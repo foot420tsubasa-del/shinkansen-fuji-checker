@@ -84,7 +84,11 @@ export default function HomePage() {
                   <button
                     key={opt.id}
                     type="button"
-                    onClick={() => setDirection(opt.id)}
+                    onClick={() => {
+                      setDirection(opt.id);
+                      // 方向を変えたら一度結果をリセット
+                      setHasChecked(false);
+                    }}
                     className={[
                       "flex-1 px-3 py-2 rounded-full transition-all duration-150",
                       "flex items-center justify-center gap-1.5",
