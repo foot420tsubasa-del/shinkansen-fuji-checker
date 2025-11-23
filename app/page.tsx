@@ -81,7 +81,9 @@ export default function HomePage() {
                 </p>
                 <p className="mt-0.5 text-[10px] text-slate-500 flex items-center gap-1">
                   <Globe className="h-3 w-3 text-sky-600" />
-                  <span>Built by a Japanese local for international travellers.</span>
+                  <span>
+                    Built by a Japanese local for international travellers.
+                  </span>
                 </p>
               </div>
             </div>
@@ -359,7 +361,9 @@ export default function HomePage() {
                 <p className="text-[10px] text-slate-500">
                   All links use Klook, a major travel booking platform popular
                   with visitors to Japan. We may earn a small commission at no
-                  extra cost to you.
+                  extra cost to you. Klook supports multiple languages and
+                  currencies — you can change them from the menu on each Klook
+                  page.
                 </p>
 
                 {/* Essentials */}
