@@ -59,7 +59,7 @@ export default function HomePage() {
     <main className="min-h-screen bg-gradient-to-b from-sky-100 via-sky-50 to-white text-slate-900 flex flex-col">
       <div className="flex-1 flex flex-col px-4 py-6 max-w-md mx-auto w-full">
         {/* Header / Branding */}
-        <header className="mb-6 mt-2">
+        <header className="mb-2 mt-2">
           <div className="flex items-center gap-3">
             {/* Fuji logo */}
             <div className="relative h-11 w-11 rounded-2xl bg-gradient-to-b from-sky-300 to-sky-500 flex items-center justify-center shadow-sm">
@@ -76,6 +76,14 @@ export default function HomePage() {
             </div>
           </div>
         </header>
+
+        {/* Description (SEO & UX) */}
+        <p className="mb-3 text-[11px] text-slate-600 leading-relaxed">
+          This free tool helps you find the best Shinkansen seat to see Mt. Fuji
+          between Tokyo and Osaka/Kyoto. Choose your direction, tap “Check Best
+          Seat”, and then book your Shinkansen tickets, eSIM and other travel
+          essentials via Klook.
+        </p>
 
         {/* Steps */}
         <div className="mb-3 flex items-center justify-between text-[11px] text-slate-500">
@@ -269,7 +277,7 @@ export default function HomePage() {
                 <span>Book Shinkansen tickets on Klook</span>
               </motion.a>
 
-              {/* Travel essentials + Premium options in one card */}
+              {/* Travel essentials + Premium options */}
               <div className="mt-3 bg-white/90 border border-slate-200 rounded-2xl px-3 py-3 space-y-2">
                 <div className="flex items-center justify-between">
                   <p className="text-[11px] font-medium text-slate-700">
