@@ -12,6 +12,10 @@ import {
   Plane,
   Shield,
   Car,
+  Globe,
+  Share2,
+  Camera,
+  Info,
 } from "lucide-react";
 
 // ================== Affiliate URLs ==================
@@ -61,19 +65,25 @@ export default function HomePage() {
       <div className="flex-1 flex flex-col px-4 py-6 max-w-md mx-auto w-full">
         {/* Header / Branding */}
         <header className="mb-2 mt-2">
-          <div className="flex items-center gap-3">
-            {/* Fuji logo */}
-            <div className="relative h-11 w-11 rounded-2xl bg-gradient-to-b from-sky-300 to-sky-500 flex items-center justify-center shadow-sm">
-              <Mountain className="h-6 w-6 text-white" />
-              <div className="pointer-events-none absolute bottom-2 h-2.5 w-5 bg-white/95 rounded-t-[999px] rounded-b-[6px]" />
-            </div>
-            <div>
-              <h1 className="text-lg font-semibold tracking-tight">
-                Shinkansen Mt. Fuji Seat Checker
-              </h1>
-              <p className="text-xs text-slate-500">
-                Find the Mt. Fuji side seat in just one tap.
-              </p>
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              {/* Fuji logo */}
+              <div className="relative h-11 w-11 rounded-2xl bg-gradient-to-b from-sky-300 to-sky-500 flex items-center justify-center shadow-sm">
+                <Mountain className="h-6 w-6 text-white" />
+                <div className="pointer-events-none absolute bottom-2 h-2.5 w-5 bg-white/95 rounded-t-[999px] rounded-b-[6px]" />
+              </div>
+              <div>
+                <h1 className="text-lg font-semibold tracking-tight">
+                  Shinkansen Mt. Fuji Seat Checker
+                </h1>
+                <p className="text-[11px] text-slate-500">
+                  Find the Mt. Fuji side seat in just one tap.
+                </p>
+                <p className="mt-0.5 text-[10px] text-slate-500 flex items-center gap-1">
+                  <Globe className="h-3 w-3 text-sky-600" />
+                  <span>Built by a Japanese local for international travellers.</span>
+                </p>
+              </div>
             </div>
           </div>
         </header>
@@ -199,8 +209,12 @@ export default function HomePage() {
                       (window, Mt. Fuji side)
                     </p>
                     <p className="text-[11px] text-slate-600 mt-1">
-                      Most trains: choose window seat E for the best Mt. Fuji
-                      view.
+                      Most trains: choose window seat E on the Mt. Fuji side
+                      for the best chance to{" "}
+                      <span className="font-semibold">
+                        see and photograph Mt. Fuji
+                      </span>{" "}
+                      from your seat.
                     </p>
                   </div>
 
@@ -273,8 +287,50 @@ export default function HomePage() {
                 <p className="mt-3 text-[10px] text-slate-500 leading-relaxed">
                   Tip: Mt. Fuji is usually visible between Shin-Yokohama and
                   Shizuoka, especially around Shin-Fuji station, on clear days.
+                  Have your camera or phone ready before this section.
                 </p>
-                <p className="mt-1 text-[10px] text-slate-500">
+
+                {/* Mini FAQ with photo angle */}
+                <div className="mt-4 bg-slate-50 border border-slate-200 rounded-2xl px-3 py-3 space-y-1.5">
+                  <p className="text-[11px] font-medium text-slate-700 flex items-center gap-1">
+                    <Info className="h-3.5 w-3.5 text-sky-600" />
+                    <span>Quick FAQ for Mt. Fuji &amp; photos</span>
+                  </p>
+                  <p className="text-[10px] text-slate-600">
+                    <span className="font-semibold">Q. Seat E is sold out?</span>{" "}
+                    → Book seat <span className="font-semibold">D</span>. It&apos;s
+                    on the same Mt. Fuji side, just one seat away from the
+                    window.
+                  </p>
+                  <p className="text-[10px] text-slate-600">
+                    <span className="font-semibold">
+                      Q. What about Green Cars?
+                    </span>{" "}
+                    → Layouts can be different, but the same{" "}
+                    <span className="font-semibold">left/right rule</span> still
+                    applies for Mt. Fuji. Aim for the Mt. Fuji side window if
+                    possible.
+                  </p>
+                  <p className="text-[10px] text-slate-600">
+                    <span className="font-semibold">
+                      Q. Is this seat good for photos?
+                    </span>{" "}
+                    → Yes. Window seat E gives you the best chance to take clear{" "}
+                    <span className="font-semibold">
+                      photos and videos of Mt. Fuji
+                    </span>{" "}
+                    without other passengers in front of you.
+                  </p>
+                  <p className="text-[10px] text-slate-600">
+                    <span className="font-semibold">
+                      Q. Is Mt. Fuji guaranteed?
+                    </span>{" "}
+                    → No. Cloudy or hazy weather can hide it even from the
+                    correct seat.
+                  </p>
+                </div>
+
+                <p className="mt-3 text-[10px] text-slate-500 leading-relaxed">
                   Ready to book? Check Shinkansen tickets on Klook below.
                 </p>
               </div>
@@ -302,7 +358,8 @@ export default function HomePage() {
                 </div>
                 <p className="text-[10px] text-slate-500">
                   All links use Klook, a major travel booking platform popular
-                  with visitors to Japan.
+                  with visitors to Japan. We may earn a small commission at no
+                  extra cost to you.
                 </p>
 
                 {/* Essentials */}
@@ -376,10 +433,26 @@ export default function HomePage() {
                   </a>
                 </div>
 
-                <p className="pt-1 text-[10px] text-slate-500">
-                  This free tool is supported by affiliate links. We may earn a
-                  small commission at no extra cost to you.
-                </p>
+                {/* Share / screenshot hint */}
+                <div className="pt-2 mt-2 border-t border-slate-100">
+                  <p className="text-[10px] text-slate-600 flex items-center gap-1">
+                    <Share2 className="h-3.5 w-3.5 text-slate-500" />
+                    <span>
+                      Take a screenshot and share this with friends visiting
+                      Japan or planning Mt. Fuji photos.
+                    </span>
+                  </p>
+                  <div className="mt-1.5 rounded-xl bg-slate-50 border border-dashed border-slate-200 px-3 py-2">
+                    <p className="text-[10px] text-slate-700 flex items-start gap-1.5">
+                      <Camera className="h-3 w-3 mt-[2px]" />
+                      <span>
+                        Tokyo → Osaka/Kyoto: right side, seat E (window). <br />
+                        Osaka/Kyoto → Tokyo: left side, seat E (window). <br />
+                        Perfect spot for Mt. Fuji shots from the train.
+                      </span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </motion.section>
           )}
@@ -403,6 +476,10 @@ export default function HomePage() {
               </span>
             </span>
           </a>
+
+          <p className="mt-2 text-[9px] text-center text-slate-400">
+            Built by a Japanese AI &amp; travel enthusiast.
+          </p>
         </footer>
       </div>
     </main>
