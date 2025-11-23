@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -78,11 +79,23 @@ export default function HomePage() {
         </header>
 
         {/* Description (SEO & UX) */}
-        <p className="mb-3 text-[11px] text-slate-600 leading-relaxed">
+        <p className="mb-1 text-[11px] text-slate-600 leading-relaxed">
           This free tool helps you find the best Shinkansen seat to see Mt. Fuji
           between Tokyo and Osaka/Kyoto. Choose your direction, tap “Check Best
           Seat”, and then book your Shinkansen tickets, eSIM and other travel
           essentials via Klook.
+        </p>
+
+        {/* Link to guide */}
+        <p className="mb-3 text-[11px] text-slate-500">
+          Want more details?{" "}
+          <Link
+            href="/guide"
+            className="underline underline-offset-2 text-sky-700 hover:text-sky-800"
+          >
+            Read the Mt. Fuji &amp; Shinkansen guide
+          </Link>
+          .
         </p>
 
         {/* Steps */}
