@@ -9,16 +9,15 @@ import {
   ArrowLeftRight,
   Wifi,
   ArrowRight,
-  Plane,
-  Shield,
-  Car,
-  Globe,
+  ExternalLink,
   Share2,
-  Camera,
   Info,
+  ShieldCheck,
+  Car,
 } from "lucide-react";
 
 // ================== Affiliate URLs ==================
+
 // JR Pass（Klook）
 const JR_PASS_URL =
   "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165791&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F1420-7-day-whole-japan-rail-pass-jr-pass%2F";
@@ -27,17 +26,22 @@ const JR_PASS_URL =
 const ESIM_URL =
   "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1166001&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F109393-japan-esim-high-speed-internet-qr-code-voucher%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3D60b4e2e817";
 
-// Airport transfer
+// Airport transfer / Narita Express
 const AIRPORT_TRANSFER_URL =
   "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165996&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F173165-narita-express-n-ex-round-trip-train-ticket-narita-airport-tokyo%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3D91ab54bcac";
 
 // Travel insurance（Klook Protect）
-const TRAVEL_INSURANCE_URL =
+const INSURANCE_URL =
   "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1166002&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Finsurance%2Fklook-protect%2F";
 
-// Car rental with driver（Private charter）
+// Private car charter
 const CAR_RENTAL_URL =
   "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1166009&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F15420-tokyo-private-car-charter-karuizawa-hakuba-izu-englishspeakingdriver%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3D84732e1e5b";
+
+// JR Central official article (Mt. Fuji from Shinkansen)
+const JR_CENTRAL_SOURCE_URL =
+  "https://recommend.jr-central.co.jp/shizuoka-tabi/articles/01/";
+
 // =====================================================
 
 const directions = [
@@ -64,51 +68,37 @@ export default function HomePage() {
     <main className="min-h-screen bg-gradient-to-b from-sky-100 via-sky-50 to-white text-slate-900 flex flex-col">
       <div className="flex-1 flex flex-col px-4 py-6 max-w-md mx-auto w-full">
         {/* Header / Branding */}
-        <header className="mb-2 mt-2">
-          <div className="flex items-center justify-between gap-3">
-            <div className="flex items-center gap-3">
-              {/* Fuji logo */}
-              <div className="relative h-11 w-11 rounded-2xl bg-gradient-to-b from-sky-300 to-sky-500 flex items-center justify-center shadow-sm">
-                <Mountain className="h-6 w-6 text-white" />
-                <div className="pointer-events-none absolute bottom-2 h-2.5 w-5 bg-white/95 rounded-t-[999px] rounded-b-[6px]" />
-              </div>
-              <div>
-                <h1 className="text-lg font-semibold tracking-tight">
-                  Shinkansen Mt. Fuji Seat Checker
-                </h1>
-                <p className="text-[11px] text-slate-500">
-                  Find the Mt. Fuji side seat in just one tap.
-                </p>
-                <p className="mt-0.5 text-[10px] text-slate-500 flex items-center gap-1">
-                  <Globe className="h-3 w-3 text-sky-600" />
-                  <span>
-                    Built by a Japanese local for international travellers.
-                  </span>
-                </p>
-              </div>
+        <header className="mb-6 mt-2">
+          <div className="flex items-center gap-3">
+            {/* Fuji logo */}
+            <div className="relative h-11 w-11 rounded-2xl bg-gradient-to-b from-sky-300 to-sky-500 flex items-center justify-center shadow-sm">
+              <Mountain className="h-6 w-6 text-white" />
+              <div className="pointer-events-none absolute bottom-2 h-2.5 w-5 bg-white/95 rounded-t-[999px] rounded-b-[6px]" />
+            </div>
+            <div>
+              <h1 className="text-lg font-semibold tracking-tight">
+                Shinkansen Mt. Fuji Seat Checker
+              </h1>
+              <p className="text-xs text-slate-500">
+                Find the Mt. Fuji side seat in just one tap.
+              </p>
+              {/* 公開データ＋非公式ツールの明記 */}
+              <p className="mt-1 text-[11px] text-slate-500">
+                Based on publicly available information from JR Central{" "}
+                <a
+                  href={JR_CENTRAL_SOURCE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 text-sky-700"
+                >
+                  [view source]
+                </a>
+                . This is an independent, unofficial tool and not endorsed by JR
+                companies.
+              </p>
             </div>
           </div>
         </header>
-
-        {/* Description (SEO & UX) */}
-        <p className="mb-1 text-[11px] text-slate-600 leading-relaxed">
-          This free tool helps you find the best Shinkansen seat to see Mt. Fuji
-          between Tokyo and Osaka/Kyoto. Choose your direction, tap “Check Best
-          Seat”, and then book your Shinkansen tickets, eSIM and other travel
-          essentials via Klook.
-        </p>
-
-        {/* Link to guide */}
-        <p className="mb-3 text-[11px] text-slate-500">
-          Want more details?{" "}
-          <Link
-            href="/guide"
-            className="underline underline-offset-2 text-sky-700 hover:text-sky-800"
-          >
-            Read the Mt. Fuji &amp; Shinkansen guide
-          </Link>
-          .
-        </p>
 
         {/* Steps */}
         <div className="mb-3 flex items-center justify-between text-[11px] text-slate-500">
@@ -137,7 +127,7 @@ export default function HomePage() {
                     type="button"
                     onClick={() => {
                       setDirection(opt.id);
-                      setHasChecked(false); // reset result when changing direction
+                      setHasChecked(false); // reset result when direction changes
                     }}
                     className={[
                       "flex-1 px-3 py-2 rounded-full transition-all duration-150",
@@ -170,6 +160,16 @@ export default function HomePage() {
             Works for most Nozomi, Hikari and Kodama trains on the Tokaido
             Shinkansen line.
           </p>
+
+          {/* Link to guide */}
+          <Link
+            href="/guide"
+            className="inline-flex items-center gap-1.5 text-[11px] text-sky-700 hover:underline underline-offset-2"
+          >
+            <Info className="h-3.5 w-3.5" />
+            <span>Read the Mt. Fuji &amp; Shinkansen guide</span>
+            <ExternalLink className="h-3 w-3" />
+          </Link>
         </section>
 
         {/* Result area */}
@@ -211,12 +211,8 @@ export default function HomePage() {
                       (window, Mt. Fuji side)
                     </p>
                     <p className="text-[11px] text-slate-600 mt-1">
-                      Most trains: choose window seat E on the Mt. Fuji side
-                      for the best chance to{" "}
-                      <span className="font-semibold">
-                        see and photograph Mt. Fuji
-                      </span>{" "}
-                      from your seat.
+                      Most 3+2 standard cars: choose window seat E on the Mt.
+                      Fuji side.
                     </p>
                   </div>
 
@@ -286,176 +282,141 @@ export default function HomePage() {
                   </div>
                 </div>
 
+                {/* Tip & FAQ */}
                 <p className="mt-3 text-[10px] text-slate-500 leading-relaxed">
                   Tip: Mt. Fuji is usually visible between Shin-Yokohama and
-                  Shizuoka, especially around Shin-Fuji station, on clear days.
+                  Shizuoka, especially around Shin-Fuji station on clear days.
                   Have your camera or phone ready before this section.
                 </p>
 
-                {/* Mini FAQ with photo angle */}
-                <div className="mt-4 bg-slate-50 border border-slate-200 rounded-2xl px-3 py-3 space-y-1.5">
-                  <p className="text-[11px] font-medium text-slate-700 flex items-center gap-1">
-                    <Info className="h-3.5 w-3.5 text-sky-600" />
-                    <span>Quick FAQ for Mt. Fuji &amp; photos</span>
-                  </p>
-                  <p className="text-[10px] text-slate-600">
-                    <span className="font-semibold">Q. Seat E is sold out?</span>{" "}
-                    → Book seat <span className="font-semibold">D</span>. It&apos;s
-                    on the same Mt. Fuji side, just one seat away from the
-                    window.
-                  </p>
-                  <p className="text-[10px] text-slate-600">
-                    <span className="font-semibold">
-                      Q. What about Green Cars?
-                    </span>{" "}
-                    → Layouts can be different, but the same{" "}
-                    <span className="font-semibold">left/right rule</span> still
-                    applies for Mt. Fuji. Aim for the Mt. Fuji side window if
-                    possible.
-                  </p>
-                  <p className="text-[10px] text-slate-600">
-                    <span className="font-semibold">
-                      Q. Is this seat good for photos?
-                    </span>{" "}
-                    → Yes. Window seat E gives you the best chance to take clear{" "}
-                    <span className="font-semibold">
-                      photos and videos of Mt. Fuji
-                    </span>{" "}
-                    without other passengers in front of you.
-                  </p>
-                  <p className="text-[10px] text-slate-600">
-                    <span className="font-semibold">
-                      Q. Is Mt. Fuji guaranteed?
-                    </span>{" "}
-                    → No. Cloudy or hazy weather can hide it even from the
-                    correct seat.
-                  </p>
+                <div className="mt-3 rounded-2xl bg-slate-50 border border-slate-200 px-3 py-3 space-y-1.5">
+                  <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-700">
+                    <Info className="h-3.5 w-3.5" />
+                    <span>Quick FAQ about Mt. Fuji &amp; photos</span>
+                  </div>
+                  <ul className="mt-1 space-y-1.5 text-[10px] text-slate-600">
+                    <li>
+                      <span className="font-semibold">Seat E is sold out?</span>{" "}
+                      → Book seat D. It&apos;s on the same Mt. Fuji side, just
+                      one seat away from the window.
+                    </li>
+                    <li>
+                      <span className="font-semibold">
+                        What about Green Cars?
+                      </span>{" "}
+                      → Layouts can be different, but the same left/right rule
+                      still applies for Mt. Fuji. Aim for a window seat on the
+                      Mt. Fuji side if possible.
+                    </li>
+                    <li>
+                      <span className="font-semibold">
+                        Is this seat good for photos?
+                      </span>{" "}
+                      → Yes. Window seat E gives you one of the best chances to
+                      take clear photos and videos of Mt. Fuji from the train,
+                      without other passengers directly in front of you.
+                    </li>
+                    <li>
+                      <span className="font-semibold">
+                        Is Mt. Fuji guaranteed?
+                      </span>{" "}
+                      → No. Cloudy or hazy weather can hide it even from the
+                      correct seat.
+                    </li>
+                  </ul>
                 </div>
 
-                <p className="mt-3 text-[10px] text-slate-500 leading-relaxed">
-                  Ready to book? Check Shinkansen tickets on Klook below.
-                </p>
+                {/* Share hint */}
+                <div className="mt-3 flex items-start gap-2 rounded-2xl bg-slate-50 border border-slate-200 px-3 py-2.5">
+                  <Share2 className="h-3.5 w-3.5 mt-[2px] text-slate-400" />
+                  <p className="text-[10px] text-slate-600 leading-relaxed">
+                    Planning a trip with friends? Take a screenshot and share it
+                    with them so they remember:
+                    <br />
+                    <span className="font-medium">
+                      • Tokyo → Osaka/Kyoto: right side, seat E
+                      <br />• Osaka/Kyoto → Tokyo: left side, seat E
+                    </span>
+                    <br />
+                    It&apos;s one of the easiest ways to get that Mt. Fuji ×
+                    Shinkansen shot.
+                  </p>
+                </div>
               </div>
 
               {/* Main JR Pass button */}
               <motion.a
                 href={JR_PASS_URL}
                 target="_blank"
-                rel="noopener noreferrer sponsored"
+                rel="noopener noreferrer"
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex flex-col items-center justify-center w-full rounded-2xl border border-red-500/80 bg-red-500 text-sm font-semibold tracking-tight py-3 text-white shadow-md shadow-red-200 hover:brightness-110 active:brightness-95 transition-all"
+                className="inline-flex items-center justify-center w-full rounded-2xl border border-red-500/80 bg-red-500 text-sm font-semibold tracking-tight py-3 text-white shadow-md shadow-red-200 hover:brightness-110 active:brightness-95 transition-all"
               >
-                <span>Book Shinkansen tickets on Klook</span>
+                Book Shinkansen tickets / JR Pass on Klook
               </motion.a>
 
-              {/* Travel essentials + Premium options */}
+              {/* Travel essentials block */}
               <div className="mt-3 bg-white/90 border border-slate-200 rounded-2xl px-3 py-3 space-y-2">
-                <div className="flex items-center justify-between">
-                  <p className="text-[11px] font-medium text-slate-700">
-                    Travel essentials for your Japan trip
-                  </p>
-                  <span className="text-[10px] text-slate-400">
-                    Powered by Klook
-                  </span>
+                <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-700">
+                  <ShieldCheck className="h-3.5 w-3.5" />
+                  <span>Travel essentials for your Japan trip</span>
                 </div>
                 <p className="text-[10px] text-slate-500">
-                  All links use Klook, a major travel booking platform popular
-                  with visitors to Japan. We may earn a small commission at no
-                  extra cost to you. Klook supports multiple languages and
-                  currencies — you can change them from the menu on each Klook
-                  page.
+                  Links below are Klook affiliate links. We may earn a small
+                  commission at no extra cost to you. Klook supports multiple
+                  languages and currencies — you can change them from the menu
+                  on each Klook page.
                 </p>
-
-                {/* Essentials */}
-                <div className="mt-1.5 space-y-1.5 text-[11px]">
-                  {/* 1. eSIM */}
-                  <a
-                    href={ESIM_URL}
-                    target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="flex items-center gap-1.5 text-sky-700 hover:underline underline-offset-2"
-                  >
-                    <Wifi className="h-3.5 w-3.5" />
-                    <span>Japan eSIM – High-speed data in Japan</span>
-                  </a>
-
-                  {/* 2. JR Pass */}
+                <div className="space-y-1.5 text-[11px]">
                   <a
                     href={JR_PASS_URL}
                     target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="flex items-center gap-1.5 text-sky-700 hover:underline underline-offset-2"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
                   >
                     <Train className="h-3.5 w-3.5" />
-                    <span>
-                      JR Pass – Long-distance train pass across Japan
-                    </span>
+                    <span>JR Pass &amp; Shinkansen tickets (long distance)</span>
                   </a>
-
-                  {/* 3. Airport transfer */}
+                  <a
+                    href={ESIM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
+                  >
+                    <Wifi className="h-3.5 w-3.5" />
+                    <span>Japan eSIM – Stay online during your trip</span>
+                  </a>
                   <a
                     href={AIRPORT_TRANSFER_URL}
                     target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="flex items-center gap-1.5 text-sky-700 hover:underline underline-offset-2"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
                   >
-                    <Plane className="h-3.5 w-3.5" />
-                    <span>Airport transfer – Narita Express (N&apos;EX)</span>
+                    <Train className="h-3.5 w-3.5" />
+                    <span>Narita Express / airport transfer to Tokyo</span>
                   </a>
-
-                  {/* 4. Insurance */}
                   <a
-                    href={TRAVEL_INSURANCE_URL}
+                    href={INSURANCE_URL}
                     target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="flex items-center gap-1.5 text-sky-700 hover:underline underline-offset-2"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
                   >
-                    <Shield className="h-3.5 w-3.5" />
+                    <ShieldCheck className="h-3.5 w-3.5" />
                     <span>
-                      Klook Protect – Flexible travel insurance &amp; booking
-                      upgrades
+                      Klook Protect – Travel insurance for peace of mind
                     </span>
                   </a>
-                </div>
-
-                {/* Premium section */}
-                <div className="pt-2 mt-2 border-t border-slate-100 space-y-1.5 text-[11px]">
-                  <p className="text-[10px] font-medium text-slate-600">
-                    Premium &amp; family-friendly option
-                  </p>
                   <a
                     href={CAR_RENTAL_URL}
                     target="_blank"
-                    rel="noopener noreferrer sponsored"
-                    className="flex items-center gap-1.5 text-sky-700 hover:underline underline-offset-2"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
                   >
                     <Car className="h-3.5 w-3.5" />
                     <span>
-                      Private car charter – Tokyo to resorts (Karuizawa,
-                      Hakuba, Izu)
+                      Private car charter – For families &amp; premium trips
                     </span>
                   </a>
-                </div>
-
-                {/* Share / screenshot hint */}
-                <div className="pt-2 mt-2 border-t border-slate-100">
-                  <p className="text-[10px] text-slate-600 flex items-center gap-1">
-                    <Share2 className="h-3.5 w-3.5 text-slate-500" />
-                    <span>
-                      Take a screenshot and share this with friends visiting
-                      Japan or planning Mt. Fuji photos.
-                    </span>
-                  </p>
-                  <div className="mt-1.5 rounded-xl bg-slate-50 border border-dashed border-slate-200 px-3 py-2">
-                    <p className="text-[10px] text-slate-700 flex items-start gap-1.5">
-                      <Camera className="h-3 w-3 mt-[2px]" />
-                      <span>
-                        Tokyo → Osaka/Kyoto: right side, seat E (window). <br />
-                        Osaka/Kyoto → Tokyo: left side, seat E (window). <br />
-                        Perfect spot for Mt. Fuji shots from the train.
-                      </span>
-                    </p>
-                  </div>
                 </div>
               </div>
             </motion.section>
@@ -464,25 +425,27 @@ export default function HomePage() {
 
         <div className="flex-1" />
 
-        {/* Footer eSIM link */}
-        <footer className="pt-6 pb-3">
+        {/* Footer eSIM link + disclaimer */}
+        <footer className="pt-6 pb-3 space-y-2">
           <a
             href={ESIM_URL}
             target="_blank"
-            rel="noopener noreferrer sponsored"
+            rel="noopener noreferrer"
             className="flex items-center justify-center gap-1.5 text-[11px] text-slate-500 hover:text-sky-700 transition-colors"
           >
             <Wifi className="h-3.5 w-3.5" />
             <span>
-              Need data in Japan?{" "}
-              <span className="underline underline-offset-2">
-                Get instant eSIM here
-              </span>
+              Need WiFi?{" "}
+              <span className="underline underline-offset-2">Get eSIM</span>
             </span>
           </a>
-
-          <p className="mt-2 text-[9px] text-center text-slate-400">
-            Built by a Japanese AI &amp; travel enthusiast.
+          <p className="text-[10px] text-center text-slate-400">
+            Built by a Japanese AI &amp; travel enthusiast. Not affiliated with
+            JR companies. Seat info is provided as-is; always follow official
+            guidance at stations and on trains.
+          </p>
+          <p className="text-[9px] text-center text-slate-400">
+            Powered by Klook affiliate links.
           </p>
         </footer>
       </div>
