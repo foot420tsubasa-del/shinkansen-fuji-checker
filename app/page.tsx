@@ -80,10 +80,15 @@ export default function HomePage() {
                 Shinkansen Mt. Fuji Seat Checker
               </h1>
               <p className="text-xs text-slate-500">
-                Find the Mt. Fuji side seat in just one tap.
+                Get the Mt. Fuji side window seat in two taps on the Tokaido
+                Shinkansen (Tokyo ⇄ Osaka/Kyoto).
+              </p>
+              <p className="mt-1 text-[11px] text-slate-500">
+                Built by a Japanese AI &amp; travel enthusiast for international
+                travellers who don&apos;t want to miss the Mt. Fuji view.
               </p>
               {/* 公開データ＋非公式ツールの明記 */}
-              <p className="mt-1 text-[11px] text-slate-500">
+              <p className="mt-1 text-[10px] text-slate-500">
                 Based on publicly available information from JR Central{" "}
                 <a
                   href={JR_CENTRAL_SOURCE_URL}
@@ -93,8 +98,9 @@ export default function HomePage() {
                 >
                   [view source]
                 </a>
-                . This is an independent, unofficial tool and not endorsed by JR
-                companies.
+                . This is an independent, unofficial tool and not endorsed by
+                any JR company. Seat info is provided as-is; always follow
+                official guidance at stations and on trains.
               </p>
             </div>
           </div>
@@ -109,6 +115,17 @@ export default function HomePage() {
 
         {/* Main card */}
         <section className="bg-white/90 border border-slate-200 rounded-3xl px-4 py-5 shadow-md shadow-slate-200/70 backdrop-blur flex flex-col gap-4">
+          {/* Tagline */}
+          <div className="space-y-1">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-700">
+              Stop staring at walls.
+            </p>
+            <p className="text-sm font-semibold text-slate-900">
+              We tell you exactly which window seat to book for the Mt. Fuji
+              view.
+            </p>
+          </div>
+
           {/* Direction selector */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
@@ -152,13 +169,13 @@ export default function HomePage() {
             whileTap={{ scale: 0.97 }}
             className="mt-1 inline-flex items-center justify-center w-full rounded-2xl bg-gradient-to-r from-red-500 to-red-500 text-sm font-semibold tracking-tight py-3.5 text-white shadow-md shadow-red-200 hover:brightness-110 active:brightness-95 transition-all"
           >
-            <span>Check Best Seat</span>
+            <span>Check best seat</span>
             <ArrowRight className="ml-2 h-4 w-4" />
           </motion.button>
 
           <p className="text-[11px] text-slate-500 leading-relaxed">
             Works for most Nozomi, Hikari and Kodama trains on the Tokaido
-            Shinkansen line.
+            Shinkansen line between Tokyo, Nagoya and Osaka/Kyoto.
           </p>
 
           {/* Link to guide */}
@@ -167,7 +184,7 @@ export default function HomePage() {
             className="inline-flex items-center gap-1.5 text-[11px] text-sky-700 hover:underline underline-offset-2"
           >
             <Info className="h-3.5 w-3.5" />
-            <span>Read the Mt. Fuji &amp; Shinkansen guide</span>
+            <span>Read the full Mt. Fuji view guide</span>
             <ExternalLink className="h-3 w-3" />
           </Link>
         </section>
@@ -207,12 +224,13 @@ export default function HomePage() {
                       Seat <span className="text-red-500">E</span>
                     </p>
                     <p className="mt-1 text-sm text-slate-700 font-medium">
-                      Best seat: <span className="font-semibold">Seat E</span>{" "}
-                      (window, Mt. Fuji side)
+                      <span className="font-semibold">Seat E</span> is the
+                      window seat on the Mt. Fuji side in most standard 3+2
+                      cars.
                     </p>
                     <p className="text-[11px] text-slate-600 mt-1">
-                      Most 3+2 standard cars: choose window seat E on the Mt.
-                      Fuji side.
+                      If Seat E is sold out, Seat D is on the same side and
+                      still gives you a good chance to see Mt. Fuji.
                     </p>
                   </div>
 
@@ -231,14 +249,14 @@ export default function HomePage() {
                     <span>Sea side</span>
                     <span className="italic text-slate-400">Aisle</span>
                     <span className="font-medium text-sky-700">
-                      Mt. Fuji / Window side
+                      Mt. Fuji / window side
                     </span>
                   </div>
 
                   <div className="bg-slate-50 rounded-2xl border border-slate-200 px-3 py-3">
                     <div className="flex items-center justify-between gap-2 mb-2 text-[11px] text-slate-500">
                       <span className="flex-1 text-center">
-                        Example row (standard car)
+                        Example row (standard 3+2 car)
                       </span>
                     </div>
                     <div className="flex items-center justify-between gap-2">
@@ -284,15 +302,16 @@ export default function HomePage() {
 
                 {/* Tip & FAQ */}
                 <p className="mt-3 text-[10px] text-slate-500 leading-relaxed">
-                  Tip: Mt. Fuji is usually visible between Shin-Yokohama and
+                  Mt. Fuji is usually visible between Shin-Yokohama and
                   Shizuoka, especially around Shin-Fuji station on clear days.
-                  Have your camera or phone ready before this section.
+                  You won&apos;t see it for the whole ride, so have your camera
+                  ready a bit before this section.
                 </p>
 
                 <div className="mt-3 rounded-2xl bg-slate-50 border border-slate-200 px-3 py-3 space-y-1.5">
                   <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-700">
                     <Info className="h-3.5 w-3.5" />
-                    <span>Quick FAQ about Mt. Fuji &amp; photos</span>
+                    <span>Quick FAQ about Mt. Fuji &amp; seats</span>
                   </div>
                   <ul className="mt-1 space-y-1.5 text-[10px] text-slate-600">
                     <li>
@@ -334,8 +353,8 @@ export default function HomePage() {
                     with them so they remember:
                     <br />
                     <span className="font-medium">
-                      • Tokyo → Osaka/Kyoto: right side, seat E
-                      <br />• Osaka/Kyoto → Tokyo: left side, seat E
+                      • Tokyo → Osaka/Kyoto: right side, Seat E
+                      <br />• Osaka/Kyoto → Tokyo: left side, Seat E
                     </span>
                     <br />
                     It&apos;s one of the easiest ways to get that Mt. Fuji ×
@@ -384,7 +403,7 @@ export default function HomePage() {
                     className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
                   >
                     <Wifi className="h-3.5 w-3.5" />
-                    <span>Japan eSIM – Stay online during your trip</span>
+                    <span>Japan eSIM – stay online during your trip</span>
                   </a>
                   <a
                     href={AIRPORT_TRANSFER_URL}
@@ -403,7 +422,7 @@ export default function HomePage() {
                   >
                     <ShieldCheck className="h-3.5 w-3.5" />
                     <span>
-                      Klook Protect – Travel insurance for peace of mind
+                      Klook Protect – travel insurance for peace of mind
                     </span>
                   </a>
                   <a
@@ -414,7 +433,7 @@ export default function HomePage() {
                   >
                     <Car className="h-3.5 w-3.5" />
                     <span>
-                      Private car charter – For families &amp; premium trips
+                      Private car charter – for families &amp; premium trips
                     </span>
                   </a>
                 </div>
@@ -439,13 +458,15 @@ export default function HomePage() {
               <span className="underline underline-offset-2">Get eSIM</span>
             </span>
           </a>
-          <p className="text-[10px] text-center text-slate-400">
-            Built by a Japanese AI &amp; travel enthusiast. Not affiliated with
-            JR companies. Seat info is provided as-is; always follow official
-            guidance at stations and on trains.
+          <p className="text-[10px] text-center text-slate-400 leading-relaxed">
+            Based on publicly available information from JR Central. This is an
+            independent, unofficial tool and not endorsed by any JR company.
+            Seat info is provided as-is; always follow official guidance at
+            stations and on trains.
           </p>
           <p className="text-[9px] text-center text-slate-400">
-            Powered by Klook affiliate links.
+            Built by a Japanese AI &amp; travel enthusiast. Powered by Klook
+            affiliate links.
           </p>
         </footer>
       </div>
