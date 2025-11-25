@@ -18,7 +18,10 @@ export default function GuidePage() {
                 How to see Mt. Fuji from the Shinkansen (Tokyo ⇄ Osaka/Kyoto)
               </h1>
               <p className="text-xs text-slate-500">
-                A quick guide to the best Shinkansen seats and sections for Mt. Fuji views.
+                A practical guide to the best Shinkansen seats, sections, and timing for Mt. Fuji views.
+              </p>
+              <p className="mt-0.5 text-[10px] text-slate-500">
+                Written by a Japanese local, for visitors who don&apos;t want to miss the Mt. Fuji × Shinkansen view.
               </p>
             </div>
           </div>
@@ -36,18 +39,61 @@ export default function GuidePage() {
         <section className="mb-5 text-[13px] leading-relaxed text-slate-700 bg-white/90 border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">
           {/* 追加の H2（SEO寄せ） */}
           <h2 className="text-sm font-semibold text-slate-900 mb-2">
-            Mt. Fuji view basics for the Tokaido Shinkansen
+            Mt. Fuji view basics on the Tokaido Shinkansen
           </h2>
           <p>
             Many visitors to Japan want to see Mt. Fuji from the Shinkansen, but
-            it&apos;s easy to miss if you don&apos;t know which side or
-            section to sit in. This guide explains{" "}
+            it&apos;s easy to miss if you don&apos;t know which side or section
+            to sit in. This guide explains{" "}
             <span className="font-semibold">
               where and when Mt. Fuji is visible from the Tokaido Shinkansen
             </span>{" "}
             between Tokyo and Osaka/Kyoto, and how to make it easier by using our
             free Shinkansen Mt. Fuji Seat Checker tool.
           </p>
+          <p className="mt-2 text-[12px] text-slate-600">
+            You won&apos;t see Mt. Fuji for the whole ride – it appears only for a short
+            stretch of the journey, and it can be completely hidden by clouds on some days.
+          </p>
+        </section>
+
+        {/* TL;DR */}
+        <section className="mb-5 text-[13px] leading-relaxed text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">
+          <h2 className="text-sm font-semibold text-slate-900 mb-2">
+            TL;DR – quick answers
+          </h2>
+          <ul className="list-disc pl-5 space-y-1.5">
+            <li>
+              <span className="font-semibold">Which side?</span> Tokyo → Osaka/Kyoto ={" "}
+              <span className="font-semibold">right</span> side. Osaka/Kyoto → Tokyo ={" "}
+              <span className="font-semibold">left</span> side.
+            </li>
+            <li>
+              <span className="font-semibold">Which seat?</span> In most standard 3+2 cars,{" "}
+              <span className="font-semibold">Seat E</span> is the Mt. Fuji window seat.
+            </li>
+            <li>
+              <span className="font-semibold">Where on the route?</span> Around{" "}
+              <span className="font-semibold">Shin-Fuji</span> station, between Shin-Yokohama
+              and Shizuoka.
+            </li>
+            <li>
+              <span className="font-semibold">When?</span> Clear days, usually late morning
+              to early afternoon (season-dependent).
+            </li>
+            <li>
+              <span className="font-semibold">Don&apos;t want to memorize this?</span>{" "}
+              Use the free{" "}
+              <span className="font-semibold">
+                Shinkansen Mt. Fuji Seat Checker
+              </span>{" "}
+              on{" "}
+              <span className="font-semibold">
+                fujiseat.com
+              </span>{" "}
+              before you book.
+            </li>
+          </ul>
         </section>
 
         <div className="space-y-6 text-[13px] leading-relaxed text-slate-700">
@@ -55,7 +101,7 @@ export default function GuidePage() {
           <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
-              Which side of the Shinkansen is Mt. Fuji on?
+              Which side of the Shinkansen is Mt. Fuji on? (Seat E explained)
             </h2>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>
@@ -75,7 +121,9 @@ export default function GuidePage() {
               In most standard (non–Green Car) 3+2 seat cars,{" "}
               <span className="font-semibold">Seat E</span> is the window seat
               on the Mt. Fuji side. Green Cars may have a different layout, but
-              the same left/right rule still applies.
+              the same left/right rule still applies. Some older guides still mention
+              different seat letters, but on most modern 3+2 standard cars, Seat E
+              is the Mt. Fuji window seat.
             </p>
           </section>
 
@@ -86,7 +134,8 @@ export default function GuidePage() {
               Best section and timing to see Mt. Fuji from the train
             </h2>
             <p>
-              Mt. Fuji is usually visible on clear days between{" "}
+              You won&apos;t see Mt. Fuji for the whole ride – it appears only for a short
+              stretch of the journey. Mt. Fuji is usually visible on clear days between{" "}
               <span className="font-semibold">Shin-Yokohama</span> and{" "}
               <span className="font-semibold">Shizuoka</span>, especially
               around <span className="font-semibold">Shin-Fuji</span> station.
@@ -114,7 +163,7 @@ export default function GuidePage() {
           <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Info className="h-4 w-4 text-sky-600" />
-              Practical seat tips for Mt. Fuji views
+              Practical seat tips for a better Mt. Fuji view
             </h2>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>
@@ -141,7 +190,32 @@ export default function GuidePage() {
             </ul>
           </section>
 
-          {/* Section 4: Use the Seat Checker */}
+          {/* Section 4: Common mistakes */}
+          <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+              <Info className="h-4 w-4 text-sky-600" />
+              Common mistakes when trying to see Mt. Fuji
+            </h2>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>
+                <span className="font-semibold">Booking the wrong side:</span>{" "}
+                Forgetting that Tokyo → Osaka/Kyoto is right side, and the
+                opposite for the return.
+              </li>
+              <li>
+                <span className="font-semibold">Expecting a guaranteed view:</span>{" "}
+                Even with the correct seat, clouds or haze can fully cover the
+                mountain.
+              </li>
+              <li>
+                <span className="font-semibold">Looking too late:</span> If you
+                start looking only near Shizuoka, you might miss the best view
+                around Shin-Fuji.
+              </li>
+            </ul>
+          </section>
+
+          {/* Section 5: Use the Seat Checker */}
           <section className="bg-sky-50 border border-sky-200 rounded-2xl px-4 py-4 shadow-sm shadow-sky-100">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Mountain className="h-4 w-4 text-sky-700" />
@@ -155,6 +229,10 @@ export default function GuidePage() {
               </span>
               . Just choose your direction and it tells you which seat to book
               for the best chance of seeing Mt. Fuji.
+            </p>
+            <p className="mt-2 text-[12px] text-slate-600">
+              The tool is designed to work well on mobile, so you can quickly
+              check it while booking tickets or travelling in Japan.
             </p>
             <div className="mt-3">
               <Link
