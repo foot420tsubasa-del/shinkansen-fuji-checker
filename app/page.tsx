@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Mountain,
@@ -14,6 +14,9 @@ import {
   Info,
   ShieldCheck,
   Car,
+  Cloud,
+  CloudSun,
+  Sun,
 } from "lucide-react";
 
 // ================== Affiliate URLs ==================
@@ -51,9 +54,22 @@ const directions = [
 
 type DirectionId = (typeof directions)[number]["id"];
 
+type VisibilityLevel = "high" | "medium" | "low";
+
+type FujiVisibility = {
+  visibility: VisibilityLevel;
+  cloudPercent: number;
+  message: string;
+};
+
 export default function HomePage() {
   const [direction, setDirection] = useState<DirectionId>("tokyo-osaka");
   const [hasChecked, setHasChecked] = useState(false);
+
+  // Mt. Fuji visibility (weather API)
+  const [visData, setVisData] = useState<FujiVisibility | null>(null);
+  const [visLoading, setVisLoading] = useState(true);
+  const [visError, setVisError] = useState(false);
 
   const handleCheck = () => {
     setHasChecked(true);
@@ -63,6 +79,76 @@ export default function HomePage() {
     direction === "tokyo-osaka"
       ? "Tokyo → Osaka / Kyoto"
       : "Osaka / Kyoto → Tokyo";
+
+  // fetch visibility once on mount
+  useEffect(() => {
+    const fetchVisibility = async () => {
+      try {
+        setVisLoading(true);
+        setVisError(false);
+
+        const res = await fetch("/api/fuji-visibility");
+        if (!res.ok) throw new Error("Failed to fetch visibility");
+
+        const json = await res.json();
+        setVisData({
+          visibility: json.visibility,
+          cloudPercent: json.cloudPercent,
+          message: json.message,
+        });
+      } catch (e) {
+        console.error("fuji-visibility fetch error:", e);
+        setVisError(true);
+      } finally {
+        setVisLoading(false);
+      }
+    };
+
+    fetchVisibility();
+  }, []);
+
+  // UI helper for visibility badge
+  const visibilityUi = (() => {
+    if (visLoading) {
+      return {
+        label: "Checking today’s Mt. Fuji visibility…",
+        icon: <CloudSun className="h-3.5 w-3.5" />,
+        badgeClass: "bg-sky-50 border-sky-200 text-sky-700",
+      };
+    }
+    if (visError || !visData) {
+      return {
+        label:
+          "Weather data unavailable – seat side is still correct, please check local forecast.",
+        icon: <Cloud className="h-3.5 w-3.5" />,
+        badgeClass: "bg-slate-50 border-slate-200 text-slate-500",
+      };
+    }
+
+    const extra = ` · ${visData.cloudPercent}% clouds`;
+
+    switch (visData.visibility) {
+      case "high":
+        return {
+          label: "HIGH chance to see Mt. Fuji" + extra,
+          icon: <Sun className="h-3.5 w-3.5" />,
+          badgeClass: "bg-emerald-50 border-emerald-200 text-emerald-700",
+        };
+      case "medium":
+        return {
+          label: "MIXED – maybe visible" + extra,
+          icon: <CloudSun className="h-3.5 w-3.5" />,
+          badgeClass: "bg-amber-50 border-amber-200 text-amber-700",
+        };
+      case "low":
+      default:
+        return {
+          label: "LOW chance – likely hidden" + extra,
+          icon: <Cloud className="h-3.5 w-3.5" />,
+          badgeClass: "bg-slate-100 border-slate-200 text-slate-700",
+        };
+    }
+  })();
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-100 via-sky-50 to-white text-slate-900 flex flex-col">
@@ -105,6 +191,23 @@ export default function HomePage() {
             </div>
           </div>
         </header>
+
+        {/* Today’s Mt. Fuji visibility */}
+        <div className="mb-3 flex items-center justify-between gap-3 text-[11px]">
+          <span className="text-slate-500">
+            Today near Shin-Fuji (weather)
+          </span>
+          <div
+            className={[
+              "inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border",
+              "max-w-[70%] text-right",
+              visibilityUi.badgeClass,
+            ].join(" ")}
+          >
+            {visibilityUi.icon}
+            <span className="truncate">{visibilityUi.label}</span>
+          </div>
+        </div>
 
         {/* Steps */}
         <div className="mb-3 flex items-center justify-between text-[11px] text-slate-500">
@@ -232,6 +335,23 @@ export default function HomePage() {
                       If Seat E is sold out, Seat D is on the same side and
                       still gives you a good chance to see Mt. Fuji.
                     </p>
+
+                    {/* inline visibility info inside result card */}
+                    {visData && !visLoading && !visError && (
+                      <p className="mt-2 text-[10px] text-slate-500">
+                        Today’s visibility near Shin-Fuji:{" "}
+                        <span className="font-semibold uppercase">
+                          {visData.visibility}
+                        </span>{" "}
+                        ({visData.cloudPercent}% clouds). {visData.message}
+                      </p>
+                    )}
+                    {visError && (
+                      <p className="mt-2 text-[10px] text-slate-500">
+                        Couldn&apos;t load weather data. Seat side is still
+                        correct, but please check the local forecast separately.
+                      </p>
+                    )}
                   </div>
 
                   {/* Fuji mini illustration */}
