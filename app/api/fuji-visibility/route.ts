@@ -26,7 +26,7 @@ export async function GET() {
     const url = new URL("https://api.open-meteo.com/v1/forecast");
     url.searchParams.set("latitude", LAT.toString());
     url.searchParams.set("longitude", LON.toString());
-    // ✅ 正しくは cloudcover（アンダースコアなし）
+    // 正しくは cloudcover（アンダースコアなし）
     url.searchParams.set("hourly", "cloudcover");
     url.searchParams.set("forecast_days", "1");
     url.searchParams.set("timezone", "Asia/Tokyo");
@@ -44,7 +44,7 @@ export async function GET() {
 
     const json = await res.json();
 
-    // ✅ レスポンス側も cloudcover
+    // レスポンス側も cloudcover
     const cloudArray: number[] | undefined = json?.hourly?.cloudcover;
 
     if (!Array.isArray(cloudArray) || cloudArray.length === 0) {
