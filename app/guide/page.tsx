@@ -280,14 +280,6 @@ export default function GuidePage() {
             </div>
           </section>
 
-
-
-              <span className="text-[11px] text-slate-500">
-                (opens in a new tab)
-              </span>
-            </div>
-          </section>
-
         </div>
       </div>
     </main>
