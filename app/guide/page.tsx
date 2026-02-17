@@ -244,11 +244,12 @@ export default function GuidePage() {
             </div>
           </section>
 
-                    {/* Section 6: From the developer (KanjiFlick) */}
+          {/* Section 6: From the developer (KanjiFlick) */}
           <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="text-sm font-semibold text-slate-900 mb-1.5">
               From the developer
             </h2>
+
             <p className="text-[13px] leading-relaxed text-slate-700">
               I&apos;m also building a small side project called{" "}
               <span className="font-semibold">KanjiFlick</span> — a swipe-style list of{" "}
@@ -257,16 +258,29 @@ export default function GuidePage() {
               the characters you&apos;ll see around Japan, you might enjoy it.
             </p>
 
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              {/* App Store / LP に差し替えOK */}
-              <Link
+            <div className="mt-3 flex items-center gap-3">
+              {/* App Store badge (uses /public/appstore-badge.svg) */}
+              <a
                 href="https://apps.apple.com/app/id6757971053?ct=fujiseat_guide"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-2xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-slate-800 active:bg-slate-950 transition-colors"
+                className="inline-flex items-center"
+                aria-label="Download KanjiFlick on the App Store"
+                title="KanjiFlick on the App Store"
               >
-                Check KanjiFlick
-              </Link>
+                <img
+                  src="/appstore-badge.svg"
+                  alt="Download on the App Store"
+                  className="h-10 w-auto hover:opacity-90 active:opacity-80 transition-opacity"
+                />
+              </a>
+
+              <span className="text-[11px] text-slate-500">
+                (opens in a new tab)
+              </span>
+            </div>
+          </section>
+
 
               <span className="text-[11px] text-slate-500">
                 (opens in a new tab)
