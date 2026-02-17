@@ -259,7 +259,6 @@ export default function GuidePage() {
             </p>
 
             <div className="mt-3 flex items-center gap-3">
-              {/* App Store badge (uses /public/appstore-badge.svg) */}
               <a
                 href="https://apps.apple.com/app/id6757971053?ct=fujiseat_guide"
                 target="_blank"
@@ -280,6 +279,7 @@ export default function GuidePage() {
               </span>
             </div>
           </section>
+
 
 
               <span className="text-[11px] text-slate-500">
