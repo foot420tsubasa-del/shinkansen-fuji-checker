@@ -366,8 +366,12 @@ export default function HomePage() {
                   </div>
                 </div>
 
+                <div className="mt-3">
+                  <KlookCTA />
+                </div>
+
                 {/* Seat diagram */}
-                <div className="mt-2 space-y-2">
+                <div className="mt-4 space-y-2">
                   <div className="flex items-center justify-between text-[11px] text-slate-500">
                     <span>Sea side</span>
                     <span className="italic text-slate-400">Aisle</span>
@@ -484,74 +488,74 @@ export default function HomePage() {
                     Shinkansen shot.
                   </p>
                 </div>
+
+                {/* Travel essentials block */}
+                <div className="mt-3 bg-slate-50 border border-slate-200 rounded-2xl px-3 py-3 space-y-2">
+                  <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-700">
+                    <ShieldCheck className="h-3.5 w-3.5" />
+                    <span>Travel essentials for your Japan trip</span>
+                  </div>
+                  <p className="text-[10px] text-slate-500">
+                    Links below are Klook affiliate links. We may earn a small
+                    commission at no extra cost to you. Klook supports multiple
+                    languages and currencies — you can change them from the menu
+                    on each Klook page.
+                  </p>
+                  <div className="space-y-1.5 text-[11px]">
+                    <a
+                      href={JR_PASS_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
+                    >
+                      <Train className="h-3.5 w-3.5" />
+                      <span>JR Pass &amp; Shinkansen tickets (long distance)</span>
+                    </a>
+                    <a
+                      href={ESIM_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
+                    >
+                      <Wifi className="h-3.5 w-3.5" />
+                      <span>Japan eSIM – stay online during your trip</span>
+                    </a>
+                    <a
+                      href={AIRPORT_TRANSFER_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
+                    >
+                      <Train className="h-3.5 w-3.5" />
+                      <span>Narita Express / airport transfer to Tokyo</span>
+                    </a>
+                    <a
+                      href={INSURANCE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
+                    >
+                      <ShieldCheck className="h-3.5 w-3.5" />
+                      <span>
+                        Klook Protect – travel insurance for peace of mind
+                      </span>
+                    </a>
+                    <a
+                      href={CAR_RENTAL_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
+                    >
+                      <Car className="h-3.5 w-3.5" />
+                      <span>
+                        Private car charter – for families &amp; premium trips
+                      </span>
+                    </a>
+                  </div>
+                </div>
               </div>
 
               <KlookCTA />
-
-              {/* Travel essentials block */}
-              <div className="mt-3 bg-white/90 border border-slate-200 rounded-2xl px-3 py-3 space-y-2">
-                <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-700">
-                  <ShieldCheck className="h-3.5 w-3.5" />
-                  <span>Travel essentials for your Japan trip</span>
-                </div>
-                <p className="text-[10px] text-slate-500">
-                  Links below are Klook affiliate links. We may earn a small
-                  commission at no extra cost to you. Klook supports multiple
-                  languages and currencies — you can change them from the menu
-                  on each Klook page.
-                </p>
-                <div className="space-y-1.5 text-[11px]">
-                  <a
-                    href={JR_PASS_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
-                  >
-                    <Train className="h-3.5 w-3.5" />
-                    <span>JR Pass &amp; Shinkansen tickets (long distance)</span>
-                  </a>
-                  <a
-                    href={ESIM_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
-                  >
-                    <Wifi className="h-3.5 w-3.5" />
-                    <span>Japan eSIM – stay online during your trip</span>
-                  </a>
-                  <a
-                    href={AIRPORT_TRANSFER_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
-                  >
-                    <Train className="h-3.5 w-3.5" />
-                    <span>Narita Express / airport transfer to Tokyo</span>
-                  </a>
-                  <a
-                    href={INSURANCE_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
-                  >
-                    <ShieldCheck className="h-3.5 w-3.5" />
-                    <span>
-                      Klook Protect – travel insurance for peace of mind
-                    </span>
-                  </a>
-                  <a
-                    href={CAR_RENTAL_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
-                  >
-                    <Car className="h-3.5 w-3.5" />
-                    <span>
-                      Private car charter – for families &amp; premium trips
-                    </span>
-                  </a>
-                </div>
-              </div>
             </motion.section>
           )}
         </AnimatePresence>

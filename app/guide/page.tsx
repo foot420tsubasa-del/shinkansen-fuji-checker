@@ -218,6 +218,179 @@ export default function GuidePage() {
             </ul>
           </section>
 
+          {/* Section A: JR Pass vs Single Ticket */}
+          <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+              <Train className="h-4 w-4 text-sky-600" />
+              JR Pass vs Single Ticket: Which is cheaper?
+            </h2>
+            <p className="mb-2">
+              Single reserved seat prices (Tokyo ↔ Osaka/Kyoto):
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>Tokyo → Shin-Osaka: approx. <span className="font-semibold">¥14,720</span></li>
+              <li>Tokyo → Kyoto: approx. <span className="font-semibold">¥13,850</span></li>
+              <li>Round trip Tokyo ↔ Osaka: approx. <span className="font-semibold">¥29,440</span></li>
+            </ul>
+            <p className="mt-2.5 mb-2">
+              JR Pass prices:
+            </p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li><span className="font-semibold">7-day:</span> ¥50,000</li>
+              <li><span className="font-semibold">14-day:</span> ¥80,000</li>
+              <li><span className="font-semibold">21-day:</span> ¥100,000</li>
+            </ul>
+            <div className="mt-3 space-y-2 text-[12px] text-slate-600">
+              <p>
+                <span className="font-semibold">JR Pass is worth it</span> if taking 2+ long Shinkansen
+                rides (e.g. Tokyo → Kyoto → Hiroshima → Tokyo). For a single round trip Tokyo ↔ Osaka,
+                single tickets are cheaper.
+              </p>
+              <p className="rounded-xl bg-amber-50 border border-amber-200 px-3 py-2 text-amber-800">
+                <span className="font-semibold">Note:</span> The Nozomi (fastest) is <span className="font-semibold">NOT covered</span> by
+                the JR Pass. Use Hikari or Kodama — these stop near Shin-Fuji station, which is actually
+                better for Mt. Fuji views.
+              </p>
+            </div>
+            <div className="mt-3">
+              <KlookCTA />
+            </div>
+          </section>
+
+          {/* Section B: Best Season & Time of Day */}
+          <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+              <Info className="h-4 w-4 text-sky-600" />
+              Best Season &amp; Time of Day to See Mt. Fuji
+            </h2>
+            <p className="mb-2 font-semibold text-[12px] uppercase tracking-wide text-slate-500">Season guide</p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>
+                <span className="font-semibold">Winter (Dec–Feb):</span>{" "}
+                <span className="text-emerald-700 font-semibold">BEST</span> — snow-capped peak, clear skies
+              </li>
+              <li>
+                <span className="font-semibold">Autumn (Sep–Nov):</span> Very good — clear skies, early snow from October
+              </li>
+              <li>
+                <span className="font-semibold">Spring (Mar–May):</span> Good — more haze possible
+              </li>
+              <li>
+                <span className="font-semibold">Summer (Jun–Aug):</span>{" "}
+                <span className="text-slate-500">Difficult</span> — clouds, haze, rainy season
+              </li>
+            </ul>
+            <p className="mt-3 mb-2 font-semibold text-[12px] uppercase tracking-wide text-slate-500">Time of day</p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>
+                <span className="font-semibold">Before 10am:</span> Often clearest before haze builds
+              </li>
+              <li>
+                <span className="font-semibold">Late morning to early afternoon:</span> Good on clear days
+              </li>
+              <li>
+                <span className="font-semibold">Late afternoon:</span> Sun glare possible on the Mt. Fuji side
+              </li>
+            </ul>
+            <p className="mt-3 text-[12px] text-slate-600 rounded-xl bg-sky-50 border border-sky-200 px-3 py-2">
+              <span className="font-semibold">Pro tip:</span> Check Shizuoka Prefecture weather the night before.
+              Our tool shows live visibility near Shin-Fuji at the top of the page.
+            </p>
+          </section>
+
+          {/* Section C: Car Number & Seat Detail Guide */}
+          <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+              <Train className="h-4 w-4 text-sky-600" />
+              Car Number &amp; Seat Detail Guide
+            </h2>
+            <p className="mb-2 font-semibold text-[12px] uppercase tracking-wide text-slate-500">Standard cars (3+2 layout)</p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>Cars 4–7 often give the clearest unobstructed views</li>
+              <li><span className="font-semibold">Seat E</span> = Mt. Fuji window seat in all standard cars</li>
+            </ul>
+            <p className="mt-3 mb-2 font-semibold text-[12px] uppercase tracking-wide text-slate-500">Green Car (cars 8–10, 2+2 layout)</p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>Mt. Fuji window seat = <span className="font-semibold">Seat D</span></li>
+            </ul>
+            <p className="mt-3 mb-2 font-semibold text-[12px] uppercase tracking-wide text-slate-500">How to request Seat E</p>
+            <ul className="list-disc pl-5 space-y-1.5">
+              <li>
+                <span className="font-semibold">At JR ticket office:</span> show{" "}
+                <span className="font-semibold">「E席をお願いします」</span>
+              </li>
+              <li>
+                <span className="font-semibold">Via Klook:</span> select column E on the seat map
+              </li>
+              <li>
+                <span className="font-semibold">With JR Pass:</span> reserve free at any JR station counter
+              </li>
+            </ul>
+            <div className="mt-3">
+              <KlookCTA />
+            </div>
+          </section>
+
+          {/* Section D: FAQ */}
+          <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-3">
+              <Info className="h-4 w-4 text-sky-600" />
+              Frequently Asked Questions
+            </h2>
+            <div className="space-y-3">
+              {[
+                {
+                  q: "Can I see Mt. Fuji from a non-reserved car?",
+                  a: "Yes, but risky — you may end up in an aisle seat. Reserve Seat E in advance.",
+                },
+                {
+                  q: "How long can I see Mt. Fuji?",
+                  a: "Only 30–60 seconds at Shinkansen speed. Have your camera ready before reaching Shin-Fuji station.",
+                },
+                {
+                  q: "Is Seat E always the Mt. Fuji side?",
+                  a: "In standard 3+2 cars, yes. In Green Cars (2+2), it's Seat D. Our checker accounts for this.",
+                },
+                {
+                  q: "What if it's cloudy?",
+                  a: "Mt. Fuji is often hidden, especially in summer. Check our live visibility indicator at the top of the page.",
+                },
+                {
+                  q: "Can I see Mt. Fuji on the return trip (Osaka/Kyoto → Tokyo)?",
+                  a: "Yes — Mt. Fuji is on the LEFT side, which is again Seat E. Use our checker and select the opposite direction.",
+                },
+                {
+                  q: "Does the Nozomi stop near Mt. Fuji?",
+                  a: "No, but you can still see it through the window. Hikari and Kodama stop at Shin-Fuji station.",
+                },
+                {
+                  q: "Is the JR Pass worth it for Tokyo–Osaka only?",
+                  a: "Generally no. Round trip ≈ ¥29,000 vs 7-day Pass ¥50,000. Pass makes sense if also visiting Hiroshima, Nara, etc.",
+                },
+                {
+                  q: "Can I bring large luggage?",
+                  a: "Bags over 160cm total dimensions need a designated overhead space — reserve when booking your seat.",
+                },
+                {
+                  q: "Is there WiFi on the Shinkansen?",
+                  a: "Onboard WiFi exists but can be unreliable. A Japan eSIM is recommended for consistent connectivity.",
+                },
+                {
+                  q: "Best way to book as a foreigner?",
+                  a: "Klook — fully English, instant mobile voucher, seat selection including Seat E.",
+                },
+              ].map(({ q, a }) => (
+                <div key={q} className="border-b border-slate-100 pb-3 last:border-0 last:pb-0">
+                  <p className="font-semibold text-slate-800 mb-1">Q: {q}</p>
+                  <p className="text-[12px] text-slate-600">A: {a}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4">
+              <KlookCTA />
+            </div>
+          </section>
+
           {/* Section 5: Use the Seat Checker */}
           <section className="bg-sky-50 border border-sky-200 rounded-2xl px-4 py-4 shadow-sm shadow-sky-100">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
