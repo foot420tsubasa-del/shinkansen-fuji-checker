@@ -20,6 +20,7 @@ import {
   CloudSun,
   Sun,
 } from "lucide-react";
+import { KlookCTA } from "./components/KlookCTA";
 
 // ================== Affiliate URLs ==================
 
@@ -485,16 +486,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Main JR Pass button */}
-              <motion.a
-                href={JR_PASS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center justify-center w-full rounded-2xl border border-red-500/80 bg-red-500 text-sm font-semibold tracking-tight py-3 text-white shadow-md shadow-red-200 hover:brightness-110 active:brightness-95 transition-all"
-              >
-                Book Shinkansen tickets / JR Pass on Klook
-              </motion.a>
+              <KlookCTA />
 
               {/* Travel essentials block */}
               <div className="mt-3 bg-white/90 border border-slate-200 rounded-2xl px-3 py-3 space-y-2">
