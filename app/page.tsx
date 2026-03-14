@@ -490,66 +490,89 @@ export default function HomePage() {
                 </div>
 
                 {/* Travel essentials block */}
-                <div className="mt-3 bg-slate-50 border border-slate-200 rounded-2xl px-3 py-3 space-y-2">
+                <div className="mt-3 bg-red-50/50 border border-red-100 rounded-2xl px-3 py-3 space-y-2">
                   <div className="flex items-center gap-1.5 text-[11px] font-medium text-slate-700">
                     <ShieldCheck className="h-3.5 w-3.5" />
                     <span>Travel essentials for your Japan trip</span>
                   </div>
                   <p className="text-[10px] text-slate-500">
-                    Links below are Klook affiliate links. We may earn a small
-                    commission at no extra cost to you. Klook supports multiple
-                    languages and currencies — you can change them from the menu
-                    on each Klook page.
+                    Klook affiliate links — English OK, instant mobile voucher.
                   </p>
-                  <div className="space-y-1.5 text-[11px]">
+                  <div className="space-y-1.5">
                     <a
                       href={JR_PASS_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
+                      className="flex items-center gap-2.5 rounded-xl border border-red-100 bg-white px-3 py-2 hover:bg-red-50 active:brightness-95 transition-colors"
                     >
-                      <Train className="h-3.5 w-3.5" />
-                      <span>JR Pass &amp; Shinkansen tickets (long distance)</span>
+                      <div className="shrink-0 w-7 h-7 rounded-lg bg-red-50 border border-red-100 flex items-center justify-center">
+                        <Train className="h-3.5 w-3.5 text-red-500" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[12px] font-semibold text-slate-800">JR Pass &amp; Shinkansen tickets</p>
+                        <p className="text-[10px] text-slate-500">Best for 2+ long rides. Book in English on Klook.</p>
+                      </div>
+                      <ExternalLink className="shrink-0 h-3 w-3 text-slate-400" />
                     </a>
                     <a
                       href={ESIM_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
+                      className="flex items-center gap-2.5 rounded-xl border border-red-100 bg-white px-3 py-2 hover:bg-red-50 active:brightness-95 transition-colors"
                     >
-                      <Wifi className="h-3.5 w-3.5" />
-                      <span>Japan eSIM – stay online during your trip</span>
+                      <div className="shrink-0 w-7 h-7 rounded-lg bg-red-50 border border-red-100 flex items-center justify-center">
+                        <Wifi className="h-3.5 w-3.5 text-red-500" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[12px] font-semibold text-slate-800">Japan eSIM</p>
+                        <p className="text-[10px] text-slate-500">Stay online the whole trip — no SIM swap needed.</p>
+                      </div>
+                      <ExternalLink className="shrink-0 h-3 w-3 text-slate-400" />
                     </a>
                     <a
                       href={AIRPORT_TRANSFER_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
+                      className="flex items-center gap-2.5 rounded-xl border border-red-100 bg-white px-3 py-2 hover:bg-red-50 active:brightness-95 transition-colors"
                     >
-                      <Train className="h-3.5 w-3.5" />
-                      <span>Narita Express / airport transfer to Tokyo</span>
+                      <div className="shrink-0 w-7 h-7 rounded-lg bg-red-50 border border-red-100 flex items-center justify-center">
+                        <Train className="h-3.5 w-3.5 text-red-500" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[12px] font-semibold text-slate-800">Narita Express (N&apos;EX)</p>
+                        <p className="text-[10px] text-slate-500">Fast train from Narita Airport to central Tokyo.</p>
+                      </div>
+                      <ExternalLink className="shrink-0 h-3 w-3 text-slate-400" />
                     </a>
                     <a
                       href={INSURANCE_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
+                      className="flex items-center gap-2.5 rounded-xl border border-red-100 bg-white px-3 py-2 hover:bg-red-50 active:brightness-95 transition-colors"
                     >
-                      <ShieldCheck className="h-3.5 w-3.5" />
-                      <span>
-                        Klook Protect – travel insurance for peace of mind
-                      </span>
+                      <div className="shrink-0 w-7 h-7 rounded-lg bg-red-50 border border-red-100 flex items-center justify-center">
+                        <ShieldCheck className="h-3.5 w-3.5 text-red-500" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[12px] font-semibold text-slate-800">Klook Protect — Travel Insurance</p>
+                        <p className="text-[10px] text-slate-500">Trip cancellation, medical, and more. Peace of mind.</p>
+                      </div>
+                      <ExternalLink className="shrink-0 h-3 w-3 text-slate-400" />
                     </a>
                     <a
                       href={CAR_RENTAL_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 text-sky-700 hover:underline underline-offset-2"
+                      className="flex items-center gap-2.5 rounded-xl border border-red-100 bg-white px-3 py-2 hover:bg-red-50 active:brightness-95 transition-colors"
                     >
-                      <Car className="h-3.5 w-3.5" />
-                      <span>
-                        Private car charter – for families &amp; premium trips
-                      </span>
+                      <div className="shrink-0 w-7 h-7 rounded-lg bg-red-50 border border-red-100 flex items-center justify-center">
+                        <Car className="h-3.5 w-3.5 text-red-500" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-[12px] font-semibold text-slate-800">Private Car Charter</p>
+                        <p className="text-[10px] text-slate-500">English-speaking driver. Great for families &amp; day trips.</p>
+                      </div>
+                      <ExternalLink className="shrink-0 h-3 w-3 text-slate-400" />
                     </a>
                   </div>
                 </div>

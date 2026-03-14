@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { Mountain, Train, Info, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { KlookCTA } from "../components/KlookCTA";
+
+export const metadata: Metadata = {
+  title: "How to See Mt. Fuji from the Shinkansen — Seat, Side & Timing Guide",
+  description:
+    "Which seat to book for the best Mt. Fuji view on the Shinkansen? Seat E, right side (Tokyo→Osaka). Complete guide with season tips, car numbers, JR Pass vs ticket comparison, and FAQ.",
+};
 
 export default function GuidePage() {
   return (
