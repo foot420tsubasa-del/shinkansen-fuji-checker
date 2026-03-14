@@ -271,22 +271,23 @@ export default function GuidePage() {
               Best Season &amp; Time of Day to See Mt. Fuji
             </h2>
             <p className="mb-2 font-semibold text-[12px] uppercase tracking-wide text-slate-500">Season guide</p>
-            <ul className="list-disc pl-5 space-y-1.5">
-              <li>
-                <span className="font-semibold">Winter (Dec–Feb):</span>{" "}
-                <span className="text-emerald-700 font-semibold">BEST</span> — snow-capped peak, clear skies
-              </li>
-              <li>
-                <span className="font-semibold">Autumn (Sep–Nov):</span> Very good — clear skies, early snow from October
-              </li>
-              <li>
-                <span className="font-semibold">Spring (Mar–May):</span> Good — more haze possible
-              </li>
-              <li>
-                <span className="font-semibold">Summer (Jun–Aug):</span>{" "}
-                <span className="text-slate-500">Difficult</span> — clouds, haze, rainy season
-              </li>
-            </ul>
+            <div className="divide-y divide-slate-100 rounded-xl border border-slate-200 overflow-hidden text-[12px]">
+              {[
+                { season: "Winter (Dec–Feb)", stars: "★★★★★", rating: "Best", note: "Snow-capped, clear skies", color: "text-emerald-700" },
+                { season: "Autumn (Sep–Nov)", stars: "★★★★", rating: "Very good", note: "Clear skies, early snow from October", color: "text-sky-700" },
+                { season: "Spring (Mar–May)", stars: "★★★", rating: "Good", note: "More haze possible", color: "text-amber-700" },
+                { season: "Summer (Jun–Aug)", stars: "★", rating: "Difficult", note: "Clouds, haze, rainy season", color: "text-slate-500" },
+              ].map(({ season, stars, rating, note, color }) => (
+                <div key={season} className="flex items-start gap-2 px-3 py-2 bg-white">
+                  <span className={`shrink-0 font-semibold ${color}`}>{stars}</span>
+                  <div>
+                    <span className="font-semibold text-slate-800">{season}:</span>{" "}
+                    <span className={`font-semibold ${color}`}>{rating}</span>
+                    {" "}— {note}
+                  </div>
+                </div>
+              ))}
+            </div>
             <p className="mt-3 mb-2 font-semibold text-[12px] uppercase tracking-wide text-slate-500">Time of day</p>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>
@@ -348,15 +349,15 @@ export default function GuidePage() {
               {[
                 {
                   q: "Can I see Mt. Fuji from a non-reserved car?",
-                  a: "Yes, but risky — you may end up in an aisle seat. Reserve Seat E in advance.",
+                  a: "Yes, but risky — you may end up in an aisle seat with no view. Reserve Seat E in advance.",
                 },
                 {
-                  q: "How long can I see Mt. Fuji?",
-                  a: "Only 30–60 seconds at Shinkansen speed. Have your camera ready before reaching Shin-Fuji station.",
+                  q: "How long can I see Mt. Fuji from the train?",
+                  a: "Only about 30–60 seconds at Shinkansen speed. Have your camera ready before reaching Shin-Fuji station.",
                 },
                 {
                   q: "Is Seat E always the Mt. Fuji side?",
-                  a: "In standard 3+2 cars, yes. In Green Cars (2+2), it's Seat D. Our checker accounts for this.",
+                  a: "In standard 3+2 cars, yes. In Green Cars (2+2 layout), the Mt. Fuji window seat is Seat D.",
                 },
                 {
                   q: "What if it's cloudy?",
@@ -368,23 +369,23 @@ export default function GuidePage() {
                 },
                 {
                   q: "Does the Nozomi stop near Mt. Fuji?",
-                  a: "No, but you can still see it through the window. Hikari and Kodama stop at Shin-Fuji station.",
+                  a: "No, but you can still see it through the window as the train passes. Hikari and Kodama stop at Shin-Fuji station.",
                 },
                 {
                   q: "Is the JR Pass worth it for Tokyo–Osaka only?",
-                  a: "Generally no. Round trip ≈ ¥29,000 vs 7-day Pass ¥50,000. Pass makes sense if also visiting Hiroshima, Nara, etc.",
+                  a: "Generally no. Round trip ≈ ¥29,000 vs 7-day Pass ¥50,000. The Pass makes sense if also visiting Hiroshima, Nara, etc.",
                 },
                 {
-                  q: "Can I bring large luggage?",
-                  a: "Bags over 160cm total dimensions need a designated overhead space — reserve when booking your seat.",
+                  q: "Can I bring large luggage on the Shinkansen?",
+                  a: "Bags with total dimensions over 160cm need a designated overhead space — reserve when booking your seat.",
                 },
                 {
                   q: "Is there WiFi on the Shinkansen?",
-                  a: "Onboard WiFi exists but can be unreliable. A Japan eSIM is recommended for consistent connectivity.",
+                  a: "Onboard WiFi exists but can be unreliable. A Japan eSIM is recommended for consistent connectivity throughout your trip.",
                 },
                 {
-                  q: "Best way to book as a foreigner?",
-                  a: "Klook — fully English, instant mobile voucher, seat selection including Seat E.",
+                  q: "What is the best way to book as a foreigner?",
+                  a: "Klook — fully in English, instant mobile voucher, and you can select Seat E on the seat map.",
                 },
               ].map(({ q, a }) => (
                 <div key={q} className="border-b border-slate-100 pb-3 last:border-0 last:pb-0">
