@@ -218,8 +218,6 @@ export default function GuidePage() {
             </ul>
           </section>
 
-          <KlookCTA />
-
           {/* Section 5: Use the Seat Checker */}
           <section className="bg-sky-50 border border-sky-200 rounded-2xl px-4 py-4 shadow-sm shadow-sky-100">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
@@ -239,8 +237,7 @@ export default function GuidePage() {
               The tool is designed to work well on mobile, so you can quickly
               check it while booking tickets or travelling in Japan.
             </p>
-            <div className="mt-3 space-y-3">
-              <KlookCTA />
+            <div className="mt-3">
               <Link
                 href="/"
                 className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-red-500 to-red-500 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-red-200 hover:brightness-110 active:brightness-95 transition-all"
@@ -249,6 +246,8 @@ export default function GuidePage() {
               </Link>
             </div>
           </section>
+
+          <KlookCTA />
 
           {/* Section 6: From the developer (KanjiFlick) */}
           <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
