@@ -132,7 +132,7 @@ export default function HomeClient() {
     <main className="min-h-screen bg-gradient-to-b from-sky-100 via-sky-50 to-white text-slate-900 flex flex-col">
       <div className="flex-1 flex flex-col px-4 py-6 max-w-md mx-auto w-full">
         {/* Header / Branding */}
-        <header className="mb-6 mt-2">
+        <header className="mb-3 mt-2">
           <div className="flex items-start gap-3">
             {/* Fuji logo */}
             <div className="shrink-0 relative h-11 w-11 rounded-2xl bg-gradient-to-b from-sky-300 to-sky-500 flex items-center justify-center shadow-sm">
@@ -167,7 +167,7 @@ export default function HomeClient() {
         </header>
 
         {/* Today's Mt. Fuji visibility */}
-        <div className="mb-3 flex items-center justify-between gap-3 text-[11px]">
+        <div className="mb-2 flex items-center justify-between gap-3 text-[11px]">
           <span className="text-slate-500">{t("weatherLabel")}</span>
           <div
             className={[
@@ -182,14 +182,14 @@ export default function HomeClient() {
         </div>
 
         {/* Steps */}
-        <div className="mb-3 flex items-center justify-between text-[11px] text-slate-500">
+        <div className="mb-2 flex items-center justify-between text-[11px] text-slate-500">
           <span>{t("step1")}</span>
           <span>{t("step2")}</span>
           <span>{t("step3")}</span>
         </div>
 
         {/* Main card */}
-        <section className="bg-white/90 border border-slate-200 rounded-3xl px-4 py-5 shadow-md shadow-slate-200/70 backdrop-blur flex flex-col gap-4">
+        <section className="bg-white/90 border border-slate-200 rounded-3xl px-4 py-4 shadow-md shadow-slate-200/70 backdrop-blur flex flex-col gap-3">
           <div className="space-y-1">
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-700">
               {t("tagline")}

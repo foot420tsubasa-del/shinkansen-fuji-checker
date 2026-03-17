@@ -24,7 +24,7 @@ export function KlookCTA() {
           href={KLOOK_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 inline-flex items-center justify-center rounded-2xl border border-red-400 bg-white px-4 py-2.5 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-50 active:brightness-95 transition-all"
+          className="flex-1 inline-flex items-center justify-center rounded-2xl border-2 border-red-500 bg-red-50 px-4 py-2.5 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-100 active:brightness-95 transition-all"
         >
           {t("jrPass")}
         </a>

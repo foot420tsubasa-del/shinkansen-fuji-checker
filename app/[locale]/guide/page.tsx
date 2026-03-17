@@ -61,8 +61,8 @@ export default async function GuidePage({ params }: Props) {
               <div className="pointer-events-none absolute bottom-1.5 h-2 w-4 bg-white/95 rounded-t-[999px] rounded-b-[6px]" />
             </div>
             <div>
-              <h1 className="text-base font-semibold tracking-tight">
-                {t("h1")}
+              <h1 className="text-sm font-semibold tracking-tight leading-snug">
+                Mt. Fuji Shinkansen Seat Guide
               </h1>
               <p className="text-xs text-slate-500">{t("subtitle")}</p>
               <p className="mt-0.5 text-[10px] text-slate-500">
