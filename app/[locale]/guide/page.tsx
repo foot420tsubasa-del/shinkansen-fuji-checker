@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { Mountain, Train, Info, ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { KlookCTA } from "../components/KlookCTA";
+import { LanguageSelector } from "../components/LanguageSelector";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -70,13 +71,16 @@ export default async function GuidePage({ params }: Props) {
             </div>
           </div>
 
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-600 hover:bg-slate-50 transition-colors"
-          >
-            <ArrowLeft className="h-3.5 w-3.5" />
-            <span>{t("backToChecker")}</span>
-          </Link>
+          <div className="flex items-center gap-2 shrink-0">
+            <LanguageSelector />
+            <Link
+              href="/"
+              className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-600 hover:bg-slate-50 transition-colors"
+            >
+              <ArrowLeft className="h-3.5 w-3.5" />
+              <span>{t("backToChecker")}</span>
+            </Link>
+          </div>
         </header>
 
         {/* Intro */}
