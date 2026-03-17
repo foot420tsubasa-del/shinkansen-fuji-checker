@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Mountain, Train, Info, ArrowLeft } from "lucide-react";
+import Script from "next/script";
 import { Link } from "@/i18n/navigation";
 import { KlookCTA } from "../components/KlookCTA";
 import { LanguageSelector } from "../components/LanguageSelector";
@@ -8,6 +9,93 @@ import { getAlternates } from "@/i18n/hreflang";
 
 const KLOOK_URL =
   "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165791&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F1420-7-day-whole-japan-rail-pass-jr-pass%2F";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Can I see Mt. Fuji from a non-reserved car?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, but risky — you may end up in an aisle seat with no view. Reserve Seat E in advance.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How long can I see Mt. Fuji from the train?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Only about 30–60 seconds at Shinkansen speed. Have your camera ready before reaching Shin-Fuji station.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is Seat E always the Mt. Fuji side?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "In standard 3+2 cars, yes. In Green Cars (2+2 layout), the Mt. Fuji window seat is Seat D.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What if it's cloudy?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Mt. Fuji is often hidden, especially in summer. Check the live visibility indicator at the top of fujiseat.com.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I see Mt. Fuji on the return trip from Osaka/Kyoto to Tokyo?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes — Mt. Fuji is on the LEFT side, which is again Seat E. Use the checker and select the opposite direction.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Does the Nozomi stop near Mt. Fuji?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No, but you can still see it through the window as the train passes. Hikari and Kodama stop at Shin-Fuji station.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is the JR Pass worth it for Tokyo to Osaka only?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Generally no. Round trip is approximately ¥29,000 vs 7-day Pass ¥50,000. The Pass makes sense if also visiting Hiroshima, Nara, etc.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Can I bring large luggage on the Shinkansen?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Bags with total dimensions over 160cm need a designated overhead space — reserve when booking your seat.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is there WiFi on the Shinkansen?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Onboard WiFi exists but can be unreliable. A Japan eSIM is recommended for consistent connectivity throughout your trip.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What is the best way to book Shinkansen tickets as a foreigner?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Klook — fully in English, instant mobile voucher, and you can select Seat E on the seat map.",
+      },
+    },
+  ],
+};
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -57,6 +145,11 @@ export default async function GuidePage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-100 via-sky-50 to-white text-slate-900 flex flex-col">
+      <Script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="flex-1 flex flex-col px-4 py-6 max-w-2xl mx-auto w-full">
         {/* Header */}
         <header className="mb-6 flex items-center justify-between gap-3">
