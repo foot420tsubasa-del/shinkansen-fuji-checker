@@ -6,6 +6,9 @@ import { KlookCTA } from "../components/KlookCTA";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { getAlternates } from "@/i18n/hreflang";
 
+const KLOOK_URL =
+  "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165791&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F1420-7-day-whole-japan-rail-pass-jr-pass%2F";
+
 type Props = {
   params: Promise<{ locale: string }>;
 };
@@ -94,8 +97,37 @@ export default async function GuidePage({ params }: Props) {
           <p className="mt-2 text-[12px] text-slate-600">{t("introP2")}</p>
         </section>
 
+        {/* Quick navigation */}
+        <section className="mb-5 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-2.5">
+            Quick navigation
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              href="/"
+              className="inline-flex items-center rounded-full bg-sky-500 px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm hover:brightness-110 transition-all"
+            >
+              Check my seat now →
+            </Link>
+            <a
+              href="#basics"
+              className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-[12px] font-semibold text-slate-600 hover:bg-slate-100 transition-colors"
+            >
+              Read full guide ↓
+            </a>
+            <a
+              href={KLOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-full border border-red-200 bg-red-50 px-3.5 py-1.5 text-[12px] font-semibold text-red-600 hover:bg-red-100 transition-colors"
+            >
+              Book on Klook →
+            </a>
+          </div>
+        </section>
+
         {/* TL;DR */}
-        <section className="mb-5 text-[13px] leading-relaxed text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">
+        <section id="basics" className="mb-5 text-[13px] leading-relaxed text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">
           <h2 className="text-sm font-semibold text-slate-900 mb-2">
             {t("tldrH2")}
           </h2>
@@ -108,9 +140,21 @@ export default async function GuidePage({ params }: Props) {
           </ul>
         </section>
 
+        {/* Jump to section */}
+        <div className="mb-5 text-[12px] text-slate-500 leading-relaxed">
+          <span className="font-semibold text-slate-600">Jump to: </span>
+          <a href="#which-seat" className="underline underline-offset-2 hover:text-slate-800 transition-colors">Which seat?</a>
+          {" · "}
+          <a href="#best-time" className="underline underline-offset-2 hover:text-slate-800 transition-colors">Best time?</a>
+          {" · "}
+          <a href="#jr-pass" className="underline underline-offset-2 hover:text-slate-800 transition-colors">JR Pass vs ticket?</a>
+          {" · "}
+          <a href="#faq" className="underline underline-offset-2 hover:text-slate-800 transition-colors">FAQ</a>
+        </div>
+
         <div className="space-y-6 text-[13px] leading-relaxed text-slate-700">
           {/* Section 1: Which side? */}
-          <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
+          <section id="which-seat" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
               {t("s1H2")}
@@ -202,7 +246,7 @@ export default async function GuidePage({ params }: Props) {
           </section>
 
           {/* Section A: JR Pass vs Single Ticket */}
-          <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
+          <section id="jr-pass" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
               {t("jrH2")}
@@ -233,7 +277,7 @@ export default async function GuidePage({ params }: Props) {
           </section>
 
           {/* Section B: Best Season & Time */}
-          <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
+          <section id="best-time" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Info className="h-4 w-4 text-sky-600" />
               {t("seasonH2")}
@@ -319,7 +363,7 @@ export default async function GuidePage({ params }: Props) {
           </section>
 
           {/* Section D: FAQ */}
-          <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
+          <section id="faq" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-3">
               <Info className="h-4 w-4 text-sky-600" />
               {t("faqH2")}
@@ -364,34 +408,6 @@ export default async function GuidePage({ params }: Props) {
 
           <KlookCTA />
 
-          {/* Section 6: From the developer */}
-          <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
-            <h2 className="text-sm font-semibold text-slate-900 mb-1.5">
-              {t("devH2")}
-            </h2>
-            <p className="text-[13px] leading-relaxed text-slate-700">
-              {t("devP")}
-            </p>
-            <div className="mt-3 flex items-center gap-3">
-              <a
-                href="https://apps.apple.com/app/id6757971053?ct=fujiseat_guide"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center"
-                aria-label="Download KanjiFlick on the App Store"
-                title="KanjiFlick on the App Store"
-              >
-                <img
-                  src="/appstore-badge.svg"
-                  alt="Download on the App Store"
-                  className="h-10 w-auto hover:opacity-90 active:opacity-80 transition-opacity"
-                />
-              </a>
-              <span className="text-[11px] text-slate-500">
-                (opens in a new tab)
-              </span>
-            </div>
-          </section>
         </div>
       </div>
     </main>
