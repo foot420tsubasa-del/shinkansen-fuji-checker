@@ -4,6 +4,7 @@ import { Mountain, Train, Info, ArrowLeft } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { KlookCTA } from "../components/KlookCTA";
 import { LanguageSelector } from "../components/LanguageSelector";
+import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -15,6 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("guideTitle"),
     description: t("guideDesc"),
+    alternates: getAlternates("/guide", locale),
   };
 }
 
