@@ -137,7 +137,7 @@
       "21 días: ¥100.000"
     ],
     "jrPassWorth": "El JR Pass vale la pena si vas a hacer 2 o más viajes largos en Shinkansen (ej: Tokio → Kioto → Hiroshima → Tokio). Para solo un viaje de ida y vuelta Tokio ↔ Osaka, los billetes individuales son más baratos.",
-    "jrNozomiNote": "Nota: El Nozomi (el más rápido) NO está cubierto por el JR Pass. Usa el Hikari o Kodama — estos paran cerca de la estación Shin-Fuji, lo que es mejor para ver el Monte Fuji.",
+    "jrNozomiNote": "Nota: El Nozomi (el más rápido) requiere un billete adicional NOZOMI MIZUHO (¥4.960 Tokio→Kioto/Osaka) además del JR Pass. Sin él, usa el Hikari o Kodama — estos paran cerca de Shin-Fuji, lo que es mejor para ver el Monte Fuji.",
     "seasonH2": "Mejor Temporada y Horario para Ver el Monte Fuji",
     "seasonLabel": "Guía por temporadas",
     "seasons": [
@@ -178,7 +178,7 @@
       { "q": "¿Se puede ver el Monte Fuji en el viaje de vuelta (Osaka/Kioto → Tokio)?", "a": "Sí — el Monte Fuji está en el lado IZQUIERDO, que es de nuevo el Asiento E. Usa nuestro verificador y selecciona la dirección contraria." },
       { "q": "¿Para el Nozomi cerca del Monte Fuji?", "a": "No, pero puedes verlo por la ventana mientras el tren pasa. El Hikari y el Kodama paran en la estación Shin-Fuji." },
       { "q": "¿Vale la pena el JR Pass solo para Tokio–Osaka?", "a": "Generalmente no. Ida y vuelta ≈ ¥29.000 vs JR Pass 7 días ¥50.000. El Pass tiene sentido si también vas a Hiroshima, Nara, etc." },
-      { "q": "¿Puedo llevar equipaje grande en el Shinkansen?", "a": "Las maletas con dimensiones totales superiores a 160 cm necesitan un espacio reservado en el maletero — resérvalo al comprar el billete." },
+      { "q": "¿Puedo llevar equipaje grande en el Shinkansen?", "a": "Las maletas con dimensiones totales entre 160 cm y 250 cm requieren una reserva de asiento con área de equipaje especial (予約が必要). Resérvala al comprar el billete del Shinkansen. Las maletas de más de 250 cm no están permitidas." },
       { "q": "¿Hay WiFi en el Shinkansen?", "a": "Existe WiFi a bordo pero puede ser inestable. Se recomienda un eSIM de Japón para conexión constante durante el viaje." },
       { "q": "¿Cuál es la mejor forma de reservar siendo extranjero?", "a": "Klook — totalmente en inglés, vale móvil instantáneo, y puedes seleccionar el Asiento E en el mapa de asientos." }
     ],

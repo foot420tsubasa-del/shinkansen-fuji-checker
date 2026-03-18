@@ -137,7 +137,7 @@
       "21-day: ¥100,000"
     ],
     "jrPassWorth": "JR Pass is worth it if taking 2+ long Shinkansen rides (e.g. Tokyo → Kyoto → Hiroshima → Tokyo). For a single round trip Tokyo ↔ Osaka, single tickets are cheaper.",
-    "jrNozomiNote": "Note: The Nozomi (fastest) is NOT covered by the JR Pass. Use Hikari or Kodama — these stop near Shin-Fuji station, which is actually better for Mt. Fuji views.",
+    "jrNozomiNote": "Note: The Nozomi (fastest) requires an additional NOZOMI MIZUHO Ticket (¥4,960 Tokyo→Kyoto/Osaka) on top of your JR Pass. Without it, use Hikari or Kodama — these stop near Shin-Fuji, which is actually better for Mt. Fuji views anyway.",
     "seasonH2": "Best Season & Time of Day to See Mt. Fuji",
     "seasonLabel": "Season guide",
     "seasons": [
@@ -178,7 +178,7 @@
       { "q": "Can I see Mt. Fuji on the return trip (Osaka/Kyoto → Tokyo)?", "a": "Yes — Mt. Fuji is on the LEFT side, which is again Seat E. Use our checker and select the opposite direction." },
       { "q": "Does the Nozomi stop near Mt. Fuji?", "a": "No, but you can still see it through the window as the train passes. Hikari and Kodama stop at Shin-Fuji station." },
       { "q": "Is the JR Pass worth it for Tokyo–Osaka only?", "a": "Generally no. Round trip ≈ ¥29,000 vs 7-day Pass ¥50,000. The Pass makes sense if also visiting Hiroshima, Nara, etc." },
-      { "q": "Can I bring large luggage on the Shinkansen?", "a": "Bags with total dimensions over 160cm need a designated overhead space — reserve when booking your seat." },
+      { "q": "Can I bring large luggage on the Shinkansen?", "a": "Bags with total dimensions over 160cm and up to 250cm require a seat reservation with an oversized baggage area (予約が必要). Reserve this when booking your Shinkansen seat. Bags over 250cm are not permitted." },
       { "q": "Is there WiFi on the Shinkansen?", "a": "Onboard WiFi exists but can be unreliable. A Japan eSIM is recommended for consistent connectivity throughout your trip." },
       { "q": "What is the best way to book as a foreigner?", "a": "Klook — fully in English, instant mobile voucher, and you can select Seat E on the seat map." }
     ],

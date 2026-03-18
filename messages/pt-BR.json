@@ -137,7 +137,7 @@
       "21 dias: ¥100.000"
     ],
     "jrPassWorth": "O JR Pass compensa se você fizer 2 ou mais viagens longas de Shinkansen (ex: Tóquio → Kyoto → Hiroshima → Tóquio). Para apenas uma ida e volta Tóquio ↔ Osaka, as passagens avulsas são mais baratas.",
-    "jrNozomiNote": "Atenção: O Nozomi (mais rápido) NÃO é coberto pelo JR Pass. Use o Hikari ou Kodama — eles param perto da estação Shin-Fuji, o que é ainda melhor para ver o Monte Fuji.",
+    "jrNozomiNote": "Atenção: O Nozomi (mais rápido) exige um bilhete adicional NOZOMI MIZUHO (¥4.960 Tóquio→Kyoto/Osaka) além do JR Pass. Sem ele, use o Hikari ou Kodama — eles param perto da estação Shin-Fuji, o que é ainda melhor para ver o Monte Fuji.",
     "seasonH2": "Melhor Estação e Horário para Ver o Monte Fuji",
     "seasonLabel": "Guia de estações",
     "seasons": [
@@ -178,7 +178,7 @@
       { "q": "Dá para ver o Monte Fuji na volta (Osaka/Kyoto → Tóquio)?", "a": "Sim — o Monte Fuji fica no lado ESQUERDO, que é novamente o Assento E. Use nosso verificador e selecione a direção oposta." },
       { "q": "O Nozomi para perto do Monte Fuji?", "a": "Não, mas dá para ver pela janela enquanto o trem passa. O Hikari e o Kodama param na estação Shin-Fuji." },
       { "q": "O JR Pass compensa para o trajeto Tóquio–Osaka apenas?", "a": "Geralmente não. Ida e volta ≈ ¥29.000 vs JR Pass 7 dias ¥50.000. O Pass faz sentido se também for a Hiroshima, Nara, etc." },
-      { "q": "Posso levar bagagem grande no Shinkansen?", "a": "Malas com dimensões totais acima de 160 cm precisam de espaço reservado no compartimento — reserve ao comprar o assento." },
+      { "q": "Posso levar bagagem grande no Shinkansen?", "a": "Malas com dimensões totais entre 160 cm e 250 cm exigem reserva de assento com área para bagagem extra (予約が必要). Faça a reserva ao comprar o bilhete do Shinkansen. Malas acima de 250 cm não são permitidas." },
       { "q": "Tem WiFi no Shinkansen?", "a": "Existe WiFi a bordo, mas pode ser instável. Um eSIM Japão é recomendado para conexão consistente durante toda a viagem." },
       { "q": "Qual a melhor forma de reservar sendo estrangeiro?", "a": "Klook — totalmente em inglês, voucher mobile instantâneo, e você pode selecionar o Assento E no mapa de assentos." }
     ],

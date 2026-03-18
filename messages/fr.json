@@ -137,7 +137,7 @@
       "21 jours : ¥100 000"
     ],
     "jrPassWorth": "Le JR Pass est intéressant si vous prenez 2 longs trajets en Shinkansen ou plus (ex : Tokyo → Kyoto → Hiroshima → Tokyo). Pour un simple aller-retour Tokyo ↔ Osaka, les billets simples sont moins chers.",
-    "jrNozomiNote": "Note : Le Nozomi (le plus rapide) n'est PAS couvert par le JR Pass. Utilisez le Hikari ou Kodama — ces trains s'arrêtent près de la gare Shin-Fuji, ce qui est en fait idéal pour voir le Mont Fuji.",
+    "jrNozomiNote": "Note : Le Nozomi (le plus rapide) nécessite un billet supplémentaire NOZOMI MIZUHO (¥4 960 Tokyo→Kyoto/Osaka) en plus du JR Pass. Sans ce billet, utilisez le Hikari ou Kodama — ces trains s'arrêtent près de Shin-Fuji, ce qui est en fait idéal pour voir le Mont Fuji.",
     "seasonH2": "Meilleure Saison et Heure pour Voir le Mont Fuji",
     "seasonLabel": "Guide des saisons",
     "seasons": [
@@ -178,7 +178,7 @@
       { "q": "Peut-on voir le Mont Fuji au retour (Osaka/Kyoto → Tokyo) ?", "a": "Oui — le Mont Fuji est à GAUCHE, ce qui correspond encore au Siège E. Utilisez notre vérificateur en sélectionnant la direction opposée." },
       { "q": "Le Nozomi s'arrête-t-il près du Mont Fuji ?", "a": "Non, mais vous pouvez quand même le voir par la fenêtre au passage. Le Hikari et le Kodama s'arrêtent à la gare Shin-Fuji." },
       { "q": "Le JR Pass vaut-il le coup pour Tokyo–Osaka seulement ?", "a": "Généralement non. Aller-retour ≈ ¥29 000 vs JR Pass 7 jours ¥50 000. Le Pass est intéressant si vous visitez aussi Hiroshima, Nara, etc." },
-      { "q": "Peut-on apporter des bagages volumineux dans le Shinkansen ?", "a": "Les bagages dont les dimensions totales dépassent 160 cm nécessitent un espace dédié en porte-bagages — réservez lors de l'achat du billet." },
+      { "q": "Peut-on apporter des bagages volumineux dans le Shinkansen ?", "a": "Les bagages dont les dimensions totales sont supérieures à 160 cm et inférieures ou égales à 250 cm nécessitent une réservation de siège avec espace bagages spécial (予約が必要). Réservez lors de l'achat de votre billet de Shinkansen. Les bagages dépassant 250 cm ne sont pas autorisés." },
       { "q": "Y a-t-il du WiFi dans le Shinkansen ?", "a": "Il existe du WiFi à bord mais il peut être instable. Un eSIM Japon est recommandé pour une connexion continue tout au long du voyage." },
       { "q": "Quelle est la meilleure façon de réserver en tant qu'étranger ?", "a": "Klook — entièrement en anglais, coupon mobile instantané, et vous pouvez sélectionner le Siège E sur le plan des sièges." }
     ],

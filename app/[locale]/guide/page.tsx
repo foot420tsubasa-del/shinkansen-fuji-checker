@@ -75,7 +75,7 @@ const faqSchema = {
       name: "Can I bring large luggage on the Shinkansen?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Bags with total dimensions over 160cm need a designated overhead space — reserve when booking your seat.",
+        text: "Bags with total dimensions over 160cm and up to 250cm require a seat reservation with an oversized baggage area (予約が必要). Reserve this when booking your Shinkansen seat. Bags over 250cm are not permitted.",
       },
     },
     {
