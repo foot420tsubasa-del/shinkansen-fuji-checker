@@ -186,6 +186,11 @@
     "makeEasyP1": "Si no quieres memorizar todos los detalles, usa nuestro Verificador de Asientos del Shinkansen gratuito. Solo elige tu dirección y te dice qué asiento reservar para la mejor oportunidad de ver el Monte Fuji.",
     "makeEasyP2": "La herramienta está diseñada para funcionar bien en móvil, así que puedes consultarla rápidamente al reservar billetes o mientras viajas por Japón.",
     "openChecker": "Abrir Verificador de Asiento",
+    "priorityH2": "Asientos Prioritarios — Lo que los visitantes deben saber",
+    "priorityP1": "Notarás asientos marcados como 優先席 (yūsen-seki) cerca de las puertas en la mayoría de los trenes japoneses. Estos asientos están reservados para personas mayores, mujeres embarazadas, personas con discapacidad y quienes llevan niños pequeños.",
+    "priorityP2": "Aunque no está legalmente prohibido, sentarse en asientos prioritarios sin necesitarlos se considera mala educación en Japón. Muchos japoneses evitan estos asientos por completo — incluso cuando el tren no está lleno — porque ocuparlos conlleva un estigma social tácito.",
+    "priorityP3": "Como visitante, lo más seguro es simplemente evitar los asientos prioritarios. Si el tren está lleno y nadie que los necesite está cerca, sentarse brevemente es comprensible — pero prepárate para levantarte inmediatamente cuando alguien que lo necesite suba.",
+    "priorityTip": "Busca las pegatinas en las ventanas y la tela de color diferente (generalmente gris o con patrón) para identificar los asientos prioritarios. En caso de duda, elige un asiento normal.",
     "devH2": "Del desarrollador",
     "devP": "También estoy desarrollando un pequeño proyecto llamado KanjiFlick — una lista de kanji en formato swipe con los significados de los ideogramas (los que aprenden los niños japoneses). No es una app de viajes, pero si tienes curiosidad por los caracteres que verás por Japón, puede que te guste."
   }

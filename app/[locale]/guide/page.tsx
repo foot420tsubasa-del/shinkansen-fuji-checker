@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Mountain, Train, Info, ArrowLeft } from "lucide-react";
+import { Mountain, Train, Info, ArrowLeft, Wifi, ShieldCheck, Car, ExternalLink, AlertTriangle } from "lucide-react";
 import Script from "next/script";
 import { Link } from "@/i18n/navigation";
 import { KlookCTA } from "../components/KlookCTA";
@@ -9,6 +9,14 @@ import { getAlternates } from "@/i18n/hreflang";
 
 const KLOOK_URL =
   "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165791&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F1420-7-day-whole-japan-rail-pass-jr-pass%2F";
+const ESIM_URL =
+  "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1166001&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F109393-japan-esim-high-speed-internet-qr-code-voucher%2F";
+const AIRPORT_TRANSFER_URL =
+  "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165996&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F173165-narita-express-n-ex-round-trip-train-ticket-narita-airport-tokyo%2F";
+const INSURANCE_URL =
+  "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1166002&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Finsurance%2Fklook-protect%2F";
+const CAR_RENTAL_URL =
+  "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1166009&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F15420-tokyo-private-car-charter-karuizawa-hakuba-izu-englishspeakingdriver%2F";
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -114,6 +122,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function GuidePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "guide" });
+  const h = await getTranslations({ locale, namespace: "home" });
 
   const tldrItems = t.raw("tldr") as Array<{ bold: string; text: string }>;
   const seasons = t.raw("seasons") as Array<{
@@ -142,6 +151,89 @@ export default async function GuidePage({ params }: Props) {
     "text-amber-700",
     "text-slate-500",
   ];
+
+  const essentialLinks = [
+    {
+      url: KLOOK_URL,
+      icon: <Train className="h-4 w-4 text-red-500" />,
+      title: h("jrPassTitle"),
+      desc: h("jrPassDesc"),
+      accent: "from-red-50 to-red-100 border-red-100 group-hover:from-red-100 group-hover:to-red-200",
+      featured: true,
+    },
+    {
+      url: ESIM_URL,
+      icon: <Wifi className="h-4 w-4 text-emerald-500" />,
+      title: h("esimTitle"),
+      desc: h("esimDesc"),
+      accent: "from-emerald-50 to-emerald-100 border-emerald-100 group-hover:from-emerald-100 group-hover:to-emerald-200",
+    },
+    {
+      url: AIRPORT_TRANSFER_URL,
+      icon: <Train className="h-4 w-4 text-sky-500" />,
+      title: h("nexTitle"),
+      desc: h("nexDesc"),
+      accent: "from-sky-50 to-sky-100 border-sky-100 group-hover:from-sky-100 group-hover:to-sky-200",
+    },
+    {
+      url: INSURANCE_URL,
+      icon: <ShieldCheck className="h-4 w-4 text-amber-500" />,
+      title: h("insuranceTitle"),
+      desc: h("insuranceDesc"),
+      accent: "from-amber-50 to-amber-100 border-amber-100 group-hover:from-amber-100 group-hover:to-amber-200",
+    },
+    {
+      url: CAR_RENTAL_URL,
+      icon: <Car className="h-4 w-4 text-violet-500" />,
+      title: h("carTitle"),
+      desc: h("carDesc"),
+      accent: "from-violet-50 to-violet-100 border-violet-100 group-hover:from-violet-100 group-hover:to-violet-200",
+    },
+  ];
+
+  const renderTravelEssentials = () => (
+    <section className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm md:shadow">
+      <div className="px-4 py-3.5 md:px-6 md:py-4 border-b border-slate-100 bg-slate-50/60">
+        <h2 className="text-[13px] md:text-[15px] font-semibold text-slate-900">
+          {h("essentialsTitle")}
+        </h2>
+        <p className="text-[11px] md:text-xs text-slate-400 mt-0.5">
+          {h("essentialsNote")}
+        </p>
+      </div>
+      <div className="p-2.5 md:p-3.5 grid gap-2 md:grid-cols-2 md:gap-2.5">
+        {essentialLinks.map((link, i) => (
+          <a
+            key={i}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={[
+              "flex items-center gap-3 rounded-xl border px-3.5 py-3 md:px-4 md:py-3.5",
+              "border-slate-100 bg-slate-50/40 hover:bg-white hover:border-slate-200 hover:shadow-sm",
+              "transition-all duration-150 group",
+              link.featured ? "md:col-span-2" : "",
+            ].join(" ")}
+          >
+            <div
+              className={`shrink-0 w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gradient-to-br ${link.accent} border flex items-center justify-center`}
+            >
+              {link.icon}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-[12px] md:text-[13px] font-semibold text-slate-800">
+                {link.title}
+              </p>
+              <p className="text-[10px] md:text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                {link.desc}
+              </p>
+            </div>
+            <ExternalLink className="shrink-0 h-3.5 w-3.5 md:h-4 md:w-4 text-slate-300 group-hover:text-red-500 transition-colors" />
+          </a>
+        ))}
+      </div>
+    </section>
+  );
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-sky-100 via-sky-50 to-white text-slate-900 flex flex-col">
@@ -242,6 +334,8 @@ export default async function GuidePage({ params }: Props) {
           {" · "}
           <a href="#jr-pass" className="underline underline-offset-2 hover:text-slate-800 transition-colors">JR Pass vs ticket?</a>
           {" · "}
+          <a href="#etiquette" className="underline underline-offset-2 hover:text-slate-800 transition-colors">Train etiquette</a>
+          {" · "}
           <a href="#faq" className="underline underline-offset-2 hover:text-slate-800 transition-colors">FAQ</a>
         </div>
 
@@ -314,7 +408,7 @@ export default async function GuidePage({ params }: Props) {
             </ul>
           </section>
 
-          <KlookCTA />
+          {renderTravelEssentials()}
 
           {/* Section 4: Common mistakes */}
           <section className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
@@ -336,6 +430,25 @@ export default async function GuidePage({ params }: Props) {
                 {t("s4Bullet3")}
               </li>
             </ul>
+          </section>
+
+          {/* Section: Priority Seats */}
+          <section id="etiquette" className="rounded-2xl border border-amber-200/80 bg-amber-50/30 px-4 py-4 md:px-6 md:py-5 shadow-sm">
+            <h2 className="flex items-center gap-2 text-sm md:text-[15px] font-semibold text-slate-900 mb-3">
+              <AlertTriangle className="h-4 w-4 text-amber-500" />
+              {t("priorityH2")}
+            </h2>
+            <div className="space-y-3 text-[13px] md:text-sm leading-relaxed text-slate-700">
+              <p>{t("priorityP1")}</p>
+              <p>{t("priorityP2")}</p>
+              <p>{t("priorityP3")}</p>
+            </div>
+            <div className="mt-4 flex items-start gap-2.5 rounded-xl bg-white/80 border border-amber-200/60 px-3.5 py-3 md:px-4">
+              <Info className="shrink-0 h-4 w-4 text-amber-600 mt-0.5" />
+              <p className="text-[11px] md:text-xs text-amber-800 leading-relaxed">
+                {t("priorityTip")}
+              </p>
+            </div>
           </section>
 
           {/* Section A: JR Pass vs Single Ticket */}
@@ -499,7 +612,7 @@ export default async function GuidePage({ params }: Props) {
             </div>
           </section>
 
-          <KlookCTA />
+          {renderTravelEssentials()}
 
         </div>
       </div>

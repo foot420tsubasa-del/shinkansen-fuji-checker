@@ -186,6 +186,11 @@
     "makeEasyP1": "Si vous ne voulez pas mémoriser tous ces détails, utilisez notre Vérificateur de Siège Shinkansen gratuit. Choisissez simplement votre direction et il vous indique quel siège réserver pour avoir les meilleures chances de voir le Mont Fuji.",
     "makeEasyP2": "L'outil est conçu pour fonctionner parfaitement sur mobile, vous pouvez donc le consulter rapidement lors de la réservation de billets ou pendant votre voyage au Japon.",
     "openChecker": "Ouvrir le Vérificateur de Siège",
+    "priorityH2": "Sièges prioritaires — Ce que les visiteurs doivent savoir",
+    "priorityP1": "Vous remarquerez des sièges marqués 優先席 (yūsen-seki) près des portes dans la plupart des trains japonais. Ces sièges sont réservés aux personnes âgées, aux femmes enceintes, aux personnes handicapées et à celles accompagnées de jeunes enfants.",
+    "priorityP2": "Bien que ce ne soit pas légalement interdit, s'asseoir sur un siège prioritaire sans en avoir besoin est considéré comme un manque de savoir-vivre au Japon. De nombreux Japonais évitent systématiquement ces sièges — même quand le train n'est pas bondé — car les occuper porte une stigmatisation sociale tacite.",
+    "priorityP3": "En tant que visiteur, l'approche la plus sûre est d'éviter complètement les sièges prioritaires. Si le train est bondé et que personne n'en a besoin à proximité, s'asseoir brièvement est compréhensible — mais soyez prêt à vous lever immédiatement si quelqu'un en a besoin.",
+    "priorityTip": "Repérez les autocollants sur les vitres et le tissu de couleur différente (généralement gris ou à motifs) pour identifier les sièges prioritaires. En cas de doute, choisissez un siège normal.",
     "devH2": "Du développeur",
     "devP": "Je développe également un petit projet appelé KanjiFlick — une liste de kanji en format swipe avec les significations des idéogrammes (ceux que les enfants japonais apprennent). Ce n'est pas une appli de voyage, mais si vous êtes curieux des caractères que vous verrez partout au Japon, cela pourrait vous plaire."
   }
