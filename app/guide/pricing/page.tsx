@@ -26,9 +26,9 @@ export default function PricingPage() {
       } else {
         throw new Error("Checkout URL not returned.");
       }
-    } catch (e: any) {
+    } catch (e: unknown) {
       console.error(e);
-      setError(e.message ?? "Something went wrong.");
+      setError(e instanceof Error ? e.message : "Something went wrong.");
       setLoading(false);
     }
   };
@@ -39,8 +39,7 @@ export default function PricingPage() {
         Mt. Fuji Shinkansen Pro Guide
       </h1>
       <p className="text-gray-600">
-        One-time purchase. Lifetime access. Written by a Japan-based AI & travel
-        enthusiast.
+        One-time purchase. Lifetime access. Written by a Japanese creator.
       </p>
 
       <div className="border rounded-2xl p-6 shadow-sm space-y-4">

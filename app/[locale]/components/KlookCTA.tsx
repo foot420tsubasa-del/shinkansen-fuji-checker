@@ -1,9 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-
-const KLOOK_URL =
-  "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165791&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F1420-7-day-whole-japan-rail-pass-jr-pass%2F";
+import { KLOOK_URL } from "@/src/affiliateLinks";
 
 export function KlookCTA() {
   const t = useTranslations("klook");

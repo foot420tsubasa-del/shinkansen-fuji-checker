@@ -13,7 +13,7 @@
   "home": {
     "brandTitle": "Verificador de Assento do Shinkansen",
     "brandSubtitle": "Encontre o assento na janela do lado do Monte Fuji em dois toques no Shinkansen Tokaido (Tóquio ⇄ Osaka/Kyoto).",
-    "brandBuiltBy": "Criado por um entusiasta de IA e viagens do Japão para viajantes internacionais que não querem perder a vista do Monte Fuji.",
+    "brandBuiltBy": "Criado por uma pessoa japonesa para viajantes internacionais que não querem perder a vista do Monte Fuji.",
     "brandSource": "Baseado em informações públicas da JR Central",
     "brandSourceLink": "ver fonte",
     "brandDisclaimer": "Esta é uma ferramenta independente e não oficial, não endossada por nenhuma empresa JR. As informações de assento são fornecidas como estão; sempre siga as orientações oficiais nas estações e nos trens.",
@@ -72,9 +72,90 @@
     "insuranceDesc": "Cancelamento, médico e muito mais. Viaje tranquilo.",
     "carTitle": "Carro Fretado Privado",
     "carDesc": "Motorista que fala inglês. Ótimo para famílias e passeios.",
+    "commandCenterCta": "Planeje toda a sua viagem ao Japão",
+    "commandCenterDesc": "Rotas, reservas essenciais, clima, moeda e checklist — tudo em um planejador.",
+    "commandCenterBtn": "Abrir Trip Planner",
     "footerEsim": "Precisa de WiFi? Compre eSIM",
     "footerDisclaimer": "Baseado em informações públicas da JR Central. Ferramenta independente e não oficial, não endossada por nenhuma empresa JR.",
-    "footerBuiltBy": "Criado por um entusiasta de IA e viagens. Powered by Klook affiliate links."
+    "footerBuiltBy": "Criado por uma pessoa japonesa. Powered by Klook affiliate links.",
+    "nav": {
+      "hub": "Ferramentas de viagem ao Japão",
+      "seat": "Verificador de assento",
+      "planner": "Planejador",
+      "guide": "Guia",
+      "decisions": "Decisões de viagem",
+      "questions": "Feedback"
+    },
+    "decisions": {
+      "eyebrow": "Ferramentas de viagem",
+      "title": "Tome sua próxima decisão de viagem ao Japão com menos atrito",
+      "desc": "Use o verificador de assento como ponto de partida para planejar sua viagem ao Japão: onde ficar, como se locomover, que rota seguir e o que reservar antes de chegar.",
+      "stay-tokyo": {
+        "label": "Regiões para ficar",
+        "title": "Decisão de base em Tóquio",
+        "desc": "Shinjuku, Ueno, Asakusa ou Estação de Tóquio.",
+        "tradeoff": "Equilibre vida noturna, acesso ao aeroporto e praticidade com bagagem.",
+        "cta": "Comparar regiões"
+      },
+      "transfer-narita": {
+        "label": "Traslados aeroporto",
+        "title": "Narita até a cidade",
+        "desc": "Escolha entre trem, ônibus e transfer privado.",
+        "tradeoff": "Bagagem e horário de chegada importam mais que velocidade.",
+        "cta": "Comparar opções"
+      },
+      "itinerary-golden-route": {
+        "label": "Roteiro",
+        "title": "Formato Tóquio a Kyoto",
+        "desc": "Um roteiro simples para primeira vez com o Fuji no caminho.",
+        "tradeoff": "Use o dia do Shinkansen como âncora do planejamento.",
+        "cta": "Ver roteiro"
+      },
+      "essentials": {
+        "label": "Essenciais",
+        "title": "Antes de pousar",
+        "desc": "eSIM, reserva de trem, traslado do aeroporto e plano B.",
+        "tradeoff": "Pequenas decisões que eliminam atritos no dia da chegada.",
+        "cta": "Começar com eSIM"
+      }
+    },
+    "tripPicks": {
+      "badge": "Passos-chave",
+      "title": "Checklist pré-viagem",
+      "hint": "Toque no círculo para marcar cada passo como concluído.",
+      "allSet": "Tudo pronto — aproveite o Japão!",
+      "note": "Links de afiliados são exibidos apenas quando correspondem à etapa de planejamento.",
+      "itinerary": {
+        "title": "Escolha sua rota",
+        "desc": "Rota dourada de 7 dias ou alternativas de 5/10/14 dias.",
+        "cta": "Ver roteiros"
+      },
+      "shinkansen": {
+        "title": "Passagem do Shinkansen",
+        "desc": "Reserve depois de saber o assento do lado do Fuji.",
+        "cta": "Reservar trem"
+      },
+      "esim": {
+        "title": "eSIM Japão",
+        "desc": "Dados antes de pousar — mapas, tradutor, transporte.",
+        "cta": "Comprar eSIM"
+      },
+      "airport-transfer": {
+        "title": "Traslado do aeroporto",
+        "desc": "Organize Narita/Haneda até a cidade antes do dia de chegada.",
+        "cta": "Comparar opções"
+      },
+      "tokyo-stay": {
+        "title": "Hospedagem em Tóquio",
+        "desc": "Use Shinjuku, Ueno ou Estação de Tóquio como base.",
+        "cta": "Comparar regiões"
+      },
+      "insurance": {
+        "title": "Seguro viagem",
+        "desc": "Médico + cancelamento. Fácil de pular, difícil de se arrepender.",
+        "cta": "Ver planos"
+      }
+    }
   },
   "guide": {
     "h1": "Como ver o Monte Fuji do Shinkansen (Tóquio ⇄ Osaka/Kyoto)",
@@ -186,6 +267,9 @@
     "makeEasyP1": "Se não quiser memorizar todos os detalhes, use nosso Verificador de Assento Shinkansen gratuito. Basta escolher a direção e ele mostra qual assento reservar para a melhor chance de ver o Monte Fuji.",
     "makeEasyP2": "A ferramenta foi desenvolvida para funcionar bem no celular, então você pode consultá-la rapidamente ao reservar passagens ou durante a viagem no Japão.",
     "openChecker": "Abrir Verificador de Assento",
+    "commandCenterH2": "Planeje toda a sua viagem ao Japão",
+    "commandCenterP": "Já escolheu seu assento no Shinkansen? Planeje o resto da viagem com rotas, reservas essenciais, clima, moeda e checklist.",
+    "commandCenterBtn": "Abrir Trip Planner",
     "priorityH2": "Assentos Prioritários — O que visitantes devem saber",
     "priorityP1": "Você verá assentos marcados como 優先席 (yūsen-seki) perto das portas na maioria dos trens japoneses. Esses assentos são reservados para idosos, gestantes, pessoas com deficiência e acompanhantes de crianças pequenas.",
     "priorityP2": "Embora não seja legalmente proibido, sentar em assentos prioritários sem necessidade é considerado falta de educação no Japão. Muitos japoneses evitam esses assentos completamente — mesmo quando o trem não está lotado — porque ocupá-los carrega um estigma social implícito.",
@@ -193,5 +277,271 @@
     "priorityTip": "Procure os adesivos nas janelas e o tecido de cor diferente (geralmente cinza ou estampado) para identificar os assentos prioritários. Na dúvida, escolha um assento comum.",
     "devH2": "Do desenvolvedor",
     "devP": "Também estou desenvolvendo um pequeno projeto chamado KanjiFlick — uma lista de kanji estilo swipe com os significados dos ideogramas (os que as crianças japonesas aprendem). Não é um app de viagem, mas se você tiver curiosidade sobre os caracteres que verá pelo Japão, pode gostar."
+  },
+  "cc": {
+    "title": "CENTRO DE COMANDO — VIAGEM AO JAPÃO",
+    "titleShort": "CENTRO DE COMANDO",
+    "subtitle": "fujiseat.com",
+    "live": "AO VIVO",
+    "tMinus": "T-MENOS",
+    "missionActive": "MISSÃO ATIVA",
+    "missionRoute": "Rota da missão",
+    "current": "ATUAL",
+    "upcoming": "PRÓXIMO",
+    "locked": "BLOQUEADO",
+    "opsMap": "Mapa de operações — Japão",
+    "preMission": "Checklist pré-missão",
+    "missionReadiness": "PREPARAÇÃO",
+    "fieldIntel": "Inteligência de campo",
+    "phraseArsenal": "Arsenal de frases",
+    "emergency": "Contatos de emergência",
+    "emergencySave": "Salve estes números antes de partir",
+    "weather": "Clima ao vivo",
+    "weatherLoading": "Carregando dados do clima...",
+    "currency": "Conversor de moedas",
+    "activityPlanner": "Planejador de atividades",
+    "activityNone": "Nenhuma atividade planejada. Adicione uma acima.",
+    "currentBase": "BASE ATUAL",
+    "nextSector": "PRÓX. SETOR",
+    "citiesLocked": "CIDADES BLOQ.",
+    "criticalItems": "ITENS CRÍTICOS",
+    "tabMap": "MAPA",
+    "tabRoute": "ROTA",
+    "tabTasks": "TAREFAS",
+    "tabIntel": "INFO",
+    "tabPlan": "PLANO",
+    "tabTools": "FERRAMENTAS",
+    "tabSos": "SOS",
+    "tabPhrases": "Frases",
+    "tabWeather": "Clima",
+    "tabFx": "FX",
+    "bookViaKlook": "RESERVAR NO KLOOK",
+    "highlights": "DESTAQUES",
+    "intel": "INTEL",
+    "checkSeat": "VER ASSENTO",
+    "fujiseatTip": "Assento E (Tokyo→Osaka) · Assento A (Osaka→Tokyo) para vista do Mt. Fuji",
+    "checkFujiSeat": "Verificar assento Fuji",
+    "loadingMap": "CARREGANDO MAPA...",
+    "mapOffline": "MAPA OFFLINE",
+    "mapOfflineHint": "Adicione NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ao .env",
+    "initializing": "INICIALIZANDO...",
+    "bootLine1": "Conectando à rede satelital...",
+    "bootLine2": "Carregando banco de dados de cidades...",
+    "bootLine3": "Mapeando corredores Shinkansen...",
+    "bootLine4": "Calibrando zona de vista Mt. Fuji...",
+    "bootLine5": "Sincronizando checklist da missão...",
+    "bootLine6": "Todos os sistemas operacionais.",
+    "bootInit": "INICIALIZANDO",
+    "missionReady": "MISSÃO PRONTA"
+  },
+  "planner": {
+    "badge": "Planejador de Viagem",
+    "title": "Planeje sua viagem ao Japão",
+    "home": "Início",
+    "departureDay": "Dia da partida!",
+    "daysUntil": "{count, plural, one {# dia para o Japão} other {# dias para o Japão}}",
+    "tasksDone": "tarefas prontas",
+    "step1": "Passo 1",
+    "chooseRoute": "Escolha sua rota",
+    "step2": "Passo 2",
+    "setDate": "Defina a data de partida",
+    "step3": "Passo 3",
+    "checklist": "Checklist pré-viagem",
+    "fullItinerary": "Roteiro completo",
+    "routeLabel": "Rota {name}",
+    "jrRecommended": "✓ JR Pass recomendado",
+    "jrMayNotPayOff": "△ O JR Pass pode não compensar",
+    "partnerNote": "Links com ↗ são de afiliados. Ganhamos uma pequena comissão sem custo extra para você.",
+    "allSet": "Tudo pronto — aproveite o Japão!",
+    "bookEssentials": "Reserve o essencial para esta rota",
+    "recommendedFor": "Recomendado para o {name}",
+    "bookingsPartnerNote": "Links de afiliados — ganhamos uma pequena comissão sem custo extra para você.",
+    "routes": {
+      "classic-7": {
+        "name": "Clássico 7 dias",
+        "desc": "Tóquio → Fuji → Kyoto → Osaka",
+        "duration": "7 dias",
+        "jrNote": "Cobre Shinkansen Tóquio→Kyoto + N'EX do aeroporto"
+      },
+      "express-5": {
+        "name": "Expresso 5 dias",
+        "desc": "Tóquio → Kyoto (sem enrolação)",
+        "duration": "5 dias",
+        "jrNote": "Trecho único de Shinkansen pode ser mais barato que o JR Pass — compare antes"
+      },
+      "full-10": {
+        "name": "10 dias com Fuji",
+        "desc": "Tóquio → Kawaguchiko → Hakone → Kyoto → Osaka",
+        "duration": "10 dias",
+        "jrNote": "Cobre Shinkansen + N'EX + trens locais JR"
+      },
+      "deep-14": {
+        "name": "Explorador 14 dias",
+        "desc": "Tóquio → Nikko → Fuji → Kyoto → Hiroshima → Osaka",
+        "duration": "14 dias",
+        "jrNote": "Compensa fácil — Tóquio→Kyoto→Hiroshima→Osaka coberto"
+      }
+    },
+    "cities": {
+      "tokyo": "Tóquio",
+      "kyoto": "Kyoto",
+      "osaka": "Osaka",
+      "hiroshima": "Hiroshima",
+      "kawaguchiko": "Kawaguchiko",
+      "hakone": "Hakone",
+      "depart": "Partida"
+    },
+    "dayRanges": {
+      "day1_3": "Dia 1–3",
+      "day4_5": "Dia 4–5",
+      "day6_7": "Dia 6–7",
+      "day1_2": "Dia 1–2",
+      "day3_4": "Dia 3–4",
+      "day5": "Dia 5",
+      "day4": "Dia 4",
+      "day6_8": "Dia 6–8",
+      "day9_10": "Dia 9–10",
+      "day1_4": "Dia 1–4",
+      "day5_6": "Dia 5–6",
+      "day7_10": "Dia 7–10",
+      "day11_12": "Dia 11–12",
+      "day13_14": "Dia 13–14"
+    },
+    "checks": {
+      "passport": "Passaporte válido durante a estadia",
+      "esim": "eSIM do Japão comprado",
+      "train": "JR Pass ou passagens de trem verificados",
+      "transfer": "Traslado do aeroporto planejado",
+      "hotel": "Hotéis reservados",
+      "insurance": "Seguro viagem",
+      "cash": "¥50.000+ em dinheiro",
+      "maps": "Google Maps offline (Japão)",
+      "translate": "App de tradução instalado"
+    },
+    "checkLinks": {
+      "esim": "Comprar eSIM",
+      "train": "Comparar",
+      "transfer": "Comparar",
+      "hotel": "Comparar",
+      "insurance": "Ver planos"
+    },
+    "bookings": {
+      "esim": {
+        "label": "eSIM Japão",
+        "desc": "Dados antes de pousar — mapas, tradutor, transporte.",
+        "cta": "Comprar eSIM"
+      },
+      "transfer": {
+        "label": "Traslado aeroporto",
+        "desc": "Narita/Haneda até a cidade — compare trem e ônibus.",
+        "cta": "Comparar opções"
+      },
+      "stay": {
+        "label": "Onde ficar",
+        "desc": "Compare regiões de Tóquio por acesso e orçamento.",
+        "cta": "Comparar regiões"
+      },
+      "jrPass": {
+        "label": "JR Pass",
+        "desc": "Cobre Shinkansen + maioria dos trens JR.",
+        "cta": "Ver JR Pass"
+      },
+      "insurance": {
+        "label": "Seguro viagem",
+        "desc": "Cobertura médica + cancelamento de viagem.",
+        "cta": "Ver planos"
+      }
+    },
+    "emergency": {
+      "title": "Contatos de emergência",
+      "save": "Salve estes números antes de partir",
+      "police": "Polícia",
+      "ambulance": "Ambulância / Bombeiros",
+      "tourist": "Linha turística (24/7)",
+      "translation": "Tradução de emergência"
+    },
+    "weather": {
+      "title": "Clima da rota (ao vivo)",
+      "unavailable": "Dados de clima indisponíveis"
+    },
+    "currency": {
+      "title": "Conversor de moedas"
+    },
+    "quickLinks": {
+      "title": "Links rápidos",
+      "airport": "Traslados aeroporto",
+      "stay": "Onde ficar",
+      "seat": "Verificador de assento",
+      "itinerary": "Roteiro completo",
+      "map": "Explorar mapa da rota"
+    },
+    "footer": {
+      "brand": "fujiseat.com — ferramentas de viagem ao Japão",
+      "ready": "Pronto para reservar?",
+      "jrPass": "Comprar JR Pass no Klook",
+      "or": "ou",
+      "esim": "comprar eSIM Japão",
+      "mapQuestion": "Precisa do mapa interativo?",
+      "commandCenter": "Explorar Command Center"
+    },
+    "preview": {
+      "badge": "Planejador Japão",
+      "title": "Planeje sua viagem do início ao fim.",
+      "subtitle": "Visão geral visual da rota principal do fujiseat.",
+      "arrival": "Chegada",
+      "cities": "Cidades",
+      "tripLength": "Duração",
+      "style": "Estilo",
+      "narita": "Narita (NRT)",
+      "fourCities": "4 cidades",
+      "sevenDays": "7 dias",
+      "firstTime": "Primeira vez",
+      "routeOverview": "Visão geral da rota",
+      "fujiZone": "Zona de vista do Fuji",
+      "svgLabel": "Visão geral da rota Tóquio a Osaka com zona de vista do Fuji",
+      "tokyo": "Tóquio",
+      "start": "Início",
+      "fujiView": "Vista do Fuji",
+      "seatEWindow": "Assento E janela",
+      "kyoto": "Kyoto",
+      "temples": "Templos",
+      "osaka": "Osaka",
+      "food": "Gastronomia",
+      "time": "2h15",
+      "tokyoToKyoto": "Tóquio a Kyoto",
+      "seatE": "Assento E",
+      "fujiWindow": "Janela lado Fuji",
+      "threeNights": "3 noites",
+      "kyotoBase": "Boa base em Kyoto",
+      "planTrip": "Planejar viagem",
+      "checkJrPass": "Ver JR Pass",
+      "routeMap": "Mapa da rota"
+    }
+  },
+  "feedback": {
+    "hub": "Ferramentas de viagem ao Japão",
+    "seatChecker": "Verificador de assento",
+    "planner": "Planejador",
+    "eyebrow": "Feedback",
+    "title": "Compartilhe uma avaliação, elogio ou dica de viagem",
+    "description": "Envie uma nota anônima sobre o que foi útil, confuso, faltou ou valeria cobrir depois. Boas experiências, pequenas avaliações e dicas locais ajudam tanto quanto bugs.",
+    "playful": "Se o fujiseat ajudou, um pequeno elogio também deixará o criador japonês muito feliz.",
+    "topic": "Tema",
+    "topics": {
+      "site": "Feedback do site",
+      "review": "Relato / avaliação da viagem",
+      "tip": "Dica local",
+      "train": "Shinkansen / trem",
+      "tokyo": "Ideia de foto/artigo em Tóquio",
+      "other": "Outro"
+    },
+    "fieldLabel": "Feedback, avaliação ou dica",
+    "placeholder": "Conte o que foi útil, confuso, faltou ou deveria virar conteúdo. Exemplo: usei antes de Tóquio a Kyoto e a dica do assento ajudou, mas a reserva foi confusa.",
+    "note": "É anônimo e serve principalmente para melhorar o fujiseat e encontrar ideias de artigos. Não envie passaporte, reservas, pagamentos ou informações sensíveis.",
+    "submit": "Enviar feedback",
+    "sending": "Enviando...",
+    "sent": "Obrigado. Seu feedback foi enviado.",
+    "error": "Não foi possível enviar. Tente novamente mais tarde.",
+    "privacyNote": "O feedback é coletado anonimamente para melhorar o site e ideias de artigos. Não peço contato, então não há fluxo de resposta."
   }
 }

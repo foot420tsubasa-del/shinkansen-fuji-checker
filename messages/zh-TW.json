@@ -13,7 +13,7 @@
   "home": {
     "brandTitle": "新幹線富士山座位查詢",
     "brandSubtitle": "兩下點擊，找到東海道新幹線（東京 ⇄ 大阪/京都）富士山側的窗邊座位。",
-    "brandBuiltBy": "由熱愛日本旅遊的 AI 工程師製作，專為不想錯過富士山美景的海外旅客設計。",
+    "brandBuiltBy": "由日本製作者製作，專為不想錯過富士山美景的海外旅客設計。",
     "brandSource": "資料來源：JR 東海公開資訊",
     "brandSourceLink": "查看出處",
     "brandDisclaimer": "本工具為獨立非官方工具，與任何 JR 公司無關。座位資訊僅供參考，請遵循車站及列車上的官方指示。",
@@ -72,9 +72,90 @@
     "insuranceDesc": "涵蓋行程取消、醫療等項目，安心出行。",
     "carTitle": "私人包車服務",
     "carDesc": "英語司機，適合家庭旅遊及一日遊。",
+    "commandCenterCta": "規劃您的完整日本之旅",
+    "commandCenterDesc": "路線模板、預訂重點、天氣、匯率和清單——盡在一個旅行規劃器中。",
+    "commandCenterBtn": "開啟旅行規劃器",
     "footerEsim": "需要 WiFi？購買 eSIM",
     "footerDisclaimer": "資料來源：JR 東海公開資訊。本工具為獨立非官方工具，與任何 JR 公司無關。",
-    "footerBuiltBy": "由熱愛日本旅遊的 AI 工程師製作。透過 Klook 聯盟連結營運。"
+    "footerBuiltBy": "由日本製作者製作。透過 Klook 聯盟連結營運。",
+    "nav": {
+      "hub": "日本旅行實用工具",
+      "seat": "座位查詢器",
+      "planner": "旅行規劃器",
+      "guide": "指南",
+      "decisions": "旅行決策",
+      "questions": "回饋"
+    },
+    "decisions": {
+      "eyebrow": "旅行實用工具",
+      "title": "更輕鬆地做出下一個日本旅行決定",
+      "desc": "以座位查詢器為起點，規劃實用的日本行程：住哪裡、怎麼轉機、走哪條路線、出發前預訂什麼。",
+      "stay-tokyo": {
+        "label": "住宿區域",
+        "title": "東京落腳點",
+        "desc": "新宿、上野、淺草、東京車站。",
+        "tradeoff": "在夜生活、機場交通和行李便利之間取得平衡。",
+        "cta": "比較區域"
+      },
+      "transfer-narita": {
+        "label": "機場接駁",
+        "title": "成田到市區",
+        "desc": "在列車、巴士和私人接送之間選擇。",
+        "tradeoff": "行李和抵達時間比純速度更重要。",
+        "cta": "比較選項"
+      },
+      "itinerary-golden-route": {
+        "label": "行程",
+        "title": "東京到京都路線",
+        "desc": "一條包含富士山的簡單首次日本旅行路線。",
+        "tradeoff": "以新幹線出行日為行程規劃的錨點。",
+        "cta": "查看行程"
+      },
+      "essentials": {
+        "label": "必備事項",
+        "title": "落地之前",
+        "desc": "eSIM、列車預訂、機場接駁和備用方案。",
+        "tradeoff": "消除抵達日摩擦的小決定。",
+        "cta": "從 eSIM 開始"
+      }
+    },
+    "tripPicks": {
+      "badge": "旅行精選",
+      "title": "出發前清單",
+      "hint": "點擊圓圈標記每個步驟完成。",
+      "allSet": "一切就緒 — 盡情享受日本吧！",
+      "note": "合作夥伴連結僅在與規劃步驟相符時顯示。",
+      "itinerary": {
+        "title": "選擇路線",
+        "desc": "7天黃金路線或 5/10/14 天替代方案。",
+        "cta": "查看行程"
+      },
+      "shinkansen": {
+        "title": "新幹線車票",
+        "desc": "確認富士山側座位後再預訂。",
+        "cta": "預訂列車"
+      },
+      "esim": {
+        "title": "日本 eSIM",
+        "desc": "落地前設定數據 — 地圖、翻譯、交通。",
+        "cta": "購買 eSIM"
+      },
+      "airport-transfer": {
+        "title": "機場接駁",
+        "desc": "在抵達日之前確定成田/羽田到市區的方式。",
+        "cta": "比較選項"
+      },
+      "tokyo-stay": {
+        "title": "東京住宿",
+        "desc": "以新宿、上野或東京車站為據點。",
+        "cta": "比較區域"
+      },
+      "insurance": {
+        "title": "旅遊保險",
+        "desc": "醫療 + 行程取消。容易跳過，難以後悔。",
+        "cta": "查看方案"
+      }
+    }
   },
   "guide": {
     "h1": "如何從新幹線看富士山（東京 ⇄ 大阪/京都）",
@@ -186,6 +267,9 @@
     "makeEasyP1": "不想記住所有細節？使用我們免費的新幹線富士山座位查詢器。只需選擇方向，即可知道應預訂哪個座位來提高看到富士山的機會。",
     "makeEasyP2": "本工具針對手機優化，方便您在購票或日本旅途中隨時查詢。",
     "openChecker": "開啟座位查詢器",
+    "commandCenterH2": "規劃您的完整日本之旅",
+    "commandCenterP": "新幹線座位選好了？用路線模板、預訂重點、天氣、匯率和出發前清單規劃剩餘行程。",
+    "commandCenterBtn": "開啟旅行規劃器",
     "priorityH2": "優先席 — 外國旅客須知",
     "priorityP1": "在日本大多數列車上，您會注意到車門附近標有「優先席」(yūsen-seki) 的座位。這些座位是為年長者、孕婦、殘障人士和攜帶幼兒的乘客準備的。",
     "priorityP2": "雖然沒有法律禁止，但在不需要時坐優先席在日本被視為缺乏禮貌。許多日本人即使列車不擁擠也會完全避開這些座位——因為坐在優先席上帶有一種無形的社會壓力。",
@@ -193,5 +277,271 @@
     "priorityTip": "透過車窗上的標識貼紙和不同顏色的座椅面料（通常為灰色或帶圖案）來識別優先席。如果不確定，請選擇普通座位。",
     "devH2": "開發者的話",
     "devP": "我也在開發一個小型專案 KanjiFlick — 以滑動方式學習日本小學漢字意義的應用程式。雖然不是旅遊 App，但如果您對在日本各地看到的漢字感到好奇，或許會喜歡它。"
+  },
+  "cc": {
+    "title": "日本旅行指揮中心",
+    "titleShort": "指揮中心",
+    "subtitle": "fujiseat.com",
+    "live": "即時",
+    "tMinus": "倒數",
+    "missionActive": "任務進行中",
+    "missionRoute": "任務路線",
+    "current": "目前",
+    "upcoming": "即將",
+    "locked": "鎖定",
+    "opsMap": "作戰地圖 — 日本",
+    "preMission": "出發前檢查清單",
+    "missionReadiness": "任務準備度",
+    "fieldIntel": "現場情報",
+    "phraseArsenal": "日語短語庫",
+    "emergency": "緊急聯絡方式",
+    "emergencySave": "出發前請儲存這些號碼",
+    "weather": "即時天氣",
+    "weatherLoading": "正在取得天氣資料...",
+    "currency": "匯率換算",
+    "activityPlanner": "活動規劃",
+    "activityNone": "尚無計劃活動。請在上方新增。",
+    "currentBase": "目前基地",
+    "nextSector": "下一區域",
+    "citiesLocked": "鎖定城市",
+    "criticalItems": "關鍵事項",
+    "tabMap": "地圖",
+    "tabRoute": "路線",
+    "tabTasks": "任務",
+    "tabIntel": "情報",
+    "tabPlan": "計劃",
+    "tabTools": "工具",
+    "tabSos": "SOS",
+    "tabPhrases": "短語",
+    "tabWeather": "天氣",
+    "tabFx": "匯率",
+    "bookViaKlook": "透過KLOOK預訂",
+    "highlights": "亮點",
+    "intel": "情報",
+    "checkSeat": "查看座位",
+    "fujiseatTip": "E座（東京→大阪）· A座（大阪→東京）可觀賞富士山",
+    "checkFujiSeat": "查看富士山座位",
+    "loadingMap": "載入地圖中...",
+    "mapOffline": "地圖離線",
+    "mapOfflineHint": "請在 .env 中新增 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY",
+    "initializing": "初始化中...",
+    "bootLine1": "連接衛星網路...",
+    "bootLine2": "載入城市情報資料庫...",
+    "bootLine3": "映射新幹線走廊...",
+    "bootLine4": "校準富士山觀景區...",
+    "bootLine5": "同步任務檢查清單...",
+    "bootLine6": "所有系統正常運行。",
+    "bootInit": "初始化中",
+    "missionReady": "任務就緒"
+  },
+  "planner": {
+    "badge": "旅行規劃器",
+    "title": "規劃您的日本之旅",
+    "home": "首頁",
+    "departureDay": "出發日！",
+    "daysUntil": "距日本行還有 {count} 天",
+    "tasksDone": "已完成",
+    "step1": "步驟 1",
+    "chooseRoute": "選擇路線",
+    "step2": "步驟 2",
+    "setDate": "設定出發日期",
+    "step3": "步驟 3",
+    "checklist": "出發前清單",
+    "fullItinerary": "完整行程",
+    "routeLabel": "{name}路線",
+    "jrRecommended": "✓ 推薦購買 JR Pass",
+    "jrMayNotPayOff": "△ JR Pass 可能不划算",
+    "partnerNote": "帶 ↗ 標記的連結為聯盟連結。不會產生額外費用，我們會獲得少量佣金。",
+    "allSet": "一切就緒 — 盡情享受日本吧！",
+    "bookEssentials": "預訂此路線的必備項目",
+    "recommendedFor": "推薦用於{name}",
+    "bookingsPartnerNote": "聯盟連結 — 不會產生額外費用，我們會獲得少量佣金。",
+    "routes": {
+      "classic-7": {
+        "name": "經典 7 天",
+        "desc": "東京 → 富士 → 京都 → 大阪",
+        "duration": "7 天",
+        "jrNote": "涵蓋東京→京都新幹線 + N'EX 機場轉乘"
+      },
+      "express-5": {
+        "name": "快速 5 天",
+        "desc": "東京 → 京都（精簡行程）",
+        "duration": "5 天",
+        "jrNote": "單程新幹線可能比 JR Pass 更便宜 — 請先比較"
+      },
+      "full-10": {
+        "name": "富士 10 天",
+        "desc": "東京 → 河口湖 → 箱根 → 京都 → 大阪",
+        "duration": "10 天",
+        "jrNote": "涵蓋新幹線 + N'EX + JR 地方線"
+      },
+      "deep-14": {
+        "name": "深度 14 天",
+        "desc": "東京 → 日光 → 富士 → 京都 → 廣島 → 大阪",
+        "duration": "14 天",
+        "jrNote": "輕鬆回本 — 涵蓋東京→京都→廣島→大阪"
+      }
+    },
+    "cities": {
+      "tokyo": "東京",
+      "kyoto": "京都",
+      "osaka": "大阪",
+      "hiroshima": "廣島",
+      "kawaguchiko": "河口湖",
+      "hakone": "箱根",
+      "depart": "出發"
+    },
+    "dayRanges": {
+      "day1_3": "第 1–3 天",
+      "day4_5": "第 4–5 天",
+      "day6_7": "第 6–7 天",
+      "day1_2": "第 1–2 天",
+      "day3_4": "第 3–4 天",
+      "day5": "第 5 天",
+      "day4": "第 4 天",
+      "day6_8": "第 6–8 天",
+      "day9_10": "第 9–10 天",
+      "day1_4": "第 1–4 天",
+      "day5_6": "第 5–6 天",
+      "day7_10": "第 7–10 天",
+      "day11_12": "第 11–12 天",
+      "day13_14": "第 13–14 天"
+    },
+    "checks": {
+      "passport": "護照在停留期間有效",
+      "esim": "已購買日本 eSIM",
+      "train": "已確認 JR Pass 或列車票",
+      "transfer": "已規劃機場接駁",
+      "hotel": "已預訂飯店",
+      "insurance": "旅遊保險",
+      "cash": "準備 ¥50,000+ 現金",
+      "maps": "Google Maps 離線地圖（日本）",
+      "translate": "已安裝翻譯應用"
+    },
+    "checkLinks": {
+      "esim": "購買 eSIM",
+      "train": "比較",
+      "transfer": "比較",
+      "hotel": "比較",
+      "insurance": "查看方案"
+    },
+    "bookings": {
+      "esim": {
+        "label": "日本 eSIM",
+        "desc": "落地即有數據 — 地圖、翻譯、交通。",
+        "cta": "購買 eSIM"
+      },
+      "transfer": {
+        "label": "機場接駁",
+        "desc": "成田/羽田到市區 — 比較列車與巴士。",
+        "cta": "比較選項"
+      },
+      "stay": {
+        "label": "住哪裡",
+        "desc": "按交通和預算比較東京各區域。",
+        "cta": "比較區域"
+      },
+      "jrPass": {
+        "label": "JR Pass",
+        "desc": "涵蓋新幹線 + 大部分 JR 列車。",
+        "cta": "查看 JR Pass"
+      },
+      "insurance": {
+        "label": "旅遊保險",
+        "desc": "醫療 + 行程取消保障。",
+        "cta": "查看方案"
+      }
+    },
+    "emergency": {
+      "title": "緊急聯絡方式",
+      "save": "出發前請儲存這些號碼",
+      "police": "警察",
+      "ambulance": "急救 / 消防",
+      "tourist": "旅遊熱線（24小時）",
+      "translation": "緊急翻譯"
+    },
+    "weather": {
+      "title": "路線天氣（即時）",
+      "unavailable": "無法取得天氣資料"
+    },
+    "currency": {
+      "title": "匯率換算"
+    },
+    "quickLinks": {
+      "title": "快速連結",
+      "airport": "機場接駁",
+      "stay": "住哪裡",
+      "seat": "座位查詢器",
+      "itinerary": "完整行程",
+      "map": "探索路線地圖"
+    },
+    "footer": {
+      "brand": "fujiseat.com — 日本旅行實用工具",
+      "ready": "準備預訂了嗎？",
+      "jrPass": "在 Klook 查看 JR Pass",
+      "or": "或",
+      "esim": "購買日本 eSIM",
+      "mapQuestion": "需要互動地圖？",
+      "commandCenter": "探索指揮中心"
+    },
+    "preview": {
+      "badge": "日本旅行規劃器",
+      "title": "從頭到尾規劃您的旅程。",
+      "subtitle": "fujiseat 主路線的視覺化概覽。",
+      "arrival": "抵達",
+      "cities": "城市",
+      "tripLength": "行程天數",
+      "style": "風格",
+      "narita": "成田 (NRT)",
+      "fourCities": "4 座城市",
+      "sevenDays": "7 天",
+      "firstTime": "首次到訪",
+      "routeOverview": "路線概覽",
+      "fujiZone": "富士山觀景區",
+      "svgLabel": "東京至大阪路線概覽（含富士山觀景區）",
+      "tokyo": "東京",
+      "start": "出發",
+      "fujiView": "富士山景",
+      "seatEWindow": "E 號靠窗",
+      "kyoto": "京都",
+      "temples": "寺廟",
+      "osaka": "大阪",
+      "food": "美食",
+      "time": "2小時15分",
+      "tokyoToKyoto": "東京到京都",
+      "seatE": "E 號座",
+      "fujiWindow": "富士山側窗",
+      "threeNights": "3 晚",
+      "kyotoBase": "京都好據點",
+      "planTrip": "規劃旅程",
+      "checkJrPass": "查看 JR Pass",
+      "routeMap": "路線地圖"
+    }
+  },
+  "feedback": {
+    "hub": "日本旅行實用工具",
+    "seatChecker": "座位查詢器",
+    "planner": "旅行規劃器",
+    "eyebrow": "回饋",
+    "title": "分享評價、鼓勵或日本旅行小提示",
+    "description": "匿名告訴我哪些內容有用、令人困惑、缺少什麼，或未來值得寫什麼。好的體驗、簡短評價和在地小提示，和問題回報一樣有幫助。",
+    "playful": "如果 fujiseat 幫到了你，一句小小的稱讚也會讓日本製作者很開心。",
+    "topic": "主題",
+    "topics": {
+      "site": "網站回饋",
+      "review": "旅行心得 / 評價",
+      "tip": "在地小提示",
+      "train": "新幹線 / 列車資訊",
+      "tokyo": "東京照片/文章靈感",
+      "other": "其他"
+    },
+    "fieldLabel": "回饋、評價或小提示",
+    "placeholder": "告訴我哪些內容有用、困惑、缺少或值得寫。例：我在東京去京都前用了這個，座位提示很有幫助，但訂票步驟有點困惑。",
+    "note": "這是匿名回饋，主要用於改進 fujiseat 和尋找未來文章靈感。請不要傳送護照號碼、預訂編號、付款資訊或其他敏感資訊。",
+    "submit": "送出回饋",
+    "sending": "送出中...",
+    "sent": "謝謝，回饋已送出。",
+    "error": "無法送出回饋，請稍後再試。",
+    "privacyNote": "回饋會匿名收集，用於網站改進和未來文章靈感。我不會索取聯絡方式，因此沒有回覆流程。"
   }
 }

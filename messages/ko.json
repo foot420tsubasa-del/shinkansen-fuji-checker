@@ -13,7 +13,7 @@
   "home": {
     "brandTitle": "신칸센 후지산 좌석 확인기",
     "brandSubtitle": "두 번의 탭으로 도카이도 신칸센(도쿄 ⇄ 오사카/교토)의 후지산 쪽 창가 좌석을 확인하세요.",
-    "brandBuiltBy": "일본 여행을 사랑하는 AI 엔지니어가 후지산 뷰를 놓치고 싶지 않은 해외 여행자들을 위해 만들었습니다.",
+    "brandBuiltBy": "일본인 제작자가 후지산 뷰를 놓치고 싶지 않은 해외 여행자들을 위해 만들었습니다.",
     "brandSource": "JR 센트럴 공개 정보 기반",
     "brandSourceLink": "출처 보기",
     "brandDisclaimer": "본 도구는 독립적인 비공식 툴로, 어떠한 JR 관련 회사와도 무관합니다. 좌석 정보는 참고용이며, 역 및 열차 내 공식 안내를 따르세요.",
@@ -72,9 +72,90 @@
     "insuranceDesc": "여행 취소, 의료비 등 안심 보장.",
     "carTitle": "프라이빗 차량 대절",
     "carDesc": "영어 가능 기사 제공. 가족 여행 및 당일치기에 최적.",
+    "commandCenterCta": "일본 여행 전체 계획하기",
+    "commandCenterDesc": "루트 템플릿, 예약 필수 항목, 날씨, 환율, 체크리스트를 한 플래너에서 확인하세요.",
+    "commandCenterBtn": "여행 플래너 열기",
     "footerEsim": "WiFi 필요하세요? eSIM 구매",
     "footerDisclaimer": "JR 센트럴 공개 정보 기반. 독립 비공식 도구로 JR 관련 회사와 무관합니다.",
-    "footerBuiltBy": "일본 여행을 사랑하는 AI 엔지니어 제작. Klook 제휴 링크로 운영."
+    "footerBuiltBy": "일본인 제작자가 만들었습니다. Klook 제휴 링크로 운영.",
+    "nav": {
+      "hub": "일본 여행 유틸리티 허브",
+      "seat": "좌석 확인기",
+      "planner": "여행 플래너",
+      "guide": "가이드",
+      "decisions": "여행 결정",
+      "questions": "피드백"
+    },
+    "decisions": {
+      "eyebrow": "여행 유틸리티 허브",
+      "title": "다음 일본 여행 결정을 더 쉽게 내리세요",
+      "desc": "좌석 확인기를 출발점으로 실용적인 일본 여행을 계획하세요: 어디에 묵을지, 어떻게 이동할지, 어떤 루트를 선택할지, 출발 전 무엇을 예약할지.",
+      "stay-tokyo": {
+        "label": "숙소 지역",
+        "title": "도쿄 거점 결정",
+        "desc": "신주쿠, 우에노, 아사쿠사, 도쿄역.",
+        "tradeoff": "밤문화, 공항 접근성, 짐 보관 편의의 균형을 맞추세요.",
+        "cta": "지역 비교"
+      },
+      "transfer-narita": {
+        "label": "공항 이동",
+        "title": "나리타에서 시내로",
+        "desc": "열차, 버스, 프라이빗 이동 중 선택하세요.",
+        "tradeoff": "짐과 도착 시간이 순수 속도보다 더 중요합니다.",
+        "cta": "옵션 비교"
+      },
+      "itinerary-golden-route": {
+        "label": "일정",
+        "title": "도쿄에서 교토까지",
+        "desc": "후지산을 포함한 심플한 첫 일본 여행 루트.",
+        "tradeoff": "신칸센 이동일을 일정의 기준으로 삼으세요.",
+        "cta": "일정 보기"
+      },
+      "essentials": {
+        "label": "필수 준비",
+        "title": "도착 전에",
+        "desc": "eSIM, 열차 예약, 공항 이동, 대비책.",
+        "tradeoff": "도착일 스트레스를 줄이는 작은 결정들.",
+        "cta": "eSIM부터 시작"
+      }
+    },
+    "tripPicks": {
+      "badge": "여행 준비 목록",
+      "title": "출발 전 체크리스트",
+      "hint": "원을 탭하여 각 항목을 완료 표시하세요.",
+      "allSet": "준비 완료 — 일본을 즐기세요!",
+      "note": "파트너 링크는 해당 계획 단계와 일치하는 경우에만 표시됩니다.",
+      "itinerary": {
+        "title": "루트 선택",
+        "desc": "7일 골든 루트 또는 5/10/14일 대안.",
+        "cta": "일정 보기"
+      },
+      "shinkansen": {
+        "title": "신칸센 티켓",
+        "desc": "후지산 쪽 좌석을 확인한 후 예약하세요.",
+        "cta": "열차 예약"
+      },
+      "esim": {
+        "title": "일본 eSIM",
+        "desc": "도착 전 데이터 설정 — 지도, 번역, 교통.",
+        "cta": "eSIM 구매"
+      },
+      "airport-transfer": {
+        "title": "공항 이동",
+        "desc": "도착일 전에 나리타/하네다에서 시내 이동을 정하세요.",
+        "cta": "옵션 비교"
+      },
+      "tokyo-stay": {
+        "title": "도쿄 숙소",
+        "desc": "신주쿠, 우에노, 도쿄역을 거점으로 활용하세요.",
+        "cta": "지역 비교"
+      },
+      "insurance": {
+        "title": "여행자 보험",
+        "desc": "의료비 + 여행 취소. 쉽게 건너뛰지만, 후회하기 어렵습니다.",
+        "cta": "플랜 보기"
+      }
+    }
   },
   "guide": {
     "h1": "신칸센에서 후지산 보는 법 (도쿄 ⇄ 오사카/교토)",
@@ -186,12 +267,281 @@
     "makeEasyP1": "모든 내용을 외우고 싶지 않으신가요? 무료 신칸센 후지산 좌석 확인기를 이용하세요. 방향만 선택하면 후지산을 볼 가능성이 가장 높은 좌석을 알려드립니다.",
     "makeEasyP2": "모바일에 최적화되어 있어 티켓 예약 중이나 일본 여행 중에도 빠르게 확인할 수 있습니다.",
     "openChecker": "좌석 확인기 열기",
+    "commandCenterH2": "일본 여행 전체를 계획하세요",
+    "commandCenterP": "신칸센 좌석을 정했나요? 루트 템플릿, 예약 필수 항목, 날씨, 환율, 출발 전 체크리스트로 나머지 여행을 계획하세요.",
+    "commandCenterBtn": "여행 플래너 열기",
     "priorityH2": "우선석 — 외국인이 알아야 할 것",
     "priorityP1": "일본 대부분의 열차에서 문 근처에 優先席(유센세키)이라고 표시된 좌석을 볼 수 있습니다. 이 좌석은 노약자, 임산부, 장애인, 영유아 동반자를 위한 우선석입니다.",
     "priorityP2": "법적으로 금지된 것은 아니지만, 필요하지 않은데 우선석에 앉는 것은 일본에서 매너가 없는 행동으로 여겨집니다. 많은 일본인들은 열차가 붐비지 않을 때도 이 좌석을 피합니다 — 앉는 것 자체가 암묵적인 사회적 낙인이 있기 때문입니다.",
     "priorityP3": "방문객으로서 가장 안전한 방법은 우선석을 완전히 피하는 것입니다. 열차가 만원이고 주변에 필요한 사람이 없다면 잠시 앉는 것은 이해할 수 있지만, 필요한 사람이 탑승하면 즉시 일어날 준비를 하세요.",
     "priorityTip": "창문의 스티커와 다른 색상의 좌석 원단(보통 회색 또는 무늬)으로 우선석을 식별하세요. 확신이 없으면 일반 좌석을 선택하세요.",
     "devH2": "개발자 소개",
-    "devP": "KanjiFlick이라는 소규모 프로젝트도 만들고 있습니다 — 일본 아이들이 배우는 한자 의미를 스와이프 형식으로 학습하는 앱입니다. 여행 앱은 아니지만, 일본 곳곳에서 볼 한자가 궁금하다면 즐길 수 있을 거예요."
+    "devP": "KanjiFlick이라는 소규��� 프로젝트도 만들고 있습니다 — 일본 아이들이 배우는 한자 의미를 스와이프 형식으로 학습하는 앱입니다. 여행 앱은 아니지만, 일본 곳곳에서 볼 한자가 궁금하다면 즐길 수 있을 거예요."
+  },
+  "cc": {
+    "title": "일본 여행 커맨드 센터",
+    "titleShort": "커맨드 센터",
+    "subtitle": "fujiseat.com",
+    "live": "실시간",
+    "tMinus": "출발까지",
+    "missionActive": "미션 진행 중",
+    "missionRoute": "미션 루트",
+    "current": "현재",
+    "upcoming": "예정",
+    "locked": "잠김",
+    "opsMap": "작전 지도 — 일본",
+    "preMission": "출발 전 체크리스트",
+    "missionReadiness": "미션 준비도",
+    "fieldIntel": "현장 정보",
+    "phraseArsenal": "필수 일본어",
+    "emergency": "긴급 연락처",
+    "emergencySave": "출발 전에 이 번호들을 저장하세요",
+    "weather": "실시간 날씨",
+    "weatherLoading": "날씨 데이터 로딩 중...",
+    "currency": "환율 계산기",
+    "activityPlanner": "일정 플래너",
+    "activityNone": "계획된 활동이 없습니다. 위에서 추가하세요.",
+    "currentBase": "현재 거점",
+    "nextSector": "다음 구역",
+    "citiesLocked": "잠긴 ���시",
+    "criticalItems": "중요 항목",
+    "tabMap": "지도",
+    "tabRoute": "루트",
+    "tabTasks": "할일",
+    "tabIntel": "정보",
+    "tabPlan": "일정",
+    "tabTools": "도구",
+    "tabSos": "SOS",
+    "tabPhrases": "회화",
+    "tabWeather": "날씨",
+    "tabFx": "환율",
+    "bookViaKlook": "KLOOK 예약",
+    "highlights": "하이라이트",
+    "intel": "���보",
+    "checkSeat": "좌석 확인",
+    "fujiseatTip": "E석 (도쿄→오사카) · A석 (오사카→도쿄)에서 후지산 조망",
+    "checkFujiSeat": "후지산 ��석 확인",
+    "loadingMap": "지도 로딩 중...",
+    "mapOffline": "지도 오프라인",
+    "mapOfflineHint": ".env에 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY를 추가하세요",
+    "initializing": "초기화 중...",
+    "bootLine1": "위성 네트워크 연결 중...",
+    "bootLine2": "도시 정보 데이터베이스 로딩...",
+    "bootLine3": "신칸센 노선 매핑...",
+    "bootLine4": "후지산 뷰존 보정...",
+    "bootLine5": "미션 체크리스트 동기화...",
+    "bootLine6": "모든 시스템 정상 가동.",
+    "bootInit": "초기화 중",
+    "missionReady": "미션 준비 완료"
+  },
+  "planner": {
+    "badge": "여행 플래너",
+    "title": "일본 여행을 계획하세요",
+    "home": "홈",
+    "departureDay": "출발일입니다!",
+    "daysUntil": "일본까지 {count}일",
+    "tasksDone": "완료",
+    "step1": "스텝 1",
+    "chooseRoute": "루트 선택",
+    "step2": "스텝 2",
+    "setDate": "출발일 설정",
+    "step3": "스텝 3",
+    "checklist": "출발 전 체크리스트",
+    "fullItinerary": "전체 일정",
+    "routeLabel": "{name} 루트",
+    "jrRecommended": "✓ JR 패스 추천",
+    "jrMayNotPayOff": "△ JR 패스가 이득이 아닐 수 있음",
+    "partnerNote": "↗ 표시 링크는 제휴 링크입니다. 추가 비용 없이 소정의 수수료를 받습니다.",
+    "allSet": "준비 완료 — 일본을 즐기세요!",
+    "bookEssentials": "이 루트의 필수 예약",
+    "recommendedFor": "{name} 추천",
+    "bookingsPartnerNote": "제휴 링크 — 추가 비용 없이 소정의 수수료를 받습니다.",
+    "routes": {
+      "classic-7": {
+        "name": "클래식 7일",
+        "desc": "도쿄 → 후지 → 교토 → 오사카",
+        "duration": "7일",
+        "jrNote": "도쿄→교토 신칸센 + N'EX 공항 이동 포함"
+      },
+      "express-5": {
+        "name": "익스프레스 5일",
+        "desc": "도쿄 → 교토 (알짜 코스)",
+        "duration": "5일",
+        "jrNote": "편도 신칸센이 JR 패스보다 저렴할 수 있음 — 먼저 비교하세요"
+      },
+      "full-10": {
+        "name": "후지 포함 10일",
+        "desc": "도쿄 → 가와구치코 → 하코네 → 교토 → 오사카",
+        "duration": "10일",
+        "jrNote": "신칸센 + N'EX + JR 지역 열차 포함"
+      },
+      "deep-14": {
+        "name": "탐험가 14일",
+        "desc": "도쿄 → 닛코 → 후지 → 교토 → 히로시마 → 오사카",
+        "duration": "14일",
+        "jrNote": "충분히 이득 — 도쿄→교토→히로시마→오사카 포함"
+      }
+    },
+    "cities": {
+      "tokyo": "도쿄",
+      "kyoto": "교토",
+      "osaka": "오사카",
+      "hiroshima": "히로시마",
+      "kawaguchiko": "가와구치코",
+      "hakone": "하코네",
+      "depart": "출발"
+    },
+    "dayRanges": {
+      "day1_3": "1~3일차",
+      "day4_5": "4~5일차",
+      "day6_7": "6~7일차",
+      "day1_2": "1~2일차",
+      "day3_4": "3~4일차",
+      "day5": "5일차",
+      "day4": "4일차",
+      "day6_8": "6~8일차",
+      "day9_10": "9~10일차",
+      "day1_4": "1~4일차",
+      "day5_6": "5~6일차",
+      "day7_10": "7~10일차",
+      "day11_12": "11~12일차",
+      "day13_14": "13~14일차"
+    },
+    "checks": {
+      "passport": "여권 유효기간 확인",
+      "esim": "일본 eSIM 구매 완료",
+      "train": "JR 패스 또는 열차 티켓 확인",
+      "transfer": "공항 이동 계획 완료",
+      "hotel": "호텔 예약 완료",
+      "insurance": "여행자 보험",
+      "cash": "현금 ¥50,000+ 준비",
+      "maps": "구글맵 오프라인 (일본)",
+      "translate": "번역 앱 설치"
+    },
+    "checkLinks": {
+      "esim": "eSIM 구매",
+      "train": "비교하기",
+      "transfer": "비교하기",
+      "hotel": "비교하기",
+      "insurance": "플랜 보기"
+    },
+    "bookings": {
+      "esim": {
+        "label": "일본 eSIM",
+        "desc": "도착 전 데이터 — 지도, 번역, 교통.",
+        "cta": "eSIM 구매"
+      },
+      "transfer": {
+        "label": "공항 이동",
+        "desc": "나리타/하네다에서 시내까지 — 열차 vs 버스 비교.",
+        "cta": "옵션 비교"
+      },
+      "stay": {
+        "label": "숙소",
+        "desc": "도쿄 지역을 접근성과 예산으로 비교.",
+        "cta": "지역 비교"
+      },
+      "jrPass": {
+        "label": "JR 패스",
+        "desc": "신칸센 + 대부분의 JR 열차 포함.",
+        "cta": "JR 패스 보기"
+      },
+      "insurance": {
+        "label": "여행자 보험",
+        "desc": "의료비 + 여행 취소 보장.",
+        "cta": "플랜 보기"
+      }
+    },
+    "emergency": {
+      "title": "긴급 연락처",
+      "save": "출발 전에 이 번호를 저장하세요",
+      "police": "경찰",
+      "ambulance": "구급차 / 소방",
+      "tourist": "관광 핫라인 (24시간)",
+      "translation": "긴급 통역"
+    },
+    "weather": {
+      "title": "루트 날씨 (실시간)",
+      "unavailable": "날씨 데이터를 불러올 수 없습니다"
+    },
+    "currency": {
+      "title": "환율 계산기"
+    },
+    "quickLinks": {
+      "title": "빠른 링크",
+      "airport": "공항 이동",
+      "stay": "숙소",
+      "seat": "좌석 확인기",
+      "itinerary": "전체 일정",
+      "map": "루트 지도 보기"
+    },
+    "footer": {
+      "brand": "fujiseat.com — 일본 여행 유틸리티 허브",
+      "ready": "예약 준비됐나요?",
+      "jrPass": "Klook에서 JR 패스 확인",
+      "or": "또는",
+      "esim": "일본 eSIM 구매",
+      "mapQuestion": "인터랙티브 지도가 필요하세요?",
+      "commandCenter": "커맨드 센터 열기"
+    },
+    "preview": {
+      "badge": "일본 여행 플래너",
+      "title": "여행을 처음부터 끝까지 계획하세요.",
+      "subtitle": "fujiseat 메인 루트의 시각적 개요.",
+      "arrival": "도착",
+      "cities": "도시",
+      "tripLength": "기간",
+      "style": "스타일",
+      "narita": "나리타 (NRT)",
+      "fourCities": "4개 도시",
+      "sevenDays": "7일",
+      "firstTime": "첫 방문",
+      "routeOverview": "루트 개요",
+      "fujiZone": "후지산 뷰 구간",
+      "svgLabel": "도쿄에서 오사카 루트 개요 (후지산 뷰 구간 포함)",
+      "tokyo": "도쿄",
+      "start": "출발",
+      "fujiView": "후지산 뷰",
+      "seatEWindow": "E석 창가",
+      "kyoto": "교토",
+      "temples": "사찰",
+      "osaka": "오사카",
+      "food": "먹거리",
+      "time": "2시간 15분",
+      "tokyoToKyoto": "도쿄 → 교토",
+      "seatE": "E석",
+      "fujiWindow": "후지산 쪽 창가",
+      "threeNights": "3박",
+      "kyotoBase": "교토 거점으로 좋음",
+      "planTrip": "여행 계획",
+      "checkJrPass": "JR 패스 보기",
+      "routeMap": "루트 지도"
+    }
+  },
+  "feedback": {
+    "hub": "일본 여행 유틸리티 허브",
+    "seatChecker": "좌석 확인기",
+    "planner": "여행 플래너",
+    "eyebrow": "피드백",
+    "title": "후기, 칭찬, 일본 여행 팁을 남겨주세요",
+    "description": "유용했던 점, 헷갈렸던 점, 빠진 내용, 다음에 다루면 좋을 내용을 익명으로 남겨주세요. 좋은 경험, 짧은 리뷰, 현지 팁도 오류 제보만큼 도움이 됩니다.",
+    "playful": "fujiseat가 도움이 되었다면 작은 칭찬도 일본인 제작자를 아주 기쁘게 합니다.",
+    "topic": "주제",
+    "topics": {
+      "site": "사이트 피드백",
+      "review": "여행 후기 / 리뷰",
+      "tip": "현지 팁",
+      "train": "신칸센 / 열차 정보",
+      "tokyo": "도쿄 사진/글 아이디어",
+      "other": "기타"
+    },
+    "fieldLabel": "피드백, 리뷰 또는 팁",
+    "placeholder": "무엇이 유용했는지, 헷갈렸는지, 빠졌는지 알려주세요. 예: 도쿄에서 교토로 가기 전에 사용했고 좌석 팁은 도움이 됐지만 예약 단계가 헷갈렸어요.",
+    "note": "익명이며 fujiseat 개선과 향후 글 아이디어를 위해 사용됩니다. 여권번호, 예약번호, 결제정보 등 민감한 정보는 보내지 마세요.",
+    "submit": "피드백 보내기",
+    "sending": "보내는 중...",
+    "sent": "감사합니다. 피드백이 전송되었습니다.",
+    "error": "전송하지 못했습니다. 나중에 다시 시도해 주세요.",
+    "privacyNote": "피드백은 사이트 개선과 향후 글 아이디어를 위해 익명으로 수집됩니다. 연락처를 요청하지 않으므로 답변 절차는 없습니다."
   }
 }

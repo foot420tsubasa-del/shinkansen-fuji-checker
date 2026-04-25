@@ -6,17 +6,10 @@ import { Link } from "@/i18n/navigation";
 import { KlookCTA } from "../components/KlookCTA";
 import { LanguageSelector } from "../components/LanguageSelector";
 import { getAlternates } from "@/i18n/hreflang";
-
-const KLOOK_URL =
-  "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165791&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F1420-7-day-whole-japan-rail-pass-jr-pass%2F";
-const ESIM_URL =
-  "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1166001&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F109393-japan-esim-high-speed-internet-qr-code-voucher%2F";
-const AIRPORT_TRANSFER_URL =
-  "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165996&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F173165-narita-express-n-ex-round-trip-train-ticket-narita-airport-tokyo%2F";
-const INSURANCE_URL =
-  "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1166002&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Finsurance%2Fklook-protect%2F";
-const CAR_RENTAL_URL =
-  "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1166009&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F15420-tokyo-private-car-charter-karuizawa-hakuba-izu-englishspeakingdriver%2F";
+import { KLOOK_URL, ESIM_URL, AIRPORT_TRANSFER_URL, INSURANCE_URL, CAR_RENTAL_URL } from "@/src/affiliateLinks";
+import { GuideNextSteps } from "@/components/travel/GuideNextSteps";
+import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { BrandMark } from "@/components/ui/BrandMark";
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -246,10 +239,7 @@ export default async function GuidePage({ params }: Props) {
         {/* Header */}
         <header className="mb-6 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="relative h-10 w-10 rounded-2xl bg-gradient-to-b from-sky-300 to-sky-500 flex items-center justify-center shadow-sm">
-              <Mountain className="h-6 w-6 text-white" />
-              <div className="pointer-events-none absolute bottom-1.5 h-2 w-4 bg-white/95 rounded-t-[999px] rounded-b-[6px]" />
-            </div>
+            <BrandMark size="sm" />
             <div>
               <h1 className="text-sm font-semibold tracking-tight leading-snug">
                 Mt. Fuji Shinkansen Seat Guide
@@ -308,6 +298,12 @@ export default async function GuidePage({ params }: Props) {
             >
               Book on Klook →
             </a>
+            <Link
+              href="/planner"
+              className="inline-flex items-center rounded-full border border-indigo-200 bg-indigo-50 px-3.5 py-1.5 text-[12px] font-semibold text-indigo-600 hover:bg-indigo-100 transition-colors"
+            >
+              {t("commandCenterBtn")} →
+            </Link>
           </div>
         </section>
 
@@ -324,6 +320,10 @@ export default async function GuidePage({ params }: Props) {
             ))}
           </ul>
         </section>
+
+        <div className="mb-6">
+          <GuideNextSteps />
+        </div>
 
         {/* Jump to section */}
         <div className="mb-5 text-[12px] text-slate-500 leading-relaxed">
@@ -432,6 +432,18 @@ export default async function GuidePage({ params }: Props) {
             </ul>
           </section>
 
+          {/* Contextual planner callout after mistakes */}
+          <Link
+            href="/planner"
+            className="flex items-center gap-3 rounded-xl border border-indigo-100 bg-indigo-50/50 px-3.5 py-2.5 hover:bg-indigo-50 hover:border-indigo-200 transition-all group"
+          >
+            <span className="shrink-0 text-base">✅</span>
+            <span className="flex-1 text-[12px] text-indigo-800 leading-snug">
+              {t("commandCenterBtn")} — {h("commandCenterDesc")}
+            </span>
+            <ExternalLink className="shrink-0 h-3 w-3 text-indigo-400 group-hover:text-indigo-600" />
+          </Link>
+
           {/* Section: Priority Seats */}
           <section id="etiquette" className="rounded-2xl border border-amber-200/80 bg-amber-50/30 px-4 py-4 md:px-6 md:py-5 shadow-sm">
             <h2 className="flex items-center gap-2 text-sm md:text-[15px] font-semibold text-slate-900 mb-3">
@@ -450,6 +462,20 @@ export default async function GuidePage({ params }: Props) {
               </p>
             </div>
           </section>
+
+          {/* Contextual: eSIM after etiquette (translation apps) */}
+          <a
+            href={ESIM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 rounded-xl border border-sky-100 bg-sky-50/50 px-3.5 py-2.5 hover:bg-sky-50 hover:border-sky-200 transition-all group"
+          >
+            <span className="shrink-0 text-base">📶</span>
+            <span className="flex-1 text-[12px] text-sky-800 leading-snug">
+              {h("esimTitle")} — {h("esimDesc")}
+            </span>
+            <ExternalLink className="shrink-0 h-3 w-3 text-sky-400 group-hover:text-sky-600" />
+          </a>
 
           {/* Section A: JR Pass vs Single Ticket */}
           <section id="jr-pass" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
@@ -612,7 +638,32 @@ export default async function GuidePage({ params }: Props) {
             </div>
           </section>
 
+          <section className="rounded-2xl border border-indigo-200/80 bg-gradient-to-br from-indigo-50/60 to-sky-50/40 px-4 py-4 md:px-6 md:py-5 shadow-sm">
+            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2">
+              <Mountain className="h-4 w-4 text-indigo-600" />
+              {t("commandCenterH2")}
+            </h2>
+            <p className="text-[13px] leading-relaxed text-slate-700">
+              {t("commandCenterP")}
+            </p>
+            <div className="mt-3">
+              <Link
+                href="/planner"
+                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-500 to-sky-500 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-indigo-200 hover:brightness-110 active:brightness-95 transition-all"
+              >
+                <Mountain className="h-3.5 w-3.5" />
+                {t("commandCenterBtn")}
+              </Link>
+            </div>
+          </section>
+
           {renderTravelEssentials()}
+
+          <footer className="border-t border-slate-200 pt-5 text-center text-[10px] text-slate-400">
+            <p>fujiseat.com — Japan travel utility hub</p>
+            <p className="mt-1">Partner links shown where they match the planning step.</p>
+            <SiteLegalLinks className="mt-3 text-slate-400" />
+          </footer>
 
         </div>
       </div>

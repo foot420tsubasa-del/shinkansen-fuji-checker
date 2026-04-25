@@ -1,0 +1,537 @@
+{
+  "jrPass": {
+    "label": "JR Pass (7-Day Whole Japan)",
+    "provider": "klook",
+    "adid": "1165791",
+    "klookPath": "activity/1420-7-day-whole-japan-rail-pass-jr-pass/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165791&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F1420-7-day-whole-japan-rail-pass-jr-pass%2F",
+    "usedOn": [
+      "Top",
+      "Guide",
+      "KlookCTA",
+      "Command Center",
+      "Planner",
+      "TripPicks",
+      "Transfers",
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "esim": {
+    "label": "Japan eSIM",
+    "provider": "klook",
+    "adid": "1166001",
+    "klookPath": "activity/109393-japan-esim-high-speed-internet-qr-code-voucher/",
+    "directUrl": "",
+    "usedOn": [
+      "Top",
+      "Guide",
+      "Command Center",
+      "Planner",
+      "TripPicks",
+      "Transfers",
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "airportTransfer": {
+    "label": "N'EX (Narita Express)",
+    "provider": "klook",
+    "adid": "1165996",
+    "klookPath": "activity/173165-narita-express-n-ex-round-trip-train-ticket-narita-airport-tokyo/",
+    "directUrl": "",
+    "usedOn": [
+      "Guide"
+    ]
+  },
+  "insurance": {
+    "label": "Travel Insurance (Klook Protect)",
+    "provider": "klook",
+    "adid": "1166002",
+    "klookPath": "insurance/klook-protect/",
+    "directUrl": "",
+    "usedOn": [
+      "Guide",
+      "Planner",
+      "TripPicks"
+    ]
+  },
+  "carRental": {
+    "label": "Car Charter (Tokyo)",
+    "provider": "klook",
+    "adid": "1166009",
+    "klookPath": "activity/15420-tokyo-private-car-charter-karuizawa-hakuba-izu-englishspeakingdriver/",
+    "directUrl": "",
+    "usedOn": [
+      "Guide"
+    ]
+  },
+  "cityTokyo": {
+    "label": "Tokyo Activities",
+    "provider": "klook",
+    "adid": "1263633",
+    "klookPath": "city/7-tokyo-things-to-do/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263633&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fdestination%2Fc28-tokyo%2F1-things-to-do%2F",
+    "usedOn": [
+      "Command Center",
+      "Itineraries"
+    ]
+  },
+  "cityNikko": {
+    "label": "Nikko Day Trip",
+    "provider": "klook",
+    "adid": "1263639",
+    "klookPath": "activity/3689-nikko-day-trip-tokyo/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263639&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fdestination%2Fp50266278-toshogu-shrine%2F1-things-to-do%2F",
+    "usedOn": [
+      "Command Center",
+      "Itineraries"
+    ]
+  },
+  "cityKyoto": {
+    "label": "Kyoto Activities",
+    "provider": "klook",
+    "adid": "1263636",
+    "klookPath": "city/17-kyoto-things-to-do/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263636&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fdestination%2Fc30-kyoto%2F1-things-to-do%2F%3Fspm%3DCountry.TopDestination_City_LIST%26clickId%3Ded7ff257cf",
+    "usedOn": [
+      "Command Center",
+      "Itineraries"
+    ]
+  },
+  "cityOsaka": {
+    "label": "Osaka Activities",
+    "provider": "klook",
+    "adid": "1263634",
+    "klookPath": "city/18-osaka-things-to-do/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263634&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fdestination%2Fc29-osaka%2F1-things-to-do%2F%3Fspm%3DCountry.TopDestination_City_LIST%26clickId%3D4b5ed696dd",
+    "usedOn": [
+      "Command Center",
+      "Itineraries"
+    ]
+  },
+  "cityHiroshima": {
+    "label": "Hiroshima Activities",
+    "provider": "klook",
+    "adid": "1263637",
+    "klookPath": "city/13-hiroshima-things-to-do/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263637&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fdestination%2Fc11000005-chugoku-area%2F1-things-to-do%2F%3Fspm%3DCountry.TopDestination_City_LIST%26clickId%3Dacd9970742",
+    "usedOn": [
+      "Command Center",
+      "Itineraries"
+    ]
+  },
+  "hotelTokyo": {
+    "label": "Tokyo Hotels",
+    "provider": "klook",
+    "adid": "1263404",
+    "klookPath": "hotel/list/7-tokyo-japan-hotels/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263404&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3D%25E3%2583%259B%25E3%2583%2586%25E3%2583%25AB%25E3%2580%2580%25E6%259D%25B1%25E4%25BA%25AC%25E9%25A7%2585",
+    "usedOn": [
+      "Stay"
+    ]
+  },
+  "hotelShinjuku": {
+    "label": "Shinjuku Hotels",
+    "provider": "klook",
+    "adid": "1263157",
+    "klookPath": "hotel/list/7-tokyo-japan-hotels/?area=shinjuku",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263157&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3Dshinjuku%2520hotel%26spm%3DSearchResult.SearchStart_SearchHistory_LIST%26clickId%3Df423fa8ebd",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "hotelUeno": {
+    "label": "Ueno Hotels",
+    "provider": "klook",
+    "adid": "1263169",
+    "klookPath": "search/result/",
+    "directUrl": "",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "hotelAsakusa": {
+    "label": "Asakusa Hotels",
+    "provider": "klook",
+    "adid": "1263407",
+    "klookPath": "hotel/list/7-tokyo-japan-hotels/?area=asakusa",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263407&k_site=https%3A%2F%2Fwww.klook.comhttps%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3D%25E3%2583%259B%25E3%2583%2586%25E3%2583%25AB%25E3%2580%2580%25E6%25B5%2585%25E8%258D%2589",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "hotelKyoto": {
+    "label": "Kyoto Hotels",
+    "provider": "klook",
+    "adid": "1263588",
+    "klookPath": "hotel/list/17-kyoto-japan-hotels/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263588&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3D%25E3%2583%259B%25E3%2583%2586%25E3%2583%25AB%25E3%2580%2580%25E4%25BA%25AC%25E9%2583%25BD",
+    "usedOn": [
+      "Stay"
+    ]
+  },
+  "hotelKyotoStation": {
+    "label": "Kyoto Station Hotels",
+    "provider": "klook",
+    "adid": "1263589",
+    "klookPath": "hotel/list/17-kyoto-japan-hotels/?area=kyoto-station",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263589&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3D%25E3%2583%259B%25E3%2583%2586%25E3%2583%25AB%25E3%2580%2580%25E4%25BA%25AC%25E9%2583%25BD%25E9%25A7%2585",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "hotelGion": {
+    "label": "Gion Hotels",
+    "provider": "klook",
+    "adid": "1263590",
+    "klookPath": "hotel/list/17-kyoto-japan-hotels/?area=gion",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263590&k_site=https%3A%2F%2Fwww.klohttps%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3D%25E3%2583%259B%25E3%2583%2586%25E3%2583%25AB%2520Gionok.com",
+    "usedOn": [
+      "Stay"
+    ]
+  },
+  "hotelKawaguchiko": {
+    "label": "Kawaguchiko Hotels",
+    "provider": "klook",
+    "adid": "1263592",
+    "klookPath": "hotel/list/228-mount-fuji-japan-hotels/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263592&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3Dhotel%2520Kawaguchiko",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "nex": {
+    "label": "Narita Express (N'EX)",
+    "provider": "klook",
+    "adid": "1165996",
+    "klookPath": "activity/173165-narita-express-n-ex-round-trip-train-ticket-narita-airport-tokyo/",
+    "directUrl": "",
+    "usedOn": [
+      "Transfer"
+    ]
+  },
+  "skyliner": {
+    "label": "Skyliner (Narita to Ueno/Nippori)",
+    "provider": "klook",
+    "adid": "1263641",
+    "klookPath": "activity/1371-skyliner-discount-ticket-keisei-narita-airport/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263641&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F1410-skyliner-tokyo%2F",
+    "usedOn": [
+      "Transfer"
+    ]
+  },
+  "limousineBus": {
+    "label": "Airport Limousine Bus",
+    "provider": "klook",
+    "adid": "1263642",
+    "klookPath": "activity/8088-airport-limousine-bus-ticket-narita-haneda/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263642&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F2274-narita-airport-limousine-bus-tokyo%2F",
+    "usedOn": [
+      "Transfer"
+    ]
+  },
+  "hanedaMonorail": {
+    "label": "Tokyo Monorail (Haneda)",
+    "provider": "klook",
+    "adid": "1263643",
+    "klookPath": "activity/56547-tokyo-monorail-ticket/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263643&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F149639-tokyo-monorail-ticket-between-haneda-airport-and-hamamatsucho%2F",
+    "usedOn": [
+      "Transfer"
+    ]
+  },
+  "bookingTokyo": {
+    "label": "Tokyo Hotels",
+    "provider": "booking.com",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Stay"
+    ]
+  },
+  "bookingShinjuku": {
+    "label": "Shinjuku Hotels",
+    "provider": "booking.com",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "bookingUeno": {
+    "label": "Ueno Hotels",
+    "provider": "booking.com",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Stay"
+    ]
+  },
+  "bookingAsakusa": {
+    "label": "Asakusa Hotels",
+    "provider": "booking.com",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "bookingKyoto": {
+    "label": "Kyoto Hotels",
+    "provider": "booking.com",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "bookingOsaka": {
+    "label": "Osaka Hotels",
+    "provider": "booking.com",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "bookingKawaguchiko": {
+    "label": "Kawaguchiko / Mt Fuji Hotels",
+    "provider": "booking.com",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "bookingHakone": {
+    "label": "Hakone Ryokan & Hotels",
+    "provider": "booking.com",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Itineraries"
+    ]
+  },
+  "bookingHiroshima": {
+    "label": "Hiroshima Hotels",
+    "provider": "booking.com",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Itineraries"
+    ]
+  },
+  "agodaTokyo": {
+    "label": "Tokyo Hotels",
+    "provider": "agoda",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Stay"
+    ]
+  },
+  "agodaKyoto": {
+    "label": "Kyoto Hotels & Ryokan",
+    "provider": "agoda",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "agodaOsaka": {
+    "label": "Osaka Hotels",
+    "provider": "agoda",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "agodaKawaguchiko": {
+    "label": "Kawaguchiko / Mt Fuji Hotels",
+    "provider": "agoda",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Stay",
+      "Itineraries"
+    ]
+  },
+  "agodaHakone": {
+    "label": "Hakone Ryokan",
+    "provider": "agoda",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Itineraries"
+    ]
+  },
+  "hakone": {
+    "label": "Hakone Free Pass",
+    "provider": "klook",
+    "adid": "1263598",
+    "klookPath": "activity/117-hakone-freepass/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263598&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F821-hakone-transport-day-pass-tokyo%2F",
+    "usedOn": [
+      "Itineraries"
+    ]
+  },
+  "nara": {
+    "label": "Nara Day Trip",
+    "provider": "klook",
+    "adid": "1263640",
+    "klookPath": "activity/2029-nara-afternoon-tour-from-kyoto/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263640&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fexperiences%2Flist%2Fnara-tours-experiences%2Fc12999%2F%3Fspm%3DActivity.Things_To_Do_In_City%26clickId%3D98ee1ca0dd",
+    "usedOn": [
+      "Itineraries"
+    ]
+  },
+  "hotelOsaka": {
+    "label": "Osaka Hotels",
+    "provider": "klook",
+    "adid": "1263594",
+    "klookPath": "hotel/list/18-osaka-japan-hotels/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263594&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3DHotel%2520Osaka",
+    "usedOn": [
+      "Itineraries"
+    ]
+  },
+  "hotelHiroshima": {
+    "label": "Hiroshima Hotels",
+    "provider": "klook",
+    "adid": "1263601",
+    "klookPath": "hotel/list/13-hiroshima-japan-hotels/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263601&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3DHotel%25E3%2580%2580Hiroshima",
+    "usedOn": [
+      "Itineraries"
+    ]
+  },
+  "hotelHakone": {
+    "label": "Hakone Hotels",
+    "provider": "klook",
+    "adid": "1263598",
+    "klookPath": "hotel/list/55-hakone-japan-hotels/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263598&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3DHakone%2520Hotel%26sort%3Dmost_relevant%26tab_key%3D0%26start%3D1",
+    "usedOn": [
+      "Itineraries"
+    ]
+  },
+  "foodTourTokyo": {
+    "label": "Tokyo Food Tour",
+    "provider": "klook",
+    "adid": "1263771",
+    "klookPath": "activity/6298-tokyo-food-tour/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263771&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3DTokyo%2520Food%2520Tour%26spm%3DCountry.TopNavigation.SearchInput%26clickId%3D3a40b12887",
+    "usedOn": [
+      "Command Center"
+    ]
+  },
+  "foodTourKyoto": {
+    "label": "Kyoto Food Walk",
+    "provider": "klook",
+    "adid": "1263772",
+    "klookPath": "activity/24498-kyoto-food-drink-walking-tour/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263772&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3DKyoto%2520Food%2520Walk",
+    "usedOn": [
+      "Command Center"
+    ]
+  },
+  "foodTourOsaka": {
+    "label": "Osaka Street Food Tour",
+    "provider": "klook",
+    "adid": "1263774",
+    "klookPath": "activity/5678-osaka-food-tour/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263774&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3DOsaka%2520Street%2520Food%2520Tour",
+    "usedOn": [
+      "Command Center"
+    ]
+  },
+  "teamlabBorderless": {
+    "label": "teamLab Borderless",
+    "provider": "klook",
+    "adid": "1263775",
+    "klookPath": "activity/2474-teamlab-borderless-tokyo/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263775&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F20707-teamlab-borderless-admission-ticket-tokyo%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3Dae29e307de",
+    "usedOn": [
+      "Command Center"
+    ]
+  },
+  "tokyoTower": {
+    "label": "Tokyo Tower",
+    "provider": "klook",
+    "adid": "1263777",
+    "klookPath": "activity/2246-tokyo-tower/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263777&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3DTokyo%2520Tower",
+    "usedOn": [
+      "Command Center"
+    ]
+  },
+  "kimonoRentalKyoto": {
+    "label": "Kyoto Kimono Rental",
+    "provider": "klook",
+    "adid": "1263778",
+    "klookPath": "activity/6789-kyoto-kimono-rental/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263778&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3DKyoto%2520Kimono%2520Rental",
+    "usedOn": [
+      "Command Center"
+    ]
+  },
+  "fushimiInariNaraTour": {
+    "label": "Fushimi Inari + Nara Day Tour",
+    "provider": "klook",
+    "adid": "1263779",
+    "klookPath": "activity/4523-fushimi-inari-nara-tour/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263779&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3DFushimi%2520Inari",
+    "usedOn": [
+      "Command Center"
+    ]
+  },
+  "osakaAmazingPass": {
+    "label": "Osaka Amazing Pass",
+    "provider": "klook",
+    "adid": "1263781",
+    "klookPath": "activity/1234-osaka-amazing-pass/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263781&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F82312-amazing-pass-osaka%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3Dec5b10e222",
+    "usedOn": [
+      "Command Center"
+    ]
+  },
+  "universalStudiosJapan": {
+    "label": "Universal Studios Japan",
+    "provider": "klook",
+    "adid": "1263782",
+    "klookPath": "activity/1530-universal-studios-japan/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263782&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F46604-universal-studios-japan-e-ticket-osaka-qr-code-direct-entry%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3D451e509d96",
+    "usedOn": [
+      "Command Center"
+    ]
+  }
+}

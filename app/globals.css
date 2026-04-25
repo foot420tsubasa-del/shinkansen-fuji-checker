@@ -24,3 +24,15 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.page-shell {
+  background:
+    radial-gradient(circle at 14% 0%, rgba(251, 191, 36, 0.16), transparent 28rem),
+    radial-gradient(circle at 82% 2%, rgba(244, 114, 182, 0.12), transparent 24rem),
+    linear-gradient(180deg, #fff7ed 0%, #f0f7ff 22rem, #f6f8fb 48rem);
+}
+
+.page-header {
+  background:
+    linear-gradient(90deg, rgba(255, 247, 237, 0.94), rgba(239, 246, 255, 0.94) 48%, rgba(255, 241, 242, 0.92));
+}
