@@ -143,10 +143,10 @@ export const transferPages: TransferPage[] = [
         bookingLabel: "Compare options",
       },
     ],
-    lateArrivalNote: "Catching a Shinkansen the same day? Book N'EX to arrive at Tokyo Station with zero transfers. JR Pass holders: N'EX is covered by the pass — activate it at Narita JR counter before boarding.",
-    proTip: "If you have a JR Pass, the Narita Express is free (covered by pass). Activate your pass at the JR East Travel Service Center in Narita Terminal 1 or 2 before boarding — it takes 10–15 min.",
+    lateArrivalNote: "Catching a Shinkansen the same day? N'EX is usually the simplest way to reach Tokyo Station with zero transfers. If you already have a JR Pass, N'EX may be covered after activation at the Narita JR counter.",
+    proTip: "Do not buy a JR Pass just for N'EX. It only starts to make sense when your wider route has multiple long-distance JR rides. If you already have one, activate it at the JR East Travel Service Center in Narita Terminal 1 or 2 before boarding.",
     nextActions: [
-      { id: "jr-pass", category: "train", title: "Get JR Pass", description: "Covers N'EX + all Shinkansen (except Nozomi).", cta: "See JR Pass", href: jrPassUrl },
+      { id: "jr-pass", category: "train", title: "Compare JR Pass vs single tickets", description: "Usually worth it only for multiple long-distance rides.", cta: "Compare JR Pass", href: jrPassUrl },
       { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare areas by Shinkansen access.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
       ...commonNextActions.filter(a => a.id !== "stay-tokyo"),
     ],

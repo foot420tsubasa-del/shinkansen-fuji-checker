@@ -3,6 +3,7 @@
 import { ArrowRight, Bed, Check, ExternalLink, MapPin, Train } from "lucide-react";
 import type { ItineraryDay } from "@/lib/content/itineraries";
 import { trackAffiliateClick } from "@/lib/analytics";
+import { relForExternalLink } from "@/lib/link-rel";
 
 export function DayCard({ day, location, title, highlights, stayArea, stayLink, transport, bookingCta }: ItineraryDay) {
   return (
@@ -53,7 +54,7 @@ export function DayCard({ day, location, title, highlights, stayArea, stayLink, 
               <a
                 href={stayLink}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel={relForExternalLink(stayLink)}
                 onClick={() => trackAffiliateClick("itinerary-hotel", `Day ${day} ${location}`)}
                 className="inline-flex items-center gap-1 rounded-xl border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-xs font-semibold text-indigo-700 hover:bg-indigo-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-200"
               >
@@ -65,7 +66,7 @@ export function DayCard({ day, location, title, highlights, stayArea, stayLink, 
               <a
                 href={bookingCta.href}
                 target={bookingCta.href.startsWith("http") ? "_blank" : undefined}
-                rel={bookingCta.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                rel={relForExternalLink(bookingCta.href)}
                 onClick={() => trackAffiliateClick("itinerary-cta", bookingCta.label)}
                 className="inline-flex items-center gap-1 rounded-xl border border-sky-200 bg-sky-50 px-3 py-1.5 text-xs font-semibold text-sky-700 hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
               >

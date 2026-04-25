@@ -8,7 +8,7 @@
   "klook": {
     "heading": "準備預訂了嗎？透過 Klook 購買新幹線車票（支援英文）",
     "book": "預訂新幹線",
-    "jrPass": "購買 JR Pass"
+    "jrPass": "比較 JR Pass"
   },
   "home": {
     "brandTitle": "新幹線富士山座位查詢",
@@ -63,7 +63,7 @@
     "essentialsTitle": "日本旅遊必備",
     "essentialsNote": "Klook 聯盟連結 — 支援英文，即時手機憑證。",
     "jrPassTitle": "JR Pass 與新幹線車票",
-    "jrPassDesc": "適合搭乘 2 次以上長途列車。可在 Klook 以英文預訂。",
+    "jrPassDesc": "通常只有多次長途移動才划算，購買前請先比較。",
     "esimTitle": "日本 eSIM",
     "esimDesc": "全程保持網路連線 — 無需換 SIM 卡。",
     "nexTitle": "成田特快 (N'EX)",
@@ -217,8 +217,8 @@
       "14日券：¥80,000",
       "21日券：¥100,000"
     ],
-    "jrPassWorth": "若搭乘 2 次以上長途新幹線（例：東京→京都→廣島→東京），JR Pass 才划算。僅東京↔大阪來回的話，買單程票更便宜。",
-    "jrNozomiNote": "注意：最快的希望號（Nozomi）需在 JR Pass 之外另購希望·瑞穗號追加票（東京→京都/大阪 ¥4,960）。若無追加票，請搭乘光號（Hikari）或回聲號（Kodama）— 停靠新富士站，反而更有利於觀賞富士山。",
+    "jrPassWorth": "JR Pass 通常只有多段長途新幹線時才值得比較（例：東京→京都→廣島→東京）。單純東京↔大阪來回時，單程票通常更便宜。",
+    "jrNozomiNote": "注意：最快的希望號（Nozomi）可能需在 JR Pass 之外另購希望·瑞穗號追加票（東京→京都/大阪約 ¥4,960）。若無追加票，請搭乘光號（Hikari）或回聲號（Kodama）— 停靠新富士站，反而更有利於觀賞富士山。",
     "seasonH2": "觀賞富士山的最佳季節與時間",
     "seasonLabel": "季節指南",
     "seasons": [
@@ -349,7 +349,7 @@
     "checklist": "出發前清單",
     "fullItinerary": "完整行程",
     "routeLabel": "{name}路線",
-    "jrRecommended": "✓ 推薦購買 JR Pass",
+    "jrRecommended": "比較 JR Pass 與單程票",
     "jrMayNotPayOff": "△ JR Pass 可能不划算",
     "partnerNote": "帶 ↗ 標記的連結為聯盟連結。不會產生額外費用，我們會獲得少量佣金。",
     "allSet": "一切就緒 — 盡情享受日本吧！",
@@ -361,7 +361,7 @@
         "name": "經典 7 天",
         "desc": "東京 → 富士 → 京都 → 大阪",
         "duration": "7 天",
-        "jrNote": "涵蓋東京→京都新幹線 + N'EX 機場轉乘"
+        "jrNote": "這種簡單路線通常不適合 JR Pass。除非加上廣島、多次長途移動或搭新幹線返回東京，否則單程票通常更便宜。"
       },
       "express-5": {
         "name": "快速 5 天",
@@ -373,13 +373,13 @@
         "name": "富士 10 天",
         "desc": "東京 → 河口湖 → 箱根 → 京都 → 大阪",
         "duration": "10 天",
-        "jrNote": "涵蓋新幹線 + N'EX + JR 地方線"
+        "jrNote": "請先比較。若沒有多段 JR 長途移動，單程票通常更便宜。"
       },
       "deep-14": {
         "name": "深度 14 天",
         "desc": "東京 → 日光 → 富士 → 京都 → 廣島 → 大阪",
         "duration": "14 天",
-        "jrNote": "輕鬆回本 — 涵蓋東京→京都→廣島→大阪"
+        "jrNote": "此路線有多段 JR 長途移動，值得比較 JR Pass。"
       }
     },
     "cities": {
@@ -443,8 +443,8 @@
       },
       "jrPass": {
         "label": "JR Pass",
-        "desc": "涵蓋新幹線 + 大部分 JR 列車。",
-        "cta": "查看 JR Pass"
+        "desc": "通常只有多次長途移動才划算。",
+        "cta": "比較 JR Pass"
       },
       "insurance": {
         "label": "旅遊保險",
@@ -514,7 +514,7 @@
       "threeNights": "3 晚",
       "kyotoBase": "京都好據點",
       "planTrip": "規劃旅程",
-      "checkJrPass": "查看 JR Pass",
+      "checkJrPass": "比較 JR Pass",
       "routeMap": "路線地圖"
     }
   },

@@ -17,6 +17,7 @@ import { Link } from "@/i18n/navigation";
 import { Card } from "@/components/ui/Card";
 import type { TripPick } from "@/lib/trip-picks";
 import { trackAffiliateClick } from "@/lib/analytics";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 
 const STORAGE_KEY = "fujiseat-trip-checks";
 
@@ -139,7 +140,7 @@ export function TripPicks({ picks, compact = false }: TripPicksProps) {
 
           if (isExternal) {
             return (
-              <a key={pick.id} href={pick.href} target="_blank" rel="noopener noreferrer" className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-sky-300" onClick={() => trackAffiliateClick("trip-picks", pick.title)}>
+              <a key={pick.id} href={pick.href} target="_blank" rel={AFFILIATE_REL} className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-sky-300" onClick={() => trackAffiliateClick("trip-picks", pick.title)}>
                 {inner}
               </a>
             );

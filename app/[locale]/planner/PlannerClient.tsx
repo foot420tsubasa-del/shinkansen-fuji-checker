@@ -18,8 +18,10 @@ import {
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { getAffUrl } from "@/src/affiliateLinks";
 import { trackAffiliateClick, trackChecklistComplete, trackTemplateSelect } from "@/lib/analytics";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 
 // ─── Constants ──────────────────────────────────────────────────────────────
 
@@ -47,7 +49,7 @@ const TEMPLATE_DATA: TemplateData[] = [
       { key: "osaka", daysKey: "day6_7", emoji: "🍣" },
     ],
     itinerarySlug: "7-day-first-time-japan",
-    jrPassWorthIt: true,
+    jrPassWorthIt: false,
   },
   {
     id: "express-5",
@@ -71,7 +73,7 @@ const TEMPLATE_DATA: TemplateData[] = [
       { key: "osaka", daysKey: "day9_10", emoji: "🍣" },
     ],
     itinerarySlug: "10-day-with-fuji",
-    jrPassWorthIt: true,
+    jrPassWorthIt: false,
   },
   {
     id: "deep-14",
@@ -225,7 +227,6 @@ export function PlannerClient() {
 
   const templateName = t(`routes.${templateData.id}.name`);
   const templateDesc = t(`routes.${templateData.id}.desc`);
-  const templateDuration = t(`routes.${templateData.id}.duration`);
   const templateJrNote = t(`routes.${templateData.id}.jrNote`);
 
   const templateCities = useMemo(
@@ -505,7 +506,7 @@ export function PlannerClient() {
                         <a
                           href={item.href}
                           target="_blank"
-                          rel="noopener noreferrer"
+                          rel={AFFILIATE_REL}
                           onClick={() => trackAffiliateClick("checklist", item.id)}
                           className="inline-flex items-center gap-1 rounded-lg border border-sky-200 bg-sky-50 px-2.5 py-1 text-[11px] font-semibold text-sky-700 transition-colors hover:bg-sky-100"
                         >
@@ -555,7 +556,7 @@ export function PlannerClient() {
                     <a
                       href={booking.href}
                       target="_blank"
-                      rel="noopener noreferrer"
+                      rel={AFFILIATE_REL}
                       onClick={() => trackAffiliateClick("bookings-sidebar", booking.key)}
                       className="mt-2 inline-flex items-center gap-1 rounded-lg bg-[#07142f] px-3 py-1.5 text-[11px] font-semibold text-white transition-colors hover:bg-slate-800"
                     >
@@ -713,7 +714,7 @@ export function PlannerClient() {
           <a
             href={getAffUrl("jrPass")}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={AFFILIATE_REL}
             onClick={() => trackAffiliateClick("planner-footer", "JR Pass")}
             className="text-sky-600 underline underline-offset-2"
           >
@@ -723,7 +724,7 @@ export function PlannerClient() {
           <a
             href={getAffUrl("esim")}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={AFFILIATE_REL}
             onClick={() => trackAffiliateClick("planner-footer", "Japan eSIM")}
             className="text-sky-600 underline underline-offset-2"
           >
@@ -735,6 +736,7 @@ export function PlannerClient() {
           </Link>
           .
         </p>
+        <LastCheckedNote className="mt-2" />
         <SiteLegalLinks className="mt-3 text-slate-400" />
       </footer>
     </div>

@@ -1,4 +1,5 @@
 import { ArrowRight, Check, Clock, Luggage, Wallet, X, Zap } from "lucide-react";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 
 type TransferOptionProps = {
   name: string;
@@ -95,7 +96,7 @@ export function TransferOption({
       <a
         href={bookingLink}
         target="_blank"
-        rel="noopener noreferrer"
+        rel={AFFILIATE_REL}
         className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-2xl bg-[#07142f] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
       >
         {bookingLabel}

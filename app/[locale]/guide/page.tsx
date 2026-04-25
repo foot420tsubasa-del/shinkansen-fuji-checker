@@ -10,6 +10,8 @@ import { KLOOK_URL, ESIM_URL, AIRPORT_TRANSFER_URL, INSURANCE_URL, CAR_RENTAL_UR
 import { GuideNextSteps } from "@/components/travel/GuideNextSteps";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { BrandMark } from "@/components/ui/BrandMark";
+import { LastCheckedNote } from "@/components/content/LastCheckedNote";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -200,7 +202,7 @@ export default async function GuidePage({ params }: Props) {
             key={i}
             href={link.url}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={AFFILIATE_REL}
             className={[
               "flex items-center gap-3 rounded-xl border px-3.5 py-3 md:px-4 md:py-3.5",
               "border-slate-100 bg-slate-50/40 hover:bg-white hover:border-slate-200 hover:shadow-sm",
@@ -293,7 +295,7 @@ export default async function GuidePage({ params }: Props) {
             <a
               href={KLOOK_URL}
               target="_blank"
-              rel="noopener noreferrer"
+              rel={AFFILIATE_REL}
               className="inline-flex items-center rounded-full border border-red-200 bg-red-50 px-3.5 py-1.5 text-[12px] font-semibold text-red-600 hover:bg-red-100 transition-colors"
             >
               Book on Klook →
@@ -467,7 +469,7 @@ export default async function GuidePage({ params }: Props) {
           <a
             href={ESIM_URL}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={AFFILIATE_REL}
             className="flex items-center gap-3 rounded-xl border border-sky-100 bg-sky-50/50 px-3.5 py-2.5 hover:bg-sky-50 hover:border-sky-200 transition-all group"
           >
             <span className="shrink-0 text-base">📶</span>
@@ -662,6 +664,7 @@ export default async function GuidePage({ params }: Props) {
           <footer className="border-t border-slate-200 pt-5 text-center text-[10px] text-slate-400">
             <p>fujiseat.com — Japan travel utility hub</p>
             <p className="mt-1">Partner links shown where they match the planning step.</p>
+            <LastCheckedNote className="mt-3" />
             <SiteLegalLinks className="mt-3 text-slate-400" />
           </footer>
 

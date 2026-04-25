@@ -1,6 +1,7 @@
 import { ArrowRight, ExternalLink, Hotel, Map, Plane, ShieldCheck } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Card } from "@/components/ui/Card";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 
 type DecisionCardProps = {
   label: string;
@@ -79,7 +80,7 @@ export function DecisionCard({
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className="block h-full rounded-[28px] no-underline outline-none focus-visible:ring-2 focus-visible:ring-sky-300">
+      <a href={href} target="_blank" rel={AFFILIATE_REL} className="block h-full rounded-[28px] no-underline outline-none focus-visible:ring-2 focus-visible:ring-sky-300">
         {body}
       </a>
     );

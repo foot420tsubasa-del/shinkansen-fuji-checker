@@ -8,6 +8,7 @@ import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { TransferOption } from "@/components/content/TransferOption";
 import { ProTip } from "@/components/content/ProTip";
 import { NextActions } from "@/components/content/NextActions";
+import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAllTransferSlugs, getTransferBySlug } from "@/lib/content/transfers";
 
@@ -20,12 +21,13 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const page = getTransferBySlug(slug);
   if (!page) return {};
   return {
     title: `${page.title} | fujiseat`,
     description: page.description,
+    robots: locale === "en" ? undefined : { index: false, follow: true },
     openGraph: {
       title: page.title,
       description: page.description,
@@ -109,6 +111,7 @@ export default async function TransferPage({ params }: Props) {
         <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">
           <p>fujiseat.com — Japan travel utility hub</p>
           <p className="mt-1">Partner links shown where they match the planning step.</p>
+          <LastCheckedNote className="mt-3" />
           <SiteLegalLinks className="mt-3 text-slate-400" />
         </footer>
       </Container>

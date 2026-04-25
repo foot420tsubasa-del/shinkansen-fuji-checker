@@ -3,19 +3,28 @@ import { ArrowRight, Plane } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
+import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { transferPages } from "@/lib/content/transfers";
 
-export const metadata: Metadata = {
-  title: "Airport Transfers in Japan — Narita & Haneda to Tokyo | fujiseat",
-  description:
-    "Compare the fastest, cheapest, and easiest ways to get from Narita and Haneda airports to central Tokyo. N'EX, Skyliner, limousine bus, and more.",
-  openGraph: {
-    title: "Airport Transfers — Narita & Haneda to Tokyo",
-    description:
-      "Compare the fastest, cheapest, and easiest ways to get from Narita and Haneda airports to Tokyo.",
-    siteName: "fujiseat",
-  },
+type Props = {
+  params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Airport Transfers in Japan — Narita & Haneda to Tokyo | fujiseat",
+    description:
+      "Compare the fastest, cheapest, and easiest ways to get from Narita and Haneda airports to central Tokyo. N'EX, Skyliner, limousine bus, and more.",
+    robots: locale === "en" ? undefined : { index: false, follow: true },
+    openGraph: {
+      title: "Airport Transfers — Narita & Haneda to Tokyo",
+      description:
+        "Compare the fastest, cheapest, and easiest ways to get from Narita and Haneda airports to Tokyo.",
+      siteName: "fujiseat",
+    },
+  };
+}
 
 export default function AirportTransfersIndex() {
   return (
@@ -78,9 +87,7 @@ export default function AirportTransfersIndex() {
         ))}
       </div>
 
-      <p className="mt-8 text-center text-[10px] text-slate-400">
-        All transfer information verified as of 2024. Prices may vary by season.
-      </p>
+      <LastCheckedNote className="mt-8 text-center" />
     </Container>
   );
 }

@@ -3,19 +3,28 @@ import { ArrowRight, Bed } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
+import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { stayPages } from "@/lib/content/stay";
 
-export const metadata: Metadata = {
-  title: "Where to Stay in Japan — Area Guides for First-Timers | fujiseat",
-  description:
-    "Compare the best areas to stay in Tokyo, Kyoto, Osaka, and near Mt Fuji. Find neighborhoods that match your budget, pace, and travel style.",
-  openGraph: {
-    title: "Where to Stay in Japan — Area Guides",
-    description:
-      "Compare neighborhoods across Tokyo, Kyoto, Osaka, and Mt Fuji for your first Japan trip.",
-    siteName: "fujiseat",
-  },
+type Props = {
+  params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Where to Stay in Japan — Area Guides for First-Timers | fujiseat",
+    description:
+      "Compare the best areas to stay in Tokyo, Kyoto, Osaka, and near Mt Fuji. Find neighborhoods that match your budget, pace, and travel style.",
+    robots: locale === "en" ? undefined : { index: false, follow: true },
+    openGraph: {
+      title: "Where to Stay in Japan — Area Guides",
+      description:
+        "Compare neighborhoods across Tokyo, Kyoto, Osaka, and Mt Fuji for your first Japan trip.",
+      siteName: "fujiseat",
+    },
+  };
+}
 
 export default function AreasToStayIndex() {
   return (
@@ -82,6 +91,7 @@ export default function AreasToStayIndex() {
       <p className="mt-8 text-center text-[10px] text-slate-400">
         Hotel links are partner links — we earn a small commission at no extra cost to you.
       </p>
+      <LastCheckedNote className="mt-2 text-center" />
     </Container>
   );
 }

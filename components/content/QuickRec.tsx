@@ -1,4 +1,5 @@
 import { ArrowRight, Zap } from "lucide-react";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 
 type QuickRecProps = {
   area: string;
@@ -21,7 +22,7 @@ export function QuickRec({ area, why, link, cta = "See hotels" }: QuickRecProps)
       <a
         href={link}
         target="_blank"
-        rel="noopener noreferrer"
+        rel={AFFILIATE_REL}
         className="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-200 transition-all hover:bg-emerald-700"
       >
         {cta}

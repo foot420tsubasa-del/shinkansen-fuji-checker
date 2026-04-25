@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import type { FujiVisibility, SeatRecommendation } from "@/lib/seat-checker";
 import { Card } from "@/components/ui/Card";
 import { KLOOK_URL } from "@/src/affiliateLinks";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 
 type SeatResultCardProps = {
   recommendation: SeatRecommendation;
@@ -92,7 +93,7 @@ export function SeatResultCard({
             <a
               href={KLOOK_URL}
               target="_blank"
-              rel="noopener noreferrer"
+              rel={AFFILIATE_REL}
               className="flex-1 rounded-2xl bg-red-500 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-md shadow-red-200 transition-all hover:brightness-110 active:brightness-95"
             >
               {k("book")}
@@ -100,7 +101,7 @@ export function SeatResultCard({
             <a
               href={KLOOK_URL}
               target="_blank"
-              rel="noopener noreferrer"
+              rel={AFFILIATE_REL}
               className="flex-1 rounded-2xl border-2 border-red-500 bg-red-50 px-4 py-2.5 text-center text-sm font-semibold text-red-600 shadow-sm transition-all hover:bg-red-100 active:brightness-95"
             >
               {k("jrPass")}

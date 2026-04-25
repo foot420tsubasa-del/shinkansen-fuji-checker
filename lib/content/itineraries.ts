@@ -50,7 +50,7 @@ const hotelAsakusaUrl = getAffUrl("hotelAsakusa");
 // ─── Shared next actions ────────────────────────────────────────────────────
 
 const commonNextActions: TripPick[] = [
-  { id: "jr-pass", category: "train", title: "Get JR Pass", description: "Covers all Shinkansen (except Nozomi) + most JR trains.", cta: "See JR Pass", href: jrPassUrl },
+  { id: "jr-pass", category: "train", title: "Compare JR Pass vs single tickets", description: "Usually worth it only for multiple long-distance rides.", cta: "Compare JR Pass", href: jrPassUrl },
   { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Set up data before landing — maps, translate, transit apps.", cta: "Get eSIM", href: esimUrl },
   { id: "transfer", category: "transfer", title: "Airport transfer", description: "Plan your Narita/Haneda to city route.", cta: "Compare options", href: "/airport-transfers/narita-to-shinjuku" },
   { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare Shinjuku, Ueno, Asakusa for your base.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
@@ -102,8 +102,8 @@ export const itineraryPages: ItineraryPage[] = [
         highlights: ["Take Tokaido Shinkansen Tokyo → Kyoto (2h15m)", "Sit on the right side (E seat) for Mt. Fuji view", "Afternoon: Fushimi Inari — walk the torii gates", "Evening: Gion district walk"],
         stayArea: "Kyoto Station area",
         stayLink: hotelKyotoStationUrl,
-        transport: "Shinkansen (covered by JR Pass)",
-        bookingCta: { label: "Get JR Pass", href: jrPassUrl },
+        transport: "Shinkansen (single ticket is often cheaper)",
+        bookingCta: { label: "Compare train tickets", href: jrPassUrl },
       },
       {
         day: 5,
@@ -132,7 +132,7 @@ export const itineraryPages: ItineraryPage[] = [
         transport: "Nankai/JR to Kansai Airport, or Shinkansen to Tokyo",
       },
     ],
-    proTip: "The Shinkansen on Day 4 is the anchor of this trip. Book the right-side seat (E) for the Fuji view — use the fujiseat checker before booking. If you have a JR Pass, it covers the Hikari Shinkansen, N'EX airport transfer, and JR trains to Nara.",
+    proTip: "The Shinkansen on Day 4 is the anchor of this trip. Book the right-side seat (E) for the Fuji view. JR Pass is usually not worth it for this simple route. Single tickets are often cheaper unless you add Hiroshima, multiple long-distance rides, or return to Tokyo by Shinkansen.",
     nextActions: commonNextActions,
   },
   {
@@ -169,8 +169,8 @@ export const itineraryPages: ItineraryPage[] = [
         highlights: ["Morning: Shinkansen to Kyoto (2h15m) — E seat for Fuji", "Afternoon: Fushimi Inari (torii gates)", "Evening: Gion district walk + dinner"],
         stayArea: "Kyoto Station area",
         stayLink: hotelKyotoStationUrl,
-        transport: "Shinkansen (covered by JR Pass)",
-        bookingCta: { label: "Get JR Pass", href: jrPassUrl },
+        transport: "Shinkansen (single ticket is often cheaper)",
+        bookingCta: { label: "Compare train tickets", href: jrPassUrl },
       },
       {
         day: 4,
@@ -254,7 +254,7 @@ export const itineraryPages: ItineraryPage[] = [
         stayArea: "Kyoto Station area",
         stayLink: hotelKyotoStationUrl,
         transport: "Hakone bus → Odawara → Shinkansen",
-        bookingCta: { label: "Get JR Pass", href: jrPassUrl },
+        bookingCta: { label: "Compare JR Pass", href: jrPassUrl },
       },
       {
         day: 7,
@@ -367,8 +367,8 @@ export const itineraryPages: ItineraryPage[] = [
         highlights: ["Tokaido Shinkansen Tokyo → Kyoto (2h15m)", "Right side E seat for Mt. Fuji — use fujiseat checker", "Afternoon: Fushimi Inari torii gates", "Evening: Gion walk + dinner on Pontocho"],
         stayArea: "Kyoto Station area",
         stayLink: hotelKyotoStationUrl,
-        transport: "Shinkansen (covered by JR Pass)",
-        bookingCta: { label: "Get JR Pass", href: jrPassUrl },
+        transport: "Shinkansen (compare pass vs tickets)",
+        bookingCta: { label: "Compare JR Pass", href: jrPassUrl },
       },
       {
         day: 8,
@@ -394,7 +394,7 @@ export const itineraryPages: ItineraryPage[] = [
         highlights: ["JR or Kintetsu to Nara (45 min)", "Todai-ji — world's largest wooden building", "Walk through deer park + Kasuga Taisha shrine"],
         stayArea: "Kyoto Station area",
         stayLink: hotelKyotoStationUrl,
-        transport: "JR Nara Line (covered by JR Pass)",
+        transport: "JR Nara Line (covered if you already use JR Pass)",
         bookingCta: { label: "Book Nara trip", href: naraUrl },
       },
       {
@@ -404,7 +404,7 @@ export const itineraryPages: ItineraryPage[] = [
         highlights: ["Shinkansen Kyoto → Hiroshima (1h40m)", "Peace Memorial Park + Museum", "Evening: Hiroshima-style okonomiyaki"],
         stayArea: "Hiroshima",
         stayLink: hotelHiroshimaUrl,
-        transport: "Shinkansen (covered by JR Pass)",
+        transport: "Shinkansen (compare JR Pass vs tickets)",
         bookingCta: { label: "See Hiroshima activities", href: hiroshimaUrl },
       },
       {
@@ -414,7 +414,7 @@ export const itineraryPages: ItineraryPage[] = [
         highlights: ["Ferry to Miyajima island (10 min from mainland)", "Itsukushima Shrine — floating torii at high tide", "Try momiji manju (maple leaf cake) + grilled oysters"],
         stayArea: "Hiroshima",
         stayLink: hotelHiroshimaUrl,
-        transport: "JR train + ferry (covered by JR Pass)",
+        transport: "JR train + ferry (covered if you use JR Pass)",
       },
       {
         day: 13,
@@ -423,7 +423,7 @@ export const itineraryPages: ItineraryPage[] = [
         highlights: ["Shinkansen Hiroshima → Osaka (1h20m)", "Afternoon: Osaka Castle or Shinsekai", "Evening: Dotonbori — the ultimate street food strip"],
         stayArea: "Namba / Dotonbori",
         stayLink: hotelOsakaUrl,
-        transport: "Shinkansen (covered by JR Pass)",
+        transport: "Shinkansen (compare JR Pass vs tickets)",
         bookingCta: { label: "See Osaka activities", href: osakaUrl },
       },
       {
@@ -434,7 +434,7 @@ export const itineraryPages: ItineraryPage[] = [
         transport: "Nankai/JR to KIX or Shinkansen to Tokyo",
       },
     ],
-    proTip: "The 14-day JR Pass pays for itself easily on this route: Tokyo→Kyoto, Kyoto→Hiroshima, Hiroshima→Osaka, and potentially Osaka→Tokyo. Activate it on Day 7 (Shinkansen day) so it covers Days 7–13 — all the long-distance legs.",
+    proTip: "The 14-day JR Pass is usually worth comparing for this route because it includes several long-distance legs: Tokyo→Kyoto, Kyoto→Hiroshima, Hiroshima→Osaka, and potentially Osaka→Tokyo. Activate it around Day 7 so it covers the dense train section, then confirm current prices before buying.",
     nextActions: [
       { id: "stay-kawaguchiko", category: "stay", title: "Kawaguchiko hotels", description: "Fuji-view onsen hotels by the lake.", cta: "See hotels", href: hotelKawaguchikoUrl },
       { id: "hiroshima", category: "experience", title: "Hiroshima activities", description: "Peace park, Miyajima, and local food.", cta: "See activities", href: hiroshimaUrl },

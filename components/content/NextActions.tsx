@@ -4,6 +4,7 @@ import { ArrowRight, ExternalLink, Luggage, Map, Plane, Shield, Train, Wifi } fr
 import { Link } from "@/i18n/navigation";
 import type { TripPick } from "@/lib/trip-picks";
 import { trackAffiliateClick } from "@/lib/analytics";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 
 const iconByCategory: Record<string, typeof Train> = {
   train: Train,
@@ -54,7 +55,7 @@ export function NextActions({ picks, title = "Next steps" }: { picks: TripPick[]
 
           if (isExternal) {
             return (
-              <a key={pick.id} href={pick.href} target="_blank" rel="noopener noreferrer" className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-sky-300" onClick={() => trackAffiliateClick("next-actions", pick.title)}>
+              <a key={pick.id} href={pick.href} target="_blank" rel={AFFILIATE_REL} className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-sky-300" onClick={() => trackAffiliateClick("next-actions", pick.title)}>
                 {inner}
               </a>
             );

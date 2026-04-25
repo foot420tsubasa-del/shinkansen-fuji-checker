@@ -8,7 +8,7 @@
   "klook": {
     "heading": "¿Listo para reservar? Consigue tu billete del Shinkansen en Klook (en inglés)",
     "book": "Reservar Shinkansen",
-    "jrPass": "Obtener JR Pass"
+    "jrPass": "Comparar JR Pass"
   },
   "home": {
     "brandTitle": "Verificador de Asientos del Shinkansen",
@@ -63,7 +63,7 @@
     "essentialsTitle": "Esenciales para tu viaje a Japón",
     "essentialsNote": "Enlaces de afiliado de Klook — disponible en inglés, vale móvil instantáneo.",
     "jrPassTitle": "JR Pass y billetes del Shinkansen",
-    "jrPassDesc": "Ideal para 2 o más viajes largos. Reserva en inglés en Klook.",
+    "jrPassDesc": "Normalmente compensa solo con varios trayectos largos. Compara antes de comprar.",
     "esimTitle": "eSIM Japón",
     "esimDesc": "Mantente conectado durante todo el viaje — sin cambiar de SIM.",
     "nexTitle": "Narita Express (N'EX)",
@@ -217,8 +217,8 @@
       "14 días: ¥80.000",
       "21 días: ¥100.000"
     ],
-    "jrPassWorth": "El JR Pass vale la pena si vas a hacer 2 o más viajes largos en Shinkansen (ej: Tokio → Kioto → Hiroshima → Tokio). Para solo un viaje de ida y vuelta Tokio ↔ Osaka, los billetes individuales son más baratos.",
-    "jrNozomiNote": "Nota: El Nozomi (el más rápido) requiere un billete adicional NOZOMI MIZUHO (¥4.960 Tokio→Kioto/Osaka) además del JR Pass. Sin él, usa el Hikari o Kodama — estos paran cerca de Shin-Fuji, lo que es mejor para ver el Monte Fuji.",
+    "jrPassWorth": "El JR Pass normalmente solo merece comparación si haces varios viajes largos en Shinkansen (ej: Tokio → Kioto → Hiroshima → Tokio). Para un viaje simple Tokio ↔ Osaka, los billetes individuales suelen ser más baratos.",
+    "jrNozomiNote": "Nota: El Nozomi (el más rápido) puede requerir un billete adicional NOZOMI MIZUHO (aprox. ¥4.960 Tokio→Kioto/Osaka) además del JR Pass. Sin él, usa el Hikari o Kodama — estos paran cerca de Shin-Fuji, lo que es mejor para ver el Monte Fuji.",
     "seasonH2": "Mejor Temporada y Horario para Ver el Monte Fuji",
     "seasonLabel": "Guía por temporadas",
     "seasons": [
@@ -349,7 +349,7 @@
     "checklist": "Lista de preparación",
     "fullItinerary": "Itinerario completo",
     "routeLabel": "Ruta {name}",
-    "jrRecommended": "✓ JR Pass recomendado",
+    "jrRecommended": "Comparar JR Pass vs billetes individuales",
     "jrMayNotPayOff": "△ El JR Pass puede no compensar",
     "partnerNote": "Los enlaces con ↗ son de afiliados. Ganamos una pequeña comisión sin coste adicional para ti.",
     "allSet": "¡Todo listo — disfruta Japón!",
@@ -361,7 +361,7 @@
         "name": "Clásico 7 días",
         "desc": "Tokio → Fuji → Kioto → Osaka",
         "duration": "7 días",
-        "jrNote": "Cubre Shinkansen Tokio→Kioto + N'EX desde el aeropuerto"
+        "jrNote": "Para esta ruta simple, normalmente el JR Pass no compensa. Los billetes individuales suelen ser más baratos salvo que añadas Hiroshima, varios trayectos largos o vuelta a Tokio en Shinkansen."
       },
       "express-5": {
         "name": "Exprés 5 días",
@@ -373,13 +373,13 @@
         "name": "10 días con Fuji",
         "desc": "Tokio → Kawaguchiko → Hakone → Kioto → Osaka",
         "duration": "10 días",
-        "jrNote": "Cubre Shinkansen + N'EX + trenes locales JR"
+        "jrNote": "Compara primero. Los billetes individuales suelen ser más baratos salvo que añadas varios trayectos largos JR."
       },
       "deep-14": {
         "name": "Explorador 14 días",
         "desc": "Tokio → Nikko → Fuji → Kioto → Hiroshima → Osaka",
         "duration": "14 días",
-        "jrNote": "Compensa fácilmente — Tokio→Kioto→Hiroshima→Osaka cubierto"
+        "jrNote": "Suele merecer la pena compararlo porque esta ruta tiene varios trayectos largos JR."
       }
     },
     "cities": {
@@ -443,8 +443,8 @@
       },
       "jrPass": {
         "label": "JR Pass",
-        "desc": "Cubre Shinkansen + la mayoría de trenes JR.",
-        "cta": "Ver JR Pass"
+        "desc": "Normalmente compensa solo con varios trayectos largos.",
+        "cta": "Comparar JR Pass"
       },
       "insurance": {
         "label": "Seguro de viaje",
@@ -514,7 +514,7 @@
       "threeNights": "3 noches",
       "kyotoBase": "Buena base en Kioto",
       "planTrip": "Planificar viaje",
-      "checkJrPass": "Ver JR Pass",
+      "checkJrPass": "Comparar JR Pass",
       "routeMap": "Mapa de ruta"
     }
   },

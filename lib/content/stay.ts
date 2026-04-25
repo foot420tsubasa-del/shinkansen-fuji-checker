@@ -56,7 +56,7 @@ const hotelKawaguchiko = getAffUrl("hotelKawaguchiko");
 
 const commonNextActions: TripPick[] = [
   { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Set up connectivity before landing.", cta: "Get eSIM", href: ESIM_URL },
-  { id: "jr-pass", category: "train", title: "Book JR Pass", description: "Covers Shinkansen + most JR trains.", cta: "See JR Pass", href: JR_PASS_URL },
+  { id: "jr-pass", category: "train", title: "Compare JR Pass vs single tickets", description: "Usually worth it only for multiple long-distance rides.", cta: "Compare JR Pass", href: JR_PASS_URL },
 ];
 
 // ─── Page Data ──────────────────────────────────────────────────────────────
@@ -193,7 +193,7 @@ export const stayPages: StayPage[] = [
     description: "Compare Kyoto Station area and Gion for your Kyoto stay. Transport access, temple proximity, ryokan options, and which suits your trip style.",
     quickRec: {
       area: "Kyoto Station area",
-      why: "Best for first-timers using JR Pass. Direct Shinkansen access, bus hub for all major temples, and easy luggage handling. Gion is better for atmosphere but worse for logistics.",
+      why: "Best for first-timers who prioritize easy Shinkansen access. Direct platforms, bus hub for major temples, and simple luggage handling. Gion is better for atmosphere but worse for logistics.",
       link: hotelKyotoStation,
     },
     areas: [

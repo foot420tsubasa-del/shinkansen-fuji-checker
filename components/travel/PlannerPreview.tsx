@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Card } from "@/components/ui/Card";
 import { JR_PASS_URL } from "@/src/affiliateLinks";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 
 const routeStops = [
   { nameKey: "tokyo", detailKey: "start", x: 15, y: 70 },
@@ -173,7 +174,7 @@ export function PlannerPreview() {
         <a
           href={JR_PASS_URL}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={AFFILIATE_REL}
           className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm font-semibold text-amber-800 transition-all hover:bg-amber-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200"
         >
           {t("checkJrPass")}

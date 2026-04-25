@@ -3,6 +3,7 @@ import { ArrowRight, Map } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
+import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { itineraryPages } from "@/lib/content/itineraries";
 
 const paceConfig = {
@@ -11,17 +12,25 @@ const paceConfig = {
   fast: { label: "Fast", color: "bg-red-50 text-red-700 border-red-200" },
 };
 
-export const metadata: Metadata = {
-  title: "Japan Itineraries — 5 to 14 Day Trip Plans | fujiseat",
-  description:
-    "Day-by-day Japan itineraries for first-time visitors. From a 5-day express trip to a 14-day deep dive — each plan includes hotels, transport, and booking links.",
-  openGraph: {
-    title: "Japan Itineraries — Day-by-Day Trip Plans",
-    description:
-      "Detailed itineraries from 5 to 14 days. Hotels, transport, and activities included.",
-    siteName: "fujiseat",
-  },
+type Props = {
+  params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Japan Itineraries — 5 to 14 Day Trip Plans | fujiseat",
+    description:
+      "Day-by-day Japan itineraries for first-time visitors. From a 5-day express trip to a 14-day deep dive — each plan includes hotels, transport, and booking links.",
+    robots: locale === "en" ? undefined : { index: false, follow: true },
+    openGraph: {
+      title: "Japan Itineraries — Day-by-Day Trip Plans",
+      description:
+        "Detailed itineraries from 5 to 14 days. Hotels, transport, and activities included.",
+      siteName: "fujiseat",
+    },
+  };
+}
 
 export default function ItinerariesIndex() {
   return (
@@ -99,6 +108,7 @@ export default function ItinerariesIndex() {
       <p className="mt-8 text-center text-[10px] text-slate-400">
         Booking links are partner links — we earn a small commission at no extra cost to you.
       </p>
+      <LastCheckedNote className="mt-2 text-center" />
     </Container>
   );
 }

@@ -8,7 +8,7 @@
   "klook": {
     "heading": "Ready to book? Get your Shinkansen ticket via Klook (English OK)",
     "book": "Book Shinkansen",
-    "jrPass": "Get JR Pass"
+    "jrPass": "Compare JR Pass"
   },
   "home": {
     "brandTitle": "Shinkansen Mt. Fuji Seat Checker",
@@ -63,7 +63,7 @@
     "essentialsTitle": "Travel essentials for your Japan trip",
     "essentialsNote": "Klook affiliate links — English OK, instant mobile voucher.",
     "jrPassTitle": "JR Pass & Shinkansen tickets",
-    "jrPassDesc": "Best for 2+ long rides. Book in English on Klook.",
+    "jrPassDesc": "Usually worth it only for multiple long-distance rides. Compare before buying.",
     "esimTitle": "Japan eSIM",
     "esimDesc": "Stay online the whole trip — no SIM swap needed.",
     "nexTitle": "Narita Express (N'EX)",
@@ -217,8 +217,8 @@
       "14-day: ¥80,000",
       "21-day: ¥100,000"
     ],
-    "jrPassWorth": "JR Pass is worth it if taking 2+ long Shinkansen rides (e.g. Tokyo → Kyoto → Hiroshima → Tokyo). For a single round trip Tokyo ↔ Osaka, single tickets are cheaper.",
-    "jrNozomiNote": "Note: The Nozomi (fastest) requires an additional NOZOMI MIZUHO Ticket (¥4,960 Tokyo→Kyoto/Osaka) on top of your JR Pass. Without it, use Hikari or Kodama — these stop near Shin-Fuji, which is actually better for Mt. Fuji views anyway.",
+    "jrPassWorth": "JR Pass is usually worth comparing only if you take multiple long Shinkansen rides (e.g. Tokyo → Kyoto → Hiroshima → Tokyo). For a simple Tokyo ↔ Osaka round trip, single tickets are often cheaper.",
+    "jrNozomiNote": "Note: The Nozomi (fastest) may require an additional NOZOMI MIZUHO Ticket (approx. ¥4,960 Tokyo→Kyoto/Osaka) on top of your JR Pass. Without it, use Hikari or Kodama — these stop near Shin-Fuji, which is actually better for Mt. Fuji views anyway.",
     "seasonH2": "Best Season & Time of Day to See Mt. Fuji",
     "seasonLabel": "Season guide",
     "seasons": [
@@ -349,7 +349,7 @@
     "checklist": "Pre-departure checklist",
     "fullItinerary": "Full itinerary",
     "routeLabel": "{name} route",
-    "jrRecommended": "✓ JR Pass recommended",
+    "jrRecommended": "Compare JR Pass vs single tickets",
     "jrMayNotPayOff": "△ JR Pass may not pay off",
     "partnerNote": "Links marked with ↗ are partner links. We earn a small commission at no extra cost to you.",
     "allSet": "All set — enjoy Japan!",
@@ -361,7 +361,7 @@
         "name": "7-day Classic",
         "desc": "Tokyo → Fuji → Kyoto → Osaka",
         "duration": "7 days",
-        "jrNote": "Covers Tokyo→Kyoto Shinkansen + N'EX airport transfer"
+        "jrNote": "JR Pass is usually not worth it for this simple route. Single tickets are often cheaper unless you add Hiroshima, multiple long-distance rides, or return to Tokyo by Shinkansen."
       },
       "express-5": {
         "name": "5-day Express",
@@ -373,13 +373,13 @@
         "name": "10-day with Fuji",
         "desc": "Tokyo → Kawaguchiko → Hakone → Kyoto → Osaka",
         "duration": "10 days",
-        "jrNote": "Covers Shinkansen + N'EX + JR local trains"
+        "jrNote": "Compare first. Single tickets are often cheaper unless you add several long-distance JR rides."
       },
       "deep-14": {
         "name": "14-day Explorer",
         "desc": "Tokyo → Nikko → Fuji → Kyoto → Hiroshima → Osaka",
         "duration": "14 days",
-        "jrNote": "Easily pays off — Tokyo→Kyoto→Hiroshima→Osaka covered"
+        "jrNote": "Usually worth comparing because this route has several long-distance JR legs."
       }
     },
     "cities": {
@@ -443,8 +443,8 @@
       },
       "jrPass": {
         "label": "JR Pass",
-        "desc": "Covers Shinkansen + most JR trains.",
-        "cta": "See JR Pass"
+        "desc": "Usually worth it only for multiple long-distance rides.",
+        "cta": "Compare JR Pass"
       },
       "insurance": {
         "label": "Travel insurance",
@@ -514,7 +514,7 @@
       "threeNights": "3 nights",
       "kyotoBase": "Good Kyoto base",
       "planTrip": "Plan trip",
-      "checkJrPass": "Check JR Pass",
+      "checkJrPass": "Compare JR Pass",
       "routeMap": "Route map"
     }
   },
