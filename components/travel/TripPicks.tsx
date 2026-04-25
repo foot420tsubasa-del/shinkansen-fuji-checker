@@ -34,9 +34,10 @@ const iconByCategory: Record<string, typeof Train> = {
 type TripPicksProps = {
   picks: TripPick[];
   compact?: boolean;
+  sticky?: boolean;
 };
 
-export function TripPicks({ picks, compact = false }: TripPicksProps) {
+export function TripPicks({ picks, compact = false, sticky = !compact }: TripPicksProps) {
   const t = useTranslations("home.tripPicks");
   const [checked, setChecked] = useState<Record<string, boolean>>({});
   const [mounted, setMounted] = useState(false);
@@ -63,7 +64,7 @@ export function TripPicks({ picks, compact = false }: TripPicksProps) {
   const doneCount = picks.filter((p) => checked[p.id]).length;
 
   return (
-    <Card tone={compact ? "surface" : "accent"} className={["overflow-hidden", compact ? "" : "lg:sticky lg:top-6"].join(" ")}>
+    <Card tone={compact ? "surface" : "accent"} className={["overflow-hidden", sticky ? "lg:sticky lg:top-6" : ""].join(" ")}>
       <div className="border-b border-slate-200/80 bg-white px-5 py-4">
         <div className="flex items-start justify-between gap-3">
           <div>

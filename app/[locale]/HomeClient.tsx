@@ -166,12 +166,15 @@ export default function HomeClient() {
 
             <div id="planner" className="grid gap-3">
                 <PlannerPreview />
-                <TripPicks picks={starterTripPicks.map(p => ({
-                  ...p,
-                  title: t(`tripPicks.${p.id}.title`),
-                  description: t(`tripPicks.${p.id}.desc`),
-                  cta: t(`tripPicks.${p.id}.cta`),
-                }))} />
+                <TripPicks
+                  sticky={false}
+                  picks={starterTripPicks.map(p => ({
+                    ...p,
+                    title: t(`tripPicks.${p.id}.title`),
+                    description: t(`tripPicks.${p.id}.desc`),
+                    cta: t(`tripPicks.${p.id}.cta`),
+                  }))}
+                />
                 <Link
                   href="/plan-your-trip"
                   className="group rounded-[24px] border border-sky-200 bg-sky-50/80 p-4 shadow-sm transition-colors hover:border-sky-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
