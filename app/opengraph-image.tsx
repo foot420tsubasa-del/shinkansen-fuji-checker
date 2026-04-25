@@ -40,7 +40,7 @@ export default async function Image() {
             marginBottom: 12,
           }}
         >
-          Best Seat: Seat E — Right Side Window
+          Best Seat: Seat E - Right Side Window
         </div>
         <div
           style={{
@@ -49,7 +49,7 @@ export default async function Image() {
             textAlign: "center",
           }}
         >
-          Free tool for Tokyo ⇄ Osaka / Kyoto travellers
+          Free tool for Tokyo to Osaka / Kyoto travellers
         </div>
         <div
           style={{

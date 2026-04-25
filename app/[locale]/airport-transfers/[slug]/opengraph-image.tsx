@@ -10,7 +10,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   return createOgImage({
     emoji: "✈️",
     title: page?.title ?? "Airport Transfer",
-    subtitle: page ? `${page.from} → ${page.to} — compare options` : "Compare transfer options",
+    subtitle: page ? `${page.from} to ${page.to} - compare options` : "Compare transfer options",
     accent: "#0369a1",
   });
 }
