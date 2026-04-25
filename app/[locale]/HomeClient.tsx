@@ -167,7 +167,6 @@ export default function HomeClient() {
             <div id="planner" className="grid gap-3">
                 <PlannerPreview />
                 <TripPicks
-                  sticky={false}
                   picks={starterTripPicks.map(p => ({
                     ...p,
                     title: t(`tripPicks.${p.id}.title`),
