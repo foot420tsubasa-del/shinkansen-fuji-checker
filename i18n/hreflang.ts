@@ -8,7 +8,7 @@ const LOCALES = ["en", "pt-BR", "es", "ko", "zh-TW", "zh-CN", "fr"] as const;
  * path=""  → home  (en: /,  others: /pt-BR  /es  /ko …)
  * path="/guide" → guide (en: /guide, others: /pt-BR/guide …)
  */
-export function getAlternates(path: "" | "/guide", locale: string) {
+export function getAlternates(path: "" | "/guide" | "/plan-your-trip", locale: string) {
   const enUrl = path === "" ? `${BASE}/` : `${BASE}${path}`;
   const localeUrl = (loc: string) =>
     loc === "en" ? enUrl : `${BASE}/${loc}${path}`;

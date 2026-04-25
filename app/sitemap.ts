@@ -9,6 +9,7 @@ const siteUrl = "https://fujiseat.com";
 const translatedPaths = [
   "",
   "/guide",
+  "/plan-your-trip",
   "/planner",
   "/command-center",
 ];

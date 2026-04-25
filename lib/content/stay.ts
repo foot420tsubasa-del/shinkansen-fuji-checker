@@ -1,5 +1,5 @@
 import type { TripPick } from "@/lib/trip-picks";
-import { getAffUrl } from "@/src/affiliateLinks";
+import { requireAffUrl } from "@/src/affiliateLinks";
 
 
 // ─── Types ──────────────────────────────────────────────────────────────────
@@ -42,15 +42,15 @@ export type StayPage = {
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
-const ESIM_URL = getAffUrl("esim");
-const JR_PASS_URL = getAffUrl("jrPass");
-const hotelTokyo = getAffUrl("hotelTokyo");
-const hotelShinjuku = getAffUrl("hotelShinjuku");
-const hotelUeno = getAffUrl("hotelUeno");
-const hotelAsakusa = getAffUrl("hotelAsakusa");
-const hotelKyotoStation = getAffUrl("hotelKyotoStation");
-const hotelGion = getAffUrl("hotelGion");
-const hotelKawaguchiko = getAffUrl("hotelKawaguchiko");
+const ESIM_URL = requireAffUrl("esim");
+const JR_PASS_URL = requireAffUrl("jrPass");
+const hotelTokyo = requireAffUrl("hotelTokyo");
+const hotelShinjuku = requireAffUrl("hotelShinjuku");
+const hotelUeno = requireAffUrl("hotelUeno");
+const hotelAsakusa = requireAffUrl("hotelAsakusa");
+const hotelKyotoStation = requireAffUrl("hotelKyotoStation");
+const hotelGion = requireAffUrl("hotelGion");
+const hotelKawaguchiko = requireAffUrl("hotelKawaguchiko");
 
 // ─── Shared next actions ────────────────────────────────────────────────────
 

@@ -27,16 +27,35 @@ export type LinkConfig = {
 
 export const AFFILIATE_LINKS: Record<string, LinkConfig> = linkData as Record<string, LinkConfig>;
 
-export function getAffUrl(linkId: string): string {
+export function getAffUrl(linkId: string): string | null {
   const link = AFFILIATE_LINKS[linkId];
-  if (!link) return "#";
-  if (link.directUrl) return link.directUrl;
-  return klookAff(link.klookPath, link.adid);
+  if (!link) return null;
+  if (link.directUrl.trim()) return link.directUrl;
+  if (link.provider === "klook" && link.klookPath.trim()) {
+    return klookAff(link.klookPath, link.adid);
+  }
+  return null;
 }
 
-export const JR_PASS_URL = getAffUrl("jrPass");
-export const ESIM_URL = getAffUrl("esim");
-export const AIRPORT_TRANSFER_URL = getAffUrl("airportTransfer");
-export const INSURANCE_URL = getAffUrl("insurance");
-export const CAR_RENTAL_URL = getAffUrl("carRental");
+export function requireAffUrl(linkId: string): string {
+  const url = getAffUrl(linkId);
+  if (!url) {
+    throw new Error(`Affiliate link "${linkId}" is not configured with a usable URL.`);
+  }
+  return url;
+}
+
+export function getAffLabel(linkId: string): string {
+  return AFFILIATE_LINKS[linkId]?.label ?? linkId;
+}
+
+export function hasAffUrl(linkId: string): boolean {
+  return getAffUrl(linkId) !== null;
+}
+
+export const JR_PASS_URL = requireAffUrl("jrPass");
+export const ESIM_URL = requireAffUrl("esim");
+export const AIRPORT_TRANSFER_URL = requireAffUrl("airportTransfer");
+export const INSURANCE_URL = requireAffUrl("insurance");
+export const CAR_RENTAL_URL = requireAffUrl("carRental");
 export const KLOOK_URL = JR_PASS_URL;

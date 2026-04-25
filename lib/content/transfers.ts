@@ -1,5 +1,5 @@
 import type { TripPick } from "@/lib/trip-picks";
-import { getAffUrl } from "@/src/affiliateLinks";
+import { requireAffUrl } from "@/src/affiliateLinks";
 
 
 // ─── Types ──────────────────────────────────────────────────────────────────
@@ -31,12 +31,12 @@ export type TransferPage = {
 
 // ─── Affiliate URLs ─────────────────────────────────────────────────────────
 
-const nexUrl = getAffUrl("nex");
-const skylinerUrl = getAffUrl("skyliner");
-const limousineBusUrl = getAffUrl("limousineBus");
-const monorailUrl = getAffUrl("hanedaMonorail");
-const esimUrl = getAffUrl("esim");
-const jrPassUrl = getAffUrl("jrPass");
+const nexUrl = requireAffUrl("nex");
+const skylinerUrl = requireAffUrl("skyliner");
+const limousineBusUrl = requireAffUrl("limousineBus");
+const monorailUrl = requireAffUrl("hanedaMonorail");
+const esimUrl = requireAffUrl("esim");
+const jrPassUrl = requireAffUrl("jrPass");
 
 // ─── Shared next actions ────────────────────────────────────────────────────
 

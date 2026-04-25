@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
+import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -171,6 +172,24 @@ export default function HomeClient() {
                   description: t(`tripPicks.${p.id}.desc`),
                   cta: t(`tripPicks.${p.id}.cta`),
                 }))} />
+                <Link
+                  href="/plan-your-trip"
+                  className="group rounded-[24px] border border-sky-200 bg-sky-50/80 p-4 shadow-sm transition-colors hover:border-sky-300 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
+                >
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-sky-700">
+                    {t("planEssentialsEyebrow")}
+                  </p>
+                  <p className="mt-1 text-base font-semibold text-slate-950">
+                    {t("planEssentialsTitle")}
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">
+                    {t("planEssentialsDesc")}
+                  </p>
+                  <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-sky-700">
+                    {t("planEssentialsCta")}
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
             </div>
           </div>
         </section>

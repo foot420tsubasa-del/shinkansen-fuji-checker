@@ -19,7 +19,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
-import { getAffUrl } from "@/src/affiliateLinks";
+import { requireAffUrl } from "@/src/affiliateLinks";
 import { trackAffiliateClick, trackChecklistComplete, trackTemplateSelect } from "@/lib/analytics";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
@@ -99,11 +99,11 @@ type CheckData = {
 
 const CHECKLIST_DATA: CheckData[] = [
   { id: "passport", critical: true },
-  { id: "esim", critical: true, href: getAffUrl("esim"), hasLink: true },
-  { id: "train", critical: false, href: getAffUrl("jrPass"), hasLink: true },
+  { id: "esim", critical: true, href: requireAffUrl("esim"), hasLink: true },
+  { id: "train", critical: false, href: requireAffUrl("jrPass"), hasLink: true },
   { id: "transfer", critical: true, href: "/airport-transfers/narita-to-shinjuku", hasLink: true },
   { id: "hotel", critical: true, href: "/areas-to-stay/tokyo-first-time", hasLink: true },
-  { id: "insurance", critical: false, href: getAffUrl("insurance"), hasLink: true },
+  { id: "insurance", critical: false, href: requireAffUrl("insurance"), hasLink: true },
   { id: "cash", critical: false },
   { id: "maps", critical: false },
   { id: "translate", critical: false },
@@ -116,11 +116,11 @@ type BookingData = {
 };
 
 const BOOKING_DATA: BookingData[] = [
-  { key: "esim", href: getAffUrl("esim"), external: true },
+  { key: "esim", href: requireAffUrl("esim"), external: true },
   { key: "transfer", href: "/airport-transfers/narita-to-shinjuku", external: false },
   { key: "stay", href: "/areas-to-stay/tokyo-first-time", external: false },
-  { key: "jrPass", href: getAffUrl("jrPass"), external: true },
-  { key: "insurance", href: getAffUrl("insurance"), external: true },
+  { key: "jrPass", href: requireAffUrl("jrPass"), external: true },
+  { key: "insurance", href: requireAffUrl("insurance"), external: true },
 ];
 
 const EMERGENCY_DATA = [
@@ -712,7 +712,7 @@ export function PlannerClient() {
         <p className="mt-1">
           {t("footer.ready")}{" "}
           <a
-            href={getAffUrl("jrPass")}
+            href={requireAffUrl("jrPass")}
             target="_blank"
             rel={AFFILIATE_REL}
             onClick={() => trackAffiliateClick("planner-footer", "JR Pass")}
@@ -722,7 +722,7 @@ export function PlannerClient() {
           </a>
           {" "}{t("footer.or")}{" "}
           <a
-            href={getAffUrl("esim")}
+            href={requireAffUrl("esim")}
             target="_blank"
             rel={AFFILIATE_REL}
             onClick={() => trackAffiliateClick("planner-footer", "Japan eSIM")}

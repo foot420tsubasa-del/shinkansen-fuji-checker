@@ -1,5 +1,5 @@
 import type { TripPick } from "@/lib/trip-picks";
-import { getAffUrl } from "@/src/affiliateLinks";
+import { requireAffUrl } from "@/src/affiliateLinks";
 
 
 // ─── Types ──────────────────────────────────────────────────────────────────
@@ -29,23 +29,23 @@ export type ItineraryPage = {
 
 // ─── Affiliate URLs ─────────────────────────────────────────────────────────
 
-const jrPassUrl = getAffUrl("jrPass");
-const esimUrl = getAffUrl("esim");
-const tokyoUrl = getAffUrl("cityTokyo");
-const kyotoUrl = getAffUrl("cityKyoto");
-const osakaUrl = getAffUrl("cityOsaka");
-const hiroshimaUrl = getAffUrl("cityHiroshima");
-const nikkoUrl = getAffUrl("cityNikko");
-const hakoneUrl = getAffUrl("hakone");
-const naraUrl = getAffUrl("nara");
-const hotelShinjukuUrl = getAffUrl("hotelShinjuku");
-const hotelKyotoStationUrl = getAffUrl("hotelKyotoStation");
-const hotelOsakaUrl = getAffUrl("hotelOsaka");
-const hotelKawaguchikoUrl = getAffUrl("hotelKawaguchiko");
-const hotelHiroshimaUrl = getAffUrl("hotelHiroshima");
-const hotelHakoneUrl = getAffUrl("hotelHakone");
-const hotelUenoUrl = getAffUrl("hotelUeno");
-const hotelAsakusaUrl = getAffUrl("hotelAsakusa");
+const jrPassUrl = requireAffUrl("jrPass");
+const esimUrl = requireAffUrl("esim");
+const tokyoUrl = requireAffUrl("cityTokyo");
+const kyotoUrl = requireAffUrl("cityKyoto");
+const osakaUrl = requireAffUrl("cityOsaka");
+const hiroshimaUrl = requireAffUrl("cityHiroshima");
+const nikkoUrl = requireAffUrl("cityNikko");
+const hakoneUrl = requireAffUrl("hakone");
+const naraUrl = requireAffUrl("nara");
+const hotelShinjukuUrl = requireAffUrl("hotelShinjuku");
+const hotelKyotoStationUrl = requireAffUrl("hotelKyotoStation");
+const hotelOsakaUrl = requireAffUrl("hotelOsaka");
+const hotelKawaguchikoUrl = requireAffUrl("hotelKawaguchiko");
+const hotelHiroshimaUrl = requireAffUrl("hotelHiroshima");
+const hotelHakoneUrl = requireAffUrl("hotelHakone");
+const hotelUenoUrl = requireAffUrl("hotelUeno");
+const hotelAsakusaUrl = requireAffUrl("hotelAsakusa");
 
 // ─── Shared next actions ────────────────────────────────────────────────────
 

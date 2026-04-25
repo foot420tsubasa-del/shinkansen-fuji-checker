@@ -19,6 +19,7 @@ import {
   ROUTE_TEMPLATES,
 } from "./japanTripModel";
 import { getAffUrl } from "./affiliateLinks";
+import { AFFILIATE_REL } from "../lib/link-rel";
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
 const LS_KEY = "fujiseat_checklist";
@@ -566,7 +567,7 @@ function BookingContextPanel({ phase, city }) {
             key={item.label}
             href={item.url}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={AFFILIATE_REL}
             style={{
               display: "block",
               textDecoration: "none",
@@ -680,7 +681,7 @@ function CityIntelPanel({ city }) {
         <div style={{ fontFamily: "'Geist Mono', monospace", fontSize: "12px", color: "#c8d8f0", fontWeight: 600 }}>
           {city.name} — {city.codename}
         </div>
-        <a href={city.klookUrl} target="_blank" rel="noopener noreferrer" style={{
+        <a href={city.klookUrl} target="_blank" rel={AFFILIATE_REL} style={{
           fontSize: "9px", color: "#4a9eff", textDecoration: "none",
           border: "1px solid #1e3a5f", borderRadius: "3px", padding: "2px 7px", fontFamily: "monospace",
         }}>OPEN KLOOK ↗</a>
@@ -790,7 +791,7 @@ function Checklist({ items, onToggle }) {
               {item.label}
             </span>
             {item.actionUrl && !item.done && (
-              <a href={item.actionUrl} target="_blank" rel="noopener noreferrer"
+              <a href={item.actionUrl} target="_blank" rel={AFFILIATE_REL}
                 onClick={(e) => e.stopPropagation()}
                 style={{
                   fontSize: "8px", color: "#4a9eff", textDecoration: "none",
@@ -815,7 +816,7 @@ function BookingEssentialsPanel() {
             key={item.label}
             href={item.url}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={AFFILIATE_REL}
             style={{
               display: "block", textDecoration: "none",
               background: "rgba(74,158,255,0.08)",
@@ -1258,7 +1259,7 @@ function RestaurantPanel({ selectedCityId }) {
     <>
       <PanelTitle>Dining — {city?.name || cityId.toUpperCase()}</PanelTitle>
       {tourLink && (
-        <a href={tourLink.url} target="_blank" rel="noopener noreferrer" style={{
+        <a href={tourLink.url} target="_blank" rel={AFFILIATE_REL} style={{
           display: "block", marginBottom: 10, padding: "8px 10px",
           background: "linear-gradient(135deg, rgba(245,158,11,0.1), rgba(74,158,255,0.1))",
           border: "1px solid rgba(245,158,11,0.3)", borderRadius: 5,
@@ -1313,7 +1314,7 @@ function AccommodationPanel({ selectedCityId }) {
   return (
     <>
       <PanelTitle>Stay — {city?.name || cityId.toUpperCase()}</PanelTitle>
-      <a href={acc.klookUrl} target="_blank" rel="noopener noreferrer" style={{
+      <a href={acc.klookUrl} target="_blank" rel={AFFILIATE_REL} style={{
         display: "block", marginBottom: 10, padding: "8px 10px",
         background: "linear-gradient(135deg, rgba(34,197,94,0.1), rgba(74,158,255,0.1))",
         border: "1px solid rgba(34,197,94,0.3)", borderRadius: 5,
@@ -1403,7 +1404,7 @@ function DailyBriefingModal({ briefing, onClose }) {
             <div style={{ fontSize: 9, color: "#4a6080", letterSpacing: "0.1em", marginTop: 14, marginBottom: 8 }}>RECOMMENDED BOOKINGS</div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
               {briefing.recommendedBookings.map((b, i) => (
-                <a key={i} href={b.url} target="_blank" rel="noopener noreferrer" style={{
+                <a key={i} href={b.url} target="_blank" rel={AFFILIATE_REL} style={{
                   padding: "6px 12px", background: "rgba(74,158,255,0.08)",
                   border: "1px solid rgba(74,158,255,0.25)", borderRadius: 5,
                   fontSize: 10, color: "#4a9eff", fontFamily: "monospace",

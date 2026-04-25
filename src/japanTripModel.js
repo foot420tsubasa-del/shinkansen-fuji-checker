@@ -267,9 +267,9 @@ export const ROUTE_TEMPLATES = [
 
 export const MISSION_CHECKLIST = [
   {
-    id: "jrpass", label: "JR Pass activated", done: true, critical: false,
+    id: "jrpass", label: "Compare JR Pass vs single tickets", done: false, critical: false,
     actionUrl: getAffUrl("jrPass"),
-    actionLabel: "Get JR Pass",
+    actionLabel: "Compare",
   },
   { id: "suica", label: "Suica IC Card loaded", done: true, critical: true },
   {
