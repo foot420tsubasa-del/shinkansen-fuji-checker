@@ -34,6 +34,9 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale}>
+      <head>
+        <meta name="agd-partner-manual-verification" />
+      </head>
       <body>
         <GoogleAnalytics />
         <NextIntlClientProvider messages={messages}>
