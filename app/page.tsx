@@ -5,6 +5,9 @@ import { getAlternates } from "@/i18n/hreflang";
 
 export const metadata: Metadata = {
   alternates: getAlternates("", "en"),
+  other: {
+    "agd-partner-manual-verification": "",
+  },
 };
 
 // Should not be rendered in practice (middleware handles routing).

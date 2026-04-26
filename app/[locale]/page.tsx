@@ -14,6 +14,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("homeTitle"),
     description: t("homeDesc"),
     alternates: getAlternates("", locale),
+    other: {
+      "agd-partner-manual-verification": "",
+    },
   };
 }
 
