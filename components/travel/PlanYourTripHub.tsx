@@ -17,7 +17,6 @@ type Category = {
   description: string;
   icon: typeof Train;
   items: ExternalItem[];
-  comingSoon?: string[];
 };
 
 const categories: Category[] = [
@@ -57,7 +56,6 @@ const categories: Category[] = [
       { label: "Shin-Osaka / Osaka hotels", description: "Easy Kansai base for Osaka and onward rail.", linkId: "hotelOsaka" },
       { label: "Namba hotels", description: "Best for Dotonbori nightlife and food.", linkId: "hotelOsaka" },
     ],
-    comingSoon: ["Shinagawa hotel picks"],
   },
   {
     title: "Luggage & Transfers",
@@ -67,7 +65,6 @@ const categories: Category[] = [
       { label: "Private car charter", description: "Useful for families, Fuji-area days, or heavy luggage.", linkId: "carRental" },
       { label: "Airport transfer guide", description: "Choose train, bus, or private transfer by arrival style.", href: "/airport-transfers" },
     ],
-    comingSoon: ["Luggage delivery", "Private transfer"],
   },
   {
     title: "See Mt. Fuji Up Close",
@@ -78,7 +75,6 @@ const categories: Category[] = [
       { label: "Hakone Free Pass", description: "A classic Fuji-area and onsen side trip.", linkId: "hakone" },
       { label: "Hakone hotels", description: "Onsen stays that pair well with the golden route.", linkId: "hotelHakone" },
     ],
-    comingSoon: ["Private Mt. Fuji tour", "Group Mt. Fuji tour", "Kawaguchiko day trip"],
   },
   {
     title: "City Activities",
@@ -200,16 +196,6 @@ export function PlanYourTripHub() {
                     );
                   })}
                 </div>
-
-                {category.comingSoon && category.comingSoon.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-1.5">
-                    {category.comingSoon.map((label) => (
-                      <span key={label} className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-1 text-[10px] font-semibold text-slate-500">
-                        {label} · coming soon
-                      </span>
-                    ))}
-                  </div>
-                )}
               </Card>
             );
           })}
