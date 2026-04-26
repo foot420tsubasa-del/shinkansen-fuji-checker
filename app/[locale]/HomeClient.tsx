@@ -87,7 +87,7 @@ export default function HomeClient() {
               <p className="text-sm font-semibold text-white md:text-base">
                 fujiseat
               </p>
-              <p className="hidden text-xs leading-5 text-slate-500 sm:block">
+              <p className="hidden text-xs font-semibold leading-5 text-sky-200 sm:block">
                 {t("nav.hub")}
               </p>
             </div>

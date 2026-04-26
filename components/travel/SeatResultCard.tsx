@@ -284,7 +284,7 @@ export function SeatMapPanel({
       <div className="border-b border-slate-200 bg-white px-4 py-4">
         <p className="text-[11px] font-semibold uppercase text-sky-700">Seat map</p>
         <h2 className="mt-1 text-lg font-semibold text-slate-950">
-          {highlighted ? `Seat ${recommendation.standardWindowSeat}` : "Seat map ready"}
+          {highlighted ? `Seat ${recommendation.standardWindowSeat}` : "Check your seat below"}
         </h2>
         <p className="mt-1 text-xs leading-5 text-slate-500">{directionLabel}</p>
       </div>
