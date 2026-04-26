@@ -149,8 +149,8 @@ export function SeatResultCard({
                         key={`${row}${seat}`}
                         label={seat}
                         active={highlighted && seat === recommendation.standardWindowSeat}
-                        recommended={seat === recommendation.standardWindowSeat}
-                        muted={seat === recommendation.fallbackSeat}
+                        recommended={highlighted && seat === recommendation.standardWindowSeat}
+                        muted={highlighted && seat === recommendation.fallbackSeat}
                       />
                     ))}
                     </div>
@@ -163,8 +163,8 @@ export function SeatResultCard({
                         key={`${row}${seat}`}
                         label={seat}
                         active={highlighted && seat === recommendation.standardWindowSeat}
-                        recommended={seat === recommendation.standardWindowSeat}
-                        muted={seat === recommendation.fallbackSeat}
+                        recommended={highlighted && seat === recommendation.standardWindowSeat}
+                        muted={highlighted && seat === recommendation.fallbackSeat}
                       />
                     ))}
                     </div>
@@ -284,7 +284,7 @@ export function SeatMapPanel({
       <div className="border-b border-slate-200 bg-white px-4 py-4">
         <p className="text-[11px] font-semibold uppercase text-sky-700">Seat map</p>
         <h2 className="mt-1 text-lg font-semibold text-slate-950">
-          Seat {recommendation.standardWindowSeat}
+          {highlighted ? `Seat ${recommendation.standardWindowSeat}` : "Seat map ready"}
         </h2>
         <p className="mt-1 text-xs leading-5 text-slate-500">{directionLabel}</p>
       </div>
@@ -303,7 +303,7 @@ export function SeatMapPanel({
         <div className="mt-3 space-y-2">
           <div className="flex items-center justify-center gap-1.5 rounded-2xl border border-sky-100 bg-white px-3 py-2 text-[11px] font-semibold text-sky-700">
             <Mountain className="h-3.5 w-3.5" />
-            <span>{t("fujisideLabel")} / window side</span>
+            <span>{t("fujiWindowLabel")}</span>
           </div>
 
           <div className="relative rounded-[30px] border border-slate-200 bg-white px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]">
@@ -316,7 +316,7 @@ export function SeatMapPanel({
                     row={row}
                     recommendation={recommendation}
                     highlighted={highlighted}
-                    windowSide
+                    windowSide={highlighted}
                   />
                 ))}
               </div>
@@ -349,7 +349,7 @@ export function SeatMapPanel({
         </div>
 
         <p className="mt-3 rounded-2xl border border-sky-100 bg-sky-50 px-3 py-2 text-xs leading-5 text-sky-900">
-          {highlighted ? "Seat E is highlighted." : "Press Check best seat to highlight Seat E."}
+          {highlighted ? "Seat E is highlighted." : "Tap Check best seat to highlight your Mt. Fuji-side seat."}
         </p>
 
         {(sourceLabel || disclaimer) && (
@@ -450,8 +450,8 @@ function SeatPair({
           key={`${row}${seat}`}
           label={seat}
           active={highlighted && seat === recommendation.standardWindowSeat}
-          recommended={seat === recommendation.standardWindowSeat}
-          muted={seat === recommendation.fallbackSeat}
+          recommended={highlighted && seat === recommendation.standardWindowSeat}
+          muted={highlighted && seat === recommendation.fallbackSeat}
         />
       ))}
     </div>

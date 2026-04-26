@@ -32,6 +32,9 @@
     "readGuide": "Read the full Mt. Fuji view guide",
     "visChecking": "Checking today's Mt. Fuji visibility…",
     "visUnavailable": "Weather data unavailable – seat side is still correct, please check local forecast.",
+    "visLoadingFallback": "Visibility forecast loading — refresh in a moment for live data.",
+    "visErrorFallback": "Live visibility unavailable right now. Check season tips in the",
+    "visGuideLink": "guide",
     "visHigh": "HIGH chance to see Mt. Fuji",
     "visMedium": "MIXED – maybe visible",
     "visLow": "LOW chance – likely hidden",
@@ -45,7 +48,8 @@
     "resultVisError": "Couldn't load weather data. Seat side is still correct, but please check the local forecast separately.",
     "seaSide": "Sea side",
     "aisle": "Aisle",
-    "fujisideLabel": "Mt. Fuji / window side",
+    "fujisideLabel": "Mt. Fuji side",
+    "fujiWindowLabel": "Mt. Fuji window",
     "trainInterior": "Train interior",
     "fujisideArrow": "Window / Mt. Fuji side →",
     "exampleRow": "Example row (standard 3+2 car)",
@@ -80,9 +84,15 @@
     "planEssentialsTitle": "Plan your Japan trip essentials",
     "planEssentialsDesc": "Rail, arrival, hotels, Fuji side trips, and city activities after choosing your Shinkansen seat.",
     "planEssentialsCta": "Open essentials hub",
+    "makerNoteEyebrow": "Maker note",
+    "makerNoteBody": "I'm a Tokyo-based Japanese creator. I built this because tourists kept asking me the same Shinkansen + Mt. Fuji questions, and the English answers online were scattered or off. This site is the answer I'd give in person — just typed up.",
+    "makerNoteCta": "Read more →",
     "footerEsim": "Need WiFi? Get eSIM",
     "footerDisclaimer": "Based on publicly available information from JR Central. This is an independent, unofficial tool and not endorsed by any JR company. Seat info is provided as-is; always follow official guidance at stations and on trains.",
     "footerBuiltBy": "Built by a Japanese creator. Powered by Klook affiliate links.",
+    "footerCredit": "Built by a Tokyo-based Japanese creator for international travellers.",
+    "footerIndependent": "Independent and unofficial. Based on publicly available information from JR Central.",
+    "footerAffiliate": "Some links are Klook affiliate links — using them helps keep this site free.",
     "nav": {
       "hub": "Japan travel utility hub",
       "seat": "Seat Checker",
@@ -136,9 +146,14 @@
         "cta": "See itineraries"
       },
       "shinkansen": {
-        "title": "Shinkansen ticket",
+        "title": "Single Shinkansen ticket",
         "desc": "Book after you know the Fuji-side seat.",
         "cta": "Book train"
+      },
+      "jr-pass": {
+        "title": "Compare JR Pass",
+        "desc": "Usually worth it only for multiple long-distance rides.",
+        "cta": "Compare"
       },
       "esim": {
         "title": "Japan eSIM",

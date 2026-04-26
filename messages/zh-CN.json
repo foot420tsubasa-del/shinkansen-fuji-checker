@@ -32,6 +32,9 @@
     "readGuide": "阅读完整富士山观赏指南",
     "visChecking": "正在确认今日富士山能见度…",
     "visUnavailable": "无法获取天气数据 — 座位方向仍然正确，请查看当地天气预报。",
+    "visLoadingFallback": "能见度预报正在加载，请稍后刷新查看实时数据。",
+    "visErrorFallback": "当前无法获取实时能见度。请在",
+    "visGuideLink": "指南",
     "visHigh": "看到富士山的概率高",
     "visMedium": "天气多变 — 可能可见",
     "visLow": "概率低 — 可能被云遮挡",
@@ -45,7 +48,8 @@
     "resultVisError": "无法加载天气数据。座位方向仍然正确，请另行确认当地天气预报。",
     "seaSide": "海洋侧",
     "aisle": "走道",
-    "fujisideLabel": "富士山 / 窗侧",
+    "fujisideLabel": "富士山侧",
+    "fujiWindowLabel": "富士山侧窗",
     "trainInterior": "车厢内部",
     "fujisideArrow": "窗侧 / 富士山方向 →",
     "exampleRow": "座位示意图（标准 3+2 车厢）",
@@ -80,9 +84,15 @@
     "planEssentialsTitle": "规划日本旅行必备项目",
     "planEssentialsDesc": "选好新干线座位后，整理铁路、抵达交通、住宿、富士山近郊与城市活动。",
     "planEssentialsCta": "打开必备中心",
+    "makerNoteEyebrow": "制作者说明",
+    "makerNoteBody": "我是住在东京的日本制作者。很多旅行者反复询问新干线和富士山的问题，而英文信息分散或不准确，所以我做了这个网站。",
+    "makerNoteCta": "了解更多 →",
     "footerEsim": "需要 WiFi？购买 eSIM",
     "footerDisclaimer": "数据来源：JR 东海公开资讯。本工具为独立非官方工具，与任何 JR 公司无关。",
     "footerBuiltBy": "由日本制作者制作。通过 Klook 联盟链接运营。",
+    "footerCredit": "由住在东京的日本人为国际旅行者制作。",
+    "footerIndependent": "独立非官方网站。基于 JR 东海公开信息。",
+    "footerAffiliate": "部分链接为 Klook 联盟链接，使用它们有助于维持本站免费。",
     "nav": {
       "hub": "日本旅行实用工具",
       "seat": "座位查询器",
@@ -136,9 +146,14 @@
         "cta": "查看行程"
       },
       "shinkansen": {
-        "title": "新干线车票",
+        "title": "新干线单程车票",
         "desc": "确认富士山侧座位后再预订。",
         "cta": "预订列车"
+      },
+      "jr-pass": {
+        "title": "比较 JR Pass",
+        "desc": "通常只有多次长途移动才比较值得。",
+        "cta": "比较"
       },
       "esim": {
         "title": "日本 eSIM",

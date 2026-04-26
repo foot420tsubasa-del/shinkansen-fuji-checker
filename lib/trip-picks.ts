@@ -26,7 +26,7 @@ export const starterTripPicks: TripPick[] = [
   {
     id: "shinkansen",
     category: "train",
-    title: "Book Shinkansen ticket",
+    title: "Single Shinkansen ticket",
     description: "Book after you know the Fuji-side seat.",
     cta: "Book ticket",
     href: SHINKANSEN_TICKET_URL,

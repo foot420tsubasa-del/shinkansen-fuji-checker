@@ -32,6 +32,9 @@
     "readGuide": "閱讀完整富士山觀賞指南",
     "visChecking": "正在確認今日富士山能見度…",
     "visUnavailable": "無法取得天氣資料 — 座位方向仍然正確，請查看當地天氣預報。",
+    "visLoadingFallback": "能見度預報正在載入，請稍後重新整理查看即時資料。",
+    "visErrorFallback": "目前無法取得即時能見度。請在",
+    "visGuideLink": "指南",
     "visHigh": "看到富士山的機率高",
     "visMedium": "天氣多變 — 可能可見",
     "visLow": "機率低 — 可能被雲遮蔽",
@@ -45,7 +48,8 @@
     "resultVisError": "無法載入天氣資料。座位方向仍然正確，請另行確認當地天氣預報。",
     "seaSide": "海洋側",
     "aisle": "走道",
-    "fujisideLabel": "富士山 / 窗側",
+    "fujisideLabel": "富士山側",
+    "fujiWindowLabel": "富士山側窗",
     "trainInterior": "車廂內部",
     "fujisideArrow": "窗側 / 富士山方向 →",
     "exampleRow": "座位示意圖（標準 3+2 車廂）",
@@ -80,9 +84,15 @@
     "planEssentialsTitle": "規劃日本旅行必備項目",
     "planEssentialsDesc": "選好新幹線座位後，整理鐵路、抵達交通、住宿、富士山近郊與城市活動。",
     "planEssentialsCta": "開啟必備中心",
+    "makerNoteEyebrow": "製作者說明",
+    "makerNoteBody": "我是住在東京的日本製作者。很多旅客反覆詢問新幹線和富士山的問題，而英文資訊分散或不準確，所以我做了這個網站。",
+    "makerNoteCta": "了解更多 →",
     "footerEsim": "需要 WiFi？購買 eSIM",
     "footerDisclaimer": "資料來源：JR 東海公開資訊。本工具為獨立非官方工具，與任何 JR 公司無關。",
     "footerBuiltBy": "由日本製作者製作。透過 Klook 聯盟連結營運。",
+    "footerCredit": "由住在東京的日本人為國際旅客製作。",
+    "footerIndependent": "獨立非官方網站。基於 JR 東海公開資訊。",
+    "footerAffiliate": "部分連結為 Klook 聯盟連結，使用它們有助於維持本站免費。",
     "nav": {
       "hub": "日本旅行實用工具",
       "seat": "座位查詢器",
@@ -136,9 +146,14 @@
         "cta": "查看行程"
       },
       "shinkansen": {
-        "title": "新幹線車票",
+        "title": "新幹線單程車票",
         "desc": "確認富士山側座位後再預訂。",
         "cta": "預訂列車"
+      },
+      "jr-pass": {
+        "title": "比較 JR Pass",
+        "desc": "通常只有多次長途移動才比較值得。",
+        "cta": "比較"
       },
       "esim": {
         "title": "日本 eSIM",

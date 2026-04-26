@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { directions, type DirectionId, type FujiVisibility } from "@/lib/seat-checker";
 
 const FUJI_VIS_CONFIG = {
@@ -12,7 +13,7 @@ const FUJI_VIS_CONFIG = {
   low: { emoji: "☁️", bg: "rgba(148,163,184,0.12)", border: "rgba(148,163,184,0.3)", color: "#94a3b8" },
 } as const;
 
-function FujiWeatherStrip({ data, loading, error }: { data: FujiVisibility | null; loading: boolean; error: boolean }) {
+function FujiWeatherStrip({ data, loading, slowLoading, error }: { data: FujiVisibility | null; loading: boolean; slowLoading: boolean; error: boolean }) {
   const t = useTranslations("home");
 
   if (loading) {
@@ -20,7 +21,7 @@ function FujiWeatherStrip({ data, loading, error }: { data: FujiVisibility | nul
       <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-2.5 backdrop-blur-sm">
         <span className="text-xl leading-none">🌤️</span>
         <div>
-          <p className="text-[11px] font-semibold text-slate-300">{t("visChecking")}</p>
+          <p className="text-[11px] font-semibold text-slate-300">{slowLoading ? t("visLoadingFallback") : t("visChecking")}</p>
           <p className="text-[10px] text-slate-500">Mt. Fuji visibility</p>
         </div>
       </div>
@@ -32,7 +33,12 @@ function FujiWeatherStrip({ data, loading, error }: { data: FujiVisibility | nul
       <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-2.5 backdrop-blur-sm">
         <span className="text-xl leading-none">🌫️</span>
         <div>
-          <p className="text-[11px] font-semibold text-slate-400">{t("visUnavailable")}</p>
+          <p className="text-[11px] font-semibold text-slate-400">
+            {t("visErrorFallback")}{" "}
+            <Link href="/guide" className="text-sky-200 underline underline-offset-2">
+              {t("visGuideLink")}
+            </Link>
+          </p>
           <p className="text-[10px] text-slate-500">Mt. Fuji visibility</p>
         </div>
       </div>
@@ -70,6 +76,7 @@ type SeatCheckerPanelProps = {
   onCheck: () => void;
   visibility: FujiVisibility | null;
   visibilityLoading: boolean;
+  visibilitySlowLoading?: boolean;
   visibilityError: boolean;
 };
 
@@ -79,6 +86,7 @@ export function SeatCheckerPanel({
   onCheck,
   visibility,
   visibilityLoading,
+  visibilitySlowLoading = false,
   visibilityError,
 }: SeatCheckerPanelProps) {
   const t = useTranslations("home");
@@ -146,7 +154,7 @@ export function SeatCheckerPanel({
           </div>
 
           <div className="mt-auto pt-5">
-            <FujiWeatherStrip data={visibility} loading={visibilityLoading} error={visibilityError} />
+            <FujiWeatherStrip data={visibility} loading={visibilityLoading} slowLoading={visibilitySlowLoading} error={visibilityError} />
           </div>
         </div>
 

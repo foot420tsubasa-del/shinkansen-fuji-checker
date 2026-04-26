@@ -32,6 +32,9 @@
     "readGuide": "후지산 뷰 완전 가이드 읽기",
     "visChecking": "오늘 후지산 가시성 확인 중…",
     "visUnavailable": "날씨 데이터를 불러올 수 없습니다 – 좌석 방향은 그대로 유효합니다. 현지 예보를 확인해 주세요.",
+    "visLoadingFallback": "가시성 예보를 불러오는 중입니다. 잠시 후 새로고침하면 실시간 데이터를 볼 수 있습니다.",
+    "visErrorFallback": "현재 실시간 가시성 정보를 사용할 수 없습니다. 계절별 팁은",
+    "visGuideLink": "가이드",
     "visHigh": "후지산을 볼 가능성 높음",
     "visMedium": "흐림 – 보일 수도 있음",
     "visLow": "가능성 낮음 – 구름에 가릴 수 있음",
@@ -45,7 +48,8 @@
     "resultVisError": "날씨 데이터를 불러오지 못했습니다. 좌석 방향은 그대로 유효하므로, 현지 예보를 별도로 확인해 주세요.",
     "seaSide": "바다 쪽",
     "aisle": "통로",
-    "fujisideLabel": "후지산 / 창가",
+    "fujisideLabel": "후지산 쪽",
+    "fujiWindowLabel": "후지산 창가",
     "trainInterior": "차량 내부",
     "fujisideArrow": "창가 / 후지산 쪽 →",
     "exampleRow": "예시 좌석 배치 (일반 3+2 차량)",
@@ -80,9 +84,15 @@
     "planEssentialsTitle": "일본 여행 필수 항목 계획하기",
     "planEssentialsDesc": "신칸센 좌석을 고른 뒤 철도, 도착 이동, 호텔, 후지 당일치기, 도시 액티비티를 준비하세요.",
     "planEssentialsCta": "필수 허브 열기",
+    "makerNoteEyebrow": "제작자 노트",
+    "makerNoteBody": "저는 도쿄 기반의 일본인 제작자입니다. 여행자들이 신칸센과 후지산에 대해 같은 질문을 반복했고, 영어 정보가 흩어져 있거나 부정확해서 이 사이트를 만들었습니다.",
+    "makerNoteCta": "더 읽기 →",
     "footerEsim": "WiFi 필요하세요? eSIM 구매",
     "footerDisclaimer": "JR 센트럴 공개 정보 기반. 독립 비공식 도구로 JR 관련 회사와 무관합니다.",
     "footerBuiltBy": "일본인 제작자가 만들었습니다. Klook 제휴 링크로 운영.",
+    "footerCredit": "도쿄 기반의 일본인 제작자가 해외 여행자를 위해 만들었습니다.",
+    "footerIndependent": "독립적인 비공식 사이트입니다. JR 센트럴 공개 정보를 바탕으로 합니다.",
+    "footerAffiliate": "일부 링크는 Klook 제휴 링크이며, 사용해 주시면 사이트를 무료로 유지하는 데 도움이 됩니다.",
     "nav": {
       "hub": "일본 여행 유틸리티 허브",
       "seat": "좌석 확인기",
@@ -136,9 +146,14 @@
         "cta": "일정 보기"
       },
       "shinkansen": {
-        "title": "신칸센 티켓",
+        "title": "신칸센 단일 티켓",
         "desc": "후지산 쪽 좌석을 확인한 후 예약하세요.",
         "cta": "열차 예약"
+      },
+      "jr-pass": {
+        "title": "JR 패스 비교",
+        "desc": "여러 장거리 이동이 있을 때만 유리한 경우가 많습니다.",
+        "cta": "비교"
       },
       "esim": {
         "title": "일본 eSIM",

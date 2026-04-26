@@ -7,6 +7,10 @@ type SiteLegalLinksProps = {
 export function SiteLegalLinks({ className = "" }: SiteLegalLinksProps) {
   return (
     <div className={["flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[10px]", className].join(" ")}>
+      <Link href="/about" className="underline underline-offset-2 hover:text-slate-600">
+        About
+      </Link>
+      <span aria-hidden="true">·</span>
       <Link href="/terms" className="underline underline-offset-2 hover:text-slate-600">
         Terms & notices
       </Link>

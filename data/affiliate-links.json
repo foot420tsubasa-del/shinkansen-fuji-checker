@@ -18,11 +18,11 @@
     ]
   },
   "shinkansenTicket": {
-    "label": "Shinkansen Tickets (Tokyo to Kyoto)",
+    "label": "Single Shinkansen Ticket (Tokaido Shinkansen)",
     "provider": "klook",
     "adid": "1165791",
-    "klookPath": "japan-rail/shinkansen/28-tokyo/30-kyoto/",
-    "directUrl": "",
+    "klookPath": "activity/81022-tokaido-shinkansen-ticket/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165791&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F81022-tokaido-shinkansen-ticket%2F",
     "usedOn": [
       "Top",
       "Guide",

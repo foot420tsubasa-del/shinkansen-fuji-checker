@@ -14,6 +14,7 @@ import { TripPicks } from "@/components/travel/TripPicks";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { BrandMark } from "@/components/ui/BrandMark";
 import { LanguageSelector } from "./components/LanguageSelector";
+import { trackEvent } from "@/lib/analytics";
 import {
   type DirectionId,
   type FujiVisibility,
@@ -30,13 +31,18 @@ export default function HomeClient() {
   const [hasChecked, setHasChecked] = useState(false);
   const [visData, setVisData] = useState<FujiVisibility | null>(null);
   const [visLoading, setVisLoading] = useState(true);
+  const [visSlowLoading, setVisSlowLoading] = useState(false);
   const [visError, setVisError] = useState(false);
 
   useEffect(() => {
     const fetchVisibility = async () => {
+      const startedAt = performance.now();
+      let slowTimer: ReturnType<typeof setTimeout> | undefined;
       try {
         setVisLoading(true);
+        setVisSlowLoading(false);
         setVisError(false);
+        slowTimer = setTimeout(() => setVisSlowLoading(true), 3000);
         const res = await fetch("/api/fuji-visibility");
         if (!res.ok) throw new Error("Failed to fetch visibility");
         const json = await res.json();
@@ -49,7 +55,14 @@ export default function HomeClient() {
         console.error("fuji-visibility fetch error:", e);
         setVisError(true);
       } finally {
+        if (slowTimer) clearTimeout(slowTimer);
         setVisLoading(false);
+        const elapsedMs = Math.round(performance.now() - startedAt);
+        trackEvent({
+          action: "fuji_visibility_load_time",
+          category: "weather",
+          value: elapsedMs,
+        });
       }
     };
     fetchVisibility();
@@ -80,12 +93,12 @@ export default function HomeClient() {
             </div>
           </div>
           <nav className="hidden items-center gap-2 text-sm font-semibold text-slate-200 lg:flex">
-            <a
-              href="#seat-checker"
+            <Link
+              href="/#seat-checker"
               className="rounded-full border border-sky-400/50 bg-sky-400/15 px-3.5 py-2 text-sky-100 shadow-sm transition-colors hover:border-sky-300 hover:bg-sky-400/25"
             >
               {t("nav.seat")}
-            </a>
+            </Link>
             <Link
               href="/planner"
               className="rounded-full border border-white/10 bg-white/5 px-3.5 py-2 shadow-sm transition-colors hover:border-white/20 hover:bg-white/10 hover:text-white"
@@ -123,9 +136,9 @@ export default function HomeClient() {
         </Container>
         <Container className="pb-3 lg:hidden">
           <nav className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 text-xs font-semibold text-slate-200 [scrollbar-width:none]">
-            <a href="#seat-checker" className="shrink-0 rounded-full border border-sky-400/50 bg-sky-400/15 px-3 py-2 text-sky-100">
+            <Link href="/#seat-checker" className="shrink-0 rounded-full border border-sky-400/50 bg-sky-400/15 px-3 py-2 text-sky-100">
               {t("nav.seat")}
-            </a>
+            </Link>
             <Link href="/planner" className="shrink-0 rounded-full border border-white/10 bg-white/5 px-3 py-2">
               {t("nav.planner")}
             </Link>
@@ -152,6 +165,7 @@ export default function HomeClient() {
                   onCheck={() => setHasChecked(true)}
                   visibility={visData}
                   visibilityLoading={visLoading}
+                  visibilitySlowLoading={visSlowLoading}
                   visibilityError={visError}
                 />
                 <SeatMapCard
@@ -196,6 +210,21 @@ export default function HomeClient() {
           </div>
         </section>
 
+        <section className="mt-4 rounded-[24px] border border-sky-100 bg-sky-50/70 px-4 py-4 text-slate-800 md:px-5">
+          <div className="flex gap-3">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl border border-sky-200 bg-white text-base">
+              🗼
+            </span>
+            <div>
+              <p className="text-xs font-semibold uppercase text-sky-700">{t("makerNoteEyebrow")}</p>
+              <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-700">{t("makerNoteBody")}</p>
+              <Link href="/about" className="mt-2 inline-flex text-xs font-semibold text-sky-700 underline underline-offset-2">
+                {t("makerNoteCta")}
+              </Link>
+            </div>
+          </div>
+        </section>
+
         <section id="next-decisions" className="mt-12 space-y-5 md:mt-16">
               <SectionHeader
                 eyebrow={t("decisions.eyebrow")}
@@ -222,14 +251,14 @@ export default function HomeClient() {
         <section className="mt-12 rounded-[32px] border border-slate-200 bg-[#07142f] px-5 py-5 text-white shadow-[0_24px_70px_rgba(7,20,47,0.22)] md:px-7">
           <div>
             <div>
-              <p className="text-sm font-semibold">{t("brandBuiltBy")}</p>
-              <p className="mt-2 max-w-3xl text-xs leading-6 text-slate-300">{t("footerDisclaimer")}</p>
+              <p className="text-sm font-semibold">{t("footerCredit")}</p>
+              <p className="mt-2 max-w-3xl text-xs leading-6 text-slate-300">{t("footerIndependent")}</p>
+              <p className="mt-1 max-w-3xl text-xs leading-6 text-slate-300">{t("footerAffiliate")}</p>
             </div>
           </div>
         </section>
 
         <footer className="py-8 text-center">
-          <p className="text-center text-[9px] text-slate-400">{t("footerBuiltBy")}</p>
           <SiteLegalLinks className="mt-3 text-slate-400" />
         </footer>
       </Container>
