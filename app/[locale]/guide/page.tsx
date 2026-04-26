@@ -181,6 +181,156 @@ const howToSchema = {
   ],
 };
 
+const enGuideCopy = {
+  title: "Mt. Fuji Shinkansen Seat Guide",
+  introQuick: "For Tokyo to Kyoto or Osaka, sit on the right side of the Shinkansen in Seat E. For Kyoto or Osaka back to Tokyo, sit on the left side, also Seat E. Mt. Fuji appears around Shin-Fuji station for about 30 to 60 seconds.",
+  quickNav: "Quick navigation",
+  checkSeatNow: "Check my seat now →",
+  readFullGuide: "Read full guide ↓",
+  bookOnKlook: "Book on Klook →",
+  jumpTo: "Jump to:",
+  jumpTldr: "TL;DR",
+  jumpSide: "Which side?",
+  jumpLetters: "Seat letters",
+  jumpTime: "Best time",
+  jumpZone: "Viewing zone",
+  jumpJrPass: "JR Pass",
+  jumpFaq: "FAQ",
+  tldrH2: "TL;DR — which side and which seat for Mt. Fuji",
+  quickLabel: "Quick answer:",
+  whichSideH2: "Which side of the Shinkansen is Mt. Fuji on?",
+  whichSideQuick: <>Going from Tokyo to Kyoto or Osaka, Mt. Fuji is on the <strong>right side</strong> of the Shinkansen — specifically Seat E in standard cars. Going from Kyoto or Osaka back to Tokyo, it is on the <strong>left side</strong> — also Seat E. The view appears around Shin-Fuji station and lasts about 30 to 60 seconds.</>,
+  tokyoRightH3: "Tokyo → Kyoto / Osaka: right side",
+  returnLeftH3: "Kyoto / Osaka → Tokyo: left side",
+  sideBackH3: "What side for Tokyo to Osaka, Tokyo to Kyoto, and back",
+  lettersH2: "Shinkansen seat letters explained (A, B, C, D, E)",
+  lettersQuick: <>Standard Tokaido Shinkansen cars have a 3+2 seat layout with letters A, B, C on one side and D, E on the other. <strong>Seat E is the Mt. Fuji window seat</strong> in standard cars. Green Cars use a 2+2 layout where Seat D is the Mt. Fuji window. Seat A is always the opposite sea side.</>,
+  seatEH3: "Seat E is the Mt. Fuji window seat in standard 3+2 cars",
+  greenCarH3: "Seat D is the Mt. Fuji window in Green Cars (2+2 layout)",
+  seatAH3: "Seat A is the opposite side (sea side)",
+  whyEH3: "Why Seat E matters more than right side alone",
+  seatAText: "Seat A is useful if you want the sea-side window, but it is not the Mt. Fuji-side window on the Tokaido Shinkansen.",
+  whyEText: "When booking online, you usually choose a seat letter rather than only a side of the train. Seat E is the practical instruction most travelers need.",
+  whenH2: "When to see Mt. Fuji from the Shinkansen",
+  whenQuick: <>Late morning to early afternoon usually gives the clearest view of Mt. Fuji on a typical day. <strong>Winter (December–February)</strong> is the best season for a snow-capped silhouette and clear skies. Mt. Fuji is generally not visible at night because the mountain is unlit.</>,
+  timeH3: "Best time of day — late morning to early afternoon",
+  seasonH3: "Best season — winter for snow-cap, autumn for clear skies",
+  nightH3: "Can you see Mt. Fuji at night from the Shinkansen?",
+  nightText: "Usually no. Mt. Fuji is not lit at night, so even from the correct side it is normally too dark to see.",
+  liveH3: "Live visibility check before you board",
+  liveTextBefore: "Before booking or boarding,",
+  liveLink: "check today's live visibility",
+  liveTextAfter: "with the free seat checker.",
+  routeH2: "Where on the route does Mt. Fuji appear?",
+  routeQuick: <>Mt. Fuji becomes visible from the Tokaido Shinkansen between <strong>Shin-Yokohama and Shizuoka stations</strong>, with the clearest view around <strong>Shin-Fuji station</strong>. Total visibility window is about 30 to 60 seconds at full Shinkansen speed, so have your camera ready before reaching Shin-Fuji.</>,
+  shinFujiH3: "Around Shin-Fuji station — the prime viewing zone",
+  durationH3: "How long is Mt. Fuji visible from the train? (about 30-60 seconds)",
+  mapH3: "Tokaido Shinkansen route map — Shin-Yokohama to Shizuoka",
+  trainTypeH2: "Nozomi vs Hikari vs Kodama — which Shinkansen for Mt. Fuji?",
+  trainTypeQuick: <>All three Tokaido Shinkansen services pass Mt. Fuji, and the seat to pick (Seat E) is the same regardless. <strong>Hikari and Kodama</strong> stop at Shin-Fuji station, which can give a slightly longer viewing window. <strong>Nozomi</strong> is fastest but does not stop at Shin-Fuji.</>,
+  nozomiH3: "Nozomi: fastest, but no Shin-Fuji stop",
+  nozomiText: "Nozomi trains still pass the Fuji viewing zone, but they do not stop at Shin-Fuji.",
+  hikariH3: "Hikari and Kodama: stop at Shin-Fuji, slightly better viewing",
+  typeSeatH3: "Does the train type change which seat to pick? (no — Seat E either way)",
+  typeSeatText: "The left/right rule and Seat E recommendation do not change between Nozomi, Hikari, and Kodama standard cars.",
+  jrPassH2: "JR Pass vs single ticket — which is cheaper for Tokyo-Kyoto?",
+  jrPassQuick: <>For a simple Tokyo–Kyoto round trip, <strong>single tickets are cheaper</strong> (about ¥29,000 round trip vs ¥50,000 for a 7-day JR Pass). The Pass starts paying off only when you add Hiroshima, do 2+ long-distance rides, or take multiple Shinkansen segments in one week.</>,
+  itineraryBefore: "To see how this fits into a trip plan,",
+  itineraryLink: "see how this fits into a 7-day route",
+  bookH2: "How to book Seat E — step by step",
+  bookQuick: <>At a JR ticket office, show 「<strong>E席をお願いします</strong>」 (Please give me Seat E). On Klook, choose your route then select column E from the seat map. With a JR Pass, walk into any JR Reservation Counter — seat reservations are free.</>,
+  jrOfficeH3: "At a JR ticket office (Japanese phrase included)",
+  klookH3: "Booking via Klook (English UI)",
+  klookText: "Choose the Tokaido Shinkansen route, then select column E on the seat map when the option is available.",
+  jrPassCounterH3: "Reserving with a JR Pass",
+  jrPassCounterTextBefore: "With a JR Pass, reserve your seat at a JR Reservation Counter before boarding. For an early Shinkansen day, it can help to",
+  stayLink: "stay near Tokyo Station for an early Shinkansen day",
+  mistakesTextBefore: "The same planning logic applies when you land:",
+  mistakesLink: "do not make the same mistake on arrival day",
+  mistakesTextAfter: "by choosing the wrong airport transfer for your luggage and arrival time.",
+  mistakesH2: "Common mistakes when trying to see Mt. Fuji from the Shinkansen",
+  priorityH2: "Priority seats (優先席) — etiquette foreigners should know",
+  faqH2: "Frequently Asked Questions",
+  makeEasyH2: "Make it easy with the Shinkansen Mt. Fuji Seat Checker",
+  footerBrand: "fujiseat.com — Japan travel utility hub",
+  footerPartner: "Partner links shown where they match the planning step.",
+};
+
+const frGuideCopy = {
+  title: "Guide des sièges Shinkansen pour voir le mont Fuji",
+  introQuick: "Pour Tokyo → Kyoto ou Osaka, asseyez-vous du côté droit du Shinkansen, au siège E. Pour Kyoto ou Osaka → Tokyo, asseyez-vous du côté gauche, toujours au siège E. Le mont Fuji apparaît aux alentours de Shin-Fuji pendant environ 30 à 60 secondes.",
+  quickNav: "Navigation rapide",
+  checkSeatNow: "Vérifier mon siège →",
+  readFullGuide: "Lire le guide ↓",
+  bookOnKlook: "Réserver sur Klook →",
+  jumpTo: "Aller à :",
+  jumpTldr: "En bref",
+  jumpSide: "Quel côté ?",
+  jumpLetters: "Lettres de siège",
+  jumpTime: "Meilleure heure",
+  jumpZone: "Zone de vue",
+  jumpJrPass: "JR Pass",
+  jumpFaq: "FAQ",
+  tldrH2: "En bref — quel côté et quel siège pour le mont Fuji",
+  quickLabel: "Réponse rapide :",
+  whichSideH2: "De quel côté du Shinkansen se trouve le mont Fuji ?",
+  whichSideQuick: <>Lors du trajet Tokyo → Kyoto ou Osaka, le mont Fuji se trouve <strong>du côté droit</strong> du Shinkansen — précisément au siège E dans les voitures standard. Au retour Kyoto ou Osaka → Tokyo, il se trouve <strong>du côté gauche</strong> — toujours au siège E. La vue apparaît aux alentours de la gare de Shin-Fuji et dure environ 30 à 60 secondes.</>,
+  tokyoRightH3: "Tokyo → Kyoto / Osaka : côté droit",
+  returnLeftH3: "Kyoto / Osaka → Tokyo : côté gauche",
+  sideBackH3: "Quel côté pour Tokyo–Osaka, Tokyo–Kyoto, et le retour",
+  lettersH2: "Comprendre les lettres de siège du Shinkansen (A, B, C, D, E)",
+  lettersQuick: <>Les voitures standard du Tokaido Shinkansen ont une disposition 3+2, avec les lettres A, B, C d&apos;un côté et D, E de l&apos;autre. <strong>Le siège E est la place côté fenêtre du mont Fuji</strong> dans les voitures standard. Les Green Cars utilisent une disposition 2+2 où le siège D donne sur le mont Fuji. Le siège A se trouve toujours du côté opposé (côté mer).</>,
+  seatEH3: "Le siège E est la fenêtre côté mont Fuji dans les voitures standard",
+  greenCarH3: "Le siège D est la fenêtre côté mont Fuji en Green Car (disposition 2+2)",
+  seatAH3: "Le siège A se trouve toujours du côté opposé (côté mer)",
+  whyEH3: "Pourquoi « E » importe plus que « côté droit » seul",
+  seatAText: "Le siège A est utile si vous voulez la fenêtre côté mer, mais ce n'est pas la fenêtre côté mont Fuji sur le Tokaido Shinkansen.",
+  whyEText: "Lors d'une réservation en ligne, vous choisissez généralement une lettre de siège plutôt qu'un côté du train. Le siège E est donc l'instruction la plus pratique.",
+  whenH2: "Quand voir le mont Fuji depuis le Shinkansen",
+  whenQuick: <>En général, la fin de matinée et le début d&apos;après-midi offrent la vue la plus dégagée sur le mont Fuji par temps clair. <strong>L&apos;hiver (décembre–février)</strong> est la meilleure saison, avec une silhouette enneigée et un ciel souvent dégagé. Le mont Fuji n&apos;est généralement pas visible la nuit — la montagne n&apos;est pas éclairée.</>,
+  timeH3: "Meilleure heure — fin de matinée à début d'après-midi",
+  seasonH3: "Meilleure saison — l'hiver pour la silhouette enneigée, l'automne pour le ciel dégagé",
+  nightH3: "Peut-on voir le mont Fuji la nuit depuis le Shinkansen ?",
+  nightText: "En général, non. Le mont Fuji n'est pas éclairé la nuit, il est donc normalement trop sombre pour être visible, même du bon côté.",
+  liveH3: "Vérifiez la visibilité en direct avant de monter à bord",
+  liveTextBefore: "Avant de réserver ou de monter à bord,",
+  liveLink: "vérifier la visibilité en direct",
+  liveTextAfter: "avec le vérificateur de siège gratuit.",
+  routeH2: "Sur quelle partie du trajet le mont Fuji apparaît-il ?",
+  routeQuick: <>Le mont Fuji devient visible depuis le Tokaido Shinkansen entre les gares de <strong>Shin-Yokohama et Shizuoka</strong>, avec la vue la plus dégagée aux alentours de la <strong>gare de Shin-Fuji</strong>. La fenêtre de visibilité totale est d&apos;environ 30 à 60 secondes à pleine vitesse.</>,
+  shinFujiH3: "Aux alentours de la gare de Shin-Fuji — la zone de vue principale",
+  durationH3: "Combien de temps le mont Fuji est-il visible depuis le train ? (environ 30 à 60 secondes)",
+  mapH3: "Carte du trajet Tokaido Shinkansen — de Shin-Yokohama à Shizuoka",
+  trainTypeH2: "Nozomi, Hikari ou Kodama — quel Shinkansen pour le mont Fuji ?",
+  trainTypeQuick: <>Les trois services du Tokaido Shinkansen passent près du mont Fuji, et le siège à réserver (siège E) est le même pour tous. <strong>Hikari et Kodama</strong> s&apos;arrêtent à la gare de Shin-Fuji, ce qui peut offrir une fenêtre de visualisation légèrement plus longue. <strong>Nozomi</strong> est le plus rapide mais ne s&apos;arrête pas à Shin-Fuji.</>,
+  nozomiH3: "Nozomi : le plus rapide, mais sans arrêt à Shin-Fuji",
+  nozomiText: "Les trains Nozomi passent bien dans la zone de vue du mont Fuji, mais ils ne s'arrêtent pas à Shin-Fuji.",
+  hikariH3: "Hikari et Kodama : avec arrêt à Shin-Fuji, vue légèrement plus longue",
+  typeSeatH3: "Le type de train change-t-il le siège à choisir ? (non — siège E dans tous les cas)",
+  typeSeatText: "La règle gauche/droite et la recommandation du siège E ne changent pas entre Nozomi, Hikari et Kodama en voiture standard.",
+  jrPassH2: "JR Pass ou billet à l'unité — quel est le plus économique pour Tokyo–Kyoto ?",
+  jrPassQuick: <>Pour un simple aller-retour Tokyo–Kyoto, <strong>les billets à l&apos;unité sont moins chers</strong> (environ 29 000 ¥ aller-retour contre 50 000 ¥ pour un JR Pass 7 jours). Le JR Pass devient rentable uniquement si vous ajoutez Hiroshima, effectuez 2 longs trajets ou plus, ou prenez plusieurs segments de Shinkansen en une semaine.</>,
+  itineraryBefore: "Pour voir comment cela s'intègre dans un voyage,",
+  itineraryLink: "voir comment cela s'intègre dans un itinéraire de 7 jours",
+  bookH2: "Comment réserver le siège E — étape par étape",
+  bookQuick: <>Au guichet JR, montrez 「<strong>E席をお願いします</strong>」 (« Le siège E, s&apos;il vous plaît »). Sur Klook, choisissez votre trajet puis sélectionnez la colonne E sur le plan de siège. Avec un JR Pass, rendez-vous dans n&apos;importe quel comptoir de réservation JR — les réservations de siège y sont gratuites.</>,
+  jrOfficeH3: "Au guichet JR (avec la phrase japonaise utile)",
+  klookH3: "Réservation via Klook (interface en français/anglais)",
+  klookText: "Choisissez le trajet Tokaido Shinkansen, puis sélectionnez la colonne E sur le plan de siège lorsque l'option est disponible.",
+  jrPassCounterH3: "Avec un JR Pass au comptoir de réservation",
+  jrPassCounterTextBefore: "Avec un JR Pass, réservez votre siège à un comptoir de réservation JR avant de monter à bord. Pour un départ tôt en Shinkansen, il peut être pratique de",
+  stayLink: "séjourner près de la gare de Tokyo",
+  mistakesTextBefore: "La même logique s'applique à l'arrivée :",
+  mistakesLink: "ne commettez pas la même erreur le jour de l'arrivée",
+  mistakesTextAfter: "en choisissant un transfert aéroport inadapté à vos bagages et à votre heure d'arrivée.",
+  mistakesH2: "Erreurs fréquentes lorsqu'on essaie de voir le mont Fuji depuis le Shinkansen",
+  priorityH2: "Sièges prioritaires (優先席) — l'étiquette à connaître",
+  faqH2: "Questions fréquentes",
+  makeEasyH2: "Simplifiez-vous la tâche avec le Shinkansen Mt. Fuji Seat Checker",
+  footerBrand: "fujiseat.com — outils de voyage au Japon",
+  footerPartner: "Liens partenaires affichés uniquement lorsqu'ils correspondent à l'étape de préparation.",
+};
+
 type Props = {
   params: Promise<{ locale: string }>;
 };
@@ -188,6 +338,13 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
+  if (locale === "fr") {
+    return {
+      title: "Mont Fuji depuis le Shinkansen — côté, siège et timing",
+      description: "Guide gratuit par un Tokyoïte : quel côté du Shinkansen pour voir le mont Fuji, pourquoi le siège E, et quand regarder. Mis à jour 2026.",
+      alternates: getAlternates("/guide", locale),
+    };
+  }
   return {
     title: locale === "en" ? "Mt. Fuji Shinkansen Seat Guide — Side, Seat & Timing" : t("guideTitle"),
     description:
@@ -202,6 +359,8 @@ export default async function GuidePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "guide" });
   const h = await getTranslations({ locale, namespace: "home" });
+  const isFr = locale === "fr";
+  const copy = isFr ? frGuideCopy : enGuideCopy;
 
   const tldrItems = t.raw("tldr") as Array<{ bold: string; text: string }>;
   const seasons = t.raw("seasons") as Array<{
@@ -223,28 +382,110 @@ export default async function GuidePage({ params }: Props) {
   const jrSingle = t.raw("jrSingle") as string[];
   const jrPassItems = t.raw("jrPassItems") as string[];
   const faqItems = t.raw("faq") as Array<{ q: string; a: string }>;
-  const extraFaqItems = [
-    {
-      q: "Which side of the bullet train for Mt. Fuji?",
-      a: "Bullet train is the English name for the Shinkansen. Tokyo → Kyoto/Osaka means Mt. Fuji on the right (Seat E). Kyoto/Osaka → Tokyo means Mt. Fuji on the left (also Seat E).",
-    },
-    {
-      q: "When can I see Mt. Fuji on the Shinkansen?",
-      a: "The Mt. Fuji viewing window is between Shin-Yokohama and Shizuoka stations, peaking around Shin-Fuji. Total time visible is about 30 to 60 seconds. Late morning to early afternoon, on a clear day, generally gives the best chance.",
-    },
-    {
-      q: "Can you see Mt. Fuji from the Nozomi Shinkansen?",
-      a: "Yes — although the Nozomi does not stop at Shin-Fuji, you can still see Mt. Fuji clearly from the right-side window (Seat E) when traveling Tokyo to Kyoto/Osaka. The viewing time is just slightly shorter than on Hikari or Kodama.",
-    },
-    {
-      q: "What is the best time of day to see Mt. Fuji from the Shinkansen?",
-      a: "Late morning to early afternoon usually offers the clearest view. Mornings before 10 AM can be even better in summer because heat haze has not built up yet. Late afternoon often has sun glare on the Mt. Fuji side.",
-    },
-    {
-      q: "Which seat letter is the Mt. Fuji window in a Green Car?",
-      a: "In Green Cars (2+2 layout, cars 8-10 on most Tokaido Shinkansen), Seat D is the Mt. Fuji window seat. The same left/right rule applies — right side going to Kyoto, left side going to Tokyo.",
-    },
-  ];
+  const extraFaqItems = isFr
+    ? [
+        {
+          q: "De quel côté du train à grande vitesse pour voir le mont Fuji ?",
+          a: "« Train à grande vitesse » est l'équivalent français de Shinkansen. Tokyo → Kyoto/Osaka : mont Fuji à droite (siège E). Kyoto/Osaka → Tokyo : mont Fuji à gauche (également siège E).",
+        },
+        {
+          q: "Quand peut-on voir le mont Fuji depuis le Shinkansen ?",
+          a: "La fenêtre de visualisation se situe entre les gares de Shin-Yokohama et Shizuoka, avec un point culminant aux alentours de Shin-Fuji. La durée totale de visibilité est d'environ 30 à 60 secondes. La fin de matinée et le début d'après-midi par temps clair offrent généralement les meilleures chances.",
+        },
+        {
+          q: "Peut-on voir le mont Fuji depuis le Nozomi Shinkansen ?",
+          a: "Oui — bien que le Nozomi ne s'arrête pas à Shin-Fuji, vous pouvez toujours voir clairement le mont Fuji depuis la fenêtre côté droit (siège E) lors du trajet Tokyo → Kyoto/Osaka. La durée de visualisation est juste un peu plus courte qu'en Hikari ou Kodama.",
+        },
+        {
+          q: "À quel moment de la journée le mont Fuji est-il le mieux visible depuis le Shinkansen ?",
+          a: "La fin de matinée et le début d'après-midi offrent généralement la vue la plus dégagée. En été, le matin avant 10 h peut être encore meilleur car la brume de chaleur ne s'est pas encore installée. En fin d'après-midi, le soleil produit souvent des reflets gênants côté mont Fuji.",
+        },
+        {
+          q: "Quelle lettre de siège correspond à la fenêtre côté mont Fuji en Green Car ?",
+          a: "Dans les Green Cars (disposition 2+2, voitures 8 à 10 sur la plupart des Tokaido Shinkansen), le siège D est la place côté fenêtre du mont Fuji. La règle gauche/droite reste la même — côté droit en allant à Kyoto, côté gauche en allant à Tokyo.",
+        },
+      ]
+    : [
+        {
+          q: "Which side of the bullet train for Mt. Fuji?",
+          a: "Bullet train is the English name for the Shinkansen. Tokyo → Kyoto/Osaka means Mt. Fuji on the right (Seat E). Kyoto/Osaka → Tokyo means Mt. Fuji on the left (also Seat E).",
+        },
+        {
+          q: "When can I see Mt. Fuji on the Shinkansen?",
+          a: "The Mt. Fuji viewing window is between Shin-Yokohama and Shizuoka stations, peaking around Shin-Fuji. Total time visible is about 30 to 60 seconds. Late morning to early afternoon, on a clear day, generally gives the best chance.",
+        },
+        {
+          q: "Can you see Mt. Fuji from the Nozomi Shinkansen?",
+          a: "Yes — although the Nozomi does not stop at Shin-Fuji, you can still see Mt. Fuji clearly from the right-side window (Seat E) when traveling Tokyo to Kyoto/Osaka. The viewing time is just slightly shorter than on Hikari or Kodama.",
+        },
+        {
+          q: "What is the best time of day to see Mt. Fuji from the Shinkansen?",
+          a: "Late morning to early afternoon usually offers the clearest view. Mornings before 10 AM can be even better in summer because heat haze has not built up yet. Late afternoon often has sun glare on the Mt. Fuji side.",
+        },
+        {
+          q: "Which seat letter is the Mt. Fuji window in a Green Car?",
+          a: "In Green Cars (2+2 layout, cars 8-10 on most Tokaido Shinkansen), Seat D is the Mt. Fuji window seat. The same left/right rule applies — right side going to Kyoto, left side going to Tokyo.",
+        },
+      ];
+
+  const faqSchemaData = isFr
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        inLanguage: "fr",
+        "@language": "fr",
+        mainEntity: [...faqItems, ...extraFaqItems].map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.a,
+          },
+        })),
+      }
+    : faqSchema;
+  const articleSchemaData = isFr
+    ? {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@language": "fr",
+        inLanguage: "fr",
+        headline: "Guide des sièges Shinkansen pour voir le mont Fuji",
+        description: "Guide gratuit par un Tokyoïte : quel côté du Shinkansen pour voir le mont Fuji, pourquoi le siège E, et quand regarder. Mis à jour 2026.",
+        author: {
+          "@type": "Person",
+          name: "fujiseat (créateur japonais basé à Tokyo)",
+        },
+        datePublished: "2026-04-01",
+        dateModified: "2026-04-27",
+      }
+    : articleSchema;
+  const howToSchemaData = isFr
+    ? {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "@language": "fr",
+        inLanguage: "fr",
+        name: "Comment réserver le siège E pour la vue du mont Fuji",
+        step: [
+          {
+            "@type": "HowToStep",
+            name: "Choisir la direction",
+            text: "Choisissez si vous voyagez de Tokyo vers Kyoto ou Osaka, ou de Kyoto ou Osaka vers Tokyo.",
+          },
+          {
+            "@type": "HowToStep",
+            name: "Sélectionner la colonne E sur le plan de siège",
+            text: "Dans les voitures standard 3+2 du Tokaido Shinkansen, choisissez le siège E pour la fenêtre côté mont Fuji.",
+          },
+          {
+            "@type": "HowToStep",
+            name: "Confirmer avant le paiement",
+            text: "Avant le paiement ou le retrait du billet, vérifiez que la lettre de siège réservée est E en voiture standard, ou D en Green Car.",
+          },
+        ],
+      }
+    : howToSchema;
 
   const seasonColors = [
     "text-emerald-700",
@@ -341,17 +582,17 @@ export default async function GuidePage({ params }: Props) {
       <Script
         id="faq-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaData) }}
       />
       <Script
         id="article-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchemaData) }}
       />
       <Script
         id="howto-seat-e-schema"
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchemaData) }}
       />
       <div className="flex-1 flex flex-col px-4 py-6 max-w-2xl mx-auto w-full">
         {/* Header */}
@@ -360,7 +601,7 @@ export default async function GuidePage({ params }: Props) {
             <BrandMark size="sm" />
             <div>
               <h1 className="text-sm font-semibold tracking-tight leading-snug">
-                Mt. Fuji Shinkansen Seat Guide
+                {copy.title}
               </h1>
               <p className="text-xs text-slate-500">{t("subtitle")}</p>
               <p className="mt-0.5 text-[10px] text-slate-500">
@@ -387,7 +628,7 @@ export default async function GuidePage({ params }: Props) {
             {t("introH2")}
           </h2>
           <p className="mb-2 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-            <strong>Quick answer:</strong> For Tokyo to Kyoto or Osaka, sit on the right side of the Shinkansen in Seat E. For Kyoto or Osaka back to Tokyo, sit on the left side, also Seat E. Mt. Fuji appears around Shin-Fuji station for about 30 to 60 seconds.
+            <strong>{copy.quickLabel}</strong> {copy.introQuick}
           </p>
           <p>{t("introP1")}</p>
           <p className="mt-2 text-[12px] text-slate-600">{t("introP2")}</p>
@@ -396,20 +637,20 @@ export default async function GuidePage({ params }: Props) {
         {/* Quick navigation */}
         <section className="mb-5 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-2.5">
-            Quick navigation
+            {copy.quickNav}
           </p>
           <div className="flex flex-wrap gap-2">
             <Link
               href="/"
               className="inline-flex items-center rounded-full bg-sky-500 px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm hover:brightness-110 transition-all"
             >
-              Check my seat now →
+              {copy.checkSeatNow}
             </Link>
             <a
               href="#tldr"
               className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-[12px] font-semibold text-slate-600 hover:bg-slate-100 transition-colors"
             >
-              Read full guide ↓
+              {copy.readFullGuide}
             </a>
             <a
               href={KLOOK_URL}
@@ -417,7 +658,7 @@ export default async function GuidePage({ params }: Props) {
               rel={AFFILIATE_REL}
               className="inline-flex items-center rounded-full border border-red-200 bg-red-50 px-3.5 py-1.5 text-[12px] font-semibold text-red-600 hover:bg-red-100 transition-colors"
             >
-              Book on Klook →
+              {copy.bookOnKlook}
             </a>
             <Link
               href="/planner"
@@ -431,7 +672,7 @@ export default async function GuidePage({ params }: Props) {
         {/* TL;DR */}
         <section id="tldr" className="mb-5 text-[13px] leading-relaxed text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">
           <h2 className="text-sm font-semibold text-slate-900 mb-2">
-            TL;DR — which side and which seat for Mt. Fuji
+            {copy.tldrH2}
           </h2>
           <ul className="list-disc pl-5 space-y-1.5">
             {tldrItems.map((item, i) => (
@@ -448,84 +689,84 @@ export default async function GuidePage({ params }: Props) {
 
         {/* Jump to section */}
         <div className="mb-5 text-[12px] text-slate-500 leading-relaxed">
-          <span className="font-semibold text-slate-600">Jump to: </span>
-          <a href="#tldr" className="underline underline-offset-2 hover:text-slate-800 transition-colors">TL;DR</a>
+          <span className="font-semibold text-slate-600">{copy.jumpTo} </span>
+          <a href="#tldr" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpTldr}</a>
           {" · "}
-          <a href="#which-side" className="underline underline-offset-2 hover:text-slate-800 transition-colors">Which side?</a>
+          <a href="#which-side" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpSide}</a>
           {" · "}
-          <a href="#seat-letters" className="underline underline-offset-2 hover:text-slate-800 transition-colors">Seat letters</a>
+          <a href="#seat-letters" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpLetters}</a>
           {" · "}
-          <a href="#when-to-see" className="underline underline-offset-2 hover:text-slate-800 transition-colors">Best time</a>
+          <a href="#when-to-see" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpTime}</a>
           {" · "}
-          <a href="#route-zone" className="underline underline-offset-2 hover:text-slate-800 transition-colors">Viewing zone</a>
+          <a href="#route-zone" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpZone}</a>
           {" · "}
-          <a href="#jr-pass" className="underline underline-offset-2 hover:text-slate-800 transition-colors">JR Pass</a>
+          <a href="#jr-pass" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpJrPass}</a>
           {" · "}
-          <a href="#faq" className="underline underline-offset-2 hover:text-slate-800 transition-colors">FAQ</a>
+          <a href="#faq" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpFaq}</a>
         </div>
 
         <div className="space-y-6 text-[13px] leading-relaxed text-slate-700">
           <section id="which-side" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
-              Which side of the Shinkansen is Mt. Fuji on?
+              {copy.whichSideH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>Quick answer:</strong> Going from Tokyo to Kyoto or Osaka, Mt. Fuji is on the <strong>right side</strong> of the Shinkansen — specifically Seat E in standard cars. Going from Kyoto or Osaka back to Tokyo, it is on the <strong>left side</strong> — also Seat E. The view appears around Shin-Fuji station and lasts about 30 to 60 seconds.
+              <strong>{copy.quickLabel}</strong> {copy.whichSideQuick}
             </p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Tokyo → Kyoto / Osaka: right side</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.tokyoRightH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>
                 <span className="font-semibold">{t("s1Bullet1Bold")}</span>{" "}
                 {t("s1Bullet1")}
               </li>
             </ul>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Kyoto / Osaka → Tokyo: left side</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.returnLeftH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>
                 <span className="font-semibold">{t("s1Bullet2Bold")}</span>{" "}
                 {t("s1Bullet2")}
               </li>
             </ul>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">What side for Tokyo to Osaka, Tokyo to Kyoto, and back</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.sideBackH3}</h3>
             <p className="mt-2 text-[12px] text-slate-600">{t("s1Note")}</p>
           </section>
 
           <section id="seat-letters" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
-              Shinkansen seat letters explained (A, B, C, D, E)
+              {copy.lettersH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>Quick answer:</strong> Standard Tokaido Shinkansen cars have a 3+2 seat layout with letters A, B, C on one side and D, E on the other. <strong>Seat E is the Mt. Fuji window seat</strong> in standard cars. Green Cars use a 2+2 layout where Seat D is the Mt. Fuji window. Seat A is always the opposite sea side.
+              <strong>{copy.quickLabel}</strong> {copy.lettersQuick}
             </p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Seat E is the Mt. Fuji window seat in standard 3+2 cars</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.seatEH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               {carStandard.map((item, i) => (
                 <li key={i}>{item}</li>
               ))}
             </ul>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Seat D is the Mt. Fuji window in Green Cars (2+2 layout)</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.greenCarH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               {carGreen.map((item, i) => (
                 <li key={i}>{item}</li>
               ))}
             </ul>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Seat A is the opposite side (sea side)</h3>
-            <p className="text-[12px] text-slate-600">Seat A is useful if you want the sea-side window, but it is not the Mt. Fuji-side window on the Tokaido Shinkansen.</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Why Seat E matters more than right side alone</h3>
-            <p className="text-[12px] text-slate-600">When booking online, you usually choose a seat letter rather than only a side of the train. Seat E is the practical instruction most travelers need.</p>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.seatAH3}</h3>
+            <p className="text-[12px] text-slate-600">{copy.seatAText}</p>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.whyEH3}</h3>
+            <p className="text-[12px] text-slate-600">{copy.whyEText}</p>
           </section>
 
           <section id="when-to-see" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Info className="h-4 w-4 text-sky-600" />
-              When to see Mt. Fuji from the Shinkansen
+              {copy.whenH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>Quick answer:</strong> Late morning to early afternoon usually gives the clearest view of Mt. Fuji on a typical day. <strong>Winter (December–February)</strong> is the best season for a snow-capped silhouette and clear skies. Mt. Fuji is generally not visible at night because the mountain is unlit.
+              <strong>{copy.quickLabel}</strong> {copy.whenQuick}
             </p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Best time of day — late morning to early afternoon</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.timeH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               {timeItems.map((item, i) => (
                 <li key={i}>
@@ -533,7 +774,7 @@ export default async function GuidePage({ params }: Props) {
                 </li>
               ))}
             </ul>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Best season — winter for snow-cap, autumn for clear skies</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.seasonH3}</h3>
             <div className="mt-2 divide-y divide-slate-100 rounded-xl border border-slate-200 overflow-hidden text-[12px]">
               {seasons.map((s, i) => (
                 <div key={i} className="flex items-start gap-2 px-3 py-2 bg-white">
@@ -545,27 +786,27 @@ export default async function GuidePage({ params }: Props) {
                 </div>
               ))}
             </div>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Can you see Mt. Fuji at night from the Shinkansen?</h3>
-            <p className="text-[12px] text-slate-600">Usually no. Mt. Fuji is not lit at night, so even from the correct side it is normally too dark to see.</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Live visibility check before you board</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.nightH3}</h3>
+            <p className="text-[12px] text-slate-600">{copy.nightText}</p>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.liveH3}</h3>
             <p className="text-[12px] text-slate-600">
-              Before booking or boarding, <Link href="/#seat-checker" className="font-semibold text-sky-700 underline underline-offset-2">check today&apos;s live visibility</Link> with the free seat checker.
+              {copy.liveTextBefore} <Link href="/#seat-checker" className="font-semibold text-sky-700 underline underline-offset-2">{copy.liveLink}</Link> {copy.liveTextAfter}
             </p>
           </section>
 
           <section id="route-zone" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Mountain className="h-4 w-4 text-sky-600" />
-              Where on the route does Mt. Fuji appear?
+              {copy.routeH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>Quick answer:</strong> Mt. Fuji becomes visible from the Tokaido Shinkansen between <strong>Shin-Yokohama and Shizuoka stations</strong>, with the clearest view around <strong>Shin-Fuji station</strong>. Total visibility window is about 30 to 60 seconds at full Shinkansen speed, so have your camera ready before reaching Shin-Fuji.
+              <strong>{copy.quickLabel}</strong> {copy.routeQuick}
             </p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Around Shin-Fuji station — the prime viewing zone</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.shinFujiH3}</h3>
             <p>{t("s2P1")}</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">How long is Mt. Fuji visible from the train? (about 30-60 seconds)</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.durationH3}</h3>
             <p className="text-[12px] text-slate-600">{t("s3Bullet3")}</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Tokaido Shinkansen route map — Shin-Yokohama to Shizuoka</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.mapH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               <li><span className="font-semibold">{t("s2Bullet1Bold")}</span> {t("s2Bullet1")}</li>
               <li><span className="font-semibold">{t("s2Bullet3Bold")}</span> {t("s2Bullet3")}</li>
@@ -575,26 +816,26 @@ export default async function GuidePage({ params }: Props) {
           <section id="nozomi-hikari-kodama" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
-              Nozomi vs Hikari vs Kodama — which Shinkansen for Mt. Fuji?
+              {copy.trainTypeH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>Quick answer:</strong> All three Tokaido Shinkansen services pass Mt. Fuji, and the seat to pick (Seat E) is the same regardless. <strong>Hikari and Kodama</strong> stop at Shin-Fuji station, which can give a slightly longer viewing window. <strong>Nozomi</strong> is fastest but does not stop at Shin-Fuji.
+              <strong>{copy.quickLabel}</strong> {copy.trainTypeQuick}
             </p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Nozomi: fastest, but no Shin-Fuji stop</h3>
-            <p className="text-[12px] text-slate-600">Nozomi trains still pass the Fuji viewing zone, but they do not stop at Shin-Fuji.</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Hikari and Kodama: stop at Shin-Fuji, slightly better viewing</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.nozomiH3}</h3>
+            <p className="text-[12px] text-slate-600">{copy.nozomiText}</p>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.hikariH3}</h3>
             <p className="text-[12px] text-slate-600">{t("jrNozomiNote")}</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Does the train type change which seat to pick? (no — Seat E either way)</h3>
-            <p className="text-[12px] text-slate-600">The left/right rule and Seat E recommendation do not change between Nozomi, Hikari, and Kodama standard cars.</p>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.typeSeatH3}</h3>
+            <p className="text-[12px] text-slate-600">{copy.typeSeatText}</p>
           </section>
 
           <section id="jr-pass" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
-              JR Pass vs single ticket — which is cheaper for Tokyo-Kyoto?
+              {copy.jrPassH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>Quick answer:</strong> For a simple Tokyo–Kyoto round trip, <strong>single tickets are cheaper</strong> (about ¥29,000 round trip vs ¥50,000 for a 7-day JR Pass). The Pass starts paying off only when you add Hiroshima, do 2+ long-distance rides, or take multiple Shinkansen segments in one week.
+              <strong>{copy.quickLabel}</strong> {copy.jrPassQuick}
             </p>
             <p className="mb-2">{t("jrSingleLabel")}</p>
             <ul className="list-disc pl-5 space-y-1.5">
@@ -620,19 +861,19 @@ export default async function GuidePage({ params }: Props) {
               <KlookCTA />
             </div>
             <p className="mt-3 text-[12px] text-slate-600">
-              To see how this fits into a trip plan, <Link href="/itineraries/7-day-first-time-japan" className="font-semibold text-sky-700 underline underline-offset-2">see how this fits into a 7-day route</Link>.
+              {copy.itineraryBefore} <Link href="/itineraries/7-day-first-time-japan" className="font-semibold text-sky-700 underline underline-offset-2">{copy.itineraryLink}</Link>.
             </p>
           </section>
 
           <section id="book-seat-e" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
-              How to book Seat E — step by step
+              {copy.bookH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>Quick answer:</strong> At a JR ticket office, show 「<strong>E席をお願いします</strong>」 (Please give me Seat E). On Klook, choose your route then select column E from the seat map. With a JR Pass, walk into any JR Reservation Counter — seat reservations are free.
+              <strong>{copy.quickLabel}</strong> {copy.bookQuick}
             </p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">At a JR ticket office (Japanese phrase included)</h3>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.jrOfficeH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               {carRequest.slice(0, 1).map((item, i) => (
                 <li key={i}>
@@ -640,10 +881,10 @@ export default async function GuidePage({ params }: Props) {
                 </li>
               ))}
             </ul>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Booking via Klook (English UI)</h3>
-            <p className="text-[12px] text-slate-600">Choose the Tokaido Shinkansen route, then select column E on the seat map when the option is available.</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">Reserving with a JR Pass</h3>
-            <p className="text-[12px] text-slate-600">With a JR Pass, reserve your seat at a JR Reservation Counter before boarding. For an early Shinkansen day, it can help to <Link href="/areas-to-stay/tokyo-first-time" className="font-semibold text-sky-700 underline underline-offset-2">stay near Tokyo Station for an early Shinkansen day</Link>.</p>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.klookH3}</h3>
+            <p className="text-[12px] text-slate-600">{copy.klookText}</p>
+            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.jrPassCounterH3}</h3>
+            <p className="text-[12px] text-slate-600">{copy.jrPassCounterTextBefore} <Link href="/areas-to-stay/tokyo-first-time" className="font-semibold text-sky-700 underline underline-offset-2">{copy.stayLink}</Link>.</p>
             <div className="mt-3">
               <KlookCTA />
             </div>
@@ -652,7 +893,7 @@ export default async function GuidePage({ params }: Props) {
           <section id="common-mistakes" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Info className="h-4 w-4 text-sky-600" />
-              {t("s4H2")}
+              {copy.mistakesH2 ?? t("s4H2")}
             </h2>
             <ul className="list-disc pl-5 space-y-1.5">
               <li><span className="font-semibold">{t("s4Bullet1Bold")}</span> {t("s4Bullet1")}</li>
@@ -660,14 +901,14 @@ export default async function GuidePage({ params }: Props) {
               <li><span className="font-semibold">{t("s4Bullet3Bold")}</span> {t("s4Bullet3")}</li>
             </ul>
             <p className="mt-3 text-[12px] text-slate-600">
-              The same planning logic applies when you land: <Link href="/airport-transfers/narita-to-shinjuku" className="font-semibold text-sky-700 underline underline-offset-2">do not make the same mistake on arrival day</Link> by choosing the wrong airport transfer for your luggage and arrival time.
+              {copy.mistakesTextBefore} <Link href="/airport-transfers/narita-to-shinjuku" className="font-semibold text-sky-700 underline underline-offset-2">{copy.mistakesLink}</Link> {copy.mistakesTextAfter}
             </p>
           </section>
 
           <section id="etiquette" className="rounded-2xl border border-amber-200/80 bg-amber-50/30 px-4 py-4 md:px-6 md:py-5 shadow-sm">
             <h2 className="flex items-center gap-2 text-sm md:text-[15px] font-semibold text-slate-900 mb-3">
               <AlertTriangle className="h-4 w-4 text-amber-500" />
-              {t("priorityH2")}
+              {copy.priorityH2 ?? t("priorityH2")}
             </h2>
             <div className="space-y-3 text-[13px] md:text-sm leading-relaxed text-slate-700">
               <p>{t("priorityP1")}</p>
@@ -686,7 +927,7 @@ export default async function GuidePage({ params }: Props) {
           <section id="faq" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-3">
               <Info className="h-4 w-4 text-sky-600" />
-              {t("faqH2")}
+              {copy.faqH2 ?? t("faqH2")}
             </h2>
             <div className="space-y-3">
               {[...faqItems, ...extraFaqItems].map((item, i) => (
@@ -710,7 +951,7 @@ export default async function GuidePage({ params }: Props) {
           <section className="bg-sky-50 border border-sky-200 rounded-2xl px-4 py-4 shadow-sm shadow-sky-100">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
               <Mountain className="h-4 w-4 text-sky-700" />
-              {t("makeEasyH2")}
+              {copy.makeEasyH2 ?? t("makeEasyH2")}
             </h2>
             <p>{t("makeEasyP1")}</p>
             <p className="mt-2 text-[12px] text-slate-600">
@@ -727,8 +968,8 @@ export default async function GuidePage({ params }: Props) {
           </section>
 
           <footer className="border-t border-slate-200 pt-5 text-center text-[10px] text-slate-400">
-            <p>fujiseat.com — Japan travel utility hub</p>
-            <p className="mt-1">Partner links shown where they match the planning step.</p>
+            <p>{copy.footerBrand}</p>
+            <p className="mt-1">{copy.footerPartner}</p>
             <LastCheckedNote className="mt-3" />
             <SiteLegalLinks className="mt-3 text-slate-400" />
           </footer>
