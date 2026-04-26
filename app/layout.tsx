@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://fujiseat.com"),
+  other: {
+    "agd-partner-manual-verification": "",
+  },
 };
 
 // Root layout – minimal pass-through.
