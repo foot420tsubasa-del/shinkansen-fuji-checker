@@ -1,7 +1,7 @@
 {
   "meta": {
-    "homeTitle": "Verificador de Assento do Shinkansen — Monte Fuji (Grátis)",
-    "homeDesc": "Encontre o assento exato no Shinkansen para a melhor vista do Monte Fuji. Assento E, lado direito (Tóquio→Osaka). Verificador gratuito + reserve passagens via Klook.",
+    "homeTitle": "Planejador de Viagem ao Japão — Assento no Shinkansen, Hospedagem e Roteiros",
+    "homeDesc": "Planeje sua viagem ao Japão com uma só ferramenta. Encontre o assento para ver o Monte Fuji no Shinkansen, compare áreas para ficar em Tóquio, traslados de aeroporto e um roteiro de 7 dias.",
     "guideTitle": "Como Ver o Monte Fuji do Shinkansen — Guia de Assento, Lado e Horário",
     "guideDesc": "Qual assento reservar para a melhor vista do Monte Fuji no Shinkansen? Assento E, lado direito (Tóquio→Osaka). Guia completo com dicas de temporada, vagões, JR Pass vs passagem avulsa e FAQ."
   },
@@ -11,8 +11,9 @@
     "jrPass": "Comparar JR Pass"
   },
   "home": {
-    "brandTitle": "Verificador de Assento do Shinkansen",
-    "brandSubtitle": "Encontre o assento na janela do lado do Monte Fuji em dois toques no Shinkansen Tokaido (Tóquio ⇄ Osaka/Kyoto).",
+    "brandTitle": "Planeje sua viagem ao Japão — do assento à hospedagem",
+    "brandSubtitle": "Verificador de assento gratuito, roteiros, áreas para se hospedar e traslados de aeroporto em um só lugar.",
+    "seatCheckerHeading": "Verificador de assento no Shinkansen para ver o Monte Fuji",
     "brandBuiltBy": "Criado por uma pessoa japonesa para viajantes internacionais que não querem perder a vista do Monte Fuji.",
     "brandSource": "Baseado em informações públicas da JR Central",
     "brandSourceLink": "ver fonte",

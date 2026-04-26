@@ -96,11 +96,14 @@ export function SeatCheckerPanel({
 
           <div>
             <h1 className="max-w-[460px] text-[32px] font-semibold leading-[0.98] text-white sm:text-[40px] lg:text-[44px]">
-              Shinkansen Mt. Fuji Seat Checker
+              {t("brandTitle")}
             </h1>
             <p className="mt-4 max-w-[380px] text-sm leading-6 text-slate-300">
-              Find the best side of the Shinkansen to get a clear view of Mt. Fuji.
+              {t("brandSubtitle")}
             </p>
+            <h2 className="mt-4 inline-flex rounded-full border border-white/10 bg-white/8 px-3 py-1.5 text-xs font-semibold text-sky-100">
+              {t("seatCheckerHeading")}
+            </h2>
           </div>
 
           <div className="mt-6 space-y-3">

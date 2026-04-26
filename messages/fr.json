@@ -1,7 +1,7 @@
 {
   "meta": {
-    "homeTitle": "Vérificateur de Siège Shinkansen — Vue Mont Fuji (Gratuit)",
-    "homeDesc": "Trouvez le siège exact dans le Shinkansen pour la meilleure vue du Mont Fuji. Siège E, côté droit (Tokyo→Osaka). Vérificateur gratuit + réservez vos billets via Klook.",
+    "homeTitle": "Planificateur de Voyage au Japon — Siège Shinkansen, Séjours et Itinéraires",
+    "homeDesc": "Planifiez votre voyage au Japon avec un seul outil. Trouvez le siège pour voir le Mont Fuji dans le Shinkansen, comparez les quartiers où séjourner à Tokyo, les transferts aéroport et un itinéraire de 7 jours.",
     "guideTitle": "Comment Voir le Mont Fuji depuis le Shinkansen — Guide du Siège, Côté et Horaire",
     "guideDesc": "Quel siège réserver pour la meilleure vue du Mont Fuji dans le Shinkansen ? Siège E, côté droit (Tokyo→Osaka). Guide complet avec conseils saisonniers, numéros de wagon, comparaison JR Pass vs billet et FAQ."
   },
@@ -11,8 +11,9 @@
     "jrPass": "Comparer le JR Pass"
   },
   "home": {
-    "brandTitle": "Vérificateur de Siège Shinkansen",
-    "brandSubtitle": "Trouvez le siège côté fenêtre du Mont Fuji en deux clics sur le Shinkansen Tokaido (Tokyo ⇄ Osaka/Kyoto).",
+    "brandTitle": "Planifiez votre voyage au Japon — du siège au séjour",
+    "brandSubtitle": "Vérificateur de siège gratuit, itinéraires, quartiers où séjourner et transferts aéroport au même endroit.",
+    "seatCheckerHeading": "Vérificateur de siège Shinkansen pour voir le Mont Fuji",
     "brandBuiltBy": "Créé par une personne japonaise pour les voyageurs qui ne veulent pas manquer la vue sur le Mont Fuji.",
     "brandSource": "Basé sur les informations publiques de JR Central",
     "brandSourceLink": "voir la source",

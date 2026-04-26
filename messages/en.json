@@ -1,7 +1,7 @@
 {
   "meta": {
-    "homeTitle": "Shinkansen Mt. Fuji Seat Checker — Which Side & Seat? (Free)",
-    "homeDesc": "Find the exact Shinkansen seat for the best Mt. Fuji view. Seat E, right side (Tokyo→Osaka). Free instant checker + book tickets via Klook.",
+    "homeTitle": "Japan Trip Planner — Free Shinkansen Seat Checker, Stays & Itineraries",
+    "homeDesc": "Plan your Japan trip with one tool. Find the Mt. Fuji seat on the Shinkansen, compare Tokyo stay areas, airport transfers, and a 7-day itinerary. Built by a Japanese creator.",
     "guideTitle": "How to See Mt. Fuji from the Shinkansen — Seat, Side & Timing Guide",
     "guideDesc": "Which seat to book for the best Mt. Fuji view on the Shinkansen? Seat E, right side (Tokyo→Osaka). Complete guide with season tips, car numbers, JR Pass vs ticket comparison, and FAQ."
   },
@@ -11,8 +11,9 @@
     "jrPass": "Compare JR Pass"
   },
   "home": {
-    "brandTitle": "Shinkansen Mt. Fuji Seat Checker",
-    "brandSubtitle": "Get the Mt. Fuji side window seat in two taps on the Tokaido Shinkansen (Tokyo ⇄ Osaka/Kyoto).",
+    "brandTitle": "Plan Your Japan Trip — From Mt. Fuji Seat to Stay",
+    "brandSubtitle": "Free seat checker, itineraries, stay picks, and airport transfers — all in one place.",
+    "seatCheckerHeading": "Shinkansen Mt. Fuji Seat Checker",
     "brandBuiltBy": "Built by a Japanese creator for international travellers who don't want to miss the Mt. Fuji view.",
     "brandSource": "Based on publicly available information from JR Central",
     "brandSourceLink": "view source",
