@@ -95,7 +95,7 @@ export const transferPages: TransferPage[] = [
     lateArrivalNote: "Flight landing after 21:00? The Limousine Bus and Keisei Access Express run later than N'EX. If you land after 23:00, budget ¥20,000–25,000 for a taxi or book an airport hotel for the night.",
     proTip: "If you have 2+ large suitcases, the Limousine Bus is the least stressful option. N'EX is fast but Shinjuku Station is enormous — navigating to your exit with heavy luggage is the hidden cost.",
     nextActions: [
-      { id: "stay-shinjuku", category: "stay", title: "Hotels near Shinjuku Station", description: "Best areas to stay once you arrive.", cta: "See Shinjuku stays", href: "/areas-to-stay/shinjuku-vs-ueno-vs-asakusa" },
+      { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare Shinjuku, Ueno, Asakusa for your base.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
       ...commonNextActions,
     ],
   },
