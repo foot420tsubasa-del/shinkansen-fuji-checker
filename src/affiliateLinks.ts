@@ -54,8 +54,9 @@ export function hasAffUrl(linkId: string): boolean {
 }
 
 export const JR_PASS_URL = requireAffUrl("jrPass");
+export const SHINKANSEN_TICKET_URL = requireAffUrl("shinkansenTicket");
 export const ESIM_URL = requireAffUrl("esim");
 export const AIRPORT_TRANSFER_URL = requireAffUrl("airportTransfer");
 export const INSURANCE_URL = requireAffUrl("insurance");
 export const CAR_RENTAL_URL = requireAffUrl("carRental");
-export const KLOOK_URL = JR_PASS_URL;
+export const KLOOK_URL = SHINKANSEN_TICKET_URL;

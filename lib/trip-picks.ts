@@ -2,6 +2,7 @@ import {
   ESIM_URL,
   INSURANCE_URL,
   JR_PASS_URL,
+  SHINKANSEN_TICKET_URL,
 } from "@/src/affiliateLinks";
 
 export type TripPick = {
@@ -25,9 +26,17 @@ export const starterTripPicks: TripPick[] = [
   {
     id: "shinkansen",
     category: "train",
-    title: "Shinkansen ticket",
+    title: "Book Shinkansen ticket",
     description: "Book after you know the Fuji-side seat.",
-    cta: "Book train",
+    cta: "Book ticket",
+    href: SHINKANSEN_TICKET_URL,
+  },
+  {
+    id: "jr-pass",
+    category: "train",
+    title: "Compare JR Pass vs single tickets",
+    description: "Usually worth it only for multiple long-distance rides.",
+    cta: "Compare",
     href: JR_PASS_URL,
   },
   {

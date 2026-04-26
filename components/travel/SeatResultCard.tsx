@@ -1,11 +1,11 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, Info, Mountain, Plane, Share2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, Info, Mountain, Plane, Share2, Train } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { FujiVisibility, SeatRecommendation } from "@/lib/seat-checker";
 import { Card } from "@/components/ui/Card";
-import { KLOOK_URL } from "@/src/affiliateLinks";
+import { JR_PASS_URL, KLOOK_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
 type SeatResultCardProps = {
@@ -99,7 +99,7 @@ export function SeatResultCard({
               {k("book")}
             </a>
             <a
-              href={KLOOK_URL}
+              href={JR_PASS_URL}
               target="_blank"
               rel={AFFILIATE_REL}
               className="flex-1 rounded-2xl border-2 border-red-500 bg-red-50 px-4 py-2.5 text-center text-sm font-semibold text-red-600 shadow-sm transition-all hover:bg-red-100 active:brightness-95"
@@ -374,7 +374,34 @@ export function SeatMapPanel({
         )}
 
         <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3">
-          <p className="text-[11px] font-semibold uppercase text-slate-500">Next actions</p>
+          <p className="text-[11px] font-semibold uppercase text-slate-500">After checking your seat</p>
+          <div className="mt-2 grid gap-2 sm:grid-cols-3">
+            <a
+              href={SHINKANSEN_TICKET_URL}
+              target="_blank"
+              rel={AFFILIATE_REL}
+              className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#07142f] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+            >
+              <Train className="h-3.5 w-3.5" />
+              Book Shinkansen ticket
+            </a>
+            <a
+              href={JR_PASS_URL}
+              target="_blank"
+              rel={AFFILIATE_REL}
+              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-800 transition-colors hover:bg-amber-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              Compare JR Pass
+            </a>
+            <Link
+              href="/plan-your-trip"
+              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-sky-200 bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700 transition-colors hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
+            >
+              <Plane className="h-3.5 w-3.5" />
+              Plan trip essentials
+            </Link>
+          </div>
           <div className="mt-2 grid gap-2 sm:grid-cols-2">
             <Link
               href="/guide"

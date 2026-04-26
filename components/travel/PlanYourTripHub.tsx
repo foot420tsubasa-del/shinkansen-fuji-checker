@@ -26,12 +26,12 @@ const categories: Category[] = [
     description: "Compare the train decisions that matter after choosing the Fuji-side seat.",
     icon: Train,
     items: [
-      { label: "Shinkansen tickets guide", description: "Check seat side, timing, and booking context before buying.", href: "/guide" },
-      { label: "Compare JR Pass vs single tickets", description: "Usually worth it only for multiple long-distance rides.", linkId: "jrPass" },
+      { label: "Book Shinkansen ticket", description: "Most relevant after checking your Fuji-side seat.", linkId: "shinkansenTicket" },
+      { label: "Compare JR Pass vs single tickets", description: "Compare only if you have multiple long-distance rides.", linkId: "jrPass" },
+      { label: "Shinkansen seat guide", description: "Check seat side, timing, and booking context before buying.", href: "/guide" },
       { label: "Tokyo to Kyoto route", description: "Use the golden route itinerary before booking.", href: "/itineraries/7-day-first-time-japan" },
       { label: "Tokyo to Osaka route", description: "Plan the Shinkansen day and onward stay.", href: "/itineraries/7-day-first-time-japan" },
     ],
-    comingSoon: ["Direct Shinkansen ticket booking link"],
   },
   {
     title: "Arrival Essentials",

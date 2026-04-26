@@ -17,6 +17,20 @@
       "Itineraries"
     ]
   },
+  "shinkansenTicket": {
+    "label": "Shinkansen Tickets (Tokyo to Kyoto)",
+    "provider": "klook",
+    "adid": "1165791",
+    "klookPath": "japan-rail/shinkansen/28-tokyo/30-kyoto/",
+    "directUrl": "",
+    "usedOn": [
+      "Top",
+      "Guide",
+      "KlookCTA",
+      "PlanYourTrip",
+      "TripPicks"
+    ]
+  },
   "esim": {
     "label": "Japan eSIM",
     "provider": "klook",
@@ -158,7 +172,7 @@
     "provider": "klook",
     "adid": "1263407",
     "klookPath": "hotel/list/7-tokyo-japan-hotels/?area=asakusa",
-    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263407&k_site=https%3A%2F%2Fwww.klook.comhttps%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3D%25E3%2583%259B%25E3%2583%2586%25E3%2583%25AB%25E3%2580%2580%25E6%25B5%2585%25E8%258D%2589",
+    "directUrl": "",
     "usedOn": [
       "Stay",
       "Itineraries"
@@ -190,7 +204,7 @@
     "provider": "klook",
     "adid": "1263590",
     "klookPath": "hotel/list/17-kyoto-japan-hotels/?area=gion",
-    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263590&k_site=https%3A%2F%2Fwww.klohttps%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3D%25E3%2583%259B%25E3%2583%2586%25E3%2583%25AB%2520Gionok.com",
+    "directUrl": "",
     "usedOn": [
       "Stay"
     ]
