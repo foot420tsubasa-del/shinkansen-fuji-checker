@@ -172,7 +172,7 @@
     "provider": "klook",
     "adid": "1263407",
     "klookPath": "hotel/list/7-tokyo-japan-hotels/?area=asakusa",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263407&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3DAsakusa%2520hotel",
     "usedOn": [
       "Stay",
       "Itineraries"
