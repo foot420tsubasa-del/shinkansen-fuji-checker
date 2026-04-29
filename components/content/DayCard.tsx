@@ -6,6 +6,8 @@ import { trackAffiliateClick } from "@/lib/analytics";
 import { relForExternalLink } from "@/lib/link-rel";
 
 export function DayCard({ day, location, title, highlights, stayArea, stayLink, transport, bookingCta }: ItineraryDay) {
+  const isBookingExternal = bookingCta?.href.startsWith("http");
+
   return (
     <div className="relative flex gap-4">
       <div className="flex flex-col items-center">
@@ -56,7 +58,7 @@ export function DayCard({ day, location, title, highlights, stayArea, stayLink, 
                 target="_blank"
                 rel={relForExternalLink(stayLink)}
                 onClick={() => trackAffiliateClick("itinerary-hotel", `Day ${day} ${location}`)}
-                className="inline-flex items-center gap-1 rounded-xl border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-xs font-semibold text-indigo-700 hover:bg-indigo-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-200"
+                className="inline-flex items-center gap-1 rounded-xl border border-[#ff7a00] bg-[#fff3e7] px-3 py-1.5 text-xs font-semibold text-[#b44b00] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
               >
                 See hotels
                 <ExternalLink className="h-3 w-3" />
@@ -65,10 +67,15 @@ export function DayCard({ day, location, title, highlights, stayArea, stayLink, 
             {bookingCta && (
               <a
                 href={bookingCta.href}
-                target={bookingCta.href.startsWith("http") ? "_blank" : undefined}
+                target={isBookingExternal ? "_blank" : undefined}
                 rel={relForExternalLink(bookingCta.href)}
                 onClick={() => trackAffiliateClick("itinerary-cta", bookingCta.label)}
-                className="inline-flex items-center gap-1 rounded-xl border border-sky-200 bg-sky-50 px-3 py-1.5 text-xs font-semibold text-sky-700 hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
+                className={[
+                  "inline-flex items-center gap-1 rounded-xl border px-3 py-1.5 text-xs font-semibold focus-visible:outline-none focus-visible:ring-2",
+                  isBookingExternal
+                    ? "border-[#ff7a00] bg-[#fff3e7] text-[#b44b00] hover:bg-white focus-visible:ring-orange-200"
+                    : "border-[#9fd7bd] bg-[#f0fbf6] text-[#106b43] hover:border-[#168a56] hover:bg-white focus-visible:ring-emerald-200",
+                ].join(" ")}
               >
                 {bookingCta.label}
                 <ArrowRight className="h-3 w-3" />

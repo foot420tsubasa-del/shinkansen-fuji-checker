@@ -2,13 +2,7 @@ const BASE = "https://fujiseat.com";
 
 const LOCALES = ["en", "pt-BR", "es", "ko", "zh-TW", "zh-CN", "fr"] as const;
 
-/**
- * Returns alternates metadata (canonical + hreflang) for a given path.
- *
- * path=""  → home  (en: /,  others: /pt-BR  /es  /ko …)
- * path="/guide" → guide (en: /guide, others: /pt-BR/guide …)
- */
-export function getAlternates(path: "" | "/guide" | "/about" | "/plan-your-trip", locale: string) {
+export function getAlternates(path: string, locale: string) {
   const enUrl = path === "" ? `${BASE}/` : `${BASE}${path}`;
   const localeUrl = (loc: string) =>
     loc === "en" ? enUrl : `${BASE}/${loc}${path}`;

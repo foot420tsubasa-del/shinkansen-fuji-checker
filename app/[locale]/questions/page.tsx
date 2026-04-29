@@ -1,19 +1,28 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
-import { BrandMark } from "@/components/ui/BrandMark";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { SiteHeader } from "../components/SiteHeader";
 import { QuestionForm } from "./QuestionForm";
-
-export const metadata: Metadata = {
-  title: "Feedback and Japan travel tips — fujiseat",
-  description: "Send feedback, trip reports, reviews, or Japan travel tips for future fujiseat improvements and articles.",
-};
+import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Feedback and Japan travel tips — fujiseat",
+    description: "Send feedback, trip reports, reviews, or Japan travel tips for future fujiseat improvements and articles.",
+    openGraph: {
+      title: "Feedback and Japan travel tips",
+      description: "Send feedback, trip reports, or Japan travel tips for future fujiseat improvements.",
+      siteName: "fujiseat",
+    },
+    alternates: getAlternates("/questions", locale),
+  };
+}
 
 export default async function QuestionsPage({ params }: Props) {
   const { locale } = await params;
@@ -21,21 +30,7 @@ export default async function QuestionsPage({ params }: Props) {
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
-      <div className="page-header border-b border-sky-100/80 backdrop-blur">
-        <Container className="flex min-h-16 items-center justify-between gap-4 py-3">
-          <Link href="/" className="flex min-w-0 items-center gap-3">
-            <BrandMark />
-            <div className="min-w-0">
-              <p className="text-sm font-semibold text-slate-950 md:text-base">fujiseat</p>
-              <p className="hidden text-xs leading-5 text-slate-500 sm:block">{t("hub")}</p>
-            </div>
-          </Link>
-          <nav className="flex items-center gap-4 text-sm font-medium text-slate-600">
-            <Link href="/" className="hover:text-slate-950">{t("seatChecker")}</Link>
-            <Link href="/planner" className="hover:text-slate-950">{t("planner")}</Link>
-          </nav>
-        </Container>
-      </div>
+      <SiteHeader />
 
       <Container className="py-8 md:py-12">
         <div className="mx-auto max-w-3xl">

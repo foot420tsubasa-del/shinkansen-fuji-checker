@@ -166,7 +166,7 @@ export function PlannerPreview() {
       <div className="mt-4 grid gap-2 sm:grid-cols-3">
         <Link
           href="/planner"
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl bg-[#07142f] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#0f6f45] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200"
         >
           {t("planTrip")}
           <ArrowRight className="h-4 w-4" />
@@ -175,14 +175,14 @@ export function PlannerPreview() {
           href={JR_PASS_URL}
           target="_blank"
           rel={AFFILIATE_REL}
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm font-semibold text-amber-800 transition-all hover:bg-amber-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200"
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#e66700] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
         >
           {t("checkJrPass")}
           <ExternalLink className="h-4 w-4" />
         </a>
         <Link
           href="/command-center"
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-sky-200 bg-sky-50 px-4 py-2.5 text-sm font-semibold text-sky-700 transition-all hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-slate-700 bg-[#0b1a33] px-4 py-2.5 text-sm font-semibold text-sky-300 shadow-[0_8px_22px_rgba(7,20,47,0.3)] transition-all hover:bg-[#132744] hover:text-sky-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
         >
           {t("routeMap")}
           <ArrowRight className="h-4 w-4" />

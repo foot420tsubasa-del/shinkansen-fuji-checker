@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Clock, MapPin, Plane } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { Clock, MapPin, Plane } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { BrandMark } from "@/components/ui/BrandMark";
+import { SiteHeader } from "../../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { TransferOption } from "@/components/content/TransferOption";
 import { ProTip } from "@/components/content/ProTip";
@@ -11,6 +10,7 @@ import { NextActions } from "@/components/content/NextActions";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAllTransferSlugs, getTransferBySlug } from "@/lib/content/transfers";
+import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -33,6 +33,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: page.description,
       siteName: "fujiseat",
     },
+    alternates: getAlternates(`/airport-transfers/${slug}`, locale),
   };
 }
 
@@ -43,21 +44,7 @@ export default async function TransferPage({ params }: Props) {
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
-      <div className="page-header border-b border-sky-100/80 backdrop-blur">
-        <Container className="flex min-h-16 items-center justify-between gap-4 py-3">
-          <div className="flex min-w-0 items-center gap-3">
-            <BrandMark />
-            <div className="min-w-0">
-              <p className="text-sm font-semibold text-slate-950 md:text-base">fujiseat</p>
-              <p className="hidden text-xs leading-5 text-slate-500 sm:block">Japan travel utility hub</p>
-            </div>
-          </div>
-          <Link href="/" className="text-sm font-medium text-slate-600 hover:text-slate-950">
-            <ArrowLeft className="mr-1 inline h-4 w-4" />
-            Home
-          </Link>
-        </Container>
-      </div>
+      <SiteHeader />
 
       <Container className="py-8 md:py-12">
         <Breadcrumb items={[

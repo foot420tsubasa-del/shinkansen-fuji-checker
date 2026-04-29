@@ -57,7 +57,7 @@ export function AreaCard({ name, vibe, pros, cons, bestFor, transport, hotelLink
         href={hotelLink}
         target="_blank"
         rel={AFFILIATE_REL}
-        className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-2xl bg-[#07142f] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+        className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#e66700] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
       >
         Browse {name} hotels
         <ArrowRight className="h-3.5 w-3.5" />

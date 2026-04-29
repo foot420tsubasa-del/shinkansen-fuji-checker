@@ -5,6 +5,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { SiteHeader } from "../components/SiteHeader";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -16,6 +17,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: "About fujiseat — Built in Tokyo for Japan travellers",
     description: "Why fujiseat exists, what is available today, and what is still missing from this Japan travel utility hub.",
     alternates: getAlternates("/about", locale),
+    openGraph: {
+      title: "About fujiseat — Built in Tokyo for Japan travellers",
+      description: "Why fujiseat exists, what is available today, and what is still missing from this Japan travel utility hub.",
+      siteName: "fujiseat",
+      images: [{ url: "https://fujiseat.com/og-about.png", width: 1200, height: 630 }],
+    },
   };
 }
 
@@ -32,7 +39,7 @@ const hereToday = [
 const notYet = [
   "Full coverage of every Japan region",
   "Live train inventory or official seat availability",
-  "Booking.com / Agoda hotel links while partner approvals are still pending",
+  "Agoda hotel links while partner approval is still pending",
   "Human travel consultation or guaranteed personal replies",
   "Perfect translation coverage for every page",
 ];
@@ -40,6 +47,7 @@ const notYet = [
 export default function AboutPage() {
   return (
     <main className="page-shell min-h-screen text-slate-950">
+      <SiteHeader />
       <Container className="py-8 md:py-12">
         <Card className="p-6 md:p-8" tone="navy">
           <p className="text-[11px] font-semibold uppercase text-sky-200">About fujiseat</p>
@@ -78,7 +86,7 @@ export default function AboutPage() {
             </p>
             <Link
               href="/questions"
-              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[#07142f] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800"
+              className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[#168a56] px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
             >
               Send anonymous feedback
               <ArrowRight className="h-4 w-4" />

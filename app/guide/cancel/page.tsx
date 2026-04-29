@@ -3,7 +3,8 @@ import Link from "next/link";
 
 export default function CancelPage() {
   return (
-    <main className="max-w-xl mx-auto px-4 py-16 text-center space-y-4">
+    <main className="page-shell min-h-screen px-4 py-16 text-center text-slate-950">
+      <div className="mx-auto max-w-xl space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <h1 className="text-3xl font-bold">Checkout canceled</h1>
       <p>
         No worries — your card was not charged. You can start the checkout
@@ -11,10 +12,11 @@ export default function CancelPage() {
       </p>
       <Link
         href="/pricing"
-        className="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700"
+        className="inline-flex items-center rounded-lg border border-[#168a56] bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
       >
         Back to pricing
       </Link>
+      </div>
     </main>
   );
 }

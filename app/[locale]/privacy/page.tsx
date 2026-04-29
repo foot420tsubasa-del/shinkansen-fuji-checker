@@ -4,11 +4,24 @@ import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { BrandMark } from "@/components/ui/BrandMark";
+import { SiteHeader } from "../components/SiteHeader";
+import { getAlternates } from "@/i18n/hreflang";
 
-export const metadata: Metadata = {
-  title: "Privacy Policy | fujiseat",
-  description: "Privacy policy for fujiseat, including analytics, affiliate links, and local browser storage.",
-};
+type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Privacy Policy | fujiseat",
+    description: "Privacy policy for fujiseat, including analytics, affiliate links, and local browser storage.",
+    openGraph: {
+      title: "Privacy Policy | fujiseat",
+      description: "Privacy policy for fujiseat, including analytics, affiliate links, and local browser storage.",
+      siteName: "fujiseat",
+    },
+    alternates: getAlternates("/privacy", locale),
+  };
+}
 
 const sections = [
   {
@@ -52,6 +65,7 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <main className="page-shell min-h-screen text-slate-950">
+      <SiteHeader />
       <Container className="py-6 md:py-10">
         <div className="mb-6 flex items-center justify-between gap-4">
           <Link href="/" className="inline-flex items-center gap-1 text-sm font-medium text-slate-600 hover:text-slate-950">

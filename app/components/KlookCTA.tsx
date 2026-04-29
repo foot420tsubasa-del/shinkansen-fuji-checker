@@ -5,7 +5,7 @@ import { JR_PASS_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 
 export function KlookCTA() {
   return (
-    <div className="bg-red-50 border border-red-200 rounded-2xl px-4 py-4 space-y-3 shadow-sm shadow-red-100">
+    <div className="space-y-3 rounded-2xl border border-[#ffb56b] bg-[#fff3e7] px-4 py-4 shadow-sm shadow-orange-100">
       <p className="text-[13px] font-semibold text-slate-800">
         Ready to book? Get your Shinkansen ticket via Klook (English OK)
       </p>
@@ -14,7 +14,7 @@ export function KlookCTA() {
           href={SHINKANSEN_TICKET_URL}
           target="_blank"
           rel={AFFILIATE_REL}
-          className="flex-1 inline-flex items-center justify-center rounded-2xl bg-red-500 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-red-200 hover:brightness-110 active:brightness-95 transition-all"
+          className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700] active:brightness-95"
         >
           Book Shinkansen
         </a>
@@ -22,7 +22,7 @@ export function KlookCTA() {
           href={JR_PASS_URL}
           target="_blank"
           rel={AFFILIATE_REL}
-          className="flex-1 inline-flex items-center justify-center rounded-2xl border border-red-400 bg-white px-4 py-2.5 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-50 active:brightness-95 transition-all"
+          className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
         >
           Compare JR Pass
         </a>

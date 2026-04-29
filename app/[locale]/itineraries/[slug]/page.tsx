@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Calendar, Clock, Users, Zap } from "lucide-react";
+import { Calendar, Clock, Users, Zap } from "lucide-react";
+import Script from "next/script";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
-import { BrandMark } from "@/components/ui/BrandMark";
+import { SiteHeader } from "../../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { DayCard } from "@/components/content/DayCard";
 import { ProTip } from "@/components/content/ProTip";
@@ -11,6 +12,7 @@ import { NextActions } from "@/components/content/NextActions";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAllItinerarySlugs, getItineraryBySlug } from "@/lib/content/itineraries";
+import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -33,6 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: page.description,
       siteName: "fujiseat",
     },
+    alternates: getAlternates(`/itineraries/${slug}`, locale),
   };
 }
 
@@ -42,31 +45,53 @@ const paceConfig = {
   fast: { label: "Fast", icon: Zap, className: "border-amber-200 bg-amber-50 text-amber-700" },
 };
 
+const SITE_URL = "https://fujiseat.com";
+
+function localizedUrl(locale: string, path: string) {
+  return locale === "en" ? `${SITE_URL}${path}` : `${SITE_URL}/${locale}${path}`;
+}
+
 export default async function ItineraryPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const page = getItineraryBySlug(slug);
   if (!page) notFound();
 
   const pace = paceConfig[page.pace];
   const PaceIcon = pace.icon;
+  const pagePath = `/itineraries/${slug}`;
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: localizedUrl(locale, "/"),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Itineraries",
+        item: localizedUrl(locale, "/itineraries"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: page.title,
+        item: localizedUrl(locale, pagePath),
+      },
+    ],
+  };
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
-      <div className="page-header border-b border-sky-100/80 backdrop-blur">
-        <Container className="flex min-h-16 items-center justify-between gap-4 py-3">
-          <div className="flex min-w-0 items-center gap-3">
-            <BrandMark />
-            <div className="min-w-0">
-              <p className="text-sm font-semibold text-slate-950 md:text-base">fujiseat</p>
-              <p className="hidden text-xs leading-5 text-slate-500 sm:block">Japan travel utility hub</p>
-            </div>
-          </div>
-          <Link href="/" className="text-sm font-medium text-slate-600 hover:text-slate-950">
-            <ArrowLeft className="mr-1 inline h-4 w-4" />
-            Home
-          </Link>
-        </Container>
-      </div>
+      <Script
+        id={`breadcrumb-itinerary-${slug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <SiteHeader />
 
       <Container className="py-8 md:py-12">
         <Breadcrumb items={[
@@ -106,6 +131,35 @@ export default async function ItineraryPage({ params }: Props) {
           </section>
 
           <ProTip>{page.proTip}</ProTip>
+
+          <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#145aa0]">
+              Plan the logistics
+            </p>
+            <h2 className="mt-2 text-lg font-semibold text-slate-950">
+              Lock in arrival and hotel decisions before booking the route.
+            </h2>
+            <div className="mt-4 grid gap-3 md:grid-cols-2">
+              <Link
+                href="/airport-transfers/narita-to-shinjuku"
+                className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]"
+              >
+                <span className="block font-bold text-[#082653]">Airport transfers</span>
+                <span className="mt-1 block text-xs leading-5 text-[#5f7190]">
+                  Choose Narita/Haneda to city routes before arrival day.
+                </span>
+              </Link>
+              <Link
+                href="/areas-to-stay/tokyo-first-time"
+                className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]"
+              >
+                <span className="block font-bold text-[#082653]">Areas to stay</span>
+                <span className="mt-1 block text-xs leading-5 text-[#5f7190]">
+                  Compare Shinjuku, Ueno, Asakusa, Tokyo Station, and calmer local bases.
+                </span>
+              </Link>
+            </div>
+          </section>
 
           <NextActions picks={page.nextActions} />
         </div>

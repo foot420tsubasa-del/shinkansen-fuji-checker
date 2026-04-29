@@ -14,6 +14,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("homeTitle"),
     description: t("homeDesc"),
     alternates: getAlternates("", locale),
+    openGraph: {
+      title: t("homeTitle"),
+      description: t("homeDesc"),
+      siteName: "fujiseat",
+      images: [{ url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fujiseat.com"}/og-home.png`, width: 1200, height: 630 }],
+    },
     other: {
       "agd-partner-manual-verification": "",
     },

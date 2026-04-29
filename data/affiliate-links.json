@@ -7,6 +7,7 @@
     "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165791&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F1420-7-day-whole-japan-rail-pass-jr-pass%2F",
     "usedOn": [
       "Top",
+      "HomeAfterSeat",
       "Guide",
       "KlookCTA",
       "Command Center",
@@ -20,11 +21,12 @@
   "shinkansenTicket": {
     "label": "Single Shinkansen Ticket (Tokaido Shinkansen)",
     "provider": "klook",
-    "adid": "1165791",
+    "adid": "1265303",
     "klookPath": "activity/81022-tokaido-shinkansen-ticket/",
-    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1165791&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F81022-tokaido-shinkansen-ticket%2F",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1265303&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fjapan-rail%2Fshinkansen%2F",
     "usedOn": [
       "Top",
+      "HomeAfterSeat",
       "Guide",
       "KlookCTA",
       "PlanYourTrip",
@@ -258,101 +260,6 @@
     "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263643&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F149639-tokyo-monorail-ticket-between-haneda-airport-and-hamamatsucho%2F",
     "usedOn": [
       "Transfer"
-    ]
-  },
-  "bookingTokyo": {
-    "label": "Tokyo Hotels",
-    "provider": "booking.com",
-    "adid": "",
-    "klookPath": "",
-    "directUrl": "",
-    "usedOn": [
-      "Stay"
-    ]
-  },
-  "bookingShinjuku": {
-    "label": "Shinjuku Hotels",
-    "provider": "booking.com",
-    "adid": "",
-    "klookPath": "",
-    "directUrl": "",
-    "usedOn": [
-      "Stay",
-      "Itineraries"
-    ]
-  },
-  "bookingUeno": {
-    "label": "Ueno Hotels",
-    "provider": "booking.com",
-    "adid": "",
-    "klookPath": "",
-    "directUrl": "",
-    "usedOn": [
-      "Stay"
-    ]
-  },
-  "bookingAsakusa": {
-    "label": "Asakusa Hotels",
-    "provider": "booking.com",
-    "adid": "",
-    "klookPath": "",
-    "directUrl": "",
-    "usedOn": [
-      "Stay",
-      "Itineraries"
-    ]
-  },
-  "bookingKyoto": {
-    "label": "Kyoto Hotels",
-    "provider": "booking.com",
-    "adid": "",
-    "klookPath": "",
-    "directUrl": "",
-    "usedOn": [
-      "Stay",
-      "Itineraries"
-    ]
-  },
-  "bookingOsaka": {
-    "label": "Osaka Hotels",
-    "provider": "booking.com",
-    "adid": "",
-    "klookPath": "",
-    "directUrl": "",
-    "usedOn": [
-      "Stay",
-      "Itineraries"
-    ]
-  },
-  "bookingKawaguchiko": {
-    "label": "Kawaguchiko / Mt Fuji Hotels",
-    "provider": "booking.com",
-    "adid": "",
-    "klookPath": "",
-    "directUrl": "",
-    "usedOn": [
-      "Stay",
-      "Itineraries"
-    ]
-  },
-  "bookingHakone": {
-    "label": "Hakone Ryokan & Hotels",
-    "provider": "booking.com",
-    "adid": "",
-    "klookPath": "",
-    "directUrl": "",
-    "usedOn": [
-      "Itineraries"
-    ]
-  },
-  "bookingHiroshima": {
-    "label": "Hiroshima Hotels",
-    "provider": "booking.com",
-    "adid": "",
-    "klookPath": "",
-    "directUrl": "",
-    "usedOn": [
-      "Itineraries"
     ]
   },
   "agodaTokyo": {

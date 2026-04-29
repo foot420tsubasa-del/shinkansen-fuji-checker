@@ -5,8 +5,6 @@ const affiliateHosts = [
   "affiliate.klook.com",
   "klook.com",
   "www.klook.com",
-  "booking.com",
-  "www.booking.com",
   "agoda.com",
   "www.agoda.com",
 ];

@@ -90,7 +90,6 @@ const PLACEMENTS: Record<string, Placement[]> = {
 
 const PROVIDER_STYLES: Record<string, { dot: string; badge: string; label: string; color: string }> = {
   klook: { dot: "bg-orange-400", badge: "bg-orange-100 text-orange-800 border-orange-200", label: "Klook", color: "border-orange-300 bg-orange-50" },
-  "booking.com": { dot: "bg-blue-500", badge: "bg-blue-100 text-blue-800 border-blue-200", label: "Booking.com", color: "border-blue-300 bg-blue-50" },
   agoda: { dot: "bg-red-400", badge: "bg-red-100 text-red-800 border-red-200", label: "Agoda", color: "border-red-300 bg-red-50" },
   getyourguide: { dot: "bg-emerald-500", badge: "bg-emerald-100 text-emerald-800 border-emerald-200", label: "GetYourGuide", color: "border-emerald-300 bg-emerald-50" },
   safetywing: { dot: "bg-cyan-500", badge: "bg-cyan-100 text-cyan-800 border-cyan-200", label: "SafetyWing", color: "border-cyan-300 bg-cyan-50" },
@@ -139,7 +138,7 @@ export default function AdminPage() {
   }, [adminToken]);
 
   useEffect(() => {
-    const saved = localStorage.getItem("fujiseat_admin_token") || "";
+    const saved = sessionStorage.getItem("fujiseat_admin_token") || "";
     setAdminToken(saved);
   }, []);
 
@@ -293,7 +292,6 @@ export default function AdminPage() {
             className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-sky-300"
           >
             <option value="klook">Klook</option>
-            <option value="booking.com">Booking.com</option>
             <option value="agoda">Agoda</option>
             <option value="getyourguide">GetYourGuide</option>
             <option value="safetywing">SafetyWing</option>
@@ -482,7 +480,7 @@ export default function AdminPage() {
               <button
                 type="button"
                 onClick={() => {
-                  localStorage.setItem("fujiseat_admin_token", adminToken);
+                  sessionStorage.setItem("fujiseat_admin_token", adminToken);
                   fetchLinks();
                   flash("トークンを保存しました", true);
                 }}
@@ -547,7 +545,6 @@ export default function AdminPage() {
           </div>
         )}
 
-        {/* TODO tab */}
         {!loading && tab === "todo" && (
           <div className="space-y-6">
             {todoItems.length === 0 ? (
@@ -614,7 +611,7 @@ export default function AdminPage() {
             )}
 
             {/* Group by provider */}
-            {(["klook", "booking.com", "agoda"] as const).map((provider) => {
+            {(["klook", "agoda"] as const).map((provider) => {
               const items = byProvider(provider);
               if (items.length === 0) return null;
               const style = ps(provider);
@@ -635,12 +632,12 @@ export default function AdminPage() {
             })}
 
             {/* Other providers */}
-            {links.filter((l) => !["klook", "booking.com", "agoda"].includes(l.provider)).length > 0 && (
+            {links.filter((l) => !["klook", "agoda"].includes(l.provider)).length > 0 && (
               <div>
                 <p className="mb-2 text-xs font-bold text-slate-700">その他</p>
                 <div className="space-y-2">
                   {links
-                    .filter((l) => !["klook", "booking.com", "agoda"].includes(l.provider))
+                    .filter((l) => !["klook", "agoda"].includes(l.provider))
                     .map((entry) => <LinkCard key={entry.id} entry={entry} />)}
                 </div>
               </div>
@@ -673,27 +670,6 @@ export default function AdminPage() {
             </div>
           </div>
 
-          {/* Booking.com */}
-          <div className="rounded-2xl border border-blue-200 bg-blue-50/50 p-5 shadow-sm">
-            <div className="flex items-center gap-2">
-              <span className="h-3 w-3 rounded-full bg-blue-500" />
-              <p className="text-xs font-bold text-slate-900">Booking.com — アフィリエイトURL を丸ごと貼る</p>
-            </div>
-            <p className="mt-2 text-[11px] leading-5 text-slate-600">
-              Booking.com では完成したアフィリエイトリンクをそのまま貼ります。
-            </p>
-            <div className="mt-3 rounded-xl bg-white p-3">
-              <p className="text-[10px] font-semibold text-slate-700">手順</p>
-              <ol className="mt-1 list-inside list-decimal space-y-1 text-[11px] leading-5 text-slate-600">
-                <li>Booking.com Affiliate Partner にログイン</li>
-                <li>「Deep Link Generator」または「Link Generator」を開く</li>
-                <li>リンクしたいページの URL を入力（例: booking.com/searchresults.html?city=-246227）</li>
-                <li>生成されたアフィリエイトリンクをコピー</li>
-                <li>この管理画面で「設定する」→ URL に貼り付け → 保存</li>
-              </ol>
-            </div>
-          </div>
-
           {/* Agoda */}
           <div className="rounded-2xl border border-red-200 bg-red-50/50 p-5 shadow-sm">
             <div className="flex items-center gap-2">
@@ -701,7 +677,7 @@ export default function AdminPage() {
               <p className="text-xs font-bold text-slate-900">Agoda — アフィリエイトURL を丸ごと貼る</p>
             </div>
             <p className="mt-2 text-[11px] leading-5 text-slate-600">
-              Agoda も Booking.com と同様に完成リンクを貼ります。
+              Agoda は完成したアフィリエイトリンクをそのまま貼ります。
             </p>
             <div className="mt-3 rounded-xl bg-white p-3">
               <p className="text-[10px] font-semibold text-slate-700">手順</p>

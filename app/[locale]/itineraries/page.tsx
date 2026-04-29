@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import { ArrowRight, Map } from "lucide-react";
+import Script from "next/script";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
+import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { itineraryPages } from "@/lib/content/itineraries";
+import { getAlternates } from "@/i18n/hreflang";
 
 const paceConfig = {
   relaxed: { label: "Relaxed", color: "bg-emerald-50 text-emerald-700 border-emerald-200" },
@@ -16,6 +19,12 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
+const SITE_URL = "https://fujiseat.com";
+
+function localizedUrl(locale: string, path: string) {
+  return locale === "en" ? `${SITE_URL}${path}` : `${SITE_URL}/${locale}${path}`;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return {
@@ -23,17 +32,46 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description:
       "Day-by-day Japan itineraries for first-time visitors. From a 5-day express trip to a 14-day deep dive — each plan includes hotels, transport, and booking links.",
     robots: locale === "en" ? undefined : { index: false, follow: true },
+    alternates: getAlternates("/itineraries", locale),
     openGraph: {
       title: "Japan Itineraries — Day-by-Day Trip Plans",
       description:
         "Detailed itineraries from 5 to 14 days. Hotels, transport, and activities included.",
       siteName: "fujiseat",
+      images: [{ url: "https://fujiseat.com/og-itineraries.png", width: 1200, height: 630 }],
     },
   };
 }
 
-export default function ItinerariesIndex() {
+export default async function ItinerariesIndex({ params }: Props) {
+  const { locale } = await params;
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: localizedUrl(locale, "/"),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Itineraries",
+        item: localizedUrl(locale, "/itineraries"),
+      },
+    ],
+  };
+
   return (
+    <main className="page-shell min-h-screen text-slate-950">
+    <Script
+      id="breadcrumb-itineraries"
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+    />
+    <SiteHeader />
     <Container className="py-8 md:py-12">
       <Breadcrumb
         items={[
@@ -105,10 +143,8 @@ export default function ItinerariesIndex() {
         })}
       </div>
 
-      <p className="mt-8 text-center text-[10px] text-slate-400">
-        Booking links are partner links — we earn a small commission at no extra cost to you.
-      </p>
-      <LastCheckedNote className="mt-2 text-center" />
+      <LastCheckedNote className="mt-8 text-center" />
     </Container>
+    </main>
   );
 }

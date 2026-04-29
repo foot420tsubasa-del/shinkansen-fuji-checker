@@ -1,17 +1,22 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Mountain, Train, Info, ArrowLeft, Wifi, ShieldCheck, Car, ExternalLink, AlertTriangle } from "lucide-react";
+import { Mountain, Train, Info, Wifi, ShieldCheck, Car, ExternalLink, AlertTriangle } from "lucide-react";
 import Script from "next/script";
 import { Link } from "@/i18n/navigation";
 import { KlookCTA } from "../components/KlookCTA";
-import { LanguageSelector } from "../components/LanguageSelector";
+import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
 import { KLOOK_URL, ESIM_URL, AIRPORT_TRANSFER_URL, INSURANCE_URL, CAR_RENTAL_URL } from "@/src/affiliateLinks";
 import { GuideNextSteps } from "@/components/travel/GuideNextSteps";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
-import { BrandMark } from "@/components/ui/BrandMark";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+
+const SITE_URL = "https://fujiseat.com";
+
+function localizedUrl(locale: string, path: string) {
+  return locale === "en" ? `${SITE_URL}${path}` : `${SITE_URL}/${locale}${path}`;
+}
 
 const baseFaqSchemaItems = [
   {
@@ -343,15 +348,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: "Mont Fuji depuis le Shinkansen — côté, siège et timing",
       description: "Guide gratuit par un Tokyoïte : quel côté du Shinkansen pour voir le mont Fuji, pourquoi le siège E, et quand regarder. Mis à jour 2026.",
       alternates: getAlternates("/guide", locale),
+      openGraph: {
+        title: "Mont Fuji depuis le Shinkansen — côté, siège et timing",
+        description: "Guide gratuit par un Tokyoïte : quel côté du Shinkansen pour voir le mont Fuji.",
+        siteName: "fujiseat",
+        images: [{ url: "https://fujiseat.com/og-guide.png", width: 1200, height: 630 }],
+      },
     };
   }
+  const guideTitle = locale === "en" ? "Mt. Fuji Shinkansen Seat Guide — Side, Seat & Timing" : t("guideTitle");
+  const guideDesc = locale === "en"
+    ? "Which Shinkansen side for Mt. Fuji, why Seat E matters, when and where to look. Free guide from a Tokyo local, updated for 2026."
+    : t("guideDesc");
   return {
-    title: locale === "en" ? "Mt. Fuji Shinkansen Seat Guide — Side, Seat & Timing" : t("guideTitle"),
-    description:
-      locale === "en"
-        ? "Which Shinkansen side for Mt. Fuji, why Seat E matters, when and where to look. Free guide from a Tokyo local, updated for 2026."
-        : t("guideDesc"),
+    title: guideTitle,
+    description: guideDesc,
     alternates: getAlternates("/guide", locale),
+    openGraph: {
+      title: guideTitle,
+      description: guideDesc,
+      siteName: "fujiseat",
+      images: [{ url: "https://fujiseat.com/og-guide.png", width: 1200, height: 630 }],
+    },
   };
 }
 
@@ -486,6 +504,24 @@ export default async function GuidePage({ params }: Props) {
         ],
       }
     : howToSchema;
+  const breadcrumbSchemaData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: localizedUrl(locale, "/"),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: copy.title,
+        item: localizedUrl(locale, "/guide"),
+      },
+    ],
+  };
 
   const seasonColors = [
     "text-emerald-700",
@@ -578,7 +614,7 @@ export default async function GuidePage({ params }: Props) {
   );
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-sky-100 via-sky-50 to-white text-slate-900 flex flex-col">
+    <main className="page-shell flex min-h-screen flex-col text-slate-900">
       <Script
         id="faq-schema"
         type="application/ld+json"
@@ -594,33 +630,22 @@ export default async function GuidePage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchemaData) }}
       />
+      <Script
+        id="breadcrumb-guide-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }}
+      />
+      <SiteHeader />
       <div className="flex-1 flex flex-col px-4 py-6 max-w-2xl mx-auto w-full">
-        {/* Header */}
-        <header className="mb-6 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <BrandMark size="sm" />
-            <div>
-              <h1 className="text-sm font-semibold tracking-tight leading-snug">
-                {copy.title}
-              </h1>
-              <p className="text-xs text-slate-500">{t("subtitle")}</p>
-              <p className="mt-0.5 text-[10px] text-slate-500">
-                {t("writtenBy")}
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 shrink-0">
-            <LanguageSelector />
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-[11px] text-slate-600 hover:bg-slate-50 transition-colors"
-            >
-              <ArrowLeft className="h-3.5 w-3.5" />
-              <span>{t("backToChecker")}</span>
-            </Link>
-          </div>
-        </header>
+        <div className="mb-6">
+          <h1 className="text-lg font-semibold tracking-tight text-slate-950">
+            {copy.title}
+          </h1>
+          <p className="mt-1 text-xs text-slate-500">{t("subtitle")}</p>
+          <p className="mt-0.5 text-[10px] text-slate-500">
+            {t("writtenBy")}
+          </p>
+        </div>
 
         {/* Intro */}
         <section className="mb-5 text-[13px] leading-relaxed text-slate-700 bg-white/90 border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">
@@ -642,7 +667,7 @@ export default async function GuidePage({ params }: Props) {
           <div className="flex flex-wrap gap-2">
             <Link
               href="/"
-              className="inline-flex items-center rounded-full bg-sky-500 px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm hover:brightness-110 transition-all"
+              className="inline-flex items-center rounded-full border border-[#168a56] bg-[#168a56] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
               {copy.checkSeatNow}
             </Link>
@@ -656,13 +681,13 @@ export default async function GuidePage({ params }: Props) {
               href={KLOOK_URL}
               target="_blank"
               rel={AFFILIATE_REL}
-              className="inline-flex items-center rounded-full border border-red-200 bg-red-50 px-3.5 py-1.5 text-[12px] font-semibold text-red-600 hover:bg-red-100 transition-colors"
+              className="inline-flex items-center rounded-full border border-[#ff7a00] bg-[#ff7a00] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
             >
               {copy.bookOnKlook}
             </a>
             <Link
               href="/planner"
-              className="inline-flex items-center rounded-full border border-indigo-200 bg-indigo-50 px-3.5 py-1.5 text-[12px] font-semibold text-indigo-600 hover:bg-indigo-100 transition-colors"
+              className="inline-flex items-center rounded-full border border-[#9fd7bd] bg-[#f0fbf6] px-3.5 py-1.5 text-[12px] font-semibold text-[#106b43] transition-colors hover:border-[#168a56] hover:bg-white"
             >
               {t("commandCenterBtn")} →
             </Link>
@@ -686,6 +711,41 @@ export default async function GuidePage({ params }: Props) {
         <div className="mb-6">
           <GuideNextSteps />
         </div>
+
+        <section className="mb-6 rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm shadow-slate-200/70">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+            Continue planning
+          </p>
+          <div className="mt-3 grid gap-2.5">
+            <Link
+              href="/local-tokyo"
+              className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[12px] transition-colors hover:bg-white"
+            >
+              <span className="block font-semibold text-slate-900">Local Tokyo neighborhoods</span>
+              <span className="mt-0.5 block text-slate-500">
+                Add quieter east-side stops like Kiyosumi-Shirakawa, Kuramae, Oshiage, and Ryogoku.
+              </span>
+            </Link>
+            <Link
+              href="/itineraries/7-day-first-time-japan"
+              className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[12px] transition-colors hover:bg-white"
+            >
+              <span className="block font-semibold text-slate-900">7-day first-time Japan itinerary</span>
+              <span className="mt-0.5 block text-slate-500">
+                Put the Fuji-side Shinkansen ride into a realistic Tokyo, Kyoto, and Osaka route.
+              </span>
+            </Link>
+            <Link
+              href="/areas-to-stay/tokyo-first-time"
+              className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[12px] transition-colors hover:bg-white"
+            >
+              <span className="block font-semibold text-slate-900">Tokyo areas to stay</span>
+              <span className="mt-0.5 block text-slate-500">
+                Compare Shinjuku, Ueno, Asakusa, Tokyo Station, and calmer east-side bases.
+              </span>
+            </Link>
+          </div>
+        </section>
 
         {/* Jump to section */}
         <div className="mb-5 text-[12px] text-slate-500 leading-relaxed">
@@ -960,7 +1020,7 @@ export default async function GuidePage({ params }: Props) {
             <div className="mt-3">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-red-500 to-red-500 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-red-200 hover:brightness-110 active:brightness-95 transition-all"
+                className="inline-flex items-center justify-center rounded-2xl border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-100 transition-colors hover:bg-[#0f6f45] active:brightness-95"
               >
                 {t("openChecker")}
               </Link>

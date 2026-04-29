@@ -19,6 +19,15 @@ const englishOnlyContentPaths = [
   "/itineraries",
   "/areas-to-stay",
   "/airport-transfers",
+  "/local-tokyo",
+  "/local-tokyo/kiyosumi-shirakawa",
+  "/local-tokyo/kuramae",
+  "/local-tokyo/monzen-nakacho",
+  "/local-tokyo/ryogoku",
+  "/local-tokyo/oshiage",
+  "/privacy",
+  "/terms",
+  "/questions",
 ];
 
 const dynamicPaths = [

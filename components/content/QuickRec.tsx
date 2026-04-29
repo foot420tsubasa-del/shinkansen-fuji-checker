@@ -23,7 +23,7 @@ export function QuickRec({ area, why, link, cta = "See hotels" }: QuickRecProps)
         href={link}
         target="_blank"
         rel={AFFILIATE_REL}
-        className="mt-4 inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-200 transition-all hover:bg-emerald-700"
+        className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700]"
       >
         {cta}
         <ArrowRight className="h-4 w-4" />

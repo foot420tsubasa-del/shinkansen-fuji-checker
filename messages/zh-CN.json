@@ -56,10 +56,22 @@
     "timingNote": "富士山通常在晴天时于新横滨至静冈之间可见，尤其是新富士站附近。整段旅程不一定都能看到，请在进入该区段前提早准备好相机。",
     "faqTitle": "富士山 & 座位快速 FAQ",
     "faq": [
-      { "q": "E 号座位已售完？", "a": "可以预订 D 号座位，同样在富士山那一侧，只是离窗户多一个座位。" },
-      { "q": "绿色车厢怎么办？", "a": "座位配置可能不同，但左右方向规则仍然适用。请尽量选富士山侧的靠窗座位。" },
-      { "q": "这个座位适合拍照吗？", "a": "非常适合。E 靠窗座位让您能够清晰拍摄富士山，前方不会有其他乘客遮挡。" },
-      { "q": "一定能看到富士山吗？", "a": "不一定。阴天或雾天时，即使坐在正确的位置也可能看不到。" }
+      {
+        "q": "E 号座位已售完？",
+        "a": "可以预订 D 号座位，同样在富士山那一侧，只是离窗户多一个座位。"
+      },
+      {
+        "q": "绿色车厢怎么办？",
+        "a": "座位配置可能不同，但左右方向规则仍然适用。请尽量选富士山侧的靠窗座位。"
+      },
+      {
+        "q": "这个座位适合拍照吗？",
+        "a": "非常适合。E 靠窗座位让您能够清晰拍摄富士山，前方不会有其他乘客遮挡。"
+      },
+      {
+        "q": "一定能看到富士山吗？",
+        "a": "不一定。阴天或雾天时，即使坐在正确的位置也可能看不到。"
+      }
     ],
     "shareHeading": "和朋友一起旅行？截图分享，让他们记住：",
     "shareTokyo": "东京 → 大阪/京都：右侧，E 号座位",
@@ -175,6 +187,172 @@
         "desc": "医疗 + 行程取消。容易跳过，难以后悔。",
         "cta": "查看方案"
       }
+    },
+    "featureCards": {
+      "seatChecker": {
+        "title": "座位查询",
+        "desc": "找到适合欣赏 Mt. Fuji 的 Shinkansen 最佳座位。"
+      },
+      "tripPlanner": {
+        "title": "行程规划器",
+        "desc": "用路线、时间和必备事项来安排你的行程。"
+      },
+      "quietTokyo": {
+        "title": "安静的 Tokyo",
+        "desc": "从街区和本地散步路线，看见更从容的 Tokyo。"
+      },
+      "stayAreas": {
+        "title": "住宿区域",
+        "desc": "比较适合铁路出行日和行李安排的实用据点。"
+      },
+      "essentials": {
+        "title": "必备事项",
+        "desc": "eSIM、机场交通和铁路预订链接。"
+      }
+    },
+    "popularLinks": {
+      "eyebrow": "热门链接",
+      "tokyo": {
+        "title": "Tokyo",
+        "desc": "从 Tokyo 开始你的旅程。"
+      },
+      "fujiView": {
+        "title": "列车上的 Mt. Fuji 景观",
+        "desc": "好座位，才有好景色。预订前先确认 E 座。"
+      },
+      "kyoto": {
+        "title": "Kyoto",
+        "desc": "寺院、庭园和历久弥新的街道。"
+      },
+      "osaka": {
+        "title": "Osaka",
+        "desc": "美食、活力和轻松的一日游。"
+      }
+    },
+    "tokyoBases": {
+      "eyebrow": "选择你的 Tokyo 据点",
+      "desc": "Shinjuku 和 Shibuya 是充满活力的经典选择。Tokyo Station 和 Ueno 更实用。想要更安静的本地氛围时，Asakusa 和 East Tokyo 会更合适。",
+      "shinjuku": {
+        "name": "Shinjuku",
+        "bestFor": "第一次来 Tokyo 的热闹感、夜生活、购物和灵活的铁路交通。",
+        "mood": "Tokyo 能量全开",
+        "weakness": "大型车站和深夜人潮在抵达当天可能会让人吃不消。不要跟随 Kabukicho 的街头拉客，乱收费和诈骗酒吧是真实风险。"
+      },
+      "shibuya": {
+        "name": "Shibuya",
+        "bestFor": "时尚、美食、夜生活、年轻文化，以及前往 Tokyo 西侧的便利交通。",
+        "mood": "经典又有活力",
+        "weakness": "人多，部分酒店周边有坡路，而且不太适合清早赶 Shinkansen。"
+      },
+      "ueno": {
+        "name": "Ueno",
+        "bestFor": "经济型酒店、Narita 交通、博物馆和市场美食。",
+        "mood": "实用又有文化感",
+        "weakness": "深夜选择比 Shinjuku 或 Shibuya 少。"
+      },
+      "asakusa": {
+        "name": "Asakusa",
+        "bestFor": "传统 Tokyo、Senso-ji、河边散步和老街氛围。",
+        "mood": "东侧的经典 Tokyo",
+        "weakness": "不在 JR Yamanote Line 上，跨城移动需要换乘。"
+      },
+      "tokyoStation": {
+        "name": "Tokyo Station",
+        "bestFor": "清早 Shinkansen、顺畅动线、前往 Ginza，以及高效率出行日。",
+        "mood": "安静高效",
+        "weakness": "商务感更强，通常也比 Ueno 或 Asakusa 贵。"
+      },
+      "eastTokyo": {
+        "name": "Kiyosumi-Shirakawa / East Tokyo",
+        "bestFor": "安静的本地 Tokyo、咖啡、庭园、博物馆和慢节奏早晨。",
+        "mood": "本地视角",
+        "weakness": "比起第一次入住的默认选择，更适合作为安静绕行或第二次来 Tokyo 的据点。"
+      }
+    },
+    "localTokyo": {
+      "eyebrow": "日本本地人精选的 Local Tokyo",
+      "desc": "用本地视角探索 Shinjuku 和 Shibuya 之外更安静的东侧街区，也包括适合看 Skytree 和河边散步的 Oshiage。",
+      "seeAll": "查看全部 Local Tokyo 精选",
+      "kiyosumi": {
+        "name": "Kiyosumi-Shirakawa",
+        "summary": "咖啡、Kiyosumi Garden、Fukagawa Edo Museum，以及运河边的慢步调散步。附近新开了金缮体验工坊，藏在小巷里的小咖啡摊 OZ 也吸引了懂门道的海外旅人。",
+        "bestFor": "咖啡、庭园、博物馆",
+        "avoidIf": "你想要夜生活或第一晚的简单动线",
+        "timing": "上午到午后早些时候"
+      },
+      "kuramae": {
+        "name": "Kuramae",
+        "summary": "设计小店、小型手作品牌、河边咖啡馆，以及和 Asakusa 更柔和的搭配。",
+        "bestFor": "设计小店和悠闲咖啡馆",
+        "avoidIf": "你想在一站内看完主要景点",
+        "timing": "上午晚些时候到下午"
+      },
+      "oshiage": {
+        "name": "Oshiage",
+        "summary": "Skytree 景观、Sumida 河边散步，以及更安静的东侧住宿。旁边的 Kinshicho 有宽敞的 Daiso、Muji 和扭蛋楼层，没有 Shibuya 那样的人潮。",
+        "bestFor": "Skytree 景观和经济住宿",
+        "avoidIf": "你想要夜生活或市中心感",
+        "timing": "下午到晚上"
+      },
+      "monzenNakacho": {
+        "name": "Monzen-Nakacho",
+        "summary": "老 Tokyo 街道、神社、社区 izakaya，以及轻松串联 East Tokyo 的路线。",
+        "bestFor": "神社、本地美食、老街氛围",
+        "avoidIf": "你需要大量英语旅游设施",
+        "timing": "下午到傍晚"
+      },
+      "ryogoku": {
+        "name": "Ryogoku",
+        "summary": "相扑文化、Edo 历史、博物馆，以及通往 Asakusa 的实用衔接点。",
+        "bestFor": "相扑和 Edo 历史",
+        "avoidIf": "你想购物或体验夜生活",
+        "timing": "上午或午后早些时候"
+      }
+    },
+    "essentialsCta": {
+      "eyebrow": "落地前的必备事项",
+      "shinkansen": {
+        "title": "单程 Shinkansen 车票",
+        "desc": "确认 Fuji 侧座位后再预订。"
+      },
+      "esim": {
+        "title": "日本 eSIM",
+        "desc": "落地后马上联网。"
+      },
+      "airportTransfer": {
+        "title": "机场交通",
+        "desc": "比较省心的机场路线。"
+      },
+      "jrPass": {
+        "title": "JR Pass",
+        "desc": "只有路线包含多段长途移动时才需要确认。"
+      },
+      "insurance": {
+        "title": "旅行保险",
+        "desc": "出发前准备医疗和取消保障。"
+      }
+    },
+    "footer": {
+      "tagline": "为你的日本旅行提供聪明工具、从容路线和实用本地建议。",
+      "plan": "规划",
+      "seatChecker": "座位查询",
+      "planner": "规划器",
+      "stayAreas": "住宿区域",
+      "essentials": "必备事项",
+      "guides": "指南",
+      "shinkansenGuide": "Shinkansen 座位指南",
+      "itineraries": "行程",
+      "airportTransfers": "机场交通",
+      "commandCenter": "指挥中心",
+      "support": "支持",
+      "about": "关于",
+      "localTokyo": "本地 Tokyo",
+      "privacy": "隐私",
+      "terms": "条款",
+      "feedbackTitle": "发送反馈",
+      "feedbackDesc": "目前还没有 newsletter。匿名留言能帮助决定接下来要做哪些日本旅行工具。",
+      "feedbackCta": "留一条建议",
+      "affiliateNote": "部分链接为联盟链接，详情请查看条款。"
     }
   },
   "guide": {
@@ -188,11 +366,26 @@
     "introP2": "整段旅程中并非一直都能看到富士山 — 它只在短暂的一段路程中出现，某些日子可能被云层完全遮蔽。",
     "tldrH2": "重点摘要",
     "tldr": [
-      { "bold": "哪一侧？", "text": "东京 → 大阪/京都 = 右侧。大阪/京都 → 东京 = 左侧。" },
-      { "bold": "哪个座位？", "text": "大多数标准 3+2 车厢中，E 号座位是富士山侧靠窗座位。" },
-      { "bold": "在哪个路段？", "text": "新横滨至静冈之间，尤其是新富士站附近。" },
-      { "bold": "什么时候？", "text": "晴天，通常在上午晚些到下午初（因季节而异）。" },
-      { "bold": "不想记这些？", "text": "在预订前使用 fujiseat.com 的免费新干线富士山座位查询器。" }
+      {
+        "bold": "哪一侧？",
+        "text": "东京 → 大阪/京都 = 右侧。大阪/京都 → 东京 = 左侧。"
+      },
+      {
+        "bold": "哪个座位？",
+        "text": "大多数标准 3+2 车厢中，E 号座位是富士山侧靠窗座位。"
+      },
+      {
+        "bold": "在哪个路段？",
+        "text": "新横滨至静冈之间，尤其是新富士站附近。"
+      },
+      {
+        "bold": "什么时候？",
+        "text": "晴天，通常在上午晚些到下午初（因季节而异）。"
+      },
+      {
+        "bold": "不想记这些？",
+        "text": "在预订前使用 fujiseat.com 的免费新干线富士山座位查询器。"
+      }
     ],
     "s1H2": "新干线哪一侧可以看到富士山？（E 号座位解析）",
     "s1Bullet1Bold": "东京 → 大阪 / 京都：",
@@ -242,16 +435,45 @@
     "seasonH2": "观赏富士山的最佳季节与时间",
     "seasonLabel": "季节指南",
     "seasons": [
-      { "season": "冬季（12月～2月）", "stars": "★★★★★", "rating": "最佳", "note": "雪帽富士山，天空晴朗" },
-      { "season": "秋季（9月～11月）", "stars": "★★★★", "rating": "非常好", "note": "天空清澈，十月起可见早雪" },
-      { "season": "春季（3月～5月）", "stars": "★★★", "rating": "不错", "note": "能见度可能较低" },
-      { "season": "夏季（6月～8月）", "stars": "★", "rating": "困难", "note": "云多、雾多、梅雨季" }
+      {
+        "season": "冬季（12月～2月）",
+        "stars": "★★★★★",
+        "rating": "最佳",
+        "note": "雪帽富士山，天空晴朗"
+      },
+      {
+        "season": "秋季（9月～11月）",
+        "stars": "★★★★",
+        "rating": "非常好",
+        "note": "天空清澈，十月起可见早雪"
+      },
+      {
+        "season": "春季（3月～5月）",
+        "stars": "★★★",
+        "rating": "不错",
+        "note": "能见度可能较低"
+      },
+      {
+        "season": "夏季（6月～8月）",
+        "stars": "★",
+        "rating": "困难",
+        "note": "云多、雾多、梅雨季"
+      }
     ],
     "timeLabel": "时间段",
     "timeItems": [
-      { "bold": "上午10时前：", "text": "雾气形成前通常最晴朗" },
-      { "bold": "上午晚些至下午初：", "text": "晴天时视野良好" },
-      { "bold": "下午晚些：", "text": "富士山侧可能出现阳光眩光" }
+      {
+        "bold": "上午10时前：",
+        "text": "雾气形成前通常最晴朗"
+      },
+      {
+        "bold": "上午晚些至下午初：",
+        "text": "晴天时视野良好"
+      },
+      {
+        "bold": "下午晚些：",
+        "text": "富士山侧可能出现阳光眩光"
+      }
     ],
     "proTip": "小提示：前一天晚上查看静冈县天气预报。我们的工具会在页面顶端显示新富士站附近的即时能见度。",
     "carH2": "车厢号码与座位详细指南",
@@ -266,22 +488,61 @@
     ],
     "carRequestLabel": "如何要求 E 号座位",
     "carRequest": [
-      { "bold": "在 JR 售票窗口：", "text": "出示 「E席をお願いします」" },
-      { "bold": "通过 Klook：", "text": "在座位图上选择 E 列" },
-      { "bold": "持 JR Pass：", "text": "在任何 JR 车站窗口免费预约" }
+      {
+        "bold": "在 JR 售票窗口：",
+        "text": "出示 「E席をお願いします」"
+      },
+      {
+        "bold": "通过 Klook：",
+        "text": "在座位图上选择 E 列"
+      },
+      {
+        "bold": "持 JR Pass：",
+        "text": "在任何 JR 车站窗口免费预约"
+      }
     ],
     "faqH2": "常见问题",
     "faq": [
-      { "q": "坐自由席也能看到富士山吗？", "a": "可以，但有风险 — 可能坐到走道席看不到。请提前预订 E 号指定席。" },
-      { "q": "从列车上能看富士山多久？", "a": "以新干线速度约只有 30～60 秒。请在抵达新富士站前准备好相机。" },
-      { "q": "E 号座位一定是富士山那侧吗？", "a": "普通 3+2 车厢是的。绿色车厢（2+2 配置）的富士山靠窗座位是 D 号。" },
-      { "q": "如果是阴天怎么办？", "a": "富士山很常被云遮蔽，尤其是夏季。请查看页面顶端的即时能见度指标。" },
-      { "q": "回程（大阪/京都→东京）也看得到吗？", "a": "可以 — 富士山在左侧，同样是 E 号座位。使用我们的查询器并选择反方向。" },
-      { "q": "希望号会停靠富士山附近吗？", "a": "不停靠，但列车经过时仍能透过窗户看到。光号和回声号会在新富士站停靠。" },
-      { "q": "只走东京～大阪，JR Pass 划算吗？", "a": "通常不划算。往返约 ¥29,000，7 日券 ¥50,000。若还要去广岛、奈良等地才合算。" },
-      { "q": "可以携带大型行李上新干线吗？", "a": "三边合计超过 160cm、不超过 250cm 的行李，需预约附大型行李放置区的座位（予約が必要）。请于购买新干线车票时一并预约。三边合计超过 250cm 的行李不得携带上车。" },
-      { "q": "新干线上有 WiFi 吗？", "a": "车内有 WiFi 但可能不稳定。建议使用日本 eSIM 确保全程稳定连线。" },
-      { "q": "外国人最方便的购票方式是？", "a": "Klook — 全英文操作，即时手机凭证，并可在座位图上选择 E 号座位。" }
+      {
+        "q": "坐自由席也能看到富士山吗？",
+        "a": "可以，但有风险 — 可能坐到走道席看不到。请提前预订 E 号指定席。"
+      },
+      {
+        "q": "从列车上能看富士山多久？",
+        "a": "以新干线速度约只有 30～60 秒。请在抵达新富士站前准备好相机。"
+      },
+      {
+        "q": "E 号座位一定是富士山那侧吗？",
+        "a": "普通 3+2 车厢是的。绿色车厢（2+2 配置）的富士山靠窗座位是 D 号。"
+      },
+      {
+        "q": "如果是阴天怎么办？",
+        "a": "富士山很常被云遮蔽，尤其是夏季。请查看页面顶端的即时能见度指标。"
+      },
+      {
+        "q": "回程（大阪/京都→东京）也看得到吗？",
+        "a": "可以 — 富士山在左侧，同样是 E 号座位。使用我们的查询器并选择反方向。"
+      },
+      {
+        "q": "希望号会停靠富士山附近吗？",
+        "a": "不停靠，但列车经过时仍能透过窗户看到。光号和回声号会在新富士站停靠。"
+      },
+      {
+        "q": "只走东京～大阪，JR Pass 划算吗？",
+        "a": "通常不划算。往返约 ¥29,000，7 日券 ¥50,000。若还要去广岛、奈良等地才合算。"
+      },
+      {
+        "q": "可以携带大型行李上新干线吗？",
+        "a": "三边合计超过 160cm、不超过 250cm 的行李，需预约附大型行李放置区的座位（予約が必要）。请于购买新干线车票时一并预约。三边合计超过 250cm 的行李不得携带上车。"
+      },
+      {
+        "q": "新干线上有 WiFi 吗？",
+        "a": "车内有 WiFi 但可能不稳定。建议使用日本 eSIM 确保全程稳定连线。"
+      },
+      {
+        "q": "外国人最方便的购票方式是？",
+        "a": "Klook — 全英文操作，即时手机凭证，并可在座位图上选择 E 号座位。"
+      }
     ],
     "makeEasyH2": "用新干线富士山座位查询器轻松搞定",
     "makeEasyP1": "不想记住所有细节？使用我们免费的新干线富士山座位查询器。只需选择方向，即可知道应预订哪个座位来提高看到富士山的机会。",
@@ -331,7 +592,7 @@
     "tabIntel": "情报",
     "tabPlan": "计划",
     "tabTools": "工具",
-    "tabSos": "SOS",
+    "tabSos": "求助",
     "tabPhrases": "短语",
     "tabWeather": "天气",
     "tabFx": "汇率",
@@ -493,7 +754,7 @@
       "stay": "住哪里",
       "seat": "座位查询器",
       "itinerary": "完整行程",
-      "map": "探索路线地图"
+      "map": "旅行中心"
     },
     "footer": {
       "brand": "fujiseat.com — 日本旅行实用工具",
@@ -535,7 +796,7 @@
       "kyotoBase": "京都好据点",
       "planTrip": "规划旅程",
       "checkJrPass": "比较 JR Pass",
-      "routeMap": "路线地图"
+      "routeMap": "旅行中心"
     }
   },
   "feedback": {
@@ -563,5 +824,454 @@
     "sent": "谢谢，反馈已发送。",
     "error": "无法发送反馈，请稍后再试。",
     "privacyNote": "反馈会匿名收集，用于网站改进和未来文章灵感。我不会索取联系方式，因此没有回复流程。"
+  },
+  "localTokyoPages": {
+    "common": {
+      "eyebrow": "本地视角指南",
+      "compareBases": "比较 Tokyo 住宿据点",
+      "placeItinerary": "加入行程",
+      "quickAnswer": "快速结论",
+      "bestFor": "适合",
+      "notBestFor": "不适合",
+      "bestTiming": "最佳时间",
+      "combineWith": "可搭配",
+      "whyVisit": "为什么去",
+      "halfDayRoute": "半日路线",
+      "shouldStay": "适合住在这里吗？",
+      "nearbyHotels": "附近住宿区域"
+    },
+    "kiyosumi-shirakawa": {
+      "title": "Kiyosumi-Shirakawa 指南 — 咖啡、庭园和安静的 East Tokyo",
+      "description": "Kiyosumi-Shirakawa 是 Tokyo 安静的咖啡、庭园和艺术街区。适合慢节奏早晨、博物馆，以及想看见更从容 Tokyo 的旅行者。",
+      "imageAlt": "Kiyosumi-Shirakawa 街区",
+      "bestFor": [
+        "咖啡",
+        "庭园",
+        "博物馆",
+        "安静散步"
+      ],
+      "notBestFor": [
+        "夜生活",
+        "深夜用餐",
+        "第一晚简单动线"
+      ],
+      "bestTiming": "上午到午后早些时候。",
+      "combineWith": "Monzen-Nakacho、Ryogoku、Asakusa 或 Tokyo Station。",
+      "whyVisit": "当 Tokyo 显得太吵时，Kiyosumi-Shirakawa 很有用。这里有独立咖啡馆、经典庭园、小型博物馆，以及仍带住宅感的街道，适合安排一个踏实的东侧早晨。",
+      "route": [
+        "在 Kiyosumi-Shirakawa Station 附近喝咖啡",
+        "Kiyosumi Garden",
+        "Fukagawa Edo Museum",
+        "Museum of Contemporary Art Tokyo 或河边散步",
+        "继续前往 Monzen-Nakacho 或 Ryogoku"
+      ],
+      "shouldStay": "如果你已经解决基本动线，想要安静的本地据点，可以住这里。第一次抵达 Tokyo 的晚上，Shinjuku、Ueno、Asakusa 或 Tokyo Station 通常更简单。",
+      "nearby": [
+        {
+          "title": "Tokyo Station",
+          "description": "适合 Shinkansen 出发和简单动线。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Asakusa",
+          "description": "传统观光和旅游设施更方便。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "酒店较实惠，Narita 交通方便。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "East Tokyo 酒店",
+          "description": "Klook 和 Agoda 链接即将加入。",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo 区域指南",
+          "description": "选酒店前先比较第一次来 Tokyo 的住宿据点。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "第一次日本 7 日行程",
+          "description": "把这个本地停留放进经典路线。",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "打开规划器",
+          "description": "把它变成现实可走的一天。",
+          "href": "/planner"
+        },
+        {
+          "title": "旅行必备事项",
+          "description": "eSIM、机场交通和列车下一步。",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "回到座位查询",
+          "description": "把 Mt. Fuji 侧 Shinkansen 座位作为核心工具。",
+          "href": "/guide"
+        }
+      ]
+    },
+    "kuramae": {
+      "title": "Kuramae 指南 — East Tokyo 的设计小店、咖啡和手作品牌",
+      "description": "Kuramae 是 Tokyo 安静的设计和手作街区。适合工艺小店、河边咖啡馆，以及想在东侧散步看创意店铺的旅行者。",
+      "imageAlt": "Kuramae 街区",
+      "bestFor": [
+        "设计小店",
+        "手冲咖啡",
+        "河边散步",
+        "小型手作品牌"
+      ],
+      "notBestFor": [
+        "大型景点",
+        "夜生活",
+        "第一晚住宿动线"
+      ],
+      "bestTiming": "上午晚些时候到下午。",
+      "combineWith": "Asakusa、Kiyosumi-Shirakawa 或 Akihabara。",
+      "whyVisit": "Kuramae 是不太商业化的 Tokyo 设计和手作街区。Sumida River 与 Asakusa 之间的安静街道上，有皮革工房、玻璃工房和精品咖啡店，适合慢慢逛。",
+      "route": [
+        "在车站附近的 Kuramae 烘焙咖啡店喝咖啡",
+        "逛 Kuramae-dori 和小巷里的设计店",
+        "沿 Sumida River 往 Asakusa 方向散步",
+        "在本地咖啡馆午餐，或继续去 Asakusa",
+        "可选：加入 Kiyosumi-Shirakawa 看庭园和博物馆"
+      ],
+      "shouldStay": "适合再访旅客，或比起景点密度更重视设计的人。第一次来通常住 Asakusa 或 Ueno 更简单。",
+      "nearby": [
+        {
+          "title": "Asakusa",
+          "description": "酒店、餐饮和交通选择更多。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "价格友好，Narita 交通方便。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Kiyosumi-Shirakawa",
+          "description": "把历史或购物与咖啡、庭园搭配。",
+          "href": "/local-tokyo/kiyosumi-shirakawa"
+        },
+        {
+          "title": "更多东侧精选",
+          "description": "继续看东侧安静街区。",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo 区域指南",
+          "description": "选酒店前先比较第一次来 Tokyo 的住宿据点。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "第一次日本 7 日行程",
+          "description": "把这个本地停留放进经典路线。",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "打开规划器",
+          "description": "把它变成现实可走的一天。",
+          "href": "/planner"
+        },
+        {
+          "title": "旅行必备事项",
+          "description": "eSIM、机场交通和列车下一步。",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "回到座位查询",
+          "description": "把 Mt. Fuji 侧 Shinkansen 座位作为核心工具。",
+          "href": "/guide"
+        }
+      ]
+    },
+    "monzen-nakacho": {
+      "title": "Monzen-Nakacho 指南 — 神社、izakaya 和老 East Tokyo",
+      "description": "Monzen-Nakacho 是有神社、izakaya 街和本地美食的老 Tokyo 街区。适合下午散步和更慢节奏的东侧夜晚。",
+      "imageAlt": "Monzen-Nakacho 街区",
+      "bestFor": [
+        "神社",
+        "本地 izakaya",
+        "老街氛围",
+        "下午散步"
+      ],
+      "notBestFor": [
+        "大量英语旅游设施",
+        "深夜选择",
+        "购物"
+      ],
+      "bestTiming": "下午到傍晚。",
+      "combineWith": "Kiyosumi-Shirakawa、Ryogoku 或 Tsukiji。",
+      "whyVisit": "Monzen-Nakacho 仍保留着老 shitamachi 氛围。Tomioka Hachimangu 是街区核心，周边有小型 izakaya、本地午餐店和服务常客的传统店铺。",
+      "route": [
+        "从 Kiyosumi-Shirakawa 出发，或抵达 Monzen-Nakacho Station",
+        "参拜 Tomioka Hachimangu",
+        "走进有本地小店和餐馆的后街",
+        "傍晚在 Eitai-dori 或小巷体验 izakaya",
+        "可选：继续去 Tsukiji 或 Tokyo Station 晚餐"
+      ],
+      "shouldStay": "适合已经熟悉 Tokyo、想要住宅感更强的本地据点。第一次来更建议把它作为搭配 Kiyosumi-Shirakawa 的半日行程。",
+      "nearby": [
+        {
+          "title": "Asakusa",
+          "description": "酒店、餐饮和交通选择更多。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "价格友好，Narita 交通方便。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Kiyosumi-Shirakawa",
+          "description": "把历史或购物与咖啡、庭园搭配。",
+          "href": "/local-tokyo/kiyosumi-shirakawa"
+        },
+        {
+          "title": "更多东侧精选",
+          "description": "继续看东侧安静街区。",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo 区域指南",
+          "description": "选酒店前先比较第一次来 Tokyo 的住宿据点。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "第一次日本 7 日行程",
+          "description": "把这个本地停留放进经典路线。",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "打开规划器",
+          "description": "把它变成现实可走的一天。",
+          "href": "/planner"
+        },
+        {
+          "title": "旅行必备事项",
+          "description": "eSIM、机场交通和列车下一步。",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "回到座位查询",
+          "description": "把 Mt. Fuji 侧 Shinkansen 座位作为核心工具。",
+          "href": "/guide"
+        }
+      ]
+    },
+    "oshiage": {
+      "title": "Oshiage 指南 — Skytree、本地街道和更安静的 Asakusa 替代选择",
+      "description": "Oshiage 是 Tokyo Skytree 所在街区。适合 Skytree 景观、Solamachi 购物，以及想要比 Asakusa 更安静且机场交通方便的旅行者。",
+      "imageAlt": "有 Tokyo Skytree 的 Oshiage 街区",
+      "bestFor": [
+        "Skytree 景观",
+        "Solamachi 购物",
+        "机场交通",
+        "经济型酒店"
+      ],
+      "notBestFor": [
+        "夜生活",
+        "潮流餐厅",
+        "市中心感"
+      ],
+      "bestTiming": "傍晚到晚上适合看 Skytree 灯光，上午适合安静街道。",
+      "combineWith": "Asakusa、Ryogoku 或 Kiyosumi-Shirakawa。",
+      "whyVisit": "Oshiage 同时提供 Tokyo Skytree 体验和旁边安静的住宅街区。Solamachi 可以解决购物和用餐，塔后的小街则有老东京气息，比 Asakusa 人少很多。",
+      "extra": {
+        "title": "Kinshicho — 下一站",
+        "body": "从 Oshiage 搭 Hanzomon line 一站到 Kinshicho。这里没有大景点，但很适合购物，有宽敞的 Daiso、Muji 和大型扭蛋楼层，比 Shibuya 或 Shinjuku 少很多人。"
+      },
+      "route": [
+        "抵达 Oshiage Station，步行到 Tokyo Skytree",
+        "在 Solamachi 购物或午餐",
+        "逛塔东侧安静小街",
+        "沿 Sumida River 往 Asakusa 方向走",
+        "可选：去 Kinshicho 逛 Daiso、Muji 和扭蛋",
+        "可选：傍晚上 Skytree 展望台"
+      ],
+      "shouldStay": "Oshiage 是 Asakusa 的实用经济替代选择。酒店通常更便宜，机场交通直接，Asakusa 也很近。",
+      "nearby": [
+        {
+          "title": "Asakusa",
+          "description": "酒店、餐饮和交通选择更多。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "价格友好，Narita 交通方便。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Kiyosumi-Shirakawa",
+          "description": "把历史或购物与咖啡、庭园搭配。",
+          "href": "/local-tokyo/kiyosumi-shirakawa"
+        },
+        {
+          "title": "更多东侧精选",
+          "description": "继续看东侧安静街区。",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo 区域指南",
+          "description": "选酒店前先比较第一次来 Tokyo 的住宿据点。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "第一次日本 7 日行程",
+          "description": "把这个本地停留放进经典路线。",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "打开规划器",
+          "description": "把它变成现实可走的一天。",
+          "href": "/planner"
+        },
+        {
+          "title": "旅行必备事项",
+          "description": "eSIM、机场交通和列车下一步。",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "回到座位查询",
+          "description": "把 Mt. Fuji 侧 Shinkansen 座位作为核心工具。",
+          "href": "/guide"
+        }
+      ]
+    },
+    "ryogoku": {
+      "title": "Ryogoku 指南 — East Tokyo 的相扑、Edo 历史和博物馆",
+      "description": "Ryogoku 是 Tokyo 的相扑和 Edo 历史街区。适合 Edo-Tokyo Museum、相扑文化，以及想安排东侧历史上午的旅行者。",
+      "imageAlt": "Ryogoku 街区",
+      "bestFor": [
+        "相扑文化",
+        "Edo-Tokyo Museum",
+        "历史散步",
+        "河景"
+      ],
+      "notBestFor": [
+        "购物",
+        "夜生活",
+        "潮流咖啡馆"
+      ],
+      "bestTiming": "上午或午后早些时候。",
+      "combineWith": "Asakusa、Kiyosumi-Shirakawa 或 Monzen-Nakacho。",
+      "whyVisit": "Ryogoku 是相扑传统和 Edo 历史并存的地方。Kokugikan 每年举办大型赛事，即使非比赛季，街区里也有相扑部屋、chanko nabe 餐厅和博物馆。",
+      "route": [
+        "抵达 JR Sobu line 的 Ryogoku Station",
+        "在 Edo-Tokyo Museum 了解 Edo 和 Meiji",
+        "经过 Kokugikan 和相扑部屋附近",
+        "在本地餐厅吃 chanko nabe 午餐",
+        "跨过 Sumida River 去 Asakusa 或继续到 Kiyosumi-Shirakawa"
+      ],
+      "shouldStay": "Ryogoku 更适合作为半日目的地，而不是住宿据点。酒店选择少于 Asakusa 或 Ueno，晚上也更安静。",
+      "nearby": [
+        {
+          "title": "Asakusa",
+          "description": "酒店、餐饮和交通选择更多。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "价格友好，Narita 交通方便。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Kiyosumi-Shirakawa",
+          "description": "把历史或购物与咖啡、庭园搭配。",
+          "href": "/local-tokyo/kiyosumi-shirakawa"
+        },
+        {
+          "title": "更多东侧精选",
+          "description": "继续看东侧安静街区。",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo 区域指南",
+          "description": "选酒店前先比较第一次来 Tokyo 的住宿据点。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "第一次日本 7 日行程",
+          "description": "把这个本地停留放进经典路线。",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "打开规划器",
+          "description": "把它变成现实可走的一天。",
+          "href": "/planner"
+        },
+        {
+          "title": "旅行必备事项",
+          "description": "eSIM、机场交通和列车下一步。",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "回到座位查询",
+          "description": "把 Mt. Fuji 侧 Shinkansen 座位作为核心工具。",
+          "href": "/guide"
+        }
+      ]
+    }
+  },
+  "localTokyoIndex": {
+    "title": "Local Tokyo 精选 — Shinjuku 和 Shibuya 之外的安静街区",
+    "description": "探索 Kiyosumi-Shirakawa、Kuramae、Monzen-Nakacho 和 Ryogoku 等更安静的 Tokyo 街区，由日本本地人从咖啡、庭园、博物馆和慢步调散步角度精选。",
+    "eyebrow": "本地视角",
+    "startCta": "从 Kiyosumi-Shirakawa 开始",
+    "compareCta": "比较 Tokyo 住宿据点",
+    "imageAlt": "Kiyosumi-Shirakawa 街区",
+    "quickLabel": "快速建议",
+    "quickTitle": "把 Local Tokyo 作为安静的第二层。",
+    "quickBody": "第一次来通常住 Shinjuku、Ueno、Asakusa 或 Tokyo Station 更简单。想要咖啡、庭园、博物馆和慢街道时，再加入 East Tokyo。",
+    "routeLabel": "最佳第一条路线",
+    "routeBody": "上午去 Kiyosumi-Shirakawa，再继续到 Monzen-Nakacho 或 Ryogoku。它很适合放在 Asakusa、Tokyo Station 或轻松晚餐前。",
+    "areaCards": "区域卡片",
+    "halfDayTitle": "East Tokyo 半日路线",
+    "halfDayStops": [
+      "在 Kiyosumi-Shirakawa Station 附近喝咖啡",
+      "想安静休息时走 Kiyosumi Garden",
+      "参观 Fukagawa Edo Museum 了解老 Tokyo",
+      "继续去 Monzen-Nakacho 看神社，或去 Ryogoku 看 Edo 与相扑历史"
+    ],
+    "ctas": [
+      {
+        "title": "比较 Tokyo 住宿区域",
+        "description": "选住宿前先看这里。",
+        "href": "/areas-to-stay/tokyo-first-time"
+      },
+      {
+        "title": "打开 7 日首次日本行程",
+        "description": "把 Local Tokyo 放进经典路线，不让行程过满。",
+        "href": "/itineraries/7-day-first-time-japan"
+      },
+      {
+        "title": "从座位查询开始",
+        "description": "先决定能看 Mt. Fuji 的 Shinkansen 座位。",
+        "href": "/guide"
+      },
+      {
+        "title": "规划旅行必备事项",
+        "description": "eSIM、交通和列车预订集中查看。",
+        "href": "/plan-your-trip"
+      },
+      {
+        "title": "在规划器里做路线",
+        "description": "把这些停留变成现实可走的一天。",
+        "href": "/planner"
+      }
+    ]
   }
 }

@@ -65,7 +65,12 @@ export function DecisionCard({
           </p>
         )}
         <div className="mt-auto pt-5">
-        <span className="inline-flex w-full items-center justify-center gap-1.5 rounded-2xl bg-[#07142f] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors group-hover:bg-slate-800">
+        <span className={[
+          "inline-flex w-full items-center justify-center gap-1.5 rounded-2xl px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors",
+          external
+            ? "bg-[#ff7a00] group-hover:bg-[#e66700]"
+            : "bg-[#168a56] group-hover:bg-[#0f6f45]",
+        ].join(" ")}>
           {cta}
           {external ? (
             <ExternalLink className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />

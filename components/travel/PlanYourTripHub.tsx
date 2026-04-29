@@ -201,9 +201,6 @@ export function PlanYourTripHub() {
           })}
         </section>
 
-        <p className="mt-8 text-center text-[10px] leading-5 text-slate-400">
-          Partner links are shown only when a valid URL is configured. Some links may earn fujiseat a commission at no extra cost to you.
-        </p>
       </Container>
     </main>
   );

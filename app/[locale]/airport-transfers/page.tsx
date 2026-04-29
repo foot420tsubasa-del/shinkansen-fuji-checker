@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { ArrowRight, Plane } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
+import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { transferPages } from "@/lib/content/transfers";
+import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -17,17 +19,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description:
       "Compare the fastest, cheapest, and easiest ways to get from Narita and Haneda airports to central Tokyo. N'EX, Skyliner, limousine bus, and more.",
     robots: locale === "en" ? undefined : { index: false, follow: true },
+    alternates: getAlternates("/airport-transfers", locale),
     openGraph: {
       title: "Airport Transfers — Narita & Haneda to Tokyo",
       description:
         "Compare the fastest, cheapest, and easiest ways to get from Narita and Haneda airports to Tokyo.",
       siteName: "fujiseat",
+      images: [{ url: "https://fujiseat.com/og-airport-transfers.png", width: 1200, height: 630 }],
     },
   };
 }
 
 export default function AirportTransfersIndex() {
   return (
+    <main className="page-shell min-h-screen text-slate-950">
+    <SiteHeader />
     <Container className="py-8 md:py-12">
       <Breadcrumb
         items={[
@@ -89,5 +95,6 @@ export default function AirportTransfersIndex() {
 
       <LastCheckedNote className="mt-8 text-center" />
     </Container>
+    </main>
   );
 }

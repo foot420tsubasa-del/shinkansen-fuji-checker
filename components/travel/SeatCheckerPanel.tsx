@@ -92,29 +92,28 @@ export function SeatCheckerPanel({
   const t = useTranslations("home");
 
   return (
-    <section className="relative min-h-[360px] overflow-hidden rounded-[22px] bg-[#061a3c] text-white shadow-[0_24px_70px_rgba(6,26,60,0.28)]">
+    <section className="relative h-full overflow-hidden rounded-[22px] bg-[#061a3c] text-white shadow-[0_24px_70px_rgba(6,26,60,0.28)]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_22%,rgba(56,189,248,0.22),transparent_34%),linear-gradient(115deg,#061a3c_0%,#08224f_50%,#0b1d39_100%)]" />
-      <div className="relative grid min-h-[360px] lg:grid-cols-[minmax(0,0.98fr)_minmax(260px,0.78fr)]">
-        <div className="flex flex-col px-5 py-5 sm:px-6 sm:py-6">
-          <div className="mb-4">
-            <span className="inline-flex rounded-full bg-sky-400/15 px-2.5 py-1 text-[10px] font-bold uppercase text-sky-200 ring-1 ring-sky-300/20">
-              Free tool
-            </span>
-          </div>
-
+      <div className="relative grid h-full lg:grid-cols-[minmax(0,0.98fr)_minmax(260px,0.78fr)]">
+        <div className="flex flex-col justify-center px-5 py-6 sm:px-6 sm:py-8">
           <div>
-            <h1 className="max-w-[460px] text-[32px] font-semibold leading-[0.98] text-white sm:text-[40px] lg:text-[44px]">
+            <h1 className="max-w-[460px] text-[30px] font-semibold leading-[1.02] text-white sm:text-[38px] lg:text-[42px]">
               {t("brandTitle")}
             </h1>
-            <p className="mt-4 max-w-[380px] text-sm leading-6 text-slate-300">
+            <p className="mt-3 max-w-[380px] text-sm leading-6 text-slate-300">
               {t("brandSubtitle")}
             </p>
-            <h2 className="mt-4 inline-flex rounded-full border border-white/10 bg-white/8 px-3 py-1.5 text-xs font-semibold text-sky-100">
-              {t("seatCheckerHeading")}
-            </h2>
+            <div className="mt-4 flex flex-wrap items-center gap-2">
+              <span className="inline-flex rounded-full bg-sky-400/15 px-2.5 py-1 text-[10px] font-bold uppercase text-sky-200 ring-1 ring-sky-300/20">
+                Free tool
+              </span>
+              <h2 className="inline-flex rounded-full border border-white/10 bg-white/8 px-3 py-1.5 text-xs font-semibold text-sky-100">
+                {t("seatCheckerHeading")}
+              </h2>
+            </div>
           </div>
 
-          <div className="mt-6 space-y-3">
+          <div className="mt-5 space-y-3">
             <div className="grid gap-2 rounded-2xl bg-white p-1.5 text-xs shadow-[0_14px_35px_rgba(0,0,0,0.18)]">
               {directions.map((opt) => {
                 const active = opt.id === direction;
@@ -153,12 +152,12 @@ export function SeatCheckerPanel({
             </motion.button>
           </div>
 
-          <div className="mt-auto pt-5">
+          <div className="mt-5">
             <FujiWeatherStrip data={visibility} loading={visibilityLoading} slowLoading={visibilitySlowLoading} error={visibilityError} />
           </div>
         </div>
 
-        <div className="relative hidden min-h-[360px] overflow-hidden lg:block">
+        <div className="relative hidden overflow-hidden lg:block">
           <div className="absolute -left-14 inset-y-0 z-20 w-32 bg-[linear-gradient(90deg,#061a3c_0%,rgba(6,26,60,0.72)_42%,rgba(6,26,60,0)_100%)]" />
           <div className="absolute inset-y-6 right-5 w-[92%] overflow-hidden rounded-[34px] border border-white/15 bg-[#07111f] shadow-[inset_0_0_0_7px_rgba(255,255,255,0.045),0_30px_80px_rgba(0,0,0,0.38)]">
             <Image

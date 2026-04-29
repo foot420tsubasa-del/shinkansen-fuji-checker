@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { ArrowRight, Bed } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
+import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { stayPages } from "@/lib/content/stay";
+import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -17,17 +19,21 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description:
       "Compare the best areas to stay in Tokyo, Kyoto, Osaka, and near Mt Fuji. Find neighborhoods that match your budget, pace, and travel style.",
     robots: locale === "en" ? undefined : { index: false, follow: true },
+    alternates: getAlternates("/areas-to-stay", locale),
     openGraph: {
       title: "Where to Stay in Japan — Area Guides",
       description:
         "Compare neighborhoods across Tokyo, Kyoto, Osaka, and Mt Fuji for your first Japan trip.",
       siteName: "fujiseat",
+      images: [{ url: "https://fujiseat.com/og-areas-to-stay.png", width: 1200, height: 630 }],
     },
   };
 }
 
 export default function AreasToStayIndex() {
   return (
+    <main className="page-shell min-h-screen text-slate-950">
+    <SiteHeader />
     <Container className="py-8 md:py-12">
       <Breadcrumb
         items={[
@@ -88,10 +94,8 @@ export default function AreasToStayIndex() {
         ))}
       </div>
 
-      <p className="mt-8 text-center text-[10px] text-slate-400">
-        Hotel links are partner links — we earn a small commission at no extra cost to you.
-      </p>
-      <LastCheckedNote className="mt-2 text-center" />
+      <LastCheckedNote className="mt-8 text-center" />
     </Container>
+    </main>
   );
 }

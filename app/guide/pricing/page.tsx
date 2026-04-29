@@ -27,14 +27,14 @@ export default function PricingPage() {
         throw new Error("Checkout URL not returned.");
       }
     } catch (e: unknown) {
-      console.error(e);
       setError(e instanceof Error ? e.message : "Something went wrong.");
       setLoading(false);
     }
   };
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-10 space-y-8">
+    <main className="page-shell min-h-screen px-4 py-10 text-slate-950">
+      <div className="mx-auto max-w-3xl space-y-8">
       <h1 className="text-3xl font-bold mb-2">
         Mt. Fuji Shinkansen Pro Guide
       </h1>
@@ -42,7 +42,7 @@ export default function PricingPage() {
         One-time purchase. Lifetime access. Written by a Japanese creator.
       </p>
 
-      <div className="border rounded-2xl p-6 shadow-sm space-y-4">
+      <div className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="flex items-baseline gap-2">
           <span className="text-3xl font-bold">¥1,200</span>
           <span className="text-gray-500 text-sm">one-time</span>
@@ -58,7 +58,7 @@ export default function PricingPage() {
         <button
           onClick={handleCheckout}
           disabled={loading}
-          className="inline-flex items-center justify-center px-5 py-3 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed transition w-full sm:w-auto"
+          className="inline-flex w-full items-center justify-center rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#e66700] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
           {loading ? "Redirecting to checkout..." : "Unlock the full guide"}
         </button>
@@ -73,6 +73,7 @@ export default function PricingPage() {
           Payment is processed securely by Stripe. Your card details never touch
           our servers.
         </p>
+      </div>
       </div>
     </main>
   );

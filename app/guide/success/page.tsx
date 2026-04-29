@@ -3,7 +3,8 @@ import Link from "next/link";
 
 export default function SuccessPage() {
   return (
-    <main className="max-w-xl mx-auto px-4 py-16 text-center space-y-4">
+    <main className="page-shell min-h-screen px-4 py-16 text-center text-slate-950">
+      <div className="mx-auto max-w-xl space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
       <h1 className="text-3xl font-bold">Thank you! 🙏</h1>
       <p>
         Your purchase was successful. We&apos;re preparing your access to the
@@ -21,10 +22,11 @@ export default function SuccessPage() {
       <div className="space-x-3">
         <Link
           href="/guide"
-          className="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-semibold hover:bg-blue-700"
+          className="inline-flex items-center rounded-lg border border-[#168a56] bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
         >
           Back to the guide
         </Link>
+      </div>
       </div>
     </main>
   );

@@ -1,11 +1,11 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, ExternalLink, Info, Mountain, Plane, Share2, Train } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, Info, Mountain, Share2, Train } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { FujiVisibility, SeatRecommendation } from "@/lib/seat-checker";
 import { Card } from "@/components/ui/Card";
-import { JR_PASS_URL, KLOOK_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
+import { JR_PASS_URL, KLOOK_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
 type SeatResultCardProps = {
@@ -87,14 +87,14 @@ export function SeatResultCard({
 
       <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_320px]">
       <div className="bg-slate-50/70 px-5 py-5 md:px-6">
-        <div className="space-y-3 rounded-[24px] border border-red-100 bg-white px-4 py-4 shadow-sm shadow-red-100">
+        <div className="space-y-3 rounded-[24px] border border-[#ffb56b] bg-[#fff3e7] px-4 py-4 shadow-sm shadow-orange-100">
           <p className="text-[13px] font-semibold text-slate-800">{k("heading")}</p>
           <div className="flex gap-2">
             <a
               href={KLOOK_URL}
               target="_blank"
               rel={AFFILIATE_REL}
-              className="flex-1 rounded-2xl bg-red-500 px-4 py-2.5 text-center text-sm font-semibold text-white shadow-md shadow-red-200 transition-all hover:brightness-110 active:brightness-95"
+              className="flex-1 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-center text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700] active:brightness-95"
             >
               {k("book")}
             </a>
@@ -102,7 +102,7 @@ export function SeatResultCard({
               href={JR_PASS_URL}
               target="_blank"
               rel={AFFILIATE_REL}
-              className="flex-1 rounded-2xl border-2 border-red-500 bg-red-50 px-4 py-2.5 text-center text-sm font-semibold text-red-600 shadow-sm transition-all hover:bg-red-100 active:brightness-95"
+              className="flex-1 rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
             >
               {k("jrPass")}
             </a>
@@ -252,7 +252,7 @@ export function SeatMapCard({
   disclaimer,
 }: SeatMapCardProps) {
   return (
-    <Card className="overflow-hidden">
+    <Card className="h-full overflow-hidden">
       <SeatMapPanel
         recommendation={recommendation}
         directionLabel={directionLabel}
@@ -373,52 +373,6 @@ export function SeatMapPanel({
           </div>
         )}
 
-        <div className="mt-3 rounded-2xl border border-slate-200 bg-white p-3">
-          <p className="text-[11px] font-semibold uppercase text-slate-500">After checking your seat</p>
-          <div className="mt-2 grid gap-2 sm:grid-cols-3">
-            <a
-              href={SHINKANSEN_TICKET_URL}
-              target="_blank"
-              rel={AFFILIATE_REL}
-              className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#07142f] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
-            >
-              <Train className="h-3.5 w-3.5" />
-              Book Shinkansen ticket
-            </a>
-            <a
-              href={JR_PASS_URL}
-              target="_blank"
-              rel={AFFILIATE_REL}
-              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-800 transition-colors hover:bg-amber-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-200"
-            >
-              <ExternalLink className="h-3.5 w-3.5" />
-              Compare JR Pass
-            </a>
-            <Link
-              href="/plan-your-trip"
-              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-sky-200 bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700 transition-colors hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
-            >
-              <Plane className="h-3.5 w-3.5" />
-              Plan trip essentials
-            </Link>
-          </div>
-          <div className="mt-2 grid gap-2 sm:grid-cols-2">
-            <Link
-              href="/guide"
-              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-sky-200 bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700 transition-colors hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
-            >
-              <Info className="h-3.5 w-3.5" />
-              Read guide
-            </Link>
-            <Link
-              href="/planner"
-              className="inline-flex items-center justify-center gap-1.5 rounded-xl bg-[#07142f] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
-            >
-              <Plane className="h-3.5 w-3.5" />
-              Plan trip
-            </Link>
-          </div>
-        </div>
       </div>
     </>
   );

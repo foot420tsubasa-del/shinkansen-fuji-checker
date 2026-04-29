@@ -56,10 +56,22 @@
     "timingNote": "후지산은 주로 신요코하마~시즈오카 구간, 특히 신후지역 부근에서 맑은 날 볼 수 있습니다. 열차 전 구간에서 보이지는 않으므로, 이 구간에 가까워지면 카메라를 미리 준비해 두세요.",
     "faqTitle": "후지산 & 좌석 간단 FAQ",
     "faq": [
-      { "q": "E석이 매진됐어요?", "a": "D석을 예약하세요. 같은 후지산 방향으로, 창가에서 한 자리 떨어진 좌석입니다." },
-      { "q": "그린 차량은 어떤가요?", "a": "배치가 다를 수 있지만, 동일한 좌우 규칙이 적용됩니다. 가능하면 후지산 쪽 창가 좌석을 선택하세요." },
-      { "q": "이 좌석은 사진 찍기에 좋나요?", "a": "네. E창가석은 앞 승객 방해 없이 후지산을 깔끔하게 촬영할 수 있는 최적의 자리입니다." },
-      { "q": "후지산이 반드시 보이나요?", "a": "아니요. 흐리거나 안개가 낀 날에는 올바른 좌석에 앉아도 보이지 않을 수 있습니다." }
+      {
+        "q": "E석이 매진됐어요?",
+        "a": "D석을 예약하세요. 같은 후지산 방향으로, 창가에서 한 자리 떨어진 좌석입니다."
+      },
+      {
+        "q": "그린 차량은 어떤가요?",
+        "a": "배치가 다를 수 있지만, 동일한 좌우 규칙이 적용됩니다. 가능하면 후지산 쪽 창가 좌석을 선택하세요."
+      },
+      {
+        "q": "이 좌석은 사진 찍기에 좋나요?",
+        "a": "네. E창가석은 앞 승객 방해 없이 후지산을 깔끔하게 촬영할 수 있는 최적의 자리입니다."
+      },
+      {
+        "q": "후지산이 반드시 보이나요?",
+        "a": "아니요. 흐리거나 안개가 낀 날에는 올바른 좌석에 앉아도 보이지 않을 수 있습니다."
+      }
     ],
     "shareHeading": "친구와 여행 계획 중인가요? 스크린샷을 공유해 기억하게 해주세요:",
     "shareTokyo": "도쿄 → 오사카/교토: 우측, E석",
@@ -175,6 +187,172 @@
         "desc": "의료비 + 여행 취소. 쉽게 건너뛰지만, 후회하기 어렵습니다.",
         "cta": "플랜 보기"
       }
+    },
+    "featureCards": {
+      "seatChecker": {
+        "title": "좌석 확인",
+        "desc": "Mt. Fuji 전망에 좋은 Shinkansen 좌석을 찾아드립니다."
+      },
+      "tripPlanner": {
+        "title": "여행 플래너",
+        "desc": "동선, 시간, 필수 준비물을 넣어 일정을 짤 수 있습니다."
+      },
+      "quietTokyo": {
+        "title": "조용한 Tokyo",
+        "desc": "동네와 산책 코스를 중심으로 Tokyo를 더 차분하게 볼 수 있습니다."
+      },
+      "stayAreas": {
+        "title": "숙박 지역",
+        "desc": "철도 이동일과 짐 보관에 편한 거점을 비교합니다."
+      },
+      "essentials": {
+        "title": "필수 준비",
+        "desc": "eSIM, 공항 이동, 철도 예약 링크를 확인합니다."
+      }
+    },
+    "popularLinks": {
+      "eyebrow": "인기 링크",
+      "tokyo": {
+        "title": "Tokyo",
+        "desc": "Tokyo에서 여행을 시작합니다."
+      },
+      "fujiView": {
+        "title": "기차에서 보는 Mt. Fuji 전망",
+        "desc": "좋은 좌석이 좋은 전망을 만듭니다. 예약 전에 E 좌석을 확인하세요."
+      },
+      "kyoto": {
+        "title": "Kyoto",
+        "desc": "사찰, 정원, 오래 남는 거리 풍경을 만납니다."
+      },
+      "osaka": {
+        "title": "Osaka",
+        "desc": "먹거리, 활기, 쉬운 당일치기 여행이 있습니다."
+      }
+    },
+    "tokyoBases": {
+      "eyebrow": "Tokyo 숙박 거점 고르기",
+      "desc": "Shinjuku와 Shibuya는 활기 있는 대표 지역입니다. Tokyo Station과 Ueno는 실용적입니다. Asakusa와 East Tokyo는 더 차분한 동네 분위기를 원할 때 좋습니다.",
+      "shinjuku": {
+        "name": "Shinjuku",
+        "bestFor": "첫 Tokyo 여행의 활기, 밤 문화, 쇼핑, 유연한 열차 이동에 좋습니다.",
+        "mood": "Tokyo의 에너지를 최대로",
+        "weakness": "큰 역과 늦은 밤 인파가 도착 첫날에는 부담스러울 수 있습니다. Kabukicho에서 길거리 호객을 따라가지 마세요. 바가지요금과 사기성 바의 위험이 실제로 있습니다."
+      },
+      "shibuya": {
+        "name": "Shibuya",
+        "bestFor": "패션, 음식, 밤 문화, 젊은 분위기, Tokyo 서쪽 접근에 좋습니다.",
+        "mood": "상징적이고 활기찬 분위기",
+        "weakness": "붐비고 일부 호텔 주변은 언덕이 있으며, 이른 Shinkansen 이동에는 아주 단순하지 않습니다."
+      },
+      "ueno": {
+        "name": "Ueno",
+        "bestFor": "합리적인 호텔, Narita 접근, 박물관, 시장 먹거리에 좋습니다.",
+        "mood": "실용적이고 문화적인 분위기",
+        "weakness": "Shinjuku나 Shibuya보다 늦은 밤 선택지가 적습니다."
+      },
+      "asakusa": {
+        "name": "Asakusa",
+        "bestFor": "전통적인 Tokyo, Senso-ji, 강변 산책, 옛 동네 분위기에 좋습니다.",
+        "mood": "동쪽의 클래식 Tokyo",
+        "weakness": "JR Yamanote Line에 있지 않아 도심을 가로지르는 이동에는 환승이 필요합니다."
+      },
+      "tokyoStation": {
+        "name": "Tokyo Station",
+        "bestFor": "이른 Shinkansen, 깔끔한 동선, Ginza 접근, 효율적인 이동일에 좋습니다.",
+        "mood": "차분하고 효율적인 분위기",
+        "weakness": "업무 지구 느낌이 강하고 보통 Ueno나 Asakusa보다 비쌉니다."
+      },
+      "eastTokyo": {
+        "name": "Kiyosumi-Shirakawa / East Tokyo",
+        "bestFor": "조용한 로컬 Tokyo, 커피, 정원, 박물관, 느긋한 아침에 좋습니다.",
+        "mood": "로컬 시선",
+        "weakness": "첫날 기본 숙소보다는 차분한 우회 코스나 두 번째 Tokyo 여행의 거점으로 더 잘 맞습니다."
+      }
+    },
+    "localTokyo": {
+      "eyebrow": "일본 현지인이 고른 Local Tokyo",
+      "desc": "Shinjuku와 Shibuya를 벗어나 더 조용한 동쪽 동네를 로컬 시선으로 소개합니다. Skytree 전망과 강변 산책이 좋은 Oshiage도 포함됩니다.",
+      "seeAll": "Local Tokyo 추천 모두 보기",
+      "kiyosumi": {
+        "name": "Kiyosumi-Shirakawa",
+        "summary": "커피, Kiyosumi Garden, Fukagawa Edo Museum, 운하 옆 느긋한 산책을 즐길 수 있습니다. 근처에는 킨츠기 워크숍이 새로 생겼고, 골목 안 작은 커피 스탠드 OZ는 아는 해외 여행자들이 찾는 곳입니다.",
+        "bestFor": "커피, 정원, 박물관",
+        "avoidIf": "밤 문화나 첫날의 단순한 동선을 원한다면 피하는 편이 좋습니다",
+        "timing": "아침부터 이른 오후까지"
+      },
+      "kuramae": {
+        "name": "Kuramae",
+        "summary": "디자인 숍, 작은 공방, 강변 카페, Asakusa와 부드럽게 이어지는 코스가 있습니다.",
+        "bestFor": "디자인 숍과 여유로운 카페",
+        "avoidIf": "한 정거장에서 대표 관광지를 많이 보고 싶다면 맞지 않습니다",
+        "timing": "늦은 오전부터 오후까지"
+      },
+      "oshiage": {
+        "name": "Oshiage",
+        "summary": "Skytree 전망, Sumida 강변 산책, 차분한 동쪽 숙박에 좋습니다. 옆 동네 Kinshicho에는 넓은 Daiso, Muji, 가샤폰 층이 있어 Shibuya 인파 없이 둘러볼 수 있습니다.",
+        "bestFor": "Skytree 전망과 합리적인 숙박",
+        "avoidIf": "밤 문화나 중심지 느낌을 원한다면 맞지 않습니다",
+        "timing": "오후부터 저녁까지"
+      },
+      "monzenNakacho": {
+        "name": "Monzen-Nakacho",
+        "summary": "오래된 Tokyo 거리, 신사, 동네 이자카야, East Tokyo와 이어지는 쉬운 코스가 있습니다.",
+        "bestFor": "신사, 현지 음식, 옛 동네 분위기",
+        "avoidIf": "영어 관광 인프라가 많이 필요하다면 피하는 편이 좋습니다",
+        "timing": "오후부터 이른 저녁까지"
+      },
+      "ryogoku": {
+        "name": "Ryogoku",
+        "summary": "스모 문화, Edo 역사, 박물관, Asakusa로 이어지는 유용한 동선이 있습니다.",
+        "bestFor": "스모와 Edo 역사",
+        "avoidIf": "쇼핑이나 밤 문화를 원한다면 맞지 않습니다",
+        "timing": "아침 또는 이른 오후"
+      }
+    },
+    "essentialsCta": {
+      "eyebrow": "도착 전 필수 준비",
+      "shinkansen": {
+        "title": "Shinkansen 단일 티켓",
+        "desc": "Fuji 쪽 좌석을 확인한 뒤 예약하세요."
+      },
+      "esim": {
+        "title": "일본 eSIM",
+        "desc": "도착하자마자 바로 온라인에 접속합니다."
+      },
+      "airportTransfer": {
+        "title": "공항 이동",
+        "desc": "번거롭지 않은 공항 이동 경로를 비교합니다."
+      },
+      "jrPass": {
+        "title": "JR Pass",
+        "desc": "장거리 이동이 여러 번 있을 때만 확인하면 됩니다."
+      },
+      "insurance": {
+        "title": "여행자 보험",
+        "desc": "출발 전 의료와 취소 상황에 대비합니다."
+      }
+    },
+    "footer": {
+      "tagline": "일본 여행을 위한 똑똑한 도구, 차분한 동선, 실용적인 현지 팁입니다.",
+      "plan": "계획",
+      "seatChecker": "좌석 확인",
+      "planner": "플래너",
+      "stayAreas": "숙박 지역",
+      "essentials": "필수 준비",
+      "guides": "가이드",
+      "shinkansenGuide": "Shinkansen 좌석 가이드",
+      "itineraries": "일정",
+      "airportTransfers": "공항 이동",
+      "commandCenter": "커맨드 센터",
+      "support": "지원",
+      "about": "소개",
+      "localTokyo": "로컬 Tokyo",
+      "privacy": "개인정보 처리방침",
+      "terms": "이용약관",
+      "feedbackTitle": "피드백 보내기",
+      "feedbackDesc": "아직 뉴스레터는 없습니다. 익명 메모는 다음에 만들 일본 여행 도구를 정하는 데 도움이 됩니다.",
+      "feedbackCta": "메모 남기기",
+      "affiliateNote": "일부 링크는 제휴 링크입니다. 자세한 내용은 이용약관을 확인하세요."
     }
   },
   "guide": {
@@ -188,11 +366,26 @@
     "introP2": "열차 전 구간에서 후지산이 보이지는 않습니다 — 짧은 구간에서만 나타나며, 날씨에 따라 구름에 완전히 가려질 수 있습니다.",
     "tldrH2": "핵심 요약",
     "tldr": [
-      { "bold": "어느 쪽?", "text": "도쿄 → 오사카/교토 = 우측. 오사카/교토 → 도쿄 = 좌측." },
-      { "bold": "어느 좌석?", "text": "대부분의 일반 3+2 차량에서 E석이 후지산 쪽 창가 좌석입니다." },
-      { "bold": "어느 구간?", "text": "신요코하마~시즈오카 사이, 특히 신후지역 부근." },
-      { "bold": "언제?", "text": "맑은 날 오전 중반~오후 초반 (계절에 따라 다름)." },
-      { "bold": "외우기 싫으세요?", "text": "fujiseat.com의 무료 신칸센 후지산 좌석 확인기를 예약 전에 이용하세요." }
+      {
+        "bold": "어느 쪽?",
+        "text": "도쿄 → 오사카/교토 = 우측. 오사카/교토 → 도쿄 = 좌측."
+      },
+      {
+        "bold": "어느 좌석?",
+        "text": "대부분의 일반 3+2 차량에서 E석이 후지산 쪽 창가 좌석입니다."
+      },
+      {
+        "bold": "어느 구간?",
+        "text": "신요코하마~시즈오카 사이, 특히 신후지역 부근."
+      },
+      {
+        "bold": "언제?",
+        "text": "맑은 날 오전 중반~오후 초반 (계절에 따라 다름)."
+      },
+      {
+        "bold": "외우기 싫으세요?",
+        "text": "fujiseat.com의 무료 신칸센 후지산 좌석 확인기를 예약 전에 이용하세요."
+      }
     ],
     "s1H2": "신칸센 어느 쪽에 후지산이 있나요? (E석 해설)",
     "s1Bullet1Bold": "도쿄 → 오사카 / 교토:",
@@ -242,16 +435,45 @@
     "seasonH2": "후지산 뷰 최적 계절과 시간대",
     "seasonLabel": "계절별 가이드",
     "seasons": [
-      { "season": "겨울 (12~2월)", "stars": "★★★★★", "rating": "최고", "note": "설모자를 쓴 후지산, 맑은 하늘" },
-      { "season": "가을 (9~11월)", "stars": "★★★★", "rating": "매우 좋음", "note": "맑은 하늘, 10월부터 이른 설경 가능" },
-      { "season": "봄 (3~5월)", "stars": "★★★", "rating": "좋음", "note": "안개가 낄 가능성 있음" },
-      { "season": "여름 (6~8월)", "stars": "★", "rating": "어려움", "note": "구름·안개·장마철" }
+      {
+        "season": "겨울 (12~2월)",
+        "stars": "★★★★★",
+        "rating": "최고",
+        "note": "설모자를 쓴 후지산, 맑은 하늘"
+      },
+      {
+        "season": "가을 (9~11월)",
+        "stars": "★★★★",
+        "rating": "매우 좋음",
+        "note": "맑은 하늘, 10월부터 이른 설경 가능"
+      },
+      {
+        "season": "봄 (3~5월)",
+        "stars": "★★★",
+        "rating": "좋음",
+        "note": "안개가 낄 가능성 있음"
+      },
+      {
+        "season": "여름 (6~8월)",
+        "stars": "★",
+        "rating": "어려움",
+        "note": "구름·안개·장마철"
+      }
     ],
     "timeLabel": "시간대",
     "timeItems": [
-      { "bold": "오전 10시 이전:", "text": "안개가 끼기 전으로 가장 맑은 경우 많음" },
-      { "bold": "오전 중반~오후 초반:", "text": "맑은 날 좋음" },
-      { "bold": "오후 늦게:", "text": "후지산 쪽에 역광이 들어올 수 있음" }
+      {
+        "bold": "오전 10시 이전:",
+        "text": "안개가 끼기 전으로 가장 맑은 경우 많음"
+      },
+      {
+        "bold": "오전 중반~오후 초반:",
+        "text": "맑은 날 좋음"
+      },
+      {
+        "bold": "오후 늦게:",
+        "text": "후지산 쪽에 역광이 들어올 수 있음"
+      }
     ],
     "proTip": "팁: 전날 밤 시즈오카현 날씨를 미리 확인하세요. 페이지 상단에서 신후지 인근 실시간 가시성을 확인할 수 있습니다.",
     "carH2": "호차 번호 & 좌석 상세 가이드",
@@ -266,22 +488,61 @@
     ],
     "carRequestLabel": "E석 요청 방법",
     "carRequest": [
-      { "bold": "JR 창구에서:", "text": "「E席をお願いします」를 보여주세요" },
-      { "bold": "Klook에서:", "text": "좌석 배치도에서 E열 선택" },
-      { "bold": "JR 패스 이용 시:", "text": "어느 JR 역 창구에서나 무료로 예약" }
+      {
+        "bold": "JR 창구에서:",
+        "text": "「E席をお願いします」를 보여주세요"
+      },
+      {
+        "bold": "Klook에서:",
+        "text": "좌석 배치도에서 E열 선택"
+      },
+      {
+        "bold": "JR 패스 이용 시:",
+        "text": "어느 JR 역 창구에서나 무료로 예약"
+      }
     ],
     "faqH2": "자주 묻는 질문",
     "faq": [
-      { "q": "자유석에서도 후지산을 볼 수 있나요?", "a": "가능하지만 위험 — 통로석에 앉으면 뷰가 없습니다. E석을 미리 예약하세요." },
-      { "q": "열차에서 후지산을 얼마나 오래 볼 수 있나요?", "a": "신칸센 속도로는 약 30~60초입니다. 신후지역에 가까워지기 전에 카메라를 준비해 두세요." },
-      { "q": "E석은 항상 후지산 쪽인가요?", "a": "일반 3+2 차량에서는 그렇습니다. 그린카(2+2 배치)에서는 후지산 쪽 창가석이 D석입니다." },
-      { "q": "흐린 날에는 어떻게 되나요?", "a": "특히 여름에는 후지산이 자주 가려집니다. 페이지 상단의 실시간 가시성 표시를 확인하세요." },
-      { "q": "돌아오는 길(오사카/교토→도쿄)에도 볼 수 있나요?", "a": "네 — 후지산은 좌측에 있으며, 역시 E석입니다. 확인기에서 반대 방향을 선택하세요." },
-      { "q": "노조미는 후지산 근처에 서지 않나요?", "a": "정차하지 않지만 창문으로 볼 수 있습니다. 히카리와 고다마는 신후지역에 정차합니다." },
-      { "q": "도쿄~오사카 구간만이라면 JR 패스가 이득인가요?", "a": "일반적으로 아닙니다. 왕복 약 ¥29,000 vs 7일 패스 ¥50,000. 히로시마·나라 등 다른 지역도 여행할 경우에 이득입니다." },
-      { "q": "신칸센에 큰 짐을 가져갈 수 있나요?", "a": "세 면의 합이 160cm 초과~250cm 이하인 짐은 대형 수하물 공간이 있는 좌석 예약(予約が必要)이 필요합니다. 신칸센 좌석 예약 시 함께 신청하세요. 250cm를 초과하는 짐은 반입이 금지됩니다." },
-      { "q": "신칸센에 WiFi가 있나요?", "a": "차내 WiFi가 있지만 불안정할 수 있습니다. 여행 내내 안정적인 연결을 위해 일본 eSIM을 추천합니다." },
-      { "q": "외국인이 예약하는 가장 좋은 방법은?", "a": "Klook — 완전 영어 지원, 즉시 모바일 바우처, 좌석 배치도에서 E열 선택 가능." }
+      {
+        "q": "자유석에서도 후지산을 볼 수 있나요?",
+        "a": "가능하지만 위험 — 통로석에 앉으면 뷰가 없습니다. E석을 미리 예약하세요."
+      },
+      {
+        "q": "열차에서 후지산을 얼마나 오래 볼 수 있나요?",
+        "a": "신칸센 속도로는 약 30~60초입니다. 신후지역에 가까워지기 전에 카메라를 준비해 두세요."
+      },
+      {
+        "q": "E석은 항상 후지산 쪽인가요?",
+        "a": "일반 3+2 차량에서는 그렇습니다. 그린카(2+2 배치)에서는 후지산 쪽 창가석이 D석입니다."
+      },
+      {
+        "q": "흐린 날에는 어떻게 되나요?",
+        "a": "특히 여름에는 후지산이 자주 가려집니다. 페이지 상단의 실시간 가시성 표시를 확인하세요."
+      },
+      {
+        "q": "돌아오는 길(오사카/교토→도쿄)에도 볼 수 있나요?",
+        "a": "네 — 후지산은 좌측에 있으며, 역시 E석입니다. 확인기에서 반대 방향을 선택하세요."
+      },
+      {
+        "q": "노조미는 후지산 근처에 서지 않나요?",
+        "a": "정차하지 않지만 창문으로 볼 수 있습니다. 히카리와 고다마는 신후지역에 정차합니다."
+      },
+      {
+        "q": "도쿄~오사카 구간만이라면 JR 패스가 이득인가요?",
+        "a": "일반적으로 아닙니다. 왕복 약 ¥29,000 vs 7일 패스 ¥50,000. 히로시마·나라 등 다른 지역도 여행할 경우에 이득입니다."
+      },
+      {
+        "q": "신칸센에 큰 짐을 가져갈 수 있나요?",
+        "a": "세 면의 합이 160cm 초과~250cm 이하인 짐은 대형 수하물 공간이 있는 좌석 예약(予約が必要)이 필요합니다. 신칸센 좌석 예약 시 함께 신청하세요. 250cm를 초과하는 짐은 반입이 금지됩니다."
+      },
+      {
+        "q": "신칸센에 WiFi가 있나요?",
+        "a": "차내 WiFi가 있지만 불안정할 수 있습니다. 여행 내내 안정적인 연결을 위해 일본 eSIM을 추천합니다."
+      },
+      {
+        "q": "외국인이 예약하는 가장 좋은 방법은?",
+        "a": "Klook — 완전 영어 지원, 즉시 모바일 바우처, 좌석 배치도에서 E열 선택 가능."
+      }
     ],
     "makeEasyH2": "신칸센 후지산 좌석 확인기로 쉽게 해결하세요",
     "makeEasyP1": "모든 내용을 외우고 싶지 않으신가요? 무료 신칸센 후지산 좌석 확인기를 이용하세요. 방향만 선택하면 후지산을 볼 가능성이 가장 높은 좌석을 알려드립니다.",
@@ -331,7 +592,7 @@
     "tabIntel": "정보",
     "tabPlan": "일정",
     "tabTools": "도구",
-    "tabSos": "SOS",
+    "tabSos": "도움",
     "tabPhrases": "회화",
     "tabWeather": "날씨",
     "tabFx": "환율",
@@ -493,7 +754,7 @@
       "stay": "숙소",
       "seat": "좌석 확인기",
       "itinerary": "전체 일정",
-      "map": "루트 지도 보기"
+      "map": "여행 센터"
     },
     "footer": {
       "brand": "fujiseat.com — 일본 여행 유틸리티 허브",
@@ -535,7 +796,7 @@
       "kyotoBase": "교토 거점으로 좋음",
       "planTrip": "여행 계획",
       "checkJrPass": "JR 패스 비교",
-      "routeMap": "루트 지도"
+      "routeMap": "여행 센터"
     }
   },
   "feedback": {
@@ -563,5 +824,454 @@
     "sent": "감사합니다. 피드백이 전송되었습니다.",
     "error": "전송하지 못했습니다. 나중에 다시 시도해 주세요.",
     "privacyNote": "피드백은 사이트 개선과 향후 글 아이디어를 위해 익명으로 수집됩니다. 연락처를 요청하지 않으므로 답변 절차는 없습니다."
+  },
+  "localTokyoPages": {
+    "common": {
+      "eyebrow": "로컬 시선 가이드",
+      "compareBases": "Tokyo 숙박지 비교",
+      "placeItinerary": "일정에 넣기",
+      "quickAnswer": "빠른 답변",
+      "bestFor": "추천 대상",
+      "notBestFor": "맞지 않는 경우",
+      "bestTiming": "추천 시간대",
+      "combineWith": "함께 보기 좋은 곳",
+      "whyVisit": "왜 가면 좋은가요",
+      "halfDayRoute": "반나절 코스",
+      "shouldStay": "여기에 묵어도 될까요?",
+      "nearbyHotels": "근처 숙박 지역"
+    },
+    "kiyosumi-shirakawa": {
+      "title": "Kiyosumi-Shirakawa 가이드 — 커피, 정원, 조용한 East Tokyo",
+      "description": "Kiyosumi-Shirakawa는 Tokyo의 조용한 커피, 정원, 예술 동네입니다. 느긋한 아침, 박물관, 차분한 Tokyo를 원하는 여행자에게 좋습니다.",
+      "imageAlt": "Kiyosumi-Shirakawa 동네",
+      "bestFor": [
+        "커피",
+        "정원",
+        "박물관",
+        "조용한 산책"
+      ],
+      "notBestFor": [
+        "밤 문화",
+        "늦은 밤 식사",
+        "첫날의 쉬운 동선"
+      ],
+      "bestTiming": "아침부터 이른 오후까지입니다.",
+      "combineWith": "Monzen-Nakacho, Ryogoku, Asakusa 또는 Tokyo Station과 함께 보기 좋습니다.",
+      "whyVisit": "Kiyosumi-Shirakawa는 Tokyo가 너무 시끄럽게 느껴질 때 유용합니다. 독립 카페, 전통 정원, 작은 박물관, 주거지 느낌의 거리로 동쪽의 차분한 아침을 만들어 줍니다.",
+      "route": [
+        "Kiyosumi-Shirakawa Station 근처에서 커피",
+        "Kiyosumi Garden",
+        "Fukagawa Edo Museum",
+        "Museum of Contemporary Art Tokyo 또는 강변 산책",
+        "Monzen-Nakacho 또는 Ryogoku로 계속 이동"
+      ],
+      "shouldStay": "기본 동선을 이미 정했고 조용한 로컬 거점을 원한다면 묵어도 좋습니다. 첫날 밤은 Shinjuku, Ueno, Asakusa, Tokyo Station이 보통 더 단순합니다.",
+      "nearby": [
+        {
+          "title": "Tokyo Station",
+          "description": "Shinkansen 출발과 단순한 동선에 가장 좋습니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Asakusa",
+          "description": "전통 관광과 여행자 인프라가 더 쉽습니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "합리적인 호텔과 Narita 접근이 좋습니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "East Tokyo 호텔",
+          "description": "Klook 및 Agoda 링크는 곧 추가됩니다.",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo 지역 가이드",
+          "description": "호텔을 고르기 전에 첫 여행 숙박지를 비교합니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "첫 일본 7일 일정",
+          "description": "이 로컬 코스를 기본 루트 안에 넣습니다.",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "플래너 열기",
+          "description": "현실적인 하루 일정으로 바꿉니다.",
+          "href": "/planner"
+        },
+        {
+          "title": "여행 필수 준비",
+          "description": "eSIM, 공항 이동, 열차 다음 단계를 확인합니다.",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "좌석 확인으로 돌아가기",
+          "description": "Mt. Fuji 쪽 Shinkansen 좌석 결정을 중심 도구로 둡니다.",
+          "href": "/guide"
+        }
+      ]
+    },
+    "kuramae": {
+      "title": "Kuramae 가이드 — East Tokyo의 디자인 숍, 카페, 메이커",
+      "description": "Kuramae는 Tokyo의 조용한 디자인과 메이커 동네입니다. 공예 숍, 강변 카페, 창의적인 산책을 원하는 여행자에게 좋습니다.",
+      "imageAlt": "Kuramae 동네",
+      "bestFor": [
+        "디자인 숍",
+        "공예 커피",
+        "강변 산책",
+        "작은 메이커"
+      ],
+      "notBestFor": [
+        "대표 관광지",
+        "밤 문화",
+        "첫날 숙소 동선"
+      ],
+      "bestTiming": "늦은 오전부터 오후까지입니다.",
+      "combineWith": "Asakusa, Kiyosumi-Shirakawa 또는 Akihabara와 함께 보기 좋습니다.",
+      "whyVisit": "Kuramae는 관광지 가격표 없이 Tokyo의 디자인과 공예 분위기를 볼 수 있는 곳입니다. Sumida River와 Asakusa 사이의 조용한 거리에는 가죽 공방, 유리 공방, 로스터리가 이어집니다.",
+      "route": [
+        "역 근처 Kuramae 로스터리에서 커피",
+        "Kuramae-dori와 골목의 디자인 숍 둘러보기",
+        "Sumida River를 따라 Asakusa 방향으로 걷기",
+        "동네 카페에서 점심 또는 Asakusa로 이동",
+        "옵션: 정원과 박물관을 위해 Kiyosumi-Shirakawa 추가"
+      ],
+      "shouldStay": "재방문자나 관광지 밀도보다 디자인을 중시하는 여행자에게 좋습니다. 첫 여행은 Asakusa나 Ueno가 더 쉽습니다.",
+      "nearby": [
+        {
+          "title": "Asakusa",
+          "description": "호텔, 음식, 교통 선택지가 더 많습니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "합리적이고 Narita 접근이 좋습니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Kiyosumi-Shirakawa",
+          "description": "역사나 쇼핑에 커피와 정원을 더합니다.",
+          "href": "/local-tokyo/kiyosumi-shirakawa"
+        },
+        {
+          "title": "East Tokyo 추천",
+          "description": "동쪽의 조용한 동네를 더 봅니다.",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo 지역 가이드",
+          "description": "호텔을 고르기 전에 첫 여행 숙박지를 비교합니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "첫 일본 7일 일정",
+          "description": "이 로컬 코스를 기본 루트 안에 넣습니다.",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "플래너 열기",
+          "description": "현실적인 하루 일정으로 바꿉니다.",
+          "href": "/planner"
+        },
+        {
+          "title": "여행 필수 준비",
+          "description": "eSIM, 공항 이동, 열차 다음 단계를 확인합니다.",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "좌석 확인으로 돌아가기",
+          "description": "Mt. Fuji 쪽 Shinkansen 좌석 결정을 중심 도구로 둡니다.",
+          "href": "/guide"
+        }
+      ]
+    },
+    "monzen-nakacho": {
+      "title": "Monzen-Nakacho 가이드 — 신사, 이자카야, 오래된 East Tokyo",
+      "description": "Monzen-Nakacho는 신사, 이자카야 거리, 현지 음식이 있는 오래된 Tokyo 동네입니다. 오후 산책과 느린 동쪽 저녁에 좋습니다.",
+      "imageAlt": "Monzen-Nakacho 동네",
+      "bestFor": [
+        "신사",
+        "동네 이자카야",
+        "옛 동네 분위기",
+        "오후 산책"
+      ],
+      "notBestFor": [
+        "영어 관광 인프라",
+        "늦은 밤 선택지",
+        "쇼핑"
+      ],
+      "bestTiming": "오후부터 이른 저녁까지입니다.",
+      "combineWith": "Kiyosumi-Shirakawa, Ryogoku 또는 Tsukiji와 함께 보기 좋습니다.",
+      "whyVisit": "Monzen-Nakacho에는 오래된 shitamachi 분위기가 아직 남아 있습니다. Tomioka Hachimangu가 중심을 잡고, 주변 거리에는 동네 이자카야, 현지 점심집, 전통 상점이 이어집니다.",
+      "route": [
+        "Kiyosumi-Shirakawa에서 시작하거나 Monzen-Nakacho Station 도착",
+        "Tomioka Hachimangu 방문",
+        "동네 상점과 작은 식당이 있는 골목 걷기",
+        "Eitai-dori 또는 골목에서 이른 저녁 이자카야",
+        "옵션: 저녁은 Tsukiji 또는 Tokyo Station으로 이동"
+      ],
+      "shouldStay": "Tokyo에 익숙하고 더 주거지 같은 분위기를 원하는 여행자에게 로컬 거점으로 맞습니다. 첫 여행자는 Kiyosumi-Shirakawa와 함께 반나절 코스로 보는 편이 좋습니다.",
+      "nearby": [
+        {
+          "title": "Asakusa",
+          "description": "호텔, 음식, 교통 선택지가 더 많습니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "합리적이고 Narita 접근이 좋습니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Kiyosumi-Shirakawa",
+          "description": "역사나 쇼핑에 커피와 정원을 더합니다.",
+          "href": "/local-tokyo/kiyosumi-shirakawa"
+        },
+        {
+          "title": "East Tokyo 추천",
+          "description": "동쪽의 조용한 동네를 더 봅니다.",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo 지역 가이드",
+          "description": "호텔을 고르기 전에 첫 여행 숙박지를 비교합니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "첫 일본 7일 일정",
+          "description": "이 로컬 코스를 기본 루트 안에 넣습니다.",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "플래너 열기",
+          "description": "현실적인 하루 일정으로 바꿉니다.",
+          "href": "/planner"
+        },
+        {
+          "title": "여행 필수 준비",
+          "description": "eSIM, 공항 이동, 열차 다음 단계를 확인합니다.",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "좌석 확인으로 돌아가기",
+          "description": "Mt. Fuji 쪽 Shinkansen 좌석 결정을 중심 도구로 둡니다.",
+          "href": "/guide"
+        }
+      ]
+    },
+    "oshiage": {
+      "title": "Oshiage 가이드 — Skytree, 로컬 거리, 조용한 Asakusa 대안",
+      "description": "Oshiage는 Tokyo Skytree 동네입니다. Skytree 전망, Solamachi 쇼핑, Asakusa보다 차분한 분위기와 공항 접근을 원하는 여행자에게 좋습니다.",
+      "imageAlt": "Tokyo Skytree가 보이는 Oshiage 동네",
+      "bestFor": [
+        "Skytree 전망",
+        "Solamachi 쇼핑",
+        "공항 접근",
+        "합리적인 호텔"
+      ],
+      "notBestFor": [
+        "밤 문화",
+        "트렌디한 레스토랑",
+        "중심지 느낌"
+      ],
+      "bestTiming": "Skytree 조명은 늦은 오후부터 저녁, 조용한 거리는 아침이 좋습니다.",
+      "combineWith": "Asakusa, Ryogoku 또는 Kiyosumi-Shirakawa와 함께 보기 좋습니다.",
+      "whyVisit": "Oshiage는 Tokyo Skytree 경험과 바로 옆의 조용한 주거지를 함께 제공합니다. Solamachi에서 쇼핑과 식사를 해결할 수 있고, 타워 뒤쪽 골목은 Asakusa보다 훨씬 차분합니다.",
+      "extra": {
+        "title": "Kinshicho — 바로 다음 역",
+        "body": "Oshiage에서 Hanzomon line으로 한 정거장인 Kinshicho는 큰 명소는 없지만 쇼핑에 실용적입니다. 넓은 Daiso, Muji, 큰 가샤폰 층이 있어 Shibuya나 Shinjuku보다 덜 붐빕니다."
+      },
+      "route": [
+        "Oshiage Station에 도착해 Tokyo Skytree까지 걷기",
+        "Solamachi에서 쇼핑이나 점심",
+        "타워 동쪽의 조용한 골목 걷기",
+        "Sumida River를 따라 Asakusa 방향으로 이동",
+        "옵션: Kinshicho에서 Daiso, Muji, 가샤폰 쇼핑",
+        "옵션: 늦은 오후 Skytree 전망대"
+      ],
+      "shouldStay": "Oshiage는 Asakusa의 실용적인 예산 대안입니다. 호텔이 비교적 저렴하고 공항 접근이 직접적이며 Asakusa도 가깝습니다.",
+      "nearby": [
+        {
+          "title": "Asakusa",
+          "description": "호텔, 음식, 교통 선택지가 더 많습니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "합리적이고 Narita 접근이 좋습니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Kiyosumi-Shirakawa",
+          "description": "역사나 쇼핑에 커피와 정원을 더합니다.",
+          "href": "/local-tokyo/kiyosumi-shirakawa"
+        },
+        {
+          "title": "East Tokyo 추천",
+          "description": "동쪽의 조용한 동네를 더 봅니다.",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo 지역 가이드",
+          "description": "호텔을 고르기 전에 첫 여행 숙박지를 비교합니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "첫 일본 7일 일정",
+          "description": "이 로컬 코스를 기본 루트 안에 넣습니다.",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "플래너 열기",
+          "description": "현실적인 하루 일정으로 바꿉니다.",
+          "href": "/planner"
+        },
+        {
+          "title": "여행 필수 준비",
+          "description": "eSIM, 공항 이동, 열차 다음 단계를 확인합니다.",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "좌석 확인으로 돌아가기",
+          "description": "Mt. Fuji 쪽 Shinkansen 좌석 결정을 중심 도구로 둡니다.",
+          "href": "/guide"
+        }
+      ]
+    },
+    "ryogoku": {
+      "title": "Ryogoku 가이드 — East Tokyo의 스모, Edo 역사, 박물관",
+      "description": "Ryogoku는 Tokyo의 스모와 Edo 역사 지구입니다. Edo-Tokyo Museum, 스모 문화, 역사적인 동쪽 아침을 원하는 여행자에게 좋습니다.",
+      "imageAlt": "Ryogoku 동네",
+      "bestFor": [
+        "스모 문화",
+        "Edo-Tokyo Museum",
+        "역사 산책",
+        "강 전망"
+      ],
+      "notBestFor": [
+        "쇼핑",
+        "밤 문화",
+        "트렌디한 카페"
+      ],
+      "bestTiming": "아침 또는 이른 오후가 좋습니다.",
+      "combineWith": "Asakusa, Kiyosumi-Shirakawa 또는 Monzen-Nakacho와 함께 보기 좋습니다.",
+      "whyVisit": "Ryogoku는 스모 전통과 Edo 시대 역사가 나란히 있는 곳입니다. Kokugikan에서는 주요 대회가 열리고, 대회가 없는 시기에도 스모 도장, chanko nabe 식당, 박물관을 볼 수 있습니다.",
+      "route": [
+        "JR Sobu line의 Ryogoku Station 도착",
+        "Edo-Tokyo Museum에서 Edo와 Meiji 역사 보기",
+        "Kokugikan과 스모 도장 주변 걷기",
+        "동네 식당에서 chanko nabe 점심",
+        "Sumida River를 건너 Asakusa 또는 Kiyosumi-Shirakawa로 이동"
+      ],
+      "shouldStay": "Ryogoku는 숙박지보다 반나절 방문지로 더 좋습니다. Asakusa나 Ueno보다 호텔 선택지가 적고 저녁 분위기도 조용합니다.",
+      "nearby": [
+        {
+          "title": "Asakusa",
+          "description": "호텔, 음식, 교통 선택지가 더 많습니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "합리적이고 Narita 접근이 좋습니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Kiyosumi-Shirakawa",
+          "description": "역사나 쇼핑에 커피와 정원을 더합니다.",
+          "href": "/local-tokyo/kiyosumi-shirakawa"
+        },
+        {
+          "title": "East Tokyo 추천",
+          "description": "동쪽의 조용한 동네를 더 봅니다.",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo 지역 가이드",
+          "description": "호텔을 고르기 전에 첫 여행 숙박지를 비교합니다.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "첫 일본 7일 일정",
+          "description": "이 로컬 코스를 기본 루트 안에 넣습니다.",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "플래너 열기",
+          "description": "현실적인 하루 일정으로 바꿉니다.",
+          "href": "/planner"
+        },
+        {
+          "title": "여행 필수 준비",
+          "description": "eSIM, 공항 이동, 열차 다음 단계를 확인합니다.",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "좌석 확인으로 돌아가기",
+          "description": "Mt. Fuji 쪽 Shinkansen 좌석 결정을 중심 도구로 둡니다.",
+          "href": "/guide"
+        }
+      ]
+    }
+  },
+  "localTokyoIndex": {
+    "title": "Local Tokyo 추천 — Shinjuku와 Shibuya 밖의 조용한 동네",
+    "description": "일본 현지인이 고른 Kiyosumi-Shirakawa, Kuramae, Monzen-Nakacho, Ryogoku를 소개합니다. 커피, 정원, 박물관, 느린 산책에 좋은 동네입니다.",
+    "eyebrow": "로컬 시선",
+    "startCta": "Kiyosumi-Shirakawa부터 보기",
+    "compareCta": "Tokyo 숙박지 비교",
+    "imageAlt": "Kiyosumi-Shirakawa 동네",
+    "quickLabel": "빠른 추천",
+    "quickTitle": "Local Tokyo를 차분한 두 번째 레이어로 사용하세요.",
+    "quickBody": "첫 여행자는 보통 Shinjuku, Ueno, Asakusa, Tokyo Station에 묵는 편이 더 쉽습니다. 커피, 정원, 박물관, 느린 거리가 필요할 때 East Tokyo를 더하세요.",
+    "routeLabel": "첫 추천 코스",
+    "routeBody": "아침에는 Kiyosumi-Shirakawa, 그다음 Monzen-Nakacho 또는 Ryogoku로 이동합니다. Asakusa, Tokyo Station, 편한 저녁 계획 전에 넣기 좋습니다.",
+    "areaCards": "지역 카드",
+    "halfDayTitle": "East Tokyo 반나절 코스",
+    "halfDayStops": [
+      "Kiyosumi-Shirakawa Station 근처에서 커피",
+      "조용한 리셋이 필요할 때 Kiyosumi Garden 산책",
+      "오래된 Tokyo 맥락을 위해 Fukagawa Edo Museum 방문",
+      "신사는 Monzen-Nakacho, Edo와 스모 역사는 Ryogoku로 계속 이동"
+    ],
+    "ctas": [
+      {
+        "title": "Tokyo 숙박 지역 비교",
+        "description": "어디에 묵을지 정하기 전에 확인합니다.",
+        "href": "/areas-to-stay/tokyo-first-time"
+      },
+      {
+        "title": "7일 첫 일본 일정 열기",
+        "description": "기본 루트를 복잡하게 만들지 않고 Local Tokyo를 넣습니다.",
+        "href": "/itineraries/7-day-first-time-japan"
+      },
+      {
+        "title": "좌석 확인부터 시작",
+        "description": "Mt. Fuji Shinkansen 좌석 결정을 먼저 둡니다.",
+        "href": "/guide"
+      },
+      {
+        "title": "필수 준비 계획",
+        "description": "eSIM, 이동, 열차 예약을 한곳에서 봅니다.",
+        "href": "/plan-your-trip"
+      },
+      {
+        "title": "플래너에서 동선 만들기",
+        "description": "이 정류장을 현실적인 하루로 바꿉니다.",
+        "href": "/planner"
+      }
+    ]
   }
 }

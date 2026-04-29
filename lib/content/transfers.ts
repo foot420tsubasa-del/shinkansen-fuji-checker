@@ -96,7 +96,7 @@ export const transferPages: TransferPage[] = [
     proTip: "If you have 2+ large suitcases, the Limousine Bus is the least stressful option. N'EX is fast but Shinjuku Station is enormous — navigating to your exit with heavy luggage is the hidden cost.",
     nextActions: [
       { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare Shinjuku, Ueno, Asakusa for your base.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
-      ...commonNextActions,
+      ...commonNextActions.filter(a => a.id !== "stay-tokyo"),
     ],
   },
   {

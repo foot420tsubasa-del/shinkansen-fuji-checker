@@ -86,7 +86,6 @@ export async function GET() {
       },
     });
   } catch (err) {
-    console.error("fuji-visibility error:", err);
     return new Response(
       JSON.stringify({ error: "Unexpected error fetching weather" }),
       { status: 500 }

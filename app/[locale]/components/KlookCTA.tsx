@@ -1,21 +1,23 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { JR_PASS_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
+import { JR_PASS_URL, SHINKANSEN_TICKET_URL, ESIM_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+import { trackAffiliateClick } from "@/lib/analytics";
 
 export function KlookCTA() {
   const t = useTranslations("klook");
 
   return (
-    <div className="bg-red-50 border border-red-200 rounded-2xl px-4 py-4 space-y-3 shadow-sm shadow-red-100">
+    <div className="space-y-3 rounded-2xl border border-[#ffb56b] bg-[#fff3e7] px-4 py-4 shadow-sm shadow-orange-100">
       <p className="text-[13px] font-semibold text-slate-800">{t("heading")}</p>
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         <a
           href={SHINKANSEN_TICKET_URL}
           target="_blank"
           rel={AFFILIATE_REL}
-          className="flex-1 inline-flex items-center justify-center rounded-2xl bg-red-500 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-red-200 hover:brightness-110 active:brightness-95 transition-all"
+          onClick={() => trackAffiliateClick("guide-cta", "shinkansen_ticket")}
+          className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700] active:brightness-95"
         >
           {t("book")}
         </a>
@@ -23,9 +25,19 @@ export function KlookCTA() {
           href={JR_PASS_URL}
           target="_blank"
           rel={AFFILIATE_REL}
-          className="flex-1 inline-flex items-center justify-center rounded-2xl border-2 border-red-500 bg-red-50 px-4 py-2.5 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-100 active:brightness-95 transition-all"
+          onClick={() => trackAffiliateClick("guide-cta", "jr_pass")}
+          className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
         >
           {t("jrPass")}
+        </a>
+        <a
+          href={ESIM_URL}
+          target="_blank"
+          rel={AFFILIATE_REL}
+          onClick={() => trackAffiliateClick("guide-cta", "esim")}
+          className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
+        >
+          eSIM
         </a>
       </div>
     </div>

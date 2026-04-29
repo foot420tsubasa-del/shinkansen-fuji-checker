@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PlanYourTripHub } from "@/components/travel/PlanYourTripHub";
 import { getAlternates } from "@/i18n/hreflang";
+import { SiteHeader } from "../components/SiteHeader";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -18,10 +19,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description:
         "You checked your Fuji-side Shinkansen seat. Now prepare the rest of your Japan trip.",
       siteName: "fujiseat",
+      images: [{ url: "https://fujiseat.com/og-plan-your-trip.png", width: 1200, height: 630 }],
     },
   };
 }
 
 export default function PlanYourTripPage() {
-  return <PlanYourTripHub />;
+  return (
+    <>
+      <SiteHeader />
+      <PlanYourTripHub />
+    </>
+  );
 }

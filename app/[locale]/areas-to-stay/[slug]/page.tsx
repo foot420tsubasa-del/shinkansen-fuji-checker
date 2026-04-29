@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
-import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
-import { BrandMark } from "@/components/ui/BrandMark";
+import { SiteHeader } from "../../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { QuickRec } from "@/components/content/QuickRec";
 import { AreaCard } from "@/components/content/AreaCard";
@@ -13,7 +11,9 @@ import { HotelPicks } from "@/components/content/HotelPicks";
 import { NextActions } from "@/components/content/NextActions";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { HotelAreaCTA } from "@/components/content/LocalTokyoCards";
 import { getAllStaySlugs, getStayBySlug } from "@/lib/content/stay";
+import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -36,6 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: page.description,
       siteName: "fujiseat",
     },
+    alternates: getAlternates(`/areas-to-stay/${slug}`, locale),
   };
 }
 
@@ -46,21 +47,7 @@ export default async function StayPage({ params }: Props) {
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
-      <div className="page-header border-b border-sky-100/80 backdrop-blur">
-        <Container className="flex min-h-16 items-center justify-between gap-4 py-3">
-          <div className="flex min-w-0 items-center gap-3">
-            <BrandMark />
-            <div className="min-w-0">
-              <p className="text-sm font-semibold text-slate-950 md:text-base">fujiseat</p>
-              <p className="hidden text-xs leading-5 text-slate-500 sm:block">Japan travel utility hub</p>
-            </div>
-          </div>
-          <Link href="/" className="text-sm font-medium text-slate-600 hover:text-slate-950">
-            <ArrowLeft className="mr-1 inline h-4 w-4" />
-            Home
-          </Link>
-        </Container>
-      </div>
+      <SiteHeader />
 
       <Container className="py-8 md:py-12">
         <Breadcrumb items={[
@@ -102,6 +89,37 @@ export default async function StayPage({ params }: Props) {
           </section>
 
           <ProTip>{page.proTip}</ProTip>
+
+          {page.slug === "tokyo-first-time" ? (
+            <section className="rounded-[22px] border border-sky-100 bg-[linear-gradient(180deg,#f8fcff,#fff)] p-5 shadow-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-sky-700">
+                Local alternative: East Tokyo
+              </p>
+              <h2 className="mt-2 text-lg font-semibold text-slate-950">
+                If Shinjuku feels too intense, look east.
+              </h2>
+              <div className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
+                <p>
+                  First-time visitors usually do better with Shinjuku, Ueno, Asakusa, or Tokyo Station because the transport and late-arrival logistics are simpler.
+                </p>
+                <p>
+                  But if Shinjuku feels too intense, East Tokyo can be a calmer alternative. Kiyosumi-Shirakawa works especially well as a quiet local detour or second-time Tokyo base, rather than the default first-night base.
+                </p>
+              </div>
+              <div className="mt-5 grid gap-3 md:grid-cols-2">
+                <HotelAreaCTA
+                  title="Kiyosumi-Shirakawa local guide"
+                  description="Coffee, gardens, museums, and quiet East Tokyo."
+                  href="/local-tokyo/kiyosumi-shirakawa"
+                />
+                <HotelAreaCTA
+                  title="All Local Tokyo picks"
+                  description="Kiyosumi-Shirakawa, Kuramae, Monzen-Nakacho, and Ryogoku."
+                  href="/local-tokyo"
+                />
+              </div>
+            </section>
+          ) : null}
 
           <section>
             <HotelPicks picks={page.hotelPicks} />

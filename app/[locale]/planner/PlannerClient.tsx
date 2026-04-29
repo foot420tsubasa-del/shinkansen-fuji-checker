@@ -17,8 +17,6 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
-import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { requireAffUrl } from "@/src/affiliateLinks";
 import { trackAffiliateClick, trackChecklistComplete, trackTemplateSelect } from "@/lib/analytics";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -558,7 +556,7 @@ export function PlannerClient() {
                       target="_blank"
                       rel={AFFILIATE_REL}
                       onClick={() => trackAffiliateClick("bookings-sidebar", booking.key)}
-                      className="mt-2 inline-flex items-center gap-1 rounded-lg bg-[#07142f] px-3 py-1.5 text-[11px] font-semibold text-white transition-colors hover:bg-slate-800"
+                      className="mt-2 inline-flex items-center gap-1 rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-3 py-1.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#e66700]"
                     >
                       {t(`bookings.${booking.key}.cta`)}
                       <ExternalLink className="h-3 w-3" />
@@ -566,7 +564,7 @@ export function PlannerClient() {
                   ) : (
                     <Link
                       href={booking.href}
-                      className="mt-2 inline-flex items-center gap-1 rounded-lg bg-[#07142f] px-3 py-1.5 text-[11px] font-semibold text-white transition-colors hover:bg-slate-800"
+                      className="mt-2 inline-flex items-center gap-1 rounded-lg border border-[#168a56] bg-[#168a56] px-3 py-1.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#0f6f45]"
                     >
                       {t(`bookings.${booking.key}.cta`)}
                       <ArrowRight className="h-3 w-3" />
@@ -706,39 +704,6 @@ export function PlannerClient() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">
-        <p>{t("footer.brand")}</p>
-        <p className="mt-1">
-          {t("footer.ready")}{" "}
-          <a
-            href={requireAffUrl("jrPass")}
-            target="_blank"
-            rel={AFFILIATE_REL}
-            onClick={() => trackAffiliateClick("planner-footer", "JR Pass")}
-            className="text-sky-600 underline underline-offset-2"
-          >
-            {t("footer.jrPass")}
-          </a>
-          {" "}{t("footer.or")}{" "}
-          <a
-            href={requireAffUrl("esim")}
-            target="_blank"
-            rel={AFFILIATE_REL}
-            onClick={() => trackAffiliateClick("planner-footer", "Japan eSIM")}
-            className="text-sky-600 underline underline-offset-2"
-          >
-            {t("footer.esim")}
-          </a>
-          {" "}{t("footer.mapQuestion")}{" "}
-          <Link href="/command-center" className="text-sky-600 underline underline-offset-2">
-            {t("footer.commandCenter")}
-          </Link>
-          .
-        </p>
-        <LastCheckedNote className="mt-2" />
-        <SiteLegalLinks className="mt-3 text-slate-400" />
-      </footer>
     </div>
   );
 }
