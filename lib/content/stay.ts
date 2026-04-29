@@ -5,6 +5,7 @@ import { requireAffUrl } from "@/src/affiliateLinks";
 // ─── Types ──────────────────────────────────────────────────────────────────
 
 export type StayArea = {
+  id?: string;
   name: string;
   vibe: string;
   pros: string[];
@@ -43,7 +44,6 @@ export type StayPage = {
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 const ESIM_URL = requireAffUrl("esim");
-const JR_PASS_URL = requireAffUrl("jrPass");
 const hotelTokyo = requireAffUrl("hotelTokyo");
 const hotelShinjuku = requireAffUrl("hotelShinjuku");
 const hotelUeno = requireAffUrl("hotelUeno");
@@ -56,7 +56,7 @@ const hotelKawaguchiko = requireAffUrl("hotelKawaguchiko");
 
 const commonNextActions: TripPick[] = [
   { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Set up connectivity before landing.", cta: "Get eSIM", href: ESIM_URL },
-  { id: "jr-pass", category: "train", title: "Compare JR Pass vs single tickets", description: "Usually worth it only for multiple long-distance rides.", cta: "Compare JR Pass", href: JR_PASS_URL },
+  { id: "jr-pass", category: "train", title: "JR Pass fit guide", description: "Check whether your route has enough long-distance JR rides before buying.", cta: "Read guide", href: "/guide#jr-pass" },
 ];
 
 // ─── Page Data ──────────────────────────────────────────────────────────────
@@ -73,6 +73,7 @@ export const stayPages: StayPage[] = [
     },
     areas: [
       {
+        id: "shinjuku",
         name: "Shinjuku",
         vibe: "Buzzing hub — nightlife, shopping, transport",
         pros: ["Best train connectivity (JR + Metro + private lines)", "Huge hotel selection at every price point", "Walking distance to Kabukicho, Golden Gai, Omoide Yokocho"],
@@ -82,6 +83,7 @@ export const stayPages: StayPage[] = [
         hotelLink: hotelShinjuku,
       },
       {
+        id: "ueno",
         name: "Ueno",
         vibe: "Calm, cultural, budget-friendly",
         pros: ["Cheapest hotel area in central Tokyo", "Walking distance to Ameyoko market + museums", "Skyliner direct to Narita (36 min)"],
@@ -91,6 +93,7 @@ export const stayPages: StayPage[] = [
         hotelLink: hotelUeno,
       },
       {
+        id: "asakusa",
         name: "Asakusa",
         vibe: "Traditional Tokyo — temples, riverside, old-town charm",
         pros: ["Senso-ji Temple walking distance", "Sumida River views, Tokyo Skytree nearby", "Strong local neighborhood feel"],
@@ -100,6 +103,7 @@ export const stayPages: StayPage[] = [
         hotelLink: hotelAsakusa,
       },
       {
+        id: "tokyo-station",
         name: "Tokyo Station area",
         vibe: "Business-efficient — Shinkansen access, clean, quiet",
         pros: ["Direct Shinkansen platform — zero transfer for Kyoto/Osaka", "Excellent for early departures and late arrivals", "Marunouchi and Ginza shopping nearby"],

@@ -50,7 +50,7 @@ const hotelAsakusaUrl = requireAffUrl("hotelAsakusa");
 // ─── Shared next actions ────────────────────────────────────────────────────
 
 const commonNextActions: TripPick[] = [
-  { id: "jr-pass", category: "train", title: "Compare JR Pass vs single tickets", description: "Usually worth it only for multiple long-distance rides.", cta: "Compare JR Pass", href: jrPassUrl },
+  { id: "jr-pass", category: "train", title: "JR Pass fit guide", description: "Check whether your route has enough long-distance JR rides before buying.", cta: "Read guide", href: "/guide#jr-pass" },
   { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Set up data before landing — maps, translate, transit apps.", cta: "Get eSIM", href: esimUrl },
   { id: "transfer", category: "transfer", title: "Airport transfer", description: "Plan your Narita/Haneda to city route.", cta: "Compare options", href: "/airport-transfers/narita-to-shinjuku" },
   { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare Shinjuku, Ueno, Asakusa for your base.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },

@@ -1,7 +1,6 @@
 import {
   ESIM_URL,
   INSURANCE_URL,
-  JR_PASS_URL,
   SHINKANSEN_TICKET_URL,
 } from "@/src/affiliateLinks";
 
@@ -34,10 +33,10 @@ export const starterTripPicks: TripPick[] = [
   {
     id: "jr-pass",
     category: "train",
-    title: "Compare JR Pass vs single tickets",
-    description: "Usually worth it only for multiple long-distance rides.",
-    cta: "Compare",
-    href: JR_PASS_URL,
+    title: "JR Pass fit guide",
+    description: "Check whether your route has enough long-distance JR rides.",
+    cta: "Read guide",
+    href: "/guide#jr-pass",
   },
   {
     id: "esim",
@@ -92,7 +91,7 @@ export const homeDecisionModules: DecisionModule[] = [
     description: "Shinjuku, Ueno, Asakusa, or Tokyo Station.",
     tradeoff: "Balance nightlife, airport access, and luggage ease.",
     href: "/areas-to-stay/tokyo-first-time",
-    cta: "Compare areas",
+    cta: "Compare Tokyo bases",
   },
   {
     id: "transfer-narita",

@@ -14,7 +14,9 @@ export type AreaChoice = {
   mood: string;
   weakness: string;
   compareHref: string;
+  compareCta?: string;
   localHref?: string;
+  localCta?: string;
 };
 
 export type LocalLensPick = {
@@ -91,7 +93,7 @@ export function AreaChoiceCard({ area }: { area: AreaChoice }) {
           href={area.compareHref}
           className={`${buttonPage} h-10 px-3 text-xs`}
         >
-          Compare areas
+          {area.compareCta ?? "View this area"}
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
         {area.localHref ? (
@@ -99,7 +101,7 @@ export function AreaChoiceCard({ area }: { area: AreaChoice }) {
             href={area.localHref}
             className={`${buttonPageSecondary} h-10 px-3 text-xs`}
           >
-            Explore local Tokyo
+            {area.localCta ?? "Explore local Tokyo"}
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         ) : null}

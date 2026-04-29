@@ -2,6 +2,7 @@ import { ArrowRight, Check, X } from "lucide-react";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
 type AreaCardProps = {
+  id?: string;
   name: string;
   vibe: string;
   pros: string[];
@@ -11,9 +12,9 @@ type AreaCardProps = {
   hotelLink: string;
 };
 
-export function AreaCard({ name, vibe, pros, cons, bestFor, transport, hotelLink }: AreaCardProps) {
+export function AreaCard({ id, name, vibe, pros, cons, bestFor, transport, hotelLink }: AreaCardProps) {
   return (
-    <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+    <div id={id} className="scroll-mt-24 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex items-start justify-between gap-3">
         <div>
           <h3 className="text-lg font-semibold text-slate-950">{name}</h3>

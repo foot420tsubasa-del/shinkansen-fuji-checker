@@ -69,7 +69,7 @@ export default async function StayPage({ params }: Props) {
             link={page.quickRec.link}
           />
 
-          <section>
+          <section id="areas" className="scroll-mt-24">
             <h2 className="text-lg font-semibold text-slate-950">Area breakdown</h2>
             <p className="mt-1 text-sm text-slate-500">Tap an area to see hotels on Klook.</p>
             <div className="mt-4 grid gap-4 lg:grid-cols-2">
@@ -79,7 +79,7 @@ export default async function StayPage({ params }: Props) {
             </div>
           </section>
 
-          <section>
+          <section id="comparison" className="scroll-mt-24">
             <h2 className="mb-4 text-lg font-semibold text-slate-950">Side-by-side comparison</h2>
             <ComparisonTable
               columns={page.comparisonColumns}

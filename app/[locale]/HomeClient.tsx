@@ -160,12 +160,12 @@ export default function HomeClient() {
   ], [t]);
 
   const tokyoBaseChoices: AreaChoice[] = useMemo(() => [
-    { name: t("tokyoBases.shinjuku.name"), bestFor: t("tokyoBases.shinjuku.bestFor"), mood: t("tokyoBases.shinjuku.mood"), weakness: t("tokyoBases.shinjuku.weakness"), compareHref: "/areas-to-stay/tokyo-first-time" },
-    { name: t("tokyoBases.shibuya.name"), bestFor: t("tokyoBases.shibuya.bestFor"), mood: t("tokyoBases.shibuya.mood"), weakness: t("tokyoBases.shibuya.weakness"), compareHref: "/areas-to-stay/tokyo-first-time" },
-    { name: t("tokyoBases.ueno.name"), bestFor: t("tokyoBases.ueno.bestFor"), mood: t("tokyoBases.ueno.mood"), weakness: t("tokyoBases.ueno.weakness"), compareHref: "/areas-to-stay/tokyo-first-time" },
-    { name: t("tokyoBases.asakusa.name"), bestFor: t("tokyoBases.asakusa.bestFor"), mood: t("tokyoBases.asakusa.mood"), weakness: t("tokyoBases.asakusa.weakness"), compareHref: "/areas-to-stay/tokyo-first-time" },
-    { name: t("tokyoBases.tokyoStation.name"), bestFor: t("tokyoBases.tokyoStation.bestFor"), mood: t("tokyoBases.tokyoStation.mood"), weakness: t("tokyoBases.tokyoStation.weakness"), compareHref: "/areas-to-stay/tokyo-first-time" },
-    { name: t("tokyoBases.eastTokyo.name"), bestFor: t("tokyoBases.eastTokyo.bestFor"), mood: t("tokyoBases.eastTokyo.mood"), weakness: t("tokyoBases.eastTokyo.weakness"), compareHref: "/areas-to-stay/tokyo-first-time", localHref: "/local-tokyo/kiyosumi-shirakawa" },
+    { name: t("tokyoBases.shinjuku.name"), bestFor: t("tokyoBases.shinjuku.bestFor"), mood: t("tokyoBases.shinjuku.mood"), weakness: t("tokyoBases.shinjuku.weakness"), compareHref: "/areas-to-stay/tokyo-first-time#shinjuku", compareCta: "View Shinjuku" },
+    { name: t("tokyoBases.shibuya.name"), bestFor: t("tokyoBases.shibuya.bestFor"), mood: t("tokyoBases.shibuya.mood"), weakness: t("tokyoBases.shibuya.weakness"), compareHref: "/areas-to-stay/tokyo-first-time#comparison", compareCta: "Compare fit" },
+    { name: t("tokyoBases.ueno.name"), bestFor: t("tokyoBases.ueno.bestFor"), mood: t("tokyoBases.ueno.mood"), weakness: t("tokyoBases.ueno.weakness"), compareHref: "/areas-to-stay/tokyo-first-time#ueno", compareCta: "View Ueno" },
+    { name: t("tokyoBases.asakusa.name"), bestFor: t("tokyoBases.asakusa.bestFor"), mood: t("tokyoBases.asakusa.mood"), weakness: t("tokyoBases.asakusa.weakness"), compareHref: "/areas-to-stay/tokyo-first-time#asakusa", compareCta: "View Asakusa" },
+    { name: t("tokyoBases.tokyoStation.name"), bestFor: t("tokyoBases.tokyoStation.bestFor"), mood: t("tokyoBases.tokyoStation.mood"), weakness: t("tokyoBases.tokyoStation.weakness"), compareHref: "/areas-to-stay/tokyo-first-time#tokyo-station", compareCta: "View Tokyo Station" },
+    { name: t("tokyoBases.eastTokyo.name"), bestFor: t("tokyoBases.eastTokyo.bestFor"), mood: t("tokyoBases.eastTokyo.mood"), weakness: t("tokyoBases.eastTokyo.weakness"), compareHref: "/local-tokyo", compareCta: "See Local Tokyo", localHref: "/local-tokyo/kiyosumi-shirakawa", localCta: "Start with Kiyosumi" },
   ], [t]);
 
   const localLensPicks: LocalLensPick[] = useMemo(() => [
@@ -380,22 +380,19 @@ export default function HomeClient() {
                 <Train className="h-3.5 w-3.5" />
                 Book a single ride
               </a>
-              <a
-                href={JR_PASS_URL}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                onClick={() => trackAffiliateClick("home-after-seat", "jr_pass")}
-                className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#ff7a00] bg-[#fff3e7] px-4 text-xs font-extrabold text-[#b44b00] shadow-[0_6px_16px_rgba(255,122,0,0.10)] transition-colors hover:bg-white h-11"
+              <Link
+                href="/guide#jr-pass"
+                className={`${buttonPage} h-11 px-4 text-xs`}
               >
-                <ExternalLink className="h-3.5 w-3.5" />
-                7-Day JR Pass
-              </a>
+                <ArrowRight className="h-3.5 w-3.5" />
+                JR Pass guide
+              </Link>
               <Link
                 href="/guide"
                 className={`${buttonPage} h-11 px-4 text-xs`}
               >
                 <ArrowRight className="h-3.5 w-3.5" />
-                Read guide
+                Seat guide
               </Link>
               <Link
                 href="/planner"
@@ -461,6 +458,15 @@ export default function HomeClient() {
             {tokyoBaseChoices.map((area) => (
               <AreaChoiceCard key={area.name} area={area} />
             ))}
+          </div>
+          <div className="mt-5 flex justify-center">
+            <Link
+              href="/areas-to-stay/tokyo-first-time"
+              className={`${buttonPageSecondary} h-11 px-5 text-sm`}
+            >
+              Compare all Tokyo bases
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </section>
 
