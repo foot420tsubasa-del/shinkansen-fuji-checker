@@ -14,7 +14,8 @@ type SuggestedNextStepsProps = {
     | "transfer"
     | "itinerary"
     | "local-tokyo"
-    | "planner";
+    | "planner"
+    | "train";
   locale?: string;
   excludeCurrentPage?: boolean;
 };

@@ -32,6 +32,9 @@ const englishOnlyContentPaths = [
   "/kyoto-to-tokyo-mt-fuji-seat",
   "/shinkansen-seat-letters",
   "/shinkansen-seat-guides",
+  "/jr-pass-vs-single-ticket",
+  "/tokyo-to-kyoto-shinkansen-ticket",
+  "/shinkansen-ticket-vs-jr-pass-tokyo-kyoto-osaka",
 ];
 
 const dynamicPaths = [
