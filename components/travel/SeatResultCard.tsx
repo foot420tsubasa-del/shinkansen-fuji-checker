@@ -1,12 +1,13 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, ExternalLink, Info, Mountain, Share2, Train } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bed, Info, Luggage, Mountain, Share2, Train } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { FujiVisibility, SeatRecommendation } from "@/lib/seat-checker";
 import { Card } from "@/components/ui/Card";
-import { JR_PASS_URL, KLOOK_URL } from "@/src/affiliateLinks";
+import { ESIM_URL, KLOOK_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+import { trackAffiliateClick, trackCtaClick } from "@/lib/analytics";
 
 type SeatResultCardProps = {
   recommendation: SeatRecommendation;
@@ -35,7 +36,6 @@ export function SeatResultCard({
   highlighted = false,
 }: SeatResultCardProps) {
   const t = useTranslations("home");
-  const k = useTranslations("klook");
   const faqItems = t.raw("faq") as Array<{ q: string; a: string }>;
   const fujiOnRight = recommendation.sideLabel === "right";
   const seatRows = ["14", "15", "16"];
@@ -88,25 +88,74 @@ export function SeatResultCard({
       <div className="grid gap-0 lg:grid-cols-[minmax(0,1fr)_320px]">
       <div className="bg-slate-50/70 px-5 py-5 md:px-6">
         <div className="space-y-3 rounded-[24px] border border-[#ffb56b] bg-[#fff3e7] px-4 py-4 shadow-sm shadow-orange-100">
-          <p className="text-[13px] font-semibold text-slate-800">{k("heading")}</p>
-          <div className="flex gap-2">
+          <p className="text-[13px] font-semibold text-slate-800">After checking your seat</p>
+          <div className="grid gap-2">
             <a
               href={KLOOK_URL}
               target="_blank"
               rel={AFFILIATE_REL}
-              className="flex-1 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-center text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700] active:brightness-95"
+              onClick={() =>
+                trackAffiliateClick({
+                  category: "train",
+                  provider: "klook",
+                  placement: "seat_result",
+                  href: KLOOK_URL,
+                  label: "Book your Shinkansen ticket",
+                })
+              }
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-center text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700] active:brightness-95"
             >
-              {k("book")}
+              <Train className="h-4 w-4" />
+              Book your Shinkansen ticket
             </a>
+            <Link
+              href="/areas-to-stay/tokyo-first-time"
+              onClick={() =>
+                trackCtaClick({
+                  placement: "seat_result",
+                  href: "/areas-to-stay/tokyo-first-time",
+                  label: "Choose where to stay",
+                  category: "stay",
+                })
+              }
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#168a56] bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#106b43] shadow-sm transition-all hover:bg-[#f0fbf6] active:brightness-95"
+            >
+              <Bed className="h-4 w-4" />
+              Choose where to stay
+            </Link>
             <a
-              href={JR_PASS_URL}
+              href={ESIM_URL}
               target="_blank"
               rel={AFFILIATE_REL}
-              className="flex-1 rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
+              onClick={() =>
+                trackAffiliateClick({
+                  category: "esim",
+                  provider: "klook",
+                  placement: "seat_result",
+                  href: ESIM_URL,
+                  label: "Prepare eSIM & airport transfer",
+                })
+              }
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
             >
-              {k("jrPass")}
+              <Luggage className="h-4 w-4" />
+              Prepare eSIM & airport transfer
             </a>
           </div>
+          <Link
+            href="/airport-transfers/narita-to-shinjuku"
+            onClick={() =>
+              trackCtaClick({
+                placement: "seat_result",
+                href: "/airport-transfers/narita-to-shinjuku",
+                label: "Compare airport transfer",
+                category: "transfer",
+              })
+            }
+            className="mt-2 inline-flex text-[11px] font-semibold text-[#106b43] underline underline-offset-2"
+          >
+            Compare airport transfer options
+          </Link>
         </div>
 
       <div className="mt-5 rounded-[28px] border border-slate-200 bg-white p-4 shadow-sm">

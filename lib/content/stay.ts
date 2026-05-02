@@ -1,4 +1,5 @@
 import type { TripPick } from "@/lib/trip-picks";
+import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { requireAffUrl } from "@/src/affiliateLinks";
 
 
@@ -13,6 +14,7 @@ export type StayArea = {
   bestFor: string;
   transport: string;
   hotelLink: string;
+  hotelKey?: HotelAreaKey;
 };
 
 export type HotelPick = {
@@ -20,6 +22,7 @@ export type HotelPick = {
   area: string;
   price: string;
   link: string;
+  hotelKey?: HotelAreaKey;
   tag?: string;
 };
 
@@ -44,13 +47,13 @@ export type StayPage = {
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 const ESIM_URL = requireAffUrl("esim");
-const hotelTokyo = requireAffUrl("hotelTokyo");
-const hotelShinjuku = requireAffUrl("hotelShinjuku");
-const hotelUeno = requireAffUrl("hotelUeno");
-const hotelAsakusa = requireAffUrl("hotelAsakusa");
-const hotelKyotoStation = requireAffUrl("hotelKyotoStation");
-const hotelGion = requireAffUrl("hotelGion");
-const hotelKawaguchiko = requireAffUrl("hotelKawaguchiko");
+const hotelTokyo = getHotelLink("tokyoStation");
+const hotelShinjuku = getHotelLink("shinjuku");
+const hotelUeno = getHotelLink("ueno");
+const hotelAsakusa = getHotelLink("asakusa");
+const hotelKyotoStation = getHotelLink("kyotoStation");
+const hotelGion = getHotelLink("gionKawaramachi");
+const hotelKawaguchiko = getHotelLink("kawaguchiko");
 
 // ─── Shared next actions ────────────────────────────────────────────────────
 
@@ -69,7 +72,7 @@ export const stayPages: StayPage[] = [
     quickRec: {
       area: "Shinjuku",
       why: "Best balance of nightlife, transport access, and hotel density. 10 min to Tokyo Station for Shinkansen day trips. Most first-timers start here.",
-      link: hotelShinjuku,
+      link: hotelShinjuku.href,
     },
     areas: [
       {
@@ -80,7 +83,8 @@ export const stayPages: StayPage[] = [
         cons: ["Can feel overwhelming on first night", "Station is enormous — easy to get lost"],
         bestFor: "First-timers",
         transport: "10 min to Tokyo Station (JR Chuo). Direct Narita Express. Odakyu to Hakone.",
-        hotelLink: hotelShinjuku,
+        hotelLink: hotelShinjuku.href,
+        hotelKey: "shinjuku",
       },
       {
         id: "ueno",
@@ -90,7 +94,8 @@ export const stayPages: StayPage[] = [
         cons: ["Quieter nightlife than Shinjuku/Shibuya", "Fewer dining options late night"],
         bestFor: "Budget travelers",
         transport: "Skyliner to Narita 36 min. JR Yamanote to Shinjuku 25 min. Metro to Asakusa 5 min.",
-        hotelLink: hotelUeno,
+        hotelLink: hotelUeno.href,
+        hotelKey: "ueno",
       },
       {
         id: "asakusa",
@@ -100,7 +105,8 @@ export const stayPages: StayPage[] = [
         cons: ["Not on JR Yamanote Line — transfers needed", "Limited late-night food options"],
         bestFor: "Culture-first trips",
         transport: "Metro Ginza Line to Shibuya 30 min. Tobu Line direct to Nikko. Water bus to Odaiba.",
-        hotelLink: hotelAsakusa,
+        hotelLink: hotelAsakusa.href,
+        hotelKey: "asakusa",
       },
       {
         id: "tokyo-station",
@@ -110,7 +116,8 @@ export const stayPages: StayPage[] = [
         cons: ["Higher hotel prices", "Less neighborhood character — mostly offices after 9pm"],
         bestFor: "Shinkansen-heavy trips",
         transport: "All Shinkansen lines. Narita Express direct. JR Yamanote to anywhere.",
-        hotelLink: hotelTokyo,
+        hotelLink: hotelTokyo.href,
+        hotelKey: "tokyoStation",
       },
     ],
     comparisonColumns: ["Shinjuku", "Ueno", "Asakusa", "Tokyo Stn"],
@@ -123,10 +130,10 @@ export const stayPages: StayPage[] = [
     ],
     proTip: "If you're taking the Shinkansen to Kyoto on Day 3+, staying in Shinjuku and transferring to Tokyo Station (10 min) is more fun than staying near Tokyo Station the whole time. You get the best nightlife and still catch your train easily.",
     hotelPicks: [
-      { name: "Hotel Gracery Shinjuku", area: "Shinjuku", price: "¥12,000/night", link: hotelShinjuku, tag: "Popular" },
-      { name: "Dormy Inn Ueno Okachimachi", area: "Ueno", price: "¥7,500/night", link: hotelUeno, tag: "Budget" },
-      { name: "Richmond Hotel Asakusa", area: "Asakusa", price: "¥9,000/night", link: hotelAsakusa },
-      { name: "Hotel Metropolitan Tokyo", area: "Tokyo Station", price: "¥15,000/night", link: hotelTokyo },
+      { name: "Hotel Gracery Shinjuku", area: "Shinjuku", price: "Check latest price", link: hotelShinjuku.href, hotelKey: "shinjuku", tag: "Popular" },
+      { name: "Dormy Inn Ueno Okachimachi", area: "Ueno", price: "Check latest price", link: hotelUeno.href, hotelKey: "ueno", tag: "Budget" },
+      { name: "Richmond Hotel Asakusa", area: "Asakusa", price: "Check latest price", link: hotelAsakusa.href, hotelKey: "asakusa" },
+      { name: "Hotel Metropolitan Tokyo", area: "Tokyo Station", price: "Check latest price", link: hotelTokyo.href, hotelKey: "tokyoStation" },
     ],
     nextActions: [
       { id: "transfer", category: "transfer", title: "Sort airport transfer", description: "Narita to Shinjuku — compare N'EX, bus, and Skyliner.", cta: "Compare transfers", href: "/airport-transfers/narita-to-shinjuku" },
@@ -140,7 +147,7 @@ export const stayPages: StayPage[] = [
     quickRec: {
       area: "Shinjuku",
       why: "If you can only pick one: Shinjuku wins on transport flexibility, dining variety, and nightlife. But Ueno beats it on budget, and Asakusa beats it on atmosphere.",
-      link: hotelShinjuku,
+      link: hotelShinjuku.href,
     },
     areas: [
       {
@@ -150,7 +157,8 @@ export const stayPages: StayPage[] = [
         cons: ["Station layout is confusing", "Can feel chaotic late at night", "Hotel prices spike on weekends"],
         bestFor: "Nightlife & flexibility",
         transport: "JR Yamanote hub. N'EX to Narita. Odakyu to Hakone. 10 min to Tokyo Station.",
-        hotelLink: hotelShinjuku,
+        hotelLink: hotelShinjuku.href,
+        hotelKey: "shinjuku",
       },
       {
         name: "Ueno",
@@ -159,7 +167,8 @@ export const stayPages: StayPage[] = [
         cons: ["Smaller nightlife scene", "Fewer restaurant options late night", "Some streets feel dated"],
         bestFor: "Budget & culture",
         transport: "Skyliner to Narita 36 min. JR Yamanote + Metro access. Close to Akihabara (3 min JR).",
-        hotelLink: hotelUeno,
+        hotelLink: hotelUeno.href,
+        hotelKey: "ueno",
       },
       {
         name: "Asakusa",
@@ -168,7 +177,8 @@ export const stayPages: StayPage[] = [
         cons: ["No JR Yamanote — need Metro/Tobu", "Quiet after 9pm", "Farther from Shibuya/Shinjuku (30+ min)"],
         bestFor: "Culture & photo ops",
         transport: "Metro Ginza Line. Tobu Line to Nikko (direct). Water bus to Odaiba.",
-        hotelLink: hotelAsakusa,
+        hotelLink: hotelAsakusa.href,
+        hotelKey: "asakusa",
       },
     ],
     comparisonColumns: ["Shinjuku", "Ueno", "Asakusa"],
@@ -181,9 +191,9 @@ export const stayPages: StayPage[] = [
     ],
     proTip: "Staying 2–3 nights? Consider splitting: 2 nights Shinjuku (nightlife + shopping) → 1 night Asakusa (temple morning). The move takes 30 min by Metro and changes the whole trip feel.",
     hotelPicks: [
-      { name: "Tokyu Stay Shinjuku Eastside", area: "Shinjuku", price: "¥10,000/night", link: hotelShinjuku, tag: "Best value" },
-      { name: "Nohga Hotel Ueno Tokyo", area: "Ueno", price: "¥11,000/night", link: hotelUeno, tag: "Design" },
-      { name: "Gate Hotel Kaminarimon", area: "Asakusa", price: "¥13,000/night", link: hotelAsakusa, tag: "Views" },
+      { name: "Tokyu Stay Shinjuku Eastside", area: "Shinjuku", price: "Check latest price", link: hotelShinjuku.href, hotelKey: "shinjuku", tag: "Value" },
+      { name: "Nohga Hotel Ueno Tokyo", area: "Ueno", price: "Check latest price", link: hotelUeno.href, hotelKey: "ueno", tag: "Design" },
+      { name: "Gate Hotel Kaminarimon", area: "Asakusa", price: "Check latest price", link: hotelAsakusa.href, hotelKey: "asakusa", tag: "Views" },
     ],
     nextActions: [
       { id: "transfer-narita", category: "transfer", title: "Narita to your area", description: "Compare the fastest route to Shinjuku, Ueno, or Asakusa.", cta: "See transfers", href: "/airport-transfers/narita-to-shinjuku" },
@@ -198,7 +208,7 @@ export const stayPages: StayPage[] = [
     quickRec: {
       area: "Kyoto Station area",
       why: "Best for first-timers who prioritize easy Shinkansen access. Direct platforms, bus hub for major temples, and simple luggage handling. Gion is better for atmosphere but worse for logistics.",
-      link: hotelKyotoStation,
+      link: hotelKyotoStation.href,
     },
     areas: [
       {
@@ -208,7 +218,8 @@ export const stayPages: StayPage[] = [
         cons: ["Feels like a transit hub, not 'old Kyoto'", "Walking to temples takes 20+ min", "Hotels can feel generic"],
         bestFor: "Transit efficiency",
         transport: "Shinkansen direct. Bus 100/101/206 to all temples. JR Nara Line to Nara (45 min).",
-        hotelLink: hotelKyotoStation,
+        hotelLink: hotelKyotoStation.href,
+        hotelKey: "kyotoStation",
       },
       {
         name: "Gion / Higashiyama",
@@ -217,7 +228,8 @@ export const stayPages: StayPage[] = [
         cons: ["15 min bus/taxi to Kyoto Station", "Narrow streets — luggage is a hassle", "Higher prices, especially ryokans"],
         bestFor: "Atmosphere & temples",
         transport: "Bus 206 to Kyoto Station 15 min. Walking to Higashiyama temples. Keihan Line to Osaka.",
-        hotelLink: hotelGion,
+        hotelLink: hotelGion.href,
+        hotelKey: "gionKawaramachi",
       },
     ],
     comparisonColumns: ["Kyoto Station", "Gion"],
@@ -231,10 +243,10 @@ export const stayPages: StayPage[] = [
     ],
     proTip: "If arriving by Shinkansen with luggage, stay near Kyoto Station for the first night. Luggage-forward services (¥800–2,000) can send bags to your next hotel by next morning — use this to switch to a Gion ryokan luggage-free.",
     hotelPicks: [
-      { name: "Hotel Granvia Kyoto", area: "Kyoto Station", price: "¥14,000/night", link: hotelKyotoStation, tag: "Connected" },
-      { name: "Daiwa Roynet Kyoto Station", area: "Kyoto Station", price: "¥9,000/night", link: hotelKyotoStation, tag: "Budget" },
-      { name: "Sowaka Gion", area: "Gion", price: "¥35,000/night", link: hotelGion, tag: "Ryokan" },
-      { name: "Hotel The Celestine Gion", area: "Gion", price: "¥18,000/night", link: hotelGion },
+      { name: "Hotel Granvia Kyoto", area: "Kyoto Station", price: "Check latest price", link: hotelKyotoStation.href, hotelKey: "kyotoStation", tag: "Connected" },
+      { name: "Daiwa Roynet Kyoto Station", area: "Kyoto Station", price: "Check latest price", link: hotelKyotoStation.href, hotelKey: "kyotoStation", tag: "Budget" },
+      { name: "Sowaka Gion", area: "Gion / Kawaramachi", price: "Check latest price", link: hotelGion.href, hotelKey: "gionKawaramachi", tag: "Ryokan" },
+      { name: "Hotel The Celestine Gion", area: "Gion / Kawaramachi", price: "Check latest price", link: hotelGion.href, hotelKey: "gionKawaramachi" },
     ],
     nextActions: [
       { id: "shinkansen-seat", category: "train", title: "Check Fuji-side seat", description: "Tokyo → Kyoto: Seat E for Mt. Fuji views.", cta: "Check seat", href: "/" },
@@ -249,7 +261,7 @@ export const stayPages: StayPage[] = [
     quickRec: {
       area: "North shore of Lake Kawaguchiko",
       why: "North shore gives you the iconic Fuji-over-lake view directly from your room. Most ryokans with outdoor onsen face south toward Fuji. Book early — Fuji-view rooms sell out months ahead.",
-      link: hotelKawaguchiko,
+      link: hotelKawaguchiko.href,
     },
     areas: [
       {
@@ -259,7 +271,8 @@ export const stayPages: StayPage[] = [
         cons: ["Fewer restaurants and konbini nearby", "Need bus/car to reach Kawaguchiko Station", "Premium pricing for Fuji-view rooms"],
         bestFor: "Fuji views & onsen",
         transport: "Retro Bus Red Line loops every 15 min. Most hotels offer station shuttle. Taxi ¥1,500–2,000.",
-        hotelLink: hotelKawaguchiko,
+        hotelLink: hotelKawaguchiko.href,
+        hotelKey: "kawaguchiko",
       },
       {
         name: "Kawaguchiko Station area",
@@ -268,7 +281,8 @@ export const stayPages: StayPage[] = [
         cons: ["No lake/Fuji view from most hotels", "More tourist-commercial feel", "Less memorable than lakeside stay"],
         bestFor: "Budget & convenience",
         transport: "Fujikyu Railway to Otsuki → JR Chuo to Shinjuku (2h total). Highway bus to Shinjuku 1h50m.",
-        hotelLink: hotelKawaguchiko,
+        hotelLink: hotelKawaguchiko.href,
+        hotelKey: "kawaguchiko",
       },
     ],
     comparisonColumns: ["North shore", "Station area"],
@@ -281,9 +295,9 @@ export const stayPages: StayPage[] = [
     ],
     proTip: "Fuji is most visible in early morning (before clouds build). Book a north-shore ryokan with an in-room or private onsen so you can soak with the Fuji view at 6am — that's the money shot.",
     hotelPicks: [
-      { name: "Kozantei Ubuya", area: "North shore", price: "¥45,000/night", link: hotelKawaguchiko, tag: "Iconic view" },
-      { name: "Fuji Lake Hotel", area: "North shore", price: "¥22,000/night", link: hotelKawaguchiko },
-      { name: "Hotel Mystays Fuji", area: "Station area", price: "¥9,000/night", link: hotelKawaguchiko, tag: "Budget" },
+      { name: "Kozantei Ubuya", area: "Kawaguchiko", price: "Check latest price", link: hotelKawaguchiko.href, hotelKey: "kawaguchiko", tag: "Fuji view" },
+      { name: "Fuji Lake Hotel", area: "Kawaguchiko", price: "Check latest price", link: hotelKawaguchiko.href, hotelKey: "kawaguchiko" },
+      { name: "Hotel Mystays Fuji", area: "Kawaguchiko", price: "Check latest price", link: hotelKawaguchiko.href, hotelKey: "kawaguchiko", tag: "Budget" },
     ],
     nextActions: [
       { id: "itinerary-fuji", category: "experience", title: "Tokyo to Fuji day trip", description: "Plan a 1-day Kawaguchiko itinerary from Tokyo.", cta: "See itinerary", href: "/itineraries/tokyo-to-fuji-1day" },

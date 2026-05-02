@@ -356,9 +356,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
-  const guideTitle = locale === "en" ? "Mt. Fuji Shinkansen Seat Guide — Side, Seat & Timing" : t("guideTitle");
+  const guideTitle = locale === "en" ? "Which Shinkansen Seat to See Mt. Fuji? Seat E, Side & Timing Guide" : t("guideTitle");
   const guideDesc = locale === "en"
-    ? "Which Shinkansen side for Mt. Fuji, why Seat E matters, when and where to look. Free guide from a Tokyo local, updated for 2026."
+    ? "Find which Shinkansen seat to book for Mt. Fuji. Tokyo to Kyoto/Osaka: right side, Seat E. Kyoto/Osaka to Tokyo: left side, Seat E. Includes timing, Green Car tips, and a free seat checker."
     : t("guideDesc");
   return {
     title: guideTitle,
@@ -379,6 +379,9 @@ export default async function GuidePage({ params }: Props) {
   const h = await getTranslations({ locale, namespace: "home" });
   const isFr = locale === "fr";
   const copy = isFr ? frGuideCopy : enGuideCopy;
+  const displayTitle = locale === "en"
+    ? "Which Shinkansen Seat to See Mt. Fuji? Seat E, Side & Timing Guide"
+    : copy.title;
 
   const tldrItems = t.raw("tldr") as Array<{ bold: string; text: string }>;
   const seasons = t.raw("seasons") as Array<{
@@ -639,13 +642,44 @@ export default async function GuidePage({ params }: Props) {
       <div className="flex-1 flex flex-col px-4 py-6 max-w-2xl mx-auto w-full">
         <div className="mb-6">
           <h1 className="text-lg font-semibold tracking-tight text-slate-950">
-            {copy.title}
+            {displayTitle}
           </h1>
           <p className="mt-1 text-xs text-slate-500">{t("subtitle")}</p>
           <p className="mt-0.5 text-[10px] text-slate-500">
             {t("writtenBy")}
           </p>
         </div>
+
+        {locale === "en" && (
+          <section className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 text-[13px] leading-relaxed text-emerald-950 shadow-sm">
+            <p className="text-[11px] font-black uppercase tracking-[0.1em] text-emerald-700">
+              Quick Answer
+            </p>
+            <h2 className="mt-1 text-base font-semibold text-slate-950">
+              Book Seat E in standard cars. Use Seat D in Green Car.
+            </h2>
+            <ul className="mt-3 space-y-2">
+              <li><strong>Tokyo → Kyoto/Osaka:</strong> right side, Seat E.</li>
+              <li><strong>Kyoto/Osaka → Tokyo:</strong> left side, Seat E.</li>
+              <li><strong>Green Car:</strong> usually Seat D for the Mt. Fuji window.</li>
+              <li><strong>Best timing:</strong> be ready around Shin-Fuji.</li>
+            </ul>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Link
+                href="/#seat-checker"
+                className="inline-flex items-center rounded-full border border-[#168a56] bg-[#168a56] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+              >
+                Open free Seat Checker
+              </Link>
+              <span className="inline-flex cursor-not-allowed items-center rounded-full border border-emerald-200 bg-white/70 px-3.5 py-1.5 text-[12px] font-semibold text-emerald-700" title="Prepared for a future child page">
+                Seat E guide
+              </span>
+              <span className="inline-flex cursor-not-allowed items-center rounded-full border border-emerald-200 bg-white/70 px-3.5 py-1.5 text-[12px] font-semibold text-emerald-700" title="Prepared for a future child page">
+                Green Car seats
+              </span>
+            </div>
+          </section>
+        )}
 
         {/* Intro */}
         <section className="mb-5 text-[13px] leading-relaxed text-slate-700 bg-white/90 border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">

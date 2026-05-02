@@ -18,7 +18,8 @@ import {
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { requireAffUrl } from "@/src/affiliateLinks";
-import { trackAffiliateClick, trackChecklistComplete, trackTemplateSelect } from "@/lib/analytics";
+import { getProviderFromHref, trackAffiliateClick, trackChecklistComplete, trackTemplateSelect } from "@/lib/analytics";
+import { getHotelLink } from "@/lib/hotel-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
 // ─── Constants ──────────────────────────────────────────────────────────────
@@ -93,14 +94,33 @@ type CheckData = {
   critical: boolean;
   href?: string;
   hasLink?: boolean;
+  affiliate?: {
+    category: "hotel" | "esim" | "transfer" | "train" | "activity" | "tour" | "insurance";
+    provider: "klook" | "agoda" | "trip" | "other";
+    label: string;
+    area?: string;
+  };
 };
+
+const plannerHotel = getHotelLink("shinjuku");
 
 const CHECKLIST_DATA: CheckData[] = [
   { id: "passport", critical: true },
   { id: "esim", critical: true, href: requireAffUrl("esim"), hasLink: true },
   { id: "train", critical: false, href: requireAffUrl("jrPass"), hasLink: true },
   { id: "transfer", critical: true, href: "/airport-transfers/narita-to-shinjuku", hasLink: true },
-  { id: "hotel", critical: true, href: "/areas-to-stay/tokyo-first-time", hasLink: true },
+  {
+    id: "hotel",
+    critical: true,
+    href: plannerHotel.href,
+    hasLink: true,
+    affiliate: {
+      category: "hotel",
+      provider: plannerHotel.provider,
+      label: plannerHotel.label,
+      area: `${plannerHotel.city}: ${plannerHotel.areaName}`,
+    },
+  },
   { id: "insurance", critical: false, href: requireAffUrl("insurance"), hasLink: true },
   { id: "cash", critical: false },
   { id: "maps", critical: false },
@@ -111,12 +131,23 @@ type BookingData = {
   key: string;
   href: string;
   external: boolean;
+  affiliate?: CheckData["affiliate"];
 };
 
 const BOOKING_DATA: BookingData[] = [
   { key: "esim", href: requireAffUrl("esim"), external: true },
   { key: "transfer", href: "/airport-transfers/narita-to-shinjuku", external: false },
-  { key: "stay", href: "/areas-to-stay/tokyo-first-time", external: false },
+  {
+    key: "stay",
+    href: plannerHotel.href,
+    external: true,
+    affiliate: {
+      category: "hotel",
+      provider: plannerHotel.provider,
+      label: plannerHotel.label,
+      area: `${plannerHotel.city}: ${plannerHotel.areaName}`,
+    },
+  },
   { key: "jrPass", href: requireAffUrl("jrPass"), external: true },
   { key: "insurance", href: requireAffUrl("insurance"), external: true },
 ];
@@ -160,6 +191,7 @@ function weatherIcon(code: number) {
 
 export function PlannerClient() {
   const t = useTranslations("planner");
+  const locale = typeof window === "undefined" ? undefined : window.location.pathname.split("/").filter(Boolean)[0];
 
   const [plannerState, setPlannerState] = useState<{
     templateId: string;
@@ -469,6 +501,7 @@ export function PlannerClient() {
               {CHECKLIST_DATA.map((item) => {
                 const isDone = mounted && checks[item.id];
                 const isExternal = item.href?.startsWith("http");
+                const checkLinkLabel = item.id === "hotel" ? "Compare hotels" : item.hasLink ? t(`checkLinks.${item.id}`) : "";
                 return (
                   <div
                     key={item.id}
@@ -505,10 +538,21 @@ export function PlannerClient() {
                           href={item.href}
                           target="_blank"
                           rel={AFFILIATE_REL}
-                          onClick={() => trackAffiliateClick("checklist", item.id)}
+                          onClick={() =>
+                            trackAffiliateClick({
+                              category: item.affiliate?.category ?? (item.id === "esim" ? "esim" : item.id === "train" ? "train" : item.id === "insurance" ? "insurance" : "activity"),
+                              provider: item.affiliate?.provider ?? getProviderFromHref(item.href ?? ""),
+                              placement: "next_steps",
+                              page_path: "/planner",
+                              locale,
+                              href: item.href ?? "",
+                              label: item.affiliate?.label ?? checkLinkLabel,
+                              area: item.affiliate?.area,
+                            })
+                          }
                           className="inline-flex items-center gap-1 rounded-lg border border-sky-200 bg-sky-50 px-2.5 py-1 text-[11px] font-semibold text-sky-700 transition-colors hover:bg-sky-100"
                         >
-                          {t(`checkLinks.${item.id}`)}
+                          {checkLinkLabel}
                           <ExternalLink className="h-3 w-3" />
                         </a>
                       ) : (
@@ -516,7 +560,7 @@ export function PlannerClient() {
                           href={item.href}
                           className="inline-flex items-center gap-1 rounded-lg border border-sky-200 bg-sky-50 px-2.5 py-1 text-[11px] font-semibold text-sky-700 transition-colors hover:bg-sky-100"
                         >
-                          {t(`checkLinks.${item.id}`)}
+                          {checkLinkLabel}
                           <ArrowRight className="h-3 w-3" />
                         </Link>
                       )
@@ -546,32 +590,48 @@ export function PlannerClient() {
             </div>
             <p className="mt-1 text-[10px] text-slate-500">{t("recommendedFor", { name: templateName })}</p>
             <div className="mt-3 space-y-2">
-              {BOOKING_DATA.map((booking) => (
-                <div key={booking.key} className="rounded-xl border border-white bg-white p-3 shadow-sm">
-                  <p className="text-xs font-semibold text-slate-900">{t(`bookings.${booking.key}.label`)}</p>
-                  <p className="mt-0.5 text-[10px] leading-4 text-slate-500">{t(`bookings.${booking.key}.desc`)}</p>
-                  {booking.external ? (
-                    <a
-                      href={booking.href}
-                      target="_blank"
-                      rel={AFFILIATE_REL}
-                      onClick={() => trackAffiliateClick("bookings-sidebar", booking.key)}
-                      className="mt-2 inline-flex items-center gap-1 rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-3 py-1.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#e66700]"
-                    >
-                      {t(`bookings.${booking.key}.cta`)}
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
-                  ) : (
-                    <Link
-                      href={booking.href}
-                      className="mt-2 inline-flex items-center gap-1 rounded-lg border border-[#168a56] bg-[#168a56] px-3 py-1.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#0f6f45]"
-                    >
-                      {t(`bookings.${booking.key}.cta`)}
-                      <ArrowRight className="h-3 w-3" />
-                    </Link>
-                  )}
-                </div>
-              ))}
+              {BOOKING_DATA.map((booking) => {
+                const label = booking.key === "stay" ? "Where to stay" : t(`bookings.${booking.key}.label`);
+                const desc = booking.key === "stay" ? "Compare current hotel options before booking." : t(`bookings.${booking.key}.desc`);
+                const cta = booking.key === "stay" ? (plannerHotel.provider === "trip" ? plannerHotel.label : "Compare hotels") : t(`bookings.${booking.key}.cta`);
+                return (
+                  <div key={booking.key} className="rounded-xl border border-white bg-white p-3 shadow-sm">
+                    <p className="text-xs font-semibold text-slate-900">{label}</p>
+                    <p className="mt-0.5 text-[10px] leading-4 text-slate-500">{desc}</p>
+                    {booking.external ? (
+                      <a
+                        href={booking.href}
+                        target="_blank"
+                        rel={AFFILIATE_REL}
+                        onClick={() =>
+                          trackAffiliateClick({
+                            category: booking.affiliate?.category ?? (booking.key === "esim" ? "esim" : booking.key === "jrPass" ? "train" : booking.key === "insurance" ? "insurance" : "activity"),
+                            provider: booking.affiliate?.provider ?? getProviderFromHref(booking.href),
+                            placement: "next_steps",
+                            page_path: "/planner",
+                            locale,
+                            href: booking.href,
+                            label: booking.affiliate?.label ?? cta,
+                            area: booking.affiliate?.area,
+                          })
+                        }
+                        className="mt-2 inline-flex items-center gap-1 rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-3 py-1.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#e66700]"
+                      >
+                        {cta}
+                        <ExternalLink className="h-3 w-3" />
+                      </a>
+                    ) : (
+                      <Link
+                        href={booking.href}
+                        className="mt-2 inline-flex items-center gap-1 rounded-lg border border-[#168a56] bg-[#168a56] px-3 py-1.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                      >
+                        {cta}
+                        <ArrowRight className="h-3 w-3" />
+                      </Link>
+                    )}
+                  </div>
+                );
+              })}
             </div>
             <p className="mt-3 text-[10px] text-slate-400">
               {t("bookingsPartnerNote")}

@@ -1,4 +1,5 @@
 import type { TripPick } from "@/lib/trip-picks";
+import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { requireAffUrl } from "@/src/affiliateLinks";
 
 
@@ -11,8 +12,15 @@ export type ItineraryDay = {
   highlights: string[];
   stayArea?: string;
   stayLink?: string;
+  stayHotelKey?: HotelAreaKey;
   transport?: string;
-  bookingCta?: { label: string; href: string };
+  bookingCta?: {
+    label: string;
+    href: string;
+    category?: "hotel" | "esim" | "transfer" | "train" | "activity" | "tour" | "insurance";
+  };
+  prepare?: string;
+  prepareCta?: { label: string; href: string };
 };
 
 export type ItineraryPage = {
@@ -38,14 +46,14 @@ const hiroshimaUrl = requireAffUrl("cityHiroshima");
 const nikkoUrl = requireAffUrl("cityNikko");
 const hakoneUrl = requireAffUrl("hakone");
 const naraUrl = requireAffUrl("nara");
-const hotelShinjukuUrl = requireAffUrl("hotelShinjuku");
-const hotelKyotoStationUrl = requireAffUrl("hotelKyotoStation");
-const hotelOsakaUrl = requireAffUrl("hotelOsaka");
-const hotelKawaguchikoUrl = requireAffUrl("hotelKawaguchiko");
-const hotelHiroshimaUrl = requireAffUrl("hotelHiroshima");
-const hotelHakoneUrl = requireAffUrl("hotelHakone");
-const hotelUenoUrl = requireAffUrl("hotelUeno");
-const hotelAsakusaUrl = requireAffUrl("hotelAsakusa");
+const hotelShinjuku = getHotelLink("shinjuku");
+const hotelKyotoStation = getHotelLink("kyotoStation");
+const hotelNamba = getHotelLink("namba");
+const hotelKawaguchiko = getHotelLink("kawaguchiko");
+const hotelHiroshima = getHotelLink("hiroshima");
+const hotelHakone = getHotelLink("hakone");
+const hotelUeno = getHotelLink("ueno");
+const hotelAsakusa = getHotelLink("asakusa");
 
 // ─── Shared next actions ────────────────────────────────────────────────────
 
@@ -73,9 +81,12 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Arrive & settle in",
         highlights: ["Land at Narita/Haneda, transfer to hotel", "Activate eSIM, get IC card (Suica/Pasmo)", "Evening walk around your neighbourhood — Shinjuku or Asakusa"],
         stayArea: "Shinjuku",
-        stayLink: hotelShinjukuUrl,
+        stayLink: hotelShinjuku.href,
+        stayHotelKey: "shinjuku",
         transport: "Airport transfer to hotel",
-        bookingCta: { label: "Book airport transfer", href: "/airport-transfers/narita-to-shinjuku" },
+        bookingCta: { label: "Book airport transfer", href: "/airport-transfers/narita-to-shinjuku", category: "transfer" },
+        prepare: "eSIM / IC card",
+        prepareCta: { label: "Get eSIM", href: esimUrl },
       },
       {
         day: 2,
@@ -83,8 +94,10 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Classic Tokyo highlights",
         highlights: ["Morning: Senso-ji temple (Asakusa)", "Afternoon: Akihabara or Ueno Park", "Evening: Shibuya crossing → Shibuya Sky or Tokyo Tower"],
         stayArea: "Shinjuku",
-        stayLink: hotelShinjukuUrl,
-        bookingCta: { label: "See Tokyo activities", href: tokyoUrl },
+        stayLink: hotelShinjuku.href,
+        stayHotelKey: "shinjuku",
+        bookingCta: { label: "See Tokyo activities", href: tokyoUrl, category: "activity" },
+        prepare: "Keep the day light after arrival",
       },
       {
         day: 3,
@@ -92,8 +105,10 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Explore deeper or day trip",
         highlights: ["Option A: Harajuku → Meiji Shrine → Omotesando → Shinjuku Gyoen", "Option B: Day trip to Nikko (2.5h) — stunning shrines in the mountains", "Option C: Tsukiji outer market → TeamLab → Odaiba"],
         stayArea: "Shinjuku",
-        stayLink: hotelShinjukuUrl,
-        bookingCta: { label: "Book Nikko day trip", href: nikkoUrl },
+        stayLink: hotelShinjuku.href,
+        stayHotelKey: "shinjuku",
+        bookingCta: { label: "Book Nikko day trip", href: nikkoUrl, category: "tour" },
+        prepare: "Confirm weather and transit timing",
       },
       {
         day: 4,
@@ -101,9 +116,12 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Shinkansen day — see Mt. Fuji",
         highlights: ["Take Tokaido Shinkansen Tokyo → Kyoto (2h15m)", "Sit on the right side (E seat) for Mt. Fuji view", "Afternoon: Fushimi Inari — walk the torii gates", "Evening: Gion district walk"],
         stayArea: "Kyoto Station area",
-        stayLink: hotelKyotoStationUrl,
+        stayLink: hotelKyotoStation.href,
+        stayHotelKey: "kyotoStation",
         transport: "Shinkansen (single ticket is often cheaper)",
-        bookingCta: { label: "Compare train tickets", href: jrPassUrl },
+        bookingCta: { label: "Book Shinkansen ticket", href: jrPassUrl, category: "train" },
+        prepare: "Fuji-side seat checker",
+        prepareCta: { label: "Check Fuji seat", href: "/guide" },
       },
       {
         day: 5,
@@ -111,8 +129,10 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Temples & traditions",
         highlights: ["Morning: Kinkaku-ji (Golden Pavilion) → Ryoan-ji", "Afternoon: Arashiyama bamboo grove + monkey park", "Evening: Pontocho alley for dinner"],
         stayArea: "Kyoto Station area",
-        stayLink: hotelKyotoStationUrl,
-        bookingCta: { label: "See Kyoto activities", href: kyotoUrl },
+        stayLink: hotelKyotoStation.href,
+        stayHotelKey: "kyotoStation",
+        bookingCta: { label: "See Kyoto activities", href: kyotoUrl, category: "activity" },
+        prepare: "Temple timing and dinner area",
       },
       {
         day: 6,
@@ -120,9 +140,11 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Nara detour + Osaka night",
         highlights: ["Morning: Day trip to Nara (45 min) — deer park + Todai-ji", "Afternoon: Train to Osaka (30 min from Nara)", "Evening: Dotonbori street food — takoyaki, okonomiyaki, gyoza"],
         stayArea: "Namba / Dotonbori",
-        stayLink: hotelOsakaUrl,
+        stayLink: hotelNamba.href,
+        stayHotelKey: "namba",
         transport: "JR Nara Line + JR to Osaka",
-        bookingCta: { label: "See Osaka activities", href: osakaUrl },
+        bookingCta: { label: "See Osaka activities", href: osakaUrl, category: "activity" },
+        prepare: "Forward luggage if changing hotels",
       },
       {
         day: 7,
@@ -130,6 +152,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Last morning + fly home",
         highlights: ["Morning: Osaka Castle or Shinsekai district", "Head to KIX (Kansai Airport) for departure", "Alternative: Shinkansen back to Tokyo if flying from Narita/Haneda"],
         transport: "Nankai/JR to Kansai Airport, or Shinkansen to Tokyo",
+        prepare: "Airport transfer buffer and souvenirs",
       },
     ],
     proTip: "The Shinkansen on Day 4 is the anchor of this trip. Book the right-side seat (E) for the Fuji view. JR Pass is usually not worth it for this simple route. Single tickets are often cheaper unless you add Hiroshima, multiple long-distance rides, or return to Tokyo by Shinkansen.",
@@ -149,7 +172,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Arrive & hit the ground running",
         highlights: ["Arrive at Narita/Haneda, transfer to Shinjuku", "Afternoon: Shibuya crossing → Harajuku → Meiji Shrine", "Evening: Shinjuku nightlife or Golden Gai"],
         stayArea: "Shinjuku",
-        stayLink: hotelShinjukuUrl,
+        stayLink: hotelShinjuku.href,
         transport: "Airport transfer",
         bookingCta: { label: "Book airport transfer", href: "/airport-transfers/narita-to-shinjuku" },
       },
@@ -159,7 +182,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Full Tokyo day",
         highlights: ["Morning: Senso-ji (Asakusa) → Ueno", "Afternoon: Akihabara or teamLab", "Evening: Tokyo Tower or Shibuya Sky"],
         stayArea: "Shinjuku",
-        stayLink: hotelShinjukuUrl,
+        stayLink: hotelShinjuku.href,
         bookingCta: { label: "See Tokyo activities", href: tokyoUrl },
       },
       {
@@ -168,7 +191,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Shinkansen to Kyoto + afternoon temples",
         highlights: ["Morning: Shinkansen to Kyoto (2h15m) — E seat for Fuji", "Afternoon: Fushimi Inari (torii gates)", "Evening: Gion district walk + dinner"],
         stayArea: "Kyoto Station area",
-        stayLink: hotelKyotoStationUrl,
+        stayLink: hotelKyotoStation.href,
         transport: "Shinkansen (single ticket is often cheaper)",
         bookingCta: { label: "Compare train tickets", href: jrPassUrl },
       },
@@ -178,7 +201,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Kyoto temples & bamboo",
         highlights: ["Morning: Kinkaku-ji → Ryoan-ji", "Afternoon: Arashiyama bamboo grove", "Evening: Pontocho or Nishiki Market"],
         stayArea: "Kyoto Station area",
-        stayLink: hotelKyotoStationUrl,
+        stayLink: hotelKyotoStation.href,
         bookingCta: { label: "See Kyoto activities", href: kyotoUrl },
       },
       {
@@ -206,7 +229,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Arrive & settle in",
         highlights: ["Land at Narita/Haneda, transfer to hotel", "Activate eSIM, get IC card", "Evening stroll around Shinjuku or Asakusa"],
         stayArea: "Shinjuku",
-        stayLink: hotelShinjukuUrl,
+        stayLink: hotelShinjuku.href,
         bookingCta: { label: "Book airport transfer", href: "/airport-transfers/narita-to-shinjuku" },
       },
       {
@@ -215,7 +238,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "East Tokyo — temples & tradition",
         highlights: ["Morning: Senso-ji → Nakamise → Asakusa", "Afternoon: Ueno Park + museums", "Evening: Ameyoko street market → dinner in Ueno"],
         stayArea: "Shinjuku",
-        stayLink: hotelShinjukuUrl,
+        stayLink: hotelShinjuku.href,
         bookingCta: { label: "See Tokyo activities", href: tokyoUrl },
       },
       {
@@ -224,7 +247,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "West Tokyo — modern & pop culture",
         highlights: ["Morning: Meiji Shrine → Harajuku → Omotesando", "Afternoon: Shibuya crossing → Shibuya Sky", "Evening: Shinjuku Golden Gai or Kabukicho"],
         stayArea: "Shinjuku",
-        stayLink: hotelShinjukuUrl,
+        stayLink: hotelShinjuku.href,
       },
       {
         day: 4,
@@ -232,9 +255,9 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Mt. Fuji area — lake & views",
         highlights: ["Highway bus from Shinjuku to Kawaguchiko (2h)", "Afternoon: Chureito Pagoda for the iconic Fuji shot", "Onsen hotel with Fuji view — the best part of this trip"],
         stayArea: "Kawaguchiko",
-        stayLink: hotelKawaguchikoUrl,
+        stayLink: hotelKawaguchiko.href,
         transport: "Highway bus from Shinjuku Busta (2h)",
-        bookingCta: { label: "See Kawaguchiko hotels", href: hotelKawaguchikoUrl },
+        bookingCta: { label: "See Kawaguchiko hotels", href: hotelKawaguchiko.href },
       },
       {
         day: 5,
@@ -242,7 +265,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Fuji views + Hakone onsen",
         highlights: ["Morning: Lake Kawaguchiko cycling or Oshino Hakkai", "Afternoon: Bus to Hakone (or return to Tokyo, then Romancecar)", "Evening: Hakone onsen ryokan experience"],
         stayArea: "Hakone",
-        stayLink: hotelHakoneUrl,
+        stayLink: hotelHakone.href,
         transport: "Bus or train via Gotemba/Mishima",
         bookingCta: { label: "Get Hakone Free Pass", href: hakoneUrl },
       },
@@ -252,7 +275,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Hakone loop + Shinkansen to Kyoto",
         highlights: ["Morning: Hakone ropeway → Owakudani → Lake Ashi pirate ship", "Afternoon: Bus to Odawara, Shinkansen to Kyoto (2h)", "Evening: Arrive Kyoto, explore Kyoto Station area"],
         stayArea: "Kyoto Station area",
-        stayLink: hotelKyotoStationUrl,
+        stayLink: hotelKyotoStation.href,
         transport: "Hakone bus → Odawara → Shinkansen",
         bookingCta: { label: "Compare JR Pass", href: jrPassUrl },
       },
@@ -262,7 +285,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Kyoto — temples & shrines",
         highlights: ["Morning: Fushimi Inari (go early, avoid crowds)", "Afternoon: Kinkaku-ji → Ryoan-ji", "Evening: Gion geisha district walk"],
         stayArea: "Kyoto Station area",
-        stayLink: hotelKyotoStationUrl,
+        stayLink: hotelKyotoStation.href,
         bookingCta: { label: "See Kyoto activities", href: kyotoUrl },
       },
       {
@@ -271,7 +294,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Kyoto — bamboo & day trip",
         highlights: ["Morning: Arashiyama bamboo grove + monkey park", "Afternoon: Day trip to Nara (45 min) — deer + Todai-ji", "Evening: Nishiki Market → Pontocho dinner"],
         stayArea: "Kyoto Station area",
-        stayLink: hotelKyotoStationUrl,
+        stayLink: hotelKyotoStation.href,
         bookingCta: { label: "Book Nara trip", href: naraUrl },
       },
       {
@@ -280,7 +303,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Osaka — street food capital",
         highlights: ["Morning: Train to Osaka (15 min on Shinkansen)", "Afternoon: Osaka Castle → Shinsekai", "Evening: Dotonbori — takoyaki, okonomiyaki, kushikatsu"],
         stayArea: "Namba / Dotonbori",
-        stayLink: hotelOsakaUrl,
+        stayLink: hotelNamba.href,
         bookingCta: { label: "See Osaka activities", href: osakaUrl },
       },
       {
@@ -293,7 +316,7 @@ export const itineraryPages: ItineraryPage[] = [
     ],
     proTip: "The Kawaguchiko → Hakone → Kyoto sequence on Days 4–6 is the highlight most itineraries miss. You see Fuji from both the lake and mountain side, soak in an onsen, and naturally end up on the Shinkansen to Kyoto from Odawara — no backtracking to Tokyo.",
     nextActions: [
-      { id: "stay-kawaguchiko", category: "stay", title: "Kawaguchiko hotels", description: "Fuji-view onsen hotels by the lake.", cta: "See hotels", href: hotelKawaguchikoUrl },
+      { id: "stay-kawaguchiko", category: "stay", title: "Kawaguchiko hotels", description: "Fuji-view onsen hotels by the lake.", cta: "See hotels", href: hotelKawaguchiko.href },
       ...commonNextActions,
     ],
   },
@@ -311,7 +334,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Arrive & settle in",
         highlights: ["Land at Narita/Haneda, transfer to Asakusa or Ueno", "Activate eSIM, get IC card", "Evening: Senso-ji lit up at night (fewer crowds)"],
         stayArea: "Asakusa",
-        stayLink: hotelAsakusaUrl,
+        stayLink: hotelAsakusa.href,
         bookingCta: { label: "Book airport transfer", href: "/airport-transfers/narita-to-shinjuku" },
       },
       {
@@ -320,7 +343,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "East Tokyo deep dive",
         highlights: ["Morning: Tsukiji outer market for breakfast", "Afternoon: TeamLab Planets → Odaiba", "Evening: Tokyo Tower or Roppongi"],
         stayArea: "Asakusa",
-        stayLink: hotelAsakusaUrl,
+        stayLink: hotelAsakusa.href,
         bookingCta: { label: "See Tokyo activities", href: tokyoUrl },
       },
       {
@@ -329,7 +352,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "West Tokyo & Shinjuku",
         highlights: ["Morning: Meiji Shrine → Harajuku → Omotesando", "Afternoon: Shinjuku Gyoen gardens", "Evening: Golden Gai or Omoide Yokocho"],
         stayArea: "Asakusa",
-        stayLink: hotelAsakusaUrl,
+        stayLink: hotelAsakusa.href,
       },
       {
         day: 4,
@@ -337,7 +360,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Mountain shrines & waterfalls",
         highlights: ["Tobu train from Asakusa to Nikko (2h)", "Toshogu Shrine — elaborate carvings, see-no-evil monkeys", "Kegon Falls or Lake Chuzenji if time allows"],
         stayArea: "Asakusa",
-        stayLink: hotelAsakusaUrl,
+        stayLink: hotelAsakusa.href,
         transport: "Tobu Nikko Line from Asakusa (2h direct)",
         bookingCta: { label: "Book Nikko trip", href: nikkoUrl },
       },
@@ -347,9 +370,9 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Mt. Fuji lakeside",
         highlights: ["Highway bus from Shinjuku to Kawaguchiko (2h)", "Chureito Pagoda for the postcard Fuji view", "Onsen with Fuji view — peak of the trip"],
         stayArea: "Kawaguchiko",
-        stayLink: hotelKawaguchikoUrl,
+        stayLink: hotelKawaguchiko.href,
         transport: "Highway bus from Shinjuku Busta",
-        bookingCta: { label: "See Kawaguchiko hotels", href: hotelKawaguchikoUrl },
+        bookingCta: { label: "See Kawaguchiko hotels", href: hotelKawaguchiko.href },
       },
       {
         day: 6,
@@ -357,7 +380,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Morning by the lake + return",
         highlights: ["Morning: Cycling around Lake Kawaguchiko or Oshino Hakkai", "Afternoon: Return to Tokyo", "Evening: Akihabara or Shimokitazawa — your pick"],
         stayArea: "Ueno",
-        stayLink: hotelUenoUrl,
+        stayLink: hotelUeno.href,
         transport: "Highway bus back to Shinjuku (2h)",
       },
       {
@@ -366,7 +389,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Shinkansen day — see Fuji from the train",
         highlights: ["Tokaido Shinkansen Tokyo → Kyoto (2h15m)", "Right side E seat for Mt. Fuji — use fujiseat checker", "Afternoon: Fushimi Inari torii gates", "Evening: Gion walk + dinner on Pontocho"],
         stayArea: "Kyoto Station area",
-        stayLink: hotelKyotoStationUrl,
+        stayLink: hotelKyotoStation.href,
         transport: "Shinkansen (compare pass vs tickets)",
         bookingCta: { label: "Compare JR Pass", href: jrPassUrl },
       },
@@ -376,7 +399,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "North Kyoto temples",
         highlights: ["Morning: Kinkaku-ji (Golden Pavilion)", "Afternoon: Ryoan-ji → Ninna-ji", "Evening: Nishiki Market → kaiseki dinner"],
         stayArea: "Kyoto Station area",
-        stayLink: hotelKyotoStationUrl,
+        stayLink: hotelKyotoStation.href,
         bookingCta: { label: "See Kyoto activities", href: kyotoUrl },
       },
       {
@@ -385,7 +408,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Arashiyama + south Kyoto",
         highlights: ["Morning: Arashiyama bamboo grove + monkey park", "Afternoon: Tofuku-ji or Sanjusangendo (1,001 statues)", "Evening: Free evening — rest or explore"],
         stayArea: "Kyoto Station area",
-        stayLink: hotelKyotoStationUrl,
+        stayLink: hotelKyotoStation.href,
       },
       {
         day: 10,
@@ -393,7 +416,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Deer park & giant Buddha",
         highlights: ["JR or Kintetsu to Nara (45 min)", "Todai-ji — world's largest wooden building", "Walk through deer park + Kasuga Taisha shrine"],
         stayArea: "Kyoto Station area",
-        stayLink: hotelKyotoStationUrl,
+        stayLink: hotelKyotoStation.href,
         transport: "JR Nara Line (covered if you already use JR Pass)",
         bookingCta: { label: "Book Nara trip", href: naraUrl },
       },
@@ -403,7 +426,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Hiroshima — history & peace",
         highlights: ["Shinkansen Kyoto → Hiroshima (1h40m)", "Peace Memorial Park + Museum", "Evening: Hiroshima-style okonomiyaki"],
         stayArea: "Hiroshima",
-        stayLink: hotelHiroshimaUrl,
+        stayLink: hotelHiroshima.href,
         transport: "Shinkansen (compare JR Pass vs tickets)",
         bookingCta: { label: "See Hiroshima activities", href: hiroshimaUrl },
       },
@@ -413,7 +436,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Floating torii gate island",
         highlights: ["Ferry to Miyajima island (10 min from mainland)", "Itsukushima Shrine — floating torii at high tide", "Try momiji manju (maple leaf cake) + grilled oysters"],
         stayArea: "Hiroshima",
-        stayLink: hotelHiroshimaUrl,
+        stayLink: hotelHiroshima.href,
         transport: "JR train + ferry (covered if you use JR Pass)",
       },
       {
@@ -422,7 +445,7 @@ export const itineraryPages: ItineraryPage[] = [
         title: "Osaka street food finale",
         highlights: ["Shinkansen Hiroshima → Osaka (1h20m)", "Afternoon: Osaka Castle or Shinsekai", "Evening: Dotonbori — the ultimate street food strip"],
         stayArea: "Namba / Dotonbori",
-        stayLink: hotelOsakaUrl,
+        stayLink: hotelNamba.href,
         transport: "Shinkansen (compare JR Pass vs tickets)",
         bookingCta: { label: "See Osaka activities", href: osakaUrl },
       },
@@ -436,7 +459,7 @@ export const itineraryPages: ItineraryPage[] = [
     ],
     proTip: "The 14-day JR Pass is usually worth comparing for this route because it includes several long-distance legs: Tokyo→Kyoto, Kyoto→Hiroshima, Hiroshima→Osaka, and potentially Osaka→Tokyo. Activate it around Day 7 so it covers the dense train section, then confirm current prices before buying.",
     nextActions: [
-      { id: "stay-kawaguchiko", category: "stay", title: "Kawaguchiko hotels", description: "Fuji-view onsen hotels by the lake.", cta: "See hotels", href: hotelKawaguchikoUrl },
+      { id: "stay-kawaguchiko", category: "stay", title: "Kawaguchiko hotels", description: "Fuji-view onsen hotels by the lake.", cta: "See hotels", href: hotelKawaguchiko.href },
       { id: "hiroshima", category: "experience", title: "Hiroshima activities", description: "Peace park, Miyajima, and local food.", cta: "See activities", href: hiroshimaUrl },
       ...commonNextActions,
     ],

@@ -1,5 +1,8 @@
+"use client";
+
 import { ArrowRight, Check, Clock, Luggage, Wallet, X, Zap } from "lucide-react";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+import { getProviderFromHref, trackAffiliateClick } from "@/lib/analytics";
 
 type TransferOptionProps = {
   name: string;
@@ -10,8 +13,10 @@ type TransferOptionProps = {
   cons: string[];
   luggageFriendly: boolean;
   lateOk: boolean;
-  bookingLink: string;
+  bookingLink?: string;
   bookingLabel?: string;
+  locale?: string;
+  pagePath?: string;
 };
 
 const badgeConfig = {
@@ -22,7 +27,7 @@ const badgeConfig = {
 
 export function TransferOption({
   name, badge, duration, cost, pros, cons,
-  luggageFriendly, lateOk, bookingLink, bookingLabel = "Book ticket",
+  luggageFriendly, lateOk, bookingLink, bookingLabel = "Book ticket", locale = "en", pagePath,
 }: TransferOptionProps) {
   const b = badgeConfig[badge];
   const BadgeIcon = b.icon;
@@ -93,15 +98,32 @@ export function TransferOption({
         </span>
       </div>
 
-      <a
-        href={bookingLink}
-        target="_blank"
-        rel={AFFILIATE_REL}
-        className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#e66700] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
-      >
-        {bookingLabel}
-        <ArrowRight className="h-3.5 w-3.5" />
-      </a>
+      {bookingLink ? (
+        <a
+          href={bookingLink}
+          target="_blank"
+          rel={AFFILIATE_REL}
+          onClick={() =>
+            trackAffiliateClick({
+              category: "transfer",
+              provider: getProviderFromHref(bookingLink),
+              placement: "airport_transfer",
+              page_path: pagePath,
+              locale,
+              href: bookingLink,
+              label: bookingLabel,
+            })
+          }
+          className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#e66700] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
+        >
+          {bookingLabel}
+          <ArrowRight className="h-3.5 w-3.5" />
+        </a>
+      ) : (
+        <span className="mt-4 inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-semibold text-slate-600">
+          {bookingLabel}
+        </span>
+      )}
     </div>
   );
 }

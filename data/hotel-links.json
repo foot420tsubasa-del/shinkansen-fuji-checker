@@ -1,0 +1,100 @@
+{
+  "shinjuku": {
+    "areaName": "Shinjuku",
+    "city": "Tokyo",
+    "label": "Compare Shinjuku hotels on Trip.com",
+    "tripUrl": "https://www.trip.com/t/48qXpVIBXU2",
+    "fallbackLinkId": "hotelShinjuku"
+  },
+  "ueno": {
+    "areaName": "Ueno",
+    "city": "Tokyo",
+    "label": "Compare Ueno hotels on Trip.com",
+    "tripUrl": "https://www.trip.com/t/B0JQEdOBXU2",
+    "fallbackLinkId": "hotelUeno"
+  },
+  "asakusa": {
+    "areaName": "Asakusa",
+    "city": "Tokyo",
+    "label": "Compare Asakusa hotels on Trip.com",
+    "tripUrl": "https://www.trip.com/t/siVBikRBXU2",
+    "fallbackLinkId": "hotelAsakusa"
+  },
+  "tokyoStation": {
+    "areaName": "Tokyo Station",
+    "city": "Tokyo",
+    "label": "Compare hotels near Tokyo Station",
+    "tripUrl": "https://www.trip.com/t/PgV216VBXU2",
+    "fallbackLinkId": "hotelTokyo"
+  },
+  "shibuya": {
+    "areaName": "Shibuya",
+    "city": "Tokyo",
+    "label": "Compare Shibuya hotels on Trip.com",
+    "tripUrl": "https://www.trip.com/t/PEM7YWXBXU2",
+    "fallbackLinkId": "hotelShinjuku"
+  },
+  "oshiage": {
+    "areaName": "Oshiage",
+    "city": "Tokyo",
+    "label": "Compare Oshiage hotels on Trip.com",
+    "tripUrl": "https://www.trip.com/t/AbpWVXaBXU2",
+    "fallbackLinkId": "hotelAsakusa"
+  },
+  "kyotoStation": {
+    "areaName": "Kyoto Station",
+    "city": "Kyoto",
+    "label": "Compare Kyoto Station hotels",
+    "tripUrl": "https://www.trip.com/t/LrRH7HdBXU2",
+    "fallbackLinkId": "hotelKyotoStation"
+  },
+  "gionKawaramachi": {
+    "areaName": "Gion / Kawaramachi",
+    "city": "Kyoto",
+    "label": "Compare Gion and Kawaramachi hotels on Trip.com",
+    "tripUrl": "https://www.trip.com/t/vDpJrykBXU2",
+    "fallbackLinkId": "hotelGion"
+  },
+  "namba": {
+    "areaName": "Namba",
+    "city": "Osaka",
+    "label": "Compare Namba hotels",
+    "tripUrl": "https://www.trip.com/t/nMo892nBXU2",
+    "fallbackLinkId": "hotelOsaka"
+  },
+  "umeda": {
+    "areaName": "Umeda",
+    "city": "Osaka",
+    "label": "Compare Umeda hotels on Trip.com",
+    "tripUrl": "https://www.trip.com/t/QZRM3xoBXU2",
+    "fallbackLinkId": "hotelOsaka"
+  },
+  "shinOsaka": {
+    "areaName": "Shin-Osaka",
+    "city": "Osaka",
+    "label": "Compare Shin-Osaka hotels on Trip.com",
+    "tripUrl": "https://www.trip.com/t/iGx5LJqBXU2",
+    "fallbackLinkId": "hotelOsaka"
+  },
+  "kawaguchiko": {
+    "areaName": "Kawaguchiko",
+    "city": "Fujikawaguchiko",
+    "label": "Compare Kawaguchiko hotels on Trip.com",
+    "tripUrl": "https://www.trip.com/t/4yZdOmrBXU2",
+    "fallbackLinkId": "hotelKawaguchiko"
+  },
+  "hakone": {
+    "areaName": "Hakone",
+    "city": "Hakone",
+    "label": "Compare Hakone hotels on Trip.com",
+    "tripUrl": "https://www.trip.com/t/AIAiuFtBXU2",
+    "fallbackLinkId": "hotelHakone"
+  },
+  "hiroshima": {
+    "areaName": "Hiroshima",
+    "city": "Hiroshima",
+    "label": "Compare Hiroshima hotels on Trip.com",
+    "tripUrl": "https://www.trip.com/t/HlmtoVuBXU2",
+    "fallbackLinkId": "hotelHiroshima"
+  }
+}

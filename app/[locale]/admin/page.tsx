@@ -3,10 +3,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import type { LinkConfig } from "@/src/affiliateLinks";
+import type { HotelLinkConfig } from "@/lib/hotel-links";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
 type LinkEntry = { id: string } & LinkConfig;
+type HotelEntry = { id: string } & HotelLinkConfig;
 
 type FormState = {
   id: string;
@@ -16,6 +18,15 @@ type FormState = {
   klookPath: string;
   directUrl: string;
   usedOn: string;
+};
+
+type HotelFormState = {
+  id: string;
+  areaName: string;
+  city: string;
+  label: string;
+  tripUrl: string;
+  fallbackLinkId: string;
 };
 
 const EMPTY_FORM: FormState = {
@@ -90,6 +101,7 @@ const PLACEMENTS: Record<string, Placement[]> = {
 
 const PROVIDER_STYLES: Record<string, { dot: string; badge: string; label: string; color: string }> = {
   klook: { dot: "bg-orange-400", badge: "bg-orange-100 text-orange-800 border-orange-200", label: "Klook", color: "border-orange-300 bg-orange-50" },
+  trip: { dot: "bg-blue-500", badge: "bg-blue-100 text-blue-800 border-blue-200", label: "Trip.com", color: "border-blue-300 bg-blue-50" },
   agoda: { dot: "bg-red-400", badge: "bg-red-100 text-red-800 border-red-200", label: "Agoda", color: "border-red-300 bg-red-50" },
   getyourguide: { dot: "bg-emerald-500", badge: "bg-emerald-100 text-emerald-800 border-emerald-200", label: "GetYourGuide", color: "border-emerald-300 bg-emerald-50" },
   safetywing: { dot: "bg-cyan-500", badge: "bg-cyan-100 text-cyan-800 border-cyan-200", label: "SafetyWing", color: "border-cyan-300 bg-cyan-50" },
@@ -104,6 +116,7 @@ function ps(provider: string) {
 
 export default function AdminPage() {
   const [links, setLinks] = useState<LinkEntry[]>([]);
+  const [hotelLinks, setHotelLinks] = useState<HotelEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ text: string; ok: boolean } | null>(null);
@@ -111,8 +124,10 @@ export default function AdminPage() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [showAdd, setShowAdd] = useState(false);
   const [klookUrlInput, setKlookUrlInput] = useState("");
-  const [tab, setTab] = useState<"todo" | "all">("todo");
+  const [tab, setTab] = useState<"hotel" | "todo" | "all">("hotel");
   const [adminToken, setAdminToken] = useState("");
+  const [editingHotelId, setEditingHotelId] = useState<string | null>(null);
+  const [hotelForm, setHotelForm] = useState<HotelFormState | null>(null);
 
   const fetchLinks = useCallback(async () => {
     try {
@@ -137,12 +152,33 @@ export default function AdminPage() {
     }
   }, [adminToken]);
 
+  const fetchHotelLinks = useCallback(async () => {
+    try {
+      const res = await fetch("/api/hotel-links", {
+        headers: adminToken ? { "x-admin-token": adminToken } : {},
+      });
+      if (res.status === 401) return;
+      const data = await res.json();
+      setHotelLinks(
+        Object.entries(data).map(([id, config]) => ({
+          id,
+          ...(config as HotelLinkConfig),
+        })),
+      );
+    } catch {
+      setMessage({ text: "ホテルリンクの読み込みに失敗しました", ok: false });
+    }
+  }, [adminToken]);
+
   useEffect(() => {
     const saved = sessionStorage.getItem("fujiseat_admin_token") || "";
     setAdminToken(saved);
   }, []);
 
-  useEffect(() => { fetchLinks(); }, [fetchLinks]);
+  useEffect(() => {
+    fetchLinks();
+    fetchHotelLinks();
+  }, [fetchLinks, fetchHotelLinks]);
 
   const flash = (text: string, ok: boolean) => {
     setMessage({ text, ok });
@@ -176,6 +212,28 @@ export default function AdminPage() {
     setKlookUrlInput("");
   };
 
+  const startHotelEdit = (entry: HotelEntry) => {
+    setEditingHotelId(entry.id);
+    setHotelForm({
+      id: entry.id,
+      areaName: entry.areaName,
+      city: entry.city,
+      label: entry.label,
+      tripUrl: entry.tripUrl,
+      fallbackLinkId: entry.fallbackLinkId,
+    });
+    setEditingId(null);
+    setShowAdd(false);
+  };
+
+  const cancelHotelEdit = () => {
+    setEditingHotelId(null);
+    setHotelForm(null);
+  };
+
+  const updateHotelForm = (field: keyof HotelFormState, value: string) =>
+    setHotelForm((prev) => (prev ? { ...prev, [field]: value } : prev));
+
   const save = async () => {
     const id = form.id.trim();
     if (!id || !form.label.trim()) {
@@ -203,6 +261,33 @@ export default function AdminPage() {
       await fetchLinks();
     } catch {
       flash("保存に失敗しました（本番環境では編集不可）", false);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const saveHotel = async () => {
+    if (!hotelForm) return;
+    setSaving(true);
+    try {
+      const config: HotelLinkConfig = {
+        areaName: hotelForm.areaName.trim(),
+        city: hotelForm.city.trim(),
+        label: hotelForm.label.trim(),
+        tripUrl: hotelForm.tripUrl.trim(),
+        fallbackLinkId: hotelForm.fallbackLinkId.trim(),
+      };
+      const res = await fetch("/api/hotel-links", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", "x-admin-token": adminToken },
+        body: JSON.stringify({ id: hotelForm.id, config }),
+      });
+      if (!res.ok) throw new Error();
+      flash("Trip.comホテルリンクを保存しました", true);
+      cancelHotelEdit();
+      await fetchHotelLinks();
+    } catch {
+      flash("ホテルリンクの保存に失敗しました", false);
     } finally {
       setSaving(false);
     }
@@ -247,6 +332,7 @@ export default function AdminPage() {
 
   const todoItems = links.filter((l) => getStatus(l) !== "done");
   const doneItems = links.filter((l) => getStatus(l) === "done");
+  const tripHotelDoneCount = hotelLinks.filter((h) => h.tripUrl.trim()).length;
 
   const todoByProvider = Object.entries(
     todoItems.reduce<Record<string, LinkEntry[]>>((acc, l) => {
@@ -292,6 +378,7 @@ export default function AdminPage() {
             className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-sky-300"
           >
             <option value="klook">Klook</option>
+            <option value="trip">Trip.com</option>
             <option value="agoda">Agoda</option>
             <option value="getyourguide">GetYourGuide</option>
             <option value="safetywing">SafetyWing</option>
@@ -440,6 +527,117 @@ export default function AdminPage() {
     );
   }
 
+  function HotelLinkCard({ entry }: { entry: HotelEntry }) {
+    const hasTripUrl = Boolean(entry.tripUrl.trim());
+    const isEditing = editingHotelId === entry.id && hotelForm;
+
+    if (isEditing) {
+      return (
+        <div className="rounded-2xl border border-blue-200 bg-blue-50/50 p-4 shadow-sm">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">エリアID</label>
+              <input
+                value={hotelForm.id}
+                disabled
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-500"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">表示エリア名</label>
+              <input
+                value={hotelForm.areaName}
+                onChange={(e) => updateHotelForm("areaName", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-blue-300"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">都市</label>
+              <input
+                value={hotelForm.city}
+                onChange={(e) => updateHotelForm("city", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-blue-300"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">未設定時のfallback ID</label>
+              <input
+                value={hotelForm.fallbackLinkId}
+                onChange={(e) => updateHotelForm("fallbackLinkId", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-blue-300"
+              />
+            </div>
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-semibold text-slate-500">ボタン文言</label>
+            <input
+              value={hotelForm.label}
+              onChange={(e) => updateHotelForm("label", e.target.value)}
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-blue-300"
+            />
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-bold text-blue-700">Trip.com affiliate / deeplink URL</label>
+            <input
+              value={hotelForm.tripUrl}
+              onChange={(e) => updateHotelForm("tripUrl", e.target.value)}
+              placeholder="https://..."
+              className="mt-1 w-full rounded-lg border border-blue-200 bg-white px-3 py-2 text-xs outline-none focus:border-blue-400"
+            />
+            <p className="mt-1 text-[10px] text-slate-500">
+              空欄ならKlookホテルリンクへfallbackします。Trip.com URLを入れるとGA4 providerも trip になります。
+            </p>
+          </div>
+          <div className="mt-4 flex gap-2">
+            <button
+              onClick={saveHotel}
+              disabled={saving}
+              className="rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700 disabled:opacity-50"
+            >
+              {saving ? "保存中..." : "保存する"}
+            </button>
+            <button
+              onClick={cancelHotelEdit}
+              className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50"
+            >
+              キャンセル
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className={`rounded-2xl border bg-white p-4 shadow-sm ${hasTripUrl ? "border-blue-200" : "border-amber-200 bg-amber-50/30"}`}>
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="text-sm font-semibold text-slate-900">{entry.areaName}</p>
+              <span className="rounded-md border border-blue-200 bg-blue-100 px-1.5 py-0.5 text-[9px] font-bold text-blue-800">
+                Trip.com hotel
+              </span>
+              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasTripUrl ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>
+                {hasTripUrl ? "Trip URL 設定済み" : "Trip URL 未設定"}
+              </span>
+            </div>
+            <p className="mt-1 text-[10px] text-slate-500">
+              {entry.city} / fallback: <code className="rounded bg-slate-100 px-1">{entry.fallbackLinkId}</code>
+            </p>
+            <p className="mt-1 truncate text-[10px] text-slate-400">
+              {hasTripUrl ? entry.tripUrl : "未設定時は既存Klookホテルリンクを使用"}
+            </p>
+          </div>
+          <button
+            onClick={() => startHotelEdit(entry)}
+            className="shrink-0 rounded-lg bg-blue-100 px-3 py-1.5 text-[10px] font-semibold text-blue-700 hover:bg-blue-200"
+          >
+            編集
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   // ─── Render ───────────────────────────────────────────────────────────────
 
   return (
@@ -451,7 +649,7 @@ export default function AdminPage() {
             <p className="text-[11px] font-semibold uppercase text-sky-700">Admin</p>
             <h1 className="mt-1 text-2xl font-bold text-slate-950">アフィリエイトリンク管理</h1>
             <p className="mt-1 text-sm text-slate-500">
-              リンクの追加・編集ができます。「設定する」を押して各サイトで生成した URL を入力。
+              Trip.comホテル導線と、Klook等の汎用リンクを分けて管理します。
             </p>
           </div>
           <Link href="/" className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-medium text-slate-600 shadow-sm hover:bg-slate-50">
@@ -497,7 +695,7 @@ export default function AdminPage() {
 
         {/* Summary cards */}
         {!loading && (
-          <div className="mb-6 grid grid-cols-3 gap-3">
+          <div className="mb-6 grid gap-3 sm:grid-cols-4">
             <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center">
               <p className="text-2xl font-bold text-emerald-700">{doneItems.length}</p>
               <p className="text-[10px] font-medium text-emerald-600">設定済み</p>
@@ -514,11 +712,21 @@ export default function AdminPage() {
               </p>
               <p className="text-[10px] font-medium text-red-600">URL 未設定</p>
             </div>
+            <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-center">
+              <p className="text-2xl font-bold text-blue-700">{tripHotelDoneCount}/{hotelLinks.length}</p>
+              <p className="text-[10px] font-medium text-blue-600">Tripホテル設定</p>
+            </div>
           </div>
         )}
 
         {/* Tabs */}
         <div className="mb-4 flex gap-2">
+          <button
+            onClick={() => setTab("hotel")}
+            className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "hotel" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
+          >
+            Trip.comホテル ({tripHotelDoneCount}/{hotelLinks.length})
+          </button>
           <button
             onClick={() => setTab("todo")}
             className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "todo" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
@@ -542,6 +750,51 @@ export default function AdminPage() {
             {[1, 2, 3].map((i) => (
               <div key={i} className="h-20 animate-pulse rounded-2xl bg-slate-200" />
             ))}
+          </div>
+        )}
+
+        {!loading && tab === "hotel" && (
+          <div className="space-y-4">
+            <div className="rounded-2xl border border-blue-200 bg-blue-50/70 p-5 shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="h-3 w-3 rounded-full bg-blue-500" />
+                <p className="text-sm font-bold text-slate-900">Trip.comホテルURL管理</p>
+              </div>
+              <p className="mt-2 text-xs leading-5 text-slate-600">
+                Trip.com管理画面で生成したホテル検索deeplinkを、エリアごとに貼り付けます。
+                空欄のエリアは既存Klookホテルリンクへfallbackします。
+              </p>
+              <div className="mt-3 rounded-xl bg-white px-3 py-2 text-[11px] leading-5 text-slate-600">
+                <span className="font-semibold text-slate-800">運用ルール：</span>
+                日付固定なしの検索URLを優先。日付固定URLしか作れない場合も、ここを差し替えるだけで全ページに反映されます。
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              {([
+                ["Tokyo", hotelLinks.filter((h) => h.city === "Tokyo")],
+                ["Kyoto", hotelLinks.filter((h) => h.city === "Kyoto")],
+                ["Osaka", hotelLinks.filter((h) => h.city === "Osaka")],
+                ["Other", hotelLinks.filter((h) => !["Tokyo", "Kyoto", "Osaka"].includes(h.city))],
+              ] as Array<[string, HotelEntry[]]>).map(([city, cityItems]) => {
+                if (cityItems.length === 0) return null;
+                return (
+                  <section key={city}>
+                    <div className="mb-2 flex items-center gap-2">
+                      <p className="text-xs font-bold text-slate-700">{city}</p>
+                      <span className="text-[10px] text-slate-400">
+                        {cityItems.filter((h) => h.tripUrl.trim()).length}/{cityItems.length} 設定済み
+                      </span>
+                    </div>
+                    <div className="space-y-2">
+                      {cityItems.map((entry) => (
+                        <HotelLinkCard key={entry.id} entry={entry} />
+                      ))}
+                    </div>
+                  </section>
+                );
+              })}
+            </div>
           </div>
         )}
 
@@ -666,6 +919,26 @@ export default function AdminPage() {
                 <li>リンクしたい商品ページの URL を入力</li>
                 <li>生成されたアフィリエイトリンクをコピー</li>
                 <li>この管理画面で「設定する」→ URL 欄に貼り付け → 自動で Ad ID が入る → 保存</li>
+              </ol>
+            </div>
+          </div>
+
+          {/* Trip.com */}
+          <div className="rounded-2xl border border-blue-200 bg-blue-50/50 p-5 shadow-sm">
+            <div className="flex items-center gap-2">
+              <span className="h-3 w-3 rounded-full bg-blue-500" />
+              <p className="text-xs font-bold text-slate-900">Trip.com — ホテルは専用タブで管理</p>
+            </div>
+            <p className="mt-2 text-[11px] leading-5 text-slate-600">
+              ホテル検索deeplinkは上部の「Trip.comホテル」タブに貼ります。KlookのホテルIDを書き換えないでください。
+            </p>
+            <div className="mt-3 rounded-xl bg-white p-3">
+              <p className="text-[10px] font-semibold text-slate-700">手順</p>
+              <ol className="mt-1 list-inside list-decimal space-y-1 text-[11px] leading-5 text-slate-600">
+                <li>Trip.com Affiliate のdeeplink作成画面を開く</li>
+                <li>Shinjuku / Ueno などエリア別のホテル検索URLを生成</li>
+                <li>できれば日付固定なしURLを使う</li>
+                <li>この管理画面の「Trip.comホテル」タブで該当エリアに貼り付け</li>
               </ol>
             </div>
           </div>

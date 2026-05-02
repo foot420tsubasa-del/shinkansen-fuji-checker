@@ -16,7 +16,15 @@ export function KlookCTA() {
           href={SHINKANSEN_TICKET_URL}
           target="_blank"
           rel={AFFILIATE_REL}
-          onClick={() => trackAffiliateClick("guide-cta", "shinkansen_ticket")}
+          onClick={() =>
+            trackAffiliateClick({
+              category: "train",
+              provider: "klook",
+              placement: "guide_top",
+              href: SHINKANSEN_TICKET_URL,
+              label: "Book Shinkansen",
+            })
+          }
           className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700] active:brightness-95"
         >
           {t("book")}
@@ -25,7 +33,15 @@ export function KlookCTA() {
           href={JR_PASS_URL}
           target="_blank"
           rel={AFFILIATE_REL}
-          onClick={() => trackAffiliateClick("guide-cta", "jr_pass")}
+          onClick={() =>
+            trackAffiliateClick({
+              category: "train",
+              provider: "klook",
+              placement: "guide_top",
+              href: JR_PASS_URL,
+              label: "JR Pass",
+            })
+          }
           className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
         >
           {t("jrPass")}
@@ -34,7 +50,15 @@ export function KlookCTA() {
           href={ESIM_URL}
           target="_blank"
           rel={AFFILIATE_REL}
-          onClick={() => trackAffiliateClick("guide-cta", "esim")}
+          onClick={() =>
+            trackAffiliateClick({
+              category: "esim",
+              provider: "klook",
+              placement: "guide_top",
+              href: ESIM_URL,
+              label: "eSIM",
+            })
+          }
           className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
         >
           eSIM

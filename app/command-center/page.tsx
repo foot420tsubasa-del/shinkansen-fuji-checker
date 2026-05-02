@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Japan Trip Command Center — fujiseat.com",
   description:
     "Explore your Japan route with an interactive command center, route map, checklists, weather, booking essentials, and city tips.",
+  robots: { index: false, follow: true },
 };
 
 export default function CommandCenterFallbackPage() {

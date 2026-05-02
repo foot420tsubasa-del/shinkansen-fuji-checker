@@ -9,10 +9,13 @@ import { ComparisonTable } from "@/components/content/ComparisonTable";
 import { ProTip } from "@/components/content/ProTip";
 import { HotelPicks } from "@/components/content/HotelPicks";
 import { NextActions } from "@/components/content/NextActions";
+import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { HotelAreaCTA } from "@/components/content/LocalTokyoCards";
+import { HotelCTA } from "@/components/affiliate/HotelCTA";
 import { getAllStaySlugs, getStayBySlug } from "@/lib/content/stay";
+import { getHotelLink } from "@/lib/hotel-links";
 import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
@@ -41,9 +44,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function StayPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const page = getStayBySlug(slug);
   if (!page) notFound();
+  const pagePath = `/areas-to-stay/${slug}`;
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -63,6 +67,54 @@ export default async function StayPage({ params }: Props) {
         </p>
 
         <div className="mt-8 space-y-8">
+          {page.slug === "tokyo-first-time" ? (
+            <section className="rounded-[22px] border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-emerald-700">
+                Quick Recommendation
+              </p>
+              <h2 className="mt-2 text-lg font-semibold text-slate-950">
+                Not sure where to stay?
+              </h2>
+              <div className="mt-4 grid gap-3 md:grid-cols-2">
+                {page.areas.map((area) => {
+                  const hotel = area.hotelKey ? getHotelLink(area.hotelKey) : null;
+                  return (
+                    <div key={area.name} className="rounded-2xl border border-emerald-100 bg-white p-4">
+                    <p className="text-sm font-semibold text-slate-950">
+                      {area.bestFor} → {area.name}
+                    </p>
+                    <p className="mt-1 text-xs leading-5 text-slate-600">{area.vibe}</p>
+                    <HotelCTA
+                      areaName={hotel?.areaName ?? area.name}
+                      city={hotel?.city ?? "Tokyo"}
+                      provider={hotel?.provider}
+                      href={hotel?.href ?? area.hotelLink}
+                      placement="stay_area"
+                      locale={locale}
+                      pagePath={pagePath}
+                      label={hotel?.label ?? `Compare ${area.name} hotels`}
+                      className="mt-3 w-full text-xs"
+                    />
+                  </div>
+                  );
+                })}
+                <div className="rounded-2xl border border-emerald-100 bg-white p-4">
+                  <p className="text-sm font-semibold text-slate-950">
+                    Calmer local day → East Tokyo
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">
+                    Use Local Tokyo as a day-plan layer after choosing a practical base.
+                  </p>
+                  <HotelAreaCTA
+                    title="Explore Local Tokyo"
+                    description="Kiyosumi-Shirakawa, Kuramae, Oshiage, Monzen-Nakacho, and Ryogoku."
+                    href="/local-tokyo"
+                  />
+                </div>
+              </div>
+            </section>
+          ) : null}
+
           <QuickRec
             area={page.quickRec.area}
             why={page.quickRec.why}
@@ -71,10 +123,10 @@ export default async function StayPage({ params }: Props) {
 
           <section id="areas" className="scroll-mt-24">
             <h2 className="text-lg font-semibold text-slate-950">Area breakdown</h2>
-            <p className="mt-1 text-sm text-slate-500">Tap an area to see hotels on Klook.</p>
+            <p className="mt-1 text-sm text-slate-500">Tap an area to compare current hotel availability.</p>
             <div className="mt-4 grid gap-4 lg:grid-cols-2">
               {page.areas.map((area) => (
-                <AreaCard key={area.name} {...area} />
+                <AreaCard key={area.name} {...area} locale={locale} pagePath={pagePath} />
               ))}
             </div>
           </section>
@@ -122,10 +174,11 @@ export default async function StayPage({ params }: Props) {
           ) : null}
 
           <section>
-            <HotelPicks picks={page.hotelPicks} />
+            <HotelPicks picks={page.hotelPicks} locale={locale} pagePath={pagePath} />
           </section>
 
-          <NextActions picks={page.nextActions} />
+          <NextActions picks={page.nextActions} locale={locale} pagePath={pagePath} />
+          <SuggestedNextSteps currentPageType="stay" locale={locale} />
         </div>
 
         <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">

@@ -9,6 +9,7 @@ import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { DayCard } from "@/components/content/DayCard";
 import { ProTip } from "@/components/content/ProTip";
 import { NextActions } from "@/components/content/NextActions";
+import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAllItinerarySlugs, getItineraryBySlug } from "@/lib/content/itineraries";
@@ -125,7 +126,7 @@ export default async function ItineraryPage({ params }: Props) {
             <h2 className="mb-6 text-lg font-semibold text-slate-950">Day-by-day plan</h2>
             <div>
               {page.days.map((day) => (
-                <DayCard key={day.day} {...day} />
+                <DayCard key={day.day} {...day} locale={locale} pagePath={pagePath} />
               ))}
             </div>
           </section>
@@ -161,7 +162,8 @@ export default async function ItineraryPage({ params }: Props) {
             </div>
           </section>
 
-          <NextActions picks={page.nextActions} />
+          <NextActions picks={page.nextActions} locale={locale} pagePath={pagePath} />
+          <SuggestedNextSteps currentPageType="itinerary" locale={locale} />
         </div>
 
         <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">

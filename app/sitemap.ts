@@ -12,7 +12,6 @@ const translatedPaths = [
   "/about",
   "/plan-your-trip",
   "/planner",
-  "/command-center",
 ];
 
 const englishOnlyContentPaths = [

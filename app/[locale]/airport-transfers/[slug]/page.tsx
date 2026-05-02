@@ -7,6 +7,7 @@ import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { TransferOption } from "@/components/content/TransferOption";
 import { ProTip } from "@/components/content/ProTip";
 import { NextActions } from "@/components/content/NextActions";
+import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAllTransferSlugs, getTransferBySlug } from "@/lib/content/transfers";
@@ -38,9 +39,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function TransferPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug, locale } = await params;
   const page = getTransferBySlug(slug);
   if (!page) notFound();
+  const pagePath = `/airport-transfers/${slug}`;
+  const bestOption = page.options[0];
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -72,14 +75,35 @@ export default async function TransferPage({ params }: Props) {
         </div>
 
         <div className="mt-8 space-y-8">
+          <section className="rounded-[22px] border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-emerald-700">
+              Quick answer
+            </p>
+            <h2 className="mt-2 text-lg font-semibold text-slate-950">
+              Most travelers should start with {bestOption.name}.
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-slate-700">
+              It is the default recommendation for {page.from} to {page.to}: {bestOption.duration}, {bestOption.cost}, and {bestOption.luggageFriendly ? "luggage-friendly" : "best when traveling light"}.
+            </p>
+          </section>
+
           <section>
             <h2 className="text-lg font-semibold text-slate-950">Compare your options</h2>
             <p className="mt-1 text-sm text-slate-500">Sorted by what matters most — speed, ease, or cost.</p>
             <div className="mt-4 grid gap-4 lg:grid-cols-1">
               {page.options.map((opt) => (
-                <TransferOption key={opt.name} {...opt} />
+                <TransferOption key={opt.name} {...opt} locale={locale} pagePath={pagePath} />
               ))}
             </div>
+          </section>
+
+          <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-sky-700">
+              Luggage note
+            </p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              With two or more large suitcases, prioritize direct trains or buses over the cheapest transfer. Station stairs and rush-hour platforms are the hidden cost.
+            </p>
           </section>
 
           <div className="flex gap-3 rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3">
@@ -92,7 +116,8 @@ export default async function TransferPage({ params }: Props) {
 
           <ProTip>{page.proTip}</ProTip>
 
-          <NextActions picks={page.nextActions} />
+          <NextActions picks={page.nextActions} locale={locale} pagePath={pagePath} />
+          <SuggestedNextSteps currentPageType="transfer" locale={locale} />
         </div>
 
         <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">

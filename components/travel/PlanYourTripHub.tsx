@@ -1,8 +1,12 @@
+"use client";
+
 import { ArrowRight, ExternalLink, Luggage, MapPinned, Plane, Sparkles, Train, Building2 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { getAffUrl } from "@/src/affiliateLinks";
+import { getProviderFromHref, trackAffiliateClick } from "@/lib/analytics";
+import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
 type ExternalItem = {
@@ -10,6 +14,7 @@ type ExternalItem = {
   description: string;
   linkId?: string;
   href?: string;
+  hotelKey?: HotelAreaKey;
 };
 
 type Category = {
@@ -50,11 +55,11 @@ const categories: Category[] = [
     description: "Pick a base that makes Shinkansen days and luggage movement easier.",
     icon: Building2,
     items: [
-      { label: "Tokyo Station hotels", description: "Most efficient for early Shinkansen departures.", linkId: "hotelTokyo" },
-      { label: "Shinjuku hotels", description: "Better nightlife and still practical for Tokyo Station.", linkId: "hotelShinjuku" },
-      { label: "Kyoto Station hotels", description: "Best logistics for first-time Kyoto stays.", linkId: "hotelKyotoStation" },
-      { label: "Shin-Osaka / Osaka hotels", description: "Easy Kansai base for Osaka and onward rail.", linkId: "hotelOsaka" },
-      { label: "Namba hotels", description: "Best for Dotonbori nightlife and food.", linkId: "hotelOsaka" },
+      { label: "Compare hotels near Tokyo Station", description: "Most efficient for early Shinkansen departures.", hotelKey: "tokyoStation" },
+      { label: "Compare Shinjuku hotels on Trip.com", description: "Better nightlife and still practical for Tokyo Station.", hotelKey: "shinjuku" },
+      { label: "Compare Kyoto Station hotels", description: "Best logistics for first-time Kyoto stays.", hotelKey: "kyotoStation" },
+      { label: "Compare Shin-Osaka hotels on Trip.com", description: "Easy Kansai base for Osaka and onward rail.", hotelKey: "shinOsaka" },
+      { label: "Compare Namba hotels", description: "Best for Dotonbori nightlife and food.", hotelKey: "namba" },
     ],
   },
   {
@@ -71,9 +76,9 @@ const categories: Category[] = [
     description: "Extend the Shinkansen view into a Fuji-area day or overnight stay.",
     icon: MapPinned,
     items: [
-      { label: "Kawaguchiko hotels", description: "Stay overnight for the best morning Fuji chance.", linkId: "hotelKawaguchiko" },
+      { label: "Compare Kawaguchiko hotels on Trip.com", description: "Stay overnight for the best morning Fuji chance.", hotelKey: "kawaguchiko" },
       { label: "Hakone Free Pass", description: "A classic Fuji-area and onsen side trip.", linkId: "hakone" },
-      { label: "Hakone hotels", description: "Onsen stays that pair well with the golden route.", linkId: "hotelHakone" },
+      { label: "Compare Hakone hotels on Trip.com", description: "Onsen stays that pair well with the golden route.", hotelKey: "hakone" },
     ],
   },
   {
@@ -102,6 +107,18 @@ const internalLinks = [
 ];
 
 function resolveItem(item: ExternalItem) {
+  if (item.hotelKey) {
+    const hotel = getHotelLink(item.hotelKey);
+    return {
+      ...item,
+      label: hotel.label,
+      url: hotel.href,
+      external: true,
+      category: "hotel" as const,
+      provider: hotel.provider,
+      area: `${hotel.city}: ${hotel.areaName}`,
+    };
+  }
   if (item.href) return { ...item, url: item.href, external: item.href.startsWith("http") };
   if (!item.linkId) return null;
   const url = getAffUrl(item.linkId);
@@ -110,6 +127,8 @@ function resolveItem(item: ExternalItem) {
 }
 
 export function PlanYourTripHub() {
+  const locale = typeof window === "undefined" ? undefined : window.location.pathname.split("/").filter(Boolean)[0];
+
   return (
     <main className="page-shell min-h-screen text-slate-950">
       <Container className="py-8 md:py-12">
@@ -144,7 +163,7 @@ export function PlanYourTripHub() {
         <section className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {categories.map((category) => {
             const Icon = category.icon;
-            const resolved = category.items.map(resolveItem).filter(Boolean) as Array<ExternalItem & { url: string; external: boolean }>;
+            const resolved = category.items.map(resolveItem).filter(Boolean) as Array<ExternalItem & { url: string; external: boolean; category?: "hotel"; provider?: "klook" | "agoda" | "trip"; area?: string }>;
             return (
               <Card key={category.title} className="flex flex-col p-5">
                 <div className="flex items-start gap-3">
@@ -179,6 +198,18 @@ export function PlanYourTripHub() {
                           href={item.url}
                           target="_blank"
                           rel={AFFILIATE_REL}
+                          onClick={() =>
+                            trackAffiliateClick({
+                              category: item.category ?? (item.linkId === "esim" ? "esim" : item.linkId?.includes("Pass") || item.linkId?.includes("Ticket") ? "train" : "activity"),
+                              provider: item.provider ?? getProviderFromHref(item.url),
+                              placement: "next_steps",
+                              page_path: "/plan-your-trip",
+                              locale,
+                              href: item.url,
+                              label: item.label,
+                              area: item.area,
+                            })
+                          }
                           className="flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-3 py-3 transition-colors hover:border-sky-200 hover:bg-sky-50"
                         >
                           {content}

@@ -7,6 +7,8 @@ const affiliateHosts = [
   "www.klook.com",
   "agoda.com",
   "www.agoda.com",
+  "trip.com",
+  "www.trip.com",
 ];
 
 export function isAffiliateUrl(href: string) {

@@ -3,7 +3,7 @@
 import { ArrowRight, ExternalLink, Luggage, Map, Plane, Shield, Train, Wifi } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import type { TripPick } from "@/lib/trip-picks";
-import { trackAffiliateClick } from "@/lib/analytics";
+import { getProviderFromHref, trackAffiliateClick } from "@/lib/analytics";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
 const iconByCategory: Record<string, typeof Train> = {
@@ -16,7 +16,25 @@ const iconByCategory: Record<string, typeof Train> = {
   insurance: Shield,
 };
 
-export function NextActions({ picks, title = "Next steps" }: { picks: TripPick[]; title?: string }) {
+function affiliateCategory(category: TripPick["category"]) {
+  if (category === "connectivity") return "esim";
+  if (category === "experience") return "activity";
+  if (category === "itinerary") return "tour";
+  if (category === "stay") return "hotel";
+  return category;
+}
+
+export function NextActions({
+  picks,
+  title = "Next steps",
+  locale = "en",
+  pagePath,
+}: {
+  picks: TripPick[];
+  title?: string;
+  locale?: string;
+  pagePath?: string;
+}) {
   return (
     <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
       <p className="text-[11px] font-semibold uppercase text-sky-700">
@@ -55,7 +73,24 @@ export function NextActions({ picks, title = "Next steps" }: { picks: TripPick[]
 
           if (isExternal) {
             return (
-              <a key={pick.id} href={pick.href} target="_blank" rel={AFFILIATE_REL} className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-sky-300" onClick={() => trackAffiliateClick("next-actions", pick.title)}>
+              <a
+                key={pick.id}
+                href={pick.href}
+                target="_blank"
+                rel={AFFILIATE_REL}
+                className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+                onClick={() =>
+                  trackAffiliateClick({
+                    category: affiliateCategory(pick.category),
+                    provider: getProviderFromHref(pick.href),
+                    placement: "next_steps",
+                    page_path: pagePath,
+                    locale,
+                    href: pick.href,
+                    label: pick.title,
+                  })
+                }
+              >
                 {inner}
               </a>
             );

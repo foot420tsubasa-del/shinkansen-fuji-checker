@@ -61,6 +61,18 @@ type LocalTokyoCta = {
   href: string;
 };
 
+type LocalTokyoOptionalFields = {
+  localNote?: string;
+  bestTimeToVisit?: string;
+  avoidIf?: string[];
+  walkingRoute?: string[];
+  photoSpots?: string[];
+  nearbyStations?: string[];
+  combineWithAreas?: string[];
+};
+
+type LocalTokyoConfig = (typeof pageConfig)[LocalTokyoPageKey] & LocalTokyoOptionalFields;
+
 type LocalTokyoDetailProps = {
   locale: string;
   pageKey: LocalTokyoPageKey;
@@ -71,7 +83,7 @@ export async function getLocalTokyoMetadata(
   pageKey: LocalTokyoPageKey,
 ): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: `localTokyoPages.${pageKey}` });
-  const config = pageConfig[pageKey];
+  const config: LocalTokyoConfig = pageConfig[pageKey];
   const title = t("title");
   const description = t("description");
 
@@ -91,7 +103,7 @@ export async function getLocalTokyoMetadata(
 export async function LocalTokyoDetailPage({ locale, pageKey }: LocalTokyoDetailProps) {
   const t = await getTranslations({ locale, namespace: `localTokyoPages.${pageKey}` });
   const common = await getTranslations({ locale, namespace: "localTokyoPages.common" });
-  const config = pageConfig[pageKey];
+  const config: LocalTokyoConfig = pageConfig[pageKey];
   const Icon = config.Icon;
   const ExtraIcon = config.extraIcon;
   const nearby = t.raw("nearby") as LocalTokyoCta[];
