@@ -381,7 +381,7 @@ export default function HomeClient() {
                 Book a single ride
               </a>
               <Link
-                href="/guide#jr-pass"
+                href="/jr-pass-vs-single-ticket"
                 className={`${buttonPage} h-11 px-4 text-xs`}
               >
                 <ArrowRight className="h-3.5 w-3.5" />

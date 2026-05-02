@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
-import { itineraryPages } from "@/lib/content/itineraries";
+import { publicItineraryPages } from "@/lib/content/itineraries";
 import { stayPages } from "@/lib/content/stay";
 import { transferPages } from "@/lib/content/transfers";
 
@@ -38,7 +38,7 @@ const englishOnlyContentPaths = [
 ];
 
 const dynamicPaths = [
-  ...itineraryPages.map((page) => `/itineraries/${page.slug}`),
+  ...publicItineraryPages.map((page) => `/itineraries/${page.slug}`),
   ...stayPages.map((page) => `/areas-to-stay/${page.slug}`),
   ...transferPages.map((page) => `/airport-transfers/${page.slug}`),
 ];

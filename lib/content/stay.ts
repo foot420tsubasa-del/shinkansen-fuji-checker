@@ -62,7 +62,7 @@ const hotelShinOsaka = getHotelLink("shinOsaka");
 
 const commonNextActions: TripPick[] = [
   { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Set up connectivity before landing.", cta: "Get eSIM", href: ESIM_URL },
-  { id: "jr-pass", category: "train", title: "JR Pass fit guide", description: "Check whether your route has enough long-distance JR rides before buying.", cta: "Read guide", href: "/guide#jr-pass" },
+  { id: "jr-pass", category: "train", title: "JR Pass fit guide", description: "Check whether your route has enough long-distance JR rides before buying.", cta: "Read guide", href: "/jr-pass-vs-single-ticket" },
 ];
 
 // ─── Page Data ──────────────────────────────────────────────────────────────

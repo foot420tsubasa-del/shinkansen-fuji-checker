@@ -71,7 +71,7 @@ const TEMPLATE_DATA: TemplateData[] = [
       { key: "kyoto", daysKey: "day6_8", emoji: "⛩️" },
       { key: "osaka", daysKey: "day9_10", emoji: "🍣" },
     ],
-    itinerarySlug: "10-day-with-fuji",
+    itinerarySlug: "10-day-japan-with-fuji",
     jrPassWorthIt: false,
   },
   {
@@ -84,7 +84,7 @@ const TEMPLATE_DATA: TemplateData[] = [
       { key: "hiroshima", daysKey: "day11_12", emoji: "☮️" },
       { key: "osaka", daysKey: "day13_14", emoji: "🍣" },
     ],
-    itinerarySlug: "14-day-deep-japan",
+    itinerarySlug: "14-day-japan-golden-route",
     jrPassWorthIt: true,
   },
 ];
@@ -108,7 +108,7 @@ const plannerHotel = getHotelLink("shinjuku");
 const CHECKLIST_DATA: CheckData[] = [
   { id: "passport", critical: true },
   { id: "esim", critical: true, href: requireAffUrl("esim"), hasLink: true },
-  { id: "train", critical: false, href: requireAffUrl("jrPass"), hasLink: true },
+  { id: "train", critical: false, href: "/jr-pass-vs-single-ticket", hasLink: true },
   { id: "transfer", critical: true, href: "/airport-transfers/narita-to-shinjuku", hasLink: true },
   {
     id: "hotel",
@@ -151,7 +151,7 @@ const BOOKING_DATA: BookingData[] = [
       href: plannerHotel.trackingHref,
     },
   },
-  { key: "jrPass", href: requireAffUrl("jrPass"), external: true },
+  { key: "jrPass", href: "/jr-pass-vs-single-ticket", external: false },
   { key: "insurance", href: requireAffUrl("insurance"), external: true },
 ];
 

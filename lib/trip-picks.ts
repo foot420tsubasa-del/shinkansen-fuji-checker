@@ -36,7 +36,7 @@ export const starterTripPicks: TripPick[] = [
     title: "JR Pass fit guide",
     description: "Check whether your route has enough long-distance JR rides.",
     cta: "Read guide",
-    href: "/guide#jr-pass",
+    href: "/jr-pass-vs-single-ticket",
   },
   {
     id: "esim",

@@ -65,7 +65,7 @@ const teamlabUrl = requireAffUrl("teamlabBorderless");
 // ─── Shared next actions ────────────────────────────────────────────────────
 
 const commonNextActions: TripPick[] = [
-  { id: "jr-pass", category: "train", title: "JR Pass fit guide", description: "Check whether your route has enough long-distance JR rides before buying.", cta: "Read guide", href: "/guide#jr-pass" },
+  { id: "jr-pass", category: "train", title: "JR Pass fit guide", description: "Check whether your route has enough long-distance JR rides before buying.", cta: "Read guide", href: "/jr-pass-vs-single-ticket" },
   { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Set up data before landing — maps, translate, transit apps.", cta: "Get eSIM", href: esimUrl },
   { id: "transfer", category: "transfer", title: "Airport transfer", description: "Plan your Narita/Haneda to city route.", cta: "Compare options", href: "/airport-transfers/narita-to-shinjuku" },
   { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare Shinjuku, Ueno, Asakusa for your base.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
@@ -871,6 +871,15 @@ export const itineraryPages: ItineraryPage[] = [
   },
 ];
 
+export const itineraryRedirects: Record<string, string> = {
+  "10-day-with-fuji": "10-day-japan-with-fuji",
+  "14-day-deep-japan": "14-day-japan-golden-route",
+};
+
+export const publicItineraryPages = itineraryPages.filter(
+  (page) => !Object.prototype.hasOwnProperty.call(itineraryRedirects, page.slug),
+);
+
 // ─── Lookup ─────────────────────────────────────────────────────────────────
 
 export function getItineraryBySlug(slug: string): ItineraryPage | undefined {
@@ -879,4 +888,8 @@ export function getItineraryBySlug(slug: string): ItineraryPage | undefined {
 
 export function getAllItinerarySlugs(): string[] {
   return itineraryPages.map((p) => p.slug);
+}
+
+export function getPublicItinerarySlugs(): string[] {
+  return publicItineraryPages.map((p) => p.slug);
 }

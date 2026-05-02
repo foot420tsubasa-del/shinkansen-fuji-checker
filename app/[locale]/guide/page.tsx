@@ -979,6 +979,13 @@ export default async function GuidePage({ params }: Props) {
               <KlookCTA />
             </div>
             <p className="mt-3 text-[12px] text-slate-600">
+              For a route-level decision before buying, use the{" "}
+              <Link href="/jr-pass-vs-single-ticket" className="font-semibold text-sky-700 underline underline-offset-2">
+                JR Pass vs single ticket guide
+              </Link>
+              .
+            </p>
+            <p className="mt-3 text-[12px] text-slate-600">
               {copy.itineraryBefore} <Link href="/itineraries/7-day-first-time-japan" className="font-semibold text-sky-700 underline underline-offset-2">{copy.itineraryLink}</Link>.
             </p>
           </section>

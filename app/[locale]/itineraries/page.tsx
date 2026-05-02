@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
-import { itineraryPages } from "@/lib/content/itineraries";
+import { publicItineraryPages } from "@/lib/content/itineraries";
 import { getAlternates } from "@/i18n/hreflang";
 
 const paceConfig = {
@@ -97,7 +97,7 @@ export default async function ItinerariesIndex({ params }: Props) {
       </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        {itineraryPages.map((page) => {
+        {publicItineraryPages.map((page) => {
           const pace = paceConfig[page.pace];
           const cities = [...new Set(page.days.map((d) => d.location))];
           return (
