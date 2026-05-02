@@ -553,7 +553,7 @@ export function PlannerClient() {
                               area: item.affiliate?.area,
                             })
                           }
-                          className="inline-flex items-center gap-1 rounded-lg border border-sky-200 bg-sky-50 px-2.5 py-1 text-[11px] font-semibold text-sky-700 transition-colors hover:bg-sky-100"
+                          className="inline-flex min-h-10 items-center gap-1 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700 transition-colors hover:bg-sky-100"
                         >
                           {checkLinkLabel}
                           <ExternalLink className="h-3 w-3" />
@@ -561,7 +561,7 @@ export function PlannerClient() {
                       ) : (
                         <Link
                           href={item.href}
-                          className="inline-flex items-center gap-1 rounded-lg border border-sky-200 bg-sky-50 px-2.5 py-1 text-[11px] font-semibold text-sky-700 transition-colors hover:bg-sky-100"
+                          className="inline-flex min-h-10 items-center gap-1 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700 transition-colors hover:bg-sky-100"
                         >
                           {checkLinkLabel}
                           <ArrowRight className="h-3 w-3" />
@@ -618,7 +618,7 @@ export function PlannerClient() {
                             area: booking.affiliate?.area,
                           })
                         }
-                        className="mt-2 inline-flex items-center gap-1 rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-3 py-1.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#e66700]"
+                        className="mt-2 inline-flex min-h-10 items-center gap-1 rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#e66700]"
                       >
                         {cta}
                         <ExternalLink className="h-3 w-3" />
@@ -626,7 +626,7 @@ export function PlannerClient() {
                     ) : (
                       <Link
                         href={booking.href}
-                        className="mt-2 inline-flex items-center gap-1 rounded-lg border border-[#168a56] bg-[#168a56] px-3 py-1.5 text-[11px] font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                        className="mt-2 inline-flex min-h-10 items-center gap-1 rounded-lg border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
                       >
                         {cta}
                         <ArrowRight className="h-3 w-3" />

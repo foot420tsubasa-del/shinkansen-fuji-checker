@@ -106,7 +106,7 @@ export function DayCard({
                     area: hotel ? `${hotel.city}: ${hotel.areaName}` : stayArea,
                   })
                 }
-                className="inline-flex items-center gap-1 rounded-xl border border-[#ff7a00] bg-[#fff3e7] px-3 py-1.5 text-xs font-semibold text-[#b44b00] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
+                className="inline-flex min-h-10 items-center gap-1 rounded-xl border border-[#ff7a00] bg-[#fff3e7] px-3 py-2 text-xs font-semibold text-[#b44b00] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
               >
                 {stayLabel}
                 <ExternalLink className="h-3 w-3" />
@@ -140,7 +140,7 @@ export function DayCard({
                   }
                 }}
                 className={[
-                  "inline-flex items-center gap-1 rounded-xl border px-3 py-1.5 text-xs font-semibold focus-visible:outline-none focus-visible:ring-2",
+                  "inline-flex min-h-10 items-center gap-1 rounded-xl border px-3 py-2 text-xs font-semibold focus-visible:outline-none focus-visible:ring-2",
                   isBookingExternal
                     ? "border-[#ff7a00] bg-[#fff3e7] text-[#b44b00] hover:bg-white focus-visible:ring-orange-200"
                     : "border-[#9fd7bd] bg-[#f0fbf6] text-[#106b43] hover:border-[#168a56] hover:bg-white focus-visible:ring-emerald-200",
@@ -176,7 +176,7 @@ export function DayCard({
                     });
                   }
                 }}
-                className="inline-flex items-center gap-1 rounded-xl border border-[#9fd7bd] bg-[#f0fbf6] px-3 py-1.5 text-xs font-semibold text-[#106b43] hover:border-[#168a56] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200"
+                className="inline-flex min-h-10 items-center gap-1 rounded-xl border border-[#9fd7bd] bg-[#f0fbf6] px-3 py-2 text-xs font-semibold text-[#106b43] hover:border-[#168a56] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200"
               >
                 {prepareCta.label}
                 <ArrowRight className="h-3 w-3" />
