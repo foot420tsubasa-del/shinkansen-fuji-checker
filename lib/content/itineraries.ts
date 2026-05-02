@@ -121,7 +121,7 @@ export const itineraryPages: ItineraryPage[] = [
         transport: "Shinkansen (single ticket is often cheaper)",
         bookingCta: { label: "Book Shinkansen ticket", href: jrPassUrl, category: "train" },
         prepare: "Fuji-side seat checker",
-        prepareCta: { label: "Check Fuji seat", href: "/guide" },
+        prepareCta: { label: "Which seat for Fuji?", href: "/tokyo-to-kyoto-mt-fuji-seat" },
       },
       {
         day: 5,

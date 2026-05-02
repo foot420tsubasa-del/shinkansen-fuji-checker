@@ -35,6 +35,8 @@ const categories: Category[] = [
       { label: "Shinkansen seat guide", description: "Check seat side, timing, and booking context before buying.", href: "/guide" },
       { label: "Tokyo to Kyoto route", description: "Use the golden route itinerary before booking.", href: "/itineraries/7-day-first-time-japan" },
       { label: "Tokyo to Osaka route", description: "Plan the Shinkansen day and onward stay.", href: "/itineraries/7-day-first-time-japan" },
+      { label: "Which seat for Mt. Fuji?", description: "Direction-specific window seat for Fuji views.", href: "/tokyo-to-kyoto-mt-fuji-seat" },
+      { label: "Seat letters A–E explained", description: "Understand window, aisle, and Fuji-side layout.", href: "/shinkansen-seat-letters" },
     ],
   },
   {

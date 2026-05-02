@@ -742,6 +742,30 @@ export default async function GuidePage({ params }: Props) {
           </ul>
         </section>
 
+        <section className="mb-5 rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-4 shadow-sm">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-sky-700">
+            Seat guides by topic
+          </p>
+          <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
+            <Link href="/shinkansen-seat-e" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
+              <span className="block font-semibold text-slate-900">Seat E guide</span>
+              <span className="mt-0.5 block text-slate-500">Learn when Seat E is the Mt. Fuji-side window seat.</span>
+            </Link>
+            <Link href="/tokyo-to-kyoto-mt-fuji-seat" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
+              <span className="block font-semibold text-slate-900">Tokyo → Kyoto Mt. Fuji seat</span>
+              <span className="mt-0.5 block text-slate-500">The simple right-side / Seat E answer for Tokyo to Kyoto or Osaka.</span>
+            </Link>
+            <Link href="/kyoto-to-tokyo-mt-fuji-seat" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
+              <span className="block font-semibold text-slate-900">Kyoto → Tokyo Mt. Fuji seat</span>
+              <span className="mt-0.5 block text-slate-500">Which side and seat to choose on the return trip.</span>
+            </Link>
+            <Link href="/shinkansen-seat-letters" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
+              <span className="block font-semibold text-slate-900">Seat letters explained</span>
+              <span className="mt-0.5 block text-slate-500">Understand A, B, C, D, E, window and aisle seats.</span>
+            </Link>
+          </div>
+        </section>
+
         <div className="mb-6">
           <GuideNextSteps />
         </div>

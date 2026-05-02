@@ -403,6 +403,11 @@ export default function HomeClient() {
               </Link>
             </div>
           </div>
+          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-400">
+            <Link href="/shinkansen-seat-e" className="underline underline-offset-2 transition-colors hover:text-slate-600">Seat E guide</Link>
+            <Link href="/shinkansen-seat-letters" className="underline underline-offset-2 transition-colors hover:text-slate-600">Seat letters A–E</Link>
+            <Link href="/shinkansen-seat-guides" className="underline underline-offset-2 transition-colors hover:text-slate-600">All seat guides</Link>
+          </div>
         </section>
 
         <section className="py-9">
