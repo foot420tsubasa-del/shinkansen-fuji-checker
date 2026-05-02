@@ -62,6 +62,7 @@ export function HotelPicks({
                 locale={locale}
                 pagePath={pagePath}
                 label={hotel?.label ?? `Compare ${h.area} hotels`}
+                trackingHref={hotel?.trackingHref}
                 className="mt-3 w-full"
               />
             </div>

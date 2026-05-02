@@ -23,6 +23,8 @@ export type HotelLinkConfig = {
   label: string;
   tripUrl: string;
   fallbackLinkId: string;
+  checkinType?: "dynamic_offset" | "fixed_date";
+  lastChecked?: string;
 };
 
 const hotelLinks = hotelLinkData as Record<HotelAreaKey, HotelLinkConfig>;
@@ -31,18 +33,26 @@ export function getHotelLink(areaKey: HotelAreaKey) {
   const config = hotelLinks[areaKey];
   const tripUrl = config.tripUrl.trim();
   if (tripUrl) {
+    const checkinType = config.checkinType ?? "dynamic_offset";
     return {
       ...config,
-      href: tripUrl,
+      href:
+        checkinType === "dynamic_offset"
+          ? `/api/trip-hotel-redirect?area=${encodeURIComponent(areaKey)}`
+          : tripUrl,
+      trackingHref: tripUrl,
       provider: "trip" as const,
+      checkinType,
     };
   }
 
   return {
     ...config,
     href: getAffUrl(config.fallbackLinkId) ?? "#",
+    trackingHref: getAffUrl(config.fallbackLinkId) ?? "#",
     provider: "klook" as const,
     label: `Compare ${config.areaName} hotels`,
+    checkinType: "fixed_date" as const,
   };
 }
 

@@ -4,97 +4,125 @@
     "city": "Tokyo",
     "label": "Compare Shinjuku hotels on Trip.com",
     "tripUrl": "https://www.trip.com/t/48qXpVIBXU2",
-    "fallbackLinkId": "hotelShinjuku"
+    "fallbackLinkId": "hotelShinjuku",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "ueno": {
     "areaName": "Ueno",
     "city": "Tokyo",
     "label": "Compare Ueno hotels on Trip.com",
     "tripUrl": "https://www.trip.com/t/B0JQEdOBXU2",
-    "fallbackLinkId": "hotelUeno"
+    "fallbackLinkId": "hotelUeno",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "asakusa": {
     "areaName": "Asakusa",
     "city": "Tokyo",
     "label": "Compare Asakusa hotels on Trip.com",
     "tripUrl": "https://www.trip.com/t/siVBikRBXU2",
-    "fallbackLinkId": "hotelAsakusa"
+    "fallbackLinkId": "hotelAsakusa",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "tokyoStation": {
     "areaName": "Tokyo Station",
     "city": "Tokyo",
     "label": "Compare hotels near Tokyo Station",
     "tripUrl": "https://www.trip.com/t/PgV216VBXU2",
-    "fallbackLinkId": "hotelTokyo"
+    "fallbackLinkId": "hotelTokyo",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "shibuya": {
     "areaName": "Shibuya",
     "city": "Tokyo",
     "label": "Compare Shibuya hotels on Trip.com",
     "tripUrl": "https://www.trip.com/t/PEM7YWXBXU2",
-    "fallbackLinkId": "hotelShinjuku"
+    "fallbackLinkId": "hotelShinjuku",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "oshiage": {
     "areaName": "Oshiage",
     "city": "Tokyo",
     "label": "Compare Oshiage hotels on Trip.com",
     "tripUrl": "https://www.trip.com/t/AbpWVXaBXU2",
-    "fallbackLinkId": "hotelAsakusa"
+    "fallbackLinkId": "hotelAsakusa",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "kyotoStation": {
     "areaName": "Kyoto Station",
     "city": "Kyoto",
     "label": "Compare Kyoto Station hotels",
     "tripUrl": "https://www.trip.com/t/LrRH7HdBXU2",
-    "fallbackLinkId": "hotelKyotoStation"
+    "fallbackLinkId": "hotelKyotoStation",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "gionKawaramachi": {
     "areaName": "Gion / Kawaramachi",
     "city": "Kyoto",
     "label": "Compare Gion and Kawaramachi hotels on Trip.com",
     "tripUrl": "https://www.trip.com/t/vDpJrykBXU2",
-    "fallbackLinkId": "hotelGion"
+    "fallbackLinkId": "hotelGion",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "namba": {
     "areaName": "Namba",
     "city": "Osaka",
     "label": "Compare Namba hotels",
     "tripUrl": "https://www.trip.com/t/nMo892nBXU2",
-    "fallbackLinkId": "hotelOsaka"
+    "fallbackLinkId": "hotelOsaka",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "umeda": {
     "areaName": "Umeda",
     "city": "Osaka",
     "label": "Compare Umeda hotels on Trip.com",
     "tripUrl": "https://www.trip.com/t/QZRM3xoBXU2",
-    "fallbackLinkId": "hotelOsaka"
+    "fallbackLinkId": "hotelOsaka",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "shinOsaka": {
     "areaName": "Shin-Osaka",
     "city": "Osaka",
     "label": "Compare Shin-Osaka hotels on Trip.com",
     "tripUrl": "https://www.trip.com/t/iGx5LJqBXU2",
-    "fallbackLinkId": "hotelOsaka"
+    "fallbackLinkId": "hotelOsaka",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "kawaguchiko": {
     "areaName": "Kawaguchiko",
     "city": "Fujikawaguchiko",
     "label": "Compare Kawaguchiko hotels on Trip.com",
     "tripUrl": "https://www.trip.com/t/4yZdOmrBXU2",
-    "fallbackLinkId": "hotelKawaguchiko"
+    "fallbackLinkId": "hotelKawaguchiko",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "hakone": {
     "areaName": "Hakone",
     "city": "Hakone",
     "label": "Compare Hakone hotels on Trip.com",
     "tripUrl": "https://www.trip.com/t/AIAiuFtBXU2",
-    "fallbackLinkId": "hotelHakone"
+    "fallbackLinkId": "hotelHakone",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   },
   "hiroshima": {
     "areaName": "Hiroshima",
     "city": "Hiroshima",
     "label": "Compare Hiroshima hotels on Trip.com",
     "tripUrl": "https://www.trip.com/t/HlmtoVuBXU2",
-    "fallbackLinkId": "hotelHiroshima"
+    "fallbackLinkId": "hotelHiroshima",
+    "checkinType": "dynamic_offset",
+    "lastChecked": "2026-05-02"
   }
 }

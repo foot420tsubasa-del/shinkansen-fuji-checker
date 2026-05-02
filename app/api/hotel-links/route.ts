@@ -36,7 +36,9 @@ function isValidConfig(config: unknown): config is Record<string, unknown> {
     typeof c.city === "string" &&
     typeof c.label === "string" &&
     typeof c.tripUrl === "string" &&
-    typeof c.fallbackLinkId === "string"
+    typeof c.fallbackLinkId === "string" &&
+    (!("checkinType" in c) || c.checkinType === "dynamic_offset" || c.checkinType === "fixed_date") &&
+    (!("lastChecked" in c) || typeof c.lastChecked === "string")
   );
 }
 

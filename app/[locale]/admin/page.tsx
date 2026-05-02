@@ -27,6 +27,8 @@ type HotelFormState = {
   label: string;
   tripUrl: string;
   fallbackLinkId: string;
+  checkinType: "dynamic_offset" | "fixed_date";
+  lastChecked: string;
 };
 
 const EMPTY_FORM: FormState = {
@@ -221,6 +223,8 @@ export default function AdminPage() {
       label: entry.label,
       tripUrl: entry.tripUrl,
       fallbackLinkId: entry.fallbackLinkId,
+      checkinType: entry.checkinType ?? "dynamic_offset",
+      lastChecked: entry.lastChecked ?? "",
     });
     setEditingId(null);
     setShowAdd(false);
@@ -276,6 +280,8 @@ export default function AdminPage() {
         label: hotelForm.label.trim(),
         tripUrl: hotelForm.tripUrl.trim(),
         fallbackLinkId: hotelForm.fallbackLinkId.trim(),
+        checkinType: hotelForm.checkinType,
+        lastChecked: hotelForm.lastChecked.trim(),
       };
       const res = await fetch("/api/hotel-links", {
         method: "PUT",
@@ -588,6 +594,28 @@ export default function AdminPage() {
               空欄ならKlookホテルリンクへfallbackします。Trip.com URLを入れるとGA4 providerも trip になります。
             </p>
           </div>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">日付タイプ</label>
+              <select
+                value={hotelForm.checkinType}
+                onChange={(e) => updateHotelForm("checkinType", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-blue-300"
+              >
+                <option value="dynamic_offset">クリック時に today +45 / +46 へ更新</option>
+                <option value="fixed_date">Trip.com URL内の日付をそのまま使う</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">最終確認日</label>
+              <input
+                value={hotelForm.lastChecked}
+                onChange={(e) => updateHotelForm("lastChecked", e.target.value)}
+                placeholder="2026-05-02"
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-blue-300"
+              />
+            </div>
+          </div>
           <div className="mt-4 flex gap-2">
             <button
               onClick={saveHotel}
@@ -618,6 +646,9 @@ export default function AdminPage() {
               </span>
               <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasTripUrl ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>
                 {hasTripUrl ? "Trip URL 設定済み" : "Trip URL 未設定"}
+              </span>
+              <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-600">
+                {entry.checkinType === "fixed_date" ? "固定日付" : "動的日付"}
               </span>
             </div>
             <p className="mt-1 text-[10px] text-slate-500">

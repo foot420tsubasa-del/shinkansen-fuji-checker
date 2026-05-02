@@ -93,6 +93,7 @@ export default async function StayPage({ params }: Props) {
                       locale={locale}
                       pagePath={pagePath}
                       label={hotel?.label ?? `Compare ${area.name} hotels`}
+                      trackingHref={hotel?.trackingHref}
                       className="mt-3 w-full text-xs"
                     />
                   </div>

@@ -113,6 +113,7 @@ function resolveItem(item: ExternalItem) {
       ...item,
       label: hotel.label,
       url: hotel.href,
+      trackingUrl: hotel.trackingHref,
       external: true,
       category: "hotel" as const,
       provider: hotel.provider,
@@ -163,7 +164,7 @@ export function PlanYourTripHub() {
         <section className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {categories.map((category) => {
             const Icon = category.icon;
-            const resolved = category.items.map(resolveItem).filter(Boolean) as Array<ExternalItem & { url: string; external: boolean; category?: "hotel"; provider?: "klook" | "agoda" | "trip"; area?: string }>;
+            const resolved = category.items.map(resolveItem).filter(Boolean) as Array<ExternalItem & { url: string; trackingUrl?: string; external: boolean; category?: "hotel"; provider?: "klook" | "agoda" | "trip"; area?: string }>;
             return (
               <Card key={category.title} className="flex flex-col p-5">
                 <div className="flex items-start gap-3">
@@ -201,11 +202,11 @@ export function PlanYourTripHub() {
                           onClick={() =>
                             trackAffiliateClick({
                               category: item.category ?? (item.linkId === "esim" ? "esim" : item.linkId?.includes("Pass") || item.linkId?.includes("Ticket") ? "train" : "activity"),
-                              provider: item.provider ?? getProviderFromHref(item.url),
+                              provider: item.provider ?? getProviderFromHref(item.trackingUrl ?? item.url),
                               placement: "next_steps",
                               page_path: "/plan-your-trip",
                               locale,
-                              href: item.url,
+                              href: item.trackingUrl ?? item.url,
                               label: item.label,
                               area: item.area,
                             })

@@ -85,6 +85,7 @@ export function AreaCard({
         locale={locale}
         pagePath={pagePath}
         label={hotel?.label ?? `Compare ${name} hotels`}
+        trackingHref={hotel?.trackingHref}
         className="mt-4"
       />
     </div>

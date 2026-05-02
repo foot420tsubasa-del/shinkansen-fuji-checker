@@ -4,7 +4,7 @@ import { ArrowRight, Bed, Check, ExternalLink, MapPin, Train } from "lucide-reac
 import type { ItineraryDay } from "@/lib/content/itineraries";
 import { getProviderFromHref, trackAffiliateClick, trackCtaClick } from "@/lib/analytics";
 import { getHotelLink } from "@/lib/hotel-links";
-import { relForExternalLink } from "@/lib/link-rel";
+import { AFFILIATE_REL, relForExternalLink } from "@/lib/link-rel";
 
 export function DayCard({
   day,
@@ -25,6 +25,7 @@ export function DayCard({
   const isPrepareExternal = prepareCta?.href.startsWith("http");
   const hotel = stayHotelKey ? getHotelLink(stayHotelKey) : null;
   const resolvedStayLink = hotel?.href ?? stayLink;
+  const analyticsStayLink = hotel?.trackingHref ?? resolvedStayLink ?? "";
   const stayLabel = hotel?.label ?? "See hotels";
 
   return (
@@ -92,15 +93,15 @@ export function DayCard({
               <a
                 href={resolvedStayLink}
                 target="_blank"
-                rel={relForExternalLink(resolvedStayLink)}
+                rel={hotel?.provider === "trip" ? AFFILIATE_REL : relForExternalLink(resolvedStayLink)}
                 onClick={() =>
                   trackAffiliateClick({
                     category: "hotel",
-                    provider: hotel?.provider ?? getProviderFromHref(resolvedStayLink),
+                    provider: hotel?.provider ?? getProviderFromHref(analyticsStayLink),
                     placement: "itinerary_day_card",
                     page_path: pagePath,
                     locale,
-                    href: resolvedStayLink,
+                    href: analyticsStayLink,
                     label: stayLabel,
                     area: hotel ? `${hotel.city}: ${hotel.areaName}` : stayArea,
                   })

@@ -14,6 +14,7 @@ type HotelCTAProps = {
   label?: string;
   pagePath: string;
   className?: string;
+  trackingHref?: string;
 };
 
 export function HotelCTA({
@@ -26,9 +27,11 @@ export function HotelCTA({
   label,
   pagePath,
   className,
+  trackingHref,
 }: HotelCTAProps) {
   const ctaLabel = label ?? `Check latest ${areaName} hotels`;
-  const hrefProvider = getProviderFromHref(href);
+  const analyticsHref = trackingHref ?? href;
+  const hrefProvider = getProviderFromHref(analyticsHref);
   const resolvedProvider = provider ?? (hrefProvider === "trip" || hrefProvider === "agoda" ? hrefProvider : "klook");
 
   return (
@@ -43,7 +46,7 @@ export function HotelCTA({
           placement,
           page_path: pagePath,
           locale,
-          href,
+          href: analyticsHref,
           label: ctaLabel,
           area: `${city}: ${areaName}`,
         })

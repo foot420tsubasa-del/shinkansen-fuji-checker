@@ -99,6 +99,7 @@ type CheckData = {
     provider: "klook" | "agoda" | "trip" | "other";
     label: string;
     area?: string;
+    href?: string;
   };
 };
 
@@ -119,6 +120,7 @@ const CHECKLIST_DATA: CheckData[] = [
       provider: plannerHotel.provider,
       label: plannerHotel.label,
       area: `${plannerHotel.city}: ${plannerHotel.areaName}`,
+      href: plannerHotel.trackingHref,
     },
   },
   { id: "insurance", critical: false, href: requireAffUrl("insurance"), hasLink: true },
@@ -146,6 +148,7 @@ const BOOKING_DATA: BookingData[] = [
       provider: plannerHotel.provider,
       label: plannerHotel.label,
       area: `${plannerHotel.city}: ${plannerHotel.areaName}`,
+      href: plannerHotel.trackingHref,
     },
   },
   { key: "jrPass", href: requireAffUrl("jrPass"), external: true },
@@ -500,7 +503,7 @@ export function PlannerClient() {
             <div className="mt-4 space-y-2">
               {CHECKLIST_DATA.map((item) => {
                 const isDone = mounted && checks[item.id];
-                const isExternal = item.href?.startsWith("http");
+                const isExternal = item.href?.startsWith("http") || item.affiliate?.provider === "trip";
                 const checkLinkLabel = item.id === "hotel" ? "Compare hotels" : item.hasLink ? t(`checkLinks.${item.id}`) : "";
                 return (
                   <div
@@ -545,7 +548,7 @@ export function PlannerClient() {
                               placement: "next_steps",
                               page_path: "/planner",
                               locale,
-                              href: item.href ?? "",
+                              href: item.affiliate?.href ?? item.href ?? "",
                               label: item.affiliate?.label ?? checkLinkLabel,
                               area: item.affiliate?.area,
                             })
@@ -606,11 +609,11 @@ export function PlannerClient() {
                         onClick={() =>
                           trackAffiliateClick({
                             category: booking.affiliate?.category ?? (booking.key === "esim" ? "esim" : booking.key === "jrPass" ? "train" : booking.key === "insurance" ? "insurance" : "activity"),
-                            provider: booking.affiliate?.provider ?? getProviderFromHref(booking.href),
+                          provider: booking.affiliate?.provider ?? getProviderFromHref(booking.href),
                             placement: "next_steps",
                             page_path: "/planner",
                             locale,
-                            href: booking.href,
+                          href: booking.affiliate?.href ?? booking.href,
                             label: booking.affiliate?.label ?? cta,
                             area: booking.affiliate?.area,
                           })
