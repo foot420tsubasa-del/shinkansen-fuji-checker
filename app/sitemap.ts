@@ -27,6 +27,10 @@ const englishOnlyContentPaths = [
   "/privacy",
   "/terms",
   "/questions",
+  "/shinkansen-seat-e",
+  "/tokyo-to-kyoto-mt-fuji-seat",
+  "/kyoto-to-tokyo-mt-fuji-seat",
+  "/shinkansen-seat-letters",
 ];
 
 const dynamicPaths = [
