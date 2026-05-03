@@ -45,7 +45,7 @@ const categories: Category[] = [
     icon: Plane,
     items: [
       { label: "Japan eSIM", description: "Maps, translation, transit, and backup access from landing.", linkId: "esim" },
-      { label: "Airport transfer", description: "Compare Narita and Haneda routes into Tokyo.", href: "/airport-transfers" },
+      { label: "Airport transfer", description: "Compare Narita, Haneda and Kansai Airport routes.", href: "/airport-transfers" },
       { label: "Narita Express (N'EX)", description: "Simple reserved train from Narita into central Tokyo.", linkId: "nex" },
       { label: "Skyliner", description: "Fast Narita access to Ueno and Nippori.", linkId: "skyliner" },
       { label: "Limousine bus", description: "Luggage-friendly airport bus options.", linkId: "limousineBus" },

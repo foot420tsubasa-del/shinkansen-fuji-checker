@@ -5,7 +5,8 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
-import { transferPages } from "@/lib/content/transfers";
+import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { transferPages, type TransferPage } from "@/lib/content/transfers";
 import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
@@ -15,19 +16,82 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return {
-    title: "Airport Transfers in Japan — Narita & Haneda to Tokyo | fujiseat",
+    title: "Airport Transfers in Japan — Narita, Haneda and Kansai Airport | fujiseat",
     description:
-      "Compare the fastest, cheapest, and easiest ways to get from Narita and Haneda airports to central Tokyo. N'EX, Skyliner, limousine bus, and more.",
+      "Compare airport transfer options for Tokyo and Kansai, including Narita, Haneda, and Kansai Airport routes to Shinjuku, Asakusa, Kyoto, Namba and Umeda.",
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates("/airport-transfers", locale),
     openGraph: {
-      title: "Airport Transfers — Narita & Haneda to Tokyo",
+      title: "Airport Transfers in Japan — Narita, Haneda & Kansai",
       description:
-        "Compare the fastest, cheapest, and easiest ways to get from Narita and Haneda airports to Tokyo.",
+        "Compare airport transfer options for Tokyo and Kansai. Narita, Haneda, and KIX routes compared.",
       siteName: "fujiseat",
-      images: [{ url: "https://fujiseat.com/og-airport-transfers.png", width: 1200, height: 630 }],
     },
   };
+}
+
+const naritaSlugs = [
+  "narita-to-shinjuku",
+  "narita-to-tokyo-station",
+  "narita-to-ueno",
+  "narita-to-shibuya",
+  "narita-to-asakusa",
+  "narita-to-oshiage",
+] as const;
+const hanedaSlugs = [
+  "haneda-to-shinjuku",
+  "haneda-to-asakusa",
+  "haneda-to-ueno",
+  "haneda-to-tokyo-station",
+  "haneda-to-shibuya",
+] as const;
+const kansaiSlugs = [
+  "kansai-airport-to-kyoto",
+  "kansai-airport-to-namba",
+  "kansai-airport-to-umeda",
+  "osaka-to-kansai-airport",
+  "kyoto-to-kansai-airport",
+] as const;
+const lateArrivalSlugs = ["narita-late-arrival", "haneda-late-arrival"] as const;
+
+function orderedPages(slugs: readonly string[]): TransferPage[] {
+  return slugs
+    .map((slug) => transferPages.find((page) => page.slug === slug))
+    .filter((page): page is TransferPage => Boolean(page));
+}
+
+function TransferCard({ page }: { page: TransferPage }) {
+  return (
+    <Link
+      href={`/airport-transfers/${page.slug}`}
+      className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-slate-300 hover:shadow-md"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-xs font-semibold text-sky-700">
+            {page.from} → {page.to}
+          </p>
+          <h3 className="mt-1 text-base font-semibold text-slate-950 group-hover:text-sky-800">
+            {page.title}
+          </h3>
+          <p className="mt-1.5 text-xs leading-5 text-slate-500">
+            {page.description}
+          </p>
+        </div>
+        <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-300 transition-colors group-hover:text-sky-600" />
+      </div>
+      <div className="mt-3 flex flex-wrap gap-1.5">
+        {page.options.map((opt) => (
+          <span
+            key={opt.name}
+            className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-[10px] font-semibold text-slate-600"
+          >
+            {opt.name} · {opt.duration} · {opt.cost}
+          </span>
+        ))}
+      </div>
+    </Link>
+  );
 }
 
 export default function AirportTransfersIndex() {
@@ -50,50 +114,53 @@ export default function AirportTransfersIndex() {
           </p>
         </div>
         <h1 className="mt-2 text-2xl font-bold text-slate-950 md:text-3xl">
-          How to get from the airport to Tokyo
+          Airport Transfers in Japan
         </h1>
         <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
-          Narita and Haneda both have fast, easy connections to central Tokyo.
-          Pick your airport and destination below to compare options side by side.
+          Compare airport transfer options for Tokyo and Kansai, including Narita, Haneda, and Kansai Airport routes to Shinjuku, Asakusa, Kyoto, Namba and Umeda.
         </p>
       </div>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        {transferPages.map((page) => (
-          <Link
-            key={page.slug}
-            href={`/airport-transfers/${page.slug}`}
-            className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-slate-300 hover:shadow-md"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-xs font-semibold text-sky-700">
-                  {page.from} → {page.to}
-                </p>
-                <h2 className="mt-1 text-base font-semibold text-slate-950 group-hover:text-sky-800">
-                  {page.title}
-                </h2>
-                <p className="mt-1.5 text-xs leading-5 text-slate-500">
-                  {page.description}
-                </p>
-              </div>
-              <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-300 transition-colors group-hover:text-sky-600" />
-            </div>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {page.options.map((opt) => (
-                <span
-                  key={opt.name}
-                  className="rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-[10px] font-semibold text-slate-600"
-                >
-                  {opt.name} · {opt.duration} · {opt.cost}
-                </span>
-              ))}
-            </div>
-          </Link>
-        ))}
-      </div>
+      {/* Narita */}
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-slate-950">Narita Airport (NRT)</h2>
+        <p className="mt-1 text-xs text-slate-500">Tokyo&apos;s main international airport — further out, but well-connected by N&apos;EX, Skyliner, and bus.</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {orderedPages(naritaSlugs).map((p) => <TransferCard key={p.slug} page={p} />)}
+        </div>
+      </section>
 
-      <LastCheckedNote className="mt-8 text-center" />
+      {/* Haneda */}
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-slate-950">Haneda Airport (HND)</h2>
+        <p className="mt-1 text-xs text-slate-500">Closer to central Tokyo — monorail, Keikyu, and bus options are fast and affordable.</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {orderedPages(hanedaSlugs).map((p) => <TransferCard key={p.slug} page={p} />)}
+        </div>
+      </section>
+
+      {/* Kansai */}
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-slate-950">Kansai Airport (KIX)</h2>
+        <p className="mt-1 text-xs text-slate-500">Gateway to Kyoto and Osaka — Haruka, Nankai, and bus connections to the Kansai region.</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {orderedPages(kansaiSlugs).map((p) => <TransferCard key={p.slug} page={p} />)}
+        </div>
+      </section>
+
+      {/* Late arrival */}
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-slate-950">Late Arrival Guides</h2>
+        <p className="mt-1 text-xs text-slate-500">Landing at night? Compare your options when trains stop running.</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {orderedPages(lateArrivalSlugs).map((p) => <TransferCard key={p.slug} page={p} />)}
+        </div>
+      </section>
+
+      <footer className="mt-12 border-t border-slate-200 pt-6 text-center">
+        <LastCheckedNote />
+        <SiteLegalLinks className="mt-3 text-slate-400" />
+      </footer>
     </Container>
     </main>
   );
