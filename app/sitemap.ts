@@ -24,6 +24,7 @@ const englishOnlyContentPaths = [
   "/local-tokyo/monzen-nakacho",
   "/local-tokyo/ryogoku",
   "/local-tokyo/oshiage",
+  "/local-tokyo/suitengumae-ningyocho",
   "/privacy",
   "/terms",
   "/questions",

@@ -169,11 +169,12 @@ export default function HomeClient() {
   ], [t]);
 
   const localLensPicks: LocalLensPick[] = useMemo(() => [
-    { name: t("localTokyo.kiyosumi.name"), summary: t("localTokyo.kiyosumi.summary"), summaryLink: { label: "ROAM COFFEE Instagram", href: "https://www.instagram.com/roam_coffee413/" }, bestFor: t("localTokyo.kiyosumi.bestFor"), avoidIf: t("localTokyo.kiyosumi.avoidIf"), timing: t("localTokyo.kiyosumi.timing"), href: "/local-tokyo/kiyosumi-shirakawa", image: image2Placeholder("quiet-kiyosumi.jpg") },
+    { name: t("localTokyo.kiyosumi.name"), summary: t("localTokyo.kiyosumi.summary"), summaryLinks: [{ text: "COFFEE STAND OZ", href: "https://www.instagram.com/coffeestandoz/" }, { text: "ROAM COFFEE", href: "https://www.instagram.com/roam_coffee413/" }], bestFor: t("localTokyo.kiyosumi.bestFor"), avoidIf: t("localTokyo.kiyosumi.avoidIf"), timing: t("localTokyo.kiyosumi.timing"), href: "/local-tokyo/kiyosumi-shirakawa", image: image2Placeholder("quiet-kiyosumi.jpg") },
     { name: t("localTokyo.kuramae.name"), summary: t("localTokyo.kuramae.summary"), bestFor: t("localTokyo.kuramae.bestFor"), avoidIf: t("localTokyo.kuramae.avoidIf"), timing: t("localTokyo.kuramae.timing"), href: "/local-tokyo/kuramae", image: image2Placeholder("quiet-kuramae.jpg") },
     { name: t("localTokyo.oshiage.name"), summary: t("localTokyo.oshiage.summary"), bestFor: t("localTokyo.oshiage.bestFor"), avoidIf: t("localTokyo.oshiage.avoidIf"), timing: t("localTokyo.oshiage.timing"), href: "/local-tokyo/oshiage", image: image2Placeholder("quiet-oshiage.jpg") },
     { name: t("localTokyo.monzenNakacho.name"), summary: t("localTokyo.monzenNakacho.summary"), bestFor: t("localTokyo.monzenNakacho.bestFor"), avoidIf: t("localTokyo.monzenNakacho.avoidIf"), timing: t("localTokyo.monzenNakacho.timing"), href: "/local-tokyo/monzen-nakacho", image: image2Placeholder("quiet-monzen-nakacho.jpg") },
     { name: t("localTokyo.ryogoku.name"), summary: t("localTokyo.ryogoku.summary"), bestFor: t("localTokyo.ryogoku.bestFor"), avoidIf: t("localTokyo.ryogoku.avoidIf"), timing: t("localTokyo.ryogoku.timing"), href: "/local-tokyo/ryogoku", image: image2Placeholder("quiet-ryogoku.jpg") },
+    { name: t("localTokyo.suitengumae.name"), summary: t("localTokyo.suitengumae.summary"), bestFor: t("localTokyo.suitengumae.bestFor"), avoidIf: t("localTokyo.suitengumae.avoidIf"), timing: t("localTokyo.suitengumae.timing"), href: "/local-tokyo/suitengumae-ningyocho", image: image2Placeholder("quiet-suitengumae.png") },
   ], [t]);
 
   const essentialCtas = useMemo(() => [
@@ -486,7 +487,7 @@ export default function HomeClient() {
               <LocalLensCard key={pick.name} pick={pick} />
             ))}
           </div>
-          <div className="mx-auto mt-5 grid max-w-3xl gap-5 md:grid-cols-2">
+          <div className="mt-5 grid gap-5 md:grid-cols-3">
             {localLensPicks.slice(3).map((pick) => (
               <LocalLensCard key={pick.name} pick={pick} />
             ))}

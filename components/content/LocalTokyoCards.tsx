@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { ArrowRight, CheckCircle2, Clock3, Hotel, MapPin, Sparkles, XCircle } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -19,13 +20,15 @@ export type AreaChoice = {
   localCta?: string;
 };
 
+type LocalLensSummaryLink = {
+  text: string;
+  href: string;
+};
+
 export type LocalLensPick = {
   name: string;
   summary: string;
-  summaryLink?: {
-    label: string;
-    href: string;
-  };
+  summaryLinks?: LocalLensSummaryLink[];
   bestFor: string;
   avoidIf: string;
   timing: string;
@@ -33,7 +36,45 @@ export type LocalLensPick = {
   image?: string;
 };
 
-export function DecisionBadge({ children }: { children: React.ReactNode }) {
+function renderLinkedSummary(summary: string, links: LocalLensSummaryLink[] = []): ReactNode[] {
+  const nodes: ReactNode[] = [];
+  let cursor = 0;
+
+  while (cursor < summary.length) {
+    const next = links.reduce<{ link: LocalLensSummaryLink; index: number } | null>((match, link) => {
+      const index = summary.indexOf(link.text, cursor);
+      if (index === -1) return match;
+      if (!match || index < match.index) return { link, index };
+      return match;
+    }, null);
+
+    if (!next) {
+      nodes.push(summary.slice(cursor));
+      break;
+    }
+
+    if (next.index > cursor) {
+      nodes.push(summary.slice(cursor, next.index));
+    }
+
+    nodes.push(
+      <a
+        key={`${next.link.text}-${next.index}`}
+        href={next.link.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-bold text-[#106b43] underline underline-offset-2 transition-colors hover:text-[#0f6f45]"
+      >
+        {next.link.text}
+      </a>,
+    );
+    cursor = next.index + next.link.text.length;
+  }
+
+  return nodes.length ? nodes : [summary];
+}
+
+export function DecisionBadge({ children }: { children: ReactNode }) {
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-100 bg-sky-50 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-[#145aa0]">
       <Sparkles className="h-3 w-3" />
@@ -130,20 +171,7 @@ export function LocalLensCard({ pick }: { pick: LocalLensPick }) {
           </Link>
         </h3>
         <p className="mt-2 text-sm leading-6 text-[#5f7190]">
-          {pick.summary}
-          {pick.summaryLink ? (
-            <>
-              {" "}
-              <a
-                href={pick.summaryLink.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-bold text-[#106b43] underline underline-offset-2 transition-colors hover:text-[#0f6f45]"
-              >
-                {pick.summaryLink.label}
-              </a>
-            </>
-          ) : null}
+          {renderLinkedSummary(pick.summary, pick.summaryLinks)}
         </p>
         <div className="mt-4 grid gap-3 text-xs leading-5 text-slate-700">
           <p><span className="font-bold text-[#082653]">Best for:</span> {pick.bestFor}</p>

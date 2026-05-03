@@ -275,7 +275,7 @@
       "seeAll": "See all Local Tokyo picks",
       "kiyosumi": {
         "name": "Kiyosumi-Shirakawa",
-        "summary": "Coffee, Kiyosumi Garden, Fukagawa Edo Museum, and slow canal-side walks. A kintsugi workshop has opened nearby, OZ — a tiny coffee stand tucked in a back alley — draws in-the-know visitors from overseas, and ROAM COFFEE opens every Sunday with coffee built around sweetness, clarity, and a bright acidity that leaves you feeling positive.",
+        "summary": "Coffee, Kiyosumi Garden, Fukagawa Edo Museum, and slow canal-side walks. A kintsugi workshop has opened nearby, COFFEE STAND OZ — tucked quietly in a back alley — draws in-the-know visitors from overseas, and ROAM COFFEE opens every Sunday with coffee built around sweetness, clarity, and a bright acidity that leaves you feeling positive.",
         "bestFor": "coffee, gardens, museums",
         "avoidIf": "you want nightlife or first-night simplicity",
         "timing": "morning to early afternoon"
@@ -307,6 +307,13 @@
         "bestFor": "sumo and Edo history",
         "avoidIf": "you want shopping or nightlife",
         "timing": "morning or early afternoon"
+      },
+      "suitengumae": {
+        "name": "Suitengumae / Ningyocho",
+        "summary": "T-CAT airport bus access, quiet hotels, Ningyocho food streets, and an easy bridge between Tokyo Station and East Tokyo.",
+        "bestFor": "airport transfer, calm hotels, old-town food",
+        "avoidIf": "you want nightlife or headline sights",
+        "timing": "arrival day or departure eve"
       }
     },
     "essentialsCta": {
@@ -865,6 +872,24 @@
         "Museum of Contemporary Art Tokyo or a river walk",
         "Continue to Monzen-Nakacho or Ryogoku"
       ],
+      "developerPicks": {
+        "title": "Developer's local coffee picks",
+        "description": "Two small coffee stops I would personally point visitors to when they want the quieter, more local side of Kiyosumi-Shirakawa.",
+        "items": [
+          {
+            "name": "COFFEE STAND OZ",
+            "description": "A small coffee stand tucked quietly in a back alley, useful when you want a local stop that does not feel like a tourist checklist.",
+            "href": "https://www.instagram.com/coffeestandoz/",
+            "linkLabel": "Open Instagram"
+          },
+          {
+            "name": "ROAM COFFEE",
+            "description": "Open every Sunday. The coffee concept is sweetness, clarity, and a bright acidity that leaves you feeling positive. ROAM COFFEE pursues a taste that makes the drinker's everyday life feel a little lighter and more forward-looking, and you can feel the care behind it.",
+            "href": "https://www.instagram.com/roam_coffee413/",
+            "linkLabel": "Open Instagram"
+          }
+        ]
+      },
       "shouldStay": "Stay here if you have already solved the basics and want a quiet local base. For a first night in Tokyo, Shinjuku, Ueno, Asakusa, or Tokyo Station are usually simpler. Kiyosumi-Shirakawa is strongest as a quiet detour, second-time base, or calm final night before a Tokyo Station departure.",
       "nearby": [
         {
@@ -1212,6 +1237,82 @@
           "title": "Open Planner",
           "description": "Turn this into a realistic day plan.",
           "href": "/planner"
+        },
+        {
+          "title": "Plan your trip essentials",
+          "description": "eSIM, airport transfer, and train next steps.",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "Back to the Seat Checker",
+          "description": "Keep the Mt. Fuji Shinkansen decision as the main tool.",
+          "href": "/guide"
+        }
+      ]
+    },
+    "suitengumae-ningyocho": {
+      "title": "Suitengumae / Ningyocho Guide — T-CAT, Hotels and Old Tokyo Food Streets",
+      "description": "A practical local guide to Suitengumae and Ningyocho, Tokyo's airport bus hub with calm hotels, old-town food streets and easy access to Nihonbashi, Tokyo Station and East Tokyo.",
+      "imageAlt": "Suitengumae and Ningyocho neighborhood",
+      "bestFor": [
+        "Airport bus access",
+        "Quiet hotels",
+        "Ningyocho food streets",
+        "First or last night"
+      ],
+      "notBestFor": [
+        "Nightlife",
+        "Iconic sights",
+        "Trendy shopping"
+      ],
+      "bestTiming": "Arrival day, departure eve, or a light half-day.",
+      "combineWith": "Ningyocho, Nihonbashi, Kiyosumi-Shirakawa, or Tokyo Station.",
+      "whyVisit": "Suitengumae is not a flashy sightseeing stop, and that is exactly why it is useful. The Tokyo City Air Terminal makes airport bus transfers simple, hotels are calmer than Shinjuku or Shibuya, and Ningyocho is close enough for old-town snacks, small restaurants, and a more local first evening. It works as a practical East Tokyo hub rather than a destination you force into the itinerary.",
+      "route": [
+        "Arrive via T-CAT or Suitengumae Station",
+        "Walk toward Ningyocho for old-town food streets",
+        "Stop by Amazake Yokocho or small local snack shops",
+        "Continue to Nihonbashi or Tokyo Station if you need city logistics",
+        "Optional: add Kiyosumi-Shirakawa for coffee, gardens, and museums"
+      ],
+      "shouldStay": "Stay here if airport transfer, quiet hotels, and easy movement matter more than nightlife. It is especially useful for a first night after a long flight, a final night before an airport bus, or travelers who want to be near Tokyo Station without paying Tokyo Station prices. If you want big sights at your door, Asakusa, Ueno, or Shinjuku will feel clearer.",
+      "nearby": [
+        {
+          "title": "Tokyo Station",
+          "description": "Best for Shinkansen departures and direct city logistics.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Kiyosumi-Shirakawa",
+          "description": "Add coffee, gardens, and museums after a practical arrival base.",
+          "href": "/local-tokyo/kiyosumi-shirakawa"
+        },
+        {
+          "title": "Asakusa",
+          "description": "More traditional sightseeing with stronger visitor infrastructure.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Airport transfers",
+          "description": "Compare Narita and Haneda arrival options before choosing a hotel.",
+          "href": "/airport-transfers"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo area guide",
+          "description": "Compare first-time bases before choosing a hotel.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Airport transfer guide",
+          "description": "Use this area when airport logistics matter.",
+          "href": "/airport-transfers"
+        },
+        {
+          "title": "7-day first-time Japan",
+          "description": "Place this hub on an arrival or departure day.",
+          "href": "/itineraries/7-day-first-time-japan"
         },
         {
           "title": "Plan your trip essentials",

@@ -275,7 +275,7 @@
       "seeAll": "查看全部 Local Tokyo 精選",
       "kiyosumi": {
         "name": "Kiyosumi-Shirakawa",
-        "summary": "咖啡、Kiyosumi Garden、Fukagawa Edo Museum，以及運河邊的慢步調散步。附近新開了金繼體驗工坊，藏在小巷裡的小咖啡攤 OZ 吸引了懂門道的海外旅人；ROAM COFFEE 每週日營業，咖啡概念是甜感、透明感，以及能讓人變得積極的明亮酸質。",
+        "summary": "咖啡、Kiyosumi Garden、Fukagawa Edo Museum，以及運河邊的慢步調散步。附近新開了金繼體驗工坊，靜靜藏在小巷裡的 COFFEE STAND OZ 吸引了懂門道的海外旅人；ROAM COFFEE 每週日營業，咖啡概念是甜感、透明感，以及能讓人變得積極的明亮酸質。",
         "bestFor": "咖啡、庭園、博物館",
         "avoidIf": "你想要夜生活或第一晚的簡單動線",
         "timing": "上午到午後早些時候"
@@ -307,6 +307,13 @@
         "bestFor": "相撲和 Edo 歷史",
         "avoidIf": "你想購物或體驗夜生活",
         "timing": "上午或午後早些時候"
+      },
+      "suitengumae": {
+        "name": "Suitengumae / Ningyocho",
+        "summary": "T-CAT 機場巴士、安靜飯店、Ningyocho 美食街，以及連接 Tokyo Station 和 East Tokyo 的實用據點。",
+        "bestFor": "機場移動、安靜飯店、老街美食",
+        "avoidIf": "你想要夜生活或標誌性景點",
+        "timing": "抵達日或出發前一晚"
       }
     },
     "essentialsCta": {
@@ -865,6 +872,24 @@
         "Museum of Contemporary Art Tokyo 或河邊散步",
         "繼續前往 Monzen-Nakacho 或 Ryogoku"
       ],
+      "developerPicks": {
+        "title": "開發者推薦的在地咖啡",
+        "description": "如果想看看 Kiyosumi-Shirakawa 更安靜、更在地的一面，這兩家小咖啡店是我會親自推薦的停靠點。",
+        "items": [
+          {
+            "name": "COFFEE STAND OZ",
+            "description": "靜靜藏在小巷裡的小咖啡攤，適合想要一個不像旅遊清單、更有在地感的短暫停留。",
+            "href": "https://www.instagram.com/coffeestandoz/",
+            "linkLabel": "開啟 Instagram"
+          },
+          {
+            "name": "ROAM COFFEE",
+            "description": "每週日營業。咖啡概念是甜感、透明感，以及能讓人變得積極的明亮酸質。ROAM COFFEE 追求一種能讓飲用者的日常稍微變輕、變得更前向的味道，也能感受到其中的講究。",
+            "href": "https://www.instagram.com/roam_coffee413/",
+            "linkLabel": "開啟 Instagram"
+          }
+        ]
+      },
       "shouldStay": "如果你已經解決基本動線，想要安靜的在地據點，可以住這裡。第一次抵達 Tokyo 的晚上，Shinjuku、Ueno、Asakusa 或 Tokyo Station 通常更簡單。",
       "nearby": [
         {
@@ -1221,6 +1246,82 @@
         {
           "title": "回到座位查詢",
           "description": "把 Mt. Fuji 側 Shinkansen 座位作為核心工具。",
+          "href": "/guide"
+        }
+      ]
+    },
+    "suitengumae-ningyocho": {
+      "title": "Suitengumae / Ningyocho 指南 — T-CAT、飯店和老東京美食街",
+      "description": "Suitengumae 與 Ningyocho 的實用在地指南。這裡有 Tokyo 的機場巴士樞紐、安靜飯店、老街美食，以及前往 Nihonbashi、Tokyo Station 和 East Tokyo 的便利交通。",
+      "imageAlt": "Suitengumae 和 Ningyocho 街區",
+      "bestFor": [
+        "機場巴士交通",
+        "安靜飯店",
+        "Ningyocho 美食街",
+        "第一晚或最後一晚"
+      ],
+      "notBestFor": [
+        "夜生活",
+        "標誌性景點",
+        "潮流購物"
+      ],
+      "bestTiming": "抵達日、出發前一晚，或輕鬆半日。",
+      "combineWith": "Ningyocho、Nihonbashi、Kiyosumi-Shirakawa 或 Tokyo Station。",
+      "whyVisit": "Suitengumae 不是搶眼的觀光點，也正因如此才實用。Tokyo City Air Terminal 讓機場巴士移動變簡單，飯店比 Shinjuku 或 Shibuya 更安靜，Ningyocho 也很近，適合老街小吃、小餐館和更有在地感的第一個晚上。",
+      "route": [
+        "從 T-CAT 或 Suitengumae Station 抵達",
+        "步行前往 Ningyocho 的老街美食區",
+        "順路逛 Amazake Yokocho 或在地小吃店",
+        "如果需要城市交通動線，繼續前往 Nihonbashi 或 Tokyo Station",
+        "可選：加入 Kiyosumi-Shirakawa 的咖啡、庭園和博物館"
+      ],
+      "shouldStay": "如果機場交通、安靜飯店和移動效率比夜生活更重要，可以住這裡。它特別適合長途飛行後的第一晚、機場巴士前的最後一晚，或想靠近 Tokyo Station 但不想支付 Tokyo Station 價格的旅人。",
+      "nearby": [
+        {
+          "title": "Tokyo Station",
+          "description": "適合 Shinkansen 出發和直接城市動線。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Kiyosumi-Shirakawa",
+          "description": "在實用抵達據點之後，加入咖啡、庭園和博物館。",
+          "href": "/local-tokyo/kiyosumi-shirakawa"
+        },
+        {
+          "title": "Asakusa",
+          "description": "傳統觀光更多，旅客設施也更完整。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "機場交通",
+          "description": "選擇飯店前比較 Narita 和 Haneda 的抵達方式。",
+          "href": "/airport-transfers"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo 住宿區域指南",
+          "description": "選擇飯店前比較首次旅行適合的據點。",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "機場交通指南",
+          "description": "當機場動線很重要時，可以考慮這個區域。",
+          "href": "/airport-transfers"
+        },
+        {
+          "title": "首次日本 7 日行程",
+          "description": "把這個樞紐放在抵達日或出發日。",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "旅行準備 essentials",
+          "description": "eSIM、機場交通和鐵路下一步。",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "回到 Seat Checker",
+          "description": "把 Mt. Fuji Shinkansen 座位判斷作為主工具。",
           "href": "/guide"
         }
       ]

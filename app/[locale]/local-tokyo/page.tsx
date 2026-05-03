@@ -53,6 +53,7 @@ export default async function LocalTokyoPage({ params }: Props) {
     { name: h("localTokyo.monzenNakacho.name"), summary: h("localTokyo.monzenNakacho.summary"), bestFor: h("localTokyo.monzenNakacho.bestFor"), avoidIf: h("localTokyo.monzenNakacho.avoidIf"), timing: h("localTokyo.monzenNakacho.timing"), href: "/local-tokyo/monzen-nakacho", image: "/design-home-assets/quiet-monzen-nakacho.jpg" },
     { name: h("localTokyo.ryogoku.name"), summary: h("localTokyo.ryogoku.summary"), bestFor: h("localTokyo.ryogoku.bestFor"), avoidIf: h("localTokyo.ryogoku.avoidIf"), timing: h("localTokyo.ryogoku.timing"), href: "/local-tokyo/ryogoku", image: "/design-home-assets/quiet-ryogoku.jpg" },
     { name: h("localTokyo.oshiage.name"), summary: h("localTokyo.oshiage.summary"), bestFor: h("localTokyo.oshiage.bestFor"), avoidIf: h("localTokyo.oshiage.avoidIf"), timing: h("localTokyo.oshiage.timing"), href: "/local-tokyo/oshiage", image: "/design-home-assets/quiet-oshiage.jpg" },
+    { name: h("localTokyo.suitengumae.name"), summary: h("localTokyo.suitengumae.summary"), bestFor: h("localTokyo.suitengumae.bestFor"), avoidIf: h("localTokyo.suitengumae.avoidIf"), timing: h("localTokyo.suitengumae.timing"), href: "/local-tokyo/suitengumae-ningyocho", image: "/design-home-assets/quiet-suitengumae.png" },
   ];
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -169,7 +170,7 @@ export default async function LocalTokyoPage({ params }: Props) {
             <MapPinned className="h-5 w-5 text-[#145aa0]" />
             <h2 className="text-xl font-bold text-[#082653]">{t("areaCards")}</h2>
           </div>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {localPicks.map((pick) => (
               <LocalLensCard key={pick.name} pick={pick} />
             ))}

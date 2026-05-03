@@ -39,6 +39,12 @@ const pageConfig = {
     Icon: Building2,
     extraIcon: ShoppingBag,
   },
+  "suitengumae-ningyocho": {
+    image: "/design-home-assets/quiet-suitengumae.png",
+    path: "/local-tokyo/suitengumae-ningyocho",
+    Icon: MapPinned,
+    extraIcon: null,
+  },
   ryogoku: {
     image: "/design-home-assets/quiet-ryogoku.jpg",
     path: "/local-tokyo/ryogoku",
@@ -59,6 +65,13 @@ type LocalTokyoCta = {
   title: string;
   description: string;
   href: string;
+};
+
+type DeveloperPick = {
+  name: string;
+  description: string;
+  href: string;
+  linkLabel: string;
 };
 
 type LocalTokyoOptionalFields = {
@@ -108,6 +121,9 @@ export async function LocalTokyoDetailPage({ locale, pageKey }: LocalTokyoDetail
   const ExtraIcon = config.extraIcon;
   const nearby = t.raw("nearby") as LocalTokyoCta[];
   const sidebar = t.raw("sidebar") as LocalTokyoCta[];
+  const developerPicks = pageKey === "kiyosumi-shirakawa"
+    ? t.raw("developerPicks.items") as DeveloperPick[]
+    : [];
   const pageUrl = localizedUrl(locale, config.path);
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -246,6 +262,35 @@ export async function LocalTokyoDetailPage({ locale, pageKey }: LocalTokyoDetail
                 <HalfDayRoute stops={t.raw("route") as string[]} />
               </div>
             </section>
+
+            {developerPicks.length ? (
+              <section className="rounded-[22px] border border-[#d9e5f2] bg-white p-5 shadow-sm">
+                <div className="flex items-center gap-2">
+                  <Coffee className="h-5 w-5 text-[#145aa0]" />
+                  <h2 className="text-xl font-bold text-[#082653]">{t("developerPicks.title")}</h2>
+                </div>
+                <p className="mt-3 text-sm leading-7 text-slate-600">{t("developerPicks.description")}</p>
+                <div className="mt-5 grid gap-3 md:grid-cols-2">
+                  {developerPicks.map((pick) => (
+                    <article key={pick.name} className="rounded-[16px] border border-slate-200 bg-[#f8fbff] p-4">
+                      <h3 className="text-sm font-bold text-[#082653]">{pick.name}</h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-600">{pick.description}</p>
+                      <a
+                        href={pick.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-4 inline-flex min-h-[44px] items-center gap-3 rounded-full border border-slate-200 bg-white py-1.5 pl-2 pr-4 text-xs font-extrabold text-[#082653] shadow-sm transition-colors hover:border-[#168a56] hover:bg-[#f0fbf6]"
+                      >
+                        <span className="flex h-[32px] w-[32px] shrink-0 items-center justify-center">
+                          <Image src="/instagram-glyph-gradient.svg" alt="" width={29} height={29} aria-hidden="true" />
+                        </span>
+                        {pick.linkLabel}
+                      </a>
+                    </article>
+                  ))}
+                </div>
+              </section>
+            ) : null}
 
             <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
               <h2 className="text-xl font-bold text-[#082653]">{common("shouldStay")}</h2>
