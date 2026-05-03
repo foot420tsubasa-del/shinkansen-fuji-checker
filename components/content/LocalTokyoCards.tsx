@@ -22,6 +22,10 @@ export type AreaChoice = {
 export type LocalLensPick = {
   name: string;
   summary: string;
+  summaryLink?: {
+    label: string;
+    href: string;
+  };
   bestFor: string;
   avoidIf: string;
   timing: string;
@@ -124,7 +128,23 @@ export function LocalLensCard({ pick }: { pick: LocalLensPick }) {
       <div className="flex flex-1 flex-col p-5 pb-6">
         <DecisionBadge>Local Lens</DecisionBadge>
         <h3 className="mt-4 text-xl font-bold text-[#082653]">{pick.name}</h3>
-        <p className="mt-2 text-sm leading-6 text-[#5f7190]">{pick.summary}</p>
+        <p className="mt-2 text-sm leading-6 text-[#5f7190]">
+          {pick.summary}
+          {pick.summaryLink ? (
+            <>
+              {" "}
+              <a
+                href={pick.summaryLink.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-bold text-[#106b43] underline underline-offset-2 transition-colors hover:text-[#0f6f45]"
+                onClick={(event) => event.stopPropagation()}
+              >
+                {pick.summaryLink.label}
+              </a>
+            </>
+          ) : null}
+        </p>
         <div className="mt-4 grid gap-3 text-xs leading-5 text-slate-700">
           <p><span className="font-bold text-[#082653]">Best for:</span> {pick.bestFor}</p>
           <p><span className="font-bold text-[#082653]">Avoid if:</span> {pick.avoidIf}</p>
