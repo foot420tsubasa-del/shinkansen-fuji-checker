@@ -116,18 +116,19 @@ export function AreaChoiceCard({ area }: { area: AreaChoice }) {
 
 export function LocalLensCard({ pick }: { pick: LocalLensPick }) {
   return (
-    <Link
-      href={pick.href}
-      className="group flex flex-col overflow-hidden rounded-[9px] border border-[#d5e5ef] bg-white shadow-[0_14px_34px_rgba(9,35,70,0.08)] transition-transform hover:-translate-y-1"
-    >
+    <article className="group flex flex-col overflow-hidden rounded-[9px] border border-[#d5e5ef] bg-white shadow-[0_14px_34px_rgba(9,35,70,0.08)] transition-transform hover:-translate-y-1">
       {pick.image ? (
-        <div className="relative h-[118px] w-full">
+        <Link href={pick.href} className="relative block h-[118px] w-full">
           <Image src={pick.image} alt="" fill sizes="(min-width: 1280px) 20vw, (min-width: 768px) 50vw, 100vw" className="object-cover" aria-hidden="true" />
-        </div>
+        </Link>
       ) : null}
       <div className="flex flex-1 flex-col p-5 pb-6">
         <DecisionBadge>Local Lens</DecisionBadge>
-        <h3 className="mt-4 text-xl font-bold text-[#082653]">{pick.name}</h3>
+        <h3 className="mt-4 text-xl font-bold text-[#082653]">
+          <Link href={pick.href} className="transition-colors hover:text-[#106b43]">
+            {pick.name}
+          </Link>
+        </h3>
         <p className="mt-2 text-sm leading-6 text-[#5f7190]">
           {pick.summary}
           {pick.summaryLink ? (
@@ -138,7 +139,6 @@ export function LocalLensCard({ pick }: { pick: LocalLensPick }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-bold text-[#106b43] underline underline-offset-2 transition-colors hover:text-[#0f6f45]"
-                onClick={(event) => event.stopPropagation()}
               >
                 {pick.summaryLink.label}
               </a>
@@ -154,13 +154,13 @@ export function LocalLensCard({ pick }: { pick: LocalLensPick }) {
           </p>
         </div>
         <div className="mt-auto pt-5">
-          <span className={`${buttonPage} h-9 px-4 text-xs`}>
+          <Link href={pick.href} className={`${buttonPage} h-9 px-4 text-xs`}>
             Open local pick
             <ArrowRight className="h-3.5 w-3.5" />
-          </span>
+          </Link>
         </div>
       </div>
-    </Link>
+    </article>
   );
 }
 
