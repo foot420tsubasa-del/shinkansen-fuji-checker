@@ -3,12 +3,16 @@ import { HotelCTA } from "@/components/affiliate/HotelCTA";
 import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 
 type HotelPick = {
+  id?: string;
   name: string;
   area: string;
   price: string;
   link: string;
   hotelKey?: HotelAreaKey;
   tag?: string;
+  provider?: "trip" | "klook" | "agoda";
+  trackingHref?: string;
+  label?: string;
 };
 
 export function HotelPicks({
@@ -30,10 +34,10 @@ export function HotelPicks({
       </div>
       <div className="grid gap-3 sm:grid-cols-2">
         {picks.map((h) => {
-          const hotel = h.hotelKey ? getHotelLink(h.hotelKey) : null;
+          const hotel = h.provider ? null : h.hotelKey ? getHotelLink(h.hotelKey) : null;
           return (
             <div
-              key={h.name}
+              key={h.id ?? h.name}
               className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-4 transition-all hover:border-slate-300 hover:shadow-sm"
             >
               <div className="flex items-start justify-between gap-2">
@@ -56,13 +60,13 @@ export function HotelPicks({
               <HotelCTA
                 areaName={hotel?.areaName ?? h.area}
                 city={hotel?.city ?? "Tokyo"}
-                provider={hotel?.provider}
+                provider={h.provider ?? hotel?.provider}
                 href={hotel?.href ?? h.link}
                 placement="stay_area"
                 locale={locale}
                 pagePath={pagePath}
-                label={hotel?.label ?? `Compare ${h.area} hotels`}
-                trackingHref={hotel?.trackingHref}
+                label={h.label ?? hotel?.label ?? `Compare ${h.area} hotels`}
+                trackingHref={h.trackingHref ?? hotel?.trackingHref}
                 className="mt-3 w-full"
               />
             </div>

@@ -1,5 +1,6 @@
 import type { TripPick } from "@/lib/trip-picks";
 import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
+import { getManagedStayHotelPicks } from "@/lib/stay-hotel-picks";
 import { requireAffUrl } from "@/src/affiliateLinks";
 
 
@@ -18,12 +19,16 @@ export type StayArea = {
 };
 
 export type HotelPick = {
+  id?: string;
   name: string;
   area: string;
   price: string;
   link: string;
   hotelKey?: HotelAreaKey;
   tag?: string;
+  provider?: "trip" | "klook" | "agoda";
+  trackingHref?: string;
+  label?: string;
 };
 
 export type ComparisonRow = {
@@ -73,7 +78,7 @@ const commonNextActions: TripPick[] = [
 
 // ─── Page Data ──────────────────────────────────────────────────────────────
 
-export const stayPages: StayPage[] = [
+const rawStayPages: StayPage[] = [
   {
     slug: "tokyo-first-time",
     title: "Where to stay in Tokyo — first-time visitor guide",
@@ -943,6 +948,11 @@ export const stayPages: StayPage[] = [
     ],
   },
 ];
+
+export const stayPages: StayPage[] = rawStayPages.map((page) => ({
+  ...page,
+  hotelPicks: getManagedStayHotelPicks(page.slug, page.hotelPicks),
+}));
 
 // ─── Lookup ─────────────────────────────────────────────────────────────────
 

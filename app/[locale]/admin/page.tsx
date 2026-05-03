@@ -9,6 +9,25 @@ import type { HotelLinkConfig } from "@/lib/hotel-links";
 
 type LinkEntry = { id: string } & LinkConfig;
 type HotelEntry = { id: string } & HotelLinkConfig;
+type StayHotelPickEntry = {
+  id: string;
+  name: string;
+  area: string;
+  price: string;
+  hotelKey: string;
+  tag?: string;
+  tripUrl: string;
+  label: string;
+};
+type StayHotelPickGroup = { slug: string; picks: StayHotelPickEntry[] };
+type HotelPickLinkEntry = {
+  id: string;
+  name: string;
+  hotelKey: string;
+  tripUrl: string;
+  label: string;
+  lastChecked?: string;
+};
 
 type FormState = {
   id: string;
@@ -30,6 +49,8 @@ type HotelFormState = {
   checkinType: "dynamic_offset" | "fixed_date";
   lastChecked: string;
 };
+
+type HotelPickLinkFormState = HotelPickLinkEntry;
 
 const EMPTY_FORM: FormState = {
   id: "",
@@ -119,6 +140,8 @@ function ps(provider: string) {
 export default function AdminPage() {
   const [links, setLinks] = useState<LinkEntry[]>([]);
   const [hotelLinks, setHotelLinks] = useState<HotelEntry[]>([]);
+  const [stayHotelPicks, setStayHotelPicks] = useState<StayHotelPickGroup[]>([]);
+  const [hotelPickLinks, setHotelPickLinks] = useState<HotelPickLinkEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ text: string; ok: boolean } | null>(null);
@@ -126,10 +149,12 @@ export default function AdminPage() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [showAdd, setShowAdd] = useState(false);
   const [klookUrlInput, setKlookUrlInput] = useState("");
-  const [tab, setTab] = useState<"hotel" | "todo" | "all">("hotel");
+  const [tab, setTab] = useState<"hotel" | "stay-picks" | "todo" | "all">("hotel");
   const [adminToken, setAdminToken] = useState("");
   const [editingHotelId, setEditingHotelId] = useState<string | null>(null);
   const [hotelForm, setHotelForm] = useState<HotelFormState | null>(null);
+  const [editingHotelPickLinkId, setEditingHotelPickLinkId] = useState<string | null>(null);
+  const [hotelPickLinkForm, setHotelPickLinkForm] = useState<HotelPickLinkFormState | null>(null);
 
   const fetchLinks = useCallback(async () => {
     try {
@@ -172,6 +197,42 @@ export default function AdminPage() {
     }
   }, [adminToken]);
 
+  const fetchStayHotelPicks = useCallback(async () => {
+    try {
+      const res = await fetch("/api/stay-hotel-picks", {
+        headers: adminToken ? { "x-admin-token": adminToken } : {},
+      });
+      if (res.status === 401) return;
+      const data = await res.json();
+      setStayHotelPicks(
+        Object.entries(data).map(([slug, picks]) => ({
+          slug,
+          picks: Array.isArray(picks) ? (picks as StayHotelPickEntry[]) : [],
+        })),
+      );
+    } catch {
+      setMessage({ text: "おすすめホテルの読み込みに失敗しました", ok: false });
+    }
+  }, [adminToken]);
+
+  const fetchHotelPickLinks = useCallback(async () => {
+    try {
+      const res = await fetch("/api/hotel-pick-links", {
+        headers: adminToken ? { "x-admin-token": adminToken } : {},
+      });
+      if (res.status === 401) return;
+      const data = await res.json();
+      setHotelPickLinks(
+        Object.entries(data).map(([id, config]) => ({
+          id,
+          ...(config as Omit<HotelPickLinkEntry, "id">),
+        })),
+      );
+    } catch {
+      setMessage({ text: "ホテル個別リンクの読み込みに失敗しました", ok: false });
+    }
+  }, [adminToken]);
+
   useEffect(() => {
     const saved = sessionStorage.getItem("fujiseat_admin_token") || "";
     setAdminToken(saved);
@@ -180,7 +241,9 @@ export default function AdminPage() {
   useEffect(() => {
     fetchLinks();
     fetchHotelLinks();
-  }, [fetchLinks, fetchHotelLinks]);
+    fetchStayHotelPicks();
+    fetchHotelPickLinks();
+  }, [fetchLinks, fetchHotelLinks, fetchStayHotelPicks, fetchHotelPickLinks]);
 
   const flash = (text: string, ok: boolean) => {
     setMessage({ text, ok });
@@ -237,6 +300,29 @@ export default function AdminPage() {
 
   const updateHotelForm = (field: keyof HotelFormState, value: string) =>
     setHotelForm((prev) => (prev ? { ...prev, [field]: value } : prev));
+
+  const startHotelPickLinkEdit = (entry: HotelPickLinkEntry) => {
+    setEditingHotelPickLinkId(entry.id);
+    setHotelPickLinkForm({
+      id: entry.id,
+      name: entry.name,
+      hotelKey: entry.hotelKey,
+      tripUrl: entry.tripUrl,
+      label: entry.label,
+      lastChecked: entry.lastChecked ?? "",
+    });
+    setEditingId(null);
+    setShowAdd(false);
+    cancelHotelEdit();
+  };
+
+  const cancelHotelPickLinkEdit = () => {
+    setEditingHotelPickLinkId(null);
+    setHotelPickLinkForm(null);
+  };
+
+  const updateHotelPickLinkForm = (field: keyof HotelPickLinkFormState, value: string) =>
+    setHotelPickLinkForm((prev) => (prev ? { ...prev, [field]: value } : prev));
 
   const save = async () => {
     const id = form.id.trim();
@@ -299,6 +385,33 @@ export default function AdminPage() {
     }
   };
 
+  const saveHotelPickLink = async () => {
+    if (!hotelPickLinkForm) return;
+    setSaving(true);
+    try {
+      const config = {
+        name: hotelPickLinkForm.name.trim(),
+        hotelKey: hotelPickLinkForm.hotelKey.trim(),
+        tripUrl: hotelPickLinkForm.tripUrl.trim(),
+        label: hotelPickLinkForm.label.trim() || `Check ${hotelPickLinkForm.name.trim()} on Trip.com`,
+        lastChecked: hotelPickLinkForm.lastChecked?.trim() || "",
+      };
+      const res = await fetch("/api/hotel-pick-links", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", "x-admin-token": adminToken },
+        body: JSON.stringify({ id: hotelPickLinkForm.id, config }),
+      });
+      if (!res.ok) throw new Error();
+      flash("ホテル個別リンクを保存しました", true);
+      cancelHotelPickLinkEdit();
+      await fetchHotelPickLinks();
+    } catch {
+      flash("ホテル個別リンクの保存に失敗しました", false);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const remove = async (id: string) => {
     if (!confirm(`「${id}」を削除しますか？`)) return;
     try {
@@ -339,6 +452,15 @@ export default function AdminPage() {
   const todoItems = links.filter((l) => getStatus(l) !== "done");
   const doneItems = links.filter((l) => getStatus(l) === "done");
   const tripHotelDoneCount = hotelLinks.filter((h) => h.tripUrl.trim()).length;
+  const hotelPickLinkUrlCount = hotelPickLinks.filter((pick) => pick.tripUrl.trim()).length;
+
+  const hotelPickUsage = stayHotelPicks.reduce<Record<string, { slug: string; area: string; tag?: string }[]>>((acc, group) => {
+    for (const pick of group.picks) {
+      if (!acc[pick.id]) acc[pick.id] = [];
+      acc[pick.id].push({ slug: group.slug, area: pick.area, tag: pick.tag });
+    }
+    return acc;
+  }, {});
 
   const todoByProvider = Object.entries(
     todoItems.reduce<Record<string, LinkEntry[]>>((acc, l) => {
@@ -669,6 +791,130 @@ export default function AdminPage() {
     );
   }
 
+  function HotelPickLinkCard({ entry }: { entry: HotelPickLinkEntry }) {
+    const isEditing = editingHotelPickLinkId === entry.id && hotelPickLinkForm;
+    const hasSpecificUrl = Boolean(entry.tripUrl.trim());
+    const usages = hotelPickUsage[entry.id] ?? [];
+
+    if (isEditing) {
+      return (
+        <div className="rounded-2xl border border-orange-200 bg-orange-50/40 p-4 shadow-sm">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">ホテルID</label>
+              <input
+                value={hotelPickLinkForm.id}
+                disabled
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-500"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">ホテル名</label>
+              <input
+                value={hotelPickLinkForm.name}
+                onChange={(e) => updateHotelPickLinkForm("name", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-orange-300"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">fallback エリア hotelKey</label>
+              <select
+                value={hotelPickLinkForm.hotelKey}
+                onChange={(e) => updateHotelPickLinkForm("hotelKey", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-orange-300"
+              >
+                {hotelLinks.map((hotel) => (
+                  <option key={hotel.id} value={hotel.id}>
+                    {hotel.id} / {hotel.areaName}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">最終確認日</label>
+              <input
+                value={hotelPickLinkForm.lastChecked ?? ""}
+                onChange={(e) => updateHotelPickLinkForm("lastChecked", e.target.value)}
+                placeholder="2026-05-03"
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-orange-300"
+              />
+            </div>
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-bold text-orange-700">具体ホテルのTrip.com affiliate URL</label>
+            <input
+              value={hotelPickLinkForm.tripUrl}
+              onChange={(e) => updateHotelPickLinkForm("tripUrl", e.target.value)}
+              placeholder="https://www.trip.com/t/..."
+              className="mt-1 w-full rounded-lg border border-orange-200 bg-white px-3 py-2 text-xs outline-none focus:border-orange-400"
+            />
+            <p className="mt-1 text-[10px] text-slate-500">
+              空欄の場合は hotelKey のエリア検索リンクへfallbackします。同じホテルが複数ページに出ていても、この1箇所を保存すれば全ページに反映されます。
+            </p>
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-semibold text-slate-500">ボタン文言</label>
+            <input
+              value={hotelPickLinkForm.label}
+              onChange={(e) => updateHotelPickLinkForm("label", e.target.value)}
+              placeholder="Check Hotel Name on Trip.com"
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-orange-300"
+            />
+          </div>
+          <div className="mt-4 flex gap-2">
+            <button
+              onClick={saveHotelPickLink}
+              disabled={saving}
+              className="rounded-lg bg-[#ff7a00] px-4 py-2 text-xs font-semibold text-white hover:bg-[#e66700] disabled:opacity-50"
+            >
+              {saving ? "保存中..." : "保存する"}
+            </button>
+            <button
+              onClick={cancelHotelPickLinkEdit}
+              className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50"
+            >
+              キャンセル
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className={`rounded-2xl border bg-white p-4 shadow-sm ${hasSpecificUrl ? "border-orange-200" : "border-slate-200"}`}>
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="text-sm font-semibold text-slate-900">{entry.name}</p>
+              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasSpecificUrl ? "bg-orange-100 text-orange-700" : "bg-emerald-100 text-emerald-700"}`}>
+                {hasSpecificUrl ? "具体ホテルURL" : "エリア検索fallback"}
+              </span>
+            </div>
+            <p className="mt-1 text-[10px] text-slate-500">
+              {usages.length}ページで使用 / fallback: <code className="rounded bg-slate-100 px-1">{entry.hotelKey}</code>
+            </p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {usages.map((usage) => (
+                <span key={`${usage.slug}-${usage.area}-${usage.tag ?? ""}`} className="rounded-lg bg-slate-50 px-2 py-1 text-[10px] text-slate-600">
+                  {usage.slug} / {usage.area}{usage.tag ? ` / ${usage.tag}` : ""}
+                </span>
+              ))}
+            </div>
+            <p className="mt-1 truncate text-[10px] text-slate-400">
+              {hasSpecificUrl ? entry.tripUrl : "未設定時はエリア検索のTrip.comリンクを使用"}
+            </p>
+          </div>
+          <button
+            onClick={() => startHotelPickLinkEdit(entry)}
+            className="shrink-0 rounded-lg bg-orange-100 px-3 py-1.5 text-[10px] font-semibold text-orange-700 hover:bg-orange-200"
+          >
+            編集
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   // ─── Render ───────────────────────────────────────────────────────────────
 
   return (
@@ -726,7 +972,7 @@ export default function AdminPage() {
 
         {/* Summary cards */}
         {!loading && (
-          <div className="mb-6 grid gap-3 sm:grid-cols-4">
+          <div className="mb-6 grid gap-3 sm:grid-cols-5">
             <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center">
               <p className="text-2xl font-bold text-emerald-700">{doneItems.length}</p>
               <p className="text-[10px] font-medium text-emerald-600">設定済み</p>
@@ -747,6 +993,10 @@ export default function AdminPage() {
               <p className="text-2xl font-bold text-blue-700">{tripHotelDoneCount}/{hotelLinks.length}</p>
               <p className="text-[10px] font-medium text-blue-600">Tripホテル設定</p>
             </div>
+            <div className="rounded-xl border border-orange-200 bg-orange-50 p-3 text-center">
+              <p className="text-2xl font-bold text-orange-700">{hotelPickLinkUrlCount}/{hotelPickLinks.length}</p>
+              <p className="text-[10px] font-medium text-orange-600">具体ホテルURL</p>
+            </div>
           </div>
         )}
 
@@ -757,6 +1007,12 @@ export default function AdminPage() {
             className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "hotel" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
           >
             Trip.comホテル ({tripHotelDoneCount}/{hotelLinks.length})
+          </button>
+          <button
+            onClick={() => setTab("stay-picks")}
+            className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "stay-picks" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
+          >
+            おすすめホテル ({hotelPickLinkUrlCount}/{hotelPickLinks.length})
           </button>
           <button
             onClick={() => setTab("todo")}
@@ -825,6 +1081,31 @@ export default function AdminPage() {
                   </section>
                 );
               })}
+            </div>
+          </div>
+        )}
+
+        {!loading && tab === "stay-picks" && (
+          <div className="space-y-4">
+            <div className="rounded-2xl border border-orange-200 bg-orange-50/70 p-5 shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="h-3 w-3 rounded-full bg-orange-500" />
+                <p className="text-sm font-bold text-slate-900">Stayページのおすすめホテル管理</p>
+              </div>
+              <p className="mt-2 text-xs leading-5 text-slate-600">
+                Stayページに表示される具体的なホテル名・Trip.com個別URLを、ホテル単位でまとめて管理します。
+                同じホテルが複数ページに出ていても、ここで1回設定すれば全ページに反映されます。
+              </p>
+              <div className="mt-3 rounded-xl bg-white px-3 py-2 text-[11px] leading-5 text-slate-600">
+                <span className="font-semibold text-slate-800">運用ルール：</span>
+                具体ホテルを推す場合のみ Trip.com の個別ホテルdeeplinkを設定。未確認なら空欄のままエリア検索に逃がします。タグや表示エリアは各ページ側の文脈として保持します。
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              {hotelPickLinks.map((entry) => (
+                <HotelPickLinkCard key={entry.id} entry={entry} />
+              ))}
             </div>
           </div>
         )}

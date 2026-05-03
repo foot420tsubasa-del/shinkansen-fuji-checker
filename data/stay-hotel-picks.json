@@ -1,0 +1,508 @@
+{
+  "tokyo-first-time": [
+    {
+      "id": "hotel-gracery-shinjuku",
+      "name": "Hotel Gracery Shinjuku",
+      "area": "Shinjuku",
+      "price": "Check latest price",
+      "hotelKey": "shinjuku",
+      "tag": "Popular",
+      "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-1841600/hotel-gracery-shinjuku-tokyo/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Gracery%20Shinjuku&trip_sub3=D16483434",
+      "label": "Check Hotel Gracery Shinjuku on Trip.com"
+    },
+    {
+      "id": "dormy-inn-ueno-okachimachi",
+      "name": "Dormy Inn Ueno Okachimachi",
+      "area": "Ueno",
+      "price": "Check latest price",
+      "hotelKey": "ueno",
+      "tag": "Budget",
+      "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-2124497/dormy-inn-ueno-okachimachi/?Allianceid=8178829&SID=309509299&trip_sub1=Dormy%20Inn%20Ueno%20Okachimachi&trip_sub3=D16483686",
+      "label": "Check Dormy Inn Ueno Okachimachi on Trip.com"
+    },
+    {
+      "id": "richmond-hotel-asakusa",
+      "name": "Richmond Hotel Asakusa",
+      "area": "Asakusa",
+      "price": "Check latest price",
+      "hotelKey": "asakusa",
+      "tag": "",
+      "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-686532/richmond-hotel-asakusa/?Allianceid=8178829&SID=309509299&trip_sub1=Richmond%20Hotel%20Asakusa&trip_sub3=D16483511",
+      "label": "Check Richmond Hotel Asakusa on Trip.com"
+    },
+    {
+      "id": "hotel-metropolitan-tokyo",
+      "name": "Hotel Metropolitan Tokyo",
+      "area": "Tokyo Station",
+      "price": "Check latest price",
+      "hotelKey": "tokyoStation",
+      "tag": "",
+      "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-1330921/hotel-metropolitan-tokyo-marunouchi/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Metropolitan%20Tokyo&trip_sub3=D16483749",
+      "label": "Check Hotel Metropolitan Tokyo on Trip.com"
+    }
+  ],
+  "shinjuku-vs-ueno-vs-asakusa": [
+    {
+      "id": "tokyu-stay-shinjuku-eastside",
+      "name": "Tokyu Stay Shinjuku Eastside",
+      "area": "Shinjuku",
+      "price": "Check latest price",
+      "hotelKey": "shinjuku",
+      "tag": "Value",
+      "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-71915937/tokyu-stay-shinjuku-eastside/?Allianceid=8178829&SID=309509299&trip_sub1=Tokyu%20Stay%20Shinjuku%20Eastside&trip_sub3=D16483784",
+      "label": "Check Tokyu Stay Shinjuku Eastside on Trip.com"
+    },
+    {
+      "id": "nohga-hotel-ueno-tokyo",
+      "name": "Nohga Hotel Ueno Tokyo",
+      "area": "Ueno",
+      "price": "Check latest price",
+      "hotelKey": "ueno",
+      "tag": "Design",
+      "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-21890132/nohga-hotel-ueno/?Allianceid=8178829&SID=309509299&trip_sub1=Nohga%20Hotel%20Ueno%20Tokyo&trip_sub3=D16483791",
+      "label": "Check Nohga Hotel Ueno Tokyo on Trip.com"
+    },
+    {
+      "id": "gate-hotel-kaminarimon",
+      "name": "Gate Hotel Kaminarimon",
+      "area": "Asakusa",
+      "price": "Check latest price",
+      "hotelKey": "asakusa",
+      "tag": "Views",
+      "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-686539/the-gate-hotel-kaminarimon-by-hulic/?Allianceid=8178829&SID=309509299&trip_sub1=Gate%20Hotel%20Kaminarimon&trip_sub3=D16483833",
+      "label": "Check Gate Hotel Kaminarimon on Trip.com"
+    }
+  ],
+  "kyoto-station-vs-gion": [
+    {
+      "id": "hotel-granvia-kyoto",
+      "name": "Hotel Granvia Kyoto",
+      "area": "Kyoto Station",
+      "price": "Check latest price",
+      "hotelKey": "kyotoStation",
+      "tag": "Connected",
+      "tripUrl": "https://www.trip.com/hotels/kyoto-hotel-detail-993497/hotel-granvia-kyoto/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Granvia%20Kyoto&trip_sub3=D16483840",
+      "label": "Check Hotel Granvia Kyoto on Trip.com"
+    },
+    {
+      "id": "daiwa-roynet-kyoto-station",
+      "name": "Daiwa Roynet Kyoto Station",
+      "area": "Kyoto Station",
+      "price": "Check latest price",
+      "hotelKey": "kyotoStation",
+      "tag": "Value",
+      "tripUrl": "",
+      "label": "Check Daiwa Roynet Kyoto Station on Trip.com"
+    },
+    {
+      "id": "sowaka-gion",
+      "name": "Sowaka Gion",
+      "area": "Gion",
+      "price": "Check latest price",
+      "hotelKey": "gionKawaramachi",
+      "tag": "Ryokan",
+      "tripUrl": "https://www.trip.com/hotels/kyoto-hotel-detail-25098093/sowaka/?Allianceid=8178829&SID=309509299&trip_sub1=Sowaka%20Gion&trip_sub3=D16483938",
+      "label": "Check Sowaka Gion on Trip.com"
+    },
+    {
+      "id": "hotel-the-celestine-gion",
+      "name": "Hotel The Celestine Gion",
+      "area": "Gion / Kawaramachi",
+      "price": "Check latest price",
+      "hotelKey": "gionKawaramachi",
+      "tag": "",
+      "tripUrl": "https://www.trip.com/hotels/kyoto-hotel-detail-7045649/hotel-the-celestine-kyoto-gion/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20The%20Celestine%20Gion&trip_sub3=D16483987",
+      "label": "Check Hotel The Celestine Gion on Trip.com"
+    }
+  ],
+  "kawaguchiko": [
+    {
+      "id": "kozantei-ubuya",
+      "name": "Kozantei Ubuya",
+      "area": "Kawaguchiko",
+      "price": "Check latest price",
+      "hotelKey": "kawaguchiko",
+      "tag": "Fuji view",
+      "tripUrl": "",
+      "label": "Check Kozantei Ubuya on Trip.com"
+    },
+    {
+      "id": "fuji-lake-hotel",
+      "name": "Fuji Lake Hotel",
+      "area": "Kawaguchiko",
+      "price": "Check latest price",
+      "hotelKey": "kawaguchiko",
+      "tag": "",
+      "tripUrl": "https://www.trip.com/hotels/fujikawaguchiko-hotel-detail-704371/fuji-lake-hotel/?Allianceid=8178829&SID=309509299&trip_sub1=Fuji%20Lake%20Hotel&trip_sub3=D16484057",
+      "label": "Check Fuji Lake Hotel on Trip.com"
+    },
+    {
+      "id": "hotel-mystays-fuji",
+      "name": "Hotel Mystays Fuji",
+      "area": "Kawaguchiko",
+      "price": "Check latest price",
+      "hotelKey": "kawaguchiko",
+      "tag": "Budget",
+      "tripUrl": "https://www.trip.com/hotels/fujiyoshida-hotel-detail-5859418/hotel-mystays-fuji-onsen-resort/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Mystays%20Fuji&trip_sub3=D16484064",
+      "label": "Check Hotel Mystays Fuji on Trip.com"
+    }
+  ],
+  "where-to-stay-before-shinkansen": [
+    {
+      "id": "hotel-metropolitan-tokyo",
+      "name": "Hotel Metropolitan Tokyo",
+      "area": "Tokyo Station",
+      "price": "Check latest price",
+      "hotelKey": "tokyoStation",
+      "tag": "Shinkansen",
+      "tripUrl": "",
+      "label": "Check Hotel Metropolitan Tokyo on Trip.com"
+    },
+    {
+      "id": "hotel-gracery-shinjuku",
+      "name": "Hotel Gracery Shinjuku",
+      "area": "Shinjuku",
+      "price": "Check latest price",
+      "hotelKey": "shinjuku",
+      "tag": "Popular",
+      "tripUrl": "",
+      "label": "Check Hotel Gracery Shinjuku on Trip.com"
+    },
+    {
+      "id": "dormy-inn-ueno-okachimachi",
+      "name": "Dormy Inn Ueno Okachimachi",
+      "area": "Ueno",
+      "price": "Check latest price",
+      "hotelKey": "ueno",
+      "tag": "Budget",
+      "tripUrl": "",
+      "label": "Check Dormy Inn Ueno Okachimachi on Trip.com"
+    },
+    {
+      "id": "richmond-hotel-asakusa",
+      "name": "Richmond Hotel Asakusa",
+      "area": "Asakusa",
+      "price": "Check latest price",
+      "hotelKey": "asakusa",
+      "tag": "",
+      "tripUrl": "",
+      "label": "Check Richmond Hotel Asakusa on Trip.com"
+    }
+  ],
+  "tokyo-station-vs-shinjuku": [
+    {
+      "id": "hotel-metropolitan-tokyo",
+      "name": "Hotel Metropolitan Tokyo",
+      "area": "Tokyo Station",
+      "price": "Check latest price",
+      "hotelKey": "tokyoStation",
+      "tag": "Shinkansen",
+      "tripUrl": "",
+      "label": "Check Hotel Metropolitan Tokyo on Trip.com"
+    },
+    {
+      "id": "hotel-gracery-shinjuku",
+      "name": "Hotel Gracery Shinjuku",
+      "area": "Shinjuku",
+      "price": "Check latest price",
+      "hotelKey": "shinjuku",
+      "tag": "Popular",
+      "tripUrl": "",
+      "label": "Check Hotel Gracery Shinjuku on Trip.com"
+    },
+    {
+      "id": "tokyu-stay-shinjuku-eastside",
+      "name": "Tokyu Stay Shinjuku Eastside",
+      "area": "Shinjuku",
+      "price": "Check latest price",
+      "hotelKey": "shinjuku",
+      "tag": "Value",
+      "tripUrl": "",
+      "label": "Check Tokyu Stay Shinjuku Eastside on Trip.com"
+    }
+  ],
+  "ueno-vs-shinjuku": [
+    {
+      "id": "nohga-hotel-ueno-tokyo",
+      "name": "Nohga Hotel Ueno Tokyo",
+      "area": "Ueno",
+      "price": "Check latest price",
+      "hotelKey": "ueno",
+      "tag": "Design",
+      "tripUrl": "",
+      "label": "Check Nohga Hotel Ueno Tokyo on Trip.com"
+    },
+    {
+      "id": "dormy-inn-ueno-okachimachi",
+      "name": "Dormy Inn Ueno Okachimachi",
+      "area": "Ueno",
+      "price": "Check latest price",
+      "hotelKey": "ueno",
+      "tag": "Budget",
+      "tripUrl": "",
+      "label": "Check Dormy Inn Ueno Okachimachi on Trip.com"
+    },
+    {
+      "id": "hotel-gracery-shinjuku",
+      "name": "Hotel Gracery Shinjuku",
+      "area": "Shinjuku",
+      "price": "Check latest price",
+      "hotelKey": "shinjuku",
+      "tag": "Popular",
+      "tripUrl": "",
+      "label": "Check Hotel Gracery Shinjuku on Trip.com"
+    },
+    {
+      "id": "tokyu-stay-shinjuku-eastside",
+      "name": "Tokyu Stay Shinjuku Eastside",
+      "area": "Shinjuku",
+      "price": "Check latest price",
+      "hotelKey": "shinjuku",
+      "tag": "Value",
+      "tripUrl": "",
+      "label": "Check Tokyu Stay Shinjuku Eastside on Trip.com"
+    }
+  ],
+  "kyoto-first-time": [
+    {
+      "id": "hotel-granvia-kyoto",
+      "name": "Hotel Granvia Kyoto",
+      "area": "Kyoto Station",
+      "price": "Check latest price",
+      "hotelKey": "kyotoStation",
+      "tag": "Connected",
+      "tripUrl": "",
+      "label": "Check Hotel Granvia Kyoto on Trip.com"
+    },
+    {
+      "id": "daiwa-roynet-kyoto-station",
+      "name": "Daiwa Roynet Kyoto Station",
+      "area": "Kyoto Station",
+      "price": "Check latest price",
+      "hotelKey": "kyotoStation",
+      "tag": "Value",
+      "tripUrl": "",
+      "label": "Check Daiwa Roynet Kyoto Station on Trip.com"
+    },
+    {
+      "id": "sowaka-gion",
+      "name": "Sowaka Gion",
+      "area": "Gion",
+      "price": "Check latest price",
+      "hotelKey": "gionKawaramachi",
+      "tag": "Ryokan",
+      "tripUrl": "",
+      "label": "Check Sowaka Gion on Trip.com"
+    },
+    {
+      "id": "hotel-the-celestine-gion",
+      "name": "Hotel The Celestine Gion",
+      "area": "Gion / Kawaramachi",
+      "price": "Check latest price",
+      "hotelKey": "gionKawaramachi",
+      "tag": "",
+      "tripUrl": "",
+      "label": "Check Hotel The Celestine Gion on Trip.com"
+    }
+  ],
+  "osaka-first-time": [
+    {
+      "id": "cross-hotel-osaka",
+      "name": "Cross Hotel Osaka",
+      "area": "Namba",
+      "price": "Check latest price",
+      "hotelKey": "namba",
+      "tag": "Location",
+      "tripUrl": "",
+      "label": "Check Cross Hotel Osaka on Trip.com"
+    },
+    {
+      "id": "hotel-granvia-osaka",
+      "name": "Hotel Granvia Osaka",
+      "area": "Umeda",
+      "price": "Check latest price",
+      "hotelKey": "umeda",
+      "tag": "Transport",
+      "tripUrl": "",
+      "label": "Check Hotel Granvia Osaka on Trip.com"
+    },
+    {
+      "id": "remm-shin-osaka",
+      "name": "Remm Shin-Osaka",
+      "area": "Shin-Osaka",
+      "price": "Check latest price",
+      "hotelKey": "shinOsaka",
+      "tag": "Shinkansen",
+      "tripUrl": "",
+      "label": "Check Remm Shin-Osaka on Trip.com"
+    }
+  ],
+  "namba-vs-umeda": [
+    {
+      "id": "cross-hotel-osaka",
+      "name": "Cross Hotel Osaka",
+      "area": "Namba",
+      "price": "Check latest price",
+      "hotelKey": "namba",
+      "tag": "Location",
+      "tripUrl": "",
+      "label": "Check Cross Hotel Osaka on Trip.com"
+    },
+    {
+      "id": "hotel-monterey-grasmere",
+      "name": "Hotel Monterey Grasmere",
+      "area": "Namba",
+      "price": "Check latest price",
+      "hotelKey": "namba",
+      "tag": "Value",
+      "tripUrl": "",
+      "label": "Check Hotel Monterey Grasmere on Trip.com"
+    },
+    {
+      "id": "hotel-granvia-osaka",
+      "name": "Hotel Granvia Osaka",
+      "area": "Umeda",
+      "price": "Check latest price",
+      "hotelKey": "umeda",
+      "tag": "Transport",
+      "tripUrl": "",
+      "label": "Check Hotel Granvia Osaka on Trip.com"
+    },
+    {
+      "id": "hotel-hankyu-international",
+      "name": "Hotel Hankyu International",
+      "area": "Umeda",
+      "price": "Check latest price",
+      "hotelKey": "umeda",
+      "tag": "",
+      "tripUrl": "",
+      "label": "Check Hotel Hankyu International on Trip.com"
+    }
+  ],
+  "shin-osaka-vs-namba": [
+    {
+      "id": "remm-shin-osaka",
+      "name": "Remm Shin-Osaka",
+      "area": "Shin-Osaka",
+      "price": "Check latest price",
+      "hotelKey": "shinOsaka",
+      "tag": "Shinkansen",
+      "tripUrl": "",
+      "label": "Check Remm Shin-Osaka on Trip.com"
+    },
+    {
+      "id": "courtyard-marriott-shin-osaka",
+      "name": "Courtyard by Marriott Shin-Osaka",
+      "area": "Shin-Osaka",
+      "price": "Check latest price",
+      "hotelKey": "shinOsaka",
+      "tag": "Business",
+      "tripUrl": "",
+      "label": "Check Courtyard by Marriott Shin-Osaka on Trip.com"
+    },
+    {
+      "id": "cross-hotel-osaka",
+      "name": "Cross Hotel Osaka",
+      "area": "Namba",
+      "price": "Check latest price",
+      "hotelKey": "namba",
+      "tag": "Location",
+      "tripUrl": "",
+      "label": "Check Cross Hotel Osaka on Trip.com"
+    },
+    {
+      "id": "hotel-monterey-grasmere",
+      "name": "Hotel Monterey Grasmere",
+      "area": "Namba",
+      "price": "Check latest price",
+      "hotelKey": "namba",
+      "tag": "Value",
+      "tripUrl": "",
+      "label": "Check Hotel Monterey Grasmere on Trip.com"
+    }
+  ],
+  "tokyo-station-hotels-before-shinkansen": [
+    {
+      "id": "hotel-metropolitan-tokyo-marunouchi",
+      "name": "Hotel Metropolitan Tokyo Marunouchi",
+      "area": "Tokyo Station",
+      "price": "Check latest price",
+      "hotelKey": "tokyoStation",
+      "tag": "Connected",
+      "tripUrl": "",
+      "label": "Check Hotel Metropolitan Tokyo Marunouchi on Trip.com"
+    },
+    {
+      "id": "hotel-ryumeikan-tokyo",
+      "name": "Hotel Ryumeikan Tokyo",
+      "area": "Tokyo Station",
+      "price": "Check latest price",
+      "hotelKey": "tokyoStation",
+      "tag": "Value",
+      "tripUrl": "",
+      "label": "Check Hotel Ryumeikan Tokyo on Trip.com"
+    },
+    {
+      "id": "hotel-gracery-shinjuku",
+      "name": "Hotel Gracery Shinjuku",
+      "area": "Shinjuku",
+      "price": "Check latest price",
+      "hotelKey": "shinjuku",
+      "tag": "Nightlife",
+      "tripUrl": "",
+      "label": "Check Hotel Gracery Shinjuku on Trip.com"
+    },
+    {
+      "id": "nohga-hotel-ueno-tokyo",
+      "name": "Nohga Hotel Ueno Tokyo",
+      "area": "Ueno",
+      "price": "Check latest price",
+      "hotelKey": "ueno",
+      "tag": "Budget",
+      "tripUrl": "",
+      "label": "Check Nohga Hotel Ueno Tokyo on Trip.com"
+    }
+  ],
+  "asakusa-vs-ueno": [
+    {
+      "id": "gate-hotel-kaminarimon",
+      "name": "Gate Hotel Kaminarimon",
+      "area": "Asakusa",
+      "price": "Check latest price",
+      "hotelKey": "asakusa",
+      "tag": "Views",
+      "tripUrl": "",
+      "label": "Check Gate Hotel Kaminarimon on Trip.com"
+    },
+    {
+      "id": "richmond-hotel-asakusa",
+      "name": "Richmond Hotel Asakusa",
+      "area": "Asakusa",
+      "price": "Check latest price",
+      "hotelKey": "asakusa",
+      "tag": "Value",
+      "tripUrl": "",
+      "label": "Check Richmond Hotel Asakusa on Trip.com"
+    },
+    {
+      "id": "nohga-hotel-ueno-tokyo",
+      "name": "Nohga Hotel Ueno Tokyo",
+      "area": "Ueno",
+      "price": "Check latest price",
+      "hotelKey": "ueno",
+      "tag": "Design",
+      "tripUrl": "",
+      "label": "Check Nohga Hotel Ueno Tokyo on Trip.com"
+    },
+    {
+      "id": "mimaru-tokyo-ueno",
+      "name": "MIMARU Tokyo Ueno",
+      "area": "Ueno",
+      "price": "Check latest price",
+      "hotelKey": "ueno",
+      "tag": "Family",
+      "tripUrl": "",
+      "label": "Check MIMARU Tokyo Ueno on Trip.com"
+    }
+  ]
+}
