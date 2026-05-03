@@ -15,7 +15,7 @@ import {
   Train,
   Wifi,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { BrandMark } from "@/components/ui/BrandMark";
 import { SiteHeader } from "./components/SiteHeader";
@@ -28,7 +28,7 @@ import {
   LocalLensCard,
   type LocalLensPick,
 } from "@/components/content/LocalTokyoCards";
-import { trackAffiliateClick, trackEvent } from "@/lib/analytics";
+import { getProviderFromHref, trackAffiliateClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
   type DirectionId,
   type FujiVisibility,
@@ -129,6 +129,7 @@ function SectionTitle({
 
 export default function HomeClient() {
   const t = useTranslations("home");
+  const locale = useLocale();
   const [direction, setDirection] = useState<DirectionId>("tokyo-osaka");
   const [hasChecked, setHasChecked] = useState(false);
   const [visData, setVisData] = useState<FujiVisibility | null>(null);
@@ -178,11 +179,11 @@ export default function HomeClient() {
   ], [t]);
 
   const essentialCtas = useMemo(() => [
-    { title: t("essentialsCta.shinkansen.title"), description: t("essentialsCta.shinkansen.desc"), href: SHINKANSEN_TICKET_URL, icon: Train, tracking: "home_essentials_shinkansen" },
-    { title: t("essentialsCta.esim.title"), description: t("essentialsCta.esim.desc"), href: ESIM_URL, icon: Wifi, tracking: "home_essentials_esim" },
-    { title: t("essentialsCta.airportTransfer.title"), description: t("essentialsCta.airportTransfer.desc"), href: AIRPORT_TRANSFER_URL, icon: Car, tracking: "home_essentials_airport_transfer" },
-    { title: t("essentialsCta.jrPass.title"), description: t("essentialsCta.jrPass.desc"), href: JR_PASS_URL, icon: Train, tracking: "home_essentials_jrpass" },
-    { title: t("essentialsCta.insurance.title"), description: t("essentialsCta.insurance.desc"), href: INSURANCE_URL, icon: ShieldCheck, tracking: "home_essentials_insurance" },
+    { title: t("essentialsCta.shinkansen.title"), description: t("essentialsCta.shinkansen.desc"), href: SHINKANSEN_TICKET_URL, icon: Train, tracking: "home_essentials_shinkansen", category: "train" as const },
+    { title: t("essentialsCta.esim.title"), description: t("essentialsCta.esim.desc"), href: ESIM_URL, icon: Wifi, tracking: "home_essentials_esim", category: "esim" as const },
+    { title: t("essentialsCta.airportTransfer.title"), description: t("essentialsCta.airportTransfer.desc"), href: AIRPORT_TRANSFER_URL, icon: Car, tracking: "home_essentials_airport_transfer", category: "transfer" as const },
+    { title: t("essentialsCta.jrPass.title"), description: t("essentialsCta.jrPass.desc"), href: JR_PASS_URL, icon: Train, tracking: "home_essentials_jrpass", category: "train" as const },
+    { title: t("essentialsCta.insurance.title"), description: t("essentialsCta.insurance.desc"), href: INSURANCE_URL, icon: ShieldCheck, tracking: "home_essentials_insurance", category: "insurance" as const },
   ], [t]);
 
   const trustItems = useMemo(() => [
@@ -319,7 +320,14 @@ export default function HomeClient() {
                     href={link.href}
                     target="_blank"
                     rel={AFFILIATE_REL}
-                    onClick={() => trackAffiliateClick("home-popular-links", link.tracking ?? link.label)}
+                    onClick={() => trackAffiliateClick({
+                      category: "esim",
+                      provider: getProviderFromHref(link.href),
+                      placement: "home_popular",
+                      href: link.href,
+                      label: link.tracking ?? link.label,
+                      locale,
+                    })}
                     className={`${buttonAffiliatePill} h-[42px] px-5 text-sm`}
                   >
                     {content}
@@ -348,7 +356,16 @@ export default function HomeClient() {
             <SeatCheckerPanel
               direction={direction}
               onDirectionChange={handleDirectionChange}
-              onCheck={() => setHasChecked(true)}
+              onCheck={() => {
+                setHasChecked(true);
+                trackSeatCheckComplete({
+                  direction,
+                  route: direction,
+                  result_seat: recommendation.standardWindowSeat,
+                  result_side: recommendation.sideLabel,
+                  locale,
+                });
+              }}
               visibility={visData}
               visibilityLoading={visLoading}
               visibilitySlowLoading={visSlowLoading}
@@ -375,7 +392,14 @@ export default function HomeClient() {
                 href={SHINKANSEN_TICKET_URL}
                 target="_blank"
                 rel={AFFILIATE_REL}
-                onClick={() => trackAffiliateClick("home-after-seat", "shinkansen_ticket")}
+                onClick={() => trackAffiliateClick({
+                  category: "train",
+                  provider: "klook",
+                  placement: "home_after_seat",
+                  href: SHINKANSEN_TICKET_URL,
+                  label: "shinkansen_ticket",
+                  locale,
+                })}
                 className={`${buttonAffiliate} h-11 px-4 text-xs`}
               >
                 <Train className="h-3.5 w-3.5" />
@@ -514,7 +538,14 @@ export default function HomeClient() {
                   href={item.href}
                   target="_blank"
                   rel={AFFILIATE_REL}
-                  onClick={() => trackAffiliateClick("home-essentials", item.tracking)}
+                  onClick={() => trackAffiliateClick({
+                    category: item.category,
+                    provider: getProviderFromHref(item.href),
+                    placement: "home_essentials",
+                    href: item.href,
+                    label: item.tracking,
+                    locale,
+                  })}
                   className="flex min-h-[110px] items-center gap-4 rounded-[18px] border border-[#ffb56b] bg-[#fff8f0] p-5 shadow-[0_18px_45px_rgba(255,122,0,0.12)] transition-transform hover:-translate-y-1 hover:border-[#ff7a00]"
                 >
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ff7a00] text-white">
@@ -538,7 +569,14 @@ export default function HomeClient() {
                   href={item.href}
                   target="_blank"
                   rel={AFFILIATE_REL}
-                  onClick={() => trackAffiliateClick("home-essentials", item.tracking)}
+                  onClick={() => trackAffiliateClick({
+                    category: item.category,
+                    provider: getProviderFromHref(item.href),
+                    placement: "home_essentials",
+                    href: item.href,
+                    label: item.tracking,
+                    locale,
+                  })}
                   className="flex min-h-[110px] items-center gap-4 rounded-[18px] border border-[#ffb56b] bg-[#fff8f0] p-5 shadow-[0_18px_45px_rgba(255,122,0,0.12)] transition-transform hover:-translate-y-1 hover:border-[#ff7a00]"
                 >
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ff7a00] text-white">

@@ -29,12 +29,19 @@ export type AffiliateClickParams = {
     | "airport_transfer"
     | "local_tokyo"
     | "footer"
-    | "next_steps";
+    | "next_steps"
+    | "home_popular"
+    | "home_essentials"
+    | "home_after_seat";
   page_path?: string;
   locale?: string;
   href: string;
   label: string;
   area?: string;
+  itinerary_slug?: string;
+  day_number?: number;
+  cta_type?: "stay" | "booking" | "prepare";
+  hotel_name?: string;
 };
 
 export function getProviderFromHref(href: string): AffiliateClickParams["provider"] {
@@ -49,40 +56,51 @@ export function getProviderFromHref(href: string): AffiliateClickParams["provide
   return "other";
 }
 
-export function trackAffiliateClick(provider: string, destination: string): void;
-export function trackAffiliateClick(params: AffiliateClickParams): void;
-export function trackAffiliateClick(
-  providerOrParams: string | AffiliateClickParams,
-  destination?: string,
-) {
-  if (typeof providerOrParams === "string") {
-    trackEvent({
-      action: "affiliate_click",
-      category: providerOrParams,
-      label: destination,
-      params: {
-        provider: providerOrParams,
-        label: destination,
-        page_path: typeof window === "undefined" ? undefined : window.location.pathname,
-      },
-    });
-    return;
-  }
+export function trackAffiliateClick(params: AffiliateClickParams) {
   const pagePath =
-    providerOrParams.page_path ??
+    params.page_path ??
     (typeof window === "undefined" ? undefined : window.location.pathname);
   trackEvent({
     action: "affiliate_click",
-    category: providerOrParams.category,
-    label: providerOrParams.label,
+    category: params.category,
+    label: params.label,
     params: {
-      provider: providerOrParams.provider,
-      placement: providerOrParams.placement,
+      provider: params.provider,
+      placement: params.placement,
       page_path: pagePath,
-      locale: providerOrParams.locale,
-      href: providerOrParams.href,
-      label: providerOrParams.label,
-      area: providerOrParams.area,
+      locale: params.locale,
+      href: params.href,
+      label: params.label,
+      area: params.area,
+      itinerary_slug: params.itinerary_slug,
+      day_number: params.day_number,
+      cta_type: params.cta_type,
+      hotel_name: params.hotel_name,
+    },
+  });
+}
+
+export function trackSeatCheckComplete(params: {
+  direction: string;
+  route: string;
+  result_seat: string;
+  result_side: string;
+  locale?: string;
+  page_path?: string;
+}) {
+  trackEvent({
+    action: "seat_check_complete",
+    category: "seat_checker",
+    label: `${params.direction} → ${params.result_seat}`,
+    params: {
+      direction: params.direction,
+      route: params.route,
+      result_seat: params.result_seat,
+      result_side: params.result_side,
+      locale: params.locale,
+      page_path:
+        params.page_path ??
+        (typeof window === "undefined" ? undefined : window.location.pathname),
     },
   });
 }

@@ -20,7 +20,8 @@ export function DayCard({
   prepareCta,
   locale = "en",
   pagePath,
-}: ItineraryDay & { locale?: string; pagePath?: string }) {
+  itinerarySlug,
+}: ItineraryDay & { locale?: string; pagePath?: string; itinerarySlug?: string }) {
   const isBookingExternal = bookingCta?.href.startsWith("http");
   const isPrepareExternal = prepareCta?.href.startsWith("http");
   const hotel = stayHotelKey ? getHotelLink(stayHotelKey) : null;
@@ -104,6 +105,10 @@ export function DayCard({
                     href: analyticsStayLink,
                     label: stayLabel,
                     area: hotel ? `${hotel.city}: ${hotel.areaName}` : stayArea,
+                    itinerary_slug: itinerarySlug,
+                    day_number: day,
+                    cta_type: "stay",
+                    hotel_name: hotel?.areaName,
                   })
                 }
                 className="inline-flex min-h-10 items-center gap-1 rounded-xl border border-[#ff7a00] bg-[#fff3e7] px-3 py-2 text-xs font-semibold text-[#b44b00] hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
@@ -127,6 +132,9 @@ export function DayCard({
                       locale,
                       href: bookingCta.href,
                       label: bookingCta.label,
+                      itinerary_slug: itinerarySlug,
+                      day_number: day,
+                      cta_type: "booking",
                     });
                   } else {
                     trackCtaClick({
@@ -165,6 +173,9 @@ export function DayCard({
                       locale,
                       href: prepareCta.href,
                       label: prepareCta.label,
+                      itinerary_slug: itinerarySlug,
+                      day_number: day,
+                      cta_type: "prepare",
                     });
                   } else {
                     trackCtaClick({

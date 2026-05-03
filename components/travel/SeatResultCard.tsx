@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowLeft, ArrowRight, Bed, Info, Luggage, Mountain, Share2, Train } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { FujiVisibility, SeatRecommendation } from "@/lib/seat-checker";
 import { Card } from "@/components/ui/Card";
@@ -36,6 +36,7 @@ export function SeatResultCard({
   highlighted = false,
 }: SeatResultCardProps) {
   const t = useTranslations("home");
+  const locale = useLocale();
   const faqItems = t.raw("faq") as Array<{ q: string; a: string }>;
   const fujiOnRight = recommendation.sideLabel === "right";
   const seatRows = ["14", "15", "16"];
@@ -101,6 +102,7 @@ export function SeatResultCard({
                   placement: "seat_result",
                   href: KLOOK_URL,
                   label: "Book your Shinkansen ticket",
+                  locale,
                 })
               }
               className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-center text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700] active:brightness-95"
@@ -134,6 +136,7 @@ export function SeatResultCard({
                   placement: "seat_result",
                   href: ESIM_URL,
                   label: "Prepare eSIM & airport transfer",
+                  locale,
                 })
               }
               className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"

@@ -16,8 +16,18 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Card } from "@/components/ui/Card";
 import type { TripPick } from "@/lib/trip-picks";
-import { trackAffiliateClick } from "@/lib/analytics";
+import { type AffiliateClickParams, getProviderFromHref, trackAffiliateClick } from "@/lib/analytics";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+
+const CATEGORY_MAP: Record<string, AffiliateClickParams["category"]> = {
+  train: "train",
+  connectivity: "esim",
+  transfer: "transfer",
+  stay: "hotel",
+  experience: "activity",
+  itinerary: "activity",
+  insurance: "insurance",
+};
 
 const STORAGE_KEY = "fujiseat-trip-checks";
 
@@ -153,7 +163,13 @@ export function TripPicks({ picks, compact = false }: TripPicksProps) {
 
           if (isExternal) {
             return (
-              <a key={pick.id} href={pick.href} target="_blank" rel={AFFILIATE_REL} className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-sky-300" onClick={() => trackAffiliateClick("trip-picks", pick.title)}>
+              <a key={pick.id} href={pick.href} target="_blank" rel={AFFILIATE_REL} className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-sky-300" onClick={() => trackAffiliateClick({
+                category: CATEGORY_MAP[pick.category] ?? "activity",
+                provider: getProviderFromHref(pick.href),
+                placement: "next_steps",
+                href: pick.href,
+                label: pick.title,
+              })}>
                 {inner}
               </a>
             );

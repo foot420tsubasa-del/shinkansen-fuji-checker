@@ -126,7 +126,7 @@ export default async function ItineraryPage({ params }: Props) {
             <h2 className="mb-6 text-lg font-semibold text-slate-950">Day-by-day plan</h2>
             <div>
               {page.days.map((day) => (
-                <DayCard key={day.day} {...day} locale={locale} pagePath={pagePath} />
+                <DayCard key={day.day} {...day} locale={locale} pagePath={pagePath} itinerarySlug={slug} />
               ))}
             </div>
           </section>

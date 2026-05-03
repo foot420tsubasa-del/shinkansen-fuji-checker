@@ -1,12 +1,13 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { JR_PASS_URL, SHINKANSEN_TICKET_URL, ESIM_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { trackAffiliateClick } from "@/lib/analytics";
 
 export function KlookCTA() {
   const t = useTranslations("klook");
+  const locale = useLocale();
 
   return (
     <div className="space-y-3 rounded-2xl border border-[#ffb56b] bg-[#fff3e7] px-4 py-4 shadow-sm shadow-orange-100">
@@ -23,6 +24,7 @@ export function KlookCTA() {
               placement: "guide_top",
               href: SHINKANSEN_TICKET_URL,
               label: "Book Shinkansen",
+              locale,
             })
           }
           className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700] active:brightness-95"
@@ -40,6 +42,7 @@ export function KlookCTA() {
               placement: "guide_top",
               href: JR_PASS_URL,
               label: "JR Pass",
+              locale,
             })
           }
           className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
@@ -57,6 +60,7 @@ export function KlookCTA() {
               placement: "guide_top",
               href: ESIM_URL,
               label: "eSIM",
+              locale,
             })
           }
           className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
