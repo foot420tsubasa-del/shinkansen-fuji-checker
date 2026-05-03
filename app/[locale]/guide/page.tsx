@@ -639,13 +639,13 @@ export default async function GuidePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }}
       />
       <SiteHeader />
-      <div className="flex-1 flex flex-col px-4 py-6 max-w-2xl mx-auto w-full">
-        <div className="mb-6">
-          <h1 className="text-lg font-semibold tracking-tight text-slate-950">
+      <div className="flex-1 flex flex-col px-4 py-6 lg:py-10 max-w-2xl lg:max-w-5xl mx-auto w-full">
+        <div className="mb-6 lg:mb-8">
+          <h1 className="text-lg lg:text-[26px] lg:leading-tight font-semibold tracking-tight text-slate-950">
             {displayTitle}
           </h1>
-          <p className="mt-1 text-xs text-slate-500">{t("subtitle")}</p>
-          <p className="mt-0.5 text-[10px] text-slate-500">
+          <p className="mt-1 text-xs lg:text-sm text-slate-500">{t("subtitle")}</p>
+          <p className="mt-0.5 text-[10px] lg:text-xs text-slate-500">
             {t("writtenBy")}
           </p>
         </div>
@@ -681,8 +681,12 @@ export default async function GuidePage({ params }: Props) {
           </section>
         )}
 
+        {/* Two-column layout on desktop: article + sidebar */}
+        <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-10 lg:items-start">
+        <div className="min-w-0">
+
         {/* Intro */}
-        <section className="mb-5 text-[13px] leading-relaxed text-slate-700 bg-white/90 border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">
+        <section className="mb-5 text-[13px] lg:text-sm leading-relaxed text-slate-700 bg-white/90 border border-slate-200 rounded-2xl px-4 py-3 lg:px-6 lg:py-4 shadow-sm shadow-slate-200/70">
           <h2 className="text-sm font-semibold text-slate-900 mb-2">
             {t("introH2")}
           </h2>
@@ -693,7 +697,8 @@ export default async function GuidePage({ params }: Props) {
           <p className="mt-2 text-[12px] text-slate-600">{t("introP2")}</p>
         </section>
 
-        {/* Quick navigation */}
+        {/* Quick navigation — mobile only (desktop version in sidebar) */}
+        <div className="lg:hidden">
         <section className="mb-5 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-2.5">
             {copy.quickNav}
@@ -727,9 +732,10 @@ export default async function GuidePage({ params }: Props) {
             </Link>
           </div>
         </section>
+        </div>
 
         {/* TL;DR */}
-        <section id="tldr" className="mb-5 text-[13px] leading-relaxed text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">
+        <section id="tldr" className="mb-5 text-[13px] lg:text-sm leading-relaxed text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 lg:px-6 lg:py-4 shadow-sm shadow-slate-200/70">
           <h2 className="text-sm font-semibold text-slate-900 mb-2">
             {copy.tldrH2}
           </h2>
@@ -742,6 +748,8 @@ export default async function GuidePage({ params }: Props) {
           </ul>
         </section>
 
+        {/* Seat guides — mobile only (desktop version in sidebar) */}
+        <div className="lg:hidden">
         <section className="mb-5 rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-4 shadow-sm">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-sky-700">
             Seat guides by topic
@@ -765,11 +773,15 @@ export default async function GuidePage({ params }: Props) {
             </Link>
           </div>
         </section>
+        </div>
 
-        <div className="mb-6">
+        {/* Next steps + Trip Picks — visible on all screen sizes, in main column */}
+        <div className="mb-6 lg:mb-8">
           <GuideNextSteps />
         </div>
 
+        {/* Continue planning — mobile only (desktop version in sidebar) */}
+        <div className="lg:hidden">
         <section className="mb-6 rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm shadow-slate-200/70">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
             Continue planning
@@ -804,9 +816,10 @@ export default async function GuidePage({ params }: Props) {
             </Link>
           </div>
         </section>
+        </div>
 
-        {/* Jump to section */}
-        <div className="mb-5 text-[12px] text-slate-500 leading-relaxed">
+        {/* Jump to section — mobile only */}
+        <div className="mb-5 text-[12px] text-slate-500 leading-relaxed lg:hidden">
           <span className="font-semibold text-slate-600">{copy.jumpTo} </span>
           <a href="#tldr" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpTldr}</a>
           {" · "}
@@ -823,9 +836,9 @@ export default async function GuidePage({ params }: Props) {
           <a href="#faq" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpFaq}</a>
         </div>
 
-        <div className="space-y-6 text-[13px] leading-relaxed text-slate-700">
-          <section id="which-side" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+        <div className="space-y-6 lg:space-y-8 text-[13px] lg:text-sm leading-relaxed text-slate-700">
+          <section id="which-side" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
               {copy.whichSideH2}
             </h2>
@@ -850,8 +863,8 @@ export default async function GuidePage({ params }: Props) {
             <p className="mt-2 text-[12px] text-slate-600">{t("s1Note")}</p>
           </section>
 
-          <section id="seat-letters" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+          <section id="seat-letters" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
               {copy.lettersH2}
             </h2>
@@ -876,8 +889,8 @@ export default async function GuidePage({ params }: Props) {
             <p className="text-[12px] text-slate-600">{copy.whyEText}</p>
           </section>
 
-          <section id="when-to-see" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+          <section id="when-to-see" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
               <Info className="h-4 w-4 text-sky-600" />
               {copy.whenH2}
             </h2>
@@ -912,8 +925,8 @@ export default async function GuidePage({ params }: Props) {
             </p>
           </section>
 
-          <section id="route-zone" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+          <section id="route-zone" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
               <Mountain className="h-4 w-4 text-sky-600" />
               {copy.routeH2}
             </h2>
@@ -931,8 +944,8 @@ export default async function GuidePage({ params }: Props) {
             </ul>
           </section>
 
-          <section id="nozomi-hikari-kodama" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+          <section id="nozomi-hikari-kodama" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
               {copy.trainTypeH2}
             </h2>
@@ -947,8 +960,8 @@ export default async function GuidePage({ params }: Props) {
             <p className="text-[12px] text-slate-600">{copy.typeSeatText}</p>
           </section>
 
-          <section id="jr-pass" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+          <section id="jr-pass" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
               {copy.jrPassH2}
             </h2>
@@ -990,8 +1003,8 @@ export default async function GuidePage({ params }: Props) {
             </p>
           </section>
 
-          <section id="book-seat-e" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+          <section id="book-seat-e" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
               <Train className="h-4 w-4 text-sky-600" />
               {copy.bookH2}
             </h2>
@@ -1015,8 +1028,8 @@ export default async function GuidePage({ params }: Props) {
             </div>
           </section>
 
-          <section id="common-mistakes" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+          <section id="common-mistakes" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
+            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
               <Info className="h-4 w-4 text-sky-600" />
               {copy.mistakesH2 ?? t("s4H2")}
             </h2>
@@ -1049,7 +1062,7 @@ export default async function GuidePage({ params }: Props) {
           {renderTravelEssentials()}
 
           {/* Section D: FAQ */}
-          <section id="faq" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 shadow-sm shadow-slate-200/60">
+          <section id="faq" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-3">
               <Info className="h-4 w-4 text-sky-600" />
               {copy.faqH2 ?? t("faqH2")}
@@ -1073,8 +1086,8 @@ export default async function GuidePage({ params }: Props) {
           </section>
 
           {/* Section 5: Make it easy */}
-          <section className="bg-sky-50 border border-sky-200 rounded-2xl px-4 py-4 shadow-sm shadow-sky-100">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-2.5">
+          <section className="bg-sky-50 border border-sky-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-sky-100">
+            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
               <Mountain className="h-4 w-4 text-sky-700" />
               {copy.makeEasyH2 ?? t("makeEasyH2")}
             </h2>
@@ -1100,6 +1113,99 @@ export default async function GuidePage({ params }: Props) {
           </footer>
 
         </div>
+        </div>{/* close main column */}
+
+        {/* Desktop sidebar */}
+        <aside className="hidden lg:block">
+          <div className="sticky top-6 space-y-4">
+            {/* Actions */}
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-3">
+                {copy.quickNav}
+              </p>
+              <div className="flex flex-col gap-2">
+                <Link
+                  href="/"
+                  className="inline-flex items-center justify-center rounded-xl border border-[#168a56] bg-[#168a56] px-3.5 py-2 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+                >
+                  {copy.checkSeatNow}
+                </Link>
+                <a
+                  href={KLOOK_URL}
+                  target="_blank"
+                  rel={AFFILIATE_REL}
+                  className="inline-flex items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3.5 py-2 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+                >
+                  {copy.bookOnKlook}
+                </a>
+                <Link
+                  href="/planner"
+                  className="inline-flex items-center justify-center rounded-xl border border-[#9fd7bd] bg-[#f0fbf6] px-3.5 py-2 text-[12px] font-semibold text-[#106b43] transition-colors hover:border-[#168a56] hover:bg-white"
+                >
+                  {t("commandCenterBtn")} →
+                </Link>
+              </div>
+            </div>
+
+            {/* Table of contents */}
+            <nav className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-3">
+                {copy.jumpTo}
+              </p>
+              <ul className="space-y-2 text-[12px]">
+                <li><a href="#tldr" className="text-slate-600 hover:text-slate-900 transition-colors">{copy.jumpTldr}</a></li>
+                <li><a href="#which-side" className="text-slate-600 hover:text-slate-900 transition-colors">{copy.jumpSide}</a></li>
+                <li><a href="#seat-letters" className="text-slate-600 hover:text-slate-900 transition-colors">{copy.jumpLetters}</a></li>
+                <li><a href="#when-to-see" className="text-slate-600 hover:text-slate-900 transition-colors">{copy.jumpTime}</a></li>
+                <li><a href="#route-zone" className="text-slate-600 hover:text-slate-900 transition-colors">{copy.jumpZone}</a></li>
+                <li><a href="#jr-pass" className="text-slate-600 hover:text-slate-900 transition-colors">{copy.jumpJrPass}</a></li>
+                <li><a href="#faq" className="text-slate-600 hover:text-slate-900 transition-colors">{copy.jumpFaq}</a></li>
+              </ul>
+            </nav>
+
+            {/* Seat guides */}
+            <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-4 shadow-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-sky-700 mb-3">
+                Seat guides by topic
+              </p>
+              <div className="space-y-2">
+                <Link href="/shinkansen-seat-e" className="block rounded-xl border border-sky-100 bg-white px-3 py-2.5 text-[12px] transition-colors hover:bg-sky-50">
+                  <span className="block font-semibold text-slate-900">Seat E guide</span>
+                </Link>
+                <Link href="/tokyo-to-kyoto-mt-fuji-seat" className="block rounded-xl border border-sky-100 bg-white px-3 py-2.5 text-[12px] transition-colors hover:bg-sky-50">
+                  <span className="block font-semibold text-slate-900">Tokyo → Kyoto seat</span>
+                </Link>
+                <Link href="/kyoto-to-tokyo-mt-fuji-seat" className="block rounded-xl border border-sky-100 bg-white px-3 py-2.5 text-[12px] transition-colors hover:bg-sky-50">
+                  <span className="block font-semibold text-slate-900">Kyoto → Tokyo seat</span>
+                </Link>
+                <Link href="/shinkansen-seat-letters" className="block rounded-xl border border-sky-100 bg-white px-3 py-2.5 text-[12px] transition-colors hover:bg-sky-50">
+                  <span className="block font-semibold text-slate-900">Seat letters explained</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Continue planning */}
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-3">
+                Continue planning
+              </p>
+              <div className="space-y-2">
+                <Link href="/local-tokyo" className="block rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] transition-colors hover:bg-white">
+                  <span className="block font-semibold text-slate-900">Local Tokyo</span>
+                </Link>
+                <Link href="/itineraries/7-day-first-time-japan" className="block rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] transition-colors hover:bg-white">
+                  <span className="block font-semibold text-slate-900">7-day itinerary</span>
+                </Link>
+                <Link href="/areas-to-stay/tokyo-first-time" className="block rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] transition-colors hover:bg-white">
+                  <span className="block font-semibold text-slate-900">Tokyo areas to stay</span>
+                </Link>
+              </div>
+            </div>
+
+          </div>
+        </aside>
+
+        </div>{/* close 2-column grid */}
       </div>
     </main>
   );
