@@ -1,0 +1,1277 @@
+{
+  "meta": {
+    "homeTitle": "Japan Trip Planner — Free Shinkansen Seat Checker, Stays & Itineraries",
+    "homeDesc": "Plan your Japan trip with one tool. Find the Mt. Fuji seat on the Shinkansen, compare Tokyo stay areas, airport transfers, and a 7-day itinerary. Built by a Japanese creator.",
+    "guideTitle": "How to See Mt. Fuji from the Shinkansen — Seat, Side & Timing Guide",
+    "guideDesc": "Which seat to book for the best Mt. Fuji view on the Shinkansen? Seat E, right side (Tokyo→Osaka). Complete guide with season tips, car numbers, JR Pass vs ticket comparison, and FAQ."
+  },
+  "klook": {
+    "heading": "Ready to book? Get your Shinkansen ticket via Klook (English OK)",
+    "book": "Book Shinkansen",
+    "jrPass": "Compare JR Pass"
+  },
+  "home": {
+    "brandTitle": "Plan Your Japan Trip — From Mt. Fuji Seat to Stay",
+    "brandSubtitle": "Free seat checker, itineraries, stay picks, and airport transfers — all in one place.",
+    "seatCheckerHeading": "Shinkansen Mt. Fuji Seat Checker",
+    "brandBuiltBy": "Built by a Japanese creator for international travellers who don't want to miss the Mt. Fuji view.",
+    "brandSource": "Based on publicly available information from JR Central",
+    "brandSourceLink": "view source",
+    "brandDisclaimer": "This is an independent, unofficial tool and not endorsed by any JR company. Seat info is provided as-is; always follow official guidance at stations and on trains.",
+    "weatherLabel": "Today near Shin-Fuji (weather)",
+    "step1": "1. Choose direction",
+    "step2": "2. Tap \"Check Best Seat\"",
+    "step3": "3. Book Seat E",
+    "tagline": "Stop staring at walls.",
+    "taglineBody": "We tell you exactly which window seat to book for the Mt. Fuji view.",
+    "directionLabel": "Direction",
+    "dirToOsaka": "Tokyo → Osaka / Kyoto",
+    "dirToTokyo": "Osaka / Kyoto → Tokyo",
+    "checkBtn": "Check best seat",
+    "trainNote": "Works for most Nozomi, Hikari and Kodama trains on the Tokaido Shinkansen line between Tokyo, Nagoya and Osaka/Kyoto.",
+    "readGuide": "Read the full Mt. Fuji view guide",
+    "visChecking": "Checking today's Mt. Fuji visibility…",
+    "visUnavailable": "Weather data unavailable – seat side is still correct, please check local forecast.",
+    "visLoadingFallback": "Visibility forecast loading — refresh in a moment for live data.",
+    "visErrorFallback": "Live visibility unavailable right now. Check season tips in the",
+    "visGuideLink": "guide",
+    "visHigh": "HIGH chance to see Mt. Fuji",
+    "visMedium": "MIXED – maybe visible",
+    "visLow": "LOW chance – likely hidden",
+    "resultBadge": "Mt. Fuji view side",
+    "resultDirectionLabel": "Direction:",
+    "resultBestSeat": "Best seat",
+    "resultSeatEMain": "Seat E is the window seat on the Mt. Fuji side in most standard 3+2 cars.",
+    "resultSeatDFallback": "If Seat E is sold out, Seat D is on the same side and still gives you a good chance to see Mt. Fuji.",
+    "resultVisToday": "Today's visibility near Shin-Fuji:",
+    "resultClouds": "{pct}% clouds",
+    "resultVisError": "Couldn't load weather data. Seat side is still correct, but please check the local forecast separately.",
+    "seaSide": "Sea side",
+    "aisle": "Aisle",
+    "fujisideLabel": "Mt. Fuji side",
+    "fujiWindowLabel": "Mt. Fuji window",
+    "trainInterior": "Train interior",
+    "fujisideArrow": "Window / Mt. Fuji side →",
+    "exampleRow": "Example row (standard 3+2 car)",
+    "timingNote": "Mt. Fuji is usually visible between Shin-Yokohama and Shizuoka, especially around Shin-Fuji station on clear days. You won't see it for the whole ride, so have your camera ready a bit before this section.",
+    "faqTitle": "Quick FAQ about Mt. Fuji & seats",
+    "faq": [
+      {
+        "q": "Seat E is sold out?",
+        "a": "Book seat D. It's on the same Mt. Fuji side, just one seat away from the window."
+      },
+      {
+        "q": "What about Green Cars?",
+        "a": "Layouts can be different, but the same left/right rule still applies for Mt. Fuji. Aim for a window seat on the Mt. Fuji side if possible."
+      },
+      {
+        "q": "Is this seat good for photos?",
+        "a": "Yes. Window seat E gives you one of the best chances to take clear photos and videos of Mt. Fuji from the train, without other passengers directly in front of you."
+      },
+      {
+        "q": "Is Mt. Fuji guaranteed?",
+        "a": "No. Cloudy or hazy weather can hide it even from the correct seat."
+      }
+    ],
+    "shareHeading": "Planning a trip with friends? Take a screenshot and share it with them so they remember:",
+    "shareTokyo": "Tokyo → Osaka/Kyoto: right side, Seat E",
+    "shareOsaka": "Osaka/Kyoto → Tokyo: left side, Seat E",
+    "shareBody": "It's one of the easiest ways to get that Mt. Fuji × Shinkansen shot.",
+    "essentialsTitle": "Travel essentials for your Japan trip",
+    "essentialsNote": "Klook affiliate links — English OK, instant mobile voucher.",
+    "jrPassTitle": "JR Pass & Shinkansen tickets",
+    "jrPassDesc": "Usually worth it only for multiple long-distance rides. Compare before buying.",
+    "esimTitle": "Japan eSIM",
+    "esimDesc": "Stay online the whole trip — no SIM swap needed.",
+    "nexTitle": "Narita Express (N'EX)",
+    "nexDesc": "Fast train from Narita Airport to central Tokyo.",
+    "insuranceTitle": "Klook Protect — Travel Insurance",
+    "insuranceDesc": "Trip cancellation, medical, and more. Peace of mind.",
+    "carTitle": "Private Car Charter",
+    "carDesc": "English-speaking driver. Great for families & day trips.",
+    "commandCenterCta": "Plan your full Japan trip",
+    "commandCenterDesc": "Route templates, booking essentials, weather, currency and checklist — all in one planner.",
+    "commandCenterBtn": "Open Trip Planner",
+    "planEssentialsEyebrow": "Trip essentials",
+    "planEssentialsTitle": "Plan your Japan trip essentials",
+    "planEssentialsDesc": "Rail, arrival, hotels, Fuji side trips, and city activities after choosing your Shinkansen seat.",
+    "planEssentialsCta": "Open essentials hub",
+    "makerNoteEyebrow": "Maker note",
+    "makerNoteBody": "I'm a Tokyo-based Japanese creator. I built this because tourists kept asking me the same Shinkansen + Mt. Fuji questions, and the English answers online were scattered or off. This site is the answer I'd give in person — just typed up.",
+    "makerNoteCta": "Read more →",
+    "footerEsim": "Need WiFi? Get eSIM",
+    "footerDisclaimer": "Based on publicly available information from JR Central. This is an independent, unofficial tool and not endorsed by any JR company. Seat info is provided as-is; always follow official guidance at stations and on trains.",
+    "footerBuiltBy": "Built by a Japanese creator. Powered by Klook affiliate links.",
+    "footerCredit": "Built by a Tokyo-based Japanese creator for international travellers.",
+    "footerIndependent": "Independent and unofficial. Based on publicly available information from JR Central.",
+    "footerAffiliate": "Some links are Klook affiliate links — using them helps keep this site free.",
+    "nav": {
+      "hub": "Japan travel utility hub",
+      "seat": "Seat Checker",
+      "planner": "Planner",
+      "guide": "Guide",
+      "decisions": "Trip decisions",
+      "questions": "Feedback"
+    },
+    "decisions": {
+      "eyebrow": "Travel utility hub",
+      "title": "Make the next Japan travel decision with less friction",
+      "desc": "Use the seat checker as the start of a practical Japan planning flow: where to stay, how to transfer, what route to take, and what to book before arrival.",
+      "stay-tokyo": {
+        "label": "Areas to stay",
+        "title": "Tokyo base decision",
+        "desc": "Shinjuku, Ueno, Asakusa, or Tokyo Station.",
+        "tradeoff": "Balance nightlife, airport access, and luggage ease.",
+        "cta": "Compare areas"
+      },
+      "transfer-narita": {
+        "label": "Airport transfers",
+        "title": "Narita to city",
+        "desc": "Choose between train, bus, and private transfer.",
+        "tradeoff": "Luggage and arrival time matter more than raw speed.",
+        "cta": "Compare options"
+      },
+      "itinerary-golden-route": {
+        "label": "Itinerary",
+        "title": "Tokyo to Kyoto shape",
+        "desc": "A simple first-time Japan route with Fuji on the way.",
+        "tradeoff": "Use the Shinkansen day as a planning anchor.",
+        "cta": "See itinerary"
+      },
+      "essentials": {
+        "label": "Essentials",
+        "title": "Before you land",
+        "desc": "eSIM, train booking, airport transfer, and backup plan.",
+        "tradeoff": "Small decisions that remove arrival-day friction.",
+        "cta": "Start with eSIM"
+      }
+    },
+    "tripPicks": {
+      "badge": "Trip Picks",
+      "title": "Pre-departure checklist",
+      "hint": "Tap the circle to mark each step done.",
+      "allSet": "All set — enjoy Japan!",
+      "note": "Partner links are shown only where they match the planning step.",
+      "itinerary": {
+        "title": "Choose your route",
+        "desc": "7-day golden route or 5/10/14-day alternatives.",
+        "cta": "See itineraries"
+      },
+      "shinkansen": {
+        "title": "Single Shinkansen ticket",
+        "desc": "Book after you know the Fuji-side seat.",
+        "cta": "Book train"
+      },
+      "jr-pass": {
+        "title": "Compare JR Pass",
+        "desc": "Usually worth it only for multiple long-distance rides.",
+        "cta": "Compare"
+      },
+      "esim": {
+        "title": "Japan eSIM",
+        "desc": "Set up data before landing — maps, translate, transit.",
+        "cta": "Get eSIM"
+      },
+      "airport-transfer": {
+        "title": "Airport transfer",
+        "desc": "Sort Narita/Haneda to city before arrival day.",
+        "cta": "Compare options"
+      },
+      "tokyo-stay": {
+        "title": "Tokyo stay",
+        "desc": "Use Shinjuku, Ueno, or Tokyo Station as your base.",
+        "cta": "Compare areas"
+      },
+      "insurance": {
+        "title": "Travel insurance",
+        "desc": "Medical + trip cancellation. Easy to skip, hard to regret.",
+        "cta": "See plans"
+      }
+    },
+    "featureCards": {
+      "seatChecker": {
+        "title": "Seat Checker",
+        "desc": "Find the best Shinkansen seats for Mt. Fuji views."
+      },
+      "tripPlanner": {
+        "title": "Trip Planner",
+        "desc": "Build your itinerary with routes, timing, and essentials."
+      },
+      "quietTokyo": {
+        "title": "Quiet Tokyo",
+        "desc": "A calmer Tokyo angle for neighborhoods and local walks."
+      },
+      "stayAreas": {
+        "title": "Stay Areas",
+        "desc": "Compare practical bases for rail days and luggage."
+      },
+      "essentials": {
+        "title": "Essentials",
+        "desc": "eSIM, airport transfer, and rail booking links."
+      }
+    },
+    "popularLinks": {
+      "eyebrow": "Popular Links",
+      "tokyo": {
+        "title": "Tokyo",
+        "desc": "Start your adventure in Tokyo."
+      },
+      "fujiView": {
+        "title": "Mt. Fuji View by Train",
+        "desc": "Best seat, best view. Check Seat E before booking."
+      },
+      "kyoto": {
+        "title": "Kyoto",
+        "desc": "Temples, gardens, and timeless streets."
+      },
+      "osaka": {
+        "title": "Osaka",
+        "desc": "Food, energy, and easy day trips."
+      }
+    },
+    "tokyoBases": {
+      "eyebrow": "Choose your Tokyo base",
+      "desc": "Shinjuku and Shibuya are the energetic classics. Tokyo Station and Ueno are practical. Asakusa and East Tokyo work better when you want calmer local texture.",
+      "shinjuku": {
+        "name": "Shinjuku",
+        "bestFor": "First-time energy, nightlife, shopping, and flexible train access.",
+        "mood": "Maximum Tokyo",
+        "weakness": "Big stations and late-night crowds can feel intense on arrival day. Never follow street touts in Kabukicho — overcharging and scam bars are a real risk."
+      },
+      "shibuya": {
+        "name": "Shibuya",
+        "bestFor": "Fashion, food, nightlife, youth culture, and easy west-side Tokyo access.",
+        "mood": "Iconic and energetic",
+        "weakness": "Crowded, hilly around some hotels, and not as simple for early Shinkansen days."
+      },
+      "ueno": {
+        "name": "Ueno",
+        "bestFor": "Budget hotels, Narita access, museums, and market food.",
+        "mood": "Practical and cultural",
+        "weakness": "Less late-night variety than Shinjuku or Shibuya."
+      },
+      "asakusa": {
+        "name": "Asakusa",
+        "bestFor": "Traditional Tokyo, Senso-ji, riverside walks, and old-town texture.",
+        "mood": "Classic east-side Tokyo",
+        "weakness": "Not on the JR Yamanote Line, so cross-city trips need transfers."
+      },
+      "tokyoStation": {
+        "name": "Tokyo Station",
+        "bestFor": "Early Shinkansen, clean logistics, Ginza access, and efficient travel days.",
+        "mood": "Calm and efficient",
+        "weakness": "More businesslike and usually pricier than Ueno or Asakusa."
+      },
+      "eastTokyo": {
+        "name": "Kiyosumi-Shirakawa / East Tokyo",
+        "bestFor": "Quiet local Tokyo, coffee, gardens, museums, and slower mornings.",
+        "mood": "Local Lens",
+        "weakness": "Better as a calm detour or second-time base than a default first-night choice."
+      }
+    },
+    "localTokyo": {
+      "eyebrow": "Local Tokyo picks from a Japanese local",
+      "desc": "A Local Lens for quieter east-side neighborhoods beyond Shinjuku and Shibuya, including Oshiage for Skytree views and riverside walks.",
+      "seeAll": "See all Local Tokyo picks",
+      "kiyosumi": {
+        "name": "Kiyosumi-Shirakawa",
+        "summary": "Coffee, Kiyosumi Garden, Fukagawa Edo Museum, and slow canal-side walks. A kintsugi workshop has opened nearby, and OZ — a tiny coffee stand tucked in a back alley — draws in-the-know visitors from overseas.",
+        "bestFor": "coffee, gardens, museums",
+        "avoidIf": "you want nightlife or first-night simplicity",
+        "timing": "morning to early afternoon"
+      },
+      "kuramae": {
+        "name": "Kuramae",
+        "summary": "Design shops, small makers, riverside cafes, and a softer Asakusa pairing.",
+        "bestFor": "design shops and relaxed cafes",
+        "avoidIf": "you need major sights in one stop",
+        "timing": "late morning to afternoon"
+      },
+      "oshiage": {
+        "name": "Oshiage",
+        "summary": "Skytree views, Sumida riverside walks, and calmer east-side stays. Next-door Kinshicho has a spacious Daiso, Muji, and gashapon floor without Shibuya crowds.",
+        "bestFor": "Skytree views and budget stays",
+        "avoidIf": "you want nightlife or a central feel",
+        "timing": "afternoon into evening"
+      },
+      "monzenNakacho": {
+        "name": "Monzen-Nakacho",
+        "summary": "Old Tokyo streets, shrines, neighborhood izakaya, and easy East Tokyo add-ons.",
+        "bestFor": "shrines, local food, old-town atmosphere",
+        "avoidIf": "you need English-heavy tourist infrastructure",
+        "timing": "afternoon into early evening"
+      },
+      "ryogoku": {
+        "name": "Ryogoku",
+        "summary": "Sumo culture, Edo history, museums, and a useful bridge toward Asakusa.",
+        "bestFor": "sumo and Edo history",
+        "avoidIf": "you want shopping or nightlife",
+        "timing": "morning or early afternoon"
+      }
+    },
+    "essentialsCta": {
+      "eyebrow": "Essentials Before You Land",
+      "shinkansen": {
+        "title": "Single Shinkansen ticket",
+        "desc": "Book after you know the Fuji-side seat."
+      },
+      "esim": {
+        "title": "Japan eSIM",
+        "desc": "Get online the moment you land."
+      },
+      "airportTransfer": {
+        "title": "Airport Transfer",
+        "desc": "Compare hassle-free airport routes."
+      },
+      "jrPass": {
+        "title": "JR Pass",
+        "desc": "Check only if your route has multiple long rides."
+      },
+      "insurance": {
+        "title": "Travel Insurance",
+        "desc": "Medical and cancellation backup before departure."
+      }
+    },
+    "footer": {
+      "tagline": "Smart tools, calm routes, and practical local tips for your Japan trip.",
+      "plan": "Plan",
+      "seatChecker": "Seat Checker",
+      "planner": "Planner",
+      "stayAreas": "Stay Areas",
+      "essentials": "Essentials",
+      "guides": "Guides",
+      "shinkansenGuide": "Shinkansen Seat Guide",
+      "itineraries": "Itineraries",
+      "airportTransfers": "Airport Transfers",
+      "commandCenter": "Command Center",
+      "support": "Support",
+      "about": "About",
+      "localTokyo": "Local Tokyo",
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "feedbackTitle": "Send feedback",
+      "feedbackDesc": "No newsletter yet. Anonymous notes help decide which Japan travel tools to build next.",
+      "feedbackCta": "Leave a note",
+      "affiliateNote": "Some links are affiliate links — see Terms for details."
+    }
+  },
+  "guide": {
+    "h1": "How to see Mt. Fuji from the Shinkansen (Tokyo ⇄ Osaka/Kyoto)",
+    "subtitle": "A practical guide to the best Shinkansen seats, sections, and timing for Mt. Fuji views.",
+    "writtenBy": "Written by a Japanese local, for visitors who don't want to miss the Mt. Fuji × Shinkansen view.",
+    "backToChecker": "Back to Seat Checker",
+    "introH2": "Mt. Fuji view basics on the Tokaido Shinkansen",
+    "introP1": "Many visitors to Japan want to see Mt. Fuji from the Shinkansen, but it's easy to miss if you don't know which side or section to sit in. This guide explains where and when Mt. Fuji is visible from the Tokaido Shinkansen between Tokyo and Osaka/Kyoto, and how to make it easier by using our free Shinkansen Mt. Fuji Seat Checker tool.",
+    "introP1Bold": "where and when Mt. Fuji is visible from the Tokaido Shinkansen",
+    "introP2": "You won't see Mt. Fuji for the whole ride – it appears only for a short stretch of the journey, and it can be completely hidden by clouds on some days.",
+    "tldrH2": "TL;DR – quick answers",
+    "tldr": [
+      {
+        "bold": "Which side?",
+        "text": "Tokyo → Osaka/Kyoto = right side. Osaka/Kyoto → Tokyo = left side."
+      },
+      {
+        "bold": "Which seat?",
+        "text": "In most standard 3+2 cars, Seat E is the Mt. Fuji window seat."
+      },
+      {
+        "bold": "Where on the route?",
+        "text": "Around Shin-Fuji station, between Shin-Yokohama and Shizuoka."
+      },
+      {
+        "bold": "When?",
+        "text": "Clear days, usually late morning to early afternoon (season-dependent)."
+      },
+      {
+        "bold": "Don't want to memorize this?",
+        "text": "Use the free Shinkansen Mt. Fuji Seat Checker on fujiseat.com before you book."
+      }
+    ],
+    "s1H2": "Which side of the Shinkansen is Mt. Fuji on? (Seat E explained)",
+    "s1Bullet1Bold": "Tokyo → Osaka / Kyoto:",
+    "s1Bullet1": "Mt. Fuji is on the right side of the train (window seat E in most standard cars).",
+    "s1Bullet2Bold": "Osaka / Kyoto → Tokyo:",
+    "s1Bullet2": "Mt. Fuji is on the left side of the train (again, window seat E in most standard cars).",
+    "s1Note": "In most standard (non–Green Car) 3+2 seat cars, Seat E is the window seat on the Mt. Fuji side. Green Cars may have a different layout, but the same left/right rule still applies. Some older guides still mention different seat letters, but on most modern 3+2 standard cars, Seat E is the Mt. Fuji window seat.",
+    "s2H2": "Best section and timing to see Mt. Fuji from the train",
+    "s2P1": "You won't see Mt. Fuji for the whole ride – it appears only for a short stretch of the journey. Mt. Fuji is usually visible on clear days between Shin-Yokohama and Shizuoka, especially around Shin-Fuji station.",
+    "s2Bullet1Bold": "Route:",
+    "s2Bullet1": "Tokaido Shinkansen between Tokyo, Nagoya and Osaka/Kyoto (Nozomi / Hikari / Kodama).",
+    "s2Bullet2Bold": "Time of day:",
+    "s2Bullet2": "Late morning to early afternoon often gives a clearer silhouette. In summer, early morning can also work well.",
+    "s2Bullet3Bold": "Weather:",
+    "s2Bullet3": "On cloudy or hazy days, Mt. Fuji may be hard to see even from the correct side and seat.",
+    "s3H2": "Practical seat tips for a better Mt. Fuji view",
+    "s3Bullet1Bold": "Reserve your seat:",
+    "s3Bullet1": "When booking, choose a reserved seat in a standard car and request seat E on the Mt. Fuji side if possible.",
+    "s3Bullet2Bold": "Avoid obstructions:",
+    "s3Bullet2": "Window seats near the middle of the car often have the clearest views, away from doors and bulkheads.",
+    "s3Bullet3Bold": "Keep your camera ready:",
+    "s3Bullet3": "Mt. Fuji can appear and disappear quickly, especially around Shin-Fuji station.",
+    "s3Bullet4Bold": "Listen for announcements:",
+    "s3Bullet4": "Some trains announce when Mt. Fuji is visible—listen for English announcements if you're not watching the map.",
+    "s4H2": "Common mistakes when trying to see Mt. Fuji",
+    "s4Bullet1Bold": "Booking the wrong side:",
+    "s4Bullet1": "Forgetting that Tokyo → Osaka/Kyoto is right side, and the opposite for the return.",
+    "s4Bullet2Bold": "Expecting a guaranteed view:",
+    "s4Bullet2": "Even with the correct seat, clouds or haze can fully cover the mountain.",
+    "s4Bullet3Bold": "Looking too late:",
+    "s4Bullet3": "If you start looking only near Shizuoka, you might miss the best view around Shin-Fuji.",
+    "jrH2": "JR Pass vs Single Ticket: Which is cheaper?",
+    "jrSingleLabel": "Single reserved seat prices (Tokyo ↔ Osaka/Kyoto):",
+    "jrSingle": [
+      "Tokyo → Shin-Osaka: approx. ¥14,720",
+      "Tokyo → Kyoto: approx. ¥13,850",
+      "Round trip Tokyo ↔ Osaka: approx. ¥29,440"
+    ],
+    "jrPassLabel": "JR Pass prices:",
+    "jrPassItems": [
+      "7-day: ¥50,000",
+      "14-day: ¥80,000",
+      "21-day: ¥100,000"
+    ],
+    "jrPassWorth": "JR Pass is usually worth comparing only if you take multiple long Shinkansen rides (e.g. Tokyo → Kyoto → Hiroshima → Tokyo). For a simple Tokyo ↔ Osaka round trip, single tickets are often cheaper.",
+    "jrNozomiNote": "Note: The Nozomi (fastest) may require an additional NOZOMI MIZUHO Ticket (approx. ¥4,960 Tokyo→Kyoto/Osaka) on top of your JR Pass. Without it, use Hikari or Kodama — these stop near Shin-Fuji, which is actually better for Mt. Fuji views anyway.",
+    "seasonH2": "Best Season & Time of Day to See Mt. Fuji",
+    "seasonLabel": "Season guide",
+    "seasons": [
+      {
+        "season": "Winter (Dec–Feb)",
+        "stars": "★★★★★",
+        "rating": "Best",
+        "note": "Snow-capped, clear skies"
+      },
+      {
+        "season": "Autumn (Sep–Nov)",
+        "stars": "★★★★",
+        "rating": "Very good",
+        "note": "Clear skies, early snow from October"
+      },
+      {
+        "season": "Spring (Mar–May)",
+        "stars": "★★★",
+        "rating": "Good",
+        "note": "More haze possible"
+      },
+      {
+        "season": "Summer (Jun–Aug)",
+        "stars": "★",
+        "rating": "Difficult",
+        "note": "Clouds, haze, rainy season"
+      }
+    ],
+    "timeLabel": "Time of day",
+    "timeItems": [
+      {
+        "bold": "Before 10am:",
+        "text": "Often clearest before haze builds"
+      },
+      {
+        "bold": "Late morning to early afternoon:",
+        "text": "Good on clear days"
+      },
+      {
+        "bold": "Late afternoon:",
+        "text": "Sun glare possible on the Mt. Fuji side"
+      }
+    ],
+    "proTip": "Pro tip: Check Shizuoka Prefecture weather the night before. Our tool shows live visibility near Shin-Fuji at the top of the page.",
+    "carH2": "Car Number & Seat Detail Guide",
+    "carStandardLabel": "Standard cars (3+2 layout)",
+    "carStandard": [
+      "Cars 4–7 often give the clearest unobstructed views",
+      "Seat E = Mt. Fuji window seat in all standard cars"
+    ],
+    "carGreenLabel": "Green Car (cars 8–10, 2+2 layout)",
+    "carGreen": [
+      "Mt. Fuji window seat = Seat D"
+    ],
+    "carRequestLabel": "How to request Seat E",
+    "carRequest": [
+      {
+        "bold": "At JR ticket office:",
+        "text": "show 「E席をお願いします」"
+      },
+      {
+        "bold": "Via Klook:",
+        "text": "select column E on the seat map"
+      },
+      {
+        "bold": "With JR Pass:",
+        "text": "reserve free at any JR station counter"
+      }
+    ],
+    "faqH2": "Frequently Asked Questions",
+    "faq": [
+      {
+        "q": "Can I see Mt. Fuji from a non-reserved car?",
+        "a": "Yes, but risky — you may end up in an aisle seat with no view. Reserve Seat E in advance."
+      },
+      {
+        "q": "How long can I see Mt. Fuji from the train?",
+        "a": "Only about 30–60 seconds at Shinkansen speed. Have your camera ready before reaching Shin-Fuji station."
+      },
+      {
+        "q": "Is Seat E always the Mt. Fuji side?",
+        "a": "In standard 3+2 cars, yes. In Green Cars (2+2 layout), the Mt. Fuji window seat is Seat D."
+      },
+      {
+        "q": "What if it's cloudy?",
+        "a": "Mt. Fuji is often hidden, especially in summer. Check our live visibility indicator at the top of the page."
+      },
+      {
+        "q": "Can I see Mt. Fuji on the return trip (Osaka/Kyoto → Tokyo)?",
+        "a": "Yes — Mt. Fuji is on the LEFT side, which is again Seat E. Use our checker and select the opposite direction."
+      },
+      {
+        "q": "Does the Nozomi stop near Mt. Fuji?",
+        "a": "No, but you can still see it through the window as the train passes. Hikari and Kodama stop at Shin-Fuji station."
+      },
+      {
+        "q": "Is the JR Pass worth it for Tokyo–Osaka only?",
+        "a": "Generally no. Round trip ≈ ¥29,000 vs 7-day Pass ¥50,000. The Pass makes sense if also visiting Hiroshima, Nara, etc."
+      },
+      {
+        "q": "Can I bring large luggage on the Shinkansen?",
+        "a": "Bags with total dimensions over 160cm and up to 250cm require a seat reservation with an oversized baggage area (予約が必要). Reserve this when booking your Shinkansen seat. Bags over 250cm are not permitted."
+      },
+      {
+        "q": "Is there WiFi on the Shinkansen?",
+        "a": "Onboard WiFi exists but can be unreliable. A Japan eSIM is recommended for consistent connectivity throughout your trip."
+      },
+      {
+        "q": "What is the best way to book as a foreigner?",
+        "a": "Klook — fully in English, instant mobile voucher, and you can select Seat E on the seat map."
+      }
+    ],
+    "makeEasyH2": "Make it easy with the Shinkansen Mt. Fuji Seat Checker",
+    "makeEasyP1": "If you don't want to remember all the details, you can use our free Shinkansen Mt. Fuji Seat Checker. Just choose your direction and it tells you which seat to book for the best chance of seeing Mt. Fuji.",
+    "makeEasyP2": "The tool is designed to work well on mobile, so you can quickly check it while booking tickets or travelling in Japan.",
+    "openChecker": "Open Seat Checker",
+    "commandCenterH2": "Plan your entire Japan trip",
+    "commandCenterP": "Got your Shinkansen seat sorted? Plan the rest of the trip with route templates, booking essentials, weather, currency and a pre-departure checklist.",
+    "commandCenterBtn": "Open Trip Planner",
+    "priorityH2": "Priority Seats — What Foreigners Should Know",
+    "priorityP1": "You'll notice seats marked 優先席 (yūsen-seki) near the doors of most Japanese trains. These are priority seats reserved for elderly passengers, pregnant women, people with disabilities, and those carrying small children.",
+    "priorityP2": "While not legally prohibited, sitting in priority seats when you don't need them is considered poor manners in Japan. Many Japanese people avoid these seats entirely — even when the train is not crowded — because occupying them carries an unspoken social stigma.",
+    "priorityP3": "As a visitor, the safest approach is to simply avoid priority seats altogether. If the train is packed and no one who needs the seat is nearby, sitting briefly is understandable — but be ready to stand immediately when someone who needs it boards.",
+    "priorityTip": "Look for the stickers on windows and the different-colored seat fabric (usually grey or patterned) to identify priority seats. When in doubt, choose a regular seat.",
+    "devH2": "From the developer",
+    "devP": "I'm also building a small side project called KanjiFlick — a swipe-style list of single kanji meanings (the kind Japanese kids learn). It's not a travel app, but if you're curious about the characters you'll see around Japan, you might enjoy it."
+  },
+  "cc": {
+    "title": "JAPAN TRIP COMMAND CENTER",
+    "titleShort": "COMMAND CENTER",
+    "subtitle": "fujiseat.com",
+    "live": "LIVE",
+    "tMinus": "T-MINUS",
+    "missionActive": "TRIP ACTIVE",
+    "missionRoute": "Trip Route",
+    "current": "CURRENT",
+    "upcoming": "UPCOMING",
+    "locked": "LOCKED",
+    "opsMap": "Operations Map — Japan",
+    "preMission": "Pre-departure Checklist",
+    "missionReadiness": "TRIP READINESS",
+    "fieldIntel": "Travel Intel",
+    "phraseArsenal": "Useful Phrases",
+    "emergency": "Emergency Contacts",
+    "emergencySave": "Save these numbers before departure",
+    "weather": "Live Weather",
+    "weatherLoading": "Fetching weather data...",
+    "currency": "Currency Converter",
+    "activityPlanner": "Activity Planner",
+    "activityNone": "No activities planned. Add one above.",
+    "currentBase": "TRIP PHASE",
+    "nextSector": "NEXT STEP",
+    "citiesLocked": "CITIES LOCKED",
+    "criticalItems": "CRITICAL ITEMS",
+    "tabMap": "MAP",
+    "tabRoute": "ROUTE",
+    "tabTasks": "TASKS",
+    "tabIntel": "INTEL",
+    "tabPlan": "PLAN",
+    "tabTools": "TOOLS",
+    "tabSos": "SOS",
+    "tabPhrases": "Phrases",
+    "tabWeather": "Weather",
+    "tabFx": "FX",
+    "bookViaKlook": "BOOK VIA KLOOK",
+    "highlights": "HIGHLIGHTS",
+    "intel": "INTEL",
+    "checkSeat": "CHECK SEAT",
+    "fujiseatTip": "Seat E (Tokyo→Osaka) · Seat A (Osaka→Tokyo) for Mt. Fuji views",
+    "checkFujiSeat": "Check Fuji Seat",
+    "loadingMap": "LOADING MAP...",
+    "mapOffline": "MAP OFFLINE",
+    "mapOfflineHint": "Add NEXT_PUBLIC_GOOGLE_MAPS_API_KEY to .env",
+    "initializing": "INITIALIZING...",
+    "bootLine1": "Connecting to satellite network...",
+    "bootLine2": "Loading city intel database...",
+    "bootLine3": "Mapping Shinkansen corridors...",
+    "bootLine4": "Calibrating Mt. Fuji view zone...",
+    "bootLine5": "Syncing mission checklist...",
+    "bootLine6": "All systems operational.",
+    "bootInit": "INITIALIZING",
+    "missionReady": "MISSION READY"
+  },
+  "planner": {
+    "badge": "Trip Planner",
+    "title": "Plan your Japan trip",
+    "home": "Home",
+    "departureDay": "Departure day!",
+    "daysUntil": "{count, plural, one {# day until Japan} other {# days until Japan}}",
+    "tasksDone": "tasks done",
+    "step1": "Step 1",
+    "chooseRoute": "Choose your route",
+    "step2": "Step 2",
+    "setDate": "Set departure date",
+    "step3": "Step 3",
+    "checklist": "Pre-departure checklist",
+    "fullItinerary": "Full itinerary",
+    "routeLabel": "{name} route",
+    "jrRecommended": "Compare JR Pass vs single tickets",
+    "jrMayNotPayOff": "△ JR Pass may not pay off",
+    "partnerNote": "Links marked with ↗ are partner links. We earn a small commission at no extra cost to you.",
+    "allSet": "All set — enjoy Japan!",
+    "bookEssentials": "Book essentials for this route",
+    "recommendedFor": "Recommended for the {name}",
+    "bookingsPartnerNote": "Partner links — we earn a small commission at no extra cost to you.",
+    "routes": {
+      "classic-7": {
+        "name": "7-day Classic",
+        "desc": "Tokyo → Fuji → Kyoto → Osaka",
+        "duration": "7 days",
+        "jrNote": "JR Pass is usually not worth it for this simple route. Single tickets are often cheaper unless you add Hiroshima, multiple long-distance rides, or return to Tokyo by Shinkansen."
+      },
+      "express-5": {
+        "name": "5-day Express",
+        "desc": "Tokyo → Kyoto (no filler)",
+        "duration": "5 days",
+        "jrNote": "One-way Shinkansen may be cheaper than JR Pass — compare first"
+      },
+      "full-10": {
+        "name": "10-day with Fuji",
+        "desc": "Tokyo → Kawaguchiko → Hakone → Kyoto → Osaka",
+        "duration": "10 days",
+        "jrNote": "Compare first. Single tickets are often cheaper unless you add several long-distance JR rides."
+      },
+      "deep-14": {
+        "name": "14-day Explorer",
+        "desc": "Tokyo → Nikko → Fuji → Kyoto → Hiroshima → Osaka",
+        "duration": "14 days",
+        "jrNote": "Usually worth comparing because this route has several long-distance JR legs."
+      }
+    },
+    "cities": {
+      "tokyo": "Tokyo",
+      "kyoto": "Kyoto",
+      "osaka": "Osaka",
+      "hiroshima": "Hiroshima",
+      "kawaguchiko": "Kawaguchiko",
+      "hakone": "Hakone",
+      "depart": "Depart"
+    },
+    "dayRanges": {
+      "day1_3": "Day 1–3",
+      "day4_5": "Day 4–5",
+      "day6_7": "Day 6–7",
+      "day1_2": "Day 1–2",
+      "day3_4": "Day 3–4",
+      "day5": "Day 5",
+      "day4": "Day 4",
+      "day6_8": "Day 6–8",
+      "day9_10": "Day 9–10",
+      "day1_4": "Day 1–4",
+      "day5_6": "Day 5–6",
+      "day7_10": "Day 7–10",
+      "day11_12": "Day 11–12",
+      "day13_14": "Day 13–14"
+    },
+    "checks": {
+      "passport": "Passport valid through your stay",
+      "esim": "Japan eSIM purchased",
+      "train": "JR Pass or train tickets checked",
+      "transfer": "Airport transfer planned",
+      "hotel": "Hotels booked",
+      "insurance": "Travel insurance",
+      "cash": "¥50,000+ cash ready",
+      "maps": "Google Maps offline (Japan)",
+      "translate": "Translation app installed"
+    },
+    "checkLinks": {
+      "esim": "Get eSIM",
+      "train": "Compare",
+      "transfer": "Compare",
+      "hotel": "Compare",
+      "insurance": "See plans"
+    },
+    "bookings": {
+      "esim": {
+        "label": "Japan eSIM",
+        "desc": "Data before you land — maps, translate, transit.",
+        "cta": "Get eSIM"
+      },
+      "transfer": {
+        "label": "Airport transfer",
+        "desc": "Narita/Haneda to city — compare train vs bus.",
+        "cta": "Compare options"
+      },
+      "stay": {
+        "label": "Where to stay",
+        "desc": "Compare Tokyo areas by access and budget.",
+        "cta": "Compare areas"
+      },
+      "jrPass": {
+        "label": "JR Pass",
+        "desc": "Usually worth it only for multiple long-distance rides.",
+        "cta": "Compare JR Pass"
+      },
+      "insurance": {
+        "label": "Travel insurance",
+        "desc": "Medical + trip cancellation coverage.",
+        "cta": "See plans"
+      }
+    },
+    "emergency": {
+      "title": "Emergency contacts",
+      "save": "Save these numbers before departure",
+      "police": "Police",
+      "ambulance": "Ambulance / Fire",
+      "tourist": "Tourist Hotline (24/7)",
+      "translation": "Emergency Translation"
+    },
+    "weather": {
+      "title": "Route weather (live)",
+      "unavailable": "Weather data unavailable"
+    },
+    "currency": {
+      "title": "Currency converter"
+    },
+    "quickLinks": {
+      "title": "Quick links",
+      "airport": "Airport transfers",
+      "stay": "Where to stay",
+      "seat": "Seat checker",
+      "itinerary": "Full itinerary",
+      "map": "Command Center"
+    },
+    "footer": {
+      "brand": "fujiseat.com — Japan travel utility hub",
+      "ready": "Ready to book?",
+      "jrPass": "Check JR Pass on Klook",
+      "or": "or",
+      "esim": "get a Japan eSIM",
+      "mapQuestion": "Need the interactive map?",
+      "commandCenter": "Explore Command Center"
+    },
+    "preview": {
+      "badge": "Japan Trip Planner",
+      "title": "Plan your trip from start to finish.",
+      "subtitle": "A calm route overview for the main fujiseat flow.",
+      "arrival": "Arrival",
+      "cities": "Cities",
+      "tripLength": "Trip length",
+      "style": "Style",
+      "narita": "Narita (NRT)",
+      "fourCities": "4 cities",
+      "sevenDays": "7 days",
+      "firstTime": "First-time",
+      "routeOverview": "Route overview",
+      "fujiZone": "Fuji view zone",
+      "svgLabel": "Tokyo to Osaka route overview with Fuji view zone",
+      "tokyo": "Tokyo",
+      "start": "Start",
+      "fujiView": "Fuji view",
+      "seatEWindow": "Seat E window",
+      "kyoto": "Kyoto",
+      "temples": "Temples",
+      "osaka": "Osaka",
+      "food": "Food",
+      "time": "2h15m",
+      "tokyoToKyoto": "Tokyo to Kyoto",
+      "seatE": "Seat E",
+      "fujiWindow": "Fuji-side window",
+      "threeNights": "3 nights",
+      "kyotoBase": "Good Kyoto base",
+      "planTrip": "Plan trip",
+      "checkJrPass": "Compare JR Pass",
+      "routeMap": "Command Center"
+    }
+  },
+  "feedback": {
+    "hub": "Japan travel utility hub",
+    "seatChecker": "Seat checker",
+    "planner": "Planner",
+    "eyebrow": "Feedback",
+    "title": "Share a review, kind note, or Japan travel tip",
+    "description": "Send an anonymous note about what was useful, confusing, missing, or worth covering next. Good experiences, small reviews, and local tips are just as helpful as bug reports.",
+    "playful": "If fujiseat helped, a tiny compliment also makes the Japanese creator very happy.",
+    "topic": "Topic",
+    "topics": {
+      "site": "Site feedback",
+      "review": "Trip report / review",
+      "tip": "Local tip",
+      "train": "Shinkansen / train info",
+      "tokyo": "Tokyo photo/article idea",
+      "other": "Other"
+    },
+    "fieldLabel": "Feedback, review, or tip",
+    "placeholder": "Tell me what was useful, confusing, missing, or worth covering. Example: I used this before Tokyo to Kyoto and the seat tip helped, but the booking step was confusing.",
+    "note": "This is anonymous and mainly for improving fujiseat and finding future article ideas. Please do not send passport numbers, booking references, payment details, or other sensitive information.",
+    "submit": "Send feedback",
+    "sending": "Sending...",
+    "sent": "Thank you. Your feedback has been sent.",
+    "error": "Could not send your feedback. Please try again later.",
+    "privacyNote": "Feedback is collected anonymously for site improvement and possible future article ideas. I do not ask for contact details, so there is no reply workflow."
+  },
+  "localTokyoPages": {
+    "common": {
+      "eyebrow": "Local Lens guide",
+      "compareBases": "Compare Tokyo bases",
+      "placeItinerary": "Place this in an itinerary",
+      "quickAnswer": "Quick answer",
+      "bestFor": "Best for",
+      "notBestFor": "Not best for",
+      "bestTiming": "Best timing",
+      "combineWith": "Combine with",
+      "whyVisit": "Why visit",
+      "halfDayRoute": "Half-day route",
+      "shouldStay": "Should you stay here?",
+      "nearbyHotels": "Nearby hotel areas"
+    },
+    "kiyosumi-shirakawa": {
+      "title": "Kiyosumi-Shirakawa Guide — Coffee, Gardens and Quiet East Tokyo",
+      "description": "A practical local guide to Kiyosumi-Shirakawa, Tokyo's quiet coffee, garden and art neighborhood. Best for slow mornings, museums, and travelers who want a calmer side of Tokyo.",
+      "imageAlt": "Kiyosumi-Shirakawa neighborhood",
+      "bestFor": [
+        "Coffee",
+        "Gardens",
+        "Museums",
+        "Quiet walks"
+      ],
+      "notBestFor": [
+        "Nightlife",
+        "Late-night food",
+        "First-night simplicity"
+      ],
+      "bestTiming": "Morning to early afternoon.",
+      "combineWith": "Monzen-Nakacho, Ryogoku, Asakusa, or Tokyo Station.",
+      "whyVisit": "Kiyosumi-Shirakawa is useful when Tokyo starts to feel too loud. It gives travelers a grounded east-side morning: independent coffee, a classic garden, compact museums, and streets that still feel residential.",
+      "route": [
+        "Coffee near Kiyosumi-Shirakawa Station",
+        "Kiyosumi Garden",
+        "Fukagawa Edo Museum",
+        "Museum of Contemporary Art Tokyo or a river walk",
+        "Continue to Monzen-Nakacho or Ryogoku"
+      ],
+      "shouldStay": "Stay here if you have already solved the basics and want a quiet local base. For a first night in Tokyo, Shinjuku, Ueno, Asakusa, or Tokyo Station are usually simpler. Kiyosumi-Shirakawa is strongest as a quiet detour, second-time base, or calm final night before a Tokyo Station departure.",
+      "nearby": [
+        {
+          "title": "Tokyo Station",
+          "description": "Best for Shinkansen departures and simple logistics.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Asakusa",
+          "description": "More traditional sightseeing and easier tourist infrastructure.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "Budget-friendly hotels and strong Narita access.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "East Tokyo hotels",
+          "description": "Klook and Agoda links coming soon.",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo area guide",
+          "description": "Compare first-time bases before choosing a hotel.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "7-day first-time Japan",
+          "description": "Place this local stop inside the classic route.",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "Open Planner",
+          "description": "Turn this into a realistic day plan.",
+          "href": "/planner"
+        },
+        {
+          "title": "Plan your trip essentials",
+          "description": "eSIM, airport transfer, and train next steps.",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "Back to the Seat Checker",
+          "description": "Keep the Mt. Fuji Shinkansen decision as the main tool.",
+          "href": "/guide"
+        }
+      ]
+    },
+    "kuramae": {
+      "title": "Kuramae Guide — Design Shops, Cafes and Makers in East Tokyo",
+      "description": "A practical local guide to Kuramae, Tokyo's quiet design and maker neighborhood. Best for craft shops, riverside cafes, and travelers who want a creative, walkable side of east Tokyo.",
+      "imageAlt": "Kuramae neighborhood",
+      "bestFor": [
+        "Design shops",
+        "Craft coffee",
+        "Riverside walks",
+        "Small makers"
+      ],
+      "notBestFor": [
+        "Major sights",
+        "Nightlife",
+        "First-night logistics"
+      ],
+      "bestTiming": "Late morning to afternoon.",
+      "combineWith": "Asakusa, Kiyosumi-Shirakawa, or Akihabara.",
+      "whyVisit": "Kuramae is where Tokyo's design and craft scene lives without the tourist markup. Old warehouses turned into leather studios, glass workshops, and single-origin roasters line quiet streets between the Sumida River and Asakusa. It rewards slow browsing: walk into a shop, talk to the maker, and buy something you cannot find in Shibuya.",
+      "route": [
+        "Coffee at a Kuramae roaster near the station",
+        "Browse design shops along Kuramae-dori and side streets",
+        "Walk along the Sumida River toward Asakusa",
+        "Lunch at a local cafe or continue to Asakusa for traditional food",
+        "Optional: add Kiyosumi-Shirakawa for gardens and museums"
+      ],
+      "shouldStay": "Good for repeat visitors or travelers who value design over sightseeing density. First-timers usually do better near Asakusa or Ueno. Kuramae is one station away and easy as a morning add-on without sleeping there. If you want a creative, quiet base and do not mind being a short ride from major sights, it works well.",
+      "nearby": [
+        {
+          "title": "Asakusa",
+          "description": "Traditional sights and easier tourist infrastructure, one stop away.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "Budget-friendly hotels and strong Narita access.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Akihabara",
+          "description": "Central location with JR and metro connections.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "East Tokyo picks",
+          "description": "More quiet neighborhoods on the east side.",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo area guide",
+          "description": "Compare first-time bases before choosing a hotel.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "7-day first-time Japan",
+          "description": "Place this local stop inside the classic route.",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "Open Planner",
+          "description": "Turn this into a realistic day plan.",
+          "href": "/planner"
+        },
+        {
+          "title": "Plan your trip essentials",
+          "description": "eSIM, airport transfer, and train next steps.",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "Back to the Seat Checker",
+          "description": "Keep the Mt. Fuji Shinkansen decision as the main tool.",
+          "href": "/guide"
+        }
+      ]
+    },
+    "monzen-nakacho": {
+      "title": "Monzen-Nakacho Guide — Shrines, Izakaya and Old East Tokyo",
+      "description": "A practical local guide to Monzen-Nakacho, Tokyo's old-town neighborhood with shrines, izakaya streets, and local food. Best for afternoon walks, traditional atmosphere, and travelers who want a slower east-side evening.",
+      "imageAlt": "Monzen-Nakacho neighborhood",
+      "bestFor": [
+        "Shrines",
+        "Local izakaya",
+        "Old-town atmosphere",
+        "Afternoon walks"
+      ],
+      "notBestFor": [
+        "English-heavy infrastructure",
+        "Late-night options",
+        "Shopping"
+      ],
+      "bestTiming": "Afternoon into early evening.",
+      "combineWith": "Kiyosumi-Shirakawa, Ryogoku, or Tsukiji.",
+      "whyVisit": "Monzen-Nakacho is one of the few Tokyo neighborhoods where the old shitamachi atmosphere still holds. Tomioka Hachimangu shrine anchors the area, and the surrounding streets are lined with small izakaya, local lunch spots, and traditional shops that cater to regulars, not tourists. It gives travelers a taste of Tokyo's east-side character without the curated feel of Yanaka or Asakusa.",
+      "route": [
+        "Start from Kiyosumi-Shirakawa or arrive at Monzen-Nakacho Station",
+        "Visit Tomioka Hachimangu shrine",
+        "Walk the backstreets for local shops and small eateries",
+        "Early evening izakaya along Eitai-dori or side alleys",
+        "Optional: continue to Tsukiji or Tokyo Station for dinner"
+      ],
+      "shouldStay": "Monzen-Nakacho works as a local base for travelers who already know their way around Tokyo and want a quieter, more residential feel. For first-timers, it is better as a half-day add-on paired with Kiyosumi-Shirakawa in the morning. The Tozai line gives easy access to Nihonbashi and Otemachi for business travelers.",
+      "nearby": [
+        {
+          "title": "Tokyo Station",
+          "description": "Best for Shinkansen departures and simple logistics.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Kiyosumi-Shirakawa",
+          "description": "Pair a morning coffee walk before an afternoon here.",
+          "href": "/local-tokyo/kiyosumi-shirakawa"
+        },
+        {
+          "title": "Asakusa",
+          "description": "More traditional sightseeing with easier tourist infrastructure.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "East Tokyo picks",
+          "description": "More quiet neighborhoods on the east side.",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo area guide",
+          "description": "Compare first-time bases before choosing a hotel.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "7-day first-time Japan",
+          "description": "Place this local stop inside the classic route.",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "Open Planner",
+          "description": "Turn this into a realistic day plan.",
+          "href": "/planner"
+        },
+        {
+          "title": "Plan your trip essentials",
+          "description": "eSIM, airport transfer, and train next steps.",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "Back to the Seat Checker",
+          "description": "Keep the Mt. Fuji Shinkansen decision as the main tool.",
+          "href": "/guide"
+        }
+      ]
+    },
+    "oshiage": {
+      "title": "Oshiage Guide — Skytree, Local Streets and a Quieter Asakusa Alternative",
+      "description": "A practical local guide to Oshiage, the Tokyo Skytree neighborhood. Best for Skytree views, Solamachi shopping, and travelers who want a calmer alternative to Asakusa with easy airport access.",
+      "imageAlt": "Oshiage neighborhood with Tokyo Skytree",
+      "bestFor": [
+        "Skytree views",
+        "Solamachi shopping",
+        "Airport access",
+        "Budget hotels"
+      ],
+      "notBestFor": [
+        "Nightlife",
+        "Trendy restaurants",
+        "Central location feel"
+      ],
+      "bestTiming": "Late afternoon into evening for Skytree lights. Morning for quiet streets.",
+      "combineWith": "Asakusa, Ryogoku, or Kiyosumi-Shirakawa.",
+      "whyVisit": "Oshiage gives travelers the Tokyo Skytree experience plus a surprisingly quiet residential neighborhood one block away. The Solamachi mall at the base of Skytree covers souvenirs, food, and a planetarium. Beyond the tower, Oshiage's backstreets feel like old shitamachi Tokyo: small shops, local eateries, and none of the Asakusa crowds. The Tobu Skytree line and Hanzomon metro make Narita and Haneda access straightforward.",
+      "extra": {
+        "title": "Kinshicho — the next station over",
+        "body": "One stop from Oshiage on the Hanzomon line, Kinshicho has no headline sights but is quietly useful for shopping. The large commercial complex next to the station houses a spacious Daiso, Muji, and a big gashapon capsule toy floor, all far less crowded than their Shibuya or Shinjuku equivalents. Don Quijote is also nearby."
+      },
+      "route": [
+        "Arrive at Oshiage Station and walk to Tokyo Skytree",
+        "Browse Solamachi for souvenirs or lunch",
+        "Walk the quiet backstreets east of the tower",
+        "Cross toward Asakusa along the Sumida River",
+        "Optional: one stop to Kinshicho for Daiso, Muji, and gashapon shopping",
+        "Optional: Skytree observation deck in the late afternoon for sunset views"
+      ],
+      "shouldStay": "Oshiage is a practical budget alternative to Asakusa. Hotels are cheaper, airport access is direct via Tobu Skytree line and Keisei line, and Asakusa is a 20-minute walk or one stop away. The trade-off: fewer restaurants and less evening atmosphere than Asakusa. It works well for a first or last night when airport logistics matter, or as a budget base for travelers who do not mind a quieter neighborhood.",
+      "nearby": [
+        {
+          "title": "Asakusa",
+          "description": "Walking distance with more food, temples, and tourist infrastructure.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "Budget-friendly with strong Narita access and museums.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ryogoku",
+          "description": "Sumo and Edo history, one bridge south.",
+          "href": "/local-tokyo/ryogoku"
+        },
+        {
+          "title": "East Tokyo picks",
+          "description": "More quiet neighborhoods on the east side.",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo area guide",
+          "description": "Compare first-time bases before choosing a hotel.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "7-day first-time Japan",
+          "description": "Place this local stop inside the classic route.",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "Open Planner",
+          "description": "Turn this into a realistic day plan.",
+          "href": "/planner"
+        },
+        {
+          "title": "Plan your trip essentials",
+          "description": "eSIM, airport transfer, and train next steps.",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "Back to the Seat Checker",
+          "description": "Keep the Mt. Fuji Shinkansen decision as the main tool.",
+          "href": "/guide"
+        }
+      ]
+    },
+    "ryogoku": {
+      "title": "Ryogoku Guide — Sumo, Edo History and Museums in East Tokyo",
+      "description": "A practical local guide to Ryogoku, Tokyo's sumo and Edo history district. Best for the Edo-Tokyo Museum, sumo culture, and travelers who want a historical side of east Tokyo.",
+      "imageAlt": "Ryogoku neighborhood",
+      "bestFor": [
+        "Sumo culture",
+        "Edo-Tokyo Museum",
+        "History walks",
+        "River views"
+      ],
+      "notBestFor": [
+        "Shopping",
+        "Nightlife",
+        "Trendy cafes"
+      ],
+      "bestTiming": "Morning or early afternoon.",
+      "combineWith": "Asakusa, Kiyosumi-Shirakawa, or Monzen-Nakacho.",
+      "whyVisit": "Ryogoku is where Tokyo's sumo tradition and Edo-period history live side by side. The Kokugikan sumo arena hosts major tournaments three times a year, and even outside tournament season the neighborhood is full of sumo stables, chanko nabe restaurants, and the Edo-Tokyo Museum. It is a focused, half-day destination that pairs naturally with Asakusa across the river.",
+      "route": [
+        "Arrive at Ryogoku Station on the JR Sobu line",
+        "Edo-Tokyo Museum for a thorough Edo and Meiji overview",
+        "Walk past Kokugikan and look for sumo wrestlers near stables",
+        "Chanko nabe lunch at a local restaurant",
+        "Cross the Sumida River to Asakusa or continue to Kiyosumi-Shirakawa"
+      ],
+      "shouldStay": "Ryogoku is best as a half-day visit rather than a base. Hotel options are limited compared to Asakusa or Ueno, and evening dining is quieter than most travelers prefer. Visit for the museum, sumo, and chanko, then continue to a busier area. If you want to stay nearby, Asakusa is across the river and offers more options.",
+      "nearby": [
+        {
+          "title": "Asakusa",
+          "description": "Across the river with more hotels, food, and transport links.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Ueno",
+          "description": "Budget-friendly and strong Narita access.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "Kiyosumi-Shirakawa",
+          "description": "Pair sumo history with a coffee-and-garden morning.",
+          "href": "/local-tokyo/kiyosumi-shirakawa"
+        },
+        {
+          "title": "East Tokyo picks",
+          "description": "More quiet neighborhoods on the east side.",
+          "href": "/local-tokyo"
+        }
+      ],
+      "sidebar": [
+        {
+          "title": "Tokyo area guide",
+          "description": "Compare first-time bases before choosing a hotel.",
+          "href": "/areas-to-stay/tokyo-first-time"
+        },
+        {
+          "title": "7-day first-time Japan",
+          "description": "Place this local stop inside the classic route.",
+          "href": "/itineraries/7-day-first-time-japan"
+        },
+        {
+          "title": "Open Planner",
+          "description": "Turn this into a realistic day plan.",
+          "href": "/planner"
+        },
+        {
+          "title": "Plan your trip essentials",
+          "description": "eSIM, airport transfer, and train next steps.",
+          "href": "/plan-your-trip"
+        },
+        {
+          "title": "Back to the Seat Checker",
+          "description": "Keep the Mt. Fuji Shinkansen decision as the main tool.",
+          "href": "/guide"
+        }
+      ]
+    }
+  },
+  "localTokyoIndex": {
+    "title": "Local Tokyo Picks — Quiet Neighborhoods Beyond Shinjuku and Shibuya",
+    "description": "Explore quieter Tokyo neighborhoods like Kiyosumi-Shirakawa, Kuramae, Monzen-Nakacho and Ryogoku, chosen by a Japanese local for coffee, gardens, museums and slow walks.",
+    "eyebrow": "Local Lens",
+    "startCta": "Start with Kiyosumi-Shirakawa",
+    "compareCta": "Compare Tokyo bases",
+    "imageAlt": "Kiyosumi-Shirakawa neighborhood",
+    "quickLabel": "Quick recommendation",
+    "quickTitle": "Use Local Tokyo as a calm second layer.",
+    "quickBody": "First-time visitors usually do better sleeping in Shinjuku, Ueno, Asakusa, or Tokyo Station. Add East Tokyo when you want coffee, gardens, museums, and slower streets without turning the trip into a hotel search problem.",
+    "routeLabel": "Best first route",
+    "routeBody": "Kiyosumi-Shirakawa in the morning, then continue to Monzen-Nakacho or Ryogoku. It works well before Asakusa, Tokyo Station, or an easy dinner plan.",
+    "areaCards": "Area cards",
+    "halfDayTitle": "East Tokyo half-day route",
+    "halfDayStops": [
+      "Coffee near Kiyosumi-Shirakawa Station",
+      "Walk Kiyosumi Garden when you want a quiet reset",
+      "Visit Fukagawa Edo Museum for old Tokyo context",
+      "Continue to Monzen-Nakacho for shrines or Ryogoku for Edo and sumo history"
+    ],
+    "ctas": [
+      {
+        "title": "Compare first-time Tokyo areas",
+        "description": "Use this before choosing where to sleep.",
+        "href": "/areas-to-stay/tokyo-first-time"
+      },
+      {
+        "title": "Open the 7-day first-time itinerary",
+        "description": "Place Local Tokyo without crowding the classic route.",
+        "href": "/itineraries/7-day-first-time-japan"
+      },
+      {
+        "title": "Start with Seat Checker",
+        "description": "Keep the Mt. Fuji Shinkansen seat decision first.",
+        "href": "/guide"
+      },
+      {
+        "title": "Plan your essentials",
+        "description": "eSIM, transfers, and train bookings in one place.",
+        "href": "/plan-your-trip"
+      },
+      {
+        "title": "Build a route in Planner",
+        "description": "Turn these stops into a realistic Japan day.",
+        "href": "/planner"
+      }
+    ]
+  }
+}
