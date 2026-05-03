@@ -518,7 +518,7 @@ export function PlannerClient() {
                     <button
                       type="button"
                       onClick={() => toggleCheck(item.id)}
-                      className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-slate-300 transition-colors hover:border-sky-400"
+                      className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-slate-300 transition-colors hover:border-[#168a56]"
                     >
                       {isDone && <Check className="h-3.5 w-3.5 text-emerald-600" />}
                     </button>
@@ -553,7 +553,7 @@ export function PlannerClient() {
                               area: item.affiliate?.area,
                             })
                           }
-                          className="inline-flex min-h-10 items-center gap-1 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700 transition-colors hover:bg-sky-100"
+                          className="inline-flex min-h-10 items-center gap-1 rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#e66700]"
                         >
                           {checkLinkLabel}
                           <ExternalLink className="h-3 w-3" />
@@ -561,7 +561,7 @@ export function PlannerClient() {
                       ) : (
                         <Link
                           href={item.href}
-                          className="inline-flex min-h-10 items-center gap-1 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700 transition-colors hover:bg-sky-100"
+                          className="inline-flex min-h-10 items-center gap-1 rounded-lg border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
                         >
                           {checkLinkLabel}
                           <ArrowRight className="h-3 w-3" />

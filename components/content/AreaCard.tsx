@@ -42,7 +42,7 @@ export function AreaCard({
           <h3 className="text-lg font-semibold text-slate-950">{name}</h3>
           <p className="mt-1 text-xs text-slate-500">{vibe}</p>
         </div>
-        <span className="shrink-0 rounded-full border border-sky-100 bg-sky-50 px-2.5 py-1 text-[10px] font-semibold text-sky-700">
+        <span className="shrink-0 rounded-full border border-[#9fd7bd] bg-[#f0fbf6] px-2.5 py-1 text-[10px] font-semibold text-[#106b43]">
           {bestFor}
         </span>
       </div>

@@ -147,16 +147,16 @@ export function PlanYourTripHub() {
           </Card>
 
           <Card className="p-5" tone="accent">
-            <p className="text-[11px] font-semibold uppercase text-sky-700">Keep planning</p>
+            <p className="text-[11px] font-semibold uppercase text-[#106b43]">Keep planning</p>
             <div className="mt-3 grid gap-2">
               {internalLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="flex items-center justify-between gap-3 rounded-2xl border border-sky-100 bg-white px-3 py-2.5 text-sm font-semibold text-slate-800 transition-colors hover:border-sky-200 hover:bg-sky-50"
+                  className="flex items-center justify-between gap-3 rounded-2xl border border-[#9fd7bd] bg-white px-3 py-2.5 text-sm font-semibold text-[#106b43] transition-colors hover:border-[#168a56] hover:bg-[#f0fbf6]"
                 >
                   {link.label}
-                  <ArrowRight className="h-4 w-4 text-sky-600" />
+                  <ArrowRight className="h-4 w-4 text-[#106b43]" />
                 </Link>
               ))}
             </div>
@@ -170,7 +170,7 @@ export function PlanYourTripHub() {
             return (
               <Card key={category.title} className="flex flex-col p-5">
                 <div className="flex items-start gap-3">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-sky-100 bg-sky-50 text-sky-700">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#9fd7bd] bg-[#f0fbf6] text-[#106b43]">
                     <Icon className="h-5 w-5" />
                   </div>
                   <div>
@@ -181,6 +181,15 @@ export function PlanYourTripHub() {
 
                 <div className="mt-4 space-y-2">
                   {resolved.map((item) => {
+                    const itemTone = item.external
+                      ? {
+                          card: "hover:border-[#ff7a00] hover:bg-[#fff8f0]",
+                          icon: "text-[#b44b00]",
+                        }
+                      : {
+                          card: "hover:border-[#168a56] hover:bg-[#f0fbf6]",
+                          icon: "text-[#106b43]",
+                        };
                     const content = (
                       <>
                         <span>
@@ -188,9 +197,9 @@ export function PlanYourTripHub() {
                           <span className="mt-0.5 block text-xs leading-5 text-slate-500">{item.description}</span>
                         </span>
                         {item.external ? (
-                          <ExternalLink className="h-4 w-4 shrink-0 text-sky-600" />
+                          <ExternalLink className={`h-4 w-4 shrink-0 ${itemTone.icon}`} />
                         ) : (
-                          <ArrowRight className="h-4 w-4 shrink-0 text-sky-600" />
+                          <ArrowRight className={`h-4 w-4 shrink-0 ${itemTone.icon}`} />
                         )}
                       </>
                     );
@@ -213,7 +222,7 @@ export function PlanYourTripHub() {
                               area: item.area,
                             })
                           }
-                          className="flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-3 py-3 transition-colors hover:border-sky-200 hover:bg-sky-50"
+                          className={`flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-3 py-3 transition-colors ${itemTone.card}`}
                         >
                           {content}
                         </a>
@@ -223,7 +232,7 @@ export function PlanYourTripHub() {
                       <Link
                         key={`${category.title}-${item.label}`}
                         href={item.url}
-                        className="flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-3 py-3 transition-colors hover:border-sky-200 hover:bg-sky-50"
+                        className={`flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-3 py-3 transition-colors ${itemTone.card}`}
                       >
                         {content}
                       </Link>

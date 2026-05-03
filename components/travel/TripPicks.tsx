@@ -67,7 +67,7 @@ export function TripPicks({ picks, compact = false }: TripPicksProps) {
       <div className="border-b border-slate-200/80 bg-white px-5 py-4">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="text-[11px] font-semibold uppercase text-sky-700">
+            <p className="text-[11px] font-semibold uppercase text-[#106b43]">
               {t("badge")}
             </p>
             <h2 className="mt-1 text-xl font-semibold text-slate-950">
@@ -97,18 +97,31 @@ export function TripPicks({ picks, compact = false }: TripPicksProps) {
           const Icon = iconByCategory[pick.category] ?? Luggage;
           const isDone = mounted && checked[pick.id];
           const isExternal = pick.href.startsWith("http");
+          const actionTone = isExternal
+            ? {
+                hover: "hover:border-[#ff7a00] hover:bg-[#fff8f0]",
+                icon: "border-orange-100 bg-[#fff3e7] text-[#b44b00] hover:bg-[#ffe7cf]",
+                mobile: "text-[#b44b00]",
+                pill: "border-[#ff7a00] bg-[#ff7a00] text-white group-hover:bg-[#e66700]",
+              }
+            : {
+                hover: "hover:border-[#168a56] hover:bg-[#f0fbf6]",
+                icon: "border-[#9fd7bd] bg-[#f0fbf6] text-[#106b43] hover:bg-[#dff6eb]",
+                mobile: "text-[#106b43]",
+                pill: "border-[#168a56] bg-[#168a56] text-white group-hover:bg-[#0f6f45]",
+              };
 
           const inner = (
             <div className={[
               "group flex items-center gap-3 rounded-2xl border px-3 py-3 transition-all",
               isDone
                 ? "border-emerald-200 bg-emerald-50/60"
-                : "border-slate-200 bg-white hover:border-sky-300 hover:bg-sky-50/40 hover:shadow-sm",
+                : `border-slate-200 bg-white hover:shadow-sm ${actionTone.hover}`,
             ].join(" ")}>
               <button
                 type="button"
                 onClick={(e) => toggle(pick.id, e)}
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-sky-100 bg-sky-50 text-sky-700 transition-colors hover:bg-sky-100"
+                className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border transition-colors ${actionTone.icon}`}
                 aria-label={isDone ? `${pick.title} を未完了にする` : `${pick.title} を完了にする`}
               >
                 {isDone ? (
@@ -122,12 +135,12 @@ export function TripPicks({ picks, compact = false }: TripPicksProps) {
                   {pick.title}
                 </p>
                 <p className="text-xs leading-5 text-slate-500">{pick.description}</p>
-                <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-sky-700 sm:hidden">
+                <span className={`mt-2 inline-flex items-center gap-1 text-[11px] font-semibold sm:hidden ${actionTone.mobile}`}>
                   {pick.cta}
                   {isExternal ? <ExternalLink className="h-3 w-3" /> : <ArrowRight className="h-3 w-3" />}
                 </span>
               </div>
-              <span className="hidden min-w-[104px] shrink-0 items-center justify-center gap-1 rounded-xl border border-sky-200 bg-sky-50 px-3 py-1.5 text-[11px] font-semibold text-sky-700 transition-colors group-hover:bg-sky-100 sm:inline-flex">
+              <span className={`hidden min-w-[104px] shrink-0 items-center justify-center gap-1 rounded-xl border px-3 py-1.5 text-[11px] font-semibold transition-colors sm:inline-flex ${actionTone.pill}`}>
                 {pick.cta}
                 {isExternal ? (
                   <ExternalLink className="h-3 w-3" />

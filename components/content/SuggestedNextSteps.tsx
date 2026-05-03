@@ -38,20 +38,31 @@ export function SuggestedNextSteps({
 
   return (
     <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-      <p className="text-[11px] font-semibold uppercase text-sky-700">Suggested next steps</p>
+      <p className="text-[11px] font-semibold uppercase text-[#106b43]">Suggested next steps</p>
       <div className="mt-4 grid gap-3 md:grid-cols-2">
         {visible.slice(0, 5).map((step) => {
           const Icon = step.icon;
+          const tone = step.external
+            ? {
+                card: "hover:border-[#ff7a00] hover:bg-[#fff8f0]",
+                icon: "bg-[#fff3e7] text-[#b44b00]",
+                arrow: "text-[#b44b00]",
+              }
+            : {
+                card: "hover:border-[#168a56] hover:bg-[#f0fbf6]",
+                icon: "bg-[#f0fbf6] text-[#106b43]",
+                arrow: "text-[#106b43]",
+              };
           const inner = (
-            <div className="flex h-full items-center gap-3 rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#eef6ff] text-[#145aa0]">
+            <div className={`flex h-full items-center gap-3 rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors ${tone.card}`}>
+              <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full ${tone.icon}`}>
                 <Icon className="h-5 w-5" />
               </span>
               <span className="min-w-0 flex-1">
                 <span className="block font-bold text-[#082653]">{step.title}</span>
                 <span className="mt-1 block text-xs leading-5 text-[#5f7190]">{step.desc}</span>
               </span>
-              <ArrowRight className="h-4 w-4 shrink-0 text-[#082653]" />
+              <ArrowRight className={`h-4 w-4 shrink-0 ${tone.arrow}`} />
             </div>
           );
           if (step.external) {

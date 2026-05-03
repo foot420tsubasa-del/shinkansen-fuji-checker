@@ -37,7 +37,7 @@ export function NextActions({
 }) {
   return (
     <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-      <p className="text-[11px] font-semibold uppercase text-sky-700">
+      <p className="text-[11px] font-semibold uppercase text-[#106b43]">
         {title}
       </p>
       <p className="mt-1 text-base font-semibold text-slate-950">
@@ -47,20 +47,33 @@ export function NextActions({
         {picks.map((pick) => {
           const Icon = iconByCategory[pick.category];
           const isExternal = pick.href.startsWith("http");
+          const actionTone = isExternal
+            ? {
+                hover: "hover:border-[#ff7a00] hover:bg-[#fff8f0]",
+                icon: "border-orange-100 bg-[#fff3e7] text-[#b44b00]",
+                mobile: "text-[#b44b00]",
+                pill: "border-[#ff7a00] bg-[#ff7a00] text-white group-hover:bg-[#e66700]",
+              }
+            : {
+                hover: "hover:border-[#168a56] hover:bg-[#f0fbf6]",
+                icon: "border-[#9fd7bd] bg-[#f0fbf6] text-[#106b43]",
+                mobile: "text-[#106b43]",
+                pill: "border-[#168a56] bg-[#168a56] text-white group-hover:bg-[#0f6f45]",
+              };
           const inner = (
-            <div className="group flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-3 py-3 transition-all hover:border-sky-300 hover:bg-sky-50/40 hover:shadow-sm">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-sky-100 bg-sky-50 text-sky-700">
+            <div className={`group flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-3 py-3 transition-all hover:shadow-sm ${actionTone.hover}`}>
+              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border ${actionTone.icon}`}>
                 <Icon className="h-4 w-4" />
               </div>
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-semibold text-slate-900">{pick.title}</p>
                 <p className="text-xs leading-5 text-slate-500">{pick.description}</p>
-                <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-semibold text-sky-700 sm:hidden">
+                <span className={`mt-2 inline-flex items-center gap-1 text-[11px] font-semibold sm:hidden ${actionTone.mobile}`}>
                   {pick.cta}
                   {isExternal ? <ExternalLink className="h-3 w-3" /> : <ArrowRight className="h-3 w-3" />}
                 </span>
               </div>
-              <span className="hidden min-w-[104px] shrink-0 items-center justify-center gap-1 rounded-xl border border-sky-200 bg-sky-50 px-3 py-1.5 text-[11px] font-semibold text-sky-700 transition-colors group-hover:bg-sky-100 sm:inline-flex">
+              <span className={`hidden min-w-[104px] shrink-0 items-center justify-center gap-1 rounded-xl border px-3 py-1.5 text-[11px] font-semibold transition-colors sm:inline-flex ${actionTone.pill}`}>
                 {pick.cta}
                 {isExternal ? (
                   <ExternalLink className="h-3 w-3" />
