@@ -6,16 +6,40 @@ type GtagEvent = {
   params?: Record<string, string | number | boolean | undefined>;
 };
 
+type GtagWindow = Window & {
+  dataLayer?: unknown[];
+  gtag?: (...args: unknown[]) => void;
+};
+
+function isGaDebugMode() {
+  if (typeof window === "undefined") return false;
+  return new URLSearchParams(window.location.search).get("ga_debug") === "1";
+}
+
 export function trackEvent({ action, category, label, value, params }: GtagEvent) {
   if (typeof window === "undefined") return;
-  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
-  if (!gtag) return;
-  gtag("event", action, {
+  const gaWindow = window as GtagWindow;
+  const eventParams = {
     event_category: category,
     event_label: label,
     value,
     ...params,
-  });
+    ...(isGaDebugMode() ? { debug_mode: true } : {}),
+  };
+
+  if (process.env.NODE_ENV === "development") {
+    console.debug("[GA4 event]", action, eventParams);
+  }
+
+  if (gaWindow.gtag) {
+    gaWindow.gtag("event", action, eventParams);
+    return;
+  }
+
+  if (process.env.NODE_ENV === "production") {
+    gaWindow.dataLayer = gaWindow.dataLayer || [];
+    gaWindow.dataLayer.push(["event", action, eventParams]);
+  }
 }
 
 export type AffiliateClickParams = {
