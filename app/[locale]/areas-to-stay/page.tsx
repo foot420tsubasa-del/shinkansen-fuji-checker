@@ -5,7 +5,8 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
-import { stayPages } from "@/lib/content/stay";
+import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { stayPages, type StayPage } from "@/lib/content/stay";
 import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
@@ -28,6 +29,59 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [{ url: "https://fujiseat.com/og-areas-to-stay.png", width: 1200, height: 630 }],
     },
   };
+}
+
+const tokyoSlugs = [
+  "tokyo-first-time",
+  "where-to-stay-before-shinkansen",
+  "tokyo-station-vs-shinjuku",
+  "tokyo-station-hotels-before-shinkansen",
+  "ueno-vs-shinjuku",
+  "asakusa-vs-ueno",
+] as const;
+const kyotoSlugs = ["kyoto-first-time", "kyoto-station-vs-gion"] as const;
+const osakaSlugs = ["osaka-first-time", "namba-vs-umeda", "shin-osaka-vs-namba"] as const;
+const fujiSlugs = ["kawaguchiko"] as const;
+
+function orderedPages(slugs: readonly string[]): StayPage[] {
+  return slugs
+    .map((slug) => stayPages.find((page) => page.slug === slug))
+    .filter((page): page is StayPage => Boolean(page));
+}
+
+function StayCard({ page }: { page: StayPage }) {
+  return (
+    <Link
+      key={page.slug}
+      href={`/areas-to-stay/${page.slug}`}
+      className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-slate-300 hover:shadow-md"
+    >
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-xs font-semibold text-indigo-700">
+            {page.quickRec.area} recommended
+          </p>
+          <h2 className="mt-1 text-base font-semibold text-slate-950 group-hover:text-indigo-800">
+            {page.title}
+          </h2>
+          <p className="mt-1.5 text-xs leading-5 text-slate-500">
+            {page.description}
+          </p>
+        </div>
+        <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-300 transition-colors group-hover:text-indigo-600" />
+      </div>
+      <div className="mt-3 flex flex-wrap gap-1.5">
+        {page.areas.map((area) => (
+          <span
+            key={area.name}
+            className="rounded-full border border-indigo-100 bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold text-indigo-700"
+          >
+            {area.name}
+          </span>
+        ))}
+      </div>
+    </Link>
+  );
 }
 
 export default function AreasToStayIndex() {
@@ -59,42 +113,46 @@ export default function AreasToStayIndex() {
         </p>
       </div>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        {stayPages.map((page) => (
-          <Link
-            key={page.slug}
-            href={`/areas-to-stay/${page.slug}`}
-            className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-all hover:border-slate-300 hover:shadow-md"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-xs font-semibold text-indigo-700">
-                  {page.quickRec.area} recommended
-                </p>
-                <h2 className="mt-1 text-base font-semibold text-slate-950 group-hover:text-indigo-800">
-                  {page.title}
-                </h2>
-                <p className="mt-1.5 text-xs leading-5 text-slate-500">
-                  {page.description}
-                </p>
-              </div>
-              <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-300 transition-colors group-hover:text-indigo-600" />
-            </div>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {page.areas.map((area) => (
-                <span
-                  key={area.name}
-                  className="rounded-full border border-indigo-100 bg-indigo-50 px-2.5 py-0.5 text-[10px] font-semibold text-indigo-700"
-                >
-                  {area.name}
-                </span>
-              ))}
-            </div>
-          </Link>
-        ))}
-      </div>
+      {/* Tokyo */}
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-slate-950">Tokyo</h2>
+        <p className="mt-1 text-xs text-slate-500">Compare Shinjuku, Ueno, Asakusa, Tokyo Station and more for your Tokyo base.</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {orderedPages(tokyoSlugs).map((p) => <StayCard key={p.slug} page={p} />)}
+        </div>
+      </section>
 
-      <LastCheckedNote className="mt-8 text-center" />
+      {/* Kyoto */}
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-slate-950">Kyoto</h2>
+        <p className="mt-1 text-xs text-slate-500">Kyoto Station for logistics, Gion for atmosphere, Kawaramachi for food and nightlife.</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {orderedPages(kyotoSlugs).map((p) => <StayCard key={p.slug} page={p} />)}
+        </div>
+      </section>
+
+      {/* Osaka */}
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-slate-950">Osaka</h2>
+        <p className="mt-1 text-xs text-slate-500">Namba for food and nightlife, Umeda for transport, Shin-Osaka for the Shinkansen.</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {orderedPages(osakaSlugs).map((p) => <StayCard key={p.slug} page={p} />)}
+        </div>
+      </section>
+
+      {/* Mt. Fuji / Kawaguchiko */}
+      <section className="mt-10">
+        <h2 className="text-lg font-bold text-slate-950">Mt. Fuji / Kawaguchiko</h2>
+        <p className="mt-1 text-xs text-slate-500">Extend the Shinkansen view into a lakeside overnight stay near Mt. Fuji.</p>
+        <div className="mt-4 grid gap-4 sm:grid-cols-2">
+          {orderedPages(fujiSlugs).map((p) => <StayCard key={p.slug} page={p} />)}
+        </div>
+      </section>
+
+      <footer className="mt-12 border-t border-slate-200 pt-6 text-center">
+        <LastCheckedNote />
+        <SiteLegalLinks className="mt-3 text-slate-400" />
+      </footer>
     </Container>
     </main>
   );

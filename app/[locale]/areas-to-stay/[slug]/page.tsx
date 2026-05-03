@@ -51,6 +51,22 @@ export default async function StayPage({ params }: Props) {
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
+      {page.faqs && page.faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              mainEntity: page.faqs.map((f) => ({
+                "@type": "Question",
+                name: f.question,
+                acceptedAnswer: { "@type": "Answer", text: f.answer },
+              })),
+            }),
+          }}
+        />
+      )}
       <SiteHeader />
 
       <Container className="py-8 md:py-12">
@@ -179,6 +195,21 @@ export default async function StayPage({ params }: Props) {
           </section>
 
           <NextActions picks={page.nextActions} locale={locale} pagePath={pagePath} />
+
+          {page.faqs && page.faqs.length > 0 && (
+            <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+              <h2 className="text-lg font-semibold text-slate-950">FAQ</h2>
+              <dl className="mt-4 space-y-4 text-sm">
+                {page.faqs.map((item) => (
+                  <div key={item.question}>
+                    <dt className="font-semibold text-slate-900">{item.question}</dt>
+                    <dd className="mt-1 leading-6 text-slate-600">{item.answer}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
+
           <SuggestedNextSteps currentPageType="stay" locale={locale} />
         </div>
 
