@@ -13,6 +13,7 @@ const LOCALE_LABELS: Record<string, string> = {
   "zh-CN": "简中",
   fr: "FR",
   de: "DE",
+  ru: "RU",
 };
 
 export function LanguageSelector() {
