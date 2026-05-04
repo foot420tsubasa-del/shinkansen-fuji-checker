@@ -8,6 +8,7 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAlternates } from "@/i18n/hreflang";
 import { EsimCta, InternalCta } from "./TrainSignsCtas";
+import { ShareThisPage } from "@/components/share/ShareThisPage";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -389,6 +390,13 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                 <EsimCta label="Get Japan eSIM" placement="train_signs_checklist" locale={locale} variant="subtle" />
               </div>
             </section>
+
+            <ShareThisPage
+              title="How to Read Japanese Train Signs"
+              placement="train_signs_footer"
+              description="Know someone visiting Japan for the first time? Share this train sign guide with them."
+              locale={locale}
+            />
           </article>
 
           <aside className="space-y-3 lg:sticky lg:top-24 lg:self-start">

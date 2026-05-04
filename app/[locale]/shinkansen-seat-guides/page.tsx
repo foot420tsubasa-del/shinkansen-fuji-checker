@@ -6,6 +6,7 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAlternates } from "@/i18n/hreflang";
+import { ShareThisPage } from "@/components/share/ShareThisPage";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -147,6 +148,14 @@ export default async function SeatGuidesHubPage({ params }: Props) {
         </section>
 
         <SuggestedNextSteps currentPageType="seat" locale={locale} />
+
+        <ShareThisPage
+          title="Mt. Fuji Shinkansen Seat Guides"
+          placement="seat_guides_footer"
+          description="Share these Mt. Fuji Shinkansen seat guides with someone booking Tokyo, Kyoto or Osaka trains."
+          locale={locale}
+          className="mt-8"
+        />
 
         <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">
           <p>fujiseat.com — Japan travel utility hub</p>

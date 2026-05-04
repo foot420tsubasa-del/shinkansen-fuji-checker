@@ -10,6 +10,7 @@ import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAlternates } from "@/i18n/hreflang";
 import { JR_PASS_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+import { ShareThisPage } from "@/components/share/ShareThisPage";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -301,6 +302,14 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
           </section>
 
           <SuggestedNextSteps currentPageType="train" locale={locale} />
+
+          <ShareThisPage
+            title="JR Pass vs Single Shinkansen Tickets"
+            placement="jr_pass_footer"
+            description="Still deciding about the JR Pass? Share this comparison with your travel group."
+            locale={locale}
+            className="mt-8"
+          />
         </div>
 
         <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">

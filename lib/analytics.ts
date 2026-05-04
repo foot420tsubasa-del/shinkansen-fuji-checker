@@ -158,6 +158,29 @@ export function trackCtaClick(params: {
   });
 }
 
+export function trackShareClick(params: {
+  platform: "native" | "copy" | "x" | "facebook" | "linkedin";
+  page_path?: string;
+  locale?: string;
+  placement: string;
+  label: string;
+}) {
+  trackEvent({
+    action: "share_click",
+    category: "share",
+    label: params.label,
+    params: {
+      platform: params.platform,
+      page_path:
+        params.page_path ??
+        (typeof window === "undefined" ? undefined : window.location.pathname),
+      locale: params.locale,
+      placement: params.placement,
+      label: params.label,
+    },
+  });
+}
+
 export function trackChecklistComplete(item: string) {
   trackEvent({
     action: "checklist_complete",

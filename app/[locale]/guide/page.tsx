@@ -11,6 +11,7 @@ import { GuideNextSteps } from "@/components/travel/GuideNextSteps";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+import { ShareThisPage } from "@/components/share/ShareThisPage";
 
 const SITE_URL = "https://fujiseat.com";
 
@@ -1104,6 +1105,13 @@ export default async function GuidePage({ params }: Props) {
               </Link>
             </div>
           </section>
+
+          <ShareThisPage
+            title="Which Shinkansen Seat to See Mt. Fuji?"
+            placement="guide_footer"
+            description="Was this Shinkansen seat guide helpful? Share it with someone planning a Japan trip."
+            locale={locale}
+          />
 
           <footer className="border-t border-slate-200 pt-5 text-center text-[10px] text-slate-400">
             <p>{copy.footerBrand}</p>
