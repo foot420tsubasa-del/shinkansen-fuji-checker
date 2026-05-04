@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Bed, CalendarDays, Leaf, Plane, Train, Wifi } from "lucide-react";
+import { ArrowRight, Bed, CalendarDays, Leaf, Plane, Signpost, Train, Wifi } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { ESIM_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -15,7 +15,8 @@ type SuggestedNextStepsProps = {
     | "itinerary"
     | "local-tokyo"
     | "planner"
-    | "train";
+    | "train"
+    | "train-signs";
   locale?: string;
   excludeCurrentPage?: boolean;
 };
@@ -23,6 +24,7 @@ type SuggestedNextStepsProps = {
 const steps = [
   { type: "stay", title: "Choose where to stay", desc: "Compare Tokyo bases before booking hotels.", href: "/areas-to-stay/tokyo-first-time", icon: Bed },
   { type: "transfer", title: "Compare airport transfer", desc: "Pick the route that fits luggage and arrival time.", href: "/airport-transfers/narita-to-shinjuku", icon: Plane },
+  { type: "train-signs", title: "Read Japanese train signs", desc: "Learn line, direction, train type, platform, and exit.", href: "/how-to-read-japanese-train-signs", icon: Signpost },
   { type: "esim", title: "Get Japan eSIM", desc: "Set up maps, translation, and transit before landing.", href: ESIM_URL, icon: Wifi, external: true },
   { type: "guide", title: "Check Shinkansen seat", desc: "Find the Fuji-side seat before booking.", href: "/guide", icon: Train },
   { type: "itinerary", title: "Open 7-day itinerary", desc: "Place Tokyo, Fuji, Kyoto, and Osaka in order.", href: "/itineraries/7-day-first-time-japan", icon: CalendarDays },

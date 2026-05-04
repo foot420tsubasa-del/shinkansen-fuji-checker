@@ -56,7 +56,10 @@ export type AffiliateClickParams = {
     | "next_steps"
     | "home_popular"
     | "home_essentials"
-    | "home_after_seat";
+    | "home_after_seat"
+    | "train_signs_quick_answer"
+    | "train_signs_google_maps"
+    | "train_signs_checklist";
   page_path?: string;
   locale?: string;
   href: string;
@@ -64,7 +67,7 @@ export type AffiliateClickParams = {
   area?: string;
   itinerary_slug?: string;
   day_number?: number;
-  cta_type?: "stay" | "booking" | "prepare";
+  cta_type?: "stay" | "booking" | "prepare" | "esim" | "rail" | "seat_checker" | "guide";
   hotel_name?: string;
 };
 
@@ -136,6 +139,7 @@ export function trackCtaClick(params: {
   category?: string;
   page_path?: string;
   locale?: string;
+  cta_type?: string;
 }) {
   trackEvent({
     action: "cta_click",
@@ -149,6 +153,7 @@ export function trackCtaClick(params: {
       locale: params.locale,
       href: params.href,
       label: params.label,
+      cta_type: params.cta_type,
     },
   });
 }

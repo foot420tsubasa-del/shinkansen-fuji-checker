@@ -28,6 +28,7 @@ const englishOnlyContentPaths = [
   "/privacy",
   "/terms",
   "/questions",
+  "/how-to-read-japanese-train-signs",
   "/shinkansen-seat-e",
   "/tokyo-to-kyoto-mt-fuji-seat",
   "/kyoto-to-tokyo-mt-fuji-seat",
