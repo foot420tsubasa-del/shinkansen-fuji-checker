@@ -15,8 +15,8 @@
     "title": "A local map for choosing between Kyoto Station and Gion",
     "alt": "Simplified local map showing the hotel-area logic around Kyoto Station, Gion and Kawaramachi for first-time visitors.",
     "caption": "Use this as a simple overview when comparing Kyoto Station convenience with Gion and Kawaramachi atmosphere.",
-    "disclaimer": "",
-    "status": "draft",
+    "disclaimer": "This is a simplified local guide map, not a precise navigation map. Use it to understand the general hotel-area logic, then check exact locations on Google Maps or your booking site.",
+    "status": "active",
     "lastChecked": "2026-05-07"
   },
   "osakaNambaUmedaMap": {
@@ -25,8 +25,8 @@
     "title": "A local map for choosing where to stay in Osaka",
     "alt": "Simplified local map showing Namba, Umeda and Shin-Osaka hotel-area logic for Osaka visitors.",
     "caption": "Use this as a simple overview when comparing Namba, Umeda and Shin-Osaka.",
-    "disclaimer": "",
-    "status": "draft",
+    "disclaimer": "This is a simplified local guide map, not a precise navigation map. Use it to understand the general hotel-area logic, then check exact locations on Google Maps or your booking site.",
+    "status": "active",
     "lastChecked": "2026-05-07"
   },
   "shinOsakaNambaMap": {
@@ -35,8 +35,8 @@
     "title": "A local map for choosing between Shin-Osaka and Namba",
     "alt": "Simplified local map showing Shin-Osaka and Namba hotel-area logic for Shinkansen and nightlife access.",
     "caption": "Use this as a simple overview when comparing Shin-Osaka logistics with Namba nightlife.",
-    "disclaimer": "",
-    "status": "draft",
+    "disclaimer": "This is a simplified local guide map, not a precise navigation map. Use it to understand the general hotel-area logic, then check exact locations on Google Maps or your booking site.",
+    "status": "active",
     "lastChecked": "2026-05-07"
   },
   "eastTokyoMap": {
@@ -45,8 +45,8 @@
     "title": "A local map for calmer East Tokyo hotel areas",
     "alt": "Simplified local map showing East Tokyo hotel-area logic around Ueno, Asakusa, Oshiage and nearby neighborhoods.",
     "caption": "Use this as a simple overview when considering a calmer East Tokyo base.",
-    "disclaimer": "",
-    "status": "draft",
+    "disclaimer": "This is a simplified local guide map, not a precise navigation map. Use it to understand the general hotel-area logic, then check exact locations on Google Maps or your booking site.",
+    "status": "active",
     "lastChecked": "2026-05-07"
   },
   "tokyoStationMap": {
@@ -55,8 +55,8 @@
     "title": "A local map for choosing where to stay near Tokyo Station",
     "alt": "Simplified local map showing hotel-area logic around Tokyo Station, Ginza and Nihonbashi for Shinkansen-focused stays.",
     "caption": "Use this as a simple overview when comparing Tokyo Station, Ginza and Nihonbashi.",
-    "disclaimer": "",
-    "status": "draft",
+    "disclaimer": "This is a simplified local guide map, not a precise navigation map. Use it to understand the general hotel-area logic, then check exact locations on Google Maps or your booking site.",
+    "status": "active",
     "lastChecked": "2026-05-07"
   }
 }

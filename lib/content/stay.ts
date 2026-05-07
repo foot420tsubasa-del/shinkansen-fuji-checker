@@ -232,6 +232,7 @@ const rawStayPages: StayPage[] = [
       why: "First-time visitors with heavy luggage usually do better near Kyoto Station. Shinkansen access is direct, buses depart from the main terminal, and luggage storage is easy. Choose Gion if you value traditional atmosphere over convenience.",
       link: hotelKyotoStation.href,
     },
+    mapId: "kyotoStationGionMap",
     areas: [
       {
         id: "kyoto-station",
@@ -352,6 +353,7 @@ const rawStayPages: StayPage[] = [
       why: "If the Shinkansen is your priority, Tokyo Station is the simplest base. Zero transfers to the platform, coin lockers everywhere, and you can roll your luggage straight to the gate. Shinjuku is better for nightlife but adds a 10 min transfer.",
       link: hotelTokyo.href,
     },
+    mapId: "tokyoStationMap",
     areas: [
       {
         id: "tokyo-station",
@@ -680,6 +682,7 @@ const rawStayPages: StayPage[] = [
       why: "First-time visitors who want the classic Osaka experience should stay near Namba. Dotonbori, Shinsekai, and Kuromon Market are walking distance. Nankai Line runs direct to Kansai Airport. Umeda is better for shopping, business hotels, and easier Kyoto access.",
       link: hotelNamba.href,
     },
+    mapId: "osakaNambaUmedaMap",
     areas: [
       {
         id: "namba",
@@ -746,6 +749,7 @@ const rawStayPages: StayPage[] = [
       why: "For first-time sightseeing, Namba is usually more memorable — Dotonbori, street food, and nightlife are walking distance. Choose Shin-Osaka only if you have an early Shinkansen, heavy luggage, or a short overnight stop between rail legs.",
       link: hotelNamba.href,
     },
+    mapId: "shinOsakaNambaMap",
     areas: [
       {
         id: "shin-osaka",
@@ -898,6 +902,7 @@ const rawStayPages: StayPage[] = [
       why: "Ueno is more practical: direct Skyliner from Narita, JR to Tokyo Station in 7 min, budget hotels, and Ameyoko market. Asakusa is more atmospheric but slightly less convenient for rail connections. Both areas are only 5 minutes apart by Metro.",
       link: hotelUeno.href,
     },
+    mapId: "eastTokyoMap",
     areas: [
       {
         id: "asakusa",
