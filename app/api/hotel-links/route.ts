@@ -35,7 +35,10 @@ function isValidConfig(config: unknown): config is Record<string, unknown> {
     typeof c.areaName === "string" &&
     typeof c.city === "string" &&
     typeof c.label === "string" &&
+    (!("primaryProvider" in c) || c.primaryProvider === "agoda" || c.primaryProvider === "trip") &&
+    (!("agodaUrl" in c) || typeof c.agodaUrl === "string") &&
     typeof c.tripUrl === "string" &&
+    (!("fallbackProvider" in c) || c.fallbackProvider === "trip" || c.fallbackProvider === "agoda" || c.fallbackProvider === "klook") &&
     typeof c.fallbackLinkId === "string" &&
     (!("checkinType" in c) || c.checkinType === "dynamic_offset" || c.checkinType === "fixed_date") &&
     (!("lastChecked" in c) || typeof c.lastChecked === "string")

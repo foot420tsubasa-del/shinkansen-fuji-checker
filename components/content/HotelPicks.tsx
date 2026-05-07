@@ -62,11 +62,12 @@ export function HotelPicks({
                 city={hotel?.city ?? "Tokyo"}
                 provider={h.provider ?? hotel?.provider}
                 href={hotel?.href ?? h.link}
-                placement="stay_area"
+                placement="hotel_pick"
                 locale={locale}
                 pagePath={pagePath}
                 label={h.label ?? hotel?.label ?? `Compare ${h.area} hotels`}
                 trackingHref={h.trackingHref ?? hotel?.trackingHref}
+                hotelName={h.name}
                 className="mt-3 w-full"
               />
             </div>

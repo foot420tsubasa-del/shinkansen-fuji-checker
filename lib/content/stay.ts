@@ -1,5 +1,6 @@
 import type { TripPick } from "@/lib/trip-picks";
 import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
+import type { StayAreaMapKey } from "@/lib/stay-area-maps";
 import { getManagedStayHotelPicks } from "@/lib/stay-hotel-picks";
 import { requireAffUrl } from "@/src/affiliateLinks";
 
@@ -46,6 +47,8 @@ export type StayPage = {
   title: string;
   description: string;
   quickRec: { area: string; why: string; link: string };
+  mapId?: StayAreaMapKey;
+  mapDescription?: string[];
   areas: StayArea[];
   comparisonColumns: string[];
   comparison: ComparisonRow[];
@@ -88,6 +91,11 @@ const rawStayPages: StayPage[] = [
       why: "Best balance of nightlife, transport access, and hotel density. 10 min to Tokyo Station for Shinkansen day trips. Most first-timers start here.",
       link: hotelShinjuku.href,
     },
+    mapId: "shinjukuStayMap",
+    mapDescription: [
+      "Shinjuku is convenient, but not every part of Shinjuku feels the same at night. Kabukicho is lively and useful for nightlife, but it may feel noisy for families or light sleepers.",
+      "For a calmer stay, look around Nishi-Shinjuku, Shinjuku-Gyoenmae / Shinjuku-sanchome, or Yoyogi / South Shinjuku. This is a local-style way to think about Shinjuku hotels, not a strict rule.",
+    ],
     areas: [
       {
         id: "shinjuku",

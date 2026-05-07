@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-const DATA_PATH = path.join(process.cwd(), "data", "hotel-pick-links.json");
+const DATA_PATH = path.join(process.cwd(), "data", "stay-area-maps.json");
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN || "";
 
 function isAuthorized(request: Request) {
@@ -17,11 +17,11 @@ function unauthorized() {
   return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 }
 
-function readLinks(): Record<string, unknown> {
+function readMaps(): Record<string, unknown> {
   return JSON.parse(fs.readFileSync(DATA_PATH, "utf-8"));
 }
 
-function writeLinks(data: Record<string, unknown>) {
+function writeMaps(data: Record<string, unknown>) {
   const json = JSON.stringify(data, null, 2) + "\n";
   const tmp = DATA_PATH + ".tmp";
   fs.writeFileSync(tmp, json);
@@ -32,20 +32,22 @@ function isValidConfig(config: unknown): config is Record<string, unknown> {
   if (!config || typeof config !== "object" || Array.isArray(config)) return false;
   const c = config as Record<string, unknown>;
   return (
-    typeof c.name === "string" &&
-    typeof c.hotelKey === "string" &&
-    (!("primaryProvider" in c) || c.primaryProvider === "agoda" || c.primaryProvider === "trip") &&
-    (!("agodaUrl" in c) || typeof c.agodaUrl === "string") &&
-    typeof c.tripUrl === "string" &&
-    typeof c.label === "string" &&
-    (!("lastChecked" in c) || typeof c.lastChecked === "string")
+    typeof c.id === "string" &&
+    typeof c.src === "string" &&
+    typeof c.alt === "string" &&
+    c.alt.trim().length > 0 &&
+    (!("title" in c) || typeof c.title === "string") &&
+    (!("caption" in c) || typeof c.caption === "string") &&
+    (!("disclaimer" in c) || typeof c.disclaimer === "string") &&
+    (c.status === "active" || c.status === "draft" || c.status === "disabled") &&
+    typeof c.lastChecked === "string"
   );
 }
 
 export async function GET(request: Request) {
   if (!isAuthorized(request)) return unauthorized();
   try {
-    return NextResponse.json(readLinks());
+    return NextResponse.json(readMaps());
   } catch {
     return NextResponse.json({}, { status: 500 });
   }
@@ -58,15 +60,15 @@ export async function PUT(request: Request) {
     if (typeof id !== "string" || !id.trim()) {
       return NextResponse.json({ error: "id is required" }, { status: 400 });
     }
-    if (!isValidConfig(config)) {
-      return NextResponse.json({ error: "Invalid hotel pick link config" }, { status: 400 });
+    if (!isValidConfig(config) || config.id !== id) {
+      return NextResponse.json({ error: "Invalid stay area map config" }, { status: 400 });
     }
-    const data = readLinks();
+    const data = readMaps();
     if (!(id in data)) {
-      return NextResponse.json({ error: "Hotel pick not found" }, { status: 404 });
+      return NextResponse.json({ error: "Stay area map not found" }, { status: 404 });
     }
     data[id] = config;
-    writeLinks(data);
+    writeMaps(data);
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ error: "Failed to save" }, { status: 500 });

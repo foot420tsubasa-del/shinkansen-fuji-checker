@@ -21,7 +21,10 @@ export type HotelLinkConfig = {
   areaName: string;
   city: string;
   label: string;
+  primaryProvider?: "agoda" | "trip";
+  agodaUrl?: string;
   tripUrl: string;
+  fallbackProvider?: "trip" | "agoda" | "klook";
   fallbackLinkId: string;
   checkinType?: "dynamic_offset" | "fixed_date";
   lastChecked?: string;
@@ -29,9 +32,28 @@ export type HotelLinkConfig = {
 
 const hotelLinks = hotelLinkData as Record<HotelAreaKey, HotelLinkConfig>;
 
+function agodaLabel(config: HotelLinkConfig) {
+  if (config.label.includes("Agoda")) return config.label;
+  return `Compare ${config.areaName} hotels on Agoda`;
+}
+
 export function getHotelLink(areaKey: HotelAreaKey) {
   const config = hotelLinks[areaKey];
+  const agodaUrl = config.agodaUrl?.trim() ?? "";
   const tripUrl = config.tripUrl.trim();
+  const primaryProvider = config.primaryProvider;
+
+  if ((primaryProvider === "agoda" && agodaUrl) || (!primaryProvider && agodaUrl)) {
+    return {
+      ...config,
+      label: agodaLabel(config),
+      href: agodaUrl,
+      trackingHref: agodaUrl,
+      provider: "agoda" as const,
+      checkinType: config.checkinType ?? "fixed_date",
+    };
+  }
+
   if (tripUrl) {
     const checkinType = config.checkinType ?? "dynamic_offset";
     return {
@@ -43,6 +65,17 @@ export function getHotelLink(areaKey: HotelAreaKey) {
       trackingHref: tripUrl,
       provider: "trip" as const,
       checkinType,
+    };
+  }
+
+  if (config.fallbackProvider === "agoda" && agodaUrl) {
+    return {
+      ...config,
+      label: agodaLabel(config),
+      href: agodaUrl,
+      trackingHref: agodaUrl,
+      provider: "agoda" as const,
+      checkinType: config.checkinType ?? "fixed_date",
     };
   }
 

@@ -11,6 +11,7 @@ import {
   HalfDayRoute,
   HotelAreaCTA,
 } from "@/components/content/LocalTokyoCards";
+import { AgodaHotelMap } from "@/components/affiliate/AgodaHotelMap";
 import { getAlternates } from "@/i18n/hreflang";
 import { SiteHeader } from "../components/SiteHeader";
 
@@ -60,6 +61,10 @@ function localizedUrl(locale: string, path: string) {
 }
 
 export type LocalTokyoPageKey = keyof typeof pageConfig;
+
+const agodaMapIdsByLocalTokyoPage: Partial<Record<LocalTokyoPageKey, string[]>> = {
+  oshiage: ["oshiageSkytree"],
+};
 
 type LocalTokyoCta = {
   title: string;
@@ -298,6 +303,15 @@ export async function LocalTokyoDetailPage({ locale, pageKey }: LocalTokyoDetail
               <h2 className="text-xl font-bold text-[#082653]">{common("shouldStay")}</h2>
               <p className="mt-3 text-sm leading-7 text-slate-600">{t("shouldStay")}</p>
             </section>
+
+            {(agodaMapIdsByLocalTokyoPage[pageKey] ?? []).map((mapId) => (
+              <AgodaHotelMap
+                key={mapId}
+                mapId={mapId}
+                placement="local_tokyo_map"
+                locale={locale}
+              />
+            ))}
 
             <section>
               <h2 className="text-xl font-bold text-[#082653]">{common("nearbyHotels")}</h2>

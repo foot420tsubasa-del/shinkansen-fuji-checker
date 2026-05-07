@@ -4,160 +4,206 @@
     "hotelKey": "shinjuku",
     "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-1841600/hotel-gracery-shinjuku-tokyo/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Gracery%20Shinjuku&trip_sub3=D16483434",
     "label": "Check Hotel Gracery Shinjuku on Trip.com",
-    "lastChecked": "2026-05-03"
+    "lastChecked": "2026-05-03",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "dormy-inn-ueno-okachimachi": {
     "name": "Dormy Inn Ueno Okachimachi",
     "hotelKey": "ueno",
     "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-2124497/dormy-inn-ueno-okachimachi/?Allianceid=8178829&SID=309509299&trip_sub1=Dormy%20Inn%20Ueno%20Okachimachi&trip_sub3=D16483686",
     "label": "Check Dormy Inn Ueno Okachimachi on Trip.com",
-    "lastChecked": "2026-05-03"
+    "lastChecked": "2026-05-03",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "richmond-hotel-asakusa": {
     "name": "Richmond Hotel Asakusa",
     "hotelKey": "asakusa",
     "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-686532/richmond-hotel-asakusa/?Allianceid=8178829&SID=309509299&trip_sub1=Richmond%20Hotel%20Asakusa&trip_sub3=D16483511",
     "label": "Check Richmond Hotel Asakusa on Trip.com",
-    "lastChecked": "2026-05-03"
+    "lastChecked": "2026-05-03",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "hotel-metropolitan-tokyo": {
     "name": "Hotel Metropolitan Tokyo",
     "hotelKey": "tokyoStation",
     "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-1330921/hotel-metropolitan-tokyo-marunouchi/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Metropolitan%20Tokyo&trip_sub3=D16483749",
     "label": "Check Hotel Metropolitan Tokyo on Trip.com",
-    "lastChecked": "2026-05-03"
+    "lastChecked": "2026-05-03",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "tokyu-stay-shinjuku-eastside": {
     "name": "Tokyu Stay Shinjuku Eastside",
     "hotelKey": "shinjuku",
     "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-71915937/tokyu-stay-shinjuku-eastside/?Allianceid=8178829&SID=309509299&trip_sub1=Tokyu%20Stay%20Shinjuku%20Eastside&trip_sub3=D16483784",
     "label": "Check Tokyu Stay Shinjuku Eastside on Trip.com",
-    "lastChecked": "2026-05-03"
+    "lastChecked": "2026-05-03",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "nohga-hotel-ueno-tokyo": {
     "name": "Nohga Hotel Ueno Tokyo",
     "hotelKey": "ueno",
     "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-21890132/nohga-hotel-ueno/?Allianceid=8178829&SID=309509299&trip_sub1=Nohga%20Hotel%20Ueno%20Tokyo&trip_sub3=D16483791",
     "label": "Check Nohga Hotel Ueno Tokyo on Trip.com",
-    "lastChecked": "2026-05-03"
+    "lastChecked": "2026-05-03",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "gate-hotel-kaminarimon": {
     "name": "Gate Hotel Kaminarimon",
     "hotelKey": "asakusa",
     "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-686539/the-gate-hotel-kaminarimon-by-hulic/?Allianceid=8178829&SID=309509299&trip_sub1=Gate%20Hotel%20Kaminarimon&trip_sub3=D16483833",
     "label": "Check Gate Hotel Kaminarimon on Trip.com",
-    "lastChecked": "2026-05-03"
+    "lastChecked": "2026-05-03",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "hotel-granvia-kyoto": {
     "name": "Hotel Granvia Kyoto",
     "hotelKey": "kyotoStation",
     "tripUrl": "https://www.trip.com/hotels/kyoto-hotel-detail-993497/hotel-granvia-kyoto/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Granvia%20Kyoto&trip_sub3=D16483840",
     "label": "Check Hotel Granvia Kyoto on Trip.com",
-    "lastChecked": "2026-05-03"
+    "lastChecked": "2026-05-03",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "daiwa-roynet-kyoto-station": {
     "name": "Daiwa Roynet Kyoto Station",
     "hotelKey": "kyotoStation",
     "tripUrl": "https://www.trip.com/hotels/kyoto-hotel-detail-704894/daiwa-roynet-hotel-kyoto-hachijoguchi/?Allianceid=8178829&SID=309509299&trip_sub1=Daiwa%20Roynet%20Kyoto%20Station&trip_sub3=D16484666",
     "label": "Check Daiwa Roynet Kyoto Station on Trip.com",
-    "lastChecked": ""
+    "lastChecked": "",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "sowaka-gion": {
     "name": "Sowaka Gion",
     "hotelKey": "gionKawaramachi",
     "tripUrl": "https://www.trip.com/hotels/kyoto-hotel-detail-25098093/sowaka/?Allianceid=8178829&SID=309509299&trip_sub1=Sowaka%20Gion&trip_sub3=D16483938",
     "label": "Check Sowaka Gion on Trip.com",
-    "lastChecked": "2026-05-03"
+    "lastChecked": "2026-05-03",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "hotel-the-celestine-gion": {
     "name": "Hotel The Celestine Gion",
     "hotelKey": "gionKawaramachi",
     "tripUrl": "https://www.trip.com/hotels/kyoto-hotel-detail-7045649/hotel-the-celestine-kyoto-gion/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20The%20Celestine%20Gion&trip_sub3=D16483987",
     "label": "Check Hotel The Celestine Gion on Trip.com",
-    "lastChecked": "2026-05-03"
+    "lastChecked": "2026-05-03",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "kozantei-ubuya": {
     "name": "Kozantei Ubuya",
     "hotelKey": "kawaguchiko",
     "tripUrl": "https://www.trip.com/hotels/fujikawaguchiko-hotel-detail-706407/kozantei-ubuya/?Allianceid=8178829&SID=309509299&trip_sub1=Kozantei%20Ubuya&trip_sub3=D16484491",
     "label": "Check Kozantei Ubuya on Trip.com",
-    "lastChecked": ""
+    "lastChecked": "",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "fuji-lake-hotel": {
     "name": "Fuji Lake Hotel",
     "hotelKey": "kawaguchiko",
     "tripUrl": "https://www.trip.com/hotels/fujikawaguchiko-hotel-detail-704371/fuji-lake-hotel/?Allianceid=8178829&SID=309509299&trip_sub1=Fuji%20Lake%20Hotel&trip_sub3=D16484057",
     "label": "Check Fuji Lake Hotel on Trip.com",
-    "lastChecked": "2026-05-03"
+    "lastChecked": "2026-05-03",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "hotel-mystays-fuji": {
     "name": "Hotel Mystays Fuji",
     "hotelKey": "kawaguchiko",
     "tripUrl": "https://www.trip.com/hotels/fujiyoshida-hotel-detail-5859418/hotel-mystays-fuji-onsen-resort/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Mystays%20Fuji&trip_sub3=D16484064",
     "label": "Check Hotel Mystays Fuji on Trip.com",
-    "lastChecked": "2026-05-03"
+    "lastChecked": "2026-05-03",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "cross-hotel-osaka": {
     "name": "Cross Hotel Osaka",
     "hotelKey": "namba",
     "tripUrl": "https://jp.trip.com/hotels/osaka-hotel-detail-688204/cross-hotel-osaka/?Allianceid=8178829&SID=309509299&trip_sub1=Cross%20Hotel%20Osaka&trip_sub3=D16484673",
     "label": "Check Cross Hotel Osaka on Trip.com",
-    "lastChecked": ""
+    "lastChecked": "",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "hotel-granvia-osaka": {
     "name": "Hotel Granvia Osaka",
     "hotelKey": "umeda",
     "tripUrl": "https://www.trip.com/hotels/osaka-hotel-detail-480887/hotel-granvia-osaka/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Granvia%20Osaka&trip_sub3=D16484701",
     "label": "Check Hotel Granvia Osaka on Trip.com",
-    "lastChecked": ""
+    "lastChecked": "",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "remm-shin-osaka": {
     "name": "Remm Shin-Osaka",
     "hotelKey": "shinOsaka",
     "tripUrl": "https://www.trip.com/hotels/osaka-hotel-detail-688057/remm-shin-osaka/?Allianceid=8178829&SID=309509299&trip_sub1=Remm%20Shin-Osaka&trip_sub3=D16484757",
     "label": "Check Remm Shin-Osaka on Trip.com",
-    "lastChecked": ""
+    "lastChecked": "",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "hotel-monterey-grasmere": {
     "name": "Hotel Monterey Grasmere",
     "hotelKey": "namba",
     "tripUrl": "https://www.trip.com/hotels/osaka-hotel-detail-688216/hotel-monterey-grasmere-osaka/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Monterey%20Grasmere&trip_sub3=D16484771",
     "label": "Check Hotel Monterey Grasmere on Trip.com",
-    "lastChecked": ""
+    "lastChecked": "",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "hotel-hankyu-international": {
     "name": "Hotel Hankyu International",
     "hotelKey": "umeda",
     "tripUrl": "https://www.trip.com/hotels/osaka-hotel-detail-1707413/courtyard-by-marriott-shin-osaka-station/?Allianceid=8178829&SID=309509299&trip_sub1=Courtyard%20by%20Marriott%20Shin-Osaka&trip_sub3=D16484799",
     "label": "Check Hotel Hankyu International on Trip.com",
-    "lastChecked": ""
+    "lastChecked": "",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "courtyard-marriott-shin-osaka": {
     "name": "Courtyard by Marriott Shin-Osaka",
     "hotelKey": "shinOsaka",
     "tripUrl": "https://www.trip.com/hotels/osaka-hotel-detail-1707413/courtyard-by-marriott-shin-osaka-station/?Allianceid=8178829&SID=309509299&trip_sub1=Courtyard%20by%20Marriott%20Shin-Osaka&trip_sub3=D16484813",
     "label": "Check Courtyard by Marriott Shin-Osaka on Trip.com",
-    "lastChecked": ""
+    "lastChecked": "",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "hotel-metropolitan-tokyo-marunouchi": {
     "name": "Hotel Metropolitan Tokyo Marunouchi",
     "hotelKey": "tokyoStation",
     "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-1330921/hotel-metropolitan-tokyo-marunouchi/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Metropolitan%20Tokyo&trip_sub3=D16483749",
     "label": "Check Hotel Metropolitan Tokyo Marunouchi on Trip.com",
-    "lastChecked": ""
+    "lastChecked": "",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "hotel-ryumeikan-tokyo": {
     "name": "Hotel Ryumeikan Tokyo",
     "hotelKey": "tokyoStation",
     "tripUrl": "https://jp.trip.com/hotels/tokyo-hotel-detail-688171/hotel-ryumeikan-tokyo/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Ryumeikan%20Tokyo&trip_sub3=D16484946",
     "label": "Check Hotel Ryumeikan Tokyo on Trip.com",
-    "lastChecked": ""
+    "lastChecked": "",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   },
   "mimaru-tokyo-ueno": {
     "name": "MIMARU Tokyo Ueno",
     "hotelKey": "ueno",
     "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-21864150/mimaru-tokyo-ueno-east/?Allianceid=8178829&SID=309509299&trip_sub1=&trip_sub3=D16484981",
     "label": "Check MIMARU Tokyo Ueno on Trip.com",
-    "lastChecked": ""
+    "lastChecked": "",
+    "primaryProvider": "trip",
+    "agodaUrl": ""
   }
 }

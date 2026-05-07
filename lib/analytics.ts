@@ -49,6 +49,7 @@ export type AffiliateClickParams = {
     | "guide_top"
     | "seat_result"
     | "stay_area"
+    | "hotel_pick"
     | "itinerary_day_card"
     | "airport_transfer"
     | "local_tokyo"
@@ -177,6 +178,60 @@ export function trackShareClick(params: {
       locale: params.locale,
       placement: params.placement,
       label: params.label,
+    },
+  });
+}
+
+export function trackAgodaHotelMapView(params: {
+  map_id: string;
+  area: string;
+  city: string;
+  placement: string;
+  page_path?: string;
+  locale?: string;
+}) {
+  trackEvent({
+    action: "agoda_hotel_map_view",
+    category: "hotel",
+    label: params.map_id,
+    params: {
+      provider: "agoda",
+      category: "hotel",
+      map_id: params.map_id,
+      area: params.area,
+      city: params.city,
+      placement: params.placement,
+      page_path:
+        params.page_path ??
+        (typeof window === "undefined" ? undefined : window.location.pathname),
+      locale: params.locale,
+    },
+  });
+}
+
+export function trackAgodaHotelMapClick(params: {
+  map_id: string;
+  area: string;
+  city: string;
+  placement: string;
+  page_path?: string;
+  locale?: string;
+}) {
+  trackEvent({
+    action: "agoda_hotel_map_click",
+    category: "hotel",
+    label: params.map_id,
+    params: {
+      provider: "agoda",
+      category: "hotel",
+      map_id: params.map_id,
+      area: params.area,
+      city: params.city,
+      placement: params.placement,
+      page_path:
+        params.page_path ??
+        (typeof window === "undefined" ? undefined : window.location.pathname),
+      locale: params.locale,
     },
   });
 }

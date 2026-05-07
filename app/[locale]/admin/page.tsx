@@ -4,6 +4,9 @@ import { useCallback, useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import type { LinkConfig } from "@/src/affiliateLinks";
 import type { HotelLinkConfig } from "@/lib/hotel-links";
+import type { AgodaHotelMapConfig } from "@/lib/agoda-hotel-maps";
+import { DEFAULT_STAY_AREA_MAP_DISCLAIMER } from "@/lib/stay-area-map-constants";
+import type { StayAreaMapConfig } from "@/lib/stay-area-maps";
 
 // ─── Types ──────────────────────────────────────────────────────────────────
 
@@ -24,6 +27,8 @@ type HotelPickLinkEntry = {
   id: string;
   name: string;
   hotelKey: string;
+  primaryProvider?: "agoda" | "trip";
+  agodaUrl?: string;
   tripUrl: string;
   label: string;
   lastChecked?: string;
@@ -44,13 +49,20 @@ type HotelFormState = {
   areaName: string;
   city: string;
   label: string;
+  primaryProvider: "agoda" | "trip";
+  agodaUrl: string;
   tripUrl: string;
+  fallbackProvider: "trip" | "agoda" | "klook";
   fallbackLinkId: string;
   checkinType: "dynamic_offset" | "fixed_date";
   lastChecked: string;
 };
 
 type HotelPickLinkFormState = HotelPickLinkEntry;
+type AgodaHotelMapEntry = AgodaHotelMapConfig;
+type AgodaHotelMapFormState = AgodaHotelMapConfig;
+type StayAreaMapEntry = StayAreaMapConfig;
+type StayAreaMapFormState = StayAreaMapConfig;
 
 const EMPTY_FORM: FormState = {
   id: "",
@@ -142,6 +154,8 @@ export default function AdminPage() {
   const [hotelLinks, setHotelLinks] = useState<HotelEntry[]>([]);
   const [stayHotelPicks, setStayHotelPicks] = useState<StayHotelPickGroup[]>([]);
   const [hotelPickLinks, setHotelPickLinks] = useState<HotelPickLinkEntry[]>([]);
+  const [agodaHotelMaps, setAgodaHotelMaps] = useState<AgodaHotelMapEntry[]>([]);
+  const [stayAreaMaps, setStayAreaMaps] = useState<StayAreaMapEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ text: string; ok: boolean } | null>(null);
@@ -149,12 +163,16 @@ export default function AdminPage() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [showAdd, setShowAdd] = useState(false);
   const [klookUrlInput, setKlookUrlInput] = useState("");
-  const [tab, setTab] = useState<"hotel" | "stay-picks" | "todo" | "all">("hotel");
+  const [tab, setTab] = useState<"hotel" | "stay-picks" | "stay-maps" | "agoda-maps" | "todo" | "all">("hotel");
   const [adminToken, setAdminToken] = useState("");
   const [editingHotelId, setEditingHotelId] = useState<string | null>(null);
   const [hotelForm, setHotelForm] = useState<HotelFormState | null>(null);
   const [editingHotelPickLinkId, setEditingHotelPickLinkId] = useState<string | null>(null);
   const [hotelPickLinkForm, setHotelPickLinkForm] = useState<HotelPickLinkFormState | null>(null);
+  const [editingAgodaHotelMapId, setEditingAgodaHotelMapId] = useState<string | null>(null);
+  const [agodaHotelMapForm, setAgodaHotelMapForm] = useState<AgodaHotelMapFormState | null>(null);
+  const [editingStayAreaMapId, setEditingStayAreaMapId] = useState<string | null>(null);
+  const [stayAreaMapForm, setStayAreaMapForm] = useState<StayAreaMapFormState | null>(null);
 
   const fetchLinks = useCallback(async () => {
     try {
@@ -233,6 +251,42 @@ export default function AdminPage() {
     }
   }, [adminToken]);
 
+  const fetchAgodaHotelMaps = useCallback(async () => {
+    try {
+      const res = await fetch("/api/agoda-hotel-maps", {
+        headers: adminToken ? { "x-admin-token": adminToken } : {},
+      });
+      if (res.status === 401) return;
+      const data = await res.json();
+      setAgodaHotelMaps(
+        Object.entries(data).map(([id, config]) => ({
+          ...(config as AgodaHotelMapConfig),
+          id,
+        })),
+      );
+    } catch {
+      setMessage({ text: "Agoda Hotel Mapの読み込みに失敗しました", ok: false });
+    }
+  }, [adminToken]);
+
+  const fetchStayAreaMaps = useCallback(async () => {
+    try {
+      const res = await fetch("/api/stay-area-maps", {
+        headers: adminToken ? { "x-admin-token": adminToken } : {},
+      });
+      if (res.status === 401) return;
+      const data = await res.json();
+      setStayAreaMaps(
+        Object.entries(data).map(([id, config]) => ({
+          ...(config as StayAreaMapConfig),
+          id,
+        })),
+      );
+    } catch {
+      setMessage({ text: "Stay Area Mapsの読み込みに失敗しました", ok: false });
+    }
+  }, [adminToken]);
+
   useEffect(() => {
     const saved = sessionStorage.getItem("fujiseat_admin_token") || "";
     setAdminToken(saved);
@@ -243,7 +297,9 @@ export default function AdminPage() {
     fetchHotelLinks();
     fetchStayHotelPicks();
     fetchHotelPickLinks();
-  }, [fetchLinks, fetchHotelLinks, fetchStayHotelPicks, fetchHotelPickLinks]);
+    fetchAgodaHotelMaps();
+    fetchStayAreaMaps();
+  }, [fetchLinks, fetchHotelLinks, fetchStayHotelPicks, fetchHotelPickLinks, fetchAgodaHotelMaps, fetchStayAreaMaps]);
 
   const flash = (text: string, ok: boolean) => {
     setMessage({ text, ok });
@@ -284,7 +340,10 @@ export default function AdminPage() {
       areaName: entry.areaName,
       city: entry.city,
       label: entry.label,
+      primaryProvider: entry.primaryProvider ?? "agoda",
+      agodaUrl: entry.agodaUrl ?? "",
       tripUrl: entry.tripUrl,
+      fallbackProvider: entry.fallbackProvider ?? "trip",
       fallbackLinkId: entry.fallbackLinkId,
       checkinType: entry.checkinType ?? "dynamic_offset",
       lastChecked: entry.lastChecked ?? "",
@@ -307,6 +366,8 @@ export default function AdminPage() {
       id: entry.id,
       name: entry.name,
       hotelKey: entry.hotelKey,
+      primaryProvider: entry.primaryProvider ?? "agoda",
+      agodaUrl: entry.agodaUrl ?? "",
       tripUrl: entry.tripUrl,
       label: entry.label,
       lastChecked: entry.lastChecked ?? "",
@@ -316,13 +377,51 @@ export default function AdminPage() {
     cancelHotelEdit();
   };
 
+  const startAgodaHotelMapEdit = (entry: AgodaHotelMapEntry) => {
+    setEditingAgodaHotelMapId(entry.id);
+    setAgodaHotelMapForm({ ...entry });
+    setEditingId(null);
+    setShowAdd(false);
+    cancelHotelEdit();
+    cancelHotelPickLinkEdit();
+  };
+
+  const startStayAreaMapEdit = (entry: StayAreaMapEntry) => {
+    setEditingStayAreaMapId(entry.id);
+    setStayAreaMapForm({
+      ...entry,
+      disclaimer: entry.disclaimer || DEFAULT_STAY_AREA_MAP_DISCLAIMER,
+    });
+    setEditingId(null);
+    setShowAdd(false);
+    cancelHotelEdit();
+    cancelHotelPickLinkEdit();
+    cancelAgodaHotelMapEdit();
+  };
+
   const cancelHotelPickLinkEdit = () => {
     setEditingHotelPickLinkId(null);
     setHotelPickLinkForm(null);
   };
 
+  const cancelAgodaHotelMapEdit = () => {
+    setEditingAgodaHotelMapId(null);
+    setAgodaHotelMapForm(null);
+  };
+
+  const cancelStayAreaMapEdit = () => {
+    setEditingStayAreaMapId(null);
+    setStayAreaMapForm(null);
+  };
+
   const updateHotelPickLinkForm = (field: keyof HotelPickLinkFormState, value: string) =>
     setHotelPickLinkForm((prev) => (prev ? { ...prev, [field]: value } : prev));
+
+  const updateAgodaHotelMapForm = (field: keyof AgodaHotelMapFormState, value: string) =>
+    setAgodaHotelMapForm((prev) => (prev ? { ...prev, [field]: value } : prev));
+
+  const updateStayAreaMapForm = (field: keyof StayAreaMapFormState, value: string) =>
+    setStayAreaMapForm((prev) => (prev ? { ...prev, [field]: value } : prev));
 
   const save = async () => {
     const id = form.id.trim();
@@ -364,7 +463,10 @@ export default function AdminPage() {
         areaName: hotelForm.areaName.trim(),
         city: hotelForm.city.trim(),
         label: hotelForm.label.trim(),
+        primaryProvider: hotelForm.primaryProvider,
+        agodaUrl: hotelForm.agodaUrl.trim(),
         tripUrl: hotelForm.tripUrl.trim(),
+        fallbackProvider: hotelForm.fallbackProvider,
         fallbackLinkId: hotelForm.fallbackLinkId.trim(),
         checkinType: hotelForm.checkinType,
         lastChecked: hotelForm.lastChecked.trim(),
@@ -392,8 +494,10 @@ export default function AdminPage() {
       const config = {
         name: hotelPickLinkForm.name.trim(),
         hotelKey: hotelPickLinkForm.hotelKey.trim(),
+        primaryProvider: hotelPickLinkForm.primaryProvider ?? "agoda",
+        agodaUrl: hotelPickLinkForm.agodaUrl?.trim() ?? "",
         tripUrl: hotelPickLinkForm.tripUrl.trim(),
-        label: hotelPickLinkForm.label.trim() || `Check ${hotelPickLinkForm.name.trim()} on Trip.com`,
+        label: hotelPickLinkForm.label.trim() || `Check ${hotelPickLinkForm.name.trim()}`,
         lastChecked: hotelPickLinkForm.lastChecked?.trim() || "",
       };
       const res = await fetch("/api/hotel-pick-links", {
@@ -407,6 +511,74 @@ export default function AdminPage() {
       await fetchHotelPickLinks();
     } catch {
       flash("ホテル個別リンクの保存に失敗しました", false);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const saveAgodaHotelMap = async () => {
+    if (!agodaHotelMapForm) return;
+    setSaving(true);
+    try {
+      const config: AgodaHotelMapConfig = {
+        id: agodaHotelMapForm.id,
+        label: agodaHotelMapForm.label.trim(),
+        areaName: agodaHotelMapForm.areaName.trim(),
+        city: agodaHotelMapForm.city.trim(),
+        country: agodaHotelMapForm.country.trim(),
+        status: agodaHotelMapForm.status,
+        placementDefault: agodaHotelMapForm.placementDefault.trim(),
+        embedCode: agodaHotelMapForm.embedCode.trim(),
+        scriptUrl: agodaHotelMapForm.scriptUrl.trim(),
+        iframeUrl: agodaHotelMapForm.iframeUrl.trim(),
+        notes: agodaHotelMapForm.notes.trim(),
+        lastChecked: agodaHotelMapForm.lastChecked.trim(),
+      };
+      const res = await fetch("/api/agoda-hotel-maps", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", "x-admin-token": adminToken },
+        body: JSON.stringify({ id: agodaHotelMapForm.id, config }),
+      });
+      if (!res.ok) throw new Error();
+      flash("Agoda Hotel Mapを保存しました", true);
+      cancelAgodaHotelMapEdit();
+      await fetchAgodaHotelMaps();
+    } catch {
+      flash("Agoda Hotel Mapの保存に失敗しました", false);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const saveStayAreaMap = async () => {
+    if (!stayAreaMapForm) return;
+    if (!stayAreaMapForm.alt.trim()) {
+      flash("alt は必須です", false);
+      return;
+    }
+    setSaving(true);
+    try {
+      const config: StayAreaMapConfig = {
+        id: stayAreaMapForm.id,
+        src: stayAreaMapForm.src.trim(),
+        title: stayAreaMapForm.title?.trim() ?? "",
+        alt: stayAreaMapForm.alt.trim(),
+        caption: stayAreaMapForm.caption?.trim() ?? "",
+        disclaimer: stayAreaMapForm.disclaimer?.trim() || DEFAULT_STAY_AREA_MAP_DISCLAIMER,
+        status: stayAreaMapForm.status,
+        lastChecked: stayAreaMapForm.lastChecked.trim(),
+      };
+      const res = await fetch("/api/stay-area-maps", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", "x-admin-token": adminToken },
+        body: JSON.stringify({ id: stayAreaMapForm.id, config }),
+      });
+      if (!res.ok) throw new Error();
+      flash("Stay Area Mapを保存しました", true);
+      cancelStayAreaMapEdit();
+      await fetchStayAreaMaps();
+    } catch {
+      flash("Stay Area Mapの保存に失敗しました", false);
     } finally {
       setSaving(false);
     }
@@ -453,6 +625,11 @@ export default function AdminPage() {
   const doneItems = links.filter((l) => getStatus(l) === "done");
   const tripHotelDoneCount = hotelLinks.filter((h) => h.tripUrl.trim()).length;
   const hotelPickLinkUrlCount = hotelPickLinks.filter((pick) => pick.tripUrl.trim()).length;
+  const agodaHotelMapActiveCount = agodaHotelMaps.filter((map) => map.status === "active").length;
+  const agodaHotelMapReadyCount = agodaHotelMaps.filter((map) =>
+    map.embedCode.trim() || map.iframeUrl.trim() || map.scriptUrl.trim()
+  ).length;
+  const stayAreaMapActiveCount = stayAreaMaps.filter((map) => map.status === "active").length;
 
   const hotelPickUsage = stayHotelPicks.reduce<Record<string, { slug: string; area: string; tag?: string }[]>>((acc, group) => {
     for (const pick of group.picks) {
@@ -657,6 +834,7 @@ export default function AdminPage() {
 
   function HotelLinkCard({ entry }: { entry: HotelEntry }) {
     const hasTripUrl = Boolean(entry.tripUrl.trim());
+    const hasAgodaUrl = Boolean(entry.agodaUrl?.trim());
     const isEditing = editingHotelId === entry.id && hotelForm;
 
     if (isEditing) {
@@ -704,6 +882,43 @@ export default function AdminPage() {
               className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-blue-300"
             />
           </div>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Primary provider</label>
+              <select
+                value={hotelForm.primaryProvider}
+                onChange={(e) => updateHotelForm("primaryProvider", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
+              >
+                <option value="agoda">Agoda primary</option>
+                <option value="trip">Trip.com primary</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Fallback provider</label>
+              <select
+                value={hotelForm.fallbackProvider}
+                onChange={(e) => updateHotelForm("fallbackProvider", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
+              >
+                <option value="trip">Trip.com fallback</option>
+                <option value="agoda">Agoda fallback</option>
+                <option value="klook">Klook fallback</option>
+              </select>
+            </div>
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-bold text-red-700">Agoda affiliate / deeplink URL</label>
+            <input
+              value={hotelForm.agodaUrl}
+              onChange={(e) => updateHotelForm("agodaUrl", e.target.value)}
+              placeholder="https://..."
+              className="mt-1 w-full rounded-lg border border-red-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-400"
+            />
+            <p className="mt-1 text-[10px] text-slate-500">
+              Agoda URLは直接外部リンクとして使います。Trip.com dynamic redirectには通しません。
+            </p>
+          </div>
           <div className="mt-3">
             <label className="text-[10px] font-bold text-blue-700">Trip.com affiliate / deeplink URL</label>
             <input
@@ -713,7 +928,7 @@ export default function AdminPage() {
               className="mt-1 w-full rounded-lg border border-blue-200 bg-white px-3 py-2 text-xs outline-none focus:border-blue-400"
             />
             <p className="mt-1 text-[10px] text-slate-500">
-              空欄ならKlookホテルリンクへfallbackします。Trip.com URLを入れるとGA4 providerも trip になります。
+              Agoda URLが空の場合のfallbackとして残します。Trip.com URLを入れると既存dynamic redirectとGA4 provider=tripを維持します。
             </p>
           </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -758,13 +973,16 @@ export default function AdminPage() {
     }
 
     return (
-      <div className={`rounded-2xl border bg-white p-4 shadow-sm ${hasTripUrl ? "border-blue-200" : "border-amber-200 bg-amber-50/30"}`}>
+      <div className={`rounded-2xl border bg-white p-4 shadow-sm ${hasAgodaUrl ? "border-red-200" : hasTripUrl ? "border-blue-200" : "border-amber-200 bg-amber-50/30"}`}>
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <p className="text-sm font-semibold text-slate-900">{entry.areaName}</p>
-              <span className="rounded-md border border-blue-200 bg-blue-100 px-1.5 py-0.5 text-[9px] font-bold text-blue-800">
-                Trip.com hotel
+              <span className="rounded-md border border-red-200 bg-red-100 px-1.5 py-0.5 text-[9px] font-bold text-red-800">
+                Primary: {entry.primaryProvider ?? "auto"}
+              </span>
+              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasAgodaUrl ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-600"}`}>
+                {hasAgodaUrl ? "Agoda URL 設定済み" : "Agoda URL 未設定"}
               </span>
               <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasTripUrl ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>
                 {hasTripUrl ? "Trip URL 設定済み" : "Trip URL 未設定"}
@@ -774,10 +992,10 @@ export default function AdminPage() {
               </span>
             </div>
             <p className="mt-1 text-[10px] text-slate-500">
-              {entry.city} / fallback: <code className="rounded bg-slate-100 px-1">{entry.fallbackLinkId}</code>
+              {entry.city} / fallback: <code className="rounded bg-slate-100 px-1">{entry.fallbackProvider ?? "trip"} → {entry.fallbackLinkId}</code>
             </p>
             <p className="mt-1 truncate text-[10px] text-slate-400">
-              {hasTripUrl ? entry.tripUrl : "未設定時は既存Klookホテルリンクを使用"}
+              {hasAgodaUrl ? entry.agodaUrl : hasTripUrl ? entry.tripUrl : "未設定時は既存fallbackリンクを使用"}
             </p>
           </div>
           <button
@@ -794,6 +1012,7 @@ export default function AdminPage() {
   function HotelPickLinkCard({ entry }: { entry: HotelPickLinkEntry }) {
     const isEditing = editingHotelPickLinkId === entry.id && hotelPickLinkForm;
     const hasSpecificUrl = Boolean(entry.tripUrl.trim());
+    const hasAgodaUrl = Boolean(entry.agodaUrl?.trim());
     const usages = hotelPickUsage[entry.id] ?? [];
 
     if (isEditing) {
@@ -840,6 +1059,31 @@ export default function AdminPage() {
               />
             </div>
           </div>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Primary provider</label>
+              <select
+                value={hotelPickLinkForm.primaryProvider ?? "agoda"}
+                onChange={(e) => updateHotelPickLinkForm("primaryProvider", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
+              >
+                <option value="agoda">Agoda primary</option>
+                <option value="trip">Trip.com primary</option>
+              </select>
+            </div>
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-bold text-red-700">具体ホテルのAgoda affiliate URL</label>
+            <input
+              value={hotelPickLinkForm.agodaUrl ?? ""}
+              onChange={(e) => updateHotelPickLinkForm("agodaUrl", e.target.value)}
+              placeholder="https://..."
+              className="mt-1 w-full rounded-lg border border-red-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-400"
+            />
+            <p className="mt-1 text-[10px] text-slate-500">
+              Agoda URLがあればprimaryProviderに従って個別ホテルCTAに使います。
+            </p>
+          </div>
           <div className="mt-3">
             <label className="text-[10px] font-bold text-orange-700">具体ホテルのTrip.com affiliate URL</label>
             <input
@@ -849,7 +1093,7 @@ export default function AdminPage() {
               className="mt-1 w-full rounded-lg border border-orange-200 bg-white px-3 py-2 text-xs outline-none focus:border-orange-400"
             />
             <p className="mt-1 text-[10px] text-slate-500">
-              空欄の場合は hotelKey のエリア検索リンクへfallbackします。同じホテルが複数ページに出ていても、この1箇所を保存すれば全ページに反映されます。
+              Agoda URLが空の場合のfallbackとして残します。同じホテルが複数ページに出ていても、この1箇所を保存すれば全ページに反映されます。
             </p>
           </div>
           <div className="mt-3">
@@ -881,13 +1125,19 @@ export default function AdminPage() {
     }
 
     return (
-      <div className={`rounded-2xl border bg-white p-4 shadow-sm ${hasSpecificUrl ? "border-orange-200" : "border-slate-200"}`}>
+      <div className={`rounded-2xl border bg-white p-4 shadow-sm ${hasAgodaUrl ? "border-red-200" : hasSpecificUrl ? "border-orange-200" : "border-slate-200"}`}>
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <p className="text-sm font-semibold text-slate-900">{entry.name}</p>
+              <span className="rounded-md border border-red-200 bg-red-100 px-1.5 py-0.5 text-[9px] font-bold text-red-800">
+                Primary: {entry.primaryProvider ?? "auto"}
+              </span>
+              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasAgodaUrl ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-600"}`}>
+                {hasAgodaUrl ? "Agoda URL" : "Agoda未設定"}
+              </span>
               <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasSpecificUrl ? "bg-orange-100 text-orange-700" : "bg-emerald-100 text-emerald-700"}`}>
-                {hasSpecificUrl ? "具体ホテルURL" : "エリア検索fallback"}
+                {hasSpecificUrl ? "Trip URL" : "エリア検索fallback"}
               </span>
             </div>
             <p className="mt-1 text-[10px] text-slate-500">
@@ -901,12 +1151,326 @@ export default function AdminPage() {
               ))}
             </div>
             <p className="mt-1 truncate text-[10px] text-slate-400">
-              {hasSpecificUrl ? entry.tripUrl : "未設定時はエリア検索のTrip.comリンクを使用"}
+              {hasAgodaUrl ? entry.agodaUrl : hasSpecificUrl ? entry.tripUrl : "未設定時はエリア検索リンクを使用"}
             </p>
           </div>
           <button
             onClick={() => startHotelPickLinkEdit(entry)}
             className="shrink-0 rounded-lg bg-orange-100 px-3 py-1.5 text-[10px] font-semibold text-orange-700 hover:bg-orange-200"
+          >
+            編集
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  function AgodaHotelMapCard({ entry }: { entry: AgodaHotelMapEntry }) {
+    const isEditing = editingAgodaHotelMapId === entry.id && agodaHotelMapForm;
+    const hasEmbed = Boolean(entry.embedCode.trim() || entry.iframeUrl.trim() || entry.scriptUrl.trim());
+    const statusTone =
+      entry.status === "active"
+        ? "bg-emerald-100 text-emerald-700"
+        : entry.status === "disabled"
+          ? "bg-slate-100 text-slate-600"
+          : "bg-amber-100 text-amber-700";
+
+    if (isEditing) {
+      return (
+        <div className="rounded-2xl border border-red-200 bg-red-50/40 p-4 shadow-sm">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Map ID</label>
+              <input
+                value={agodaHotelMapForm.id}
+                disabled
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-500"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Status</label>
+              <select
+                value={agodaHotelMapForm.status}
+                onChange={(e) => updateAgodaHotelMapForm("status", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
+              >
+                <option value="draft">draft</option>
+                <option value="active">active</option>
+                <option value="disabled">disabled</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Label</label>
+              <input
+                value={agodaHotelMapForm.label}
+                onChange={(e) => updateAgodaHotelMapForm("label", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Area name</label>
+              <input
+                value={agodaHotelMapForm.areaName}
+                onChange={(e) => updateAgodaHotelMapForm("areaName", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">City</label>
+              <input
+                value={agodaHotelMapForm.city}
+                onChange={(e) => updateAgodaHotelMapForm("city", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Country</label>
+              <input
+                value={agodaHotelMapForm.country}
+                onChange={(e) => updateAgodaHotelMapForm("country", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Default placement</label>
+              <input
+                value={agodaHotelMapForm.placementDefault}
+                onChange={(e) => updateAgodaHotelMapForm("placementDefault", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Last checked</label>
+              <input
+                value={agodaHotelMapForm.lastChecked}
+                onChange={(e) => updateAgodaHotelMapForm("lastChecked", e.target.value)}
+                placeholder="2026-05-07"
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
+              />
+            </div>
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-bold text-red-700">Embed code / HTML snippet</label>
+            <textarea
+              value={agodaHotelMapForm.embedCode}
+              onChange={(e) => updateAgodaHotelMapForm("embedCode", e.target.value)}
+              rows={5}
+              placeholder="<div>...</div>"
+              className="mt-1 w-full rounded-lg border border-red-200 bg-white px-3 py-2 font-mono text-xs outline-none focus:border-red-400"
+            />
+          </div>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className="text-[10px] font-bold text-red-700">Script URL</label>
+              <input
+                value={agodaHotelMapForm.scriptUrl}
+                onChange={(e) => updateAgodaHotelMapForm("scriptUrl", e.target.value)}
+                placeholder="https://..."
+                className="mt-1 w-full rounded-lg border border-red-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-400"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-bold text-red-700">Iframe URL</label>
+              <input
+                value={agodaHotelMapForm.iframeUrl}
+                onChange={(e) => updateAgodaHotelMapForm("iframeUrl", e.target.value)}
+                placeholder="https://..."
+                className="mt-1 w-full rounded-lg border border-red-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-400"
+              />
+            </div>
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-semibold text-slate-500">Notes</label>
+            <textarea
+              value={agodaHotelMapForm.notes}
+              onChange={(e) => updateAgodaHotelMapForm("notes", e.target.value)}
+              rows={3}
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
+            />
+          </div>
+          <div className="mt-4 flex gap-2">
+            <button
+              onClick={saveAgodaHotelMap}
+              disabled={saving}
+              className="rounded-lg bg-red-600 px-4 py-2 text-xs font-semibold text-white hover:bg-red-700 disabled:opacity-50"
+            >
+              {saving ? "保存中..." : "保存する"}
+            </button>
+            <button
+              onClick={cancelAgodaHotelMapEdit}
+              className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50"
+            >
+              キャンセル
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className={`rounded-2xl border bg-white p-4 shadow-sm ${hasEmbed ? "border-red-200" : "border-slate-200"}`}>
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="text-sm font-semibold text-slate-900">{entry.label}</p>
+              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${statusTone}`}>{entry.status}</span>
+              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasEmbed ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-600"}`}>
+                {hasEmbed ? "embed設定あり" : "embed未設定"}
+              </span>
+            </div>
+            <p className="mt-1 text-[10px] text-slate-500">
+              <code className="rounded bg-slate-100 px-1">{entry.id}</code> / {entry.city} / {entry.areaName}
+            </p>
+            <p className="mt-1 truncate text-[10px] text-slate-400">
+              {entry.iframeUrl || entry.scriptUrl || entry.notes || "Agoda Hotel Mapを貼り付けてください"}
+            </p>
+          </div>
+          <button
+            onClick={() => startAgodaHotelMapEdit(entry)}
+            className="shrink-0 rounded-lg bg-red-100 px-3 py-1.5 text-[10px] font-semibold text-red-700 hover:bg-red-200"
+          >
+            編集
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  function StayAreaMapCard({ entry }: { entry: StayAreaMapEntry }) {
+    const isEditing = editingStayAreaMapId === entry.id && stayAreaMapForm;
+    const hasSrc = Boolean(entry.src.trim());
+    const statusTone =
+      entry.status === "active"
+        ? "bg-emerald-100 text-emerald-700"
+        : entry.status === "disabled"
+          ? "bg-slate-100 text-slate-600"
+          : "bg-amber-100 text-amber-700";
+
+    if (isEditing) {
+      return (
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50/40 p-4 shadow-sm">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Map ID</label>
+              <input
+                value={stayAreaMapForm.id}
+                disabled
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-500"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Status</label>
+              <select
+                value={stayAreaMapForm.status}
+                onChange={(e) => updateStayAreaMapForm("status", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-emerald-300"
+              >
+                <option value="draft">draft</option>
+                <option value="active">active</option>
+                <option value="disabled">disabled</option>
+              </select>
+            </div>
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-semibold text-slate-500">画像パス</label>
+            <input
+              value={stayAreaMapForm.src}
+              onChange={(e) => updateStayAreaMapForm("src", e.target.value)}
+              placeholder="/images/stay-area-maps/shinjuku-stay-map.png"
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-emerald-300"
+            />
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-semibold text-slate-500">Title</label>
+            <input
+              value={stayAreaMapForm.title ?? ""}
+              onChange={(e) => updateStayAreaMapForm("title", e.target.value)}
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-emerald-300"
+            />
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-bold text-emerald-700">Alt（必須）</label>
+            <textarea
+              value={stayAreaMapForm.alt}
+              onChange={(e) => updateStayAreaMapForm("alt", e.target.value)}
+              rows={3}
+              className="mt-1 w-full rounded-lg border border-emerald-200 bg-white px-3 py-2 text-xs outline-none focus:border-emerald-400"
+            />
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-semibold text-slate-500">Caption</label>
+            <textarea
+              value={stayAreaMapForm.caption ?? ""}
+              onChange={(e) => updateStayAreaMapForm("caption", e.target.value)}
+              rows={3}
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-emerald-300"
+            />
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-semibold text-slate-500">Disclaimer</label>
+            <textarea
+              value={stayAreaMapForm.disclaimer || DEFAULT_STAY_AREA_MAP_DISCLAIMER}
+              onChange={(e) => updateStayAreaMapForm("disclaimer", e.target.value)}
+              rows={3}
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-emerald-300"
+            />
+            <button
+              type="button"
+              onClick={() => updateStayAreaMapForm("disclaimer", DEFAULT_STAY_AREA_MAP_DISCLAIMER)}
+              className="mt-2 rounded-lg bg-white px-3 py-1.5 text-[10px] font-semibold text-emerald-700 ring-1 ring-emerald-200 hover:bg-emerald-50"
+            >
+              標準disclaimerを入れる
+            </button>
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-semibold text-slate-500">Last checked</label>
+            <input
+              value={stayAreaMapForm.lastChecked}
+              onChange={(e) => updateStayAreaMapForm("lastChecked", e.target.value)}
+              placeholder="2026-05-07"
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-emerald-300"
+            />
+          </div>
+          <div className="mt-4 flex gap-2">
+            <button
+              onClick={saveStayAreaMap}
+              disabled={saving}
+              className="rounded-lg bg-emerald-700 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-800 disabled:opacity-50"
+            >
+              {saving ? "保存中..." : "保存する"}
+            </button>
+            <button
+              onClick={cancelStayAreaMapEdit}
+              className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50"
+            >
+              キャンセル
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className={`rounded-2xl border bg-white p-4 shadow-sm ${entry.status === "active" ? "border-emerald-200" : "border-slate-200"}`}>
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="text-sm font-semibold text-slate-900">{entry.title || entry.id}</p>
+              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${statusTone}`}>{entry.status}</span>
+              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasSrc ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"}`}>
+                {hasSrc ? "画像パスあり" : "画像パスなし"}
+              </span>
+            </div>
+            <p className="mt-1 text-[10px] text-slate-500">
+              <code className="rounded bg-slate-100 px-1">{entry.id}</code> / {entry.src}
+            </p>
+            <p className="mt-1 truncate text-[10px] text-slate-400">
+              {entry.caption || "caption未設定"}
+            </p>
+          </div>
+          <button
+            onClick={() => startStayAreaMapEdit(entry)}
+            className="shrink-0 rounded-lg bg-emerald-100 px-3 py-1.5 text-[10px] font-semibold text-emerald-700 hover:bg-emerald-200"
           >
             編集
           </button>
@@ -957,6 +1521,11 @@ export default function AdminPage() {
                 onClick={() => {
                   sessionStorage.setItem("fujiseat_admin_token", adminToken);
                   fetchLinks();
+                  fetchHotelLinks();
+                  fetchStayHotelPicks();
+                  fetchHotelPickLinks();
+                  fetchAgodaHotelMaps();
+                  fetchStayAreaMaps();
                   flash("トークンを保存しました", true);
                 }}
                 className="rounded-xl bg-slate-950 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-800"
@@ -997,11 +1566,19 @@ export default function AdminPage() {
               <p className="text-2xl font-bold text-orange-700">{hotelPickLinkUrlCount}/{hotelPickLinks.length}</p>
               <p className="text-[10px] font-medium text-orange-600">具体ホテルURL</p>
             </div>
+            <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-center">
+              <p className="text-2xl font-bold text-red-700">{agodaHotelMapActiveCount}/{agodaHotelMaps.length}</p>
+              <p className="text-[10px] font-medium text-red-600">Agoda Map active</p>
+            </div>
+            <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center">
+              <p className="text-2xl font-bold text-emerald-700">{stayAreaMapActiveCount}/{stayAreaMaps.length}</p>
+              <p className="text-[10px] font-medium text-emerald-600">Stay Map active</p>
+            </div>
           </div>
         )}
 
         {/* Tabs */}
-        <div className="mb-4 flex gap-2">
+        <div className="mb-4 flex flex-wrap gap-2">
           <button
             onClick={() => setTab("hotel")}
             className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "hotel" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
@@ -1013,6 +1590,18 @@ export default function AdminPage() {
             className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "stay-picks" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
           >
             おすすめホテル ({hotelPickLinkUrlCount}/{hotelPickLinks.length})
+          </button>
+          <button
+            onClick={() => setTab("agoda-maps")}
+            className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "agoda-maps" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
+          >
+            Agoda Maps ({agodaHotelMapReadyCount}/{agodaHotelMaps.length})
+          </button>
+          <button
+            onClick={() => setTab("stay-maps")}
+            className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "stay-maps" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
+          >
+            Stay Maps ({stayAreaMapActiveCount}/{stayAreaMaps.length})
           </button>
           <button
             onClick={() => setTab("todo")}
@@ -1105,6 +1694,76 @@ export default function AdminPage() {
             <div className="space-y-2">
               {hotelPickLinks.map((entry) => (
                 <HotelPickLinkCard key={entry.id} entry={entry} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {!loading && tab === "agoda-maps" && (
+          <div className="space-y-4">
+            <div className="rounded-2xl border border-red-200 bg-red-50/70 p-5 shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="h-3 w-3 rounded-full bg-red-500" />
+                <p className="text-sm font-bold text-slate-900">Agoda Hotel Map管理</p>
+              </div>
+              <p className="mt-2 text-xs leading-5 text-slate-600">
+                駅周辺や細かいエリアはHotelCTAではなく、Agoda公式Hotel Mapを補助ブロックとして設置します。
+                statusをactiveにし、embedCode / iframeUrl / scriptUrl のいずれかを設定したMapだけページに表示されます。
+              </p>
+              <div className="mt-3 rounded-xl bg-white px-3 py-2 text-[11px] leading-5 text-slate-600">
+                <span className="font-semibold text-slate-800">注意：</span>
+                embedCodeはadmin-only入力前提で表示します。外部scriptは必要なMapが表示されるページだけで遅延読み込みします。
+              </div>
+            </div>
+
+            <div className="space-y-6">
+              {([
+                ["Tokyo", agodaHotelMaps.filter((map) => map.city === "Tokyo")],
+                ["Kyoto", agodaHotelMaps.filter((map) => map.city === "Kyoto")],
+                ["Osaka", agodaHotelMaps.filter((map) => map.city === "Osaka")],
+                ["Other", agodaHotelMaps.filter((map) => !["Tokyo", "Kyoto", "Osaka"].includes(map.city))],
+              ] as Array<[string, AgodaHotelMapEntry[]]>).map(([city, cityItems]) => {
+                if (cityItems.length === 0) return null;
+                return (
+                  <section key={city}>
+                    <div className="mb-2 flex items-center gap-2">
+                      <p className="text-xs font-bold text-slate-700">{city}</p>
+                      <span className="text-[10px] text-slate-400">
+                        {cityItems.filter((map) => map.status === "active").length}/{cityItems.length} active
+                      </span>
+                    </div>
+                    <div className="space-y-2">
+                      {cityItems.map((entry) => (
+                        <AgodaHotelMapCard key={entry.id} entry={entry} />
+                      ))}
+                    </div>
+                  </section>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {!loading && tab === "stay-maps" && (
+          <div className="space-y-4">
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-5 shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="h-3 w-3 rounded-full bg-emerald-500" />
+                <p className="text-sm font-bold text-slate-900">Stay Area Maps管理</p>
+              </div>
+              <p className="mt-2 text-xs leading-5 text-slate-600">
+                宿泊エリアページに表示する「日本人目線の簡易ガイド地図」を管理します。
+                statusがactiveで、画像パスとaltがあるMapだけページに表示されます。
+              </p>
+              <div className="mt-3 rounded-xl bg-white px-3 py-2 text-[11px] leading-5 text-slate-600">
+                <span className="font-semibold text-slate-800">標準注釈：</span>
+                {DEFAULT_STAY_AREA_MAP_DISCLAIMER}
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              {stayAreaMaps.map((entry) => (
+                <StayAreaMapCard key={entry.id} entry={entry} />
               ))}
             </div>
           </div>

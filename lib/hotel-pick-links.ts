@@ -4,6 +4,8 @@ import type { HotelAreaKey } from "@/lib/hotel-links";
 export type HotelPickLinkConfig = {
   name: string;
   hotelKey: HotelAreaKey;
+  primaryProvider?: "agoda" | "trip";
+  agodaUrl?: string;
   tripUrl: string;
   label: string;
   lastChecked?: string;

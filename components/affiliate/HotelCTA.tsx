@@ -15,6 +15,7 @@ type HotelCTAProps = {
   pagePath: string;
   className?: string;
   trackingHref?: string;
+  hotelName?: string;
 };
 
 export function HotelCTA({
@@ -28,6 +29,7 @@ export function HotelCTA({
   pagePath,
   className,
   trackingHref,
+  hotelName,
 }: HotelCTAProps) {
   const ctaLabel = label ?? `Check latest ${areaName} hotels`;
   const analyticsHref = trackingHref ?? href;
@@ -49,6 +51,7 @@ export function HotelCTA({
           href: analyticsHref,
           label: ctaLabel,
           area: `${city}: ${areaName}`,
+          hotel_name: hotelName,
         })
       }
       className={[

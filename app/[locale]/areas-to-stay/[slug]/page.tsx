@@ -7,6 +7,7 @@ import { QuickRec } from "@/components/content/QuickRec";
 import { AreaCard } from "@/components/content/AreaCard";
 import { ComparisonTable } from "@/components/content/ComparisonTable";
 import { ProTip } from "@/components/content/ProTip";
+import { StayAreaMap } from "@/components/content/StayAreaMap";
 import { HotelPicks } from "@/components/content/HotelPicks";
 import { NextActions } from "@/components/content/NextActions";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
@@ -14,12 +15,20 @@ import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { HotelAreaCTA } from "@/components/content/LocalTokyoCards";
 import { HotelCTA } from "@/components/affiliate/HotelCTA";
+import { AgodaHotelMap } from "@/components/affiliate/AgodaHotelMap";
 import { getAllStaySlugs, getStayBySlug } from "@/lib/content/stay";
 import { getHotelLink } from "@/lib/hotel-links";
 import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
+};
+
+const agodaMapIdsByStaySlug: Record<string, string[]> = {
+  "where-to-stay-before-shinkansen": ["tokyoStation"],
+  "kyoto-station-vs-gion": ["kyotoStation"],
+  "namba-vs-umeda": ["namba"],
+  "shin-osaka-vs-namba": ["shinOsaka", "namba"],
 };
 
 export async function generateStaticParams() {
@@ -132,6 +141,24 @@ export default async function StayPage({ params }: Props) {
             </section>
           ) : null}
 
+          {page.mapId ? (
+            <section className="space-y-4">
+              <StayAreaMap
+                mapId={page.mapId}
+                priority={page.slug === "tokyo-first-time"}
+              />
+              {page.mapDescription && page.mapDescription.length > 0 ? (
+                <div className="rounded-[18px] border border-slate-200 bg-white p-5 text-sm leading-6 text-slate-600 shadow-sm">
+                  {page.mapDescription.map((paragraph) => (
+                    <p key={paragraph} className="mt-3 first:mt-0">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              ) : null}
+            </section>
+          ) : null}
+
           <QuickRec
             area={page.quickRec.area}
             why={page.quickRec.why}
@@ -209,6 +236,15 @@ export default async function StayPage({ params }: Props) {
               </dl>
             </section>
           )}
+
+          {(agodaMapIdsByStaySlug[page.slug] ?? []).map((mapId) => (
+            <AgodaHotelMap
+              key={mapId}
+              mapId={mapId}
+              placement="stay_area_map"
+              locale={locale}
+            />
+          ))}
 
           <SuggestedNextSteps currentPageType="stay" locale={locale} />
         </div>

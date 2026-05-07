@@ -6,7 +6,10 @@
     "tripUrl": "https://www.trip.com/t/48qXpVIBXU2",
     "fallbackLinkId": "hotelShinjuku",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "ueno": {
     "areaName": "Ueno",
@@ -15,7 +18,10 @@
     "tripUrl": "https://www.trip.com/t/B0JQEdOBXU2",
     "fallbackLinkId": "hotelUeno",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "asakusa": {
     "areaName": "Asakusa",
@@ -24,7 +30,10 @@
     "tripUrl": "https://www.trip.com/t/siVBikRBXU2",
     "fallbackLinkId": "hotelAsakusa",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "tokyoStation": {
     "areaName": "Tokyo Station",
@@ -33,7 +42,10 @@
     "tripUrl": "https://www.trip.com/t/PgV216VBXU2",
     "fallbackLinkId": "hotelTokyo",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "shibuya": {
     "areaName": "Shibuya",
@@ -42,7 +54,10 @@
     "tripUrl": "https://www.trip.com/t/PEM7YWXBXU2",
     "fallbackLinkId": "hotelShinjuku",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "oshiage": {
     "areaName": "Oshiage",
@@ -51,7 +66,10 @@
     "tripUrl": "https://www.trip.com/t/AbpWVXaBXU2",
     "fallbackLinkId": "hotelAsakusa",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "kyotoStation": {
     "areaName": "Kyoto Station",
@@ -60,7 +78,10 @@
     "tripUrl": "https://www.trip.com/t/LrRH7HdBXU2",
     "fallbackLinkId": "hotelKyotoStation",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "gionKawaramachi": {
     "areaName": "Gion / Kawaramachi",
@@ -69,7 +90,10 @@
     "tripUrl": "https://www.trip.com/t/vDpJrykBXU2",
     "fallbackLinkId": "hotelGion",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "namba": {
     "areaName": "Namba",
@@ -78,7 +102,10 @@
     "tripUrl": "https://www.trip.com/t/nMo892nBXU2",
     "fallbackLinkId": "hotelOsaka",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "umeda": {
     "areaName": "Umeda",
@@ -87,7 +114,10 @@
     "tripUrl": "https://www.trip.com/t/QZRM3xoBXU2",
     "fallbackLinkId": "hotelOsaka",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "shinOsaka": {
     "areaName": "Shin-Osaka",
@@ -96,7 +126,10 @@
     "tripUrl": "https://www.trip.com/t/iGx5LJqBXU2",
     "fallbackLinkId": "hotelOsaka",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "kawaguchiko": {
     "areaName": "Kawaguchiko",
@@ -105,7 +138,10 @@
     "tripUrl": "https://www.trip.com/t/4yZdOmrBXU2",
     "fallbackLinkId": "hotelKawaguchiko",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "hakone": {
     "areaName": "Hakone",
@@ -114,7 +150,10 @@
     "tripUrl": "https://www.trip.com/t/AIAiuFtBXU2",
     "fallbackLinkId": "hotelHakone",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   },
   "hiroshima": {
     "areaName": "Hiroshima",
@@ -123,6 +162,9 @@
     "tripUrl": "https://www.trip.com/t/HlmtoVuBXU2",
     "fallbackLinkId": "hotelHiroshima",
     "checkinType": "dynamic_offset",
-    "lastChecked": "2026-05-02"
+    "lastChecked": "2026-05-02",
+    "primaryProvider": "trip",
+    "agodaUrl": "",
+    "fallbackProvider": "trip"
   }
 }
