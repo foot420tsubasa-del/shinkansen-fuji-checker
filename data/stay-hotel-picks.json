@@ -32,13 +32,13 @@
     },
     {
       "id": "hotel-metropolitan-tokyo",
-      "name": "Hotel Metropolitan Tokyo",
+      "name": "Hotel Metropolitan Tokyo Marunouchi",
       "area": "Tokyo Station",
       "price": "Check latest price",
       "hotelKey": "tokyoStation",
       "tag": "",
-      "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-1330921/hotel-metropolitan-tokyo-marunouchi/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Metropolitan%20Tokyo&trip_sub3=D16483749",
-      "label": "Check Hotel Metropolitan Tokyo on Trip.com"
+      "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-1330921/hotel-metropolitan-tokyo-marunouchi/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel+Metropolitan+Tokyo+Marunouchi&trip_sub3=D16483749",
+      "label": "Check Hotel Metropolitan Tokyo Marunouchi on Trip.com"
     }
   ],
   "shinjuku-vs-ueno-vs-asakusa": [
@@ -86,13 +86,13 @@
     },
     {
       "id": "daiwa-roynet-kyoto-station",
-      "name": "Daiwa Roynet Kyoto Station",
+      "name": "Daiwa Roynet Hotel Kyoto Hachijoguchi",
       "area": "Kyoto Station",
       "price": "Check latest price",
       "hotelKey": "kyotoStation",
       "tag": "Value",
       "tripUrl": "",
-      "label": "Check Daiwa Roynet Kyoto Station on Trip.com"
+      "label": "Check Daiwa Roynet Hotel Kyoto Hachijoguchi on Trip.com"
     },
     {
       "id": "sowaka-gion",
@@ -150,13 +150,13 @@
   "where-to-stay-before-shinkansen": [
     {
       "id": "hotel-metropolitan-tokyo",
-      "name": "Hotel Metropolitan Tokyo",
+      "name": "Hotel Metropolitan Tokyo Marunouchi",
       "area": "Tokyo Station",
       "price": "Check latest price",
       "hotelKey": "tokyoStation",
       "tag": "Shinkansen",
       "tripUrl": "",
-      "label": "Check Hotel Metropolitan Tokyo on Trip.com"
+      "label": "Check Hotel Metropolitan Tokyo Marunouchi on Trip.com"
     },
     {
       "id": "hotel-gracery-shinjuku",
@@ -192,13 +192,13 @@
   "tokyo-station-vs-shinjuku": [
     {
       "id": "hotel-metropolitan-tokyo",
-      "name": "Hotel Metropolitan Tokyo",
+      "name": "Hotel Metropolitan Tokyo Marunouchi",
       "area": "Tokyo Station",
       "price": "Check latest price",
       "hotelKey": "tokyoStation",
       "tag": "Shinkansen",
       "tripUrl": "",
-      "label": "Check Hotel Metropolitan Tokyo on Trip.com"
+      "label": "Check Hotel Metropolitan Tokyo Marunouchi on Trip.com"
     },
     {
       "id": "hotel-gracery-shinjuku",
@@ -276,13 +276,13 @@
     },
     {
       "id": "daiwa-roynet-kyoto-station",
-      "name": "Daiwa Roynet Kyoto Station",
+      "name": "Daiwa Roynet Hotel Kyoto Hachijoguchi",
       "area": "Kyoto Station",
       "price": "Check latest price",
       "hotelKey": "kyotoStation",
       "tag": "Value",
       "tripUrl": "",
-      "label": "Check Daiwa Roynet Kyoto Station on Trip.com"
+      "label": "Check Daiwa Roynet Hotel Kyoto Hachijoguchi on Trip.com"
     },
     {
       "id": "sowaka-gion",
@@ -496,13 +496,13 @@
     },
     {
       "id": "mimaru-tokyo-ueno",
-      "name": "MIMARU Tokyo Ueno",
+      "name": "MIMARU Tokyo Ueno East",
       "area": "Ueno",
       "price": "Check latest price",
       "hotelKey": "ueno",
       "tag": "Family",
       "tripUrl": "",
-      "label": "Check MIMARU Tokyo Ueno on Trip.com"
+      "label": "Check MIMARU Tokyo Ueno East on Trip.com"
     }
   ]
 }

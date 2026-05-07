@@ -27,11 +27,11 @@
     "agodaUrl": ""
   },
   "hotel-metropolitan-tokyo": {
-    "name": "Hotel Metropolitan Tokyo",
+    "name": "Hotel Metropolitan Tokyo Marunouchi",
     "hotelKey": "tokyoStation",
-    "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-1330921/hotel-metropolitan-tokyo-marunouchi/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Metropolitan%20Tokyo&trip_sub3=D16483749",
-    "label": "Check Hotel Metropolitan Tokyo on Trip.com",
-    "lastChecked": "2026-05-03",
+    "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-1330921/hotel-metropolitan-tokyo-marunouchi/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel+Metropolitan+Tokyo+Marunouchi&trip_sub3=D16483749",
+    "label": "Check Hotel Metropolitan Tokyo Marunouchi on Trip.com",
+    "lastChecked": "2026-05-07",
     "primaryProvider": "trip",
     "agodaUrl": ""
   },
@@ -72,11 +72,11 @@
     "agodaUrl": ""
   },
   "daiwa-roynet-kyoto-station": {
-    "name": "Daiwa Roynet Kyoto Station",
+    "name": "Daiwa Roynet Hotel Kyoto Hachijoguchi",
     "hotelKey": "kyotoStation",
-    "tripUrl": "https://www.trip.com/hotels/kyoto-hotel-detail-704894/daiwa-roynet-hotel-kyoto-hachijoguchi/?Allianceid=8178829&SID=309509299&trip_sub1=Daiwa%20Roynet%20Kyoto%20Station&trip_sub3=D16484666",
-    "label": "Check Daiwa Roynet Kyoto Station on Trip.com",
-    "lastChecked": "",
+    "tripUrl": "https://www.trip.com/hotels/kyoto-hotel-detail-704894/daiwa-roynet-hotel-kyoto-hachijoguchi/?Allianceid=8178829&SID=309509299&trip_sub1=Daiwa+Roynet+Hotel+Kyoto+Hachijoguchi&trip_sub3=D16484666",
+    "label": "Check Daiwa Roynet Hotel Kyoto Hachijoguchi on Trip.com",
+    "lastChecked": "2026-05-07",
     "primaryProvider": "trip",
     "agodaUrl": ""
   },
@@ -164,9 +164,9 @@
   "hotel-hankyu-international": {
     "name": "Hotel Hankyu International",
     "hotelKey": "umeda",
-    "tripUrl": "https://www.trip.com/hotels/osaka-hotel-detail-1707413/courtyard-by-marriott-shin-osaka-station/?Allianceid=8178829&SID=309509299&trip_sub1=Courtyard%20by%20Marriott%20Shin-Osaka&trip_sub3=D16484799",
+    "tripUrl": "https://www.trip.com/hotels/osaka-hotel-detail-736871/hotel-hankyu-international/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel+Hankyu+International&trip_sub3=D16484799",
     "label": "Check Hotel Hankyu International on Trip.com",
-    "lastChecked": "",
+    "lastChecked": "2026-05-07",
     "primaryProvider": "trip",
     "agodaUrl": ""
   },
@@ -182,9 +182,9 @@
   "hotel-metropolitan-tokyo-marunouchi": {
     "name": "Hotel Metropolitan Tokyo Marunouchi",
     "hotelKey": "tokyoStation",
-    "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-1330921/hotel-metropolitan-tokyo-marunouchi/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel%20Metropolitan%20Tokyo&trip_sub3=D16483749",
+    "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-1330921/hotel-metropolitan-tokyo-marunouchi/?Allianceid=8178829&SID=309509299&trip_sub1=Hotel+Metropolitan+Tokyo+Marunouchi&trip_sub3=D16483749",
     "label": "Check Hotel Metropolitan Tokyo Marunouchi on Trip.com",
-    "lastChecked": "",
+    "lastChecked": "2026-05-07",
     "primaryProvider": "trip",
     "agodaUrl": ""
   },
@@ -198,11 +198,11 @@
     "agodaUrl": ""
   },
   "mimaru-tokyo-ueno": {
-    "name": "MIMARU Tokyo Ueno",
+    "name": "MIMARU Tokyo Ueno East",
     "hotelKey": "ueno",
-    "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-21864150/mimaru-tokyo-ueno-east/?Allianceid=8178829&SID=309509299&trip_sub1=&trip_sub3=D16484981",
-    "label": "Check MIMARU Tokyo Ueno on Trip.com",
-    "lastChecked": "",
+    "tripUrl": "https://www.trip.com/hotels/tokyo-hotel-detail-21864150/mimaru-tokyo-ueno-east/?Allianceid=8178829&SID=309509299&trip_sub1=MIMARU+Tokyo+Ueno+East&trip_sub3=D16484981",
+    "label": "Check MIMARU Tokyo Ueno East on Trip.com",
+    "lastChecked": "2026-05-07",
     "primaryProvider": "trip",
     "agodaUrl": ""
   }
