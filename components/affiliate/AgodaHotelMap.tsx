@@ -18,6 +18,9 @@ export function AgodaHotelMap({
   className,
   locale,
 }: AgodaHotelMapProps) {
+  // Currently disabled / not used in normal page strategy.
+  // Agoda Hotel Map embeds can include fixed dates, external scripts, limited UI control, and extra page weight.
+  // Keep the component available for draft experiments, but do not use it as the primary hotel CTA path.
   const config = getAgodaHotelMap(mapId);
   if (!isActiveAgodaHotelMap(config)) return null;
 

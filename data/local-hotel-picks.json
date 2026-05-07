@@ -1,0 +1,289 @@
+{
+  "yuenShinjuku": {
+    "id": "yuenShinjuku",
+    "city": "Tokyo",
+    "area": "Shinjuku-Gyoenmae / Shinjuku-sanchome",
+    "hotelName": "ONSEN RYOKAN YUEN SHINJUKU",
+    "bestFor": "Japanese-modern Shinjuku stay, couples, calmer atmosphere",
+    "localReason": "Good if you want Shinjuku access without sleeping deep inside the loudest nightlife blocks.",
+    "notIdealFor": "Travelers who need to be right next to JR Shinjuku Station.",
+    "tags": [
+      "Japanese-modern",
+      "calm Shinjuku",
+      "couples"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=6992283",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "mimaruShinjukuWest": {
+    "id": "mimaruShinjukuWest",
+    "city": "Tokyo",
+    "area": "Nishi-Shinjuku",
+    "hotelName": "MIMARU Tokyo Shinjuku West",
+    "bestFor": "Families, groups, longer stays",
+    "localReason": "Apartment-style rooms make more sense for families than small business hotels around Shinjuku.",
+    "notIdealFor": "Solo travelers who only need the cheapest bed.",
+    "tags": [
+      "family",
+      "group",
+      "kitchen"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=9807778",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "daiwaRoynetNishiShinjuku": {
+    "id": "daiwaRoynetNishiShinjuku",
+    "city": "Tokyo",
+    "area": "Nishi-Shinjuku",
+    "hotelName": "Daiwa Roynet Hotel Nishi-Shinjuku PREMIER",
+    "bestFor": "Calm practical stay, business, first Tokyo base",
+    "localReason": "A practical west-side Shinjuku option away from the loudest nightlife blocks.",
+    "notIdealFor": "Travelers who want nightlife immediately outside the hotel.",
+    "tags": [
+      "practical",
+      "calm",
+      "west Shinjuku"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=10567522",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "theKnotShinjuku": {
+    "id": "theKnotShinjuku",
+    "city": "Tokyo",
+    "area": "Nishi-Shinjuku / Tokyo Metropolitan Government side",
+    "hotelName": "THE KNOT TOKYO Shinjuku",
+    "bestFor": "Design, park-side stay, value-conscious travelers",
+    "localReason": "Better if you like the west-side park and government building area rather than Kabukicho.",
+    "notIdealFor": "Travelers who want to be directly at JR Shinjuku Station.",
+    "tags": [
+      "design",
+      "park-side",
+      "Nishi-Shinjuku"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=3090336",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "citanHostel": {
+    "id": "citanHostel",
+    "city": "Tokyo",
+    "area": "East Tokyo / Nihonbashi / Bakurocho",
+    "hotelName": "CITAN Hostel",
+    "bestFor": "Solo travelers, friends, hostel/cafe/bar atmosphere",
+    "localReason": "A social East Tokyo base with cafe and bar culture, better as a personality pick than a family hotel.",
+    "notIdealFor": "Families who want a quiet full-service hotel.",
+    "tags": [
+      "hostel",
+      "social",
+      "East Tokyo"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=1932063",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "theThousandKyoto": {
+    "id": "theThousandKyoto",
+    "city": "Kyoto",
+    "area": "Kyoto Station",
+    "hotelName": "THE THOUSAND KYOTO",
+    "bestFor": "Polished Kyoto Station stay, couples, first Kyoto trip",
+    "localReason": "A more polished Kyoto Station-side option for travelers who want convenience without a purely business-hotel feel.",
+    "notIdealFor": "Travelers who want to sleep inside old-town Gion.",
+    "tags": [
+      "polished",
+      "Kyoto Station",
+      "couples"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=5583852",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "mimaruKyotoStation": {
+    "id": "mimaruKyotoStation",
+    "city": "Kyoto",
+    "area": "Kyoto Station / Hachijo side",
+    "hotelName": "MIMARU Kyoto Station",
+    "bestFor": "Families, groups, longer stays",
+    "localReason": "Apartment-style rooms near Kyoto Station make luggage, day trips, and family travel easier.",
+    "notIdealFor": "Travelers who want a ryokan-style atmosphere.",
+    "tags": [
+      "family",
+      "group",
+      "kitchen",
+      "Kyoto Station"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=6992283",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "nohgaKiyomizu": {
+    "id": "nohgaKiyomizu",
+    "city": "Kyoto",
+    "area": "Kiyomizu-Gojo",
+    "hotelName": "NOHGA HOTEL KIYOMIZU KYOTO",
+    "bestFor": "Local culture, design, temple-side walking",
+    "localReason": "A good pick if you want Kyoto atmosphere without staying deep in the most crowded Gion lanes.",
+    "notIdealFor": "Travelers who prioritize being next to Kyoto Station.",
+    "tags": [
+      "local culture",
+      "design",
+      "Kiyomizu"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=30111946",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "sequenceKyotoGojo": {
+    "id": "sequenceKyotoGojo",
+    "city": "Kyoto",
+    "area": "Gojo / Shijo-Karasuma",
+    "hotelName": "sequence KYOTO GOJO",
+    "bestFor": "Practical Kyoto base, value, smart hotel",
+    "localReason": "Good balance between Kyoto Station access and central Kyoto streets.",
+    "notIdealFor": "Travelers who want classic ryokan service.",
+    "tags": [
+      "practical",
+      "Gojo",
+      "Shijo-Karasuma"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=12506406",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "nokuKyoto": {
+    "id": "nokuKyoto",
+    "city": "Kyoto",
+    "area": "Marutamachi / Kyoto Imperial Palace side",
+    "hotelName": "Noku Kyoto",
+    "bestFor": "Quiet Kyoto stay, Imperial Palace area, calmer streets",
+    "localReason": "Better for travelers who want a quieter side of Kyoto rather than the busiest tourist streets.",
+    "notIdealFor": "Travelers who want nightlife or station-first convenience.",
+    "tags": [
+      "quiet",
+      "Imperial Palace",
+      "calm Kyoto"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=1120382",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "hotelRoyalClassicOsaka": {
+    "id": "hotelRoyalClassicOsaka",
+    "city": "Osaka",
+    "area": "Namba",
+    "hotelName": "Hotel Royal Classic Osaka",
+    "bestFor": "First Osaka trip, Namba convenience, families",
+    "localReason": "A practical Namba pick when you want food, transport, and easy orientation.",
+    "notIdealFor": "Travelers who want a very quiet residential area.",
+    "tags": [
+      "Namba",
+      "practical",
+      "first Osaka"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=9790614",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "swissotelNankaiOsaka": {
+    "id": "swissotelNankaiOsaka",
+    "city": "Osaka",
+    "area": "Nankai Namba",
+    "hotelName": "Swissotel Nankai Osaka",
+    "bestFor": "Kansai Airport access, upper stay, families",
+    "localReason": "Strong if you want Namba plus simple KIX access via Nankai.",
+    "notIdealFor": "Budget travelers.",
+    "tags": [
+      "KIX access",
+      "Namba",
+      "upper stay"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=45609",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "mimaruOsakaNamba": {
+    "id": "mimaruOsakaNamba",
+    "city": "Osaka",
+    "area": "Namba / Nipponbashi",
+    "hotelName": "MIMARU Osaka Namba Station",
+    "bestFor": "Families, groups, playful stay",
+    "localReason": "Apartment-style rooms and group-friendly setup work well for families in Osaka.",
+    "notIdealFor": "Travelers who want a quiet luxury hotel.",
+    "tags": [
+      "family",
+      "group",
+      "kitchen",
+      "Namba"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=32315615",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "hotelHankyuRespire": {
+    "id": "hotelHankyuRespire",
+    "city": "Osaka",
+    "area": "Umeda",
+    "hotelName": "Hotel Hankyu RESPIRE Osaka",
+    "bestFor": "Transport, Kyoto day trips, practical Osaka base",
+    "localReason": "A practical Umeda pick when rail access matters more than nightlife.",
+    "notIdealFor": "Travelers who want to be near Dotonbori every night.",
+    "tags": [
+      "Umeda",
+      "transport",
+      "practical"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=6942282",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  },
+  "zentisOsaka": {
+    "id": "zentisOsaka",
+    "city": "Osaka",
+    "area": "Dojimahama / Kitashinchi",
+    "hotelName": "Zentis Osaka",
+    "bestFor": "Design, adult stay, polished Kita-side base",
+    "localReason": "Better for travelers who want a calmer, more polished north Osaka base.",
+    "notIdealFor": "Families who want maximum room size and kitchen facilities.",
+    "tags": [
+      "design",
+      "Kitashinchi",
+      "adult stay"
+    ],
+    "agodaUrl": "https://www.agoda.com/partners/partnersearch.aspx?pcs=1&cid=1963497&hl=en-us&hid=16306093",
+    "tripFallbackUrl": "",
+    "officialUrl": "",
+    "status": "active",
+    "lastChecked": "2026-05-07"
+  }
+}

@@ -104,6 +104,7 @@ const internalLinks = [
   { label: "Read the Fuji seat guide", href: "/guide" },
   { label: "Browse itineraries", href: "/itineraries" },
   { label: "Compare stay areas", href: "/areas-to-stay" },
+  { label: "Local hotel picks", href: "/local-hotel-picks" },
   { label: "Airport transfer guides", href: "/airport-transfers" },
   { label: "Explore route map", href: "/command-center" },
 ];

@@ -63,6 +63,35 @@ type AgodaHotelMapEntry = AgodaHotelMapConfig;
 type AgodaHotelMapFormState = AgodaHotelMapConfig;
 type StayAreaMapEntry = StayAreaMapConfig;
 type StayAreaMapFormState = StayAreaMapConfig;
+type LocalHotelPickEntry = {
+  id: string;
+  city: string;
+  area: string;
+  hotelName: string;
+  bestFor: string;
+  localReason: string;
+  notIdealFor: string;
+  tags: string[];
+  agodaUrl: string;
+  tripFallbackUrl: string;
+  officialUrl: string;
+  status: "active" | "draft" | "disabled";
+  lastChecked: string;
+};
+type LocalHotelPickFormState = LocalHotelPickEntry;
+type LocalHotelPickCityFilter = "all" | "Tokyo" | "Kyoto" | "Osaka";
+type LocalHotelPickStatusFilter = "all" | "active" | "draft" | "disabled";
+type LocalHotelPickAgodaFilter = "all" | "missing" | "present";
+
+type HotelPickProviderFilter = "all" | "agoda" | "trip";
+type HotelPickAgodaFilter = "all" | "missing" | "present";
+type HotelPickHealthFilter =
+  | "all"
+  | "primary-agoda-missing"
+  | "agoda-present-trip-primary"
+  | "missing-all-urls"
+  | "possible-mismatch"
+  | "used-3-plus";
 
 const EMPTY_FORM: FormState = {
   id: "",
@@ -93,6 +122,56 @@ const STATUS_CONFIG = {
   "needs-adid": { label: "adid 未設定", dot: "bg-amber-400", bg: "bg-amber-50/50" },
   "needs-url": { label: "URL 未設定", dot: "bg-red-400", bg: "bg-red-50/50" },
 };
+
+const AGODA_HOTEL_MAP_DISABLED_REASON =
+  "Currently disabled / not used. Agoda Hotel Map embeds can include fixed checkIn / checkOut dates, external scripts, limited UI control, and extra page weight.";
+
+const AGODA_PRIORITY_HOTEL_PICKS = [
+  "Hotel Granvia Kyoto",
+  "Hotel The Celestine Kyoto Gion",
+  "Sowaka",
+  "Hotel Metropolitan Tokyo Marunouchi",
+  "Hotel Ryumeikan Tokyo",
+  "NOHGA Hotel Ueno Tokyo",
+  "Gate Hotel Kaminarimon",
+  "Cross Hotel Osaka",
+  "Remm Shin-Osaka",
+  "Courtyard by Marriott Shin-Osaka Station",
+];
+
+const HOTEL_URL_STOP_WORDS = new Set([
+  "and",
+  "the",
+  "hotel",
+  "hotels",
+  "tokyo",
+  "kyoto",
+  "osaka",
+  "station",
+  "premier",
+]);
+
+function normalizeHotelToken(value: string) {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function getTripUrlPath(value: string) {
+  try {
+    return new URL(value).pathname.toLowerCase();
+  } catch {
+    return value.toLowerCase();
+  }
+}
+
+function hasPossibleHotelUrlMismatch(entry: HotelPickLinkEntry) {
+  if (!entry.tripUrl.trim()) return false;
+  const urlPath = getTripUrlPath(entry.tripUrl);
+  const tokens = normalizeHotelToken(entry.name)
+    .split(/\s+/)
+    .filter((token) => token.length >= 4 && !HOTEL_URL_STOP_WORDS.has(token));
+  if (tokens.length === 0) return false;
+  return !tokens.some((token) => urlPath.includes(token));
+}
 
 // ─── Placement Map ──────────────────────────────────────────────────────────
 
@@ -163,7 +242,7 @@ export default function AdminPage() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [showAdd, setShowAdd] = useState(false);
   const [klookUrlInput, setKlookUrlInput] = useState("");
-  const [tab, setTab] = useState<"hotel" | "stay-picks" | "stay-maps" | "agoda-maps" | "todo" | "all">("hotel");
+  const [tab, setTab] = useState<"hotel" | "stay-picks" | "local-picks" | "stay-maps" | "agoda-maps" | "todo" | "all">("hotel");
   const [adminToken, setAdminToken] = useState("");
   const [editingHotelId, setEditingHotelId] = useState<string | null>(null);
   const [hotelForm, setHotelForm] = useState<HotelFormState | null>(null);
@@ -173,6 +252,17 @@ export default function AdminPage() {
   const [agodaHotelMapForm, setAgodaHotelMapForm] = useState<AgodaHotelMapFormState | null>(null);
   const [editingStayAreaMapId, setEditingStayAreaMapId] = useState<string | null>(null);
   const [stayAreaMapForm, setStayAreaMapForm] = useState<StayAreaMapFormState | null>(null);
+  const [hotelPickProviderFilter, setHotelPickProviderFilter] = useState<HotelPickProviderFilter>("all");
+  const [hotelPickAgodaFilter, setHotelPickAgodaFilter] = useState<HotelPickAgodaFilter>("all");
+  const [hotelPickPageFilter, setHotelPickPageFilter] = useState("all");
+  const [hotelPickAreaFilter, setHotelPickAreaFilter] = useState("all");
+  const [hotelPickHealthFilter, setHotelPickHealthFilter] = useState<HotelPickHealthFilter>("all");
+  const [localHotelPicks, setLocalHotelPicks] = useState<LocalHotelPickEntry[]>([]);
+  const [editingLocalPickId, setEditingLocalPickId] = useState<string | null>(null);
+  const [localPickForm, setLocalPickForm] = useState<LocalHotelPickFormState | null>(null);
+  const [localPickCityFilter, setLocalPickCityFilter] = useState<LocalHotelPickCityFilter>("all");
+  const [localPickStatusFilter, setLocalPickStatusFilter] = useState<LocalHotelPickStatusFilter>("all");
+  const [localPickAgodaFilter, setLocalPickAgodaFilter] = useState<LocalHotelPickAgodaFilter>("all");
 
   const fetchLinks = useCallback(async () => {
     try {
@@ -287,6 +377,24 @@ export default function AdminPage() {
     }
   }, [adminToken]);
 
+  const fetchLocalHotelPicks = useCallback(async () => {
+    try {
+      const res = await fetch("/api/local-hotel-picks", {
+        headers: adminToken ? { "x-admin-token": adminToken } : {},
+      });
+      if (res.status === 401) return;
+      const data = await res.json();
+      setLocalHotelPicks(
+        Object.entries(data).map(([id, config]) => ({
+          ...(config as Omit<LocalHotelPickEntry, "id">),
+          id,
+        })),
+      );
+    } catch {
+      setMessage({ text: "Local Hotel Picksの読み込みに失敗しました", ok: false });
+    }
+  }, [adminToken]);
+
   useEffect(() => {
     const saved = sessionStorage.getItem("fujiseat_admin_token") || "";
     setAdminToken(saved);
@@ -299,7 +407,8 @@ export default function AdminPage() {
     fetchHotelPickLinks();
     fetchAgodaHotelMaps();
     fetchStayAreaMaps();
-  }, [fetchLinks, fetchHotelLinks, fetchStayHotelPicks, fetchHotelPickLinks, fetchAgodaHotelMaps, fetchStayAreaMaps]);
+    fetchLocalHotelPicks();
+  }, [fetchLinks, fetchHotelLinks, fetchStayHotelPicks, fetchHotelPickLinks, fetchAgodaHotelMaps, fetchStayAreaMaps, fetchLocalHotelPicks]);
 
   const flash = (text: string, ok: boolean) => {
     setMessage({ text, ok });
@@ -340,7 +449,7 @@ export default function AdminPage() {
       areaName: entry.areaName,
       city: entry.city,
       label: entry.label,
-      primaryProvider: entry.primaryProvider ?? "agoda",
+      primaryProvider: entry.primaryProvider ?? "trip",
       agodaUrl: entry.agodaUrl ?? "",
       tripUrl: entry.tripUrl,
       fallbackProvider: entry.fallbackProvider ?? "trip",
@@ -366,7 +475,7 @@ export default function AdminPage() {
       id: entry.id,
       name: entry.name,
       hotelKey: entry.hotelKey,
-      primaryProvider: entry.primaryProvider ?? "agoda",
+      primaryProvider: entry.primaryProvider ?? "trip",
       agodaUrl: entry.agodaUrl ?? "",
       tripUrl: entry.tripUrl,
       label: entry.label,
@@ -422,6 +531,60 @@ export default function AdminPage() {
 
   const updateStayAreaMapForm = (field: keyof StayAreaMapFormState, value: string) =>
     setStayAreaMapForm((prev) => (prev ? { ...prev, [field]: value } : prev));
+
+  const startLocalPickEdit = (entry: LocalHotelPickEntry) => {
+    setEditingLocalPickId(entry.id);
+    setLocalPickForm({ ...entry });
+    setEditingId(null);
+    setShowAdd(false);
+    cancelHotelEdit();
+    cancelHotelPickLinkEdit();
+    cancelAgodaHotelMapEdit();
+    cancelStayAreaMapEdit();
+  };
+
+  const cancelLocalPickEdit = () => {
+    setEditingLocalPickId(null);
+    setLocalPickForm(null);
+  };
+
+  const updateLocalPickForm = (field: keyof LocalHotelPickFormState, value: string | string[]) =>
+    setLocalPickForm((prev) => (prev ? { ...prev, [field]: value } : prev));
+
+  const saveLocalPick = async () => {
+    if (!localPickForm) return;
+    setSaving(true);
+    try {
+      const config: LocalHotelPickEntry = {
+        id: localPickForm.id,
+        city: localPickForm.city.trim(),
+        area: localPickForm.area.trim(),
+        hotelName: localPickForm.hotelName.trim(),
+        bestFor: localPickForm.bestFor.trim(),
+        localReason: localPickForm.localReason.trim(),
+        notIdealFor: localPickForm.notIdealFor.trim(),
+        tags: localPickForm.tags.map((t) => t.trim()).filter(Boolean),
+        agodaUrl: localPickForm.agodaUrl.trim(),
+        tripFallbackUrl: localPickForm.tripFallbackUrl.trim(),
+        officialUrl: localPickForm.officialUrl.trim(),
+        status: localPickForm.status,
+        lastChecked: localPickForm.lastChecked.trim(),
+      };
+      const res = await fetch("/api/local-hotel-picks", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", "x-admin-token": adminToken },
+        body: JSON.stringify({ id: localPickForm.id, config }),
+      });
+      if (!res.ok) throw new Error();
+      flash("Local Hotel Pickを保存しました", true);
+      cancelLocalPickEdit();
+      await fetchLocalHotelPicks();
+    } catch {
+      flash("Local Hotel Pickの保存に失敗しました", false);
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const save = async () => {
     const id = form.id.trim();
@@ -494,7 +657,7 @@ export default function AdminPage() {
       const config = {
         name: hotelPickLinkForm.name.trim(),
         hotelKey: hotelPickLinkForm.hotelKey.trim(),
-        primaryProvider: hotelPickLinkForm.primaryProvider ?? "agoda",
+        primaryProvider: hotelPickLinkForm.primaryProvider ?? "trip",
         agodaUrl: hotelPickLinkForm.agodaUrl?.trim() ?? "",
         tripUrl: hotelPickLinkForm.tripUrl.trim(),
         label: hotelPickLinkForm.label.trim() || `Check ${hotelPickLinkForm.name.trim()}`,
@@ -625,11 +788,19 @@ export default function AdminPage() {
   const doneItems = links.filter((l) => getStatus(l) === "done");
   const tripHotelDoneCount = hotelLinks.filter((h) => h.tripUrl.trim()).length;
   const hotelPickLinkUrlCount = hotelPickLinks.filter((pick) => pick.tripUrl.trim()).length;
-  const agodaHotelMapActiveCount = agodaHotelMaps.filter((map) => map.status === "active").length;
-  const agodaHotelMapReadyCount = agodaHotelMaps.filter((map) =>
-    map.embedCode.trim() || map.iframeUrl.trim() || map.scriptUrl.trim()
-  ).length;
   const stayAreaMapActiveCount = stayAreaMaps.filter((map) => map.status === "active").length;
+
+  const localPickActiveCount = localHotelPicks.filter((p) => p.status === "active").length;
+  const localPickDraftCount = localHotelPicks.filter((p) => p.status === "draft").length;
+  const localPickAgodaFilledCount = localHotelPicks.filter((p) => p.agodaUrl.trim()).length;
+  const localPickAgodaMissingCount = localHotelPicks.filter((p) => !p.agodaUrl.trim()).length;
+  const filteredLocalPicks = localHotelPicks.filter((p) => {
+    if (localPickCityFilter !== "all" && p.city !== localPickCityFilter) return false;
+    if (localPickStatusFilter !== "all" && p.status !== localPickStatusFilter) return false;
+    if (localPickAgodaFilter === "missing" && p.agodaUrl.trim()) return false;
+    if (localPickAgodaFilter === "present" && !p.agodaUrl.trim()) return false;
+    return true;
+  });
 
   const hotelPickUsage = stayHotelPicks.reduce<Record<string, { slug: string; area: string; tag?: string }[]>>((acc, group) => {
     for (const pick of group.picks) {
@@ -647,6 +818,41 @@ export default function AdminPage() {
       return acc;
     }, {}),
   );
+
+  const hotelAreaPrimaryAgodaMissing = hotelLinks.filter(
+    (entry) => entry.primaryProvider === "agoda" && !entry.agodaUrl?.trim(),
+  );
+  const hotelPickPrimaryAgodaMissing = hotelPickLinks.filter(
+    (entry) => entry.primaryProvider === "agoda" && !entry.agodaUrl?.trim(),
+  );
+  const hotelPickAgodaPresentTripPrimary = hotelPickLinks.filter(
+    (entry) => Boolean(entry.agodaUrl?.trim()) && (entry.primaryProvider ?? "trip") === "trip",
+  );
+  const hotelPickMissingAllUrls = hotelPickLinks.filter(
+    (entry) => !entry.agodaUrl?.trim() && !entry.tripUrl.trim(),
+  );
+  const hotelPickPossibleMismatches = hotelPickLinks.filter(hasPossibleHotelUrlMismatch);
+  const hotelPickUsedThreePlus = hotelPickLinks.filter((entry) => (hotelPickUsage[entry.id] ?? []).length >= 3);
+  const hotelPickPageOptions = stayHotelPicks.map((group) => group.slug).sort();
+  const hotelPickAreaOptions = Array.from(new Set(hotelPickLinks.map((entry) => entry.hotelKey))).sort();
+  const filteredHotelPickLinks = hotelPickLinks.filter((entry) => {
+    const usages = hotelPickUsage[entry.id] ?? [];
+    const hasAgodaUrl = Boolean(entry.agodaUrl?.trim());
+    const hasTripUrl = Boolean(entry.tripUrl.trim());
+    const provider = entry.primaryProvider ?? "trip";
+
+    if (hotelPickProviderFilter !== "all" && provider !== hotelPickProviderFilter) return false;
+    if (hotelPickAgodaFilter === "missing" && hasAgodaUrl) return false;
+    if (hotelPickAgodaFilter === "present" && !hasAgodaUrl) return false;
+    if (hotelPickPageFilter !== "all" && !usages.some((usage) => usage.slug === hotelPickPageFilter)) return false;
+    if (hotelPickAreaFilter !== "all" && entry.hotelKey !== hotelPickAreaFilter) return false;
+    if (hotelPickHealthFilter === "primary-agoda-missing" && !(provider === "agoda" && !hasAgodaUrl)) return false;
+    if (hotelPickHealthFilter === "agoda-present-trip-primary" && !(hasAgodaUrl && provider === "trip")) return false;
+    if (hotelPickHealthFilter === "missing-all-urls" && (hasAgodaUrl || hasTripUrl)) return false;
+    if (hotelPickHealthFilter === "possible-mismatch" && !hasPossibleHotelUrlMismatch(entry)) return false;
+    if (hotelPickHealthFilter === "used-3-plus" && usages.length < 3) return false;
+    return true;
+  });
 
   // ─── Inline Form ─────────────────────────────────────────────────────────
 
@@ -836,8 +1042,11 @@ export default function AdminPage() {
     const hasTripUrl = Boolean(entry.tripUrl.trim());
     const hasAgodaUrl = Boolean(entry.agodaUrl?.trim());
     const isEditing = editingHotelId === entry.id && hotelForm;
+    const primaryProvider = entry.primaryProvider ?? "trip";
+    const showAgodaEmptyWarning = primaryProvider === "agoda" && !hasAgodaUrl;
 
     if (isEditing) {
+      const editingAgodaEmptyWarning = hotelForm.primaryProvider === "agoda" && !hotelForm.agodaUrl.trim();
       return (
         <div className="rounded-2xl border border-blue-200 bg-blue-50/50 p-4 shadow-sm">
           <div className="grid gap-3 sm:grid-cols-2">
@@ -890,9 +1099,12 @@ export default function AdminPage() {
                 onChange={(e) => updateHotelForm("primaryProvider", e.target.value)}
                 className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
               >
-                <option value="agoda">Agoda primary</option>
                 <option value="trip">Trip.com primary</option>
+                <option value="agoda">Agoda primary (optional broad city link only)</option>
               </select>
+              <p className="mt-1 text-[10px] text-slate-500">
+                Area links should usually stay Trip.com primary.
+              </p>
             </div>
             <div>
               <label className="text-[10px] font-semibold text-slate-500">Fallback provider</label>
@@ -908,7 +1120,7 @@ export default function AdminPage() {
             </div>
           </div>
           <div className="mt-3">
-            <label className="text-[10px] font-bold text-red-700">Agoda affiliate / deeplink URL</label>
+            <label className="text-[10px] font-bold text-red-700">Agoda URL (optional broad city link only)</label>
             <input
               value={hotelForm.agodaUrl}
               onChange={(e) => updateHotelForm("agodaUrl", e.target.value)}
@@ -916,11 +1128,16 @@ export default function AdminPage() {
               className="mt-1 w-full rounded-lg border border-red-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-400"
             />
             <p className="mt-1 text-[10px] text-slate-500">
-              Agoda URLは直接外部リンクとして使います。Trip.com dynamic redirectには通しません。
+              Use only for broad city links. Fine area links such as Shinjuku, Ueno, Kyoto Station, Namba and Umeda should usually use Trip.com.
             </p>
+            {editingAgodaEmptyWarning ? (
+              <p className="mt-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[10px] font-semibold text-amber-800">
+                Agoda URL is empty. For area links, Trip.com should usually be the primary provider.
+              </p>
+            ) : null}
           </div>
           <div className="mt-3">
-            <label className="text-[10px] font-bold text-blue-700">Trip.com affiliate / deeplink URL</label>
+            <label className="text-[10px] font-bold text-blue-700">Trip.com area search affiliate URL</label>
             <input
               value={hotelForm.tripUrl}
               onChange={(e) => updateHotelForm("tripUrl", e.target.value)}
@@ -928,7 +1145,7 @@ export default function AdminPage() {
               className="mt-1 w-full rounded-lg border border-blue-200 bg-white px-3 py-2 text-xs outline-none focus:border-blue-400"
             />
             <p className="mt-1 text-[10px] text-slate-500">
-              Agoda URLが空の場合のfallbackとして残します。Trip.com URLを入れると既存dynamic redirectとGA4 provider=tripを維持します。
+              Main field for Hotel Area Links. This keeps the existing dynamic redirect and GA4 provider=trip flow.
             </p>
           </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
@@ -978,8 +1195,8 @@ export default function AdminPage() {
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <p className="text-sm font-semibold text-slate-900">{entry.areaName}</p>
-              <span className="rounded-md border border-red-200 bg-red-100 px-1.5 py-0.5 text-[9px] font-bold text-red-800">
-                Primary: {entry.primaryProvider ?? "auto"}
+              <span className={`rounded-md border px-1.5 py-0.5 text-[9px] font-bold ${primaryProvider === "trip" ? "border-blue-200 bg-blue-100 text-blue-800" : "border-red-200 bg-red-100 text-red-800"}`}>
+                Primary: {primaryProvider}
               </span>
               <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasAgodaUrl ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-600"}`}>
                 {hasAgodaUrl ? "Agoda URL 設定済み" : "Agoda URL 未設定"}
@@ -997,6 +1214,11 @@ export default function AdminPage() {
             <p className="mt-1 truncate text-[10px] text-slate-400">
               {hasAgodaUrl ? entry.agodaUrl : hasTripUrl ? entry.tripUrl : "未設定時は既存fallbackリンクを使用"}
             </p>
+            {showAgodaEmptyWarning ? (
+              <p className="mt-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[10px] font-semibold text-amber-800">
+                Agoda URL is empty. For area links, Trip.com should usually be the primary provider.
+              </p>
+            ) : null}
           </div>
           <button
             onClick={() => startHotelEdit(entry)}
@@ -1014,8 +1236,36 @@ export default function AdminPage() {
     const hasSpecificUrl = Boolean(entry.tripUrl.trim());
     const hasAgodaUrl = Boolean(entry.agodaUrl?.trim());
     const usages = hotelPickUsage[entry.id] ?? [];
+    const primaryProvider = entry.primaryProvider ?? "trip";
+    const possibleMismatch = hasPossibleHotelUrlMismatch(entry);
+    const warningMessages = [
+      primaryProvider === "agoda" && !hasAgodaUrl
+        ? "Agoda URL is empty. Use Agoda only when agodaUrl is filled; otherwise use Trip.com."
+        : "",
+      hasAgodaUrl && primaryProvider === "trip"
+        ? "Agoda URL is available. Consider setting primaryProvider to agoda."
+        : "",
+      !hasAgodaUrl && !hasSpecificUrl
+        ? "No Agoda or Trip.com URL is set. This pick will fall back to the area search link."
+        : "",
+      possibleMismatch ? "Possible URL mismatch: hotel name and URL slug look different." : "",
+    ].filter(Boolean);
 
     if (isEditing) {
+      const editingHasAgodaUrl = Boolean(hotelPickLinkForm.agodaUrl?.trim());
+      const editingHasTripUrl = Boolean(hotelPickLinkForm.tripUrl.trim());
+      const editingPrimaryProvider = hotelPickLinkForm.primaryProvider ?? "trip";
+      const editingWarnings = [
+        editingPrimaryProvider === "agoda" && !editingHasAgodaUrl
+          ? "Agoda URL is empty. Use Agoda only when agodaUrl is filled; otherwise use Trip.com."
+          : "",
+        editingHasAgodaUrl && editingPrimaryProvider === "trip"
+          ? "Agoda URL is available. Consider setting primaryProvider to agoda."
+          : "",
+        !editingHasAgodaUrl && !editingHasTripUrl
+          ? "No Agoda or Trip.com URL is set. This pick will fall back to the area search link."
+          : "",
+      ].filter(Boolean);
       return (
         <div className="rounded-2xl border border-orange-200 bg-orange-50/40 p-4 shadow-sm">
           <div className="grid gap-3 sm:grid-cols-2">
@@ -1063,17 +1313,37 @@ export default function AdminPage() {
             <div>
               <label className="text-[10px] font-semibold text-slate-500">Primary provider</label>
               <select
-                value={hotelPickLinkForm.primaryProvider ?? "agoda"}
+                value={hotelPickLinkForm.primaryProvider ?? "trip"}
                 onChange={(e) => updateHotelPickLinkForm("primaryProvider", e.target.value)}
                 className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-300"
               >
                 <option value="agoda">Agoda primary</option>
                 <option value="trip">Trip.com primary</option>
               </select>
+              <p className="mt-1 text-[10px] text-slate-500">
+                Use Agoda only when agodaUrl is filled. Otherwise use Trip.com.
+              </p>
             </div>
           </div>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button
+              type="button"
+              disabled={!editingHasAgodaUrl}
+              onClick={() => updateHotelPickLinkForm("primaryProvider", "agoda")}
+              className="rounded-lg bg-red-100 px-3 py-1.5 text-[10px] font-semibold text-red-700 hover:bg-red-200 disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Set primary to Agoda
+            </button>
+            <button
+              type="button"
+              onClick={() => updateHotelPickLinkForm("primaryProvider", "trip")}
+              className="rounded-lg bg-blue-100 px-3 py-1.5 text-[10px] font-semibold text-blue-700 hover:bg-blue-200"
+            >
+              Set primary to Trip.com
+            </button>
+          </div>
           <div className="mt-3">
-            <label className="text-[10px] font-bold text-red-700">具体ホテルのAgoda affiliate URL</label>
+            <label className="text-[10px] font-bold text-red-700">Agoda individual hotel affiliate URL</label>
             <input
               value={hotelPickLinkForm.agodaUrl ?? ""}
               onChange={(e) => updateHotelPickLinkForm("agodaUrl", e.target.value)}
@@ -1081,11 +1351,11 @@ export default function AdminPage() {
               className="mt-1 w-full rounded-lg border border-red-200 bg-white px-3 py-2 text-xs outline-none focus:border-red-400"
             />
             <p className="mt-1 text-[10px] text-slate-500">
-              Agoda URLがあればprimaryProviderに従って個別ホテルCTAに使います。
+              Add Agoda URLs here only for specific hotel recommendation cards.
             </p>
           </div>
           <div className="mt-3">
-            <label className="text-[10px] font-bold text-orange-700">具体ホテルのTrip.com affiliate URL</label>
+            <label className="text-[10px] font-bold text-orange-700">Trip.com individual hotel fallback URL</label>
             <input
               value={hotelPickLinkForm.tripUrl}
               onChange={(e) => updateHotelPickLinkForm("tripUrl", e.target.value)}
@@ -1096,6 +1366,15 @@ export default function AdminPage() {
               Agoda URLが空の場合のfallbackとして残します。同じホテルが複数ページに出ていても、この1箇所を保存すれば全ページに反映されます。
             </p>
           </div>
+          {editingWarnings.length > 0 ? (
+            <div className="mt-3 space-y-2">
+              {editingWarnings.map((warning) => (
+                <p key={warning} className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[10px] font-semibold text-amber-800">
+                  {warning}
+                </p>
+              ))}
+            </div>
+          ) : null}
           <div className="mt-3">
             <label className="text-[10px] font-semibold text-slate-500">ボタン文言</label>
             <input
@@ -1130,8 +1409,8 @@ export default function AdminPage() {
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <p className="text-sm font-semibold text-slate-900">{entry.name}</p>
-              <span className="rounded-md border border-red-200 bg-red-100 px-1.5 py-0.5 text-[9px] font-bold text-red-800">
-                Primary: {entry.primaryProvider ?? "auto"}
+              <span className={`rounded-md border px-1.5 py-0.5 text-[9px] font-bold ${primaryProvider === "agoda" ? "border-red-200 bg-red-100 text-red-800" : "border-blue-200 bg-blue-100 text-blue-800"}`}>
+                Primary: {primaryProvider}
               </span>
               <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasAgodaUrl ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-600"}`}>
                 {hasAgodaUrl ? "Agoda URL" : "Agoda未設定"}
@@ -1153,6 +1432,15 @@ export default function AdminPage() {
             <p className="mt-1 truncate text-[10px] text-slate-400">
               {hasAgodaUrl ? entry.agodaUrl : hasSpecificUrl ? entry.tripUrl : "未設定時はエリア検索リンクを使用"}
             </p>
+            {warningMessages.length > 0 ? (
+              <div className="mt-2 space-y-1">
+                {warningMessages.map((warning) => (
+                  <p key={warning} className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-1.5 text-[10px] font-semibold text-amber-800">
+                    {warning}
+                  </p>
+                ))}
+              </div>
+            ) : null}
           </div>
           <button
             onClick={() => startHotelPickLinkEdit(entry)}
@@ -1160,6 +1448,226 @@ export default function AdminPage() {
           >
             編集
           </button>
+        </div>
+      </div>
+    );
+  }
+
+  function LocalHotelPickCard({ entry }: { entry: LocalHotelPickEntry }) {
+    const isEditing = editingLocalPickId === entry.id && localPickForm;
+    const hasAgodaUrl = Boolean(entry.agodaUrl.trim());
+    const statusTone =
+      entry.status === "active"
+        ? "bg-emerald-100 text-emerald-700"
+        : entry.status === "disabled"
+          ? "bg-slate-100 text-slate-600"
+          : "bg-amber-100 text-amber-700";
+    const warningMessages = [
+      !entry.hotelName.trim() ? "Hotel name is empty." : "",
+      !entry.city.trim() ? "City is empty." : "",
+      !entry.localReason.trim() ? "Local reason is empty." : "",
+      !hasAgodaUrl ? "Agoda URL is missing. This card will not show an active booking button." : "",
+      entry.status === "active" && !hasAgodaUrl
+        ? "Active pick without Agoda URL. The card will show 'Agoda link coming soon'."
+        : "",
+    ].filter(Boolean);
+
+    if (isEditing) {
+      return (
+        <div className="rounded-2xl border border-purple-200 bg-purple-50/40 p-4 shadow-sm">
+          <div className="grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">ID</label>
+              <input value={localPickForm.id} disabled className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-100 px-3 py-2 text-xs text-slate-500" />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Hotel name</label>
+              <input
+                value={localPickForm.hotelName}
+                onChange={(e) => updateLocalPickForm("hotelName", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-purple-300"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">City</label>
+              <select
+                value={localPickForm.city}
+                onChange={(e) => updateLocalPickForm("city", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-purple-300"
+              >
+                <option value="Tokyo">Tokyo</option>
+                <option value="Kyoto">Kyoto</option>
+                <option value="Osaka">Osaka</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Area</label>
+              <input
+                value={localPickForm.area}
+                onChange={(e) => updateLocalPickForm("area", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-purple-300"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Status</label>
+              <select
+                value={localPickForm.status}
+                onChange={(e) => updateLocalPickForm("status", e.target.value)}
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-purple-300"
+              >
+                <option value="active">active</option>
+                <option value="draft">draft</option>
+                <option value="disabled">disabled</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Last checked</label>
+              <input
+                value={localPickForm.lastChecked}
+                onChange={(e) => updateLocalPickForm("lastChecked", e.target.value)}
+                placeholder="2026-05-07"
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-purple-300"
+              />
+            </div>
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-semibold text-slate-500">Best for</label>
+            <input
+              value={localPickForm.bestFor}
+              onChange={(e) => updateLocalPickForm("bestFor", e.target.value)}
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-purple-300"
+            />
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-semibold text-slate-500">Why this local pick</label>
+            <textarea
+              value={localPickForm.localReason}
+              onChange={(e) => updateLocalPickForm("localReason", e.target.value)}
+              rows={2}
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-purple-300"
+            />
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-semibold text-slate-500">Not ideal for</label>
+            <input
+              value={localPickForm.notIdealFor}
+              onChange={(e) => updateLocalPickForm("notIdealFor", e.target.value)}
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-purple-300"
+            />
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-semibold text-slate-500">Tags (comma-separated)</label>
+            <input
+              value={localPickForm.tags.join(", ")}
+              onChange={(e) => updateLocalPickForm("tags", e.target.value.split(",").map((t) => t.trim()))}
+              className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-purple-300"
+            />
+          </div>
+          <div className="mt-3">
+            <label className="text-[10px] font-bold text-purple-700">Agoda individual hotel affiliate URL</label>
+            <input
+              value={localPickForm.agodaUrl}
+              onChange={(e) => updateLocalPickForm("agodaUrl", e.target.value)}
+              placeholder="https://..."
+              className="mt-1 w-full rounded-lg border border-purple-200 bg-white px-3 py-2 text-xs outline-none focus:border-purple-400"
+            />
+          </div>
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Trip.com fallback URL (optional)</label>
+              <input
+                value={localPickForm.tripFallbackUrl}
+                onChange={(e) => updateLocalPickForm("tripFallbackUrl", e.target.value)}
+                placeholder="https://..."
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-purple-300"
+              />
+            </div>
+            <div>
+              <label className="text-[10px] font-semibold text-slate-500">Official URL (optional)</label>
+              <input
+                value={localPickForm.officialUrl}
+                onChange={(e) => updateLocalPickForm("officialUrl", e.target.value)}
+                placeholder="https://..."
+                className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-purple-300"
+              />
+            </div>
+          </div>
+          <div className="mt-4 flex gap-2">
+            <button
+              onClick={saveLocalPick}
+              disabled={saving}
+              className="rounded-lg bg-purple-600 px-4 py-2 text-xs font-semibold text-white hover:bg-purple-700 disabled:opacity-50"
+            >
+              {saving ? "保存中..." : "保存する"}
+            </button>
+            <button
+              onClick={cancelLocalPickEdit}
+              className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50"
+            >
+              キャンセル
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className={`rounded-2xl border bg-white p-4 shadow-sm ${hasAgodaUrl ? "border-purple-200" : "border-slate-200"}`}>
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="text-sm font-semibold text-slate-900">{entry.hotelName}</p>
+              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${statusTone}`}>
+                {entry.status}
+              </span>
+              <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-600">
+                {entry.city}
+              </span>
+              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasAgodaUrl ? "bg-purple-100 text-purple-700" : "bg-red-100 text-red-700"}`}>
+                {hasAgodaUrl ? "Agoda URL" : "Agoda未設定"}
+              </span>
+            </div>
+            <p className="mt-1 text-[10px] text-slate-500">
+              {entry.area} · {entry.bestFor}
+            </p>
+            <p className="mt-0.5 truncate text-[10px] text-slate-400">
+              {hasAgodaUrl ? entry.agodaUrl : "Agoda URL未設定 — カードに \"Agoda link coming soon\" と表示されます"}
+            </p>
+            <div className="mt-1.5 flex flex-wrap gap-1">
+              {entry.tags.map((tag) => (
+                <span key={tag} className="rounded-full bg-slate-50 px-2 py-0.5 text-[10px] text-slate-500">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            {entry.lastChecked ? (
+              <p className="mt-1 text-[10px] text-slate-400">Last checked: {entry.lastChecked}</p>
+            ) : null}
+            {warningMessages.length > 0 ? (
+              <div className="mt-2 space-y-1">
+                {warningMessages.map((warning) => (
+                  <p key={warning} className="rounded-lg border border-amber-200 bg-amber-50 px-3 py-1.5 text-[10px] font-semibold text-amber-800">
+                    {warning}
+                  </p>
+                ))}
+              </div>
+            ) : null}
+          </div>
+          <div className="flex shrink-0 flex-col gap-1.5">
+            <button
+              onClick={() => startLocalPickEdit(entry)}
+              className="rounded-lg bg-purple-100 px-3 py-1.5 text-[10px] font-semibold text-purple-700 hover:bg-purple-200"
+            >
+              編集
+            </button>
+            <Link
+              href="/local-hotel-picks"
+              target="_blank"
+              className="rounded-lg bg-slate-100 px-3 py-1.5 text-center text-[10px] font-semibold text-slate-600 hover:bg-slate-200"
+            >
+              確認
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -1467,6 +1975,9 @@ export default function AdminPage() {
             <p className="mt-1 truncate text-[10px] text-slate-400">
               {entry.caption || "caption未設定"}
             </p>
+            <p className="mt-1 text-[10px] text-slate-500">
+              Static guide image. Not an Agoda map or affiliate widget.
+            </p>
           </div>
           <button
             onClick={() => startStayAreaMapEdit(entry)}
@@ -1526,6 +2037,7 @@ export default function AdminPage() {
                   fetchHotelPickLinks();
                   fetchAgodaHotelMaps();
                   fetchStayAreaMaps();
+                  fetchLocalHotelPicks();
                   flash("トークンを保存しました", true);
                 }}
                 className="rounded-xl bg-slate-950 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-800"
@@ -1539,9 +2051,21 @@ export default function AdminPage() {
           </p>
         </div>
 
+        <div className="mb-6 rounded-2xl border border-sky-200 bg-sky-50/80 p-5 shadow-sm">
+          <p className="text-sm font-bold text-slate-950">Hotel affiliate management guide</p>
+          <ul className="mt-3 space-y-2 text-xs leading-5 text-slate-700">
+            <li>Use Hotel Area Links for broad area search CTAs. These should usually use Trip.com.</li>
+            <li>Use Hotel Pick Links for specific hotel recommendations. Add Agoda individual hotel URLs here.</li>
+            <li>Stay Hotel Picks control which hotels appear on each stay page. Hotel Pick Links manage the actual affiliate URLs.</li>
+            <li>Use Local Hotel Picks for curated Agoda hotel cards on /local-hotel-picks. These are separate from Trip.com Hotel Picks.</li>
+            <li>Do not use Agoda Hotel Map for now. {AGODA_HOTEL_MAP_DISABLED_REASON}</li>
+            <li>Stay Area Maps are static visual guide images, not affiliate widgets.</li>
+          </ul>
+        </div>
+
         {/* Summary cards */}
         {!loading && (
-          <div className="mb-6 grid gap-3 sm:grid-cols-5">
+          <div className="mb-6 grid gap-3 sm:grid-cols-4">
             <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center">
               <p className="text-2xl font-bold text-emerald-700">{doneItems.length}</p>
               <p className="text-[10px] font-medium text-emerald-600">設定済み</p>
@@ -1566,9 +2090,9 @@ export default function AdminPage() {
               <p className="text-2xl font-bold text-orange-700">{hotelPickLinkUrlCount}/{hotelPickLinks.length}</p>
               <p className="text-[10px] font-medium text-orange-600">具体ホテルURL</p>
             </div>
-            <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-center">
-              <p className="text-2xl font-bold text-red-700">{agodaHotelMapActiveCount}/{agodaHotelMaps.length}</p>
-              <p className="text-[10px] font-medium text-red-600">Agoda Map active</p>
+            <div className="rounded-xl border border-purple-200 bg-purple-50 p-3 text-center">
+              <p className="text-2xl font-bold text-purple-700">{localPickAgodaFilledCount}/{localHotelPicks.length}</p>
+              <p className="text-[10px] font-medium text-purple-600">Local Agoda URL</p>
             </div>
             <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-center">
               <p className="text-2xl font-bold text-emerald-700">{stayAreaMapActiveCount}/{stayAreaMaps.length}</p>
@@ -1583,25 +2107,25 @@ export default function AdminPage() {
             onClick={() => setTab("hotel")}
             className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "hotel" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
           >
-            Trip.comホテル ({tripHotelDoneCount}/{hotelLinks.length})
+            Hotel Area Links ({tripHotelDoneCount}/{hotelLinks.length})
           </button>
           <button
             onClick={() => setTab("stay-picks")}
             className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "stay-picks" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
           >
-            おすすめホテル ({hotelPickLinkUrlCount}/{hotelPickLinks.length})
+            Hotel Pick Links ({hotelPickLinkUrlCount}/{hotelPickLinks.length})
           </button>
           <button
-            onClick={() => setTab("agoda-maps")}
-            className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "agoda-maps" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
+            onClick={() => setTab("local-picks")}
+            className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "local-picks" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
           >
-            Agoda Maps ({agodaHotelMapReadyCount}/{agodaHotelMaps.length})
+            Local Hotel Picks ({localPickAgodaFilledCount}/{localHotelPicks.length})
           </button>
           <button
             onClick={() => setTab("stay-maps")}
             className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "stay-maps" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
           >
-            Stay Maps ({stayAreaMapActiveCount}/{stayAreaMaps.length})
+            Stay Area Maps ({stayAreaMapActiveCount}/{stayAreaMaps.length})
           </button>
           <button
             onClick={() => setTab("todo")}
@@ -1634,16 +2158,22 @@ export default function AdminPage() {
             <div className="rounded-2xl border border-blue-200 bg-blue-50/70 p-5 shadow-sm">
               <div className="flex items-center gap-2">
                 <span className="h-3 w-3 rounded-full bg-blue-500" />
-                <p className="text-sm font-bold text-slate-900">Trip.comホテルURL管理</p>
+                <p className="text-sm font-bold text-slate-900">Hotel Area Links — Trip.com area search CTAs</p>
               </div>
               <p className="mt-2 text-xs leading-5 text-slate-600">
-                Trip.com管理画面で生成したホテル検索deeplinkを、エリアごとに貼り付けます。
-                空欄のエリアは既存Klookホテルリンクへfallbackします。
+                Use this for wider hotel search by area. Trip.com works better for fine area links such as Shinjuku,
+                Ueno, Asakusa, Kyoto Station, Namba and Umeda. Do not put Agoda individual hotel URLs here.
               </p>
               <div className="mt-3 rounded-xl bg-white px-3 py-2 text-[11px] leading-5 text-slate-600">
-                <span className="font-semibold text-slate-800">運用ルール：</span>
-                日付固定なしの検索URLを優先。日付固定URLしか作れない場合も、ここを差し替えるだけで全ページに反映されます。
+                <span className="font-semibold text-slate-800">Rule:</span>
+                Keep primaryProvider=trip unless a real broad Agoda city link exists. Empty Agoda URLs should not be used for area CTAs.
               </div>
+              {hotelAreaPrimaryAgodaMissing.length > 0 ? (
+                <div className="mt-3 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-[11px] leading-5 text-amber-800">
+                  <span className="font-semibold">Warning:</span>{" "}
+                  {hotelAreaPrimaryAgodaMissing.map((entry) => entry.id).join(", ")} have primaryProvider=agoda but no agodaUrl.
+                </div>
+              ) : null}
             </div>
 
             <div className="space-y-6">
@@ -1679,26 +2209,299 @@ export default function AdminPage() {
             <div className="rounded-2xl border border-orange-200 bg-orange-50/70 p-5 shadow-sm">
               <div className="flex items-center gap-2">
                 <span className="h-3 w-3 rounded-full bg-orange-500" />
-                <p className="text-sm font-bold text-slate-900">Stayページのおすすめホテル管理</p>
+                <p className="text-sm font-bold text-slate-900">Hotel Pick Links — Individual hotel recommendations</p>
               </div>
               <p className="mt-2 text-xs leading-5 text-slate-600">
-                Stayページに表示される具体的なホテル名・Trip.com個別URLを、ホテル単位でまとめて管理します。
-                同じホテルが複数ページに出ていても、ここで1回設定すれば全ページに反映されます。
+                Use this for specific hotel cards shown on stay pages. Add Agoda individual hotel affiliate URLs here.
+                If agodaUrl is present, this pick can use Agoda. If not, it falls back to Trip.com.
               </p>
               <div className="mt-3 rounded-xl bg-white px-3 py-2 text-[11px] leading-5 text-slate-600">
-                <span className="font-semibold text-slate-800">運用ルール：</span>
-                具体ホテルを推す場合のみ Trip.com の個別ホテルdeeplinkを設定。未確認なら空欄のままエリア検索に逃がします。タグや表示エリアは各ページ側の文脈として保持します。
+                <span className="font-semibold text-slate-800">Rule:</span>
+                Agoda is for individual hotel picks only. Use Agoda only when agodaUrl is filled; otherwise use Trip.com.
               </div>
             </div>
 
+            <div className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:grid-cols-3">
+              <div>
+                <p className="text-2xl font-bold text-slate-900">{hotelPickLinks.length}</p>
+                <p className="text-[10px] font-medium text-slate-500">Total hotel picks</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-red-700">{hotelPickLinks.filter((entry) => entry.agodaUrl?.trim()).length}</p>
+                <p className="text-[10px] font-medium text-red-600">Agoda URLs filled</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-amber-700">{hotelPickLinks.filter((entry) => !entry.agodaUrl?.trim()).length}</p>
+                <p className="text-[10px] font-medium text-amber-600">Agoda URLs missing</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-blue-700">{hotelPickLinks.filter((entry) => entry.tripUrl.trim()).length}</p>
+                <p className="text-[10px] font-medium text-blue-600">Trip URLs filled</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-amber-700">{hotelPickPossibleMismatches.length}</p>
+                <p className="text-[10px] font-medium text-amber-600">Possible mismatches</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-red-700">{hotelPickPrimaryAgodaMissing.length}</p>
+                <p className="text-[10px] font-medium text-red-600">Agoda primary without URL</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-amber-700">{hotelPickAgodaPresentTripPrimary.length}</p>
+                <p className="text-[10px] font-medium text-amber-600">Agoda URL but Trip primary</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-red-700">{hotelPickMissingAllUrls.length}</p>
+                <p className="text-[10px] font-medium text-red-600">Missing all URLs</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-orange-700">{hotelPickUsedThreePlus.length}</p>
+                <p className="text-[10px] font-medium text-orange-600">Picks used on 3+ pages</p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-red-200 bg-red-50/60 p-4 shadow-sm">
+              <p className="text-xs font-bold text-slate-900">Agoda URL priority picks</p>
+              <p className="mt-1 text-[11px] leading-5 text-slate-600">
+                Start with these individual hotel picks when adding Agoda affiliate URLs.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {AGODA_PRIORITY_HOTEL_PICKS.map((name) => (
+                  <span key={name} className="rounded-lg bg-white px-2.5 py-1.5 text-[10px] font-semibold text-red-700 ring-1 ring-red-100">
+                    {name}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <div className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() => setHotelPickAgodaFilter("missing")}
+                  className="rounded-lg bg-amber-100 px-3 py-1.5 text-[10px] font-semibold text-amber-800 hover:bg-amber-200"
+                >
+                  Show only Agoda URL missing
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setHotelPickHealthFilter("possible-mismatch")}
+                  className="rounded-lg bg-red-100 px-3 py-1.5 text-[10px] font-semibold text-red-700 hover:bg-red-200"
+                >
+                  Show only possible URL mismatch
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setHotelPickProviderFilter("all");
+                    setHotelPickAgodaFilter("all");
+                    setHotelPickPageFilter("all");
+                    setHotelPickAreaFilter("all");
+                    setHotelPickHealthFilter("all");
+                  }}
+                  className="rounded-lg bg-slate-100 px-3 py-1.5 text-[10px] font-semibold text-slate-700 hover:bg-slate-200"
+                >
+                  Clear filters
+                </button>
+              </div>
+              <div className="mt-3 grid gap-3 sm:grid-cols-5">
+                <label className="text-[10px] font-semibold text-slate-500">
+                  Provider
+                  <select
+                    value={hotelPickProviderFilter}
+                    onChange={(e) => setHotelPickProviderFilter(e.target.value as HotelPickProviderFilter)}
+                    className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-xs outline-none focus:border-orange-300"
+                  >
+                    <option value="all">all</option>
+                    <option value="agoda">agoda</option>
+                    <option value="trip">trip</option>
+                  </select>
+                </label>
+                <label className="text-[10px] font-semibold text-slate-500">
+                  Agoda URL
+                  <select
+                    value={hotelPickAgodaFilter}
+                    onChange={(e) => setHotelPickAgodaFilter(e.target.value as HotelPickAgodaFilter)}
+                    className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-xs outline-none focus:border-orange-300"
+                  >
+                    <option value="all">all</option>
+                    <option value="missing">missing</option>
+                    <option value="present">present</option>
+                  </select>
+                </label>
+                <label className="text-[10px] font-semibold text-slate-500">
+                  Page slug
+                  <select
+                    value={hotelPickPageFilter}
+                    onChange={(e) => setHotelPickPageFilter(e.target.value)}
+                    className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-xs outline-none focus:border-orange-300"
+                  >
+                    <option value="all">all</option>
+                    {hotelPickPageOptions.map((slug) => (
+                      <option key={slug} value={slug}>{slug}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className="text-[10px] font-semibold text-slate-500">
+                  hotelKey / area
+                  <select
+                    value={hotelPickAreaFilter}
+                    onChange={(e) => setHotelPickAreaFilter(e.target.value)}
+                    className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-xs outline-none focus:border-orange-300"
+                  >
+                    <option value="all">all</option>
+                    {hotelPickAreaOptions.map((area) => (
+                      <option key={area} value={area}>{area}</option>
+                    ))}
+                  </select>
+                </label>
+                <label className="text-[10px] font-semibold text-slate-500">
+                  Health
+                  <select
+                    value={hotelPickHealthFilter}
+                    onChange={(e) => setHotelPickHealthFilter(e.target.value as HotelPickHealthFilter)}
+                    className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-xs outline-none focus:border-orange-300"
+                  >
+                    <option value="all">all</option>
+                    <option value="primary-agoda-missing">agoda primary without URL</option>
+                    <option value="agoda-present-trip-primary">agoda present but trip primary</option>
+                    <option value="missing-all-urls">missing all URLs</option>
+                    <option value="possible-mismatch">possible URL mismatch</option>
+                    <option value="used-3-plus">used count 3+</option>
+                  </select>
+                </label>
+              </div>
+              <p className="mt-3 text-[10px] text-slate-500">
+                Showing {filteredHotelPickLinks.length}/{hotelPickLinks.length} picks.
+              </p>
+            </div>
+
             <div className="space-y-2">
-              {hotelPickLinks.map((entry) => (
+              {filteredHotelPickLinks.map((entry) => (
                 <HotelPickLinkCard key={entry.id} entry={entry} />
               ))}
             </div>
           </div>
         )}
 
+        {!loading && tab === "local-picks" && (
+          <div className="space-y-4">
+            <div className="rounded-2xl border border-purple-200 bg-purple-50/70 p-5 shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="h-3 w-3 rounded-full bg-purple-500" />
+                <p className="text-sm font-bold text-slate-900">Local Hotel Picks — Agoda curated hotel cards</p>
+              </div>
+              <p className="mt-2 text-xs leading-5 text-slate-600">
+                Use this section for curated individual hotel picks shown on /local-hotel-picks.
+                Add Agoda individual hotel affiliate URLs here.
+                These are separate from the existing Trip.com Hotel Picks.
+              </p>
+              <div className="mt-3 rounded-xl bg-white px-3 py-2 text-[11px] leading-5 text-slate-600">
+                <span className="font-semibold text-slate-800">Rule:</span>
+                {" "}Add Agoda URLs for individual hotels only. Do not mix Trip.com area search URLs here.
+                Trip.com appears only in &ldquo;Want more choices?&rdquo; blocks on the page.
+              </div>
+            </div>
+
+            <div className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:grid-cols-5">
+              <div>
+                <p className="text-2xl font-bold text-slate-900">{localHotelPicks.length}</p>
+                <p className="text-[10px] font-medium text-slate-500">Total picks</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-emerald-700">{localPickActiveCount}</p>
+                <p className="text-[10px] font-medium text-emerald-600">Active</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-amber-700">{localPickDraftCount}</p>
+                <p className="text-[10px] font-medium text-amber-600">Draft</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-purple-700">{localPickAgodaFilledCount}</p>
+                <p className="text-[10px] font-medium text-purple-600">Agoda URLs filled</p>
+              </div>
+              <div>
+                <p className="text-2xl font-bold text-red-700">{localPickAgodaMissingCount}</p>
+                <p className="text-[10px] font-medium text-red-600">Agoda URLs missing</p>
+              </div>
+            </div>
+
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <div className="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onClick={() => setLocalPickAgodaFilter("missing")}
+                  className="rounded-lg bg-red-100 px-3 py-1.5 text-[10px] font-semibold text-red-700 hover:bg-red-200"
+                >
+                  Show only Agoda URL missing
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLocalPickCityFilter("all");
+                    setLocalPickStatusFilter("all");
+                    setLocalPickAgodaFilter("all");
+                  }}
+                  className="rounded-lg bg-slate-100 px-3 py-1.5 text-[10px] font-semibold text-slate-700 hover:bg-slate-200"
+                >
+                  Clear filters
+                </button>
+              </div>
+              <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                <label className="text-[10px] font-semibold text-slate-500">
+                  City
+                  <select
+                    value={localPickCityFilter}
+                    onChange={(e) => setLocalPickCityFilter(e.target.value as LocalHotelPickCityFilter)}
+                    className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-xs outline-none focus:border-purple-300"
+                  >
+                    <option value="all">all</option>
+                    <option value="Tokyo">Tokyo</option>
+                    <option value="Kyoto">Kyoto</option>
+                    <option value="Osaka">Osaka</option>
+                  </select>
+                </label>
+                <label className="text-[10px] font-semibold text-slate-500">
+                  Status
+                  <select
+                    value={localPickStatusFilter}
+                    onChange={(e) => setLocalPickStatusFilter(e.target.value as LocalHotelPickStatusFilter)}
+                    className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-xs outline-none focus:border-purple-300"
+                  >
+                    <option value="all">all</option>
+                    <option value="active">active</option>
+                    <option value="draft">draft</option>
+                    <option value="disabled">disabled</option>
+                  </select>
+                </label>
+                <label className="text-[10px] font-semibold text-slate-500">
+                  Agoda URL
+                  <select
+                    value={localPickAgodaFilter}
+                    onChange={(e) => setLocalPickAgodaFilter(e.target.value as LocalHotelPickAgodaFilter)}
+                    className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-xs outline-none focus:border-purple-300"
+                  >
+                    <option value="all">all</option>
+                    <option value="missing">missing</option>
+                    <option value="present">present</option>
+                  </select>
+                </label>
+              </div>
+              <p className="mt-3 text-[10px] text-slate-500">
+                Showing {filteredLocalPicks.length}/{localHotelPicks.length} picks.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              {filteredLocalPicks.map((entry) => (
+                <LocalHotelPickCard key={entry.id} entry={entry} />
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Agoda Hotel Map is intentionally not exposed in normal admin navigation.
+            Currently disabled / not used: fixed dates, external scripts, limited UI control, and page weight do not fit the hotel CTA strategy. */}
         {!loading && tab === "agoda-maps" && (
           <div className="space-y-4">
             <div className="rounded-2xl border border-red-200 bg-red-50/70 p-5 shadow-sm">
@@ -1749,11 +2552,11 @@ export default function AdminPage() {
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50/70 p-5 shadow-sm">
               <div className="flex items-center gap-2">
                 <span className="h-3 w-3 rounded-full bg-emerald-500" />
-                <p className="text-sm font-bold text-slate-900">Stay Area Maps管理</p>
+                <p className="text-sm font-bold text-slate-900">Stay Area Maps — Static visual guide images</p>
               </div>
               <p className="mt-2 text-xs leading-5 text-slate-600">
-                宿泊エリアページに表示する「日本人目線の簡易ガイド地図」を管理します。
-                statusがactiveで、画像パスとaltがあるMapだけページに表示されます。
+                Use this for simplified local guide maps. These are static guide images used to explain hotel-area logic.
+                They are not Agoda maps or affiliate widgets.
               </p>
               <div className="mt-3 rounded-xl bg-white px-3 py-2 text-[11px] leading-5 text-slate-600">
                 <span className="font-semibold text-slate-800">標準注釈：</span>

@@ -60,12 +60,15 @@ export type AffiliateClickParams = {
     | "home_after_seat"
     | "train_signs_quick_answer"
     | "train_signs_google_maps"
-    | "train_signs_checklist";
+    | "train_signs_checklist"
+    | "local_hotel_pick"
+    | "local_hotel_pick_more_options";
   page_path?: string;
   locale?: string;
   href: string;
   label: string;
   area?: string;
+  city?: string;
   itinerary_slug?: string;
   day_number?: number;
   cta_type?: "stay" | "booking" | "prepare" | "esim" | "rail" | "seat_checker" | "guide";
@@ -100,6 +103,7 @@ export function trackAffiliateClick(params: AffiliateClickParams) {
       href: params.href,
       label: params.label,
       area: params.area,
+      city: params.city,
       itinerary_slug: params.itinerary_slug,
       day_number: params.day_number,
       cta_type: params.cta_type,

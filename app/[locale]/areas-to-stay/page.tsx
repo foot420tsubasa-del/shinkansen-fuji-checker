@@ -149,6 +149,20 @@ export default function AreasToStayIndex() {
         </div>
       </section>
 
+      <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+        <p className="text-sm font-semibold text-slate-950">Looking for specific hotel recommendations?</p>
+        <p className="mt-1 text-xs leading-5 text-slate-500">
+          Curated picks based on local-area logic — calmer Shinjuku stays, family rooms, design hotels, and more.
+        </p>
+        <Link
+          href="/local-hotel-picks"
+          className="mt-3 inline-flex items-center gap-1.5 rounded-2xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-700"
+        >
+          Japanese Local Hotel Picks
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      </section>
+
       <footer className="mt-12 border-t border-slate-200 pt-6 text-center">
         <LastCheckedNote />
         <SiteLegalLinks className="mt-3 text-slate-400" />
