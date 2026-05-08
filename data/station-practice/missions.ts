@@ -166,20 +166,20 @@ export const missions: Mission[] = [
     mapPosition: { x: 30, y: 45 },
     choices: [
       {
-        id: "c1",
-        label: "Follow Local Lines transfer",
-        sublabel: "Orange transfer gates",
-        result: "correct",
-        explanation:
-          "Correct — the orange transfer gate keeps you in the paid area and forwards you onto the local platforms.",
-      },
-      {
         id: "c2",
         label: "Go through the regular exit gate",
         sublabel: "Out of the station",
         result: "wrong",
         explanation:
           "Regular exit gates take you OUT of the station entirely. You'd need to re-enter and likely buy a fresh local-line ticket — wasted fare and time.",
+      },
+      {
+        id: "c1",
+        label: "Follow Local Lines transfer",
+        sublabel: "Orange transfer gates",
+        result: "correct",
+        explanation:
+          "Correct — the orange transfer gate keeps you in the paid area and forwards you onto the local platforms.",
       },
       {
         id: "c3",
@@ -222,14 +222,6 @@ export const missions: Mission[] = [
     mapPosition: { x: 50, y: 60 },
     choices: [
       {
-        id: "c1",
-        label: "West Gate",
-        sublabel: "Skyscraper district",
-        result: "correct",
-        explanation:
-          "Correct — the West Gate is the side closest to your hotel.",
-      },
-      {
         id: "c2",
         label: "East Gate",
         sublabel: "Shopping district",
@@ -244,6 +236,14 @@ export const missions: Mission[] = [
         result: "wrong",
         explanation:
           "The Opposite Gate is the back-side exit, far from any hotel district. Useful for service access, wrong for a West Gate-side stay.",
+      },
+      {
+        id: "c1",
+        label: "West Gate",
+        sublabel: "Skyscraper district",
+        result: "correct",
+        explanation:
+          "Correct — the West Gate is the side closest to your hotel.",
       },
     ],
   },
@@ -278,20 +278,20 @@ export const missions: Mission[] = [
     mapPosition: { x: 70, y: 35 },
     choices: [
       {
-        id: "c1",
-        label: "Follow the long-corridor sign",
-        sublabel: "8-10 min walk via moving walkway",
-        result: "correct",
-        explanation:
-          "Correct — the long-corridor sign with the posted 8-10 min walking time is the honest route. Moving walkways keep the pace reasonable.",
-      },
-      {
         id: "c2",
         label: "Take a generic subway transfer",
         sublabel: "Different operator",
         result: "wrong",
         explanation:
           "That sign points to a subway line, not the train you actually need. You'd cross fare zones for nothing and still have to come back.",
+      },
+      {
+        id: "c1",
+        label: "Follow the long-corridor sign",
+        sublabel: "8-10 min walk via moving walkway",
+        result: "correct",
+        explanation:
+          "Correct — the long-corridor sign with the posted 8-10 min walking time is the honest route. Moving walkways keep the pace reasonable.",
       },
       {
         id: "c3",
