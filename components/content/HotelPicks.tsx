@@ -1,4 +1,5 @@
 import { Star } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { HotelCTA } from "@/components/affiliate/HotelCTA";
 import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 
@@ -24,12 +25,14 @@ export function HotelPicks({
   locale?: string;
   pagePath?: string;
 }) {
+  const t = useTranslations("hotelPicks");
+
   return (
     <div className="space-y-3">
       <div className="flex items-center gap-2">
-        <p className="text-[11px] font-semibold uppercase text-sky-700">Hotel picks</p>
+        <p className="text-[11px] font-semibold uppercase text-sky-700">{t("heading")}</p>
         <span className="rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-semibold text-slate-500">
-          compare latest rates
+          {t("compareRates")}
         </span>
       </div>
       <div className="grid gap-3 sm:grid-cols-2">
@@ -54,7 +57,7 @@ export function HotelPicks({
               </div>
               <div className="mt-auto flex items-center justify-between pt-3">
                 <span className="text-sm font-semibold text-slate-950">
-                  {h.price.includes("¥") ? "Typical range - check latest price" : h.price}
+                  {h.price.includes("¥") ? t("typicalRange") : h.price}
                 </span>
               </div>
               <HotelCTA
@@ -65,7 +68,7 @@ export function HotelPicks({
                 placement="hotel_pick"
                 locale={locale}
                 pagePath={pagePath}
-                label={h.label ?? hotel?.label ?? `Compare ${h.area} hotels`}
+                label={h.label ?? hotel?.label ?? t("fallbackCompareHotels", { areaName: h.area })}
                 trackingHref={h.trackingHref ?? hotel?.trackingHref}
                 hotelName={h.name}
                 className="mt-3 w-full"

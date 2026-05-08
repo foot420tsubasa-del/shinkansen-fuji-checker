@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Bed, CalendarDays, ExternalLink, Plane, Sparkles, Train, Wifi } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
@@ -11,6 +12,7 @@ import { AFFILIATE_REL } from "@/lib/link-rel";
 
 type ExternalItem = {
   label: string;
+  labelKey?: "bookShinkansenTicket" | "prepareESim";
   description: string;
   linkId?: string;
   href?: string;
@@ -30,6 +32,7 @@ type GuideSection = {
   icon: typeof Train;
   primary: {
     label: string;
+    labelKey?: "chooseWhereToStay" | "prepareAirportTransfer";
     href: string;
   };
   links: Array<{
@@ -38,12 +41,18 @@ type GuideSection = {
   }>;
 };
 
+type InternalLink = {
+  label: string;
+  labelKey?: "chooseWhereToStay" | "prepareAirportTransfer";
+  href: string;
+};
+
 const guideSections: GuideSection[] = [
   {
     title: "Hotels",
     description: "Choose the area first, then look at specific local hotel examples.",
     icon: Bed,
-    primary: { label: "Choose where to stay", href: "/areas-to-stay" },
+    primary: { label: "Choose where to stay", labelKey: "chooseWhereToStay", href: "/areas-to-stay" },
     links: [
       { label: "Japanese local hotel picks", href: "/local-hotel-picks" },
       { label: "Stay before Shinkansen", href: "/areas-to-stay/where-to-stay-before-shinkansen" },
@@ -63,7 +72,7 @@ const guideSections: GuideSection[] = [
     title: "Airport / Arrival",
     description: "Prepare the first hour in Japan: airport route, luggage, maps, and data.",
     icon: Plane,
-    primary: { label: "Prepare airport transfer", href: "/airport-transfers" },
+    primary: { label: "Prepare airport transfer", labelKey: "prepareAirportTransfer", href: "/airport-transfers" },
     links: [
       { label: "Narita to Shinjuku", href: "/airport-transfers/narita-to-shinjuku" },
       { label: "Haneda to Shibuya", href: "/airport-transfers/haneda-to-shibuya" },
@@ -87,7 +96,7 @@ const bookingShortcuts: Category[] = [
     description: "Use this when you already know your travel date and route.",
     icon: Train,
     items: [
-      { label: "Book Shinkansen ticket", description: "Klook ticket link for the Tokaido Shinkansen.", linkId: "shinkansenTicket" },
+      { label: "Book Shinkansen ticket", labelKey: "bookShinkansenTicket", description: "Klook ticket link for the Tokaido Shinkansen.", linkId: "shinkansenTicket" },
     ],
   },
   {
@@ -95,7 +104,7 @@ const bookingShortcuts: Category[] = [
     description: "Useful before landing, especially for stations and transfers.",
     icon: Wifi,
     items: [
-      { label: "Prepare eSIM", description: "Get online for maps, translation, and transit apps.", linkId: "esim" },
+      { label: "Prepare eSIM", labelKey: "prepareESim", description: "Get online for maps, translation, and transit apps.", linkId: "esim" },
     ],
   },
   {
@@ -116,13 +125,13 @@ const bookingShortcuts: Category[] = [
   },
 ];
 
-const internalLinks = [
-  { label: "Choose where to stay", href: "/areas-to-stay" },
+const internalLinks: InternalLink[] = [
+  { label: "Choose where to stay", labelKey: "chooseWhereToStay", href: "/areas-to-stay" },
   { label: "Book train / rail basics", href: "/tokyo-to-kyoto-shinkansen-ticket" },
-  { label: "Prepare airport transfer", href: "/airport-transfers" },
+  { label: "Prepare airport transfer", labelKey: "prepareAirportTransfer", href: "/airport-transfers" },
   { label: "Build an itinerary", href: "/itineraries" },
   { label: "See local hotel picks", href: "/local-hotel-picks" },
-];
+] as const;
 
 function resolveItem(item: ExternalItem) {
   if (item.hotelKey) {
@@ -146,6 +155,7 @@ function resolveItem(item: ExternalItem) {
 }
 
 export function PlanYourTripHub() {
+  const commonT = useTranslations("common");
   const locale = typeof window === "undefined" ? undefined : window.location.pathname.split("/").filter(Boolean)[0];
 
   return (
@@ -171,7 +181,7 @@ export function PlanYourTripHub() {
                   href={link.href}
                   className="flex items-center justify-between gap-3 rounded-2xl border border-[#9fd7bd] bg-white px-3 py-2.5 text-sm font-semibold text-[#106b43] transition-colors hover:border-[#168a56] hover:bg-[#f0fbf6]"
                 >
-                  {link.label}
+                  {link.labelKey ? commonT(link.labelKey) : link.label}
                   <ArrowRight className="h-4 w-4 text-[#106b43]" />
                 </Link>
               ))}
@@ -197,7 +207,7 @@ export function PlanYourTripHub() {
                   href={section.primary.href}
                   className="mt-4 inline-flex w-fit items-center gap-2 rounded-xl border border-[#168a56] bg-[#168a56] px-3.5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
                 >
-                  {section.primary.label}
+                  {section.primary.labelKey ? commonT(section.primary.labelKey) : section.primary.label}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold text-[#106b43]">
@@ -250,7 +260,7 @@ export function PlanYourTripHub() {
                     const content = (
                       <>
                         <span>
-                          <span className="block text-sm font-semibold text-slate-900">{item.label}</span>
+                          <span className="block text-sm font-semibold text-slate-900">{item.labelKey ? commonT(item.labelKey) : item.label}</span>
                           <span className="mt-0.5 block text-xs leading-5 text-slate-500">{item.description}</span>
                         </span>
                         {item.external ? (

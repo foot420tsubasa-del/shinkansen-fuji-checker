@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../components/SiteHeader";
@@ -53,6 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function StayPage({ params }: Props) {
   const { slug, locale } = await params;
+  const localHotelT = await getTranslations("localHotelPicks");
   const page = getStayBySlug(slug);
   if (!page) notFound();
   const pagePath = `/areas-to-stay/${slug}`;
@@ -214,7 +216,7 @@ export default async function StayPage({ params }: Props) {
                 href="/local-hotel-picks"
                 className="mt-3 inline-flex rounded-xl border border-[#168a56] bg-[#168a56] px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
               >
-                See Japanese local hotel picks
+                {localHotelT("seeLocalHotelPicks")}
               </Link>
             </div>
           </section>

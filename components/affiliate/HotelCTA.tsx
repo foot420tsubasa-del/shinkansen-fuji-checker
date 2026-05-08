@@ -1,6 +1,7 @@
 "use client";
 
 import { ExternalLink } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { getProviderFromHref, trackAffiliateClick, type AffiliateClickParams } from "@/lib/analytics";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
@@ -31,7 +32,8 @@ export function HotelCTA({
   trackingHref,
   hotelName,
 }: HotelCTAProps) {
-  const ctaLabel = label ?? `Check latest ${areaName} hotels`;
+  const t = useTranslations("hotelCta");
+  const ctaLabel = label ?? t("checkLatestHotels", { areaName });
   const analyticsHref = trackingHref ?? href;
   const hrefProvider = getProviderFromHref(analyticsHref);
   const resolvedProvider = provider ?? (hrefProvider === "trip" || hrefProvider === "agoda" ? hrefProvider : "klook");

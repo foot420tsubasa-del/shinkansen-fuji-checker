@@ -1374,5 +1374,34 @@
         "href": "/planner"
       }
     ]
+  },
+  "hotelCta": {
+    "checkLatestHotels": "Check latest {areaName} hotels"
+  },
+  "hotelPicks": {
+    "heading": "Hotel picks",
+    "compareRates": "compare latest rates",
+    "typicalRange": "Typical range - check latest price",
+    "fallbackCompareHotels": "Compare {areaName} hotels"
+  },
+  "localHotelPicks": {
+    "checkOnAgoda": "Check on Agoda",
+    "comingSoon": "Agoda link coming soon",
+    "seeLocalHotelPicks": "See Japanese local hotel picks",
+    "bestFor": "Best for",
+    "whyThisLocalPick": "Why this local pick",
+    "notIdealFor": "Not ideal for"
+  },
+  "suggestedNextSteps": {
+    "heading": "Suggested next steps"
+  },
+  "common": {
+    "chooseWhereToStay": "Choose where to stay",
+    "prepareAirportTransfer": "Prepare airport transfer",
+    "bookShinkansenTicket": "Book Shinkansen ticket",
+    "prepareESim": "Prepare eSIM"
+  },
+  "stayAreaMap": {
+    "defaultDisclaimer": "This is a simplified local guide map, not a precise navigation map. Use it to understand the general hotel-area logic, then check exact locations on Google Maps or your booking site."
   }
 }

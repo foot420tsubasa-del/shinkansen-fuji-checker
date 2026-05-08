@@ -1374,5 +1374,34 @@
         "href": "/planner"
       }
     ]
+  },
+  "hotelCta": {
+    "checkLatestHotels": "查看 {areaName} 飯店最新資訊"
+  },
+  "hotelPicks": {
+    "heading": "飯店推薦",
+    "compareRates": "比較最新價格",
+    "typicalRange": "常見價格範圍 - 請查看最新價格",
+    "fallbackCompareHotels": "比較 {areaName} 飯店"
+  },
+  "localHotelPicks": {
+    "checkOnAgoda": "在 Agoda 查看",
+    "comingSoon": "Agoda 連結即將上線",
+    "seeLocalHotelPicks": "查看日本在地視角飯店推薦",
+    "bestFor": "適合",
+    "whyThisLocalPick": "為什麼推薦這間",
+    "notIdealFor": "不太適合"
+  },
+  "suggestedNextSteps": {
+    "heading": "建議的下一步"
+  },
+  "common": {
+    "chooseWhereToStay": "選擇住宿區域",
+    "prepareAirportTransfer": "準備機場交通",
+    "bookShinkansenTicket": "預訂新幹線車票",
+    "prepareESim": "準備 eSIM"
+  },
+  "stayAreaMap": {
+    "defaultDisclaimer": "這是一張簡化的在地住宿區域參考圖，並不是精確導航地圖。請用它理解飯店區域選擇的大致邏輯，然後在 Google Maps 或預訂網站確認準確位置。"
   }
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ArrowRight, Bed } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
@@ -181,7 +182,9 @@ function StayCard({ page }: { page: StayPage }) {
   );
 }
 
-export default function AreasToStayIndex() {
+export default async function AreasToStayIndex() {
+  const localHotelT = await getTranslations("localHotelPicks");
+
   return (
     <main className="page-shell min-h-screen text-slate-950">
     <SiteHeader />
@@ -293,7 +296,7 @@ export default function AreasToStayIndex() {
           href="/local-hotel-picks"
           className="mt-3 inline-flex items-center gap-1.5 rounded-2xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-700"
         >
-          Japanese Local Hotel Picks
+          {localHotelT("seeLocalHotelPicks")}
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
       </section>

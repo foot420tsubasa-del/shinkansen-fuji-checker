@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Bed, CalendarDays, Leaf, Plane, Signpost, Train, Wifi } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ESIM_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -38,6 +39,7 @@ export function SuggestedNextSteps({
   excludeCurrentPage = true,
   excludeTypes = [],
 }: SuggestedNextStepsProps) {
+  const t = useTranslations("suggestedNextSteps");
   const visible = steps.filter((step) => {
     if (excludeCurrentPage && step.type === currentPageType) return false;
     return !excludeTypes.includes(step.type);
@@ -45,7 +47,7 @@ export function SuggestedNextSteps({
 
   return (
     <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-      <p className="text-[11px] font-semibold uppercase text-[#106b43]">Suggested next steps</p>
+      <p className="text-[11px] font-semibold uppercase text-[#106b43]">{t("heading")}</p>
       <div className="mt-4 grid gap-3 md:grid-cols-2">
         {visible.slice(0, 5).map((step) => {
           const Icon = step.icon;

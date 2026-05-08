@@ -1374,5 +1374,34 @@
         "href": "/planner"
       }
     ]
+  },
+  "hotelCta": {
+    "checkLatestHotels": "查看 {areaName} 酒店最新信息"
+  },
+  "hotelPicks": {
+    "heading": "酒店推荐",
+    "compareRates": "比较最新价格",
+    "typicalRange": "常见价格范围 - 请查看最新价格",
+    "fallbackCompareHotels": "比较 {areaName} 酒店"
+  },
+  "localHotelPicks": {
+    "checkOnAgoda": "在 Agoda 查看",
+    "comingSoon": "Agoda 链接即将上线",
+    "seeLocalHotelPicks": "查看日本本地视角酒店推荐",
+    "bestFor": "适合",
+    "whyThisLocalPick": "为什么推荐这家",
+    "notIdealFor": "不太适合"
+  },
+  "suggestedNextSteps": {
+    "heading": "推荐的下一步"
+  },
+  "common": {
+    "chooseWhereToStay": "选择住宿区域",
+    "prepareAirportTransfer": "准备机场交通",
+    "bookShinkansenTicket": "预订新干线车票",
+    "prepareESim": "准备 eSIM"
+  },
+  "stayAreaMap": {
+    "defaultDisclaimer": "这是一张简化的本地住宿区域参考图，并不是精确导航地图。请用它理解酒店区域选择的大致逻辑，然后在 Google Maps 或预订网站上确认准确位置。"
   }
 }

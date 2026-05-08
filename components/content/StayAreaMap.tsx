@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { DEFAULT_STAY_AREA_MAP_DISCLAIMER } from "@/lib/stay-area-map-constants";
 import { getRenderableStayAreaMap } from "@/lib/stay-area-maps";
 
@@ -15,7 +16,7 @@ type StayAreaMapProps = {
   height?: number;
 };
 
-export function StayAreaMap({
+export async function StayAreaMap({
   mapId,
   src,
   alt,
@@ -27,12 +28,13 @@ export function StayAreaMap({
   width = 1448,
   height = 1086,
 }: StayAreaMapProps) {
+  const t = await getTranslations("stayAreaMap");
   const config = mapId ? getRenderableStayAreaMap(mapId) : null;
   const resolvedSrc = config?.src ?? src;
   const resolvedAlt = config?.alt ?? alt;
   const resolvedTitle = config?.title ?? title;
   const resolvedCaption = config?.caption ?? caption;
-  const resolvedDisclaimer = config?.disclaimer?.trim() || disclaimer || DEFAULT_STAY_AREA_MAP_DISCLAIMER;
+  const resolvedDisclaimer = config?.disclaimer?.trim() || disclaimer || t("defaultDisclaimer") || DEFAULT_STAY_AREA_MAP_DISCLAIMER;
 
   if (mapId && !config) return null;
   if (!resolvedSrc || !resolvedAlt) return null;

@@ -1374,5 +1374,34 @@
         "href": "/planner"
       }
     ]
+  },
+  "hotelCta": {
+    "checkLatestHotels": "Aktuelle Hotels in {areaName} ansehen"
+  },
+  "hotelPicks": {
+    "heading": "Hotel-Empfehlungen",
+    "compareRates": "aktuelle Preise vergleichen",
+    "typicalRange": "Typische Spanne - aktuellen Preis prüfen",
+    "fallbackCompareHotels": "Hotels in {areaName} vergleichen"
+  },
+  "localHotelPicks": {
+    "checkOnAgoda": "Auf Agoda ansehen",
+    "comingSoon": "Agoda-Link folgt in Kürze",
+    "seeLocalHotelPicks": "Lokale japanische Hotel-Empfehlungen ansehen",
+    "bestFor": "Am besten für",
+    "whyThisLocalPick": "Warum diese lokale Empfehlung",
+    "notIdealFor": "Weniger geeignet für"
+  },
+  "suggestedNextSteps": {
+    "heading": "Empfohlene nächste Schritte"
+  },
+  "common": {
+    "chooseWhereToStay": "Unterkunftsviertel wählen",
+    "prepareAirportTransfer": "Airport-Transfer vorbereiten",
+    "bookShinkansenTicket": "Shinkansen-Ticket buchen",
+    "prepareESim": "eSIM vorbereiten"
+  },
+  "stayAreaMap": {
+    "defaultDisclaimer": "Dies ist eine vereinfachte lokale Übersichtskarte, keine genaue Navigationskarte. Nutze sie, um die Logik der Hotelviertel zu verstehen, und prüfe die genaue Lage danach auf Google Maps oder deiner Buchungsseite."
   }
 }

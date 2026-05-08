@@ -1374,5 +1374,34 @@
         "href": "/planner"
       }
     ]
+  },
+  "hotelCta": {
+    "checkLatestHotels": "Посмотреть актуальные отели в {areaName}"
+  },
+  "hotelPicks": {
+    "heading": "Подборка отелей",
+    "compareRates": "сравнить актуальные цены",
+    "typicalRange": "Обычный диапазон — проверьте актуальную цену",
+    "fallbackCompareHotels": "Сравнить отели в {areaName}"
+  },
+  "localHotelPicks": {
+    "checkOnAgoda": "Посмотреть на Agoda",
+    "comingSoon": "Ссылка Agoda скоро появится",
+    "seeLocalHotelPicks": "Посмотреть отели, выбранные с местной японской точки зрения",
+    "bestFor": "Лучше всего для",
+    "whyThisLocalPick": "Почему этот местный выбор",
+    "notIdealFor": "Не лучший вариант для"
+  },
+  "suggestedNextSteps": {
+    "heading": "Рекомендуемые следующие шаги"
+  },
+  "common": {
+    "chooseWhereToStay": "Выбрать район для проживания",
+    "prepareAirportTransfer": "Подготовить трансфер из аэропорта",
+    "bookShinkansenTicket": "Забронировать билет на Синкансэн",
+    "prepareESim": "Подготовить eSIM"
+  },
+  "stayAreaMap": {
+    "defaultDisclaimer": "Это упрощённая местная карта-гид, а не точная навигационная карта. Используйте её, чтобы понять общую логику районов для отелей, а точные адреса проверяйте в Google Maps или на сайте бронирования."
   }
 }

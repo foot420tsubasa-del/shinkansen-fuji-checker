@@ -1,6 +1,7 @@
 "use client";
 
 import { ExternalLink } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { trackAffiliateClick } from "@/lib/analytics";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import type { LocalHotelPick } from "@/lib/content/local-hotel-picks";
@@ -12,6 +13,7 @@ type LocalHotelPickCardProps = {
 };
 
 export function LocalHotelPickCard({ pick, locale, pagePath }: LocalHotelPickCardProps) {
+  const t = useTranslations("localHotelPicks");
   const hasAgodaUrl = Boolean(pick.agodaUrl.trim());
 
   return (
@@ -35,15 +37,15 @@ export function LocalHotelPickCard({ pick, locale, pagePath }: LocalHotelPickCar
 
       <div className="mt-4 grid gap-3 text-sm md:grid-cols-3">
         <div className="rounded-xl bg-emerald-50 p-3">
-          <p className="text-[10px] font-semibold uppercase tracking-wide text-emerald-700">Best for</p>
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-emerald-700">{t("bestFor")}</p>
           <p className="mt-1 text-xs leading-5 text-slate-700">{pick.bestFor}</p>
         </div>
         <div className="rounded-xl bg-sky-50 p-3">
-          <p className="text-[10px] font-semibold uppercase tracking-wide text-sky-700">Why this local pick</p>
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-sky-700">{t("whyThisLocalPick")}</p>
           <p className="mt-1 text-xs leading-5 text-slate-700">{pick.localReason}</p>
         </div>
         <div className="rounded-xl bg-amber-50 p-3">
-          <p className="text-[10px] font-semibold uppercase tracking-wide text-amber-700">Not ideal for</p>
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-amber-700">{t("notIdealFor")}</p>
           <p className="mt-1 text-xs leading-5 text-slate-700">{pick.notIdealFor}</p>
         </div>
       </div>
@@ -62,7 +64,7 @@ export function LocalHotelPickCard({ pick, locale, pagePath }: LocalHotelPickCar
                 page_path: pagePath,
                 locale,
                 href: pick.agodaUrl,
-                label: `Check on Agoda — ${pick.hotelName}`,
+                label: `${t("checkOnAgoda")} — ${pick.hotelName}`,
                 city: pick.city,
                 area: pick.area,
                 hotel_name: pick.hotelName,
@@ -70,12 +72,12 @@ export function LocalHotelPickCard({ pick, locale, pagePath }: LocalHotelPickCar
             }
             className="inline-flex items-center gap-1.5 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#e66700]"
           >
-            Check on Agoda
+            {t("checkOnAgoda")}
             <ExternalLink className="h-3.5 w-3.5" />
           </a>
         ) : (
           <span className="inline-flex items-center gap-1.5 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-medium text-slate-400">
-            Agoda link coming soon
+            {t("comingSoon")}
           </span>
         )}
       </div>
