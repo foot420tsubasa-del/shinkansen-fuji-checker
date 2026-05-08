@@ -16,6 +16,7 @@ type AreaCardProps = {
   pagePath?: string;
   provider?: "agoda" | "trip" | "klook";
   hotelKey?: HotelAreaKey;
+  showHotelCta?: boolean;
 };
 
 export function AreaCard({
@@ -32,6 +33,7 @@ export function AreaCard({
   pagePath = "/areas-to-stay",
   provider = "klook",
   hotelKey,
+  showHotelCta = true,
 }: AreaCardProps) {
   const hotel = hotelKey ? getHotelLink(hotelKey) : null;
 
@@ -76,18 +78,20 @@ export function AreaCard({
         <span className="font-semibold text-slate-700">Transport:</span> {transport}
       </div>
 
-      <HotelCTA
-        areaName={hotel?.areaName ?? name}
-        city={hotel?.city ?? city}
-        provider={hotel?.provider ?? provider}
-        href={hotel?.href ?? hotelLink}
-        placement="stay_area"
-        locale={locale}
-        pagePath={pagePath}
-        label={hotel?.label ?? `Compare ${name} hotels`}
-        trackingHref={hotel?.trackingHref}
-        className="mt-4"
-      />
+      {showHotelCta ? (
+        <HotelCTA
+          areaName={hotel?.areaName ?? name}
+          city={hotel?.city ?? city}
+          provider={hotel?.provider ?? provider}
+          href={hotel?.href ?? hotelLink}
+          placement="stay_area"
+          locale={locale}
+          pagePath={pagePath}
+          label={hotel?.label ?? `Compare ${name} hotels`}
+          trackingHref={hotel?.trackingHref}
+          className="mt-4"
+        />
+      ) : null}
     </div>
   );
 }

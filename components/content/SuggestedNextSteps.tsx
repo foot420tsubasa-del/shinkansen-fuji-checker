@@ -19,6 +19,7 @@ type SuggestedNextStepsProps = {
     | "train-signs";
   locale?: string;
   excludeCurrentPage?: boolean;
+  excludeTypes?: string[];
 };
 
 const steps = [
@@ -35,8 +36,12 @@ export function SuggestedNextSteps({
   currentPageType,
   locale = "en",
   excludeCurrentPage = true,
+  excludeTypes = [],
 }: SuggestedNextStepsProps) {
-  const visible = steps.filter((step) => !excludeCurrentPage || step.type !== currentPageType);
+  const visible = steps.filter((step) => {
+    if (excludeCurrentPage && step.type === currentPageType) return false;
+    return !excludeTypes.includes(step.type);
+  });
 
   return (
     <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">

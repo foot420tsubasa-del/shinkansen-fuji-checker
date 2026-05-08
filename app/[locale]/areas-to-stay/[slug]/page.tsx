@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
@@ -14,10 +15,8 @@ import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { HotelAreaCTA } from "@/components/content/LocalTokyoCards";
-import { HotelCTA } from "@/components/affiliate/HotelCTA";
 import { AgodaHotelMap } from "@/components/affiliate/AgodaHotelMap";
 import { getAllStaySlugs, getStayBySlug } from "@/lib/content/stay";
-import { getHotelLink } from "@/lib/hotel-links";
 import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
@@ -101,29 +100,14 @@ export default async function StayPage({ params }: Props) {
                 Not sure where to stay?
               </h2>
               <div className="mt-4 grid gap-3 md:grid-cols-2">
-                {page.areas.map((area) => {
-                  const hotel = area.hotelKey ? getHotelLink(area.hotelKey) : null;
-                  return (
-                    <div key={area.name} className="rounded-2xl border border-emerald-100 bg-white p-4">
+                {page.areas.map((area) => (
+                  <div key={area.name} className="rounded-2xl border border-emerald-100 bg-white p-4">
                     <p className="text-sm font-semibold text-slate-950">
                       {area.bestFor} → {area.name}
                     </p>
                     <p className="mt-1 text-xs leading-5 text-slate-600">{area.vibe}</p>
-                    <HotelCTA
-                      areaName={hotel?.areaName ?? area.name}
-                      city={hotel?.city ?? "Tokyo"}
-                      provider={hotel?.provider}
-                      href={hotel?.href ?? area.hotelLink}
-                      placement="stay_area"
-                      locale={locale}
-                      pagePath={pagePath}
-                      label={hotel?.label ?? `Compare ${area.name} hotels`}
-                      trackingHref={hotel?.trackingHref}
-                      className="mt-3 w-full text-xs"
-                    />
                   </div>
-                  );
-                })}
+                ))}
                 <div className="rounded-2xl border border-emerald-100 bg-white p-4">
                   <p className="text-sm font-semibold text-slate-950">
                     Calmer local day → East Tokyo
@@ -167,10 +151,10 @@ export default async function StayPage({ params }: Props) {
 
           <section id="areas" className="scroll-mt-24">
             <h2 className="text-lg font-semibold text-slate-950">Area breakdown</h2>
-            <p className="mt-1 text-sm text-slate-500">Tap an area to compare current hotel availability.</p>
+            <p className="mt-1 text-sm text-slate-500">Compare the practical fit of each area before choosing where to search.</p>
             <div className="mt-4 grid gap-4 lg:grid-cols-2">
               {page.areas.map((area) => (
-                <AreaCard key={area.name} {...area} locale={locale} pagePath={pagePath} />
+                <AreaCard key={area.name} {...area} locale={locale} pagePath={pagePath} showHotelCta={false} />
               ))}
             </div>
           </section>
@@ -219,6 +203,20 @@ export default async function StayPage({ params }: Props) {
 
           <section>
             <HotelPicks picks={page.hotelPicks} locale={locale} pagePath={pagePath} />
+            <div className="mt-4 rounded-[18px] border border-emerald-100 bg-emerald-50/70 p-4">
+              <p className="text-sm font-semibold text-slate-950">
+                Want more specific hotel examples?
+              </p>
+              <p className="mt-1 text-xs leading-5 text-slate-600">
+                See curated Japanese local hotel picks for Tokyo, Kyoto, and Osaka.
+              </p>
+              <Link
+                href="/local-hotel-picks"
+                className="mt-3 inline-flex rounded-xl border border-[#168a56] bg-[#168a56] px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+              >
+                See Japanese local hotel picks
+              </Link>
+            </div>
           </section>
 
           <NextActions picks={page.nextActions} locale={locale} pagePath={pagePath} />
@@ -246,7 +244,7 @@ export default async function StayPage({ params }: Props) {
             />
           ))}
 
-          <SuggestedNextSteps currentPageType="stay" locale={locale} />
+          <SuggestedNextSteps currentPageType="stay" locale={locale} excludeTypes={["esim"]} />
         </div>
 
         <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">
