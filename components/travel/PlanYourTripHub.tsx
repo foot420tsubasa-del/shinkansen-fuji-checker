@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ExternalLink, Luggage, MapPinned, Plane, Sparkles, Train, Building2 } from "lucide-react";
+import { ArrowRight, Bed, CalendarDays, ExternalLink, Plane, Sparkles, Train, Wifi } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
@@ -24,89 +24,104 @@ type Category = {
   items: ExternalItem[];
 };
 
-const categories: Category[] = [
+type GuideSection = {
+  title: string;
+  description: string;
+  icon: typeof Train;
+  primary: {
+    label: string;
+    href: string;
+  };
+  links: Array<{
+    label: string;
+    href: string;
+  }>;
+};
+
+const guideSections: GuideSection[] = [
   {
-    title: "Shinkansen & Rail",
-    description: "Compare the train decisions that matter after choosing the Fuji-side seat.",
+    title: "Hotels",
+    description: "Choose the area first, then look at specific local hotel examples.",
+    icon: Bed,
+    primary: { label: "Choose where to stay", href: "/areas-to-stay" },
+    links: [
+      { label: "Japanese local hotel picks", href: "/local-hotel-picks" },
+      { label: "Stay before Shinkansen", href: "/areas-to-stay/where-to-stay-before-shinkansen" },
+    ],
+  },
+  {
+    title: "Train / Rail",
+    description: "Sort the Shinkansen ticket, JR Pass, and seat decisions before booking.",
+    icon: Train,
+    primary: { label: "Read train ticket guide", href: "/tokyo-to-kyoto-shinkansen-ticket" },
+    links: [
+      { label: "Compare JR Pass vs single tickets", href: "/jr-pass-vs-single-ticket" },
+      { label: "Shinkansen seat guides", href: "/shinkansen-seat-guides" },
+    ],
+  },
+  {
+    title: "Airport / Arrival",
+    description: "Prepare the first hour in Japan: airport route, luggage, maps, and data.",
+    icon: Plane,
+    primary: { label: "Prepare airport transfer", href: "/airport-transfers" },
+    links: [
+      { label: "Narita to Shinjuku", href: "/airport-transfers/narita-to-shinjuku" },
+      { label: "Haneda to Shibuya", href: "/airport-transfers/haneda-to-shibuya" },
+    ],
+  },
+  {
+    title: "Itinerary",
+    description: "Place hotels, trains, arrival day, and city time into a realistic route.",
+    icon: CalendarDays,
+    primary: { label: "Build an itinerary", href: "/itineraries" },
+    links: [
+      { label: "7-day first-time Japan", href: "/itineraries/7-day-first-time-japan" },
+      { label: "10-day Japan with Fuji", href: "/itineraries/10-day-japan-with-fuji" },
+    ],
+  },
+];
+
+const bookingShortcuts: Category[] = [
+  {
+    title: "Book rail only after checking the route",
+    description: "Use this when you already know your travel date and route.",
     icon: Train,
     items: [
-      { label: "Book Shinkansen ticket", description: "Most relevant after checking your Fuji-side seat.", linkId: "shinkansenTicket" },
-      { label: "Compare JR Pass vs single tickets", description: "Compare only if you have multiple long-distance rides.", href: "/jr-pass-vs-single-ticket" },
-      { label: "Shinkansen seat guide", description: "Check seat side, timing, and booking context before buying.", href: "/guide" },
-      { label: "Tokyo to Kyoto route", description: "Use the golden route itinerary before booking.", href: "/itineraries/7-day-first-time-japan" },
-      { label: "Tokyo to Osaka route", description: "Plan the Shinkansen day and onward stay.", href: "/itineraries/7-day-first-time-japan" },
-      { label: "Which seat for Mt. Fuji?", description: "Direction-specific window seat for Fuji views.", href: "/tokyo-to-kyoto-mt-fuji-seat" },
-      { label: "Seat letters A–E explained", description: "Understand window, aisle, and Fuji-side layout.", href: "/shinkansen-seat-letters" },
+      { label: "Book Shinkansen ticket", description: "Klook ticket link for the Tokaido Shinkansen.", linkId: "shinkansenTicket" },
     ],
   },
   {
-    title: "Arrival Essentials",
-    description: "Set up the practical pieces that reduce arrival-day stress.",
-    icon: Plane,
+    title: "Prepare maps and translation",
+    description: "Useful before landing, especially for stations and transfers.",
+    icon: Wifi,
     items: [
-      { label: "Japan eSIM", description: "Maps, translation, transit, and backup access from landing.", linkId: "esim" },
-      { label: "Airport transfer", description: "Compare Narita, Haneda and Kansai Airport routes.", href: "/airport-transfers" },
-      { label: "Narita Express (N'EX)", description: "Simple reserved train from Narita into central Tokyo.", linkId: "nex" },
-      { label: "Skyliner", description: "Fast Narita access to Ueno and Nippori.", linkId: "skyliner" },
-      { label: "Limousine bus", description: "Luggage-friendly airport bus options.", linkId: "limousineBus" },
-      { label: "Travel insurance", description: "Medical and cancellation coverage before departure.", linkId: "insurance" },
+      { label: "Prepare eSIM", description: "Get online for maps, translation, and transit apps.", linkId: "esim" },
     ],
   },
   {
-    title: "Stay Near the Right Station",
-    description: "Pick a base that makes Shinkansen days and luggage movement easier.",
-    icon: Building2,
+    title: "Compare one practical hotel area",
+    description: "Use this as a fallback after reading the stay-area guide.",
+    icon: Bed,
     items: [
       { label: "Compare hotels near Tokyo Station", description: "Most efficient for early Shinkansen departures.", hotelKey: "tokyoStation" },
-      { label: "Compare Shinjuku hotels on Trip.com", description: "Better nightlife and still practical for Tokyo Station.", hotelKey: "shinjuku" },
-      { label: "Compare Kyoto Station hotels", description: "Best logistics for first-time Kyoto stays.", hotelKey: "kyotoStation" },
-      { label: "Compare Shin-Osaka hotels on Trip.com", description: "Easy Kansai base for Osaka and onward rail.", hotelKey: "shinOsaka" },
-      { label: "Compare Namba hotels", description: "Best for Dotonbori nightlife and food.", hotelKey: "namba" },
     ],
   },
   {
-    title: "Luggage & Transfers",
-    description: "Keep the heavy logistics away from your sightseeing time.",
-    icon: Luggage,
-    items: [
-      { label: "Private car charter", description: "Useful for families, Fuji-area days, or heavy luggage.", linkId: "carRental" },
-      { label: "Airport transfer guide", description: "Choose train, bus, or private transfer by arrival style.", href: "/airport-transfers" },
-    ],
-  },
-  {
-    title: "See Mt. Fuji Up Close",
-    description: "Extend the Shinkansen view into a Fuji-area day or overnight stay.",
-    icon: MapPinned,
-    items: [
-      { label: "Compare Kawaguchiko hotels on Trip.com", description: "Stay overnight for the best morning Fuji chance.", hotelKey: "kawaguchiko" },
-      { label: "Hakone Free Pass", description: "A classic Fuji-area and onsen side trip.", linkId: "hakone" },
-      { label: "Compare Hakone hotels on Trip.com", description: "Onsen stays that pair well with the golden route.", hotelKey: "hakone" },
-    ],
-  },
-  {
-    title: "City Activities",
-    description: "Book the city pieces that fit around your Shinkansen route.",
+    title: "Activities",
+    description: "Add tours and experiences only after the route is stable.",
     icon: Sparkles,
     items: [
-      { label: "Tokyo food tours", description: "Local food walks and guided city experiences.", linkId: "foodTourTokyo" },
-      { label: "teamLab Borderless", description: "Popular Tokyo digital art museum.", linkId: "teamlabBorderless" },
-      { label: "Tokyo Tower", description: "Classic Tokyo view after dark.", linkId: "tokyoTower" },
-      { label: "Kyoto kimono rental", description: "Easy add-on for Gion and Higashiyama days.", linkId: "kimonoRentalKyoto" },
-      { label: "Nara / Fushimi Inari", description: "Popular Kyoto-area day tour.", linkId: "fushimiInariNaraTour" },
-      { label: "Osaka Amazing Pass", description: "Transport and attraction pass for Osaka.", linkId: "osakaAmazingPass" },
-      { label: "Universal Studios Japan", description: "Reserve early for high-demand Osaka days.", linkId: "universalStudiosJapan" },
+      { label: "Explore Japan activities", description: "Klook activity search for tours and experiences.", linkId: "cityTokyo" },
     ],
   },
 ];
 
 const internalLinks = [
-  { label: "Use the trip planner", href: "/planner" },
-  { label: "Read the Fuji seat guide", href: "/guide" },
-  { label: "Browse itineraries", href: "/itineraries" },
-  { label: "Compare stay areas", href: "/areas-to-stay" },
-  { label: "Local hotel picks", href: "/local-hotel-picks" },
-  { label: "Airport transfer guides", href: "/airport-transfers" },
-  { label: "Explore route map", href: "/command-center" },
+  { label: "Choose where to stay", href: "/areas-to-stay" },
+  { label: "Book train / rail basics", href: "/tokyo-to-kyoto-shinkansen-ticket" },
+  { label: "Prepare airport transfer", href: "/airport-transfers" },
+  { label: "Build an itinerary", href: "/itineraries" },
+  { label: "See local hotel picks", href: "/local-hotel-picks" },
 ];
 
 function resolveItem(item: ExternalItem) {
@@ -148,7 +163,7 @@ export function PlanYourTripHub() {
           </Card>
 
           <Card className="p-5" tone="accent">
-            <p className="text-[11px] font-semibold uppercase text-[#106b43]">Keep planning</p>
+            <p className="text-[11px] font-semibold uppercase text-[#106b43]">Start with the decision</p>
             <div className="mt-3 grid gap-2">
               {internalLinks.map((link) => (
                 <Link
@@ -164,8 +179,49 @@ export function PlanYourTripHub() {
           </Card>
         </section>
 
-        <section className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {categories.map((category) => {
+        <section className="mt-8 grid gap-4 md:grid-cols-2">
+          {guideSections.map((section) => {
+            const Icon = section.icon;
+            return (
+              <Card key={section.title} className="flex flex-col p-5">
+                <div className="flex items-start gap-3">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#9fd7bd] bg-[#f0fbf6] text-[#106b43]">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <h2 className="text-base font-semibold text-slate-950">{section.title}</h2>
+                    <p className="mt-1 text-xs leading-5 text-slate-500">{section.description}</p>
+                  </div>
+                </div>
+                <Link
+                  href={section.primary.href}
+                  className="mt-4 inline-flex w-fit items-center gap-2 rounded-xl border border-[#168a56] bg-[#168a56] px-3.5 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                >
+                  {section.primary.label}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold text-[#106b43]">
+                  {section.links.map((link) => (
+                    <Link key={link.href} href={link.href} className="underline underline-offset-4 transition-colors hover:text-[#0f6f45]">
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </Card>
+            );
+          })}
+        </section>
+
+        <section className="mt-10">
+          <div className="max-w-2xl">
+            <p className="text-[11px] font-semibold uppercase text-[#106b43]">Booking shortcuts</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-950">Use these only after you know what you need.</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              These partner links are grouped as practical next steps, not a complete booking directory.
+            </p>
+          </div>
+          <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {bookingShortcuts.map((category) => {
             const Icon = category.icon;
             const resolved = category.items.map(resolveItem).filter(Boolean) as Array<ExternalItem & { url: string; trackingUrl?: string; external: boolean; category?: "hotel"; provider?: "klook" | "agoda" | "trip"; area?: string }>;
             return (
@@ -243,6 +299,7 @@ export function PlanYourTripHub() {
               </Card>
             );
           })}
+          </div>
         </section>
 
       </Container>
