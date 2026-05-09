@@ -213,7 +213,7 @@ export function BranchingPracticeClient({ missionId }: Props) {
 
       <section className="grid flex-1 gap-5 px-4 py-5 sm:px-6 lg:grid-cols-[300px_1fr_300px]">
         {/* LEFT */}
-        <aside className="flex flex-col gap-4">
+        <aside className="order-2 flex flex-col gap-4 lg:order-none">
           <MissionPanel mission={mission} scene={currentScene} />
           <MiniMap
             scenes={mission.scenes}
@@ -223,7 +223,7 @@ export function BranchingPracticeClient({ missionId }: Props) {
         </aside>
 
         {/* CENTER */}
-        <div className="flex flex-col gap-4">
+        <div className="order-1 flex flex-col gap-4 lg:order-none">
           <SceneViewport scene={currentScene}>
             <SignOverlayLayer
               signs={currentScene.signs}
@@ -266,7 +266,7 @@ export function BranchingPracticeClient({ missionId }: Props) {
         </div>
 
         {/* RIGHT */}
-        <aside className="flex flex-col gap-4">
+        <aside className="order-3 flex flex-col gap-4 lg:order-none">
           <HintPanel
             hint={currentScene.hint}
             revealed={state.hintRevealed}

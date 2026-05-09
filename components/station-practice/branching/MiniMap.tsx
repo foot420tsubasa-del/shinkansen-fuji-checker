@@ -28,6 +28,7 @@ export function MiniMap({ scenes, currentSceneId, cleared }: Props) {
   const currentIndex = isDetour ? detourContextIndex : mainIndex;
   const reachedTerminal =
     cleared || (mainIndex < 0 && currentScene?.clearOnEnter);
+  const detourMessage = getDetourMessage(currentScene);
 
   // Place each gameplay node at evenly-spaced x positions, alternating y
   // slightly so the polyline reads as a station route, not a flat line.
@@ -49,7 +50,7 @@ export function MiniMap({ scenes, currentSceneId, cleared }: Props) {
       </div>
       {isDetour && (
         <div className="mt-3 rounded-lg border border-red-300/20 bg-red-400/10 px-3 py-2 text-xs leading-5 text-red-100">
-          Wrong route. Return to the previous decision point to continue.
+          {detourMessage}
         </div>
       )}
       <svg
@@ -125,4 +126,21 @@ export function MiniMap({ scenes, currentSceneId, cleared }: Props) {
       </svg>
     </section>
   );
+}
+
+function getDetourMessage(scene?: StationScene): string {
+  const id = scene?.id ?? "";
+  if (id.includes("outside-gate")) {
+    return "Wrong route: this is an exit path, not the subway transfer. Return to the gate split.";
+  }
+  if (id.includes("bayline") || id.includes("bay-line")) {
+    return "Wrong route: Bay Line is a different line. Return to the last Red Metro sign.";
+  }
+  if (id.includes("main-rail")) {
+    return "Wrong route: these are Main Rail platforms, not the subway transfer. Return to Red Metro.";
+  }
+  if (id.includes("transfer-gate")) {
+    return "Wrong route: this transfer passage is not the exit route. Return to the exit gate.";
+  }
+  return "Wrong route. Return to the previous decision point to continue.";
 }

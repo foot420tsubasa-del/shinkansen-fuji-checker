@@ -3,12 +3,15 @@ import Image from "next/image";
 import {
   ArrowRight,
   Compass,
+  Hotel,
   MapPinned,
+  Plane,
   ShieldCheck,
   Signpost,
+  Wifi,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { missions } from "@/data/station-practice/missions";
+import { branchingMissions } from "@/data/station-practice/branching/missions";
 import { FaqAccordion } from "@/components/station-practice/landing/FaqAccordion";
 
 /*
@@ -21,13 +24,62 @@ import { FaqAccordion } from "@/components/station-practice/landing/FaqAccordion
 export const metadata: Metadata = {
   title: "Station Practice — internal preview",
   description:
-    "Internal preview of the Tokyo-style station navigation practice simulator. Hidden — not linked from public navigation.",
+    "Internal preview of the branching Japanese station navigation practice simulator. Hidden — not linked from public navigation.",
   robots: { index: false, follow: false },
 };
 
-export default function StationPracticeLandingPage() {
-  const featured = missions.slice(0, 3);
+const missionCards = [
+  {
+    id: "mission-1",
+    title: "High-Speed Rail → West Central Gate",
+    description:
+      "Practice finding the correct station side, ticket gate, and exit number.",
+    status: "Playable",
+    cta: "Start Mission 1",
+    href: "/station-practice/branching",
+  },
+  {
+    id: "mission-2",
+    title: branchingMissions[1].title,
+    description:
+      "Practice following subway transfer signs, line colors, and transfer gates.",
+    status: "Playable",
+    cta: "Start Mission 2",
+    href: "/station-practice/branching?mission=2",
+  },
+  {
+    id: "mission-3",
+    title: "Airport Train → Hotel Area Exit",
+    description:
+      "Practice your first station arrival route after landing in Japan.",
+    status: "Coming Soon",
+    cta: "Coming Soon",
+    href: null,
+  },
+] as const;
 
+const supportCtas = [
+  {
+    title: "Compare hotels near convenient stations",
+    body: "Placeholder guide link for choosing practical hotel areas later.",
+    href: "/areas-to-stay/tokyo-first-time",
+    icon: Hotel,
+  },
+  {
+    title: "Prepare airport transfer",
+    body: "Placeholder guide link for planning airport-to-hotel movement.",
+    href: "/airport-transfers",
+    icon: Plane,
+  },
+  {
+    title: "Get eSIM / Wi-Fi before arrival",
+    body: "Placeholder guide link for maps and translation readiness.",
+    href: "/plan-your-trip",
+    icon: Wifi,
+  },
+] as const;
+
+export default function StationPracticeLandingPage() {
   return (
     <>
       <header className="absolute left-0 right-0 top-0 z-20 px-6 py-5 sm:px-10">
@@ -50,10 +102,10 @@ export default function StationPracticeLandingPage() {
             </a>
           </nav>
           <Link
-            href="/station-practice/practice"
+            href="/station-practice/branching"
             className="hidden items-center gap-1.5 rounded-full bg-yellow-300 px-4 py-2 text-xs font-semibold text-black transition-colors hover:bg-yellow-200 sm:inline-flex"
           >
-            Start practice <ArrowRight className="h-3.5 w-3.5" />
+            Start Mission 1 <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </header>
@@ -83,22 +135,22 @@ export default function StationPracticeLandingPage() {
               Pre-travel simulation
             </span>
             <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
-              Practice navigating Tokyo&rsquo;s mega stations
+              Practice Japanese stations
               <span className="block text-yellow-300">
-                before you arrive in Japan.
+                before your trip.
               </span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-7 text-neutral-300 sm:text-lg">
-              A free, calm, premium simulator that helps travelers rehearse
-              exits, transfers, and signage choices &mdash; so you can step off
-              the train with confidence instead of confusion.
+              A free navigation practice game inspired by complex Tokyo-style
+              stations. Learn how to read exits, transfers, gates, and platform
+              signs before arriving in Japan.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/station-practice/practice"
+                href="/station-practice/branching"
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-yellow-300 px-7 text-sm font-semibold text-black transition-colors hover:bg-yellow-200"
               >
-                Start a practice mission
+                Start Mission 1
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <a
@@ -112,27 +164,32 @@ export default function StationPracticeLandingPage() {
         </section>
 
         <section className="border-t border-white/5 bg-[#080b14] px-6 py-14 sm:px-10">
-          <div className="mx-auto grid max-w-7xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto max-w-7xl">
+            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+              Why this helps
+            </h2>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <Feature
               icon={<MapPinned className="h-5 w-5" />}
-              title="Realistic stations"
-              body="Layouts inspired by the patterns of complex Tokyo-style stations."
+              title="Read station signs"
+              body="Read Japanese-first station signs with English support."
             />
             <Feature
               icon={<Signpost className="h-5 w-5" />}
-              title="Bilingual signs"
-              body="Practice reading the same kind of yellow-and-black overhead signage you will see on arrival."
+              title="Tell routes apart"
+              body="Tell exits, transfer gates, and platforms apart."
             />
             <Feature
               icon={<Compass className="h-5 w-5" />}
-              title="Practical skills"
-              body="Learn the patterns: pick the city side first, then the numbered exit. Trust posted walking times."
+              title="Recover calmly"
+              body="Learn what to do when you follow the wrong route."
             />
             <Feature
               icon={<ShieldCheck className="h-5 w-5" />}
-              title="Travel confidence"
-              body="Arrive feeling rehearsed, not anxious. Great as a last step before your trip."
+              title="Practice first"
+              body="Practice before your real trip."
             />
+            </div>
           </div>
         </section>
 
@@ -141,52 +198,69 @@ export default function StationPracticeLandingPage() {
             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
               <div>
                 <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                  Featured missions
+                  Station Practice missions
                 </h2>
                 <p className="mt-2 max-w-xl text-sm leading-6 text-neutral-400">
-                  Each mission is a single navigation decision &mdash; the kind
-                  you will face the moment you step off the train.
+                  Mission 1 and Mission 2 are playable through the branching
+                  route. Mission 3 is staged as a future arrival scenario.
                 </p>
               </div>
               <Link
-                href="/station-practice/practice"
+                href="/station-practice/branching"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-yellow-300 hover:text-yellow-200"
               >
-                Play all missions <ArrowRight className="h-4 w-4" />
+                Start Mission 1 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
 
             <ul className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {featured.map((mission, idx) => (
+              {missionCards.map((mission, idx) => (
                 <li key={mission.id}>
-                  <Link
-                    href="/station-practice/practice"
-                    className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-[#0d1322] to-[#070a13] p-6 transition-colors hover:border-yellow-300/40"
-                  >
-                    <span
-                      aria-hidden
-                      className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-yellow-300/0 via-yellow-300 to-yellow-300/0"
-                    />
-                    <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-neutral-500">
-                      <span>Mission {String(idx + 1).padStart(2, "0")}</span>
-                      <span className="text-yellow-300">{mission.difficulty}</span>
-                    </div>
-                    <h3 className="mt-4 text-lg font-semibold text-white">
-                      {mission.title}
-                    </h3>
-                    <p className="mt-2 line-clamp-3 text-sm leading-6 text-neutral-400">
-                      {mission.scenarioIntro}
-                    </p>
-                    <div className="mt-6 flex items-center justify-between text-xs text-neutral-500">
-                      <span>~{mission.estimatedMinutes}</span>
-                      <span className="inline-flex items-center gap-1 text-yellow-300/80 transition-colors group-hover:text-yellow-200">
-                        Try this mission <ArrowRight className="h-3.5 w-3.5" />
-                      </span>
-                    </div>
-                  </Link>
+                  <MissionCard mission={mission} index={idx} />
                 </li>
               ))}
             </ul>
+          </div>
+        </section>
+
+        <section className="border-t border-white/5 bg-[#080b14] px-6 py-16 sm:px-10">
+          <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+            <div>
+              <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+                Free tool, supported by travel planning links
+              </h2>
+              <p className="mt-3 text-sm leading-6 text-neutral-400">
+                This tool is free to use. Some links on fujiseat may be
+                affiliate links, which means we may earn a small commission if
+                you book through them, at no extra cost to you. Your support
+                helps us keep building free Japan travel tools.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {supportCtas.map((cta) => {
+                const Icon = cta.icon;
+                return (
+                  <Link
+                    key={cta.title}
+                    href={cta.href}
+                    className="group rounded-2xl border border-white/5 bg-white/[0.02] p-5 transition-colors hover:border-yellow-300/35 hover:bg-white/[0.04]"
+                  >
+                    <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-yellow-300/10 text-yellow-300">
+                      <Icon className="h-4 w-4" />
+                    </div>
+                    <h3 className="mt-4 text-sm font-semibold text-white">
+                      {cta.title}
+                    </h3>
+                    <p className="mt-2 text-xs leading-5 text-neutral-400">
+                      {cta.body}
+                    </p>
+                    <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-yellow-300/80 group-hover:text-yellow-200">
+                      Open guide <ArrowRight className="h-3.5 w-3.5" />
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </section>
 
@@ -202,17 +276,17 @@ export default function StationPracticeLandingPage() {
               <Step
                 step="01"
                 title="Choose a mission"
-                body="Pick a realistic scenario &mdash; finding an exit, transferring lines, or catching the airport train."
+                body="Pick a realistic scenario such as finding an exit or transferring to a subway line."
               />
               <Step
                 step="02"
                 title="Read the signs"
-                body="Use the overhead signage and route cues to make the right call, just like you will at the real station."
+                body="Use Japanese-first signs, English helper labels, route colors, and gate names to choose your next move."
               />
               <Step
                 step="03"
-                title="Reach your goal"
-                body="Complete the route, learn the travel tip, and move on with more confidence for your real trip."
+                title="Recover from detours"
+                body="Wrong routes teach why the path is wrong, then return you to the decision point so you can continue."
               />
             </ol>
           </div>
@@ -236,18 +310,18 @@ export default function StationPracticeLandingPage() {
           <div className="mx-auto flex max-w-5xl flex-col items-start gap-8 rounded-3xl border border-white/5 bg-white/[0.02] p-10 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                Step off the train ready.
+                Practice the first two routes.
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-6 text-neutral-400">
-                Five short missions. About ten minutes total. No sign-up
-                required.
+                Mission 1 covers station exits. Mission 2 covers subway
+                transfers. More arrival scenarios can be added later.
               </p>
             </div>
             <Link
-              href="/station-practice/practice"
+              href="/station-practice/branching"
               className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-yellow-300 px-7 text-sm font-semibold text-black transition-colors hover:bg-yellow-200"
             >
-              Start practice <ArrowRight className="h-4 w-4" />
+              Start Mission 1 <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </section>
@@ -260,13 +334,69 @@ export default function StationPracticeLandingPage() {
               are original.
             </span>
             <span>
-              Internal preview &middot; not yet linked from fujiseat
-              navigation
+              Internal preview &middot; hidden/noindex &middot; not yet linked
+              from fujiseat navigation
             </span>
           </div>
         </footer>
       </main>
     </>
+  );
+}
+
+function MissionCard({
+  mission,
+  index,
+}: {
+  mission: (typeof missionCards)[number];
+  index: number;
+}) {
+  const content = (
+    <>
+      <span
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-yellow-300/0 via-yellow-300 to-yellow-300/0"
+      />
+      <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-neutral-500">
+        <span>Mission {String(index + 1).padStart(2, "0")}</span>
+        <span className={mission.href ? "text-yellow-300" : "text-neutral-400"}>
+          {mission.status}
+        </span>
+      </div>
+      <h3 className="mt-4 text-lg font-semibold text-white">{mission.title}</h3>
+      <p className="mt-2 line-clamp-3 text-sm leading-6 text-neutral-400">
+        {mission.description}
+      </p>
+      <div className="mt-6 flex items-center justify-between text-xs text-neutral-500">
+        <span>{mission.href ? "Branching route" : "Future route"}</span>
+        {mission.href ? (
+          <span className="inline-flex items-center gap-1 text-yellow-300/80 transition-colors group-hover:text-yellow-200">
+            {mission.cta} <ArrowRight className="h-3.5 w-3.5" />
+          </span>
+        ) : (
+          <span className="rounded-full border border-white/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-neutral-400">
+            {mission.cta}
+          </span>
+        )}
+      </div>
+    </>
+  );
+
+  if (mission.href) {
+    return (
+      <Link
+        href={mission.href}
+        className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-[#0d1322] to-[#070a13] p-6 transition-colors hover:border-yellow-300/40"
+      >
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/5 bg-gradient-to-br from-[#0d1322]/80 to-[#070a13] p-6 opacity-80">
+      {content}
+    </div>
   );
 }
 

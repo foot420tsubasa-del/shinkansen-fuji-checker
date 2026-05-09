@@ -406,7 +406,7 @@ const scenes: StationScene[] = [
         id: "m2c4d-a",
         badge: "A",
         labelJa: "外へ出る",
-        labelEn: "Continue out of the station",
+        labelEn: "Keep going toward the exit",
         result: "wrong",
         feedback:
           "That would leave the transfer route. Return to the gate split and choose the subway transfer gate.",
@@ -709,7 +709,7 @@ const scenes: StationScene[] = [
         id: "m2c7c",
         badge: "C",
         labelJa: "改札を避けて進む",
-        labelEn: "Walk around the gate area",
+        labelEn: "Bypass the gate signs",
         result: "wrong",
         feedback:
           "For a transfer, the gate type matters. The correct sign says レッドメトロ 改札.",
@@ -849,7 +849,7 @@ const scenes: StationScene[] = [
         id: "m2c8d-b",
         badge: "B",
         labelJa: "案内板を探す",
-        labelEn: "Look for another information board",
+        labelEn: "Stop to check another board",
         result: "wrong",
         feedback:
           "More information can help, but you already know the mismatch: Main Rail is not Red Metro.",
