@@ -10,13 +10,13 @@ import { getBranchingMission } from "@/data/station-practice/branching/missions"
 import { TopBar } from "./TopBar";
 import { MissionPanel } from "./MissionPanel";
 import { SceneViewport } from "./SceneViewport";
-import { SignOverlayLayer } from "./SignOverlayLayer";
 import { SignZoomModal } from "./SignZoomModal";
 import { ChoicePanel } from "./ChoicePanel";
 import { HintPanel } from "./HintPanel";
 import { MiniMap } from "./MiniMap";
 import { FeedbackToast } from "./FeedbackToast";
 import { CompletionScreen } from "./CompletionScreen";
+import { KeySignsPanel } from "./KeySignsPanel";
 
 /*
  * Orchestrator for the branching mode. Owns the state machine via
@@ -224,12 +224,11 @@ export function BranchingPracticeClient({ missionId }: Props) {
 
         {/* CENTER */}
         <div className="order-1 flex flex-col gap-4 lg:order-none">
-          <SceneViewport scene={currentScene}>
-            <SignOverlayLayer
-              signs={currentScene.signs}
-              onSignClick={() => setZoomOpen(true)}
-            />
-          </SceneViewport>
+          <SceneViewport scene={currentScene} />
+          <KeySignsPanel
+            signs={currentScene.signs}
+            onInspectSigns={() => setZoomOpen(true)}
+          />
 
           <div className="flex flex-col items-center gap-3">
             {state.status === "transitioning" && (

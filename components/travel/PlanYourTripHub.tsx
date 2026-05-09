@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Bed, CalendarDays, ExternalLink, Plane, Sparkles, Train, Wifi } from "lucide-react";
+import { ArrowRight, Bed, CalendarDays, ExternalLink, Plane, Signpost, Sparkles, Train, Wifi } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
@@ -220,6 +220,35 @@ export function PlanYourTripHub() {
               </Card>
             );
           })}
+        </section>
+
+        <section className="mt-8">
+          <Card className="grid gap-4 border-[#d5e5ef] bg-white p-5 md:grid-cols-[1fr_auto] md:items-center">
+            <div className="flex items-start gap-3">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-[#d5e5ef] bg-[#eef6fb] text-[#082653]">
+                <Signpost className="h-5 w-5" />
+              </div>
+              <div>
+                <p className="text-[11px] font-semibold uppercase text-slate-500">
+                  Free travel-prep tool
+                </p>
+                <h2 className="mt-1 text-base font-semibold text-slate-950">
+                  Practice station navigation
+                </h2>
+                <p className="mt-1 text-sm leading-6 text-slate-600">
+                  Try a free Tokyo-style station practice game before your
+                  trip.
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/station-practice"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-[#168a56] bg-white px-4 text-sm font-semibold text-[#106b43] transition-colors hover:bg-[#f0fbf6]"
+            >
+              Start station practice
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </Card>
         </section>
 
         <section className="mt-10">

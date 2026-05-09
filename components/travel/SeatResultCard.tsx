@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, Bed, Info, Luggage, Mountain, Share2, Train } from "lucide-react";
+import { ArrowLeft, ArrowRight, Bed, Info, Luggage, Mountain, Share2, Signpost, Train } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { FujiVisibility, SeatRecommendation } from "@/lib/seat-checker";
@@ -159,6 +159,38 @@ export function SeatResultCard({
           >
             Compare airport transfer options
           </Link>
+          <div className="mt-4 rounded-2xl border border-[#d5e5ef] bg-white px-4 py-3">
+            <div className="flex items-start gap-3">
+              <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#eef6fb] text-[#082653]">
+                <Signpost className="h-4 w-4" />
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-slate-900">
+                  Practice station navigation
+                </p>
+                <p className="mt-1 text-xs leading-5 text-slate-600">
+                  Try a free Tokyo-style station practice game before your
+                  trip.
+                </p>
+                <Link
+                  href="/station-practice"
+                  onClick={() =>
+                    trackCtaClick({
+                      placement: "seat_result",
+                      href: "/station-practice",
+                      label: "Start station practice",
+                      category: "station_practice",
+                      locale,
+                    })
+                  }
+                  className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-[#106b43] underline underline-offset-2"
+                >
+                  Start station practice
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
 
       <div className="mt-5 rounded-[28px] border border-slate-200 bg-white p-4 shadow-sm">
