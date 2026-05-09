@@ -12,12 +12,12 @@ type Props = {
 /*
  * Horizontal stylised route showing one node per gameplay scene plus a
  * terminal flag. Current node pulses yellow; cleared nodes are
- * green-muted; upcoming nodes are neutral. Wrong attempts do NOT
- * advance the marker — staying-in-place is part of the visual language.
+ * green-muted; upcoming nodes are neutral. Short detour scenes are
+ * excluded from this main route map so the line stays readable.
  */
 
 export function MiniMap({ scenes, currentSceneId, cleared }: Props) {
-  const gameplay = scenes.filter((s) => !s.clearOnEnter);
+  const gameplay = scenes.filter((s) => !s.clearOnEnter && !s.isDetour);
   const currentIndex = gameplay.findIndex((s) => s.id === currentSceneId);
   const reachedTerminal =
     cleared || (currentIndex < 0 && scenes.find((s) => s.id === currentSceneId)?.clearOnEnter);

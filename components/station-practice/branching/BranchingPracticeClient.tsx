@@ -73,13 +73,14 @@ function reducer(state: State, action: Action): State {
     case "SELECT_CHOICE": {
       const { choice } = action;
       if (state.status !== "in-scene") return state;
-      if (choice.result === "correct") {
+      if (choice.nextSceneId) {
         return {
           ...state,
           status: "transitioning",
           lastChoiceId: choice.id,
-          lastResult: "correct",
+          lastResult: choice.result,
           lastFeedback: null,
+          mistakes: choice.result === "wrong" ? state.mistakes + 1 : state.mistakes,
         };
       }
       // wrong or neutral: stay on the scene, surface feedback
@@ -143,8 +144,9 @@ export function BranchingPracticeClient() {
 
   const currentScene = sceneById.get(state.currentSceneId);
 
-  // Auto-advance after a correct choice (short delay so the green
-  // highlight reads).
+  // Auto-advance after a choice with a destination scene. Correct picks
+  // continue the main route; selected wrong picks can branch into short
+  // detour scenes before returning to the decision point.
   useEffect(() => {
     if (state.status !== "transitioning") return;
     if (!currentScene) return;

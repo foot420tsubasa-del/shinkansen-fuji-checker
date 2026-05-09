@@ -7,7 +7,9 @@
  * scene and surface an educational explanation; correct choices advance
  * to the next scene id. Naming and signage vocabulary follow the
  * fujiseat hidden-route brand-safety policy (no real station names, no
- * operator marks, generic Japanese wayfinding kanji only).
+ * operator marks, generic Japanese wayfinding kanji only). Some wrong
+ * choices may branch into short detour scenes before returning to the
+ * main route.
  */
 
 export type ChoiceDirection =
@@ -28,7 +30,7 @@ export type Choice = {
   labelJa: string;
   /** English secondary label. */
   labelEn: string;
-  /** id of the scene this choice transitions to (only used for `correct`). */
+  /** id of the scene this choice transitions to. */
   nextSceneId?: string;
   result: ChoiceResult;
   /** Educational explanation shown after a wrong (or neutral) pick. */
@@ -97,6 +99,8 @@ export type StationScene = {
   choices: Choice[];
   /** Optional revealable hint. */
   hint?: string;
+  /** Short wrong-route branch. Excluded from the main route counter. */
+  isDetour?: boolean;
   /**
    * Marks the terminal scene. The client renders the CompletionScreen
    * instead of the normal viewport when this is true.
