@@ -7,7 +7,7 @@ import { cn } from "@/components/station-practice/lib/utils";
 import { DirectionIcon } from "./SignBadge";
 
 /*
- * Three large A/B/C choice buttons. The component is "dumb" — it gets
+ * Three compact A/B/C choice buttons. The component is "dumb" — it gets
  * the current scene's choices, the last clicked id, and the last
  * result, and emits an `onSelect` callback. Wrong-clicked buttons get
  * a brief shake + red highlight; correct stays green.
@@ -29,7 +29,7 @@ export function ChoicePanel({
   onSelect,
 }: Props) {
   return (
-    <div className="grid w-full gap-3 sm:grid-cols-3">
+    <div className="grid w-full gap-2.5 sm:grid-cols-3">
       {choices.map((choice) => {
         const isLast = lastChoiceId === choice.id;
         const isWrong = isLast && lastResult === "wrong";
@@ -43,8 +43,8 @@ export function ChoicePanel({
             animate={isWrong ? { x: [0, -4, 4, -3, 3, 0] } : { x: 0 }}
             transition={{ duration: 0.45 }}
             className={cn(
-              "group relative flex min-h-[88px] flex-col items-start gap-1 rounded-xl border px-4 py-3 text-left transition-colors",
-              "border-white/10 bg-white/[0.04] text-white",
+              "group relative flex min-h-[76px] flex-col items-start gap-1 rounded-lg border px-3.5 py-2.5 text-left transition-colors",
+              "border-white/10 bg-white/[0.035] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]",
               "hover:border-yellow-300/50 hover:bg-yellow-300/5",
               "disabled:cursor-not-allowed disabled:opacity-60",
               isWrong &&
@@ -54,22 +54,22 @@ export function ChoicePanel({
             )}
           >
             <span className="flex w-full items-center justify-between">
-              <span className="inline-flex h-6 min-w-6 items-center justify-center rounded-full border border-yellow-300/50 bg-yellow-300/10 px-2 text-xs font-semibold text-yellow-200">
+              <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full border border-yellow-300/50 bg-yellow-300/10 px-1.5 text-[11px] font-semibold text-yellow-200">
                 {choice.badge}
               </span>
               <span className="flex items-center gap-1.5 text-yellow-300/70 group-hover:text-yellow-200">
                 {choice.direction && (
-                  <DirectionIcon direction={choice.direction} className="h-3.5 w-3.5" />
+                  <DirectionIcon direction={choice.direction} className="h-3 w-3" />
                 )}
-                {isWrong && <XCircle className="h-4 w-4 text-red-300" />}
-                {isCorrect && <CheckCircle2 className="h-4 w-4 text-emerald-300" />}
+                {isWrong && <XCircle className="h-3.5 w-3.5 text-red-300" />}
+                {isCorrect && <CheckCircle2 className="h-3.5 w-3.5 text-emerald-300" />}
               </span>
             </span>
             <span className="mt-1 flex w-full flex-col gap-0.5">
-              <span className="text-sm font-semibold text-white">
+              <span className="text-[13px] font-semibold leading-5 text-white">
                 {choice.labelJa}
               </span>
-              <span className="text-xs text-neutral-300">{choice.labelEn}</span>
+              <span className="text-[11px] leading-4 text-neutral-300">{choice.labelEn}</span>
             </span>
           </motion.button>
         );

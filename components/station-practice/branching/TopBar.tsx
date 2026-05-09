@@ -10,6 +10,7 @@ type Props = {
   mistakes: number;
   progressIndex: number;
   totalGameplayScenes: number;
+  isDetour?: boolean;
   onInspectSigns: () => void;
   signsAvailable: boolean;
 };
@@ -20,6 +21,7 @@ export function TopBar({
   mistakes,
   progressIndex,
   totalGameplayScenes,
+  isDetour = false,
   onInspectSigns,
   signsAvailable,
 }: Props) {
@@ -42,7 +44,7 @@ export function TopBar({
       </Link>
       <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-400 sm:gap-4">
         <span className="rounded-full border border-white/10 px-3 py-1">
-          Scene {sceneNumber}/{totalGameplayScenes}
+          {isDetour ? "Wrong route" : `Scene ${sceneNumber}/${totalGameplayScenes}`}
         </span>
         <span className="hidden items-center gap-1.5 sm:inline-flex">
           <Timer className="h-3.5 w-3.5" />

@@ -90,7 +90,7 @@ const scenes: StationScene[] = [
       "A station platform with overhead Japanese yellow signage and stairs leading up.",
     currentLocation: "High-Speed Rail Platform",
     missionText:
-      "You just stepped off the High-Speed Rail. Find a way up to the upper concourse — Japanese stations exit upward.",
+      "You just stepped off a Shinkansen-style high-speed rail train. Start by finding the stairs or escalators up to the concourse.",
     signs: [
       {
         id: "s1-stairs",
@@ -142,7 +142,7 @@ const scenes: StationScene[] = [
         labelEn: "Walk to the far end of the platform",
         result: "wrong",
         feedback:
-          "There is no exit at the far end of a platform. In a Japanese terminal station, you almost always go up to leave.",
+          "The far end of the platform usually leads to more platform space, not the station exit. Look for stairs or escalators marked 改札.",
         direction: "straight",
       },
       {
@@ -152,7 +152,7 @@ const scenes: StationScene[] = [
         labelEn: "Walk back toward the train",
         result: "wrong",
         feedback:
-          "Walking back along the platform takes you nowhere — the train is already gone. Look up for stairs or escalators.",
+          "Walking back along the platform usually just retraces your steps. The exit route starts with the stairs or escalators.",
         direction: "back",
       },
     ],
@@ -303,7 +303,7 @@ const scenes: StationScene[] = [
         labelEn: "Head right toward the East Central Gate",
         result: "wrong",
         feedback:
-          "East Central Gate is the OPPOSITE city side. If your destination is on the West side, you'd add 10–15 minutes of underground walking.",
+          "East Central Gate is the other side of the station. If your destination is on the West side, this can add 10–15 minutes of walking.",
         direction: "right",
       },
       {
@@ -739,7 +739,7 @@ const scenes: StationScene[] = [
         labelEn: "Continue toward the subway",
         result: "wrong",
         feedback:
-          "That keeps you inside the transfer system. You need the exit gate marked 出口 A1–A4.",
+          "That keeps you inside the transfer area. For this route, return to the exit gate marked 出口 A1–A4.",
         direction: "right",
       },
       {
@@ -931,7 +931,7 @@ const scenes: StationScene[] = [
     clearSummary:
       "You navigated from the High-Speed Rail platform out to the West Central Gate by reading signs in order: side first, gate name next, exit number last.",
     clearLessons: [
-      "Japanese stations exit upward — find stairs / escalators marked 改札 first.",
+      "At many large stations, the first step after the platform is up to the concourse — look for stairs or escalators marked 改札.",
       "Pick the city side (西口 / 東口) before the numbered exit.",
       "出口 means exit. のりかえ means transfer to another train route.",
       "When overhead signs repeat your destination name, you're on the right corridor — keep walking.",

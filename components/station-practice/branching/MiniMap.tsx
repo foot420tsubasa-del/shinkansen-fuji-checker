@@ -18,9 +18,16 @@ type Props = {
 
 export function MiniMap({ scenes, currentSceneId, cleared }: Props) {
   const gameplay = scenes.filter((s) => !s.clearOnEnter && !s.isDetour);
-  const currentIndex = gameplay.findIndex((s) => s.id === currentSceneId);
+  const currentScene = scenes.find((s) => s.id === currentSceneId);
+  const isDetour = !!currentScene?.isDetour;
+  const mainIndex = gameplay.findIndex((s) => s.id === currentSceneId);
+  const detourContextIndex =
+    isDetour && currentScene
+      ? Math.max(0, Math.min(gameplay.length - 1, currentScene.progressIndex))
+      : -1;
+  const currentIndex = isDetour ? detourContextIndex : mainIndex;
   const reachedTerminal =
-    cleared || (currentIndex < 0 && scenes.find((s) => s.id === currentSceneId)?.clearOnEnter);
+    cleared || (mainIndex < 0 && currentScene?.clearOnEnter);
 
   // Place each gameplay node at evenly-spaced x positions, alternating y
   // slightly so the polyline reads as a station route, not a flat line.
@@ -37,9 +44,14 @@ export function MiniMap({ scenes, currentSceneId, cleared }: Props) {
       <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-neutral-500">
         <span>Route</span>
         <span>
-          {Math.min(currentIndex + 1, gameplay.length)}/{gameplay.length}
+          {isDetour ? "Detour" : `${Math.min(currentIndex + 1, gameplay.length)}/${gameplay.length}`}
         </span>
       </div>
+      {isDetour && (
+        <div className="mt-3 rounded-lg border border-red-300/20 bg-red-400/10 px-3 py-2 text-xs leading-5 text-red-100">
+          Wrong route. Return to the previous decision point to continue.
+        </div>
+      )}
       <svg
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
@@ -66,12 +78,16 @@ export function MiniMap({ scenes, currentSceneId, cleared }: Props) {
             !reachedTerminal && i === currentIndex && !isCleared;
           const fill = isCleared
             ? "rgba(74, 222, 128, 0.85)"
-            : isCurrent
+            : isCurrent && isDetour
+              ? "rgba(248, 113, 113, 0.9)"
+              : isCurrent
               ? "#fde047"
               : "rgba(255,255,255,0.18)";
           const stroke = isCleared
             ? "rgba(74, 222, 128, 0.4)"
-            : isCurrent
+            : isCurrent && isDetour
+              ? "rgba(248, 113, 113, 0.7)"
+              : isCurrent
               ? "rgba(253, 224, 71, 0.45)"
               : "rgba(255,255,255,0.25)";
           const r = isCurrent ? 3.2 : 2.4;
@@ -83,7 +99,7 @@ export function MiniMap({ scenes, currentSceneId, cleared }: Props) {
                   cy={n.y}
                   r={r}
                   fill="none"
-                  stroke="#fde047"
+                  stroke={isDetour ? "#f87171" : "#fde047"}
                   strokeOpacity={0.55}
                   initial={{ r, opacity: 0.9 }}
                   animate={{

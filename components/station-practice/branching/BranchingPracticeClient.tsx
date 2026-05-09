@@ -204,6 +204,7 @@ export function BranchingPracticeClient() {
         totalGameplayScenes={mission.totalGameplayScenes}
         onInspectSigns={() => setZoomOpen(true)}
         signsAvailable={currentScene.signs.length > 0}
+        isDetour={currentScene.isDetour}
       />
 
       <section className="grid flex-1 gap-5 px-4 py-5 sm:px-6 lg:grid-cols-[300px_1fr_300px]">
@@ -227,6 +228,15 @@ export function BranchingPracticeClient() {
           </SceneViewport>
 
           <div className="flex flex-col items-center gap-3">
+            {state.status === "transitioning" && (
+              <div className="rounded-full border border-yellow-300/20 bg-yellow-300/10 px-3 py-1 text-xs font-medium text-yellow-100">
+                {state.lastResult === "wrong"
+                  ? "Taking the wrong route..."
+                  : currentScene.isDetour
+                    ? "Returning to the junction..."
+                    : "Following the signs..."}
+              </div>
+            )}
             <FeedbackToast
               open={
                 state.status === "wrong-feedback" &&
@@ -238,7 +248,7 @@ export function BranchingPracticeClient() {
               onDismiss={() => dispatch({ type: "DISMISS_FEEDBACK" })}
             />
             <p className="text-center text-xs text-neutral-400">
-              Pick the direction the overhead signs point to.
+              Match the sign with your destination, then choose a direction.
             </p>
           </div>
 
@@ -264,13 +274,13 @@ export function BranchingPracticeClient() {
             </div>
             <p className="mt-2">
               You're playing the branching navigation prototype. Read the
-              overhead signs, follow the Japanese kanji first and the
-              English second, and pick the direction that matches your
+              overhead signs, match the Japanese shape and English label,
+              and pick the direction that matches your
               destination.
             </p>
             <p className="mt-2">
-              Wrong choices stay on the same scene and explain what
-              happened — you can always try again.
+              Some wrong choices lead to short detours. They show why the
+              route is wrong, then let you return to the decision point.
             </p>
           </section>
         </aside>

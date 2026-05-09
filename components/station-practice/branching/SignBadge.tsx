@@ -43,9 +43,9 @@ export function SignBadge({ sign, zoom = false, onClick }: Props) {
         "block h-full w-full overflow-hidden rounded-md text-left",
         "border-2 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.6)]",
         isYellow
-          ? "border-black/30 bg-yellow-300 text-black"
-          : "border-yellow-300/15 bg-[#0e1933] text-neutral-100",
-        sign.important && !zoom && "ring-1 ring-yellow-200/40",
+          ? "border-black/30 bg-yellow-300/95 text-black"
+          : "border-yellow-300/15 bg-[#0e1933]/95 text-neutral-100",
+        sign.important && !zoom && "ring-1 ring-yellow-200/25",
         zoom ? "cursor-default" : "cursor-zoom-in transition-transform hover:scale-[1.04]",
       )}
       aria-label={`Sign: ${sign.textJa} / ${sign.textEn}`}
