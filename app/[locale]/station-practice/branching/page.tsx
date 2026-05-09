@@ -21,6 +21,13 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function StationPracticeBranchingPage() {
-  return <BranchingPracticeClient />;
+type Props = {
+  searchParams: Promise<{ mission?: string }>;
+};
+
+export default async function StationPracticeBranchingPage({
+  searchParams,
+}: Props) {
+  const { mission } = await searchParams;
+  return <BranchingPracticeClient key={mission ?? "1"} missionId={mission} />;
 }

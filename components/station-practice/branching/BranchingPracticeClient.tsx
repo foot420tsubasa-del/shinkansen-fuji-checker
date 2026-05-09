@@ -6,7 +6,7 @@ import type {
   Mission,
   StationScene,
 } from "@/data/station-practice/branching/types";
-import { mission1 } from "@/data/station-practice/branching/mission1Scenes";
+import { getBranchingMission } from "@/data/station-practice/branching/missions";
 import { TopBar } from "./TopBar";
 import { MissionPanel } from "./MissionPanel";
 import { SceneViewport } from "./SceneViewport";
@@ -45,7 +45,7 @@ type Action =
   | { type: "ADVANCE_TO"; sceneId: string; clearOnEnter: boolean }
   | { type: "DISMISS_FEEDBACK" }
   | { type: "REVEAL_HINT" }
-  | { type: "RESTART" };
+  | { type: "RESTART"; mission: Mission };
 
 function initialState(mission: Mission): State {
   return {
@@ -124,15 +124,19 @@ function reducer(state: State, action: Action): State {
       return { ...state, hintRevealed: true, hintsUsed: state.hintsUsed + 1 };
 
     case "RESTART":
-      return initialState(mission1);
+      return initialState(action.mission);
 
     default:
       return state;
   }
 }
 
-export function BranchingPracticeClient() {
-  const mission = mission1;
+type Props = {
+  missionId?: string | null;
+};
+
+export function BranchingPracticeClient({ missionId }: Props) {
+  const mission = useMemo(() => getBranchingMission(missionId), [missionId]);
   const [state, dispatch] = useReducer(reducer, mission, initialState);
   const [zoomOpen, setZoomOpen] = useState(false);
 
@@ -186,7 +190,7 @@ export function BranchingPracticeClient() {
         elapsedSeconds={elapsed}
         hintsUsed={state.hintsUsed}
         mistakes={state.mistakes}
-        onRestart={() => dispatch({ type: "RESTART" })}
+        onRestart={() => dispatch({ type: "RESTART", mission })}
       />
     );
   }
