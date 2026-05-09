@@ -9,35 +9,81 @@ import type { Mission, StationScene } from "./types";
  * Subway Transfer, Exits A1–A4 / B1–B2, etc.). Japanese kanji used are
  * everyday wayfinding language (改札, 出口, ホーム, 案内所, etc.).
  *
- * IMAGE NOTE — placeholders.
- * The 7 PNGs under /images/station-practice/ are reused here as scene
- * placeholders. They were authored for the 2.5D / 3D routes and have
- * "Hotel Side / Marunouchi-style" baked-in art. The branching mode never
- * relies on text inside the image — all gameplay-relevant signs are HTML
- * overlays defined in `signs[]` below. The placeholder mood is
- * appropriate (calm, premium underground concourse) but each scene
- * carries a TODO marker so it can be regenerated with branching-specific
- * imagery later.
+ * IMAGE PIPELINE.
+ *
+ * Each scene declares the PREFERRED dedicated path under
+ * /images/station-practice/branching/<scene-id>.png. Those files are
+ * generated externally (Image2 / ChatGPT) and dropped in over time —
+ * not committed by Claude or Codex. Until a dedicated PNG is in place,
+ * SceneViewport's onError chain falls back through:
+ *   1. a mood-matched placeholder from the existing
+ *      /images/station-practice/* set (per-scene `fallbackImages[0]`);
+ *   2. the universal gameplay default (`gameplay-station-bg.png`);
+ *   3. the universal hero (`hero-station-bg.png`).
+ *
+ * The branching mode never relies on text inside the image — every
+ * gameplay-relevant sign is an HTML overlay defined in `signs[]` below.
+ * That stays true even after the dedicated images land, so corrections
+ * and translations don't require re-rendering art.
+ *
+ * Drop-in instructions for the 10 dedicated images live in
+ * `docs/STATION_PRACTICE_BRANCHING_IMAGE_CHECKLIST.md`.
  */
 
+const FALLBACK_GAMEPLAY = "/images/station-practice/gameplay-station-bg.png";
+const FALLBACK_HERO = "/images/station-practice/hero-station-bg.png";
+
+/**
+ * Per-scene placeholder picked to roughly match the scene's mood while
+ * the dedicated branching image is being generated. These point at the
+ * existing /images/station-practice/* art shipped for the 2.5D / 3D
+ * routes — they are *not* canonical for the branching mode.
+ */
 const SCENE_IMG = {
-  // generic photographic moods reused across multiple scenes; TODO
-  // replace with branching-specific generated/photographed scenes.
-  platform: "/images/station-practice/scene-local-transfer.png",        // TODO: replace
-  midConcourse: "/images/station-practice/gameplay-station-bg.png",     // TODO: replace
-  upperConcourse: "/images/station-practice/scene-hotel-exit.png",      // TODO: replace
-  multiBranchJunction: "/images/station-practice/scene-wrong-side.png", // TODO: replace
-  longCorridor: "/images/station-practice/scene-long-corridor.png",     // TODO: replace
-  airportConcourse: "/images/station-practice/scene-airport-train.png", // TODO: replace
-  hero: "/images/station-practice/hero-station-bg.png",                 // TODO: replace
+  platform: "/images/station-practice/scene-local-transfer.png",
+  midConcourse: FALLBACK_GAMEPLAY,
+  upperConcourse: "/images/station-practice/scene-hotel-exit.png",
+  multiBranchJunction: "/images/station-practice/scene-wrong-side.png",
+  longCorridor: "/images/station-practice/scene-long-corridor.png",
+  airportConcourse: "/images/station-practice/scene-airport-train.png",
+  hero: FALLBACK_HERO,
 } as const;
+
+/**
+ * Dedicated branching-mode image paths. Filenames match the scene `id`s
+ * exactly so artists / image generators only need the id list to know
+ * what to drop in.
+ */
+const BRANCHING_IMG: Record<string, string> = {
+  "scene-01-platform":       "/images/station-practice/branching/scene-01-platform.png",
+  "scene-02-escalator":      "/images/station-practice/branching/scene-02-escalator.png",
+  "scene-03-stair-landing":  "/images/station-practice/branching/scene-03-stair-landing.png",
+  "scene-04-main-concourse": "/images/station-practice/branching/scene-04-main-concourse.png",
+  "scene-05-branch-corridor":"/images/station-practice/branching/scene-05-branch-corridor.png",
+  "scene-06-pre-gate":       "/images/station-practice/branching/scene-06-pre-gate.png",
+  "scene-07-ticket-gate":    "/images/station-practice/branching/scene-07-ticket-gate.png",
+  "scene-08-outside-gate":   "/images/station-practice/branching/scene-08-outside-gate.png",
+  "scene-09-final-stretch":  "/images/station-practice/branching/scene-09-final-stretch.png",
+  "scene-10-clear":          "/images/station-practice/branching/scene-10-clear.png",
+};
+
+/**
+ * Build the ordered fallback chain for a given placeholder. Deduped so
+ * a placeholder that already happens to be one of the universal
+ * fallbacks (e.g. `gameplay-station-bg.png`) isn't tried twice.
+ */
+function buildFallbackChain(placeholder: string): string[] {
+  const chain = [placeholder, FALLBACK_GAMEPLAY, FALLBACK_HERO];
+  return Array.from(new Set(chain));
+}
 
 const scenes: StationScene[] = [
   // -------------------------------------------------------------- 01
   {
     id: "scene-01-platform",
     progressIndex: 0,
-    image: SCENE_IMG.platform,
+    image: BRANCHING_IMG["scene-01-platform"],
+    fallbackImages: buildFallbackChain(SCENE_IMG.platform),
     imageAlt:
       "A station platform with overhead Japanese yellow signage and stairs leading up.",
     currentLocation: "High-Speed Rail Platform",
@@ -115,7 +161,8 @@ const scenes: StationScene[] = [
   {
     id: "scene-02-escalator",
     progressIndex: 1,
-    image: SCENE_IMG.midConcourse,
+    image: BRANCHING_IMG["scene-02-escalator"],
+    fallbackImages: buildFallbackChain(SCENE_IMG.midConcourse),
     imageAlt:
       "Top of the platform escalator, opening onto a wider station concourse.",
     currentLocation: "Top of the platform escalator",
@@ -194,7 +241,8 @@ const scenes: StationScene[] = [
   {
     id: "scene-03-stair-landing",
     progressIndex: 2,
-    image: SCENE_IMG.upperConcourse,
+    image: BRANCHING_IMG["scene-03-stair-landing"],
+    fallbackImages: buildFallbackChain(SCENE_IMG.upperConcourse),
     imageAlt:
       "An upper-concourse landing with overhead yellow signage branching multiple ways.",
     currentLocation: "Upper concourse",
@@ -273,7 +321,8 @@ const scenes: StationScene[] = [
   {
     id: "scene-04-main-concourse",
     progressIndex: 3,
-    image: SCENE_IMG.multiBranchJunction,
+    image: BRANCHING_IMG["scene-04-main-concourse"],
+    fallbackImages: buildFallbackChain(SCENE_IMG.multiBranchJunction),
     imageAlt:
       "A main station concourse with a three-way junction and overhead signs for several lines.",
     currentLocation: "Main concourse — three-way junction",
@@ -353,7 +402,8 @@ const scenes: StationScene[] = [
   {
     id: "scene-05-branch-corridor",
     progressIndex: 4,
-    image: SCENE_IMG.multiBranchJunction,
+    image: BRANCHING_IMG["scene-05-branch-corridor"],
+    fallbackImages: buildFallbackChain(SCENE_IMG.multiBranchJunction),
     imageAlt:
       "A wide branching corridor with three possible paths and overhead signage.",
     currentLocation: "Branch corridor",
@@ -433,7 +483,8 @@ const scenes: StationScene[] = [
   {
     id: "scene-06-pre-gate",
     progressIndex: 5,
-    image: SCENE_IMG.longCorridor,
+    image: BRANCHING_IMG["scene-06-pre-gate"],
+    fallbackImages: buildFallbackChain(SCENE_IMG.longCorridor),
     imageAlt:
       "A long underground corridor leading toward a row of ticket gates in the distance.",
     currentLocation: "Pre-gate corridor",
@@ -502,7 +553,8 @@ const scenes: StationScene[] = [
   {
     id: "scene-07-ticket-gate",
     progressIndex: 6,
-    image: SCENE_IMG.platform, // TODO: replace with a ticket-gate-specific scene
+    image: BRANCHING_IMG["scene-07-ticket-gate"],
+    fallbackImages: buildFallbackChain(SCENE_IMG.platform),
     imageAlt:
       "A row of silver ticket gates with overhead signage above the gate row.",
     currentLocation: "West Central Ticket Gate",
@@ -571,7 +623,8 @@ const scenes: StationScene[] = [
   {
     id: "scene-08-outside-gate",
     progressIndex: 7,
-    image: SCENE_IMG.airportConcourse,
+    image: BRANCHING_IMG["scene-08-outside-gate"],
+    fallbackImages: buildFallbackChain(SCENE_IMG.airportConcourse),
     imageAlt:
       "A station hall just outside a ticket gate with overhead signs for numbered exits.",
     currentLocation: "Just outside the West Central Ticket Gate",
@@ -650,7 +703,8 @@ const scenes: StationScene[] = [
   {
     id: "scene-09-final-stretch",
     progressIndex: 8,
-    image: SCENE_IMG.upperConcourse,
+    image: BRANCHING_IMG["scene-09-final-stretch"],
+    fallbackImages: buildFallbackChain(SCENE_IMG.upperConcourse),
     imageAlt:
       "A short final corridor with daylight visible at the end and a Plaza sign overhead.",
     currentLocation: "Exit A2 — final stretch",
@@ -718,7 +772,8 @@ const scenes: StationScene[] = [
   {
     id: "scene-10-clear",
     progressIndex: 9,
-    image: SCENE_IMG.hero,
+    image: BRANCHING_IMG["scene-10-clear"],
+    fallbackImages: buildFallbackChain(SCENE_IMG.hero),
     imageAlt:
       "A wide station view of the West Central plaza with daylight and the city visible.",
     currentLocation: "West Central Gate plaza",

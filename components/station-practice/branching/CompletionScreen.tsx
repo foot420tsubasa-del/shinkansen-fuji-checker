@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   ArrowLeft,
   CheckCircle2,
@@ -50,6 +51,16 @@ export function CompletionScreen({
         <p className="mt-1 text-sm text-yellow-300">
           {mission.title}
         </p>
+        <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-black/40">
+          <Image
+            src={clearScene.image}
+            alt={clearScene.imageAlt}
+            fill
+            sizes="(min-width: 640px) 560px, 90vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
+        </div>
         {clearScene.clearSummary && (
           <p className="mt-4 text-sm leading-6 text-neutral-300">
             {clearScene.clearSummary}
