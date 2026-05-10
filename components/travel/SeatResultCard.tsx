@@ -110,6 +110,8 @@ export function SeatResultCard({
               <Train className="h-4 w-4" />
               Book your Shinkansen ticket
             </a>
+          </div>
+          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-semibold">
             <Link
               href="/areas-to-stay/tokyo-first-time"
               onClick={() =>
@@ -120,9 +122,9 @@ export function SeatResultCard({
                   category: "stay",
                 })
               }
-              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#168a56] bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#106b43] shadow-sm transition-all hover:bg-[#f0fbf6] active:brightness-95"
+              className="inline-flex items-center gap-1 text-[#106b43] underline underline-offset-2"
             >
-              <Bed className="h-4 w-4" />
+              <Bed className="h-3.5 w-3.5" />
               Choose where to stay
             </Link>
             <a
@@ -139,26 +141,26 @@ export function SeatResultCard({
                   locale,
                 })
               }
-              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
+              className="inline-flex items-center gap-1 text-[#b44b00] underline underline-offset-2"
             >
-              <Luggage className="h-4 w-4" />
+              <Luggage className="h-3.5 w-3.5" />
               Prepare eSIM & airport transfer
             </a>
+            <Link
+              href="/airport-transfers/narita-to-shinjuku"
+              onClick={() =>
+                trackCtaClick({
+                  placement: "seat_result",
+                  href: "/airport-transfers/narita-to-shinjuku",
+                  label: "Compare airport transfer",
+                  category: "transfer",
+                })
+              }
+              className="inline-flex items-center gap-1 text-[#106b43] underline underline-offset-2"
+            >
+              Compare airport transfer
+            </Link>
           </div>
-          <Link
-            href="/airport-transfers/narita-to-shinjuku"
-            onClick={() =>
-              trackCtaClick({
-                placement: "seat_result",
-                href: "/airport-transfers/narita-to-shinjuku",
-                label: "Compare airport transfer",
-                category: "transfer",
-              })
-            }
-            className="mt-2 inline-flex text-[11px] font-semibold text-[#106b43] underline underline-offset-2"
-          >
-            Compare airport transfer options
-          </Link>
           <div className="mt-4 rounded-2xl border border-[#d5e5ef] bg-white px-4 py-3">
             <div className="flex items-start gap-3">
               <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#eef6fb] text-[#082653]">
@@ -169,7 +171,7 @@ export function SeatResultCard({
                   Practice station navigation
                 </p>
                 <p className="mt-1 text-xs leading-5 text-slate-600">
-                  Try a free Tokyo-style station practice game before your
+                  Try a free Tokyo-style station practice tool before your
                   trip.
                 </p>
                 <Link

@@ -276,7 +276,7 @@ export function BranchingPracticeClient({ missionId }: Props) {
               About this preview
             </div>
             <p className="mt-2">
-              You're playing the branching navigation prototype. Read the
+              You&apos;re playing the branching navigation prototype. Read the
               overhead signs, match the Japanese shape and English label,
               and pick the direction that matches your
               destination.

@@ -1381,7 +1381,7 @@
   "hotelPicks": {
     "heading": "Подборка отелей",
     "compareRates": "сравнить актуальные цены",
-    "typicalRange": "Обычный диапазон — проверьте актуальную цену",
+    "typicalRange": "Обычный диапазон — проверьте актуальные тарифы",
     "fallbackCompareHotels": "Сравнить отели в {areaName}"
   },
   "localHotelPicks": {

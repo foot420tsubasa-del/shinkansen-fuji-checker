@@ -1381,7 +1381,7 @@
   "hotelPicks": {
     "heading": "Hotel picks",
     "compareRates": "compare latest rates",
-    "typicalRange": "Typical range - check latest price",
+    "typicalRange": "Typical range - check latest rates",
     "fallbackCompareHotels": "Compare {areaName} hotels"
   },
   "localHotelPicks": {

@@ -122,6 +122,15 @@ export default async function ItineraryPage({ params }: Props) {
         </p>
 
         <div className="mt-8 space-y-8">
+          <NextActions
+            picks={page.nextActions}
+            title="Book the essentials for this route"
+            subtitle="Start with hotels, rail, arrival transfer, and eSIM before adding activities."
+            maxItems={5}
+            locale={locale}
+            pagePath={pagePath}
+          />
+
           <section>
             <h2 className="mb-6 text-lg font-semibold text-slate-950">Day-by-day plan</h2>
             <div>
@@ -162,7 +171,6 @@ export default async function ItineraryPage({ params }: Props) {
             </div>
           </section>
 
-          <NextActions picks={page.nextActions} locale={locale} pagePath={pagePath} />
           <SuggestedNextSteps currentPageType="itinerary" locale={locale} />
         </div>
 

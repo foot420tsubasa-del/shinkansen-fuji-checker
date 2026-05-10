@@ -27,11 +27,15 @@ function affiliateCategory(category: TripPick["category"]) {
 export function NextActions({
   picks,
   title = "Next steps",
+  subtitle = "Keep planning — don't lose momentum.",
+  maxItems = 4,
   locale = "en",
   pagePath,
 }: {
   picks: TripPick[];
   title?: string;
+  subtitle?: string;
+  maxItems?: number;
   locale?: string;
   pagePath?: string;
 }) {
@@ -41,10 +45,10 @@ export function NextActions({
         {title}
       </p>
       <p className="mt-1 text-base font-semibold text-slate-950">
-        Keep planning — don&apos;t lose momentum.
+        {subtitle}
       </p>
       <div className="mt-4 space-y-2">
-        {picks.map((pick) => {
+        {picks.slice(0, maxItems).map((pick) => {
           const Icon = iconByCategory[pick.category];
           const isExternal = pick.href.startsWith("http");
           const actionTone = isExternal

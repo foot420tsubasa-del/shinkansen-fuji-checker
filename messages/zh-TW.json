@@ -1381,7 +1381,7 @@
   "hotelPicks": {
     "heading": "飯店推薦",
     "compareRates": "比較最新價格",
-    "typicalRange": "常見價格範圍 - 請查看最新價格",
+    "typicalRange": "常見價格範圍 - 請查看最新房價",
     "fallbackCompareHotels": "比較 {areaName} 飯店"
   },
   "localHotelPicks": {

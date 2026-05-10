@@ -1381,7 +1381,7 @@
   "hotelPicks": {
     "heading": "호텔 추천",
     "compareRates": "최신 요금 비교",
-    "typicalRange": "일반적인 범위 - 최신 가격을 확인하세요",
+    "typicalRange": "일반적인 범위 - 최신 요금을 확인하세요",
     "fallbackCompareHotels": "{areaName} 호텔 비교하기"
   },
   "localHotelPicks": {

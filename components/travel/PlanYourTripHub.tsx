@@ -236,7 +236,7 @@ export function PlanYourTripHub() {
                   Practice station navigation
                 </h2>
                 <p className="mt-1 text-sm leading-6 text-slate-600">
-                  Try a free Tokyo-style station practice game before your
+                  Try a free Tokyo-style station practice tool before your
                   trip.
                 </p>
               </div>

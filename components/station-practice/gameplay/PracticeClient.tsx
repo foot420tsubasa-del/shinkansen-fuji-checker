@@ -613,7 +613,8 @@ function useWrongShakeKey({
     const sig = `${lastChoiceId}-${Date.now()}`;
     if (sig !== sigRef.current) {
       sigRef.current = sig;
-      setKey((k) => k + 1);
+      const handle = window.setTimeout(() => setKey((k) => k + 1), 0);
+      return () => window.clearTimeout(handle);
     }
   }, [lastChoiceId, lastResult]);
 

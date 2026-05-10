@@ -116,7 +116,14 @@ export default async function TransferPage({ params }: Props) {
 
           <ProTip>{page.proTip}</ProTip>
 
-          <NextActions picks={page.nextActions} locale={locale} pagePath={pagePath} />
+          <NextActions
+            picks={page.nextActions}
+            title="After choosing your transfer"
+            subtitle="Book the arrival route first, then confirm hotel area and data."
+            maxItems={4}
+            locale={locale}
+            pagePath={pagePath}
+          />
           <SuggestedNextSteps currentPageType="transfer" locale={locale} />
         </div>
 

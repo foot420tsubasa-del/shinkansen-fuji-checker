@@ -33,6 +33,18 @@ const steps = [
   { type: "local-tokyo", title: "Explore Local Tokyo", desc: "Add quieter local neighborhoods without changing your base.", href: "/local-tokyo", icon: Leaf },
 ];
 
+const pageTypeStepOrder: Record<SuggestedNextStepsProps["currentPageType"], string[]> = {
+  guide: ["seat", "train-signs", "itinerary"],
+  seat: ["guide", "train-signs", "itinerary"],
+  stay: ["transfer", "itinerary", "train-signs"],
+  transfer: ["stay", "esim", "itinerary"],
+  itinerary: ["stay", "transfer", "guide"],
+  "local-tokyo": ["stay", "itinerary", "train-signs"],
+  planner: ["stay", "transfer", "guide"],
+  train: ["guide", "stay", "itinerary"],
+  "train-signs": ["guide", "transfer", "stay"],
+};
+
 export function SuggestedNextSteps({
   currentPageType,
   locale = "en",
@@ -40,7 +52,9 @@ export function SuggestedNextSteps({
   excludeTypes = [],
 }: SuggestedNextStepsProps) {
   const t = useTranslations("suggestedNextSteps");
-  const visible = steps.filter((step) => {
+  const preferredTypes = pageTypeStepOrder[currentPageType];
+  const visible = preferredTypes.map((type) => steps.find((step) => step.type === type)).filter((step): step is (typeof steps)[number] => {
+    if (!step) return false;
     if (excludeCurrentPage && step.type === currentPageType) return false;
     return !excludeTypes.includes(step.type);
   });
@@ -49,7 +63,7 @@ export function SuggestedNextSteps({
     <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
       <p className="text-[11px] font-semibold uppercase text-[#106b43]">{t("heading")}</p>
       <div className="mt-4 grid gap-3 md:grid-cols-2">
-        {visible.slice(0, 5).map((step) => {
+        {visible.slice(0, 3).map((step) => {
           const Icon = step.icon;
           const tone = step.external
             ? {

@@ -221,7 +221,14 @@ export default async function StayPage({ params }: Props) {
             </div>
           </section>
 
-          <NextActions picks={page.nextActions} locale={locale} pagePath={pagePath} />
+          <NextActions
+            picks={page.nextActions}
+            title="Related stay planning"
+            subtitle="Use these only after you have chosen the hotel area."
+            maxItems={3}
+            locale={locale}
+            pagePath={pagePath}
+          />
 
           {page.faqs && page.faqs.length > 0 && (
             <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">

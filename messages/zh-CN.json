@@ -1381,7 +1381,7 @@
   "hotelPicks": {
     "heading": "酒店推荐",
     "compareRates": "比较最新价格",
-    "typicalRange": "常见价格范围 - 请查看最新价格",
+    "typicalRange": "常见价格范围 - 请查看最新房价",
     "fallbackCompareHotels": "比较 {areaName} 酒店"
   },
   "localHotelPicks": {

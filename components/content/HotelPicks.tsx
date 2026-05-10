@@ -38,6 +38,10 @@ export function HotelPicks({
       <div className="grid gap-3 sm:grid-cols-2">
         {picks.map((h) => {
           const hotel = h.provider ? null : h.hotelKey ? getHotelLink(h.hotelKey) : null;
+          const priceLabel =
+            h.price.includes("¥") || h.price.toLowerCase() === "check latest price"
+              ? t("compareRates")
+              : h.price;
           return (
             <div
               key={h.id ?? h.name}
@@ -57,7 +61,7 @@ export function HotelPicks({
               </div>
               <div className="mt-auto flex items-center justify-between pt-3">
                 <span className="text-sm font-semibold text-slate-950">
-                  {h.price.includes("¥") ? t("typicalRange") : h.price}
+                  {priceLabel}
                 </span>
               </div>
               <HotelCTA

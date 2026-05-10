@@ -1381,7 +1381,7 @@
   "hotelPicks": {
     "heading": "Sélections d’hôtels",
     "compareRates": "comparer les tarifs récents",
-    "typicalRange": "Fourchette habituelle — vérifiez le prix actuel",
+    "typicalRange": "Fourchette habituelle — vérifiez les tarifs actuels",
     "fallbackCompareHotels": "Comparer les hôtels à {areaName}"
   },
   "localHotelPicks": {

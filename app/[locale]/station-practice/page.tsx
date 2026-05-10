@@ -14,17 +14,10 @@ import { Link } from "@/i18n/navigation";
 import { branchingMissions } from "@/data/station-practice/branching/missions";
 import { FaqAccordion } from "@/components/station-practice/landing/FaqAccordion";
 
-/*
- * Hidden internal-preview route. Must NOT be linked from any public nav,
- * sitemap, or footer. See:
- *   - app/sitemap.ts (intentionally does not list /station-practice)
- *   - app/robots.ts  (disallows /station-practice and /*​/station-practice)
- *   - metadata below (robots: index/follow false, no hreflang alternates)
- */
 export const metadata: Metadata = {
-  title: "Station Practice — internal preview",
+  title: "Station Practice — Japanese station navigation simulator",
   description:
-    "Internal preview of the branching Japanese station navigation practice simulator. Hidden — not linked from public navigation.",
+    "Practice Japanese station navigation before your trip. Learn exits, transfer gates, platforms, and Japanese-first station signs with short guided missions.",
   robots: { index: false, follow: false },
 };
 
@@ -141,7 +134,7 @@ export default function StationPracticeLandingPage() {
               </span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-7 text-neutral-300 sm:text-lg">
-              A free navigation practice game inspired by complex Tokyo-style
+              A free navigation practice tool inspired by complex Tokyo-style
               stations. Learn how to read exits, transfers, gates, and platform
               signs before arriving in Japan.
             </p>
@@ -334,8 +327,7 @@ export default function StationPracticeLandingPage() {
               are original.
             </span>
             <span>
-              Internal preview &middot; hidden/noindex &middot; not yet linked
-              from fujiseat navigation
+              Station navigation practice &middot; free travel-prep simulator
             </span>
           </div>
         </footer>
