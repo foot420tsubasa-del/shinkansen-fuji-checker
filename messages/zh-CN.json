@@ -231,7 +231,7 @@
     },
     "tokyoBases": {
       "eyebrow": "选择你的 Tokyo 据点",
-      "desc": "Shinjuku 和 Shibuya 是充满活力的经典选择。Tokyo Station 和 Ueno 更实用。想要更安静的本地氛围时，Asakusa 和 East Tokyo 会更合适。",
+      "desc": "先从三个常见的 Tokyo 住宿据点开始：Shinjuku 适合感受活力，Ueno / Asakusa 适合东侧交通，Tokyo Station 适合 Shinkansen 和行李移动。",
       "shinjuku": {
         "name": "Shinjuku",
         "bestFor": "第一次来 Tokyo 的热闹感、夜生活、购物和灵活的铁路交通。",
@@ -267,7 +267,16 @@
         "bestFor": "安静的本地 Tokyo、咖啡、庭园、博物馆和慢节奏早晨。",
         "mood": "本地视角",
         "weakness": "比起第一次入住的默认选择，更适合作为安静绕行或第二次来 Tokyo 的据点。"
-      }
+      },
+      "seeAll": "查看所有 Tokyo 住宿区域",
+      "uenoAsakusa": {
+        "name": "Ueno / Asakusa",
+        "bestFor": "Narita 交通、预算住宿和老东京氛围",
+        "mood": "实用的东侧住宿据点",
+        "weakness": "夜生活少于 Shinjuku 或 Shibuya",
+        "compareCta": "比较 Ueno / Asakusa"
+      },
+      "fullGuide": "打开完整 Tokyo 住宿指南"
     },
     "localTokyo": {
       "eyebrow": "日本本地人精选的 Local Tokyo",
@@ -360,6 +369,21 @@
       "feedbackDesc": "目前还没有 newsletter。匿名留言能帮助决定接下来要做哪些日本旅行工具。",
       "feedbackCta": "留一条建议",
       "affiliateNote": "部分链接为联盟链接，详情请查看条款。"
+    },
+    "stationPractice": {
+      "label": "新工具",
+      "title": "练习日本车站导航",
+      "desc": "在日本第一次乘坐电车前，先尝试一个简短的车站场景。",
+      "cta": "开始练习"
+    },
+    "routePlan": {
+      "eyebrow": "路线规划",
+      "title": "规划你的日本路线",
+      "desc": "先从简单路线开始，再选择座位、酒店和抵达准备事项。",
+      "primaryCta": "打开行程规划",
+      "sevenDay": "查看7天行程",
+      "tenDay": "查看10天行程",
+      "commandCenter": "打开 Command Center"
     }
   },
   "guide": {

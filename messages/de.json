@@ -231,7 +231,7 @@
     },
     "tokyoBases": {
       "eyebrow": "Wähle deine Tokyo-Basis",
-      "desc": "Shinjuku und Shibuya sind die energiegeladenen Klassiker. Tokyo Station und Ueno sind praktisch. Asakusa und East Tokyo passen besser, wenn du ruhigere lokale Atmosphäre möchtest.",
+      "desc": "Starte mit drei typischen Basen in Tokyo: Shinjuku für Energie, Ueno / Asakusa für einfacheren Zugang im Osten und Tokyo Station für Shinkansen und Gepäck.",
       "shinjuku": {
         "name": "Shinjuku",
         "bestFor": "Erstbesucher-Energie, Nachtleben, Shopping und flexible Zuganbindung.",
@@ -267,7 +267,16 @@
         "bestFor": "Ruhiges lokales Tokyo, Kaffee, Gärten, Museen und langsamere Morgen.",
         "mood": "Lokaler Blick",
         "weakness": "Eher ein ruhiger Abstecher oder eine Basis für Wiederholer als die Standardwahl für die erste Nacht."
-      }
+      },
+      "seeAll": "Alle Stadtteile zum Übernachten in Tokyo ansehen",
+      "uenoAsakusa": {
+        "name": "Ueno / Asakusa",
+        "bestFor": "Narita-Anbindung, günstigere Hotels und altes Tokyo",
+        "mood": "praktische Basis im Osten",
+        "weakness": "weniger Nachtleben als Shinjuku oder Shibuya",
+        "compareCta": "Ueno / Asakusa vergleichen"
+      },
+      "fullGuide": "Vollständigen Tokyo-Übernachtungsguide öffnen"
     },
     "localTokyo": {
       "eyebrow": "Local Tokyo-Tipps von einem japanischen Local",
@@ -360,6 +369,21 @@
       "feedbackDesc": "Noch kein Newsletter. Anonyme Hinweise helfen zu entscheiden, welche Japan-Reisetools als Nächstes gebaut werden.",
       "feedbackCta": "Notiz hinterlassen",
       "affiliateNote": "Einige Links sind Affiliate-Links — Details siehe Bedingungen."
+    },
+    "stationPractice": {
+      "label": "Neues Tool",
+      "title": "Japanische Bahnhofsorientierung üben",
+      "desc": "Teste ein kurzes Bahnhofsszenario vor deiner ersten Zugfahrt in Japan.",
+      "cta": "Station Practice starten"
+    },
+    "routePlan": {
+      "eyebrow": "Routenplanung",
+      "title": "Plane deine Japan-Route",
+      "desc": "Beginne mit einer einfachen Route und wähle danach Sitzplätze, Hotels und Ankunfts-Essentials.",
+      "primaryCta": "Trip Planner öffnen",
+      "sevenDay": "7-Tage-Route ansehen",
+      "tenDay": "10-Tage-Route ansehen",
+      "commandCenter": "Command Center öffnen"
     }
   },
   "guide": {

@@ -12,6 +12,7 @@ import {
   Luggage,
   MapPinned,
   ShieldCheck,
+  Signpost,
   Train,
   Wifi,
 } from "lucide-react";
@@ -28,7 +29,7 @@ import {
   LocalLensCard,
   type LocalLensPick,
 } from "@/components/content/LocalTokyoCards";
-import { getProviderFromHref, trackAffiliateClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
+import { getProviderFromHref, trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
   type DirectionId,
   type FujiVisibility,
@@ -153,21 +154,11 @@ export default function HomeClient() {
     { label: t("essentialsCta.airportTransfer.title"), href: "/airport-transfers", icon: Car },
   ], [t]);
 
-  const routeCards = useMemo(() => [
-    { title: t("popularLinks.tokyo.title"), description: t("popularLinks.tokyo.desc"), image: image2Placeholder("route-tokyo.png") },
-    { title: t("popularLinks.fujiView.title"), description: t("popularLinks.fujiView.desc"), image: image2Placeholder("route-fuji.png") },
-    { title: t("popularLinks.kyoto.title"), description: t("popularLinks.kyoto.desc"), image: image2Placeholder("route-kyoto.png") },
-    { title: t("popularLinks.osaka.title"), description: t("popularLinks.osaka.desc"), image: image2Placeholder("route-osaka.png") },
-  ], [t]);
-
   const tokyoBaseChoices: AreaChoice[] = useMemo(() => [
-    { name: t("tokyoBases.shinjuku.name"), bestFor: t("tokyoBases.shinjuku.bestFor"), mood: t("tokyoBases.shinjuku.mood"), weakness: t("tokyoBases.shinjuku.weakness"), compareHref: "/areas-to-stay/tokyo-first-time#shinjuku", compareCta: "View Shinjuku" },
-    { name: t("tokyoBases.shibuya.name"), bestFor: t("tokyoBases.shibuya.bestFor"), mood: t("tokyoBases.shibuya.mood"), weakness: t("tokyoBases.shibuya.weakness"), compareHref: "/areas-to-stay/tokyo-first-time#comparison", compareCta: "Compare fit" },
-    { name: t("tokyoBases.ueno.name"), bestFor: t("tokyoBases.ueno.bestFor"), mood: t("tokyoBases.ueno.mood"), weakness: t("tokyoBases.ueno.weakness"), compareHref: "/areas-to-stay/tokyo-first-time#ueno", compareCta: "View Ueno" },
-    { name: t("tokyoBases.asakusa.name"), bestFor: t("tokyoBases.asakusa.bestFor"), mood: t("tokyoBases.asakusa.mood"), weakness: t("tokyoBases.asakusa.weakness"), compareHref: "/areas-to-stay/tokyo-first-time#asakusa", compareCta: "View Asakusa" },
-    { name: t("tokyoBases.tokyoStation.name"), bestFor: t("tokyoBases.tokyoStation.bestFor"), mood: t("tokyoBases.tokyoStation.mood"), weakness: t("tokyoBases.tokyoStation.weakness"), compareHref: "/areas-to-stay/tokyo-first-time#tokyo-station", compareCta: "View Tokyo Station" },
-    { name: t("tokyoBases.eastTokyo.name"), bestFor: t("tokyoBases.eastTokyo.bestFor"), mood: t("tokyoBases.eastTokyo.mood"), weakness: t("tokyoBases.eastTokyo.weakness"), compareHref: "/local-tokyo", compareCta: "See Local Tokyo", localHref: "/local-tokyo/kiyosumi-shirakawa", localCta: "Start with Kiyosumi" },
-  ], [t]);
+    { name: t("tokyoBases.shinjuku.name"), bestFor: t("tokyoBases.shinjuku.bestFor"), mood: t("tokyoBases.shinjuku.mood"), weakness: t("tokyoBases.shinjuku.weakness"), compareHref: "/areas-to-stay/tokyo-first-time", compareCta: "View Shinjuku", trackingPlacement: "home_tokyo_base_shinjuku", trackingLocale: locale, trackingPagePath: "/" },
+    { name: t("tokyoBases.uenoAsakusa.name"), bestFor: t("tokyoBases.uenoAsakusa.bestFor"), mood: t("tokyoBases.uenoAsakusa.mood"), weakness: t("tokyoBases.uenoAsakusa.weakness"), compareHref: "/areas-to-stay/asakusa-vs-ueno", compareCta: t("tokyoBases.uenoAsakusa.compareCta"), trackingPlacement: "home_tokyo_base_ueno_asakusa", trackingLocale: locale, trackingPagePath: "/" },
+    { name: t("tokyoBases.tokyoStation.name"), bestFor: t("tokyoBases.tokyoStation.bestFor"), mood: t("tokyoBases.tokyoStation.mood"), weakness: t("tokyoBases.tokyoStation.weakness"), compareHref: "/areas-to-stay/where-to-stay-before-shinkansen", compareCta: "View Tokyo Station", trackingPlacement: "home_tokyo_base_tokyo_station", trackingLocale: locale, trackingPagePath: "/" },
+  ], [locale, t]);
 
   const localLensPicks: LocalLensPick[] = useMemo(() => [
     { name: t("localTokyo.kiyosumi.name"), summary: t("localTokyo.kiyosumi.summary"), bestFor: t("localTokyo.kiyosumi.bestFor"), avoidIf: t("localTokyo.kiyosumi.avoidIf"), timing: t("localTokyo.kiyosumi.timing"), href: "/local-tokyo/kiyosumi-shirakawa", image: image2Placeholder("quiet-kiyosumi.jpg") },
@@ -436,46 +427,97 @@ export default function HomeClient() {
         </section>
 
         <section className="py-9">
-          <SectionTitle
-            eyebrow="Plan Your Route"
-            description="A classic journey. Designed with time, comfort, and views in mind."
-          />
-          <div className="grid items-center gap-3 lg:grid-cols-[1fr_70px_1fr_70px_1fr_70px_1fr]">
-            {routeCards.map((card, index) => (
-              <div key={card.title} className="contents">
-                <article className="overflow-hidden rounded-[9px] border border-[#d9e5f2] bg-white shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
-                  <div className="relative h-[126px] w-full lg:h-[86px]">
-                    <Image src={card.image} alt="" fill sizes="(min-width: 1024px) 25vw, 100vw" className="object-cover" />
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-xl font-bold text-[#082653]">{card.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-[#5f7190]">{card.description}</p>
-                  </div>
-                </article>
-                {index < routeCards.length - 1 && (
-                  <div className="hidden text-center text-sm font-black text-[#082653] lg:block">
-                    <div className="mb-2 border-t-[3px] border-dotted border-[#7e98bb]" />
-                    {index === 0 ? "~1.5 hr" : index === 1 ? "~2.5 hr" : "~30 min"}
-                  </div>
-                )}
+          <div className="rounded-[18px] border border-[#d9e5f2] bg-white p-5 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="max-w-2xl">
+                <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">
+                  {t("routePlan.eyebrow")}
+                </p>
+                <h2 className="mt-1 text-xl font-bold text-[#082653]">
+                  {t("routePlan.title")}
+                </h2>
+                <p className="mt-1 text-sm leading-6 text-[#5f7190]">
+                  {t("routePlan.desc")}
+                </p>
               </div>
-            ))}
+              <Link
+                href="/plan-your-trip"
+                onClick={() =>
+                  trackCtaClick({
+                    placement: "home_route_plan",
+                    href: "/plan-your-trip",
+                    label: "Open trip planner",
+                    category: "itinerary",
+                    locale,
+                  })
+                }
+                className={`${buttonPage} h-11 px-5 text-sm`}
+              >
+                {t("routePlan.primaryCta")}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-[#106b43]">
+              {[
+                { href: "/itineraries/7-day-first-time-japan", label: t("routePlan.sevenDay"), eventLabel: "See 7-day itinerary" },
+                { href: "/itineraries/10-day-japan-with-fuji", label: t("routePlan.tenDay"), eventLabel: "See 10-day itinerary" },
+                { href: "/command-center", label: t("routePlan.commandCenter"), eventLabel: "Open Command Center" },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() =>
+                    trackCtaClick({
+                      placement: "home_route_plan",
+                      href: link.href,
+                      label: link.eventLabel,
+                      category: "itinerary",
+                      locale,
+                    })
+                  }
+                  className="inline-flex items-center gap-1 underline underline-offset-4 transition-colors hover:text-[#0f6f45]"
+                >
+                  {link.label}
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              ))}
+            </div>
           </div>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <Link
-              href="/planner"
-              className={`${buttonPage} h-11 px-5 text-sm`}
-            >
-              Open planner
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/command-center"
-              className="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-700 bg-[#0b1a33] px-5 text-sm font-extrabold text-sky-300 shadow-[0_8px_22px_rgba(7,20,47,0.3)] transition-colors hover:bg-[#132744] hover:text-sky-200 h-11"
-            >
-              {t("footer.commandCenter")}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+          <div className="mt-5 max-w-3xl rounded-[18px] border border-slate-700 bg-[#07142f] p-5 shadow-[0_14px_34px_rgba(7,20,47,0.22)]">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-start gap-3">
+                <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-yellow-300/40 bg-yellow-300/10 text-yellow-300">
+                  <Signpost className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="inline-flex rounded-full border border-yellow-300/35 bg-yellow-300/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.1em] text-yellow-300">
+                    {t("stationPractice.label")}
+                  </p>
+                  <h3 className="mt-2 text-lg font-bold text-white">
+                    {t("stationPractice.title")}
+                  </h3>
+                  <p className="mt-1 text-sm leading-6 text-slate-300">
+                    {t("stationPractice.desc")}
+                  </p>
+                </div>
+              </div>
+              <Link
+                href="/station-practice"
+                onClick={() =>
+                  trackCtaClick({
+                    placement: "home_station_practice",
+                    href: "/station-practice",
+                    label: "Start station practice",
+                    category: "station_practice",
+                    locale,
+                  })
+                }
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-yellow-300 bg-yellow-300 px-4 py-2.5 text-xs font-extrabold text-slate-950 shadow-[0_8px_18px_rgba(250,204,21,0.18)] transition-colors hover:bg-yellow-200"
+              >
+                {t("stationPractice.cta")}
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -492,9 +534,18 @@ export default function HomeClient() {
           <div className="mt-5 flex justify-center">
             <Link
               href="/areas-to-stay/tokyo-first-time"
+              onClick={() =>
+                trackCtaClick({
+                  placement: "home_tokyo_base_more",
+                  href: "/areas-to-stay/tokyo-first-time",
+                    label: "Open full Tokyo stay guide",
+                  category: "stay",
+                  locale,
+                })
+              }
               className={`${buttonPageSecondary} h-11 px-5 text-sm`}
             >
-              Compare all Tokyo bases
+              {t("tokyoBases.fullGuide")}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -511,14 +562,18 @@ export default function HomeClient() {
               <LocalLensCard key={pick.name} pick={pick} />
             ))}
           </div>
-          <div className="mt-5 grid gap-5 md:grid-cols-3">
-            {localLensPicks.slice(3).map((pick) => (
-              <LocalLensCard key={pick.name} pick={pick} />
-            ))}
-          </div>
           <div className="mt-5 flex justify-center">
             <Link
               href="/local-tokyo"
+              onClick={() =>
+                trackCtaClick({
+                  placement: "home_local_tokyo_more",
+                  href: "/local-tokyo",
+                  label: "Explore more local Tokyo areas",
+                  category: "local_tokyo",
+                  locale,
+                })
+              }
               className={`${buttonPageSecondary} h-11 px-5 text-sm`}
             >
               {t("localTokyo.seeAll")}

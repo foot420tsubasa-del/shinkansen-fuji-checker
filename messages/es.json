@@ -231,7 +231,7 @@
     },
     "tokyoBases": {
       "eyebrow": "Elige tu base en Tokyo",
-      "desc": "Shinjuku y Shibuya son los clásicos con más energía. Tokyo Station y Ueno son prácticos. Asakusa y East Tokyo funcionan mejor si buscas un ambiente local más tranquilo.",
+      "desc": "Empieza con tres bases habituales en Tokyo: Shinjuku por la energía, Ueno / Asakusa por el acceso más fácil al lado este, y Tokyo Station por el Shinkansen y el equipaje.",
       "shinjuku": {
         "name": "Shinjuku",
         "bestFor": "Energía para primera visita, vida nocturna, compras y acceso flexible en tren.",
@@ -267,7 +267,16 @@
         "bestFor": "Tokyo local y tranquilo, café, jardines, museos y mañanas más lentas.",
         "mood": "Mirada local",
         "weakness": "Funciona mejor como desvío calmado o base para una segunda visita que como primera noche predeterminada."
-      }
+      },
+      "seeAll": "Ver todas las zonas para alojarse en Tokyo",
+      "uenoAsakusa": {
+        "name": "Ueno / Asakusa",
+        "bestFor": "acceso a Narita, alojamientos económicos y Tokyo tradicional",
+        "mood": "base práctica del lado este",
+        "weakness": "menos vida nocturna que Shinjuku o Shibuya",
+        "compareCta": "Comparar Ueno / Asakusa"
+      },
+      "fullGuide": "Abrir la guía completa para alojarse en Tokyo"
     },
     "localTokyo": {
       "eyebrow": "Selecciones de Local Tokyo de una persona local japonesa",
@@ -360,6 +369,21 @@
       "feedbackDesc": "Aún no hay newsletter. Las notas anónimas ayudan a decidir qué herramientas de viaje para Japón crear después.",
       "feedbackCta": "Dejar una nota",
       "affiliateNote": "Algunos enlaces son de afiliado; consulta los Términos para más detalles."
+    },
+    "stationPractice": {
+      "label": "Nueva herramienta",
+      "title": "Practica la navegación en estaciones japonesas",
+      "desc": "Prueba un escenario corto de estación antes de tu primer viaje en tren en Japón.",
+      "cta": "Empezar la práctica"
+    },
+    "routePlan": {
+      "eyebrow": "Plan de ruta",
+      "title": "Planifica tu ruta por Japón",
+      "desc": "Empieza con una ruta simple y luego elige asientos, hoteles y preparativos de llegada.",
+      "primaryCta": "Abrir planificador",
+      "sevenDay": "Ver itinerario de 7 días",
+      "tenDay": "Ver itinerario de 10 días",
+      "commandCenter": "Abrir Command Center"
     }
   },
   "guide": {

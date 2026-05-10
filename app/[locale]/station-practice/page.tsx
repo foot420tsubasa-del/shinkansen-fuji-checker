@@ -54,19 +54,19 @@ const missionCards = [
 const supportCtas = [
   {
     title: "Compare hotels near convenient stations",
-    body: "Placeholder guide link for choosing practical hotel areas later.",
+    body: "Choose practical hotel areas near stations that fit your route.",
     href: "/areas-to-stay/tokyo-first-time",
     icon: Hotel,
   },
   {
     title: "Prepare airport transfer",
-    body: "Placeholder guide link for planning airport-to-hotel movement.",
+    body: "Compare airport-to-hotel routes before your first arrival day.",
     href: "/airport-transfers",
     icon: Plane,
   },
   {
     title: "Get eSIM / Wi-Fi before arrival",
-    body: "Placeholder guide link for maps and translation readiness.",
+    body: "Prepare maps, translation, and station searches before landing.",
     href: "/plan-your-trip",
     icon: Wifi,
   },

@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { ArrowRight, CheckCircle2, Clock3, Hotel, MapPin, Sparkles, XCircle } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+import { trackCtaClick } from "@/lib/analytics";
 
 const buttonPage =
   "inline-flex items-center justify-center gap-1.5 rounded-lg border border-[#168a56] bg-[#168a56] font-extrabold text-white shadow-[0_8px_22px_rgba(22,138,86,0.14)] transition-colors hover:bg-[#0f6f45]";
@@ -18,6 +19,9 @@ export type AreaChoice = {
   compareCta?: string;
   localHref?: string;
   localCta?: string;
+  trackingPlacement?: string;
+  trackingLocale?: string;
+  trackingPagePath?: string;
 };
 
 type LocalLensSummaryLink = {
@@ -136,6 +140,16 @@ export function AreaChoiceCard({ area }: { area: AreaChoice }) {
       <div className="mt-auto flex flex-wrap gap-2 pt-5">
         <Link
           href={area.compareHref}
+          onClick={() => {
+            if (!area.trackingPlacement) return;
+            trackCtaClick({
+              placement: area.trackingPlacement,
+              label: area.compareCta ?? area.name,
+              href: area.compareHref,
+              page_path: area.trackingPagePath,
+              locale: area.trackingLocale,
+            });
+          }}
           className={`${buttonPage} h-10 px-3 text-xs`}
         >
           {area.compareCta ?? "View this area"}

@@ -231,7 +231,7 @@
     },
     "tokyoBases": {
       "eyebrow": "Choisissez votre base à Tokyo",
-      "desc": "Shinjuku et Shibuya sont les classiques animés. Tokyo Station et Ueno sont pratiques. Asakusa et l'Est de Tokyo conviennent quand vous voulez une atmosphère locale plus calme.",
+      "desc": "Commencez par trois bases courantes à Tokyo : Shinjuku pour l’énergie, Ueno / Asakusa pour un accès plus simple côté est, et Tokyo Station pour le Shinkansen et les bagages.",
       "shinjuku": {
         "name": "Shinjuku",
         "bestFor": "Énergie, vie nocturne, shopping et accès ferroviaire flexible.",
@@ -267,7 +267,16 @@
         "bestFor": "Tokyo local calme, café, jardins, musées et matinées tranquilles.",
         "mood": "Regard local",
         "weakness": "Mieux comme détour calme ou base pour une deuxième visite qu'un premier choix de première nuit."
-      }
+      },
+      "seeAll": "Voir tous les quartiers où loger à Tokyo",
+      "uenoAsakusa": {
+        "name": "Ueno / Asakusa",
+        "bestFor": "accès à Narita, hôtels abordables et vieux Tokyo",
+        "mood": "base pratique à l’est",
+        "weakness": "moins de vie nocturne que Shinjuku ou Shibuya",
+        "compareCta": "Comparer Ueno / Asakusa"
+      },
+      "fullGuide": "Ouvrir le guide complet des quartiers où loger à Tokyo"
     },
     "localTokyo": {
       "eyebrow": "Tokyo local — choix d'un Japonais",
@@ -360,6 +369,21 @@
       "feedbackDesc": "Pas de newsletter. Vos notes anonymes aident à choisir les prochains outils de voyage à développer.",
       "feedbackCta": "Laisser un message",
       "affiliateNote": "Certains liens sont des liens affiliés — voir Conditions pour plus de détails."
+    },
+    "stationPractice": {
+      "label": "Nouvel outil",
+      "title": "Entraînez-vous à vous orienter dans les gares japonaises",
+      "desc": "Essayez un court scénario de gare avant votre premier trajet en train au Japon.",
+      "cta": "Commencer l’entraînement"
+    },
+    "routePlan": {
+      "eyebrow": "Planification de l’itinéraire",
+      "title": "Planifiez votre itinéraire au Japon",
+      "desc": "Commencez par un itinéraire simple, puis choisissez les sièges, les hôtels et les essentiels d’arrivée.",
+      "primaryCta": "Ouvrir le planificateur",
+      "sevenDay": "Voir l’itinéraire de 7 jours",
+      "tenDay": "Voir l’itinéraire de 10 jours",
+      "commandCenter": "Ouvrir le Command Center"
     }
   },
   "guide": {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import JapanTripCommandCenter from "@/src/JapanTripCommandCenter";
+import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 
 export const metadata: Metadata = {
   title: "Japan Trip Command Center — fujiseat.com",
@@ -40,6 +41,27 @@ export default function CommandCenterPage() {
             <Link href="/areas-to-stay" className="underline underline-offset-4">Stay Areas</Link>
             <Link href="/airport-transfers" className="underline underline-offset-4">Airport Transfers</Link>
           </nav>
+          <div className="mt-5 max-w-xl rounded-2xl border border-[#233653] bg-white/[0.03] p-4">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8fd0ff]">
+              Practice tool
+            </p>
+            <h2 className="mt-1 text-base font-semibold text-white">
+              Practice station navigation
+            </h2>
+            <p className="mt-1 text-sm leading-6 text-[#8fa8c8]">
+              Learn exits, transfer gates, and platform signs before your trip.
+            </p>
+            <TrackedCtaLink
+              href="/station-practice"
+              placement="command_center_station_practice"
+              label="Start station practice"
+              pagePath="/command-center"
+              category="station_practice"
+              className="mt-3 inline-flex text-xs font-semibold text-[#8fd0ff] underline underline-offset-4 hover:text-white"
+            >
+              Start station practice
+            </TrackedCtaLink>
+          </div>
         </div>
         <noscript>
           The interactive Command Center requires JavaScript. You can still

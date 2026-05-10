@@ -231,7 +231,7 @@
     },
     "tokyoBases": {
       "eyebrow": "Choose your Tokyo base",
-      "desc": "Shinjuku and Shibuya are the energetic classics. Tokyo Station and Ueno are practical. Asakusa and East Tokyo work better when you want calmer local texture.",
+      "desc": "Start with three common Tokyo bases: Shinjuku for energy, Ueno / Asakusa for easier east-side access, and Tokyo Station for Shinkansen and luggage convenience.",
       "shinjuku": {
         "name": "Shinjuku",
         "bestFor": "First-time energy, nightlife, shopping, and flexible train access.",
@@ -267,7 +267,16 @@
         "bestFor": "Quiet local Tokyo, coffee, gardens, museums, and slower mornings.",
         "mood": "Local Lens",
         "weakness": "Better as a calm detour or second-time base than a default first-night choice."
-      }
+      },
+      "seeAll": "See all Tokyo stay areas",
+      "uenoAsakusa": {
+        "name": "Ueno / Asakusa",
+        "bestFor": "Narita access, budget stays, and old-town Tokyo",
+        "mood": "practical east-side base",
+        "weakness": "less nightlife than Shinjuku or Shibuya",
+        "compareCta": "Compare Ueno / Asakusa"
+      },
+      "fullGuide": "Open full Tokyo stay guide"
     },
     "localTokyo": {
       "eyebrow": "Local Tokyo picks from a Japanese local",
@@ -360,6 +369,21 @@
       "feedbackDesc": "No newsletter yet. Anonymous notes help decide which Japan travel tools to build next.",
       "feedbackCta": "Leave a note",
       "affiliateNote": "Some links are affiliate links — see Terms for details."
+    },
+    "stationPractice": {
+      "label": "New tool",
+      "title": "Practice Japanese station navigation",
+      "desc": "Try a short station scenario before your first train ride in Japan.",
+      "cta": "Start station practice"
+    },
+    "routePlan": {
+      "eyebrow": "Route planning",
+      "title": "Plan your Japan route",
+      "desc": "Start with a simple route plan, then choose seats, hotels, and arrival essentials.",
+      "primaryCta": "Open trip planner",
+      "sevenDay": "See 7-day itinerary",
+      "tenDay": "See 10-day itinerary",
+      "commandCenter": "Open Command Center"
     }
   },
   "guide": {

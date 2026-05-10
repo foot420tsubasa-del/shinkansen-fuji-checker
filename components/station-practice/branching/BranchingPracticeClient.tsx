@@ -273,13 +273,11 @@ export function BranchingPracticeClient({ missionId }: Props) {
           />
           <section className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 text-xs leading-6 text-neutral-400">
             <div className="text-[10px] uppercase tracking-[0.2em] text-yellow-300">
-              About this preview
+              How this practice works
             </div>
             <p className="mt-2">
-              You&apos;re playing the branching navigation prototype. Read the
-              overhead signs, match the Japanese shape and English label,
-              and pick the direction that matches your
-              destination.
+              Read the signs, match the Japanese shape and English label, and
+              choose the direction that matches your destination.
             </p>
             <p className="mt-2">
               Some wrong choices lead to short detours. They show why the
@@ -291,7 +289,7 @@ export function BranchingPracticeClient({ missionId }: Props) {
 
       <footer className="border-t border-white/5 px-6 py-4 text-xs text-neutral-500">
         Inspired by complex Tokyo-style stations. Layouts, signage, and
-        line names are original to this preview.
+        line names are fictional.
       </footer>
 
       <SignZoomModal

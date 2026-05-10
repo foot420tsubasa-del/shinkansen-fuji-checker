@@ -9,6 +9,7 @@ import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAlternates } from "@/i18n/hreflang";
 import { EsimCta, InternalCta } from "./TrainSignsCtas";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
+import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -344,6 +345,33 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                   <EsimCta label="Get Japan eSIM" placement="train_signs_checklist" locale={locale} variant="subtle" />
                   <InternalCta href="/jr-pass-vs-single-ticket" label="Compare JR Pass vs single tickets" placement="train_signs_checklist" ctaType="rail" locale={locale} variant="secondary" />
                   <InternalCta href="/#seat-checker" label="Find your Shinkansen seat" placement="train_signs_checklist" ctaType="seat_checker" locale={locale} variant="secondary" />
+                </div>
+              </div>
+              <div className="mt-4 rounded-[22px] border border-[#d9e5f2] bg-[#f8fbff] p-5 shadow-sm">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#145aa0]">
+                      Practice tool
+                    </p>
+                    <h3 className="mt-1 text-lg font-bold text-[#082653]">
+                      Practice station navigation
+                    </h3>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                      Try a free station navigation practice tool before your first train ride in Japan.
+                    </p>
+                  </div>
+                  <TrackedCtaLink
+                    href="/station-practice"
+                    placement="train_signs_station_practice"
+                    label="Start station practice"
+                    pagePath="/how-to-read-japanese-train-signs"
+                    locale={locale}
+                    category="station_practice"
+                    className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-[#168a56] bg-white px-4 py-2.5 text-sm font-extrabold text-[#106b43] transition-colors hover:bg-[#f0fbf6]"
+                  >
+                    Start station practice
+                    <ArrowRight className="h-4 w-4" />
+                  </TrackedCtaLink>
                 </div>
               </div>
             </section>

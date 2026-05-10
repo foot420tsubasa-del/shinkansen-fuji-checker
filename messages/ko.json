@@ -231,7 +231,7 @@
     },
     "tokyoBases": {
       "eyebrow": "Tokyo 숙박 거점 고르기",
-      "desc": "Shinjuku와 Shibuya는 활기 있는 대표 지역입니다. Tokyo Station과 Ueno는 실용적입니다. Asakusa와 East Tokyo는 더 차분한 동네 분위기를 원할 때 좋습니다.",
+      "desc": "Tokyo 숙소는 먼저 세 가지 대표 거점으로 좁혀 보세요. 활기라면 Shinjuku, 동쪽 접근성은 Ueno / Asakusa, Shinkansen과 짐 이동은 Tokyo Station이 좋습니다.",
       "shinjuku": {
         "name": "Shinjuku",
         "bestFor": "첫 Tokyo 여행의 활기, 밤 문화, 쇼핑, 유연한 열차 이동에 좋습니다.",
@@ -267,7 +267,16 @@
         "bestFor": "조용한 로컬 Tokyo, 커피, 정원, 박물관, 느긋한 아침에 좋습니다.",
         "mood": "로컬 시선",
         "weakness": "첫날 기본 숙소보다는 차분한 우회 코스나 두 번째 Tokyo 여행의 거점으로 더 잘 맞습니다."
-      }
+      },
+      "seeAll": "Tokyo 숙박 지역 모두 보기",
+      "uenoAsakusa": {
+        "name": "Ueno / Asakusa",
+        "bestFor": "Narita 접근, 합리적인 숙소, 오래된 Tokyo 분위기",
+        "mood": "동쪽의 실용적인 거점",
+        "weakness": "Shinjuku나 Shibuya보다 밤 문화는 적습니다",
+        "compareCta": "Ueno / Asakusa 비교"
+      },
+      "fullGuide": "Tokyo 숙박 전체 가이드 열기"
     },
     "localTokyo": {
       "eyebrow": "일본 현지인이 고른 Local Tokyo",
@@ -360,6 +369,21 @@
       "feedbackDesc": "아직 뉴스레터는 없습니다. 익명 메모는 다음에 만들 일본 여행 도구를 정하는 데 도움이 됩니다.",
       "feedbackCta": "메모 남기기",
       "affiliateNote": "일부 링크는 제휴 링크입니다. 자세한 내용은 이용약관을 확인하세요."
+    },
+    "stationPractice": {
+      "label": "새 도구",
+      "title": "일본 역 내 이동을 연습하세요",
+      "desc": "일본에서 첫 열차를 타기 전에 짧은 역 이동 시나리오를 연습합니다.",
+      "cta": "역 이동 연습 시작"
+    },
+    "routePlan": {
+      "eyebrow": "동선 계획",
+      "title": "일본 여행 동선을 계획하세요",
+      "desc": "간단한 동선부터 정한 뒤 좌석, 호텔, 도착 준비를 선택합니다.",
+      "primaryCta": "여행 플래너 열기",
+      "sevenDay": "7일 일정 보기",
+      "tenDay": "10일 일정 보기",
+      "commandCenter": "Command Center 열기"
     }
   },
   "guide": {
