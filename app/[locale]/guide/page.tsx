@@ -12,6 +12,8 @@ import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
+import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
+import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 
 const SITE_URL = "https://fujiseat.com";
 
@@ -540,6 +542,7 @@ export default async function GuidePage({ params }: Props) {
       icon: <Train className="h-4 w-4 text-red-500" />,
       title: h("jrPassTitle"),
       desc: h("jrPassDesc"),
+      category: "train" as const,
       accent: "from-red-50 to-red-100 border-red-100 group-hover:from-red-100 group-hover:to-red-200",
       featured: true,
     },
@@ -548,6 +551,7 @@ export default async function GuidePage({ params }: Props) {
       icon: <Wifi className="h-4 w-4 text-emerald-500" />,
       title: h("esimTitle"),
       desc: h("esimDesc"),
+      category: "esim" as const,
       accent: "from-emerald-50 to-emerald-100 border-emerald-100 group-hover:from-emerald-100 group-hover:to-emerald-200",
     },
     {
@@ -555,6 +559,7 @@ export default async function GuidePage({ params }: Props) {
       icon: <Train className="h-4 w-4 text-sky-500" />,
       title: h("nexTitle"),
       desc: h("nexDesc"),
+      category: "transfer" as const,
       accent: "from-sky-50 to-sky-100 border-sky-100 group-hover:from-sky-100 group-hover:to-sky-200",
     },
     {
@@ -562,6 +567,7 @@ export default async function GuidePage({ params }: Props) {
       icon: <ShieldCheck className="h-4 w-4 text-amber-500" />,
       title: h("insuranceTitle"),
       desc: h("insuranceDesc"),
+      category: "insurance" as const,
       accent: "from-amber-50 to-amber-100 border-amber-100 group-hover:from-amber-100 group-hover:to-amber-200",
     },
     {
@@ -569,6 +575,7 @@ export default async function GuidePage({ params }: Props) {
       icon: <Car className="h-4 w-4 text-violet-500" />,
       title: h("carTitle"),
       desc: h("carDesc"),
+      category: "activity" as const,
       accent: "from-violet-50 to-violet-100 border-violet-100 group-hover:from-violet-100 group-hover:to-violet-200",
     },
   ];
@@ -585,11 +592,17 @@ export default async function GuidePage({ params }: Props) {
       </div>
       <div className="p-2.5 md:p-3.5 grid gap-2 md:grid-cols-2 md:gap-2.5">
         {essentialLinks.map((link, i) => (
-          <a
+          <TrackedAffiliateLink
             key={i}
             href={link.url}
             target="_blank"
             rel={AFFILIATE_REL}
+            category={link.category}
+            provider="klook"
+            placement="guide_booking_option"
+            pagePath="/guide"
+            locale={locale}
+            label={link.title}
             className={[
               "flex items-center gap-3 rounded-xl border px-3.5 py-3 md:px-4 md:py-3.5",
               "border-slate-100 bg-slate-50/40 hover:bg-white hover:border-slate-200 hover:shadow-sm",
@@ -611,7 +624,7 @@ export default async function GuidePage({ params }: Props) {
               </p>
             </div>
             <ExternalLink className="shrink-0 h-3.5 w-3.5 md:h-4 md:w-4 text-slate-300 group-hover:text-red-500 transition-colors" />
-          </a>
+          </TrackedAffiliateLink>
         ))}
       </div>
     </section>
@@ -717,14 +730,20 @@ export default async function GuidePage({ params }: Props) {
             >
               {copy.readFullGuide}
             </a>
-            <a
+            <TrackedAffiliateLink
               href={KLOOK_URL}
               target="_blank"
               rel={AFFILIATE_REL}
+              category="train"
+              provider="klook"
+              placement="guide_booking_option"
+              pagePath="/guide"
+              locale={locale}
+              label={copy.bookOnKlook}
               className="inline-flex items-center rounded-full border border-[#ff7a00] bg-[#ff7a00] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
             >
               {copy.bookOnKlook}
-            </a>
+            </TrackedAffiliateLink>
             <Link
               href="/planner"
               className="inline-flex items-center rounded-full border border-[#9fd7bd] bg-[#f0fbf6] px-3.5 py-1.5 text-[12px] font-semibold text-[#106b43] transition-colors hover:border-[#168a56] hover:bg-white"
@@ -815,6 +834,18 @@ export default async function GuidePage({ params }: Props) {
                 Compare Shinjuku, Ueno, Asakusa, Tokyo Station, and calmer east-side bases.
               </span>
             </Link>
+            <TrackedCtaLink
+              href="/local-hotel-picks"
+              placement="guide_local_hotel_picks"
+              label="See local hotel picks"
+              pagePath="/guide"
+              locale={locale}
+              category="hotel"
+              className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[12px] transition-colors hover:bg-white"
+            >
+              <span className="block font-semibold text-slate-900">Need hotel examples?</span>
+              <span className="mt-0.5 block text-slate-500">See local hotel picks.</span>
+            </TrackedCtaLink>
           </div>
         </section>
         </div>
@@ -1138,14 +1169,20 @@ export default async function GuidePage({ params }: Props) {
                 >
                   {copy.checkSeatNow}
                 </Link>
-                <a
+                <TrackedAffiliateLink
                   href={KLOOK_URL}
                   target="_blank"
                   rel={AFFILIATE_REL}
+                  category="train"
+                  provider="klook"
+                  placement="guide_booking_option"
+                  pagePath="/guide"
+                  locale={locale}
+                  label={copy.bookOnKlook}
                   className="inline-flex items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3.5 py-2 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
                 >
                   {copy.bookOnKlook}
-                </a>
+                </TrackedAffiliateLink>
                 <Link
                   href="/planner"
                   className="inline-flex items-center justify-center rounded-xl border border-[#9fd7bd] bg-[#f0fbf6] px-3.5 py-2 text-[12px] font-semibold text-[#106b43] transition-colors hover:border-[#168a56] hover:bg-white"
@@ -1207,6 +1244,18 @@ export default async function GuidePage({ params }: Props) {
                 <Link href="/areas-to-stay/tokyo-first-time" className="block rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] transition-colors hover:bg-white">
                   <span className="block font-semibold text-slate-900">Tokyo areas to stay</span>
                 </Link>
+                <TrackedCtaLink
+                  href="/local-hotel-picks"
+                  placement="guide_local_hotel_picks"
+                  label="See local hotel picks"
+                  pagePath="/guide"
+                  locale={locale}
+                  category="hotel"
+                  className="block rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] transition-colors hover:bg-white"
+                >
+                  <span className="block font-semibold text-slate-900">Need hotel examples?</span>
+                  <span className="mt-0.5 block text-slate-500">See local hotel picks.</span>
+                </TrackedCtaLink>
               </div>
             </div>
 

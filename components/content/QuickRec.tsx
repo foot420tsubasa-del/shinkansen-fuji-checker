@@ -1,14 +1,30 @@
+"use client";
+
 import { ArrowRight, Zap } from "lucide-react";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+import { trackAffiliateClick, type AffiliateClickParams } from "@/lib/analytics";
 
 type QuickRecProps = {
   area: string;
   why: string;
   link: string;
   cta?: string;
+  locale?: string;
+  pagePath?: string;
+  provider?: AffiliateClickParams["provider"];
+  placement?: AffiliateClickParams["placement"];
 };
 
-export function QuickRec({ area, why, link, cta = "See hotels" }: QuickRecProps) {
+export function QuickRec({
+  area,
+  why,
+  link,
+  cta = "See hotels",
+  locale,
+  pagePath,
+  provider = "trip",
+  placement = "stay_quick_recommendation",
+}: QuickRecProps) {
   return (
     <div className="rounded-[22px] border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5 shadow-sm">
       <div className="flex items-center gap-2 text-[11px] font-semibold uppercase text-emerald-700">
@@ -23,6 +39,18 @@ export function QuickRec({ area, why, link, cta = "See hotels" }: QuickRecProps)
         href={link}
         target="_blank"
         rel={AFFILIATE_REL}
+        onClick={() =>
+          trackAffiliateClick({
+            category: "hotel",
+            provider,
+            placement,
+            page_path: pagePath,
+            locale,
+            href: link,
+            label: cta,
+            area,
+          })
+        }
         className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700]"
       >
         {cta}

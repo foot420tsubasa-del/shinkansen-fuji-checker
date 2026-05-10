@@ -10,6 +10,7 @@ import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAlternates } from "@/i18n/hreflang";
 import { SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -210,15 +211,21 @@ export default async function TokyoToKyotoTicketPage({ params }: Props) {
           <section>
             <h2 className="text-xl font-bold text-slate-950">Book your ticket</h2>
             <div className="mt-4">
-              <a
+              <TrackedAffiliateLink
                 href={SHINKANSEN_TICKET_URL}
                 target="_blank"
                 rel={AFFILIATE_REL}
+                category="train"
+                provider="klook"
+                placement="shinkansen_ticket"
+                pagePath="/tokyo-to-kyoto-shinkansen-ticket"
+                locale={locale}
+                label="Book Shinkansen ticket"
                 className="inline-flex items-center gap-2 rounded-[18px] border border-[#ff7a00] bg-[#fff3e7] px-5 py-3 text-sm font-bold text-[#b44b00] shadow-sm transition-colors hover:bg-white"
               >
                 Book Shinkansen ticket
                 <ExternalLink className="h-4 w-4" />
-              </a>
+              </TrackedAffiliateLink>
             </div>
           </section>
 

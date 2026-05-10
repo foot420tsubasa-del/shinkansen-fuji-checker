@@ -62,7 +62,12 @@ export type AffiliateClickParams = {
     | "train_signs_google_maps"
     | "train_signs_checklist"
     | "local_hotel_pick"
-    | "local_hotel_pick_more_options";
+    | "local_hotel_pick_more_options"
+    | "stay_quick_recommendation"
+    | "guide_booking_option"
+    | "jr_pass_comparison"
+    | "shinkansen_ticket"
+    | "seat_guide_booking";
   page_path?: string;
   locale?: string;
   href: string;
@@ -108,6 +113,7 @@ export function trackAffiliateClick(params: AffiliateClickParams) {
       day_number: params.day_number,
       cta_type: params.cta_type,
       hotel_name: params.hotel_name,
+      transport_type: "beacon",
     },
   });
 }

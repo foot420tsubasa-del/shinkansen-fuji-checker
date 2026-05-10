@@ -6,7 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { getAffUrl } from "@/src/affiliateLinks";
-import { getProviderFromHref, trackAffiliateClick } from "@/lib/analytics";
+import { getProviderFromHref, trackAffiliateClick, trackCtaClick } from "@/lib/analytics";
 import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
@@ -179,6 +179,18 @@ export function PlanYourTripHub() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={() => {
+                    if (link.href === "/local-hotel-picks") {
+                      trackCtaClick({
+                        placement: "plan_trip_local_hotel_picks",
+                        href: link.href,
+                        label: link.label,
+                        category: "hotel",
+                        page_path: "/plan-your-trip",
+                        locale,
+                      });
+                    }
+                  }}
                   className="flex items-center justify-between gap-3 rounded-2xl border border-[#9fd7bd] bg-white px-3 py-2.5 text-sm font-semibold text-[#106b43] transition-colors hover:border-[#168a56] hover:bg-[#f0fbf6]"
                 >
                   {link.labelKey ? commonT(link.labelKey) : link.label}
@@ -212,7 +224,23 @@ export function PlanYourTripHub() {
                 </Link>
                 <div className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold text-[#106b43]">
                   {section.links.map((link) => (
-                    <Link key={link.href} href={link.href} className="underline underline-offset-4 transition-colors hover:text-[#0f6f45]">
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => {
+                        if (link.href === "/local-hotel-picks") {
+                          trackCtaClick({
+                            placement: "plan_trip_local_hotel_picks",
+                            href: link.href,
+                            label: link.label,
+                            category: "hotel",
+                            page_path: "/plan-your-trip",
+                            locale,
+                          });
+                        }
+                      }}
+                      className="underline underline-offset-4 transition-colors hover:text-[#0f6f45]"
+                    >
                       {link.label}
                     </Link>
                   ))}

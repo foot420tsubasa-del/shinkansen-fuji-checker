@@ -7,6 +7,7 @@ import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { stayPages, type StayPage } from "@/lib/content/stay";
 import { getAlternates } from "@/i18n/hreflang";
 
@@ -182,8 +183,10 @@ function StayCard({ page }: { page: StayPage }) {
   );
 }
 
-export default async function AreasToStayIndex() {
+export default async function AreasToStayIndex({ params }: Props) {
+  const { locale } = await params;
   const localHotelT = await getTranslations("localHotelPicks");
+  const pagePath = "/areas-to-stay";
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -223,23 +226,45 @@ export default async function AreasToStayIndex() {
           </div>
         </div>
         <div className="mt-4 grid gap-2 md:grid-cols-2">
-          {quickPickerItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="group flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 transition-colors hover:border-[#9fd7bd] hover:bg-[#f0fbf6]"
-            >
-              <span>
-                <span className="block text-sm font-semibold text-slate-950 group-hover:text-[#106b43]">
-                  {item.title}
+          {quickPickerItems.map((item) => {
+            const className = "group flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 transition-colors hover:border-[#9fd7bd] hover:bg-[#f0fbf6]";
+            const content = (
+              <>
+                <span>
+                  <span className="block text-sm font-semibold text-slate-950 group-hover:text-[#106b43]">
+                    {item.title}
+                  </span>
+                  <span className="mt-0.5 block text-xs leading-5 text-slate-500">
+                    {item.text}
+                  </span>
                 </span>
-                <span className="mt-0.5 block text-xs leading-5 text-slate-500">
-                  {item.text}
-                </span>
-              </span>
-              <ArrowRight className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" />
-            </Link>
-          ))}
+                <ArrowRight className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" />
+              </>
+            );
+
+            if (item.href === "/local-hotel-picks") {
+              return (
+                <TrackedCtaLink
+                  key={item.href}
+                  href={item.href}
+                  placement="areas_hub_local_hotel_picks"
+                  label={item.title}
+                  pagePath={pagePath}
+                  locale={locale}
+                  category="hotel"
+                  className={className}
+                >
+                  {content}
+                </TrackedCtaLink>
+              );
+            }
+
+            return (
+              <Link key={item.href} href={item.href} className={className}>
+                {content}
+              </Link>
+            );
+          })}
         </div>
       </section>
 
@@ -292,13 +317,18 @@ export default async function AreasToStayIndex() {
         <p className="mt-1 text-xs leading-5 text-slate-500">
           See curated local hotel picks for Tokyo, Kyoto and Osaka — selected by area logic, not as a generic ranking.
         </p>
-        <Link
+        <TrackedCtaLink
           href="/local-hotel-picks"
+          placement="areas_hub_local_hotel_picks"
+          label="Japanese local hotel picks"
+          pagePath={pagePath}
+          locale={locale}
+          category="hotel"
           className="mt-3 inline-flex items-center gap-1.5 rounded-2xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-700"
         >
           {localHotelT("seeLocalHotelPicks")}
           <ArrowRight className="h-3.5 w-3.5" />
-        </Link>
+        </TrackedCtaLink>
       </section>
 
       <footer className="mt-12 border-t border-slate-200 pt-6 text-center">

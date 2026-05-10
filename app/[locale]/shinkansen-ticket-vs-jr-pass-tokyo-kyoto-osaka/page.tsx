@@ -10,6 +10,7 @@ import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAlternates } from "@/i18n/hreflang";
 import { JR_PASS_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -225,10 +226,16 @@ export default async function PassVsTicketTKOPage({ params }: Props) {
           <section>
             <h2 className="text-xl font-bold text-slate-950">Booking options</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <a
+              <TrackedAffiliateLink
                 href={SHINKANSEN_TICKET_URL}
                 target="_blank"
                 rel={AFFILIATE_REL}
+                category="train"
+                provider="klook"
+                placement="jr_pass_comparison"
+                pagePath="/shinkansen-ticket-vs-jr-pass-tokyo-kyoto-osaka"
+                locale={locale}
+                label="Book Shinkansen ticket"
                 className="flex items-center justify-between rounded-[18px] border border-[#ff7a00] bg-[#fff3e7] p-4 text-sm shadow-sm transition-colors hover:bg-white"
               >
                 <span>
@@ -236,11 +243,17 @@ export default async function PassVsTicketTKOPage({ params }: Props) {
                   <span className="mt-0.5 block text-xs text-[#b44b00]/70">Single ticket — simplest for this route.</span>
                 </span>
                 <ExternalLink className="h-4 w-4 shrink-0 text-[#b44b00]" />
-              </a>
-              <a
+              </TrackedAffiliateLink>
+              <TrackedAffiliateLink
                 href={JR_PASS_URL}
                 target="_blank"
                 rel={AFFILIATE_REL}
+                category="train"
+                provider="klook"
+                placement="jr_pass_comparison"
+                pagePath="/shinkansen-ticket-vs-jr-pass-tokyo-kyoto-osaka"
+                locale={locale}
+                label="Compare JR Pass"
                 className="flex items-center justify-between rounded-[18px] border border-[#ff7a00] bg-[#fff3e7] p-4 text-sm shadow-sm transition-colors hover:bg-white"
               >
                 <span>
@@ -248,7 +261,7 @@ export default async function PassVsTicketTKOPage({ params }: Props) {
                   <span className="mt-0.5 block text-xs text-[#b44b00]/70">Only if adding Hiroshima or return leg.</span>
                 </span>
                 <ExternalLink className="h-4 w-4 shrink-0 text-[#b44b00]" />
-              </a>
+              </TrackedAffiliateLink>
             </div>
           </section>
 

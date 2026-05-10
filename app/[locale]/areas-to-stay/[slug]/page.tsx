@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
@@ -17,6 +16,7 @@ import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { HotelAreaCTA } from "@/components/content/LocalTokyoCards";
 import { AgodaHotelMap } from "@/components/affiliate/AgodaHotelMap";
+import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { getAllStaySlugs, getStayBySlug } from "@/lib/content/stay";
 import { getAlternates } from "@/i18n/hreflang";
 
@@ -149,6 +149,8 @@ export default async function StayPage({ params }: Props) {
             area={page.quickRec.area}
             why={page.quickRec.why}
             link={page.quickRec.link}
+            locale={locale}
+            pagePath={pagePath}
           />
 
           <section id="areas" className="scroll-mt-24">
@@ -212,12 +214,17 @@ export default async function StayPage({ params }: Props) {
               <p className="mt-1 text-xs leading-5 text-slate-600">
                 See curated Japanese local hotel picks for Tokyo, Kyoto, and Osaka.
               </p>
-              <Link
+              <TrackedCtaLink
                 href="/local-hotel-picks"
+                placement="stay_detail_local_hotel_picks"
+                label="Japanese local hotel picks"
+                pagePath={pagePath}
+                locale={locale}
+                category="hotel"
                 className="mt-3 inline-flex rounded-xl border border-[#168a56] bg-[#168a56] px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
               >
                 {localHotelT("seeLocalHotelPicks")}
-              </Link>
+              </TrackedCtaLink>
             </div>
           </section>
 
