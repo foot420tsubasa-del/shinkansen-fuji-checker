@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowRight, ExternalLink, Info, Train, Mountain, Calculator } from "lucide-react";
 import Script from "next/script";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
@@ -69,6 +70,8 @@ const costBreakdown = [
 
 export default async function PassVsTicketTKOPage({ params }: Props) {
   const { locale } = await params;
+  const tCommon = await getTranslations({ locale, namespace: "common" });
+  const compareTrainTicketsLabel = tCommon("compareTrainTickets");
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -235,11 +238,11 @@ export default async function PassVsTicketTKOPage({ params }: Props) {
                 placement="jr_pass_comparison"
                 pagePath="/shinkansen-ticket-vs-jr-pass-tokyo-kyoto-osaka"
                 locale={locale}
-                label="Book Shinkansen ticket"
+                label="Compare train tickets"
                 className="flex items-center justify-between rounded-[18px] border border-[#ff7a00] bg-[#fff3e7] p-4 text-sm shadow-sm transition-colors hover:bg-white"
               >
                 <span>
-                  <span className="block font-bold text-[#b44b00]">Book Shinkansen ticket</span>
+                  <span className="block font-bold text-[#b44b00]">{compareTrainTicketsLabel}</span>
                   <span className="mt-0.5 block text-xs text-[#b44b00]/70">Single ticket — simplest for this route.</span>
                 </span>
                 <ExternalLink className="h-4 w-4 shrink-0 text-[#b44b00]" />
