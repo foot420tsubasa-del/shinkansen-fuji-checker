@@ -19,6 +19,8 @@ import {
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { BrandMark } from "@/components/ui/BrandMark";
+import { buttonClassName } from "@/components/ui/Button";
+import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { SiteHeader } from "./components/SiteHeader";
 import Image from "next/image";
 import { SeatCheckerPanel } from "@/components/travel/SeatCheckerPanel";
@@ -54,8 +56,6 @@ const buttonPage =
   "inline-flex items-center justify-center gap-2 rounded-lg border border-[#168a56] bg-[#168a56] font-extrabold text-white shadow-[0_8px_22px_rgba(22,138,86,0.18)] transition-colors hover:bg-[#0f6f45]";
 const buttonPageSecondary =
   "inline-flex items-center justify-center gap-2 rounded-lg border border-[#9fd7bd] bg-white font-extrabold text-[#106b43] shadow-[0_8px_22px_rgba(22,138,86,0.08)] transition-colors hover:border-[#168a56] hover:bg-[#f0fbf6]";
-const buttonAffiliate =
-  "inline-flex items-center justify-center gap-2 rounded-lg border border-[#ff7a00] bg-[#ff7a00] font-extrabold text-white shadow-[0_8px_22px_rgba(255,122,0,0.24)] transition-colors hover:bg-[#e66700]";
 const buttonPagePill =
   "inline-flex items-center gap-2 rounded-xl border border-[#b8dfca] bg-[#f0fbf6] font-extrabold text-[#106b43] shadow-[0_6px_16px_rgba(22,138,86,0.06)] transition-colors hover:border-[#168a56] hover:bg-white";
 const buttonAffiliatePill =
@@ -130,6 +130,7 @@ function SectionTitle({
 
 export default function HomeClient() {
   const t = useTranslations("home");
+  const tCommon = useTranslations("common");
   const locale = useLocale();
   const [direction, setDirection] = useState<DirectionId>("tokyo-osaka");
   const [hasChecked, setHasChecked] = useState(false);
@@ -255,14 +256,14 @@ export default function HomeClient() {
             <div className="mt-5 flex flex-wrap gap-4">
               <Link
                 href="/#seat-checker"
-                className={`${buttonPage} h-14 px-6 text-sm`}
+                className={buttonClassName({ variant: "internal", size: "lg" })}
               >
                 <Train className="h-4 w-4" />
                 {t("nav.seat")}
               </Link>
               <Link
                 href="/planner"
-                className={`${buttonPageSecondary} h-14 px-6 text-sm`}
+                className={buttonClassName({ variant: "internalOutline", size: "lg" })}
               >
                 <CalendarDays className="h-4 w-4" />
                 {t("nav.planner")}
@@ -378,7 +379,7 @@ export default function HomeClient() {
           </p>
           <div className="mt-5 rounded-2xl border border-[#d9e5f2] bg-white p-4 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
             <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#5f7190]">After checking your seat</p>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
               <a
                 href={SHINKANSEN_TICKET_URL}
                 target="_blank"
@@ -391,32 +392,41 @@ export default function HomeClient() {
                   label: "shinkansen_ticket",
                   locale,
                 })}
-                className={`${buttonAffiliate} h-11 px-4 text-xs`}
+                className={buttonClassName({ variant: "commercial" })}
               >
                 <Train className="h-3.5 w-3.5" />
-                Book a single ride
+                {tCommon("bookShinkansenTicket")}
               </a>
-              <Link
-                href="/jr-pass-vs-single-ticket"
-                className={`${buttonPage} h-11 px-4 text-xs`}
+              <TrackedCtaLink
+                href="/areas-to-stay"
+                placement="home_after_seat"
+                label="Choose where to stay"
+                category="stay"
+                ctaType="stay"
+                pagePath="/"
+                locale={locale}
+                className={buttonClassName({ variant: "internal" })}
               >
-                <ArrowRight className="h-3.5 w-3.5" />
-                JR Pass guide
-              </Link>
-              <Link
-                href="/guide"
-                className={`${buttonPage} h-11 px-4 text-xs`}
+                <Bed className="h-3.5 w-3.5" />
+                {tCommon("chooseWhereToStay")}
+              </TrackedCtaLink>
+              <a
+                href={ESIM_URL}
+                target="_blank"
+                rel={AFFILIATE_REL}
+                onClick={() => trackAffiliateClick({
+                  category: "esim",
+                  provider: getProviderFromHref(ESIM_URL),
+                  placement: "home_after_seat",
+                  href: ESIM_URL,
+                  label: "esim",
+                  locale,
+                })}
+                className={buttonClassName({ variant: "commercial" })}
               >
-                <ArrowRight className="h-3.5 w-3.5" />
-                Seat guide
-              </Link>
-              <Link
-                href="/planner"
-                className={`${buttonPageSecondary} h-11 px-4 text-xs`}
-              >
-                <CalendarDays className="h-3.5 w-3.5" />
-                Plan trip
-              </Link>
+                <Wifi className="h-3.5 w-3.5" />
+                {tCommon("prepareESim")}
+              </a>
             </div>
           </div>
           <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-400">
@@ -451,7 +461,7 @@ export default function HomeClient() {
                     locale,
                   })
                 }
-                className={`${buttonPage} h-11 px-5 text-sm`}
+                className={buttonClassName({ variant: "internal" })}
               >
                 {t("routePlan.primaryCta")}
                 <ArrowRight className="h-4 w-4" />
