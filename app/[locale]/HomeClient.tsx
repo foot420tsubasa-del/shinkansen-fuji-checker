@@ -389,13 +389,13 @@ export default function HomeClient() {
                   provider: "klook",
                   placement: "home_after_seat",
                   href: SHINKANSEN_TICKET_URL,
-                  label: "shinkansen_ticket",
+                  label: "compare_train_tickets",
                   locale,
                 })}
                 className={buttonClassName({ variant: "commercial" })}
               >
                 <Train className="h-3.5 w-3.5" />
-                {tCommon("bookShinkansenTicket")}
+                {tCommon("compareTrainTickets")}
               </a>
               <TrackedCtaLink
                 href="/areas-to-stay"
