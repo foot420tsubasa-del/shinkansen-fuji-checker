@@ -1427,5 +1427,27 @@
   },
   "stayAreaMap": {
     "defaultDisclaimer": "Cette carte locale est simplifiée, ce n’est pas une carte de navigation précise. Utilisez-la pour comprendre la logique générale des zones d’hôtel, puis vérifiez les emplacements exacts sur Google Maps ou votre site de réservation."
+  },
+  "stayArea": {
+    "purpose": {
+      "title": "Choisir selon votre profil",
+      "subtitle": "Allez directement au quartier qui correspond à votre style de voyage.",
+      "firstTime": "Première fois",
+      "airportAccess": "Accès aéroport",
+      "shinkansen": "Shinkansen",
+      "quietLocal": "Calme & local",
+      "family": "Famille"
+    },
+    "compare": {
+      "title": "Comparer les hôtels à {areaName}",
+      "singleTitle": "Voir les hôtels à {areaName}",
+      "tripLabel": "Comparer sur Trip.com",
+      "agodaLabel": "Comparer sur Agoda",
+      "note": "Les tarifs et la disponibilité peuvent varier selon la date."
+    },
+    "index": {
+      "seeLocalPicksTitle": "Vous cherchez des exemples concrets d’hôtels ?",
+      "seeLocalPicksBody": "Consultez les sélections d’hôtels locaux pour Tokyo, Kyoto et Osaka — choisis selon la logique du quartier, et non comme un classement générique."
+    }
   }
 }

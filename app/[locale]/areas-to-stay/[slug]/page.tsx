@@ -17,7 +17,13 @@ import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { HotelAreaCTA } from "@/components/content/LocalTokyoCards";
 import { AgodaHotelMap } from "@/components/affiliate/AgodaHotelMap";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
+import { HotelCompareBlock } from "@/components/content/HotelCompareBlock";
+import {
+  PurposeChips,
+  type PurposeChipItem,
+} from "@/components/ui/PurposeChips";
 import { getAllStaySlugs, getStayBySlug } from "@/lib/content/stay";
+import { getTripHotelConfig } from "@/lib/hotel-links";
 import { getAlternates } from "@/i18n/hreflang";
 
 type Props = {
@@ -55,9 +61,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function StayPage({ params }: Props) {
   const { slug, locale } = await params;
   const localHotelT = await getTranslations("localHotelPicks");
+  const stayAreaT = await getTranslations("stayArea");
   const page = getStayBySlug(slug);
   if (!page) notFound();
   const pagePath = `/areas-to-stay/${slug}`;
+
+  // Phase 2: Purpose chips + Trip/Agoda compare block on tokyo-first-time only.
+  // Other stay-area slugs are intentionally untouched in this phase.
+  const isTokyoFirstTime = page.slug === "tokyo-first-time";
+
+  const purposeChips: PurposeChipItem[] = isTokyoFirstTime
+    ? [
+        { key: "firstTime", label: stayAreaT("purpose.firstTime"), href: "#shinjuku" },
+        { key: "airportAccess", label: stayAreaT("purpose.airportAccess"), href: "#ueno" },
+        { key: "shinkansen", label: stayAreaT("purpose.shinkansen"), href: "#tokyo-station" },
+        { key: "quietLocal", label: stayAreaT("purpose.quietLocal"), href: `/${locale}/local-tokyo`, external: true },
+        { key: "family", label: stayAreaT("purpose.family"), href: "#ueno" },
+      ]
+    : [];
+
+  // Compare block reads its URLs from the central hotel-links config so we
+  // never invent Agoda links: if agodaUrl is empty the block falls back to
+  // a Trip.com-only render automatically.
+  const compareCfg = isTokyoFirstTime ? getTripHotelConfig("shinjuku") : null;
+  const compareTripHref = compareCfg
+    ? `/api/trip-hotel-redirect?area=${encodeURIComponent("shinjuku")}`
+    : "";
+  const compareTripTrackingHref = compareCfg?.tripUrl ?? "";
+  const compareAgodaHref = compareCfg?.agodaUrl?.trim() ?? "";
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -91,6 +122,15 @@ export default async function StayPage({ params }: Props) {
         <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">
           {page.description}
         </p>
+
+        {isTokyoFirstTime ? (
+          <PurposeChips
+            className="mt-6"
+            title={stayAreaT("purpose.title")}
+            subtitle={stayAreaT("purpose.subtitle")}
+            chips={purposeChips}
+          />
+        ) : null}
 
         <div className="mt-8 space-y-8">
           {page.slug === "tokyo-first-time" ? (
@@ -152,6 +192,24 @@ export default async function StayPage({ params }: Props) {
             locale={locale}
             pagePath={pagePath}
           />
+
+          {isTokyoFirstTime && compareCfg ? (
+            <HotelCompareBlock
+              title={stayAreaT("compare.title", { areaName: compareCfg.areaName })}
+              singleProviderTitle={stayAreaT("compare.singleTitle", { areaName: compareCfg.areaName })}
+              note={stayAreaT("compare.note")}
+              tripLabel={stayAreaT("compare.tripLabel")}
+              agodaLabel={stayAreaT("compare.agodaLabel")}
+              tripHref={compareTripHref}
+              tripTrackingHref={compareTripTrackingHref}
+              agodaHref={compareAgodaHref}
+              placement="stay_area"
+              pagePath={pagePath}
+              locale={locale}
+              area={compareCfg.areaName}
+              city={compareCfg.city}
+            />
+          ) : null}
 
           <section id="areas" className="scroll-mt-24">
             <h2 className="text-lg font-semibold text-slate-950">Area breakdown</h2>
