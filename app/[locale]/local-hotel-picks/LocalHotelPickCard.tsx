@@ -1,9 +1,7 @@
 "use client";
 
-import { ExternalLink } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { trackAffiliateClick } from "@/lib/analytics";
-import { AFFILIATE_REL } from "@/lib/link-rel";
+import { ProviderButton } from "@/components/ui/ProviderButton";
 import type { LocalHotelPick } from "@/lib/content/local-hotel-picks";
 
 type LocalHotelPickCardProps = {
@@ -52,29 +50,20 @@ export function LocalHotelPickCard({ pick, locale, pagePath }: LocalHotelPickCar
 
       <div className="mt-4">
         {hasAgodaUrl ? (
-          <a
+          <ProviderButton
+            provider="agoda"
             href={pick.agodaUrl}
-            target="_blank"
-            rel={AFFILIATE_REL}
-            onClick={() =>
-              trackAffiliateClick({
-                category: "hotel",
-                provider: "agoda",
-                placement: "local_hotel_pick",
-                page_path: pagePath,
-                locale,
-                href: pick.agodaUrl,
-                label: `${t("checkOnAgoda")} — ${pick.hotelName}`,
-                city: pick.city,
-                area: pick.area,
-                hotel_name: pick.hotelName,
-              })
-            }
-            className="inline-flex items-center gap-1.5 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#e66700]"
+            placement="local_hotel_pick"
+            pagePath={pagePath}
+            locale={locale}
+            category="hotel"
+            area={pick.area}
+            city={pick.city}
+            hotelName={pick.hotelName}
+            fullWidth={false}
           >
             {t("checkOnAgoda")}
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
+          </ProviderButton>
         ) : (
           <span className="inline-flex items-center gap-1.5 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-medium text-slate-400">
             {t("comingSoon")}
