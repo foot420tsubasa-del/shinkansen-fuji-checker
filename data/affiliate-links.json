@@ -33,6 +33,73 @@
       "TripPicks"
     ]
   },
+  "omioShinkansen": {
+    "label": "Compare Shinkansen routes on Omio",
+    "provider": "omio",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Train",
+      "Route comparison"
+    ]
+  },
+  "omioTokyoKyoto": {
+    "label": "Compare Tokyo to Kyoto routes on Omio",
+    "provider": "omio",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Train",
+      "Route comparison"
+    ]
+  },
+  "omioTokyoOsaka": {
+    "label": "Compare Tokyo to Osaka routes on Omio",
+    "provider": "omio",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Train",
+      "Route comparison"
+    ]
+  },
+  "omioJapanRailPass": {
+    "label": "Compare Japan Rail Pass options on Omio",
+    "provider": "omio",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "JR Pass",
+      "Route comparison"
+    ]
+  },
+  "omioJapanTrain": {
+    "label": "Compare trains in Japan on Omio",
+    "provider": "omio",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Train",
+      "JR Pass",
+      "Route comparison"
+    ]
+  },
+  "omioJapanBus": {
+    "label": "Compare buses in Japan on Omio",
+    "provider": "omio",
+    "adid": "",
+    "klookPath": "",
+    "directUrl": "",
+    "usedOn": [
+      "Train",
+      "Route comparison"
+    ]
+  },
   "esim": {
     "label": "Japan eSIM",
     "provider": "klook",

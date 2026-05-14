@@ -9,7 +9,7 @@ import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAlternates } from "@/i18n/hreflang";
-import { JR_PASS_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
+import { JR_PASS_URL, OMIO_JAPAN_RAIL_PASS_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
@@ -278,6 +278,26 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
                 </span>
                 <ExternalLink className="h-4 w-4 shrink-0 text-[#b44b00]" />
               </TrackedAffiliateLink>
+              {OMIO_JAPAN_RAIL_PASS_URL ? (
+                <TrackedAffiliateLink
+                  href={OMIO_JAPAN_RAIL_PASS_URL}
+                  target="_blank"
+                  rel={AFFILIATE_REL}
+                  category="train"
+                  provider="omio"
+                  placement="jr_pass_comparison"
+                  pagePath="/jr-pass-vs-single-ticket"
+                  locale={locale}
+                  label="Compare train routes on Omio"
+                  className="flex items-center justify-between rounded-[18px] border border-indigo-200 bg-white p-4 text-sm shadow-sm transition-colors hover:bg-indigo-50"
+                >
+                  <span>
+                    <span className="block font-bold text-indigo-700">Compare train routes on Omio</span>
+                    <span className="mt-0.5 block text-xs text-indigo-700/70">Route comparison for trains and buses.</span>
+                  </span>
+                  <ExternalLink className="h-4 w-4 shrink-0 text-indigo-700" />
+                </TrackedAffiliateLink>
+              ) : null}
             </div>
           </section>
 

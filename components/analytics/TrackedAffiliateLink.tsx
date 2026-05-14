@@ -16,6 +16,7 @@ type TrackedAffiliateLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "
   city?: string;
   hotelName?: string;
   trackingHref?: string;
+  route?: string;
 };
 
 export function TrackedAffiliateLink({
@@ -31,6 +32,7 @@ export function TrackedAffiliateLink({
   city,
   hotelName,
   trackingHref,
+  route,
   ...anchorProps
 }: TrackedAffiliateLinkProps) {
   const analyticsHref = trackingHref ?? href;
@@ -50,6 +52,7 @@ export function TrackedAffiliateLink({
           area,
           city,
           hotel_name: hotelName,
+          route,
         })
       }
       {...anchorProps}
