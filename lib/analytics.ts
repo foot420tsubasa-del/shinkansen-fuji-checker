@@ -44,7 +44,7 @@ export function trackEvent({ action, category, label, value, params }: GtagEvent
 
 export type AffiliateClickParams = {
   category: "hotel" | "esim" | "transfer" | "train" | "activity" | "tour" | "insurance";
-  provider: "klook" | "agoda" | "trip" | "other";
+  provider: "klook" | "agoda" | "trip" | "omio" | "other";
   placement:
     | "guide_top"
     | "seat_result"
@@ -67,7 +67,8 @@ export type AffiliateClickParams = {
     | "guide_booking_option"
     | "jr_pass_comparison"
     | "shinkansen_ticket"
-    | "seat_guide_booking";
+    | "seat_guide_booking"
+    | "train_route_comparison";
   page_path?: string;
   locale?: string;
   href: string;
@@ -78,6 +79,7 @@ export type AffiliateClickParams = {
   day_number?: number;
   cta_type?: "stay" | "booking" | "prepare" | "esim" | "rail" | "seat_checker" | "guide";
   hotel_name?: string;
+  route?: string;
 };
 
 export function getProviderFromHref(href: string): AffiliateClickParams["provider"] {
@@ -86,6 +88,7 @@ export function getProviderFromHref(href: string): AffiliateClickParams["provide
     if (host.includes("klook")) return "klook";
     if (host.includes("agoda")) return "agoda";
     if (host.includes("trip.com")) return "trip";
+    if (host.includes("omio")) return "omio";
   } catch {
     return "other";
   }
@@ -113,6 +116,7 @@ export function trackAffiliateClick(params: AffiliateClickParams) {
       day_number: params.day_number,
       cta_type: params.cta_type,
       hotel_name: params.hotel_name,
+      route: params.route,
       transport_type: "beacon",
     },
   });

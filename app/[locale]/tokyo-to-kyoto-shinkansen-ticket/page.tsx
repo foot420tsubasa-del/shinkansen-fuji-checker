@@ -8,7 +8,7 @@ import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAlternates } from "@/i18n/hreflang";
-import { SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
+import { OMIO_TOKYO_KYOTO_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 
@@ -227,6 +227,29 @@ export default async function TokyoToKyotoTicketPage({ params }: Props) {
                 <ExternalLink className="h-4 w-4" />
               </TrackedAffiliateLink>
             </div>
+            {OMIO_TOKYO_KYOTO_URL ? (
+              <div className="mt-3">
+                <TrackedAffiliateLink
+                  href={OMIO_TOKYO_KYOTO_URL}
+                  target="_blank"
+                  rel={AFFILIATE_REL}
+                  category="train"
+                  provider="omio"
+                  placement="train_route_comparison"
+                  pagePath="/tokyo-to-kyoto-shinkansen-ticket"
+                  locale={locale}
+                  label="Compare Tokyo to Kyoto on Omio"
+                  route="tokyo-kyoto"
+                  className="inline-flex items-center gap-2 rounded-[18px] border border-indigo-200 bg-white px-5 py-3 text-sm font-bold text-indigo-700 shadow-sm transition-colors hover:bg-indigo-50"
+                >
+                  Compare Tokyo to Kyoto on Omio
+                  <ExternalLink className="h-4 w-4" />
+                </TrackedAffiliateLink>
+                <p className="mt-2 text-xs leading-5 text-slate-500">
+                  Use Omio to compare train and bus route options; use Klook when you already want the Shinkansen ticket.
+                </p>
+              </div>
+            ) : null}
           </section>
 
           {/* FAQ */}

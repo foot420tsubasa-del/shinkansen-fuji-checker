@@ -217,6 +217,7 @@ const PROVIDER_STYLES: Record<string, { dot: string; badge: string; label: strin
   klook: { dot: "bg-orange-400", badge: "bg-orange-100 text-orange-800 border-orange-200", label: "Klook", color: "border-orange-300 bg-orange-50" },
   trip: { dot: "bg-blue-500", badge: "bg-blue-100 text-blue-800 border-blue-200", label: "Trip.com", color: "border-blue-300 bg-blue-50" },
   agoda: { dot: "bg-red-400", badge: "bg-red-100 text-red-800 border-red-200", label: "Agoda", color: "border-red-300 bg-red-50" },
+  omio: { dot: "bg-indigo-500", badge: "bg-indigo-100 text-indigo-800 border-indigo-200", label: "Omio", color: "border-indigo-300 bg-indigo-50" },
   getyourguide: { dot: "bg-emerald-500", badge: "bg-emerald-100 text-emerald-800 border-emerald-200", label: "GetYourGuide", color: "border-emerald-300 bg-emerald-50" },
   safetywing: { dot: "bg-cyan-500", badge: "bg-cyan-100 text-cyan-800 border-cyan-200", label: "SafetyWing", color: "border-cyan-300 bg-cyan-50" },
   other: { dot: "bg-slate-400", badge: "bg-slate-100 text-slate-700 border-slate-200", label: "Other", color: "border-slate-300 bg-slate-50" },
@@ -889,6 +890,7 @@ export default function AdminPage() {
             className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-sky-300"
           >
             <option value="klook">Klook</option>
+            <option value="omio">Omio</option>
             <option value="trip">Trip.com</option>
             <option value="agoda">Agoda</option>
             <option value="getyourguide">GetYourGuide</option>
