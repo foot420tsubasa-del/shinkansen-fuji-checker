@@ -2647,7 +2647,7 @@ export default function AdminPage() {
             )}
 
             {/* Group by provider */}
-            {(["klook", "agoda"] as const).map((provider) => {
+            {(["klook", "omio", "agoda"] as const).map((provider) => {
               const items = byProvider(provider);
               if (items.length === 0) return null;
               const style = ps(provider);
