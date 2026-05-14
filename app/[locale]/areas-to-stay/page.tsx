@@ -3,6 +3,7 @@ import { ArrowRight, Bed } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
+import { buttonClassName } from "@/components/ui/Button";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { LastCheckedNote } from "@/components/content/LastCheckedNote";
@@ -186,6 +187,7 @@ function StayCard({ page }: { page: StayPage }) {
 export default async function AreasToStayIndex({ params }: Props) {
   const { locale } = await params;
   const localHotelT = await getTranslations("localHotelPicks");
+  const stayAreaT = await getTranslations("stayArea");
   const pagePath = "/areas-to-stay";
 
   return (
@@ -313,9 +315,9 @@ export default async function AreasToStayIndex({ params }: Props) {
       </section>
 
       <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-        <p className="text-sm font-semibold text-slate-950">Looking for specific hotel examples?</p>
+        <p className="text-sm font-semibold text-slate-950">{stayAreaT("index.seeLocalPicksTitle")}</p>
         <p className="mt-1 text-xs leading-5 text-slate-500">
-          See curated local hotel picks for Tokyo, Kyoto and Osaka — selected by area logic, not as a generic ranking.
+          {stayAreaT("index.seeLocalPicksBody")}
         </p>
         <TrackedCtaLink
           href="/local-hotel-picks"
@@ -324,7 +326,7 @@ export default async function AreasToStayIndex({ params }: Props) {
           pagePath={pagePath}
           locale={locale}
           category="hotel"
-          className="mt-3 inline-flex items-center gap-1.5 rounded-2xl bg-slate-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-slate-700"
+          className={buttonClassName({ variant: "internal", className: "mt-3" })}
         >
           {localHotelT("seeLocalHotelPicks")}
           <ArrowRight className="h-3.5 w-3.5" />

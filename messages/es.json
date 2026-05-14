@@ -1409,6 +1409,7 @@
     "fallbackCompareHotels": "Comparar hoteles en {areaName}"
   },
   "localHotelPicks": {
+    "checkOnTrip": "Ver en Trip.com",
     "checkOnAgoda": "Ver en Agoda",
     "comingSoon": "Enlace de Agoda próximamente",
     "seeLocalHotelPicks": "Ver hoteles elegidos por un local japonés",
@@ -1423,9 +1424,32 @@
     "chooseWhereToStay": "Elegir dónde alojarte",
     "prepareAirportTransfer": "Preparar traslado desde el aeropuerto",
     "bookShinkansenTicket": "Reservar billete de Shinkansen",
+    "compareTrainTickets": "Comparar billetes de tren",
     "prepareESim": "Preparar eSIM"
   },
   "stayAreaMap": {
     "defaultDisclaimer": "Este es un mapa local simplificado, no un mapa de navegación preciso. Úsalo para entender la lógica general de las zonas de hoteles y luego revisa las ubicaciones exactas en Google Maps o en tu sitio de reservas."
+  },
+  "stayArea": {
+    "purpose": {
+      "title": "Elige por motivo de viaje",
+      "subtitle": "Salta directamente a la zona que se ajusta a tu forma de viajar.",
+      "firstTime": "Primera vez",
+      "airportAccess": "Acceso al aeropuerto",
+      "shinkansen": "Shinkansen",
+      "quietLocal": "Local y tranquilo",
+      "family": "Familia"
+    },
+    "compare": {
+      "title": "Comparar hoteles en {areaName}",
+      "singleTitle": "Ver hoteles en {areaName}",
+      "tripLabel": "Comparar en Trip.com",
+      "agodaLabel": "Comparar en Agoda",
+      "note": "Los precios y la disponibilidad pueden variar según la fecha."
+    },
+    "index": {
+      "seeLocalPicksTitle": "¿Buscas ejemplos concretos de hoteles?",
+      "seeLocalPicksBody": "Consulta las recomendaciones locales para Tokio, Kioto y Osaka, elegidas por lógica de zona y no como un ranking genérico."
+    }
   }
 }

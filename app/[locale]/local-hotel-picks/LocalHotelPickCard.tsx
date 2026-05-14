@@ -1,9 +1,7 @@
 "use client";
 
-import { ExternalLink } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { trackAffiliateClick } from "@/lib/analytics";
-import { AFFILIATE_REL } from "@/lib/link-rel";
+import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
 import type { LocalHotelPick } from "@/lib/content/local-hotel-picks";
 
 type LocalHotelPickCardProps = {
@@ -14,7 +12,12 @@ type LocalHotelPickCardProps = {
 
 export function LocalHotelPickCard({ pick, locale, pagePath }: LocalHotelPickCardProps) {
   const t = useTranslations("localHotelPicks");
-  const hasAgodaUrl = Boolean(pick.agodaUrl.trim());
+  const agodaUrl = pick.agodaUrl.trim();
+  const tripUrl = pick.tripFallbackUrl.trim();
+  const providerLinks: Array<{ provider: ProviderId; href: string; label: string }> = [
+    tripUrl ? { provider: "trip", href: tripUrl, label: t("checkOnTrip") } : null,
+    agodaUrl ? { provider: "agoda", href: agodaUrl, label: t("checkOnAgoda") } : null,
+  ].filter(Boolean) as Array<{ provider: ProviderId; href: string; label: string }>;
 
   return (
     <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
@@ -50,37 +53,26 @@ export function LocalHotelPickCard({ pick, locale, pagePath }: LocalHotelPickCar
         </div>
       </div>
 
-      <div className="mt-4">
-        {hasAgodaUrl ? (
-          <a
-            href={pick.agodaUrl}
-            target="_blank"
-            rel={AFFILIATE_REL}
-            onClick={() =>
-              trackAffiliateClick({
-                category: "hotel",
-                provider: "agoda",
-                placement: "local_hotel_pick",
-                page_path: pagePath,
-                locale,
-                href: pick.agodaUrl,
-                label: `${t("checkOnAgoda")} — ${pick.hotelName}`,
-                city: pick.city,
-                area: pick.area,
-                hotel_name: pick.hotelName,
-              })
-            }
-            className="inline-flex items-center gap-1.5 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#e66700]"
-          >
-            {t("checkOnAgoda")}
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-        ) : (
-          <span className="inline-flex items-center gap-1.5 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-medium text-slate-400">
-            {t("comingSoon")}
-          </span>
-        )}
-      </div>
+      {providerLinks.length > 0 ? (
+        <div className={`mt-4 grid gap-2 ${providerLinks.length > 1 ? "sm:grid-cols-2" : "sm:max-w-xs"}`}>
+          {providerLinks.map((link) => (
+            <ProviderButton
+              key={link.provider}
+              provider={link.provider}
+              href={link.href}
+              placement="local_hotel_pick"
+              pagePath={pagePath}
+              locale={locale}
+              category="hotel"
+              area={pick.area}
+              city={pick.city}
+              hotelName={pick.hotelName}
+            >
+              {link.label}
+            </ProviderButton>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }

@@ -1409,6 +1409,7 @@
     "fallbackCompareHotels": "Compare {areaName} hotels"
   },
   "localHotelPicks": {
+    "checkOnTrip": "Check on Trip.com",
     "checkOnAgoda": "Check on Agoda",
     "comingSoon": "Agoda link coming soon",
     "seeLocalHotelPicks": "See Japanese local hotel picks",
@@ -1423,9 +1424,32 @@
     "chooseWhereToStay": "Choose where to stay",
     "prepareAirportTransfer": "Prepare airport transfer",
     "bookShinkansenTicket": "Book Shinkansen ticket",
+    "compareTrainTickets": "Compare train tickets",
     "prepareESim": "Prepare eSIM"
   },
   "stayAreaMap": {
     "defaultDisclaimer": "This is a simplified local guide map, not a precise navigation map. Use it to understand the general hotel-area logic, then check exact locations on Google Maps or your booking site."
+  },
+  "stayArea": {
+    "purpose": {
+      "title": "Choose by purpose",
+      "subtitle": "Jump to the area that fits how you travel.",
+      "firstTime": "First time",
+      "airportAccess": "Airport access",
+      "shinkansen": "Shinkansen",
+      "quietLocal": "Quiet local",
+      "family": "Family"
+    },
+    "compare": {
+      "title": "Compare hotels in {areaName}",
+      "singleTitle": "Check hotels in {areaName}",
+      "tripLabel": "Compare on Trip.com",
+      "agodaLabel": "Compare on Agoda",
+      "note": "Prices and availability may differ by date."
+    },
+    "index": {
+      "seeLocalPicksTitle": "Looking for specific hotel examples?",
+      "seeLocalPicksBody": "See curated local hotel picks for Tokyo, Kyoto and Osaka — selected by area logic, not as a generic ranking."
+    }
   }
 }

@@ -1409,6 +1409,7 @@
     "fallbackCompareHotels": "比较 {areaName} 酒店"
   },
   "localHotelPicks": {
+    "checkOnTrip": "在 Trip.com 查看",
     "checkOnAgoda": "在 Agoda 查看",
     "comingSoon": "Agoda 链接即将上线",
     "seeLocalHotelPicks": "查看日本本地视角酒店推荐",
@@ -1423,9 +1424,32 @@
     "chooseWhereToStay": "选择住宿区域",
     "prepareAirportTransfer": "准备机场交通",
     "bookShinkansenTicket": "预订新干线车票",
+    "compareTrainTickets": "比较火车票",
     "prepareESim": "准备 eSIM"
   },
   "stayAreaMap": {
     "defaultDisclaimer": "这是一张简化的本地住宿区域参考图，并不是精确导航地图。请用它理解酒店区域选择的大致逻辑，然后在 Google Maps 或预订网站上确认准确位置。"
+  },
+  "stayArea": {
+    "purpose": {
+      "title": "按出行需求选择",
+      "subtitle": "直接跳到适合你旅行方式的区域。",
+      "firstTime": "第一次去",
+      "airportAccess": "机场交通",
+      "shinkansen": "新干线",
+      "quietLocal": "安静的本地区",
+      "family": "家庭出行"
+    },
+    "compare": {
+      "title": "比较 {areaName} 的酒店",
+      "singleTitle": "查看 {areaName} 的酒店",
+      "tripLabel": "在 Trip.com 上比较",
+      "agodaLabel": "在 Agoda 上比较",
+      "note": "价格和可订状态会因日期而异。"
+    },
+    "index": {
+      "seeLocalPicksTitle": "想看具体的酒店推荐？",
+      "seeLocalPicksBody": "查看面向东京、京都和大阪的本地酒店精选——按区域逻辑挑选，而不是一般排行榜。"
+    }
   }
 }

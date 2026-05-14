@@ -1409,6 +1409,7 @@
     "fallbackCompareHotels": "Сравнить отели в {areaName}"
   },
   "localHotelPicks": {
+    "checkOnTrip": "Посмотреть на Trip.com",
     "checkOnAgoda": "Посмотреть на Agoda",
     "comingSoon": "Ссылка Agoda скоро появится",
     "seeLocalHotelPicks": "Посмотреть отели, выбранные с местной японской точки зрения",
@@ -1423,9 +1424,32 @@
     "chooseWhereToStay": "Выбрать район для проживания",
     "prepareAirportTransfer": "Подготовить трансфер из аэропорта",
     "bookShinkansenTicket": "Забронировать билет на Синкансэн",
+    "compareTrainTickets": "Сравнить билеты на поезд",
     "prepareESim": "Подготовить eSIM"
   },
   "stayAreaMap": {
     "defaultDisclaimer": "Это упрощённая местная карта-гид, а не точная навигационная карта. Используйте её, чтобы понять общую логику районов для отелей, а точные адреса проверяйте в Google Maps или на сайте бронирования."
+  },
+  "stayArea": {
+    "purpose": {
+      "title": "Выберите по цели поездки",
+      "subtitle": "Перейдите сразу к району, который подходит вашему стилю поездки.",
+      "firstTime": "Первая поездка",
+      "airportAccess": "Доступ к аэропорту",
+      "shinkansen": "Синкансэн",
+      "quietLocal": "Тихий местный",
+      "family": "Семья"
+    },
+    "compare": {
+      "title": "Сравнить отели в {areaName}",
+      "singleTitle": "Посмотреть отели в {areaName}",
+      "tripLabel": "Сравнить на Trip.com",
+      "agodaLabel": "Сравнить на Agoda",
+      "note": "Цены и доступность могут отличаться в зависимости от даты."
+    },
+    "index": {
+      "seeLocalPicksTitle": "Ищете конкретные примеры отелей?",
+      "seeLocalPicksBody": "Посмотрите подборку местных отелей в Токио, Киото и Осаке — выбраны по логике района, а не как обычный рейтинг."
+    }
   }
 }
