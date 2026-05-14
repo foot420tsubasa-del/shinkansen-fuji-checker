@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { ProviderButton } from "@/components/ui/ProviderButton";
+import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
 import type { LocalHotelPick } from "@/lib/content/local-hotel-picks";
 
 type LocalHotelPickCardProps = {
@@ -12,7 +12,12 @@ type LocalHotelPickCardProps = {
 
 export function LocalHotelPickCard({ pick, locale, pagePath }: LocalHotelPickCardProps) {
   const t = useTranslations("localHotelPicks");
-  const hasAgodaUrl = Boolean(pick.agodaUrl.trim());
+  const agodaUrl = pick.agodaUrl.trim();
+  const tripUrl = pick.tripFallbackUrl.trim();
+  const providerLinks: Array<{ provider: ProviderId; href: string; label: string }> = [
+    tripUrl ? { provider: "trip", href: tripUrl, label: t("checkOnTrip") } : null,
+    agodaUrl ? { provider: "agoda", href: agodaUrl, label: t("checkOnAgoda") } : null,
+  ].filter(Boolean) as Array<{ provider: ProviderId; href: string; label: string }>;
 
   return (
     <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
@@ -48,28 +53,26 @@ export function LocalHotelPickCard({ pick, locale, pagePath }: LocalHotelPickCar
         </div>
       </div>
 
-      <div className="mt-4">
-        {hasAgodaUrl ? (
-          <ProviderButton
-            provider="agoda"
-            href={pick.agodaUrl}
-            placement="local_hotel_pick"
-            pagePath={pagePath}
-            locale={locale}
-            category="hotel"
-            area={pick.area}
-            city={pick.city}
-            hotelName={pick.hotelName}
-            fullWidth={false}
-          >
-            {t("checkOnAgoda")}
-          </ProviderButton>
-        ) : (
-          <span className="inline-flex items-center gap-1.5 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-medium text-slate-400">
-            {t("comingSoon")}
-          </span>
-        )}
-      </div>
+      {providerLinks.length > 0 ? (
+        <div className={`mt-4 grid gap-2 ${providerLinks.length > 1 ? "sm:grid-cols-2" : "sm:max-w-xs"}`}>
+          {providerLinks.map((link) => (
+            <ProviderButton
+              key={link.provider}
+              provider={link.provider}
+              href={link.href}
+              placement="local_hotel_pick"
+              pagePath={pagePath}
+              locale={locale}
+              category="hotel"
+              area={pick.area}
+              city={pick.city}
+              hotelName={pick.hotelName}
+            >
+              {link.label}
+            </ProviderButton>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }

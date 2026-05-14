@@ -1409,6 +1409,7 @@
     "fallbackCompareHotels": "{areaName} 호텔 비교하기"
   },
   "localHotelPicks": {
+    "checkOnTrip": "Trip.com에서 확인하기",
     "checkOnAgoda": "Agoda에서 확인하기",
     "comingSoon": "Agoda 링크 준비 중입니다",
     "seeLocalHotelPicks": "일본 현지 시선의 호텔 추천 보기",

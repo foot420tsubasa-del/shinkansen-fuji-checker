@@ -1409,6 +1409,7 @@
     "fallbackCompareHotels": "比較 {areaName} 飯店"
   },
   "localHotelPicks": {
+    "checkOnTrip": "在 Trip.com 查看",
     "checkOnAgoda": "在 Agoda 查看",
     "comingSoon": "Agoda 連結即將上線",
     "seeLocalHotelPicks": "查看日本在地視角飯店推薦",

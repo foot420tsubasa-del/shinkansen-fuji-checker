@@ -1409,6 +1409,7 @@
     "fallbackCompareHotels": "Compare {areaName} hotels"
   },
   "localHotelPicks": {
+    "checkOnTrip": "Check on Trip.com",
     "checkOnAgoda": "Check on Agoda",
     "comingSoon": "Agoda link coming soon",
     "seeLocalHotelPicks": "See Japanese local hotel picks",

@@ -1456,6 +1456,7 @@ export default function AdminPage() {
   function LocalHotelPickCard({ entry }: { entry: LocalHotelPickEntry }) {
     const isEditing = editingLocalPickId === entry.id && localPickForm;
     const hasAgodaUrl = Boolean(entry.agodaUrl.trim());
+    const hasTripFallbackUrl = Boolean(entry.tripFallbackUrl.trim());
     const statusTone =
       entry.status === "active"
         ? "bg-emerald-100 text-emerald-700"
@@ -1466,9 +1467,9 @@ export default function AdminPage() {
       !entry.hotelName.trim() ? "Hotel name is empty." : "",
       !entry.city.trim() ? "City is empty." : "",
       !entry.localReason.trim() ? "Local reason is empty." : "",
-      !hasAgodaUrl ? "Agoda URL is missing. This card will not show an active booking button." : "",
-      entry.status === "active" && !hasAgodaUrl
-        ? "Active pick without Agoda URL. The card will show 'Agoda link coming soon'."
+      !hasAgodaUrl && !hasTripFallbackUrl ? "No Agoda or Trip.com URL is set. The public card will not show a provider button." : "",
+      entry.status === "active" && !hasAgodaUrl && !hasTripFallbackUrl
+        ? "Active pick without provider URL. Add Agoda URL or Trip.com URL before promoting this pick."
         : "",
     ].filter(Boolean);
 
@@ -1564,7 +1565,7 @@ export default function AdminPage() {
             />
           </div>
           <div className="mt-3">
-            <label className="text-[10px] font-bold text-purple-700">Agoda individual hotel affiliate URL</label>
+            <label className="text-[10px] font-bold text-purple-700">Agoda URL</label>
             <input
               value={localPickForm.agodaUrl}
               onChange={(e) => updateLocalPickForm("agodaUrl", e.target.value)}
@@ -1574,7 +1575,7 @@ export default function AdminPage() {
           </div>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <div>
-              <label className="text-[10px] font-semibold text-slate-500">Trip.com fallback URL (optional)</label>
+              <label className="text-[10px] font-semibold text-blue-700">Trip.com URL</label>
               <input
                 value={localPickForm.tripFallbackUrl}
                 onChange={(e) => updateLocalPickForm("tripFallbackUrl", e.target.value)}
@@ -1623,15 +1624,18 @@ export default function AdminPage() {
               <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-600">
                 {entry.city}
               </span>
-              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasAgodaUrl ? "bg-purple-100 text-purple-700" : "bg-red-100 text-red-700"}`}>
+              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasAgodaUrl ? "bg-purple-100 text-purple-700" : "bg-slate-100 text-slate-600"}`}>
                 {hasAgodaUrl ? "Agoda URL" : "Agoda未設定"}
+              </span>
+              <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasTripFallbackUrl ? "bg-blue-100 text-blue-700" : "bg-slate-100 text-slate-600"}`}>
+                {hasTripFallbackUrl ? "Trip.com URL" : "Trip.com未設定"}
               </span>
             </div>
             <p className="mt-1 text-[10px] text-slate-500">
               {entry.area} · {entry.bestFor}
             </p>
             <p className="mt-0.5 truncate text-[10px] text-slate-400">
-              {hasAgodaUrl ? entry.agodaUrl : "Agoda URL未設定 — カードに \"Agoda link coming soon\" と表示されます"}
+              {hasAgodaUrl ? entry.agodaUrl : hasTripFallbackUrl ? entry.tripFallbackUrl : "Provider URL未設定 — 公開カードには予約ボタンを表示しません"}
             </p>
             <div className="mt-1.5 flex flex-wrap gap-1">
               {entry.tags.map((tag) => (
@@ -2057,10 +2061,13 @@ export default function AdminPage() {
             <li>Use Hotel Area Links for broad area search CTAs. These should usually use Trip.com.</li>
             <li>Use Hotel Pick Links for specific hotel recommendations. Add Agoda individual hotel URLs here.</li>
             <li>Stay Hotel Picks control which hotels appear on each stay page. Hotel Pick Links manage the actual affiliate URLs.</li>
-            <li>Use Local Hotel Picks for curated Agoda hotel cards on /local-hotel-picks. These are separate from Trip.com Hotel Picks.</li>
+            <li>Use Local Hotel Picks for curated hotel cards on /local-hotel-picks. Add Agoda and Trip.com provider URLs there when available.</li>
             <li>Do not use Agoda Hotel Map for now. {AGODA_HOTEL_MAP_DISABLED_REASON}</li>
             <li>Stay Area Maps are static visual guide images, not affiliate widgets.</li>
           </ul>
+          <p className="mt-3 rounded-xl border border-sky-200 bg-white px-3 py-2 text-[11px] leading-5 text-slate-600">
+            On Vercel, JSON edits are not persistent. Use this admin locally, then commit and deploy the updated JSON.
+          </p>
         </div>
 
         {/* Summary cards */}
@@ -2393,13 +2400,13 @@ export default function AdminPage() {
               </div>
               <p className="mt-2 text-xs leading-5 text-slate-600">
                 Use this section for curated individual hotel picks shown on /local-hotel-picks.
-                Add Agoda individual hotel affiliate URLs here.
+                Add Agoda and Trip.com individual hotel affiliate URLs here.
                 These are separate from the existing Trip.com Hotel Picks.
               </p>
               <div className="mt-3 rounded-xl bg-white px-3 py-2 text-[11px] leading-5 text-slate-600">
                 <span className="font-semibold text-slate-800">Rule:</span>
-                {" "}Add Agoda URLs for individual hotels only. Do not mix Trip.com area search URLs here.
-                Trip.com appears only in &ldquo;Want more choices?&rdquo; blocks on the page.
+                {" "}Use agodaUrl for Agoda individual hotel links and tripFallbackUrl for Trip.com individual hotel links.
+                Do not paste Trip.com area search URLs into individual hotel picks.
               </div>
             </div>
 

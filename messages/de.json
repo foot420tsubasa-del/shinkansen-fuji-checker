@@ -1409,6 +1409,7 @@
     "fallbackCompareHotels": "Hotels in {areaName} vergleichen"
   },
   "localHotelPicks": {
+    "checkOnTrip": "Auf Trip.com ansehen",
     "checkOnAgoda": "Auf Agoda ansehen",
     "comingSoon": "Agoda-Link folgt in Kürze",
     "seeLocalHotelPicks": "Lokale japanische Hotel-Empfehlungen ansehen",
