@@ -17,9 +17,10 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { getAffUrl, requireAffUrl } from "@/src/affiliateLinks";
 import { getProviderFromHref, trackAffiliateClick, trackChecklistComplete, trackTemplateSelect } from "@/lib/analytics";
-import { getHotelLink } from "@/lib/hotel-links";
+import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
 // ─── Constants ──────────────────────────────────────────────────────────────
@@ -144,12 +145,28 @@ type RouteBookingAction = {
   priority: "primary" | "secondary" | "text";
 };
 
+type RouteHotelAction = {
+  actionLabel: string;
+  hotelKey: HotelAreaKey;
+  area: string;
+};
+
+type RouteHotelDetailLink = {
+  label: string;
+  href: string;
+};
+
 type RouteBookingRecommendation = {
   routeId: string;
   railRecommendation: string;
+  railActionLabel: string;
+  railActionDescription?: string;
   railActions: RouteBookingAction[];
   hotelRecommendation: string;
-  hotelAction: RouteBookingAction;
+  hotelRecommendedAreas: string[];
+  hotelPrimaryAction?: RouteBookingAction;
+  hotelDetailLinks: RouteHotelDetailLink[];
+  hotelActions: RouteHotelAction[];
   arrivalRecommendation: string;
   arrivalActions: RouteBookingAction[];
   optionalAddOns: RouteBookingAction[];
@@ -157,30 +174,78 @@ type RouteBookingRecommendation = {
 
 const shinkansenTicketUrl = getAffUrl("shinkansenTicket");
 const jrPassUrl = getAffUrl("jrPass");
-const omioTrainUrl = getAffUrl("omioJapanTrain") ?? getAffUrl("omioShinkansen");
+const omioJapanTrainUrl = getAffUrl("omioJapanTrain");
+const omioTrainUrl = omioJapanTrainUrl ?? getAffUrl("omioShinkansen");
+const omioTrainLinkId = omioJapanTrainUrl ? "omioJapanTrain" : "omioShinkansen";
 const esimUrl = getAffUrl("esim");
 const insuranceUrl = getAffUrl("insurance");
-const kawaguchikoHotel = getHotelLink("kawaguchiko");
-const tokyoStationHotel = getHotelLink("tokyoStation");
+
+function plannerHotelProviders(hotelKey: HotelAreaKey): ProviderChoiceButton[] {
+  const hotelLink = getHotelLink(hotelKey);
+  const config = getTripHotelConfig(hotelKey);
+  const tripUrl = config.tripUrl?.trim() ?? "";
+  const agodaUrl = config.agodaUrl?.trim() ?? "";
+  const providers: ProviderChoiceButton[] = [];
+
+  if (tripUrl) {
+    providers.push({
+      label: "Trip.com",
+      href: hotelLink.provider === "trip" ? hotelLink.href : tripUrl,
+      trackingHref: tripUrl,
+      provider: "trip",
+      product: "hotel",
+      linkId: `hotelArea.${hotelKey}.trip`,
+      placement: "planner_route_stack",
+      variant: "primary",
+      category: "hotel",
+    });
+  }
+
+  if (agodaUrl) {
+    providers.push({
+      label: "Agoda",
+      href: agodaUrl,
+      trackingHref: agodaUrl,
+      provider: "agoda",
+      product: "hotel",
+      linkId: `hotelArea.${hotelKey}.agoda`,
+      placement: "planner_route_stack",
+      variant: providers.length > 0 ? "secondary" : "primary",
+      category: "hotel",
+    });
+  }
+
+  return providers;
+}
 
 const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = {
   "express-5": {
     routeId: "express-5",
     railRecommendation:
       "A single Shinkansen ticket is usually simpler for this short Tokyo → Kyoto route. JR Pass is usually not needed unless you return to Tokyo by Shinkansen.",
+    railActionLabel: "Book Shinkansen ticket",
+    railActionDescription: "Best for Tokyo → Kyoto / Osaka, one-way, or simple first-time routes.",
     railActions: [
       shinkansenTicketUrl
-        ? { label: "Book Shinkansen ticket", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "express-5", external: true, priority: "primary" }
+        ? { label: "Klook", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "express-5", external: true, priority: "primary" }
         : null,
       omioTrainUrl
-        ? { label: "Compare routes on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: "omioJapanTrain", product: "route_compare", routeType: "express-5", external: true, priority: "text" }
+        ? { label: "Compare on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: omioTrainLinkId, product: "route_compare", routeType: "express-5", external: true, priority: "secondary" }
         : null,
       jrPassUrl
-        ? { label: "JR Pass usually not needed — compare only if returning to Tokyo", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "express-5", external: true, priority: "text" }
+        ? { label: "JR Pass usually not needed for this route", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "express-5", external: true, priority: "text" }
         : null,
     ].filter(Boolean) as RouteBookingAction[],
-    hotelRecommendation: "Keep hotel bases simple: Tokyo for arrival, then Kyoto Station or Gion depending on your pace.",
-    hotelAction: { label: "Choose hotels before Shinkansen", href: "/areas-to-stay/where-to-stay-before-shinkansen", external: false, priority: "secondary" },
+    hotelRecommendation: "Short trip, fewer transfers, and easier early rail days.",
+    hotelRecommendedAreas: ["Tokyo Station", "Shinjuku"],
+    hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
+    hotelDetailLinks: [
+      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo/tokyo-station" },
+      { label: "Shinjuku details", href: "/areas-to-stay/tokyo/shinjuku" },
+    ],
+    hotelActions: [
+      { actionLabel: "Compare hotels near Tokyo Station", hotelKey: "tokyoStation", area: "Tokyo: Tokyo Station" },
+    ],
     arrivalRecommendation: "Set up data and airport movement before landing so the short route does not start with friction.",
     arrivalActions: [
       esimUrl ? { label: "Get Japan eSIM", href: esimUrl, provider: "klook", category: "esim", linkId: "esim", product: "esim", adid: "1166001", external: true, priority: "secondary" } : null,
@@ -192,19 +257,31 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     routeId: "classic-7",
     railRecommendation:
       "A single Shinkansen ticket is usually simpler for Tokyo → Kyoto / Osaka. Compare the JR Pass only if you add Hiroshima, multiple long-distance rides, or return to Tokyo by Shinkansen.",
+    railActionLabel: "Book Shinkansen ticket",
+    railActionDescription: "Best for Tokyo → Kyoto / Osaka, one-way, or simple first-time routes.",
     railActions: [
       shinkansenTicketUrl
-        ? { label: "Book Shinkansen ticket", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "classic-7", external: true, priority: "primary" }
-        : null,
-      jrPassUrl
-        ? { label: "Compare JR Pass", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "classic-7", external: true, priority: "secondary" }
+        ? { label: "Klook", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "classic-7", external: true, priority: "primary" }
         : null,
       omioTrainUrl
-        ? { label: "Compare routes on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: "omioJapanTrain", product: "route_compare", routeType: "classic-7", external: true, priority: "text" }
+        ? { label: "Compare on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: omioTrainLinkId, product: "route_compare", routeType: "classic-7", external: true, priority: "secondary" }
+        : null,
+      jrPassUrl
+        ? { label: "Check JR Pass options if adding Hiroshima or return-to-Tokyo", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "classic-7", external: true, priority: "text" }
         : null,
     ].filter(Boolean) as RouteBookingAction[],
-    hotelRecommendation: "Choose the first Tokyo base before filling activities. Shinjuku, Ueno / Asakusa, and Tokyo Station solve different arrival problems.",
-    hotelAction: { label: plannerHotel.label, href: plannerHotel.href, provider: plannerHotel.provider, category: "hotel", area: `${plannerHotel.city}: ${plannerHotel.areaName}`, trackingHref: plannerHotel.trackingHref, external: true, priority: "secondary" },
+    hotelRecommendation: "Best balance for first-time Tokyo, Kyoto / Osaka transfer, and airport access.",
+    hotelRecommendedAreas: ["Shinjuku", "Ueno / Asakusa", "Tokyo Station"],
+    hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
+    hotelDetailLinks: [
+      { label: "Shinjuku details", href: "/areas-to-stay/tokyo/shinjuku" },
+      { label: "Ueno details", href: "/areas-to-stay/tokyo/ueno" },
+      { label: "Asakusa details", href: "/areas-to-stay/tokyo/asakusa" },
+      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo/tokyo-station" },
+    ],
+    hotelActions: [
+      { actionLabel: "Compare Shinjuku hotels", hotelKey: "shinjuku", area: "Tokyo: Shinjuku" },
+    ],
     arrivalRecommendation: "Prepare data and airport transfer first; activities can wait until the route is stable.",
     arrivalActions: [
       esimUrl ? { label: "Get Japan eSIM", href: esimUrl, provider: "klook", category: "esim", linkId: "esim", product: "esim", adid: "1166001", external: true, priority: "secondary" } : null,
@@ -216,19 +293,30 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     routeId: "full-10",
     railRecommendation:
       "Because this route mixes Fuji-side travel, Hakone, and the Shinkansen to Kyoto, compare the route first. Then book the Shinkansen legs that fit your final order.",
+    railActionLabel: "Compare train routes",
+    railActionDescription: "Best when Fuji, Hakone, and Kyoto order are still flexible.",
     railActions: [
       omioTrainUrl
-        ? { label: "Compare routes on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: "omioJapanTrain", product: "route_compare", routeType: "full-10", external: true, priority: "primary" }
+        ? { label: "Compare on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: omioTrainLinkId, product: "route_compare", routeType: "full-10", external: true, priority: "primary" }
         : null,
       shinkansenTicketUrl
-        ? { label: "Book Shinkansen ticket", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "full-10", external: true, priority: "secondary" }
+        ? { label: "Klook", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "full-10", external: true, priority: "secondary" }
         : null,
       jrPassUrl
-        ? { label: "JR Pass is conditional — compare if adding more JR rides", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "full-10", external: true, priority: "text" }
+        ? { label: "JR Pass is conditional if adding more JR rides", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "full-10", external: true, priority: "text" }
         : null,
     ].filter(Boolean) as RouteBookingAction[],
-    hotelRecommendation: "Add Fuji overnight logistics before Kyoto. Kawaguchiko and Hakone change the rail order.",
-    hotelAction: { label: kawaguchikoHotel.label, href: kawaguchikoHotel.href, provider: kawaguchikoHotel.provider, category: "hotel", area: `${kawaguchikoHotel.city}: ${kawaguchikoHotel.areaName}`, trackingHref: kawaguchikoHotel.trackingHref, external: true, priority: "secondary" },
+    hotelRecommendation: "Good balance between Tokyo sightseeing and onward rail movement.",
+    hotelRecommendedAreas: ["Shinjuku", "Tokyo Station"],
+    hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
+    hotelDetailLinks: [
+      { label: "Shinjuku details", href: "/areas-to-stay/tokyo/shinjuku" },
+      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo/tokyo-station" },
+    ],
+    hotelActions: [
+      { actionLabel: "Compare Shinjuku hotels", hotelKey: "shinjuku", area: "Tokyo: Shinjuku" },
+      { actionLabel: "Compare hotels near Tokyo Station", hotelKey: "tokyoStation", area: "Tokyo: Tokyo Station" },
+    ],
     arrivalRecommendation: "Use eSIM and airport transfer planning to keep the first Tokyo day flexible.",
     arrivalActions: [
       esimUrl ? { label: "Get Japan eSIM", href: esimUrl, provider: "klook", category: "esim", linkId: "esim", product: "esim", adid: "1166001", external: true, priority: "secondary" } : null,
@@ -240,19 +328,30 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     routeId: "deep-14",
     railRecommendation:
       "Because this route includes more long-distance travel, compare the JR Pass before buying separate tickets.",
+    railActionLabel: "Check JR Pass options",
+    railActionDescription: "Best if your route includes Hiroshima, multiple long-distance JR rides, or returning to Tokyo by Shinkansen.",
     railActions: [
       jrPassUrl
-        ? { label: "Compare JR Pass", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "deep-14", external: true, priority: "primary" }
+        ? { label: "Klook", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "deep-14", external: true, priority: "primary" }
         : null,
       omioTrainUrl
-        ? { label: "Compare routes on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: "omioJapanTrain", product: "route_compare", routeType: "deep-14", external: true, priority: "secondary" }
+        ? { label: "Compare on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: omioTrainLinkId, product: "route_compare", routeType: "deep-14", external: true, priority: "secondary" }
         : null,
       shinkansenTicketUrl
-        ? { label: "Book single Shinkansen ticket", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "deep-14", external: true, priority: "text" }
+        ? { label: "Book known Shinkansen leg on Klook", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "deep-14", external: true, priority: "text" }
         : null,
     ].filter(Boolean) as RouteBookingAction[],
-    hotelRecommendation: "Use station-friendly hotel bases because this route has more luggage moves and long-distance rail days.",
-    hotelAction: { label: tokyoStationHotel.label, href: tokyoStationHotel.href, provider: tokyoStationHotel.provider, category: "hotel", area: `${tokyoStationHotel.city}: ${tokyoStationHotel.areaName}`, trackingHref: tokyoStationHotel.trackingHref, external: true, priority: "secondary" },
+    hotelRecommendation: "Multiple long-distance rail days and luggage movement make logistics more important.",
+    hotelRecommendedAreas: ["Tokyo Station", "Ueno"],
+    hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
+    hotelDetailLinks: [
+      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo/tokyo-station" },
+      { label: "Ueno details", href: "/areas-to-stay/tokyo/ueno" },
+    ],
+    hotelActions: [
+      { actionLabel: "Compare hotels near Tokyo Station", hotelKey: "tokyoStation", area: "Tokyo: Tokyo Station" },
+      { actionLabel: "Compare Ueno hotels", hotelKey: "ueno", area: "Tokyo: Ueno" },
+    ],
     arrivalRecommendation: "Prepare eSIM and airport transfer before landing; this route has less margin for early confusion.",
     arrivalActions: [
       esimUrl ? { label: "Get Japan eSIM", href: esimUrl, provider: "klook", category: "esim", linkId: "esim", product: "esim", adid: "1166001", external: true, priority: "secondary" } : null,
@@ -367,14 +466,22 @@ function RouteBookingStack({
   routeId,
   routeTitle,
   railRecommendation,
+  railActionLabel,
+  railActionDescription,
   hotelRecommendation,
+  hotelRecommendedAreas,
+  hotelPrimaryAction,
+  hotelDetailLinks,
+  hotelActions,
   arrivalRecommendation,
   optionalAddOns,
   railActions,
-  hotelAction,
   arrivalActions,
   locale,
 }: RouteBookingRecommendation & { routeTitle: string; locale?: string }) {
+  const railProviderActions = railActions.filter((action) => action.priority !== "text").slice(0, 2);
+  const railTextActions = railActions.filter((action) => action.priority === "text");
+
   return (
     <section className="rounded-[22px] border border-sky-200 bg-sky-50/70 p-5 shadow-sm">
       <div className="flex items-center gap-2">
@@ -386,18 +493,73 @@ function RouteBookingStack({
         <div className="rounded-xl border border-white bg-white p-3 shadow-sm">
           <p className="text-xs font-semibold text-slate-900">1. Rail</p>
           <p className="mt-0.5 text-[10px] leading-4 text-slate-500">{railRecommendation}</p>
-          <div className="mt-2 flex flex-col gap-2">
-            {railActions.map((action) => (
-              <RouteBookingActionLink key={`${routeId}-rail-${action.label}`} action={action} routeId={routeId} locale={locale} />
-            ))}
-          </div>
+          <ProviderChoiceCTA
+            actionLabel={railActionLabel}
+            description={railActionDescription}
+            pagePath="/planner"
+            locale={locale}
+            routeType={routeId}
+            className="mt-2 border-slate-100 bg-slate-50"
+            providers={railProviderActions.map((action) => ({
+              label: action.label,
+              href: action.external ? action.href : undefined,
+              internalLink: action.external ? undefined : action.href,
+              provider: action.provider ?? "other",
+              product: action.product ?? "route_compare",
+              adid: action.adid,
+              linkId: action.linkId,
+              placement: "planner_route_stack",
+              variant: action.priority,
+              category: action.category ?? "train",
+              trackingHref: action.trackingHref,
+            }))}
+          />
+          {railTextActions.length > 0 ? (
+            <div className="mt-2 flex flex-col gap-1">
+              {railTextActions.map((action) => (
+                <RouteBookingActionLink key={`${routeId}-rail-note-${action.label}`} action={action} routeId={routeId} locale={locale} />
+              ))}
+            </div>
+          ) : null}
         </div>
 
         <div className="rounded-xl border border-white bg-white p-3 shadow-sm">
           <p className="text-xs font-semibold text-slate-900">2. Hotel area</p>
           <p className="mt-0.5 text-[10px] leading-4 text-slate-500">{hotelRecommendation}</p>
-          <div className="mt-2">
-            <RouteBookingActionLink action={hotelAction} routeId={routeId} locale={locale} />
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {hotelRecommendedAreas.map((area) => (
+              <span key={`${routeId}-hotel-area-${area}`} className="rounded-full bg-emerald-50 px-2 py-1 text-[10px] font-semibold text-[#106b43]">
+                {area}
+              </span>
+            ))}
+          </div>
+          {hotelPrimaryAction ? (
+            <div className="mt-2">
+              <RouteBookingActionLink action={hotelPrimaryAction} routeId={routeId} locale={locale} />
+            </div>
+          ) : null}
+          {hotelDetailLinks.length > 0 ? (
+            <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+              {hotelDetailLinks.map((link) => (
+                <Link key={`${routeId}-hotel-detail-${link.href}`} href={link.href} className="text-[10px] font-semibold text-slate-600 underline underline-offset-4 hover:text-slate-900">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          ) : null}
+          <div className="mt-2 space-y-2">
+            {hotelActions.map((action) => (
+              <ProviderChoiceCTA
+                key={`${routeId}-hotel-action-${action.hotelKey}`}
+                actionLabel={action.actionLabel}
+                pagePath="/planner"
+                locale={locale}
+                area={action.area}
+                routeType={routeId}
+                className="border-emerald-100 bg-emerald-50/50"
+                providers={plannerHotelProviders(action.hotelKey)}
+              />
+            ))}
           </div>
         </div>
 

@@ -6,8 +6,9 @@ import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
+import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { getAffUrl } from "@/src/affiliateLinks";
-import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import type { AffiliateClickParams } from "@/lib/analytics";
 
@@ -24,10 +25,14 @@ type AffiliateProduct = {
 
 type TokyoBaseCard = {
   title: string;
-  bestFor: string;
+  area: string;
+  reason: string;
   href: string;
-  cta: string;
-  hotelKey?: HotelAreaKey;
+  detailLabel: string;
+  hotelKeys?: HotelAreaKey[];
+  hotelActionLabel?: string;
+  extraDetailHref?: string;
+  extraDetailLabel?: string;
 };
 
 type CityCard = {
@@ -44,35 +49,50 @@ const jrPass = getAffUrl("jrPass");
 const esim = getAffUrl("esim");
 const airportTransfer = getAffUrl("airportTransfer");
 const insurance = getAffUrl("insurance");
-const omioRouteCompare = getAffUrl("omioJapanTrain") ?? getAffUrl("omioShinkansen");
+const omioJapanTrain = getAffUrl("omioJapanTrain");
+const omioRouteCompare = omioJapanTrain ?? getAffUrl("omioShinkansen");
+const omioRouteCompareLinkId = omioJapanTrain ? "omioJapanTrain" : "omioShinkansen";
+
+function providerChoices(...providers: Array<ProviderChoiceButton | null | undefined>) {
+  return providers.filter((provider): provider is ProviderChoiceButton => Boolean(provider));
+}
 
 const tokyoBaseCards: TokyoBaseCard[] = [
   {
-    title: "Shinjuku",
-    bestFor: "First-time energy, nightlife, and easy food options.",
-    href: "/areas-to-stay/tokyo-first-time",
-    cta: "Read Shinjuku stay guide",
-    hotelKey: "shinjuku",
+    title: "First-time convenience",
+    area: "Shinjuku",
+    reason: "Best when you want food, nightlife, shopping, and flexible train access in one base.",
+    href: "/areas-to-stay/tokyo/shinjuku",
+    detailLabel: "See Shinjuku details",
+    hotelKeys: ["shinjuku"],
+    hotelActionLabel: "Compare Shinjuku hotels",
   },
   {
-    title: "Ueno / Asakusa",
-    bestFor: "Narita access, budget range, and east-side sightseeing.",
-    href: "/areas-to-stay/asakusa-vs-ueno",
-    cta: "Compare Ueno and Asakusa",
-    hotelKey: "ueno",
+    title: "Narita access / value",
+    area: "Ueno or Asakusa",
+    reason: "Best if Narita arrival, better-value hotels, museums, temples, or old-town Tokyo matter most.",
+    href: "/areas-to-stay/tokyo/ueno",
+    detailLabel: "See Ueno details",
+    extraDetailHref: "/areas-to-stay/tokyo/asakusa",
+    extraDetailLabel: "See Asakusa details",
+    hotelKeys: ["ueno", "asakusa"],
+    hotelActionLabel: "Compare Ueno / Asakusa hotels",
   },
   {
-    title: "Tokyo Station",
-    bestFor: "Early Shinkansen departures and easier luggage movement.",
-    href: "/areas-to-stay/where-to-stay-before-shinkansen",
-    cta: "Choose before Shinkansen",
-    hotelKey: "tokyoStation",
+    title: "Early Shinkansen",
+    area: "Tokyo Station",
+    reason: "Best when luggage, early Kyoto / Osaka departures, and clean station logistics matter.",
+    href: "/areas-to-stay/tokyo/tokyo-station",
+    detailLabel: "See Tokyo Station details",
+    hotelKeys: ["tokyoStation"],
+    hotelActionLabel: "Compare hotels near Tokyo Station",
   },
   {
-    title: "East Tokyo / quiet local",
-    bestFor: "Calmer days, coffee walks, and a less tourist-heavy base.",
-    href: "/local-tokyo",
-    cta: "Explore Local Tokyo",
+    title: "Quiet local Tokyo",
+    area: "East Tokyo",
+    reason: "Best for calmer walks, coffee, riverside neighborhoods, and a slower second base.",
+    href: "/areas-to-stay/tokyo/east-tokyo",
+    detailLabel: "See East Tokyo details",
   },
 ];
 
@@ -140,26 +160,70 @@ function AffiliateButton({
   );
 }
 
-function HotelCompareLink({ hotelKey, locale }: { hotelKey: HotelAreaKey; locale: string }) {
+function hotelProviderChoicesForKey(hotelKey: HotelAreaKey, labelPrefix?: string) {
   const hotel = getHotelLink(hotelKey);
+  const config = getTripHotelConfig(hotelKey);
+  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
+  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
+  const agodaHref = config.agodaUrl?.trim();
+
+  return providerChoices(
+    tripHref
+      ? {
+          label: labelPrefix ? `${labelPrefix} Trip.com` : "Trip.com",
+          href: tripHref,
+          trackingHref: tripTrackingHref,
+          provider: "trip",
+          product: "hotel",
+          linkId: `hotelArea.${hotelKey}.trip`,
+          placement: "plan_trip_hotel_cards",
+          variant: "primary",
+          category: "hotel",
+        }
+      : null,
+    agodaHref
+      ? {
+          label: labelPrefix ? `${labelPrefix} Agoda` : "Agoda",
+          href: agodaHref,
+          trackingHref: agodaHref,
+          provider: "agoda",
+          product: "hotel",
+          linkId: `hotelArea.${hotelKey}.agoda`,
+          placement: "plan_trip_hotel_cards",
+          variant: "secondary",
+          category: "hotel",
+        }
+      : null,
+  );
+}
+
+function HotelProviderChoice({
+  hotelKeys,
+  actionLabel,
+  areaLabel,
+  locale,
+}: {
+  hotelKeys: HotelAreaKey[];
+  actionLabel: string;
+  areaLabel: string;
+  locale: string;
+}) {
+  const providers =
+    hotelKeys.length === 1
+      ? hotelProviderChoicesForKey(hotelKeys[0])
+      : hotelKeys.flatMap((hotelKey) => hotelProviderChoicesForKey(hotelKey, getTripHotelConfig(hotelKey).areaName)).slice(0, 2);
+
+  if (providers.length === 0) return null;
+
   return (
-    <TrackedAffiliateLink
-      href={hotel.href}
-      target="_blank"
-      rel={AFFILIATE_REL}
-      category="hotel"
-      provider={hotel.provider}
-      placement="plan_trip_hotel_cards"
+    <ProviderChoiceCTA
+      actionLabel={actionLabel}
       pagePath="/plan-your-trip"
       locale={locale}
-      label={hotel.label}
-      trackingHref={hotel.trackingHref}
-      area={`${hotel.city}: ${hotel.areaName}`}
-      className="inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#0a4ca8] bg-[#0a4ca8] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0a3f8b]"
-    >
-      {hotel.label}
-      <ExternalLink className="h-3.5 w-3.5" />
-    </TrackedAffiliateLink>
+      area={areaLabel}
+      className="mt-auto"
+      providers={providers}
+    />
   );
 }
 
@@ -261,18 +325,21 @@ export function PlanYourTripHub() {
                 <li>First-time 5–7 day trips</li>
               </ul>
               <div className="mt-5">
-                {shinkansenTicket ? (
-                  <AffiliateButton
-                    href={shinkansenTicket}
-                    placement="plan_trip_rail_showdown"
-                    item={{ label: "Book Shinkansen ticket", linkId: "shinkansenTicket", category: "train", provider: "klook", product: "shinkansen_ticket", adid: "1265303", routeType: "simple-shinkansen" }}
-                    locale={locale}
-                    className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#e66700]"
-                  >
-                    Book Shinkansen ticket
-                    <ExternalLink className="h-4 w-4" />
-                  </AffiliateButton>
-                ) : null}
+                <ProviderChoiceCTA
+                  actionLabel="Book Shinkansen ticket"
+                  description="Best for Tokyo → Kyoto / Osaka, one-way, or simple first-time routes."
+                  pagePath="/plan-your-trip"
+                  locale={locale}
+                  routeType="simple-shinkansen"
+                  providers={providerChoices(
+                    shinkansenTicket
+                      ? { label: "Klook", href: shinkansenTicket, provider: "klook", product: "shinkansen_ticket", adid: "1265303", linkId: "shinkansenTicket", placement: "plan_trip_rail_showdown", variant: "primary", category: "train" }
+                      : null,
+                    omioRouteCompare
+                      ? { label: "Compare on Omio", href: omioRouteCompare, provider: "omio", product: "route_compare", linkId: omioRouteCompareLinkId, placement: "plan_trip_rail_showdown", variant: "secondary", category: "train" }
+                      : null,
+                  )}
+                />
               </div>
             </Card>
 
@@ -291,46 +358,44 @@ export function PlanYourTripHub() {
                 <li>Return to Tokyo by Shinkansen</li>
                 <li>Multiple long-distance JR rides</li>
               </ul>
-              {jrPass ? (
-                <AffiliateButton
-                  href={jrPass}
-                  placement="plan_trip_rail_showdown"
-                  item={{ label: "Check JR Pass options", linkId: "jrPass", category: "train", provider: "klook", product: "jr_pass", adid: "1165791", routeType: "multi-city-jr" }}
-                  locale={locale}
-                  className="mt-5 inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
-                >
-                  Check JR Pass options
-                  <ExternalLink className="h-4 w-4" />
-                </AffiliateButton>
-              ) : null}
-              <Link
-                href="/jr-pass-vs-single-ticket"
-                className="mt-6 flex justify-end text-xs font-semibold text-[#106b43] underline underline-offset-4 transition-colors hover:text-[#0f6f45]"
-              >
-                Read when it pays off
-              </Link>
+              <ProviderChoiceCTA
+                actionLabel="Check JR Pass options"
+                description="Best if your route includes Hiroshima, multiple long-distance JR rides, or returning to Tokyo by Shinkansen."
+                pagePath="/plan-your-trip"
+                locale={locale}
+                routeType="multi-city-jr"
+                className="mt-5"
+                providers={providerChoices(
+                  jrPass
+                    ? { label: "Klook", href: jrPass, provider: "klook", product: "jr_pass", adid: "1165791", linkId: "jrPass", placement: "plan_trip_rail_showdown", variant: "primary", category: "train" }
+                    : null,
+                  { label: "Read guide", internalLink: "/jr-pass-vs-single-ticket", provider: "other", product: "jr_pass", placement: "plan_trip_rail_showdown", variant: "secondary", category: "train" },
+                )}
+              />
             </Card>
           </div>
-          {omioRouteCompare ? (
-            <AffiliateButton
-              href={omioRouteCompare}
-              placement="plan_trip_rail_showdown"
-              item={{ label: "Not sure yet? Compare routes on Omio.", linkId: "omioJapanTrain", category: "train", provider: "omio", product: "route_compare", routeType: "route-comparison" }}
-              locale={locale}
-              className="mt-4 inline-flex min-h-9 items-center justify-center gap-1.5 rounded-lg border border-transparent bg-transparent px-0 py-1 text-xs font-semibold text-indigo-700 underline underline-offset-4 transition-colors hover:text-indigo-900"
-            >
-              Not sure yet? Compare routes on Omio.
-              <ExternalLink className="h-3.5 w-3.5" />
-            </AffiliateButton>
-          ) : null}
         </section>
 
         <section className="mt-12">
           <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">Hotels</p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-950">Choose your Tokyo base</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-600">Pick the area logic first. Then compare hotels only where the area fits your route.</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">HOTEL BASE DECISION</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">Choose your Tokyo base before booking hotels</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Your hotel area affects airport access, Shinkansen days, luggage, and how your first nights in Tokyo feel.
+            </p>
           </div>
+          <TrackedCtaLink
+            href="/areas-to-stay/tokyo-first-time"
+            placement="plan_trip_stay_hub"
+            label="Compare Tokyo stay areas"
+            category="hotel"
+            pagePath="/plan-your-trip"
+            locale={locale}
+            className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] border border-[#168a56] bg-[#168a56] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+          >
+            Compare Tokyo stay areas
+            <ArrowRight className="h-4 w-4" />
+          </TrackedCtaLink>
           <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {tokyoBaseCards.map((base) => (
               <Card key={base.title} className="flex flex-col p-5">
@@ -338,23 +403,43 @@ export function PlanYourTripHub() {
                   <Bed className="h-5 w-5" />
                 </div>
                 <h3 className="mt-4 text-lg font-semibold text-slate-950">{base.title}</h3>
-                <p className="mt-2 min-h-[72px] text-sm leading-6 text-slate-600">{base.bestFor}</p>
-                <TrackedCtaLink
-                  href={base.href}
-                  placement="plan_trip_hotel_cards"
-                  label={base.cta}
-                  category="hotel"
-                  pagePath="/plan-your-trip"
-      locale={locale}
-                  className="mt-auto inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
-                >
-                  {base.cta}
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </TrackedCtaLink>
-                {base.hotelKey ? (
-                  <div className="mt-2">
-                    <HotelCompareLink hotelKey={base.hotelKey} locale={locale} />
-                  </div>
+                <p className="mt-1 text-sm font-semibold text-slate-800">→ {base.area}</p>
+                <p className="mt-2 min-h-[96px] text-sm leading-6 text-slate-600">{base.reason}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <TrackedCtaLink
+                    href={base.href}
+                    placement="plan_trip_stay_hub"
+                    label={base.detailLabel}
+                    category="hotel"
+                    pagePath="/plan-your-trip"
+                    locale={locale}
+                    className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-xl border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                  >
+                    {base.detailLabel}
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </TrackedCtaLink>
+                  {base.extraDetailHref && base.extraDetailLabel ? (
+                    <TrackedCtaLink
+                      href={base.extraDetailHref}
+                      placement="plan_trip_stay_hub"
+                      label={base.extraDetailLabel}
+                      category="hotel"
+                      pagePath="/plan-your-trip"
+                      locale={locale}
+                      className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-xl border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                    >
+                      {base.extraDetailLabel}
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </TrackedCtaLink>
+                  ) : null}
+                </div>
+                {base.hotelKeys && base.hotelActionLabel ? (
+                  <HotelProviderChoice
+                    hotelKeys={base.hotelKeys}
+                    actionLabel={base.hotelActionLabel}
+                    areaLabel={`Tokyo: ${base.area}`}
+                    locale={locale}
+                  />
                 ) : null}
               </Card>
             ))}

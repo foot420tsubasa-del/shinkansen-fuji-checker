@@ -1,6 +1,7 @@
 import { Check, X } from "lucide-react";
 import { HotelCTA } from "@/components/affiliate/HotelCTA";
-import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
+import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
+import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 
 type AreaCardProps = {
   id?: string;
@@ -19,6 +20,10 @@ type AreaCardProps = {
   showHotelCta?: boolean;
 };
 
+function providerChoices(...providers: Array<ProviderChoiceButton | null | undefined>) {
+  return providers.filter((provider): provider is ProviderChoiceButton => Boolean(provider));
+}
+
 export function AreaCard({
   id,
   name,
@@ -36,6 +41,15 @@ export function AreaCard({
   showHotelCta = true,
 }: AreaCardProps) {
   const hotel = hotelKey ? getHotelLink(hotelKey) : null;
+  const hotelConfig = hotelKey ? getTripHotelConfig(hotelKey) : null;
+  const hotelActionLabel =
+    hotelKey === "tokyoStation"
+      ? "Compare hotels near Tokyo Station"
+      : `Compare ${hotel?.areaName ?? name} hotels`;
+  const tripHref = hotel?.provider === "trip" ? hotel.href : hotelConfig?.tripUrl ?? (provider === "trip" ? hotelLink : undefined);
+  const tripTrackingHref = hotel?.provider === "trip" ? hotel.trackingHref : hotelConfig?.tripUrl ?? (provider === "trip" ? hotelLink : undefined);
+  const agodaHref = hotelConfig?.agodaUrl?.trim();
+  const useProviderChoice = pagePath.endsWith("/tokyo-first-time");
 
   return (
     <div id={id} className="scroll-mt-24 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
@@ -78,7 +92,43 @@ export function AreaCard({
         <span className="font-semibold text-slate-700">Transport:</span> {transport}
       </div>
 
-      {showHotelCta ? (
+      {showHotelCta && useProviderChoice ? (
+        <ProviderChoiceCTA
+          actionLabel={hotelActionLabel}
+          pagePath={pagePath}
+          locale={locale}
+          area={`${hotel?.city ?? city}: ${hotel?.areaName ?? name}`}
+          className="mt-4"
+          providers={providerChoices(
+            tripHref
+              ? {
+                  label: "Trip.com",
+                  href: tripHref,
+                  trackingHref: tripTrackingHref,
+                  provider: "trip",
+                  product: "hotel",
+                  linkId: hotelKey ? `hotelArea.${hotelKey}.trip` : undefined,
+                  placement: "stay_area_hotel_card",
+                  variant: "primary",
+                  category: "hotel",
+              }
+              : null,
+            agodaHref
+              ? {
+                  label: "Agoda",
+                  href: agodaHref,
+                  trackingHref: agodaHref,
+                  provider: "agoda",
+                  product: "hotel",
+                  linkId: hotelKey ? `hotelArea.${hotelKey}.agoda` : undefined,
+                  placement: "stay_area_hotel_card",
+                  variant: "secondary",
+                  category: "hotel",
+              }
+              : null,
+          )}
+        />
+      ) : showHotelCta ? (
         <HotelCTA
           areaName={hotel?.areaName ?? name}
           city={hotel?.city ?? city}

@@ -960,6 +960,44 @@ const rawStayPages: StayPage[] = [
       { question: "Can I walk from Ueno to Asakusa?", answer: "Yes — it's about a 20-minute walk through Kappabashi (Kitchen Town) or along the river. By Metro (Ginza Line), it's one stop, about 5 minutes." },
     ],
   },
+  {
+    slug: "kyoto-first-time",
+    title: "Where to Stay in Kyoto for First-Time Visitors",
+    description: "Choose a Kyoto hotel area by transport, luggage, day trips, temple access, food, and atmosphere.",
+    quickRec: {
+      area: "Kyoto Station",
+      why: "Kyoto Station is the easiest first Kyoto base for Shinkansen arrivals, luggage, buses, and day trips. Choose Gion or Kawaramachi if atmosphere matters more than logistics.",
+      link: hotelKyotoStation.href,
+    },
+    areas: [],
+    comparisonColumns: [],
+    comparison: [],
+    proTip: "Pick Kyoto Station for logistics, Kawaramachi / Shijo for central food and shopping, and Gion / Higashiyama for atmosphere.",
+    hotelPicks: [],
+    nextActions: [
+      { id: "kyoto-station-vs-gion", category: "stay", title: "Kyoto Station vs Gion", description: "Compare the main Kyoto first-time tradeoff.", cta: "Read guide", href: "/areas-to-stay/kyoto-station-vs-gion" },
+      { id: "plan-trip", category: "itinerary", title: "Plan Your Trip", description: "Place Kyoto inside the full Japan route.", cta: "Plan trip", href: "/plan-your-trip" },
+    ],
+  },
+  {
+    slug: "osaka-first-time",
+    title: "Where to Stay in Osaka for First-Time Visitors",
+    description: "Choose an Osaka hotel area by food, nightlife, rail access, Shinkansen logistics, airport connections, and calmer central stays.",
+    quickRec: {
+      area: "Namba",
+      why: "Namba is the easiest first Osaka base if food, nightlife, and orientation matter most. Choose Umeda for rail links or Shin-Osaka for pure Shinkansen logistics.",
+      link: hotelNamba.href,
+    },
+    areas: [],
+    comparisonColumns: [],
+    comparison: [],
+    proTip: "Pick Namba for food and nightlife, Umeda for rail connections, and Shin-Osaka only when the Shinkansen is the main priority.",
+    hotelPicks: [],
+    nextActions: [
+      { id: "namba-vs-umeda", category: "stay", title: "Namba vs Umeda", description: "Compare Osaka's two most useful first-time bases.", cta: "Read guide", href: "/areas-to-stay/namba-vs-umeda" },
+      { id: "shin-osaka-vs-namba", category: "stay", title: "Shin-Osaka vs Namba", description: "Decide whether Shinkansen logistics should drive your Osaka base.", cta: "Read guide", href: "/areas-to-stay/shin-osaka-vs-namba" },
+    ],
+  },
 ];
 
 export const stayPages: StayPage[] = rawStayPages.map((page) => ({
