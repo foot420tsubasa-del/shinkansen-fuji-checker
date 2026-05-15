@@ -102,24 +102,32 @@ const cityCards: CityCard[] = [
     description: "Tours, food walks, observation decks, and first-time activities.",
     linkId: "cityTokyo",
     cta: "Browse Tokyo activities",
+    imageSrc: "/images/stay/tokyo/tokyo-stay-hero.png",
+    imageAlt: "Tokyo city stay and activity area",
   },
   {
     title: "Kyoto",
     description: "Kimono rental, temples, guided walks, and classic Kyoto experiences.",
     linkId: "cityKyoto",
     cta: "Browse Kyoto activities",
+    imageSrc: "/images/Kyoto.png",
+    imageAlt: "Kyoto temple district at sunset",
   },
   {
     title: "Osaka",
     description: "Food, passes, theme parks, and evening-friendly activities.",
     linkId: "cityOsaka",
     cta: "Browse Osaka activities",
+    imageSrc: "/images/Osaka.png",
+    imageAlt: "Osaka Dotonbori canal at night",
   },
   {
     title: "Mt. Fuji / Hakone",
     description: "Add a mountain-side day or overnight stop after the main route is fixed.",
     linkId: "hakone",
     cta: "Browse Fuji area add-ons",
+    imageSrc: "/images/Kawaguchiko.png",
+    imageAlt: "Mt. Fuji and Lake Kawaguchiko at dusk",
   },
 ];
 

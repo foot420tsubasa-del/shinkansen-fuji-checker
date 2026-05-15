@@ -204,9 +204,6 @@ function trackedLinkClass(className = "") {
   ].join(" ");
 }
 
-const subtleLinkCardClass =
-  "group flex items-center justify-between gap-3 rounded-[16px] border border-slate-200 bg-white px-4 py-3 text-left text-sm font-semibold text-slate-700 shadow-sm transition-colors hover:border-[#9fd7bd] hover:bg-[#f7fffb] hover:text-[#106b43] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200";
-
 function publicImageIfExists(candidates: string[]) {
   return candidates.find((src) => fs.existsSync(path.join(process.cwd(), "public", src.replace(/^\//, ""))));
 }
@@ -353,7 +350,7 @@ export default async function AreasToStayIndex({ params }: Props) {
                 placement="stay_hub_hero"
                 label="See local hotel examples"
                 locale={locale}
-                className={buttonClassName({ variant: "internalOutline", fullWidth: true, size: "lg" })}
+                className={buttonClassName({ variant: "internal", fullWidth: true, size: "lg" })}
               >
                 See local hotel examples
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -441,17 +438,14 @@ export default async function AreasToStayIndex({ params }: Props) {
         <section className="mt-10">
           <h2 className="text-lg font-semibold text-slate-950">Continue planning</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-4">
-            <TrackedInternalLink href="/plan-your-trip" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Plan Your Trip" locale={locale} className={subtleLinkCardClass}>
+            <TrackedInternalLink href="/plan-your-trip" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Plan Your Trip" locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
               Plan Your Trip
-              <ArrowRight className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" aria-hidden="true" />
             </TrackedInternalLink>
-            <TrackedInternalLink href="/guide" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Seat Checker" locale={locale} className={subtleLinkCardClass}>
+            <TrackedInternalLink href="/guide" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Seat Checker" locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
               Seat Checker
-              <ArrowRight className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" aria-hidden="true" />
             </TrackedInternalLink>
-            <TrackedInternalLink href="/airport-transfers" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Airport Transfers" locale={locale} className={subtleLinkCardClass}>
+            <TrackedInternalLink href="/airport-transfers" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Airport Transfers" locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
               Airport Transfers
-              <ArrowRight className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" aria-hidden="true" />
             </TrackedInternalLink>
             {esimHref ? (
               <TrackedAffiliateLink
@@ -467,15 +461,14 @@ export default async function AreasToStayIndex({ params }: Props) {
                 linkId="esim"
                 product="esim"
                 adid="1166001"
-                className={subtleLinkCardClass}
+                className={buttonClassName({ variant: "commercial", fullWidth: true, className: "text-center" })}
               >
                 Japan eSIM
-                <Wifi className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" aria-hidden="true" />
+                <Wifi className="h-4 w-4" aria-hidden="true" />
               </TrackedAffiliateLink>
             ) : (
-              <TrackedInternalLink href="/plan-your-trip" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Japan eSIM" locale={locale} className={subtleLinkCardClass}>
+              <TrackedInternalLink href="/plan-your-trip" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Japan eSIM" locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
                 Japan eSIM
-                <Wifi className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" aria-hidden="true" />
               </TrackedInternalLink>
             )}
           </div>
