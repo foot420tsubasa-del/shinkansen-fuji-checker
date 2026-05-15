@@ -38,6 +38,9 @@ const agodaMapIdsByStaySlug: Record<string, string[]> = {
   "shin-osaka-vs-namba": ["shinOsaka", "namba"],
 };
 
+const filledNextStepClass =
+  "rounded-2xl border border-[#168a56] bg-[#168a56] p-4 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]";
+
 const tokyoStayImages = {
   hero: "/images/stay/tokyo/tokyo-stay-hero.png",
   shinjuku: "/images/stay/tokyo/stay-shinjuku.png",
@@ -342,25 +345,25 @@ function TokyoFirstTimeHub({ locale }: { locale: string }) {
         <section className="mt-10">
           <h2 className="text-lg font-semibold text-slate-950">Continue Planning</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-5">
-            <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label="Plan Your Trip" pagePath={pagePath} locale={locale} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+            <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label="Plan Your Trip" pagePath={pagePath} locale={locale} className={filledNextStepClass}>
               Plan Your Trip
             </TrackedCtaLink>
-            <TrackedCtaLink href="/jr-pass-vs-single-ticket" placement="next_steps" label="JR Pass vs Single Ticket" pagePath={pagePath} locale={locale} category="rail" className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+            <TrackedCtaLink href="/jr-pass-vs-single-ticket" placement="next_steps" label="JR Pass vs Single Ticket" pagePath={pagePath} locale={locale} category="rail" className={filledNextStepClass}>
               JR Pass vs Single Ticket
             </TrackedCtaLink>
             {esimHref ? (
-              <TrackedAffiliateLink href={esimHref} target="_blank" rel={AFFILIATE_REL} category="esim" provider="klook" placement="next_steps" pagePath={pagePath} locale={locale} label="Japan eSIM" linkId="esim" product="esim" adid="1166001" className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+              <TrackedAffiliateLink href={esimHref} target="_blank" rel={AFFILIATE_REL} category="esim" provider="klook" placement="next_steps" pagePath={pagePath} locale={locale} label="Japan eSIM" linkId="esim" product="esim" adid="1166001" className={filledNextStepClass}>
                 Japan eSIM
               </TrackedAffiliateLink>
             ) : (
-              <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label="Japan eSIM" pagePath={pagePath} locale={locale} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+              <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label="Japan eSIM" pagePath={pagePath} locale={locale} className={filledNextStepClass}>
                 Japan eSIM
               </TrackedCtaLink>
             )}
-            <TrackedCtaLink href="/airport-transfers" placement="next_steps" label="Airport Transfer" pagePath={pagePath} locale={locale} category="transfer" className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+            <TrackedCtaLink href="/airport-transfers" placement="next_steps" label="Airport Transfer" pagePath={pagePath} locale={locale} category="transfer" className={filledNextStepClass}>
               Airport Transfer
             </TrackedCtaLink>
-            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label="Local Hotel Picks" pagePath={pagePath} locale={locale} category="hotel" className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label="Local Hotel Picks" pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
               Local Hotel Picks
             </TrackedCtaLink>
           </div>
@@ -645,16 +648,16 @@ function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeStayHub
         <section className="mt-10">
           <h2 className="text-lg font-semibold text-slate-950">Continue Planning</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-4">
-            <TrackedCtaLink href="/areas-to-stay" placement="next_steps" label="Areas to Stay" pagePath={pagePath} locale={locale} category="hotel" className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+            <TrackedCtaLink href="/areas-to-stay" placement="next_steps" label="Areas to Stay" pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
               Areas to Stay
             </TrackedCtaLink>
-            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label="Local Hotel Picks" pagePath={pagePath} locale={locale} category="hotel" className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label="Local Hotel Picks" pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
               Local Hotel Picks
             </TrackedCtaLink>
-            <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label="Plan Your Trip" pagePath={pagePath} locale={locale} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+            <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label="Plan Your Trip" pagePath={pagePath} locale={locale} className={filledNextStepClass}>
               Plan Your Trip
             </TrackedCtaLink>
-            <TrackedCtaLink href="/airport-transfers" placement="next_steps" label="Airport Transfer" pagePath={pagePath} locale={locale} category="transfer" className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+            <TrackedCtaLink href="/airport-transfers" placement="next_steps" label="Airport Transfer" pagePath={pagePath} locale={locale} category="transfer" className={filledNextStepClass}>
               Airport Transfer
             </TrackedCtaLink>
           </div>

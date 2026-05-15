@@ -172,6 +172,9 @@ const areaDetails: Record<string, AreaDetail> = {
   },
 };
 
+const filledNextStepClass =
+  "rounded-2xl border border-[#168a56] bg-[#168a56] p-4 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]";
+
 function publicImageIfExists(src: string) {
   const filePath = path.join(process.cwd(), "public", src.replace(/^\//, ""));
   return fs.existsSync(filePath) ? src : undefined;
@@ -416,16 +419,16 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
         <section className="mt-10">
           <h2 className="text-lg font-semibold text-slate-950">Continue planning</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-4">
-            <TrackedCtaLink href="/areas-to-stay/tokyo-first-time" placement="next_steps" label="Tokyo stay area hub" pagePath={pagePath} locale={locale} category="hotel" className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+            <TrackedCtaLink href="/areas-to-stay/tokyo-first-time" placement="next_steps" label="Tokyo stay area hub" pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
               Tokyo stay area hub
             </TrackedCtaLink>
-            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label="Local hotel picks" pagePath={pagePath} locale={locale} category="hotel" className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label="Local hotel picks" pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
               Local hotel picks
             </TrackedCtaLink>
-            <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label="Plan Your Trip" pagePath={pagePath} locale={locale} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+            <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label="Plan Your Trip" pagePath={pagePath} locale={locale} className={filledNextStepClass}>
               Plan Your Trip
             </TrackedCtaLink>
-            <TrackedCtaLink href={detail.airportHref ?? "/airport-transfers"} placement="next_steps" label="Airport transfer" pagePath={pagePath} locale={locale} category="transfer" className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+            <TrackedCtaLink href={detail.airportHref ?? "/airport-transfers"} placement="next_steps" label="Airport transfer" pagePath={pagePath} locale={locale} category="transfer" className={filledNextStepClass}>
               Airport transfer
             </TrackedCtaLink>
           </div>

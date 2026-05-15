@@ -75,6 +75,9 @@ const CITY_INTROS: Record<string, string> = {
   Osaka: "Examples that map to Namba food access, KIX convenience, group stays, and Kita-side logistics.",
 };
 
+const filledPlanningLinkClass =
+  "flex flex-col rounded-2xl border border-[#168a56] bg-[#168a56] p-4 text-white transition-colors hover:bg-[#0f6f45]";
+
 function pickMapById(picks: LocalHotelPick[]) {
   return new Map(picks.map((pick) => [pick.id, pick]));
 }
@@ -244,10 +247,10 @@ export default async function LocalHotelPicksPage({ params }: Props) {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="flex flex-col rounded-2xl border border-slate-200 bg-white p-4 transition-colors hover:border-slate-300 hover:bg-slate-50"
+                  className={filledPlanningLinkClass}
                 >
-                  <span className="text-sm font-semibold text-slate-900">{item.label}</span>
-                  <span className="mt-1 text-xs leading-5 text-slate-500">{item.desc}</span>
+                  <span className="text-sm font-semibold text-white">{item.label}</span>
+                  <span className="mt-1 text-xs leading-5 text-white/80">{item.desc}</span>
                 </Link>
               ))}
             </div>

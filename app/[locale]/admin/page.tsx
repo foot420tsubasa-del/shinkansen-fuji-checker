@@ -139,6 +139,18 @@ const AGODA_PRIORITY_HOTEL_PICKS = [
   "Courtyard by Marriott Shin-Osaka Station",
 ];
 
+const AGODA_PRIORITY_AREA_LINK_IDS = [
+  "shinjuku",
+  "ueno",
+  "asakusa",
+  "tokyoStation",
+  "kyotoStation",
+  "gionKawaramachi",
+  "namba",
+  "umeda",
+  "shinOsaka",
+];
+
 const HOTEL_URL_STOP_WORDS = new Set([
   "and",
   "the",
@@ -823,6 +835,9 @@ export default function AdminPage() {
   const hotelAreaPrimaryAgodaMissing = hotelLinks.filter(
     (entry) => entry.primaryProvider === "agoda" && !entry.agodaUrl?.trim(),
   );
+  const hotelAreaAgodaPriorityLinks = AGODA_PRIORITY_AREA_LINK_IDS.map((id) => hotelLinks.find((entry) => entry.id === id))
+    .filter((entry): entry is HotelEntry => Boolean(entry));
+  const hotelAreaAgodaPriorityMissing = hotelAreaAgodaPriorityLinks.filter((entry) => !entry.agodaUrl?.trim());
   const hotelPickPrimaryAgodaMissing = hotelPickLinks.filter(
     (entry) => entry.primaryProvider === "agoda" && !entry.agodaUrl?.trim(),
   );
@@ -2183,6 +2198,36 @@ export default function AdminPage() {
                   {hotelAreaPrimaryAgodaMissing.map((entry) => entry.id).join(", ")} have primaryProvider=agoda but no agodaUrl.
                 </div>
               ) : null}
+            </div>
+
+            <div className="rounded-2xl border border-purple-200 bg-purple-50/70 p-5 shadow-sm">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div>
+                  <p className="text-sm font-bold text-slate-900">Stay area Agoda CTA backlog</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">
+                    Add broad Agoda area URLs here only when the URL clearly matches the area. Public pages will show Agoda buttons automatically after agodaUrl is filled.
+                  </p>
+                </div>
+                <span className="rounded-full bg-white px-3 py-1 text-[10px] font-bold text-purple-700 ring-1 ring-purple-100">
+                  {hotelAreaAgodaPriorityMissing.length}/{hotelAreaAgodaPriorityLinks.length} missing
+                </span>
+              </div>
+              <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                {hotelAreaAgodaPriorityLinks.map((entry) => {
+                  const hasAgodaUrl = Boolean(entry.agodaUrl?.trim());
+                  return (
+                    <div key={entry.id} className={`rounded-xl border bg-white px-3 py-2 text-[11px] ${hasAgodaUrl ? "border-emerald-100" : "border-purple-100"}`}>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="font-bold text-slate-900">{entry.city}: {entry.areaName}</span>
+                        <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${hasAgodaUrl ? "bg-emerald-100 text-emerald-700" : "bg-purple-100 text-purple-700"}`}>
+                          {hasAgodaUrl ? "Agoda ready" : "Add Agoda"}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-slate-500">{entry.id}</p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="space-y-6">
