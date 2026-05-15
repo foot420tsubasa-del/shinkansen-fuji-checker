@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import fs from "node:fs";
+import path from "node:path";
 import { ArrowRight, Bed, Building2, Landmark, Mountain, Plane, Train, Utensils, Wifi } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { buttonClassName } from "@/components/ui/Button";
@@ -22,11 +24,9 @@ type CityCard = {
   subtitle: string;
   href: string;
   cta: string;
-  secondaryHref: string;
-  secondaryLabel: string;
   placementLabel: string;
   icon: typeof Building2;
-  image?: string;
+  imageCandidates: string[];
 };
 
 type ProblemCard = {
@@ -59,45 +59,37 @@ const cityCards: CityCard[] = [
     title: "Tokyo",
     subtitle: "Best for first-time Japan, nightlife, airport choices, and Shinkansen planning.",
     href: "/areas-to-stay/tokyo-first-time",
-    cta: "Choose Tokyo area",
-    secondaryHref: "/local-hotel-picks#tokyo",
-    secondaryLabel: "Tokyo hotel examples",
+    cta: "Open Tokyo stay guide",
     placementLabel: "Tokyo city card",
     icon: Building2,
-    image: "/images/stay/tokyo/tokyo-stay-hero.png",
+    imageCandidates: ["/images/stay/tokyo/tokyo-stay-hero.png"],
   },
   {
     title: "Kyoto",
-    subtitle: "Best for temples, atmosphere, classic Japan stays, and day trips.",
+    subtitle: "Best for temples, classic atmosphere, traditional streets, and day trips.",
     href: "/areas-to-stay/kyoto-first-time",
-    cta: "Choose Kyoto area",
-    secondaryHref: "/local-hotel-picks#kyoto",
-    secondaryLabel: "Kyoto hotel examples",
+    cta: "Open Kyoto guide",
     placementLabel: "Kyoto city card",
     icon: Landmark,
-    image: "/images/Kyoto.png",
+    imageCandidates: ["/images/stay/japan/stay-kyoto.jpg", "/images/Kyoto.png"],
   },
   {
     title: "Osaka",
     subtitle: "Best for food, nightlife, Kansai airport access, and Kyoto / Nara day trips.",
     href: "/areas-to-stay/osaka-first-time",
-    cta: "Choose Osaka area",
-    secondaryHref: "/local-hotel-picks#osaka",
-    secondaryLabel: "Osaka hotel examples",
+    cta: "Open Osaka guide",
     placementLabel: "Osaka city card",
     icon: Utensils,
-    image: "/images/Osaka.png",
+    imageCandidates: ["/images/stay/japan/stay-osaka.jpg", "/images/Osaka.png"],
   },
   {
     title: "Mt. Fuji / Kawaguchiko",
     subtitle: "Best if you want to stay overnight near Mt. Fuji instead of only seeing it from the Shinkansen.",
     href: "/areas-to-stay/kawaguchiko",
     cta: "Find Fuji-view stays",
-    secondaryHref: "/guide",
-    secondaryLabel: "Check Fuji-side Shinkansen seat",
     placementLabel: "Kawaguchiko city card",
     icon: Mountain,
-    image: "/images/Kawaguchiko.png",
+    imageCandidates: ["/images/stay/japan/stay-kawaguchiko.jpg", "/images/Kawaguchiko.png"],
   },
 ];
 
@@ -179,6 +171,20 @@ const guideDescriptions: Record<string, string> = {
   kawaguchiko: "Use this for an overnight Mt. Fuji view stay around Kawaguchiko.",
 };
 
+const guideTags: Record<string, string[]> = {
+  "tokyo-first-time": ["Tokyo", "First-time", "Area guide"],
+  "where-to-stay-before-shinkansen": ["Tokyo", "Shinkansen", "Luggage"],
+  "tokyo-station-vs-shinjuku": ["Tokyo Station", "Shinjuku"],
+  "ueno-vs-shinjuku": ["Ueno", "Shinjuku"],
+  "asakusa-vs-ueno": ["Asakusa", "Ueno"],
+  "kyoto-first-time": ["Kyoto", "First-time", "Area guide"],
+  "kyoto-station-vs-gion": ["Kyoto Station", "Gion"],
+  "osaka-first-time": ["Osaka", "First-time", "Area guide"],
+  "namba-vs-umeda": ["Namba", "Umeda"],
+  "shin-osaka-vs-namba": ["Shin-Osaka", "Namba"],
+  kawaguchiko: ["Mt. Fuji", "Kawaguchiko", "Overnight"],
+};
+
 const quickAnswers = [
   "First time in Tokyo -> Start with the Tokyo first-time area guide.",
   "First time in Kyoto -> Compare Kyoto Station, Gion, and Kawaramachi.",
@@ -193,22 +199,37 @@ function pageBySlug(slug: string) {
 
 function trackedLinkClass(className = "") {
   return [
-    "group rounded-[18px] border border-slate-200 bg-white p-4 text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#9fd7bd] hover:bg-[#f7fffb] hover:shadow-md",
+    "group rounded-[18px] border border-slate-200 bg-white p-4 text-left shadow-sm transition-colors hover:border-[#9fd7bd] hover:bg-[#f7fffb]",
     className,
   ].join(" ");
 }
 
+const subtleLinkCardClass =
+  "group flex items-center justify-between gap-3 rounded-[16px] border border-slate-200 bg-white px-4 py-3 text-left text-sm font-semibold text-slate-700 shadow-sm transition-colors hover:border-[#9fd7bd] hover:bg-[#f7fffb] hover:text-[#106b43] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200";
+
+function publicImageIfExists(candidates: string[]) {
+  return candidates.find((src) => fs.existsSync(path.join(process.cwd(), "public", src.replace(/^\//, ""))));
+}
+
 function CityDecisionCard({ card, locale, pagePath }: { card: CityCard; locale: string; pagePath: string }) {
   const Icon = card.icon;
+  const image = publicImageIfExists(card.imageCandidates);
 
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-sm">
-      {card.image ? (
-        <div className="relative h-40 bg-slate-100">
-          <Image src={card.image} alt={`${card.title} stay area guide`} fill sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw" className="object-cover" />
+    <TrackedInternalLink
+      href={card.href}
+      sourcePage={pagePath}
+      placement="stay_hub_city_card"
+      label={card.placementLabel}
+      locale={locale}
+      className="group flex h-full flex-col overflow-hidden rounded-[24px] border border-slate-200 bg-white text-left shadow-sm transition-all hover:-translate-y-0.5 hover:border-[#9fd7bd] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200"
+    >
+      {image ? (
+        <div className="relative h-52 bg-slate-100">
+          <Image src={image} alt={`${card.title} stay area guide`} fill sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
         </div>
       ) : (
-        <div className="flex h-40 items-center justify-center bg-[linear-gradient(135deg,#f8fafc,#ecfdf5)]">
+        <div className="flex h-52 items-center justify-center bg-[linear-gradient(135deg,#f8fafc,#ecfdf5)]">
           <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#9fd7bd] bg-white text-[#106b43] shadow-sm">
             <Icon className="h-8 w-8" aria-hidden="true" />
           </div>
@@ -219,32 +240,12 @@ function CityDecisionCard({ card, locale, pagePath }: { card: CityCard; locale: 
           <h3 className="text-xl font-semibold text-slate-950">{card.title}</h3>
           <p className="mt-2 text-sm leading-6 text-slate-600">{card.subtitle}</p>
         </div>
-        <div className="mt-auto grid gap-2 pt-5">
-          <TrackedInternalLink
-            href={card.href}
-            sourcePage={pagePath}
-            placement="stay_hub_city_card"
-            label={card.placementLabel}
-            locale={locale}
-            className={buttonClassName({ variant: "internal", fullWidth: true })}
-          >
-            {card.cta}
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </TrackedInternalLink>
-          <TrackedInternalLink
-            href={card.secondaryHref}
-            sourcePage={pagePath}
-            placement="stay_hub_city_card"
-            label={`${card.title} secondary link`}
-            locale={locale}
-            className={buttonClassName({ variant: "internal", fullWidth: true })}
-          >
-            {card.secondaryLabel}
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </TrackedInternalLink>
-        </div>
+        <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-semibold text-[#106b43]">
+          {card.cta}
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+        </span>
       </div>
-    </article>
+    </TrackedInternalLink>
   );
 }
 
@@ -273,6 +274,8 @@ function ProblemCardLink({ item, locale, pagePath }: { item: ProblemCard; locale
 }
 
 function GuideCard({ page, locale, pagePath }: { page: StayPage; locale: string; pagePath: string }) {
+  const tags = guideTags[page.slug] ?? page.areas.slice(0, 3).map((area) => area.name);
+
   return (
     <TrackedInternalLink
       href={`/areas-to-stay/${page.slug}`}
@@ -282,12 +285,19 @@ function GuideCard({ page, locale, pagePath }: { page: StayPage; locale: string;
       locale={locale}
       className={trackedLinkClass()}
     >
-      <div className="flex items-start justify-between gap-3">
-        <div>
+      <div className="flex h-full items-start justify-between gap-3">
+        <div className="min-w-0">
           <h3 className="text-sm font-semibold leading-5 text-slate-950 group-hover:text-[#106b43]">{page.title}</h3>
           <p className="mt-1.5 text-xs leading-5 text-slate-600">
             {guideDescriptions[page.slug] ?? page.description}
           </p>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {tags.slice(0, 3).map((tag) => (
+              <span key={tag} className="rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-500">
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
         <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" aria-hidden="true" />
       </div>
@@ -343,7 +353,7 @@ export default async function AreasToStayIndex({ params }: Props) {
                 placement="stay_hub_hero"
                 label="See local hotel examples"
                 locale={locale}
-                className={buttonClassName({ variant: "internal", fullWidth: true, size: "lg" })}
+                className={buttonClassName({ variant: "internalOutline", fullWidth: true, size: "lg" })}
               >
                 See local hotel examples
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -377,6 +387,27 @@ export default async function AreasToStayIndex({ params }: Props) {
           </div>
         </section>
 
+        <section className="mt-8 rounded-[22px] border border-[#d9eadd] bg-[#f7fffb] p-5 md:flex md:items-center md:justify-between md:gap-6">
+          <div>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">Hotel examples</p>
+            <h2 className="mt-1 text-xl font-semibold text-slate-950">Need actual hotel examples?</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+              See practical hotel examples for Tokyo, Kyoto, and Osaka. These are not rankings — they are starting points by area logic.
+            </p>
+          </div>
+          <TrackedInternalLink
+            href="/local-hotel-picks"
+            sourcePage={pagePath}
+            placement="stay_hub_local_picks"
+            label="See local hotel picks"
+            locale={locale}
+            className={buttonClassName({ variant: "internalOutline", className: "mt-4 shrink-0 md:mt-0" })}
+          >
+            See local hotel picks
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </TrackedInternalLink>
+        </section>
+
         <section className="mt-10">
           <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">Route logic</p>
           <h2 className="mt-1 text-2xl font-semibold text-slate-950">Choose by travel problem</h2>
@@ -407,36 +438,20 @@ export default async function AreasToStayIndex({ params }: Props) {
           </div>
         </section>
 
-        <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm md:p-6">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">Hotel examples</p>
-          <h2 className="mt-1 text-2xl font-semibold text-slate-950">Need actual hotel examples?</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
-            See practical hotel examples for Tokyo, Kyoto, and Osaka. These are not rankings — they are starting points by area logic.
-          </p>
-          <TrackedInternalLink
-            href="/local-hotel-picks"
-            sourcePage={pagePath}
-            placement="stay_hub_local_picks"
-            label="See local hotel picks"
-            locale={locale}
-            className={buttonClassName({ variant: "internal", className: "mt-4" })}
-          >
-            See local hotel picks
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </TrackedInternalLink>
-        </section>
-
         <section className="mt-10">
           <h2 className="text-lg font-semibold text-slate-950">Continue planning</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-4">
-            <TrackedInternalLink href="/plan-your-trip" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Plan Your Trip" locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
+            <TrackedInternalLink href="/plan-your-trip" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Plan Your Trip" locale={locale} className={subtleLinkCardClass}>
               Plan Your Trip
+              <ArrowRight className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" aria-hidden="true" />
             </TrackedInternalLink>
-            <TrackedInternalLink href="/guide" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Seat Checker" locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
+            <TrackedInternalLink href="/guide" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Seat Checker" locale={locale} className={subtleLinkCardClass}>
               Seat Checker
+              <ArrowRight className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" aria-hidden="true" />
             </TrackedInternalLink>
-            <TrackedInternalLink href="/airport-transfers" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Airport Transfers" locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
+            <TrackedInternalLink href="/airport-transfers" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Airport Transfers" locale={locale} className={subtleLinkCardClass}>
               Airport Transfers
+              <ArrowRight className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" aria-hidden="true" />
             </TrackedInternalLink>
             {esimHref ? (
               <TrackedAffiliateLink
@@ -452,14 +467,15 @@ export default async function AreasToStayIndex({ params }: Props) {
                 linkId="esim"
                 product="esim"
                 adid="1166001"
-                className={buttonClassName({ variant: "commercial", fullWidth: true, className: "text-center" })}
+                className={subtleLinkCardClass}
               >
                 Japan eSIM
-                <Wifi className="h-4 w-4" aria-hidden="true" />
+                <Wifi className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" aria-hidden="true" />
               </TrackedAffiliateLink>
             ) : (
-              <TrackedInternalLink href="/plan-your-trip" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Japan eSIM" locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
+              <TrackedInternalLink href="/plan-your-trip" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Japan eSIM" locale={locale} className={subtleLinkCardClass}>
                 Japan eSIM
+                <Wifi className="h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" aria-hidden="true" />
               </TrackedInternalLink>
             )}
           </div>
