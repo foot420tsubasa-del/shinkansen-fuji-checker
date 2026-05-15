@@ -1,7 +1,7 @@
 import { Check, X } from "lucide-react";
 import { HotelCTA } from "@/components/affiliate/HotelCTA";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
-import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 
 type AreaCardProps = {
   id?: string;
@@ -48,7 +48,7 @@ export function AreaCard({
       : `Compare ${hotel?.areaName ?? name} hotels`;
   const tripHref = hotel?.provider === "trip" ? hotel.href : hotelConfig?.tripUrl ?? (provider === "trip" ? hotelLink : undefined);
   const tripTrackingHref = hotel?.provider === "trip" ? hotel.trackingHref : hotelConfig?.tripUrl ?? (provider === "trip" ? hotelLink : undefined);
-  const agodaHref = hotelConfig?.agodaUrl?.trim();
+  const agodaLink = hotelKey ? getAgodaHotelAreaUrl(hotelKey) : null;
   const useProviderChoice = pagePath.endsWith("/tokyo-first-time");
 
   return (
@@ -113,14 +113,14 @@ export function AreaCard({
                   category: "hotel",
               }
               : null,
-            agodaHref
+            agodaLink
               ? {
                   label: "Agoda",
-                  href: agodaHref,
-                  trackingHref: agodaHref,
+                  href: agodaLink.href,
+                  trackingHref: agodaLink.trackingHref,
                   provider: "agoda",
                   product: "hotel",
-                  linkId: hotelKey ? `hotelArea.${hotelKey}.agoda` : undefined,
+                  linkId: agodaLink.linkId,
                   placement: "stay_area_hotel_card",
                   variant: "secondary",
                   category: "hotel",

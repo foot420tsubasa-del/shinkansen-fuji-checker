@@ -13,7 +13,7 @@ import { ProviderButton } from "@/components/ui/ProviderButton";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { Link } from "@/i18n/navigation";
 import { getAlternates } from "@/i18n/hreflang";
-import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { getAllHotelPickLinkConfigs } from "@/lib/hotel-pick-links";
 import type { StayAreaMapKey } from "@/lib/stay-area-maps";
 
@@ -189,7 +189,7 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
   const config = getTripHotelConfig(areaKey);
   const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
   const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
-  const agodaHref = config.agodaUrl?.trim();
+  const agodaLink = getAgodaHotelAreaUrl(areaKey);
 
   return providerChoices(
     tripHref
@@ -205,14 +205,14 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
           category: "hotel",
         }
       : null,
-    agodaHref
+    agodaLink
       ? {
           label: "Agoda",
-          href: agodaHref,
-          trackingHref: agodaHref,
+          href: agodaLink.href,
+          trackingHref: agodaLink.trackingHref,
           provider: "agoda",
           product: "hotel",
-          linkId: `hotelArea.${areaKey}.agoda`,
+          linkId: agodaLink.linkId,
           placement,
           variant: "secondary",
           category: "hotel",

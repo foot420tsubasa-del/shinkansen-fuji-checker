@@ -32,9 +32,41 @@ export type HotelLinkConfig = {
 
 const hotelLinks = hotelLinkData as Record<HotelAreaKey, HotelLinkConfig>;
 
+const agodaCityLinkIdByCity: Partial<Record<HotelLinkConfig["city"], string>> = {
+  Tokyo: "agodaTokyo",
+  Kyoto: "agodaKyoto",
+  Osaka: "agodaOsaka",
+  Kawaguchiko: "agodaKawaguchiko",
+  Hakone: "agodaHakone",
+};
+
 function agodaLabel(config: HotelLinkConfig) {
   if (config.label.includes("Agoda")) return config.label;
   return `Compare ${config.areaName} hotels on Agoda`;
+}
+
+export function getAgodaHotelAreaUrl(areaKey: HotelAreaKey) {
+  const config = hotelLinks[areaKey];
+  const explicitAgodaUrl = config.agodaUrl?.trim();
+
+  if (explicitAgodaUrl) {
+    return {
+      href: explicitAgodaUrl,
+      trackingHref: explicitAgodaUrl,
+      linkId: `hotelArea.${areaKey}.agoda`,
+    };
+  }
+
+  const fallbackLinkId = agodaCityLinkIdByCity[config.city];
+  const fallbackUrl = fallbackLinkId ? getAffUrl(fallbackLinkId) : undefined;
+
+  if (!fallbackUrl) return null;
+
+  return {
+    href: fallbackUrl,
+    trackingHref: fallbackUrl,
+    linkId: fallbackLinkId,
+  };
 }
 
 export function getHotelLink(areaKey: HotelAreaKey) {

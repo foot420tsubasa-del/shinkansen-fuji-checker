@@ -20,7 +20,7 @@ import { Link } from "@/i18n/navigation";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { getAffUrl, requireAffUrl } from "@/src/affiliateLinks";
 import { getProviderFromHref, trackAffiliateClick, trackChecklistComplete, trackTemplateSelect } from "@/lib/analytics";
-import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
 // ─── Constants ──────────────────────────────────────────────────────────────
@@ -184,7 +184,7 @@ function plannerHotelProviders(hotelKey: HotelAreaKey): ProviderChoiceButton[] {
   const hotelLink = getHotelLink(hotelKey);
   const config = getTripHotelConfig(hotelKey);
   const tripUrl = config.tripUrl?.trim() ?? "";
-  const agodaUrl = config.agodaUrl?.trim() ?? "";
+  const agodaLink = getAgodaHotelAreaUrl(hotelKey);
   const providers: ProviderChoiceButton[] = [];
 
   if (tripUrl) {
@@ -201,14 +201,14 @@ function plannerHotelProviders(hotelKey: HotelAreaKey): ProviderChoiceButton[] {
     });
   }
 
-  if (agodaUrl) {
+  if (agodaLink) {
     providers.push({
       label: "Agoda",
-      href: agodaUrl,
-      trackingHref: agodaUrl,
+      href: agodaLink.href,
+      trackingHref: agodaLink.trackingHref,
       provider: "agoda",
       product: "hotel",
-      linkId: `hotelArea.${hotelKey}.agoda`,
+      linkId: agodaLink.linkId,
       placement: "planner_route_stack",
       variant: providers.length > 0 ? "secondary" : "primary",
       category: "hotel",
