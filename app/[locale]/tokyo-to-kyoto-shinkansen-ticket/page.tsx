@@ -5,8 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
-import { LastCheckedNote } from "@/components/content/LastCheckedNote";
-import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { OMIO_TOKYO_KYOTO_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -240,7 +239,7 @@ export default async function TokyoToKyotoTicketPage({ params }: Props) {
                   locale={locale}
                   label="Compare Tokyo to Kyoto on Omio"
                   route="tokyo-kyoto"
-                  className="inline-flex items-center gap-2 rounded-[18px] border border-indigo-200 bg-white px-5 py-3 text-sm font-bold text-indigo-700 shadow-sm transition-colors hover:bg-indigo-50"
+                  className="inline-flex items-center gap-2 rounded-[18px] border border-indigo-700 bg-indigo-700 px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-indigo-800"
                 >
                   Compare Tokyo to Kyoto on Omio
                   <ExternalLink className="h-4 w-4" />
@@ -291,13 +290,8 @@ export default async function TokyoToKyotoTicketPage({ params }: Props) {
           <SuggestedNextSteps currentPageType="train" locale={locale} />
         </div>
 
-        <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">
-          <p>fujiseat.com — Japan travel utility hub</p>
-          <p className="mt-1">Partner links shown where they match the planning step.</p>
-          <LastCheckedNote className="mt-3" />
-          <SiteLegalLinks className="mt-3 text-slate-400" />
-        </footer>
       </Container>
+      <SiteFooter />
     </main>
   );
 }

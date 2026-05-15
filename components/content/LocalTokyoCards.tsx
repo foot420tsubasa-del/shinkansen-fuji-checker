@@ -8,7 +8,7 @@ import { trackCtaClick } from "@/lib/analytics";
 const buttonPage =
   "inline-flex items-center justify-center gap-1.5 rounded-lg border border-[#168a56] bg-[#168a56] font-extrabold text-white shadow-[0_8px_22px_rgba(22,138,86,0.14)] transition-colors hover:bg-[#0f6f45]";
 const buttonPageSecondary =
-  "inline-flex items-center justify-center gap-1.5 rounded-lg border border-[#9fd7bd] bg-white font-extrabold text-[#106b43] shadow-[0_6px_16px_rgba(22,138,86,0.06)] transition-colors hover:border-[#168a56] hover:bg-[#f0fbf6]";
+  "inline-flex items-center justify-center gap-1.5 rounded-lg border border-[#168a56] bg-[#168a56] font-extrabold text-white shadow-[0_6px_16px_rgba(22,138,86,0.10)] transition-colors hover:bg-[#0f6f45]";
 
 export type AreaChoice = {
   name: string;

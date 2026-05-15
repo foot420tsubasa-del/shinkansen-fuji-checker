@@ -10,6 +10,9 @@ type TrackedAffiliateLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "
   provider?: AffiliateClickParams["provider"];
   placement: AffiliateClickParams["placement"];
   label: string;
+  linkId?: string;
+  product?: string;
+  adid?: string;
   pagePath?: string;
   locale?: string;
   area?: string;
@@ -17,6 +20,7 @@ type TrackedAffiliateLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "
   hotelName?: string;
   trackingHref?: string;
   route?: string;
+  routeType?: string;
 };
 
 export function TrackedAffiliateLink({
@@ -26,6 +30,9 @@ export function TrackedAffiliateLink({
   provider,
   placement,
   label,
+  linkId,
+  product,
+  adid,
   pagePath,
   locale,
   area,
@@ -33,6 +40,7 @@ export function TrackedAffiliateLink({
   hotelName,
   trackingHref,
   route,
+  routeType,
   ...anchorProps
 }: TrackedAffiliateLinkProps) {
   const analyticsHref = trackingHref ?? href;
@@ -49,10 +57,14 @@ export function TrackedAffiliateLink({
           locale,
           href: analyticsHref,
           label,
+          link_id: linkId,
+          product,
+          adid,
           area,
           city,
           hotel_name: hotelName,
           route,
+          route_type: routeType,
         })
       }
       {...anchorProps}

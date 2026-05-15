@@ -4,8 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
-import { LastCheckedNote } from "@/components/content/LastCheckedNote";
-import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { SiteFooter } from "@/components/content/SiteFooter";
 import { transferPages, type TransferPage } from "@/lib/content/transfers";
 import { getAlternates } from "@/i18n/hreflang";
 
@@ -157,11 +156,8 @@ export default function AirportTransfersIndex() {
         </div>
       </section>
 
-      <footer className="mt-12 border-t border-slate-200 pt-6 text-center">
-        <LastCheckedNote />
-        <SiteLegalLinks className="mt-3 text-slate-400" />
-      </footer>
     </Container>
+    <SiteFooter />
     </main>
   );
 }

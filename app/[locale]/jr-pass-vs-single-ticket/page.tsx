@@ -6,8 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
-import { LastCheckedNote } from "@/components/content/LastCheckedNote";
-import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { JR_PASS_URL, OMIO_JAPAN_RAIL_PASS_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -100,7 +99,8 @@ const routes = [
 export default async function JrPassVsSingleTicketPage({ params }: Props) {
   const { locale } = await params;
   const tCommon = await getTranslations({ locale, namespace: "common" });
-  const compareTrainTicketsLabel = tCommon("compareTrainTickets");
+  const bookShinkansenTicketLabel = tCommon("bookShinkansenTicket");
+  const checkJrPassOptionsLabel = tCommon("checkJrPassOptions");
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -248,14 +248,17 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
                 rel={AFFILIATE_REL}
                 category="train"
                 provider="klook"
-                placement="jr_pass_comparison"
+                placement="jrpass_booking_options"
                 pagePath="/jr-pass-vs-single-ticket"
                 locale={locale}
-                label="Compare train tickets"
+                label="Book Shinkansen ticket"
+                linkId="shinkansenTicket"
+                product="shinkansen_ticket"
+                adid="1265303"
                 className="flex items-center justify-between rounded-[18px] border border-[#ff7a00] bg-[#fff3e7] p-4 text-sm shadow-sm transition-colors hover:bg-white"
               >
                 <span>
-                  <span className="block font-bold text-[#b44b00]">{compareTrainTicketsLabel}</span>
+                  <span className="block font-bold text-[#b44b00]">{bookShinkansenTicketLabel}</span>
                   <span className="mt-0.5 block text-xs text-[#b44b00]/70">Single ticket — simplest for most routes.</span>
                 </span>
                 <ExternalLink className="h-4 w-4 shrink-0 text-[#b44b00]" />
@@ -266,14 +269,17 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
                 rel={AFFILIATE_REL}
                 category="train"
                 provider="klook"
-                placement="jr_pass_comparison"
+                placement="jrpass_booking_options"
                 pagePath="/jr-pass-vs-single-ticket"
                 locale={locale}
-                label="Compare JR Pass"
+                label="Check JR Pass options"
+                linkId="jrPass"
+                product="jr_pass"
+                adid="1165791"
                 className="flex items-center justify-between rounded-[18px] border border-[#ff7a00] bg-[#fff3e7] p-4 text-sm shadow-sm transition-colors hover:bg-white"
               >
                 <span>
-                  <span className="block font-bold text-[#b44b00]">Compare JR Pass</span>
+                  <span className="block font-bold text-[#b44b00]">{checkJrPassOptionsLabel}</span>
                   <span className="mt-0.5 block text-xs text-[#b44b00]/70">Only if your route has enough long-distance legs.</span>
                 </span>
                 <ExternalLink className="h-4 w-4 shrink-0 text-[#b44b00]" />
@@ -285,17 +291,19 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
                   rel={AFFILIATE_REL}
                   category="train"
                   provider="omio"
-                  placement="jr_pass_comparison"
+                  placement="jrpass_booking_options"
                   pagePath="/jr-pass-vs-single-ticket"
                   locale={locale}
                   label="Compare train routes on Omio"
-                  className="flex items-center justify-between rounded-[18px] border border-indigo-200 bg-white p-4 text-sm shadow-sm transition-colors hover:bg-indigo-50"
+                  linkId="omioJapanRailPass"
+                  product="route_compare"
+                  className="flex items-center justify-between rounded-[18px] border border-indigo-700 bg-indigo-700 p-4 text-sm shadow-sm transition-colors hover:bg-indigo-800"
                 >
                   <span>
-                    <span className="block font-bold text-indigo-700">Compare train routes on Omio</span>
-                    <span className="mt-0.5 block text-xs text-indigo-700/70">Route comparison for trains and buses.</span>
+                    <span className="block font-bold text-white">Compare train routes on Omio</span>
+                    <span className="mt-0.5 block text-xs text-white/75">Route comparison for trains and buses.</span>
                   </span>
-                  <ExternalLink className="h-4 w-4 shrink-0 text-indigo-700" />
+                  <ExternalLink className="h-4 w-4 shrink-0 text-white" />
                 </TrackedAffiliateLink>
               ) : null}
             </div>
@@ -348,13 +356,8 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
           />
         </div>
 
-        <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">
-          <p>fujiseat.com — Japan travel utility hub</p>
-          <p className="mt-1">Partner links shown where they match the planning step.</p>
-          <LastCheckedNote className="mt-3" />
-          <SiteLegalLinks className="mt-3 text-slate-400" />
-        </footer>
       </Container>
+      <SiteFooter />
     </main>
   );
 }

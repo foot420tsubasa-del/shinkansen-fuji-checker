@@ -1,3 +1,5 @@
+import { resolveAffiliateClickMetadata, type AffiliatePlacement, type AffiliateProvider } from "@/lib/affiliate/links";
+
 type GtagEvent = {
   action: string;
   category: string;
@@ -44,35 +46,15 @@ export function trackEvent({ action, category, label, value, params }: GtagEvent
 
 export type AffiliateClickParams = {
   category: "hotel" | "esim" | "transfer" | "train" | "activity" | "tour" | "insurance";
-  provider: "klook" | "agoda" | "trip" | "omio" | "other";
-  placement:
-    | "guide_top"
-    | "seat_result"
-    | "stay_area"
-    | "hotel_pick"
-    | "itinerary_day_card"
-    | "airport_transfer"
-    | "local_tokyo"
-    | "footer"
-    | "next_steps"
-    | "home_popular"
-    | "home_essentials"
-    | "home_after_seat"
-    | "train_signs_quick_answer"
-    | "train_signs_google_maps"
-    | "train_signs_checklist"
-    | "local_hotel_pick"
-    | "local_hotel_pick_more_options"
-    | "stay_quick_recommendation"
-    | "guide_booking_option"
-    | "jr_pass_comparison"
-    | "shinkansen_ticket"
-    | "seat_guide_booking"
-    | "train_route_comparison";
+  provider: AffiliateProvider;
+  placement: AffiliatePlacement;
   page_path?: string;
   locale?: string;
   href: string;
   label: string;
+  link_id?: string;
+  product?: string;
+  adid?: string;
   area?: string;
   city?: string;
   itinerary_slug?: string;
@@ -80,6 +62,7 @@ export type AffiliateClickParams = {
   cta_type?: "stay" | "booking" | "prepare" | "esim" | "rail" | "seat_checker" | "guide";
   hotel_name?: string;
   route?: string;
+  route_type?: string;
 };
 
 export function getProviderFromHref(href: string): AffiliateClickParams["provider"] {
@@ -99,17 +82,28 @@ export function trackAffiliateClick(params: AffiliateClickParams) {
   const pagePath =
     params.page_path ??
     (typeof window === "undefined" ? undefined : window.location.pathname);
+  const registryMeta = resolveAffiliateClickMetadata({
+    linkId: params.link_id,
+    href: params.href,
+    provider: params.provider,
+    label: params.label,
+  });
   trackEvent({
     action: "affiliate_click",
     category: params.category,
     label: params.label,
     params: {
-      provider: params.provider,
+      provider: registryMeta.provider ?? params.provider,
+      product: params.product ?? registryMeta.product,
+      adid: params.adid ?? registryMeta.adid,
       placement: params.placement,
       page_path: pagePath,
       locale: params.locale,
       href: params.href,
       label: params.label,
+      link_id: params.link_id ?? registryMeta.link_id,
+      destination_type: registryMeta.destination_type,
+      link_source: registryMeta.link_source,
       area: params.area,
       city: params.city,
       itinerary_slug: params.itinerary_slug,
@@ -117,6 +111,7 @@ export function trackAffiliateClick(params: AffiliateClickParams) {
       cta_type: params.cta_type,
       hotel_name: params.hotel_name,
       route: params.route,
+      route_type: params.route_type,
       transport_type: "beacon",
     },
   });

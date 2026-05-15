@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Mountain, Train, Info, Wifi, ShieldCheck, Car, ExternalLink, AlertTriangle } from "lucide-react";
+import { Mountain, Train, Info, AlertTriangle } from "lucide-react";
 import Script from "next/script";
 import { Link } from "@/i18n/navigation";
 import { KlookCTA } from "../components/KlookCTA";
 import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
-import { KLOOK_URL, ESIM_URL, AIRPORT_TRANSFER_URL, INSURANCE_URL, CAR_RENTAL_URL } from "@/src/affiliateLinks";
+import { KLOOK_URL, ESIM_URL, JR_PASS_URL, OMIO_SHINKANSEN_URL } from "@/src/affiliateLinks";
 import { GuideNextSteps } from "@/components/travel/GuideNextSteps";
-import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
-import { LastCheckedNote } from "@/components/content/LastCheckedNote";
+import { SiteFooter } from "@/components/content/SiteFooter";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
+import { RailDecisionCard } from "@/components/affiliate/RailDecisionCard";
 
 const SITE_URL = "https://fujiseat.com";
 
@@ -379,7 +379,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function GuidePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "guide" });
-  const h = await getTranslations({ locale, namespace: "home" });
   const isFr = locale === "fr";
   const copy = isFr ? frGuideCopy : enGuideCopy;
   const displayTitle = locale === "en"
@@ -536,96 +535,78 @@ export default async function GuidePage({ params }: Props) {
     "text-slate-500",
   ];
 
-  const essentialLinks = [
-    {
-      url: KLOOK_URL,
-      icon: <Train className="h-4 w-4 text-red-500" />,
-      title: h("jrPassTitle"),
-      desc: h("jrPassDesc"),
-      category: "train" as const,
-      accent: "from-red-50 to-red-100 border-red-100 group-hover:from-red-100 group-hover:to-red-200",
-      featured: true,
-    },
-    {
-      url: ESIM_URL,
-      icon: <Wifi className="h-4 w-4 text-emerald-500" />,
-      title: h("esimTitle"),
-      desc: h("esimDesc"),
-      category: "esim" as const,
-      accent: "from-emerald-50 to-emerald-100 border-emerald-100 group-hover:from-emerald-100 group-hover:to-emerald-200",
-    },
-    {
-      url: AIRPORT_TRANSFER_URL,
-      icon: <Train className="h-4 w-4 text-sky-500" />,
-      title: h("nexTitle"),
-      desc: h("nexDesc"),
-      category: "transfer" as const,
-      accent: "from-sky-50 to-sky-100 border-sky-100 group-hover:from-sky-100 group-hover:to-sky-200",
-    },
-    {
-      url: INSURANCE_URL,
-      icon: <ShieldCheck className="h-4 w-4 text-amber-500" />,
-      title: h("insuranceTitle"),
-      desc: h("insuranceDesc"),
-      category: "insurance" as const,
-      accent: "from-amber-50 to-amber-100 border-amber-100 group-hover:from-amber-100 group-hover:to-amber-200",
-    },
-    {
-      url: CAR_RENTAL_URL,
-      icon: <Car className="h-4 w-4 text-violet-500" />,
-      title: h("carTitle"),
-      desc: h("carDesc"),
-      category: "activity" as const,
-      accent: "from-violet-50 to-violet-100 border-violet-100 group-hover:from-violet-100 group-hover:to-violet-200",
-    },
-  ];
-
   const renderTravelEssentials = () => (
-    <section className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm md:shadow">
+    <section className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
       <div className="px-4 py-3.5 md:px-6 md:py-4 border-b border-slate-100 bg-slate-50/60">
         <h2 className="text-[13px] md:text-[15px] font-semibold text-slate-900">
-          {h("essentialsTitle")}
+          Pre-departure checklist
         </h2>
         <p className="text-[11px] md:text-xs text-slate-400 mt-0.5">
-          {h("essentialsNote")}
+          Keep the booking steps in order: route first, rail second, arrival basics after.
         </p>
       </div>
-      <div className="p-2.5 md:p-3.5 grid gap-2 md:grid-cols-2 md:gap-2.5">
-        {essentialLinks.map((link, i) => (
+      <div className="grid gap-3 p-3.5 md:p-4">
+        <div className="grid gap-2 text-[12px] leading-5 text-slate-600 md:grid-cols-2">
+          <Link href="/plan-your-trip" className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-semibold text-slate-800 hover:bg-white">
+            Choose your route
+          </Link>
+          <Link href="/airport-transfers" className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-semibold text-slate-800 hover:bg-white">
+            Plan airport transfer
+          </Link>
+          <Link href="/areas-to-stay" className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-semibold text-slate-800 hover:bg-white">
+            Choose stay area
+          </Link>
           <TrackedAffiliateLink
-            key={i}
-            href={link.url}
+            href={ESIM_URL}
             target="_blank"
             rel={AFFILIATE_REL}
-            category={link.category}
+            category="esim"
             provider="klook"
-            placement="guide_booking_option"
+            placement="guide_checklist"
             pagePath="/guide"
             locale={locale}
-            label={link.title}
-            className={[
-              "flex items-center gap-3 rounded-xl border px-3.5 py-3 md:px-4 md:py-3.5",
-              "border-slate-100 bg-slate-50/40 hover:bg-white hover:border-slate-200 hover:shadow-sm",
-              "transition-all duration-150 group",
-              link.featured ? "md:col-span-2" : "",
-            ].join(" ")}
+            label="Get Japan eSIM"
+            linkId="esim"
+            product="esim"
+            className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-semibold text-slate-800 hover:bg-white"
           >
-            <div
-              className={`shrink-0 w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gradient-to-br ${link.accent} border flex items-center justify-center`}
-            >
-              {link.icon}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-[12px] md:text-[13px] font-semibold text-slate-800">
-                {link.title}
-              </p>
-              <p className="text-[10px] md:text-[11px] text-slate-500 mt-0.5 leading-relaxed">
-                {link.desc}
-              </p>
-            </div>
-            <ExternalLink className="shrink-0 h-3.5 w-3.5 md:h-4 md:w-4 text-slate-300 group-hover:text-red-500 transition-colors" />
+            Get Japan eSIM
           </TrackedAffiliateLink>
-        ))}
+        </div>
+        <RailDecisionCard
+          title="Book rail"
+          body="For Tokyo to Kyoto or Osaka, book a single Shinkansen ticket after choosing the Fuji-side seat. Check JR Pass options only for longer multi-city JR routes."
+          primaryCta={{
+            label: "Book Shinkansen ticket",
+            href: KLOOK_URL,
+            provider: "klook",
+            linkId: "shinkansenTicket",
+            product: "shinkansen_ticket",
+            adid: "1265303",
+          }}
+          secondaryCta={{
+            label: "Check JR Pass options",
+            href: JR_PASS_URL,
+            provider: "klook",
+            linkId: "jrPass",
+            product: "jr_pass",
+            adid: "1165791",
+          }}
+          tertiaryTextLink={
+            OMIO_SHINKANSEN_URL
+              ? {
+                  label: "Compare trains and buses on Omio",
+                  href: OMIO_SHINKANSEN_URL,
+                  provider: "omio",
+                  linkId: "omioShinkansen",
+                  product: "route_compare",
+                }
+              : undefined
+          }
+          placement="guide_checklist"
+          locale={locale}
+          routeType="simple-shinkansen"
+        />
       </div>
     </section>
   );
@@ -752,6 +733,43 @@ export default async function GuidePage({ params }: Props) {
             </Link>
           </div>
         </section>
+        </div>
+
+        <div className="mb-5">
+          <RailDecisionCard
+            title="Book after checking your Fuji-side seat"
+            body="For a simple Tokyo → Kyoto / Osaka trip, a single Shinkansen ticket is usually easier. If your route includes Hiroshima, multiple long JR rides, or a return to Tokyo, check JR Pass options before booking."
+            primaryCta={{
+              label: "Book Shinkansen ticket",
+              href: KLOOK_URL,
+              provider: "klook",
+              linkId: "shinkansenTicket",
+              product: "shinkansen_ticket",
+              adid: "1265303",
+            }}
+            secondaryCta={{
+              label: "Check JR Pass options",
+              href: JR_PASS_URL,
+              provider: "klook",
+              linkId: "jrPass",
+              product: "jr_pass",
+              adid: "1165791",
+            }}
+            tertiaryTextLink={
+              OMIO_SHINKANSEN_URL
+                ? {
+                    label: "Still planning your route? Compare trains and buses on Omio",
+                    href: OMIO_SHINKANSEN_URL,
+                    provider: "omio",
+                    linkId: "omioShinkansen",
+                    product: "route_compare",
+                  }
+                : undefined
+            }
+            placement="guide_rail_decision"
+            locale={locale}
+            routeType="simple-shinkansen"
+          />
         </div>
 
         {/* TL;DR */}
@@ -1144,13 +1162,6 @@ export default async function GuidePage({ params }: Props) {
             locale={locale}
           />
 
-          <footer className="border-t border-slate-200 pt-5 text-center text-[10px] text-slate-400">
-            <p>{copy.footerBrand}</p>
-            <p className="mt-1">{copy.footerPartner}</p>
-            <LastCheckedNote className="mt-3" />
-            <SiteLegalLinks className="mt-3 text-slate-400" />
-          </footer>
-
         </div>
         </div>{/* close main column */}
 
@@ -1264,6 +1275,7 @@ export default async function GuidePage({ params }: Props) {
 
         </div>{/* close 2-column grid */}
       </div>
+      <SiteFooter />
     </main>
   );
 }

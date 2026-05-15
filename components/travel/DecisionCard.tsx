@@ -1,7 +1,10 @@
+"use client";
+
 import { ArrowRight, ExternalLink, Hotel, Map, Plane, ShieldCheck } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Card } from "@/components/ui/Card";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+import { getProviderFromHref, trackAffiliateClick, type AffiliateClickParams } from "@/lib/analytics";
 
 type DecisionCardProps = {
   label: string;
@@ -11,6 +14,8 @@ type DecisionCardProps = {
   href: string;
   cta: string;
   external?: boolean;
+  affiliateCategory?: AffiliateClickParams["category"];
+  affiliatePlacement?: AffiliateClickParams["placement"];
   accent?: "sky" | "red" | "emerald" | "amber" | "indigo";
 };
 
@@ -38,6 +43,8 @@ export function DecisionCard({
   href,
   cta,
   external = false,
+  affiliateCategory = "esim",
+  affiliatePlacement = "guide_article_inline",
   accent = "sky",
 }: DecisionCardProps) {
   const Icon = iconClass[accent];
@@ -85,7 +92,21 @@ export function DecisionCard({
 
   if (external) {
     return (
-      <a href={href} target="_blank" rel={AFFILIATE_REL} className="block h-full rounded-[28px] no-underline outline-none focus-visible:ring-2 focus-visible:ring-sky-300">
+      <a
+        href={href}
+        target="_blank"
+        rel={AFFILIATE_REL}
+        onClick={() =>
+          trackAffiliateClick({
+            category: affiliateCategory,
+            provider: getProviderFromHref(href),
+            placement: affiliatePlacement,
+            href,
+            label: cta,
+          })
+        }
+        className="block h-full rounded-[28px] no-underline outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+      >
         {body}
       </a>
     );

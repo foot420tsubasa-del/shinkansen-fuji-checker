@@ -13,6 +13,7 @@ type QuickRecProps = {
   pagePath?: string;
   provider?: AffiliateClickParams["provider"];
   placement?: AffiliateClickParams["placement"];
+  showCta?: boolean;
 };
 
 export function QuickRec({
@@ -24,6 +25,7 @@ export function QuickRec({
   pagePath,
   provider = "trip",
   placement = "stay_quick_recommendation",
+  showCta = true,
 }: QuickRecProps) {
   return (
     <div className="rounded-[22px] border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5 shadow-sm">
@@ -35,27 +37,30 @@ export function QuickRec({
         Stay in <span className="text-emerald-700">{area}</span>
       </p>
       <p className="mt-2 text-sm leading-6 text-slate-600">{why}</p>
-      <a
-        href={link}
-        target="_blank"
-        rel={AFFILIATE_REL}
-        onClick={() =>
-          trackAffiliateClick({
-            category: "hotel",
-            provider,
-            placement,
-            page_path: pagePath,
-            locale,
-            href: link,
-            label: cta,
-            area,
-          })
-        }
-        className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700]"
-      >
-        {cta}
-        <ArrowRight className="h-4 w-4" />
-      </a>
+      {showCta ? (
+        <a
+          href={link}
+          target="_blank"
+          rel={AFFILIATE_REL}
+          onClick={() =>
+            trackAffiliateClick({
+              category: "hotel",
+              provider,
+              placement,
+              page_path: pagePath,
+              locale,
+              href: link,
+              label: cta,
+              area,
+              product: "hotel",
+            })
+          }
+          className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700]"
+        >
+          {cta}
+          <ArrowRight className="h-4 w-4" />
+        </a>
+      ) : null}
     </div>
   );
 }

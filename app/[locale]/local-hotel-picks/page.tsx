@@ -4,8 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
-import { LastCheckedNote } from "@/components/content/LastCheckedNote";
-import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { SiteFooter } from "@/components/content/SiteFooter";
 import { HotelCTA } from "@/components/affiliate/HotelCTA";
 import { getHotelLink } from "@/lib/hotel-links";
 import { getAlternates } from "@/i18n/hreflang";
@@ -156,17 +155,8 @@ export default async function LocalHotelPicksPage({ params }: Props) {
           <SuggestedNextSteps currentPageType="stay" locale={locale} />
         </div>
 
-        <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">
-          <p>fujiseat.com — Japan travel utility hub</p>
-          <p className="mt-1">Partner links shown where they match the planning step.</p>
-          <p className="mt-2 text-slate-400">
-            Hotel availability, rates, and conditions change frequently.
-            Always check the latest details on the booking site before making a reservation.
-          </p>
-          <LastCheckedNote className="mt-3" />
-          <SiteLegalLinks className="mt-3 text-slate-400" />
-        </footer>
       </Container>
+      <SiteFooter />
     </main>
   );
 }

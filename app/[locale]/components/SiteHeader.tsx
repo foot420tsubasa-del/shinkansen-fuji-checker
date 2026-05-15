@@ -34,9 +34,6 @@ export function SiteHeader() {
           <Link href="/plan-your-trip" className="transition-colors hover:text-white">
             Essentials
           </Link>
-          <Link href="/command-center" className="transition-colors hover:text-white">
-            Command Center
-          </Link>
           <Link href="/about" className="transition-colors hover:text-white">
             About
           </Link>

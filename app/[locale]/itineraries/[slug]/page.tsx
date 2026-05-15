@@ -10,8 +10,7 @@ import { DayCard } from "@/components/content/DayCard";
 import { ProTip } from "@/components/content/ProTip";
 import { NextActions } from "@/components/content/NextActions";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
-import { LastCheckedNote } from "@/components/content/LastCheckedNote";
-import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAllItinerarySlugs, getItineraryBySlug } from "@/lib/content/itineraries";
 import { getAlternates } from "@/i18n/hreflang";
 
@@ -174,13 +173,8 @@ export default async function ItineraryPage({ params }: Props) {
           <SuggestedNextSteps currentPageType="itinerary" locale={locale} />
         </div>
 
-        <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">
-          <p>fujiseat.com — Japan travel utility hub</p>
-          <p className="mt-1">Partner links shown where they match the planning step.</p>
-          <LastCheckedNote className="mt-3" />
-          <SiteLegalLinks className="mt-3 text-slate-400" />
-        </footer>
       </Container>
+      <SiteFooter />
     </main>
   );
 }

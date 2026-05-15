@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
-import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 
@@ -157,11 +157,8 @@ export default async function SeatGuidesHubPage({ params }: Props) {
           className="mt-8"
         />
 
-        <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">
-          <p>fujiseat.com — Japan travel utility hub</p>
-          <SiteLegalLinks className="mt-3 text-slate-400" />
-        </footer>
       </Container>
+      <SiteFooter />
     </main>
   );
 }

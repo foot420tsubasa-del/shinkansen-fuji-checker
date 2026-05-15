@@ -6,8 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { buttonClassName } from "@/components/ui/Button";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
-import { LastCheckedNote } from "@/components/content/LastCheckedNote";
-import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { SiteFooter } from "@/components/content/SiteFooter";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { stayPages, type StayPage } from "@/lib/content/stay";
 import { getAlternates } from "@/i18n/hreflang";
@@ -333,11 +332,8 @@ export default async function AreasToStayIndex({ params }: Props) {
         </TrackedCtaLink>
       </section>
 
-      <footer className="mt-12 border-t border-slate-200 pt-6 text-center">
-        <LastCheckedNote />
-        <SiteLegalLinks className="mt-3 text-slate-400" />
-      </footer>
     </Container>
+    <SiteFooter />
     </main>
   );
 }

@@ -84,7 +84,7 @@ export function AreaCard({
           city={hotel?.city ?? city}
           provider={hotel?.provider ?? provider}
           href={hotel?.href ?? hotelLink}
-          placement="stay_area"
+          placement="stay_area_hotel_card"
           locale={locale}
           pagePath={pagePath}
           label={hotel?.label ?? `Compare ${name} hotels`}

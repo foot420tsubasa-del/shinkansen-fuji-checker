@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { requireAffUrl } from "@/src/affiliateLinks";
+import { getAffUrl, requireAffUrl } from "@/src/affiliateLinks";
 import { getProviderFromHref, trackAffiliateClick, trackChecklistComplete, trackTemplateSelect } from "@/lib/analytics";
 import { getHotelLink } from "@/lib/hotel-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -129,31 +129,138 @@ const CHECKLIST_DATA: CheckData[] = [
   { id: "translate", critical: false },
 ];
 
-type BookingData = {
-  key: string;
+type RouteBookingAction = {
+  label: string;
   href: string;
-  external: boolean;
-  affiliate?: CheckData["affiliate"];
+  provider?: "klook" | "omio" | "trip" | "agoda";
+  category?: "hotel" | "esim" | "transfer" | "train" | "insurance";
+  linkId?: string;
+  product?: string;
+  adid?: string;
+  routeType?: string;
+  area?: string;
+  trackingHref?: string;
+  external?: boolean;
+  priority: "primary" | "secondary" | "text";
 };
 
-const BOOKING_DATA: BookingData[] = [
-  { key: "esim", href: requireAffUrl("esim"), external: true },
-  { key: "transfer", href: "/airport-transfers/narita-to-shinjuku", external: false },
-  {
-    key: "stay",
-    href: plannerHotel.href,
-    external: true,
-    affiliate: {
-      category: "hotel",
-      provider: plannerHotel.provider,
-      label: plannerHotel.label,
-      area: `${plannerHotel.city}: ${plannerHotel.areaName}`,
-      href: plannerHotel.trackingHref,
-    },
+type RouteBookingRecommendation = {
+  routeId: string;
+  railRecommendation: string;
+  railActions: RouteBookingAction[];
+  hotelRecommendation: string;
+  hotelAction: RouteBookingAction;
+  arrivalRecommendation: string;
+  arrivalActions: RouteBookingAction[];
+  optionalAddOns: RouteBookingAction[];
+};
+
+const shinkansenTicketUrl = getAffUrl("shinkansenTicket");
+const jrPassUrl = getAffUrl("jrPass");
+const omioTrainUrl = getAffUrl("omioJapanTrain") ?? getAffUrl("omioShinkansen");
+const esimUrl = getAffUrl("esim");
+const insuranceUrl = getAffUrl("insurance");
+const kawaguchikoHotel = getHotelLink("kawaguchiko");
+const tokyoStationHotel = getHotelLink("tokyoStation");
+
+const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = {
+  "express-5": {
+    routeId: "express-5",
+    railRecommendation:
+      "A single Shinkansen ticket is usually simpler for this short Tokyo → Kyoto route. JR Pass is usually not needed unless you return to Tokyo by Shinkansen.",
+    railActions: [
+      shinkansenTicketUrl
+        ? { label: "Book Shinkansen ticket", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "express-5", external: true, priority: "primary" }
+        : null,
+      omioTrainUrl
+        ? { label: "Compare routes on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: "omioJapanTrain", product: "route_compare", routeType: "express-5", external: true, priority: "text" }
+        : null,
+      jrPassUrl
+        ? { label: "JR Pass usually not needed — compare only if returning to Tokyo", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "express-5", external: true, priority: "text" }
+        : null,
+    ].filter(Boolean) as RouteBookingAction[],
+    hotelRecommendation: "Keep hotel bases simple: Tokyo for arrival, then Kyoto Station or Gion depending on your pace.",
+    hotelAction: { label: "Choose hotels before Shinkansen", href: "/areas-to-stay/where-to-stay-before-shinkansen", external: false, priority: "secondary" },
+    arrivalRecommendation: "Set up data and airport movement before landing so the short route does not start with friction.",
+    arrivalActions: [
+      esimUrl ? { label: "Get Japan eSIM", href: esimUrl, provider: "klook", category: "esim", linkId: "esim", product: "esim", adid: "1166001", external: true, priority: "secondary" } : null,
+      { label: "Plan airport transfer", href: "/airport-transfers", external: false, priority: "text" },
+    ].filter(Boolean) as RouteBookingAction[],
+    optionalAddOns: insuranceUrl ? [{ label: "Check travel insurance", href: insuranceUrl, provider: "klook", category: "insurance", linkId: "insurance", product: "travel_insurance", adid: "1166002", external: true, priority: "text" }] : [],
   },
-  { key: "jrPass", href: "/jr-pass-vs-single-ticket", external: false },
-  { key: "insurance", href: requireAffUrl("insurance"), external: true },
-];
+  "classic-7": {
+    routeId: "classic-7",
+    railRecommendation:
+      "A single Shinkansen ticket is usually simpler for Tokyo → Kyoto / Osaka. Compare the JR Pass only if you add Hiroshima, multiple long-distance rides, or return to Tokyo by Shinkansen.",
+    railActions: [
+      shinkansenTicketUrl
+        ? { label: "Book Shinkansen ticket", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "classic-7", external: true, priority: "primary" }
+        : null,
+      jrPassUrl
+        ? { label: "Compare JR Pass", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "classic-7", external: true, priority: "secondary" }
+        : null,
+      omioTrainUrl
+        ? { label: "Compare routes on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: "omioJapanTrain", product: "route_compare", routeType: "classic-7", external: true, priority: "text" }
+        : null,
+    ].filter(Boolean) as RouteBookingAction[],
+    hotelRecommendation: "Choose the first Tokyo base before filling activities. Shinjuku, Ueno / Asakusa, and Tokyo Station solve different arrival problems.",
+    hotelAction: { label: plannerHotel.label, href: plannerHotel.href, provider: plannerHotel.provider, category: "hotel", area: `${plannerHotel.city}: ${plannerHotel.areaName}`, trackingHref: plannerHotel.trackingHref, external: true, priority: "secondary" },
+    arrivalRecommendation: "Prepare data and airport transfer first; activities can wait until the route is stable.",
+    arrivalActions: [
+      esimUrl ? { label: "Get Japan eSIM", href: esimUrl, provider: "klook", category: "esim", linkId: "esim", product: "esim", adid: "1166001", external: true, priority: "secondary" } : null,
+      { label: "Plan airport transfer", href: "/airport-transfers", external: false, priority: "text" },
+    ].filter(Boolean) as RouteBookingAction[],
+    optionalAddOns: insuranceUrl ? [{ label: "Check travel insurance", href: insuranceUrl, provider: "klook", category: "insurance", linkId: "insurance", product: "travel_insurance", adid: "1166002", external: true, priority: "text" }] : [],
+  },
+  "full-10": {
+    routeId: "full-10",
+    railRecommendation:
+      "Because this route mixes Fuji-side travel, Hakone, and the Shinkansen to Kyoto, compare the route first. Then book the Shinkansen legs that fit your final order.",
+    railActions: [
+      omioTrainUrl
+        ? { label: "Compare routes on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: "omioJapanTrain", product: "route_compare", routeType: "full-10", external: true, priority: "primary" }
+        : null,
+      shinkansenTicketUrl
+        ? { label: "Book Shinkansen ticket", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "full-10", external: true, priority: "secondary" }
+        : null,
+      jrPassUrl
+        ? { label: "JR Pass is conditional — compare if adding more JR rides", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "full-10", external: true, priority: "text" }
+        : null,
+    ].filter(Boolean) as RouteBookingAction[],
+    hotelRecommendation: "Add Fuji overnight logistics before Kyoto. Kawaguchiko and Hakone change the rail order.",
+    hotelAction: { label: kawaguchikoHotel.label, href: kawaguchikoHotel.href, provider: kawaguchikoHotel.provider, category: "hotel", area: `${kawaguchikoHotel.city}: ${kawaguchikoHotel.areaName}`, trackingHref: kawaguchikoHotel.trackingHref, external: true, priority: "secondary" },
+    arrivalRecommendation: "Use eSIM and airport transfer planning to keep the first Tokyo day flexible.",
+    arrivalActions: [
+      esimUrl ? { label: "Get Japan eSIM", href: esimUrl, provider: "klook", category: "esim", linkId: "esim", product: "esim", adid: "1166001", external: true, priority: "secondary" } : null,
+      { label: "Plan airport transfer", href: "/airport-transfers", external: false, priority: "text" },
+    ].filter(Boolean) as RouteBookingAction[],
+    optionalAddOns: insuranceUrl ? [{ label: "Check travel insurance", href: insuranceUrl, provider: "klook", category: "insurance", linkId: "insurance", product: "travel_insurance", adid: "1166002", external: true, priority: "text" }] : [],
+  },
+  "deep-14": {
+    routeId: "deep-14",
+    railRecommendation:
+      "Because this route includes more long-distance travel, compare the JR Pass before buying separate tickets.",
+    railActions: [
+      jrPassUrl
+        ? { label: "Compare JR Pass", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "deep-14", external: true, priority: "primary" }
+        : null,
+      omioTrainUrl
+        ? { label: "Compare routes on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: "omioJapanTrain", product: "route_compare", routeType: "deep-14", external: true, priority: "secondary" }
+        : null,
+      shinkansenTicketUrl
+        ? { label: "Book single Shinkansen ticket", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "deep-14", external: true, priority: "text" }
+        : null,
+    ].filter(Boolean) as RouteBookingAction[],
+    hotelRecommendation: "Use station-friendly hotel bases because this route has more luggage moves and long-distance rail days.",
+    hotelAction: { label: tokyoStationHotel.label, href: tokyoStationHotel.href, provider: tokyoStationHotel.provider, category: "hotel", area: `${tokyoStationHotel.city}: ${tokyoStationHotel.areaName}`, trackingHref: tokyoStationHotel.trackingHref, external: true, priority: "secondary" },
+    arrivalRecommendation: "Prepare eSIM and airport transfer before landing; this route has less margin for early confusion.",
+    arrivalActions: [
+      esimUrl ? { label: "Get Japan eSIM", href: esimUrl, provider: "klook", category: "esim", linkId: "esim", product: "esim", adid: "1166001", external: true, priority: "secondary" } : null,
+      { label: "Plan airport transfer", href: "/airport-transfers", external: false, priority: "text" },
+    ].filter(Boolean) as RouteBookingAction[],
+    optionalAddOns: insuranceUrl ? [{ label: "Check travel insurance", href: insuranceUrl, provider: "klook", category: "insurance", linkId: "insurance", product: "travel_insurance", adid: "1166002", external: true, priority: "text" }] : [],
+  },
+};
 
 const EMERGENCY_DATA = [
   { key: "police", number: "110", emoji: "🚨" },
@@ -188,6 +295,138 @@ function weatherIcon(code: number) {
   if (code <= 67) return "🌧️";
   if (code <= 77) return "🌨️";
   return "⛈️";
+}
+
+function routeActionClass(action: RouteBookingAction) {
+  if (action.priority === "text") {
+    return [
+      "inline-flex min-h-9 items-center gap-1 text-xs font-semibold underline underline-offset-4 transition-colors",
+      action.provider === "omio" ? "text-indigo-700 hover:text-indigo-900" : "text-[#106b43] hover:text-[#0f6f45]",
+    ].join(" ");
+  }
+  if (action.priority === "primary") {
+    if (action.provider === "omio") {
+      return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-indigo-700 bg-indigo-700 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-indigo-800";
+    }
+    if (action.linkId === "jrPass") {
+      return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]";
+    }
+    return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#e66700]";
+  }
+  if (action.provider === "trip") {
+    return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#0a4ca8] bg-[#0a4ca8] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0a3f8b]";
+  }
+  if (action.provider === "omio") {
+    return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-indigo-700 bg-indigo-700 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-indigo-800";
+  }
+  return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]";
+}
+
+function RouteBookingActionLink({ action, routeId, locale }: { action: RouteBookingAction; routeId: string; locale?: string }) {
+  const className = routeActionClass(action);
+
+  if (!action.external) {
+    return (
+      <Link href={action.href} className={className}>
+        {action.label}
+        {action.priority !== "text" ? <ArrowRight className="h-3 w-3" /> : null}
+      </Link>
+    );
+  }
+
+  return (
+    <a
+      href={action.href}
+      target="_blank"
+      rel={AFFILIATE_REL}
+      onClick={() =>
+        trackAffiliateClick({
+          category: action.category ?? "train",
+          provider: action.provider ?? getProviderFromHref(action.href),
+          placement: "planner_route_stack",
+          page_path: "/planner",
+          locale,
+          href: action.trackingHref ?? action.href,
+          label: action.label,
+          area: action.area,
+          link_id: action.linkId,
+          product: action.product,
+          adid: action.adid,
+          route_type: action.routeType ?? routeId,
+        })
+      }
+      className={className}
+    >
+      {action.label}
+      {action.priority !== "text" ? <ExternalLink className="h-3 w-3" /> : null}
+    </a>
+  );
+}
+
+function RouteBookingStack({
+  routeId,
+  routeTitle,
+  railRecommendation,
+  hotelRecommendation,
+  arrivalRecommendation,
+  optionalAddOns,
+  railActions,
+  hotelAction,
+  arrivalActions,
+  locale,
+}: RouteBookingRecommendation & { routeTitle: string; locale?: string }) {
+  return (
+    <section className="rounded-[22px] border border-sky-200 bg-sky-50/70 p-5 shadow-sm">
+      <div className="flex items-center gap-2">
+        <ShoppingBag className="h-4 w-4 text-sky-700" />
+        <h3 className="text-sm font-semibold text-slate-950">Recommended booking stack for {routeTitle}</h3>
+      </div>
+      <p className="mt-1 text-[10px] text-slate-500">Recommended for this route</p>
+      <div className="mt-3 space-y-3">
+        <div className="rounded-xl border border-white bg-white p-3 shadow-sm">
+          <p className="text-xs font-semibold text-slate-900">1. Rail</p>
+          <p className="mt-0.5 text-[10px] leading-4 text-slate-500">{railRecommendation}</p>
+          <div className="mt-2 flex flex-col gap-2">
+            {railActions.map((action) => (
+              <RouteBookingActionLink key={`${routeId}-rail-${action.label}`} action={action} routeId={routeId} locale={locale} />
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-white bg-white p-3 shadow-sm">
+          <p className="text-xs font-semibold text-slate-900">2. Hotel area</p>
+          <p className="mt-0.5 text-[10px] leading-4 text-slate-500">{hotelRecommendation}</p>
+          <div className="mt-2">
+            <RouteBookingActionLink action={hotelAction} routeId={routeId} locale={locale} />
+          </div>
+        </div>
+
+        <div className="rounded-xl border border-white bg-white p-3 shadow-sm">
+          <p className="text-xs font-semibold text-slate-900">3. eSIM / arrival</p>
+          <p className="mt-0.5 text-[10px] leading-4 text-slate-500">{arrivalRecommendation}</p>
+          <div className="mt-2 flex flex-col gap-2">
+            {arrivalActions.map((action) => (
+              <RouteBookingActionLink key={`${routeId}-arrival-${action.label}`} action={action} routeId={routeId} locale={locale} />
+            ))}
+          </div>
+        </div>
+
+        {optionalAddOns.length > 0 ? (
+          <div className="rounded-xl border border-white bg-white p-3 shadow-sm">
+            <p className="text-xs font-semibold text-slate-900">4. Optional add-ons</p>
+            <div className="mt-2 flex flex-col gap-2">
+              {optionalAddOns.map((action) => (
+                <RouteBookingActionLink key={`${routeId}-optional-${action.label}`} action={action} routeId={routeId} locale={locale} />
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </div>
+      <p className="mt-3 text-[10px] text-slate-400">
+        Partner links — we earn a small commission at no extra cost to you.
+      </p>
+    </section>
+  );
 }
 
 // ─── Component ──────────────────────────────────────────────────────────────
@@ -261,6 +500,7 @@ export function PlannerClient() {
   const templateName = t(`routes.${templateData.id}.name`);
   const templateDesc = t(`routes.${templateData.id}.desc`);
   const templateJrNote = t(`routes.${templateData.id}.jrNote`);
+  const routeBooking = routeBookingRecommendations[templateData.id] ?? routeBookingRecommendations["classic-7"];
 
   const templateCities = useMemo(
     () =>
@@ -585,61 +825,7 @@ export function PlannerClient() {
 
         {/* Right sidebar */}
         <div className="lg:sticky lg:top-6 space-y-6 self-start">
-          {/* Recommended bookings */}
-          <section className="rounded-[22px] border border-sky-200 bg-sky-50/70 p-5 shadow-sm">
-            <div className="flex items-center gap-2">
-              <ShoppingBag className="h-4 w-4 text-sky-700" />
-              <h3 className="text-sm font-semibold text-slate-950">{t("bookEssentials")}</h3>
-            </div>
-            <p className="mt-1 text-[10px] text-slate-500">{t("recommendedFor", { name: templateName })}</p>
-            <div className="mt-3 space-y-2">
-              {BOOKING_DATA.map((booking) => {
-                const label = booking.key === "stay" ? "Where to stay" : t(`bookings.${booking.key}.label`);
-                const desc = booking.key === "stay" ? "Compare current hotel options before booking." : t(`bookings.${booking.key}.desc`);
-                const cta = booking.key === "stay" ? (plannerHotel.provider === "trip" ? plannerHotel.label : "Compare hotels") : t(`bookings.${booking.key}.cta`);
-                return (
-                  <div key={booking.key} className="rounded-xl border border-white bg-white p-3 shadow-sm">
-                    <p className="text-xs font-semibold text-slate-900">{label}</p>
-                    <p className="mt-0.5 text-[10px] leading-4 text-slate-500">{desc}</p>
-                    {booking.external ? (
-                      <a
-                        href={booking.href}
-                        target="_blank"
-                        rel={AFFILIATE_REL}
-                        onClick={() =>
-                          trackAffiliateClick({
-                            category: booking.affiliate?.category ?? (booking.key === "esim" ? "esim" : booking.key === "jrPass" ? "train" : booking.key === "insurance" ? "insurance" : "activity"),
-                          provider: booking.affiliate?.provider ?? getProviderFromHref(booking.href),
-                            placement: "next_steps",
-                            page_path: "/planner",
-                            locale,
-                          href: booking.affiliate?.href ?? booking.href,
-                            label: booking.affiliate?.label ?? cta,
-                            area: booking.affiliate?.area,
-                          })
-                        }
-                        className="mt-2 inline-flex min-h-10 items-center gap-1 rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#e66700]"
-                      >
-                        {cta}
-                        <ExternalLink className="h-3 w-3" />
-                      </a>
-                    ) : (
-                      <Link
-                        href={booking.href}
-                        className="mt-2 inline-flex min-h-10 items-center gap-1 rounded-lg border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
-                      >
-                        {cta}
-                        <ArrowRight className="h-3 w-3" />
-                      </Link>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-            <p className="mt-3 text-[10px] text-slate-400">
-              {t("bookingsPartnerNote")}
-            </p>
-          </section>
+          <RouteBookingStack {...routeBooking} routeTitle={templateName} locale={locale} />
 
           {/* Weather */}
           <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">

@@ -18,10 +18,10 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { BrandMark } from "@/components/ui/BrandMark";
 import { buttonClassName } from "@/components/ui/Button";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { SiteHeader } from "./components/SiteHeader";
+import { SiteFooter } from "@/components/content/SiteFooter";
 import Image from "next/image";
 import { SeatCheckerPanel } from "@/components/travel/SeatCheckerPanel";
 import { SeatMapCard } from "@/components/travel/SeatResultCard";
@@ -42,6 +42,7 @@ import {
   ESIM_URL,
   INSURANCE_URL,
   JR_PASS_URL,
+  OMIO_SHINKANSEN_URL,
   SHINKANSEN_TICKET_URL,
 } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -52,14 +53,12 @@ const JR_CENTRAL_SOURCE_URL =
 const asset = (name: string) => `/reference-ui-assets/${name}`;
 const image2Placeholder = (name: string) => `/design-home-assets/${name}`;
 
-const buttonPage =
-  "inline-flex items-center justify-center gap-2 rounded-lg border border-[#168a56] bg-[#168a56] font-extrabold text-white shadow-[0_8px_22px_rgba(22,138,86,0.18)] transition-colors hover:bg-[#0f6f45]";
 const buttonPageSecondary =
-  "inline-flex items-center justify-center gap-2 rounded-lg border border-[#9fd7bd] bg-white font-extrabold text-[#106b43] shadow-[0_8px_22px_rgba(22,138,86,0.08)] transition-colors hover:border-[#168a56] hover:bg-[#f0fbf6]";
+  "inline-flex items-center justify-center gap-2 rounded-lg border border-[#168a56] bg-[#168a56] font-extrabold text-white shadow-[0_8px_22px_rgba(22,138,86,0.14)] transition-colors hover:bg-[#0f6f45]";
 const buttonPagePill =
-  "inline-flex items-center gap-2 rounded-xl border border-[#b8dfca] bg-[#f0fbf6] font-extrabold text-[#106b43] shadow-[0_6px_16px_rgba(22,138,86,0.06)] transition-colors hover:border-[#168a56] hover:bg-white";
+  "inline-flex items-center gap-2 rounded-xl border border-[#168a56] bg-[#168a56] font-extrabold text-white shadow-[0_6px_16px_rgba(22,138,86,0.10)] transition-colors hover:bg-[#0f6f45]";
 const buttonAffiliatePill =
-  "inline-flex items-center gap-2 rounded-xl border border-[#ffb56b] bg-[#fff3e7] font-extrabold text-[#b44b00] shadow-[0_6px_16px_rgba(255,122,0,0.10)] transition-colors hover:border-[#ff7a00] hover:bg-white";
+  "inline-flex items-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] font-extrabold text-white shadow-[0_6px_16px_rgba(255,122,0,0.16)] transition-colors hover:bg-[#e66700]";
 
 type PopularLink = {
   label: string;
@@ -184,6 +183,7 @@ export default function HomeClient() {
     { title: t("featureCards.stayAreas.title"), description: t("featureCards.stayAreas.desc"), icon: CheckCircle2 },
     { title: t("featureCards.essentials.title"), description: t("featureCards.essentials.desc"), icon: ShieldCheck },
   ], [t]);
+  const omioRouteCompareHref = OMIO_SHINKANSEN_URL;
 
   useEffect(() => {
     const fetchVisibility = async () => {
@@ -263,7 +263,7 @@ export default function HomeClient() {
               </Link>
               <Link
                 href="/planner"
-                className={buttonClassName({ variant: "internalOutline", size: "lg" })}
+                className={buttonClassName({ variant: "internal", size: "lg" })}
               >
                 <CalendarDays className="h-4 w-4" />
                 {t("nav.planner")}
@@ -387,19 +387,42 @@ export default function HomeClient() {
                 onClick={() => trackAffiliateClick({
                   category: "train",
                   provider: "klook",
-                  placement: "home_after_seat",
+                  placement: "home_seat_result",
                   href: SHINKANSEN_TICKET_URL,
-                  label: "compare_train_tickets",
+                  label: "Book Shinkansen ticket",
+                  link_id: "shinkansenTicket",
+                  product: "shinkansen_ticket",
+                  adid: "1265303",
                   locale,
                 })}
                 className={buttonClassName({ variant: "commercial" })}
               >
                 <Train className="h-3.5 w-3.5" />
-                {tCommon("compareTrainTickets")}
+                {tCommon("bookShinkansenTicket")}
+              </a>
+              <a
+                href={JR_PASS_URL}
+                target="_blank"
+                rel={AFFILIATE_REL}
+                onClick={() => trackAffiliateClick({
+                  category: "train",
+                  provider: "klook",
+                  placement: "home_seat_result",
+                  href: JR_PASS_URL,
+                  label: "Check JR Pass options",
+                  link_id: "jrPass",
+                  product: "jr_pass",
+                  adid: "1165791",
+                  locale,
+                })}
+                className={buttonClassName({ variant: "commercial" })}
+              >
+                <Train className="h-3.5 w-3.5" />
+                {tCommon("checkJrPassOptions")}
               </a>
               <TrackedCtaLink
                 href="/areas-to-stay"
-                placement="home_after_seat"
+                placement="home_seat_result"
                 label="Choose where to stay"
                 category="stay"
                 ctaType="stay"
@@ -410,29 +433,34 @@ export default function HomeClient() {
                 <Bed className="h-3.5 w-3.5" />
                 {tCommon("chooseWhereToStay")}
               </TrackedCtaLink>
-              <a
-                href={ESIM_URL}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                onClick={() => trackAffiliateClick({
-                  category: "esim",
-                  provider: getProviderFromHref(ESIM_URL),
-                  placement: "home_after_seat",
-                  href: ESIM_URL,
-                  label: "esim",
-                  locale,
-                })}
-                className={buttonClassName({ variant: "commercial" })}
-              >
-                <Wifi className="h-3.5 w-3.5" />
-                {tCommon("prepareESim")}
-              </a>
             </div>
           </div>
           <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-400">
             <Link href="/shinkansen-seat-e" className="underline underline-offset-2 transition-colors hover:text-slate-600">Seat E guide</Link>
             <Link href="/shinkansen-seat-letters" className="underline underline-offset-2 transition-colors hover:text-slate-600">Seat letters A–E</Link>
             <Link href="/shinkansen-seat-guides" className="underline underline-offset-2 transition-colors hover:text-slate-600">All seat guides</Link>
+            {omioRouteCompareHref ? (
+              <a
+                href={omioRouteCompareHref}
+                target="_blank"
+                rel={AFFILIATE_REL}
+                onClick={() => trackAffiliateClick({
+                  category: "train",
+                  provider: "omio",
+                  placement: "home_seat_result",
+                  href: omioRouteCompareHref,
+                  label: "Still planning? Compare routes on Omio",
+                  link_id: "omioShinkansen",
+                  product: "route_compare",
+                  route_type: "route-comparison",
+                  locale,
+                })}
+                className="inline-flex items-center gap-1 text-indigo-700 underline underline-offset-2 transition-colors hover:text-indigo-900"
+              >
+                Still planning? Compare routes on Omio
+                <ExternalLink className="h-3 w-3" />
+              </a>
+            ) : null}
           </div>
         </section>
 
@@ -680,68 +708,7 @@ export default function HomeClient() {
         </section>
       </div>
 
-      <footer className="mt-10 border-t border-slate-700/60 bg-[#07142f] py-10 text-slate-300 shadow-[0_-16px_50px_rgba(15,23,42,0.16)]">
-        <div className="mx-auto max-w-[1180px] px-5 md:px-7">
-          <div className="grid gap-8 lg:grid-cols-[2fr_1fr_1fr_1fr_1.7fr]">
-            <div>
-              <Link href="/" className="flex items-center gap-3">
-                <BrandMark size="sm" />
-                <span className="text-xl font-extrabold text-white">fujiseat.com</span>
-              </Link>
-              <p className="mt-3 max-w-sm text-sm leading-6 text-slate-300">
-                {t("footer.tagline")}
-              </p>
-            </div>
-
-            <div>
-              <h4 className="mb-3 text-xs font-black uppercase tracking-[0.06em] text-sky-200">{t("footer.plan")}</h4>
-              <Link className="mb-2 block text-sm text-slate-300 transition-colors hover:text-white" href="/#seat-checker">{t("footer.seatChecker")}</Link>
-              <Link className="mb-2 block text-sm text-slate-300 transition-colors hover:text-white" href="/planner">{t("footer.planner")}</Link>
-              <Link className="mb-2 block text-sm text-slate-300 transition-colors hover:text-white" href="/areas-to-stay">{t("footer.stayAreas")}</Link>
-              <Link className="mb-2 block text-sm text-slate-300 transition-colors hover:text-white" href="/plan-your-trip">{t("footer.essentials")}</Link>
-            </div>
-
-            <div>
-              <h4 className="mb-3 text-xs font-black uppercase tracking-[0.06em] text-sky-200">{t("footer.guides")}</h4>
-              <Link className="mb-2 block text-sm text-slate-300 transition-colors hover:text-white" href="/guide">{t("footer.shinkansenGuide")}</Link>
-              <Link className="mb-2 block text-sm text-slate-300 transition-colors hover:text-white" href="/itineraries">{t("footer.itineraries")}</Link>
-              <Link className="mb-2 block text-sm text-slate-300 transition-colors hover:text-white" href="/airport-transfers">{t("footer.airportTransfers")}</Link>
-              <Link className="mb-2 block text-sm text-slate-300 transition-colors hover:text-white" href="/command-center">{t("footer.commandCenter")}</Link>
-            </div>
-
-            <div>
-              <h4 className="mb-3 text-xs font-black uppercase tracking-[0.06em] text-sky-200">{t("footer.support")}</h4>
-              <Link className="mb-2 block text-sm text-slate-300 transition-colors hover:text-white" href="/about">{t("footer.about")}</Link>
-              <Link className="mb-2 block text-sm text-slate-300 transition-colors hover:text-white" href="/local-tokyo">{t("footer.localTokyo")}</Link>
-              <Link className="mb-2 block text-sm text-slate-300 transition-colors hover:text-white" href="/privacy">{t("footer.privacy")}</Link>
-              <Link className="mb-2 block text-sm text-slate-300 transition-colors hover:text-white" href="/terms">{t("footer.terms")}</Link>
-            </div>
-
-            <div className="rounded-[14px] border border-white/10 bg-white/5 p-5">
-              <h4 className="text-xs font-black uppercase tracking-[0.06em] text-sky-200">
-                {t("footer.feedbackTitle")}
-              </h4>
-              <p className="mt-2 text-sm leading-6 text-slate-300">
-                {t("footer.feedbackDesc")}
-              </p>
-              <Link
-                href="/questions"
-                className={`${buttonPage} mt-4 h-10 px-4 text-sm`}
-              >
-                {t("footer.feedbackCta")}
-              </Link>
-            </div>
-          </div>
-
-          <div className="mt-7 border-t border-white/10 pt-4 text-xs leading-5 text-slate-400">
-            <p>
-              {t("footer.affiliateNote").split("Terms").map((part, i) =>
-                i === 0 ? <span key={i}>{part}<Link href="/terms" className="underline underline-offset-2 hover:text-white">{t("footer.terms")}</Link></span> : <span key={i}>{part}</span>
-              )}
-            </p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

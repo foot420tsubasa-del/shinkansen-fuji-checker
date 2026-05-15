@@ -1,9 +1,12 @@
+"use client";
+
 import { ArrowRight, ExternalLink, MapPinned, Mountain, Route, Train } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Card } from "@/components/ui/Card";
 import { JR_PASS_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+import { trackAffiliateClick } from "@/lib/analytics";
 
 const routeStops = [
   { nameKey: "tokyo", detailKey: "start", x: 15, y: 70 },
@@ -175,6 +178,18 @@ export function PlannerPreview() {
           href={JR_PASS_URL}
           target="_blank"
           rel={AFFILIATE_REL}
+          onClick={() =>
+            trackAffiliateClick({
+              category: "train",
+              provider: "klook",
+              placement: "planner_route_stack",
+              href: JR_PASS_URL,
+              label: t("checkJrPass"),
+              link_id: "jrPass",
+              product: "jr_pass",
+              adid: "1165791",
+            })
+          }
           className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#e66700] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
         >
           {t("checkJrPass")}

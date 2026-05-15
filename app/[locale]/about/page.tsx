@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { getAlternates } from "@/i18n/hreflang";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
-import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { SiteFooter } from "@/components/content/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 
 type Props = {
@@ -270,10 +270,8 @@ export default function AboutPage() {
           </Card>
         </section>
 
-        <footer className="py-8 text-center">
-          <SiteLegalLinks className="mt-3 text-slate-400" />
-        </footer>
       </Container>
+      <SiteFooter />
     </main>
   );
 }

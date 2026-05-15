@@ -54,6 +54,7 @@ export function HotelCTA({
         pagePath={pagePath}
         locale={locale}
         category="hotel"
+        product="hotel"
         area={areaName}
         city={city}
         hotelName={hotelName}
@@ -79,6 +80,7 @@ export function HotelCTA({
           locale,
           href: analyticsHref,
           label: ctaLabel,
+          product: "hotel",
           area: `${city}: ${areaName}`,
           hotel_name: hotelName,
         })

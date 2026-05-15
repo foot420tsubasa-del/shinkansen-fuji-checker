@@ -25,6 +25,9 @@ type ProviderButtonProps = {
   /** Page path for analytics. */
   pagePath: string;
   locale: string;
+  linkId?: string;
+  product?: string;
+  adid?: string;
   /** Optional category override. Defaults to "hotel". */
   category?: AffiliateClickParams["category"];
   area?: string;
@@ -52,6 +55,9 @@ export function ProviderButton({
   placement,
   pagePath,
   locale,
+  linkId,
+  product,
+  adid,
   category = "hotel",
   area,
   city,
@@ -77,6 +83,9 @@ export function ProviderButton({
           locale,
           href: analyticsHref,
           label: analyticsLabel,
+          link_id: linkId,
+          product,
+          adid,
           area: area ? (city ? `${city}: ${area}` : area) : undefined,
           city,
           hotel_name: hotelName,

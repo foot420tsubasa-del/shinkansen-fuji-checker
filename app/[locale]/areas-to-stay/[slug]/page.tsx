@@ -12,19 +12,19 @@ import { StayAreaMap } from "@/components/content/StayAreaMap";
 import { HotelPicks } from "@/components/content/HotelPicks";
 import { NextActions } from "@/components/content/NextActions";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
-import { LastCheckedNote } from "@/components/content/LastCheckedNote";
-import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
+import { SiteFooter } from "@/components/content/SiteFooter";
 import { HotelAreaCTA } from "@/components/content/LocalTokyoCards";
 import { AgodaHotelMap } from "@/components/affiliate/AgodaHotelMap";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
-import { HotelCompareBlock } from "@/components/content/HotelCompareBlock";
+import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import {
   PurposeChips,
   type PurposeChipItem,
 } from "@/components/ui/PurposeChips";
 import { getAllStaySlugs, getStayBySlug } from "@/lib/content/stay";
-import { getTripHotelConfig } from "@/lib/hotel-links";
 import { getAlternates } from "@/i18n/hreflang";
+import { getAffUrl } from "@/src/affiliateLinks";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -80,15 +80,7 @@ export default async function StayPage({ params }: Props) {
       ]
     : [];
 
-  // Compare block reads its URLs from the central hotel-links config so we
-  // never invent Agoda links: if agodaUrl is empty the block falls back to
-  // a Trip.com-only render automatically.
-  const compareCfg = isTokyoFirstTime ? getTripHotelConfig("shinjuku") : null;
-  const compareTripHref = compareCfg
-    ? `/api/trip-hotel-redirect?area=${encodeURIComponent("shinjuku")}`
-    : "";
-  const compareTripTrackingHref = compareCfg?.tripUrl ?? "";
-  const compareAgodaHref = compareCfg?.agodaUrl?.trim() ?? "";
+  const esimHref = isTokyoFirstTime ? getAffUrl("esim") : null;
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -191,33 +183,42 @@ export default async function StayPage({ params }: Props) {
             link={page.quickRec.link}
             locale={locale}
             pagePath={pagePath}
+            showCta={!isTokyoFirstTime}
           />
-
-          {isTokyoFirstTime && compareCfg ? (
-            <HotelCompareBlock
-              title={stayAreaT("compare.title", { areaName: compareCfg.areaName })}
-              singleProviderTitle={stayAreaT("compare.singleTitle", { areaName: compareCfg.areaName })}
-              note={stayAreaT("compare.note")}
-              tripLabel={stayAreaT("compare.tripLabel")}
-              agodaLabel={stayAreaT("compare.agodaLabel")}
-              tripHref={compareTripHref}
-              tripTrackingHref={compareTripTrackingHref}
-              agodaHref={compareAgodaHref}
-              placement="stay_area"
-              pagePath={pagePath}
-              locale={locale}
-              area={compareCfg.areaName}
-              city={compareCfg.city}
-            />
-          ) : null}
 
           <section id="areas" className="scroll-mt-24">
             <h2 className="text-lg font-semibold text-slate-950">Area breakdown</h2>
             <p className="mt-1 text-sm text-slate-500">Compare the practical fit of each area before choosing where to search.</p>
             <div className="mt-4 grid gap-4 lg:grid-cols-2">
               {page.areas.map((area) => (
-                <AreaCard key={area.name} {...area} locale={locale} pagePath={pagePath} showHotelCta={false} />
+                <AreaCard key={area.name} {...area} locale={locale} pagePath={pagePath} showHotelCta={isTokyoFirstTime} />
               ))}
+              {isTokyoFirstTime ? (
+                <div className="scroll-mt-24 rounded-[22px] border border-sky-100 bg-[linear-gradient(180deg,#f8fcff,#fff)] p-5 shadow-sm">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <h3 className="text-lg font-semibold text-slate-950">East Tokyo</h3>
+                      <p className="mt-1 text-xs text-slate-500">Calmer local alternative after you understand the main bases.</p>
+                    </div>
+                    <span className="shrink-0 rounded-full border border-sky-200 bg-sky-50 px-2.5 py-1 text-[10px] font-semibold text-sky-700">
+                      Local alternative
+                    </span>
+                  </div>
+                  <div className="mt-4 space-y-2 text-sm leading-6 text-slate-600">
+                    <p>
+                      Use East Tokyo if you want quieter coffee walks, riverside streets, and a more local Tokyo layer.
+                    </p>
+                    <p>
+                      It is better as a calm second base or day-plan layer than as the default first-night decision for every visitor.
+                    </p>
+                  </div>
+                  <HotelAreaCTA
+                    title="Explore Local Tokyo areas"
+                    description="Kiyosumi-Shirakawa, Kuramae, Oshiage, Monzen-Nakacho, Ryogoku, and Suitengumae."
+                    href="/local-tokyo"
+                  />
+                </div>
+              ) : null}
             </div>
           </section>
 
@@ -295,6 +296,66 @@ export default async function StayPage({ params }: Props) {
             pagePath={pagePath}
           />
 
+          {isTokyoFirstTime ? (
+            <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-500">
+                Travel prep after hotel area
+              </p>
+              <h2 className="mt-2 text-lg font-semibold text-slate-950">
+                Keep these decisions lower priority
+              </h2>
+              <p className="mt-1 text-sm leading-6 text-slate-600">
+                Choose the hotel area first. Then prepare arrival, data, and rail fit only when they match your route.
+              </p>
+              <div className="mt-4 grid gap-3 md:grid-cols-3">
+                <TrackedCtaLink
+                  href="/airport-transfers"
+                  placement="stay_detail_secondary"
+                  label="Compare airport transfer"
+                  pagePath={pagePath}
+                  locale={locale}
+                  category="transfer"
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-white"
+                >
+                  <span className="block">Airport transfer</span>
+                  <span className="mt-1 block text-xs font-normal leading-5 text-slate-500">Plan Narita or Haneda after choosing your Tokyo base.</span>
+                </TrackedCtaLink>
+                {esimHref ? (
+                  <TrackedAffiliateLink
+                    href={esimHref}
+                    target="_blank"
+                    rel={AFFILIATE_REL}
+                    category="esim"
+                    provider="klook"
+                    placement="next_steps"
+                    pagePath={pagePath}
+                    locale={locale}
+                    label="Get Japan eSIM"
+                    linkId="esim"
+                    product="esim"
+                    adid="1166001"
+                    className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-white"
+                  >
+                    <span className="block">Japan eSIM</span>
+                    <span className="mt-1 block text-xs font-normal leading-5 text-slate-500">Useful for maps and translation, but not a hotel-area decision.</span>
+                  </TrackedAffiliateLink>
+                ) : null}
+                <TrackedCtaLink
+                  href="/jr-pass-vs-single-ticket"
+                  placement="stay_detail_secondary"
+                  label="JR Pass fit guide"
+                  pagePath={pagePath}
+                  locale={locale}
+                  category="rail"
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm font-semibold text-slate-700 transition-colors hover:bg-white"
+                >
+                  <span className="block">JR Pass fit guide</span>
+                  <span className="mt-1 block text-xs font-normal leading-5 text-slate-500">Check only if your route has multiple long-distance JR rides.</span>
+                </TrackedCtaLink>
+              </div>
+            </section>
+          ) : null}
+
           {page.faqs && page.faqs.length > 0 && (
             <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
               <h2 className="text-lg font-semibold text-slate-950">FAQ</h2>
@@ -321,13 +382,8 @@ export default async function StayPage({ params }: Props) {
           <SuggestedNextSteps currentPageType="stay" locale={locale} excludeTypes={["esim"]} />
         </div>
 
-        <footer className="mt-12 border-t border-slate-200 pt-6 text-center text-[10px] text-slate-400">
-          <p>fujiseat.com — Japan travel utility hub</p>
-          <p className="mt-1">Partner links shown where they match the planning step.</p>
-          <LastCheckedNote className="mt-3" />
-          <SiteLegalLinks className="mt-3 text-slate-400" />
-        </footer>
       </Container>
+      <SiteFooter />
     </main>
   );
 }
