@@ -45,7 +45,7 @@ function providerCategory(product: string): AffiliateClickParams["category"] {
 
 function providerClass(provider: AffiliateProvider, product: string, variant: ProviderChoiceVariant) {
   const base =
-    "inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold no-underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-white";
+    "inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold no-underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-white sm:min-w-28 sm:flex-1";
 
   if (variant === "text") {
     return [
@@ -76,6 +76,9 @@ function providerClass(provider: AffiliateProvider, product: string, variant: Pr
   }
   if (provider === "agoda") {
     return [base, "border border-[#9a3f9a] bg-[#9a3f9a] text-white hover:bg-[#7e3380] focus-visible:ring-fuchsia-200"].join(" ");
+  }
+  if (provider === "other") {
+    return [base, "border border-[#168a56] bg-[#168a56] text-white hover:bg-[#0f6f45] focus-visible:ring-emerald-200"].join(" ");
   }
   if (product === "jr_pass") {
     return [base, "border border-[#168a56] bg-[#168a56] text-white hover:bg-[#0f6f45] focus-visible:ring-emerald-200"].join(" ");

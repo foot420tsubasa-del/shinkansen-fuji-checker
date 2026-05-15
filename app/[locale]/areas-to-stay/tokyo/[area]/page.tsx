@@ -16,6 +16,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { getAllHotelPickLinkConfigs } from "@/lib/hotel-pick-links";
 import type { StayAreaMapKey } from "@/lib/stay-area-maps";
+import { buttonClassName } from "@/components/ui/Button";
 
 type Props = {
   params: Promise<{ locale: string; area: string }>;
@@ -173,7 +174,7 @@ const areaDetails: Record<string, AreaDetail> = {
 };
 
 const filledNextStepClass =
-  "rounded-2xl border border-[#168a56] bg-[#168a56] p-4 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]";
+  buttonClassName({ variant: "internal", fullWidth: true, className: "p-4 text-center" });
 
 function publicImageIfExists(src: string) {
   const filePath = path.join(process.cwd(), "public", src.replace(/^\//, ""));

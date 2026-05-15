@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
 import type { LocalHotelPick } from "@/lib/content/local-hotel-picks";
 
@@ -9,11 +8,9 @@ type LocalHotelPickCardProps = {
   locale: string;
   pagePath: string;
   groupLabel?: string;
-  imagePath?: string;
-  imageAlt?: string;
 };
 
-export function LocalHotelPickCard({ pick, locale, pagePath, groupLabel, imagePath, imageAlt }: LocalHotelPickCardProps) {
+export function LocalHotelPickCard({ pick, locale, pagePath, groupLabel }: LocalHotelPickCardProps) {
   const agodaUrl = pick.agodaUrl.trim();
   const tripUrl = pick.tripFallbackUrl.trim();
   const providerLinks: Array<{ provider: ProviderId; href: string; label: string; linkId: string }> = [
@@ -23,14 +20,6 @@ export function LocalHotelPickCard({ pick, locale, pagePath, groupLabel, imagePa
 
   return (
     <article className="overflow-hidden rounded-[18px] border border-slate-200 bg-white shadow-sm">
-      {imagePath ? (
-        <div className="relative h-36 bg-slate-100">
-          <Image src={imagePath} alt={imageAlt ?? `${pick.city} hotel area atmosphere`} fill sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw" className="object-cover" />
-        </div>
-      ) : (
-        <div className="h-10 border-b border-slate-100 bg-[linear-gradient(135deg,#f8fafc,#ecfdf5)]" aria-hidden="true" />
-      )}
-
       <div className="p-4">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <div>

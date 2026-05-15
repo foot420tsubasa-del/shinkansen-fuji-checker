@@ -26,6 +26,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { getAffUrl } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { buttonClassName } from "@/components/ui/Button";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -39,7 +40,9 @@ const agodaMapIdsByStaySlug: Record<string, string[]> = {
 };
 
 const filledNextStepClass =
-  "rounded-2xl border border-[#168a56] bg-[#168a56] p-4 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]";
+  buttonClassName({ variant: "internal", fullWidth: true, className: "p-4 text-center" });
+const filledCommercialNextStepClass =
+  buttonClassName({ variant: "commercial", fullWidth: true, className: "p-4 text-center" });
 
 const tokyoStayImages = {
   hero: "/images/stay/tokyo/tokyo-stay-hero.png",
@@ -352,7 +355,7 @@ function TokyoFirstTimeHub({ locale }: { locale: string }) {
               JR Pass vs Single Ticket
             </TrackedCtaLink>
             {esimHref ? (
-              <TrackedAffiliateLink href={esimHref} target="_blank" rel={AFFILIATE_REL} category="esim" provider="klook" placement="next_steps" pagePath={pagePath} locale={locale} label="Japan eSIM" linkId="esim" product="esim" adid="1166001" className={filledNextStepClass}>
+              <TrackedAffiliateLink href={esimHref} target="_blank" rel={AFFILIATE_REL} category="esim" provider="klook" placement="next_steps" pagePath={pagePath} locale={locale} label="Japan eSIM" linkId="esim" product="esim" adid="1166001" className={filledCommercialNextStepClass}>
                 Japan eSIM
               </TrackedAffiliateLink>
             ) : (

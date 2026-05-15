@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
@@ -22,7 +21,6 @@ type TokyoPickGroup = {
   label: string;
   description: string;
   pickIds: string[];
-  imagePath: string;
   fallbackHref?: string;
   fallbackLabel?: string;
 };
@@ -32,7 +30,6 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     label: "Calm Shinjuku",
     description: "Shinjuku access without sleeping in the loudest nightlife blocks.",
     pickIds: ["yuenShinjuku"],
-    imagePath: "/images/stay/tokyo/stay-shinjuku.png",
     fallbackHref: "/areas-to-stay/tokyo/shinjuku",
     fallbackLabel: "See Shinjuku area logic",
   },
@@ -40,7 +37,6 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     label: "Family / group",
     description: "Apartment-style rooms and practical layouts for families or friends.",
     pickIds: ["mimaruShinjukuWest"],
-    imagePath: "/images/stay/tokyo/stay-shinjuku.png",
     fallbackHref: "/areas-to-stay/tokyo/shinjuku",
     fallbackLabel: "See Shinjuku area logic",
   },
@@ -48,7 +44,6 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     label: "Practical Nishi-Shinjuku",
     description: "West-side Shinjuku examples for calmer logistics and first Tokyo stays.",
     pickIds: ["daiwaRoynetNishiShinjuku", "theKnotShinjuku"],
-    imagePath: "/images/stay/tokyo/stay-shinjuku.png",
     fallbackHref: "/areas-to-stay/tokyo/shinjuku",
     fallbackLabel: "See Shinjuku area logic",
   },
@@ -56,7 +51,6 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     label: "East Tokyo personality stay",
     description: "A more local-feeling base for travelers who care about cafes, streets, and atmosphere.",
     pickIds: ["citanHostel"],
-    imagePath: "/images/stay/tokyo/stay-east-tokyo.png",
     fallbackHref: "/areas-to-stay/tokyo/east-tokyo",
     fallbackLabel: "See East Tokyo area logic",
   },
@@ -64,7 +58,6 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     label: "Tokyo Station logistics",
     description: "Best when early Shinkansen, luggage, and transfers matter more than nightlife.",
     pickIds: [],
-    imagePath: "/images/stay/tokyo/stay-tokyo-station.png",
     fallbackHref: "/areas-to-stay/tokyo/tokyo-station",
     fallbackLabel: "See Tokyo Station area logic",
   },
@@ -171,16 +164,11 @@ export default async function LocalHotelPicksPage({ params }: Props) {
                             locale={locale}
                             pagePath={pagePath}
                             groupLabel={group.label}
-                            imagePath={group.imagePath}
-                            imageAlt={`${group.label} hotel area atmosphere in Tokyo`}
                           />
                         ))}
                       </div>
                     ) : (
-                      <div className="mt-4 overflow-hidden rounded-[18px] border border-dashed border-slate-300 bg-white">
-                        <div className="relative h-36 bg-slate-100">
-                          <Image src={group.imagePath} alt={`${group.label} hotel area atmosphere in Tokyo`} fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
-                        </div>
+                      <div className="mt-4 rounded-[18px] border border-dashed border-slate-300 bg-white">
                         <div className="p-4">
                           <p className="text-sm font-semibold text-slate-900">No individual hotel example here yet.</p>
                           <p className="mt-1 text-xs leading-5 text-slate-600">
