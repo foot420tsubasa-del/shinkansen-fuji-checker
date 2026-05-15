@@ -53,6 +53,7 @@ export type AffiliatePlacement =
   | "stay_area_detail_primary"
   | "stay_area_detail_hotel_example"
   | "stay_quick_recommendation"
+  | "stay_hub_continue_planning"
   | "guide_booking_option"
   | "jr_pass_comparison"
   | "shinkansen_ticket"

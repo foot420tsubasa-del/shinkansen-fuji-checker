@@ -168,6 +168,27 @@ export function trackCtaClick(params: {
   });
 }
 
+export function trackInternalLinkClick(params: {
+  source_page: string;
+  placement: string;
+  target_path: string;
+  link_label: string;
+  locale?: string;
+}) {
+  trackEvent({
+    action: "internal_link_click",
+    category: "navigation",
+    label: params.link_label,
+    params: {
+      source_page: params.source_page,
+      placement: params.placement,
+      target_path: params.target_path,
+      link_label: params.link_label,
+      locale: params.locale,
+    },
+  });
+}
+
 export function trackShareClick(params: {
   platform: "native" | "copy" | "x" | "facebook" | "linkedin";
   page_path?: string;
