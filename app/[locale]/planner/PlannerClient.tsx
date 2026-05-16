@@ -15,7 +15,7 @@ import {
   Sun,
   Train,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { getAffUrl, requireAffUrl } from "@/src/affiliateLinks";
@@ -407,9 +407,6 @@ function routeActionClass(action: RouteBookingAction) {
     if (action.provider === "omio") {
       return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-indigo-700 bg-indigo-700 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-indigo-800";
     }
-    if (action.linkId === "jrPass") {
-      return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]";
-    }
     return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#e66700]";
   }
   if (action.provider === "trip") {
@@ -481,17 +478,18 @@ function RouteBookingStack({
 }: RouteBookingRecommendation & { routeTitle: string; locale?: string }) {
   const railProviderActions = railActions.filter((action) => action.priority !== "text").slice(0, 2);
   const railTextActions = railActions.filter((action) => action.priority === "text");
+  const t = useTranslations("planner.routeBooking.ui");
 
   return (
     <section className="rounded-[22px] border border-sky-200 bg-sky-50/70 p-5 shadow-sm">
       <div className="flex items-center gap-2">
         <ShoppingBag className="h-4 w-4 text-sky-700" />
-        <h3 className="text-sm font-semibold text-slate-950">Recommended booking stack for {routeTitle}</h3>
+        <h3 className="text-sm font-semibold text-slate-950">{t("title", { routeTitle })}</h3>
       </div>
-      <p className="mt-1 text-[10px] text-slate-500">Recommended for this route</p>
+      <p className="mt-1 text-[10px] text-slate-500">{t("subtitle")}</p>
       <div className="mt-3 space-y-3">
         <div className="rounded-xl border border-white bg-white p-3 shadow-sm">
-          <p className="text-xs font-semibold text-slate-900">1. Rail</p>
+          <p className="text-xs font-semibold text-slate-900">{t("rail")}</p>
           <p className="mt-0.5 text-[10px] leading-4 text-slate-500">{railRecommendation}</p>
           <ProviderChoiceCTA
             actionLabel={railActionLabel}
@@ -524,7 +522,7 @@ function RouteBookingStack({
         </div>
 
         <div className="rounded-xl border border-white bg-white p-3 shadow-sm">
-          <p className="text-xs font-semibold text-slate-900">2. Hotel area</p>
+          <p className="text-xs font-semibold text-slate-900">{t("hotel")}</p>
           <p className="mt-0.5 text-[10px] leading-4 text-slate-500">{hotelRecommendation}</p>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {hotelRecommendedAreas.map((area) => (
@@ -564,7 +562,7 @@ function RouteBookingStack({
         </div>
 
         <div className="rounded-xl border border-white bg-white p-3 shadow-sm">
-          <p className="text-xs font-semibold text-slate-900">3. eSIM / arrival</p>
+          <p className="text-xs font-semibold text-slate-900">{t("arrival")}</p>
           <p className="mt-0.5 text-[10px] leading-4 text-slate-500">{arrivalRecommendation}</p>
           <div className="mt-2 flex flex-col gap-2">
             {arrivalActions.map((action) => (
@@ -575,7 +573,7 @@ function RouteBookingStack({
 
         {optionalAddOns.length > 0 ? (
           <div className="rounded-xl border border-white bg-white p-3 shadow-sm">
-            <p className="text-xs font-semibold text-slate-900">4. Optional add-ons</p>
+            <p className="text-xs font-semibold text-slate-900">{t("optional")}</p>
             <div className="mt-2 flex flex-col gap-2">
               {optionalAddOns.map((action) => (
                 <RouteBookingActionLink key={`${routeId}-optional-${action.label}`} action={action} routeId={routeId} locale={locale} />
@@ -585,17 +583,48 @@ function RouteBookingStack({
         ) : null}
       </div>
       <p className="mt-3 text-[10px] text-slate-400">
-        Partner links — we earn a small commission at no extra cost to you.
+        {t("partnerNote")}
       </p>
     </section>
   );
+}
+
+function localizeRouteBooking(
+  base: RouteBookingRecommendation,
+  t: ReturnType<typeof useTranslations<"planner">>,
+): RouteBookingRecommendation {
+  const key = `routeBooking.routes.${base.routeId}`;
+  const railActionLabels = t.raw(`${key}.railActions`) as string[];
+  const hotelAreas = t.raw(`${key}.hotelRecommendedAreas`) as string[];
+  const hotelDetailLabels = t.raw(`${key}.hotelDetailLinks`) as string[];
+  const hotelActionLabels = t.raw(`${key}.hotelActions`) as string[];
+  const arrivalActionLabels = t.raw(`${key}.arrivalActions`) as string[];
+  const optionalActionLabels = t.raw(`${key}.optionalAddOns`) as string[];
+
+  return {
+    ...base,
+    railRecommendation: t(`${key}.railRecommendation`),
+    railActionLabel: t(`${key}.railActionLabel`),
+    railActionDescription: t(`${key}.railActionDescription`),
+    railActions: base.railActions.map((action, index) => ({ ...action, label: railActionLabels[index] ?? action.label })),
+    hotelRecommendation: t(`${key}.hotelRecommendation`),
+    hotelRecommendedAreas: hotelAreas,
+    hotelPrimaryAction: base.hotelPrimaryAction
+      ? { ...base.hotelPrimaryAction, label: t(`${key}.hotelPrimaryAction`) }
+      : undefined,
+    hotelDetailLinks: base.hotelDetailLinks.map((link, index) => ({ ...link, label: hotelDetailLabels[index] ?? link.label })),
+    hotelActions: base.hotelActions.map((action, index) => ({ ...action, actionLabel: hotelActionLabels[index] ?? action.actionLabel })),
+    arrivalRecommendation: t(`${key}.arrivalRecommendation`),
+    arrivalActions: base.arrivalActions.map((action, index) => ({ ...action, label: arrivalActionLabels[index] ?? action.label })),
+    optionalAddOns: base.optionalAddOns.map((action, index) => ({ ...action, label: optionalActionLabels[index] ?? action.label })),
+  };
 }
 
 // ─── Component ──────────────────────────────────────────────────────────────
 
 export function PlannerClient() {
   const t = useTranslations("planner");
-  const locale = typeof window === "undefined" ? undefined : window.location.pathname.split("/").filter(Boolean)[0];
+  const locale = useLocale();
 
   const [plannerState, setPlannerState] = useState<{
     templateId: string;
@@ -662,7 +691,8 @@ export function PlannerClient() {
   const templateName = t(`routes.${templateData.id}.name`);
   const templateDesc = t(`routes.${templateData.id}.desc`);
   const templateJrNote = t(`routes.${templateData.id}.jrNote`);
-  const routeBooking = routeBookingRecommendations[templateData.id] ?? routeBookingRecommendations["classic-7"];
+  const baseRouteBooking = routeBookingRecommendations[templateData.id] ?? routeBookingRecommendations["classic-7"];
+  const routeBooking = localizeRouteBooking(baseRouteBooking, t);
 
   const templateCities = useMemo(
     () =>
@@ -906,7 +936,7 @@ export function PlannerClient() {
               {CHECKLIST_DATA.map((item) => {
                 const isDone = mounted && checks[item.id];
                 const isExternal = item.href?.startsWith("http") || item.affiliate?.provider === "trip";
-                const checkLinkLabel = item.id === "hotel" ? "Compare hotels" : item.hasLink ? t(`checkLinks.${item.id}`) : "";
+                const checkLinkLabel = item.id === "hotel" ? t("checkLinks.hotel") : item.hasLink ? t(`checkLinks.${item.id}`) : "";
                 return (
                   <div
                     key={item.id}
@@ -1013,7 +1043,7 @@ export function PlannerClient() {
                       <div>
                         <p className="text-xs font-semibold text-slate-800">{t(`cities.${w.cityKey}`)}</p>
                         <p className="text-[10px] text-slate-500">
-                          H {Math.round(w.high)}° / L {Math.round(w.low)}°
+                          {t("weather.highShort")} {Math.round(w.high)}° / {t("weather.lowShort")} {Math.round(w.low)}°
                         </p>
                       </div>
                     </div>

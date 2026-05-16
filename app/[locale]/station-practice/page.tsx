@@ -13,6 +13,7 @@ import {
 import { Link } from "@/i18n/navigation";
 import { branchingMissions } from "@/data/station-practice/branching/missions";
 import { FaqAccordion } from "@/components/station-practice/landing/FaqAccordion";
+import { LanguageSelector } from "../components/LanguageSelector";
 
 export const metadata: Metadata = {
   title: "Station Practice — Japanese station navigation simulator",
@@ -83,23 +84,26 @@ export default function StationPracticeLandingPage() {
               Tokyo Mega Station Practice
             </span>
           </Link>
-          <nav className="hidden items-center gap-8 text-sm text-neutral-300 sm:flex">
-            <a href="#missions" className="hover:text-white">
-              Missions
-            </a>
-            <a href="#how-it-works" className="hover:text-white">
-              How it works
-            </a>
-            <a href="#faq" className="hover:text-white">
-              FAQ
-            </a>
-          </nav>
-          <Link
-            href="/station-practice/branching"
-            className="hidden items-center gap-1.5 rounded-full bg-yellow-300 px-4 py-2 text-xs font-semibold text-black transition-colors hover:bg-yellow-200 sm:inline-flex"
-          >
-            Start Mission 1 <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
+          <div className="flex items-center gap-3">
+            <nav className="hidden items-center gap-8 text-sm text-neutral-300 lg:flex">
+              <a href="#missions" className="hover:text-white">
+                Missions
+              </a>
+              <a href="#how-it-works" className="hover:text-white">
+                How it works
+              </a>
+              <a href="#faq" className="hover:text-white">
+                FAQ
+              </a>
+            </nav>
+            <Link
+              href="/station-practice/branching"
+              className="hidden items-center gap-1.5 rounded-full bg-yellow-300 px-4 py-2 text-xs font-semibold text-black transition-colors hover:bg-yellow-200 sm:inline-flex"
+            >
+              Start Mission 1 <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+            <LanguageSelector />
+          </div>
         </div>
       </header>
 

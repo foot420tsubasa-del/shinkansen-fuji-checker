@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { PlannerClient } from "./PlannerClient";
 import { getAlternates } from "@/i18n/hreflang";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -10,12 +11,14 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "planner.meta" });
+
   return {
-    title: "Trip Planner | fujiseat",
-    description: "Plan your Japan trip — choose a route, set a departure date, and track your pre-departure checklist. Lightweight planner with weather, currency, and emergency info.",
+    title: t("title"),
+    description: t("description"),
     openGraph: {
-      title: "Trip Planner | fujiseat",
-      description: "Plan your Japan trip with route templates, weather, currency converter, and pre-departure checklist.",
+      title: t("ogTitle"),
+      description: t("ogDescription"),
       siteName: "fujiseat",
       images: [{ url: "https://fujiseat.com/og-planner.png", width: 1200, height: 630 }],
     },

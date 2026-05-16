@@ -734,7 +734,7 @@
       "esim": "購買 eSIM",
       "train": "比較",
       "transfer": "比較",
-      "hotel": "比較",
+      "hotel": "比較飯店",
       "insurance": "查看方案"
     },
     "bookings": {
@@ -774,7 +774,9 @@
     },
     "weather": {
       "title": "路線天氣（即時）",
-      "unavailable": "無法取得天氣資料"
+      "unavailable": "無法取得天氣資料",
+      "highShort": "高",
+      "lowShort": "低"
     },
     "currency": {
       "title": "匯率換算"
@@ -828,6 +830,154 @@
       "planTrip": "規劃旅程",
       "checkJrPass": "比較 JR Pass",
       "routeMap": "旅行中心"
+    },
+    "routeBooking": {
+      "ui": {
+        "title": "{routeTitle} 推薦預訂順序",
+        "subtitle": "此路線推薦",
+        "rail": "1. 鐵路",
+        "hotel": "2. 飯店區域",
+        "arrival": "3. eSIM / 抵達",
+        "optional": "4. 可選項目",
+        "partnerNote": "合作連結可能為我們帶來少量佣金，你不需支付額外費用。"
+      },
+      "routes": {
+        "express-5": {
+          "railRecommendation": "這條短途東京 → 京都路線通常單買新幹線票更簡單。除非你搭新幹線返回東京，否則通常不需要 JR Pass。",
+          "railActionLabel": "预订新干线车票",
+          "railActionDescription": "這條短途東京 → 京都路線通常單買新幹線票更簡單。除非你搭新幹線返回東京，否則通常不需要 JR Pass。",
+          "railActions": [
+            "Klook",
+            "在 Omio 比較",
+            "此路线通常不需要 JR Pass"
+          ],
+          "hotelRecommendation": "短途旅行、较少换乘，早班铁路日更轻松。",
+          "hotelRecommendedAreas": [
+            "Tokyo Station",
+            "Shinjuku"
+          ],
+          "hotelPrimaryAction": "選擇東京住宿點",
+          "hotelDetailLinks": [
+            "Tokyo Station details",
+            "Shinjuku details"
+          ],
+          "hotelActions": [
+            "比较东京站附近酒店"
+          ],
+          "arrivalRecommendation": "落地前准备好数据和机场移动。",
+          "arrivalActions": [
+            "取得日本 eSIM",
+            "規劃機場接送"
+          ],
+          "optionalAddOns": [
+            "查看旅行保險"
+          ]
+        },
+        "classic-7": {
+          "railRecommendation": "東京 → 京都 / 大阪通常單買新幹線票更簡單。只有加入廣島、多段長距離或返回東京時才比較 JR Pass。",
+          "railActionLabel": "预订新干线车票",
+          "railActionDescription": "東京 → 京都 / 大阪通常單買新幹線票更簡單。只有加入廣島、多段長距離或返回東京時才比較 JR Pass。",
+          "railActions": [
+            "Klook",
+            "在 Omio 比較",
+            "加入广岛或返回东京时查看 JR Pass"
+          ],
+          "hotelRecommendation": "首次东京、京都 / 大阪转移和机场交通的平衡较好。",
+          "hotelRecommendedAreas": [
+            "Shinjuku",
+            "Ueno / Asakusa",
+            "Tokyo Station"
+          ],
+          "hotelPrimaryAction": "選擇東京住宿點",
+          "hotelDetailLinks": [
+            "Shinjuku details",
+            "Ueno details",
+            "Asakusa details",
+            "Tokyo Station details"
+          ],
+          "hotelActions": [
+            "比较新宿酒店"
+          ],
+          "arrivalRecommendation": "先准备数据和机场接送，活动可以稍后。",
+          "arrivalActions": [
+            "取得日本 eSIM",
+            "規劃機場接送"
+          ],
+          "optionalAddOns": [
+            "查看旅行保險"
+          ]
+        },
+        "full-10": {
+          "railRecommendation": "這條路線混合富士、箱根和前往京都的新幹線，先比較路線，再預訂符合最終順序的車段。",
+          "railActionLabel": "比较火车路线",
+          "railActionDescription": "這條路線混合富士、箱根和前往京都的新幹線，先比較路線，再預訂符合最終順序的車段。",
+          "railActions": [
+            "在 Omio 比較",
+            "Klook",
+            "增加 JR 移动时再考虑 JR Pass"
+          ],
+          "hotelRecommendation": "东京观光和后续铁路移动的平衡较好。",
+          "hotelRecommendedAreas": [
+            "Shinjuku",
+            "Tokyo Station"
+          ],
+          "hotelPrimaryAction": "選擇東京住宿點",
+          "hotelDetailLinks": [
+            "Shinjuku details",
+            "Tokyo Station details"
+          ],
+          "hotelActions": [
+            "比较新宿酒店",
+            "比较东京站附近酒店"
+          ],
+          "arrivalRecommendation": "用 eSIM 和机场接送规划让第一个东京日更灵活。",
+          "arrivalActions": [
+            "取得日本 eSIM",
+            "規劃機場接送"
+          ],
+          "optionalAddOns": [
+            "查看旅行保險"
+          ]
+        },
+        "deep-14": {
+          "railRecommendation": "這條路線包含更多長距離移動，購買單獨車票前先比較 JR Pass。",
+          "railActionLabel": "查看 JR Pass 选项",
+          "railActionDescription": "這條路線包含更多長距離移動，購買單獨車票前先比較 JR Pass。",
+          "railActions": [
+            "Klook",
+            "在 Omio 比較",
+            "在 Klook 预订已确定的新干线段"
+          ],
+          "hotelRecommendation": "多天长距离铁路和行李移动让交通逻辑更重要。",
+          "hotelRecommendedAreas": [
+            "Tokyo Station",
+            "Ueno"
+          ],
+          "hotelPrimaryAction": "選擇東京住宿點",
+          "hotelDetailLinks": [
+            "Tokyo Station details",
+            "Ueno details"
+          ],
+          "hotelActions": [
+            "比较东京站附近酒店",
+            "比较上野酒店"
+          ],
+          "arrivalRecommendation": "落地前准备 eSIM 和机场接送。",
+          "arrivalActions": [
+            "取得日本 eSIM",
+            "規劃機場接送"
+          ],
+          "optionalAddOns": [
+            "查看旅行保險"
+          ]
+        }
+      }
+    },
+    "meta": {
+      "title": "旅行規劃器 | fujiseat",
+      "description": "規劃你的日本旅行：選擇路線、設定出發日期，並追蹤出發前清單。包含天氣、匯率和緊急資訊的輕量規劃器。",
+      "ogTitle": "旅行規劃器 | fujiseat",
+      "ogDescription": "用路線範本、天氣、匯率轉換和出發前清單規劃日本旅行。"
     }
   },
   "feedback": {
@@ -1415,7 +1565,249 @@
     "seeLocalHotelPicks": "查看日本在地視角飯店推薦",
     "bestFor": "適合",
     "whyThisLocalPick": "為什麼推薦這間",
-    "notIdealFor": "不太適合"
+    "notIdealFor": "不太適合",
+    "page": {
+      "meta": {
+        "title": "Japanese Local Hotel Picks for Tokyo, Kyoto and Osaka | fujiseat",
+        "description": "A curated set of hotel picks in Tokyo, Kyoto and Osaka based on Japanese local area logic, including calmer Shinjuku stays, Kyoto Station bases, family-friendly rooms and practical Osaka locations.",
+        "ogTitle": "Japanese Local Hotel Picks for Tokyo, Kyoto and Osaka",
+        "ogDescription": "A curated set of hotel picks in Tokyo, Kyoto and Osaka based on Japanese local area logic, including calmer Shinjuku stays, Kyoto Station bases, family-friendly rooms and practical Osaka locations."
+      },
+      "breadcrumb": "在地飯店範例",
+      "cityLabels": {
+        "Tokyo": "東京",
+        "Kyoto": "京都",
+        "Osaka": "大阪"
+      },
+      "hero": {
+        "eyebrow": "飯店範例",
+        "title": "日本在地飯店範例",
+        "subtitle": "這不是排名，而是依照東京、京都和大阪的區域邏輯給出的實用飯店範例。"
+      },
+      "tokyo": {
+        "title": "Tokyo examples by area logic",
+        "guideLink": "Tokyo stay area guide",
+        "groups": {
+          "calmShinjuku": {
+            "label": "Calm Shinjuku",
+            "description": "Shinjuku access without sleeping in the loudest nightlife blocks.",
+            "fallbackLabel": "See Shinjuku area logic"
+          },
+          "familyGroup": {
+            "label": "Family / group",
+            "description": "Apartment-style rooms and practical layouts for families or friends.",
+            "fallbackLabel": "See Shinjuku area logic"
+          },
+          "nishiShinjuku": {
+            "label": "Practical Nishi-Shinjuku",
+            "description": "West-side Shinjuku examples for calmer logistics and first Tokyo stays.",
+            "fallbackLabel": "See Shinjuku area logic"
+          },
+          "eastTokyo": {
+            "label": "East Tokyo personality stay",
+            "description": "A more local-feeling base for travelers who care about cafes, streets, and atmosphere.",
+            "fallbackLabel": "See East Tokyo area logic"
+          },
+          "tokyoStation": {
+            "label": "Tokyo Station logistics",
+            "description": "Best when early Shinkansen, luggage, and transfers matter more than nightlife.",
+            "fallbackLabel": "See Tokyo Station area logic"
+          }
+        }
+      },
+      "empty": {
+        "title": "No individual hotel example here yet.",
+        "body": "Use the area guide first, then compare hotels once this base fits your route."
+      },
+      "citySection": {
+        "title": "{city} examples by area logic",
+        "intros": {
+          "Kyoto": "Examples that map to station convenience, quieter Kyoto streets, and temple-side walking.",
+          "Osaka": "Examples that map to Namba food access, KIX convenience, group stays, and Kita-side logistics."
+        },
+        "kyotoGuide": "Kyoto stay area guide",
+        "osakaGuide": "Osaka stay area guide"
+      },
+      "continue": {
+        "eyebrow": "Continue planning",
+        "links": [
+          {
+            "href": "/areas-to-stay/tokyo-first-time",
+            "label": "Tokyo stay area guide",
+            "desc": "Choose Shinjuku, Ueno, Asakusa, Tokyo Station, or East Tokyo."
+          },
+          {
+            "href": "/areas-to-stay/kyoto-station-vs-gion",
+            "label": "Kyoto stay area guide",
+            "desc": "Pick between station convenience and Kyoto atmosphere."
+          },
+          {
+            "href": "/areas-to-stay/namba-vs-umeda",
+            "label": "Osaka stay area guide",
+            "desc": "Compare Osaka's two main hotel zones."
+          },
+          {
+            "href": "/plan-your-trip",
+            "label": "Plan Your Trip",
+            "desc": "Rail, hotels, arrival setup, and route order."
+          }
+        ]
+      }
+    },
+    "picks": {
+      "yuenShinjuku": {
+        "bestFor": "適合：Japanese-modern Shinjuku stay, couples, calmer atmosphere",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Good if you want Shinjuku access without sleeping deep inside the loudest nightlife blocks.",
+        "notIdealFor": "不太適合：Travelers who need to be right next to JR Shinjuku Station.",
+        "tags": [
+          "Japanese-modern",
+          "calm Shinjuku",
+          "couples"
+        ]
+      },
+      "mimaruShinjukuWest": {
+        "bestFor": "適合：Families, groups, longer stays",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Apartment-style rooms make more sense for families than small business hotels around Shinjuku.",
+        "notIdealFor": "不太適合：Solo travelers who only need a very basic low-budget bed.",
+        "tags": [
+          "family",
+          "group",
+          "kitchen"
+        ]
+      },
+      "daiwaRoynetNishiShinjuku": {
+        "bestFor": "適合：Calm practical stay, business, first Tokyo base",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：A practical west-side Shinjuku option away from the loudest nightlife blocks.",
+        "notIdealFor": "不太適合：Travelers who want nightlife immediately outside the hotel.",
+        "tags": [
+          "practical",
+          "calm",
+          "west Shinjuku"
+        ]
+      },
+      "theKnotShinjuku": {
+        "bestFor": "適合：Design, park-side stay, value-conscious travelers",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Better if you like the west-side park and government building area rather than Kabukicho.",
+        "notIdealFor": "不太適合：Travelers who want to be directly at JR Shinjuku Station.",
+        "tags": [
+          "design",
+          "park-side",
+          "Nishi-Shinjuku"
+        ]
+      },
+      "citanHostel": {
+        "bestFor": "適合：Solo travelers, friends, hostel/cafe/bar atmosphere",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：A social East Tokyo base with cafe and bar culture, better as a personality pick than a family hotel.",
+        "notIdealFor": "不太適合：Families who want a quiet full-service hotel.",
+        "tags": [
+          "hostel",
+          "social",
+          "East Tokyo"
+        ]
+      },
+      "theThousandKyoto": {
+        "bestFor": "適合：Polished Kyoto Station stay, couples, first Kyoto trip",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：A more polished Kyoto Station-side option for travelers who want convenience without a purely business-hotel feel.",
+        "notIdealFor": "不太適合：Travelers who want to sleep inside old-town Gion.",
+        "tags": [
+          "polished",
+          "Kyoto Station",
+          "couples"
+        ]
+      },
+      "mimaruKyotoStation": {
+        "bestFor": "適合：Families, groups, longer stays",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Apartment-style rooms near Kyoto Station make luggage, day trips, and family travel easier.",
+        "notIdealFor": "不太適合：Travelers who want a ryokan-style atmosphere.",
+        "tags": [
+          "family",
+          "group",
+          "kitchen",
+          "Kyoto Station"
+        ]
+      },
+      "nohgaKiyomizu": {
+        "bestFor": "適合：Local culture, design, temple-side walking",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：A good pick if you want Kyoto atmosphere without staying deep in the most crowded Gion lanes.",
+        "notIdealFor": "不太適合：Travelers who prioritize being next to Kyoto Station.",
+        "tags": [
+          "local culture",
+          "design",
+          "Kiyomizu"
+        ]
+      },
+      "sequenceKyotoGojo": {
+        "bestFor": "適合：Practical Kyoto base, value, smart hotel",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Good balance between Kyoto Station access and central Kyoto streets.",
+        "notIdealFor": "不太適合：Travelers who want classic ryokan service.",
+        "tags": [
+          "practical",
+          "Gojo",
+          "Shijo-Karasuma"
+        ]
+      },
+      "nokuKyoto": {
+        "bestFor": "適合：Quiet Kyoto stay, Imperial Palace area, calmer streets",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Better for travelers who want a quieter side of Kyoto rather than the busiest tourist streets.",
+        "notIdealFor": "不太適合：Travelers who want nightlife or station-first convenience.",
+        "tags": [
+          "quiet",
+          "Imperial Palace",
+          "calm Kyoto"
+        ]
+      },
+      "hotelRoyalClassicOsaka": {
+        "bestFor": "適合：First Osaka trip, Namba convenience, families",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：A practical Namba pick when you want food, transport, and easy orientation.",
+        "notIdealFor": "不太適合：Travelers who want a very quiet residential area.",
+        "tags": [
+          "Namba",
+          "practical",
+          "first Osaka"
+        ]
+      },
+      "swissotelNankaiOsaka": {
+        "bestFor": "適合：Kansai Airport access, upper stay, families",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Strong if you want Namba plus simple KIX access via Nankai.",
+        "notIdealFor": "不太適合：Budget travelers.",
+        "tags": [
+          "KIX access",
+          "Namba",
+          "upper stay"
+        ]
+      },
+      "mimaruOsakaNamba": {
+        "bestFor": "適合：Families, groups, playful stay",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Apartment-style rooms and group-friendly setup work well for families in Osaka.",
+        "notIdealFor": "不太適合：Travelers who want a quiet luxury hotel.",
+        "tags": [
+          "family",
+          "group",
+          "kitchen",
+          "Namba"
+        ]
+      },
+      "hotelHankyuRespire": {
+        "bestFor": "適合：Transport, Kyoto day trips, practical Osaka base",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：A practical Umeda pick when rail access matters more than nightlife.",
+        "notIdealFor": "不太適合：Travelers who want to be near Dotonbori every night.",
+        "tags": [
+          "Umeda",
+          "transport",
+          "practical"
+        ]
+      },
+      "zentisOsaka": {
+        "bestFor": "適合：Design, adult stay, polished Kita-side base",
+        "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Better for travelers who want a calmer, more polished north Osaka base.",
+        "notIdealFor": "不太適合：Families who want maximum room size and kitchen facilities.",
+        "tags": [
+          "design",
+          "Kitashinchi",
+          "adult stay"
+        ]
+      }
+    }
   },
   "suggestedNextSteps": {
     "heading": "建議的下一步"
@@ -1451,6 +1843,361 @@
     "index": {
       "seeLocalPicksTitle": "想看具體的飯店推薦？",
       "seeLocalPicksBody": "查看面向東京、京都和大阪的在地飯店精選——按區域邏輯挑選，而不是一般排行榜。"
+    }
+  },
+  "areasToStayHub": {
+    "meta": {
+      "title": "日本住哪裡 — 東京、京都、大阪與富士山住宿區域指南",
+      "description": "依照城市、路線、機場交通、新幹線計畫和旅行風格選擇日本住宿區域。比較東京、京都、大阪和富士山周邊的飯店區域。",
+      "ogDescription": "依照城市、路線、機場、新幹線和旅行風格選擇日本住宿區域。"
+    },
+    "breadcrumb": {
+      "home": "首頁",
+      "current": "住宿區域"
+    },
+    "hero": {
+      "eyebrow": "住宿區域導覽",
+      "title": "日本住哪裡",
+      "subtitle": "訂飯店前先選好城市和區域。依照路線、機場、新幹線計畫和旅行風格，從東京、京都、大阪或富士山開始。",
+      "primaryCta": "先看東京住宿指南",
+      "secondaryCta": "查看在地飯店範例"
+    },
+    "quickAnswerTitle": "快速答案",
+    "quickAnswers": [
+      "第一次去東京 -> 從東京首次旅客區域指南開始。",
+      "第一次去京都 -> 比較京都站、祇園和河原町。",
+      "第一次去大阪 -> 比較難波、梅田和新大阪。",
+      "一早搭新幹線 -> 選擇方便行李和早班車的住宿點。",
+      "想住在富士山附近 -> 想過夜看富士山可選河口湖。"
+    ],
+    "citySection": {
+      "eyebrow": "先選城市",
+      "title": "選擇你的城市"
+    },
+    "cityCards": {
+      "tokyo": {
+        "title": "東京",
+        "subtitle": "適合第一次日本旅行、夜生活、機場選擇和新幹線行程規劃。",
+        "cta": "打開東京指南",
+        "placementLabel": "東京城市卡片"
+      },
+      "kyoto": {
+        "title": "京都",
+        "subtitle": "適合寺廟、經典氛圍、傳統街道和周邊一日遊。",
+        "cta": "打開京都指南",
+        "placementLabel": "京都城市卡片"
+      },
+      "osaka": {
+        "title": "大阪",
+        "subtitle": "適合美食、夜生活、關西機場交通，以及京都 / 奈良一日遊。",
+        "cta": "打開大阪指南",
+        "placementLabel": "大阪城市卡片"
+      },
+      "kawaguchiko": {
+        "title": "富士山 / 河口湖",
+        "subtitle": "如果你想在富士山附近住一晚，而不是只從新幹線上看一眼。",
+        "cta": "尋找富士山景住宿",
+        "placementLabel": "河口湖城市卡片"
+      }
+    },
+    "localPicks": {
+      "eyebrow": "飯店範例",
+      "title": "需要實際飯店範例？",
+      "body": "查看東京、京都和大阪的實用飯店範例。這不是排名，而是依照區域邏輯給你的起點。",
+      "cta": "查看在地飯店"
+    },
+    "problemSection": {
+      "eyebrow": "路線邏輯",
+      "title": "依旅行問題選擇"
+    },
+    "problemCards": {
+      "firstTime": {
+        "title": "我是第一次去日本",
+        "cta": "從東京開始"
+      },
+      "earlyShinkansen": {
+        "title": "我要趕早班新幹線",
+        "cta": "選擇適合鐵路移動的住宿點"
+      },
+      "narita": {
+        "title": "我從成田抵達",
+        "cta": "比較東京住宿點"
+      },
+      "temples": {
+        "title": "我想要寺廟和老街氛圍",
+        "cta": "比較京都區域"
+      },
+      "foodNightlife": {
+        "title": "我想要美食和夜生活",
+        "cta": "比較大阪區域"
+      },
+      "fujiOvernight": {
+        "title": "我想住一晚看富士山",
+        "cta": "查看河口湖"
+      }
+    },
+    "featuredGuides": {
+      "eyebrow": "現有指南",
+      "title": "精選住宿指南",
+      "groups": {
+        "tokyo": "東京",
+        "kyoto": "京都",
+        "osaka": "大阪",
+        "fuji": "富士山"
+      },
+      "guides": {
+        "tokyo-first-time": {
+          "title": "東京住哪裡 — 首次旅客指南",
+          "description": "比較新宿、上野、淺草、東京站和更安靜的東京東部。",
+          "tags": [
+            "Tokyo",
+            "First-time",
+            "Area guide"
+          ]
+        },
+        "where-to-stay-before-shinkansen": {
+          "title": "在東京搭新幹線前住哪裡",
+          "description": "如果行李和東京站早班出發很重要，先看這篇。",
+          "tags": [
+            "Tokyo",
+            "Shinkansen",
+            "Luggage"
+          ]
+        },
+        "tokyo-station-vs-shinjuku": {
+          "title": "東京站 vs 新宿",
+          "description": "比較鐵路交通、餐飲夜生活和首次旅行便利性。",
+          "tags": [
+            "Tokyo Station",
+            "Shinjuku"
+          ]
+        },
+        "ueno-vs-shinjuku": {
+          "title": "上野 vs 新宿",
+          "description": "在成田機場交通和東京西側活力之間選擇。",
+          "tags": [
+            "Ueno",
+            "Shinjuku"
+          ]
+        },
+        "asakusa-vs-ueno": {
+          "title": "淺草 vs 上野",
+          "description": "比較老東京氛圍和實用鐵路交通。",
+          "tags": [
+            "Asakusa",
+            "Ueno"
+          ]
+        },
+        "kyoto-first-time": {
+          "title": "第一次去京都住哪裡",
+          "description": "比較京都站、河原町 / 四條、祇園、嵐山和更安靜的京都北部。",
+          "tags": [
+            "Kyoto",
+            "First-time",
+            "Area guide"
+          ]
+        },
+        "kyoto-station-vs-gion": {
+          "title": "京都站 vs 祇園",
+          "description": "決定是交通便利還是經典京都氛圍更重要。",
+          "tags": [
+            "Kyoto Station",
+            "Gion"
+          ]
+        },
+        "osaka-first-time": {
+          "title": "第一次去大阪住哪裡",
+          "description": "比較難波、梅田、新大阪、天王寺和較安靜的市中心區域。",
+          "tags": [
+            "Osaka",
+            "First-time",
+            "Area guide"
+          ]
+        },
+        "namba-vs-umeda": {
+          "title": "難波 vs 梅田",
+          "description": "在美食夜生活和鐵路交通之間選擇。",
+          "tags": [
+            "Namba",
+            "Umeda"
+          ]
+        },
+        "shin-osaka-vs-namba": {
+          "title": "新大阪 vs 難波",
+          "description": "判斷新幹線交通是否應決定你在大阪的住宿點。",
+          "tags": [
+            "Shin-Osaka",
+            "Namba"
+          ]
+        },
+        "kawaguchiko": {
+          "title": "河口湖住哪裡 — 富士山景飯店",
+          "description": "適合在河口湖周邊住一晚看富士山。",
+          "tags": [
+            "Mt. Fuji",
+            "Kawaguchiko",
+            "Overnight"
+          ]
+        }
+      }
+    },
+    "continuePlanning": {
+      "title": "繼續規劃",
+      "plan": "規劃行程",
+      "seat": "座位查詢",
+      "airport": "機場接送",
+      "esim": "日本 eSIM"
+    }
+  },
+  "planYourTrip": {
+    "meta": {
+      "title": "選好新幹線座位後的日本旅行準備 | fujiseat",
+      "description": "你已確認富士山側新幹線座位。現在準備鐵路、抵達、飯店、行李、富士山和城市活動。",
+      "ogTitle": "選好新幹線座位後的日本旅行準備",
+      "ogDescription": "你已確認富士山側座位。現在準備剩下的日本行程。"
+    },
+    "providers": {
+      "omio": "Compare on Omio",
+      "readGuide": "Read guide"
+    },
+    "hero": {
+      "eyebrow": "fujiseat 預訂路徑",
+      "title": "日本旅行預訂指南",
+      "subtitle": "你已找到富士山側新幹線座位。接著按正確順序準備剩下的日本行程。",
+      "shinkansenCta": "預訂新幹線車票",
+      "plannerCta": "打開行程規劃器"
+    },
+    "bookingOrder": {
+      "eyebrow": "依這個順序預訂",
+      "items": [
+        "確認新幹線方向和富士山側座位。",
+        "選擇鐵路：先看單程票，只有路線適合時才考慮 JR Pass。",
+        "先選飯店區域，再安排活動。",
+        "落地前準備好抵達當天的必需事項。"
+      ],
+      "guideCta": "閱讀富士山側座位指南"
+    },
+    "rail": {
+      "eyebrow": "鐵路選擇",
+      "title": "新幹線車票 vs JR Pass",
+      "subtitle": "選擇符合你路線的鐵路方案。",
+      "singleTicket": {
+        "title": "單程新幹線車票",
+        "summary": "適合簡單的城市間移動日。",
+        "bullets": [
+          "東京 → 京都 / 大阪",
+          "單程或簡單路線",
+          "首次 5–7 天旅行"
+        ],
+        "action": "預訂新幹線車票",
+        "description": "適合東京 → 京都 / 大阪、單程或首次旅行的簡單路線。"
+      },
+      "jrPass": {
+        "title": "JR Pass",
+        "summary": "只有路線包含足夠 JR 長距離移動時才適合。",
+        "bullets": [
+          "廣島",
+          "搭新幹線返回東京",
+          "多段長距離 JR 移動"
+        ],
+        "action": "查看 JR Pass 選項",
+        "description": "如果路線包含廣島、多段長距離 JR，或搭新幹線返回東京，會更適合。"
+      }
+    },
+    "hotel": {
+      "eyebrow": "飯店區域決策",
+      "title": "預訂飯店前先選擇東京住宿區域",
+      "subtitle": "飯店區域會影響機場交通、新幹線日、行李移動，以及你在東京最初幾晚的體驗。",
+      "hubCta": "比較東京住宿區域",
+      "cards": {
+        "shinjuku": {
+          "title": "首次旅行便利",
+          "area": "新宿",
+          "reason": "想把餐飲、夜生活、購物和彈性鐵路交通集中在一個基地時適合。",
+          "detailLabel": "查看新宿詳情",
+          "hotelActionLabel": "比較新宿飯店"
+        },
+        "uenoAsakusa": {
+          "title": "成田交通 / 性價比",
+          "area": "上野或淺草",
+          "reason": "如果成田抵達、較高性價比、博物館、寺廟或老東京氛圍更重要，適合這裡。",
+          "detailLabel": "查看上野詳情",
+          "extraDetailLabel": "查看淺草詳情",
+          "hotelActionLabel": "比較上野 / 淺草飯店"
+        },
+        "tokyoStation": {
+          "title": "早班新幹線",
+          "area": "東京站",
+          "reason": "行李、早班京都 / 大阪出發和清楚車站動線重要時適合。",
+          "detailLabel": "查看東京站詳情",
+          "hotelActionLabel": "比較東京站附近飯店"
+        },
+        "eastTokyo": {
+          "title": "安靜的東京在地感",
+          "area": "東京東部",
+          "reason": "適合安靜散步、咖啡、河邊街區和節奏較慢的第二基地。",
+          "detailLabel": "查看東京東部詳情"
+        }
+      }
+    },
+    "arrival": {
+      "eyebrow": "抵達準備",
+      "title": "準備在日本的第一個小時",
+      "subtitle": "保持實用：行動數據、機場移動，以及抵達當天需要的車站基礎。",
+      "esim": {
+        "title": "日本 eSIM",
+        "description": "離開機場前就能使用地圖、翻譯和交通 App。",
+        "cta": "取得日本 eSIM"
+      },
+      "airport": {
+        "title": "機場接送",
+        "description": "行李和時間重要時，先預訂或比較從機場出發的第一段移動。",
+        "cta": "預訂機場接送"
+      },
+      "station": {
+        "title": "車站準備",
+        "description": "第一次搭車前練習出口、轉乘閘口和月台標示。",
+        "cta": "開始車站練習"
+      }
+    },
+    "activities": {
+      "eyebrow": "活動",
+      "title": "依城市探索",
+      "subtitle": "路線、飯店和抵達準備穩定後，再加入活動。",
+      "cards": {
+        "tokyo": {
+          "title": "東京",
+          "description": "觀光團、美食散步、觀景台和首次旅行活動。",
+          "cta": "瀏覽東京活動",
+          "imageAlt": "東京住宿和活動區域"
+        },
+        "kyoto": {
+          "title": "京都",
+          "description": "和服租借、寺廟、導覽散步和經典京都體驗。",
+          "cta": "瀏覽京都活動",
+          "imageAlt": "夕陽下的京都寺廟區域"
+        },
+        "osaka": {
+          "title": "大阪",
+          "description": "美食、通票、主題樂園和適合夜晚的活動。",
+          "cta": "瀏覽大阪活動",
+          "imageAlt": "夜晚的大阪道頓堀運河"
+        },
+        "fujiHakone": {
+          "title": "富士山 / 箱根",
+          "description": "主要路線確定後，可加入山側一日遊或過夜停留。",
+          "cta": "瀏覽富士地區項目",
+          "imageAlt": "黃昏的富士山和河口湖"
+        }
+      }
+    },
+    "optional": {
+      "eyebrow": "可選項目",
+      "title": "有用，但不是第一步決策",
+      "insurance": "查看旅行保險",
+      "station": "車站練習",
+      "commandCenter": "Command Center",
+      "localTokyo": "在地東京"
     }
   }
 }

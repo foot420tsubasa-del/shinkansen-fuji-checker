@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Check, ChevronDown, Globe2 } from "lucide-react";
 import { useLocale } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 const LOCALE_OPTIONS: Record<string, { code: string; label: string }> = {
@@ -17,6 +17,31 @@ const LOCALE_OPTIONS: Record<string, { code: string; label: string }> = {
   de: { code: "DE", label: "Deutsch" },
   ru: { code: "RU", label: "Русский" },
 };
+
+const localeSet = new Set<string>(routing.locales);
+
+function stripLocalePrefix(pathname: string) {
+  const normalizedPath = pathname || "/";
+  const segments = normalizedPath.split("/");
+  const maybeLocale = segments[1];
+
+  if (!maybeLocale || !localeSet.has(maybeLocale)) {
+    return normalizedPath;
+  }
+
+  const pathWithoutLocale = `/${segments.slice(2).join("/")}`;
+  return pathWithoutLocale === "/" ? "/" : pathWithoutLocale.replace(/\/$/, "");
+}
+
+function getLocalizedPathname(pathname: string, nextLocale: string) {
+  const basePath = stripLocalePrefix(pathname);
+
+  if (nextLocale === routing.defaultLocale) {
+    return basePath;
+  }
+
+  return basePath === "/" ? `/${nextLocale}` : `/${nextLocale}${basePath}`;
+}
 
 export function LanguageSelector() {
   const locale = useLocale();
@@ -53,9 +78,16 @@ export function LanguageSelector() {
 
   const handleSelect = (nextLocale: string) => {
     setOpen(false);
-    if (nextLocale !== locale) {
-      router.replace(pathname, { locale: nextLocale });
+
+    if (nextLocale === locale) {
+      return;
     }
+
+    const nextPathname = getLocalizedPathname(pathname, nextLocale);
+    const search = window.location.search;
+    const hash = window.location.hash;
+
+    router.replace(`${nextPathname}${search}${hash}`);
   };
 
   return (

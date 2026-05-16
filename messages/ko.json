@@ -734,7 +734,7 @@
       "esim": "eSIM 구매",
       "train": "비교하기",
       "transfer": "비교하기",
-      "hotel": "비교하기",
+      "hotel": "호텔 비교",
       "insurance": "플랜 보기"
     },
     "bookings": {
@@ -774,7 +774,9 @@
     },
     "weather": {
       "title": "루트 날씨 (실시간)",
-      "unavailable": "날씨 데이터를 불러올 수 없습니다"
+      "unavailable": "날씨 데이터를 불러올 수 없습니다",
+      "highShort": "최고",
+      "lowShort": "최저"
     },
     "currency": {
       "title": "환율 계산기"
@@ -828,6 +830,154 @@
       "planTrip": "여행 계획",
       "checkJrPass": "JR 패스 비교",
       "routeMap": "여행 센터"
+    },
+    "routeBooking": {
+      "ui": {
+        "title": "{routeTitle} 추천 예약 순서",
+        "subtitle": "이 동선에 추천",
+        "rail": "1. 철도",
+        "hotel": "2. 호텔 지역",
+        "arrival": "3. eSIM / 도착",
+        "optional": "4. 선택 옵션",
+        "partnerNote": "제휴 링크를 통해 추가 비용 없이 소정의 수수료를 받을 수 있습니다."
+      },
+      "routes": {
+        "express-5": {
+          "railRecommendation": "이 짧은 도쿄 → 교토 동선은 단일 신칸센 티켓이 보통 더 쉽습니다. 도쿄로 신칸센 복귀가 없다면 JR Pass는 보통 필요 없습니다.",
+          "railActionLabel": "신칸센 티켓 예약",
+          "railActionDescription": "이 짧은 도쿄 → 교토 동선은 단일 신칸센 티켓이 보통 더 쉽습니다. 도쿄로 신칸센 복귀가 없다면 JR Pass는 보통 필요 없습니다.",
+          "railActions": [
+            "Klook",
+            "Omio에서 비교",
+            "이 동선은 JR Pass가 보통 필요 없음"
+          ],
+          "hotelRecommendation": "짧은 여행, 적은 환승, 이른 철도 이동에 유리합니다.",
+          "hotelRecommendedAreas": [
+            "Tokyo Station",
+            "Shinjuku"
+          ],
+          "hotelPrimaryAction": "도쿄 거점 선택",
+          "hotelDetailLinks": [
+            "Tokyo Station details",
+            "Shinjuku details"
+          ],
+          "hotelActions": [
+            "도쿄역 근처 호텔 비교"
+          ],
+          "arrivalRecommendation": "도착 전 데이터와 공항 이동을 준비하세요.",
+          "arrivalActions": [
+            "일본 eSIM 받기",
+            "공항 이동 계획"
+          ],
+          "optionalAddOns": [
+            "여행 보험 확인"
+          ]
+        },
+        "classic-7": {
+          "railRecommendation": "도쿄 → 교토 / 오사카는 단일 신칸센 티켓이 보통 더 쉽습니다. 히로시마, 여러 장거리 이동, 도쿄 복귀가 있을 때만 JR Pass를 비교하세요.",
+          "railActionLabel": "신칸센 티켓 예약",
+          "railActionDescription": "도쿄 → 교토 / 오사카는 단일 신칸센 티켓이 보통 더 쉽습니다. 히로시마, 여러 장거리 이동, 도쿄 복귀가 있을 때만 JR Pass를 비교하세요.",
+          "railActions": [
+            "Klook",
+            "Omio에서 비교",
+            "히로시마/도쿄 복귀 추가 시 JR Pass 확인"
+          ],
+          "hotelRecommendation": "첫 도쿄, 교토 / 오사카 이동, 공항 접근의 균형이 좋습니다.",
+          "hotelRecommendedAreas": [
+            "Shinjuku",
+            "Ueno / Asakusa",
+            "Tokyo Station"
+          ],
+          "hotelPrimaryAction": "도쿄 거점 선택",
+          "hotelDetailLinks": [
+            "Shinjuku details",
+            "Ueno details",
+            "Asakusa details",
+            "Tokyo Station details"
+          ],
+          "hotelActions": [
+            "신주쿠 호텔 비교"
+          ],
+          "arrivalRecommendation": "데이터와 공항 이동을 먼저 준비하세요.",
+          "arrivalActions": [
+            "일본 eSIM 받기",
+            "공항 이동 계획"
+          ],
+          "optionalAddOns": [
+            "여행 보험 확인"
+          ]
+        },
+        "full-10": {
+          "railRecommendation": "후지, 하코네, 교토행 신칸센이 섞인 동선이므로 먼저 경로를 비교한 뒤 확정 순서에 맞는 신칸센을 예약하세요.",
+          "railActionLabel": "열차 경로 비교",
+          "railActionDescription": "후지, 하코네, 교토행 신칸센이 섞인 동선이므로 먼저 경로를 비교한 뒤 확정 순서에 맞는 신칸센을 예약하세요.",
+          "railActions": [
+            "Omio에서 비교",
+            "Klook",
+            "JR 이동 추가 시 JR Pass 조건부"
+          ],
+          "hotelRecommendation": "도쿄 관광과 이후 철도 이동의 균형이 좋습니다.",
+          "hotelRecommendedAreas": [
+            "Shinjuku",
+            "Tokyo Station"
+          ],
+          "hotelPrimaryAction": "도쿄 거점 선택",
+          "hotelDetailLinks": [
+            "Shinjuku details",
+            "Tokyo Station details"
+          ],
+          "hotelActions": [
+            "신주쿠 호텔 비교",
+            "도쿄역 근처 호텔 비교"
+          ],
+          "arrivalRecommendation": "eSIM과 공항 이동으로 첫 도쿄 날을 유연하게 유지하세요.",
+          "arrivalActions": [
+            "일본 eSIM 받기",
+            "공항 이동 계획"
+          ],
+          "optionalAddOns": [
+            "여행 보험 확인"
+          ]
+        },
+        "deep-14": {
+          "railRecommendation": "장거리 이동이 많으므로 개별 티켓 구매 전 JR Pass를 비교하세요.",
+          "railActionLabel": "JR Pass 옵션 확인",
+          "railActionDescription": "장거리 이동이 많으므로 개별 티켓 구매 전 JR Pass를 비교하세요.",
+          "railActions": [
+            "Klook",
+            "Omio에서 비교",
+            "확정된 신칸센 구간 Klook 예약"
+          ],
+          "hotelRecommendation": "여러 장거리 철도일과 짐 이동으로 물류가 더 중요합니다.",
+          "hotelRecommendedAreas": [
+            "Tokyo Station",
+            "Ueno"
+          ],
+          "hotelPrimaryAction": "도쿄 거점 선택",
+          "hotelDetailLinks": [
+            "Tokyo Station details",
+            "Ueno details"
+          ],
+          "hotelActions": [
+            "도쿄역 근처 호텔 비교",
+            "우에노 호텔 비교"
+          ],
+          "arrivalRecommendation": "도착 전 eSIM과 공항 이동을 준비하세요.",
+          "arrivalActions": [
+            "일본 eSIM 받기",
+            "공항 이동 계획"
+          ],
+          "optionalAddOns": [
+            "여행 보험 확인"
+          ]
+        }
+      }
+    },
+    "meta": {
+      "title": "여행 플래너 | fujiseat",
+      "description": "일본 여행을 계획하세요. 동선을 고르고, 출발일을 설정하고, 출발 전 체크리스트를 확인합니다. 날씨, 환율, 긴급 정보가 포함된 가벼운 플래너입니다.",
+      "ogTitle": "여행 플래너 | fujiseat",
+      "ogDescription": "동선 템플릿, 날씨, 환율 계산기, 출발 전 체크리스트로 일본 여행을 계획하세요."
     }
   },
   "feedback": {
@@ -1415,7 +1565,249 @@
     "seeLocalHotelPicks": "일본 현지 시선의 호텔 추천 보기",
     "bestFor": "추천 대상",
     "whyThisLocalPick": "이 현지 추천의 이유",
-    "notIdealFor": "맞지 않을 수 있는 경우"
+    "notIdealFor": "맞지 않을 수 있는 경우",
+    "page": {
+      "meta": {
+        "title": "Japanese Local Hotel Picks for Tokyo, Kyoto and Osaka | fujiseat",
+        "description": "A curated set of hotel picks in Tokyo, Kyoto and Osaka based on Japanese local area logic, including calmer Shinjuku stays, Kyoto Station bases, family-friendly rooms and practical Osaka locations.",
+        "ogTitle": "Japanese Local Hotel Picks for Tokyo, Kyoto and Osaka",
+        "ogDescription": "A curated set of hotel picks in Tokyo, Kyoto and Osaka based on Japanese local area logic, including calmer Shinjuku stays, Kyoto Station bases, family-friendly rooms and practical Osaka locations."
+      },
+      "breadcrumb": "로컬 호텔 예시",
+      "cityLabels": {
+        "Tokyo": "도쿄",
+        "Kyoto": "교토",
+        "Osaka": "오사카"
+      },
+      "hero": {
+        "eyebrow": "호텔 예시",
+        "title": "일본 로컬 호텔 예시",
+        "subtitle": "순위가 아닙니다. 도쿄, 교토, 오사카의 지역 선택 논리에 따른 실용적인 호텔 예시입니다."
+      },
+      "tokyo": {
+        "title": "Tokyo examples by area logic",
+        "guideLink": "Tokyo stay area guide",
+        "groups": {
+          "calmShinjuku": {
+            "label": "Calm Shinjuku",
+            "description": "Shinjuku access without sleeping in the loudest nightlife blocks.",
+            "fallbackLabel": "See Shinjuku area logic"
+          },
+          "familyGroup": {
+            "label": "Family / group",
+            "description": "Apartment-style rooms and practical layouts for families or friends.",
+            "fallbackLabel": "See Shinjuku area logic"
+          },
+          "nishiShinjuku": {
+            "label": "Practical Nishi-Shinjuku",
+            "description": "West-side Shinjuku examples for calmer logistics and first Tokyo stays.",
+            "fallbackLabel": "See Shinjuku area logic"
+          },
+          "eastTokyo": {
+            "label": "East Tokyo personality stay",
+            "description": "A more local-feeling base for travelers who care about cafes, streets, and atmosphere.",
+            "fallbackLabel": "See East Tokyo area logic"
+          },
+          "tokyoStation": {
+            "label": "Tokyo Station logistics",
+            "description": "Best when early Shinkansen, luggage, and transfers matter more than nightlife.",
+            "fallbackLabel": "See Tokyo Station area logic"
+          }
+        }
+      },
+      "empty": {
+        "title": "No individual hotel example here yet.",
+        "body": "Use the area guide first, then compare hotels once this base fits your route."
+      },
+      "citySection": {
+        "title": "{city} examples by area logic",
+        "intros": {
+          "Kyoto": "Examples that map to station convenience, quieter Kyoto streets, and temple-side walking.",
+          "Osaka": "Examples that map to Namba food access, KIX convenience, group stays, and Kita-side logistics."
+        },
+        "kyotoGuide": "Kyoto stay area guide",
+        "osakaGuide": "Osaka stay area guide"
+      },
+      "continue": {
+        "eyebrow": "Continue planning",
+        "links": [
+          {
+            "href": "/areas-to-stay/tokyo-first-time",
+            "label": "Tokyo stay area guide",
+            "desc": "Choose Shinjuku, Ueno, Asakusa, Tokyo Station, or East Tokyo."
+          },
+          {
+            "href": "/areas-to-stay/kyoto-station-vs-gion",
+            "label": "Kyoto stay area guide",
+            "desc": "Pick between station convenience and Kyoto atmosphere."
+          },
+          {
+            "href": "/areas-to-stay/namba-vs-umeda",
+            "label": "Osaka stay area guide",
+            "desc": "Compare Osaka's two main hotel zones."
+          },
+          {
+            "href": "/plan-your-trip",
+            "label": "Plan Your Trip",
+            "desc": "Rail, hotels, arrival setup, and route order."
+          }
+        ]
+      }
+    },
+    "picks": {
+      "yuenShinjuku": {
+        "bestFor": "추천 대상: Japanese-modern Shinjuku stay, couples, calmer atmosphere",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Good if you want Shinjuku access without sleeping deep inside the loudest nightlife blocks.",
+        "notIdealFor": "추천하지 않는 경우: Travelers who need to be right next to JR Shinjuku Station.",
+        "tags": [
+          "Japanese-modern",
+          "calm Shinjuku",
+          "couples"
+        ]
+      },
+      "mimaruShinjukuWest": {
+        "bestFor": "추천 대상: Families, groups, longer stays",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Apartment-style rooms make more sense for families than small business hotels around Shinjuku.",
+        "notIdealFor": "추천하지 않는 경우: Solo travelers who only need a very basic low-budget bed.",
+        "tags": [
+          "family",
+          "group",
+          "kitchen"
+        ]
+      },
+      "daiwaRoynetNishiShinjuku": {
+        "bestFor": "추천 대상: Calm practical stay, business, first Tokyo base",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: A practical west-side Shinjuku option away from the loudest nightlife blocks.",
+        "notIdealFor": "추천하지 않는 경우: Travelers who want nightlife immediately outside the hotel.",
+        "tags": [
+          "practical",
+          "calm",
+          "west Shinjuku"
+        ]
+      },
+      "theKnotShinjuku": {
+        "bestFor": "추천 대상: Design, park-side stay, value-conscious travelers",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Better if you like the west-side park and government building area rather than Kabukicho.",
+        "notIdealFor": "추천하지 않는 경우: Travelers who want to be directly at JR Shinjuku Station.",
+        "tags": [
+          "design",
+          "park-side",
+          "Nishi-Shinjuku"
+        ]
+      },
+      "citanHostel": {
+        "bestFor": "추천 대상: Solo travelers, friends, hostel/cafe/bar atmosphere",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: A social East Tokyo base with cafe and bar culture, better as a personality pick than a family hotel.",
+        "notIdealFor": "추천하지 않는 경우: Families who want a quiet full-service hotel.",
+        "tags": [
+          "hostel",
+          "social",
+          "East Tokyo"
+        ]
+      },
+      "theThousandKyoto": {
+        "bestFor": "추천 대상: Polished Kyoto Station stay, couples, first Kyoto trip",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: A more polished Kyoto Station-side option for travelers who want convenience without a purely business-hotel feel.",
+        "notIdealFor": "추천하지 않는 경우: Travelers who want to sleep inside old-town Gion.",
+        "tags": [
+          "polished",
+          "Kyoto Station",
+          "couples"
+        ]
+      },
+      "mimaruKyotoStation": {
+        "bestFor": "추천 대상: Families, groups, longer stays",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Apartment-style rooms near Kyoto Station make luggage, day trips, and family travel easier.",
+        "notIdealFor": "추천하지 않는 경우: Travelers who want a ryokan-style atmosphere.",
+        "tags": [
+          "family",
+          "group",
+          "kitchen",
+          "Kyoto Station"
+        ]
+      },
+      "nohgaKiyomizu": {
+        "bestFor": "추천 대상: Local culture, design, temple-side walking",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: A good pick if you want Kyoto atmosphere without staying deep in the most crowded Gion lanes.",
+        "notIdealFor": "추천하지 않는 경우: Travelers who prioritize being next to Kyoto Station.",
+        "tags": [
+          "local culture",
+          "design",
+          "Kiyomizu"
+        ]
+      },
+      "sequenceKyotoGojo": {
+        "bestFor": "추천 대상: Practical Kyoto base, value, smart hotel",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Good balance between Kyoto Station access and central Kyoto streets.",
+        "notIdealFor": "추천하지 않는 경우: Travelers who want classic ryokan service.",
+        "tags": [
+          "practical",
+          "Gojo",
+          "Shijo-Karasuma"
+        ]
+      },
+      "nokuKyoto": {
+        "bestFor": "추천 대상: Quiet Kyoto stay, Imperial Palace area, calmer streets",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Better for travelers who want a quieter side of Kyoto rather than the busiest tourist streets.",
+        "notIdealFor": "추천하지 않는 경우: Travelers who want nightlife or station-first convenience.",
+        "tags": [
+          "quiet",
+          "Imperial Palace",
+          "calm Kyoto"
+        ]
+      },
+      "hotelRoyalClassicOsaka": {
+        "bestFor": "추천 대상: First Osaka trip, Namba convenience, families",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: A practical Namba pick when you want food, transport, and easy orientation.",
+        "notIdealFor": "추천하지 않는 경우: Travelers who want a very quiet residential area.",
+        "tags": [
+          "Namba",
+          "practical",
+          "first Osaka"
+        ]
+      },
+      "swissotelNankaiOsaka": {
+        "bestFor": "추천 대상: Kansai Airport access, upper stay, families",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Strong if you want Namba plus simple KIX access via Nankai.",
+        "notIdealFor": "추천하지 않는 경우: Budget travelers.",
+        "tags": [
+          "KIX access",
+          "Namba",
+          "upper stay"
+        ]
+      },
+      "mimaruOsakaNamba": {
+        "bestFor": "추천 대상: Families, groups, playful stay",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Apartment-style rooms and group-friendly setup work well for families in Osaka.",
+        "notIdealFor": "추천하지 않는 경우: Travelers who want a quiet luxury hotel.",
+        "tags": [
+          "family",
+          "group",
+          "kitchen",
+          "Namba"
+        ]
+      },
+      "hotelHankyuRespire": {
+        "bestFor": "추천 대상: Transport, Kyoto day trips, practical Osaka base",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: A practical Umeda pick when rail access matters more than nightlife.",
+        "notIdealFor": "추천하지 않는 경우: Travelers who want to be near Dotonbori every night.",
+        "tags": [
+          "Umeda",
+          "transport",
+          "practical"
+        ]
+      },
+      "zentisOsaka": {
+        "bestFor": "추천 대상: Design, adult stay, polished Kita-side base",
+        "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Better for travelers who want a calmer, more polished north Osaka base.",
+        "notIdealFor": "추천하지 않는 경우: Families who want maximum room size and kitchen facilities.",
+        "tags": [
+          "design",
+          "Kitashinchi",
+          "adult stay"
+        ]
+      }
+    }
   },
   "suggestedNextSteps": {
     "heading": "추천 다음 단계"
@@ -1451,6 +1843,361 @@
     "index": {
       "seeLocalPicksTitle": "구체적인 호텔 예시를 보고 싶으신가요?",
       "seeLocalPicksBody": "도쿄, 교토, 오사카의 현지 시각으로 고른 호텔 추천을 지역 논리에 따라 정리해 두었습니다."
+    }
+  },
+  "areasToStayHub": {
+    "meta": {
+      "title": "일본 숙소 위치 가이드 — 도쿄, 교토, 오사카, 후지산",
+      "description": "도시, 동선, 공항 접근, 신칸센 일정, 여행 스타일에 맞춰 일본에서 묵을 지역을 고르세요. 도쿄, 교토, 오사카, 후지산 주변 호텔 지역을 비교합니다.",
+      "ogDescription": "도시, 동선, 공항, 신칸센, 여행 스타일에 맞춰 일본 숙소 지역을 고르세요."
+    },
+    "breadcrumb": {
+      "home": "홈",
+      "current": "숙소 지역"
+    },
+    "hero": {
+      "eyebrow": "숙소 지역 허브",
+      "title": "일본에서 어디에 묵을까",
+      "subtitle": "예약 전에 도시와 호텔 지역을 먼저 고르세요. 동선, 공항, 신칸센 일정, 여행 스타일에 따라 도쿄, 교토, 오사카, 후지산부터 시작할 수 있습니다.",
+      "primaryCta": "도쿄 숙소 가이드부터 보기",
+      "secondaryCta": "로컬 호텔 예시 보기"
+    },
+    "quickAnswerTitle": "빠른 답변",
+    "quickAnswers": [
+      "도쿄가 처음이라면 -> 도쿄 첫 방문자 지역 가이드부터 보세요.",
+      "교토가 처음이라면 -> 교토역, 기온, 가와라마치를 비교하세요.",
+      "오사카가 처음이라면 -> 난바, 우메다, 신오사카를 비교하세요.",
+      "이른 신칸센이 있다면 -> 짐과 아침 이동이 편한 거점을 고르세요.",
+      "후지산 근처에서 묵는다면 -> 후지산 전망 숙박은 가와구치코가 좋습니다."
+    ],
+    "citySection": {
+      "eyebrow": "도시 먼저",
+      "title": "도시 선택하기"
+    },
+    "cityCards": {
+      "tokyo": {
+        "title": "도쿄",
+        "subtitle": "첫 일본 여행, 야경과 음식, 공항 선택, 신칸센 계획에 좋습니다.",
+        "cta": "도쿄 가이드 열기",
+        "placementLabel": "도쿄 도시 카드"
+      },
+      "kyoto": {
+        "title": "교토",
+        "subtitle": "사찰, 고전적인 분위기, 전통 거리, 당일치기 여행에 좋습니다.",
+        "cta": "교토 가이드 열기",
+        "placementLabel": "교토 도시 카드"
+      },
+      "osaka": {
+        "title": "오사카",
+        "subtitle": "음식, 밤 문화, 간사이공항 접근, 교토 / 나라 당일치기에 좋습니다.",
+        "cta": "오사카 가이드 열기",
+        "placementLabel": "오사카 도시 카드"
+      },
+      "kawaguchiko": {
+        "title": "후지산 / 가와구치코",
+        "subtitle": "신칸센에서만 보는 대신 후지산 근처에서 하룻밤 묵고 싶을 때 좋습니다.",
+        "cta": "후지산 전망 숙소 찾기",
+        "placementLabel": "가와구치코 도시 카드"
+      }
+    },
+    "localPicks": {
+      "eyebrow": "호텔 예시",
+      "title": "실제 호텔 예시가 필요하신가요?",
+      "body": "도쿄, 교토, 오사카의 실용적인 호텔 예시를 보세요. 순위가 아니라 지역 선택 논리에 따른 출발점입니다.",
+      "cta": "로컬 호텔 보기"
+    },
+    "problemSection": {
+      "eyebrow": "동선 기준",
+      "title": "여행 고민별로 고르기"
+    },
+    "problemCards": {
+      "firstTime": {
+        "title": "일본이 처음입니다",
+        "cta": "도쿄부터 시작"
+      },
+      "earlyShinkansen": {
+        "title": "이른 신칸센을 탑니다",
+        "cta": "철도 이동에 좋은 거점 선택"
+      },
+      "narita": {
+        "title": "나리타에 도착합니다",
+        "cta": "도쿄 거점 비교"
+      },
+      "temples": {
+        "title": "사찰과 옛 동네 분위기를 원합니다",
+        "cta": "교토 지역 비교"
+      },
+      "foodNightlife": {
+        "title": "음식과 밤 문화를 원합니다",
+        "cta": "오사카 지역 비교"
+      },
+      "fujiOvernight": {
+        "title": "후지산 전망으로 하룻밤 묵고 싶습니다",
+        "cta": "가와구치코 보기"
+      }
+    },
+    "featuredGuides": {
+      "eyebrow": "기존 가이드",
+      "title": "추천 숙소 지역 가이드",
+      "groups": {
+        "tokyo": "도쿄",
+        "kyoto": "교토",
+        "osaka": "오사카",
+        "fuji": "후지산"
+      },
+      "guides": {
+        "tokyo-first-time": {
+          "title": "도쿄 숙소 위치 — 첫 방문자 가이드",
+          "description": "신주쿠, 우에노, 아사쿠사, 도쿄역, 조용한 동쪽 도쿄를 비교합니다.",
+          "tags": [
+            "Tokyo",
+            "First-time",
+            "Area guide"
+          ]
+        },
+        "where-to-stay-before-shinkansen": {
+          "title": "도쿄에서 신칸센 타기 전 어디에 묵을까",
+          "description": "짐과 이른 도쿄역 출발이 중요할 때 참고하세요.",
+          "tags": [
+            "Tokyo",
+            "Shinkansen",
+            "Luggage"
+          ]
+        },
+        "tokyo-station-vs-shinjuku": {
+          "title": "도쿄역 vs 신주쿠",
+          "description": "철도 이동 편의와 음식, 밤 문화, 첫 방문 편의성을 비교합니다.",
+          "tags": [
+            "Tokyo Station",
+            "Shinjuku"
+          ]
+        },
+        "ueno-vs-shinjuku": {
+          "title": "우에노 vs 신주쿠",
+          "description": "나리타 접근성과 서쪽 도쿄의 활기를 비교합니다.",
+          "tags": [
+            "Ueno",
+            "Shinjuku"
+          ]
+        },
+        "asakusa-vs-ueno": {
+          "title": "아사쿠사 vs 우에노",
+          "description": "옛 도쿄 분위기와 실용적인 철도 접근성을 비교합니다.",
+          "tags": [
+            "Asakusa",
+            "Ueno"
+          ]
+        },
+        "kyoto-first-time": {
+          "title": "교토 첫 방문자는 어디에 묵을까",
+          "description": "교토역, 가와라마치 / 시조, 기온, 아라시야마, 조용한 북쪽을 비교합니다.",
+          "tags": [
+            "Kyoto",
+            "First-time",
+            "Area guide"
+          ]
+        },
+        "kyoto-station-vs-gion": {
+          "title": "교토역 vs 기온",
+          "description": "이동 편의와 전통적인 교토 분위기 중 무엇을 우선할지 정합니다.",
+          "tags": [
+            "Kyoto Station",
+            "Gion"
+          ]
+        },
+        "osaka-first-time": {
+          "title": "오사카 첫 방문자는 어디에 묵을까",
+          "description": "난바, 우메다, 신오사카, 덴노지, 조용한 중심부를 비교합니다.",
+          "tags": [
+            "Osaka",
+            "First-time",
+            "Area guide"
+          ]
+        },
+        "namba-vs-umeda": {
+          "title": "난바 vs 우메다",
+          "description": "음식/밤 문화와 철도 접근성을 비교합니다.",
+          "tags": [
+            "Namba",
+            "Umeda"
+          ]
+        },
+        "shin-osaka-vs-namba": {
+          "title": "신오사카 vs 난바",
+          "description": "신칸센 이동 편의가 오사카 숙소 선택을 좌우하는지 판단합니다.",
+          "tags": [
+            "Shin-Osaka",
+            "Namba"
+          ]
+        },
+        "kawaguchiko": {
+          "title": "가와구치코 숙소 위치 — 후지산 전망 호텔",
+          "description": "가와구치코 주변에서 후지산 전망으로 하룻밤 묵을 때 참고하세요.",
+          "tags": [
+            "Mt. Fuji",
+            "Kawaguchiko",
+            "Overnight"
+          ]
+        }
+      }
+    },
+    "continuePlanning": {
+      "title": "계속 계획하기",
+      "plan": "여행 계획",
+      "seat": "좌석 확인",
+      "airport": "공항 이동",
+      "esim": "일본 eSIM"
+    }
+  },
+  "planYourTrip": {
+    "meta": {
+      "title": "신칸센 좌석 선택 후 일본 여행 준비 | fujiseat",
+      "description": "후지산 쪽 신칸센 좌석을 확인했습니다. 이제 철도, 도착, 호텔, 짐, 후지산, 도시별 활동을 준비하세요.",
+      "ogTitle": "신칸센 좌석 선택 후 일본 여행 준비",
+      "ogDescription": "후지산 쪽 좌석을 확인했습니다. 이제 나머지 여행을 준비하세요."
+    },
+    "providers": {
+      "omio": "Compare on Omio",
+      "readGuide": "Read guide"
+    },
+    "hero": {
+      "eyebrow": "fujiseat 예약 흐름",
+      "title": "일본 여행 예약 가이드",
+      "subtitle": "후지산 쪽 신칸센 좌석을 찾았습니다. 이제 나머지 여행을 올바른 순서로 준비하세요.",
+      "shinkansenCta": "신칸센 티켓 예약",
+      "plannerCta": "여행 플래너 열기"
+    },
+    "bookingOrder": {
+      "eyebrow": "이 순서로 예약",
+      "items": [
+        "신칸센 방향과 후지산 쪽 좌석을 확인하세요.",
+        "철도 선택: 단일 티켓을 먼저 보고, JR Pass는 동선이 맞을 때만 고려하세요.",
+        "활동을 채우기 전에 호텔 거점을 먼저 고르세요.",
+        "도착 전에 첫날 필수 준비를 마치세요."
+      ],
+      "guideCta": "후지산 쪽 좌석 가이드 읽기"
+    },
+    "rail": {
+      "eyebrow": "철도 비교",
+      "title": "신칸센 티켓 vs JR Pass",
+      "subtitle": "여행 동선에 맞는 철도 옵션을 고르세요.",
+      "singleTicket": {
+        "title": "단일 신칸센 티켓",
+        "summary": "도시 간 이동이 단순한 날에 가장 적합합니다.",
+        "bullets": [
+          "도쿄 → 교토 / 오사카",
+          "편도 또는 단순 동선",
+          "첫 5–7일 여행"
+        ],
+        "action": "신칸센 티켓 예약",
+        "description": "도쿄 → 교토 / 오사카, 편도 또는 첫 방문의 단순 동선에 적합합니다."
+      },
+      "jrPass": {
+        "title": "JR Pass",
+        "summary": "JR 장거리 이동이 충분할 때만 적합합니다.",
+        "bullets": [
+          "히로시마",
+          "신칸센으로 도쿄 복귀",
+          "여러 번의 장거리 JR 이동"
+        ],
+        "action": "JR Pass 옵션 확인",
+        "description": "히로시마, 여러 장거리 JR 이동, 신칸센 도쿄 복귀가 포함될 때 적합합니다."
+      }
+    },
+    "hotel": {
+      "eyebrow": "호텔 거점 결정",
+      "title": "호텔 예약 전 도쿄 거점 고르기",
+      "subtitle": "호텔 지역은 공항 접근, 신칸센 이동일, 짐, 도쿄 첫날 밤의 느낌에 영향을 줍니다.",
+      "hubCta": "도쿄 숙소 지역 비교",
+      "cards": {
+        "shinjuku": {
+          "title": "첫 방문 편의성",
+          "area": "신주쿠",
+          "reason": "음식, 밤 문화, 쇼핑, 다양한 열차 접근을 한 거점에서 원할 때 좋습니다.",
+          "detailLabel": "신주쿠 자세히 보기",
+          "hotelActionLabel": "신주쿠 호텔 비교"
+        },
+        "uenoAsakusa": {
+          "title": "나리타 접근 / 가성비",
+          "area": "우에노 또는 아사쿠사",
+          "reason": "나리타 도착, 더 나은 가격대, 박물관, 사찰, 옛 도쿄 분위기가 중요할 때 좋습니다.",
+          "detailLabel": "우에노 자세히 보기",
+          "extraDetailLabel": "아사쿠사 자세히 보기",
+          "hotelActionLabel": "우에노 / 아사쿠사 호텔 비교"
+        },
+        "tokyoStation": {
+          "title": "이른 신칸센",
+          "area": "도쿄역",
+          "reason": "짐, 이른 교토 / 오사카 출발, 깔끔한 역 동선이 중요할 때 좋습니다.",
+          "detailLabel": "도쿄역 자세히 보기",
+          "hotelActionLabel": "도쿄역 근처 호텔 비교"
+        },
+        "eastTokyo": {
+          "title": "조용한 로컬 도쿄",
+          "area": "동쪽 도쿄",
+          "reason": "차분한 산책, 커피, 강변 동네, 느린 두 번째 거점에 좋습니다.",
+          "detailLabel": "동쪽 도쿄 자세히 보기"
+        }
+      }
+    },
+    "arrival": {
+      "eyebrow": "도착 필수 준비",
+      "title": "일본에서의 첫 1시간 준비",
+      "subtitle": "데이터, 공항 이동, 도착일에 필요한 역 기본 사항을 실용적으로 준비하세요.",
+      "esim": {
+        "title": "일본 eSIM",
+        "description": "공항을 나서기 전에 지도, 번역, 교통 앱을 쓸 수 있게 준비하세요.",
+        "cta": "일본 eSIM 받기"
+      },
+      "airport": {
+        "title": "공항 이동",
+        "description": "짐과 시간이 중요할 때 공항에서 첫 이동을 예약하거나 비교하세요.",
+        "cta": "공항 이동 예약"
+      },
+      "station": {
+        "title": "역 준비",
+        "description": "첫 열차 전에 출구, 환승 개찰구, 플랫폼 표지를 연습하세요.",
+        "cta": "역 연습 시작"
+      }
+    },
+    "activities": {
+      "eyebrow": "활동",
+      "title": "도시별로 둘러보기",
+      "subtitle": "동선, 호텔, 도착 준비가 안정된 뒤 활동을 추가하세요.",
+      "cards": {
+        "tokyo": {
+          "title": "도쿄",
+          "description": "투어, 음식 산책, 전망대, 첫 방문 활동.",
+          "cta": "도쿄 활동 보기",
+          "imageAlt": "도쿄 숙소와 활동 지역"
+        },
+        "kyoto": {
+          "title": "교토",
+          "description": "기모노 대여, 사찰, 가이드 산책, 클래식 교토 체험.",
+          "cta": "교토 활동 보기",
+          "imageAlt": "해 질 무렵 교토 사찰 지구"
+        },
+        "osaka": {
+          "title": "오사카",
+          "description": "음식, 패스, 테마파크, 저녁에 좋은 활동.",
+          "cta": "오사카 활동 보기",
+          "imageAlt": "밤의 오사카 도톤보리 운하"
+        },
+        "fujiHakone": {
+          "title": "후지산 / 하코네",
+          "description": "주요 동선이 정해진 뒤 산 쪽 당일 또는 1박 코스를 추가하세요.",
+          "cta": "후지 지역 옵션 보기",
+          "imageAlt": "해 질 무렵 후지산과 가와구치코"
+        }
+      }
+    },
+    "optional": {
+      "eyebrow": "선택 옵션",
+      "title": "유용하지만 첫 단계 결정은 아닙니다",
+      "insurance": "여행 보험 확인",
+      "station": "역 연습",
+      "commandCenter": "Command Center",
+      "localTokyo": "로컬 도쿄"
     }
   }
 }

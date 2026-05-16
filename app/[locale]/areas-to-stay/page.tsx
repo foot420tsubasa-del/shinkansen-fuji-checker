@@ -14,12 +14,14 @@ import { AFFILIATE_REL } from "@/lib/link-rel";
 import { stayPages, type StayPage } from "@/lib/content/stay";
 import { getAlternates } from "@/i18n/hreflang";
 import { getAffUrl } from "@/src/affiliateLinks";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
 type CityCard = {
+  key: CityCardKey;
   title: string;
   subtitle: string;
   href: string;
@@ -30,111 +32,97 @@ type CityCard = {
 };
 
 type ProblemCard = {
+  key: ProblemCardKey;
   title: string;
   href: string;
   cta: string;
   icon: typeof Building2;
 };
 
+type CityCardKey = "tokyo" | "kyoto" | "osaka" | "kawaguchiko";
+type ProblemCardKey = "firstTime" | "earlyShinkansen" | "narita" | "temples" | "foodNightlife" | "fujiOvernight";
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "areasToStayHub.meta" });
+
   return {
-    title: "Where to Stay in Japan — Tokyo, Kyoto, Osaka and Mt. Fuji Area Guides",
-    description:
-      "Choose where to stay in Japan by city, route, airport access, Shinkansen plans, and travel style. Compare Tokyo, Kyoto, Osaka, and Mt. Fuji hotel areas.",
+    title: t("title"),
+    description: t("description"),
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates("/areas-to-stay", locale),
     openGraph: {
-      title: "Where to Stay in Japan — Tokyo, Kyoto, Osaka and Mt. Fuji Area Guides",
-      description:
-        "Choose where to stay in Japan by city, route, airport access, Shinkansen plans, and travel style.",
+      title: t("title"),
+      description: t("ogDescription"),
       siteName: "fujiseat",
       images: [{ url: "https://fujiseat.com/og-areas-to-stay.png", width: 1200, height: 630 }],
     },
   };
 }
 
-const cityCards: CityCard[] = [
+const cityCardConfigs = [
   {
-    title: "Tokyo",
-    subtitle: "Best for first-time Japan, nightlife, airport choices, and Shinkansen planning.",
+    key: "tokyo",
     href: "/areas-to-stay/tokyo-first-time",
-    cta: "Open Tokyo stay guide",
-    placementLabel: "Tokyo city card",
     icon: Building2,
     imageCandidates: ["/images/stay/tokyo/tokyo-stay-hero.png"],
   },
   {
-    title: "Kyoto",
-    subtitle: "Best for temples, classic atmosphere, traditional streets, and day trips.",
+    key: "kyoto",
     href: "/areas-to-stay/kyoto-first-time",
-    cta: "Open Kyoto guide",
-    placementLabel: "Kyoto city card",
     icon: Landmark,
     imageCandidates: ["/images/stay/japan/stay-kyoto.jpg", "/images/Kyoto.png"],
   },
   {
-    title: "Osaka",
-    subtitle: "Best for food, nightlife, Kansai airport access, and Kyoto / Nara day trips.",
+    key: "osaka",
     href: "/areas-to-stay/osaka-first-time",
-    cta: "Open Osaka guide",
-    placementLabel: "Osaka city card",
     icon: Utensils,
     imageCandidates: ["/images/stay/japan/stay-osaka.jpg", "/images/Osaka.png"],
   },
   {
-    title: "Mt. Fuji / Kawaguchiko",
-    subtitle: "Best if you want to stay overnight near Mt. Fuji instead of only seeing it from the Shinkansen.",
+    key: "kawaguchiko",
     href: "/areas-to-stay/kawaguchiko",
-    cta: "Find Fuji-view stays",
-    placementLabel: "Kawaguchiko city card",
     icon: Mountain,
     imageCandidates: ["/images/stay/japan/stay-kawaguchiko.jpg", "/images/Kawaguchiko.png"],
   },
-];
+] as const satisfies ReadonlyArray<Omit<CityCard, "title" | "subtitle" | "cta" | "placementLabel">>;
 
-const problemCards: ProblemCard[] = [
+const problemCardConfigs = [
   {
-    title: "I am visiting Japan for the first time",
+    key: "firstTime",
     href: "/areas-to-stay/tokyo-first-time",
-    cta: "Start with Tokyo",
     icon: Bed,
   },
   {
-    title: "I have an early Shinkansen",
+    key: "earlyShinkansen",
     href: "/areas-to-stay/where-to-stay-before-shinkansen",
-    cta: "Pick a rail-friendly base",
     icon: Train,
   },
   {
-    title: "I arrive at Narita",
+    key: "narita",
     href: "/areas-to-stay/tokyo-first-time",
-    cta: "Compare Tokyo bases",
     icon: Plane,
   },
   {
-    title: "I want temples and old-town atmosphere",
+    key: "temples",
     href: "/areas-to-stay/kyoto-first-time",
-    cta: "Compare Kyoto areas",
     icon: Landmark,
   },
   {
-    title: "I want food and nightlife",
+    key: "foodNightlife",
     href: "/areas-to-stay/osaka-first-time",
-    cta: "Compare Osaka areas",
     icon: Utensils,
   },
   {
-    title: "I want a Fuji-view overnight stay",
+    key: "fujiOvernight",
     href: "/areas-to-stay/kawaguchiko",
-    cta: "See Kawaguchiko",
     icon: Mountain,
   },
-];
+] as const satisfies ReadonlyArray<Omit<ProblemCard, "title" | "cta">>;
 
 const guideGroups = [
   {
-    city: "Tokyo",
+    cityKey: "tokyo",
     slugs: [
       "tokyo-first-time",
       "where-to-stay-before-shinkansen",
@@ -144,54 +132,18 @@ const guideGroups = [
     ],
   },
   {
-    city: "Kyoto",
+    cityKey: "kyoto",
     slugs: ["kyoto-first-time", "kyoto-station-vs-gion"],
   },
   {
-    city: "Osaka",
+    cityKey: "osaka",
     slugs: ["osaka-first-time", "namba-vs-umeda", "shin-osaka-vs-namba"],
   },
   {
-    city: "Mt. Fuji",
+    cityKey: "fuji",
     slugs: ["kawaguchiko"],
   },
 ] as const;
-
-const guideDescriptions: Record<string, string> = {
-  "tokyo-first-time": "Start here to compare Shinjuku, Ueno, Asakusa, Tokyo Station, and quieter East Tokyo.",
-  "where-to-stay-before-shinkansen": "Use this when luggage and an early Tokyo Station departure matter.",
-  "tokyo-station-vs-shinjuku": "Compare rail logistics with food, nightlife, and first-time convenience.",
-  "ueno-vs-shinjuku": "Choose between Narita access and west-side Tokyo energy.",
-  "asakusa-vs-ueno": "Compare old-town atmosphere with practical rail access.",
-  "kyoto-first-time": "Compare Kyoto Station, Kawaramachi / Shijo, Gion, Arashiyama, and quieter north Kyoto.",
-  "kyoto-station-vs-gion": "Decide whether logistics or classic Kyoto atmosphere should lead.",
-  "osaka-first-time": "Compare Namba, Umeda, Shin-Osaka, Tennoji, and quieter central Osaka.",
-  "namba-vs-umeda": "Choose between food/nightlife and rail access.",
-  "shin-osaka-vs-namba": "Decide whether Shinkansen logistics should drive your Osaka base.",
-  kawaguchiko: "Use this for an overnight Mt. Fuji view stay around Kawaguchiko.",
-};
-
-const guideTags: Record<string, string[]> = {
-  "tokyo-first-time": ["Tokyo", "First-time", "Area guide"],
-  "where-to-stay-before-shinkansen": ["Tokyo", "Shinkansen", "Luggage"],
-  "tokyo-station-vs-shinjuku": ["Tokyo Station", "Shinjuku"],
-  "ueno-vs-shinjuku": ["Ueno", "Shinjuku"],
-  "asakusa-vs-ueno": ["Asakusa", "Ueno"],
-  "kyoto-first-time": ["Kyoto", "First-time", "Area guide"],
-  "kyoto-station-vs-gion": ["Kyoto Station", "Gion"],
-  "osaka-first-time": ["Osaka", "First-time", "Area guide"],
-  "namba-vs-umeda": ["Namba", "Umeda"],
-  "shin-osaka-vs-namba": ["Shin-Osaka", "Namba"],
-  kawaguchiko: ["Mt. Fuji", "Kawaguchiko", "Overnight"],
-};
-
-const quickAnswers = [
-  "First time in Tokyo -> Start with the Tokyo first-time area guide.",
-  "First time in Kyoto -> Compare Kyoto Station, Gion, and Kawaramachi.",
-  "First time in Osaka -> Compare Namba, Umeda, and Shin-Osaka.",
-  "Early Shinkansen day -> Choose a hotel base that works for luggage and early trains.",
-  "Staying near Mt. Fuji -> Use Kawaguchiko if you want an overnight Fuji-view stay.",
-];
 
 function pageBySlug(slug: string) {
   return stayPages.find((page) => page.slug === slug);
@@ -270,23 +222,35 @@ function ProblemCardLink({ item, locale, pagePath }: { item: ProblemCard; locale
   );
 }
 
-function GuideCard({ page, locale, pagePath }: { page: StayPage; locale: string; pagePath: string }) {
-  const tags = guideTags[page.slug] ?? page.areas.slice(0, 3).map((area) => area.name);
-
+function GuideCard({
+  page,
+  title,
+  description,
+  tags,
+  locale,
+  pagePath,
+}: {
+  page: StayPage;
+  title: string;
+  description: string;
+  tags: string[];
+  locale: string;
+  pagePath: string;
+}) {
   return (
     <TrackedInternalLink
       href={`/areas-to-stay/${page.slug}`}
       sourcePage={pagePath}
       placement="stay_hub_featured_guide"
-      label={page.title}
+      label={title}
       locale={locale}
       className={trackedLinkClass()}
     >
       <div className="flex h-full items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="text-sm font-semibold leading-5 text-slate-950 group-hover:text-[#106b43]">{page.title}</h3>
+          <h3 className="text-sm font-semibold leading-5 text-slate-950 group-hover:text-[#106b43]">{title}</h3>
           <p className="mt-1.5 text-xs leading-5 text-slate-600">
-            {guideDescriptions[page.slug] ?? page.description}
+            {description}
           </p>
           <div className="mt-3 flex flex-wrap gap-1.5">
             {tags.slice(0, 3).map((tag) => (
@@ -304,8 +268,22 @@ function GuideCard({ page, locale, pagePath }: { page: StayPage; locale: string;
 
 export default async function AreasToStayIndex({ params }: Props) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "areasToStayHub" });
   const pagePath = "/areas-to-stay";
   const esimHref = getAffUrl("esim");
+  const cityCards: CityCard[] = cityCardConfigs.map((card) => ({
+    ...card,
+    title: t(`cityCards.${card.key}.title`),
+    subtitle: t(`cityCards.${card.key}.subtitle`),
+    cta: t(`cityCards.${card.key}.cta`),
+    placementLabel: t(`cityCards.${card.key}.placementLabel`),
+  }));
+  const problemCards: ProblemCard[] = problemCardConfigs.map((item) => ({
+    ...item,
+    title: t(`problemCards.${item.key}.title`),
+    cta: t(`problemCards.${item.key}.cta`),
+  }));
+  const quickAnswers = [0, 1, 2, 3, 4].map((index) => t(`quickAnswers.${index}`));
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -313,23 +291,23 @@ export default async function AreasToStayIndex({ params }: Props) {
       <Container className="py-8 md:py-12">
         <Breadcrumb
           items={[
-            { label: "Home", href: "/" },
-            { label: "Where to Stay" },
+            { label: t("breadcrumb.home"), href: "/" },
+            { label: t("breadcrumb.current") },
           ]}
         />
 
         <section className="mt-6 rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
           <p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">
             <Bed className="h-4 w-4" aria-hidden="true" />
-            Stay area hub
+            {t("hero.eyebrow")}
           </p>
           <div className="mt-4 grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <div>
               <h1 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">
-                Where to Stay in Japan
+                {t("hero.title")}
               </h1>
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-                Choose the right city and hotel area before booking. Start with Tokyo, Kyoto, Osaka, or Mt. Fuji based on your route, airport, Shinkansen plans, and travel style.
+                {t("hero.subtitle")}
               </p>
             </div>
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-1">
@@ -337,22 +315,22 @@ export default async function AreasToStayIndex({ params }: Props) {
                 href="/areas-to-stay/tokyo-first-time"
                 sourcePage={pagePath}
                 placement="stay_hub_hero"
-                label="Start with Tokyo stay guide"
+                label={t("hero.primaryCta")}
                 locale={locale}
                 className={buttonClassName({ variant: "internal", fullWidth: true, size: "lg" })}
               >
-                Start with Tokyo stay guide
+                {t("hero.primaryCta")}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </TrackedInternalLink>
               <TrackedInternalLink
                 href="/local-hotel-picks"
                 sourcePage={pagePath}
                 placement="stay_hub_hero"
-                label="See local hotel examples"
+                label={t("hero.secondaryCta")}
                 locale={locale}
                 className={buttonClassName({ variant: "internal", fullWidth: true, size: "lg" })}
               >
-                See local hotel examples
+                {t("hero.secondaryCta")}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </TrackedInternalLink>
             </div>
@@ -360,7 +338,7 @@ export default async function AreasToStayIndex({ params }: Props) {
         </section>
 
         <section className="mt-8 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">Quick Answer</h2>
+          <h2 className="text-xl font-semibold text-slate-950">{t("quickAnswerTitle")}</h2>
           <ul className="mt-4 grid gap-2 md:grid-cols-2">
             {quickAnswers.map((answer) => (
               <li key={answer} className="rounded-2xl bg-slate-50 px-4 py-3 text-sm leading-6 text-slate-700">
@@ -373,8 +351,8 @@ export default async function AreasToStayIndex({ params }: Props) {
         <section className="mt-10">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">City first</p>
-              <h2 className="mt-1 text-2xl font-semibold text-slate-950">Choose your city</h2>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">{t("citySection.eyebrow")}</p>
+              <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("citySection.title")}</h2>
             </div>
           </div>
           <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
@@ -386,28 +364,28 @@ export default async function AreasToStayIndex({ params }: Props) {
 
         <section className="mt-8 rounded-[22px] border border-[#d9eadd] bg-[#f7fffb] p-5 md:flex md:items-center md:justify-between md:gap-6">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">Hotel examples</p>
-            <h2 className="mt-1 text-xl font-semibold text-slate-950">Need actual hotel examples?</h2>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">{t("localPicks.eyebrow")}</p>
+            <h2 className="mt-1 text-xl font-semibold text-slate-950">{t("localPicks.title")}</h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
-              See practical hotel examples for Tokyo, Kyoto, and Osaka. These are not rankings — they are starting points by area logic.
+              {t("localPicks.body")}
             </p>
           </div>
           <TrackedInternalLink
             href="/local-hotel-picks"
             sourcePage={pagePath}
             placement="stay_hub_local_picks"
-            label="See local hotel picks"
+            label={t("localPicks.cta")}
             locale={locale}
             className={buttonClassName({ variant: "internalOutline", className: "mt-4 shrink-0 md:mt-0" })}
           >
-            See local hotel picks
+            {t("localPicks.cta")}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </TrackedInternalLink>
         </section>
 
         <section className="mt-10">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">Route logic</p>
-          <h2 className="mt-1 text-2xl font-semibold text-slate-950">Choose by travel problem</h2>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">{t("problemSection.eyebrow")}</p>
+          <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("problemSection.title")}</h2>
           <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
             {problemCards.map((item) => (
               <ProblemCardLink key={item.title} item={item} locale={locale} pagePath={pagePath} />
@@ -416,17 +394,25 @@ export default async function AreasToStayIndex({ params }: Props) {
         </section>
 
         <section className="mt-10">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">Existing guides</p>
-          <h2 className="mt-1 text-2xl font-semibold text-slate-950">Featured stay guides</h2>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">{t("featuredGuides.eyebrow")}</p>
+          <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("featuredGuides.title")}</h2>
           <div className="mt-5 grid gap-5 lg:grid-cols-2">
             {guideGroups.map((group) => {
               const pages = group.slugs.map(pageBySlug).filter((page): page is StayPage => Boolean(page));
               return (
-                <section key={group.city} className="rounded-[22px] border border-slate-200 bg-slate-50/80 p-4">
-                  <h3 className="text-base font-semibold text-slate-950">{group.city}</h3>
+                <section key={group.cityKey} className="rounded-[22px] border border-slate-200 bg-slate-50/80 p-4">
+                  <h3 className="text-base font-semibold text-slate-950">{t(`featuredGuides.groups.${group.cityKey}`)}</h3>
                   <div className="mt-3 grid gap-3">
                     {pages.map((page) => (
-                      <GuideCard key={page.slug} page={page} locale={locale} pagePath={pagePath} />
+                      <GuideCard
+                        key={page.slug}
+                        page={page}
+                        title={t(`featuredGuides.guides.${page.slug}.title`)}
+                        description={t(`featuredGuides.guides.${page.slug}.description`)}
+                        tags={t.raw(`featuredGuides.guides.${page.slug}.tags`) as string[]}
+                        locale={locale}
+                        pagePath={pagePath}
+                      />
                     ))}
                   </div>
                 </section>
@@ -436,16 +422,16 @@ export default async function AreasToStayIndex({ params }: Props) {
         </section>
 
         <section className="mt-10">
-          <h2 className="text-lg font-semibold text-slate-950">Continue planning</h2>
+          <h2 className="text-lg font-semibold text-slate-950">{t("continuePlanning.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-4">
-            <TrackedInternalLink href="/plan-your-trip" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Plan Your Trip" locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
-              Plan Your Trip
+            <TrackedInternalLink href="/plan-your-trip" sourcePage={pagePath} placement="stay_hub_continue_planning" label={t("continuePlanning.plan")} locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
+              {t("continuePlanning.plan")}
             </TrackedInternalLink>
-            <TrackedInternalLink href="/guide" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Seat Checker" locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
-              Seat Checker
+            <TrackedInternalLink href="/guide" sourcePage={pagePath} placement="stay_hub_continue_planning" label={t("continuePlanning.seat")} locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
+              {t("continuePlanning.seat")}
             </TrackedInternalLink>
-            <TrackedInternalLink href="/airport-transfers" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Airport Transfers" locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
-              Airport Transfers
+            <TrackedInternalLink href="/airport-transfers" sourcePage={pagePath} placement="stay_hub_continue_planning" label={t("continuePlanning.airport")} locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
+              {t("continuePlanning.airport")}
             </TrackedInternalLink>
             {esimHref ? (
               <TrackedAffiliateLink
@@ -457,18 +443,18 @@ export default async function AreasToStayIndex({ params }: Props) {
                 placement="stay_hub_continue_planning"
                 pagePath={pagePath}
                 locale={locale}
-                label="Japan eSIM"
+                label={t("continuePlanning.esim")}
                 linkId="esim"
                 product="esim"
                 adid="1166001"
                 className={buttonClassName({ variant: "commercial", fullWidth: true, className: "text-center" })}
               >
-                Japan eSIM
+                {t("continuePlanning.esim")}
                 <Wifi className="h-4 w-4" aria-hidden="true" />
               </TrackedAffiliateLink>
             ) : (
-              <TrackedInternalLink href="/plan-your-trip" sourcePage={pagePath} placement="stay_hub_continue_planning" label="Japan eSIM" locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
-                Japan eSIM
+              <TrackedInternalLink href="/plan-your-trip" sourcePage={pagePath} placement="stay_hub_continue_planning" label={t("continuePlanning.esim")} locale={locale} className={buttonClassName({ variant: "internal", fullWidth: true, className: "text-center" })}>
+                {t("continuePlanning.esim")}
               </TrackedInternalLink>
             )}
           </div>

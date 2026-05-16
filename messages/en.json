@@ -734,7 +734,7 @@
       "esim": "Get eSIM",
       "train": "Compare",
       "transfer": "Compare",
-      "hotel": "Compare",
+      "hotel": "Compare hotels",
       "insurance": "See plans"
     },
     "bookings": {
@@ -774,7 +774,9 @@
     },
     "weather": {
       "title": "Route weather (live)",
-      "unavailable": "Weather data unavailable"
+      "unavailable": "Weather data unavailable",
+      "highShort": "H",
+      "lowShort": "L"
     },
     "currency": {
       "title": "Currency converter"
@@ -828,6 +830,154 @@
       "planTrip": "Plan trip",
       "checkJrPass": "Compare JR Pass",
       "routeMap": "Command Center"
+    },
+    "routeBooking": {
+      "ui": {
+        "title": "Recommended booking stack for {routeTitle}",
+        "subtitle": "Recommended for this route",
+        "rail": "1. Rail",
+        "hotel": "2. Hotel area",
+        "arrival": "3. eSIM / arrival",
+        "optional": "4. Optional add-ons",
+        "partnerNote": "Partner links — we earn a small commission at no extra cost to you."
+      },
+      "routes": {
+        "express-5": {
+          "railRecommendation": "A single Shinkansen ticket is usually simpler for this short Tokyo → Kyoto route. JR Pass is usually not needed unless you return to Tokyo by Shinkansen.",
+          "railActionLabel": "Book Shinkansen ticket",
+          "railActionDescription": "Best for Tokyo → Kyoto / Osaka, one-way, or simple first-time routes.",
+          "railActions": [
+            "Klook",
+            "Compare on Omio",
+            "JR Pass usually not needed for this route"
+          ],
+          "hotelRecommendation": "Short trip, fewer transfers, and easier early rail days.",
+          "hotelRecommendedAreas": [
+            "Tokyo Station",
+            "Shinjuku"
+          ],
+          "hotelPrimaryAction": "Choose Tokyo base",
+          "hotelDetailLinks": [
+            "Tokyo Station details",
+            "Shinjuku details"
+          ],
+          "hotelActions": [
+            "Compare hotels near Tokyo Station"
+          ],
+          "arrivalRecommendation": "Set up data and airport movement before landing so the short route does not start with friction.",
+          "arrivalActions": [
+            "Get Japan eSIM",
+            "Plan airport transfer"
+          ],
+          "optionalAddOns": [
+            "Check travel insurance"
+          ]
+        },
+        "classic-7": {
+          "railRecommendation": "A single Shinkansen ticket is usually simpler for Tokyo → Kyoto / Osaka. Compare the JR Pass only if you add Hiroshima, multiple long-distance rides, or return to Tokyo by Shinkansen.",
+          "railActionLabel": "Book Shinkansen ticket",
+          "railActionDescription": "Best for Tokyo → Kyoto / Osaka, one-way, or simple first-time routes.",
+          "railActions": [
+            "Klook",
+            "Compare on Omio",
+            "Check JR Pass options if adding Hiroshima or return-to-Tokyo"
+          ],
+          "hotelRecommendation": "Best balance for first-time Tokyo, Kyoto / Osaka transfer, and airport access.",
+          "hotelRecommendedAreas": [
+            "Shinjuku",
+            "Ueno / Asakusa",
+            "Tokyo Station"
+          ],
+          "hotelPrimaryAction": "Choose Tokyo base",
+          "hotelDetailLinks": [
+            "Shinjuku details",
+            "Ueno details",
+            "Asakusa details",
+            "Tokyo Station details"
+          ],
+          "hotelActions": [
+            "Compare Shinjuku hotels"
+          ],
+          "arrivalRecommendation": "Prepare data and airport transfer first; activities can wait until the route is stable.",
+          "arrivalActions": [
+            "Get Japan eSIM",
+            "Plan airport transfer"
+          ],
+          "optionalAddOns": [
+            "Check travel insurance"
+          ]
+        },
+        "full-10": {
+          "railRecommendation": "Because this route mixes Fuji-side travel, Hakone, and the Shinkansen to Kyoto, compare the route first. Then book the Shinkansen legs that fit your final order.",
+          "railActionLabel": "Compare train routes",
+          "railActionDescription": "Best when Fuji, Hakone, and Kyoto order are still flexible.",
+          "railActions": [
+            "Compare on Omio",
+            "Klook",
+            "JR Pass is conditional if adding more JR rides"
+          ],
+          "hotelRecommendation": "Good balance between Tokyo sightseeing and onward rail movement.",
+          "hotelRecommendedAreas": [
+            "Shinjuku",
+            "Tokyo Station"
+          ],
+          "hotelPrimaryAction": "Choose Tokyo base",
+          "hotelDetailLinks": [
+            "Shinjuku details",
+            "Tokyo Station details"
+          ],
+          "hotelActions": [
+            "Compare Shinjuku hotels",
+            "Compare hotels near Tokyo Station"
+          ],
+          "arrivalRecommendation": "Use eSIM and airport transfer planning to keep the first Tokyo day flexible.",
+          "arrivalActions": [
+            "Get Japan eSIM",
+            "Plan airport transfer"
+          ],
+          "optionalAddOns": [
+            "Check travel insurance"
+          ]
+        },
+        "deep-14": {
+          "railRecommendation": "Because this route includes more long-distance travel, compare the JR Pass before buying separate tickets.",
+          "railActionLabel": "Check JR Pass options",
+          "railActionDescription": "Best if your route includes Hiroshima, multiple long-distance JR rides, or returning to Tokyo by Shinkansen.",
+          "railActions": [
+            "Klook",
+            "Compare on Omio",
+            "Book known Shinkansen leg on Klook"
+          ],
+          "hotelRecommendation": "Multiple long-distance rail days and luggage movement make logistics more important.",
+          "hotelRecommendedAreas": [
+            "Tokyo Station",
+            "Ueno"
+          ],
+          "hotelPrimaryAction": "Choose Tokyo base",
+          "hotelDetailLinks": [
+            "Tokyo Station details",
+            "Ueno details"
+          ],
+          "hotelActions": [
+            "Compare hotels near Tokyo Station",
+            "Compare Ueno hotels"
+          ],
+          "arrivalRecommendation": "Prepare eSIM and airport transfer before landing; this route has less margin for early confusion.",
+          "arrivalActions": [
+            "Get Japan eSIM",
+            "Plan airport transfer"
+          ],
+          "optionalAddOns": [
+            "Check travel insurance"
+          ]
+        }
+      }
+    },
+    "meta": {
+      "title": "Trip Planner | fujiseat",
+      "description": "Plan your Japan trip — choose a route, set a departure date, and track your pre-departure checklist. Lightweight planner with weather, currency, and emergency info.",
+      "ogTitle": "Trip Planner | fujiseat",
+      "ogDescription": "Plan your Japan trip with route templates, weather, currency converter, and pre-departure checklist."
     }
   },
   "feedback": {
@@ -1415,7 +1565,249 @@
     "seeLocalHotelPicks": "See Japanese local hotel picks",
     "bestFor": "Best for",
     "whyThisLocalPick": "Why this local pick",
-    "notIdealFor": "Not ideal for"
+    "notIdealFor": "Not ideal for",
+    "page": {
+      "meta": {
+        "title": "Japanese Local Hotel Picks for Tokyo, Kyoto and Osaka | fujiseat",
+        "description": "A curated set of hotel picks in Tokyo, Kyoto and Osaka based on Japanese local area logic, including calmer Shinjuku stays, Kyoto Station bases, family-friendly rooms and practical Osaka locations.",
+        "ogTitle": "Japanese Local Hotel Picks for Tokyo, Kyoto and Osaka",
+        "ogDescription": "A curated set of hotel picks in Tokyo, Kyoto and Osaka based on Japanese local area logic, including calmer Shinjuku stays, Kyoto Station bases, family-friendly rooms and practical Osaka locations."
+      },
+      "breadcrumb": "Local Hotel Picks",
+      "cityLabels": {
+        "Tokyo": "Tokyo",
+        "Kyoto": "Kyoto",
+        "Osaka": "Osaka"
+      },
+      "hero": {
+        "eyebrow": "Hotel examples",
+        "title": "Local Hotel Picks in Japan",
+        "subtitle": "Not rankings. Practical hotel examples by area logic for Tokyo, Kyoto, and Osaka."
+      },
+      "tokyo": {
+        "title": "Tokyo examples by area logic",
+        "guideLink": "Tokyo stay area guide",
+        "groups": {
+          "calmShinjuku": {
+            "label": "Calm Shinjuku",
+            "description": "Shinjuku access without sleeping in the loudest nightlife blocks.",
+            "fallbackLabel": "See Shinjuku area logic"
+          },
+          "familyGroup": {
+            "label": "Family / group",
+            "description": "Apartment-style rooms and practical layouts for families or friends.",
+            "fallbackLabel": "See Shinjuku area logic"
+          },
+          "nishiShinjuku": {
+            "label": "Practical Nishi-Shinjuku",
+            "description": "West-side Shinjuku examples for calmer logistics and first Tokyo stays.",
+            "fallbackLabel": "See Shinjuku area logic"
+          },
+          "eastTokyo": {
+            "label": "East Tokyo personality stay",
+            "description": "A more local-feeling base for travelers who care about cafes, streets, and atmosphere.",
+            "fallbackLabel": "See East Tokyo area logic"
+          },
+          "tokyoStation": {
+            "label": "Tokyo Station logistics",
+            "description": "Best when early Shinkansen, luggage, and transfers matter more than nightlife.",
+            "fallbackLabel": "See Tokyo Station area logic"
+          }
+        }
+      },
+      "empty": {
+        "title": "No individual hotel example here yet.",
+        "body": "Use the area guide first, then compare hotels once this base fits your route."
+      },
+      "citySection": {
+        "title": "{city} examples by area logic",
+        "intros": {
+          "Kyoto": "Examples that map to station convenience, quieter Kyoto streets, and temple-side walking.",
+          "Osaka": "Examples that map to Namba food access, KIX convenience, group stays, and Kita-side logistics."
+        },
+        "kyotoGuide": "Kyoto stay area guide",
+        "osakaGuide": "Osaka stay area guide"
+      },
+      "continue": {
+        "eyebrow": "Continue planning",
+        "links": [
+          {
+            "href": "/areas-to-stay/tokyo-first-time",
+            "label": "Tokyo stay area guide",
+            "desc": "Choose Shinjuku, Ueno, Asakusa, Tokyo Station, or East Tokyo."
+          },
+          {
+            "href": "/areas-to-stay/kyoto-station-vs-gion",
+            "label": "Kyoto stay area guide",
+            "desc": "Pick between station convenience and Kyoto atmosphere."
+          },
+          {
+            "href": "/areas-to-stay/namba-vs-umeda",
+            "label": "Osaka stay area guide",
+            "desc": "Compare Osaka's two main hotel zones."
+          },
+          {
+            "href": "/plan-your-trip",
+            "label": "Plan Your Trip",
+            "desc": "Rail, hotels, arrival setup, and route order."
+          }
+        ]
+      }
+    },
+    "picks": {
+      "yuenShinjuku": {
+        "bestFor": "Japanese-modern Shinjuku stay, couples, calmer atmosphere",
+        "localReason": "Good if you want Shinjuku access without sleeping deep inside the loudest nightlife blocks.",
+        "notIdealFor": "Travelers who need to be right next to JR Shinjuku Station.",
+        "tags": [
+          "Japanese-modern",
+          "calm Shinjuku",
+          "couples"
+        ]
+      },
+      "mimaruShinjukuWest": {
+        "bestFor": "Families, groups, longer stays",
+        "localReason": "Apartment-style rooms make more sense for families than small business hotels around Shinjuku.",
+        "notIdealFor": "Solo travelers who only need a very basic low-budget bed.",
+        "tags": [
+          "family",
+          "group",
+          "kitchen"
+        ]
+      },
+      "daiwaRoynetNishiShinjuku": {
+        "bestFor": "Calm practical stay, business, first Tokyo base",
+        "localReason": "A practical west-side Shinjuku option away from the loudest nightlife blocks.",
+        "notIdealFor": "Travelers who want nightlife immediately outside the hotel.",
+        "tags": [
+          "practical",
+          "calm",
+          "west Shinjuku"
+        ]
+      },
+      "theKnotShinjuku": {
+        "bestFor": "Design, park-side stay, value-conscious travelers",
+        "localReason": "Better if you like the west-side park and government building area rather than Kabukicho.",
+        "notIdealFor": "Travelers who want to be directly at JR Shinjuku Station.",
+        "tags": [
+          "design",
+          "park-side",
+          "Nishi-Shinjuku"
+        ]
+      },
+      "citanHostel": {
+        "bestFor": "Solo travelers, friends, hostel/cafe/bar atmosphere",
+        "localReason": "A social East Tokyo base with cafe and bar culture, better as a personality pick than a family hotel.",
+        "notIdealFor": "Families who want a quiet full-service hotel.",
+        "tags": [
+          "hostel",
+          "social",
+          "East Tokyo"
+        ]
+      },
+      "theThousandKyoto": {
+        "bestFor": "Polished Kyoto Station stay, couples, first Kyoto trip",
+        "localReason": "A more polished Kyoto Station-side option for travelers who want convenience without a purely business-hotel feel.",
+        "notIdealFor": "Travelers who want to sleep inside old-town Gion.",
+        "tags": [
+          "polished",
+          "Kyoto Station",
+          "couples"
+        ]
+      },
+      "mimaruKyotoStation": {
+        "bestFor": "Families, groups, longer stays",
+        "localReason": "Apartment-style rooms near Kyoto Station make luggage, day trips, and family travel easier.",
+        "notIdealFor": "Travelers who want a ryokan-style atmosphere.",
+        "tags": [
+          "family",
+          "group",
+          "kitchen",
+          "Kyoto Station"
+        ]
+      },
+      "nohgaKiyomizu": {
+        "bestFor": "Local culture, design, temple-side walking",
+        "localReason": "A good pick if you want Kyoto atmosphere without staying deep in the most crowded Gion lanes.",
+        "notIdealFor": "Travelers who prioritize being next to Kyoto Station.",
+        "tags": [
+          "local culture",
+          "design",
+          "Kiyomizu"
+        ]
+      },
+      "sequenceKyotoGojo": {
+        "bestFor": "Practical Kyoto base, value, smart hotel",
+        "localReason": "Good balance between Kyoto Station access and central Kyoto streets.",
+        "notIdealFor": "Travelers who want classic ryokan service.",
+        "tags": [
+          "practical",
+          "Gojo",
+          "Shijo-Karasuma"
+        ]
+      },
+      "nokuKyoto": {
+        "bestFor": "Quiet Kyoto stay, Imperial Palace area, calmer streets",
+        "localReason": "Better for travelers who want a quieter side of Kyoto rather than the busiest tourist streets.",
+        "notIdealFor": "Travelers who want nightlife or station-first convenience.",
+        "tags": [
+          "quiet",
+          "Imperial Palace",
+          "calm Kyoto"
+        ]
+      },
+      "hotelRoyalClassicOsaka": {
+        "bestFor": "First Osaka trip, Namba convenience, families",
+        "localReason": "A practical Namba pick when you want food, transport, and easy orientation.",
+        "notIdealFor": "Travelers who want a very quiet residential area.",
+        "tags": [
+          "Namba",
+          "practical",
+          "first Osaka"
+        ]
+      },
+      "swissotelNankaiOsaka": {
+        "bestFor": "Kansai Airport access, upper stay, families",
+        "localReason": "Strong if you want Namba plus simple KIX access via Nankai.",
+        "notIdealFor": "Budget travelers.",
+        "tags": [
+          "KIX access",
+          "Namba",
+          "upper stay"
+        ]
+      },
+      "mimaruOsakaNamba": {
+        "bestFor": "Families, groups, playful stay",
+        "localReason": "Apartment-style rooms and group-friendly setup work well for families in Osaka.",
+        "notIdealFor": "Travelers who want a quiet luxury hotel.",
+        "tags": [
+          "family",
+          "group",
+          "kitchen",
+          "Namba"
+        ]
+      },
+      "hotelHankyuRespire": {
+        "bestFor": "Transport, Kyoto day trips, practical Osaka base",
+        "localReason": "A practical Umeda pick when rail access matters more than nightlife.",
+        "notIdealFor": "Travelers who want to be near Dotonbori every night.",
+        "tags": [
+          "Umeda",
+          "transport",
+          "practical"
+        ]
+      },
+      "zentisOsaka": {
+        "bestFor": "Design, adult stay, polished Kita-side base",
+        "localReason": "Better for travelers who want a calmer, more polished north Osaka base.",
+        "notIdealFor": "Families who want maximum room size and kitchen facilities.",
+        "tags": [
+          "design",
+          "Kitashinchi",
+          "adult stay"
+        ]
+      }
+    }
   },
   "suggestedNextSteps": {
     "heading": "Suggested next steps"
@@ -1451,6 +1843,361 @@
     "index": {
       "seeLocalPicksTitle": "Looking for specific hotel examples?",
       "seeLocalPicksBody": "See curated local hotel picks for Tokyo, Kyoto and Osaka — selected by area logic, not as a generic ranking."
+    }
+  },
+  "areasToStayHub": {
+    "meta": {
+      "title": "Where to Stay in Japan — Tokyo, Kyoto, Osaka and Mt. Fuji Area Guides",
+      "description": "Choose where to stay in Japan by city, route, airport access, Shinkansen plans, and travel style. Compare Tokyo, Kyoto, Osaka, and Mt. Fuji hotel areas.",
+      "ogDescription": "Choose where to stay in Japan by city, route, airport access, Shinkansen plans, and travel style."
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "current": "Where to Stay"
+    },
+    "hero": {
+      "eyebrow": "Stay area hub",
+      "title": "Where to Stay in Japan",
+      "subtitle": "Choose the right city and hotel area before booking. Start with Tokyo, Kyoto, Osaka, or Mt. Fuji based on your route, airport, Shinkansen plans, and travel style.",
+      "primaryCta": "Start with Tokyo stay guide",
+      "secondaryCta": "See local hotel examples"
+    },
+    "quickAnswerTitle": "Quick Answer",
+    "quickAnswers": [
+      "First time in Tokyo -> Start with the Tokyo first-time area guide.",
+      "First time in Kyoto -> Compare Kyoto Station, Gion, and Kawaramachi.",
+      "First time in Osaka -> Compare Namba, Umeda, and Shin-Osaka.",
+      "Early Shinkansen day -> Choose a hotel base that works for luggage and early trains.",
+      "Staying near Mt. Fuji -> Use Kawaguchiko if you want an overnight Fuji-view stay."
+    ],
+    "citySection": {
+      "eyebrow": "City first",
+      "title": "Choose your city"
+    },
+    "cityCards": {
+      "tokyo": {
+        "title": "Tokyo",
+        "subtitle": "Best for first-time Japan, nightlife, airport choices, and Shinkansen planning.",
+        "cta": "Open Tokyo stay guide",
+        "placementLabel": "Tokyo city card"
+      },
+      "kyoto": {
+        "title": "Kyoto",
+        "subtitle": "Best for temples, classic atmosphere, traditional streets, and day trips.",
+        "cta": "Open Kyoto guide",
+        "placementLabel": "Kyoto city card"
+      },
+      "osaka": {
+        "title": "Osaka",
+        "subtitle": "Best for food, nightlife, Kansai airport access, and Kyoto / Nara day trips.",
+        "cta": "Open Osaka guide",
+        "placementLabel": "Osaka city card"
+      },
+      "kawaguchiko": {
+        "title": "Mt. Fuji / Kawaguchiko",
+        "subtitle": "Best if you want to stay overnight near Mt. Fuji instead of only seeing it from the Shinkansen.",
+        "cta": "Find Fuji-view stays",
+        "placementLabel": "Kawaguchiko city card"
+      }
+    },
+    "localPicks": {
+      "eyebrow": "Hotel examples",
+      "title": "Need actual hotel examples?",
+      "body": "See practical hotel examples for Tokyo, Kyoto, and Osaka. These are not rankings — they are starting points by area logic.",
+      "cta": "See local hotel picks"
+    },
+    "problemSection": {
+      "eyebrow": "Route logic",
+      "title": "Choose by travel problem"
+    },
+    "problemCards": {
+      "firstTime": {
+        "title": "I am visiting Japan for the first time",
+        "cta": "Start with Tokyo"
+      },
+      "earlyShinkansen": {
+        "title": "I have an early Shinkansen",
+        "cta": "Pick a rail-friendly base"
+      },
+      "narita": {
+        "title": "I arrive at Narita",
+        "cta": "Compare Tokyo bases"
+      },
+      "temples": {
+        "title": "I want temples and old-town atmosphere",
+        "cta": "Compare Kyoto areas"
+      },
+      "foodNightlife": {
+        "title": "I want food and nightlife",
+        "cta": "Compare Osaka areas"
+      },
+      "fujiOvernight": {
+        "title": "I want a Fuji-view overnight stay",
+        "cta": "See Kawaguchiko"
+      }
+    },
+    "featuredGuides": {
+      "eyebrow": "Existing guides",
+      "title": "Featured stay guides",
+      "groups": {
+        "tokyo": "Tokyo",
+        "kyoto": "Kyoto",
+        "osaka": "Osaka",
+        "fuji": "Mt. Fuji"
+      },
+      "guides": {
+        "tokyo-first-time": {
+          "title": "Where to stay in Tokyo — first-time visitor guide",
+          "description": "Start here to compare Shinjuku, Ueno, Asakusa, Tokyo Station, and quieter East Tokyo.",
+          "tags": [
+            "Tokyo",
+            "First-time",
+            "Area guide"
+          ]
+        },
+        "where-to-stay-before-shinkansen": {
+          "title": "Where to stay before taking the Shinkansen in Tokyo",
+          "description": "Use this when luggage and an early Tokyo Station departure matter.",
+          "tags": [
+            "Tokyo",
+            "Shinkansen",
+            "Luggage"
+          ]
+        },
+        "tokyo-station-vs-shinjuku": {
+          "title": "Tokyo Station vs Shinjuku",
+          "description": "Compare rail logistics with food, nightlife, and first-time convenience.",
+          "tags": [
+            "Tokyo Station",
+            "Shinjuku"
+          ]
+        },
+        "ueno-vs-shinjuku": {
+          "title": "Ueno vs Shinjuku",
+          "description": "Choose between Narita access and west-side Tokyo energy.",
+          "tags": [
+            "Ueno",
+            "Shinjuku"
+          ]
+        },
+        "asakusa-vs-ueno": {
+          "title": "Asakusa vs Ueno",
+          "description": "Compare old-town atmosphere with practical rail access.",
+          "tags": [
+            "Asakusa",
+            "Ueno"
+          ]
+        },
+        "kyoto-first-time": {
+          "title": "Where to stay in Kyoto for first-time visitors",
+          "description": "Compare Kyoto Station, Kawaramachi / Shijo, Gion, Arashiyama, and quieter north Kyoto.",
+          "tags": [
+            "Kyoto",
+            "First-time",
+            "Area guide"
+          ]
+        },
+        "kyoto-station-vs-gion": {
+          "title": "Kyoto Station vs Gion",
+          "description": "Decide whether logistics or classic Kyoto atmosphere should lead.",
+          "tags": [
+            "Kyoto Station",
+            "Gion"
+          ]
+        },
+        "osaka-first-time": {
+          "title": "Where to stay in Osaka for first-time visitors",
+          "description": "Compare Namba, Umeda, Shin-Osaka, Tennoji, and quieter central Osaka.",
+          "tags": [
+            "Osaka",
+            "First-time",
+            "Area guide"
+          ]
+        },
+        "namba-vs-umeda": {
+          "title": "Namba vs Umeda",
+          "description": "Choose between food/nightlife and rail access.",
+          "tags": [
+            "Namba",
+            "Umeda"
+          ]
+        },
+        "shin-osaka-vs-namba": {
+          "title": "Shin-Osaka vs Namba",
+          "description": "Decide whether Shinkansen logistics should drive your Osaka base.",
+          "tags": [
+            "Shin-Osaka",
+            "Namba"
+          ]
+        },
+        "kawaguchiko": {
+          "title": "Where to stay in Kawaguchiko — best Mt. Fuji view hotels",
+          "description": "Use this for an overnight Mt. Fuji view stay around Kawaguchiko.",
+          "tags": [
+            "Mt. Fuji",
+            "Kawaguchiko",
+            "Overnight"
+          ]
+        }
+      }
+    },
+    "continuePlanning": {
+      "title": "Continue planning",
+      "plan": "Plan Your Trip",
+      "seat": "Seat Checker",
+      "airport": "Airport Transfers",
+      "esim": "Japan eSIM"
+    }
+  },
+  "planYourTrip": {
+    "meta": {
+      "title": "Japan Trip Essentials After Choosing Your Shinkansen Seat | fujiseat",
+      "description": "You checked your Fuji-side Shinkansen seat. Now prepare the rest of your Japan trip with rail, arrival, hotel, luggage, Mt. Fuji, and city activity essentials.",
+      "ogTitle": "Japan Trip Essentials After Choosing Your Shinkansen Seat",
+      "ogDescription": "You checked your Fuji-side Shinkansen seat. Now prepare the rest of your Japan trip."
+    },
+    "providers": {
+      "omio": "Compare on Omio",
+      "readGuide": "Read guide"
+    },
+    "hero": {
+      "eyebrow": "Fujiseat booking path",
+      "title": "Japan Trip Booking Guide",
+      "subtitle": "You found the Fuji-side Shinkansen seat. Now prepare the rest of your Japan trip in the right order.",
+      "shinkansenCta": "Book Shinkansen ticket",
+      "plannerCta": "Open Trip Planner"
+    },
+    "bookingOrder": {
+      "eyebrow": "Book in this order",
+      "items": [
+        "Confirm the Shinkansen direction and Fuji-side seat.",
+        "Choose rail: single ticket first, JR Pass only if the route fits.",
+        "Pick the hotel base before filling activities.",
+        "Prepare arrival essentials before landing."
+      ],
+      "guideCta": "Read Fuji-side seat guide"
+    },
+    "rail": {
+      "eyebrow": "Rail showdown",
+      "title": "Shinkansen Ticket vs JR Pass",
+      "subtitle": "Choose the rail option that matches your route.",
+      "singleTicket": {
+        "title": "Single Shinkansen Ticket",
+        "summary": "Best for simple city-to-city rail days.",
+        "bullets": [
+          "Tokyo → Kyoto / Osaka",
+          "One-way or simple route",
+          "First-time 5–7 day trips"
+        ],
+        "action": "Book Shinkansen ticket",
+        "description": "Best for Tokyo → Kyoto / Osaka, one-way, or simple first-time routes."
+      },
+      "jrPass": {
+        "title": "JR Pass",
+        "summary": "Best only when your route has enough JR distance.",
+        "bullets": [
+          "Hiroshima",
+          "Return to Tokyo by Shinkansen",
+          "Multiple long-distance JR rides"
+        ],
+        "action": "Check JR Pass options",
+        "description": "Best if your route includes Hiroshima, multiple long-distance JR rides, or returning to Tokyo by Shinkansen."
+      }
+    },
+    "hotel": {
+      "eyebrow": "HOTEL BASE DECISION",
+      "title": "Choose your Tokyo base before booking hotels",
+      "subtitle": "Your hotel area affects airport access, Shinkansen days, luggage, and how your first nights in Tokyo feel.",
+      "hubCta": "Compare Tokyo stay areas",
+      "cards": {
+        "shinjuku": {
+          "title": "First-time convenience",
+          "area": "Shinjuku",
+          "reason": "Best when you want food, nightlife, shopping, and flexible train access in one base.",
+          "detailLabel": "See Shinjuku details",
+          "hotelActionLabel": "Compare Shinjuku hotels"
+        },
+        "uenoAsakusa": {
+          "title": "Narita access / value",
+          "area": "Ueno or Asakusa",
+          "reason": "Best if Narita arrival, better-value hotels, museums, temples, or old-town Tokyo matter most.",
+          "detailLabel": "See Ueno details",
+          "extraDetailLabel": "See Asakusa details",
+          "hotelActionLabel": "Compare Ueno / Asakusa hotels"
+        },
+        "tokyoStation": {
+          "title": "Early Shinkansen",
+          "area": "Tokyo Station",
+          "reason": "Best when luggage, early Kyoto / Osaka departures, and clean station logistics matter.",
+          "detailLabel": "See Tokyo Station details",
+          "hotelActionLabel": "Compare hotels near Tokyo Station"
+        },
+        "eastTokyo": {
+          "title": "Quiet local Tokyo",
+          "area": "East Tokyo",
+          "reason": "Best for calmer walks, coffee, riverside neighborhoods, and a slower second base.",
+          "detailLabel": "See East Tokyo details"
+        }
+      }
+    },
+    "arrival": {
+      "eyebrow": "Arrival essentials",
+      "title": "Prepare the first hour in Japan",
+      "subtitle": "Keep this practical: data, airport movement, and the station basics you need on arrival day.",
+      "esim": {
+        "title": "Japan eSIM",
+        "description": "Get online for maps, translation, and transit apps before leaving the airport.",
+        "cta": "Get Japan eSIM"
+      },
+      "airport": {
+        "title": "Airport transfer",
+        "description": "Book or compare the first ride from the airport when luggage and timing matter.",
+        "cta": "Book airport transfer"
+      },
+      "station": {
+        "title": "Station prep",
+        "description": "Practice exits, transfer gates, and platform signs before your first train ride.",
+        "cta": "Start station practice"
+      }
+    },
+    "activities": {
+      "eyebrow": "Activities",
+      "title": "Explore by city",
+      "subtitle": "Add activities after the route, hotels, and arrival basics are stable.",
+      "cards": {
+        "tokyo": {
+          "title": "Tokyo",
+          "description": "Tours, food walks, observation decks, and first-time activities.",
+          "cta": "Browse Tokyo activities",
+          "imageAlt": "Tokyo city stay and activity area"
+        },
+        "kyoto": {
+          "title": "Kyoto",
+          "description": "Kimono rental, temples, guided walks, and classic Kyoto experiences.",
+          "cta": "Browse Kyoto activities",
+          "imageAlt": "Kyoto temple district at sunset"
+        },
+        "osaka": {
+          "title": "Osaka",
+          "description": "Food, passes, theme parks, and evening-friendly activities.",
+          "cta": "Browse Osaka activities",
+          "imageAlt": "Osaka Dotonbori canal at night"
+        },
+        "fujiHakone": {
+          "title": "Mt. Fuji / Hakone",
+          "description": "Add a mountain-side day or overnight stop after the main route is fixed.",
+          "cta": "Browse Fuji area add-ons",
+          "imageAlt": "Mt. Fuji and Lake Kawaguchiko at dusk"
+        }
+      }
+    },
+    "optional": {
+      "eyebrow": "Optional add-ons",
+      "title": "Useful, but not first-step decisions",
+      "insurance": "Check travel insurance",
+      "station": "Station practice",
+      "commandCenter": "Command Center",
+      "localTokyo": "Local Tokyo"
     }
   }
 }

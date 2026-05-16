@@ -2,15 +2,23 @@
 
 import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
 import type { LocalHotelPick } from "@/lib/content/local-hotel-picks";
+import { useTranslations } from "next-intl";
 
 type LocalHotelPickCardProps = {
   pick: LocalHotelPick;
   locale: string;
   pagePath: string;
   groupLabel?: string;
+  copy?: {
+    bestFor: string;
+    localReason: string;
+    notIdealFor: string;
+    tags: string[];
+  };
 };
 
-export function LocalHotelPickCard({ pick, locale, pagePath, groupLabel }: LocalHotelPickCardProps) {
+export function LocalHotelPickCard({ pick, locale, pagePath, groupLabel, copy }: LocalHotelPickCardProps) {
+  const t = useTranslations("localHotelPicks");
   const agodaUrl = pick.agodaUrl.trim();
   const tripUrl = pick.tripFallbackUrl.trim();
   const providerLinks: Array<{ provider: ProviderId; href: string; label: string; linkId: string }> = [
@@ -32,7 +40,7 @@ export function LocalHotelPickCard({ pick, locale, pagePath, groupLabel }: Local
         </div>
 
         <div className="mt-3 flex flex-wrap gap-1.5">
-          {pick.tags.slice(0, 3).map((tag) => (
+          {(copy?.tags ?? pick.tags).slice(0, 3).map((tag) => (
             <span key={tag} className="rounded-full bg-slate-100 px-2.5 py-1 text-[10px] font-medium text-slate-600">
               {tag}
             </span>
@@ -41,16 +49,16 @@ export function LocalHotelPickCard({ pick, locale, pagePath, groupLabel }: Local
 
         <div className="mt-4 space-y-3">
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-wide text-emerald-700">Best for</p>
-            <p className="mt-1 text-xs leading-5 text-slate-700">{pick.bestFor}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-emerald-700">{t("bestFor")}</p>
+            <p className="mt-1 text-xs leading-5 text-slate-700">{copy?.bestFor ?? pick.bestFor}</p>
           </div>
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-wide text-sky-700">Why this pick</p>
-            <p className="mt-1 text-xs leading-5 text-slate-700">{pick.localReason}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-sky-700">{t("whyThisLocalPick")}</p>
+            <p className="mt-1 text-xs leading-5 text-slate-700">{copy?.localReason ?? pick.localReason}</p>
           </div>
           <div>
-            <p className="text-[10px] font-semibold uppercase tracking-wide text-amber-700">Not ideal for</p>
-            <p className="mt-1 text-xs leading-5 text-slate-700">{pick.notIdealFor}</p>
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-amber-700">{t("notIdealFor")}</p>
+            <p className="mt-1 text-xs leading-5 text-slate-700">{copy?.notIdealFor ?? pick.notIdealFor}</p>
           </div>
         </div>
 

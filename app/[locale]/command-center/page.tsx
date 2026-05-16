@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import JapanTripCommandCenter from "@/src/JapanTripCommandCenter";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
+import { LanguageSelector } from "../components/LanguageSelector";
 
 export const metadata: Metadata = {
   title: "Japan Trip Command Center — fujiseat.com",
@@ -21,12 +22,17 @@ export default function CommandCenterPage() {
     <main>
       <section className="bg-[#0a0e1a] px-5 py-6 text-[#c8d8f0] md:px-8">
         <div className="mx-auto max-w-6xl">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#4a9eff]">
-            Japan trip route map
-          </p>
-          <h1 className="mt-2 text-2xl font-semibold text-white md:text-3xl">
-            Japan Trip Command Center
-          </h1>
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#4a9eff]">
+                Japan trip route map
+              </p>
+              <h1 className="mt-2 text-2xl font-semibold text-white md:text-3xl">
+                Japan Trip Command Center
+              </h1>
+            </div>
+            <LanguageSelector />
+          </div>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-[#8fa8c8]">
             Plan the practical flow of a first Japan trip: Tokyo arrival, Mt.
             Fuji views from the Shinkansen, Kyoto and Osaka stays, airport

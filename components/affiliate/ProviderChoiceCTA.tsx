@@ -80,9 +80,6 @@ function providerClass(provider: AffiliateProvider, product: string, variant: Pr
   if (provider === "other") {
     return [base, "border border-[#168a56] bg-[#168a56] text-white hover:bg-[#0f6f45] focus-visible:ring-emerald-200"].join(" ");
   }
-  if (product === "jr_pass") {
-    return [base, "border border-[#168a56] bg-[#168a56] text-white hover:bg-[#0f6f45] focus-visible:ring-emerald-200"].join(" ");
-  }
   return [base, "border border-[#ff7a00] bg-[#ff7a00] text-white hover:bg-[#e66700] focus-visible:ring-orange-200"].join(" ");
 }
 

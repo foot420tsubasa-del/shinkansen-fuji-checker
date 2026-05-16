@@ -12,12 +12,14 @@ import {
   type LocalHotelPick,
 } from "@/lib/content/local-hotel-picks";
 import { LocalHotelPickCard } from "./LocalHotelPickCard";
+import { getTranslations } from "next-intl/server";
 
 type Props = {
   params: Promise<{ locale: string }>;
 };
 
 type TokyoPickGroup = {
+  key: string;
   label: string;
   description: string;
   pickIds: string[];
@@ -27,6 +29,7 @@ type TokyoPickGroup = {
 
 const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
   {
+    key: "calmShinjuku",
     label: "Calm Shinjuku",
     description: "Shinjuku access without sleeping in the loudest nightlife blocks.",
     pickIds: ["yuenShinjuku"],
@@ -34,6 +37,7 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     fallbackLabel: "See Shinjuku area logic",
   },
   {
+    key: "familyGroup",
     label: "Family / group",
     description: "Apartment-style rooms and practical layouts for families or friends.",
     pickIds: ["mimaruShinjukuWest"],
@@ -41,6 +45,7 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     fallbackLabel: "See Shinjuku area logic",
   },
   {
+    key: "nishiShinjuku",
     label: "Practical Nishi-Shinjuku",
     description: "West-side Shinjuku examples for calmer logistics and first Tokyo stays.",
     pickIds: ["daiwaRoynetNishiShinjuku", "theKnotShinjuku"],
@@ -48,6 +53,7 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     fallbackLabel: "See Shinjuku area logic",
   },
   {
+    key: "eastTokyo",
     label: "East Tokyo personality stay",
     description: "A more local-feeling base for travelers who care about cafes, streets, and atmosphere.",
     pickIds: ["citanHostel"],
@@ -55,6 +61,7 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     fallbackLabel: "See East Tokyo area logic",
   },
   {
+    key: "tokyoStation",
     label: "Tokyo Station logistics",
     description: "Best when early Shinkansen, luggage, and transfers matter more than nightlife.",
     pickIds: [],
@@ -62,11 +69,6 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     fallbackLabel: "See Tokyo Station area logic",
   },
 ];
-
-const CITY_INTROS: Record<string, string> = {
-  Kyoto: "Examples that map to station convenience, quieter Kyoto streets, and temple-side walking.",
-  Osaka: "Examples that map to Namba food access, KIX convenience, group stays, and Kita-side logistics.",
-};
 
 const filledPlanningLinkClass =
   "flex flex-col rounded-2xl border border-[#168a56] bg-[#168a56] p-4 text-white transition-colors hover:bg-[#0f6f45]";
@@ -77,15 +79,15 @@ function pickMapById(picks: LocalHotelPick[]) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "localHotelPicks.page.meta" });
+
   return {
-    title: "Japanese Local Hotel Picks for Tokyo, Kyoto and Osaka | fujiseat",
-    description:
-      "A curated set of hotel picks in Tokyo, Kyoto and Osaka based on Japanese local area logic, including calmer Shinjuku stays, Kyoto Station bases, family-friendly rooms and practical Osaka locations.",
+    title: t("title"),
+    description: t("description"),
     robots: locale === "en" ? undefined : { index: false, follow: true },
     openGraph: {
-      title: "Japanese Local Hotel Picks for Tokyo, Kyoto and Osaka",
-      description:
-        "A curated set of hotel picks in Tokyo, Kyoto and Osaka based on Japanese local area logic, including calmer Shinjuku stays, Kyoto Station bases, family-friendly rooms and practical Osaka locations.",
+      title: t("ogTitle"),
+      description: t("ogDescription"),
       siteName: "fujiseat",
     },
     alternates: getAlternates("/local-hotel-picks", locale),
@@ -94,8 +96,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function LocalHotelPicksPage({ params }: Props) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "localHotelPicks" });
   const pagePath = "/local-hotel-picks";
   const allPicksById = pickMapById(getAllLocalHotelPicks());
+  const cityLabels = t.raw("page.cityLabels") as Record<string, string>;
+  const planningLinks = t.raw("page.continue.links") as Array<{ href: string; label: string; desc: string }>;
+
+  function pickCopy(pick: LocalHotelPick) {
+    return t.raw(`picks.${pick.id}`) as {
+      bestFor: string;
+      localReason: string;
+      notIdealFor: string;
+      tags: string[];
+    };
+  }
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -103,21 +117,21 @@ export default async function LocalHotelPicksPage({ params }: Props) {
 
       <Container className="py-8 md:py-12">
         <Breadcrumb
-          items={[{ label: "Local Hotel Picks" }]}
+          items={[{ label: t("page.breadcrumb") }]}
         />
 
         <section className="mt-4 rounded-[24px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">Hotel examples</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">{t("page.hero.eyebrow")}</p>
           <h1 className="mt-3 text-3xl font-semibold leading-tight text-slate-950 md:text-5xl">
-            Local Hotel Picks in Japan
+            {t("page.hero.title")}
           </h1>
           <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">
-            Not rankings. Practical hotel examples by area logic for Tokyo, Kyoto, and Osaka.
+            {t("page.hero.subtitle")}
           </p>
           <nav className="mt-6 flex flex-wrap gap-2" aria-label="Hotel pick city tabs">
             {LOCAL_HOTEL_PICK_CITIES.map((city) => (
               <a key={city} href={`#${city.toLowerCase()}`} className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-700 transition-colors hover:border-emerald-200 hover:bg-emerald-50 hover:text-[#106b43]">
-                {city}
+                {cityLabels[city] ?? city}
               </a>
             ))}
           </nav>
@@ -127,11 +141,11 @@ export default async function LocalHotelPicksPage({ params }: Props) {
           <section id="tokyo" className="scroll-mt-24">
             <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end">
               <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">Tokyo</p>
-                <h2 className="mt-1 text-2xl font-semibold text-slate-950">Tokyo examples by area logic</h2>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">{cityLabels.Tokyo}</p>
+                <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("page.tokyo.title")}</h2>
               </div>
               <Link href="/areas-to-stay/tokyo-first-time" className="text-sm font-semibold text-[#106b43] underline underline-offset-4">
-                Tokyo stay area guide
+                {t("page.tokyo.guideLink")}
               </Link>
             </div>
 
@@ -142,15 +156,15 @@ export default async function LocalHotelPicksPage({ params }: Props) {
                   .filter(Boolean) as LocalHotelPick[];
 
                 return (
-                  <section key={group.label} className="rounded-[22px] border border-slate-200 bg-slate-50/80 p-4 md:p-5">
+                  <section key={group.key} className="rounded-[22px] border border-slate-200 bg-slate-50/80 p-4 md:p-5">
                     <div className="flex flex-col justify-between gap-2 md:flex-row md:items-end">
                       <div>
-                        <h3 className="text-base font-semibold text-slate-950">{group.label}</h3>
-                        <p className="mt-1 max-w-2xl text-xs leading-5 text-slate-600">{group.description}</p>
+                        <h3 className="text-base font-semibold text-slate-950">{t(`page.tokyo.groups.${group.key}.label`)}</h3>
+                        <p className="mt-1 max-w-2xl text-xs leading-5 text-slate-600">{t(`page.tokyo.groups.${group.key}.description`)}</p>
                       </div>
                       {group.fallbackHref && group.fallbackLabel ? (
                         <Link href={group.fallbackHref} className="text-xs font-semibold text-[#106b43] underline underline-offset-4">
-                          {group.fallbackLabel}
+                          {t(`page.tokyo.groups.${group.key}.fallbackLabel`)}
                         </Link>
                       ) : null}
                     </div>
@@ -163,16 +177,17 @@ export default async function LocalHotelPicksPage({ params }: Props) {
                             pick={pick}
                             locale={locale}
                             pagePath={pagePath}
-                            groupLabel={group.label}
+                            groupLabel={t(`page.tokyo.groups.${group.key}.label`)}
+                            copy={pickCopy(pick)}
                           />
                         ))}
                       </div>
                     ) : (
                       <div className="mt-4 rounded-[18px] border border-dashed border-slate-300 bg-white">
                         <div className="p-4">
-                          <p className="text-sm font-semibold text-slate-900">No individual hotel example here yet.</p>
+                          <p className="text-sm font-semibold text-slate-900">{t("page.empty.title")}</p>
                           <p className="mt-1 text-xs leading-5 text-slate-600">
-                            Use the area guide first, then compare hotels once this base fits your route.
+                            {t("page.empty.body")}
                           </p>
                         </div>
                       </div>
@@ -191,17 +206,17 @@ export default async function LocalHotelPicksPage({ params }: Props) {
               <section key={city} id={city.toLowerCase()} className="scroll-mt-24">
                 <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end">
                   <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">{city}</p>
-                    <h2 className="mt-1 text-2xl font-semibold text-slate-950">{city} examples by area logic</h2>
-                    <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{CITY_INTROS[city]}</p>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">{cityLabels[city] ?? city}</p>
+                    <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("page.citySection.title", { city: cityLabels[city] ?? city })}</h2>
+                    <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t(`page.citySection.intros.${city}`)}</p>
                   </div>
                   {city === "Kyoto" ? (
                     <Link href="/areas-to-stay/kyoto-station-vs-gion" className="text-sm font-semibold text-[#106b43] underline underline-offset-4">
-                      Kyoto stay area guide
+                      {t("page.citySection.kyotoGuide")}
                     </Link>
                   ) : (
                     <Link href="/areas-to-stay/namba-vs-umeda" className="text-sm font-semibold text-[#106b43] underline underline-offset-4">
-                      Osaka stay area guide
+                      {t("page.citySection.osakaGuide")}
                     </Link>
                   )}
                 </div>
@@ -214,6 +229,7 @@ export default async function LocalHotelPicksPage({ params }: Props) {
                       locale={locale}
                       pagePath={pagePath}
                       groupLabel={pick.area}
+                      copy={pickCopy(pick)}
                     />
                   ))}
                 </div>
@@ -223,15 +239,10 @@ export default async function LocalHotelPicksPage({ params }: Props) {
 
           <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
             <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-500">
-              Continue planning
+              {t("page.continue.eyebrow")}
             </p>
             <div className="mt-3 grid gap-3 md:grid-cols-2">
-              {[
-                { href: "/areas-to-stay/tokyo-first-time", label: "Tokyo stay area guide", desc: "Choose Shinjuku, Ueno, Asakusa, Tokyo Station, or East Tokyo." },
-                { href: "/areas-to-stay/kyoto-station-vs-gion", label: "Kyoto stay area guide", desc: "Pick between station convenience and Kyoto atmosphere." },
-                { href: "/areas-to-stay/namba-vs-umeda", label: "Osaka stay area guide", desc: "Compare Osaka's two main hotel zones." },
-                { href: "/plan-your-trip", label: "Plan Your Trip", desc: "Rail, hotels, arrival setup, and route order." },
-              ].map((item) => (
+              {planningLinks.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}

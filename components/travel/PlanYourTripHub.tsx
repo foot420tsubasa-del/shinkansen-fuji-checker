@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Bed, CalendarDays, ExternalLink, Landmark, Luggage, MapPinned, Plane, ShieldCheck, Signpost, Train, Wifi } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
@@ -24,6 +25,7 @@ type AffiliateProduct = {
 };
 
 type TokyoBaseCard = {
+  key: TokyoBaseCardKey;
   title: string;
   area: string;
   reason: string;
@@ -36,6 +38,7 @@ type TokyoBaseCard = {
 };
 
 type CityCard = {
+  key: CityCardKey;
   title: string;
   description: string;
   linkId: string;
@@ -43,6 +46,9 @@ type CityCard = {
   imageSrc?: string;
   imageAlt?: string;
 };
+
+type TokyoBaseCardKey = "shinjuku" | "uenoAsakusa" | "tokyoStation" | "eastTokyo";
+type CityCardKey = "tokyo" | "kyoto" | "osaka" | "fujiHakone";
 
 const shinkansenTicket = getAffUrl("shinkansenTicket");
 const jrPass = getAffUrl("jrPass");
@@ -57,79 +63,56 @@ function providerChoices(...providers: Array<ProviderChoiceButton | null | undef
   return providers.filter((provider): provider is ProviderChoiceButton => Boolean(provider));
 }
 
-const tokyoBaseCards: TokyoBaseCard[] = [
+const tokyoBaseCardConfigs: ReadonlyArray<
+  Pick<TokyoBaseCard, "key" | "href"> &
+    Partial<Pick<TokyoBaseCard, "extraDetailHref">> & {
+      hotelKeys?: readonly HotelAreaKey[];
+    }
+> = [
   {
-    title: "First-time convenience",
-    area: "Shinjuku",
-    reason: "Best when you want food, nightlife, shopping, and flexible train access in one base.",
+    key: "shinjuku",
     href: "/areas-to-stay/tokyo/shinjuku",
-    detailLabel: "See Shinjuku details",
     hotelKeys: ["shinjuku"],
-    hotelActionLabel: "Compare Shinjuku hotels",
   },
   {
-    title: "Narita access / value",
-    area: "Ueno or Asakusa",
-    reason: "Best if Narita arrival, better-value hotels, museums, temples, or old-town Tokyo matter most.",
+    key: "uenoAsakusa",
     href: "/areas-to-stay/tokyo/ueno",
-    detailLabel: "See Ueno details",
     extraDetailHref: "/areas-to-stay/tokyo/asakusa",
-    extraDetailLabel: "See Asakusa details",
     hotelKeys: ["ueno", "asakusa"],
-    hotelActionLabel: "Compare Ueno / Asakusa hotels",
   },
   {
-    title: "Early Shinkansen",
-    area: "Tokyo Station",
-    reason: "Best when luggage, early Kyoto / Osaka departures, and clean station logistics matter.",
+    key: "tokyoStation",
     href: "/areas-to-stay/tokyo/tokyo-station",
-    detailLabel: "See Tokyo Station details",
     hotelKeys: ["tokyoStation"],
-    hotelActionLabel: "Compare hotels near Tokyo Station",
   },
   {
-    title: "Quiet local Tokyo",
-    area: "East Tokyo",
-    reason: "Best for calmer walks, coffee, riverside neighborhoods, and a slower second base.",
+    key: "eastTokyo",
     href: "/areas-to-stay/tokyo/east-tokyo",
-    detailLabel: "See East Tokyo details",
   },
-];
+] as const;
 
-const cityCards: CityCard[] = [
+const cityCardConfigs = [
   {
-    title: "Tokyo",
-    description: "Tours, food walks, observation decks, and first-time activities.",
+    key: "tokyo",
     linkId: "cityTokyo",
-    cta: "Browse Tokyo activities",
     imageSrc: "/images/stay/tokyo/tokyo-stay-hero.png",
-    imageAlt: "Tokyo city stay and activity area",
   },
   {
-    title: "Kyoto",
-    description: "Kimono rental, temples, guided walks, and classic Kyoto experiences.",
+    key: "kyoto",
     linkId: "cityKyoto",
-    cta: "Browse Kyoto activities",
     imageSrc: "/images/Kyoto.png",
-    imageAlt: "Kyoto temple district at sunset",
   },
   {
-    title: "Osaka",
-    description: "Food, passes, theme parks, and evening-friendly activities.",
+    key: "osaka",
     linkId: "cityOsaka",
-    cta: "Browse Osaka activities",
     imageSrc: "/images/Osaka.png",
-    imageAlt: "Osaka Dotonbori canal at night",
   },
   {
-    title: "Mt. Fuji / Hakone",
-    description: "Add a mountain-side day or overnight stop after the main route is fixed.",
+    key: "fujiHakone",
     linkId: "hakone",
-    cta: "Browse Fuji area add-ons",
     imageSrc: "/images/Kawaguchiko.png",
-    imageAlt: "Mt. Fuji and Lake Kawaguchiko at dusk",
   },
-];
+] as const satisfies ReadonlyArray<Omit<CityCard, "title" | "description" | "cta" | "imageAlt">>;
 
 function AffiliateButton({
   item,
@@ -168,7 +151,7 @@ function AffiliateButton({
   );
 }
 
-function hotelProviderChoicesForKey(hotelKey: HotelAreaKey, labelPrefix?: string) {
+function hotelProviderChoicesForKey(hotelKey: HotelAreaKey) {
   const hotel = getHotelLink(hotelKey);
   const config = getTripHotelConfig(hotelKey);
   const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
@@ -178,7 +161,7 @@ function hotelProviderChoicesForKey(hotelKey: HotelAreaKey, labelPrefix?: string
   return providerChoices(
     tripHref
       ? {
-          label: labelPrefix ? `${labelPrefix} Trip.com` : "Trip.com",
+          label: "Trip.com",
           href: tripHref,
           trackingHref: tripTrackingHref,
           provider: "trip",
@@ -191,7 +174,7 @@ function hotelProviderChoicesForKey(hotelKey: HotelAreaKey, labelPrefix?: string
       : null,
     agodaLink
       ? {
-          label: labelPrefix ? `${labelPrefix} Agoda` : "Agoda",
+          label: "Agoda",
           href: agodaLink.href,
           trackingHref: agodaLink.trackingHref,
           provider: "agoda",
@@ -219,7 +202,7 @@ function HotelProviderChoice({
   const providers =
     hotelKeys.length === 1
       ? hotelProviderChoicesForKey(hotelKeys[0])
-      : hotelKeys.flatMap((hotelKey) => hotelProviderChoicesForKey(hotelKey, getTripHotelConfig(hotelKey).areaName)).slice(0, 2);
+      : hotelKeys.flatMap((hotelKey) => hotelProviderChoicesForKey(hotelKey)).slice(0, 2);
 
   if (providers.length === 0) return null;
 
@@ -236,19 +219,40 @@ function HotelProviderChoice({
 }
 
 export function PlanYourTripHub() {
-  const locale = typeof window === "undefined" ? "en" : (window.location.pathname.split("/").filter(Boolean)[0] || "en");
+  const locale = useLocale();
+  const t = useTranslations("planYourTrip");
+  const bookingOrderItems = t.raw("bookingOrder.items") as string[];
+  const singleTicketBullets = t.raw("rail.singleTicket.bullets") as string[];
+  const jrPassBullets = t.raw("rail.jrPass.bullets") as string[];
+  const tokyoBaseCards: TokyoBaseCard[] = tokyoBaseCardConfigs.map((base) => ({
+    ...base,
+    hotelKeys: base.hotelKeys ? [...base.hotelKeys] : undefined,
+    title: t(`hotel.cards.${base.key}.title`),
+    area: t(`hotel.cards.${base.key}.area`),
+    reason: t(`hotel.cards.${base.key}.reason`),
+    detailLabel: t(`hotel.cards.${base.key}.detailLabel`),
+    extraDetailLabel: base.extraDetailHref ? t(`hotel.cards.${base.key}.extraDetailLabel`) : undefined,
+    hotelActionLabel: base.hotelKeys ? t(`hotel.cards.${base.key}.hotelActionLabel`) : undefined,
+  }));
+  const cityCards: CityCard[] = cityCardConfigs.map((city) => ({
+    ...city,
+    title: t(`activities.cards.${city.key}.title`),
+    description: t(`activities.cards.${city.key}.description`),
+    cta: t(`activities.cards.${city.key}.cta`),
+    imageAlt: t(`activities.cards.${city.key}.imageAlt`),
+  }));
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
       <Container className="py-8 md:py-12">
         <section className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_340px] lg:items-stretch">
           <Card className="p-6 md:p-9" tone="navy">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-sky-200">Fujiseat booking path</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-sky-200">{t("hero.eyebrow")}</p>
             <h1 className="mt-3 max-w-4xl text-3xl font-semibold leading-tight text-white md:text-5xl">
-              Japan Trip Booking Guide
+              {t("hero.title")}
             </h1>
             <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-300 md:text-base">
-              You found the Fuji-side Shinkansen seat. Now prepare the rest of your Japan trip in the right order.
+              {t("hero.subtitle")}
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               {shinkansenTicket ? (
@@ -256,7 +260,7 @@ export function PlanYourTripHub() {
                   href={shinkansenTicket}
                   placement="plan_trip_hero"
                   item={{
-                    label: "Book Shinkansen ticket",
+                    label: t("hero.shinkansenCta"),
                     linkId: "shinkansenTicket",
                     category: "train",
                     provider: "klook",
@@ -267,20 +271,20 @@ export function PlanYourTripHub() {
                   locale={locale}
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] border border-[#ff7a00] bg-[#ff7a00] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
                 >
-                  Book Shinkansen ticket
+                  {t("hero.shinkansenCta")}
                   <ExternalLink className="h-4 w-4" />
                 </AffiliateButton>
               ) : null}
               <TrackedCtaLink
                 href="/planner"
                 placement="plan_trip_hero"
-                label="Open Trip Planner"
+                label={t("hero.plannerCta")}
                 category="navigation"
                 pagePath="/plan-your-trip"
-      locale={locale}
+                locale={locale}
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] border border-slate-500 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/15"
               >
-                Open Trip Planner
+                {t("hero.plannerCta")}
                 <ArrowRight className="h-4 w-4" />
               </TrackedCtaLink>
             </div>
@@ -288,14 +292,9 @@ export function PlanYourTripHub() {
 
           <Card className="flex flex-col justify-between p-5" tone="accent">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">Book in this order</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("bookingOrder.eyebrow")}</p>
               <ol className="mt-4 space-y-3 text-sm text-slate-700">
-                {[
-                  "Confirm the Shinkansen direction and Fuji-side seat.",
-                  "Choose rail: single ticket first, JR Pass only if the route fits.",
-                  "Pick the hotel base before filling activities.",
-                  "Prepare arrival essentials before landing.",
-                ].map((item, index) => (
+                {bookingOrderItems.map((item, index) => (
                   <li key={item} className="flex gap-3">
                     <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-xs font-bold text-[#106b43]">{index + 1}</span>
                     <span className="leading-6">{item}</span>
@@ -304,7 +303,7 @@ export function PlanYourTripHub() {
               </ol>
             </div>
             <Link href="/guide" className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#106b43] underline underline-offset-4">
-              Read Fuji-side seat guide
+              {t("bookingOrder.guideCta")}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Card>
@@ -312,9 +311,9 @@ export function PlanYourTripHub() {
 
         <section className="mt-10">
           <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">Rail showdown</p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-950">Shinkansen Ticket vs JR Pass</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-600">Choose the rail option that matches your route.</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("rail.eyebrow")}</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">{t("rail.title")}</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">{t("rail.subtitle")}</p>
           </div>
           <div className="mt-5 grid gap-4 lg:grid-cols-2">
             <Card className="p-5">
@@ -323,19 +322,19 @@ export function PlanYourTripHub() {
                   <Train className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-slate-950">Single Shinkansen Ticket</h3>
-                  <p className="mt-1 text-sm text-slate-500">Best for simple city-to-city rail days.</p>
+                  <h3 className="text-lg font-semibold text-slate-950">{t("rail.singleTicket.title")}</h3>
+                  <p className="mt-1 text-sm text-slate-500">{t("rail.singleTicket.summary")}</p>
                 </div>
               </div>
               <ul className="mt-4 space-y-2 text-sm leading-6 text-slate-600">
-                <li>Tokyo → Kyoto / Osaka</li>
-                <li>One-way or simple route</li>
-                <li>First-time 5–7 day trips</li>
+                {singleTicketBullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
               </ul>
               <div className="mt-5">
                 <ProviderChoiceCTA
-                  actionLabel="Book Shinkansen ticket"
-                  description="Best for Tokyo → Kyoto / Osaka, one-way, or simple first-time routes."
+                  actionLabel={t("rail.singleTicket.action")}
+                  description={t("rail.singleTicket.description")}
                   pagePath="/plan-your-trip"
                   locale={locale}
                   routeType="simple-shinkansen"
@@ -344,7 +343,7 @@ export function PlanYourTripHub() {
                       ? { label: "Klook", href: shinkansenTicket, provider: "klook", product: "shinkansen_ticket", adid: "1265303", linkId: "shinkansenTicket", placement: "plan_trip_rail_showdown", variant: "primary", category: "train" }
                       : null,
                     omioRouteCompare
-                      ? { label: "Compare on Omio", href: omioRouteCompare, provider: "omio", product: "route_compare", linkId: omioRouteCompareLinkId, placement: "plan_trip_rail_showdown", variant: "secondary", category: "train" }
+                      ? { label: t("providers.omio"), href: omioRouteCompare, provider: "omio", product: "route_compare", linkId: omioRouteCompareLinkId, placement: "plan_trip_rail_showdown", variant: "secondary", category: "train" }
                       : null,
                   )}
                 />
@@ -357,18 +356,18 @@ export function PlanYourTripHub() {
                   <Landmark className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-slate-950">JR Pass</h3>
-                  <p className="mt-1 text-sm text-slate-500">Best only when your route has enough JR distance.</p>
+                  <h3 className="text-lg font-semibold text-slate-950">{t("rail.jrPass.title")}</h3>
+                  <p className="mt-1 text-sm text-slate-500">{t("rail.jrPass.summary")}</p>
                 </div>
               </div>
               <ul className="mt-4 space-y-2 text-sm leading-6 text-slate-600">
-                <li>Hiroshima</li>
-                <li>Return to Tokyo by Shinkansen</li>
-                <li>Multiple long-distance JR rides</li>
+                {jrPassBullets.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
               </ul>
               <ProviderChoiceCTA
-                actionLabel="Check JR Pass options"
-                description="Best if your route includes Hiroshima, multiple long-distance JR rides, or returning to Tokyo by Shinkansen."
+                actionLabel={t("rail.jrPass.action")}
+                description={t("rail.jrPass.description")}
                 pagePath="/plan-your-trip"
                 locale={locale}
                 routeType="multi-city-jr"
@@ -377,7 +376,7 @@ export function PlanYourTripHub() {
                   jrPass
                     ? { label: "Klook", href: jrPass, provider: "klook", product: "jr_pass", adid: "1165791", linkId: "jrPass", placement: "plan_trip_rail_showdown", variant: "primary", category: "train" }
                     : null,
-                  { label: "Read guide", internalLink: "/jr-pass-vs-single-ticket", provider: "other", product: "jr_pass", placement: "plan_trip_rail_showdown", variant: "secondary", category: "train" },
+                  { label: t("providers.readGuide"), internalLink: "/jr-pass-vs-single-ticket", provider: "other", product: "jr_pass", placement: "plan_trip_rail_showdown", variant: "secondary", category: "train" },
                 )}
               />
             </Card>
@@ -386,22 +385,22 @@ export function PlanYourTripHub() {
 
         <section className="mt-12">
           <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">HOTEL BASE DECISION</p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-950">Choose your Tokyo base before booking hotels</h2>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("hotel.eyebrow")}</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">{t("hotel.title")}</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">
-              Your hotel area affects airport access, Shinkansen days, luggage, and how your first nights in Tokyo feel.
+              {t("hotel.subtitle")}
             </p>
           </div>
           <TrackedCtaLink
             href="/areas-to-stay/tokyo-first-time"
             placement="plan_trip_stay_hub"
-            label="Compare Tokyo stay areas"
+            label={t("hotel.hubCta")}
             category="hotel"
             pagePath="/plan-your-trip"
             locale={locale}
             className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] border border-[#168a56] bg-[#168a56] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
           >
-            Compare Tokyo stay areas
+            {t("hotel.hubCta")}
             <ArrowRight className="h-4 w-4" />
           </TrackedCtaLink>
           <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -456,24 +455,24 @@ export function PlanYourTripHub() {
 
         <section className="mt-12">
           <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">Arrival essentials</p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-950">Prepare the first hour in Japan</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-600">Keep this practical: data, airport movement, and the station basics you need on arrival day.</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("arrival.eyebrow")}</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">{t("arrival.title")}</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">{t("arrival.subtitle")}</p>
           </div>
           <div className="mt-5 grid gap-4 md:grid-cols-3">
             {esim ? (
               <Card className="p-5">
                 <Wifi className="h-6 w-6 text-[#106b43]" />
-                <h3 className="mt-4 text-lg font-semibold text-slate-950">Japan eSIM</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">Get online for maps, translation, and transit apps before leaving the airport.</p>
+                <h3 className="mt-4 text-lg font-semibold text-slate-950">{t("arrival.esim.title")}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{t("arrival.esim.description")}</p>
                 <AffiliateButton
                   href={esim}
                   placement="plan_trip_arrival_cards"
-                  item={{ label: "Get Japan eSIM", linkId: "esim", category: "esim", provider: "klook", product: "esim", adid: "1166001" }}
+                  item={{ label: t("arrival.esim.cta"), linkId: "esim", category: "esim", provider: "klook", product: "esim", adid: "1166001" }}
                   locale={locale}
                   className="mt-5 inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#e66700]"
                 >
-                  Get Japan eSIM
+                  {t("arrival.esim.cta")}
                   <ExternalLink className="h-4 w-4" />
                 </AffiliateButton>
               </Card>
@@ -481,34 +480,34 @@ export function PlanYourTripHub() {
             {airportTransfer ? (
               <Card className="p-5">
                 <Plane className="h-6 w-6 text-[#106b43]" />
-                <h3 className="mt-4 text-lg font-semibold text-slate-950">Airport transfer</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">Book or compare the first ride from the airport when luggage and timing matter.</p>
+                <h3 className="mt-4 text-lg font-semibold text-slate-950">{t("arrival.airport.title")}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{t("arrival.airport.description")}</p>
                 <AffiliateButton
                   href={airportTransfer}
                   placement="plan_trip_arrival_cards"
-                  item={{ label: "Book airport transfer", linkId: "airportTransfer", category: "transfer", provider: "klook", product: "airport_transfer", adid: "1165996" }}
+                  item={{ label: t("arrival.airport.cta"), linkId: "airportTransfer", category: "transfer", provider: "klook", product: "airport_transfer", adid: "1165996" }}
                   locale={locale}
                   className="mt-5 inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#e66700]"
                 >
-                  Book airport transfer
+                  {t("arrival.airport.cta")}
                   <ExternalLink className="h-4 w-4" />
                 </AffiliateButton>
               </Card>
             ) : null}
             <Card className="p-5">
               <Luggage className="h-6 w-6 text-[#106b43]" />
-              <h3 className="mt-4 text-lg font-semibold text-slate-950">Station prep</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-600">Practice exits, transfer gates, and platform signs before your first train ride.</p>
+              <h3 className="mt-4 text-lg font-semibold text-slate-950">{t("arrival.station.title")}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{t("arrival.station.description")}</p>
               <TrackedCtaLink
                 href="/station-practice"
                 placement="plan_trip_arrival_cards"
-                label="Start station practice"
+                label={t("arrival.station.cta")}
                 category="station_practice"
                 pagePath="/plan-your-trip"
                 locale={locale}
                 className="mt-5 inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#168a56] bg-[#168a56] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
               >
-                Start station practice
+                {t("arrival.station.cta")}
                 <ArrowRight className="h-4 w-4" />
               </TrackedCtaLink>
             </Card>
@@ -517,9 +516,9 @@ export function PlanYourTripHub() {
 
         <section className="mt-12">
           <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">Activities</p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-950">Explore by city</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-600">Add activities after the route, hotels, and arrival basics are stable.</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("activities.eyebrow")}</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">{t("activities.title")}</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">{t("activities.subtitle")}</p>
           </div>
           <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {cityCards.map((city) => {
@@ -556,33 +555,33 @@ export function PlanYourTripHub() {
 
         <section className="mt-12">
           <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500">Optional add-ons</p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-950">Useful, but not first-step decisions</h2>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500">{t("optional.eyebrow")}</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-950">{t("optional.title")}</h2>
           </div>
           <div className="mt-5 grid gap-3 md:grid-cols-4">
             {insurance ? (
               <AffiliateButton
                 href={insurance}
                 placement="plan_trip_activity_cards"
-                item={{ label: "Check travel insurance", linkId: "insurance", category: "insurance", provider: "klook", product: "travel_insurance", adid: "1166002" }}
+                item={{ label: t("optional.insurance"), linkId: "insurance", category: "insurance", provider: "klook", product: "travel_insurance", adid: "1166002" }}
                 locale={locale}
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#475569] bg-[#475569] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#334155]"
               >
                 <ShieldCheck className="h-4 w-4" />
-                Check travel insurance
+                {t("optional.insurance")}
               </AffiliateButton>
             ) : null}
-            <TrackedCtaLink href="/station-practice" placement="plan_trip_arrival_cards" label="Station practice" category="station_practice" pagePath="/plan-your-trip" locale={locale} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#111827] bg-[#111827] px-3 py-2 text-sm font-semibold text-[#f6c343] transition-colors hover:bg-[#020617]">
+            <TrackedCtaLink href="/station-practice" placement="plan_trip_arrival_cards" label={t("optional.station")} category="station_practice" pagePath="/plan-your-trip" locale={locale} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#111827] bg-[#111827] px-3 py-2 text-sm font-semibold text-[#f6c343] transition-colors hover:bg-[#020617]">
               <Signpost className="h-4 w-4" />
-              Station practice
+              {t("optional.station")}
             </TrackedCtaLink>
-            <TrackedCtaLink href="/command-center" placement="plan_trip_hero" label="Command Center" category="navigation" pagePath="/plan-your-trip" locale={locale} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#082653] bg-[#082653] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#061d40]">
+            <TrackedCtaLink href="/command-center" placement="plan_trip_hero" label={t("optional.commandCenter")} category="navigation" pagePath="/plan-your-trip" locale={locale} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#082653] bg-[#082653] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#061d40]">
               <MapPinned className="h-4 w-4" />
-              Command Center
+              {t("optional.commandCenter")}
             </TrackedCtaLink>
-            <TrackedCtaLink href="/local-tokyo" placement="plan_trip_hotel_cards" label="Local Tokyo" category="navigation" pagePath="/plan-your-trip" locale={locale} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#106b43] bg-[#106b43] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]">
+            <TrackedCtaLink href="/local-tokyo" placement="plan_trip_hotel_cards" label={t("optional.localTokyo")} category="navigation" pagePath="/plan-your-trip" locale={locale} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#106b43] bg-[#106b43] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]">
               <CalendarDays className="h-4 w-4" />
-              Local Tokyo
+              {t("optional.localTokyo")}
             </TrackedCtaLink>
           </div>
         </section>
