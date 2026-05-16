@@ -3092,6 +3092,24 @@
             "description": "Place Tokyo, Kyoto, and Osaka in a practical route.",
             "cta": "View itinerary"
           }
+        ],
+        "faqs": [
+          {
+            "question": "京都站適合住宿嗎？",
+            "answer": "適合。第一次來京都時很實用，新幹線、巴士、寄物櫃和一日遊列車都近。"
+          },
+          {
+            "question": "祇園比京都站更好嗎？",
+            "answer": "祇園更適合氛圍和夜晚散步。京都站更適合行李、新幹線和一日遊。"
+          },
+          {
+            "question": "帶行李在京都住哪裡？",
+            "answer": "行李多就住京都站附近。祇園窄街拖行李更麻煩。"
+          },
+          {
+            "question": "京都站更適合一日遊嗎？",
+            "answer": "是。去奈良、大阪、伏見稻荷和主要巴士總站都更簡單。"
+          }
         ]
       },
       "kawaguchiko": {
@@ -3101,7 +3119,100 @@
           "area": "North shore",
           "why": "實用建議：先按路線、行李和抵達時間選擇飯店區域。"
         },
-        "proTip": "提示：依照行李、第一晚和新幹線日程來選住宿區域。"
+        "proTip": "提示：依照行李、第一晚和新幹線日程來選住宿區域。",
+        "areas": [
+          {
+            "name": "北岸（富士山景觀側）",
+            "vibe": "經典明信片景色 — 湖對面的富士山",
+            "pros": [
+              "房間更容易直接看到富士山",
+              "許多有私人或露天溫泉的旅館",
+              "更安靜、更適合散步"
+            ],
+            "cons": [
+              "附近餐廳和便利商店較少",
+              "從車站需巴士、接駁或計程車",
+              "富士山景房更貴且很早訂滿"
+            ],
+            "bestFor": "富士山景觀和溫泉",
+            "transport": "從河口湖站搭 Retro Bus Red Line、飯店接駁或計程車。"
+          },
+          {
+            "name": "河口湖站周邊",
+            "vibe": "方便 — 餐廳、商店、車站",
+            "pros": [
+              "可步行到車站和巴士總站",
+              "餐飲選擇更多",
+              "比許多湖邊旅館更有價格彈性"
+            ],
+            "cons": [
+              "多數沒有湖和富士山同框景觀",
+              "觀光商業感較強",
+              "不如湖邊住宿有記憶點"
+            ],
+            "bestFor": "預算和便利",
+            "transport": "富士急到大月，JR中央線到新宿，或高速巴士到東京。"
+          }
+        ],
+        "comparison": [
+          {
+            "feature": "富士山景觀",
+            "values": {
+              "North shore": "★★★★★ 湖景直面富士山",
+              "Station area": "★★☆☆☆ 部分或有限"
+            }
+          },
+          {
+            "feature": "溫泉感",
+            "values": {
+              "North shore": "私人或露天，面向富士山",
+              "Station area": "通常是較簡單的大浴場"
+            }
+          },
+          {
+            "feature": "車站交通",
+            "values": {
+              "North shore": "巴士/接駁/計程車",
+              "Station area": "可步行"
+            }
+          },
+          {
+            "feature": "飯店價格感",
+            "values": {
+              "North shore": "高端湖景旅館",
+              "Station area": "預算選擇更多"
+            }
+          },
+          {
+            "feature": "附近餐飲",
+            "values": {
+              "North shore": "有限，多依賴飯店餐",
+              "Station area": "輕食選擇更多"
+            }
+          }
+        ],
+        "nextActions": [
+          {
+            "title": "東京到富士一日遊",
+            "description": "規劃從東京出發的河口湖一日行程。",
+            "cta": "查看行程"
+          },
+          {
+            "title": "東京住哪裡",
+            "description": "比較新宿、上野、淺草和東京站。",
+            "cta": "查看東京區域"
+          },
+          {
+            "title": "日本 eSIM",
+            "description": "出發前準備好網路。",
+            "cta": "查看 eSIM"
+          },
+          {
+            "title": "JR Pass 指南",
+            "description": "購買前確認路線是否有足夠長距離 JR。",
+            "cta": "閱讀指南"
+          }
+        ]
       },
       "where-to-stay-before-shinkansen": {
         "title": "Where to Stay Before Taking the Shinkansen in 東京",
@@ -3339,6 +3450,24 @@
             "description": "Find the right window seat for Mt. Fuji views.",
             "cta": "Check seat"
           }
+        ],
+        "faqs": [
+          {
+            "question": "第一次大阪住難波還是梅田？",
+            "answer": "想體驗大阪美食和夜生活，通常難波更好。重視鐵路和京都/神戶一日遊則梅田更好。"
+          },
+          {
+            "question": "夜生活哪裡更好？",
+            "answer": "難波。道頓堀、美國村、新世界都更容易步行。"
+          },
+          {
+            "question": "從關西機場哪裡更方便？",
+            "answer": "難波。南海線從 KIX 直達難波。"
+          },
+          {
+            "question": "去道頓堀應該住難波嗎？",
+            "answer": "是。道頓堀就在難波區域，步行很方便。"
+          }
         ]
       },
       "shin-osaka-vs-namba": {
@@ -3406,6 +3535,24 @@
             "title": "Japan itinerary",
             "description": "Place Tokyo, Kyoto, and Osaka in a practical route.",
             "cta": "View itinerary"
+          }
+        ],
+        "faqs": [
+          {
+            "question": "新大阪適合住宿嗎？",
+            "answer": "適合早班新幹線或晚到，但不適合以美食、夜生活、觀光為主的住宿。"
+          },
+          {
+            "question": "第一次大阪住難波比新大阪好嗎？",
+            "answer": "大多數情況是。難波離道頓堀、街頭美食和夜生活更近。"
+          },
+          {
+            "question": "為了新幹線要住新大阪嗎？",
+            "answer": "只有車很早、抵達很晚，或行李動線比氛圍更重要時才建議。"
+          },
+          {
+            "question": "難波去關西機場方便嗎？",
+            "answer": "方便。南海線從難波直達關西機場。"
           }
         ]
       },
@@ -3500,6 +3647,24 @@
             "description": "安排東京、富士、京都和大阪。",
             "cta": "查看行程"
           }
+        ],
+        "faqs": [
+          {
+            "question": "搭新幹線前要住東京站附近嗎？",
+            "answer": "如果車很早或行李很重，建議住東京站附近。較晚出發則新宿或上野也可以。"
+          },
+          {
+            "question": "新宿離東京站太遠嗎？",
+            "answer": "不遠。JR中央線很快，但早高峰和行李會讓體驗變差。"
+          },
+          {
+            "question": "東京站附近哪裡預算選擇更多？",
+            "answer": "上野通常更有預算選擇，同時搭 JR 到東京站也近。"
+          },
+          {
+            "question": "東京站可以寄放行李嗎？",
+            "answer": "可以。有投幣櫃、人工寄放和行李配送服務。"
+          }
         ]
       },
       "asakusa-vs-ueno": {
@@ -3540,6 +3705,24 @@
             ],
             "bestFor": "預算 + 成田 + 博物館",
             "transport": "Skyliner 到成田36分鐘。JR山手線到新宿25分鐘。地鐵到淺草5分鐘。"
+          }
+        ],
+        "faqs": [
+          {
+            "question": "第一次東京住淺草還是上野？",
+            "answer": "上野對成田和 JR 更實用。淺草更適合老東京氛圍。"
+          },
+          {
+            "question": "哪裡離成田機場更近？",
+            "answer": "上野更快，因為 Skyliner 從成田直達上野。"
+          },
+          {
+            "question": "淺草適合家庭嗎？",
+            "answer": "適合。淺草寺、仲見世和晴空塔都適合家庭，晚上也比新宿安靜。"
+          },
+          {
+            "question": "可以從上野走到淺草嗎？",
+            "answer": "可以。步行約20分鐘，或搭銀座線一小段。"
           }
         ]
       }

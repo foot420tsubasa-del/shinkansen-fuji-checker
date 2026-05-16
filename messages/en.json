@@ -3092,6 +3092,24 @@
             "description": "Place Tokyo, Kyoto, and Osaka in a practical route.",
             "cta": "View itinerary"
           }
+        ],
+        "faqs": [
+          {
+            "question": "Is Kyoto Station a good place to stay?",
+            "answer": "Yes. It is one of the most practical bases for first-time Kyoto because Shinkansen, buses, lockers, and day-trip trains are all close."
+          },
+          {
+            "question": "Is Gion better than Kyoto Station?",
+            "answer": "Gion is better for atmosphere and evening walks. Kyoto Station is better for luggage, Shinkansen access, and day trips."
+          },
+          {
+            "question": "Where should I stay in Kyoto with luggage?",
+            "answer": "Stay near Kyoto Station if luggage is the main concern. Narrow streets around Gion make rolling bags harder."
+          },
+          {
+            "question": "Is Kyoto Station better for day trips?",
+            "answer": "Yes. Nara, Osaka, Fushimi Inari, and the main bus terminal are easiest from Kyoto Station."
+          }
         ]
       },
       "kawaguchiko": {
@@ -3101,7 +3119,100 @@
           "area": "North shore",
           "why": "The north shore gives the classic lake-and-Fuji view. It is less convenient than the station area, but stronger for the reason most people stay overnight."
         },
-        "proTip": "Fuji is often clearest early in the morning, so overnight stays work best when your room or bath faces the mountain."
+        "proTip": "Fuji is often clearest early in the morning, so overnight stays work best when your room or bath faces the mountain.",
+        "areas": [
+          {
+            "name": "North shore (Fuji-view side)",
+            "vibe": "Classic postcard view — Fuji across the lake",
+            "pros": [
+              "Direct Mt. Fuji views from hotel rooms",
+              "Many ryokans with private or outdoor onsen",
+              "Quieter scenic walking paths"
+            ],
+            "cons": [
+              "Fewer restaurants and convenience stores nearby",
+              "Bus, shuttle, or taxi needed from the station",
+              "Fuji-view rooms price higher and sell out early"
+            ],
+            "bestFor": "Fuji views & onsen",
+            "transport": "Retro Bus Red Line, hotel shuttles, or taxi from Kawaguchiko Station."
+          },
+          {
+            "name": "Kawaguchiko Station area",
+            "vibe": "Convenient — restaurants, shops, station access",
+            "pros": [
+              "Walk to station and bus terminal",
+              "More dining options",
+              "Better value than many lake-view ryokans"
+            ],
+            "cons": [
+              "Most hotels do not have the lake-and-Fuji view",
+              "More tourist-commercial feel",
+              "Less memorable than a lakeside stay"
+            ],
+            "bestFor": "Budget & convenience",
+            "transport": "Fujikyu Railway to Otsuki, JR Chuo to Shinjuku, or highway bus to Tokyo."
+          }
+        ],
+        "comparison": [
+          {
+            "feature": "Mt. Fuji view",
+            "values": {
+              "North shore": "★★★★★ direct lake view",
+              "Station area": "★★☆☆☆ partial or limited"
+            }
+          },
+          {
+            "feature": "Onsen feel",
+            "values": {
+              "North shore": "Private or outdoor, Fuji-facing",
+              "Station area": "Usually simpler public bath"
+            }
+          },
+          {
+            "feature": "Station access",
+            "values": {
+              "North shore": "Bus/shuttle/taxi",
+              "Station area": "Walkable"
+            }
+          },
+          {
+            "feature": "Hotel cost feel",
+            "values": {
+              "North shore": "Premium lake-view ryokan",
+              "Station area": "More budget options"
+            }
+          },
+          {
+            "feature": "Dining nearby",
+            "values": {
+              "North shore": "Limited, often hotel dining",
+              "Station area": "More casual choices"
+            }
+          }
+        ],
+        "nextActions": [
+          {
+            "title": "Tokyo to Fuji day trip",
+            "description": "Plan a 1-day Kawaguchiko itinerary from Tokyo.",
+            "cta": "See itinerary"
+          },
+          {
+            "title": "Where to stay in Tokyo",
+            "description": "Compare Shinjuku, Ueno, Asakusa, and Tokyo Station.",
+            "cta": "See Tokyo areas"
+          },
+          {
+            "title": "Get Japan eSIM",
+            "description": "Set up connectivity before landing.",
+            "cta": "Get eSIM"
+          },
+          {
+            "title": "JR Pass fit guide",
+            "description": "Check whether your route has enough long-distance JR rides before buying.",
+            "cta": "Read guide"
+          }
+        ]
       },
       "where-to-stay-before-shinkansen": {
         "title": "Where to Stay Before Taking the Shinkansen in Tokyo",
@@ -3417,6 +3528,24 @@
             "description": "Find the right window seat for Mt. Fuji views.",
             "cta": "Check seat"
           }
+        ],
+        "faqs": [
+          {
+            "question": "Is Namba or Umeda better for first-time Osaka?",
+            "answer": "Namba is usually better for classic Osaka food and nightlife. Umeda is better for rail access and Kyoto or Kobe day trips."
+          },
+          {
+            "question": "Which is better for nightlife, Namba or Umeda?",
+            "answer": "Namba. Dotonbori, Amerikamura, and Shinsekai are easier on foot from Namba."
+          },
+          {
+            "question": "Which area is easier from Kansai Airport?",
+            "answer": "Namba is easier because the Nankai line runs directly from KIX to Namba."
+          },
+          {
+            "question": "Should I stay in Namba if visiting Dotonbori?",
+            "answer": "Yes. Dotonbori is in the Namba area, so you can walk there easily."
+          }
         ]
       },
       "shin-osaka-vs-namba": {
@@ -3484,6 +3613,24 @@
             "title": "Japan itinerary",
             "description": "Place Tokyo, Kyoto, and Osaka in a practical route.",
             "cta": "View itinerary"
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Is Shin-Osaka a good place to stay?",
+            "answer": "It is practical for early Shinkansen departures or late arrivals, but it is not the best area for food, nightlife, or sightseeing."
+          },
+          {
+            "question": "Is Namba better than Shin-Osaka for first-time visitors?",
+            "answer": "Yes for most sightseeing trips. Namba puts you close to Dotonbori, street food, and nightlife."
+          },
+          {
+            "question": "Should I stay near Shin-Osaka for the Shinkansen?",
+            "answer": "Only if your train is very early, you arrive late, or luggage logistics matter more than atmosphere."
+          },
+          {
+            "question": "Is Namba convenient for Kansai Airport?",
+            "answer": "Yes. The Nankai line connects Namba and Kansai Airport directly."
           }
         ]
       },
@@ -3578,6 +3725,24 @@
             "description": "Place Tokyo, Fuji, Kyoto and Osaka in order.",
             "cta": "View itinerary"
           }
+        ],
+        "faqs": [
+          {
+            "question": "Should I stay near Tokyo Station before the Shinkansen?",
+            "answer": "Yes if your train is early or luggage is heavy. For later departures, Shinjuku or Ueno can also work."
+          },
+          {
+            "question": "Is Shinjuku too far from Tokyo Station for the Shinkansen?",
+            "answer": "No. JR Chuo Line connects Shinjuku and Tokyo Station quickly, but rush hour and luggage can make it less comfortable."
+          },
+          {
+            "question": "Which area has more budget options near Tokyo Station?",
+            "answer": "Ueno usually has more budget options while still staying close to Tokyo Station by JR."
+          },
+          {
+            "question": "Can I store luggage at Tokyo Station?",
+            "answer": "Yes. Tokyo Station has coin lockers, staffed storage, and luggage forwarding options."
+          }
         ]
       },
       "asakusa-vs-ueno": {
@@ -3618,6 +3783,24 @@
             ],
             "bestFor": "Budget + Narita + museums",
             "transport": "Skyliner to Narita 36 min. JR Yamanote to Shinjuku 25 min. Metro to Asakusa 5 min."
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Is Asakusa or Ueno better for first-time Tokyo?",
+            "answer": "Ueno is more practical for Narita and JR access. Asakusa is better for old-town atmosphere."
+          },
+          {
+            "question": "Which is closer to Narita Airport?",
+            "answer": "Ueno is faster because the Skyliner runs directly from Narita to Ueno."
+          },
+          {
+            "question": "Is Asakusa good for families?",
+            "answer": "Yes. Senso-ji, Nakamise, and Skytree are family-friendly, and evenings are calmer than Shinjuku."
+          },
+          {
+            "question": "Can I walk from Ueno to Asakusa?",
+            "answer": "Yes. It is about a 20-minute walk, or one short ride on the Ginza Line."
           }
         ]
       }
