@@ -13,6 +13,7 @@ import { ProviderButton } from "@/components/ui/ProviderButton";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { Link } from "@/i18n/navigation";
 import { getAlternates } from "@/i18n/hreflang";
+import { getTranslations } from "next-intl/server";
 import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { getAllHotelPickLinkConfigs } from "@/lib/hotel-pick-links";
 import type { StayAreaMapKey } from "@/lib/stay-area-maps";
@@ -238,15 +239,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { area, locale } = await params;
   const detail = areaDetails[area];
   if (!detail) return {};
+  const t = await getTranslations({ locale, namespace: `tokyoAreaDetails.areas.${area}` });
   const pathName = `/areas-to-stay/tokyo/${detail.slug}`;
   return {
-    title: `${detail.title} | fujiseat`,
-    description: detail.subtitle,
+    title: `${t("title")} | fujiseat`,
+    description: t("subtitle"),
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(pathName, locale),
     openGraph: {
-      title: detail.title,
-      description: detail.subtitle,
+      title: t("title"),
+      description: t("subtitle"),
       siteName: "fujiseat",
     },
   };
@@ -256,14 +258,27 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
   const { area, locale } = await params;
   const detail = areaDetails[area];
   if (!detail) notFound();
+  const t = await getTranslations({ locale, namespace: "tokyoAreaDetails" });
 
   const pagePath = `/areas-to-stay/tokyo/${detail.slug}`;
   const image = publicImageIfExists(detail.image);
   const examples = hotelExamples(detail.hotelKey);
+  const localized = {
+    title: t(`areas.${area}.title`),
+    subtitle: t(`areas.${area}.subtitle`),
+    areaLabel: t(`areas.${area}.areaLabel`),
+    breadcrumbLabel: t(`areas.${area}.breadcrumbLabel`),
+    primaryAction: t(`areas.${area}.primaryAction`),
+    bestFor: t(`areas.${area}.bestFor`),
+    avoid: t(`areas.${area}.avoid`),
+    bestMicroAreas: t(`areas.${area}.bestMicroAreas`),
+    microAreas: t.raw(`areas.${area}.microAreas`) as Array<{ name: string; body: string }>,
+    faqs: t.raw(`areas.${area}.faqs`) as Array<{ question: string; answer: string }>,
+  };
   const primaryChoices = detail.hotelKey
     ? hotelProviderChoices(detail.hotelKey, "stay_area_detail_primary")
     : providerChoices({
-        label: detail.primaryAction,
+        label: localized.primaryAction,
         internalLink: detail.internalPrimaryHref ?? "/local-tokyo",
         provider: "other",
         product: "hotel",
@@ -277,34 +292,34 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
       <SiteHeader />
       <Container className="py-8 md:py-12">
         <Breadcrumb items={[
-          { label: "Areas to stay", href: "/areas-to-stay" },
-          { label: "Tokyo stay area hub", href: "/areas-to-stay/tokyo-first-time" },
-          { label: detail.title.replace("Where to Stay ", "") },
+          { label: t("breadcrumb.parent"), href: "/areas-to-stay" },
+          { label: t("breadcrumb.hub"), href: "/areas-to-stay/tokyo-first-time" },
+          { label: localized.breadcrumbLabel },
         ]} />
 
         <section className="mt-5 overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
           {image ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={image} alt={`${detail.areaLabel} hotel area`} className="aspect-[16/9] max-h-[380px] w-full object-cover" />
+            <img src={image} alt={t("heroImageAlt", { area: localized.areaLabel })} className="aspect-[16/9] max-h-[380px] w-full object-cover" />
           ) : (
             <div className="h-64 border-b border-slate-100 bg-[linear-gradient(135deg,#eef6fb,#fff_50%,#f0fbf6)]" aria-hidden="true" />
           )}
           <div className="grid gap-5 p-6 md:grid-cols-[minmax(0,1fr)_340px] md:p-8">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#106b43]">{detail.areaLabel}</p>
-              <h1 className="mt-3 text-3xl font-semibold leading-tight text-slate-950 md:text-5xl">{detail.title}</h1>
-              <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">{detail.subtitle}</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#106b43]">{localized.areaLabel}</p>
+              <h1 className="mt-3 text-3xl font-semibold leading-tight text-slate-950 md:text-5xl">{localized.title}</h1>
+              <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">{localized.subtitle}</p>
             </div>
             <div>
               <ProviderChoiceCTA
-                actionLabel={detail.primaryAction}
+                actionLabel={localized.primaryAction}
                 providers={primaryChoices}
                 pagePath={pagePath}
                 locale={locale}
-                area={detail.areaLabel}
+                area={localized.areaLabel}
               />
               <Link href="/areas-to-stay/tokyo-first-time" className="mt-3 inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-[#168a56] bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]">
-                Back to Tokyo stay area hub
+                {t("backToHub")}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
@@ -312,19 +327,19 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
         </section>
 
         <section className="mt-8 rounded-[22px] border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">Quick Answer</h2>
+          <h2 className="text-xl font-semibold text-slate-950">{t("quickAnswer.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-3">
             <div className="rounded-2xl border border-emerald-100 bg-white p-4">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-emerald-700">Stay here if</p>
-              <p className="mt-1 text-sm leading-6 text-slate-700">{detail.bestFor}</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-emerald-700">{t("quickAnswer.stayHereIf")}</p>
+              <p className="mt-1 text-sm leading-6 text-slate-700">{localized.bestFor}</p>
             </div>
             <div className="rounded-2xl border border-amber-100 bg-white p-4">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-amber-700">Avoid if</p>
-              <p className="mt-1 text-sm leading-6 text-slate-700">{detail.avoid}</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-amber-700">{t("quickAnswer.avoidIf")}</p>
+              <p className="mt-1 text-sm leading-6 text-slate-700">{localized.avoid}</p>
             </div>
             <div className="rounded-2xl border border-sky-100 bg-white p-4">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-sky-700">Best micro-areas</p>
-              <p className="mt-1 text-sm leading-6 text-slate-700">{detail.bestMicroAreas}</p>
+              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-sky-700">{t("quickAnswer.bestMicroAreas")}</p>
+              <p className="mt-1 text-sm leading-6 text-slate-700">{localized.bestMicroAreas}</p>
             </div>
           </div>
         </section>
@@ -336,9 +351,9 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
         ) : null}
 
         <section className="mt-10">
-          <h2 className="text-2xl font-semibold text-slate-950">Micro-area guide</h2>
+          <h2 className="text-2xl font-semibold text-slate-950">{t("microAreaTitle")}</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
-            {detail.microAreas.map((microArea) => (
+            {localized.microAreas.map((microArea) => (
               <div key={microArea.name} className="rounded-[20px] border border-slate-200 bg-white p-5 shadow-sm">
                 <h3 className="text-lg font-semibold text-slate-950">{microArea.name}</h3>
                 <p className="mt-2 text-sm leading-6 text-slate-600">{microArea.body}</p>
@@ -348,13 +363,13 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
         </section>
 
         <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">Hotel comparison action</h2>
+          <h2 className="text-xl font-semibold text-slate-950">{t("hotelComparisonTitle")}</h2>
           <ProviderChoiceCTA
-            actionLabel={detail.primaryAction}
+            actionLabel={localized.primaryAction}
             providers={primaryChoices}
             pagePath={pagePath}
             locale={locale}
-            area={detail.areaLabel}
+            area={localized.areaLabel}
             className="mt-4"
           />
         </section>
@@ -362,11 +377,11 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
         <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-sky-700">Local hotel examples</p>
-              <h2 className="mt-1 text-xl font-semibold text-slate-950">Practical examples, not rankings</h2>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-sky-700">{t("examples.eyebrow")}</p>
+              <h2 className="mt-1 text-xl font-semibold text-slate-950">{t("examples.title")}</h2>
             </div>
             <Link href="/local-hotel-picks" className="text-sm font-semibold text-[#106b43] underline underline-offset-4">
-              More local picks
+              {t("examples.more")}
             </Link>
           </div>
           {examples.length > 0 ? (
@@ -377,7 +392,7 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
                 return (
                   <div key={hotel.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                     <p className="text-sm font-semibold text-slate-950">{hotel.name}</p>
-                    <p className="mt-1 text-xs leading-5 text-slate-600">Use this as a reference point for the area and room style, not as a ranked list.</p>
+                    <p className="mt-1 text-xs leading-5 text-slate-600">{t("examples.cardNote")}</p>
                     <ProviderButton
                       provider={provider}
                       href={href}
@@ -387,7 +402,7 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
                       locale={locale}
                       linkId={`hotelPick.${hotel.id}.${provider}`}
                       product="hotel"
-                      area={detail.areaLabel}
+                      area={localized.areaLabel}
                       hotelName={hotel.name}
                       fullWidth
                       className="mt-3"
@@ -400,15 +415,15 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
             </div>
           ) : (
             <p className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-4 text-sm leading-6 text-slate-600">
-              Specific hotel examples for this area are handled in the local hotel picks page.
+              {t("examples.empty")}
             </p>
           )}
         </section>
 
         <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">FAQ</h2>
+          <h2 className="text-xl font-semibold text-slate-950">{t("faqTitle")}</h2>
           <dl className="mt-4 grid gap-3 md:grid-cols-2">
-            {detail.faqs.map((faq) => (
+            {localized.faqs.map((faq) => (
               <div key={faq.question} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
                 <dt className="font-semibold text-slate-950">{faq.question}</dt>
                 <dd className="mt-1 text-sm leading-6 text-slate-600">{faq.answer}</dd>
@@ -418,19 +433,19 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
         </section>
 
         <section className="mt-10">
-          <h2 className="text-lg font-semibold text-slate-950">Continue planning</h2>
+          <h2 className="text-lg font-semibold text-slate-950">{t("continue.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-4">
-            <TrackedCtaLink href="/areas-to-stay/tokyo-first-time" placement="next_steps" label="Tokyo stay area hub" pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
-              Tokyo stay area hub
+            <TrackedCtaLink href="/areas-to-stay/tokyo-first-time" placement="next_steps" label={t("continue.hub")} pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
+              {t("continue.hub")}
             </TrackedCtaLink>
-            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label="Local hotel picks" pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
-              Local hotel picks
+            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label={t("continue.localPicks")} pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
+              {t("continue.localPicks")}
             </TrackedCtaLink>
-            <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label="Plan Your Trip" pagePath={pagePath} locale={locale} className={filledNextStepClass}>
-              Plan Your Trip
+            <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label={t("continue.plan")} pagePath={pagePath} locale={locale} className={filledNextStepClass}>
+              {t("continue.plan")}
             </TrackedCtaLink>
-            <TrackedCtaLink href={detail.airportHref ?? "/airport-transfers"} placement="next_steps" label="Airport transfer" pagePath={pagePath} locale={locale} category="transfer" className={filledNextStepClass}>
-              Airport transfer
+            <TrackedCtaLink href={detail.airportHref ?? "/airport-transfers"} placement="next_steps" label={t("continue.airport")} pagePath={pagePath} locale={locale} category="transfer" className={filledNextStepClass}>
+              {t("continue.airport")}
             </TrackedCtaLink>
           </div>
         </section>

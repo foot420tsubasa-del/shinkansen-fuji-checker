@@ -21,7 +21,7 @@ import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affil
 import { StayBaseCard } from "@/components/affiliate/StayBaseCard";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
-import { getAllStaySlugs, getStayBySlug } from "@/lib/content/stay";
+import { getAllStaySlugs, getStayBySlug, type StayPage as StayContentPage } from "@/lib/content/stay";
 import { getAlternates } from "@/i18n/hreflang";
 import { getAffUrl } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -43,6 +43,60 @@ const filledNextStepClass =
   buttonClassName({ variant: "internal", fullWidth: true, className: "p-4 text-center" });
 const filledCommercialNextStepClass =
   buttonClassName({ variant: "commercial", fullWidth: true, className: "p-4 text-center" });
+
+type StayPageTranslation = Partial<Pick<StayContentPage, "title" | "description" | "proTip">> & {
+  quickRec?: Partial<StayContentPage["quickRec"]>;
+  mapDescription?: StayContentPage["mapDescription"];
+  areas?: Array<Partial<StayContentPage["areas"][number]>>;
+  comparisonColumns?: StayContentPage["comparisonColumns"];
+  comparison?: StayContentPage["comparison"];
+  hotelPicks?: Array<Partial<StayContentPage["hotelPicks"][number]>>;
+  nextActions?: Array<Partial<StayContentPage["nextActions"][number]>>;
+  faqs?: StayContentPage["faqs"];
+};
+
+function applyStayPageTranslation(page: StayContentPage, translation?: StayPageTranslation): StayContentPage {
+  if (!translation) return page;
+  return {
+    ...page,
+    title: translation.title ?? page.title,
+    description: translation.description ?? page.description,
+    proTip: translation.proTip ?? page.proTip,
+    mapDescription: translation.mapDescription ?? page.mapDescription,
+    areas: translation.areas
+      ? page.areas.map((area, index) => ({
+          ...area,
+          ...translation.areas?.[index],
+          hotelLink: area.hotelLink,
+          hotelKey: area.hotelKey,
+        }))
+      : page.areas,
+    comparisonColumns: translation.comparisonColumns ?? page.comparisonColumns,
+    comparison: translation.comparison ?? page.comparison,
+    hotelPicks: translation.hotelPicks
+      ? page.hotelPicks.map((pick, index) => ({
+          ...pick,
+          ...translation.hotelPicks?.[index],
+          link: pick.link,
+          trackingHref: pick.trackingHref,
+          hotelKey: pick.hotelKey,
+          provider: pick.provider,
+        }))
+      : page.hotelPicks,
+    nextActions: translation.nextActions
+      ? page.nextActions.map((action, index) => ({
+          ...action,
+          ...translation.nextActions?.[index],
+          href: action.href,
+        }))
+      : page.nextActions,
+    faqs: translation.faqs ?? page.faqs,
+    quickRec: {
+      ...page.quickRec,
+      ...translation.quickRec,
+    },
+  };
+}
 
 const tokyoStayImages = {
   hero: "/images/stay/tokyo/tokyo-stay-hero.png",
@@ -99,65 +153,46 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
   );
 }
 
-function TokyoFirstTimeHub({ locale }: { locale: string }) {
+async function TokyoFirstTimeHub({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: "tokyoStayHub" });
   const pagePath = "/areas-to-stay/tokyo-first-time";
   const esimHref = getAffUrl("esim");
   const heroImage = publicImageIfExists(tokyoStayImages.hero);
-  const cards = [
+  const cardConfigs = [
     {
-      title: "Shinjuku",
-      subtitle: "Best for first-time energy, food, nightlife, and flexible trains.",
-      bestFor: "First-time convenience, food, nightlife, and train options.",
-      weakness: "Can feel intense around Kabukicho.",
+      key: "shinjuku",
       area: "Tokyo: Shinjuku",
       image: publicImageIfExists(tokyoStayImages.shinjuku),
-      primaryAction: "Compare Shinjuku hotels",
       providerChoices: hotelProviderChoices("shinjuku", "stay_area_glance_card"),
       detailHref: "/areas-to-stay/tokyo/shinjuku",
     },
     {
-      title: "Ueno",
-      subtitle: "Best for Narita access, museums, and better-value hotels.",
-      bestFor: "Narita access, museums, and better-value hotels.",
-      weakness: "Quieter nightlife than Shinjuku.",
+      key: "ueno",
       area: "Tokyo: Ueno",
       image: publicImageIfExists(tokyoStayImages.ueno),
-      primaryAction: "Compare Ueno hotels",
       providerChoices: hotelProviderChoices("ueno", "stay_area_glance_card"),
       detailHref: "/areas-to-stay/tokyo/ueno",
     },
     {
-      title: "Asakusa",
-      subtitle: "Best for old-town Tokyo, Senso-ji, and riverside walks.",
-      bestFor: "Old-town Tokyo, Senso-ji, and riverside walks.",
-      weakness: "Not on the JR Yamanote Line.",
+      key: "asakusa",
       area: "Tokyo: Asakusa",
       image: publicImageIfExists(tokyoStayImages.asakusa),
-      primaryAction: "Compare Asakusa hotels",
       providerChoices: hotelProviderChoices("asakusa", "stay_area_glance_card"),
       detailHref: "/areas-to-stay/tokyo/asakusa",
     },
     {
-      title: "Tokyo Station",
-      subtitle: "Best for early Shinkansen, luggage, and clean logistics.",
-      bestFor: "Early Shinkansen, luggage, and smooth transfer to Kyoto / Osaka.",
-      weakness: "Usually more business-like and less local at night.",
+      key: "tokyoStation",
       area: "Tokyo: Tokyo Station",
       image: publicImageIfExists(tokyoStayImages.tokyoStation),
-      primaryAction: "Compare hotels near Tokyo Station",
       providerChoices: hotelProviderChoices("tokyoStation", "stay_area_glance_card"),
       detailHref: "/areas-to-stay/tokyo/tokyo-station",
     },
     {
-      title: "East Tokyo",
-      subtitle: "Best for calmer walks, coffee, riverside neighborhoods, and second-time Tokyo.",
-      bestFor: "Quiet local walks, coffee, and riverside neighborhoods.",
-      weakness: "Better as a second base than the default first-night stay.",
+      key: "eastTokyo",
       area: "Tokyo: East Tokyo",
       image: publicImageIfExists(tokyoStayImages.eastTokyo),
-      primaryAction: "Explore Local Tokyo",
       providerChoices: providerChoices({
-        label: "Explore Local Tokyo",
+        label: t("cards.eastTokyo.primaryAction"),
         internalLink: "/local-tokyo",
         provider: "other",
         product: "hotel",
@@ -168,65 +203,59 @@ function TokyoFirstTimeHub({ locale }: { locale: string }) {
       detailHref: "/areas-to-stay/tokyo/east-tokyo",
     },
   ];
+  const cards = cardConfigs.map((card) => ({
+    ...card,
+    title: t(`cards.${card.key}.title`),
+    subtitle: t(`cards.${card.key}.subtitle`),
+    bestFor: t(`cards.${card.key}.bestFor`),
+    weakness: t(`cards.${card.key}.weakness`),
+    primaryAction: t(`cards.${card.key}.primaryAction`),
+  }));
 
-  const comparisonRows = [
-    ["Shinjuku", "N'EX direct, slower from Narita", "10-15 min to Tokyo Station", "Strongest", "Wide range, weekend spikes", "Energetic"],
-    ["Ueno", "Best Narita access", "7 min to Tokyo Station", "Moderate", "Often better value", "Practical, cultural"],
-    ["Asakusa", "Good via Access Express", "Transfer needed", "Quiet evenings", "Good value", "Old-town"],
-    ["Tokyo Station", "N'EX direct", "Best", "Business dining", "Usually higher", "Clean logistics"],
-    ["East Tokyo", "Varies by neighborhood", "Usually transfer needed", "Local and calm", "Mixed", "Quiet, slower"],
-  ];
-
-  const faqs = [
-    ["Is Shinjuku too noisy for families?", "It can be around Kabukicho. Families usually do better around Nishi-Shinjuku, Yoyogi, or Shinjuku-Gyoenmae."],
-    ["Is Ueno good for first-time visitors?", "Yes, especially if you arrive at Narita or want better-value hotels with museums and markets nearby."],
-    ["Should I stay near Tokyo Station before Kyoto or Osaka?", "Yes if your Shinkansen is early or you have heavy luggage. Otherwise Shinjuku or Ueno can still work well."],
-    ["Is Asakusa convenient without the JR Yamanote Line?", "It is convenient for old-town sightseeing, but you will use subway transfers more often than in Ueno or Shinjuku."],
-    ["Where should I stay if I arrive late at Narita?", "Ueno is usually the simplest because the Skyliner is fast and the area is calmer on arrival night."],
-    ["Is East Tokyo good for a first Tokyo hotel?", "It can be, but it is better for travelers who already know they want a quieter local base."],
-  ];
+  const quickAnswers = t.raw("quickAnswer.items") as string[];
+  const planCards = t.raw("travelPlan.cards") as Array<{ label: string; area: string; href: string }>;
+  const benefits = t.raw("benefits.items") as Array<{ title: string; body: string }>;
+  const comparisonHeadings = t.raw("comparison.headings") as string[];
+  const comparisonRows = t.raw("comparison.rows") as string[][];
+  const faqs = t.raw("faq.items") as Array<{ question: string; answer: string }>;
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
       <SiteHeader />
       <Container className="py-8 md:py-12">
         <Breadcrumb items={[
-          { label: "Areas to stay", href: "/" },
-          { label: "Tokyo first-time hotel areas" },
+          { label: t("breadcrumb.parent"), href: "/" },
+          { label: t("breadcrumb.current") },
         ]} />
 
         <section className="mt-5 overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
           {heroImage ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={heroImage} alt="Tokyo hotel area skyline and neighborhood view" className="aspect-[16/9] max-h-[420px] w-full object-cover" />
+            <img src={heroImage} alt={t("hero.imageAlt")} className="aspect-[16/9] max-h-[420px] w-full object-cover" />
           ) : (
             <div className="h-64 bg-[linear-gradient(135deg,#eef6fb,#fff_50%,#f0fbf6)]" aria-hidden="true" />
           )}
           <div className="p-6 md:p-9">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#106b43]">Tokyo hotel area guide</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#106b43]">{t("hero.eyebrow")}</p>
             <h1 className="mt-3 max-w-4xl text-3xl font-semibold leading-tight text-slate-950 md:text-5xl">
-              Where to Stay in Tokyo for First-Time Visitors
+              {t("hero.title")}
             </h1>
             <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">
-              Pick the right hotel area before you book. Compare Shinjuku, Ueno, Asakusa, Tokyo Station, and quieter East Tokyo based on airport access, Shinkansen plans, nightlife, and luggage.
+              {t("hero.subtitle")}
             </p>
           </div>
         </section>
 
         <section className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_360px]">
           <div className="rounded-[22px] border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
-            <h2 className="text-xl font-semibold text-slate-950">Quick Answer</h2>
+            <h2 className="text-xl font-semibold text-slate-950">{t("quickAnswer.title")}</h2>
             <div className="mt-4 space-y-2 text-sm leading-6 text-slate-700">
-              <p>Most first-time visitors should start with Shinjuku.</p>
-              <p>Choose Ueno if you want Narita access and better-value hotels.</p>
-              <p>Choose Asakusa if you want old-town Tokyo and temples.</p>
-              <p>Choose Tokyo Station if you have an early Shinkansen.</p>
-              <p>Choose East Tokyo if you want a calmer local base.</p>
+              {quickAnswers.map((answer) => <p key={answer}>{answer}</p>)}
             </div>
           </div>
           <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
             <ProviderChoiceCTA
-              actionLabel="Compare hotels in Shinjuku"
+              actionLabel={t("quickAnswer.cta")}
               providers={hotelProviderChoices("shinjuku", "stay_quick_answer")}
               pagePath={pagePath}
               locale={locale}
@@ -235,27 +264,21 @@ function TokyoFirstTimeHub({ locale }: { locale: string }) {
             <TrackedCtaLink
               href="/local-hotel-picks"
               placement="stay_quick_answer"
-              label="See local hotel examples"
+              label={t("quickAnswer.secondaryCta")}
               pagePath={pagePath}
               locale={locale}
               category="hotel"
               className="mt-3 inline-flex min-h-10 items-center justify-center rounded-xl border border-[#168a56] bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
             >
-              See local hotel examples
+              {t("quickAnswer.secondaryCta")}
             </TrackedCtaLink>
           </div>
         </section>
 
         <section className="mt-10">
-          <h2 className="text-xl font-semibold text-slate-950">Choose by Your Travel Plan</h2>
+          <h2 className="text-xl font-semibold text-slate-950">{t("travelPlan.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-5">
-            {[
-              ["I want the easiest first Tokyo base", "Shinjuku", "#shinjuku"],
-              ["I arrive at Narita Airport", "Ueno / Asakusa", "#ueno"],
-              ["I take an early Shinkansen", "Tokyo Station", "#tokyo-station"],
-              ["I want temples and old-town vibe", "Asakusa", "#asakusa"],
-              ["I want a quiet, local neighborhood", "East Tokyo", "#east-tokyo"],
-            ].map(([label, area, href]) => (
+            {planCards.map(({ label, area, href }) => (
               <a key={label} href={href} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm transition-colors hover:bg-slate-50">
                 <span className="block text-slate-600">{label}</span>
                 <span className="mt-2 block font-semibold text-slate-950">→ {area}</span>
@@ -266,8 +289,8 @@ function TokyoFirstTimeHub({ locale }: { locale: string }) {
 
         <section className="mt-12">
           <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">Tokyo Stay Areas at a Glance</p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-950">Compare the hotel base before the hotel</h2>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("glance.eyebrow")}</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">{t("glance.title")}</h2>
           </div>
           <div className="mt-5 grid gap-5 lg:grid-cols-2">
             {cards.map((card) => (
@@ -277,11 +300,11 @@ function TokyoFirstTimeHub({ locale }: { locale: string }) {
                 subtitle={card.subtitle}
                 bestFor={card.bestFor}
                 weakness={card.weakness}
-                image={card.image ? { src: card.image, alt: `${card.title} hotel area in Tokyo` } : undefined}
+                image={card.image ? { src: card.image, alt: t("glance.cardImageAlt", { area: card.title }) } : undefined}
                 area={card.area}
                 primaryAction={card.primaryAction}
                 providerChoices={card.providerChoices}
-                secondaryInternalLink={{ href: card.detailHref, label: "See details" }}
+                secondaryInternalLink={{ href: card.detailHref, label: t("glance.detailLabel") }}
                 placement="stay_area_glance_card"
                 pagePath={pagePath}
                 locale={locale}
@@ -291,14 +314,9 @@ function TokyoFirstTimeHub({ locale }: { locale: string }) {
         </section>
 
         <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">Why pick your area before booking?</h2>
+          <h2 className="text-xl font-semibold text-slate-950">{t("benefits.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-4">
-            {[
-              ["Time saved", "Better access to your airport and trains."],
-              ["Less stress", "Shorter transfers with luggage."],
-              ["Better value", "Each area has different price and vibe."],
-              ["Better experience", "Your base shapes your whole Tokyo trip."],
-            ].map(([title, body]) => (
+            {benefits.map(({ title, body }) => (
               <div key={title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
                 <p className="font-semibold text-slate-950">{title}</p>
                 <p className="mt-1 text-sm leading-5 text-slate-600">{body}</p>
@@ -308,12 +326,12 @@ function TokyoFirstTimeHub({ locale }: { locale: string }) {
         </section>
 
         <section id="comparison" className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">Quick Area Comparison</h2>
+          <h2 className="text-xl font-semibold text-slate-950">{t("comparison.title")}</h2>
           <div className="mt-4 overflow-x-auto">
             <table className="w-full min-w-[760px] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-slate-200 text-xs uppercase tracking-[0.08em] text-slate-500">
-                  {["Area", "Airport access", "Shinkansen access", "Nightlife / food", "Hotel cost feel", "Vibe"].map((heading) => (
+                  {comparisonHeadings.map((heading) => (
                     <th key={heading} className="px-3 py-2 font-semibold">{heading}</th>
                   ))}
                 </tr>
@@ -334,9 +352,9 @@ function TokyoFirstTimeHub({ locale }: { locale: string }) {
         </section>
 
         <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">FAQ</h2>
+          <h2 className="text-xl font-semibold text-slate-950">{t("faq.title")}</h2>
           <dl className="mt-4 grid gap-3 md:grid-cols-2">
-            {faqs.map(([question, answer]) => (
+            {faqs.map(({ question, answer }) => (
               <div key={question} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
                 <dt className="font-semibold text-slate-950">{question}</dt>
                 <dd className="mt-1 text-sm leading-6 text-slate-600">{answer}</dd>
@@ -346,28 +364,28 @@ function TokyoFirstTimeHub({ locale }: { locale: string }) {
         </section>
 
         <section className="mt-10">
-          <h2 className="text-lg font-semibold text-slate-950">Continue Planning</h2>
+          <h2 className="text-lg font-semibold text-slate-950">{t("continue.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-5">
-            <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label="Plan Your Trip" pagePath={pagePath} locale={locale} className={filledNextStepClass}>
-              Plan Your Trip
+            <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label={t("continue.plan")} pagePath={pagePath} locale={locale} className={filledNextStepClass}>
+              {t("continue.plan")}
             </TrackedCtaLink>
-            <TrackedCtaLink href="/jr-pass-vs-single-ticket" placement="next_steps" label="JR Pass vs Single Ticket" pagePath={pagePath} locale={locale} category="rail" className={filledNextStepClass}>
-              JR Pass vs Single Ticket
+            <TrackedCtaLink href="/jr-pass-vs-single-ticket" placement="next_steps" label={t("continue.jrPass")} pagePath={pagePath} locale={locale} category="rail" className={filledNextStepClass}>
+              {t("continue.jrPass")}
             </TrackedCtaLink>
             {esimHref ? (
-              <TrackedAffiliateLink href={esimHref} target="_blank" rel={AFFILIATE_REL} category="esim" provider="klook" placement="next_steps" pagePath={pagePath} locale={locale} label="Japan eSIM" linkId="esim" product="esim" adid="1166001" className={filledCommercialNextStepClass}>
-                Japan eSIM
+              <TrackedAffiliateLink href={esimHref} target="_blank" rel={AFFILIATE_REL} category="esim" provider="klook" placement="next_steps" pagePath={pagePath} locale={locale} label={t("continue.esim")} linkId="esim" product="esim" adid="1166001" className={filledCommercialNextStepClass}>
+                {t("continue.esim")}
               </TrackedAffiliateLink>
             ) : (
-              <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label="Japan eSIM" pagePath={pagePath} locale={locale} className={filledNextStepClass}>
-                Japan eSIM
+              <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label={t("continue.esim")} pagePath={pagePath} locale={locale} className={filledNextStepClass}>
+                {t("continue.esim")}
               </TrackedCtaLink>
             )}
-            <TrackedCtaLink href="/airport-transfers" placement="next_steps" label="Airport Transfer" pagePath={pagePath} locale={locale} category="transfer" className={filledNextStepClass}>
-              Airport Transfer
+            <TrackedCtaLink href="/airport-transfers" placement="next_steps" label={t("continue.airport")} pagePath={pagePath} locale={locale} category="transfer" className={filledNextStepClass}>
+              {t("continue.airport")}
             </TrackedCtaLink>
-            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label="Local Hotel Picks" pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
-              Local Hotel Picks
+            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label={t("continue.localPicks")} pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
+              {t("continue.localPicks")}
             </TrackedCtaLink>
           </div>
         </section>
@@ -540,32 +558,47 @@ const firstTimeStayHubs: Record<string, FirstTimeStayHubConfig> = {
   },
 };
 
-function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeStayHubConfig; locale: string }) {
+async function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeStayHubConfig; locale: string }) {
+  const t = await getTranslations({ locale, namespace: `firstTimeStayHubs.${config.slug}` });
   const pagePath = `/areas-to-stay/${config.slug}`;
+  const quickAnswer = t.raw("quickAnswer") as string[];
+  const comparisonHeadings = t.raw("comparisonHeadings") as string[];
+  const comparisonRows = t.raw("comparisonRows") as string[][];
+  const localizedAreas = config.areas.map((area) => ({
+    ...area,
+    ...(t.raw(`areas.${area.id}`) as {
+      name: string;
+      bestFor: string;
+      watchOut: string;
+      transportNote: string;
+      actionLabel?: string;
+      detailLabel?: string;
+    }),
+  }));
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
       <SiteHeader />
       <Container className="py-8 md:py-12">
         <Breadcrumb items={[
-          { label: "Areas to stay", href: "/" },
-          { label: `${config.city} first-time hotel areas` },
+          { label: t("breadcrumb.parent"), href: "/" },
+          { label: t("breadcrumb.current") },
         ]} />
 
         <section className="mt-5 rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm md:p-9">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#106b43]">{config.city} hotel area guide</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#106b43]">{t("hero.eyebrow")}</p>
           <h1 className="mt-3 max-w-4xl text-3xl font-semibold leading-tight text-slate-950 md:text-5xl">
-            {config.title}
+            {t("hero.title")}
           </h1>
           <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">
-            {config.subtitle}
+            {t("hero.subtitle")}
           </p>
         </section>
 
         <section className="mt-8 rounded-[22px] border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">Quick Answer</h2>
+          <h2 className="text-xl font-semibold text-slate-950">{t("quickAnswerTitle")}</h2>
           <div className="mt-4 grid gap-2 text-sm leading-6 text-slate-700 md:grid-cols-2">
-            {config.quickAnswer.map((answer) => (
+            {quickAnswer.map((answer) => (
               <p key={answer}>{answer}</p>
             ))}
           </div>
@@ -573,28 +606,28 @@ function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeStayHub
 
         <section className="mt-10">
           <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{config.city} Stay Areas at a Glance</p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-950">Choose the area before the hotel</h2>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("glance.eyebrow")}</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">{t("glance.title")}</h2>
           </div>
           <div className="mt-5 grid gap-5 lg:grid-cols-2">
-            {config.areas.map((area) => {
+            {localizedAreas.map((area) => {
               const choices = area.hotelKey ? hotelProviderChoices(area.hotelKey, "stay_area_glance_card") : [];
 
               return (
                 <article key={area.id} id={area.id} className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{config.city}</p>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("city")}</p>
                   <h3 className="mt-2 text-xl font-semibold text-slate-950">{area.name}</h3>
                   <div className="mt-4 grid gap-3 text-sm">
                     <div className="rounded-2xl border border-emerald-100 bg-emerald-50/70 p-3">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-emerald-700">Best for</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-emerald-700">{t("labels.bestFor")}</p>
                       <p className="mt-1 leading-5 text-slate-700">{area.bestFor}</p>
                     </div>
                     <div className="rounded-2xl border border-amber-100 bg-amber-50/70 p-3">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-amber-700">Watch out</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-amber-700">{t("labels.watchOut")}</p>
                       <p className="mt-1 leading-5 text-slate-700">{area.watchOut}</p>
                     </div>
                     <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-3">
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-sky-700">Transport note</p>
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-sky-700">{t("labels.transportNote")}</p>
                       <p className="mt-1 leading-5 text-slate-700">{area.transportNote}</p>
                     </div>
                   </div>
@@ -614,7 +647,7 @@ function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeStayHub
                       {area.detailLabel}
                     </Link>
                   ) : (
-                    <p className="mt-4 text-xs font-semibold text-slate-500">Detail guide planned</p>
+                    <p className="mt-4 text-xs font-semibold text-slate-500">{t("labels.detailGuidePlanned")}</p>
                   )}
                 </article>
               );
@@ -623,18 +656,18 @@ function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeStayHub
         </section>
 
         <section id="comparison" className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">Quick Area Comparison</h2>
+          <h2 className="text-xl font-semibold text-slate-950">{t("comparisonTitle")}</h2>
           <div className="mt-4 overflow-x-auto">
             <table className="w-full min-w-[680px] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-slate-200 text-xs uppercase tracking-[0.08em] text-slate-500">
-                  {["Area", "Airport access", "Shinkansen access", "Food / nightlife", "Vibe"].map((heading) => (
+                  {comparisonHeadings.map((heading) => (
                     <th key={heading} className="px-3 py-2 font-semibold">{heading}</th>
                   ))}
                 </tr>
               </thead>
               <tbody>
-                {config.comparisonRows.map((row) => (
+                {comparisonRows.map((row) => (
                   <tr key={row[0]} className="border-b border-slate-100 last:border-0">
                     {row.map((cell, index) => (
                       <td key={`${row[0]}-${index}`} className={["px-3 py-3 align-top", index === 0 ? "font-semibold text-slate-950" : "text-slate-600"].join(" ")}>
@@ -649,19 +682,19 @@ function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeStayHub
         </section>
 
         <section className="mt-10">
-          <h2 className="text-lg font-semibold text-slate-950">Continue Planning</h2>
+          <h2 className="text-lg font-semibold text-slate-950">{t("continue.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-4">
-            <TrackedCtaLink href="/areas-to-stay" placement="next_steps" label="Areas to Stay" pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
-              Areas to Stay
+            <TrackedCtaLink href="/areas-to-stay" placement="next_steps" label={t("continue.areas")} pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
+              {t("continue.areas")}
             </TrackedCtaLink>
-            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label="Local Hotel Picks" pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
-              Local Hotel Picks
+            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label={t("continue.localPicks")} pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
+              {t("continue.localPicks")}
             </TrackedCtaLink>
-            <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label="Plan Your Trip" pagePath={pagePath} locale={locale} className={filledNextStepClass}>
-              Plan Your Trip
+            <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label={t("continue.plan")} pagePath={pagePath} locale={locale} className={filledNextStepClass}>
+              {t("continue.plan")}
             </TrackedCtaLink>
-            <TrackedCtaLink href="/airport-transfers" placement="next_steps" label="Airport Transfer" pagePath={pagePath} locale={locale} category="transfer" className={filledNextStepClass}>
-              Airport Transfer
+            <TrackedCtaLink href="/airport-transfers" placement="next_steps" label={t("continue.airport")} pagePath={pagePath} locale={locale} category="transfer" className={filledNextStepClass}>
+              {t("continue.airport")}
             </TrackedCtaLink>
           </div>
         </section>
@@ -677,8 +710,29 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug, locale } = await params;
-  const page = getStayBySlug(slug);
-  if (!page) return {};
+  const rawPage = getStayBySlug(slug);
+  if (!rawPage) return {};
+  const firstTimeStayHub = firstTimeStayHubs[slug];
+
+  if (firstTimeStayHub) {
+    const t = await getTranslations({ locale, namespace: `firstTimeStayHubs.${slug}.meta` });
+    return {
+      title: `${t("title")} | fujiseat`,
+      description: t("description"),
+      robots: locale === "en" ? undefined : { index: false, follow: true },
+      openGraph: {
+        title: t("title"),
+        description: t("description"),
+        siteName: "fujiseat",
+      },
+      alternates: getAlternates(`/areas-to-stay/${slug}`, locale),
+    };
+  }
+
+  const stayPagesT = await getTranslations({ locale, namespace: "stayPages" });
+  const pageTranslations = stayPagesT.raw("pages") as Record<string, StayPageTranslation>;
+  const page = applyStayPageTranslation(rawPage, pageTranslations[slug]);
+
   return {
     title: `${page.title} | fujiseat`,
     description: page.description,
@@ -695,8 +749,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function StayPage({ params }: Props) {
   const { slug, locale } = await params;
   const localHotelT = await getTranslations("localHotelPicks");
-  const page = getStayBySlug(slug);
-  if (!page) notFound();
+  const stayPagesT = await getTranslations({ locale, namespace: "stayPages" });
+  const stayPagesCommon = stayPagesT.raw("common") as Record<string, string>;
+  const pageTranslations = stayPagesT.raw("pages") as Record<string, StayPageTranslation>;
+  const rawPage = getStayBySlug(slug);
+  if (!rawPage) notFound();
+  const page = applyStayPageTranslation(rawPage, pageTranslations[slug]);
   const pagePath = `/areas-to-stay/${slug}`;
 
   const isTokyoFirstTime = page.slug === "tokyo-first-time";
@@ -732,7 +790,7 @@ export default async function StayPage({ params }: Props) {
 
       <Container className="py-8 md:py-12">
         <Breadcrumb items={[
-          { label: "Areas to stay", href: "/" },
+          { label: stayPagesCommon.breadcrumbParent, href: "/" },
           { label: page.title.split("—")[0].trim() },
         ]} />
 
@@ -772,8 +830,8 @@ export default async function StayPage({ params }: Props) {
           />
 
           <section id="areas" className="scroll-mt-24">
-            <h2 className="text-lg font-semibold text-slate-950">Area breakdown</h2>
-            <p className="mt-1 text-sm text-slate-500">Compare the practical fit of each area before choosing where to search.</p>
+            <h2 className="text-lg font-semibold text-slate-950">{stayPagesCommon.areaBreakdownTitle}</h2>
+            <p className="mt-1 text-sm text-slate-500">{stayPagesCommon.areaBreakdownSubtitle}</p>
             <div className="mt-4 grid gap-4 lg:grid-cols-2">
               {page.areas.map((area) => (
                 <AreaCard key={area.name} {...area} locale={locale} pagePath={pagePath} showHotelCta={isTokyoFirstTime} />
@@ -782,7 +840,7 @@ export default async function StayPage({ params }: Props) {
           </section>
 
           <section id="comparison" className="scroll-mt-24">
-            <h2 className="mb-4 text-lg font-semibold text-slate-950">Side-by-side comparison</h2>
+            <h2 className="mb-4 text-lg font-semibold text-slate-950">{stayPagesCommon.comparisonTitle}</h2>
             <ComparisonTable
               columns={page.comparisonColumns}
               rows={page.comparison}
@@ -796,15 +854,15 @@ export default async function StayPage({ params }: Props) {
             <HotelPicks picks={page.hotelPicks} locale={locale} pagePath={pagePath} />
             <div className="mt-4 rounded-[18px] border border-emerald-100 bg-emerald-50/70 p-4">
               <p className="text-sm font-semibold text-slate-950">
-                Want more specific hotel examples?
+                {stayPagesCommon.localHotelBoxTitle}
               </p>
               <p className="mt-1 text-xs leading-5 text-slate-600">
-                See curated Japanese local hotel picks for Tokyo, Kyoto, and Osaka.
+                {stayPagesCommon.localHotelBoxBody}
               </p>
               <TrackedCtaLink
                 href="/local-hotel-picks"
                 placement="stay_detail_local_hotel_picks"
-                label="Japanese local hotel picks"
+                label={stayPagesCommon.localHotelCtaLabel}
                 pagePath={pagePath}
                 locale={locale}
                 category="hotel"
@@ -817,8 +875,8 @@ export default async function StayPage({ params }: Props) {
 
           <NextActions
             picks={page.nextActions}
-            title="Related stay planning"
-            subtitle="Use these only after you have chosen the hotel area."
+            title={stayPagesCommon.nextActionsTitle}
+            subtitle={stayPagesCommon.nextActionsSubtitle}
             maxItems={3}
             locale={locale}
             pagePath={pagePath}
@@ -826,7 +884,7 @@ export default async function StayPage({ params }: Props) {
 
           {page.faqs && page.faqs.length > 0 && (
             <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-              <h2 className="text-lg font-semibold text-slate-950">FAQ</h2>
+              <h2 className="text-lg font-semibold text-slate-950">{stayPagesCommon.faqTitle}</h2>
               <dl className="mt-4 space-y-4 text-sm">
                 {page.faqs.map((item) => (
                   <div key={item.question}>

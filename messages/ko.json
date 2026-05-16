@@ -2199,5 +2199,1350 @@
       "commandCenter": "Command Center",
       "localTokyo": "로컬 도쿄"
     }
+  },
+  "tokyoStayHub": {
+    "breadcrumb": {
+      "parent": "Areas to stay",
+      "current": "Tokyo first-time hotel areas"
+    },
+    "hero": {
+      "eyebrow": "도쿄 호텔 지역 가이드",
+      "title": "처음 도쿄에서 어디에 묵을까",
+      "subtitle": "예약 전에 호텔 지역을 먼저 고르세요. 공항, 신칸센, 밤 문화, 짐 기준으로 신주쿠, 우에노, 아사쿠사, 도쿄역, 조용한 동쪽 도쿄를 비교합니다.",
+      "imageAlt": "Tokyo hotel area skyline and neighborhood view"
+    },
+    "quickAnswer": {
+      "title": "빠른 답변",
+      "items": [
+        "대부분의 첫 방문자는 신주쿠부터 보면 좋습니다.",
+        "나리타 접근과 가성비를 원하면 우에노를 고르세요.",
+        "옛 도쿄와 사찰을 원하면 아사쿠사를 고르세요.",
+        "이른 신칸센이 있으면 도쿄역을 고르세요.",
+        "조용한 로컬 거점을 원하면 동쪽 도쿄를 고르세요."
+      ],
+      "cta": "신주쿠 호텔 비교",
+      "secondaryCta": "로컬 호텔 예시 보기"
+    },
+    "travelPlan": {
+      "title": "여행 계획별로 선택",
+      "cards": [
+        {
+          "label": "I want the easiest first Tokyo base",
+          "area": "Shinjuku",
+          "href": "#shinjuku"
+        },
+        {
+          "label": "I arrive at Narita Airport",
+          "area": "Ueno / Asakusa",
+          "href": "#ueno"
+        },
+        {
+          "label": "I take an early Shinkansen",
+          "area": "Tokyo Station",
+          "href": "#tokyo-station"
+        },
+        {
+          "label": "I want temples and old-town vibe",
+          "area": "Asakusa",
+          "href": "#asakusa"
+        },
+        {
+          "label": "I want a quiet, local neighborhood",
+          "area": "East Tokyo",
+          "href": "#east-tokyo"
+        }
+      ]
+    },
+    "glance": {
+      "eyebrow": "도쿄 숙소 지역 한눈에 보기",
+      "title": "호텔보다 먼저 거점을 비교하세요",
+      "detailLabel": "자세히 보기",
+      "cardImageAlt": "{area} hotel area in Tokyo"
+    },
+    "cards": {
+      "shinjuku": {
+        "title": "Shinjuku",
+        "subtitle": "Best for first-time energy, food, nightlife, and flexible trains.",
+        "bestFor": "First-time convenience, food, nightlife, and train options.",
+        "weakness": "Can feel intense around Kabukicho.",
+        "primaryAction": "Compare Shinjuku hotels"
+      },
+      "ueno": {
+        "title": "Ueno",
+        "subtitle": "Best for Narita access, museums, and better-value hotels.",
+        "bestFor": "Narita access, museums, and better-value hotels.",
+        "weakness": "Quieter nightlife than Shinjuku.",
+        "primaryAction": "Compare Ueno hotels"
+      },
+      "asakusa": {
+        "title": "Asakusa",
+        "subtitle": "Best for old-town Tokyo, Senso-ji, and riverside walks.",
+        "bestFor": "Old-town Tokyo, Senso-ji, and riverside walks.",
+        "weakness": "Not on the JR Yamanote Line.",
+        "primaryAction": "Compare Asakusa hotels"
+      },
+      "tokyoStation": {
+        "title": "Tokyo Station",
+        "subtitle": "Best for early Shinkansen, luggage, and clean logistics.",
+        "bestFor": "Early Shinkansen, luggage, and smooth transfer to Kyoto / Osaka.",
+        "weakness": "Usually more business-like and less local at night.",
+        "primaryAction": "Compare hotels near Tokyo Station"
+      },
+      "eastTokyo": {
+        "title": "East Tokyo",
+        "subtitle": "Best for calmer walks, coffee, riverside neighborhoods, and second-time Tokyo.",
+        "bestFor": "Quiet local walks, coffee, and riverside neighborhoods.",
+        "weakness": "Better as a second base than the default first-night stay.",
+        "primaryAction": "Explore Local Tokyo"
+      }
+    },
+    "benefits": {
+      "title": "왜 예약 전 지역을 먼저 고를까?",
+      "items": [
+        {
+          "title": "시간 절약",
+          "body": "공항과 열차 접근이 좋아집니다."
+        },
+        {
+          "title": "스트레스 감소",
+          "body": "짐을 들고 이동하는 시간이 줄어듭니다."
+        },
+        {
+          "title": "더 나은 가치",
+          "body": "지역마다 가격과 분위기가 다릅니다."
+        },
+        {
+          "title": "더 나은 경험",
+          "body": "거점이 도쿄 여행 전체를 만듭니다."
+        }
+      ]
+    },
+    "comparison": {
+      "title": "지역 빠른 비교",
+      "headings": [
+        "지역",
+        "공항 접근",
+        "신칸센 접근",
+        "밤 / 음식",
+        "호텔 비용감",
+        "분위기"
+      ],
+      "rows": [
+        [
+          "Shinjuku",
+          "N'EX direct, slower from Narita",
+          "10-15 min to Tokyo Station",
+          "Strongest",
+          "Wide range, weekend spikes",
+          "Energetic"
+        ],
+        [
+          "Ueno",
+          "Best Narita access",
+          "7 min to Tokyo Station",
+          "Moderate",
+          "Often better value",
+          "Practical, cultural"
+        ],
+        [
+          "Asakusa",
+          "Good via Access Express",
+          "Transfer needed",
+          "Quiet evenings",
+          "Good value",
+          "Old-town"
+        ],
+        [
+          "Tokyo Station",
+          "N'EX direct",
+          "Best",
+          "Business dining",
+          "Usually higher",
+          "Clean logistics"
+        ],
+        [
+          "East Tokyo",
+          "Varies by neighborhood",
+          "Usually transfer needed",
+          "Local and calm",
+          "Mixed",
+          "Quiet, slower"
+        ]
+      ]
+    },
+    "faq": {
+      "title": "FAQ",
+      "items": [
+        {
+          "question": "Is Shinjuku too noisy for families?",
+          "answer": "It can be around Kabukicho. Families usually do better around Nishi-Shinjuku, Yoyogi, or Shinjuku-Gyoenmae."
+        },
+        {
+          "question": "Is Ueno good for first-time visitors?",
+          "answer": "Yes, especially if you arrive at Narita or want better-value hotels with museums and markets nearby."
+        },
+        {
+          "question": "Should I stay near Tokyo Station before Kyoto or Osaka?",
+          "answer": "Yes if your Shinkansen is early or you have heavy luggage. Otherwise Shinjuku or Ueno can still work well."
+        },
+        {
+          "question": "Is Asakusa convenient without the JR Yamanote Line?",
+          "answer": "It is convenient for old-town sightseeing, but you will use subway transfers more often than in Ueno or Shinjuku."
+        },
+        {
+          "question": "Where should I stay if I arrive late at Narita?",
+          "answer": "Ueno is usually the simplest because the Skyliner is fast and the area is calmer on arrival night."
+        },
+        {
+          "question": "Is East Tokyo good for a first Tokyo hotel?",
+          "answer": "It can be, but it is better for travelers who already know they want a quieter local base."
+        }
+      ]
+    },
+    "continue": {
+      "title": "계속 계획하기",
+      "plan": "여행 계획",
+      "jrPass": "JR Pass vs 단일 티켓",
+      "esim": "일본 eSIM",
+      "airport": "공항 이동",
+      "localPicks": "로컬 호텔"
+    }
+  },
+  "tokyoAreaDetails": {
+    "breadcrumb": {
+      "parent": "숙소 지역",
+      "hub": "도쿄 숙소 지역 허브"
+    },
+    "heroImageAlt": "{area} hotel area",
+    "backToHub": "도쿄 숙소 지역 허브로 돌아가기",
+    "quickAnswer": {
+      "title": "빠른 답변",
+      "stayHereIf": "여기에 묵기 좋은 경우",
+      "avoidIf": "피해야 할 경우",
+      "bestMicroAreas": "추천 세부 지역"
+    },
+    "microAreaTitle": "세부 지역 가이드",
+    "hotelComparisonTitle": "호텔 비교",
+    "examples": {
+      "eyebrow": "로컬 호텔 예시",
+      "title": "순위가 아닌 실용 예시",
+      "more": "더 많은 로컬 호텔",
+      "cardNote": "순위가 아니라 지역과 객실 스타일 참고점으로 보세요.",
+      "empty": "이 지역의 구체적인 호텔 예시는 로컬 호텔 페이지에서 다룹니다."
+    },
+    "faqTitle": "FAQ",
+    "continue": {
+      "title": "계속 계획하기",
+      "hub": "도쿄 숙소 지역 허브",
+      "localPicks": "로컬 호텔",
+      "plan": "여행 계획",
+      "airport": "공항 이동"
+    },
+    "areas": {
+      "shinjuku": {
+        "title": "숙소 위치: Shinjuku",
+        "subtitle": "추천: Best for first-time energy, food, nightlife, and train options — but choose the calmer side if you want quiet nights.",
+        "areaLabel": "Tokyo: Shinjuku",
+        "primaryAction": "호텔 비교: Shinjuku",
+        "bestFor": "추천: First-timers who want food, nightlife, shopping, and flexible train access in one base.",
+        "avoid": "Light sleepers who book directly inside the loudest nightlife blocks without checking the micro-area.",
+        "bestMicroAreas": "Nishi-Shinjuku, Shinjuku-Gyoenmae / Shinjuku-sanchome, and Yoyogi / South Shinjuku.",
+        "microAreas": [
+          {
+            "name": "Nishi-Shinjuku",
+            "body": "Business hotels, quieter nights, good for families and comfort."
+          },
+          {
+            "name": "Shinjuku-Gyoenmae / Shinjuku-sanchome",
+            "body": "Still central, calmer, good food access."
+          },
+          {
+            "name": "Yoyogi / South Shinjuku",
+            "body": "More residential, balanced, easier nights."
+          },
+          {
+            "name": "Kabukicho",
+            "body": "Bright, loud, convenient, but not ideal for quiet stays."
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Is Shinjuku too noisy?",
+            "answer": "Some blocks are. Stay west, south, or near Shinjuku-Gyoenmae if quiet matters."
+          },
+          {
+            "question": "Is Shinjuku good for families?",
+            "answer": "Yes, especially Nishi-Shinjuku or Yoyogi / South Shinjuku."
+          },
+          {
+            "question": "Is Kabukicho a bad place to stay?",
+            "answer": "Not automatically, but it is loud and nightlife-heavy. It is not the calmest first-night choice."
+          },
+          {
+            "question": "How far is Shinjuku from Tokyo Station?",
+            "answer": "Usually 10-15 minutes by JR Chuo Line, plus walking time inside stations."
+          }
+        ],
+        "breadcrumbLabel": "Shinjuku"
+      },
+      "ueno": {
+        "title": "숙소 위치: Ueno",
+        "subtitle": "추천: Best for Narita access, museums, parks, and better-value hotels.",
+        "areaLabel": "Tokyo: Ueno",
+        "primaryAction": "호텔 비교: Ueno",
+        "bestFor": "추천: Travelers arriving at Narita, museum days, Ueno Park, and practical central Tokyo value.",
+        "avoid": "Travelers who want late-night nightlife at their hotel doorstep.",
+        "bestMicroAreas": "Ueno Station / Okachimachi, Ueno Park side, Inaricho / Taito side, and Ameyoko side.",
+        "microAreas": [
+          {
+            "name": "Ueno Station / Okachimachi",
+            "body": "Easiest transport and food."
+          },
+          {
+            "name": "Ueno Park side",
+            "body": "Museums, park, calmer daytime feel."
+          },
+          {
+            "name": "Inaricho / Taito side",
+            "body": "Quieter, often better value."
+          },
+          {
+            "name": "Ameyoko side",
+            "body": "Lively, food, budget energy."
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Is Ueno good for first-time visitors?",
+            "answer": "Yes, especially if Narita access and value matter more than nightlife."
+          },
+          {
+            "question": "Is Ueno convenient for the Shinkansen?",
+            "answer": "Tokyo Station is about 7 minutes away by JR, and some northern Shinkansen services also stop at Ueno."
+          },
+          {
+            "question": "Is Ueno lively at night?",
+            "answer": "It has food and market energy, but it is much quieter than Shinjuku."
+          },
+          {
+            "question": "Where should I stay near Ueno?",
+            "answer": "Station / Okachimachi is easiest; Inaricho can feel calmer and better value."
+          }
+        ],
+        "breadcrumbLabel": "Ueno"
+      },
+      "asakusa": {
+        "title": "숙소 위치: Asakusa",
+        "subtitle": "추천: Best for old-town Tokyo, Senso-ji, riverside walks, and a traditional atmosphere.",
+        "areaLabel": "Tokyo: Asakusa",
+        "primaryAction": "호텔 비교: Asakusa",
+        "bestFor": "추천: Travelers who want temples, old-town atmosphere, Tokyo Skytree views, and calmer evenings.",
+        "avoid": "Travelers who want JR Yamanote access or late-night west-side nightlife every night.",
+        "bestMicroAreas": "Senso-ji / Kaminarimon side, Tawaramachi side, Sumida River side, and Kuramae edge.",
+        "microAreas": [
+          {
+            "name": "Senso-ji / Kaminarimon side",
+            "body": "Most atmospheric, tourist-friendly."
+          },
+          {
+            "name": "Tawaramachi side",
+            "body": "Quieter, good Ginza Line access."
+          },
+          {
+            "name": "Sumida River side",
+            "body": "Calmer walks and skyline views."
+          },
+          {
+            "name": "Kuramae edge",
+            "body": "Cafes, design shops, east-side feel."
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Is Asakusa convenient without JR?",
+            "answer": "Yes for east Tokyo and old-town sights, but you will use subway transfers more often."
+          },
+          {
+            "question": "Is Asakusa good for families?",
+            "answer": "Yes. It is calmer than Shinjuku and has easy temple and river walks."
+          },
+          {
+            "question": "Is Asakusa too quiet at night?",
+            "answer": "It quiets down earlier than Shinjuku, which can be a benefit if you want calm nights."
+          },
+          {
+            "question": "Where is the best Asakusa micro-area?",
+            "answer": "Kaminarimon is easiest for first-timers; Tawaramachi and Kuramae edge are calmer."
+          }
+        ],
+        "breadcrumbLabel": "Asakusa"
+      },
+      "tokyo-station": {
+        "title": "숙소 위치: Tokyo Station",
+        "subtitle": "추천: Best for early Shinkansen, luggage, business-like comfort, and easy Kyoto / Osaka transfers.",
+        "areaLabel": "Tokyo: Tokyo Station",
+        "primaryAction": "호텔 비교: Tokyo Station",
+        "bestFor": "추천: Early Shinkansen departures, heavy luggage, Kyoto / Osaka transfers, and clean logistics.",
+        "avoid": "Travelers who want late-night local neighborhood energy right outside the hotel.",
+        "bestMicroAreas": "Marunouchi side, Yaesu side, Nihonbashi / Kyobashi side, and Ginza edge.",
+        "microAreas": [
+          {
+            "name": "Marunouchi side",
+            "body": "Clean, premium, business-like."
+          },
+          {
+            "name": "Yaesu side",
+            "body": "Practical for Shinkansen and buses."
+          },
+          {
+            "name": "Nihonbashi / Kyobashi side",
+            "body": "Calmer, walkable, still convenient."
+          },
+          {
+            "name": "Ginza edge",
+            "body": "Shopping and restaurants, higher-end feel."
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Should I stay near Tokyo Station before Kyoto?",
+            "answer": "Yes if your train is early or luggage is heavy. It removes the morning transfer."
+          },
+          {
+            "question": "Is Tokyo Station too business-like?",
+            "answer": "It can feel less local at night, but it is excellent for logistics."
+          },
+          {
+            "question": "Which side is best for the Shinkansen?",
+            "answer": "Yaesu is usually the practical side for Shinkansen and bus access."
+          },
+          {
+            "question": "Is Ginza close enough?",
+            "answer": "Yes for many travelers, especially if shopping and restaurants matter."
+          }
+        ],
+        "breadcrumbLabel": "Tokyo Station"
+      },
+      "east-tokyo": {
+        "title": "숙소 위치: East Tokyo",
+        "subtitle": "추천: Best for quieter local walks, coffee, riverside neighborhoods, and second-time Tokyo visitors.",
+        "areaLabel": "Tokyo: East Tokyo",
+        "primaryAction": "로컬 도쿄 탐색",
+        "bestFor": "추천: Travelers who want slower streets, coffee, museums, riverside walks, and a quieter base.",
+        "avoid": "First-timers who want the simplest default base for every major Tokyo sight.",
+        "bestMicroAreas": "Kiyosumi-Shirakawa, Kuramae, Ryogoku, and Monzen-Nakacho.",
+        "microAreas": [
+          {
+            "name": "Kiyosumi-Shirakawa",
+            "body": "Coffee, museums, calm streets."
+          },
+          {
+            "name": "Kuramae",
+            "body": "Design shops, cafes, river walks."
+          },
+          {
+            "name": "Ryogoku",
+            "body": "Sumo, history, local food."
+          },
+          {
+            "name": "Monzen-Nakacho",
+            "body": "Local food, temples, slower pace."
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Is East Tokyo good for a first Tokyo hotel?",
+            "answer": "It can be, but it is better if you already know you want a quieter local base."
+          },
+          {
+            "question": "Which East Tokyo area is best for coffee?",
+            "answer": "Kiyosumi-Shirakawa is the strongest coffee and museum base."
+          },
+          {
+            "question": "Is Kuramae convenient?",
+            "answer": "It is good for Asakusa and riverside walks, but less direct for west-side nightlife."
+          },
+          {
+            "question": "Should I stay in Ryogoku?",
+            "answer": "It works for sumo, museums, and local food, but it is usually better as a focused local base than a default first stay."
+          }
+        ],
+        "breadcrumbLabel": "East Tokyo"
+      }
+    }
+  },
+  "firstTimeStayHubs": {
+    "kyoto-first-time": {
+      "meta": {
+        "title": "교토 첫 방문자는 어디에 묵을까",
+        "description": "Pick the right Kyoto base before you book. Kyoto Station solves luggage and day trips; Gion and Higashiyama solve atmosphere; Kawaramachi / Shijo keeps food and shopping central."
+      },
+      "city": "교토",
+      "breadcrumb": {
+        "parent": "숙소 지역",
+        "current": "교토 first-time hotel areas"
+      },
+      "hero": {
+        "eyebrow": "교토 hotel area guide",
+        "title": "교토 첫 방문자는 어디에 묵을까",
+        "subtitle": "Pick the right Kyoto base before you book. Kyoto Station solves luggage and day trips; Gion and Higashiyama solve atmosphere; Kawaramachi / Shijo keeps food and shopping central."
+      },
+      "quickAnswerTitle": "빠른 답변",
+      "quickAnswer": [
+        "Choose Kyoto Station if transport, luggage, and day trips matter most.",
+        "Choose Kawaramachi / Shijo if you want food, shopping, and central convenience.",
+        "Choose Gion / Higashiyama if temples and traditional Kyoto atmosphere matter most.",
+        "Choose Arashiyama for a scenic stay, but expect a less central base.",
+        "Choose Kyoto Imperial Palace / quieter north if you want calmer streets on a repeat visit."
+      ],
+      "glance": {
+        "eyebrow": "Kyoto Stay Areas at a Glance",
+        "title": "Choose the area before the hotel"
+      },
+      "labels": {
+        "bestFor": "추천 대상",
+        "watchOut": "주의할 점",
+        "transportNote": "교통 메모",
+        "detailGuidePlanned": "상세 가이드 예정"
+      },
+      "areas": {
+        "kyoto-station": {
+          "name": "Kyoto Station",
+          "bestFor": "추천 대상: Transport, luggage, day trips.",
+          "watchOut": "Modern and practical rather than atmospheric.",
+          "transportNote": "Direct Shinkansen, JR, subway, buses, and Haruka airport train.",
+          "actionLabel": "Compare Kyoto Station hotels",
+          "detailLabel": "See Kyoto Station vs Gion"
+        },
+        "kawaramachi-shijo": {
+          "name": "Kawaramachi / Shijo",
+          "bestFor": "추천 대상: Food, shopping, central convenience.",
+          "watchOut": "Less direct for Shinkansen luggage days.",
+          "transportNote": "Good Hankyu, subway, bus, and taxi access across central Kyoto.",
+          "actionLabel": "Compare Kawaramachi / Shijo hotels",
+          "detailLabel": "See Kyoto Station vs Gion"
+        },
+        "gion-higashiyama": {
+          "name": "Gion / Higashiyama",
+          "bestFor": "추천 대상: Temples, atmosphere, traditional Kyoto.",
+          "watchOut": "Narrow streets and luggage are less convenient.",
+          "transportNote": "Best on foot and by taxi; Kyoto Station is usually a bus or taxi ride away.",
+          "actionLabel": "Compare Gion / Higashiyama hotels",
+          "detailLabel": "See Kyoto Station vs Gion"
+        },
+        "arashiyama": {
+          "name": "Arashiyama",
+          "bestFor": "추천 대상: Scenic stays, bamboo grove, riverside walks.",
+          "watchOut": "Less central for first-time city sightseeing.",
+          "transportNote": "Useful JR and Hankyu access, but most central Kyoto plans require extra travel."
+        },
+        "imperial-palace-north": {
+          "name": "Kyoto Imperial Palace / quieter north",
+          "bestFor": "추천 대상: Calmer repeat visitors.",
+          "watchOut": "Not the default first-night base for temple-heavy trips.",
+          "transportNote": "Subway and buses work, but taxis may be useful at night."
+        }
+      },
+      "comparisonTitle": "빠른 지역 비교",
+      "comparisonHeadings": [
+        "Area",
+        "Airport access",
+        "Shinkansen access",
+        "Food / nightlife",
+        "Vibe"
+      ],
+      "comparisonRows": [
+        [
+          "Kyoto Station",
+          "Best",
+          "Best",
+          "Practical",
+          "Modern logistics"
+        ],
+        [
+          "Kawaramachi / Shijo",
+          "Good",
+          "Transfer needed",
+          "Strongest",
+          "Central city"
+        ],
+        [
+          "Gion / Higashiyama",
+          "Atmospheric",
+          "Taxi/bus needed",
+          "Good but touristy",
+          "Traditional"
+        ],
+        [
+          "Arashiyama",
+          "Scenic",
+          "Less central",
+          "Limited at night",
+          "Riverside"
+        ],
+        [
+          "Imperial Palace / north",
+          "Calm",
+          "Moderate",
+          "Quiet",
+          "Residential"
+        ]
+      ],
+      "continue": {
+        "title": "계속 계획하기",
+        "areas": "숙소 지역",
+        "localPicks": "로컬 호텔",
+        "plan": "여행 계획",
+        "airport": "공항 이동"
+      }
+    },
+    "osaka-first-time": {
+      "meta": {
+        "title": "오사카 첫 방문자는 어디에 묵을까",
+        "description": "Pick the Osaka base by how you will use the city. Namba is easiest for food and nightlife; Umeda is stronger for rail; Shin-Osaka is a logistics choice."
+      },
+      "city": "오사카",
+      "breadcrumb": {
+        "parent": "숙소 지역",
+        "current": "오사카 first-time hotel areas"
+      },
+      "hero": {
+        "eyebrow": "오사카 hotel area guide",
+        "title": "오사카 첫 방문자는 어디에 묵을까",
+        "subtitle": "Pick the Osaka base by how you will use the city. Namba is easiest for food and nightlife; Umeda is stronger for rail; Shin-Osaka is a logistics choice."
+      },
+      "quickAnswerTitle": "빠른 답변",
+      "quickAnswer": [
+        "Choose Namba if food, nightlife, and first-time Osaka energy matter most.",
+        "Choose Umeda if rail access, Kyoto / Kobe trips, and airport connections matter most.",
+        "Choose Shin-Osaka if Shinkansen logistics are the main priority.",
+        "Choose Tennoji if you want value and south Osaka access.",
+        "Choose Osaka Castle / quieter central if you want a calmer base."
+      ],
+      "glance": {
+        "eyebrow": "Osaka Stay Areas at a Glance",
+        "title": "Choose the area before the hotel"
+      },
+      "labels": {
+        "bestFor": "추천 대상",
+        "watchOut": "주의할 점",
+        "transportNote": "교통 메모",
+        "detailGuidePlanned": "상세 가이드 예정"
+      },
+      "areas": {
+        "namba": {
+          "name": "Namba",
+          "bestFor": "추천 대상: Food, nightlife, first-time Osaka.",
+          "watchOut": "Can feel busy and loud at night.",
+          "transportNote": "Strong subway and Nankai access; practical for KIX and Dotonbori.",
+          "actionLabel": "Compare Namba hotels",
+          "detailLabel": "See Namba vs Umeda"
+        },
+        "umeda": {
+          "name": "Umeda",
+          "bestFor": "추천 대상: Rail access, Kyoto / Kobe / airport connections.",
+          "watchOut": "Less classic Osaka nightlife than Namba.",
+          "transportNote": "Best for JR, Hankyu, Hanshin, subway, and Kansai rail day trips.",
+          "actionLabel": "Compare Umeda hotels",
+          "detailLabel": "See Namba vs Umeda"
+        },
+        "shin-osaka": {
+          "name": "Shin-Osaka",
+          "bestFor": "추천 대상: Shinkansen logistics.",
+          "watchOut": "Not a lively neighborhood base.",
+          "transportNote": "Direct Shinkansen and subway to central Osaka; useful for early rail days.",
+          "actionLabel": "Compare Shin-Osaka hotels",
+          "detailLabel": "See Shin-Osaka vs Namba"
+        },
+        "tennoji": {
+          "name": "Tennoji",
+          "bestFor": "추천 대상: Value and south Osaka access.",
+          "watchOut": "Less central for Kyoto or Kobe day trips.",
+          "transportNote": "JR and subway access works well for south Osaka, Nara, and KIX routes."
+        },
+        "osaka-castle": {
+          "name": "Osaka Castle / quieter central",
+          "bestFor": "추천 대상: Calmer stays.",
+          "watchOut": "Less food-and-nightlife density than Namba or Umeda.",
+          "transportNote": "Good if your plans cluster around central Osaka, but check station distance carefully."
+        }
+      },
+      "comparisonTitle": "빠른 지역 비교",
+      "comparisonHeadings": [
+        "Area",
+        "Airport access",
+        "Shinkansen access",
+        "Food / nightlife",
+        "Vibe"
+      ],
+      "comparisonRows": [
+        [
+          "Namba",
+          "Good via Nankai",
+          "Transfer to Shin-Osaka",
+          "Strongest",
+          "Food-first"
+        ],
+        [
+          "Umeda",
+          "Good rail links",
+          "Good via JR/subway",
+          "Strong but polished",
+          "Transport hub"
+        ],
+        [
+          "Shin-Osaka",
+          "Transfer needed",
+          "Best",
+          "Limited",
+          "Logistics"
+        ],
+        [
+          "Tennoji",
+          "Good for KIX",
+          "Transfer needed",
+          "Moderate",
+          "Value"
+        ],
+        [
+          "Osaka Castle / quieter central",
+          "Varies",
+          "Transfer needed",
+          "Calmer",
+          "Central quiet"
+        ]
+      ],
+      "continue": {
+        "title": "계속 계획하기",
+        "areas": "숙소 지역",
+        "localPicks": "로컬 호텔",
+        "plan": "여행 계획",
+        "airport": "공항 이동"
+      }
+    }
+  },
+  "stayShared": {
+    "quickRec": {
+      "title": "빠른 추천",
+      "stayIn": "추천 숙박 지역:",
+      "seeHotels": "호텔 보기"
+    },
+    "areaCard": {
+      "pros": "장점",
+      "cons": "주의점",
+      "transport": "교통",
+      "compareTokyoStation": "도쿄역 근처 호텔 비교",
+      "compareAreaHotels": "{area} 호텔 비교"
+    }
+  },
+  "stayPages": {
+    "common": {
+      "breadcrumbParent": "숙박 지역",
+      "areaBreakdownTitle": "지역별 비교",
+      "areaBreakdownSubtitle": "호텔을 찾기 전에 각 지역의 실용적인 차이를 비교하세요.",
+      "comparisonTitle": "한눈에 비교",
+      "localHotelBoxTitle": "구체적인 호텔 예시가 필요하신가요?",
+      "localHotelBoxBody": "도쿄, 교토, 오사카의 현지 호텔 예시를 확인하세요.",
+      "localHotelCtaLabel": "일본 현지 호텔 예시",
+      "nextActionsTitle": "관련 숙박 계획",
+      "nextActionsSubtitle": "호텔 지역을 고른 뒤에 참고하세요.",
+      "faqTitle": "FAQ"
+    },
+    "pages": {
+      "tokyo-first-time": {
+        "title": "어디에 머물까: 도쿄 — first-time visitor guide",
+        "description": "비교: Compare Shinjuku, Ueno, Asakusa, and 도쿄 Station for your first trip to Japan. Find the best area based on transport access, nightlife, and luggage ease.",
+        "quickRec": {
+          "area": "Shinjuku",
+          "why": "동선이 복잡해지지 않도록 호텔 지역을 고르는 실용적인 추천입니다."
+        },
+        "proTip": "팁: 짐, 첫날 밤, 장거리 열차 일정을 기준으로 지역을 고르세요."
+      },
+      "shinjuku-vs-ueno-vs-asakusa": {
+        "title": "Shinjuku vs Ueno vs Asakusa — which 도쿄 base is right?",
+        "description": "비교: A head-to-head comparison of 도쿄's three most popular tourist areas: transport, budget, vibe, and best traveler fit.",
+        "quickRec": {
+          "area": "Shinjuku",
+          "why": "동선이 복잡해지지 않도록 호텔 지역을 고르는 실용적인 추천입니다."
+        },
+        "proTip": "팁: 짐, 첫날 밤, 장거리 열차 일정을 기준으로 지역을 고르세요.",
+        "areas": [
+          {
+            "vibe": "도쿄다운 에너지 — 네온, 인파, 선택지",
+            "pros": [
+              "도쿄에서 가장 연결성이 좋은 역",
+              "골든가이와 오모이데요코초의 밤문화",
+              "쇼핑, 음식, 호텔 선택지가 밀집"
+            ],
+            "cons": [
+              "역 구조가 복잡함",
+              "늦은 밤에는 혼잡하게 느껴질 수 있음",
+              "주말 요금 상승 가능"
+            ],
+            "bestFor": "밤문화와 유연한 동선",
+            "transport": "JR 야마노테 허브. 나리타 NEX. 하코네 오다큐. 도쿄역 10분."
+          },
+          {
+            "vibe": "편안하고 문화적이며 시장 분위기",
+            "pros": [
+              "좋은 호텔을 더 합리적으로 찾기 쉬움",
+              "아메요코와 우에노 공원이 가까움",
+              "나리타 Skyliner가 빠름"
+            ],
+            "cons": [
+              "밤문화 규모가 작음",
+              "늦은 식사 선택지가 적음",
+              "일부 거리는 오래된 느낌"
+            ],
+            "bestFor": "예산과 문화",
+            "transport": "나리타 Skyliner 36분. JR 야마노테와 지하철. 아키하바라 가까움."
+          },
+          {
+            "vibe": "옛 도쿄 — 절, 장인 거리, 강변 산책",
+            "pros": [
+              "센소지가 바로 가까움",
+              "스미다강과 스카이트리 인접",
+              "로컬 동네 느낌이 강함"
+            ],
+            "cons": [
+              "JR 야마노테 라인이 아님",
+              "밤 9시 이후 조용함",
+              "시부야와 신주쿠에서 더 멂"
+            ],
+            "bestFor": "문화와 사진",
+            "transport": "긴자선 지하철. 닛코행 도부선. 우에노 이동 쉬움."
+          }
+        ],
+        "nextActions": [
+          {
+            "title": "공항 이동 비교",
+            "description": "나리타 또는 하네다에서 호텔 지역까지.",
+            "cta": "이동 보기"
+          },
+          {
+            "title": "7일 일본 일정",
+            "description": "도쿄, 후지, 교토, 오사카를 순서대로 배치하세요.",
+            "cta": "일정 보기"
+          }
+        ]
+      },
+      "kyoto-station-vs-gion": {
+        "title": "교토 Station vs Gion: 어디에 머물까: 교토?",
+        "description": "비교: Compare 교토 Station and Gion for Shinkansen access, luggage, sightseeing, food, and atmosphere.",
+        "quickRec": {
+          "area": "Kyoto Station",
+          "why": "동선이 복잡해지지 않도록 호텔 지역을 고르는 실용적인 추천입니다."
+        },
+        "proTip": "팁: 짐, 첫날 밤, 장거리 열차 일정을 기준으로 지역을 고르세요.",
+        "areas": [
+          {
+            "vibe": "번역 요약: Transport hub — practical, efficient, central access",
+            "pros": [
+              "실용 포인트: Direct Shinkansen platform",
+              "실용 포인트: JR, subway, buses, and lockers in one place",
+              "실용 포인트: Best base for Nara, Osaka, and Fushimi Inari"
+            ],
+            "cons": [
+              "주의할 점: Modern and functional rather than atmospheric",
+              "주의할 점: Restaurants are mostly in station malls",
+              "주의할 점: Feels less like old Kyoto"
+            ],
+            "bestFor": "추천 대상: Shinkansen / luggage / day trips",
+            "transport": "교통: Shinkansen direct. JR to Nara. Bus to Gion and temple areas."
+          },
+          {
+            "vibe": "번역 요약: Traditional Kyoto — lanterns, temples, evening walks",
+            "pros": [
+              "실용 포인트: Walk to Kiyomizu-dera and Yasaka Shrine",
+              "실용 포인트: Traditional streets and evening atmosphere",
+              "실용 포인트: Pontocho and Kawaramachi dining nearby"
+            ],
+            "cons": [
+              "주의할 점: Bus or taxi to Kyoto Station",
+              "주의할 점: Narrow streets make luggage harder",
+              "주의할 점: Often higher rates for atmosphere"
+            ],
+            "bestFor": "추천 대상: Atmosphere / temples / evenings",
+            "transport": "교통: Bus or taxi to Kyoto Station. Walkable to Higashiyama sights."
+          }
+        ],
+        "nextActions": [
+          {
+            "title": "Full Kyoto stay guide",
+            "description": "Compare Kyoto Station, Gion, Kawaramachi, and quieter areas.",
+            "cta": "See full guide"
+          },
+          {
+            "title": "Airport transfer routes",
+            "description": "Compare airport trains, buses, and transfer options.",
+            "cta": "See routes"
+          },
+          {
+            "title": "Airport transfer routes",
+            "description": "Compare airport trains, buses, and transfer options.",
+            "cta": "See routes"
+          },
+          {
+            "title": "Check Fuji-side seat",
+            "description": "Find the right window seat for Mt. Fuji views.",
+            "cta": "Check seat"
+          },
+          {
+            "title": "Japan itinerary",
+            "description": "Place Tokyo, Kyoto, and Osaka in a practical route.",
+            "cta": "View itinerary"
+          }
+        ]
+      },
+      "kawaguchiko": {
+        "title": "어디에 머물까: Kawaguchiko — best Mt. Fuji view hotels",
+        "description": "비교: Compare Lake Kawaguchiko areas for an overnight Mt. Fuji stay, including north shore, south shore, station area, and onsen ryokan choices.",
+        "quickRec": {
+          "area": "North shore",
+          "why": "동선이 복잡해지지 않도록 호텔 지역을 고르는 실용적인 추천입니다."
+        },
+        "proTip": "팁: 짐, 첫날 밤, 장거리 열차 일정을 기준으로 지역을 고르세요."
+      },
+      "where-to-stay-before-shinkansen": {
+        "title": "Where to Stay Before Taking the Shinkansen in 도쿄",
+        "description": "비교: Compare 도쿄 Station, Shinjuku, Ueno, Asakusa, and East 도쿄 before a Shinkansen day to 교토 or 오사카.",
+        "quickRec": {
+          "area": "Tokyo Station",
+          "why": "동선이 복잡해지지 않도록 호텔 지역을 고르는 실용적인 추천입니다."
+        },
+        "proTip": "팁: 짐, 첫날 밤, 장거리 열차 일정을 기준으로 지역을 고르세요.",
+        "areas": [
+          {
+            "vibe": "효율적 — 신칸센 직결, 깔끔한 동선",
+            "pros": [
+              "신칸센 승강장 직결",
+              "이른 출발에 좋음",
+              "마루노우치, 니혼바시, 긴자 가까움"
+            ],
+            "cons": [
+              "호텔 요금이 높은 편",
+              "퇴근 시간 이후 조용함",
+              "동네 개성은 약함"
+            ],
+            "bestFor": "이른 신칸센",
+            "transport": "모든 신칸센 노선. 나리타 익스프레스 직통. JR 야마노테로 주요 지역 이동."
+          },
+          {
+            "vibe": "도쿄다운 에너지 — 네온, 인파, 선택지",
+            "pros": [
+              "도쿄에서 가장 연결성이 좋은 역",
+              "골든가이와 오모이데요코초의 밤문화",
+              "쇼핑, 음식, 호텔 선택지가 밀집"
+            ],
+            "cons": [
+              "역 구조가 복잡함",
+              "늦은 밤에는 혼잡하게 느껴질 수 있음",
+              "주말 요금 상승 가능"
+            ],
+            "bestFor": "밤문화와 유연한 동선",
+            "transport": "JR 야마노테 허브. 나리타 NEX. 하코네 오다큐. 도쿄역 10분."
+          },
+          {
+            "vibe": "편안하고 문화적이며 시장 분위기",
+            "pros": [
+              "좋은 호텔을 더 합리적으로 찾기 쉬움",
+              "아메요코와 우에노 공원이 가까움",
+              "나리타 Skyliner가 빠름"
+            ],
+            "cons": [
+              "밤문화 규모가 작음",
+              "늦은 식사 선택지가 적음",
+              "일부 거리는 오래된 느낌"
+            ],
+            "bestFor": "예산과 문화",
+            "transport": "나리타 Skyliner 36분. JR 야마노테와 지하철. 아키하바라 가까움."
+          },
+          {
+            "vibe": "옛 도쿄 — 절, 장인 거리, 강변 산책",
+            "pros": [
+              "센소지가 바로 가까움",
+              "스미다강과 스카이트리 인접",
+              "로컬 동네 느낌이 강함"
+            ],
+            "cons": [
+              "JR 야마노테 라인이 아님",
+              "밤 9시 이후 조용함",
+              "시부야와 신주쿠에서 더 멂"
+            ],
+            "bestFor": "문화와 사진",
+            "transport": "긴자선 지하철. 닛코행 도부선. 우에노 이동 쉬움."
+          }
+        ],
+        "nextActions": [
+          {
+            "title": "후지산 방향 좌석 확인",
+            "description": "탑승 전 후지산 창가 좌석을 확인하세요.",
+            "cta": "좌석 확인"
+          },
+          {
+            "title": "공항 이동 비교",
+            "description": "나리타 또는 하네다에서 호텔 지역까지.",
+            "cta": "이동 보기"
+          },
+          {
+            "title": "7일 일본 일정",
+            "description": "도쿄, 후지, 교토, 오사카를 순서대로 배치하세요.",
+            "cta": "일정 보기"
+          }
+        ]
+      },
+      "tokyo-station-vs-shinjuku": {
+        "title": "도쿄 Station vs Shinjuku: 어디에 머물까: 도쿄?",
+        "description": "비교: Compare 도쿄 Station and Shinjuku for Shinkansen access, nightlife, food, airport transfers, and luggage.",
+        "quickRec": {
+          "area": "Shinjuku",
+          "why": "동선이 복잡해지지 않도록 호텔 지역을 고르는 실용적인 추천입니다."
+        },
+        "proTip": "팁: 짐, 첫날 밤, 장거리 열차 일정을 기준으로 지역을 고르세요.",
+        "areas": [
+          {
+            "vibe": "비즈니스형 실용 지역 — 신칸센, 깔끔함, 조용함",
+            "pros": [
+              "신칸센 승강장까지 바로 이동",
+              "이른 출발과 늦은 도착에 편리",
+              "마루노우치와 긴자가 가까움"
+            ],
+            "cons": [
+              "호텔 요금이 높은 편",
+              "밤 9시 이후 조용한 오피스 분위기",
+              "동네 개성은 약함"
+            ],
+            "bestFor": "신칸센 중심 일정",
+            "transport": "모든 신칸센 노선. 나리타 익스프레스 직통 55분. JR 야마노테."
+          },
+          {
+            "vibe": "도쿄다운 에너지 — 밤문화, 쇼핑, 음식",
+            "pros": [
+              "도쿄에서 가장 강한 철도 연결성",
+              "예산대별 호텔 선택지가 많음",
+              "골든가이, 오모이데요코초, 가부키초 도보권"
+            ],
+            "cons": [
+              "역이 매우 커서 헤매기 쉬움",
+              "신칸센 이용 시 도쿄역까지 10분 이동",
+              "첫날 밤에는 압도적으로 느껴질 수 있음"
+            ],
+            "bestFor": "첫 방문과 밤문화",
+            "transport": "JR 주오선으로 도쿄역 10분. 나리타 익스프레스 직통. 오다큐로 하코네."
+          }
+        ]
+      },
+      "ueno-vs-shinjuku": {
+        "title": "Ueno vs Shinjuku: Which 도쿄 Area Should You Stay In?",
+        "description": "비교: Compare Ueno and Shinjuku for Narita access, hotel value, nightlife, food, museums, luggage, and train convenience.",
+        "quickRec": {
+          "area": "Ueno",
+          "why": "동선이 복잡해지지 않도록 호텔 지역을 고르는 실용적인 추천입니다."
+        },
+        "proTip": "팁: 짐, 첫날 밤, 장거리 열차 일정을 기준으로 지역을 고르세요.",
+        "areas": [
+          {
+            "vibe": "차분하고 문화적이며 가성비 좋은 지역",
+            "pros": [
+              "도심 안에서 예산형 호텔 선택지가 많음",
+              "나리타 Skyliner 접근이 빠름",
+              "박물관, 공원, 아메요코가 가까움"
+            ],
+            "cons": [
+              "밤문화는 조용한 편",
+              "늦은 식사 선택지가 적음",
+              "일부 거리는 오래된 느낌"
+            ],
+            "bestFor": "예산 + 나리타 + 박물관",
+            "transport": "나리타 Skyliner 36분. JR 야마노테로 신주쿠 25분. 지하철로 아사쿠사 5분."
+          },
+          {
+            "vibe": "네온과 사람, 선택지가 많은 도쿄다운 지역",
+            "pros": [
+              "도쿄에서 철도 연결이 가장 강함",
+              "밤문화, 음식, 쇼핑을 한 지역에서 해결",
+              "골든가이와 가부키초 도보권"
+            ],
+            "cons": [
+              "역이 매우 큼",
+              "주말 요금이 오를 수 있음",
+              "나리타 이동 시간이 더 김"
+            ],
+            "bestFor": "밤문화 + 유연한 동선",
+            "transport": "도쿄역 10분. 나리타 익스프레스 직통. 오다큐로 하코네."
+          }
+        ]
+      },
+      "namba-vs-umeda": {
+        "title": "Namba vs Umeda: 어디에 머물까: 오사카?",
+        "description": "비교: Compare Namba and Umeda for food, nightlife, shopping, transport, 교토 day trips, and Kansai Airport access.",
+        "quickRec": {
+          "area": "Namba",
+          "why": "동선이 복잡해지지 않도록 호텔 지역을 고르는 실용적인 추천입니다."
+        },
+        "proTip": "팁: 짐, 첫날 밤, 장거리 열차 일정을 기준으로 지역을 고르세요.",
+        "areas": [
+          {
+            "vibe": "번역 요약: Osaka's soul — street food, neon, nightlife",
+            "pros": [
+              "실용 포인트: Dotonbori, Shinsekai, and Kuromon nearby",
+              "실용 포인트: Best street-food concentration",
+              "실용 포인트: Nankai line direct to Kansai Airport"
+            ],
+            "cons": [
+              "주의할 점: Loud and crowded on weekends",
+              "주의할 점: Transfer needed for Shinkansen",
+              "주의할 점: Can feel intense on arrival night"
+            ],
+            "bestFor": "추천 대상: Food / nightlife / first-time Osaka",
+            "transport": "교통: Nankai to KIX. Metro to Shin-Osaka and Umeda."
+          },
+          {
+            "vibe": "번역 요약: Business district — shopping, transport, modern",
+            "pros": [
+              "실용 포인트: Huge rail hub around Osaka Station",
+              "실용 포인트: Fast access to Shin-Osaka",
+              "실용 포인트: Good for Kyoto and Kobe day trips"
+            ],
+            "cons": [
+              "주의할 점: Less street-food character than Namba",
+              "주의할 점: Business feel after evening",
+              "주의할 점: KIX access is less direct"
+            ],
+            "bestFor": "추천 대상: Shopping / transport / Kyoto day trips",
+            "transport": "교통: JR to Shin-Osaka. Hankyu to Kyoto. JR or bus to KIX."
+          }
+        ],
+        "nextActions": [
+          {
+            "title": "Full Osaka stay guide",
+            "description": "Compare Namba, Umeda, and Shin-Osaka.",
+            "cta": "See full guide"
+          },
+          {
+            "title": "Airport transfer routes",
+            "description": "Compare airport trains, buses, and transfer options.",
+            "cta": "See routes"
+          },
+          {
+            "title": "Airport transfer routes",
+            "description": "Compare airport trains, buses, and transfer options.",
+            "cta": "See routes"
+          },
+          {
+            "title": "Airport transfer routes",
+            "description": "Compare airport trains, buses, and transfer options.",
+            "cta": "See routes"
+          },
+          {
+            "title": "Check Fuji-side seat",
+            "description": "Find the right window seat for Mt. Fuji views.",
+            "cta": "Check seat"
+          }
+        ]
+      },
+      "shin-osaka-vs-namba": {
+        "title": "Shin-오사카 vs Namba: 어디에 머물까: 오사카?",
+        "description": "비교: Compare Shin-오사카 and Namba for Shinkansen access, nightlife, food, luggage, early trains, and first-time 오사카 trips.",
+        "quickRec": {
+          "area": "Namba",
+          "why": "동선이 복잡해지지 않도록 호텔 지역을 고르는 실용적인 추천입니다."
+        },
+        "proTip": "팁: 짐, 첫날 밤, 장거리 열차 일정을 기준으로 지역을 고르세요.",
+        "areas": [
+          {
+            "vibe": "번역 요약: Shinkansen hub — practical, efficient",
+            "pros": [
+              "실용 포인트: Direct Shinkansen platform",
+              "실용 포인트: Best for early departures or late arrivals",
+              "실용 포인트: Simple luggage handling"
+            ],
+            "cons": [
+              "주의할 점: Little to do nearby",
+              "주의할 점: Mostly business hotels",
+              "주의할 점: No real nightlife walking distance"
+            ],
+            "bestFor": "추천 대상: Early Shinkansen / luggage / overnight stop",
+            "transport": "교통: Shinkansen direct. Midosuji Metro to Namba and Umeda."
+          },
+          {
+            "vibe": "번역 요약: Osaka's soul — street food, neon, nightlife",
+            "pros": [
+              "실용 포인트: Dotonbori, Shinsekai, and Kuromon nearby",
+              "실용 포인트: Best street-food concentration",
+              "실용 포인트: Nankai line direct to Kansai Airport"
+            ],
+            "cons": [
+              "주의할 점: Loud and crowded on weekends",
+              "주의할 점: Transfer needed for Shinkansen",
+              "주의할 점: Can feel intense on arrival night"
+            ],
+            "bestFor": "추천 대상: Food / nightlife / first-time Osaka",
+            "transport": "교통: Nankai to KIX. Metro to Shin-Osaka and Umeda."
+          }
+        ],
+        "nextActions": [
+          {
+            "title": "Full Osaka stay guide",
+            "description": "Compare Namba, Umeda, and Shin-Osaka.",
+            "cta": "See full guide"
+          },
+          {
+            "title": "Namba vs Umeda",
+            "description": "Compare the two main sightseeing bases in Osaka.",
+            "cta": "Compare"
+          },
+          {
+            "title": "Airport transfer routes",
+            "description": "Compare airport trains, buses, and transfer options.",
+            "cta": "See routes"
+          },
+          {
+            "title": "Check Fuji-side seat",
+            "description": "Find the right window seat for Mt. Fuji views.",
+            "cta": "Check seat"
+          },
+          {
+            "title": "Japan itinerary",
+            "description": "Place Tokyo, Kyoto, and Osaka in a practical route.",
+            "cta": "View itinerary"
+          }
+        ]
+      },
+      "tokyo-station-hotels-before-shinkansen": {
+        "title": "어디에 머물까: 도쿄",
+        "description": "비교: Compare 도쿄 Station, Shinjuku, Ueno, and Asakusa before taking the Shinkansen to 교토 or 오사카.",
+        "quickRec": {
+          "area": "Tokyo Station or Ueno",
+          "why": "동선이 복잡해지지 않도록 호텔 지역을 고르는 실용적인 추천입니다."
+        },
+        "proTip": "팁: 짐, 첫날 밤, 장거리 열차 일정을 기준으로 지역을 고르세요.",
+        "areas": [
+          {
+            "vibe": "효율적 — 신칸센 직결, 깔끔한 동선",
+            "pros": [
+              "신칸센 승강장 직결",
+              "이른 출발에 좋음",
+              "마루노우치, 니혼바시, 긴자 가까움"
+            ],
+            "cons": [
+              "호텔 요금이 높은 편",
+              "퇴근 시간 이후 조용함",
+              "동네 개성은 약함"
+            ],
+            "bestFor": "이른 신칸센",
+            "transport": "모든 신칸센 노선. 나리타 익스프레스 직통. JR 야마노테로 주요 지역 이동."
+          },
+          {
+            "vibe": "도쿄다운 에너지 — 네온, 인파, 선택지",
+            "pros": [
+              "도쿄에서 가장 연결성이 좋은 역",
+              "골든가이와 오모이데요코초의 밤문화",
+              "쇼핑, 음식, 호텔 선택지가 밀집"
+            ],
+            "cons": [
+              "역 구조가 복잡함",
+              "늦은 밤에는 혼잡하게 느껴질 수 있음",
+              "주말 요금 상승 가능"
+            ],
+            "bestFor": "밤문화와 유연한 동선",
+            "transport": "JR 야마노테 허브. 나리타 NEX. 하코네 오다큐. 도쿄역 10분."
+          },
+          {
+            "vibe": "편안하고 문화적이며 시장 분위기",
+            "pros": [
+              "좋은 호텔을 더 합리적으로 찾기 쉬움",
+              "아메요코와 우에노 공원이 가까움",
+              "나리타 Skyliner가 빠름"
+            ],
+            "cons": [
+              "밤문화 규모가 작음",
+              "늦은 식사 선택지가 적음",
+              "일부 거리는 오래된 느낌"
+            ],
+            "bestFor": "예산과 문화",
+            "transport": "나리타 Skyliner 36분. JR 야마노테와 지하철. 아키하바라 가까움."
+          },
+          {
+            "vibe": "옛 도쿄 — 절, 장인 거리, 강변 산책",
+            "pros": [
+              "센소지가 바로 가까움",
+              "스미다강과 스카이트리 인접",
+              "로컬 동네 느낌이 강함"
+            ],
+            "cons": [
+              "JR 야마노테 라인이 아님",
+              "밤 9시 이후 조용함",
+              "시부야와 신주쿠에서 더 멂"
+            ],
+            "bestFor": "문화와 사진",
+            "transport": "긴자선 지하철. 닛코행 도부선. 우에노 이동 쉬움."
+          }
+        ],
+        "nextActions": [
+          {
+            "title": "도쿄 숙박 지역 전체 가이드",
+            "description": "신주쿠, 우에노, 아사쿠사, 도쿄역을 비교하세요.",
+            "cta": "가이드 보기"
+          },
+          {
+            "title": "후지산 방향 좌석 확인",
+            "description": "탑승 전 후지산 창가 좌석을 확인하세요.",
+            "cta": "좌석 확인"
+          },
+          {
+            "title": "신칸센 티켓 가이드",
+            "description": "도쿄에서 교토 신칸센 예약 방법.",
+            "cta": "가이드 읽기"
+          },
+          {
+            "title": "7일 일본 일정",
+            "description": "도쿄, 후지, 교토, 오사카를 순서대로 배치하세요.",
+            "cta": "일정 보기"
+          }
+        ]
+      },
+      "asakusa-vs-ueno": {
+        "title": "Asakusa vs Ueno: 어디에 머물까: 도쿄?",
+        "description": "비교: Compare Asakusa and Ueno for old 도쿄 atmosphere, Narita access, budget hotels, museums, and food.",
+        "quickRec": {
+          "area": "Ueno",
+          "why": "동선이 복잡해지지 않도록 호텔 지역을 고르는 실용적인 추천입니다."
+        },
+        "proTip": "팁: 짐, 첫날 밤, 장거리 열차 일정을 기준으로 지역을 고르세요.",
+        "areas": [
+          {
+            "vibe": "전통적인 도쿄 — 절, 스카이트리, 조용한 저녁",
+            "pros": [
+              "센소지와 나카미세가 가까움",
+              "도쿄 스카이트리 도보권",
+              "구도심 분위기"
+            ],
+            "cons": [
+              "도쿄역 이동이 더 김",
+              "늦은 밤 선택지가 적음",
+              "열차 이동일은 계획이 더 필요"
+            ],
+            "bestFor": "분위기 / 절 / 스카이트리",
+            "transport": "우에노까지 지하철 5분. 나리타 Access Express 약 55분."
+          },
+          {
+            "vibe": "차분하고 문화적이며 가성비 좋은 지역",
+            "pros": [
+              "도심 안에서 예산형 호텔 선택지가 많음",
+              "나리타 Skyliner 접근이 빠름",
+              "박물관, 공원, 아메요코가 가까움"
+            ],
+            "cons": [
+              "밤문화는 조용한 편",
+              "늦은 식사 선택지가 적음",
+              "일부 거리는 오래된 느낌"
+            ],
+            "bestFor": "예산 + 나리타 + 박물관",
+            "transport": "나리타 Skyliner 36분. JR 야마노테로 신주쿠 25분. 지하철로 아사쿠사 5분."
+          }
+        ]
+      }
+    }
   }
 }

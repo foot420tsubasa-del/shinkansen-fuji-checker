@@ -1,4 +1,5 @@
 import { Check, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { HotelCTA } from "@/components/affiliate/HotelCTA";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
@@ -40,12 +41,13 @@ export function AreaCard({
   hotelKey,
   showHotelCta = true,
 }: AreaCardProps) {
+  const t = useTranslations("stayShared.areaCard");
   const hotel = hotelKey ? getHotelLink(hotelKey) : null;
   const hotelConfig = hotelKey ? getTripHotelConfig(hotelKey) : null;
   const hotelActionLabel =
     hotelKey === "tokyoStation"
-      ? "Compare hotels near Tokyo Station"
-      : `Compare ${hotel?.areaName ?? name} hotels`;
+      ? t("compareTokyoStation")
+      : t("compareAreaHotels", { area: hotel?.areaName ?? name });
   const tripHref = hotel?.provider === "trip" ? hotel.href : hotelConfig?.tripUrl ?? (provider === "trip" ? hotelLink : undefined);
   const tripTrackingHref = hotel?.provider === "trip" ? hotel.trackingHref : hotelConfig?.tripUrl ?? (provider === "trip" ? hotelLink : undefined);
   const agodaLink = hotelKey ? getAgodaHotelAreaUrl(hotelKey) : null;
@@ -65,7 +67,7 @@ export function AreaCard({
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         <div>
-          <p className="mb-2 text-[10px] font-semibold uppercase text-emerald-600">Pros</p>
+          <p className="mb-2 text-[10px] font-semibold uppercase text-emerald-600">{t("pros")}</p>
           <ul className="space-y-1.5">
             {pros.map((p) => (
               <li key={p} className="flex items-start gap-2 text-xs leading-5 text-slate-700">
@@ -76,7 +78,7 @@ export function AreaCard({
           </ul>
         </div>
         <div>
-          <p className="mb-2 text-[10px] font-semibold uppercase text-red-500">Cons</p>
+          <p className="mb-2 text-[10px] font-semibold uppercase text-red-500">{t("cons")}</p>
           <ul className="space-y-1.5">
             {cons.map((c) => (
               <li key={c} className="flex items-start gap-2 text-xs leading-5 text-slate-700">
@@ -89,7 +91,7 @@ export function AreaCard({
       </div>
 
       <div className="mt-4 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2.5 text-xs leading-5 text-slate-600">
-        <span className="font-semibold text-slate-700">Transport:</span> {transport}
+        <span className="font-semibold text-slate-700">{t("transport")}:</span> {transport}
       </div>
 
       {showHotelCta && useProviderChoice ? (
@@ -137,7 +139,7 @@ export function AreaCard({
           placement="stay_area_hotel_card"
           locale={locale}
           pagePath={pagePath}
-          label={hotel?.label ?? `Compare ${name} hotels`}
+          label={hotel?.label ?? t("compareAreaHotels", { area: name })}
           trackingHref={hotel?.trackingHref}
           className="mt-4"
         />
