@@ -29,13 +29,13 @@ export function SiteHeader() {
             {t("nav.planner")}
           </Link>
           <Link href="/areas-to-stay" className="transition-colors hover:text-white">
-            Stay
+            {t("nav.stay")}
           </Link>
           <Link href="/plan-your-trip" className="transition-colors hover:text-white">
-            Essentials
+            {t("nav.essentials")}
           </Link>
           <Link href="/about" className="transition-colors hover:text-white">
-            About
+            {t("nav.about")}
           </Link>
         </nav>
 
