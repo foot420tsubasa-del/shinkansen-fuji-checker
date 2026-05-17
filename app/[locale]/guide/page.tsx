@@ -46,6 +46,21 @@ function faqItemsToSchema(items: Array<{ q: string; a: string }>, locale?: strin
   };
 }
 
+function isDuplicateGuideFaq(item: { q: string }) {
+  const normalized = item.q.toLowerCase();
+  return (
+    normalized.includes("how long") ||
+    normalized.includes("combien de temps") ||
+    normalized.includes("seat e always") ||
+    normalized.includes("siège e est-il toujours") ||
+    normalized.includes("nozomi") ||
+    normalized.includes("jr pass worth") ||
+    normalized.includes("jr pass vaut") ||
+    normalized.includes("tokyo–osaka only") ||
+    normalized.includes("tokyo-osaka only")
+  );
+}
+
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -85,6 +100,15 @@ const howToSchema = {
 const enGuideCopy = {
   title: "Mt. Fuji Shinkansen Seat Guide",
   introQuick: "For Tokyo to Kyoto or Osaka, sit on the right side of the Shinkansen in Seat E. For Kyoto or Osaka back to Tokyo, sit on the left side, also Seat E. Mt. Fuji appears around Shin-Fuji station for about 30 to 60 seconds.",
+  quickAnswerTitle: "Quick Answer",
+  quickAnswerHeading: "Book Seat E in standard cars. Use Seat D in Green Car.",
+  quickAnswerItems: [
+    { bold: "Tokyo → Kyoto/Osaka:", text: "right side, Seat E." },
+    { bold: "Kyoto/Osaka → Tokyo:", text: "left side, Seat E." },
+    { bold: "Green Car:", text: "usually Seat D for the Mt. Fuji window." },
+    { bold: "Best timing:", text: "be ready around Shin-Fuji." },
+  ],
+  openSeatChecker: "Open free Seat Checker",
   quickNav: "Quick navigation",
   checkSeatNow: "Check my seat now →",
   readFullGuide: "Read full guide ↓",
@@ -159,6 +183,15 @@ const enGuideCopy = {
 const frGuideCopy = {
   title: "Guide des sièges Shinkansen pour voir le mont Fuji",
   introQuick: "Pour Tokyo → Kyoto ou Osaka, asseyez-vous du côté droit du Shinkansen, au siège E. Pour Kyoto ou Osaka → Tokyo, asseyez-vous du côté gauche, toujours au siège E. Le mont Fuji apparaît aux alentours de Shin-Fuji pendant environ 30 à 60 secondes.",
+  quickAnswerTitle: "Réponse rapide",
+  quickAnswerHeading: "Réservez le siège E en voiture standard. Choisissez le siège D en Green Car.",
+  quickAnswerItems: [
+    { bold: "Tokyo → Kyoto/Osaka :", text: "côté droit, siège E." },
+    { bold: "Kyoto/Osaka → Tokyo :", text: "côté gauche, siège E." },
+    { bold: "Green Car :", text: "généralement siège D pour la fenêtre côté mont Fuji." },
+    { bold: "Meilleur timing :", text: "soyez prêt autour de Shin-Fuji." },
+  ],
+  openSeatChecker: "Ouvrir le vérificateur de siège gratuit",
   quickNav: "Navigation rapide",
   checkSeatNow: "Vérifier mon siège →",
   readFullGuide: "Lire le guide ↓",
@@ -320,10 +353,6 @@ export default async function GuidePage({ params }: Props) {
           a: "La vue principale dure généralement moins d’une minute autour de Shin-Fuji. Préparez votre appareil photo avant cette zone.",
         },
         {
-          q: "Le siège E est-il toujours le meilleur siège ?",
-          a: "En voiture standard, le siège E est le choix pratique pour la fenêtre côté Fuji. En Green Car, le siège D est généralement le meilleur.",
-        },
-        {
           q: "Le JR Pass vaut-il le coup pour Tokyo vers Kyoto ou Osaka ?",
           a: "Pour un simple Tokyo-Kyoto ou Tokyo-Osaka, les billets à l’unité sont généralement plus logiques. Vérifiez le JR Pass seulement si vous ajoutez Hiroshima ou plusieurs longs trajets JR.",
         },
@@ -362,10 +391,6 @@ export default async function GuidePage({ params }: Props) {
           a: "The main view usually lasts under a minute around Shin-Fuji. Have your camera ready before that part of the route.",
         },
         {
-          q: "Is Seat E always the best seat?",
-          a: "In standard cars, Seat E is the practical Fuji-side window choice. In Green Car, Seat D is usually the better window seat.",
-        },
-        {
           q: "Is the JR Pass worth it for Tokyo to Kyoto or Osaka?",
           a: "For a simple Tokyo-Kyoto or Tokyo-Osaka trip, single tickets usually make more sense. Check JR Pass options if you add Hiroshima or several long-distance JR rides.",
         },
@@ -382,7 +407,10 @@ export default async function GuidePage({ params }: Props) {
           a: "Tokyo Station can reduce luggage stress for early trains, but Shinjuku, Ueno, and Asakusa may fit different travel styles.",
         },
       ];
-  const orderedFaqItems = dedupeFaqItems([...priorityFaqItems, ...faqItems]);
+  const orderedFaqItems = dedupeFaqItems([
+    ...priorityFaqItems,
+    ...faqItems.filter((item) => !isDuplicateGuideFaq(item)),
+  ]);
   const faqSchemaData = faqItemsToSchema(orderedFaqItems, isFr ? "fr" : undefined);
   const articleSchemaData = isFr
     ? {
@@ -674,30 +702,29 @@ export default async function GuidePage({ params }: Props) {
           </p>
         </div>
 
-        {locale === "en" && (
-          <section className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 text-[13px] leading-relaxed text-emerald-950 shadow-sm">
-            <p className="text-[11px] font-black uppercase tracking-[0.1em] text-emerald-700">
-              Quick Answer
-            </p>
-            <h2 className="mt-1 text-base font-semibold text-slate-950">
-              Book Seat E in standard cars. Use Seat D in Green Car.
-            </h2>
-            <ul className="mt-3 space-y-2">
-              <li><strong>Tokyo → Kyoto/Osaka:</strong> right side, Seat E.</li>
-              <li><strong>Kyoto/Osaka → Tokyo:</strong> left side, Seat E.</li>
-              <li><strong>Green Car:</strong> usually Seat D for the Mt. Fuji window.</li>
-              <li><strong>Best timing:</strong> be ready around Shin-Fuji.</li>
-            </ul>
-            <div className="mt-4 flex flex-wrap gap-2">
-              <Link
-                href="/#seat-checker"
-                className="inline-flex items-center rounded-full border border-[#168a56] bg-[#168a56] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
-              >
-                Open free Seat Checker
-              </Link>
-            </div>
-          </section>
-        )}
+        <section className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 text-[13px] leading-relaxed text-emerald-950 shadow-sm">
+          <p className="text-[11px] font-black uppercase tracking-[0.1em] text-emerald-700">
+            {copy.quickAnswerTitle}
+          </p>
+          <h2 className="mt-1 text-base font-semibold text-slate-950">
+            {copy.quickAnswerHeading}
+          </h2>
+          <ul className="mt-3 space-y-2">
+            {copy.quickAnswerItems.map((item) => (
+              <li key={item.bold}>
+                <strong>{item.bold}</strong> {item.text}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-4 flex flex-wrap gap-2">
+            <Link
+              href="/#seat-checker"
+              className="inline-flex items-center rounded-full border border-[#168a56] bg-[#168a56] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+            >
+              {copy.openSeatChecker}
+            </Link>
+          </div>
+        </section>
 
         {/* Two-column layout on desktop: article + sidebar */}
         <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-10 lg:items-start">
