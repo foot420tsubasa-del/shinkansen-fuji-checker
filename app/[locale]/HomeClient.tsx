@@ -379,47 +379,85 @@ export default function HomeClient() {
           </p>
           <div className="mt-5 rounded-2xl border border-[#d9e5f2] bg-white p-4 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
             <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#5f7190]">After checking your seat</p>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-              <a
-                href={SHINKANSEN_TICKET_URL}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                onClick={() => trackAffiliateClick({
-                  category: "train",
-                  provider: "klook",
-                  placement: "home_seat_result",
-                  href: SHINKANSEN_TICKET_URL,
-                  label: "Book Shinkansen ticket",
-                  link_id: "shinkansenTicket",
-                  product: "shinkansen_ticket",
-                  adid: "1265303",
-                  locale,
-                })}
-                className={buttonClassName({ variant: "commercial" })}
-              >
-                <Train className="h-3.5 w-3.5" />
-                {tCommon("bookShinkansenTicket")}
-              </a>
-              <a
-                href={JR_PASS_URL}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                onClick={() => trackAffiliateClick({
-                  category: "train",
-                  provider: "klook",
-                  placement: "home_seat_result",
-                  href: JR_PASS_URL,
-                  label: "Check JR Pass options",
-                  link_id: "jrPass",
-                  product: "jr_pass",
-                  adid: "1165791",
-                  locale,
-                })}
-                className={buttonClassName({ variant: "commercial" })}
-              >
-                <Train className="h-3.5 w-3.5" />
-                {tCommon("checkJrPassOptions")}
-              </a>
+            <div className="mt-3 grid items-stretch gap-3 lg:grid-cols-[1.35fr_1fr]">
+              <div className="flex h-full flex-col rounded-2xl border border-orange-100 bg-orange-50/70 p-3">
+                <p className="text-sm font-bold text-[#082653]">{tCommon("bookShinkansenTicket")}</p>
+                <p className="mt-1 text-xs leading-5 text-slate-600">
+                  Choose Seat E if available, then book the simple Tokyo to Kyoto / Osaka ticket.
+                </p>
+                <div className="mt-auto flex flex-col gap-2 pt-3 sm:flex-row">
+                  <a
+                    href={SHINKANSEN_TICKET_URL}
+                    target="_blank"
+                    rel={AFFILIATE_REL}
+                    onClick={() => trackAffiliateClick({
+                      category: "train",
+                      provider: "klook",
+                      placement: "home_seat_result",
+                      href: SHINKANSEN_TICKET_URL,
+                      label: "Book Shinkansen ticket",
+                      link_id: "shinkansenTicket",
+                      product: "shinkansen_ticket",
+                      adid: "1265303",
+                      locale,
+                    })}
+                    className="inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+                  >
+                    <Train className="h-3.5 w-3.5" />
+                    Klook
+                  </a>
+                  {omioRouteCompareHref ? (
+                    <a
+                      href={omioRouteCompareHref}
+                      target="_blank"
+                      rel={AFFILIATE_REL}
+                      onClick={() => trackAffiliateClick({
+                        category: "train",
+                        provider: "omio",
+                        placement: "home_seat_result",
+                        href: omioRouteCompareHref,
+                        label: "Still planning? Compare routes on Omio",
+                        link_id: "omioShinkansen",
+                        product: "route_compare",
+                        route_type: "route-comparison",
+                        locale,
+                      })}
+                      className="inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-indigo-700 bg-indigo-700 px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-indigo-800"
+                    >
+                      Omio
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+              <div className="flex h-full flex-col rounded-2xl border border-orange-100 bg-orange-50/70 p-3">
+                <p className="text-sm font-bold text-[#082653]">{tCommon("checkJrPassOptions")}</p>
+                <p className="mt-1 text-xs leading-5 text-slate-600">
+                  Use this if your route includes Hiroshima, multiple long JR rides, or a return to Tokyo.
+                </p>
+                <div className="mt-auto pt-3">
+                <a
+                  href={JR_PASS_URL}
+                  target="_blank"
+                  rel={AFFILIATE_REL}
+                  onClick={() => trackAffiliateClick({
+                    category: "train",
+                    provider: "klook",
+                    placement: "home_seat_result",
+                    href: JR_PASS_URL,
+                    label: "Check JR Pass options",
+                    link_id: "jrPass",
+                    product: "jr_pass",
+                    adid: "1165791",
+                    locale,
+                  })}
+                  className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+                >
+                  <Train className="h-3.5 w-3.5" />
+                  Klook
+                </a>
+                </div>
+              </div>
               <TrackedCtaLink
                 href="/areas-to-stay"
                 placement="home_seat_result"
@@ -428,10 +466,16 @@ export default function HomeClient() {
                 ctaType="stay"
                 pagePath="/"
                 locale={locale}
-                className={buttonClassName({ variant: "internal" })}
+                className="rounded-2xl border border-emerald-100 bg-emerald-50/70 p-3 transition-colors hover:bg-emerald-50 lg:col-span-2"
               >
-                <Bed className="h-3.5 w-3.5" />
-                {tCommon("chooseWhereToStay")}
+                <span className="flex items-center gap-2 text-sm font-bold text-[#082653]">
+                  <Bed className="h-3.5 w-3.5 text-[#106b43]" />
+                  {tCommon("chooseWhereToStay")}
+                </span>
+                <span className="mt-1 block text-xs leading-5 text-slate-600">
+                  Taking an early Shinkansen? Choose a Tokyo base that makes luggage and station access easier.
+                </span>
+                <span className="mt-2 inline-flex text-xs font-bold text-[#106b43]">Choose Tokyo stay area →</span>
               </TrackedCtaLink>
             </div>
           </div>
@@ -439,28 +483,6 @@ export default function HomeClient() {
             <Link href="/shinkansen-seat-e" className="underline underline-offset-2 transition-colors hover:text-slate-600">Seat E guide</Link>
             <Link href="/shinkansen-seat-letters" className="underline underline-offset-2 transition-colors hover:text-slate-600">Seat letters A–E</Link>
             <Link href="/shinkansen-seat-guides" className="underline underline-offset-2 transition-colors hover:text-slate-600">All seat guides</Link>
-            {omioRouteCompareHref ? (
-              <a
-                href={omioRouteCompareHref}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                onClick={() => trackAffiliateClick({
-                  category: "train",
-                  provider: "omio",
-                  placement: "home_seat_result",
-                  href: omioRouteCompareHref,
-                  label: "Still planning? Compare routes on Omio",
-                  link_id: "omioShinkansen",
-                  product: "route_compare",
-                  route_type: "route-comparison",
-                  locale,
-                })}
-                className="inline-flex items-center gap-1 text-indigo-700 underline underline-offset-2 transition-colors hover:text-indigo-900"
-              >
-                Still planning? Compare routes on Omio
-                <ExternalLink className="h-3 w-3" />
-              </a>
-            ) : null}
           </div>
         </section>
 
