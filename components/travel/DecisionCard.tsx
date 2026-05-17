@@ -3,6 +3,7 @@
 import { ArrowRight, ExternalLink, Hotel, Map, Plane, ShieldCheck } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Card } from "@/components/ui/Card";
+import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { getProviderFromHref, trackAffiliateClick, type AffiliateClickParams } from "@/lib/analytics";
 
@@ -16,6 +17,9 @@ type DecisionCardProps = {
   external?: boolean;
   affiliateCategory?: AffiliateClickParams["category"];
   affiliatePlacement?: AffiliateClickParams["placement"];
+  internalPlacement?: string;
+  internalSourcePage?: string;
+  locale?: string;
   accent?: "sky" | "red" | "emerald" | "amber" | "indigo";
 };
 
@@ -45,6 +49,9 @@ export function DecisionCard({
   external = false,
   affiliateCategory = "esim",
   affiliatePlacement = "guide_article_inline",
+  internalPlacement,
+  internalSourcePage,
+  locale,
   accent = "sky",
 }: DecisionCardProps) {
   const Icon = iconClass[accent];
@@ -109,6 +116,21 @@ export function DecisionCard({
       >
         {body}
       </a>
+    );
+  }
+
+  if (internalPlacement && internalSourcePage) {
+    return (
+      <TrackedInternalLink
+        href={href}
+        sourcePage={internalSourcePage}
+        placement={internalPlacement}
+        label={cta}
+        locale={locale}
+        className="block h-full rounded-[28px] no-underline outline-none focus-visible:ring-2 focus-visible:ring-sky-300"
+      >
+        {body}
+      </TrackedInternalLink>
     );
   }
 

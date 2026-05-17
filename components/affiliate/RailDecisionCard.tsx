@@ -71,6 +71,40 @@ function RailButton({
   );
 }
 
+function RailTextLink({
+  cta,
+  placement,
+  locale,
+  routeType,
+  className = "text-slate-700 underline underline-offset-2 hover:text-slate-950",
+}: {
+  cta: RailCta;
+  placement: AffiliateClickParams["placement"];
+  locale: string;
+  routeType?: string;
+  className?: string;
+}) {
+  return (
+    <TrackedAffiliateLink
+      href={cta.href}
+      target="_blank"
+      rel={AFFILIATE_REL}
+      category={cta.category ?? "train"}
+      provider={cta.provider}
+      placement={placement}
+      locale={locale}
+      label={cta.label}
+      linkId={cta.linkId}
+      product={cta.product}
+      adid={cta.adid}
+      routeType={routeType}
+      className={["inline-flex text-xs font-semibold transition-colors", className].join(" ")}
+    >
+      {cta.label}
+    </TrackedAffiliateLink>
+  );
+}
+
 export function RailDecisionCard({
   title,
   body,
@@ -90,36 +124,23 @@ export function RailDecisionCard({
       <p className="mt-2 text-[13px] leading-6 text-slate-600">{body}</p>
       <div className="mt-4 flex flex-col gap-2 sm:flex-row">
         <RailButton cta={primaryCta} placement={placement} locale={locale} routeType={routeType} variant="primary" />
-        <RailButton cta={secondaryCta} placement={placement} locale={locale} routeType={routeType} variant="secondary" />
+      </div>
+      <div className="mt-3">
+        <RailTextLink cta={secondaryCta} placement={placement} locale={locale} routeType={routeType} />
       </div>
       {tertiaryTextLink?.href ? (
         tertiaryTextLink.external ?? true ? (
-          <TrackedAffiliateLink
-            href={tertiaryTextLink.href}
-            target="_blank"
-            rel={AFFILIATE_REL}
-            category={tertiaryTextLink.category ?? "train"}
-            provider={tertiaryTextLink.provider}
+          <RailTextLink
+            cta={tertiaryTextLink}
             placement={placement}
             locale={locale}
-            label={tertiaryTextLink.label}
-            linkId={tertiaryTextLink.linkId}
-            product={tertiaryTextLink.product}
-            adid={tertiaryTextLink.adid}
             routeType={routeType}
-            className={[
-              "mt-3 inline-flex text-xs font-semibold transition-colors",
-              tertiaryTextLink.provider === "omio"
-                ? "min-h-9 items-center justify-center rounded-lg border border-indigo-700 bg-indigo-700 px-3 py-2 text-white hover:bg-indigo-800"
-                : "text-indigo-700 underline underline-offset-2 hover:text-indigo-900",
-            ].join(" ")}
-          >
-            {tertiaryTextLink.label}
-          </TrackedAffiliateLink>
+            className="mt-2 text-slate-500 underline underline-offset-2 hover:text-slate-800"
+          />
         ) : (
           <Link
             href={tertiaryTextLink.href}
-            className="mt-3 inline-flex text-xs font-semibold text-indigo-700 underline underline-offset-2 hover:text-indigo-900"
+            className="mt-2 inline-flex text-xs font-semibold text-slate-500 underline underline-offset-2 hover:text-slate-800"
           >
             {tertiaryTextLink.label}
           </Link>

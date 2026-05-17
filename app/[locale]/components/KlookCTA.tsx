@@ -10,9 +10,9 @@ export function KlookCTA() {
   const locale = useLocale();
 
   return (
-    <div className="space-y-3 rounded-2xl border border-[#ffb56b] bg-[#fff3e7] px-4 py-4 shadow-sm shadow-orange-100">
+    <div className="space-y-3 rounded-2xl border border-[#ffb56b] bg-[#fff8f0] px-4 py-4 shadow-sm shadow-orange-100">
       <p className="text-[13px] font-semibold text-slate-800">{t("heading")}</p>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row">
         <a
           href={SHINKANSEN_TICKET_URL}
           target="_blank"
@@ -23,14 +23,16 @@ export function KlookCTA() {
               provider: "klook",
               placement: "guide_top",
               href: SHINKANSEN_TICKET_URL,
-              label: "Book Shinkansen",
+              label: "Book Shinkansen ticket",
               locale,
             })
           }
           className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700] active:brightness-95"
         >
-          {t("book")}
+          Book Shinkansen ticket
         </a>
+      </div>
+      <div className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-semibold">
         <a
           href={JR_PASS_URL}
           target="_blank"
@@ -41,13 +43,13 @@ export function KlookCTA() {
               provider: "klook",
               placement: "guide_top",
               href: JR_PASS_URL,
-              label: "JR Pass",
+              label: "Check JR Pass options",
               locale,
             })
           }
-          className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
+          className="text-slate-600 underline underline-offset-2 transition-colors hover:text-slate-950"
         >
-          {t("jrPass")}
+          Check JR Pass options
         </a>
         <a
           href={ESIM_URL}
@@ -59,13 +61,13 @@ export function KlookCTA() {
               provider: "klook",
               placement: "guide_top",
               href: ESIM_URL,
-              label: "eSIM",
+              label: "Get Japan eSIM",
               locale,
             })
           }
-          className="inline-flex flex-1 items-center justify-center rounded-2xl border border-[#ff7a00] bg-white px-4 py-2.5 text-sm font-semibold text-[#b44b00] shadow-sm transition-all hover:bg-[#fff8f0] active:brightness-95"
+          className="text-slate-500 underline underline-offset-2 transition-colors hover:text-slate-800"
         >
-          eSIM
+          Get Japan eSIM
         </a>
       </div>
     </div>

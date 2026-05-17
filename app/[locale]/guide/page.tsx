@@ -21,137 +21,31 @@ function localizedUrl(locale: string, path: string) {
   return locale === "en" ? `${SITE_URL}${path}` : `${SITE_URL}/${locale}${path}`;
 }
 
-const baseFaqSchemaItems = [
-  {
-    "@type": "Question",
-    name: "Can I see Mt. Fuji from a non-reserved car?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "Yes, but risky — you may end up in an aisle seat with no view. Reserve Seat E in advance.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "How long can I see Mt. Fuji from the train?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "Only about 30–60 seconds at Shinkansen speed. Have your camera ready before reaching Shin-Fuji station.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "Is Seat E always the Mt. Fuji side?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "In standard 3+2 cars, yes. In Green Cars (2+2 layout), the Mt. Fuji window seat is Seat D.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "What if it's cloudy?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "Mt. Fuji is often hidden, especially in summer. Check the live visibility indicator at the top of fujiseat.com.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "Can I see Mt. Fuji on the return trip from Osaka/Kyoto to Tokyo?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "Yes — Mt. Fuji is on the LEFT side, which is again Seat E. Use the checker and select the opposite direction.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "Does the Nozomi stop near Mt. Fuji?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "No, but you can still see it through the window as the train passes. Hikari and Kodama stop at Shin-Fuji station.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "Is the JR Pass worth it for Tokyo to Osaka only?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "Generally no. Round trip is approximately ¥29,000 vs 7-day Pass ¥50,000. The Pass makes sense if also visiting Hiroshima, Nara, etc.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "Can I bring large luggage on the Shinkansen?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "Bags with total dimensions over 160cm and up to 250cm require a seat reservation with an oversized baggage area (予約が必要). Reserve this when booking your Shinkansen seat. Bags over 250cm are not permitted.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "Is there WiFi on the Shinkansen?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "Onboard WiFi exists but can be unreliable. A Japan eSIM is recommended for consistent connectivity throughout your trip.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "What is the best way to book Shinkansen tickets as a foreigner?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "Klook — fully in English, instant mobile voucher, and you can select Seat E on the seat map.",
-    },
-  },
-];
+function dedupeFaqItems(items: Array<{ q: string; a: string }>) {
+  const seen = new Set<string>();
+  return items.filter((item) => {
+    const normalized = item.q.toLowerCase().replace(/[^\w\s]/g, "").replace(/\s+/g, " ").trim();
+    if (seen.has(normalized)) return false;
+    seen.add(normalized);
+    return true;
+  });
+}
 
-const extraFaqSchemaItems = [
-  {
-    "@type": "Question",
-    name: "Which side of the bullet train for Mt. Fuji?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "Bullet train is the English name for the Shinkansen. Tokyo to Kyoto or Osaka means Mt. Fuji on the right, Seat E. Kyoto or Osaka to Tokyo means Mt. Fuji on the left, also Seat E.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "When can I see Mt. Fuji on the Shinkansen?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "The Mt. Fuji viewing window is between Shin-Yokohama and Shizuoka stations, peaking around Shin-Fuji. Total time visible is about 30 to 60 seconds. Late morning to early afternoon, on a clear day, generally gives the best chance.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "Can you see Mt. Fuji from the Nozomi Shinkansen?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "Yes. Although the Nozomi does not stop at Shin-Fuji, you can still see Mt. Fuji clearly from the right-side window, Seat E, when traveling Tokyo to Kyoto or Osaka. The viewing time is just slightly shorter than on Hikari or Kodama.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "What is the best time of day to see Mt. Fuji from the Shinkansen?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "Late morning to early afternoon usually offers the clearest view. Mornings before 10 AM can be even better in summer because heat haze has not built up yet. Late afternoon often has sun glare on the Mt. Fuji side.",
-    },
-  },
-  {
-    "@type": "Question",
-    name: "Which seat letter is the Mt. Fuji window in a Green Car?",
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: "In Green Cars, which use a 2+2 layout in cars 8 to 10 on most Tokaido Shinkansen trains, Seat D is the Mt. Fuji window seat. The same left/right rule applies: right side going to Kyoto, left side going to Tokyo.",
-    },
-  },
-];
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [...baseFaqSchemaItems, ...extraFaqSchemaItems],
-};
+function faqItemsToSchema(items: Array<{ q: string; a: string }>, locale?: string) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    ...(locale ? { inLanguage: locale, "@language": locale } : {}),
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+}
 
 const articleSchema = {
   "@context": "https://schema.org",
@@ -195,7 +89,6 @@ const enGuideCopy = {
   quickNav: "Quick navigation",
   checkSeatNow: "Check my seat now →",
   readFullGuide: "Read full guide ↓",
-  bookOnKlook: "Book on Klook →",
   jumpTo: "Jump to:",
   jumpTldr: "TL;DR",
   jumpSide: "Which side?",
@@ -270,7 +163,6 @@ const frGuideCopy = {
   quickNav: "Navigation rapide",
   checkSeatNow: "Vérifier mon siège →",
   readFullGuide: "Lire le guide ↓",
-  bookOnKlook: "Réserver sur Klook →",
   jumpTo: "Aller à :",
   jumpTldr: "En bref",
   jumpSide: "Quel côté ?",
@@ -359,9 +251,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
-  const guideTitle = locale === "en" ? "Which Shinkansen Seat to See Mt. Fuji? Seat E, Side & Timing Guide" : t("guideTitle");
+  const guideTitle = locale === "en" ? "Which Shinkansen Seat to See Mt. Fuji? Seat E Guide for Tokyo to Kyoto" : t("guideTitle");
   const guideDesc = locale === "en"
-    ? "Find which Shinkansen seat to book for Mt. Fuji. Tokyo to Kyoto/Osaka: right side, Seat E. Kyoto/Osaka to Tokyo: left side, Seat E. Includes timing, Green Car tips, and a free seat checker."
+    ? "Find the Mt. Fuji side of the Shinkansen before booking. For Tokyo to Kyoto or Osaka, choose the right side and Seat E in standard cars. Includes seat checker, timing, JR Pass notes, and booking tips."
     : t("guideDesc");
   return {
     title: guideTitle,
@@ -451,22 +343,53 @@ export default async function GuidePage({ params }: Props) {
         },
       ];
 
-  const faqSchemaData = isFr
-    ? {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        inLanguage: "fr",
-        "@language": "fr",
-        mainEntity: [...faqItems, ...extraFaqItems].map((item) => ({
-          "@type": "Question",
-          name: item.q,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: item.a,
-          },
-        })),
-      }
-    : faqSchema;
+  const priorityFaqItems = isFr
+    ? [
+        {
+          q: "De quel côté du Shinkansen voit-on le mont Fuji de Tokyo à Kyoto ?",
+          a: "De Tokyo vers Kyoto ou Osaka, le mont Fuji est du côté droit du Shinkansen. En voiture standard, choisissez le siège E pour la fenêtre côté Fuji.",
+        },
+        {
+          q: "Quelle lettre de siège réserver pour voir le mont Fuji ?",
+          a: "En voiture standard 3+2, réservez le siège E. En Green Car 2+2, la fenêtre côté mont Fuji est généralement le siège D.",
+        },
+        {
+          q: "Peut-on voir le mont Fuji depuis le Nozomi Shinkansen ?",
+          a: "Oui. Le Nozomi ne s’arrête pas à Shin-Fuji, mais il passe devant le mont Fuji. Depuis Tokyo vers Kyoto ou Osaka, choisissez le côté droit, siège E.",
+        },
+        {
+          q: "Quel est le meilleur moment pour voir le mont Fuji depuis le Shinkansen ?",
+          a: "La fin de matinée ou le début d’après-midi par temps clair fonctionne souvent bien. En été, le matin peut être meilleur avant que la brume ne s’installe.",
+        },
+        {
+          q: "Le JR Pass vaut-il le coup pour Tokyo vers Kyoto ou Osaka ?",
+          a: "Pour un simple Tokyo-Kyoto ou Tokyo-Osaka, les billets à l’unité sont généralement plus logiques. Vérifiez le JR Pass seulement si vous ajoutez Hiroshima ou plusieurs longs trajets JR.",
+        },
+      ]
+    : [
+        {
+          q: "Which side of the Shinkansen is Mt. Fuji on from Tokyo to Kyoto?",
+          a: "From Tokyo to Kyoto or Osaka, Mt. Fuji is on the right side of the Shinkansen. In standard cars, choose Seat E for the Fuji-side window.",
+        },
+        {
+          q: "Which seat letter should I book to see Mt. Fuji?",
+          a: "Book Seat E in standard 3+2 cars. In Green Cars with a 2+2 layout, the Mt. Fuji-side window is usually Seat D.",
+        },
+        {
+          q: "Can I see Mt. Fuji from the Nozomi Shinkansen?",
+          a: "Yes. Nozomi does not stop at Shin-Fuji, but it still passes Mt. Fuji. From Tokyo to Kyoto or Osaka, choose the right side, Seat E.",
+        },
+        {
+          q: "When is the best time to see Mt. Fuji from the Shinkansen?",
+          a: "Late morning to early afternoon on a clear day often works well. In summer, morning can be better before heat haze builds up.",
+        },
+        {
+          q: "Is the JR Pass worth it for Tokyo to Kyoto or Osaka?",
+          a: "For a simple Tokyo-Kyoto or Tokyo-Osaka trip, single tickets usually make more sense. Check JR Pass options if you add Hiroshima or several long-distance JR rides.",
+        },
+      ];
+  const orderedFaqItems = dedupeFaqItems([...priorityFaqItems, ...extraFaqItems, ...faqItems]);
+  const faqSchemaData = faqItemsToSchema(orderedFaqItems, isFr ? "fr" : undefined);
   const articleSchemaData = isFr
     ? {
         "@context": "https://schema.org",
@@ -573,40 +496,6 @@ export default async function GuidePage({ params }: Props) {
             Get Japan eSIM
           </TrackedAffiliateLink>
         </div>
-        <RailDecisionCard
-          title="Book rail"
-          body="For Tokyo to Kyoto or Osaka, book a single Shinkansen ticket after choosing the Fuji-side seat. Check JR Pass options only for longer multi-city JR routes."
-          primaryCta={{
-            label: "Book Shinkansen ticket",
-            href: KLOOK_URL,
-            provider: "klook",
-            linkId: "shinkansenTicket",
-            product: "shinkansen_ticket",
-            adid: "1265303",
-          }}
-          secondaryCta={{
-            label: "Check JR Pass options",
-            href: JR_PASS_URL,
-            provider: "klook",
-            linkId: "jrPass",
-            product: "jr_pass",
-            adid: "1165791",
-          }}
-          tertiaryTextLink={
-            OMIO_SHINKANSEN_URL
-              ? {
-                  label: "Compare trains and buses on Omio",
-                  href: OMIO_SHINKANSEN_URL,
-                  provider: "omio",
-                  linkId: "omioShinkansen",
-                  product: "route_compare",
-                }
-              : undefined
-          }
-          placement="guide_checklist"
-          locale={locale}
-          routeType="simple-shinkansen"
-        />
       </div>
     </section>
   );
@@ -666,12 +555,6 @@ export default async function GuidePage({ params }: Props) {
               >
                 Open free Seat Checker
               </Link>
-              <span className="inline-flex cursor-not-allowed items-center rounded-full border border-emerald-200 bg-white/70 px-3.5 py-1.5 text-[12px] font-semibold text-emerald-700" title="Prepared for a future child page">
-                Seat E guide
-              </span>
-              <span className="inline-flex cursor-not-allowed items-center rounded-full border border-emerald-200 bg-white/70 px-3.5 py-1.5 text-[12px] font-semibold text-emerald-700" title="Prepared for a future child page">
-                Green Car seats
-              </span>
             </div>
           </section>
         )}
@@ -700,37 +583,19 @@ export default async function GuidePage({ params }: Props) {
           </p>
           <div className="flex flex-wrap gap-2">
             <Link
-              href="/"
+              href="/#seat-checker"
               className="inline-flex items-center rounded-full border border-[#168a56] bg-[#168a56] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              {copy.checkSeatNow}
+              Open free Seat Checker
             </Link>
-            <a
-              href="#tldr"
-              className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-[12px] font-semibold text-slate-600 hover:bg-slate-100 transition-colors"
-            >
+          </div>
+          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-[12px] font-semibold">
+            <Link href="/planner" className="text-slate-500 underline underline-offset-2 hover:text-slate-800">
+              Need a full route? {t("commandCenterBtn")} →
+            </Link>
+            <a href="#tldr" className="text-slate-500 underline underline-offset-2 hover:text-slate-800">
               {copy.readFullGuide}
             </a>
-            <TrackedAffiliateLink
-              href={KLOOK_URL}
-              target="_blank"
-              rel={AFFILIATE_REL}
-              category="train"
-              provider="klook"
-              placement="guide_booking_option"
-              pagePath="/guide"
-              locale={locale}
-              label={copy.bookOnKlook}
-              className="inline-flex items-center rounded-full border border-[#ff7a00] bg-[#ff7a00] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
-            >
-              {copy.bookOnKlook}
-            </TrackedAffiliateLink>
-            <Link
-              href="/planner"
-              className="inline-flex items-center rounded-full border border-[#9fd7bd] bg-[#f0fbf6] px-3.5 py-1.5 text-[12px] font-semibold text-[#106b43] transition-colors hover:border-[#168a56] hover:bg-white"
-            >
-              {t("commandCenterBtn")} →
-            </Link>
           </div>
         </section>
         </div>
@@ -1038,9 +903,6 @@ export default async function GuidePage({ params }: Props) {
                 {t("jrNozomiNote")}
               </p>
             </div>
-            <div className="mt-3">
-              <KlookCTA />
-            </div>
             <p className="mt-3 text-[12px] text-slate-600">
               For a route-level decision before buying, use the{" "}
               <Link href="/jr-pass-vs-single-ticket" className="font-semibold text-sky-700 underline underline-offset-2">
@@ -1118,7 +980,7 @@ export default async function GuidePage({ params }: Props) {
               {copy.faqH2 ?? t("faqH2")}
             </h2>
             <div className="space-y-3">
-              {[...faqItems, ...extraFaqItems].map((item, i) => (
+              {orderedFaqItems.map((item, i) => (
                 <div
                   key={i}
                   className="border-b border-slate-100 pb-3 last:border-0 last:pb-0"
@@ -1129,9 +991,6 @@ export default async function GuidePage({ params }: Props) {
                   <p className="text-[12px] text-slate-600">A: {item.a}</p>
                 </div>
               ))}
-            </div>
-            <div className="mt-4">
-              <KlookCTA />
             </div>
           </section>
 
@@ -1171,34 +1030,17 @@ export default async function GuidePage({ params }: Props) {
             {/* Actions */}
             <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
               <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-3">
-                {copy.quickNav}
+                Start here
               </p>
               <div className="flex flex-col gap-2">
                 <Link
-                  href="/"
+                  href="/#seat-checker"
                   className="inline-flex items-center justify-center rounded-xl border border-[#168a56] bg-[#168a56] px-3.5 py-2 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
                 >
-                  {copy.checkSeatNow}
+                  Open free Seat Checker
                 </Link>
-                <TrackedAffiliateLink
-                  href={KLOOK_URL}
-                  target="_blank"
-                  rel={AFFILIATE_REL}
-                  category="train"
-                  provider="klook"
-                  placement="guide_booking_option"
-                  pagePath="/guide"
-                  locale={locale}
-                  label={copy.bookOnKlook}
-                  className="inline-flex items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3.5 py-2 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
-                >
-                  {copy.bookOnKlook}
-                </TrackedAffiliateLink>
-                <Link
-                  href="/planner"
-                  className="inline-flex items-center justify-center rounded-xl border border-[#9fd7bd] bg-[#f0fbf6] px-3.5 py-2 text-[12px] font-semibold text-[#106b43] transition-colors hover:border-[#168a56] hover:bg-white"
-                >
-                  {t("commandCenterBtn")} →
+                <Link href="/planner" className="text-center text-[11px] font-semibold text-slate-500 underline underline-offset-2 transition-colors hover:text-slate-800">
+                  Need a full route? {t("commandCenterBtn")} →
                 </Link>
               </div>
             </div>
