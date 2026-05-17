@@ -264,6 +264,476 @@ const frGuideCopy = {
   footerPartner: "Liens partenaires affichés uniquement lorsqu'ils correspondent à l'étape de préparation.",
 };
 
+const guideCopyOverridesByLocale: Record<string, Partial<typeof enGuideCopy>> = {
+  "pt-BR": {
+    title: "Como ver o Monte Fuji do Shinkansen",
+    quickLabel: "Resposta rápida:",
+    whichSideQuick: <>De Tokyo para Kyoto ou Osaka, o Monte Fuji fica no <strong>lado direito</strong> do Shinkansen — especificamente no assento E nos carros standard. De Kyoto ou Osaka de volta para Tokyo, fica no <strong>lado esquerdo</strong> — também no assento E. A vista aparece perto da estação Shin-Fuji e dura cerca de 30 a 60 segundos.</>,
+    lettersQuick: <>Os carros standard do Tokaido Shinkansen têm layout 3+2, com as letras A, B, C de um lado e D, E do outro. <strong>O assento E é a janela do lado do Monte Fuji</strong> nos carros standard. O Green Car usa layout 2+2, em que o assento D costuma ser a janela do lado do Monte Fuji. O assento A fica sempre no lado oposto, voltado para o mar.</>,
+    whenQuick: <>Fim da manhã até o começo da tarde costuma dar a visão mais clara do Monte Fuji em um dia típico. <strong>O inverno (dezembro-fevereiro)</strong> é a melhor estação para ver a silhueta com neve e céu limpo. À noite, o Monte Fuji geralmente não é visível porque a montanha não é iluminada.</>,
+    routeQuick: <>O Monte Fuji fica visível no Tokaido Shinkansen entre as estações <strong>Shin-Yokohama e Shizuoka</strong>, com a melhor vista perto da <strong>estação Shin-Fuji</strong>. A janela total de visibilidade é de cerca de 30 a 60 segundos em velocidade de Shinkansen.</>,
+    trainTypeQuick: <>Nozomi, Hikari e Kodama passam pelo Monte Fuji, e o assento recomendado é o mesmo: E. <strong>Hikari e Kodama</strong> param em Shin-Fuji, o que pode dar uma janela um pouco mais longa. <strong>Nozomi</strong> é o mais rápido, mas não para em Shin-Fuji.</>,
+    jrPassQuick: <>Para uma viagem simples Tokyo-Kyoto ida e volta, <strong>bilhetes separados costumam ser mais baratos</strong>. O JR Pass começa a fazer sentido quando você adiciona Hiroshima, faz 2 ou mais viagens longas de JR ou usa vários trechos de Shinkansen em uma semana.</>,
+    bookQuick: <>No guichê JR, mostre 「<strong>E席をお願いします</strong>」. Na Klook, escolha a rota e selecione a coluna E no mapa de assentos. Com JR Pass, reserve no balcão de reservas JR antes de embarcar.</>,
+  },
+  es: {
+    title: "Cómo ver el Monte Fuji desde el Shinkansen",
+    quickLabel: "Respuesta rápida:",
+    whichSideQuick: <>De Tokio a Kioto u Osaka, el Monte Fuji está en el <strong>lado derecho</strong> del Shinkansen — concretamente el asiento E en coches estándar. De Kioto u Osaka de vuelta a Tokio, está en el <strong>lado izquierdo</strong> — también el asiento E. La vista aparece cerca de la estación Shin-Fuji y dura unos 30 a 60 segundos.</>,
+    lettersQuick: <>Los coches estándar del Tokaido Shinkansen tienen distribución 3+2, con A, B, C a un lado y D, E al otro. <strong>El asiento E es la ventana del lado del Monte Fuji</strong> en coches estándar. Los Green Cars usan distribución 2+2, donde la ventana del Monte Fuji suele ser el asiento D. El asiento A siempre queda en el lado opuesto, hacia el mar.</>,
+    whenQuick: <>De media mañana a primera hora de la tarde suele dar la vista más clara del Monte Fuji en un día normal. <strong>El invierno (diciembre-febrero)</strong> es la mejor temporada para ver la silueta nevada y cielos despejados. De noche, el Monte Fuji normalmente no se ve porque la montaña no está iluminada.</>,
+    routeQuick: <>El Monte Fuji se ve desde el Tokaido Shinkansen entre <strong>Shin-Yokohama y Shizuoka</strong>, con la vista más clara cerca de la <strong>estación Shin-Fuji</strong>. La ventana total de visibilidad es de unos 30 a 60 segundos a velocidad de Shinkansen.</>,
+    trainTypeQuick: <>Nozomi, Hikari y Kodama pasan por el Monte Fuji, y el asiento recomendado es el mismo: E. <strong>Hikari y Kodama</strong> paran en Shin-Fuji, lo que puede dar una ventana de vista algo más larga. <strong>Nozomi</strong> es el más rápido, pero no para en Shin-Fuji.</>,
+    jrPassQuick: <>Para un viaje simple de ida y vuelta Tokio-Kioto, <strong>los billetes individuales suelen ser más baratos</strong>. El JR Pass empieza a compensar si añades Hiroshima, haces 2 o más trayectos largos de JR, o tomas varios tramos de Shinkansen en una semana.</>,
+    bookQuick: <>En una taquilla JR, muestra 「<strong>E席をお願いします</strong>」. En Klook, elige la ruta y selecciona la columna E en el mapa de asientos. Con JR Pass, reserva en un mostrador de reservas JR antes de subir.</>,
+  },
+  ko: {
+    title: "신칸센에서 후지산을 보는 좌석 가이드",
+    quickLabel: "빠른 답변:",
+    whichSideQuick: <>도쿄에서 교토나 오사카로 갈 때 후지산은 신칸센의 <strong>오른쪽</strong>에 보이며, 일반석에서는 E석이 기준입니다. 교토나 오사카에서 도쿄로 돌아올 때는 <strong>왼쪽</strong>이며, 역시 E석입니다. 후지산은 신후지 역 근처에서 약 30~60초 동안 보입니다.</>,
+    lettersQuick: <>도카이도 신칸센 일반석은 A, B, C 한쪽과 D, E 다른 쪽으로 된 3+2 배열입니다. 일반석에서는 <strong>E석이 후지산 쪽 창가 좌석</strong>입니다. 그린샤는 2+2 배열이라 후지산 쪽 창가는 보통 D석입니다. A석은 항상 반대편, 바다 쪽입니다.</>,
+    whenQuick: <>보통 맑은 날에는 늦은 오전부터 이른 오후가 후지산을 가장 보기 좋습니다. <strong>겨울(12월-2월)</strong>은 눈 덮인 실루엣과 맑은 하늘을 보기 가장 좋은 계절입니다. 밤에는 산에 조명이 없어 보통 후지산이 보이지 않습니다.</>,
+    routeQuick: <>후지산은 도카이도 신칸센의 <strong>신요코하마-시즈오카</strong> 구간에서 보이며, 가장 선명한 구간은 <strong>신후지 역</strong> 근처입니다. 신칸센 속도에서는 전체 시야 시간이 약 30~60초 정도입니다.</>,
+    trainTypeQuick: <>노조미, 히카리, 고다마 모두 후지산 구간을 지나며 추천 좌석은 동일하게 E석입니다. <strong>히카리와 고다마</strong>는 신후지에 정차해 조금 더 여유가 있을 수 있습니다. <strong>노조미</strong>는 가장 빠르지만 신후지에 정차하지 않습니다.</>,
+    jrPassQuick: <>단순한 도쿄-교토 왕복이라면 <strong>개별 승차권이 보통 더 저렴합니다</strong>. 히로시마를 추가하거나 장거리 JR 이동이 2회 이상이거나 일주일 안에 여러 신칸센 구간을 타는 경우 JR Pass를 비교해 보세요.</>,
+    bookQuick: <>JR 매표소에서는 「<strong>E席をお願いします</strong>」라고 보여 주세요. Klook에서는 노선을 고른 뒤 좌석표에서 E열을 선택합니다. JR Pass가 있다면 승차 전 JR 예약 창구에서 좌석을 예약하세요.</>,
+  },
+  "zh-TW": {
+    title: "從新幹線看富士山的座位指南",
+    quickLabel: "快速答案：",
+    whichSideQuick: <>從東京前往京都或大阪時，富士山在新幹線的<strong>右側</strong>，普通車請選 E 座。從京都或大阪返回東京時，富士山在<strong>左側</strong>，同樣選 E 座。富士山會在新富士站附近出現約 30 到 60 秒。</>,
+    lettersQuick: <>東海道新幹線普通車是 3+2 座位排列，一側是 A、B、C，另一側是 D、E。普通車中，<strong>E 座是富士山側窗邊座位</strong>。Green Car 是 2+2 排列，富士山側窗邊通常是 D 座。A 座永遠是相反的海側。</>,
+    whenQuick: <>一般來說，天氣晴朗時，上午較晚到下午較早時段最容易看清富士山。<strong>冬季（12 月到 2 月）</strong>最適合看見積雪輪廓與清楚天空。晚上通常看不到富士山，因為山體沒有照明。</>,
+    routeQuick: <>富士山會在東海道新幹線的<strong>新橫濱到靜岡</strong>之間出現，最清楚的位置在<strong>新富士站</strong>附近。以新幹線速度通過時，總可見時間約 30 到 60 秒。</>,
+    trainTypeQuick: <>Nozomi、Hikari、Kodama 都會經過富士山，建議座位一樣是 E 座。<strong>Hikari 和 Kodama</strong>會停靠新富士，視野時間可能稍長。<strong>Nozomi</strong>最快，但不停靠新富士。</>,
+    jrPassQuick: <>單純東京和京都來回時，<strong>單買車票通常比較便宜</strong>。如果加入廣島、兩段以上長距離 JR 移動，或一週內搭多段新幹線，再比較 JR Pass 較合理。</>,
+    bookQuick: <>在 JR 售票處可出示「<strong>E席をお願いします</strong>」。在 Klook 請先選路線，再從座位圖選 E 欄。有 JR Pass 的話，搭車前到 JR 預約櫃台劃位。</>,
+  },
+  "zh-CN": {
+    title: "从新干线看富士山的座位指南",
+    quickLabel: "快速答案：",
+    whichSideQuick: <>从东京前往京都或大阪时，富士山在新干线的<strong>右侧</strong>，普通车请选择 E 座。从京都或大阪返回东京时，富士山在<strong>左侧</strong>，同样选择 E 座。富士山会在新富士站附近出现约 30 到 60 秒。</>,
+    lettersQuick: <>东海道新干线普通车是 3+2 座位排列，一侧是 A、B、C，另一侧是 D、E。普通车中，<strong>E 座是富士山侧窗边座位</strong>。Green Car 是 2+2 排列，富士山侧窗边通常是 D 座。A 座始终是相反的海侧。</>,
+    whenQuick: <>通常在晴天，上午较晚到下午较早时段最容易看清富士山。<strong>冬季（12 月到 2 月）</strong>最适合看见积雪轮廓和清晰天空。夜间通常看不到富士山，因为山体没有照明。</>,
+    routeQuick: <>富士山会在东海道新干线的<strong>新横滨到静冈</strong>之间出现，最清楚的位置在<strong>新富士站</strong>附近。以新干线速度通过时，总可见时间约 30 到 60 秒。</>,
+    trainTypeQuick: <>Nozomi、Hikari、Kodama 都会经过富士山，推荐座位同样是 E 座。<strong>Hikari 和 Kodama</strong>会停靠新富士，视野时间可能稍长。<strong>Nozomi</strong>最快，但不停靠新富士。</>,
+    jrPassQuick: <>如果只是东京和京都往返，<strong>单买车票通常更划算</strong>。如果加入广岛、两段以上长距离 JR 移动，或一周内乘坐多段新干线，再比较 JR Pass。</>,
+    bookQuick: <>在 JR 售票处可出示「<strong>E席をお願いします</strong>」。在 Klook 先选择路线，再从座位图选择 E 列。有 JR Pass 的话，请在乘车前到 JR 预约窗口划位。</>,
+  },
+  de: {
+    title: "Mt. Fuji aus dem Shinkansen sehen",
+    quickLabel: "Kurzantwort:",
+    whichSideQuick: <>Von Tokyo nach Kyoto oder Osaka liegt Mt. Fuji auf der <strong>rechten Seite</strong> des Shinkansen — im Standardwagen konkret Sitz E. Von Kyoto oder Osaka zurück nach Tokyo liegt er auf der <strong>linken Seite</strong> — ebenfalls Sitz E. Der Blick erscheint rund um Shin-Fuji und dauert etwa 30 bis 60 Sekunden.</>,
+    lettersQuick: <>Standardwagen des Tokaido Shinkansen haben eine 3+2-Sitzordnung mit A, B, C auf einer Seite und D, E auf der anderen. <strong>Sitz E ist im Standardwagen der Mt.-Fuji-Fensterplatz</strong>. Green Cars haben meist 2+2, dort ist Sitz D das Mt.-Fuji-Fenster. Sitz A ist immer die gegenüberliegende Meerseite.</>,
+    whenQuick: <>Später Vormittag bis früher Nachmittag bietet an einem typischen klaren Tag meist den besten Mt.-Fuji-Blick. <strong>Winter (Dezember-Februar)</strong> ist die beste Saison für eine schneebedeckte Silhouette und klaren Himmel. Nachts ist Mt. Fuji normalerweise nicht sichtbar, weil der Berg nicht beleuchtet ist.</>,
+    routeQuick: <>Mt. Fuji wird auf dem Tokaido Shinkansen zwischen <strong>Shin-Yokohama und Shizuoka</strong> sichtbar, mit dem klarsten Blick rund um <strong>Shin-Fuji</strong>. Bei Shinkansen-Geschwindigkeit dauert das Hauptfenster etwa 30 bis 60 Sekunden.</>,
+    trainTypeQuick: <>Nozomi, Hikari und Kodama fahren alle an Mt. Fuji vorbei, und die Sitzempfehlung bleibt Sitz E. <strong>Hikari und Kodama</strong> halten in Shin-Fuji und können ein etwas längeres Sichtfenster geben. <strong>Nozomi</strong> ist am schnellsten, hält aber nicht in Shin-Fuji.</>,
+    jrPassQuick: <>Für eine einfache Hin- und Rückfahrt Tokyo-Kyoto sind <strong>Einzeltickets meist günstiger</strong>. Der JR Pass lohnt sich eher, wenn Hiroshima, mehrere lange JR-Fahrten oder mehrere Shinkansen-Abschnitte in einer Woche dazukommen.</>,
+    bookQuick: <>Am JR-Schalter zeigst du 「<strong>E席をお願いします</strong>」. Bei Klook wählst du die Strecke und dann Spalte E im Sitzplan. Mit JR Pass reservierst du vor der Fahrt am JR Reservation Counter.</>,
+  },
+  ru: {
+    title: "Как увидеть Фудзи из синкансэна",
+    quickLabel: "Короткий ответ:",
+    whichSideQuick: <>Из Токио в Киото или Осаку Фудзи находится <strong>справа</strong> от синкансэна — в обычном вагоне это место E. Из Киото или Осаки обратно в Токио Фудзи будет <strong>слева</strong> — тоже место E. Вид появляется около станции Shin-Fuji примерно на 30-60 секунд.</>,
+    lettersQuick: <>В обычных вагонах Tokaido Shinkansen схема 3+2: A, B, C с одной стороны и D, E с другой. <strong>Место E — окно на сторону Фудзи</strong> в обычных вагонах. В Green Car схема 2+2, и окно на сторону Фудзи обычно место D. Место A всегда на противоположной, морской стороне.</>,
+    whenQuick: <>В ясный день позднее утро и ранний день обычно дают самый четкий вид на Фудзи. <strong>Зима (декабрь-февраль)</strong> — лучший сезон для снежной вершины и чистого неба. Ночью Фудзи обычно не видна, потому что гора не подсвечивается.</>,
+    routeQuick: <>Фудзи видна из Tokaido Shinkansen между <strong>Shin-Yokohama и Shizuoka</strong>, самый ясный вид обычно около <strong>Shin-Fuji</strong>. На скорости синкансэна основное окно видимости длится около 30-60 секунд.</>,
+    trainTypeQuick: <>Nozomi, Hikari и Kodama проходят мимо Фудзи, и рекомендация по месту та же: E. <strong>Hikari и Kodama</strong> останавливаются в Shin-Fuji, что может дать чуть более долгий обзор. <strong>Nozomi</strong> самый быстрый, но не останавливается в Shin-Fuji.</>,
+    jrPassQuick: <>Для простого маршрута Токио-Киото туда-обратно <strong>отдельные билеты обычно дешевле</strong>. JR Pass стоит сравнивать, если добавляете Хиросиму, несколько длинных поездок JR или несколько сегментов синкансэна за неделю.</>,
+    bookQuick: <>В кассе JR покажите 「<strong>E席をお願いします</strong>」. В Klook выберите маршрут, затем колонку E на схеме мест. С JR Pass зарезервируйте место в JR Reservation Counter до посадки.</>,
+  },
+};
+
+const guideUiByLocale = {
+  en: {
+    travelEssentialsTitle: "Pre-departure checklist",
+    travelEssentialsBody: "Keep the booking steps in order: route first, rail second, arrival basics after.",
+    chooseRoute: "Choose your route",
+    planAirportTransfer: "Plan airport transfer",
+    chooseStayArea: "Choose stay area",
+    getJapanEsim: "Get Japan eSIM",
+    railDecisionLabel: "Rail booking decision",
+    bookShinkansenTitle: "Book Shinkansen ticket",
+    bookShinkansenBody: "For a simple Tokyo → Kyoto / Osaka trip, choose Seat E if available and book a single Shinkansen ticket.",
+    checkJrPassTitle: "Check JR Pass options",
+    checkJrPassBody: "If your route includes Hiroshima, multiple long JR rides, or a return to Tokyo, check JR Pass options before booking separate tickets.",
+    shinkansenDayLabel: "Shinkansen day setup",
+    shinkansenDayTitle: "Choose where to stay before your Shinkansen day",
+    shinkansenDayBody: "If you are taking an early Shinkansen to Kyoto or Osaka, your Tokyo base matters. Tokyo Station can reduce luggage stress, while Shinjuku, Ueno, and Asakusa may fit different travel styles.",
+    chooseTokyoStayArea: "Choose Tokyo stay area",
+    seatGuidesLabel: "Seat guides by topic",
+    seatGuideTitle: "Seat E guide",
+    seatGuideBody: "Learn when Seat E is the Mt. Fuji-side window seat.",
+    tokyoKyotoSeatTitle: "Tokyo → Kyoto Mt. Fuji seat",
+    tokyoKyotoSeatBody: "The simple right-side / Seat E answer for Tokyo to Kyoto or Osaka.",
+    kyotoTokyoSeatTitle: "Kyoto → Tokyo Mt. Fuji seat",
+    kyotoTokyoSeatBody: "Which side and seat to choose on the return trip.",
+    seatLettersTitle: "Seat letters explained",
+    seatLettersBody: "Understand A, B, C, D, E, window and aisle seats.",
+    continuePlanningLabel: "Continue planning",
+    localTokyoTitle: "Local Tokyo neighborhoods",
+    localTokyoBody: "Explore quieter east-side neighborhoods like Kiyosumi-Shirakawa, Kuramae, and Ryogoku.",
+    localTokyoLink: "Explore Local Tokyo →",
+    itineraryTitle: "7-day first-time Japan itinerary",
+    itineraryBody: "Plan Tokyo, Mt. Fuji, Kyoto, and Osaka in a practical first-time route.",
+    itineraryLink: "Open itinerary →",
+    tokyoStayTitle: "Tokyo areas to stay",
+    tokyoStayBody: "Choose Shinjuku, Ueno, Asakusa, Tokyo Station, or East Tokyo before booking hotels.",
+    tokyoStayLink: "Choose Tokyo stay area →",
+    localHotelTitle: "Local hotel picks",
+    localHotelBody: "See practical hotel examples by area logic. Not rankings.",
+    localHotelLink: "See hotel examples →",
+    readyTitle: "Ready to book Seat E?",
+    readyBody: "Book your Shinkansen ticket after confirming the Fuji-side seat. Check JR Pass only if your route includes multiple long-distance JR rides.",
+    bookShinkansenButton: "Book Shinkansen ticket",
+    checkJrPassButton: "Check JR Pass options",
+  },
+  "pt-BR": {
+    travelEssentialsTitle: "Checklist antes da partida",
+    travelEssentialsBody: "Mantenha a ordem: rota primeiro, trem depois, chegada por último.",
+    chooseRoute: "Escolher rota",
+    planAirportTransfer: "Planejar traslado do aeroporto",
+    chooseStayArea: "Escolher área para ficar",
+    getJapanEsim: "Obter eSIM do Japão",
+    railDecisionLabel: "Decisão de reserva de trem",
+    bookShinkansenTitle: "Reservar bilhete Shinkansen",
+    bookShinkansenBody: "Para uma rota simples Tokyo → Kyoto / Osaka, escolha o assento E se estiver disponível e reserve um bilhete avulso de Shinkansen.",
+    checkJrPassTitle: "Ver opções de JR Pass",
+    checkJrPassBody: "Se sua rota inclui Hiroshima, vários trechos longos de JR ou retorno a Tokyo, verifique o JR Pass antes de comprar bilhetes separados.",
+    shinkansenDayLabel: "Preparação do dia do Shinkansen",
+    shinkansenDayTitle: "Escolha onde ficar antes do dia do Shinkansen",
+    shinkansenDayBody: "Se você vai pegar um Shinkansen cedo para Kyoto ou Osaka, sua base em Tokyo importa. Tokyo Station reduz o estresse com bagagem; Shinjuku, Ueno e Asakusa podem combinar com outros estilos.",
+    chooseTokyoStayArea: "Escolher área em Tokyo",
+    seatGuidesLabel: "Guias de assento por tema",
+    seatGuideTitle: "Guia do assento E",
+    seatGuideBody: "Entenda quando o assento E é a janela do lado do Monte Fuji.",
+    tokyoKyotoSeatTitle: "Assento Tokyo → Kyoto para Fuji",
+    tokyoKyotoSeatBody: "A resposta simples: lado direito / assento E de Tokyo para Kyoto ou Osaka.",
+    kyotoTokyoSeatTitle: "Assento Kyoto → Tokyo para Fuji",
+    kyotoTokyoSeatBody: "Qual lado e assento escolher no retorno.",
+    seatLettersTitle: "Letras dos assentos explicadas",
+    seatLettersBody: "Entenda A, B, C, D, E, janela e corredor.",
+    continuePlanningLabel: "Continue planejando",
+    localTokyoTitle: "Bairros locais de Tokyo",
+    localTokyoBody: "Explore áreas mais calmas no leste, como Kiyosumi-Shirakawa, Kuramae e Ryogoku.",
+    localTokyoLink: "Explorar Tokyo local →",
+    itineraryTitle: "Roteiro de 7 dias para primeira viagem",
+    itineraryBody: "Planeje Tokyo, Monte Fuji, Kyoto e Osaka em uma rota prática.",
+    itineraryLink: "Abrir roteiro →",
+    tokyoStayTitle: "Onde ficar em Tokyo",
+    tokyoStayBody: "Escolha Shinjuku, Ueno, Asakusa, Tokyo Station ou East Tokyo antes de reservar hotéis.",
+    tokyoStayLink: "Escolher área em Tokyo →",
+    localHotelTitle: "Exemplos de hotéis locais",
+    localHotelBody: "Veja exemplos práticos por lógica de área. Não são rankings.",
+    localHotelLink: "Ver exemplos de hotéis →",
+    readyTitle: "Pronto para reservar o assento E?",
+    readyBody: "Reserve o Shinkansen depois de confirmar o assento do lado do Fuji. Veja o JR Pass apenas se sua rota tiver vários trajetos longos de JR.",
+    bookShinkansenButton: "Reservar Shinkansen",
+    checkJrPassButton: "Ver JR Pass",
+  },
+  es: {
+    travelEssentialsTitle: "Checklist antes de salir",
+    travelEssentialsBody: "Mantén el orden: primero ruta, luego tren, después lo básico de llegada.",
+    chooseRoute: "Elegir ruta",
+    planAirportTransfer: "Planificar traslado",
+    chooseStayArea: "Elegir zona para alojarse",
+    getJapanEsim: "Obtener eSIM de Japón",
+    railDecisionLabel: "Decisión de reserva de tren",
+    bookShinkansenTitle: "Reservar billete Shinkansen",
+    bookShinkansenBody: "Para una ruta simple Tokio → Kioto / Osaka, elige el asiento E si está disponible y reserva un billete individual de Shinkansen.",
+    checkJrPassTitle: "Ver opciones de JR Pass",
+    checkJrPassBody: "Si tu ruta incluye Hiroshima, varios trayectos largos de JR o regreso a Tokio, revisa el JR Pass antes de comprar billetes separados.",
+    shinkansenDayLabel: "Preparación del día Shinkansen",
+    shinkansenDayTitle: "Elige dónde alojarte antes del día del Shinkansen",
+    shinkansenDayBody: "Si tomas un Shinkansen temprano a Kioto u Osaka, tu base en Tokio importa. Tokyo Station reduce el estrés con equipaje; Shinjuku, Ueno y Asakusa pueden encajar con otros estilos.",
+    chooseTokyoStayArea: "Elegir zona en Tokio",
+    seatGuidesLabel: "Guías de asiento por tema",
+    seatGuideTitle: "Guía del asiento E",
+    seatGuideBody: "Aprende cuándo el asiento E es la ventana del lado del Monte Fuji.",
+    tokyoKyotoSeatTitle: "Asiento Tokio → Kioto para Fuji",
+    tokyoKyotoSeatBody: "La respuesta simple: lado derecho / asiento E de Tokio a Kioto u Osaka.",
+    kyotoTokyoSeatTitle: "Asiento Kioto → Tokio para Fuji",
+    kyotoTokyoSeatBody: "Qué lado y asiento elegir en el viaje de vuelta.",
+    seatLettersTitle: "Letras de asiento explicadas",
+    seatLettersBody: "Entiende A, B, C, D, E, ventana y pasillo.",
+    continuePlanningLabel: "Continuar planificación",
+    localTokyoTitle: "Barrios locales de Tokio",
+    localTokyoBody: "Explora zonas tranquilas del este como Kiyosumi-Shirakawa, Kuramae y Ryogoku.",
+    localTokyoLink: "Explorar Tokio local →",
+    itineraryTitle: "Itinerario de 7 días para primera visita",
+    itineraryBody: "Planifica Tokio, Monte Fuji, Kioto y Osaka en una ruta práctica.",
+    itineraryLink: "Abrir itinerario →",
+    tokyoStayTitle: "Zonas para alojarse en Tokio",
+    tokyoStayBody: "Elige Shinjuku, Ueno, Asakusa, Tokyo Station o East Tokyo antes de reservar hoteles.",
+    tokyoStayLink: "Elegir zona en Tokio →",
+    localHotelTitle: "Ejemplos de hoteles locales",
+    localHotelBody: "Mira ejemplos prácticos por lógica de zona. No son rankings.",
+    localHotelLink: "Ver ejemplos de hoteles →",
+    readyTitle: "¿Listo para reservar el asiento E?",
+    readyBody: "Reserva el Shinkansen después de confirmar el asiento del lado del Fuji. Revisa el JR Pass solo si tu ruta incluye varios trayectos largos de JR.",
+    bookShinkansenButton: "Reservar Shinkansen",
+    checkJrPassButton: "Ver JR Pass",
+  },
+  ko: {
+    travelEssentialsTitle: "출발 전 체크리스트",
+    travelEssentialsBody: "순서는 노선, 철도 예약, 도착 준비 순으로 정리하세요.",
+    chooseRoute: "노선 선택",
+    planAirportTransfer: "공항 이동 계획",
+    chooseStayArea: "숙소 지역 선택",
+    getJapanEsim: "일본 eSIM 받기",
+    railDecisionLabel: "철도 예약 결정",
+    bookShinkansenTitle: "신칸센 티켓 예약",
+    bookShinkansenBody: "도쿄 → 교토 / 오사카처럼 단순한 이동이라면 E석을 확인한 뒤 신칸센 단일 티켓을 예약하세요.",
+    checkJrPassTitle: "JR Pass 옵션 확인",
+    checkJrPassBody: "히로시마, 여러 장거리 JR 이동, 도쿄 복귀가 포함되면 개별 티켓 예약 전에 JR Pass를 확인하세요.",
+    shinkansenDayLabel: "신칸센 당일 준비",
+    shinkansenDayTitle: "신칸센 당일 전에 도쿄 숙소 위치를 정하세요",
+    shinkansenDayBody: "이른 신칸센으로 교토나 오사카에 간다면 도쿄 숙소 위치가 중요합니다. 도쿄역은 짐 부담을 줄이고, 신주쿠·우에노·아사쿠사는 다른 여행 스타일에 맞을 수 있습니다.",
+    chooseTokyoStayArea: "도쿄 숙소 지역 선택",
+    seatGuidesLabel: "주제별 좌석 가이드",
+    seatGuideTitle: "E석 가이드",
+    seatGuideBody: "E석이 후지산 쪽 창가가 되는 경우를 확인하세요.",
+    tokyoKyotoSeatTitle: "도쿄 → 교토 후지산 좌석",
+    tokyoKyotoSeatBody: "도쿄에서 교토나 오사카로 갈 때는 오른쪽 / E석입니다.",
+    kyotoTokyoSeatTitle: "교토 → 도쿄 후지산 좌석",
+    kyotoTokyoSeatBody: "돌아오는 길에 어느 쪽과 어떤 좌석을 고를지 확인하세요.",
+    seatLettersTitle: "좌석 문자 설명",
+    seatLettersBody: "A, B, C, D, E와 창가·통로 좌석을 이해하세요.",
+    continuePlanningLabel: "계속 계획하기",
+    localTokyoTitle: "도쿄 로컬 동네",
+    localTokyoBody: "기요스미시라카와, 구라마에, 료고쿠 같은 조용한 동쪽 지역을 둘러보세요.",
+    localTokyoLink: "로컬 도쿄 보기 →",
+    itineraryTitle: "첫 일본 7일 일정",
+    itineraryBody: "도쿄, 후지산, 교토, 오사카를 실용적인 첫 여행 루트로 계획하세요.",
+    itineraryLink: "일정 열기 →",
+    tokyoStayTitle: "도쿄 숙소 지역",
+    tokyoStayBody: "호텔 예약 전 신주쿠, 우에노, 아사쿠사, 도쿄역, 이스트 도쿄 중에서 고르세요.",
+    tokyoStayLink: "도쿄 숙소 지역 선택 →",
+    localHotelTitle: "로컬 호텔 예시",
+    localHotelBody: "지역 논리별 실용적인 호텔 예시입니다. 순위가 아닙니다.",
+    localHotelLink: "호텔 예시 보기 →",
+    readyTitle: "E석을 예약할 준비가 되었나요?",
+    readyBody: "후지산 쪽 좌석을 확인한 뒤 신칸센 티켓을 예약하세요. 여러 장거리 JR 이동이 있을 때만 JR Pass를 확인하세요.",
+    bookShinkansenButton: "신칸센 예약",
+    checkJrPassButton: "JR Pass 확인",
+  },
+  "zh-TW": {
+    travelEssentialsTitle: "出發前檢查清單",
+    travelEssentialsBody: "請依序整理：先路線，再鐵路，最後處理抵達後的基本準備。",
+    chooseRoute: "選擇路線",
+    planAirportTransfer: "規劃機場交通",
+    chooseStayArea: "選擇住宿區域",
+    getJapanEsim: "取得日本 eSIM",
+    railDecisionLabel: "鐵路預訂決策",
+    bookShinkansenTitle: "預訂新幹線車票",
+    bookShinkansenBody: "東京 → 京都 / 大阪這類簡單路線，請先確認 E 座是否可選，再預訂單程新幹線車票。",
+    checkJrPassTitle: "查看 JR Pass 選項",
+    checkJrPassBody: "如果路線包含廣島、多段長距離 JR，或回到東京，請在買單程票前先查看 JR Pass 選項。",
+    shinkansenDayLabel: "新幹線當日準備",
+    shinkansenDayTitle: "新幹線當日前先選好東京住宿區域",
+    shinkansenDayBody: "如果你要搭早班新幹線前往京都或大阪，東京住宿位置很重要。東京站可減少拖行李壓力，而新宿、上野、淺草則可能更符合不同旅遊風格。",
+    chooseTokyoStayArea: "選擇東京住宿區域",
+    seatGuidesLabel: "主題座位指南",
+    seatGuideTitle: "E 座指南",
+    seatGuideBody: "了解什麼時候 E 座是富士山側窗邊座位。",
+    tokyoKyotoSeatTitle: "東京 → 京都富士山座位",
+    tokyoKyotoSeatBody: "東京到京都或大阪的簡單答案：右側 / E 座。",
+    kyotoTokyoSeatTitle: "京都 → 東京富士山座位",
+    kyotoTokyoSeatBody: "回程時該選哪一側與哪個座位。",
+    seatLettersTitle: "座位字母說明",
+    seatLettersBody: "了解 A、B、C、D、E，以及窗邊與走道座位。",
+    continuePlanningLabel: "繼續規劃",
+    localTokyoTitle: "東京在地街區",
+    localTokyoBody: "探索清澄白河、藏前、兩國等較安靜的東京東側街區。",
+    localTokyoLink: "探索在地東京 →",
+    itineraryTitle: "第一次日本 7 日行程",
+    itineraryBody: "用實用路線規劃東京、富士山、京都與大阪。",
+    itineraryLink: "開啟行程 →",
+    tokyoStayTitle: "東京住宿區域",
+    tokyoStayBody: "訂飯店前，先選新宿、上野、淺草、東京站或 East Tokyo。",
+    tokyoStayLink: "選擇東京住宿區域 →",
+    localHotelTitle: "在地飯店範例",
+    localHotelBody: "查看依區域邏輯整理的實用飯店範例。這不是排名。",
+    localHotelLink: "查看飯店範例 →",
+    readyTitle: "準備好預訂 E 座了嗎？",
+    readyBody: "確認富士山側座位後再預訂新幹線車票。只有多段長距離 JR 移動時才需要查看 JR Pass。",
+    bookShinkansenButton: "預訂新幹線",
+    checkJrPassButton: "查看 JR Pass",
+  },
+  "zh-CN": {
+    travelEssentialsTitle: "出发前检查清单",
+    travelEssentialsBody: "请按顺序整理：先路线，再铁路，最后处理抵达后的基本准备。",
+    chooseRoute: "选择路线",
+    planAirportTransfer: "规划机场交通",
+    chooseStayArea: "选择住宿区域",
+    getJapanEsim: "获取日本 eSIM",
+    railDecisionLabel: "铁路预订决策",
+    bookShinkansenTitle: "预订新干线车票",
+    bookShinkansenBody: "东京 → 京都 / 大阪这类简单路线，请先确认 E 座是否可选，再预订单程新干线车票。",
+    checkJrPassTitle: "查看 JR Pass 选项",
+    checkJrPassBody: "如果路线包含广岛、多段长距离 JR，或返回东京，请在购买单程票前先查看 JR Pass 选项。",
+    shinkansenDayLabel: "新干线当日准备",
+    shinkansenDayTitle: "新干线当日前先选好东京住宿区域",
+    shinkansenDayBody: "如果你要搭早班新干线前往京都或大阪，东京住宿位置很重要。东京站可减少拖行李压力，而新宿、上野、浅草则可能更符合不同旅行风格。",
+    chooseTokyoStayArea: "选择东京住宿区域",
+    seatGuidesLabel: "主题座位指南",
+    seatGuideTitle: "E 座指南",
+    seatGuideBody: "了解什么时候 E 座是富士山侧窗边座位。",
+    tokyoKyotoSeatTitle: "东京 → 京都富士山座位",
+    tokyoKyotoSeatBody: "东京到京都或大阪的简单答案：右侧 / E 座。",
+    kyotoTokyoSeatTitle: "京都 → 东京富士山座位",
+    kyotoTokyoSeatBody: "回程时该选哪一侧和哪个座位。",
+    seatLettersTitle: "座位字母说明",
+    seatLettersBody: "了解 A、B、C、D、E，以及窗边和走道座位。",
+    continuePlanningLabel: "继续规划",
+    localTokyoTitle: "东京本地街区",
+    localTokyoBody: "探索清澄白河、藏前、两国等较安静的东京东侧街区。",
+    localTokyoLink: "探索本地东京 →",
+    itineraryTitle: "第一次日本 7 日行程",
+    itineraryBody: "用实用路线规划东京、富士山、京都和大阪。",
+    itineraryLink: "打开行程 →",
+    tokyoStayTitle: "东京住宿区域",
+    tokyoStayBody: "订酒店前，先选择新宿、上野、浅草、东京站或 East Tokyo。",
+    tokyoStayLink: "选择东京住宿区域 →",
+    localHotelTitle: "本地酒店示例",
+    localHotelBody: "查看按区域逻辑整理的实用酒店示例。这不是排名。",
+    localHotelLink: "查看酒店示例 →",
+    readyTitle: "准备好预订 E 座了吗？",
+    readyBody: "确认富士山侧座位后再预订新干线车票。只有多段长距离 JR 移动时才需要查看 JR Pass。",
+    bookShinkansenButton: "预订新干线",
+    checkJrPassButton: "查看 JR Pass",
+  },
+  fr: {
+    travelEssentialsTitle: "Checklist avant le départ",
+    travelEssentialsBody: "Gardez l'ordre logique : itinéraire d'abord, train ensuite, puis les bases à l'arrivée.",
+    chooseRoute: "Choisir l'itinéraire",
+    planAirportTransfer: "Prévoir le transfert aéroport",
+    chooseStayArea: "Choisir le quartier",
+    getJapanEsim: "Obtenir une eSIM Japon",
+    railDecisionLabel: "Décision de réservation ferroviaire",
+    bookShinkansenTitle: "Réserver un billet Shinkansen",
+    bookShinkansenBody: "Pour un trajet simple Tokyo → Kyoto / Osaka, choisissez le siège E si disponible et réservez un billet Shinkansen à l'unité.",
+    checkJrPassTitle: "Voir les options JR Pass",
+    checkJrPassBody: "Si votre itinéraire inclut Hiroshima, plusieurs longs trajets JR ou un retour à Tokyo, vérifiez le JR Pass avant d'acheter des billets séparés.",
+    shinkansenDayLabel: "Préparation du jour Shinkansen",
+    shinkansenDayTitle: "Choisissez où dormir avant votre jour de Shinkansen",
+    shinkansenDayBody: "Si vous prenez un Shinkansen tôt vers Kyoto ou Osaka, votre base à Tokyo compte. Tokyo Station réduit le stress avec les bagages, tandis que Shinjuku, Ueno et Asakusa peuvent mieux correspondre à d'autres styles.",
+    chooseTokyoStayArea: "Choisir un quartier à Tokyo",
+    seatGuidesLabel: "Guides de sièges par thème",
+    seatGuideTitle: "Guide du siège E",
+    seatGuideBody: "Comprendre quand le siège E est la fenêtre côté mont Fuji.",
+    tokyoKyotoSeatTitle: "Siège Tokyo → Kyoto pour Fuji",
+    tokyoKyotoSeatBody: "La réponse simple : côté droit / siège E de Tokyo vers Kyoto ou Osaka.",
+    kyotoTokyoSeatTitle: "Siège Kyoto → Tokyo pour Fuji",
+    kyotoTokyoSeatBody: "Quel côté et quel siège choisir au retour.",
+    seatLettersTitle: "Lettres de siège expliquées",
+    seatLettersBody: "Comprendre A, B, C, D, E, fenêtre et couloir.",
+    continuePlanningLabel: "Continuer la préparation",
+    localTokyoTitle: "Quartiers locaux de Tokyo",
+    localTokyoBody: "Explorez des quartiers plus calmes de l'est comme Kiyosumi-Shirakawa, Kuramae et Ryogoku.",
+    localTokyoLink: "Explorer Tokyo local →",
+    itineraryTitle: "Itinéraire Japon 7 jours pour une première visite",
+    itineraryBody: "Planifiez Tokyo, le mont Fuji, Kyoto et Osaka dans un itinéraire pratique.",
+    itineraryLink: "Ouvrir l'itinéraire →",
+    tokyoStayTitle: "Quartiers où dormir à Tokyo",
+    tokyoStayBody: "Choisissez Shinjuku, Ueno, Asakusa, Tokyo Station ou East Tokyo avant de réserver un hôtel.",
+    tokyoStayLink: "Choisir un quartier à Tokyo →",
+    localHotelTitle: "Exemples d'hôtels locaux",
+    localHotelBody: "Voir des exemples pratiques selon la logique de quartier. Ce ne sont pas des classements.",
+    localHotelLink: "Voir les exemples d'hôtels →",
+    readyTitle: "Prêt à réserver le siège E ?",
+    readyBody: "Réservez votre Shinkansen après avoir confirmé le siège côté Fuji. Vérifiez le JR Pass seulement si votre itinéraire comprend plusieurs longs trajets JR.",
+    bookShinkansenButton: "Réserver Shinkansen",
+    checkJrPassButton: "Voir JR Pass",
+  },
+  de: {
+    travelEssentialsTitle: "Checkliste vor der Abfahrt",
+    travelEssentialsBody: "Halte die Reihenfolge ein: zuerst Route, dann Bahn, danach Ankunftsbasics.",
+    chooseRoute: "Route wählen",
+    planAirportTransfer: "Flughafentransfer planen",
+    chooseStayArea: "Übernachtungsviertel wählen",
+    getJapanEsim: "Japan-eSIM holen",
+    railDecisionLabel: "Bahn-Buchungsentscheidung",
+    bookShinkansenTitle: "Shinkansen-Ticket buchen",
+    bookShinkansenBody: "Für eine einfache Strecke Tokyo → Kyoto / Osaka wähle Sitz E, wenn verfügbar, und buche ein einzelnes Shinkansen-Ticket.",
+    checkJrPassTitle: "JR-Pass-Optionen prüfen",
+    checkJrPassBody: "Wenn deine Route Hiroshima, mehrere lange JR-Fahrten oder eine Rückkehr nach Tokyo enthält, prüfe den JR Pass vor Einzeltickets.",
+    shinkansenDayLabel: "Shinkansen-Tag vorbereiten",
+    shinkansenDayTitle: "Wähle deine Unterkunft vor dem Shinkansen-Tag",
+    shinkansenDayBody: "Wenn du früh nach Kyoto oder Osaka fährst, ist deine Basis in Tokyo wichtig. Tokyo Station reduziert Gepäckstress; Shinjuku, Ueno und Asakusa passen zu anderen Reisestilen.",
+    chooseTokyoStayArea: "Tokyo-Viertel wählen",
+    seatGuidesLabel: "Sitzplatz-Guides nach Thema",
+    seatGuideTitle: "Sitz-E-Guide",
+    seatGuideBody: "Erfahre, wann Sitz E der Mt.-Fuji-Fensterplatz ist.",
+    tokyoKyotoSeatTitle: "Tokyo → Kyoto Mt.-Fuji-Sitz",
+    tokyoKyotoSeatBody: "Die einfache Antwort: rechte Seite / Sitz E von Tokyo nach Kyoto oder Osaka.",
+    kyotoTokyoSeatTitle: "Kyoto → Tokyo Mt.-Fuji-Sitz",
+    kyotoTokyoSeatBody: "Welche Seite und welchen Sitz du auf der Rückfahrt wählen solltest.",
+    seatLettersTitle: "Sitzbuchstaben erklärt",
+    seatLettersBody: "A, B, C, D, E sowie Fenster- und Gangplätze verstehen.",
+    continuePlanningLabel: "Weiter planen",
+    localTokyoTitle: "Lokale Viertel in Tokyo",
+    localTokyoBody: "Entdecke ruhigere Ost-Tokyo-Viertel wie Kiyosumi-Shirakawa, Kuramae und Ryogoku.",
+    localTokyoLink: "Lokales Tokyo ansehen →",
+    itineraryTitle: "7-Tage-Japanroute für Erstbesucher",
+    itineraryBody: "Plane Tokyo, Mt. Fuji, Kyoto und Osaka als praktische erste Route.",
+    itineraryLink: "Route öffnen →",
+    tokyoStayTitle: "Übernachten in Tokyo",
+    tokyoStayBody: "Wähle vor der Hotelbuchung Shinjuku, Ueno, Asakusa, Tokyo Station oder East Tokyo.",
+    tokyoStayLink: "Tokyo-Viertel wählen →",
+    localHotelTitle: "Lokale Hotelbeispiele",
+    localHotelBody: "Praktische Beispiele nach Gebietslogik. Keine Rangliste.",
+    localHotelLink: "Hotelbeispiele ansehen →",
+    readyTitle: "Bereit, Sitz E zu buchen?",
+    readyBody: "Buche dein Shinkansen-Ticket nach der Fuji-Sitzprüfung. Prüfe den JR Pass nur bei mehreren langen JR-Fahrten.",
+    bookShinkansenButton: "Shinkansen buchen",
+    checkJrPassButton: "JR Pass prüfen",
+  },
+  ru: {
+    travelEssentialsTitle: "Чек-лист перед отправлением",
+    travelEssentialsBody: "Сначала маршрут, затем поезд, потом базовые вопросы прибытия.",
+    chooseRoute: "Выбрать маршрут",
+    planAirportTransfer: "Спланировать трансфер",
+    chooseStayArea: "Выбрать район проживания",
+    getJapanEsim: "Получить eSIM для Японии",
+    railDecisionLabel: "Выбор железнодорожного билета",
+    bookShinkansenTitle: "Забронировать билет Shinkansen",
+    bookShinkansenBody: "Для простого маршрута Токио → Киото / Осака выберите место E, если оно доступно, и купите отдельный билет на синкансэн.",
+    checkJrPassTitle: "Проверить JR Pass",
+    checkJrPassBody: "Если маршрут включает Хиросиму, несколько длинных поездок JR или возвращение в Токио, проверьте JR Pass до покупки отдельных билетов.",
+    shinkansenDayLabel: "Подготовка к дню Shinkansen",
+    shinkansenDayTitle: "Выберите район проживания перед днем Shinkansen",
+    shinkansenDayBody: "Если вы едете ранним синкансэном в Киото или Осаку, база в Токио важна. Tokyo Station уменьшает стресс с багажом, а Shinjuku, Ueno и Asakusa подходят под разные стили поездки.",
+    chooseTokyoStayArea: "Выбрать район в Токио",
+    seatGuidesLabel: "Гиды по местам",
+    seatGuideTitle: "Гид по месту E",
+    seatGuideBody: "Когда место E является окном на сторону Фудзи.",
+    tokyoKyotoSeatTitle: "Место Токио → Киото для Фудзи",
+    tokyoKyotoSeatBody: "Простой ответ: правая сторона / место E из Токио в Киото или Осаку.",
+    kyotoTokyoSeatTitle: "Место Киото → Токио для Фудзи",
+    kyotoTokyoSeatBody: "Какую сторону и место выбрать на обратном пути.",
+    seatLettersTitle: "Буквы мест",
+    seatLettersBody: "Разберитесь с A, B, C, D, E, окнами и проходами.",
+    continuePlanningLabel: "Продолжить планирование",
+    localTokyoTitle: "Локальные районы Токио",
+    localTokyoBody: "Изучите более спокойные восточные районы: Kiyosumi-Shirakawa, Kuramae и Ryogoku.",
+    localTokyoLink: "Открыть локальный Токио →",
+    itineraryTitle: "7-дневный маршрут по Японии",
+    itineraryBody: "Спланируйте Токио, Фудзи, Киото и Осаку в практичном маршруте для первой поездки.",
+    itineraryLink: "Открыть маршрут →",
+    tokyoStayTitle: "Где остановиться в Токио",
+    tokyoStayBody: "Перед бронированием отеля выберите Shinjuku, Ueno, Asakusa, Tokyo Station или East Tokyo.",
+    tokyoStayLink: "Выбрать район в Токио →",
+    localHotelTitle: "Примеры местных отелей",
+    localHotelBody: "Практичные примеры по логике районов. Это не рейтинг.",
+    localHotelLink: "Посмотреть примеры отелей →",
+    readyTitle: "Готовы забронировать место E?",
+    readyBody: "Бронируйте Shinkansen после проверки места на сторону Фудзи. JR Pass проверяйте только при нескольких длинных поездках JR.",
+    bookShinkansenButton: "Забронировать Shinkansen",
+    checkJrPassButton: "Проверить JR Pass",
+  },
+};
+
 type Props = {
   params: Promise<{ locale: string }>;
 };
@@ -304,6 +774,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 type QuickAnswerCopy = {
   title: string;
   heading: string;
+  summary: string;
   items: Array<{ bold: string; text: string }>;
   cta: string;
 };
@@ -314,6 +785,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
   en: {
     title: "Quick Answer",
     heading: "Book Seat E in standard cars. Use Seat D in Green Car.",
+    summary: "For Tokyo to Kyoto or Osaka, sit on the right side of the Shinkansen in Seat E. For Kyoto or Osaka back to Tokyo, sit on the left side, also Seat E. Mt. Fuji appears around Shin-Fuji station for about 30 to 60 seconds.",
     items: [
       { bold: "Tokyo → Kyoto/Osaka:", text: "right side, Seat E." },
       { bold: "Kyoto/Osaka → Tokyo:", text: "left side, Seat E." },
@@ -325,6 +797,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
   "pt-BR": {
     title: "Resposta rápida",
     heading: "Reserve o assento E nos carros standard. Use o assento D no Green Car.",
+    summary: "De Tokyo para Kyoto ou Osaka, sente-se do lado direito do Shinkansen no assento E. De Kyoto ou Osaka de volta para Tokyo, sente-se do lado esquerdo, também no assento E. O Monte Fuji aparece perto da estação Shin-Fuji por cerca de 30 a 60 segundos.",
     items: [
       { bold: "Tokyo → Kyoto/Osaka:", text: "lado direito, assento E." },
       { bold: "Kyoto/Osaka → Tokyo:", text: "lado esquerdo, assento E." },
@@ -336,6 +809,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
   es: {
     title: "Respuesta rápida",
     heading: "Reserva el asiento E en coches estándar. Usa el asiento D en Green Car.",
+    summary: "De Tokio a Kioto u Osaka, siéntate en el lado derecho del Shinkansen, en el asiento E. De Kioto u Osaka de vuelta a Tokio, siéntate en el lado izquierdo, también en el asiento E. El Monte Fuji aparece cerca de la estación Shin-Fuji durante unos 30 a 60 segundos.",
     items: [
       { bold: "Tokio → Kioto/Osaka:", text: "lado derecho, asiento E." },
       { bold: "Kioto/Osaka → Tokio:", text: "lado izquierdo, asiento E." },
@@ -347,6 +821,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
   ko: {
     title: "빠른 답변",
     heading: "일반석은 E석, 그린샤는 D석을 예약하세요.",
+    summary: "도쿄에서 교토나 오사카로 갈 때는 신칸센 오른쪽 E석에 앉으세요. 교토나 오사카에서 도쿄로 돌아올 때는 왼쪽, 역시 E석입니다. 후지산은 신후지 역 근처에서 약 30~60초 동안 보입니다.",
     items: [
       { bold: "도쿄 → 교토/오사카:", text: "오른쪽, E석." },
       { bold: "교토/오사카 → 도쿄:", text: "왼쪽, E석." },
@@ -358,6 +833,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
   "zh-TW": {
     title: "快速答案",
     heading: "普通車請選 E 座。Green Car 請選 D 座。",
+    summary: "從東京前往京都或大阪時，請坐新幹線右側的 E 座。從京都或大阪返回東京時，請坐左側，也是一樣選 E 座。富士山會在新富士站附近出現約 30 到 60 秒。",
     items: [
       { bold: "東京 → 京都/大阪：", text: "右側，E 座。" },
       { bold: "京都/大阪 → 東京：", text: "左側，E 座。" },
@@ -369,6 +845,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
   "zh-CN": {
     title: "快速答案",
     heading: "普通车选 E 座。Green Car 选 D 座。",
+    summary: "从东京前往京都或大阪时，请坐新干线右侧的 E 座。从京都或大阪返回东京时，请坐左侧，同样选择 E 座。富士山会在新富士站附近出现约 30 到 60 秒。",
     items: [
       { bold: "东京 → 京都/大阪：", text: "右侧，E 座。" },
       { bold: "京都/大阪 → 东京：", text: "左侧，E 座。" },
@@ -380,6 +857,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
   fr: {
     title: "Réponse rapide",
     heading: "Réservez le siège E en voiture standard. Choisissez le siège D en Green Car.",
+    summary: "Pour Tokyo → Kyoto ou Osaka, asseyez-vous du côté droit du Shinkansen, au siège E. Pour Kyoto ou Osaka → Tokyo, asseyez-vous du côté gauche, toujours au siège E. Le mont Fuji apparaît aux alentours de Shin-Fuji pendant environ 30 à 60 secondes.",
     items: [
       { bold: "Tokyo → Kyoto/Osaka :", text: "côté droit, siège E." },
       { bold: "Kyoto/Osaka → Tokyo :", text: "côté gauche, siège E." },
@@ -391,6 +869,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
   de: {
     title: "Kurzantwort",
     heading: "Buche Sitz E im Standardwagen. Im Green Car ist meist Sitz D richtig.",
+    summary: "Von Tokyo nach Kyoto oder Osaka sitzt du auf der rechten Seite des Shinkansen in Sitz E. Von Kyoto oder Osaka zurück nach Tokyo sitzt du auf der linken Seite, ebenfalls in Sitz E. Der Mt. Fuji erscheint rund um Shin-Fuji für etwa 30 bis 60 Sekunden.",
     items: [
       { bold: "Tokyo → Kyoto/Osaka:", text: "rechte Seite, Sitz E." },
       { bold: "Kyoto/Osaka → Tokyo:", text: "linke Seite, Sitz E." },
@@ -402,6 +881,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
   ru: {
     title: "Короткий ответ",
     heading: "В обычном вагоне выбирайте место E. В Green Car обычно место D.",
+    summary: "Из Токио в Киото или Осаку садитесь справа в синкансэне, на место E. Из Киото или Осаки обратно в Токио садитесь слева, также на место E. Фудзи появляется около станции Shin-Fuji примерно на 30-60 секунд.",
     items: [
       { bold: "Токио → Киото/Осака:", text: "правая сторона, место E." },
       { bold: "Киото/Осака → Токио:", text: "левая сторона, место E." },
@@ -518,11 +998,13 @@ export default async function GuidePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "guide" });
   const isFr = locale === "fr";
-  const copy = isFr ? frGuideCopy : enGuideCopy;
+  const copy = locale === "fr" ? frGuideCopy : { ...enGuideCopy, ...guideCopyOverridesByLocale[locale] };
   const quickAnswer = quickAnswerCopyByLocale[locale] ?? quickAnswerCopyByLocale.en;
+  const ui = guideUiByLocale[locale as keyof typeof guideUiByLocale] ?? guideUiByLocale.en;
+  const quickLabel = `${quickAnswer.title}:`;
   const displayTitle = locale === "en"
     ? "Which Shinkansen Seat to See Mt. Fuji? Seat E, Side & Timing Guide"
-    : copy.title;
+    : t("h1");
 
   const tldrItems = t.raw("tldr") as Array<{ bold: string; text: string }>;
   const seasons = t.raw("seasons") as Array<{
@@ -606,7 +1088,7 @@ export default async function GuidePage({ params }: Props) {
       {
         "@type": "ListItem",
         position: 2,
-        name: copy.title,
+        name: displayTitle,
         item: localizedUrl(locale, "/guide"),
       },
     ],
@@ -623,22 +1105,22 @@ export default async function GuidePage({ params }: Props) {
     <section className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
       <div className="px-4 py-3.5 md:px-6 md:py-4 border-b border-slate-100 bg-slate-50/60">
         <h2 className="text-[13px] md:text-[15px] font-semibold text-slate-900">
-          Pre-departure checklist
+          {ui.travelEssentialsTitle}
         </h2>
         <p className="text-[11px] md:text-xs text-slate-400 mt-0.5">
-          Keep the booking steps in order: route first, rail second, arrival basics after.
+          {ui.travelEssentialsBody}
         </p>
       </div>
       <div className="grid gap-3 p-3.5 md:p-4">
         <div className="grid gap-2 text-[12px] leading-5 text-slate-600 md:grid-cols-2">
           <Link href="/plan-your-trip" className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-semibold text-slate-800 hover:bg-white">
-            Choose your route
+            {ui.chooseRoute}
           </Link>
           <Link href="/airport-transfers" className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-semibold text-slate-800 hover:bg-white">
-            Plan airport transfer
+            {ui.planAirportTransfer}
           </Link>
           <Link href="/areas-to-stay" className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-semibold text-slate-800 hover:bg-white">
-            Choose stay area
+            {ui.chooseStayArea}
           </Link>
           <TrackedAffiliateLink
             href={ESIM_URL}
@@ -654,7 +1136,7 @@ export default async function GuidePage({ params }: Props) {
             product="esim"
             className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-semibold text-slate-800 hover:bg-white"
           >
-            Get Japan eSIM
+            {ui.getJapanEsim}
           </TrackedAffiliateLink>
         </div>
       </div>
@@ -664,15 +1146,15 @@ export default async function GuidePage({ params }: Props) {
   const renderShinkansenDaySetup = () => (
     <section className="mb-5 rounded-2xl border border-emerald-100 bg-emerald-50/60 px-4 py-4 shadow-sm shadow-emerald-100/60 lg:px-5">
       <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">
-        Shinkansen day setup
+        {ui.shinkansenDayLabel}
       </p>
       <div className="mt-2 grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
         <div>
           <h2 className="text-base font-semibold text-slate-950">
-            Choose where to stay before your Shinkansen day
+            {ui.shinkansenDayTitle}
           </h2>
           <p className="mt-2 text-[13px] leading-6 text-slate-600">
-            If you are taking an early Shinkansen to Kyoto or Osaka, your Tokyo base matters. Tokyo Station can reduce luggage stress, while Shinjuku, Ueno, and Asakusa may fit different travel styles.
+            {ui.shinkansenDayBody}
           </p>
         </div>
         <TrackedInternalLink
@@ -683,7 +1165,7 @@ export default async function GuidePage({ params }: Props) {
           locale={locale}
           className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
         >
-          Choose Tokyo stay area
+          {ui.chooseTokyoStayArea}
         </TrackedInternalLink>
       </div>
     </section>
@@ -692,24 +1174,24 @@ export default async function GuidePage({ params }: Props) {
   const renderSeatGuides = () => (
     <section className="rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-4 shadow-sm">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-sky-700">
-        Seat guides by topic
+        {ui.seatGuidesLabel}
       </p>
       <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
         <Link href="/shinkansen-seat-e" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
-          <span className="block font-semibold text-slate-900">Seat E guide</span>
-          <span className="mt-0.5 block text-slate-500">Learn when Seat E is the Mt. Fuji-side window seat.</span>
+          <span className="block font-semibold text-slate-900">{ui.seatGuideTitle}</span>
+          <span className="mt-0.5 block text-slate-500">{ui.seatGuideBody}</span>
         </Link>
         <Link href="/tokyo-to-kyoto-mt-fuji-seat" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
-          <span className="block font-semibold text-slate-900">Tokyo → Kyoto Mt. Fuji seat</span>
-          <span className="mt-0.5 block text-slate-500">The simple right-side / Seat E answer for Tokyo to Kyoto or Osaka.</span>
+          <span className="block font-semibold text-slate-900">{ui.tokyoKyotoSeatTitle}</span>
+          <span className="mt-0.5 block text-slate-500">{ui.tokyoKyotoSeatBody}</span>
         </Link>
         <Link href="/kyoto-to-tokyo-mt-fuji-seat" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
-          <span className="block font-semibold text-slate-900">Kyoto → Tokyo Mt. Fuji seat</span>
-          <span className="mt-0.5 block text-slate-500">Which side and seat to choose on the return trip.</span>
+          <span className="block font-semibold text-slate-900">{ui.kyotoTokyoSeatTitle}</span>
+          <span className="mt-0.5 block text-slate-500">{ui.kyotoTokyoSeatBody}</span>
         </Link>
         <Link href="/shinkansen-seat-letters" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
-          <span className="block font-semibold text-slate-900">Seat letters explained</span>
-          <span className="mt-0.5 block text-slate-500">Understand A, B, C, D, E, window and aisle seats.</span>
+          <span className="block font-semibold text-slate-900">{ui.seatLettersTitle}</span>
+          <span className="mt-0.5 block text-slate-500">{ui.seatLettersBody}</span>
         </Link>
       </div>
     </section>
@@ -718,38 +1200,38 @@ export default async function GuidePage({ params }: Props) {
   const renderContinuePlanning = () => (
     <section className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm shadow-slate-200/70">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
-        Continue planning
+        {ui.continuePlanningLabel}
       </p>
       <div className="mt-3 grid gap-3 sm:grid-cols-2">
         <Link
           href="/local-tokyo"
           className="rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3.5 text-[12px] transition-colors hover:border-slate-300 hover:bg-white"
         >
-          <span className="block font-semibold text-slate-900">Local Tokyo neighborhoods</span>
+          <span className="block font-semibold text-slate-900">{ui.localTokyoTitle}</span>
           <span className="mt-0.5 block text-slate-500">
-            Explore quieter east-side neighborhoods like Kiyosumi-Shirakawa, Kuramae, and Ryogoku.
+            {ui.localTokyoBody}
           </span>
-          <span className="mt-3 inline-flex text-[11px] font-semibold text-slate-600">Explore Local Tokyo →</span>
+          <span className="mt-3 inline-flex text-[11px] font-semibold text-slate-600">{ui.localTokyoLink}</span>
         </Link>
         <Link
           href="/itineraries/7-day-first-time-japan"
           className="rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3.5 text-[12px] transition-colors hover:border-slate-300 hover:bg-white"
         >
-          <span className="block font-semibold text-slate-900">7-day first-time Japan itinerary</span>
+          <span className="block font-semibold text-slate-900">{ui.itineraryTitle}</span>
           <span className="mt-0.5 block text-slate-500">
-            Plan Tokyo, Mt. Fuji, Kyoto, and Osaka in a practical first-time route.
+            {ui.itineraryBody}
           </span>
-          <span className="mt-3 inline-flex text-[11px] font-semibold text-slate-600">Open itinerary →</span>
+          <span className="mt-3 inline-flex text-[11px] font-semibold text-slate-600">{ui.itineraryLink}</span>
         </Link>
         <Link
           href="/areas-to-stay/tokyo-first-time"
           className="rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3.5 text-[12px] transition-colors hover:border-slate-300 hover:bg-white"
         >
-          <span className="block font-semibold text-slate-900">Tokyo areas to stay</span>
+          <span className="block font-semibold text-slate-900">{ui.tokyoStayTitle}</span>
           <span className="mt-0.5 block text-slate-500">
-            Choose Shinjuku, Ueno, Asakusa, Tokyo Station, or East Tokyo before booking hotels.
+            {ui.tokyoStayBody}
           </span>
-          <span className="mt-3 inline-flex text-[11px] font-semibold text-slate-600">Choose Tokyo stay area →</span>
+          <span className="mt-3 inline-flex text-[11px] font-semibold text-slate-600">{ui.tokyoStayLink}</span>
         </Link>
         <TrackedCtaLink
           href="/local-hotel-picks"
@@ -760,9 +1242,9 @@ export default async function GuidePage({ params }: Props) {
           category="hotel"
           className="rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3.5 text-[12px] transition-colors hover:border-slate-300 hover:bg-white"
         >
-          <span className="block font-semibold text-slate-900">Local hotel picks</span>
-          <span className="mt-0.5 block text-slate-500">See practical hotel examples by area logic. Not rankings.</span>
-          <span className="mt-3 inline-flex text-[11px] font-semibold text-slate-600">See hotel examples →</span>
+          <span className="block font-semibold text-slate-900">{ui.localHotelTitle}</span>
+          <span className="mt-0.5 block text-slate-500">{ui.localHotelBody}</span>
+          <span className="mt-3 inline-flex text-[11px] font-semibold text-slate-600">{ui.localHotelLink}</span>
         </TrackedCtaLink>
       </div>
     </section>
@@ -770,9 +1252,9 @@ export default async function GuidePage({ params }: Props) {
 
   const renderSeatBookingReminder = () => (
     <div className="mt-4 rounded-2xl border border-orange-100 bg-orange-50/60 px-3.5 py-3">
-      <p className="text-sm font-semibold text-slate-950">Ready to book Seat E?</p>
+      <p className="text-sm font-semibold text-slate-950">{ui.readyTitle}</p>
       <p className="mt-1 text-xs leading-5 text-slate-600">
-        Book your Shinkansen ticket after confirming the Fuji-side seat. Check JR Pass only if your route includes multiple long-distance JR rides.
+        {ui.readyBody}
       </p>
       <div className="mt-3 flex flex-col gap-2 sm:flex-row">
         <TrackedAffiliateLink
@@ -787,7 +1269,7 @@ export default async function GuidePage({ params }: Props) {
           label="Book Shinkansen ticket"
           className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
         >
-          Book Shinkansen ticket
+          {ui.bookShinkansenButton}
         </TrackedAffiliateLink>
         <TrackedAffiliateLink
           href={JR_PASS_URL}
@@ -801,7 +1283,7 @@ export default async function GuidePage({ params }: Props) {
           label="Check JR Pass options"
           className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
         >
-          Check JR Pass options
+          {ui.checkJrPassButton}
         </TrackedAffiliateLink>
       </div>
     </div>
@@ -875,7 +1357,7 @@ export default async function GuidePage({ params }: Props) {
             {t("introH2")}
           </h2>
           <p className="mb-2 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-            <strong>{copy.quickLabel}</strong> {copy.introQuick}
+            <strong>{quickLabel}</strong> {quickAnswer.summary}
           </p>
           <p>{t("introP1")}</p>
           <p className="mt-2 text-[12px] text-slate-600">{t("introP2")}</p>
@@ -883,8 +1365,9 @@ export default async function GuidePage({ params }: Props) {
 
         <div className="mb-5">
           <RailDecisionCard
-            title="Book Shinkansen ticket"
-            body="For a simple Tokyo → Kyoto / Osaka trip, choose Seat E if available and book a single Shinkansen ticket."
+            sectionLabel={ui.railDecisionLabel}
+            title={ui.bookShinkansenTitle}
+            body={ui.bookShinkansenBody}
             primaryCta={{
               label: "Klook",
               href: KLOOK_URL,
@@ -912,8 +1395,8 @@ export default async function GuidePage({ params }: Props) {
                   }
                 : undefined
             }
-            secondaryTitle="Check JR Pass options"
-            secondaryBody="If your route includes Hiroshima, multiple long JR rides, or a return to Tokyo, check JR Pass options before booking separate tickets."
+            secondaryTitle={ui.checkJrPassTitle}
+            secondaryBody={ui.checkJrPassBody}
             placement="guide_rail_decision"
             locale={locale}
             routeType="simple-shinkansen"
@@ -961,7 +1444,7 @@ export default async function GuidePage({ params }: Props) {
               {copy.whichSideH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{copy.quickLabel}</strong> {copy.whichSideQuick}
+              <strong>{quickLabel}</strong> {copy.whichSideQuick}
             </p>
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.tokyoRightH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
@@ -987,7 +1470,7 @@ export default async function GuidePage({ params }: Props) {
               {copy.lettersH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{copy.quickLabel}</strong> {copy.lettersQuick}
+              <strong>{quickLabel}</strong> {copy.lettersQuick}
             </p>
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.seatEH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
@@ -1013,7 +1496,7 @@ export default async function GuidePage({ params }: Props) {
               {copy.whenH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{copy.quickLabel}</strong> {copy.whenQuick}
+              <strong>{quickLabel}</strong> {copy.whenQuick}
             </p>
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.timeH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
@@ -1049,7 +1532,7 @@ export default async function GuidePage({ params }: Props) {
               {copy.routeH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{copy.quickLabel}</strong> {copy.routeQuick}
+              <strong>{quickLabel}</strong> {copy.routeQuick}
             </p>
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.shinFujiH3}</h3>
             <p>{t("s2P1")}</p>
@@ -1068,7 +1551,7 @@ export default async function GuidePage({ params }: Props) {
               {copy.trainTypeH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{copy.quickLabel}</strong> {copy.trainTypeQuick}
+              <strong>{quickLabel}</strong> {copy.trainTypeQuick}
             </p>
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.nozomiH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.nozomiText}</p>
@@ -1084,7 +1567,7 @@ export default async function GuidePage({ params }: Props) {
               {copy.jrPassH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{copy.quickLabel}</strong> {copy.jrPassQuick}
+              <strong>{quickLabel}</strong> {copy.jrPassQuick}
             </p>
             <p className="mb-2">{t("jrSingleLabel")}</p>
             <ul className="list-disc pl-5 space-y-1.5">
@@ -1124,7 +1607,7 @@ export default async function GuidePage({ params }: Props) {
               {copy.bookH2}
             </h2>
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{copy.quickLabel}</strong> {copy.bookQuick}
+              <strong>{quickLabel}</strong> {copy.bookQuick}
             </p>
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.jrOfficeH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">

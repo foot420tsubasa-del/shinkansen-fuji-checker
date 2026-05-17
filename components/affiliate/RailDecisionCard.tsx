@@ -20,6 +20,7 @@ type RailDecisionCardProps = {
   tertiaryTextLink?: RailCta;
   secondaryTitle: string;
   secondaryBody: string;
+  sectionLabel?: string;
   placement: AffiliateClickParams["placement"];
   locale: string;
   routeType?: string;
@@ -51,6 +52,7 @@ export function RailDecisionCard({
   tertiaryTextLink,
   secondaryTitle,
   secondaryBody,
+  sectionLabel = "Rail booking decision",
   placement,
   locale,
   routeType,
@@ -63,7 +65,7 @@ export function RailDecisionCard({
   return (
     <section className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm shadow-slate-200/70 lg:px-5">
       <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500">
-        Rail booking decision
+        {sectionLabel}
       </p>
       <div className="mt-3 grid gap-3 md:grid-cols-2">
         <ProviderChoiceCTA
