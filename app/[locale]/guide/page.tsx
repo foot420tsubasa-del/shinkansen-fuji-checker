@@ -46,7 +46,8 @@ function faqItemsToSchema(items: Array<{ q: string; a: string }>, locale?: strin
   };
 }
 
-function isDuplicateGuideFaq(item: { q: string }) {
+function isDuplicateGuideFaq(item: { q: string }, index?: number) {
+  if (typeof index === "number" && [1, 2, 5, 6].includes(index)) return true;
   const normalized = item.q.toLowerCase();
   return (
     normalized.includes("how long") ||
@@ -300,11 +301,225 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+type QuickAnswerCopy = {
+  title: string;
+  heading: string;
+  items: Array<{ bold: string; text: string }>;
+  cta: string;
+};
+
+type GuideFaqItem = { q: string; a: string };
+
+const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
+  en: {
+    title: "Quick Answer",
+    heading: "Book Seat E in standard cars. Use Seat D in Green Car.",
+    items: [
+      { bold: "Tokyo → Kyoto/Osaka:", text: "right side, Seat E." },
+      { bold: "Kyoto/Osaka → Tokyo:", text: "left side, Seat E." },
+      { bold: "Green Car:", text: "usually Seat D for the Mt. Fuji window." },
+      { bold: "Best timing:", text: "be ready around Shin-Fuji." },
+    ],
+    cta: "Open free Seat Checker",
+  },
+  "pt-BR": {
+    title: "Resposta rápida",
+    heading: "Reserve o assento E nos carros standard. Use o assento D no Green Car.",
+    items: [
+      { bold: "Tokyo → Kyoto/Osaka:", text: "lado direito, assento E." },
+      { bold: "Kyoto/Osaka → Tokyo:", text: "lado esquerdo, assento E." },
+      { bold: "Green Car:", text: "geralmente assento D para a janela do Monte Fuji." },
+      { bold: "Melhor timing:", text: "esteja pronto perto de Shin-Fuji." },
+    ],
+    cta: "Abrir verificador de assento grátis",
+  },
+  es: {
+    title: "Respuesta rápida",
+    heading: "Reserva el asiento E en coches estándar. Usa el asiento D en Green Car.",
+    items: [
+      { bold: "Tokio → Kioto/Osaka:", text: "lado derecho, asiento E." },
+      { bold: "Kioto/Osaka → Tokio:", text: "lado izquierdo, asiento E." },
+      { bold: "Green Car:", text: "normalmente asiento D para la ventana del Monte Fuji." },
+      { bold: "Mejor momento:", text: "prepárate cerca de Shin-Fuji." },
+    ],
+    cta: "Abrir verificador de asiento gratis",
+  },
+  ko: {
+    title: "빠른 답변",
+    heading: "일반석은 E석, 그린샤는 D석을 예약하세요.",
+    items: [
+      { bold: "도쿄 → 교토/오사카:", text: "오른쪽, E석." },
+      { bold: "교토/오사카 → 도쿄:", text: "왼쪽, E석." },
+      { bold: "그린샤:", text: "후지산 쪽 창가는 보통 D석입니다." },
+      { bold: "좋은 타이밍:", text: "신후지 근처에서 준비하세요." },
+    ],
+    cta: "무료 좌석 체커 열기",
+  },
+  "zh-TW": {
+    title: "快速答案",
+    heading: "普通車請選 E 座。Green Car 請選 D 座。",
+    items: [
+      { bold: "東京 → 京都/大阪：", text: "右側，E 座。" },
+      { bold: "京都/大阪 → 東京：", text: "左側，E 座。" },
+      { bold: "Green Car：", text: "富士山側窗邊通常是 D 座。" },
+      { bold: "最佳時機：", text: "接近新富士時先準備好。" },
+    ],
+    cta: "開啟免費座位檢查器",
+  },
+  "zh-CN": {
+    title: "快速答案",
+    heading: "普通车选 E 座。Green Car 选 D 座。",
+    items: [
+      { bold: "东京 → 京都/大阪：", text: "右侧，E 座。" },
+      { bold: "京都/大阪 → 东京：", text: "左侧，E 座。" },
+      { bold: "Green Car：", text: "富士山侧窗边通常是 D 座。" },
+      { bold: "最佳时机：", text: "接近新富士时提前准备。" },
+    ],
+    cta: "打开免费座位检查器",
+  },
+  fr: {
+    title: "Réponse rapide",
+    heading: "Réservez le siège E en voiture standard. Choisissez le siège D en Green Car.",
+    items: [
+      { bold: "Tokyo → Kyoto/Osaka :", text: "côté droit, siège E." },
+      { bold: "Kyoto/Osaka → Tokyo :", text: "côté gauche, siège E." },
+      { bold: "Green Car :", text: "généralement siège D pour la fenêtre côté mont Fuji." },
+      { bold: "Meilleur timing :", text: "soyez prêt autour de Shin-Fuji." },
+    ],
+    cta: "Ouvrir le vérificateur de siège gratuit",
+  },
+  de: {
+    title: "Kurzantwort",
+    heading: "Buche Sitz E im Standardwagen. Im Green Car ist meist Sitz D richtig.",
+    items: [
+      { bold: "Tokyo → Kyoto/Osaka:", text: "rechte Seite, Sitz E." },
+      { bold: "Kyoto/Osaka → Tokyo:", text: "linke Seite, Sitz E." },
+      { bold: "Green Car:", text: "meist Sitz D für das Mt.-Fuji-Fenster." },
+      { bold: "Bester Zeitpunkt:", text: "sei rund um Shin-Fuji bereit." },
+    ],
+    cta: "Kostenlosen Sitz-Checker öffnen",
+  },
+  ru: {
+    title: "Короткий ответ",
+    heading: "В обычном вагоне выбирайте место E. В Green Car обычно место D.",
+    items: [
+      { bold: "Токио → Киото/Осака:", text: "правая сторона, место E." },
+      { bold: "Киото/Осака → Токио:", text: "левая сторона, место E." },
+      { bold: "Green Car:", text: "обычно место D у окна на сторону Фудзи." },
+      { bold: "Лучший момент:", text: "будьте готовы около Shin-Fuji." },
+    ],
+    cta: "Открыть бесплатную проверку места",
+  },
+};
+
+const priorityGuideFaqByLocale: Record<string, GuideFaqItem[]> = {
+  en: [
+    { q: "Which side of the Shinkansen is Mt. Fuji on from Tokyo to Kyoto?", a: "From Tokyo to Kyoto or Osaka, Mt. Fuji is on the right side of the Shinkansen. In standard cars, choose Seat E for the Fuji-side window." },
+    { q: "Which seat letter should I book to see Mt. Fuji?", a: "Book Seat E in standard 3+2 cars. In Green Cars with a 2+2 layout, the Mt. Fuji-side window is usually Seat D." },
+    { q: "Can I see Mt. Fuji from the Nozomi Shinkansen?", a: "Yes. Nozomi does not stop at Shin-Fuji, but it still passes Mt. Fuji. From Tokyo to Kyoto or Osaka, choose the right side, Seat E." },
+    { q: "When is the best time to see Mt. Fuji from the Shinkansen?", a: "Late morning to early afternoon on a clear day often works well. In summer, morning can be better before heat haze builds up." },
+    { q: "How long can I see Mt. Fuji from the train?", a: "The main view usually lasts under a minute around Shin-Fuji. Have your camera ready before that part of the route." },
+    { q: "Is the JR Pass worth it for Tokyo to Kyoto or Osaka?", a: "For a simple Tokyo-Kyoto or Tokyo-Osaka trip, single tickets usually make more sense. Check JR Pass options if you add Hiroshima or several long-distance JR rides." },
+    { q: "Can I reserve a Fuji-side seat with oversized luggage?", a: "Yes, but reserve early if you also need oversized luggage space. Fuji-side window seats and luggage seats can both sell out." },
+    { q: "What should I do if Seat E is not available?", a: "Try another train time, or choose another right-side seat from Tokyo to Kyoto or Osaka if the seat map allows it." },
+    { q: "Should I stay near Tokyo Station before an early Shinkansen?", a: "Tokyo Station can reduce luggage stress for early trains, but Shinjuku, Ueno, and Asakusa may fit different travel styles." },
+  ],
+  "pt-BR": [
+    { q: "De que lado do Shinkansen fica o Monte Fuji de Tokyo para Kyoto?", a: "De Tokyo para Kyoto ou Osaka, o Monte Fuji fica do lado direito do Shinkansen. Nos carros standard, escolha o assento E para a janela do lado do Fuji." },
+    { q: "Qual letra de assento devo reservar para ver o Monte Fuji?", a: "Reserve o assento E nos carros standard 3+2. No Green Car 2+2, a janela do lado do Monte Fuji geralmente é o assento D." },
+    { q: "Posso ver o Monte Fuji do Shinkansen Nozomi?", a: "Sim. O Nozomi não para em Shin-Fuji, mas passa pelo Monte Fuji. De Tokyo para Kyoto ou Osaka, escolha o lado direito, assento E." },
+    { q: "Qual é o melhor horário para ver o Monte Fuji do Shinkansen?", a: "Fim da manhã até o começo da tarde, em dia claro, costuma funcionar bem. No verão, a manhã pode ser melhor antes da névoa de calor." },
+    { q: "Por quanto tempo dá para ver o Monte Fuji do trem?", a: "A vista principal geralmente dura menos de um minuto perto de Shin-Fuji. Deixe a câmera pronta antes dessa parte da rota." },
+    { q: "O JR Pass vale a pena para Tokyo a Kyoto ou Osaka?", a: "Para uma viagem simples Tokyo-Kyoto ou Tokyo-Osaka, bilhetes avulsos geralmente fazem mais sentido. Compare o JR Pass se adicionar Hiroshima ou vários trajetos JR longos." },
+    { q: "Posso reservar assento do lado do Fuji com bagagem grande?", a: "Sim, mas reserve cedo se também precisar de espaço para bagagem oversized. Assentos do lado do Fuji e vagas de bagagem podem esgotar." },
+    { q: "O que fazer se o assento E não estiver disponível?", a: "Tente outro horário ou escolha outro assento do lado direito de Tokyo para Kyoto ou Osaka se o mapa de assentos permitir." },
+    { q: "Devo ficar perto da Tokyo Station antes de um Shinkansen cedo?", a: "Tokyo Station pode reduzir o estresse com bagagem em trens cedo, mas Shinjuku, Ueno e Asakusa podem combinar melhor com outros estilos de viagem." },
+  ],
+  es: [
+    { q: "¿De qué lado del Shinkansen está el Monte Fuji de Tokio a Kioto?", a: "De Tokio a Kioto u Osaka, el Monte Fuji queda en el lado derecho del Shinkansen. En coches estándar, elige el asiento E para la ventana del lado Fuji." },
+    { q: "¿Qué letra de asiento debo reservar para ver el Monte Fuji?", a: "Reserva el asiento E en coches estándar 3+2. En Green Car 2+2, la ventana del lado del Monte Fuji suele ser el asiento D." },
+    { q: "¿Puedo ver el Monte Fuji desde el Shinkansen Nozomi?", a: "Sí. El Nozomi no se detiene en Shin-Fuji, pero pasa frente al Monte Fuji. De Tokio a Kioto u Osaka, elige el lado derecho, asiento E." },
+    { q: "¿Cuál es la mejor hora para ver el Monte Fuji desde el Shinkansen?", a: "De media mañana a primeras horas de la tarde en un día despejado suele funcionar bien. En verano, la mañana puede ser mejor antes de la bruma." },
+    { q: "¿Cuánto tiempo se ve el Monte Fuji desde el tren?", a: "La vista principal normalmente dura menos de un minuto cerca de Shin-Fuji. Ten la cámara lista antes de esa parte de la ruta." },
+    { q: "¿Vale la pena el JR Pass para Tokio a Kioto u Osaka?", a: "Para un viaje simple Tokio-Kioto o Tokio-Osaka, los billetes sueltos suelen tener más sentido. Compara el JR Pass si añades Hiroshima o varios trayectos JR largos." },
+    { q: "¿Puedo reservar un asiento del lado Fuji con equipaje grande?", a: "Sí, pero reserva pronto si también necesitas espacio para equipaje oversized. Los asientos del lado Fuji y los espacios de equipaje pueden agotarse." },
+    { q: "¿Qué hago si el asiento E no está disponible?", a: "Prueba otro horario o elige otro asiento del lado derecho de Tokio a Kioto u Osaka si el mapa lo permite." },
+    { q: "¿Debería alojarme cerca de Tokyo Station antes de un Shinkansen temprano?", a: "Tokyo Station puede reducir el estrés con equipaje en trenes tempranos, pero Shinjuku, Ueno y Asakusa pueden encajar mejor con otros estilos de viaje." },
+  ],
+  ko: [
+    { q: "도쿄에서 교토로 갈 때 후지산은 신칸센 어느 쪽에 있나요?", a: "도쿄에서 교토나 오사카로 갈 때 후지산은 신칸센 오른쪽에 있습니다. 일반석에서는 후지산 쪽 창가인 E석을 선택하세요." },
+    { q: "후지산을 보려면 어떤 좌석 문자를 예약해야 하나요?", a: "일반석 3+2 배열에서는 E석을 예약하세요. 2+2 배열의 그린샤에서는 후지산 쪽 창가가 보통 D석입니다." },
+    { q: "노조미 신칸센에서도 후지산을 볼 수 있나요?", a: "네. 노조미는 신후지역에 정차하지 않지만 후지산 앞을 지나갑니다. 도쿄에서 교토나 오사카로 갈 때는 오른쪽 E석을 선택하세요." },
+    { q: "신칸센에서 후지산을 보기 가장 좋은 시간은 언제인가요?", a: "맑은 날 늦은 오전부터 이른 오후가 대체로 좋습니다. 여름에는 열 안개가 생기기 전인 오전이 더 나을 수 있습니다." },
+    { q: "열차에서 후지산은 얼마나 오래 보이나요?", a: "신후지 근처의 주요 전망은 보통 1분 미만입니다. 그 구간 전에 카메라를 준비하세요." },
+    { q: "도쿄에서 교토나 오사카만 갈 때 JR 패스가 필요할까요?", a: "단순한 도쿄-교토 또는 도쿄-오사카 일정이라면 보통 개별 티켓이 더 합리적입니다. 히로시마나 여러 장거리 JR 이동을 추가할 때 JR 패스를 비교하세요." },
+    { q: "큰 짐이 있어도 후지산 쪽 좌석을 예약할 수 있나요?", a: "가능하지만 대형 수하물 공간도 필요하다면 일찍 예약하세요. 후지산 쪽 창가와 수하물 공간 좌석은 모두 매진될 수 있습니다." },
+    { q: "E석이 없으면 어떻게 해야 하나요?", a: "다른 시간대 열차를 확인하거나, 좌석표에서 가능하다면 도쿄에서 교토/오사카 방향의 다른 오른쪽 좌석을 선택하세요." },
+    { q: "이른 신칸센 전날에는 도쿄역 근처에 머무는 게 좋나요?", a: "도쿄역은 이른 열차와 짐 이동의 부담을 줄여줍니다. 다만 신주쿠, 우에노, 아사쿠사도 여행 스타일에 따라 더 잘 맞을 수 있습니다." },
+  ],
+  "zh-TW": [
+    { q: "從東京到京都時，富士山在新幹線哪一側？", a: "從東京前往京都或大阪時，富士山在新幹線右側。普通車請選 E 座，這是富士山側窗邊。" },
+    { q: "想看富士山應該訂哪個座位字母？", a: "普通車 3+2 座位配置請訂 E 座。Green Car 2+2 配置中，富士山側窗邊通常是 D 座。" },
+    { q: "搭 Nozomi 新幹線也能看到富士山嗎？", a: "可以。Nozomi 不停靠新富士，但仍會經過富士山。東京往京都或大阪方向請選右側 E 座。" },
+    { q: "從新幹線看富士山的最佳時間是？", a: "天氣晴朗時，上午晚些時候到下午早些時候通常較好。夏天則可能早上更好，因為熱霧還沒變重。" },
+    { q: "從列車上可以看到富士山多久？", a: "主要景色通常在新富士附近不到一分鐘。請在進入該區間前先準備好相機。" },
+    { q: "東京到京都或大阪需要 JR Pass 嗎？", a: "單純東京-京都或東京-大阪行程通常買單程票更合理。若加入廣島或多段長距離 JR，再比較 JR Pass。" },
+    { q: "有大型行李也能訂富士山側座位嗎？", a: "可以，但如果還需要大型行李空間，請提早預訂。富士山側窗邊和行李空間座位都可能售完。" },
+    { q: "如果 E 座沒有了怎麼辦？", a: "可以改查其他班次，或在座位圖允許時選擇東京往京都/大阪方向的其他右側座位。" },
+    { q: "搭早班新幹線前一晚該住東京站附近嗎？", a: "東京站能減少早班列車與行李壓力，但新宿、上野、淺草也可能更符合不同旅行風格。" },
+  ],
+  "zh-CN": [
+    { q: "从东京到京都时，富士山在新干线哪一侧？", a: "从东京前往京都或大阪时，富士山在新干线右侧。普通车请选 E 座，这是富士山侧窗边。" },
+    { q: "想看富士山应该订哪个座位字母？", a: "普通车 3+2 座位布局请订 E 座。Green Car 2+2 布局中，富士山侧窗边通常是 D 座。" },
+    { q: "坐 Nozomi 新干线也能看到富士山吗？", a: "可以。Nozomi 不停靠新富士，但仍会经过富士山。东京去京都或大阪方向请选择右侧 E 座。" },
+    { q: "从新干线看富士山的最佳时间是？", a: "天气晴朗时，上午较晚到下午较早通常比较好。夏天可能早上更好，因为热雾还没变重。" },
+    { q: "从列车上能看到富士山多久？", a: "主要景色通常在新富士附近不到一分钟。请在进入该区间前准备好相机。" },
+    { q: "东京到京都或大阪需要 JR Pass 吗？", a: "单纯东京-京都或东京-大阪行程通常买单程票更合理。如果加入广岛或多段长距离 JR，再比较 JR Pass。" },
+    { q: "有大件行李也能订富士山侧座位吗？", a: "可以，但如果还需要大件行李空间，请尽早预订。富士山侧窗边和行李空间座位都可能售罄。" },
+    { q: "如果 E 座没有了怎么办？", a: "可以查看其他班次，或在座位图允许时选择东京去京都/大阪方向的其他右侧座位。" },
+    { q: "早班新干线前一晚应该住东京站附近吗？", a: "东京站能减少早班列车和行李压力，但新宿、上野、浅草也可能更适合不同旅行风格。" },
+  ],
+  fr: [
+    { q: "De quel côté du Shinkansen voit-on le mont Fuji de Tokyo à Kyoto ?", a: "De Tokyo vers Kyoto ou Osaka, le mont Fuji est du côté droit du Shinkansen. En voiture standard, choisissez le siège E pour la fenêtre côté Fuji." },
+    { q: "Quelle lettre de siège réserver pour voir le mont Fuji ?", a: "En voiture standard 3+2, réservez le siège E. En Green Car 2+2, la fenêtre côté mont Fuji est généralement le siège D." },
+    { q: "Peut-on voir le mont Fuji depuis le Nozomi Shinkansen ?", a: "Oui. Le Nozomi ne s’arrête pas à Shin-Fuji, mais il passe devant le mont Fuji. Depuis Tokyo vers Kyoto ou Osaka, choisissez le côté droit, siège E." },
+    { q: "Quel est le meilleur moment pour voir le mont Fuji depuis le Shinkansen ?", a: "La fin de matinée ou le début d’après-midi par temps clair fonctionne souvent bien. En été, le matin peut être meilleur avant que la brume ne s’installe." },
+    { q: "Combien de temps voit-on le mont Fuji depuis le train ?", a: "La vue principale dure généralement moins d’une minute autour de Shin-Fuji. Préparez votre appareil photo avant cette zone." },
+    { q: "Le JR Pass vaut-il le coup pour Tokyo vers Kyoto ou Osaka ?", a: "Pour un simple Tokyo-Kyoto ou Tokyo-Osaka, les billets à l’unité sont généralement plus logiques. Vérifiez le JR Pass seulement si vous ajoutez Hiroshima ou plusieurs longs trajets JR." },
+    { q: "Puis-je réserver un siège côté Fuji avec de gros bagages ?", a: "Oui, mais réservez tôt si vous avez besoin d’un espace pour bagages volumineux. La disponibilité côté Fuji peut partir vite." },
+    { q: "Que faire si le siège E n’est pas disponible ?", a: "Choisissez un autre siège côté droit de Tokyo vers Kyoto/Osaka si possible, ou vérifiez un horaire voisin." },
+    { q: "Faut-il dormir près de Tokyo Station avant un Shinkansen tôt ?", a: "Tokyo Station peut réduire le stress avec les bagages, mais Shinjuku, Ueno et Asakusa peuvent mieux convenir selon votre style de voyage." },
+  ],
+  de: [
+    { q: "Auf welcher Seite des Shinkansen ist Mt. Fuji von Tokyo nach Kyoto?", a: "Von Tokyo nach Kyoto oder Osaka liegt Mt. Fuji auf der rechten Seite des Shinkansen. Im Standardwagen wähle Sitz E für das Fuji-seitige Fenster." },
+    { q: "Welchen Sitzbuchstaben soll ich für Mt. Fuji buchen?", a: "Buche Sitz E in Standardwagen mit 3+2-Anordnung. Im Green Car mit 2+2-Anordnung ist das Fuji-Fenster meistens Sitz D." },
+    { q: "Kann ich Mt. Fuji aus dem Nozomi Shinkansen sehen?", a: "Ja. Nozomi hält nicht in Shin-Fuji, fährt aber an Mt. Fuji vorbei. Von Tokyo nach Kyoto oder Osaka wähle rechts, Sitz E." },
+    { q: "Wann sieht man Mt. Fuji aus dem Shinkansen am besten?", a: "Später Vormittag bis früher Nachmittag funktioniert an klaren Tagen oft gut. Im Sommer kann der Morgen besser sein, bevor Hitzedunst entsteht." },
+    { q: "Wie lange sieht man Mt. Fuji aus dem Zug?", a: "Die wichtigste Sicht dauert rund um Shin-Fuji meist weniger als eine Minute. Halte die Kamera vorher bereit." },
+    { q: "Lohnt sich der JR Pass für Tokyo nach Kyoto oder Osaka?", a: "Für eine einfache Tokyo-Kyoto- oder Tokyo-Osaka-Reise sind Einzeltickets meist sinnvoller. Vergleiche den JR Pass, wenn du Hiroshima oder mehrere lange JR-Fahrten hinzufügst." },
+    { q: "Kann ich einen Fuji-seitigen Sitz mit großem Gepäck reservieren?", a: "Ja, aber buche früh, wenn du zusätzlich Platz für übergroßes Gepäck brauchst. Fuji-Fensterplätze und Gepäckplätze können ausverkauft sein." },
+    { q: "Was tun, wenn Sitz E nicht verfügbar ist?", a: "Prüfe eine andere Abfahrtszeit oder wähle, wenn möglich, einen anderen rechten Sitz von Tokyo nach Kyoto oder Osaka." },
+    { q: "Sollte ich vor einem frühen Shinkansen nahe Tokyo Station übernachten?", a: "Tokyo Station kann Stress mit Gepäck und frühen Zügen reduzieren. Shinjuku, Ueno und Asakusa können je nach Reisestil aber besser passen." },
+  ],
+  ru: [
+    { q: "С какой стороны синкансэна видна Фудзи по пути из Токио в Киото?", a: "Из Токио в Киото или Осаку Фудзи находится справа от синкансэна. В обычном вагоне выбирайте место E у окна на сторону Фудзи." },
+    { q: "Какую букву места выбрать, чтобы увидеть Фудзи?", a: "В обычных вагонах с компоновкой 3+2 выбирайте место E. В Green Car с компоновкой 2+2 окно на сторону Фудзи обычно место D." },
+    { q: "Можно ли увидеть Фудзи из синкансэна Nozomi?", a: "Да. Nozomi не останавливается на Shin-Fuji, но проходит мимо Фудзи. Из Токио в Киото или Осаку выбирайте правую сторону, место E." },
+    { q: "Когда лучше всего смотреть на Фудзи из синкансэна?", a: "В ясный день обычно хорошо подходит позднее утро или ранний день. Летом утро может быть лучше до появления дымки." },
+    { q: "Как долго видно Фудзи из поезда?", a: "Главный вид около Shin-Fuji обычно длится меньше минуты. Подготовьте камеру заранее." },
+    { q: "Стоит ли брать JR Pass для маршрута Токио-Киото или Осака?", a: "Для простого маршрута Токио-Киото или Токио-Осака обычно разумнее отдельные билеты. Сравните JR Pass, если добавляете Хиросиму или несколько длинных поездок JR." },
+    { q: "Можно ли забронировать место со стороны Фудзи с крупным багажом?", a: "Да, но бронируйте заранее, если нужен и отсек для крупного багажа. Места у окна на сторону Фудзи и багажные места могут закончиться." },
+    { q: "Что делать, если места E нет?", a: "Проверьте другое время отправления или выберите другое место справа из Токио в Киото или Осаку, если схема мест позволяет." },
+    { q: "Стоит ли жить рядом с Tokyo Station перед ранним синкансэном?", a: "Tokyo Station снижает стресс с багажом и ранними поездами, но Shinjuku, Ueno и Asakusa могут лучше подойти под другой стиль поездки." },
+  ],
+};
+
 export default async function GuidePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "guide" });
   const isFr = locale === "fr";
   const copy = isFr ? frGuideCopy : enGuideCopy;
+  const quickAnswer = quickAnswerCopyByLocale[locale] ?? quickAnswerCopyByLocale.en;
   const displayTitle = locale === "en"
     ? "Which Shinkansen Seat to See Mt. Fuji? Seat E, Side & Timing Guide"
     : copy.title;
@@ -330,86 +545,10 @@ export default async function GuidePage({ params }: Props) {
   const jrPassItems = t.raw("jrPassItems") as string[];
   const faqItems = t.raw("faq") as Array<{ q: string; a: string }>;
 
-  const priorityFaqItems = isFr
-    ? [
-        {
-          q: "De quel côté du Shinkansen voit-on le mont Fuji de Tokyo à Kyoto ?",
-          a: "De Tokyo vers Kyoto ou Osaka, le mont Fuji est du côté droit du Shinkansen. En voiture standard, choisissez le siège E pour la fenêtre côté Fuji.",
-        },
-        {
-          q: "Quelle lettre de siège réserver pour voir le mont Fuji ?",
-          a: "En voiture standard 3+2, réservez le siège E. En Green Car 2+2, la fenêtre côté mont Fuji est généralement le siège D.",
-        },
-        {
-          q: "Peut-on voir le mont Fuji depuis le Nozomi Shinkansen ?",
-          a: "Oui. Le Nozomi ne s’arrête pas à Shin-Fuji, mais il passe devant le mont Fuji. Depuis Tokyo vers Kyoto ou Osaka, choisissez le côté droit, siège E.",
-        },
-        {
-          q: "Quel est le meilleur moment pour voir le mont Fuji depuis le Shinkansen ?",
-          a: "La fin de matinée ou le début d’après-midi par temps clair fonctionne souvent bien. En été, le matin peut être meilleur avant que la brume ne s’installe.",
-        },
-        {
-          q: "Combien de temps voit-on le mont Fuji depuis le train ?",
-          a: "La vue principale dure généralement moins d’une minute autour de Shin-Fuji. Préparez votre appareil photo avant cette zone.",
-        },
-        {
-          q: "Le JR Pass vaut-il le coup pour Tokyo vers Kyoto ou Osaka ?",
-          a: "Pour un simple Tokyo-Kyoto ou Tokyo-Osaka, les billets à l’unité sont généralement plus logiques. Vérifiez le JR Pass seulement si vous ajoutez Hiroshima ou plusieurs longs trajets JR.",
-        },
-        {
-          q: "Puis-je réserver un siège côté Fuji avec de gros bagages ?",
-          a: "Oui, mais réservez tôt si vous avez besoin d’un espace pour bagages volumineux. La disponibilité côté Fuji peut partir vite.",
-        },
-        {
-          q: "Que faire si le siège E n’est pas disponible ?",
-          a: "Choisissez un autre siège côté droit de Tokyo vers Kyoto/Osaka si possible, ou vérifiez un horaire voisin.",
-        },
-        {
-          q: "Faut-il dormir près de Tokyo Station avant un Shinkansen tôt ?",
-          a: "Tokyo Station peut réduire le stress avec les bagages, mais Shinjuku, Ueno et Asakusa peuvent mieux convenir selon votre style de voyage.",
-        },
-      ]
-    : [
-        {
-          q: "Which side of the Shinkansen is Mt. Fuji on from Tokyo to Kyoto?",
-          a: "From Tokyo to Kyoto or Osaka, Mt. Fuji is on the right side of the Shinkansen. In standard cars, choose Seat E for the Fuji-side window.",
-        },
-        {
-          q: "Which seat letter should I book to see Mt. Fuji?",
-          a: "Book Seat E in standard 3+2 cars. In Green Cars with a 2+2 layout, the Mt. Fuji-side window is usually Seat D.",
-        },
-        {
-          q: "Can I see Mt. Fuji from the Nozomi Shinkansen?",
-          a: "Yes. Nozomi does not stop at Shin-Fuji, but it still passes Mt. Fuji. From Tokyo to Kyoto or Osaka, choose the right side, Seat E.",
-        },
-        {
-          q: "When is the best time to see Mt. Fuji from the Shinkansen?",
-          a: "Late morning to early afternoon on a clear day often works well. In summer, morning can be better before heat haze builds up.",
-        },
-        {
-          q: "How long can I see Mt. Fuji from the train?",
-          a: "The main view usually lasts under a minute around Shin-Fuji. Have your camera ready before that part of the route.",
-        },
-        {
-          q: "Is the JR Pass worth it for Tokyo to Kyoto or Osaka?",
-          a: "For a simple Tokyo-Kyoto or Tokyo-Osaka trip, single tickets usually make more sense. Check JR Pass options if you add Hiroshima or several long-distance JR rides.",
-        },
-        {
-          q: "Can I reserve a Fuji-side seat with oversized luggage?",
-          a: "Yes, but reserve early if you also need oversized luggage space. Fuji-side window seats and luggage seats can both sell out.",
-        },
-        {
-          q: "What should I do if Seat E is not available?",
-          a: "Try another train time, or choose another right-side seat from Tokyo to Kyoto or Osaka if the seat map allows it.",
-        },
-        {
-          q: "Should I stay near Tokyo Station before an early Shinkansen?",
-          a: "Tokyo Station can reduce luggage stress for early trains, but Shinjuku, Ueno, and Asakusa may fit different travel styles.",
-        },
-      ];
+  const priorityFaqItems = priorityGuideFaqByLocale[locale] ?? priorityGuideFaqByLocale.en;
   const orderedFaqItems = dedupeFaqItems([
     ...priorityFaqItems,
-    ...faqItems.filter((item) => !isDuplicateGuideFaq(item)),
+    ...faqItems.filter((item, index) => !isDuplicateGuideFaq(item, index)),
   ]);
   const faqSchemaData = faqItemsToSchema(orderedFaqItems, isFr ? "fr" : undefined);
   const articleSchemaData = isFr
@@ -704,13 +843,13 @@ export default async function GuidePage({ params }: Props) {
 
         <section className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 text-[13px] leading-relaxed text-emerald-950 shadow-sm">
           <p className="text-[11px] font-black uppercase tracking-[0.1em] text-emerald-700">
-            {copy.quickAnswerTitle}
+            {quickAnswer.title}
           </p>
           <h2 className="mt-1 text-base font-semibold text-slate-950">
-            {copy.quickAnswerHeading}
+            {quickAnswer.heading}
           </h2>
           <ul className="mt-3 space-y-2">
-            {copy.quickAnswerItems.map((item) => (
+            {quickAnswer.items.map((item) => (
               <li key={item.bold}>
                 <strong>{item.bold}</strong> {item.text}
               </li>
@@ -721,7 +860,7 @@ export default async function GuidePage({ params }: Props) {
               href="/#seat-checker"
               className="inline-flex items-center rounded-full border border-[#168a56] bg-[#168a56] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              {copy.openSeatChecker}
+              {quickAnswer.cta}
             </Link>
           </div>
         </section>
