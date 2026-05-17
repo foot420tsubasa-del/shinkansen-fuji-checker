@@ -602,10 +602,10 @@ export default async function GuidePage({ params }: Props) {
 
         <div className="mb-5">
           <RailDecisionCard
-            title="Book after checking your Fuji-side seat"
-            body="For a simple Tokyo → Kyoto / Osaka trip, a single Shinkansen ticket is usually easier. If your route includes Hiroshima, multiple long JR rides, or a return to Tokyo, check JR Pass options before booking."
+            title="Book Shinkansen ticket"
+            body="For a simple Tokyo → Kyoto / Osaka trip, choose Seat E if available and book a single Shinkansen ticket."
             primaryCta={{
-              label: "Book Shinkansen ticket",
+              label: "Klook",
               href: KLOOK_URL,
               provider: "klook",
               linkId: "shinkansenTicket",
@@ -613,7 +613,7 @@ export default async function GuidePage({ params }: Props) {
               adid: "1265303",
             }}
             secondaryCta={{
-              label: "Check JR Pass options",
+              label: "Klook",
               href: JR_PASS_URL,
               provider: "klook",
               linkId: "jrPass",
@@ -623,7 +623,7 @@ export default async function GuidePage({ params }: Props) {
             tertiaryTextLink={
               OMIO_SHINKANSEN_URL
                 ? {
-                    label: "Still planning your route? Compare trains and buses on Omio",
+                    label: "Omio",
                     href: OMIO_SHINKANSEN_URL,
                     provider: "omio",
                     linkId: "omioShinkansen",
@@ -631,6 +631,8 @@ export default async function GuidePage({ params }: Props) {
                   }
                 : undefined
             }
+            secondaryTitle="Check JR Pass options"
+            secondaryBody="If your route includes Hiroshima, multiple long JR rides, or a return to Tokyo, check JR Pass options before booking separate tickets."
             placement="guide_rail_decision"
             locale={locale}
             routeType="simple-shinkansen"
@@ -698,6 +700,7 @@ export default async function GuidePage({ params }: Props) {
               <span className="mt-0.5 block text-slate-500">
                 Add quieter east-side stops like Kiyosumi-Shirakawa, Kuramae, Oshiage, and Ryogoku.
               </span>
+              <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Open guide →</span>
             </Link>
             <Link
               href="/itineraries/7-day-first-time-japan"
@@ -707,6 +710,7 @@ export default async function GuidePage({ params }: Props) {
               <span className="mt-0.5 block text-slate-500">
                 Put the Fuji-side Shinkansen ride into a realistic Tokyo, Kyoto, and Osaka route.
               </span>
+              <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Open itinerary →</span>
             </Link>
             <Link
               href="/areas-to-stay/tokyo-first-time"
@@ -716,6 +720,7 @@ export default async function GuidePage({ params }: Props) {
               <span className="mt-0.5 block text-slate-500">
                 Compare Shinjuku, Ueno, Asakusa, Tokyo Station, and calmer east-side bases.
               </span>
+              <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Choose area →</span>
             </Link>
             <TrackedCtaLink
               href="/local-hotel-picks"
@@ -728,6 +733,7 @@ export default async function GuidePage({ params }: Props) {
             >
               <span className="block font-semibold text-slate-900">Need hotel examples?</span>
               <span className="mt-0.5 block text-slate-500">See local hotel picks.</span>
+              <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">View picks →</span>
             </TrackedCtaLink>
           </div>
         </section>
@@ -1089,13 +1095,19 @@ export default async function GuidePage({ params }: Props) {
               </p>
               <div className="space-y-2">
                 <Link href="/local-tokyo" className="block rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] transition-colors hover:bg-white">
-                  <span className="block font-semibold text-slate-900">Local Tokyo</span>
+                  <span className="block font-semibold text-slate-900">Local Tokyo neighborhoods</span>
+                  <span className="mt-0.5 block text-slate-500">Quiet east-side stops for slower Tokyo days.</span>
+                  <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Open guide →</span>
                 </Link>
                 <Link href="/itineraries/7-day-first-time-japan" className="block rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] transition-colors hover:bg-white">
-                  <span className="block font-semibold text-slate-900">7-day itinerary</span>
+                  <span className="block font-semibold text-slate-900">7-day first-time Japan itinerary</span>
+                  <span className="mt-0.5 block text-slate-500">Place Tokyo, Fuji, Kyoto, and Osaka in order.</span>
+                  <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Open itinerary →</span>
                 </Link>
                 <Link href="/areas-to-stay/tokyo-first-time" className="block rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] transition-colors hover:bg-white">
                   <span className="block font-semibold text-slate-900">Tokyo areas to stay</span>
+                  <span className="mt-0.5 block text-slate-500">Choose the best hotel base before booking.</span>
+                  <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Choose area →</span>
                 </Link>
                 <TrackedCtaLink
                   href="/local-hotel-picks"
@@ -1108,6 +1120,7 @@ export default async function GuidePage({ params }: Props) {
                 >
                   <span className="block font-semibold text-slate-900">Need hotel examples?</span>
                   <span className="mt-0.5 block text-slate-500">See local hotel picks.</span>
+                  <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">View picks →</span>
                 </TrackedCtaLink>
               </div>
             </div>

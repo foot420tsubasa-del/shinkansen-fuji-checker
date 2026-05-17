@@ -230,7 +230,7 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
         ? { label: "Klook", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "express-5", external: true, priority: "primary" }
         : null,
       omioTrainUrl
-        ? { label: "Compare on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: omioTrainLinkId, product: "route_compare", routeType: "express-5", external: true, priority: "secondary" }
+        ? { label: "Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: omioTrainLinkId, product: "route_compare", routeType: "express-5", external: true, priority: "secondary" }
         : null,
       jrPassUrl
         ? { label: "JR Pass usually not needed for this route", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "express-5", external: true, priority: "text" }
@@ -264,7 +264,7 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
         ? { label: "Klook", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "classic-7", external: true, priority: "primary" }
         : null,
       omioTrainUrl
-        ? { label: "Compare on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: omioTrainLinkId, product: "route_compare", routeType: "classic-7", external: true, priority: "secondary" }
+        ? { label: "Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: omioTrainLinkId, product: "route_compare", routeType: "classic-7", external: true, priority: "secondary" }
         : null,
       jrPassUrl
         ? { label: "Check JR Pass options if adding Hiroshima or return-to-Tokyo", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "classic-7", external: true, priority: "text" }
@@ -293,11 +293,11 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     routeId: "full-10",
     railRecommendation:
       "Because this route mixes Fuji-side travel, Hakone, and the Shinkansen to Kyoto, compare the route first. Then book the Shinkansen legs that fit your final order.",
-    railActionLabel: "Compare train routes",
+    railActionLabel: "Compare rail routes",
     railActionDescription: "Best when Fuji, Hakone, and Kyoto order are still flexible.",
     railActions: [
       omioTrainUrl
-        ? { label: "Compare on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: omioTrainLinkId, product: "route_compare", routeType: "full-10", external: true, priority: "primary" }
+        ? { label: "Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: omioTrainLinkId, product: "route_compare", routeType: "full-10", external: true, priority: "primary" }
         : null,
       shinkansenTicketUrl
         ? { label: "Klook", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "full-10", external: true, priority: "secondary" }
@@ -335,7 +335,7 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
         ? { label: "Klook", href: jrPassUrl, provider: "klook", category: "train", linkId: "jrPass", product: "jr_pass", adid: "1165791", routeType: "deep-14", external: true, priority: "primary" }
         : null,
       omioTrainUrl
-        ? { label: "Compare on Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: omioTrainLinkId, product: "route_compare", routeType: "deep-14", external: true, priority: "secondary" }
+        ? { label: "Omio", href: omioTrainUrl, provider: "omio", category: "train", linkId: omioTrainLinkId, product: "route_compare", routeType: "deep-14", external: true, priority: "secondary" }
         : null,
       shinkansenTicketUrl
         ? { label: "Book known Shinkansen leg on Klook", href: shinkansenTicketUrl, provider: "klook", category: "train", linkId: "shinkansenTicket", product: "shinkansen_ticket", adid: "1265303", routeType: "deep-14", external: true, priority: "text" }
@@ -478,6 +478,13 @@ function RouteBookingStack({
 }: RouteBookingRecommendation & { routeTitle: string; locale?: string }) {
   const railProviderActions = railActions.filter((action) => action.priority !== "text").slice(0, 2);
   const railTextActions = railActions.filter((action) => action.priority === "text");
+  const isJrPassPrimary = railActionLabel === "Check JR Pass options";
+  const primaryRailProviderActions = isJrPassPrimary
+    ? railProviderActions.filter((action) => action.product === "jr_pass")
+    : railProviderActions;
+  const secondaryRailProviderActions = isJrPassPrimary
+    ? railProviderActions.filter((action) => action.product !== "jr_pass")
+    : [];
   const t = useTranslations("planner.routeBooking.ui");
 
   return (
@@ -498,7 +505,7 @@ function RouteBookingStack({
             locale={locale}
             routeType={routeId}
             className="mt-2 border-slate-100 bg-slate-50"
-            providers={railProviderActions.map((action) => ({
+            providers={primaryRailProviderActions.map((action) => ({
               label: action.label,
               href: action.external ? action.href : undefined,
               internalLink: action.external ? undefined : action.href,
@@ -512,6 +519,29 @@ function RouteBookingStack({
               trackingHref: action.trackingHref,
             }))}
           />
+          {secondaryRailProviderActions.length > 0 ? (
+            <ProviderChoiceCTA
+              actionLabel="Compare rail routes"
+              description="Use this when the route order or transport mode is still flexible."
+              pagePath="/planner"
+              locale={locale}
+              routeType={routeId}
+              className="mt-2 border-sky-100 bg-sky-50/60"
+              providers={secondaryRailProviderActions.map((action) => ({
+                label: action.label,
+                href: action.external ? action.href : undefined,
+                internalLink: action.external ? undefined : action.href,
+                provider: action.provider ?? "other",
+                product: action.product ?? "route_compare",
+                adid: action.adid,
+                linkId: action.linkId,
+                placement: "planner_route_stack",
+                variant: action.priority,
+                category: action.category ?? "train",
+                trackingHref: action.trackingHref,
+              }))}
+            />
+          ) : null}
           {railTextActions.length > 0 ? (
             <div className="mt-2 flex flex-col gap-1">
               {railTextActions.map((action) => (

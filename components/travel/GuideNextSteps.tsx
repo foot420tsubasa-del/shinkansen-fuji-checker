@@ -7,10 +7,10 @@ export function GuideNextSteps() {
     module.id === "stay-tokyo"
       ? {
           ...module,
-          title: "Taking an early Shinkansen?",
+          title: "Areas to stay",
           description:
-            "Choose your Tokyo base before booking hotels. Tokyo Station can save time for early Kyoto/Osaka trains, while Shinjuku, Ueno, and Asakusa may fit different travel styles.",
-          tradeoff: "Internal stay-area guide only. No hotel affiliate buttons here.",
+            "Taking an early Shinkansen? Choose your Tokyo base before booking hotels. Tokyo Station can save time, while Shinjuku, Ueno, and Asakusa fit different travel styles.",
+          tradeoff: undefined,
           cta: "Choose Tokyo stay area",
         }
       : module,

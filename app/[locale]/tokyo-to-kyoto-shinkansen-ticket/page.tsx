@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, ExternalLink, Info, Train, Mountain, Luggage, MapPin } from "lucide-react";
+import { ArrowRight, Info, Train, Mountain, Luggage, MapPin } from "lucide-react";
 import Script from "next/script";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
@@ -8,8 +8,7 @@ import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { OMIO_TOKYO_KYOTO_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
-import { AFFILIATE_REL } from "@/lib/link-rel";
-import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
+import { ProviderChoiceCTA } from "@/components/affiliate/ProviderChoiceCTA";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -210,45 +209,21 @@ export default async function TokyoToKyotoTicketPage({ params }: Props) {
           <section>
             <h2 className="text-xl font-bold text-slate-950">Book your ticket</h2>
             <div className="mt-4">
-              <TrackedAffiliateLink
-                href={SHINKANSEN_TICKET_URL}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                category="train"
-                provider="klook"
-                placement="shinkansen_ticket"
+              <ProviderChoiceCTA
+                actionLabel="Book Shinkansen ticket"
+                description={
+                  OMIO_TOKYO_KYOTO_URL
+                    ? "Use Klook when you already want the Shinkansen ticket; use Omio to compare train and bus route options before booking."
+                    : "Use Klook when you already want the Shinkansen ticket."
+                }
                 pagePath="/tokyo-to-kyoto-shinkansen-ticket"
                 locale={locale}
-                label="Book Shinkansen ticket"
-                className="inline-flex items-center gap-2 rounded-[18px] border border-[#ff7a00] bg-[#fff3e7] px-5 py-3 text-sm font-bold text-[#b44b00] shadow-sm transition-colors hover:bg-white"
-              >
-                Book Shinkansen ticket
-                <ExternalLink className="h-4 w-4" />
-              </TrackedAffiliateLink>
+                providers={[
+                  { label: "Klook", href: SHINKANSEN_TICKET_URL, provider: "klook", product: "shinkansen_ticket", placement: "shinkansen_ticket", variant: "primary", category: "train" },
+                  ...(OMIO_TOKYO_KYOTO_URL ? [{ label: "Omio", href: OMIO_TOKYO_KYOTO_URL, provider: "omio" as const, product: "route_compare", placement: "train_route_comparison" as const, variant: "secondary" as const, category: "train" as const, route: "tokyo-kyoto" }] : []),
+                ]}
+              />
             </div>
-            {OMIO_TOKYO_KYOTO_URL ? (
-              <div className="mt-3">
-                <TrackedAffiliateLink
-                  href={OMIO_TOKYO_KYOTO_URL}
-                  target="_blank"
-                  rel={AFFILIATE_REL}
-                  category="train"
-                  provider="omio"
-                  placement="train_route_comparison"
-                  pagePath="/tokyo-to-kyoto-shinkansen-ticket"
-                  locale={locale}
-                  label="Compare Tokyo to Kyoto on Omio"
-                  route="tokyo-kyoto"
-                  className="inline-flex items-center gap-2 rounded-[18px] border border-indigo-700 bg-indigo-700 px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-indigo-800"
-                >
-                  Compare Tokyo to Kyoto on Omio
-                  <ExternalLink className="h-4 w-4" />
-                </TrackedAffiliateLink>
-                <p className="mt-2 text-xs leading-5 text-slate-500">
-                  Use Omio to compare train and bus route options; use Klook when you already want the Shinkansen ticket.
-                </p>
-              </div>
-            ) : null}
           </section>
 
           {/* FAQ */}

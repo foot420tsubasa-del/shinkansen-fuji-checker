@@ -343,7 +343,7 @@ export function PlanYourTripHub() {
                       ? { label: "Klook", href: shinkansenTicket, provider: "klook", product: "shinkansen_ticket", adid: "1265303", linkId: "shinkansenTicket", placement: "plan_trip_rail_showdown", variant: "primary", category: "train" }
                       : null,
                     omioRouteCompare
-                      ? { label: t("providers.omio"), href: omioRouteCompare, provider: "omio", product: "route_compare", linkId: omioRouteCompareLinkId, placement: "plan_trip_rail_showdown", variant: "secondary", category: "train" }
+                      ? { label: "Omio", href: omioRouteCompare, provider: "omio", product: "route_compare", linkId: omioRouteCompareLinkId, placement: "plan_trip_rail_showdown", variant: "secondary", category: "train" }
                       : null,
                   )}
                 />
@@ -376,7 +376,6 @@ export function PlanYourTripHub() {
                   jrPass
                     ? { label: "Klook", href: jrPass, provider: "klook", product: "jr_pass", adid: "1165791", linkId: "jrPass", placement: "plan_trip_rail_showdown", variant: "primary", category: "train" }
                     : null,
-                  { label: t("providers.readGuide"), internalLink: "/jr-pass-vs-single-ticket", provider: "other", product: "jr_pass", placement: "plan_trip_rail_showdown", variant: "secondary", category: "train" },
                 )}
               />
             </Card>

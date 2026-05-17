@@ -1,7 +1,4 @@
-import { ExternalLink } from "lucide-react";
-import { Link } from "@/i18n/navigation";
-import { AFFILIATE_REL } from "@/lib/link-rel";
-import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
+import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import type { AffiliateClickParams } from "@/lib/analytics";
 
 type RailCta = {
@@ -21,88 +18,29 @@ type RailDecisionCardProps = {
   primaryCta: RailCta;
   secondaryCta: RailCta;
   tertiaryTextLink?: RailCta;
+  secondaryTitle: string;
+  secondaryBody: string;
   placement: AffiliateClickParams["placement"];
   locale: string;
   routeType?: string;
 };
 
-function RailButton({
-  cta,
-  placement,
-  locale,
-  routeType,
-  variant,
-}: {
-  cta: RailCta;
-  placement: AffiliateClickParams["placement"];
-  locale: string;
-  routeType?: string;
-  variant: "primary" | "secondary";
-}) {
-  const classes =
-    variant === "primary"
-      ? "border-[#ff7a00] bg-[#ff7a00] text-white hover:bg-[#e66700]"
-      : cta.provider === "omio"
-        ? "border-indigo-700 bg-indigo-700 text-white hover:bg-indigo-800"
-      : "border-slate-200 bg-white text-slate-800 hover:border-slate-300 hover:bg-slate-50";
-
-  return (
-    <TrackedAffiliateLink
-      href={cta.href}
-      target="_blank"
-      rel={AFFILIATE_REL}
-      category={cta.category ?? "train"}
-      provider={cta.provider}
-      placement={placement}
-      locale={locale}
-      label={cta.label}
-      linkId={cta.linkId}
-      product={cta.product}
-      adid={cta.adid}
-      routeType={routeType}
-      className={[
-        "inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border px-4 py-2.5 text-sm font-semibold shadow-sm transition-colors",
-        classes,
-      ].join(" ")}
-    >
-      {cta.label}
-      <ExternalLink className="h-3.5 w-3.5" />
-    </TrackedAffiliateLink>
-  );
-}
-
-function RailTextLink({
-  cta,
-  placement,
-  locale,
-  routeType,
-  className = "text-slate-700 underline underline-offset-2 hover:text-slate-950",
-}: {
-  cta: RailCta;
-  placement: AffiliateClickParams["placement"];
-  locale: string;
-  routeType?: string;
-  className?: string;
-}) {
-  return (
-    <TrackedAffiliateLink
-      href={cta.href}
-      target="_blank"
-      rel={AFFILIATE_REL}
-      category={cta.category ?? "train"}
-      provider={cta.provider}
-      placement={placement}
-      locale={locale}
-      label={cta.label}
-      linkId={cta.linkId}
-      product={cta.product}
-      adid={cta.adid}
-      routeType={routeType}
-      className={["inline-flex text-xs font-semibold transition-colors", className].join(" ")}
-    >
-      {cta.label}
-    </TrackedAffiliateLink>
-  );
+function toProviderChoice(
+  cta: RailCta,
+  placement: AffiliateClickParams["placement"],
+  variant: ProviderChoiceButton["variant"],
+): ProviderChoiceButton {
+  return {
+    label: cta.label,
+    href: cta.href,
+    provider: cta.provider ?? "other",
+    product: cta.product ?? "route_compare",
+    adid: cta.adid,
+    linkId: cta.linkId,
+    placement,
+    variant,
+    category: cta.category ?? "train",
+  };
 }
 
 export function RailDecisionCard({
@@ -111,41 +49,42 @@ export function RailDecisionCard({
   primaryCta,
   secondaryCta,
   tertiaryTextLink,
+  secondaryTitle,
+  secondaryBody,
   placement,
   locale,
   routeType,
 }: RailDecisionCardProps) {
+  const shinkansenProviders = [
+    toProviderChoice(primaryCta, placement, "primary"),
+    tertiaryTextLink?.href ? toProviderChoice(tertiaryTextLink, placement, "secondary") : null,
+  ].filter((provider): provider is ProviderChoiceButton => Boolean(provider));
+
   return (
     <section className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm shadow-slate-200/70 lg:px-5">
       <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500">
         Rail booking decision
       </p>
-      <h2 className="mt-1 text-base font-semibold text-slate-950">{title}</h2>
-      <p className="mt-2 text-[13px] leading-6 text-slate-600">{body}</p>
-      <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-        <RailButton cta={primaryCta} placement={placement} locale={locale} routeType={routeType} variant="primary" />
+      <div className="mt-3 grid gap-3 md:grid-cols-2">
+        <ProviderChoiceCTA
+          actionLabel={title}
+          description={body}
+          providers={shinkansenProviders}
+          pagePath="/guide"
+          locale={locale}
+          routeType={routeType}
+          className="h-full border-orange-100 bg-orange-50/50"
+        />
+        <ProviderChoiceCTA
+          actionLabel={secondaryTitle}
+          description={secondaryBody}
+          providers={[toProviderChoice(secondaryCta, placement, "primary")]}
+          pagePath="/guide"
+          locale={locale}
+          routeType={routeType}
+          className="h-full border-emerald-100 bg-emerald-50/50"
+        />
       </div>
-      <div className="mt-3">
-        <RailTextLink cta={secondaryCta} placement={placement} locale={locale} routeType={routeType} />
-      </div>
-      {tertiaryTextLink?.href ? (
-        tertiaryTextLink.external ?? true ? (
-          <RailTextLink
-            cta={tertiaryTextLink}
-            placement={placement}
-            locale={locale}
-            routeType={routeType}
-            className="mt-2 text-slate-500 underline underline-offset-2 hover:text-slate-800"
-          />
-        ) : (
-          <Link
-            href={tertiaryTextLink.href}
-            className="mt-2 inline-flex text-xs font-semibold text-slate-500 underline underline-offset-2 hover:text-slate-800"
-          >
-            {tertiaryTextLink.label}
-          </Link>
-        )
-      ) : null}
     </section>
   );
 }

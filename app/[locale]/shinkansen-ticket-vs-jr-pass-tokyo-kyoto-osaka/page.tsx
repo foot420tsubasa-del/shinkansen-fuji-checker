@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, ExternalLink, Info, Train, Mountain, Calculator } from "lucide-react";
+import { ArrowRight, Info, Train, Mountain, Calculator } from "lucide-react";
 import Script from "next/script";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -9,8 +9,7 @@ import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { JR_PASS_URL, OMIO_SHINKANSEN_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
-import { AFFILIATE_REL } from "@/lib/link-rel";
-import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
+import { ProviderChoiceCTA } from "@/components/affiliate/ProviderChoiceCTA";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -229,71 +228,25 @@ export default async function PassVsTicketTKOPage({ params }: Props) {
           <section>
             <h2 className="text-xl font-bold text-slate-950">Booking options</h2>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
-              <TrackedAffiliateLink
-                href={SHINKANSEN_TICKET_URL}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                category="train"
-                provider="klook"
-                placement="jrpass_booking_options"
+              <ProviderChoiceCTA
+                actionLabel={bookShinkansenTicketLabel}
+                description="Single ticket — simplest for this route."
                 pagePath="/shinkansen-ticket-vs-jr-pass-tokyo-kyoto-osaka"
                 locale={locale}
-                label="Book Shinkansen ticket"
-                linkId="shinkansenTicket"
-                product="shinkansen_ticket"
-                adid="1265303"
-                className="flex items-center justify-between rounded-[18px] border border-[#ff7a00] bg-[#fff3e7] p-4 text-sm shadow-sm transition-colors hover:bg-white"
-              >
-                <span>
-                  <span className="block font-bold text-[#b44b00]">{bookShinkansenTicketLabel}</span>
-                  <span className="mt-0.5 block text-xs text-[#b44b00]/70">Single ticket — simplest for this route.</span>
-                </span>
-                <ExternalLink className="h-4 w-4 shrink-0 text-[#b44b00]" />
-              </TrackedAffiliateLink>
-              <TrackedAffiliateLink
-                href={JR_PASS_URL}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                category="train"
-                provider="klook"
-                placement="jrpass_booking_options"
+                providers={[
+                  { label: "Klook", href: SHINKANSEN_TICKET_URL, provider: "klook", product: "shinkansen_ticket", adid: "1265303", linkId: "shinkansenTicket", placement: "jrpass_booking_options", variant: "primary", category: "train" },
+                  ...(OMIO_SHINKANSEN_URL ? [{ label: "Omio", href: OMIO_SHINKANSEN_URL, provider: "omio" as const, product: "route_compare", linkId: "omioShinkansen", placement: "jrpass_booking_options" as const, variant: "secondary" as const, category: "train" as const, route: "tokyo-kyoto-osaka" }] : []),
+                ]}
+              />
+              <ProviderChoiceCTA
+                actionLabel={checkJrPassOptionsLabel}
+                description="Only if adding Hiroshima or a return leg."
                 pagePath="/shinkansen-ticket-vs-jr-pass-tokyo-kyoto-osaka"
                 locale={locale}
-                label="Check JR Pass options"
-                linkId="jrPass"
-                product="jr_pass"
-                adid="1165791"
-                className="flex items-center justify-between rounded-[18px] border border-[#ff7a00] bg-[#fff3e7] p-4 text-sm shadow-sm transition-colors hover:bg-white"
-              >
-                <span>
-                  <span className="block font-bold text-[#b44b00]">{checkJrPassOptionsLabel}</span>
-                  <span className="mt-0.5 block text-xs text-[#b44b00]/70">Only if adding Hiroshima or return leg.</span>
-                </span>
-                <ExternalLink className="h-4 w-4 shrink-0 text-[#b44b00]" />
-              </TrackedAffiliateLink>
-              {OMIO_SHINKANSEN_URL ? (
-                <TrackedAffiliateLink
-                  href={OMIO_SHINKANSEN_URL}
-                  target="_blank"
-                  rel={AFFILIATE_REL}
-                  category="train"
-                  provider="omio"
-                  placement="jrpass_booking_options"
-                  pagePath="/shinkansen-ticket-vs-jr-pass-tokyo-kyoto-osaka"
-                  locale={locale}
-                  label="Compare train routes on Omio"
-                  linkId="omioShinkansen"
-                  product="route_compare"
-                  route="tokyo-kyoto-osaka"
-                  className="flex items-center justify-between rounded-[18px] border border-indigo-700 bg-indigo-700 p-4 text-sm shadow-sm transition-colors hover:bg-indigo-800"
-                >
-                  <span>
-                    <span className="block font-bold text-white">Compare train routes on Omio</span>
-                    <span className="mt-0.5 block text-xs text-white/75">Route comparison for trains and buses.</span>
-                  </span>
-                  <ExternalLink className="h-4 w-4 shrink-0 text-white" />
-                </TrackedAffiliateLink>
-              ) : null}
+                providers={[
+                  { label: "Klook", href: JR_PASS_URL, provider: "klook", product: "jr_pass", adid: "1165791", linkId: "jrPass", placement: "jrpass_booking_options", variant: "primary", category: "train" },
+                ]}
+              />
             </div>
           </section>
 

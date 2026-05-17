@@ -21,6 +21,7 @@ export type ProviderChoiceButton = {
   variant: ProviderChoiceVariant;
   category?: AffiliateClickParams["category"];
   trackingHref?: string;
+  route?: string;
 };
 
 type ProviderChoiceCTAProps = {
@@ -143,6 +144,7 @@ export function ProviderChoiceCTA({
                   adid: provider.adid,
                   area,
                   city,
+                  route: provider.route,
                   route_type: routeType,
                 })
               }
