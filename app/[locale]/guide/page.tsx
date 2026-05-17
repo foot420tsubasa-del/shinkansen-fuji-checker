@@ -7,12 +7,12 @@ import { KlookCTA } from "../components/KlookCTA";
 import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
 import { KLOOK_URL, ESIM_URL, JR_PASS_URL, OMIO_SHINKANSEN_URL } from "@/src/affiliateLinks";
-import { GuideNextSteps } from "@/components/travel/GuideNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
+import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { RailDecisionCard } from "@/components/affiliate/RailDecisionCard";
 
 const SITE_URL = "https://fujiseat.com";
@@ -500,6 +500,113 @@ export default async function GuidePage({ params }: Props) {
     </section>
   );
 
+  const renderShinkansenDaySetup = () => (
+    <section className="mb-5 rounded-2xl border border-emerald-100 bg-emerald-50/60 px-4 py-4 shadow-sm shadow-emerald-100/60 lg:px-5">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">
+        Shinkansen day setup
+      </p>
+      <div className="mt-2 grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
+        <div>
+          <h2 className="text-base font-semibold text-slate-950">
+            Choose where to stay before your Shinkansen day
+          </h2>
+          <p className="mt-2 text-[13px] leading-6 text-slate-600">
+            If you are taking an early Shinkansen to Kyoto or Osaka, your Tokyo base matters. Tokyo Station can reduce luggage stress, while Shinjuku, Ueno, and Asakusa may fit different travel styles.
+          </p>
+        </div>
+        <TrackedInternalLink
+          href="/areas-to-stay/tokyo-first-time"
+          sourcePage="/guide"
+          placement="guide_shinkansen_day_setup"
+          label="Choose Tokyo stay area"
+          locale={locale}
+          className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+        >
+          Choose Tokyo stay area
+        </TrackedInternalLink>
+      </div>
+    </section>
+  );
+
+  const renderSeatGuides = () => (
+    <section className="rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-4 shadow-sm">
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-sky-700">
+        Seat guides by topic
+      </p>
+      <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
+        <Link href="/shinkansen-seat-e" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
+          <span className="block font-semibold text-slate-900">Seat E guide</span>
+          <span className="mt-0.5 block text-slate-500">Learn when Seat E is the Mt. Fuji-side window seat.</span>
+        </Link>
+        <Link href="/tokyo-to-kyoto-mt-fuji-seat" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
+          <span className="block font-semibold text-slate-900">Tokyo → Kyoto Mt. Fuji seat</span>
+          <span className="mt-0.5 block text-slate-500">The simple right-side / Seat E answer for Tokyo to Kyoto or Osaka.</span>
+        </Link>
+        <Link href="/kyoto-to-tokyo-mt-fuji-seat" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
+          <span className="block font-semibold text-slate-900">Kyoto → Tokyo Mt. Fuji seat</span>
+          <span className="mt-0.5 block text-slate-500">Which side and seat to choose on the return trip.</span>
+        </Link>
+        <Link href="/shinkansen-seat-letters" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
+          <span className="block font-semibold text-slate-900">Seat letters explained</span>
+          <span className="mt-0.5 block text-slate-500">Understand A, B, C, D, E, window and aisle seats.</span>
+        </Link>
+      </div>
+    </section>
+  );
+
+  const renderContinuePlanning = () => (
+    <section className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm shadow-slate-200/70">
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+        Continue planning
+      </p>
+      <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
+        <Link
+          href="/local-tokyo"
+          className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[12px] transition-colors hover:bg-white"
+        >
+          <span className="block font-semibold text-slate-900">Local Tokyo neighborhoods</span>
+          <span className="mt-0.5 block text-slate-500">
+            Add quieter east-side stops like Kiyosumi-Shirakawa, Kuramae, Oshiage, and Ryogoku.
+          </span>
+          <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Open guide →</span>
+        </Link>
+        <Link
+          href="/itineraries/7-day-first-time-japan"
+          className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[12px] transition-colors hover:bg-white"
+        >
+          <span className="block font-semibold text-slate-900">7-day first-time Japan itinerary</span>
+          <span className="mt-0.5 block text-slate-500">
+            Put the Fuji-side Shinkansen ride into a realistic Tokyo, Kyoto, and Osaka route.
+          </span>
+          <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Open itinerary →</span>
+        </Link>
+        <Link
+          href="/areas-to-stay/tokyo-first-time"
+          className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[12px] transition-colors hover:bg-white"
+        >
+          <span className="block font-semibold text-slate-900">Tokyo areas to stay</span>
+          <span className="mt-0.5 block text-slate-500">
+            Compare Shinjuku, Ueno, Asakusa, Tokyo Station, and calmer east-side bases.
+          </span>
+          <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Choose area →</span>
+        </Link>
+        <TrackedCtaLink
+          href="/local-hotel-picks"
+          placement="guide_local_hotel_picks"
+          label="See local hotel picks"
+          pagePath="/guide"
+          locale={locale}
+          category="hotel"
+          className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[12px] transition-colors hover:bg-white"
+        >
+          <span className="block font-semibold text-slate-900">Need hotel examples?</span>
+          <span className="mt-0.5 block text-slate-500">See local hotel picks.</span>
+          <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">View picks →</span>
+        </TrackedCtaLink>
+      </div>
+    </section>
+  );
+
   return (
     <main className="page-shell flex min-h-screen flex-col text-slate-900">
       <Script
@@ -575,31 +682,6 @@ export default async function GuidePage({ params }: Props) {
           <p className="mt-2 text-[12px] text-slate-600">{t("introP2")}</p>
         </section>
 
-        {/* Quick navigation — mobile only (desktop version in sidebar) */}
-        <div className="lg:hidden">
-        <section className="mb-5 bg-white border border-slate-200 rounded-2xl px-4 py-3 shadow-sm shadow-slate-200/70">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-2.5">
-            {copy.quickNav}
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <Link
-              href="/#seat-checker"
-              className="inline-flex items-center rounded-full border border-[#168a56] bg-[#168a56] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
-            >
-              Open free Seat Checker
-            </Link>
-          </div>
-          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-[12px] font-semibold">
-            <Link href="/planner" className="text-slate-500 underline underline-offset-2 hover:text-slate-800">
-              Need a full route? {t("commandCenterBtn")} →
-            </Link>
-            <a href="#tldr" className="text-slate-500 underline underline-offset-2 hover:text-slate-800">
-              {copy.readFullGuide}
-            </a>
-          </div>
-        </section>
-        </div>
-
         <div className="mb-5">
           <RailDecisionCard
             title="Book Shinkansen ticket"
@@ -639,6 +721,8 @@ export default async function GuidePage({ params }: Props) {
           />
         </div>
 
+        {renderShinkansenDaySetup()}
+
         {/* TL;DR */}
         <section id="tldr" className="mb-5 text-[13px] lg:text-sm leading-relaxed text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 lg:px-6 lg:py-4 shadow-sm shadow-slate-200/70">
           <h2 className="text-sm font-semibold text-slate-900 mb-2">
@@ -652,92 +736,6 @@ export default async function GuidePage({ params }: Props) {
             ))}
           </ul>
         </section>
-
-        {/* Seat guides — mobile only (desktop version in sidebar) */}
-        <div className="lg:hidden">
-        <section className="mb-5 rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-4 shadow-sm">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-sky-700">
-            Seat guides by topic
-          </p>
-          <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
-            <Link href="/shinkansen-seat-e" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
-              <span className="block font-semibold text-slate-900">Seat E guide</span>
-              <span className="mt-0.5 block text-slate-500">Learn when Seat E is the Mt. Fuji-side window seat.</span>
-            </Link>
-            <Link href="/tokyo-to-kyoto-mt-fuji-seat" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
-              <span className="block font-semibold text-slate-900">Tokyo → Kyoto Mt. Fuji seat</span>
-              <span className="mt-0.5 block text-slate-500">The simple right-side / Seat E answer for Tokyo to Kyoto or Osaka.</span>
-            </Link>
-            <Link href="/kyoto-to-tokyo-mt-fuji-seat" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
-              <span className="block font-semibold text-slate-900">Kyoto → Tokyo Mt. Fuji seat</span>
-              <span className="mt-0.5 block text-slate-500">Which side and seat to choose on the return trip.</span>
-            </Link>
-            <Link href="/shinkansen-seat-letters" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
-              <span className="block font-semibold text-slate-900">Seat letters explained</span>
-              <span className="mt-0.5 block text-slate-500">Understand A, B, C, D, E, window and aisle seats.</span>
-            </Link>
-          </div>
-        </section>
-        </div>
-
-        {/* Next steps + Trip Picks — visible on all screen sizes, in main column */}
-        <div className="mb-6 lg:mb-8">
-          <GuideNextSteps />
-        </div>
-
-        {/* Continue planning — mobile only (desktop version in sidebar) */}
-        <div className="lg:hidden">
-        <section className="mb-6 rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm shadow-slate-200/70">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
-            Continue planning
-          </p>
-          <div className="mt-3 grid gap-2.5">
-            <Link
-              href="/local-tokyo"
-              className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[12px] transition-colors hover:bg-white"
-            >
-              <span className="block font-semibold text-slate-900">Local Tokyo neighborhoods</span>
-              <span className="mt-0.5 block text-slate-500">
-                Add quieter east-side stops like Kiyosumi-Shirakawa, Kuramae, Oshiage, and Ryogoku.
-              </span>
-              <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Open guide →</span>
-            </Link>
-            <Link
-              href="/itineraries/7-day-first-time-japan"
-              className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[12px] transition-colors hover:bg-white"
-            >
-              <span className="block font-semibold text-slate-900">7-day first-time Japan itinerary</span>
-              <span className="mt-0.5 block text-slate-500">
-                Put the Fuji-side Shinkansen ride into a realistic Tokyo, Kyoto, and Osaka route.
-              </span>
-              <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Open itinerary →</span>
-            </Link>
-            <Link
-              href="/areas-to-stay/tokyo-first-time"
-              className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[12px] transition-colors hover:bg-white"
-            >
-              <span className="block font-semibold text-slate-900">Tokyo areas to stay</span>
-              <span className="mt-0.5 block text-slate-500">
-                Compare Shinjuku, Ueno, Asakusa, Tokyo Station, and calmer east-side bases.
-              </span>
-              <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Choose area →</span>
-            </Link>
-            <TrackedCtaLink
-              href="/local-hotel-picks"
-              placement="guide_local_hotel_picks"
-              label="See local hotel picks"
-              pagePath="/guide"
-              locale={locale}
-              category="hotel"
-              className="rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-3 text-[12px] transition-colors hover:bg-white"
-            >
-              <span className="block font-semibold text-slate-900">Need hotel examples?</span>
-              <span className="mt-0.5 block text-slate-500">See local hotel picks.</span>
-              <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">View picks →</span>
-            </TrackedCtaLink>
-          </div>
-        </section>
-        </div>
 
         {/* Jump to section — mobile only */}
         <div className="mb-5 text-[12px] text-slate-500 leading-relaxed lg:hidden">
@@ -1020,6 +1018,10 @@ export default async function GuidePage({ params }: Props) {
             </div>
           </section>
 
+          {renderSeatGuides()}
+
+          {renderContinuePlanning()}
+
           <ShareThisPage
             title="Which Shinkansen Seat to See Mt. Fuji?"
             placement="guide_footer"
@@ -1033,24 +1035,6 @@ export default async function GuidePage({ params }: Props) {
         {/* Desktop sidebar */}
         <aside className="hidden lg:block">
           <div className="sticky top-6 space-y-4">
-            {/* Actions */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-3">
-                Start here
-              </p>
-              <div className="flex flex-col gap-2">
-                <Link
-                  href="/#seat-checker"
-                  className="inline-flex items-center justify-center rounded-xl border border-[#168a56] bg-[#168a56] px-3.5 py-2 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
-                >
-                  Open free Seat Checker
-                </Link>
-                <Link href="/planner" className="text-center text-[11px] font-semibold text-slate-500 underline underline-offset-2 transition-colors hover:text-slate-800">
-                  Need a full route? {t("commandCenterBtn")} →
-                </Link>
-              </div>
-            </div>
-
             {/* Table of contents */}
             <nav className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
               <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-3">
@@ -1066,64 +1050,6 @@ export default async function GuidePage({ params }: Props) {
                 <li><a href="#faq" className="text-slate-600 hover:text-slate-900 transition-colors">{copy.jumpFaq}</a></li>
               </ul>
             </nav>
-
-            {/* Seat guides */}
-            <div className="rounded-2xl border border-sky-100 bg-sky-50/70 p-4 shadow-sm">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-sky-700 mb-3">
-                Seat guides by topic
-              </p>
-              <div className="space-y-2">
-                <Link href="/shinkansen-seat-e" className="block rounded-xl border border-sky-100 bg-white px-3 py-2.5 text-[12px] transition-colors hover:bg-sky-50">
-                  <span className="block font-semibold text-slate-900">Seat E guide</span>
-                </Link>
-                <Link href="/tokyo-to-kyoto-mt-fuji-seat" className="block rounded-xl border border-sky-100 bg-white px-3 py-2.5 text-[12px] transition-colors hover:bg-sky-50">
-                  <span className="block font-semibold text-slate-900">Tokyo → Kyoto seat</span>
-                </Link>
-                <Link href="/kyoto-to-tokyo-mt-fuji-seat" className="block rounded-xl border border-sky-100 bg-white px-3 py-2.5 text-[12px] transition-colors hover:bg-sky-50">
-                  <span className="block font-semibold text-slate-900">Kyoto → Tokyo seat</span>
-                </Link>
-                <Link href="/shinkansen-seat-letters" className="block rounded-xl border border-sky-100 bg-white px-3 py-2.5 text-[12px] transition-colors hover:bg-sky-50">
-                  <span className="block font-semibold text-slate-900">Seat letters explained</span>
-                </Link>
-              </div>
-            </div>
-
-            {/* Continue planning */}
-            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-3">
-                Continue planning
-              </p>
-              <div className="space-y-2">
-                <Link href="/local-tokyo" className="block rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] transition-colors hover:bg-white">
-                  <span className="block font-semibold text-slate-900">Local Tokyo neighborhoods</span>
-                  <span className="mt-0.5 block text-slate-500">Quiet east-side stops for slower Tokyo days.</span>
-                  <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Open guide →</span>
-                </Link>
-                <Link href="/itineraries/7-day-first-time-japan" className="block rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] transition-colors hover:bg-white">
-                  <span className="block font-semibold text-slate-900">7-day first-time Japan itinerary</span>
-                  <span className="mt-0.5 block text-slate-500">Place Tokyo, Fuji, Kyoto, and Osaka in order.</span>
-                  <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Open itinerary →</span>
-                </Link>
-                <Link href="/areas-to-stay/tokyo-first-time" className="block rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] transition-colors hover:bg-white">
-                  <span className="block font-semibold text-slate-900">Tokyo areas to stay</span>
-                  <span className="mt-0.5 block text-slate-500">Choose the best hotel base before booking.</span>
-                  <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">Choose area →</span>
-                </Link>
-                <TrackedCtaLink
-                  href="/local-hotel-picks"
-                  placement="guide_local_hotel_picks"
-                  label="See local hotel picks"
-                  pagePath="/guide"
-                  locale={locale}
-                  category="hotel"
-                  className="block rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[12px] transition-colors hover:bg-white"
-                >
-                  <span className="block font-semibold text-slate-900">Need hotel examples?</span>
-                  <span className="mt-0.5 block text-slate-500">See local hotel picks.</span>
-                  <span className="mt-2 inline-flex text-[11px] font-semibold text-slate-600">View picks →</span>
-                </TrackedCtaLink>
-              </div>
-            </div>
 
           </div>
         </aside>
