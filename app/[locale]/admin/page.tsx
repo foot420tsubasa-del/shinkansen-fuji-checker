@@ -108,6 +108,15 @@ const EMPTY_FORM: FormState = {
 const DEFAULT_KLOOK_ADID = "1165791";
 
 type SetupStatus = "done" | "needs-adid" | "needs-url";
+type MissingTransportAffiliate = {
+  id: string;
+  provider: "klook" | "omio";
+  label: string;
+  product: string;
+  targetUrl: string;
+  usedOn: string;
+  note: string;
+};
 
 function getStatus(entry: LinkEntry): SetupStatus {
   if (entry.directUrl) return "done";
@@ -125,6 +134,99 @@ const STATUS_CONFIG = {
 
 const AGODA_HOTEL_MAP_DISABLED_REASON =
   "Currently disabled / not used. Agoda Hotel Map embeds can include fixed checkIn / checkOut dates, external scripts, limited UI control, and extra page weight.";
+
+const RECOMMENDED_TRANSPORT_AFFILIATE_LINKS: MissingTransportAffiliate[] = [
+  {
+    id: "omioJapanAirportTransfer",
+    provider: "omio",
+    label: "Compare Japan airport transfers on Omio",
+    product: "airport_route_compare",
+    targetUrl: "https://www.omio.com/airport-japan-transfers",
+    usedOn: "Transfers, Airport route comparison",
+    note: "Omioの空港送迎/交通比較。affiliate/deeplink化して directUrl に貼る。",
+  },
+  {
+    id: "hanedaLimousineBus",
+    provider: "klook",
+    label: "Haneda Airport Limousine Bus",
+    product: "airport_bus",
+    targetUrl: "https://www.klook.com/activity/150434-haneda-airport-limousine-bus-tokyo/",
+    usedOn: "Transfers",
+    note: "羽田バス専用。Narita Limousine Bus URLを流用しない。",
+  },
+  {
+    id: "jrHaruka",
+    provider: "klook",
+    label: "JR Haruka Airport Express",
+    product: "airport_train",
+    targetUrl: "https://www.klook.com/activity/18400-jr-haruka-airport-express-train-tickets-osaka/",
+    usedOn: "Transfers",
+    note: "KIX⇔KyotoのHaruka用。affiliate URL化後にCTA表示対象。",
+  },
+  {
+    id: "kixLimousineBus",
+    provider: "klook",
+    label: "Kansai Airport Limousine Bus",
+    product: "airport_bus",
+    targetUrl: "https://www.klook.com/activity/18203-kansai-airport-one-way-transfer-osaka/",
+    usedOn: "Transfers",
+    note: "KIX bus専用。Narita Limousine Bus URLを流用しない。",
+  },
+  {
+    id: "nankaiRapit",
+    provider: "klook",
+    label: "Nankai Rapi:t",
+    product: "airport_train",
+    targetUrl: "https://www.klook.com/activity/599-kansai-airport-namba-train-ticket-osaka/",
+    usedOn: "Transfers",
+    note: "KIX⇔NambaのNankai Rapi:t用。",
+  },
+  {
+    id: "naritaPrivateTransfer",
+    provider: "klook",
+    label: "Narita private airport transfer",
+    product: "airport_private_transfer",
+    targetUrl: "https://www.klook.com/airport-transfers/service/nrt-narita-international-airport/",
+    usedOn: "Transfers",
+    note: "成田private transfer専用。既存airportTransferはN'EXなので使わない。",
+  },
+  {
+    id: "hanedaPrivateTransfer",
+    provider: "klook",
+    label: "Haneda private airport transfer",
+    product: "airport_private_transfer",
+    targetUrl: "https://www.klook.com/airport-transfers/service/hnd-tokyo-haneda-international-airport/",
+    usedOn: "Transfers",
+    note: "羽田private transfer専用。",
+  },
+  {
+    id: "airportPrivateTransfer",
+    provider: "klook",
+    label: "Airport private transfer",
+    product: "airport_private_transfer",
+    targetUrl: "https://www.klook.com/airport-transfers/",
+    usedOn: "Transfers",
+    note: "汎用fallback。できれば空港別URLを優先。",
+  },
+  {
+    id: "klookTokyoTransport",
+    provider: "klook",
+    label: "Tokyo transport on Klook",
+    product: "transport",
+    targetUrl: "https://www.klook.com/destination/c28-tokyo/4-transport/",
+    usedOn: "Transfers",
+    note: "東京transportカテゴリfallback。個別商品URLがない場合のみ検討。",
+  },
+  {
+    id: "klookAirportTransfers",
+    provider: "klook",
+    label: "Klook airport transfers",
+    product: "airport_private_transfer",
+    targetUrl: "https://www.klook.com/airport-transfers/",
+    usedOn: "Transfers",
+    note: "Klook airport transfer hub fallback。個別空港URLがない場合のみ検討。",
+  },
+];
 
 const AGODA_PRIORITY_HOTEL_PICKS = [
   "Hotel Granvia Kyoto",
@@ -447,6 +549,22 @@ export default function AdminPage() {
     setEditingId(null);
     setShowAdd(true);
     setForm(EMPTY_FORM);
+  };
+
+  const startAddTransportAffiliate = (item: MissingTransportAffiliate) => {
+    setEditingId(null);
+    setShowAdd(true);
+    setKlookUrlInput("");
+    setForm({
+      id: item.id,
+      label: item.label,
+      provider: item.provider,
+      adid: item.provider === "klook" ? "" : "",
+      klookPath: "",
+      directUrl: "",
+      usedOn: item.usedOn,
+    });
+    setTab("todo");
   };
 
   const cancel = () => {
@@ -799,6 +917,7 @@ export default function AdminPage() {
 
   const todoItems = links.filter((l) => getStatus(l) !== "done");
   const doneItems = links.filter((l) => getStatus(l) === "done");
+  const missingTransportAffiliateItems = RECOMMENDED_TRANSPORT_AFFILIATE_LINKS.filter((item) => !links.some((link) => link.id === item.id && getStatus(link) === "done"));
   const tripHotelDoneCount = hotelLinks.filter((h) => h.tripUrl.trim()).length;
   const hotelPickLinkUrlCount = hotelPickLinks.filter((pick) => pick.tripUrl.trim()).length;
   const stayAreaMapActiveCount = stayAreaMaps.filter((map) => map.status === "active").length;
@@ -2106,6 +2225,10 @@ export default function AdminPage() {
               </p>
               <p className="text-[10px] font-medium text-red-600">URL 未設定</p>
             </div>
+            <div className="rounded-xl border border-rose-200 bg-rose-50 p-3 text-center">
+              <p className="text-2xl font-bold text-rose-700">{missingTransportAffiliateItems.length}</p>
+              <p className="text-[10px] font-medium text-rose-600">空港送迎 未設定</p>
+            </div>
             <div className="rounded-xl border border-blue-200 bg-blue-50 p-3 text-center">
               <p className="text-2xl font-bold text-blue-700">{tripHotelDoneCount}/{hotelLinks.length}</p>
               <p className="text-[10px] font-medium text-blue-600">Tripホテル設定</p>
@@ -2155,7 +2278,7 @@ export default function AdminPage() {
             onClick={() => setTab("todo")}
             className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "todo" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
           >
-            やることリスト ({todoItems.length})
+            やることリスト ({todoItems.length + missingTransportAffiliateItems.length})
           </button>
           <button
             onClick={() => setTab("all")}
@@ -2628,7 +2751,64 @@ export default function AdminPage() {
 
         {!loading && tab === "todo" && (
           <div className="space-y-6">
-            {todoItems.length === 0 ? (
+            {showAdd && editingId === null && form.id ? (
+              <div>{formUI}</div>
+            ) : null}
+
+            <div className="rounded-2xl border border-rose-200 bg-rose-50/70 p-5 shadow-sm">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <p className="text-sm font-bold text-slate-950">空港送迎 affiliate 未設定</p>
+                  <p className="mt-1 text-xs leading-5 text-slate-600">
+                    Canonical target は分かっているが、admin に affiliate/deeplink URL が未登録のものです。raw URL はCTAに出しません。
+                  </p>
+                </div>
+                <span className="rounded-full bg-white px-3 py-1 text-xs font-bold text-rose-700">
+                  {missingTransportAffiliateItems.length} 件
+                </span>
+              </div>
+
+              {missingTransportAffiliateItems.length === 0 ? (
+                <div className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-xs font-semibold text-emerald-800">
+                  空港送迎の推奨 affiliate はすべて設定済みです。
+                </div>
+              ) : (
+                <div className="mt-4 grid gap-3">
+                  {missingTransportAffiliateItems.map((item) => {
+                    const style = ps(item.provider);
+                    return (
+                      <div key={item.id} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                        <div className="flex flex-wrap items-start justify-between gap-3">
+                          <div className="min-w-0 flex-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <code className="rounded-md bg-slate-100 px-2 py-1 text-[11px] font-bold text-slate-800">{item.id}</code>
+                              <span className={`rounded-md border px-1.5 py-0.5 text-[9px] font-bold ${style.badge}`}>{style.label}</span>
+                              <span className="rounded-md bg-rose-100 px-1.5 py-0.5 text-[9px] font-bold text-rose-700">未設定</span>
+                              <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-600">{item.product}</span>
+                            </div>
+                            <p className="mt-2 text-sm font-semibold text-slate-950">{item.label}</p>
+                            <p className="mt-1 text-xs leading-5 text-slate-600">{item.note}</p>
+                            <div className="mt-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2">
+                              <p className="text-[10px] font-bold uppercase tracking-[0.08em] text-slate-400">Canonical target</p>
+                              <p className="mt-1 break-all text-[11px] leading-5 text-slate-700">{item.targetUrl}</p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => startAddTransportAffiliate(item)}
+                            className="rounded-lg bg-slate-950 px-3 py-2 text-[11px] font-semibold text-white hover:bg-slate-800"
+                          >
+                            入力フォームにセット
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {todoItems.length === 0 && missingTransportAffiliateItems.length === 0 ? (
               <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-8 text-center">
                 <p className="text-lg font-bold text-emerald-800">すべて設定済み！</p>
                 <p className="mt-1 text-xs text-emerald-600">全リンクが正しく設定されています。</p>

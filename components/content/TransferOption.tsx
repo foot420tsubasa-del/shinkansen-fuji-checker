@@ -1,8 +1,9 @@
 "use client";
 
-import { ArrowRight, Check, Clock, Luggage, Wallet, X, Zap } from "lucide-react";
-import { AFFILIATE_REL } from "@/lib/link-rel";
-import { getProviderFromHref, trackAffiliateClick } from "@/lib/analytics";
+import { Check, Clock, Luggage, Wallet, Zap } from "lucide-react";
+import { TransferOptionCard } from "@/components/airport/AirportTransferUi";
+import type { AffiliateClickParams } from "@/lib/analytics";
+import { getAffUrl } from "@/src/affiliateLinks";
 
 type TransferOptionProps = {
   name: string;
@@ -17,113 +18,204 @@ type TransferOptionProps = {
   bookingLabel?: string;
   locale?: string;
   pagePath?: string;
+  placement?: AffiliateClickParams["placement"];
 };
 
+const omioJapanTrainUrl = getAffUrl("omioJapanTrain");
+const omioJapanBusUrl = getAffUrl("omioJapanBus");
+const omioJapanAirportTransferUrl = getAffUrl("omioJapanAirportTransfer");
+const legacyAirportTransferUrl = getAffUrl("airportTransfer");
+const naritaLimousineBusUrl = getAffUrl("naritaLimousineBus") ?? getAffUrl("limousineBus");
+const hanedaLimousineBusUrl = getAffUrl("hanedaLimousineBus");
+const kixLimousineBusUrl = getAffUrl("kixLimousineBus");
+const jrHarukaUrl = getAffUrl("jrHaruka");
+const nankaiRapitUrl = getAffUrl("nankaiRapit");
+const naritaPrivateTransferUrl = getAffUrl("naritaPrivateTransfer");
+const hanedaPrivateTransferUrl = getAffUrl("hanedaPrivateTransfer");
+const airportPrivateTransferUrl = getAffUrl("airportPrivateTransfer");
+
+function normalizedName(name: string) {
+  return name.toLowerCase();
+}
+
+function isPrivateTransfer(name: string) {
+  const text = normalizedName(name);
+  return text.includes("private") || text.includes("taxi");
+}
+
+function isAirportBus(name: string) {
+  const text = normalizedName(name);
+  return text.includes("bus") || text.includes("limousine");
+}
+
+function isAirportTrain(name: string) {
+  const text = normalizedName(name);
+  return (
+    text.includes("narita express") ||
+    text.includes("n'ex") ||
+    text.includes("skyliner") ||
+    text.includes("monorail") ||
+    text.includes("haruka") ||
+    text.includes("nankai") ||
+    text.includes("keisei") ||
+    text.includes("keikyu") ||
+    text.includes("jr")
+  );
+}
+
+function actionTitleForOption(name: string) {
+  const text = normalizedName(name);
+  if (text.includes("private")) return "Private airport transfer";
+  if (text.includes("narita express") || text.includes("n'ex")) return "Book or compare Narita Express";
+  if (text.includes("skyliner")) return "Book or compare Skyliner";
+  if (text.includes("haruka")) return "Book or compare JR Haruka";
+  if (isAirportBus(name)) return "Book or compare airport bus";
+  return "Book or compare this route";
+}
+
+function transportTypeForOption(name: string) {
+  if (isPrivateTransfer(name)) return "private_transfer";
+  if (isAirportBus(name)) return "airport_bus";
+  if (isAirportTrain(name)) return "airport_train";
+  return undefined;
+}
+
+function omioForOption(name: string) {
+  if (isPrivateTransfer(name)) return null;
+  if (isAirportBus(name)) {
+    if (omioJapanAirportTransferUrl) return { href: omioJapanAirportTransferUrl, linkId: "omioJapanAirportTransfer", transportType: "airport_route_compare" };
+    return omioJapanBusUrl ? { href: omioJapanBusUrl, linkId: "omioJapanBus", transportType: "airport_bus" } : null;
+  }
+  if (isAirportTrain(name)) {
+    if (omioJapanAirportTransferUrl) return { href: omioJapanAirportTransferUrl, linkId: "omioJapanAirportTransfer", transportType: "airport_route_compare" };
+    return omioJapanTrainUrl ? { href: omioJapanTrainUrl, linkId: "omioJapanTrain", transportType: "airport_train" } : null;
+  }
+  return null;
+}
+
+function linkIdForKlookOption(name: string, pagePath?: string) {
+  const text = normalizedName(name);
+  if (text.includes("narita express") || text.includes("n'ex")) return "nex";
+  if (text.includes("skyliner")) return "keiseiSkyliner";
+  if (text.includes("haruka")) return "jrHaruka";
+  if (text.includes("nankai") || text.includes("rapi")) return "nankaiRapit";
+  if (isPrivateTransfer(name)) {
+    if (pagePath?.includes("narita")) return "naritaPrivateTransfer";
+    if (pagePath?.includes("haneda")) return "hanedaPrivateTransfer";
+    return "airportPrivateTransfer";
+  }
+  if (text.includes("limousine") || text.includes("bus")) {
+    if (pagePath?.includes("narita")) return "naritaLimousineBus";
+    if (pagePath?.includes("haneda")) return "hanedaLimousineBus";
+    if (pagePath?.includes("kansai") || pagePath?.includes("kyoto") || pagePath?.includes("osaka")) return "kixLimousineBus";
+    return undefined;
+  }
+  if (text.includes("monorail")) return "hanedaMonorail";
+  return undefined;
+}
+
+function configuredKlookHrefForOption(name: string, pagePath?: string) {
+  const text = normalizedName(name);
+  if (text.includes("haruka")) return jrHarukaUrl;
+  if (text.includes("nankai") || text.includes("rapi")) return nankaiRapitUrl;
+  if (isPrivateTransfer(name)) {
+    if (pagePath?.includes("narita")) return naritaPrivateTransferUrl ?? airportPrivateTransferUrl;
+    if (pagePath?.includes("haneda")) return hanedaPrivateTransferUrl ?? airportPrivateTransferUrl;
+    return airportPrivateTransferUrl;
+  }
+  if (isAirportBus(name)) {
+    if (pagePath?.includes("narita")) return naritaLimousineBusUrl;
+    if (pagePath?.includes("haneda")) return hanedaLimousineBusUrl;
+    if (pagePath?.includes("kansai") || pagePath?.includes("kyoto") || pagePath?.includes("osaka")) return kixLimousineBusUrl;
+  }
+  return undefined;
+}
+
+function validKlookBookingLink(name: string, href?: string, pagePath?: string) {
+  const configuredHref = configuredKlookHrefForOption(name, pagePath);
+  if (configuredHref) return configuredHref;
+  if (!href) return undefined;
+  if (isPrivateTransfer(name) && href === legacyAirportTransferUrl) return undefined;
+  if (isAirportBus(name) && href === naritaLimousineBusUrl && !pagePath?.includes("narita")) return undefined;
+  return href;
+}
+
 const badgeConfig = {
-  fastest: { label: "Fastest", icon: Zap, className: "border-amber-200 bg-amber-50 text-amber-700" },
-  easiest: { label: "Easiest", icon: Check, className: "border-emerald-200 bg-emerald-50 text-emerald-700" },
-  cheapest: { label: "Cheapest", icon: Wallet, className: "border-sky-200 bg-sky-50 text-sky-700" },
+  fastest: { label: "Fastest", icon: Zap },
+  easiest: { label: "Easiest with luggage", icon: Check },
+  cheapest: { label: "Cheapest", icon: Wallet },
 };
+
+function bestForCopy(badge: TransferOptionProps["badge"], luggageFriendly: boolean, lateOk: boolean) {
+  if (badge === "fastest") return "Best for travelers who want the quickest route after landing.";
+  if (badge === "cheapest") return "Best if you are traveling light and want to keep costs low.";
+  if (luggageFriendly && lateOk) return "Best for heavy luggage, families, or tired late arrivals.";
+  if (luggageFriendly) return "Best if luggage ease matters more than raw speed.";
+  return "Best when you want a simpler arrival choice.";
+}
 
 export function TransferOption({
   name, badge, duration, cost, pros, cons,
-  luggageFriendly, lateOk, bookingLink, bookingLabel = "Book ticket", locale = "en", pagePath,
+  luggageFriendly, lateOk, bookingLink, bookingLabel = "Book ticket", locale = "en", pagePath, placement = "airport_transfer",
 }: TransferOptionProps) {
   const b = badgeConfig[badge];
   const BadgeIcon = b.icon;
+  const effectiveBookingLink = validKlookBookingLink(name, bookingLink, pagePath);
+  const omio = effectiveBookingLink ? omioForOption(name) : null;
+  const transportType = transportTypeForOption(name);
+  const providerCtas = effectiveBookingLink
+    ? [
+        {
+          href: effectiveBookingLink,
+          label: "Klook",
+          pagePath,
+          locale,
+          provider: "klook" as const,
+          linkId: linkIdForKlookOption(name, pagePath),
+          product: isPrivateTransfer(name) ? "airport_private_transfer" : isAirportBus(name) ? "airport_bus" : "airport_train",
+          transportType,
+        },
+        ...(omio
+          ? [
+              {
+                href: omio.href,
+                label: "Omio",
+                pagePath,
+                locale,
+                provider: "omio" as const,
+                linkId: omio.linkId,
+                product: "airport_route_compare",
+                transportType: omio.transportType,
+              },
+            ]
+          : []),
+      ]
+    : [];
 
   return (
-    <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <h3 className="text-lg font-semibold text-slate-950">{name}</h3>
-          <div className="mt-2 flex flex-wrap items-center gap-3 text-sm">
-            <span className="flex items-center gap-1 font-semibold text-slate-900">
-              <Clock className="h-3.5 w-3.5 text-slate-400" />
-              {duration}
-            </span>
-            <span className="flex items-center gap-1 font-semibold text-slate-900">
-              <Wallet className="h-3.5 w-3.5 text-slate-400" />
-              {cost}
-            </span>
-          </div>
-        </div>
-        <span className={["inline-flex shrink-0 items-center gap-1 rounded-full border px-2.5 py-1 text-[10px] font-semibold", b.className].join(" ")}>
-          <BadgeIcon className="h-3 w-3" />
-          {b.label}
-        </span>
-      </div>
-
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <div>
-          <p className="mb-2 text-[10px] font-semibold uppercase text-emerald-600">Pros</p>
-          <ul className="space-y-1.5">
-            {pros.map((p) => (
-              <li key={p} className="flex items-start gap-2 text-xs leading-5 text-slate-700">
-                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-500" />
-                {p}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <p className="mb-2 text-[10px] font-semibold uppercase text-red-500">Cons</p>
-          <ul className="space-y-1.5">
-            {cons.map((c) => (
-              <li key={c} className="flex items-start gap-2 text-xs leading-5 text-slate-700">
-                <X className="mt-0.5 h-3.5 w-3.5 shrink-0 text-red-400" />
-                {c}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div className="mt-4 flex flex-wrap items-center gap-3">
-        <span className={["inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold",
-          luggageFriendly
-            ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-            : "border-slate-200 bg-slate-50 text-slate-500",
-        ].join(" ")}>
-          <Luggage className="h-3 w-3" />
-          {luggageFriendly ? "Luggage friendly" : "Luggage difficult"}
-        </span>
-        <span className={["inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[10px] font-semibold",
-          lateOk
-            ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-            : "border-amber-200 bg-amber-50 text-amber-700",
-        ].join(" ")}>
-          <Clock className="h-3 w-3" />
-          {lateOk ? "Late arrival OK" : "Ends early evening"}
-        </span>
-      </div>
-
-      {bookingLink ? (
-        <a
-          href={bookingLink}
-          target="_blank"
-          rel={AFFILIATE_REL}
-          onClick={() =>
-            trackAffiliateClick({
-              category: "transfer",
-              provider: getProviderFromHref(bookingLink),
-              placement: "airport_transfer",
-              page_path: pagePath,
-              locale,
-              href: bookingLink,
-              label: bookingLabel,
-            })
-          }
-          className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#e66700] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
-        >
-          {bookingLabel}
-          <ArrowRight className="h-3.5 w-3.5" />
-        </a>
-      ) : (
-        <span className="mt-4 inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-semibold text-slate-600">
-          {bookingLabel}
-        </span>
-      )}
-    </div>
+    <TransferOptionCard
+      title={name}
+      time={duration}
+      price={cost}
+      bestFor={bestForCopy(badge, luggageFriendly, lateOk)}
+      pros={pros}
+      cons={cons}
+      tags={[
+        { label: b.label, tone: badge === "fastest" ? "amber" : badge === "easiest" ? "green" : "slate", icon: <BadgeIcon className="h-3 w-3" /> },
+        { label: luggageFriendly ? "Luggage friendly" : "Luggage difficult", tone: luggageFriendly ? "green" : "slate", icon: <Luggage className="h-3 w-3" /> },
+        { label: lateOk ? "Late arrival OK" : "Ends early evening", tone: lateOk ? "green" : "amber", icon: <Clock className="h-3 w-3" /> },
+      ]}
+      ctas={providerCtas}
+      actionTitle={actionTitleForOption(name)}
+      helperText={
+        providerCtas.length > 1
+          ? "Use Klook to book a specific ticket. Use Omio to compare trains, buses, and route options."
+          : bookingLink
+            ? "Use Klook to book this transport product."
+            : undefined
+      }
+      note={effectiveBookingLink ? undefined : isPrivateTransfer(name) ? "Pre-book if needed" : bookingLabel}
+      placement={placement}
+    />
   );
 }

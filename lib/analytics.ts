@@ -63,6 +63,7 @@ export type AffiliateClickParams = {
   hotel_name?: string;
   route?: string;
   route_type?: string;
+  transport_type?: string;
 };
 
 export function getProviderFromHref(href: string): AffiliateClickParams["provider"] {
@@ -105,14 +106,14 @@ export function trackAffiliateClick(params: AffiliateClickParams) {
       destination_type: registryMeta.destination_type,
       link_source: registryMeta.link_source,
       area: params.area,
-      city: params.city,
+      city: params.city ?? registryMeta.city,
       itinerary_slug: params.itinerary_slug,
       day_number: params.day_number,
       cta_type: params.cta_type,
       hotel_name: params.hotel_name,
       route: params.route,
       route_type: params.route_type,
-      transport_type: "beacon",
+      transport_type: params.transport_type ?? registryMeta.transport_type,
     },
   });
 }

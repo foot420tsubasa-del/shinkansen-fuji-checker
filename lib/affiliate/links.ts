@@ -12,9 +12,14 @@ export type AffiliateDestinationType =
   | "hotel"
   | "esim"
   | "airport"
+  | "airport_transfer"
+  | "rail"
+  | "bus"
+  | "private_transfer"
   | "activity"
   | "insurance"
-  | "route_compare";
+  | "route_compare"
+  | "transport";
 
 export type AffiliatePlacement =
   | "home_seat_result"
@@ -37,6 +42,12 @@ export type AffiliatePlacement =
   | "hotel_pick"
   | "itinerary_day_card"
   | "airport_transfer"
+  | "airport_hub_continue_planning"
+  | "airport_route_option"
+  | "airport_route_next_steps"
+  | "airport_route_esim"
+  | "airport_route_transfer_booking"
+  | "airport_route_compare"
   | "local_tokyo"
   | "footer"
   | "next_steps"
@@ -87,6 +98,8 @@ export type AffiliateRegistryEntry = {
   destinationType: AffiliateDestinationType;
   defaultPlacement: AffiliatePlacement;
   linkSource: string;
+  transportType?: string;
+  city?: string;
   notes?: string;
 };
 
@@ -140,10 +153,15 @@ function providerFromConfig(provider: string): AffiliateProvider {
 
 function destinationTypeForLink(id: string, link: ManagedAffiliateLink): AffiliateDestinationType {
   const text = `${id} ${link.label} ${link.usedOn.join(" ")}`.toLowerCase();
-  if (text.includes("omio") || text.includes("route comparison") || text.includes("bus")) return "route_compare";
+  if (id.startsWith("omio")) return "route_compare";
+  if (id === "airportPrivateTransfer" || id === "naritaPrivateTransfer" || id === "hanedaPrivateTransfer" || id === "klookAirportTransfers") return "private_transfer";
+  if (id === "airportTransfer") return "airport";
+  if (id === "limousineBus") return "bus";
   if (text.includes("jr pass")) return "pass";
   if (text.includes("shinkansen") || text.includes("ticket") || text.includes("rail")) return "ticket";
   if (text.includes("esim")) return "esim";
+  if (text.includes("private transfer")) return "private_transfer";
+  if (text.includes("bus")) return "bus";
   if (text.includes("airport") || text.includes("narita") || text.includes("haneda") || text.includes("transfer")) return "airport";
   if (text.includes("insurance")) return "insurance";
   if (text.includes("hotel")) return "hotel";
@@ -151,11 +169,23 @@ function destinationTypeForLink(id: string, link: ManagedAffiliateLink): Affilia
 }
 
 function productForLink(id: string, link: ManagedAffiliateLink, destinationType: AffiliateDestinationType) {
-  if (id.startsWith("omio")) return "route_compare";
+  if (id.startsWith("omio")) {
+    if (id.toLowerCase().includes("shinkansen")) return "shinkansen_compare";
+    if (id.toLowerCase().includes("train")) return "train_compare";
+    return "route_compare";
+  }
+  if (id === "nex" || id === "skyliner" || id === "hanedaMonorail") return "airport_train";
+  if (id === "limousineBus") return "airport_bus";
+  if (id === "airportTransfer") return "airport_train";
+  if (id === "airportPrivateTransfer" || id === "naritaPrivateTransfer" || id === "hanedaPrivateTransfer" || id === "klookAirportTransfers") return "airport_private_transfer";
+  if (id === "hanedaLimousineBus" || id === "kixLimousineBus") return "airport_bus";
+  if (id === "jrHaruka" || id === "nankaiRapit" || id === "keiseiSkyliner") return "airport_train";
   if (destinationType === "ticket") return "shinkansen_ticket";
   if (destinationType === "pass") return "jr_pass";
   if (destinationType === "esim") return "esim";
-  if (destinationType === "airport") return "airport_transfer";
+  if (destinationType === "airport" || destinationType === "airport_transfer") return "airport_transfer";
+  if (destinationType === "bus") return "airport_bus";
+  if (destinationType === "private_transfer") return "airport_private_transfer";
   if (destinationType === "insurance") return "travel_insurance";
   if (destinationType === "hotel") return "hotel";
   return "activity";
@@ -166,9 +196,25 @@ function defaultPlacementForLink(id: string, destinationType: AffiliateDestinati
   if (destinationType === "ticket") return "shinkansen_ticket";
   if (destinationType === "pass") return "jr_pass_comparison";
   if (destinationType === "hotel") return "stay_area_hotel_card";
-  if (destinationType === "airport") return "airport_transfer";
+  if (destinationType === "airport" || destinationType === "airport_transfer" || destinationType === "bus" || destinationType === "private_transfer") return "airport_route_option";
   if (destinationType === "esim") return "home_essentials";
   return "guide_article_inline";
+}
+
+function transportTypeForLink(id: string, link: ManagedAffiliateLink) {
+  const text = `${id} ${link.label}`.toLowerCase();
+  if (text.includes("omio")) return "route_compare";
+  if (text.includes("private transfer")) return "private_transfer";
+  if (text.includes("bus")) return "airport_bus";
+  if (text.includes("monorail") || text.includes("skyliner") || text.includes("narita express") || text.includes("n'ex") || text.includes("haruka") || text.includes("nankai")) return "airport_train";
+  return undefined;
+}
+
+function cityForLink(id: string, link: ManagedAffiliateLink) {
+  const text = `${id} ${link.label}`.toLowerCase();
+  if (text.includes("kansai") || text.includes("haruka") || text.includes("osaka") || text.includes("kyoto")) return "kansai";
+  if (text.includes("narita") || text.includes("haneda") || text.includes("tokyo")) return "tokyo";
+  return undefined;
 }
 
 function normalizeUrl(url: string | null | undefined) {
@@ -191,6 +237,8 @@ function buildManagedAffiliateEntries(): AffiliateRegistryEntry[] {
         destinationType,
         defaultPlacement: defaultPlacementForLink(id, destinationType),
         linkSource: "data/affiliate-links.json",
+        transportType: transportTypeForLink(id, link),
+        city: cityForLink(id, link),
       } satisfies AffiliateRegistryEntry;
     })
     .filter((entry): entry is AffiliateRegistryEntry => Boolean(entry));
@@ -331,9 +379,11 @@ export function resolveAffiliateClickMetadata(params: {
     provider: params.provider ?? entry?.provider,
     product: entry?.product,
     adid: entry?.adid,
-    destination_type: entry?.destinationType,
-    link_source: entry?.linkSource,
-    default_placement: entry?.defaultPlacement,
-    label: params.label ?? entry?.label,
+      destination_type: entry?.destinationType,
+      link_source: entry?.linkSource,
+      transport_type: entry?.transportType,
+      city: entry?.city,
+      default_placement: entry?.defaultPlacement,
+      label: params.label ?? entry?.label,
   };
 }

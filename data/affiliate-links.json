@@ -309,8 +309,28 @@
       "Transfer"
     ]
   },
+  "keiseiSkyliner": {
+    "label": "Keisei Skyliner",
+    "provider": "klook",
+    "adid": "1263641",
+    "klookPath": "activity/1371-skyliner-discount-ticket-keisei-narita-airport/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263641&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F1410-skyliner-tokyo%2F",
+    "usedOn": [
+      "Transfer"
+    ]
+  },
   "limousineBus": {
     "label": "Airport Limousine Bus",
+    "provider": "klook",
+    "adid": "1263642",
+    "klookPath": "activity/8088-airport-limousine-bus-ticket-narita-haneda/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263642&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F2274-narita-airport-limousine-bus-tokyo%2F",
+    "usedOn": [
+      "Transfer"
+    ]
+  },
+  "naritaLimousineBus": {
+    "label": "Narita Airport Limousine Bus",
     "provider": "klook",
     "adid": "1263642",
     "klookPath": "activity/8088-airport-limousine-bus-ticket-narita-haneda/",
@@ -520,6 +540,96 @@
     "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1263782&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F46604-universal-studios-japan-e-ticket-osaka-qr-code-direct-entry%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3D451e509d96",
     "usedOn": [
       "Command Center"
+    ]
+  },
+  "hanedaLimousineBus": {
+    "label": "Haneda Airport Limousine Bus",
+    "provider": "klook",
+    "adid": "1280077",
+    "klookPath": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1280077&k_site=https%3A%2F%2Fwww.klook.com%2Factivity%2F150434-haneda-airport-limousine-bus-tokyo%2F",
+    "usedOn": [
+      "Transfers"
+    ]
+  },
+  "jrHaruka": {
+    "label": "JR Haruka Airport Express",
+    "provider": "klook",
+    "adid": "1280078",
+    "klookPath": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1280078&k_site=https%3A%2F%2Fwww.klook.com%2Factivity%2F18400-jr-haruka-airport-express-train-tickets-osaka%2F",
+    "usedOn": [
+      "Transfers"
+    ]
+  },
+  "kixLimousineBus": {
+    "label": "Kansai Airport Limousine Bus",
+    "provider": "klook",
+    "adid": "1280079",
+    "klookPath": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1280079&k_site=https%3A%2F%2Fwww.klook.com%2Factivity%2F18203-kansai-airport-one-way-transfer-osaka%2F",
+    "usedOn": [
+      "Transfers"
+    ]
+  },
+  "nankaiRapit": {
+    "label": "Nankai Rapi:t",
+    "provider": "klook",
+    "adid": "1280080",
+    "klookPath": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1280080&k_site=https%3A%2F%2Fwww.klook.com%2Factivity%2F599-kansai-airport-namba-train-ticket-osaka%2F",
+    "usedOn": [
+      "Transfers"
+    ]
+  },
+  "naritaPrivateTransfer": {
+    "label": "Narita private airport transfer",
+    "provider": "klook",
+    "adid": "1280081",
+    "klookPath": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1280081&k_site=https%3A%2F%2Fwww.klook.com%2Fairport-transfers%2Fservice%2Fnrt-narita-international-airport%2F",
+    "usedOn": [
+      "Transfers"
+    ]
+  },
+  "hanedaPrivateTransfer": {
+    "label": "Haneda private airport transfer",
+    "provider": "klook",
+    "adid": "1280082",
+    "klookPath": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1280082&k_site=https%3A%2F%2Fwww.klook.com%2Fairport-transfers%2Fservice%2Fhnd-tokyo-haneda-international-airport%2F",
+    "usedOn": [
+      "Transfers"
+    ]
+  },
+  "airportPrivateTransfer": {
+    "label": "Airport private transfer",
+    "provider": "klook",
+    "adid": "1280083",
+    "klookPath": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1280083&k_site=https%3A%2F%2Fwww.klook.com%2Fairport-transfers%2F",
+    "usedOn": [
+      "Transfers"
+    ]
+  },
+  "klookTokyoTransport": {
+    "label": "Tokyo transport on Klook",
+    "provider": "klook",
+    "adid": "1280084",
+    "klookPath": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1280084&k_site=https%3A%2F%2Fwww.klook.com%2Fdestination%2Fc28-tokyo%2F4-transport%2F",
+    "usedOn": [
+      "Transfers"
+    ]
+  },
+  "klookAirportTransfers": {
+    "label": "Klook airport transfers",
+    "provider": "klook",
+    "adid": "1280085",
+    "klookPath": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1280085&k_site=https%3A%2F%2Fwww.klook.com%2Fairport-transfers%2F",
+    "usedOn": [
+      "Transfers"
     ]
   }
 }
