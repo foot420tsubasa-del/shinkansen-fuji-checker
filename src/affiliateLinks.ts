@@ -23,6 +23,21 @@ export type LinkConfig = {
   klookPath: string;
   directUrl: string;
   usedOn: string[];
+  product?: string;
+  routeFrom?: string;
+  routeTo?: string;
+  routeType?: string;
+  targetUrl?: string;
+  affiliateUrl?: string;
+  urlStatus?: "ready" | "needs_affiliate_conversion" | "needs_city_id" | "fallback_only" | "do_not_render";
+  destinationType?: string;
+  defaultPlacement?: string;
+  linkSource?: string;
+  city?: string;
+  country?: string;
+  adminTitle?: string;
+  adminDescription?: string;
+  adminNotes?: string;
 };
 
 export const AFFILIATE_LINKS: Record<string, LinkConfig> = linkData as Record<string, LinkConfig>;
@@ -31,10 +46,23 @@ export function getAffUrl(linkId: string): string | null {
   const link = AFFILIATE_LINKS[linkId];
   if (!link) return null;
   if (link.directUrl.trim()) return link.directUrl;
+  if (link.affiliateUrl?.trim()) return link.affiliateUrl;
   if (link.provider === "klook" && link.klookPath.trim()) {
     return klookAff(link.klookPath, link.adid);
   }
   return null;
+}
+
+export function getReadyAffUrl(linkId: string, options: { allowFallback?: boolean } = {}): string | null {
+  const link = AFFILIATE_LINKS[linkId];
+  if (!link) return null;
+  const status = link.urlStatus;
+  if (status && status !== "ready" && !(options.allowFallback && status === "fallback_only")) return null;
+  return getAffUrl(linkId);
+}
+
+export function getAffiliateConfig(linkId: string): LinkConfig | undefined {
+  return AFFILIATE_LINKS[linkId];
 }
 
 export function requireAffUrl(linkId: string): string {

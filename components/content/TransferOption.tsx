@@ -3,7 +3,7 @@
 import { Check, Clock, Luggage, Wallet, Zap } from "lucide-react";
 import { TransferOptionCard } from "@/components/airport/AirportTransferUi";
 import type { AffiliateClickParams } from "@/lib/analytics";
-import { getAffUrl } from "@/src/affiliateLinks";
+import { getAffUrl, getReadyAffUrl } from "@/src/affiliateLinks";
 
 type TransferOptionProps = {
   name: string;
@@ -21,9 +21,6 @@ type TransferOptionProps = {
   placement?: AffiliateClickParams["placement"];
 };
 
-const omioJapanTrainUrl = getAffUrl("omioJapanTrain");
-const omioJapanBusUrl = getAffUrl("omioJapanBus");
-const omioJapanAirportTransferUrl = getAffUrl("omioJapanAirportTransfer");
 const legacyAirportTransferUrl = getAffUrl("airportTransfer");
 const naritaLimousineBusUrl = getAffUrl("naritaLimousineBus") ?? getAffUrl("limousineBus");
 const hanedaLimousineBusUrl = getAffUrl("hanedaLimousineBus");
@@ -80,17 +77,30 @@ function transportTypeForOption(name: string) {
   return undefined;
 }
 
-function omioForOption(name: string) {
+const routeOmioIds: Record<string, string> = {
+  "/airport-transfers/narita-to-shinjuku": "omioNaritaAirportToShinjuku",
+  "/airport-transfers/narita-to-tokyo-station": "omioNaritaAirportToTokyo",
+  "/airport-transfers/narita-to-ueno": "omioNaritaAirportToUeno",
+  "/airport-transfers/narita-to-asakusa": "omioNaritaAirportToAsakusa",
+  "/airport-transfers/haneda-to-shinjuku": "omioHanedaAirportToShinjuku",
+  "/airport-transfers/haneda-to-tokyo-station": "omioHanedaAirportToTokyo",
+  "/airport-transfers/haneda-to-ueno": "omioHanedaAirportToUeno",
+  "/airport-transfers/haneda-to-asakusa": "omioHanedaAirportToAsakusa",
+  "/airport-transfers/kansai-airport-to-kyoto": "omioKansaiAirportToKyoto",
+  "/airport-transfers/kyoto-to-kansai-airport": "omioKansaiAirportToKyoto",
+  "/airport-transfers/kansai-airport-to-namba": "omioKansaiAirportToNamba",
+  "/airport-transfers/kansai-airport-to-umeda": "omioKansaiAirportToOsaka",
+  "/airport-transfers/osaka-to-kansai-airport": "omioKansaiAirportToOsaka",
+};
+
+function omioForOption(name: string, pagePath?: string) {
   if (isPrivateTransfer(name)) return null;
-  if (isAirportBus(name)) {
-    if (omioJapanAirportTransferUrl) return { href: omioJapanAirportTransferUrl, linkId: "omioJapanAirportTransfer", transportType: "airport_route_compare" };
-    return omioJapanBusUrl ? { href: omioJapanBusUrl, linkId: "omioJapanBus", transportType: "airport_bus" } : null;
-  }
-  if (isAirportTrain(name)) {
-    if (omioJapanAirportTransferUrl) return { href: omioJapanAirportTransferUrl, linkId: "omioJapanAirportTransfer", transportType: "airport_route_compare" };
-    return omioJapanTrainUrl ? { href: omioJapanTrainUrl, linkId: "omioJapanTrain", transportType: "airport_train" } : null;
-  }
-  return null;
+  if (!isAirportBus(name) && !isAirportTrain(name)) return null;
+  const linkId = pagePath ? routeOmioIds[pagePath] : undefined;
+  if (!linkId) return null;
+  const href = getReadyAffUrl(linkId);
+  if (!href) return null;
+  return { href, linkId, transportType: "airport_route_compare" };
 }
 
 function linkIdForKlookOption(name: string, pagePath?: string) {
@@ -161,7 +171,7 @@ export function TransferOption({
   const b = badgeConfig[badge];
   const BadgeIcon = b.icon;
   const effectiveBookingLink = validKlookBookingLink(name, bookingLink, pagePath);
-  const omio = effectiveBookingLink ? omioForOption(name) : null;
+  const omio = effectiveBookingLink ? omioForOption(name, pagePath) : null;
   const transportType = transportTypeForOption(name);
   const providerCtas = effectiveBookingLink
     ? [

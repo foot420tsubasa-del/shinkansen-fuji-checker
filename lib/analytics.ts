@@ -64,6 +64,9 @@ export type AffiliateClickParams = {
   route?: string;
   route_type?: string;
   transport_type?: string;
+  route_from?: string;
+  route_to?: string;
+  url_status?: string;
 };
 
 export function getProviderFromHref(href: string): AffiliateClickParams["provider"] {
@@ -114,6 +117,9 @@ export function trackAffiliateClick(params: AffiliateClickParams) {
       route: params.route,
       route_type: params.route_type,
       transport_type: params.transport_type ?? registryMeta.transport_type,
+      route_from: params.route_from ?? registryMeta.route_from,
+      route_to: params.route_to ?? registryMeta.route_to,
+      url_status: params.url_status ?? registryMeta.url_status,
     },
   });
 }

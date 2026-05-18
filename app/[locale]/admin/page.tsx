@@ -725,13 +725,18 @@ export default function AdminPage() {
     }
     setSaving(true);
     try {
+      const existingEntry = links.find((entry) => entry.id === id);
+      const existingConfig: Partial<LinkConfig> = existingEntry ? { ...existingEntry } : {};
+      delete (existingConfig as Partial<LinkConfig> & { id?: string }).id;
       const config: LinkConfig = {
+        ...existingConfig,
         label: form.label.trim(),
         provider: form.provider,
         adid: form.adid.trim(),
         klookPath: form.klookPath.trim(),
         directUrl: form.directUrl.trim(),
         usedOn: form.usedOn.split(",").map((s) => s.trim()).filter(Boolean),
+        ...(form.provider === "omio" && form.directUrl.trim() ? { urlStatus: "ready" as const } : {}),
       };
       const res = await fetch("/api/affiliate-links", {
         method: "PUT",
@@ -1134,6 +1139,20 @@ export default function AdminPage() {
                     ? `Klook で「${entry.label}」の広告を作成 → adid を取得してここに入力`
                     : `${style.label} で「${entry.label}」のアフィリエイトリンクを生成 → ここに貼る`}
               </p>
+              {(entry.adminTitle || entry.routeFrom || entry.routeTo || entry.targetUrl || entry.urlStatus) && (
+                <div className="mt-2 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-[10px] leading-4 text-slate-600">
+                  <div className="flex flex-wrap gap-2">
+                    {entry.adminTitle ? <span className="font-bold text-slate-800">{entry.adminTitle}</span> : null}
+                    {entry.urlStatus ? <span className="rounded bg-white px-1.5 py-0.5 font-bold text-slate-700">status: {entry.urlStatus}</span> : null}
+                    {entry.product ? <span className="rounded bg-white px-1.5 py-0.5 font-bold text-slate-700">{entry.product}</span> : null}
+                  </div>
+                  {entry.routeFrom || entry.routeTo ? (
+                    <p className="mt-1">Route: {entry.routeFrom || "?"} → {entry.routeTo || "?"}</p>
+                  ) : null}
+                  {entry.targetUrl ? <p className="mt-1 break-all">Target: {entry.targetUrl}</p> : null}
+                  {entry.adminNotes ? <p className="mt-1 text-slate-500">{entry.adminNotes}</p> : null}
+                </div>
+              )}
             </div>
             <div className="flex shrink-0 gap-1">
               <button

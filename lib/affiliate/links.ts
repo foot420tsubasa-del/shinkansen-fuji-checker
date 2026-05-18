@@ -100,6 +100,9 @@ export type AffiliateRegistryEntry = {
   linkSource: string;
   transportType?: string;
   city?: string;
+  routeFrom?: string;
+  routeTo?: string;
+  urlStatus?: string;
   notes?: string;
 };
 
@@ -110,6 +113,21 @@ type ManagedAffiliateLink = {
   klookPath: string;
   directUrl: string;
   usedOn: string[];
+  product?: string;
+  routeFrom?: string;
+  routeTo?: string;
+  routeType?: string;
+  targetUrl?: string;
+  affiliateUrl?: string;
+  urlStatus?: string;
+  destinationType?: string;
+  defaultPlacement?: string;
+  linkSource?: string;
+  city?: string;
+  country?: string;
+  adminTitle?: string;
+  adminDescription?: string;
+  adminNotes?: string;
 };
 
 type HotelAreaLink = {
@@ -152,6 +170,7 @@ function providerFromConfig(provider: string): AffiliateProvider {
 }
 
 function destinationTypeForLink(id: string, link: ManagedAffiliateLink): AffiliateDestinationType {
+  if (link.destinationType === "route_compare") return "route_compare";
   const text = `${id} ${link.label} ${link.usedOn.join(" ")}`.toLowerCase();
   if (id.startsWith("omio")) return "route_compare";
   if (id === "airportPrivateTransfer" || id === "naritaPrivateTransfer" || id === "hanedaPrivateTransfer" || id === "klookAirportTransfers") return "private_transfer";
@@ -169,6 +188,7 @@ function destinationTypeForLink(id: string, link: ManagedAffiliateLink): Affilia
 }
 
 function productForLink(id: string, link: ManagedAffiliateLink, destinationType: AffiliateDestinationType) {
+  if (link.product) return link.product;
   if (id.startsWith("omio")) {
     if (id.toLowerCase().includes("shinkansen")) return "shinkansen_compare";
     if (id.toLowerCase().includes("train")) return "train_compare";
@@ -192,6 +212,8 @@ function productForLink(id: string, link: ManagedAffiliateLink, destinationType:
 }
 
 function defaultPlacementForLink(id: string, destinationType: AffiliateDestinationType): AffiliatePlacement {
+  const configuredPlacement = managedLinks[id]?.defaultPlacement;
+  if (configuredPlacement) return configuredPlacement as AffiliatePlacement;
   if (id.startsWith("omio")) return "train_route_comparison";
   if (destinationType === "ticket") return "shinkansen_ticket";
   if (destinationType === "pass") return "jr_pass_comparison";
@@ -236,9 +258,12 @@ function buildManagedAffiliateEntries(): AffiliateRegistryEntry[] {
         adid: link.adid || undefined,
         destinationType,
         defaultPlacement: defaultPlacementForLink(id, destinationType),
-        linkSource: "data/affiliate-links.json",
+        linkSource: link.linkSource ?? "data/affiliate-links.json",
         transportType: transportTypeForLink(id, link),
         city: cityForLink(id, link),
+        routeFrom: link.routeFrom,
+        routeTo: link.routeTo,
+        urlStatus: link.urlStatus,
       } satisfies AffiliateRegistryEntry;
     })
     .filter((entry): entry is AffiliateRegistryEntry => Boolean(entry));
@@ -383,6 +408,9 @@ export function resolveAffiliateClickMetadata(params: {
       link_source: entry?.linkSource,
       transport_type: entry?.transportType,
       city: entry?.city,
+      route_from: entry?.routeFrom,
+      route_to: entry?.routeTo,
+      url_status: entry?.urlStatus,
       default_placement: entry?.defaultPlacement,
       label: params.label ?? entry?.label,
   };

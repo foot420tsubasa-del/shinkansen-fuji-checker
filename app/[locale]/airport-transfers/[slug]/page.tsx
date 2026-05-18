@@ -13,7 +13,7 @@ import { getAllTransferSlugs, getTransferBySlug } from "@/lib/content/transfers"
 import { getAlternates } from "@/i18n/hreflang";
 import { getAirportTransferRouteImage } from "@/lib/airport-transfer-images";
 import { AirportHeroCard, AirportNextSteps, AirportRouteCompareCard, ArrivalSetupCard } from "@/components/airport/AirportTransferUi";
-import { ESIM_URL, getAffUrl } from "@/src/affiliateLinks";
+import { ESIM_URL, getReadyAffUrl } from "@/src/affiliateLinks";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -102,13 +102,33 @@ function transferOptionPlacement(optionName: string) {
 }
 
 function routeCompareLink(slug: string) {
-  const isKansai = slug.includes("kansai") || slug.includes("kyoto") || slug.includes("osaka");
-  const airportTransferUrl = getAffUrl("omioJapanAirportTransfer");
-  const url = airportTransferUrl ?? (isKansai ? (getAffUrl("omioJapanTrain") ?? getAffUrl("omioJapanBus")) : (getAffUrl("omioJapanTrain") ?? getAffUrl("omioJapanBus")));
+  const routeIds: Record<string, string> = {
+    "narita-to-shinjuku": "omioNaritaAirportToShinjuku",
+    "narita-to-tokyo-station": "omioNaritaAirportToTokyo",
+    "narita-to-ueno": "omioNaritaAirportToUeno",
+    "narita-to-asakusa": "omioNaritaAirportToAsakusa",
+    "haneda-to-shinjuku": "omioHanedaAirportToShinjuku",
+    "haneda-to-tokyo-station": "omioHanedaAirportToTokyo",
+    "haneda-to-ueno": "omioHanedaAirportToUeno",
+    "haneda-to-asakusa": "omioHanedaAirportToAsakusa",
+    "kansai-airport-to-kyoto": "omioKansaiAirportToKyoto",
+    "kyoto-to-kansai-airport": "omioKansaiAirportToKyoto",
+    "kansai-airport-to-namba": "omioKansaiAirportToNamba",
+    "kansai-airport-to-umeda": "omioKansaiAirportToOsaka",
+    "osaka-to-kansai-airport": "omioKansaiAirportToOsaka",
+  };
+  const routeLinkId = routeIds[slug];
+  const routeHref = routeLinkId ? getReadyAffUrl(routeLinkId) : null;
+  if (routeLinkId && routeHref) return { href: routeHref, linkId: routeLinkId };
+
+  const fallbackIds = ["omioJapanAirportTransfer", "omioJapanTrain", "omioJapanBus"];
+  const fallbackLinkId = fallbackIds.find((id) => getReadyAffUrl(id, { allowFallback: true }));
+  if (!fallbackLinkId) return null;
+  const url = getReadyAffUrl(fallbackLinkId, { allowFallback: true });
   if (!url) return null;
   return {
     href: url,
-    linkId: airportTransferUrl && url === airportTransferUrl ? "omioJapanAirportTransfer" : url === getAffUrl("omioJapanTrain") ? "omioJapanTrain" : "omioJapanBus",
+    linkId: fallbackLinkId,
   };
 }
 
@@ -254,6 +274,9 @@ export default async function TransferPage({ params }: Props) {
           <section>
             <h2 className="text-lg font-semibold text-slate-950">Compare your options</h2>
             <p className="mt-1 text-sm text-slate-500">Sorted by what matters most — speed, ease, or cost.</p>
+            <p className="mt-2 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-xs leading-5 text-amber-900">
+              Fares and travel times are approximate and can change by date, provider, service type, and booking channel. Always check the latest price and schedule before booking.
+            </p>
             <div className="mt-4 grid gap-4 lg:grid-cols-1">
               {page.options.map((opt) => (
                 <TransferOption key={opt.name} {...opt} locale={locale} pagePath={pagePath} placement={transferOptionPlacement(opt.name)} />
