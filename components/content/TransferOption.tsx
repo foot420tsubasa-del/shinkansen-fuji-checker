@@ -66,6 +66,18 @@ function isNankaiRapit(name: string) {
   return text.includes("rapi:t") || text.includes("rapit");
 }
 
+function isNoReservationLocalOption(name: string) {
+  const text = normalizedName(name);
+  return (
+    text.includes("kansai airport rapid") ||
+    text.includes("nankai airport express") ||
+    text.includes("keisei access express") ||
+    text.includes("keisei main line") ||
+    text.includes("keikyu line") ||
+    text.includes("local")
+  );
+}
+
 function actionTitleForOption(name: string) {
   const text = normalizedName(name);
   if (text.includes("private")) return "Private airport transfer";
@@ -203,6 +215,7 @@ function configuredKlookHrefForOption(name: string, pagePath?: string) {
 }
 
 function validKlookBookingLink(name: string, href?: string, pagePath?: string) {
+  if (isNoReservationLocalOption(name)) return undefined;
   const configuredHref = configuredKlookHrefForOption(name, pagePath);
   if (configuredHref) return configuredHref;
   if (!href) return undefined;
