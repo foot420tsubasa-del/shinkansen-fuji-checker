@@ -220,7 +220,7 @@ export const transferPages: TransferPage[] = [
         bookingLabel: "Book Monorail ticket",
       },
     ],
-    lateArrivalNote: "Haneda has later domestic and international arrivals than Narita. The Keikyu Line runs until ~midnight, and taxi to Shinjuku is ¥6,000–8,000 (30 min). Affordable backup if you land late.",
+    lateArrivalNote: "Haneda has later domestic and international arrivals than Narita. The Keikyu Line runs until ~midnight, and taxi to Shinjuku is often around ¥6,000–8,000 depending on time, traffic, and destination (30 min). Affordable backup if you land late.",
     proTip: "Haneda to Shinjuku is short enough that a taxi split 2 ways (¥3,000–4,000 per person) is worth considering if you have heavy luggage and arrive tired. The ride is scenic at night.",
     nextActions: [
       { id: "stay-shinjuku", category: "stay", title: "Shinjuku vs Ueno vs Asakusa", description: "Landed in Shinjuku — now decide your base.", cta: "Compare areas", href: "/areas-to-stay/shinjuku-vs-ueno-vs-asakusa" },
@@ -571,7 +571,7 @@ export const transferPages: TransferPage[] = [
         bookingLabel: "Use airport taxi or taxi app",
       },
     ],
-    lateArrivalNote: "Keikyu trains from Haneda run until about midnight. A taxi to Ueno is ¥6,000–9,000 and takes 30–50 min — reasonable for two people splitting the fare after a late landing.",
+    lateArrivalNote: "Keikyu trains from Haneda run until about midnight. A taxi to Ueno is often around ¥6,000–9,000 depending on time, traffic, and destination and takes 30–50 min — reasonable for two people splitting the fare after a late landing.",
     proTip: "Ueno is a great first-night base from Haneda. Budget hotels, easy Narita connections (for return), museums, and Ameyoko market are all within walking distance. If you're also planning a Skyliner return to Narita, Ueno makes double sense.",
     nextActions: arrivalBundle(
       { id: "stay-ueno", category: "stay", title: "Compare Ueno hotels on Trip.com", description: "Budget-friendly base with museum access and easy Narita return.", cta: "Compare hotels", href: hotelUeno.href },

@@ -47,3 +47,31 @@ Admin help text:
 - Generic Omio Japan train/bus links do not render beside product-specific Klook airport transfer buttons.
 - Fallback Omio links can render only in the secondary “Not sure which transfer is best?” block.
 - Private transfer remains Klook-only unless a specific valid Omio private-transfer affiliate URL is added later.
+
+## Page Rendering Decisions
+
+| Page | Option | Omio URL type | Render location | Decision | Notes |
+|---|---|---|---|---|---|
+| `/airport-transfers/narita-to-shinjuku` | Narita Express | route_specific_page | option + comparison block | render_option_level | `omioNaritaAirportToShinjuku` is ready and marked route-specific. |
+| `/airport-transfers/narita-to-shinjuku` | Limousine Bus | route_specific_page | option + comparison block | render_option_level | Route-level Omio supports the page; Klook remains the bus booking CTA. |
+| `/airport-transfers/narita-to-shinjuku` | Keisei Access Express + Metro | no booking URL | none | no_booking_needed | IC-card/local route only. |
+| `/airport-transfers/narita-to-tokyo-station` | Narita Express | route_specific_page | option + comparison block | render_option_level | `omioNaritaAirportToTokyo` is ready and marked route-specific. |
+| `/airport-transfers/narita-to-tokyo-station` | Keisei Skyliner + JR Transfer | route_specific_page | option + comparison block | render_option_level | Same route-level Omio page is acceptable for Tokyo-level comparison. |
+| `/airport-transfers/narita-to-tokyo-station` | Keisei Access Express + Metro | no booking URL | none | no_booking_needed | IC-card/local route only. |
+| `/airport-transfers/narita-to-ueno` | Keisei Skyliner | weak/missing route URL | comparison block only | render_comparison_only | Ueno-specific Omio is not ready and may be weak. Klook only on option card. |
+| `/airport-transfers/narita-to-ueno` | Keisei Main Line local | no booking URL | none | no_booking_needed | IC-card/local route only. |
+| `/airport-transfers/narita-to-asakusa` | Keisei Access Express → Asakusa Line | no booking URL | none | no_booking_needed | IC-card/local route only. |
+| `/airport-transfers/narita-to-asakusa` | Skyliner to Ueno + Ginza Line | weak/missing route URL | comparison block only | render_comparison_only | Asakusa-specific Omio is not ready and may be weak. Klook only on option card. |
+| `/airport-transfers/narita-to-asakusa` | Private transfer | not applicable | none | klook_only | Private transfer remains Klook-only. |
+| `/airport-transfers/haneda-to-shinjuku` | Limousine Bus | route_specific_page | option + comparison block | render_option_level | `omioHanedaAirportToShinjuku` is ready and marked route-specific. |
+| `/airport-transfers/haneda-to-shinjuku` | Keikyu Line + JR | no booking URL | none | no_booking_needed | IC-card/local route only. |
+| `/airport-transfers/haneda-to-shinjuku` | Tokyo Monorail + JR | route_specific_page | option + comparison block | render_option_level | Route-level Omio supports the page; Klook remains the Monorail product CTA. |
+| `/airport-transfers/haneda-to-ueno` | Tokyo Monorail + JR | weak/missing route URL | comparison block only | render_comparison_only | Ueno-specific Omio is not ready and may be weak. Klook only on option card. |
+| `/airport-transfers/haneda-to-ueno` | Keikyu + JR Ueno-Tokyo Line | no booking URL | none | no_booking_needed | IC-card/local route only. |
+| `/airport-transfers/haneda-to-asakusa` | Limousine Bus to Asakusa View Hotel | weak/missing route URL | comparison block only | render_comparison_only | Asakusa-specific Omio is not ready and may be weak. Klook only on option card. |
+| `/airport-transfers/haneda-to-asakusa` | Keikyu Line → Asakusa Line | no booking URL | none | no_booking_needed | IC-card/local route only. |
+| `/airport-transfers/kansai-airport-to-kyoto` | JR Haruka Express | route_specific_page | option + comparison block | render_option_level | `omioKansaiAirportToKyoto` is ready and marked route-specific. |
+| `/airport-transfers/kansai-airport-to-kyoto` | Airport Limousine Bus | route_specific_page | option + comparison block | render_option_level | Route-level Omio supports the page; Klook remains the bus booking CTA. |
+| `/airport-transfers/kansai-airport-to-kyoto` | Private transfer | not applicable | none | klook_only | Private transfer remains Klook-only. |
+| `/airport-transfers/kansai-airport-to-namba` | Nankai Rapi:t | weak/missing station route URL | comparison block only | render_comparison_only | Namba-specific Omio is not ready; Osaka fallback is comparison-block only. |
+| `/airport-transfers/kansai-airport-to-umeda` | Airport Limousine Bus | generic Osaka fallback | comparison block only | render_comparison_only | Osaka-level Omio is `country_category`, so it does not render beside option cards. |

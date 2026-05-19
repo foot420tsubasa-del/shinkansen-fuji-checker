@@ -99,14 +99,14 @@ type TransferOptionCardProps = {
 
 function ctaColor(title: string, provider?: AffiliateClickParams["provider"]) {
   const normalized = title.toLowerCase();
-  if (normalized.includes("private") || normalized.includes("taxi")) {
-    return "border-[#082653] bg-[#082653] hover:bg-[#061d40] focus-visible:ring-slate-300";
-  }
   if (provider === "omio") {
     return "border-[#2563eb] bg-[#2563eb] hover:bg-[#1d4ed8] focus-visible:ring-sky-200";
   }
   if (provider === "klook") {
     return "border-[#ff7a00] bg-[#ff7a00] hover:bg-[#e66700] focus-visible:ring-orange-200";
+  }
+  if (normalized.includes("private") || normalized.includes("taxi")) {
+    return "border-[#082653] bg-[#082653] hover:bg-[#061d40] focus-visible:ring-slate-300";
   }
   if (normalized.includes("bus") || normalized.includes("limousine")) {
     return "border-[#145aa0] bg-[#145aa0] hover:bg-[#0f477f] focus-visible:ring-sky-200";

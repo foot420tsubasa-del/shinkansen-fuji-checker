@@ -3,7 +3,7 @@
 import { Check, Clock, Luggage, Wallet, Zap } from "lucide-react";
 import { TransferOptionCard } from "@/components/airport/AirportTransferUi";
 import type { AffiliateClickParams } from "@/lib/analytics";
-import { getAffUrl, getReadyAffUrl } from "@/src/affiliateLinks";
+import { getAffiliateConfig, getAffUrl, getReadyAffUrl } from "@/src/affiliateLinks";
 
 type TransferOptionProps = {
   name: string;
@@ -98,6 +98,8 @@ function omioForOption(name: string, pagePath?: string) {
   if (!isAirportBus(name) && !isAirportTrain(name)) return null;
   const linkId = pagePath ? routeOmioIds[pagePath] : undefined;
   if (!linkId) return null;
+  const config = getAffiliateConfig(linkId);
+  if (config?.urlSpecificity !== "route_search_prefilled" && config?.urlSpecificity !== "route_specific_page") return null;
   const href = getReadyAffUrl(linkId);
   if (!href) return null;
   return { href, linkId, transportType: "airport_route_compare" };

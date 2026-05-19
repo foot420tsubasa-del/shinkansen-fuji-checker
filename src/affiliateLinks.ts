@@ -30,6 +30,7 @@ export type LinkConfig = {
   targetUrl?: string;
   affiliateUrl?: string;
   urlStatus?: "ready" | "needs_affiliate_conversion" | "needs_city_id" | "fallback_only" | "do_not_render";
+  urlSpecificity?: "route_search_prefilled" | "route_specific_page" | "country_category" | "generic_homepage" | "missing";
   destinationType?: string;
   defaultPlacement?: string;
   linkSource?: string;
