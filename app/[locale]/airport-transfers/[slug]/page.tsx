@@ -13,7 +13,7 @@ import { getAllTransferSlugs, getTransferBySlug } from "@/lib/content/transfers"
 import { getAlternates } from "@/i18n/hreflang";
 import { getAirportTransferRouteImage } from "@/lib/airport-transfer-images";
 import { AirportHeroCard, AirportNextSteps, AirportRouteCompareCard, ArrivalSetupCard } from "@/components/airport/AirportTransferUi";
-import { ESIM_URL, getReadyAffUrl } from "@/src/affiliateLinks";
+import { ESIM_URL, getAffiliateConfig, getReadyAffUrl } from "@/src/affiliateLinks";
 import { getAirportRouteUiCopy, localizedLateArrivalNote, localizedProTip, localizedRouteDescription, localizedRouteTitle, localizeTripPick, routeSpecific } from "@/lib/content/airport-transfer-i18n";
 
 type Props = {
@@ -120,7 +120,13 @@ function routeCompareLink(slug: string) {
   };
   const routeLinkId = routeIds[slug];
   const routeHref = routeLinkId ? getReadyAffUrl(routeLinkId) : null;
-  if (routeLinkId && routeHref) return { href: routeHref, linkId: routeLinkId };
+  if (routeLinkId && routeHref) {
+    const specificity = getAffiliateConfig(routeLinkId)?.urlSpecificity;
+    if (specificity === "route_search_prefilled" || specificity === "route_specific_page") {
+      return null;
+    }
+    return { href: routeHref, linkId: routeLinkId };
+  }
 
   const fallbackIds = ["omioJapanAirportTransfer", "omioJapanTrain", "omioJapanBus"];
   const fallbackLinkId = fallbackIds.find((id) => getReadyAffUrl(id, { allowFallback: true }));

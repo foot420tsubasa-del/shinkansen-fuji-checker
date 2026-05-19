@@ -90,13 +90,36 @@ const actionTitleText: Record<string, Record<string, string>> = {
   ru: { private: "Частный трансфер из аэропорта", nex: "Забронировать или сравнить Narita Express", skyliner: "Забронировать или сравнить Skyliner", haruka: "Забронировать или сравнить JR Haruka", bus: "Забронировать или сравнить автобус аэропорта", default: "Забронировать или сравнить маршрут" },
 };
 
-function localizedActionTitle(name: string, locale?: string) {
-  const text = actionTitleText[locale ?? "en"] ?? actionTitleText.en;
+const bookActionTitleText: Record<string, Record<string, string>> = {
+  en: {
+    private: "Private airport transfer",
+    nex: "Book Narita Express",
+    skyliner: "Book Skyliner",
+    haruka: "Book JR Haruka",
+    nankai: "Book Nankai Rapi:t",
+    bus: "Book airport bus",
+    default: "Book this route",
+  },
+  es: { private: "Transfer privado de aeropuerto", nex: "Reservar Narita Express", skyliner: "Reservar Skyliner", haruka: "Reservar JR Haruka", nankai: "Reservar Nankai Rapi:t", bus: "Reservar bus de aeropuerto", default: "Reservar esta ruta" },
+  "pt-BR": { private: "Transfer privado de aeroporto", nex: "Reservar Narita Express", skyliner: "Reservar Skyliner", haruka: "Reservar JR Haruka", nankai: "Reservar Nankai Rapi:t", bus: "Reservar onibus de aeroporto", default: "Reservar esta rota" },
+  ko: { private: "공항 private transfer", nex: "Narita Express 예약", skyliner: "Skyliner 예약", haruka: "JR Haruka 예약", nankai: "Nankai Rapi:t 예약", bus: "공항버스 예약", default: "이 경로 예약" },
+  "zh-TW": { private: "私人機場接送", nex: "預訂 Narita Express", skyliner: "預訂 Skyliner", haruka: "預訂 JR Haruka", nankai: "預訂 Nankai Rapi:t", bus: "預訂機場巴士", default: "預訂這條路線" },
+  "zh-CN": { private: "私人机场接送", nex: "预订 Narita Express", skyliner: "预订 Skyliner", haruka: "预订 JR Haruka", nankai: "预订 Nankai Rapi:t", bus: "预订机场巴士", default: "预订这条路线" },
+  fr: { private: "Transfert aeroport prive", nex: "Reserver Narita Express", skyliner: "Reserver Skyliner", haruka: "Reserver JR Haruka", nankai: "Reserver Nankai Rapi:t", bus: "Reserver le bus aeroport", default: "Reserver cette route" },
+  de: { private: "Privater Flughafentransfer", nex: "Narita Express buchen", skyliner: "Skyliner buchen", haruka: "JR Haruka buchen", nankai: "Nankai Rapi:t buchen", bus: "Flughafenbus buchen", default: "Diese Route buchen" },
+  ru: { private: "Частный трансфер из аэропорта", nex: "Забронировать Narita Express", skyliner: "Забронировать Skyliner", haruka: "Забронировать JR Haruka", nankai: "Забронировать Nankai Rapi:t", bus: "Забронировать автобус аэропорта", default: "Забронировать маршрут" },
+};
+
+function localizedActionTitle(name: string, locale?: string, canCompare = false) {
+  const text = canCompare
+    ? (actionTitleText[locale ?? "en"] ?? actionTitleText.en)
+    : (bookActionTitleText[locale ?? "en"] ?? bookActionTitleText.en);
   const normalized = normalizedName(name);
   if (normalized.includes("private")) return text.private;
   if (normalized.includes("narita express") || normalized.includes("n'ex")) return text.nex;
   if (normalized.includes("skyliner")) return text.skyliner;
   if (normalized.includes("haruka")) return text.haruka;
+  if (normalized.includes("nankai") || normalized.includes("rapi")) return text.nankai ?? text.default;
   if (isAirportBus(name)) return text.bus;
   return text.default;
 }
@@ -414,7 +437,7 @@ export function TransferOption({
         { label: lateOk ? optionTag(locale, "lateOk") : optionTag(locale, "endsEarly"), tone: lateOk ? "green" : "amber", icon: <Clock className="h-3 w-3" /> },
       ]}
       ctas={providerCtas}
-      actionTitle={localizedActionTitle(name, locale) || actionTitleForOption(name)}
+      actionTitle={localizedActionTitle(name, locale, providerCtas.some((item) => item.provider === "omio")) || actionTitleForOption(name)}
       helperText={
         providerCtas.length > 1
           ? ui.helperBoth
