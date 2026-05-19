@@ -669,11 +669,11 @@
     ]
   },
   "omioJapanAirportTransfer": {
-    "label": "Omio",
+    "label": "Compare Japan airport transfers on Omio",
     "provider": "omio",
     "adid": "",
     "klookPath": "",
-    "directUrl": "",
+    "directUrl": "https://omio.sjv.io/m4E561",
     "usedOn": [
       "Transfers",
       "Airport route comparison"
@@ -682,7 +682,7 @@
     "routeType": "airport_transfer",
     "targetUrl": "https://www.omio.com/airport-japan-transfers",
     "affiliateUrl": "",
-    "urlStatus": "needs_affiliate_conversion",
+    "urlStatus": "ready",
     "destinationType": "route_compare",
     "defaultPlacement": "airport_route_compare",
     "linkSource": "admin",
@@ -696,7 +696,7 @@
     "provider": "omio",
     "adid": "",
     "klookPath": "",
-    "directUrl": "",
+    "directUrl": "https://omio.sjv.io/jRyrE0",
     "usedOn": [
       "Transfers",
       "Narita to Tokyo Station"
@@ -707,7 +707,7 @@
     "routeType": "airport_transfer",
     "targetUrl": "",
     "affiliateUrl": "",
-    "urlStatus": "needs_city_id",
+    "urlStatus": "ready",
     "destinationType": "route_compare",
     "defaultPlacement": "airport_route_compare",
     "linkSource": "admin",
@@ -722,7 +722,7 @@
     "provider": "omio",
     "adid": "",
     "klookPath": "",
-    "directUrl": "",
+    "directUrl": "https://omio.sjv.io/DWeKE2",
     "usedOn": [
       "Transfers",
       "Narita to Shinjuku"
@@ -733,7 +733,7 @@
     "routeType": "airport_transfer",
     "targetUrl": "",
     "affiliateUrl": "",
-    "urlStatus": "needs_city_id",
+    "urlStatus": "ready",
     "destinationType": "route_compare",
     "defaultPlacement": "airport_route_option",
     "linkSource": "admin",
@@ -826,7 +826,7 @@
     "provider": "omio",
     "adid": "",
     "klookPath": "",
-    "directUrl": "",
+    "directUrl": "https://omio.sjv.io/3kZe2M",
     "usedOn": [
       "Transfers",
       "Haneda to Shinjuku"
@@ -837,7 +837,7 @@
     "routeType": "airport_transfer",
     "targetUrl": "",
     "affiliateUrl": "",
-    "urlStatus": "needs_city_id",
+    "urlStatus": "ready",
     "destinationType": "route_compare",
     "defaultPlacement": "airport_route_option",
     "linkSource": "admin",
@@ -904,7 +904,7 @@
     "provider": "omio",
     "adid": "",
     "klookPath": "",
-    "directUrl": "",
+    "directUrl": "https://omio.sjv.io/DWeK52",
     "usedOn": [
       "Transfers",
       "Kansai Airport to Kyoto"
@@ -915,7 +915,7 @@
     "routeType": "airport_transfer",
     "targetUrl": "",
     "affiliateUrl": "",
-    "urlStatus": "needs_city_id",
+    "urlStatus": "ready",
     "destinationType": "route_compare",
     "defaultPlacement": "airport_route_option",
     "linkSource": "admin",
@@ -930,7 +930,7 @@
     "provider": "omio",
     "adid": "",
     "klookPath": "",
-    "directUrl": "",
+    "directUrl": "https://omio.sjv.io/oNLqxO",
     "usedOn": [
       "Transfers",
       "Kansai Airport to Namba",
@@ -942,7 +942,7 @@
     "routeType": "airport_transfer",
     "targetUrl": "",
     "affiliateUrl": "",
-    "urlStatus": "needs_city_id",
+    "urlStatus": "ready",
     "destinationType": "route_compare",
     "defaultPlacement": "airport_route_compare",
     "linkSource": "admin",
