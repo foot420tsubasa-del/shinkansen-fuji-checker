@@ -260,6 +260,7 @@ export const transferPages: TransferPage[] = [
       },
       {
         name: "Taxi",
+        bookingMode: "taxi_stand",
         badge: "cheapest",
         duration: "30–45 min",
         cost: "often around ¥5,000–7,000 depending on traffic and destination",
@@ -270,7 +271,7 @@ export const transferPages: TransferPage[] = [
         bookingLabel: "Use airport taxi or taxi app",
       },
     ],
-    lateArrivalNote: "The Keikyu direct to Asakusa runs until about 23:30. If you arrive later, a taxi from Haneda to Asakusa is ¥5,000–7,000 and takes 30 min — reasonable for 2 people splitting.",
+    lateArrivalNote: "The Keikyu direct to Asakusa runs until about 23:30. If you arrive later, a taxi from Haneda to Asakusa is often around ¥5,000–7,000 depending on time, traffic, and destination — reasonable for 2 people splitting.",
     proTip: "The Keikyu → Asakusa Line through-service is the hidden gem here. Many travelers don't know this direct connection exists and take unnecessary transfers via Shinagawa. Look for trains marked 'エアポート快特 Asakusa Line' on the platform display.",
     nextActions: arrivalBundle(
       { id: "stay-asakusa", category: "stay", title: "Compare Asakusa hotels on Trip.com", description: "Senso-ji area — traditional vibe with great Narita/Haneda access.", cta: "Compare hotels", href: hotelAsakusa.href },
@@ -374,6 +375,7 @@ export const transferPages: TransferPage[] = [
       },
       {
         name: "Taxi",
+        bookingMode: "taxi_stand",
         badge: "easiest",
         duration: "25–40 min",
         cost: "often around ¥5,000–7,000 depending on traffic and destination",
@@ -562,6 +564,7 @@ export const transferPages: TransferPage[] = [
       },
       {
         name: "Taxi",
+        bookingMode: "taxi_stand",
         badge: "easiest",
         duration: "30–50 min",
         cost: "often around ¥6,000–9,000 depending on traffic and destination",
@@ -609,7 +612,8 @@ export const transferPages: TransferPage[] = [
         bookingLabel: "Book Limousine Bus",
       },
       {
-        name: "Private transfer / taxi",
+        name: "Private transfer",
+        bookingMode: "private_transfer",
         badge: "fastest",
         duration: "60–80 min",
         cost: "often around ¥20,000–30,000 depending on vehicle, date, time, and destination",
@@ -651,6 +655,7 @@ export const transferPages: TransferPage[] = [
       },
       {
         name: "Taxi",
+        bookingMode: "taxi_stand",
         badge: "easiest",
         duration: "20–45 min",
         cost: "often around ¥3,000–8,000 depending on traffic and destination",
@@ -673,7 +678,7 @@ export const transferPages: TransferPage[] = [
         bookingLabel: "Book private transfer",
       },
     ],
-    lateArrivalNote: "Haneda is much closer to central Tokyo than Narita. Even after midnight, a taxi to Shinjuku or Shibuya is ¥5,000–8,000 (20–35 min). For Asakusa or Ueno, expect ¥5,000–7,000. This makes Haneda the more forgiving airport for late arrivals.",
+    lateArrivalNote: "Haneda is much closer to central Tokyo than Narita. Even after midnight, a taxi to Shinjuku or Shibuya is often around ¥5,000–8,000 depending on time, traffic, and destination. For Asakusa or Ueno, expect around ¥5,000–7,000 depending on time, traffic, and destination. This makes Haneda the more forgiving airport for late arrivals.",
     proTip: "Haneda's proximity to Tokyo means 'late arrival' is less of a crisis than at Narita. A taxi split two ways is often comparable to a train fare per person. If you land after 23:00, don't stress — just take a taxi and save the transit navigation for day one.",
     nextActions: [
       { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Activate before landing — check live schedules and call a taxi.", cta: "Get eSIM", href: esimUrl },
@@ -777,7 +782,7 @@ export const transferPages: TransferPage[] = [
         bookingLabel: "Book private transfer",
       },
     ],
-    lateArrivalNote: "The Nankai Airport Express runs until about 23:15 from KIX to Namba. If you land after 22:00, check the schedule before clearing customs. After the last train, a taxi to Namba costs ¥15,000–20,000 or book a private transfer in advance.",
+    lateArrivalNote: "The Nankai Airport Express runs until about 23:15 from KIX to Namba. If you land after 22:00, check the schedule before clearing customs. After the last train, a taxi to Namba can often cost around ¥15,000–20,000 depending on time, traffic, and destination, or book a private transfer in advance.",
     proTip: "Namba is the best Osaka base for Dotonbori street food and nightlife. The Nankai Rapi:t gets you there in 34 minutes with luggage space — it's the obvious first choice. If you want to save a small amount, the Airport Express is nearly as fast.",
     nextActions: kansaiBundle(
       { id: "stay-namba", category: "stay", title: "Compare Namba hotels on Trip.com", description: "Dotonbori, street food, and nightlife — the classic Osaka base.", cta: "Compare hotels", href: hotelNamba.href },
@@ -826,7 +831,7 @@ export const transferPages: TransferPage[] = [
         bookingLabel: "Book private transfer",
       },
     ],
-    lateArrivalNote: "The JR Kansai Airport Rapid runs until about 23:30 from KIX. Umeda is well-connected by train even late at night. If you miss the last train, a taxi to Umeda costs ¥15,000–20,000.",
+    lateArrivalNote: "The JR Kansai Airport Rapid runs until about 23:30 from KIX. Umeda is well-connected by train even late at night. If you miss the last train, a taxi to Umeda can often cost around ¥15,000–20,000 depending on time, traffic, and destination.",
     proTip: "Umeda / Osaka Station is the transit hub of Osaka — great for connecting to Kyoto, Kobe, and north Osaka. If your priority is food and nightlife, Namba is usually better. If your priority is transit access and department stores, Umeda wins.",
     nextActions: kansaiBundle(
       { id: "stay-umeda", category: "stay", title: "Compare Umeda hotels on Trip.com", description: "Transit hub — best for Kyoto/Kobe connections and shopping.", cta: "Compare hotels", href: hotelUmeda.href },
