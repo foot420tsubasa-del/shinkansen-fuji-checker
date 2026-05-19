@@ -243,14 +243,14 @@ function configuredKlookHrefForOption(name: string, pagePath?: string) {
   return undefined;
 }
 
-function validKlookBookingLink(name: string, href?: string, pagePath?: string) {
-  const bookingMode = deriveBookingMode(name);
-  if (bookingMode === "no_booking_ic_card" || bookingMode === "taxi_stand" || bookingMode === "comparison_only") return undefined;
+function validKlookBookingLink(name: string, href?: string, pagePath?: string, bookingMode?: TransferOptionProps["bookingMode"]) {
+  const effectiveBookingMode = deriveBookingMode(name, bookingMode);
+  if (effectiveBookingMode === "no_booking_ic_card" || effectiveBookingMode === "taxi_stand" || effectiveBookingMode === "comparison_only") return undefined;
   if (isNoReservationLocalOption(name)) return undefined;
   const configuredHref = configuredKlookHrefForOption(name, pagePath);
   if (configuredHref) return configuredHref;
   if (!href) return undefined;
-  if (bookingMode === "private_transfer" && href === legacyAirportTransferUrl) return undefined;
+  if (effectiveBookingMode === "private_transfer" && href === legacyAirportTransferUrl) return undefined;
   if (isAirportBus(name) && href === naritaLimousineBusUrl && !pagePath?.includes("narita")) return undefined;
   return href;
 }
@@ -441,7 +441,7 @@ export function TransferOption({
   const bookingMode = deriveBookingMode(name, explicitBookingMode);
   const b = badgeConfig[badge];
   const BadgeIcon = b.icon;
-  const effectiveBookingLink = validKlookBookingLink(name, bookingLink, pagePath);
+  const effectiveBookingLink = validKlookBookingLink(name, bookingLink, pagePath, bookingMode);
   const omio = bookingMode === "affiliate_booking" && effectiveBookingLink ? omioForOption(name, pagePath) : null;
   const transportType = transportTypeForOption(name);
   const providerCtas = effectiveBookingLink
