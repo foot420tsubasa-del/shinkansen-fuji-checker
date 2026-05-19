@@ -7,6 +7,7 @@ import { getHotelLink } from "@/lib/hotel-links";
 
 export type TransferOption = {
   name: string;
+  bookingMode?: "affiliate_booking" | "no_booking_ic_card" | "taxi_stand" | "private_transfer" | "comparison_only";
   badge: "fastest" | "easiest" | "cheapest";
   duration: string;
   cost: string;

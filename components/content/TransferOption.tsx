@@ -8,6 +8,7 @@ import { getAffiliateConfig, getAffUrl, getReadyAffUrl } from "@/src/affiliateLi
 
 type TransferOptionProps = {
   name: string;
+  bookingMode?: "affiliate_booking" | "no_booking_ic_card" | "taxi_stand" | "private_transfer" | "comparison_only";
   badge: "fastest" | "easiest" | "cheapest";
   duration: string;
   cost: string;
@@ -38,7 +39,12 @@ function normalizedName(name: string) {
 
 function isPrivateTransfer(name: string) {
   const text = normalizedName(name);
-  return text.includes("private") || text.includes("taxi");
+  return text.includes("private");
+}
+
+function isNormalTaxi(name: string) {
+  const text = normalizedName(name);
+  return text.includes("taxi") && !text.includes("private");
 }
 
 function isAirportBus(name: string) {
@@ -78,6 +84,24 @@ function isNoReservationLocalOption(name: string) {
   );
 }
 
+function deriveBookingMode(name: string, explicitMode?: TransferOptionProps["bookingMode"]): NonNullable<TransferOptionProps["bookingMode"]> {
+  if (explicitMode) return explicitMode;
+  if (isPrivateTransfer(name)) return "private_transfer";
+  if (isNormalTaxi(name)) return "taxi_stand";
+  if (isNoReservationLocalOption(name)) return "no_booking_ic_card";
+  if (
+    normalizedName(name).includes("narita express") ||
+    normalizedName(name).includes("n'ex") ||
+    normalizedName(name).includes("skyliner") ||
+    normalizedName(name).includes("haruka") ||
+    isNankaiRapit(name) ||
+    isAirportBus(name)
+  ) {
+    return "affiliate_booking";
+  }
+  return "no_booking_ic_card";
+}
+
 function actionTitleForOption(name: string) {
   const text = normalizedName(name);
   if (text.includes("private")) return "Private airport transfer";
@@ -94,17 +118,18 @@ const actionTitleText: Record<string, Record<string, string>> = {
     nex: "Book or compare Narita Express",
     skyliner: "Book or compare Skyliner",
     haruka: "Book or compare JR Haruka",
+    monorail: "Book or compare Tokyo Monorail",
     bus: "Book or compare airport bus",
     default: "Book or compare this route",
   },
-  es: { private: "Transfer privado de aeropuerto", nex: "Reservar o comparar Narita Express", skyliner: "Reservar o comparar Skyliner", haruka: "Reservar o comparar JR Haruka", bus: "Reservar o comparar bus de aeropuerto", default: "Reservar o comparar esta ruta" },
-  "pt-BR": { private: "Transfer privado de aeroporto", nex: "Reservar ou comparar Narita Express", skyliner: "Reservar ou comparar Skyliner", haruka: "Reservar ou comparar JR Haruka", bus: "Reservar ou comparar onibus de aeroporto", default: "Reservar ou comparar esta rota" },
-  ko: { private: "공항 private transfer", nex: "Narita Express 예약 또는 비교", skyliner: "Skyliner 예약 또는 비교", haruka: "JR Haruka 예약 또는 비교", bus: "공항버스 예약 또는 비교", default: "이 경로 예약 또는 비교" },
-  "zh-TW": { private: "私人機場接送", nex: "預訂或比較 Narita Express", skyliner: "預訂或比較 Skyliner", haruka: "預訂或比較 JR Haruka", bus: "預訂或比較機場巴士", default: "預訂或比較這條路線" },
-  "zh-CN": { private: "私人机场接送", nex: "预订或比较 Narita Express", skyliner: "预订或比较 Skyliner", haruka: "预订或比较 JR Haruka", bus: "预订或比较机场巴士", default: "预订或比较这条路线" },
-  fr: { private: "Transfert aeroport prive", nex: "Reserver ou comparer Narita Express", skyliner: "Reserver ou comparer Skyliner", haruka: "Reserver ou comparer JR Haruka", bus: "Reserver ou comparer le bus aeroport", default: "Reserver ou comparer cette route" },
-  de: { private: "Privater Flughafentransfer", nex: "Narita Express buchen oder vergleichen", skyliner: "Skyliner buchen oder vergleichen", haruka: "JR Haruka buchen oder vergleichen", bus: "Flughafenbus buchen oder vergleichen", default: "Diese Route buchen oder vergleichen" },
-  ru: { private: "Частный трансфер из аэропорта", nex: "Забронировать или сравнить Narita Express", skyliner: "Забронировать или сравнить Skyliner", haruka: "Забронировать или сравнить JR Haruka", bus: "Забронировать или сравнить автобус аэропорта", default: "Забронировать или сравнить маршрут" },
+  es: { private: "Transfer privado de aeropuerto", nex: "Reservar o comparar Narita Express", skyliner: "Reservar o comparar Skyliner", haruka: "Reservar o comparar JR Haruka", monorail: "Reservar o comparar Tokyo Monorail", bus: "Reservar o comparar bus de aeropuerto", default: "Reservar o comparar esta ruta" },
+  "pt-BR": { private: "Transfer privado de aeroporto", nex: "Reservar ou comparar Narita Express", skyliner: "Reservar ou comparar Skyliner", haruka: "Reservar ou comparar JR Haruka", monorail: "Reservar ou comparar Tokyo Monorail", bus: "Reservar ou comparar onibus de aeroporto", default: "Reservar ou comparar esta rota" },
+  ko: { private: "공항 private transfer", nex: "Narita Express 예약 또는 비교", skyliner: "Skyliner 예약 또는 비교", haruka: "JR Haruka 예약 또는 비교", monorail: "Tokyo Monorail 예약 또는 비교", bus: "공항버스 예약 또는 비교", default: "이 경로 예약 또는 비교" },
+  "zh-TW": { private: "私人機場接送", nex: "預訂或比較 Narita Express", skyliner: "預訂或比較 Skyliner", haruka: "預訂或比較 JR Haruka", monorail: "預訂或比較 Tokyo Monorail", bus: "預訂或比較機場巴士", default: "預訂或比較這條路線" },
+  "zh-CN": { private: "私人机场接送", nex: "预订或比较 Narita Express", skyliner: "预订或比较 Skyliner", haruka: "预订或比较 JR Haruka", monorail: "预订或比较 Tokyo Monorail", bus: "预订或比较机场巴士", default: "预订或比较这条路线" },
+  fr: { private: "Transfert aeroport prive", nex: "Reserver ou comparer Narita Express", skyliner: "Reserver ou comparer Skyliner", haruka: "Reserver ou comparer JR Haruka", monorail: "Reserver ou comparer Tokyo Monorail", bus: "Reserver ou comparer le bus aeroport", default: "Reserver ou comparer cette route" },
+  de: { private: "Privater Flughafentransfer", nex: "Narita Express buchen oder vergleichen", skyliner: "Skyliner buchen oder vergleichen", haruka: "JR Haruka buchen oder vergleichen", monorail: "Tokyo Monorail buchen oder vergleichen", bus: "Flughafenbus buchen oder vergleichen", default: "Diese Route buchen oder vergleichen" },
+  ru: { private: "Частный трансфер из аэропорта", nex: "Забронировать или сравнить Narita Express", skyliner: "Забронировать или сравнить Skyliner", haruka: "Забронировать или сравнить JR Haruka", monorail: "Забронировать или сравнить Tokyo Monorail", bus: "Забронировать или сравнить автобус аэропорта", default: "Забронировать или сравнить маршрут" },
 };
 
 const bookActionTitleText: Record<string, Record<string, string>> = {
@@ -114,17 +139,18 @@ const bookActionTitleText: Record<string, Record<string, string>> = {
     skyliner: "Book Skyliner",
     haruka: "Book JR Haruka",
     nankai: "Book Nankai Rapi:t",
+    monorail: "Book Tokyo Monorail",
     bus: "Book airport bus",
     default: "Book this route",
   },
-  es: { private: "Transfer privado de aeropuerto", nex: "Reservar Narita Express", skyliner: "Reservar Skyliner", haruka: "Reservar JR Haruka", nankai: "Reservar Nankai Rapi:t", bus: "Reservar bus de aeropuerto", default: "Reservar esta ruta" },
-  "pt-BR": { private: "Transfer privado de aeroporto", nex: "Reservar Narita Express", skyliner: "Reservar Skyliner", haruka: "Reservar JR Haruka", nankai: "Reservar Nankai Rapi:t", bus: "Reservar onibus de aeroporto", default: "Reservar esta rota" },
-  ko: { private: "공항 private transfer", nex: "Narita Express 예약", skyliner: "Skyliner 예약", haruka: "JR Haruka 예약", nankai: "Nankai Rapi:t 예약", bus: "공항버스 예약", default: "이 경로 예약" },
-  "zh-TW": { private: "私人機場接送", nex: "預訂 Narita Express", skyliner: "預訂 Skyliner", haruka: "預訂 JR Haruka", nankai: "預訂 Nankai Rapi:t", bus: "預訂機場巴士", default: "預訂這條路線" },
-  "zh-CN": { private: "私人机场接送", nex: "预订 Narita Express", skyliner: "预订 Skyliner", haruka: "预订 JR Haruka", nankai: "预订 Nankai Rapi:t", bus: "预订机场巴士", default: "预订这条路线" },
-  fr: { private: "Transfert aeroport prive", nex: "Reserver Narita Express", skyliner: "Reserver Skyliner", haruka: "Reserver JR Haruka", nankai: "Reserver Nankai Rapi:t", bus: "Reserver le bus aeroport", default: "Reserver cette route" },
-  de: { private: "Privater Flughafentransfer", nex: "Narita Express buchen", skyliner: "Skyliner buchen", haruka: "JR Haruka buchen", nankai: "Nankai Rapi:t buchen", bus: "Flughafenbus buchen", default: "Diese Route buchen" },
-  ru: { private: "Частный трансфер из аэропорта", nex: "Забронировать Narita Express", skyliner: "Забронировать Skyliner", haruka: "Забронировать JR Haruka", nankai: "Забронировать Nankai Rapi:t", bus: "Забронировать автобус аэропорта", default: "Забронировать маршрут" },
+  es: { private: "Transfer privado de aeropuerto", nex: "Reservar Narita Express", skyliner: "Reservar Skyliner", haruka: "Reservar JR Haruka", nankai: "Reservar Nankai Rapi:t", monorail: "Reservar Tokyo Monorail", bus: "Reservar bus de aeropuerto", default: "Reservar esta ruta" },
+  "pt-BR": { private: "Transfer privado de aeroporto", nex: "Reservar Narita Express", skyliner: "Reservar Skyliner", haruka: "Reservar JR Haruka", nankai: "Reservar Nankai Rapi:t", monorail: "Reservar Tokyo Monorail", bus: "Reservar onibus de aeroporto", default: "Reservar esta rota" },
+  ko: { private: "공항 private transfer", nex: "Narita Express 예약", skyliner: "Skyliner 예약", haruka: "JR Haruka 예약", nankai: "Nankai Rapi:t 예약", monorail: "Tokyo Monorail 예약", bus: "공항버스 예약", default: "이 경로 예약" },
+  "zh-TW": { private: "私人機場接送", nex: "預訂 Narita Express", skyliner: "預訂 Skyliner", haruka: "預訂 JR Haruka", nankai: "預訂 Nankai Rapi:t", monorail: "預訂 Tokyo Monorail", bus: "預訂機場巴士", default: "預訂這條路線" },
+  "zh-CN": { private: "私人机场接送", nex: "预订 Narita Express", skyliner: "预订 Skyliner", haruka: "预订 JR Haruka", nankai: "预订 Nankai Rapi:t", monorail: "预订 Tokyo Monorail", bus: "预订机场巴士", default: "预订这条路线" },
+  fr: { private: "Transfert aeroport prive", nex: "Reserver Narita Express", skyliner: "Reserver Skyliner", haruka: "Reserver JR Haruka", nankai: "Reserver Nankai Rapi:t", monorail: "Reserver Tokyo Monorail", bus: "Reserver le bus aeroport", default: "Reserver cette route" },
+  de: { private: "Privater Flughafentransfer", nex: "Narita Express buchen", skyliner: "Skyliner buchen", haruka: "JR Haruka buchen", nankai: "Nankai Rapi:t buchen", monorail: "Tokyo Monorail buchen", bus: "Flughafenbus buchen", default: "Diese Route buchen" },
+  ru: { private: "Частный трансфер из аэропорта", nex: "Забронировать Narita Express", skyliner: "Забронировать Skyliner", haruka: "Забронировать JR Haruka", nankai: "Забронировать Nankai Rapi:t", monorail: "Забронировать Tokyo Monorail", bus: "Забронировать автобус аэропорта", default: "Забронировать маршрут" },
 };
 
 function localizedActionTitle(name: string, locale?: string, canCompare = false) {
@@ -137,6 +163,7 @@ function localizedActionTitle(name: string, locale?: string, canCompare = false)
   if (normalized.includes("skyliner")) return text.skyliner;
   if (normalized.includes("haruka")) return text.haruka;
   if (isNankaiRapit(name)) return text.nankai ?? text.default;
+  if (normalized.includes("monorail")) return text.monorail ?? text.default;
   if (isAirportBus(name)) return text.bus;
   return text.default;
 }
@@ -166,6 +193,8 @@ const routeOmioIds: Record<string, string> = {
 
 function omioForOption(name: string, pagePath?: string) {
   if (isPrivateTransfer(name)) return null;
+  if (isNormalTaxi(name)) return null;
+  if (isNoReservationLocalOption(name)) return null;
   if (!isAirportBus(name) && !isAirportTrain(name)) return null;
   const linkId = pagePath ? routeOmioIds[pagePath] : undefined;
   if (!linkId) return null;
@@ -215,11 +244,13 @@ function configuredKlookHrefForOption(name: string, pagePath?: string) {
 }
 
 function validKlookBookingLink(name: string, href?: string, pagePath?: string) {
+  const bookingMode = deriveBookingMode(name);
+  if (bookingMode === "no_booking_ic_card" || bookingMode === "taxi_stand" || bookingMode === "comparison_only") return undefined;
   if (isNoReservationLocalOption(name)) return undefined;
   const configuredHref = configuredKlookHrefForOption(name, pagePath);
   if (configuredHref) return configuredHref;
   if (!href) return undefined;
-  if (isPrivateTransfer(name) && href === legacyAirportTransferUrl) return undefined;
+  if (bookingMode === "private_transfer" && href === legacyAirportTransferUrl) return undefined;
   if (isAirportBus(name) && href === naritaLimousineBusUrl && !pagePath?.includes("narita")) return undefined;
   return href;
 }
@@ -404,13 +435,14 @@ function bestForCopy(badge: TransferOptionProps["badge"], luggageFriendly: boole
 
 export function TransferOption({
   name, badge, duration, cost, pros, cons,
-  luggageFriendly, lateOk, bookingLink, bookingLabel = "Book ticket", locale = "en", pagePath, placement = "airport_transfer",
+  luggageFriendly, lateOk, bookingLink, bookingLabel = "Book ticket", locale = "en", pagePath, placement = "airport_transfer", bookingMode: explicitBookingMode,
 }: TransferOptionProps) {
   const ui = getAirportRouteUiCopy(locale);
+  const bookingMode = deriveBookingMode(name, explicitBookingMode);
   const b = badgeConfig[badge];
   const BadgeIcon = b.icon;
   const effectiveBookingLink = validKlookBookingLink(name, bookingLink, pagePath);
-  const omio = effectiveBookingLink ? omioForOption(name, pagePath) : null;
+  const omio = bookingMode === "affiliate_booking" && effectiveBookingLink ? omioForOption(name, pagePath) : null;
   const transportType = transportTypeForOption(name);
   const providerCtas = effectiveBookingLink
     ? [
@@ -421,7 +453,7 @@ export function TransferOption({
           locale,
           provider: "klook" as const,
           linkId: linkIdForKlookOption(name, pagePath),
-          product: isPrivateTransfer(name) ? "airport_private_transfer" : isAirportBus(name) ? "airport_bus" : "airport_train",
+          product: bookingMode === "private_transfer" ? "airport_private_transfer" : isAirportBus(name) ? "airport_bus" : "airport_train",
           transportType,
         },
         ...(omio
@@ -459,11 +491,21 @@ export function TransferOption({
       helperText={
         providerCtas.length > 1
           ? ui.helperBoth
-          : bookingLink
+          : effectiveBookingLink
             ? ui.helperKlook
             : undefined
       }
-      note={effectiveBookingLink ? undefined : isPrivateTransfer(name) ? ui.preBook : bookingLabel.includes("IC card") ? ui.noBookingIc : bookingLabel || ui.noBooking}
+      note={
+        effectiveBookingLink
+          ? undefined
+          : bookingMode === "taxi_stand"
+            ? "No advance booking needed - use taxi stand"
+            : bookingMode === "private_transfer"
+              ? ui.preBook
+              : bookingMode === "no_booking_ic_card" || bookingLabel.includes("IC card")
+                ? ui.noBookingIc
+                : bookingLabel || ui.noBooking
+      }
       placement={placement}
       prosLabel={ui.pros}
       consLabel={ui.cons}
