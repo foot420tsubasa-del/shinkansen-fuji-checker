@@ -61,6 +61,11 @@ function isAirportTrain(name: string) {
   );
 }
 
+function isNankaiRapit(name: string) {
+  const text = normalizedName(name);
+  return text.includes("rapi:t") || text.includes("rapit");
+}
+
 function actionTitleForOption(name: string) {
   const text = normalizedName(name);
   if (text.includes("private")) return "Private airport transfer";
@@ -119,7 +124,7 @@ function localizedActionTitle(name: string, locale?: string, canCompare = false)
   if (normalized.includes("narita express") || normalized.includes("n'ex")) return text.nex;
   if (normalized.includes("skyliner")) return text.skyliner;
   if (normalized.includes("haruka")) return text.haruka;
-  if (normalized.includes("nankai") || normalized.includes("rapi")) return text.nankai ?? text.default;
+  if (isNankaiRapit(name)) return text.nankai ?? text.default;
   if (isAirportBus(name)) return text.bus;
   return text.default;
 }
@@ -164,7 +169,7 @@ function linkIdForKlookOption(name: string, pagePath?: string) {
   if (text.includes("narita express") || text.includes("n'ex")) return "nex";
   if (text.includes("skyliner")) return "keiseiSkyliner";
   if (text.includes("haruka")) return "jrHaruka";
-  if (text.includes("nankai") || text.includes("rapi")) return "nankaiRapit";
+  if (isNankaiRapit(name)) return "nankaiRapit";
   if (isPrivateTransfer(name)) {
     if (pagePath?.includes("narita")) return "naritaPrivateTransfer";
     if (pagePath?.includes("haneda")) return "hanedaPrivateTransfer";
@@ -183,7 +188,7 @@ function linkIdForKlookOption(name: string, pagePath?: string) {
 function configuredKlookHrefForOption(name: string, pagePath?: string) {
   const text = normalizedName(name);
   if (text.includes("haruka")) return jrHarukaUrl;
-  if (text.includes("nankai") || text.includes("rapi")) return nankaiRapitUrl;
+  if (isNankaiRapit(name)) return nankaiRapitUrl;
   if (isPrivateTransfer(name)) {
     if (pagePath?.includes("narita")) return naritaPrivateTransferUrl ?? airportPrivateTransferUrl;
     if (pagePath?.includes("haneda")) return hanedaPrivateTransferUrl ?? airportPrivateTransferUrl;
