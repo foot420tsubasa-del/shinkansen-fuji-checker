@@ -39,6 +39,16 @@ const agodaMapIdsByStaySlug: Record<string, string[]> = {
   "shin-osaka-vs-namba": ["shinOsaka", "namba"],
 };
 
+const stayComparisonHotelPickSlugs = new Set([
+  "asakusa-vs-ueno",
+  "tokyo-station-vs-shinjuku",
+  "ueno-vs-shinjuku",
+  "shinjuku-vs-ueno-vs-asakusa",
+  "kyoto-station-vs-gion",
+  "namba-vs-umeda",
+  "shin-osaka-vs-namba",
+]);
+
 const filledNextStepClass =
   buttonClassName({ variant: "internal", fullWidth: true, className: "p-4 text-center" });
 const filledCommercialNextStepClass =
@@ -851,7 +861,12 @@ export default async function StayPage({ params }: Props) {
           <ProTip>{page.proTip}</ProTip>
 
           <section>
-            <HotelPicks picks={page.hotelPicks} locale={locale} pagePath={pagePath} />
+            <HotelPicks
+              picks={page.hotelPicks}
+              locale={locale}
+              pagePath={pagePath}
+              placement={stayComparisonHotelPickSlugs.has(page.slug) ? "stay_comparison_hotel_pick" : "hotel_pick"}
+            />
             <div className="mt-4 rounded-[18px] border border-emerald-100 bg-emerald-50/70 p-4">
               <p className="text-sm font-semibold text-slate-950">
                 {stayPagesCommon.localHotelBoxTitle}

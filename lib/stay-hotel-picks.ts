@@ -26,7 +26,16 @@ export type ResolvedStayHotelPick = {
   provider?: "trip" | "klook" | "agoda";
   trackingHref?: string;
   label?: string;
+  providerLinks?: Array<{
+    provider: "trip" | "agoda";
+    href: string;
+    trackingHref?: string;
+    label: string;
+    linkId: string;
+  }>;
 };
+
+type StayHotelPickProviderLink = NonNullable<ResolvedStayHotelPick["providerLinks"]>[number];
 
 const stayHotelPicks = stayHotelPickData as Record<string, ManagedStayHotelPick[]>;
 
@@ -41,6 +50,25 @@ export function getManagedStayHotelPicks(slug: string, fallback: ResolvedStayHot
     const agodaUrl = shared?.agodaUrl?.trim() || pick.agodaUrl?.trim();
     const tripUrl = shared?.tripUrl?.trim() || pick.tripUrl?.trim();
     const areaHotel = getHotelLink(hotelKey);
+    const providerLinks: StayHotelPickProviderLink[] = [];
+    if (tripUrl) {
+      providerLinks.push({
+        provider: "trip",
+        href: tripUrl,
+        trackingHref: tripUrl,
+        label: "Trip.com",
+        linkId: `hotelPick.${pick.id}.trip`,
+      });
+    }
+    if (agodaUrl) {
+      providerLinks.push({
+        provider: "agoda",
+        href: agodaUrl,
+        trackingHref: agodaUrl,
+        label: "Agoda",
+        linkId: `hotelPick.${pick.id}.agoda`,
+      });
+    }
     const specificUrl =
       primaryProvider === "agoda" && agodaUrl
         ? agodaUrl
@@ -65,6 +93,7 @@ export function getManagedStayHotelPicks(slug: string, fallback: ResolvedStayHot
       trackingHref: specificUrl || areaHotel.trackingHref,
       provider: specificProvider ?? areaHotel.provider,
       label: specificUrl ? specificLabel.replace("Trip.com", providerLabel) : areaHotel.label,
+      providerLinks: providerLinks.length ? providerLinks : undefined,
     };
   });
 }

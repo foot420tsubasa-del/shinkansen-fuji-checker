@@ -40,6 +40,7 @@ export type AffiliatePlacement =
   | "seat_result"
   | "stay_area"
   | "hotel_pick"
+  | "stay_comparison_hotel_pick"
   | "itinerary_day_card"
   | "airport_transfer"
   | "airport_hub_continue_planning"

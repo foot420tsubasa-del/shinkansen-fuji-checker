@@ -14,16 +14,25 @@ type HotelPick = {
   provider?: "trip" | "klook" | "agoda";
   trackingHref?: string;
   label?: string;
+  providerLinks?: Array<{
+    provider: "trip" | "agoda";
+    href: string;
+    trackingHref?: string;
+    label: string;
+    linkId: string;
+  }>;
 };
 
 export function HotelPicks({
   picks,
   locale = "en",
   pagePath = "/areas-to-stay",
+  placement = "hotel_pick",
 }: {
   picks: HotelPick[];
   locale?: string;
   pagePath?: string;
+  placement?: "hotel_pick" | "stay_comparison_hotel_pick";
 }) {
   const t = useTranslations("hotelPicks");
 
@@ -64,19 +73,41 @@ export function HotelPicks({
                   {priceLabel}
                 </span>
               </div>
-              <HotelCTA
-                areaName={hotel?.areaName ?? h.area}
-                city={hotel?.city ?? "Tokyo"}
-                provider={h.provider ?? hotel?.provider}
-                href={hotel?.href ?? h.link}
-                placement="hotel_pick"
-                locale={locale}
-                pagePath={pagePath}
-                label={h.label ?? hotel?.label ?? t("fallbackCompareHotels", { areaName: h.area })}
-                trackingHref={h.trackingHref ?? hotel?.trackingHref}
-                hotelName={h.name}
-                className="mt-3 w-full"
-              />
+              {h.providerLinks?.length ? (
+                <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {h.providerLinks.slice(0, 2).map((link) => (
+                    <HotelCTA
+                      key={`${h.id ?? h.name}-${link.provider}`}
+                      areaName={hotel?.areaName ?? h.area}
+                      city={hotel?.city ?? "Tokyo"}
+                      provider={link.provider}
+                      href={link.href}
+                      placement={placement}
+                      locale={locale}
+                      pagePath={pagePath}
+                      label={link.label}
+                      trackingHref={link.trackingHref}
+                      hotelName={h.name}
+                      linkId={link.linkId}
+                      className="w-full"
+                    />
+                  ))}
+                </div>
+              ) : (
+                <HotelCTA
+                  areaName={hotel?.areaName ?? h.area}
+                  city={hotel?.city ?? "Tokyo"}
+                  provider={h.provider ?? hotel?.provider}
+                  href={hotel?.href ?? h.link}
+                  placement={placement}
+                  locale={locale}
+                  pagePath={pagePath}
+                  label={h.label ?? hotel?.label ?? t("fallbackCompareHotels", { areaName: h.area })}
+                  trackingHref={h.trackingHref ?? hotel?.trackingHref}
+                  hotelName={h.name}
+                  className="mt-3 w-full"
+                />
+              )}
             </div>
           );
         })}
