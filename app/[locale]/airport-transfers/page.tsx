@@ -13,6 +13,7 @@ import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLin
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { ESIM_URL } from "@/src/affiliateLinks";
 import { getAirportTransferHubImage, getAirportTransferRouteImage } from "@/lib/airport-transfer-images";
+import { getAirportTransferHubCopy, localizedRouteTitle } from "@/lib/content/airport-transfer-i18n";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -21,16 +22,15 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const image = getAirportTransferHubImage();
+  const copy = getAirportTransferHubCopy(locale);
   return {
-    title: "Airport Transfers in Japan — Narita, Haneda and Kansai Airport | fujiseat",
-    description:
-      "Compare airport transfer options for Tokyo and Kansai, including Narita, Haneda, and Kansai Airport routes to Shinjuku, Asakusa, Kyoto, Namba and Umeda.",
+    title: copy.metaTitle,
+    description: copy.metaDescription,
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates("/airport-transfers", locale),
     openGraph: {
-      title: "Airport Transfers in Japan — Narita, Haneda & Kansai",
-      description:
-        "Compare airport transfer options for Tokyo and Kansai. Narita, Haneda, and KIX routes compared.",
+      title: copy.ogTitle,
+      description: copy.ogDescription,
       siteName: "fujiseat",
       ...(image ? { images: [{ url: image, width: 1200, height: 630 }] } : {}),
     },
@@ -82,7 +82,7 @@ function RouteTextLink({
       href={`/airport-transfers/${page.slug}`}
       sourcePage={pagePath}
       placement={placement}
-      label={page.title}
+      label={localizedRouteTitle(page, locale)}
       locale={locale}
       className="inline-flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition-colors hover:border-sky-200 hover:bg-sky-50 hover:text-sky-800"
     >
@@ -200,6 +200,7 @@ function ProblemCard({
 
 export default async function AirportTransfersIndex({ params }: Props) {
   const { locale } = await params;
+  const copy = getAirportTransferHubCopy(locale);
   const heroImage = getAirportTransferHubImage();
   const naritaImage = getAirportTransferRouteImage("narita");
   const hanedaImage = getAirportTransferRouteImage("haneda");
@@ -215,15 +216,15 @@ export default async function AirportTransfersIndex({ params }: Props) {
     <Container className="py-8 md:py-12">
       <Breadcrumb
         items={[
-          { label: "Home", href: "/" },
-          { label: "Airport Transfers" },
+          { label: copy.breadcrumbHome, href: "/" },
+          { label: copy.breadcrumbCurrent },
         ]}
       />
 
       <section className="mt-6 overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
         {heroImage ? (
           <div className="relative aspect-[21/9] max-h-[360px] min-h-[180px] w-full">
-            <Image src={heroImage} alt="Airport arrivals and transfer planning in Japan" fill priority sizes="(min-width: 768px) 1180px, 100vw" className="object-cover" />
+            <Image src={heroImage} alt={copy.heroImageAlt} fill priority sizes="(min-width: 768px) 1180px, 100vw" className="object-cover" />
           </div>
         ) : (
           <div className="flex aspect-[21/9] max-h-[360px] min-h-[180px] items-center justify-center bg-gradient-to-br from-sky-50 to-emerald-50">
@@ -232,100 +233,100 @@ export default async function AirportTransfersIndex({ params }: Props) {
         )}
         <div className="p-5 md:p-8">
           <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-sky-700">
-            Arrival transfer guide
+            {copy.heroLabel}
           </p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-            Airport Transfers in Japan
+            {copy.heroTitle}
           </h1>
           <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600 md:text-base">
-            Choose your first route from Narita, Haneda, or Kansai Airport before booking your hotel area. The best option depends on luggage, arrival time, and where you stay.
+            {copy.heroBody}
           </p>
           <div className="mt-5 flex flex-col gap-2 sm:flex-row">
             <TrackedInternalLink
               href="#tokyo-airport-routes"
               sourcePage={pagePath}
               placement="airport_hub_hero"
-              label="Start with Tokyo airport routes"
+              label={copy.heroPrimary}
               locale={locale}
               className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              Start with Tokyo airport routes
+              {copy.heroPrimary}
             </TrackedInternalLink>
             <TrackedInternalLink
               href="#kansai-airport-routes"
               sourcePage={pagePath}
               placement="airport_hub_hero"
-              label="See Kansai Airport routes"
+              label={copy.heroSecondary}
               locale={locale}
               className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-[#082653] bg-[#082653] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#061d40]"
             >
-              See Kansai Airport routes
+              {copy.heroSecondary}
             </TrackedInternalLink>
           </div>
         </div>
       </section>
 
       <section className="mt-10">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">Quick answer</p>
-        <h2 className="mt-2 text-xl font-bold text-slate-950">Start with where you sleep on night one</h2>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">{copy.quickLabel}</p>
+        <h2 className="mt-2 text-xl font-bold text-slate-950">{copy.quickTitle}</h2>
         <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           <QuickAnswerCard
-            title="Staying in Shinjuku"
-            copy="Narita Express is simple from Narita. From Haneda, trains or limousine bus are usually easier."
+            title={copy.quickAnswers[0].title}
+            copy={copy.quickAnswers[0].copy}
             href="/airport-transfers/narita-to-shinjuku"
-            label="Narita to Shinjuku"
+            label={copy.quickAnswers[0].label}
             locale={locale}
           />
           <QuickAnswerCard
-            title="Staying in Ueno / Asakusa"
-            copy="Narita can be very practical. Skyliner or direct Keisei/Asakusa Line routes often work well."
+            title={copy.quickAnswers[1].title}
+            copy={copy.quickAnswers[1].copy}
             href="/airport-transfers/narita-to-ueno"
-            label="Narita to Ueno / Asakusa"
+            label={copy.quickAnswers[1].label}
             locale={locale}
           />
           <QuickAnswerCard
-            title="Taking an early Shinkansen"
-            copy="Tokyo Station can reduce luggage stress before Kyoto or Osaka train days."
+            title={copy.quickAnswers[2].title}
+            copy={copy.quickAnswers[2].copy}
             href="/areas-to-stay/tokyo-station-hotels-before-shinkansen"
-            label="Tokyo stay area guide"
+            label={copy.quickAnswers[2].label}
             locale={locale}
           />
           <QuickAnswerCard
-            title="Landing late"
-            copy="Check last trains and airport hotels before booking a hotel far from the airport."
+            title={copy.quickAnswers[3].title}
+            copy={copy.quickAnswers[3].copy}
             href="/airport-transfers/narita-late-arrival"
-            label="Late arrival guides"
+            label={copy.quickAnswers[3].label}
             locale={locale}
           />
         </div>
       </section>
 
       <section id="tokyo-airport-routes" className="mt-12 scroll-mt-24">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-sky-700">Choose your arrival airport</p>
-        <h2 className="mt-2 text-2xl font-bold text-slate-950">Match the airport to your first hotel area</h2>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-sky-700">{copy.chooseLabel}</p>
+        <h2 className="mt-2 text-2xl font-bold text-slate-950">{copy.chooseTitle}</h2>
         <div className="mt-5 grid gap-5 lg:grid-cols-3">
           <AirportCard
-            title="Narita Airport"
-            body="Further from central Tokyo, but strong for Ueno, Asakusa, Tokyo Station, and Shinjuku with the right route."
+            title={copy.airportCards.narita.title}
+            body={copy.airportCards.narita.body}
             image={naritaImage}
-            imageAlt="Narita Airport arrivals transfer area"
+            imageAlt={copy.airportCards.narita.imageAlt}
             pages={naritaPages.filter((page) => ["narita-to-shinjuku", "narita-to-tokyo-station", "narita-to-ueno", "narita-to-asakusa"].includes(page.slug))}
             locale={locale}
           />
           <AirportCard
-            title="Haneda Airport"
-            body="Closer to central Tokyo. Good for Shinjuku, Tokyo Station, Asakusa, Ueno, and late arrivals."
+            title={copy.airportCards.haneda.title}
+            body={copy.airportCards.haneda.body}
             image={hanedaImage}
-            imageAlt="Haneda Airport arrivals transfer area"
+            imageAlt={copy.airportCards.haneda.imageAlt}
             pages={hanedaPages.filter((page) => ["haneda-to-shinjuku", "haneda-to-tokyo-station", "haneda-to-asakusa", "haneda-to-ueno"].includes(page.slug))}
             locale={locale}
           />
           <div id="kansai-airport-routes" className="scroll-mt-24">
             <AirportCard
-              title="Kansai Airport"
-              body="Gateway to Kyoto and Osaka. Choose Haruka, Nankai, bus, or transfer based on your first hotel area."
+              title={copy.airportCards.kansai.title}
+              body={copy.airportCards.kansai.body}
               image={kansaiImage}
-              imageAlt="Kansai Airport arrivals transfer area"
+              imageAlt={copy.airportCards.kansai.imageAlt}
               pages={kansaiPages.filter((page) => ["kansai-airport-to-kyoto", "kansai-airport-to-namba", "kansai-airport-to-umeda"].includes(page.slug))}
               locale={locale}
             />
@@ -334,21 +335,21 @@ export default async function AirportTransfersIndex({ params }: Props) {
       </section>
 
       <section className="mt-10">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">Choose by travel problem</p>
-        <h2 className="mt-2 text-xl font-bold text-slate-950">Route decisions that matter after landing</h2>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">{copy.problemLabel}</p>
+        <h2 className="mt-2 text-xl font-bold text-slate-950">{copy.problemTitle}</h2>
         <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-          <ProblemCard icon={<Luggage className="h-4 w-4" />} title="Heavy luggage" body="Prioritize direct trains, airport buses, or private transfer over the cheapest stairs-and-transfer route." href="/airport-transfers/narita-to-shinjuku" label="Compare luggage-friendly routes" locale={locale} />
-          <ProblemCard icon={<Clock className="h-4 w-4" />} title="Late arrival" body="Check the last-train risk before choosing a hotel far from the airport." href="/airport-transfers/haneda-late-arrival" label="Open late arrival guide" locale={locale} />
-          <ProblemCard icon={<MapPin className="h-4 w-4" />} title="First-time Tokyo" body="Choose the airport route together with your first Tokyo base." href="/areas-to-stay/tokyo-first-time" label="Choose Tokyo stay area" locale={locale} />
-          <ProblemCard icon={<Train className="h-4 w-4" />} title="Kyoto first night" body="If you land at KIX and sleep in Kyoto, compare Haruka, bus, and transfer options." href="/airport-transfers/kansai-airport-to-kyoto" label="KIX to Kyoto" locale={locale} />
-          <ProblemCard icon={<MapPin className="h-4 w-4" />} title="Osaka food/nightlife base" body="Namba is often the practical first target for food and evening energy." href="/airport-transfers/kansai-airport-to-namba" label="KIX to Namba" locale={locale} />
-          <ProblemCard icon={<Train className="h-4 w-4" />} title="Shinkansen next day" body="Tokyo Station can make luggage and early Kyoto or Osaka departures easier." href="/areas-to-stay/tokyo-station-hotels-before-shinkansen" label="Stay before Shinkansen" locale={locale} />
+          <ProblemCard icon={<Luggage className="h-4 w-4" />} title={copy.problems[0].title} body={copy.problems[0].body} href="/airport-transfers/narita-to-shinjuku" label={copy.problems[0].label} locale={locale} />
+          <ProblemCard icon={<Clock className="h-4 w-4" />} title={copy.problems[1].title} body={copy.problems[1].body} href="/airport-transfers/haneda-late-arrival" label={copy.problems[1].label} locale={locale} />
+          <ProblemCard icon={<MapPin className="h-4 w-4" />} title={copy.problems[2].title} body={copy.problems[2].body} href="/areas-to-stay/tokyo-first-time" label={copy.problems[2].label} locale={locale} />
+          <ProblemCard icon={<Train className="h-4 w-4" />} title={copy.problems[3].title} body={copy.problems[3].body} href="/airport-transfers/kansai-airport-to-kyoto" label={copy.problems[3].label} locale={locale} />
+          <ProblemCard icon={<MapPin className="h-4 w-4" />} title={copy.problems[4].title} body={copy.problems[4].body} href="/airport-transfers/kansai-airport-to-namba" label={copy.problems[4].label} locale={locale} />
+          <ProblemCard icon={<Train className="h-4 w-4" />} title={copy.problems[5].title} body={copy.problems[5].body} href="/areas-to-stay/tokyo-station-hotels-before-shinkansen" label={copy.problems[5].label} locale={locale} />
         </div>
       </section>
 
       <section className="mt-10 rounded-2xl border border-slate-200 bg-slate-50/70 p-5">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">All transfer route guides</p>
-        <h2 className="mt-2 text-lg font-bold text-slate-950">Keep every existing route easy to reach</h2>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">{copy.allRoutesLabel}</p>
+        <h2 className="mt-2 text-lg font-bold text-slate-950">{copy.allRoutesTitle}</h2>
         <div className="mt-4 grid gap-4 lg:grid-cols-4">
           <div>
             <h3 className="text-sm font-bold text-slate-900">Narita</h3>
@@ -369,7 +370,7 @@ export default async function AirportTransfersIndex({ params }: Props) {
             </div>
           </div>
           <div>
-            <h3 className="text-sm font-bold text-slate-900">Late arrival</h3>
+            <h3 className="text-sm font-bold text-slate-900">{copy.lateArrival}</h3>
             <div className="mt-2 grid gap-2">
               {lateArrivalPages.map((page) => <RouteTextLink key={page.slug} page={page} locale={locale} placement="airport_hub_airport_card" />)}
             </div>
@@ -378,19 +379,19 @@ export default async function AirportTransfersIndex({ params }: Props) {
       </section>
 
       <section className="mt-10">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">Continue planning</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">{copy.continueLabel}</p>
         <div className="mt-3 grid gap-3 md:grid-cols-4">
-          <TrackedInternalLink href="/areas-to-stay" sourcePage={pagePath} placement="airport_hub_continue_planning" label="Choose where to stay" locale={locale} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-900 shadow-sm transition-colors hover:bg-slate-50">
-            Choose where to stay <span className="mt-1 block text-xs font-normal text-slate-500">Pick the city and hotel area before booking.</span>
+          <TrackedInternalLink href="/areas-to-stay" sourcePage={pagePath} placement="airport_hub_continue_planning" label={copy.continueCards[0].title} locale={locale} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-900 shadow-sm transition-colors hover:bg-slate-50">
+            {copy.continueCards[0].title} <span className="mt-1 block text-xs font-normal text-slate-500">{copy.continueCards[0].body}</span>
           </TrackedInternalLink>
-          <TrackedAffiliateLink href={ESIM_URL} target="_blank" rel={AFFILIATE_REL} category="esim" provider="klook" placement="airport_hub_continue_planning" pagePath={pagePath} locale={locale} label="Get Japan eSIM" linkId="esim" product="esim" className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-900 shadow-sm transition-colors hover:bg-slate-50">
-            Get Japan eSIM <span className="mt-1 block text-xs font-normal text-slate-500">Set up maps and transit before landing.</span>
+          <TrackedAffiliateLink href={ESIM_URL} target="_blank" rel={AFFILIATE_REL} category="esim" provider="klook" placement="airport_hub_continue_planning" pagePath={pagePath} locale={locale} label={copy.continueCards[1].title} linkId="esim" product="esim" className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-900 shadow-sm transition-colors hover:bg-slate-50">
+            {copy.continueCards[1].title} <span className="mt-1 block text-xs font-normal text-slate-500">{copy.continueCards[1].body}</span>
           </TrackedAffiliateLink>
-          <TrackedInternalLink href="/guide" sourcePage={pagePath} placement="airport_hub_continue_planning" label="Check Shinkansen seat" locale={locale} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-900 shadow-sm transition-colors hover:bg-slate-50">
-            Check Shinkansen seat <span className="mt-1 block text-xs font-normal text-slate-500">Find the Fuji-side seat before booking rail.</span>
+          <TrackedInternalLink href="/guide" sourcePage={pagePath} placement="airport_hub_continue_planning" label={copy.continueCards[2].title} locale={locale} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-900 shadow-sm transition-colors hover:bg-slate-50">
+            {copy.continueCards[2].title} <span className="mt-1 block text-xs font-normal text-slate-500">{copy.continueCards[2].body}</span>
           </TrackedInternalLink>
-          <TrackedInternalLink href="/itineraries/7-day-first-time-japan" sourcePage={pagePath} placement="airport_hub_continue_planning" label="Open 7-day itinerary" locale={locale} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-900 shadow-sm transition-colors hover:bg-slate-50">
-            Open 7-day itinerary <span className="mt-1 block text-xs font-normal text-slate-500">Connect arrival, Tokyo, Fuji, Kyoto, and Osaka.</span>
+          <TrackedInternalLink href="/itineraries/7-day-first-time-japan" sourcePage={pagePath} placement="airport_hub_continue_planning" label={copy.continueCards[3].title} locale={locale} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-900 shadow-sm transition-colors hover:bg-slate-50">
+            {copy.continueCards[3].title} <span className="mt-1 block text-xs font-normal text-slate-500">{copy.continueCards[3].body}</span>
           </TrackedInternalLink>
         </div>
       </section>

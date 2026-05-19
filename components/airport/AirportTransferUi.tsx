@@ -95,6 +95,8 @@ type TransferOptionCardProps = {
   note?: string;
   provider?: AffiliateClickParams["provider"];
   placement: AffiliateClickParams["placement"];
+  prosLabel?: string;
+  consLabel?: string;
 };
 
 function ctaColor(title: string, provider?: AffiliateClickParams["provider"]) {
@@ -135,6 +137,8 @@ export function TransferOptionCard({
   note,
   provider,
   placement,
+  prosLabel = "Pros",
+  consLabel = "Cons",
 }: TransferOptionCardProps) {
   const providerCtas = ctas ?? (cta ? [cta] : []);
 
@@ -156,7 +160,7 @@ export function TransferOptionCard({
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
         <div>
-          <p className="mb-2 text-[10px] font-semibold uppercase text-emerald-600">Pros</p>
+          <p className="mb-2 text-[10px] font-semibold uppercase text-emerald-600">{prosLabel}</p>
           <ul className="space-y-1.5">
             {pros.map((item) => (
               <li key={item} className="flex items-start gap-2 text-xs leading-5 text-slate-700">
@@ -167,7 +171,7 @@ export function TransferOptionCard({
           </ul>
         </div>
         <div>
-          <p className="mb-2 text-[10px] font-semibold uppercase text-red-500">Cons</p>
+          <p className="mb-2 text-[10px] font-semibold uppercase text-red-500">{consLabel}</p>
           <ul className="space-y-1.5">
             {cons.map((item) => (
               <li key={item} className="flex items-start gap-2 text-xs leading-5 text-slate-700">
@@ -273,18 +277,18 @@ type AirportRouteCompareCardProps = {
   pagePath: string;
   locale?: string;
   linkId?: string;
+  title?: string;
+  body?: string;
 };
 
-export function AirportRouteCompareCard({ href, pagePath, locale, linkId }: AirportRouteCompareCardProps) {
+export function AirportRouteCompareCard({ href, pagePath, locale, linkId, title = "Not sure which transfer is best?", body = "Compare trains, buses, and route options before booking." }: AirportRouteCompareCardProps) {
   return (
     <section className="rounded-[22px] border border-sky-200 bg-sky-50 p-5 shadow-sm">
       <div className="grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-sky-700">Route comparison</p>
-          <h2 className="mt-2 text-lg font-semibold text-slate-950">Not sure which transfer is best?</h2>
-          <p className="mt-2 text-sm leading-6 text-slate-700">
-            Compare trains, buses, and route options before booking.
-          </p>
+          <h2 className="mt-2 text-lg font-semibold text-slate-950">{title}</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-700">{body}</p>
         </div>
         <TrackedAffiliateLink
           href={href}

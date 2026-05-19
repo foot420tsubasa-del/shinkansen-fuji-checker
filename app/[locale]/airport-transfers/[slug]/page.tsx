@@ -14,6 +14,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { getAirportTransferRouteImage } from "@/lib/airport-transfer-images";
 import { AirportHeroCard, AirportNextSteps, AirportRouteCompareCard, ArrivalSetupCard } from "@/components/airport/AirportTransferUi";
 import { ESIM_URL, getReadyAffUrl } from "@/src/affiliateLinks";
+import { getAirportRouteUiCopy, localizedLateArrivalNote, localizedProTip, localizedRouteDescription, localizedRouteTitle, localizeTripPick, routeSpecific } from "@/lib/content/airport-transfer-i18n";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -133,6 +134,7 @@ function routeCompareLink(slug: string) {
 }
 
 function ContinuePlanningCards({ locale, pagePath }: { locale: string; pagePath: string }) {
+  const ui = getAirportRouteUiCopy(locale);
   return (
     <AirportNextSteps
       sourcePage={pagePath}
@@ -140,16 +142,16 @@ function ContinuePlanningCards({ locale, pagePath }: { locale: string; pagePath:
       locale={locale}
       cards={[
         {
-          title: "Choose stay area",
-          body: "Match your first hotel area to your airport route.",
-          label: "Open guide",
+          title: ui.nextCards[0].title,
+          body: ui.nextCards[0].body,
+          label: ui.nextCards[0].label,
           href: "/areas-to-stay",
           icon: <Bed className="h-4 w-4 text-[#106b43]" />,
         },
         {
-          title: "Get Japan eSIM",
-          body: "Set up maps, translation, and transit before landing.",
-          label: "Get eSIM",
+          title: ui.nextCards[1].title,
+          body: ui.nextCards[1].body,
+          label: ui.nextCards[1].label,
           href: ESIM_URL,
           icon: <Wifi className="h-4 w-4 text-[#106b43]" />,
           external: true,
@@ -160,16 +162,16 @@ function ContinuePlanningCards({ locale, pagePath }: { locale: string; pagePath:
           product: "esim",
         },
         {
-          title: "Check Shinkansen seat",
-          body: "Find the Fuji-side seat before booking your rail day.",
-          label: "Open checker",
+          title: ui.nextCards[2].title,
+          body: ui.nextCards[2].body,
+          label: ui.nextCards[2].label,
           href: "/guide",
           icon: <Train className="h-4 w-4 text-[#106b43]" />,
         },
         {
-          title: "Open itinerary",
-          body: "Connect arrival, Tokyo, Fuji, Kyoto, and Osaka in order.",
-          label: "Open itinerary",
+          title: ui.nextCards[3].title,
+          body: ui.nextCards[3].body,
+          label: ui.nextCards[3].label,
           href: "/itineraries/7-day-first-time-japan",
           icon: <CalendarDays className="h-4 w-4 text-[#106b43]" />,
         },
@@ -187,13 +189,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const page = getTransferBySlug(slug);
   if (!page) return {};
   const image = getAirportTransferRouteImage(slug);
+  const title = localizedRouteTitle(page, locale);
+  const description = localizedRouteDescription(page, locale);
   return {
-    title: `${page.title} | fujiseat`,
-    description: page.description,
+    title: `${title} | fujiseat`,
+    description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
     openGraph: {
-      title: page.title,
-      description: page.description,
+      title,
+      description,
       siteName: "fujiseat",
       ...(image ? { images: [{ url: image, width: 1200, height: 630 }] } : {}),
     },
@@ -205,9 +209,13 @@ export default async function TransferPage({ params }: Props) {
   const { slug, locale } = await params;
   const page = getTransferBySlug(slug);
   if (!page) notFound();
+  const ui = getAirportRouteUiCopy(locale);
   const pagePath = `/airport-transfers/${slug}`;
   const bestOption = page.options[0];
   const enhanced = getEnhancedRouteCopy(slug, page, bestOption.name);
+  const specific = routeSpecific(locale, slug);
+  const routeTitle = localizedRouteTitle(page, locale);
+  const routeDescription = localizedRouteDescription(page, locale);
   const image = getAirportTransferRouteImage(slug);
   const compareLink = routeCompareLink(slug);
 
@@ -217,31 +225,31 @@ export default async function TransferPage({ params }: Props) {
 
       <Container className="py-8 md:py-12">
         <Breadcrumb items={[
-          { label: "Airport transfers", href: "/" },
+          { label: ui.breadcrumb, href: "/" },
           { label: `${page.from} → ${page.to}` },
         ]} />
 
         {enhanced ? (
           <AirportHeroCard
             label={enhanced.routeLabel}
-            title={page.title}
-            summary={page.description}
+            title={routeTitle}
+            summary={routeDescription}
             image={image}
             imageAlt={`${page.from} arrivals transfer area`}
             fallbackIcon={<Plane className="h-12 w-12" />}
             badges={[
-              { label: "Recommended", value: bestOption.name },
-              { label: "Luggage note", value: enhanced.luggageNote },
-              { label: "Late arrival", value: page.lateArrivalNote },
+              { label: ui.recommended, value: bestOption.name },
+              { label: ui.luggageNote, value: specific?.luggageNote ?? enhanced.luggageNote },
+              { label: ui.lateArrival, value: localizedLateArrivalNote(page, locale) },
             ]}
           />
         ) : (
           <>
             <h1 className="mt-4 text-2xl font-semibold text-slate-950 md:text-3xl">
-              {page.title}
+              {routeTitle}
             </h1>
             <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">
-              {page.description}
+              {routeDescription}
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-slate-500">
@@ -261,21 +269,21 @@ export default async function TransferPage({ params }: Props) {
         <div className="mt-8 space-y-8">
           <section className="rounded-[22px] border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
             <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-emerald-700">
-              Quick answer
+              {ui.quickAnswer}
             </p>
             <h2 className="mt-2 text-lg font-semibold text-slate-950">
-              {enhanced ? enhanced.quickTitle : `Most travelers should start with ${bestOption.name}.`}
+              {specific?.quickTitle ?? (locale === "en" ? enhanced.quickTitle : `${ui.recommended}: ${bestOption.name}`)}
             </h2>
             <p className="mt-2 text-sm leading-6 text-slate-700">
-              {enhanced ? enhanced.quickBody : `It is the default recommendation for ${page.from} to ${page.to}: ${bestOption.duration}, ${bestOption.cost}, and ${bestOption.luggageFriendly ? "luggage-friendly" : "best when traveling light"}.`}
+              {specific?.quickBody ?? (locale === "en" ? enhanced.quickBody : routeDescription)}
             </p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-slate-950">Compare your options</h2>
-            <p className="mt-1 text-sm text-slate-500">Sorted by what matters most — speed, ease, or cost.</p>
+            <h2 className="text-lg font-semibold text-slate-950">{ui.compareTitle}</h2>
+            <p className="mt-1 text-sm text-slate-500">{ui.compareBody}</p>
             <p className="mt-2 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-xs leading-5 text-amber-900">
-              Fares and travel times are approximate and can change by date, provider, service type, and booking channel. Always check the latest price and schedule before booking.
+              {ui.fareDisclaimer}
             </p>
             <div className="mt-4 grid gap-4 lg:grid-cols-1">
               {page.options.map((opt) => (
@@ -290,34 +298,36 @@ export default async function TransferPage({ params }: Props) {
               linkId={compareLink.linkId}
               pagePath={pagePath}
               locale={locale}
+              title={ui.compareRouteTitle}
+              body={ui.compareRouteBody}
             />
           ) : null}
 
           <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
             <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-sky-700">
-              Luggage note
+              {ui.luggageLabel}
             </p>
             <p className="mt-2 text-sm leading-6 text-slate-600">
-              With two or more large suitcases, prioritize direct trains or buses over the cheapest transfer. Station stairs and rush-hour platforms are the hidden cost.
+              {ui.luggageBody}
             </p>
           </section>
 
           <div className="flex gap-3 rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3">
             <Clock className="mt-0.5 h-4 w-4 shrink-0 text-sky-600" />
             <div>
-              <p className="text-xs font-semibold text-sky-900">Late arrival?</p>
-              <p className="mt-0.5 text-xs leading-5 text-sky-800">{page.lateArrivalNote}</p>
+              <p className="text-xs font-semibold text-sky-900">{ui.lateQuestion}</p>
+              <p className="mt-0.5 text-xs leading-5 text-sky-800">{localizedLateArrivalNote(page, locale)}</p>
             </div>
           </div>
 
-          <ProTip>{page.proTip}</ProTip>
+          <ProTip>{localizedProTip(page, locale)}</ProTip>
 
           {enhanced ? (
             <>
               <ArrivalSetupCard
-                title="Choose your hotel area around your arrival route"
-                body={enhanced.arrivalSetupBody}
-                ctaLabel="Choose stay area"
+                title={ui.arrivalTitle}
+                body={specific?.arrivalSetupBody ?? enhanced.arrivalSetupBody}
+                ctaLabel={ui.arrivalCta}
                 href={enhanced.stayHref}
                 placement="airport_route_arrival_setup"
                 sourcePage={pagePath}
@@ -329,9 +339,9 @@ export default async function TransferPage({ params }: Props) {
           ) : (
             <>
               <NextActions
-                picks={page.nextActions}
-                title="After choosing your transfer"
-                subtitle="Book the arrival route first, then confirm hotel area and data."
+                picks={page.nextActions.map((pick) => localizeTripPick(pick, locale))}
+                title={ui.compareTitle}
+                subtitle={ui.compareBody}
                 maxItems={4}
                 locale={locale}
                 pagePath={pagePath}

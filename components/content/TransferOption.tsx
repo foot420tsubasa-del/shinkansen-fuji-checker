@@ -3,6 +3,7 @@
 import { Check, Clock, Luggage, Wallet, Zap } from "lucide-react";
 import { TransferOptionCard } from "@/components/airport/AirportTransferUi";
 import type { AffiliateClickParams } from "@/lib/analytics";
+import { getAirportRouteUiCopy } from "@/lib/content/airport-transfer-i18n";
 import { getAffiliateConfig, getAffUrl, getReadyAffUrl } from "@/src/affiliateLinks";
 
 type TransferOptionProps = {
@@ -68,6 +69,36 @@ function actionTitleForOption(name: string) {
   if (text.includes("haruka")) return "Book or compare JR Haruka";
   if (isAirportBus(name)) return "Book or compare airport bus";
   return "Book or compare this route";
+}
+
+const actionTitleText: Record<string, Record<string, string>> = {
+  en: {
+    private: "Private airport transfer",
+    nex: "Book or compare Narita Express",
+    skyliner: "Book or compare Skyliner",
+    haruka: "Book or compare JR Haruka",
+    bus: "Book or compare airport bus",
+    default: "Book or compare this route",
+  },
+  es: { private: "Transfer privado de aeropuerto", nex: "Reservar o comparar Narita Express", skyliner: "Reservar o comparar Skyliner", haruka: "Reservar o comparar JR Haruka", bus: "Reservar o comparar bus de aeropuerto", default: "Reservar o comparar esta ruta" },
+  "pt-BR": { private: "Transfer privado de aeroporto", nex: "Reservar ou comparar Narita Express", skyliner: "Reservar ou comparar Skyliner", haruka: "Reservar ou comparar JR Haruka", bus: "Reservar ou comparar onibus de aeroporto", default: "Reservar ou comparar esta rota" },
+  ko: { private: "공항 private transfer", nex: "Narita Express 예약 또는 비교", skyliner: "Skyliner 예약 또는 비교", haruka: "JR Haruka 예약 또는 비교", bus: "공항버스 예약 또는 비교", default: "이 경로 예약 또는 비교" },
+  "zh-TW": { private: "私人機場接送", nex: "預訂或比較 Narita Express", skyliner: "預訂或比較 Skyliner", haruka: "預訂或比較 JR Haruka", bus: "預訂或比較機場巴士", default: "預訂或比較這條路線" },
+  "zh-CN": { private: "私人机场接送", nex: "预订或比较 Narita Express", skyliner: "预订或比较 Skyliner", haruka: "预订或比较 JR Haruka", bus: "预订或比较机场巴士", default: "预订或比较这条路线" },
+  fr: { private: "Transfert aeroport prive", nex: "Reserver ou comparer Narita Express", skyliner: "Reserver ou comparer Skyliner", haruka: "Reserver ou comparer JR Haruka", bus: "Reserver ou comparer le bus aeroport", default: "Reserver ou comparer cette route" },
+  de: { private: "Privater Flughafentransfer", nex: "Narita Express buchen oder vergleichen", skyliner: "Skyliner buchen oder vergleichen", haruka: "JR Haruka buchen oder vergleichen", bus: "Flughafenbus buchen oder vergleichen", default: "Diese Route buchen oder vergleichen" },
+  ru: { private: "Частный трансфер из аэропорта", nex: "Забронировать или сравнить Narita Express", skyliner: "Забронировать или сравнить Skyliner", haruka: "Забронировать или сравнить JR Haruka", bus: "Забронировать или сравнить автобус аэропорта", default: "Забронировать или сравнить маршрут" },
+};
+
+function localizedActionTitle(name: string, locale?: string) {
+  const text = actionTitleText[locale ?? "en"] ?? actionTitleText.en;
+  const normalized = normalizedName(name);
+  if (normalized.includes("private")) return text.private;
+  if (normalized.includes("narita express") || normalized.includes("n'ex")) return text.nex;
+  if (normalized.includes("skyliner")) return text.skyliner;
+  if (normalized.includes("haruka")) return text.haruka;
+  if (isAirportBus(name)) return text.bus;
+  return text.default;
 }
 
 function transportTypeForOption(name: string) {
@@ -158,18 +189,183 @@ const badgeConfig = {
   cheapest: { label: "Cheapest", icon: Wallet },
 };
 
-function bestForCopy(badge: TransferOptionProps["badge"], luggageFriendly: boolean, lateOk: boolean) {
-  if (badge === "fastest") return "Best for travelers who want the quickest route after landing.";
-  if (badge === "cheapest") return "Best if you are traveling light and want to keep costs low.";
-  if (luggageFriendly && lateOk) return "Best for heavy luggage, families, or tired late arrivals.";
-  if (luggageFriendly) return "Best if luggage ease matters more than raw speed.";
-  return "Best when you want a simpler arrival choice.";
+const tagText: Record<string, Record<string, string>> = {
+  en: {
+    luggageFriendly: "Luggage friendly",
+    luggageDifficult: "Luggage difficult",
+    lateOk: "Late arrival OK",
+    endsEarly: "Ends early evening",
+  },
+  "pt-BR": {
+    luggageFriendly: "Bom com bagagem",
+    luggageDifficult: "Dificil com bagagem",
+    lateOk: "Serve para chegada tarde",
+    endsEarly: "Termina cedo",
+  },
+  es: {
+    luggageFriendly: "Comodo con equipaje",
+    luggageDifficult: "Dificil con equipaje",
+    lateOk: "Sirve para llegada tarde",
+    endsEarly: "Termina temprano",
+  },
+  ko: {
+    luggageFriendly: "짐 이동 편함",
+    luggageDifficult: "짐 이동 어려움",
+    lateOk: "늦은 도착 가능",
+    endsEarly: "저녁 일찍 종료",
+  },
+  "zh-TW": {
+    luggageFriendly: "行李友善",
+    luggageDifficult: "行李較不方便",
+    lateOk: "適合晚到",
+    endsEarly: "傍晚較早結束",
+  },
+  "zh-CN": {
+    luggageFriendly: "行李友好",
+    luggageDifficult: "行李较不方便",
+    lateOk: "适合晚到",
+    endsEarly: "傍晚较早结束",
+  },
+  fr: {
+    luggageFriendly: "Pratique avec bagages",
+    luggageDifficult: "Difficile avec bagages",
+    lateOk: "OK arrivee tardive",
+    endsEarly: "Se termine tot",
+  },
+  de: {
+    luggageFriendly: "Gepaeckfreundlich",
+    luggageDifficult: "Schwierig mit Gepaeck",
+    lateOk: "Spaete Ankunft OK",
+    endsEarly: "Endet frueh",
+  },
+  ru: {
+    luggageFriendly: "Удобно с багажом",
+    luggageDifficult: "Сложно с багажом",
+    lateOk: "Подходит для позднего прилета",
+    endsEarly: "Заканчивается рано",
+  },
+};
+
+const optionListText: Record<string, {
+  pros: {
+    fastest: string;
+    cheapest: string;
+    luggage: string;
+    light: string;
+    late: string;
+    daytime: string;
+    bookable: string;
+    noBooking: string;
+  };
+  cons: {
+    expensive: string;
+    transfer: string;
+    traffic: string;
+    luggage: string;
+    late: string;
+    schedule: string;
+  };
+  cost: {
+    usually: string;
+    often: string;
+    depending: string;
+  };
+}> = {
+  en: {
+    pros: { fastest: "Fast travel time after landing", cheapest: "Keeps transfer cost low", luggage: "Easier with large luggage", light: "Good when traveling light", late: "Can work for later arrivals", daytime: "Good for daytime arrivals", bookable: "Can be booked in advance", noBooking: "No advance booking needed" },
+    cons: { expensive: "Costs more than local trains", transfer: "May require station transfers", traffic: "Traffic can add time", luggage: "Harder with large luggage", late: "Check final departures", schedule: "Schedule can be less flexible" },
+    cost: { usually: "usually around", often: "often around", depending: "depending on" },
+  },
+  "pt-BR": {
+    pros: { fastest: "Tempo de viagem rapido apos o pouso", cheapest: "Mantem o custo baixo", luggage: "Mais facil com malas grandes", light: "Bom se voce viaja leve", late: "Pode funcionar para chegadas mais tarde", daytime: "Bom para chegadas durante o dia", bookable: "Pode ser reservado com antecedencia", noBooking: "Nao precisa reservar antes" },
+    cons: { expensive: "Custa mais que trens locais", transfer: "Pode exigir baldeacoes em estacoes", traffic: "Transito pode aumentar o tempo", luggage: "Mais dificil com malas grandes", late: "Confira os ultimos horarios", schedule: "Horario pode ser menos flexivel" },
+    cost: { usually: "geralmente cerca de", often: "frequentemente cerca de", depending: "dependendo de" },
+  },
+  es: {
+    pros: { fastest: "Tiempo rapido despues de aterrizar", cheapest: "Mantiene bajo el coste del traslado", luggage: "Mas facil con maletas grandes", light: "Bueno si viajas ligero", late: "Puede servir para llegadas tardias", daytime: "Bueno para llegadas durante el dia", bookable: "Se puede reservar con antelacion", noBooking: "No requiere reserva previa" },
+    cons: { expensive: "Cuesta mas que trenes locales", transfer: "Puede requerir transbordos en estaciones", traffic: "El trafico puede sumar tiempo", luggage: "Mas dificil con maletas grandes", late: "Revisa los ultimos horarios", schedule: "El horario puede ser menos flexible" },
+    cost: { usually: "normalmente alrededor de", often: "a menudo alrededor de", depending: "segun" },
+  },
+  ko: {
+    pros: { fastest: "도착 후 이동 시간이 빠름", cheapest: "이동 비용을 낮게 유지", luggage: "큰 짐이 있을 때 더 편함", light: "짐이 적을 때 좋음", late: "늦은 도착에도 가능할 수 있음", daytime: "낮 도착에 좋음", bookable: "사전 예약 가능", noBooking: "사전 예약 필요 없음" },
+    cons: { expensive: "일반 전철보다 비쌀 수 있음", transfer: "역 환승이 필요할 수 있음", traffic: "교통 상황에 따라 시간이 늘어남", luggage: "큰 짐이 있으면 더 어려움", late: "막차 시간을 확인해야 함", schedule: "시간표가 덜 유연할 수 있음" },
+    cost: { usually: "보통 약", often: "대개 약", depending: "조건에 따라" },
+  },
+  "zh-TW": {
+    pros: { fastest: "落地後移動時間較快", cheapest: "能壓低交通費", luggage: "大型行李較方便", light: "適合輕裝旅行", late: "可能適合較晚抵達", daytime: "適合白天抵達", bookable: "可事先預訂", noBooking: "不需要事先預訂" },
+    cons: { expensive: "比一般電車貴", transfer: "可能需要車站轉乘", traffic: "交通狀況可能增加時間", luggage: "大型行李較不方便", late: "需要確認末班時間", schedule: "班次彈性可能較低" },
+    cost: { usually: "通常約", often: "多半約", depending: "視" },
+  },
+  "zh-CN": {
+    pros: { fastest: "落地后移动时间较快", cheapest: "能压低交通费", luggage: "大型行李较方便", light: "适合轻装旅行", late: "可能适合较晚抵达", daytime: "适合白天抵达", bookable: "可事先预订", noBooking: "不需要事先预订" },
+    cons: { expensive: "比普通电车贵", transfer: "可能需要车站换乘", traffic: "交通状况可能增加时间", luggage: "大型行李较不方便", late: "需要确认末班时间", schedule: "班次弹性可能较低" },
+    cost: { usually: "通常约", often: "多半约", depending: "视" },
+  },
+  fr: {
+    pros: { fastest: "Temps de trajet rapide apres l'atterrissage", cheapest: "Garde le cout du transfert bas", luggage: "Plus simple avec de grosses valises", light: "Bien si vous voyagez leger", late: "Peut fonctionner pour les arrivees tardives", daytime: "Bien pour les arrivees en journee", bookable: "Peut etre reserve a l'avance", noBooking: "Pas de reservation necessaire" },
+    cons: { expensive: "Plus cher que les trains locaux", transfer: "Peut demander des correspondances", traffic: "Le trafic peut ajouter du temps", luggage: "Plus difficile avec de grosses valises", late: "Verifiez les derniers departs", schedule: "Horaires parfois moins flexibles" },
+    cost: { usually: "generalement autour de", often: "souvent autour de", depending: "selon" },
+  },
+  de: {
+    pros: { fastest: "Schnelle Fahrzeit nach der Landung", cheapest: "Haelt Transferkosten niedrig", luggage: "Einfacher mit grossen Koffern", light: "Gut mit wenig Gepaeck", late: "Kann fuer spaete Ankunft passen", daytime: "Gut fuer Ankunft am Tag", bookable: "Kann vorab gebucht werden", noBooking: "Keine Vorabbuchung noetig" },
+    cons: { expensive: "Teurer als lokale Zuege", transfer: "Kann Umstiege am Bahnhof erfordern", traffic: "Verkehr kann Zeit kosten", luggage: "Schwieriger mit grossen Koffern", late: "Letzte Abfahrten pruefen", schedule: "Fahrplan kann weniger flexibel sein" },
+    cost: { usually: "normalerweise etwa", often: "oft etwa", depending: "je nach" },
+  },
+  ru: {
+    pros: { fastest: "Быстрое время в пути после прилета", cheapest: "Помогает снизить стоимость трансфера", luggage: "Удобнее с крупным багажом", light: "Хорошо, если вы едете налегке", late: "Может подойти для позднего прилета", daytime: "Хорошо для дневного прилета", bookable: "Можно забронировать заранее", noBooking: "Предварительное бронирование не нужно" },
+    cons: { expensive: "Дороже местных поездов", transfer: "Могут потребоваться пересадки", traffic: "Пробки могут увеличить время", luggage: "Сложнее с крупным багажом", late: "Проверьте последние отправления", schedule: "Расписание может быть менее гибким" },
+    cost: { usually: "обычно около", often: "часто около", depending: "в зависимости от" },
+  },
+};
+
+function optionTag(locale: string | undefined, key: keyof (typeof tagText)["en"]) {
+  return (tagText[locale ?? "en"] ?? tagText.en)[key];
+}
+
+function localizeCost(cost: string, locale?: string) {
+  const text = optionListText[locale ?? "en"] ?? optionListText.en;
+  if ((locale ?? "en") === "en") return cost;
+  return cost
+    .replace("usually around", text.cost.usually)
+    .replace("often around", text.cost.often)
+    .replace("depending on", text.cost.depending);
+}
+
+function localizedPros(locale: string | undefined, badge: TransferOptionProps["badge"], luggageFriendly: boolean, lateOk: boolean, bookable: boolean) {
+  if ((locale ?? "en") === "en") return null;
+  const text = optionListText[locale ?? "en"] ?? optionListText.en;
+  return [
+    badge === "fastest" ? text.pros.fastest : badge === "cheapest" ? text.pros.cheapest : text.pros.luggage,
+    luggageFriendly ? text.pros.luggage : text.pros.light,
+    lateOk ? text.pros.late : text.pros.daytime,
+    bookable ? text.pros.bookable : text.pros.noBooking,
+  ];
+}
+
+function localizedCons(locale: string | undefined, badge: TransferOptionProps["badge"], luggageFriendly: boolean, lateOk: boolean, name: string) {
+  if ((locale ?? "en") === "en") return null;
+  const text = optionListText[locale ?? "en"] ?? optionListText.en;
+  return [
+    badge === "cheapest" ? text.cons.transfer : badge === "easiest" && isAirportBus(name) ? text.cons.traffic : text.cons.expensive,
+    luggageFriendly ? text.cons.schedule : text.cons.luggage,
+    lateOk ? text.cons.traffic : text.cons.late,
+  ];
+}
+
+function bestForCopy(badge: TransferOptionProps["badge"], luggageFriendly: boolean, lateOk: boolean, locale?: string) {
+  const ui = getAirportRouteUiCopy(locale);
+  if (badge === "fastest") return ui.bestFor.fastest;
+  if (badge === "cheapest") return ui.bestFor.cheapest;
+  if (luggageFriendly && lateOk) return ui.bestFor.luggageLate;
+  if (luggageFriendly) return ui.bestFor.luggage;
+  return ui.bestFor.default;
 }
 
 export function TransferOption({
   name, badge, duration, cost, pros, cons,
   luggageFriendly, lateOk, bookingLink, bookingLabel = "Book ticket", locale = "en", pagePath, placement = "airport_transfer",
 }: TransferOptionProps) {
+  const ui = getAirportRouteUiCopy(locale);
   const b = badgeConfig[badge];
   const BadgeIcon = b.icon;
   const effectiveBookingLink = validKlookBookingLink(name, bookingLink, pagePath);
@@ -208,26 +404,28 @@ export function TransferOption({
     <TransferOptionCard
       title={name}
       time={duration}
-      price={cost}
-      bestFor={bestForCopy(badge, luggageFriendly, lateOk)}
-      pros={pros}
-      cons={cons}
+      price={localizeCost(cost, locale)}
+      bestFor={bestForCopy(badge, luggageFriendly, lateOk, locale)}
+      pros={localizedPros(locale, badge, luggageFriendly, lateOk, Boolean(effectiveBookingLink)) ?? pros}
+      cons={localizedCons(locale, badge, luggageFriendly, lateOk, name) ?? cons}
       tags={[
-        { label: b.label, tone: badge === "fastest" ? "amber" : badge === "easiest" ? "green" : "slate", icon: <BadgeIcon className="h-3 w-3" /> },
-        { label: luggageFriendly ? "Luggage friendly" : "Luggage difficult", tone: luggageFriendly ? "green" : "slate", icon: <Luggage className="h-3 w-3" /> },
-        { label: lateOk ? "Late arrival OK" : "Ends early evening", tone: lateOk ? "green" : "amber", icon: <Clock className="h-3 w-3" /> },
+        { label: ui.badges[badge] ?? b.label, tone: badge === "fastest" ? "amber" : badge === "easiest" ? "green" : "slate", icon: <BadgeIcon className="h-3 w-3" /> },
+        { label: luggageFriendly ? optionTag(locale, "luggageFriendly") : optionTag(locale, "luggageDifficult"), tone: luggageFriendly ? "green" : "slate", icon: <Luggage className="h-3 w-3" /> },
+        { label: lateOk ? optionTag(locale, "lateOk") : optionTag(locale, "endsEarly"), tone: lateOk ? "green" : "amber", icon: <Clock className="h-3 w-3" /> },
       ]}
       ctas={providerCtas}
-      actionTitle={actionTitleForOption(name)}
+      actionTitle={localizedActionTitle(name, locale) || actionTitleForOption(name)}
       helperText={
         providerCtas.length > 1
-          ? "Use Klook to book a specific ticket. Use Omio to compare trains, buses, and route options."
+          ? ui.helperBoth
           : bookingLink
-            ? "Use Klook to book this transport product."
+            ? ui.helperKlook
             : undefined
       }
-      note={effectiveBookingLink ? undefined : isPrivateTransfer(name) ? "Pre-book if needed" : bookingLabel}
+      note={effectiveBookingLink ? undefined : isPrivateTransfer(name) ? ui.preBook : bookingLabel.includes("IC card") ? ui.noBookingIc : bookingLabel || ui.noBooking}
       placement={placement}
+      prosLabel={ui.pros}
+      consLabel={ui.cons}
     />
   );
 }
