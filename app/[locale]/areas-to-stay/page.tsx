@@ -348,6 +348,13 @@ export default async function AreasToStayIndex({ params }: Props) {
           </ul>
         </section>
 
+        <section className="mt-6 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
+          <h2 className="text-lg font-semibold text-slate-950">Still not sure where to stay?</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
+            A personal stay-area recommendation can narrow this down by your airport, luggage, Shinkansen day, room-size needs, and travel style. The free guides below keep the decision general so you can compare the main city bases first.
+          </p>
+        </section>
+
         <section className="mt-10">
           <div className="flex items-end justify-between gap-4">
             <div>

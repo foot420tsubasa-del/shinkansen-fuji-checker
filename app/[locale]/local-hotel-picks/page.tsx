@@ -137,6 +137,13 @@ export default async function LocalHotelPicksPage({ params }: Props) {
           </nav>
         </section>
 
+        <section className="mt-6 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
+          <h2 className="text-xl font-semibold text-slate-950">How to use these hotel examples</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
+            These are not rankings. Use them as practical examples of area logic: quieter Shinjuku, easier Narita access, apartment-style family rooms, Kyoto station logistics, or Osaka food/nightlife bases. Always check the latest price, room size, and bed setup before booking.
+          </p>
+        </section>
+
         <div className="mt-8 space-y-12">
           <section id="tokyo" className="scroll-mt-24">
             <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end">

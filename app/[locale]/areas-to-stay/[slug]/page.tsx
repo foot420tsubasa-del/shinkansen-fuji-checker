@@ -323,6 +323,26 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
           </div>
         </section>
 
+        <section className="mt-10 grid gap-4 lg:grid-cols-2">
+          <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+            <h2 className="text-xl font-semibold text-slate-950">Common mistakes when choosing a Tokyo hotel area</h2>
+            <div className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
+              <p>Do not choose Shinjuku only because everyone recommends it.</p>
+              <p>Do not choose Asakusa only because it looks traditional.</p>
+              <p>Do not choose Tokyo Station only because it is convenient for Shinkansen.</p>
+              <p>A famous station is not always the easiest place to sleep.</p>
+              <p>Your best base depends on airport access, luggage, Shinkansen day, station complexity, quiet nights, and room size.</p>
+            </div>
+          </div>
+          <div className="rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
+            <h2 className="text-xl font-semibold text-slate-950">Room size note for Tokyo hotels</h2>
+            <div className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
+              <p>Tokyo hotel rooms can feel compact compared with hotels or apartments in some countries. For two travelers, rooms under 18㎡ can feel tight with large suitcases. Around 22–26㎡ is usually workable, and 30㎡+ is generally comfortable for two by Tokyo hotel standards.</p>
+              <p>Before booking, check room size, bed setup, and reviews mentioning luggage or small rooms.</p>
+            </div>
+          </div>
+        </section>
+
         <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
           <h2 className="text-xl font-semibold text-slate-950">{t("benefits.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-4">

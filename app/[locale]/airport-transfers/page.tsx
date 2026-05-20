@@ -266,6 +266,13 @@ export default async function AirportTransfersIndex({ params }: Props) {
         </div>
       </section>
 
+      <section className="mt-8 rounded-[22px] border border-sky-100 bg-sky-50/70 p-5 shadow-sm">
+        <h2 className="text-xl font-bold text-slate-950">Choose the hotel area and transfer together</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
+          Airport transfer is not only about the fastest train. Your first hotel area, luggage, arrival time, and station exits can change the easiest route. If you arrive late or carry large suitcases, choose the transfer and hotel area together.
+        </p>
+      </section>
+
       <section className="mt-10">
         <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">{copy.quickLabel}</p>
         <h2 className="mt-2 text-xl font-bold text-slate-950">{copy.quickTitle}</h2>

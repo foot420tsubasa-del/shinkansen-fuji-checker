@@ -359,7 +359,7 @@ const guideUiByLocale = {
     checkJrPassBody: "If your route includes Hiroshima, multiple long JR rides, or a return to Tokyo, check JR Pass options before booking separate tickets.",
     shinkansenDayLabel: "Shinkansen day setup",
     shinkansenDayTitle: "Choose where to stay before your Shinkansen day",
-    shinkansenDayBody: "If you are taking an early Shinkansen to Kyoto or Osaka, your Tokyo base matters. Tokyo Station can reduce luggage stress, while Shinjuku, Ueno, and Asakusa may fit different travel styles.",
+    shinkansenDayBody: "If you are taking an early Shinkansen to Kyoto or Osaka, your Tokyo base matters. Tokyo Station can reduce luggage stress, while Shinjuku, Ueno, and Asakusa may fit different travel styles. If your Shinkansen leaves early, the hotel area matters almost as much as the seat.",
     chooseTokyoStayArea: "Choose Tokyo stay area",
     seatGuidesLabel: "Seat guides by topic",
     seatGuideTitle: "Seat E guide",
