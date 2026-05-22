@@ -129,7 +129,6 @@ function SectionTitle({
 
 export default function HomeClient() {
   const t = useTranslations("home");
-  const tCommon = useTranslations("common");
   const locale = useLocale();
   const [direction, setDirection] = useState<DirectionId>("tokyo-osaka");
   const [hasChecked, setHasChecked] = useState(false);
@@ -140,10 +139,10 @@ export default function HomeClient() {
 
   const featureCards = useMemo(() => [
     { title: t("featureCards.seatChecker.title"), description: t("featureCards.seatChecker.desc"), href: "/#seat-checker", icon: Train },
+    { title: "Hotel Base", description: "Choose a Tokyo stay area for luggage, rail days, and airport access.", href: "/areas-to-stay", icon: Bed },
+    { title: t("featureCards.essentials.title"), description: t("featureCards.essentials.desc"), href: "/plan-your-trip", icon: Luggage },
     { title: t("featureCards.tripPlanner.title"), description: t("featureCards.tripPlanner.desc"), href: "/planner", icon: CalendarDays },
     { title: t("featureCards.quietTokyo.title"), description: t("featureCards.quietTokyo.desc"), href: "/local-tokyo", icon: Leaf },
-    { title: t("featureCards.stayAreas.title"), description: t("featureCards.stayAreas.desc"), href: "/areas-to-stay", icon: Bed },
-    { title: t("featureCards.essentials.title"), description: t("featureCards.essentials.desc"), href: "/plan-your-trip", icon: Luggage },
   ], [t]);
 
   const popularLinks: PopularLink[] = useMemo(() => [
@@ -262,11 +261,11 @@ export default function HomeClient() {
                 {t("nav.seat")}
               </Link>
               <Link
-                href="/planner"
+                href="/areas-to-stay"
                 className={buttonClassName({ variant: "internal", size: "lg" })}
               >
-                <CalendarDays className="h-4 w-4" />
-                {t("nav.planner")}
+                <Bed className="h-4 w-4" />
+                Choose your hotel base
               </Link>
             </div>
           </div>
@@ -379,9 +378,9 @@ export default function HomeClient() {
           </p>
           <div className="mt-5 rounded-2xl border border-[#d9e5f2] bg-white p-4 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
             <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#5f7190]">After checking your seat</p>
-            <div className="mt-3 grid items-stretch gap-3 lg:grid-cols-[1.35fr_1fr]">
+            <div className="mt-3 grid items-stretch gap-3 lg:grid-cols-2">
               <div className="flex h-full flex-col rounded-2xl border border-orange-100 bg-orange-50/70 p-3">
-                <p className="text-sm font-bold text-[#082653]">{tCommon("bookShinkansenTicket")}</p>
+                <p className="text-sm font-bold text-[#082653]">Book Shinkansen ticket</p>
                 <p className="mt-1 text-xs leading-5 text-slate-600">
                   Choose Seat E if available, then book the simple Tokyo to Kyoto / Osaka ticket.
                 </p>
@@ -431,7 +430,7 @@ export default function HomeClient() {
                 </div>
               </div>
               <div className="flex h-full flex-col rounded-2xl border border-orange-100 bg-orange-50/70 p-3">
-                <p className="text-sm font-bold text-[#082653]">{tCommon("checkJrPassOptions")}</p>
+                <p className="text-sm font-bold text-[#082653]">Compare JR Pass</p>
                 <p className="mt-1 text-xs leading-5 text-slate-600">
                   Use this if your route includes Hiroshima, multiple long JR rides, or a return to Tokyo.
                 </p>
@@ -461,21 +460,40 @@ export default function HomeClient() {
               <TrackedCtaLink
                 href="/areas-to-stay"
                 placement="home_seat_result"
-                label="Choose where to stay"
+                label="Choose your hotel base"
                 category="stay"
                 ctaType="stay"
                 pagePath="/"
                 locale={locale}
-                className="rounded-2xl border border-emerald-100 bg-emerald-50/70 p-3 transition-colors hover:bg-emerald-50 lg:col-span-2"
+                className="rounded-2xl border border-emerald-100 bg-emerald-50/70 p-3 transition-colors hover:bg-emerald-50"
               >
                 <span className="flex items-center gap-2 text-sm font-bold text-[#082653]">
                   <Bed className="h-3.5 w-3.5 text-[#106b43]" />
-                  {tCommon("chooseWhereToStay")}
+                  Choose your hotel base
                 </span>
                 <span className="mt-1 block text-xs leading-5 text-slate-600">
                   Taking an early Shinkansen? Choose a Tokyo base that makes luggage and station access easier.
                 </span>
-                <span className="mt-2 inline-flex text-xs font-bold text-[#106b43]">Choose Tokyo stay area →</span>
+                <span className="mt-2 inline-flex text-xs font-bold text-[#106b43]">Compare Tokyo stay areas →</span>
+              </TrackedCtaLink>
+              <TrackedCtaLink
+                href="/airport-transfers"
+                placement="home_seat_result"
+                label="Get eSIM / airport transfer"
+                category="transfer"
+                ctaType="transfer"
+                pagePath="/"
+                locale={locale}
+                className="rounded-2xl border border-sky-100 bg-sky-50/70 p-3 transition-colors hover:bg-sky-50"
+              >
+                <span className="flex items-center gap-2 text-sm font-bold text-[#082653]">
+                  <Car className="h-3.5 w-3.5 text-[#145aa0]" />
+                  Get eSIM / airport transfer
+                </span>
+                <span className="mt-1 block text-xs leading-5 text-slate-600">
+                  Sort your first arrival route, then prepare data for maps, translation, and transit apps.
+                </span>
+                <span className="mt-2 inline-flex text-xs font-bold text-[#145aa0]">Plan arrival essentials →</span>
               </TrackedCtaLink>
             </div>
           </div>
@@ -583,8 +601,8 @@ export default function HomeClient() {
 
         <section className="py-9">
           <SectionTitle
-            eyebrow={t("tokyoBases.eyebrow")}
-            description={t("tokyoBases.desc")}
+            eyebrow="Tokyo hotel base decision"
+            description="Use your airport, luggage, and Shinkansen day to choose a practical Tokyo base before comparing hotels."
           />
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {tokyoBaseChoices.map((area) => (
