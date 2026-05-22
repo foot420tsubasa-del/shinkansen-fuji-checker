@@ -442,22 +442,22 @@ export default function HomeClient() {
                   className="object-cover"
                 />
               </div>
-              <Link
-                href="/areas-to-stay/tokyo-first-time"
-                onClick={() =>
-                  trackCtaClick({
-                    placement: "home_tokyo_base_more",
-                    href: "/areas-to-stay/tokyo-first-time",
-                    label: "Open full Tokyo stay guide",
-                    category: "stay",
-                    locale,
-                  })
-                }
+              <p className="mt-3 text-xs leading-5 text-slate-600">
+                Compare famous stations, calmer nearby bases, and logistics-friendly hotel areas before you search hotels.
+              </p>
+              <TrackedCtaLink
+                href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
+                placement="home_hotel_base_matrix"
+                label="Open Tokyo hotel matrix"
+                category="stay"
+                ctaType="stay"
+                pagePath="/"
+                locale={locale}
                 className={`${buttonPageSecondary} mt-3 h-11 w-full px-5 text-sm`}
               >
-                {t("tokyoBases.fullGuide")}
+                Open Tokyo hotel matrix
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </TrackedCtaLink>
             </div>
           </div>
         </section>

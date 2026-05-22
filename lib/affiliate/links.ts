@@ -58,6 +58,7 @@ export type AffiliatePlacement =
   | "train_signs_google_maps"
   | "train_signs_checklist"
   | "local_hotel_pick"
+  | "local_hotel_picks_matrix"
   | "local_hotel_pick_more_options"
   | "stay_quick_answer"
   | "stay_area_glance_card"

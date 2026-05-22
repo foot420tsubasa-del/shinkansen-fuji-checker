@@ -487,7 +487,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
             <h2 className="mt-2 text-2xl font-semibold text-slate-950">Tokyo hotel base matrix</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">
               Compare famous stations, calmer nearby bases, and logistics-friendly hotel areas before you search hotels.
-              This is a general starting point, not a personalized recommendation.
+              This is a general starting point, not traveler-specific advice.
             </p>
           </div>
 
