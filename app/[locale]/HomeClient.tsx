@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
   Bed,
-  CalendarDays,
   Car,
   CheckCircle2,
   ExternalLink,
@@ -12,7 +11,6 @@ import {
   MapPinned,
   ShieldCheck,
   Train,
-  Wifi,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -22,16 +20,13 @@ import { SiteFooter } from "@/components/content/SiteFooter";
 import Image from "next/image";
 import { SeatCheckerPanel } from "@/components/travel/SeatCheckerPanel";
 import { SeatMapCard } from "@/components/travel/SeatResultCard";
-import { getProviderFromHref, trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
+import { trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
   type DirectionId,
   type FujiVisibility,
   getSeatRecommendation,
 } from "@/lib/seat-checker";
 import {
-  AIRPORT_TRANSFER_URL,
-  ESIM_URL,
-  INSURANCE_URL,
   JR_PASS_URL,
   OMIO_SHINKANSEN_URL,
   SHINKANSEN_TICKET_URL,
@@ -134,15 +129,7 @@ export default function HomeClient() {
     { label: "Seat E guide", href: "/shinkansen-seat-e", icon: Train },
     { label: "Seat letters A-E", href: "/shinkansen-seat-letters", icon: Train },
     { label: "All seat guides", href: "/shinkansen-seat-guides", icon: Train },
-    { label: t("popularLinks.kyoto.title"), href: "/itineraries/7-day-first-time-japan", icon: CalendarDays },
-  ], [t]);
-
-  const essentialCtas = useMemo(() => [
-    { title: t("essentialsCta.esim.title"), description: t("essentialsCta.esim.desc"), href: ESIM_URL, icon: Wifi, tracking: "home_essentials_esim", category: "esim" as const },
-    { title: t("essentialsCta.airportTransfer.title"), description: t("essentialsCta.airportTransfer.desc"), href: AIRPORT_TRANSFER_URL, icon: Car, tracking: "home_essentials_airport_transfer", category: "transfer" as const },
-    { title: t("essentialsCta.jrPass.title"), description: t("essentialsCta.jrPass.desc"), href: JR_PASS_URL, icon: Train, tracking: "home_essentials_jrpass", category: "train" as const },
-    { title: t("essentialsCta.insurance.title"), description: t("essentialsCta.insurance.desc"), href: INSURANCE_URL, icon: ShieldCheck, tracking: "home_essentials_insurance", category: "insurance" as const },
-  ], [t]);
+  ], []);
 
   const trustItems = useMemo(() => [
     { title: t("featureCards.seatChecker.title"), description: t("featureCards.seatChecker.desc"), icon: MapPinned },
@@ -475,60 +462,47 @@ export default function HomeClient() {
           </div>
         </section>
 
-        <section id="quiet-tokyo" className="py-9">
-          <div className="overflow-hidden rounded-[18px] border border-[#d9e5f2] bg-white p-5 shadow-[0_10px_25px_rgba(8,38,83,0.07)] md:grid md:grid-cols-[minmax(0,1fr)_220px] md:items-center md:gap-6">
-            <div>
-              <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">Support guide</p>
-              <h2 className="mt-1 text-xl font-bold text-[#082653]">Local Tokyo ideas after choosing your hotel base</h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5f7190]">
-                Use quieter local neighborhoods after the main hotel-base decision is clear. This stays secondary to rail,
-                hotel, and arrival planning.
+        <section className="py-7">
+          <SectionTitle
+            eyebrow="Support tools"
+            description="Use these after the seat, rail ticket, hotel base, and arrival essentials are clear."
+          />
+          <div className="grid gap-4 lg:grid-cols-3">
+            <div className="rounded-[18px] border border-[#d9e5f2] bg-white p-5 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
+              <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">Local Tokyo</p>
+              <h2 className="mt-1 text-lg font-bold text-[#082653]">Local Tokyo ideas after choosing your hotel base</h2>
+              <p className="mt-2 text-sm leading-6 text-[#5f7190]">
+                Use quieter local neighborhoods after the main hotel-base decision is clear.
               </p>
-            </div>
-            <div className="mt-5 md:mt-0">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-slate-100 bg-slate-50 shadow-sm">
-                <Image
-                  src="/images/home/local-tokyo-ideas.png"
-                  alt="Quiet local Tokyo neighborhood street"
-                  fill
-                  sizes="(min-width: 768px) 220px, 100vw"
-                  className="object-cover"
-                />
-              </div>
               <Link
                 href="/local-tokyo"
                 onClick={() =>
                   trackCtaClick({
-                    placement: "home_local_tokyo_more",
+                    placement: "home_support_tools",
                     href: "/local-tokyo",
-                    label: "Explore more local Tokyo areas",
+                    label: "Open Local Tokyo",
                     category: "local_tokyo",
                     locale,
                   })
                 }
-                className={`${buttonPageSecondary} mt-3 h-11 w-full px-5 text-sm`}
+                className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#106b43] underline underline-offset-4"
               >
                 Open Local Tokyo
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
-          </div>
-        </section>
-
-        <section className="py-6">
-          <div className="grid gap-4 lg:grid-cols-2">
             <div className="rounded-[18px] border border-[#d9e5f2] bg-white p-5 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
               <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">Route support</p>
-              <h2 className="mt-1 text-xl font-bold text-[#082653]">Need a full route overview?</h2>
+              <h2 className="mt-1 text-lg font-bold text-[#082653]">Need a full route overview?</h2>
               <p className="mt-2 text-sm leading-6 text-[#5f7190]">
-                Use these after the seat, rail ticket, hotel base, and arrival essentials are clear.
+                Keep itinerary tools secondary to seat, ticket, hotel, and arrival decisions.
               </p>
               <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
                 <Link
                   href="/plan-your-trip"
                   onClick={() =>
                     trackCtaClick({
-                      placement: "home_route_plan",
+                      placement: "home_support_tools",
                       href: "/plan-your-trip",
                       label: "Open trip planner",
                       category: "itinerary",
@@ -549,7 +523,7 @@ export default function HomeClient() {
                     href={link.href}
                     onClick={() =>
                       trackCtaClick({
-                        placement: "home_route_plan",
+                        placement: "home_support_tools",
                         href: link.href,
                         label: link.eventLabel,
                         category: "itinerary",
@@ -566,7 +540,7 @@ export default function HomeClient() {
             </div>
             <div className="rounded-[18px] border border-slate-200 bg-slate-50 p-5">
               <p className="text-[11px] font-black uppercase tracking-[0.1em] text-slate-500">Travel prep</p>
-              <h2 className="mt-1 text-xl font-bold text-[#082653]">Practice Japanese station signs</h2>
+              <h2 className="mt-1 text-lg font-bold text-[#082653]">Practice Japanese station signs</h2>
               <p className="mt-2 text-sm leading-6 text-[#5f7190]">
                 Practice exits, transfer gates, and station signs after reading the train-sign guide.
               </p>
@@ -574,7 +548,7 @@ export default function HomeClient() {
                 href="/station-practice"
                 onClick={() =>
                   trackCtaClick({
-                    placement: "home_station_practice",
+                    placement: "home_support_tools",
                     href: "/station-practice",
                     label: "Start station practice",
                     category: "station_practice",
@@ -587,41 +561,6 @@ export default function HomeClient() {
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
-          </div>
-        </section>
-
-        <section className="py-9">
-          <SectionTitle eyebrow="Essentials Before You Land" />
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {essentialCtas.map((item) => {
-              const Icon = item.icon;
-              return (
-                <a
-                  key={item.title}
-                  href={item.href}
-                  target="_blank"
-                  rel={AFFILIATE_REL}
-                  onClick={() => trackAffiliateClick({
-                    category: item.category,
-                    provider: getProviderFromHref(item.href),
-                    placement: "home_essentials",
-                    href: item.href,
-                    label: item.tracking,
-                    locale,
-                  })}
-                  className="flex min-h-[110px] items-center gap-4 rounded-[18px] border border-[#ffb56b] bg-[#fff8f0] p-5 shadow-[0_18px_45px_rgba(255,122,0,0.12)] transition-transform hover:-translate-y-1 hover:border-[#ff7a00]"
-                >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ff7a00] text-white">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-base font-bold leading-5 text-[#7a3300]">{item.title}</h3>
-                    <p className="mt-1 text-xs leading-5 text-[#5f7190]">{item.description}</p>
-                  </div>
-                  <ExternalLink className="ml-auto h-4 w-4 shrink-0 text-[#b44b00]" />
-                </a>
-              );
-            })}
           </div>
         </section>
 
