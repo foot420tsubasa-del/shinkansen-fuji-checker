@@ -37,6 +37,8 @@ const englishOnlyContentPaths = [
   "/jr-pass-vs-single-ticket",
   "/tokyo-to-kyoto-shinkansen-ticket",
   "/shinkansen-ticket-vs-jr-pass-tokyo-kyoto-osaka",
+  "/areas-to-stay/tokyo-hotel-room-size-guide",
+  "/areas-to-stay/where-to-stay-in-tokyo-with-luggage",
 ];
 
 const dynamicPaths = [
