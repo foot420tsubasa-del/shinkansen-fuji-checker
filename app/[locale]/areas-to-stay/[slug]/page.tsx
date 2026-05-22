@@ -20,6 +20,7 @@ import { AgodaHotelMap } from "@/components/affiliate/AgodaHotelMap";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { StayBaseCard } from "@/components/affiliate/StayBaseCard";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
+import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { getAllStaySlugs, getStayBySlug, type StayPage as StayContentPage } from "@/lib/content/stay";
 import { getAlternates } from "@/i18n/hreflang";
@@ -228,6 +229,50 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
   const comparisonHeadings = t.raw("comparison.headings") as string[];
   const comparisonRows = t.raw("comparison.rows") as string[][];
   const faqs = t.raw("faq.items") as Array<{ question: string; answer: string }>;
+  const nearbyBases = [
+    {
+      name: "Suitengumae / Ningyocho",
+      broadBase: "East Tokyo / Tokyo Station side",
+      bestFor: "Calmer nights, Haneda or Narita logistics, and travelers who want easier streets than the biggest hubs.",
+      watchOut: "Less nightlife than Shinjuku and fewer obvious first-time landmarks outside the hotel.",
+      href: "/areas-to-stay/tokyo/east-tokyo",
+    },
+    {
+      name: "Akasaka / Akasaka-mitsuke",
+      broadBase: "Central Tokyo",
+      bestFor: "Food, subway access, and a more controlled night base than the busiest station areas.",
+      watchOut: "Not as direct for Shinkansen mornings as staying near Tokyo Station.",
+      href: "/areas-to-stay/tokyo-first-time",
+    },
+    {
+      name: "Kuramae / Tawaramachi",
+      broadBase: "Asakusa / East Tokyo",
+      bestFor: "Cafes, design shops, calmer streets, and old-town access without sleeping in the most tourist-heavy blocks.",
+      watchOut: "Some airport or Shinkansen routes may need one extra transfer.",
+      href: "/areas-to-stay/tokyo/asakusa",
+    },
+    {
+      name: "Hatchobori / Kyobashi / Nihombashi",
+      broadBase: "Tokyo Station side",
+      bestFor: "Early Shinkansen, luggage logistics, and a quieter businesslike base near central rail routes.",
+      watchOut: "Less local-night energy than Shinjuku, Ueno, or Asakusa.",
+      href: "/areas-to-stay/tokyo/tokyo-station",
+    },
+    {
+      name: "Nippori / Okachimachi",
+      broadBase: "Ueno side",
+      bestFor: "Narita access, better-value hotel searches, and practical food options around the Ueno corridor.",
+      watchOut: "Pick carefully if you want nightlife or a polished first-night feel.",
+      href: "/areas-to-stay/tokyo/ueno",
+    },
+    {
+      name: "Nishi-Shinjuku / Yoyogi / Shinjuku-Gyoenmae",
+      broadBase: "Shinjuku side",
+      bestFor: "Shinjuku convenience with a better chance of calmer nights than the loudest east-side blocks.",
+      watchOut: "Walking distance and station exits matter because Shinjuku scale can still be tiring.",
+      href: "/areas-to-stay/tokyo/shinjuku",
+    },
+  ];
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -340,6 +385,76 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               <p>Tokyo hotel rooms can feel compact compared with hotels or apartments in some countries. For two travelers, rooms under 18㎡ can feel tight with large suitcases. Around 22–26㎡ is usually workable, and 30㎡+ is generally comfortable for two by Tokyo hotel standards.</p>
               <p>Before booking, check room size, bed setup, and reviews mentioning luggage or small rooms.</p>
             </div>
+          </div>
+        </section>
+
+        <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="max-w-3xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Hotel-base refinement</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">Smarter nearby hotel bases</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              The famous area name is only the starting point. A nearby hotel base can sometimes make arrival, luggage,
+              room size, or quiet nights easier while still keeping the same broad Tokyo logic. Use these as general
+              search directions, not station-by-station instructions.
+            </p>
+          </div>
+          <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {nearbyBases.map((base) => (
+              <article key={base.name} className="flex h-full flex-col rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                <h3 className="text-base font-semibold text-slate-950">{base.name}</h3>
+                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">{base.broadBase}</p>
+                <div className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
+                  <p><span className="font-semibold text-slate-900">Good if:</span> {base.bestFor}</p>
+                  <p><span className="font-semibold text-slate-900">Watch out:</span> {base.watchOut}</p>
+                </div>
+                <Link
+                  href={base.href}
+                  className="mt-4 inline-flex text-sm font-semibold text-[#106b43] underline underline-offset-4"
+                >
+                  Compare the broader area →
+                </Link>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+          <h2 className="text-lg font-semibold text-slate-950">Need a clearer Tokyo hotel-base framework?</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
+            Use the free guides for general area logic. Room size, luggage, airport arrival, and Shinkansen timing can
+            change the easiest hotel base, so keep those constraints visible before comparing hotels.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3">
+            <TrackedInternalLink
+              href="/areas-to-stay/tokyo-hotel-room-size-guide"
+              sourcePage={pagePath}
+              placement="tokyo_first_time_tokyo_pack"
+              label="Tokyo hotel room size guide"
+              locale={locale}
+              className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-700 transition-colors hover:bg-white"
+            >
+              Room size guide →
+            </TrackedInternalLink>
+            <TrackedInternalLink
+              href="/areas-to-stay/where-to-stay-in-tokyo-with-luggage"
+              sourcePage={pagePath}
+              placement="tokyo_first_time_tokyo_pack"
+              label="Tokyo with luggage guide"
+              locale={locale}
+              className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-700 transition-colors hover:bg-white"
+            >
+              Tokyo with luggage →
+            </TrackedInternalLink>
+            <TrackedInternalLink
+              href="/areas-to-stay"
+              sourcePage={pagePath}
+              placement="tokyo_first_time_tokyo_pack"
+              label="Japan stay area hub"
+              locale={locale}
+              className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold text-[#106b43] transition-colors hover:bg-white"
+            >
+              Compare stay area guides →
+            </TrackedInternalLink>
           </div>
         </section>
 

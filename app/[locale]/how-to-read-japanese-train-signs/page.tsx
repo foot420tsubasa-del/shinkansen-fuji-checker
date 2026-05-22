@@ -347,17 +347,18 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                   <InternalCta href="/#seat-checker" label="Find your Shinkansen seat" placement="train_signs_checklist" ctaType="seat_checker" locale={locale} variant="secondary" />
                 </div>
               </div>
-              <div className="mt-4 rounded-[22px] border border-[#d9e5f2] bg-[#f8fbff] p-5 shadow-sm">
+              <div className="mt-4 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
-                    <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#145aa0]">
-                      Practice tool
+                    <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">
+                      Practical next step
                     </p>
-                    <h3 className="mt-1 text-lg font-bold text-[#082653]">
-                      Practice station navigation
+                    <h3 className="mt-1 text-lg font-bold text-slate-950">
+                      Try Station Practice before your first ride
                     </h3>
                     <p className="mt-1 text-sm leading-6 text-slate-600">
-                      Try a free station navigation practice tool before your first train ride in Japan.
+                      After learning how signs work, practice exits, transfer gates, platforms, and wrong-route recovery
+                      in a short station navigation mission.
                     </p>
                   </div>
                   <TrackedCtaLink
@@ -367,7 +368,7 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                     pagePath="/how-to-read-japanese-train-signs"
                     locale={locale}
                     category="station_practice"
-                    className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-[#168a56] bg-white px-4 py-2.5 text-sm font-extrabold text-[#106b43] transition-colors hover:bg-[#f0fbf6]"
+                    className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
                   >
                     Start station practice
                     <ArrowRight className="h-4 w-4" />
