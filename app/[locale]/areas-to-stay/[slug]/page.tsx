@@ -66,6 +66,145 @@ type StayPageTranslation = Partial<Pick<StayContentPage, "title" | "description"
   faqs?: StayContentPage["faqs"];
 };
 
+type TokyoHotelBaseMatrixEntry = {
+  base: string;
+  category: "major" | "nearby" | "logistics";
+  goodIf: string;
+  watchOut: string;
+  accessLogic: string;
+  nextStepLabel: string;
+  href: string;
+};
+
+const tokyoHotelBaseMatrixGroups: Array<{
+  category: TokyoHotelBaseMatrixEntry["category"];
+  title: string;
+}> = [
+  { category: "major", title: "Major bases" },
+  { category: "nearby", title: "Nearby calmer bases" },
+  { category: "logistics", title: "Logistics bases" },
+];
+
+const tokyoHotelBaseMatrix: TokyoHotelBaseMatrixEntry[] = [
+  {
+    base: "Shinjuku",
+    category: "major",
+    goodIf: "First-time Tokyo energy, food, nightlife, and many hotel choices.",
+    watchOut: "Crowds, a huge station, and a tiring arrival with luggage.",
+    accessLogic: "Flexible, but not the easiest for Narita or early Shinkansen.",
+    nextStepLabel: "Compare Shinjuku area",
+    href: "/areas-to-stay/ueno-vs-shinjuku",
+  },
+  {
+    base: "Ueno",
+    category: "major",
+    goodIf: "Narita access, museums, better-value hotel search, and practical east Tokyo logistics.",
+    watchOut: "Less polished than Ginza or Shinjuku.",
+    accessLogic: "Strong for Narita and easy to Tokyo Station.",
+    nextStepLabel: "Compare Ueno area",
+    href: "/areas-to-stay/asakusa-vs-ueno",
+  },
+  {
+    base: "Asakusa",
+    category: "major",
+    goodIf: "Old Tokyo atmosphere, Senso-ji, river walks, and calmer nights.",
+    watchOut: "Not JR-centered; check subway routing.",
+    accessLogic: "Good for east Tokyo if your hotel is near the right subway line.",
+    nextStepLabel: "Compare Asakusa area",
+    href: "/areas-to-stay/asakusa-vs-ueno",
+  },
+  {
+    base: "Tokyo Station",
+    category: "major",
+    goodIf: "Early Shinkansen, luggage logistics, first/last night, and businesslike convenience.",
+    watchOut: "Large station, businesslike feel, less local atmosphere.",
+    accessLogic: "Best for Shinkansen and strong for airport logistics.",
+    nextStepLabel: "Compare Tokyo Station area",
+    href: "/areas-to-stay/tokyo-station-vs-shinjuku",
+  },
+  {
+    base: "Nishi-Shinjuku / Yoyogi / Shinjuku-Gyoenmae",
+    category: "nearby",
+    goodIf: "You want Shinjuku access with calmer nights.",
+    watchOut: "Not the same as staying directly in the nightlife core.",
+    accessLogic: "Good if your hotel is near a convenient exit or subway line.",
+    nextStepLabel: "See Shinjuku alternatives",
+    href: "/areas-to-stay/tokyo/shinjuku",
+  },
+  {
+    base: "Kuramae / Tawaramachi",
+    category: "nearby",
+    goodIf: "You want Asakusa atmosphere but a calmer hotel base.",
+    watchOut: "Check exact subway line and nearest hotel exit.",
+    accessLogic: "Useful for east Tokyo, cafes, river walks, and quieter nights.",
+    nextStepLabel: "See East Tokyo bases",
+    href: "/areas-to-stay/asakusa-vs-ueno",
+  },
+  {
+    base: "Hatchobori / Kyobashi / Nihombashi",
+    category: "nearby",
+    goodIf: "Tokyo Station and Ginza access with a calmer hotel base.",
+    watchOut: "Can feel quiet or businesslike at night.",
+    accessLogic: "Good for early Shinkansen and central logistics.",
+    nextStepLabel: "See Shinkansen-friendly bases",
+    href: "/areas-to-stay/where-to-stay-before-shinkansen",
+  },
+  {
+    base: "Akasaka / Akasaka-mitsuke",
+    category: "nearby",
+    goodIf: "Balanced central Tokyo access to Ginza, Shibuya, Shinjuku, and calmer nights than Shinjuku.",
+    watchOut: "Less old-town or classic sightseeing atmosphere.",
+    accessLogic: "Good central balance if your hotel is close to the right subway station.",
+    nextStepLabel: "Compare central Tokyo bases",
+    href: "/areas-to-stay/tokyo-first-time",
+  },
+  {
+    base: "Suitengumae / Ningyocho",
+    category: "nearby",
+    goodIf: "Airport limousine / T-CAT, Nihombashi, calmer central-east stay, and luggage.",
+    watchOut: "Less famous for first-time visitors; subway/bus routing matters.",
+    accessLogic: "Strong if using T-CAT or airport limousine; useful for central-east Tokyo.",
+    nextStepLabel: "See central-east bases",
+    href: "/areas-to-stay/tokyo/east-tokyo",
+  },
+  {
+    base: "Yurakucho / Ginza / Hibiya",
+    category: "nearby",
+    goodIf: "You want Tokyo Station and Ginza access without staying directly inside the Tokyo Station hotel zone.",
+    watchOut: "Can feel businesslike or shopping-focused. Not ideal for old-town atmosphere or Shinjuku-style nightlife.",
+    accessLogic: "Strong for Tokyo Station, Ginza, Hibiya, and central Tokyo.",
+    nextStepLabel: "Compare Tokyo Station area",
+    href: "/areas-to-stay/tokyo-station-vs-shinjuku",
+  },
+  {
+    base: "Nippori / Okachimachi",
+    category: "logistics",
+    goodIf: "Narita access, Ueno-area hotel search, and practical first/last night logistics.",
+    watchOut: "Less classic first-time Tokyo atmosphere.",
+    accessLogic: "Very strong for Narita and easy to connect toward Ueno / Tokyo Station.",
+    nextStepLabel: "See Ueno-area bases",
+    href: "/areas-to-stay/asakusa-vs-ueno",
+  },
+  {
+    base: "Hamamatsucho / Daimon",
+    category: "logistics",
+    goodIf: "You use Haneda Airport, want easy airport logistics, or need a practical first/last night base.",
+    watchOut: "Less exciting as a first-time sightseeing base. Check whether your hotel is closer to JR Hamamatsucho, Monorail Hamamatsucho, or Daimon.",
+    accessLogic: "Very strong for Haneda and practical for luggage.",
+    nextStepLabel: "See airport-friendly bases",
+    href: "/airport-transfers",
+  },
+  {
+    base: "Shinagawa / Takanawa Gateway",
+    category: "logistics",
+    goodIf: "You want easy access to the Tokaido Shinkansen, Haneda Airport, or a practical first/last night base.",
+    watchOut: "It can feel businesslike and less atmospheric than Asakusa, Ueno, or Shinjuku. Station exits and hotel location matter.",
+    accessLogic: "Very strong for Shinkansen and strong for Haneda.",
+    nextStepLabel: "See Shinkansen-friendly bases",
+    href: "/areas-to-stay/where-to-stay-before-shinkansen",
+  },
+];
+
 function applyStayPageTranslation(page: StayContentPage, translation?: StayPageTranslation): StayContentPage {
   if (!translation) return page;
   return {
@@ -339,6 +478,88 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                 <span className="mt-2 block font-semibold text-slate-950">→ {area}</span>
               </a>
             ))}
+          </div>
+        </section>
+
+        <section id="hotel-base-matrix" className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="max-w-3xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Hotel base decision</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">Tokyo hotel base matrix</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Compare famous stations, calmer nearby bases, and logistics-friendly hotel areas before you search hotels.
+              This is a general starting point, not a personalized recommendation.
+            </p>
+          </div>
+
+          <div className="mt-6 space-y-6">
+            {tokyoHotelBaseMatrixGroups.map((group) => {
+              const entries = tokyoHotelBaseMatrix.filter((entry) => entry.category === group.category);
+
+              return (
+                <div key={group.category}>
+                  <h3 className="text-base font-semibold text-slate-950">{group.title}</h3>
+
+                  <div className="mt-3 hidden overflow-x-auto rounded-2xl border border-slate-200 md:block">
+                    <table className="w-full min-w-[860px] border-collapse text-left text-sm">
+                      <thead>
+                        <tr className="border-b border-slate-200 bg-slate-50 text-xs uppercase tracking-[0.08em] text-slate-500">
+                          <th className="px-3 py-3 font-semibold">Base</th>
+                          <th className="px-3 py-3 font-semibold">Good if</th>
+                          <th className="px-3 py-3 font-semibold">Watch out</th>
+                          <th className="px-3 py-3 font-semibold">Access logic</th>
+                          <th className="px-3 py-3 font-semibold">Next step</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {entries.map((entry) => (
+                          <tr key={entry.base} className="border-b border-slate-100 last:border-0">
+                            <td className="w-[190px] px-3 py-4 align-top font-semibold text-slate-950">{entry.base}</td>
+                            <td className="px-3 py-4 align-top leading-6 text-slate-600">{entry.goodIf}</td>
+                            <td className="px-3 py-4 align-top leading-6 text-slate-600">{entry.watchOut}</td>
+                            <td className="px-3 py-4 align-top leading-6 text-slate-600">{entry.accessLogic}</td>
+                            <td className="w-[170px] px-3 py-4 align-top">
+                              <TrackedInternalLink
+                                href={entry.href}
+                                sourcePage={pagePath}
+                                placement="tokyo_first_time_hotel_base_matrix"
+                                label={entry.nextStepLabel}
+                                locale={locale}
+                                className="inline-flex text-sm font-semibold text-[#106b43] underline underline-offset-4 transition-colors hover:text-[#0f6f45]"
+                              >
+                                {entry.nextStepLabel} →
+                              </TrackedInternalLink>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div className="mt-3 grid gap-3 md:hidden">
+                    {entries.map((entry) => (
+                      <article key={entry.base} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                        <h4 className="font-semibold text-slate-950">{entry.base}</h4>
+                        <div className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
+                          <p><span className="font-semibold text-slate-900">Good if:</span> {entry.goodIf}</p>
+                          <p><span className="font-semibold text-slate-900">Watch out:</span> {entry.watchOut}</p>
+                          <p><span className="font-semibold text-slate-900">Access logic:</span> {entry.accessLogic}</p>
+                        </div>
+                        <TrackedInternalLink
+                          href={entry.href}
+                          sourcePage={pagePath}
+                          placement="tokyo_first_time_hotel_base_matrix"
+                          label={entry.nextStepLabel}
+                          locale={locale}
+                          className="mt-3 inline-flex text-sm font-semibold text-[#106b43] underline underline-offset-4 transition-colors hover:text-[#0f6f45]"
+                        >
+                          {entry.nextStepLabel} →
+                        </TrackedInternalLink>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
 
