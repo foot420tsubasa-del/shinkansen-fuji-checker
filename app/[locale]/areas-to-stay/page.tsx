@@ -351,7 +351,9 @@ export default async function AreasToStayIndex({ params }: Props) {
         <section className="mt-6 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
           <h2 className="text-lg font-semibold text-slate-950">Still not sure where to stay?</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
-            Use the stay-area guides to compare hotel bases by airport access, luggage, Shinkansen days, room-size needs, and travel style. Start with the city guide, then compare hotels only after the base logic feels clear.
+            Not sure which city or station area to search hotels near? Use the guides below to compare famous stations
+            and calmer nearby bases by airport access, luggage, Shinkansen plans, room-size needs, and travel style.
+            These guides are general starting points, not personalized hotel recommendations.
           </p>
         </section>
 

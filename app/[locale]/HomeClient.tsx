@@ -9,10 +9,8 @@ import {
   CheckCircle2,
   ExternalLink,
   Leaf,
-  Luggage,
   MapPinned,
   ShieldCheck,
-  Signpost,
   Train,
   Wifi,
 } from "lucide-react";
@@ -25,12 +23,6 @@ import { SiteFooter } from "@/components/content/SiteFooter";
 import Image from "next/image";
 import { SeatCheckerPanel } from "@/components/travel/SeatCheckerPanel";
 import { SeatMapCard } from "@/components/travel/SeatResultCard";
-import {
-  AreaChoiceCard,
-  type AreaChoice,
-  LocalLensCard,
-  type LocalLensPick,
-} from "@/components/content/LocalTokyoCards";
 import { getProviderFromHref, trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
   type DirectionId,
@@ -50,7 +42,6 @@ import { AFFILIATE_REL } from "@/lib/link-rel";
 const JR_CENTRAL_SOURCE_URL =
   "https://recommend.jr-central.co.jp/shizuoka-tabi/articles/01/";
 
-const asset = (name: string) => `/reference-ui-assets/${name}`;
 const image2Placeholder = (name: string) => `/design-home-assets/${name}`;
 
 const buttonPageSecondary =
@@ -139,33 +130,17 @@ export default function HomeClient() {
 
   const featureCards = useMemo(() => [
     { title: t("featureCards.seatChecker.title"), description: t("featureCards.seatChecker.desc"), href: "/#seat-checker", icon: Train },
-    { title: "Hotel Base", description: "Choose a Tokyo stay area for luggage, rail days, and airport access.", href: "/areas-to-stay", icon: Bed },
-    { title: t("featureCards.essentials.title"), description: t("featureCards.essentials.desc"), href: "/plan-your-trip", icon: Luggage },
-    { title: t("featureCards.tripPlanner.title"), description: t("featureCards.tripPlanner.desc"), href: "/planner", icon: CalendarDays },
-    { title: t("featureCards.quietTokyo.title"), description: t("featureCards.quietTokyo.desc"), href: "/local-tokyo", icon: Leaf },
+    { title: "Hotel Base", description: "Choose a practical hotel base for luggage, rail days, and calmer nights.", href: "/areas-to-stay", icon: Bed },
+    { title: "Rail Tickets", description: "Book a Shinkansen ticket or compare JR Pass before buying rail.", href: "/guide", icon: Train },
+    { title: "Arrival Essentials", description: "Plan airport transfer and data before arrival day.", href: "/airport-transfers", icon: Car },
   ], [t]);
 
   const popularLinks: PopularLink[] = useMemo(() => [
     { label: t("footer.shinkansenGuide"), href: "/guide", icon: Train },
-    { label: t("popularLinks.kyoto.title"), href: "/itineraries/7-day-first-time-japan", icon: CalendarDays },
-    { label: t("featureCards.quietTokyo.title"), href: "/local-tokyo", icon: Leaf },
+    { label: "Choose your hotel base", href: "/areas-to-stay", icon: Bed },
     { label: t("essentialsCta.esim.title"), href: ESIM_URL, icon: Wifi, external: true, tracking: "home_popular_esim" },
     { label: t("essentialsCta.airportTransfer.title"), href: "/airport-transfers", icon: Car },
-  ], [t]);
-
-  const tokyoBaseChoices: AreaChoice[] = useMemo(() => [
-    { name: t("tokyoBases.shinjuku.name"), bestFor: t("tokyoBases.shinjuku.bestFor"), mood: t("tokyoBases.shinjuku.mood"), weakness: t("tokyoBases.shinjuku.weakness"), compareHref: "/areas-to-stay/tokyo-first-time", compareCta: "View Shinjuku", trackingPlacement: "home_tokyo_base_shinjuku", trackingLocale: locale, trackingPagePath: "/" },
-    { name: t("tokyoBases.uenoAsakusa.name"), bestFor: t("tokyoBases.uenoAsakusa.bestFor"), mood: t("tokyoBases.uenoAsakusa.mood"), weakness: t("tokyoBases.uenoAsakusa.weakness"), compareHref: "/areas-to-stay/asakusa-vs-ueno", compareCta: t("tokyoBases.uenoAsakusa.compareCta"), trackingPlacement: "home_tokyo_base_ueno_asakusa", trackingLocale: locale, trackingPagePath: "/" },
-    { name: t("tokyoBases.tokyoStation.name"), bestFor: t("tokyoBases.tokyoStation.bestFor"), mood: t("tokyoBases.tokyoStation.mood"), weakness: t("tokyoBases.tokyoStation.weakness"), compareHref: "/areas-to-stay/where-to-stay-before-shinkansen", compareCta: "View Tokyo Station", trackingPlacement: "home_tokyo_base_tokyo_station", trackingLocale: locale, trackingPagePath: "/" },
-  ], [locale, t]);
-
-  const localLensPicks: LocalLensPick[] = useMemo(() => [
-    { name: t("localTokyo.kiyosumi.name"), summary: t("localTokyo.kiyosumi.summary"), bestFor: t("localTokyo.kiyosumi.bestFor"), avoidIf: t("localTokyo.kiyosumi.avoidIf"), timing: t("localTokyo.kiyosumi.timing"), href: "/local-tokyo/kiyosumi-shirakawa", image: image2Placeholder("quiet-kiyosumi.jpg") },
-    { name: t("localTokyo.kuramae.name"), summary: t("localTokyo.kuramae.summary"), bestFor: t("localTokyo.kuramae.bestFor"), avoidIf: t("localTokyo.kuramae.avoidIf"), timing: t("localTokyo.kuramae.timing"), href: "/local-tokyo/kuramae", image: image2Placeholder("quiet-kuramae.jpg") },
-    { name: t("localTokyo.oshiage.name"), summary: t("localTokyo.oshiage.summary"), bestFor: t("localTokyo.oshiage.bestFor"), avoidIf: t("localTokyo.oshiage.avoidIf"), timing: t("localTokyo.oshiage.timing"), href: "/local-tokyo/oshiage", image: image2Placeholder("quiet-oshiage.jpg") },
-    { name: t("localTokyo.monzenNakacho.name"), summary: t("localTokyo.monzenNakacho.summary"), bestFor: t("localTokyo.monzenNakacho.bestFor"), avoidIf: t("localTokyo.monzenNakacho.avoidIf"), timing: t("localTokyo.monzenNakacho.timing"), href: "/local-tokyo/monzen-nakacho", image: image2Placeholder("quiet-monzen-nakacho.jpg") },
-    { name: t("localTokyo.ryogoku.name"), summary: t("localTokyo.ryogoku.summary"), bestFor: t("localTokyo.ryogoku.bestFor"), avoidIf: t("localTokyo.ryogoku.avoidIf"), timing: t("localTokyo.ryogoku.timing"), href: "/local-tokyo/ryogoku", image: image2Placeholder("quiet-ryogoku.jpg") },
-    { name: t("localTokyo.suitengumae.name"), summary: t("localTokyo.suitengumae.summary"), bestFor: t("localTokyo.suitengumae.bestFor"), avoidIf: t("localTokyo.suitengumae.avoidIf"), timing: t("localTokyo.suitengumae.timing"), href: "/local-tokyo/suitengumae-ningyocho", image: image2Placeholder("quiet-suitengumae.png") },
+    { label: t("popularLinks.kyoto.title"), href: "/itineraries/7-day-first-time-japan", icon: CalendarDays },
   ], [t]);
 
   const essentialCtas = useMemo(() => [
@@ -201,7 +176,7 @@ export default function HomeClient() {
           cloudPercent: json.cloudPercent,
           message: json.message,
         });
-      } catch (e) {
+      } catch {
         setVisError(true);
       } finally {
         if (slowTimer) clearTimeout(slowTimer);
@@ -258,7 +233,7 @@ export default function HomeClient() {
                 className={buttonClassName({ variant: "internal", size: "lg" })}
               >
                 <Train className="h-4 w-4" />
-                {t("nav.seat")}
+                Check Fuji-side seat
               </Link>
               <Link
                 href="/areas-to-stay"
@@ -273,7 +248,7 @@ export default function HomeClient() {
       </section>
 
       <div className="mx-auto max-w-[1180px] px-5 md:px-7">
-        <section className="relative z-10 mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+        <section className="relative z-10 mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {featureCards.map((card) => {
             const Icon = card.icon;
             return (
@@ -292,53 +267,7 @@ export default function HomeClient() {
           })}
         </section>
 
-        <section className="py-10">
-          <SectionTitle eyebrow={t("popularLinks.eyebrow")} />
-          <div className="flex flex-wrap gap-4">
-            {popularLinks.map((link) => {
-              const Icon = link.icon;
-              const content = (
-                <>
-                  <Icon className="h-4 w-4" />
-                  {link.label}
-                  {link.external && <ExternalLink className="h-3.5 w-3.5" />}
-                </>
-              );
-              if (link.external) {
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel={AFFILIATE_REL}
-                    onClick={() => trackAffiliateClick({
-                      category: "esim",
-                      provider: getProviderFromHref(link.href),
-                      placement: "home_popular",
-                      href: link.href,
-                      label: link.tracking ?? link.label,
-                      locale,
-                    })}
-                    className={`${buttonAffiliatePill} h-[42px] px-5 text-sm`}
-                  >
-                    {content}
-                  </a>
-                );
-              }
-              return (
-                <SmartLink
-                  key={link.label}
-                  href={link.href}
-                  className={`${buttonPagePill} h-[42px] px-5 text-sm`}
-                >
-                  {content}
-                </SmartLink>
-              );
-            })}
-          </div>
-        </section>
-
-        <section id="seat-checker" className="py-8">
+        <section id="seat-checker" className="py-10">
           <SectionTitle
             eyebrow="Fuji-side seat checker"
             description="Check the route first, then confirm Seat E for the standard-car Mt. Fuji window. The existing seat logic is preserved here."
@@ -430,6 +359,26 @@ export default function HomeClient() {
                 </div>
               </div>
               <div className="flex h-full flex-col rounded-2xl border border-orange-100 bg-orange-50/70 p-3">
+                <p className="text-sm font-bold text-[#082653]">Choose your hotel base</p>
+                <p className="mt-1 text-xs leading-5 text-slate-600">
+                  Taking an early Shinkansen? Choose a Tokyo base that makes luggage and station access easier.
+                </p>
+                <div className="mt-auto pt-3">
+                  <TrackedCtaLink
+                    href="/areas-to-stay"
+                    placement="home_seat_result"
+                    label="Choose your hotel base"
+                    category="stay"
+                    ctaType="stay"
+                    pagePath="/"
+                    locale={locale}
+                    className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+                  >
+                    Compare Tokyo stay areas
+                  </TrackedCtaLink>
+                </div>
+              </div>
+              <div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-slate-50 p-3">
                 <p className="text-sm font-bold text-[#082653]">Compare JR Pass</p>
                 <p className="mt-1 text-xs leading-5 text-slate-600">
                   Use this if your route includes Hiroshima, multiple long JR rides, or a return to Tokyo.
@@ -458,25 +407,6 @@ export default function HomeClient() {
                 </div>
               </div>
               <TrackedCtaLink
-                href="/areas-to-stay"
-                placement="home_seat_result"
-                label="Choose your hotel base"
-                category="stay"
-                ctaType="stay"
-                pagePath="/"
-                locale={locale}
-                className="rounded-2xl border border-emerald-100 bg-emerald-50/70 p-3 transition-colors hover:bg-emerald-50"
-              >
-                <span className="flex items-center gap-2 text-sm font-bold text-[#082653]">
-                  <Bed className="h-3.5 w-3.5 text-[#106b43]" />
-                  Choose your hotel base
-                </span>
-                <span className="mt-1 block text-xs leading-5 text-slate-600">
-                  Taking an early Shinkansen? Choose a Tokyo base that makes luggage and station access easier.
-                </span>
-                <span className="mt-2 inline-flex text-xs font-bold text-[#106b43]">Compare Tokyo stay areas →</span>
-              </TrackedCtaLink>
-              <TrackedCtaLink
                 href="/airport-transfers"
                 placement="home_seat_result"
                 label="Get eSIM / airport transfer"
@@ -504,81 +434,155 @@ export default function HomeClient() {
           </div>
         </section>
 
-        <section className="py-9">
-          <div className="rounded-[18px] border border-[#d9e5f2] bg-white p-5 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
-            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-              <div className="max-w-2xl">
-                <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">
-                  {t("routePlan.eyebrow")}
-                </p>
-                <h2 className="mt-1 text-xl font-bold text-[#082653]">
-                  {t("routePlan.title")}
-                </h2>
-                <p className="mt-1 text-sm leading-6 text-[#5f7190]">
-                  {t("routePlan.desc")}
-                </p>
+        <section className="py-7">
+          <div className="overflow-hidden rounded-[18px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-[0_10px_25px_rgba(8,38,83,0.06)] md:grid md:grid-cols-[minmax(0,1fr)_240px] md:items-center md:gap-6">
+            <div>
+              <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">
+                Tokyo hotel base
+              </p>
+              <h2 className="mt-1 text-xl font-bold text-[#082653]">
+                Choose a practical hotel base before comparing hotels
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5f7190]">
+                Start with Shinjuku, Ueno / Asakusa, or Tokyo Station based on airport access, luggage,
+                Shinkansen days, and quieter nights.
+              </p>
+              <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs font-semibold text-[#106b43]">
+                {[
+                  { href: "/areas-to-stay/asakusa-vs-ueno", label: "Ueno vs Asakusa" },
+                  { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Tokyo Station vs Shinjuku" },
+                  { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Tokyo with luggage" },
+                ].map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() =>
+                      trackCtaClick({
+                        placement: "home_tokyo_base_more",
+                        href: link.href,
+                        label: link.label,
+                        category: "stay",
+                        locale,
+                      })
+                    }
+                    className="inline-flex items-center gap-1 underline underline-offset-4 transition-colors hover:text-[#0f6f45]"
+                  >
+                    {link.label}
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div className="mt-5 md:mt-0">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/70 bg-white shadow-sm">
+                <Image
+                  src="/images/home/tokyo-hotel-base.png"
+                  alt="Luggage near a Tokyo station hotel area"
+                  fill
+                  sizes="(min-width: 768px) 240px, 100vw"
+                  className="object-cover"
+                />
               </div>
               <Link
-                href="/plan-your-trip"
+                href="/areas-to-stay/tokyo-first-time"
                 onClick={() =>
                   trackCtaClick({
-                    placement: "home_route_plan",
-                    href: "/plan-your-trip",
-                    label: "Open trip planner",
-                    category: "itinerary",
+                    placement: "home_tokyo_base_more",
+                    href: "/areas-to-stay/tokyo-first-time",
+                    label: "Open full Tokyo stay guide",
+                    category: "stay",
                     locale,
                   })
                 }
-                className={buttonClassName({ variant: "internal" })}
+                className={`${buttonPageSecondary} mt-3 h-11 w-full px-5 text-sm`}
               >
-                {t("routePlan.primaryCta")}
+                {t("tokyoBases.fullGuide")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
-            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold text-[#106b43]">
-              {[
-                { href: "/itineraries/7-day-first-time-japan", label: t("routePlan.sevenDay"), eventLabel: "See 7-day itinerary" },
-                { href: "/itineraries/10-day-japan-with-fuji", label: t("routePlan.tenDay"), eventLabel: "See 10-day itinerary" },
-                { href: "/command-center", label: t("routePlan.commandCenter"), eventLabel: "Open Command Center" },
-              ].map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() =>
-                    trackCtaClick({
-                      placement: "home_route_plan",
-                      href: link.href,
-                      label: link.eventLabel,
-                      category: "itinerary",
-                      locale,
-                    })
-                  }
-                  className="inline-flex items-center gap-1 underline underline-offset-4 transition-colors hover:text-[#0f6f45]"
-                >
-                  {link.label}
-                  <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-              ))}
+          </div>
+        </section>
+
+        <section id="quiet-tokyo" className="py-9">
+          <div className="overflow-hidden rounded-[18px] border border-[#d9e5f2] bg-white p-5 shadow-[0_10px_25px_rgba(8,38,83,0.07)] md:grid md:grid-cols-[minmax(0,1fr)_220px] md:items-center md:gap-6">
+            <div>
+              <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">Support guide</p>
+              <h2 className="mt-1 text-xl font-bold text-[#082653]">Local Tokyo ideas after choosing your hotel base</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5f7190]">
+                Use quieter local neighborhoods after the main hotel-base decision is clear. This stays secondary to rail,
+                hotel, and arrival planning.
+              </p>
+            </div>
+            <div className="mt-5 md:mt-0">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-slate-100 bg-slate-50 shadow-sm">
+                <Image
+                  src="/images/home/local-tokyo-ideas.png"
+                  alt="Quiet local Tokyo neighborhood street"
+                  fill
+                  sizes="(min-width: 768px) 220px, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <Link
+                href="/local-tokyo"
+                onClick={() =>
+                  trackCtaClick({
+                    placement: "home_local_tokyo_more",
+                    href: "/local-tokyo",
+                    label: "Explore more local Tokyo areas",
+                    category: "local_tokyo",
+                    locale,
+                  })
+                }
+                className={`${buttonPageSecondary} mt-3 h-11 w-full px-5 text-sm`}
+              >
+                Open Local Tokyo
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
-          <div className="mt-5 max-w-3xl rounded-[18px] border border-slate-700 bg-[#07142f] p-5 shadow-[0_14px_34px_rgba(7,20,47,0.22)]">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-start gap-3">
-                <div className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-yellow-300/40 bg-yellow-300/10 text-yellow-300">
-                  <Signpost className="h-5 w-5" />
-                </div>
-                <div>
-                  <p className="inline-flex rounded-full border border-yellow-300/35 bg-yellow-300/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.1em] text-yellow-300">
-                    {t("stationPractice.label")}
-                  </p>
-                  <h3 className="mt-2 text-lg font-bold text-white">
-                    {t("stationPractice.title")}
-                  </h3>
-                  <p className="mt-1 text-sm leading-6 text-slate-300">
-                    {t("stationPractice.desc")}
-                  </p>
-                </div>
+        </section>
+
+        <section className="py-6">
+          <div className="grid gap-4 lg:grid-cols-2">
+            <div className="rounded-[18px] border border-[#d9e5f2] bg-white p-5 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
+              <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">Route support</p>
+              <h2 className="mt-1 text-xl font-bold text-[#082653]">Need a full route overview?</h2>
+              <p className="mt-2 text-sm leading-6 text-[#5f7190]">
+                Use these after the seat, rail ticket, hotel base, and arrival essentials are clear.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {[
+                  { href: "/plan-your-trip", label: "Open Trip Planner", eventLabel: "Open trip planner" },
+                  { href: "/command-center", label: "Open Command Center", eventLabel: "Open Command Center" },
+                  { href: "/itineraries/7-day-first-time-japan", label: "See 7-day itinerary", eventLabel: "See 7-day itinerary" },
+                ].map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() =>
+                      trackCtaClick({
+                        placement: "home_route_plan",
+                        href: link.href,
+                        label: link.eventLabel,
+                        category: "itinerary",
+                        locale,
+                      })
+                    }
+                    className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-bold text-[#106b43] transition-colors hover:bg-white"
+                  >
+                    {link.label}
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                ))}
               </div>
+            </div>
+            <div className="rounded-[18px] border border-slate-200 bg-slate-50 p-5">
+              <p className="text-[11px] font-black uppercase tracking-[0.1em] text-slate-500">Travel prep</p>
+              <h2 className="mt-1 text-xl font-bold text-[#082653]">Station Practice</h2>
+              <p className="mt-2 text-sm leading-6 text-[#5f7190]">
+                Practice exits, transfer gates, and station signs after reading the train-sign guide.
+              </p>
               <Link
                 href="/station-practice"
                 onClick={() =>
@@ -590,73 +594,12 @@ export default function HomeClient() {
                     locale,
                   })
                 }
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-yellow-300 bg-yellow-300 px-4 py-2.5 text-xs font-extrabold text-slate-950 shadow-[0_8px_18px_rgba(250,204,21,0.18)] transition-colors hover:bg-yellow-200"
+                className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#106b43] underline underline-offset-4"
               >
-                {t("stationPractice.cta")}
+                Start station practice
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
-          </div>
-        </section>
-
-        <section className="py-9">
-          <SectionTitle
-            eyebrow="Tokyo hotel base decision"
-            description="Use your airport, luggage, and Shinkansen day to choose a practical Tokyo base before comparing hotels."
-          />
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {tokyoBaseChoices.map((area) => (
-              <AreaChoiceCard key={area.name} area={area} />
-            ))}
-          </div>
-          <div className="mt-5 flex justify-center">
-            <Link
-              href="/areas-to-stay/tokyo-first-time"
-              onClick={() =>
-                trackCtaClick({
-                  placement: "home_tokyo_base_more",
-                  href: "/areas-to-stay/tokyo-first-time",
-                    label: "Open full Tokyo stay guide",
-                  category: "stay",
-                  locale,
-                })
-              }
-              className={`${buttonPageSecondary} h-11 px-5 text-sm`}
-            >
-              {t("tokyoBases.fullGuide")}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </section>
-
-        <section id="quiet-tokyo" className="py-9">
-          <SectionTitle
-            eyebrow={t("localTokyo.eyebrow")}
-            description={t("localTokyo.desc")}
-            centered
-          />
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {localLensPicks.slice(0, 3).map((pick) => (
-              <LocalLensCard key={pick.name} pick={pick} />
-            ))}
-          </div>
-          <div className="mt-5 flex justify-center">
-            <Link
-              href="/local-tokyo"
-              onClick={() =>
-                trackCtaClick({
-                  placement: "home_local_tokyo_more",
-                  href: "/local-tokyo",
-                  label: "Explore more local Tokyo areas",
-                  category: "local_tokyo",
-                  locale,
-                })
-              }
-              className={`${buttonPageSecondary} h-11 px-5 text-sm`}
-            >
-              {t("localTokyo.seeAll")}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
           </div>
         </section>
 
@@ -721,6 +664,52 @@ export default function HomeClient() {
                   </div>
                   <ExternalLink className="ml-auto h-4 w-4 shrink-0 text-[#b44b00]" />
                 </a>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="py-6">
+          <SectionTitle eyebrow="More guides" />
+          <div className="flex flex-wrap gap-3">
+            {popularLinks.map((link) => {
+              const Icon = link.icon;
+              const content = (
+                <>
+                  <Icon className="h-4 w-4" />
+                  {link.label}
+                  {link.external && <ExternalLink className="h-3.5 w-3.5" />}
+                </>
+              );
+              if (link.external) {
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel={AFFILIATE_REL}
+                    onClick={() => trackAffiliateClick({
+                      category: "esim",
+                      provider: getProviderFromHref(link.href),
+                      placement: "home_popular",
+                      href: link.href,
+                      label: link.tracking ?? link.label,
+                      locale,
+                    })}
+                    className={`${buttonAffiliatePill} h-[42px] px-5 text-sm`}
+                  >
+                    {content}
+                  </a>
+                );
+              }
+              return (
+                <SmartLink
+                  key={link.label}
+                  href={link.href}
+                  className={`${buttonPagePill} h-[42px] px-5 text-sm`}
+                >
+                  {content}
+                </SmartLink>
               );
             })}
           </div>
