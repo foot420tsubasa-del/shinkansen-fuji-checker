@@ -61,6 +61,7 @@ export type AffiliatePlacement =
   | "local_hotel_picks_matrix"
   | "local_hotel_pick_more_options"
   | "stay_quick_answer"
+  | "tokyo_first_time_hotel_base_matrix"
   | "stay_area_glance_card"
   | "stay_comparison_table"
   | "stay_area_detail_primary"

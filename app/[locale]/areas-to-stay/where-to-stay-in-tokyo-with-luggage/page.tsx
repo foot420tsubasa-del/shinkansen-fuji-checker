@@ -111,6 +111,57 @@ export default async function WhereToStayInTokyoWithLuggagePage({ params }: Prop
           </div>
         </section>
 
+        <section className="mt-10 rounded-[24px] border border-sky-100 bg-sky-50/70 p-6 shadow-sm">
+          <div className="max-w-3xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-sky-700">Luggage option</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">Option: send your luggage from the airport to your hotel</h2>
+            <p className="mt-3 text-sm leading-6 text-slate-700">
+              Yamato and airport luggage delivery counters may let travelers send luggage from the airport to a hotel.
+              JAL ABC and airport baggage delivery counters may also support hotel luggage delivery on some routes.
+              Same-day delivery can be available, but counters, destinations, cut-off times, and delivery windows vary.
+            </p>
+          </div>
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <article className="rounded-2xl border border-white/80 bg-white p-4 shadow-sm">
+              <h3 className="font-semibold text-slate-950">Before you use delivery</h3>
+              <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
+                <li>Confirm the hotel name, address, and reservation name.</li>
+                <li>Check whether your hotel accepts luggage delivery before check-in.</li>
+                <li>Confirm the airport counter, cut-off time, and expected delivery time.</li>
+              </ul>
+            </article>
+            <article className="rounded-2xl border border-white/80 bg-white p-4 shadow-sm">
+              <h3 className="font-semibold text-slate-950">Keep a small day bag</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600">
+                Carry passports, medicine, chargers, valuables, and overnight essentials with you. Luggage delivery can be
+                especially useful if you arrive before hotel check-in or travel with family or multiple suitcases.
+              </p>
+            </article>
+          </div>
+          <div className="mt-5 flex flex-wrap gap-2">
+            <TrackedInternalLink
+              href="/airport-transfers"
+              sourcePage={pagePath}
+              placement="luggage_pack_cta"
+              label="Airport transfer guide"
+              locale={locale}
+              className="inline-flex min-h-10 items-center rounded-xl border border-sky-200 bg-white px-4 py-2 text-sm font-semibold text-sky-700 transition-colors hover:bg-sky-50"
+            >
+              Airport transfer guide →
+            </TrackedInternalLink>
+            <TrackedInternalLink
+              href="/areas-to-stay/tokyo-first-time"
+              sourcePage={pagePath}
+              placement="luggage_pack_cta"
+              label="Tokyo hotel base guide"
+              locale={locale}
+              className="inline-flex min-h-10 items-center rounded-xl border border-emerald-200 bg-white px-4 py-2 text-sm font-semibold text-[#106b43] transition-colors hover:bg-emerald-50"
+            >
+              Tokyo hotel base guide →
+            </TrackedInternalLink>
+          </div>
+        </section>
+
         <section className="mt-10">
           <h2 className="text-2xl font-semibold text-slate-950">Major area logic with luggage</h2>
           <div className="mt-5 grid gap-4 md:grid-cols-2">

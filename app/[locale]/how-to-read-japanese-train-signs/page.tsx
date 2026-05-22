@@ -213,9 +213,6 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
               </li>
             ))}
           </ul>
-          <div className="mt-5">
-            <EsimCta label="Get Japan eSIM before you land" placement="train_signs_quick_answer" locale={locale} />
-          </div>
         </section>
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
@@ -287,12 +284,10 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                   If you have already passed through the ticket gates and still feel lost in a deep underground passage, it is often completely fine to go up to street level and reset. This can be easier than trying to solve a maze of underground corridors while tired or carrying luggage. Once you are outside, you can use landmarks, street signs, and your map app again. At stations such as Shinjuku, Tokyo, Ueno, and Kyoto, going above ground may add a few minutes, but it can reduce confusion and help you understand which side of the station you are actually on.
                 </p>
               </div>
-              <div className="mt-5 rounded-[18px] border border-[#ffd1a3] bg-[#fff8f0] p-4">
-                <p className="text-sm font-bold text-[#082653]">Maps and translation are much easier when your phone works before the first train ride.</p>
-                <div className="mt-3">
-                  <EsimCta label="Prepare eSIM for maps and translation" placement="train_signs_google_maps" locale={locale} variant="subtle" />
-                </div>
-              </div>
+              <p className="mt-5 rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm font-semibold leading-6 text-[#082653] shadow-sm">
+                Maps and translation are much easier when your phone works before the first train ride. Keep your first route,
+                hotel address, and station exit saved before you arrive.
+              </p>
             </section>
 
             <section>
@@ -339,14 +334,6 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                   </li>
                 ))}
               </ul>
-              <div className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-                <h3 className="text-lg font-bold text-[#082653]">Prepare before your first train ride in Japan</h3>
-                <div className="mt-4 flex flex-wrap gap-3">
-                  <EsimCta label="Get Japan eSIM" placement="train_signs_checklist" locale={locale} variant="subtle" />
-                  <InternalCta href="/jr-pass-vs-single-ticket" label="Compare JR Pass vs single tickets" placement="train_signs_checklist" ctaType="rail" locale={locale} variant="secondary" />
-                  <InternalCta href="/#seat-checker" label="Find your Shinkansen seat" placement="train_signs_checklist" ctaType="seat_checker" locale={locale} variant="secondary" />
-                </div>
-              </div>
               <div className="mt-4 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>
@@ -361,18 +348,47 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                       in a short station navigation mission.
                     </p>
                   </div>
-                  <TrackedCtaLink
-                    href="/station-practice"
-                    placement="train_signs_station_practice"
-                    label="Start station practice"
-                    pagePath="/how-to-read-japanese-train-signs"
-                    locale={locale}
-                    category="station_practice"
-                    className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
-                  >
-                    Start station practice
-                    <ArrowRight className="h-4 w-4" />
-                  </TrackedCtaLink>
+                  <div className="flex shrink-0 flex-col gap-2">
+                    <TrackedCtaLink
+                      href="/station-practice"
+                      placement="train_signs_station_practice"
+                      label="Start Station Practice"
+                      pagePath="/how-to-read-japanese-train-signs"
+                      locale={locale}
+                      category="station_practice"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+                    >
+                      Start Station Practice
+                      <ArrowRight className="h-4 w-4" />
+                    </TrackedCtaLink>
+                    <TrackedCtaLink
+                      href="/areas-to-stay/where-to-stay-in-tokyo-with-luggage"
+                      placement="train_signs_station_practice"
+                      label="Choose luggage-friendly hotel base"
+                      pagePath="/how-to-read-japanese-train-signs"
+                      locale={locale}
+                      category="stay"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#145aa0] bg-[#145aa0] px-4 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#0d477f]"
+                    >
+                      Choose hotel base
+                      <ArrowRight className="h-4 w-4" />
+                    </TrackedCtaLink>
+                    <TrackedCtaLink
+                      href="/airport-transfers"
+                      placement="train_signs_station_practice"
+                      label="Check airport transfer to hotel area"
+                      pagePath="/how-to-read-japanese-train-signs"
+                      locale={locale}
+                      category="transfer"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#0f766e] bg-[#0f766e] px-4 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#115e59]"
+                    >
+                      Check airport transfer
+                      <ArrowRight className="h-4 w-4" />
+                    </TrackedCtaLink>
+                    <div className="pt-1">
+                      <EsimCta label="Get eSIM before arrival" placement="train_signs_checklist" locale={locale} variant="subtle" />
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>
@@ -416,7 +432,6 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                     </span>
                   </Link>
                 ))}
-                <EsimCta label="Get Japan eSIM" placement="train_signs_checklist" locale={locale} variant="subtle" />
               </div>
             </section>
 
