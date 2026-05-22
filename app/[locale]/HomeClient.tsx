@@ -16,7 +16,6 @@ import {
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { buttonClassName } from "@/components/ui/Button";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
@@ -48,15 +47,11 @@ const buttonPageSecondary =
   "inline-flex items-center justify-center gap-2 rounded-lg border border-[#168a56] bg-[#168a56] font-extrabold text-white shadow-[0_8px_22px_rgba(22,138,86,0.14)] transition-colors hover:bg-[#0f6f45]";
 const buttonPagePill =
   "inline-flex items-center gap-2 rounded-xl border border-[#168a56] bg-[#168a56] font-extrabold text-white shadow-[0_6px_16px_rgba(22,138,86,0.10)] transition-colors hover:bg-[#0f6f45]";
-const buttonAffiliatePill =
-  "inline-flex items-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] font-extrabold text-white shadow-[0_6px_16px_rgba(255,122,0,0.16)] transition-colors hover:bg-[#e66700]";
 
 type PopularLink = {
   label: string;
   href: string;
   icon: typeof Train;
-  external?: boolean;
-  tracking?: string;
 };
 
 function Header() {
@@ -136,15 +131,13 @@ export default function HomeClient() {
   ], [t]);
 
   const popularLinks: PopularLink[] = useMemo(() => [
-    { label: t("footer.shinkansenGuide"), href: "/guide", icon: Train },
-    { label: "Choose your hotel base", href: "/areas-to-stay", icon: Bed },
-    { label: t("essentialsCta.esim.title"), href: ESIM_URL, icon: Wifi, external: true, tracking: "home_popular_esim" },
-    { label: t("essentialsCta.airportTransfer.title"), href: "/airport-transfers", icon: Car },
+    { label: "Seat E guide", href: "/shinkansen-seat-e", icon: Train },
+    { label: "Seat letters A-E", href: "/shinkansen-seat-letters", icon: Train },
+    { label: "All seat guides", href: "/shinkansen-seat-guides", icon: Train },
     { label: t("popularLinks.kyoto.title"), href: "/itineraries/7-day-first-time-japan", icon: CalendarDays },
   ], [t]);
 
   const essentialCtas = useMemo(() => [
-    { title: t("essentialsCta.shinkansen.title"), description: t("essentialsCta.shinkansen.desc"), href: SHINKANSEN_TICKET_URL, icon: Train, tracking: "home_essentials_shinkansen", category: "train" as const },
     { title: t("essentialsCta.esim.title"), description: t("essentialsCta.esim.desc"), href: ESIM_URL, icon: Wifi, tracking: "home_essentials_esim", category: "esim" as const },
     { title: t("essentialsCta.airportTransfer.title"), description: t("essentialsCta.airportTransfer.desc"), href: AIRPORT_TRANSFER_URL, icon: Car, tracking: "home_essentials_airport_transfer", category: "transfer" as const },
     { title: t("essentialsCta.jrPass.title"), description: t("essentialsCta.jrPass.desc"), href: JR_PASS_URL, icon: Train, tracking: "home_essentials_jrpass", category: "train" as const },
@@ -227,22 +220,6 @@ export default function HomeClient() {
             <p className="mt-5 max-w-[560px] text-lg leading-8 text-[#263a5d] md:text-xl">
               {t("footer.tagline")}
             </p>
-            <div className="mt-5 flex flex-wrap gap-4">
-              <Link
-                href="/#seat-checker"
-                className={buttonClassName({ variant: "internal", size: "lg" })}
-              >
-                <Train className="h-4 w-4" />
-                Check Fuji-side seat
-              </Link>
-              <Link
-                href="/areas-to-stay"
-                className={buttonClassName({ variant: "internal", size: "lg" })}
-              >
-                <Bed className="h-4 w-4" />
-                Choose your hotel base
-              </Link>
-            </div>
           </div>
         </div>
       </section>
@@ -270,7 +247,7 @@ export default function HomeClient() {
         <section id="seat-checker" className="py-10">
           <SectionTitle
             eyebrow="Fuji-side seat checker"
-            description="Check the route first, then confirm Seat E for the standard-car Mt. Fuji window. The existing seat logic is preserved here."
+            description="Choose your direction and check the Mt. Fuji-side seat."
           />
           <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_410px]">
             <SeatCheckerPanel
@@ -427,11 +404,6 @@ export default function HomeClient() {
               </TrackedCtaLink>
             </div>
           </div>
-          <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[11px] text-slate-400">
-            <Link href="/shinkansen-seat-e" className="underline underline-offset-2 transition-colors hover:text-slate-600">Seat E guide</Link>
-            <Link href="/shinkansen-seat-letters" className="underline underline-offset-2 transition-colors hover:text-slate-600">Seat letters A–E</Link>
-            <Link href="/shinkansen-seat-guides" className="underline underline-offset-2 transition-colors hover:text-slate-600">All seat guides</Link>
-          </div>
         </section>
 
         <section className="py-7">
@@ -551,11 +523,26 @@ export default function HomeClient() {
               <p className="mt-2 text-sm leading-6 text-[#5f7190]">
                 Use these after the seat, rail ticket, hotel base, and arrival essentials are clear.
               </p>
-              <div className="mt-4 flex flex-wrap gap-3">
+              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <Link
+                  href="/plan-your-trip"
+                  onClick={() =>
+                    trackCtaClick({
+                      placement: "home_route_plan",
+                      href: "/plan-your-trip",
+                      label: "Open trip planner",
+                      category: "itinerary",
+                      locale,
+                    })
+                  }
+                  className={`${buttonPageSecondary} h-10 px-4 text-xs`}
+                >
+                  Open Trip Planner
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
                 {[
-                  { href: "/plan-your-trip", label: "Open Trip Planner", eventLabel: "Open trip planner" },
-                  { href: "/command-center", label: "Open Command Center", eventLabel: "Open Command Center" },
-                  { href: "/itineraries/7-day-first-time-japan", label: "See 7-day itinerary", eventLabel: "See 7-day itinerary" },
+                  { href: "/itineraries/7-day-first-time-japan", label: "7-day itinerary", eventLabel: "See 7-day itinerary" },
+                  { href: "/command-center", label: "Command Center", eventLabel: "Open Command Center" },
                 ].map((link) => (
                   <Link
                     key={link.href}
@@ -569,7 +556,7 @@ export default function HomeClient() {
                         locale,
                       })
                     }
-                    className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-bold text-[#106b43] transition-colors hover:bg-white"
+                    className="inline-flex items-center gap-1 text-xs font-bold text-[#106b43] underline underline-offset-4 transition-colors hover:text-[#0f6f45]"
                   >
                     {link.label}
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -579,7 +566,7 @@ export default function HomeClient() {
             </div>
             <div className="rounded-[18px] border border-slate-200 bg-slate-50 p-5">
               <p className="text-[11px] font-black uppercase tracking-[0.1em] text-slate-500">Travel prep</p>
-              <h2 className="mt-1 text-xl font-bold text-[#082653]">Station Practice</h2>
+              <h2 className="mt-1 text-xl font-bold text-[#082653]">Practice Japanese station signs</h2>
               <p className="mt-2 text-sm leading-6 text-[#5f7190]">
                 Practice exits, transfer gates, and station signs after reading the train-sign guide.
               </p>
@@ -596,7 +583,7 @@ export default function HomeClient() {
                 }
                 className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#106b43] underline underline-offset-4"
               >
-                Start station practice
+                Open Station Practice
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
@@ -604,40 +591,9 @@ export default function HomeClient() {
         </section>
 
         <section className="py-9">
-          <SectionTitle eyebrow={t("essentialsCta.eyebrow")} />
-          <div className="grid gap-4 md:grid-cols-3">
-            {essentialCtas.slice(0, 3).map((item) => {
-              const Icon = item.icon;
-              return (
-                <a
-                  key={item.title}
-                  href={item.href}
-                  target="_blank"
-                  rel={AFFILIATE_REL}
-                  onClick={() => trackAffiliateClick({
-                    category: item.category,
-                    provider: getProviderFromHref(item.href),
-                    placement: "home_essentials",
-                    href: item.href,
-                    label: item.tracking,
-                    locale,
-                  })}
-                  className="flex min-h-[110px] items-center gap-4 rounded-[18px] border border-[#ffb56b] bg-[#fff8f0] p-5 shadow-[0_18px_45px_rgba(255,122,0,0.12)] transition-transform hover:-translate-y-1 hover:border-[#ff7a00]"
-                >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#ff7a00] text-white">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-base font-bold leading-5 text-[#7a3300]">{item.title}</h3>
-                    <p className="mt-1 text-xs leading-5 text-[#5f7190]">{item.description}</p>
-                  </div>
-                  <ExternalLink className="ml-auto h-4 w-4 shrink-0 text-[#b44b00]" />
-                </a>
-              );
-            })}
-          </div>
-          <div className="mx-auto mt-4 grid max-w-3xl gap-4 md:grid-cols-2">
-            {essentialCtas.slice(3).map((item) => {
+          <SectionTitle eyebrow="Essentials Before You Land" />
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+            {essentialCtas.map((item) => {
               const Icon = item.icon;
               return (
                 <a
@@ -670,7 +626,7 @@ export default function HomeClient() {
         </section>
 
         <section className="py-6">
-          <SectionTitle eyebrow="More guides" />
+          <SectionTitle eyebrow="More seat guides" />
           <div className="flex flex-wrap gap-3">
             {popularLinks.map((link) => {
               const Icon = link.icon;
@@ -678,30 +634,8 @@ export default function HomeClient() {
                 <>
                   <Icon className="h-4 w-4" />
                   {link.label}
-                  {link.external && <ExternalLink className="h-3.5 w-3.5" />}
                 </>
               );
-              if (link.external) {
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel={AFFILIATE_REL}
-                    onClick={() => trackAffiliateClick({
-                      category: "esim",
-                      provider: getProviderFromHref(link.href),
-                      placement: "home_popular",
-                      href: link.href,
-                      label: link.tracking ?? link.label,
-                      locale,
-                    })}
-                    className={`${buttonAffiliatePill} h-[42px] px-5 text-sm`}
-                  >
-                    {content}
-                  </a>
-                );
-              }
               return (
                 <SmartLink
                   key={link.label}
