@@ -5,11 +5,7 @@ import {
   ArrowRight,
   Bed,
   Car,
-  CheckCircle2,
   ExternalLink,
-  Leaf,
-  MapPinned,
-  ShieldCheck,
   Train,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
@@ -27,6 +23,7 @@ import {
   getSeatRecommendation,
 } from "@/lib/seat-checker";
 import {
+  ESIM_URL,
   JR_PASS_URL,
   OMIO_SHINKANSEN_URL,
   SHINKANSEN_TICKET_URL,
@@ -131,12 +128,6 @@ export default function HomeClient() {
     { label: "All seat guides", href: "/shinkansen-seat-guides", icon: Train },
   ], []);
 
-  const trustItems = useMemo(() => [
-    { title: t("featureCards.seatChecker.title"), description: t("featureCards.seatChecker.desc"), icon: MapPinned },
-    { title: t("featureCards.tripPlanner.title"), description: t("featureCards.tripPlanner.desc"), icon: Leaf },
-    { title: t("featureCards.stayAreas.title"), description: t("featureCards.stayAreas.desc"), icon: CheckCircle2 },
-    { title: t("featureCards.essentials.title"), description: t("featureCards.essentials.desc"), icon: ShieldCheck },
-  ], [t]);
   const omioRouteCompareHref = OMIO_SHINKANSEN_URL;
 
   useEffect(() => {
@@ -589,23 +580,125 @@ export default function HomeClient() {
         </section>
 
         <section className="py-9">
-          <div className="grid rounded-[18px] border border-[#d9e5f2] bg-white p-3 shadow-[0_18px_45px_rgba(9,35,70,0.10)] md:grid-cols-4">
-            {trustItems.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.title}
-                  className={[
-                    "p-5",
-                    index < trustItems.length - 1 ? "border-b border-[#d9e5f2] md:border-b-0 md:border-r" : "",
-                  ].join(" ")}
-                >
-                  <Icon className="mb-3 h-6 w-6 text-[#145aa0]" />
-                  <h3 className="text-lg font-bold text-[#082653]">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#5f7190]">{item.description}</p>
-                </div>
-              );
-            })}
+          <div className="mb-5 rounded-[18px] border border-[#d9e5f2] bg-slate-50 p-5 shadow-[0_10px_25px_rgba(8,38,83,0.05)] md:flex md:items-center md:justify-between md:gap-6">
+            <div>
+              <h2 className="text-xl font-bold text-[#082653]">
+                Built in Tokyo to help visitors make practical Japan travel decisions
+              </h2>
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-[#5f7190]">
+                fujiseat is made by a Japanese creator living in Tokyo. After seeing many visitors struggle with station signs,
+                hotel locations, and questions like “which Shinkansen seat shows Mt. Fuji?”, I started building small practical
+                tools and guides to make those decisions easier before the trip.
+              </p>
+              <p className="mt-2 text-xs leading-5 text-slate-500">
+                Independent and unofficial. No hotel rankings, no personal travel consultation, and no live train inventory.
+              </p>
+            </div>
+            <Link
+              href="/about"
+              onClick={() =>
+                trackCtaClick({
+                  placement: "home_about",
+                  href: "/about",
+                  label: "Read about fujiseat",
+                  category: "guide",
+                  locale,
+                })
+              }
+              className="mt-4 inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-xl bg-[#082653] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#123967] md:mt-0"
+            >
+              Read about fujiseat
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+          <div className="rounded-[18px] border border-[#d9e5f2] bg-white p-5 text-center shadow-[0_14px_34px_rgba(9,35,70,0.08)] md:p-7">
+            <h2 className="text-2xl font-bold text-[#082653]">Still planning your Japan trip?</h2>
+            <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-[#5f7190]">
+              Start with the Fuji-side seat, then choose a practical Tokyo hotel base before opening booking sites.
+            </p>
+            <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
+              <TrackedCtaLink
+                href="/#seat-checker"
+                placement="home_final_cta"
+                label="Check Fuji-side seat"
+                category="seat_checker"
+                ctaType="seat_checker"
+                pagePath="/"
+                locale={locale}
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#168a56] px-5 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+              >
+                Check Fuji-side seat
+                <ArrowRight className="h-4 w-4" />
+              </TrackedCtaLink>
+              <TrackedCtaLink
+                href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
+                placement="home_final_cta"
+                label="Open Tokyo hotel matrix"
+                category="stay"
+                ctaType="stay"
+                pagePath="/"
+                locale={locale}
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#082653] px-5 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#123967]"
+              >
+                Open Tokyo hotel matrix
+                <ArrowRight className="h-4 w-4" />
+              </TrackedCtaLink>
+            </div>
+            <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm font-bold">
+              <a
+                href={SHINKANSEN_TICKET_URL}
+                target="_blank"
+                rel={AFFILIATE_REL}
+                onClick={() => trackAffiliateClick({
+                  category: "train",
+                  provider: "klook",
+                  placement: "home_essentials",
+                  href: SHINKANSEN_TICKET_URL,
+                  label: "Book Shinkansen ticket",
+                  link_id: "shinkansenTicket",
+                  product: "shinkansen_ticket",
+                  adid: "1265303",
+                  locale,
+                })}
+                className="inline-flex items-center gap-1 text-[#e66700] underline underline-offset-4"
+              >
+                Book Shinkansen ticket
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+              <TrackedCtaLink
+                href="/airport-transfers"
+                placement="home_final_cta"
+                label="Airport transfer"
+                category="transfer"
+                ctaType="prepare"
+                pagePath="/"
+                locale={locale}
+                className="inline-flex items-center gap-1 text-[#145aa0] underline underline-offset-4"
+              >
+                Airport transfer
+                <ArrowRight className="h-3.5 w-3.5" />
+              </TrackedCtaLink>
+              <a
+                href={ESIM_URL}
+                target="_blank"
+                rel={AFFILIATE_REL}
+                onClick={() => trackAffiliateClick({
+                  category: "esim",
+                  provider: "klook",
+                  placement: "home_essentials",
+                  href: ESIM_URL,
+                  label: "eSIM",
+                  link_id: "esim",
+                  product: "esim",
+                  adid: "1166001",
+                  locale,
+                })}
+                className="inline-flex items-center gap-1 text-[#106b43] underline underline-offset-4"
+              >
+                eSIM
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
           </div>
         </section>
       </div>
