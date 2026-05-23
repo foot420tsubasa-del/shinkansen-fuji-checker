@@ -18,7 +18,6 @@ import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { AgodaHotelMap } from "@/components/affiliate/AgodaHotelMap";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
-import { StayBaseCard } from "@/components/affiliate/StayBaseCard";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
@@ -67,7 +66,9 @@ type StayPageTranslation = Partial<Pick<StayContentPage, "title" | "description"
 };
 
 type TokyoHotelBaseMatrixGroup = {
+  anchorId: string;
   title: string;
+  image?: string;
   categoryLabel: string;
   tone: "active" | "airport" | "rail" | "calm" | "traditional";
   mainBaseLabel: string;
@@ -86,7 +87,9 @@ type TokyoHotelBaseMatrixGroup = {
 
 const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
   {
+    anchorId: "shinjuku-area",
     title: "Shinjuku area",
+    image: "/images/stay/tokyo/stay-shinjuku.png",
     categoryLabel: "Active city",
     tone: "active",
     mainBaseLabel: "Main base",
@@ -100,7 +103,9 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
     internalLinks: [{ label: "Compare Shinjuku vs Ueno", href: "/areas-to-stay/ueno-vs-shinjuku" }],
   },
   {
+    anchorId: "ueno-area",
     title: "Ueno area",
+    image: "/images/stay/tokyo/stay-ueno.png",
     categoryLabel: "Airport access",
     tone: "airport",
     mainBaseLabel: "Main base",
@@ -117,7 +122,9 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
     ],
   },
   {
+    anchorId: "asakusa-area",
     title: "Asakusa area",
+    image: "/images/stay/tokyo/stay-asakusa.png",
     categoryLabel: "Traditional",
     tone: "traditional",
     mainBaseLabel: "Main base",
@@ -131,7 +138,9 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
     internalLinks: [{ label: "Compare Asakusa vs Ueno", href: "/areas-to-stay/asakusa-vs-ueno" }],
   },
   {
+    anchorId: "tokyo-station-ginza-area",
     title: "Tokyo Station / Ginza area",
+    image: "/images/stay/tokyo/stay-tokyo-station.png",
     categoryLabel: "Rail logistics",
     tone: "rail",
     mainBaseLabel: "Main base",
@@ -145,7 +154,9 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
     internalLinks: [{ label: "Where to stay before Shinkansen", href: "/areas-to-stay/where-to-stay-before-shinkansen" }],
   },
   {
+    anchorId: "central-balance-area",
     title: "Central balance area",
+    image: "/images/stay/tokyo/stay-east-tokyo.png",
     categoryLabel: "Calm central",
     tone: "calm",
     mainBaseLabel: "Main bases",
@@ -158,7 +169,9 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
     ],
   },
   {
+    anchorId: "airport-logistics-area",
     title: "Airport / logistics area",
+    image: "/images/stay/tokyo/stay-airport-logistics.png",
     categoryLabel: "Airport + rail",
     tone: "airport",
     mainBaseLabel: "Main bases",
@@ -223,15 +236,26 @@ type TokyoFirstTimeSupplementCopy = {
     luggage: string;
     stayHub: string;
   };
+  priceTiming: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    cards: Array<{ title: string; body: string }>;
+    panelTitle: string;
+    panelItems: string[];
+    matrixCta: string;
+    examplesCta: string;
+    sourcesTitle: string;
+  };
 };
 
 const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplementCopy> = {
   en: {
     matrix: {
-      eyebrow: "Hotel base decision",
-      title: "Tokyo hotel base matrix",
+      eyebrow: "",
+      title: "Compare Tokyo hotel bases before you book",
       intro:
-        "Compare famous stations, calmer nearby bases, and logistics-friendly hotel areas before you search hotels. This is a general starting point, not traveler-specific advice.",
+        "Start with the broad area, then check nearby calmer or logistics-friendly bases. Use this as a general starting point before opening hotel search sites.",
       goodIfLabel: "Good if",
       watchOutLabel: "Watch out",
       providerDescription: "Broad area search only. Smaller nearby bases do not have separate provider buttons here.",
@@ -371,6 +395,33 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
       roomSize: "Room size guide",
       luggage: "Tokyo with luggage",
       stayHub: "Compare stay area guides",
+    },
+    priceTiming: {
+      eyebrow: "Hotel price timing",
+      title: "When Tokyo hotels get expensive",
+      intro:
+        "Hotel prices change by demand. If your dates fall on weekends, holidays, or major travel seasons, compare nearby hotel bases before giving up on Tokyo.",
+      cards: [
+        { title: "Friday / Saturday nights", body: "Often higher than weekdays, especially in popular city areas." },
+        { title: "Night before a national holiday", body: "Long weekends can make central hotels and transport busier." },
+        { title: "Golden Week", body: "Late April to early May. Several national holidays are close together, so domestic travel can be busy." },
+        { title: "Obon", body: "Around mid-August. Many people travel domestically or return to hometowns." },
+        { title: "New Year holidays", body: "Late December to early January. Transport and accommodation can be crowded." },
+        { title: "Cherry blossom season", body: "Usually late March to early April in Tokyo and Kyoto." },
+        { title: "Autumn foliage season", body: "Especially November for Tokyo/Kyoto and nearby day-trip areas." },
+        { title: "Big events", body: "Concerts, sports, exhibitions, and festivals can raise prices around specific stations." },
+      ],
+      panelTitle: "What to do if your dates are expensive",
+      panelItems: [
+        "Compare nearby bases, not only Shinjuku or Tokyo Station.",
+        "Try weekday nights if your schedule is flexible.",
+        "Check luggage-friendly bases if you are arriving with suitcases.",
+        "Open the Tokyo hotel base matrix before opening booking sites.",
+        "See local hotel examples after choosing a base.",
+      ],
+      matrixCta: "Open Tokyo hotel base matrix",
+      examplesCta: "See local hotel examples",
+      sourcesTitle: "Official / useful references",
     },
   },
 };
@@ -809,6 +860,32 @@ tokyoFirstTimeSupplementCopyByLocale["pt-BR"].nearby.items = [
   { name: "Nippori / Okachimachi", broadBase: "Lado Ueno", bestFor: "Acesso a Narita, busca de hoteis com melhor valor e comida pratica no corredor de Ueno.", watchOut: "Escolha com cuidado se quiser vida noturna ou uma chegada mais polida.", href: "/areas-to-stay/tokyo/ueno" },
   { name: "Nishi-Shinjuku / Yoyogi / Shinjuku-Gyoenmae", broadBase: "Lado Shinjuku", bestFor: "Conveniência de Shinjuku com mais chance de noites calmas que os blocos mais barulhentos.", watchOut: "Distancia a pe e saidas da estacao importam porque Shinjuku ainda e grande.", href: "/areas-to-stay/tokyo/shinjuku" },
 ];
+tokyoFirstTimeSupplementCopyByLocale["pt-BR"].priceTiming = {
+  eyebrow: "Quando os hoteis ficam caros",
+  title: "Quando hoteis em Toquio ficam caros",
+  intro: "Precos de hotel mudam conforme a demanda. Se suas datas caem em fins de semana, feriados ou grandes temporadas de viagem, compare bases proximas antes de desistir de Toquio.",
+  cards: [
+    { title: "Sexta / sabado a noite", body: "Costumam ser mais caros que dias de semana, especialmente em areas populares." },
+    { title: "Vespera de feriado nacional", body: "Fins de semana prolongados podem deixar hoteis centrais e transportes mais cheios." },
+    { title: "Golden Week", body: "Fim de abril a inicio de maio. Varios feriados nacionais ficam proximos, entao viagens domesticas podem aumentar." },
+    { title: "Obon", body: "Por volta de meados de agosto. Muitas pessoas viajam no Japao ou voltam para suas cidades." },
+    { title: "Ano Novo", body: "Fim de dezembro a inicio de janeiro. Transporte e hospedagem podem ficar cheios." },
+    { title: "Temporada de cerejeiras", body: "Geralmente fim de marco a inicio de abril em Toquio e Kyoto." },
+    { title: "Temporada de folhas de outono", body: "Especialmente novembro para Toquio/Kyoto e areas de bate-volta." },
+    { title: "Grandes eventos", body: "Shows, esportes, feiras e festivais podem elevar precos perto de estacoes especificas." },
+  ],
+  panelTitle: "O que fazer se suas datas estiverem caras",
+  panelItems: [
+    "Compare bases proximas, nao apenas Shinjuku ou Tokyo Station.",
+    "Tente noites de semana se sua agenda permitir.",
+    "Confira bases boas para bagagem se chegar com malas.",
+    "Abra a matriz de bases de hotel antes de abrir sites de reserva.",
+    "Veja exemplos de hoteis locais depois de escolher uma base.",
+  ],
+  matrixCta: "Abrir matriz de bases em Toquio",
+  examplesCta: "Ver exemplos de hoteis locais",
+  sourcesTitle: "Referencias oficiais / uteis",
+};
 
 tokyoFirstTimeSupplementCopyByLocale.es.nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "Este de Tokio / lado Tokyo Station", bestFor: "Noches mas tranquilas, logistica desde Haneda o Narita y calles mas faciles que los grandes hubs.", watchOut: "Menos vida nocturna que Shinjuku y menos iconos obvios de primer viaje fuera del hotel.", href: "/areas-to-stay/tokyo/east-tokyo" },
@@ -818,6 +895,32 @@ tokyoFirstTimeSupplementCopyByLocale.es.nearby.items = [
   { name: "Nippori / Okachimachi", broadBase: "Lado Ueno", bestFor: "Acceso a Narita, busquedas de hotel de mejor valor y comida practica en el corredor de Ueno.", watchOut: "Elige con cuidado si quieres vida nocturna o una primera noche mas pulida.", href: "/areas-to-stay/tokyo/ueno" },
   { name: "Nishi-Shinjuku / Yoyogi / Shinjuku-Gyoenmae", broadBase: "Lado Shinjuku", bestFor: "Comodidad de Shinjuku con mas probabilidad de noches tranquilas que los bloques mas ruidosos.", watchOut: "La distancia a pie y las salidas importan porque Shinjuku sigue siendo enorme.", href: "/areas-to-stay/tokyo/shinjuku" },
 ];
+tokyoFirstTimeSupplementCopyByLocale.es.priceTiming = {
+  eyebrow: "Temporada de precios",
+  title: "Cuando los hoteles en Tokio se encarecen",
+  intro: "Los precios cambian segun la demanda. Si tus fechas caen en fines de semana, festivos o grandes temporadas de viaje, compara bases cercanas antes de descartar Tokio.",
+  cards: [
+    { title: "Viernes / sabados por la noche", body: "Suelen ser mas altos que entre semana, sobre todo en zonas populares." },
+    { title: "Noche antes de festivo nacional", body: "Los puentes pueden llenar mas los hoteles centrales y el transporte." },
+    { title: "Golden Week", body: "Finales de abril a principios de mayo. Varios festivos estan juntos y puede haber mucho viaje domestico." },
+    { title: "Obon", body: "Alrededor de mediados de agosto. Muchas personas viajan dentro de Japon o vuelven a sus ciudades." },
+    { title: "Ano Nuevo", body: "Finales de diciembre a principios de enero. Transporte y alojamiento pueden estar concurridos." },
+    { title: "Temporada de cerezos", body: "Normalmente de finales de marzo a principios de abril en Tokio y Kioto." },
+    { title: "Hojas de otono", body: "Especialmente noviembre para Tokio/Kioto y zonas de excursion cercanas." },
+    { title: "Grandes eventos", body: "Conciertos, deportes, ferias y festivales pueden subir precios alrededor de ciertas estaciones." },
+  ],
+  panelTitle: "Que hacer si tus fechas son caras",
+  panelItems: [
+    "Compara bases cercanas, no solo Shinjuku o Tokyo Station.",
+    "Prueba noches entre semana si tu horario es flexible.",
+    "Revisa bases faciles con equipaje si llegas con maletas.",
+    "Abre la matriz de bases de Tokio antes de abrir webs de reserva.",
+    "Mira ejemplos de hoteles locales despues de elegir una base.",
+  ],
+  matrixCta: "Abrir matriz de bases de Tokio",
+  examplesCta: "Ver ejemplos de hoteles locales",
+  sourcesTitle: "Referencias oficiales / utiles",
+};
 
 tokyoFirstTimeSupplementCopyByLocale.ko.nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "동쪽 도쿄 / 도쿄역 쪽", bestFor: "조용한 밤, 하네다 또는 나리타 동선, 큰 허브보다 걷기 쉬운 거리.", watchOut: "신주쿠보다 밤문화가 적고 호텔 밖 첫 여행 명소가 덜 뚜렷합니다.", href: "/areas-to-stay/tokyo/east-tokyo" },
@@ -827,6 +930,32 @@ tokyoFirstTimeSupplementCopyByLocale.ko.nearby.items = [
   { name: "Nippori / Okachimachi", broadBase: "우에노 쪽", bestFor: "나리타 접근, 더 나은 가격대의 호텔 검색, 우에노 축의 실용적인 식사.", watchOut: "밤문화나 세련된 첫날 느낌을 원하면 신중히 고르세요.", href: "/areas-to-stay/tokyo/ueno" },
   { name: "Nishi-Shinjuku / Yoyogi / Shinjuku-Gyoenmae", broadBase: "신주쿠 쪽", bestFor: "신주쿠 편리함을 유지하면서 가장 시끄러운 동쪽 블록보다 조용한 밤을 기대할 때.", watchOut: "신주쿠는 여전히 크므로 도보 거리와 역 출구가 중요합니다.", href: "/areas-to-stay/tokyo/shinjuku" },
 ];
+tokyoFirstTimeSupplementCopyByLocale.ko.priceTiming = {
+  eyebrow: "호텔 가격 시기",
+  title: "도쿄 호텔이 비싸지기 쉬운 시기",
+  intro: "호텔 가격은 수요에 따라 달라집니다. 주말, 공휴일, 큰 여행 시즌에 겹치면 도쿄를 포기하기 전에 주변 호텔 거점을 함께 비교하세요.",
+  cards: [
+    { title: "금요일 / 토요일 밤", body: "특히 인기 도심 지역에서는 평일보다 높아지는 경우가 많습니다." },
+    { title: "공휴일 전날 밤", body: "연휴에는 중심부 호텔과 교통이 더 붐빌 수 있습니다." },
+    { title: "골든위크", body: "4월 말부터 5월 초. 여러 공휴일이 가까워 국내 여행 수요가 많아질 수 있습니다." },
+    { title: "오봉", body: "8월 중순 전후. 많은 사람이 국내 이동이나 귀성을 합니다." },
+    { title: "연말연시", body: "12월 말부터 1월 초. 교통과 숙박이 붐빌 수 있습니다." },
+    { title: "벚꽃 시즌", body: "도쿄와 교토는 보통 3월 말부터 4월 초입니다." },
+    { title: "단풍 시즌", body: "도쿄/교토와 근교 당일치기 지역은 특히 11월이 중요합니다." },
+    { title: "대형 이벤트", body: "콘서트, 스포츠, 전시, 축제는 특정 역 주변 가격을 올릴 수 있습니다." },
+  ],
+  panelTitle: "날짜가 비쌀 때 할 일",
+  panelItems: [
+    "신주쿠나 도쿄역만 보지 말고 주변 거점도 비교하세요.",
+    "일정이 유연하면 평일 밤을 확인하세요.",
+    "캐리어가 있다면 짐 친화적인 거점을 확인하세요.",
+    "예약 사이트를 열기 전에 도쿄 호텔 거점 매트릭스를 보세요.",
+    "거점을 고른 뒤 현지 호텔 예시를 확인하세요.",
+  ],
+  matrixCta: "도쿄 호텔 거점 매트릭스 열기",
+  examplesCta: "현지 호텔 예시 보기",
+  sourcesTitle: "공식 / 유용한 참고자료",
+};
 
 tokyoFirstTimeSupplementCopyByLocale["zh-TW"].nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "東東京 / 東京站側", bestFor: "較安靜的夜晚、羽田或成田動線，以及比大型樞紐更好走的街道。", watchOut: "夜生活少於新宿，飯店外的第一次東京地標也較不明顯。", href: "/areas-to-stay/tokyo/east-tokyo" },
@@ -836,6 +965,32 @@ tokyoFirstTimeSupplementCopyByLocale["zh-TW"].nearby.items = [
   { name: "Nippori / Okachimachi", broadBase: "上野側", bestFor: "成田交通、較有價值感的飯店搜尋，以及上野走廊周邊實用餐飲。", watchOut: "若想要夜生活或精緻第一晚，請仔細挑選。", href: "/areas-to-stay/tokyo/ueno" },
   { name: "Nishi-Shinjuku / Yoyogi / Shinjuku-Gyoenmae", broadBase: "新宿側", bestFor: "保留新宿便利，同時比最吵的東側街區更可能有安靜夜晚。", watchOut: "新宿規模仍大，步行距離與車站出口很重要。", href: "/areas-to-stay/tokyo/shinjuku" },
 ];
+tokyoFirstTimeSupplementCopyByLocale["zh-TW"].priceTiming = {
+  eyebrow: "飯店價格時機",
+  title: "東京飯店容易變貴的時候",
+  intro: "飯店價格會隨需求變動。若日期碰到週末、假日或主要旅遊季，先比較鄰近飯店基地，再決定是否放棄東京。",
+  cards: [
+    { title: "週五 / 週六晚上", body: "通常比平日高，特別是在熱門市區。" },
+    { title: "國定假日前一晚", body: "連假可能讓市中心飯店與交通更繁忙。" },
+    { title: "黃金週", body: "4月底到5月初。多個國定假日相近，國內旅遊可能很忙。" },
+    { title: "盂蘭盆節", body: "約8月中旬。許多人會在日本國內旅行或返鄉。" },
+    { title: "新年假期", body: "12月底到1月初。交通與住宿可能擁擠。" },
+    { title: "櫻花季", body: "東京與京都通常是3月底到4月初。" },
+    { title: "紅葉季", body: "東京/京都與附近一日遊區域，特別是11月。" },
+    { title: "大型活動", body: "演唱會、體育賽事、展覽與祭典可能推高特定車站周邊價格。" },
+  ],
+  panelTitle: "如果你的日期很貴，可以怎麼做",
+  panelItems: [
+    "比較鄰近基地，不要只看新宿或東京站。",
+    "如果行程彈性，試著查看平日晚上。",
+    "若帶大型行李抵達，查看行李友善基地。",
+    "打開訂房網站前，先看東京飯店基地矩陣。",
+    "選定基地後，再看當地飯店範例。",
+  ],
+  matrixCta: "打開東京飯店基地矩陣",
+  examplesCta: "查看當地飯店範例",
+  sourcesTitle: "官方 / 實用參考",
+};
 
 tokyoFirstTimeSupplementCopyByLocale["zh-CN"].nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "东东京 / 东京站侧", bestFor: "较安静的夜晚、羽田或成田动线，以及比大型枢纽更好走的街道。", watchOut: "夜生活少于新宿，酒店外的第一次东京地标也较不明显。", href: "/areas-to-stay/tokyo/east-tokyo" },
@@ -845,6 +1000,32 @@ tokyoFirstTimeSupplementCopyByLocale["zh-CN"].nearby.items = [
   { name: "Nippori / Okachimachi", broadBase: "上野侧", bestFor: "成田交通、较有性价比的酒店搜索，以及上野走廊周边实用餐饮。", watchOut: "若想要夜生活或精致第一晚，请仔细挑选。", href: "/areas-to-stay/tokyo/ueno" },
   { name: "Nishi-Shinjuku / Yoyogi / Shinjuku-Gyoenmae", broadBase: "新宿侧", bestFor: "保留新宿便利，同时比最吵的东侧街区更可能有安静夜晚。", watchOut: "新宿规模仍大，步行距离与车站出口很重要。", href: "/areas-to-stay/tokyo/shinjuku" },
 ];
+tokyoFirstTimeSupplementCopyByLocale["zh-CN"].priceTiming = {
+  eyebrow: "酒店价格时机",
+  title: "东京酒店容易变贵的时候",
+  intro: "酒店价格会随需求变动。若日期碰到周末、假日或主要旅游季，先比较邻近酒店基地，再决定是否放弃东京。",
+  cards: [
+    { title: "周五 / 周六晚上", body: "通常比平日高，特别是在热门市区。" },
+    { title: "国定假日前一晚", body: "连假可能让市中心酒店与交通更繁忙。" },
+    { title: "黄金周", body: "4月底到5月初。多个国定假日相近，国内旅游可能很忙。" },
+    { title: "盂兰盆节", body: "约8月中旬。许多人会在日本国内旅行或返乡。" },
+    { title: "新年假期", body: "12月底到1月初。交通与住宿可能拥挤。" },
+    { title: "樱花季", body: "东京与京都通常是3月底到4月初。" },
+    { title: "红叶季", body: "东京/京都与附近一日游区域，特别是11月。" },
+    { title: "大型活动", body: "演唱会、体育赛事、展览与祭典可能推高特定车站周边价格。" },
+  ],
+  panelTitle: "如果你的日期很贵，可以怎么做",
+  panelItems: [
+    "比较邻近基地，不要只看新宿或东京站。",
+    "如果行程弹性，试着查看平日晚上。",
+    "若带大型行李抵达，查看行李友好基地。",
+    "打开订房网站前，先看东京酒店基地矩阵。",
+    "选定基地后，再看当地酒店范例。",
+  ],
+  matrixCta: "打开东京酒店基地矩阵",
+  examplesCta: "查看当地酒店范例",
+  sourcesTitle: "官方 / 实用参考",
+};
 
 tokyoFirstTimeSupplementCopyByLocale.fr.nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "Est de Tokyo / cote Tokyo Station", bestFor: "Nuits plus calmes, logistique Haneda ou Narita et rues plus faciles que les grands hubs.", watchOut: "Moins de vie nocturne que Shinjuku et moins de reperes evidents de premier sejour hors de l'hotel.", href: "/areas-to-stay/tokyo/east-tokyo" },
@@ -854,6 +1035,32 @@ tokyoFirstTimeSupplementCopyByLocale.fr.nearby.items = [
   { name: "Nippori / Okachimachi", broadBase: "Cote Ueno", bestFor: "Acces Narita, recherche d'hotels bon rapport qualite-prix et repas pratiques autour du corridor Ueno.", watchOut: "Choisissez avec soin si vous voulez de la vie nocturne ou une premiere nuit plus raffinee.", href: "/areas-to-stay/tokyo/ueno" },
   { name: "Nishi-Shinjuku / Yoyogi / Shinjuku-Gyoenmae", broadBase: "Cote Shinjuku", bestFor: "Confort de Shinjuku avec plus de chances de nuits calmes que les blocs est les plus bruyants.", watchOut: "La distance a pied et les sorties comptent, car Shinjuku reste immense.", href: "/areas-to-stay/tokyo/shinjuku" },
 ];
+tokyoFirstTimeSupplementCopyByLocale.fr.priceTiming = {
+  eyebrow: "Timing des prix d'hotel",
+  title: "Quand les hotels de Tokyo deviennent chers",
+  intro: "Les prix d'hotel changent selon la demande. Si vos dates tombent sur des week-ends, jours feries ou grandes saisons, comparez les bases voisines avant d'abandonner Tokyo.",
+  cards: [
+    { title: "Vendredi / samedi soir", body: "Souvent plus cher que les jours de semaine, surtout dans les quartiers populaires." },
+    { title: "Veille d'un jour ferie national", body: "Les longs week-ends peuvent rendre les hotels centraux et les transports plus charges." },
+    { title: "Golden Week", body: "Fin avril a debut mai. Plusieurs jours feries sont rapproches, donc le tourisme domestique peut etre dense." },
+    { title: "Obon", body: "Autour de la mi-aout. Beaucoup de gens voyagent au Japon ou retournent dans leur ville d'origine." },
+    { title: "Nouvel An", body: "Fin decembre a debut janvier. Transports et hebergements peuvent etre charges." },
+    { title: "Saison des cerisiers", body: "Generalement fin mars a debut avril a Tokyo et Kyoto." },
+    { title: "Saison des feuilles d'automne", body: "Surtout novembre pour Tokyo/Kyoto et les zones d'excursion proches." },
+    { title: "Grands evenements", body: "Concerts, sports, salons et festivals peuvent faire monter les prix autour de certaines gares." },
+  ],
+  panelTitle: "Que faire si vos dates sont cheres",
+  panelItems: [
+    "Comparez les bases voisines, pas seulement Shinjuku ou Tokyo Station.",
+    "Essayez les nuits en semaine si votre planning est flexible.",
+    "Verifiez les bases faciles avec bagages si vous arrivez avec des valises.",
+    "Ouvrez la matrice des bases d'hotel avant les sites de reservation.",
+    "Consultez les exemples d'hotels locaux apres avoir choisi une base.",
+  ],
+  matrixCta: "Ouvrir la matrice des bases de Tokyo",
+  examplesCta: "Voir des exemples d'hotels locaux",
+  sourcesTitle: "References officielles / utiles",
+};
 
 tokyoFirstTimeSupplementCopyByLocale.de.nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "Ost-Tokio / Seite Tokyo Station", bestFor: "Ruhigere Nachte, Haneda- oder Narita-Logistik und einfachere Strassen als die grossen Hubs.", watchOut: "Weniger Nachtleben als Shinjuku und weniger offensichtliche Erstbesucher-Orte direkt am Hotel.", href: "/areas-to-stay/tokyo/east-tokyo" },
@@ -863,6 +1070,32 @@ tokyoFirstTimeSupplementCopyByLocale.de.nearby.items = [
   { name: "Nippori / Okachimachi", broadBase: "Seite Ueno", bestFor: "Narita-Zugang, bessere Hotelsuche nach Wert und praktische Essensoptionen im Ueno-Korridor.", watchOut: "Sorgfaltig wahlen, wenn du Nachtleben oder ein polierteres Ankunftsgefuhl willst.", href: "/areas-to-stay/tokyo/ueno" },
   { name: "Nishi-Shinjuku / Yoyogi / Shinjuku-Gyoenmae", broadBase: "Seite Shinjuku", bestFor: "Shinjuku-Komfort mit besserer Chance auf ruhige Nachte als in den lautesten Ost-Blocks.", watchOut: "Fusswege und Bahnhofsausgange zahlen, weil Shinjuku weiterhin gross ist.", href: "/areas-to-stay/tokyo/shinjuku" },
 ];
+tokyoFirstTimeSupplementCopyByLocale.de.priceTiming = {
+  eyebrow: "Hotelpreis-Zeiten",
+  title: "Wann Hotels in Tokio teuer werden",
+  intro: "Hotelpreise andern sich mit der Nachfrage. Wenn deine Daten auf Wochenenden, Feiertage oder grosse Reisesaisons fallen, vergleiche nahe Hotelbasen, bevor du Tokio aufgibst.",
+  cards: [
+    { title: "Freitag- / Samstagabend", body: "Oft teurer als Werktage, besonders in beliebten Stadtgebieten." },
+    { title: "Nacht vor einem Feiertag", body: "Lange Wochenenden konnen zentrale Hotels und Verkehr voller machen." },
+    { title: "Golden Week", body: "Ende April bis Anfang Mai. Mehrere Feiertage liegen nah beieinander, daher kann Inlandsreiseverkehr stark sein." },
+    { title: "Obon", body: "Etwa Mitte August. Viele Menschen reisen im Inland oder fahren in ihre Heimatorte." },
+    { title: "Neujahrsferien", body: "Ende Dezember bis Anfang Januar. Verkehr und Unterkunfte konnen voll sein." },
+    { title: "Kirschblutenzeit", body: "In Tokio und Kyoto meist Ende Marz bis Anfang April." },
+    { title: "Herbstlaubzeit", body: "Besonders November fur Tokio/Kyoto und nahe Tagesausflugsgebiete." },
+    { title: "Grosse Events", body: "Konzerte, Sport, Messen und Festivals konnen Preise rund um bestimmte Bahnhofe erhohen." },
+  ],
+  panelTitle: "Was tun, wenn deine Daten teuer sind",
+  panelItems: [
+    "Vergleiche nahe Basen, nicht nur Shinjuku oder Tokyo Station.",
+    "Prufe Werktage, wenn dein Zeitplan flexibel ist.",
+    "Prufe gepackfreundliche Basen, wenn du mit Koffern ankommst.",
+    "Offne die Tokio-Hotelbasis-Matrix vor Buchungsseiten.",
+    "Sieh lokale Hotelbeispiele an, nachdem du eine Basis gewahlt hast.",
+  ],
+  matrixCta: "Tokio-Hotelbasis-Matrix offnen",
+  examplesCta: "Lokale Hotelbeispiele ansehen",
+  sourcesTitle: "Offizielle / nutzliche Quellen",
+};
 
 tokyoFirstTimeSupplementCopyByLocale.ru.nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "Восточный Токио / сторона Tokyo Station", bestFor: "Более тихие ночи, логистика Ханэда или Нарита и улицы проще, чем у крупных узлов.", watchOut: "Меньше ночной жизни, чем в Синдзюку, и меньше очевидных мест первого визита рядом с отелем.", href: "/areas-to-stay/tokyo/east-tokyo" },
@@ -872,6 +1105,32 @@ tokyoFirstTimeSupplementCopyByLocale.ru.nearby.items = [
   { name: "Nippori / Okachimachi", broadBase: "Сторона Уэно", bestFor: "Доступ к Нарите, поиск отелей с лучшей ценностью и практичная еда вокруг коридора Уэно.", watchOut: "Выбирайте внимательно, если нужны ночная жизнь или более аккуратное первое впечатление.", href: "/areas-to-stay/tokyo/ueno" },
   { name: "Nishi-Shinjuku / Yoyogi / Shinjuku-Gyoenmae", broadBase: "Сторона Синдзюку", bestFor: "Удобство Синдзюку с большей вероятностью тихих ночей, чем в самых шумных восточных кварталах.", watchOut: "Пешая дистанция и выходы станции важны, потому что Синдзюку все равно очень большой.", href: "/areas-to-stay/tokyo/shinjuku" },
 ];
+tokyoFirstTimeSupplementCopyByLocale.ru.priceTiming = {
+  eyebrow: "Сезоны цен на отели",
+  title: "Когда отели в Токио становятся дороже",
+  intro: "Цены на отели меняются по спросу. Если даты попадают на выходные, праздники или крупные сезоны поездок, сравните соседние базы перед тем, как отказываться от Токио.",
+  cards: [
+    { title: "Пятница / суббота вечером", body: "Часто дороже будней, особенно в популярных городских районах." },
+    { title: "Ночь перед национальным праздником", body: "Длинные выходные могут сделать центральные отели и транспорт более загруженными." },
+    { title: "Golden Week", body: "Конец апреля — начало мая. Несколько праздников идут рядом, поэтому внутренних поездок может быть много." },
+    { title: "Обон", body: "Около середины августа. Многие путешествуют по Японии или возвращаются в родные города." },
+    { title: "Новогодние праздники", body: "Конец декабря — начало января. Транспорт и жилье могут быть загружены." },
+    { title: "Сезон сакуры", body: "Обычно конец марта — начало апреля в Токио и Киото." },
+    { title: "Сезон осенних листьев", body: "Особенно ноябрь для Токио/Киото и близких районов однодневных поездок." },
+    { title: "Крупные события", body: "Концерты, спорт, выставки и фестивали могут поднимать цены вокруг отдельных станций." },
+  ],
+  panelTitle: "Что делать, если ваши даты дорогие",
+  panelItems: [
+    "Сравните соседние базы, а не только Синдзюку или Tokyo Station.",
+    "Попробуйте будние ночи, если расписание гибкое.",
+    "Проверьте базы, удобные с багажом, если приезжаете с чемоданами.",
+    "Откройте матрицу районов для отеля до сайтов бронирования.",
+    "Посмотрите местные примеры отелей после выбора базы.",
+  ],
+  matrixCta: "Открыть матрицу районов Токио",
+  examplesCta: "Посмотреть местные примеры отелей",
+  sourcesTitle: "Официальные / полезные источники",
+};
 
 function applyStayPageTranslation(page: StayContentPage, translation?: StayPageTranslation): StayContentPage {
   if (!translation) return page;
@@ -977,63 +1236,17 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
   const pagePath = "/areas-to-stay/tokyo-first-time";
   const esimHref = getAffUrl("esim");
   const heroImage = publicImageIfExists(tokyoStayImages.hero);
-  const cardConfigs = [
-    {
-      key: "shinjuku",
-      area: "Tokyo: Shinjuku",
-      image: publicImageIfExists(tokyoStayImages.shinjuku),
-      providerChoices: hotelProviderChoices("shinjuku", "stay_area_glance_card"),
-      detailHref: "/areas-to-stay/tokyo/shinjuku",
-    },
-    {
-      key: "ueno",
-      area: "Tokyo: Ueno",
-      image: publicImageIfExists(tokyoStayImages.ueno),
-      providerChoices: hotelProviderChoices("ueno", "stay_area_glance_card"),
-      detailHref: "/areas-to-stay/tokyo/ueno",
-    },
-    {
-      key: "asakusa",
-      area: "Tokyo: Asakusa",
-      image: publicImageIfExists(tokyoStayImages.asakusa),
-      providerChoices: hotelProviderChoices("asakusa", "stay_area_glance_card"),
-      detailHref: "/areas-to-stay/tokyo/asakusa",
-    },
-    {
-      key: "tokyoStation",
-      area: "Tokyo: Tokyo Station",
-      image: publicImageIfExists(tokyoStayImages.tokyoStation),
-      providerChoices: hotelProviderChoices("tokyoStation", "stay_area_glance_card"),
-      detailHref: "/areas-to-stay/tokyo/tokyo-station",
-    },
-    {
-      key: "eastTokyo",
-      area: "Tokyo: East Tokyo",
-      image: publicImageIfExists(tokyoStayImages.eastTokyo),
-      providerChoices: providerChoices({
-        label: t("cards.eastTokyo.primaryAction"),
-        internalLink: "/local-tokyo",
-        provider: "other",
-        product: "hotel",
-        placement: "stay_area_glance_card",
-        variant: "primary",
-        category: "hotel",
-      }),
-      detailHref: "/areas-to-stay/tokyo/east-tokyo",
-    },
-  ];
-  const cards = cardConfigs.map((card) => ({
-    ...card,
-    title: t(`cards.${card.key}.title`),
-    subtitle: t(`cards.${card.key}.subtitle`),
-    bestFor: t(`cards.${card.key}.bestFor`),
-    weakness: t(`cards.${card.key}.weakness`),
-    primaryAction: t(`cards.${card.key}.primaryAction`),
-  }));
-
   const quickAnswers = t.raw("quickAnswer.items") as string[];
-  const planCards = t.raw("travelPlan.cards") as Array<{ label: string; area: string; href: string }>;
-  const benefits = t.raw("benefits.items") as Array<{ title: string; body: string }>;
+  const planCards = (t.raw("travelPlan.cards") as Array<{ label: string; area: string; href: string }>).map((card) => ({
+    ...card,
+    href: {
+      "#shinjuku": "#shinjuku-area",
+      "#ueno": "#ueno-area",
+      "#tokyo-station": "#tokyo-station-ginza-area",
+      "#asakusa": "#asakusa-area",
+      "#east-tokyo": "/areas-to-stay/tokyo/east-tokyo",
+    }[card.href] ?? card.href,
+  }));
   const comparisonHeadings = t.raw("comparison.headings") as string[];
   const comparisonRows = t.raw("comparison.rows") as string[][];
   const faqs = t.raw("faq.items") as Array<{ question: string; answer: string }>;
@@ -1048,7 +1261,6 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
       })),
     };
   });
-  const nearbyBases = supplement.nearby.items;
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -1120,7 +1332,6 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
 
         <section id="hotel-base-matrix" className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
           <div className="max-w-3xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">{supplement.matrix.eyebrow}</p>
             <h2 className="mt-2 text-2xl font-semibold text-slate-950">{supplement.matrix.title}</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">
               {supplement.matrix.intro}
@@ -1132,9 +1343,20 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               const hotelProviders = group.hotelAreaKey
                 ? hotelProviderChoices(group.hotelAreaKey, "tokyo_first_time_hotel_base_matrix")
                 : [];
+              const cardImage = group.image ? publicImageIfExists(group.image) : undefined;
 
               return (
-                <article key={group.title} className="flex h-full flex-col rounded-[22px] border border-slate-200 bg-slate-50 p-4 shadow-sm">
+                <article id={group.anchorId} key={group.title} className="flex h-full scroll-mt-24 flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-slate-50 shadow-sm">
+                  {cardImage ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={cardImage}
+                      alt={`${group.title} hotel base in Tokyo`}
+                      className="aspect-[16/7] w-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : null}
+                  <div className="flex flex-1 flex-col p-4">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold ${hotelBaseMatrixToneClasses[group.tone]}`}>
                       {group.categoryLabel}
@@ -1150,7 +1372,16 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                     {group.nearbyBases ? (
                       <div>
                         <dt className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">{group.nearbyLabel}</dt>
-                        <dd className="mt-1 text-slate-700">{group.nearbyBases}</dd>
+                        <dd className="mt-2">
+                          <p className="font-semibold text-slate-800">{group.nearbyBases}</p>
+                          <div className="mt-2 flex flex-wrap gap-2">
+                            {group.nearbyBases.split(" / ").map((base) => (
+                              <span key={base} className="rounded-full border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700">
+                                {base}
+                              </span>
+                            ))}
+                          </div>
+                        </dd>
                       </div>
                     ) : null}
                     <div>
@@ -1192,35 +1423,10 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                       ))}
                     </div>
                   </div>
+                  </div>
                 </article>
               );
             })}
-          </div>
-        </section>
-
-        <section className="mt-12">
-          <div className="max-w-2xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("glance.eyebrow")}</p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-950">{t("glance.title")}</h2>
-          </div>
-          <div className="mt-5 grid gap-5 lg:grid-cols-2">
-            {cards.map((card) => (
-              <StayBaseCard
-                key={card.title}
-                title={card.title}
-                subtitle={card.subtitle}
-                bestFor={card.bestFor}
-                weakness={card.weakness}
-                image={card.image ? { src: card.image, alt: t("glance.cardImageAlt", { area: card.title }) } : undefined}
-                area={card.area}
-                primaryAction={card.primaryAction}
-                providerChoices={card.providerChoices}
-                secondaryInternalLink={{ href: card.detailHref, label: t("glance.detailLabel") }}
-                placement="stay_area_glance_card"
-                pagePath={pagePath}
-                locale={locale}
-              />
-            ))}
           </div>
         </section>
 
@@ -1239,82 +1445,88 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
           </div>
         </section>
 
-        <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+        <section id="hotel-price-timing" className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
           <div className="max-w-3xl">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">{supplement.nearby.eyebrow}</p>
-            <h2 className="mt-2 text-2xl font-semibold text-slate-950">{supplement.nearby.title}</h2>
-            <p className="mt-2 text-sm leading-6 text-slate-600">
-              {supplement.nearby.intro}
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">
+              {supplement.priceTiming.eyebrow}
             </p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">{supplement.priceTiming.title}</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">{supplement.priceTiming.intro}</p>
           </div>
-          <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {nearbyBases.map((base) => (
-              <article key={base.name} className="flex h-full flex-col rounded-2xl border border-slate-100 bg-slate-50 p-4">
-                <h3 className="text-base font-semibold text-slate-950">{base.name}</h3>
-                <p className="mt-1 text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">{base.broadBase}</p>
-                <div className="mt-3 space-y-2 text-sm leading-6 text-slate-600">
-                  <p><span className="font-semibold text-slate-900">{supplement.nearby.goodIfLabel}</span> {base.bestFor}</p>
-                  <p><span className="font-semibold text-slate-900">{supplement.nearby.watchOutLabel}</span> {base.watchOut}</p>
-                </div>
-                <Link
-                  href={base.href}
-                  className="mt-4 inline-flex text-sm font-semibold text-[#106b43] underline underline-offset-4"
-                >
-                  {supplement.nearby.compareLabel} →
-                </Link>
+
+          <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {supplement.priceTiming.cards.map((card) => (
+              <article key={card.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                <h3 className="text-sm font-semibold text-slate-950">{card.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{card.body}</p>
               </article>
             ))}
           </div>
-        </section>
 
-        <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-lg font-semibold text-slate-950">{supplement.framework.title}</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
-            {supplement.framework.body}
-          </p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <TrackedInternalLink
-              href="/areas-to-stay/tokyo-hotel-room-size-guide"
-              sourcePage={pagePath}
-              placement="tokyo_first_time_tokyo_pack"
-              label="Tokyo hotel room size guide"
-              locale={locale}
-              className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-700 transition-colors hover:bg-white"
-            >
-              {supplement.framework.roomSize} →
-            </TrackedInternalLink>
-            <TrackedInternalLink
-              href="/areas-to-stay/where-to-stay-in-tokyo-with-luggage"
-              sourcePage={pagePath}
-              placement="tokyo_first_time_tokyo_pack"
-              label="Tokyo with luggage guide"
-              locale={locale}
-              className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-700 transition-colors hover:bg-white"
-            >
-              {supplement.framework.luggage} →
-            </TrackedInternalLink>
-            <TrackedInternalLink
-              href="/areas-to-stay"
-              sourcePage={pagePath}
-              placement="tokyo_first_time_tokyo_pack"
-              label="Japan stay area hub"
-              locale={locale}
-              className="rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-xs font-semibold text-[#106b43] transition-colors hover:bg-white"
-            >
-              {supplement.framework.stayHub} →
-            </TrackedInternalLink>
-          </div>
-        </section>
-
-        <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">{t("benefits.title")}</h2>
-          <div className="mt-4 grid gap-3 md:grid-cols-4">
-            {benefits.map(({ title, body }) => (
-              <div key={title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-                <p className="font-semibold text-slate-950">{title}</p>
-                <p className="mt-1 text-sm leading-5 text-slate-600">{body}</p>
+          <div className="mt-5 grid gap-4 lg:grid-cols-[minmax(0,1fr)_280px]">
+            <div className="rounded-2xl border border-emerald-100 bg-emerald-50/70 p-4">
+              <h3 className="text-base font-semibold text-slate-950">{supplement.priceTiming.panelTitle}</h3>
+              <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
+                {supplement.priceTiming.panelItems.map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#106b43]" aria-hidden="true" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-4 flex flex-wrap gap-3">
+                <TrackedInternalLink
+                  href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
+                  sourcePage={pagePath}
+                  placement="tokyo_first_time_price_timing"
+                  label={supplement.priceTiming.matrixCta}
+                  locale={locale}
+                  className="inline-flex min-h-10 items-center rounded-xl bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                >
+                  {supplement.priceTiming.matrixCta}
+                </TrackedInternalLink>
+                <TrackedInternalLink
+                  href="/local-hotel-picks#hotel-examples-matrix"
+                  sourcePage={pagePath}
+                  placement="tokyo_first_time_price_timing"
+                  label={supplement.priceTiming.examplesCta}
+                  locale={locale}
+                  className="inline-flex min-h-10 items-center rounded-xl border border-emerald-200 bg-white px-4 py-2 text-sm font-semibold text-[#106b43] transition-colors hover:bg-emerald-50"
+                >
+                  {supplement.priceTiming.examplesCta}
+                </TrackedInternalLink>
               </div>
-            ))}
+            </div>
+
+            <aside className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+              <h3 className="text-sm font-semibold text-slate-950">{supplement.priceTiming.sourcesTitle}</h3>
+              <div className="mt-3 grid gap-2 text-sm">
+                <a
+                  href="https://www.japan.travel/en/gc/tips/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-[#106b43] underline underline-offset-4"
+                >
+                  JNTO high/low travel seasons
+                </a>
+                <a
+                  href="https://www.japan.travel/en/plan/business-hours-and-holidays/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-[#106b43] underline underline-offset-4"
+                >
+                  JNTO business hours and holidays
+                </a>
+                <a
+                  href="https://www.gotokyo.org/en/story/guide/public-holidays/index.html"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-[#106b43] underline underline-offset-4"
+                >
+                  Go Tokyo public holidays
+                </a>
+              </div>
+            </aside>
           </div>
         </section>
 
