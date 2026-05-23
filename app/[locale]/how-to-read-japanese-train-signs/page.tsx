@@ -10,6 +10,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { EsimCta, InternalCta } from "./TrainSignsCtas";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
+import { AdSlot } from "@/components/ads/AdSlot";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -334,6 +335,7 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                   </li>
                 ))}
               </ul>
+              <AdSlot placement="train_signs_mid_article" format="horizontal" />
               <div className="mt-4 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                   <div>

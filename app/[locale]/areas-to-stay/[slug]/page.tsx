@@ -21,12 +21,14 @@ import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affil
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { getAllStaySlugs, getStayBySlug, type StayPage as StayContentPage } from "@/lib/content/stay";
 import { getAlternates } from "@/i18n/hreflang";
 import { getAffUrl } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { buttonClassName } from "@/components/ui/Button";
+import type { AdPlacement } from "@/lib/ads";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -48,6 +50,11 @@ const stayComparisonHotelPickSlugs = new Set([
   "namba-vs-umeda",
   "shin-osaka-vs-namba",
 ]);
+
+const stayComparisonAdPlacements: Partial<Record<string, AdPlacement>> = {
+  "asakusa-vs-ueno": "asakusa_ueno_after_hotel_cta",
+  "ueno-vs-shinjuku": "ueno_shinjuku_after_hotel_cta",
+};
 
 const filledNextStepClass =
   buttonClassName({ variant: "internal", fullWidth: true, className: "p-4 text-center" });
@@ -2227,6 +2234,7 @@ export default async function StayPage({ params }: Props) {
   if (!rawPage) notFound();
   const page = applyStayPageTranslation(rawPage, pageTranslations[slug]);
   const pagePath = `/areas-to-stay/${slug}`;
+  const stayComparisonAdPlacement = stayComparisonAdPlacements[page.slug];
 
   const isTokyoFirstTime = page.slug === "tokyo-first-time";
   const firstTimeStayHub = firstTimeStayHubs[page.slug];
@@ -2348,6 +2356,10 @@ export default async function StayPage({ params }: Props) {
               </TrackedCtaLink>
             </div>
           </section>
+
+          {stayComparisonAdPlacement ? (
+            <AdSlot placement={stayComparisonAdPlacement} format="horizontal" />
+          ) : null}
 
           <NextActions
             picks={page.nextActions}

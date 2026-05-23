@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { getAlternates } from "@/i18n/hreflang";
 import { SiteHeader } from "../../components/SiteHeader";
 
@@ -362,6 +363,8 @@ export default async function TokyoHotelRoomSizeGuidePage({ params }: Props) {
             {copy.nuance}
           </p>
         </section>
+
+        <AdSlot placement="room_size_mid_article" format="horizontal" />
 
         <section className="mt-10 rounded-[24px] border border-slate-200 bg-white p-6 shadow-sm">
           <h2 className="text-2xl font-semibold text-slate-950">{copy.checkTitle}</h2>

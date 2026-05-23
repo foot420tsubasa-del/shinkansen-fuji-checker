@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
+import { AdSlot } from "@/components/ads/AdSlot";
 import { getAlternates } from "@/i18n/hreflang";
 import { SiteHeader } from "../../components/SiteHeader";
 
@@ -424,6 +425,7 @@ export default async function WhereToStayInTokyoWithLuggagePage({ params }: Prop
               </a>
             </div>
           </div>
+          <AdSlot placement="luggage_guide_after_delivery" format="horizontal" />
           <div className="mt-5 flex flex-wrap gap-2">
             <TrackedInternalLink
               href="/airport-transfers"
