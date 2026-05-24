@@ -85,7 +85,7 @@ export async function GET() {
         "Content-Type": "application/json",
       },
     });
-  } catch (err) {
+  } catch {
     return new Response(
       JSON.stringify({ error: "Unexpected error fetching weather" }),
       { status: 500 }
