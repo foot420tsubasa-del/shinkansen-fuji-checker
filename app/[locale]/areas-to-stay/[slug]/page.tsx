@@ -1528,8 +1528,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
           </div>
         </section>
 
-        <section className="mt-8 grid gap-5 lg:grid-cols-[minmax(0,1fr)_360px]">
-          <div className="rounded-[22px] border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
+        <section className="mt-8 rounded-[22px] border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
             <h2 className="text-xl font-semibold text-slate-950">{supplement.quickAnswerOverride.title}</h2>
             <div className="mt-4 space-y-3 text-sm leading-6 text-slate-700">
               <p>{supplement.quickAnswerOverride.intro}</p>
@@ -1619,27 +1618,6 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                 </div>
               ) : null}
             </div>
-          </div>
-          <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-            <ProviderChoiceCTA
-              actionLabel={t("quickAnswer.cta")}
-              providers={hotelProviderChoices("shinjuku", "stay_quick_answer")}
-              pagePath={pagePath}
-              locale={locale}
-              area="Tokyo: Shinjuku"
-            />
-            <TrackedCtaLink
-              href="/local-hotel-picks"
-              placement="stay_quick_answer"
-              label={t("quickAnswer.secondaryCta")}
-              pagePath={pagePath}
-              locale={locale}
-              category="hotel"
-              className="mt-3 inline-flex min-h-10 items-center justify-center rounded-xl border border-[#168a56] bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
-            >
-              {t("quickAnswer.secondaryCta")}
-            </TrackedCtaLink>
-          </div>
         </section>
 
         <section className="mt-10">
