@@ -347,10 +347,10 @@ const rawStayPages: StayPage[] = [
   {
     slug: "where-to-stay-before-shinkansen",
     title: "Where to Stay Before Taking the Shinkansen in Tokyo",
-    description: "Compare Tokyo Station, Shinjuku, Ueno, Asakusa and East Tokyo before taking the Shinkansen to Kyoto or Osaka. Choose the easiest hotel base for luggage, early trains and first-time Japan trips.",
+    description: "Use this before booking your Tokyo hotel if Kyoto, Osaka, or an early Shinkansen is part of your route. Compare Tokyo Station, Shinjuku, Ueno and Asakusa by departure time, luggage and station complexity.",
     quickRec: {
       area: "Tokyo Station",
-      why: "If the Shinkansen is your priority, Tokyo Station is the simplest base. Zero transfers to the platform, coin lockers everywhere, and you can roll your luggage straight to the gate. Shinjuku is better for nightlife but adds a 10 min transfer.",
+      why: "The best Tokyo hotel area before a Shinkansen day depends on departure time, luggage, station complexity, and what you want to do the night before. If the Shinkansen is your priority, Tokyo Station is the simplest base.",
       link: hotelTokyo.href,
     },
     mapId: "tokyoStationMap",
@@ -408,7 +408,7 @@ const rawStayPages: StayPage[] = [
       { feature: "Nightlife", values: { "Tokyo Stn": "★★★☆☆", "Shinjuku": "★★★★★", "Ueno": "★★☆☆☆", "Asakusa": "★★☆☆☆" } },
       { feature: "Hotel cost feel", values: { "Tokyo Stn": "Usually higher", "Shinjuku": "Wide range", "Ueno": "More budget options", "Asakusa": "Good value" } },
     ],
-    proTip: "If your Shinkansen leaves before 8am, stay near Tokyo Station — morning rush makes transfers unpredictable. If your train is after 10am, Shinjuku gives you a better evening and the transfer is painless.",
+    proTip: "If your Shinkansen leaves before 8am, stay near Tokyo Station because morning rush makes transfers less predictable. If your train is after 10am, Shinjuku gives you a better evening and the transfer is usually manageable.",
     hotelPicks: [
       { name: "Hotel Metropolitan Tokyo", area: "Tokyo Station", price: "Check latest price", link: hotelTokyo.href, hotelKey: "tokyoStation", tag: "Shinkansen" },
       { name: "Hotel Gracery Shinjuku", area: "Shinjuku", price: "Check latest price", link: hotelShinjuku.href, hotelKey: "shinjuku", tag: "Popular" },
@@ -420,6 +420,20 @@ const rawStayPages: StayPage[] = [
       { id: "transfer-narita", category: "transfer", title: "Compare airport transfer", description: "Narita or Haneda to your hotel area.", cta: "See transfers", href: "/airport-transfers/narita-to-tokyo-station" },
       { id: "itinerary", category: "experience", title: "7-day Japan itinerary", description: "Place Tokyo, Fuji, Kyoto and Osaka in order.", cta: "View itinerary", href: "/itineraries/7-day-first-time-japan" },
       ...commonNextActions,
+    ],
+    faqs: [
+      {
+        question: "Should I stay near Tokyo Station before going to Kyoto or Osaka?",
+        answer: "Stay near Tokyo Station if your Shinkansen is early or your luggage is heavy. If the evening before matters more, Shinjuku, Ueno, or Asakusa can still work depending on your route.",
+      },
+      {
+        question: "Is Shinjuku a bad place to stay before the Shinkansen?",
+        answer: "No. Shinjuku can work well if you want food, nightlife, and hotel choice, but Tokyo Station is simpler for early departures and heavy luggage.",
+      },
+      {
+        question: "What is the best Tokyo area for an early Shinkansen?",
+        answer: "Tokyo Station / Ginza / Nihombashi is usually the simplest area for early Shinkansen logistics.",
+      },
     ],
   },
   {

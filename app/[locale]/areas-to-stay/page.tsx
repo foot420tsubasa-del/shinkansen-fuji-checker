@@ -40,7 +40,16 @@ type ProblemCard = {
 };
 
 type CityCardKey = "tokyo" | "kyoto" | "osaka" | "kawaguchiko";
-type ProblemCardKey = "firstTime" | "earlyShinkansen" | "narita" | "temples" | "foodNightlife" | "fujiOvernight";
+type ProblemCardKey =
+  | "notBookedHotels"
+  | "firstTime"
+  | "earlyShinkansen"
+  | "luggage"
+  | "narita"
+  | "airportAccess"
+  | "temples"
+  | "foodNightlife"
+  | "fujiOvernight";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -89,6 +98,11 @@ const cityCardConfigs = [
 
 const problemCardConfigs = [
   {
+    key: "notBookedHotels",
+    href: "/areas-to-stay#choose-your-city",
+    icon: Bed,
+  },
+  {
     key: "firstTime",
     href: "/areas-to-stay/tokyo-first-time",
     icon: Bed,
@@ -100,7 +114,17 @@ const problemCardConfigs = [
   },
   {
     key: "narita",
-    href: "/areas-to-stay/tokyo-first-time",
+    href: "/airport-transfers",
+    icon: Plane,
+  },
+  {
+    key: "luggage",
+    href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage",
+    icon: Bed,
+  },
+  {
+    key: "airportAccess",
+    href: "/airport-transfers",
     icon: Plane,
   },
   {
@@ -278,7 +302,11 @@ export default async function AreasToStayIndex({ params }: Props) {
     cta: t(`cityCards.${card.key}.cta`),
     placementLabel: t(`cityCards.${card.key}.placementLabel`),
   }));
-  const problemCards: ProblemCard[] = problemCardConfigs.map((item) => ({
+  const visibleProblemCardConfigs =
+    locale === "en"
+      ? problemCardConfigs
+      : problemCardConfigs.filter((item) => !["notBookedHotels", "luggage", "airportAccess"].includes(item.key));
+  const problemCards: ProblemCard[] = visibleProblemCardConfigs.map((item) => ({
     ...item,
     title: t(`problemCards.${item.key}.title`),
     cta: t(`problemCards.${item.key}.cta`),
@@ -349,15 +377,15 @@ export default async function AreasToStayIndex({ params }: Props) {
         </section>
 
         <section className="mt-6 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
-          <h2 className="text-lg font-semibold text-slate-950">Still not sure where to stay?</h2>
+          <h2 className="text-lg font-semibold text-slate-950">Start here if you have not booked hotels yet</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
-            Not sure which city or station area to search hotels near? Use the guides below to compare famous stations
-            and calmer nearby bases by airport access, luggage, Shinkansen plans, room-size needs, and travel style.
-            These guides are general starting points, not personalized hotel recommendations.
+            Use this page before opening hotel booking sites. First choose your city, then compare station areas, then
+            check hotel examples. In Japan, a good hotel base should make airport transfers, luggage days, Shinkansen
+            trips, and first nights easier. These guides are general starting points, not personalized hotel recommendations.
           </p>
         </section>
 
-        <section className="mt-10">
+        <section id="choose-your-city" className="mt-10 scroll-mt-24">
           <div className="flex items-end justify-between gap-4">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">{t("citySection.eyebrow")}</p>

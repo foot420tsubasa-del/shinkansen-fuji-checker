@@ -329,7 +329,7 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
           watchOut: "Businesslike, large stations, and less local atmosphere.",
           hotelActionLabel: "Search Tokyo Station area hotels",
           detailLabel: "See Tokyo Station area guide",
-          internalLabels: ["Where to stay before Shinkansen"],
+          internalLabels: ["Where to stay before taking the Shinkansen"],
         },
         {
           title: "Central balance area",
@@ -338,7 +338,7 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
           goodIf: "Central Tokyo balance, calmer nights, airport bus / T-CAT, and Nihombashi access.",
           watchOut: "Less famous for first-time visitors; routing depends on subway or bus.",
           detailLabel: "See East Tokyo area guide",
-          internalLabels: ["Use the Tokyo first-time guide", "Choose by luggage / airport logic"],
+          internalLabels: ["Where to stay in Tokyo for first-time visitors", "Choose a Tokyo hotel area with luggage"],
         },
         {
           title: "Airport / logistics area",
@@ -346,7 +346,7 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
           mainBaseLabel: "Main bases",
           goodIf: "Haneda, Shinkansen, first/last night, and luggage-heavy travel.",
           watchOut: "Businesslike and less atmospheric.",
-          internalLabels: ["See Shinkansen-friendly stays", "Check airport transfer"],
+          internalLabels: ["Best Tokyo area before Shinkansen", "Choose your first-night hotel area by airport"],
         },
       ],
     },
@@ -451,7 +451,7 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
         "Open the Tokyo hotel base matrix before opening booking sites.",
         "See local hotel examples after choosing a base.",
       ],
-      matrixCta: "Open Tokyo hotel base matrix",
+      matrixCta: "Compare Tokyo hotel areas",
       examplesCta: "See local hotel examples",
       sourcesTitle: "Official / useful references",
     },
@@ -1555,6 +1555,69 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               >
                 {supplement.quickAnswerOverride.matrixCta} →
               </TrackedInternalLink>
+              {locale === "en" ? (
+                <div className="mt-5 border-t border-emerald-200 pt-5">
+                  <div className="grid gap-3 md:grid-cols-2">
+                    <div className="rounded-2xl border border-emerald-100 bg-white/80 p-4">
+                      <h3 className="text-base font-semibold text-slate-950">
+                        Before you book a Tokyo hotel
+                      </h3>
+                      <p className="mt-1 text-sm leading-6 text-slate-700">
+                        Start with how your trip moves, then compare hotel names.
+                      </p>
+                      <div className="mt-3 flex flex-wrap gap-2">
+                        {[
+                          "Narita or Haneda",
+                          "Kyoto / Osaka by Shinkansen",
+                          "Large suitcases",
+                          "Nightlife or quiet nights",
+                          "Huge station or calmer base",
+                        ].map((question) => (
+                          <span
+                            key={question}
+                            className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-[#106b43]"
+                          >
+                            {question}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
+                      <h3 className="text-base font-semibold text-slate-950">Common Tokyo hotel area mistakes</h3>
+                      <ul className="mt-3 grid gap-2 text-sm leading-5 text-slate-700">
+                        {[
+                          "Choosing Shinjuku only because it is famous",
+                          "Choosing Asakusa only because it looks traditional",
+                          "Choosing Tokyo Station only for Shinkansen",
+                          "Ignoring luggage, room size, and station complexity",
+                          "Booking before deciding airport and rail routes",
+                        ].map((mistake) => (
+                          <li key={mistake} className="flex gap-2">
+                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#106b43]" aria-hidden="true" />
+                            <span>{mistake}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  <div className="mt-3 rounded-2xl border border-slate-200 bg-white/70 p-4">
+                    <p className="text-sm font-semibold leading-6 text-slate-900">
+                      A famous station is not always the easiest place to sleep. The best Tokyo hotel area usually reduces
+                      transfers, luggage stress, and first-night confusion.
+                    </p>
+                    <TrackedInternalLink
+                      href="/areas-to-stay/tokyo-first-time#hotel-price-timing"
+                      sourcePage={pagePath}
+                      placement="tokyo_first_time_quick_answer_matrix_jump"
+                      label="Check room size and expensive dates before booking"
+                      locale={locale}
+                      className="mt-3 inline-flex min-h-9 items-center rounded-xl bg-slate-700 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
+                    >
+                      Check room size and expensive dates before booking →
+                    </TrackedInternalLink>
+                  </div>
+                </div>
+              ) : null}
             </div>
           </div>
           <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">

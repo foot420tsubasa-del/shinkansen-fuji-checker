@@ -1850,9 +1850,9 @@
   },
   "areasToStayHub": {
     "meta": {
-      "title": "Where to Stay in Japan — Tokyo, Kyoto, Osaka and Mt. Fuji Area Guides",
-      "description": "Choose where to stay in Japan by city, route, airport access, Shinkansen plans, and travel style. Compare Tokyo, Kyoto, Osaka, and Mt. Fuji hotel areas.",
-      "ogDescription": "Choose where to stay in Japan by city, route, airport access, Shinkansen plans, and travel style."
+      "title": "Where to Stay in Japan — Best Areas for Tokyo, Kyoto, Osaka and Mt. Fuji",
+      "description": "Choose where to stay in Japan before booking hotels. Compare Tokyo, Kyoto, Osaka and Mt. Fuji areas by airport access, luggage, Shinkansen plans and travel style.",
+      "ogDescription": "Choose where to stay in Japan before booking hotels. Compare cities and hotel areas by route, luggage and travel style."
     },
     "breadcrumb": {
       "home": "Home",
@@ -1861,8 +1861,8 @@
     "hero": {
       "eyebrow": "Stay area hub",
       "title": "Where to Stay in Japan",
-      "subtitle": "Choose the right city and hotel area before booking. Start with Tokyo, Kyoto, Osaka, or Mt. Fuji based on your route, airport, Shinkansen plans, and travel style.",
-      "primaryCta": "Start with Tokyo stay guide",
+      "subtitle": "Not sure where to stay in Japan? Start by choosing the right city and hotel area before comparing hotel names. Use Tokyo, Kyoto, Osaka, or Mt. Fuji as your route starting point.",
+      "primaryCta": "Where to stay in Tokyo",
       "secondaryCta": "See local hotel examples"
     },
     "quickAnswerTitle": "Quick Answer",
@@ -1915,16 +1915,28 @@
     },
     "problemCards": {
       "firstTime": {
-        "title": "I am visiting Japan for the first time",
-        "cta": "Start with Tokyo"
+        "title": "I am visiting Tokyo for the first time",
+        "cta": "Where to stay in Tokyo"
+      },
+      "notBookedHotels": {
+        "title": "I have not booked hotels yet",
+        "cta": "Start with city and area"
       },
       "earlyShinkansen": {
         "title": "I have an early Shinkansen",
-        "cta": "Pick a rail-friendly base"
+        "cta": "Best Tokyo area before Shinkansen"
       },
       "narita": {
-        "title": "I arrive at Narita",
-        "cta": "Compare Tokyo bases"
+        "title": "I arrive late at Narita or Haneda",
+        "cta": "Choose first-night hotel area"
+      },
+      "luggage": {
+        "title": "I arrive with large luggage",
+        "cta": "Choose a luggage-friendly Tokyo base"
+      },
+      "airportAccess": {
+        "title": "I want easy airport access",
+        "cta": "Compare airport-friendly bases"
       },
       "temples": {
         "title": "I want temples and old-town atmosphere",
@@ -1950,17 +1962,17 @@
       },
       "guides": {
         "tokyo-first-time": {
-          "title": "Where to stay in Tokyo — first-time visitor guide",
-          "description": "Start here to compare Shinjuku, Ueno, Asakusa, Tokyo Station, and quieter East Tokyo.",
+          "title": "Where to stay in Tokyo for first-time visitors",
+          "description": "Compare Shinjuku, Ueno, Asakusa, Tokyo Station, Ginza and quieter East Tokyo by airport access, luggage and Shinkansen plans.",
           "tags": [
             "Tokyo",
             "First-time",
             "Area guide"
           ]
         },
-        "where-to-stay-before-shinkansen": {
-          "title": "Where to stay before taking the Shinkansen in Tokyo",
-          "description": "Use this when luggage and an early Tokyo Station departure matter.",
+      "where-to-stay-before-shinkansen": {
+        "title": "Where to stay before taking the Shinkansen in Tokyo",
+        "description": "Use this before booking your Tokyo hotel if Kyoto, Osaka, or an early Shinkansen is part of your route.",
           "tags": [
             "Tokyo",
             "Shinkansen",
@@ -2054,10 +2066,10 @@
   },
   "planYourTrip": {
     "meta": {
-      "title": "Japan Trip Essentials After Choosing Your Shinkansen Seat | fujiseat",
-      "description": "You checked your Fuji-side Shinkansen seat. Now prepare the rest of your Japan trip with rail, arrival, hotel, luggage, Mt. Fuji, and city activity essentials.",
-      "ogTitle": "Japan Trip Essentials After Choosing Your Shinkansen Seat",
-      "ogDescription": "You checked your Fuji-side Shinkansen seat. Now prepare the rest of your Japan trip."
+      "title": "Japan Trip Booking Guide — What to Book First: Shinkansen, Hotels, Airport Transfer and eSIM",
+      "description": "Plan your Japan trip in the right order. Decide Shinkansen routes, choose where to stay, compare airport transfers, and prepare eSIM before arrival.",
+      "ogTitle": "Japan Trip Booking Guide — Shinkansen, Hotels, Airport Transfer and eSIM",
+      "ogDescription": "Plan your Japan trip in the right order: rail routes, where to stay, airport transfers and arrival essentials."
     },
     "providers": {
       "omio": "Compare on Omio",
@@ -2078,7 +2090,9 @@
         "Pick the hotel base before filling activities.",
         "Prepare arrival essentials before landing."
       ],
-      "guideCta": "Read Fuji-side seat guide"
+      "guideCta": "Read Fuji-side seat guide",
+      "routeDecisionTitle": "Do not book hotels before these route decisions",
+      "routeDecisionBody": "Before choosing hotel names, decide your arrival airport, first-night area, Shinkansen day, luggage plan, and whether Kyoto, Osaka, Mt. Fuji, or Disney affects your base."
     },
     "rail": {
       "eyebrow": "Rail showdown",
@@ -2114,14 +2128,14 @@
       "hubCta": "Compare Tokyo stay areas",
       "cards": {
         "shinjuku": {
-          "title": "First-time convenience",
+          "title": "Best Tokyo area for first-time convenience",
           "area": "Shinjuku",
           "reason": "Best when you want food, nightlife, shopping, and flexible train access in one base.",
           "detailLabel": "See Shinjuku details",
           "hotelActionLabel": "Compare Shinjuku hotels"
         },
         "uenoAsakusa": {
-          "title": "Narita access / value",
+          "title": "Best Tokyo area for Narita access",
           "area": "Ueno or Asakusa",
           "reason": "Best if Narita arrival, better-value hotels, museums, temples, or old-town Tokyo matter most.",
           "detailLabel": "See Ueno details",
@@ -2129,14 +2143,14 @@
           "hotelActionLabel": "Compare Ueno / Asakusa hotels"
         },
         "tokyoStation": {
-          "title": "Early Shinkansen",
+          "title": "Best Tokyo area before an early Shinkansen",
           "area": "Tokyo Station",
           "reason": "Best when luggage, early Kyoto / Osaka departures, and clean station logistics matter.",
           "detailLabel": "See Tokyo Station details",
           "hotelActionLabel": "Compare hotels near Tokyo Station"
         },
         "eastTokyo": {
-          "title": "Quiet local Tokyo",
+          "title": "Best quiet Tokyo base",
           "area": "East Tokyo",
           "reason": "Best for calmer walks, coffee, riverside neighborhoods, and a slower second base.",
           "detailLabel": "See East Tokyo details"
@@ -2211,7 +2225,7 @@
     "hero": {
       "eyebrow": "Tokyo hotel area guide",
       "title": "Where to Stay in Tokyo for First-Time Visitors",
-      "subtitle": "Pick the right hotel area before you book. Compare Shinjuku, Ueno, Asakusa, Tokyo Station, and quieter East Tokyo based on airport access, Shinkansen plans, nightlife, and luggage.",
+      "subtitle": "Compare Shinjuku, Ueno, Asakusa, Tokyo Station, Ginza, and quieter East Tokyo before booking hotels. Choose by airport access, luggage, Shinkansen plans, nightlife, and first-night comfort.",
       "imageAlt": "Tokyo hotel area skyline and neighborhood view"
     },
     "quickAnswer": {
@@ -2953,8 +2967,8 @@
     },
     "pages": {
       "tokyo-first-time": {
-        "title": "Where to stay in Tokyo — first-time visitor guide",
-        "description": "Compare Shinjuku, Ueno, Asakusa, and Tokyo Station for your first trip to Japan. Find the best area based on transport access, nightlife, and luggage ease.",
+        "title": "Where to Stay in Tokyo for First-Time Visitors — Best Hotel Areas by Trip Style",
+        "description": "Compare Shinjuku, Ueno, Asakusa, Tokyo Station, Ginza and quieter East Tokyo before booking hotels. Choose by airport access, luggage, Shinkansen plans, nightlife and first-night comfort.",
         "quickRec": {
           "area": "Shinjuku",
           "why": "Best balance of nightlife, transport access, and hotel density. 10 min to Tokyo Station for Shinkansen day trips. Most first-timers start here."
@@ -3219,12 +3233,12 @@
       },
       "where-to-stay-before-shinkansen": {
         "title": "Where to Stay Before Taking the Shinkansen in Tokyo",
-        "description": "Compare Tokyo Station, Shinjuku, Ueno, Asakusa, and East Tokyo before a Shinkansen day to Kyoto or Osaka.",
+        "description": "Use this before booking your Tokyo hotel if Kyoto, Osaka, or an early Shinkansen is part of your route. Compare Tokyo Station, Shinjuku, Ueno and Asakusa by departure time, luggage and station complexity.",
         "quickRec": {
           "area": "Tokyo Station",
-          "why": "If your Shinkansen is early or luggage is heavy, Tokyo Station reduces morning stress. Shinjuku is better when the evening before matters more."
+          "why": "The best Tokyo hotel area before a Shinkansen day depends on departure time, luggage, station complexity, and what you want to do the night before. If the Shinkansen is your priority, Tokyo Station is the simplest base."
         },
-        "proTip": "Before 8am, stay near Tokyo Station. After 10am, Shinjuku is usually fine and gives you a better final Tokyo evening.",
+        "proTip": "If your Shinkansen leaves before 8am, stay near Tokyo Station because morning rush makes transfers less predictable. If your train is after 10am, Shinjuku gives you a better evening and the transfer is usually manageable.",
         "areas": [
           {
             "vibe": "Efficient — direct Shinkansen, clean logistics",

@@ -273,6 +273,60 @@ export default async function AirportTransfersIndex({ params }: Props) {
         </p>
       </section>
 
+      <section className="mt-8 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="max-w-3xl">
+          <h2 className="text-xl font-bold text-slate-950">Choose your first hotel area by arrival airport</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-700">
+            Your first hotel area should match your arrival airport, landing time, luggage, and first-night energy. The
+            fastest train is not always the easiest route with suitcases.
+          </p>
+        </div>
+        <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            {
+              title: "Arriving at Narita",
+              body: "Compare Ueno, Asakusa, Tokyo Station, and Shinjuku.",
+              href: "/areas-to-stay/tokyo-first-time",
+              label: "Choose Narita-friendly hotel area",
+            },
+            {
+              title: "Arriving at Haneda",
+              body: "Compare Hamamatsucho, Shinagawa, Tokyo Station, and Shinjuku.",
+              href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix",
+              label: "Choose Haneda-friendly hotel area",
+            },
+            {
+              title: "Landing late",
+              body: "Check last trains before booking far from the airport.",
+              href: "/airport-transfers/haneda-late-arrival",
+              label: "Check late-arrival routes",
+            },
+            {
+              title: "Carrying large luggage",
+              body: "Prioritize direct trains, airport buses, or private transfers.",
+              href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage",
+              label: "Choose luggage-friendly Tokyo base",
+            },
+          ].map((item) => (
+            <TrackedInternalLink
+              key={item.title}
+              href={item.href}
+              sourcePage={pagePath}
+              placement="airport_hub_problem_card"
+              label={item.label}
+              locale={locale}
+              className="group rounded-2xl border border-slate-200 bg-slate-50 p-4 shadow-sm transition-colors hover:border-sky-200 hover:bg-sky-50"
+            >
+              <p className="text-sm font-bold text-slate-950">{item.title}</p>
+              <p className="mt-1.5 text-xs leading-5 text-slate-600">{item.body}</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-sky-700">
+                {item.label} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              </span>
+            </TrackedInternalLink>
+          ))}
+        </div>
+      </section>
+
       <section className="mt-10">
         <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">{copy.quickLabel}</p>
         <h2 className="mt-2 text-xl font-bold text-slate-950">{copy.quickTitle}</h2>
@@ -294,7 +348,7 @@ export default async function AirportTransfersIndex({ params }: Props) {
           <QuickAnswerCard
             title={copy.quickAnswers[2].title}
             copy={copy.quickAnswers[2].copy}
-            href="/areas-to-stay/tokyo-station-hotels-before-shinkansen"
+            href="/areas-to-stay/where-to-stay-before-shinkansen"
             label={copy.quickAnswers[2].label}
             locale={locale}
           />
@@ -350,7 +404,7 @@ export default async function AirportTransfersIndex({ params }: Props) {
           <ProblemCard icon={<MapPin className="h-4 w-4" />} title={copy.problems[2].title} body={copy.problems[2].body} href="/areas-to-stay/tokyo-first-time" label={copy.problems[2].label} locale={locale} />
           <ProblemCard icon={<Train className="h-4 w-4" />} title={copy.problems[3].title} body={copy.problems[3].body} href="/airport-transfers/kansai-airport-to-kyoto" label={copy.problems[3].label} locale={locale} />
           <ProblemCard icon={<MapPin className="h-4 w-4" />} title={copy.problems[4].title} body={copy.problems[4].body} href="/airport-transfers/kansai-airport-to-namba" label={copy.problems[4].label} locale={locale} />
-          <ProblemCard icon={<Train className="h-4 w-4" />} title={copy.problems[5].title} body={copy.problems[5].body} href="/areas-to-stay/tokyo-station-hotels-before-shinkansen" label={copy.problems[5].label} locale={locale} />
+          <ProblemCard icon={<Train className="h-4 w-4" />} title={copy.problems[5].title} body={copy.problems[5].body} href="/areas-to-stay/where-to-stay-before-shinkansen" label={copy.problems[5].label} locale={locale} />
         </div>
       </section>
 

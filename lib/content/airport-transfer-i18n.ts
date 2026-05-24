@@ -80,14 +80,14 @@ type RouteUiCopy = {
 const hubCopies: Record<AirportLocale, HubCopy> = {
   en: {
     metaTitle: "Airport Transfers in Japan — Narita, Haneda and Kansai Airport | fujiseat",
-    metaDescription: "Compare airport transfer options for Tokyo and Kansai, including Narita, Haneda, and Kansai Airport routes to Shinjuku, Asakusa, Kyoto, Namba and Umeda.",
+    metaDescription: "Compare airport transfer options for Tokyo and Kansai, then choose a first-night hotel area by airport access, luggage, arrival time and route simplicity.",
     ogTitle: "Airport Transfers in Japan — Narita, Haneda & Kansai",
     ogDescription: "Compare airport transfer options for Tokyo and Kansai. Narita, Haneda, and KIX routes compared.",
     breadcrumbHome: "Home",
     breadcrumbCurrent: "Airport Transfers",
     heroLabel: "Arrival transfer guide",
     heroTitle: "Airport Transfers in Japan",
-    heroBody: "Choose your first route from Narita, Haneda, or Kansai Airport before booking your hotel area. The best option depends on luggage, arrival time, and where you stay.",
+    heroBody: "Choose your first route from Narita, Haneda, or Kansai Airport before booking your hotel area. The best option depends on luggage, landing time, first-night energy, and where you stay.",
     heroPrimary: "Start with Tokyo airport routes",
     heroSecondary: "See Kansai Airport routes",
     heroImageAlt: "Airport arrivals and transfer planning in Japan",

@@ -391,17 +391,17 @@ export default function HomeClient() {
                 Tokyo hotel base
               </p>
               <h2 className="mt-1 text-xl font-bold text-[#082653]">
-                Choose a practical hotel base before comparing hotels
+                Choose where to stay before comparing hotels
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5f7190]">
-                Start with Shinjuku, Ueno / Asakusa, or Tokyo Station based on airport access, luggage,
-                Shinkansen days, and quieter nights.
+                Start with your Tokyo base, not hotel names. The best area depends on airport access, luggage,
+                Shinkansen days, station complexity, and whether you want busy nights or a calmer local base.
               </p>
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs font-semibold text-[#106b43]">
                 {[
-                  { href: "/areas-to-stay/asakusa-vs-ueno", label: "Ueno vs Asakusa" },
-                  { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Tokyo Station vs Shinjuku" },
-                  { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Tokyo with luggage" },
+                  { href: "/areas-to-stay/asakusa-vs-ueno", label: "Compare Asakusa vs Ueno" },
+                  { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Compare Tokyo Station vs Shinjuku" },
+                  { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose a Tokyo hotel area with luggage" },
                 ].map((link) => (
                   <Link
                     key={link.href}
@@ -439,14 +439,14 @@ export default function HomeClient() {
               <TrackedCtaLink
                 href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
                 placement="home_hotel_base_matrix"
-                label="Open Tokyo hotel matrix"
+                label="Find the best Tokyo area to stay"
                 category="stay"
                 ctaType="stay"
                 pagePath="/"
                 locale={locale}
                 className={`${buttonPageSecondary} mt-3 h-11 w-full px-5 text-sm`}
               >
-                Open Tokyo hotel matrix
+                Find the best Tokyo area to stay
                 <ArrowRight className="h-4 w-4" />
               </TrackedCtaLink>
             </div>
@@ -633,14 +633,14 @@ export default function HomeClient() {
               <TrackedCtaLink
                 href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
                 placement="home_final_cta"
-                label="Open Tokyo hotel matrix"
+                label="Compare Tokyo hotel areas"
                 category="stay"
                 ctaType="stay"
                 pagePath="/"
                 locale={locale}
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#082653] px-5 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#123967]"
               >
-                Open Tokyo hotel matrix
+                Compare Tokyo hotel areas
                 <ArrowRight className="h-4 w-4" />
               </TrackedCtaLink>
             </div>
