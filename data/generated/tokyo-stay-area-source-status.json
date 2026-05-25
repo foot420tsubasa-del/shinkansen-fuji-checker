@@ -1,0 +1,65 @@
+{
+  "generatedAt": "2026-05-25T18:38:13.764Z",
+  "sources": [
+    {
+      "sourceId": "tokyo-metro-passengers",
+      "label": "Tokyo Metro passenger ranking",
+      "status": "success",
+      "fetchedAt": "2026-05-25T18:38:13.512Z",
+      "sourcePeriod": "FY2024",
+      "records": 41,
+      "message": "Parsed 41 station rows from Tokyo Metro 駅別乗降人員順位表."
+    },
+    {
+      "sourceId": "toei-passengers",
+      "label": "Toei Subway passenger volume",
+      "status": "success",
+      "fetchedAt": "2026-05-25T18:38:13.455Z",
+      "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)",
+      "records": 106,
+      "message": "Parsed 106 station rows (28 canonical matches) from Toei CKAN CSVs: {\"asakusa\":20,\"mita\":27,\"shinjuku\":21,\"oedo\":38}."
+    },
+    {
+      "sourceId": "toei-barrier-free",
+      "label": "Toei Subway accessibility / barrier-free CSV",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "message": "CSV catalog discovery not stable from a script in this pass."
+    },
+    {
+      "sourceId": "tokyo-metro-barrier-free",
+      "label": "Tokyo Metro accessibility / barrier-free pages",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "message": "Conservative source status only — per-station details not parsed in this pass."
+    },
+    {
+      "sourceId": "odpt-station-information",
+      "label": "ODPT station information",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "message": "ODPT_CONSUMER_KEY not set; skipping gracefully."
+    },
+    {
+      "sourceId": "tokyo-police-crime",
+      "label": "Tokyo Metropolitan Police town-level crime statistics",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "message": "Not displayed as a safety claim; skipped in this pass."
+    },
+    {
+      "sourceId": "gsi-hazard-portal",
+      "label": "Hazard Map Portal (MLIT / GSI)",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "message": "Heavy GIS — catalogued only, no UI rendering this pass."
+    },
+    {
+      "sourceId": "tokyo-lodging-facilities",
+      "label": "Tokyo lodging business facility datasets",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "message": "Catalogued only; ward-level CSV URLs change frequently."
+    }
+  ]
+}

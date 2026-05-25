@@ -1,76 +1,156 @@
+/*
+ * Source registry for the Tokyo Stay Area Index public-data layer.
+ *
+ * Each entry documents an upstream source we either fetch locally
+ * (status: "live" — best-effort fetch with fallback to previous JSON),
+ * or have catalogued for future work (status: "registered" — included
+ * in the registry but not fetched in this pass).
+ *
+ * `expectedUpdateCadence` is documented so the UI never claims "daily
+ * updated" for an annual or irregular source. `requiredEnv` is set when
+ * a source requires credentials (e.g. ODPT_CONSUMER_KEY); the fetcher
+ * will skip with status="skipped" when the env var is missing.
+ */
+
+export type StayAreaSourceCategory =
+  | "passenger"
+  | "accessibility"
+  | "station"
+  | "crime"
+  | "hazard"
+  | "lodging";
+
+export type StayAreaSourceCadence =
+  | "daily"
+  | "monthly"
+  | "annual"
+  | "irregular";
+
 export type StayAreaSourceDefinition = {
-  sourceId: string;
+  id: string;
   label: string;
-  owner: string;
-  signalType: "passenger" | "accessibility" | "station" | "crime" | "hazard" | "lodging";
-  updateMode: "manual-reference";
-  note: string;
+  category: StayAreaSourceCategory;
+  provider: string;
   url?: string;
+  expectedUpdateCadence: StayAreaSourceCadence;
+  /** Set when an env var must be present for the fetcher to run. */
+  requiredEnv?: string[];
+  /** Notes on commercial use, attribution, or licensing. */
+  commercialUseNote?: string;
+  /** "live" = attempted in scripts/update-tokyo-stay-area-signals.mjs.
+   *  "registered" = documented but not fetched in this pass. */
+  status: "live" | "registered";
+  /**
+   * Whether this source ever contributes to the area scoring blend. Police
+   * and hazard sources stay false even when later activated — they belong to
+   * the "context (not scored)" group in the UI.
+   */
+  usedInScore: boolean;
+  note: string;
 };
 
 export const tokyoStayAreaSourceRegistry: StayAreaSourceDefinition[] = [
   {
-    sourceId: "tokyo-metro-passenger-volume",
-    label: "Tokyo Metro passenger volume",
-    owner: "Tokyo Metro",
-    signalType: "passenger",
-    updateMode: "manual-reference",
-    note: "Future signal source for station crowd and passenger-volume context.",
+    id: "tokyo-metro-passengers",
+    label: "Tokyo Metro passenger ranking",
+    category: "passenger",
+    provider: "Tokyo Metro Co., Ltd.",
+    url: "https://www.tokyometro.jp/corporate/enterprise/passenger_rail/transportation/passenger/index.html",
+    expectedUpdateCadence: "annual",
+    commercialUseNote:
+      "Public passenger ranking page. Attribute to Tokyo Metro. Do not republish full datasets.",
+    status: "live",
+    usedInScore: true,
+    note: "Per-station daily passenger ranking. Best-effort HTML parse.",
   },
   {
-    sourceId: "toei-subway-passenger-volume",
+    id: "toei-passengers",
     label: "Toei Subway passenger volume",
-    owner: "Tokyo Metropolitan Bureau of Transportation",
-    signalType: "passenger",
-    updateMode: "manual-reference",
-    note: "Future signal source for Toei station crowd context.",
+    category: "passenger",
+    provider: "Tokyo Metropolitan Bureau of Transportation",
+    url: "https://www.kotsu.metro.tokyo.jp/subway/about/transport.html",
+    expectedUpdateCadence: "annual",
+    commercialUseNote:
+      "Public Toei passenger statistics. Attribute to Tokyo Metropolitan Bureau of Transportation.",
+    status: "live",
+    usedInScore: true,
+    note: "Per-station passenger volume. Best-effort HTML parse.",
   },
   {
-    sourceId: "tokyo-metro-barrier-free",
-    label: "Tokyo Metro accessibility / barrier-free information",
-    owner: "Tokyo Metro",
-    signalType: "accessibility",
-    updateMode: "manual-reference",
-    note: "Future signal source for elevator and luggage-friendly station checks.",
+    id: "toei-barrier-free",
+    label: "Toei Subway accessibility / barrier-free CSV",
+    category: "accessibility",
+    provider: "Tokyo Metropolitan Bureau of Transportation",
+    url: "https://catalog.data.metro.tokyo.lg.jp/dataset?keywords_or=%E3%83%90%E3%83%AA%E3%82%A2%E3%83%95%E3%83%AA%E3%83%BC&organization=t000022",
+    expectedUpdateCadence: "irregular",
+    commercialUseNote:
+      "Tokyo Open Data Catalog. License attached per dataset; check before bulk redistribution.",
+    status: "registered",
+    usedInScore: true,
+    note: "CSV catalog discovery is fragile from a script. Marked skipped this pass; revisit with a stable dataset id.",
   },
   {
-    sourceId: "toei-subway-barrier-free",
-    label: "Toei Subway accessibility / barrier-free information",
-    owner: "Tokyo Metropolitan Bureau of Transportation",
-    signalType: "accessibility",
-    updateMode: "manual-reference",
-    note: "Future signal source for Toei accessibility checks.",
+    id: "tokyo-metro-barrier-free",
+    label: "Tokyo Metro accessibility / barrier-free pages",
+    category: "accessibility",
+    provider: "Tokyo Metro Co., Ltd.",
+    url: "https://www.tokyometro.jp/station/barrierfree/",
+    expectedUpdateCadence: "irregular",
+    commercialUseNote: "Attribute to Tokyo Metro. Per-station detail pages not parsed in this pass.",
+    status: "registered",
+    usedInScore: true,
+    note: "Conservative source status only — exact elevator counts are not claimed in this pass.",
   },
   {
-    sourceId: "odpt-station-information",
+    id: "odpt-station-information",
     label: "ODPT station information",
-    owner: "Open Data Public Transportation Council",
-    signalType: "station",
-    updateMode: "manual-reference",
-    note: "Future signal source for station metadata and line coverage.",
+    category: "station",
+    provider: "Open Data Public Transportation Council",
+    url: "https://developer.odpt.org/",
+    expectedUpdateCadence: "irregular",
+    requiredEnv: ["ODPT_CONSUMER_KEY"],
+    commercialUseNote:
+      "Requires a consumer key. Attribution to ODPT and individual operators required.",
+    status: "registered",
+    usedInScore: true,
+    note: "Skipped automatically when ODPT_CONSUMER_KEY is not set.",
   },
   {
-    sourceId: "tokyo-police-crime-statistics",
-    label: "Tokyo Metropolitan Police crime statistics",
-    owner: "Tokyo Metropolitan Police Department",
-    signalType: "crime",
-    updateMode: "manual-reference",
-    note: "Future public-data reference. Do not present this MVP as a safety ranking.",
+    id: "tokyo-police-crime",
+    label: "Tokyo Metropolitan Police town-level crime statistics",
+    category: "crime",
+    provider: "Tokyo Metropolitan Police Department",
+    url: "https://www.keishicho.metro.tokyo.lg.jp/about_mpd/jokyo_tokei/jokyo/ninchikensu.html",
+    expectedUpdateCadence: "monthly",
+    commercialUseNote:
+      "Public reference. Do not present as a 'safety ranking'; do not label areas as safe or dangerous.",
+    status: "registered",
+    usedInScore: false,
+    note: "Not displayed as a safety claim. Skipped in this pass.",
   },
   {
-    sourceId: "hazard-map-portal",
-    label: "Hazard Map Portal",
-    owner: "Ministry of Land, Infrastructure, Transport and Tourism",
-    signalType: "hazard",
-    updateMode: "manual-reference",
-    note: "Future context source for hazard notes. Not fetched in this MVP.",
+    id: "gsi-hazard-portal",
+    label: "Hazard Map Portal (MLIT / GSI)",
+    category: "hazard",
+    provider: "Ministry of Land, Infrastructure, Transport and Tourism",
+    url: "https://disaportal.gsi.go.jp/",
+    expectedUpdateCadence: "irregular",
+    commercialUseNote: "Public reference. Heavy GIS — out of scope for this pass.",
+    status: "registered",
+    usedInScore: false,
+    note: "Catalogued only; no UI scare-factor rendering.",
   },
   {
-    sourceId: "tokyo-lodging-business-facilities",
+    id: "tokyo-lodging-facilities",
     label: "Tokyo lodging business facility datasets",
-    owner: "Tokyo Metropolitan Government",
-    signalType: "lodging",
-    updateMode: "manual-reference",
-    note: "Future signal source for lodging density context, not hotel quality or price.",
+    category: "lodging",
+    provider: "Tokyo Metropolitan Government",
+    url: "https://catalog.data.metro.tokyo.lg.jp/dataset?keywords_or=%E6%97%85%E9%A4%A8%E6%A5%AD",
+    expectedUpdateCadence: "irregular",
+    commercialUseNote:
+      "Public dataset. For density signals only — not hotel quality or price.",
+    status: "registered",
+    usedInScore: true,
+    note: "Catalogued only; ward-level CSV URLs change frequently.",
   },
 ];

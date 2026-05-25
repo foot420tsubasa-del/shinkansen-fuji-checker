@@ -1,0 +1,2396 @@
+[
+  {
+    "id": "oshiage",
+    "name": "Oshiage",
+    "displayName": "Oshiage",
+    "japaneseName": "押上",
+    "stationNames": [
+      "Oshiage",
+      "Tokyo Skytree"
+    ],
+    "stationLines": [
+      "Hanzomon Line",
+      "Asakusa Line",
+      "Keisei Oshiage Line",
+      "Tobu Skytree Line"
+    ],
+    "wardNames": [
+      "Sumida"
+    ],
+    "areaGroup": "East Tokyo",
+    "coordinates": {
+      "lat": 35.71,
+      "lng": 139.8108
+    },
+    "editorial": {
+      "overallLabel": "Luggage-friendly east Tokyo base with strong airport logic.",
+      "bestFor": [
+        "Narita arrival",
+        "Families",
+        "Asakusa and Skytree access",
+        "Travelers with luggage"
+      ],
+      "watchOut": [
+        "Less ideal for Shinjuku or Shibuya nightlife",
+        "Quieter at night than major hubs"
+      ],
+      "dataSignals": [
+        "Airport through-service",
+        "Lower station stress than major hubs",
+        "Skytree-side sightseeing access"
+      ],
+      "editorialNote": "Oshiage combines direct airport logic with a calmer station-area feel than most central hubs.",
+      "localFeelNote": "Residential and practical, with Skytree energy nearby but less chaos than central Tokyo."
+    },
+    "editorialScores": {
+      "stationSimplicity": 88,
+      "luggageFriendly": 90,
+      "airportAccess": 92,
+      "shinkansenAccess": 72,
+      "touristAccess": 80,
+      "localFeel": 78,
+      "crowdStress": 86,
+      "lodgingChoice": 68,
+      "confidence": 82
+    },
+    "crowdLevel": "Low",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "multi-operator",
+      "transfer-hub",
+      "airport-direct",
+      "luggage-friendly",
+      "easy-surface-orientation"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "kuramae",
+    "name": "Kuramae",
+    "displayName": "Kuramae",
+    "japaneseName": "蔵前",
+    "stationNames": [
+      "Kuramae",
+      "Tawaramachi"
+    ],
+    "stationLines": [
+      "Asakusa Line",
+      "Oedo Line",
+      "Ginza Line"
+    ],
+    "wardNames": [
+      "Taito"
+    ],
+    "areaGroup": "East Tokyo",
+    "coordinates": {
+      "lat": 35.7041,
+      "lng": 139.7916
+    },
+    "editorial": {
+      "overallLabel": "Calmer local Tokyo base near Asakusa without the busiest tourist streets.",
+      "bestFor": [
+        "Local Tokyo",
+        "Cafes and quiet streets",
+        "Asakusa-adjacent stay",
+        "Repeat visitors"
+      ],
+      "watchOut": [
+        "Some station exits may be less convenient with heavy luggage",
+        "Not as famous as Shinjuku or Ueno"
+      ],
+      "dataSignals": [
+        "Calmer neighborhood pattern",
+        "Asakusa access",
+        "Small-station routing tradeoff"
+      ],
+      "editorialNote": "Kuramae is strong for travelers who value local feel and lower crowd stress over big-station convenience.",
+      "localFeelNote": "Design shops, cafes, river walks, and a quieter east-side stay."
+    },
+    "editorialScores": {
+      "stationSimplicity": 85,
+      "luggageFriendly": 82,
+      "airportAccess": 78,
+      "shinkansenAccess": 70,
+      "touristAccess": 78,
+      "localFeel": 88,
+      "crowdStress": 84,
+      "lodgingChoice": 62,
+      "confidence": 78
+    },
+    "crowdLevel": "Low-Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "compact-station",
+      "easy-surface-orientation",
+      "luggage-friendly"
+    ],
+    "exitComplexityLevel": "Simple",
+    "transferHubLevel": "Low",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Low"
+  },
+  {
+    "id": "asakusa",
+    "name": "Asakusa",
+    "displayName": "Asakusa",
+    "japaneseName": "浅草",
+    "stationNames": [
+      "Asakusa"
+    ],
+    "stationLines": [
+      "Ginza Line",
+      "Asakusa Line",
+      "Tobu Skytree Line",
+      "Tsukuba Express"
+    ],
+    "wardNames": [
+      "Taito"
+    ],
+    "areaGroup": "East Tokyo",
+    "coordinates": {
+      "lat": 35.7148,
+      "lng": 139.7967
+    },
+    "editorial": {
+      "overallLabel": "Classic Tokyo sightseeing base with strong atmosphere but higher tourist crowds.",
+      "bestFor": [
+        "Classic Tokyo sightseeing",
+        "Temples and old-town atmosphere",
+        "First-time visitors who want a strong Tokyo feel"
+      ],
+      "watchOut": [
+        "Tourist crowds",
+        "Some streets are busy with luggage",
+        "Not JR-centered"
+      ],
+      "dataSignals": [
+        "Major sightseeing demand",
+        "Subway-based routing",
+        "Old-town appeal"
+      ],
+      "editorialNote": "Asakusa is excellent for atmosphere, but luggage and crowds matter more than many visitors expect.",
+      "localFeelNote": "Traditional, photogenic, and visitor-heavy around Senso-ji."
+    },
+    "editorialScores": {
+      "stationSimplicity": 68,
+      "luggageFriendly": 76,
+      "airportAccess": 74,
+      "shinkansenAccess": 68,
+      "touristAccess": 86,
+      "localFeel": 84,
+      "crowdStress": 55,
+      "lodgingChoice": 78,
+      "confidence": 80
+    },
+    "crowdLevel": "High",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator",
+      "transfer-hub",
+      "luggage-confusing"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "High"
+  },
+  {
+    "id": "ueno",
+    "name": "Ueno",
+    "displayName": "Ueno",
+    "japaneseName": "上野",
+    "stationNames": [
+      "Ueno",
+      "Keisei Ueno"
+    ],
+    "stationLines": [
+      "JR Yamanote Line",
+      "JR Ueno-Tokyo Line",
+      "Ginza Line",
+      "Hibiya Line",
+      "Keisei Skyliner"
+    ],
+    "wardNames": [
+      "Taito"
+    ],
+    "areaGroup": "East Tokyo",
+    "coordinates": {
+      "lat": 35.7138,
+      "lng": 139.777
+    },
+    "editorial": {
+      "overallLabel": "Practical east-side hub with Narita access and strong rail connections.",
+      "bestFor": [
+        "Narita access",
+        "Museums and parks",
+        "Practical rail connections",
+        "Better-value hotel search"
+      ],
+      "watchOut": [
+        "Busier and more chaotic than smaller East Tokyo areas",
+        "Less polished than Ginza or Shinjuku"
+      ],
+      "dataSignals": [
+        "Narita rail access",
+        "JR and subway coverage",
+        "Museum and park proximity"
+      ],
+      "editorialNote": "Ueno is not the calmest station, but it is one of Tokyo's most practical first-night bases.",
+      "localFeelNote": "Busy, useful, and a little rougher around the edges than polished central areas."
+    },
+    "editorialScores": {
+      "stationSimplicity": 70,
+      "luggageFriendly": 80,
+      "airportAccess": 86,
+      "shinkansenAccess": 82,
+      "touristAccess": 84,
+      "localFeel": 75,
+      "crowdStress": 62,
+      "lodgingChoice": 82,
+      "confidence": 84
+    },
+    "crowdLevel": "Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "many-exits",
+      "multi-operator",
+      "transfer-hub",
+      "airport-direct",
+      "shinkansen-friendly",
+      "hotel-dense"
+    ],
+    "exitComplexityLevel": "Complex",
+    "transferHubLevel": "High",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Very High"
+  },
+  {
+    "id": "ryogoku",
+    "name": "Ryogoku",
+    "displayName": "Ryogoku",
+    "japaneseName": "両国",
+    "stationNames": [
+      "Ryogoku"
+    ],
+    "stationLines": [
+      "JR Sobu Line",
+      "Oedo Line"
+    ],
+    "wardNames": [
+      "Sumida"
+    ],
+    "areaGroup": "East Tokyo",
+    "coordinates": {
+      "lat": 35.696,
+      "lng": 139.7937
+    },
+    "editorial": {
+      "overallLabel": "Cultural east Tokyo base with lower stress and good local feel.",
+      "bestFor": [
+        "Local stay",
+        "Sumo and cultural atmosphere",
+        "Budget-conscious travelers",
+        "Access to Asakusa and Akihabara"
+      ],
+      "watchOut": [
+        "Not as direct for airport access as Oshiage or Ueno",
+        "Quieter nightlife"
+      ],
+      "dataSignals": [
+        "Smaller station pattern",
+        "Cultural landmarks",
+        "East Tokyo connectivity"
+      ],
+      "editorialNote": "Ryogoku works best when atmosphere and calm matter more than airport directness.",
+      "localFeelNote": "Distinctive sumo culture, museums, and a quieter station-area rhythm."
+    },
+    "editorialScores": {
+      "stationSimplicity": 80,
+      "luggageFriendly": 78,
+      "airportAccess": 70,
+      "shinkansenAccess": 72,
+      "touristAccess": 76,
+      "localFeel": 82,
+      "crowdStress": 78,
+      "lodgingChoice": 58,
+      "confidence": 76
+    },
+    "crowdLevel": "Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "compact-station",
+      "easy-surface-orientation"
+    ],
+    "exitComplexityLevel": "Simple",
+    "transferHubLevel": "Low",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Low"
+  },
+  {
+    "id": "kiyosumi-shirakawa",
+    "name": "Kiyosumi-Shirakawa",
+    "displayName": "Kiyosumi-Shirakawa",
+    "japaneseName": "清澄白河",
+    "stationNames": [
+      "Kiyosumi-shirakawa"
+    ],
+    "stationLines": [
+      "Hanzomon Line",
+      "Oedo Line"
+    ],
+    "wardNames": [
+      "Koto"
+    ],
+    "areaGroup": "East Tokyo",
+    "coordinates": {
+      "lat": 35.6818,
+      "lng": 139.7989
+    },
+    "editorial": {
+      "overallLabel": "Quiet, design-forward local base with cafes and museum access.",
+      "bestFor": [
+        "Repeat visitors",
+        "Cafe-hopping",
+        "Quiet stays",
+        "Local Tokyo feel"
+      ],
+      "watchOut": [
+        "Limited tourist signage",
+        "Fewer late-night options",
+        "Not strong for shinkansen days"
+      ],
+      "dataSignals": [
+        "Small-station calm",
+        "Cafe and gallery density",
+        "Hanzomon Line straight to Otemachi"
+      ],
+      "editorialNote": "Kiyosumi-Shirakawa rewards repeat visitors who want a calm base with cafe culture.",
+      "localFeelNote": "Coffee roasters, museums, and tree-lined streets along the Sumida tributaries."
+    },
+    "editorialScores": {
+      "stationSimplicity": 86,
+      "luggageFriendly": 80,
+      "airportAccess": 70,
+      "shinkansenAccess": 68,
+      "touristAccess": 70,
+      "localFeel": 90,
+      "crowdStress": 88,
+      "lodgingChoice": 50,
+      "confidence": 74
+    },
+    "crowdLevel": "Low",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "compact-station",
+      "easy-surface-orientation",
+      "luggage-friendly"
+    ],
+    "exitComplexityLevel": "Simple",
+    "transferHubLevel": "Low",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Low"
+  },
+  {
+    "id": "monzen-nakacho",
+    "name": "Monzen-Nakacho",
+    "displayName": "Monzen-Nakacho",
+    "japaneseName": "門前仲町",
+    "stationNames": [
+      "Monzen-nakacho"
+    ],
+    "stationLines": [
+      "Tozai Line",
+      "Oedo Line"
+    ],
+    "wardNames": [
+      "Koto"
+    ],
+    "areaGroup": "East Tokyo",
+    "coordinates": {
+      "lat": 35.6724,
+      "lng": 139.7986
+    },
+    "editorial": {
+      "overallLabel": "Lively shitamachi base near Fukagawa, calmer than central hubs.",
+      "bestFor": [
+        "Local food",
+        "Repeat visitors",
+        "Shitamachi atmosphere",
+        "Budget-conscious stays"
+      ],
+      "watchOut": [
+        "Less polished than central areas",
+        "Quiet late at night",
+        "Limited big-brand hotels"
+      ],
+      "dataSignals": [
+        "Tozai Line direct to Otemachi",
+        "Local food density",
+        "Festival culture (Fukagawa Hachiman)"
+      ],
+      "editorialNote": "Monzen-Nakacho fits travelers who want neighborhood food and a working-Tokyo feel.",
+      "localFeelNote": "Sake bars, izakaya streets, and a community-temple rhythm near the Sumida bay."
+    },
+    "editorialScores": {
+      "stationSimplicity": 84,
+      "luggageFriendly": 78,
+      "airportAccess": 72,
+      "shinkansenAccess": 70,
+      "touristAccess": 72,
+      "localFeel": 86,
+      "crowdStress": 84,
+      "lodgingChoice": 52,
+      "confidence": 74
+    },
+    "crowdLevel": "Low-Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "compact-station",
+      "easy-surface-orientation"
+    ],
+    "exitComplexityLevel": "Simple",
+    "transferHubLevel": "Low",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Low"
+  },
+  {
+    "id": "ningyocho",
+    "name": "Ningyocho",
+    "displayName": "Ningyocho",
+    "japaneseName": "人形町",
+    "stationNames": [
+      "Ningyocho",
+      "Suitengumae"
+    ],
+    "stationLines": [
+      "Hibiya Line",
+      "Asakusa Line",
+      "Hanzomon Line"
+    ],
+    "wardNames": [
+      "Chuo"
+    ],
+    "areaGroup": "Central Tokyo",
+    "coordinates": {
+      "lat": 35.6862,
+      "lng": 139.7838
+    },
+    "editorial": {
+      "overallLabel": "Old-merchant central base with easy reach to Tokyo and Ginza.",
+      "bestFor": [
+        "Quiet central stay",
+        "Repeat visitors",
+        "Walk to Nihombashi and Ginza",
+        "Calm food streets"
+      ],
+      "watchOut": [
+        "Not the cheapest area",
+        "Less famous to tourists",
+        "Limited late-night life"
+      ],
+      "dataSignals": [
+        "Walkable to Nihombashi",
+        "Hanzomon access to Shibuya",
+        "Old downtown atmosphere"
+      ],
+      "editorialNote": "Ningyocho gives a quieter central base than Ginza without losing the central rail logic.",
+      "localFeelNote": "Old-merchant streets, sweet shops, and the Suitengumae shrine block."
+    },
+    "editorialScores": {
+      "stationSimplicity": 82,
+      "luggageFriendly": 80,
+      "airportAccess": 76,
+      "shinkansenAccess": 78,
+      "touristAccess": 78,
+      "localFeel": 82,
+      "crowdStress": 80,
+      "lodgingChoice": 64,
+      "confidence": 76
+    },
+    "crowdLevel": "Low-Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "hatchobori",
+    "name": "Hatchobori",
+    "displayName": "Hatchobori",
+    "japaneseName": "八丁堀",
+    "stationNames": [
+      "Hatchobori"
+    ],
+    "stationLines": [
+      "Hibiya Line",
+      "JR Keiyo Line"
+    ],
+    "wardNames": [
+      "Chuo"
+    ],
+    "areaGroup": "Central Tokyo",
+    "coordinates": {
+      "lat": 35.6755,
+      "lng": 139.7775
+    },
+    "editorial": {
+      "overallLabel": "Compact business-side base with quick Tokyo Station and Tsukiji access.",
+      "bestFor": [
+        "Tokyo Station access",
+        "Disney-Keiyo day trips",
+        "Business-style stays",
+        "Quieter central nights"
+      ],
+      "watchOut": [
+        "Mostly office area at night",
+        "Less character than Ningyocho or Ginza",
+        "Limited tourist food street"
+      ],
+      "dataSignals": [
+        "Keiyo Line to Maihama (Disney)",
+        "Hibiya Line to Roppongi",
+        "Walk to Tokyo Station / Ginza"
+      ],
+      "editorialNote": "Hatchobori is a quiet, useful central base when you value rail logistics over a lively street.",
+      "localFeelNote": "Office-side streets that empty in the evening; convenient but unhurried."
+    },
+    "editorialScores": {
+      "stationSimplicity": 80,
+      "luggageFriendly": 80,
+      "airportAccess": 74,
+      "shinkansenAccess": 82,
+      "touristAccess": 70,
+      "localFeel": 68,
+      "crowdStress": 80,
+      "lodgingChoice": 62,
+      "confidence": 74
+    },
+    "crowdLevel": "Low-Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "compact-station",
+      "multi-operator"
+    ],
+    "exitComplexityLevel": "Simple",
+    "transferHubLevel": "Low",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "kayabacho",
+    "name": "Kayabacho",
+    "displayName": "Kayabacho",
+    "japaneseName": "茅場町",
+    "stationNames": [
+      "Kayabacho"
+    ],
+    "stationLines": [
+      "Hibiya Line",
+      "Tozai Line"
+    ],
+    "wardNames": [
+      "Chuo"
+    ],
+    "areaGroup": "Central Tokyo",
+    "coordinates": {
+      "lat": 35.6796,
+      "lng": 139.7826
+    },
+    "editorial": {
+      "overallLabel": "Quiet finance-district base, well connected via Tozai and Hibiya.",
+      "bestFor": [
+        "Quiet central stays",
+        "Day trips to Otemachi or Roppongi",
+        "Business-side hotels"
+      ],
+      "watchOut": [
+        "Quiet evenings",
+        "Less to do nearby",
+        "Not strong for sightseeing concentration"
+      ],
+      "dataSignals": [
+        "Two subway lines",
+        "Walk to Nihombashi",
+        "Office-area calm"
+      ],
+      "editorialNote": "Kayabacho is a calm, central, slightly underrated base for travelers who don't need a bustling street.",
+      "localFeelNote": "Bank towers, river views toward Hatchobori, and unhurried evenings."
+    },
+    "editorialScores": {
+      "stationSimplicity": 82,
+      "luggageFriendly": 80,
+      "airportAccess": 74,
+      "shinkansenAccess": 78,
+      "touristAccess": 68,
+      "localFeel": 70,
+      "crowdStress": 82,
+      "lodgingChoice": 56,
+      "confidence": 72
+    },
+    "crowdLevel": "Low",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Low"
+  },
+  {
+    "id": "nihombashi",
+    "name": "Nihombashi",
+    "displayName": "Nihombashi",
+    "japaneseName": "日本橋",
+    "stationNames": [
+      "Nihombashi",
+      "Mitsukoshimae"
+    ],
+    "stationLines": [
+      "Ginza Line",
+      "Tozai Line",
+      "Asakusa Line",
+      "Hanzomon Line"
+    ],
+    "wardNames": [
+      "Chuo"
+    ],
+    "areaGroup": "Central Tokyo",
+    "coordinates": {
+      "lat": 35.6831,
+      "lng": 139.774
+    },
+    "editorial": {
+      "overallLabel": "Classic central base with strong rail coverage and Tokyo Station adjacency.",
+      "bestFor": [
+        "First-night near Tokyo Station",
+        "Shopping and historic streets",
+        "Shinkansen-friendly stays",
+        "Polished feel"
+      ],
+      "watchOut": [
+        "Higher hotel costs",
+        "Quieter than Ginza for nightlife",
+        "Business-oriented during weekdays"
+      ],
+      "dataSignals": [
+        "Walk to Tokyo Station",
+        "Four subway lines",
+        "Department-store density"
+      ],
+      "editorialNote": "Nihombashi blends central convenience with a calmer, older-merchant character.",
+      "localFeelNote": "Department-store flagships, historic bridges, and a deliberate, central feel."
+    },
+    "editorialScores": {
+      "stationSimplicity": 78,
+      "luggageFriendly": 80,
+      "airportAccess": 74,
+      "shinkansenAccess": 88,
+      "touristAccess": 80,
+      "localFeel": 70,
+      "crowdStress": 70,
+      "lodgingChoice": 80,
+      "confidence": 82
+    },
+    "crowdLevel": "Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "many-exits",
+      "multi-operator",
+      "transfer-hub",
+      "luggage-confusing",
+      "hotel-dense"
+    ],
+    "exitComplexityLevel": "Complex",
+    "transferHubLevel": "High",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "High"
+  },
+  {
+    "id": "tokyo-station",
+    "name": "Tokyo Station / Marunouchi",
+    "displayName": "Tokyo Station / Marunouchi",
+    "japaneseName": "東京駅 / 丸の内",
+    "stationNames": [
+      "Tokyo",
+      "Marunouchi",
+      "Yaesu",
+      "Otemachi",
+      "Nijubashimae"
+    ],
+    "stationLines": [
+      "Tokaido Shinkansen",
+      "JR Yamanote Line",
+      "JR Chuo Line",
+      "Marunouchi Line",
+      "Narita Express"
+    ],
+    "wardNames": [
+      "Chiyoda",
+      "Chuo"
+    ],
+    "areaGroup": "Central Tokyo",
+    "coordinates": {
+      "lat": 35.6812,
+      "lng": 139.7671
+    },
+    "editorial": {
+      "overallLabel": "Rail logistics powerhouse with high complexity and businesslike surroundings.",
+      "bestFor": [
+        "Early Shinkansen",
+        "First or last night in Tokyo",
+        "Business hotels",
+        "Kyoto or Osaka transfer days"
+      ],
+      "watchOut": [
+        "Giant station complexity",
+        "Expensive and businesslike area",
+        "Stressful with luggage when unfamiliar"
+      ],
+      "dataSignals": [
+        "Direct Shinkansen access",
+        "Large terminal complexity",
+        "Central business district pattern"
+      ],
+      "editorialNote": "Tokyo Station scores very high for Shinkansen access but low for simplicity and crowd stress.",
+      "localFeelNote": "Efficient and polished, but less relaxed than east-side local bases."
+    },
+    "editorialScores": {
+      "stationSimplicity": 40,
+      "luggageFriendly": 52,
+      "airportAccess": 70,
+      "shinkansenAccess": 96,
+      "touristAccess": 80,
+      "localFeel": 55,
+      "crowdStress": 32,
+      "lodgingChoice": 84,
+      "confidence": 88
+    },
+    "crowdLevel": "Very High",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "mega-terminal",
+      "multi-operator",
+      "transfer-hub",
+      "shinkansen-friendly",
+      "underground-maze",
+      "hotel-dense"
+    ],
+    "exitComplexityLevel": "Mega station",
+    "transferHubLevel": "Very High",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Very High"
+  },
+  {
+    "id": "ginza-yurakucho",
+    "name": "Ginza / Yurakucho",
+    "displayName": "Ginza / Yurakucho",
+    "japaneseName": "銀座 / 有楽町",
+    "stationNames": [
+      "Ginza",
+      "Yurakucho",
+      "Hibiya",
+      "Higashi-Ginza"
+    ],
+    "stationLines": [
+      "Ginza Line",
+      "Marunouchi Line",
+      "Hibiya Line",
+      "Yurakucho Line",
+      "JR Yamanote Line",
+      "Asakusa Line"
+    ],
+    "wardNames": [
+      "Chuo",
+      "Chiyoda"
+    ],
+    "areaGroup": "Central Tokyo",
+    "coordinates": {
+      "lat": 35.6717,
+      "lng": 139.7639
+    },
+    "editorial": {
+      "overallLabel": "Polished central base for shopping and Tokyo-Station adjacency.",
+      "bestFor": [
+        "Shopping",
+        "Last-night before flights",
+        "Polished central feel",
+        "Walk to Tokyo Station"
+      ],
+      "watchOut": [
+        "Higher hotel cost feel",
+        "Less local and casual than East Tokyo",
+        "Quieter side streets at night"
+      ],
+      "dataSignals": [
+        "Walk to Tokyo Station",
+        "Multiple subway lines",
+        "Central shopping density"
+      ],
+      "editorialNote": "Ginza / Yurakucho balances rail logistics with a cleaner, less chaotic feel than Tokyo Station itself.",
+      "localFeelNote": "Department stores, polished side streets, and an upper-end central mood."
+    },
+    "editorialScores": {
+      "stationSimplicity": 70,
+      "luggageFriendly": 76,
+      "airportAccess": 72,
+      "shinkansenAccess": 86,
+      "touristAccess": 84,
+      "localFeel": 66,
+      "crowdStress": 58,
+      "lodgingChoice": 82,
+      "confidence": 82
+    },
+    "crowdLevel": "Medium-High",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "many-exits",
+      "multi-operator",
+      "transfer-hub",
+      "hotel-dense",
+      "luggage-confusing"
+    ],
+    "exitComplexityLevel": "Complex",
+    "transferHubLevel": "High",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Very High"
+  },
+  {
+    "id": "shimbashi",
+    "name": "Shimbashi",
+    "displayName": "Shimbashi",
+    "japaneseName": "新橋",
+    "stationNames": [
+      "Shimbashi"
+    ],
+    "stationLines": [
+      "JR Yamanote Line",
+      "JR Tokaido Line",
+      "Ginza Line",
+      "Asakusa Line",
+      "Yurikamome"
+    ],
+    "wardNames": [
+      "Minato"
+    ],
+    "areaGroup": "Central Tokyo",
+    "coordinates": {
+      "lat": 35.6655,
+      "lng": 139.7595
+    },
+    "editorial": {
+      "overallLabel": "Practical salaryman hub with Yurikamome to Odaiba and walk to Ginza.",
+      "bestFor": [
+        "Budget central hotels",
+        "Walk to Ginza",
+        "Odaiba day trips (Yurikamome)",
+        "Quick Haneda routing via Asakusa Line"
+      ],
+      "watchOut": [
+        "Loud after-work street energy",
+        "Old-station feel",
+        "Less polished than Ginza or Marunouchi"
+      ],
+      "dataSignals": [
+        "Yurikamome terminus",
+        "Yamanote Line",
+        "Walk to Ginza"
+      ],
+      "editorialNote": "Shimbashi is utilitarian — good rail logic and budget hotels, less character than nearby Ginza.",
+      "localFeelNote": "After-work izakaya streets and a busy interchange feel."
+    },
+    "editorialScores": {
+      "stationSimplicity": 64,
+      "luggageFriendly": 70,
+      "airportAccess": 80,
+      "shinkansenAccess": 84,
+      "touristAccess": 76,
+      "localFeel": 64,
+      "crowdStress": 56,
+      "lodgingChoice": 78,
+      "confidence": 78
+    },
+    "crowdLevel": "Medium-High",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator",
+      "hotel-dense"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "High"
+  },
+  {
+    "id": "hamamatsucho-daimon",
+    "name": "Hamamatsucho / Daimon",
+    "displayName": "Hamamatsucho / Daimon",
+    "japaneseName": "浜松町 / 大門",
+    "stationNames": [
+      "Hamamatsucho",
+      "Daimon"
+    ],
+    "stationLines": [
+      "JR Yamanote Line",
+      "Tokyo Monorail",
+      "Asakusa Line",
+      "Oedo Line"
+    ],
+    "wardNames": [
+      "Minato"
+    ],
+    "areaGroup": "South Central Tokyo",
+    "coordinates": {
+      "lat": 35.6553,
+      "lng": 139.757
+    },
+    "editorial": {
+      "overallLabel": "Haneda-friendly central-south base via Tokyo Monorail.",
+      "bestFor": [
+        "Haneda arrival",
+        "Business hotels",
+        "Easy first or last night",
+        "Practical luggage routing"
+      ],
+      "watchOut": [
+        "Office-area mood at night",
+        "Less character than Asakusa or Ginza",
+        "Quieter weekends"
+      ],
+      "dataSignals": [
+        "Tokyo Monorail to Haneda",
+        "Yamanote Line",
+        "Two Toei subway lines"
+      ],
+      "editorialNote": "Hamamatsucho is the cleanest Haneda routing option among major central bases.",
+      "localFeelNote": "Polished but quiet after-hours, with skyscraper backdrops and the monorail ramp."
+    },
+    "editorialScores": {
+      "stationSimplicity": 72,
+      "luggageFriendly": 82,
+      "airportAccess": 92,
+      "shinkansenAccess": 82,
+      "touristAccess": 70,
+      "localFeel": 60,
+      "crowdStress": 68,
+      "lodgingChoice": 76,
+      "confidence": 80
+    },
+    "crowdLevel": "Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator",
+      "airport-direct",
+      "hotel-dense",
+      "luggage-friendly"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "High"
+  },
+  {
+    "id": "shinagawa",
+    "name": "Shinagawa",
+    "displayName": "Shinagawa",
+    "japaneseName": "品川",
+    "stationNames": [
+      "Shinagawa"
+    ],
+    "stationLines": [
+      "Tokaido Shinkansen",
+      "JR Yamanote Line",
+      "Keikyu Main Line",
+      "Narita Express"
+    ],
+    "wardNames": [
+      "Minato"
+    ],
+    "areaGroup": "South Tokyo",
+    "coordinates": {
+      "lat": 35.6285,
+      "lng": 139.7387
+    },
+    "editorial": {
+      "overallLabel": "South-side rail powerhouse with strong Haneda and Shinkansen access.",
+      "bestFor": [
+        "Haneda arrival",
+        "Shinkansen days",
+        "Business hotels",
+        "Last-night before flight"
+      ],
+      "watchOut": [
+        "Less for sightseeing-walks",
+        "Office-tower feel",
+        "Far from Asakusa or Shibuya nightlife"
+      ],
+      "dataSignals": [
+        "Shinkansen platforms",
+        "Keikyu direct to Haneda",
+        "JR Yamanote"
+      ],
+      "editorialNote": "Shinagawa is unbeatable for rail logistics on the south side — practical, predictable, central-ish.",
+      "localFeelNote": "Glass office towers, hotel rows, and big-station predictability."
+    },
+    "editorialScores": {
+      "stationSimplicity": 56,
+      "luggageFriendly": 78,
+      "airportAccess": 94,
+      "shinkansenAccess": 92,
+      "touristAccess": 66,
+      "localFeel": 58,
+      "crowdStress": 50,
+      "lodgingChoice": 80,
+      "confidence": 86
+    },
+    "crowdLevel": "High",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "many-exits",
+      "multi-operator",
+      "transfer-hub",
+      "airport-direct",
+      "shinkansen-friendly",
+      "hotel-dense",
+      "luggage-friendly"
+    ],
+    "exitComplexityLevel": "Complex",
+    "transferHubLevel": "High",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Very High"
+  },
+  {
+    "id": "gotanda",
+    "name": "Gotanda",
+    "displayName": "Gotanda",
+    "japaneseName": "五反田",
+    "stationNames": [
+      "Gotanda"
+    ],
+    "stationLines": [
+      "JR Yamanote Line",
+      "Asakusa Line",
+      "Tokyu Ikegami Line"
+    ],
+    "wardNames": [
+      "Shinagawa"
+    ],
+    "areaGroup": "South Tokyo",
+    "coordinates": {
+      "lat": 35.6256,
+      "lng": 139.7236
+    },
+    "editorial": {
+      "overallLabel": "Practical Yamanote-side base with Haneda access via Asakusa Line.",
+      "bestFor": [
+        "Budget-conscious Yamanote stay",
+        "Haneda routing",
+        "Easy walking around Meguro River"
+      ],
+      "watchOut": [
+        "Less polished after-dark",
+        "Less famous to first-time visitors",
+        "Not a sightseeing destination"
+      ],
+      "dataSignals": [
+        "Yamanote Line",
+        "Asakusa Line to Haneda",
+        "Meguro River walk"
+      ],
+      "editorialNote": "Gotanda fits travelers who want Yamanote convenience without big-station chaos.",
+      "localFeelNote": "Office and apartment blocks, river-side walks, and after-work izakaya streets."
+    },
+    "editorialScores": {
+      "stationSimplicity": 76,
+      "luggageFriendly": 76,
+      "airportAccess": 84,
+      "shinkansenAccess": 78,
+      "touristAccess": 64,
+      "localFeel": 72,
+      "crowdStress": 72,
+      "lodgingChoice": 70,
+      "confidence": 76
+    },
+    "crowdLevel": "Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "meguro",
+    "name": "Meguro",
+    "displayName": "Meguro",
+    "japaneseName": "目黒",
+    "stationNames": [
+      "Meguro"
+    ],
+    "stationLines": [
+      "JR Yamanote Line",
+      "Mita Line",
+      "Namboku Line",
+      "Tokyu Meguro Line"
+    ],
+    "wardNames": [
+      "Shinagawa",
+      "Meguro"
+    ],
+    "areaGroup": "South Tokyo",
+    "coordinates": {
+      "lat": 35.6339,
+      "lng": 139.7159
+    },
+    "editorial": {
+      "overallLabel": "Quieter Yamanote-side base with strong walking access to Ebisu and the river.",
+      "bestFor": [
+        "Calm Yamanote stay",
+        "Meguro River cherry blossom walks",
+        "Repeat visitors",
+        "Local feel"
+      ],
+      "watchOut": [
+        "Less direct for Narita",
+        "Quieter at night",
+        "Not a tourist-information rich area"
+      ],
+      "dataSignals": [
+        "Four lines at the station",
+        "Walk to Ebisu",
+        "River-side dining"
+      ],
+      "editorialNote": "Meguro is a calmer alternative to Shibuya / Ebisu with strong walking access.",
+      "localFeelNote": "Riverside cafes, polished residential blocks, and Yamanote-side quiet."
+    },
+    "editorialScores": {
+      "stationSimplicity": 78,
+      "luggageFriendly": 76,
+      "airportAccess": 76,
+      "shinkansenAccess": 76,
+      "touristAccess": 70,
+      "localFeel": 80,
+      "crowdStress": 76,
+      "lodgingChoice": 66,
+      "confidence": 76
+    },
+    "crowdLevel": "Low-Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "ebisu",
+    "name": "Ebisu",
+    "displayName": "Ebisu",
+    "japaneseName": "恵比寿",
+    "stationNames": [
+      "Ebisu"
+    ],
+    "stationLines": [
+      "JR Yamanote Line",
+      "JR Saikyo Line",
+      "Hibiya Line"
+    ],
+    "wardNames": [
+      "Shibuya"
+    ],
+    "areaGroup": "West Tokyo",
+    "coordinates": {
+      "lat": 35.6469,
+      "lng": 139.71
+    },
+    "editorial": {
+      "overallLabel": "Polished south-Shibuya stay with strong food and Yamanote convenience.",
+      "bestFor": [
+        "Food-forward repeat visitors",
+        "Polished but not Shinjuku",
+        "Yamanote convenience"
+      ],
+      "watchOut": [
+        "Higher hotel costs",
+        "Less famous to first-time visitors",
+        "Quiet weekends in some blocks"
+      ],
+      "dataSignals": [
+        "Yamanote + Saikyo + Hibiya",
+        "Daikanyama-walk access",
+        "Food density"
+      ],
+      "editorialNote": "Ebisu is a strong second-trip base for travelers tired of Shinjuku-style hubs.",
+      "localFeelNote": "Polished food street, Yebisu Garden Place, and a calm-by-Shibuya-standards feel."
+    },
+    "editorialScores": {
+      "stationSimplicity": 74,
+      "luggageFriendly": 76,
+      "airportAccess": 72,
+      "shinkansenAccess": 72,
+      "touristAccess": 76,
+      "localFeel": 78,
+      "crowdStress": 70,
+      "lodgingChoice": 70,
+      "confidence": 78
+    },
+    "crowdLevel": "Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "shibuya",
+    "name": "Shibuya",
+    "displayName": "Shibuya",
+    "japaneseName": "渋谷",
+    "stationNames": [
+      "Shibuya"
+    ],
+    "stationLines": [
+      "JR Yamanote Line",
+      "JR Saikyo Line",
+      "Hanzomon Line",
+      "Ginza Line",
+      "Fukutoshin Line",
+      "Tokyu Toyoko Line",
+      "Keio Inokashira Line"
+    ],
+    "wardNames": [
+      "Shibuya"
+    ],
+    "areaGroup": "West Tokyo",
+    "coordinates": {
+      "lat": 35.658,
+      "lng": 139.7016
+    },
+    "editorial": {
+      "overallLabel": "Maximum youth-Tokyo energy with a constantly evolving giant station.",
+      "bestFor": [
+        "Nightlife",
+        "Shopping",
+        "Trendy food",
+        "Strong first-trip Tokyo feel"
+      ],
+      "watchOut": [
+        "Massive station rebuild complexity",
+        "Big crowds",
+        "Stressful with luggage when unfamiliar"
+      ],
+      "dataSignals": [
+        "Major passenger hub",
+        "Multi-line interchange",
+        "Reconstruction zones"
+      ],
+      "editorialNote": "Shibuya is iconic but tiring on day one — better when you're already oriented.",
+      "localFeelNote": "Crossings, screens, packed streets, and a constantly evolving station."
+    },
+    "editorialScores": {
+      "stationSimplicity": 36,
+      "luggageFriendly": 48,
+      "airportAccess": 64,
+      "shinkansenAccess": 64,
+      "touristAccess": 88,
+      "localFeel": 66,
+      "crowdStress": 26,
+      "lodgingChoice": 84,
+      "confidence": 84
+    },
+    "crowdLevel": "Very High",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "mega-terminal",
+      "multi-operator",
+      "transfer-hub",
+      "underground-maze",
+      "luggage-confusing",
+      "hotel-dense"
+    ],
+    "exitComplexityLevel": "Mega station",
+    "transferHubLevel": "Very High",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Very High"
+  },
+  {
+    "id": "shinjuku",
+    "name": "Shinjuku",
+    "displayName": "Shinjuku",
+    "japaneseName": "新宿",
+    "stationNames": [
+      "Shinjuku",
+      "Shinjuku-sanchome"
+    ],
+    "stationLines": [
+      "JR Yamanote Line",
+      "JR Chuo Line",
+      "Marunouchi Line",
+      "Oedo Line",
+      "Odakyu Line",
+      "Keio Line"
+    ],
+    "wardNames": [
+      "Shinjuku"
+    ],
+    "areaGroup": "West Tokyo",
+    "coordinates": {
+      "lat": 35.6896,
+      "lng": 139.7006
+    },
+    "editorial": {
+      "overallLabel": "Maximum big-city energy, but one of the most stressful first-night bases.",
+      "bestFor": [
+        "Nightlife",
+        "Food",
+        "Shopping",
+        "Big-city energy"
+      ],
+      "watchOut": [
+        "Huge station",
+        "Crowds",
+        "Arrival with luggage can be tiring",
+        "Not the simplest first-night base"
+      ],
+      "dataSignals": [
+        "Major passenger hub",
+        "Nightlife density",
+        "Large station complexity"
+      ],
+      "editorialNote": "Shinjuku is powerful after you are oriented, but it is not always the easiest place to sleep first.",
+      "localFeelNote": "Energetic, dense, and iconic, with very different blocks around the station."
+    },
+    "editorialScores": {
+      "stationSimplicity": 38,
+      "luggageFriendly": 48,
+      "airportAccess": 64,
+      "shinkansenAccess": 62,
+      "touristAccess": 88,
+      "localFeel": 62,
+      "crowdStress": 26,
+      "lodgingChoice": 88,
+      "confidence": 86
+    },
+    "crowdLevel": "Very High",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "mega-terminal",
+      "multi-operator",
+      "transfer-hub",
+      "underground-maze",
+      "luggage-confusing",
+      "hotel-dense"
+    ],
+    "exitComplexityLevel": "Mega station",
+    "transferHubLevel": "Very High",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Very High"
+  },
+  {
+    "id": "yoyogi",
+    "name": "Yoyogi",
+    "displayName": "Yoyogi",
+    "japaneseName": "代々木",
+    "stationNames": [
+      "Yoyogi"
+    ],
+    "stationLines": [
+      "JR Yamanote Line",
+      "JR Chuo-Sobu Line",
+      "Oedo Line"
+    ],
+    "wardNames": [
+      "Shibuya",
+      "Shinjuku"
+    ],
+    "areaGroup": "West Tokyo",
+    "coordinates": {
+      "lat": 35.6831,
+      "lng": 139.7028
+    },
+    "editorial": {
+      "overallLabel": "Calmer Shinjuku-adjacent base with park-side walking access.",
+      "bestFor": [
+        "Shinjuku-adjacent without the chaos",
+        "Yoyogi Park",
+        "Practical Yamanote stay"
+      ],
+      "watchOut": [
+        "Less character on its own",
+        "Quieter at night",
+        "Limited tourist food street"
+      ],
+      "dataSignals": [
+        "Yamanote Line",
+        "Walk to Shinjuku and Harajuku",
+        "Park-side walking"
+      ],
+      "editorialNote": "Yoyogi is for travelers who want Shinjuku access without sleeping inside the Shinjuku machine.",
+      "localFeelNote": "Park-side calm, exam-school energy, and after-work runners."
+    },
+    "editorialScores": {
+      "stationSimplicity": 80,
+      "luggageFriendly": 76,
+      "airportAccess": 66,
+      "shinkansenAccess": 66,
+      "touristAccess": 78,
+      "localFeel": 76,
+      "crowdStress": 74,
+      "lodgingChoice": 62,
+      "confidence": 74
+    },
+    "crowdLevel": "Low-Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "compact-station",
+      "easy-surface-orientation"
+    ],
+    "exitComplexityLevel": "Simple",
+    "transferHubLevel": "Low",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "ikebukuro",
+    "name": "Ikebukuro",
+    "displayName": "Ikebukuro",
+    "japaneseName": "池袋",
+    "stationNames": [
+      "Ikebukuro"
+    ],
+    "stationLines": [
+      "JR Yamanote Line",
+      "JR Saikyo Line",
+      "Marunouchi Line",
+      "Yurakucho Line",
+      "Fukutoshin Line",
+      "Tobu Tojo Line",
+      "Seibu Ikebukuro Line"
+    ],
+    "wardNames": [
+      "Toshima"
+    ],
+    "areaGroup": "North-West Tokyo",
+    "coordinates": {
+      "lat": 35.7298,
+      "lng": 139.7113
+    },
+    "editorial": {
+      "overallLabel": "Big northern hub, slightly easier than Shinjuku for first-time hotel searches.",
+      "bestFor": [
+        "Budget-friendly hotel search",
+        "Shopping (Sunshine City)",
+        "Major rail interchange"
+      ],
+      "watchOut": [
+        "Big station complexity",
+        "Crowds",
+        "Less iconic than Shinjuku or Shibuya"
+      ],
+      "dataSignals": [
+        "Major passenger hub",
+        "Yamanote north anchor",
+        "Department-store density"
+      ],
+      "editorialNote": "Ikebukuro is high-volume but often a better value than the south-side giant hubs.",
+      "localFeelNote": "Big-station shopping, anime / character culture pockets, and dense food blocks."
+    },
+    "editorialScores": {
+      "stationSimplicity": 42,
+      "luggageFriendly": 56,
+      "airportAccess": 68,
+      "shinkansenAccess": 62,
+      "touristAccess": 82,
+      "localFeel": 60,
+      "crowdStress": 36,
+      "lodgingChoice": 84,
+      "confidence": 80
+    },
+    "crowdLevel": "Very High",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "mega-terminal",
+      "multi-operator",
+      "transfer-hub",
+      "underground-maze",
+      "luggage-confusing",
+      "hotel-dense"
+    ],
+    "exitComplexityLevel": "Mega station",
+    "transferHubLevel": "Very High",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Very High"
+  },
+  {
+    "id": "akihabara",
+    "name": "Akihabara",
+    "displayName": "Akihabara",
+    "japaneseName": "秋葉原",
+    "stationNames": [
+      "Akihabara",
+      "Suehirocho"
+    ],
+    "stationLines": [
+      "JR Yamanote Line",
+      "JR Chuo-Sobu Line",
+      "Hibiya Line",
+      "Tsukuba Express"
+    ],
+    "wardNames": [
+      "Chiyoda",
+      "Taito"
+    ],
+    "areaGroup": "Central-East Tokyo",
+    "coordinates": {
+      "lat": 35.6984,
+      "lng": 139.7731
+    },
+    "editorial": {
+      "overallLabel": "Practical Yamanote base near Tokyo Station with strong sightseeing pull.",
+      "bestFor": [
+        "Anime / electronics culture",
+        "Yamanote convenience",
+        "Walk to Kanda and Ueno"
+      ],
+      "watchOut": [
+        "Loud street energy",
+        "Some streets feel chaotic with luggage",
+        "Less polished hotels"
+      ],
+      "dataSignals": [
+        "Yamanote + Sobu interchange",
+        "Electronics / anime density",
+        "Tokyo-Station-adjacent rail"
+      ],
+      "editorialNote": "Akihabara is a good multi-line Yamanote base if you don't mind a busy character-culture street.",
+      "localFeelNote": "Bright signs, electronics shops, and a strong subculture pulse."
+    },
+    "editorialScores": {
+      "stationSimplicity": 64,
+      "luggageFriendly": 70,
+      "airportAccess": 78,
+      "shinkansenAccess": 82,
+      "touristAccess": 84,
+      "localFeel": 68,
+      "crowdStress": 54,
+      "lodgingChoice": 76,
+      "confidence": 80
+    },
+    "crowdLevel": "High",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "many-exits",
+      "multi-operator",
+      "transfer-hub",
+      "hotel-dense"
+    ],
+    "exitComplexityLevel": "Complex",
+    "transferHubLevel": "High",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "High"
+  },
+  {
+    "id": "kanda",
+    "name": "Kanda",
+    "displayName": "Kanda",
+    "japaneseName": "神田",
+    "stationNames": [
+      "Kanda"
+    ],
+    "stationLines": [
+      "JR Yamanote Line",
+      "JR Chuo Line",
+      "Ginza Line"
+    ],
+    "wardNames": [
+      "Chiyoda"
+    ],
+    "areaGroup": "Central Tokyo",
+    "coordinates": {
+      "lat": 35.6916,
+      "lng": 139.7708
+    },
+    "editorial": {
+      "overallLabel": "Compact Yamanote base, one stop from Tokyo Station with budget options.",
+      "bestFor": [
+        "Tokyo-Station adjacency",
+        "Budget central hotels",
+        "Salaryman izakaya culture"
+      ],
+      "watchOut": [
+        "Loud weeknights near izakaya streets",
+        "Older-building feel",
+        "Limited polish"
+      ],
+      "dataSignals": [
+        "Yamanote one-stop to Tokyo",
+        "Walk to Akihabara",
+        "Old central character"
+      ],
+      "editorialNote": "Kanda is a quieter, budget-leaning alternative to staying inside Tokyo Station itself.",
+      "localFeelNote": "Old offices, izakaya alleys, and a working-Tokyo central feel."
+    },
+    "editorialScores": {
+      "stationSimplicity": 76,
+      "luggageFriendly": 74,
+      "airportAccess": 74,
+      "shinkansenAccess": 86,
+      "touristAccess": 72,
+      "localFeel": 76,
+      "crowdStress": 68,
+      "lodgingChoice": 68,
+      "confidence": 76
+    },
+    "crowdLevel": "Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "asakusabashi",
+    "name": "Asakusabashi",
+    "displayName": "Asakusabashi",
+    "japaneseName": "浅草橋",
+    "stationNames": [
+      "Asakusabashi"
+    ],
+    "stationLines": [
+      "JR Chuo-Sobu Line",
+      "Asakusa Line"
+    ],
+    "wardNames": [
+      "Taito"
+    ],
+    "areaGroup": "East Tokyo",
+    "coordinates": {
+      "lat": 35.7,
+      "lng": 139.7869
+    },
+    "editorial": {
+      "overallLabel": "Underrated east-side base with direct airport routing and walking distance to Akihabara.",
+      "bestFor": [
+        "Budget-conscious stays",
+        "Narita / Haneda routing via Asakusa Line",
+        "Quiet central-east"
+      ],
+      "watchOut": [
+        "Old-station feel",
+        "Less famous to first-time visitors",
+        "Limited polish"
+      ],
+      "dataSignals": [
+        "Asakusa Line direct to both airports",
+        "Walk to Akihabara",
+        "Lower hotel density"
+      ],
+      "editorialNote": "Asakusabashi is a quiet, underrated rail-strong base when you don't need a giant station.",
+      "localFeelNote": "Doll shops, river walks, and a sleepy weekday rhythm."
+    },
+    "editorialScores": {
+      "stationSimplicity": 80,
+      "luggageFriendly": 76,
+      "airportAccess": 86,
+      "shinkansenAccess": 72,
+      "touristAccess": 70,
+      "localFeel": 78,
+      "crowdStress": 80,
+      "lodgingChoice": 60,
+      "confidence": 74
+    },
+    "crowdLevel": "Low-Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "compact-station",
+      "easy-surface-orientation",
+      "airport-direct"
+    ],
+    "exitComplexityLevel": "Simple",
+    "transferHubLevel": "Low",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Low"
+  },
+  {
+    "id": "bakurocho-higashinihombashi",
+    "name": "Bakurocho / Higashi-Nihombashi",
+    "displayName": "Bakurocho / Higashi-Nihombashi",
+    "japaneseName": "馬喰町 / 東日本橋",
+    "stationNames": [
+      "Bakurocho",
+      "Higashi-Nihombashi",
+      "Bakuro-yokoyama"
+    ],
+    "stationLines": [
+      "JR Sobu Line",
+      "Asakusa Line",
+      "Shinjuku Line"
+    ],
+    "wardNames": [
+      "Chuo"
+    ],
+    "areaGroup": "Central-East Tokyo",
+    "coordinates": {
+      "lat": 35.6925,
+      "lng": 139.7836
+    },
+    "editorial": {
+      "overallLabel": "Quiet wholesale-district base with strong airport routing via Asakusa Line.",
+      "bestFor": [
+        "Budget-conscious stays",
+        "Airport routing",
+        "Walking to Akihabara, Ningyocho, Asakusabashi"
+      ],
+      "watchOut": [
+        "Office and wholesale feel by day",
+        "Sleepy at night",
+        "Limited tourist signage"
+      ],
+      "dataSignals": [
+        "Asakusa Line to Narita / Haneda",
+        "Triple-station interchange",
+        "Walk to central-east attractions"
+      ],
+      "editorialNote": "Bakurocho / Higashi-Nihombashi is a rail-strong, character-light option for value-seekers.",
+      "localFeelNote": "Wholesale shops, quiet weekends, and unhurried mornings."
+    },
+    "editorialScores": {
+      "stationSimplicity": 80,
+      "luggageFriendly": 76,
+      "airportAccess": 86,
+      "shinkansenAccess": 76,
+      "touristAccess": 68,
+      "localFeel": 72,
+      "crowdStress": 82,
+      "lodgingChoice": 58,
+      "confidence": 70
+    },
+    "crowdLevel": "Low",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "compact-station",
+      "multi-operator",
+      "airport-direct"
+    ],
+    "exitComplexityLevel": "Simple",
+    "transferHubLevel": "Low",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Low"
+  },
+  {
+    "id": "kinshicho",
+    "name": "Kinshicho",
+    "displayName": "Kinshicho",
+    "japaneseName": "錦糸町",
+    "stationNames": [
+      "Kinshicho"
+    ],
+    "stationLines": [
+      "JR Sobu Line",
+      "Hanzomon Line"
+    ],
+    "wardNames": [
+      "Sumida"
+    ],
+    "areaGroup": "East Tokyo",
+    "coordinates": {
+      "lat": 35.6964,
+      "lng": 139.8146
+    },
+    "editorial": {
+      "overallLabel": "Big-station east-Tokyo base with Narita rail access via JR.",
+      "bestFor": [
+        "Budget hotel search",
+        "Narita Express stop",
+        "Easy access to Skytree",
+        "Practical day trips"
+      ],
+      "watchOut": [
+        "Loud after-dark street energy",
+        "Less polished than central Tokyo",
+        "Variable hotel quality"
+      ],
+      "dataSignals": [
+        "Narita Express stop",
+        "Hanzomon Line direct to Otemachi",
+        "Major east hub"
+      ],
+      "editorialNote": "Kinshicho is practical and well-connected on the east side, but less calm than Oshiage or Ryogoku.",
+      "localFeelNote": "Tower, station, and busy street crossings — a working east-side hub."
+    },
+    "editorialScores": {
+      "stationSimplicity": 70,
+      "luggageFriendly": 76,
+      "airportAccess": 86,
+      "shinkansenAccess": 74,
+      "touristAccess": 74,
+      "localFeel": 70,
+      "crowdStress": 60,
+      "lodgingChoice": 76,
+      "confidence": 78
+    },
+    "crowdLevel": "High",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator",
+      "airport-direct"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "High"
+  },
+  {
+    "id": "akasaka-mitsuke",
+    "name": "Akasaka / Akasaka-mitsuke",
+    "displayName": "Akasaka / Akasaka-mitsuke",
+    "japaneseName": "赤坂 / 赤坂見附",
+    "stationNames": [
+      "Akasaka",
+      "Akasaka-mitsuke"
+    ],
+    "stationLines": [
+      "Chiyoda Line",
+      "Ginza Line",
+      "Marunouchi Line"
+    ],
+    "wardNames": [
+      "Minato"
+    ],
+    "areaGroup": "Central Tokyo",
+    "coordinates": {
+      "lat": 35.676,
+      "lng": 139.7367
+    },
+    "editorial": {
+      "overallLabel": "Polished central base between Roppongi and the Imperial Palace.",
+      "bestFor": [
+        "Business-style central stay",
+        "Quiet polished streets",
+        "Walk to Roppongi"
+      ],
+      "watchOut": [
+        "Higher hotel costs",
+        "Less iconic for first-time visitors",
+        "Mostly business-side energy"
+      ],
+      "dataSignals": [
+        "Three subway lines",
+        "Walk to Roppongi",
+        "Central-business calm"
+      ],
+      "editorialNote": "Akasaka-mitsuke is a calmer central alternative to Roppongi with strong subway coverage.",
+      "localFeelNote": "Side-street restaurants, embassies, and polished office blocks."
+    },
+    "editorialScores": {
+      "stationSimplicity": 76,
+      "luggageFriendly": 78,
+      "airportAccess": 72,
+      "shinkansenAccess": 76,
+      "touristAccess": 72,
+      "localFeel": 70,
+      "crowdStress": 74,
+      "lodgingChoice": 70,
+      "confidence": 76
+    },
+    "crowdLevel": "Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator",
+      "transfer-hub"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "roppongi",
+    "name": "Roppongi",
+    "displayName": "Roppongi",
+    "japaneseName": "六本木",
+    "stationNames": [
+      "Roppongi"
+    ],
+    "stationLines": [
+      "Hibiya Line",
+      "Oedo Line"
+    ],
+    "wardNames": [
+      "Minato"
+    ],
+    "areaGroup": "Central Tokyo",
+    "coordinates": {
+      "lat": 35.6638,
+      "lng": 139.732
+    },
+    "editorial": {
+      "overallLabel": "Nightlife and art hub with polished hotels and uneven late-night feel.",
+      "bestFor": [
+        "Nightlife",
+        "Art (Mori, Suntory)",
+        "Polished hotels",
+        "Walking to Shibuya / Azabu"
+      ],
+      "watchOut": [
+        "Tourist-targeting clubs at night",
+        "Uneven side streets",
+        "Distance from Yamanote"
+      ],
+      "dataSignals": [
+        "Hibiya + Oedo subway",
+        "Roppongi Hills / Midtown",
+        "Art museums"
+      ],
+      "editorialNote": "Roppongi works for travelers who want polish and nightlife but can navigate a touristy after-dark street.",
+      "localFeelNote": "Embassies by day, neon and clubs by night, art towers above the crossings."
+    },
+    "editorialScores": {
+      "stationSimplicity": 68,
+      "luggageFriendly": 72,
+      "airportAccess": 68,
+      "shinkansenAccess": 70,
+      "touristAccess": 80,
+      "localFeel": 66,
+      "crowdStress": 60,
+      "lodgingChoice": 72,
+      "confidence": 76
+    },
+    "crowdLevel": "Medium-High",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "aoyama-omotesando",
+    "name": "Aoyama / Omotesando",
+    "displayName": "Aoyama / Omotesando",
+    "japaneseName": "青山 / 表参道",
+    "stationNames": [
+      "Omotesando",
+      "Aoyama-itchome",
+      "Gaiemmae"
+    ],
+    "stationLines": [
+      "Ginza Line",
+      "Chiyoda Line",
+      "Hanzomon Line",
+      "Oedo Line"
+    ],
+    "wardNames": [
+      "Minato",
+      "Shibuya"
+    ],
+    "areaGroup": "West-Central Tokyo",
+    "coordinates": {
+      "lat": 35.6651,
+      "lng": 139.7126
+    },
+    "editorial": {
+      "overallLabel": "Polished shopping-side stay between Shibuya and Akasaka.",
+      "bestFor": [
+        "Polished fashion / cafe walking",
+        "Walk to Shibuya and Harajuku",
+        "Quieter than Shibuya"
+      ],
+      "watchOut": [
+        "Higher hotel costs",
+        "Limited budget options",
+        "Less for first-time sightseeing demand"
+      ],
+      "dataSignals": [
+        "Three subway lines",
+        "Walk to Shibuya / Harajuku",
+        "Polished shopping density"
+      ],
+      "editorialNote": "Aoyama / Omotesando is a refined alternative to Shibuya for travelers who want calm and cafes.",
+      "localFeelNote": "Tree-lined avenues, polished shopfronts, and quiet residential side streets."
+    },
+    "editorialScores": {
+      "stationSimplicity": 76,
+      "luggageFriendly": 74,
+      "airportAccess": 68,
+      "shinkansenAccess": 68,
+      "touristAccess": 80,
+      "localFeel": 76,
+      "crowdStress": 70,
+      "lodgingChoice": 64,
+      "confidence": 76
+    },
+    "crowdLevel": "Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "ochanomizu",
+    "name": "Ochanomizu",
+    "displayName": "Ochanomizu",
+    "japaneseName": "御茶ノ水",
+    "stationNames": [
+      "Ochanomizu",
+      "Shin-ochanomizu"
+    ],
+    "stationLines": [
+      "JR Chuo Line",
+      "JR Chuo-Sobu Line",
+      "Marunouchi Line",
+      "Chiyoda Line"
+    ],
+    "wardNames": [
+      "Chiyoda",
+      "Bunkyo"
+    ],
+    "areaGroup": "Central-North Tokyo",
+    "coordinates": {
+      "lat": 35.6997,
+      "lng": 139.7651
+    },
+    "editorial": {
+      "overallLabel": "Quieter Yamanote-adjacent base near universities and Kanda River.",
+      "bestFor": [
+        "Budget central stays",
+        "Walk to Akihabara",
+        "Quieter weeknights",
+        "Practical Chuo Line access"
+      ],
+      "watchOut": [
+        "University-area weeknight noise pockets",
+        "Limited polish",
+        "Not for first-time sightseeing-density demand"
+      ],
+      "dataSignals": [
+        "Chuo Line east-west speed",
+        "Walk to Akihabara and Jimbocho",
+        "River-side views"
+      ],
+      "editorialNote": "Ochanomizu is a calm central-north base, often forgotten but practical and affordable.",
+      "localFeelNote": "Bookstore streets, exam schools, and the historic Nikolai cathedral."
+    },
+    "editorialScores": {
+      "stationSimplicity": 76,
+      "luggageFriendly": 74,
+      "airportAccess": 70,
+      "shinkansenAccess": 78,
+      "touristAccess": 70,
+      "localFeel": 76,
+      "crowdStress": 78,
+      "lodgingChoice": 56,
+      "confidence": 74
+    },
+    "crowdLevel": "Low-Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Low"
+  },
+  {
+    "id": "iidabashi",
+    "name": "Iidabashi",
+    "displayName": "Iidabashi",
+    "japaneseName": "飯田橋",
+    "stationNames": [
+      "Iidabashi"
+    ],
+    "stationLines": [
+      "JR Chuo-Sobu Line",
+      "Tozai Line",
+      "Yurakucho Line",
+      "Namboku Line",
+      "Oedo Line"
+    ],
+    "wardNames": [
+      "Chiyoda",
+      "Shinjuku",
+      "Bunkyo"
+    ],
+    "areaGroup": "Central-West Tokyo",
+    "coordinates": {
+      "lat": 35.7022,
+      "lng": 139.7457
+    },
+    "editorial": {
+      "overallLabel": "Multi-line junction with quieter neighborhood feel and good Shinjuku access.",
+      "bestFor": [
+        "Multi-line subway coverage",
+        "Walking to Korakuen",
+        "Calm central-west stay"
+      ],
+      "watchOut": [
+        "Subway-only station block can feel hidden",
+        "Office-area calm at night"
+      ],
+      "dataSignals": [
+        "Five-line interchange",
+        "Walk to Korakuen and Kagurazaka",
+        "Riverside walk"
+      ],
+      "editorialNote": "Iidabashi quietly offers more subway lines than its low profile suggests.",
+      "localFeelNote": "Riverside walks, Kagurazaka's quiet alleys, and an unhurried business-residential mix."
+    },
+    "editorialScores": {
+      "stationSimplicity": 74,
+      "luggageFriendly": 76,
+      "airportAccess": 70,
+      "shinkansenAccess": 74,
+      "touristAccess": 70,
+      "localFeel": 78,
+      "crowdStress": 78,
+      "lodgingChoice": 62,
+      "confidence": 74
+    },
+    "crowdLevel": "Low-Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "many-exits",
+      "multi-operator",
+      "transfer-hub"
+    ],
+    "exitComplexityLevel": "Complex",
+    "transferHubLevel": "High",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "korakuen-kasuga",
+    "name": "Korakuen / Kasuga",
+    "displayName": "Korakuen / Kasuga",
+    "japaneseName": "後楽園 / 春日",
+    "stationNames": [
+      "Korakuen",
+      "Kasuga"
+    ],
+    "stationLines": [
+      "Marunouchi Line",
+      "Namboku Line",
+      "Mita Line",
+      "Oedo Line"
+    ],
+    "wardNames": [
+      "Bunkyo"
+    ],
+    "areaGroup": "North-Central Tokyo",
+    "coordinates": {
+      "lat": 35.7077,
+      "lng": 139.7521
+    },
+    "editorial": {
+      "overallLabel": "Quiet university-side base with Tokyo Dome and garden access.",
+      "bestFor": [
+        "Calm family stays",
+        "Tokyo Dome events",
+        "Walking to gardens",
+        "Repeat visitors"
+      ],
+      "watchOut": [
+        "Limited late-night street life",
+        "Not strongly tourist-iconic",
+        "Mostly subway-based routing"
+      ],
+      "dataSignals": [
+        "Four-line interchange",
+        "Tokyo Dome / Koishikawa garden access",
+        "Quiet residential surrounds"
+      ],
+      "editorialNote": "Korakuen / Kasuga is an under-the-radar quiet stay near gardens and the dome.",
+      "localFeelNote": "University blocks, gardens, and weeknight calm."
+    },
+    "editorialScores": {
+      "stationSimplicity": 78,
+      "luggageFriendly": 76,
+      "airportAccess": 70,
+      "shinkansenAccess": 72,
+      "touristAccess": 68,
+      "localFeel": 80,
+      "crowdStress": 80,
+      "lodgingChoice": 54,
+      "confidence": 72
+    },
+    "crowdLevel": "Low",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "multi-operator"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Medium",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Low"
+  },
+  {
+    "id": "toyosu",
+    "name": "Toyosu",
+    "displayName": "Toyosu",
+    "japaneseName": "豊洲",
+    "stationNames": [
+      "Toyosu"
+    ],
+    "stationLines": [
+      "Yurakucho Line",
+      "Yurikamome"
+    ],
+    "wardNames": [
+      "Koto"
+    ],
+    "areaGroup": "Bay Area",
+    "coordinates": {
+      "lat": 35.6549,
+      "lng": 139.7959
+    },
+    "editorial": {
+      "overallLabel": "Modern bay-side base with new hotels and Toyosu Market access.",
+      "bestFor": [
+        "Modern hotels",
+        "Toyosu Market",
+        "Family-friendly waterfront",
+        "Yurikamome day trips"
+      ],
+      "watchOut": [
+        "Less character / older streets",
+        "Limited late-night food",
+        "Subway-light coverage"
+      ],
+      "dataSignals": [
+        "Yurakucho Line to Otemachi",
+        "Yurikamome for Odaiba",
+        "Toyosu Market access"
+      ],
+      "editorialNote": "Toyosu trades old-Tokyo character for new hotels and a clean bay-side walk.",
+      "localFeelNote": "New apartments, waterfront promenades, and weekend family energy."
+    },
+    "editorialScores": {
+      "stationSimplicity": 80,
+      "luggageFriendly": 82,
+      "airportAccess": 74,
+      "shinkansenAccess": 70,
+      "touristAccess": 70,
+      "localFeel": 64,
+      "crowdStress": 82,
+      "lodgingChoice": 68,
+      "confidence": 74
+    },
+    "crowdLevel": "Low-Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "moderate-exits",
+      "easy-surface-orientation",
+      "luggage-friendly"
+    ],
+    "exitComplexityLevel": "Moderate",
+    "transferHubLevel": "Low",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  },
+  {
+    "id": "ariake-odaiba",
+    "name": "Ariake / Odaiba",
+    "displayName": "Ariake / Odaiba",
+    "japaneseName": "有明 / お台場",
+    "stationNames": [
+      "Ariake",
+      "Daiba",
+      "Tokyo Big Sight"
+    ],
+    "stationLines": [
+      "Yurikamome",
+      "Rinkai Line"
+    ],
+    "wardNames": [
+      "Koto",
+      "Minato"
+    ],
+    "areaGroup": "Bay Area",
+    "coordinates": {
+      "lat": 35.6334,
+      "lng": 139.7935
+    },
+    "editorial": {
+      "overallLabel": "Resort-style bay base for events at Big Sight and Tokyo Bay views.",
+      "bestFor": [
+        "Big Sight events",
+        "Family resort-style stays",
+        "Tokyo Bay views",
+        "Theme-park-adjacent days"
+      ],
+      "watchOut": [
+        "Long ride into central Tokyo",
+        "Limited late-night food",
+        "Yurikamome-dependence"
+      ],
+      "dataSignals": [
+        "Yurikamome to Shimbashi",
+        "Rinkai Line to Osaki",
+        "Event-week occupancy swings"
+      ],
+      "editorialNote": "Ariake / Odaiba is event-driven — strong when Big Sight is busy, isolated otherwise.",
+      "localFeelNote": "Convention centers, waterfront parks, and skyline views across Tokyo Bay."
+    },
+    "editorialScores": {
+      "stationSimplicity": 78,
+      "luggageFriendly": 84,
+      "airportAccess": 72,
+      "shinkansenAccess": 64,
+      "touristAccess": 70,
+      "localFeel": 58,
+      "crowdStress": 78,
+      "lodgingChoice": 64,
+      "confidence": 72
+    },
+    "crowdLevel": "Low-Medium",
+    "affiliateSearchLinks": {},
+    "complexityTags": [
+      "compact-station",
+      "easy-surface-orientation",
+      "luggage-friendly"
+    ],
+    "exitComplexityLevel": "Simple",
+    "transferHubLevel": "Low",
+    "stepFreeConfidence": "Unknown",
+    "lodgingDensityLevel": "Medium"
+  }
+]

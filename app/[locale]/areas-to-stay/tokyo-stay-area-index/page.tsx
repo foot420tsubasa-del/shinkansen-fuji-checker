@@ -1,5 +1,17 @@
 import type { Metadata } from "next";
-import { ArrowRight, BarChart3, Luggage, MapPin, Plane, ShieldCheck, Train } from "lucide-react";
+import {
+  ArrowRight,
+  BarChart3,
+  Building2,
+  DoorOpen,
+  Luggage,
+  MapPin,
+  Plane,
+  ShieldCheck,
+  Signpost,
+  Train,
+  Users,
+} from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
@@ -7,14 +19,26 @@ import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { getAlternates } from "@/i18n/hreflang";
 import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
-import signals from "@/data/generated/tokyo-stay-area-signals.json";
+import signalsJson from "@/data/generated/tokyo-stay-area-signals.json";
 import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
+import sourceStatusJson from "@/data/generated/tokyo-stay-area-source-status.json";
 import { tokyoStayAreaSourceRegistry } from "@/data/stay-area/source-registry";
-import { buildTokyoStayAreaScores } from "@/lib/stay-area/scoring";
-import type { ComputedStayAreaScore, StayAreaBase, StayAreaSignalsFile } from "@/lib/stay-area/types";
+import type {
+  ComputedStayAreaScore,
+  ExitComplexityLevel,
+  LodgingDensityLevel,
+  SignalsSourceEntry,
+  StayAreaBase,
+  StayAreaMatchLabel,
+  StayAreaSignalsFile,
+  StayAreaScoresFile,
+  SourceStatusFile,
+  StepFreeConfidence,
+} from "@/lib/stay-area/types";
 
 type Props = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<{ filter?: string }>;
 };
 
 const pagePath = "/areas-to-stay/tokyo-stay-area-index";
@@ -27,39 +51,229 @@ const scoreLabels: Array<{ key: keyof ComputedStayAreaScore["scores"]; label: st
   { key: "touristAccess", label: "Tourist access" },
   { key: "localFeel", label: "Local feel" },
   { key: "crowdStress", label: "Less crowd stress" },
+  { key: "lodgingChoice", label: "Lodging choice density" },
 ];
 
-const filterChips = [
-  "First-time visitor",
-  "Narita arrival",
-  "Haneda arrival",
-  "Shinkansen access",
-  "Avoid giant stations",
-  "Local Tokyo",
-  "Budget-conscious",
+type FilterKey =
+  | "all"
+  | "first-time"
+  | "narita-arrival"
+  | "haneda-arrival"
+  | "shinkansen"
+  | "avoid-giant-stations"
+  | "local-tokyo"
+  | "budget-conscious";
+
+const FILTERS: Array<{ key: FilterKey; label: string }> = [
+  { key: "all", label: "All" },
+  { key: "first-time", label: "First-time" },
+  { key: "narita-arrival", label: "Narita arrival" },
+  { key: "haneda-arrival", label: "Haneda arrival" },
+  { key: "shinkansen", label: "Shinkansen" },
+  { key: "avoid-giant-stations", label: "Avoid giant stations" },
+  { key: "local-tokyo", label: "Local Tokyo" },
+  { key: "budget-conscious", label: "Budget-conscious" },
 ];
+
+const FILTER_BOOSTS: Record<FilterKey, Array<{ areaId: string; delta: number }>> = {
+  "all": [],
+  "first-time": [
+    { areaId: "oshiage", delta: 6 },
+    { areaId: "ueno", delta: 4 },
+    { areaId: "asakusa", delta: 3 },
+    { areaId: "tokyo-station", delta: 3 },
+    { areaId: "shinagawa", delta: 3 },
+    { areaId: "hamamatsucho-daimon", delta: 3 },
+    { areaId: "ginza-yurakucho", delta: 2 },
+  ],
+  "narita-arrival": [
+    { areaId: "oshiage", delta: 8 },
+    { areaId: "ueno", delta: 6 },
+    { areaId: "kinshicho", delta: 4 },
+    { areaId: "asakusabashi", delta: 4 },
+    { areaId: "bakurocho-higashinihombashi", delta: 4 },
+  ],
+  "haneda-arrival": [
+    { areaId: "shinagawa", delta: 8 },
+    { areaId: "hamamatsucho-daimon", delta: 7 },
+    { areaId: "asakusabashi", delta: 4 },
+    { areaId: "shimbashi", delta: 4 },
+    { areaId: "gotanda", delta: 3 },
+  ],
+  "shinkansen": [
+    { areaId: "tokyo-station", delta: 8 },
+    { areaId: "shinagawa", delta: 7 },
+    { areaId: "ueno", delta: 5 },
+    { areaId: "ginza-yurakucho", delta: 3 },
+    { areaId: "kanda", delta: 3 },
+    { areaId: "nihombashi", delta: 3 },
+  ],
+  "avoid-giant-stations": [
+    { areaId: "kuramae", delta: 7 },
+    { areaId: "kayabacho", delta: 6 },
+    { areaId: "kiyosumi-shirakawa", delta: 6 },
+    { areaId: "monzen-nakacho", delta: 5 },
+    { areaId: "ningyocho", delta: 5 },
+    { areaId: "hatchobori", delta: 5 },
+    { areaId: "iidabashi", delta: 4 },
+    { areaId: "korakuen-kasuga", delta: 4 },
+    { areaId: "ochanomizu", delta: 4 },
+    { areaId: "asakusabashi", delta: 3 },
+  ],
+  "local-tokyo": [
+    { areaId: "kiyosumi-shirakawa", delta: 7 },
+    { areaId: "kuramae", delta: 6 },
+    { areaId: "monzen-nakacho", delta: 6 },
+    { areaId: "ryogoku", delta: 5 },
+    { areaId: "asakusa", delta: 4 },
+    { areaId: "ningyocho", delta: 4 },
+    { areaId: "yoyogi", delta: 2 },
+  ],
+  "budget-conscious": [
+    { areaId: "ueno", delta: 6 },
+    { areaId: "akihabara", delta: 5 },
+    { areaId: "kanda", delta: 4 },
+    { areaId: "kinshicho", delta: 4 },
+    { areaId: "bakurocho-higashinihombashi", delta: 4 },
+    { areaId: "asakusabashi", delta: 4 },
+    { areaId: "gotanda", delta: 4 },
+    { areaId: "kuramae", delta: 3 },
+  ],
+};
+
+const signalsFile = signalsJson as StayAreaSignalsFile;
+const scoresFile = scoresJson as StayAreaScoresFile;
+const sourceStatusFile = sourceStatusJson as SourceStatusFile;
+
+const FRESHNESS_HEADLINE = "Passenger-data-informed local refresh";
+const FRESHNESS_SUBLINE =
+  "Passenger volume and editorial station-usability signals refresh when public sources update.";
+const FRESHNESS_TAIL = "Step-free, lodging-density, and context sources are not yet live.";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return {
     title: "Tokyo Stay Area Index: Compare Station Areas Before Booking Hotels",
     description:
-      "Compare Tokyo station areas by luggage-friendliness, airport access, station simplicity, crowd stress, and local feel before choosing where to stay.",
+      "Compare Tokyo station areas by passenger volume, exit complexity, transfer-hub penalty, airport access, and lodging density. Editorial travel-fit signals informed by passenger data — not an official ranking.",
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(pagePath, locale),
     openGraph: {
       title: "Tokyo Stay Area Index",
       description:
-        "Compare Tokyo station areas by luggage-friendliness, airport access, station simplicity, crowd stress, and local feel.",
+        "Compare Tokyo station areas by passenger volume, exit complexity, transfer-hub penalty, airport access, and lodging density.",
       siteName: "fujiseat",
     },
   };
 }
 
-function areaById(id: string) {
+function areaById(id: string): StayAreaBase {
   const area = tokyoStayAreasBase.find((item) => item.id === id);
   if (!area) throw new Error(`Missing Tokyo stay area base data for ${id}`);
   return area;
+}
+
+function parseFilter(value: string | undefined): FilterKey {
+  const candidate = (value ?? "all") as FilterKey;
+  return FILTERS.some((f) => f.key === candidate) ? candidate : "all";
+}
+
+function applyFilterBoost(scores: ComputedStayAreaScore[], filter: FilterKey) {
+  if (filter === "all") return scores;
+  const boostMap = new Map(FILTER_BOOSTS[filter].map((b) => [b.areaId, b.delta] as const));
+  return scores
+    .map((s) => {
+      const delta = boostMap.get(s.id) ?? 0;
+      return delta
+        ? { ...s, overallScore: Math.max(0, Math.min(100, s.overallScore + delta)) }
+        : s;
+    })
+    .sort((a, b) => b.overallScore - a.overallScore);
+}
+
+function formatLastChecked(iso: string): string {
+  try { return new Date(iso).toISOString().slice(0, 10); } catch { return iso; }
+}
+
+function statusLabel(status: SignalsSourceEntry["status"]): string {
+  if (status === "success") return "Success";
+  if (status === "partial") return "Partial";
+  if (status === "skipped") return "Skipped";
+  if (status === "optional") return "Optional";
+  return "Failed";
+}
+
+function matchLabelTone(label: StayAreaMatchLabel): { text: string; cls: string } {
+  if (label === "public-data-matched")
+    return { text: "Public data matched", cls: "bg-emerald-50 text-[#106b43] border-emerald-100" };
+  if (label === "partial-public-data")
+    return { text: "Partial public data", cls: "bg-amber-50 text-amber-800 border-amber-100" };
+  return { text: "Editorial fallback", cls: "bg-slate-100 text-slate-600 border-slate-200" };
+}
+
+// ---------- station-usability chip helpers --------------------------------
+
+type ChipTone = "soft" | "calm" | "warn" | "alert";
+
+function chipToneClass(tone: ChipTone): string {
+  switch (tone) {
+    case "soft": return "border-slate-200 bg-slate-50 text-slate-700";
+    case "calm": return "border-emerald-100 bg-emerald-50 text-[#106b43]";
+    case "warn": return "border-amber-100 bg-amber-50 text-amber-800";
+    case "alert": return "border-rose-100 bg-rose-50 text-rose-700";
+  }
+}
+
+function crowdLevelFromPercentile(percentile: number | null | undefined): {
+  label: "Low" | "Medium" | "High" | "Very High" | "Unknown";
+  tone: ChipTone;
+} {
+  if (percentile == null) return { label: "Unknown", tone: "soft" };
+  if (percentile >= 0.75) return { label: "Very High", tone: "alert" };
+  if (percentile >= 0.5) return { label: "High", tone: "warn" };
+  if (percentile >= 0.25) return { label: "Medium", tone: "soft" };
+  return { label: "Low", tone: "calm" };
+}
+function complexityChipTone(level: ExitComplexityLevel): ChipTone {
+  if (level === "Mega station") return "alert";
+  if (level === "Complex") return "warn";
+  if (level === "Moderate") return "soft";
+  return "calm";
+}
+function stepFreeChipTone(c: StepFreeConfidence): ChipTone {
+  if (c === "Known") return "calm";
+  if (c === "Partial") return "warn";
+  return "soft";
+}
+function lodgingChipTone(level: LodgingDensityLevel): ChipTone {
+  if (level === "Very High" || level === "High") return "calm";
+  if (level === "Medium") return "soft";
+  return "warn";
+}
+
+function Chip({
+  label,
+  value,
+  tone,
+  hideOnMobile,
+}: {
+  label: string;
+  value: string;
+  tone: ChipTone;
+  hideOnMobile?: boolean;
+}) {
+  return (
+    <span
+      className={[
+        "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold",
+        chipToneClass(tone),
+        hideOnMobile ? "hidden md:inline-flex" : "",
+      ].join(" ")}
+    >
+      <span className="text-[9px] uppercase tracking-[0.1em] opacity-70">{label}</span>
+      <span>{value}</span>
+    </span>
+  );
 }
 
 function ScoreBar({ label, value }: { label: string; value: number }) {
@@ -76,30 +290,125 @@ function ScoreBar({ label, value }: { label: string; value: number }) {
   );
 }
 
-function ProviderNote({ area }: { area: StayAreaBase }) {
-  const hasProviderLink = Object.values(area.affiliateSearchLinks).some(Boolean);
-  if (hasProviderLink) return null;
+function StationUsabilityRow({
+  label,
+  value,
+  hint,
+}: {
+  label: string;
+  value: string;
+  hint?: string;
+}) {
   return (
-    <p className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-xs leading-5 text-slate-600">
-      No station-area hotel provider buttons are shown here because no approved station-specific affiliate URLs are configured for this MVP.
-    </p>
+    <div className="flex items-start justify-between gap-3 border-b border-slate-100 py-2 text-xs last:border-b-0">
+      <div className="min-w-0">
+        <p className="font-semibold text-slate-700">{label}</p>
+        {hint ? <p className="mt-0.5 text-[11px] leading-4 text-slate-500">{hint}</p> : null}
+      </div>
+      <span className="shrink-0 rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-semibold text-slate-700">
+        {value}
+      </span>
+    </div>
   );
 }
 
-function AreaDetailPanel({ area, score }: { area: StayAreaBase; score: ComputedStayAreaScore }) {
+function StationUsabilityPanel({
+  area,
+  signal,
+  contribution,
+}: {
+  area: StayAreaBase;
+  signal: StayAreaSignalsFile["areas"][string] | undefined;
+  contribution: ComputedStayAreaScore["usabilityContribution"];
+}) {
+  const percentile = signal?.passengerSignal?.crowdPercentile ?? null;
+  const passengerStatus = signal?.passengerSignal?.status;
+  const crowd = crowdLevelFromPercentile(percentile);
+
+  return (
+    <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+      <div className="flex items-center gap-2 text-[#106b43]">
+        <Users className="h-4 w-4" aria-hidden="true" />
+        <h3 className="text-sm font-semibold text-slate-950">Station usability</h3>
+      </div>
+      <div className="mt-2 grid">
+        <StationUsabilityRow
+          label="Passenger volume percentile"
+          value={
+            percentile == null
+              ? "Unknown"
+              : `${(percentile * 100).toFixed(0)}th · ${crowd.label}`
+          }
+          hint={
+            signal?.passengerSignal?.value
+              ? `Aggregated ${signal.passengerSignal.value.toLocaleString()} (${(signal.passengerSignal.operatorSources ?? []).join(", ")})`
+              : passengerStatus === "skipped"
+                ? "Source skipped this run."
+                : "No passenger data matched this area."
+          }
+        />
+        <StationUsabilityRow
+          label="Exit / entrance complexity"
+          value={area.exitComplexityLevel}
+          hint={`Contribution: ${contribution.exitComplexity >= 0 ? "+" : ""}${contribution.exitComplexity}`}
+        />
+        <StationUsabilityRow
+          label="Line / operator complexity"
+          value={`${area.stationLines.length} lines`}
+          hint={`Contribution: ${contribution.lineOperator >= 0 ? "+" : ""}${contribution.lineOperator}`}
+        />
+        <StationUsabilityRow
+          label="Transfer hub penalty"
+          value={area.transferHubLevel}
+          hint={`Contribution: ${contribution.transferHub >= 0 ? "+" : ""}${contribution.transferHub}`}
+        />
+        <StationUsabilityRow
+          label="Step-free / elevator route"
+          value={area.stepFreeConfidence}
+          hint={
+            area.stepFreeConfidence === "Unknown"
+              ? "Accessibility source not live yet — not penalised."
+              : "Editorial confidence label."
+          }
+        />
+        <StationUsabilityRow
+          label="Hotel choice density"
+          value={area.lodgingDensityLevel}
+          hint="Editorial; not a hotel quality or price signal."
+        />
+      </div>
+    </div>
+  );
+}
+
+function AreaDetailPanel({
+  area,
+  score,
+  signal,
+}: {
+  area: StayAreaBase;
+  score: ComputedStayAreaScore;
+  signal: StayAreaSignalsFile["areas"][string] | undefined;
+}) {
+  const tone = matchLabelTone(score.matchLabel);
   return (
     <section className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-24">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Selected area</p>
           <h2 className="mt-1 text-2xl font-semibold text-slate-950">{area.displayName}</h2>
-          <p className="mt-1 text-sm text-slate-500">{area.japaneseName} · {area.areaGroup}</p>
+          <p className="mt-1 text-sm text-slate-500">
+            {area.japaneseName} · {area.areaGroup}
+          </p>
         </div>
         <div className="rounded-2xl bg-[#ff7a00] px-4 py-3 text-center text-white shadow-sm">
           <p className="text-2xl font-black leading-none">{score.overallScore}</p>
           <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.08em]">/100</p>
         </div>
       </div>
+      <span className={`mt-3 inline-flex rounded-full border px-2.5 py-0.5 text-[11px] font-semibold ${tone.cls}`}>
+        {tone.text}
+      </span>
       <p className="mt-4 text-sm leading-6 text-slate-700">{area.editorial.overallLabel}</p>
 
       <div className="mt-5 grid gap-2">
@@ -108,21 +417,19 @@ function AreaDetailPanel({ area, score }: { area: StayAreaBase; score: ComputedS
         ))}
       </div>
 
+      <StationUsabilityPanel area={area} signal={signal} contribution={score.usabilityContribution} />
+
       <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-1">
         <div>
           <h3 className="text-sm font-semibold text-slate-950">Best for</h3>
           <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
-            {area.editorial.bestFor.map((item) => (
-              <li key={item}>· {item}</li>
-            ))}
+            {area.editorial.bestFor.map((item) => (<li key={item}>· {item}</li>))}
           </ul>
         </div>
         <div>
           <h3 className="text-sm font-semibold text-slate-950">Watch out</h3>
           <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
-            {area.editorial.watchOut.map((item) => (
-              <li key={item}>· {item}</li>
-            ))}
+            {area.editorial.watchOut.map((item) => (<li key={item}>· {item}</li>))}
           </ul>
         </div>
       </div>
@@ -134,7 +441,9 @@ function AreaDetailPanel({ area, score }: { area: StayAreaBase; score: ComputedS
       <p className="mt-4 text-xs leading-5 text-slate-500">
         Confidence: {score.confidence.label} ({score.confidence.score}/100) · Data freshness: {score.sourceFreshness.label}
       </p>
-      <ProviderNote area={area} />
+      <p className="mt-2 text-xs leading-5 text-slate-500">
+        Score parts — editorial {score.scoreParts.editorialComponent} · public data {score.scoreParts.publicDataComponent} · live status {score.scoreParts.liveStatusComponent} · coverage {(score.scoreParts.sourceCoverage * 100).toFixed(0)}%
+      </p>
     </section>
   );
 }
@@ -143,11 +452,14 @@ function AreaRankRow({
   rank,
   area,
   score,
+  signal,
 }: {
   rank: number;
   area: StayAreaBase;
   score: ComputedStayAreaScore;
+  signal: StayAreaSignalsFile["areas"][string] | undefined;
 }) {
+  const crowd = crowdLevelFromPercentile(signal?.passengerSignal?.crowdPercentile ?? null);
   return (
     <article className="rounded-[22px] border border-slate-200 bg-white p-4 shadow-sm">
       <div className="flex flex-col gap-4 md:flex-row md:items-center">
@@ -158,19 +470,42 @@ function AreaRankRow({
           <div className="min-w-0">
             <h3 className="text-lg font-semibold text-slate-950">{area.displayName}</h3>
             <p className="mt-1 text-xs leading-5 text-slate-500">
-              {area.stationNames.join(" / ")} · {area.crowdLevel} crowd level
+              {area.stationNames.slice(0, 3).join(" / ")} · {area.areaGroup}
             </p>
+            <div className="mt-2 flex flex-wrap items-center gap-1.5">
+              <Chip label="Crowd" value={crowd.label} tone={crowd.tone} />
+              <Chip
+                label="Complexity"
+                value={area.exitComplexityLevel}
+                tone={complexityChipTone(area.exitComplexityLevel)}
+              />
+              <Chip
+                label="Luggage route"
+                value={area.stepFreeConfidence}
+                tone={stepFreeChipTone(area.stepFreeConfidence)}
+                hideOnMobile
+              />
+              <Chip
+                label="Hotel choice"
+                value={area.lodgingDensityLevel}
+                tone={lodgingChipTone(area.lodgingDensityLevel)}
+                hideOnMobile
+              />
+            </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-2 text-xs md:grid-cols-5 md:text-center">
+        <div className="grid grid-cols-2 gap-2 text-xs md:grid-cols-3 md:text-center">
           <Metric label="Overall" value={score.overallScore} strong />
           <Metric label="Station" value={score.scores.stationSimplicity} />
           <Metric label="Luggage" value={score.scores.luggageFriendly} />
-          <Metric label="Airport" value={score.scores.airportAccess} />
-          <Metric label="Local" value={score.scores.localFeel} />
         </div>
       </div>
       <p className="mt-3 text-sm leading-6 text-slate-700">{area.editorial.overallLabel}</p>
+      {area.editorial.bestFor.length > 0 && (
+        <p className="mt-2 text-xs leading-5 text-slate-500">
+          Best for: {area.editorial.bestFor.slice(0, 3).join(" · ")}
+        </p>
+      )}
     </article>
   );
 }
@@ -206,14 +541,92 @@ function FeaturedAreaCard({ area, score }: { area: StayAreaBase; score: Computed
   );
 }
 
-export default async function TokyoStayAreaIndexPage({ params }: Props) {
+// ---------- Station usability signals dashboard tiles ---------------------
+
+type SignalTileProps = {
+  icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean }>;
+  title: string;
+  status: string;
+  statusTone: ChipTone;
+  body: string;
+};
+
+function SignalTile({ icon: Icon, title, status, statusTone, body }: SignalTileProps) {
+  return (
+    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2 text-[#106b43]">
+          <Icon className="h-4 w-4" aria-hidden />
+          <h3 className="text-sm font-semibold text-slate-950">{title}</h3>
+        </div>
+        <span className={`shrink-0 rounded-full border px-2 py-0.5 text-[10px] font-semibold ${chipToneClass(statusTone)}`}>
+          {status}
+        </span>
+      </div>
+      <p className="mt-2 text-xs leading-5 text-slate-600">{body}</p>
+    </div>
+  );
+}
+
+function deriveCoreSignals(sources: SignalsSourceEntry[]) {
+  const get = (id: string) => sources.find((s) => s.sourceId === id);
+  const tokyoMetroPax = get("tokyo-metro-passengers");
+  const toeiPax = get("toei-passengers");
+  const tmBarrier = get("tokyo-metro-barrier-free");
+  const toeiBarrier = get("toei-barrier-free");
+  const lodging = get("tokyo-lodging-facilities");
+
+  const passengerStatus =
+    tokyoMetroPax?.status === "success" && toeiPax?.status === "success"
+      ? { label: "Success", tone: "calm" as ChipTone }
+      : tokyoMetroPax?.status === "success" || toeiPax?.status === "success"
+        ? { label: "Partial", tone: "warn" as ChipTone }
+        : { label: "Skipped", tone: "soft" as ChipTone };
+
+  const stepFree =
+    tmBarrier?.status === "success" || toeiBarrier?.status === "success"
+      ? { label: "Partial", tone: "warn" as ChipTone }
+      : { label: "Next", tone: "soft" as ChipTone };
+
+  const lodgingStatus =
+    lodging?.status === "success"
+      ? { label: "Active", tone: "calm" as ChipTone }
+      : { label: "Next", tone: "soft" as ChipTone };
+
+  return { passengerStatus, stepFree, lodgingStatus, tokyoMetroPax, toeiPax };
+}
+
+export default async function TokyoStayAreaIndexPage({ params, searchParams }: Props) {
   const { locale } = await params;
-  const computedScores = buildTokyoStayAreaScores(tokyoStayAreasBase, signals as StayAreaSignalsFile);
-  const scoreById = new Map(computedScores.map((score) => [score.id, score]));
-  const rankedAreas = computedScores.map((score) => ({ area: areaById(score.id), score }));
+  const { filter } = await searchParams;
+  const activeFilter = parseFilter(filter);
+
+  const baselineScores = scoresFile.areas;
+  const computedScores = applyFilterBoost(baselineScores, activeFilter);
+  const scoreById = new Map(baselineScores.map((s) => [s.id, s] as const));
+  const rankedAreas = computedScores.map((score) => ({
+    area: areaById(score.id),
+    score,
+    signal: signalsFile.areas[score.id],
+  }));
   const selected = rankedAreas[0];
   const featuredIds = ["oshiage", "kuramae", "ueno"];
-  const generatedScoreCount = scoresJson.areas.length;
+  const generatedScoreCount = scoresFile.areas.length;
+  const lastChecked = formatLastChecked(sourceStatusFile.generatedAt);
+
+  const core = deriveCoreSignals(sourceStatusFile.sources);
+  const passengerSummary =
+    core.tokyoMetroPax?.status === "success" && core.toeiPax?.status === "success"
+      ? `Tokyo Metro ${core.tokyoMetroPax.records ?? "?"} + Toei ${core.toeiPax.records ?? "?"} records`
+      : `Tokyo Metro: ${statusLabel(core.tokyoMetroPax?.status ?? "skipped").toLowerCase()} · Toei: ${statusLabel(core.toeiPax?.status ?? "skipped").toLowerCase()}`;
+
+  const contextSources = sourceStatusFile.sources.filter((s) =>
+    ["tokyo-police-crime", "gsi-hazard-portal"].includes(s.sourceId),
+  );
+
+  const matchedCount = baselineScores.filter((s) => s.matchLabel === "public-data-matched").length;
+  const partialCount = baselineScores.filter((s) => s.matchLabel === "partial-public-data").length;
+  const fallbackCount = baselineScores.filter((s) => s.matchLabel === "editorial-fallback").length;
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -235,11 +648,16 @@ export default async function TokyoStayAreaIndexPage({ params }: Props) {
             <div>
               <h1 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">Tokyo Stay Area Index</h1>
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-                Compare Tokyo station areas before choosing hotels, based on luggage-friendliness, airport access,
-                station simplicity, crowd stress, and local feel.
+                Compare Tokyo station areas before booking hotels, using seven station-usability signals:
+                passenger volume, exit / entrance complexity, line / operator count, step-free route confidence,
+                transfer-hub penalty, airport / Shinkansen access, and hotel choice density. Editorial travel-fit
+                scores informed by passenger data — not an official ranking.
               </p>
               <p className="mt-4 text-sm font-semibold text-[#106b43]">
-                Public-data-informed · Updated locally for now · Built for first-time Japan travelers
+                {FRESHNESS_HEADLINE} · Last source check: {lastChecked}
+              </p>
+              <p className="mt-1 text-xs leading-5 text-slate-500">
+                {FRESHNESS_SUBLINE} {FRESHNESS_TAIL}
               </p>
             </div>
             <a
@@ -254,14 +672,118 @@ export default async function TokyoStayAreaIndexPage({ params }: Props) {
 
         <section className="mt-6 rounded-[22px] border border-slate-200 bg-slate-50 p-4">
           <div className="flex flex-wrap gap-2">
-            {filterChips.map((chip) => (
-              <span key={chip} className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700">
-                {chip}
-              </span>
-            ))}
+            {FILTERS.map(({ key, label }) => {
+              const isActive = key === activeFilter;
+              const href = key === "all" ? pagePath : `${pagePath}?filter=${key}`;
+              return (
+                <a
+                  key={key}
+                  href={`/${locale === "en" ? "" : `${locale}/`}${href.replace(/^\//, "")}#ranked-areas`}
+                  className={[
+                    "rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors",
+                    isActive
+                      ? "border-emerald-200 bg-emerald-50 text-[#106b43]"
+                      : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200 hover:text-[#106b43]",
+                  ].join(" ")}
+                  aria-current={isActive ? "true" : undefined}
+                >
+                  {label}
+                </a>
+              );
+            })}
           </div>
           <p className="mt-3 text-xs leading-5 text-slate-500">
-            MVP note: filters are visual prompts for now. The ranked list uses the editorial travel-fit score below.
+            Filters re-rank using predefined travel-fit modifiers on top of the same blended score. They do not change
+            the underlying source data.
+          </p>
+        </section>
+
+        {/* ============= Station usability signals (replaces "Source status") ============== */}
+        <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="flex items-center gap-2 text-[#106b43]">
+            <BarChart3 className="h-5 w-5" aria-hidden="true" />
+            <h2 className="text-xl font-semibold text-slate-950">Station usability signals</h2>
+          </div>
+          <p className="mt-2 text-xs leading-5 text-slate-500">
+            Seven signals drive the score. Passenger volume is live; exit complexity, line / operator complexity,
+            and transfer-hub penalty come from editorial tags; step-free and lodging-density sources are next.
+          </p>
+
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <SignalTile
+              icon={Users}
+              title="Passenger volume"
+              status={core.passengerStatus.label}
+              statusTone={core.passengerStatus.tone}
+              body={passengerSummary}
+            />
+            <SignalTile
+              icon={DoorOpen}
+              title="Exit / entrance complexity"
+              status="Active"
+              statusTone="calm"
+              body="Editorial tags (Simple / Moderate / Complex / Mega station). Affects station simplicity and lightly affects luggage friendliness."
+            />
+            <SignalTile
+              icon={Train}
+              title="Line / operator complexity"
+              status="Active"
+              statusTone="calm"
+              body="Computed from each area's stationLines[]. Multi-operator mega hubs get a heavier penalty."
+            />
+            <SignalTile
+              icon={Luggage}
+              title="Step-free / elevator route"
+              status={core.stepFree.label}
+              statusTone={core.stepFree.tone}
+              body="Accessibility CSV parsing not live yet. Areas remain Unknown — they are not penalised on this signal."
+            />
+            <SignalTile
+              icon={Signpost}
+              title="Transfer hub penalty"
+              status="Active"
+              statusTone="calm"
+              body="Editorial transfer-hub level (Low → Very High). Strongly affects station simplicity and crowd stress for mega hubs."
+            />
+            <SignalTile
+              icon={Plane}
+              title="Airport / Shinkansen access"
+              status="Editorial + route logic"
+              statusTone="soft"
+              body="Editorial sub-scores plus filter boosts (Narita arrival / Haneda arrival / Shinkansen) for fit-based re-ranking."
+            />
+            <SignalTile
+              icon={Building2}
+              title="Hotel choice density"
+              status={core.lodgingStatus.label}
+              statusTone={core.lodgingStatus.tone}
+              body="Editorial level (Low / Medium / High / Very High). Open-data CSV ingestion is the next step. Not a hotel quality or price signal."
+            />
+          </div>
+
+          {/* ============== Context (not scored) ============== */}
+          <div className="mt-6">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">Context (not scored)</p>
+            <p className="mt-1 text-xs leading-5 text-slate-500">
+              Catalogued for reference. These signals do NOT contribute to the station-area score. We do not label
+              areas as safe or dangerous.
+            </p>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              {contextSources.map((src) => (
+                <SignalTile
+                  key={src.sourceId}
+                  icon={ShieldCheck}
+                  title={src.label}
+                  status="Not used in score"
+                  statusTone="soft"
+                  body={src.message || "Catalogued only. Not displayed as a safety or hazard claim."}
+                />
+              ))}
+            </div>
+          </div>
+
+          <p className="mt-5 text-xs leading-5 text-slate-500">
+            Coverage across {generatedScoreCount} station areas — public data matched: {matchedCount} · partial: {partialCount} · editorial fallback: {fallbackCount}.
           </p>
         </section>
 
@@ -272,15 +794,17 @@ export default async function TokyoStayAreaIndexPage({ params }: Props) {
                 <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Ranked list</p>
                 <h2 className="mt-1 text-2xl font-semibold text-slate-950">Station-area travel fit</h2>
               </div>
-              <p className="hidden text-xs font-semibold text-slate-500 md:block">{generatedScoreCount} local seed scores</p>
+              <p className="hidden text-xs font-semibold text-slate-500 md:block">
+                {generatedScoreCount} areas · filter: {FILTERS.find((f) => f.key === activeFilter)?.label}
+              </p>
             </div>
             <div className="mt-4 grid gap-3">
-              {rankedAreas.map(({ area, score }, index) => (
-                <AreaRankRow key={area.id} rank={index + 1} area={area} score={score} />
+              {rankedAreas.map(({ area, score, signal }, index) => (
+                <AreaRankRow key={area.id} rank={index + 1} area={area} score={score} signal={signal} />
               ))}
             </div>
           </div>
-          <AreaDetailPanel area={selected.area} score={selected.score} />
+          <AreaDetailPanel area={selected.area} score={selected.score} signal={selected.signal} />
         </section>
 
         <section className="mt-10">
@@ -301,14 +825,22 @@ export default async function TokyoStayAreaIndexPage({ params }: Props) {
             </div>
             <div className="mt-4 space-y-3 text-sm leading-6 text-slate-700">
               <p>This compares station areas, not individual hotels.</p>
-              <p>Scores combine editorial travel logic with public-data-ready signals. The current local MVP uses seed data and is structured for future public-data refresh.</p>
-              <p>Scores are not official ratings and do not rank hotel quality, price, or availability.</p>
+              <p>
+                Scores blend a 55% editorial travel-fit baseline, 35% station-usability adjustments
+                (passenger crowd, exit / entrance complexity, line / operator count, transfer-hub penalty),
+                and 10% live status. Each per-sub-score adjustment is capped at ±10.
+              </p>
+              <p>
+                Step-free route confidence is shown but is not yet penalised — accessibility data is not live.
+                Hotel choice density is editorial and does not evaluate individual hotels. Scores are not official
+                ratings and do not rank safety, hotel quality, price, or availability.
+              </p>
             </div>
             <div className="mt-4 grid gap-2 sm:grid-cols-2">
-              <InfoCard icon={Luggage} title="Luggage" body="Does the area feel manageable with suitcases?" />
-              <InfoCard icon={Plane} title="Airport" body="Does arrival routing stay practical?" />
-              <InfoCard icon={Train} title="Rail days" body="Does it help or hurt Shinkansen logistics?" />
-              <InfoCard icon={ShieldCheck} title="Stress" body="Higher crowd-stress score means less stressful." />
+              <InfoCard icon={Users} title="Crowd" body="Passenger-data-informed; high volume lowers crowd-stress." />
+              <InfoCard icon={DoorOpen} title="Complexity" body="Exit / entrance complexity from editorial tags." />
+              <InfoCard icon={Train} title="Lines" body="More lines / operators lower station simplicity." />
+              <InfoCard icon={Signpost} title="Transfer" body="Transfer-hub penalty hits mega interchanges." />
             </div>
           </div>
 
@@ -318,17 +850,23 @@ export default async function TokyoStayAreaIndexPage({ params }: Props) {
               <h2 className="text-xl font-semibold text-slate-950">Data freshness / source note</h2>
             </div>
             <p className="mt-4 text-sm leading-6 text-slate-700">
-              fujiseat.com scores are editorial travel-fit scores based on public data signals and traveler logic. They
-              are not official ratings and do not guarantee safety, comfort, hotel quality, price, or availability.
+              fujiseat.com scores are editorial travel-fit scores informed by passenger data. They are not official
+              ratings and do not guarantee safety, comfort, hotel quality, price, or availability.
             </p>
             <p className="mt-3 text-sm leading-6 text-slate-700">
-              Current mode: <span className="font-semibold">local-seed</span>. External public-data fetch is not enabled yet.
+              Current mode: <span className="font-semibold">{signalsFile.mode}</span>. Last source check: {lastChecked}.
             </p>
             <div className="mt-4 rounded-2xl bg-slate-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">Future source registry</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">Source registry</p>
               <ul className="mt-2 space-y-1.5 text-xs leading-5 text-slate-600">
-                {tokyoStayAreaSourceRegistry.slice(0, 5).map((source) => (
-                  <li key={source.sourceId}>· {source.label}</li>
+                {tokyoStayAreaSourceRegistry.map((source) => (
+                  <li key={source.id}>
+                    · {source.label}{" "}
+                    <span className="text-slate-400">
+                      ({source.expectedUpdateCadence}, {source.status === "live" ? "fetched locally" : "registered only"}
+                      {source.usedInScore ? "" : " · not used in score"})
+                    </span>
+                  </li>
                 ))}
               </ul>
             </div>

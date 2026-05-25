@@ -1,102 +1,1613 @@
 {
-  "generatedAt": "2026-05-25T00:00:00.000Z",
-  "mode": "local-seed",
+  "generatedAt": "2026-05-25T18:38:13.764Z",
+  "mode": "public-data-local",
   "sources": [
     {
-      "sourceId": "manual-seed",
-      "label": "Manual editorial seed",
+      "sourceId": "tokyo-metro-passengers",
+      "label": "Tokyo Metro passenger ranking",
       "status": "success",
-      "fetchedAt": "2026-05-25T00:00:00.000Z",
-      "message": "Local seed data for MVP. External public-data fetch is not enabled yet."
+      "fetchedAt": "2026-05-25T18:38:13.512Z",
+      "sourcePeriod": "FY2024",
+      "records": 41,
+      "message": "Parsed 41 station rows from Tokyo Metro 駅別乗降人員順位表."
+    },
+    {
+      "sourceId": "toei-passengers",
+      "label": "Toei Subway passenger volume",
+      "status": "success",
+      "fetchedAt": "2026-05-25T18:38:13.455Z",
+      "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)",
+      "records": 106,
+      "message": "Parsed 106 station rows (28 canonical matches) from Toei CKAN CSVs: {\"asakusa\":20,\"mita\":27,\"shinjuku\":21,\"oedo\":38}."
+    },
+    {
+      "sourceId": "toei-barrier-free",
+      "label": "Toei Subway accessibility / barrier-free CSV",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "message": "CSV catalog discovery not stable from a script in this pass."
+    },
+    {
+      "sourceId": "tokyo-metro-barrier-free",
+      "label": "Tokyo Metro accessibility / barrier-free pages",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "message": "Conservative source status only — per-station details not parsed in this pass."
+    },
+    {
+      "sourceId": "odpt-station-information",
+      "label": "ODPT station information",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "message": "ODPT_CONSUMER_KEY not set; skipping gracefully."
+    },
+    {
+      "sourceId": "tokyo-police-crime",
+      "label": "Tokyo Metropolitan Police town-level crime statistics",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "message": "Not displayed as a safety claim; skipped in this pass."
+    },
+    {
+      "sourceId": "gsi-hazard-portal",
+      "label": "Hazard Map Portal (MLIT / GSI)",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "message": "Heavy GIS — catalogued only, no UI rendering this pass."
+    },
+    {
+      "sourceId": "tokyo-lodging-facilities",
+      "label": "Tokyo lodging business facility datasets",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "message": "Catalogued only; ward-level CSV URLs change frequently."
     }
   ],
   "areas": {
     "oshiage": {
-      "passengerSignal": null,
-      "accessibilitySignal": null,
-      "safetySignal": null,
-      "floodNoteSignal": null,
-      "lodgingDensitySignal": null,
+      "matchedStations": [
+        "oshiage"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 187689,
+        "operatorSources": [
+          "toei"
+        ],
+        "matchedStations": [
+          "oshiage"
+        ],
+        "crowdPercentile": 0.65,
+        "scoreContribution": -2,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
       "sourceFreshness": {
-        "level": "seed",
-        "label": "Local seed"
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
       }
     },
     "kuramae": {
-      "passengerSignal": null,
-      "accessibilitySignal": null,
-      "safetySignal": null,
-      "floodNoteSignal": null,
-      "lodgingDensitySignal": null,
+      "matchedStations": [
+        "kuramae",
+        "tawaramachi"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 99792,
+        "operatorSources": [
+          "toei",
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "kuramae",
+          "tawaramachi"
+        ],
+        "crowdPercentile": 0.21,
+        "scoreContribution": 0,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
       "sourceFreshness": {
-        "level": "seed",
-        "label": "Local seed"
-      }
-    },
-    "ueno": {
-      "passengerSignal": null,
-      "accessibilitySignal": null,
-      "safetySignal": null,
-      "floodNoteSignal": null,
-      "lodgingDensitySignal": null,
-      "sourceFreshness": {
-        "level": "seed",
-        "label": "Local seed"
-      }
-    },
-    "ryogoku": {
-      "passengerSignal": null,
-      "accessibilitySignal": null,
-      "safetySignal": null,
-      "floodNoteSignal": null,
-      "lodgingDensitySignal": null,
-      "sourceFreshness": {
-        "level": "seed",
-        "label": "Local seed"
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
       }
     },
     "asakusa": {
-      "passengerSignal": null,
-      "accessibilitySignal": null,
-      "safetySignal": null,
-      "floodNoteSignal": null,
-      "lodgingDensitySignal": null,
+      "matchedStations": [
+        "asakusa"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 154520,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "asakusa"
+        ],
+        "crowdPercentile": 0.41,
+        "scoreContribution": -1,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
       "sourceFreshness": {
-        "level": "seed",
-        "label": "Local seed"
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "ueno": {
+      "matchedStations": [
+        "ueno"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 189373,
+        "operatorSources": [
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "ueno"
+        ],
+        "crowdPercentile": 0.68,
+        "scoreContribution": -2,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "ryogoku": {
+      "matchedStations": [
+        "ryogoku"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 28397,
+        "operatorSources": [
+          "toei"
+        ],
+        "matchedStations": [
+          "ryogoku"
+        ],
+        "crowdPercentile": 0.03,
+        "scoreContribution": 0,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "kiyosumi-shirakawa": {
+      "matchedStations": [
+        "kiyosumi-shirakawa"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 93611,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "kiyosumi-shirakawa"
+        ],
+        "crowdPercentile": 0.18,
+        "scoreContribution": 0,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "monzen-nakacho": {
+      "matchedStations": [
+        "monzen-nakacho"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 177329,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "monzen-nakacho"
+        ],
+        "crowdPercentile": 0.53,
+        "scoreContribution": -2,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "ningyocho": {
+      "matchedStations": [
+        "ningyocho",
+        "suitengumae"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 184677,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "ningyocho",
+          "suitengumae"
+        ],
+        "crowdPercentile": 0.62,
+        "scoreContribution": -2,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "hatchobori": {
+      "matchedStations": [
+        "hatchobori"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 102173,
+        "operatorSources": [
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "hatchobori"
+        ],
+        "crowdPercentile": 0.24,
+        "scoreContribution": 0,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "kayabacho": {
+      "matchedStations": [
+        "kayabacho"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 112343,
+        "operatorSources": [
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "kayabacho"
+        ],
+        "crowdPercentile": 0.32,
+        "scoreContribution": -1,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "nihombashi": {
+      "matchedStations": [
+        "nihombashi",
+        "mitsukoshimae"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 370987,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "nihombashi",
+          "mitsukoshimae"
+        ],
+        "crowdPercentile": 0.82,
+        "scoreContribution": -4,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
       }
     },
     "tokyo-station": {
-      "passengerSignal": null,
-      "accessibilitySignal": null,
-      "safetySignal": null,
-      "floodNoteSignal": null,
-      "lodgingDensitySignal": null,
+      "matchedStations": [
+        "tokyo",
+        "otemachi",
+        "nijubashimae"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 657708,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "tokyo",
+          "otemachi",
+          "nijubashimae"
+        ],
+        "crowdPercentile": 0.91,
+        "scoreContribution": -6,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
       "sourceFreshness": {
-        "level": "seed",
-        "label": "Local seed"
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "ginza-yurakucho": {
+      "matchedStations": [
+        "ginza",
+        "yurakucho",
+        "hibiya",
+        "higashi-ginza"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 684332,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "ginza",
+          "yurakucho",
+          "hibiya",
+          "higashi-ginza"
+        ],
+        "crowdPercentile": 0.94,
+        "scoreContribution": -6,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "shimbashi": {
+      "matchedStations": [
+        "shimbashi"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 275943,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "shimbashi"
+        ],
+        "crowdPercentile": 0.79,
+        "scoreContribution": -4,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "hamamatsucho-daimon": {
+      "matchedStations": [
+        "daimon"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 176278,
+        "operatorSources": [
+          "toei"
+        ],
+        "matchedStations": [
+          "daimon"
+        ],
+        "crowdPercentile": 0.5,
+        "scoreContribution": -2,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "shinagawa": {
+      "matchedStations": [],
+      "passengerSignal": {
+        "status": "partial",
+        "value": null,
+        "operatorSources": [],
+        "matchedStations": [],
+        "crowdPercentile": null,
+        "scoreContribution": null,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
+      }
+    },
+    "gotanda": {
+      "matchedStations": [
+        "gotanda"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 52651,
+        "operatorSources": [
+          "toei"
+        ],
+        "matchedStations": [
+          "gotanda"
+        ],
+        "crowdPercentile": 0.09,
+        "scoreContribution": 0,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "meguro": {
+      "matchedStations": [
+        "meguro"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 81374,
+        "operatorSources": [
+          "toei"
+        ],
+        "matchedStations": [
+          "meguro"
+        ],
+        "crowdPercentile": 0.15,
+        "scoreContribution": 0,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "ebisu": {
+      "matchedStations": [
+        "ebisu"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 104751,
+        "operatorSources": [
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "ebisu"
+        ],
+        "crowdPercentile": 0.26,
+        "scoreContribution": -1,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "shibuya": {
+      "matchedStations": [
+        "shibuya"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 191505,
+        "operatorSources": [
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "shibuya"
+        ],
+        "crowdPercentile": 0.71,
+        "scoreContribution": -2,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
       }
     },
     "shinjuku": {
-      "passengerSignal": null,
-      "accessibilitySignal": null,
-      "safetySignal": null,
-      "floodNoteSignal": null,
-      "lodgingDensitySignal": null,
+      "matchedStations": [
+        "shinjuku",
+        "shinjuku-sanchome"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 816727,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "shinjuku",
+          "shinjuku-sanchome"
+        ],
+        "crowdPercentile": 0.97,
+        "scoreContribution": -6,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
       "sourceFreshness": {
-        "level": "seed",
-        "label": "Local seed"
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
       }
     },
-    "ginza-nihombashi": {
-      "passengerSignal": null,
-      "accessibilitySignal": null,
-      "safetySignal": null,
-      "floodNoteSignal": null,
-      "lodgingDensitySignal": null,
+    "yoyogi": {
+      "matchedStations": [
+        "yoyogi"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 27628,
+        "operatorSources": [
+          "toei"
+        ],
+        "matchedStations": [
+          "yoyogi"
+        ],
+        "crowdPercentile": 0,
+        "scoreContribution": 0,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
       "sourceFreshness": {
-        "level": "seed",
-        "label": "Local seed"
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "ikebukuro": {
+      "matchedStations": [
+        "ikebukuro"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 518135,
+        "operatorSources": [
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "ikebukuro"
+        ],
+        "crowdPercentile": 0.88,
+        "scoreContribution": -4,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "akihabara": {
+      "matchedStations": [
+        "akihabara",
+        "suehirocho"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 139614,
+        "operatorSources": [
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "akihabara",
+          "suehirocho"
+        ],
+        "crowdPercentile": 0.35,
+        "scoreContribution": -1,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "kanda": {
+      "matchedStations": [
+        "kanda"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 56241,
+        "operatorSources": [
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "kanda"
+        ],
+        "crowdPercentile": 0.12,
+        "scoreContribution": 0,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "asakusabashi": {
+      "matchedStations": [
+        "asakusabashi"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 50828,
+        "operatorSources": [
+          "toei"
+        ],
+        "matchedStations": [
+          "asakusabashi"
+        ],
+        "crowdPercentile": 0.06,
+        "scoreContribution": 0,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "bakurocho-higashinihombashi": {
+      "matchedStations": [
+        "higashi-nihombashi",
+        "bakuro-yokoyama"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 164149,
+        "operatorSources": [
+          "toei"
+        ],
+        "matchedStations": [
+          "higashi-nihombashi",
+          "bakuro-yokoyama"
+        ],
+        "crowdPercentile": 0.44,
+        "scoreContribution": -1,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "kinshicho": {
+      "matchedStations": [
+        "kinshicho"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 104930,
+        "operatorSources": [
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "kinshicho"
+        ],
+        "crowdPercentile": 0.29,
+        "scoreContribution": -1,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "akasaka-mitsuke": {
+      "matchedStations": [
+        "akasaka",
+        "akasaka-mitsuke"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 166932,
+        "operatorSources": [
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "akasaka",
+          "akasaka-mitsuke"
+        ],
+        "crowdPercentile": 0.47,
+        "scoreContribution": -1,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "roppongi": {
+      "matchedStations": [
+        "roppongi"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 181120,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "roppongi"
+        ],
+        "crowdPercentile": 0.56,
+        "scoreContribution": -2,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "aoyama-omotesando": {
+      "matchedStations": [
+        "omotesando",
+        "aoyama-itchome",
+        "gaiemmae"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 407545,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "omotesando",
+          "aoyama-itchome",
+          "gaiemmae"
+        ],
+        "crowdPercentile": 0.85,
+        "scoreContribution": -4,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "ochanomizu": {
+      "matchedStations": [
+        "ochanomizu",
+        "shin-ochanomizu"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 141605,
+        "operatorSources": [
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "ochanomizu",
+          "shin-ochanomizu"
+        ],
+        "crowdPercentile": 0.38,
+        "scoreContribution": -1,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "iidabashi": {
+      "matchedStations": [
+        "iidabashi"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 184551,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "iidabashi"
+        ],
+        "crowdPercentile": 0.59,
+        "scoreContribution": -2,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "korakuen-kasuga": {
+      "matchedStations": [
+        "korakuen",
+        "kasuga"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 217781,
+        "operatorSources": [
+          "tokyo-metro",
+          "toei"
+        ],
+        "matchedStations": [
+          "korakuen",
+          "kasuga"
+        ],
+        "crowdPercentile": 0.76,
+        "scoreContribution": -4,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "toyosu": {
+      "matchedStations": [
+        "toyosu"
+      ],
+      "passengerSignal": {
+        "status": "success",
+        "value": 210782,
+        "operatorSources": [
+          "tokyo-metro"
+        ],
+        "matchedStations": [
+          "toyosu"
+        ],
+        "crowdPercentile": 0.74,
+        "scoreContribution": -2,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      }
+    },
+    "ariake-odaiba": {
+      "matchedStations": [],
+      "passengerSignal": {
+        "status": "partial",
+        "value": null,
+        "operatorSources": [],
+        "matchedStations": [],
+        "crowdPercentile": null,
+        "scoreContribution": null,
+        "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
+      },
+      "accessibilitySignal": {
+        "status": "skipped",
+        "rawFacilityCount": null,
+        "elevatorOrStepFreeSignal": null,
+        "operatorSources": [],
+        "scoreContribution": null,
+        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      },
+      "safetySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "floodNoteSignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "lodgingDensitySignal": {
+        "status": "skipped",
+        "message": "Optional source not fetched in this pass."
+      },
+      "sourceFreshness": {
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     }
   }
