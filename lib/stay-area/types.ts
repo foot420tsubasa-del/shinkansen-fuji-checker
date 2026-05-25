@@ -128,16 +128,26 @@ export type PassengerSignal = {
   message?: string;
 };
 
-export type AccessibilitySignal = {
+/**
+ * Step-free / elevator route signal derived from public barrier-free data.
+ *
+ * Phase 3 reads the Toei subway open-data barrier-free CSVs (per-line) and
+ * looks at the `1ルート確保（エレベーター等）` column — `○` means at least
+ * one step-free route to the platform is confirmed for that station. A
+ * matched area summarizes its constituent stations' coverage.
+ */
+export type StepFreeSignal = {
   status: SignalStatus;
-  /** Best-effort facility count summed across matched stations, if parseable. */
-  rawFacilityCount: number | null;
-  /** True only when at least one matched station has parsed step-free signal. */
-  elevatorOrStepFreeSignal: boolean | null;
-  /** Operators we consulted. */
-  operatorSources: Array<"tokyo-metro" | "toei">;
+  /** Canonical station keys that matched in the source data. */
+  matchedStations: string[];
+  /** True if at least one matched station has a confirmed step-free route. */
+  hasStepFreeRoute: boolean | null;
+  /** Elevator/route coverage across matched stations. */
+  elevatorSignal: "known" | "partial" | "unknown";
   /** Score contribution applied to luggageFriendly (positive = better). */
   scoreContribution: number | null;
+  /** Sources that contributed to this signal. */
+  sourceIds: Array<"tokyo-metro-barrier-free" | "toei-barrier-free">;
   message?: string;
 };
 
@@ -158,7 +168,7 @@ export type SourceFreshness = {
 export type StayAreaSignal = {
   matchedStations: string[];
   passengerSignal: PassengerSignal;
-  accessibilitySignal: AccessibilitySignal;
+  stepFreeSignal: StepFreeSignal;
   safetySignal: OptionalSignal;
   floodNoteSignal: OptionalSignal;
   lodgingDensitySignal: OptionalSignal;

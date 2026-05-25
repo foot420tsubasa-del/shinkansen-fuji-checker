@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-05-25T18:38:13.764Z",
+  "generatedAt": "2026-05-25T18:56:31.625Z",
   "mode": "public-data-local",
   "sources": [
     {
       "sourceId": "tokyo-metro-passengers",
       "label": "Tokyo Metro passenger ranking",
       "status": "success",
-      "fetchedAt": "2026-05-25T18:38:13.512Z",
+      "fetchedAt": "2026-05-25T18:56:31.350Z",
       "sourcePeriod": "FY2024",
       "records": 41,
       "message": "Parsed 41 station rows from Tokyo Metro 駅別乗降人員順位表."
@@ -15,7 +15,7 @@
       "sourceId": "toei-passengers",
       "label": "Toei Subway passenger volume",
       "status": "success",
-      "fetchedAt": "2026-05-25T18:38:13.455Z",
+      "fetchedAt": "2026-05-25T18:56:31.296Z",
       "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)",
       "records": 106,
       "message": "Parsed 106 station rows (28 canonical matches) from Toei CKAN CSVs: {\"asakusa\":20,\"mita\":27,\"shinjuku\":21,\"oedo\":38}."
@@ -23,43 +23,45 @@
     {
       "sourceId": "toei-barrier-free",
       "label": "Toei Subway accessibility / barrier-free CSV",
-      "status": "skipped",
-      "fetchedAt": "2026-05-25T18:38:13.764Z",
-      "message": "CSV catalog discovery not stable from a script in this pass."
+      "status": "success",
+      "fetchedAt": "2026-05-25T18:56:31.350Z",
+      "sourcePeriod": "Tokyo Open Data (CKAN t000018d0000000028, refreshed irregularly)",
+      "records": 106,
+      "message": "Parsed 106 station rows from Toei barrier-free CKAN CSVs: {\"asakusa\":20,\"mita\":27,\"shinjuku\":21,\"oedo\":38}."
     },
     {
       "sourceId": "tokyo-metro-barrier-free",
       "label": "Tokyo Metro accessibility / barrier-free pages",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T18:38:13.764Z",
-      "message": "Conservative source status only — per-station details not parsed in this pass."
+      "fetchedAt": "2026-05-25T18:56:31.624Z",
+      "message": "Page is client-rendered from a script request; per-station detail pages not parsed in this pass."
     },
     {
       "sourceId": "odpt-station-information",
       "label": "ODPT station information",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "fetchedAt": "2026-05-25T18:56:31.624Z",
       "message": "ODPT_CONSUMER_KEY not set; skipping gracefully."
     },
     {
       "sourceId": "tokyo-police-crime",
       "label": "Tokyo Metropolitan Police town-level crime statistics",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "fetchedAt": "2026-05-25T18:56:31.624Z",
       "message": "Not displayed as a safety claim; skipped in this pass."
     },
     {
       "sourceId": "gsi-hazard-portal",
       "label": "Hazard Map Portal (MLIT / GSI)",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "fetchedAt": "2026-05-25T18:56:31.624Z",
       "message": "Heavy GIS — catalogued only, no UI rendering this pass."
     },
     {
       "sourceId": "tokyo-lodging-facilities",
       "label": "Tokyo lodging business facility datasets",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T18:38:13.764Z",
+      "fetchedAt": "2026-05-25T18:56:31.624Z",
       "message": "Catalogued only; ward-level CSV URLs change frequently."
     }
   ],
@@ -81,13 +83,18 @@
         "scoreContribution": -2,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "oshiage"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -126,13 +133,18 @@
         "scoreContribution": 0,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "kuramae"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -169,13 +181,18 @@
         "scoreContribution": -1,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "asakusa"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -211,13 +228,14 @@
         "scoreContribution": -2,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -232,8 +250,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "ryogoku": {
@@ -253,13 +271,18 @@
         "scoreContribution": 0,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "ryogoku"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -296,13 +319,18 @@
         "scoreContribution": 0,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "kiyosumi-shirakawa"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -339,13 +367,18 @@
         "scoreContribution": -2,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "monzen-nakacho"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -384,13 +417,18 @@
         "scoreContribution": -2,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "ningyocho"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -426,13 +464,14 @@
         "scoreContribution": 0,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -447,8 +486,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "kayabacho": {
@@ -468,13 +507,14 @@
         "scoreContribution": -1,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -489,8 +529,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "nihombashi": {
@@ -513,13 +553,18 @@
         "scoreContribution": -4,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "nihombashi"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -560,13 +605,18 @@
         "scoreContribution": -6,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "otemachi"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -609,13 +659,19 @@
         "scoreContribution": -6,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "hibiya",
+          "higashi-ginza"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 2 matched Toei stations report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -652,13 +708,18 @@
         "scoreContribution": -4,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "shimbashi"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -694,13 +755,18 @@
         "scoreContribution": -2,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "daimon"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -730,13 +796,14 @@
         "scoreContribution": null,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -772,13 +839,18 @@
         "scoreContribution": 0,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "gotanda"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -814,13 +886,18 @@
         "scoreContribution": 0,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "meguro"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -856,13 +933,14 @@
         "scoreContribution": -1,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -877,8 +955,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "shibuya": {
@@ -898,13 +976,14 @@
         "scoreContribution": -2,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -919,8 +998,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "shinjuku": {
@@ -943,13 +1022,19 @@
         "scoreContribution": -6,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "shinjuku",
+          "shinjuku-sanchome"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 2 matched Toei stations report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -985,13 +1070,18 @@
         "scoreContribution": 0,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "yoyogi"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1027,13 +1117,14 @@
         "scoreContribution": -4,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1048,8 +1139,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "akihabara": {
@@ -1071,13 +1162,14 @@
         "scoreContribution": -1,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1092,8 +1184,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "kanda": {
@@ -1113,13 +1205,14 @@
         "scoreContribution": 0,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1134,8 +1227,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "asakusabashi": {
@@ -1155,13 +1248,18 @@
         "scoreContribution": 0,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "asakusabashi"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1199,13 +1297,19 @@
         "scoreContribution": -1,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "higashi-nihombashi",
+          "bakuro-yokoyama"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 2 matched Toei stations report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1241,13 +1345,14 @@
         "scoreContribution": -1,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1262,8 +1367,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "akasaka-mitsuke": {
@@ -1285,13 +1390,14 @@
         "scoreContribution": -1,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1306,8 +1412,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "roppongi": {
@@ -1328,13 +1434,18 @@
         "scoreContribution": -2,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "roppongi"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1375,13 +1486,18 @@
         "scoreContribution": -4,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "aoyama-itchome"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1419,13 +1535,14 @@
         "scoreContribution": -1,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1440,8 +1557,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "iidabashi": {
@@ -1462,13 +1579,18 @@
         "scoreContribution": -2,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "iidabashi"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1507,13 +1629,18 @@
         "scoreContribution": -4,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
-        "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
-        "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+      "stepFreeSignal": {
+        "status": "success",
+        "matchedStations": [
+          "kasuga"
+        ],
+        "hasStepFreeRoute": true,
+        "elevatorSignal": "known",
+        "scoreContribution": 3,
+        "sourceIds": [
+          "toei-barrier-free"
+        ],
+        "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1549,13 +1676,14 @@
         "scoreContribution": -2,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1570,8 +1698,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "ariake-odaiba": {
@@ -1585,13 +1713,14 @@
         "scoreContribution": null,
         "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)"
       },
-      "accessibilitySignal": {
+      "stepFreeSignal": {
         "status": "skipped",
-        "rawFacilityCount": null,
-        "elevatorOrStepFreeSignal": null,
-        "operatorSources": [],
+        "matchedStations": [],
+        "hasStepFreeRoute": null,
+        "elevatorSignal": "unknown",
         "scoreContribution": null,
-        "message": "Accessibility CSV parsing skipped in this pass; conservative source status only."
+        "sourceIds": [],
+        "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
       "safetySignal": {
         "status": "skipped",

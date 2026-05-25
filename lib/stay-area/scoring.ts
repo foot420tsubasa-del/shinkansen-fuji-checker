@@ -140,6 +140,19 @@ function transferHubContribution(level: StayAreaBase["transferHubLevel"]): numbe
 
 // ----- Per-sub-score delta wiring -----------------------------------------
 
+/**
+ * Step-free / elevator route contribution. Positive-only by design — we
+ * only credit when a public source confidently confirms a step-free route;
+ * unknown / missing is never punished.
+ */
+function stepFreeContribution(signal: StayAreaSignal | undefined): number {
+  const sf = signal?.stepFreeSignal;
+  if (!sf || sf.status === "failed" || sf.status === "skipped") return 0;
+  if (sf.elevatorSignal === "known" && sf.hasStepFreeRoute === true) return 3;
+  if (sf.elevatorSignal === "partial") return 1;
+  return 0;
+}
+
 function deriveUsabilityContribution(
   area: StayAreaBase,
   signal: StayAreaSignal | undefined,
@@ -148,6 +161,7 @@ function deriveUsabilityContribution(
   const exit = exitContribution(area.exitComplexityLevel);
   const lineOp = lineOperatorContribution(area);
   const hub = transferHubContribution(area.transferHubLevel);
+  const stepFree = stepFreeContribution(signal);
 
   // Per-sub-score aggregates, each clamped to +/- SUB_SCORE_DELTA_CAP.
   const crowdStressDelta = clamp(passenger + hub, -SUB_SCORE_DELTA_CAP, SUB_SCORE_DELTA_CAP);
@@ -156,8 +170,9 @@ function deriveUsabilityContribution(
     -SUB_SCORE_DELTA_CAP,
     SUB_SCORE_DELTA_CAP,
   );
+  // Light influence from exit complexity + the (positive-only) step-free signal.
   const luggageFriendlyDelta = clamp(
-    0.5 * exit,
+    0.5 * exit + stepFree,
     -SUB_SCORE_DELTA_CAP,
     SUB_SCORE_DELTA_CAP,
   );
@@ -193,11 +208,11 @@ function deriveMatchLabel(signal: StayAreaSignal | undefined): StayAreaMatchLabe
   const passengerOk =
     signal.passengerSignal?.status === "success" ||
     signal.passengerSignal?.status === "partial";
-  const accessibilityOk =
-    signal.accessibilitySignal?.status === "success" ||
-    signal.accessibilitySignal?.status === "partial";
-  if (passengerOk && accessibilityOk) return "public-data-matched";
-  if (passengerOk || accessibilityOk) return "partial-public-data";
+  const stepFreeOk =
+    signal.stepFreeSignal?.status === "success" ||
+    signal.stepFreeSignal?.status === "partial";
+  if (passengerOk && stepFreeOk) return "public-data-matched";
+  if (passengerOk || stepFreeOk) return "partial-public-data";
   return "editorial-fallback";
 }
 
@@ -205,7 +220,7 @@ function deriveSourceCoverage(signal: StayAreaSignal | undefined): number {
   if (!signal) return 0;
   const ok = [
     signal.passengerSignal,
-    signal.accessibilitySignal,
+    signal.stepFreeSignal,
     signal.safetySignal,
     signal.floodNoteSignal,
     signal.lodgingDensitySignal,

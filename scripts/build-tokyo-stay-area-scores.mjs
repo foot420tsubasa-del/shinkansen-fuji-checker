@@ -97,11 +97,20 @@ function transferHubContribution(level) {
   }
 }
 
+function stepFreeContribution(signal) {
+  const sf = signal?.stepFreeSignal;
+  if (!sf || sf.status === "failed" || sf.status === "skipped") return 0;
+  if (sf.elevatorSignal === "known" && sf.hasStepFreeRoute === true) return 3;
+  if (sf.elevatorSignal === "partial") return 1;
+  return 0;
+}
+
 function deriveUsabilityContribution(area, signal) {
   const passenger = passengerContribution(signal?.passengerSignal?.crowdPercentile ?? null);
   const exit = exitContribution(area.exitComplexityLevel);
   const lineOp = lineOperatorContribution(area);
   const hub = transferHubContribution(area.transferHubLevel);
+  const stepFree = stepFreeContribution(signal);
 
   return {
     passengerCrowd: passenger,
@@ -111,7 +120,7 @@ function deriveUsabilityContribution(area, signal) {
     rawTotal: passenger + exit + lineOp + hub,
     crowdStressDelta: clamp(passenger + hub, -SUB_SCORE_DELTA_CAP, SUB_SCORE_DELTA_CAP),
     stationSimplicityDelta: clamp(exit + lineOp + hub + 0.5 * passenger, -SUB_SCORE_DELTA_CAP, SUB_SCORE_DELTA_CAP),
-    luggageFriendlyDelta: clamp(0.5 * exit, -SUB_SCORE_DELTA_CAP, SUB_SCORE_DELTA_CAP),
+    luggageFriendlyDelta: clamp(0.5 * exit + stepFree, -SUB_SCORE_DELTA_CAP, SUB_SCORE_DELTA_CAP),
   };
 }
 
@@ -128,7 +137,7 @@ function deriveSourceCoverage(signal) {
   if (!signal) return 0;
   const xs = [
     signal.passengerSignal,
-    signal.accessibilitySignal,
+    signal.stepFreeSignal,
     signal.safetySignal,
     signal.floodNoteSignal,
     signal.lodgingDensitySignal,
@@ -145,8 +154,8 @@ function applyConfidenceFromCoverage(scores, coverage) {
 function deriveMatchLabel(signal) {
   if (!signal) return "editorial-fallback";
   const ok = (s) => s?.status === "success" || s?.status === "partial";
-  if (ok(signal.passengerSignal) && ok(signal.accessibilitySignal)) return "public-data-matched";
-  if (ok(signal.passengerSignal) || ok(signal.accessibilitySignal)) return "partial-public-data";
+  if (ok(signal.passengerSignal) && ok(signal.stepFreeSignal)) return "public-data-matched";
+  if (ok(signal.passengerSignal) || ok(signal.stepFreeSignal)) return "partial-public-data";
   return "editorial-fallback";
 }
 

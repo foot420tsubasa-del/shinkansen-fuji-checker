@@ -56,6 +56,13 @@ const TOEI_CSV_URLS = {
   shinjuku: "https://www.opendata.metro.tokyo.lg.jp/kotsu/subway_passengers_shinjyuku.csv",
   oedo: "https://www.opendata.metro.tokyo.lg.jp/kotsu/subway_passengers_oedo.csv",
 };
+// Toei barrier-free per-station CSVs (stable per CKAN catalog t000018d0000000028).
+const TOEI_BARRIER_FREE_CSV_URLS = {
+  asakusa: "https://www.opendata.metro.tokyo.lg.jp/kotsu/subway_barrierfree_asakusa.csv",
+  mita: "https://www.opendata.metro.tokyo.lg.jp/kotsu/subway_barrierfree_mita.csv",
+  shinjuku: "https://www.opendata.metro.tokyo.lg.jp/kotsu/subway_barrierfree_shinjyuku.csv",
+  oedo: "https://www.opendata.metro.tokyo.lg.jp/kotsu/subway_barrierfree_oedo.csv",
+};
 const TOEI_LANDING = "https://www.kotsu.metro.tokyo.jp/subway/kanren/passengers.html";
 
 const TOKYO_METRO_PASSENGER_URL =
@@ -412,6 +419,91 @@ async function fetchTokyoMetro() {
   }
 }
 
+// ---------- Toei barrier-free (CSV via CKAN open-data) --------------------
+
+async function fetchToeiBarrierFreeLineCsv(slug, url) {
+  const { ok, status, buf } = await fetchBuffer(url);
+  if (!ok) throw new Error(`Toei barrier-free ${slug} HTTP ${status}`);
+  const text = new TextDecoder("shift_jis").decode(buf);
+  const lines = text.split(/\r?\n/).filter((l) => l.trim().length);
+  if (lines.length < 2) throw new Error(`Toei barrier-free ${slug} returned empty CSV`);
+
+  // Schema (per row): 駅名, エスカレーター(地上↔改札), エレベーター(地上↔改札),
+  //   エスカレーター(改札↔ホーム), エレベーター(改札↔ホーム),
+  //   バリアフリートイレ, ホーム形式, 1ルート確保（エレベーター等）, 駅タイプ, 連絡先
+  const records = [];
+  for (let i = 1; i < lines.length; i++) {
+    const cells = lines[i].split(",").map((c) => c.trim());
+    let station = cells[0];
+    if (!station || /^計\d+駅$/u.test(station) || station === "計") continue;
+    // Strip line-code prefix like "（A-01）", "（I-05）", "（S-12）", "（E-37）"
+    station = station.replace(/^[（(][A-Z]-?\d+[)）]/u, "").trim();
+    if (!station) continue;
+    const oneRouteSecured = (cells[7] || "").trim();
+    // "○" (with optional follow-up like "（※階段昇降機を含む）") counts as confirmed.
+    const hasRoute = oneRouteSecured.startsWith("○");
+    records.push({ rawStation: station, hasRoute });
+  }
+  return records;
+}
+
+async function fetchToeiBarrierFree() {
+  const fetchedAt = new Date().toISOString();
+  const lineSummary = {};
+  const stationStepFree = {};
+  let totalRecords = 0;
+  let firstError = null;
+
+  for (const [slug, url] of Object.entries(TOEI_BARRIER_FREE_CSV_URLS)) {
+    try {
+      const recs = await fetchToeiBarrierFreeLineCsv(slug, url);
+      lineSummary[slug] = recs.length;
+      totalRecords += recs.length;
+      for (const r of recs) {
+        const key = normalizeStationName(r.rawStation);
+        if (!key) continue;
+        const prior = stationStepFree[key] || { hasRoute: false, sources: new Set() };
+        prior.hasRoute = prior.hasRoute || r.hasRoute;
+        prior.sources.add(slug);
+        stationStepFree[key] = prior;
+      }
+    } catch (err) {
+      if (!firstError) firstError = err;
+      lineSummary[slug] = `error: ${err?.message || String(err)}`;
+    }
+  }
+
+  // Serializable shape.
+  const stations = {};
+  for (const [k, v] of Object.entries(stationStepFree)) {
+    stations[k] = { hasRoute: v.hasRoute, sources: Array.from(v.sources) };
+  }
+
+  if (totalRecords === 0) {
+    return {
+      sourceId: "toei-barrier-free",
+      label: "Toei Subway accessibility / barrier-free CSV",
+      status: "failed",
+      fetchedAt,
+      records: 0,
+      message: firstError
+        ? `Toei barrier-free CSV fetch error: ${firstError.message}`
+        : "Toei barrier-free CSV fetch returned 0 records.",
+      stationStepFree: {},
+    };
+  }
+  return {
+    sourceId: "toei-barrier-free",
+    label: "Toei Subway accessibility / barrier-free CSV",
+    status: "success",
+    fetchedAt,
+    sourcePeriod: "Tokyo Open Data (CKAN t000018d0000000028, refreshed irregularly)",
+    records: totalRecords,
+    message: `Parsed ${totalRecords} station rows from Toei barrier-free CKAN CSVs: ${JSON.stringify(lineSummary)}.`,
+    stationStepFree: stations,
+  };
+}
+
 // ---------- Optional / registered-only sources -----------------------------
 
 function skippedSource(sourceId, label, message) {
@@ -451,18 +543,19 @@ async function main() {
   console.log(`[stay-area:update-signals] Loading ${areasBase.length} editorial areas.`);
   console.log(`[stay-area:update-signals] Toei landing reference: ${TOEI_LANDING}`);
 
-  const [toei, tokyoMetro] = await Promise.all([fetchToei(), fetchTokyoMetro()]);
+  const [toei, tokyoMetro, toeiBarrierFree] = await Promise.all([
+    fetchToei(),
+    fetchTokyoMetro(),
+    fetchToeiBarrierFree(),
+  ]);
 
-  // Accessibility & optional sources stay skipped this pass.
-  const toeiBarrierFree = skippedSource(
-    "toei-barrier-free",
-    "Toei Subway accessibility / barrier-free CSV",
-    "CSV catalog discovery not stable from a script in this pass.",
-  );
+  // Tokyo Metro barrier-free page is JS-rendered (~263 B from a script
+  // request). Skip cleanly with a clear note; revisit if a stable API
+  // endpoint is published.
   const tokyoMetroBarrierFree = skippedSource(
     "tokyo-metro-barrier-free",
     "Tokyo Metro accessibility / barrier-free pages",
-    "Conservative source status only — per-station details not parsed in this pass.",
+    "Page is client-rendered from a script request; per-station detail pages not parsed in this pass.",
   );
   const odpt = odptSource();
   const policeCrime = skippedSource(
@@ -536,6 +629,66 @@ async function main() {
     return Number((idx / passengerValues.length).toFixed(2));
   }
 
+  // ----- bucket Toei barrier-free coverage per area -------------------------
+  const areaStepFree = new Map();
+  for (const area of areasBase) {
+    const keys = areaCanonicalKeys(area.stationNames);
+    const matched = [];
+    let routeYes = 0;
+    for (const k of keys) {
+      const v = toeiBarrierFree.stationStepFree?.[k];
+      if (!v) continue;
+      matched.push(k);
+      if (v.hasRoute) routeYes += 1;
+    }
+    if (matched.length === 0) {
+      areaStepFree.set(area.id, {
+        status: toeiBarrierFree.status === "failed" ? "failed" : "skipped",
+        matchedStations: [],
+        hasStepFreeRoute: null,
+        elevatorSignal: "unknown",
+        scoreContribution: null,
+        sourceIds: [],
+        message:
+          toeiBarrierFree.status === "failed"
+            ? "Toei barrier-free fetch failed; no per-area data this run."
+            : "No matching Toei stations for this area (other operators not parsed yet).",
+      });
+      continue;
+    }
+    if (routeYes === matched.length) {
+      areaStepFree.set(area.id, {
+        status: "success",
+        matchedStations: matched,
+        hasStepFreeRoute: true,
+        elevatorSignal: "known",
+        scoreContribution: 3,
+        sourceIds: ["toei-barrier-free"],
+        message: `All ${matched.length} matched Toei station${matched.length === 1 ? "" : "s"} report a confirmed step-free route (1ルート確保).`,
+      });
+    } else if (routeYes > 0) {
+      areaStepFree.set(area.id, {
+        status: "partial",
+        matchedStations: matched,
+        hasStepFreeRoute: true,
+        elevatorSignal: "partial",
+        scoreContribution: 1,
+        sourceIds: ["toei-barrier-free"],
+        message: `${routeYes} of ${matched.length} matched Toei stations report a step-free route.`,
+      });
+    } else {
+      areaStepFree.set(area.id, {
+        status: "partial",
+        matchedStations: matched,
+        hasStepFreeRoute: false,
+        elevatorSignal: "partial",
+        scoreContribution: 0,
+        sourceIds: ["toei-barrier-free"],
+        message: `Matched ${matched.length} Toei station${matched.length === 1 ? "" : "s"}, none with a confirmed step-free route.`,
+      });
+    }
+  }
+
   // ----- per-area signal records -------------------------------------------
   const tokyoMetroOk = tokyoMetro.status === "success" || tokyoMetro.status === "partial";
   const toeiOk = toei.status === "success" || toei.status === "partial";
@@ -576,21 +729,23 @@ async function main() {
     const floodNoteSignal = previousArea?.floodNoteSignal ?? { status: "skipped", message: "Optional source not fetched in this pass." };
     const lodgingDensitySignal = previousArea?.lodgingDensitySignal ?? { status: "skipped", message: "Optional source not fetched in this pass." };
 
-    const accessibilitySignal = {
+    const stepFreeSignal = areaStepFree.get(area.id) ?? {
       status: "skipped",
-      rawFacilityCount: null,
-      elevatorOrStepFreeSignal: null,
-      operatorSources: [],
+      matchedStations: [],
+      hasStepFreeRoute: null,
+      elevatorSignal: "unknown",
       scoreContribution: null,
-      message: "Accessibility CSV parsing skipped in this pass; conservative source status only.",
+      sourceIds: [],
+      message: "No step-free data computed for this area.",
     };
+    const stepFreeOk = stepFreeSignal.status === "success" || stepFreeSignal.status === "partial";
 
     let sourceFreshness;
-    if (bothPassengerOk && hasMatch) {
+    if (bothPassengerOk && hasMatch && stepFreeOk) {
       sourceFreshness = { level: "public-data-local", label: "Public sources checked locally" };
     } else if (anyPassengerOk && hasMatch) {
       sourceFreshness = { level: "partial-public-data", label: "Public data: partially matched" };
-    } else if (anyPassengerOk) {
+    } else if (anyPassengerOk || stepFreeOk) {
       sourceFreshness = { level: "partial-public-data", label: "Public data: partially matched" };
     } else {
       sourceFreshness = { level: "fallback", label: "Editorial fallback (public sources unavailable)" };
@@ -607,7 +762,7 @@ async function main() {
         scoreContribution,
         sourcePeriod: toei.sourcePeriod || tokyoMetro.sourcePeriod || undefined,
       },
-      accessibilitySignal,
+      stepFreeSignal,
       safetySignal,
       floodNoteSignal,
       lodgingDensitySignal,
@@ -620,6 +775,7 @@ async function main() {
   const publicSources = sources.map((src) => {
     const copy = { ...src };
     delete copy.stationCounts;
+    delete copy.stationStepFree;
     return copy;
   });
 
@@ -638,10 +794,16 @@ async function main() {
   const summary = sources.map((s) => `  ${s.sourceId.padEnd(28)} ${s.status.padEnd(8)} ${s.records ? `(${s.records} records)` : ""}`);
   console.log("[stay-area:update-signals] Source summary:");
   console.log(summary.join("\n"));
+  const stepFreeMatched = Array.from(areaStepFree.values()).filter(
+    (v) => v.status === "success" || v.status === "partial",
+  ).length;
   console.log(
     `[stay-area:update-signals] Areas matched with passenger data: ${
       Array.from(areaPassenger.values()).filter((v) => v.value != null).length
     } / ${areasBase.length}`,
+  );
+  console.log(
+    `[stay-area:update-signals] Areas matched with step-free data: ${stepFreeMatched} / ${areasBase.length}`,
   );
   console.log(`[stay-area:update-signals] Wrote signals + source-status JSON at ${generatedAt}.`);
 }

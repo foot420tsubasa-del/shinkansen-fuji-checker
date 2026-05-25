@@ -147,8 +147,8 @@ const sourceStatusFile = sourceStatusJson as SourceStatusFile;
 
 const FRESHNESS_HEADLINE = "Passenger-data-informed local refresh";
 const FRESHNESS_SUBLINE =
-  "Passenger volume and editorial station-usability signals refresh when public sources update.";
-const FRESHNESS_TAIL = "Step-free, lodging-density, and context sources are not yet live.";
+  "Passenger volume and Toei step-free / elevator data refresh when public sources update.";
+const FRESHNESS_TAIL = "Tokyo Metro accessibility and lodging-density sources are not yet live.";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -240,10 +240,26 @@ function complexityChipTone(level: ExitComplexityLevel): ChipTone {
   if (level === "Moderate") return "soft";
   return "calm";
 }
-function stepFreeChipTone(c: StepFreeConfidence): ChipTone {
-  if (c === "Known") return "calm";
-  if (c === "Partial") return "warn";
-  return "soft";
+/**
+ * Display the step-free signal as a row chip / detail row.
+ * Reads the live signal when available; falls back to editorial
+ * stepFreeConfidence. Missing data is shown as "Not live yet" (not
+ * "Unknown") so travellers don't misread it as a problem with the area.
+ */
+function stepFreeDisplay(
+  signal: StayAreaSignalsFile["areas"][string] | undefined,
+  fallback: StepFreeConfidence,
+): { label: "Known" | "Partial" | "Not live yet"; tone: ChipTone } {
+  const sf = signal?.stepFreeSignal;
+  if (sf?.status === "success" && sf.elevatorSignal === "known") {
+    return { label: "Known", tone: "calm" };
+  }
+  if (sf?.status === "partial" || sf?.elevatorSignal === "partial") {
+    return { label: "Partial", tone: "warn" };
+  }
+  if (fallback === "Known") return { label: "Known", tone: "calm" };
+  if (fallback === "Partial") return { label: "Partial", tone: "warn" };
+  return { label: "Not live yet", tone: "soft" };
 }
 function lodgingChipTone(level: LodgingDensityLevel): ChipTone {
   if (level === "Very High" || level === "High") return "calm";
@@ -362,15 +378,17 @@ function StationUsabilityPanel({
           value={area.transferHubLevel}
           hint={`Contribution: ${contribution.transferHub >= 0 ? "+" : ""}${contribution.transferHub}`}
         />
-        <StationUsabilityRow
-          label="Step-free / elevator route"
-          value={area.stepFreeConfidence}
-          hint={
-            area.stepFreeConfidence === "Unknown"
-              ? "Accessibility source not live yet — not penalised."
-              : "Editorial confidence label."
+        {(() => {
+          const sf = signal?.stepFreeSignal;
+          const display = stepFreeDisplay(signal, area.stepFreeConfidence);
+          let hint = "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal.";
+          if (sf?.status === "success" || sf?.status === "partial") {
+            hint = `${sf.message ?? ""} Sources: ${sf.sourceIds.join(", ") || "—"}.`;
+          } else if (area.stepFreeConfidence !== "Unknown") {
+            hint = "Editorial confidence label (no live source matched this area).";
           }
-        />
+          return <StationUsabilityRow label="Step-free / elevator route" value={display.label} hint={hint} />;
+        })()}
         <StationUsabilityRow
           label="Hotel choice density"
           value={area.lodgingDensityLevel}
@@ -479,12 +497,12 @@ function AreaRankRow({
                 value={area.exitComplexityLevel}
                 tone={complexityChipTone(area.exitComplexityLevel)}
               />
-              <Chip
-                label="Luggage route"
-                value={area.stepFreeConfidence}
-                tone={stepFreeChipTone(area.stepFreeConfidence)}
-                hideOnMobile
-              />
+              {(() => {
+                const sf = stepFreeDisplay(signal, area.stepFreeConfidence);
+                return (
+                  <Chip label="Luggage route" value={sf.label} tone={sf.tone} hideOnMobile />
+                );
+              })()}
               <Chip
                 label="Hotel choice"
                 value={area.lodgingDensityLevel}
@@ -568,7 +586,10 @@ function SignalTile({ icon: Icon, title, status, statusTone, body }: SignalTileP
   );
 }
 
-function deriveCoreSignals(sources: SignalsSourceEntry[]) {
+function deriveCoreSignals(
+  sources: SignalsSourceEntry[],
+  signals: StayAreaSignalsFile,
+) {
   const get = (id: string) => sources.find((s) => s.sourceId === id);
   const tokyoMetroPax = get("tokyo-metro-passengers");
   const toeiPax = get("toei-passengers");
@@ -583,17 +604,30 @@ function deriveCoreSignals(sources: SignalsSourceEntry[]) {
         ? { label: "Partial", tone: "warn" as ChipTone }
         : { label: "Skipped", tone: "soft" as ChipTone };
 
-  const stepFree =
-    tmBarrier?.status === "success" || toeiBarrier?.status === "success"
-      ? { label: "Partial", tone: "warn" as ChipTone }
-      : { label: "Next", tone: "soft" as ChipTone };
+  // Step-free status reflects both the upstream sources AND how many areas
+  // actually have stepFreeSignal coverage. If at least one operator source
+  // succeeded and any areas matched → success / partial; otherwise next.
+  const stepFreeAreas = Object.values(signals.areas).filter(
+    (a) => a.stepFreeSignal?.status === "success" || a.stepFreeSignal?.status === "partial",
+  ).length;
+  const anyBarrierSourceOk =
+    tmBarrier?.status === "success" || toeiBarrier?.status === "success";
+  const bothBarrierSourcesOk =
+    tmBarrier?.status === "success" && toeiBarrier?.status === "success";
+  const stepFree = !anyBarrierSourceOk
+    ? { label: "Not live yet", tone: "soft" as ChipTone }
+    : bothBarrierSourcesOk && stepFreeAreas > 0
+      ? { label: "Success", tone: "calm" as ChipTone }
+      : stepFreeAreas > 0
+        ? { label: "Partial", tone: "warn" as ChipTone }
+        : { label: "Not live yet", tone: "soft" as ChipTone };
 
   const lodgingStatus =
     lodging?.status === "success"
       ? { label: "Active", tone: "calm" as ChipTone }
       : { label: "Next", tone: "soft" as ChipTone };
 
-  return { passengerStatus, stepFree, lodgingStatus, tokyoMetroPax, toeiPax };
+  return { passengerStatus, stepFree, stepFreeAreas, lodgingStatus, tokyoMetroPax, toeiPax };
 }
 
 export default async function TokyoStayAreaIndexPage({ params, searchParams }: Props) {
@@ -614,7 +648,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
   const generatedScoreCount = scoresFile.areas.length;
   const lastChecked = formatLastChecked(sourceStatusFile.generatedAt);
 
-  const core = deriveCoreSignals(sourceStatusFile.sources);
+  const core = deriveCoreSignals(sourceStatusFile.sources, signalsFile);
   const passengerSummary =
     core.tokyoMetroPax?.status === "success" && core.toeiPax?.status === "success"
       ? `Tokyo Metro ${core.tokyoMetroPax.records ?? "?"} + Toei ${core.toeiPax.records ?? "?"} records`
@@ -736,7 +770,11 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               title="Step-free / elevator route"
               status={core.stepFree.label}
               statusTone={core.stepFree.tone}
-              body="Accessibility CSV parsing not live yet. Areas remain Unknown — they are not penalised on this signal."
+              body={
+                core.stepFreeAreas > 0
+                  ? `Toei barrier-free CSVs parsed — ${core.stepFreeAreas} of ${generatedScoreCount} areas have a confirmed step-free route. Missing data is not penalised. Tokyo Metro per-station detail pages are not yet parsed.`
+                  : "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal."
+              }
             />
             <SignalTile
               icon={Signpost}
@@ -831,9 +869,10 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
                 and 10% live status. Each per-sub-score adjustment is capped at ±10.
               </p>
               <p>
-                Step-free route confidence is shown but is not yet penalised — accessibility data is not live.
-                Hotel choice density is editorial and does not evaluate individual hotels. Scores are not official
-                ratings and do not rank safety, hotel quality, price, or availability.
+                Step-free route confidence is read from Toei&apos;s public barrier-free CSVs where matched, and adds a
+                small positive nudge to luggage-friendliness. Missing step-free data is never punished. Hotel choice
+                density is editorial and does not evaluate individual hotels. Scores are not official ratings and
+                do not rank safety, hotel quality, price, or availability.
               </p>
             </div>
             <div className="mt-4 grid gap-2 sm:grid-cols-2">
