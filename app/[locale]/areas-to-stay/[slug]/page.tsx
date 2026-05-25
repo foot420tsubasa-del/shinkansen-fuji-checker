@@ -479,7 +479,7 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
       nearbyBases:
         "Nishi-Shinjuku / Yoyogi, Nippori / Okachimachi, Kuramae / Tawaramachi, Hatchobori / Nihombashi, Akasaka, Suitengumae, Hamamatsucho, or Shinagawa.",
       matrixNote: "Use the hotel base matrix below before opening booking sites.",
-      matrixCta: "Open hotel base matrix",
+      matrixCta: "Compare Tokyo station areas",
     },
     earlyDecision: {
       title: "Before you book a Tokyo hotel",
@@ -1332,6 +1332,15 @@ tokyoFirstTimeSupplementCopyByLocale.ru.quickAnswerOverride = {
   matrixCta: "Открыть матрицу отелей",
 };
 
+tokyoFirstTimeSupplementCopyByLocale["pt-BR"].quickAnswerOverride.matrixCta = "Comparar areas de estacao em Toquio";
+tokyoFirstTimeSupplementCopyByLocale.es.quickAnswerOverride.matrixCta = "Comparar zonas de estacion en Tokio";
+tokyoFirstTimeSupplementCopyByLocale.ko.quickAnswerOverride.matrixCta = "도쿄 역 주변 지역 비교";
+tokyoFirstTimeSupplementCopyByLocale["zh-TW"].quickAnswerOverride.matrixCta = "比較東京車站區域";
+tokyoFirstTimeSupplementCopyByLocale["zh-CN"].quickAnswerOverride.matrixCta = "比较东京车站区域";
+tokyoFirstTimeSupplementCopyByLocale.fr.quickAnswerOverride.matrixCta = "Comparer les zones de gare a Tokyo";
+tokyoFirstTimeSupplementCopyByLocale.de.quickAnswerOverride.matrixCta = "Tokio-Stationsgebiete vergleichen";
+tokyoFirstTimeSupplementCopyByLocale.ru.quickAnswerOverride.matrixCta = "Сравнить районы станций Токио";
+
 tokyoFirstTimeSupplementCopyByLocale["pt-BR"].earlyDecision = {
   title: "Antes de reservar um hotel em Toquio",
   body: "Comece pelo movimento da viagem; depois compare nomes de hoteis.",
@@ -1697,7 +1706,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               <p className="font-semibold text-slate-900">{supplement.quickAnswerOverride.nearbyBases}</p>
               <p>{supplement.quickAnswerOverride.matrixNote}</p>
               <TrackedInternalLink
-                href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
+                href="/areas-to-stay/tokyo-stay-area-index"
                 sourcePage={pagePath}
                 placement="tokyo_first_time_quick_answer_matrix_jump"
                 label={supplement.quickAnswerOverride.matrixCta}

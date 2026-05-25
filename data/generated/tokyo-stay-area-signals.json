@@ -1,0 +1,103 @@
+{
+  "generatedAt": "2026-05-25T00:00:00.000Z",
+  "mode": "local-seed",
+  "sources": [
+    {
+      "sourceId": "manual-seed",
+      "label": "Manual editorial seed",
+      "status": "success",
+      "fetchedAt": "2026-05-25T00:00:00.000Z",
+      "message": "Local seed data for MVP. External public-data fetch is not enabled yet."
+    }
+  ],
+  "areas": {
+    "oshiage": {
+      "passengerSignal": null,
+      "accessibilitySignal": null,
+      "safetySignal": null,
+      "floodNoteSignal": null,
+      "lodgingDensitySignal": null,
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    "kuramae": {
+      "passengerSignal": null,
+      "accessibilitySignal": null,
+      "safetySignal": null,
+      "floodNoteSignal": null,
+      "lodgingDensitySignal": null,
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    "ueno": {
+      "passengerSignal": null,
+      "accessibilitySignal": null,
+      "safetySignal": null,
+      "floodNoteSignal": null,
+      "lodgingDensitySignal": null,
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    "ryogoku": {
+      "passengerSignal": null,
+      "accessibilitySignal": null,
+      "safetySignal": null,
+      "floodNoteSignal": null,
+      "lodgingDensitySignal": null,
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    "asakusa": {
+      "passengerSignal": null,
+      "accessibilitySignal": null,
+      "safetySignal": null,
+      "floodNoteSignal": null,
+      "lodgingDensitySignal": null,
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    "tokyo-station": {
+      "passengerSignal": null,
+      "accessibilitySignal": null,
+      "safetySignal": null,
+      "floodNoteSignal": null,
+      "lodgingDensitySignal": null,
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    "shinjuku": {
+      "passengerSignal": null,
+      "accessibilitySignal": null,
+      "safetySignal": null,
+      "floodNoteSignal": null,
+      "lodgingDensitySignal": null,
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    "ginza-nihombashi": {
+      "passengerSignal": null,
+      "accessibilitySignal": null,
+      "safetySignal": null,
+      "floodNoteSignal": null,
+      "lodgingDensitySignal": null,
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    }
+  }
+}

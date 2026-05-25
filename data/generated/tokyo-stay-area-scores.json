@@ -1,0 +1,182 @@
+{
+  "generatedAt": "2026-05-25T00:00:00.000Z",
+  "mode": "local-seed",
+  "areas": [
+    {
+      "id": "oshiage",
+      "overallScore": 85,
+      "scores": {
+        "stationSimplicity": 88,
+        "luggageFriendly": 90,
+        "airportAccess": 92,
+        "shinkansenAccess": 72,
+        "touristAccess": 80,
+        "localFeel": 78,
+        "crowdStress": 86,
+        "confidence": 82
+      },
+      "confidence": {
+        "score": 82,
+        "label": "Medium-high"
+      },
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    {
+      "id": "kuramae",
+      "overallScore": 81,
+      "scores": {
+        "stationSimplicity": 85,
+        "luggageFriendly": 82,
+        "airportAccess": 78,
+        "shinkansenAccess": 70,
+        "touristAccess": 78,
+        "localFeel": 88,
+        "crowdStress": 84,
+        "confidence": 78
+      },
+      "confidence": {
+        "score": 78,
+        "label": "Medium-high"
+      },
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    {
+      "id": "ueno",
+      "overallScore": 79,
+      "scores": {
+        "stationSimplicity": 70,
+        "luggageFriendly": 80,
+        "airportAccess": 86,
+        "shinkansenAccess": 82,
+        "touristAccess": 84,
+        "localFeel": 75,
+        "crowdStress": 62,
+        "confidence": 84
+      },
+      "confidence": {
+        "score": 84,
+        "label": "Medium-high"
+      },
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    {
+      "id": "ryogoku",
+      "overallScore": 76,
+      "scores": {
+        "stationSimplicity": 80,
+        "luggageFriendly": 78,
+        "airportAccess": 70,
+        "shinkansenAccess": 72,
+        "touristAccess": 76,
+        "localFeel": 82,
+        "crowdStress": 78,
+        "confidence": 76
+      },
+      "confidence": {
+        "score": 76,
+        "label": "Medium-high"
+      },
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    {
+      "id": "asakusa",
+      "overallScore": 74,
+      "scores": {
+        "stationSimplicity": 68,
+        "luggageFriendly": 76,
+        "airportAccess": 74,
+        "shinkansenAccess": 68,
+        "touristAccess": 86,
+        "localFeel": 84,
+        "crowdStress": 55,
+        "confidence": 80
+      },
+      "confidence": {
+        "score": 80,
+        "label": "Medium-high"
+      },
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    {
+      "id": "ginza-nihombashi",
+      "overallScore": 72,
+      "scores": {
+        "stationSimplicity": 66,
+        "luggageFriendly": 72,
+        "airportAccess": 70,
+        "shinkansenAccess": 86,
+        "touristAccess": 82,
+        "localFeel": 68,
+        "crowdStress": 58,
+        "confidence": 80
+      },
+      "confidence": {
+        "score": 80,
+        "label": "Medium-high"
+      },
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    {
+      "id": "tokyo-station",
+      "overallScore": 60,
+      "scores": {
+        "stationSimplicity": 40,
+        "luggageFriendly": 50,
+        "airportAccess": 64,
+        "shinkansenAccess": 96,
+        "touristAccess": 78,
+        "localFeel": 55,
+        "crowdStress": 30,
+        "confidence": 88
+      },
+      "confidence": {
+        "score": 88,
+        "label": "High"
+      },
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    },
+    {
+      "id": "shinjuku",
+      "overallScore": 57,
+      "scores": {
+        "stationSimplicity": 38,
+        "luggageFriendly": 48,
+        "airportAccess": 62,
+        "shinkansenAccess": 62,
+        "touristAccess": 88,
+        "localFeel": 62,
+        "crowdStress": 28,
+        "confidence": 86
+      },
+      "confidence": {
+        "score": 86,
+        "label": "High"
+      },
+      "sourceFreshness": {
+        "level": "seed",
+        "label": "Local seed"
+      }
+    }
+  ]
+}

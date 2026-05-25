@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import fs from "node:fs";
 import path from "node:path";
-import { ArrowRight, Bed, Building2, Landmark, Mountain, Plane, Train, Utensils, Wifi } from "lucide-react";
+import { ArrowRight, BarChart3, Bed, Building2, Landmark, Mountain, Plane, Train, Utensils, Wifi } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { buttonClassName } from "@/components/ui/Button";
 import { SiteHeader } from "../components/SiteHeader";
@@ -376,6 +376,29 @@ export default async function AreasToStayIndex({ params }: Props) {
           <h2 className="text-lg font-semibold text-slate-950">{t("preBooking.title")}</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">{t("preBooking.body")}</p>
         </section>
+
+        <TrackedInternalLink
+          href="/areas-to-stay/tokyo-stay-area-index"
+          sourcePage={pagePath}
+          placement="stay_hub_tokyo_area_index"
+          label="Tokyo Stay Area Index"
+          locale={locale}
+          className="mt-5 flex items-start gap-4 rounded-[22px] border border-orange-100 bg-orange-50/70 p-5 text-left shadow-sm transition-colors hover:border-orange-200 hover:bg-orange-50"
+        >
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white text-[#ff7a00] shadow-sm">
+            <BarChart3 className="h-5 w-5" aria-hidden="true" />
+          </span>
+          <span className="min-w-0 flex-1">
+            <span className="block text-lg font-semibold text-slate-950">Tokyo Stay Area Index</span>
+            <span className="mt-1.5 block text-sm leading-6 text-slate-700">
+              Compare station areas like Oshiage, Kuramae, Ueno, Asakusa, Shinjuku, and Tokyo Station before searching hotels.
+            </span>
+            <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[#c45500]">
+              Compare Tokyo station areas
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </span>
+          </span>
+        </TrackedInternalLink>
 
         <section id="choose-your-city" className="mt-10 scroll-mt-24">
           <div className="flex items-end justify-between gap-4">
