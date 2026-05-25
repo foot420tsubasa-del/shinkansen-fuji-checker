@@ -302,11 +302,7 @@ export default async function AreasToStayIndex({ params }: Props) {
     cta: t(`cityCards.${card.key}.cta`),
     placementLabel: t(`cityCards.${card.key}.placementLabel`),
   }));
-  const visibleProblemCardConfigs =
-    locale === "en"
-      ? problemCardConfigs
-      : problemCardConfigs.filter((item) => !["notBookedHotels", "luggage", "airportAccess"].includes(item.key));
-  const problemCards: ProblemCard[] = visibleProblemCardConfigs.map((item) => ({
+  const problemCards: ProblemCard[] = problemCardConfigs.map((item) => ({
     ...item,
     title: t(`problemCards.${item.key}.title`),
     cta: t(`problemCards.${item.key}.cta`),
@@ -377,12 +373,8 @@ export default async function AreasToStayIndex({ params }: Props) {
         </section>
 
         <section className="mt-6 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
-          <h2 className="text-lg font-semibold text-slate-950">Start here if you have not booked hotels yet</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
-            Use this page before opening hotel booking sites. First choose your city, then compare station areas, then
-            check hotel examples. In Japan, a good hotel base should make airport transfers, luggage days, Shinkansen
-            trips, and first nights easier. These guides are general starting points, not personalized hotel recommendations.
-          </p>
+          <h2 className="text-lg font-semibold text-slate-950">{t("preBooking.title")}</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">{t("preBooking.body")}</p>
         </section>
 
         <section id="choose-your-city" className="mt-10 scroll-mt-24">

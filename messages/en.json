@@ -1970,9 +1970,9 @@
             "Area guide"
           ]
         },
-      "where-to-stay-before-shinkansen": {
-        "title": "Where to stay before taking the Shinkansen in Tokyo",
-        "description": "Use this before booking your Tokyo hotel if Kyoto, Osaka, or an early Shinkansen is part of your route.",
+        "where-to-stay-before-shinkansen": {
+          "title": "Where to stay before taking the Shinkansen in Tokyo",
+          "description": "Use this before booking your Tokyo hotel if Kyoto, Osaka, or an early Shinkansen is part of your route.",
           "tags": [
             "Tokyo",
             "Shinkansen",
@@ -2062,6 +2062,10 @@
       "seat": "Seat Checker",
       "airport": "Airport Transfers",
       "esim": "Japan eSIM"
+    },
+    "preBooking": {
+      "title": "Start here if you have not booked hotels yet",
+      "body": "Use this page before opening hotel booking sites. First choose your city, then compare station areas, then check hotel examples. In Japan, a good hotel base should make airport transfers, luggage days, Shinkansen trips, and first nights easier. These guides are general starting points, not personalized hotel recommendations."
     }
   },
   "planYourTrip": {

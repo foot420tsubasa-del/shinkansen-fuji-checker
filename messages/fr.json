@@ -1937,6 +1937,18 @@
       "fujiOvernight": {
         "title": "Je veux une nuit avec vue Fuji",
         "cta": "Voir Kawaguchiko"
+      },
+      "notBookedHotels": {
+        "title": "Je n'ai pas encore réservé d'hôtel",
+        "cta": "Commencer par ville et quartier"
+      },
+      "luggage": {
+        "title": "J'arrive avec de gros bagages",
+        "cta": "Choisir une base facile avec bagages"
+      },
+      "airportAccess": {
+        "title": "Je veux un accès aéroport facile",
+        "cta": "Comparer les bases pratiques pour aéroport"
       }
     },
     "featuredGuides": {
@@ -2050,6 +2062,10 @@
       "seat": "Vérifier le siège",
       "airport": "Transferts aéroport",
       "esim": "eSIM Japon"
+    },
+    "preBooking": {
+      "title": "Commencez ici si vous n'avez pas encore réservé d'hôtel",
+      "body": "Utilisez cette page avant d'ouvrir les sites de réservation. Choisissez d'abord la ville, comparez les zones de gare, puis regardez des exemples d'hôtels. Au Japon, une bonne base hôtelière doit faciliter les transferts aéroport, les jours avec bagages, les trajets en Shinkansen et les premières nuits. Ces guides sont des points de départ généraux, pas des recommandations personnalisées d'hôtel."
     }
   },
   "planYourTrip": {
@@ -2078,7 +2094,9 @@
         "Choisissez la base hôtelière avant de remplir les activités.",
         "Préparez les essentiels d’arrivée avant d’atterrir."
       ],
-      "guideCta": "Lire le guide du siège côté Fuji"
+      "guideCta": "Lire le guide du siège côté Fuji",
+      "routeDecisionTitle": "Ne réservez pas vos hôtels avant ces décisions de trajet",
+      "routeDecisionBody": "Avant de choisir des noms d'hôtels, décidez votre aéroport d'arrivée, le quartier de la première nuit, le jour de Shinkansen, le plan bagages et si Kyoto, Osaka, Mt. Fuji ou Disney influencent votre base."
     },
     "rail": {
       "eyebrow": "Comparaison rail",

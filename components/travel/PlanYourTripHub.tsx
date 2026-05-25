@@ -309,15 +309,10 @@ export function PlanYourTripHub() {
           </Card>
         </section>
 
-        {locale === "en" ? (
-          <section className="mt-8 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
-            <h2 className="text-xl font-semibold text-slate-950">Do not book hotels before these route decisions</h2>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
-              Before choosing hotel names, decide your arrival airport, first-night area, Shinkansen day, luggage plan,
-              and whether Kyoto, Osaka, Mt. Fuji, or Disney affects your base.
-            </p>
-          </section>
-        ) : null}
+        <section className="mt-8 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
+          <h2 className="text-xl font-semibold text-slate-950">{t("bookingOrder.routeDecisionTitle")}</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">{t("bookingOrder.routeDecisionBody")}</p>
+        </section>
 
         <section className="mt-10">
           <div className="max-w-2xl">

@@ -1937,6 +1937,18 @@
       "fujiOvernight": {
         "title": "Quiero dormir con vista al Fuji",
         "cta": "Ver Kawaguchiko"
+      },
+      "notBookedHotels": {
+        "title": "Aún no he reservado hoteles",
+        "cta": "Empezar por ciudad y zona"
+      },
+      "luggage": {
+        "title": "Llego con equipaje grande",
+        "cta": "Elegir base fácil con equipaje"
+      },
+      "airportAccess": {
+        "title": "Quiero acceso fácil al aeropuerto",
+        "cta": "Comparar bases cómodas para aeropuerto"
       }
     },
     "featuredGuides": {
@@ -2050,6 +2062,10 @@
       "seat": "Comprobador de asiento",
       "airport": "Traslados de aeropuerto",
       "esim": "eSIM Japón"
+    },
+    "preBooking": {
+      "title": "Empieza aquí si aún no has reservado hoteles",
+      "body": "Usa esta página antes de abrir webs de reserva de hoteles. Primero elige la ciudad, luego compara zonas de estación y después mira ejemplos de hoteles. En Japón, una buena base de hotel debe facilitar traslados desde el aeropuerto, días con equipaje, viajes en Shinkansen y primeras noches. Estas guías son puntos de partida generales, no recomendaciones personalizadas de hotel."
     }
   },
   "planYourTrip": {
@@ -2078,7 +2094,9 @@
         "Elige la base de hotel antes de llenar actividades.",
         "Prepara los esenciales de llegada antes de aterrizar."
       ],
-      "guideCta": "Leer guía del asiento lado Fuji"
+      "guideCta": "Leer guía del asiento lado Fuji",
+      "routeDecisionTitle": "No reserves hoteles antes de estas decisiones de ruta",
+      "routeDecisionBody": "Antes de elegir nombres de hoteles, decide tu aeropuerto de llegada, zona de la primera noche, día de Shinkansen, plan de equipaje y si Kioto, Osaka, Mt. Fuji o Disney afectan tu base."
     },
     "rail": {
       "eyebrow": "Comparación de tren",

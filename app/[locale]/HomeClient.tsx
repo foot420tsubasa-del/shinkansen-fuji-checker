@@ -46,6 +46,158 @@ type PopularLink = {
   icon: typeof Train;
 };
 
+const homeHotelCopyByLocale: Record<
+  string,
+  {
+    title: string;
+    body: string;
+    links: Array<{ href: string; label: string }>;
+    imageNote: string;
+    matrixCta: string;
+    finalTitle: string;
+    finalBody: string;
+    checkSeatCta: string;
+    finalMatrixCta: string;
+  }
+> = {
+  en: {
+    title: "Choose where to stay before comparing hotels",
+    body:
+      "Start with your Tokyo base, not hotel names. The best area depends on airport access, luggage, Shinkansen days, station complexity, and whether you want busy nights or a calmer local base.",
+    links: [
+      { href: "/areas-to-stay/asakusa-vs-ueno", label: "Compare Asakusa vs Ueno" },
+      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Compare Tokyo Station vs Shinjuku" },
+      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose a Tokyo hotel area with luggage" },
+    ],
+    imageNote: "Compare famous stations, calmer nearby bases, and logistics-friendly hotel areas before you search hotels.",
+    matrixCta: "Find the best Tokyo area to stay",
+    finalTitle: "Still planning your Japan trip?",
+    finalBody: "Start with the Fuji-side seat, then choose a practical Tokyo hotel base before opening booking sites.",
+    checkSeatCta: "Check Fuji-side seat",
+    finalMatrixCta: "Compare Tokyo hotel areas",
+  },
+  "pt-BR": {
+    title: "Escolha onde ficar antes de comparar hotéis",
+    body: "Comece pela sua base em Tóquio, não pelos nomes dos hotéis. A melhor área depende de aeroporto, bagagem, dias de Shinkansen, estações grandes e noites agitadas ou mais calmas.",
+    links: [
+      { href: "/areas-to-stay/asakusa-vs-ueno", label: "Comparar Asakusa e Ueno" },
+      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Comparar Tokyo Station e Shinjuku" },
+      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Escolher área em Tóquio com bagagem" },
+    ],
+    imageNote: "Compare estações famosas, bases próximas mais calmas e áreas práticas antes de buscar hotéis.",
+    matrixCta: "Encontrar a melhor área de Tóquio",
+    finalTitle: "Ainda planejando sua viagem ao Japão?",
+    finalBody: "Comece pelo assento do lado Fuji e depois escolha uma base prática em Tóquio antes de abrir sites de reserva.",
+    checkSeatCta: "Ver assento do lado Fuji",
+    finalMatrixCta: "Comparar áreas de hotel em Tóquio",
+  },
+  es: {
+    title: "Elige dónde alojarte antes de comparar hoteles",
+    body: "Empieza por tu base en Tokio, no por nombres de hoteles. La mejor zona depende del aeropuerto, equipaje, días de Shinkansen, estaciones grandes y noches animadas o tranquilas.",
+    links: [
+      { href: "/areas-to-stay/asakusa-vs-ueno", label: "Comparar Asakusa y Ueno" },
+      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Comparar Tokyo Station y Shinjuku" },
+      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Elegir zona en Tokio con equipaje" },
+    ],
+    imageNote: "Compara estaciones famosas, bases cercanas más tranquilas y zonas logísticas antes de buscar hoteles.",
+    matrixCta: "Encontrar la mejor zona de Tokio",
+    finalTitle: "¿Sigues planificando tu viaje a Japón?",
+    finalBody: "Empieza por el asiento del lado Fuji y luego elige una base práctica en Tokio antes de abrir webs de reserva.",
+    checkSeatCta: "Revisar asiento lado Fuji",
+    finalMatrixCta: "Comparar zonas hoteleras de Tokio",
+  },
+  ko: {
+    title: "호텔을 비교하기 전에 묵을 지역부터 고르기",
+    body: "호텔 이름보다 도쿄 거점부터 정하세요. 좋은 지역은 공항 접근, 짐, 신칸센 일정, 큰 역의 복잡도, 활기찬 밤 또는 조용한 밤에 따라 달라집니다.",
+    links: [
+      { href: "/areas-to-stay/asakusa-vs-ueno", label: "아사쿠사와 우에노 비교" },
+      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "도쿄역과 신주쿠 비교" },
+      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "짐이 있을 때 도쿄 호텔 지역 선택" },
+    ],
+    imageNote: "호텔을 찾기 전에 유명 역, 더 차분한 인근 거점, 이동에 편한 지역을 비교하세요.",
+    matrixCta: "도쿄에서 묵기 좋은 지역 찾기",
+    finalTitle: "아직 일본 여행을 계획 중인가요?",
+    finalBody: "후지산 쪽 좌석을 확인한 뒤, 예약 사이트를 열기 전에 실용적인 도쿄 호텔 거점을 고르세요.",
+    checkSeatCta: "후지산 쪽 좌석 확인",
+    finalMatrixCta: "도쿄 호텔 지역 비교",
+  },
+  "zh-TW": {
+    title: "比較飯店前，先選住宿區域",
+    body: "先從東京住宿基地開始，不要先看飯店名稱。適合的區域取決於機場交通、行李、新幹線日程、車站複雜度，以及你想要熱鬧或安靜的夜晚。",
+    links: [
+      { href: "/areas-to-stay/asakusa-vs-ueno", label: "比較淺草與上野" },
+      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "比較東京站與新宿" },
+      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "選擇適合行李的東京飯店區域" },
+    ],
+    imageNote: "搜尋飯店前，先比較知名車站、較安靜的附近基地與動線友善區域。",
+    matrixCta: "找出適合住宿的東京區域",
+    finalTitle: "還在規劃日本旅行嗎？",
+    finalBody: "先確認富士山側座位，再在打開訂房網站前選擇實用的東京住宿基地。",
+    checkSeatCta: "確認富士山側座位",
+    finalMatrixCta: "比較東京飯店區域",
+  },
+  "zh-CN": {
+    title: "比较酒店前，先选择住宿区域",
+    body: "先从东京住宿基地开始，不要先看酒店名称。适合的区域取决于机场交通、行李、新干线日程、车站复杂度，以及你想要热闹或安静的夜晚。",
+    links: [
+      { href: "/areas-to-stay/asakusa-vs-ueno", label: "比较浅草与上野" },
+      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "比较东京站与新宿" },
+      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "选择适合行李的东京酒店区域" },
+    ],
+    imageNote: "搜索酒店前，先比较知名车站、较安静的附近基地和动线友好区域。",
+    matrixCta: "找出适合住宿的东京区域",
+    finalTitle: "还在规划日本旅行吗？",
+    finalBody: "先确认富士山侧座位，再在打开订房网站前选择实用的东京住宿基地。",
+    checkSeatCta: "确认富士山侧座位",
+    finalMatrixCta: "比较东京酒店区域",
+  },
+  fr: {
+    title: "Choisissez où dormir avant de comparer les hôtels",
+    body: "Commencez par votre base à Tokyo, pas par les noms d'hôtels. Le bon quartier dépend de l'aéroport, des bagages, du Shinkansen, des grandes gares et de nuits animées ou plus calmes.",
+    links: [
+      { href: "/areas-to-stay/asakusa-vs-ueno", label: "Comparer Asakusa et Ueno" },
+      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Comparer Tokyo Station et Shinjuku" },
+      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choisir un quartier à Tokyo avec bagages" },
+    ],
+    imageNote: "Comparez gares connues, bases plus calmes et quartiers pratiques avant de chercher des hôtels.",
+    matrixCta: "Trouver le meilleur quartier de Tokyo",
+    finalTitle: "Vous planifiez encore votre voyage au Japon ?",
+    finalBody: "Commencez par le siege cote Fuji, puis choisissez une base pratique a Tokyo avant d'ouvrir les sites de reservation.",
+    checkSeatCta: "Verifier le siege cote Fuji",
+    finalMatrixCta: "Comparer les quartiers d'hôtel à Tokyo",
+  },
+  de: {
+    title: "Erst die Hotelgegend wählen, dann Hotels vergleichen",
+    body: "Beginne mit deiner Tokio-Basis, nicht mit Hotelnamen. Die beste Gegend hängt von Flughafen, Gepäck, Shinkansen-Tagen, großen Bahnhöfen und lebhaften oder ruhigeren Nächten ab.",
+    links: [
+      { href: "/areas-to-stay/asakusa-vs-ueno", label: "Asakusa und Ueno vergleichen" },
+      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Tokyo Station und Shinjuku vergleichen" },
+      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Tokio-Hotelgegend mit Gepäck wählen" },
+    ],
+    imageNote: "Vergleiche bekannte Bahnhöfe, ruhigere nahe Basen und logistische Gegenden, bevor du Hotels suchst.",
+    matrixCta: "Beste Tokio-Gegend finden",
+    finalTitle: "Planst du deine Japanreise noch?",
+    finalBody: "Beginne mit dem Fuji-seitigen Sitz und wahle dann eine praktische Tokio-Hotelbasis, bevor du Buchungsseiten offnest.",
+    checkSeatCta: "Fuji-seitigen Sitz prufen",
+    finalMatrixCta: "Tokio-Hotelgegenden vergleichen",
+  },
+  ru: {
+    title: "Сначала выберите район, потом сравнивайте отели",
+    body: "Начните с базы в Токио, а не с названий отелей. Подходящий район зависит от аэропорта, багажа, синкансэна, сложности станций и того, нужны ли вам оживленные или спокойные ночи.",
+    links: [
+      { href: "/areas-to-stay/asakusa-vs-ueno", label: "Сравнить Асакуса и Уэно" },
+      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Сравнить Tokyo Station и Синдзюку" },
+      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Выбрать район Токио с багажом" },
+    ],
+    imageNote: "Сравните известные станции, более спокойные соседние базы и удобные районы до поиска отелей.",
+    matrixCta: "Найти лучший район Токио",
+    finalTitle: "Все еще планируете поездку в Японию?",
+    finalBody: "Начните с места со стороны Фудзи, затем выберите практичную базу в Токио перед открытием сайтов бронирования.",
+    checkSeatCta: "Проверить место со стороны Фудзи",
+    finalMatrixCta: "Сравнить районы отелей в Токио",
+  },
+};
+
 function Header() {
   return <SiteHeader />;
 }
@@ -108,6 +260,7 @@ function SectionTitle({
 export default function HomeClient() {
   const t = useTranslations("home");
   const locale = useLocale();
+  const homeHotelCopy = homeHotelCopyByLocale[locale] ?? homeHotelCopyByLocale.en;
   const [direction, setDirection] = useState<DirectionId>("tokyo-osaka");
   const [hasChecked, setHasChecked] = useState(false);
   const [visData, setVisData] = useState<FujiVisibility | null>(null);
@@ -390,19 +543,10 @@ export default function HomeClient() {
               <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">
                 Tokyo hotel base
               </p>
-              <h2 className="mt-1 text-xl font-bold text-[#082653]">
-                Choose where to stay before comparing hotels
-              </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5f7190]">
-                Start with your Tokyo base, not hotel names. The best area depends on airport access, luggage,
-                Shinkansen days, station complexity, and whether you want busy nights or a calmer local base.
-              </p>
+              <h2 className="mt-1 text-xl font-bold text-[#082653]">{homeHotelCopy.title}</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5f7190]">{homeHotelCopy.body}</p>
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs font-semibold text-[#106b43]">
-                {[
-                  { href: "/areas-to-stay/asakusa-vs-ueno", label: "Compare Asakusa vs Ueno" },
-                  { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Compare Tokyo Station vs Shinjuku" },
-                  { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose a Tokyo hotel area with luggage" },
-                ].map((link) => (
+                {homeHotelCopy.links.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
@@ -434,19 +578,19 @@ export default function HomeClient() {
                 />
               </div>
               <p className="mt-3 text-xs leading-5 text-slate-600">
-                Compare famous stations, calmer nearby bases, and logistics-friendly hotel areas before you search hotels.
+                {homeHotelCopy.imageNote}
               </p>
               <TrackedCtaLink
                 href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
                 placement="home_hotel_base_matrix"
-                label="Find the best Tokyo area to stay"
+                label={homeHotelCopy.matrixCta}
                 category="stay"
                 ctaType="stay"
                 pagePath="/"
                 locale={locale}
                 className={`${buttonPageSecondary} mt-3 h-11 w-full px-5 text-sm`}
               >
-                Find the best Tokyo area to stay
+                {homeHotelCopy.matrixCta}
                 <ArrowRight className="h-4 w-4" />
               </TrackedCtaLink>
             </div>
@@ -612,35 +756,35 @@ export default function HomeClient() {
             </Link>
           </div>
           <div className="rounded-[18px] border border-[#d9e5f2] bg-white p-5 text-center shadow-[0_14px_34px_rgba(9,35,70,0.08)] md:p-7">
-            <h2 className="text-2xl font-bold text-[#082653]">Still planning your Japan trip?</h2>
+            <h2 className="text-2xl font-bold text-[#082653]">{homeHotelCopy.finalTitle}</h2>
             <p className="mx-auto mt-2 max-w-2xl text-sm leading-6 text-[#5f7190]">
-              Start with the Fuji-side seat, then choose a practical Tokyo hotel base before opening booking sites.
+              {homeHotelCopy.finalBody}
             </p>
             <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
               <TrackedCtaLink
                 href="/#seat-checker"
                 placement="home_final_cta"
-                label="Check Fuji-side seat"
+                label={homeHotelCopy.checkSeatCta}
                 category="seat_checker"
                 ctaType="seat_checker"
                 pagePath="/"
                 locale={locale}
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#168a56] px-5 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
               >
-                Check Fuji-side seat
+                {homeHotelCopy.checkSeatCta}
                 <ArrowRight className="h-4 w-4" />
               </TrackedCtaLink>
               <TrackedCtaLink
                 href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
                 placement="home_final_cta"
-                label="Compare Tokyo hotel areas"
+                label={homeHotelCopy.finalMatrixCta}
                 category="stay"
                 ctaType="stay"
                 pagePath="/"
                 locale={locale}
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#082653] px-5 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#123967]"
               >
-                Compare Tokyo hotel areas
+                {homeHotelCopy.finalMatrixCta}
                 <ArrowRight className="h-4 w-4" />
               </TrackedCtaLink>
             </div>

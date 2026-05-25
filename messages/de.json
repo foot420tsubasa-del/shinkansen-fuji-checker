@@ -1937,6 +1937,18 @@
       "fujiOvernight": {
         "title": "Ich möchte eine Übernachtung mit Fuji-Blick",
         "cta": "Kawaguchiko ansehen"
+      },
+      "notBookedHotels": {
+        "title": "Ich habe noch keine Hotels gebucht",
+        "cta": "Mit Stadt und Gegend beginnen"
+      },
+      "luggage": {
+        "title": "Ich komme mit großem Gepäck an",
+        "cta": "Gepäckfreundliche Tokio-Basis wählen"
+      },
+      "airportAccess": {
+        "title": "Ich möchte einfachen Flughafenzugang",
+        "cta": "Flughafenfreundliche Basen vergleichen"
       }
     },
     "featuredGuides": {
@@ -2050,6 +2062,10 @@
       "seat": "Sitz prüfen",
       "airport": "Flughafentransfers",
       "esim": "Japan eSIM"
+    },
+    "preBooking": {
+      "title": "Beginne hier, wenn du noch keine Hotels gebucht hast",
+      "body": "Nutze diese Seite, bevor du Hotelbuchungsseiten öffnest. Wähle zuerst die Stadt, vergleiche dann Bahnhofsumgebungen und sieh dir danach Hotelbeispiele an. In Japan sollte eine gute Hotelbasis Flughafentransfers, Gepäcktage, Shinkansen-Fahrten und erste Nächte erleichtern. Diese Guides sind allgemeine Startpunkte, keine personalisierten Hotelempfehlungen."
     }
   },
   "planYourTrip": {
@@ -2078,7 +2094,9 @@
         "Wähle die Hotelbasis vor den Aktivitäten.",
         "Bereite Ankunfts-Essentials vor der Landung vor."
       ],
-      "guideCta": "Guide zum Fuji-Seiten-Sitz lesen"
+      "guideCta": "Guide zum Fuji-Seiten-Sitz lesen",
+      "routeDecisionTitle": "Buche Hotels nicht vor diesen Routenentscheidungen",
+      "routeDecisionBody": "Bevor du Hotelnamen auswählst, entscheide Ankunftsflughafen, Gegend der ersten Nacht, Shinkansen-Tag, Gepäckplan und ob Kyoto, Osaka, Mt. Fuji oder Disney deine Basis beeinflussen."
     },
     "rail": {
       "eyebrow": "Bahnvergleich",

@@ -62,6 +62,147 @@ const kansaiSlugs = [
 const lateArrivalSlugs = ["narita-late-arrival", "haneda-late-arrival"] as const;
 const pagePath = "/airport-transfers";
 
+const firstHotelAreaCopyByLocale: Record<
+  string,
+  {
+    title: string;
+    body: string;
+    cards: Array<{ title: string; body: string; label: string; href: string }>;
+  }
+> = {
+  en: {
+    title: "Choose your first hotel area by arrival airport",
+    body:
+      "Your first hotel area should match your arrival airport, landing time, luggage, and first-night energy. The fastest train is not always the easiest route with suitcases.",
+    cards: [
+      { title: "Arriving at Narita", body: "Compare Ueno, Asakusa, Tokyo Station, and Shinjuku.", href: "/areas-to-stay/tokyo-first-time", label: "Choose Narita-friendly hotel area" },
+      { title: "Arriving at Haneda", body: "Compare Hamamatsucho, Shinagawa, Tokyo Station, and Shinjuku.", href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix", label: "Choose Haneda-friendly hotel area" },
+      { title: "Landing late", body: "Check last trains before booking far from the airport.", href: "/airport-transfers/haneda-late-arrival", label: "Check late-arrival routes" },
+      { title: "Carrying large luggage", body: "Prioritize direct trains, airport buses, or private transfers.", href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose luggage-friendly Tokyo base" },
+    ],
+  },
+  "pt-BR": {
+    title: "Escolha a primeira area de hotel pelo aeroporto de chegada",
+    body: "A primeira area de hotel deve combinar com aeroporto, horario de pouso, bagagem e energia da primeira noite. O trem mais rapido nem sempre e a rota mais facil com malas.",
+    cards: [
+      { title: "Chegando por Narita", body: "Compare Ueno, Asakusa, Tokyo Station e Shinjuku.", href: "/areas-to-stay/tokyo-first-time", label: "Escolher area boa para Narita" },
+      { title: "Chegando por Haneda", body: "Compare Hamamatsucho, Shinagawa, Tokyo Station e Shinjuku.", href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix", label: "Escolher area boa para Haneda" },
+      { title: "Chegada tarde", body: "Confira os ultimos trens antes de reservar longe do aeroporto.", href: "/airport-transfers/haneda-late-arrival", label: "Ver rotas de chegada tarde" },
+      { title: "Com malas grandes", body: "Priorize trens diretos, onibus de aeroporto ou transfer privado.", href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Escolher base facil com bagagem" },
+    ],
+  },
+  es: {
+    title: "Elige tu primera zona de hotel segun el aeropuerto",
+    body: "Tu primera zona de hotel debe encajar con el aeropuerto, la hora de llegada, el equipaje y la energia de la primera noche. El tren mas rapido no siempre es la ruta mas facil con maletas.",
+    cards: [
+      { title: "Llegas a Narita", body: "Compara Ueno, Asakusa, Tokyo Station y Shinjuku.", href: "/areas-to-stay/tokyo-first-time", label: "Elegir zona comoda para Narita" },
+      { title: "Llegas a Haneda", body: "Compara Hamamatsucho, Shinagawa, Tokyo Station y Shinjuku.", href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix", label: "Elegir zona comoda para Haneda" },
+      { title: "Llegada tarde", body: "Revisa ultimos trenes antes de reservar lejos del aeropuerto.", href: "/airport-transfers/haneda-late-arrival", label: "Ver rutas de llegada tarde" },
+      { title: "Con equipaje grande", body: "Prioriza trenes directos, buses de aeropuerto o transfer privado.", href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Elegir base facil con equipaje" },
+    ],
+  },
+  ko: {
+    title: "도착 공항에 맞춰 첫 호텔 지역 고르기",
+    body: "첫 호텔 지역은 도착 공항, 도착 시간, 짐, 첫날 밤의 컨디션과 맞아야 합니다. 여행가방이 있으면 가장 빠른 열차가 항상 가장 쉬운 길은 아닙니다.",
+    cards: [
+      { title: "나리타 도착", body: "우에노, 아사쿠사, 도쿄역, 신주쿠를 비교하세요.", href: "/areas-to-stay/tokyo-first-time", label: "나리타에 편한 호텔 지역 선택" },
+      { title: "하네다 도착", body: "하마마쓰초, 시나가와, 도쿄역, 신주쿠를 비교하세요.", href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix", label: "하네다에 편한 호텔 지역 선택" },
+      { title: "늦은 도착", body: "공항에서 먼 호텔을 예약하기 전에 막차를 확인하세요.", href: "/airport-transfers/haneda-late-arrival", label: "늦은 도착 경로 확인" },
+      { title: "큰 짐이 있음", body: "직통 열차, 공항 버스, 프라이빗 이동을 우선하세요.", href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "짐에 편한 도쿄 거점 선택" },
+    ],
+  },
+  "zh-TW": {
+    title: "依抵達機場選擇第一晚飯店區域",
+    body: "第一晚飯店區域應該配合抵達機場、落地時間、行李與第一晚體力。帶行李箱時，最快的列車不一定是最輕鬆的路線。",
+    cards: [
+      { title: "抵達成田", body: "比較上野、淺草、東京站與新宿。", href: "/areas-to-stay/tokyo-first-time", label: "選擇適合成田的飯店區域" },
+      { title: "抵達羽田", body: "比較濱松町、品川、東京站與新宿。", href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix", label: "選擇適合羽田的飯店區域" },
+      { title: "深夜抵達", body: "訂離機場遠的飯店前，先確認末班車。", href: "/airport-transfers/haneda-late-arrival", label: "查看深夜抵達路線" },
+      { title: "攜帶大型行李", body: "優先考慮直達列車、機場巴士或包車接送。", href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "選擇行李友善的東京基地" },
+    ],
+  },
+  "zh-CN": {
+    title: "按抵达机场选择第一晚酒店区域",
+    body: "第一晚酒店区域应该配合抵达机场、落地时间、行李和第一晚体力。带行李箱时，最快的列车不一定是最轻松的路线。",
+    cards: [
+      { title: "抵达成田", body: "比较上野、浅草、东京站和新宿。", href: "/areas-to-stay/tokyo-first-time", label: "选择适合成田的酒店区域" },
+      { title: "抵达羽田", body: "比较滨松町、品川、东京站和新宿。", href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix", label: "选择适合羽田的酒店区域" },
+      { title: "深夜抵达", body: "预订离机场远的酒店前，先确认末班车。", href: "/airport-transfers/haneda-late-arrival", label: "查看深夜抵达路线" },
+      { title: "携带大型行李", body: "优先考虑直达列车、机场巴士或包车接送。", href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "选择行李友好的东京基地" },
+    ],
+  },
+  fr: {
+    title: "Choisir votre premier quartier d'hotel selon l'aeroport",
+    body: "Votre premier quartier d'hotel doit correspondre a l'aeroport, l'heure d'arrivee, les bagages et l'energie de la premiere nuit. Le train le plus rapide n'est pas toujours le plus simple avec des valises.",
+    cards: [
+      { title: "Arrivee a Narita", body: "Comparez Ueno, Asakusa, Tokyo Station et Shinjuku.", href: "/areas-to-stay/tokyo-first-time", label: "Choisir un quartier pratique pour Narita" },
+      { title: "Arrivee a Haneda", body: "Comparez Hamamatsucho, Shinagawa, Tokyo Station et Shinjuku.", href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix", label: "Choisir un quartier pratique pour Haneda" },
+      { title: "Arrivee tardive", body: "Verifiez les derniers trains avant de reserver loin de l'aeroport.", href: "/airport-transfers/haneda-late-arrival", label: "Voir les trajets tardifs" },
+      { title: "Grosses valises", body: "Priorisez trains directs, bus aeroport ou transfert prive.", href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choisir une base facile avec bagages" },
+    ],
+  },
+  de: {
+    title: "Erste Hotelgegend nach Ankunftsflughafen wahlen",
+    body: "Deine erste Hotelgegend sollte zu Flughafen, Landezeit, Gepack und Energie am ersten Abend passen. Der schnellste Zug ist mit Koffern nicht immer der einfachste Weg.",
+    cards: [
+      { title: "Ankunft in Narita", body: "Vergleiche Ueno, Asakusa, Tokyo Station und Shinjuku.", href: "/areas-to-stay/tokyo-first-time", label: "Narita-freundliche Hotelgegend wahlen" },
+      { title: "Ankunft in Haneda", body: "Vergleiche Hamamatsucho, Shinagawa, Tokyo Station und Shinjuku.", href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix", label: "Haneda-freundliche Hotelgegend wahlen" },
+      { title: "Spate Ankunft", body: "Prufe letzte Zuge, bevor du weit vom Flughafen buchst.", href: "/airport-transfers/haneda-late-arrival", label: "Spatankunft-Routen ansehen" },
+      { title: "Viel Gepack", body: "Priorisiere Direktzuge, Flughafenbusse oder private Transfers.", href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Gepackfreundliche Tokio-Basis wahlen" },
+    ],
+  },
+  ru: {
+    title: "Выберите первый район отеля по аэропорту прилета",
+    body: "Первый район отеля должен соответствовать аэропорту, времени прилета, багажу и силам в первую ночь. Самый быстрый поезд не всегда самый простой маршрут с чемоданами.",
+    cards: [
+      { title: "Прилет в Нариту", body: "Сравните Уэно, Асакуса, Tokyo Station и Синдзюку.", href: "/areas-to-stay/tokyo-first-time", label: "Выбрать район, удобный для Нариты" },
+      { title: "Прилет в Ханэду", body: "Сравните Hamamatsucho, Shinagawa, Tokyo Station и Синдзюку.", href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix", label: "Выбрать район, удобный для Ханэды" },
+      { title: "Поздний прилет", body: "Проверьте последние поезда перед бронированием далеко от аэропорта.", href: "/airport-transfers/haneda-late-arrival", label: "Проверить поздние маршруты" },
+      { title: "Большой багаж", body: "Сначала смотрите прямые поезда, автобусы аэропорта или частный трансфер.", href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Выбрать базу в Токио с багажом" },
+    ],
+  },
+};
+
+const transferTogetherCopyByLocale: Record<string, { title: string; body: string }> = {
+  en: {
+    title: "Choose the hotel area and transfer together",
+    body:
+      "Airport transfer is not only about the fastest train. Your first hotel area, luggage, arrival time, and station exits can change the easiest route. If you arrive late or carry large suitcases, choose the transfer and hotel area together.",
+  },
+  "pt-BR": {
+    title: "Escolha a area do hotel e o traslado juntos",
+    body: "Traslado de aeroporto nao e so o trem mais rapido. A primeira area de hotel, bagagem, horario de chegada e saidas da estacao podem mudar a rota mais facil. Se voce chega tarde ou leva malas grandes, escolha traslado e area do hotel juntos.",
+  },
+  es: {
+    title: "Elige juntos la zona de hotel y el traslado",
+    body: "El traslado desde el aeropuerto no es solo el tren mas rapido. La primera zona de hotel, el equipaje, la hora de llegada y las salidas de la estacion pueden cambiar la ruta mas facil. Si llegas tarde o llevas maletas grandes, elige traslado y zona de hotel juntos.",
+  },
+  ko: {
+    title: "호텔 지역과 공항 이동을 함께 고르기",
+    body: "공항 이동은 가장 빠른 열차만의 문제가 아닙니다. 첫 호텔 지역, 짐, 도착 시간, 역 출구가 가장 쉬운 동선을 바꿀 수 있습니다. 늦게 도착하거나 큰 여행가방이 있다면 이동 방법과 호텔 지역을 함께 정하세요.",
+  },
+  "zh-TW": {
+    title: "飯店區域與機場交通一起決定",
+    body: "機場交通不只是最快的列車。第一晚飯店區域、行李、抵達時間與車站出口，都可能改變最輕鬆的路線。如果深夜抵達或帶大型行李，請一起選擇交通與飯店區域。",
+  },
+  "zh-CN": {
+    title: "酒店区域与机场交通一起决定",
+    body: "机场交通不只是最快的列车。第一晚酒店区域、行李、抵达时间和车站出口，都可能改变最轻松的路线。如果深夜抵达或带大型行李，请一起选择交通和酒店区域。",
+  },
+  fr: {
+    title: "Choisir ensemble le quartier d'hotel et le transfert",
+    body: "Le transfert aeroport ne se resume pas au train le plus rapide. Le premier quartier d'hotel, les bagages, l'heure d'arrivee et les sorties de gare peuvent changer le trajet le plus simple. Si vous arrivez tard ou avec de grosses valises, choisissez transfert et quartier ensemble.",
+  },
+  de: {
+    title: "Hotelgegend und Transfer zusammen wahlen",
+    body: "Beim Flughafentransfer geht es nicht nur um den schnellsten Zug. Erste Hotelgegend, Gepack, Ankunftszeit und Bahnhofsausgange konnen den einfachsten Weg verandern. Wenn du spat ankommst oder grosse Koffer hast, wahle Transfer und Hotelgegend zusammen.",
+  },
+  ru: {
+    title: "Выбирайте район отеля и трансфер вместе",
+    body: "Трансфер из аэропорта — это не только самый быстрый поезд. Первый район отеля, багаж, время прилета и выходы со станции могут изменить самый простой маршрут. Если вы прилетаете поздно или с большими чемоданами, выбирайте трансфер и район отеля вместе.",
+  },
+};
+
 function orderedPages(slugs: readonly string[]): TransferPage[] {
   return slugs
     .map((slug) => transferPages.find((page) => page.slug === slug))
@@ -201,6 +342,8 @@ function ProblemCard({
 export default async function AirportTransfersIndex({ params }: Props) {
   const { locale } = await params;
   const copy = getAirportTransferHubCopy(locale);
+  const firstHotelAreaCopy = firstHotelAreaCopyByLocale[locale] ?? firstHotelAreaCopyByLocale.en;
+  const transferTogetherCopy = transferTogetherCopyByLocale[locale] ?? transferTogetherCopyByLocale.en;
   const heroImage = getAirportTransferHubImage();
   const naritaImage = getAirportTransferRouteImage("narita");
   const hanedaImage = getAirportTransferRouteImage("haneda");
@@ -267,47 +410,17 @@ export default async function AirportTransfersIndex({ params }: Props) {
       </section>
 
       <section className="mt-8 rounded-[22px] border border-sky-100 bg-sky-50/70 p-5 shadow-sm">
-        <h2 className="text-xl font-bold text-slate-950">Choose the hotel area and transfer together</h2>
-        <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
-          Airport transfer is not only about the fastest train. Your first hotel area, luggage, arrival time, and station exits can change the easiest route. If you arrive late or carry large suitcases, choose the transfer and hotel area together.
-        </p>
+        <h2 className="text-xl font-bold text-slate-950">{transferTogetherCopy.title}</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">{transferTogetherCopy.body}</p>
       </section>
 
       <section className="mt-8 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
         <div className="max-w-3xl">
-          <h2 className="text-xl font-bold text-slate-950">Choose your first hotel area by arrival airport</h2>
-          <p className="mt-2 text-sm leading-6 text-slate-700">
-            Your first hotel area should match your arrival airport, landing time, luggage, and first-night energy. The
-            fastest train is not always the easiest route with suitcases.
-          </p>
+          <h2 className="text-xl font-bold text-slate-950">{firstHotelAreaCopy.title}</h2>
+          <p className="mt-2 text-sm leading-6 text-slate-700">{firstHotelAreaCopy.body}</p>
         </div>
         <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-          {[
-            {
-              title: "Arriving at Narita",
-              body: "Compare Ueno, Asakusa, Tokyo Station, and Shinjuku.",
-              href: "/areas-to-stay/tokyo-first-time",
-              label: "Choose Narita-friendly hotel area",
-            },
-            {
-              title: "Arriving at Haneda",
-              body: "Compare Hamamatsucho, Shinagawa, Tokyo Station, and Shinjuku.",
-              href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix",
-              label: "Choose Haneda-friendly hotel area",
-            },
-            {
-              title: "Landing late",
-              body: "Check last trains before booking far from the airport.",
-              href: "/airport-transfers/haneda-late-arrival",
-              label: "Check late-arrival routes",
-            },
-            {
-              title: "Carrying large luggage",
-              body: "Prioritize direct trains, airport buses, or private transfers.",
-              href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage",
-              label: "Choose luggage-friendly Tokyo base",
-            },
-          ].map((item) => (
+          {firstHotelAreaCopy.cards.map((item) => (
             <TrackedInternalLink
               key={item.title}
               href={item.href}

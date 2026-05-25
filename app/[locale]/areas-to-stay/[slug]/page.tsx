@@ -274,6 +274,15 @@ type TokyoFirstTimeSupplementCopy = {
     matrixNote: string;
     matrixCta: string;
   };
+  earlyDecision: {
+    title: string;
+    body: string;
+    chips: string[];
+    mistakesTitle: string;
+    mistakes: string[];
+    note: string;
+    roomDateCta: string;
+  };
 };
 
 const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplementCopy> = {
@@ -471,6 +480,28 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
         "Nishi-Shinjuku / Yoyogi, Nippori / Okachimachi, Kuramae / Tawaramachi, Hatchobori / Nihombashi, Akasaka, Suitengumae, Hamamatsucho, or Shinagawa.",
       matrixNote: "Use the hotel base matrix below before opening booking sites.",
       matrixCta: "Open hotel base matrix",
+    },
+    earlyDecision: {
+      title: "Before you book a Tokyo hotel",
+      body: "Start with how your trip moves, then compare hotel names.",
+      chips: [
+        "Narita or Haneda",
+        "Kyoto / Osaka by Shinkansen",
+        "Large suitcases",
+        "Nightlife or quiet nights",
+        "Huge station or calmer base",
+      ],
+      mistakesTitle: "Common Tokyo hotel area mistakes",
+      mistakes: [
+        "Choosing Shinjuku only because it is famous",
+        "Choosing Asakusa only because it looks traditional",
+        "Choosing Tokyo Station only for Shinkansen",
+        "Ignoring luggage, room size, and station complexity",
+        "Booking before deciding airport and rail routes",
+      ],
+      note:
+        "A famous station is not always the easiest place to sleep. The best Tokyo hotel area usually reduces transfers, luggage stress, and first-night confusion.",
+      roomDateCta: "Check room size and expensive dates before booking",
     },
   },
 };
@@ -1301,6 +1332,127 @@ tokyoFirstTimeSupplementCopyByLocale.ru.quickAnswerOverride = {
   matrixCta: "Открыть матрицу отелей",
 };
 
+tokyoFirstTimeSupplementCopyByLocale["pt-BR"].earlyDecision = {
+  title: "Antes de reservar um hotel em Toquio",
+  body: "Comece pelo movimento da viagem; depois compare nomes de hoteis.",
+  chips: ["Narita ou Haneda", "Kyoto / Osaka de Shinkansen", "Malas grandes", "Vida noturna ou noites calmas", "Estacao enorme ou base mais calma"],
+  mistakesTitle: "Erros comuns ao escolher area de hotel em Toquio",
+  mistakes: [
+    "Escolher Shinjuku so porque e famosa",
+    "Escolher Asakusa so porque parece tradicional",
+    "Escolher Tokyo Station so pelo Shinkansen",
+    "Ignorar bagagem, tamanho do quarto e complexidade da estacao",
+    "Reservar antes de decidir aeroporto e rotas de trem",
+  ],
+  note: "Uma estacao famosa nem sempre e o lugar mais facil para dormir. A melhor area de hotel em Toquio costuma reduzir baldeacoes, estresse com bagagem e confusao na primeira noite.",
+  roomDateCta: "Ver tamanho do quarto e datas caras antes de reservar",
+};
+tokyoFirstTimeSupplementCopyByLocale.es.earlyDecision = {
+  title: "Antes de reservar un hotel en Tokio",
+  body: "Empieza por como se mueve tu viaje; despues compara nombres de hoteles.",
+  chips: ["Narita o Haneda", "Kioto / Osaka en Shinkansen", "Maletas grandes", "Vida nocturna o noches tranquilas", "Estacion enorme o base mas calmada"],
+  mistakesTitle: "Errores comunes al elegir zona de hotel en Tokio",
+  mistakes: [
+    "Elegir Shinjuku solo porque es famoso",
+    "Elegir Asakusa solo porque parece tradicional",
+    "Elegir Tokyo Station solo por el Shinkansen",
+    "Ignorar equipaje, tamano de habitacion y complejidad de estaciones",
+    "Reservar antes de decidir aeropuerto y rutas de tren",
+  ],
+  note: "Una estacion famosa no siempre es el lugar mas facil para dormir. La mejor zona de hotel en Tokio suele reducir transbordos, estres con equipaje y confusion la primera noche.",
+  roomDateCta: "Revisar tamano de habitacion y fechas caras antes de reservar",
+};
+tokyoFirstTimeSupplementCopyByLocale.ko.earlyDecision = {
+  title: "도쿄 호텔을 예약하기 전에",
+  body: "호텔 이름보다 먼저 여행 동선부터 정리하세요.",
+  chips: ["나리타 또는 하네다", "교토 / 오사카 신칸센", "큰 여행가방", "밤문화 또는 조용한 밤", "큰 역 또는 더 차분한 거점"],
+  mistakesTitle: "도쿄 호텔 지역 선택에서 흔한 실수",
+  mistakes: [
+    "유명하다는 이유만으로 신주쿠를 고르기",
+    "전통적으로 보인다는 이유만으로 아사쿠사를 고르기",
+    "신칸센 때문에 도쿄역만 고르기",
+    "짐, 객실 크기, 역 복잡도를 무시하기",
+    "공항과 철도 동선을 정하기 전에 예약하기",
+  ],
+  note: "유명한 역이 항상 가장 편한 숙박지는 아닙니다. 좋은 도쿄 호텔 지역은 환승, 짐 스트레스, 첫날 밤의 혼란을 줄여 줍니다.",
+  roomDateCta: "예약 전 객실 크기와 비싼 날짜 확인",
+};
+tokyoFirstTimeSupplementCopyByLocale["zh-TW"].earlyDecision = {
+  title: "預訂東京飯店前",
+  body: "先看你的行程如何移動，再比較飯店名稱。",
+  chips: ["成田或羽田", "搭新幹線去京都 / 大阪", "大型行李箱", "夜生活或安靜夜晚", "大型車站或較平靜的基地"],
+  mistakesTitle: "選東京飯店區域時常見的錯誤",
+  mistakes: [
+    "只因為新宿有名就選新宿",
+    "只因為淺草看起來傳統就選淺草",
+    "只因為新幹線就選東京站",
+    "忽略行李、房間大小與車站複雜度",
+    "還沒決定機場與鐵路動線就先訂房",
+  ],
+  note: "有名的車站不一定是最好睡的地方。好的東京飯店區域通常能減少轉乘、行李壓力與第一晚的混亂感。",
+  roomDateCta: "訂房前確認房間大小與容易變貴的日期",
+};
+tokyoFirstTimeSupplementCopyByLocale["zh-CN"].earlyDecision = {
+  title: "预订东京酒店前",
+  body: "先看你的行程如何移动，再比较酒店名称。",
+  chips: ["成田或羽田", "搭新干线去京都 / 大阪", "大型行李箱", "夜生活或安静夜晚", "大型车站或更平静的基地"],
+  mistakesTitle: "选择东京酒店区域时常见的错误",
+  mistakes: [
+    "只因为新宿有名就选新宿",
+    "只因为浅草看起来传统就选浅草",
+    "只因为新干线就选东京站",
+    "忽略行李、房间大小和车站复杂度",
+    "还没决定机场和铁路动线就先订房",
+  ],
+  note: "有名的车站不一定是最容易休息的地方。好的东京酒店区域通常能减少换乘、行李压力和第一晚的混乱感。",
+  roomDateCta: "订房前确认房间大小和容易变贵的日期",
+};
+tokyoFirstTimeSupplementCopyByLocale.fr.earlyDecision = {
+  title: "Avant de reserver un hotel a Tokyo",
+  body: "Commencez par la logique de votre trajet, puis comparez les noms d'hotels.",
+  chips: ["Narita ou Haneda", "Kyoto / Osaka en Shinkansen", "Grosses valises", "Vie nocturne ou nuits calmes", "Grande gare ou base plus calme"],
+  mistakesTitle: "Erreurs frequentes pour choisir un quartier d'hotel a Tokyo",
+  mistakes: [
+    "Choisir Shinjuku seulement parce que c'est connu",
+    "Choisir Asakusa seulement parce que cela semble traditionnel",
+    "Choisir Tokyo Station seulement pour le Shinkansen",
+    "Ignorer les bagages, la taille de chambre et la complexite des gares",
+    "Reserver avant de decider aeroport et trajets en train",
+  ],
+  note: "Une gare connue n'est pas toujours l'endroit le plus facile pour dormir. Le bon quartier d'hotel a Tokyo reduit souvent les correspondances, le stress des bagages et la confusion de la premiere nuit.",
+  roomDateCta: "Verifier taille de chambre et dates cheres avant de reserver",
+};
+tokyoFirstTimeSupplementCopyByLocale.de.earlyDecision = {
+  title: "Bevor du ein Hotel in Tokio buchst",
+  body: "Beginne mit deiner Reiselogik, dann vergleiche Hotelnamen.",
+  chips: ["Narita oder Haneda", "Kyoto / Osaka mit Shinkansen", "Grosse Koffer", "Nachtleben oder ruhige Nachte", "Riesiger Bahnhof oder ruhigere Basis"],
+  mistakesTitle: "Haufige Fehler bei der Hotelgegend in Tokio",
+  mistakes: [
+    "Shinjuku nur wahlen, weil es bekannt ist",
+    "Asakusa nur wahlen, weil es traditionell wirkt",
+    "Tokyo Station nur wegen des Shinkansen wahlen",
+    "Gepack, Zimmergrosse und Bahnhofskomplexitat ignorieren",
+    "Buchen, bevor Flughafen und Bahnroute klar sind",
+  ],
+  note: "Ein bekannter Bahnhof ist nicht immer der einfachste Schlafort. Die beste Hotelgegend in Tokio reduziert meist Umstiege, Gepackstress und Verwirrung in der ersten Nacht.",
+  roomDateCta: "Zimmergrosse und teure Daten vor dem Buchen prufen",
+};
+tokyoFirstTimeSupplementCopyByLocale.ru.earlyDecision = {
+  title: "Перед бронированием отеля в Токио",
+  body: "Сначала разберите логику маршрута, а потом сравнивайте названия отелей.",
+  chips: ["Нарита или Ханэда", "Киото / Осака на синкансэне", "Большие чемоданы", "Ночная жизнь или тихие ночи", "Огромная станция или более спокойная база"],
+  mistakesTitle: "Частые ошибки при выборе района отеля в Токио",
+  mistakes: [
+    "Выбирать Синдзюку только потому, что он известен",
+    "Выбирать Асакуса только потому, что он выглядит традиционно",
+    "Выбирать Tokyo Station только из-за синкансэна",
+    "Игнорировать багаж, размер номера и сложность станций",
+    "Бронировать до выбора аэропорта и железнодорожных маршрутов",
+  ],
+  note: "Известная станция не всегда самое простое место для ночлега. Хороший район отеля в Токио обычно уменьшает пересадки, стресс с багажом и путаницу в первую ночь.",
+  roomDateCta: "Проверить размер номера и дорогие даты до бронирования",
+};
+
 const tokyoMatrixDetailLabelsByLocale: Record<string, string[]> = {
   en: [
     "See Shinjuku micro-area guide",
@@ -1554,69 +1706,48 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               >
                 {supplement.quickAnswerOverride.matrixCta} →
               </TrackedInternalLink>
-              {locale === "en" ? (
-                <div className="mt-5 border-t border-emerald-200 pt-5">
-                  <div className="grid gap-3 md:grid-cols-2">
-                    <div className="rounded-2xl border border-emerald-100 bg-white/80 p-4">
-                      <h3 className="text-base font-semibold text-slate-950">
-                        Before you book a Tokyo hotel
-                      </h3>
-                      <p className="mt-1 text-sm leading-6 text-slate-700">
-                        Start with how your trip moves, then compare hotel names.
-                      </p>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        {[
-                          "Narita or Haneda",
-                          "Kyoto / Osaka by Shinkansen",
-                          "Large suitcases",
-                          "Nightlife or quiet nights",
-                          "Huge station or calmer base",
-                        ].map((question) => (
-                          <span
-                            key={question}
-                            className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-[#106b43]"
-                          >
-                            {question}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
-                      <h3 className="text-base font-semibold text-slate-950">Common Tokyo hotel area mistakes</h3>
-                      <ul className="mt-3 grid gap-2 text-sm leading-5 text-slate-700">
-                        {[
-                          "Choosing Shinjuku only because it is famous",
-                          "Choosing Asakusa only because it looks traditional",
-                          "Choosing Tokyo Station only for Shinkansen",
-                          "Ignoring luggage, room size, and station complexity",
-                          "Booking before deciding airport and rail routes",
-                        ].map((mistake) => (
-                          <li key={mistake} className="flex gap-2">
-                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#106b43]" aria-hidden="true" />
-                            <span>{mistake}</span>
-                          </li>
-                        ))}
-                      </ul>
+              <div className="mt-5 border-t border-emerald-200 pt-5">
+                <div className="grid gap-3 md:grid-cols-2">
+                  <div className="rounded-2xl border border-emerald-100 bg-white/80 p-4">
+                    <h3 className="text-base font-semibold text-slate-950">{supplement.earlyDecision.title}</h3>
+                    <p className="mt-1 text-sm leading-6 text-slate-700">{supplement.earlyDecision.body}</p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {supplement.earlyDecision.chips.map((question) => (
+                        <span
+                          key={question}
+                          className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-[#106b43]"
+                        >
+                          {question}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                  <div className="mt-3 rounded-2xl border border-slate-200 bg-white/70 p-4">
-                    <p className="text-sm font-semibold leading-6 text-slate-900">
-                      A famous station is not always the easiest place to sleep. The best Tokyo hotel area usually reduces
-                      transfers, luggage stress, and first-night confusion.
-                    </p>
-                    <TrackedInternalLink
-                      href="/areas-to-stay/tokyo-first-time#hotel-price-timing"
-                      sourcePage={pagePath}
-                      placement="tokyo_first_time_quick_answer_matrix_jump"
-                      label="Check room size and expensive dates before booking"
-                      locale={locale}
-                      className="mt-3 inline-flex min-h-9 items-center rounded-xl bg-slate-700 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
-                    >
-                      Check room size and expensive dates before booking →
-                    </TrackedInternalLink>
+                  <div className="rounded-2xl border border-slate-200 bg-white/80 p-4">
+                    <h3 className="text-base font-semibold text-slate-950">{supplement.earlyDecision.mistakesTitle}</h3>
+                    <ul className="mt-3 grid gap-2 text-sm leading-5 text-slate-700">
+                      {supplement.earlyDecision.mistakes.map((mistake) => (
+                        <li key={mistake} className="flex gap-2">
+                          <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#106b43]" aria-hidden="true" />
+                          <span>{mistake}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </div>
-              ) : null}
+                <div className="mt-3 rounded-2xl border border-slate-200 bg-white/70 p-4">
+                  <p className="text-sm font-semibold leading-6 text-slate-900">{supplement.earlyDecision.note}</p>
+                  <TrackedInternalLink
+                    href="/areas-to-stay/tokyo-first-time#hotel-price-timing"
+                    sourcePage={pagePath}
+                    placement="tokyo_first_time_quick_answer_matrix_jump"
+                    label={supplement.earlyDecision.roomDateCta}
+                    locale={locale}
+                    className="mt-3 inline-flex min-h-9 items-center rounded-xl bg-slate-700 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
+                  >
+                    {supplement.earlyDecision.roomDateCta} →
+                  </TrackedInternalLink>
+                </div>
+              </div>
             </div>
         </section>
 
