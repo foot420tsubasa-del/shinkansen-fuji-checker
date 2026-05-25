@@ -59,10 +59,12 @@ import type {
  *   - lodgingChoice     = editorial only this pass
  *   - other sub-scores  = editorial only
  *
- * Step-free / accessibility is intentionally NOT applied yet — the
- * `stepFreeConfidence` is "Unknown" for all areas while no public data
- * source is parsing barrier-free CSVs. Once a real source lands, we'll
- * add a small luggage-route delta gated on `confidence !== "Unknown"`.
+ * Phase 4 — exit / entrance complexity is now data-assisted: when the
+ * `exitComplexitySignal` returns a successful match (Tokyo Metro's open
+ * `/station/exit.json` feed), the exit bucket is re-derived from the live
+ * open-exit count (<=4 Simple, 5–8 Moderate, 9–14 Complex, 15+ Mega
+ * station) and used in place of the editorial level. Missing data is
+ * never punished — we fall back to the editorial `exitComplexityLevel`.
  */
 
 export const FINAL_BLEND = {
@@ -117,6 +119,29 @@ function exitContribution(level: StayAreaBase["exitComplexityLevel"]): number {
   }
 }
 
+/**
+ * Resolve the exit-complexity level to use for scoring this area:
+ * prefer the live signal's `derivedLevel` when status is success/partial,
+ * otherwise fall back to the editorial `exitComplexityLevel`.
+ *
+ * Note: per spec we do NOT downgrade `stationSimplicity` when accessibility /
+ * exit data is missing — we only use data when confidently matched.
+ */
+function resolveExitLevel(
+  area: StayAreaBase,
+  signal: StayAreaSignal | undefined,
+): { level: StayAreaBase["exitComplexityLevel"]; fromData: boolean } {
+  const sig = signal?.exitComplexitySignal;
+  if (
+    sig &&
+    (sig.status === "success" || sig.status === "partial") &&
+    sig.derivedLevel != null
+  ) {
+    return { level: sig.derivedLevel, fromData: true };
+  }
+  return { level: area.exitComplexityLevel, fromData: false };
+}
+
 function lineOperatorContribution(area: StayAreaBase): number {
   const lineCount = (area.stationLines || []).length;
   const isMegaMultiOp =
@@ -158,7 +183,8 @@ function deriveUsabilityContribution(
   signal: StayAreaSignal | undefined,
 ): StationUsabilityContribution {
   const passenger = passengerContribution(signal?.passengerSignal?.crowdPercentile ?? null);
-  const exit = exitContribution(area.exitComplexityLevel);
+  const exitLevel = resolveExitLevel(area, signal);
+  const exit = exitContribution(exitLevel.level);
   const lineOp = lineOperatorContribution(area);
   const hub = transferHubContribution(area.transferHubLevel);
   const stepFree = stepFreeContribution(signal);
@@ -221,11 +247,12 @@ function deriveSourceCoverage(signal: StayAreaSignal | undefined): number {
   const ok = [
     signal.passengerSignal,
     signal.stepFreeSignal,
+    signal.exitComplexitySignal,
     signal.safetySignal,
     signal.floodNoteSignal,
     signal.lodgingDensitySignal,
   ].filter((s) => s.status === "success" || s.status === "partial").length;
-  return ok / 5;
+  return ok / 6;
 }
 
 function applyConfidenceFromCoverage(

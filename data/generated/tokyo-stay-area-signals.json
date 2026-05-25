@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-05-25T18:56:31.625Z",
+  "generatedAt": "2026-05-25T23:32:35.947Z",
   "mode": "public-data-local",
   "sources": [
     {
       "sourceId": "tokyo-metro-passengers",
       "label": "Tokyo Metro passenger ranking",
       "status": "success",
-      "fetchedAt": "2026-05-25T18:56:31.350Z",
+      "fetchedAt": "2026-05-25T23:32:35.685Z",
       "sourcePeriod": "FY2024",
       "records": 41,
       "message": "Parsed 41 station rows from Tokyo Metro 駅別乗降人員順位表."
@@ -15,7 +15,7 @@
       "sourceId": "toei-passengers",
       "label": "Toei Subway passenger volume",
       "status": "success",
-      "fetchedAt": "2026-05-25T18:56:31.296Z",
+      "fetchedAt": "2026-05-25T23:32:35.654Z",
       "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)",
       "records": 106,
       "message": "Parsed 106 station rows (28 canonical matches) from Toei CKAN CSVs: {\"asakusa\":20,\"mita\":27,\"shinjuku\":21,\"oedo\":38}."
@@ -24,44 +24,60 @@
       "sourceId": "toei-barrier-free",
       "label": "Toei Subway accessibility / barrier-free CSV",
       "status": "success",
-      "fetchedAt": "2026-05-25T18:56:31.350Z",
+      "fetchedAt": "2026-05-25T23:32:35.686Z",
       "sourcePeriod": "Tokyo Open Data (CKAN t000018d0000000028, refreshed irregularly)",
       "records": 106,
       "message": "Parsed 106 station rows from Toei barrier-free CKAN CSVs: {\"asakusa\":20,\"mita\":27,\"shinjuku\":21,\"oedo\":38}."
     },
     {
+      "sourceId": "tokyo-metro-station-exits",
+      "label": "Tokyo Metro per-station exit list",
+      "status": "success",
+      "fetchedAt": "2026-05-25T23:32:35.686Z",
+      "sourcePeriod": "Tokyo Metro live exit feed (refreshed irregularly per station revision_date)",
+      "records": 1042,
+      "message": "Parsed 1042 exit records across 42 canonical stations from tokyometro.jp/station/exit.json."
+    },
+    {
+      "sourceId": "toei-station-exits",
+      "label": "Toei Subway per-station exit list",
+      "status": "skipped",
+      "fetchedAt": "2026-05-25T23:32:35.946Z",
+      "message": "Toei station detail URLs return 404 from a script; no comparable feed exists yet. Skipped cleanly."
+    },
+    {
       "sourceId": "tokyo-metro-barrier-free",
       "label": "Tokyo Metro accessibility / barrier-free pages",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T18:56:31.624Z",
+      "fetchedAt": "2026-05-25T23:32:35.946Z",
       "message": "Page is client-rendered from a script request; per-station detail pages not parsed in this pass."
     },
     {
       "sourceId": "odpt-station-information",
       "label": "ODPT station information",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T18:56:31.624Z",
+      "fetchedAt": "2026-05-25T23:32:35.946Z",
       "message": "ODPT_CONSUMER_KEY not set; skipping gracefully."
     },
     {
       "sourceId": "tokyo-police-crime",
       "label": "Tokyo Metropolitan Police town-level crime statistics",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T18:56:31.624Z",
+      "fetchedAt": "2026-05-25T23:32:35.946Z",
       "message": "Not displayed as a safety claim; skipped in this pass."
     },
     {
       "sourceId": "gsi-hazard-portal",
       "label": "Hazard Map Portal (MLIT / GSI)",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T18:56:31.624Z",
+      "fetchedAt": "2026-05-25T23:32:35.946Z",
       "message": "Heavy GIS — catalogued only, no UI rendering this pass."
     },
     {
       "sourceId": "tokyo-lodging-facilities",
       "label": "Tokyo lodging business facility datasets",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T18:56:31.624Z",
+      "fetchedAt": "2026-05-25T23:32:35.946Z",
       "message": "Catalogued only; ward-level CSV URLs change frequently."
     }
   ],
@@ -95,6 +111,28 @@
           "toei-barrier-free"
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
+      },
+      "exitComplexitySignal": {
+        "status": "partial",
+        "matchedStations": [
+          "oshiage"
+        ],
+        "exitCount": 5,
+        "entranceCount": 5,
+        "detectedExitLabels": [
+          "A3",
+          "B1",
+          "B2",
+          "B3",
+          "連絡通路直結"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 0.5,
+        "scoreContribution": 1,
+        "derivedLevel": "Moderate",
+        "message": "5 open exits across 1 of 2 stations matched (Tokyo Metro coverage only). Bucketed as Moderate; Toei-side exits not included."
       },
       "safetySignal": {
         "status": "skipped",
@@ -146,6 +184,26 @@
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "partial",
+        "matchedStations": [
+          "tawaramachi"
+        ],
+        "exitCount": 4,
+        "entranceCount": 4,
+        "detectedExitLabels": [
+          "1",
+          "2",
+          "3"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 0.5,
+        "scoreContribution": 4,
+        "derivedLevel": "Simple",
+        "message": "4 open exits across 1 of 2 stations matched (Tokyo Metro coverage only). Bucketed as Simple; Toei-side exits not included."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -194,6 +252,31 @@
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "asakusa"
+        ],
+        "exitCount": 8,
+        "entranceCount": 8,
+        "detectedExitLabels": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": 1,
+        "derivedLevel": "Moderate",
+        "message": "8 open exits across 1 matched Tokyo Metro station (asakusa). Bucketed as Moderate."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -236,6 +319,32 @@
         "scoreContribution": null,
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "ueno"
+        ],
+        "exitCount": 9,
+        "entranceCount": 9,
+        "detectedExitLabels": [
+          "1",
+          "2",
+          "3",
+          "5a",
+          "5b",
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -3,
+        "derivedLevel": "Complex",
+        "message": "9 open exits across 1 matched Tokyo Metro station (ueno). Bucketed as Complex."
       },
       "safetySignal": {
         "status": "skipped",
@@ -284,6 +393,18 @@
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "skipped",
+        "matchedStations": [],
+        "exitCount": null,
+        "entranceCount": null,
+        "detectedExitLabels": [],
+        "sourceIds": [],
+        "sourceCoverage": 0,
+        "scoreContribution": null,
+        "derivedLevel": null,
+        "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -297,8 +418,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "kiyosumi-shirakawa": {
@@ -331,6 +452,28 @@
           "toei-barrier-free"
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "kiyosumi-shirakawa"
+        ],
+        "exitCount": 5,
+        "entranceCount": 5,
+        "detectedExitLabels": [
+          "A1",
+          "A2",
+          "A3",
+          "B1",
+          "B2"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": 1,
+        "derivedLevel": "Moderate",
+        "message": "5 open exits across 1 matched Tokyo Metro station (kiyosumi-shirakawa). Bucketed as Moderate."
       },
       "safetySignal": {
         "status": "skipped",
@@ -379,6 +522,29 @@
           "toei-barrier-free"
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "monzen-nakacho"
+        ],
+        "exitCount": 6,
+        "entranceCount": 6,
+        "detectedExitLabels": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": 1,
+        "derivedLevel": "Moderate",
+        "message": "6 open exits across 1 matched Tokyo Metro station (monzen-nakacho). Bucketed as Moderate."
       },
       "safetySignal": {
         "status": "skipped",
@@ -430,6 +596,36 @@
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "ningyocho",
+          "suitengumae"
+        ],
+        "exitCount": 13,
+        "entranceCount": 13,
+        "detectedExitLabels": [
+          "1a",
+          "2",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "A2",
+          "A3",
+          "A4",
+          "A5",
+          "A6"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -3,
+        "derivedLevel": "Complex",
+        "message": "13 open exits across 2 matched Tokyo Metro stations (ningyocho, suitengumae). Bucketed as Complex."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -473,6 +669,29 @@
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "hatchobori"
+        ],
+        "exitCount": 7,
+        "entranceCount": 7,
+        "detectedExitLabels": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5a",
+          "A5b"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": 1,
+        "derivedLevel": "Moderate",
+        "message": "7 open exits across 1 matched Tokyo Metro station (hatchobori). Bucketed as Moderate."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -515,6 +734,34 @@
         "scoreContribution": null,
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "kayabacho"
+        ],
+        "exitCount": 11,
+        "entranceCount": 11,
+        "detectedExitLabels": [
+          "10",
+          "11",
+          "12",
+          "1a",
+          "1b",
+          "2",
+          "3",
+          "4a",
+          "4b",
+          "7",
+          "8"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -3,
+        "derivedLevel": "Complex",
+        "message": "11 open exits across 1 matched Tokyo Metro station (kayabacho). Bucketed as Complex."
       },
       "safetySignal": {
         "status": "skipped",
@@ -565,6 +812,51 @@
           "toei-barrier-free"
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "nihombashi",
+          "mitsukoshimae"
+        ],
+        "exitCount": 37,
+        "entranceCount": 37,
+        "detectedExitLabels": [
+          "A1",
+          "A10",
+          "A2",
+          "A3",
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "B0",
+          "B1",
+          "B10",
+          "B12",
+          "B2",
+          "B3",
+          "B4",
+          "B5",
+          "B6",
+          "B7",
+          "B8",
+          "B9",
+          "C1",
+          "C2",
+          "C4",
+          "C5",
+          "D3"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -6,
+        "derivedLevel": "Mega station",
+        "message": "37 open exits across 2 matched Tokyo Metro stations (nihombashi, mitsukoshimae). Bucketed as Mega station."
       },
       "safetySignal": {
         "status": "skipped",
@@ -617,6 +909,87 @@
           "toei-barrier-free"
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
+      },
+      "exitComplexitySignal": {
+        "status": "partial",
+        "matchedStations": [
+          "tokyo",
+          "otemachi",
+          "nijubashimae"
+        ],
+        "exitCount": 65,
+        "entranceCount": 65,
+        "detectedExitLabels": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5a",
+          "5b",
+          "6",
+          "7",
+          "A4",
+          "A5",
+          "B10",
+          "B1a",
+          "B1b",
+          "B2a",
+          "B2b",
+          "B2c",
+          "B3",
+          "B4",
+          "B5",
+          "B8b",
+          "B9a",
+          "B9b",
+          "C1",
+          "C10",
+          "C11",
+          "C12",
+          "C13a",
+          "C13b",
+          "C14",
+          "C2a",
+          "C2b",
+          "C2c",
+          "C3",
+          "C4",
+          "C5",
+          "C6a",
+          "C6b",
+          "C7",
+          "C8",
+          "C9",
+          "D2",
+          "D3",
+          "D4",
+          "D5",
+          "D6",
+          "D7",
+          "E1",
+          "E2",
+          "M1",
+          "M10",
+          "M11",
+          "M12",
+          "M13",
+          "M14",
+          "M2",
+          "M3",
+          "M4",
+          "M5",
+          "M6",
+          "M7",
+          "M8",
+          "M9"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 0.6,
+        "scoreContribution": -6,
+        "derivedLevel": "Mega station",
+        "message": "65 open exits across 3 of 5 stations matched (Tokyo Metro coverage only). Bucketed as Mega station; Toei-side exits not included."
       },
       "safetySignal": {
         "status": "skipped",
@@ -673,6 +1046,71 @@
         ],
         "message": "All 2 matched Toei stations report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "ginza",
+          "yurakucho",
+          "hibiya",
+          "higashi-ginza"
+        ],
+        "exitCount": 76,
+        "entranceCount": 76,
+        "detectedExitLabels": [
+          "3",
+          "4",
+          "5",
+          "6",
+          "A0",
+          "A1",
+          "A10",
+          "A11",
+          "A12",
+          "A13",
+          "A14",
+          "A2",
+          "A3",
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "B1",
+          "B2",
+          "B3",
+          "B4",
+          "B5",
+          "B6",
+          "B7",
+          "B8",
+          "B9",
+          "C1",
+          "C2",
+          "C3",
+          "C4",
+          "C5",
+          "C6",
+          "C7",
+          "C8",
+          "C9",
+          "D1",
+          "D3",
+          "D4",
+          "D5",
+          "D6",
+          "D7",
+          "D8",
+          "D9"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -6,
+        "derivedLevel": "Mega station",
+        "message": "76 open exits across 4 matched Tokyo Metro stations (ginza, yurakucho, hibiya, higashi-ginza). Bucketed as Mega station."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -721,6 +1159,31 @@
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "shimbashi"
+        ],
+        "exitCount": 8,
+        "entranceCount": 8,
+        "detectedExitLabels": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": 1,
+        "derivedLevel": "Moderate",
+        "message": "8 open exits across 1 matched Tokyo Metro station (shimbashi). Bucketed as Moderate."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -768,6 +1231,18 @@
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "skipped",
+        "matchedStations": [],
+        "exitCount": null,
+        "entranceCount": null,
+        "detectedExitLabels": [],
+        "sourceIds": [],
+        "sourceCoverage": 0,
+        "scoreContribution": null,
+        "derivedLevel": null,
+        "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -781,8 +1256,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "shinagawa": {
@@ -804,6 +1279,18 @@
         "scoreContribution": null,
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
+      },
+      "exitComplexitySignal": {
+        "status": "skipped",
+        "matchedStations": [],
+        "exitCount": null,
+        "entranceCount": null,
+        "detectedExitLabels": [],
+        "sourceIds": [],
+        "sourceCoverage": 0,
+        "scoreContribution": null,
+        "derivedLevel": null,
+        "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
       },
       "safetySignal": {
         "status": "skipped",
@@ -852,6 +1339,18 @@
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "skipped",
+        "matchedStations": [],
+        "exitCount": null,
+        "entranceCount": null,
+        "detectedExitLabels": [],
+        "sourceIds": [],
+        "sourceCoverage": 0,
+        "scoreContribution": null,
+        "derivedLevel": null,
+        "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -865,8 +1364,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "meguro": {
@@ -898,6 +1397,25 @@
           "toei-barrier-free"
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "meguro"
+        ],
+        "exitCount": 2,
+        "entranceCount": 2,
+        "detectedExitLabels": [
+          "正面口",
+          "西口"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": 4,
+        "derivedLevel": "Simple",
+        "message": "2 open exits across 1 matched Tokyo Metro station (meguro). Bucketed as Simple."
       },
       "safetySignal": {
         "status": "skipped",
@@ -942,6 +1460,28 @@
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "ebisu"
+        ],
+        "exitCount": 5,
+        "entranceCount": 5,
+        "detectedExitLabels": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": 1,
+        "derivedLevel": "Moderate",
+        "message": "5 open exits across 1 matched Tokyo Metro station (ebisu). Bucketed as Moderate."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -984,6 +1524,18 @@
         "scoreContribution": null,
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
+      },
+      "exitComplexitySignal": {
+        "status": "skipped",
+        "matchedStations": [],
+        "exitCount": null,
+        "entranceCount": null,
+        "detectedExitLabels": [],
+        "sourceIds": [],
+        "sourceCoverage": 0,
+        "scoreContribution": null,
+        "derivedLevel": null,
+        "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1036,6 +1588,67 @@
         ],
         "message": "All 2 matched Toei stations report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "shinjuku",
+          "shinjuku-sanchome"
+        ],
+        "exitCount": 44,
+        "entranceCount": 44,
+        "detectedExitLabels": [
+          "A1",
+          "A12",
+          "A16",
+          "A17",
+          "A2",
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "A8",
+          "A9",
+          "B10",
+          "B11",
+          "B12a",
+          "B12b",
+          "B13",
+          "B14",
+          "B15",
+          "B16",
+          "B17",
+          "B18",
+          "B2",
+          "B3",
+          "B4",
+          "B5",
+          "B6",
+          "B7",
+          "B8",
+          "B9",
+          "C1",
+          "C3",
+          "C4",
+          "C7",
+          "C8",
+          "E1",
+          "E10",
+          "E2",
+          "E3",
+          "E4",
+          "E5",
+          "E6",
+          "E8",
+          "E9"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -6,
+        "derivedLevel": "Mega station",
+        "message": "44 open exits across 2 matched Tokyo Metro stations (shinjuku, shinjuku-sanchome). Bucketed as Mega station."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1083,6 +1696,18 @@
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "skipped",
+        "matchedStations": [],
+        "exitCount": null,
+        "entranceCount": null,
+        "detectedExitLabels": [],
+        "sourceIds": [],
+        "sourceCoverage": 0,
+        "scoreContribution": null,
+        "derivedLevel": null,
+        "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1096,8 +1721,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "ikebukuro": {
@@ -1125,6 +1750,58 @@
         "scoreContribution": null,
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "ikebukuro"
+        ],
+        "exitCount": 35,
+        "entranceCount": 35,
+        "detectedExitLabels": [
+          "1a",
+          "1b",
+          "22",
+          "27",
+          "29",
+          "2a",
+          "2b",
+          "3",
+          "33",
+          "34",
+          "35",
+          "36",
+          "37",
+          "38",
+          "39",
+          "4",
+          "40",
+          "41",
+          "43",
+          "5",
+          "6a",
+          "6b",
+          "7",
+          "8",
+          "9",
+          "C1",
+          "C10",
+          "C1b",
+          "C2",
+          "C3",
+          "C4",
+          "C6",
+          "C7",
+          "C8",
+          "C9"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -6,
+        "derivedLevel": "Mega station",
+        "message": "35 open exits across 1 matched Tokyo Metro station (ikebukuro). Bucketed as Mega station."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1171,6 +1848,29 @@
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "akihabara",
+          "suehirocho"
+        ],
+        "exitCount": 9,
+        "entranceCount": 9,
+        "detectedExitLabels": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -3,
+        "derivedLevel": "Complex",
+        "message": "9 open exits across 2 matched Tokyo Metro stations (akihabara, suehirocho). Bucketed as Complex."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1213,6 +1913,29 @@
         "scoreContribution": null,
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "kanda"
+        ],
+        "exitCount": 6,
+        "entranceCount": 6,
+        "detectedExitLabels": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": 1,
+        "derivedLevel": "Moderate",
+        "message": "6 open exits across 1 matched Tokyo Metro station (kanda). Bucketed as Moderate."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1261,6 +1984,18 @@
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "skipped",
+        "matchedStations": [],
+        "exitCount": null,
+        "entranceCount": null,
+        "detectedExitLabels": [],
+        "sourceIds": [],
+        "sourceCoverage": 0,
+        "scoreContribution": null,
+        "derivedLevel": null,
+        "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1274,8 +2009,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "bakurocho-higashinihombashi": {
@@ -1311,6 +2046,18 @@
         ],
         "message": "All 2 matched Toei stations report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "skipped",
+        "matchedStations": [],
+        "exitCount": null,
+        "entranceCount": null,
+        "detectedExitLabels": [],
+        "sourceIds": [],
+        "sourceCoverage": 0,
+        "scoreContribution": null,
+        "derivedLevel": null,
+        "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1324,8 +2071,8 @@
         "message": "Optional source not fetched in this pass."
       },
       "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
       }
     },
     "kinshicho": {
@@ -1353,6 +2100,28 @@
         "scoreContribution": null,
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "kinshicho"
+        ],
+        "exitCount": 5,
+        "entranceCount": 5,
+        "detectedExitLabels": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": 1,
+        "derivedLevel": "Moderate",
+        "message": "5 open exits across 1 matched Tokyo Metro station (kinshicho). Bucketed as Moderate."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1398,6 +2167,38 @@
         "scoreContribution": null,
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "akasaka",
+          "akasaka-mitsuke"
+        ],
+        "exitCount": 22,
+        "entranceCount": 22,
+        "detectedExitLabels": [
+          "1",
+          "10",
+          "11",
+          "2",
+          "3",
+          "3a",
+          "3b",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9a",
+          "9b"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -6,
+        "derivedLevel": "Mega station",
+        "message": "22 open exits across 2 matched Tokyo Metro stations (akasaka, akasaka-mitsuke). Bucketed as Mega station."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1446,6 +2247,33 @@
           "toei-barrier-free"
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "roppongi"
+        ],
+        "exitCount": 10,
+        "entranceCount": 10,
+        "detectedExitLabels": [
+          "1a",
+          "1b",
+          "1c",
+          "2",
+          "3",
+          "4a",
+          "4b",
+          "6",
+          "7",
+          "8"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -3,
+        "derivedLevel": "Complex",
+        "message": "10 open exits across 1 matched Tokyo Metro station (roppongi). Bucketed as Complex."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1499,6 +2327,45 @@
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "omotesando",
+          "aoyama-itchome",
+          "gaiemmae"
+        ],
+        "exitCount": 21,
+        "entranceCount": 21,
+        "detectedExitLabels": [
+          "0",
+          "1",
+          "1a",
+          "2",
+          "2b",
+          "3",
+          "4",
+          "4a",
+          "4b",
+          "5",
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5",
+          "B1",
+          "B2",
+          "B3",
+          "B4",
+          "B5"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -6,
+        "derivedLevel": "Mega station",
+        "message": "21 open exits across 3 matched Tokyo Metro stations (omotesando, aoyama-itchome, gaiemmae). Bucketed as Mega station."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1543,6 +2410,42 @@
         "scoreContribution": null,
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "ochanomizu",
+          "shin-ochanomizu"
+        ],
+        "exitCount": 18,
+        "entranceCount": 18,
+        "detectedExitLabels": [
+          "1",
+          "2",
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5",
+          "A6",
+          "A7",
+          "B1",
+          "B2",
+          "B3",
+          "B3a",
+          "B3b",
+          "B4",
+          "B5",
+          "B6",
+          "B7"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -6,
+        "derivedLevel": "Mega station",
+        "message": "18 open exits across 2 matched Tokyo Metro stations (ochanomizu, shin-ochanomizu). Bucketed as Mega station."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1591,6 +2494,35 @@
           "toei-barrier-free"
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
+      },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "iidabashi"
+        ],
+        "exitCount": 13,
+        "entranceCount": 13,
+        "detectedExitLabels": [
+          "A1",
+          "A2",
+          "A3",
+          "A4",
+          "A5",
+          "B1",
+          "B2a",
+          "B2b",
+          "B3",
+          "B4a",
+          "B4b",
+          "B5"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -3,
+        "derivedLevel": "Complex",
+        "message": "13 open exits across 1 matched Tokyo Metro station (iidabashi). Bucketed as Complex."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1642,6 +2574,31 @@
         ],
         "message": "All 1 matched Toei station report a confirmed step-free route (1ルート確保)."
       },
+      "exitComplexitySignal": {
+        "status": "partial",
+        "matchedStations": [
+          "korakuen"
+        ],
+        "exitCount": 8,
+        "entranceCount": 8,
+        "detectedExitLabels": [
+          "1",
+          "2",
+          "3",
+          "4a",
+          "4b",
+          "5",
+          "6",
+          "8"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 0.5,
+        "scoreContribution": 1,
+        "derivedLevel": "Moderate",
+        "message": "8 open exits across 1 of 2 stations matched (Tokyo Metro coverage only). Bucketed as Moderate; Toei-side exits not included."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1685,6 +2642,33 @@
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
       },
+      "exitComplexitySignal": {
+        "status": "success",
+        "matchedStations": [
+          "toyosu"
+        ],
+        "exitCount": 10,
+        "entranceCount": 10,
+        "detectedExitLabels": [
+          "1a",
+          "1b",
+          "1c",
+          "2a",
+          "2b",
+          "3",
+          "5",
+          "6a",
+          "6b",
+          "7"
+        ],
+        "sourceIds": [
+          "tokyo-metro-station-exits"
+        ],
+        "sourceCoverage": 1,
+        "scoreContribution": -3,
+        "derivedLevel": "Complex",
+        "message": "10 open exits across 1 matched Tokyo Metro station (toyosu). Bucketed as Complex."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1721,6 +2705,18 @@
         "scoreContribution": null,
         "sourceIds": [],
         "message": "No matching Toei stations for this area (other operators not parsed yet)."
+      },
+      "exitComplexitySignal": {
+        "status": "skipped",
+        "matchedStations": [],
+        "exitCount": null,
+        "entranceCount": null,
+        "detectedExitLabels": [],
+        "sourceIds": [],
+        "sourceCoverage": 0,
+        "scoreContribution": null,
+        "derivedLevel": null,
+        "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
       },
       "safetySignal": {
         "status": "skipped",

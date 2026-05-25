@@ -151,6 +151,40 @@ export type StepFreeSignal = {
   message?: string;
 };
 
+/**
+ * Exit / entrance complexity signal derived from public station-information
+ * data (Phase 4). We count open exits per matched station and bucket the
+ * total into one of the editorial `ExitComplexityLevel`s.
+ *
+ * Tokyo Metro publishes `/station/exit.json` with one record per
+ * `station_base_name` × `exit_no` × `elevator` × `close`. We count records
+ * with `close === "0"` as open exits.
+ *
+ * Toei does not publish a comparable open-data exit feed at this time, so
+ * areas without Tokyo Metro coverage fall back to the editorial
+ * `exitComplexityLevel`. Missing data is never punished.
+ */
+export type ExitComplexitySignal = {
+  status: SignalStatus;
+  /** Canonical station keys that matched in the source data. */
+  matchedStations: string[];
+  /** Total open exits across matched stations (null if no data). */
+  exitCount: number | null;
+  /** Entrance count — alias of exitCount today (Tokyo Metro records both as one). */
+  entranceCount: number | null;
+  /** Raw exit labels detected, e.g. ["A1", "A2", "B1a", "C4", "1", "2", "出口1"]. */
+  detectedExitLabels: string[];
+  /** Sources that contributed to this signal. */
+  sourceIds: Array<"tokyo-metro-station-exits" | "toei-station-exits">;
+  /** 0..1 fraction of stationNames in the area that matched an upstream source. */
+  sourceCoverage: number;
+  /** Score contribution applied via the exitComplexity term (positive = better). */
+  scoreContribution: number | null;
+  /** Bucketed level — derived from exitCount when available, else null. */
+  derivedLevel: ExitComplexityLevel | null;
+  message?: string;
+};
+
 export type OptionalSignal = {
   status: SignalStatus;
   message?: string;
@@ -169,6 +203,7 @@ export type StayAreaSignal = {
   matchedStations: string[];
   passengerSignal: PassengerSignal;
   stepFreeSignal: StepFreeSignal;
+  exitComplexitySignal: ExitComplexitySignal;
   safetySignal: OptionalSignal;
   floodNoteSignal: OptionalSignal;
   lodgingDensitySignal: OptionalSignal;

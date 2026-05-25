@@ -21,9 +21,24 @@
  *      extract  順位 / 路線 / 駅名 / 人員 / 前年比.  The count column is
  *      already boarding+alighting (一日平均乗降人員), so we use it as-is.
  *
- * Other sources (Toei barrier-free CSV catalog, Tokyo Metro barrier-free pages,
- * ODPT station info, police crime, GSI hazard, lodging facilities) are marked
- * skipped per spec — registered for future passes.
+ *   3. Toei Subway barrier-free CSVs (Phase 3)
+ *      Dataset:  catalog.data.metro.tokyo.lg.jp  ›  t000018d0000000028
+ *      One row per station with column `1ルート確保（エレベーター等）`.
+ *      `○` means at least one step-free route to the platform is confirmed.
+ *
+ *   4. Tokyo Metro station exit list (Phase 4)
+ *      URL:      tokyometro.jp/station/exit.json
+ *      One JSON record per station × exit_no × elevator × close. We count
+ *      records with `close === "0"` as open exits and bucket the total
+ *      (<=4 Simple, 5–8 Moderate, 9–14 Complex, 15+ Mega station).
+ *
+ * Toei does not publish a comparable per-station exit feed at this time —
+ * the Toei station detail URLs return 404 from a script, so the
+ * `toei-station-exits` source is registered-only.
+ *
+ * Other sources (Tokyo Metro barrier-free per-station pages, ODPT station
+ * info, police crime, GSI hazard, lodging facilities) are marked skipped
+ * per spec — registered for future passes.
  *
  * Robustness:
  *   - Any source-level fetch or parse failure marks that source `failed` and
@@ -67,6 +82,11 @@ const TOEI_LANDING = "https://www.kotsu.metro.tokyo.jp/subway/kanren/passengers.
 
 const TOKYO_METRO_PASSENGER_URL =
   "https://www.tokyometro.jp/corporate/enterprise/passenger_rail/transportation/passengers/index.html";
+
+// Tokyo Metro publishes a single JSON feed used by their station pages to
+// render exit lists. One record per (station_base_name, exit_no, elevator,
+// close, usage_limit, facilities). We count records with close === "0".
+const TOKYO_METRO_EXITS_URL = "https://www.tokyometro.jp/station/exit.json";
 
 // ---------- helpers ---------------------------------------------------------
 
@@ -148,7 +168,7 @@ const NORMALIZE_PAIRS = [
   { canonical: "akasaka",                aliases: ["Akasaka", "赤坂"] },
   { canonical: "akasaka-mitsuke",        aliases: ["Akasaka-mitsuke", "赤坂見附"] },
   { canonical: "roppongi",               aliases: ["Roppongi", "六本木"] },
-  { canonical: "omotesando",             aliases: ["Omotesando", "表参道"] },
+  { canonical: "omotesando",             aliases: ["Omotesando", "表参道", "omote-sando"] },
   { canonical: "aoyama-itchome",         aliases: ["Aoyama-itchome", "青山一丁目"] },
   { canonical: "gaiemmae",               aliases: ["Gaiemmae", "外苑前"] },
   { canonical: "ochanomizu",             aliases: ["Ochanomizu", "御茶ノ水", "お茶の水"] },
@@ -504,6 +524,150 @@ async function fetchToeiBarrierFree() {
   };
 }
 
+// ---------- Tokyo Metro per-station exits (JSON feed) --------------------
+
+/**
+ * Patterns we recognise as legitimate exit labels. The Tokyo Metro feed
+ * already gives us a clean `exit_no` field — we accept records whose label
+ * matches one of these shapes after trimming.
+ *
+ *   A1, B1a, C10, M14         → /^[A-Z]\d+[a-z]?$/
+ *   1, 2, 5a, 5b              → /^\d{1,3}[a-z]?$/
+ *   出口1, 出口2               → /^出口\d+$/
+ *   1番出口, 12番出口          → /^\d{1,3}番出口$/
+ *   正面口, 西口, 中央口        → /^(正面|中央|東|西|南|北|改札)口$/
+ *   連絡通路直結                → exact string
+ *   エレベーター専用出入口      → exact string
+ */
+const EXIT_LABEL_PATTERNS = [
+  /^[A-Z]\d{1,3}[a-z]?$/,
+  /^\d{1,3}[a-z]?$/,
+  /^出口\d+$/u,
+  /^\d{1,3}番出口$/u,
+  /^(?:正面|中央|東|西|南|北|改札)口$/u,
+];
+const EXIT_LABEL_EXACT = new Set([
+  "連絡通路直結",
+  "エレベーター専用出入口",
+]);
+
+function isRecognisedExitLabel(label) {
+  if (!label) return false;
+  if (EXIT_LABEL_EXACT.has(label)) return true;
+  return EXIT_LABEL_PATTERNS.some((re) => re.test(label));
+}
+
+function exitLevelFromCount(count) {
+  if (count <= 4) return "Simple";
+  if (count <= 8) return "Moderate";
+  if (count <= 14) return "Complex";
+  return "Mega station";
+}
+
+async function fetchTokyoMetroStationExits() {
+  const fetchedAt = new Date().toISOString();
+  try {
+    const { ok, status, buf } = await fetchBuffer(TOKYO_METRO_EXITS_URL);
+    if (!ok) {
+      return {
+        sourceId: "tokyo-metro-station-exits",
+        label: "Tokyo Metro per-station exit list",
+        status: "failed",
+        fetchedAt,
+        records: 0,
+        message: `Tokyo Metro exit.json HTTP ${status}.`,
+        stationExits: {},
+      };
+    }
+    const text = buf.toString("utf8");
+    // The feed is JSON but is loaded as text with surrounding whitespace and
+    // sometimes a leading BOM; trim before parsing.
+    const json = JSON.parse(text.replace(/^﻿/, "").trim());
+    if (!Array.isArray(json)) {
+      return {
+        sourceId: "tokyo-metro-station-exits",
+        label: "Tokyo Metro per-station exit list",
+        status: "failed",
+        fetchedAt,
+        records: 0,
+        message: "Tokyo Metro exit.json did not return an array.",
+        stationExits: {},
+      };
+    }
+
+    // Aggregate per station: count open exits with non-empty exit_no, and
+    // collect a deduplicated list of recognisable labels.
+    const byStation = new Map();
+    let totalRows = 0;
+    for (const r of json) {
+      totalRows += 1;
+      const slug = String(r?.station_base_name || "").trim();
+      const exitNo = String(r?.exit_no || "").trim();
+      if (!slug || !exitNo) continue;
+      if (String(r?.close || "0") !== "0") continue;
+
+      const canonical = normalizeStationName(slug);
+      if (!canonical) continue;
+
+      const prior =
+        byStation.get(canonical) ?? {
+          exitCount: 0,
+          elevatorCount: 0,
+          labels: new Set(),
+          tmSlugs: new Set(),
+        };
+      prior.exitCount += 1;
+      if (String(r?.elevator || "0") === "1") prior.elevatorCount += 1;
+      if (isRecognisedExitLabel(exitNo)) prior.labels.add(exitNo);
+      prior.tmSlugs.add(slug);
+      byStation.set(canonical, prior);
+    }
+
+    const stationExits = {};
+    for (const [canonical, v] of byStation) {
+      stationExits[canonical] = {
+        exitCount: v.exitCount,
+        elevatorCount: v.elevatorCount,
+        labels: Array.from(v.labels).sort(),
+        tmSlugs: Array.from(v.tmSlugs),
+      };
+    }
+
+    if (Object.keys(stationExits).length === 0) {
+      return {
+        sourceId: "tokyo-metro-station-exits",
+        label: "Tokyo Metro per-station exit list",
+        status: "failed",
+        fetchedAt,
+        records: 0,
+        message: `Tokyo Metro exit.json parsed ${totalRows} rows but matched 0 canonical stations.`,
+        stationExits: {},
+      };
+    }
+
+    return {
+      sourceId: "tokyo-metro-station-exits",
+      label: "Tokyo Metro per-station exit list",
+      status: "success",
+      fetchedAt,
+      sourcePeriod: "Tokyo Metro live exit feed (refreshed irregularly per station revision_date)",
+      records: totalRows,
+      message: `Parsed ${totalRows} exit records across ${Object.keys(stationExits).length} canonical stations from tokyometro.jp/station/exit.json.`,
+      stationExits,
+    };
+  } catch (err) {
+    return {
+      sourceId: "tokyo-metro-station-exits",
+      label: "Tokyo Metro per-station exit list",
+      status: "failed",
+      fetchedAt,
+      records: 0,
+      message: `Tokyo Metro exit fetch error: ${err?.message || String(err)}`,
+      stationExits: {},
+    };
+  }
+}
+
 // ---------- Optional / registered-only sources -----------------------------
 
 function skippedSource(sourceId, label, message) {
@@ -543,10 +707,11 @@ async function main() {
   console.log(`[stay-area:update-signals] Loading ${areasBase.length} editorial areas.`);
   console.log(`[stay-area:update-signals] Toei landing reference: ${TOEI_LANDING}`);
 
-  const [toei, tokyoMetro, toeiBarrierFree] = await Promise.all([
+  const [toei, tokyoMetro, toeiBarrierFree, tokyoMetroExits] = await Promise.all([
     fetchToei(),
     fetchTokyoMetro(),
     fetchToeiBarrierFree(),
+    fetchTokyoMetroStationExits(),
   ]);
 
   // Tokyo Metro barrier-free page is JS-rendered (~263 B from a script
@@ -556,6 +721,11 @@ async function main() {
     "tokyo-metro-barrier-free",
     "Tokyo Metro accessibility / barrier-free pages",
     "Page is client-rendered from a script request; per-station detail pages not parsed in this pass.",
+  );
+  const toeiStationExits = skippedSource(
+    "toei-station-exits",
+    "Toei Subway per-station exit list",
+    "Toei station detail URLs return 404 from a script; no comparable feed exists yet. Skipped cleanly.",
   );
   const odpt = odptSource();
   const policeCrime = skippedSource(
@@ -578,6 +748,8 @@ async function main() {
     tokyoMetro,
     toei,
     toeiBarrierFree,
+    tokyoMetroExits,
+    toeiStationExits,
     tokyoMetroBarrierFree,
     odpt,
     policeCrime,
@@ -689,6 +861,76 @@ async function main() {
     }
   }
 
+  // ----- bucket Tokyo Metro exits per area ---------------------------------
+  // We aggregate open-exit counts across matched canonical stations within
+  // each area, dedupe label strings, and bucket the total into the editorial
+  // ExitComplexityLevel. Toei-only areas (no TM station) fall back to the
+  // editorial level — they are marked `skipped` (not penalised).
+  const areaExits = new Map();
+  for (const area of areasBase) {
+    const keys = areaCanonicalKeys(area.stationNames);
+    const matched = [];
+    const labels = new Set();
+    let exitCount = 0;
+    const sourceIds = new Set();
+    for (const k of keys) {
+      const v = tokyoMetroExits.stationExits?.[k];
+      if (!v) continue;
+      matched.push(k);
+      exitCount += v.exitCount || 0;
+      for (const l of v.labels || []) labels.add(l);
+      sourceIds.add("tokyo-metro-station-exits");
+    }
+    const coverage = keys.length > 0 ? Number((matched.length / keys.length).toFixed(2)) : 0;
+
+    if (matched.length === 0) {
+      areaExits.set(area.id, {
+        status: tokyoMetroExits.status === "failed" ? "failed" : "skipped",
+        matchedStations: [],
+        exitCount: null,
+        entranceCount: null,
+        detectedExitLabels: [],
+        sourceIds: [],
+        sourceCoverage: 0,
+        scoreContribution: null,
+        derivedLevel: null,
+        message:
+          tokyoMetroExits.status === "failed"
+            ? "Tokyo Metro exit feed failed; falling back to editorial exit complexity."
+            : "No Tokyo Metro station matched this area; using editorial exit-complexity level.",
+      });
+      continue;
+    }
+
+    const derivedLevel = exitLevelFromCount(exitCount);
+    const scoreContribution = (() => {
+      switch (derivedLevel) {
+        case "Simple": return 4;
+        case "Moderate": return 1;
+        case "Complex": return -3;
+        case "Mega station": return -6;
+        default: return 0;
+      }
+    })();
+
+    const status = matched.length === keys.length ? "success" : "partial";
+    areaExits.set(area.id, {
+      status,
+      matchedStations: matched,
+      exitCount,
+      entranceCount: exitCount,
+      detectedExitLabels: Array.from(labels).sort(),
+      sourceIds: Array.from(sourceIds),
+      sourceCoverage: coverage,
+      scoreContribution,
+      derivedLevel,
+      message:
+        status === "success"
+          ? `${exitCount} open exits across ${matched.length} matched Tokyo Metro station${matched.length === 1 ? "" : "s"} (${matched.join(", ")}). Bucketed as ${derivedLevel}.`
+          : `${exitCount} open exits across ${matched.length} of ${keys.length} stations matched (Tokyo Metro coverage only). Bucketed as ${derivedLevel}; Toei-side exits not included.`,
+    });
+  }
+
   // ----- per-area signal records -------------------------------------------
   const tokyoMetroOk = tokyoMetro.status === "success" || tokyoMetro.status === "partial";
   const toeiOk = toei.status === "success" || toei.status === "partial";
@@ -740,12 +982,27 @@ async function main() {
     };
     const stepFreeOk = stepFreeSignal.status === "success" || stepFreeSignal.status === "partial";
 
+    const exitComplexitySignal = areaExits.get(area.id) ?? {
+      status: "skipped",
+      matchedStations: [],
+      exitCount: null,
+      entranceCount: null,
+      detectedExitLabels: [],
+      sourceIds: [],
+      sourceCoverage: 0,
+      scoreContribution: null,
+      derivedLevel: null,
+      message: "No exit-complexity data computed for this area.",
+    };
+    const exitOk =
+      exitComplexitySignal.status === "success" || exitComplexitySignal.status === "partial";
+
     let sourceFreshness;
-    if (bothPassengerOk && hasMatch && stepFreeOk) {
+    if (bothPassengerOk && hasMatch && stepFreeOk && exitOk) {
       sourceFreshness = { level: "public-data-local", label: "Public sources checked locally" };
     } else if (anyPassengerOk && hasMatch) {
       sourceFreshness = { level: "partial-public-data", label: "Public data: partially matched" };
-    } else if (anyPassengerOk || stepFreeOk) {
+    } else if (anyPassengerOk || stepFreeOk || exitOk) {
       sourceFreshness = { level: "partial-public-data", label: "Public data: partially matched" };
     } else {
       sourceFreshness = { level: "fallback", label: "Editorial fallback (public sources unavailable)" };
@@ -763,6 +1020,7 @@ async function main() {
         sourcePeriod: toei.sourcePeriod || tokyoMetro.sourcePeriod || undefined,
       },
       stepFreeSignal,
+      exitComplexitySignal,
       safetySignal,
       floodNoteSignal,
       lodgingDensitySignal,
@@ -776,6 +1034,7 @@ async function main() {
     const copy = { ...src };
     delete copy.stationCounts;
     delete copy.stationStepFree;
+    delete copy.stationExits;
     return copy;
   });
 
@@ -804,6 +1063,12 @@ async function main() {
   );
   console.log(
     `[stay-area:update-signals] Areas matched with step-free data: ${stepFreeMatched} / ${areasBase.length}`,
+  );
+  const exitMatched = Array.from(areaExits.values()).filter(
+    (v) => v.status === "success" || v.status === "partial",
+  ).length;
+  console.log(
+    `[stay-area:update-signals] Areas matched with exit-complexity data: ${exitMatched} / ${areasBase.length}`,
   );
   console.log(`[stay-area:update-signals] Wrote signals + source-status JSON at ${generatedAt}.`);
 }

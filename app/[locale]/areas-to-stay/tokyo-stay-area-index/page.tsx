@@ -147,8 +147,8 @@ const sourceStatusFile = sourceStatusJson as SourceStatusFile;
 
 const FRESHNESS_HEADLINE = "Passenger-data-informed local refresh";
 const FRESHNESS_SUBLINE =
-  "Passenger volume and Toei step-free / elevator data refresh when public sources update.";
-const FRESHNESS_TAIL = "Tokyo Metro accessibility and lodging-density sources are not yet live.";
+  "Passenger volume, Toei step-free / elevator data, and Tokyo Metro per-station exit counts refresh when public sources update.";
+const FRESHNESS_TAIL = "Tokyo Metro accessibility, Toei exit lists, and lodging-density sources are not yet live.";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -239,6 +239,37 @@ function complexityChipTone(level: ExitComplexityLevel): ChipTone {
   if (level === "Complex") return "warn";
   if (level === "Moderate") return "soft";
   return "calm";
+}
+
+/**
+ * Resolve the exit-complexity level + provenance for display. Prefers
+ * the live `exitComplexitySignal.derivedLevel` when status is success or
+ * partial; otherwise falls back to the editorial `exitComplexityLevel`.
+ * Missing data is shown as "Editorial fallback" rather than "Unknown".
+ */
+function exitComplexityDisplay(
+  signal: StayAreaSignalsFile["areas"][string] | undefined,
+  fallback: ExitComplexityLevel,
+): {
+  level: ExitComplexityLevel;
+  fromData: boolean;
+  exitCount: number | null;
+  coverage: number;
+} {
+  const sig = signal?.exitComplexitySignal;
+  if (
+    sig &&
+    (sig.status === "success" || sig.status === "partial") &&
+    sig.derivedLevel != null
+  ) {
+    return {
+      level: sig.derivedLevel,
+      fromData: true,
+      exitCount: sig.exitCount,
+      coverage: sig.sourceCoverage,
+    };
+  }
+  return { level: fallback, fromData: false, exitCount: null, coverage: 0 };
 }
 /**
  * Display the step-free signal as a row chip / detail row.
@@ -363,11 +394,20 @@ function StationUsabilityPanel({
                 : "No passenger data matched this area."
           }
         />
-        <StationUsabilityRow
-          label="Exit / entrance complexity"
-          value={area.exitComplexityLevel}
-          hint={`Contribution: ${contribution.exitComplexity >= 0 ? "+" : ""}${contribution.exitComplexity}`}
-        />
+        {(() => {
+          const ex = exitComplexityDisplay(signal, area.exitComplexityLevel);
+          const detail =
+            ex.fromData && ex.exitCount != null
+              ? `${ex.exitCount} exits detected${ex.coverage < 1 ? ` (partial — ${Math.round(ex.coverage * 100)}% station coverage)` : ""}. Tokyo Metro live exit feed.`
+              : "Editorial fallback (no live exit feed matched this area).";
+          return (
+            <StationUsabilityRow
+              label="Exit / entrance complexity"
+              value={ex.level}
+              hint={`${detail} · Contribution: ${contribution.exitComplexity >= 0 ? "+" : ""}${contribution.exitComplexity}`}
+            />
+          );
+        })()}
         <StationUsabilityRow
           label="Line / operator complexity"
           value={`${area.stationLines.length} lines`}
@@ -492,11 +532,16 @@ function AreaRankRow({
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-1.5">
               <Chip label="Crowd" value={crowd.label} tone={crowd.tone} />
-              <Chip
-                label="Complexity"
-                value={area.exitComplexityLevel}
-                tone={complexityChipTone(area.exitComplexityLevel)}
-              />
+              {(() => {
+                const ex = exitComplexityDisplay(signal, area.exitComplexityLevel);
+                return (
+                  <Chip
+                    label="Complexity"
+                    value={ex.level}
+                    tone={complexityChipTone(ex.level)}
+                  />
+                );
+              })()}
               {(() => {
                 const sf = stepFreeDisplay(signal, area.stepFreeConfidence);
                 return (
@@ -595,6 +640,8 @@ function deriveCoreSignals(
   const toeiPax = get("toei-passengers");
   const tmBarrier = get("tokyo-metro-barrier-free");
   const toeiBarrier = get("toei-barrier-free");
+  const tmExits = get("tokyo-metro-station-exits");
+  const toeiExits = get("toei-station-exits");
   const lodging = get("tokyo-lodging-facilities");
 
   const passengerStatus =
@@ -627,7 +674,33 @@ function deriveCoreSignals(
       ? { label: "Active", tone: "calm" as ChipTone }
       : { label: "Next", tone: "soft" as ChipTone };
 
-  return { passengerStatus, stepFree, stepFreeAreas, lodgingStatus, tokyoMetroPax, toeiPax };
+  // Exit-complexity status reflects both the upstream Tokyo Metro feed and
+  // how many areas actually had matched stations. Toei has no comparable
+  // feed yet — full success requires both, partial allows one.
+  const exitMatchedAreas = Object.values(signals.areas).filter(
+    (a) => a.exitComplexitySignal?.status === "success" || a.exitComplexitySignal?.status === "partial",
+  ).length;
+  const tmExitsOk = tmExits?.status === "success";
+  const toeiExitsOk = toeiExits?.status === "success";
+  const exitStatus = !tmExitsOk && !toeiExitsOk
+    ? { label: "Editorial fallback", tone: "soft" as ChipTone }
+    : tmExitsOk && toeiExitsOk && exitMatchedAreas > 0
+      ? { label: "Success", tone: "calm" as ChipTone }
+      : exitMatchedAreas > 0
+        ? { label: "Partial", tone: "warn" as ChipTone }
+        : { label: "Editorial fallback", tone: "soft" as ChipTone };
+
+  return {
+    passengerStatus,
+    stepFree,
+    stepFreeAreas,
+    exitStatus,
+    exitMatchedAreas,
+    tmExits,
+    lodgingStatus,
+    tokyoMetroPax,
+    toeiPax,
+  };
 }
 
 export default async function TokyoStayAreaIndexPage({ params, searchParams }: Props) {
@@ -739,8 +812,9 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
             <h2 className="text-xl font-semibold text-slate-950">Station usability signals</h2>
           </div>
           <p className="mt-2 text-xs leading-5 text-slate-500">
-            Seven signals drive the score. Passenger volume is live; exit complexity, line / operator complexity,
-            and transfer-hub penalty come from editorial tags; step-free and lodging-density sources are next.
+            Seven signals drive the score. Passenger volume, Toei step-free / elevator coverage, and Tokyo Metro
+            per-station exit counts are live; line / operator complexity and transfer-hub penalty come from
+            editorial tags; lodging-density data is next.
           </p>
 
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -754,9 +828,13 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
             <SignalTile
               icon={DoorOpen}
               title="Exit / entrance complexity"
-              status="Active"
-              statusTone="calm"
-              body="Editorial tags (Simple / Moderate / Complex / Mega station). Affects station simplicity and lightly affects luggage friendliness."
+              status={core.exitStatus.label}
+              statusTone={core.exitStatus.tone}
+              body={
+                core.exitMatchedAreas > 0
+                  ? `Tokyo Metro exit feed parsed — ${core.exitMatchedAreas} of ${generatedScoreCount} areas now use a live open-exit count (bucketed: ≤4 Simple, 5–8 Moderate, 9–14 Complex, 15+ Mega station). Areas without Tokyo Metro coverage use the editorial level.`
+                  : "Editorial tags (Simple / Moderate / Complex / Mega station). Affects station simplicity and lightly affects luggage friendliness."
+              }
             />
             <SignalTile
               icon={Train}
@@ -870,14 +948,16 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               </p>
               <p>
                 Step-free route confidence is read from Toei&apos;s public barrier-free CSVs where matched, and adds a
-                small positive nudge to luggage-friendliness. Missing step-free data is never punished. Hotel choice
+                small positive nudge to luggage-friendliness. Exit / entrance complexity is read from Tokyo
+                Metro&apos;s public per-station exit feed where matched (open exits are counted and bucketed); areas
+                without Tokyo Metro coverage use the editorial level. Missing data is never punished. Hotel choice
                 density is editorial and does not evaluate individual hotels. Scores are not official ratings and
                 do not rank safety, hotel quality, price, or availability.
               </p>
             </div>
             <div className="mt-4 grid gap-2 sm:grid-cols-2">
               <InfoCard icon={Users} title="Crowd" body="Passenger-data-informed; high volume lowers crowd-stress." />
-              <InfoCard icon={DoorOpen} title="Complexity" body="Exit / entrance complexity from editorial tags." />
+              <InfoCard icon={DoorOpen} title="Complexity" body="Exit / entrance complexity from Tokyo Metro's exit feed where matched, editorial otherwise." />
               <InfoCard icon={Train} title="Lines" body="More lines / operators lower station simplicity." />
               <InfoCard icon={Signpost} title="Transfer" body="Transfer-hub penalty hits mega interchanges." />
             </div>

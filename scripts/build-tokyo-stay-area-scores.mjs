@@ -77,6 +77,23 @@ function exitContribution(level) {
     default: return 0;
   }
 }
+
+/**
+ * Prefer the live signal's bucketed `derivedLevel` when status is
+ * success/partial; otherwise fall back to editorial `exitComplexityLevel`.
+ * Missing data is never punished.
+ */
+function resolveExitLevel(area, signal) {
+  const sig = signal?.exitComplexitySignal;
+  if (
+    sig &&
+    (sig.status === "success" || sig.status === "partial") &&
+    sig.derivedLevel != null
+  ) {
+    return sig.derivedLevel;
+  }
+  return area.exitComplexityLevel;
+}
 function lineOperatorContribution(area) {
   const lineCount = (area.stationLines || []).length;
   const isMegaMultiOp =
@@ -107,7 +124,7 @@ function stepFreeContribution(signal) {
 
 function deriveUsabilityContribution(area, signal) {
   const passenger = passengerContribution(signal?.passengerSignal?.crowdPercentile ?? null);
-  const exit = exitContribution(area.exitComplexityLevel);
+  const exit = exitContribution(resolveExitLevel(area, signal));
   const lineOp = lineOperatorContribution(area);
   const hub = transferHubContribution(area.transferHubLevel);
   const stepFree = stepFreeContribution(signal);
@@ -138,12 +155,13 @@ function deriveSourceCoverage(signal) {
   const xs = [
     signal.passengerSignal,
     signal.stepFreeSignal,
+    signal.exitComplexitySignal,
     signal.safetySignal,
     signal.floodNoteSignal,
     signal.lodgingDensitySignal,
   ];
   const ok = xs.filter((s) => s?.status === "success" || s?.status === "partial").length;
-  return ok / 5;
+  return ok / 6;
 }
 
 function applyConfidenceFromCoverage(scores, coverage) {

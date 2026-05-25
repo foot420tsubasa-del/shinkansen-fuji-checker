@@ -90,6 +90,32 @@ export const tokyoStayAreaSourceRegistry: StayAreaSourceDefinition[] = [
     note: "CSV catalog discovery is fragile from a script. Marked skipped this pass; revisit with a stable dataset id.",
   },
   {
+    id: "tokyo-metro-station-exits",
+    label: "Tokyo Metro per-station exit list",
+    category: "station",
+    provider: "Tokyo Metro Co., Ltd.",
+    url: "https://www.tokyometro.jp/station/exit.json",
+    expectedUpdateCadence: "irregular",
+    commercialUseNote:
+      "Public exit dataset embedded in tokyometro.jp station pages. Attribute to Tokyo Metro.",
+    status: "live",
+    usedInScore: true,
+    note: "JSON feed: one record per station × exit_no × elevator × close. We count records with close === '0' as open exits.",
+  },
+  {
+    id: "toei-station-exits",
+    label: "Toei Subway per-station exit list",
+    category: "station",
+    provider: "Tokyo Metropolitan Bureau of Transportation",
+    url: "https://www.kotsu.metro.tokyo.jp/subway/stations/",
+    expectedUpdateCadence: "irregular",
+    commercialUseNote:
+      "Public Toei subway station pages. Attribute to Tokyo Metropolitan Bureau of Transportation.",
+    status: "registered",
+    usedInScore: true,
+    note: "Toei station detail URLs currently return 404 when fetched from a script; revisit when a stable feed is published.",
+  },
+  {
     id: "tokyo-metro-barrier-free",
     label: "Tokyo Metro accessibility / barrier-free pages",
     category: "accessibility",
