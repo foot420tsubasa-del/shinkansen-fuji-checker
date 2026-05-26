@@ -61,20 +61,20 @@ const homeHotelCopyByLocale: Record<
   }
 > = {
   en: {
-    title: "Choose where to stay before comparing hotels",
+    title: "Choose your Japan hotel base before booking hotels",
     body:
-      "Start with your Tokyo base, not hotel names. The best area depends on airport access, luggage, Shinkansen days, station complexity, and whether you want busy nights or a calmer local base.",
+      "After checking the Fuji-side seat, choose the city and station area that makes your route easier. Your hotel base affects airport arrival, luggage, Shinkansen days, station complexity, and whether nights feel busy or calm.",
     links: [
-      { href: "/areas-to-stay/asakusa-vs-ueno", label: "Compare Asakusa vs Ueno" },
-      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Compare Tokyo Station vs Shinjuku" },
-      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose a Tokyo hotel area with luggage" },
+      { href: "/areas-to-stay", label: "Choose city and hotel base" },
+      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Compare Tokyo station areas" },
+      { href: "/local-hotel-picks", label: "See local hotel examples" },
     ],
-    imageNote: "Compare famous stations, calmer nearby bases, and logistics-friendly hotel areas before you search hotels.",
-    matrixCta: "Find the best Tokyo area to stay",
+    imageNote: "Use fujiseat to choose the broad hotel area first, then check current prices, room size, bed setup, and station distance on booking sites.",
+    matrixCta: "Choose your hotel base",
     finalTitle: "Still planning your Japan trip?",
-    finalBody: "Start with the Fuji-side seat, then choose a practical Tokyo hotel base before opening booking sites.",
+    finalBody: "Start with the Fuji-side seat, then choose a practical hotel base before opening booking sites.",
     checkSeatCta: "Check Fuji-side seat",
-    finalMatrixCta: "Compare Tokyo hotel areas",
+    finalMatrixCta: "Choose hotel base",
   },
   "pt-BR": {
     title: "Escolha onde ficar antes de comparar hotéis",
@@ -270,9 +270,9 @@ export default function HomeClient() {
 
   const featureCards = useMemo(() => [
     { title: t("featureCards.seatChecker.title"), description: t("featureCards.seatChecker.desc"), href: "/#seat-checker", icon: Train },
-    { title: "Hotel Base", description: "Choose a practical hotel base for luggage, rail days, and calmer nights.", href: "/areas-to-stay", icon: Bed },
-    { title: "Rail Tickets", description: "Book a Shinkansen ticket or compare JR Pass before buying rail.", href: "/guide", icon: Train },
-    { title: "Arrival Essentials", description: "Plan airport transfer and data before arrival day.", href: "/airport-transfers", icon: Car },
+    { title: "Hotel Base", description: "Choose the city and station area before opening hotel booking sites.", href: "/areas-to-stay", icon: Bed },
+    { title: "Rail Tickets", description: "Book a Shinkansen ticket or compare JR Pass after your route is clear.", href: "/guide", icon: Train },
+    { title: "Arrival Essentials", description: "Match airport transfer and eSIM prep to your first hotel base.", href: "/airport-transfers", icon: Car },
   ], [t]);
 
   const popularLinks: PopularLink[] = useMemo(() => [
@@ -469,7 +469,7 @@ export default function HomeClient() {
               <div className="flex h-full flex-col rounded-2xl border border-orange-100 bg-orange-50/70 p-3">
                 <p className="text-sm font-bold text-[#082653]">Choose your hotel base</p>
                 <p className="mt-1 text-xs leading-5 text-slate-600">
-                  Taking an early Shinkansen? Choose a Tokyo base that makes luggage and station access easier.
+                  Choose the city and station area before booking hotels, especially if luggage or an early train matters.
                 </p>
                 <div className="mt-auto pt-3">
                   <TrackedCtaLink
@@ -482,7 +482,7 @@ export default function HomeClient() {
                     locale={locale}
                     className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
                   >
-                    Compare Tokyo stay areas
+                    Choose hotel base
                   </TrackedCtaLink>
                 </div>
               </div>
@@ -581,7 +581,7 @@ export default function HomeClient() {
                 {homeHotelCopy.imageNote}
               </p>
               <TrackedCtaLink
-                href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
+                href="/areas-to-stay"
                 placement="home_hotel_base_matrix"
                 label={homeHotelCopy.matrixCta}
                 category="stay"
@@ -775,7 +775,7 @@ export default function HomeClient() {
                 <ArrowRight className="h-4 w-4" />
               </TrackedCtaLink>
               <TrackedCtaLink
-                href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
+                href="/areas-to-stay"
                 placement="home_final_cta"
                 label={homeHotelCopy.finalMatrixCta}
                 category="stay"

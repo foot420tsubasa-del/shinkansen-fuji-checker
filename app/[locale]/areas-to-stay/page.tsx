@@ -391,10 +391,10 @@ export default async function AreasToStayIndex({ params }: Props) {
           <span className="min-w-0 flex-1">
             <span className="block text-lg font-semibold text-slate-950">Tokyo Stay Area Index</span>
             <span className="mt-1.5 block text-sm leading-6 text-slate-700">
-              Compare station areas like Oshiage, Kuramae, Ueno, Asakusa, Shinjuku, and Tokyo Station before searching hotels.
+              Compare station areas like Oshiage, Kuramae, Ueno, Asakusa, Shinjuku, and Tokyo Station before opening hotel booking sites.
             </span>
             <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[#c45500]">
-              Compare Tokyo station areas
+              Find a Tokyo hotel base
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </span>
           </span>

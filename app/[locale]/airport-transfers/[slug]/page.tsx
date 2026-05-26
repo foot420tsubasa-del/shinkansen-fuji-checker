@@ -4,6 +4,8 @@ import { Bed, CalendarDays, Clock, MapPin, Plane, Train, Wifi } from "lucide-rea
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
+import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
+import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { TransferOption } from "@/components/content/TransferOption";
 import { ProTip } from "@/components/content/ProTip";
 import { NextActions } from "@/components/content/NextActions";
@@ -15,6 +17,7 @@ import { getAirportTransferRouteImage } from "@/lib/airport-transfer-images";
 import { AirportHeroCard, AirportNextSteps, AirportRouteCompareCard, ArrivalSetupCard } from "@/components/airport/AirportTransferUi";
 import { ESIM_URL, getAffiliateConfig, getReadyAffUrl } from "@/src/affiliateLinks";
 import { getAirportRouteUiCopy, localizedLateArrivalNote, localizedProTip, localizedRouteDescription, localizedRouteTitle, localizeTripPick, routeSpecific } from "@/lib/content/airport-transfer-i18n";
+import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -28,6 +31,56 @@ type EnhancedRouteCopy = {
   arrivalSetupBody: string;
   stayHref: string;
 };
+
+type RouteHotelBaseArea = {
+  title: string;
+  goodIf: string;
+  avoidIf: string;
+  logic: string;
+  hotelKey: HotelAreaKey;
+  city: string;
+};
+
+function providerChoices(...providers: Array<ProviderChoiceButton | null | undefined>) {
+  return providers.filter((provider): provider is ProviderChoiceButton => Boolean(provider));
+}
+
+function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"]) {
+  const hotel = getHotelLink(areaKey);
+  const config = getTripHotelConfig(areaKey);
+  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
+  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
+  const agodaLink = getAgodaHotelAreaUrl(areaKey);
+
+  return providerChoices(
+    tripHref
+      ? {
+          label: "Trip.com",
+          href: tripHref,
+          trackingHref: tripTrackingHref,
+          provider: "trip",
+          product: "hotel",
+          linkId: `hotelArea.${areaKey}.trip`,
+          placement,
+          variant: "primary",
+          category: "hotel",
+        }
+      : null,
+    agodaLink
+      ? {
+          label: "Agoda",
+          href: agodaLink.href,
+          trackingHref: agodaLink.trackingHref,
+          provider: "agoda",
+          product: "hotel",
+          linkId: agodaLink.linkId,
+          placement,
+          variant: "secondary",
+          category: "hotel",
+        }
+      : null,
+  );
+}
 
 const enhancedRouteCopy: Record<string, EnhancedRouteCopy> = {
   "narita-to-shinjuku": {
@@ -64,6 +117,169 @@ function stayHrefForRoute(slug: string) {
     return "/areas-to-stay/osaka-first-time";
   }
   return "/areas-to-stay/tokyo-first-time";
+}
+
+function hotelAreasForTransferRoute(slug: string): RouteHotelBaseArea[] {
+  if (slug.includes("kansai-airport-to-kyoto") || slug.includes("kyoto-to-kansai-airport")) {
+    return [
+      {
+        title: "Kyoto Station",
+        goodIf: "You want the simplest first or final night for Kansai Airport and JR Haruka.",
+        avoidIf: "You want a traditional evening around Gion or a quieter old-town base.",
+        logic: "Strong for luggage, rail access, and late or early airport movement.",
+        hotelKey: "kyotoStation",
+        city: "Kyoto",
+      },
+      {
+        title: "Gion / Kawaramachi",
+        goodIf: "You want Kyoto atmosphere after arrival and do not mind extra luggage planning.",
+        avoidIf: "Your arrival is late or your luggage is heavy.",
+        logic: "Better for evening atmosphere than airport rail simplicity. Check taxi, bus, or transfer route.",
+        hotelKey: "gionKawaramachi",
+        city: "Kyoto",
+      },
+    ];
+  }
+
+  if (slug.includes("kansai-airport-to-namba") || slug.includes("osaka-to-kansai-airport")) {
+    return [
+      {
+        title: "Namba",
+        goodIf: "You want food, nightlife, and direct Nankai access from Kansai Airport.",
+        avoidIf: "You prefer a quieter business district or JR-centered movement.",
+        logic: "Strong when your hotel is close to the Nankai / subway side you need.",
+        hotelKey: "namba",
+        city: "Osaka",
+      },
+      {
+        title: "Umeda",
+        goodIf: "You want JR connections, shopping, and a north Osaka base after arrival.",
+        avoidIf: "You need the simplest direct Nankai airport route.",
+        logic: "Works well if airport bus or JR-based access matches your hotel side.",
+        hotelKey: "umeda",
+        city: "Osaka",
+      },
+    ];
+  }
+
+  if (slug.includes("kansai-airport-to-umeda")) {
+    return [
+      {
+        title: "Umeda",
+        goodIf: "You want JR connections, shopping, and a practical north Osaka base.",
+        avoidIf: "You prefer direct Nankai access or Dotonbori nightlife.",
+        logic: "Check whether your hotel is closer to Osaka Station, Umeda subway lines, or airport bus stops.",
+        hotelKey: "umeda",
+        city: "Osaka",
+      },
+      {
+        title: "Namba",
+        goodIf: "You want food, nightlife, and easier Nankai airport access.",
+        avoidIf: "Your plans are mostly around north Osaka or JR connections.",
+        logic: "Useful if the airport route and evening plans point south.",
+        hotelKey: "namba",
+        city: "Osaka",
+      },
+    ];
+  }
+
+  if (slug.includes("narita-to-asakusa")) {
+    return [
+      {
+        title: "Asakusa",
+        goodIf: "You want old Tokyo atmosphere and a calmer first night.",
+        avoidIf: "You need JR-centered movement or an early Shinkansen next morning.",
+        logic: "Good for east Tokyo arrivals. Confirm subway line, exits, and walking route.",
+        hotelKey: "asakusa",
+        city: "Tokyo",
+      },
+      {
+        title: "Ueno",
+        goodIf: "You want Narita access with practical rail connections nearby.",
+        avoidIf: "You want a quieter old-town stay directly by Senso-ji.",
+        logic: "A practical alternative if your route or luggage makes Ueno simpler.",
+        hotelKey: "ueno",
+        city: "Tokyo",
+      },
+    ];
+  }
+
+  if (slug.includes("narita-to-ueno")) {
+    return [
+      {
+        title: "Ueno",
+        goodIf: "You want Narita access, museums, parks, and practical east Tokyo logistics.",
+        avoidIf: "You want nightlife or a polished central hotel zone.",
+        logic: "Strong Narita fit. Check station side and hotel walking route with luggage.",
+        hotelKey: "ueno",
+        city: "Tokyo",
+      },
+      {
+        title: "Asakusa",
+        goodIf: "You want a calmer old Tokyo base after arriving through the east side.",
+        avoidIf: "You want the directest rail connection from the airport to the hotel door.",
+        logic: "Can work well, but route details and subway exits matter more.",
+        hotelKey: "asakusa",
+        city: "Tokyo",
+      },
+    ];
+  }
+
+  if (slug.includes("haneda")) {
+    return [
+      {
+        title: "Tokyo Station / Ginza",
+        goodIf: "You want central logistics, first/last night convenience, or an early Shinkansen.",
+        avoidIf: "You want a very local or nightlife-heavy first night.",
+        logic: "Practical for rail days. Check whether train, airport bus, or taxi fits your hotel side.",
+        hotelKey: "tokyoStation",
+        city: "Tokyo",
+      },
+      {
+        title: "Shinjuku",
+        goodIf: "You want food, nightlife, and hotel choice after landing.",
+        avoidIf: "You arrive late with kids, large luggage, or low station-complexity tolerance.",
+        logic: "Haneda is close, but the Shinjuku station side still matters. Airport bus can be worth comparing.",
+        hotelKey: "shinjuku",
+        city: "Tokyo",
+      },
+      {
+        title: "Asakusa",
+        goodIf: "You want a calmer east Tokyo first night with old-town atmosphere.",
+        avoidIf: "You need the simplest direct Haneda rail route.",
+        logic: "Can work through subway/Asakusa Line logic, but confirm exits and walking distance.",
+        hotelKey: "asakusa",
+        city: "Tokyo",
+      },
+    ];
+  }
+
+  return [
+    {
+      title: "Ueno",
+      goodIf: "You want Narita access, practical rail connections, and better-value hotel search.",
+      avoidIf: "You want Shinjuku nightlife or a polished central hotel zone.",
+      logic: "Strong Narita-side first-night base when luggage and rail access matter.",
+      hotelKey: "ueno",
+      city: "Tokyo",
+    },
+    {
+      title: "Tokyo Station / Ginza",
+      goodIf: "You want central logistics, early Shinkansen access, or a first/last Tokyo night.",
+      avoidIf: "You want a softer local neighborhood feel.",
+      logic: "Practical, but large-station complexity and hotel side still matter.",
+      hotelKey: "tokyoStation",
+      city: "Tokyo",
+    },
+    {
+      title: "Shinjuku",
+      goodIf: "You want food, nightlife, shopping, and many hotel choices.",
+      avoidIf: "You arrive tired with heavy luggage or dislike huge stations.",
+      logic: "Good after settling in; arrival can be tiring, so compare airport bus if your hotel is near a stop.",
+      hotelKey: "shinjuku",
+      city: "Tokyo",
+    },
+  ];
 }
 
 function arrivalSetupBodyForRoute(slug: string, page: NonNullable<ReturnType<typeof getTransferBySlug>>) {
@@ -224,6 +440,7 @@ export default async function TransferPage({ params }: Props) {
   const routeDescription = localizedRouteDescription(page, locale);
   const image = getAirportTransferRouteImage(slug);
   const compareLink = routeCompareLink(slug);
+  const firstNightHotelAreas = hotelAreasForTransferRoute(slug);
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -283,6 +500,68 @@ export default async function TransferPage({ params }: Props) {
             <p className="mt-2 text-sm leading-6 text-slate-700">
               {specific?.quickBody ?? (locale === "en" ? enhanced.quickBody : routeDescription)}
             </p>
+          </section>
+
+          <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">First-night hotel base</p>
+            <h2 className="mt-2 text-xl font-semibold text-slate-950">Best first-night hotel areas for this arrival route</h2>
+            <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
+              Choose the hotel base with the transfer. Train is enough for many travelers, while airport bus or private transfer may be better for late arrival, kids, or heavy luggage.
+            </p>
+            <div className="mt-5 grid gap-4 lg:grid-cols-2">
+              {firstNightHotelAreas.map((area) => {
+                const choices = hotelProviderChoices(area.hotelKey, "airport_page_first_night_cta");
+                return (
+                  <article key={area.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                    <h3 className="text-lg font-semibold text-slate-950">{area.title}</h3>
+                    <dl className="mt-3 grid gap-2 text-sm leading-6">
+                      <div>
+                        <dt className="font-semibold text-[#106b43]">Good if</dt>
+                        <dd className="text-slate-700">{area.goodIf}</dd>
+                      </div>
+                      <div>
+                        <dt className="font-semibold text-amber-700">Who should avoid it</dt>
+                        <dd className="text-slate-700">{area.avoidIf}</dd>
+                      </div>
+                      <div>
+                        <dt className="font-semibold text-slate-900">Airport / luggage logic</dt>
+                        <dd className="text-slate-700">{area.logic}</dd>
+                      </div>
+                    </dl>
+                    <ProviderChoiceCTA
+                      actionLabel={`Compare hotels in ${area.title}`}
+                      description="Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site."
+                      providers={choices}
+                      pagePath={pagePath}
+                      locale={locale}
+                      area={area.title}
+                      city={area.city}
+                      className="mt-4"
+                    />
+                  </article>
+                );
+              })}
+            </div>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {[
+                { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Hotel Area Finder" },
+                { href: stayHrefForRoute(slug), label: "First-time hotel base guide" },
+                { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Hotel base with luggage" },
+                { href: "/local-hotel-picks#hotel-examples-matrix", label: "Local hotel examples" },
+              ].map((link) => (
+                <TrackedInternalLink
+                  key={link.href}
+                  href={link.href}
+                  sourcePage={pagePath}
+                  placement="airport_page_first_night_cta"
+                  label={link.label}
+                  locale={locale}
+                  className="inline-flex min-h-9 items-center rounded-xl bg-slate-700 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
+                >
+                  {link.label} →
+                </TrackedInternalLink>
+              ))}
+            </div>
           </section>
 
           <section>

@@ -109,7 +109,7 @@
       "hub": "Japan travel utility hub",
       "seat": "Seat Checker",
       "planner": "Planner",
-      "stay": "Stay",
+      "stay": "Hotel Base",
       "essentials": "Essentials",
       "about": "About",
       "guide": "Guide",
@@ -205,8 +205,8 @@
         "desc": "A calmer Tokyo angle for neighborhoods and local walks."
       },
       "stayAreas": {
-        "title": "Stay Areas",
-        "desc": "Compare practical bases for rail days and luggage."
+        "title": "Hotel Base",
+        "desc": "Choose the city and station area before booking hotels."
       },
       "essentials": {
         "title": "Essentials",
@@ -1867,11 +1867,11 @@
     },
     "quickAnswerTitle": "Quick Answer",
     "quickAnswers": [
-      "First time in Tokyo -> Start with the Tokyo first-time area guide.",
-      "First time in Kyoto -> Compare Kyoto Station, Gion, and Kawaramachi.",
-      "First time in Osaka -> Compare Namba, Umeda, and Shin-Osaka.",
+      "Before booking hotels -> Choose the city first, then compare station areas.",
+      "First time in Tokyo -> Use the Tokyo guide and Stay Area Index before opening booking sites.",
+      "Airport or luggage stress -> Pick a base that keeps arrival transfers simple.",
       "Early Shinkansen day -> Choose a hotel base that works for luggage and early trains.",
-      "Staying near Mt. Fuji -> Use Kawaguchiko if you want an overnight Fuji-view stay."
+      "Hotel examples -> Use them after the area decision, not as a ranking."
     ],
     "citySection": {
       "eyebrow": "City first",
@@ -1880,38 +1880,38 @@
     "cityCards": {
       "tokyo": {
         "title": "Tokyo",
-        "subtitle": "Best for first-time Japan, nightlife, airport choices, and Shinkansen planning.",
-        "cta": "Open Tokyo stay guide",
+        "subtitle": "Choose a Tokyo hotel base by airport access, luggage, Shinkansen days, station complexity, and night style.",
+        "cta": "Choose Tokyo hotel base",
         "placementLabel": "Tokyo city card"
       },
       "kyoto": {
         "title": "Kyoto",
-        "subtitle": "Best for temples, classic atmosphere, traditional streets, and day trips.",
-        "cta": "Open Kyoto guide",
+        "subtitle": "Compare Kyoto hotel bases by station logistics, classic atmosphere, luggage, and day-trip routes.",
+        "cta": "Choose Kyoto hotel base",
         "placementLabel": "Kyoto city card"
       },
       "osaka": {
         "title": "Osaka",
-        "subtitle": "Best for food, nightlife, Kansai airport access, and Kyoto / Nara day trips.",
-        "cta": "Open Osaka guide",
+        "subtitle": "Choose an Osaka hotel base by food/nightlife access, Kansai airport routes, and Kyoto / Nara day trips.",
+        "cta": "Choose Osaka hotel base",
         "placementLabel": "Osaka city card"
       },
       "kawaguchiko": {
         "title": "Mt. Fuji / Kawaguchiko",
-        "subtitle": "Best if you want to stay overnight near Mt. Fuji instead of only seeing it from the Shinkansen.",
-        "cta": "Find Fuji-view stays",
+        "subtitle": "Use this if you want an overnight Mt. Fuji base instead of only seeing Fuji from the Shinkansen.",
+        "cta": "Choose Fuji overnight base",
         "placementLabel": "Kawaguchiko city card"
       }
     },
-    "localPicks": {
-      "eyebrow": "Hotel examples",
-      "title": "Need actual hotel examples?",
-      "body": "See practical hotel examples for Tokyo, Kyoto, and Osaka. These are not rankings — they are starting points by area logic.",
-      "cta": "See local hotel picks"
+      "localPicks": {
+        "eyebrow": "Hotel examples",
+      "title": "Need hotel examples after choosing the area?",
+      "body": "See practical hotel examples for Tokyo, Kyoto, and Osaka. These are not rankings — use them only after the city and station-area decision.",
+      "cta": "See local hotel examples"
     },
-    "problemSection": {
-      "eyebrow": "Route logic",
-      "title": "Choose by travel problem"
+      "problemSection": {
+      "eyebrow": "Before hotel booking",
+      "title": "Choose by hotel-base problem"
     },
     "problemCards": {
       "firstTime": {
@@ -1951,9 +1951,9 @@
         "cta": "See Kawaguchiko"
       }
     },
-    "featuredGuides": {
-      "eyebrow": "Existing guides",
-      "title": "Featured stay guides",
+      "featuredGuides": {
+      "eyebrow": "Hotel base guides",
+      "title": "Compare city and station-area guides",
       "groups": {
         "tokyo": "Tokyo",
         "kyoto": "Kyoto",
@@ -2056,7 +2056,7 @@
         }
       }
     },
-    "continuePlanning": {
+      "continuePlanning": {
       "title": "Continue planning",
       "plan": "Plan Your Trip",
       "seat": "Seat Checker",
@@ -2065,7 +2065,7 @@
     },
     "preBooking": {
       "title": "Start here if you have not booked hotels yet",
-      "body": "Use this page before opening hotel booking sites. First choose your city, then compare station areas, then check hotel examples. In Japan, a good hotel base should make airport transfers, luggage days, Shinkansen trips, and first nights easier. These guides are general starting points, not personalized hotel recommendations."
+      "body": "Use this page before opening Trip.com, Agoda, or other hotel booking sites. First choose the city, then compare station areas, then check broad hotel searches or examples. In Japan, a good hotel base should make airport transfers, luggage days, Shinkansen trips, and first nights easier. These guides are general starting points, not personalized hotel recommendations."
     }
   },
   "planYourTrip": {

@@ -134,15 +134,15 @@ const FRESHNESS_TAIL = "Tokyo Metro accessibility, Toei exit lists, and lodging-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return {
-    title: "Tokyo Stay Area Index: Compare Station Areas Before Booking Hotels",
+    title: "Tokyo Hotel Area Finder: Compare Station Areas Before Booking Hotels",
     description:
-      "Compare Tokyo station areas by passenger volume, exit complexity, transfer-hub penalty, airport access, and lodging density. Editorial travel-fit signals informed by passenger data — not an official ranking.",
+      "Compare 36 Tokyo station areas by luggage-friendliness, airport access, station complexity, Shinkansen fit, and hotel choice density before booking hotels.",
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(pagePath, locale),
     openGraph: {
-      title: "Tokyo Stay Area Index",
+      title: "Tokyo Hotel Area Finder",
       description:
-        "Compare Tokyo station areas by passenger volume, exit complexity, transfer-hub penalty, airport access, and lodging density.",
+        "Compare Tokyo station areas before booking hotels using fujiseat's station-area logic.",
       siteName: "fujiseat",
     },
   };
@@ -715,8 +715,8 @@ function SelectedAreaHotelSearch({
   if (!hotel) return null;
   const isBroadAreaFallback = hotel.selectedAreaName !== hotel.areaName;
   const heading = isBroadAreaFallback
-    ? `Search hotels near ${hotel.selectedAreaName}`
-    : `Search hotels around ${hotel.areaName}`;
+    ? `Compare hotels near ${hotel.selectedAreaName}`
+    : `Compare hotels around ${hotel.areaName}`;
 
   return (
     <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
@@ -726,8 +726,8 @@ function SelectedAreaHotelSearch({
       </div>
       <p className="mt-2 text-xs leading-5 text-slate-600">
         {isBroadAreaFallback
-          ? `No dedicated ${hotel.selectedAreaName} hotel URL is set yet, so this opens the nearest existing broad search area: ${hotel.areaName}. Prices and availability change on the provider site.`
-          : "Opens a hotel search for this area. Prices and availability change on the provider site."}
+          ? `Broad area search only. No dedicated ${hotel.selectedAreaName} hotel URL is set yet, so this opens the nearest existing broad search area: ${hotel.areaName}. Check exact station distance, room size, bed setup, and latest price on the provider site.`
+          : "Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site."}
       </p>
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         {hotel.providers.map((provider) => (
@@ -1110,22 +1110,38 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           items={[
             { label: "Home", href: "/" },
             { label: "Areas to stay", href: "/areas-to-stay" },
-            { label: "Tokyo Stay Area Index" },
+            { label: "Tokyo Hotel Area Finder" },
           ]}
         />
 
         <section className="mt-6 overflow-hidden rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
           <p className="inline-flex rounded-full border border-orange-200 bg-orange-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-orange-700">
-            Station-area decision tool
+            Tokyo hotel area finder
           </p>
           <div className="mt-5 grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <div>
-              <h1 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">Tokyo Stay Area Index</h1>
+              <h1 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">Tokyo Hotel Area Finder</h1>
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-                Compare Tokyo station areas before booking hotels, using seven station-usability signals:
-                passenger volume, exit / entrance complexity, line / operator count, step-free route confidence,
-                transfer-hub penalty, airport / Shinkansen access, and hotel choice density. Editorial travel-fit
-                scores informed by passenger data — not an official ranking.
+                Compare 36 Tokyo station areas before booking hotels. The finder uses fujiseat&apos;s station-area logic
+                to help you weigh luggage stress, airport arrival, Shinkansen days, station complexity, quieter nights,
+                and broad hotel choice before opening booking sites.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {[
+                  "Station complexity",
+                  "Luggage stress",
+                  "Airport access",
+                  "Shinkansen fit",
+                  "Hotel choice density",
+                ].map((signal) => (
+                  <span key={signal} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-600">
+                    {signal}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-3 max-w-3xl text-xs leading-5 text-slate-500">
+                Scores are editorial travel-fit scores informed by public data signals where available. They are not
+                official ratings, hotel rankings, or guarantees of price, comfort, availability, or route conditions.
               </p>
               <p className="mt-4 text-sm font-semibold text-[#106b43]">
                 {FRESHNESS_HEADLINE} · Last source check: {lastChecked}
@@ -1138,13 +1154,58 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               href="#ranked-areas"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#ff7a00] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#e66700]"
             >
-              Compare area fits
+              Find hotel-area fit
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
         </section>
 
+        <section className="mt-6 rounded-[22px] border border-orange-100 bg-orange-50/60 p-5 shadow-sm">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-orange-700">Start by travel situation</p>
+          <h2 className="mt-1 text-xl font-semibold text-slate-950">Choose the hotel-area problem first</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
+            Pick the situation closest to your trip. Filters re-rank the same area data; guide links help when the
+            question needs more context than a score.
+          </p>
+          <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              { href: "/areas-to-stay/tokyo-first-time", title: "First time in Tokyo", body: "Compare famous bases and calmer nearby areas.", label: "Tokyo first-time guide" },
+              { href: filterHref(locale, "narita-arrival"), title: "Narita arrival", body: "Highlight areas that fit Narita-side arrival logic.", label: "Filter Narita arrival" },
+              { href: filterHref(locale, "haneda-arrival"), title: "Haneda arrival", body: "Highlight areas that work better with Haneda.", label: "Filter Haneda arrival" },
+              { href: filterHref(locale, "shinkansen"), title: "Early Shinkansen", body: "Prioritize Tokyo / Shinagawa / Ueno rail logistics.", label: "Filter Shinkansen fit" },
+              { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", title: "Large luggage", body: "Use room size, elevators, and walking distance logic.", label: "Luggage guide" },
+              { href: filterHref(locale, "avoid-giant-stations"), title: "Avoid giant stations", body: "Lift calmer bases with lower station-complexity stress.", label: "Filter calmer bases" },
+              { href: "/local-tokyo", title: "Local Tokyo / quieter base", body: "Use local neighborhood guides after narrowing the area.", label: "Local Tokyo" },
+              { href: "/local-hotel-picks#hotel-examples-matrix", title: "Need hotel examples", body: "View examples after choosing the broad station area.", label: "Hotel examples" },
+            ].map((item) => (
+              <TrackedStayAreaContinueLink
+                key={item.title}
+                href={item.href}
+                sourcePage={pagePath}
+                placement="tokyo_stay_area_index_situation"
+                label={item.label}
+                locale={locale}
+                areaId={selected.area.id}
+                className="group rounded-2xl border border-orange-100 bg-white p-4 text-left shadow-sm transition-colors hover:bg-orange-50"
+              >
+                <span className="block text-sm font-semibold text-slate-950 group-hover:text-[#c45500]">{item.title}</span>
+                <span className="mt-1.5 block text-xs leading-5 text-slate-600">{item.body}</span>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#c45500]">
+                  {item.label}
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                </span>
+              </TrackedStayAreaContinueLink>
+            ))}
+          </div>
+        </section>
+
         <section className="mt-6 rounded-[22px] border border-slate-200 bg-slate-50 p-4">
+          <div className="mb-3">
+            <h2 className="text-base font-semibold text-slate-950">Travel priority filters</h2>
+            <p className="mt-1 text-xs leading-5 text-slate-500">
+              Choose one priority to highlight areas that fit that situation. This changes the order, not the underlying area data.
+            </p>
+          </div>
           <div className="flex flex-wrap gap-2">
             {FILTERS.map(({ key, label }) => {
               const isActive = key === activeFilter;
@@ -1182,9 +1243,6 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               );
             })}
           </div>
-          <p className="mt-3 text-xs leading-5 text-slate-500">
-            Choose a travel priority to highlight areas that fit that situation.
-          </p>
         </section>
 
         {/* ============= Station usability signals (replaces "Source status") ============== */}
@@ -1391,7 +1449,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
 
         <section className="mt-10 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
           <h2 className="text-xl font-semibold text-slate-950">Continue planning</h2>
-          <div className="mt-4 grid gap-3 md:grid-cols-3">
+          <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-5">
             <TrackedStayAreaContinueLink
               href="/areas-to-stay/tokyo-first-time"
               sourcePage={pagePath}
@@ -1402,6 +1460,28 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               className="rounded-2xl border border-emerald-100 bg-white p-4 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
             >
               Where to stay in Tokyo →
+            </TrackedStayAreaContinueLink>
+            <TrackedStayAreaContinueLink
+              href="/airport-transfers"
+              sourcePage={pagePath}
+              placement="tokyo_stay_area_index_continue"
+              label="Airport transfer hub"
+              locale={locale}
+              areaId={selected.area.id}
+              className="rounded-2xl border border-emerald-100 bg-white p-4 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
+            >
+              Match airport transfer →
+            </TrackedStayAreaContinueLink>
+            <TrackedStayAreaContinueLink
+              href="/areas-to-stay/where-to-stay-before-shinkansen"
+              sourcePage={pagePath}
+              placement="tokyo_stay_area_index_continue"
+              label="Tokyo hotel base before Shinkansen"
+              locale={locale}
+              areaId={selected.area.id}
+              className="rounded-2xl border border-emerald-100 bg-white p-4 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
+            >
+              Shinkansen hotel base →
             </TrackedStayAreaContinueLink>
             <TrackedStayAreaContinueLink
               href="/areas-to-stay/where-to-stay-in-tokyo-with-luggage"

@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { SiteFooter } from "@/components/content/SiteFooter";
+import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { transferPages, type TransferPage } from "@/lib/content/transfers";
 import { getAlternates } from "@/i18n/hreflang";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -14,6 +15,7 @@ import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink"
 import { ESIM_URL } from "@/src/affiliateLinks";
 import { getAirportTransferHubImage, getAirportTransferRouteImage } from "@/lib/airport-transfer-images";
 import { getAirportTransferHubCopy, localizedRouteTitle } from "@/lib/content/airport-transfer-i18n";
+import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -61,6 +63,86 @@ const kansaiSlugs = [
 ] as const;
 const lateArrivalSlugs = ["narita-late-arrival", "haneda-late-arrival"] as const;
 const pagePath = "/airport-transfers";
+
+type FirstNightHotelArea = {
+  title: string;
+  goodIf: string;
+  avoidIf: string;
+  logic: string;
+  hotelKey: HotelAreaKey;
+};
+
+function providerChoices(...providers: Array<ProviderChoiceButton | null | undefined>) {
+  return providers.filter((provider): provider is ProviderChoiceButton => Boolean(provider));
+}
+
+function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"]) {
+  const hotel = getHotelLink(areaKey);
+  const config = getTripHotelConfig(areaKey);
+  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
+  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
+  const agodaLink = getAgodaHotelAreaUrl(areaKey);
+
+  return providerChoices(
+    tripHref
+      ? {
+          label: "Trip.com",
+          href: tripHref,
+          trackingHref: tripTrackingHref,
+          provider: "trip",
+          product: "hotel",
+          linkId: `hotelArea.${areaKey}.trip`,
+          placement,
+          variant: "primary",
+          category: "hotel",
+        }
+      : null,
+    agodaLink
+      ? {
+          label: "Agoda",
+          href: agodaLink.href,
+          trackingHref: agodaLink.trackingHref,
+          provider: "agoda",
+          product: "hotel",
+          linkId: agodaLink.linkId,
+          placement,
+          variant: "secondary",
+          category: "hotel",
+        }
+      : null,
+  );
+}
+
+const firstNightHotelAreas: FirstNightHotelArea[] = [
+  {
+    title: "Ueno",
+    goodIf: "Narita arrival, museums, practical rail connections, and a straightforward east-side first night.",
+    avoidIf: "You want Shinjuku nightlife or the simplest possible Tokaido Shinkansen morning.",
+    logic: "Strong for Narita. Train is enough for many travelers if your hotel is close to the station side you need.",
+    hotelKey: "ueno",
+  },
+  {
+    title: "Asakusa",
+    goodIf: "Old Tokyo atmosphere, calmer nights, and a slower first evening after landing.",
+    avoidIf: "You need JR-centered movement or dislike checking subway exits with luggage.",
+    logic: "Works well for east Tokyo arrivals. Check subway line, elevators, and walking distance before booking.",
+    hotelKey: "asakusa",
+  },
+  {
+    title: "Tokyo Station / Ginza",
+    goodIf: "First/last Tokyo nights, early Shinkansen, and central luggage logistics.",
+    avoidIf: "You want a local-feeling night or a softer arrival after a long flight.",
+    logic: "Rail-friendly and central. Airport bus or private transfer can be easier if your hotel is not close to a simple station exit.",
+    hotelKey: "tokyoStation",
+  },
+  {
+    title: "Shinjuku",
+    goodIf: "Food, nightlife, hotel choice, and a big-city first Tokyo night.",
+    avoidIf: "You arrive late with kids, several suitcases, or low tolerance for huge stations.",
+    logic: "Good once settled, but arrival with luggage can be tiring. Airport bus can be worth comparing.",
+    hotelKey: "shinjuku",
+  },
+];
 
 const firstHotelAreaCopyByLocale: Record<
   string,
@@ -435,6 +517,68 @@ export default async function AirportTransfersIndex({ params }: Props) {
               <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-sky-700">
                 {item.label} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
               </span>
+            </TrackedInternalLink>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-8 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">First-night hotel base</p>
+        <h2 className="mt-2 text-xl font-bold text-slate-950">Best first-night hotel areas for Tokyo arrivals</h2>
+        <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
+          Choose the hotel base with the transfer. Train is enough for many travelers, while airport bus or private transfer may be better for late arrival, kids, or heavy luggage.
+        </p>
+        <div className="mt-5 grid gap-4 lg:grid-cols-2">
+          {firstNightHotelAreas.map((area) => {
+            const choices = hotelProviderChoices(area.hotelKey, "airport_page_first_night_cta");
+            return (
+              <article key={area.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                <h3 className="text-lg font-semibold text-slate-950">{area.title}</h3>
+                <dl className="mt-3 grid gap-2 text-sm leading-6">
+                  <div>
+                    <dt className="font-semibold text-[#106b43]">Good if</dt>
+                    <dd className="text-slate-700">{area.goodIf}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold text-amber-700">Who should avoid it</dt>
+                    <dd className="text-slate-700">{area.avoidIf}</dd>
+                  </div>
+                  <div>
+                    <dt className="font-semibold text-slate-900">Airport / luggage logic</dt>
+                    <dd className="text-slate-700">{area.logic}</dd>
+                  </div>
+                </dl>
+                <ProviderChoiceCTA
+                  actionLabel={`Compare hotels in ${area.title}`}
+                  description="Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site."
+                  providers={choices}
+                  pagePath={pagePath}
+                  locale={locale}
+                  area={area.title}
+                  city="Tokyo"
+                  className="mt-4"
+                />
+              </article>
+            );
+          })}
+        </div>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {[
+            { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Hotel Area Finder" },
+            { href: "/areas-to-stay/tokyo-first-time", label: "Tokyo first-time hotel base guide" },
+            { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose a luggage-friendly Tokyo base" },
+            { href: "/local-hotel-picks#hotel-examples-matrix", label: "Local hotel examples" },
+          ].map((link) => (
+            <TrackedInternalLink
+              key={link.href}
+              href={link.href}
+              sourcePage={pagePath}
+              placement="airport_page_first_night_cta"
+              label={link.label}
+              locale={locale}
+              className="inline-flex min-h-9 items-center rounded-xl bg-slate-700 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
+            >
+              {link.label} →
             </TrackedInternalLink>
           ))}
         </div>

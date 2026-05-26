@@ -3,9 +3,11 @@ import { Luggage, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { SiteFooter } from "@/components/content/SiteFooter";
+import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { getAlternates } from "@/i18n/hreflang";
+import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { SiteHeader } from "../../components/SiteHeader";
 
 type Props = {
@@ -20,6 +22,14 @@ type LuggageArea = {
   watchOut: string;
   goodIf: string;
   notIdealIf: string;
+};
+
+type LuggageHotelBaseArea = {
+  title: string;
+  goodIf: string;
+  avoidIf: string;
+  logic: string;
+  hotelKey: HotelAreaKey;
 };
 
 type LuggageCopy = {
@@ -316,6 +326,78 @@ const luggageCopyByLocale: Record<string, LuggageCopy> = {
   },
 };
 
+function providerChoices(...providers: Array<ProviderChoiceButton | null | undefined>) {
+  return providers.filter((provider): provider is ProviderChoiceButton => Boolean(provider));
+}
+
+function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"]) {
+  const hotel = getHotelLink(areaKey);
+  const config = getTripHotelConfig(areaKey);
+  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
+  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
+  const agodaLink = getAgodaHotelAreaUrl(areaKey);
+
+  return providerChoices(
+    tripHref
+      ? {
+          label: "Trip.com",
+          href: tripHref,
+          trackingHref: tripTrackingHref,
+          provider: "trip",
+          product: "hotel",
+          linkId: `hotelArea.${areaKey}.trip`,
+          placement,
+          variant: "primary",
+          category: "hotel",
+        }
+      : null,
+    agodaLink
+      ? {
+          label: "Agoda",
+          href: agodaLink.href,
+          trackingHref: agodaLink.trackingHref,
+          provider: "agoda",
+          product: "hotel",
+          linkId: agodaLink.linkId,
+          placement,
+          variant: "secondary",
+          category: "hotel",
+        }
+      : null,
+  );
+}
+
+const luggageHotelBaseAreas: LuggageHotelBaseArea[] = [
+  {
+    title: "Ueno",
+    goodIf: "Narita access, museums, practical rail connections, and a less intense first night.",
+    avoidIf: "You want the simplest possible early Shinkansen morning.",
+    logic: "Useful with luggage because Narita access is strong and Tokyo Station is still reachable.",
+    hotelKey: "ueno",
+  },
+  {
+    title: "Asakusa",
+    goodIf: "Old Tokyo atmosphere, calmer nights, and an east-side base after arrival.",
+    avoidIf: "You need JR-centered movement or dislike checking subway exits.",
+    logic: "Good for a slower first night, but confirm subway routing, elevators, and walking distance.",
+    hotelKey: "asakusa",
+  },
+  {
+    title: "Tokyo Station / Ginza",
+    goodIf: "Early Shinkansen, first/last Tokyo nights, and luggage-heavy rail days.",
+    avoidIf: "You want nightlife or a softer neighborhood feel.",
+    logic: "Practical for Kyoto or Osaka rail days. Check station side and hotel walking route carefully.",
+    hotelKey: "tokyoStation",
+  },
+  {
+    title: "Oshiage / East Tokyo",
+    goodIf: "Narita-side access, Skytree / Asakusa plans, and calmer arrival nights.",
+    avoidIf: "You want Shinjuku or Shibuya nightlife as your main evening focus.",
+    logic: "A luggage-friendly east-side search area when your first-night route points away from giant hubs.",
+    hotelKey: "oshiage",
+  },
+];
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const copy = luggageCopyByLocale[locale] ?? luggageCopyByLocale.en;
@@ -485,6 +567,68 @@ export default async function WhereToStayInTokyoWithLuggagePage({ params }: Prop
                   </div>
                 </dl>
               </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-10 rounded-[24px] border border-slate-200 bg-white p-6 shadow-sm">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Hotel base decision</p>
+          <h2 className="mt-2 text-2xl font-semibold text-slate-950">Best hotel base areas with luggage</h2>
+          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600">
+            Compare broad station areas first, then open hotel booking sites. With large suitcases, check exact station distance, elevator access, room size, bed setup, and the walking route before booking.
+          </p>
+          <div className="mt-5 grid gap-4 lg:grid-cols-2">
+            {luggageHotelBaseAreas.map((area) => {
+              const choices = hotelProviderChoices(area.hotelKey, "luggage_page_area_cta");
+              return (
+                <article key={area.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+                  <h3 className="text-lg font-semibold text-slate-950">{area.title}</h3>
+                  <dl className="mt-3 grid gap-2 text-sm leading-6">
+                    <div>
+                      <dt className="font-semibold text-[#106b43]">Good if</dt>
+                      <dd className="text-slate-700">{area.goodIf}</dd>
+                    </div>
+                    <div>
+                      <dt className="font-semibold text-amber-700">Who should avoid it</dt>
+                      <dd className="text-slate-700">{area.avoidIf}</dd>
+                    </div>
+                    <div>
+                      <dt className="font-semibold text-slate-900">Luggage / station logic</dt>
+                      <dd className="text-slate-700">{area.logic}</dd>
+                    </div>
+                  </dl>
+                  <ProviderChoiceCTA
+                    actionLabel={`Compare hotels in ${area.title}`}
+                    description="Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site."
+                    providers={choices}
+                    pagePath={pagePath}
+                    locale={locale}
+                    area={area.title}
+                    city="Tokyo"
+                    className="mt-4"
+                  />
+                </article>
+              );
+            })}
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {[
+              { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Hotel Area Finder" },
+              { href: "/areas-to-stay/tokyo-first-time", label: "Tokyo first-time hotel base guide" },
+              { href: "/airport-transfers", label: "Airport transfers by hotel area" },
+              { href: "/local-hotel-picks#hotel-examples-matrix", label: "Local hotel examples" },
+            ].map((link) => (
+              <TrackedInternalLink
+                key={link.href}
+                href={link.href}
+                sourcePage={pagePath}
+                placement="luggage_page_area_cta"
+                label={link.label}
+                locale={locale}
+                className="inline-flex min-h-9 items-center rounded-xl bg-slate-700 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
+              >
+                {link.label} →
+              </TrackedInternalLink>
             ))}
           </div>
         </section>

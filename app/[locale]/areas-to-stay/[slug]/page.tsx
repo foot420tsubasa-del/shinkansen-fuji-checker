@@ -294,7 +294,8 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
         "Start with the broad area, then check nearby calmer or logistics-friendly bases. Use this as a general starting point before opening hotel search sites.",
       goodIfLabel: "Good if",
       watchOutLabel: "Watch out",
-      providerDescription: "Broad area search only. Smaller nearby bases do not have separate provider buttons here.",
+      providerDescription:
+        "Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site.",
     groups: [
         {
           title: "Shinjuku area",
@@ -303,7 +304,7 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
           nearbyLabel: "Nearby calmer bases",
           goodIf: "First-time energy, food, nightlife, and many hotel choices.",
           watchOut: "Crowds, a huge station, and a tiring arrival with luggage.",
-          hotelActionLabel: "Search Shinjuku area hotels",
+          hotelActionLabel: "Compare Shinjuku area hotels",
           detailLabel: "See Shinjuku micro-area guide",
           internalLabels: ["Compare Shinjuku vs Ueno"],
         },
@@ -314,7 +315,7 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
           nearbyLabel: "Nearby / logistics bases",
           goodIf: "Narita access, museums, practical hotel search, and better-value stays.",
           watchOut: "Less polished than Ginza or Shinjuku.",
-          hotelActionLabel: "Search Ueno area hotels",
+          hotelActionLabel: "Compare Ueno area hotels",
           detailLabel: "See Ueno micro-area guide",
           internalLabels: ["Compare Ueno vs Shinjuku", "Compare Asakusa vs Ueno"],
         },
@@ -325,7 +326,7 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
           nearbyLabel: "Nearby calmer bases",
           goodIf: "Old Tokyo atmosphere, Senso-ji, river walks, and calmer nights.",
           watchOut: "Not JR-centered; check subway routing.",
-          hotelActionLabel: "Search Asakusa area hotels",
+          hotelActionLabel: "Compare Asakusa area hotels",
           detailLabel: "See Asakusa micro-area guide",
           internalLabels: ["Compare Asakusa vs Ueno"],
         },
@@ -336,7 +337,7 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
           nearbyLabel: "Nearby bases",
           goodIf: "Early Shinkansen, luggage logistics, first/last night, and Ginza access.",
           watchOut: "Businesslike, large stations, and less local atmosphere.",
-          hotelActionLabel: "Search Tokyo Station area hotels",
+          hotelActionLabel: "Compare Tokyo Station / Ginza area hotels",
           detailLabel: "See Tokyo Station area guide",
           internalLabels: ["Where to stay before taking the Shinkansen"],
         },
@@ -1626,6 +1627,122 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
   );
 }
 
+type ProblemHotelBaseArea = {
+  title: string;
+  bestFor: string;
+  avoidIf: string;
+  logic: string;
+  hotelKey: HotelAreaKey;
+};
+
+const shinkansenHotelBaseAreas: ProblemHotelBaseArea[] = [
+  {
+    title: "Tokyo Station / Ginza",
+    bestFor: "Earliest Shinkansen mornings, heavy luggage, and first/last Tokyo nights.",
+    avoidIf: "You want nightlife, a local-feeling evening, or a softer first Tokyo night.",
+    logic: "Simplest for Tokaido Shinkansen access. Check exact station side and walking route before booking.",
+    hotelKey: "tokyoStation",
+  },
+  {
+    title: "Shinjuku",
+    bestFor: "Food, nightlife, hotel choice, and a stronger evening before a later Shinkansen.",
+    avoidIf: "Your train is very early or you dislike huge stations with luggage.",
+    logic: "Works when the evening matters more than the morning. Build in extra time to reach Tokyo Station.",
+    hotelKey: "shinjuku",
+  },
+  {
+    title: "Ueno",
+    bestFor: "Narita access, practical value, museums, and a simpler east-side rail base.",
+    avoidIf: "You want the absolute simplest Tokaido Shinkansen morning.",
+    logic: "Useful if you arrive from Narita or want an east-side base before moving toward Tokyo Station.",
+    hotelKey: "ueno",
+  },
+  {
+    title: "Asakusa",
+    bestFor: "Old Tokyo atmosphere, calmer nights, and travelers who do not mind subway planning.",
+    avoidIf: "You have large luggage and an early Shinkansen departure.",
+    logic: "Better for atmosphere than Shinkansen logistics. Check subway route and elevator access carefully.",
+    hotelKey: "asakusa",
+  },
+];
+
+function ProblemHotelBaseSection({
+  areas,
+  locale,
+  pagePath,
+  placement,
+}: {
+  areas: ProblemHotelBaseArea[];
+  locale: string;
+  pagePath: string;
+  placement: ProviderChoiceButton["placement"];
+}) {
+  return (
+    <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Hotel base decision</p>
+      <h2 className="mt-2 text-xl font-semibold text-slate-950">Best hotel base areas for this situation</h2>
+      <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
+        Compare broad station areas first, then open hotel booking sites. These are area-search CTAs, not hotel rankings.
+      </p>
+      <div className="mt-5 grid gap-4 lg:grid-cols-2">
+        {areas.map((area) => {
+          const choices = hotelProviderChoices(area.hotelKey, placement);
+          return (
+            <article key={area.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+              <h3 className="text-lg font-semibold text-slate-950">{area.title}</h3>
+              <dl className="mt-3 grid gap-2 text-sm leading-6">
+                <div>
+                  <dt className="font-semibold text-[#106b43]">Good if</dt>
+                  <dd className="text-slate-700">{area.bestFor}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-amber-700">Who should avoid it</dt>
+                  <dd className="text-slate-700">{area.avoidIf}</dd>
+                </div>
+                <div>
+                  <dt className="font-semibold text-slate-900">Luggage / station logic</dt>
+                  <dd className="text-slate-700">{area.logic}</dd>
+                </div>
+              </dl>
+              <ProviderChoiceCTA
+                actionLabel={`Compare hotels in ${area.title}`}
+                description="Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site."
+                providers={choices}
+                pagePath={pagePath}
+                locale={locale}
+                area={area.title}
+                city="Tokyo"
+                className="mt-4"
+              />
+            </article>
+          );
+        })}
+      </div>
+      <div className="mt-4 flex flex-wrap gap-2">
+        {[
+          { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Hotel Area Finder" },
+          { href: "/areas-to-stay/tokyo-first-time", label: "Tokyo first-time hotel base guide" },
+          { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Tokyo with luggage" },
+          { href: "/airport-transfers", label: "Airport transfer by hotel area" },
+          { href: "/local-hotel-picks#hotel-examples-matrix", label: "Local hotel examples" },
+        ].map((link) => (
+          <TrackedInternalLink
+            key={link.href}
+            href={link.href}
+            sourcePage={pagePath}
+            placement="stay_problem_hotel_base"
+            label={link.label}
+            locale={locale}
+            className="inline-flex min-h-9 items-center rounded-xl bg-slate-700 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
+          >
+            {link.label} →
+          </TrackedInternalLink>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 async function TokyoFirstTimeHub({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: "tokyoStayHub" });
   const supplement = tokyoFirstTimeSupplementCopyByLocale[locale] ?? tokyoFirstTimeSupplementCopyByLocale.en;
@@ -1760,6 +1877,39 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
             </div>
         </section>
 
+        <section className="mt-6 rounded-[22px] border border-orange-100 bg-orange-50/70 p-5 shadow-sm">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="max-w-2xl">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-orange-700">Hotel search shortcut</p>
+              <h2 className="mt-1 text-xl font-semibold text-slate-950">Already know your Tokyo base?</h2>
+              <p className="mt-2 text-sm leading-6 text-slate-700">
+                Jump to the major area card first. Each card explains the trade-offs before showing Trip.com / Agoda
+                broad-area search buttons.
+              </p>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-2 lg:min-w-[420px]">
+              {[
+                { href: "#shinjuku-area", label: "Compare Shinjuku hotels" },
+                { href: "#ueno-area", label: "Compare Ueno hotels" },
+                { href: "#asakusa-area", label: "Compare Asakusa hotels" },
+                { href: "#tokyo-station-ginza-area", label: "Compare Tokyo Station / Ginza hotels" },
+              ].map((link) => (
+                <TrackedInternalLink
+                  key={link.href}
+                  href={link.href}
+                  sourcePage={pagePath}
+                  placement="tokyo_first_time_top_decision"
+                  label={link.label}
+                  locale={locale}
+                  className="inline-flex min-h-10 items-center justify-center rounded-xl bg-white px-3 py-2 text-center text-xs font-semibold text-[#c45500] shadow-sm ring-1 ring-orange-100 transition-colors hover:bg-orange-50"
+                >
+                  {link.label}
+                </TrackedInternalLink>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="mt-10">
           <h2 className="text-xl font-semibold text-slate-950">{t("travelPlan.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-5">
@@ -1768,6 +1918,45 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                 <span className="block text-slate-600">{label}</span>
                 <span className="mt-2 block font-semibold text-slate-950">→ {area}</span>
               </a>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Before booking hotels</p>
+          <h2 className="mt-2 text-xl font-semibold text-slate-950">Do not book yet if…</h2>
+          <div className="mt-4 grid gap-3 md:grid-cols-5">
+            {[
+              "You have not checked Narita vs Haneda arrival routes.",
+              "You will carry large luggage through stations.",
+              "You have an early Shinkansen to Kyoto or Osaka.",
+              "You have not checked room size, bed setup, and suitcase space.",
+              "You are unsure about huge stations or quieter nearby bases.",
+            ].map((item) => (
+              <div key={item} className="rounded-2xl border border-slate-100 bg-slate-50 p-3 text-xs leading-5 text-slate-700">
+                {item}
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {[
+              { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Hotel Area Finder" },
+              { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose a luggage-friendly Tokyo base" },
+              { href: "/areas-to-stay/where-to-stay-before-shinkansen", label: "Where to stay before Shinkansen" },
+              { href: "/airport-transfers", label: "Match airport transfer to hotel area" },
+              { href: "/local-hotel-picks#hotel-examples-matrix", label: "See local hotel examples" },
+            ].map((link) => (
+              <TrackedInternalLink
+                key={link.href}
+                href={link.href}
+                sourcePage={pagePath}
+                placement="tokyo_first_time_top_decision"
+                label={link.label}
+                locale={locale}
+                className="inline-flex min-h-9 items-center rounded-xl bg-slate-700 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
+              >
+                {link.label} →
+              </TrackedInternalLink>
             ))}
           </div>
         </section>
@@ -2419,6 +2608,7 @@ export default async function StayPage({ params }: Props) {
 
   const isTokyoFirstTime = page.slug === "tokyo-first-time";
   const firstTimeStayHub = firstTimeStayHubs[page.slug];
+  const isShinkansenProblemPage = page.slug === "where-to-stay-before-shinkansen";
 
   if (isTokyoFirstTime) {
     return <TokyoFirstTimeHub locale={locale} />;
@@ -2488,6 +2678,15 @@ export default async function StayPage({ params }: Props) {
             pagePath={pagePath}
             showCta={!isTokyoFirstTime}
           />
+
+          {isShinkansenProblemPage ? (
+            <ProblemHotelBaseSection
+              areas={shinkansenHotelBaseAreas}
+              locale={locale}
+              pagePath={pagePath}
+              placement="shinkansen_page_area_cta"
+            />
+          ) : null}
 
           <section id="areas" className="scroll-mt-24">
             <h2 className="text-lg font-semibold text-slate-950">{stayPagesCommon.areaBreakdownTitle}</h2>

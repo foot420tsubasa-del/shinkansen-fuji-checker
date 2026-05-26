@@ -16,7 +16,7 @@ export function SiteHeader() {
           <span className="min-w-0">
             <span className="block text-sm font-semibold text-white md:text-base">fujiseat.com</span>
             <span className="hidden text-xs font-semibold leading-5 text-sky-200 sm:block">
-              Japan travel utility hub
+              Japan hotel-base planning
             </span>
           </span>
         </Link>
