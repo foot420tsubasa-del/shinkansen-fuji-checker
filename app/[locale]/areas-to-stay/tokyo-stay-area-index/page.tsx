@@ -24,6 +24,7 @@ import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import sourceStatusJson from "@/data/generated/tokyo-stay-area-source-status.json";
 import { tokyoStayAreaSourceRegistry } from "@/data/stay-area/source-registry";
 import type {
+  AccessRouteProfile,
   ComputedStayAreaScore,
   ExitComplexityLevel,
   LodgingDensityLevel,
@@ -179,12 +180,36 @@ function parseFilter(value: string | undefined): FilterKey {
   return FILTERS.some((f) => f.key === candidate) ? candidate : "all";
 }
 
+function accessLevelFilterDelta(level: AccessRouteProfile["level"] | undefined): number {
+  if (level === "Excellent") return 8;
+  if (level === "Good") return 5;
+  if (level === "Fair") return 2;
+  return 0;
+}
+
+function shinkansenLevelFilterDelta(level: StayAreaBase["accessProfiles"]["shinkansen"]["level"] | undefined): number {
+  if (level === "Excellent") return 8;
+  if (level === "Good") return 5;
+  if (level === "Fair") return 2;
+  return 0;
+}
+
+function profileFilterDelta(area: StayAreaBase, filter: FilterKey): number {
+  if (!area.accessProfiles) return 0;
+  if (filter === "narita-arrival") return accessLevelFilterDelta(area.accessProfiles.narita?.level);
+  if (filter === "haneda-arrival") return accessLevelFilterDelta(area.accessProfiles.haneda?.level);
+  if (filter === "shinkansen") return shinkansenLevelFilterDelta(area.accessProfiles.shinkansen?.level);
+  return 0;
+}
+
 function applyFilterBoost(scores: ComputedStayAreaScore[], filter: FilterKey) {
   if (filter === "all") return scores;
   const boostMap = new Map(FILTER_BOOSTS[filter].map((b) => [b.areaId, b.delta] as const));
   return scores
     .map((s) => {
-      const delta = boostMap.get(s.id) ?? 0;
+      const delta = filter === "narita-arrival" || filter === "haneda-arrival" || filter === "shinkansen"
+        ? profileFilterDelta(areaById(s.id), filter)
+        : boostMap.get(s.id) ?? 0;
       return delta
         ? { ...s, overallScore: Math.max(0, Math.min(100, s.overallScore + delta)) }
         : s;
@@ -338,6 +363,21 @@ function networkComplexityLabel(signal: NetworkComplexitySignal): string {
     return "subway-heavy transfer complex";
   }
   return `${formatHyphenLabel(signal.railNetworkType)} ${formatHyphenLabel(signal.terminalType)}`;
+}
+
+function activeAccessBadge(area: StayAreaBase, filter: FilterKey): string | null {
+  const profiles = area.accessProfiles;
+  if (!profiles) return null;
+  if (filter === "narita-arrival" && (profiles.narita.level === "Excellent" || profiles.narita.level === "Good")) {
+    return profiles.narita.level === "Excellent" ? "Strong Narita access" : "Good Narita access";
+  }
+  if (filter === "haneda-arrival" && (profiles.haneda.level === "Excellent" || profiles.haneda.level === "Good")) {
+    return profiles.haneda.level === "Excellent" ? "Strong Haneda access" : "Good Haneda arrival";
+  }
+  if (filter === "shinkansen" && (profiles.shinkansen.level === "Excellent" || profiles.shinkansen.level === "Good")) {
+    return "Shinkansen-friendly";
+  }
+  return null;
 }
 
 function Chip({
@@ -503,6 +543,39 @@ function StationUsabilityPanel({
   );
 }
 
+function AirportShinkansenAccessPanel({ area }: { area: StayAreaBase }) {
+  const profiles = area.accessProfiles;
+  if (!profiles) return null;
+  return (
+    <div className="mt-5 rounded-2xl border border-orange-100 bg-orange-50/60 p-4">
+      <div className="flex items-center gap-2 text-orange-700">
+        <Plane className="h-4 w-4" aria-hidden="true" />
+        <h3 className="text-sm font-semibold text-slate-950">Airport / Shinkansen access</h3>
+      </div>
+      <p className="mt-2 text-xs leading-5 text-slate-600">
+        Route logic, not live timetable data. Check current trains before travel.
+      </p>
+      <div className="mt-2 grid">
+        <StationUsabilityRow
+          label="Narita"
+          value={`${profiles.narita.level} · ${profiles.narita.transferCountLabel} transfers`}
+          hint={profiles.narita.note}
+        />
+        <StationUsabilityRow
+          label="Haneda"
+          value={`${profiles.haneda.level} · ${profiles.haneda.transferCountLabel} transfers`}
+          hint={profiles.haneda.note}
+        />
+        <StationUsabilityRow
+          label="Shinkansen"
+          value={`${profiles.shinkansen.level} · ${profiles.shinkansen.bestStation}`}
+          hint={profiles.shinkansen.note}
+        />
+      </div>
+    </div>
+  );
+}
+
 function AreaDetailPanel({
   area,
   score,
@@ -540,6 +613,7 @@ function AreaDetailPanel({
       </div>
 
       <StationUsabilityPanel area={area} signal={signal} contribution={score.usabilityContribution} />
+      <AirportShinkansenAccessPanel area={area} />
 
       <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-1">
         <div>
@@ -575,13 +649,16 @@ function AreaRankRow({
   area,
   score,
   signal,
+  activeFilter,
 }: {
   rank: number;
   area: StayAreaBase;
   score: ComputedStayAreaScore;
   signal: StayAreaSignalsFile["areas"][string] | undefined;
+  activeFilter: FilterKey;
 }) {
   const crowd = crowdLevelFromPercentile(signal?.passengerSignal?.crowdPercentile ?? null);
+  const accessBadge = activeAccessBadge(area, activeFilter);
   return (
     <article className="rounded-[22px] border border-slate-200 bg-white p-4 shadow-sm">
       <div className="flex flex-col gap-4 md:flex-row md:items-center">
@@ -596,6 +673,7 @@ function AreaRankRow({
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-1.5">
               <Chip label="Crowd" value={crowd.label} tone={crowd.tone} />
+              {accessBadge ? <Chip label="Fit" value={accessBadge} tone="calm" /> : null}
               {(() => {
                 const ex = exitComplexityDisplay(signal, area.exitComplexityLevel);
                 return (
@@ -928,9 +1006,9 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
             <SignalTile
               icon={Plane}
               title="Airport / Shinkansen access"
-              status="Editorial + route logic"
-              statusTone="soft"
-              body="Editorial sub-scores plus filter boosts (Narita arrival / Haneda arrival / Shinkansen) for fit-based re-ranking."
+              status="Route logic"
+              statusTone="calm"
+              body="Curated accessProfiles explain Narita, Haneda, Tokyo Station, Shinagawa, and Shinkansen fit. No live timetable data is implied."
             />
             <SignalTile
               icon={Building2}
@@ -980,7 +1058,14 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
             </div>
             <div className="mt-4 grid gap-3">
               {rankedAreas.map(({ area, score, signal }, index) => (
-                <AreaRankRow key={area.id} rank={index + 1} area={area} score={score} signal={signal} />
+                <AreaRankRow
+                  key={area.id}
+                  rank={index + 1}
+                  area={area}
+                  score={score}
+                  signal={signal}
+                  activeFilter={activeFilter}
+                />
               ))}
             </div>
           </div>

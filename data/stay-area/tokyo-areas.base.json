@@ -65,7 +65,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Excellent",
+        "transferCountLabel": "0",
+        "note": "Keisei / Asakusa-line network access makes this one of the easier Narita-side arrivals."
+      },
+      "haneda": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Asakusa-line / Keikyu-through routing can be practical for Haneda when the connection is direct or simple."
+      },
+      "tokyoStationAccess": {
+        "level": "Good",
+        "transferCountLabel": "1",
+        "note": "Hanzomon or Asakusa-line routes connect toward central Tokyo with a transfer."
+      },
+      "shinagawaAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Asakusa-line / Keikyu-through routing can connect toward Shinagawa-side rail."
+      },
+      "uenoAccess": {
+        "level": "Good",
+        "transferCountLabel": "1",
+        "note": "Ueno is reachable across east Tokyo, but not always door-to-door simple."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Good for arrival logistics, but Tokyo Station still requires a transfer before the Tokaido Shinkansen."
+      },
+      "airportArrivalEase": {
+        "level": "Excellent",
+        "note": "Strong airport-side logic, especially for Narita arrivals and luggage-aware east Tokyo stays."
+      },
+      "luggageArrivalEase": {
+        "level": "Excellent",
+        "note": "Often easier than mega-terminal arrivals if the hotel is close to the right line or exit."
+      }
+    }
   },
   {
     "id": "kuramae",
@@ -130,7 +170,47 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low"
+    "lodgingDensityLevel": "Low",
+    "accessProfiles": {
+      "narita": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Asakusa-line / Keisei-through logic can work well from Narita when the train pattern fits."
+      },
+      "haneda": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Asakusa-line / Keikyu-through logic can be practical from Haneda."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Tokyo Station usually requires a subway/JR connection."
+      },
+      "shinagawaAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Asakusa-line routing can be practical toward Shinagawa."
+      },
+      "uenoAccess": {
+        "level": "Good",
+        "transferCountLabel": "1",
+        "note": "Ueno is nearby by subway or short rail movement, but check stairs and exits."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Better as a calm east-side base than a direct Shinkansen base."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Good airport logic for travelers comfortable checking the exact through-service route."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Calmer than mega hubs, but station exits can matter with large bags."
+      }
+    }
   },
   {
     "id": "asakusa",
@@ -196,7 +276,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "High"
+    "lodgingDensityLevel": "High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Asakusa-line / Keisei-through logic can be useful from Narita when the hotel is near the right station."
+      },
+      "haneda": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Asakusa-line / Keikyu-through logic can work from Haneda, though exact train pattern matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Tokyo Station is reachable with a transfer; not JR-centered."
+      },
+      "shinagawaAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Asakusa-line routing can connect toward Shinagawa."
+      },
+      "uenoAccess": {
+        "level": "Good",
+        "transferCountLabel": "1",
+        "note": "Ueno is nearby, but the easiest route depends on the hotel side of Asakusa."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Atmosphere is strong, but early Shinkansen logistics require extra routing."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Useful for east-side arrivals if the hotel is close to the right subway line."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Tourist streets and station exits can be tiring with large suitcases."
+      }
+    }
   },
   {
     "id": "ueno",
@@ -266,7 +386,47 @@
     "exitComplexityLevel": "Complex",
     "transferHubLevel": "High",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Very High"
+    "lodgingDensityLevel": "Very High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Excellent",
+        "transferCountLabel": "0",
+        "note": "Keisei Ueno / Skyliner and JR options make Narita access a core strength."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1-2",
+        "note": "Haneda works, but usually with more routing decisions than Shinagawa or Hamamatsucho."
+      },
+      "tokyoStationAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "JR lines connect toward Tokyo Station without complex cross-city routing."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Reach Shinagawa via JR, but it is not the natural airport-side anchor."
+      },
+      "uenoAccess": {
+        "level": "Excellent",
+        "transferCountLabel": "0",
+        "note": "This is the Ueno-area anchor."
+      },
+      "shinkansen": {
+        "level": "Good",
+        "bestStation": "Ueno",
+        "note": "Good for JR connections and northern Shinkansen; for Kyoto/Osaka, connect to Tokyo Station."
+      },
+      "airportArrivalEase": {
+        "level": "Excellent",
+        "note": "Very practical for Narita arrivals and first/last nights."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Useful rail access, though the station area can still feel busy with bags."
+      }
+    }
   },
   {
     "id": "ryogoku",
@@ -328,7 +488,47 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low"
+    "lodgingDensityLevel": "Low",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "kiyosumi-shirakawa",
@@ -392,7 +592,47 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low"
+    "lodgingDensityLevel": "Low",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "monzen-nakacho",
@@ -455,7 +695,47 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low"
+    "lodgingDensityLevel": "Low",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "ningyocho",
@@ -520,7 +800,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Good",
+        "bestStation": "Tokyo",
+        "note": "Good Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Good first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "hatchobori",
@@ -583,7 +903,47 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Excellent",
+        "transferCountLabel": "0",
+        "note": "Excellent access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Good",
+        "bestStation": "Tokyo",
+        "note": "Good Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Good first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "kayabacho",
@@ -645,7 +1005,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low"
+    "lodgingDensityLevel": "Low",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Good",
+        "bestStation": "Tokyo",
+        "note": "Good Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "nihombashi",
@@ -714,7 +1114,47 @@
     "exitComplexityLevel": "Complex",
     "transferHubLevel": "High",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "High"
+    "lodgingDensityLevel": "High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Excellent",
+        "transferCountLabel": "0",
+        "note": "Excellent access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Good",
+        "bestStation": "Tokyo",
+        "note": "Good Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Good first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "tokyo-station",
@@ -789,7 +1229,47 @@
     "exitComplexityLevel": "Mega station",
     "transferHubLevel": "Very High",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Very High"
+    "lodgingDensityLevel": "Very High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Good",
+        "transferCountLabel": "0",
+        "note": "Narita Express can serve Tokyo Station, but the station itself is large."
+      },
+      "haneda": {
+        "level": "Good",
+        "transferCountLabel": "1",
+        "note": "Haneda is practical via central connections, but not as direct as Shinagawa or Hamamatsucho."
+      },
+      "tokyoStationAccess": {
+        "level": "Excellent",
+        "transferCountLabel": "0",
+        "note": "You are already at the main Tokyo Station area."
+      },
+      "shinagawaAccess": {
+        "level": "Good",
+        "transferCountLabel": "0",
+        "note": "JR / Shinkansen corridor access makes Shinagawa straightforward."
+      },
+      "uenoAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "JR connections make Ueno reachable without complex routing."
+      },
+      "shinkansen": {
+        "level": "Excellent",
+        "bestStation": "Tokyo",
+        "note": "Best fit when the Tokaido Shinkansen leaves early or luggage logistics matter."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Very practical on paper, but the station scale can be stressful for first-time arrivals."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Strong rail logistics, but exits, underground passages, and hotel side matter with luggage."
+      }
+    }
   },
   {
     "id": "ginza-yurakucho",
@@ -863,7 +1343,47 @@
     "exitComplexityLevel": "Complex",
     "transferHubLevel": "High",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Very High"
+    "lodgingDensityLevel": "Very High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Central access is practical, especially if routing through Tokyo Station or Higashi-Ginza works."
+      },
+      "haneda": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Asakusa-line or central rail routes can be practical depending on hotel location."
+      },
+      "tokyoStationAccess": {
+        "level": "Excellent",
+        "transferCountLabel": "0-1",
+        "note": "Close to Tokyo Station / Marunouchi / Yaesu by JR, subway, taxi, or walk depending on hotel."
+      },
+      "shinagawaAccess": {
+        "level": "Good",
+        "transferCountLabel": "1",
+        "note": "Shinagawa is reachable by JR or subway/JR routing."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Ueno is reachable but not the natural anchor."
+      },
+      "shinkansen": {
+        "level": "Good",
+        "bestStation": "Tokyo",
+        "note": "Shinkansen-friendly if you choose the hotel side carefully."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Central and practical, but station choice matters with luggage."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Good if the hotel is near an elevator-friendly station or a short taxi from Tokyo Station."
+      }
+    }
   },
   {
     "id": "shimbashi",
@@ -930,7 +1450,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "High"
+    "lodgingDensityLevel": "High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Good",
+        "bestStation": "Tokyo",
+        "note": "Good Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Good first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "hamamatsucho-daimon",
@@ -999,7 +1559,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "High"
+    "lodgingDensityLevel": "High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1-2",
+        "note": "Narita is workable but not the main strength."
+      },
+      "haneda": {
+        "level": "Excellent",
+        "transferCountLabel": "0",
+        "note": "Tokyo Monorail makes this a very practical Haneda arrival base."
+      },
+      "tokyoStationAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "JR Yamanote access makes Tokyo Station relatively straightforward."
+      },
+      "shinagawaAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "JR / Toei routing can connect toward Shinagawa."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Ueno is reachable by JR but not the main reason to stay here."
+      },
+      "shinkansen": {
+        "level": "Good",
+        "bestStation": "Tokyo",
+        "note": "Good for Tokyo Station access and practical first/last night logistics."
+      },
+      "airportArrivalEase": {
+        "level": "Excellent",
+        "note": "One of the strongest Haneda first-night logic areas."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Practical for luggage if the hotel is close to JR, Monorail, or Daimon."
+      }
+    }
   },
   {
     "id": "shinagawa",
@@ -1069,7 +1669,47 @@
     "exitComplexityLevel": "Complex",
     "transferHubLevel": "High",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Very High"
+    "lodgingDensityLevel": "Very High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Good",
+        "transferCountLabel": "0",
+        "note": "Narita Express can serve Shinagawa, though service pattern should be checked."
+      },
+      "haneda": {
+        "level": "Excellent",
+        "transferCountLabel": "0",
+        "note": "Keikyu makes this one of the easiest Haneda-side hotel bases."
+      },
+      "tokyoStationAccess": {
+        "level": "Good",
+        "transferCountLabel": "0",
+        "note": "JR / Shinkansen corridor access makes Tokyo Station straightforward."
+      },
+      "shinagawaAccess": {
+        "level": "Excellent",
+        "transferCountLabel": "0",
+        "note": "You are already at the Shinagawa Shinkansen / Haneda-side rail anchor."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Ueno is reachable by JR but across the city."
+      },
+      "shinkansen": {
+        "level": "Excellent",
+        "bestStation": "Shinagawa",
+        "note": "Excellent for Tokaido Shinkansen and Haneda-linked logistics."
+      },
+      "airportArrivalEase": {
+        "level": "Excellent",
+        "note": "Very strong for Haneda arrivals and also workable for Narita Express users."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Strong logistics, though station exits and hotel side still matter."
+      }
+    }
   },
   {
     "id": "gotanda",
@@ -1132,7 +1772,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Excellent",
+        "transferCountLabel": "0",
+        "note": "Excellent access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Good first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "meguro",
@@ -1198,7 +1878,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "ebisu",
@@ -1261,7 +1981,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "shibuya",
@@ -1333,7 +2093,47 @@
     "exitComplexityLevel": "Mega station",
     "transferHubLevel": "Very High",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Very High"
+    "lodgingDensityLevel": "Very High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Weak",
+        "note": "Weak luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "shinjuku",
@@ -1406,7 +2206,47 @@
     "exitComplexityLevel": "Mega station",
     "transferHubLevel": "Very High",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Very High"
+    "lodgingDensityLevel": "Very High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Weak",
+        "note": "Weak luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "yoyogi",
@@ -1470,7 +2310,47 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "ikebukuro",
@@ -1541,7 +2421,47 @@
     "exitComplexityLevel": "Mega station",
     "transferHubLevel": "Very High",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Very High"
+    "lodgingDensityLevel": "Very High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Weak",
+        "note": "Weak luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "akihabara",
@@ -1609,7 +2529,47 @@
     "exitComplexityLevel": "Complex",
     "transferHubLevel": "High",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "High"
+    "lodgingDensityLevel": "High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Good",
+        "bestStation": "Tokyo",
+        "note": "Good Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Good first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "kanda",
@@ -1672,7 +2632,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Excellent",
+        "transferCountLabel": "0",
+        "note": "Excellent access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Good",
+        "bestStation": "Tokyo",
+        "note": "Good Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Good first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "asakusabashi",
@@ -1735,7 +2735,47 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low"
+    "lodgingDensityLevel": "Low",
+    "accessProfiles": {
+      "narita": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Good first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "bakurocho-higashinihombashi",
@@ -1801,7 +2841,47 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low"
+    "lodgingDensityLevel": "Low",
+    "accessProfiles": {
+      "narita": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Good",
+        "note": "Good first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "kinshicho",
@@ -1865,7 +2945,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "High"
+    "lodgingDensityLevel": "High",
+    "accessProfiles": {
+      "narita": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "akasaka-mitsuke",
@@ -1930,7 +3050,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "roppongi",
@@ -1993,7 +3153,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "aoyama-omotesando",
@@ -2060,7 +3260,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "ochanomizu",
@@ -2127,7 +3367,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low"
+    "lodgingDensityLevel": "Low",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Good",
+        "transferCountLabel": "0-1",
+        "note": "Good access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Good",
+        "bestStation": "Tokyo",
+        "note": "Good Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "iidabashi",
@@ -2194,7 +3474,47 @@
     "exitComplexityLevel": "Complex",
     "transferHubLevel": "High",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Weak",
+        "note": "Weak luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "korakuen-kasuga",
@@ -2260,7 +3580,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low"
+    "lodgingDensityLevel": "Low",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "toyosu",
@@ -2324,7 +3684,47 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Fair",
+        "bestStation": "Tokyo",
+        "note": "Fair Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Good",
+        "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   },
   {
     "id": "ariake-odaiba",
@@ -2391,6 +3791,46 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium"
+    "lodgingDensityLevel": "Medium",
+    "accessProfiles": {
+      "narita": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak Narita fit by route logic; confirm the exact train pattern before arrival."
+      },
+      "haneda": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair Haneda fit by route logic; hotel-side station choice matters."
+      },
+      "tokyoStationAccess": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak access to Tokyo Station for central rail movement."
+      },
+      "shinagawaAccess": {
+        "level": "Fair",
+        "transferCountLabel": "1",
+        "note": "Fair access toward Shinagawa for Haneda or Tokaido Shinkansen logic."
+      },
+      "uenoAccess": {
+        "level": "Weak",
+        "transferCountLabel": "2+",
+        "note": "Weak access toward Ueno and east-side JR / Keisei logic."
+      },
+      "shinkansen": {
+        "level": "Weak",
+        "bestStation": "None",
+        "note": "Weak Shinkansen fit by route logic; use live route checks before travel."
+      },
+      "airportArrivalEase": {
+        "level": "Fair",
+        "note": "Fair first-night arrival fit based on airport routing and station scale."
+      },
+      "luggageArrivalEase": {
+        "level": "Fair",
+        "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
+      }
+    }
   }
 ]

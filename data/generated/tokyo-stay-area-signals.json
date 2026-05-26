@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-05-25T23:55:08.799Z",
+  "generatedAt": "2026-05-26T00:06:34.742Z",
   "mode": "public-data-local",
   "sources": [
     {
       "sourceId": "tokyo-metro-passengers",
       "label": "Tokyo Metro passenger ranking",
       "status": "success",
-      "fetchedAt": "2026-05-25T23:55:08.549Z",
+      "fetchedAt": "2026-05-26T00:06:34.451Z",
       "sourcePeriod": "FY2024",
       "records": 41,
       "message": "Parsed 41 station rows from Tokyo Metro 駅別乗降人員順位表."
@@ -15,7 +15,7 @@
       "sourceId": "toei-passengers",
       "label": "Toei Subway passenger volume",
       "status": "success",
-      "fetchedAt": "2026-05-25T23:55:08.524Z",
+      "fetchedAt": "2026-05-26T00:06:34.425Z",
       "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)",
       "records": 106,
       "message": "Parsed 106 station rows (28 canonical matches) from Toei CKAN CSVs: {\"asakusa\":20,\"mita\":27,\"shinjuku\":21,\"oedo\":38}."
@@ -24,7 +24,7 @@
       "sourceId": "toei-barrier-free",
       "label": "Toei Subway accessibility / barrier-free CSV",
       "status": "success",
-      "fetchedAt": "2026-05-25T23:55:08.550Z",
+      "fetchedAt": "2026-05-26T00:06:34.452Z",
       "sourcePeriod": "Tokyo Open Data (CKAN t000018d0000000028, refreshed irregularly)",
       "records": 106,
       "message": "Parsed 106 station rows from Toei barrier-free CKAN CSVs: {\"asakusa\":20,\"mita\":27,\"shinjuku\":21,\"oedo\":38}."
@@ -33,7 +33,7 @@
       "sourceId": "tokyo-metro-station-exits",
       "label": "Tokyo Metro per-station exit list",
       "status": "success",
-      "fetchedAt": "2026-05-25T23:55:08.551Z",
+      "fetchedAt": "2026-05-26T00:06:34.453Z",
       "sourcePeriod": "Tokyo Metro live exit feed (refreshed irregularly per station revision_date)",
       "records": 1042,
       "message": "Parsed 1042 exit records across 42 canonical stations from tokyometro.jp/station/exit.json."
@@ -42,50 +42,58 @@
       "sourceId": "line-operator-complexity",
       "label": "Line / operator complexity",
       "status": "success",
-      "fetchedAt": "2026-05-25T23:55:08.796Z",
+      "fetchedAt": "2026-05-26T00:06:34.739Z",
       "records": 36,
       "message": "Active from curated area data: derived from stationLines[], complexity tags, and transfer-hub level."
+    },
+    {
+      "sourceId": "airport-shinkansen-access",
+      "label": "Airport / Shinkansen access",
+      "status": "success",
+      "fetchedAt": "2026-05-26T00:06:34.739Z",
+      "records": 36,
+      "message": "Route logic from curated accessProfiles. No live timetable or route API data is implied."
     },
     {
       "sourceId": "toei-station-exits",
       "label": "Toei Subway per-station exit list",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T23:55:08.796Z",
+      "fetchedAt": "2026-05-26T00:06:34.739Z",
       "message": "Toei station detail URLs return 404 from a script; no comparable feed exists yet. Skipped cleanly."
     },
     {
       "sourceId": "tokyo-metro-barrier-free",
       "label": "Tokyo Metro accessibility / barrier-free pages",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T23:55:08.796Z",
+      "fetchedAt": "2026-05-26T00:06:34.739Z",
       "message": "Page is client-rendered from a script request; per-station detail pages not parsed in this pass."
     },
     {
       "sourceId": "odpt-station-information",
       "label": "ODPT station information",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T23:55:08.796Z",
+      "fetchedAt": "2026-05-26T00:06:34.739Z",
       "message": "ODPT_CONSUMER_KEY not set; skipping gracefully."
     },
     {
       "sourceId": "tokyo-police-crime",
       "label": "Tokyo Metropolitan Police town-level crime statistics",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T23:55:08.796Z",
+      "fetchedAt": "2026-05-26T00:06:34.739Z",
       "message": "Not displayed as a safety claim; skipped in this pass."
     },
     {
       "sourceId": "gsi-hazard-portal",
       "label": "Hazard Map Portal (MLIT / GSI)",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T23:55:08.796Z",
+      "fetchedAt": "2026-05-26T00:06:34.739Z",
       "message": "Heavy GIS — catalogued only, no UI rendering this pass."
     },
     {
       "sourceId": "tokyo-lodging-facilities",
       "label": "Tokyo lodging business facility datasets",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T23:55:08.796Z",
+      "fetchedAt": "2026-05-26T00:06:34.739Z",
       "message": "Catalogued only; ward-level CSV URLs change frequently."
     }
   ],

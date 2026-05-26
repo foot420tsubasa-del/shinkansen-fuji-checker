@@ -76,6 +76,37 @@ export type TerminalType =
   | "interchange"
   | "terminal"
   | "mega-terminal";
+export type AccessProfileLevel = "Excellent" | "Good" | "Fair" | "Weak";
+export type TransferCountLabel = "0" | "0-1" | "1" | "1-2" | "2+";
+export type ShinkansenBestStation = "Tokyo" | "Shinagawa" | "Ueno" | "None";
+
+export type AccessRouteProfile = {
+  level: AccessProfileLevel;
+  transferCountLabel: TransferCountLabel;
+  note: string;
+};
+
+export type ShinkansenAccessProfile = {
+  level: AccessProfileLevel;
+  bestStation: ShinkansenBestStation;
+  note: string;
+};
+
+export type AccessEaseProfile = {
+  level: AccessProfileLevel;
+  note: string;
+};
+
+export type StayAreaAccessProfiles = {
+  narita: AccessRouteProfile;
+  haneda: AccessRouteProfile;
+  tokyoStationAccess: AccessRouteProfile;
+  shinagawaAccess: AccessRouteProfile;
+  uenoAccess?: AccessRouteProfile;
+  shinkansen: ShinkansenAccessProfile;
+  airportArrivalEase: AccessEaseProfile;
+  luggageArrivalEase: AccessEaseProfile;
+};
 
 export type StayAreaBase = {
   id: string;
@@ -107,6 +138,8 @@ export type StayAreaBase = {
   stepFreeConfidence: StepFreeConfidence;
   /** Manual hotel-base density (does NOT rank individual hotels). */
   lodgingDensityLevel: LodgingDensityLevel;
+  /** Editorial route-logic profiles. No live timetable data is implied. */
+  accessProfiles: StayAreaAccessProfiles;
   affiliateSearchLinks: {
     trip?: string;
     agoda?: string;

@@ -182,6 +182,34 @@ function transferHubContribution(level) {
   }
 }
 
+function accessLevelContribution(level) {
+  switch (level) {
+    case "Excellent": return 3;
+    case "Good": return 1;
+    case "Fair": return 0;
+    case "Weak": return -2;
+    default: return 0;
+  }
+}
+
+function deriveAccessProfileContribution(area) {
+  const profiles = area.accessProfiles;
+  if (!profiles) return { airportAccessDelta: 0, shinkansenAccessDelta: 0 };
+  const airportSignals = [
+    accessLevelContribution(profiles.narita?.level),
+    accessLevelContribution(profiles.haneda?.level),
+    accessLevelContribution(profiles.airportArrivalEase?.level),
+  ];
+  return {
+    airportAccessDelta: clamp(
+      Math.round(airportSignals.reduce((sum, value) => sum + value, 0) / airportSignals.length),
+      -2,
+      3,
+    ),
+    shinkansenAccessDelta: clamp(accessLevelContribution(profiles.shinkansen?.level), -2, 3),
+  };
+}
+
 function stepFreeContribution(signal) {
   const sf = signal?.stepFreeSignal;
   if (!sf || sf.status === "failed" || sf.status === "skipped") return 0;
@@ -210,12 +238,14 @@ function deriveUsabilityContribution(area, signal) {
   };
 }
 
-function applyUsabilityToScores(editorial, c) {
+function applyUsabilityToScores(editorial, c, accessContribution) {
   return {
     ...editorial,
     crowdStress: clamp(editorial.crowdStress + c.crowdStressDelta),
     stationSimplicity: clamp(editorial.stationSimplicity + c.stationSimplicityDelta),
     luggageFriendly: clamp(editorial.luggageFriendly + c.luggageFriendlyDelta),
+    airportAccess: clamp(editorial.airportAccess + accessContribution.airportAccessDelta),
+    shinkansenAccess: clamp(editorial.shinkansenAccess + accessContribution.shinkansenAccessDelta),
   };
 }
 
@@ -254,7 +284,8 @@ function computeStayAreaScore(area, signal, previousScore) {
   }, {});
 
   const usabilityContribution = deriveUsabilityContribution(area, signal);
-  const adjusted = applyUsabilityToScores(editorial, usabilityContribution);
+  const accessContribution = deriveAccessProfileContribution(area);
+  const adjusted = applyUsabilityToScores(editorial, usabilityContribution, accessContribution);
   const coverage = deriveSourceCoverage(signal);
   const withConfidence = applyConfidenceFromCoverage(adjusted, coverage);
 

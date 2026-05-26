@@ -255,6 +255,37 @@ function transferHubContribution(level: StayAreaBase["transferHubLevel"]): numbe
   }
 }
 
+function accessLevelContribution(level: StayAreaBase["accessProfiles"]["narita"]["level"] | undefined): number {
+  switch (level) {
+    case "Excellent": return 3;
+    case "Good": return 1;
+    case "Fair": return 0;
+    case "Weak": return -2;
+    default: return 0;
+  }
+}
+
+function deriveAccessProfileContribution(area: StayAreaBase): {
+  airportAccessDelta: number;
+  shinkansenAccessDelta: number;
+} {
+  const profiles = area.accessProfiles;
+  if (!profiles) return { airportAccessDelta: 0, shinkansenAccessDelta: 0 };
+  const airportSignals = [
+    accessLevelContribution(profiles.narita?.level),
+    accessLevelContribution(profiles.haneda?.level),
+    accessLevelContribution(profiles.airportArrivalEase?.level),
+  ];
+  return {
+    airportAccessDelta: clamp(
+      Math.round(airportSignals.reduce((sum, value) => sum + value, 0) / airportSignals.length),
+      -2,
+      3,
+    ),
+    shinkansenAccessDelta: clamp(accessLevelContribution(profiles.shinkansen?.level), -2, 3),
+  };
+}
+
 // ----- Per-sub-score delta wiring -----------------------------------------
 
 /**
@@ -311,12 +342,15 @@ function deriveUsabilityContribution(
 function applyUsabilityToScores(
   editorial: StayAreaScores,
   contribution: StationUsabilityContribution,
+  accessContribution: { airportAccessDelta: number; shinkansenAccessDelta: number },
 ): StayAreaScores {
   return {
     ...editorial,
     crowdStress: clamp(editorial.crowdStress + contribution.crowdStressDelta),
     stationSimplicity: clamp(editorial.stationSimplicity + contribution.stationSimplicityDelta),
     luggageFriendly: clamp(editorial.luggageFriendly + contribution.luggageFriendlyDelta),
+    airportAccess: clamp(editorial.airportAccess + accessContribution.airportAccessDelta),
+    shinkansenAccess: clamp(editorial.shinkansenAccess + accessContribution.shinkansenAccessDelta),
   };
 }
 
@@ -371,7 +405,8 @@ export function computeStayAreaScore(
   }, {} as StayAreaScores);
 
   const usabilityContribution = deriveUsabilityContribution(area, signal);
-  const adjusted = applyUsabilityToScores(editorial, usabilityContribution);
+  const accessContribution = deriveAccessProfileContribution(area);
+  const adjusted = applyUsabilityToScores(editorial, usabilityContribution, accessContribution);
   const sourceCoverage = deriveSourceCoverage(signal);
   const withConfidence = applyConfidenceFromCoverage(adjusted, sourceCoverage);
 

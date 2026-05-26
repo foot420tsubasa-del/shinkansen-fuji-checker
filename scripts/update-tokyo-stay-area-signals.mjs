@@ -828,6 +828,14 @@ async function main() {
     records: areasBase.length,
     message: "Active from curated area data: derived from stationLines[], complexity tags, and transfer-hub level.",
   };
+  const airportShinkansenAccess = {
+    sourceId: "airport-shinkansen-access",
+    label: "Airport / Shinkansen access",
+    status: "success",
+    fetchedAt: new Date().toISOString(),
+    records: areasBase.filter((area) => area.accessProfiles).length,
+    message: "Route logic from curated accessProfiles. No live timetable or route API data is implied.",
+  };
 
   const sources = [
     tokyoMetro,
@@ -835,6 +843,7 @@ async function main() {
     toeiBarrierFree,
     tokyoMetroExits,
     lineOperatorComplexity,
+    airportShinkansenAccess,
     toeiStationExits,
     tokyoMetroBarrierFree,
     odpt,

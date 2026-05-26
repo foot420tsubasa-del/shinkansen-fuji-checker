@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-25T23:55:08.951Z",
+  "generatedAt": "2026-05-26T00:06:34.886Z",
   "mode": "public-data-local",
   "areas": [
     {
@@ -8,7 +8,7 @@
       "scores": {
         "stationSimplicity": 84,
         "luggageFriendly": 93.5,
-        "airportAccess": 92,
+        "airportAccess": 94,
         "shinkansenAccess": 72,
         "touristAccess": 80,
         "localFeel": 78,
@@ -48,7 +48,7 @@
       "scores": {
         "stationSimplicity": 89,
         "luggageFriendly": 87,
-        "airportAccess": 78,
+        "airportAccess": 79,
         "shinkansenAccess": 70,
         "touristAccess": 78,
         "localFeel": 88,
@@ -66,7 +66,7 @@
       },
       "scoreParts": {
         "editorialComponent": 79,
-        "publicDataComponent": 81,
+        "publicDataComponent": 82,
         "liveStatusComponent": 80,
         "sourceCoverage": 0.57
       },
@@ -88,8 +88,8 @@
       "scores": {
         "stationSimplicity": 76,
         "luggageFriendly": 81.5,
-        "airportAccess": 76,
-        "shinkansenAccess": 78,
+        "airportAccess": 77,
+        "shinkansenAccess": 79,
         "touristAccess": 78,
         "localFeel": 82,
         "crowdStress": 76,
@@ -106,7 +106,7 @@
       },
       "scoreParts": {
         "editorialComponent": 78,
-        "publicDataComponent": 77,
+        "publicDataComponent": 78,
         "liveStatusComponent": 78,
         "sourceCoverage": 0.57
       },
@@ -128,8 +128,8 @@
       "scores": {
         "stationSimplicity": 60,
         "luggageFriendly": 78.5,
-        "airportAccess": 86,
-        "shinkansenAccess": 82,
+        "airportAccess": 88,
+        "shinkansenAccess": 83,
         "touristAccess": 84,
         "localFeel": 75,
         "crowdStress": 54,
@@ -208,8 +208,8 @@
       "scores": {
         "stationSimplicity": 68,
         "luggageFriendly": 80,
-        "airportAccess": 74,
-        "shinkansenAccess": 88,
+        "airportAccess": 75,
+        "shinkansenAccess": 89,
         "touristAccess": 80,
         "localFeel": 70,
         "crowdStress": 62,
@@ -248,8 +248,8 @@
       "scores": {
         "stationSimplicity": 68,
         "luggageFriendly": 85.5,
-        "airportAccess": 92,
-        "shinkansenAccess": 82,
+        "airportAccess": 94,
+        "shinkansenAccess": 83,
         "touristAccess": 70,
         "localFeel": 60,
         "crowdStress": 63,
@@ -288,7 +288,7 @@
       "scores": {
         "stationSimplicity": 86,
         "luggageFriendly": 81,
-        "airportAccess": 86,
+        "airportAccess": 87,
         "shinkansenAccess": 72,
         "touristAccess": 70,
         "localFeel": 78,
@@ -328,7 +328,7 @@
       "scores": {
         "stationSimplicity": 83.5,
         "luggageFriendly": 81,
-        "airportAccess": 86,
+        "airportAccess": 87,
         "shinkansenAccess": 76,
         "touristAccess": 68,
         "localFeel": 72,
@@ -449,7 +449,7 @@
         "stationSimplicity": 83,
         "luggageFriendly": 80.5,
         "airportAccess": 74,
-        "shinkansenAccess": 82,
+        "shinkansenAccess": 83,
         "touristAccess": 70,
         "localFeel": 68,
         "crowdStress": 81,
@@ -529,7 +529,7 @@
         "stationSimplicity": 78.5,
         "luggageFriendly": 78.5,
         "airportAccess": 74,
-        "shinkansenAccess": 78,
+        "shinkansenAccess": 79,
         "touristAccess": 68,
         "localFeel": 70,
         "crowdStress": 80,
@@ -568,7 +568,7 @@
       "scores": {
         "stationSimplicity": 73,
         "luggageFriendly": 79.5,
-        "airportAccess": 84,
+        "airportAccess": 85,
         "shinkansenAccess": 78,
         "touristAccess": 64,
         "localFeel": 72,
@@ -609,7 +609,7 @@
         "stationSimplicity": 75,
         "luggageFriendly": 74.5,
         "airportAccess": 74,
-        "shinkansenAccess": 86,
+        "shinkansenAccess": 87,
         "touristAccess": 72,
         "localFeel": 76,
         "crowdStress": 66,
@@ -688,7 +688,7 @@
       "scores": {
         "stationSimplicity": 64.5,
         "luggageFriendly": 79.5,
-        "airportAccess": 74,
+        "airportAccess": 75,
         "shinkansenAccess": 68,
         "touristAccess": 86,
         "localFeel": 84,
@@ -728,8 +728,8 @@
       "scores": {
         "stationSimplicity": 60,
         "luggageFriendly": 76,
-        "airportAccess": 72,
-        "shinkansenAccess": 86,
+        "airportAccess": 73,
+        "shinkansenAccess": 87,
         "touristAccess": 84,
         "localFeel": 66,
         "crowdStress": 48,
@@ -768,7 +768,7 @@
       "scores": {
         "stationSimplicity": 72.5,
         "luggageFriendly": 76.5,
-        "airportAccess": 72,
+        "airportAccess": 71,
         "shinkansenAccess": 72,
         "touristAccess": 76,
         "localFeel": 78,
@@ -888,8 +888,8 @@
       "scores": {
         "stationSimplicity": 49,
         "luggageFriendly": 76.5,
-        "airportAccess": 94,
-        "shinkansenAccess": 92,
+        "airportAccess": 96,
+        "shinkansenAccess": 95,
         "touristAccess": 66,
         "localFeel": 58,
         "crowdStress": 46,
@@ -1048,8 +1048,8 @@
       "scores": {
         "stationSimplicity": 84,
         "luggageFriendly": 86,
-        "airportAccess": 72,
-        "shinkansenAccess": 64,
+        "airportAccess": 71,
+        "shinkansenAccess": 62,
         "touristAccess": 70,
         "localFeel": 58,
         "crowdStress": 79,
@@ -1066,7 +1066,7 @@
       },
       "scoreParts": {
         "editorialComponent": 73,
-        "publicDataComponent": 75,
+        "publicDataComponent": 74,
         "liveStatusComponent": 72,
         "sourceCoverage": 0.29
       },
@@ -1088,7 +1088,7 @@
       "scores": {
         "stationSimplicity": 66,
         "luggageFriendly": 74,
-        "airportAccess": 68,
+        "airportAccess": 67,
         "shinkansenAccess": 68,
         "touristAccess": 80,
         "localFeel": 76,
@@ -1106,7 +1106,7 @@
       },
       "scoreParts": {
         "editorialComponent": 73,
-        "publicDataComponent": 71,
+        "publicDataComponent": 70,
         "liveStatusComponent": 73,
         "sourceCoverage": 0.57
       },
@@ -1129,7 +1129,7 @@
         "stationSimplicity": 67.5,
         "luggageFriendly": 71,
         "airportAccess": 70,
-        "shinkansenAccess": 78,
+        "shinkansenAccess": 79,
         "touristAccess": 70,
         "localFeel": 76,
         "crowdStress": 75,
@@ -1168,8 +1168,8 @@
       "scores": {
         "stationSimplicity": 56,
         "luggageFriendly": 73.5,
-        "airportAccess": 80,
-        "shinkansenAccess": 84,
+        "airportAccess": 81,
+        "shinkansenAccess": 85,
         "touristAccess": 76,
         "localFeel": 64,
         "crowdStress": 48,
@@ -1208,8 +1208,8 @@
       "scores": {
         "stationSimplicity": 54.5,
         "luggageFriendly": 68.5,
-        "airportAccess": 78,
-        "shinkansenAccess": 82,
+        "airportAccess": 79,
+        "shinkansenAccess": 83,
         "touristAccess": 84,
         "localFeel": 68,
         "crowdStress": 48,
@@ -1248,7 +1248,7 @@
       "scores": {
         "stationSimplicity": 64,
         "luggageFriendly": 73.5,
-        "airportAccess": 68,
+        "airportAccess": 67,
         "shinkansenAccess": 70,
         "touristAccess": 80,
         "localFeel": 66,
@@ -1288,8 +1288,8 @@
       "scores": {
         "stationSimplicity": 30,
         "luggageFriendly": 52,
-        "airportAccess": 70,
-        "shinkansenAccess": 96,
+        "airportAccess": 71,
+        "shinkansenAccess": 99,
         "touristAccess": 80,
         "localFeel": 55,
         "crowdStress": 22,
@@ -1306,7 +1306,7 @@
       },
       "scoreParts": {
         "editorialComponent": 62,
-        "publicDataComponent": 60,
+        "publicDataComponent": 61,
         "liveStatusComponent": 63,
         "sourceCoverage": 0.57
       },
@@ -1328,7 +1328,7 @@
       "scores": {
         "stationSimplicity": 32,
         "luggageFriendly": 53,
-        "airportAccess": 68,
+        "airportAccess": 67,
         "shinkansenAccess": 62,
         "touristAccess": 82,
         "localFeel": 60,
@@ -1368,7 +1368,7 @@
       "scores": {
         "stationSimplicity": 26,
         "luggageFriendly": 45,
-        "airportAccess": 64,
+        "airportAccess": 63,
         "shinkansenAccess": 64,
         "touristAccess": 88,
         "localFeel": 66,
