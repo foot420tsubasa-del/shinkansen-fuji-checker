@@ -170,7 +170,7 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low",
+    "lodgingDensityLevel": "Medium",
     "accessProfiles": {
       "narita": {
         "level": "Good",
@@ -488,7 +488,7 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low",
+    "lodgingDensityLevel": "Medium",
     "accessProfiles": {
       "narita": {
         "level": "Fair",
@@ -592,7 +592,7 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low",
+    "lodgingDensityLevel": "Medium",
     "accessProfiles": {
       "narita": {
         "level": "Fair",
@@ -695,7 +695,7 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low",
+    "lodgingDensityLevel": "Medium",
     "accessProfiles": {
       "narita": {
         "level": "Fair",
@@ -1005,7 +1005,7 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low",
+    "lodgingDensityLevel": "Medium",
     "accessProfiles": {
       "narita": {
         "level": "Fair",
@@ -1450,7 +1450,7 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "High",
+    "lodgingDensityLevel": "Very High",
     "accessProfiles": {
       "narita": {
         "level": "Fair",
@@ -2093,7 +2093,7 @@
     "exitComplexityLevel": "Mega station",
     "transferHubLevel": "Very High",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Very High",
+    "lodgingDensityLevel": "High",
     "accessProfiles": {
       "narita": {
         "level": "Weak",
@@ -2632,7 +2632,7 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium",
+    "lodgingDensityLevel": "High",
     "accessProfiles": {
       "narita": {
         "level": "Fair",
@@ -2735,7 +2735,7 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low",
+    "lodgingDensityLevel": "Medium",
     "accessProfiles": {
       "narita": {
         "level": "Good",
@@ -2841,7 +2841,7 @@
     "exitComplexityLevel": "Simple",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low",
+    "lodgingDensityLevel": "Medium",
     "accessProfiles": {
       "narita": {
         "level": "Good",
@@ -2945,7 +2945,7 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "High",
+    "lodgingDensityLevel": "Medium",
     "accessProfiles": {
       "narita": {
         "level": "Good",
@@ -3153,7 +3153,7 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium",
+    "lodgingDensityLevel": "High",
     "accessProfiles": {
       "narita": {
         "level": "Weak",
@@ -3367,7 +3367,7 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low",
+    "lodgingDensityLevel": "Medium",
     "accessProfiles": {
       "narita": {
         "level": "Fair",
@@ -3580,7 +3580,7 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Medium",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Low",
+    "lodgingDensityLevel": "Medium",
     "accessProfiles": {
       "narita": {
         "level": "Fair",
@@ -3684,7 +3684,7 @@
     "exitComplexityLevel": "Moderate",
     "transferHubLevel": "Low",
     "stepFreeConfidence": "Unknown",
-    "lodgingDensityLevel": "Medium",
+    "lodgingDensityLevel": "High",
     "accessProfiles": {
       "narita": {
         "level": "Fair",

@@ -324,6 +324,15 @@ function lodgingChipTone(level: LodgingDensityLevel): ChipTone {
   return "warn";
 }
 
+function hotelChoiceShortLabel(level: LodgingDensityLevel): string {
+  switch (level) {
+    case "Very High": return "Very dense";
+    case "High": return "Many";
+    case "Medium": return "Some";
+    case "Low": return "Limited";
+  }
+}
+
 function formatHyphenLabel(value: string): string {
   return value.replace(/-/g, " ");
 }
@@ -535,8 +544,11 @@ function StationUsabilityPanel({
         })()}
         <StationUsabilityRow
           label="Hotel choice density"
-          value={area.lodgingDensityLevel}
-          hint="Editorial; not a hotel quality or price signal."
+          value={signal?.lodgingDensitySignal?.hotelChoiceLabel ?? hotelChoiceShortLabel(area.lodgingDensityLevel)}
+          hint={
+            signal?.lodgingDensitySignal?.message ??
+            "Editorial hotel-choice-density signal only. This does not rank individual hotels or show live availability."
+          }
         />
       </div>
     </div>
@@ -692,7 +704,7 @@ function AreaRankRow({
               })()}
               <Chip
                 label="Hotel choice"
-                value={area.lodgingDensityLevel}
+                value={hotelChoiceShortLabel(area.lodgingDensityLevel)}
                 tone={lodgingChipTone(area.lodgingDensityLevel)}
                 hideOnMobile
               />
@@ -812,9 +824,11 @@ function deriveCoreSignals(
         : { label: "Not live yet", tone: "soft" as ChipTone };
 
   const lodgingStatus =
-    lodging?.status === "success"
-      ? { label: "Active", tone: "calm" as ChipTone }
-      : { label: "Next", tone: "soft" as ChipTone };
+    Object.values(signals.areas).some((a) => a.lodgingDensitySignal?.status === "editorial")
+      ? { label: "Editorial signal", tone: "calm" as ChipTone }
+      : lodging?.status === "success"
+        ? { label: "Active", tone: "calm" as ChipTone }
+        : { label: "Next", tone: "soft" as ChipTone };
 
   // Exit-complexity status reflects both the upstream Tokyo Metro feed and
   // how many areas actually had matched stations. Toei has no comparable
@@ -956,7 +970,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           <p className="mt-2 text-xs leading-5 text-slate-500">
             Seven signals drive the score. Passenger volume, Toei step-free / elevator coverage, and Tokyo Metro
             per-station exit counts are live; line / operator complexity and transfer-hub penalty come from
-            editorial tags; lodging-density data is next.
+            area data; airport / Shinkansen access uses route logic; lodging density is an editorial hotel-choice signal.
           </p>
 
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -1015,7 +1029,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               title="Hotel choice density"
               status={core.lodgingStatus.label}
               statusTone={core.lodgingStatus.tone}
-              body="Editorial level (Low / Medium / High / Very High). Open-data CSV ingestion is the next step. Not a hotel quality or price signal."
+              body="Editorial hotel-choice signal from lodgingDensityLevel. It explains whether nearby hotel search is likely limited, some, many, or very dense. Not live availability and not a hotel ranking."
             />
           </div>
 

@@ -772,6 +772,38 @@ function deriveNetworkComplexitySignal(area) {
   };
 }
 
+function lodgingChoiceLabel(level) {
+  switch (level) {
+    case "Very High": return "Very dense hotel area";
+    case "High": return "Many hotel options";
+    case "Medium": return "Some hotel choice";
+    case "Low": return "Limited hotel choice";
+    default: return "Some hotel choice";
+  }
+}
+
+function lodgingScoreContribution(level) {
+  switch (level) {
+    case "Very High": return 3;
+    case "High": return 2;
+    case "Medium": return 1;
+    case "Low": return -1;
+    default: return 0;
+  }
+}
+
+function deriveLodgingDensitySignal(area) {
+  const densityLevel = area.lodgingDensityLevel || "Medium";
+  const hotelChoiceLabel = lodgingChoiceLabel(densityLevel);
+  return {
+    status: "editorial",
+    densityLevel,
+    hotelChoiceLabel,
+    scoreContribution: lodgingScoreContribution(densityLevel),
+    message: `${hotelChoiceLabel}. Editorial hotel-choice-density signal only; this does not rank individual hotels or show live availability.`,
+  };
+}
+
 // ---------- main -----------------------------------------------------------
 
 async function main() {
@@ -818,8 +850,16 @@ async function main() {
   const lodging = skippedSource(
     "tokyo-lodging-facilities",
     "Tokyo lodging business facility datasets",
-    "Catalogued only; ward-level CSV URLs change frequently.",
+    "Registered only; not live yet and not used as live hotel inventory.",
   );
+  const lodgingDensityEditorial = {
+    sourceId: "lodging-density-editorial",
+    label: "Lodging density editorial signal",
+    status: "success",
+    fetchedAt: new Date().toISOString(),
+    records: areasBase.length,
+    message: "Editorial hotel-choice-density signal from lodgingDensityLevel. Not live inventory and not a hotel ranking.",
+  };
   const lineOperatorComplexity = {
     sourceId: "line-operator-complexity",
     label: "Line / operator complexity",
@@ -844,6 +884,7 @@ async function main() {
     tokyoMetroExits,
     lineOperatorComplexity,
     airportShinkansenAccess,
+    lodgingDensityEditorial,
     toeiStationExits,
     tokyoMetroBarrierFree,
     odpt,
@@ -1064,7 +1105,7 @@ async function main() {
     const previousArea = previousSignals?.areas?.[area.id];
     const safetySignal = previousArea?.safetySignal ?? { status: "skipped", message: "Optional source not fetched in this pass." };
     const floodNoteSignal = previousArea?.floodNoteSignal ?? { status: "skipped", message: "Optional source not fetched in this pass." };
-    const lodgingDensitySignal = previousArea?.lodgingDensitySignal ?? { status: "skipped", message: "Optional source not fetched in this pass." };
+    const lodgingDensitySignal = deriveLodgingDensitySignal(area);
 
     const stepFreeSignal = areaStepFree.get(area.id) ?? {
       status: "skipped",

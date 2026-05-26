@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-26T00:06:34.886Z",
+  "generatedAt": "2026-05-26T00:17:54.667Z",
   "mode": "public-data-local",
   "areas": [
     {
@@ -13,7 +13,7 @@
         "touristAccess": 80,
         "localFeel": 78,
         "crowdStress": 81,
-        "lodgingChoice": 68,
+        "lodgingChoice": 69,
         "confidence": 88
       },
       "confidence": {
@@ -53,7 +53,7 @@
         "touristAccess": 78,
         "localFeel": 88,
         "crowdStress": 84,
-        "lodgingChoice": 62,
+        "lodgingChoice": 63,
         "confidence": 84
       },
       "confidence": {
@@ -93,7 +93,7 @@
         "touristAccess": 78,
         "localFeel": 82,
         "crowdStress": 76,
-        "lodgingChoice": 64,
+        "lodgingChoice": 65,
         "confidence": 82
       },
       "confidence": {
@@ -133,7 +133,7 @@
         "touristAccess": 84,
         "localFeel": 75,
         "crowdStress": 54,
-        "lodgingChoice": 82,
+        "lodgingChoice": 85,
         "confidence": 87
       },
       "confidence": {
@@ -173,7 +173,7 @@
         "touristAccess": 70,
         "localFeel": 90,
         "crowdStress": 89,
-        "lodgingChoice": 50,
+        "lodgingChoice": 51,
         "confidence": 80
       },
       "confidence": {
@@ -213,7 +213,7 @@
         "touristAccess": 80,
         "localFeel": 70,
         "crowdStress": 62,
-        "lodgingChoice": 80,
+        "lodgingChoice": 82,
         "confidence": 88
       },
       "confidence": {
@@ -253,7 +253,7 @@
         "touristAccess": 70,
         "localFeel": 60,
         "crowdStress": 63,
-        "lodgingChoice": 76,
+        "lodgingChoice": 78,
         "confidence": 83
       },
       "confidence": {
@@ -293,7 +293,7 @@
         "touristAccess": 70,
         "localFeel": 78,
         "crowdStress": 81,
-        "lodgingChoice": 60,
+        "lodgingChoice": 61,
         "confidence": 77
       },
       "confidence": {
@@ -333,7 +333,7 @@
         "touristAccess": 68,
         "localFeel": 72,
         "crowdStress": 81,
-        "lodgingChoice": 58,
+        "lodgingChoice": 59,
         "confidence": 73
       },
       "confidence": {
@@ -373,7 +373,7 @@
         "touristAccess": 76,
         "localFeel": 82,
         "crowdStress": 79,
-        "lodgingChoice": 58,
+        "lodgingChoice": 59,
         "confidence": 79
       },
       "confidence": {
@@ -413,7 +413,7 @@
         "touristAccess": 72,
         "localFeel": 86,
         "crowdStress": 83,
-        "lodgingChoice": 52,
+        "lodgingChoice": 53,
         "confidence": 80
       },
       "confidence": {
@@ -453,7 +453,7 @@
         "touristAccess": 70,
         "localFeel": 68,
         "crowdStress": 81,
-        "lodgingChoice": 62,
+        "lodgingChoice": 63,
         "confidence": 77
       },
       "confidence": {
@@ -493,7 +493,7 @@
         "touristAccess": 70,
         "localFeel": 80,
         "crowdStress": 73,
-        "lodgingChoice": 66,
+        "lodgingChoice": 67,
         "confidence": 82
       },
       "confidence": {
@@ -506,7 +506,7 @@
       },
       "scoreParts": {
         "editorialComponent": 75,
-        "publicDataComponent": 76,
+        "publicDataComponent": 77,
         "liveStatusComponent": 76,
         "sourceCoverage": 0.57
       },
@@ -533,7 +533,7 @@
         "touristAccess": 68,
         "localFeel": 70,
         "crowdStress": 80,
-        "lodgingChoice": 56,
+        "lodgingChoice": 57,
         "confidence": 75
       },
       "confidence": {
@@ -546,7 +546,7 @@
       },
       "scoreParts": {
         "editorialComponent": 75,
-        "publicDataComponent": 74,
+        "publicDataComponent": 75,
         "liveStatusComponent": 75,
         "sourceCoverage": 0.43
       },
@@ -573,7 +573,7 @@
         "touristAccess": 64,
         "localFeel": 72,
         "crowdStress": 69,
-        "lodgingChoice": 70,
+        "lodgingChoice": 71,
         "confidence": 79
       },
       "confidence": {
@@ -586,7 +586,7 @@
       },
       "scoreParts": {
         "editorialComponent": 75,
-        "publicDataComponent": 75,
+        "publicDataComponent": 76,
         "liveStatusComponent": 75,
         "sourceCoverage": 0.43
       },
@@ -613,7 +613,7 @@
         "touristAccess": 72,
         "localFeel": 76,
         "crowdStress": 66,
-        "lodgingChoice": 68,
+        "lodgingChoice": 70,
         "confidence": 79
       },
       "confidence": {
@@ -653,7 +653,7 @@
         "touristAccess": 70,
         "localFeel": 64,
         "crowdStress": 81,
-        "lodgingChoice": 68,
+        "lodgingChoice": 70,
         "confidence": 77
       },
       "confidence": {
@@ -693,7 +693,7 @@
         "touristAccess": 86,
         "localFeel": 84,
         "crowdStress": 51,
-        "lodgingChoice": 78,
+        "lodgingChoice": 80,
         "confidence": 86
       },
       "confidence": {
@@ -733,7 +733,7 @@
         "touristAccess": 84,
         "localFeel": 66,
         "crowdStress": 48,
-        "lodgingChoice": 82,
+        "lodgingChoice": 85,
         "confidence": 88
       },
       "confidence": {
@@ -746,7 +746,7 @@
       },
       "scoreParts": {
         "editorialComponent": 74,
-        "publicDataComponent": 72,
+        "publicDataComponent": 73,
         "liveStatusComponent": 75,
         "sourceCoverage": 0.57
       },
@@ -773,7 +773,7 @@
         "touristAccess": 76,
         "localFeel": 78,
         "crowdStress": 67,
-        "lodgingChoice": 70,
+        "lodgingChoice": 71,
         "confidence": 81
       },
       "confidence": {
@@ -813,7 +813,7 @@
         "touristAccess": 78,
         "localFeel": 76,
         "crowdStress": 74,
-        "lodgingChoice": 62,
+        "lodgingChoice": 63,
         "confidence": 77
       },
       "confidence": {
@@ -853,7 +853,7 @@
         "touristAccess": 74,
         "localFeel": 70,
         "crowdStress": 58,
-        "lodgingChoice": 76,
+        "lodgingChoice": 77,
         "confidence": 81
       },
       "confidence": {
@@ -893,7 +893,7 @@
         "touristAccess": 66,
         "localFeel": 58,
         "crowdStress": 46,
-        "lodgingChoice": 80,
+        "lodgingChoice": 83,
         "confidence": 89
       },
       "confidence": {
@@ -906,7 +906,7 @@
       },
       "scoreParts": {
         "editorialComponent": 73,
-        "publicDataComponent": 72,
+        "publicDataComponent": 73,
         "liveStatusComponent": 73,
         "sourceCoverage": 0.29
       },
@@ -933,7 +933,7 @@
         "touristAccess": 72,
         "localFeel": 70,
         "crowdStress": 71,
-        "lodgingChoice": 70,
+        "lodgingChoice": 71,
         "confidence": 79
       },
       "confidence": {
@@ -973,7 +973,7 @@
         "touristAccess": 70,
         "localFeel": 78,
         "crowdStress": 70,
-        "lodgingChoice": 62,
+        "lodgingChoice": 63,
         "confidence": 80
       },
       "confidence": {
@@ -1013,7 +1013,7 @@
         "touristAccess": 68,
         "localFeel": 80,
         "crowdStress": 74,
-        "lodgingChoice": 54,
+        "lodgingChoice": 55,
         "confidence": 78
       },
       "confidence": {
@@ -1053,7 +1053,7 @@
         "touristAccess": 70,
         "localFeel": 58,
         "crowdStress": 79,
-        "lodgingChoice": 64,
+        "lodgingChoice": 65,
         "confidence": 75
       },
       "confidence": {
@@ -1083,88 +1083,8 @@
       }
     },
     {
-      "id": "aoyama-omotesando",
-      "overallScore": 72,
-      "scores": {
-        "stationSimplicity": 66,
-        "luggageFriendly": 74,
-        "airportAccess": 67,
-        "shinkansenAccess": 68,
-        "touristAccess": 80,
-        "localFeel": 76,
-        "crowdStress": 64,
-        "lodgingChoice": 64,
-        "confidence": 82
-      },
-      "confidence": {
-        "score": 82,
-        "label": "Medium-high"
-      },
-      "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
-      },
-      "scoreParts": {
-        "editorialComponent": 73,
-        "publicDataComponent": 70,
-        "liveStatusComponent": 73,
-        "sourceCoverage": 0.57
-      },
-      "matchLabel": "public-data-matched",
-      "usabilityContribution": {
-        "passengerCrowd": -4,
-        "exitComplexity": -6,
-        "lineOperator": 0,
-        "transferHub": -2,
-        "rawTotal": -12,
-        "crowdStressDelta": -6,
-        "stationSimplicityDelta": -10,
-        "luggageFriendlyDelta": 0
-      }
-    },
-    {
-      "id": "ochanomizu",
-      "overallScore": 72,
-      "scores": {
-        "stationSimplicity": 67.5,
-        "luggageFriendly": 71,
-        "airportAccess": 70,
-        "shinkansenAccess": 79,
-        "touristAccess": 70,
-        "localFeel": 76,
-        "crowdStress": 75,
-        "lodgingChoice": 56,
-        "confidence": 77
-      },
-      "confidence": {
-        "score": 77,
-        "label": "Medium-high"
-      },
-      "sourceFreshness": {
-        "level": "partial-public-data",
-        "label": "Public data: partially matched"
-      },
-      "scoreParts": {
-        "editorialComponent": 73,
-        "publicDataComponent": 71,
-        "liveStatusComponent": 73,
-        "sourceCoverage": 0.43
-      },
-      "matchLabel": "partial-public-data",
-      "usabilityContribution": {
-        "passengerCrowd": -1,
-        "exitComplexity": -6,
-        "lineOperator": 0,
-        "transferHub": -2,
-        "rawTotal": -9,
-        "crowdStressDelta": -3,
-        "stationSimplicityDelta": -8.5,
-        "luggageFriendlyDelta": -3
-      }
-    },
-    {
       "id": "shimbashi",
-      "overallScore": 71,
+      "overallScore": 72,
       "scores": {
         "stationSimplicity": 56,
         "luggageFriendly": 73.5,
@@ -1173,7 +1093,7 @@
         "touristAccess": 76,
         "localFeel": 64,
         "crowdStress": 48,
-        "lodgingChoice": 78,
+        "lodgingChoice": 81,
         "confidence": 84
       },
       "confidence": {
@@ -1203,6 +1123,86 @@
       }
     },
     {
+      "id": "aoyama-omotesando",
+      "overallScore": 72,
+      "scores": {
+        "stationSimplicity": 66,
+        "luggageFriendly": 74,
+        "airportAccess": 67,
+        "shinkansenAccess": 68,
+        "touristAccess": 80,
+        "localFeel": 76,
+        "crowdStress": 64,
+        "lodgingChoice": 65,
+        "confidence": 82
+      },
+      "confidence": {
+        "score": 82,
+        "label": "Medium-high"
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      },
+      "scoreParts": {
+        "editorialComponent": 73,
+        "publicDataComponent": 71,
+        "liveStatusComponent": 73,
+        "sourceCoverage": 0.57
+      },
+      "matchLabel": "public-data-matched",
+      "usabilityContribution": {
+        "passengerCrowd": -4,
+        "exitComplexity": -6,
+        "lineOperator": 0,
+        "transferHub": -2,
+        "rawTotal": -12,
+        "crowdStressDelta": -6,
+        "stationSimplicityDelta": -10,
+        "luggageFriendlyDelta": 0
+      }
+    },
+    {
+      "id": "ochanomizu",
+      "overallScore": 72,
+      "scores": {
+        "stationSimplicity": 67.5,
+        "luggageFriendly": 71,
+        "airportAccess": 70,
+        "shinkansenAccess": 79,
+        "touristAccess": 70,
+        "localFeel": 76,
+        "crowdStress": 75,
+        "lodgingChoice": 57,
+        "confidence": 77
+      },
+      "confidence": {
+        "score": 77,
+        "label": "Medium-high"
+      },
+      "sourceFreshness": {
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
+      },
+      "scoreParts": {
+        "editorialComponent": 73,
+        "publicDataComponent": 71,
+        "liveStatusComponent": 73,
+        "sourceCoverage": 0.43
+      },
+      "matchLabel": "partial-public-data",
+      "usabilityContribution": {
+        "passengerCrowd": -1,
+        "exitComplexity": -6,
+        "lineOperator": 0,
+        "transferHub": -2,
+        "rawTotal": -9,
+        "crowdStressDelta": -3,
+        "stationSimplicityDelta": -8.5,
+        "luggageFriendlyDelta": -3
+      }
+    },
+    {
       "id": "akihabara",
       "overallScore": 71,
       "scores": {
@@ -1213,7 +1213,7 @@
         "touristAccess": 84,
         "localFeel": 68,
         "crowdStress": 48,
-        "lodgingChoice": 76,
+        "lodgingChoice": 78,
         "confidence": 83
       },
       "confidence": {
@@ -1253,7 +1253,7 @@
         "touristAccess": 80,
         "localFeel": 66,
         "crowdStress": 57,
-        "lodgingChoice": 72,
+        "lodgingChoice": 74,
         "confidence": 82
       },
       "confidence": {
@@ -1293,7 +1293,7 @@
         "touristAccess": 80,
         "localFeel": 55,
         "crowdStress": 22,
-        "lodgingChoice": 84,
+        "lodgingChoice": 87,
         "confidence": 94
       },
       "confidence": {
@@ -1333,7 +1333,7 @@
         "touristAccess": 82,
         "localFeel": 60,
         "crowdStress": 26,
-        "lodgingChoice": 84,
+        "lodgingChoice": 87,
         "confidence": 83
       },
       "confidence": {
@@ -1373,7 +1373,7 @@
         "touristAccess": 88,
         "localFeel": 66,
         "crowdStress": 16,
-        "lodgingChoice": 84,
+        "lodgingChoice": 86,
         "confidence": 87
       },
       "confidence": {
@@ -1413,7 +1413,7 @@
         "touristAccess": 88,
         "localFeel": 62,
         "crowdStress": 16,
-        "lodgingChoice": 88,
+        "lodgingChoice": 91,
         "confidence": 92
       },
       "confidence": {

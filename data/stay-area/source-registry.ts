@@ -176,7 +176,7 @@ export const tokyoStayAreaSourceRegistry: StayAreaSourceDefinition[] = [
     commercialUseNote:
       "Public dataset. For density signals only — not hotel quality or price.",
     status: "registered",
-    usedInScore: true,
-    note: "Catalogued only; ward-level CSV URLs change frequently.",
+    usedInScore: false,
+    note: "Registered only; not live yet and not used as live hotel inventory. Current lodging-density signal is editorial.",
   },
 ];

@@ -210,6 +210,17 @@ function deriveAccessProfileContribution(area) {
   };
 }
 
+function lodgingDensityContribution(signal, area) {
+  const level = signal?.lodgingDensitySignal?.densityLevel ?? area.lodgingDensityLevel;
+  switch (level) {
+    case "Very High": return 3;
+    case "High": return 2;
+    case "Medium": return 1;
+    case "Low": return -1;
+    default: return 0;
+  }
+}
+
 function stepFreeContribution(signal) {
   const sf = signal?.stepFreeSignal;
   if (!sf || sf.status === "failed" || sf.status === "skipped") return 0;
@@ -238,7 +249,7 @@ function deriveUsabilityContribution(area, signal) {
   };
 }
 
-function applyUsabilityToScores(editorial, c, accessContribution) {
+function applyUsabilityToScores(editorial, c, accessContribution, lodgingContribution) {
   return {
     ...editorial,
     crowdStress: clamp(editorial.crowdStress + c.crowdStressDelta),
@@ -246,6 +257,7 @@ function applyUsabilityToScores(editorial, c, accessContribution) {
     luggageFriendly: clamp(editorial.luggageFriendly + c.luggageFriendlyDelta),
     airportAccess: clamp(editorial.airportAccess + accessContribution.airportAccessDelta),
     shinkansenAccess: clamp(editorial.shinkansenAccess + accessContribution.shinkansenAccessDelta),
+    lodgingChoice: clamp(editorial.lodgingChoice + lodgingContribution),
   };
 }
 
@@ -285,7 +297,13 @@ function computeStayAreaScore(area, signal, previousScore) {
 
   const usabilityContribution = deriveUsabilityContribution(area, signal);
   const accessContribution = deriveAccessProfileContribution(area);
-  const adjusted = applyUsabilityToScores(editorial, usabilityContribution, accessContribution);
+  const lodgingContribution = lodgingDensityContribution(signal, area);
+  const adjusted = applyUsabilityToScores(
+    editorial,
+    usabilityContribution,
+    accessContribution,
+    lodgingContribution,
+  );
   const coverage = deriveSourceCoverage(signal);
   const withConfidence = applyConfidenceFromCoverage(adjusted, coverage);
 

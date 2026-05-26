@@ -249,6 +249,18 @@ export type NetworkComplexitySignal = {
   message: string;
 };
 
+export type LodgingDensitySignal = {
+  status: "success" | "partial" | "editorial" | "skipped" | "failed";
+  densityLevel: LodgingDensityLevel;
+  hotelChoiceLabel:
+    | "Limited hotel choice"
+    | "Some hotel choice"
+    | "Many hotel options"
+    | "Very dense hotel area";
+  scoreContribution: number;
+  message: string;
+};
+
 export type OptionalSignal = {
   status: SignalStatus;
   message?: string;
@@ -271,7 +283,7 @@ export type StayAreaSignal = {
   networkComplexitySignal: NetworkComplexitySignal;
   safetySignal: OptionalSignal;
   floodNoteSignal: OptionalSignal;
-  lodgingDensitySignal: OptionalSignal;
+  lodgingDensitySignal: LodgingDensitySignal;
   sourceFreshness: SourceFreshness;
 };
 

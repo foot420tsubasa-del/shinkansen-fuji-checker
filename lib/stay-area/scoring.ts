@@ -286,6 +286,17 @@ function deriveAccessProfileContribution(area: StayAreaBase): {
   };
 }
 
+function lodgingDensityContribution(signal: StayAreaSignal | undefined, area: StayAreaBase): number {
+  const level = signal?.lodgingDensitySignal?.densityLevel ?? area.lodgingDensityLevel;
+  switch (level) {
+    case "Very High": return 3;
+    case "High": return 2;
+    case "Medium": return 1;
+    case "Low": return -1;
+    default: return 0;
+  }
+}
+
 // ----- Per-sub-score delta wiring -----------------------------------------
 
 /**
@@ -343,6 +354,7 @@ function applyUsabilityToScores(
   editorial: StayAreaScores,
   contribution: StationUsabilityContribution,
   accessContribution: { airportAccessDelta: number; shinkansenAccessDelta: number },
+  lodgingContribution: number,
 ): StayAreaScores {
   return {
     ...editorial,
@@ -351,6 +363,7 @@ function applyUsabilityToScores(
     luggageFriendly: clamp(editorial.luggageFriendly + contribution.luggageFriendlyDelta),
     airportAccess: clamp(editorial.airportAccess + accessContribution.airportAccessDelta),
     shinkansenAccess: clamp(editorial.shinkansenAccess + accessContribution.shinkansenAccessDelta),
+    lodgingChoice: clamp(editorial.lodgingChoice + lodgingContribution),
   };
 }
 
@@ -406,7 +419,13 @@ export function computeStayAreaScore(
 
   const usabilityContribution = deriveUsabilityContribution(area, signal);
   const accessContribution = deriveAccessProfileContribution(area);
-  const adjusted = applyUsabilityToScores(editorial, usabilityContribution, accessContribution);
+  const lodgingContribution = lodgingDensityContribution(signal, area);
+  const adjusted = applyUsabilityToScores(
+    editorial,
+    usabilityContribution,
+    accessContribution,
+    lodgingContribution,
+  );
   const sourceCoverage = deriveSourceCoverage(signal);
   const withConfidence = applyConfidenceFromCoverage(adjusted, sourceCoverage);
 
