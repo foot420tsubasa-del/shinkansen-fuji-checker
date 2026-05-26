@@ -196,6 +196,55 @@ export function trackInternalLinkClick(params: {
   });
 }
 
+export function trackStayAreaFilterClick(params: {
+  filter_id: string;
+  filter_label: string;
+  page_path: string;
+  result_count: number;
+  top_area_id_after_filter: string;
+  top_area_score_after_filter: number;
+}) {
+  trackEvent({
+    action: "stay_area_filter_click",
+    category: "stay_area_index",
+    label: params.filter_label,
+    params,
+  });
+}
+
+export function trackStayAreaDetailSelect(params: {
+  area_id: string;
+  area_name: string;
+  overall_score: number;
+  rank_position: number;
+  match_label: string;
+  crowd_level: string;
+  complexity_level: string;
+  page_path: string;
+}) {
+  trackEvent({
+    action: "stay_area_detail_select",
+    category: "stay_area_index",
+    label: params.area_name,
+    params,
+  });
+}
+
+export function trackStayAreaContinueClick(params: {
+  area_id?: string;
+  target_path: string;
+  link_label: string;
+  placement: string;
+  page_path: string;
+}) {
+  trackEvent({
+    action: "stay_area_continue_click",
+    category: "stay_area_index",
+    label: params.link_label,
+    params,
+  });
+}
+
 export function trackShareClick(params: {
   platform: "native" | "copy" | "x" | "facebook" | "linkedin";
   page_path?: string;

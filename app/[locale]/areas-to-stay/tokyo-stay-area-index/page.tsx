@@ -16,7 +16,6 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
-import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { getAlternates } from "@/i18n/hreflang";
 import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
 import signalsJson from "@/data/generated/tokyo-stay-area-signals.json";
@@ -37,10 +36,15 @@ import type {
   SourceStatusFile,
   StepFreeConfidence,
 } from "@/lib/stay-area/types";
+import {
+  TrackedStayAreaContinueLink,
+  TrackedStayAreaDetailLink,
+  TrackedStayAreaFilterLink,
+} from "./StayAreaIndexTracking";
 
 type Props = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ filter?: string }>;
+  searchParams: Promise<{ filter?: string; area?: string }>;
 };
 
 const pagePath = "/areas-to-stay/tokyo-stay-area-index";
@@ -215,6 +219,22 @@ function applyFilterBoost(scores: ComputedStayAreaScore[], filter: FilterKey) {
         : s;
     })
     .sort((a, b) => b.overallScore - a.overallScore);
+}
+
+function localizedIndexHref(locale: string, suffix = ""): string {
+  const localizedPath = `/${locale === "en" ? "" : `${locale}/`}${pagePath.replace(/^\//, "")}`;
+  return `${localizedPath}${suffix}`;
+}
+
+function filterHref(locale: string, filter: FilterKey): string {
+  return localizedIndexHref(locale, filter === "all" ? "#ranked-areas" : `?filter=${filter}#ranked-areas`);
+}
+
+function areaDetailHref(locale: string, filter: FilterKey, areaId: string): string {
+  const params = new URLSearchParams();
+  if (filter !== "all") params.set("filter", filter);
+  params.set("area", areaId);
+  return localizedIndexHref(locale, `?${params.toString()}#selected-area`);
 }
 
 function formatLastChecked(iso: string): string {
@@ -599,7 +619,7 @@ function AreaDetailPanel({
 }) {
   const tone = matchLabelTone(score.matchLabel);
   return (
-    <section className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-24">
+    <section id="selected-area" className="scroll-mt-24 rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-24">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Selected area</p>
@@ -662,17 +682,31 @@ function AreaRankRow({
   score,
   signal,
   activeFilter,
+  href,
 }: {
   rank: number;
   area: StayAreaBase;
   score: ComputedStayAreaScore;
   signal: StayAreaSignalsFile["areas"][string] | undefined;
   activeFilter: FilterKey;
+  href: string;
 }) {
   const crowd = crowdLevelFromPercentile(signal?.passengerSignal?.crowdPercentile ?? null);
   const accessBadge = activeAccessBadge(area, activeFilter);
+  const exit = exitComplexityDisplay(signal, area.exitComplexityLevel);
   return (
-    <article className="rounded-[22px] border border-slate-200 bg-white p-4 shadow-sm">
+    <TrackedStayAreaDetailLink
+      href={href}
+      className="block rounded-[22px] border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-emerald-200 hover:bg-emerald-50/40"
+      areaId={area.id}
+      areaName={area.displayName}
+      overallScore={score.overallScore}
+      rankPosition={rank}
+      matchLabel={score.matchLabel}
+      crowdLevel={crowd.label}
+      complexityLevel={exit.level}
+      pagePath={pagePath}
+    >
       <div className="flex flex-col gap-4 md:flex-row md:items-center">
         <div className="flex min-w-0 flex-1 items-start gap-3">
           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-950 text-sm font-bold text-white">
@@ -686,16 +720,11 @@ function AreaRankRow({
             <div className="mt-2 flex flex-wrap items-center gap-1.5">
               <Chip label="Crowd" value={crowd.label} tone={crowd.tone} />
               {accessBadge ? <Chip label="Fit" value={accessBadge} tone="calm" /> : null}
-              {(() => {
-                const ex = exitComplexityDisplay(signal, area.exitComplexityLevel);
-                return (
-                  <Chip
-                    label="Complexity"
-                    value={ex.level}
-                    tone={complexityChipTone(ex.level)}
-                  />
-                );
-              })()}
+              <Chip
+                label="Complexity"
+                value={exit.level}
+                tone={complexityChipTone(exit.level)}
+              />
               {(() => {
                 const sf = stepFreeDisplay(signal, area.stepFreeConfidence);
                 return (
@@ -723,7 +752,7 @@ function AreaRankRow({
           Best for: {area.editorial.bestFor.slice(0, 3).join(" · ")}
         </p>
       )}
-    </article>
+    </TrackedStayAreaDetailLink>
   );
 }
 
@@ -861,7 +890,7 @@ function deriveCoreSignals(
 
 export default async function TokyoStayAreaIndexPage({ params, searchParams }: Props) {
   const { locale } = await params;
-  const { filter } = await searchParams;
+  const { filter, area } = await searchParams;
   const activeFilter = parseFilter(filter);
 
   const baselineScores = scoresFile.areas;
@@ -872,7 +901,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
     score,
     signal: signalsFile.areas[score.id],
   }));
-  const selected = rankedAreas[0];
+  const selected = rankedAreas.find((item) => item.area.id === area) ?? rankedAreas[0];
   const featuredIds = ["oshiage", "kuramae", "ueno"];
   const generatedScoreCount = scoresFile.areas.length;
   const lastChecked = formatLastChecked(sourceStatusFile.generatedAt);
@@ -937,21 +966,28 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           <div className="flex flex-wrap gap-2">
             {FILTERS.map(({ key, label }) => {
               const isActive = key === activeFilter;
-              const href = key === "all" ? pagePath : `${pagePath}?filter=${key}`;
+              const filtered = applyFilterBoost(baselineScores, key);
+              const top = filtered[0];
               return (
-                <a
+                <TrackedStayAreaFilterLink
                   key={key}
-                  href={`/${locale === "en" ? "" : `${locale}/`}${href.replace(/^\//, "")}#ranked-areas`}
+                  href={filterHref(locale, key)}
                   className={[
                     "rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors",
                     isActive
                       ? "border-emerald-200 bg-emerald-50 text-[#106b43]"
                       : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200 hover:text-[#106b43]",
                   ].join(" ")}
-                  aria-current={isActive ? "true" : undefined}
+                  ariaCurrent={isActive ? "true" : undefined}
+                  filterId={key}
+                  filterLabel={label}
+                  pagePath={pagePath}
+                  resultCount={filtered.length}
+                  topAreaIdAfterFilter={top?.id ?? ""}
+                  topAreaScoreAfterFilter={top?.overallScore ?? 0}
                 >
                   {label}
-                </a>
+                </TrackedStayAreaFilterLink>
               );
             })}
           </div>
@@ -1079,6 +1115,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
                   score={score}
                   signal={signal}
                   activeFilter={activeFilter}
+                  href={areaDetailHref(locale, activeFilter, area.id)}
                 />
               ))}
             </div>
@@ -1158,36 +1195,39 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
         <section className="mt-10 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
           <h2 className="text-xl font-semibold text-slate-950">Continue planning</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-3">
-            <TrackedInternalLink
+            <TrackedStayAreaContinueLink
               href="/areas-to-stay/tokyo-first-time"
               sourcePage={pagePath}
               placement="tokyo_stay_area_index_continue"
               label="Where to stay in Tokyo for first-time visitors"
               locale={locale}
+              areaId={selected.area.id}
               className="rounded-2xl border border-emerald-100 bg-white p-4 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
             >
               Where to stay in Tokyo →
-            </TrackedInternalLink>
-            <TrackedInternalLink
+            </TrackedStayAreaContinueLink>
+            <TrackedStayAreaContinueLink
               href="/areas-to-stay/where-to-stay-in-tokyo-with-luggage"
               sourcePage={pagePath}
               placement="tokyo_stay_area_index_continue"
               label="Tokyo hotel area with luggage"
               locale={locale}
+              areaId={selected.area.id}
               className="rounded-2xl border border-emerald-100 bg-white p-4 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
             >
               Luggage-friendly Tokyo base →
-            </TrackedInternalLink>
-            <TrackedInternalLink
+            </TrackedStayAreaContinueLink>
+            <TrackedStayAreaContinueLink
               href="/local-hotel-picks#hotel-examples-matrix"
               sourcePage={pagePath}
               placement="tokyo_stay_area_index_continue"
               label="Local hotel examples"
               locale={locale}
+              areaId={selected.area.id}
               className="rounded-2xl border border-emerald-100 bg-white p-4 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
             >
               See local hotel examples →
-            </TrackedInternalLink>
+            </TrackedStayAreaContinueLink>
           </div>
         </section>
       </Container>
