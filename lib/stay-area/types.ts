@@ -64,6 +64,18 @@ export type ExitComplexityLevel = "Simple" | "Moderate" | "Complex" | "Mega stat
 export type TransferHubLevel = "Low" | "Medium" | "High" | "Very High";
 export type StepFreeConfidence = "Known" | "Partial" | "Unknown";
 export type LodgingDensityLevel = "Low" | "Medium" | "High" | "Very High";
+export type RailNetworkType =
+  | "subway-only"
+  | "jr-heavy"
+  | "private-rail"
+  | "multi-operator-hub"
+  | "airport-rail"
+  | "waterfront-rail";
+export type TerminalType =
+  | "local-station"
+  | "interchange"
+  | "terminal"
+  | "mega-terminal";
 
 export type StayAreaBase = {
   id: string;
@@ -185,6 +197,25 @@ export type ExitComplexitySignal = {
   message?: string;
 };
 
+/**
+ * Line/operator complexity signal derived from curated area.stationLines[].
+ * This is not a live public fetch: it is an explicit, generated signal from
+ * the editorial area data so the scoring and UI can explain network
+ * complexity without relying on ad-hoc stationLines.length checks.
+ */
+export type NetworkComplexitySignal = {
+  status: SignalStatus;
+  lineCount: number;
+  operatorCount: number;
+  operatorGroups: string[];
+  railNetworkType: RailNetworkType;
+  multiOperatorFlag: boolean;
+  terminalType: TerminalType;
+  /** Positive = simpler, negative = more complex. */
+  scoreContribution: number;
+  message: string;
+};
+
 export type OptionalSignal = {
   status: SignalStatus;
   message?: string;
@@ -204,6 +235,7 @@ export type StayAreaSignal = {
   passengerSignal: PassengerSignal;
   stepFreeSignal: StepFreeSignal;
   exitComplexitySignal: ExitComplexitySignal;
+  networkComplexitySignal: NetworkComplexitySignal;
   safetySignal: OptionalSignal;
   floodNoteSignal: OptionalSignal;
   lodgingDensitySignal: OptionalSignal;

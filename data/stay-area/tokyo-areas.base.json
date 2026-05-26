@@ -9,8 +9,8 @@
       "Tokyo Skytree"
     ],
     "stationLines": [
-      "Hanzomon Line",
-      "Asakusa Line",
+      "Tokyo Metro Hanzomon Line",
+      "Toei Asakusa Line",
       "Keisei Oshiage Line",
       "Tobu Skytree Line"
     ],
@@ -77,9 +77,9 @@
       "Tawaramachi"
     ],
     "stationLines": [
-      "Asakusa Line",
-      "Oedo Line",
-      "Ginza Line"
+      "Toei Asakusa Line",
+      "Toei Oedo Line",
+      "Tokyo Metro Ginza Line"
     ],
     "wardNames": [
       "Taito"
@@ -141,8 +141,8 @@
       "Asakusa"
     ],
     "stationLines": [
-      "Ginza Line",
-      "Asakusa Line",
+      "Tokyo Metro Ginza Line",
+      "Toei Asakusa Line",
       "Tobu Skytree Line",
       "Tsukuba Express"
     ],
@@ -210,8 +210,8 @@
     "stationLines": [
       "JR Yamanote Line",
       "JR Ueno-Tokyo Line",
-      "Ginza Line",
-      "Hibiya Line",
+      "Tokyo Metro Ginza Line",
+      "Tokyo Metro Hibiya Line",
       "Keisei Skyliner"
     ],
     "wardNames": [
@@ -278,7 +278,7 @@
     ],
     "stationLines": [
       "JR Sobu Line",
-      "Oedo Line"
+      "Toei Oedo Line"
     ],
     "wardNames": [
       "Sumida"
@@ -339,8 +339,8 @@
       "Kiyosumi-shirakawa"
     ],
     "stationLines": [
-      "Hanzomon Line",
-      "Oedo Line"
+      "Tokyo Metro Hanzomon Line",
+      "Toei Oedo Line"
     ],
     "wardNames": [
       "Koto"
@@ -403,8 +403,8 @@
       "Monzen-nakacho"
     ],
     "stationLines": [
-      "Tozai Line",
-      "Oedo Line"
+      "Tokyo Metro Tozai Line",
+      "Toei Oedo Line"
     ],
     "wardNames": [
       "Koto"
@@ -467,9 +467,9 @@
       "Suitengumae"
     ],
     "stationLines": [
-      "Hibiya Line",
-      "Asakusa Line",
-      "Hanzomon Line"
+      "Tokyo Metro Hibiya Line",
+      "Toei Asakusa Line",
+      "Tokyo Metro Hanzomon Line"
     ],
     "wardNames": [
       "Chuo"
@@ -531,7 +531,7 @@
       "Hatchobori"
     ],
     "stationLines": [
-      "Hibiya Line",
+      "Tokyo Metro Hibiya Line",
       "JR Keiyo Line"
     ],
     "wardNames": [
@@ -594,8 +594,8 @@
       "Kayabacho"
     ],
     "stationLines": [
-      "Hibiya Line",
-      "Tozai Line"
+      "Tokyo Metro Hibiya Line",
+      "Tokyo Metro Tozai Line"
     ],
     "wardNames": [
       "Chuo"
@@ -657,10 +657,10 @@
       "Mitsukoshimae"
     ],
     "stationLines": [
-      "Ginza Line",
-      "Tozai Line",
-      "Asakusa Line",
-      "Hanzomon Line"
+      "Tokyo Metro Ginza Line",
+      "Tokyo Metro Tozai Line",
+      "Toei Asakusa Line",
+      "Tokyo Metro Hanzomon Line"
     ],
     "wardNames": [
       "Chuo"
@@ -729,11 +729,11 @@
       "Nijubashimae"
     ],
     "stationLines": [
-      "Tokaido Shinkansen",
+      "JR Tokaido Shinkansen",
       "JR Yamanote Line",
       "JR Chuo Line",
-      "Marunouchi Line",
-      "Narita Express"
+      "Tokyo Metro Marunouchi Line",
+      "JR Narita Express"
     ],
     "wardNames": [
       "Chiyoda",
@@ -803,12 +803,12 @@
       "Higashi-Ginza"
     ],
     "stationLines": [
-      "Ginza Line",
-      "Marunouchi Line",
-      "Hibiya Line",
-      "Yurakucho Line",
+      "Tokyo Metro Ginza Line",
+      "Tokyo Metro Marunouchi Line",
+      "Tokyo Metro Hibiya Line",
+      "Tokyo Metro Yurakucho Line",
       "JR Yamanote Line",
-      "Asakusa Line"
+      "Toei Asakusa Line"
     ],
     "wardNames": [
       "Chuo",
@@ -876,8 +876,8 @@
     "stationLines": [
       "JR Yamanote Line",
       "JR Tokaido Line",
-      "Ginza Line",
-      "Asakusa Line",
+      "Tokyo Metro Ginza Line",
+      "Toei Asakusa Line",
       "Yurikamome"
     ],
     "wardNames": [
@@ -944,8 +944,8 @@
     "stationLines": [
       "JR Yamanote Line",
       "Tokyo Monorail",
-      "Asakusa Line",
-      "Oedo Line"
+      "Toei Asakusa Line",
+      "Toei Oedo Line"
     ],
     "wardNames": [
       "Minato"
@@ -1010,10 +1010,10 @@
       "Shinagawa"
     ],
     "stationLines": [
-      "Tokaido Shinkansen",
+      "JR Tokaido Shinkansen",
       "JR Yamanote Line",
       "Keikyu Main Line",
-      "Narita Express"
+      "JR Narita Express"
     ],
     "wardNames": [
       "Minato"
@@ -1081,7 +1081,7 @@
     ],
     "stationLines": [
       "JR Yamanote Line",
-      "Asakusa Line",
+      "Toei Asakusa Line",
       "Tokyu Ikegami Line"
     ],
     "wardNames": [
@@ -1144,8 +1144,8 @@
     ],
     "stationLines": [
       "JR Yamanote Line",
-      "Mita Line",
-      "Namboku Line",
+      "Toei Mita Line",
+      "Tokyo Metro Namboku Line",
       "Tokyu Meguro Line"
     ],
     "wardNames": [
@@ -1211,7 +1211,7 @@
     "stationLines": [
       "JR Yamanote Line",
       "JR Saikyo Line",
-      "Hibiya Line"
+      "Tokyo Metro Hibiya Line"
     ],
     "wardNames": [
       "Shibuya"
@@ -1274,9 +1274,9 @@
     "stationLines": [
       "JR Yamanote Line",
       "JR Saikyo Line",
-      "Hanzomon Line",
-      "Ginza Line",
-      "Fukutoshin Line",
+      "Tokyo Metro Hanzomon Line",
+      "Tokyo Metro Ginza Line",
+      "Tokyo Metro Fukutoshin Line",
       "Tokyu Toyoko Line",
       "Keio Inokashira Line"
     ],
@@ -1347,8 +1347,8 @@
     "stationLines": [
       "JR Yamanote Line",
       "JR Chuo Line",
-      "Marunouchi Line",
-      "Oedo Line",
+      "Tokyo Metro Marunouchi Line",
+      "Toei Oedo Line",
       "Odakyu Line",
       "Keio Line"
     ],
@@ -1419,7 +1419,7 @@
     "stationLines": [
       "JR Yamanote Line",
       "JR Chuo-Sobu Line",
-      "Oedo Line"
+      "Toei Oedo Line"
     ],
     "wardNames": [
       "Shibuya",
@@ -1483,9 +1483,9 @@
     "stationLines": [
       "JR Yamanote Line",
       "JR Saikyo Line",
-      "Marunouchi Line",
-      "Yurakucho Line",
-      "Fukutoshin Line",
+      "Tokyo Metro Marunouchi Line",
+      "Tokyo Metro Yurakucho Line",
+      "Tokyo Metro Fukutoshin Line",
       "Tobu Tojo Line",
       "Seibu Ikebukuro Line"
     ],
@@ -1555,7 +1555,7 @@
     "stationLines": [
       "JR Yamanote Line",
       "JR Chuo-Sobu Line",
-      "Hibiya Line",
+      "Tokyo Metro Hibiya Line",
       "Tsukuba Express"
     ],
     "wardNames": [
@@ -1622,7 +1622,7 @@
     "stationLines": [
       "JR Yamanote Line",
       "JR Chuo Line",
-      "Ginza Line"
+      "Tokyo Metro Ginza Line"
     ],
     "wardNames": [
       "Chiyoda"
@@ -1684,7 +1684,7 @@
     ],
     "stationLines": [
       "JR Chuo-Sobu Line",
-      "Asakusa Line"
+      "Toei Asakusa Line"
     ],
     "wardNames": [
       "Taito"
@@ -1749,8 +1749,8 @@
     ],
     "stationLines": [
       "JR Sobu Line",
-      "Asakusa Line",
-      "Shinjuku Line"
+      "Toei Asakusa Line",
+      "Toei Shinjuku Line"
     ],
     "wardNames": [
       "Chuo"
@@ -1813,7 +1813,7 @@
     ],
     "stationLines": [
       "JR Sobu Line",
-      "Hanzomon Line"
+      "Tokyo Metro Hanzomon Line"
     ],
     "wardNames": [
       "Sumida"
@@ -1877,9 +1877,9 @@
       "Akasaka-mitsuke"
     ],
     "stationLines": [
-      "Chiyoda Line",
-      "Ginza Line",
-      "Marunouchi Line"
+      "Tokyo Metro Chiyoda Line",
+      "Tokyo Metro Ginza Line",
+      "Tokyo Metro Marunouchi Line"
     ],
     "wardNames": [
       "Minato"
@@ -1941,8 +1941,8 @@
       "Roppongi"
     ],
     "stationLines": [
-      "Hibiya Line",
-      "Oedo Line"
+      "Tokyo Metro Hibiya Line",
+      "Toei Oedo Line"
     ],
     "wardNames": [
       "Minato"
@@ -2006,10 +2006,10 @@
       "Gaiemmae"
     ],
     "stationLines": [
-      "Ginza Line",
-      "Chiyoda Line",
-      "Hanzomon Line",
-      "Oedo Line"
+      "Tokyo Metro Ginza Line",
+      "Tokyo Metro Chiyoda Line",
+      "Tokyo Metro Hanzomon Line",
+      "Toei Oedo Line"
     ],
     "wardNames": [
       "Minato",
@@ -2074,8 +2074,8 @@
     "stationLines": [
       "JR Chuo Line",
       "JR Chuo-Sobu Line",
-      "Marunouchi Line",
-      "Chiyoda Line"
+      "Tokyo Metro Marunouchi Line",
+      "Tokyo Metro Chiyoda Line"
     ],
     "wardNames": [
       "Chiyoda",
@@ -2139,10 +2139,10 @@
     ],
     "stationLines": [
       "JR Chuo-Sobu Line",
-      "Tozai Line",
-      "Yurakucho Line",
-      "Namboku Line",
-      "Oedo Line"
+      "Tokyo Metro Tozai Line",
+      "Tokyo Metro Yurakucho Line",
+      "Tokyo Metro Namboku Line",
+      "Toei Oedo Line"
     ],
     "wardNames": [
       "Chiyoda",
@@ -2206,10 +2206,10 @@
       "Kasuga"
     ],
     "stationLines": [
-      "Marunouchi Line",
-      "Namboku Line",
-      "Mita Line",
-      "Oedo Line"
+      "Tokyo Metro Marunouchi Line",
+      "Tokyo Metro Namboku Line",
+      "Toei Mita Line",
+      "Toei Oedo Line"
     ],
     "wardNames": [
       "Bunkyo"
@@ -2271,7 +2271,7 @@
       "Toyosu"
     ],
     "stationLines": [
-      "Yurakucho Line",
+      "Tokyo Metro Yurakucho Line",
       "Yurikamome"
     ],
     "wardNames": [

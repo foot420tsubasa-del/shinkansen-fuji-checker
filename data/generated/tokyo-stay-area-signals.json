@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-05-25T23:32:35.947Z",
+  "generatedAt": "2026-05-25T23:55:08.799Z",
   "mode": "public-data-local",
   "sources": [
     {
       "sourceId": "tokyo-metro-passengers",
       "label": "Tokyo Metro passenger ranking",
       "status": "success",
-      "fetchedAt": "2026-05-25T23:32:35.685Z",
+      "fetchedAt": "2026-05-25T23:55:08.549Z",
       "sourcePeriod": "FY2024",
       "records": 41,
       "message": "Parsed 41 station rows from Tokyo Metro 駅別乗降人員順位表."
@@ -15,7 +15,7 @@
       "sourceId": "toei-passengers",
       "label": "Toei Subway passenger volume",
       "status": "success",
-      "fetchedAt": "2026-05-25T23:32:35.654Z",
+      "fetchedAt": "2026-05-25T23:55:08.524Z",
       "sourcePeriod": "FY2023 (Apr 2023 – Mar 2024)",
       "records": 106,
       "message": "Parsed 106 station rows (28 canonical matches) from Toei CKAN CSVs: {\"asakusa\":20,\"mita\":27,\"shinjuku\":21,\"oedo\":38}."
@@ -24,7 +24,7 @@
       "sourceId": "toei-barrier-free",
       "label": "Toei Subway accessibility / barrier-free CSV",
       "status": "success",
-      "fetchedAt": "2026-05-25T23:32:35.686Z",
+      "fetchedAt": "2026-05-25T23:55:08.550Z",
       "sourcePeriod": "Tokyo Open Data (CKAN t000018d0000000028, refreshed irregularly)",
       "records": 106,
       "message": "Parsed 106 station rows from Toei barrier-free CKAN CSVs: {\"asakusa\":20,\"mita\":27,\"shinjuku\":21,\"oedo\":38}."
@@ -33,51 +33,59 @@
       "sourceId": "tokyo-metro-station-exits",
       "label": "Tokyo Metro per-station exit list",
       "status": "success",
-      "fetchedAt": "2026-05-25T23:32:35.686Z",
+      "fetchedAt": "2026-05-25T23:55:08.551Z",
       "sourcePeriod": "Tokyo Metro live exit feed (refreshed irregularly per station revision_date)",
       "records": 1042,
       "message": "Parsed 1042 exit records across 42 canonical stations from tokyometro.jp/station/exit.json."
     },
     {
+      "sourceId": "line-operator-complexity",
+      "label": "Line / operator complexity",
+      "status": "success",
+      "fetchedAt": "2026-05-25T23:55:08.796Z",
+      "records": 36,
+      "message": "Active from curated area data: derived from stationLines[], complexity tags, and transfer-hub level."
+    },
+    {
       "sourceId": "toei-station-exits",
       "label": "Toei Subway per-station exit list",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T23:32:35.946Z",
+      "fetchedAt": "2026-05-25T23:55:08.796Z",
       "message": "Toei station detail URLs return 404 from a script; no comparable feed exists yet. Skipped cleanly."
     },
     {
       "sourceId": "tokyo-metro-barrier-free",
       "label": "Tokyo Metro accessibility / barrier-free pages",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T23:32:35.946Z",
+      "fetchedAt": "2026-05-25T23:55:08.796Z",
       "message": "Page is client-rendered from a script request; per-station detail pages not parsed in this pass."
     },
     {
       "sourceId": "odpt-station-information",
       "label": "ODPT station information",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T23:32:35.946Z",
+      "fetchedAt": "2026-05-25T23:55:08.796Z",
       "message": "ODPT_CONSUMER_KEY not set; skipping gracefully."
     },
     {
       "sourceId": "tokyo-police-crime",
       "label": "Tokyo Metropolitan Police town-level crime statistics",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T23:32:35.946Z",
+      "fetchedAt": "2026-05-25T23:55:08.796Z",
       "message": "Not displayed as a safety claim; skipped in this pass."
     },
     {
       "sourceId": "gsi-hazard-portal",
       "label": "Hazard Map Portal (MLIT / GSI)",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T23:32:35.946Z",
+      "fetchedAt": "2026-05-25T23:55:08.796Z",
       "message": "Heavy GIS — catalogued only, no UI rendering this pass."
     },
     {
       "sourceId": "tokyo-lodging-facilities",
       "label": "Tokyo lodging business facility datasets",
       "status": "skipped",
-      "fetchedAt": "2026-05-25T23:32:35.946Z",
+      "fetchedAt": "2026-05-25T23:55:08.796Z",
       "message": "Catalogued only; ward-level CSV URLs change frequently."
     }
   ],
@@ -133,6 +141,22 @@
         "scoreContribution": 1,
         "derivedLevel": "Moderate",
         "message": "5 open exits across 1 of 2 stations matched (Tokyo Metro coverage only). Bucketed as Moderate; Toei-side exits not included."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 4,
+        "operatorCount": 4,
+        "operatorGroups": [
+          "Keisei",
+          "Tobu",
+          "Toei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "airport-rail",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": -2,
+        "message": "4 unique lines across 4 operator groups; classified as airport-rail / interchange."
       },
       "safetySignal": {
         "status": "skipped",
@@ -203,6 +227,20 @@
         "scoreContribution": 4,
         "derivedLevel": "Simple",
         "message": "4 open exits across 1 of 2 stations matched (Tokyo Metro coverage only). Bucketed as Simple; Toei-side exits not included."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 3,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "Toei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "subway-only",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 0,
+        "message": "3 unique lines across 2 operator groups; classified as subway-only / interchange."
       },
       "safetySignal": {
         "status": "skipped",
@@ -277,6 +315,22 @@
         "derivedLevel": "Moderate",
         "message": "8 open exits across 1 matched Tokyo Metro station (asakusa). Bucketed as Moderate."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 4,
+        "operatorCount": 4,
+        "operatorGroups": [
+          "Tobu",
+          "Toei",
+          "Tokyo Metro",
+          "Tsukuba Express"
+        ],
+        "railNetworkType": "multi-operator-hub",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": -2,
+        "message": "4 unique lines across 4 operator groups; classified as multi-operator-hub / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -346,6 +400,21 @@
         "derivedLevel": "Complex",
         "message": "9 open exits across 1 matched Tokyo Metro station (ueno). Bucketed as Complex."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 5,
+        "operatorCount": 3,
+        "operatorGroups": [
+          "JR",
+          "Keisei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "airport-rail",
+        "multiOperatorFlag": true,
+        "terminalType": "terminal",
+        "scoreContribution": -5,
+        "message": "5 unique lines across 3 operator groups; classified as airport-rail / terminal."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -404,6 +473,20 @@
         "scoreContribution": null,
         "derivedLevel": null,
         "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 2,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "JR",
+          "Toei"
+        ],
+        "railNetworkType": "jr-heavy",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 2,
+        "message": "2 unique lines across 2 operator groups; classified as jr-heavy / interchange."
       },
       "safetySignal": {
         "status": "skipped",
@@ -475,6 +558,20 @@
         "derivedLevel": "Moderate",
         "message": "5 open exits across 1 matched Tokyo Metro station (kiyosumi-shirakawa). Bucketed as Moderate."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 2,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "Toei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "subway-only",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 2,
+        "message": "2 unique lines across 2 operator groups; classified as subway-only / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -545,6 +642,20 @@
         "scoreContribution": 1,
         "derivedLevel": "Moderate",
         "message": "6 open exits across 1 matched Tokyo Metro station (monzen-nakacho). Bucketed as Moderate."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 2,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "Toei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "subway-only",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 2,
+        "message": "2 unique lines across 2 operator groups; classified as subway-only / interchange."
       },
       "safetySignal": {
         "status": "skipped",
@@ -626,6 +737,20 @@
         "derivedLevel": "Complex",
         "message": "13 open exits across 2 matched Tokyo Metro stations (ningyocho, suitengumae). Bucketed as Complex."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 3,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "Toei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "subway-only",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 0,
+        "message": "3 unique lines across 2 operator groups; classified as subway-only / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -691,6 +816,20 @@
         "scoreContribution": 1,
         "derivedLevel": "Moderate",
         "message": "7 open exits across 1 matched Tokyo Metro station (hatchobori). Bucketed as Moderate."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 2,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "JR",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "jr-heavy",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 2,
+        "message": "2 unique lines across 2 operator groups; classified as jr-heavy / interchange."
       },
       "safetySignal": {
         "status": "skipped",
@@ -762,6 +901,19 @@
         "scoreContribution": -3,
         "derivedLevel": "Complex",
         "message": "11 open exits across 1 matched Tokyo Metro station (kayabacho). Bucketed as Complex."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 2,
+        "operatorCount": 1,
+        "operatorGroups": [
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "subway-only",
+        "multiOperatorFlag": false,
+        "terminalType": "local-station",
+        "scoreContribution": 2,
+        "message": "2 unique lines across 1 operator group; classified as subway-only / local-station."
       },
       "safetySignal": {
         "status": "skipped",
@@ -857,6 +1009,20 @@
         "scoreContribution": -6,
         "derivedLevel": "Mega station",
         "message": "37 open exits across 2 matched Tokyo Metro stations (nihombashi, mitsukoshimae). Bucketed as Mega station."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 4,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "Toei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "subway-only",
+        "multiOperatorFlag": true,
+        "terminalType": "terminal",
+        "scoreContribution": 0,
+        "message": "4 unique lines across 2 operator groups; classified as subway-only / terminal."
       },
       "safetySignal": {
         "status": "skipped",
@@ -991,6 +1157,20 @@
         "derivedLevel": "Mega station",
         "message": "65 open exits across 3 of 5 stations matched (Tokyo Metro coverage only). Bucketed as Mega station; Toei-side exits not included."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 5,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "JR",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "multi-operator-hub",
+        "multiOperatorFlag": true,
+        "terminalType": "mega-terminal",
+        "scoreContribution": -7,
+        "message": "5 unique lines across 2 operator groups; classified as multi-operator-hub / mega-terminal."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1111,6 +1291,21 @@
         "derivedLevel": "Mega station",
         "message": "76 open exits across 4 matched Tokyo Metro stations (ginza, yurakucho, hibiya, higashi-ginza). Bucketed as Mega station."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 6,
+        "operatorCount": 3,
+        "operatorGroups": [
+          "JR",
+          "Toei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "multi-operator-hub",
+        "multiOperatorFlag": true,
+        "terminalType": "terminal",
+        "scoreContribution": -5,
+        "message": "6 unique lines across 3 operator groups; classified as multi-operator-hub / terminal."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1184,6 +1379,22 @@
         "derivedLevel": "Moderate",
         "message": "8 open exits across 1 matched Tokyo Metro station (shimbashi). Bucketed as Moderate."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 5,
+        "operatorCount": 4,
+        "operatorGroups": [
+          "JR",
+          "Toei",
+          "Tokyo Metro",
+          "Yurikamome"
+        ],
+        "railNetworkType": "waterfront-rail",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": -5,
+        "message": "5 unique lines across 4 operator groups; classified as waterfront-rail / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1243,6 +1454,21 @@
         "derivedLevel": null,
         "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 4,
+        "operatorCount": 3,
+        "operatorGroups": [
+          "JR",
+          "Toei",
+          "Tokyo Monorail"
+        ],
+        "railNetworkType": "airport-rail",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": -2,
+        "message": "4 unique lines across 3 operator groups; classified as airport-rail / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1291,6 +1517,20 @@
         "scoreContribution": null,
         "derivedLevel": null,
         "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 4,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "JR",
+          "Keikyu"
+        ],
+        "railNetworkType": "airport-rail",
+        "multiOperatorFlag": true,
+        "terminalType": "terminal",
+        "scoreContribution": 0,
+        "message": "4 unique lines across 2 operator groups; classified as airport-rail / terminal."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1350,6 +1590,21 @@
         "scoreContribution": null,
         "derivedLevel": null,
         "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 3,
+        "operatorCount": 3,
+        "operatorGroups": [
+          "JR",
+          "Toei",
+          "Tokyu"
+        ],
+        "railNetworkType": "multi-operator-hub",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": -2,
+        "message": "3 unique lines across 3 operator groups; classified as multi-operator-hub / interchange."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1417,6 +1672,22 @@
         "derivedLevel": "Simple",
         "message": "2 open exits across 1 matched Tokyo Metro station (meguro). Bucketed as Simple."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 4,
+        "operatorCount": 4,
+        "operatorGroups": [
+          "JR",
+          "Toei",
+          "Tokyo Metro",
+          "Tokyu"
+        ],
+        "railNetworkType": "multi-operator-hub",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": -2,
+        "message": "4 unique lines across 4 operator groups; classified as multi-operator-hub / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1482,6 +1753,20 @@
         "derivedLevel": "Moderate",
         "message": "5 open exits across 1 matched Tokyo Metro station (ebisu). Bucketed as Moderate."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 3,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "JR",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "jr-heavy",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 0,
+        "message": "3 unique lines across 2 operator groups; classified as jr-heavy / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1536,6 +1821,22 @@
         "scoreContribution": null,
         "derivedLevel": null,
         "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 7,
+        "operatorCount": 4,
+        "operatorGroups": [
+          "JR",
+          "Keio",
+          "Tokyo Metro",
+          "Tokyu"
+        ],
+        "railNetworkType": "multi-operator-hub",
+        "multiOperatorFlag": true,
+        "terminalType": "mega-terminal",
+        "scoreContribution": -7,
+        "message": "7 unique lines across 4 operator groups; classified as multi-operator-hub / mega-terminal."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1649,6 +1950,23 @@
         "derivedLevel": "Mega station",
         "message": "44 open exits across 2 matched Tokyo Metro stations (shinjuku, shinjuku-sanchome). Bucketed as Mega station."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 6,
+        "operatorCount": 5,
+        "operatorGroups": [
+          "JR",
+          "Keio",
+          "Odakyu",
+          "Toei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "multi-operator-hub",
+        "multiOperatorFlag": true,
+        "terminalType": "mega-terminal",
+        "scoreContribution": -7,
+        "message": "6 unique lines across 5 operator groups; classified as multi-operator-hub / mega-terminal."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1707,6 +2025,20 @@
         "scoreContribution": null,
         "derivedLevel": null,
         "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 3,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "JR",
+          "Toei"
+        ],
+        "railNetworkType": "jr-heavy",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 0,
+        "message": "3 unique lines across 2 operator groups; classified as jr-heavy / interchange."
       },
       "safetySignal": {
         "status": "skipped",
@@ -1803,6 +2135,22 @@
         "derivedLevel": "Mega station",
         "message": "35 open exits across 1 matched Tokyo Metro station (ikebukuro). Bucketed as Mega station."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 7,
+        "operatorCount": 4,
+        "operatorGroups": [
+          "JR",
+          "Seibu",
+          "Tobu",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "multi-operator-hub",
+        "multiOperatorFlag": true,
+        "terminalType": "mega-terminal",
+        "scoreContribution": -7,
+        "message": "7 unique lines across 4 operator groups; classified as multi-operator-hub / mega-terminal."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1871,6 +2219,21 @@
         "derivedLevel": "Complex",
         "message": "9 open exits across 2 matched Tokyo Metro stations (akihabara, suehirocho). Bucketed as Complex."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 4,
+        "operatorCount": 3,
+        "operatorGroups": [
+          "JR",
+          "Tokyo Metro",
+          "Tsukuba Express"
+        ],
+        "railNetworkType": "multi-operator-hub",
+        "multiOperatorFlag": true,
+        "terminalType": "terminal",
+        "scoreContribution": -2,
+        "message": "4 unique lines across 3 operator groups; classified as multi-operator-hub / terminal."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1937,6 +2300,20 @@
         "derivedLevel": "Moderate",
         "message": "6 open exits across 1 matched Tokyo Metro station (kanda). Bucketed as Moderate."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 3,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "JR",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "jr-heavy",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 0,
+        "message": "3 unique lines across 2 operator groups; classified as jr-heavy / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -1995,6 +2372,20 @@
         "scoreContribution": null,
         "derivedLevel": null,
         "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 2,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "JR",
+          "Toei"
+        ],
+        "railNetworkType": "jr-heavy",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 2,
+        "message": "2 unique lines across 2 operator groups; classified as jr-heavy / interchange."
       },
       "safetySignal": {
         "status": "skipped",
@@ -2057,6 +2448,20 @@
         "scoreContribution": null,
         "derivedLevel": null,
         "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 3,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "JR",
+          "Toei"
+        ],
+        "railNetworkType": "jr-heavy",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 0,
+        "message": "3 unique lines across 2 operator groups; classified as jr-heavy / interchange."
       },
       "safetySignal": {
         "status": "skipped",
@@ -2122,6 +2527,20 @@
         "scoreContribution": 1,
         "derivedLevel": "Moderate",
         "message": "5 open exits across 1 matched Tokyo Metro station (kinshicho). Bucketed as Moderate."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 2,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "JR",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "jr-heavy",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 2,
+        "message": "2 unique lines across 2 operator groups; classified as jr-heavy / interchange."
       },
       "safetySignal": {
         "status": "skipped",
@@ -2200,6 +2619,19 @@
         "derivedLevel": "Mega station",
         "message": "22 open exits across 2 matched Tokyo Metro stations (akasaka, akasaka-mitsuke). Bucketed as Mega station."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 3,
+        "operatorCount": 1,
+        "operatorGroups": [
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "subway-only",
+        "multiOperatorFlag": false,
+        "terminalType": "interchange",
+        "scoreContribution": 0,
+        "message": "3 unique lines across 1 operator group; classified as subway-only / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -2274,6 +2706,20 @@
         "scoreContribution": -3,
         "derivedLevel": "Complex",
         "message": "10 open exits across 1 matched Tokyo Metro station (roppongi). Bucketed as Complex."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 2,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "Toei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "subway-only",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 2,
+        "message": "2 unique lines across 2 operator groups; classified as subway-only / interchange."
       },
       "safetySignal": {
         "status": "skipped",
@@ -2366,6 +2812,20 @@
         "derivedLevel": "Mega station",
         "message": "21 open exits across 3 matched Tokyo Metro stations (omotesando, aoyama-itchome, gaiemmae). Bucketed as Mega station."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 4,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "Toei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "subway-only",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 0,
+        "message": "4 unique lines across 2 operator groups; classified as subway-only / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -2447,6 +2907,20 @@
         "derivedLevel": "Mega station",
         "message": "18 open exits across 2 matched Tokyo Metro stations (ochanomizu, shin-ochanomizu). Bucketed as Mega station."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 4,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "JR",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "jr-heavy",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 0,
+        "message": "4 unique lines across 2 operator groups; classified as jr-heavy / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -2524,6 +2998,21 @@
         "derivedLevel": "Complex",
         "message": "13 open exits across 1 matched Tokyo Metro station (iidabashi). Bucketed as Complex."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 5,
+        "operatorCount": 3,
+        "operatorGroups": [
+          "JR",
+          "Toei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "multi-operator-hub",
+        "multiOperatorFlag": true,
+        "terminalType": "terminal",
+        "scoreContribution": -5,
+        "message": "5 unique lines across 3 operator groups; classified as multi-operator-hub / terminal."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -2599,6 +3088,20 @@
         "derivedLevel": "Moderate",
         "message": "8 open exits across 1 of 2 stations matched (Tokyo Metro coverage only). Bucketed as Moderate; Toei-side exits not included."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 4,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "Toei",
+          "Tokyo Metro"
+        ],
+        "railNetworkType": "subway-only",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 0,
+        "message": "4 unique lines across 2 operator groups; classified as subway-only / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -2669,6 +3172,20 @@
         "derivedLevel": "Complex",
         "message": "10 open exits across 1 matched Tokyo Metro station (toyosu). Bucketed as Complex."
       },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 2,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "Tokyo Metro",
+          "Yurikamome"
+        ],
+        "railNetworkType": "waterfront-rail",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 2,
+        "message": "2 unique lines across 2 operator groups; classified as waterfront-rail / interchange."
+      },
       "safetySignal": {
         "status": "skipped",
         "message": "Optional source not fetched in this pass."
@@ -2717,6 +3234,20 @@
         "scoreContribution": null,
         "derivedLevel": null,
         "message": "No Tokyo Metro station matched this area; using editorial exit-complexity level."
+      },
+      "networkComplexitySignal": {
+        "status": "success",
+        "lineCount": 2,
+        "operatorCount": 2,
+        "operatorGroups": [
+          "Rinkai",
+          "Yurikamome"
+        ],
+        "railNetworkType": "waterfront-rail",
+        "multiOperatorFlag": true,
+        "terminalType": "interchange",
+        "scoreContribution": 2,
+        "message": "2 unique lines across 2 operator groups; classified as waterfront-rail / interchange."
       },
       "safetySignal": {
         "status": "skipped",

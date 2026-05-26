@@ -27,6 +27,7 @@ import type {
   ComputedStayAreaScore,
   ExitComplexityLevel,
   LodgingDensityLevel,
+  NetworkComplexitySignal,
   SignalsSourceEntry,
   StayAreaBase,
   StayAreaMatchLabel,
@@ -298,6 +299,47 @@ function lodgingChipTone(level: LodgingDensityLevel): ChipTone {
   return "warn";
 }
 
+function formatHyphenLabel(value: string): string {
+  return value.replace(/-/g, " ");
+}
+
+function networkComplexityFallback(
+  area: StayAreaBase,
+  contribution: ComputedStayAreaScore["usabilityContribution"],
+): NetworkComplexitySignal {
+  const lineCount = new Set((area.stationLines || []).filter(Boolean)).size;
+  return {
+    status: "success",
+    lineCount,
+    operatorCount: 0,
+    operatorGroups: [],
+    railNetworkType: "subway-only",
+    multiOperatorFlag: false,
+    terminalType: area.complexityTags.includes("mega-terminal")
+      ? "mega-terminal"
+      : area.transferHubLevel === "High" || area.transferHubLevel === "Very High"
+        ? "terminal"
+        : lineCount >= 3
+          ? "interchange"
+          : "local-station",
+    scoreContribution: contribution.lineOperator,
+    message: "Derived from curated station line data.",
+  };
+}
+
+function networkComplexityLabel(signal: NetworkComplexitySignal): string {
+  if (signal.terminalType === "mega-terminal") return "multi-operator mega-terminal";
+  if (signal.railNetworkType === "airport-rail") return `airport-rail ${formatHyphenLabel(signal.terminalType)}`;
+  if (
+    signal.operatorGroups.includes("Tokyo Metro") &&
+    signal.lineCount >= 5 &&
+    signal.terminalType !== "local-station"
+  ) {
+    return "subway-heavy transfer complex";
+  }
+  return `${formatHyphenLabel(signal.railNetworkType)} ${formatHyphenLabel(signal.terminalType)}`;
+}
+
 function Chip({
   label,
   value,
@@ -408,11 +450,33 @@ function StationUsabilityPanel({
             />
           );
         })()}
-        <StationUsabilityRow
-          label="Line / operator complexity"
-          value={`${area.stationLines.length} lines`}
-          hint={`Contribution: ${contribution.lineOperator >= 0 ? "+" : ""}${contribution.lineOperator}`}
-        />
+        {(() => {
+          const network =
+            signal?.networkComplexitySignal ?? networkComplexityFallback(area, contribution);
+          return (
+            <>
+              <StationUsabilityRow
+                label="Lines / operators"
+                value={`${network.lineCount} lines · ${network.operatorCount} operators`}
+                hint={
+                  network.operatorGroups.length > 0
+                    ? `Operator groups: ${network.operatorGroups.join(", ")}.`
+                    : "Operator groups are inferred from curated line names."
+                }
+              />
+              <StationUsabilityRow
+                label="Terminal type"
+                value={formatHyphenLabel(network.terminalType)}
+                hint={`Multi-operator: ${network.multiOperatorFlag ? "yes" : "no"}.`}
+              />
+              <StationUsabilityRow
+                label="Network complexity"
+                value={networkComplexityLabel(network)}
+                hint={`Contribution: ${network.scoreContribution >= 0 ? "+" : ""}${network.scoreContribution}. ${network.message}`}
+              />
+            </>
+          );
+        })()}
         <StationUsabilityRow
           label="Transfer hub penalty"
           value={area.transferHubLevel}
@@ -839,9 +903,9 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
             <SignalTile
               icon={Train}
               title="Line / operator complexity"
-              status="Active"
+              status="Active from area data"
               statusTone="calm"
-              body="Computed from each area's stationLines[]. Multi-operator mega hubs get a heavier penalty."
+              body="Derived from curated stationLines[], operator groups, transfer-hub level, and mega-terminal tags. This is an active local signal, not a failed or skipped public fetch."
             />
             <SignalTile
               icon={Luggage}

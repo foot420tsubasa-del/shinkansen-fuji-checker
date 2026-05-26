@@ -1,5 +1,7 @@
 import type {
   ComputedStayAreaScore,
+  NetworkComplexitySignal,
+  RailNetworkType,
   StayAreaBase,
   StayAreaMatchLabel,
   StayAreaScoreKey,
@@ -9,6 +11,7 @@ import type {
   StayAreaSignalsFile,
   StayAreaScoresFile,
   StationUsabilityContribution,
+  TerminalType,
 } from "@/lib/stay-area/types";
 
 /*
@@ -39,12 +42,14 @@ import type {
  *     Complex       → -3
  *     Mega station  → -6
  *
- *   line/operator count (derived from area.stationLines.length, with a
- *   multi-operator mega-terminal flag override):
+ *   line/operator complexity (derived into networkComplexitySignal):
  *     1–2 lines               → +2
  *     3–4 lines               →  0
  *     5–7 lines               → -3
- *     8+ lines OR mega multi-operator hub → -5
+ *     8+ lines                → -5
+ *     3+ operators            → -2
+ *     mega-terminal           → -4
+ *     final contribution capped to +/- 7
  *
  *   transferHubLevel:
  *     Low        →  0
@@ -53,7 +58,7 @@ import type {
  *     Very High  → -6
  *
  * Per-sub-score routing (per spec):
- *   - crowdStress       = passenger (full) + transferHub (full)
+ *   - crowdStress       = passenger (full) + transferHub (full) + lineOperator (light)
  *   - stationSimplicity = exit + lineOperator + transferHub + 0.5 * passenger
  *   - luggageFriendly   = 0.5 * exit  (light influence only)
  *   - lodgingChoice     = editorial only this pass
@@ -119,6 +124,100 @@ function exitContribution(level: StayAreaBase["exitComplexityLevel"]): number {
   }
 }
 
+const operatorPatterns: Array<{ name: string; patterns: RegExp[] }> = [
+  { name: "JR", patterns: [/^JR\b/i, /\bShinkansen\b/i, /\bNarita Express\b/i] },
+  { name: "Tokyo Metro", patterns: [/^Tokyo Metro\b/i, /\bGinza Line\b/i, /\bMarunouchi Line\b/i, /\bHibiya Line\b/i, /\bTozai Line\b/i, /\bChiyoda Line\b/i, /\bYurakucho Line\b/i, /\bHanzomon Line\b/i, /\bNamboku Line\b/i, /\bFukutoshin Line\b/i] },
+  { name: "Toei", patterns: [/^Toei\b/i, /\bAsakusa Line\b/i, /\bOedo Line\b/i, /\bMita Line\b/i, /\bShinjuku Line\b/i] },
+  { name: "Keisei", patterns: [/^Keisei\b/i, /\bSkyliner\b/i] },
+  { name: "Keikyu", patterns: [/^Keikyu\b/i] },
+  { name: "Tobu", patterns: [/^Tobu\b/i] },
+  { name: "Tokyu", patterns: [/^Tokyu\b/i] },
+  { name: "Seibu", patterns: [/^Seibu\b/i] },
+  { name: "Keio", patterns: [/^Keio\b/i] },
+  { name: "Odakyu", patterns: [/^Odakyu\b/i] },
+  { name: "Yurikamome", patterns: [/^Yurikamome\b/i] },
+  { name: "Rinkai", patterns: [/^Rinkai\b/i] },
+  { name: "Tokyo Monorail", patterns: [/^Tokyo Monorail\b/i] },
+  { name: "Tsukuba Express", patterns: [/^Tsukuba Express\b/i] },
+];
+
+function inferOperator(line: string): string {
+  const trimmed = String(line || "").trim();
+  const match = operatorPatterns.find((entry) =>
+    entry.patterns.some((pattern) => pattern.test(trimmed)),
+  );
+  return match?.name ?? "Other";
+}
+
+function deriveTerminalType(area: StayAreaBase, lineCount: number, operatorCount: number): TerminalType {
+  if (area.complexityTags?.includes("mega-terminal")) return "mega-terminal";
+  if (area.transferHubLevel === "High" || area.transferHubLevel === "Very High") return "terminal";
+  if (lineCount >= 3 || operatorCount >= 2) return "interchange";
+  return "local-station";
+}
+
+function deriveRailNetworkType(
+  operatorGroups: string[],
+  terminalType: TerminalType,
+): RailNetworkType {
+  const operators = new Set(operatorGroups);
+  if (terminalType === "mega-terminal") return "multi-operator-hub";
+  if (operators.has("Yurikamome") || operators.has("Rinkai")) return "waterfront-rail";
+  if (
+    operators.has("Keisei") ||
+    operators.has("Keikyu") ||
+    operators.has("Tokyo Monorail") ||
+    operatorGroups.some((op) => op === "JR")
+  ) {
+    if (
+      operators.has("Keisei") ||
+      operators.has("Keikyu") ||
+      operators.has("Tokyo Monorail")
+    ) {
+      return "airport-rail";
+    }
+  }
+  if (operators.size >= 3) return "multi-operator-hub";
+  if (operators.has("JR")) return "jr-heavy";
+  if (
+    operators.has("Tobu") ||
+    operators.has("Tokyu") ||
+    operators.has("Seibu") ||
+    operators.has("Keio") ||
+    operators.has("Odakyu") ||
+    operators.has("Tsukuba Express")
+  ) {
+    return "private-rail";
+  }
+  return "subway-only";
+}
+
+export function deriveNetworkComplexitySignal(area: StayAreaBase): NetworkComplexitySignal {
+  const lineCount = new Set((area.stationLines || []).map((line) => String(line).trim()).filter(Boolean)).size;
+  const operatorGroups = Array.from(
+    new Set((area.stationLines || []).map(inferOperator).filter((op) => op !== "Other")),
+  ).sort();
+  const operatorCount = operatorGroups.length;
+  const terminalType = deriveTerminalType(area, lineCount, operatorCount);
+  const railNetworkType = deriveRailNetworkType(operatorGroups, terminalType);
+  let scoreContribution = lineCount <= 2 ? 2 : lineCount <= 4 ? 0 : lineCount <= 7 ? -3 : -5;
+  if (operatorCount >= 3) scoreContribution -= 2;
+  if (terminalType === "mega-terminal") scoreContribution -= 4;
+  scoreContribution = clamp(scoreContribution, -7, 7);
+
+  return {
+    status: "success",
+    lineCount,
+    operatorCount,
+    operatorGroups,
+    railNetworkType,
+    multiOperatorFlag: operatorCount >= 2,
+    terminalType,
+    scoreContribution,
+    message: `${lineCount} unique line${lineCount === 1 ? "" : "s"} across ${operatorCount} operator group${operatorCount === 1 ? "" : "s"}; classified as ${railNetworkType} / ${terminalType}.`,
+  };
+}
+
 /**
  * Resolve the exit-complexity level to use for scoring this area:
  * prefer the live signal's `derivedLevel` when status is success/partial,
@@ -142,15 +241,8 @@ function resolveExitLevel(
   return { level: area.exitComplexityLevel, fromData: false };
 }
 
-function lineOperatorContribution(area: StayAreaBase): number {
-  const lineCount = (area.stationLines || []).length;
-  const isMegaMultiOp =
-    area.complexityTags?.includes("mega-terminal") &&
-    area.complexityTags?.includes("multi-operator");
-  if (lineCount >= 8 || isMegaMultiOp) return -5;
-  if (lineCount >= 5) return -3;
-  if (lineCount >= 3) return 0;
-  return +2;
+function lineOperatorContribution(area: StayAreaBase, signal: StayAreaSignal | undefined): number {
+  return signal?.networkComplexitySignal?.scoreContribution ?? deriveNetworkComplexitySignal(area).scoreContribution;
 }
 
 function transferHubContribution(level: StayAreaBase["transferHubLevel"]): number {
@@ -185,12 +277,13 @@ function deriveUsabilityContribution(
   const passenger = passengerContribution(signal?.passengerSignal?.crowdPercentile ?? null);
   const exitLevel = resolveExitLevel(area, signal);
   const exit = exitContribution(exitLevel.level);
-  const lineOp = lineOperatorContribution(area);
+  const lineOp = lineOperatorContribution(area, signal);
   const hub = transferHubContribution(area.transferHubLevel);
   const stepFree = stepFreeContribution(signal);
+  const crowdNetwork = Math.round(lineOp * 0.35);
 
   // Per-sub-score aggregates, each clamped to +/- SUB_SCORE_DELTA_CAP.
-  const crowdStressDelta = clamp(passenger + hub, -SUB_SCORE_DELTA_CAP, SUB_SCORE_DELTA_CAP);
+  const crowdStressDelta = clamp(passenger + hub + crowdNetwork, -SUB_SCORE_DELTA_CAP, SUB_SCORE_DELTA_CAP);
   const stationSimplicityDelta = clamp(
     exit + lineOp + hub + 0.5 * passenger,
     -SUB_SCORE_DELTA_CAP,
@@ -248,11 +341,12 @@ function deriveSourceCoverage(signal: StayAreaSignal | undefined): number {
     signal.passengerSignal,
     signal.stepFreeSignal,
     signal.exitComplexitySignal,
+    signal.networkComplexitySignal,
     signal.safetySignal,
     signal.floodNoteSignal,
     signal.lodgingDensitySignal,
   ].filter((s) => s.status === "success" || s.status === "partial").length;
-  return ok / 6;
+  return ok / 7;
 }
 
 function applyConfidenceFromCoverage(

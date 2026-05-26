@@ -695,6 +695,83 @@ function odptSource() {
       );
 }
 
+// ---------- curated line/operator complexity ------------------------------
+
+const OPERATOR_PATTERNS = [
+  { name: "JR", patterns: [/^JR\b/i, /\bShinkansen\b/i, /\bNarita Express\b/i] },
+  { name: "Tokyo Metro", patterns: [/^Tokyo Metro\b/i, /\bGinza Line\b/i, /\bMarunouchi Line\b/i, /\bHibiya Line\b/i, /\bTozai Line\b/i, /\bChiyoda Line\b/i, /\bYurakucho Line\b/i, /\bHanzomon Line\b/i, /\bNamboku Line\b/i, /\bFukutoshin Line\b/i] },
+  { name: "Toei", patterns: [/^Toei\b/i, /\bAsakusa Line\b/i, /\bOedo Line\b/i, /\bMita Line\b/i, /\bShinjuku Line\b/i] },
+  { name: "Keisei", patterns: [/^Keisei\b/i, /\bSkyliner\b/i] },
+  { name: "Keikyu", patterns: [/^Keikyu\b/i] },
+  { name: "Tobu", patterns: [/^Tobu\b/i] },
+  { name: "Tokyu", patterns: [/^Tokyu\b/i] },
+  { name: "Seibu", patterns: [/^Seibu\b/i] },
+  { name: "Keio", patterns: [/^Keio\b/i] },
+  { name: "Odakyu", patterns: [/^Odakyu\b/i] },
+  { name: "Yurikamome", patterns: [/^Yurikamome\b/i] },
+  { name: "Rinkai", patterns: [/^Rinkai\b/i] },
+  { name: "Tokyo Monorail", patterns: [/^Tokyo Monorail\b/i] },
+  { name: "Tsukuba Express", patterns: [/^Tsukuba Express\b/i] },
+];
+
+function inferOperatorFromLine(line) {
+  const trimmed = String(line || "").trim();
+  return OPERATOR_PATTERNS.find((entry) => entry.patterns.some((pattern) => pattern.test(trimmed)))?.name ?? "Other";
+}
+
+function deriveTerminalType(area, lineCount, operatorCount) {
+  if ((area.complexityTags || []).includes("mega-terminal")) return "mega-terminal";
+  if (area.transferHubLevel === "High" || area.transferHubLevel === "Very High") return "terminal";
+  if (lineCount >= 3 || operatorCount >= 2) return "interchange";
+  return "local-station";
+}
+
+function deriveRailNetworkType(operatorGroups, terminalType) {
+  const operators = new Set(operatorGroups);
+  if (terminalType === "mega-terminal") return "multi-operator-hub";
+  if (operators.has("Yurikamome") || operators.has("Rinkai")) return "waterfront-rail";
+  if (operators.has("Keisei") || operators.has("Keikyu") || operators.has("Tokyo Monorail")) return "airport-rail";
+  if (operators.size >= 3) return "multi-operator-hub";
+  if (operators.has("JR")) return "jr-heavy";
+  if (
+    operators.has("Tobu") ||
+    operators.has("Tokyu") ||
+    operators.has("Seibu") ||
+    operators.has("Keio") ||
+    operators.has("Odakyu") ||
+    operators.has("Tsukuba Express")
+  ) {
+    return "private-rail";
+  }
+  return "subway-only";
+}
+
+function deriveNetworkComplexitySignal(area) {
+  const lineCount = new Set((area.stationLines || []).map((line) => String(line).trim()).filter(Boolean)).size;
+  const operatorGroups = Array.from(
+    new Set((area.stationLines || []).map(inferOperatorFromLine).filter((op) => op !== "Other")),
+  ).sort();
+  const operatorCount = operatorGroups.length;
+  const terminalType = deriveTerminalType(area, lineCount, operatorCount);
+  const railNetworkType = deriveRailNetworkType(operatorGroups, terminalType);
+  let scoreContribution = lineCount <= 2 ? 2 : lineCount <= 4 ? 0 : lineCount <= 7 ? -3 : -5;
+  if (operatorCount >= 3) scoreContribution -= 2;
+  if (terminalType === "mega-terminal") scoreContribution -= 4;
+  scoreContribution = Math.max(-7, Math.min(7, scoreContribution));
+
+  return {
+    status: "success",
+    lineCount,
+    operatorCount,
+    operatorGroups,
+    railNetworkType,
+    multiOperatorFlag: operatorCount >= 2,
+    terminalType,
+    scoreContribution,
+    message: `${lineCount} unique line${lineCount === 1 ? "" : "s"} across ${operatorCount} operator group${operatorCount === 1 ? "" : "s"}; classified as ${railNetworkType} / ${terminalType}.`,
+  };
+}
+
 // ---------- main -----------------------------------------------------------
 
 async function main() {
@@ -743,12 +820,21 @@ async function main() {
     "Tokyo lodging business facility datasets",
     "Catalogued only; ward-level CSV URLs change frequently.",
   );
+  const lineOperatorComplexity = {
+    sourceId: "line-operator-complexity",
+    label: "Line / operator complexity",
+    status: "success",
+    fetchedAt: new Date().toISOString(),
+    records: areasBase.length,
+    message: "Active from curated area data: derived from stationLines[], complexity tags, and transfer-hub level.",
+  };
 
   const sources = [
     tokyoMetro,
     toei,
     toeiBarrierFree,
     tokyoMetroExits,
+    lineOperatorComplexity,
     toeiStationExits,
     tokyoMetroBarrierFree,
     odpt,
@@ -996,6 +1082,7 @@ async function main() {
     };
     const exitOk =
       exitComplexitySignal.status === "success" || exitComplexitySignal.status === "partial";
+    const networkComplexitySignal = deriveNetworkComplexitySignal(area);
 
     let sourceFreshness;
     if (bothPassengerOk && hasMatch && stepFreeOk && exitOk) {
@@ -1021,6 +1108,7 @@ async function main() {
       },
       stepFreeSignal,
       exitComplexitySignal,
+      networkComplexitySignal,
       safetySignal,
       floodNoteSignal,
       lodgingDensitySignal,
