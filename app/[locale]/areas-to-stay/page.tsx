@@ -8,6 +8,7 @@ import { buttonClassName } from "@/components/ui/Button";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { SiteFooter } from "@/components/content/SiteFooter";
+import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -376,6 +377,13 @@ export default async function AreasToStayIndex({ params }: Props) {
           <h2 className="text-lg font-semibold text-slate-950">{t("preBooking.title")}</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">{t("preBooking.body")}</p>
         </section>
+
+        <FujiseatAreaLogic
+          sourcePage={pagePath}
+          placement="stay_hub_area_logic"
+          locale={locale}
+          className="mt-6"
+        />
 
         <TrackedInternalLink
           href="/areas-to-stay/tokyo-stay-area-index"

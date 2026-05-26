@@ -20,12 +20,30 @@ export type LocalHotelPick = {
 
 const picks = localHotelPicksData as Record<string, LocalHotelPick>;
 
+export const LOCAL_HOTEL_PICK_CITIES = ["Tokyo", "Kyoto", "Osaka"] as const;
+
+export type LocalHotelPickCity = (typeof LOCAL_HOTEL_PICK_CITIES)[number];
+
+const localHotelPickCityBySlug: Record<string, LocalHotelPickCity> = {
+  tokyo: "Tokyo",
+  kyoto: "Kyoto",
+  osaka: "Osaka",
+};
+
+export function normalizeLocalHotelPickCity(city: string): LocalHotelPickCity | null {
+  const normalized = city.trim().toLowerCase();
+  return localHotelPickCityBySlug[normalized] ?? null;
+}
+
 export function getAllLocalHotelPicks(): LocalHotelPick[] {
   return Object.values(picks).filter((p) => p.status === "active");
 }
 
 export function getLocalHotelPicksByCity(city: string): LocalHotelPick[] {
-  return getAllLocalHotelPicks().filter((p) => p.city === city);
+  const normalizedCity = normalizeLocalHotelPickCity(city) ?? city;
+  return getAllLocalHotelPicks().filter((p) => p.city === normalizedCity);
 }
 
-export const LOCAL_HOTEL_PICK_CITIES = ["Tokyo", "Kyoto", "Osaka"] as const;
+export function getHotelPicksByCity(city: string): LocalHotelPick[] {
+  return getLocalHotelPicksByCity(city);
+}

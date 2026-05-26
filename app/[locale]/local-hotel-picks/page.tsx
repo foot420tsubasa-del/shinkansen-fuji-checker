@@ -4,16 +4,18 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { SiteFooter } from "@/components/content/SiteFooter";
+import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
+import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { getAlternates } from "@/i18n/hreflang";
 import {
   getAllLocalHotelPicks,
-  getLocalHotelPicksByCity,
+  getHotelPicksByCity,
   LOCAL_HOTEL_PICK_CITIES,
   type LocalHotelPick,
 } from "@/lib/content/local-hotel-picks";
+import { HotelPickMatrix } from "./HotelPickMatrix";
 import { LocalHotelPickCard } from "./LocalHotelPickCard";
 import { getTranslations } from "next-intl/server";
-import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -74,37 +76,26 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
 const filledPlanningLinkClass =
   "flex flex-col rounded-2xl border border-[#168a56] bg-[#168a56] p-4 text-white transition-colors hover:bg-[#0f6f45]";
 
+const cityPageCards: Record<string, { href: string; title: string; body: string }> = {
+  Tokyo: {
+    href: "/local-hotel-picks/tokyo",
+    title: "Tokyo Local Hotel Picks",
+    body: "Examples by Shinjuku calm, East Tokyo, Tokyo Station logistics, and family/group layout.",
+  },
+  Kyoto: {
+    href: "/local-hotel-picks/kyoto",
+    title: "Kyoto Local Hotel Picks",
+    body: "Examples by Kyoto Station logistics, classic Kyoto atmosphere, and quieter practical bases.",
+  },
+  Osaka: {
+    href: "/local-hotel-picks/osaka",
+    title: "Osaka Local Hotel Picks",
+    body: "Examples by Namba food/nightlife, Umeda transport, Shin-Osaka logic, and family/group layout.",
+  },
+};
+
 function pickMapById(picks: LocalHotelPick[]) {
   return new Map(picks.map((pick) => [pick.id, pick]));
-}
-
-function providerLinksForPick(pick: LocalHotelPick): Array<{ provider: ProviderId; href: string; label: string; linkId: string }> {
-  const tripUrl = pick.tripFallbackUrl.trim();
-  const agodaUrl = pick.agodaUrl.trim();
-
-  return [
-    tripUrl ? { provider: "trip" as const, href: tripUrl, label: "Trip.com", linkId: `localHotelPick.${pick.id}.trip` } : null,
-    agodaUrl ? { provider: "agoda" as const, href: agodaUrl, label: "Agoda", linkId: `localHotelPick.${pick.id}.agoda` } : null,
-  ].filter(Boolean) as Array<{ provider: ProviderId; href: string; label: string; linkId: string }>;
-}
-
-function roomGroupAngle(pick: LocalHotelPick) {
-  const tags = pick.tags.map((tag) => tag.toLowerCase());
-
-  if (tags.some((tag) => ["family", "group", "kitchen"].includes(tag))) {
-    return "Family / group layout";
-  }
-  if (tags.some((tag) => tag.includes("hostel") || tag.includes("social"))) {
-    return "Solo / friends / social stay";
-  }
-  if (tags.some((tag) => tag.includes("couples") || tag.includes("polished") || tag.includes("japanese-modern"))) {
-    return "Couples / design stay";
-  }
-  if (tags.some((tag) => tag.includes("calm") || tag.includes("practical"))) {
-    return "Calm practical base";
-  }
-
-  return pick.tags.slice(0, 2).join(" / ") || "Check room type";
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -174,6 +165,43 @@ export default async function LocalHotelPicksPage({ params }: Props) {
           </p>
         </section>
 
+        <FujiseatAreaLogic
+          sourcePage={pagePath}
+          placement="local_hotel_picks_area_logic"
+          locale={locale}
+          className="mt-6"
+        />
+
+        <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+          <div className="max-w-3xl">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">City pages</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-950">Open hotel examples by city</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-600">
+              Use the city pages after choosing the broad city and station-area logic. They are still examples, not rankings.
+            </p>
+          </div>
+          <div className="mt-5 grid gap-3 md:grid-cols-3">
+            {LOCAL_HOTEL_PICK_CITIES.map((city) => {
+              const card = cityPageCards[city];
+              return (
+                <TrackedInternalLink
+                  key={city}
+                  href={card.href}
+                  sourcePage={pagePath}
+                  placement="local_hotel_picks_city_pages"
+                  label={card.title}
+                  locale={locale}
+                  className="rounded-2xl border border-slate-200 bg-slate-50 p-4 transition-colors hover:border-emerald-200 hover:bg-emerald-50"
+                >
+                  <span className="text-sm font-semibold text-slate-950">{card.title}</span>
+                  <span className="mt-1 block text-xs leading-5 text-slate-600">{card.body}</span>
+                  <span className="mt-3 block text-xs font-semibold text-[#106b43]">Open {city} examples →</span>
+                </TrackedInternalLink>
+              );
+            })}
+          </div>
+        </section>
+
         <section id="hotel-examples-matrix" className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
           <div className="max-w-3xl">
             <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Hotel examples</p>
@@ -183,110 +211,7 @@ export default async function LocalHotelPicksPage({ params }: Props) {
               and travel situation before checking live prices.
             </p>
           </div>
-
-          <div className="mt-5 hidden overflow-x-auto rounded-2xl border border-slate-200 lg:block">
-            <table className="w-full min-w-[980px] border-collapse text-left text-sm">
-              <thead>
-                <tr className="border-b border-slate-200 bg-slate-50 text-xs uppercase tracking-[0.08em] text-slate-500">
-                  <th className="px-3 py-3 font-semibold">Hotel example</th>
-                  <th className="px-3 py-3 font-semibold">Area logic</th>
-                  <th className="px-3 py-3 font-semibold">Best for</th>
-                  <th className="px-3 py-3 font-semibold">Not ideal for</th>
-                  <th className="px-3 py-3 font-semibold">Room / group angle</th>
-                  <th className="px-3 py-3 font-semibold">Booking links</th>
-                </tr>
-              </thead>
-              <tbody>
-                {getAllLocalHotelPicks().map((pick) => {
-                  const providerLinks = providerLinksForPick(pick);
-
-                  return (
-                    <tr key={pick.id} className="border-b border-slate-100 last:border-0">
-                      <td className="w-[210px] px-3 py-4 align-top">
-                        <p className="font-semibold leading-5 text-slate-950">{pick.hotelName}</p>
-                        <p className="mt-1 text-xs text-slate-500">{pick.city}</p>
-                      </td>
-                      <td className="w-[170px] px-3 py-4 align-top leading-6 text-slate-600">{pick.area}</td>
-                      <td className="px-3 py-4 align-top leading-6 text-slate-600">{pick.bestFor}</td>
-                      <td className="px-3 py-4 align-top leading-6 text-slate-600">{pick.notIdealFor}</td>
-                      <td className="w-[150px] px-3 py-4 align-top leading-6 text-slate-600">{roomGroupAngle(pick)}</td>
-                      <td className="w-[170px] px-3 py-4 align-top">
-                        {providerLinks.length > 0 ? (
-                          <div className="grid gap-2">
-                            {providerLinks.map((link) => (
-                              <ProviderButton
-                                key={link.provider}
-                                provider={link.provider}
-                                href={link.href}
-                                placement="local_hotel_picks_matrix"
-                                pagePath={pagePath}
-                                locale={locale}
-                                linkId={link.linkId}
-                                product="local_hotel_pick"
-                                category="hotel"
-                                area={pick.area}
-                                city={pick.city}
-                                hotelName={pick.hotelName}
-                                fullWidth
-                                className="min-h-9 px-3 py-2 text-xs"
-                              >
-                                {link.label}
-                              </ProviderButton>
-                            ))}
-                          </div>
-                        ) : null}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-
-          <div className="mt-5 grid gap-3 lg:hidden">
-            {getAllLocalHotelPicks().map((pick) => {
-              const providerLinks = providerLinksForPick(pick);
-
-              return (
-                <article key={pick.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                  <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-[#106b43]">{pick.city}</p>
-                    <h3 className="mt-1 text-base font-semibold leading-6 text-slate-950">{pick.hotelName}</h3>
-                    <p className="mt-1 text-xs text-slate-500">{pick.area}</p>
-                  </div>
-                  <div className="mt-3 grid gap-2 text-sm leading-6 text-slate-600">
-                    <p><span className="font-semibold text-slate-900">Best for:</span> {pick.bestFor}</p>
-                    <p><span className="font-semibold text-slate-900">Not ideal for:</span> {pick.notIdealFor}</p>
-                    <p><span className="font-semibold text-slate-900">Room / group angle:</span> {roomGroupAngle(pick)}</p>
-                  </div>
-                  {providerLinks.length > 0 ? (
-                    <div className={`mt-4 grid gap-2 ${providerLinks.length > 1 ? "grid-cols-2" : ""}`}>
-                      {providerLinks.map((link) => (
-                        <ProviderButton
-                          key={link.provider}
-                          provider={link.provider}
-                          href={link.href}
-                          placement="local_hotel_picks_matrix"
-                          pagePath={pagePath}
-                          locale={locale}
-                          linkId={link.linkId}
-                          product="local_hotel_pick"
-                          category="hotel"
-                          area={pick.area}
-                          city={pick.city}
-                          hotelName={pick.hotelName}
-                          fullWidth
-                          className="min-h-10 px-3 py-2 text-xs"
-                        >
-                          {link.label}
-                        </ProviderButton>
-                      ))}
-                    </div>
-                  ) : null}
-                </article>
-              );
-            })}
-          </div>
+          <HotelPickMatrix picks={getAllLocalHotelPicks()} locale={locale} pagePath={pagePath} />
         </section>
 
         <div className="mt-8 space-y-12">
@@ -351,7 +276,7 @@ export default async function LocalHotelPicksPage({ params }: Props) {
           </section>
 
           {LOCAL_HOTEL_PICK_CITIES.filter((city) => city !== "Tokyo").map((city) => {
-            const picks = getLocalHotelPicksByCity(city);
+            const picks = getHotelPicksByCity(city);
             if (picks.length === 0) return null;
 
             return (

@@ -16,6 +16,7 @@ import { HotelPicks } from "@/components/content/HotelPicks";
 import { NextActions } from "@/components/content/NextActions";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
+import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
 import { AgodaHotelMap } from "@/components/affiliate/AgodaHotelMap";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
@@ -1961,6 +1962,13 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
           </div>
         </section>
 
+        <FujiseatAreaLogic
+          sourcePage={pagePath}
+          placement="tokyo_first_time_area_logic"
+          locale={locale}
+          className="mt-6"
+        />
+
         <section id="hotel-base-matrix" className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
           <div className="max-w-3xl">
             <h2 className="mt-2 text-2xl font-semibold text-slate-950">{supplement.matrix.title}</h2>
@@ -2680,12 +2688,19 @@ export default async function StayPage({ params }: Props) {
           />
 
           {isShinkansenProblemPage ? (
-            <ProblemHotelBaseSection
-              areas={shinkansenHotelBaseAreas}
-              locale={locale}
-              pagePath={pagePath}
-              placement="shinkansen_page_area_cta"
-            />
+            <>
+              <ProblemHotelBaseSection
+                areas={shinkansenHotelBaseAreas}
+                locale={locale}
+                pagePath={pagePath}
+                placement="shinkansen_page_area_cta"
+              />
+              <FujiseatAreaLogic
+                sourcePage={pagePath}
+                placement="shinkansen_page_area_logic"
+                locale={locale}
+              />
+            </>
           ) : null}
 
           <section id="areas" className="scroll-mt-24">

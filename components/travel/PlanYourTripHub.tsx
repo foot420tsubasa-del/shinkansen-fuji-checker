@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { Card } from "@/components/ui/Card";
+import { HotelBaseNextStep } from "@/components/content/HotelBaseNextStep";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
@@ -313,6 +314,17 @@ export function PlanYourTripHub() {
           <h2 className="text-xl font-semibold text-slate-950">{t("bookingOrder.routeDecisionTitle")}</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">{t("bookingOrder.routeDecisionBody")}</p>
         </section>
+
+        <HotelBaseNextStep
+          sourcePage="/plan-your-trip"
+          locale={locale}
+          placement="plan_trip_hotel_base_next_step"
+          title="Do not book hotels before the route shape is clear"
+          body="Before choosing hotel names, decide your arrival airport, first-night area, Shinkansen day, luggage plan, and whether Kyoto, Osaka, Mt. Fuji, or Disney affects your base."
+          primaryLabel="Compare Tokyo station areas"
+          secondaryLabel="See local hotel examples"
+          className="mt-6"
+        />
 
         <section className="mt-10">
           <div className="max-w-2xl">

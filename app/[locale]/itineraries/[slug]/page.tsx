@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { DayCard } from "@/components/content/DayCard";
+import { HotelBaseNextStep } from "@/components/content/HotelBaseNextStep";
 import { ProTip } from "@/components/content/ProTip";
 import { NextActions } from "@/components/content/NextActions";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
@@ -128,6 +129,18 @@ export default async function ItineraryPage({ params }: Props) {
             maxItems={5}
             locale={locale}
             pagePath={pagePath}
+          />
+
+          <HotelBaseNextStep
+            sourcePage={pagePath}
+            locale={locale}
+            placement="itinerary_hotel_base_next_step"
+            title="Choose the hotel base before booking this route"
+            body="For this itinerary, the hotel area affects airport arrival, luggage movement, Shinkansen days, and how hard the first night feels."
+            primaryHref="/areas-to-stay"
+            primaryLabel="Choose a Japan hotel area"
+            secondaryHref="/local-hotel-picks"
+            secondaryLabel="See local hotel examples"
           />
 
           <section>

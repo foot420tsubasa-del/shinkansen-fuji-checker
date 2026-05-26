@@ -16,6 +16,7 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
+import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
 import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
 import { getAlternates } from "@/i18n/hreflang";
 import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
@@ -1198,6 +1199,14 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
             ))}
           </div>
         </section>
+
+        <FujiseatAreaLogic
+          sourcePage={pagePath}
+          placement="tokyo_stay_area_index_area_logic"
+          locale={locale}
+          className="mt-6"
+          showFinderLink={false}
+        />
 
         <section className="mt-6 rounded-[22px] border border-slate-200 bg-slate-50 p-4">
           <div className="mb-3">

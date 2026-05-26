@@ -3,6 +3,7 @@ import { Luggage, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { SiteFooter } from "@/components/content/SiteFooter";
+import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { AdSlot } from "@/components/ads/AdSlot";
@@ -454,6 +455,13 @@ export default async function WhereToStayInTokyoWithLuggagePage({ params }: Prop
             ))}
           </div>
         </section>
+
+        <FujiseatAreaLogic
+          sourcePage={pagePath}
+          placement="luggage_page_area_logic"
+          locale={locale}
+          className="mt-10"
+        />
 
         <section className="mt-10 rounded-[24px] border border-sky-100 bg-sky-50/70 p-6 shadow-sm">
           <div className="max-w-3xl">

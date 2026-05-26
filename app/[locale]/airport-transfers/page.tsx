@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { SiteFooter } from "@/components/content/SiteFooter";
+import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { transferPages, type TransferPage } from "@/lib/content/transfers";
 import { getAlternates } from "@/i18n/hreflang";
@@ -495,6 +496,13 @@ export default async function AirportTransfersIndex({ params }: Props) {
         <h2 className="text-xl font-bold text-slate-950">{transferTogetherCopy.title}</h2>
         <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">{transferTogetherCopy.body}</p>
       </section>
+
+      <FujiseatAreaLogic
+        sourcePage={pagePath}
+        placement="airport_hub_area_logic"
+        locale={locale}
+        className="mt-8"
+      />
 
       <section className="mt-8 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
         <div className="max-w-3xl">
