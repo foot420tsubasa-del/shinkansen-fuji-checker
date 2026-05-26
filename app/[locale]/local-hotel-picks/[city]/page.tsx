@@ -66,7 +66,7 @@ const cityPageConfigs: Record<LocalHotelPickCity, CityHotelPickPageConfig> = {
         title: "Narita / East Tokyo",
         body: "East-side examples for travelers who want a more local-feeling base after choosing the broad area.",
         pickIds: ["citanHostel"],
-        fallbackHref: "/areas-to-stay/tokyo/east-tokyo",
+        fallbackHref: "/local-tokyo",
         fallbackLabel: "See East Tokyo area logic",
       },
       {

@@ -83,12 +83,12 @@ const tokyoBaseCardConfigs: ReadonlyArray<
   },
   {
     key: "tokyoStation",
-    href: "/areas-to-stay/tokyo/tokyo-station",
+    href: "/areas-to-stay/tokyo-station-vs-shinjuku",
     hotelKeys: ["tokyoStation"],
   },
   {
     key: "eastTokyo",
-    href: "/areas-to-stay/tokyo/east-tokyo",
+    href: "/local-tokyo",
   },
 ] as const;
 

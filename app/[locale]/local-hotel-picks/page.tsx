@@ -60,7 +60,7 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     label: "East Tokyo personality stay",
     description: "A more local-feeling base for travelers who care about cafes, streets, and atmosphere.",
     pickIds: ["citanHostel"],
-    fallbackHref: "/areas-to-stay/tokyo/east-tokyo",
+    fallbackHref: "/local-tokyo",
     fallbackLabel: "See East Tokyo area logic",
   },
   {
@@ -68,7 +68,7 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     label: "Tokyo Station logistics",
     description: "Best when early Shinkansen, luggage, and transfers matter more than nightlife.",
     pickIds: [],
-    fallbackHref: "/areas-to-stay/tokyo/tokyo-station",
+    fallbackHref: "/areas-to-stay/tokyo-station-vs-shinjuku",
     fallbackLabel: "See Tokyo Station area logic",
   },
 ];

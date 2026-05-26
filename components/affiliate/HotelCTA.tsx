@@ -39,13 +39,15 @@ export function HotelCTA({
   const ctaLabel = label ?? t("checkLatestHotels", { areaName });
   const analyticsHref = trackingHref ?? href;
   const hrefProvider = getProviderFromHref(analyticsHref);
-  const resolvedProvider =
-    provider ?? (hrefProvider === "trip" || hrefProvider === "agoda" ? hrefProvider : "klook");
+  // Default to whatever the href resolves to (klook / omio / other). Only
+  // attribute clicks to "klook" when the URL actually points to Klook, so
+  // we never report a non-Klook click as a Klook conversion in analytics.
+  const resolvedProvider = provider ?? hrefProvider;
 
   // Provider-specific hotel CTAs use brand-inspired colors (deep blue for
   // Trip.com, magenta for Agoda) so the user can tell at a glance which
-  // provider they are about to open. Generic / Klook-routed hotel CTAs keep
-  // the commercial orange style.
+  // provider they are about to open. Any other hotel CTA (klook-routed or
+  // an unrecognized href) keeps the commercial orange style.
   if (resolvedProvider === "trip" || resolvedProvider === "agoda") {
     return (
       <ProviderButton

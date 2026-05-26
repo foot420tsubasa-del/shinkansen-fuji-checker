@@ -240,7 +240,7 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     hotelRecommendedAreas: ["Tokyo Station", "Shinjuku"],
     hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
     hotelDetailLinks: [
-      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo/tokyo-station" },
+      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
       { label: "Shinjuku details", href: "/areas-to-stay/tokyo/shinjuku" },
     ],
     hotelActions: [
@@ -277,7 +277,7 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
       { label: "Shinjuku details", href: "/areas-to-stay/tokyo/shinjuku" },
       { label: "Ueno details", href: "/areas-to-stay/tokyo/ueno" },
       { label: "Asakusa details", href: "/areas-to-stay/tokyo/asakusa" },
-      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo/tokyo-station" },
+      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
     ],
     hotelActions: [
       { actionLabel: "Compare Shinjuku hotels", hotelKey: "shinjuku", area: "Tokyo: Shinjuku" },
@@ -311,7 +311,7 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
     hotelDetailLinks: [
       { label: "Shinjuku details", href: "/areas-to-stay/tokyo/shinjuku" },
-      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo/tokyo-station" },
+      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
     ],
     hotelActions: [
       { actionLabel: "Compare Shinjuku hotels", hotelKey: "shinjuku", area: "Tokyo: Shinjuku" },
@@ -345,7 +345,7 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     hotelRecommendedAreas: ["Tokyo Station", "Ueno"],
     hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
     hotelDetailLinks: [
-      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo/tokyo-station" },
+      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
       { label: "Ueno details", href: "/areas-to-stay/tokyo/ueno" },
     ],
     hotelActions: [
