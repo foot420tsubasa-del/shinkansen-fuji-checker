@@ -1,0 +1,149 @@
+# Tokyo Stay Area Index — weekly public-data refresh.
+#
+# Runs `npm run stay-area:refresh` on a schedule, validates the result
+# (tsc / lint / build), and opens a pull request when the generated
+# JSON snapshots change. Per-source failures inside the fetcher are
+# already handled (failed / skipped statuses), so external HTTP issues
+# do not fail the workflow — TypeScript / lint / build errors do.
+#
+# Schedule: Monday 18:00 JST (== Monday 09:00 UTC).
+# Manual run: workflow_dispatch.
+
+name: Update Tokyo Stay Area Index data
+
+on:
+  schedule:
+    # Mon 18:00 JST → Mon 09:00 UTC (JST is UTC+9, no DST).
+    - cron: "0 9 * * 1"
+  workflow_dispatch:
+
+# peter-evans/create-pull-request needs `contents: write` to push the
+# refresh branch, and `pull-requests: write` to open the PR. The default
+# GITHUB_TOKEN provides both within the repo.
+permissions:
+  contents: write
+  pull-requests: write
+
+# Avoid overlapping refreshes if a manual run kicks off while the weekly
+# cron is mid-flight. The newer run replaces the older one cleanly.
+concurrency:
+  group: stay-area-index-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Refresh and validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      # ODPT_CONSUMER_KEY is optional — the fetcher already marks the
+      # ODPT source `skipped` when the env var is absent. Leaving it
+      # unset on purpose so the workflow runs without secrets.
+      NEXT_TELEMETRY_DISABLED: "1"
+      CI: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Refresh Tokyo Stay Area Index signals + scores
+        # The script catches per-source HTTP / parse failures and writes
+        # `status: failed` or `skipped` into the JSON instead of crashing.
+        # An unhandled crash exits non-zero and fails the workflow — that
+        # is intentional.
+        run: npm run stay-area:refresh
+
+      - name: TypeScript check
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      - name: Detect generated-data changes
+        id: changes
+        run: |
+          set -euo pipefail
+          paths=(
+            data/generated/tokyo-stay-area-signals.json
+            data/generated/tokyo-stay-area-scores.json
+            data/generated/tokyo-stay-area-source-status.json
+          )
+          if git diff --quiet -- "${paths[@]}"; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "changed_files<<EOF"
+              git diff --name-only -- "${paths[@]}"
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Capture refresh timestamp
+        if: steps.changes.outputs.changed == 'true'
+        id: meta
+        run: |
+          set -euo pipefail
+          generated_at=$(node -e "process.stdout.write(require('./data/generated/tokyo-stay-area-source-status.json').generatedAt || '')")
+          echo "generated_at=${generated_at}" >> "$GITHUB_OUTPUT"
+
+      - name: Open pull request with refreshed data
+        if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: bot/update-tokyo-stay-area-index
+          delete-branch: true
+          # Only commit the three generated JSON snapshots. This guards
+          # against an accidental npm-ci lockfile mutation or any other
+          # incidental working-tree change being pulled into the PR.
+          add-paths: |
+            data/generated/tokyo-stay-area-signals.json
+            data/generated/tokyo-stay-area-scores.json
+            data/generated/tokyo-stay-area-source-status.json
+          commit-message: "Update Tokyo stay area public data signals"
+          title: "Update Tokyo stay area public data signals"
+          labels: |
+            stay-area-index
+            automated
+          body: |
+            Automated weekly refresh of the Tokyo Stay Area Index generated
+            JSON snapshots.
+
+            **Refreshed at:** `${{ steps.meta.outputs.generated_at }}`
+            **Workflow run:** [${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+            ### Files changed
+            ```
+            ${{ steps.changes.outputs.changed_files }}
+            ```
+
+            ### Reminders before merging
+            - Passenger volume, Toei step-free / barrier-free, and Tokyo
+              Metro per-station exit data are sourced from public / official
+              feeds (Tokyo Metro corporate site, Tokyo Open Data CKAN).
+              They are **not** an official ranking.
+            - Per-run ±4 overall-score cap and ±10 per-sub-score cap protect
+              against wild swings — but please review the ranked-list diff,
+              especially:
+                - top-10 movement
+                - any area moving to / from `editorial-fallback`
+                - large `scoreParts.publicDataComponent` deltas
+            - External-source failures are non-fatal. Check
+              `tokyo-stay-area-source-status.json` to see which sources came
+              back `success` / `partial` / `skipped` / `failed` this run.
+            - `tsc --noEmit`, `eslint`, and `next build` all passed in CI
+              before this PR was opened.
+
+            ---
+            🤖 Opened by `.github/workflows/update-tokyo-stay-area-index.yml`
