@@ -16,12 +16,14 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
+import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
 import { getAlternates } from "@/i18n/hreflang";
 import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
 import signalsJson from "@/data/generated/tokyo-stay-area-signals.json";
 import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import sourceStatusJson from "@/data/generated/tokyo-stay-area-source-status.json";
 import { tokyoStayAreaSourceRegistry } from "@/data/stay-area/source-registry";
+import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import type {
   AccessRouteProfile,
   ComputedStayAreaScore,
@@ -49,6 +51,33 @@ type Props = {
 
 const pagePath = "/areas-to-stay/tokyo-stay-area-index";
 
+const hotelAreaKeyByStayAreaId: Partial<Record<string, HotelAreaKey>> = {
+  oshiage: "oshiage",
+  kuramae: "asakusa",
+  asakusa: "asakusa",
+  ueno: "ueno",
+  ryogoku: "oshiage",
+  "kiyosumi-shirakawa": "oshiage",
+  "monzen-nakacho": "oshiage",
+  ningyocho: "tokyoStation",
+  hatchobori: "tokyoStation",
+  kayabacho: "tokyoStation",
+  nihombashi: "tokyoStation",
+  "tokyo-station": "tokyoStation",
+  "ginza-yurakucho": "tokyoStation",
+  shimbashi: "tokyoStation",
+  "hamamatsucho-daimon": "tokyoStation",
+  shinagawa: "tokyoStation",
+  kanda: "tokyoStation",
+  akihabara: "ueno",
+  asakusabashi: "asakusa",
+  "bakurocho-higashinihombashi": "tokyoStation",
+  kinshicho: "oshiage",
+  shinjuku: "shinjuku",
+  yoyogi: "shinjuku",
+  shibuya: "shibuya",
+};
+
 const scoreLabels: Array<{ key: keyof ComputedStayAreaScore["scores"]; label: string }> = [
   { key: "stationSimplicity", label: "Station simplicity" },
   { key: "luggageFriendly", label: "Luggage-friendly" },
@@ -62,88 +91,34 @@ const scoreLabels: Array<{ key: keyof ComputedStayAreaScore["scores"]; label: st
 
 type FilterKey =
   | "all"
-  | "first-time"
   | "narita-arrival"
   | "haneda-arrival"
   | "shinkansen"
-  | "avoid-giant-stations"
-  | "local-tokyo"
-  | "budget-conscious";
+  | "avoid-giant-stations";
 
 const FILTERS: Array<{ key: FilterKey; label: string }> = [
-  { key: "all", label: "All" },
-  { key: "first-time", label: "First-time" },
   { key: "narita-arrival", label: "Narita arrival" },
   { key: "haneda-arrival", label: "Haneda arrival" },
   { key: "shinkansen", label: "Shinkansen" },
   { key: "avoid-giant-stations", label: "Avoid giant stations" },
-  { key: "local-tokyo", label: "Local Tokyo" },
-  { key: "budget-conscious", label: "Budget-conscious" },
 ];
 
 const FILTER_BOOSTS: Record<FilterKey, Array<{ areaId: string; delta: number }>> = {
   "all": [],
-  "first-time": [
-    { areaId: "oshiage", delta: 6 },
-    { areaId: "ueno", delta: 4 },
-    { areaId: "asakusa", delta: 3 },
-    { areaId: "tokyo-station", delta: 3 },
-    { areaId: "shinagawa", delta: 3 },
-    { areaId: "hamamatsucho-daimon", delta: 3 },
-    { areaId: "ginza-yurakucho", delta: 2 },
-  ],
-  "narita-arrival": [
-    { areaId: "oshiage", delta: 8 },
-    { areaId: "ueno", delta: 6 },
-    { areaId: "kinshicho", delta: 4 },
-    { areaId: "asakusabashi", delta: 4 },
-    { areaId: "bakurocho-higashinihombashi", delta: 4 },
-  ],
-  "haneda-arrival": [
-    { areaId: "shinagawa", delta: 8 },
-    { areaId: "hamamatsucho-daimon", delta: 7 },
-    { areaId: "asakusabashi", delta: 4 },
-    { areaId: "shimbashi", delta: 4 },
-    { areaId: "gotanda", delta: 3 },
-  ],
-  "shinkansen": [
-    { areaId: "tokyo-station", delta: 8 },
-    { areaId: "shinagawa", delta: 7 },
-    { areaId: "ueno", delta: 5 },
-    { areaId: "ginza-yurakucho", delta: 3 },
-    { areaId: "kanda", delta: 3 },
-    { areaId: "nihombashi", delta: 3 },
-  ],
+  "narita-arrival": [],
+  "haneda-arrival": [],
+  "shinkansen": [],
   "avoid-giant-stations": [
-    { areaId: "kuramae", delta: 7 },
-    { areaId: "kayabacho", delta: 6 },
-    { areaId: "kiyosumi-shirakawa", delta: 6 },
-    { areaId: "monzen-nakacho", delta: 5 },
-    { areaId: "ningyocho", delta: 5 },
-    { areaId: "hatchobori", delta: 5 },
-    { areaId: "iidabashi", delta: 4 },
-    { areaId: "korakuen-kasuga", delta: 4 },
-    { areaId: "ochanomizu", delta: 4 },
-    { areaId: "asakusabashi", delta: 3 },
-  ],
-  "local-tokyo": [
-    { areaId: "kiyosumi-shirakawa", delta: 7 },
-    { areaId: "kuramae", delta: 6 },
-    { areaId: "monzen-nakacho", delta: 6 },
-    { areaId: "ryogoku", delta: 5 },
-    { areaId: "asakusa", delta: 4 },
-    { areaId: "ningyocho", delta: 4 },
-    { areaId: "yoyogi", delta: 2 },
-  ],
-  "budget-conscious": [
-    { areaId: "ueno", delta: 6 },
-    { areaId: "akihabara", delta: 5 },
-    { areaId: "kanda", delta: 4 },
-    { areaId: "kinshicho", delta: 4 },
-    { areaId: "bakurocho-higashinihombashi", delta: 4 },
-    { areaId: "asakusabashi", delta: 4 },
-    { areaId: "gotanda", delta: 4 },
-    { areaId: "kuramae", delta: 3 },
+    { areaId: "kuramae", delta: 10 },
+    { areaId: "kayabacho", delta: 9 },
+    { areaId: "kiyosumi-shirakawa", delta: 9 },
+    { areaId: "monzen-nakacho", delta: 8 },
+    { areaId: "ningyocho", delta: 8 },
+    { areaId: "hatchobori", delta: 8 },
+    { areaId: "asakusabashi", delta: 7 },
+    { areaId: "ryogoku", delta: 6 },
+    { areaId: "korakuen-kasuga", delta: 6 },
+    { areaId: "ochanomizu", delta: 5 },
   ],
 };
 
@@ -179,21 +154,66 @@ function areaById(id: string): StayAreaBase {
   return area;
 }
 
+function hotelSearchForArea(area: StayAreaBase) {
+  const hotelAreaKey = hotelAreaKeyByStayAreaId[area.id];
+  if (!hotelAreaKey) return null;
+  const hotel = getHotelLink(hotelAreaKey);
+  const config = getTripHotelConfig(hotelAreaKey);
+  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl.trim();
+  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl.trim();
+  const agodaLink = getAgodaHotelAreaUrl(hotelAreaKey);
+  const providers = [
+    tripHref && tripHref !== "#"
+      ? {
+          provider: "trip" as ProviderId,
+          href: tripHref,
+          trackingHref: tripTrackingHref,
+          label: "Search this area on Trip.com",
+          linkId: `hotelArea.${hotelAreaKey}.trip`,
+        }
+      : null,
+    agodaLink && agodaLink.href !== "#"
+      ? {
+          provider: "agoda" as ProviderId,
+          href: agodaLink.href,
+          trackingHref: agodaLink.trackingHref,
+          label: "Search this area on Agoda",
+          linkId: agodaLink.linkId,
+        }
+      : null,
+  ].filter((provider): provider is {
+    provider: ProviderId;
+    href: string;
+    trackingHref: string;
+    label: string;
+    linkId: string;
+  } => Boolean(provider));
+
+  if (providers.length === 0) return null;
+  return {
+    hotelAreaKey,
+    areaName: config.areaName,
+    selectedAreaName: area.displayName,
+    city: config.city,
+    providers,
+  };
+}
+
 function parseFilter(value: string | undefined): FilterKey {
   const candidate = (value ?? "all") as FilterKey;
   return FILTERS.some((f) => f.key === candidate) ? candidate : "all";
 }
 
 function accessLevelFilterDelta(level: AccessRouteProfile["level"] | undefined): number {
-  if (level === "Excellent") return 8;
-  if (level === "Good") return 5;
+  if (level === "Excellent") return 10;
+  if (level === "Good") return 6;
   if (level === "Fair") return 2;
   return 0;
 }
 
 function shinkansenLevelFilterDelta(level: StayAreaBase["accessProfiles"]["shinkansen"]["level"] | undefined): number {
-  if (level === "Excellent") return 8;
-  if (level === "Good") return 5;
+  if (level === "Excellent") return 10;
+  if (level === "Good") return 6;
   if (level === "Fair") return 2;
   return 0;
 }
@@ -204,6 +224,82 @@ function profileFilterDelta(area: StayAreaBase, filter: FilterKey): number {
   if (filter === "haneda-arrival") return accessLevelFilterDelta(area.accessProfiles.haneda?.level);
   if (filter === "shinkansen") return shinkansenLevelFilterDelta(area.accessProfiles.shinkansen?.level);
   return 0;
+}
+
+function clampDisplayScore(score: number): number {
+  return Math.max(45, Math.min(92, Math.round(score)));
+}
+
+function deriveDisplayFitScore({
+  area,
+  score,
+  signal,
+}: {
+  area: StayAreaBase;
+  score: ComputedStayAreaScore;
+  signal: StayAreaSignalsFile["areas"][string] | undefined;
+}): number {
+  const network = signal?.networkComplexitySignal;
+  const exit = exitComplexityDisplay(signal, area.exitComplexityLevel);
+  let penalty = 0;
+  let bonus = 0;
+
+  if (network?.terminalType === "mega-terminal") penalty += 9;
+  else if (network?.terminalType === "terminal") penalty += 3;
+
+  if (exit.level === "Mega station") penalty += 5;
+  else if (exit.level === "Complex") penalty += 2;
+
+  if (score.scores.stationSimplicity < 35) penalty += 5;
+  else if (score.scores.stationSimplicity < 50) penalty += 3;
+  else if (score.scores.stationSimplicity < 65) penalty += 1;
+
+  if (score.scores.crowdStress < 30) penalty += 5;
+  else if (score.scores.crowdStress < 45) penalty += 3;
+  else if (score.scores.crowdStress < 60) penalty += 1;
+
+  if (area.lodgingDensityLevel === "Very High" && score.scores.stationSimplicity < 60) penalty += 2;
+  if (score.overallScore >= 75 && score.scores.stationSimplicity < 65) penalty += 3;
+  if (score.overallScore >= 75 && score.scores.crowdStress < 60) penalty += 2;
+  if (score.scores.stationSimplicity >= 85 && score.scores.luggageFriendly >= 80 && score.scores.crowdStress >= 80) bonus += 2;
+
+  return clampDisplayScore(score.overallScore - penalty + bonus);
+}
+
+function fitTier(displayScore: number): { label: string; tone: ChipTone; className: string } {
+  if (displayScore >= 85) {
+    return {
+      label: "Excellent fit",
+      tone: "calm",
+      className: "border-emerald-200 bg-emerald-50 text-[#106b43]",
+    };
+  }
+  if (displayScore >= 75) {
+    return {
+      label: "Strong fit",
+      tone: "calm",
+      className: "border-emerald-100 bg-emerald-50 text-[#106b43]",
+    };
+  }
+  if (displayScore >= 65) {
+    return {
+      label: "Good with trade-offs",
+      tone: "soft",
+      className: "border-slate-200 bg-slate-50 text-slate-700",
+    };
+  }
+  if (displayScore >= 55) {
+    return {
+      label: "Situational",
+      tone: "warn",
+      className: "border-amber-100 bg-amber-50 text-amber-800",
+    };
+  }
+  return {
+    label: "Hard for first-time / luggage-heavy trips",
+    tone: "alert",
+    className: "border-rose-100 bg-rose-50 text-rose-700",
+  };
 }
 
 function applyFilterBoost(scores: ComputedStayAreaScore[], filter: FilterKey) {
@@ -608,16 +704,84 @@ function AirportShinkansenAccessPanel({ area }: { area: StayAreaBase }) {
   );
 }
 
+function SelectedAreaHotelSearch({
+  area,
+  locale,
+}: {
+  area: StayAreaBase;
+  locale: string;
+}) {
+  const hotel = hotelSearchForArea(area);
+  if (!hotel) return null;
+  const isBroadAreaFallback = hotel.selectedAreaName !== hotel.areaName;
+  const heading = isBroadAreaFallback
+    ? `Search hotels near ${hotel.selectedAreaName}`
+    : `Search hotels around ${hotel.areaName}`;
+
+  return (
+    <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+      <div className="flex items-center gap-2 text-[#106b43]">
+        <Building2 className="h-4 w-4" aria-hidden="true" />
+        <h3 className="text-sm font-semibold text-slate-950">{heading}</h3>
+      </div>
+      <p className="mt-2 text-xs leading-5 text-slate-600">
+        {isBroadAreaFallback
+          ? `No dedicated ${hotel.selectedAreaName} hotel URL is set yet, so this opens the nearest existing broad search area: ${hotel.areaName}. Prices and availability change on the provider site.`
+          : "Opens a hotel search for this area. Prices and availability change on the provider site."}
+      </p>
+      <div className="mt-3 grid gap-2 sm:grid-cols-2">
+        {hotel.providers.map((provider) => (
+          <ProviderButton
+            key={provider.linkId}
+            provider={provider.provider}
+            href={provider.href}
+            trackingHref={provider.trackingHref}
+            placement="stay_area_hotel_card"
+            pagePath={pagePath}
+            locale={locale}
+            linkId={provider.linkId}
+            product="hotel"
+            area={hotel.areaName}
+            city={hotel.city}
+            fullWidth
+            className="min-h-11 rounded-xl text-sm"
+          >
+            {provider.label}
+          </ProviderButton>
+        ))}
+      </div>
+      <div className="mt-2 grid gap-2">
+        <TrackedStayAreaContinueLink
+          href="/local-hotel-picks#hotel-examples-matrix"
+          sourcePage={pagePath}
+          placement="tokyo_stay_area_index_selected_hotel_search"
+          label="See local hotel examples"
+          locale={locale}
+          areaId={area.id}
+          className="inline-flex min-h-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100"
+        >
+          See local hotel examples
+        </TrackedStayAreaContinueLink>
+      </div>
+    </div>
+  );
+}
+
 function AreaDetailPanel({
   area,
   score,
   signal,
+  displayScore,
+  locale,
 }: {
   area: StayAreaBase;
   score: ComputedStayAreaScore;
   signal: StayAreaSignalsFile["areas"][string] | undefined;
+  displayScore: number;
+  locale: string;
 }) {
   const tone = matchLabelTone(score.matchLabel);
+  const tier = fitTier(displayScore);
   return (
     <section id="selected-area" className="scroll-mt-24 rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-24">
       <div className="flex items-start justify-between gap-4">
@@ -629,14 +793,21 @@ function AreaDetailPanel({
           </p>
         </div>
         <div className="rounded-2xl bg-[#ff7a00] px-4 py-3 text-center text-white shadow-sm">
-          <p className="text-2xl font-black leading-none">{score.overallScore}</p>
+          <p className="text-2xl font-black leading-none">{displayScore}</p>
           <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.08em]">/100</p>
         </div>
       </div>
-      <span className={`mt-3 inline-flex rounded-full border px-2.5 py-0.5 text-[11px] font-semibold ${tone.cls}`}>
-        {tone.text}
-      </span>
+      <div className="mt-3 flex flex-wrap gap-2">
+        <span className={`inline-flex rounded-full border px-2.5 py-0.5 text-[11px] font-semibold ${tier.className}`}>
+          {tier.label}
+        </span>
+        <span className={`inline-flex rounded-full border px-2.5 py-0.5 text-[11px] font-semibold ${tone.cls}`}>
+          {tone.text}
+        </span>
+      </div>
       <p className="mt-4 text-sm leading-6 text-slate-700">{area.editorial.overallLabel}</p>
+
+      <SelectedAreaHotelSearch area={area} locale={locale} />
 
       <div className="mt-5 grid gap-2">
         {scoreLabels.map(({ key, label }) => (
@@ -670,7 +841,7 @@ function AreaDetailPanel({
         Confidence: {score.confidence.label} ({score.confidence.score}/100) · Data freshness: {score.sourceFreshness.label}
       </p>
       <p className="mt-2 text-xs leading-5 text-slate-500">
-        Score parts — editorial {score.scoreParts.editorialComponent} · public data {score.scoreParts.publicDataComponent} · live status {score.scoreParts.liveStatusComponent} · coverage {(score.scoreParts.sourceCoverage * 100).toFixed(0)}%
+        Display fit score adjusts the raw blended score ({score.overallScore}) for station complexity and crowd trade-offs.
       </p>
     </section>
   );
@@ -683,6 +854,7 @@ function AreaRankRow({
   signal,
   activeFilter,
   href,
+  displayScore,
 }: {
   rank: number;
   area: StayAreaBase;
@@ -690,17 +862,19 @@ function AreaRankRow({
   signal: StayAreaSignalsFile["areas"][string] | undefined;
   activeFilter: FilterKey;
   href: string;
+  displayScore: number;
 }) {
   const crowd = crowdLevelFromPercentile(signal?.passengerSignal?.crowdPercentile ?? null);
   const accessBadge = activeAccessBadge(area, activeFilter);
   const exit = exitComplexityDisplay(signal, area.exitComplexityLevel);
+  const tier = fitTier(displayScore);
   return (
     <TrackedStayAreaDetailLink
       href={href}
       className="block rounded-[22px] border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-emerald-200 hover:bg-emerald-50/40"
       areaId={area.id}
       areaName={area.displayName}
-      overallScore={score.overallScore}
+      overallScore={displayScore}
       rankPosition={rank}
       matchLabel={score.matchLabel}
       crowdLevel={crowd.label}
@@ -718,8 +892,9 @@ function AreaRankRow({
               {area.stationNames.slice(0, 3).join(" / ")} · {area.areaGroup}
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-1.5">
+              <Chip label="Fit" value={tier.label} tone={tier.tone} />
               <Chip label="Crowd" value={crowd.label} tone={crowd.tone} />
-              {accessBadge ? <Chip label="Fit" value={accessBadge} tone="calm" /> : null}
+              {accessBadge ? <Chip label="Priority" value={accessBadge} tone="calm" /> : null}
               <Chip
                 label="Complexity"
                 value={exit.level}
@@ -741,7 +916,7 @@ function AreaRankRow({
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2 text-xs md:grid-cols-3 md:text-center">
-          <Metric label="Overall" value={score.overallScore} strong />
+          <Metric label="Fit score" value={displayScore} strong />
           <Metric label="Station" value={score.scores.stationSimplicity} />
           <Metric label="Luggage" value={score.scores.luggageFriendly} />
         </div>
@@ -896,11 +1071,18 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
   const baselineScores = scoresFile.areas;
   const computedScores = applyFilterBoost(baselineScores, activeFilter);
   const scoreById = new Map(baselineScores.map((s) => [s.id, s] as const));
-  const rankedAreas = computedScores.map((score) => ({
-    area: areaById(score.id),
-    score,
-    signal: signalsFile.areas[score.id],
-  }));
+  const rankedAreas = computedScores
+    .map((score) => {
+      const areaItem = areaById(score.id);
+      const signal = signalsFile.areas[score.id];
+      return {
+        area: areaItem,
+        score,
+        signal,
+        displayScore: deriveDisplayFitScore({ area: areaItem, score, signal }),
+      };
+    })
+    .sort((a, b) => b.displayScore - a.displayScore || b.score.overallScore - a.score.overallScore);
   const selected = rankedAreas.find((item) => item.area.id === area) ?? rankedAreas[0];
   const featuredIds = ["oshiage", "kuramae", "ueno"];
   const generatedScoreCount = scoresFile.areas.length;
@@ -966,7 +1148,16 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           <div className="flex flex-wrap gap-2">
             {FILTERS.map(({ key, label }) => {
               const isActive = key === activeFilter;
-              const filtered = applyFilterBoost(baselineScores, key);
+              const filtered = applyFilterBoost(baselineScores, key)
+                .map((score) => {
+                  const areaItem = areaById(score.id);
+                  const signal = signalsFile.areas[score.id];
+                  return {
+                    score,
+                    displayScore: deriveDisplayFitScore({ area: areaItem, score, signal }),
+                  };
+                })
+                .sort((a, b) => b.displayScore - a.displayScore || b.score.overallScore - a.score.overallScore);
               const top = filtered[0];
               return (
                 <TrackedStayAreaFilterLink
@@ -983,8 +1174,8 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
                   filterLabel={label}
                   pagePath={pagePath}
                   resultCount={filtered.length}
-                  topAreaIdAfterFilter={top?.id ?? ""}
-                  topAreaScoreAfterFilter={top?.overallScore ?? 0}
+                  topAreaIdAfterFilter={top?.score.id ?? ""}
+                  topAreaScoreAfterFilter={top?.displayScore ?? 0}
                 >
                   {label}
                 </TrackedStayAreaFilterLink>
@@ -992,8 +1183,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
             })}
           </div>
           <p className="mt-3 text-xs leading-5 text-slate-500">
-            Filters re-rank using predefined travel-fit modifiers on top of the same blended score. They do not change
-            the underlying source data.
+            Choose a travel priority to highlight areas that fit that situation.
           </p>
         </section>
 
@@ -1099,15 +1289,15 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           <div id="ranked-areas" className="scroll-mt-24">
             <div className="flex items-end justify-between gap-4">
               <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Ranked list</p>
-                <h2 className="mt-1 text-2xl font-semibold text-slate-950">Station-area travel fit</h2>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Decision list</p>
+                <h2 className="mt-1 text-2xl font-semibold text-slate-950">Station-area fit and trade-offs</h2>
               </div>
               <p className="hidden text-xs font-semibold text-slate-500 md:block">
                 {generatedScoreCount} areas · filter: {FILTERS.find((f) => f.key === activeFilter)?.label}
               </p>
             </div>
             <div className="mt-4 grid gap-3">
-              {rankedAreas.map(({ area, score, signal }, index) => (
+              {rankedAreas.map(({ area, score, signal, displayScore }, index) => (
                 <AreaRankRow
                   key={area.id}
                   rank={index + 1}
@@ -1116,11 +1306,18 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
                   signal={signal}
                   activeFilter={activeFilter}
                   href={areaDetailHref(locale, activeFilter, area.id)}
+                  displayScore={displayScore}
                 />
               ))}
             </div>
           </div>
-          <AreaDetailPanel area={selected.area} score={selected.score} signal={selected.signal} />
+          <AreaDetailPanel
+            area={selected.area}
+            score={selected.score}
+            signal={selected.signal}
+            displayScore={selected.displayScore}
+            locale={locale}
+          />
         </section>
 
         <section className="mt-10">
