@@ -3808,5 +3808,302 @@
         ]
       }
     }
+  },
+  "tokyoStayAreaIndex": {
+    "meta": {
+      "title": "Tokyo Hotel Area Finder: сравните районы у станций перед бронированием",
+      "description": "Сравните 36 районов у станций Токио по багажу, аэропорту, сложности станции, синкансэну и выбору отелей.",
+      "ogTitle": "Tokyo Hotel Area Finder",
+      "ogDescription": "Сравните районы у станций Токио перед бронированием отеля с логикой fujiseat."
+    },
+    "breadcrumb": {
+      "home": "Главная",
+      "parent": "Где остановиться",
+      "current": "Tokyo Hotel Area Finder"
+    },
+    "hero": {
+      "eyebrow": "Поиск района для отеля в Токио",
+      "title": "Tokyo Hotel Area Finder",
+      "body": "Сравните 36 районов у станций Токио перед бронированием. Инструмент помогает оценить багаж, прилет из аэропорта, дни с синкансэном, сложность станции, спокойные вечера и выбор отелей.",
+      "signals": [
+        "Сложность станции",
+        "Стресс с багажом",
+        "Доступ из аэропорта",
+        "Подходит для синкансэна",
+        "Плотность выбора отелей"
+      ],
+      "disclaimer": "Баллы — редакционная оценка пригодности для поездки, при наличии учитывающая публичные данные. Это не официальные рейтинги, не рейтинг отелей и не гарантия цены, комфорта, доступности или маршрутов.",
+      "freshness": "Локальное обновление с учетом пассажирских данных · Последняя проверка: {date}",
+      "cta": "Найти подходящий район"
+    },
+    "situations": {
+      "eyebrow": "Начните с ситуации поездки",
+      "title": "Сначала выберите задачу района отеля",
+      "body": "Escolha a situação mais próxima da sua viagem. Os filtros reordenam os mesmos dados de áreas; os guias ajudam quando a pergunta precisa de mais contexto que uma pontuação.",
+      "cards": {
+        "firstTime": {
+          "title": "Первый раз в Токио",
+          "body": "Сравните известные базы и более спокойные соседние районы.",
+          "label": "Гид для первой поездки"
+        },
+        "narita": {
+          "title": "Прилет в Narita",
+          "body": "Выделяет районы, подходящие для Narita.",
+          "label": "Фильтр Narita"
+        },
+        "haneda": {
+          "title": "Прилет в Haneda",
+          "body": "Выделяет районы, подходящие для Haneda.",
+          "label": "Фильтр Haneda"
+        },
+        "shinkansen": {
+          "title": "Ранний синкансэн",
+          "body": "Приоритет логистики Tokyo / Shinagawa / Ueno.",
+          "label": "Фильтр синкансэн"
+        },
+        "luggage": {
+          "title": "Большой багаж",
+          "body": "Учитывает номер, лифты и пешую дистанцию.",
+          "label": "Гид по багажу"
+        },
+        "avoidStations": {
+          "title": "Избегать больших станций",
+          "body": "Поднимает более спокойные и простые базы.",
+          "label": "Фильтр спокойных баз"
+        },
+        "localTokyo": {
+          "title": "Локальный Токио / спокойная база",
+          "body": "Используйте локальные гиды после выбора района.",
+          "label": "Локальный Токио"
+        },
+        "hotelExamples": {
+          "title": "Нужны примеры отелей",
+          "body": "Смотрите примеры после выбора широкой зоны.",
+          "label": "Примеры отелей"
+        }
+      }
+    },
+    "filters": {
+      "all": "Все районы",
+      "narita-arrival": "Прилет в Narita",
+      "haneda-arrival": "Прилет в Haneda",
+      "shinkansen": "Синкансэн",
+      "avoid-giant-stations": "Избегать больших станций"
+    },
+    "decisionList": {
+      "eyebrow": "Список решений",
+      "title": "Подход района и компромиссы",
+      "count": "{count} районов · фильтр: {filter}"
+    },
+    "scoreLabels": {
+      "stationSimplicity": "Простота станции",
+      "luggageFriendly": "Удобно с багажом",
+      "airportAccess": "Доступ из аэропорта",
+      "shinkansenAccess": "Доступ к синкансэну",
+      "touristAccess": "Доступ к достопримечательностям",
+      "localFeel": "Локальная атмосфера",
+      "crowdStress": "Меньше стресса от толпы",
+      "lodgingChoice": "Плотность выбора отелей"
+    },
+    "tiers": {
+      "excellent": "Отлично подходит",
+      "strong": "Хорошо подходит",
+      "good": "Хорошо с компромиссами",
+      "situational": "Зависит от ситуации",
+      "hard": "Сложно для первой поездки / большого багажа"
+    },
+    "matchLabels": {
+      "publicDataMatched": "Dados públicos correspondidos",
+      "partialPublicData": "Dados públicos parciais",
+      "editorialFallback": "Base editorial"
+    },
+    "common": {
+      "unknown": "Неизвестно",
+      "yes": "да",
+      "no": "нет"
+    },
+    "crowd": {
+      "low": "Низкая",
+      "medium": "Средняя",
+      "high": "Высокая",
+      "veryHigh": "Очень высокая",
+      "unknown": "Неизвестно"
+    },
+    "stepFree": {
+      "known": "Подтверждено",
+      "partial": "Частично",
+      "notLiveYet": "Еще не live"
+    },
+    "hotelChoice": {
+      "veryDense": "Очень плотный",
+      "many": "Много",
+      "some": "Есть выбор",
+      "limited": "Ограниченно"
+    },
+    "selected": {
+      "eyebrow": "Выбранный район",
+      "bestFor": "Подходит для",
+      "watchOut": "Учтите",
+      "why": "Почему этот район выделяется",
+      "confidence": "Confiança: {label} ({score}/100) · Atualização: {freshness}",
+      "displayScoreNote": "O score visível ajusta o score bruto ({score}) por complexidade da estação e multidões."
+    },
+    "hotelSearch": {
+      "headingNear": "Сравнить отели рядом с {area}",
+      "headingAround": "Сравнить отели в {area}",
+      "note": "Это широкий поиск по району. Проверьте точное расстояние до станции, размер номера, кровати и текущую цену у провайдера.",
+      "fallbackNote": "Это широкий поиск по району. Для {selected} пока нет отдельной ссылки, поэтому открывается ближайшая широкая зона: {area}. Проверьте точное расстояние до станции, размер номера, кровати и текущую цену у провайдера.",
+      "providers": {
+        "trip": "Искать этот район на Trip.com",
+        "agoda": "Искать этот район на Agoda",
+        "klook": "Искать этот район на Klook"
+      },
+      "examples": "Смотреть примеры местных отелей"
+    },
+    "stationUsability": {
+      "title": "Station usability",
+      "passenger": "Passenger volume percentile",
+      "passengerValue": "{percentile}th · {crowd}",
+      "passengerAggregated": "Aggregated {count} ({sources})",
+      "sourceSkipped": "Source skipped this run.",
+      "noPassengerData": "No passenger data matched this area.",
+      "exit": "Exit / entrance complexity",
+      "exitDataHint": "{exits} exits detected{coverage}. Tokyo Metro live exit feed.",
+      "partialCoverage": " (partial — {coverage}% station coverage)",
+      "exitFallbackHint": "Editorial fallback (no live exit feed matched this area).",
+      "contribution": "Contribution: {value}",
+      "linesOperators": "Lines / operators",
+      "linesOperatorsValue": "{lines} lines · {operators} operators",
+      "operatorGroups": "Operator groups: {groups}.",
+      "operatorGroupsInferred": "Operator groups are inferred from curated line names.",
+      "terminalType": "Terminal type",
+      "multiOperator": "Multi-operator: {value}.",
+      "networkComplexity": "Network complexity",
+      "transferPenalty": "Transfer hub penalty",
+      "stepFree": "Step-free / elevator route",
+      "stepFreeDefaultHint": "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal.",
+      "stepFreeEditorialHint": "Editorial confidence label (no live source matched this area).",
+      "hotelChoice": "Hotel choice density",
+      "hotelChoiceHint": "Editorial hotel-choice-density signal only. This does not rank individual hotels or show live availability."
+    },
+    "access": {
+      "title": "Airport / Shinkansen access",
+      "body": "Route logic, not live timetable data. Check current trains before travel.",
+      "transferValue": "{level} · {count} transfers"
+    },
+    "rank": {
+      "chips": {
+        "fit": "Fit",
+        "crowd": "Crowd",
+        "priority": "Priority",
+        "complexity": "Complexity",
+        "luggageRoute": "Luggage route",
+        "hotelChoice": "Hotel choice"
+      },
+      "metrics": {
+        "fitScore": "Fit score",
+        "station": "Station",
+        "luggage": "Luggage"
+      },
+      "bestFor": "Best for: {items}"
+    },
+    "signalTiles": {
+      "passenger": {
+        "title": "Passenger volume"
+      },
+      "exit": {
+        "title": "Exit / entrance complexity",
+        "bodyMatched": "Tokyo Metro exit feed parsed — {matched} of {count} areas use a bucketed open-exit count. Areas without Tokyo Metro coverage use the editorial level.",
+        "bodyFallback": "Editorial tags explain station scale. This affects station simplicity and lightly affects luggage friendliness."
+      },
+      "lines": {
+        "title": "Line / operator complexity",
+        "body": "Derived from curated station lines, operator groups, transfer-hub level, and mega-terminal tags."
+      },
+      "stepFree": {
+        "title": "Step-free / elevator route",
+        "bodyMatched": "Toei barrier-free CSVs parsed — {matched} of {count} areas have a confirmed step-free route. Missing data is not penalised.",
+        "bodyFallback": "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal."
+      },
+      "access": {
+        "title": "Airport / Shinkansen access",
+        "body": "Curated route logic explains Narita, Haneda, Tokyo Station, Shinagawa, and Shinkansen fit. No live timetable data is implied."
+      },
+      "hotelChoice": {
+        "title": "Hotel choice density",
+        "body": "Editorial hotel-choice signal. It does not rank individual hotels and does not show live availability."
+      }
+    },
+    "status": {
+      "success": "Success",
+      "partial": "Partial",
+      "skipped": "Skipped",
+      "optional": "Optional",
+      "notLiveYet": "Not live yet",
+      "editorialSignal": "Editorial signal",
+      "active": "Active",
+      "next": "Next",
+      "editorialFallback": "Editorial fallback",
+      "activeFromAreaData": "Active from area data",
+      "routeLogic": "Route logic"
+    },
+    "methodology": {
+      "title": "How scores work",
+      "p1": "This compares station areas, not individual hotels.",
+      "p2": "Scores blend a 55% editorial travel-fit baseline, 35% station-usability adjustments (passenger crowd, exit / entrance complexity, line / operator count, transfer-hub penalty), and 10% live status. Each per-sub-score adjustment is capped at ±10.",
+      "p3": "Step-free route confidence is read from Toei's public barrier-free CSVs where matched, and adds a small positive nudge to luggage-friendliness. Exit / entrance complexity is read from Tokyo Metro's public per-station exit feed where matched; areas without Tokyo Metro coverage use the editorial level. Missing data is never punished. Hotel choice density is editorial and does not evaluate individual hotels. Scores are not official ratings and do not rank safety, hotel quality, price, or availability.",
+      "cards": {
+        "crowd": {
+          "title": "Crowd",
+          "body": "Passenger-data-informed; high volume lowers crowd-stress."
+        },
+        "complexity": {
+          "title": "Complexity",
+          "body": "Exit / entrance complexity from Tokyo Metro's exit feed where matched, editorial otherwise."
+        },
+        "lines": {
+          "title": "Lines",
+          "body": "More lines / operators lower station simplicity."
+        },
+        "transfer": {
+          "title": "Transfer",
+          "body": "Transfer-hub penalty hits mega interchanges."
+        }
+      },
+      "detailsTitle": "See score signal details",
+      "detailsBody": "Passenger volume, Toei step-free / elevator data, and Tokyo Metro per-station exit counts refresh when public sources update. These details are kept lower on the page so the finder starts with traveler decisions, not source status.",
+      "coverage": "Coverage across {count} station areas — public data matched: {matched} · partial: {partial} · editorial fallback: {fallback}.",
+      "internalDatasets": "Some public datasets are catalogued internally but are not used for scoring or displayed as travel claims."
+    },
+    "dataNote": {
+      "title": "Data freshness / source note",
+      "body": "fujiseat.com scores are editorial travel-fit scores informed by passenger data. They are not official ratings and do not guarantee safety, comfort, hotel quality, price, or availability.",
+      "currentMode": "Current mode: <strong>{mode}</strong>. Last source check: {date}.",
+      "registryTitle": "Source registry",
+      "fetchedLocally": "fetched locally",
+      "registeredOnly": "registered only",
+      "otherDatasets": "Other public datasets may be catalogued internally for future methodology review, but they are not shown here as travel claims and are not used in scoring."
+    },
+    "featured": {
+      "eyebrow": "Featured area cards",
+      "title": "Good starting points for many travelers"
+    },
+    "continue": {
+      "title": "Продолжить планирование",
+      "links": {
+        "firstTime": "Где остановиться в Токио",
+        "airport": "Подобрать трансфер из аэропорта",
+        "shinkansen": "База перед синкансэном",
+        "luggage": "База в Токио с багажом",
+        "examples": "Смотреть примеры местных отелей"
+      }
+    },
+    "accessBadges": {
+      "strongNarita": "Сильный доступ Narita",
+      "goodNarita": "Хороший доступ Narita",
+      "strongHaneda": "Сильный доступ Haneda",
+      "goodHaneda": "Хороший доступ Haneda",
+      "shinkansenFriendly": "Удобно для синкансэна"
+    }
   }
 }

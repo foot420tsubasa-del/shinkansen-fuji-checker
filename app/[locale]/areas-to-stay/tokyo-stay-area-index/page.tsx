@@ -24,6 +24,7 @@ import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import sourceStatusJson from "@/data/generated/tokyo-stay-area-source-status.json";
 import { tokyoStayAreaSourceRegistry } from "@/data/stay-area/source-registry";
 import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getTranslations } from "next-intl/server";
 import type {
   AccessRouteProfile,
   ComputedStayAreaScore,
@@ -47,6 +48,8 @@ type Props = {
   params: Promise<{ locale: string }>;
   searchParams: Promise<{ filter?: string; area?: string }>;
 };
+
+type Translation = Awaited<ReturnType<typeof getTranslations>>;
 
 const pagePath = "/areas-to-stay/tokyo-stay-area-index";
 
@@ -78,14 +81,14 @@ const hotelAreaKeyByStayAreaId: Partial<Record<string, HotelAreaKey>> = {
 };
 
 const scoreLabels: Array<{ key: keyof ComputedStayAreaScore["scores"]; label: string }> = [
-  { key: "stationSimplicity", label: "Station simplicity" },
-  { key: "luggageFriendly", label: "Luggage-friendly" },
-  { key: "airportAccess", label: "Airport access" },
-  { key: "shinkansenAccess", label: "Shinkansen access" },
-  { key: "touristAccess", label: "Tourist access" },
-  { key: "localFeel", label: "Local feel" },
-  { key: "crowdStress", label: "Less crowd stress" },
-  { key: "lodgingChoice", label: "Lodging choice density" },
+  { key: "stationSimplicity", label: "stationSimplicity" },
+  { key: "luggageFriendly", label: "luggageFriendly" },
+  { key: "airportAccess", label: "airportAccess" },
+  { key: "shinkansenAccess", label: "shinkansenAccess" },
+  { key: "touristAccess", label: "touristAccess" },
+  { key: "localFeel", label: "localFeel" },
+  { key: "crowdStress", label: "crowdStress" },
+  { key: "lodgingChoice", label: "lodgingChoice" },
 ];
 
 type FilterKey =
@@ -125,22 +128,17 @@ const signalsFile = signalsJson as StayAreaSignalsFile;
 const scoresFile = scoresJson as StayAreaScoresFile;
 const sourceStatusFile = sourceStatusJson as SourceStatusFile;
 
-const FRESHNESS_HEADLINE = "Passenger-data-informed local refresh";
-const FRESHNESS_SUBLINE =
-  "Passenger volume, Toei step-free / elevator data, and Tokyo Metro per-station exit counts refresh when public sources update.";
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "tokyoStayAreaIndex.meta" });
   return {
-    title: "Tokyo Hotel Area Finder: Compare Station Areas Before Booking Hotels",
-    description:
-      "Compare 36 Tokyo station areas by luggage-friendliness, airport access, station complexity, Shinkansen fit, and hotel choice density before booking hotels.",
+    title: t("title"),
+    description: t("description"),
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(pagePath, locale),
     openGraph: {
-      title: "Tokyo Hotel Area Finder",
-      description:
-        "Compare Tokyo station areas before booking hotels using fujiseat's station-area logic.",
+      title: t("ogTitle"),
+      description: t("ogDescription"),
       siteName: "fujiseat",
     },
   };
@@ -264,37 +262,37 @@ function deriveDisplayFitScore({
   return clampDisplayScore(score.overallScore - penalty + bonus);
 }
 
-function fitTier(displayScore: number): { label: string; tone: ChipTone; className: string } {
+function fitTier(displayScore: number, t?: Translation): { label: string; tone: ChipTone; className: string } {
   if (displayScore >= 85) {
     return {
-      label: "Excellent fit",
+      label: t ? t("tiers.excellent") : "Excellent fit",
       tone: "calm",
       className: "border-emerald-200 bg-emerald-50 text-[#106b43]",
     };
   }
   if (displayScore >= 75) {
     return {
-      label: "Strong fit",
+      label: t ? t("tiers.strong") : "Strong fit",
       tone: "calm",
       className: "border-emerald-100 bg-emerald-50 text-[#106b43]",
     };
   }
   if (displayScore >= 65) {
     return {
-      label: "Good with trade-offs",
+      label: t ? t("tiers.good") : "Good with trade-offs",
       tone: "soft",
       className: "border-slate-200 bg-slate-50 text-slate-700",
     };
   }
   if (displayScore >= 55) {
     return {
-      label: "Situational",
+      label: t ? t("tiers.situational") : "Situational",
       tone: "warn",
       className: "border-amber-100 bg-amber-50 text-amber-800",
     };
   }
   return {
-    label: "Hard for first-time / luggage-heavy trips",
+    label: t ? t("tiers.hard") : "Hard for first-time / luggage-heavy trips",
     tone: "alert",
     className: "border-rose-100 bg-rose-50 text-rose-700",
   };
@@ -343,12 +341,35 @@ function statusLabel(status: SignalsSourceEntry["status"]): string {
   return "Failed";
 }
 
-function matchLabelTone(label: StayAreaMatchLabel): { text: string; cls: string } {
+function displayStatus(label: string, t: Translation): string {
+  if (label === "Success") return t("status.success");
+  if (label === "Partial") return t("status.partial");
+  if (label === "Skipped") return t("status.skipped");
+  if (label === "Optional") return t("status.optional");
+  if (label === "Not live yet") return t("status.notLiveYet");
+  if (label === "Editorial signal") return t("status.editorialSignal");
+  if (label === "Active") return t("status.active");
+  if (label === "Next") return t("status.next");
+  if (label === "Editorial fallback") return t("status.editorialFallback");
+  return label;
+}
+
+function crowdLabelKey(label: ReturnType<typeof crowdLevelFromPercentile>["label"]): "low" | "medium" | "high" | "veryHigh" | "unknown" {
+  if (label === "Very High") return "veryHigh";
+  return label.toLowerCase() as "low" | "medium" | "high" | "unknown";
+}
+
+function stepFreeLabelKey(label: ReturnType<typeof stepFreeDisplay>["label"]): "known" | "partial" | "notLiveYet" {
+  if (label === "Not live yet") return "notLiveYet";
+  return label.toLowerCase() as "known" | "partial";
+}
+
+function matchLabelTone(label: StayAreaMatchLabel, t?: Translation): { text: string; cls: string } {
   if (label === "public-data-matched")
-    return { text: "Public data matched", cls: "bg-emerald-50 text-[#106b43] border-emerald-100" };
+    return { text: t ? t("matchLabels.publicDataMatched") : "Public data matched", cls: "bg-emerald-50 text-[#106b43] border-emerald-100" };
   if (label === "partial-public-data")
-    return { text: "Partial public data", cls: "bg-amber-50 text-amber-800 border-amber-100" };
-  return { text: "Editorial fallback", cls: "bg-slate-100 text-slate-600 border-slate-200" };
+    return { text: t ? t("matchLabels.partialPublicData") : "Partial public data", cls: "bg-amber-50 text-amber-800 border-amber-100" };
+  return { text: t ? t("matchLabels.editorialFallback") : "Editorial fallback", cls: "bg-slate-100 text-slate-600 border-slate-200" };
 }
 
 // ---------- station-usability chip helpers --------------------------------
@@ -438,12 +459,12 @@ function lodgingChipTone(level: LodgingDensityLevel): ChipTone {
   return "warn";
 }
 
-function hotelChoiceShortLabel(level: LodgingDensityLevel): string {
+function hotelChoiceShortLabelKey(level: LodgingDensityLevel): "veryDense" | "many" | "some" | "limited" {
   switch (level) {
-    case "Very High": return "Very dense";
-    case "High": return "Many";
-    case "Medium": return "Some";
-    case "Low": return "Limited";
+    case "Very High": return "veryDense";
+    case "High": return "many";
+    case "Medium": return "some";
+    case "Low": return "limited";
   }
 }
 
@@ -488,17 +509,17 @@ function networkComplexityLabel(signal: NetworkComplexitySignal): string {
   return `${formatHyphenLabel(signal.railNetworkType)} ${formatHyphenLabel(signal.terminalType)}`;
 }
 
-function activeAccessBadge(area: StayAreaBase, filter: FilterKey): string | null {
+function activeAccessBadge(area: StayAreaBase, filter: FilterKey, t?: Translation): string | null {
   const profiles = area.accessProfiles;
   if (!profiles) return null;
   if (filter === "narita-arrival" && (profiles.narita.level === "Excellent" || profiles.narita.level === "Good")) {
-    return profiles.narita.level === "Excellent" ? "Strong Narita access" : "Good Narita access";
+    return profiles.narita.level === "Excellent" ? (t ? t("accessBadges.strongNarita") : "Strong Narita access") : (t ? t("accessBadges.goodNarita") : "Good Narita access");
   }
   if (filter === "haneda-arrival" && (profiles.haneda.level === "Excellent" || profiles.haneda.level === "Good")) {
-    return profiles.haneda.level === "Excellent" ? "Strong Haneda access" : "Good Haneda arrival";
+    return profiles.haneda.level === "Excellent" ? (t ? t("accessBadges.strongHaneda") : "Strong Haneda access") : (t ? t("accessBadges.goodHaneda") : "Good Haneda arrival");
   }
   if (filter === "shinkansen" && (profiles.shinkansen.level === "Excellent" || profiles.shinkansen.level === "Good")) {
-    return "Shinkansen-friendly";
+    return t ? t("accessBadges.shinkansenFriendly") : "Shinkansen-friendly";
   }
   return null;
 }
@@ -568,10 +589,12 @@ function StationUsabilityPanel({
   area,
   signal,
   contribution,
+  t,
 }: {
   area: StayAreaBase;
   signal: StayAreaSignalsFile["areas"][string] | undefined;
   contribution: ComputedStayAreaScore["usabilityContribution"];
+  t: Translation;
 }) {
   const percentile = signal?.passengerSignal?.crowdPercentile ?? null;
   const passengerStatus = signal?.passengerSignal?.status;
@@ -581,35 +604,38 @@ function StationUsabilityPanel({
     <div className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
       <div className="flex items-center gap-2 text-[#106b43]">
         <Users className="h-4 w-4" aria-hidden="true" />
-        <h3 className="text-sm font-semibold text-slate-950">Station usability</h3>
+        <h3 className="text-sm font-semibold text-slate-950">{t("stationUsability.title")}</h3>
       </div>
       <div className="mt-2 grid">
         <StationUsabilityRow
-          label="Passenger volume percentile"
+          label={t("stationUsability.passenger")}
           value={
             percentile == null
-              ? "Unknown"
-              : `${(percentile * 100).toFixed(0)}th · ${crowd.label}`
+              ? t("common.unknown")
+              : t("stationUsability.passengerValue", { percentile: (percentile * 100).toFixed(0), crowd: t(`crowd.${crowdLabelKey(crowd.label)}`) })
           }
           hint={
             signal?.passengerSignal?.value
-              ? `Aggregated ${signal.passengerSignal.value.toLocaleString()} (${(signal.passengerSignal.operatorSources ?? []).join(", ")})`
+              ? t("stationUsability.passengerAggregated", { count: signal.passengerSignal.value.toLocaleString(), sources: (signal.passengerSignal.operatorSources ?? []).join(", ") })
               : passengerStatus === "skipped"
-                ? "Source skipped this run."
-                : "No passenger data matched this area."
+                ? t("stationUsability.sourceSkipped")
+                : t("stationUsability.noPassengerData")
           }
         />
         {(() => {
           const ex = exitComplexityDisplay(signal, area.exitComplexityLevel);
           const detail =
             ex.fromData && ex.exitCount != null
-              ? `${ex.exitCount} exits detected${ex.coverage < 1 ? ` (partial — ${Math.round(ex.coverage * 100)}% station coverage)` : ""}. Tokyo Metro live exit feed.`
-              : "Editorial fallback (no live exit feed matched this area).";
+              ? t("stationUsability.exitDataHint", {
+                  exits: ex.exitCount,
+                  coverage: ex.coverage < 1 ? t("stationUsability.partialCoverage", { coverage: Math.round(ex.coverage * 100) }) : "",
+                })
+              : t("stationUsability.exitFallbackHint");
           return (
             <StationUsabilityRow
-              label="Exit / entrance complexity"
-              value={ex.level}
-              hint={`${detail} · Contribution: ${contribution.exitComplexity >= 0 ? "+" : ""}${contribution.exitComplexity}`}
+                label={t("stationUsability.exit")}
+                value={ex.level}
+                hint={`${detail} · ${t("stationUsability.contribution", { value: `${contribution.exitComplexity >= 0 ? "+" : ""}${contribution.exitComplexity}` })}`}
             />
           );
         })()}
@@ -619,49 +645,49 @@ function StationUsabilityPanel({
           return (
             <>
               <StationUsabilityRow
-                label="Lines / operators"
-                value={`${network.lineCount} lines · ${network.operatorCount} operators`}
+                label={t("stationUsability.linesOperators")}
+                value={t("stationUsability.linesOperatorsValue", { lines: network.lineCount, operators: network.operatorCount })}
                 hint={
                   network.operatorGroups.length > 0
-                    ? `Operator groups: ${network.operatorGroups.join(", ")}.`
-                    : "Operator groups are inferred from curated line names."
+                    ? t("stationUsability.operatorGroups", { groups: network.operatorGroups.join(", ") })
+                    : t("stationUsability.operatorGroupsInferred")
                 }
               />
               <StationUsabilityRow
-                label="Terminal type"
+                label={t("stationUsability.terminalType")}
                 value={formatHyphenLabel(network.terminalType)}
-                hint={`Multi-operator: ${network.multiOperatorFlag ? "yes" : "no"}.`}
+                hint={t("stationUsability.multiOperator", { value: network.multiOperatorFlag ? t("common.yes") : t("common.no") })}
               />
               <StationUsabilityRow
-                label="Network complexity"
+                label={t("stationUsability.networkComplexity")}
                 value={networkComplexityLabel(network)}
-                hint={`Contribution: ${network.scoreContribution >= 0 ? "+" : ""}${network.scoreContribution}. ${network.message}`}
+                hint={`${t("stationUsability.contribution", { value: `${network.scoreContribution >= 0 ? "+" : ""}${network.scoreContribution}` })}. ${network.message}`}
               />
             </>
           );
         })()}
         <StationUsabilityRow
-          label="Transfer hub penalty"
+          label={t("stationUsability.transferPenalty")}
           value={area.transferHubLevel}
-          hint={`Contribution: ${contribution.transferHub >= 0 ? "+" : ""}${contribution.transferHub}`}
+          hint={t("stationUsability.contribution", { value: `${contribution.transferHub >= 0 ? "+" : ""}${contribution.transferHub}` })}
         />
         {(() => {
           const sf = signal?.stepFreeSignal;
           const display = stepFreeDisplay(signal, area.stepFreeConfidence);
-          let hint = "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal.";
+          let hint = t("stationUsability.stepFreeDefaultHint");
           if (sf?.status === "success" || sf?.status === "partial") {
             hint = `${sf.message ?? ""} Sources: ${sf.sourceIds.join(", ") || "—"}.`;
           } else if (area.stepFreeConfidence !== "Unknown") {
-            hint = "Editorial confidence label (no live source matched this area).";
+            hint = t("stationUsability.stepFreeEditorialHint");
           }
-          return <StationUsabilityRow label="Step-free / elevator route" value={display.label} hint={hint} />;
+          return <StationUsabilityRow label={t("stationUsability.stepFree")} value={t(`stepFree.${stepFreeLabelKey(display.label)}`)} hint={hint} />;
         })()}
         <StationUsabilityRow
-          label="Hotel choice density"
-          value={signal?.lodgingDensitySignal?.hotelChoiceLabel ?? hotelChoiceShortLabel(area.lodgingDensityLevel)}
+          label={t("stationUsability.hotelChoice")}
+          value={signal?.lodgingDensitySignal?.hotelChoiceLabel ?? t(`hotelChoice.${hotelChoiceShortLabelKey(area.lodgingDensityLevel)}`)}
           hint={
             signal?.lodgingDensitySignal?.message ??
-            "Editorial hotel-choice-density signal only. This does not rank individual hotels or show live availability."
+            t("stationUsability.hotelChoiceHint")
           }
         />
       </div>
@@ -669,27 +695,27 @@ function StationUsabilityPanel({
   );
 }
 
-function AirportShinkansenAccessPanel({ area }: { area: StayAreaBase }) {
+function AirportShinkansenAccessPanel({ area, t }: { area: StayAreaBase; t: Translation }) {
   const profiles = area.accessProfiles;
   if (!profiles) return null;
   return (
     <div className="mt-5 rounded-2xl border border-orange-100 bg-orange-50/60 p-4">
       <div className="flex items-center gap-2 text-orange-700">
         <Plane className="h-4 w-4" aria-hidden="true" />
-        <h3 className="text-sm font-semibold text-slate-950">Airport / Shinkansen access</h3>
+        <h3 className="text-sm font-semibold text-slate-950">{t("access.title")}</h3>
       </div>
       <p className="mt-2 text-xs leading-5 text-slate-600">
-        Route logic, not live timetable data. Check current trains before travel.
+        {t("access.body")}
       </p>
       <div className="mt-2 grid">
         <StationUsabilityRow
           label="Narita"
-          value={`${profiles.narita.level} · ${profiles.narita.transferCountLabel} transfers`}
+          value={t("access.transferValue", { level: profiles.narita.level, count: profiles.narita.transferCountLabel })}
           hint={profiles.narita.note}
         />
         <StationUsabilityRow
           label="Haneda"
-          value={`${profiles.haneda.level} · ${profiles.haneda.transferCountLabel} transfers`}
+          value={t("access.transferValue", { level: profiles.haneda.level, count: profiles.haneda.transferCountLabel })}
           hint={profiles.haneda.note}
         />
         <StationUsabilityRow
@@ -705,16 +731,18 @@ function AirportShinkansenAccessPanel({ area }: { area: StayAreaBase }) {
 function SelectedAreaHotelSearch({
   area,
   locale,
+  t,
 }: {
   area: StayAreaBase;
   locale: string;
+  t: Translation;
 }) {
   const hotel = hotelSearchForArea(area);
   if (!hotel) return null;
   const isBroadAreaFallback = hotel.selectedAreaName !== hotel.areaName;
   const heading = isBroadAreaFallback
-    ? `Compare hotels near ${hotel.selectedAreaName}`
-    : `Compare hotels around ${hotel.areaName}`;
+    ? t("hotelSearch.headingNear", { area: hotel.selectedAreaName })
+    : t("hotelSearch.headingAround", { area: hotel.areaName });
 
   return (
     <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
@@ -724,8 +752,8 @@ function SelectedAreaHotelSearch({
       </div>
       <p className="mt-2 text-xs leading-5 text-slate-600">
         {isBroadAreaFallback
-          ? `Broad area search only. No dedicated ${hotel.selectedAreaName} hotel URL is set yet, so this opens the nearest existing broad search area: ${hotel.areaName}. Check exact station distance, room size, bed setup, and latest price on the provider site.`
-          : "Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site."}
+          ? t("hotelSearch.fallbackNote", { selected: hotel.selectedAreaName, area: hotel.areaName })
+          : t("hotelSearch.note")}
       </p>
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         {hotel.providers.map((provider) => (
@@ -744,7 +772,7 @@ function SelectedAreaHotelSearch({
             fullWidth
             className="min-h-11 rounded-xl text-sm"
           >
-            {provider.label}
+            {t(`hotelSearch.providers.${provider.provider}`)}
           </ProviderButton>
         ))}
       </div>
@@ -753,12 +781,12 @@ function SelectedAreaHotelSearch({
           href="/local-hotel-picks#hotel-examples-matrix"
           sourcePage={pagePath}
           placement="tokyo_stay_area_index_selected_hotel_search"
-          label="See local hotel examples"
+          label={t("hotelSearch.examples")}
           locale={locale}
           areaId={area.id}
           className="inline-flex min-h-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100"
         >
-          See local hotel examples
+          {t("hotelSearch.examples")}
         </TrackedStayAreaContinueLink>
       </div>
     </div>
@@ -771,20 +799,22 @@ function AreaDetailPanel({
   signal,
   displayScore,
   locale,
+  t,
 }: {
   area: StayAreaBase;
   score: ComputedStayAreaScore;
   signal: StayAreaSignalsFile["areas"][string] | undefined;
   displayScore: number;
   locale: string;
+  t: Translation;
 }) {
-  const tone = matchLabelTone(score.matchLabel);
-  const tier = fitTier(displayScore);
+  const tone = matchLabelTone(score.matchLabel, t);
+  const tier = fitTier(displayScore, t);
   return (
     <section id="selected-area" className="scroll-mt-24 rounded-[24px] border border-orange-200 bg-white p-5 shadow-[0_18px_45px_rgba(15,23,42,0.08)] ring-4 ring-orange-50 lg:sticky lg:top-24">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Selected area</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">{t("selected.eyebrow")}</p>
           <h2 className="mt-1 text-2xl font-semibold text-slate-950">{area.displayName}</h2>
           <p className="mt-1 text-sm text-slate-500">
             {area.japaneseName} · {area.areaGroup}
@@ -805,26 +835,26 @@ function AreaDetailPanel({
       </div>
       <p className="mt-4 text-sm leading-6 text-slate-700">{area.editorial.overallLabel}</p>
 
-      <SelectedAreaHotelSearch area={area} locale={locale} />
+      <SelectedAreaHotelSearch area={area} locale={locale} t={t} />
 
       <div className="mt-5 grid gap-2">
         {scoreLabels.map(({ key, label }) => (
-          <ScoreBar key={key} label={label} value={score.scores[key]} />
+          <ScoreBar key={key} label={t(`scoreLabels.${label}`)} value={score.scores[key]} />
         ))}
       </div>
 
-      <StationUsabilityPanel area={area} signal={signal} contribution={score.usabilityContribution} />
-      <AirportShinkansenAccessPanel area={area} />
+      <StationUsabilityPanel area={area} signal={signal} contribution={score.usabilityContribution} t={t} />
+      <AirportShinkansenAccessPanel area={area} t={t} />
 
       <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-1">
         <div>
-          <h3 className="text-sm font-semibold text-slate-950">Best for</h3>
+          <h3 className="text-sm font-semibold text-slate-950">{t("selected.bestFor")}</h3>
           <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
             {area.editorial.bestFor.map((item) => (<li key={item}>· {item}</li>))}
           </ul>
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-slate-950">Watch out</h3>
+          <h3 className="text-sm font-semibold text-slate-950">{t("selected.watchOut")}</h3>
           <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
             {area.editorial.watchOut.map((item) => (<li key={item}>· {item}</li>))}
           </ul>
@@ -832,14 +862,14 @@ function AreaDetailPanel({
       </div>
 
       <div className="mt-5 rounded-2xl border border-emerald-100 bg-emerald-50/70 p-4">
-        <h3 className="text-sm font-semibold text-slate-950">Why this area ranks high</h3>
+        <h3 className="text-sm font-semibold text-slate-950">{t("selected.why")}</h3>
         <p className="mt-2 text-sm leading-6 text-slate-700">{area.editorial.editorialNote}</p>
       </div>
       <p className="mt-4 text-xs leading-5 text-slate-500">
-        Confidence: {score.confidence.label} ({score.confidence.score}/100) · Data freshness: {score.sourceFreshness.label}
+        {t("selected.confidence", { label: score.confidence.label, score: score.confidence.score, freshness: score.sourceFreshness.label })}
       </p>
       <p className="mt-2 text-xs leading-5 text-slate-500">
-        Display fit score adjusts the raw blended score ({score.overallScore}) for station complexity and crowd trade-offs.
+        {t("selected.displayScoreNote", { score: score.overallScore })}
       </p>
     </section>
   );
@@ -853,6 +883,7 @@ function AreaRankRow({
   activeFilter,
   href,
   displayScore,
+  t,
 }: {
   rank: number;
   area: StayAreaBase;
@@ -861,11 +892,12 @@ function AreaRankRow({
   activeFilter: FilterKey;
   href: string;
   displayScore: number;
+  t: Translation;
 }) {
   const crowd = crowdLevelFromPercentile(signal?.passengerSignal?.crowdPercentile ?? null);
-  const accessBadge = activeAccessBadge(area, activeFilter);
+  const accessBadge = activeAccessBadge(area, activeFilter, t);
   const exit = exitComplexityDisplay(signal, area.exitComplexityLevel);
-  const tier = fitTier(displayScore);
+  const tier = fitTier(displayScore, t);
   return (
     <TrackedStayAreaDetailLink
       href={href}
@@ -890,23 +922,23 @@ function AreaRankRow({
               {area.stationNames.slice(0, 3).join(" / ")} · {area.areaGroup}
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-1.5">
-              <Chip label="Fit" value={tier.label} tone={tier.tone} />
-              <Chip label="Crowd" value={crowd.label} tone={crowd.tone} />
-              {accessBadge ? <Chip label="Priority" value={accessBadge} tone="calm" /> : null}
+              <Chip label={t("rank.chips.fit")} value={tier.label} tone={tier.tone} />
+              <Chip label={t("rank.chips.crowd")} value={t(`crowd.${crowdLabelKey(crowd.label)}`)} tone={crowd.tone} />
+              {accessBadge ? <Chip label={t("rank.chips.priority")} value={accessBadge} tone="calm" /> : null}
               <Chip
-                label="Complexity"
+                label={t("rank.chips.complexity")}
                 value={exit.level}
                 tone={complexityChipTone(exit.level)}
               />
               {(() => {
                 const sf = stepFreeDisplay(signal, area.stepFreeConfidence);
                 return (
-                  <Chip label="Luggage route" value={sf.label} tone={sf.tone} hideOnMobile />
+                  <Chip label={t("rank.chips.luggageRoute")} value={t(`stepFree.${stepFreeLabelKey(sf.label)}`)} tone={sf.tone} hideOnMobile />
                 );
               })()}
               <Chip
-                label="Hotel choice"
-                value={hotelChoiceShortLabel(area.lodgingDensityLevel)}
+                label={t("rank.chips.hotelChoice")}
+                value={t(`hotelChoice.${hotelChoiceShortLabelKey(area.lodgingDensityLevel)}`)}
                 tone={lodgingChipTone(area.lodgingDensityLevel)}
                 hideOnMobile
               />
@@ -914,15 +946,15 @@ function AreaRankRow({
           </div>
         </div>
         <div className="grid grid-cols-2 gap-2 text-xs md:grid-cols-3 md:text-center">
-          <Metric label="Fit score" value={displayScore} strong />
-          <Metric label="Station" value={score.scores.stationSimplicity} />
-          <Metric label="Luggage" value={score.scores.luggageFriendly} />
+          <Metric label={t("rank.metrics.fitScore")} value={displayScore} strong />
+          <Metric label={t("rank.metrics.station")} value={score.scores.stationSimplicity} />
+          <Metric label={t("rank.metrics.luggage")} value={score.scores.luggageFriendly} />
         </div>
       </div>
       <p className="mt-3 text-sm leading-6 text-slate-700">{area.editorial.overallLabel}</p>
       {area.editorial.bestFor.length > 0 && (
         <p className="mt-2 text-xs leading-5 text-slate-500">
-          Best for: {area.editorial.bestFor.slice(0, 3).join(" · ")}
+          {t("rank.bestFor", { items: area.editorial.bestFor.slice(0, 3).join(" · ") })}
         </p>
       )}
     </TrackedStayAreaDetailLink>
@@ -991,62 +1023,64 @@ function StationSignalTiles({
   core,
   passengerSummary,
   generatedScoreCount,
+  t,
 }: {
   core: ReturnType<typeof deriveCoreSignals>;
   passengerSummary: string;
   generatedScoreCount: number;
+  t: Translation;
 }) {
   return (
     <div className="mt-4 grid gap-3 sm:grid-cols-2">
       <SignalTile
         icon={Users}
-        title="Passenger volume"
-        status={core.passengerStatus.label}
+        title={t("signalTiles.passenger.title")}
+        status={displayStatus(core.passengerStatus.label, t)}
         statusTone={core.passengerStatus.tone}
         body={passengerSummary}
       />
       <SignalTile
         icon={DoorOpen}
-        title="Exit / entrance complexity"
-        status={core.exitStatus.label}
+        title={t("signalTiles.exit.title")}
+        status={displayStatus(core.exitStatus.label, t)}
         statusTone={core.exitStatus.tone}
         body={
           core.exitMatchedAreas > 0
-            ? `Tokyo Metro exit feed parsed — ${core.exitMatchedAreas} of ${generatedScoreCount} areas use a bucketed open-exit count. Areas without Tokyo Metro coverage use the editorial level.`
-            : "Editorial tags explain station scale. This affects station simplicity and lightly affects luggage friendliness."
+            ? t("signalTiles.exit.bodyMatched", { matched: core.exitMatchedAreas, count: generatedScoreCount })
+            : t("signalTiles.exit.bodyFallback")
         }
       />
       <SignalTile
         icon={Train}
-        title="Line / operator complexity"
-        status="Active from area data"
+        title={t("signalTiles.lines.title")}
+        status={t("status.activeFromAreaData")}
         statusTone="calm"
-        body="Derived from curated station lines, operator groups, transfer-hub level, and mega-terminal tags."
+        body={t("signalTiles.lines.body")}
       />
       <SignalTile
         icon={Luggage}
-        title="Step-free / elevator route"
-        status={core.stepFree.label}
+        title={t("signalTiles.stepFree.title")}
+        status={displayStatus(core.stepFree.label, t)}
         statusTone={core.stepFree.tone}
         body={
           core.stepFreeAreas > 0
-            ? `Toei barrier-free CSVs parsed — ${core.stepFreeAreas} of ${generatedScoreCount} areas have a confirmed step-free route. Missing data is not penalised.`
-            : "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal."
+            ? t("signalTiles.stepFree.bodyMatched", { matched: core.stepFreeAreas, count: generatedScoreCount })
+            : t("signalTiles.stepFree.bodyFallback")
         }
       />
       <SignalTile
         icon={Plane}
-        title="Airport / Shinkansen access"
-        status="Route logic"
+        title={t("signalTiles.access.title")}
+        status={t("status.routeLogic")}
         statusTone="calm"
-        body="Curated route logic explains Narita, Haneda, Tokyo Station, Shinagawa, and Shinkansen fit. No live timetable data is implied."
+        body={t("signalTiles.access.body")}
       />
       <SignalTile
         icon={Building2}
-        title="Hotel choice density"
-        status={core.lodgingStatus.label}
+        title={t("signalTiles.hotelChoice.title")}
+        status={displayStatus(core.lodgingStatus.label, t)}
         statusTone={core.lodgingStatus.tone}
-        body="Editorial hotel-choice signal. It does not rank individual hotels and does not show live availability."
+        body={t("signalTiles.hotelChoice.body")}
       />
     </div>
   );
@@ -1129,6 +1163,7 @@ function deriveCoreSignals(
 export default async function TokyoStayAreaIndexPage({ params, searchParams }: Props) {
   const { locale } = await params;
   const { filter, area } = await searchParams;
+  const t = await getTranslations({ locale, namespace: "tokyoStayAreaIndex" });
   const activeFilter = parseFilter(filter);
 
   const baselineScores = scoresFile.areas;
@@ -1167,87 +1202,77 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
       <Container className="py-8 md:py-12">
         <Breadcrumb
           items={[
-            { label: "Home", href: "/" },
-            { label: "Areas to stay", href: "/areas-to-stay" },
-            { label: "Tokyo Hotel Area Finder" },
+            { label: t("breadcrumb.home"), href: "/" },
+            { label: t("breadcrumb.parent"), href: "/areas-to-stay" },
+            { label: t("breadcrumb.current") },
           ]}
         />
 
         <section className="mt-6 overflow-hidden rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
           <p className="inline-flex rounded-full border border-orange-200 bg-orange-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-orange-700">
-            Tokyo hotel area finder
+            {t("hero.eyebrow")}
           </p>
           <div className="mt-5 grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <div>
-              <h1 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">Tokyo Hotel Area Finder</h1>
+              <h1 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">{t("hero.title")}</h1>
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-                Compare 36 Tokyo station areas before booking hotels. The finder uses fujiseat&apos;s station-area logic
-                to help you weigh luggage stress, airport arrival, Shinkansen days, station complexity, quieter nights,
-                and broad hotel choice before opening booking sites.
+                {t("hero.body")}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                {[
-                  "Station complexity",
-                  "Luggage stress",
-                  "Airport access",
-                  "Shinkansen fit",
-                  "Hotel choice density",
-                ].map((signal) => (
+                {(t.raw("hero.signals") as string[]).map((signal) => (
                   <span key={signal} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-600">
                     {signal}
                   </span>
                 ))}
               </div>
               <p className="mt-3 max-w-3xl text-xs leading-5 text-slate-500">
-                Scores are editorial travel-fit scores informed by public data signals where available. They are not
-                official ratings, hotel rankings, or guarantees of price, comfort, availability, or route conditions.
+                {t("hero.disclaimer")}
               </p>
               <p className="mt-4 text-sm font-semibold text-[#106b43]">
-                {FRESHNESS_HEADLINE} · Last source check: {lastChecked}
+                {t("hero.freshness", { date: lastChecked })}
               </p>
             </div>
             <a
               href="#ranked-areas"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#ff7a00] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#e66700]"
             >
-              Find hotel-area fit
+              {t("hero.cta")}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
           </div>
         </section>
 
         <section className="mt-6 rounded-[22px] border border-orange-100 bg-orange-50/60 p-5 shadow-sm">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-orange-700">Start by travel situation</p>
-          <h2 className="mt-1 text-xl font-semibold text-slate-950">Choose the hotel-area problem first</h2>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-orange-700">{t("situations.eyebrow")}</p>
+          <h2 className="mt-1 text-xl font-semibold text-slate-950">{t("situations.title")}</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
-            Pick the situation closest to your trip. Filters re-rank the same area data; guide links help when the
-            question needs more context than a score.
+            {t("situations.body")}
           </p>
           <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { href: "/areas-to-stay/tokyo-first-time", title: "First time in Tokyo", body: "Compare famous bases and calmer nearby areas.", label: "Tokyo first-time guide" },
-              { href: filterHref(locale, "narita-arrival"), title: "Narita arrival", body: "Highlight areas that fit Narita-side arrival logic.", label: "Filter Narita arrival" },
-              { href: filterHref(locale, "haneda-arrival"), title: "Haneda arrival", body: "Highlight areas that work better with Haneda.", label: "Filter Haneda arrival" },
-              { href: filterHref(locale, "shinkansen"), title: "Early Shinkansen", body: "Prioritize Tokyo / Shinagawa / Ueno rail logistics.", label: "Filter Shinkansen fit" },
-              { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", title: "Large luggage", body: "Use room size, elevators, and walking distance logic.", label: "Luggage guide" },
-              { href: filterHref(locale, "avoid-giant-stations"), title: "Avoid giant stations", body: "Lift calmer bases with lower station-complexity stress.", label: "Filter calmer bases" },
-              { href: "/local-tokyo", title: "Local Tokyo / quieter base", body: "Use local neighborhood guides after narrowing the area.", label: "Local Tokyo" },
-              { href: "/local-hotel-picks#hotel-examples-matrix", title: "Need hotel examples", body: "View examples after choosing the broad station area.", label: "Hotel examples" },
+              { key: "firstTime", href: "/areas-to-stay/tokyo-first-time" },
+              { key: "narita", href: filterHref(locale, "narita-arrival") },
+              { key: "haneda", href: filterHref(locale, "haneda-arrival") },
+              { key: "shinkansen", href: filterHref(locale, "shinkansen") },
+              { key: "luggage", href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage" },
+              { key: "avoidStations", href: filterHref(locale, "avoid-giant-stations") },
+              { key: "localTokyo", href: "/local-tokyo" },
+              { key: "hotelExamples", href: "/local-hotel-picks#hotel-examples-matrix" },
             ].map((item) => (
               <TrackedStayAreaContinueLink
-                key={item.title}
+                key={item.key}
                 href={item.href}
                 sourcePage={pagePath}
                 placement="tokyo_stay_area_index_situation"
-                label={item.label}
+                label={t(`situations.cards.${item.key}.label`)}
                 locale={locale}
                 areaId={selected.area.id}
                 className="group rounded-2xl border border-orange-100 bg-white p-4 text-left shadow-sm transition-colors hover:bg-orange-50"
               >
-                <span className="block text-sm font-semibold text-slate-950 group-hover:text-[#c45500]">{item.title}</span>
-                <span className="mt-1.5 block text-xs leading-5 text-slate-600">{item.body}</span>
+                <span className="block text-sm font-semibold text-slate-950 group-hover:text-[#c45500]">{t(`situations.cards.${item.key}.title`)}</span>
+                <span className="mt-1.5 block text-xs leading-5 text-slate-600">{t(`situations.cards.${item.key}.body`)}</span>
                 <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#c45500]">
-                  {item.label}
+                  {t(`situations.cards.${item.key}.label`)}
                   <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
                 </span>
               </TrackedStayAreaContinueLink>
@@ -1267,11 +1292,14 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           <div id="ranked-areas" className="scroll-mt-24">
             <div className="flex items-end justify-between gap-4">
               <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Decision list</p>
-                <h2 className="mt-1 text-2xl font-semibold text-slate-950">Station-area fit and trade-offs</h2>
+                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">{t("decisionList.eyebrow")}</p>
+                <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("decisionList.title")}</h2>
               </div>
               <p className="hidden text-xs font-semibold text-slate-500 md:block">
-                {generatedScoreCount} areas · filter: {FILTERS.find((f) => f.key === activeFilter)?.label ?? "All areas"}
+                {t("decisionList.count", {
+                  count: generatedScoreCount,
+                  filter: activeFilter === "all" ? t("filters.all") : t(`filters.${activeFilter}`),
+                })}
               </p>
             </div>
             <div className="mt-4 grid gap-3">
@@ -1285,6 +1313,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
                   activeFilter={activeFilter}
                   href={areaDetailHref(locale, activeFilter, area.id)}
                   displayScore={displayScore}
+                  t={t}
                 />
               ))}
             </div>
@@ -1295,12 +1324,13 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
             signal={selected.signal}
             displayScore={selected.displayScore}
             locale={locale}
+            t={t}
           />
         </section>
 
         <section className="mt-10">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Featured area cards</p>
-          <h2 className="mt-1 text-2xl font-semibold text-slate-950">Good starting points for many travelers</h2>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">{t("featured.eyebrow")}</p>
+          <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("featured.title")}</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
             {featuredIds.map((id) => (
               <FeaturedAreaCard key={id} area={areaById(id)} score={scoreById.get(id) ?? selected.score} />
@@ -1312,49 +1342,37 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
             <div className="flex items-center gap-2 text-[#106b43]">
               <BarChart3 className="h-5 w-5" aria-hidden="true" />
-              <h2 className="text-xl font-semibold text-slate-950">How scores work</h2>
+              <h2 className="text-xl font-semibold text-slate-950">{t("methodology.title")}</h2>
             </div>
             <div className="mt-4 space-y-3 text-sm leading-6 text-slate-700">
-              <p>This compares station areas, not individual hotels.</p>
-              <p>
-                Scores blend a 55% editorial travel-fit baseline, 35% station-usability adjustments
-                (passenger crowd, exit / entrance complexity, line / operator count, transfer-hub penalty),
-                and 10% live status. Each per-sub-score adjustment is capped at ±10.
-              </p>
-              <p>
-                Step-free route confidence is read from Toei&apos;s public barrier-free CSVs where matched, and adds a
-                small positive nudge to luggage-friendliness. Exit / entrance complexity is read from Tokyo
-                Metro&apos;s public per-station exit feed where matched (open exits are counted and bucketed); areas
-                without Tokyo Metro coverage use the editorial level. Missing data is never punished. Hotel choice
-                density is editorial and does not evaluate individual hotels. Scores are not official ratings and
-                do not rank safety, hotel quality, price, or availability.
-              </p>
+              <p>{t("methodology.p1")}</p>
+              <p>{t("methodology.p2")}</p>
+              <p>{t("methodology.p3")}</p>
             </div>
             <div className="mt-4 grid gap-2 sm:grid-cols-2">
-              <InfoCard icon={Users} title="Crowd" body="Passenger-data-informed; high volume lowers crowd-stress." />
-              <InfoCard icon={DoorOpen} title="Complexity" body="Exit / entrance complexity from Tokyo Metro's exit feed where matched, editorial otherwise." />
-              <InfoCard icon={Train} title="Lines" body="More lines / operators lower station simplicity." />
-              <InfoCard icon={Signpost} title="Transfer" body="Transfer-hub penalty hits mega interchanges." />
+              <InfoCard icon={Users} title={t("methodology.cards.crowd.title")} body={t("methodology.cards.crowd.body")} />
+              <InfoCard icon={DoorOpen} title={t("methodology.cards.complexity.title")} body={t("methodology.cards.complexity.body")} />
+              <InfoCard icon={Train} title={t("methodology.cards.lines.title")} body={t("methodology.cards.lines.body")} />
+              <InfoCard icon={Signpost} title={t("methodology.cards.transfer.title")} body={t("methodology.cards.transfer.body")} />
             </div>
             <details className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
               <summary className="cursor-pointer text-sm font-semibold text-slate-950">
-                See score signal details
+                {t("methodology.detailsTitle")}
               </summary>
               <p className="mt-3 text-xs leading-5 text-slate-500">
-                {FRESHNESS_SUBLINE} These details are kept lower on the page so the finder starts with traveler
-                decisions, not source status.
+                {t("methodology.detailsBody")}
               </p>
               <StationSignalTiles
                 core={core}
                 passengerSummary={passengerSummary}
                 generatedScoreCount={generatedScoreCount}
+                t={t}
               />
               <p className="mt-4 text-xs leading-5 text-slate-500">
-                Coverage across {generatedScoreCount} station areas — public data matched: {matchedCount} · partial: {partialCount} · editorial fallback: {fallbackCount}.
+                {t("methodology.coverage", { count: generatedScoreCount, matched: matchedCount, partial: partialCount, fallback: fallbackCount })}
               </p>
               <p className="mt-2 text-xs leading-5 text-slate-500">
-                Some public datasets are catalogued internally but are not used for scoring or displayed as travel
-                claims.
+                {t("methodology.internalDatasets")}
               </p>
             </details>
           </div>
@@ -1362,17 +1380,20 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
             <div className="flex items-center gap-2 text-[#106b43]">
               <MapPin className="h-5 w-5" aria-hidden="true" />
-              <h2 className="text-xl font-semibold text-slate-950">Data freshness / source note</h2>
+              <h2 className="text-xl font-semibold text-slate-950">{t("dataNote.title")}</h2>
             </div>
             <p className="mt-4 text-sm leading-6 text-slate-700">
-              fujiseat.com scores are editorial travel-fit scores informed by passenger data. They are not official
-              ratings and do not guarantee safety, comfort, hotel quality, price, or availability.
+              {t("dataNote.body")}
             </p>
             <p className="mt-3 text-sm leading-6 text-slate-700">
-              Current mode: <span className="font-semibold">{signalsFile.mode}</span>. Last source check: {lastChecked}.
+              {t.rich("dataNote.currentMode", {
+                mode: signalsFile.mode,
+                date: lastChecked,
+                strong: (chunks) => <span className="font-semibold">{chunks}</span>,
+              })}
             </p>
             <div className="mt-4 rounded-2xl bg-slate-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">Source registry</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">{t("dataNote.registryTitle")}</p>
               <ul className="mt-2 space-y-1.5 text-xs leading-5 text-slate-600">
                 {tokyoStayAreaSourceRegistry
                   .filter((source) => source.usedInScore)
@@ -1380,77 +1401,75 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
                   <li key={source.id}>
                     · {source.label}{" "}
                     <span className="text-slate-400">
-                      ({source.expectedUpdateCadence}, {source.status === "live" ? "fetched locally" : "registered only"}
-                      )
+                      ({source.expectedUpdateCadence}, {source.status === "live" ? t("dataNote.fetchedLocally") : t("dataNote.registeredOnly")})
                     </span>
                   </li>
                 ))}
               </ul>
               <p className="mt-3 text-xs leading-5 text-slate-500">
-                Other public datasets may be catalogued internally for future methodology review, but they are not shown
-                here as travel claims and are not used in scoring.
+                {t("dataNote.otherDatasets")}
               </p>
             </div>
           </div>
         </section>
 
         <section className="mt-10 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">Continue planning</h2>
+          <h2 className="text-xl font-semibold text-slate-950">{t("continue.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-5">
             <TrackedStayAreaContinueLink
               href="/areas-to-stay/tokyo-first-time"
               sourcePage={pagePath}
               placement="tokyo_stay_area_index_continue"
-              label="Where to stay in Tokyo for first-time visitors"
+              label={t("continue.links.firstTime")}
               locale={locale}
               areaId={selected.area.id}
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              Where to stay in Tokyo →
+              {t("continue.links.firstTime")} →
             </TrackedStayAreaContinueLink>
             <TrackedStayAreaContinueLink
               href="/airport-transfers"
               sourcePage={pagePath}
               placement="tokyo_stay_area_index_continue"
-              label="Airport transfer hub"
+              label={t("continue.links.airport")}
               locale={locale}
               areaId={selected.area.id}
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              Match airport transfer →
+              {t("continue.links.airport")} →
             </TrackedStayAreaContinueLink>
             <TrackedStayAreaContinueLink
               href="/areas-to-stay/where-to-stay-before-shinkansen"
               sourcePage={pagePath}
               placement="tokyo_stay_area_index_continue"
-              label="Tokyo hotel base before Shinkansen"
+              label={t("continue.links.shinkansen")}
               locale={locale}
               areaId={selected.area.id}
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              Shinkansen hotel base →
+              {t("continue.links.shinkansen")} →
             </TrackedStayAreaContinueLink>
             <TrackedStayAreaContinueLink
               href="/areas-to-stay/where-to-stay-in-tokyo-with-luggage"
               sourcePage={pagePath}
               placement="tokyo_stay_area_index_continue"
-              label="Tokyo hotel area with luggage"
+              label={t("continue.links.luggage")}
               locale={locale}
               areaId={selected.area.id}
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              Luggage-friendly Tokyo base →
+              {t("continue.links.luggage")} →
             </TrackedStayAreaContinueLink>
             <TrackedStayAreaContinueLink
               href="/local-hotel-picks#hotel-examples-matrix"
               sourcePage={pagePath}
               placement="tokyo_stay_area_index_continue"
-              label="Local hotel examples"
+              label={t("continue.links.examples")}
               locale={locale}
               areaId={selected.area.id}
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              See local hotel examples →
+              {t("continue.links.examples")} →
             </TrackedStayAreaContinueLink>
           </div>
         </section>

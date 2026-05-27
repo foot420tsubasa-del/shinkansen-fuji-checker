@@ -3808,5 +3808,302 @@
         ]
       }
     }
+  },
+  "tokyoStayAreaIndex": {
+    "meta": {
+      "title": "Tokyo Hotel Area Finder：订酒店前比较车站区域",
+      "description": "按行李便利度、机场交通、车站复杂度、新干线适合度和酒店选择密度，比较东京36个车站区域。",
+      "ogTitle": "Tokyo Hotel Area Finder",
+      "ogDescription": "订酒店前，用 fujiseat 的车站区域逻辑比较东京住宿区域。"
+    },
+    "breadcrumb": {
+      "home": "首页",
+      "parent": "住宿区域",
+      "current": "Tokyo Hotel Area Finder"
+    },
+    "hero": {
+      "eyebrow": "东京酒店区域查找器",
+      "title": "Tokyo Hotel Area Finder",
+      "body": "订酒店前比较东京36个车站区域。这个工具用 fujiseat 的区域逻辑，帮助你权衡行李压力、机场抵达、新干线日程、车站复杂度、安静夜晚和酒店选择范围。",
+      "signals": [
+        "车站复杂度",
+        "行李压力",
+        "机场交通",
+        "新干线适合度",
+        "酒店选择密度"
+      ],
+      "disclaimer": "分数是编辑型旅行适合度分数，在可用时参考公开数据。它们不是官方评分、酒店排名，也不保证价格、舒适度、空房或路线。",
+      "freshness": "基于乘客数据的本地更新 · 最后检查：{date}",
+      "cta": "寻找酒店区域适合度"
+    },
+    "situations": {
+      "eyebrow": "从旅行情况开始",
+      "title": "先选择酒店区域问题",
+      "body": "Escolha a situação mais próxima da sua viagem. Os filtros reordenam os mesmos dados de áreas; os guias ajudam quando a pergunta precisa de mais contexto que uma pontuação.",
+      "cards": {
+        "firstTime": {
+          "title": "第一次来东京",
+          "body": "比较知名住宿区和更安静的附近区域。",
+          "label": "第一次东京指南"
+        },
+        "narita": {
+          "title": "成田抵达",
+          "body": "突出更适合成田抵达的区域。",
+          "label": "筛选成田"
+        },
+        "haneda": {
+          "title": "羽田抵达",
+          "body": "突出更适合羽田的区域。",
+          "label": "筛选羽田"
+        },
+        "shinkansen": {
+          "title": "早班新干线",
+          "body": "优先考虑 Tokyo / Shinagawa / Ueno 的铁路逻辑。",
+          "label": "筛选新干线"
+        },
+        "luggage": {
+          "title": "大件行李",
+          "body": "参考房间、电梯和步行距离逻辑。",
+          "label": "行李指南"
+        },
+        "avoidStations": {
+          "title": "避开大型车站",
+          "body": "提升更安静、复杂度更低的住宿区。",
+          "label": "筛选安静区域"
+        },
+        "localTokyo": {
+          "title": "本地东京 / 安静住宿区",
+          "body": "缩小区域后再看本地指南。",
+          "label": "本地东京"
+        },
+        "hotelExamples": {
+          "title": "需要酒店示例",
+          "body": "先选大区域，再看酒店示例。",
+          "label": "酒店示例"
+        }
+      }
+    },
+    "filters": {
+      "all": "全部区域",
+      "narita-arrival": "成田抵达",
+      "haneda-arrival": "羽田抵达",
+      "shinkansen": "新干线",
+      "avoid-giant-stations": "避开大型车站"
+    },
+    "decisionList": {
+      "eyebrow": "决策列表",
+      "title": "车站区域适合度与取舍",
+      "count": "{count}个区域 · 筛选：{filter}"
+    },
+    "scoreLabels": {
+      "stationSimplicity": "车站简单度",
+      "luggageFriendly": "行李友好度",
+      "airportAccess": "机场交通",
+      "shinkansenAccess": "新干线交通",
+      "touristAccess": "观光交通",
+      "localFeel": "本地感",
+      "crowdStress": "较少拥挤压力",
+      "lodgingChoice": "酒店选择密度"
+    },
+    "tiers": {
+      "excellent": "非常适合",
+      "strong": "较适合",
+      "good": "有取舍但可用",
+      "situational": "视情况而定",
+      "hard": "第一次 / 大件行李较难"
+    },
+    "matchLabels": {
+      "publicDataMatched": "Dados públicos correspondidos",
+      "partialPublicData": "Dados públicos parciais",
+      "editorialFallback": "Base editorial"
+    },
+    "common": {
+      "unknown": "未知",
+      "yes": "是",
+      "no": "否"
+    },
+    "crowd": {
+      "low": "低",
+      "medium": "中",
+      "high": "高",
+      "veryHigh": "很高",
+      "unknown": "未知"
+    },
+    "stepFree": {
+      "known": "已确认",
+      "partial": "部分",
+      "notLiveYet": "尚无实时数据"
+    },
+    "hotelChoice": {
+      "veryDense": "很密集",
+      "many": "很多",
+      "some": "一些",
+      "limited": "有限"
+    },
+    "selected": {
+      "eyebrow": "已选区域",
+      "bestFor": "适合",
+      "watchOut": "注意",
+      "why": "为什么这个区域较突出",
+      "confidence": "Confiança: {label} ({score}/100) · Atualização: {freshness}",
+      "displayScoreNote": "O score visível ajusta o score bruto ({score}) por complexidade da estação e multidões."
+    },
+    "hotelSearch": {
+      "headingNear": "比较 {area} 附近酒店",
+      "headingAround": "比较 {area} 酒店",
+      "note": "仅为大区域搜索。请在预订网站确认准确车站距离、房间大小、床型和最新价格。",
+      "fallbackNote": "仅为大区域搜索。尚未设置 {selected} 专用链接，因此打开最近的大区域：{area}。请在预订网站确认准确车站距离、房间大小、床型和最新价格。",
+      "providers": {
+        "trip": "在 Trip.com 搜索此区域",
+        "agoda": "在 Agoda 搜索此区域",
+        "klook": "在 Klook 搜索此区域"
+      },
+      "examples": "查看本地酒店示例"
+    },
+    "stationUsability": {
+      "title": "Station usability",
+      "passenger": "Passenger volume percentile",
+      "passengerValue": "{percentile}th · {crowd}",
+      "passengerAggregated": "Aggregated {count} ({sources})",
+      "sourceSkipped": "Source skipped this run.",
+      "noPassengerData": "No passenger data matched this area.",
+      "exit": "Exit / entrance complexity",
+      "exitDataHint": "{exits} exits detected{coverage}. Tokyo Metro live exit feed.",
+      "partialCoverage": " (partial — {coverage}% station coverage)",
+      "exitFallbackHint": "Editorial fallback (no live exit feed matched this area).",
+      "contribution": "Contribution: {value}",
+      "linesOperators": "Lines / operators",
+      "linesOperatorsValue": "{lines} lines · {operators} operators",
+      "operatorGroups": "Operator groups: {groups}.",
+      "operatorGroupsInferred": "Operator groups are inferred from curated line names.",
+      "terminalType": "Terminal type",
+      "multiOperator": "Multi-operator: {value}.",
+      "networkComplexity": "Network complexity",
+      "transferPenalty": "Transfer hub penalty",
+      "stepFree": "Step-free / elevator route",
+      "stepFreeDefaultHint": "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal.",
+      "stepFreeEditorialHint": "Editorial confidence label (no live source matched this area).",
+      "hotelChoice": "Hotel choice density",
+      "hotelChoiceHint": "Editorial hotel-choice-density signal only. This does not rank individual hotels or show live availability."
+    },
+    "access": {
+      "title": "Airport / Shinkansen access",
+      "body": "Route logic, not live timetable data. Check current trains before travel.",
+      "transferValue": "{level} · {count} transfers"
+    },
+    "rank": {
+      "chips": {
+        "fit": "Fit",
+        "crowd": "Crowd",
+        "priority": "Priority",
+        "complexity": "Complexity",
+        "luggageRoute": "Luggage route",
+        "hotelChoice": "Hotel choice"
+      },
+      "metrics": {
+        "fitScore": "Fit score",
+        "station": "Station",
+        "luggage": "Luggage"
+      },
+      "bestFor": "Best for: {items}"
+    },
+    "signalTiles": {
+      "passenger": {
+        "title": "Passenger volume"
+      },
+      "exit": {
+        "title": "Exit / entrance complexity",
+        "bodyMatched": "Tokyo Metro exit feed parsed — {matched} of {count} areas use a bucketed open-exit count. Areas without Tokyo Metro coverage use the editorial level.",
+        "bodyFallback": "Editorial tags explain station scale. This affects station simplicity and lightly affects luggage friendliness."
+      },
+      "lines": {
+        "title": "Line / operator complexity",
+        "body": "Derived from curated station lines, operator groups, transfer-hub level, and mega-terminal tags."
+      },
+      "stepFree": {
+        "title": "Step-free / elevator route",
+        "bodyMatched": "Toei barrier-free CSVs parsed — {matched} of {count} areas have a confirmed step-free route. Missing data is not penalised.",
+        "bodyFallback": "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal."
+      },
+      "access": {
+        "title": "Airport / Shinkansen access",
+        "body": "Curated route logic explains Narita, Haneda, Tokyo Station, Shinagawa, and Shinkansen fit. No live timetable data is implied."
+      },
+      "hotelChoice": {
+        "title": "Hotel choice density",
+        "body": "Editorial hotel-choice signal. It does not rank individual hotels and does not show live availability."
+      }
+    },
+    "status": {
+      "success": "Success",
+      "partial": "Partial",
+      "skipped": "Skipped",
+      "optional": "Optional",
+      "notLiveYet": "Not live yet",
+      "editorialSignal": "Editorial signal",
+      "active": "Active",
+      "next": "Next",
+      "editorialFallback": "Editorial fallback",
+      "activeFromAreaData": "Active from area data",
+      "routeLogic": "Route logic"
+    },
+    "methodology": {
+      "title": "How scores work",
+      "p1": "This compares station areas, not individual hotels.",
+      "p2": "Scores blend a 55% editorial travel-fit baseline, 35% station-usability adjustments (passenger crowd, exit / entrance complexity, line / operator count, transfer-hub penalty), and 10% live status. Each per-sub-score adjustment is capped at ±10.",
+      "p3": "Step-free route confidence is read from Toei's public barrier-free CSVs where matched, and adds a small positive nudge to luggage-friendliness. Exit / entrance complexity is read from Tokyo Metro's public per-station exit feed where matched; areas without Tokyo Metro coverage use the editorial level. Missing data is never punished. Hotel choice density is editorial and does not evaluate individual hotels. Scores are not official ratings and do not rank safety, hotel quality, price, or availability.",
+      "cards": {
+        "crowd": {
+          "title": "Crowd",
+          "body": "Passenger-data-informed; high volume lowers crowd-stress."
+        },
+        "complexity": {
+          "title": "Complexity",
+          "body": "Exit / entrance complexity from Tokyo Metro's exit feed where matched, editorial otherwise."
+        },
+        "lines": {
+          "title": "Lines",
+          "body": "More lines / operators lower station simplicity."
+        },
+        "transfer": {
+          "title": "Transfer",
+          "body": "Transfer-hub penalty hits mega interchanges."
+        }
+      },
+      "detailsTitle": "See score signal details",
+      "detailsBody": "Passenger volume, Toei step-free / elevator data, and Tokyo Metro per-station exit counts refresh when public sources update. These details are kept lower on the page so the finder starts with traveler decisions, not source status.",
+      "coverage": "Coverage across {count} station areas — public data matched: {matched} · partial: {partial} · editorial fallback: {fallback}.",
+      "internalDatasets": "Some public datasets are catalogued internally but are not used for scoring or displayed as travel claims."
+    },
+    "dataNote": {
+      "title": "Data freshness / source note",
+      "body": "fujiseat.com scores are editorial travel-fit scores informed by passenger data. They are not official ratings and do not guarantee safety, comfort, hotel quality, price, or availability.",
+      "currentMode": "Current mode: <strong>{mode}</strong>. Last source check: {date}.",
+      "registryTitle": "Source registry",
+      "fetchedLocally": "fetched locally",
+      "registeredOnly": "registered only",
+      "otherDatasets": "Other public datasets may be catalogued internally for future methodology review, but they are not shown here as travel claims and are not used in scoring."
+    },
+    "featured": {
+      "eyebrow": "Featured area cards",
+      "title": "Good starting points for many travelers"
+    },
+    "continue": {
+      "title": "继续规划",
+      "links": {
+        "firstTime": "东京住哪里",
+        "airport": "匹配机场交通",
+        "shinkansen": "新干线前住宿区域",
+        "luggage": "适合行李的东京区域",
+        "examples": "查看本地酒店示例"
+      }
+    },
+    "accessBadges": {
+      "strongNarita": "成田交通强",
+      "goodNarita": "成田交通好",
+      "strongHaneda": "羽田交通强",
+      "goodHaneda": "羽田交通好",
+      "shinkansenFriendly": "适合新干线"
+    }
   }
 }
