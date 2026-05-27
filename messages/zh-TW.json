@@ -4105,5 +4105,12 @@
       "goodHaneda": "羽田交通好",
       "shinkansenFriendly": "適合新幹線"
     }
+  },
+  "fujiseatAreaLogic": {
+    "eyebrow": "fujiseat 區域邏輯",
+    "title": "為什麼 fujiseat 的區域邏輯不同",
+    "body": "fujiseat 按車站複雜度、行李壓力、機場抵達路線、新幹線日程、更安靜的附近住宿區，以及東京本地視角來比較酒店基地。它不做酒店排名，不編造價格，也不會把最有名的車站自動當成答案。",
+    "finderCta": "開啟 Tokyo Hotel Area Finder",
+    "note": "Tokyo Hotel Area Finder 是一個編輯型旅行適合度工具，在可用時參考車站使用性信號。它不是官方排名。"
   }
 }

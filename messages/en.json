@@ -4183,5 +4183,12 @@
       "goodHaneda": "Good Haneda arrival",
       "shinkansenFriendly": "Shinkansen-friendly"
     }
+  },
+  "fujiseatAreaLogic": {
+    "eyebrow": "fujiseat area logic",
+    "title": "Why fujiseat's area logic is different",
+    "body": "fujiseat compares hotel bases by station complexity, luggage stress, airport arrival route, Shinkansen days, calmer nearby bases, and a local Tokyo perspective. It does not rank hotels, invent prices, or treat the most famous station as the automatic answer.",
+    "finderCta": "Open Tokyo Hotel Area Finder",
+    "note": "The Tokyo Hotel Area Finder is an editorial travel-fit tool informed by station-usability signals where available. It is not an official ranking."
   }
 }
