@@ -468,8 +468,111 @@ function hotelChoiceShortLabelKey(level: LodgingDensityLevel): "veryDense" | "ma
   }
 }
 
-function formatHyphenLabel(value: string): string {
-  return value.replace(/-/g, " ");
+function areaGroupLabel(areaGroup: string, t: Translation): string {
+  const key = areaGroup
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+  return t(`areaGroups.${key}`);
+}
+
+function fitReasonKeys(area: StayAreaBase, score: ComputedStayAreaScore): string[] {
+  const reasons: string[] = [];
+  if (score.scores.airportAccess >= 82) reasons.push("airportAccess");
+  if (score.scores.luggageFriendly >= 82) reasons.push("luggage");
+  if (score.scores.shinkansenAccess >= 82) reasons.push("shinkansen");
+  if (score.scores.stationSimplicity >= 78) reasons.push("stationSimplicity");
+  if (score.scores.localFeel >= 80) reasons.push("localFeel");
+  if (score.scores.touristAccess >= 82) reasons.push("sightseeing");
+  if (area.lodgingDensityLevel === "Very High" || area.lodgingDensityLevel === "High") reasons.push("hotelChoice");
+  if (reasons.length === 0) reasons.push("balancedBase");
+  return [...new Set(reasons)].slice(0, 4);
+}
+
+function watchOutKeys(area: StayAreaBase, score: ComputedStayAreaScore): string[] {
+  const items: string[] = [];
+  if (score.scores.stationSimplicity < 55) items.push("stationComplexity");
+  if (score.scores.crowdStress < 55) items.push("crowds");
+  if (score.scores.airportAccess < 65) items.push("airportTransfers");
+  if (score.scores.shinkansenAccess < 65) items.push("shinkansen");
+  if (area.lodgingDensityLevel === "Low") items.push("limitedHotels");
+  if (score.scores.localFeel < 60) items.push("businesslike");
+  if (items.length === 0) items.push("exactHotelLocation");
+  return [...new Set(items)].slice(0, 4);
+}
+
+function areaSummary(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string {
+  const group = areaGroupLabel(area.areaGroup, t);
+  if (score.scores.luggageFriendly >= 82 && score.scores.airportAccess >= 80) {
+    return t("areaCopy.summaryAirportLuggage", { area: area.displayName, group });
+  }
+  if (score.scores.shinkansenAccess >= 84) {
+    return t("areaCopy.summaryRail", { area: area.displayName, group });
+  }
+  if (score.scores.localFeel >= 80) {
+    return t("areaCopy.summaryLocal", { area: area.displayName, group });
+  }
+  return t("areaCopy.summaryDefault", { area: area.displayName, group });
+}
+
+function areaLocalFeel(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string {
+  if (score.scores.localFeel >= 82) return t("areaCopy.localFeelHigh", { area: area.displayName });
+  if (score.scores.crowdStress >= 78) return t("areaCopy.localFeelCalm", { area: area.displayName });
+  if (score.scores.stationSimplicity < 55 || score.scores.crowdStress < 55) return t("areaCopy.localFeelBusy", { area: area.displayName });
+  return t("areaCopy.localFeelDefault", { area: area.displayName });
+}
+
+function areaWhy(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string {
+  const reasons = fitReasonKeys(area, score).map((key) => t(`areaCopy.reasons.${key}`)).join(", ");
+  return t("areaCopy.why", { area: area.displayName, reasons });
+}
+
+function translatedFitReasons(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string[] {
+  return fitReasonKeys(area, score).map((key) => t(`areaCopy.reasons.${key}`));
+}
+
+function translatedWatchOuts(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string[] {
+  return watchOutKeys(area, score).map((key) => t(`areaCopy.watchOut.${key}`));
+}
+
+function accessLevelLabel(level: AccessRouteProfile["level"], t: Translation): string {
+  return t(`accessLevels.${level.toLowerCase()}`);
+}
+
+function exitLevelLabel(level: ExitComplexityLevel, t: Translation): string {
+  if (level === "Mega station") return t("exitLevels.megaStation");
+  return t(`exitLevels.${level.toLowerCase()}`);
+}
+
+function transferLevelLabel(level: StayAreaBase["transferHubLevel"], t: Translation): string {
+  if (level === "Very High") return t("transferLevels.veryHigh");
+  return t(`transferLevels.${level.toLowerCase()}`);
+}
+
+function terminalTypeLabel(value: NetworkComplexitySignal["terminalType"], t: Translation): string {
+  return t(`terminalTypes.${value.replace(/-/g, "")}`);
+}
+
+function networkComplexityDisplayLabel(signal: NetworkComplexitySignal, t: Translation): string {
+  if (signal.terminalType === "mega-terminal") return t("networkLabels.multiOperatorMegaTerminal");
+  if (signal.railNetworkType === "airport-rail") return t("networkLabels.airportRail", { terminal: terminalTypeLabel(signal.terminalType, t) });
+  if (
+    signal.operatorGroups.includes("Tokyo Metro") &&
+    signal.lineCount >= 5 &&
+    signal.terminalType !== "local-station"
+  ) {
+    return t("networkLabels.subwayHeavyTransfer");
+  }
+  return t("networkLabels.general", { terminal: terminalTypeLabel(signal.terminalType, t) });
+}
+
+function sourceLabel(sourceId: string, t: Translation): string {
+  const key = sourceId.replace(/-/g, "");
+  return t(`sourceLabels.${key}`);
+}
+
+function cadenceLabel(cadence: string, t: Translation): string {
+  return t(`cadences.${cadence}`);
 }
 
 function networkComplexityFallback(
@@ -494,19 +597,6 @@ function networkComplexityFallback(
     scoreContribution: contribution.lineOperator,
     message: "Derived from curated station line data.",
   };
-}
-
-function networkComplexityLabel(signal: NetworkComplexitySignal): string {
-  if (signal.terminalType === "mega-terminal") return "multi-operator mega-terminal";
-  if (signal.railNetworkType === "airport-rail") return `airport-rail ${formatHyphenLabel(signal.terminalType)}`;
-  if (
-    signal.operatorGroups.includes("Tokyo Metro") &&
-    signal.lineCount >= 5 &&
-    signal.terminalType !== "local-station"
-  ) {
-    return "subway-heavy transfer complex";
-  }
-  return `${formatHyphenLabel(signal.railNetworkType)} ${formatHyphenLabel(signal.terminalType)}`;
 }
 
 function activeAccessBadge(area: StayAreaBase, filter: FilterKey, t?: Translation): string | null {
@@ -634,7 +724,7 @@ function StationUsabilityPanel({
           return (
             <StationUsabilityRow
                 label={t("stationUsability.exit")}
-                value={ex.level}
+                value={exitLevelLabel(ex.level, t)}
                 hint={`${detail} · ${t("stationUsability.contribution", { value: `${contribution.exitComplexity >= 0 ? "+" : ""}${contribution.exitComplexity}` })}`}
             />
           );
@@ -655,20 +745,20 @@ function StationUsabilityPanel({
               />
               <StationUsabilityRow
                 label={t("stationUsability.terminalType")}
-                value={formatHyphenLabel(network.terminalType)}
+                value={terminalTypeLabel(network.terminalType, t)}
                 hint={t("stationUsability.multiOperator", { value: network.multiOperatorFlag ? t("common.yes") : t("common.no") })}
               />
               <StationUsabilityRow
                 label={t("stationUsability.networkComplexity")}
-                value={networkComplexityLabel(network)}
-                hint={`${t("stationUsability.contribution", { value: `${network.scoreContribution >= 0 ? "+" : ""}${network.scoreContribution}` })}. ${network.message}`}
+                value={networkComplexityDisplayLabel(network, t)}
+                hint={`${t("stationUsability.contribution", { value: `${network.scoreContribution >= 0 ? "+" : ""}${network.scoreContribution}` })}. ${t("stationUsability.networkDerivedHint")}`}
               />
             </>
           );
         })()}
         <StationUsabilityRow
           label={t("stationUsability.transferPenalty")}
-          value={area.transferHubLevel}
+          value={transferLevelLabel(area.transferHubLevel, t)}
           hint={t("stationUsability.contribution", { value: `${contribution.transferHub >= 0 ? "+" : ""}${contribution.transferHub}` })}
         />
         {(() => {
@@ -710,18 +800,18 @@ function AirportShinkansenAccessPanel({ area, t }: { area: StayAreaBase; t: Tran
       <div className="mt-2 grid">
         <StationUsabilityRow
           label="Narita"
-          value={t("access.transferValue", { level: profiles.narita.level, count: profiles.narita.transferCountLabel })}
-          hint={profiles.narita.note}
+          value={t("access.transferValue", { level: accessLevelLabel(profiles.narita.level, t), count: profiles.narita.transferCountLabel })}
+          hint={t("access.naritaHint")}
         />
         <StationUsabilityRow
           label="Haneda"
-          value={t("access.transferValue", { level: profiles.haneda.level, count: profiles.haneda.transferCountLabel })}
-          hint={profiles.haneda.note}
+          value={t("access.transferValue", { level: accessLevelLabel(profiles.haneda.level, t), count: profiles.haneda.transferCountLabel })}
+          hint={t("access.hanedaHint")}
         />
         <StationUsabilityRow
           label="Shinkansen"
-          value={`${profiles.shinkansen.level} · ${profiles.shinkansen.bestStation}`}
-          hint={profiles.shinkansen.note}
+          value={t("access.shinkansenValue", { level: accessLevelLabel(profiles.shinkansen.level, t), station: profiles.shinkansen.bestStation })}
+          hint={t("access.shinkansenHint")}
         />
       </div>
     </div>
@@ -817,7 +907,7 @@ function AreaDetailPanel({
           <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">{t("selected.eyebrow")}</p>
           <h2 className="mt-1 text-2xl font-semibold text-slate-950">{area.displayName}</h2>
           <p className="mt-1 text-sm text-slate-500">
-            {area.japaneseName} · {area.areaGroup}
+            {area.japaneseName} · {areaGroupLabel(area.areaGroup, t)}
           </p>
         </div>
         <div className="rounded-2xl bg-[#ff7a00] px-4 py-3 text-center text-white shadow-sm">
@@ -833,7 +923,7 @@ function AreaDetailPanel({
           {tone.text}
         </span>
       </div>
-      <p className="mt-4 text-sm leading-6 text-slate-700">{area.editorial.overallLabel}</p>
+      <p className="mt-4 text-sm leading-6 text-slate-700">{areaSummary(area, score, t)}</p>
 
       <SelectedAreaHotelSearch area={area} locale={locale} t={t} />
 
@@ -850,20 +940,20 @@ function AreaDetailPanel({
         <div>
           <h3 className="text-sm font-semibold text-slate-950">{t("selected.bestFor")}</h3>
           <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
-            {area.editorial.bestFor.map((item) => (<li key={item}>· {item}</li>))}
+            {translatedFitReasons(area, score, t).map((item) => (<li key={item}>· {item}</li>))}
           </ul>
         </div>
         <div>
           <h3 className="text-sm font-semibold text-slate-950">{t("selected.watchOut")}</h3>
           <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
-            {area.editorial.watchOut.map((item) => (<li key={item}>· {item}</li>))}
+            {translatedWatchOuts(area, score, t).map((item) => (<li key={item}>· {item}</li>))}
           </ul>
         </div>
       </div>
 
       <div className="mt-5 rounded-2xl border border-emerald-100 bg-emerald-50/70 p-4">
         <h3 className="text-sm font-semibold text-slate-950">{t("selected.why")}</h3>
-        <p className="mt-2 text-sm leading-6 text-slate-700">{area.editorial.editorialNote}</p>
+        <p className="mt-2 text-sm leading-6 text-slate-700">{areaWhy(area, score, t)}</p>
       </div>
       <p className="mt-4 text-xs leading-5 text-slate-500">
         {t("selected.confidence", { label: score.confidence.label, score: score.confidence.score, freshness: score.sourceFreshness.label })}
@@ -919,7 +1009,7 @@ function AreaRankRow({
           <div className="min-w-0">
             <h3 className="text-lg font-semibold text-slate-950">{area.displayName}</h3>
             <p className="mt-1 text-xs leading-5 text-slate-500">
-              {area.stationNames.slice(0, 3).join(" / ")} · {area.areaGroup}
+              {area.stationNames.slice(0, 3).join(" / ")} · {areaGroupLabel(area.areaGroup, t)}
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-1.5">
               <Chip label={t("rank.chips.fit")} value={tier.label} tone={tier.tone} />
@@ -927,7 +1017,7 @@ function AreaRankRow({
               {accessBadge ? <Chip label={t("rank.chips.priority")} value={accessBadge} tone="calm" /> : null}
               <Chip
                 label={t("rank.chips.complexity")}
-                value={exit.level}
+                value={exitLevelLabel(exit.level, t)}
                 tone={complexityChipTone(exit.level)}
               />
               {(() => {
@@ -951,10 +1041,10 @@ function AreaRankRow({
           <Metric label={t("rank.metrics.luggage")} value={score.scores.luggageFriendly} />
         </div>
       </div>
-      <p className="mt-3 text-sm leading-6 text-slate-700">{area.editorial.overallLabel}</p>
-      {area.editorial.bestFor.length > 0 && (
+      <p className="mt-3 text-sm leading-6 text-slate-700">{areaSummary(area, score, t)}</p>
+      {translatedFitReasons(area, score, t).length > 0 && (
         <p className="mt-2 text-xs leading-5 text-slate-500">
-          {t("rank.bestFor", { items: area.editorial.bestFor.slice(0, 3).join(" · ") })}
+          {t("rank.bestFor", { items: translatedFitReasons(area, score, t).slice(0, 3).join(" · ") })}
         </p>
       )}
     </TrackedStayAreaDetailLink>
@@ -970,19 +1060,19 @@ function Metric({ label, value, strong = false }: { label: string; value: number
   );
 }
 
-function FeaturedAreaCard({ area, score }: { area: StayAreaBase; score: ComputedStayAreaScore }) {
+function FeaturedAreaCard({ area, score, t }: { area: StayAreaBase; score: ComputedStayAreaScore; t: Translation }) {
   return (
     <article className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex items-start justify-between gap-4">
         <div>
           <h3 className="text-lg font-semibold text-slate-950">{area.displayName}</h3>
-          <p className="mt-1 text-xs text-slate-500">{area.areaGroup}</p>
+          <p className="mt-1 text-xs text-slate-500">{areaGroupLabel(area.areaGroup, t)}</p>
         </div>
         <span className="rounded-full bg-[#ff7a00] px-3 py-1 text-sm font-bold text-white">{score.overallScore}</span>
       </div>
-      <p className="mt-3 text-sm leading-6 text-slate-700">{area.editorial.localFeelNote}</p>
+      <p className="mt-3 text-sm leading-6 text-slate-700">{areaLocalFeel(area, score, t)}</p>
       <div className="mt-4 flex flex-wrap gap-2">
-        {area.editorial.bestFor.slice(0, 3).map((item) => (
+        {translatedFitReasons(area, score, t).slice(0, 3).map((item) => (
           <span key={item} className="rounded-full border border-emerald-100 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-[#106b43]">
             {item}
           </span>
@@ -1333,7 +1423,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("featured.title")}</h2>
           <div className="mt-4 grid gap-4 md:grid-cols-3">
             {featuredIds.map((id) => (
-              <FeaturedAreaCard key={id} area={areaById(id)} score={scoreById.get(id) ?? selected.score} />
+              <FeaturedAreaCard key={id} area={areaById(id)} score={scoreById.get(id) ?? selected.score} t={t} />
             ))}
           </div>
         </section>
@@ -1399,9 +1489,9 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
                   .filter((source) => source.usedInScore)
                   .map((source) => (
                   <li key={source.id}>
-                    · {source.label}{" "}
+                    · {sourceLabel(source.id, t)}{" "}
                     <span className="text-slate-400">
-                      ({source.expectedUpdateCadence}, {source.status === "live" ? t("dataNote.fetchedLocally") : t("dataNote.registeredOnly")})
+                      ({cadenceLabel(source.expectedUpdateCadence, t)}, {source.status === "live" ? t("dataNote.fetchedLocally") : t("dataNote.registeredOnly")})
                     </span>
                   </li>
                 ))}

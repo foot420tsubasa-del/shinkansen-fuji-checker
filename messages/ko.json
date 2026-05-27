@@ -3984,12 +3984,17 @@
       "stepFreeDefaultHint": "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal.",
       "stepFreeEditorialHint": "Editorial confidence label (no live source matched this area).",
       "hotelChoice": "Hotel choice density",
-      "hotelChoiceHint": "Editorial hotel-choice-density signal only. This does not rank individual hotels or show live availability."
+      "hotelChoiceHint": "Editorial hotel-choice-density signal only. This does not rank individual hotels or show live availability.",
+      "networkDerivedHint": "정리된 노선 및 운영사 데이터에서 파생되었습니다."
     },
     "access": {
-      "title": "Airport / Shinkansen access",
-      "body": "Route logic, not live timetable data. Check current trains before travel.",
-      "transferValue": "{level} · {count} transfers"
+      "title": "공항 / 신칸센 접근",
+      "body": "경로 로직이며 실시간 시간표가 아닙니다. 여행 전 현재 열차를 확인하세요.",
+      "transferValue": "{level} · 환승 {count}",
+      "shinkansenValue": "{level} · 기준역: {station}",
+      "naritaHint": "나리타 도착을 위한 편집 기반 경로 로직입니다. 실시간 시간표가 아닙니다.",
+      "hanedaHint": "하네다 도착을 위한 편집 기반 경로 로직입니다. 실시간 시간표가 아닙니다.",
+      "shinkansenHint": "신칸센 물류 로직입니다. 여행 전 현재 열차를 확인하세요."
     },
     "rank": {
       "chips": {
@@ -4048,45 +4053,45 @@
       "routeLogic": "Route logic"
     },
     "methodology": {
-      "title": "How scores work",
-      "p1": "This compares station areas, not individual hotels.",
-      "p2": "Scores blend a 55% editorial travel-fit baseline, 35% station-usability adjustments (passenger crowd, exit / entrance complexity, line / operator count, transfer-hub penalty), and 10% live status. Each per-sub-score adjustment is capped at ±10.",
-      "p3": "Step-free route confidence is read from Toei's public barrier-free CSVs where matched, and adds a small positive nudge to luggage-friendliness. Exit / entrance complexity is read from Tokyo Metro's public per-station exit feed where matched; areas without Tokyo Metro coverage use the editorial level. Missing data is never punished. Hotel choice density is editorial and does not evaluate individual hotels. Scores are not official ratings and do not rank safety, hotel quality, price, or availability.",
+      "title": "점수 계산 방식",
+      "p1": "개별 호텔이 아니라 역 주변 지역을 비교합니다.",
+      "p2": "점수는 편집 기반 여행 로직, 역 사용성 신호, 데이터 상태를 함께 봅니다.",
+      "p3": "데이터가 없다고 감점하지 않습니다. 호텔 선택 밀도는 편집 기반이며 개별 호텔, 가격, 예약 가능 여부를 평가하지 않습니다.",
       "cards": {
         "crowd": {
-          "title": "Crowd",
-          "body": "Passenger-data-informed; high volume lowers crowd-stress."
+          "title": "혼잡",
+          "body": "승객 데이터로 혼잡 스트레스를 추정합니다."
         },
         "complexity": {
-          "title": "Complexity",
-          "body": "Exit / entrance complexity from Tokyo Metro's exit feed where matched, editorial otherwise."
+          "title": "복잡도",
+          "body": "가능한 경우 Tokyo Metro 출구 데이터를 사용합니다."
         },
         "lines": {
-          "title": "Lines",
-          "body": "More lines / operators lower station simplicity."
+          "title": "노선",
+          "body": "노선과 운영사가 많을수록 단순성이 낮아집니다."
         },
         "transfer": {
-          "title": "Transfer",
-          "body": "Transfer-hub penalty hits mega interchanges."
+          "title": "환승",
+          "body": "대형 환승 허브는 불리하게 반영됩니다."
         }
       },
-      "detailsTitle": "See score signal details",
-      "detailsBody": "Passenger volume, Toei step-free / elevator data, and Tokyo Metro per-station exit counts refresh when public sources update. These details are kept lower on the page so the finder starts with traveler decisions, not source status.",
-      "coverage": "Coverage across {count} station areas — public data matched: {matched} · partial: {partial} · editorial fallback: {fallback}.",
-      "internalDatasets": "Some public datasets are catalogued internally but are not used for scoring or displayed as travel claims."
+      "detailsTitle": "점수 신호 자세히 보기",
+      "detailsBody": "페이지가 데이터 상태보다 여행 결정을 먼저 보여주도록 세부 정보는 아래에 둡니다.",
+      "coverage": "{count}개 지역 커버리지 — 공개 데이터: {matched} · 부분: {partial} · 편집 기반: {fallback}.",
+      "internalDatasets": "일부 공개 데이터셋은 내부적으로 목록화되어 있지만 여행 주장으로 사용하지 않습니다."
     },
     "dataNote": {
-      "title": "Data freshness / source note",
-      "body": "fujiseat.com scores are editorial travel-fit scores informed by passenger data. They are not official ratings and do not guarantee safety, comfort, hotel quality, price, or availability.",
-      "currentMode": "Current mode: <strong>{mode}</strong>. Last source check: {date}.",
-      "registryTitle": "Source registry",
-      "fetchedLocally": "fetched locally",
-      "registeredOnly": "registered only",
-      "otherDatasets": "Other public datasets may be catalogued internally for future methodology review, but they are not shown here as travel claims and are not used in scoring."
+      "title": "데이터 최신성 / 출처 노트",
+      "body": "fujiseat.com 점수는 가능한 경우 데이터를 참고한 편집 기반 여행 적합도입니다. 공식 평가나 보장이 아닙니다.",
+      "currentMode": "현재 모드: <strong>{mode}</strong>. 마지막 확인: {date}.",
+      "registryTitle": "출처 목록",
+      "fetchedLocally": "로컬 수집",
+      "registeredOnly": "등록만 됨",
+      "otherDatasets": "다른 데이터셋은 향후 방법론 검토용으로 목록화될 수 있지만 여행 주장으로 표시하지 않습니다."
     },
     "featured": {
-      "eyebrow": "Featured area cards",
-      "title": "Good starting points for many travelers"
+      "eyebrow": "추천 시작 지역",
+      "title": "많은 여행자에게 좋은 출발점"
     },
     "continue": {
       "title": "계속 계획하기",
@@ -4104,6 +4109,98 @@
       "strongHaneda": "하네다 접근 우수",
       "goodHaneda": "하네다 접근 좋음",
       "shinkansenFriendly": "신칸센에 적합"
+    },
+    "areaGroups": {
+      "east-tokyo": "동쪽 도쿄",
+      "central-tokyo": "중앙 도쿄",
+      "south-central-tokyo": "중남부 도쿄",
+      "south-tokyo": "남쪽 도쿄",
+      "west-tokyo": "서쪽 도쿄",
+      "north-west-tokyo": "북서쪽 도쿄",
+      "central-east-tokyo": "중동부 도쿄",
+      "west-central-tokyo": "중서부 도쿄",
+      "central-north-tokyo": "중북부 도쿄",
+      "central-west-tokyo": "중서부 도쿄",
+      "north-central-tokyo": "북중부 도쿄",
+      "bay-area": "베이 에어리어"
+    },
+    "areaCopy": {
+      "summaryAirportLuggage": "{area}는 공항 또는 짐 동선이 강한 {group} 호텔 거점 후보입니다.",
+      "summaryRail": "{area}는 철도와 신칸센 물류에 잘 맞는 {group} 호텔 거점 후보입니다.",
+      "summaryLocal": "{area}는 더 로컬한 느낌이 있는 {group} 호텔 거점 후보입니다.",
+      "summaryDefault": "{area}는 예약 전 비교할 trade-off가 분명한 {group} 호텔 거점 후보입니다.",
+      "localFeelHigh": "{area}는 교통만큼 동네 분위기도 중요할 때 잘 맞습니다.",
+      "localFeelCalm": "{area}는 호텔 위치가 맞으면 대형 허브보다 차분할 수 있습니다.",
+      "localFeelBusy": "{area}는 실용적일 수 있지만 역 규모나 혼잡이 짐 있는 도착을 어렵게 할 수 있습니다.",
+      "localFeelDefault": "{area}는 역 접근, 짐, 정확한 호텔 위치로 비교할 만합니다.",
+      "why": "{area}는 다음 이유로 이 위치에 있습니다: {reasons}. 호텔 순위가 아니라 지역 로직으로 보세요.",
+      "reasons": {
+        "airportAccess": "공항 접근",
+        "luggage": "짐 친화적 도착",
+        "shinkansen": "신칸센 물류",
+        "stationSimplicity": "더 단순한 역 이용",
+        "localFeel": "로컬 동네 느낌",
+        "sightseeing": "관광 접근",
+        "hotelChoice": "호텔 선택 밀도",
+        "balancedBase": "균형 잡힌 여행 trade-off"
+      },
+      "watchOut": {
+        "stationComplexity": "역 복잡도가 도착을 어렵게 할 수 있습니다.",
+        "crowds": "혼잡은 특히 짐이 있을 때 스트레스를 더합니다.",
+        "airportTransfers": "공항 이동은 더 계획이 필요할 수 있습니다.",
+        "shinkansen": "신칸센 접근이 가장 단순하지 않을 수 있습니다.",
+        "limitedHotels": "대형 허브보다 호텔 선택지가 적을 수 있습니다.",
+        "businesslike": "지역이 로컬보다 업무 지구처럼 느껴질 수 있습니다.",
+        "exactHotelLocation": "호텔의 정확한 방향, 출구, 도보 동선이 여전히 중요합니다."
+      }
+    },
+    "accessLevels": {
+      "excellent": "매우 좋음",
+      "good": "좋음",
+      "fair": "보통",
+      "weak": "약함"
+    },
+    "exitLevels": {
+      "simple": "단순",
+      "moderate": "보통",
+      "complex": "복잡",
+      "megaStation": "초대형 역"
+    },
+    "transferLevels": {
+      "low": "낮음",
+      "medium": "보통",
+      "high": "높음",
+      "veryHigh": "매우 높음"
+    },
+    "terminalTypes": {
+      "localstation": "로컬 역",
+      "interchange": "환승역",
+      "terminal": "터미널",
+      "megaterminal": "초대형 터미널"
+    },
+    "networkLabels": {
+      "multiOperatorMegaTerminal": "다중 운영사 초대형 터미널",
+      "airportRail": "공항철도 · {terminal}",
+      "subwayHeavyTransfer": "지하철 중심 환승 복합역",
+      "general": "네트워크 복잡도: {terminal}"
+    },
+    "sourceLabels": {
+      "tokyometropassengers": "Tokyo Metro 승객 순위",
+      "toeipassengers": "Toei Subway 승객 수",
+      "toeibarrierfree": "Toei Subway 접근성 / barrier-free CSV",
+      "tokyometrostationexits": "Tokyo Metro 역별 출구 목록",
+      "toeistationexits": "Toei Subway 역별 출구 목록",
+      "tokyometrobarrierfree": "Tokyo Metro 접근성 페이지",
+      "odptstationinformation": "ODPT 역 정보",
+      "tokyopolicecrime": "도쿄 경시청 동네별 범죄 통계",
+      "gsihazardportal": "해저드맵 포털 (MLIT / GSI)",
+      "tokyolodgingfacilities": "도쿄 숙박업 시설 데이터"
+    },
+    "cadences": {
+      "daily": "매일",
+      "monthly": "매월",
+      "annual": "매년",
+      "irregular": "비정기"
     }
   },
   "fujiseatAreaLogic": {

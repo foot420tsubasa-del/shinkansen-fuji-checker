@@ -4062,12 +4062,17 @@
       "stepFreeDefaultHint": "Les données sans marche sont utilisées seulement avec une source publique fiable. L'absence de données ne pénalise pas.",
       "stepFreeEditorialHint": "Libellé de confiance éditorial.",
       "hotelChoice": "Densité d'hôtels",
-      "hotelChoiceHint": "Signal éditorial. Ne classe pas les hôtels et ne montre pas la disponibilité."
+      "hotelChoiceHint": "Signal éditorial. Ne classe pas les hôtels et ne montre pas la disponibilité.",
+      "networkDerivedHint": "Déduit de données curées de lignes et d'opérateurs."
     },
     "access": {
       "title": "Aéroport / Shinkansen",
       "body": "Logique d'itinéraire, pas horaires en direct. Vérifiez les trains avant le trajet.",
-      "transferValue": "{level} · {count} correspondances"
+      "transferValue": "{level} · {count} correspondances",
+      "shinkansenValue": "{level} · meilleure gare : {station}",
+      "naritaHint": "Logique curée pour les arrivées Narita ; pas horaires en direct.",
+      "hanedaHint": "Logique curée pour les arrivées Haneda ; pas horaires en direct.",
+      "shinkansenHint": "Logique curée pour le Shinkansen ; vérifiez les trains avant le trajet."
     },
     "rank": {
       "chips": {
@@ -4183,6 +4188,98 @@
       "strongHaneda": "Accès Haneda fort",
       "goodHaneda": "Bon accès Haneda",
       "shinkansenFriendly": "Pratique pour Shinkansen"
+    },
+    "areaGroups": {
+      "east-tokyo": "Est de Tokyo",
+      "central-tokyo": "Centre de Tokyo",
+      "south-central-tokyo": "Centre-sud de Tokyo",
+      "south-tokyo": "Sud de Tokyo",
+      "west-tokyo": "Ouest de Tokyo",
+      "north-west-tokyo": "Nord-ouest de Tokyo",
+      "central-east-tokyo": "Centre-est de Tokyo",
+      "west-central-tokyo": "Centre-ouest de Tokyo",
+      "central-north-tokyo": "Centre-nord de Tokyo",
+      "central-west-tokyo": "Centre-ouest de Tokyo",
+      "north-central-tokyo": "Nord-centre de Tokyo",
+      "bay-area": "Zone de la baie"
+    },
+    "areaCopy": {
+      "summaryAirportLuggage": "{area} est une base hôtelière possible dans {group}, avec une bonne logique aéroport ou bagages.",
+      "summaryRail": "{area} est une base possible dans {group}, pratique pour le train et le Shinkansen.",
+      "summaryLocal": "{area} est une base possible dans {group}, avec une sensation plus locale.",
+      "summaryDefault": "{area} est une base possible dans {group}, avec des compromis clairs à comparer avant de réserver.",
+      "localFeelHigh": "{area} fonctionne bien quand l'ambiance du quartier compte autant que le transport.",
+      "localFeelCalm": "{area} peut être plus calme que les grands hubs si l'hôtel est bien placé.",
+      "localFeelBusy": "{area} peut être pratique, mais l'échelle de la gare ou la foule peut compliquer l'arrivée avec bagages.",
+      "localFeelDefault": "{area} mérite d'être comparée par accès gare, bagages et emplacement exact de l'hôtel.",
+      "why": "{area} ressort ici pour : {reasons}. Utilisez cela comme logique de zone, pas comme classement d'hôtels.",
+      "reasons": {
+        "airportAccess": "accès aéroport",
+        "luggage": "arrivée pratique avec bagages",
+        "shinkansen": "logistique Shinkansen",
+        "stationSimplicity": "gare plus simple",
+        "localFeel": "ambiance de quartier locale",
+        "sightseeing": "accès touristique",
+        "hotelChoice": "densité de choix d'hôtels",
+        "balancedBase": "compromis équilibrés"
+      },
+      "watchOut": {
+        "stationComplexity": "La complexité de la gare peut rendre l'arrivée plus difficile.",
+        "crowds": "La foule peut ajouter du stress, surtout avec des bagages.",
+        "airportTransfers": "Le transfert aéroport peut demander plus de planification.",
+        "shinkansen": "L'accès au Shinkansen n'est pas toujours le plus simple.",
+        "limitedHotels": "Le choix d'hôtels peut être plus limité que dans les grands hubs.",
+        "businesslike": "La zone peut sembler plus business que locale.",
+        "exactHotelLocation": "Le côté exact de l'hôtel, la sortie et le trajet à pied comptent encore."
+      }
+    },
+    "accessLevels": {
+      "excellent": "Excellent",
+      "good": "Bon",
+      "fair": "Correct",
+      "weak": "Faible"
+    },
+    "exitLevels": {
+      "simple": "Simple",
+      "moderate": "Modérée",
+      "complex": "Complexe",
+      "megaStation": "Méga-gare"
+    },
+    "transferLevels": {
+      "low": "Faible",
+      "medium": "Moyen",
+      "high": "Élevé",
+      "veryHigh": "Très élevé"
+    },
+    "terminalTypes": {
+      "localstation": "gare locale",
+      "interchange": "correspondance",
+      "terminal": "terminal",
+      "megaterminal": "méga-terminal"
+    },
+    "networkLabels": {
+      "multiOperatorMegaTerminal": "méga-terminal multi-opérateur",
+      "airportRail": "rail aéroport · {terminal}",
+      "subwayHeavyTransfer": "complexe de correspondance très métro",
+      "general": "complexité réseau : {terminal}"
+    },
+    "sourceLabels": {
+      "tokyometropassengers": "Classement passagers Tokyo Metro",
+      "toeipassengers": "Volume passagers du métro Toei",
+      "toeibarrierfree": "CSV accessibilité / barrier-free Toei",
+      "tokyometrostationexits": "Liste des sorties par station Tokyo Metro",
+      "toeistationexits": "Liste des sorties par station Toei",
+      "tokyometrobarrierfree": "Pages accessibilité Tokyo Metro",
+      "odptstationinformation": "Informations station ODPT",
+      "tokyopolicecrime": "Statistiques de criminalité par quartier de la police de Tokyo",
+      "gsihazardportal": "Portail des cartes de risques (MLIT / GSI)",
+      "tokyolodgingfacilities": "Données des hébergements de Tokyo"
+    },
+    "cadences": {
+      "daily": "quotidien",
+      "monthly": "mensuel",
+      "annual": "annuel",
+      "irregular": "irrégulier"
     }
   },
   "fujiseatAreaLogic": {

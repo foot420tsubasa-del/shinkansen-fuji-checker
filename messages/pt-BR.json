@@ -3984,12 +3984,17 @@
       "stepFreeDefaultHint": "Dados step-free só são usados quando a fonte pública é confiável. Dados ausentes não penalizam.",
       "stepFreeEditorialHint": "Rótulo editorial de confiança.",
       "hotelChoice": "Densidade de hotéis",
-      "hotelChoiceHint": "Sinal editorial de escolha de hotéis. Não ranqueia hotéis nem mostra disponibilidade live."
+      "hotelChoiceHint": "Sinal editorial de escolha de hotéis. Não ranqueia hotéis nem mostra disponibilidade live.",
+      "networkDerivedHint": "Derivado de dados curados de linhas e operadores."
     },
     "access": {
       "title": "Aeroporto / Shinkansen",
       "body": "Lógica de rota, não horário live. Confira trens atuais antes de viajar.",
-      "transferValue": "{level} · {count} transferências"
+      "transferValue": "{level} · {count} transferências",
+      "shinkansenValue": "{level} · melhor estação: {station}",
+      "naritaHint": "Lógica curada para chegadas por Narita; não é horário live.",
+      "hanedaHint": "Lógica curada para chegadas por Haneda; não é horário live.",
+      "shinkansenHint": "Lógica curada para Shinkansen; confira trens atuais antes de viajar."
     },
     "rank": {
       "chips": {
@@ -4105,6 +4110,98 @@
       "strongHaneda": "Haneda forte",
       "goodHaneda": "Bom para Haneda",
       "shinkansenFriendly": "Bom para Shinkansen"
+    },
+    "areaGroups": {
+      "east-tokyo": "Leste de Tóquio",
+      "central-tokyo": "Centro de Tóquio",
+      "south-central-tokyo": "Centro-sul de Tóquio",
+      "south-tokyo": "Sul de Tóquio",
+      "west-tokyo": "Oeste de Tóquio",
+      "north-west-tokyo": "Noroeste de Tóquio",
+      "central-east-tokyo": "Centro-leste de Tóquio",
+      "west-central-tokyo": "Centro-oeste de Tóquio",
+      "central-north-tokyo": "Centro-norte de Tóquio",
+      "central-west-tokyo": "Centro-oeste de Tóquio",
+      "north-central-tokyo": "Norte-central de Tóquio",
+      "bay-area": "Área da baía"
+    },
+    "areaCopy": {
+      "summaryAirportLuggage": "{area} é uma candidata de base hoteleira em {group}, com boa lógica para aeroporto ou bagagem.",
+      "summaryRail": "{area} é uma candidata em {group} que funciona bem para trem e Shinkansen.",
+      "summaryLocal": "{area} é uma candidata em {group} com sensação mais local.",
+      "summaryDefault": "{area} é uma candidata em {group} com trade-offs claros para comparar antes de reservar.",
+      "localFeelHigh": "{area} funciona bem quando o bairro importa tanto quanto o transporte.",
+      "localFeelCalm": "{area} pode parecer mais calma que os maiores hubs se o hotel estiver bem localizado.",
+      "localFeelBusy": "{area} pode ser prática, mas escala da estação ou multidões podem dificultar a chegada com bagagem.",
+      "localFeelDefault": "{area} vale comparar por acesso à estação, bagagem e localização exata do hotel.",
+      "why": "{area} aparece aqui por: {reasons}. Use isto como lógica de área, não ranking de hotel.",
+      "reasons": {
+        "airportAccess": "acesso ao aeroporto",
+        "luggage": "chegada boa com bagagem",
+        "shinkansen": "logística de Shinkansen",
+        "stationSimplicity": "uso mais simples da estação",
+        "localFeel": "sensação de bairro local",
+        "sightseeing": "acesso turístico",
+        "hotelChoice": "densidade de opções de hotel",
+        "balancedBase": "trade-offs equilibrados"
+      },
+      "watchOut": {
+        "stationComplexity": "A complexidade da estação pode dificultar a chegada.",
+        "crowds": "Multidões podem aumentar o estresse, especialmente com bagagem.",
+        "airportTransfers": "O traslado do aeroporto pode exigir mais planejamento.",
+        "shinkansen": "O acesso ao Shinkansen pode não ser o mais simples.",
+        "limitedHotels": "A oferta de hotéis pode ser menor que nos grandes hubs.",
+        "businesslike": "A área pode parecer mais corporativa que local.",
+        "exactHotelLocation": "O lado exato do hotel, a saída e a rota a pé ainda importam."
+      }
+    },
+    "accessLevels": {
+      "excellent": "Excelente",
+      "good": "Bom",
+      "fair": "Razoável",
+      "weak": "Fraco"
+    },
+    "exitLevels": {
+      "simple": "Simples",
+      "moderate": "Moderada",
+      "complex": "Complexa",
+      "megaStation": "Megaestação"
+    },
+    "transferLevels": {
+      "low": "Baixo",
+      "medium": "Médio",
+      "high": "Alto",
+      "veryHigh": "Muito alto"
+    },
+    "terminalTypes": {
+      "localstation": "estação local",
+      "interchange": "intercâmbio",
+      "terminal": "terminal",
+      "megaterminal": "megaterminal"
+    },
+    "networkLabels": {
+      "multiOperatorMegaTerminal": "megaterminal multioperador",
+      "airportRail": "acesso de aeroporto · {terminal}",
+      "subwayHeavyTransfer": "complexo de transferência com muito metrô",
+      "general": "complexidade da rede: {terminal}"
+    },
+    "sourceLabels": {
+      "tokyometropassengers": "Ranking de passageiros do Tokyo Metro",
+      "toeipassengers": "Volume de passageiros do metrô Toei",
+      "toeibarrierfree": "CSV de acessibilidade / barrier-free Toei",
+      "tokyometrostationexits": "Lista de saídas por estação do Tokyo Metro",
+      "toeistationexits": "Lista de saídas por estação Toei",
+      "tokyometrobarrierfree": "Páginas de acessibilidade do Tokyo Metro",
+      "odptstationinformation": "Informações de estação ODPT",
+      "tokyopolicecrime": "Estatísticas criminais por bairro da Polícia de Tóquio",
+      "gsihazardportal": "Portal de mapas de risco (MLIT / GSI)",
+      "tokyolodgingfacilities": "Dados de instalações hoteleiras de Tóquio"
+    },
+    "cadences": {
+      "daily": "diário",
+      "monthly": "mensal",
+      "annual": "anual",
+      "irregular": "irregular"
     }
   },
   "fujiseatAreaLogic": {

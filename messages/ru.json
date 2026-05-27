@@ -3984,12 +3984,17 @@
       "stepFreeDefaultHint": "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal.",
       "stepFreeEditorialHint": "Editorial confidence label (no live source matched this area).",
       "hotelChoice": "Hotel choice density",
-      "hotelChoiceHint": "Editorial hotel-choice-density signal only. This does not rank individual hotels or show live availability."
+      "hotelChoiceHint": "Editorial hotel-choice-density signal only. This does not rank individual hotels or show live availability.",
+      "networkDerivedHint": "Выведено из курируемых данных линий и операторов."
     },
     "access": {
-      "title": "Airport / Shinkansen access",
-      "body": "Route logic, not live timetable data. Check current trains before travel.",
-      "transferValue": "{level} · {count} transfers"
+      "title": "Аэропорт / синкансэн",
+      "body": "Логика маршрута, не живое расписание. Проверьте актуальные поезда перед поездкой.",
+      "transferValue": "{level} · пересадок: {count}",
+      "shinkansenValue": "{level} · лучшая станция: {station}",
+      "naritaHint": "Курируемая логика для прилета в Narita; не живое расписание.",
+      "hanedaHint": "Курируемая логика для прилета в Haneda; не живое расписание.",
+      "shinkansenHint": "Курируемая логика для синкансэна; проверьте актуальные поезда перед поездкой."
     },
     "rank": {
       "chips": {
@@ -4048,45 +4053,45 @@
       "routeLogic": "Route logic"
     },
     "methodology": {
-      "title": "How scores work",
-      "p1": "This compares station areas, not individual hotels.",
-      "p2": "Scores blend a 55% editorial travel-fit baseline, 35% station-usability adjustments (passenger crowd, exit / entrance complexity, line / operator count, transfer-hub penalty), and 10% live status. Each per-sub-score adjustment is capped at ±10.",
-      "p3": "Step-free route confidence is read from Toei's public barrier-free CSVs where matched, and adds a small positive nudge to luggage-friendliness. Exit / entrance complexity is read from Tokyo Metro's public per-station exit feed where matched; areas without Tokyo Metro coverage use the editorial level. Missing data is never punished. Hotel choice density is editorial and does not evaluate individual hotels. Scores are not official ratings and do not rank safety, hotel quality, price, or availability.",
+      "title": "Как работают баллы",
+      "p1": "Здесь сравниваются районы у станций, а не отдельные отели.",
+      "p2": "Баллы объединяют редакционную логику поездки, удобство станции и статус данных.",
+      "p3": "Отсутствие данных не штрафуется. Плотность выбора отелей — редакционный сигнал; он не оценивает отдельные отели, цены или доступность.",
       "cards": {
         "crowd": {
-          "title": "Crowd",
-          "body": "Passenger-data-informed; high volume lowers crowd-stress."
+          "title": "Толпа",
+          "body": "Пассажирские данные помогают оценить стресс от людности."
         },
         "complexity": {
-          "title": "Complexity",
-          "body": "Exit / entrance complexity from Tokyo Metro's exit feed where matched, editorial otherwise."
+          "title": "Сложность",
+          "body": "Где возможно, используются данные выходов Tokyo Metro."
         },
         "lines": {
-          "title": "Lines",
-          "body": "More lines / operators lower station simplicity."
+          "title": "Линии",
+          "body": "Больше линий и операторов снижает простоту."
         },
         "transfer": {
-          "title": "Transfer",
-          "body": "Transfer-hub penalty hits mega interchanges."
+          "title": "Пересадка",
+          "body": "Крупные узлы получают штраф."
         }
       },
-      "detailsTitle": "See score signal details",
-      "detailsBody": "Passenger volume, Toei step-free / elevator data, and Tokyo Metro per-station exit counts refresh when public sources update. These details are kept lower on the page so the finder starts with traveler decisions, not source status.",
-      "coverage": "Coverage across {count} station areas — public data matched: {matched} · partial: {partial} · editorial fallback: {fallback}.",
-      "internalDatasets": "Some public datasets are catalogued internally but are not used for scoring or displayed as travel claims."
+      "detailsTitle": "Подробнее о сигналах",
+      "detailsBody": "Детали находятся ниже, чтобы страница начиналась с решений путешественника.",
+      "coverage": "Покрытие {count} районов — публичные данные: {matched} · частично: {partial} · редакционно: {fallback}.",
+      "internalDatasets": "Некоторые публичные наборы данных каталогизированы внутри, но не используются как туристические утверждения."
     },
     "dataNote": {
-      "title": "Data freshness / source note",
-      "body": "fujiseat.com scores are editorial travel-fit scores informed by passenger data. They are not official ratings and do not guarantee safety, comfort, hotel quality, price, or availability.",
-      "currentMode": "Current mode: <strong>{mode}</strong>. Last source check: {date}.",
-      "registryTitle": "Source registry",
-      "fetchedLocally": "fetched locally",
-      "registeredOnly": "registered only",
-      "otherDatasets": "Other public datasets may be catalogued internally for future methodology review, but they are not shown here as travel claims and are not used in scoring."
+      "title": "Свежесть данных / источники",
+      "body": "Баллы fujiseat.com — редакционная оценка пригодности поездки, где возможно информированная данными. Это не официальные рейтинги и не гарантии.",
+      "currentMode": "Текущий режим: <strong>{mode}</strong>. Последняя проверка: {date}.",
+      "registryTitle": "Реестр источников",
+      "fetchedLocally": "получено локально",
+      "registeredOnly": "только зарегистрировано",
+      "otherDatasets": "Другие наборы данных могут быть каталогизированы для будущей проверки методологии, но не отображаются как туристические утверждения."
     },
     "featured": {
-      "eyebrow": "Featured area cards",
-      "title": "Good starting points for many travelers"
+      "eyebrow": "Выбранные районы",
+      "title": "Хорошие стартовые точки для многих путешественников"
     },
     "continue": {
       "title": "Продолжить планирование",
@@ -4104,6 +4109,98 @@
       "strongHaneda": "Сильный доступ Haneda",
       "goodHaneda": "Хороший доступ Haneda",
       "shinkansenFriendly": "Удобно для синкансэна"
+    },
+    "areaGroups": {
+      "east-tokyo": "Восточный Токио",
+      "central-tokyo": "Центральный Токио",
+      "south-central-tokyo": "Южный центр Токио",
+      "south-tokyo": "Южный Токио",
+      "west-tokyo": "Западный Токио",
+      "north-west-tokyo": "Северо-западный Токио",
+      "central-east-tokyo": "Центр-восток Токио",
+      "west-central-tokyo": "Западный центр Токио",
+      "central-north-tokyo": "Центр-север Токио",
+      "central-west-tokyo": "Центр-запад Токио",
+      "north-central-tokyo": "Северо-центральный Токио",
+      "bay-area": "Район залива"
+    },
+    "areaCopy": {
+      "summaryAirportLuggage": "{area} — возможная гостиничная база в {group} с сильной логикой аэропорта или багажа.",
+      "summaryRail": "{area} — возможная база в {group}, удобная для железной дороги и синкансэна.",
+      "summaryLocal": "{area} — возможная база в {group} с более локальной атмосферой.",
+      "summaryDefault": "{area} — возможная база в {group} с понятными компромиссами перед бронированием.",
+      "localFeelHigh": "{area} подходит, когда атмосфера района важна не меньше транспорта.",
+      "localFeelCalm": "{area} может быть спокойнее крупных узлов, если отель расположен удачно.",
+      "localFeelBusy": "{area} может быть практичным, но масштаб станции или толпы усложняют прибытие с багажом.",
+      "localFeelDefault": "{area} стоит сравнивать по доступу к станции, багажу и точному расположению отеля.",
+      "why": "{area} находится здесь из-за: {reasons}. Это логика района, а не рейтинг отелей.",
+      "reasons": {
+        "airportAccess": "доступ из аэропорта",
+        "luggage": "удобное прибытие с багажом",
+        "shinkansen": "логистика синкансэна",
+        "stationSimplicity": "более простая станция",
+        "localFeel": "локальная атмосфера района",
+        "sightseeing": "доступ к достопримечательностям",
+        "hotelChoice": "плотность выбора отелей",
+        "balancedBase": "сбалансированные компромиссы"
+      },
+      "watchOut": {
+        "stationComplexity": "Сложность станции может усложнить прибытие.",
+        "crowds": "Толпы добавляют стресс, особенно с багажом.",
+        "airportTransfers": "Трансфер из аэропорта может требовать больше планирования.",
+        "shinkansen": "Доступ к синкансэну может быть не самым простым.",
+        "limitedHotels": "Выбор отелей может быть меньше, чем в крупных узлах.",
+        "businesslike": "Район может ощущаться более деловым, чем локальным.",
+        "exactHotelLocation": "Точная сторона отеля, выход и пеший маршрут всё еще важны."
+      }
+    },
+    "accessLevels": {
+      "excellent": "Отлично",
+      "good": "Хорошо",
+      "fair": "Средне",
+      "weak": "Слабо"
+    },
+    "exitLevels": {
+      "simple": "Просто",
+      "moderate": "Средне",
+      "complex": "Сложно",
+      "megaStation": "Мега-станция"
+    },
+    "transferLevels": {
+      "low": "Низкий",
+      "medium": "Средний",
+      "high": "Высокий",
+      "veryHigh": "Очень высокий"
+    },
+    "terminalTypes": {
+      "localstation": "локальная станция",
+      "interchange": "пересадочный узел",
+      "terminal": "терминал",
+      "megaterminal": "мега-терминал"
+    },
+    "networkLabels": {
+      "multiOperatorMegaTerminal": "мега-терминал нескольких операторов",
+      "airportRail": "аэропортовая линия · {terminal}",
+      "subwayHeavyTransfer": "сложный пересадочный узел метро",
+      "general": "сложность сети: {terminal}"
+    },
+    "sourceLabels": {
+      "tokyometropassengers": "Рейтинг пассажиров Tokyo Metro",
+      "toeipassengers": "Пассажиропоток Toei Subway",
+      "toeibarrierfree": "CSV доступности Toei Subway",
+      "tokyometrostationexits": "Список выходов по станциям Tokyo Metro",
+      "toeistationexits": "Список выходов по станциям Toei Subway",
+      "tokyometrobarrierfree": "Страницы доступности Tokyo Metro",
+      "odptstationinformation": "Информация о станциях ODPT",
+      "tokyopolicecrime": "Квартальная статистика преступности полиции Токио",
+      "gsihazardportal": "Портал карт рисков (MLIT / GSI)",
+      "tokyolodgingfacilities": "Наборы данных по объектам размещения в Токио"
+    },
+    "cadences": {
+      "daily": "ежедневно",
+      "monthly": "ежемесячно",
+      "annual": "ежегодно",
+      "irregular": "нерегулярно"
     }
   },
   "fujiseatAreaLogic": {

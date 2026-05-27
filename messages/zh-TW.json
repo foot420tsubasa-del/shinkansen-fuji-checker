@@ -3984,12 +3984,17 @@
       "stepFreeDefaultHint": "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal.",
       "stepFreeEditorialHint": "Editorial confidence label (no live source matched this area).",
       "hotelChoice": "Hotel choice density",
-      "hotelChoiceHint": "Editorial hotel-choice-density signal only. This does not rank individual hotels or show live availability."
+      "hotelChoiceHint": "Editorial hotel-choice-density signal only. This does not rank individual hotels or show live availability.",
+      "networkDerivedHint": "由整理後的路線和營運商資料推導。"
     },
     "access": {
-      "title": "Airport / Shinkansen access",
-      "body": "Route logic, not live timetable data. Check current trains before travel.",
-      "transferValue": "{level} · {count} transfers"
+      "title": "機場 / 新幹線交通",
+      "body": "這是路線邏輯，不是即時列車時刻。出行前請確認目前列車。",
+      "transferValue": "{level} · {count} 次轉乘",
+      "shinkansenValue": "{level} · 推薦車站：{station}",
+      "naritaHint": "針對成田抵達的編輯型路線邏輯；不是即時列車時刻。",
+      "hanedaHint": "針對羽田抵達的編輯型路線邏輯；不是即時列車時刻。",
+      "shinkansenHint": "針對新幹線的編輯型交通邏輯；出行前請確認目前列車。"
     },
     "rank": {
       "chips": {
@@ -4048,45 +4053,45 @@
       "routeLogic": "Route logic"
     },
     "methodology": {
-      "title": "How scores work",
-      "p1": "This compares station areas, not individual hotels.",
-      "p2": "Scores blend a 55% editorial travel-fit baseline, 35% station-usability adjustments (passenger crowd, exit / entrance complexity, line / operator count, transfer-hub penalty), and 10% live status. Each per-sub-score adjustment is capped at ±10.",
-      "p3": "Step-free route confidence is read from Toei's public barrier-free CSVs where matched, and adds a small positive nudge to luggage-friendliness. Exit / entrance complexity is read from Tokyo Metro's public per-station exit feed where matched; areas without Tokyo Metro coverage use the editorial level. Missing data is never punished. Hotel choice density is editorial and does not evaluate individual hotels. Scores are not official ratings and do not rank safety, hotel quality, price, or availability.",
+      "title": "分數如何計算",
+      "p1": "這裡比較的是車站區域，不是單個酒店。",
+      "p2": "分數結合編輯型旅行邏輯、車站使用性信號和資料狀態。",
+      "p3": "缺少資料不會被扣分。酒店選擇密度是編輯信號，不評價單個酒店、價格或空房。",
       "cards": {
         "crowd": {
-          "title": "Crowd",
-          "body": "Passenger-data-informed; high volume lowers crowd-stress."
+          "title": "人流",
+          "body": "乘客資料幫助估計擁擠壓力。"
         },
         "complexity": {
-          "title": "Complexity",
-          "body": "Exit / entrance complexity from Tokyo Metro's exit feed where matched, editorial otherwise."
+          "title": "複雜度",
+          "body": "可用時使用 Tokyo Metro 出入口資料。"
         },
         "lines": {
-          "title": "Lines",
-          "body": "More lines / operators lower station simplicity."
+          "title": "路線",
+          "body": "路線和營運商越多，車站簡單度越低。"
         },
         "transfer": {
-          "title": "Transfer",
-          "body": "Transfer-hub penalty hits mega interchanges."
+          "title": "轉乘",
+          "body": "大型轉乘樞紐會受到扣分。"
         }
       },
-      "detailsTitle": "See score signal details",
-      "detailsBody": "Passenger volume, Toei step-free / elevator data, and Tokyo Metro per-station exit counts refresh when public sources update. These details are kept lower on the page so the finder starts with traveler decisions, not source status.",
-      "coverage": "Coverage across {count} station areas — public data matched: {matched} · partial: {partial} · editorial fallback: {fallback}.",
-      "internalDatasets": "Some public datasets are catalogued internally but are not used for scoring or displayed as travel claims."
+      "detailsTitle": "查看分數信號詳情",
+      "detailsBody": "詳情放在頁面下方，讓頁面先從旅行決策開始。",
+      "coverage": "覆蓋 {count} 個區域 — 公開資料: {matched} · 部分: {partial} · 編輯: {fallback}。",
+      "internalDatasets": "部分公開資料集會在內部登記，但不會作為旅行判斷聲明顯示。"
     },
     "dataNote": {
-      "title": "Data freshness / source note",
-      "body": "fujiseat.com scores are editorial travel-fit scores informed by passenger data. They are not official ratings and do not guarantee safety, comfort, hotel quality, price, or availability.",
-      "currentMode": "Current mode: <strong>{mode}</strong>. Last source check: {date}.",
-      "registryTitle": "Source registry",
-      "fetchedLocally": "fetched locally",
-      "registeredOnly": "registered only",
-      "otherDatasets": "Other public datasets may be catalogued internally for future methodology review, but they are not shown here as travel claims and are not used in scoring."
+      "title": "資料新鮮度 / 來源說明",
+      "body": "fujiseat.com 分數是編輯型旅行適合度，在可用時參考資料。它不是官方評分，也不是保證。",
+      "currentMode": "目前模式：<strong>{mode}</strong>。最後檢查：{date}。",
+      "registryTitle": "來源列表",
+      "fetchedLocally": "本地取得",
+      "registeredOnly": "僅登記",
+      "otherDatasets": "其他資料集可能用於未來方法論審核，但不會在這裡作為旅行聲明顯示。"
     },
     "featured": {
-      "eyebrow": "Featured area cards",
-      "title": "Good starting points for many travelers"
+      "eyebrow": "精選區域",
+      "title": "適合許多旅客的起點"
     },
     "continue": {
       "title": "继续规划",
@@ -4104,6 +4109,98 @@
       "strongHaneda": "羽田交通強",
       "goodHaneda": "羽田交通好",
       "shinkansenFriendly": "適合新幹線"
+    },
+    "areaGroups": {
+      "east-tokyo": "東京東部",
+      "central-tokyo": "東京中心",
+      "south-central-tokyo": "東京中南部",
+      "south-tokyo": "東京南部",
+      "west-tokyo": "東京西部",
+      "north-west-tokyo": "東京西北部",
+      "central-east-tokyo": "東京中東部",
+      "west-central-tokyo": "東京中西部",
+      "central-north-tokyo": "東京中北部",
+      "central-west-tokyo": "東京中西部",
+      "north-central-tokyo": "東京北中部",
+      "bay-area": "灣區"
+    },
+    "areaCopy": {
+      "summaryAirportLuggage": "{area} 是 {group} 的酒店基地候選，機場或行李動線較強。",
+      "summaryRail": "{area} 是 {group} 的酒店基地候選，適合鐵路和新幹線動線。",
+      "summaryLocal": "{area} 是 {group} 的酒店基地候選，本地感更強。",
+      "summaryDefault": "{area} 是 {group} 的酒店基地候選，預訂前有清楚的取捨可比較。",
+      "localFeelHigh": "{area} 適合把街區氛圍看得和交通一樣重要的旅客。",
+      "localFeelCalm": "{area} 如果酒店位置合適，可能比大型樞紐更安靜。",
+      "localFeelBusy": "{area} 可以很實用，但車站規模或人流可能讓帶行李抵達更累。",
+      "localFeelDefault": "{area} 值得按車站交通、行李和酒店確切位置來比較。",
+      "why": "{area} 排在這裡是因為：{reasons}。請把它當作區域邏輯，而不是酒店排名。",
+      "reasons": {
+        "airportAccess": "機場交通",
+        "luggage": "行李友好抵達",
+        "shinkansen": "新幹線動線",
+        "stationSimplicity": "車站使用更簡單",
+        "localFeel": "本地街區感",
+        "sightseeing": "觀光交通",
+        "hotelChoice": "酒店選擇密度",
+        "balancedBase": "平衡的旅行取捨"
+      },
+      "watchOut": {
+        "stationComplexity": "車站複雜度可能讓抵達更難。",
+        "crowds": "人流會增加壓力，尤其是帶行李時。",
+        "airportTransfers": "機場交通可能需要更多規劃。",
+        "shinkansen": "新幹線交通可能不是最簡單。",
+        "limitedHotels": "酒店選擇可能少於大型樞紐。",
+        "businesslike": "這個區域可能更偏商務，而不是本地氛圍。",
+        "exactHotelLocation": "酒店所在方向、出口和步行路線仍然重要。"
+      }
+    },
+    "accessLevels": {
+      "excellent": "優秀",
+      "good": "良好",
+      "fair": "一般",
+      "weak": "較弱"
+    },
+    "exitLevels": {
+      "simple": "簡單",
+      "moderate": "中等",
+      "complex": "複雜",
+      "megaStation": "超大型車站"
+    },
+    "transferLevels": {
+      "low": "低",
+      "medium": "中",
+      "high": "高",
+      "veryHigh": "很高"
+    },
+    "terminalTypes": {
+      "localstation": "本地車站",
+      "interchange": "轉乘站",
+      "terminal": "終點/樞紐站",
+      "megaterminal": "超大型樞紐"
+    },
+    "networkLabels": {
+      "multiOperatorMegaTerminal": "多營運商超大型樞紐",
+      "airportRail": "機場鐵路 · {terminal}",
+      "subwayHeavyTransfer": "地鐵轉乘複雜區",
+      "general": "路網複雜度：{terminal}"
+    },
+    "sourceLabels": {
+      "tokyometropassengers": "Tokyo Metro 乘客排名",
+      "toeipassengers": "Toei Subway 乘客量",
+      "toeibarrierfree": "Toei Subway 無障礙 CSV",
+      "tokyometrostationexits": "Tokyo Metro 各站出口列表",
+      "toeistationexits": "Toei Subway 各站出口列表",
+      "tokyometrobarrierfree": "Tokyo Metro 無障礙頁面",
+      "odptstationinformation": "ODPT 車站資訊",
+      "tokyopolicecrime": "東京都警察町級犯罪統計",
+      "gsihazardportal": "災害地圖入口 (MLIT / GSI)",
+      "tokyolodgingfacilities": "東京住宿設施資料集"
+    },
+    "cadences": {
+      "daily": "每日",
+      "monthly": "每月",
+      "annual": "每年",
+      "irregular": "不定期"
     }
   },
   "fujiseatAreaLogic": {
