@@ -1862,8 +1862,11 @@
       "eyebrow": "Hub de áreas para ficar",
       "title": "Onde ficar no Japão",
       "subtitle": "Escolha a cidade e a área do hotel antes de reservar. Comece por Tóquio, Kyoto, Osaka ou Mt. Fuji conforme sua rota, aeroporto, planos de Shinkansen e estilo de viagem.",
-      "primaryCta": "Começar pelo guia de Tóquio",
-      "secondaryCta": "Ver exemplos de hotéis locais"
+      "primaryCta": "Encontrar minha base de hotel em Tóquio",
+      "secondaryCta": "Ver exemplos de hotéis locais",
+      "tagline": "Escolha sua base de hotel antes de escolher um hotel.",
+      "body": "A melhor área de estação depende do seu aeroporto, bagagem, planos de Shinkansen e do tipo de viagem que você quer.",
+      "imageAlt": "Planejamento de base de hotel em Tóquio"
     },
     "quickAnswerTitle": "Resposta rápida",
     "quickAnswers": [
@@ -1907,7 +1910,24 @@
       "eyebrow": "Exemplos de hotéis",
       "title": "Quer exemplos reais de hotéis?",
       "body": "Veja exemplos práticos de hotéis para Tóquio, Kyoto e Osaka. Não são rankings — são pontos de partida por lógica de área.",
-      "cta": "Ver hotéis locais"
+      "cta": "Ver hotéis locais",
+      "previewTitle": "Exemplos de hotéis locais",
+      "previewBody": "Não são rankings. Use como exemplos da sensação de cada área antes de verificar preços ao vivo.",
+      "exampleImageAlt": "Exemplo de base de hotel em {title}",
+      "examples": {
+        "oshiage": {
+          "title": "Oshiage / Skytree",
+          "body": "Útil para acesso pelo lado de Narita, planos em Asakusa e Skytree, e noites mais calmas que nos grandes hubs."
+        },
+        "kiyosumi": {
+          "title": "Kiyosumi-Shirakawa",
+          "body": "Uma base mais calma no leste de Tóquio para cafés, museus e viajantes que não precisam de vida noturna ao lado do hotel."
+        },
+        "ryogoku": {
+          "title": "Ryogoku",
+          "body": "Boa para uma estadia com sensação local perto de sumô, museus e passeios simples pelo lado leste."
+        }
+      }
     },
     "problemSection": {
       "eyebrow": "Lógica da rota",
@@ -2066,6 +2086,46 @@
     "preBooking": {
       "title": "Comece aqui se ainda não reservou hotéis",
       "body": "Use esta página antes de abrir sites de reserva de hotéis. Primeiro escolha a cidade, depois compare áreas de estação e então veja exemplos de hotéis. No Japão, uma boa base de hotel deve facilitar traslados do aeroporto, dias com bagagem, viagens de Shinkansen e primeiras noites. Estes guias são pontos de partida gerais, não recomendações personalizadas de hotel."
+    },
+    "heroRoute": {
+      "title": "Rota principal",
+      "steps": [
+        "Chegada ao aeroporto",
+        "Área da estação",
+        "Bagagem",
+        "Busca de hotéis"
+      ]
+    },
+    "quickAnswerIntro": "Use esta página como primeira parada antes de abrir sites de reserva de hotéis.",
+    "quickAnswerCta": "Abrir Tokyo Hotel Base Finder",
+    "quickAnswersNew": {
+      "firstTime": "Primeira vez em Tóquio? Comece pelo Tokyo Hotel Base Finder.",
+      "narita": "Vai usar o Aeroporto de Narita? Ueno, Asakusa e o leste de Tóquio costumam ser mais fáceis.",
+      "shinkansen": "Vai pegar um Shinkansen cedo? Tokyo Station, Ginza e Nihombashi são bases mais seguras.",
+      "quiet": "Quer uma Tóquio local mais calma? Veja Kiyosumi-Shirakawa, Kuramae, Oshiage ou Ryogoku."
+    },
+    "finderPreview": {
+      "eyebrow": "Tokyo Hotel Base Finder",
+      "title": "Não sabe onde ficar em Tóquio?",
+      "body": "Responda pela situação da viagem, não por ranking de hotel.",
+      "cta": "Começar pelo Tokyo Hotel Base Finder",
+      "factors": {
+        "luggage": "Bagagem grande",
+        "airport": "Chegada por Narita ou Haneda",
+        "shinkansen": "Shinkansen cedo",
+        "plans": "Disney / teamLab / Asakusa / Shibuya",
+        "quiet": "Tóquio local calma vs conveniência de grandes estações"
+      }
+    },
+    "detailedGuides": {
+      "eyebrow": "Guias detalhados de estadia",
+      "title": "Leia guias de áreas mais completos",
+      "body": "Use depois da decisão principal da base de hotel. Eles continuam como guias de texto, não listas de botões de reserva."
+    },
+    "bottomCta": {
+      "title": "Ainda não sabe onde ficar?",
+      "body": "Comece pelo Tokyo Hotel Base Finder. Ele reduz as opções por aeroporto, bagagem, planos de Shinkansen e estilo de viagem.",
+      "cta": "Encontrar minha base de hotel em Tóquio"
     }
   },
   "planYourTrip": {

@@ -1862,8 +1862,11 @@
       "eyebrow": "住宿区域导航",
       "title": "日本住哪里",
       "subtitle": "预订酒店前先选好城市和区域。根据路线、机场、新干线计划和旅行风格，从东京、京都、大阪或富士山开始。",
-      "primaryCta": "先看东京住宿指南",
-      "secondaryCta": "查看本地酒店示例"
+      "primaryCta": "寻找东京酒店住宿区域",
+      "secondaryCta": "查看本地酒店示例",
+      "tagline": "先选酒店住宿区域，再选具体酒店。",
+      "body": "最合适的车站区域取决于你的机场、行李、新干线计划和旅行风格。",
+      "imageAlt": "东京酒店住宿区域规划"
     },
     "quickAnswerTitle": "快速答案",
     "quickAnswers": [
@@ -1907,7 +1910,24 @@
       "eyebrow": "酒店示例",
       "title": "需要实际酒店示例？",
       "body": "查看东京、京都和大阪的实用酒店示例。这不是排名，而是按区域逻辑给出的起点。",
-      "cta": "查看本地酒店"
+      "cta": "查看本地酒店",
+      "previewTitle": "本地酒店示例",
+      "previewBody": "这些不是排名。请把它们当作了解各区域氛围的例子，再去查看实时价格。",
+      "exampleImageAlt": "{title} 酒店住宿区域示例",
+      "examples": {
+        "oshiage": {
+          "title": "押上 / 晴空塔",
+          "body": "适合成田方向交通、浅草和晴空塔行程，也比大型枢纽夜晚更安静。"
+        },
+        "kiyosumi": {
+          "title": "清澄白河",
+          "body": "东京东侧较安静的住宿区域，适合咖啡馆、博物馆，以及不需要酒店旁边有夜生活的旅客。"
+        },
+        "ryogoku": {
+          "title": "两国",
+          "body": "适合想体验相扑、博物馆和东京东侧轻松观光的本地感住宿区域。"
+        }
+      }
     },
     "problemSection": {
       "eyebrow": "路线逻辑",
@@ -2066,6 +2086,46 @@
     "preBooking": {
       "title": "如果还没订酒店，从这里开始",
       "body": "打开订房网站前，先用这页整理方向。先选城市，再比较车站区域，最后看酒店例子。在日本，好的酒店基地应该让机场交通、行李日、新干线移动和第一晚更轻松。这些指南是一般起点，不是个性化酒店推荐。"
+    },
+    "heroRoute": {
+      "title": "主要流程",
+      "steps": [
+        "机场抵达",
+        "车站区域",
+        "行李便利度",
+        "酒店搜索"
+      ]
+    },
+    "quickAnswerIntro": "打开酒店预订网站前，先从这个页面开始。",
+    "quickAnswerCta": "打开 Tokyo Hotel Base Finder",
+    "quickAnswersNew": {
+      "firstTime": "第一次来东京？先使用 Tokyo Hotel Base Finder。",
+      "narita": "从成田机场抵达？上野、浅草和东京东侧通常更方便。",
+      "shinkansen": "要赶早班新干线？东京站、银座和日本桥是更稳妥的住宿区域。",
+      "quiet": "想要更安静的本地东京氛围？可以看清澄白河、藏前、押上或两国。"
+    },
+    "finderPreview": {
+      "eyebrow": "Tokyo Hotel Base Finder",
+      "title": "不知道东京住哪里？",
+      "body": "按旅行情况判断，而不是按酒店排名判断。",
+      "cta": "从 Tokyo Hotel Base Finder 开始",
+      "factors": {
+        "luggage": "大件行李",
+        "airport": "成田或羽田抵达",
+        "shinkansen": "早班新干线",
+        "plans": "Disney / teamLab / Asakusa / Shibuya",
+        "quiet": "安静本地东京 vs 大站便利"
+      }
+    },
+    "detailedGuides": {
+      "eyebrow": "详细住宿指南",
+      "title": "阅读更深入的区域指南",
+      "body": "请在决定主要酒店住宿区域后使用。这些是详细文字指南，不是预订按钮列表。"
+    },
+    "bottomCta": {
+      "title": "还是不确定住哪里？",
+      "body": "从 Tokyo Hotel Base Finder 开始。它会按机场、行李、新干线计划和旅行风格缩小东京选择范围。",
+      "cta": "寻找东京酒店住宿区域"
     }
   },
   "planYourTrip": {

@@ -1862,8 +1862,11 @@
       "eyebrow": "숙소 지역 허브",
       "title": "일본에서 어디에 묵을까",
       "subtitle": "예약 전에 도시와 호텔 지역을 먼저 고르세요. 동선, 공항, 신칸센 일정, 여행 스타일에 따라 도쿄, 교토, 오사카, 후지산부터 시작할 수 있습니다.",
-      "primaryCta": "도쿄 숙소 가이드부터 보기",
-      "secondaryCta": "로컬 호텔 예시 보기"
+      "primaryCta": "도쿄 호텔 거점 찾기",
+      "secondaryCta": "로컬 호텔 예시 보기",
+      "tagline": "호텔을 고르기 전에 먼저 숙박 거점을 정하세요.",
+      "body": "가장 좋은 역 주변 지역은 공항, 짐, 신칸센 일정, 원하는 여행 스타일에 따라 달라집니다.",
+      "imageAlt": "도쿄 호텔 거점 계획"
     },
     "quickAnswerTitle": "빠른 답변",
     "quickAnswers": [
@@ -1907,7 +1910,24 @@
       "eyebrow": "호텔 예시",
       "title": "실제 호텔 예시가 필요하신가요?",
       "body": "도쿄, 교토, 오사카의 실용적인 호텔 예시를 보세요. 순위가 아니라 지역 선택 논리에 따른 출발점입니다.",
-      "cta": "로컬 호텔 보기"
+      "cta": "로컬 호텔 보기",
+      "previewTitle": "로컬 호텔 예시",
+      "previewBody": "순위가 아닙니다. 실시간 가격을 확인하기 전에 각 지역의 분위기를 이해하는 예시로 사용하세요.",
+      "exampleImageAlt": "{title} 호텔 거점 예시",
+      "examples": {
+        "oshiage": {
+          "title": "오시아게 / 스카이트리",
+          "body": "나리타 쪽 접근, 아사쿠사와 스카이트리 일정, 큰 터미널보다 차분한 밤에 유용합니다."
+        },
+        "kiyosumi": {
+          "title": "기요스미시라카와",
+          "body": "카페와 미술관, 호텔 주변 밤문화를 크게 필요로 하지 않는 여행자에게 맞는 조용한 도쿄 동쪽 거점입니다."
+        },
+        "ryogoku": {
+          "title": "료고쿠",
+          "body": "스모, 박물관, 도쿄 동쪽 관광을 가볍게 즐기기 좋은 로컬 분위기의 거점입니다."
+        }
+      }
     },
     "problemSection": {
       "eyebrow": "동선 기준",
@@ -2066,6 +2086,46 @@
     "preBooking": {
       "title": "아직 호텔을 예약하지 않았다면 여기서 시작하세요",
       "body": "호텔 예약 사이트를 열기 전에 이 페이지를 사용하세요. 먼저 도시를 고르고, 역 주변 지역을 비교한 뒤 호텔 예시를 확인하세요. 일본에서는 좋은 호텔 거점이 공항 이동, 짐이 많은 날, 신칸센 이동, 첫날 밤을 더 쉽게 만들어야 합니다. 이 가이드는 일반적인 출발점이며 개인 맞춤 호텔 추천이 아닙니다."
+    },
+    "heroRoute": {
+      "title": "주요 흐름",
+      "steps": [
+        "공항 도착",
+        "역 주변 지역",
+        "짐 이동",
+        "호텔 검색"
+      ]
+    },
+    "quickAnswerIntro": "호텔 예약 사이트를 열기 전에 이 페이지를 첫 출발점으로 사용하세요.",
+    "quickAnswerCta": "Tokyo Hotel Base Finder 열기",
+    "quickAnswersNew": {
+      "firstTime": "도쿄가 처음이라면 Tokyo Hotel Base Finder부터 시작하세요.",
+      "narita": "나리타공항을 이용한다면 우에노, 아사쿠사, 도쿄 동쪽이 더 쉬운 경우가 많습니다.",
+      "shinkansen": "이른 신칸센을 탄다면 도쿄역, 긴자, 니혼바시가 더 안정적인 거점입니다.",
+      "quiet": "조용한 로컬 도쿄를 원한다면 기요스미시라카와, 구라마에, 오시아게, 료고쿠를 보세요."
+    },
+    "finderPreview": {
+      "eyebrow": "Tokyo Hotel Base Finder",
+      "title": "도쿄에서 어디에 머물지 모르겠나요?",
+      "body": "호텔 순위가 아니라 여행 상황으로 판단하세요.",
+      "cta": "Tokyo Hotel Base Finder로 시작하기",
+      "factors": {
+        "luggage": "큰 짐",
+        "airport": "나리타 또는 하네다 도착",
+        "shinkansen": "이른 신칸센",
+        "plans": "Disney / teamLab / Asakusa / Shibuya",
+        "quiet": "조용한 로컬 도쿄 vs 큰 역의 편리함"
+      }
+    },
+    "detailedGuides": {
+      "eyebrow": "상세 숙박 가이드",
+      "title": "더 자세한 지역 가이드 읽기",
+      "body": "호텔 거점을 먼저 정한 뒤 사용하세요. 예약 버튼 목록이 아니라 자세한 텍스트 가이드입니다."
+    },
+    "bottomCta": {
+      "title": "아직 어디에 머물지 모르겠나요?",
+      "body": "Tokyo Hotel Base Finder부터 시작하세요. 공항, 짐, 신칸센 일정, 여행 스타일로 도쿄 선택지를 좁혀줍니다.",
+      "cta": "도쿄 호텔 거점 찾기"
     }
   },
   "planYourTrip": {

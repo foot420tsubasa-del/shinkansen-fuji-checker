@@ -1862,8 +1862,11 @@
       "eyebrow": "住宿區域導覽",
       "title": "日本住哪裡",
       "subtitle": "訂飯店前先選好城市和區域。依照路線、機場、新幹線計畫和旅行風格，從東京、京都、大阪或富士山開始。",
-      "primaryCta": "先看東京住宿指南",
-      "secondaryCta": "查看在地飯店範例"
+      "primaryCta": "尋找東京酒店住宿區域",
+      "secondaryCta": "查看在地飯店範例",
+      "tagline": "先選酒店住宿區域，再選具體酒店。",
+      "body": "最合適的車站區域取決於你的機場、行李、新幹線計畫和旅行風格。",
+      "imageAlt": "東京酒店住宿區域規劃"
     },
     "quickAnswerTitle": "快速答案",
     "quickAnswers": [
@@ -1907,7 +1910,24 @@
       "eyebrow": "飯店範例",
       "title": "需要實際飯店範例？",
       "body": "查看東京、京都和大阪的實用飯店範例。這不是排名，而是依照區域邏輯給你的起點。",
-      "cta": "查看在地飯店"
+      "cta": "查看在地飯店",
+      "previewTitle": "在地酒店示例",
+      "previewBody": "這些不是排名。請把它們當作了解各區域氛圍的例子，再去查看即時價格。",
+      "exampleImageAlt": "{title} 酒店住宿區域示例",
+      "examples": {
+        "oshiage": {
+          "title": "押上 / 晴空塔",
+          "body": "適合成田方向交通、淺草和晴空塔行程，也比大型樞紐夜晚更安靜。"
+        },
+        "kiyosumi": {
+          "title": "清澄白河",
+          "body": "東京東側較安靜的住宿區域，適合咖啡館、博物館，以及不需要酒店旁邊有夜生活的旅客。"
+        },
+        "ryogoku": {
+          "title": "兩國",
+          "body": "適合想體驗相撲、博物館和東京東側輕鬆觀光的在地感住宿區域。"
+        }
+      }
     },
     "problemSection": {
       "eyebrow": "路線邏輯",
@@ -2066,6 +2086,46 @@
     "preBooking": {
       "title": "如果還沒訂飯店，從這裡開始",
       "body": "打開訂房網站前，先用這頁整理方向。先選城市，再比較車站區域，最後看飯店例子。在日本，好的飯店基地應該讓機場交通、行李日、新幹線移動與第一晚更輕鬆。這些指南是一般起點，不是個人化飯店推薦。"
+    },
+    "heroRoute": {
+      "title": "主要流程",
+      "steps": [
+        "機場抵達",
+        "車站區域",
+        "行李便利度",
+        "酒店搜尋"
+      ]
+    },
+    "quickAnswerIntro": "打開酒店預訂網站前，先從這個頁面開始。",
+    "quickAnswerCta": "開啟 Tokyo Hotel Base Finder",
+    "quickAnswersNew": {
+      "firstTime": "第一次來東京？先使用 Tokyo Hotel Base Finder。",
+      "narita": "從成田機場抵達？上野、淺草和東京東側通常更方便。",
+      "shinkansen": "要搭早班新幹線？東京站、銀座和日本橋是更穩妥的住宿區域。",
+      "quiet": "想要更安靜的在地東京氛圍？可以看清澄白河、藏前、押上或兩國。"
+    },
+    "finderPreview": {
+      "eyebrow": "Tokyo Hotel Base Finder",
+      "title": "不知道東京住哪裡？",
+      "body": "按旅行情況判斷，而不是按酒店排名判斷。",
+      "cta": "從 Tokyo Hotel Base Finder 開始",
+      "factors": {
+        "luggage": "大型行李",
+        "airport": "成田或羽田抵達",
+        "shinkansen": "早班新幹線",
+        "plans": "Disney / teamLab / Asakusa / Shibuya",
+        "quiet": "安靜在地東京 vs 大站便利"
+      }
+    },
+    "detailedGuides": {
+      "eyebrow": "詳細住宿指南",
+      "title": "閱讀更深入的區域指南",
+      "body": "請在決定主要酒店住宿區域後使用。這些是詳細文字指南，不是預訂按鈕列表。"
+    },
+    "bottomCta": {
+      "title": "還是不確定住哪裡？",
+      "body": "從 Tokyo Hotel Base Finder 開始。它會按機場、行李、新幹線計畫和旅行風格縮小東京選擇範圍。",
+      "cta": "尋找東京酒店住宿區域"
     }
   },
   "planYourTrip": {

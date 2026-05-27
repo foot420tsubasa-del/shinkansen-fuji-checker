@@ -100,37 +100,23 @@ const guideGroups = [
   },
 ] as const;
 
-const quickAnswers = [
-  "First time in Tokyo? Start with the Tokyo Hotel Base Finder.",
-  "Using Narita Airport? Ueno, Asakusa, and East Tokyo are often easier.",
-  "Taking an early Shinkansen? Tokyo Station, Ginza, and Nihombashi are safer bases.",
-  "Want a quieter local Tokyo feel? Look at Kiyosumi-Shirakawa, Kuramae, Oshiage, or Ryogoku.",
-] as const;
+const quickAnswerKeys = ["firstTime", "narita", "shinkansen", "quiet"] as const;
 
-const finderFactors = [
-  "Large luggage",
-  "Narita or Haneda arrival",
-  "Early Shinkansen",
-  "Disney / teamLab / Asakusa / Shibuya",
-  "Quiet local Tokyo vs big-station convenience",
-] as const;
+const finderFactorKeys = ["luggage", "airport", "shinkansen", "plans", "quiet"] as const;
 
 const localExampleCards = [
   {
-    title: "Oshiage / Skytree",
-    body: "Useful for Narita-side access, Asakusa and Skytree plans, and calmer nights than major hubs.",
+    key: "oshiage",
     href: "/areas-to-stay/tokyo-stay-area-index?area=oshiage#selected-area",
     imageCandidates: ["/images/stay/tokyo/stay-east-tokyo.png", "/images/home/local-tokyo-ideas.png"],
   },
   {
-    title: "Kiyosumi-Shirakawa",
-    body: "A quieter east Tokyo base for cafes, museums, and travelers who do not need nightlife outside the hotel.",
+    key: "kiyosumi",
     href: "/areas-to-stay/tokyo-stay-area-index?area=kiyosumi-shirakawa#selected-area",
     imageCandidates: ["/images/stay/tokyo/stay-kiyosumi-shirakawa.png", "/images/home/local-tokyo-ideas.png"],
   },
   {
-    title: "Ryogoku",
-    body: "Good for a local-feeling stay around sumo, museums, and simple east-side sightseeing.",
+    key: "ryogoku",
     href: "/areas-to-stay/tokyo-stay-area-index?area=ryogoku#selected-area",
     imageCandidates: ["/design-home-assets/quiet-ryogoku.jpg", "/images/stay/tokyo/stay-asakusa.png"],
   },
@@ -281,21 +267,21 @@ export default async function AreasToStayIndex({ params }: Props) {
                 {t("hero.title")}
               </h1>
               <p className="mt-4 text-2xl font-semibold leading-tight text-[#0b1a33] md:text-3xl">
-                Choose your hotel base before choosing a hotel.
+                {t("hero.tagline")}
               </p>
               <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
-                The best station area depends on your airport, luggage, Shinkansen plans, and the kind of trip you want.
+                {t("hero.body")}
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <TrackedInternalLink
                 href="/areas-to-stay/tokyo-stay-area-index"
                 sourcePage={pagePath}
                 placement="stay_hub_hero_finder"
-                label="Find your Tokyo hotel base"
+                label={t("hero.primaryCta")}
                 locale={locale}
                 className={buttonClassName({ variant: "navy", size: "lg", className: "text-white sm:min-w-64" })}
               >
-                Find your Tokyo hotel base
+                {t("hero.primaryCta")}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </TrackedInternalLink>
               <TrackedInternalLink
@@ -315,7 +301,7 @@ export default async function AreasToStayIndex({ params }: Props) {
               {heroImage ? (
                 <Image
                   src={heroImage}
-                  alt="Tokyo hotel base planning"
+                  alt={t("hero.imageAlt")}
                   fill
                   priority
                   sizes="(min-width: 1024px) 38vw, 100vw"
@@ -324,9 +310,9 @@ export default async function AreasToStayIndex({ params }: Props) {
               ) : null}
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.05),rgba(15,23,42,0.42))]" aria-hidden="true" />
               <div className="relative w-full rounded-[26px] border border-white/80 bg-white/90 p-5 shadow-sm backdrop-blur">
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Main route</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">{t("heroRoute.title")}</p>
                 <div className="mt-4 grid gap-3">
-                  {["Airport arrival", "Station area", "Luggage fit", "Hotel search"].map((step, index) => (
+                  {(t.raw("heroRoute.steps") as string[]).map((step, index) => (
                     <div key={step} className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3">
                       <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0b1a33] text-sm font-bold text-white">{index + 1}</span>
                       <span className="text-sm font-semibold text-slate-800">{step}</span>
@@ -342,24 +328,24 @@ export default async function AreasToStayIndex({ params }: Props) {
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <h2 className="text-2xl font-semibold text-slate-950">{t("quickAnswerTitle")}</h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">Use this page as the first stop before opening hotel booking sites.</p>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("quickAnswerIntro")}</p>
             </div>
             <TrackedInternalLink
               href="/areas-to-stay/tokyo-stay-area-index"
               sourcePage={pagePath}
               placement="stay_hub_quick_answer_finder"
-              label="Open Tokyo Hotel Base Finder"
+              label={t("quickAnswerCta")}
               locale={locale}
               className={buttonClassName({ variant: "internal", size: "md", className: "shrink-0" })}
             >
-              Open Tokyo Hotel Base Finder
+              {t("quickAnswerCta")}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </TrackedInternalLink>
           </div>
           <ul className="mt-5 grid gap-3 md:grid-cols-2">
-            {quickAnswers.map((answer) => (
-              <li key={answer} className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-4 text-sm leading-6 text-slate-700">
-                {answer}
+            {quickAnswerKeys.map((key) => (
+              <li key={key} className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-4 text-sm leading-6 text-slate-700">
+                {t(`quickAnswersNew.${key}`)}
               </li>
             ))}
           </ul>
@@ -382,26 +368,26 @@ export default async function AreasToStayIndex({ params }: Props) {
         <section className="mt-10 rounded-[30px] border border-[#c9d8ee] bg-[linear-gradient(135deg,#f8fbff,#eef6ff)] p-6 shadow-sm md:p-8">
           <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
             <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0b1a33]">Tokyo Hotel Base Finder</p>
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950">Not sure where to stay in Tokyo?</h2>
-              <p className="mt-3 text-base leading-7 text-slate-600">Answer by travel situation, not by hotel ranking.</p>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0b1a33]">{t("finderPreview.eyebrow")}</p>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950">{t("finderPreview.title")}</h2>
+              <p className="mt-3 text-base leading-7 text-slate-600">{t("finderPreview.body")}</p>
               <TrackedInternalLink
                 href="/areas-to-stay/tokyo-stay-area-index"
                 sourcePage={pagePath}
                 placement="stay_hub_finder_preview"
-                label="Start with Tokyo Hotel Base Finder"
+                label={t("finderPreview.cta")}
                 locale={locale}
                 className={buttonClassName({ variant: "navy", size: "lg", className: "mt-5 text-white" })}
               >
-                Start with Tokyo Hotel Base Finder
+                {t("finderPreview.cta")}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </TrackedInternalLink>
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
-              {finderFactors.map((factor) => (
+              {finderFactorKeys.map((factor) => (
                 <div key={factor} className="flex items-center gap-3 rounded-2xl border border-white/80 bg-white px-4 py-4 text-sm font-semibold text-slate-800 shadow-sm">
                   <Search className="h-4 w-4 shrink-0 text-[#0b1a33]" aria-hidden="true" />
-                  {factor}
+                  {t(`finderPreview.factors.${factor}`)}
                 </div>
               ))}
             </div>
@@ -412,9 +398,9 @@ export default async function AreasToStayIndex({ params }: Props) {
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">{t("localPicks.eyebrow")}</p>
-              <h2 className="mt-1 text-2xl font-semibold text-slate-950">Local hotel examples</h2>
+              <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("localPicks.previewTitle")}</h2>
               <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
-                These are not rankings. Use them as examples of what each area feels like before checking live prices.
+                {t("localPicks.previewBody")}
               </p>
             </div>
             <TrackedInternalLink
@@ -430,21 +416,24 @@ export default async function AreasToStayIndex({ params }: Props) {
             </TrackedInternalLink>
           </div>
           <div className="mt-5 grid gap-3 md:grid-cols-3">
-            {localExampleCards.map((item) => (
+            {localExampleCards.map((item) => {
+              const title = t(`localPicks.examples.${item.key}.title`);
+              const image = publicImageIfExists(item.imageCandidates);
+              return (
               <TrackedInternalLink
-                key={item.title}
+                key={item.key}
                 href={item.href}
                 sourcePage={pagePath}
                 placement="stay_hub_local_example_preview"
-                label={item.title}
+                label={title}
                 locale={locale}
                 className="group overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 text-left transition-colors hover:border-[#9fd7bd] hover:bg-[#f7fffb]"
               >
-                {publicImageIfExists(item.imageCandidates) ? (
+                {image ? (
                   <div className="relative h-32 bg-slate-100">
                     <Image
-                      src={publicImageIfExists(item.imageCandidates) as string}
-                      alt={`${item.title} hotel base example`}
+                      src={image}
+                      alt={t("localPicks.exampleImageAlt", { title })}
                       fill
                       sizes="(min-width: 768px) 30vw, 100vw"
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
@@ -454,18 +443,19 @@ export default async function AreasToStayIndex({ params }: Props) {
                 ) : null}
                 <div className="p-4">
                   <MapPin className="h-5 w-5 text-[#106b43]" aria-hidden="true" />
-                  <h3 className="mt-3 text-base font-semibold text-slate-950">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">{item.body}</p>
+                  <h3 className="mt-3 text-base font-semibold text-slate-950">{title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{t(`localPicks.examples.${item.key}.body`)}</p>
                 </div>
               </TrackedInternalLink>
-            ))}
+              );
+            })}
           </div>
         </section>
 
         <section className="mt-10">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">Detailed Stay Guides</p>
-          <h2 className="mt-1 text-2xl font-semibold text-slate-950">Read deeper area guides</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">Use these after the main hotel-base decision. They stay as detailed text guides, not booking-button lists.</p>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">{t("detailedGuides.eyebrow")}</p>
+          <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("detailedGuides.title")}</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{t("detailedGuides.body")}</p>
           <div className="mt-5 grid gap-4 lg:grid-cols-2">
             {guideGroups.map((group) => {
               const pages = group.slugs.map(pageBySlug).filter((page): page is StayPage => Boolean(page));
@@ -499,19 +489,19 @@ export default async function AreasToStayIndex({ params }: Props) {
         </section>
 
         <section className="mt-10 rounded-[28px] border border-[#0b1a33]/10 bg-[#0b1a33] p-6 text-white shadow-sm md:p-8">
-          <h2 className="text-2xl font-semibold">Still not sure where to stay?</h2>
+          <h2 className="text-2xl font-semibold">{t("bottomCta.title")}</h2>
           <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-200">
-            Start with the Tokyo Hotel Base Finder. It narrows Tokyo down by airport, luggage, Shinkansen plans, and travel style.
+            {t("bottomCta.body")}
           </p>
           <TrackedInternalLink
             href="/areas-to-stay/tokyo-stay-area-index"
             sourcePage={pagePath}
             placement="stay_hub_bottom_finder"
-            label="Find your Tokyo hotel base"
+            label={t("bottomCta.cta")}
             locale={locale}
             className={buttonClassName({ variant: "internal", size: "lg", className: "mt-5" })}
           >
-            Find your Tokyo hotel base
+            {t("bottomCta.cta")}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </TrackedInternalLink>
         </section>

@@ -1862,8 +1862,11 @@
       "eyebrow": "Stay area hub",
       "title": "Where to Stay in Japan",
       "subtitle": "Not sure where to stay in Japan? Start by choosing the right city and hotel area before comparing hotel names. Use Tokyo, Kyoto, Osaka, or Mt. Fuji as your route starting point.",
-      "primaryCta": "Where to stay in Tokyo",
-      "secondaryCta": "See local hotel examples"
+      "primaryCta": "Find your Tokyo hotel base",
+      "secondaryCta": "See local hotel examples",
+      "tagline": "Choose your hotel base before choosing a hotel.",
+      "body": "The best station area depends on your airport, luggage, Shinkansen plans, and the kind of trip you want.",
+      "imageAlt": "Tokyo hotel base planning"
     },
     "quickAnswerTitle": "Quick Answer",
     "quickAnswers": [
@@ -1903,13 +1906,30 @@
         "placementLabel": "Kawaguchiko city card"
       }
     },
-      "localPicks": {
-        "eyebrow": "Hotel examples",
+    "localPicks": {
+      "eyebrow": "Hotel examples",
       "title": "Need hotel examples after choosing the area?",
       "body": "See practical hotel examples for Tokyo, Kyoto, and Osaka. These are not rankings — use them only after the city and station-area decision.",
-      "cta": "See local hotel examples"
+      "cta": "See local hotel examples",
+      "previewTitle": "Local hotel examples",
+      "previewBody": "These are not rankings. Use them as examples of what each area feels like before checking live prices.",
+      "exampleImageAlt": "{title} hotel base example",
+      "examples": {
+        "oshiage": {
+          "title": "Oshiage / Skytree",
+          "body": "Useful for Narita-side access, Asakusa and Skytree plans, and calmer nights than major hubs."
+        },
+        "kiyosumi": {
+          "title": "Kiyosumi-Shirakawa",
+          "body": "A quieter east Tokyo base for cafes, museums, and travelers who do not need nightlife outside the hotel."
+        },
+        "ryogoku": {
+          "title": "Ryogoku",
+          "body": "Good for a local-feeling stay around sumo, museums, and simple east-side sightseeing."
+        }
+      }
     },
-      "problemSection": {
+    "problemSection": {
       "eyebrow": "Before hotel booking",
       "title": "Choose by hotel-base problem"
     },
@@ -1951,7 +1971,7 @@
         "cta": "See Kawaguchiko"
       }
     },
-      "featuredGuides": {
+    "featuredGuides": {
       "eyebrow": "Hotel base guides",
       "title": "Compare city and station-area guides",
       "groups": {
@@ -2056,7 +2076,7 @@
         }
       }
     },
-      "continuePlanning": {
+    "continuePlanning": {
       "title": "Continue planning",
       "plan": "Plan Your Trip",
       "seat": "Seat Checker",
@@ -2066,6 +2086,46 @@
     "preBooking": {
       "title": "Start here if you have not booked hotels yet",
       "body": "Use this page before opening Trip.com, Agoda, or other hotel booking sites. First choose the city, then compare station areas, then check broad hotel searches or examples. In Japan, a good hotel base should make airport transfers, luggage days, Shinkansen trips, and first nights easier. These guides are general starting points, not personalized hotel recommendations."
+    },
+    "heroRoute": {
+      "title": "Main route",
+      "steps": [
+        "Airport arrival",
+        "Station area",
+        "Luggage fit",
+        "Hotel search"
+      ]
+    },
+    "quickAnswerIntro": "Use this page as the first stop before opening hotel booking sites.",
+    "quickAnswerCta": "Open Tokyo Hotel Base Finder",
+    "quickAnswersNew": {
+      "firstTime": "First time in Tokyo? Start with the Tokyo Hotel Base Finder.",
+      "narita": "Using Narita Airport? Ueno, Asakusa, and East Tokyo are often easier.",
+      "shinkansen": "Taking an early Shinkansen? Tokyo Station, Ginza, and Nihombashi are safer bases.",
+      "quiet": "Want a quieter local Tokyo feel? Look at Kiyosumi-Shirakawa, Kuramae, Oshiage, or Ryogoku."
+    },
+    "finderPreview": {
+      "eyebrow": "Tokyo Hotel Base Finder",
+      "title": "Not sure where to stay in Tokyo?",
+      "body": "Answer by travel situation, not by hotel ranking.",
+      "cta": "Start with Tokyo Hotel Base Finder",
+      "factors": {
+        "luggage": "Large luggage",
+        "airport": "Narita or Haneda arrival",
+        "shinkansen": "Early Shinkansen",
+        "plans": "Disney / teamLab / Asakusa / Shibuya",
+        "quiet": "Quiet local Tokyo vs big-station convenience"
+      }
+    },
+    "detailedGuides": {
+      "eyebrow": "Detailed Stay Guides",
+      "title": "Read deeper area guides",
+      "body": "Use these after the main hotel-base decision. They stay as detailed text guides, not booking-button lists."
+    },
+    "bottomCta": {
+      "title": "Still not sure where to stay?",
+      "body": "Start with the Tokyo Hotel Base Finder. It narrows Tokyo down by airport, luggage, Shinkansen plans, and travel style.",
+      "cta": "Find your Tokyo hotel base"
     }
   },
   "planYourTrip": {
