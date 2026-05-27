@@ -7,7 +7,6 @@ import {
   Luggage,
   MapPin,
   Plane,
-  ShieldCheck,
   Signpost,
   Train,
   Users,
@@ -42,7 +41,6 @@ import type {
 import {
   TrackedStayAreaContinueLink,
   TrackedStayAreaDetailLink,
-  TrackedStayAreaFilterLink,
 } from "./StayAreaIndexTracking";
 
 type Props = {
@@ -130,7 +128,6 @@ const sourceStatusFile = sourceStatusJson as SourceStatusFile;
 const FRESHNESS_HEADLINE = "Passenger-data-informed local refresh";
 const FRESHNESS_SUBLINE =
   "Passenger volume, Toei step-free / elevator data, and Tokyo Metro per-station exit counts refresh when public sources update.";
-const FRESHNESS_TAIL = "Tokyo Metro accessibility, Toei exit lists, and lodging-density sources are not yet live.";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -784,7 +781,7 @@ function AreaDetailPanel({
   const tone = matchLabelTone(score.matchLabel);
   const tier = fitTier(displayScore);
   return (
-    <section id="selected-area" className="scroll-mt-24 rounded-[24px] border border-slate-200 bg-white p-5 shadow-sm lg:sticky lg:top-24">
+    <section id="selected-area" className="scroll-mt-24 rounded-[24px] border border-orange-200 bg-white p-5 shadow-[0_18px_45px_rgba(15,23,42,0.08)] ring-4 ring-orange-50 lg:sticky lg:top-24">
       <div className="flex items-start justify-between gap-4">
         <div>
           <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Selected area</p>
@@ -990,6 +987,71 @@ function SignalTile({ icon: Icon, title, status, statusTone, body }: SignalTileP
   );
 }
 
+function StationSignalTiles({
+  core,
+  passengerSummary,
+  generatedScoreCount,
+}: {
+  core: ReturnType<typeof deriveCoreSignals>;
+  passengerSummary: string;
+  generatedScoreCount: number;
+}) {
+  return (
+    <div className="mt-4 grid gap-3 sm:grid-cols-2">
+      <SignalTile
+        icon={Users}
+        title="Passenger volume"
+        status={core.passengerStatus.label}
+        statusTone={core.passengerStatus.tone}
+        body={passengerSummary}
+      />
+      <SignalTile
+        icon={DoorOpen}
+        title="Exit / entrance complexity"
+        status={core.exitStatus.label}
+        statusTone={core.exitStatus.tone}
+        body={
+          core.exitMatchedAreas > 0
+            ? `Tokyo Metro exit feed parsed — ${core.exitMatchedAreas} of ${generatedScoreCount} areas use a bucketed open-exit count. Areas without Tokyo Metro coverage use the editorial level.`
+            : "Editorial tags explain station scale. This affects station simplicity and lightly affects luggage friendliness."
+        }
+      />
+      <SignalTile
+        icon={Train}
+        title="Line / operator complexity"
+        status="Active from area data"
+        statusTone="calm"
+        body="Derived from curated station lines, operator groups, transfer-hub level, and mega-terminal tags."
+      />
+      <SignalTile
+        icon={Luggage}
+        title="Step-free / elevator route"
+        status={core.stepFree.label}
+        statusTone={core.stepFree.tone}
+        body={
+          core.stepFreeAreas > 0
+            ? `Toei barrier-free CSVs parsed — ${core.stepFreeAreas} of ${generatedScoreCount} areas have a confirmed step-free route. Missing data is not penalised.`
+            : "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal."
+        }
+      />
+      <SignalTile
+        icon={Plane}
+        title="Airport / Shinkansen access"
+        status="Route logic"
+        statusTone="calm"
+        body="Curated route logic explains Narita, Haneda, Tokyo Station, Shinagawa, and Shinkansen fit. No live timetable data is implied."
+      />
+      <SignalTile
+        icon={Building2}
+        title="Hotel choice density"
+        status={core.lodgingStatus.label}
+        statusTone={core.lodgingStatus.tone}
+        body="Editorial hotel-choice signal. It does not rank individual hotels and does not show live availability."
+      />
+    </div>
+  );
+}
+
 function deriveCoreSignals(
   sources: SignalsSourceEntry[],
   signals: StayAreaSignalsFile,
@@ -1095,10 +1157,6 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
       ? `Tokyo Metro ${core.tokyoMetroPax.records ?? "?"} + Toei ${core.toeiPax.records ?? "?"} records`
       : `Tokyo Metro: ${statusLabel(core.tokyoMetroPax?.status ?? "skipped").toLowerCase()} · Toei: ${statusLabel(core.toeiPax?.status ?? "skipped").toLowerCase()}`;
 
-  const contextSources = sourceStatusFile.sources.filter((s) =>
-    ["tokyo-police-crime", "gsi-hazard-portal"].includes(s.sourceId),
-  );
-
   const matchedCount = baselineScores.filter((s) => s.matchLabel === "public-data-matched").length;
   const partialCount = baselineScores.filter((s) => s.matchLabel === "partial-public-data").length;
   const fallbackCount = baselineScores.filter((s) => s.matchLabel === "editorial-fallback").length;
@@ -1146,9 +1204,6 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               </p>
               <p className="mt-4 text-sm font-semibold text-[#106b43]">
                 {FRESHNESS_HEADLINE} · Last source check: {lastChecked}
-              </p>
-              <p className="mt-1 text-xs leading-5 text-slate-500">
-                {FRESHNESS_SUBLINE} {FRESHNESS_TAIL}
               </p>
             </div>
             <a
@@ -1208,150 +1263,6 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           showFinderLink={false}
         />
 
-        <section className="mt-6 rounded-[22px] border border-slate-200 bg-slate-50 p-4">
-          <div className="mb-3">
-            <h2 className="text-base font-semibold text-slate-950">Travel priority filters</h2>
-            <p className="mt-1 text-xs leading-5 text-slate-500">
-              Choose one priority to highlight areas that fit that situation. This changes the order, not the underlying area data.
-            </p>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {FILTERS.map(({ key, label }) => {
-              const isActive = key === activeFilter;
-              const filtered = applyFilterBoost(baselineScores, key)
-                .map((score) => {
-                  const areaItem = areaById(score.id);
-                  const signal = signalsFile.areas[score.id];
-                  return {
-                    score,
-                    displayScore: deriveDisplayFitScore({ area: areaItem, score, signal }),
-                  };
-                })
-                .sort((a, b) => b.displayScore - a.displayScore || b.score.overallScore - a.score.overallScore);
-              const top = filtered[0];
-              return (
-                <TrackedStayAreaFilterLink
-                  key={key}
-                  href={filterHref(locale, key)}
-                  className={[
-                    "rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors",
-                    isActive
-                      ? "border-emerald-200 bg-emerald-50 text-[#106b43]"
-                      : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200 hover:text-[#106b43]",
-                  ].join(" ")}
-                  ariaCurrent={isActive ? "true" : undefined}
-                  filterId={key}
-                  filterLabel={label}
-                  pagePath={pagePath}
-                  resultCount={filtered.length}
-                  topAreaIdAfterFilter={top?.score.id ?? ""}
-                  topAreaScoreAfterFilter={top?.displayScore ?? 0}
-                >
-                  {label}
-                </TrackedStayAreaFilterLink>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* ============= Station usability signals (replaces "Source status") ============== */}
-        <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <div className="flex items-center gap-2 text-[#106b43]">
-            <BarChart3 className="h-5 w-5" aria-hidden="true" />
-            <h2 className="text-xl font-semibold text-slate-950">Station usability signals</h2>
-          </div>
-          <p className="mt-2 text-xs leading-5 text-slate-500">
-            Seven signals drive the score. Passenger volume, Toei step-free / elevator coverage, and Tokyo Metro
-            per-station exit counts are live; line / operator complexity and transfer-hub penalty come from
-            area data; airport / Shinkansen access uses route logic; lodging density is an editorial hotel-choice signal.
-          </p>
-
-          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <SignalTile
-              icon={Users}
-              title="Passenger volume"
-              status={core.passengerStatus.label}
-              statusTone={core.passengerStatus.tone}
-              body={passengerSummary}
-            />
-            <SignalTile
-              icon={DoorOpen}
-              title="Exit / entrance complexity"
-              status={core.exitStatus.label}
-              statusTone={core.exitStatus.tone}
-              body={
-                core.exitMatchedAreas > 0
-                  ? `Tokyo Metro exit feed parsed — ${core.exitMatchedAreas} of ${generatedScoreCount} areas now use a live open-exit count (bucketed: ≤4 Simple, 5–8 Moderate, 9–14 Complex, 15+ Mega station). Areas without Tokyo Metro coverage use the editorial level.`
-                  : "Editorial tags (Simple / Moderate / Complex / Mega station). Affects station simplicity and lightly affects luggage friendliness."
-              }
-            />
-            <SignalTile
-              icon={Train}
-              title="Line / operator complexity"
-              status="Active from area data"
-              statusTone="calm"
-              body="Derived from curated stationLines[], operator groups, transfer-hub level, and mega-terminal tags. This is an active local signal, not a failed or skipped public fetch."
-            />
-            <SignalTile
-              icon={Luggage}
-              title="Step-free / elevator route"
-              status={core.stepFree.label}
-              statusTone={core.stepFree.tone}
-              body={
-                core.stepFreeAreas > 0
-                  ? `Toei barrier-free CSVs parsed — ${core.stepFreeAreas} of ${generatedScoreCount} areas have a confirmed step-free route. Missing data is not penalised. Tokyo Metro per-station detail pages are not yet parsed.`
-                  : "Step-free route data is used only when a public source is confidently matched. Missing data is not treated as a negative signal."
-              }
-            />
-            <SignalTile
-              icon={Signpost}
-              title="Transfer hub penalty"
-              status="Active"
-              statusTone="calm"
-              body="Editorial transfer-hub level (Low → Very High). Strongly affects station simplicity and crowd stress for mega hubs."
-            />
-            <SignalTile
-              icon={Plane}
-              title="Airport / Shinkansen access"
-              status="Route logic"
-              statusTone="calm"
-              body="Curated accessProfiles explain Narita, Haneda, Tokyo Station, Shinagawa, and Shinkansen fit. No live timetable data is implied."
-            />
-            <SignalTile
-              icon={Building2}
-              title="Hotel choice density"
-              status={core.lodgingStatus.label}
-              statusTone={core.lodgingStatus.tone}
-              body="Editorial hotel-choice signal from lodgingDensityLevel. It explains whether nearby hotel search is likely limited, some, many, or very dense. Not live availability and not a hotel ranking."
-            />
-          </div>
-
-          {/* ============== Context (not scored) ============== */}
-          <div className="mt-6">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-500">Context (not scored)</p>
-            <p className="mt-1 text-xs leading-5 text-slate-500">
-              Catalogued for reference. These signals do NOT contribute to the station-area score. We do not label
-              areas as safe or dangerous.
-            </p>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              {contextSources.map((src) => (
-                <SignalTile
-                  key={src.sourceId}
-                  icon={ShieldCheck}
-                  title={src.label}
-                  status="Not used in score"
-                  statusTone="soft"
-                  body={src.message || "Catalogued only. Not displayed as a safety or hazard claim."}
-                />
-              ))}
-            </div>
-          </div>
-
-          <p className="mt-5 text-xs leading-5 text-slate-500">
-            Coverage across {generatedScoreCount} station areas — public data matched: {matchedCount} · partial: {partialCount} · editorial fallback: {fallbackCount}.
-          </p>
-        </section>
-
         <section className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
           <div id="ranked-areas" className="scroll-mt-24">
             <div className="flex items-end justify-between gap-4">
@@ -1360,7 +1271,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
                 <h2 className="mt-1 text-2xl font-semibold text-slate-950">Station-area fit and trade-offs</h2>
               </div>
               <p className="hidden text-xs font-semibold text-slate-500 md:block">
-                {generatedScoreCount} areas · filter: {FILTERS.find((f) => f.key === activeFilter)?.label}
+                {generatedScoreCount} areas · filter: {FILTERS.find((f) => f.key === activeFilter)?.label ?? "All areas"}
               </p>
             </div>
             <div className="mt-4 grid gap-3">
@@ -1425,6 +1336,27 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               <InfoCard icon={Train} title="Lines" body="More lines / operators lower station simplicity." />
               <InfoCard icon={Signpost} title="Transfer" body="Transfer-hub penalty hits mega interchanges." />
             </div>
+            <details className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <summary className="cursor-pointer text-sm font-semibold text-slate-950">
+                See score signal details
+              </summary>
+              <p className="mt-3 text-xs leading-5 text-slate-500">
+                {FRESHNESS_SUBLINE} These details are kept lower on the page so the finder starts with traveler
+                decisions, not source status.
+              </p>
+              <StationSignalTiles
+                core={core}
+                passengerSummary={passengerSummary}
+                generatedScoreCount={generatedScoreCount}
+              />
+              <p className="mt-4 text-xs leading-5 text-slate-500">
+                Coverage across {generatedScoreCount} station areas — public data matched: {matchedCount} · partial: {partialCount} · editorial fallback: {fallbackCount}.
+              </p>
+              <p className="mt-2 text-xs leading-5 text-slate-500">
+                Some public datasets are catalogued internally but are not used for scoring or displayed as travel
+                claims.
+              </p>
+            </details>
           </div>
 
           <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
@@ -1442,16 +1374,22 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
             <div className="mt-4 rounded-2xl bg-slate-50 p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.08em] text-slate-500">Source registry</p>
               <ul className="mt-2 space-y-1.5 text-xs leading-5 text-slate-600">
-                {tokyoStayAreaSourceRegistry.map((source) => (
+                {tokyoStayAreaSourceRegistry
+                  .filter((source) => source.usedInScore)
+                  .map((source) => (
                   <li key={source.id}>
                     · {source.label}{" "}
                     <span className="text-slate-400">
                       ({source.expectedUpdateCadence}, {source.status === "live" ? "fetched locally" : "registered only"}
-                      {source.usedInScore ? "" : " · not used in score"})
+                      )
                     </span>
                   </li>
                 ))}
               </ul>
+              <p className="mt-3 text-xs leading-5 text-slate-500">
+                Other public datasets may be catalogued internally for future methodology review, but they are not shown
+                here as travel claims and are not used in scoring.
+              </p>
             </div>
           </div>
         </section>
@@ -1466,7 +1404,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               label="Where to stay in Tokyo for first-time visitors"
               locale={locale}
               areaId={selected.area.id}
-              className="rounded-2xl border border-emerald-100 bg-white p-4 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
+              className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
               Where to stay in Tokyo →
             </TrackedStayAreaContinueLink>
@@ -1477,7 +1415,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               label="Airport transfer hub"
               locale={locale}
               areaId={selected.area.id}
-              className="rounded-2xl border border-emerald-100 bg-white p-4 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
+              className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
               Match airport transfer →
             </TrackedStayAreaContinueLink>
@@ -1488,7 +1426,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               label="Tokyo hotel base before Shinkansen"
               locale={locale}
               areaId={selected.area.id}
-              className="rounded-2xl border border-emerald-100 bg-white p-4 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
+              className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
               Shinkansen hotel base →
             </TrackedStayAreaContinueLink>
@@ -1499,7 +1437,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               label="Tokyo hotel area with luggage"
               locale={locale}
               areaId={selected.area.id}
-              className="rounded-2xl border border-emerald-100 bg-white p-4 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
+              className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
               Luggage-friendly Tokyo base →
             </TrackedStayAreaContinueLink>
@@ -1510,7 +1448,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               label="Local hotel examples"
               locale={locale}
               areaId={selected.area.id}
-              className="rounded-2xl border border-emerald-100 bg-white p-4 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
+              className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
               See local hotel examples →
             </TrackedStayAreaContinueLink>

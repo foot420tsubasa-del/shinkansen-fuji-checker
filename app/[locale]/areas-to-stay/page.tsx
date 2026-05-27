@@ -120,24 +120,34 @@ const localExampleCards = [
     title: "Oshiage / Skytree",
     body: "Useful for Narita-side access, Asakusa and Skytree plans, and calmer nights than major hubs.",
     href: "/areas-to-stay/tokyo-stay-area-index?area=oshiage#selected-area",
+    imageCandidates: ["/images/stay/tokyo/stay-east-tokyo.png", "/images/home/local-tokyo-ideas.png"],
   },
   {
     title: "Kiyosumi-Shirakawa",
     body: "A quieter east Tokyo base for cafes, museums, and travelers who do not need nightlife outside the hotel.",
     href: "/areas-to-stay/tokyo-stay-area-index?area=kiyosumi-shirakawa#selected-area",
+    imageCandidates: ["/images/stay/tokyo/stay-kiyosumi-shirakawa.png", "/images/home/local-tokyo-ideas.png"],
   },
   {
     title: "Ryogoku",
     body: "Good for a local-feeling stay around sumo, museums, and simple east-side sightseeing.",
     href: "/areas-to-stay/tokyo-stay-area-index?area=ryogoku#selected-area",
+    imageCandidates: ["/design-home-assets/quiet-ryogoku.jpg", "/images/stay/tokyo/stay-asakusa.png"],
   },
 ] as const;
+
+const guideGroupChrome = {
+  tokyo: { icon: Building2, className: "border-sky-100 bg-sky-50/60 text-sky-800" },
+  kyoto: { icon: Landmark, className: "border-emerald-100 bg-emerald-50/60 text-emerald-800" },
+  osaka: { icon: Utensils, className: "border-orange-100 bg-orange-50/55 text-orange-800" },
+  fuji: { icon: Mountain, className: "border-slate-200 bg-white text-slate-800" },
+} as const;
 
 function pageBySlug(slug: string) {
   return stayPages.find((page) => page.slug === slug);
 }
 
-function publicImageIfExists(candidates: string[]) {
+function publicImageIfExists(candidates: readonly string[]) {
   return candidates.find((src) => fs.existsSync(path.join(process.cwd(), "public", src.replace(/^\//, ""))));
 }
 
@@ -237,6 +247,10 @@ export default async function AreasToStayIndex({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "areasToStayHub" });
   const pagePath = "/areas-to-stay";
+  const heroImage = publicImageIfExists([
+    "/images/home/tokyo-hotel-base.png",
+    "/images/stay/tokyo/tokyo-stay-hero.png",
+  ]);
   const cityCards: CityCard[] = cityCardConfigs.map((card) => ({
     ...card,
     title: t(`cityCards.${card.key}.title`),
@@ -297,8 +311,19 @@ export default async function AreasToStayIndex({ params }: Props) {
               </TrackedInternalLink>
               </div>
             </div>
-            <div className="flex min-h-72 items-end bg-[linear-gradient(135deg,#eff6ff,#f8fafc_52%,#ecfdf5)] p-6 md:p-8">
-              <div className="w-full rounded-[26px] border border-white/80 bg-white/85 p-5 shadow-sm backdrop-blur">
+            <div className="relative flex min-h-80 items-end overflow-hidden bg-[linear-gradient(135deg,#eff6ff,#f8fafc_52%,#ecfdf5)] p-6 md:p-8">
+              {heroImage ? (
+                <Image
+                  src={heroImage}
+                  alt="Tokyo hotel base planning"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 38vw, 100vw"
+                  className="object-cover"
+                />
+              ) : null}
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.05),rgba(15,23,42,0.42))]" aria-hidden="true" />
+              <div className="relative w-full rounded-[26px] border border-white/80 bg-white/90 p-5 shadow-sm backdrop-blur">
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">Main route</p>
                 <div className="mt-4 grid gap-3">
                   {["Airport arrival", "Station area", "Luggage fit", "Hotel search"].map((step, index) => (
@@ -413,11 +438,25 @@ export default async function AreasToStayIndex({ params }: Props) {
                 placement="stay_hub_local_example_preview"
                 label={item.title}
                 locale={locale}
-                className="group rounded-2xl border border-slate-200 bg-slate-50 p-4 text-left transition-colors hover:border-[#9fd7bd] hover:bg-[#f7fffb]"
+                className="group overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 text-left transition-colors hover:border-[#9fd7bd] hover:bg-[#f7fffb]"
               >
-                <MapPin className="h-5 w-5 text-[#106b43]" aria-hidden="true" />
-                <h3 className="mt-3 text-base font-semibold text-slate-950">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">{item.body}</p>
+                {publicImageIfExists(item.imageCandidates) ? (
+                  <div className="relative h-32 bg-slate-100">
+                    <Image
+                      src={publicImageIfExists(item.imageCandidates) as string}
+                      alt={`${item.title} hotel base example`}
+                      fill
+                      sizes="(min-width: 768px) 30vw, 100vw"
+                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.02),rgba(15,23,42,0.18))]" aria-hidden="true" />
+                  </div>
+                ) : null}
+                <div className="p-4">
+                  <MapPin className="h-5 w-5 text-[#106b43]" aria-hidden="true" />
+                  <h3 className="mt-3 text-base font-semibold text-slate-950">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600">{item.body}</p>
+                </div>
               </TrackedInternalLink>
             ))}
           </div>
@@ -430,9 +469,16 @@ export default async function AreasToStayIndex({ params }: Props) {
           <div className="mt-5 grid gap-4 lg:grid-cols-2">
             {guideGroups.map((group) => {
               const pages = group.slugs.map(pageBySlug).filter((page): page is StayPage => Boolean(page));
+              const chrome = guideGroupChrome[group.cityKey];
+              const GroupIcon = chrome.icon;
               return (
-                <section key={group.cityKey} className="rounded-[22px] border border-slate-200 bg-slate-50/70 p-4">
-                  <h3 className="text-base font-semibold text-slate-950">{t(`featuredGuides.groups.${group.cityKey}`)}</h3>
+                <section key={group.cityKey} className={["rounded-[22px] border p-4", chrome.className].join(" ")}>
+                  <div className="flex items-center gap-2">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/80 shadow-sm">
+                      <GroupIcon className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <h3 className="text-base font-semibold text-slate-950">{t(`featuredGuides.groups.${group.cityKey}`)}</h3>
+                  </div>
                   <div className="mt-3 grid gap-3">
                     {pages.map((page) => (
                       <GuideCard
