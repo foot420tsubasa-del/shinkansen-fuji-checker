@@ -1,6 +1,6 @@
 const BASE = "https://fujiseat.com";
 
-const LOCALES = ["en", "pt-BR", "es", "ko", "zh-TW", "zh-CN", "fr", "de"] as const;
+const LOCALES = ["en", "pt-BR", "es", "ko", "zh-TW", "zh-CN", "fr", "de", "ru"] as const;
 
 export function getAlternates(path: string, locale: string) {
   const enUrl = path === "" ? `${BASE}/` : `${BASE}${path}`;

@@ -31,7 +31,6 @@ const englishOnlyContentPaths = [
   "/local-tokyo/suitengumae-ningyocho",
   "/privacy",
   "/terms",
-  "/questions",
   "/how-to-read-japanese-train-signs",
   "/shinkansen-seat-e",
   "/tokyo-to-kyoto-mt-fuji-seat",
@@ -41,8 +40,14 @@ const englishOnlyContentPaths = [
   "/jr-pass-vs-single-ticket",
   "/tokyo-to-kyoto-shinkansen-ticket",
   "/shinkansen-ticket-vs-jr-pass-tokyo-kyoto-osaka",
+  "/areas-to-stay/tokyo-stay-area-index",
   "/areas-to-stay/tokyo-hotel-room-size-guide",
   "/areas-to-stay/where-to-stay-in-tokyo-with-luggage",
+  "/areas-to-stay/tokyo/shinjuku",
+  "/areas-to-stay/tokyo/ueno",
+  "/areas-to-stay/tokyo/asakusa",
+  "/areas-to-stay/tokyo/tokyo-station",
+  "/areas-to-stay/tokyo/east-tokyo",
 ];
 
 const dynamicPaths = [
@@ -75,9 +80,10 @@ function makeEntry(path: string, priority: number, includeAlternates = true): Me
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const entries = [
     ...translatedPaths.map((path, index) => makeEntry(path, index === 0 ? 1 : 0.8)),
     ...englishOnlyContentPaths.map((path) => makeEntry(path, 0.8, false)),
     ...dynamicPaths.map((path) => makeEntry(path, 0.7, false)),
   ];
+  return Array.from(new Map(entries.map((entry) => [entry.url, entry])).values());
 }
