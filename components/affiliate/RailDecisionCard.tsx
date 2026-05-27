@@ -6,6 +6,7 @@ type RailCta = {
   href: string;
   provider?: AffiliateClickParams["provider"];
   category?: AffiliateClickParams["category"];
+  placement?: AffiliateClickParams["placement"];
   linkId?: string;
   product?: string;
   adid?: string;
@@ -38,7 +39,7 @@ function toProviderChoice(
     product: cta.product ?? "route_compare",
     adid: cta.adid,
     linkId: cta.linkId,
-    placement,
+    placement: cta.placement ?? placement,
     variant,
     category: cta.category ?? "train",
   };

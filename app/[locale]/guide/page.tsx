@@ -1111,15 +1111,15 @@ export default async function GuidePage({ params }: Props) {
           {ui.travelEssentialsBody}
         </p>
       </div>
-      <div className="grid gap-3 p-3.5 md:p-4">
-        <div className="grid gap-2 text-[12px] leading-5 text-slate-600 md:grid-cols-2">
-          <Link href="/plan-your-trip" className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-semibold text-slate-800 hover:bg-white">
+      <div className="p-3.5 md:p-4">
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[12px] leading-5 text-slate-600">
+          <Link href="/plan-your-trip" className="font-semibold text-slate-700 underline underline-offset-4 hover:text-slate-950">
             {ui.chooseRoute}
           </Link>
-          <Link href="/airport-transfers" className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-semibold text-slate-800 hover:bg-white">
+          <Link href="/airport-transfers" className="font-semibold text-slate-700 underline underline-offset-4 hover:text-slate-950">
             {ui.planAirportTransfer}
           </Link>
-          <Link href="/areas-to-stay" className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-semibold text-slate-800 hover:bg-white">
+          <Link href="/areas-to-stay" className="font-semibold text-slate-700 underline underline-offset-4 hover:text-slate-950">
             {ui.chooseStayArea}
           </Link>
           <TrackedAffiliateLink
@@ -1134,7 +1134,7 @@ export default async function GuidePage({ params }: Props) {
             label="Get Japan eSIM"
             linkId="esim"
             product="esim"
-            className="rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 font-semibold text-slate-800 hover:bg-white"
+            className="font-semibold text-slate-700 underline underline-offset-4 hover:text-slate-950"
           >
             {ui.getJapanEsim}
           </TrackedAffiliateLink>
@@ -1186,13 +1186,13 @@ export default async function GuidePage({ params }: Props) {
           rel={AFFILIATE_REL}
           category="train"
           provider="klook"
-          placement="guide_rail_decision"
+          placement="guide_top_klook_shinkansen"
           pagePath="/guide"
           locale={locale}
           label="Book Shinkansen ticket"
           linkId="shinkansenTicket"
           product="shinkansen_ticket"
-          className="rounded-2xl border border-orange-100 bg-orange-50 px-4 py-3.5 text-[12px] transition-colors hover:border-orange-200 hover:bg-orange-100"
+          className="rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3.5 text-[12px] shadow-sm transition-colors hover:border-orange-300 hover:bg-orange-100"
         >
           <span className="block font-semibold text-slate-950">Book Shinkansen ticket</span>
           <span className="mt-1 block leading-5 text-slate-600">
@@ -1201,21 +1201,50 @@ export default async function GuidePage({ params }: Props) {
           <span className="mt-3 inline-flex font-semibold text-orange-700">Open Klook →</span>
         </TrackedAffiliateLink>
 
-        <TrackedCtaLink
-          href="/jr-pass-vs-single-ticket"
-          placement="guide_after_seat_next_step"
-          label="Compare JR Pass"
+        <TrackedAffiliateLink
+          href={JR_PASS_URL}
+          target="_blank"
+          rel={AFFILIATE_REL}
+          category="train"
+          provider="klook"
+          placement="guide_top_klook_jr_pass"
           pagePath="/guide"
           locale={locale}
-          category="rail"
-          className="rounded-2xl border border-emerald-100 bg-emerald-50 px-4 py-3.5 text-[12px] transition-colors hover:border-emerald-200 hover:bg-emerald-100"
+          label="Check JR Pass options"
+          linkId="jrPass"
+          product="jr_pass"
+          adid="1165791"
+          className="rounded-2xl border border-orange-100 bg-white px-4 py-3.5 text-[12px] transition-colors hover:border-orange-200 hover:bg-orange-50"
         >
-          <span className="block font-semibold text-slate-950">Compare JR Pass</span>
+          <span className="block font-semibold text-slate-950">Check JR Pass options</span>
           <span className="mt-1 block leading-5 text-slate-600">
             Use this only if your itinerary includes several long JR rides.
           </span>
-          <span className="mt-3 inline-flex font-semibold text-[#106b43]">Open guide →</span>
-        </TrackedCtaLink>
+          <span className="mt-3 inline-flex font-semibold text-orange-700">Open Klook →</span>
+        </TrackedAffiliateLink>
+
+        {OMIO_SHINKANSEN_URL ? (
+          <TrackedAffiliateLink
+            href={OMIO_SHINKANSEN_URL}
+            target="_blank"
+            rel={AFFILIATE_REL}
+            category="train"
+            provider="omio"
+            placement="guide_top_omio_compare"
+            pagePath="/guide"
+            locale={locale}
+            label="Compare train options"
+            linkId="omioShinkansen"
+            product="route_compare"
+            className="rounded-2xl border border-indigo-100 bg-indigo-50 px-4 py-3.5 text-[12px] transition-colors hover:border-indigo-200 hover:bg-indigo-100"
+          >
+            <span className="block font-semibold text-slate-950">Compare train options</span>
+            <span className="mt-1 block leading-5 text-slate-600">
+              Use Omio if you are still comparing route options before booking.
+            </span>
+            <span className="mt-3 inline-flex font-semibold text-indigo-700">Open Omio →</span>
+          </TrackedAffiliateLink>
+        ) : null}
 
         <TrackedInternalLink
           href="/areas-to-stay/where-to-stay-before-shinkansen"
@@ -1232,21 +1261,6 @@ export default async function GuidePage({ params }: Props) {
           <span className="mt-3 inline-flex font-semibold text-sky-700">Open stay guide →</span>
         </TrackedInternalLink>
 
-        <TrackedCtaLink
-          href="/airport-transfers"
-          placement="guide_after_seat_next_step"
-          label="Check airport and eSIM basics"
-          pagePath="/guide"
-          locale={locale}
-          category="transfer"
-          className="rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-[12px] transition-colors hover:border-slate-300 hover:bg-white"
-        >
-          <span className="block font-semibold text-slate-950">Check airport / eSIM basics</span>
-          <span className="mt-1 block leading-5 text-slate-600">
-            For first-day logistics before you arrive.
-          </span>
-          <span className="mt-3 inline-flex font-semibold text-slate-700">Open arrival guide →</span>
-        </TrackedCtaLink>
       </div>
     </section>
   );
@@ -1386,10 +1400,13 @@ export default async function GuidePage({ params }: Props) {
           rel={AFFILIATE_REL}
           category="train"
           provider="klook"
-          placement="guide_top"
+          placement="guide_ready_klook_shinkansen"
           pagePath="/guide"
           locale={locale}
           label="Book Shinkansen ticket"
+          linkId="shinkansenTicket"
+          product="shinkansen_ticket"
+          adid="1265303"
           className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
         >
           {ui.bookShinkansenButton}
@@ -1400,10 +1417,13 @@ export default async function GuidePage({ params }: Props) {
           rel={AFFILIATE_REL}
           category="train"
           provider="klook"
-          placement="guide_top"
+          placement="guide_ready_klook_jr_pass"
           pagePath="/guide"
           locale={locale}
           label="Check JR Pass options"
+          linkId="jrPass"
+          product="jr_pass"
+          adid="1165791"
           className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
         >
           {ui.checkJrPassButton}
@@ -1492,17 +1512,19 @@ export default async function GuidePage({ params }: Props) {
             title={ui.bookShinkansenTitle}
             body={ui.bookShinkansenBody}
             primaryCta={{
-              label: "Klook",
+              label: "Book on Klook",
               href: KLOOK_URL,
               provider: "klook",
+              placement: "guide_top_klook_shinkansen",
               linkId: "shinkansenTicket",
               product: "shinkansen_ticket",
               adid: "1265303",
             }}
             secondaryCta={{
-              label: "Klook",
+              label: "Check on Klook",
               href: JR_PASS_URL,
               provider: "klook",
+              placement: "guide_top_klook_jr_pass",
               linkId: "jrPass",
               product: "jr_pass",
               adid: "1165791",
@@ -1510,9 +1532,10 @@ export default async function GuidePage({ params }: Props) {
             tertiaryTextLink={
               OMIO_SHINKANSEN_URL
                 ? {
-                    label: "Omio",
+                    label: "Compare on Omio",
                     href: OMIO_SHINKANSEN_URL,
                     provider: "omio",
+                    placement: "guide_top_omio_compare",
                     linkId: "omioShinkansen",
                     product: "route_compare",
                   }
@@ -1721,6 +1744,28 @@ export default async function GuidePage({ params }: Props) {
               </Link>
               .
             </p>
+            <div className="mt-3 rounded-2xl border border-orange-100 bg-orange-50/70 px-3.5 py-3">
+              <p className="text-[12px] font-semibold leading-5 text-slate-950">
+                If your route includes Tokyo → Kyoto/Osaka → Hiroshima, several long JR rides, or a return to Tokyo, check JR Pass options before booking single tickets.
+              </p>
+              <TrackedAffiliateLink
+                href={JR_PASS_URL}
+                target="_blank"
+                rel={AFFILIATE_REL}
+                category="train"
+                provider="klook"
+                placement="guide_jrpass_section_klook"
+                pagePath="/guide"
+                locale={locale}
+                label="Check JR Pass options on Klook"
+                linkId="jrPass"
+                product="jr_pass"
+                adid="1165791"
+                className="mt-3 inline-flex min-h-10 items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+              >
+                Check JR Pass options on Klook
+              </TrackedAffiliateLink>
+            </div>
             <p className="mt-3 text-[12px] text-slate-600">
               {copy.itineraryBefore} <Link href="/itineraries/7-day-first-time-japan" className="font-semibold text-sky-700 underline underline-offset-2">{copy.itineraryLink}</Link>.
             </p>
