@@ -1915,9 +1915,16 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
           <h2 className="text-xl font-semibold text-slate-950">{t("travelPlan.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-5">
             {planCards.map(({ label, area, href }) => (
-              <a key={label} href={href} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm shadow-sm transition-colors hover:bg-slate-50">
-                <span className="block text-slate-600">{label}</span>
-                <span className="mt-2 block font-semibold text-slate-950">→ {area}</span>
+              <a
+                key={label}
+                href={href}
+                className="group flex min-h-[104px] flex-col justify-between rounded-2xl border border-[#168a56] bg-[#168a56] p-4 text-sm text-white shadow-sm transition-all hover:bg-[#0f6f45] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-1"
+              >
+                <span className="block text-xs font-medium leading-5 text-emerald-50">{label}</span>
+                <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-white">
+                  {area}
+                  <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">→</span>
+                </span>
               </a>
             ))}
           </div>
