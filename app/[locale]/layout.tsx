@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -17,6 +18,15 @@ export const metadata: Metadata = {
 type Props = {
   children: ReactNode;
   params: Promise<{ locale: string }>;
+};
+
+const travelpayoutsDriveScriptAttributes: Record<string, string> = {
+  nowprocket: "",
+  "data-noptimize": "1",
+  "data-cfasync": "false",
+  "data-wpfc-render": "false",
+  "seraph-accel-crit": "1",
+  "data-no-defer": "1",
 };
 
 export function generateStaticParams() {
@@ -38,6 +48,21 @@ export default async function LocaleLayout({ children, params }: Props) {
         <meta name="agd-partner-manual-verification" />
       </head>
       <body>
+        {/* Travelpayouts Drive verification script. Added temporarily for site ownership verification. */}
+        <Script
+          id="travelpayouts-drive-verification"
+          strategy="afterInteractive"
+          {...travelpayoutsDriveScriptAttributes}
+        >
+          {`
+            (function () {
+              var script = document.createElement("script");
+              script.async = 1;
+              script.src = 'https://emrldtp.com/NTM0OTgy.js?t=534982';
+              document.head.appendChild(script);
+            })();
+          `}
+        </Script>
         <GoogleAnalytics />
         <NextIntlClientProvider messages={messages}>
           {children}
