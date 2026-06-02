@@ -78,6 +78,7 @@ export function getProviderFromHref(href: string): AffiliateClickParams["provide
     const host = new URL(href).hostname;
     if (host.includes("klook")) return "klook";
     if (host.includes("agoda")) return "agoda";
+    if (host.includes("booking.com") || host.includes("travelpayouts") || host.includes("tp.media")) return "booking_travelpayouts";
     if (host.includes("trip.com")) return "trip";
     if (host.includes("omio")) return "omio";
   } catch {

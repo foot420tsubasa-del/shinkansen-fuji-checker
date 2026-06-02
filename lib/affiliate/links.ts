@@ -1,10 +1,11 @@
 import affiliateLinkData from "@/data/affiliate-links.json";
+import hotelAffiliateLinkData from "@/data/hotel-affiliate-links.json";
 import hotelLinkData from "@/data/hotel-links.json";
 import hotelPickLinkData from "@/data/hotel-pick-links.json";
 import localHotelPickData from "@/data/local-hotel-picks.json";
 import { getAffUrl } from "@/src/affiliateLinks";
 
-export type AffiliateProvider = "klook" | "agoda" | "trip" | "omio" | "other";
+export type AffiliateProvider = "klook" | "agoda" | "trip" | "omio" | "booking_travelpayouts" | "other";
 
 export type AffiliateDestinationType =
   | "ticket"
@@ -152,6 +153,20 @@ type HotelAreaLink = {
   fallbackLinkId: string;
 };
 
+type HotelAffiliateLink = {
+  provider: string;
+  area_id: string;
+  locale: string;
+  placement: string;
+  destination_url: string;
+  affiliate_url: string;
+  sub_id: string;
+  enabled: boolean;
+  priority: number;
+  last_checked_at: string;
+  notes: string;
+};
+
 type HotelPickLink = {
   name: string;
   hotelKey: string;
@@ -174,9 +189,10 @@ const managedLinks = affiliateLinkData as Record<string, ManagedAffiliateLink>;
 const hotelLinks = hotelLinkData as Record<string, HotelAreaLink>;
 const hotelPickLinks = hotelPickLinkData as Record<string, HotelPickLink>;
 const localHotelPicks = localHotelPickData as Record<string, LocalHotelPick>;
+const hotelAffiliateLinks = hotelAffiliateLinkData as Record<string, HotelAffiliateLink>;
 
 function providerFromConfig(provider: string): AffiliateProvider {
-  if (provider === "klook" || provider === "agoda" || provider === "trip" || provider === "omio") {
+  if (provider === "klook" || provider === "agoda" || provider === "trip" || provider === "omio" || provider === "booking_travelpayouts") {
     return provider;
   }
   return "other";
@@ -388,11 +404,32 @@ function buildLocalHotelPickEntries(): AffiliateRegistryEntry[] {
   });
 }
 
+function buildHotelAffiliateEntries(): AffiliateRegistryEntry[] {
+  return Object.entries(hotelAffiliateLinks).flatMap(([id, link]) => {
+    const url = normalizeUrl(link.affiliate_url);
+    if (!link.enabled || !url || link.provider !== "booking_travelpayouts") return [];
+    return [
+      {
+        id,
+        provider: "booking_travelpayouts",
+        product: "hotel_area_search",
+        label: "Booking.com",
+        url,
+        destinationType: "hotel",
+        defaultPlacement: "stay_area_hotel_card",
+        linkSource: "data/hotel-affiliate-links.json",
+        notes: `${link.area_id} / ${link.placement} / ${link.locale} / ${link.sub_id}`,
+      },
+    ];
+  });
+}
+
 export const AFFILIATE_LINK_REGISTRY: AffiliateRegistryEntry[] = [
   ...buildManagedAffiliateEntries(),
   ...buildHotelAreaEntries(),
   ...buildHotelPickEntries(),
   ...buildLocalHotelPickEntries(),
+  ...buildHotelAffiliateEntries(),
 ];
 
 export function getAffiliateLinkById(id: string) {

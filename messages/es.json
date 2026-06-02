@@ -4033,6 +4033,7 @@
       "providers": {
         "trip": "Trip.com",
         "agoda": "Agoda",
+        "booking_travelpayouts": "Booking.com",
         "klook": "Klook"
       },
       "examples": "Ver ejemplos de hoteles locales"

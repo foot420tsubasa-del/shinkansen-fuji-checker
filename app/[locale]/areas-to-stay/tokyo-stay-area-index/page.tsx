@@ -25,6 +25,7 @@ import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import sourceStatusJson from "@/data/generated/tokyo-stay-area-source-status.json";
 import { tokyoStayAreaSourceRegistry } from "@/data/stay-area/source-registry";
 import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelProviderLinks, type HotelAffiliatePlacement } from "@/lib/hotel-affiliate-links";
 import { getTranslations } from "next-intl/server";
 import type {
   AccessRouteProfile,
@@ -151,7 +152,7 @@ function areaById(id: string): StayAreaBase {
   return area;
 }
 
-function hotelSearchForArea(area: StayAreaBase) {
+function hotelSearchForArea(area: StayAreaBase, locale: string, placement: HotelAffiliatePlacement) {
   const hotelAreaKey = hotelAreaKeyByStayAreaId[area.id];
   if (!hotelAreaKey) return null;
   const hotel = getHotelLink(hotelAreaKey);
@@ -159,7 +160,9 @@ function hotelSearchForArea(area: StayAreaBase) {
   const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl.trim();
   const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl.trim();
   const agodaLink = getAgodaHotelAreaUrl(hotelAreaKey);
+  const bookingLinks = getHotelProviderLinks({ areaId: area.id, locale, placement });
   const providers = [
+    ...bookingLinks,
     tripHref && tripHref !== "#"
       ? {
           provider: "trip" as ProviderId,
@@ -167,6 +170,7 @@ function hotelSearchForArea(area: StayAreaBase) {
           trackingHref: tripTrackingHref,
           label: "Search this area on Trip.com",
           linkId: `hotelArea.${hotelAreaKey}.trip`,
+          priority: 20,
         }
       : null,
     agodaLink && agodaLink.href !== "#"
@@ -176,6 +180,7 @@ function hotelSearchForArea(area: StayAreaBase) {
           trackingHref: agodaLink.trackingHref,
           label: "Search this area on Agoda",
           linkId: agodaLink.linkId,
+          priority: 30,
         }
       : null,
   ].filter((provider): provider is {
@@ -184,7 +189,9 @@ function hotelSearchForArea(area: StayAreaBase) {
     trackingHref: string;
     label: string;
     linkId: string;
-  } => Boolean(provider));
+    subId?: string;
+    priority: number;
+  } => Boolean(provider)).sort((a, b) => a.priority - b.priority || a.linkId.localeCompare(b.linkId));
 
   if (providers.length === 0) return null;
   return {
@@ -196,8 +203,8 @@ function hotelSearchForArea(area: StayAreaBase) {
   };
 }
 
-function hotelSearchForFinderArea(area: StayAreaBase): FinderArea["hotel"] {
-  const hotel = hotelSearchForArea(area);
+function hotelSearchForFinderArea(area: StayAreaBase, locale: string): FinderArea["hotel"] {
+  const hotel = hotelSearchForArea(area, locale, "top3");
   if (!hotel) return null;
   return {
     areaName: hotel.areaName,
@@ -773,7 +780,7 @@ function SelectedAreaHotelSearch({
   locale: string;
   t: Translation;
 }) {
-  const hotel = hotelSearchForArea(area);
+  const hotel = hotelSearchForArea(area, locale, "detail");
   if (!hotel) return null;
   const isBroadAreaFallback = hotel.selectedAreaName !== hotel.areaName;
   const heading = isBroadAreaFallback
@@ -804,7 +811,9 @@ function SelectedAreaHotelSearch({
             linkId={provider.linkId}
             product="hotel"
             area={hotel.areaName}
+            areaId={area.id}
             city={hotel.city}
+            subId={provider.subId}
             fullWidth
             className="min-h-11 rounded-xl text-sm"
           >
@@ -1124,7 +1133,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
       crowdStress: score.scores.crowdStress,
       lodgingChoice: score.scores.lodgingChoice,
     },
-    hotel: hotelSearchForFinderArea(areaItem),
+    hotel: hotelSearchForFinderArea(areaItem, locale),
   }));
   const finderCopy = t.raw("finder") as ComponentProps<typeof TokyoHotelAreaFinder>["copy"];
   const generatedScoreCount = scoresFile.areas.length;

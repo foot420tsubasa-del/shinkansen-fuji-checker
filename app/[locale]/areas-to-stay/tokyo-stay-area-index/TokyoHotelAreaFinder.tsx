@@ -16,6 +16,8 @@ type FinderProviderLink = {
   href: string;
   trackingHref: string;
   linkId: string;
+  subId?: string;
+  priority: number;
 };
 
 export type FinderArea = {
@@ -547,11 +549,12 @@ function HotelButtons({
             area={area.hotel?.areaName}
             areaId={area.id}
             city={area.hotel?.city}
+            subId={provider.subId}
             rank={rank}
             fullWidth
             className="min-h-10 rounded-xl text-xs"
           >
-            {provider.provider === "trip" ? "Trip.com" : "Agoda"}
+            {provider.provider === "booking_travelpayouts" ? "Booking.com" : provider.provider === "trip" ? "Trip.com" : "Agoda"}
           </ProviderButton>
         ))}
       </div>

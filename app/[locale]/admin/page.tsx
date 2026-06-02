@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import type { LinkConfig } from "@/src/affiliateLinks";
+import type { HotelAffiliateLinkConfig } from "@/lib/hotel-affiliate-links";
 import type { HotelLinkConfig } from "@/lib/hotel-links";
 import type { AgodaHotelMapConfig } from "@/lib/agoda-hotel-maps";
 import { DEFAULT_STAY_AREA_MAP_DISCLAIMER } from "@/lib/stay-area-map-constants";
@@ -12,6 +13,7 @@ import type { StayAreaMapConfig } from "@/lib/stay-area-maps";
 
 type LinkEntry = { id: string } & LinkConfig;
 type HotelEntry = { id: string } & HotelLinkConfig;
+type HotelAffiliateEntry = { id: string } & HotelAffiliateLinkConfig;
 type StayHotelPickEntry = {
   id: string;
   name: string;
@@ -57,6 +59,8 @@ type HotelFormState = {
   checkinType: "dynamic_offset" | "fixed_date";
   lastChecked: string;
 };
+
+type HotelAffiliateFormState = HotelAffiliateEntry;
 
 type HotelPickLinkFormState = HotelPickLinkEntry;
 type AgodaHotelMapEntry = AgodaHotelMapConfig;
@@ -346,6 +350,7 @@ function ps(provider: string) {
 export default function AdminPage() {
   const [links, setLinks] = useState<LinkEntry[]>([]);
   const [hotelLinks, setHotelLinks] = useState<HotelEntry[]>([]);
+  const [hotelAffiliateLinks, setHotelAffiliateLinks] = useState<HotelAffiliateEntry[]>([]);
   const [stayHotelPicks, setStayHotelPicks] = useState<StayHotelPickGroup[]>([]);
   const [hotelPickLinks, setHotelPickLinks] = useState<HotelPickLinkEntry[]>([]);
   const [agodaHotelMaps, setAgodaHotelMaps] = useState<AgodaHotelMapEntry[]>([]);
@@ -357,10 +362,12 @@ export default function AdminPage() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [showAdd, setShowAdd] = useState(false);
   const [klookUrlInput, setKlookUrlInput] = useState("");
-  const [tab, setTab] = useState<"hotel" | "stay-picks" | "local-picks" | "stay-maps" | "agoda-maps" | "todo" | "all">("hotel");
+  const [tab, setTab] = useState<"hotel" | "hotel-affiliate" | "stay-picks" | "local-picks" | "stay-maps" | "agoda-maps" | "todo" | "all">("hotel");
   const [adminToken, setAdminToken] = useState("");
   const [editingHotelId, setEditingHotelId] = useState<string | null>(null);
   const [hotelForm, setHotelForm] = useState<HotelFormState | null>(null);
+  const [editingHotelAffiliateId, setEditingHotelAffiliateId] = useState<string | null>(null);
+  const [hotelAffiliateForm, setHotelAffiliateForm] = useState<HotelAffiliateFormState | null>(null);
   const [editingHotelPickLinkId, setEditingHotelPickLinkId] = useState<string | null>(null);
   const [hotelPickLinkForm, setHotelPickLinkForm] = useState<HotelPickLinkFormState | null>(null);
   const [editingAgodaHotelMapId, setEditingAgodaHotelMapId] = useState<string | null>(null);
@@ -417,6 +424,24 @@ export default function AdminPage() {
       );
     } catch {
       setMessage({ text: "ホテルリンクの読み込みに失敗しました", ok: false });
+    }
+  }, [adminToken]);
+
+  const fetchHotelAffiliateLinks = useCallback(async () => {
+    try {
+      const res = await fetch("/api/hotel-affiliate-links", {
+        headers: adminToken ? { "x-admin-token": adminToken } : {},
+      });
+      if (res.status === 401) return;
+      const data = await res.json();
+      setHotelAffiliateLinks(
+        Object.entries(data).map(([id, config]) => ({
+          id,
+          ...(config as HotelAffiliateLinkConfig),
+        })),
+      );
+    } catch {
+      setMessage({ text: "Hotel Affiliate Linksの読み込みに失敗しました", ok: false });
     }
   }, [adminToken]);
 
@@ -518,12 +543,13 @@ export default function AdminPage() {
   useEffect(() => {
     fetchLinks();
     fetchHotelLinks();
+    fetchHotelAffiliateLinks();
     fetchStayHotelPicks();
     fetchHotelPickLinks();
     fetchAgodaHotelMaps();
     fetchStayAreaMaps();
     fetchLocalHotelPicks();
-  }, [fetchLinks, fetchHotelLinks, fetchStayHotelPicks, fetchHotelPickLinks, fetchAgodaHotelMaps, fetchStayAreaMaps, fetchLocalHotelPicks]);
+  }, [fetchLinks, fetchHotelLinks, fetchHotelAffiliateLinks, fetchStayHotelPicks, fetchHotelPickLinks, fetchAgodaHotelMaps, fetchStayAreaMaps, fetchLocalHotelPicks]);
 
   const flash = (text: string, ok: boolean) => {
     setMessage({ text, ok });
@@ -599,6 +625,22 @@ export default function AdminPage() {
 
   const updateHotelForm = (field: keyof HotelFormState, value: string) =>
     setHotelForm((prev) => (prev ? { ...prev, [field]: value } : prev));
+
+  const startHotelAffiliateEdit = (entry: HotelAffiliateEntry) => {
+    setEditingHotelAffiliateId(entry.id);
+    setHotelAffiliateForm({ ...entry });
+    setEditingId(null);
+    setShowAdd(false);
+    cancelHotelEdit();
+  };
+
+  const cancelHotelAffiliateEdit = () => {
+    setEditingHotelAffiliateId(null);
+    setHotelAffiliateForm(null);
+  };
+
+  const updateHotelAffiliateForm = (field: keyof HotelAffiliateFormState, value: string | boolean | number) =>
+    setHotelAffiliateForm((prev) => (prev ? { ...prev, [field]: value } : prev));
 
   const startHotelPickLinkEdit = (entry: HotelPickLinkEntry) => {
     setEditingHotelPickLinkId(entry.id);
@@ -786,6 +828,39 @@ export default function AdminPage() {
     }
   };
 
+  const saveHotelAffiliate = async () => {
+    if (!hotelAffiliateForm) return;
+    setSaving(true);
+    try {
+      const config: HotelAffiliateLinkConfig = {
+        provider: "booking_travelpayouts",
+        area_id: hotelAffiliateForm.area_id.trim(),
+        locale: hotelAffiliateForm.locale.trim() || "all",
+        placement: hotelAffiliateForm.placement,
+        destination_url: hotelAffiliateForm.destination_url.trim(),
+        affiliate_url: hotelAffiliateForm.affiliate_url.trim(),
+        sub_id: hotelAffiliateForm.sub_id.trim(),
+        enabled: hotelAffiliateForm.enabled,
+        priority: Number(hotelAffiliateForm.priority) || 10,
+        last_checked_at: hotelAffiliateForm.last_checked_at.trim(),
+        notes: hotelAffiliateForm.notes.trim(),
+      };
+      const res = await fetch("/api/hotel-affiliate-links", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", "x-admin-token": adminToken },
+        body: JSON.stringify({ id: hotelAffiliateForm.id, config }),
+      });
+      if (!res.ok) throw new Error();
+      flash("Hotel Affiliate Linkを保存しました", true);
+      cancelHotelAffiliateEdit();
+      await fetchHotelAffiliateLinks();
+    } catch {
+      flash("Hotel Affiliate Linkの保存に失敗しました", false);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const saveHotelPickLink = async () => {
     if (!hotelPickLinkForm) return;
     setSaving(true);
@@ -924,6 +999,7 @@ export default function AdminPage() {
   const doneItems = links.filter((l) => getStatus(l) === "done");
   const missingTransportAffiliateItems = RECOMMENDED_TRANSPORT_AFFILIATE_LINKS.filter((item) => !links.some((link) => link.id === item.id && getStatus(link) === "done"));
   const tripHotelDoneCount = hotelLinks.filter((h) => h.tripUrl.trim()).length;
+  const bookingHotelReadyCount = hotelAffiliateLinks.filter((link) => link.enabled && link.affiliate_url.trim()).length;
   const hotelPickLinkUrlCount = hotelPickLinks.filter((pick) => pick.tripUrl.trim()).length;
   const stayAreaMapActiveCount = stayAreaMaps.filter((map) => map.status === "active").length;
 
@@ -2192,6 +2268,7 @@ export default function AdminPage() {
                   sessionStorage.setItem("fujiseat_admin_token", adminToken);
                   fetchLinks();
                   fetchHotelLinks();
+                  fetchHotelAffiliateLinks();
                   fetchStayHotelPicks();
                   fetchHotelPickLinks();
                   fetchAgodaHotelMaps();
@@ -2276,6 +2353,12 @@ export default function AdminPage() {
             Hotel Area Links ({tripHotelDoneCount}/{hotelLinks.length})
           </button>
           <button
+            onClick={() => setTab("hotel-affiliate")}
+            className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "hotel-affiliate" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
+          >
+            Hotel Affiliate Links ({bookingHotelReadyCount}/{hotelAffiliateLinks.length})
+          </button>
+          <button
             onClick={() => setTab("stay-picks")}
             className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "stay-picks" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
           >
@@ -2316,6 +2399,139 @@ export default function AdminPage() {
             {[1, 2, 3].map((i) => (
               <div key={i} className="h-20 animate-pulse rounded-2xl bg-slate-200" />
             ))}
+          </div>
+        )}
+
+        {!loading && tab === "hotel-affiliate" && (
+          <div className="space-y-4">
+            <div className="rounded-2xl border border-blue-200 bg-blue-50/70 p-5 shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="h-3 w-3 rounded-full bg-[#003b95]" />
+                <p className="text-sm font-bold text-slate-900">Hotel Affiliate Links — Booking.com via Travelpayouts</p>
+              </div>
+              <div className="mt-3 grid gap-2 text-xs leading-5 text-slate-700 md:grid-cols-2">
+                <p className="rounded-xl bg-white px-3 py-2">affiliate_url が空ならBooking.comボタンは表示されません。</p>
+                <p className="rounded-xl bg-white px-3 py-2">enabled=false ならBooking.comボタンは表示されません。</p>
+                <p className="rounded-xl bg-white px-3 py-2">SubIDがaffiliate_url内に含まれているか目視確認してください。</p>
+                <p className="rounded-xl bg-white px-3 py-2">Vercel上のJSON編集は永続化されません。ローカル編集→commit→deploy前提です。</p>
+              </div>
+              <div className="mt-3 rounded-xl border border-blue-200 bg-white px-3 py-2 text-[11px] leading-5 text-slate-600">
+                <span className="font-semibold text-slate-900">SubID rule:</span>{" "}
+                <code className="rounded bg-slate-100 px-1">fs_{"{page}"}_{"{placement}"}_{"{area}"}_{"{locale}"}</code>
+                <span className="ml-2">Top3例: </span>
+                <code className="rounded bg-slate-100 px-1">fs_tkidx_top3_ueno_en</code>
+                <span className="ml-2">Detail例: </span>
+                <code className="rounded bg-slate-100 px-1">fs_tkidx_detail_ueno_en</code>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              {hotelAffiliateLinks
+                .slice()
+                .sort((a, b) => a.area_id.localeCompare(b.area_id) || a.placement.localeCompare(b.placement) || a.locale.localeCompare(b.locale))
+                .map((entry) => {
+                  const editing = editingHotelAffiliateId === entry.id && hotelAffiliateForm;
+                  const ready = entry.enabled && Boolean(entry.affiliate_url.trim());
+                  if (editing) {
+                    return (
+                      <div key={entry.id} className="rounded-2xl border border-blue-200 bg-white p-4 shadow-sm">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <p className="text-sm font-bold text-slate-900">{entry.id}</p>
+                          <span className="rounded-full bg-blue-50 px-2 py-1 text-[10px] font-bold text-blue-700">Booking.com</span>
+                        </div>
+                        <div className="mt-3 grid gap-3 md:grid-cols-3">
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            provider
+                            <input value={hotelAffiliateForm.provider} readOnly className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs" />
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            area_id
+                            <input value={hotelAffiliateForm.area_id} onChange={(e) => updateHotelAffiliateForm("area_id", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300" />
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            locale
+                            <input value={hotelAffiliateForm.locale} onChange={(e) => updateHotelAffiliateForm("locale", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300" />
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            placement
+                            <select value={hotelAffiliateForm.placement} onChange={(e) => updateHotelAffiliateForm("placement", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300">
+                              <option value="top3">top3</option>
+                              <option value="detail">detail</option>
+                            </select>
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            priority
+                            <input type="number" value={hotelAffiliateForm.priority} onChange={(e) => updateHotelAffiliateForm("priority", Number(e.target.value))} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300" />
+                          </label>
+                          <label className="flex items-end gap-2 text-[10px] font-semibold text-slate-500">
+                            <input type="checkbox" checked={hotelAffiliateForm.enabled} onChange={(e) => updateHotelAffiliateForm("enabled", e.target.checked)} className="h-4 w-4 rounded border-slate-300" />
+                            enabled
+                          </label>
+                        </div>
+                        <div className="mt-3 grid gap-3 md:grid-cols-2">
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            destination_url
+                            <input value={hotelAffiliateForm.destination_url} onChange={(e) => updateHotelAffiliateForm("destination_url", e.target.value)} placeholder="https://www.booking.com/..." className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300" />
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            sub_id
+                            <input value={hotelAffiliateForm.sub_id} onChange={(e) => updateHotelAffiliateForm("sub_id", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300" />
+                          </label>
+                        </div>
+                        <label className="mt-3 block text-[10px] font-semibold text-slate-500">
+                          affiliate_url
+                          <input value={hotelAffiliateForm.affiliate_url} onChange={(e) => updateHotelAffiliateForm("affiliate_url", e.target.value)} placeholder="Travelpayouts affiliate URL" className="mt-1 w-full rounded-lg border border-blue-200 px-3 py-2 text-xs outline-none focus:border-blue-400" />
+                        </label>
+                        <div className="mt-3 grid gap-3 md:grid-cols-2">
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            last_checked_at
+                            <input value={hotelAffiliateForm.last_checked_at} onChange={(e) => updateHotelAffiliateForm("last_checked_at", e.target.value)} placeholder="2026-06-02" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300" />
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            notes
+                            <input value={hotelAffiliateForm.notes} onChange={(e) => updateHotelAffiliateForm("notes", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300" />
+                          </label>
+                        </div>
+                        {hotelAffiliateForm.sub_id && hotelAffiliateForm.affiliate_url && !hotelAffiliateForm.affiliate_url.includes(hotelAffiliateForm.sub_id) ? (
+                          <p className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[10px] font-semibold text-amber-800">
+                            Warning: sub_id が affiliate_url 内に見つかりません。Travelpayouts側のSubID設定を確認してください。
+                          </p>
+                        ) : null}
+                        <div className="mt-4 flex gap-2">
+                          <button onClick={saveHotelAffiliate} disabled={saving} className="rounded-lg bg-[#003b95] px-4 py-2 text-xs font-semibold text-white hover:bg-[#002f78] disabled:opacity-50">
+                            {saving ? "保存中..." : "保存する"}
+                          </button>
+                          <button onClick={cancelHotelAffiliateEdit} className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50">
+                            キャンセル
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  }
+                  return (
+                    <div key={entry.id} className={`rounded-2xl border bg-white p-4 shadow-sm ${ready ? "border-emerald-200" : "border-slate-200"}`}>
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                          <div className="flex flex-wrap items-center gap-2">
+                            <p className="text-sm font-semibold text-slate-900">{entry.area_id}</p>
+                            <span className="rounded-md bg-blue-100 px-1.5 py-0.5 text-[9px] font-bold text-blue-800">{entry.placement}</span>
+                            <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-700">{entry.locale}</span>
+                            <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-700">priority {entry.priority}</span>
+                            <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${ready ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>
+                              {ready ? "ready" : "hidden"}
+                            </span>
+                          </div>
+                          <p className="mt-1 text-[11px] text-slate-500">{entry.id}</p>
+                          <p className="mt-1 text-[11px] text-slate-500">sub_id: {entry.sub_id || "missing"}</p>
+                        </div>
+                        <button onClick={() => startHotelAffiliateEdit(entry)} className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 hover:bg-blue-100">
+                          編集
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         )}
 
