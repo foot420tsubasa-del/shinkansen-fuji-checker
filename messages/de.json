@@ -3900,19 +3900,18 @@
       "current": "Tokyo Hotel Area Finder"
     },
     "hero": {
-      "eyebrow": "Hotelbereich-Finder für Tokio",
-      "title": "Tokyo Hotel Area Finder",
-      "body": "Vergleiche 36 Stationsbereiche in Tokio vor der Hotelbuchung. Der Finder hilft bei Gepäckstress, Flughafenankunft, Shinkansen-Tagen, Stationskomplexität, ruhigeren Nächten und breiter Hotelauswahl.",
+      "eyebrow": "Tokyo hotel area finder",
+      "title": "Find where to stay in Tokyo",
+      "body": "Pick the places you want to visit. Answer a few travel questions. Get your top 3 Tokyo hotel base areas.",
       "signals": [
-        "Stationskomplexität",
-        "Gepäckstress",
-        "Flughafenzugang",
-        "Shinkansen-Fit",
-        "Hotelauswahl-Dichte"
+        "Airport access",
+        "Luggage friendly",
+        "Shinkansen ready",
+        "Hotel choice"
       ],
-      "disclaimer": "Die Scores sind redaktionelle Reise-Fit-Scores, wo möglich durch öffentliche Daten informiert. Sie sind keine offiziellen Bewertungen, Hotelrankings oder Garantien.",
-      "freshness": "Lokale Aktualisierung mit Passagierdaten · Letzte Prüfung: {date}",
-      "cta": "Hotelbereich finden"
+      "disclaimer": "Scores are editorial travel-fit scores informed by public data signals where available. They are not official ratings, hotel rankings, or guarantees of price, comfort, availability, or route conditions.",
+      "freshness": "Passenger-data-informed local refresh · Last source check: {date}",
+      "cta": "Start"
     },
     "situations": {
       "eyebrow": "Mit der Reisesituation starten",
@@ -4032,9 +4031,9 @@
       "note": "Nur breite Gebietssuche. Prüfe genaue Stationsentfernung, Zimmergröße, Betten und aktuellen Preis beim Anbieter.",
       "fallbackNote": "Nur breite Gebietssuche. Für {selected} ist noch keine eigene URL gesetzt; geöffnet wird der nächste breite Suchbereich: {area}. Prüfe genaue Stationsentfernung, Zimmergröße, Betten und aktuellen Preis beim Anbieter.",
       "providers": {
-        "trip": "Diesen Bereich auf Trip.com suchen",
-        "agoda": "Diesen Bereich auf Agoda suchen",
-        "klook": "Diesen Bereich auf Klook suchen"
+        "trip": "Trip.com",
+        "agoda": "Agoda",
+        "klook": "Klook"
       },
       "examples": "Lokale Hotelbeispiele ansehen"
     },
@@ -4279,6 +4278,186 @@
       "monthly": "monatlich",
       "annual": "jährlich",
       "irregular": "unregelmäßig"
+    },
+    "finder": {
+      "startLabel": "Start",
+      "restartLabel": "Reset",
+      "nextLabel": "Next",
+      "backLabel": "Back",
+      "showResultsLabel": "Show my results",
+      "selectedLabel": "Selected",
+      "stepLabel": "Step",
+      "topTitle": "Your top 3 Tokyo hotel base areas",
+      "topBody": "These matches use the same 36-area data and existing fujiseat scores, then re-rank them by your answers.",
+      "whyFits": "Why it fits you",
+      "bestFor": "Best for",
+      "hotelsIntro": "Check hotels in this area",
+      "hotelsButton": "Hotels",
+      "detailsButton": "Details",
+      "noHotelLinks": "No approved hotel search link is set for this area yet.",
+      "showMore": "Show more matches",
+      "compareAll": "Compare all areas",
+      "moreTitle": "More matches",
+      "allTitle": "Compare all 36 Tokyo station areas",
+      "allBody": "This expands the full comparison list. Scores are travel-fit signals, not official ratings or hotel rankings.",
+      "matchLabel": "Match",
+      "noAnswers": "Start with a few quick choices. Results stay hidden until you finish the wizard.",
+      "badges": [
+        "Airport access",
+        "Luggage friendly",
+        "Shinkansen ready",
+        "Hotel choice"
+      ],
+      "steps": [
+        {
+          "id": "destinations",
+          "title": "Where do you want to go in Tokyo?",
+          "helper": "Choose more than one if your trip is mixed.",
+          "multi": true,
+          "options": [
+            {
+              "id": "shibuya-harajuku",
+              "label": "Shibuya / Harajuku"
+            },
+            {
+              "id": "shinjuku",
+              "label": "Shinjuku"
+            },
+            {
+              "id": "asakusa",
+              "label": "Asakusa / Senso-ji"
+            },
+            {
+              "id": "ueno",
+              "label": "Ueno"
+            },
+            {
+              "id": "ginza-tsukiji",
+              "label": "Ginza / Tsukiji"
+            },
+            {
+              "id": "akihabara",
+              "label": "Akihabara"
+            },
+            {
+              "id": "tokyo-station-palace",
+              "label": "Tokyo Station / Imperial Palace"
+            },
+            {
+              "id": "toyosu-odaiba",
+              "label": "Toyosu / teamLab / Odaiba"
+            },
+            {
+              "id": "disney",
+              "label": "Tokyo Disney Resort"
+            },
+            {
+              "id": "fuji",
+              "label": "Mt. Fuji day trip"
+            },
+            {
+              "id": "kamakura-yokohama",
+              "label": "Kamakura / Yokohama"
+            },
+            {
+              "id": "kyoto-osaka",
+              "label": "Kyoto / Osaka by Shinkansen"
+            }
+          ]
+        },
+        {
+          "id": "airport",
+          "title": "Which airport will you arrive at?",
+          "helper": "Airport choice changes the easiest first-night hotel base.",
+          "multi": false,
+          "options": [
+            {
+              "id": "narita",
+              "label": "Narita Airport (NRT)"
+            },
+            {
+              "id": "haneda",
+              "label": "Haneda Airport (HND)"
+            },
+            {
+              "id": "not-sure",
+              "label": "Not sure yet"
+            }
+          ]
+        },
+        {
+          "id": "luggage",
+          "title": "How much luggage will you have?",
+          "helper": "Large bags make station exits, transfers, and walking distance more important.",
+          "multi": false,
+          "options": [
+            {
+              "id": "light",
+              "label": "Light luggage"
+            },
+            {
+              "id": "large",
+              "label": "Large suitcase"
+            },
+            {
+              "id": "family",
+              "label": "Family / multiple bags"
+            }
+          ]
+        },
+        {
+          "id": "stay",
+          "title": "What kind of stay do you prefer?",
+          "helper": "Pick the travel style that matters most for your hotel base.",
+          "multi": false,
+          "options": [
+            {
+              "id": "first-time",
+              "label": "First-time Tokyo"
+            },
+            {
+              "id": "quiet-local",
+              "label": "Quiet local stay"
+            },
+            {
+              "id": "nightlife-shopping",
+              "label": "Nightlife / shopping"
+            },
+            {
+              "id": "easy-transfers",
+              "label": "Easy transfers"
+            },
+            {
+              "id": "budget-friendly",
+              "label": "Budget-friendly"
+            }
+          ]
+        },
+        {
+          "id": "shinkansen",
+          "title": "Will you use the Shinkansen?",
+          "helper": "Rail days can change the easiest area to sleep near.",
+          "multi": false,
+          "options": [
+            {
+              "id": "kyoto-osaka",
+              "label": "Kyoto / Osaka"
+            },
+            {
+              "id": "fuji-hakone",
+              "label": "Mt. Fuji / Hakone"
+            },
+            {
+              "id": "tokyo-only",
+              "label": "No / Tokyo only"
+            },
+            {
+              "id": "not-sure",
+              "label": "Not sure"
+            }
+          ]
+        }
+      ]
     }
   },
   "fujiseatAreaLogic": {

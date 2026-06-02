@@ -56,11 +56,15 @@ export type AffiliateClickParams = {
   product?: string;
   adid?: string;
   area?: string;
+  area_id?: string;
   city?: string;
+  rank?: number;
   itinerary_slug?: string;
   day_number?: number;
   cta_type?: "stay" | "booking" | "prepare" | "esim" | "rail" | "seat_checker" | "guide";
   hotel_name?: string;
+  hotel_id?: string;
+  sub_id?: string;
   route?: string;
   route_type?: string;
   transport_type?: string;
@@ -109,11 +113,15 @@ export function trackAffiliateClick(params: AffiliateClickParams) {
       destination_type: registryMeta.destination_type,
       link_source: registryMeta.link_source,
       area: params.area,
+      area_id: params.area_id,
       city: params.city ?? registryMeta.city,
+      rank: params.rank,
       itinerary_slug: params.itinerary_slug,
       day_number: params.day_number,
       cta_type: params.cta_type,
       hotel_name: params.hotel_name,
+      hotel_id: params.hotel_id,
+      sub_id: params.sub_id,
       route: params.route,
       route_type: params.route_type,
       transport_type: params.transport_type ?? registryMeta.transport_type,
@@ -241,6 +249,78 @@ export function trackStayAreaContinueClick(params: {
     action: "stay_area_continue_click",
     category: "stay_area_index",
     label: params.link_label,
+    params,
+  });
+}
+
+export function trackFinderStart(params: {
+  page_path: string;
+  locale?: string;
+}) {
+  trackEvent({
+    action: "finder_start",
+    category: "tokyo_hotel_area_finder",
+    label: "Start",
+    params,
+  });
+}
+
+export function trackFinderStepAnswered(params: {
+  step_id: string;
+  step_label: string;
+  answer_ids: string;
+  answer_count: number;
+  page_path: string;
+  locale?: string;
+}) {
+  trackEvent({
+    action: "finder_step_answered",
+    category: "tokyo_hotel_area_finder",
+    label: params.step_label,
+    params,
+  });
+}
+
+export function trackFinderResultsView(params: {
+  page_path: string;
+  locale?: string;
+  result_count: number;
+  top_area_id: string;
+  top_area_score: number;
+}) {
+  trackEvent({
+    action: "finder_results_view",
+    category: "tokyo_hotel_area_finder",
+    label: params.top_area_id,
+    params,
+  });
+}
+
+export function trackFinderAreaDetailsClick(params: {
+  area_id: string;
+  area_name: string;
+  rank: number;
+  page_path: string;
+  locale?: string;
+}) {
+  trackEvent({
+    action: "finder_area_details_click",
+    category: "tokyo_hotel_area_finder",
+    label: params.area_name,
+    params,
+  });
+}
+
+export function trackFinderShowMoreClick(params: {
+  action_type: "show_more_matches" | "compare_all_areas";
+  visible_count: number;
+  page_path: string;
+  locale?: string;
+}) {
+  trackEvent({
+    action: "finder_show_more_click",
+    category: "tokyo_hotel_area_finder",
+    label: params.action_type,
     params,
   });
 }

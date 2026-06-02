@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { ComponentProps } from "react";
 import {
   ArrowRight,
   BarChart3,
@@ -41,8 +42,8 @@ import type {
 } from "@/lib/stay-area/types";
 import {
   TrackedStayAreaContinueLink,
-  TrackedStayAreaDetailLink,
 } from "./StayAreaIndexTracking";
+import { TokyoHotelAreaFinder, type FinderArea } from "./TokyoHotelAreaFinder";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -195,6 +196,16 @@ function hotelSearchForArea(area: StayAreaBase) {
   };
 }
 
+function hotelSearchForFinderArea(area: StayAreaBase): FinderArea["hotel"] {
+  const hotel = hotelSearchForArea(area);
+  if (!hotel) return null;
+  return {
+    areaName: hotel.areaName,
+    city: hotel.city,
+    providers: hotel.providers,
+  };
+}
+
 function parseFilter(value: string | undefined): FilterKey {
   const candidate = (value ?? "all") as FilterKey;
   return FILTERS.some((f) => f.key === candidate) ? candidate : "all";
@@ -318,13 +329,8 @@ function localizedIndexHref(locale: string, suffix = ""): string {
   return `${localizedPath}${suffix}`;
 }
 
-function filterHref(locale: string, filter: FilterKey): string {
-  return localizedIndexHref(locale, filter === "all" ? "#ranked-areas" : `?filter=${filter}#ranked-areas`);
-}
-
-function areaDetailHref(locale: string, filter: FilterKey, areaId: string): string {
+function finderAreaDetailHref(locale: string, areaId: string): string {
   const params = new URLSearchParams();
-  if (filter !== "all") params.set("filter", filter);
   params.set("area", areaId);
   return localizedIndexHref(locale, `?${params.toString()}#selected-area`);
 }
@@ -395,13 +401,6 @@ function crowdLevelFromPercentile(percentile: number | null | undefined): {
   if (percentile >= 0.25) return { label: "Medium", tone: "soft" };
   return { label: "Low", tone: "calm" };
 }
-function complexityChipTone(level: ExitComplexityLevel): ChipTone {
-  if (level === "Mega station") return "alert";
-  if (level === "Complex") return "warn";
-  if (level === "Moderate") return "soft";
-  return "calm";
-}
-
 /**
  * Resolve the exit-complexity level + provenance for display. Prefers
  * the live `exitComplexitySignal.derivedLevel` when status is success or
@@ -453,12 +452,6 @@ function stepFreeDisplay(
   if (fallback === "Partial") return { label: "Partial", tone: "warn" };
   return { label: "Not live yet", tone: "soft" };
 }
-function lodgingChipTone(level: LodgingDensityLevel): ChipTone {
-  if (level === "Very High" || level === "High") return "calm";
-  if (level === "Medium") return "soft";
-  return "warn";
-}
-
 function hotelChoiceShortLabelKey(level: LodgingDensityLevel): "veryDense" | "many" | "some" | "limited" {
   switch (level) {
     case "Very High": return "veryDense";
@@ -513,13 +506,6 @@ function areaSummary(area: StayAreaBase, score: ComputedStayAreaScore, t: Transl
     return t("areaCopy.summaryLocal", { area: area.displayName, group });
   }
   return t("areaCopy.summaryDefault", { area: area.displayName, group });
-}
-
-function areaLocalFeel(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string {
-  if (score.scores.localFeel >= 82) return t("areaCopy.localFeelHigh", { area: area.displayName });
-  if (score.scores.crowdStress >= 78) return t("areaCopy.localFeelCalm", { area: area.displayName });
-  if (score.scores.stationSimplicity < 55 || score.scores.crowdStress < 55) return t("areaCopy.localFeelBusy", { area: area.displayName });
-  return t("areaCopy.localFeelDefault", { area: area.displayName });
 }
 
 function areaWhy(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string {
@@ -597,46 +583,6 @@ function networkComplexityFallback(
     scoreContribution: contribution.lineOperator,
     message: "Derived from curated station line data.",
   };
-}
-
-function activeAccessBadge(area: StayAreaBase, filter: FilterKey, t?: Translation): string | null {
-  const profiles = area.accessProfiles;
-  if (!profiles) return null;
-  if (filter === "narita-arrival" && (profiles.narita.level === "Excellent" || profiles.narita.level === "Good")) {
-    return profiles.narita.level === "Excellent" ? (t ? t("accessBadges.strongNarita") : "Strong Narita access") : (t ? t("accessBadges.goodNarita") : "Good Narita access");
-  }
-  if (filter === "haneda-arrival" && (profiles.haneda.level === "Excellent" || profiles.haneda.level === "Good")) {
-    return profiles.haneda.level === "Excellent" ? (t ? t("accessBadges.strongHaneda") : "Strong Haneda access") : (t ? t("accessBadges.goodHaneda") : "Good Haneda arrival");
-  }
-  if (filter === "shinkansen" && (profiles.shinkansen.level === "Excellent" || profiles.shinkansen.level === "Good")) {
-    return t ? t("accessBadges.shinkansenFriendly") : "Shinkansen-friendly";
-  }
-  return null;
-}
-
-function Chip({
-  label,
-  value,
-  tone,
-  hideOnMobile,
-}: {
-  label: string;
-  value: string;
-  tone: ChipTone;
-  hideOnMobile?: boolean;
-}) {
-  return (
-    <span
-      className={[
-        "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10px] font-semibold",
-        chipToneClass(tone),
-        hideOnMobile ? "hidden md:inline-flex" : "",
-      ].join(" ")}
-    >
-      <span className="text-[9px] uppercase tracking-[0.1em] opacity-70">{label}</span>
-      <span>{value}</span>
-    </span>
-  );
 }
 
 function ScoreBar({ label, value }: { label: string; value: number }) {
@@ -965,123 +911,6 @@ function AreaDetailPanel({
   );
 }
 
-function AreaRankRow({
-  rank,
-  area,
-  score,
-  signal,
-  activeFilter,
-  href,
-  displayScore,
-  t,
-}: {
-  rank: number;
-  area: StayAreaBase;
-  score: ComputedStayAreaScore;
-  signal: StayAreaSignalsFile["areas"][string] | undefined;
-  activeFilter: FilterKey;
-  href: string;
-  displayScore: number;
-  t: Translation;
-}) {
-  const crowd = crowdLevelFromPercentile(signal?.passengerSignal?.crowdPercentile ?? null);
-  const accessBadge = activeAccessBadge(area, activeFilter, t);
-  const exit = exitComplexityDisplay(signal, area.exitComplexityLevel);
-  const tier = fitTier(displayScore, t);
-  return (
-    <TrackedStayAreaDetailLink
-      href={href}
-      className="block rounded-[22px] border border-slate-200 bg-white p-4 shadow-sm transition-colors hover:border-emerald-200 hover:bg-emerald-50/40"
-      areaId={area.id}
-      areaName={area.displayName}
-      overallScore={displayScore}
-      rankPosition={rank}
-      matchLabel={score.matchLabel}
-      crowdLevel={crowd.label}
-      complexityLevel={exit.level}
-      pagePath={pagePath}
-    >
-      <div className="flex flex-col gap-4 md:flex-row md:items-center">
-        <div className="flex min-w-0 flex-1 items-start gap-3">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-slate-950 text-sm font-bold text-white">
-            {rank}
-          </span>
-          <div className="min-w-0">
-            <h3 className="text-lg font-semibold text-slate-950">{area.displayName}</h3>
-            <p className="mt-1 text-xs leading-5 text-slate-500">
-              {area.stationNames.slice(0, 3).join(" / ")} · {areaGroupLabel(area.areaGroup, t)}
-            </p>
-            <div className="mt-2 flex flex-wrap items-center gap-1.5">
-              <Chip label={t("rank.chips.fit")} value={tier.label} tone={tier.tone} />
-              <Chip label={t("rank.chips.crowd")} value={t(`crowd.${crowdLabelKey(crowd.label)}`)} tone={crowd.tone} />
-              {accessBadge ? <Chip label={t("rank.chips.priority")} value={accessBadge} tone="calm" /> : null}
-              <Chip
-                label={t("rank.chips.complexity")}
-                value={exitLevelLabel(exit.level, t)}
-                tone={complexityChipTone(exit.level)}
-              />
-              {(() => {
-                const sf = stepFreeDisplay(signal, area.stepFreeConfidence);
-                return (
-                  <Chip label={t("rank.chips.luggageRoute")} value={t(`stepFree.${stepFreeLabelKey(sf.label)}`)} tone={sf.tone} hideOnMobile />
-                );
-              })()}
-              <Chip
-                label={t("rank.chips.hotelChoice")}
-                value={t(`hotelChoice.${hotelChoiceShortLabelKey(area.lodgingDensityLevel)}`)}
-                tone={lodgingChipTone(area.lodgingDensityLevel)}
-                hideOnMobile
-              />
-            </div>
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-2 text-xs md:grid-cols-3 md:text-center">
-          <Metric label={t("rank.metrics.fitScore")} value={displayScore} strong />
-          <Metric label={t("rank.metrics.station")} value={score.scores.stationSimplicity} />
-          <Metric label={t("rank.metrics.luggage")} value={score.scores.luggageFriendly} />
-        </div>
-      </div>
-      <p className="mt-3 text-sm leading-6 text-slate-700">{areaSummary(area, score, t)}</p>
-      {translatedFitReasons(area, score, t).length > 0 && (
-        <p className="mt-2 text-xs leading-5 text-slate-500">
-          {t("rank.bestFor", { items: translatedFitReasons(area, score, t).slice(0, 3).join(" · ") })}
-        </p>
-      )}
-    </TrackedStayAreaDetailLink>
-  );
-}
-
-function Metric({ label, value, strong = false }: { label: string; value: number; strong?: boolean }) {
-  return (
-    <div className={["rounded-2xl border px-3 py-2", strong ? "border-orange-200 bg-orange-50 text-orange-700" : "border-slate-200 bg-slate-50 text-slate-600"].join(" ")}>
-      <span className="block text-[10px] font-semibold uppercase tracking-[0.08em]">{label}</span>
-      <span className="mt-0.5 block text-sm font-black">{Math.round(value)}</span>
-    </div>
-  );
-}
-
-function FeaturedAreaCard({ area, score, t }: { area: StayAreaBase; score: ComputedStayAreaScore; t: Translation }) {
-  return (
-    <article className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h3 className="text-lg font-semibold text-slate-950">{area.displayName}</h3>
-          <p className="mt-1 text-xs text-slate-500">{areaGroupLabel(area.areaGroup, t)}</p>
-        </div>
-        <span className="rounded-full bg-[#ff7a00] px-3 py-1 text-sm font-bold text-white">{score.overallScore}</span>
-      </div>
-      <p className="mt-3 text-sm leading-6 text-slate-700">{areaLocalFeel(area, score, t)}</p>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {translatedFitReasons(area, score, t).slice(0, 3).map((item) => (
-          <span key={item} className="rounded-full border border-emerald-100 bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-[#106b43]">
-            {item}
-          </span>
-        ))}
-      </div>
-    </article>
-  );
-}
-
 // ---------- Station usability signals dashboard tiles ---------------------
 
 type SignalTileProps = {
@@ -1258,7 +1087,6 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
 
   const baselineScores = scoresFile.areas;
   const computedScores = applyFilterBoost(baselineScores, activeFilter);
-  const scoreById = new Map(baselineScores.map((s) => [s.id, s] as const));
   const rankedAreas = computedScores
     .map((score) => {
       const areaItem = areaById(score.id);
@@ -1272,7 +1100,33 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
     })
     .sort((a, b) => b.displayScore - a.displayScore || b.score.overallScore - a.score.overallScore);
   const selected = rankedAreas.find((item) => item.area.id === area) ?? rankedAreas[0];
-  const featuredIds = ["oshiage", "kuramae", "ueno"];
+  const selectedFromQuery = Boolean(area && rankedAreas.some((item) => item.area.id === area));
+  const finderAreas: FinderArea[] = rankedAreas.map(({ area: areaItem, score, displayScore }) => ({
+    id: areaItem.id,
+    displayName: areaItem.displayName,
+    japaneseName: areaItem.japaneseName,
+    areaGroup: areaGroupLabel(areaItem.areaGroup, t),
+    stationNames: areaItem.stationNames,
+    displayScore,
+    rawScore: score.overallScore,
+    detailHref: finderAreaDetailHref(locale, areaItem.id),
+    summary: areaSummary(areaItem, score, t),
+    bestFor: translatedFitReasons(areaItem, score, t),
+    watchOut: translatedWatchOuts(areaItem, score, t),
+    tags: translatedFitReasons(areaItem, score, t).slice(0, 4),
+    scores: {
+      stationSimplicity: score.scores.stationSimplicity,
+      luggageFriendly: score.scores.luggageFriendly,
+      airportAccess: score.scores.airportAccess,
+      shinkansenAccess: score.scores.shinkansenAccess,
+      touristAccess: score.scores.touristAccess,
+      localFeel: score.scores.localFeel,
+      crowdStress: score.scores.crowdStress,
+      lodgingChoice: score.scores.lodgingChoice,
+    },
+    hotel: hotelSearchForFinderArea(areaItem),
+  }));
+  const finderCopy = t.raw("finder") as ComponentProps<typeof TokyoHotelAreaFinder>["copy"];
   const generatedScoreCount = scoresFile.areas.length;
   const lastChecked = formatLastChecked(sourceStatusFile.generatedAt);
 
@@ -1308,13 +1162,6 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
                 {t("hero.body")}
               </p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {(t.raw("hero.signals") as string[]).map((signal) => (
-                  <span key={signal} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-600">
-                    {signal}
-                  </span>
-                ))}
-              </div>
               <p className="mt-3 max-w-3xl text-xs leading-5 text-slate-500">
                 {t("hero.disclaimer")}
               </p>
@@ -1323,7 +1170,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               </p>
             </div>
             <a
-              href="#ranked-areas"
+              href="#finder"
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#ff7a00] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#e66700]"
             >
               {t("hero.cta")}
@@ -1332,43 +1179,12 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           </div>
         </section>
 
-        <section className="mt-6 rounded-[22px] border border-orange-100 bg-orange-50/60 p-5 shadow-sm">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-orange-700">{t("situations.eyebrow")}</p>
-          <h2 className="mt-1 text-xl font-semibold text-slate-950">{t("situations.title")}</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
-            {t("situations.body")}
-          </p>
-          <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              { key: "firstTime", href: "/areas-to-stay/tokyo-first-time" },
-              { key: "narita", href: filterHref(locale, "narita-arrival") },
-              { key: "haneda", href: filterHref(locale, "haneda-arrival") },
-              { key: "shinkansen", href: filterHref(locale, "shinkansen") },
-              { key: "luggage", href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage" },
-              { key: "avoidStations", href: filterHref(locale, "avoid-giant-stations") },
-              { key: "localTokyo", href: "/local-tokyo" },
-              { key: "hotelExamples", href: "/local-hotel-picks#hotel-examples-matrix" },
-            ].map((item) => (
-              <TrackedStayAreaContinueLink
-                key={item.key}
-                href={item.href}
-                sourcePage={pagePath}
-                placement="tokyo_stay_area_index_situation"
-                label={t(`situations.cards.${item.key}.label`)}
-                locale={locale}
-                areaId={selected.area.id}
-                className="group rounded-2xl border border-orange-100 bg-white p-4 text-left shadow-sm transition-colors hover:bg-orange-50"
-              >
-                <span className="block text-sm font-semibold text-slate-950 group-hover:text-[#c45500]">{t(`situations.cards.${item.key}.title`)}</span>
-                <span className="mt-1.5 block text-xs leading-5 text-slate-600">{t(`situations.cards.${item.key}.body`)}</span>
-                <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#c45500]">
-                  {t(`situations.cards.${item.key}.label`)}
-                  <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-                </span>
-              </TrackedStayAreaContinueLink>
-            ))}
-          </div>
-        </section>
+        <TokyoHotelAreaFinder
+          areas={finderAreas}
+          locale={locale}
+          pagePath={pagePath}
+          copy={finderCopy}
+        />
 
         <FujiseatAreaLogic
           sourcePage={pagePath}
@@ -1378,55 +1194,18 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           showFinderLink={false}
         />
 
-        <section className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_380px]">
-          <div id="ranked-areas" className="scroll-mt-24">
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">{t("decisionList.eyebrow")}</p>
-                <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("decisionList.title")}</h2>
-              </div>
-              <p className="hidden text-xs font-semibold text-slate-500 md:block">
-                {t("decisionList.count", {
-                  count: generatedScoreCount,
-                  filter: activeFilter === "all" ? t("filters.all") : t(`filters.${activeFilter}`),
-                })}
-              </p>
-            </div>
-            <div className="mt-4 grid gap-3">
-              {rankedAreas.map(({ area, score, signal, displayScore }, index) => (
-                <AreaRankRow
-                  key={area.id}
-                  rank={index + 1}
-                  area={area}
-                  score={score}
-                  signal={signal}
-                  activeFilter={activeFilter}
-                  href={areaDetailHref(locale, activeFilter, area.id)}
-                  displayScore={displayScore}
-                  t={t}
-                />
-              ))}
-            </div>
-          </div>
-          <AreaDetailPanel
-            area={selected.area}
-            score={selected.score}
-            signal={selected.signal}
-            displayScore={selected.displayScore}
-            locale={locale}
-            t={t}
-          />
-        </section>
-
-        <section className="mt-10">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">{t("featured.eyebrow")}</p>
-          <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("featured.title")}</h2>
-          <div className="mt-4 grid gap-4 md:grid-cols-3">
-            {featuredIds.map((id) => (
-              <FeaturedAreaCard key={id} area={areaById(id)} score={scoreById.get(id) ?? selected.score} t={t} />
-            ))}
-          </div>
-        </section>
+        {selectedFromQuery ? (
+          <section className="mt-8">
+            <AreaDetailPanel
+              area={selected.area}
+              score={selected.score}
+              signal={selected.signal}
+              displayScore={selected.displayScore}
+              locale={locale}
+              t={t}
+            />
+          </section>
+        ) : null}
 
         <section className="mt-10 grid gap-5 lg:grid-cols-2">
           <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">

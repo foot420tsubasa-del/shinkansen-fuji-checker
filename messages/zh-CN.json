@@ -3422,6 +3422,84 @@
             "bestFor": "首次东京和夜生活",
             "transport": "JR中央线到东京站约10分钟。成田特快直达。小田急到箱根。"
           }
+        ],
+        "comparison": [
+                  {
+                            "feature": "Shinkansen access",
+                            "values": {
+                                      "Tokyo Station": "Direct (0 min)",
+                                      "Shinjuku": "10 min JR Chuo transfer"
+                            }
+                  },
+                  {
+                            "feature": "Nightlife & food",
+                            "values": {
+                                      "Tokyo Station": "★★★☆☆ (Marunouchi)",
+                                      "Shinjuku": "★★★★★ (Golden Gai etc.)"
+                            }
+                  },
+                  {
+                            "feature": "Narita access",
+                            "values": {
+                                      "Tokyo Station": "N'EX 55 min",
+                                      "Shinjuku": "N'EX 80 min"
+                            }
+                  },
+                  {
+                            "feature": "Haneda access",
+                            "values": {
+                                      "Tokyo Station": "Monorail + JR 30 min",
+                                      "Shinjuku": "Bus 40 min"
+                            }
+                  },
+                  {
+                            "feature": "Luggage ease",
+                            "values": {
+                                      "Tokyo Station": "★★★★★",
+                                      "Shinjuku": "★★★☆☆"
+                            }
+                  },
+                  {
+                            "feature": "Hotel cost feel",
+                            "values": {
+                                      "Tokyo Station": "Premium business hotels",
+                                      "Shinjuku": "Wider range"
+                            }
+                  },
+                  {
+                            "feature": "Vibe after 9pm",
+                            "values": {
+                                      "Tokyo Station": "Quiet offices",
+                                      "Shinjuku": "Neon and noise"
+                            }
+                  }
+        ],
+        "nextActions": [
+                  {
+                            "title": "Full Tokyo area guide",
+                            "description": "Compare all four major Tokyo bases.",
+                            "cta": "See all areas"
+                  },
+                  {
+                            "title": "Check Fuji-side seat",
+                            "description": "Find the Mt. Fuji window seat for your route.",
+                            "cta": "Check seat"
+                  },
+                  {
+                            "title": "Sort airport transfer",
+                            "description": "Narita or Haneda to your hotel area.",
+                            "cta": "Compare transfers"
+                  },
+                  {
+                            "title": "Get Japan eSIM",
+                            "description": "Set up connectivity before landing.",
+                            "cta": "Get eSIM"
+                  },
+                  {
+                            "title": "JR Pass fit guide",
+                            "description": "Check whether your route has enough long-distance JR rides before buying.",
+                            "cta": "Read guide"
+                  }
         ]
       },
       "ueno-vs-shinjuku": {
@@ -3822,19 +3900,18 @@
       "current": "Tokyo Hotel Area Finder"
     },
     "hero": {
-      "eyebrow": "东京酒店区域查找器",
-      "title": "Tokyo Hotel Area Finder",
-      "body": "订酒店前比较东京36个车站区域。这个工具用 fujiseat 的区域逻辑，帮助你权衡行李压力、机场抵达、新干线日程、车站复杂度、安静夜晚和酒店选择范围。",
+      "eyebrow": "Tokyo hotel area finder",
+      "title": "Find where to stay in Tokyo",
+      "body": "Pick the places you want to visit. Answer a few travel questions. Get your top 3 Tokyo hotel base areas.",
       "signals": [
-        "车站复杂度",
-        "行李压力",
-        "机场交通",
-        "新干线适合度",
-        "酒店选择密度"
+        "Airport access",
+        "Luggage friendly",
+        "Shinkansen ready",
+        "Hotel choice"
       ],
-      "disclaimer": "分数是编辑型旅行适合度分数，在可用时参考公开数据。它们不是官方评分、酒店排名，也不保证价格、舒适度、空房或路线。",
-      "freshness": "基于乘客数据的本地更新 · 最后检查：{date}",
-      "cta": "寻找酒店区域适合度"
+      "disclaimer": "Scores are editorial travel-fit scores informed by public data signals where available. They are not official ratings, hotel rankings, or guarantees of price, comfort, availability, or route conditions.",
+      "freshness": "Passenger-data-informed local refresh · Last source check: {date}",
+      "cta": "Start"
     },
     "situations": {
       "eyebrow": "从旅行情况开始",
@@ -3954,9 +4031,9 @@
       "note": "仅为大区域搜索。请在预订网站确认准确车站距离、房间大小、床型和最新价格。",
       "fallbackNote": "仅为大区域搜索。尚未设置 {selected} 专用链接，因此打开最近的大区域：{area}。请在预订网站确认准确车站距离、房间大小、床型和最新价格。",
       "providers": {
-        "trip": "在 Trip.com 搜索此区域",
-        "agoda": "在 Agoda 搜索此区域",
-        "klook": "在 Klook 搜索此区域"
+        "trip": "Trip.com",
+        "agoda": "Agoda",
+        "klook": "Klook"
       },
       "examples": "查看本地酒店示例"
     },
@@ -4201,6 +4278,186 @@
       "monthly": "每月",
       "annual": "每年",
       "irregular": "不定期"
+    },
+    "finder": {
+      "startLabel": "Start",
+      "restartLabel": "Reset",
+      "nextLabel": "Next",
+      "backLabel": "Back",
+      "showResultsLabel": "Show my results",
+      "selectedLabel": "Selected",
+      "stepLabel": "Step",
+      "topTitle": "Your top 3 Tokyo hotel base areas",
+      "topBody": "These matches use the same 36-area data and existing fujiseat scores, then re-rank them by your answers.",
+      "whyFits": "Why it fits you",
+      "bestFor": "Best for",
+      "hotelsIntro": "Check hotels in this area",
+      "hotelsButton": "Hotels",
+      "detailsButton": "Details",
+      "noHotelLinks": "No approved hotel search link is set for this area yet.",
+      "showMore": "Show more matches",
+      "compareAll": "Compare all areas",
+      "moreTitle": "More matches",
+      "allTitle": "Compare all 36 Tokyo station areas",
+      "allBody": "This expands the full comparison list. Scores are travel-fit signals, not official ratings or hotel rankings.",
+      "matchLabel": "Match",
+      "noAnswers": "Start with a few quick choices. Results stay hidden until you finish the wizard.",
+      "badges": [
+        "Airport access",
+        "Luggage friendly",
+        "Shinkansen ready",
+        "Hotel choice"
+      ],
+      "steps": [
+        {
+          "id": "destinations",
+          "title": "Where do you want to go in Tokyo?",
+          "helper": "Choose more than one if your trip is mixed.",
+          "multi": true,
+          "options": [
+            {
+              "id": "shibuya-harajuku",
+              "label": "Shibuya / Harajuku"
+            },
+            {
+              "id": "shinjuku",
+              "label": "Shinjuku"
+            },
+            {
+              "id": "asakusa",
+              "label": "Asakusa / Senso-ji"
+            },
+            {
+              "id": "ueno",
+              "label": "Ueno"
+            },
+            {
+              "id": "ginza-tsukiji",
+              "label": "Ginza / Tsukiji"
+            },
+            {
+              "id": "akihabara",
+              "label": "Akihabara"
+            },
+            {
+              "id": "tokyo-station-palace",
+              "label": "Tokyo Station / Imperial Palace"
+            },
+            {
+              "id": "toyosu-odaiba",
+              "label": "Toyosu / teamLab / Odaiba"
+            },
+            {
+              "id": "disney",
+              "label": "Tokyo Disney Resort"
+            },
+            {
+              "id": "fuji",
+              "label": "Mt. Fuji day trip"
+            },
+            {
+              "id": "kamakura-yokohama",
+              "label": "Kamakura / Yokohama"
+            },
+            {
+              "id": "kyoto-osaka",
+              "label": "Kyoto / Osaka by Shinkansen"
+            }
+          ]
+        },
+        {
+          "id": "airport",
+          "title": "Which airport will you arrive at?",
+          "helper": "Airport choice changes the easiest first-night hotel base.",
+          "multi": false,
+          "options": [
+            {
+              "id": "narita",
+              "label": "Narita Airport (NRT)"
+            },
+            {
+              "id": "haneda",
+              "label": "Haneda Airport (HND)"
+            },
+            {
+              "id": "not-sure",
+              "label": "Not sure yet"
+            }
+          ]
+        },
+        {
+          "id": "luggage",
+          "title": "How much luggage will you have?",
+          "helper": "Large bags make station exits, transfers, and walking distance more important.",
+          "multi": false,
+          "options": [
+            {
+              "id": "light",
+              "label": "Light luggage"
+            },
+            {
+              "id": "large",
+              "label": "Large suitcase"
+            },
+            {
+              "id": "family",
+              "label": "Family / multiple bags"
+            }
+          ]
+        },
+        {
+          "id": "stay",
+          "title": "What kind of stay do you prefer?",
+          "helper": "Pick the travel style that matters most for your hotel base.",
+          "multi": false,
+          "options": [
+            {
+              "id": "first-time",
+              "label": "First-time Tokyo"
+            },
+            {
+              "id": "quiet-local",
+              "label": "Quiet local stay"
+            },
+            {
+              "id": "nightlife-shopping",
+              "label": "Nightlife / shopping"
+            },
+            {
+              "id": "easy-transfers",
+              "label": "Easy transfers"
+            },
+            {
+              "id": "budget-friendly",
+              "label": "Budget-friendly"
+            }
+          ]
+        },
+        {
+          "id": "shinkansen",
+          "title": "Will you use the Shinkansen?",
+          "helper": "Rail days can change the easiest area to sleep near.",
+          "multi": false,
+          "options": [
+            {
+              "id": "kyoto-osaka",
+              "label": "Kyoto / Osaka"
+            },
+            {
+              "id": "fuji-hakone",
+              "label": "Mt. Fuji / Hakone"
+            },
+            {
+              "id": "tokyo-only",
+              "label": "No / Tokyo only"
+            },
+            {
+              "id": "not-sure",
+              "label": "Not sure"
+            }
+          ]
+        }
+      ]
     }
   },
   "fujiseatAreaLogic": {

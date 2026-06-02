@@ -31,8 +31,12 @@ type ProviderButtonProps = {
   /** Optional category override. Defaults to "hotel". */
   category?: AffiliateClickParams["category"];
   area?: string;
+  areaId?: string;
   city?: string;
   hotelName?: string;
+  hotelId?: string;
+  subId?: string;
+  rank?: number;
   /** URL used for tracking only (when the href is a server-side redirect). */
   trackingHref?: string;
   fullWidth?: boolean;
@@ -60,8 +64,12 @@ export function ProviderButton({
   adid,
   category = "hotel",
   area,
+  areaId,
   city,
   hotelName,
+  hotelId,
+  subId,
+  rank,
   trackingHref,
   fullWidth = true,
   className = "",
@@ -87,8 +95,12 @@ export function ProviderButton({
           product,
           adid,
           area: area ? (city ? `${city}: ${area}` : area) : undefined,
+          area_id: areaId,
           city,
+          rank,
           hotel_name: hotelName,
+          hotel_id: hotelId,
+          sub_id: subId,
         })
       }
       className={[
