@@ -287,16 +287,16 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
           <button
             type="button"
             onClick={start}
-            className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#ff7a00] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#e66700] sm:w-auto"
+            className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#106b43] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0b5736] sm:w-auto"
           >
             {copy.startLabel}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </button>
         </div>
       ) : (
-        <div className="mt-5 rounded-[24px] border border-orange-100 bg-orange-50/60 p-4 md:p-5">
+        <div className="mt-5 rounded-[24px] border border-emerald-100 bg-emerald-50/60 p-4 md:p-5">
           <div className="flex items-center justify-between gap-3">
-            <p className="text-xs font-bold uppercase tracking-[0.12em] text-orange-700">
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#106b43]">
               {copy.stepLabel} {stepIndex + 1}/{copy.steps.length}
             </p>
             <button type="button" onClick={reset} className="text-xs font-semibold text-slate-500 underline underline-offset-4">
@@ -344,7 +344,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
               <button
                 type="button"
                 onClick={next}
-                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#ff7a00] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#106b43] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0b5736]"
               >
                 {copy.nextLabel}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -353,7 +353,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
               <button
                 type="button"
                 onClick={showMyResults}
-                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#ff7a00] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#106b43] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0b5736]"
               >
                 {copy.showResultsLabel}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />

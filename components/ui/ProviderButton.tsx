@@ -9,7 +9,7 @@ import {
 } from "@/lib/analytics";
 
 // Brand-inspired colors for hotel/provider CTAs. Text-only labels — no logos.
-//   trip                 → deep blue   (#0a4ca8) with white text
+//   trip                 → bright cyan-blue (#0875c9) with white text
 //   agoda                → magenta     (#9a3f9a) with white text
 //   booking_travelpayouts → dark blue   (#003b95) with white text
 // Use only for provider-specific buttons. For generic "Compare hotels" CTAs
@@ -45,9 +45,9 @@ type ProviderButtonProps = {
 };
 
 const PROVIDER_STYLES: Record<ProviderId, string> = {
-  // Trip.com — calm deep blue. Avoid using the official logo blue exactly.
+  // Trip.com — brighter cyan-blue so it stays distinct from Booking.com's dark blue.
   trip:
-    "border border-[#0a4ca8] bg-[#0a4ca8] text-white hover:bg-[#0a3f8b] focus-visible:ring-blue-200",
+    "border border-[#0875c9] bg-[#0875c9] text-white hover:bg-[#0662aa] focus-visible:ring-sky-200",
   // Agoda — magenta/purple.
   agoda:
     "border border-[#9a3f9a] bg-[#9a3f9a] text-white hover:bg-[#7e3380] focus-visible:ring-fuchsia-200",

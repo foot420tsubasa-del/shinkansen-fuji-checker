@@ -1180,7 +1180,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
             </div>
             <a
               href="#finder"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#ff7a00] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#106b43] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0b5736]"
             >
               {t("hero.cta")}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
