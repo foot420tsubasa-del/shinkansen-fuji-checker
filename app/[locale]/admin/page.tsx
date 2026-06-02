@@ -2508,6 +2508,10 @@ export default function AdminPage() {
                 <p className="rounded-xl bg-white px-3 py-2">affiliate_url が空なら、表示設定がenabledでもボタンは出ません。</p>
                 <p className="rounded-xl bg-white px-3 py-2">url_status=active のdestinationだけが本番表示対象です。</p>
                 <p className="rounded-xl bg-white px-3 py-2">top3/detail/locale/SubID は Hotel Affiliate Links 側で管理します。</p>
+                <p className="rounded-xl bg-white px-3 py-2">Use English Booking.com search result URLs for now.</p>
+                <p className="rounded-xl bg-white px-3 py-2">Paste the generated Travelpayouts link into affiliate_url.</p>
+                <p className="rounded-xl bg-white px-3 py-2">Set url_status to active only after checking the destination.</p>
+                <p className="rounded-xl bg-white px-3 py-2">Language-specific Booking.com URLs can be added later if needed.</p>
               </div>
             </div>
 

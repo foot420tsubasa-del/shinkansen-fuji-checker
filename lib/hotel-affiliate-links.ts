@@ -50,6 +50,25 @@ function getBookingAffiliateUrl(entry: HotelAffiliateLinkConfig) {
   return entry.affiliate_url.trim();
 }
 
+function withTravelpayoutsSubId(href: string, subId: string) {
+  const cleanHref = href.trim();
+  const cleanSubId = subId.trim();
+  if (!cleanHref || !cleanSubId) return cleanHref;
+  try {
+    const url = new URL(cleanHref);
+    url.searchParams.set("sub_id", cleanSubId);
+    return url.toString();
+  } catch {
+    const [base, hash = ""] = cleanHref.split("#");
+    const separator = base.includes("?") ? "&" : "?";
+    const withoutExistingSubId = base
+      .replace(/([?&])sub_id=[^&#]*&?/g, "$1")
+      .replace(/[?&]$/, "");
+    const nextSeparator = withoutExistingSubId.includes("?") ? "&" : separator;
+    return `${withoutExistingSubId}${nextSeparator}sub_id=${encodeURIComponent(cleanSubId)}${hash ? `#${hash}` : ""}`;
+  }
+}
+
 export function suggestedTravelpayoutsSubId({
   page,
   placement,
@@ -85,14 +104,15 @@ export function getHotelProviderLinks({
 
   return source
     .map(([id, entry]) => {
-      const href = getBookingAffiliateUrl(entry);
+      const subId = entry.sub_id.trim() || undefined;
+      const href = withTravelpayoutsSubId(getBookingAffiliateUrl(entry), subId ?? "");
       return {
         provider: entry.provider,
         href,
         trackingHref: href,
         label: "Booking.com",
         linkId: id,
-        subId: entry.sub_id.trim() || undefined,
+        subId,
         priority: entry.priority,
       };
     })
