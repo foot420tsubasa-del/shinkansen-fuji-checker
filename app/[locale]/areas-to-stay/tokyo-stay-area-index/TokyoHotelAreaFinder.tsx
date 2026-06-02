@@ -108,6 +108,25 @@ const emptyAnswers: Answers = {
   shinkansen: [],
 };
 
+function matchLabelForRank(rank: number) {
+  if (rank === 1) return "Top pick";
+  if (rank === 2) return "Strong match";
+  if (rank === 3) return "Good match";
+  return "Area option";
+}
+
+const stationNameCautionAreaIds = new Set(["oshiage", "asakusa", "kiyosumi-shirakawa", "roppongi", "kuramae"]);
+
+function hotelSearchCaution(area: Pick<FinderArea, "id" | "displayName">) {
+  if (area.id === "kuramae") {
+    return "Kuramae is a strong hidden-gem base, but Booking.com search can be sparse or overly specific here. Use the map and check hotels around Kuramae Station directly.";
+  }
+  if (stationNameCautionAreaIds.has(area.id)) {
+    return `${area.displayName} is an area where station, landmark, and district search results can be easy to mix up. Use the map and confirm the hotel is near the station entrance or train line you plan to use.`;
+  }
+  return "Booking.com can mix station, landmark, district, and hotel-name results. In Tokyo, similar place names may not mean the hotel is beside the station, so confirm the map and walking distance.";
+}
+
 const destinationBoosts: Record<string, Record<string, number>> = {
   "shibuya-harajuku": { shibuya: 18, shinjuku: 8, yoyogi: 6, ebisu: 5, "aoyama-omotesando": 5 },
   shinjuku: { shinjuku: 18, yoyogi: 9, "aoyama-omotesando": 4 },
@@ -271,10 +290,10 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
   };
 
   return (
-    <section id="finder" className="mt-6 rounded-[28px] border border-slate-200 bg-white p-5 shadow-sm md:p-7">
+    <section id="finder" className="mt-6 rounded-[28px] border border-emerald-100 bg-[#fffdf8] p-5 shadow-sm md:p-7">
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {copy.badges.map((badge) => (
-          <div key={badge} className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-slate-50 px-3 py-3 text-sm font-semibold text-slate-700">
+          <div key={badge} className="flex items-center gap-2 rounded-2xl border border-emerald-100 bg-white px-3 py-3 text-sm font-semibold text-slate-800 shadow-sm">
             <Check className="h-4 w-4 text-[#106b43]" aria-hidden="true" />
             {badge}
           </div>
@@ -294,7 +313,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
           </button>
         </div>
       ) : (
-        <div className="mt-5 rounded-[24px] border border-emerald-100 bg-emerald-50/60 p-4 md:p-5">
+        <div className="mt-5 rounded-[24px] border border-emerald-100 bg-white p-4 shadow-sm md:p-5">
           <div className="flex items-center justify-between gap-3">
             <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#106b43]">
               {copy.stepLabel} {stepIndex + 1}/{copy.steps.length}
@@ -316,8 +335,8 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
                   className={[
                     "min-h-12 rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition-colors",
                     selected
-                      ? "border-[#168a56] bg-[#168a56] text-white shadow-sm"
-                      : "border-slate-200 bg-white text-slate-700 hover:border-emerald-200 hover:bg-emerald-50",
+                      ? "border-[#106b43] bg-[#106b43] text-white shadow-sm"
+                      : "border-emerald-100 bg-white text-slate-800 hover:border-emerald-300 hover:bg-emerald-50",
                   ].join(" ")}
                 >
                   <span className="block">{option.label}</span>
@@ -369,7 +388,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
             const selected = answers[step.id] ?? [];
             if (selected.length === 0) return null;
             return (
-              <span key={step.id} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] font-semibold text-slate-600">
+              <span key={step.id} className="rounded-full border border-emerald-100 bg-white px-3 py-1 text-[11px] font-semibold text-[#106b43] shadow-sm">
                 {copy.selectedLabel}: {answerLabels(step, selected)}
               </span>
             );
@@ -380,7 +399,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
       {showResults ? (
         <div ref={resultsRef} className="mt-8 scroll-mt-24">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">{copy.matchLabel}</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Hotel area matches</p>
             <h2 className="mt-1 text-2xl font-semibold text-slate-950">{copy.topTitle}</h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{copy.topBody}</p>
           </div>
@@ -394,33 +413,37 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
             <button
               type="button"
               onClick={() => {
-                setShowMore((value) => !value);
+                const nextShowMore = !showMore;
+                setShowMore(nextShowMore);
+                if (nextShowMore) setShowAll(false);
                 trackFinderShowMoreClick({
                   action_type: "show_more_matches",
-                  visible_count: showMore ? 3 : 10,
+                  visible_count: nextShowMore ? 10 : 3,
                   page_path: pagePath,
                   locale,
                 });
               }}
-              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white px-5 py-2.5 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl border border-emerald-100 bg-white px-5 py-2.5 text-sm font-semibold text-[#106b43] transition-colors hover:bg-emerald-50"
             >
-              {copy.showMore}
+              {showMore ? "Hide ranks 4-10" : "Show ranks 4-10"}
               <ChevronDown className="h-4 w-4" aria-hidden="true" />
             </button>
             <button
               type="button"
               onClick={() => {
-                setShowAll((value) => !value);
+                const nextShowAll = !showAll;
+                setShowAll(nextShowAll);
+                if (nextShowAll) setShowMore(false);
                 trackFinderShowMoreClick({
                   action_type: "compare_all_areas",
-                  visible_count: showAll ? (showMore ? 10 : 3) : ranked.length,
+                  visible_count: nextShowAll ? ranked.length : 3,
                   page_path: pagePath,
                   locale,
                 });
               }}
               className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#168a56] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              {copy.compareAll}
+              {showAll ? "Hide full comparison" : "Compare all 36 areas"}
               <ChevronDown className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
@@ -466,32 +489,39 @@ function ResultCard({
   locale: string;
   pagePath: string;
 }) {
+  const matchLabel = matchLabelForRank(rank);
   return (
-    <article className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm">
-      <div className="bg-[linear-gradient(135deg,#0f172a,#155e75_55%,#168a56)] p-4 text-white">
+    <article className="flex h-full flex-col overflow-hidden rounded-[24px] border border-emerald-100 bg-white shadow-[0_16px_36px_rgba(15,23,42,0.08)]">
+      <div className="min-h-[118px] border-b border-emerald-200 bg-[linear-gradient(135deg,#d9f3e6,#eef8ff_55%,#d8ecff)] p-4">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.12em] text-white/75">#{rank}</p>
-            <h3 className="mt-1 text-xl font-semibold">{area.displayName}</h3>
-            <p className="mt-1 text-xs text-white/75">{area.japaneseName} · {area.areaGroup}</p>
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#106b43]">Rank #{rank}</p>
+            <h3 className="mt-1 text-xl font-semibold text-slate-950">{area.displayName}</h3>
+            <p className="mt-1 text-xs font-medium text-slate-600">{area.japaneseName} · {area.areaGroup}</p>
           </div>
-          <span className="rounded-2xl bg-white/15 px-3 py-2 text-center text-sm font-black">
-            {area.matchScore}
+          <span className="rounded-full border border-sky-100 bg-sky-50 px-3 py-1.5 text-xs font-bold text-sky-800">
+            {matchLabel}
           </span>
         </div>
       </div>
-      <div className="p-4">
-        <p className="text-sm leading-6 text-slate-700">{area.summary}</p>
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {area.tags.slice(0, 4).map((tag) => (
-            <span key={tag} className="rounded-full border border-emerald-100 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-[#106b43]">
-              {tag}
-            </span>
-          ))}
+      <div className="flex flex-1 flex-col p-4">
+        <div className="lg:h-[214px] lg:overflow-hidden">
+          <div className="mb-3 flex items-center justify-between gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-2">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500">Hotel-base fit</span>
+            <span className="rounded-full bg-slate-950 px-2.5 py-1 text-xs font-black text-white">{area.displayScore}/100</span>
+          </div>
+          <p className="overflow-hidden text-sm font-medium leading-6 text-slate-800 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">{area.summary}</p>
+          <div className="mt-3 flex max-h-[58px] flex-wrap gap-1.5 overflow-hidden">
+            {area.tags.slice(0, 4).map((tag) => (
+              <span key={tag} className="rounded-full border border-emerald-100 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-[#106b43]">
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="mt-4 rounded-2xl border border-slate-100 bg-slate-50 p-3">
+        <div className="mt-4 rounded-2xl border border-sky-100 bg-sky-50/70 p-3">
           <p className="text-xs font-semibold text-slate-950">{copy.whyFits}</p>
-          <p className="mt-1 text-xs leading-5 text-slate-600">{area.bestFor.slice(0, 2).join(" · ") || area.summary}</p>
+          <p className="mt-1 text-xs leading-5 text-slate-700">{area.bestFor.slice(0, 2).join(" · ") || area.summary}</p>
         </div>
         <HotelButtons area={area} rank={rank} copy={copy} locale={locale} pagePath={pagePath} />
         <a
@@ -534,6 +564,9 @@ function HotelButtons({
   return (
     <div className="mt-4">
       <p className="text-xs font-semibold text-slate-950">{copy.hotelsIntro}</p>
+      <p className="mt-1 text-[11px] leading-5 text-slate-600">
+        {hotelSearchCaution(area)}
+      </p>
       <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
         {area.hotel.providers.map((provider) => (
           <ProviderButton
@@ -576,17 +609,20 @@ function CompactAreaRow({
   pagePath: string;
 }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-xs font-bold text-[#106b43]">#{rank}</p>
           <h3 className="mt-1 text-base font-semibold text-slate-950">{area.displayName}</h3>
           <p className="mt-1 text-xs leading-5 text-slate-500">{area.stationNames.slice(0, 3).join(" / ")}</p>
         </div>
-        <div className="rounded-xl border border-orange-100 bg-orange-50 px-3 py-2 text-center text-orange-700">
-          <p className="text-xs font-semibold">{copy.matchLabel}</p>
-          <p className="text-base font-black">{area.matchScore}</p>
+        <div className="rounded-full border border-sky-100 bg-sky-50 px-3 py-1.5 text-xs font-bold text-sky-800">
+          {matchLabelForRank(rank)}
         </div>
+      </div>
+      <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-slate-100 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700">
+        <span>Hotel-base fit</span>
+        <span>{area.displayScore}/100</span>
       </div>
       <p className="mt-3 text-sm leading-6 text-slate-700">{area.summary}</p>
       <div className="mt-3">

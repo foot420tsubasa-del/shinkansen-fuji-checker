@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import type { ComponentProps } from "react";
 import {
-  ArrowRight,
   BarChart3,
   Building2,
   DoorOpen,
@@ -201,6 +200,18 @@ function hotelSearchForArea(area: StayAreaBase, locale: string, placement: Hotel
     city: config.city,
     providers,
   };
+}
+
+const stationNameCautionAreaIds = new Set(["oshiage", "asakusa", "kiyosumi-shirakawa", "roppongi", "kuramae"]);
+
+function hotelSearchCaution(area: Pick<StayAreaBase, "id" | "displayName">) {
+  if (area.id === "kuramae") {
+    return "Kuramae is a strong hidden-gem base, but Booking.com search can be sparse or overly specific here. Use the map and check hotels around Kuramae Station directly.";
+  }
+  if (stationNameCautionAreaIds.has(area.id)) {
+    return `${area.displayName} is an area where station, landmark, and district search results can be easy to mix up. Use the map and confirm the hotel is near the station entrance or train line you plan to use.`;
+  }
+  return "Booking.com can mix station, landmark, district, and hotel-name results. In Tokyo, similar place names may not mean the hotel is beside the station, so confirm the map and walking distance.";
 }
 
 function hotelSearchForFinderArea(area: StayAreaBase, locale: string): FinderArea["hotel"] {
@@ -798,6 +809,9 @@ function SelectedAreaHotelSearch({
           ? t("hotelSearch.fallbackNote", { selected: hotel.selectedAreaName, area: hotel.areaName })
           : t("hotelSearch.note")}
       </p>
+      <p className="mt-2 text-xs leading-5 text-slate-600">
+        {hotelSearchCaution(area)}
+      </p>
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         {hotel.providers.map((provider) => (
           <ProviderButton
@@ -1150,7 +1164,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
   const fallbackCount = baselineScores.filter((s) => s.matchLabel === "editorial-fallback").length;
 
   return (
-    <main className="page-shell min-h-screen text-slate-950">
+    <main className="min-h-screen bg-[#fffaf2] text-slate-950">
       <SiteHeader />
       <Container className="py-8 md:py-12">
         <Breadcrumb
@@ -1161,11 +1175,11 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           ]}
         />
 
-        <section className="mt-6 overflow-hidden rounded-[28px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-          <p className="inline-flex rounded-full border border-orange-200 bg-orange-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-orange-700">
+        <section className="mt-6 overflow-hidden rounded-[28px] border border-emerald-100 bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.07)] md:p-8">
+          <p className="inline-flex rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#106b43]">
             {t("hero.eyebrow")}
           </p>
-          <div className="mt-5 grid gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+          <div className="mt-5">
             <div>
               <h1 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">{t("hero.title")}</h1>
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
@@ -1174,17 +1188,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               <p className="mt-3 max-w-3xl text-xs leading-5 text-slate-500">
                 {t("hero.disclaimer")}
               </p>
-              <p className="mt-4 text-sm font-semibold text-[#106b43]">
-                {t("hero.freshness", { date: lastChecked })}
-              </p>
             </div>
-            <a
-              href="#finder"
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-[#106b43] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0b5736]"
-            >
-              {t("hero.cta")}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
           </div>
         </section>
 
