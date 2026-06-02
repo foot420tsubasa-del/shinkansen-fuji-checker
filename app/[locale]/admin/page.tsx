@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import type { LinkConfig } from "@/src/affiliateLinks";
+import type { BookingHotelDestinationConfig } from "@/lib/booking-hotel-destinations";
 import type { HotelAffiliateLinkConfig } from "@/lib/hotel-affiliate-links";
 import type { HotelLinkConfig } from "@/lib/hotel-links";
 import type { AgodaHotelMapConfig } from "@/lib/agoda-hotel-maps";
@@ -13,6 +14,7 @@ import type { StayAreaMapConfig } from "@/lib/stay-area-maps";
 
 type LinkEntry = { id: string } & LinkConfig;
 type HotelEntry = { id: string } & HotelLinkConfig;
+type BookingDestinationEntry = { id: string } & BookingHotelDestinationConfig;
 type HotelAffiliateEntry = { id: string } & HotelAffiliateLinkConfig;
 type StayHotelPickEntry = {
   id: string;
@@ -61,6 +63,7 @@ type HotelFormState = {
 };
 
 type HotelAffiliateFormState = HotelAffiliateEntry;
+type BookingDestinationFormState = BookingDestinationEntry;
 
 type HotelPickLinkFormState = HotelPickLinkEntry;
 type AgodaHotelMapEntry = AgodaHotelMapConfig;
@@ -350,6 +353,7 @@ function ps(provider: string) {
 export default function AdminPage() {
   const [links, setLinks] = useState<LinkEntry[]>([]);
   const [hotelLinks, setHotelLinks] = useState<HotelEntry[]>([]);
+  const [bookingDestinations, setBookingDestinations] = useState<BookingDestinationEntry[]>([]);
   const [hotelAffiliateLinks, setHotelAffiliateLinks] = useState<HotelAffiliateEntry[]>([]);
   const [stayHotelPicks, setStayHotelPicks] = useState<StayHotelPickGroup[]>([]);
   const [hotelPickLinks, setHotelPickLinks] = useState<HotelPickLinkEntry[]>([]);
@@ -362,12 +366,14 @@ export default function AdminPage() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [showAdd, setShowAdd] = useState(false);
   const [klookUrlInput, setKlookUrlInput] = useState("");
-  const [tab, setTab] = useState<"hotel" | "hotel-affiliate" | "stay-picks" | "local-picks" | "stay-maps" | "agoda-maps" | "todo" | "all">("hotel");
+  const [tab, setTab] = useState<"hotel" | "hotel-affiliate" | "booking-destinations" | "stay-picks" | "local-picks" | "stay-maps" | "agoda-maps" | "todo" | "all">("hotel");
   const [adminToken, setAdminToken] = useState("");
   const [editingHotelId, setEditingHotelId] = useState<string | null>(null);
   const [hotelForm, setHotelForm] = useState<HotelFormState | null>(null);
   const [editingHotelAffiliateId, setEditingHotelAffiliateId] = useState<string | null>(null);
   const [hotelAffiliateForm, setHotelAffiliateForm] = useState<HotelAffiliateFormState | null>(null);
+  const [editingBookingDestinationId, setEditingBookingDestinationId] = useState<string | null>(null);
+  const [bookingDestinationForm, setBookingDestinationForm] = useState<BookingDestinationFormState | null>(null);
   const [editingHotelPickLinkId, setEditingHotelPickLinkId] = useState<string | null>(null);
   const [hotelPickLinkForm, setHotelPickLinkForm] = useState<HotelPickLinkFormState | null>(null);
   const [editingAgodaHotelMapId, setEditingAgodaHotelMapId] = useState<string | null>(null);
@@ -442,6 +448,24 @@ export default function AdminPage() {
       );
     } catch {
       setMessage({ text: "Hotel Affiliate Linksの読み込みに失敗しました", ok: false });
+    }
+  }, [adminToken]);
+
+  const fetchBookingDestinations = useCallback(async () => {
+    try {
+      const res = await fetch("/api/booking-hotel-destinations", {
+        headers: adminToken ? { "x-admin-token": adminToken } : {},
+      });
+      if (res.status === 401) return;
+      const data = await res.json();
+      setBookingDestinations(
+        Object.entries(data).map(([id, config]) => ({
+          id,
+          ...(config as BookingHotelDestinationConfig),
+        })),
+      );
+    } catch {
+      setMessage({ text: "Booking Destinationsの読み込みに失敗しました", ok: false });
     }
   }, [adminToken]);
 
@@ -543,13 +567,14 @@ export default function AdminPage() {
   useEffect(() => {
     fetchLinks();
     fetchHotelLinks();
+    fetchBookingDestinations();
     fetchHotelAffiliateLinks();
     fetchStayHotelPicks();
     fetchHotelPickLinks();
     fetchAgodaHotelMaps();
     fetchStayAreaMaps();
     fetchLocalHotelPicks();
-  }, [fetchLinks, fetchHotelLinks, fetchHotelAffiliateLinks, fetchStayHotelPicks, fetchHotelPickLinks, fetchAgodaHotelMaps, fetchStayAreaMaps, fetchLocalHotelPicks]);
+  }, [fetchLinks, fetchHotelLinks, fetchBookingDestinations, fetchHotelAffiliateLinks, fetchStayHotelPicks, fetchHotelPickLinks, fetchAgodaHotelMaps, fetchStayAreaMaps, fetchLocalHotelPicks]);
 
   const flash = (text: string, ok: boolean) => {
     setMessage({ text, ok });
@@ -641,6 +666,23 @@ export default function AdminPage() {
 
   const updateHotelAffiliateForm = (field: keyof HotelAffiliateFormState, value: string | boolean | number) =>
     setHotelAffiliateForm((prev) => (prev ? { ...prev, [field]: value } : prev));
+
+  const startBookingDestinationEdit = (entry: BookingDestinationEntry) => {
+    setEditingBookingDestinationId(entry.id);
+    setBookingDestinationForm({ ...entry });
+    setEditingId(null);
+    setShowAdd(false);
+    cancelHotelEdit();
+    cancelHotelAffiliateEdit();
+  };
+
+  const cancelBookingDestinationEdit = () => {
+    setEditingBookingDestinationId(null);
+    setBookingDestinationForm(null);
+  };
+
+  const updateBookingDestinationForm = (field: keyof BookingDestinationFormState, value: string) =>
+    setBookingDestinationForm((prev) => (prev ? { ...prev, [field]: value } : prev));
 
   const startHotelPickLinkEdit = (entry: HotelPickLinkEntry) => {
     setEditingHotelPickLinkId(entry.id);
@@ -837,6 +879,7 @@ export default function AdminPage() {
         area_id: hotelAffiliateForm.area_id.trim(),
         locale: hotelAffiliateForm.locale.trim() || "all",
         placement: hotelAffiliateForm.placement,
+        destination_ref: hotelAffiliateForm.destination_ref?.trim() || "",
         destination_url: hotelAffiliateForm.destination_url.trim(),
         affiliate_url: hotelAffiliateForm.affiliate_url.trim(),
         sub_id: hotelAffiliateForm.sub_id.trim(),
@@ -856,6 +899,38 @@ export default function AdminPage() {
       await fetchHotelAffiliateLinks();
     } catch {
       flash("Hotel Affiliate Linkの保存に失敗しました", false);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const saveBookingDestination = async () => {
+    if (!bookingDestinationForm) return;
+    setSaving(true);
+    try {
+      const config: BookingHotelDestinationConfig = {
+        area_id: bookingDestinationForm.area_id.trim(),
+        label: bookingDestinationForm.label.trim(),
+        booking_query_label: bookingDestinationForm.booking_query_label.trim(),
+        booking_scope: bookingDestinationForm.booking_scope,
+        destination_url: bookingDestinationForm.destination_url.trim(),
+        affiliate_url: bookingDestinationForm.affiliate_url.trim(),
+        inventory_confidence: bookingDestinationForm.inventory_confidence,
+        url_status: bookingDestinationForm.url_status,
+        last_checked_at: bookingDestinationForm.last_checked_at.trim(),
+        notes: bookingDestinationForm.notes.trim(),
+      };
+      const res = await fetch("/api/booking-hotel-destinations", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", "x-admin-token": adminToken },
+        body: JSON.stringify({ id: bookingDestinationForm.id, config }),
+      });
+      if (!res.ok) throw new Error();
+      flash("Booking Destinationを保存しました", true);
+      cancelBookingDestinationEdit();
+      await fetchBookingDestinations();
+    } catch {
+      flash("Booking Destinationの保存に失敗しました", false);
     } finally {
       setSaving(false);
     }
@@ -999,7 +1074,15 @@ export default function AdminPage() {
   const doneItems = links.filter((l) => getStatus(l) === "done");
   const missingTransportAffiliateItems = RECOMMENDED_TRANSPORT_AFFILIATE_LINKS.filter((item) => !links.some((link) => link.id === item.id && getStatus(link) === "done"));
   const tripHotelDoneCount = hotelLinks.filter((h) => h.tripUrl.trim()).length;
-  const bookingHotelReadyCount = hotelAffiliateLinks.filter((link) => link.enabled && link.affiliate_url.trim()).length;
+  const bookingDestinationActiveCount = bookingDestinations.filter((destination) => destination.url_status === "active" && destination.affiliate_url.trim()).length;
+  const bookingHotelReadyCount = hotelAffiliateLinks.filter((link) => {
+    if (!link.enabled) return false;
+    if (link.destination_ref?.trim()) {
+      const destination = bookingDestinations.find((item) => item.id === link.destination_ref);
+      return Boolean(destination && destination.url_status === "active" && destination.affiliate_url.trim());
+    }
+    return Boolean(link.affiliate_url.trim());
+  }).length;
   const hotelPickLinkUrlCount = hotelPickLinks.filter((pick) => pick.tripUrl.trim()).length;
   const stayAreaMapActiveCount = stayAreaMaps.filter((map) => map.status === "active").length;
 
@@ -2268,6 +2351,7 @@ export default function AdminPage() {
                   sessionStorage.setItem("fujiseat_admin_token", adminToken);
                   fetchLinks();
                   fetchHotelLinks();
+                  fetchBookingDestinations();
                   fetchHotelAffiliateLinks();
                   fetchStayHotelPicks();
                   fetchHotelPickLinks();
@@ -2329,6 +2413,10 @@ export default function AdminPage() {
               <p className="text-2xl font-bold text-blue-700">{tripHotelDoneCount}/{hotelLinks.length}</p>
               <p className="text-[10px] font-medium text-blue-600">Tripホテル設定</p>
             </div>
+            <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-center">
+              <p className="text-2xl font-bold text-sky-700">{bookingDestinationActiveCount}/{bookingDestinations.length}</p>
+              <p className="text-[10px] font-medium text-sky-600">Booking destination</p>
+            </div>
             <div className="rounded-xl border border-orange-200 bg-orange-50 p-3 text-center">
               <p className="text-2xl font-bold text-orange-700">{hotelPickLinkUrlCount}/{hotelPickLinks.length}</p>
               <p className="text-[10px] font-medium text-orange-600">具体ホテルURL</p>
@@ -2357,6 +2445,12 @@ export default function AdminPage() {
             className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "hotel-affiliate" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
           >
             Hotel Affiliate Links ({bookingHotelReadyCount}/{hotelAffiliateLinks.length})
+          </button>
+          <button
+            onClick={() => setTab("booking-destinations")}
+            className={`rounded-lg px-4 py-2 text-xs font-semibold transition-colors ${tab === "booking-destinations" ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-600 hover:bg-slate-200"}`}
+          >
+            Booking Destinations ({bookingDestinationActiveCount}/{bookingDestinations.length})
           </button>
           <button
             onClick={() => setTab("stay-picks")}
@@ -2402,6 +2496,139 @@ export default function AdminPage() {
           </div>
         )}
 
+        {!loading && tab === "booking-destinations" && (
+          <div className="space-y-4">
+            <div className="rounded-2xl border border-sky-200 bg-sky-50/70 p-5 shadow-sm">
+              <div className="flex items-center gap-2">
+                <span className="h-3 w-3 rounded-full bg-[#003b95]" />
+                <p className="text-sm font-bold text-slate-900">Booking Destinations — area-level Booking.com URL master</p>
+              </div>
+              <div className="mt-3 grid gap-2 text-xs leading-5 text-slate-700 md:grid-cols-2">
+                <p className="rounded-xl bg-white px-3 py-2">ここは area_id ごとのBooking.com検索URLマスターです。</p>
+                <p className="rounded-xl bg-white px-3 py-2">affiliate_url が空なら、表示設定がenabledでもボタンは出ません。</p>
+                <p className="rounded-xl bg-white px-3 py-2">url_status=active のdestinationだけが本番表示対象です。</p>
+                <p className="rounded-xl bg-white px-3 py-2">top3/detail/locale/SubID は Hotel Affiliate Links 側で管理します。</p>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              {bookingDestinations
+                .slice()
+                .sort((a, b) => a.area_id.localeCompare(b.area_id))
+                .map((entry) => {
+                  const editing = editingBookingDestinationId === entry.id && bookingDestinationForm;
+                  const active = entry.url_status === "active" && Boolean(entry.affiliate_url.trim());
+                  if (editing) {
+                    return (
+                      <div key={entry.id} className="rounded-2xl border border-sky-200 bg-white p-4 shadow-sm">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <p className="text-sm font-bold text-slate-900">{entry.id}</p>
+                          <span className={`rounded-full px-2 py-1 text-[10px] font-bold ${active ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>
+                            {active ? "active" : "hidden"}
+                          </span>
+                        </div>
+                        <div className="mt-3 grid gap-3 md:grid-cols-3">
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            area_id
+                            <input value={bookingDestinationForm.area_id} onChange={(e) => updateBookingDestinationForm("area_id", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-sky-300" />
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            label
+                            <input value={bookingDestinationForm.label} onChange={(e) => updateBookingDestinationForm("label", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-sky-300" />
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            booking_query_label
+                            <input value={bookingDestinationForm.booking_query_label} onChange={(e) => updateBookingDestinationForm("booking_query_label", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-sky-300" />
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            booking_scope
+                            <select value={bookingDestinationForm.booking_scope} onChange={(e) => updateBookingDestinationForm("booking_scope", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-sky-300">
+                              <option value="station">station</option>
+                              <option value="neighborhood">neighborhood</option>
+                              <option value="area_cluster">area_cluster</option>
+                              <option value="city_fallback">city_fallback</option>
+                            </select>
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            inventory_confidence
+                            <select value={bookingDestinationForm.inventory_confidence} onChange={(e) => updateBookingDestinationForm("inventory_confidence", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-sky-300">
+                              <option value="high">high</option>
+                              <option value="medium">medium</option>
+                              <option value="low">low</option>
+                            </select>
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            url_status
+                            <select value={bookingDestinationForm.url_status} onChange={(e) => updateBookingDestinationForm("url_status", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-sky-300">
+                              <option value="active">active</option>
+                              <option value="needs_review">needs_review</option>
+                              <option value="too_broad">too_broad</option>
+                              <option value="too_narrow">too_narrow</option>
+                            </select>
+                          </label>
+                        </div>
+                        <label className="mt-3 block text-[10px] font-semibold text-slate-500">
+                          destination_url
+                          <input value={bookingDestinationForm.destination_url} onChange={(e) => updateBookingDestinationForm("destination_url", e.target.value)} placeholder="https://www.booking.com/searchresults..." className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-sky-300" />
+                        </label>
+                        <label className="mt-3 block text-[10px] font-semibold text-slate-500">
+                          affiliate_url
+                          <input value={bookingDestinationForm.affiliate_url} onChange={(e) => updateBookingDestinationForm("affiliate_url", e.target.value)} placeholder="Travelpayouts Booking.com affiliate URL" className="mt-1 w-full rounded-lg border border-sky-200 px-3 py-2 text-xs outline-none focus:border-sky-400" />
+                        </label>
+                        <div className="mt-3 grid gap-3 md:grid-cols-2">
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            last_checked_at
+                            <input value={bookingDestinationForm.last_checked_at} onChange={(e) => updateBookingDestinationForm("last_checked_at", e.target.value)} placeholder="2026-06-02" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-sky-300" />
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            notes
+                            <input value={bookingDestinationForm.notes} onChange={(e) => updateBookingDestinationForm("notes", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-sky-300" />
+                          </label>
+                        </div>
+                        {bookingDestinationForm.url_status === "active" && !bookingDestinationForm.affiliate_url.trim() ? (
+                          <p className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[10px] font-semibold text-amber-800">
+                            Warning: active にする場合は affiliate_url が必要です。空のままだとボタンは表示されません。
+                          </p>
+                        ) : null}
+                        <div className="mt-4 flex gap-2">
+                          <button onClick={saveBookingDestination} disabled={saving} className="rounded-lg bg-[#003b95] px-4 py-2 text-xs font-semibold text-white hover:bg-[#002f78] disabled:opacity-50">
+                            {saving ? "保存中..." : "保存する"}
+                          </button>
+                          <button onClick={cancelBookingDestinationEdit} className="rounded-lg border border-slate-200 bg-white px-4 py-2 text-xs font-medium text-slate-600 hover:bg-slate-50">
+                            キャンセル
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  }
+                  return (
+                    <div key={entry.id} className={`rounded-2xl border bg-white p-4 shadow-sm ${active ? "border-emerald-200" : "border-slate-200"}`}>
+                      <div className="flex flex-wrap items-start justify-between gap-3">
+                        <div>
+                          <div className="flex flex-wrap items-center gap-2">
+                            <p className="text-sm font-semibold text-slate-900">{entry.label}</p>
+                            <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-700">{entry.area_id}</span>
+                            <span className="rounded-md bg-sky-100 px-1.5 py-0.5 text-[9px] font-bold text-sky-800">{entry.booking_scope}</span>
+                            <span className="rounded-md bg-slate-100 px-1.5 py-0.5 text-[9px] font-bold text-slate-700">{entry.inventory_confidence}</span>
+                            <span className={`rounded-md px-1.5 py-0.5 text-[9px] font-bold ${active ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>
+                              {entry.url_status}
+                            </span>
+                          </div>
+                          <p className="mt-1 text-[11px] text-slate-500">{entry.id}</p>
+                          <p className="mt-1 text-[11px] text-slate-500">query: {entry.booking_query_label}</p>
+                          <p className="mt-1 text-[11px] text-slate-500">affiliate_url: {entry.affiliate_url.trim() ? "set" : "empty"}</p>
+                        </div>
+                        <button onClick={() => startBookingDestinationEdit(entry)} className="rounded-lg border border-sky-200 bg-sky-50 px-3 py-1.5 text-xs font-semibold text-sky-700 hover:bg-sky-100">
+                          編集
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        )}
+
         {!loading && tab === "hotel-affiliate" && (
           <div className="space-y-4">
             <div className="rounded-2xl border border-blue-200 bg-blue-50/70 p-5 shadow-sm">
@@ -2412,6 +2639,8 @@ export default function AdminPage() {
               <div className="mt-3 grid gap-2 text-xs leading-5 text-slate-700 md:grid-cols-2">
                 <p className="rounded-xl bg-white px-3 py-2">affiliate_url が空ならBooking.comボタンは表示されません。</p>
                 <p className="rounded-xl bg-white px-3 py-2">enabled=false ならBooking.comボタンは表示されません。</p>
+                <p className="rounded-xl bg-white px-3 py-2">destination_ref がある場合は Booking Destinations 側の active URL を優先します。</p>
+                <p className="rounded-xl bg-white px-3 py-2">destination側が needs_review / too_broad / too_narrow なら表示されません。</p>
                 <p className="rounded-xl bg-white px-3 py-2">SubIDがaffiliate_url内に含まれているか目視確認してください。</p>
                 <p className="rounded-xl bg-white px-3 py-2">Vercel上のJSON編集は永続化されません。ローカル編集→commit→deploy前提です。</p>
               </div>
@@ -2431,7 +2660,8 @@ export default function AdminPage() {
                 .sort((a, b) => a.area_id.localeCompare(b.area_id) || a.placement.localeCompare(b.placement) || a.locale.localeCompare(b.locale))
                 .map((entry) => {
                   const editing = editingHotelAffiliateId === entry.id && hotelAffiliateForm;
-                  const ready = entry.enabled && Boolean(entry.affiliate_url.trim());
+                  const destination = entry.destination_ref ? bookingDestinations.find((item) => item.id === entry.destination_ref) : null;
+                  const ready = entry.enabled && (destination ? destination.url_status === "active" && Boolean(destination.affiliate_url.trim()) : Boolean(entry.affiliate_url.trim()));
                   if (editing) {
                     return (
                       <div key={entry.id} className="rounded-2xl border border-blue-200 bg-white p-4 shadow-sm">
@@ -2463,6 +2693,10 @@ export default function AdminPage() {
                             priority
                             <input type="number" value={hotelAffiliateForm.priority} onChange={(e) => updateHotelAffiliateForm("priority", Number(e.target.value))} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300" />
                           </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            destination_ref
+                            <input value={hotelAffiliateForm.destination_ref ?? ""} onChange={(e) => updateHotelAffiliateForm("destination_ref", e.target.value)} placeholder="booking_ueno" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300" />
+                          </label>
                           <label className="flex items-end gap-2 text-[10px] font-semibold text-slate-500">
                             <input type="checkbox" checked={hotelAffiliateForm.enabled} onChange={(e) => updateHotelAffiliateForm("enabled", e.target.checked)} className="h-4 w-4 rounded border-slate-300" />
                             enabled
@@ -2492,6 +2726,11 @@ export default function AdminPage() {
                             <input value={hotelAffiliateForm.notes} onChange={(e) => updateHotelAffiliateForm("notes", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300" />
                           </label>
                         </div>
+                        {hotelAffiliateForm.destination_ref ? (
+                          <p className="mt-3 rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 text-[10px] font-semibold text-sky-800">
+                            destination_ref 使用中: 表示URLは Booking Destinations 側の affiliate_url / url_status で決まります。
+                          </p>
+                        ) : null}
                         {hotelAffiliateForm.sub_id && hotelAffiliateForm.affiliate_url && !hotelAffiliateForm.affiliate_url.includes(hotelAffiliateForm.sub_id) ? (
                           <p className="mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-[10px] font-semibold text-amber-800">
                             Warning: sub_id が affiliate_url 内に見つかりません。Travelpayouts側のSubID設定を確認してください。
@@ -2522,6 +2761,7 @@ export default function AdminPage() {
                             </span>
                           </div>
                           <p className="mt-1 text-[11px] text-slate-500">{entry.id}</p>
+                          <p className="mt-1 text-[11px] text-slate-500">destination_ref: {entry.destination_ref || "legacy direct URL"}</p>
                           <p className="mt-1 text-[11px] text-slate-500">sub_id: {entry.sub_id || "missing"}</p>
                         </div>
                         <button onClick={() => startHotelAffiliateEdit(entry)} className="rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-700 hover:bg-blue-100">

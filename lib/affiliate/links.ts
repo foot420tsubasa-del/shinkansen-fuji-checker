@@ -1,4 +1,5 @@
 import affiliateLinkData from "@/data/affiliate-links.json";
+import bookingHotelDestinationData from "@/data/booking-hotel-destinations.json";
 import hotelAffiliateLinkData from "@/data/hotel-affiliate-links.json";
 import hotelLinkData from "@/data/hotel-links.json";
 import hotelPickLinkData from "@/data/hotel-pick-links.json";
@@ -158,6 +159,7 @@ type HotelAffiliateLink = {
   area_id: string;
   locale: string;
   placement: string;
+  destination_ref?: string;
   destination_url: string;
   affiliate_url: string;
   sub_id: string;
@@ -165,6 +167,11 @@ type HotelAffiliateLink = {
   priority: number;
   last_checked_at: string;
   notes: string;
+};
+
+type BookingHotelDestination = {
+  affiliate_url: string;
+  url_status: string;
 };
 
 type HotelPickLink = {
@@ -190,6 +197,7 @@ const hotelLinks = hotelLinkData as Record<string, HotelAreaLink>;
 const hotelPickLinks = hotelPickLinkData as Record<string, HotelPickLink>;
 const localHotelPicks = localHotelPickData as Record<string, LocalHotelPick>;
 const hotelAffiliateLinks = hotelAffiliateLinkData as Record<string, HotelAffiliateLink>;
+const bookingHotelDestinations = bookingHotelDestinationData as Record<string, BookingHotelDestination>;
 
 function providerFromConfig(provider: string): AffiliateProvider {
   if (provider === "klook" || provider === "agoda" || provider === "trip" || provider === "omio" || provider === "booking_travelpayouts") {
@@ -406,8 +414,10 @@ function buildLocalHotelPickEntries(): AffiliateRegistryEntry[] {
 
 function buildHotelAffiliateEntries(): AffiliateRegistryEntry[] {
   return Object.entries(hotelAffiliateLinks).flatMap(([id, link]) => {
-    const url = normalizeUrl(link.affiliate_url);
+    const destination = link.destination_ref ? bookingHotelDestinations[link.destination_ref] : null;
+    const url = normalizeUrl(destination ? destination.affiliate_url : link.affiliate_url);
     if (!link.enabled || !url || link.provider !== "booking_travelpayouts") return [];
+    if (destination && destination.url_status !== "active") return [];
     return [
       {
         id,
