@@ -4038,6 +4038,11 @@
       },
       "examples": "Lokale Hotelbeispiele ansehen"
     },
+    "stationRouteNote": {
+      "title": "Station & hotel-route note",
+      "commonTitle": "Station-name note",
+      "commonBody": "Tokyo station names can be confusing. The same name may refer to different railway operators, separate entrances, distant platforms, or nearby-but-not-identical station areas. This finder compares practical hotel-base areas, not exact station exits. Before booking, always check the walking route from your exact hotel to the exact station entrance or platform you plan to use."
+    },
     "stationUsability": {
       "title": "Station usability",
       "passenger": "Passenger volume percentile",

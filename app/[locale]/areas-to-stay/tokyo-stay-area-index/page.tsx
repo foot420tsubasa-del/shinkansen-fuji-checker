@@ -202,16 +202,41 @@ function hotelSearchForArea(area: StayAreaBase, locale: string, placement: Hotel
   };
 }
 
-const stationNameCautionAreaIds = new Set(["oshiage", "asakusa", "kiyosumi-shirakawa", "roppongi", "kuramae"]);
+const stationRouteNotes: Partial<Record<string, string>> = {
+  asakusa:
+    "Asakusa can refer to several different station locations. Tokyo Metro, Toei, Tobu Asakusa, and Tsukuba Express Asakusa are not all the same walking point. Check which station and line your hotel is actually closest to before booking.",
+  oshiage:
+    "Oshiage is useful for airport access and Tokyo Skytree, but the walking route can vary depending on whether your hotel is closer to Oshiage Station, Tokyo Skytree Station, or the Solamachi side.",
+  kuramae:
+    "Kuramae has separate Toei Asakusa Line and Oedo Line station locations. Check which side your hotel is closer to before booking, especially with luggage.",
+  "kiyosumi-shirakawa":
+    "Kiyosumi-Shirakawa is a quiet local base, but hotel options can be limited and nearby areas such as Monzen-Nakacho or Koto may appear in hotel searches. Check the exact walking distance and nearest station before booking.",
+  roppongi:
+    "Roppongi can feel different depending on the line and exit. The Oedo Line platforms are deep, and some hotel routes involve slopes or longer walks than they look on the map.",
+  shinjuku:
+    "Shinjuku is a very large station area. West Exit, East Exit, South Exit, Shinjuku-sanchome, Nishi-Shinjuku, and Tochomae can feel like different hotel bases. Check the exact exit and walking route before booking.",
+  shibuya:
+    "Shibuya is compact on the map but can be confusing because of hills, exits, pedestrian decks, and underground routes. A hotel may look close to Shibuya Station but still require a less simple walk with luggage.",
+  "tokyo-station":
+    "Tokyo Station can mean very different sides of the station. Marunouchi, Yaesu, Otemachi, and Nihombashi are not the same hotel location, especially with luggage or an early Shinkansen.",
+  ueno:
+    "Ueno is convenient, but JR Ueno, Tokyo Metro Ueno, Keisei Ueno, Ueno-hirokoji, and Ueno-okachimachi are not the same walking point. For Narita access, check whether your hotel is closer to JR/Metro Ueno or Keisei Ueno.",
+  "ginza-yurakucho":
+    "Ginza / Yurakucho is a dense central area with several nearby stations. Ginza, Yurakucho, Higashi-Ginza, Ginza-itchome, and Shimbashi-side hotels can feel different for luggage and train access.",
+  "hamamatsucho-daimon":
+    "Hamamatsucho and Daimon are close, but JR/Monorail Hamamatsucho and Toei Daimon are not exactly the same station entrance. Check which one your hotel is closer to, especially for Haneda access.",
+  shinagawa:
+    "Shinagawa is useful for the Shinkansen and Haneda access, but the Takanawa side and Konan side feel different. Check which side your hotel is on before booking.",
+  ikebukuro:
+    "Ikebukuro is a large station with very different east, west, north, and underground exit areas. A hotel can be \"near Ikebukuro\" but still be confusing to reach with luggage.",
+  akihabara:
+    "Akihabara can refer to JR Akihabara, Tokyo Metro Hibiya Line Akihabara, Tsukuba Express Akihabara, or the nearby Iwamotocho side. Check which station entrance your hotel is actually closest to.",
+  nihombashi:
+    "Nihombashi is central and practical, but hotel listings may overlap with Tokyo Station, Otemachi, Mitsukoshimae, Kayabacho, or Ningyocho. Check the exact nearest station rather than relying only on the area name.",
+};
 
-function hotelSearchCaution(area: Pick<StayAreaBase, "id" | "displayName">) {
-  if (area.id === "kuramae") {
-    return "Kuramae is a strong hidden-gem base, but Booking.com search can be sparse or overly specific here. Use the map and check hotels around Kuramae Station directly.";
-  }
-  if (stationNameCautionAreaIds.has(area.id)) {
-    return `${area.displayName} is an area where station, landmark, and district search results can be easy to mix up. Use the map and confirm the hotel is near the station entrance or train line you plan to use.`;
-  }
-  return "Booking.com can mix station, landmark, district, and hotel-name results. In Tokyo, similar place names may not mean the hotel is beside the station, so confirm the map and walking distance.";
+function stationRouteNote(areaId: string) {
+  return stationRouteNotes[areaId] ?? null;
 }
 
 function hotelSearchForFinderArea(area: StayAreaBase, locale: string): FinderArea["hotel"] {
@@ -809,9 +834,6 @@ function SelectedAreaHotelSearch({
           ? t("hotelSearch.fallbackNote", { selected: hotel.selectedAreaName, area: hotel.areaName })
           : t("hotelSearch.note")}
       </p>
-      <p className="mt-2 text-xs leading-5 text-slate-600">
-        {hotelSearchCaution(area)}
-      </p>
       <div className="mt-3 grid gap-2 sm:grid-cols-2">
         {hotel.providers.map((provider) => (
           <ProviderButton
@@ -848,6 +870,21 @@ function SelectedAreaHotelSearch({
           {t("hotelSearch.examples")}
         </TrackedStayAreaContinueLink>
       </div>
+    </div>
+  );
+}
+
+function StationRouteNoteCard({ area, t }: { area: StayAreaBase; t: Translation }) {
+  const note = stationRouteNote(area.id);
+  if (!note) return null;
+
+  return (
+    <div className="mt-5 rounded-2xl border border-sky-100 bg-sky-50/80 p-4">
+      <div className="flex items-center gap-2 text-sky-800">
+        <Signpost className="h-4 w-4" aria-hidden="true" />
+        <h3 className="text-sm font-semibold text-slate-950">{t("stationRouteNote.title")}</h3>
+      </div>
+      <p className="mt-2 text-sm leading-6 text-slate-700">{note}</p>
     </div>
   );
 }
@@ -894,8 +931,6 @@ function AreaDetailPanel({
       </div>
       <p className="mt-4 text-sm leading-6 text-slate-700">{areaSummary(area, score, t)}</p>
 
-      <SelectedAreaHotelSearch area={area} locale={locale} t={t} />
-
       <div className="mt-5 grid gap-2">
         {scoreLabels.map(({ key, label }) => (
           <ScoreBar key={key} label={t(`scoreLabels.${label}`)} value={score.scores[key]} />
@@ -904,6 +939,8 @@ function AreaDetailPanel({
 
       <StationUsabilityPanel area={area} signal={signal} contribution={score.usabilityContribution} t={t} />
       <AirportShinkansenAccessPanel area={area} t={t} />
+      <StationRouteNoteCard area={area} t={t} />
+      <SelectedAreaHotelSearch area={area} locale={locale} t={t} />
 
       <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-1">
         <div>
@@ -1134,6 +1171,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
     rawScore: score.overallScore,
     detailHref: finderAreaDetailHref(locale, areaItem.id),
     summary: areaSummary(areaItem, score, t),
+    stationRouteNote: stationRouteNote(areaItem.id),
     bestFor: translatedFitReasons(areaItem, score, t),
     watchOut: translatedWatchOuts(areaItem, score, t),
     tags: translatedFitReasons(areaItem, score, t).slice(0, 4),
@@ -1236,6 +1274,10 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               <InfoCard icon={DoorOpen} title={t("methodology.cards.complexity.title")} body={t("methodology.cards.complexity.body")} />
               <InfoCard icon={Train} title={t("methodology.cards.lines.title")} body={t("methodology.cards.lines.body")} />
               <InfoCard icon={Signpost} title={t("methodology.cards.transfer.title")} body={t("methodology.cards.transfer.body")} />
+            </div>
+            <div className="mt-4 rounded-2xl border border-sky-100 bg-sky-50/70 p-4">
+              <h3 className="text-sm font-semibold text-slate-950">{t("stationRouteNote.commonTitle")}</h3>
+              <p className="mt-2 text-xs leading-5 text-slate-600">{t("stationRouteNote.commonBody")}</p>
             </div>
             <details className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
               <summary className="cursor-pointer text-sm font-semibold text-slate-950">
