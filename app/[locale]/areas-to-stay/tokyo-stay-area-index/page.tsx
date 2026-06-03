@@ -205,41 +205,26 @@ function hotelSearchForArea(area: StayAreaBase, locale: string, placement: Hotel
   };
 }
 
-const stationRouteNotes: Partial<Record<string, string>> = {
-  asakusa:
-    "Asakusa can refer to several different station locations. Tokyo Metro, Toei, Tobu Asakusa, and Tsukuba Express Asakusa are not all the same walking point. Check which station and line your hotel is actually closest to before booking.",
-  oshiage:
-    "Oshiage is useful for airport access and Tokyo Skytree, but the walking route can vary depending on whether your hotel is closer to Oshiage Station, Tokyo Skytree Station, or the Solamachi side.",
-  kuramae:
-    "Kuramae has separate Toei Asakusa Line and Oedo Line station locations. Check which side your hotel is closer to before booking, especially with luggage.",
-  "kiyosumi-shirakawa":
-    "Kiyosumi-Shirakawa is a quiet local base, but hotel options can be limited and nearby areas such as Monzen-Nakacho or Koto may appear in hotel searches. Check the exact walking distance and nearest station before booking.",
-  roppongi:
-    "Roppongi can feel different depending on the line and exit. The Oedo Line platforms are deep, and some hotel routes involve slopes or longer walks than they look on the map.",
-  shinjuku:
-    "Shinjuku is a very large station area. West Exit, East Exit, South Exit, Shinjuku-sanchome, Nishi-Shinjuku, and Tochomae can feel like different hotel bases. Check the exact exit and walking route before booking.",
-  shibuya:
-    "Shibuya is compact on the map but can be confusing because of hills, exits, pedestrian decks, and underground routes. A hotel may look close to Shibuya Station but still require a less simple walk with luggage.",
-  "tokyo-station":
-    "Tokyo Station can mean very different sides of the station. Marunouchi, Yaesu, Otemachi, and Nihombashi are not the same hotel location, especially with luggage or an early Shinkansen.",
-  ueno:
-    "Ueno is convenient, but JR Ueno, Tokyo Metro Ueno, Keisei Ueno, Ueno-hirokoji, and Ueno-okachimachi are not the same walking point. For Narita access, check whether your hotel is closer to JR/Metro Ueno or Keisei Ueno.",
-  "ginza-yurakucho":
-    "Ginza / Yurakucho is a dense central area with several nearby stations. Ginza, Yurakucho, Higashi-Ginza, Ginza-itchome, and Shimbashi-side hotels can feel different for luggage and train access.",
-  "hamamatsucho-daimon":
-    "Hamamatsucho and Daimon are close, but JR/Monorail Hamamatsucho and Toei Daimon are not exactly the same station entrance. Check which one your hotel is closer to, especially for Haneda access.",
-  shinagawa:
-    "Shinagawa is useful for the Shinkansen and Haneda access, but the Takanawa side and Konan side feel different. Check which side your hotel is on before booking.",
-  ikebukuro:
-    "Ikebukuro is a large station with very different east, west, north, and underground exit areas. A hotel can be \"near Ikebukuro\" but still be confusing to reach with luggage.",
-  akihabara:
-    "Akihabara can refer to JR Akihabara, Tokyo Metro Hibiya Line Akihabara, Tsukuba Express Akihabara, or the nearby Iwamotocho side. Check which station entrance your hotel is actually closest to.",
-  nihombashi:
-    "Nihombashi is central and practical, but hotel listings may overlap with Tokyo Station, Otemachi, Mitsukoshimae, Kayabacho, or Ningyocho. Check the exact nearest station rather than relying only on the area name.",
-};
+const stationRouteNoteAreaIds = new Set([
+  "asakusa",
+  "oshiage",
+  "kuramae",
+  "kiyosumi-shirakawa",
+  "roppongi",
+  "shinjuku",
+  "shibuya",
+  "tokyo-station",
+  "ueno",
+  "ginza-yurakucho",
+  "hamamatsucho-daimon",
+  "shinagawa",
+  "ikebukuro",
+  "akihabara",
+  "nihombashi",
+]);
 
-function stationRouteNote(areaId: string) {
-  return stationRouteNotes[areaId] ?? null;
+function stationRouteNote(areaId: string, t: Translation) {
+  return stationRouteNoteAreaIds.has(areaId) ? t(`stationRouteNote.areas.${areaId}`) : null;
 }
 
 function hotelSearchForFinderArea(area: StayAreaBase, locale: string, placement: HotelAffiliatePlacement): FinderArea["hotel"] {
@@ -758,7 +743,7 @@ function StationUsabilityPanel({
           const display = stepFreeDisplay(signal, area.stepFreeConfidence);
           let hint = t("stationUsability.stepFreeDefaultHint");
           if (sf?.status === "success" || sf?.status === "partial") {
-            hint = `${sf.message ?? ""} Sources: ${sf.sourceIds.join(", ") || "—"}.`;
+            hint = t("stationUsability.stepFreeSources", { message: sf.message ?? "", sources: sf.sourceIds.join(", ") || "—" });
           } else if (area.stepFreeConfidence !== "Unknown") {
             hint = t("stationUsability.stepFreeEditorialHint");
           }
@@ -878,7 +863,7 @@ function SelectedAreaHotelSearch({
 }
 
 function StationRouteNoteCard({ area, t }: { area: StayAreaBase; t: Translation }) {
-  const note = stationRouteNote(area.id);
+  const note = stationRouteNote(area.id, t);
   if (!note) return null;
 
   return (
@@ -1174,7 +1159,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
     rawScore: score.overallScore,
     detailHref: finderAreaDetailHref(locale, areaItem.id),
     summary: areaSummary(areaItem, score, t),
-    stationRouteNote: stationRouteNote(areaItem.id),
+    stationRouteNote: stationRouteNote(areaItem.id, t),
     bestFor: translatedFitReasons(areaItem, score, t),
     watchOut: translatedWatchOuts(areaItem, score, t),
     tags: translatedFitReasons(areaItem, score, t).slice(0, 4),
@@ -1198,8 +1183,11 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
   const core = deriveCoreSignals(sourceStatusFile.sources, signalsFile);
   const passengerSummary =
     core.tokyoMetroPax?.status === "success" && core.toeiPax?.status === "success"
-      ? `Tokyo Metro ${core.tokyoMetroPax.records ?? "?"} + Toei ${core.toeiPax.records ?? "?"} records`
-      : `Tokyo Metro: ${statusLabel(core.tokyoMetroPax?.status ?? "skipped").toLowerCase()} · Toei: ${statusLabel(core.toeiPax?.status ?? "skipped").toLowerCase()}`;
+      ? t("dataNote.passengerSummarySuccess", { metro: core.tokyoMetroPax.records ?? "?", toei: core.toeiPax.records ?? "?" })
+      : t("dataNote.passengerSummaryFallback", {
+          metro: displayStatus(statusLabel(core.tokyoMetroPax?.status ?? "skipped"), t),
+          toei: displayStatus(statusLabel(core.toeiPax?.status ?? "skipped"), t),
+        });
 
   const matchedCount = baselineScores.filter((s) => s.matchLabel === "public-data-matched").length;
   const partialCount = baselineScores.filter((s) => s.matchLabel === "partial-public-data").length;

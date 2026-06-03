@@ -3904,14 +3904,14 @@
       "title": "Find where to stay in Tokyo",
       "body": "Pick the places you want to visit. Answer a few travel questions. Get your top 3 Tokyo hotel base areas.",
       "signals": [
-        "Airport access",
-        "Luggage friendly",
-        "Shinkansen ready",
-        "Hotel choice"
+        "Accès aéroport",
+        "Pratique avec bagages",
+        "Prêt pour Shinkansen",
+        "Choix d'hôtels"
       ],
-      "disclaimer": "Scores are editorial travel-fit scores informed by public data signals where available. They are not official ratings, hotel rankings, or guarantees of price, comfort, availability, or route conditions.",
-      "freshness": "Passenger-data-informed local refresh · Last source check: {date}",
-      "cta": "Start"
+      "disclaimer": "Les scores sont des évaluations éditoriales d'adéquation de voyage, informées par des données publiques quand elles existent. Ce ne sont pas des notes officielles, des classements d'hôtels ni des garanties de prix, confort, disponibilité ou conditions de trajet.",
+      "freshness": "Actualisation locale avec données passagers · Dernière vérification des sources : {date}",
+      "cta": "Commencer"
     },
     "situations": {
       "eyebrow": "Commencez par votre situation",
@@ -4039,36 +4039,54 @@
       "examples": "Voir des exemples d'hôtels locaux"
     },
     "stationRouteNote": {
-      "title": "Station & hotel-route note",
-      "commonTitle": "Station-name note",
-      "commonBody": "Tokyo station names can be confusing. The same name may refer to different railway operators, separate entrances, distant platforms, or nearby-but-not-identical station areas. This finder compares practical hotel-base areas, not exact station exits. Before booking, always check the walking route from your exact hotel to the exact station entrance or platform you plan to use."
+      "title": "Note gare et trajet hôtel",
+      "commonTitle": "Note sur les noms de gare",
+      "commonBody": "Les noms de gare à Tokyo peuvent prêter à confusion. Un même nom peut désigner des opérateurs différents, des entrées séparées, des quais éloignés ou des zones proches mais non identiques. Ce finder compare des zones pratiques de base hôtelière, pas des sorties exactes. Avant de réserver, vérifiez toujours le trajet depuis votre hôtel exact jusqu'à l'entrée ou au quai que vous utiliserez.",
+      "areas": {
+        "asakusa": "Asakusa peut désigner plusieurs gares à des endroits différents. Tokyo Metro, Toei, Tobu Asakusa et Tsukuba Express Asakusa ne correspondent pas au même point à pied. Vérifiez quelle gare et quelle ligne sont réellement les plus proches de votre hôtel avant de réserver.",
+        "oshiage": "Oshiage est pratique pour l'aéroport et Tokyo Skytree, mais le trajet à pied varie selon que l'hôtel est plus proche de la gare d'Oshiage, de Tokyo Skytree Station ou du côté Solamachi.",
+        "kuramae": "Kuramae possède deux emplacements distincts pour les stations Toei Asakusa Line et Oedo Line. Vérifiez de quel côté se trouve votre hôtel avant de réserver, surtout avec des bagages.",
+        "kiyosumi-shirakawa": "Kiyosumi-Shirakawa est une base locale calme, mais le choix d'hôtels peut être limité et des zones voisines comme Monzen-Nakacho ou Koto peuvent apparaître dans les recherches. Vérifiez la distance exacte à pied et la gare la plus proche avant de réserver.",
+        "roppongi": "Roppongi peut être très différent selon la ligne et la sortie. Les quais de la Oedo Line sont profonds, et certains trajets vers les hôtels impliquent des pentes ou des marches plus longues que sur la carte.",
+        "shinjuku": "Shinjuku est une très grande zone de gare. West Exit, East Exit, South Exit, Shinjuku-sanchome, Nishi-Shinjuku et Tochomae peuvent ressembler à des bases différentes. Vérifiez la sortie exacte et le trajet à pied avant de réserver.",
+        "shibuya": "Shibuya paraît compacte sur la carte, mais peut être confuse à cause des pentes, sorties, passerelles et passages souterrains. Un hôtel peut sembler proche de la gare tout en demandant un trajet peu simple avec des bagages.",
+        "tokyo-station": "Tokyo Station peut désigner des côtés très différents de la gare. Marunouchi, Yaesu, Otemachi et Nihombashi ne sont pas le même emplacement d'hôtel, surtout avec des bagages ou un Shinkansen matinal.",
+        "ueno": "Ueno est pratique, mais JR Ueno, Tokyo Metro Ueno, Keisei Ueno, Ueno-hirokoji et Ueno-okachimachi ne sont pas le même point à pied. Pour Narita, vérifiez si l'hôtel est plus proche de JR/Metro Ueno ou de Keisei Ueno.",
+        "ginza-yurakucho": "Ginza / Yurakucho est une zone centrale dense avec plusieurs gares proches. Ginza, Yurakucho, Higashi-Ginza, Ginza-itchome et les hôtels côté Shimbashi peuvent être différents pour les bagages et les trains.",
+        "hamamatsucho-daimon": "Hamamatsucho et Daimon sont proches, mais JR/Monorail Hamamatsucho et Toei Daimon ne sont pas exactement la même entrée. Vérifiez laquelle est la plus proche de votre hôtel, surtout pour Haneda.",
+        "shinagawa": "Shinagawa est pratique pour le Shinkansen et Haneda, mais les côtés Takanawa et Konan sont différents. Vérifiez de quel côté se trouve votre hôtel avant de réserver.",
+        "ikebukuro": "Ikebukuro est une grande gare avec des zones est, ouest, nord et souterraines très différentes. Un hôtel peut être 'près d'Ikebukuro' tout en étant confus avec des bagages.",
+        "akihabara": "Akihabara peut désigner JR Akihabara, Tokyo Metro Hibiya Line Akihabara, Tsukuba Express Akihabara ou le côté voisin d'Iwamotocho. Vérifiez quelle entrée de gare est réellement la plus proche de l'hôtel.",
+        "nihombashi": "Nihombashi est central et pratique, mais les listes d'hôtels peuvent chevaucher Tokyo Station, Otemachi, Mitsukoshimae, Kayabacho ou Ningyocho. Vérifiez la gare la plus proche exacte plutôt que le seul nom de zone."
+      }
     },
     "stationUsability": {
-      "title": "Lisibilité de la gare",
-      "passenger": "Percentile passagers",
+      "title": "Usabilité de la gare",
+      "passenger": "Percentile de fréquentation",
       "passengerValue": "{percentile}e · {crowd}",
       "passengerAggregated": "Agrégé {count} ({sources})",
       "sourceSkipped": "Source ignorée cette fois.",
-      "noPassengerData": "Aucune donnée passagers pour cette zone.",
+      "noPassengerData": "Aucune donnée passagers ne correspond à cette zone.",
       "exit": "Complexité sorties / entrées",
-      "exitDataHint": "{exits} sorties détectées{coverage}. Flux Tokyo Metro.",
+      "exitDataHint": "{exits} sorties détectées{coverage}. Flux de sorties Tokyo Metro.",
       "partialCoverage": " (partiel — {coverage}% de couverture)",
-      "exitFallbackHint": "Base éditoriale (pas de flux correspondant).",
+      "exitFallbackHint": "Base éditoriale (aucun flux de sorties correspondant).",
       "contribution": "Contribution : {value}",
       "linesOperators": "Lignes / opérateurs",
       "linesOperatorsValue": "{lines} lignes · {operators} opérateurs",
-      "operatorGroups": "Opérateurs : {groups}.",
-      "operatorGroupsInferred": "Opérateurs déduits des lignes curées.",
+      "operatorGroups": "Groupes d'opérateurs : {groups}.",
+      "operatorGroupsInferred": "Groupes d'opérateurs déduits des noms de lignes curés.",
       "terminalType": "Type de terminal",
       "multiOperator": "Multi-opérateur : {value}.",
-      "networkComplexity": "Complexité du réseau",
+      "networkComplexity": "Complexité réseau",
       "transferPenalty": "Pénalité de correspondance",
-      "stepFree": "Parcours sans marche / ascenseur",
-      "stepFreeDefaultHint": "Les données sans marche sont utilisées seulement avec une source publique fiable. L'absence de données ne pénalise pas.",
-      "stepFreeEditorialHint": "Libellé de confiance éditorial.",
-      "hotelChoice": "Densité d'hôtels",
-      "hotelChoiceHint": "Signal éditorial. Ne classe pas les hôtels et ne montre pas la disponibilité.",
-      "networkDerivedHint": "Déduit de données curées de lignes et d'opérateurs."
+      "stepFree": "Trajet sans marches / ascenseur",
+      "stepFreeDefaultHint": "Les données sans marches ne sont utilisées que lorsqu'une source publique correspond avec confiance. Les données manquantes ne pénalisent pas.",
+      "stepFreeEditorialHint": "Libellé de confiance éditoriale (aucune source live correspondante).",
+      "hotelChoice": "Densité de choix hôteliers",
+      "hotelChoiceHint": "Signal éditorial de densité hôtelière. Ne classe pas les hôtels et ne montre pas la disponibilité en direct.",
+      "networkDerivedHint": "Dérivé de données de lignes et opérateurs curées.",
+      "stepFreeSources": "{message} Sources : {sources}."
     },
     "access": {
       "title": "Aéroport / Shinkansen",
@@ -4085,41 +4103,41 @@
         "crowd": "Foule",
         "priority": "Priorité",
         "complexity": "Complexité",
-        "luggageRoute": "Bagages",
+        "luggageRoute": "Trajet bagages",
         "hotelChoice": "Hôtels"
       },
       "metrics": {
-        "fitScore": "Score",
+        "fitScore": "Score d'adéquation",
         "station": "Gare",
         "luggage": "Bagages"
       },
-      "bestFor": "Bien pour : {items}"
+      "bestFor": "Idéal pour : {items}"
     },
     "signalTiles": {
       "passenger": {
-        "title": "Volume passagers"
+        "title": "Volume de passagers"
       },
       "exit": {
-        "title": "Sorties / entrées",
+        "title": "Complexité sorties / entrées",
         "bodyMatched": "Flux Tokyo Metro analysé — {matched} de {count} zones utilisent un compte de sorties.",
-        "bodyFallback": "Les tags éditoriaux expliquent l'échelle de la gare."
+        "bodyFallback": "Les balises éditoriales expliquent l'échelle de la gare. Cela affecte la simplicité et légèrement la facilité avec bagages."
       },
       "lines": {
-        "title": "Lignes / opérateurs",
-        "body": "Déduit des lignes curées, opérateurs et tags de terminal."
+        "title": "Complexité lignes / opérateurs",
+        "body": "Dérivée des lignes curées, groupes d’opérateurs, niveau de hub et balises de méga-terminal."
       },
       "stepFree": {
-        "title": "Parcours sans marche",
+        "title": "Trajet sans marches / ascenseur",
         "bodyMatched": "CSVs Toei analysés — {matched} de {count} zones ont un parcours confirmé.",
-        "bodyFallback": "L'absence de données n'est pas un signal négatif."
+        "bodyFallback": "Les données sans marches ne sont utilisées que lorsqu’une source publique correspond avec confiance. Les données manquantes ne pénalisent pas."
       },
       "access": {
         "title": "Aéroport / Shinkansen",
         "body": "Logique d'itinéraire curée, sans horaires en direct."
       },
       "hotelChoice": {
-        "title": "Densité d'hôtels",
-        "body": "Signal éditorial. Ne classe pas les hôtels et ne montre pas la disponibilité."
+        "title": "Densité de choix hôteliers",
+        "body": "Signal éditorial de choix hôtelier. Ne classe pas les hôtels individuels et ne montre pas la disponibilité en direct."
       }
     },
     "status": {
@@ -4127,13 +4145,13 @@
       "partial": "Partiel",
       "skipped": "Ignoré",
       "optional": "Optionnel",
-      "notLiveYet": "Pas encore live",
+      "notLiveYet": "Pas encore actif",
       "editorialSignal": "Signal éditorial",
       "active": "Actif",
       "next": "Suivant",
       "editorialFallback": "Base éditoriale",
       "activeFromAreaData": "Actif depuis les données de zone",
-      "routeLogic": "Logique de route",
+      "routeLogic": "Logique de trajet",
       "failed": "Échec"
     },
     "methodology": {
@@ -4171,7 +4189,9 @@
       "registryTitle": "Registre des sources",
       "fetchedLocally": "récupéré localement",
       "registeredOnly": "enregistré seulement",
-      "otherDatasets": "D'autres jeux peuvent être catalogués pour revue future, mais ne sont pas affichés comme affirmations de voyage."
+      "otherDatasets": "D'autres jeux peuvent être catalogués pour revue future, mais ne sont pas affichés comme affirmations de voyage.",
+      "passengerSummarySuccess": "Tokyo Metro {metro} + Toei {toei} enregistrements",
+      "passengerSummaryFallback": "Tokyo Metro : {metro} · Toei : {toei}"
     },
     "featured": {
       "eyebrow": "Zones en avant",
@@ -4259,7 +4279,7 @@
     "terminalTypes": {
       "localstation": "gare locale",
       "interchange": "correspondance",
-      "terminal": "terminal",
+      "terminal": "terminal principal",
       "megaterminal": "méga-terminal"
     },
     "networkLabels": {
@@ -4287,39 +4307,39 @@
       "irregular": "irrégulier"
     },
     "finder": {
-      "startLabel": "Start",
-      "restartLabel": "Reset",
-      "nextLabel": "Next",
-      "backLabel": "Back",
-      "showResultsLabel": "Show my results",
-      "selectedLabel": "Selected",
-      "stepLabel": "Step",
+      "startLabel": "Commencer",
+      "restartLabel": "Réinitialiser",
+      "nextLabel": "Suivant",
+      "backLabel": "Retour",
+      "showResultsLabel": "Afficher mes résultats",
+      "selectedLabel": "Sélectionné",
+      "stepLabel": "Étape",
       "topTitle": "Your top 3 Tokyo hotel base areas",
-      "topBody": "These matches use the same 36-area data and existing fujiseat scores, then re-rank them by your answers.",
-      "whyFits": "Why it fits you",
-      "bestFor": "Best for",
-      "hotelsIntro": "Check hotels in this area",
-      "hotelsButton": "Hotels",
-      "detailsButton": "Details",
-      "noHotelLinks": "No approved hotel search link is set for this area yet.",
-      "showMore": "Show more matches",
-      "compareAll": "Compare all areas",
-      "moreTitle": "More matches",
+      "topBody": "Ces résultats utilisent les mêmes données des 36 zones et les scores fujiseat existants, puis les réordonnent selon vos réponses.",
+      "whyFits": "Pourquoi cela vous convient",
+      "bestFor": "Idéal pour",
+      "hotelsIntro": "Voir les hôtels dans cette zone",
+      "hotelsButton": "Hôtels",
+      "detailsButton": "Détails",
+      "noHotelLinks": "Aucun lien de recherche d'hôtel approuvé n'est encore défini pour cette zone.",
+      "showMore": "Afficher plus de résultats",
+      "compareAll": "Comparer toutes les zones",
+      "moreTitle": "Plus de résultats",
       "allTitle": "Compare all 36 Tokyo station areas",
-      "allBody": "This expands the full comparison list. Scores are travel-fit signals, not official ratings or hotel rankings.",
-      "matchLabel": "Match",
-      "noAnswers": "Start with a few quick choices. Results stay hidden until you finish the wizard.",
+      "allBody": "Cela affiche la liste complète. Les scores sont des signaux d'adéquation de voyage, pas des notes officielles ni des classements d'hôtels.",
+      "matchLabel": "Correspondance",
+      "noAnswers": "Commencez par quelques choix rapides. Les résultats restent cachés jusqu'à la fin de l'assistant.",
       "badges": [
-        "Airport access",
-        "Luggage friendly",
-        "Shinkansen ready",
-        "Hotel choice"
+        "Accès aéroport",
+        "Pratique avec bagages",
+        "Prêt pour Shinkansen",
+        "Choix d'hôtels"
       ],
       "steps": [
         {
           "id": "destinations",
-          "title": "Where do you want to go in Tokyo?",
-          "helper": "Choose more than one if your trip is mixed.",
+          "title": "Où voulez-vous aller à Tokyo ?",
+          "helper": "Choisissez plusieurs options si votre voyage est varié.",
           "multi": true,
           "options": [
             {
@@ -4348,7 +4368,7 @@
             },
             {
               "id": "tokyo-station-palace",
-              "label": "Tokyo Station / Imperial Palace"
+              "label": "Tokyo Station / Palais impérial"
             },
             {
               "id": "toyosu-odaiba",
@@ -4360,7 +4380,7 @@
             },
             {
               "id": "fuji",
-              "label": "Mt. Fuji day trip"
+              "label": "Excursion au Mt. Fuji"
             },
             {
               "id": "kamakura-yokohama",
@@ -4368,14 +4388,14 @@
             },
             {
               "id": "kyoto-osaka",
-              "label": "Kyoto / Osaka by Shinkansen"
+              "label": "Kyoto / Osaka en Shinkansen"
             }
           ]
         },
         {
           "id": "airport",
-          "title": "Which airport will you arrive at?",
-          "helper": "Airport choice changes the easiest first-night hotel base.",
+          "title": "À quel aéroport arrivez-vous ?",
+          "helper": "L'aéroport change la base la plus simple pour la première nuit.",
           "multi": false,
           "options": [
             {
@@ -4388,62 +4408,62 @@
             },
             {
               "id": "not-sure",
-              "label": "Not sure yet"
+              "label": "Pas encore sûr"
             }
           ]
         },
         {
           "id": "luggage",
-          "title": "How much luggage will you have?",
-          "helper": "Large bags make station exits, transfers, and walking distance more important.",
+          "title": "Combien de bagages aurez-vous ?",
+          "helper": "Les grosses valises rendent les sorties, correspondances et distances à pied plus importantes.",
           "multi": false,
           "options": [
             {
               "id": "light",
-              "label": "Light luggage"
+              "label": "Bagage léger"
             },
             {
               "id": "large",
-              "label": "Large suitcase"
+              "label": "Grande valise"
             },
             {
               "id": "family",
-              "label": "Family / multiple bags"
+              "label": "Famille / plusieurs bagages"
             }
           ]
         },
         {
           "id": "stay",
-          "title": "What kind of stay do you prefer?",
-          "helper": "Pick the travel style that matters most for your hotel base.",
+          "title": "Quel type de séjour préférez-vous ?",
+          "helper": "Choisissez le style de voyage le plus important pour votre base hôtelière.",
           "multi": false,
           "options": [
             {
               "id": "first-time",
-              "label": "First-time Tokyo"
+              "label": "Premier voyage à Tokyo"
             },
             {
               "id": "quiet-local",
-              "label": "Quiet local stay"
+              "label": "Séjour local calme"
             },
             {
               "id": "nightlife-shopping",
-              "label": "Nightlife / shopping"
+              "label": "Vie nocturne / shopping"
             },
             {
               "id": "easy-transfers",
-              "label": "Easy transfers"
+              "label": "Correspondances faciles"
             },
             {
               "id": "budget-friendly",
-              "label": "Budget-friendly"
+              "label": "Budget maîtrisé"
             }
           ]
         },
         {
           "id": "shinkansen",
-          "title": "Will you use the Shinkansen?",
-          "helper": "Rail days can change the easiest area to sleep near.",
+          "title": "Allez-vous utiliser le Shinkansen ?",
+          "helper": "Les jours de train peuvent changer la zone la plus simple où dormir.",
           "multi": false,
           "options": [
             {
@@ -4456,15 +4476,44 @@
             },
             {
               "id": "tokyo-only",
-              "label": "No / Tokyo only"
+              "label": "Non / Tokyo seulement"
             },
             {
               "id": "not-sure",
-              "label": "Not sure"
+              "label": "Pas sûr"
             }
           ]
         }
-      ]
+      ],
+      "hotelAreaMatches": "Correspondances de zones hôtelières",
+      "hideRanks": "Masquer les rangs 4-10",
+      "showRanks": "Afficher les rangs 4-10",
+      "hideFullComparison": "Masquer la comparaison complète",
+      "compareAllAreas": "Comparer les 36 zones",
+      "rankPrefix": "Rang",
+      "hotelBaseFit": "Adéquation base hôtel",
+      "selectedArea": "Zone sélectionnée",
+      "scoreSuffix": "/100",
+      "watchOut": "À surveiller",
+      "stationRouteNoteTitle": "Note gare et trajet hôtel",
+      "scoreLabels": {
+        "stationSimplicity": "Simplicité de gare",
+        "luggageFriendly": "Pratique avec bagages",
+        "airportAccess": "Accès aéroport",
+        "shinkansenAccess": "Accès Shinkansen",
+        "hotelChoice": "Choix d'hôtels"
+      },
+      "providerLabels": {
+        "booking_travelpayouts": "Booking.com",
+        "trip": "Trip.com",
+        "agoda": "Agoda"
+      },
+      "rankLabels": {
+        "topPick": "Premier choix",
+        "strongMatch": "Forte correspondance",
+        "goodMatch": "Bonne correspondance",
+        "areaOption": "Option de zone"
+      }
     }
   },
   "fujiseatAreaLogic": {

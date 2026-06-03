@@ -95,6 +95,35 @@ type FinderCopy = {
   allBody: string;
   matchLabel: string;
   noAnswers: string;
+  hotelAreaMatches: string;
+  hideRanks: string;
+  showRanks: string;
+  hideFullComparison: string;
+  compareAllAreas: string;
+  rankPrefix: string;
+  hotelBaseFit: string;
+  selectedArea: string;
+  scoreSuffix: string;
+  watchOut: string;
+  stationRouteNoteTitle: string;
+  scoreLabels: {
+    stationSimplicity: string;
+    luggageFriendly: string;
+    airportAccess: string;
+    shinkansenAccess: string;
+    hotelChoice: string;
+  };
+  providerLabels: {
+    booking_travelpayouts: string;
+    trip: string;
+    agoda: string;
+  };
+  rankLabels: {
+    topPick: string;
+    strongMatch: string;
+    goodMatch: string;
+    areaOption: string;
+  };
   badges: string[];
   steps: FinderStep[];
 };
@@ -116,11 +145,11 @@ const emptyAnswers: Answers = {
   shinkansen: [],
 };
 
-function matchLabelForRank(rank: number) {
-  if (rank === 1) return "Top pick";
-  if (rank === 2) return "Strong match";
-  if (rank === 3) return "Good match";
-  return "Area option";
+function matchLabelForRank(rank: number, copy: FinderCopy) {
+  if (rank === 1) return copy.rankLabels.topPick;
+  if (rank === 2) return copy.rankLabels.strongMatch;
+  if (rank === 3) return copy.rankLabels.goodMatch;
+  return copy.rankLabels.areaOption;
 }
 
 const destinationBoosts: Record<string, Record<string, number>> = {
@@ -414,7 +443,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
       {showResults ? (
         <div ref={resultsRef} className="mt-8 scroll-mt-24">
           <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">Hotel area matches</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">{copy.hotelAreaMatches}</p>
             <h2 className="mt-1 text-2xl font-semibold text-slate-950">{copy.topTitle}</h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{copy.topBody}</p>
           </div>
@@ -451,7 +480,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
               }}
               className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl border border-emerald-100 bg-white px-5 py-2.5 text-sm font-semibold text-[#106b43] transition-colors hover:bg-emerald-50"
             >
-              {showMore ? "Hide ranks 4-10" : "Show ranks 4-10"}
+              {showMore ? copy.hideRanks : copy.showRanks}
               <ChevronDown className="h-4 w-4" aria-hidden="true" />
             </button>
             <button
@@ -469,7 +498,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
               }}
               className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#168a56] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              {showAll ? "Hide full comparison" : "Compare all 36 areas"}
+              {showAll ? copy.hideFullComparison : copy.compareAllAreas}
               <ChevronDown className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
@@ -517,13 +546,13 @@ function ResultCard({
   pagePath: string;
   onOpenDetails: (area: FinderArea & { matchScore: number }, rank: number) => void;
 }) {
-  const matchLabel = matchLabelForRank(rank);
+  const matchLabel = matchLabelForRank(rank, copy);
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-[24px] border border-emerald-100 bg-white shadow-[0_16px_36px_rgba(15,23,42,0.08)]">
       <div className="min-h-[118px] border-b border-emerald-200 bg-[linear-gradient(135deg,#d9f3e6,#eef8ff_55%,#d8ecff)] p-4">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#106b43]">Rank #{rank}</p>
+            <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#106b43]">{copy.rankPrefix} #{rank}</p>
             <h3 className="mt-1 text-xl font-semibold text-slate-950">{area.displayName}</h3>
             <p className="mt-1 text-xs font-medium text-slate-600">{area.japaneseName} · {area.areaGroup}</p>
           </div>
@@ -535,8 +564,8 @@ function ResultCard({
       <div className="flex flex-1 flex-col p-4">
         <div className="lg:h-[214px] lg:overflow-hidden">
           <div className="mb-3 flex items-center justify-between gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-2">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500">Hotel-base fit</span>
-            <span className="rounded-full bg-slate-950 px-2.5 py-1 text-xs font-black text-white">{area.displayScore}/100</span>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500">{copy.hotelBaseFit}</span>
+            <span className="rounded-full bg-slate-950 px-2.5 py-1 text-xs font-black text-white">{area.displayScore}{copy.scoreSuffix}</span>
           </div>
           <p className="overflow-hidden text-sm font-medium leading-6 text-slate-800 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">{area.summary}</p>
           <div className="mt-3 flex max-h-[58px] flex-wrap gap-1.5 overflow-hidden">
@@ -610,7 +639,7 @@ function HotelButtons({
             fullWidth
             className="min-h-10 rounded-xl text-xs"
           >
-            {provider.provider === "booking_travelpayouts" ? "Booking.com" : provider.provider === "trip" ? "Trip.com" : "Agoda"}
+            {copy.providerLabels[provider.provider as keyof typeof copy.providerLabels] ?? provider.provider}
           </ProviderButton>
         ))}
       </div>
@@ -636,7 +665,7 @@ const FinderSelectedAreaPanel = forwardRef<
     >
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#106b43]">Selected area</p>
+          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#106b43]">{copy.selectedArea}</p>
           <h3 className="mt-1 text-2xl font-semibold text-slate-950">{area.displayName}</h3>
           <p className="mt-1 text-sm text-slate-500">
             {area.japaneseName} · {area.areaGroup}
@@ -651,11 +680,11 @@ const FinderSelectedAreaPanel = forwardRef<
       <p className="mt-4 text-sm leading-6 text-slate-700">{area.summary}</p>
 
       <div className="mt-5 grid gap-2">
-        <ClientScoreBar label="Station simplicity" value={area.scores.stationSimplicity} />
-        <ClientScoreBar label="Luggage-friendly" value={area.scores.luggageFriendly} />
-        <ClientScoreBar label="Airport access" value={area.scores.airportAccess} />
-        <ClientScoreBar label="Shinkansen access" value={area.scores.shinkansenAccess} />
-        <ClientScoreBar label="Hotel choice" value={area.scores.lodgingChoice} />
+        <ClientScoreBar label={copy.scoreLabels.stationSimplicity} value={area.scores.stationSimplicity} scoreSuffix={copy.scoreSuffix} />
+        <ClientScoreBar label={copy.scoreLabels.luggageFriendly} value={area.scores.luggageFriendly} scoreSuffix={copy.scoreSuffix} />
+        <ClientScoreBar label={copy.scoreLabels.airportAccess} value={area.scores.airportAccess} scoreSuffix={copy.scoreSuffix} />
+        <ClientScoreBar label={copy.scoreLabels.shinkansenAccess} value={area.scores.shinkansenAccess} scoreSuffix={copy.scoreSuffix} />
+        <ClientScoreBar label={copy.scoreLabels.hotelChoice} value={area.scores.lodgingChoice} scoreSuffix={copy.scoreSuffix} />
       </div>
 
       <div className="mt-5 grid gap-4 md:grid-cols-2">
@@ -668,7 +697,7 @@ const FinderSelectedAreaPanel = forwardRef<
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-semibold text-slate-950">Watch out</h4>
+          <h4 className="text-sm font-semibold text-slate-950">{copy.watchOut}</h4>
           <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
             {area.watchOut.map((item) => (
               <li key={item}>· {item}</li>
@@ -679,7 +708,7 @@ const FinderSelectedAreaPanel = forwardRef<
 
       {area.stationRouteNote ? (
         <div className="mt-5 rounded-2xl border border-sky-100 bg-sky-50/80 p-4">
-          <h4 className="text-sm font-semibold text-slate-950">Station & hotel-route note</h4>
+          <h4 className="text-sm font-semibold text-slate-950">{copy.stationRouteNoteTitle}</h4>
           <p className="mt-2 text-sm leading-6 text-slate-700">{area.stationRouteNote}</p>
         </div>
       ) : null}
@@ -689,13 +718,13 @@ const FinderSelectedAreaPanel = forwardRef<
   );
 });
 
-function ClientScoreBar({ label, value }: { label: string; value: number }) {
+function ClientScoreBar({ label, value, scoreSuffix }: { label: string; value: number; scoreSuffix: string }) {
   const normalized = Math.max(0, Math.min(100, Math.round(value)));
   return (
     <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
       <div className="flex items-center justify-between gap-3 text-xs font-semibold text-slate-700">
         <span>{label}</span>
-        <span>{normalized}/100</span>
+        <span>{normalized}{scoreSuffix}</span>
       </div>
       <div className="mt-2 h-2 overflow-hidden rounded-full bg-white">
         <div className="h-full rounded-full bg-[#168a56]" style={{ width: `${normalized}%` }} />
@@ -724,12 +753,12 @@ function CompactAreaRow({
           <p className="mt-1 text-xs leading-5 text-slate-500">{area.stationNames.slice(0, 3).join(" / ")}</p>
         </div>
         <div className="rounded-full border border-sky-100 bg-sky-50 px-3 py-1.5 text-xs font-bold text-sky-800">
-          {matchLabelForRank(rank)}
+          {matchLabelForRank(rank, copy)}
         </div>
       </div>
       <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-slate-100 bg-slate-50 px-3 py-1.5 text-xs font-bold text-slate-700">
-        <span>Hotel-base fit</span>
-        <span>{area.displayScore}/100</span>
+        <span>{copy.hotelBaseFit}</span>
+        <span>{area.displayScore}{copy.scoreSuffix}</span>
       </div>
       <p className="mt-3 text-sm leading-6 text-slate-700">{area.summary}</p>
       <div className="mt-3">
