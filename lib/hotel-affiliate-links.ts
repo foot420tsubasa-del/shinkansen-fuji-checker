@@ -1,8 +1,14 @@
 import hotelAffiliateLinkData from "@/data/hotel-affiliate-links.json";
 import type { ProviderId } from "@/components/ui/ProviderButton";
+import type { AffiliatePlacement } from "@/lib/affiliate/links";
 import { getBookingHotelDestination, isActiveBookingHotelDestination } from "@/lib/booking-hotel-destinations";
 
-export type HotelAffiliatePlacement = "top3" | "detail";
+export type HotelAffiliatePlacement =
+  | "top3"
+  | "detail"
+  | "tokyo_first_time_card"
+  | "before_shinkansen_card"
+  | "comparison_area_cta";
 export type HotelAffiliateProvider = "booking_travelpayouts";
 export type HotelAffiliateLocale = string | "all";
 
@@ -14,6 +20,7 @@ export type HotelAffiliateLinkConfig = {
   destination_ref?: string;
   destination_url: string;
   affiliate_url: string;
+  page_group?: string;
   sub_id: string;
   enabled: boolean;
   priority: number;
@@ -29,6 +36,7 @@ export type HotelProviderLink = {
   linkId: string;
   subId?: string;
   priority: number;
+  placement: AffiliatePlacement;
 };
 
 const hotelAffiliateLinks = hotelAffiliateLinkData as Record<string, HotelAffiliateLinkConfig>;
@@ -87,14 +95,18 @@ export function getHotelProviderLinks({
   areaId,
   locale,
   placement,
+  pageGroup,
 }: {
   areaId: string;
   locale: string;
   placement: HotelAffiliatePlacement;
+  pageGroup?: string;
 }): HotelProviderLink[] {
   const matching = Object.entries(hotelAffiliateLinks).filter(([, entry]) => {
     if (!isReadyBookingLink(entry)) return false;
     if (entry.area_id !== areaId || entry.placement !== placement) return false;
+    if (pageGroup && entry.page_group !== pageGroup) return false;
+    if (!pageGroup && entry.page_group) return false;
     return entry.locale === locale || entry.locale === "all";
   });
 
@@ -114,6 +126,7 @@ export function getHotelProviderLinks({
         linkId: id,
         subId,
         priority: entry.priority,
+        placement: entry.placement,
       };
     })
     .filter((link) => link.href)

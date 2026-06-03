@@ -31,11 +31,20 @@ function writeLinks(data: Record<string, unknown>) {
 function isValidConfig(config: unknown): config is Record<string, unknown> {
   if (!config || typeof config !== "object" || Array.isArray(config)) return false;
   const c = config as Record<string, unknown>;
+  const validPlacements = new Set([
+    "top3",
+    "detail",
+    "tokyo_first_time_card",
+    "before_shinkansen_card",
+    "comparison_area_cta",
+  ]);
   return (
     c.provider === "booking_travelpayouts" &&
     typeof c.area_id === "string" &&
     (typeof c.locale === "string" && c.locale.length > 0) &&
-    (c.placement === "top3" || c.placement === "detail") &&
+    typeof c.placement === "string" &&
+    validPlacements.has(c.placement) &&
+    (typeof c.page_group === "undefined" || typeof c.page_group === "string") &&
     (typeof c.destination_ref === "undefined" || typeof c.destination_ref === "string") &&
     typeof c.destination_url === "string" &&
     typeof c.affiliate_url === "string" &&

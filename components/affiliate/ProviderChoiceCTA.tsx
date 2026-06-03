@@ -22,6 +22,9 @@ export type ProviderChoiceButton = {
   category?: AffiliateClickParams["category"];
   trackingHref?: string;
   route?: string;
+  areaId?: string;
+  rank?: number;
+  subId?: string;
 };
 
 type ProviderChoiceCTAProps = {
@@ -34,6 +37,7 @@ type ProviderChoiceCTAProps = {
   city?: string;
   routeType?: string;
   className?: string;
+  maxProviders?: number;
 };
 
 function providerCategory(product: string): AffiliateClickParams["category"] {
@@ -57,6 +61,9 @@ function providerClass(provider: AffiliateProvider, product: string, variant: Pr
   }
 
   if (variant === "secondary") {
+    if (provider === "booking_travelpayouts") {
+      return [base, "border border-[#003b95] bg-[#003b95] text-white hover:bg-[#002f78] focus-visible:ring-blue-200"].join(" ");
+    }
     if (provider === "omio") {
       return [base, "border border-indigo-600 bg-indigo-600 text-white hover:bg-indigo-700 focus-visible:ring-indigo-200"].join(" ");
     }
@@ -71,6 +78,9 @@ function providerClass(provider: AffiliateProvider, product: string, variant: Pr
 
   if (provider === "omio") {
     return [base, "border border-indigo-700 bg-indigo-700 text-white hover:bg-indigo-800 focus-visible:ring-indigo-200"].join(" ");
+  }
+  if (provider === "booking_travelpayouts") {
+    return [base, "border border-[#003b95] bg-[#003b95] text-white hover:bg-[#002f78] focus-visible:ring-blue-200"].join(" ");
   }
   if (provider === "trip") {
     return [base, "border border-[#0a4ca8] bg-[#0a4ca8] text-white hover:bg-[#0a3f8b] focus-visible:ring-blue-200"].join(" ");
@@ -94,10 +104,11 @@ export function ProviderChoiceCTA({
   city,
   routeType,
   className = "",
+  maxProviders = 2,
 }: ProviderChoiceCTAProps) {
   const availableProviders = providers
     .filter((provider) => Boolean(provider.href?.trim() || provider.internalLink?.trim()))
-    .slice(0, 2);
+    .slice(0, maxProviders);
 
   if (availableProviders.length === 0) return null;
 
@@ -144,6 +155,9 @@ export function ProviderChoiceCTA({
                   adid: provider.adid,
                   area,
                   city,
+                  area_id: provider.areaId,
+                  rank: provider.rank,
+                  sub_id: provider.subId,
                   route: provider.route,
                   route_type: routeType,
                 })

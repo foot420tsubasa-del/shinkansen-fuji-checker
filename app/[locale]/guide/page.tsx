@@ -1171,6 +1171,31 @@ export default async function GuidePage({ params }: Props) {
     </section>
   );
 
+  const renderEarlyShinkansenHotelStrip = () => (
+    <div className="mb-5 rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-3 shadow-sm shadow-sky-100/60 lg:px-5">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="text-sm font-semibold text-slate-950">
+            Taking an early Shinkansen from Tokyo?
+          </p>
+          <p className="mt-1 text-[12px] leading-5 text-slate-600">
+            Seat E solves the Fuji view. Your hotel base solves luggage stress if you are leaving early with bags.
+          </p>
+        </div>
+        <TrackedInternalLink
+          href="/areas-to-stay/where-to-stay-before-shinkansen"
+          sourcePage="/guide"
+          placement="guide_top_after_quick_answer"
+          label="Compare Tokyo hotel bases"
+          locale={locale}
+          className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-white px-3.5 py-2 text-[12px] font-semibold text-sky-800 shadow-sm transition-colors hover:border-sky-300 hover:bg-sky-100"
+        >
+          Compare Tokyo hotel bases →
+        </TrackedInternalLink>
+      </div>
+    </div>
+  );
+
   const renderAfterSeatNextSteps = () => (
     <section className="mb-5 rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm shadow-slate-200/70 lg:px-5">
       <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-400">
@@ -1489,6 +1514,8 @@ export default async function GuidePage({ params }: Props) {
             </Link>
           </div>
         </section>
+
+        {renderEarlyShinkansenHotelStrip()}
 
         {/* Two-column layout on desktop: article + sidebar */}
         <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-10 lg:items-start">

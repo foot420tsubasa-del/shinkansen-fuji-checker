@@ -10,6 +10,7 @@ import {
   trackFinderStart,
   trackFinderStepAnswered,
 } from "@/lib/analytics";
+import type { AffiliatePlacement } from "@/lib/affiliate/links";
 
 type FinderProviderLink = {
   provider: ProviderId;
@@ -18,6 +19,7 @@ type FinderProviderLink = {
   linkId: string;
   subId?: string;
   priority: number;
+  placement: AffiliatePlacement;
 };
 
 export type FinderArea = {
@@ -45,6 +47,11 @@ export type FinderArea = {
     lodgingChoice: number;
   };
   hotel?: {
+    areaName: string;
+    city: string;
+    providers: FinderProviderLink[];
+  } | null;
+  detailHotel?: {
     areaName: string;
     city: string;
     providers: FinderProviderLink[];
@@ -566,14 +573,17 @@ function HotelButtons({
   copy,
   locale,
   pagePath,
+  hotel,
 }: {
   area: FinderArea;
   rank: number;
   copy: FinderCopy;
   locale: string;
   pagePath: string;
+  hotel?: FinderArea["hotel"];
 }) {
-  if (!area.hotel?.providers.length) {
+  const activeHotel = hotel ?? area.hotel;
+  if (!activeHotel?.providers.length) {
     return <p className="mt-4 text-xs leading-5 text-slate-500">{copy.noHotelLinks}</p>;
   }
 
@@ -581,20 +591,20 @@ function HotelButtons({
     <div className="mt-4">
       <p className="text-xs font-semibold text-slate-950">{copy.hotelsIntro}</p>
       <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-        {area.hotel.providers.map((provider) => (
+        {activeHotel.providers.map((provider) => (
           <ProviderButton
             key={provider.linkId}
             provider={provider.provider}
             href={provider.href}
             trackingHref={provider.trackingHref}
-            placement="stay_area_hotel_card"
+            placement={provider.placement}
             pagePath={pagePath}
             locale={locale}
             linkId={provider.linkId}
             product="hotel"
-            area={area.hotel?.areaName}
+            area={activeHotel.areaName}
             areaId={area.id}
-            city={area.hotel?.city}
+            city={activeHotel.city}
             subId={provider.subId}
             rank={rank}
             fullWidth
@@ -674,7 +684,7 @@ const FinderSelectedAreaPanel = forwardRef<
         </div>
       ) : null}
 
-      <HotelButtons area={area} rank={rank} copy={copy} locale={locale} pagePath={pagePath} />
+      <HotelButtons area={area} rank={rank} copy={copy} locale={locale} pagePath={pagePath} hotel={area.detailHotel ?? area.hotel} />
     </div>
   );
 });

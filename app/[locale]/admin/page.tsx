@@ -879,6 +879,7 @@ export default function AdminPage() {
         area_id: hotelAffiliateForm.area_id.trim(),
         locale: hotelAffiliateForm.locale.trim() || "all",
         placement: hotelAffiliateForm.placement,
+        page_group: hotelAffiliateForm.page_group?.trim() || "",
         destination_ref: hotelAffiliateForm.destination_ref?.trim() || "",
         destination_url: hotelAffiliateForm.destination_url.trim(),
         affiliate_url: hotelAffiliateForm.affiliate_url.trim(),
@@ -2691,6 +2692,9 @@ export default function AdminPage() {
                             <select value={hotelAffiliateForm.placement} onChange={(e) => updateHotelAffiliateForm("placement", e.target.value)} className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300">
                               <option value="top3">top3</option>
                               <option value="detail">detail</option>
+                              <option value="tokyo_first_time_card">tokyo_first_time_card</option>
+                              <option value="before_shinkansen_card">before_shinkansen_card</option>
+                              <option value="comparison_area_cta">comparison_area_cta</option>
                             </select>
                           </label>
                           <label className="text-[10px] font-semibold text-slate-500">
@@ -2700,6 +2704,10 @@ export default function AdminPage() {
                           <label className="text-[10px] font-semibold text-slate-500">
                             destination_ref
                             <input value={hotelAffiliateForm.destination_ref ?? ""} onChange={(e) => updateHotelAffiliateForm("destination_ref", e.target.value)} placeholder="booking_ueno" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300" />
+                          </label>
+                          <label className="text-[10px] font-semibold text-slate-500">
+                            page_group
+                            <input value={hotelAffiliateForm.page_group ?? ""} onChange={(e) => updateHotelAffiliateForm("page_group", e.target.value)} placeholder="asakusa-vs-ueno" className="mt-1 w-full rounded-lg border border-slate-200 px-3 py-2 text-xs outline-none focus:border-blue-300" />
                           </label>
                           <label className="flex items-end gap-2 text-[10px] font-semibold text-slate-500">
                             <input type="checkbox" checked={hotelAffiliateForm.enabled} onChange={(e) => updateHotelAffiliateForm("enabled", e.target.checked)} className="h-4 w-4 rounded border-slate-300" />

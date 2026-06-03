@@ -28,6 +28,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { getAffUrl } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelProviderLinks, type HotelAffiliatePlacement } from "@/lib/hotel-affiliate-links";
 import { buttonClassName } from "@/components/ui/Button";
 import type { AdPlacement } from "@/lib/ads";
 
@@ -55,6 +56,28 @@ const stayComparisonHotelPickSlugs = new Set([
 const stayComparisonAdPlacements: Partial<Record<string, AdPlacement>> = {
   "asakusa-vs-ueno": "asakusa_ueno_after_hotel_cta",
   "ueno-vs-shinjuku": "ueno_shinjuku_after_hotel_cta",
+};
+
+const bookingAreaIdByHotelAreaKey: Partial<Record<HotelAreaKey, string>> = {
+  shinjuku: "shinjuku",
+  ueno: "ueno",
+  asakusa: "asakusa",
+  tokyoStation: "tokyo-station",
+};
+
+const comparisonAreaCtas: Partial<Record<string, Array<{ title: string; hotelKey: HotelAreaKey; bookingAreaId: string }>>> = {
+  "tokyo-station-vs-shinjuku": [
+    { title: "Tokyo Station / Ginza", hotelKey: "tokyoStation", bookingAreaId: "tokyo-station" },
+    { title: "Shinjuku", hotelKey: "shinjuku", bookingAreaId: "shinjuku" },
+  ],
+  "ueno-vs-shinjuku": [
+    { title: "Ueno", hotelKey: "ueno", bookingAreaId: "ueno" },
+    { title: "Shinjuku", hotelKey: "shinjuku", bookingAreaId: "shinjuku" },
+  ],
+  "asakusa-vs-ueno": [
+    { title: "Asakusa", hotelKey: "asakusa", bookingAreaId: "asakusa" },
+    { title: "Ueno", hotelKey: "ueno", bookingAreaId: "ueno" },
+  ],
 };
 
 const filledNextStepClass =
@@ -1591,7 +1614,48 @@ function providerChoices(...providers: Array<ProviderChoiceButton | null | undef
   return providers.filter((provider): provider is ProviderChoiceButton => Boolean(provider));
 }
 
-function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"]) {
+function bookingProviderChoices({
+  areaId,
+  locale,
+  placement,
+  pageGroup,
+}: {
+  areaId?: string;
+  locale: string;
+  placement: HotelAffiliatePlacement;
+  pageGroup?: string;
+}) {
+  if (!areaId) return [];
+  return getHotelProviderLinks({ areaId, locale, placement, pageGroup }).map((link) => ({
+    label: "Booking.com",
+    href: link.href,
+    trackingHref: link.trackingHref,
+    provider: link.provider,
+    product: "hotel",
+    linkId: link.linkId,
+    placement,
+    variant: "primary",
+    category: "hotel",
+    areaId,
+    subId: link.subId,
+  })) satisfies ProviderChoiceButton[];
+}
+
+function hotelProviderChoices({
+  areaKey,
+  placement,
+  locale,
+  bookingPlacement,
+  bookingAreaId = bookingAreaIdByHotelAreaKey[areaKey],
+  bookingPageGroup,
+}: {
+  areaKey: HotelAreaKey;
+  placement: ProviderChoiceButton["placement"];
+  locale: string;
+  bookingPlacement?: HotelAffiliatePlacement;
+  bookingAreaId?: string;
+  bookingPageGroup?: string;
+}) {
   const hotel = getHotelLink(areaKey);
   const config = getTripHotelConfig(areaKey);
   const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
@@ -1599,6 +1663,7 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
   const agodaLink = getAgodaHotelAreaUrl(areaKey);
 
   return providerChoices(
+    ...(bookingPlacement ? bookingProviderChoices({ areaId: bookingAreaId, locale, placement: bookingPlacement, pageGroup: bookingPageGroup }) : []),
     tripHref
       ? {
           label: "Trip.com",
@@ -1687,7 +1752,12 @@ function ProblemHotelBaseSection({
       </p>
       <div className="mt-5 grid gap-4 lg:grid-cols-2">
         {areas.map((area) => {
-          const choices = hotelProviderChoices(area.hotelKey, placement);
+          const choices = hotelProviderChoices({
+            areaKey: area.hotelKey,
+            placement,
+            locale,
+            bookingPlacement: "before_shinkansen_card",
+          });
           return (
             <article key={area.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
               <h3 className="text-lg font-semibold text-slate-950">{area.title}</h3>
@@ -1713,6 +1783,7 @@ function ProblemHotelBaseSection({
                 locale={locale}
                 area={area.title}
                 city="Tokyo"
+                maxProviders={3}
                 className="mt-4"
               />
             </article>
@@ -1739,6 +1810,54 @@ function ProblemHotelBaseSection({
             {link.label} →
           </TrackedInternalLink>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function ComparisonAreaHotelCtas({
+  slug,
+  locale,
+  pagePath,
+}: {
+  slug: string;
+  locale: string;
+  pagePath: string;
+}) {
+  const areas = comparisonAreaCtas[slug];
+  if (!areas?.length) return null;
+
+  return (
+    <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">More hotel search options</p>
+      <h2 className="mt-2 text-xl font-semibold text-slate-950">Check more hotels in this area</h2>
+      <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
+        Use these broad area searches after comparing the station-area trade-offs. They are not individual hotel rankings.
+      </p>
+      <div className="mt-5 grid gap-4 lg:grid-cols-2">
+        {areas.map((area) => {
+          const providers = hotelProviderChoices({
+            areaKey: area.hotelKey,
+            placement: "comparison_area_cta",
+            locale,
+            bookingPlacement: "comparison_area_cta",
+            bookingAreaId: area.bookingAreaId,
+            bookingPageGroup: slug,
+          });
+          return (
+            <ProviderChoiceCTA
+              key={`${slug}-${area.bookingAreaId}`}
+              actionLabel={`Compare hotels around ${area.title}`}
+              description="Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site."
+              providers={providers}
+              pagePath={pagePath}
+              locale={locale}
+              area={area.title}
+              city="Tokyo"
+              maxProviders={3}
+            />
+          );
+        })}
       </div>
     </section>
   );
@@ -1987,7 +2106,12 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
           <div className="mt-6 grid gap-4 lg:grid-cols-2">
             {matrixGroups.map((group) => {
               const hotelProviders = group.hotelAreaKey
-                ? hotelProviderChoices(group.hotelAreaKey, "tokyo_first_time_hotel_base_matrix")
+                ? hotelProviderChoices({
+                    areaKey: group.hotelAreaKey,
+                    placement: "tokyo_first_time_hotel_base_matrix",
+                    locale,
+                    bookingPlacement: "tokyo_first_time_card",
+                  })
                 : [];
               const cardImage = group.image ? publicImageIfExists(group.image) : undefined;
 
@@ -2050,6 +2174,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                         locale={locale}
                         area={group.title}
                         city="Tokyo"
+                        maxProviders={3}
                       />
                     ) : null}
 
@@ -2474,7 +2599,7 @@ async function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeS
           </div>
           <div className="mt-5 grid gap-5 lg:grid-cols-2">
             {localizedAreas.map((area) => {
-              const choices = area.hotelKey ? hotelProviderChoices(area.hotelKey, "stay_area_glance_card") : [];
+              const choices = area.hotelKey ? hotelProviderChoices({ areaKey: area.hotelKey, placement: "stay_area_glance_card", locale }) : [];
 
               return (
                 <article key={area.id} id={area.id} className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
@@ -2730,6 +2855,8 @@ export default async function StayPage({ params }: Props) {
           </section>
 
           <ProTip>{page.proTip}</ProTip>
+
+          <ComparisonAreaHotelCtas slug={page.slug} locale={locale} pagePath={pagePath} />
 
           <section>
             <HotelPicks

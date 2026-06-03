@@ -321,7 +321,7 @@ export function PlanYourTripHub() {
           placement="plan_trip_hotel_base_next_step"
           title="Do not book hotels before the route shape is clear"
           body="Before choosing hotel names, decide your arrival airport, first-night area, Shinkansen day, luggage plan, and whether Kyoto, Osaka, Mt. Fuji, or Disney affects your base."
-          primaryLabel="Compare Tokyo station areas"
+          primaryLabel="Open Tokyo Hotel Area Finder"
           secondaryLabel="See local hotel examples"
           className="mt-6"
         />

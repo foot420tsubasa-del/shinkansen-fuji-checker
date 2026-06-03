@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import { HotelCTA } from "@/components/affiliate/HotelCTA";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 
 type AreaCardProps = {
   id?: string;
@@ -24,6 +25,13 @@ type AreaCardProps = {
 function providerChoices(...providers: Array<ProviderChoiceButton | null | undefined>) {
   return providers.filter((provider): provider is ProviderChoiceButton => Boolean(provider));
 }
+
+const bookingAreaIdByHotelAreaKey: Partial<Record<HotelAreaKey, string>> = {
+  shinjuku: "shinjuku",
+  ueno: "ueno",
+  asakusa: "asakusa",
+  tokyoStation: "tokyo-station",
+};
 
 export function AreaCard({
   id,
@@ -51,6 +59,10 @@ export function AreaCard({
   const tripHref = hotel?.provider === "trip" ? hotel.href : hotelConfig?.tripUrl ?? (provider === "trip" ? hotelLink : undefined);
   const tripTrackingHref = hotel?.provider === "trip" ? hotel.trackingHref : hotelConfig?.tripUrl ?? (provider === "trip" ? hotelLink : undefined);
   const agodaLink = hotelKey ? getAgodaHotelAreaUrl(hotelKey) : null;
+  const bookingAreaId = hotelKey ? bookingAreaIdByHotelAreaKey[hotelKey] : undefined;
+  const bookingLinks = bookingAreaId
+    ? getHotelProviderLinks({ areaId: bookingAreaId, locale, placement: "tokyo_first_time_card" })
+    : [];
   const useProviderChoice = pagePath.endsWith("/tokyo-first-time");
 
   return (
@@ -102,6 +114,19 @@ export function AreaCard({
           area={`${hotel?.city ?? city}: ${hotel?.areaName ?? name}`}
           className="mt-4"
           providers={providerChoices(
+            ...bookingLinks.map((link) => ({
+              label: "Booking.com",
+              href: link.href,
+              trackingHref: link.trackingHref,
+              provider: link.provider,
+              product: "hotel",
+              linkId: link.linkId,
+              placement: "tokyo_first_time_card",
+              variant: "primary",
+              category: "hotel",
+              areaId: bookingAreaId,
+              subId: link.subId,
+            }) satisfies ProviderChoiceButton),
             tripHref
               ? {
                   label: "Trip.com",
@@ -129,6 +154,7 @@ export function AreaCard({
               }
               : null,
           )}
+          maxProviders={3}
         />
       ) : showHotelCta ? (
         <HotelCTA
