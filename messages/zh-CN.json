@@ -11,8 +11,8 @@
     "jrPass": "比较 JR Pass"
   },
   "home": {
-    "brandTitle": "规划你的日本旅行 — 从富士山座位到住宿",
-    "brandSubtitle": "免费座位查询、行程、住宿区域和机场交通信息，都在一个地方。",
+    "brandTitle": "Check your Mt. Fuji seat.\nChoose your Tokyo hotel base.",
+    "brandSubtitle": "Free tools for first-time Japan travelers: Fuji-side Shinkansen seats, Tokyo hotel areas, rail tickets, and arrival prep.",
     "seatCheckerHeading": "新干线富士山座位查询",
     "brandBuiltBy": "由日本制作者制作，专为不想错过富士山美景的海外旅客设计。",
     "brandSource": "数据来源：JR 东海公开资讯",
@@ -106,7 +106,7 @@
     "footerIndependent": "独立非官方网站。基于 JR 东海公开信息。",
     "footerAffiliate": "部分链接为 Klook 联盟链接，使用它们有助于维持本站免费。",
     "nav": {
-      "hub": "日本旅行实用工具",
+      "hub": "SHINKANSEN SEAT & TOKYO HOTEL BASE",
       "seat": "座位查询器",
       "planner": "旅行规划器",
       "stay": "住宿",
@@ -114,7 +114,10 @@
       "about": "关于",
       "guide": "指南",
       "decisions": "旅行决策",
-      "questions": "反馈"
+      "questions": "反馈",
+      "tagline": "Fuji seat & Tokyo hotel base",
+      "tickets": "Tickets",
+      "esim": "eSIM"
     },
     "decisions": {
       "eyebrow": "旅行实用工具",
@@ -387,6 +390,22 @@
       "sevenDay": "查看7天行程",
       "tenDay": "查看10天行程",
       "commandCenter": "打开 Command Center"
+    },
+    "heroCtas": {
+      "primary": "Check Fuji-side seat",
+      "secondary": "Choose hotel base",
+      "tickets": "Book rail tickets",
+      "esim": "Get Japan eSIM"
+    },
+    "supportTools": {
+      "eyebrow": "More tools",
+      "description": "Use these after the seat, hotel base, tickets, and arrival basics are clear.",
+      "localTokyo": "Local Tokyo",
+      "routeSupport": "Route support",
+      "planner": "Trip Planner",
+      "itinerary": "7-day itinerary",
+      "commandCenter": "Command Center",
+      "stationPractice": "Station Practice"
     }
   },
   "guide": {

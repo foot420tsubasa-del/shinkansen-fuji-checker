@@ -2694,6 +2694,7 @@ export default function AdminPage() {
                               <option value="detail">detail</option>
                               <option value="tokyo_first_time_card">tokyo_first_time_card</option>
                               <option value="before_shinkansen_card">before_shinkansen_card</option>
+                              <option value="airport_page_first_night_cta">airport_page_first_night_cta</option>
                               <option value="comparison_area_cta">comparison_area_cta</option>
                             </select>
                           </label>

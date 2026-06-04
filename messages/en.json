@@ -11,8 +11,8 @@
     "jrPass": "Compare JR Pass"
   },
   "home": {
-    "brandTitle": "Plan Your Japan Trip — From Mt. Fuji Seat to Stay",
-    "brandSubtitle": "Free seat checker, itineraries, stay picks, and airport transfers — all in one place.",
+    "brandTitle": "Check your Mt. Fuji seat.\nChoose your Tokyo hotel base.",
+    "brandSubtitle": "Free tools for first-time Japan travelers: Fuji-side Shinkansen seats, Tokyo hotel areas, rail tickets, and arrival prep.",
     "seatCheckerHeading": "Shinkansen Mt. Fuji Seat Checker",
     "brandBuiltBy": "Built by a Japanese creator for international travellers who don't want to miss the Mt. Fuji view.",
     "brandSource": "Based on publicly available information from JR Central",
@@ -106,7 +106,7 @@
     "footerIndependent": "Independent and unofficial. Based on publicly available information from JR Central.",
     "footerAffiliate": "Some links are Klook affiliate links — using them helps keep this site free.",
     "nav": {
-      "hub": "Japan travel utility hub",
+      "hub": "SHINKANSEN SEAT & TOKYO HOTEL BASE",
       "seat": "Seat Checker",
       "planner": "Planner",
       "stay": "Hotel Base",
@@ -114,7 +114,10 @@
       "about": "About",
       "guide": "Guide",
       "decisions": "Trip decisions",
-      "questions": "Feedback"
+      "questions": "Feedback",
+      "tagline": "Fuji seat & Tokyo hotel base",
+      "tickets": "Tickets",
+      "esim": "eSIM"
     },
     "decisions": {
       "eyebrow": "Travel utility hub",
@@ -387,6 +390,22 @@
       "sevenDay": "See 7-day itinerary",
       "tenDay": "See 10-day itinerary",
       "commandCenter": "Open Command Center"
+    },
+    "heroCtas": {
+      "primary": "Check Fuji-side seat",
+      "secondary": "Choose hotel base",
+      "tickets": "Book rail tickets",
+      "esim": "Get Japan eSIM"
+    },
+    "supportTools": {
+      "eyebrow": "More tools",
+      "description": "Use these after the seat, hotel base, tickets, and arrival basics are clear.",
+      "localTokyo": "Local Tokyo",
+      "routeSupport": "Route support",
+      "planner": "Trip Planner",
+      "itinerary": "7-day itinerary",
+      "commandCenter": "Command Center",
+      "stationPractice": "Station Practice"
     }
   },
   "guide": {

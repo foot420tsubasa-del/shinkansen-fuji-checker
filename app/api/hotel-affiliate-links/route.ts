@@ -36,6 +36,7 @@ function isValidConfig(config: unknown): config is Record<string, unknown> {
     "detail",
     "tokyo_first_time_card",
     "before_shinkansen_card",
+    "airport_page_first_night_cta",
     "comparison_area_cta",
   ]);
   return (

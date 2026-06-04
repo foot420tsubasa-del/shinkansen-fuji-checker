@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
-  Bed,
   Car,
   ExternalLink,
   Train,
@@ -268,13 +267,6 @@ export default function HomeClient() {
   const [visSlowLoading, setVisSlowLoading] = useState(false);
   const [visError, setVisError] = useState(false);
 
-  const featureCards = useMemo(() => [
-    { title: t("featureCards.seatChecker.title"), description: t("featureCards.seatChecker.desc"), href: "/#seat-checker", icon: Train },
-    { title: "Hotel Base", description: "Choose the city and station area before opening hotel booking sites.", href: "/areas-to-stay", icon: Bed },
-    { title: "Rail Tickets", description: "Book a Shinkansen ticket or compare JR Pass after your route is clear.", href: "/guide", icon: Train },
-    { title: "Arrival Essentials", description: "Match airport transfer and eSIM prep to your first hotel base.", href: "/airport-transfers", icon: Car },
-  ], [t]);
-
   const popularLinks: PopularLink[] = useMemo(() => [
     { label: "Seat E guide", href: "/shinkansen-seat-e", icon: Train },
     { label: "Seat letters A-E", href: "/shinkansen-seat-letters", icon: Train },
@@ -346,35 +338,90 @@ export default function HomeClient() {
               {t("nav.hub")}
             </p>
             <h1 className="font-serif text-[42px] font-bold leading-[0.98] tracking-[-0.035em] text-[#082653] md:text-[58px]">
-              {t("brandTitle")}
+              {t("brandTitle").split("\n").map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </h1>
             <p className="mt-5 max-w-[560px] text-lg leading-8 text-[#263a5d] md:text-xl">
-              {t("footer.tagline")}
+              {t("brandSubtitle")}
             </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <TrackedCtaLink
+                href="/#seat-checker"
+                placement="home_hero"
+                label={t("heroCtas.primary")}
+                category="seat_checker"
+                ctaType="seat_checker"
+                pagePath="/"
+                locale={locale}
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#082653] px-6 py-3 text-sm font-extrabold text-white shadow-[0_12px_26px_rgba(8,38,83,0.22)] transition-colors hover:bg-[#123967]"
+              >
+                {t("heroCtas.primary")}
+                <ArrowRight className="h-4 w-4" />
+              </TrackedCtaLink>
+              <TrackedCtaLink
+                href="/areas-to-stay"
+                placement="home_hero"
+                label={t("heroCtas.secondary")}
+                category="stay"
+                ctaType="stay"
+                pagePath="/"
+                locale={locale}
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[#b9cfe4] bg-white/90 px-6 py-3 text-sm font-extrabold text-[#082653] shadow-[0_10px_24px_rgba(8,38,83,0.10)] transition-colors hover:bg-[#f4f9ff]"
+              >
+                {t("heroCtas.secondary")}
+                <ArrowRight className="h-4 w-4" />
+              </TrackedCtaLink>
+            </div>
+            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm font-bold">
+              <a
+                href={SHINKANSEN_TICKET_URL}
+                target="_blank"
+                rel={AFFILIATE_REL}
+                onClick={() => trackAffiliateClick({
+                  category: "train",
+                  provider: "klook",
+                  placement: "home_hero_secondary",
+                  href: SHINKANSEN_TICKET_URL,
+                  label: t("heroCtas.tickets"),
+                  link_id: "shinkansenTicket",
+                  product: "shinkansen_ticket",
+                  adid: "1265303",
+                  locale,
+                })}
+                className="inline-flex items-center gap-1 text-[#0f4f8f] underline underline-offset-4"
+              >
+                {t("heroCtas.tickets")}
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+              <a
+                href={ESIM_URL}
+                target="_blank"
+                rel={AFFILIATE_REL}
+                onClick={() => trackAffiliateClick({
+                  category: "esim",
+                  provider: "klook",
+                  placement: "home_hero_secondary",
+                  href: ESIM_URL,
+                  label: t("heroCtas.esim"),
+                  link_id: "esim",
+                  product: "esim",
+                  adid: "1166001",
+                  locale,
+                })}
+                className="inline-flex items-center gap-1 text-[#106b43] underline underline-offset-4"
+              >
+                {t("heroCtas.esim")}
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
       <div className="mx-auto max-w-[1180px] px-5 md:px-7">
-        <section className="relative z-10 mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {featureCards.map((card) => {
-            const Icon = card.icon;
-            return (
-              <SmartLink
-                key={card.title}
-                href={card.href}
-                className="group flex min-h-[170px] flex-col justify-center rounded-[9px] border border-[#d9e5f2] bg-white p-5 shadow-[0_14px_34px_rgba(9,35,70,0.09)] transition-transform hover:-translate-y-1"
-              >
-                <div className="mb-4 flex h-[55px] w-[55px] items-center justify-center rounded-full bg-[#edf4fb] text-[#145aa0]">
-                  <Icon className="h-8 w-8" strokeWidth={2.1} />
-                </div>
-                <h2 className="text-xl font-bold text-[#082653]">{card.title}</h2>
-                <p className="mt-2 text-sm leading-6 text-[#5f7190]">{card.description}</p>
-              </SmartLink>
-            );
-          })}
-        </section>
-
         <section id="seat-checker" className="py-10">
           <SectionTitle
             eyebrow="Fuji-side seat checker"
@@ -599,102 +646,36 @@ export default function HomeClient() {
 
         <section className="py-7">
           <SectionTitle
-            eyebrow="Support tools"
-            description="Use these after the seat, rail ticket, hotel base, and arrival essentials are clear."
+            eyebrow={t("supportTools.eyebrow")}
+            description={t("supportTools.description")}
           />
-          <div className="grid gap-4 lg:grid-cols-3">
-            <div className="rounded-[18px] border border-[#d9e5f2] bg-white p-5 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
-              <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">Local Tokyo</p>
-              <h2 className="mt-1 text-lg font-bold text-[#082653]">Local Tokyo ideas after choosing your hotel base</h2>
-              <p className="mt-2 text-sm leading-6 text-[#5f7190]">
-                Use quieter local neighborhoods after the main hotel-base decision is clear.
-              </p>
-              <Link
-                href="/local-tokyo"
-                onClick={() =>
-                  trackCtaClick({
-                    placement: "home_support_tools",
-                    href: "/local-tokyo",
-                    label: "Open Local Tokyo",
-                    category: "local_tokyo",
-                    locale,
-                  })
-                }
-                className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#106b43] underline underline-offset-4"
-              >
-                Open Local Tokyo
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-            <div className="rounded-[18px] border border-[#d9e5f2] bg-white p-5 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
-              <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">Route support</p>
-              <h2 className="mt-1 text-lg font-bold text-[#082653]">Need a full route overview?</h2>
-              <p className="mt-2 text-sm leading-6 text-[#5f7190]">
-                Keep itinerary tools secondary to seat, ticket, hotel, and arrival decisions.
-              </p>
-              <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <div className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 shadow-[0_8px_20px_rgba(8,38,83,0.05)]">
+            <div className="flex flex-wrap gap-x-5 gap-y-3 text-sm font-bold">
+              {[
+                { href: "/local-tokyo", label: t("supportTools.localTokyo"), category: "local_tokyo" },
+                { href: "/plan-your-trip", label: t("supportTools.planner"), category: "itinerary" },
+                { href: "/itineraries/7-day-first-time-japan", label: t("supportTools.itinerary"), category: "itinerary" },
+                { href: "/command-center", label: t("supportTools.commandCenter"), category: "itinerary" },
+                { href: "/station-practice", label: t("supportTools.stationPractice"), category: "station_practice" },
+              ].map((link) => (
                 <Link
-                  href="/plan-your-trip"
+                  key={link.href}
+                  href={link.href}
                   onClick={() =>
                     trackCtaClick({
-                      placement: "home_support_tools",
-                      href: "/plan-your-trip",
-                      label: "Open trip planner",
-                      category: "itinerary",
+                      placement: "home_more_tools",
+                      href: link.href,
+                      label: link.label,
+                      category: link.category,
                       locale,
                     })
                   }
-                  className={`${buttonPageSecondary} h-10 px-4 text-xs`}
+                  className="inline-flex items-center gap-1 text-[#106b43] underline underline-offset-4 transition-colors hover:text-[#0f6f45]"
                 >
-                  Open Trip Planner
+                  {link.label}
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
-                {[
-                  { href: "/itineraries/7-day-first-time-japan", label: "7-day itinerary", eventLabel: "See 7-day itinerary" },
-                  { href: "/command-center", label: "Command Center", eventLabel: "Open Command Center" },
-                ].map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() =>
-                      trackCtaClick({
-                        placement: "home_support_tools",
-                        href: link.href,
-                        label: link.eventLabel,
-                        category: "itinerary",
-                        locale,
-                      })
-                    }
-                    className="inline-flex items-center gap-1 text-xs font-bold text-[#106b43] underline underline-offset-4 transition-colors hover:text-[#0f6f45]"
-                  >
-                    {link.label}
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <div className="rounded-[18px] border border-slate-200 bg-slate-50 p-5">
-              <p className="text-[11px] font-black uppercase tracking-[0.1em] text-slate-500">Travel prep</p>
-              <h2 className="mt-1 text-lg font-bold text-[#082653]">Practice Japanese station signs</h2>
-              <p className="mt-2 text-sm leading-6 text-[#5f7190]">
-                Practice exits, transfer gates, and station signs after reading the train-sign guide.
-              </p>
-              <Link
-                href="/station-practice"
-                onClick={() =>
-                  trackCtaClick({
-                    placement: "home_support_tools",
-                    href: "/station-practice",
-                    label: "Start station practice",
-                    category: "station_practice",
-                    locale,
-                  })
-                }
-                className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-[#106b43] underline underline-offset-4"
-              >
-                Open Station Practice
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
+              ))}
             </div>
           </div>
         </section>

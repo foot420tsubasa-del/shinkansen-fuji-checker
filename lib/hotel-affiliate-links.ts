@@ -8,6 +8,7 @@ export type HotelAffiliatePlacement =
   | "detail"
   | "tokyo_first_time_card"
   | "before_shinkansen_card"
+  | "airport_page_first_night_cta"
   | "comparison_area_cta";
 export type HotelAffiliateProvider = "booking_travelpayouts";
 export type HotelAffiliateLocale = string | "all";

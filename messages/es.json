@@ -11,8 +11,8 @@
     "jrPass": "Comparar JR Pass"
   },
   "home": {
-    "brandTitle": "Planifica tu viaje a Japón — del asiento al alojamiento",
-    "brandSubtitle": "Verificador de asientos gratuito, itinerarios, zonas para alojarte y traslados de aeropuerto en un solo lugar.",
+    "brandTitle": "Check your Mt. Fuji seat.\nChoose your Tokyo hotel base.",
+    "brandSubtitle": "Free tools for first-time Japan travelers: Fuji-side Shinkansen seats, Tokyo hotel areas, rail tickets, and arrival prep.",
     "seatCheckerHeading": "Verificador de asientos Shinkansen para ver el Monte Fuji",
     "brandBuiltBy": "Creado por una persona japonesa para viajeros internacionales que no quieren perderse la vista del Monte Fuji.",
     "brandSource": "Basado en información pública de JR Central",
@@ -106,7 +106,7 @@
     "footerIndependent": "Independiente y no oficial. Basado en información pública de JR Central.",
     "footerAffiliate": "Algunos enlaces son afiliados de Klook; usarlos ayuda a mantener este sitio gratis.",
     "nav": {
-      "hub": "Herramientas de viaje a Japón",
+      "hub": "SHINKANSEN SEAT & TOKYO HOTEL BASE",
       "seat": "Verificador de asiento",
       "planner": "Planificador",
       "stay": "Alojamiento",
@@ -114,7 +114,10 @@
       "about": "Acerca de",
       "guide": "Guía",
       "decisions": "Decisiones de viaje",
-      "questions": "Comentarios"
+      "questions": "Comentarios",
+      "tagline": "Fuji seat & Tokyo hotel base",
+      "tickets": "Tickets",
+      "esim": "eSIM"
     },
     "decisions": {
       "eyebrow": "Herramientas de viaje",
@@ -387,6 +390,22 @@
       "sevenDay": "Ver itinerario de 7 días",
       "tenDay": "Ver itinerario de 10 días",
       "commandCenter": "Abrir Command Center"
+    },
+    "heroCtas": {
+      "primary": "Check Fuji-side seat",
+      "secondary": "Choose hotel base",
+      "tickets": "Book rail tickets",
+      "esim": "Get Japan eSIM"
+    },
+    "supportTools": {
+      "eyebrow": "More tools",
+      "description": "Use these after the seat, hotel base, tickets, and arrival basics are clear.",
+      "localTokyo": "Local Tokyo",
+      "routeSupport": "Route support",
+      "planner": "Trip Planner",
+      "itinerary": "7-day itinerary",
+      "commandCenter": "Command Center",
+      "stationPractice": "Station Practice"
     }
   },
   "guide": {

@@ -18,6 +18,7 @@ import { AirportHeroCard, AirportNextSteps, AirportRouteCompareCard, ArrivalSetu
 import { ESIM_URL, getAffiliateConfig, getReadyAffUrl } from "@/src/affiliateLinks";
 import { getAirportRouteUiCopy, localizedLateArrivalNote, localizedProTip, localizedRouteDescription, localizedRouteTitle, localizeTripPick, routeSpecific } from "@/lib/content/airport-transfer-i18n";
 import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -45,14 +46,40 @@ function providerChoices(...providers: Array<ProviderChoiceButton | null | undef
   return providers.filter((provider): provider is ProviderChoiceButton => Boolean(provider));
 }
 
-function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"]) {
+const bookingAreaIdByHotelAreaKey: Partial<Record<HotelAreaKey, string>> = {
+  ueno: "ueno",
+  asakusa: "asakusa",
+  tokyoStation: "tokyo-station",
+  shinjuku: "shinjuku",
+  shibuya: "shibuya",
+  oshiage: "oshiage",
+};
+
+function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"], locale: string) {
   const hotel = getHotelLink(areaKey);
   const config = getTripHotelConfig(areaKey);
   const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
   const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
   const agodaLink = getAgodaHotelAreaUrl(areaKey);
+  const bookingAreaId = bookingAreaIdByHotelAreaKey[areaKey];
+  const bookingLinks = bookingAreaId
+    ? getHotelProviderLinks({ areaId: bookingAreaId, locale, placement: "airport_page_first_night_cta" }).map((link) => ({
+        label: link.label,
+        href: link.href,
+        trackingHref: link.trackingHref,
+        provider: link.provider,
+        product: "hotel",
+        linkId: link.linkId,
+        placement: link.placement,
+        variant: "primary" as const,
+        category: "hotel" as const,
+        areaId: bookingAreaId,
+        subId: link.subId,
+      }))
+    : [];
 
   return providerChoices(
+    ...bookingLinks,
     tripHref
       ? {
           label: "Trip.com",
@@ -510,7 +537,7 @@ export default async function TransferPage({ params }: Props) {
             </p>
             <div className="mt-5 grid gap-4 lg:grid-cols-2">
               {firstNightHotelAreas.map((area) => {
-                const choices = hotelProviderChoices(area.hotelKey, "airport_page_first_night_cta");
+                const choices = hotelProviderChoices(area.hotelKey, "airport_page_first_night_cta", locale);
                 return (
                   <article key={area.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
                     <h3 className="text-lg font-semibold text-slate-950">{area.title}</h3>
@@ -532,6 +559,7 @@ export default async function TransferPage({ params }: Props) {
                       actionLabel={`Compare hotels in ${area.title}`}
                       description="Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site."
                       providers={choices}
+                      maxProviders={3}
                       pagePath={pagePath}
                       locale={locale}
                       area={area.title}

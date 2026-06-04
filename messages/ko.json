@@ -11,8 +11,8 @@
     "jrPass": "JR 패스 비교"
   },
   "home": {
-    "brandTitle": "일본 여행 계획 — 후지산 좌석부터 숙소까지",
-    "brandSubtitle": "무료 좌석 확인기, 일정, 숙소 지역, 공항 이동 정보를 한곳에서 확인하세요.",
+    "brandTitle": "Check your Mt. Fuji seat.\nChoose your Tokyo hotel base.",
+    "brandSubtitle": "Free tools for first-time Japan travelers: Fuji-side Shinkansen seats, Tokyo hotel areas, rail tickets, and arrival prep.",
     "seatCheckerHeading": "신칸센 후지산 좌석 확인기",
     "brandBuiltBy": "일본인 제작자가 후지산 뷰를 놓치고 싶지 않은 해외 여행자들을 위해 만들었습니다.",
     "brandSource": "JR 센트럴 공개 정보 기반",
@@ -106,7 +106,7 @@
     "footerIndependent": "독립적인 비공식 사이트입니다. JR 센트럴 공개 정보를 바탕으로 합니다.",
     "footerAffiliate": "일부 링크는 Klook 제휴 링크이며, 사용해 주시면 사이트를 무료로 유지하는 데 도움이 됩니다.",
     "nav": {
-      "hub": "일본 여행 유틸리티 허브",
+      "hub": "SHINKANSEN SEAT & TOKYO HOTEL BASE",
       "seat": "좌석 확인기",
       "planner": "여행 플래너",
       "stay": "숙소",
@@ -114,7 +114,10 @@
       "about": "소개",
       "guide": "가이드",
       "decisions": "여행 결정",
-      "questions": "피드백"
+      "questions": "피드백",
+      "tagline": "Fuji seat & Tokyo hotel base",
+      "tickets": "Tickets",
+      "esim": "eSIM"
     },
     "decisions": {
       "eyebrow": "여행 유틸리티 허브",
@@ -387,6 +390,22 @@
       "sevenDay": "7일 일정 보기",
       "tenDay": "10일 일정 보기",
       "commandCenter": "Command Center 열기"
+    },
+    "heroCtas": {
+      "primary": "Check Fuji-side seat",
+      "secondary": "Choose hotel base",
+      "tickets": "Book rail tickets",
+      "esim": "Get Japan eSIM"
+    },
+    "supportTools": {
+      "eyebrow": "More tools",
+      "description": "Use these after the seat, hotel base, tickets, and arrival basics are clear.",
+      "localTokyo": "Local Tokyo",
+      "routeSupport": "Route support",
+      "planner": "Trip Planner",
+      "itinerary": "7-day itinerary",
+      "commandCenter": "Command Center",
+      "stationPractice": "Station Practice"
     }
   },
   "guide": {
