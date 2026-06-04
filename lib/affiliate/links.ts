@@ -27,8 +27,6 @@ export type AffiliatePlacement =
   | "home_seat_result"
   | "home_essentials"
   | "home_hero_secondary"
-  | "top_nav"
-  | "mobile_top_nav"
   | "guide_rail_decision"
   | "guide_top_klook_shinkansen"
   | "guide_top_omio_compare"

@@ -326,7 +326,7 @@ export function PlanYourTripHub() {
           className="mt-6"
         />
 
-        <section className="mt-10">
+        <section id="rail" className="mt-10 scroll-mt-28">
           <div className="max-w-2xl">
             <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("rail.eyebrow")}</p>
             <h2 className="mt-2 text-2xl font-semibold text-slate-950">{t("rail.title")}</h2>
@@ -469,7 +469,7 @@ export function PlanYourTripHub() {
           </div>
         </section>
 
-        <section className="mt-12">
+        <section id="arrival" className="mt-12 scroll-mt-28">
           <div className="max-w-2xl">
             <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("arrival.eyebrow")}</p>
             <h2 className="mt-2 text-2xl font-semibold text-slate-950">{t("arrival.title")}</h2>

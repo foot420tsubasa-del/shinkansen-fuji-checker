@@ -11,8 +11,8 @@
     "jrPass": "Сравнить JR Pass"
   },
   "home": {
-    "brandTitle": "Check your Mt. Fuji seat.\nChoose your Tokyo hotel base.",
-    "brandSubtitle": "Free tools for first-time Japan travelers: Fuji-side Shinkansen seats, Tokyo hotel areas, rail tickets, and arrival prep.",
+    "brandTitle": "Check your Mt. Fuji-side Shinkansen seat",
+    "brandSubtitle": "Then choose your Tokyo hotel base, rail option, and arrival prep in the right order.",
     "seatCheckerHeading": "Проверка мест Синкансэна с видом на Фудзи",
     "brandBuiltBy": "Создано японским автором для иностранных путешественников, которые не хотят пропустить вид на гору Фудзи.",
     "brandSource": "На основе общедоступной информации от JR Central",
@@ -106,10 +106,10 @@
     "footerIndependent": "Независимый и неофициальный. На основе общедоступной информации от JR Central.",
     "footerAffiliate": "Некоторые ссылки являются партнёрскими ссылками Klook — их использование помогает поддерживать бесплатность этого сайта.",
     "nav": {
-      "hub": "SHINKANSEN SEAT & TOKYO HOTEL BASE",
-      "seat": "Проверка мест",
+      "hub": "SHINKANSEN SEAT CHECKER",
+      "seat": "Check Seat",
       "planner": "Планировщик",
-      "stay": "Где жить",
+      "stay": "Hotel Base",
       "essentials": "Главное",
       "about": "О сайте",
       "guide": "Гид",
@@ -117,7 +117,11 @@
       "questions": "Обратная связь",
       "tagline": "Fuji seat & Tokyo hotel base",
       "tickets": "Tickets",
-      "esim": "eSIM"
+      "esim": "eSIM",
+      "railGuide": "Rail Guide",
+      "arrivalPrep": "Arrival Prep",
+      "rail": "Rail",
+      "arrival": "Arrival"
     },
     "decisions": {
       "eyebrow": "Хаб путешествий",
@@ -394,8 +398,8 @@
     "heroCtas": {
       "primary": "Check Fuji-side seat",
       "secondary": "Choose hotel base",
-      "tickets": "Book rail tickets",
-      "esim": "Get Japan eSIM"
+      "tickets": "Rail guide",
+      "esim": "Arrival prep"
     },
     "supportTools": {
       "eyebrow": "More tools",

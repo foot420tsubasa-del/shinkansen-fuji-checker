@@ -11,8 +11,8 @@
     "jrPass": "JR Pass vergleichen"
   },
   "home": {
-    "brandTitle": "Check your Mt. Fuji seat.\nChoose your Tokyo hotel base.",
-    "brandSubtitle": "Free tools for first-time Japan travelers: Fuji-side Shinkansen seats, Tokyo hotel areas, rail tickets, and arrival prep.",
+    "brandTitle": "Check your Mt. Fuji-side Shinkansen seat",
+    "brandSubtitle": "Then choose your Tokyo hotel base, rail option, and arrival prep in the right order.",
     "seatCheckerHeading": "Shinkansen Mt. Fuji Sitzplatzcheck",
     "brandBuiltBy": "Erstellt von einem japanischen Creator für internationale Reisende, die den Mt. Fuji-Blick nicht verpassen wollen.",
     "brandSource": "Basierend auf öffentlich verfügbaren Informationen von JR Central",
@@ -106,10 +106,10 @@
     "footerIndependent": "Unabhängig und inoffiziell. Basierend auf öffentlich verfügbaren Informationen von JR Central.",
     "footerAffiliate": "Einige Links sind Klook-Affiliate-Links — ihre Nutzung hilft, diese Seite kostenlos zu halten.",
     "nav": {
-      "hub": "SHINKANSEN SEAT & TOKYO HOTEL BASE",
-      "seat": "Sitzplatzcheck",
+      "hub": "SHINKANSEN SEAT CHECKER",
+      "seat": "Check Seat",
       "planner": "Planer",
-      "stay": "Übernachten",
+      "stay": "Hotel Base",
       "essentials": "Essentials",
       "about": "Über uns",
       "guide": "Reiseführer",
@@ -117,7 +117,11 @@
       "questions": "Rückmeldung",
       "tagline": "Fuji seat & Tokyo hotel base",
       "tickets": "Tickets",
-      "esim": "eSIM"
+      "esim": "eSIM",
+      "railGuide": "Rail Guide",
+      "arrivalPrep": "Arrival Prep",
+      "rail": "Rail",
+      "arrival": "Arrival"
     },
     "decisions": {
       "eyebrow": "Travel Utility Hub",
@@ -394,8 +398,8 @@
     "heroCtas": {
       "primary": "Check Fuji-side seat",
       "secondary": "Choose hotel base",
-      "tickets": "Book rail tickets",
-      "esim": "Get Japan eSIM"
+      "tickets": "Rail guide",
+      "esim": "Arrival prep"
     },
     "supportTools": {
       "eyebrow": "More tools",

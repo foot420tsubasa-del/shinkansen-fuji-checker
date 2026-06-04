@@ -11,8 +11,8 @@
     "jrPass": "比较 JR Pass"
   },
   "home": {
-    "brandTitle": "Check your Mt. Fuji seat.\nChoose your Tokyo hotel base.",
-    "brandSubtitle": "Free tools for first-time Japan travelers: Fuji-side Shinkansen seats, Tokyo hotel areas, rail tickets, and arrival prep.",
+    "brandTitle": "Check your Mt. Fuji-side Shinkansen seat",
+    "brandSubtitle": "Then choose your Tokyo hotel base, rail option, and arrival prep in the right order.",
     "seatCheckerHeading": "新干线富士山座位查询",
     "brandBuiltBy": "由日本制作者制作，专为不想错过富士山美景的海外旅客设计。",
     "brandSource": "数据来源：JR 东海公开资讯",
@@ -106,10 +106,10 @@
     "footerIndependent": "独立非官方网站。基于 JR 东海公开信息。",
     "footerAffiliate": "部分链接为 Klook 联盟链接，使用它们有助于维持本站免费。",
     "nav": {
-      "hub": "SHINKANSEN SEAT & TOKYO HOTEL BASE",
-      "seat": "座位查询器",
+      "hub": "SHINKANSEN SEAT CHECKER",
+      "seat": "Check Seat",
       "planner": "旅行规划器",
-      "stay": "住宿",
+      "stay": "Hotel Base",
       "essentials": "必备准备",
       "about": "关于",
       "guide": "指南",
@@ -117,7 +117,11 @@
       "questions": "反馈",
       "tagline": "Fuji seat & Tokyo hotel base",
       "tickets": "Tickets",
-      "esim": "eSIM"
+      "esim": "eSIM",
+      "railGuide": "Rail Guide",
+      "arrivalPrep": "Arrival Prep",
+      "rail": "Rail",
+      "arrival": "Arrival"
     },
     "decisions": {
       "eyebrow": "旅行实用工具",
@@ -394,8 +398,8 @@
     "heroCtas": {
       "primary": "Check Fuji-side seat",
       "secondary": "Choose hotel base",
-      "tickets": "Book rail tickets",
-      "esim": "Get Japan eSIM"
+      "tickets": "Rail guide",
+      "esim": "Arrival prep"
     },
     "supportTools": {
       "eyebrow": "More tools",

@@ -349,19 +349,6 @@ export default function HomeClient() {
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
               <TrackedCtaLink
-                href="/#seat-checker"
-                placement="home_hero"
-                label={t("heroCtas.primary")}
-                category="seat_checker"
-                ctaType="seat_checker"
-                pagePath="/"
-                locale={locale}
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[#082653] px-6 py-3 text-sm font-extrabold text-white shadow-[0_12px_26px_rgba(8,38,83,0.22)] transition-colors hover:bg-[#123967]"
-              >
-                {t("heroCtas.primary")}
-                <ArrowRight className="h-4 w-4" />
-              </TrackedCtaLink>
-              <TrackedCtaLink
                 href="/areas-to-stay"
                 placement="home_hero"
                 label={t("heroCtas.secondary")}
@@ -374,48 +361,6 @@ export default function HomeClient() {
                 {t("heroCtas.secondary")}
                 <ArrowRight className="h-4 w-4" />
               </TrackedCtaLink>
-            </div>
-            <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-sm font-bold">
-              <a
-                href={SHINKANSEN_TICKET_URL}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                onClick={() => trackAffiliateClick({
-                  category: "train",
-                  provider: "klook",
-                  placement: "home_hero_secondary",
-                  href: SHINKANSEN_TICKET_URL,
-                  label: t("heroCtas.tickets"),
-                  link_id: "shinkansenTicket",
-                  product: "shinkansen_ticket",
-                  adid: "1265303",
-                  locale,
-                })}
-                className="inline-flex items-center gap-1 text-[#0f4f8f] underline underline-offset-4"
-              >
-                {t("heroCtas.tickets")}
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
-              <a
-                href={ESIM_URL}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                onClick={() => trackAffiliateClick({
-                  category: "esim",
-                  provider: "klook",
-                  placement: "home_hero_secondary",
-                  href: ESIM_URL,
-                  label: t("heroCtas.esim"),
-                  link_id: "esim",
-                  product: "esim",
-                  adid: "1166001",
-                  locale,
-                })}
-                className="inline-flex items-center gap-1 text-[#106b43] underline underline-offset-4"
-              >
-                {t("heroCtas.esim")}
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
             </div>
           </div>
         </div>

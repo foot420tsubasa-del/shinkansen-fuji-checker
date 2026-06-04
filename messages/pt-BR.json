@@ -11,8 +11,8 @@
     "jrPass": "Comparar JR Pass"
   },
   "home": {
-    "brandTitle": "Check your Mt. Fuji seat.\nChoose your Tokyo hotel base.",
-    "brandSubtitle": "Free tools for first-time Japan travelers: Fuji-side Shinkansen seats, Tokyo hotel areas, rail tickets, and arrival prep.",
+    "brandTitle": "Check your Mt. Fuji-side Shinkansen seat",
+    "brandSubtitle": "Then choose your Tokyo hotel base, rail option, and arrival prep in the right order.",
     "seatCheckerHeading": "Verificador de assento no Shinkansen para ver o Monte Fuji",
     "brandBuiltBy": "Criado por uma pessoa japonesa para viajantes internacionais que não querem perder a vista do Monte Fuji.",
     "brandSource": "Baseado em informações públicas da JR Central",
@@ -106,10 +106,10 @@
     "footerIndependent": "Independente e não oficial. Baseado em informações públicas da JR Central.",
     "footerAffiliate": "Alguns links são afiliados da Klook; usá-los ajuda a manter este site gratuito.",
     "nav": {
-      "hub": "SHINKANSEN SEAT & TOKYO HOTEL BASE",
-      "seat": "Verificador de assento",
+      "hub": "SHINKANSEN SEAT CHECKER",
+      "seat": "Check Seat",
       "planner": "Planejador",
-      "stay": "Onde ficar",
+      "stay": "Hotel Base",
       "essentials": "Essenciais",
       "about": "Sobre",
       "guide": "Guia",
@@ -117,7 +117,11 @@
       "questions": "Comentários",
       "tagline": "Fuji seat & Tokyo hotel base",
       "tickets": "Tickets",
-      "esim": "eSIM"
+      "esim": "eSIM",
+      "railGuide": "Rail Guide",
+      "arrivalPrep": "Arrival Prep",
+      "rail": "Rail",
+      "arrival": "Arrival"
     },
     "decisions": {
       "eyebrow": "Ferramentas de viagem",
@@ -394,8 +398,8 @@
     "heroCtas": {
       "primary": "Check Fuji-side seat",
       "secondary": "Choose hotel base",
-      "tickets": "Book rail tickets",
-      "esim": "Get Japan eSIM"
+      "tickets": "Rail guide",
+      "esim": "Arrival prep"
     },
     "supportTools": {
       "eyebrow": "More tools",

@@ -4,18 +4,23 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { BrandMark } from "@/components/ui/BrandMark";
 import { LanguageSelector } from "./LanguageSelector";
-import { ESIM_URL } from "@/src/affiliateLinks";
-import { AFFILIATE_REL } from "@/lib/link-rel";
-import { trackAffiliateClick } from "@/lib/analytics";
+import { trackCtaClick } from "@/lib/analytics";
 
 export function SiteHeader() {
   const t = useTranslations("home");
   const locale = useLocale();
 
-  const navLinks = [
-    { href: "/#seat-checker", label: t("nav.seat") },
-    { href: "/areas-to-stay", label: t("nav.stay") },
-    { href: "/guide", label: t("nav.tickets") },
+  const desktopNavLinks = [
+    { href: "/#seat-checker", label: t("nav.seat"), category: "seat_checker" },
+    { href: "/areas-to-stay/tokyo-stay-area-index", label: t("nav.stay"), category: "stay" },
+    { href: "/plan-your-trip#rail", label: t("nav.railGuide"), category: "rail" },
+    { href: "/plan-your-trip#arrival", label: t("nav.arrivalPrep"), category: "arrival" },
+  ];
+  const mobileNavLinks = [
+    { href: "/#seat-checker", label: t("nav.seat"), category: "seat_checker" },
+    { href: "/areas-to-stay/tokyo-stay-area-index", label: t("nav.stay"), category: "stay" },
+    { href: "/plan-your-trip#rail", label: t("nav.rail"), category: "rail" },
+    { href: "/plan-your-trip#arrival", label: t("nav.arrival"), category: "arrival" },
   ];
 
   return (
@@ -32,32 +37,24 @@ export function SiteHeader() {
         </Link>
 
         <nav className="hidden items-center gap-6 text-sm font-bold text-slate-200 lg:flex">
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="transition-colors hover:text-white">
+          {desktopNavLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={() =>
+                trackCtaClick({
+                  placement: "header",
+                  href: link.href,
+                  label: link.label,
+                  category: link.category,
+                  locale,
+                })
+              }
+              className="transition-colors hover:text-white"
+            >
               {link.label}
             </Link>
           ))}
-          <a
-            href={ESIM_URL}
-            target="_blank"
-            rel={AFFILIATE_REL}
-            onClick={() =>
-              trackAffiliateClick({
-                category: "esim",
-                provider: "klook",
-                placement: "top_nav",
-                href: ESIM_URL,
-                label: t("nav.esim"),
-                link_id: "esim",
-                product: "esim",
-                adid: "1166001",
-                locale,
-              })
-            }
-            className="transition-colors hover:text-white"
-          >
-            {t("nav.esim")}
-          </a>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -65,32 +62,24 @@ export function SiteHeader() {
         </div>
       </div>
       <nav className="mx-auto grid max-w-[1180px] grid-cols-4 gap-1 border-t border-slate-800 px-3 pb-2 text-center text-[11px] font-bold text-slate-200 lg:hidden">
-        {navLinks.map((link) => (
-          <Link key={link.href} href={link.href} className="rounded-lg px-2 py-2 transition-colors hover:bg-slate-800 hover:text-white">
+        {mobileNavLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={() =>
+              trackCtaClick({
+                placement: "mobile_header",
+                href: link.href,
+                label: link.label,
+                category: link.category,
+                locale,
+              })
+            }
+            className="rounded-lg px-2 py-2 transition-colors hover:bg-slate-800 hover:text-white"
+          >
             {link.label}
           </Link>
         ))}
-        <a
-          href={ESIM_URL}
-          target="_blank"
-          rel={AFFILIATE_REL}
-          onClick={() =>
-            trackAffiliateClick({
-              category: "esim",
-              provider: "klook",
-              placement: "mobile_top_nav",
-              href: ESIM_URL,
-              label: t("nav.esim"),
-              link_id: "esim",
-              product: "esim",
-              adid: "1166001",
-              locale,
-            })
-          }
-          className="rounded-lg px-2 py-2 transition-colors hover:bg-slate-800 hover:text-white"
-        >
-          {t("nav.esim")}
-        </a>
       </nav>
     </header>
   );
