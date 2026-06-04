@@ -22,7 +22,6 @@ import {
   getSeatRecommendation,
 } from "@/lib/seat-checker";
 import {
-  ESIM_URL,
   JR_PASS_URL,
   OMIO_SHINKANSEN_URL,
   SHINKANSEN_TICKET_URL,
@@ -60,16 +59,15 @@ const homeHotelCopyByLocale: Record<
   }
 > = {
   en: {
-    title: "Choose your Japan hotel base before booking hotels",
+    title: "Tokyo hotel base",
     body:
-      "After checking the Fuji-side seat, choose the city and station area that makes your route easier. Your hotel base affects airport arrival, luggage, Shinkansen days, station complexity, and whether nights feel busy or calm.",
+      "Choose your Tokyo hotel base before booking hotels. Your hotel area affects airport arrival, luggage, Shinkansen days, and how busy your nights feel.",
     links: [
-      { href: "/areas-to-stay", label: "Choose city and hotel base" },
       { href: "/areas-to-stay/tokyo-stay-area-index", label: "Compare Tokyo station areas" },
       { href: "/local-hotel-picks", label: "See local hotel examples" },
     ],
     imageNote: "Use fujiseat to choose the broad hotel area first, then check current prices, room size, bed setup, and station distance on booking sites.",
-    matrixCta: "Choose your hotel base",
+    matrixCta: "Find your Tokyo hotel base",
     finalTitle: "Still planning your Japan trip?",
     finalBody: "Start with the Fuji-side seat, then choose a practical hotel base before opening booking sites.",
     checkSeatCta: "Check Fuji-side seat",
@@ -347,27 +345,12 @@ export default function HomeClient() {
             <p className="mt-5 max-w-[560px] text-lg leading-8 text-[#263a5d] md:text-xl">
               {t("brandSubtitle")}
             </p>
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <TrackedCtaLink
-                href="/areas-to-stay"
-                placement="home_hero"
-                label={t("heroCtas.secondary")}
-                category="stay"
-                ctaType="stay"
-                pagePath="/"
-                locale={locale}
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[#b9cfe4] bg-white/90 px-6 py-3 text-sm font-extrabold text-[#082653] shadow-[0_10px_24px_rgba(8,38,83,0.10)] transition-colors hover:bg-[#f4f9ff]"
-              >
-                {t("heroCtas.secondary")}
-                <ArrowRight className="h-4 w-4" />
-              </TrackedCtaLink>
-            </div>
           </div>
         </div>
       </section>
 
       <div className="mx-auto max-w-[1180px] px-5 md:px-7">
-        <section id="seat-checker" className="py-10">
+        <section id="seat-checker" className="scroll-mt-28 py-10">
           <SectionTitle
             eyebrow="Fuji-side seat checker"
             description="Choose your direction and check the Mt. Fuji-side seat."
@@ -465,7 +448,7 @@ export default function HomeClient() {
                 </p>
                 <div className="mt-auto pt-3">
                   <TrackedCtaLink
-                    href="/areas-to-stay"
+                    href="/areas-to-stay/tokyo-stay-area-index"
                     placement="home_seat_result"
                     label="Choose your hotel base"
                     category="stay"
@@ -484,26 +467,26 @@ export default function HomeClient() {
                   Use this if your route includes Hiroshima, multiple long JR rides, or a return to Tokyo.
                 </p>
                 <div className="mt-auto pt-3">
-                <a
-                  href={JR_PASS_URL}
-                  target="_blank"
-                  rel={AFFILIATE_REL}
-                  onClick={() => trackAffiliateClick({
-                    category: "train",
-                    provider: "klook",
-                    placement: "home_seat_result",
-                    href: JR_PASS_URL,
-                    label: "Check JR Pass options",
-                    link_id: "jrPass",
-                    product: "jr_pass",
-                    adid: "1165791",
-                    locale,
-                  })}
-                  className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#e66700]"
-                >
-                  <Train className="h-3.5 w-3.5" />
-                  Klook
-                </a>
+                  <a
+                    href={JR_PASS_URL}
+                    target="_blank"
+                    rel={AFFILIATE_REL}
+                    onClick={() => trackAffiliateClick({
+                      category: "train",
+                      provider: "klook",
+                      placement: "home_seat_result",
+                      href: JR_PASS_URL,
+                      label: "Check JR Pass options",
+                      link_id: "jrPass",
+                      product: "jr_pass",
+                      adid: "1165791",
+                      locale,
+                    })}
+                    className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+                  >
+                    <Train className="h-3.5 w-3.5" />
+                    Klook
+                  </a>
                 </div>
               </div>
               <TrackedCtaLink
@@ -573,7 +556,7 @@ export default function HomeClient() {
                 {homeHotelCopy.imageNote}
               </p>
               <TrackedCtaLink
-                href="/areas-to-stay"
+                href="/areas-to-stay/tokyo-stay-area-index"
                 placement="home_hotel_base_matrix"
                 label={homeHotelCopy.matrixCta}
                 category="stay"
@@ -701,7 +684,7 @@ export default function HomeClient() {
                 <ArrowRight className="h-4 w-4" />
               </TrackedCtaLink>
               <TrackedCtaLink
-                href="/areas-to-stay"
+                href="/areas-to-stay/tokyo-stay-area-index"
                 placement="home_final_cta"
                 label={homeHotelCopy.finalMatrixCta}
                 category="stay"
@@ -713,61 +696,6 @@ export default function HomeClient() {
                 {homeHotelCopy.finalMatrixCta}
                 <ArrowRight className="h-4 w-4" />
               </TrackedCtaLink>
-            </div>
-            <div className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm font-bold">
-              <a
-                href={SHINKANSEN_TICKET_URL}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                onClick={() => trackAffiliateClick({
-                  category: "train",
-                  provider: "klook",
-                  placement: "home_essentials",
-                  href: SHINKANSEN_TICKET_URL,
-                  label: "Book Shinkansen ticket",
-                  link_id: "shinkansenTicket",
-                  product: "shinkansen_ticket",
-                  adid: "1265303",
-                  locale,
-                })}
-                className="inline-flex items-center gap-1 text-[#e66700] underline underline-offset-4"
-              >
-                Book Shinkansen ticket
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
-              <TrackedCtaLink
-                href="/airport-transfers"
-                placement="home_final_cta"
-                label="Airport transfer"
-                category="transfer"
-                ctaType="prepare"
-                pagePath="/"
-                locale={locale}
-                className="inline-flex items-center gap-1 text-[#145aa0] underline underline-offset-4"
-              >
-                Airport transfer
-                <ArrowRight className="h-3.5 w-3.5" />
-              </TrackedCtaLink>
-              <a
-                href={ESIM_URL}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                onClick={() => trackAffiliateClick({
-                  category: "esim",
-                  provider: "klook",
-                  placement: "home_essentials",
-                  href: ESIM_URL,
-                  label: "eSIM",
-                  link_id: "esim",
-                  product: "esim",
-                  adid: "1166001",
-                  locale,
-                })}
-                className="inline-flex items-center gap-1 text-[#106b43] underline underline-offset-4"
-              >
-                eSIM
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
             </div>
           </div>
         </section>
