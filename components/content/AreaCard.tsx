@@ -135,7 +135,7 @@ export function AreaCard({
                   provider: "trip",
                   product: "hotel",
                   linkId: hotelKey ? `hotelArea.${hotelKey}.trip` : undefined,
-                  placement: "stay_area_hotel_card",
+                  placement: "tokyo_first_time_card",
                   variant: "primary",
                   category: "hotel",
               }
@@ -148,7 +148,7 @@ export function AreaCard({
                   provider: "agoda",
                   product: "hotel",
                   linkId: agodaLink.linkId,
-                  placement: "stay_area_hotel_card",
+                  placement: "tokyo_first_time_card",
                   variant: "secondary",
                   category: "hotel",
               }

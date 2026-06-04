@@ -3939,7 +3939,9 @@
       ],
       "disclaimer": "As pontuações são avaliações editoriais de adequação de viagem, informadas por dados públicos quando disponíveis. Não são notas oficiais, rankings de hotéis nem garantias de preço, conforto, disponibilidade ou condições de rota.",
       "freshness": "Atualização local com dados de passageiros · Última checagem de fontes: {date}",
-      "cta": "Começar"
+      "cta": "Começar",
+      "startCta": "Start Tokyo hotel base finder",
+      "localExamplesCta": "Prefer examples? See local hotel examples"
     },
     "situations": {
       "eyebrow": "Comece pela situação da viagem",
@@ -4184,6 +4186,7 @@
     },
     "methodology": {
       "title": "Como o score funciona",
+      "summary": "Methodology, station-name notes, and source details are here if you want to inspect the scoring.",
       "p1": "Isto compara áreas de estação, não hotéis individuais.",
       "p2": "Os scores combinam lógica editorial, sinais de usabilidade da estação e status dos dados.",
       "p3": "Dados ausentes não são punidos. A densidade de hotéis é editorial e não avalia hotéis individuais, preços ou disponibilidade.",
@@ -4212,6 +4215,7 @@
     },
     "dataNote": {
       "title": "Atualização / nota de fonte",
+      "summary": "Source status and public-data notes. This is not live hotel inventory or official travel advice.",
       "body": "Os scores da fujiseat.com são editoriais e informados por dados quando disponíveis. Não são avaliações oficiais nem garantias.",
       "currentMode": "Modo atual: <strong>{mode}</strong>. Última checagem: {date}.",
       "registryTitle": "Registro de fontes",
@@ -4347,6 +4351,9 @@
       "whyFits": "Por que combina com você",
       "bestFor": "Bom para",
       "hotelsIntro": "Ver hotéis nesta área",
+      "hotelSearchNote": "Broad area search. Check exact station distance, room size, bed setup, and latest price before booking.",
+      "recommendedNextAction": "Recommended next action",
+      "localExamplesCta": "Prefer examples? See local hotel examples",
       "hotelsButton": "Hotéis",
       "detailsButton": "Detalhes",
       "noHotelLinks": "Ainda não há link aprovado de busca de hotéis para esta área.",

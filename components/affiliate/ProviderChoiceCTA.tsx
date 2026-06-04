@@ -107,6 +107,7 @@ export function ProviderChoiceCTA({
   maxProviders = 2,
 }: ProviderChoiceCTAProps) {
   const availableProviders = providers
+    .filter((provider) => provider.provider !== "agoda")
     .filter((provider) => Boolean(provider.href?.trim() || provider.internalLink?.trim()))
     .slice(0, maxProviders);
 

@@ -3939,7 +3939,9 @@
       ],
       "disclaimer": "점수는 가능한 경우 공개 데이터 신호를 참고한 편집 기반 여행 적합도 점수입니다. 공식 평가, 호텔 순위, 가격·편안함·예약 가능 여부·경로 상태 보장이 아닙니다.",
       "freshness": "승객 데이터 기반 로컬 갱신 · 마지막 소스 확인: {date}",
-      "cta": "시작"
+      "cta": "시작",
+      "startCta": "Start Tokyo hotel base finder",
+      "localExamplesCta": "Prefer examples? See local hotel examples"
     },
     "situations": {
       "eyebrow": "여행 상황부터 시작",
@@ -4183,6 +4185,7 @@
     },
     "methodology": {
       "title": "점수 계산 방식",
+      "summary": "Methodology, station-name notes, and source details are here if you want to inspect the scoring.",
       "p1": "개별 호텔이 아니라 역 주변 지역을 비교합니다.",
       "p2": "점수는 편집 기반 여행 로직, 역 사용성 신호, 데이터 상태를 함께 봅니다.",
       "p3": "데이터가 없다고 감점하지 않습니다. 호텔 선택 밀도는 편집 기반이며 개별 호텔, 가격, 예약 가능 여부를 평가하지 않습니다.",
@@ -4211,6 +4214,7 @@
     },
     "dataNote": {
       "title": "데이터 최신성 / 출처 노트",
+      "summary": "Source status and public-data notes. This is not live hotel inventory or official travel advice.",
       "body": "fujiseat.com 점수는 가능한 경우 데이터를 참고한 편집 기반 여행 적합도입니다. 공식 평가나 보장이 아닙니다.",
       "currentMode": "현재 모드: <strong>{mode}</strong>. 마지막 확인: {date}.",
       "registryTitle": "출처 목록",
@@ -4346,6 +4350,9 @@
       "whyFits": "왜 맞는지",
       "bestFor": "적합한 경우",
       "hotelsIntro": "이 지역 호텔 확인",
+      "hotelSearchNote": "Broad area search. Check exact station distance, room size, bed setup, and latest price before booking.",
+      "recommendedNextAction": "Recommended next action",
+      "localExamplesCta": "Prefer examples? See local hotel examples",
       "hotelsButton": "호텔",
       "detailsButton": "자세히",
       "noHotelLinks": "이 지역에는 아직 승인된 호텔 검색 링크가 없습니다.",

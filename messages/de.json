@@ -3939,7 +3939,9 @@
       ],
       "disclaimer": "Die Scores sind redaktionelle Reise-Fit-Wertungen, soweit verfügbar durch öffentliche Datensignale informiert. Sie sind keine offiziellen Bewertungen, Hotelrankings oder Garantien für Preis, Komfort, Verfügbarkeit oder Route.",
       "freshness": "Lokale Aktualisierung mit Passagierdaten · Letzte Quellenprüfung: {date}",
-      "cta": "Starten"
+      "cta": "Starten",
+      "startCta": "Start Tokyo hotel base finder",
+      "localExamplesCta": "Prefer examples? See local hotel examples"
     },
     "situations": {
       "eyebrow": "Mit der Reisesituation starten",
@@ -4183,6 +4185,7 @@
     },
     "methodology": {
       "title": "Wie die Scores funktionieren",
+      "summary": "Methodology, station-name notes, and source details are here if you want to inspect the scoring.",
       "p1": "Dies vergleicht Stationsbereiche, nicht einzelne Hotels.",
       "p2": "Die Scores kombinieren redaktionelle Reiselogik, Stationsnutzbarkeit und Datenstatus.",
       "p3": "Fehlende Daten werden nicht bestraft. Hotelauswahl-Dichte ist redaktionell und bewertet keine einzelnen Hotels, Preise oder Verfügbarkeit.",
@@ -4211,6 +4214,7 @@
     },
     "dataNote": {
       "title": "Datenfrische / Quellenhinweis",
+      "summary": "Source status and public-data notes. This is not live hotel inventory or official travel advice.",
       "body": "fujiseat.com-Scores sind redaktionelle Reise-Fit-Scores, wo möglich durch Daten informiert. Sie sind keine offiziellen Bewertungen und keine Garantien.",
       "currentMode": "Aktueller Modus: <strong>{mode}</strong>. Letzte Prüfung: {date}.",
       "registryTitle": "Quellenregister",
@@ -4346,6 +4350,9 @@
       "whyFits": "Warum es passt",
       "bestFor": "Gut für",
       "hotelsIntro": "Hotels in diesem Gebiet prüfen",
+      "hotelSearchNote": "Broad area search. Check exact station distance, room size, bed setup, and latest price before booking.",
+      "recommendedNextAction": "Recommended next action",
+      "localExamplesCta": "Prefer examples? See local hotel examples",
       "hotelsButton": "Hotels",
       "detailsButton": "Details",
       "noHotelLinks": "Für dieses Gebiet ist noch kein geprüfter Hotelsuchlink hinterlegt.",

@@ -2,8 +2,10 @@
 
 import { forwardRef, useMemo, useRef, useState } from "react";
 import { ArrowRight, Check, ChevronDown } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
 import {
+  trackCtaClick,
   trackFinderAreaDetailsClick,
   trackFinderResultsView,
   trackFinderShowMoreClick,
@@ -85,6 +87,9 @@ type FinderCopy = {
   whyFits: string;
   bestFor: string;
   hotelsIntro: string;
+  hotelSearchNote: string;
+  recommendedNextAction: string;
+  localExamplesCta: string;
   hotelsButton: string;
   detailsButton: string;
   noHotelLinks: string;
@@ -273,6 +278,15 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
 
   const start = () => {
     setStarted(true);
+    trackCtaClick({
+      placement: "finder_start_click",
+      href: "#finder",
+      label: copy.startLabel,
+      category: "stay",
+      page_path: pagePath,
+      locale,
+      cta_type: "stay",
+    });
     trackFinderStart({ page_path: pagePath, locale });
   };
 
@@ -355,6 +369,22 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
             {copy.startLabel}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </button>
+          <Link
+            href="/local-hotel-picks#hotel-examples-matrix"
+            onClick={() =>
+              trackCtaClick({
+                placement: "finder_local_examples_click",
+                href: "/local-hotel-picks#hotel-examples-matrix",
+                label: copy.localExamplesCta,
+                category: "hotel",
+                page_path: pagePath,
+                locale,
+              })
+            }
+            className="mt-3 inline-flex w-full items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 sm:ml-2 sm:mt-5 sm:w-auto"
+          >
+            {copy.localExamplesCta}
+          </Link>
         </div>
       ) : (
         <div className="mt-5 rounded-[24px] border border-emerald-100 bg-white p-4 shadow-sm md:p-5">
@@ -580,6 +610,10 @@ function ResultCard({
           <p className="text-xs font-semibold text-slate-950">{copy.whyFits}</p>
           <p className="mt-1 text-xs leading-5 text-slate-700">{area.bestFor.slice(0, 2).join(" · ") || area.summary}</p>
         </div>
+        <div className="mt-3 rounded-2xl border border-amber-100 bg-amber-50/60 p-3">
+          <p className="text-xs font-semibold text-slate-950">{copy.watchOut}</p>
+          <p className="mt-1 text-xs leading-5 text-slate-700">{area.watchOut.slice(0, 2).join(" · ")}</p>
+        </div>
         <HotelButtons area={area} rank={rank} copy={copy} locale={locale} pagePath={pagePath} />
         <a
           href={area.detailHref}
@@ -618,7 +652,8 @@ function HotelButtons({
 
   return (
     <div className="mt-4">
-      <p className="text-xs font-semibold text-slate-950">{copy.hotelsIntro}</p>
+      <p className="text-xs font-semibold text-slate-950">{copy.recommendedNextAction}</p>
+      <p className="mt-1 text-sm font-semibold text-slate-950">{copy.hotelsIntro}</p>
       <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
         {activeHotel.providers.map((provider) => (
           <ProviderButton
@@ -643,6 +678,7 @@ function HotelButtons({
           </ProviderButton>
         ))}
       </div>
+      <p className="mt-2 text-[11px] leading-4 text-slate-500">{copy.hotelSearchNote}</p>
     </div>
   );
 }

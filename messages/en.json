@@ -3939,7 +3939,9 @@
       ],
       "disclaimer": "Scores are editorial travel-fit scores informed by public data signals where available. They are not official ratings, hotel rankings, or guarantees of price, comfort, availability, or route conditions.",
       "freshness": "Passenger-data-informed local refresh · Last source check: {date}",
-      "cta": "Start"
+      "cta": "Start",
+      "startCta": "Start Tokyo hotel base finder",
+      "localExamplesCta": "Prefer examples? See local hotel examples"
     },
     "situations": {
       "eyebrow": "Start by travel situation",
@@ -4183,6 +4185,7 @@
     },
     "methodology": {
       "title": "How scores work",
+      "summary": "Methodology, station-name notes, and source details are here if you want to inspect the scoring.",
       "p1": "This compares station areas, not individual hotels.",
       "p2": "Scores blend a 55% editorial travel-fit baseline, 35% station-usability adjustments (passenger crowd, exit / entrance complexity, line / operator count, transfer-hub penalty), and 10% live status. Each per-sub-score adjustment is capped at ±10.",
       "p3": "Step-free route confidence is read from Toei's public barrier-free CSVs where matched, and adds a small positive nudge to luggage-friendliness. Exit / entrance complexity is read from Tokyo Metro's public per-station exit feed where matched; areas without Tokyo Metro coverage use the editorial level. Missing data is never punished. Hotel choice density is editorial and does not evaluate individual hotels. Scores are not official ratings and do not rank safety, hotel quality, price, or availability.",
@@ -4211,6 +4214,7 @@
     },
     "dataNote": {
       "title": "Data freshness / source note",
+      "summary": "Source status and public-data notes. This is not live hotel inventory or official travel advice.",
       "body": "fujiseat.com scores are editorial travel-fit scores informed by passenger data. They are not official ratings and do not guarantee safety, comfort, hotel quality, price, or availability.",
       "currentMode": "Current mode: <strong>{mode}</strong>. Last source check: {date}.",
       "registryTitle": "Source registry",
@@ -4346,6 +4350,9 @@
       "whyFits": "Why it fits you",
       "bestFor": "Best for",
       "hotelsIntro": "Check hotels in this area",
+      "hotelSearchNote": "Broad area search. Check exact station distance, room size, bed setup, and latest price before booking.",
+      "recommendedNextAction": "Recommended next action",
+      "localExamplesCta": "Prefer examples? See local hotel examples",
       "hotelsButton": "Hotels",
       "detailsButton": "Details",
       "noHotelLinks": "No approved hotel search link is set for this area yet.",

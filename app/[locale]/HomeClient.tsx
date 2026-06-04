@@ -488,7 +488,7 @@ export default function HomeClient() {
                     href={link.href}
                     onClick={() =>
                       trackCtaClick({
-                        placement: "home_tokyo_base_more",
+                        placement: "home_hotel_base_click",
                         href: link.href,
                         label: link.label,
                         category: "stay",

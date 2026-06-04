@@ -3939,7 +3939,9 @@
       ],
       "disclaimer": "Les scores sont des évaluations éditoriales d'adéquation de voyage, informées par des données publiques quand elles existent. Ce ne sont pas des notes officielles, des classements d'hôtels ni des garanties de prix, confort, disponibilité ou conditions de trajet.",
       "freshness": "Actualisation locale avec données passagers · Dernière vérification des sources : {date}",
-      "cta": "Commencer"
+      "cta": "Commencer",
+      "startCta": "Start Tokyo hotel base finder",
+      "localExamplesCta": "Prefer examples? See local hotel examples"
     },
     "situations": {
       "eyebrow": "Commencez par votre situation",
@@ -4184,6 +4186,7 @@
     },
     "methodology": {
       "title": "Comment le score fonctionne",
+      "summary": "Methodology, station-name notes, and source details are here if you want to inspect the scoring.",
       "p1": "Compare des zones de gares, pas des hôtels individuels.",
       "p2": "Les scores combinent logique éditoriale, signaux d'usage des gares et état des données.",
       "p3": "Les données absentes ne pénalisent pas. La densité d'hôtels est éditoriale et n'évalue pas les hôtels, prix ou disponibilités.",
@@ -4212,6 +4215,7 @@
     },
     "dataNote": {
       "title": "Fraîcheur / note source",
+      "summary": "Source status and public-data notes. This is not live hotel inventory or official travel advice.",
       "body": "Les scores fujiseat.com sont éditoriaux et informés par les données disponibles. Ce ne sont pas des notes officielles ni des garanties.",
       "currentMode": "Mode actuel : <strong>{mode}</strong>. Dernière vérification : {date}.",
       "registryTitle": "Registre des sources",
@@ -4347,6 +4351,9 @@
       "whyFits": "Pourquoi cela vous convient",
       "bestFor": "Idéal pour",
       "hotelsIntro": "Voir les hôtels dans cette zone",
+      "hotelSearchNote": "Broad area search. Check exact station distance, room size, bed setup, and latest price before booking.",
+      "recommendedNextAction": "Recommended next action",
+      "localExamplesCta": "Prefer examples? See local hotel examples",
       "hotelsButton": "Hôtels",
       "detailsButton": "Détails",
       "noHotelLinks": "Aucun lien de recherche d'hôtel approuvé n'est encore défini pour cette zone.",

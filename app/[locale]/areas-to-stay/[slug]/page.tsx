@@ -1699,6 +1699,7 @@ type ProblemHotelBaseArea = {
   avoidIf: string;
   logic: string;
   hotelKey: HotelAreaKey;
+  primary?: boolean;
 };
 
 const shinkansenHotelBaseAreas: ProblemHotelBaseArea[] = [
@@ -1708,6 +1709,7 @@ const shinkansenHotelBaseAreas: ProblemHotelBaseArea[] = [
     avoidIf: "You want nightlife, a local-feeling evening, or a softer first Tokyo night.",
     logic: "Simplest for Tokaido Shinkansen access. Check exact station side and walking route before booking.",
     hotelKey: "tokyoStation",
+    primary: true,
   },
   {
     title: "Shinjuku",
@@ -1759,8 +1761,29 @@ function ProblemHotelBaseSection({
             bookingPlacement: "before_shinkansen_card",
           });
           return (
-            <article key={area.title} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-              <h3 className="text-lg font-semibold text-slate-950">{area.title}</h3>
+            <article
+              key={area.title}
+              id={area.primary ? "shinkansen-primary-hotel-base" : undefined}
+              className={[
+                "scroll-mt-24 rounded-2xl border p-4",
+                area.primary
+                  ? "border-orange-200 bg-orange-50/70 shadow-sm lg:col-span-2"
+                  : "border-slate-100 bg-slate-50",
+              ].join(" ")}
+            >
+              <div className="flex flex-wrap items-center gap-2">
+                <span
+                  className={[
+                    "rounded-full border px-2.5 py-1 text-[11px] font-semibold",
+                    area.primary
+                      ? "border-orange-200 bg-white text-orange-700"
+                      : "border-slate-200 bg-white text-slate-600",
+                  ].join(" ")}
+                >
+                  {area.primary ? "Primary area" : "Alternative area"}
+                </span>
+                <h3 className="text-lg font-semibold text-slate-950">{area.title}</h3>
+              </div>
               <dl className="mt-3 grid gap-2 text-sm leading-6">
                 <div>
                   <dt className="font-semibold text-[#106b43]">Good if</dt>
@@ -1776,8 +1799,7 @@ function ProblemHotelBaseSection({
                 </div>
               </dl>
               <ProviderChoiceCTA
-                actionLabel={`Compare hotels in ${area.title}`}
-                description="Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site."
+                actionLabel={area.primary ? "Compare hotels around Tokyo Station / Ginza" : `Compare hotels in ${area.title}`}
                 providers={choices}
                 pagePath={pagePath}
                 locale={locale}
@@ -1786,6 +1808,9 @@ function ProblemHotelBaseSection({
                 maxProviders={3}
                 className="mt-4"
               />
+              <p className="mt-2 text-[11px] leading-5 text-slate-500">
+                Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site.
+              </p>
             </article>
           );
         })}
@@ -1945,7 +1970,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               <TrackedInternalLink
                 href="/areas-to-stay/tokyo-stay-area-index"
                 sourcePage={pagePath}
-                placement="tokyo_first_time_quick_answer_matrix_jump"
+                placement="first_time_finder_click"
                 label={supplement.quickAnswerOverride.matrixCta}
                 locale={locale}
                 className="inline-flex min-h-10 items-center rounded-xl bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
@@ -1985,7 +2010,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                   <TrackedInternalLink
                     href="/areas-to-stay/tokyo-first-time#hotel-price-timing"
                     sourcePage={pagePath}
-                    placement="tokyo_first_time_quick_answer_matrix_jump"
+                    placement="first_time_top_room_dates"
                     label={supplement.earlyDecision.roomDateCta}
                     locale={locale}
                     className="mt-3 inline-flex min-h-9 items-center rounded-xl bg-slate-700 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
@@ -2003,22 +2028,22 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-orange-700">Hotel search shortcut</p>
               <h2 className="mt-1 text-xl font-semibold text-slate-950">Already know your Tokyo base?</h2>
               <p className="mt-2 text-sm leading-6 text-slate-700">
-                Jump to the major area card first. Each card explains the trade-offs before showing Trip.com / Agoda
+                Jump to the major area card first. Each card explains the trade-offs before showing Booking.com / Trip.com / Agoda
                 broad-area search buttons.
               </p>
             </div>
             <div className="grid gap-2 sm:grid-cols-2 lg:min-w-[420px]">
               {[
-                { href: "#shinjuku-area", label: "Compare Shinjuku hotels" },
-                { href: "#ueno-area", label: "Compare Ueno hotels" },
-                { href: "#asakusa-area", label: "Compare Asakusa hotels" },
-                { href: "#tokyo-station-ginza-area", label: "Compare Tokyo Station / Ginza hotels" },
+                { href: "#shinjuku-area", label: "Shinjuku" },
+                { href: "#ueno-area", label: "Ueno" },
+                { href: "#asakusa-area", label: "Asakusa" },
+                { href: "#tokyo-station-ginza-area", label: "Tokyo Station / Ginza" },
               ].map((link) => (
                 <TrackedInternalLink
                   key={link.href}
                   href={link.href}
                   sourcePage={pagePath}
-                  placement="tokyo_first_time_top_decision"
+                  placement="first_time_area_shortcut_click"
                   label={link.label}
                   locale={locale}
                   className="inline-flex min-h-10 items-center justify-center rounded-xl bg-white px-3 py-2 text-center text-xs font-semibold text-[#c45500] shadow-sm ring-1 ring-orange-100 transition-colors hover:bg-orange-50"
@@ -2067,17 +2092,17 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {[
-              { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Hotel Area Finder" },
-              { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose a luggage-friendly Tokyo base" },
-              { href: "/areas-to-stay/where-to-stay-before-shinkansen", label: "Where to stay before Shinkansen" },
-              { href: "/airport-transfers", label: "Match airport transfer to hotel area" },
-              { href: "/local-hotel-picks#hotel-examples-matrix", label: "See local hotel examples" },
+              { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Hotel Area Finder", placement: "first_time_finder_click" },
+              { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose a luggage-friendly Tokyo base", placement: "first_time_comparison_click" },
+              { href: "/areas-to-stay/where-to-stay-before-shinkansen", label: "Where to stay before Shinkansen", placement: "first_time_comparison_click" },
+              { href: "/airport-transfers", label: "Match airport transfer to hotel area", placement: "first_time_comparison_click" },
+              { href: "/local-hotel-picks#hotel-examples-matrix", label: "See local hotel examples", placement: "first_time_local_examples_click" },
             ].map((link) => (
               <TrackedInternalLink
                 key={link.href}
                 href={link.href}
                 sourcePage={pagePath}
-                placement="tokyo_first_time_top_decision"
+                placement={link.placement}
                 label={link.label}
                 locale={locale}
                 className="inline-flex min-h-9 items-center rounded-xl bg-slate-700 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-slate-800"
@@ -2168,7 +2193,6 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                     {hotelProviders.length > 0 && group.hotelActionLabel ? (
                       <ProviderChoiceCTA
                         actionLabel={group.hotelActionLabel}
-                        description={supplement.matrix.providerDescription}
                         providers={hotelProviders}
                         pagePath={pagePath}
                         locale={locale}
@@ -2176,6 +2200,9 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                         city="Tokyo"
                         maxProviders={3}
                       />
+                    ) : null}
+                    {hotelProviders.length > 0 && group.hotelActionLabel ? (
+                      <p className="mt-2 text-[11px] leading-5 text-slate-500">{supplement.matrix.providerDescription}</p>
                     ) : null}
 
                     <div className="mt-3 flex flex-wrap gap-2">
@@ -2816,11 +2843,27 @@ export default async function StayPage({ params }: Props) {
             link={page.quickRec.link}
             locale={locale}
             pagePath={pagePath}
-            showCta={!isTokyoFirstTime}
+            showCta={!isTokyoFirstTime && !isShinkansenProblemPage}
           />
 
           {isShinkansenProblemPage ? (
             <>
+              <div className="rounded-[18px] border border-orange-100 bg-orange-50/70 p-4 shadow-sm">
+                <p className="text-sm font-semibold text-slate-950">Leaving early with luggage?</p>
+                <p className="mt-1 text-sm leading-6 text-slate-700">
+                  Start with the Tokyo Station / Ginza hotel-base option, then compare alternatives if your evening plans matter more.
+                </p>
+                <TrackedInternalLink
+                  href="#shinkansen-primary-hotel-base"
+                  sourcePage={pagePath}
+                  placement="shinkansen_stay_primary_area_click"
+                  label="Compare hotels around Tokyo Station / Ginza"
+                  locale={locale}
+                  className="mt-3 inline-flex min-h-10 items-center rounded-xl bg-[#168a56] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+                >
+                  Compare hotels around Tokyo Station / Ginza
+                </TrackedInternalLink>
+              </div>
               <ProblemHotelBaseSection
                 areas={shinkansenHotelBaseAreas}
                 locale={locale}

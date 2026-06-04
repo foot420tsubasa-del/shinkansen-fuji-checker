@@ -3939,7 +3939,9 @@
       ],
       "disclaimer": "Оценки — редакционные показатели пригодности для поездки, по возможности основанные на публичных данных. Это не официальные рейтинги, не рейтинги отелей и не гарантия цены, комфорта, наличия мест или условий маршрута.",
       "freshness": "Локальное обновление с учетом пассажирских данных · Последняя проверка источников: {date}",
-      "cta": "Начать"
+      "cta": "Начать",
+      "startCta": "Start Tokyo hotel base finder",
+      "localExamplesCta": "Prefer examples? See local hotel examples"
     },
     "situations": {
       "eyebrow": "Начните с ситуации поездки",
@@ -4183,6 +4185,7 @@
     },
     "methodology": {
       "title": "Как работают баллы",
+      "summary": "Methodology, station-name notes, and source details are here if you want to inspect the scoring.",
       "p1": "Здесь сравниваются районы у станций, а не отдельные отели.",
       "p2": "Баллы объединяют редакционную логику поездки, удобство станции и статус данных.",
       "p3": "Отсутствие данных не штрафуется. Плотность выбора отелей — редакционный сигнал; он не оценивает отдельные отели, цены или доступность.",
@@ -4211,6 +4214,7 @@
     },
     "dataNote": {
       "title": "Свежесть данных / источники",
+      "summary": "Source status and public-data notes. This is not live hotel inventory or official travel advice.",
       "body": "Баллы fujiseat.com — редакционная оценка пригодности поездки, где возможно информированная данными. Это не официальные рейтинги и не гарантии.",
       "currentMode": "Текущий режим: <strong>{mode}</strong>. Последняя проверка: {date}.",
       "registryTitle": "Реестр источников",
@@ -4346,6 +4350,9 @@
       "whyFits": "Почему подходит",
       "bestFor": "Подходит для",
       "hotelsIntro": "Проверить отели в этом районе",
+      "hotelSearchNote": "Broad area search. Check exact station distance, room size, bed setup, and latest price before booking.",
+      "recommendedNextAction": "Recommended next action",
+      "localExamplesCta": "Prefer examples? See local hotel examples",
       "hotelsButton": "Отели",
       "detailsButton": "Детали",
       "noHotelLinks": "Для этого района пока нет одобренной ссылки поиска отелей.",

@@ -170,7 +170,7 @@ function hotelSearchForArea(area: StayAreaBase, locale: string, placement: Hotel
           label: "Search this area on Trip.com",
           linkId: `hotelArea.${hotelAreaKey}.trip`,
           priority: 20,
-          placement: "stay_area_hotel_card",
+          placement,
         }
       : null,
     agodaLink && agodaLink.href !== "#"
@@ -181,7 +181,7 @@ function hotelSearchForArea(area: StayAreaBase, locale: string, placement: Hotel
           label: "Search this area on Agoda",
           linkId: agodaLink.linkId,
           priority: 30,
-          placement: "stay_area_hotel_card",
+          placement,
         }
       : null,
   ].filter((provider): provider is {
@@ -849,7 +849,7 @@ function SelectedAreaHotelSearch({
         <TrackedStayAreaContinueLink
           href="/local-hotel-picks#hotel-examples-matrix"
           sourcePage={pagePath}
-          placement="tokyo_stay_area_index_selected_hotel_search"
+          placement="finder_local_examples_click"
           label={t("hotelSearch.examples")}
           locale={locale}
           areaId={area.id}
@@ -1218,6 +1218,28 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               <p className="mt-3 max-w-3xl text-xs leading-5 text-slate-500">
                 {t("hero.disclaimer")}
               </p>
+              <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                <TrackedStayAreaContinueLink
+                  href="#finder"
+                  sourcePage={pagePath}
+                  placement="finder_start_click"
+                  label={t("hero.startCta")}
+                  locale={locale}
+                  className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-[#106b43] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0b5736]"
+                >
+                  {t("hero.startCta")}
+                </TrackedStayAreaContinueLink>
+                <TrackedStayAreaContinueLink
+                  href="/local-hotel-picks#hotel-examples-matrix"
+                  sourcePage={pagePath}
+                  placement="finder_local_examples_click"
+                  label={t("hero.localExamplesCta")}
+                  locale={locale}
+                  className="inline-flex min-h-12 items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+                >
+                  {t("hero.localExamplesCta")}
+                </TrackedStayAreaContinueLink>
+              </div>
             </div>
           </div>
         </section>
@@ -1227,14 +1249,6 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           locale={locale}
           pagePath={pagePath}
           copy={finderCopy}
-        />
-
-        <FujiseatAreaLogic
-          sourcePage={pagePath}
-          placement="tokyo_stay_area_index_area_logic"
-          locale={locale}
-          className="mt-6"
-          showFinderLink={false}
         />
 
         {selectedFromQuery ? (
@@ -1251,12 +1265,15 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
         ) : null}
 
         <section className="mt-10 grid gap-5 lg:grid-cols-2">
-          <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="flex items-center gap-2 text-[#106b43]">
-              <BarChart3 className="h-5 w-5" aria-hidden="true" />
-              <h2 className="text-xl font-semibold text-slate-950">{t("methodology.title")}</h2>
-            </div>
-            <div className="mt-4 space-y-3 text-sm leading-6 text-slate-700">
+          <details className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+            <summary className="cursor-pointer list-none">
+              <div className="flex items-center gap-2 text-[#106b43]">
+                <BarChart3 className="h-5 w-5" aria-hidden="true" />
+                <h2 className="text-xl font-semibold text-slate-950">{t("methodology.title")}</h2>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{t("methodology.summary")}</p>
+            </summary>
+            <div className="mt-5 space-y-3 text-sm leading-6 text-slate-700">
               <p>{t("methodology.p1")}</p>
               <p>{t("methodology.p2")}</p>
               <p>{t("methodology.p3")}</p>
@@ -1272,9 +1289,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               <p className="mt-2 text-xs leading-5 text-slate-600">{t("stationRouteNote.commonBody")}</p>
             </div>
             <details className="mt-5 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <summary className="cursor-pointer text-sm font-semibold text-slate-950">
-                {t("methodology.detailsTitle")}
-              </summary>
+              <summary className="cursor-pointer text-sm font-semibold text-slate-950">{t("methodology.detailsTitle")}</summary>
               <p className="mt-3 text-xs leading-5 text-slate-500">
                 {t("methodology.detailsBody")}
               </p>
@@ -1291,13 +1306,16 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
                 {t("methodology.internalDatasets")}
               </p>
             </details>
-          </div>
+          </details>
 
-          <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-            <div className="flex items-center gap-2 text-[#106b43]">
-              <MapPin className="h-5 w-5" aria-hidden="true" />
-              <h2 className="text-xl font-semibold text-slate-950">{t("dataNote.title")}</h2>
-            </div>
+          <details className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+            <summary className="cursor-pointer list-none">
+              <div className="flex items-center gap-2 text-[#106b43]">
+                <MapPin className="h-5 w-5" aria-hidden="true" />
+                <h2 className="text-xl font-semibold text-slate-950">{t("dataNote.title")}</h2>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{t("dataNote.summary")}</p>
+            </summary>
             <p className="mt-4 text-sm leading-6 text-slate-700">
               {t("dataNote.body")}
             </p>
@@ -1326,12 +1344,20 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
                 {t("dataNote.otherDatasets")}
               </p>
             </div>
-          </div>
+          </details>
         </section>
+
+        <FujiseatAreaLogic
+          sourcePage={pagePath}
+          placement="tokyo_stay_area_index_area_logic"
+          locale={locale}
+          className="mt-6"
+          showFinderLink={false}
+        />
 
         <section className="mt-10 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
           <h2 className="text-xl font-semibold text-slate-950">{t("continue.title")}</h2>
-          <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
             <TrackedStayAreaContinueLink
               href="/areas-to-stay/tokyo-first-time"
               sourcePage={pagePath}
@@ -1342,17 +1368,6 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
               {t("continue.links.firstTime")} →
-            </TrackedStayAreaContinueLink>
-            <TrackedStayAreaContinueLink
-              href="/airport-transfers"
-              sourcePage={pagePath}
-              placement="tokyo_stay_area_index_continue"
-              label={t("continue.links.airport")}
-              locale={locale}
-              areaId={selected.area.id}
-              className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
-            >
-              {t("continue.links.airport")} →
             </TrackedStayAreaContinueLink>
             <TrackedStayAreaContinueLink
               href="/areas-to-stay/where-to-stay-before-shinkansen"
@@ -1366,15 +1381,15 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               {t("continue.links.shinkansen")} →
             </TrackedStayAreaContinueLink>
             <TrackedStayAreaContinueLink
-              href="/areas-to-stay/where-to-stay-in-tokyo-with-luggage"
+              href="/airport-transfers"
               sourcePage={pagePath}
               placement="tokyo_stay_area_index_continue"
-              label={t("continue.links.luggage")}
+              label={t("continue.links.airport")}
               locale={locale}
               areaId={selected.area.id}
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              {t("continue.links.luggage")} →
+              {t("continue.links.airport")} →
             </TrackedStayAreaContinueLink>
             <TrackedStayAreaContinueLink
               href="/local-hotel-picks#hotel-examples-matrix"

@@ -74,7 +74,7 @@ export function HotelCompareBlock({
   className = "",
 }: HotelCompareBlockProps) {
   const showTrip = hasHref(tripHref);
-  const showAgoda = hasHref(agodaHref);
+  const showAgoda = false;
 
   if (!showTrip && !showAgoda) return null;
 

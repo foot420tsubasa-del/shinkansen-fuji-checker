@@ -48,7 +48,9 @@ export function HotelCTA({
   // Trip.com, magenta for Agoda) so the user can tell at a glance which
   // provider they are about to open. Any other hotel CTA (klook-routed or
   // an unrecognized href) keeps the commercial orange style.
-  if (resolvedProvider === "trip" || resolvedProvider === "agoda") {
+  if (resolvedProvider === "agoda") return null;
+
+  if (resolvedProvider === "trip") {
     return (
       <ProviderButton
         provider={resolvedProvider}

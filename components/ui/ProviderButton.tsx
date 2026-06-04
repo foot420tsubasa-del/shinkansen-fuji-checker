@@ -78,6 +78,8 @@ export function ProviderButton({
   fullWidth = true,
   className = "",
 }: ProviderButtonProps) {
+  if (provider === "agoda") return null;
+
   const analyticsHref = trackingHref ?? href;
   const analyticsLabel = typeof children === "string" ? children : provider;
 

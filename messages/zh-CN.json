@@ -3939,7 +3939,9 @@
       ],
       "disclaimer": "分数是编辑型旅行适合度分数，在可用时参考公开数据信号。它们不是官方评分、酒店排名，也不保证价格、舒适度、空房或路线状况。",
       "freshness": "参考乘客数据的本地更新 · 最后来源检查：{date}",
-      "cta": "开始"
+      "cta": "开始",
+      "startCta": "Start Tokyo hotel base finder",
+      "localExamplesCta": "Prefer examples? See local hotel examples"
     },
     "situations": {
       "eyebrow": "从旅行情况开始",
@@ -4183,6 +4185,7 @@
     },
     "methodology": {
       "title": "分数如何计算",
+      "summary": "Methodology, station-name notes, and source details are here if you want to inspect the scoring.",
       "p1": "这里比较的是车站区域，不是单个酒店。",
       "p2": "分数结合编辑型旅行逻辑、车站使用性信号和数据状态。",
       "p3": "缺少数据不会被扣分。酒店选择密度是编辑信号，不评价单个酒店、价格或空房。",
@@ -4211,6 +4214,7 @@
     },
     "dataNote": {
       "title": "数据新鲜度 / 来源说明",
+      "summary": "Source status and public-data notes. This is not live hotel inventory or official travel advice.",
       "body": "fujiseat.com 分数是编辑型旅行适合度，在可用时参考数据。它不是官方评分，也不是保证。",
       "currentMode": "当前模式：<strong>{mode}</strong>。最后检查：{date}。",
       "registryTitle": "来源列表",
@@ -4346,6 +4350,9 @@
       "whyFits": "为什么适合你",
       "bestFor": "适合",
       "hotelsIntro": "查看此区域酒店",
+      "hotelSearchNote": "Broad area search. Check exact station distance, room size, bed setup, and latest price before booking.",
+      "recommendedNextAction": "Recommended next action",
+      "localExamplesCta": "Prefer examples? See local hotel examples",
       "hotelsButton": "酒店",
       "detailsButton": "详情",
       "noHotelLinks": "此区域尚未设置已批准的酒店搜索链接。",
