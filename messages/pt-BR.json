@@ -409,7 +409,12 @@
       "planner": "Trip Planner",
       "itinerary": "7-day itinerary",
       "commandCenter": "Command Center",
-      "stationPractice": "Station Practice"
+      "stationPractice": "Station Practice",
+      "featuredLabel": "Featured tool",
+      "stationPracticeTitle": "Station Practice",
+      "stationPracticeDesc": "Practice Japanese station navigation before your trip.",
+      "stationPracticeCta": "Open practice",
+      "otherLabel": "Other tools"
     }
   },
   "guide": {
