@@ -54,7 +54,6 @@ const homeHotelCopyByLocale: Record<
       "Choose your Tokyo hotel base before booking hotels. Your hotel area affects airport arrival, luggage, Shinkansen days, and how busy your nights feel.",
     links: [
       { href: "/areas-to-stay/tokyo-stay-area-index", label: "Compare Tokyo station areas" },
-      { href: "/local-hotel-picks", label: "See local hotel examples" },
     ],
     imageNote: "Use fujiseat to choose the broad hotel area first, then check current prices, room size, bed setup, and station distance on booking sites.",
     matrixCta: "Find your Tokyo hotel base",
@@ -344,7 +343,7 @@ export default function HomeClient() {
           </p>
           <div className="mt-5 rounded-2xl border border-[#d9e5f2] bg-white p-4 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
             <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#5f7190]">After checking your seat</p>
-            <div className="mt-3 grid items-stretch gap-3 lg:grid-cols-2">
+            <div className="mt-3 grid items-stretch gap-3 lg:grid-cols-3">
               <div className="flex h-full flex-col rounded-2xl border border-orange-100 bg-orange-50/70 p-3">
                 <p className="text-sm font-bold text-[#082653]">Book Shinkansen ticket</p>
                 <p className="mt-1 text-xs leading-5 text-slate-600">
@@ -395,26 +394,6 @@ export default function HomeClient() {
                   ) : null}
                 </div>
               </div>
-              <div className="flex h-full flex-col rounded-2xl border border-orange-100 bg-orange-50/70 p-3">
-                <p className="text-sm font-bold text-[#082653]">Choose your hotel base</p>
-                <p className="mt-1 text-xs leading-5 text-slate-600">
-                  Choose the city and station area before booking hotels, especially if luggage or an early train matters.
-                </p>
-                <div className="mt-auto pt-3">
-                  <TrackedCtaLink
-                    href="/areas-to-stay/tokyo-stay-area-index"
-                    placement="home_seat_result"
-                    label="Choose your hotel base"
-                    category="stay"
-                    ctaType="stay"
-                    pagePath="/"
-                    locale={locale}
-                    className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
-                  >
-                    Choose hotel base
-                  </TrackedCtaLink>
-                </div>
-              </div>
               <div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-slate-50 p-3">
                 <p className="text-sm font-bold text-[#082653]">Compare JR Pass</p>
                 <p className="mt-1 text-xs leading-5 text-slate-600">
@@ -463,15 +442,14 @@ export default function HomeClient() {
                 <span className="mt-2 inline-flex text-xs font-bold text-[#145aa0]">Plan arrival essentials →</span>
               </TrackedCtaLink>
             </div>
-          </div>
-          <div className="mt-5">
-            <SectionTitle eyebrow="More seat guides" />
-            <div className="flex flex-wrap gap-2.5">
+            <div className="mt-4 border-t border-slate-100 pt-3">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#5f7190]">More seat guides</p>
+              <div className="mt-2 flex flex-wrap gap-2">
               {popularLinks.map((link, index) => {
                 const Icon = link.icon;
                 const content = (
                   <>
-                    <Icon className="h-3.5 w-3.5" />
+                    <Icon className="h-3 w-3" />
                     {link.label}
                   </>
                 );
@@ -480,7 +458,7 @@ export default function HomeClient() {
                     key={link.label}
                     href={link.href}
                     className={[
-                      "inline-flex min-h-9 items-center gap-1.5 rounded-xl border px-4 py-2 text-xs font-extrabold shadow-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#15803d]",
+                      "inline-flex min-h-8 items-center gap-1.5 rounded-lg border px-3 py-1.5 text-[11px] font-extrabold shadow-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#15803d]",
                       index === 0
                         ? "border-[#15803d] bg-[#15803d] text-white hover:border-[#166534] hover:bg-[#166534]"
                         : "border-[#86efac] bg-white text-[#166534] hover:border-[#22c55e] hover:bg-[#f0fdf4] hover:text-[#14532d]",
@@ -490,6 +468,7 @@ export default function HomeClient() {
                   </SmartLink>
                 );
               })}
+              </div>
             </div>
           </div>
         </section>
