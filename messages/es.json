@@ -4539,7 +4539,8 @@
         "strongMatch": "Coincidencia fuerte",
         "goodMatch": "Buena coincidencia",
         "areaOption": "Opción de área"
-      }
+      },
+      "viewHotelPageLabel": "View hotel search page"
     }
   },
   "fujiseatAreaLogic": {
@@ -4551,7 +4552,7 @@
   },
   "tokyoHotelsPage": {
     "meta": {
-      "titleTemplate": "Hotels near {area} Station: Is This the Right Tokyo Base?",
+      "titleTemplate": "Hotels near {areaWithStation}: Is This the Right Tokyo Base?",
       "descriptionTemplate": "See whether {area} is a good Tokyo hotel base for your trip, with luggage, airport, Shinkansen, quietness, and hotel-search guidance.",
       "ogSiteName": "fujiseat"
     },
@@ -4562,7 +4563,7 @@
     },
     "eyebrow": "Tokyo Hotel Search Pages",
     "hero": {
-      "titleTemplate": "Hotels near {area} Station: is this the right Tokyo base for you?",
+      "titleTemplate": "{area} hotels: is this the right Tokyo base?",
       "introTemplate": "See who {area} fits best, what to watch out for, and then search hotels near the station.",
       "fitBadgeLabel": "Hotel-base fit",
       "fitBadgeOutOf": "/100",
@@ -4582,7 +4583,7 @@
       "title": "Quick fit score",
       "airportAccess": "Airport access",
       "luggageFriendly": "Luggage friendly",
-      "quietAtNight": "Quiet at night",
+      "quietAtNight": "Station stress",
       "shinkansenDayFit": "Shinkansen day fit",
       "hotelChoice": "Hotel choice"
     },
@@ -4623,7 +4624,7 @@
     },
     "bottomCta": {
       "title": "Ready to check prices?",
-      "bodyTemplate": "Compare real hotel options near {area} Station on trusted sites.",
+      "bodyTemplate": "Compare real hotel options near {areaWithStation} on trusted sites.",
       "backLink": "Back to Tokyo Hotel Area Finder"
     },
     "legal": {

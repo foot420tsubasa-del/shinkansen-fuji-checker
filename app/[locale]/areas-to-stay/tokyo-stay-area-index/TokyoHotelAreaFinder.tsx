@@ -4,6 +4,7 @@ import { forwardRef, useMemo, useRef, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
+import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import {
   trackCtaClick,
   trackFinderAreaDetailsClick,
@@ -13,6 +14,18 @@ import {
   trackFinderStepAnswered,
 } from "@/lib/analytics";
 import type { AffiliatePlacement } from "@/lib/affiliate/links";
+
+/**
+ * Areas that already have a dedicated /areas-to-stay/tokyo-hotels/<slug>
+ * landing page (Phase 1 pilots). When a result card matches one of these
+ * ids, we render a secondary "View hotel search page" CTA that links to
+ * that page. Other areas do not show the link yet.
+ */
+const PILOT_HOTEL_PAGE_IDS: ReadonlySet<string> = new Set([
+  "asakusa",
+  "ueno",
+  "tokyo-station",
+]);
 
 type FinderProviderLink = {
   provider: ProviderId;
@@ -92,6 +105,7 @@ type FinderCopy = {
   localExamplesCta: string;
   hotelsButton: string;
   detailsButton: string;
+  viewHotelPageLabel: string;
   noHotelLinks: string;
   showMore: string;
   compareAll: string;
@@ -611,6 +625,18 @@ function ResultCard({
           <p className="mt-1 text-xs leading-5 text-slate-700">{area.watchOut.slice(0, 2).join(" · ")}</p>
         </div>
         <HotelButtons area={area} rank={rank} copy={copy} locale={locale} pagePath={pagePath} />
+        {PILOT_HOTEL_PAGE_IDS.has(area.id) ? (
+          <TrackedInternalLink
+            href={`/areas-to-stay/tokyo-hotels/${area.id}`}
+            sourcePage="tokyo_stay_area_index"
+            placement="finder_result_hotel_page"
+            label={copy.viewHotelPageLabel}
+            locale={locale}
+            className="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-2xl border border-emerald-200 bg-emerald-50/60 px-4 py-2.5 text-sm font-semibold text-[#106b43] transition-colors hover:bg-emerald-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2"
+          >
+            {copy.viewHotelPageLabel}
+          </TrackedInternalLink>
+        ) : null}
         <a
           href={area.detailHref}
           onClick={(event) => {

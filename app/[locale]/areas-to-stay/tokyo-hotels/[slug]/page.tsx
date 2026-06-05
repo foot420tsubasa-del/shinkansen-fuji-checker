@@ -94,6 +94,21 @@ function areaDisplayName(id: string): string {
   return area?.displayName ?? id;
 }
 
+/**
+ * Returns a search-friendly variant of the display name that does NOT
+ * duplicate the word "Station" when the display name already contains it.
+ *
+ *   "Asakusa"                  → "Asakusa Station"
+ *   "Tokyo Station / Marunouchi" → "Tokyo Station / Marunouchi"
+ *
+ * Used in the SEO `<title>` and the bottom-CTA body to keep both reading
+ * naturally without breaking the "Hotels near X Station" SEO pattern for
+ * areas whose display name is just a place name.
+ */
+function areaWithStationSuffix(displayName: string): string {
+  return /\bStation\b/i.test(displayName) ? displayName : `${displayName} Station`;
+}
+
 function nearbyHref(targetSlug: string): string {
   if ((PILOT_SLUGS as readonly string[]).includes(targetSlug)) {
     return `/areas-to-stay/tokyo-hotels/${targetSlug}`;
@@ -178,14 +193,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const area = areaForPilot(pilot);
   const t = await getTranslations({ locale, namespace: "tokyoHotelsPage.meta" });
   const path = `/areas-to-stay/tokyo-hotels/${pilot}`;
+  const areaWithStation = areaWithStationSuffix(area.displayName);
+  const title = t("titleTemplate", { area: area.displayName, areaWithStation });
+  const description = t("descriptionTemplate", { area: area.displayName, areaWithStation });
   return {
-    title: t("titleTemplate", { area: area.displayName }),
-    description: t("descriptionTemplate", { area: area.displayName }),
+    title,
+    description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(path, locale),
     openGraph: {
-      title: t("titleTemplate", { area: area.displayName }),
-      description: t("descriptionTemplate", { area: area.displayName }),
+      title,
+      description,
       siteName: t("ogSiteName"),
     },
   };
@@ -353,6 +371,10 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
   const lodgingLabel = t(`lodgingDensity.${lodgingKey}`);
   const lodgingTone = lodgingDensityTone(area.lodgingDensityLevel);
 
+  // SEO + bottom-CTA-friendly variant: "{area} Station" unless the display
+  // name already contains "Station" (e.g. "Tokyo Station / Marunouchi").
+  const areaWithStation = areaWithStationSuffix(area.displayName);
+
   // ----- hero + bottom CTAs
   const heroLinks = assembleProviderLinks(pilot, locale, "tokyo_hotels_hero", t);
   const bottomLinks = assembleProviderLinks(pilot, locale, "tokyo_hotels_bottom", t);
@@ -360,13 +382,20 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
   // ----- best-for / watch-out / before-you-book content
   const bestFor = area.editorial.bestFor.slice(0, 3);
   const whoFor = area.editorial.bestFor.slice(0, 3);
-  const watchOut = area.editorial.watchOut.slice(0, 2);
-  const beforeYouBookItems: string[] = [
-    ...watchOut,
+  // Cap Before-you-book at 3 cards. Preferred order:
+  //   1) first editorial watch-out
+  //   2) walking-distance / station-entrance caution (always)
+  //   3) station-route disambiguation note OR second editorial watch-out
+  const watchOut = area.editorial.watchOut;
+  const beforeYouBookItems: string[] = [];
+  if (watchOut[0]) beforeYouBookItems.push(watchOut[0]);
+  beforeYouBookItems.push(
     t("beforeBook.walkingDistanceCaution", { area: area.displayName }),
-  ];
+  );
   if (stationNote) {
     beforeYouBookItems.push(stationNote);
+  } else if (watchOut[1]) {
+    beforeYouBookItems.push(watchOut[1]);
   }
 
   // ----- access notes
@@ -420,7 +449,7 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
             {t("eyebrow")}
           </p>
           <h1 className="mt-3 text-3xl font-semibold leading-tight text-slate-950 md:text-5xl">
-            {t("hero.titleTemplate", { area: area.displayName })}
+            {t("hero.titleTemplate", { area: area.displayName, areaWithStation })}
           </h1>
           <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">
             {t("hero.introTemplate", { area: area.displayName })}
@@ -605,7 +634,7 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
         <section className="mt-6 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
           <h2 className="text-xl font-semibold text-slate-950">{t("bottomCta.title")}</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
-            {t("bottomCta.bodyTemplate", { area: area.displayName })}
+            {t("bottomCta.bodyTemplate", { area: area.displayName, areaWithStation })}
           </p>
           {bottomLinks.length > 0 ? (
             <div className="mt-4 grid gap-3 sm:grid-cols-2 sm:max-w-xl">
