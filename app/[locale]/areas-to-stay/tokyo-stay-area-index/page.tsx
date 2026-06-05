@@ -1197,28 +1197,6 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               <p className="mt-3 max-w-3xl text-xs leading-5 text-slate-500">
                 {t("hero.disclaimer")}
               </p>
-              <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                <TrackedStayAreaContinueLink
-                  href="#finder"
-                  sourcePage={pagePath}
-                  placement="finder_start_click"
-                  label={t("hero.startCta")}
-                  locale={locale}
-                  className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-[#106b43] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0b5736]"
-                >
-                  {t("hero.startCta")}
-                </TrackedStayAreaContinueLink>
-                <TrackedStayAreaContinueLink
-                  href="/local-hotel-picks#hotel-examples-matrix"
-                  sourcePage={pagePath}
-                  placement="finder_local_examples_click"
-                  label={t("hero.localExamplesCta")}
-                  locale={locale}
-                  className="inline-flex min-h-12 items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50"
-                >
-                  {t("hero.localExamplesCta")}
-                </TrackedStayAreaContinueLink>
-              </div>
             </div>
           </div>
         </section>
