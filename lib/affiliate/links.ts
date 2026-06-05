@@ -80,6 +80,8 @@ export type AffiliatePlacement =
   | "before_shinkansen_card"
   | "airport_page_first_night_cta"
   | "comparison_area_cta"
+  | "tokyo_hotels_hero"
+  | "tokyo_hotels_bottom"
   | "stay_area_glance_card"
   | "stay_comparison_table"
   | "stay_area_detail_primary"

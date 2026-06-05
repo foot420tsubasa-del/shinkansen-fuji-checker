@@ -4548,5 +4548,96 @@
     "body": "fujiseat compare les bases hôtelières selon la complexité des gares, le stress des bagages, l'arrivée depuis l'aéroport, les jours de Shinkansen, les bases voisines plus calmes et une perspective locale de Tokyo. Le site ne classe pas les hôtels, n'invente pas les prix et ne prend pas automatiquement la gare la plus célèbre comme réponse.",
     "finderCta": "Ouvrir Tokyo Hotel Area Finder",
     "note": "Tokyo Hotel Area Finder est un outil éditorial d'adéquation de voyage, informé par des signaux d'usabilité des gares quand ils existent. Ce n'est pas un classement officiel."
+  },
+  "tokyoHotelsPage": {
+    "meta": {
+      "titleTemplate": "Hotels near {area} Station: Is This the Right Tokyo Base?",
+      "descriptionTemplate": "See whether {area} is a good Tokyo hotel base for your trip, with luggage, airport, Shinkansen, quietness, and hotel-search guidance.",
+      "ogSiteName": "fujiseat"
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "areasToStay": "Areas to stay",
+      "category": "Tokyo hotel search pages"
+    },
+    "eyebrow": "Tokyo Hotel Search Pages",
+    "hero": {
+      "titleTemplate": "Hotels near {area} Station: is this the right Tokyo base for you?",
+      "introTemplate": "See who {area} fits best, what to watch out for, and then search hotels near the station.",
+      "fitBadgeLabel": "Hotel-base fit",
+      "fitBadgeOutOf": "/100",
+      "confidencePrefix": "Confidence",
+      "freshnessPrefix": "Data freshness",
+      "trustNote": "We link to trusted booking partners. No extra fees.",
+      "bookingButton": "Search hotels on Booking.com",
+      "tripButton": "Search hotels on Trip.com"
+    },
+    "glance": {
+      "eyebrow": "At a glance",
+      "title": "What this area is",
+      "bestForTitle": "Best for"
+    },
+    "scoreCards": {
+      "eyebrow": "Quick fit",
+      "title": "Quick fit score",
+      "airportAccess": "Airport access",
+      "luggageFriendly": "Luggage friendly",
+      "quietAtNight": "Quiet at night",
+      "shinkansenDayFit": "Shinkansen day fit",
+      "hotelChoice": "Hotel choice"
+    },
+    "scoreLabels": {
+      "veryGood": "Very good",
+      "good": "Good",
+      "mixed": "Mixed",
+      "checkCarefully": "Check carefully"
+    },
+    "lodgingDensity": {
+      "veryHigh": "Lots of hotels nearby",
+      "high": "Good range of hotels nearby",
+      "medium": "Some hotels nearby",
+      "low": "Limited hotel choice nearby"
+    },
+    "whoFor": {
+      "eyebrow": "Who this area is for",
+      "title": "Who this area fits"
+    },
+    "beforeBook": {
+      "eyebrow": "Before you book",
+      "title": "Things to check first",
+      "walkingDistanceCaution": "Check the exact walking distance from your hotel to the station exit you actually need — \"near {area}\" can mean 3 to 15 minutes on foot."
+    },
+    "access": {
+      "eyebrow": "Access notes",
+      "title": "Airport and Shinkansen access",
+      "narita": "Narita Airport",
+      "haneda": "Haneda Airport",
+      "airportEase": "Overall airport ease",
+      "shinkansen": "Shinkansen day fit",
+      "tokyoStationAccess": "Tokyo Station access"
+    },
+    "nearby": {
+      "eyebrow": "Nearby alternatives",
+      "title": "Other Tokyo bases nearby",
+      "intro": "If this area is not quite right, here are nearby Tokyo bases that fit different travel plans."
+    },
+    "bottomCta": {
+      "title": "Ready to check prices?",
+      "bodyTemplate": "Compare real hotel options near {area} Station on trusted sites.",
+      "backLink": "Back to Tokyo Hotel Area Finder"
+    },
+    "legal": {
+      "body": "This page compares station areas, not individual hotels. It does not guarantee price, availability, safety, route conditions, or hotel quality. Always check the exact hotel location, walking route, cancellation terms, and current booking details on the partner site."
+    },
+    "index": {
+      "breadcrumb": "Tokyo hotel search pages",
+      "eyebrow": "Tokyo Hotel Search Pages",
+      "title": "Tokyo hotel search pages",
+      "intro": "Choose a station area before checking hotel prices. Each page summarises who the area fits, what to watch out for, and links straight to trusted hotel partners.",
+      "cardOpenLabel": "Open area",
+      "finderLinkLabel": "Back to Tokyo Hotel Area Finder",
+      "metaTitle": "Tokyo hotel search pages: choose your station area first | fujiseat",
+      "metaDescription": "Compare Tokyo station areas before opening hotel sites. Pilot pages for Asakusa, Ueno, and Tokyo Station with luggage, airport, Shinkansen, and quietness guidance."
+    }
   }
 }

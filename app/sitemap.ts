@@ -48,6 +48,10 @@ const englishOnlyContentPaths = [
   "/areas-to-stay/tokyo/asakusa",
   "/areas-to-stay/tokyo/tokyo-station",
   "/areas-to-stay/tokyo/east-tokyo",
+  "/areas-to-stay/tokyo-hotels",
+  "/areas-to-stay/tokyo-hotels/asakusa",
+  "/areas-to-stay/tokyo-hotels/ueno",
+  "/areas-to-stay/tokyo-hotels/tokyo-station",
 ];
 
 const dynamicPaths = [
