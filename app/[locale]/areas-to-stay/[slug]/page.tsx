@@ -42,17 +42,20 @@ const finderAreaIdByHotelAreaKey: Partial<Record<HotelAreaKey, string>> = {
   ueno: "ueno",
   asakusa: "asakusa",
   tokyoStation: "tokyo-station",
-  kyotoStation: "kyoto-station",
-  gionKawaramachi: "gion-higashiyama",
-  namba: "namba",
-  umeda: "umeda",
-  shinOsaka: "shin-osaka",
+  shibuya: "shibuya",
 };
 
-const pilotAreaHotelPages: Partial<Record<string, string>> = {
+const supportedAreaHotelPages: Partial<Record<string, string>> = {
   asakusa: "/areas-to-stay/tokyo-hotels/asakusa",
   ueno: "/areas-to-stay/tokyo-hotels/ueno",
   "tokyo-station": "/areas-to-stay/tokyo-hotels/tokyo-station",
+  "ginza-yurakucho": "/areas-to-stay/tokyo-hotels/ginza-yurakucho",
+  nihombashi: "/areas-to-stay/tokyo-hotels/nihombashi",
+  shinjuku: "/areas-to-stay/tokyo-hotels/shinjuku",
+  shibuya: "/areas-to-stay/tokyo-hotels/shibuya",
+  "hamamatsucho-daimon": "/areas-to-stay/tokyo-hotels/hamamatsucho-daimon",
+  shinagawa: "/areas-to-stay/tokyo-hotels/shinagawa",
+  kuramae: "/areas-to-stay/tokyo-hotels/kuramae",
 };
 
 const comparisonAreaCtas: Partial<Record<string, Array<{ title: string; hotelKey: HotelAreaKey; areaId: string }>>> = {
@@ -67,6 +70,11 @@ const comparisonAreaCtas: Partial<Record<string, Array<{ title: string; hotelKey
   "asakusa-vs-ueno": [
     { title: "Asakusa", hotelKey: "asakusa", areaId: "asakusa" },
     { title: "Ueno", hotelKey: "ueno", areaId: "ueno" },
+  ],
+  "shinjuku-vs-ueno-vs-asakusa": [
+    { title: "Shinjuku", hotelKey: "shinjuku", areaId: "shinjuku" },
+    { title: "Ueno", hotelKey: "ueno", areaId: "ueno" },
+    { title: "Asakusa", hotelKey: "asakusa", areaId: "asakusa" },
   ],
 };
 
@@ -1602,8 +1610,10 @@ function publicImageIfExists(src: string) {
   return fs.existsSync(filePath) ? src : undefined;
 }
 
-function areaSupportLinkForHotelKey(areaKey?: HotelAreaKey) {
-  if (!areaKey) {
+function areaSupportLinkForHotelKey(areaKey?: HotelAreaKey, areaIdOverride?: string) {
+  const areaId = areaIdOverride ?? (areaKey ? finderAreaIdByHotelAreaKey[areaKey] : undefined);
+
+  if (!areaId) {
     return {
       href: "/areas-to-stay/tokyo-stay-area-index",
       label: "Open Tokyo Hotel Area Finder",
@@ -1611,11 +1621,10 @@ function areaSupportLinkForHotelKey(areaKey?: HotelAreaKey) {
     };
   }
 
-  const areaId = finderAreaIdByHotelAreaKey[areaKey];
-  const pilotHref = areaId ? pilotAreaHotelPages[areaId] : undefined;
-  if (pilotHref) {
+  const supportedHref = supportedAreaHotelPages[areaId];
+  if (supportedHref) {
     return {
-      href: pilotHref,
+      href: supportedHref,
       label: "View hotel search page",
       placement: "stay_support_area_hotel_page",
     };
@@ -1630,18 +1639,20 @@ function areaSupportLinkForHotelKey(areaKey?: HotelAreaKey) {
 
 function AreaSupportHotelLink({
   areaKey,
+  areaId,
   sourcePage,
   locale,
   areaLabel,
   className = supportTextLinkClass,
 }: {
   areaKey?: HotelAreaKey;
+  areaId?: string;
   sourcePage: string;
   locale: string;
   areaLabel: string;
   className?: string;
 }) {
-  const link = areaSupportLinkForHotelKey(areaKey);
+  const link = areaSupportLinkForHotelKey(areaKey, areaId);
 
   return (
     <TrackedInternalLink
@@ -1822,6 +1833,7 @@ function ComparisonAreaHotelCtas({
             <div className="mt-3">
               <AreaSupportHotelLink
                 areaKey={area.hotelKey}
+                areaId={area.areaId}
                 sourcePage={pagePath}
                 locale={locale}
                 areaLabel={area.title}
@@ -2566,16 +2578,6 @@ async function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeS
                       <p className="mt-1 leading-5 text-slate-700">{area.transportNote}</p>
                     </div>
                   </div>
-                  {area.hotelKey ? (
-                    <div className="mt-4">
-                      <AreaSupportHotelLink
-                        areaKey={area.hotelKey}
-                        sourcePage={pagePath}
-                        locale={locale}
-                        areaLabel={`${config.city}: ${area.name}`}
-                      />
-                    </div>
-                  ) : null}
                   {area.detailHref && area.detailLabel ? (
                     <Link href={area.detailHref} className="mt-4 inline-flex text-sm font-semibold text-[#106b43] underline underline-offset-4">
                       {area.detailLabel}
