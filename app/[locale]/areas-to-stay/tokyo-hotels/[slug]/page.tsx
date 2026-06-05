@@ -360,9 +360,16 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
   };
 
   const quietAtNightScore = score.scores.crowdStress;
-  const fitScoreCards: Array<{ titleKey: string; value: number }> = [
+  // Surface the street-luggage-stress note as a hint on the existing
+  // Luggage friendly card *only* when the editorial level is high or
+  // very_high — keeps the card minimal for calm/medium areas.
+  const elevatedStreetStress =
+    area.streetLuggageStressLevel === "high" ||
+    area.streetLuggageStressLevel === "very_high";
+  const luggageHint = elevatedStreetStress ? area.streetLuggageStressNote : undefined;
+  const fitScoreCards: Array<{ titleKey: string; value: number; hint?: string }> = [
     { titleKey: "scoreCards.airportAccess", value: score.scores.airportAccess },
-    { titleKey: "scoreCards.luggageFriendly", value: score.scores.luggageFriendly },
+    { titleKey: "scoreCards.luggageFriendly", value: score.scores.luggageFriendly, hint: luggageHint },
     { titleKey: "scoreCards.quietAtNight", value: quietAtNightScore },
     { titleKey: "scoreCards.shinkansenDayFit", value: score.scores.shinkansenAccess },
   ];
@@ -531,12 +538,13 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
           </p>
           <h2 className="mt-2 text-xl font-semibold text-slate-950">{t("scoreCards.title")}</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {fitScoreCards.map(({ titleKey, value }) => (
+            {fitScoreCards.map(({ titleKey, value, hint }) => (
               <ScoreCard
                 key={titleKey}
                 title={t(titleKey)}
                 toneLabel={scoreLabel(value)}
                 tone={scoreTone(value)}
+                hint={hint}
               />
             ))}
             <ScoreCard

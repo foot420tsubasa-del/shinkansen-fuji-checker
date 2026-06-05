@@ -64,6 +64,13 @@ export type ExitComplexityLevel = "Simple" | "Moderate" | "Complex" | "Mega stat
 export type TransferHubLevel = "Low" | "Medium" | "High" | "Very High";
 export type StepFreeConfidence = "Known" | "Partial" | "Unknown";
 export type LodgingDensityLevel = "Low" | "Medium" | "High" | "Very High";
+/**
+ * Editorial classification for the post-station surface walk to a hotel
+ * with luggage. Distinct from station / passenger / transfer stress:
+ * this captures crowded sidewalks, busy crossings, dense commercial or
+ * nightlife blocks, narrow routes, and slopes.
+ */
+export type StreetLuggageStressLevel = "low" | "medium" | "high" | "very_high";
 export type RailNetworkType =
   | "subway-only"
   | "jr-heavy"
@@ -138,6 +145,16 @@ export type StayAreaBase = {
   stepFreeConfidence: StepFreeConfidence;
   /** Manual hotel-base density (does NOT rank individual hotels). */
   lodgingDensityLevel: LodgingDensityLevel;
+  /**
+   * Editorial level for post-station surface walking stress with luggage.
+   * Distinct from station / passenger / transfer stress; captures street-
+   * level conditions (sidewalks, crossings, nightlife / commercial density,
+   * narrow routes, slopes).
+   */
+  streetLuggageStressLevel: StreetLuggageStressLevel;
+  /** Optional short editorial note explaining the level. Surfaced only as
+   *  a hint on the Luggage friendly card when the level is high/very_high. */
+  streetLuggageStressNote?: string;
   /** Editorial route-logic profiles. No live timetable data is implied. */
   accessProfiles: StayAreaAccessProfiles;
   affiliateSearchLinks: {
@@ -327,6 +344,8 @@ export type StationUsabilityContribution = {
   transferHub: number;
   /** Sum after individual caps but before the per-sub-score aggregate cap. */
   rawTotal: number;
+  /** Bucketed editorial street-luggage-stress contribution into luggageFriendly. */
+  streetLuggageStress: number;
   /** crowdStress aggregate (capped). */
   crowdStressDelta: number;
   /** stationSimplicity aggregate (capped). */

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-26T00:17:54.667Z",
+  "generatedAt": "2026-06-05T18:55:29.883Z",
   "mode": "public-data-local",
   "areas": [
     {
@@ -7,7 +7,7 @@
       "overallScore": 84,
       "scores": {
         "stationSimplicity": 84,
-        "luggageFriendly": 93.5,
+        "luggageFriendly": 97.5,
         "airportAccess": 94,
         "shinkansenAccess": 72,
         "touristAccess": 80,
@@ -26,7 +26,7 @@
       },
       "scoreParts": {
         "editorialComponent": 84,
-        "publicDataComponent": 84,
+        "publicDataComponent": 85,
         "liveStatusComponent": 84,
         "sourceCoverage": 0.57
       },
@@ -37,9 +37,10 @@
         "lineOperator": -2,
         "transferHub": -2,
         "rawTotal": -5,
+        "streetLuggageStress": 4,
         "crowdStressDelta": -5,
         "stationSimplicityDelta": -4,
-        "luggageFriendlyDelta": 3.5
+        "luggageFriendlyDelta": 7.5
       }
     },
     {
@@ -47,7 +48,7 @@
       "overallScore": 80,
       "scores": {
         "stationSimplicity": 89,
-        "luggageFriendly": 87,
+        "luggageFriendly": 91,
         "airportAccess": 79,
         "shinkansenAccess": 70,
         "touristAccess": 78,
@@ -77,9 +78,10 @@
         "lineOperator": 0,
         "transferHub": 0,
         "rawTotal": 4,
+        "streetLuggageStress": 4,
         "crowdStressDelta": 0,
         "stationSimplicityDelta": 4,
-        "luggageFriendlyDelta": 5
+        "luggageFriendlyDelta": 9
       }
     },
     {
@@ -117,9 +119,51 @@
         "lineOperator": 0,
         "transferHub": -2,
         "rawTotal": -7,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -4,
         "stationSimplicityDelta": -6,
         "luggageFriendlyDelta": 1.5
+      }
+    },
+    {
+      "id": "asakusabashi",
+      "overallScore": 78,
+      "scores": {
+        "stationSimplicity": 86,
+        "luggageFriendly": 85,
+        "airportAccess": 87,
+        "shinkansenAccess": 72,
+        "touristAccess": 70,
+        "localFeel": 78,
+        "crowdStress": 81,
+        "lodgingChoice": 61,
+        "confidence": 77
+      },
+      "confidence": {
+        "score": 77,
+        "label": "Medium-high"
+      },
+      "sourceFreshness": {
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
+      },
+      "scoreParts": {
+        "editorialComponent": 77,
+        "publicDataComponent": 80,
+        "liveStatusComponent": 76,
+        "sourceCoverage": 0.43
+      },
+      "matchLabel": "public-data-matched",
+      "usabilityContribution": {
+        "passengerCrowd": 0,
+        "exitComplexity": 4,
+        "lineOperator": 2,
+        "transferHub": 0,
+        "rawTotal": 6,
+        "streetLuggageStress": 4,
+        "crowdStressDelta": 1,
+        "stationSimplicityDelta": 6,
+        "luggageFriendlyDelta": 9
       }
     },
     {
@@ -157,6 +201,7 @@
         "lineOperator": -5,
         "transferHub": -4,
         "rawTotal": -14,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -8,
         "stationSimplicityDelta": -10,
         "luggageFriendlyDelta": -1.5
@@ -167,7 +212,7 @@
       "overallScore": 77,
       "scores": {
         "stationSimplicity": 89,
-        "luggageFriendly": 83.5,
+        "luggageFriendly": 87.5,
         "airportAccess": 70,
         "shinkansenAccess": 68,
         "touristAccess": 70,
@@ -186,7 +231,7 @@
       },
       "scoreParts": {
         "editorialComponent": 77,
-        "publicDataComponent": 78,
+        "publicDataComponent": 79,
         "liveStatusComponent": 77,
         "sourceCoverage": 0.57
       },
@@ -197,9 +242,51 @@
         "lineOperator": 2,
         "transferHub": 0,
         "rawTotal": 3,
+        "streetLuggageStress": 4,
         "crowdStressDelta": 1,
         "stationSimplicityDelta": 3,
-        "luggageFriendlyDelta": 3.5
+        "luggageFriendlyDelta": 7.5
+      }
+    },
+    {
+      "id": "monzen-nakacho",
+      "overallScore": 77,
+      "scores": {
+        "stationSimplicity": 86,
+        "luggageFriendly": 85.5,
+        "airportAccess": 72,
+        "shinkansenAccess": 70,
+        "touristAccess": 72,
+        "localFeel": 86,
+        "crowdStress": 83,
+        "lodgingChoice": 53,
+        "confidence": 80
+      },
+      "confidence": {
+        "score": 80,
+        "label": "Medium-high"
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      },
+      "scoreParts": {
+        "editorialComponent": 76,
+        "publicDataComponent": 78,
+        "liveStatusComponent": 76,
+        "sourceCoverage": 0.57
+      },
+      "matchLabel": "public-data-matched",
+      "usabilityContribution": {
+        "passengerCrowd": -2,
+        "exitComplexity": 1,
+        "lineOperator": 2,
+        "transferHub": 0,
+        "rawTotal": 1,
+        "streetLuggageStress": 4,
+        "crowdStressDelta": -1,
+        "stationSimplicityDelta": 2,
+        "luggageFriendlyDelta": 7.5
       }
     },
     {
@@ -237,6 +324,7 @@
         "lineOperator": 0,
         "transferHub": -4,
         "rawTotal": -14,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -8,
         "stationSimplicityDelta": -10,
         "luggageFriendlyDelta": 0
@@ -277,49 +365,10 @@
         "lineOperator": -2,
         "transferHub": -2,
         "rawTotal": -5,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -5,
         "stationSimplicityDelta": -4,
         "luggageFriendlyDelta": 3.5
-      }
-    },
-    {
-      "id": "asakusabashi",
-      "overallScore": 77,
-      "scores": {
-        "stationSimplicity": 86,
-        "luggageFriendly": 81,
-        "airportAccess": 87,
-        "shinkansenAccess": 72,
-        "touristAccess": 70,
-        "localFeel": 78,
-        "crowdStress": 81,
-        "lodgingChoice": 61,
-        "confidence": 77
-      },
-      "confidence": {
-        "score": 77,
-        "label": "Medium-high"
-      },
-      "sourceFreshness": {
-        "level": "partial-public-data",
-        "label": "Public data: partially matched"
-      },
-      "scoreParts": {
-        "editorialComponent": 77,
-        "publicDataComponent": 79,
-        "liveStatusComponent": 76,
-        "sourceCoverage": 0.43
-      },
-      "matchLabel": "public-data-matched",
-      "usabilityContribution": {
-        "passengerCrowd": 0,
-        "exitComplexity": 4,
-        "lineOperator": 2,
-        "transferHub": 0,
-        "rawTotal": 6,
-        "crowdStressDelta": 1,
-        "stationSimplicityDelta": 6,
-        "luggageFriendlyDelta": 5
       }
     },
     {
@@ -327,7 +376,7 @@
       "overallScore": 77,
       "scores": {
         "stationSimplicity": 83.5,
-        "luggageFriendly": 81,
+        "luggageFriendly": 85,
         "airportAccess": 87,
         "shinkansenAccess": 76,
         "touristAccess": 68,
@@ -346,7 +395,7 @@
       },
       "scoreParts": {
         "editorialComponent": 76,
-        "publicDataComponent": 78,
+        "publicDataComponent": 79,
         "liveStatusComponent": 76,
         "sourceCoverage": 0.43
       },
@@ -357,9 +406,10 @@
         "lineOperator": 0,
         "transferHub": 0,
         "rawTotal": 3,
+        "streetLuggageStress": 4,
         "crowdStressDelta": -1,
         "stationSimplicityDelta": 3.5,
-        "luggageFriendlyDelta": 5
+        "luggageFriendlyDelta": 9
       }
     },
     {
@@ -367,7 +417,7 @@
       "overallScore": 76,
       "scores": {
         "stationSimplicity": 86,
-        "luggageFriendly": 83,
+        "luggageFriendly": 87,
         "airportAccess": 70,
         "shinkansenAccess": 72,
         "touristAccess": 76,
@@ -386,7 +436,7 @@
       },
       "scoreParts": {
         "editorialComponent": 75,
-        "publicDataComponent": 77,
+        "publicDataComponent": 78,
         "liveStatusComponent": 75,
         "sourceCoverage": 0.43
       },
@@ -397,49 +447,10 @@
         "lineOperator": 2,
         "transferHub": 0,
         "rawTotal": 6,
+        "streetLuggageStress": 4,
         "crowdStressDelta": 1,
         "stationSimplicityDelta": 6,
-        "luggageFriendlyDelta": 5
-      }
-    },
-    {
-      "id": "monzen-nakacho",
-      "overallScore": 76,
-      "scores": {
-        "stationSimplicity": 86,
-        "luggageFriendly": 81.5,
-        "airportAccess": 72,
-        "shinkansenAccess": 70,
-        "touristAccess": 72,
-        "localFeel": 86,
-        "crowdStress": 83,
-        "lodgingChoice": 53,
-        "confidence": 80
-      },
-      "confidence": {
-        "score": 80,
-        "label": "Medium-high"
-      },
-      "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
-      },
-      "scoreParts": {
-        "editorialComponent": 76,
-        "publicDataComponent": 77,
-        "liveStatusComponent": 76,
-        "sourceCoverage": 0.57
-      },
-      "matchLabel": "public-data-matched",
-      "usabilityContribution": {
-        "passengerCrowd": -2,
-        "exitComplexity": 1,
-        "lineOperator": 2,
-        "transferHub": 0,
-        "rawTotal": 1,
-        "crowdStressDelta": -1,
-        "stationSimplicityDelta": 2,
-        "luggageFriendlyDelta": 3.5
+        "luggageFriendlyDelta": 9
       }
     },
     {
@@ -477,6 +488,7 @@
         "lineOperator": 2,
         "transferHub": 0,
         "rawTotal": 3,
+        "streetLuggageStress": 0,
         "crowdStressDelta": 1,
         "stationSimplicityDelta": 3,
         "luggageFriendlyDelta": 0.5
@@ -517,6 +529,7 @@
         "lineOperator": -2,
         "transferHub": -2,
         "rawTotal": 0,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -3,
         "stationSimplicityDelta": 0,
         "luggageFriendlyDelta": 5
@@ -557,6 +570,7 @@
         "lineOperator": 2,
         "transferHub": -2,
         "rawTotal": -4,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -2,
         "stationSimplicityDelta": -3.5,
         "luggageFriendlyDelta": -1.5
@@ -597,6 +611,7 @@
         "lineOperator": -2,
         "transferHub": -2,
         "rawTotal": -3,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -3,
         "stationSimplicityDelta": -3,
         "luggageFriendlyDelta": 3.5
@@ -637,6 +652,7 @@
         "lineOperator": 0,
         "transferHub": -2,
         "rawTotal": -1,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -2,
         "stationSimplicityDelta": -1,
         "luggageFriendlyDelta": 0.5
@@ -647,7 +663,7 @@
       "overallScore": 75,
       "scores": {
         "stationSimplicity": 78,
-        "luggageFriendly": 80.5,
+        "luggageFriendly": 84.5,
         "airportAccess": 74,
         "shinkansenAccess": 70,
         "touristAccess": 70,
@@ -677,9 +693,10 @@
         "lineOperator": 2,
         "transferHub": 0,
         "rawTotal": -3,
+        "streetLuggageStress": 4,
         "crowdStressDelta": -1,
         "stationSimplicityDelta": -2,
-        "luggageFriendlyDelta": -1.5
+        "luggageFriendlyDelta": 2.5
       }
     },
     {
@@ -717,6 +734,7 @@
         "lineOperator": -2,
         "transferHub": -2,
         "rawTotal": -4,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -4,
         "stationSimplicityDelta": -3.5,
         "luggageFriendlyDelta": 3.5
@@ -727,7 +745,7 @@
       "overallScore": 74,
       "scores": {
         "stationSimplicity": 60,
-        "luggageFriendly": 76,
+        "luggageFriendly": 72,
         "airportAccess": 73,
         "shinkansenAccess": 87,
         "touristAccess": 84,
@@ -746,7 +764,7 @@
       },
       "scoreParts": {
         "editorialComponent": 74,
-        "publicDataComponent": 73,
+        "publicDataComponent": 72,
         "liveStatusComponent": 75,
         "sourceCoverage": 0.57
       },
@@ -757,9 +775,10 @@
         "lineOperator": -5,
         "transferHub": -4,
         "rawTotal": -21,
+        "streetLuggageStress": -4,
         "crowdStressDelta": -10,
         "stationSimplicityDelta": -10,
-        "luggageFriendlyDelta": 0
+        "luggageFriendlyDelta": -4
       }
     },
     {
@@ -797,6 +816,7 @@
         "lineOperator": 0,
         "transferHub": -2,
         "rawTotal": -2,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -3,
         "stationSimplicityDelta": -1.5,
         "luggageFriendlyDelta": 0.5
@@ -807,7 +827,7 @@
       "overallScore": 74,
       "scores": {
         "stationSimplicity": 84,
-        "luggageFriendly": 81,
+        "luggageFriendly": 85,
         "airportAccess": 66,
         "shinkansenAccess": 66,
         "touristAccess": 78,
@@ -826,7 +846,7 @@
       },
       "scoreParts": {
         "editorialComponent": 73,
-        "publicDataComponent": 75,
+        "publicDataComponent": 76,
         "liveStatusComponent": 73,
         "sourceCoverage": 0.43
       },
@@ -837,9 +857,10 @@
         "lineOperator": 0,
         "transferHub": 0,
         "rawTotal": 4,
+        "streetLuggageStress": 4,
         "crowdStressDelta": 0,
         "stationSimplicityDelta": 4,
-        "luggageFriendlyDelta": 5
+        "luggageFriendlyDelta": 9
       }
     },
     {
@@ -877,9 +898,51 @@
         "lineOperator": 2,
         "transferHub": -2,
         "rawTotal": 0,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -2,
         "stationSimplicityDelta": 0.5,
         "luggageFriendlyDelta": 0.5
+      }
+    },
+    {
+      "id": "ariake-odaiba",
+      "overallScore": 74,
+      "scores": {
+        "stationSimplicity": 84,
+        "luggageFriendly": 90,
+        "airportAccess": 71,
+        "shinkansenAccess": 62,
+        "touristAccess": 70,
+        "localFeel": 58,
+        "crowdStress": 79,
+        "lodgingChoice": 65,
+        "confidence": 75
+      },
+      "confidence": {
+        "score": 75,
+        "label": "Medium-high"
+      },
+      "sourceFreshness": {
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
+      },
+      "scoreParts": {
+        "editorialComponent": 73,
+        "publicDataComponent": 75,
+        "liveStatusComponent": 72,
+        "sourceCoverage": 0.29
+      },
+      "matchLabel": "partial-public-data",
+      "usabilityContribution": {
+        "passengerCrowd": 0,
+        "exitComplexity": 4,
+        "lineOperator": 2,
+        "transferHub": 0,
+        "rawTotal": 6,
+        "streetLuggageStress": 4,
+        "crowdStressDelta": 1,
+        "stationSimplicityDelta": 6,
+        "luggageFriendlyDelta": 6
       }
     },
     {
@@ -917,6 +980,7 @@
         "lineOperator": 0,
         "transferHub": -4,
         "rawTotal": -7,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -4,
         "stationSimplicityDelta": -7,
         "luggageFriendlyDelta": -1.5
@@ -957,6 +1021,7 @@
         "lineOperator": 0,
         "transferHub": -2,
         "rawTotal": -9,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -3,
         "stationSimplicityDelta": -8.5,
         "luggageFriendlyDelta": -3
@@ -997,6 +1062,7 @@
         "lineOperator": -5,
         "transferHub": -4,
         "rawTotal": -14,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -8,
         "stationSimplicityDelta": -10,
         "luggageFriendlyDelta": 1.5
@@ -1007,7 +1073,7 @@
       "overallScore": 73,
       "scores": {
         "stationSimplicity": 75,
-        "luggageFriendly": 79.5,
+        "luggageFriendly": 83.5,
         "airportAccess": 70,
         "shinkansenAccess": 72,
         "touristAccess": 68,
@@ -1026,7 +1092,7 @@
       },
       "scoreParts": {
         "editorialComponent": 73,
-        "publicDataComponent": 73,
+        "publicDataComponent": 74,
         "liveStatusComponent": 74,
         "sourceCoverage": 0.57
       },
@@ -1037,89 +1103,10 @@
         "lineOperator": 0,
         "transferHub": -2,
         "rawTotal": -5,
+        "streetLuggageStress": 4,
         "crowdStressDelta": -6,
         "stationSimplicityDelta": -3,
-        "luggageFriendlyDelta": 3.5
-      }
-    },
-    {
-      "id": "ariake-odaiba",
-      "overallScore": 73,
-      "scores": {
-        "stationSimplicity": 84,
-        "luggageFriendly": 86,
-        "airportAccess": 71,
-        "shinkansenAccess": 62,
-        "touristAccess": 70,
-        "localFeel": 58,
-        "crowdStress": 79,
-        "lodgingChoice": 65,
-        "confidence": 75
-      },
-      "confidence": {
-        "score": 75,
-        "label": "Medium-high"
-      },
-      "sourceFreshness": {
-        "level": "partial-public-data",
-        "label": "Public data: partially matched"
-      },
-      "scoreParts": {
-        "editorialComponent": 73,
-        "publicDataComponent": 74,
-        "liveStatusComponent": 72,
-        "sourceCoverage": 0.29
-      },
-      "matchLabel": "partial-public-data",
-      "usabilityContribution": {
-        "passengerCrowd": 0,
-        "exitComplexity": 4,
-        "lineOperator": 2,
-        "transferHub": 0,
-        "rawTotal": 6,
-        "crowdStressDelta": 1,
-        "stationSimplicityDelta": 6,
-        "luggageFriendlyDelta": 2
-      }
-    },
-    {
-      "id": "shimbashi",
-      "overallScore": 72,
-      "scores": {
-        "stationSimplicity": 56,
-        "luggageFriendly": 73.5,
-        "airportAccess": 81,
-        "shinkansenAccess": 85,
-        "touristAccess": 76,
-        "localFeel": 64,
-        "crowdStress": 48,
-        "lodgingChoice": 81,
-        "confidence": 84
-      },
-      "confidence": {
-        "score": 84,
-        "label": "Medium-high"
-      },
-      "sourceFreshness": {
-        "level": "public-data-local",
-        "label": "Public sources checked locally"
-      },
-      "scoreParts": {
-        "editorialComponent": 72,
-        "publicDataComponent": 71,
-        "liveStatusComponent": 72,
-        "sourceCoverage": 0.57
-      },
-      "matchLabel": "public-data-matched",
-      "usabilityContribution": {
-        "passengerCrowd": -4,
-        "exitComplexity": 1,
-        "lineOperator": -5,
-        "transferHub": -2,
-        "rawTotal": -10,
-        "crowdStressDelta": -8,
-        "stationSimplicityDelta": -8,
-        "luggageFriendlyDelta": 3.5
+        "luggageFriendlyDelta": 7.5
       }
     },
     {
@@ -1127,7 +1114,7 @@
       "overallScore": 72,
       "scores": {
         "stationSimplicity": 66,
-        "luggageFriendly": 74,
+        "luggageFriendly": 70,
         "airportAccess": 67,
         "shinkansenAccess": 68,
         "touristAccess": 80,
@@ -1146,7 +1133,7 @@
       },
       "scoreParts": {
         "editorialComponent": 73,
-        "publicDataComponent": 71,
+        "publicDataComponent": 70,
         "liveStatusComponent": 73,
         "sourceCoverage": 0.57
       },
@@ -1157,9 +1144,10 @@
         "lineOperator": 0,
         "transferHub": -2,
         "rawTotal": -12,
+        "streetLuggageStress": -4,
         "crowdStressDelta": -6,
         "stationSimplicityDelta": -10,
-        "luggageFriendlyDelta": 0
+        "luggageFriendlyDelta": -4
       }
     },
     {
@@ -1197,9 +1185,51 @@
         "lineOperator": 0,
         "transferHub": -2,
         "rawTotal": -9,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -3,
         "stationSimplicityDelta": -8.5,
         "luggageFriendlyDelta": -3
+      }
+    },
+    {
+      "id": "shimbashi",
+      "overallScore": 71,
+      "scores": {
+        "stationSimplicity": 56,
+        "luggageFriendly": 69.5,
+        "airportAccess": 81,
+        "shinkansenAccess": 85,
+        "touristAccess": 76,
+        "localFeel": 64,
+        "crowdStress": 48,
+        "lodgingChoice": 81,
+        "confidence": 84
+      },
+      "confidence": {
+        "score": 84,
+        "label": "Medium-high"
+      },
+      "sourceFreshness": {
+        "level": "public-data-local",
+        "label": "Public sources checked locally"
+      },
+      "scoreParts": {
+        "editorialComponent": 72,
+        "publicDataComponent": 70,
+        "liveStatusComponent": 72,
+        "sourceCoverage": 0.57
+      },
+      "matchLabel": "public-data-matched",
+      "usabilityContribution": {
+        "passengerCrowd": -4,
+        "exitComplexity": 1,
+        "lineOperator": -5,
+        "transferHub": -2,
+        "rawTotal": -10,
+        "streetLuggageStress": -4,
+        "crowdStressDelta": -8,
+        "stationSimplicityDelta": -8,
+        "luggageFriendlyDelta": -0.5
       }
     },
     {
@@ -1207,7 +1237,7 @@
       "overallScore": 71,
       "scores": {
         "stationSimplicity": 54.5,
-        "luggageFriendly": 68.5,
+        "luggageFriendly": 64.5,
         "airportAccess": 79,
         "shinkansenAccess": 83,
         "touristAccess": 84,
@@ -1226,7 +1256,7 @@
       },
       "scoreParts": {
         "editorialComponent": 72,
-        "publicDataComponent": 70,
+        "publicDataComponent": 69,
         "liveStatusComponent": 72,
         "sourceCoverage": 0.43
       },
@@ -1237,17 +1267,18 @@
         "lineOperator": -2,
         "transferHub": -4,
         "rawTotal": -10,
+        "streetLuggageStress": -4,
         "crowdStressDelta": -6,
         "stationSimplicityDelta": -9.5,
-        "luggageFriendlyDelta": -1.5
+        "luggageFriendlyDelta": -5.5
       }
     },
     {
       "id": "roppongi",
-      "overallScore": 70,
+      "overallScore": 69,
       "scores": {
         "stationSimplicity": 64,
-        "luggageFriendly": 73.5,
+        "luggageFriendly": 69.5,
         "airportAccess": 67,
         "shinkansenAccess": 70,
         "touristAccess": 80,
@@ -1277,9 +1308,10 @@
         "lineOperator": 2,
         "transferHub": -2,
         "rawTotal": -5,
+        "streetLuggageStress": -4,
         "crowdStressDelta": -3,
         "stationSimplicityDelta": -4,
-        "luggageFriendlyDelta": 1.5
+        "luggageFriendlyDelta": -2.5
       }
     },
     {
@@ -1317,6 +1349,7 @@
         "lineOperator": -7,
         "transferHub": -6,
         "rawTotal": -25,
+        "streetLuggageStress": 0,
         "crowdStressDelta": -10,
         "stationSimplicityDelta": -10,
         "luggageFriendlyDelta": 0
@@ -1327,7 +1360,7 @@
       "overallScore": 59,
       "scores": {
         "stationSimplicity": 32,
-        "luggageFriendly": 53,
+        "luggageFriendly": 49,
         "airportAccess": 67,
         "shinkansenAccess": 62,
         "touristAccess": 82,
@@ -1357,49 +1390,10 @@
         "lineOperator": -7,
         "transferHub": -6,
         "rawTotal": -23,
+        "streetLuggageStress": -4,
         "crowdStressDelta": -10,
         "stationSimplicityDelta": -10,
-        "luggageFriendlyDelta": -3
-      }
-    },
-    {
-      "id": "shibuya",
-      "overallScore": 57,
-      "scores": {
-        "stationSimplicity": 26,
-        "luggageFriendly": 45,
-        "airportAccess": 63,
-        "shinkansenAccess": 64,
-        "touristAccess": 88,
-        "localFeel": 66,
-        "crowdStress": 16,
-        "lodgingChoice": 86,
-        "confidence": 87
-      },
-      "confidence": {
-        "score": 87,
-        "label": "High"
-      },
-      "sourceFreshness": {
-        "level": "partial-public-data",
-        "label": "Public data: partially matched"
-      },
-      "scoreParts": {
-        "editorialComponent": 58,
-        "publicDataComponent": 55,
-        "liveStatusComponent": 57,
-        "sourceCoverage": 0.29
-      },
-      "matchLabel": "partial-public-data",
-      "usabilityContribution": {
-        "passengerCrowd": -2,
-        "exitComplexity": -6,
-        "lineOperator": -7,
-        "transferHub": -6,
-        "rawTotal": -21,
-        "crowdStressDelta": -10,
-        "stationSimplicityDelta": -10,
-        "luggageFriendlyDelta": -3
+        "luggageFriendlyDelta": -7
       }
     },
     {
@@ -1407,7 +1401,7 @@
       "overallScore": 57,
       "scores": {
         "stationSimplicity": 28,
-        "luggageFriendly": 48,
+        "luggageFriendly": 40,
         "airportAccess": 64,
         "shinkansenAccess": 62,
         "touristAccess": 88,
@@ -1426,7 +1420,7 @@
       },
       "scoreParts": {
         "editorialComponent": 58,
-        "publicDataComponent": 56,
+        "publicDataComponent": 54,
         "liveStatusComponent": 58,
         "sourceCoverage": 0.57
       },
@@ -1437,9 +1431,51 @@
         "lineOperator": -7,
         "transferHub": -6,
         "rawTotal": -25,
+        "streetLuggageStress": -8,
         "crowdStressDelta": -10,
         "stationSimplicityDelta": -10,
-        "luggageFriendlyDelta": 0
+        "luggageFriendlyDelta": -8
+      }
+    },
+    {
+      "id": "shibuya",
+      "overallScore": 56,
+      "scores": {
+        "stationSimplicity": 26,
+        "luggageFriendly": 38,
+        "airportAccess": 63,
+        "shinkansenAccess": 64,
+        "touristAccess": 88,
+        "localFeel": 66,
+        "crowdStress": 16,
+        "lodgingChoice": 86,
+        "confidence": 87
+      },
+      "confidence": {
+        "score": 87,
+        "label": "High"
+      },
+      "sourceFreshness": {
+        "level": "partial-public-data",
+        "label": "Public data: partially matched"
+      },
+      "scoreParts": {
+        "editorialComponent": 58,
+        "publicDataComponent": 54,
+        "liveStatusComponent": 57,
+        "sourceCoverage": 0.29
+      },
+      "matchLabel": "partial-public-data",
+      "usabilityContribution": {
+        "passengerCrowd": -2,
+        "exitComplexity": -6,
+        "lineOperator": -7,
+        "transferHub": -6,
+        "rawTotal": -21,
+        "streetLuggageStress": -8,
+        "crowdStressDelta": -10,
+        "stationSimplicityDelta": -10,
+        "luggageFriendlyDelta": -10
       }
     }
   ]

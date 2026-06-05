@@ -229,12 +229,29 @@ function stepFreeContribution(signal) {
   return 0;
 }
 
+/**
+ * Editorial street-luggage-stress contribution into luggageFriendly. Mirror
+ * of streetLuggageStressContribution in lib/stay-area/scoring.ts. Captures
+ * post-station surface walking conditions only; routed *only* into the
+ * luggageFriendly delta.
+ */
+function streetLuggageStressContribution(level) {
+  switch (level) {
+    case "low": return 4;
+    case "medium": return 0;
+    case "high": return -4;
+    case "very_high": return -8;
+    default: return 0;
+  }
+}
+
 function deriveUsabilityContribution(area, signal) {
   const passenger = passengerContribution(signal?.passengerSignal?.crowdPercentile ?? null);
   const exit = exitContribution(resolveExitLevel(area, signal));
   const lineOp = lineOperatorContribution(area, signal);
   const hub = transferHubContribution(area.transferHubLevel);
   const stepFree = stepFreeContribution(signal);
+  const streetLuggage = streetLuggageStressContribution(area.streetLuggageStressLevel);
   const crowdNetwork = Math.round(lineOp * 0.35);
 
   return {
@@ -243,9 +260,10 @@ function deriveUsabilityContribution(area, signal) {
     lineOperator: lineOp,
     transferHub: hub,
     rawTotal: passenger + exit + lineOp + hub,
+    streetLuggageStress: streetLuggage,
     crowdStressDelta: clamp(passenger + hub + crowdNetwork, -SUB_SCORE_DELTA_CAP, SUB_SCORE_DELTA_CAP),
     stationSimplicityDelta: clamp(exit + lineOp + hub + 0.5 * passenger, -SUB_SCORE_DELTA_CAP, SUB_SCORE_DELTA_CAP),
-    luggageFriendlyDelta: clamp(0.5 * exit + stepFree, -SUB_SCORE_DELTA_CAP, SUB_SCORE_DELTA_CAP),
+    luggageFriendlyDelta: clamp(0.5 * exit + stepFree + streetLuggage, -SUB_SCORE_DELTA_CAP, SUB_SCORE_DELTA_CAP),
   };
 }
 

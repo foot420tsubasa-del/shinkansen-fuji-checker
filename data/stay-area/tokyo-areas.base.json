@@ -105,7 +105,9 @@
         "level": "Excellent",
         "note": "Often easier than mega-terminal arrivals if the hotel is close to the right line or exit."
       }
-    }
+    },
+    "streetLuggageStressLevel": "low",
+    "streetLuggageStressNote": "Planned wide sidewalks around Skytree with low pedestrian density. Easy luggage walking."
   },
   {
     "id": "kuramae",
@@ -210,7 +212,9 @@
         "level": "Good",
         "note": "Calmer than mega hubs, but station exits can matter with large bags."
       }
-    }
+    },
+    "streetLuggageStressLevel": "low",
+    "streetLuggageStressNote": "Calm river-side streets with low foot traffic. Easy luggage walking."
   },
   {
     "id": "asakusa",
@@ -316,7 +320,9 @@
         "level": "Fair",
         "note": "Tourist streets and station exits can be tiring with large suitcases."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Tourist crowds near Senso-ji can slow luggage walks; quieter side streets exist. Check the route from the hotel to the station entrance."
   },
   {
     "id": "ueno",
@@ -426,7 +432,9 @@
         "level": "Good",
         "note": "Useful rail access, though the station area can still feel busy with bags."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Ameyoko and Shinobazu-dori stay busy into the evening; other approaches are calmer. Check the exact route from the hotel."
   },
   {
     "id": "ryogoku",
@@ -528,7 +536,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "low",
+    "streetLuggageStressNote": "Wide streets around the Kokugikan; calm outside sumo days. Easy luggage walking."
   },
   {
     "id": "kiyosumi-shirakawa",
@@ -632,7 +642,9 @@
         "level": "Good",
         "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "low",
+    "streetLuggageStressNote": "Quiet canal-side residential streets, easy to move luggage on."
   },
   {
     "id": "monzen-nakacho",
@@ -735,7 +747,9 @@
         "level": "Good",
         "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "low",
+    "streetLuggageStressNote": "Calm Fukagawa streets with low surface density. Easy luggage walking."
   },
   {
     "id": "ningyocho",
@@ -840,7 +854,9 @@
         "level": "Good",
         "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Traditional shopping streets are narrow but flow is moderate. Confirm the closest station entrance."
   },
   {
     "id": "hatchobori",
@@ -943,7 +959,9 @@
         "level": "Good",
         "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Business sidewalks; office-side gets denser at lunch hour. Confirm the route."
   },
   {
     "id": "kayabacho",
@@ -1045,7 +1063,9 @@
         "level": "Good",
         "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Quiet business streets; the Eitai-dori crossing is the busy point. Confirm the route."
   },
   {
     "id": "nihombashi",
@@ -1154,7 +1174,9 @@
         "level": "Good",
         "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Calm business district with some narrow back-streets near Mitsukoshimae. Confirm the route from the hotel."
   },
   {
     "id": "tokyo-station",
@@ -1269,7 +1291,9 @@
         "level": "Fair",
         "note": "Strong rail logistics, but exits, underground passages, and hotel side matter with luggage."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Marunouchi sidewalks are wide and orderly; Yaesu-side gets denser at peak. Confirm the correct station exit for the hotel."
   },
   {
     "id": "ginza-yurakucho",
@@ -1383,7 +1407,9 @@
         "level": "Good",
         "note": "Good if the hotel is near an elevator-friendly station or a short taxi from Tokyo Station."
       }
-    }
+    },
+    "streetLuggageStressLevel": "high",
+    "streetLuggageStressNote": "Dense retail flows on Chuo-dori and around Yurakucho can slow luggage walks. Check the exact station entrance for the hotel."
   },
   {
     "id": "shimbashi",
@@ -1490,7 +1516,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "high",
+    "streetLuggageStressNote": "Narrow under-track sidewalks and salaryman density can slow luggage movement at peak times. Check the route in advance."
   },
   {
     "id": "hamamatsucho-daimon",
@@ -1599,7 +1627,9 @@
         "level": "Good",
         "note": "Practical for luggage if the hotel is close to JR, Monorail, or Daimon."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Business district with wide sidewalks; airport-bound luggage flows are common. Confirm the exit."
   },
   {
     "id": "shinagawa",
@@ -1709,7 +1739,9 @@
         "level": "Good",
         "note": "Strong logistics, though station exits and hotel side still matter."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Konan-side has wide planned sidewalks; Takanawa-side has busier crossings. Confirm which exit matches the hotel."
   },
   {
     "id": "gotanda",
@@ -1812,7 +1844,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Wide main roads with some narrow side-street routes to hotels. Check the walking route."
   },
   {
     "id": "meguro",
@@ -1918,7 +1952,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Wide Meguro-dori but a slope from the station toward the river. Confirm the route."
   },
   {
     "id": "ebisu",
@@ -2021,7 +2057,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Garden Place and West Exit crossings get busy after dark. Confirm the route from the hotel."
   },
   {
     "id": "shibuya",
@@ -2133,7 +2171,9 @@
         "level": "Weak",
         "note": "Weak luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "very_high",
+    "streetLuggageStressNote": "Scramble Crossing and packed retail sidewalks make street walking with luggage slow. Confirm the closest station exit before booking."
   },
   {
     "id": "shinjuku",
@@ -2246,7 +2286,9 @@
         "level": "Weak",
         "note": "Weak luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "very_high",
+    "streetLuggageStressNote": "Kabukicho-side crowds and Scramble-class crosswalks slow luggage moves. Check the exact walking route from the hotel to the closest station exit."
   },
   {
     "id": "yoyogi",
@@ -2350,7 +2392,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "low",
+    "streetLuggageStressNote": "Wider, calmer streets than neighbouring Shinjuku. Easy luggage walking."
   },
   {
     "id": "ikebukuro",
@@ -2461,7 +2505,9 @@
         "level": "Weak",
         "note": "Weak luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "high",
+    "streetLuggageStressNote": "Major terminal with dense retail sidewalks. Confirm the hotel-side station exit to keep the luggage walk short."
   },
   {
     "id": "akihabara",
@@ -2569,7 +2615,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "high",
+    "streetLuggageStressNote": "Busy electronics streets and weekend pedestrian zones can tighten luggage paths. Check the closest exit for the hotel."
   },
   {
     "id": "kanda",
@@ -2672,7 +2720,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Narrow under-track sidewalks; evening flows are moderate. Confirm the exit and route."
   },
   {
     "id": "asakusabashi",
@@ -2775,7 +2825,9 @@
         "level": "Good",
         "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "low",
+    "streetLuggageStressNote": "Wholesale shop district, calm outside weekdays. Easy luggage walking."
   },
   {
     "id": "bakurocho-higashinihombashi",
@@ -2881,7 +2933,9 @@
         "level": "Good",
         "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "low",
+    "streetLuggageStressNote": "Quiet wholesale streets, easy surface walking with luggage."
   },
   {
     "id": "kinshicho",
@@ -2985,7 +3039,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Wide arterials with a denser North-Exit retail strip. Confirm the route from the hotel."
   },
   {
     "id": "akasaka-mitsuke",
@@ -3090,7 +3146,9 @@
         "level": "Good",
         "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Mixed commercial and nightlife streets, calmer than the busiest hubs. Confirm the closest exit."
   },
   {
     "id": "roppongi",
@@ -3193,7 +3251,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "high",
+    "streetLuggageStressNote": "Busy crossings and some slopes near Roppongi-dori can slow luggage movement. Confirm the walking route in advance."
   },
   {
     "id": "aoyama-omotesando",
@@ -3300,7 +3360,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "high",
+    "streetLuggageStressNote": "Omotesando retail crowds and sloped side streets can slow luggage routes. Confirm the closest exit before booking."
   },
   {
     "id": "ochanomizu",
@@ -3407,7 +3469,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Bridge crossings and a slope toward Surugadai can slow luggage. Confirm the walking route."
   },
   {
     "id": "iidabashi",
@@ -3514,7 +3578,9 @@
         "level": "Weak",
         "note": "Weak luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "medium",
+    "streetLuggageStressNote": "Several busy corner crosswalks and canal-side slopes can slow luggage walks. Confirm the exit."
   },
   {
     "id": "korakuen-kasuga",
@@ -3620,7 +3686,9 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "low",
+    "streetLuggageStressNote": "Calm Bunkyo residential streets with a gentle slope near the dome."
   },
   {
     "id": "toyosu",
@@ -3724,7 +3792,9 @@
         "level": "Good",
         "note": "Good luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "low",
+    "streetLuggageStressNote": "Bay-side planned sidewalks with low pedestrian density. Easy luggage walking."
   },
   {
     "id": "ariake-odaiba",
@@ -3831,6 +3901,8 @@
         "level": "Fair",
         "note": "Fair luggage fit based on station scale, transfers, and likely hotel-side walking."
       }
-    }
+    },
+    "streetLuggageStressLevel": "low",
+    "streetLuggageStressNote": "Very wide bay-side promenades and low density. Easy luggage walking."
   }
 ]

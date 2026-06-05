@@ -60,7 +60,8 @@ import type {
  * Per-sub-score routing (per spec):
  *   - crowdStress       = passenger (full) + transferHub (full) + lineOperator (light)
  *   - stationSimplicity = exit + lineOperator + transferHub + 0.5 * passenger
- *   - luggageFriendly   = 0.5 * exit  (light influence only)
+ *   - luggageFriendly   = 0.5 * exit + stepFree + streetLuggageStress
+ *                        (light influence each; aggregate capped at +/- 10)
  *   - lodgingChoice     = editorial only this pass
  *   - other sub-scores  = editorial only
  *
@@ -312,6 +313,24 @@ function stepFreeContribution(signal: StayAreaSignal | undefined): number {
   return 0;
 }
 
+/**
+ * Editorial street-luggage-stress contribution into luggageFriendly. Captures
+ * post-station surface walking conditions (sidewalks, crossings, nightlife /
+ * commercial density, narrow routes, slopes). Distinct from station / passenger
+ * / transfer stress; routed *only* into the luggageFriendly delta.
+ */
+function streetLuggageStressContribution(
+  level: StayAreaBase["streetLuggageStressLevel"],
+): number {
+  switch (level) {
+    case "low": return 4;
+    case "medium": return 0;
+    case "high": return -4;
+    case "very_high": return -8;
+    default: return 0;
+  }
+}
+
 function deriveUsabilityContribution(
   area: StayAreaBase,
   signal: StayAreaSignal | undefined,
@@ -322,6 +341,7 @@ function deriveUsabilityContribution(
   const lineOp = lineOperatorContribution(area, signal);
   const hub = transferHubContribution(area.transferHubLevel);
   const stepFree = stepFreeContribution(signal);
+  const streetLuggage = streetLuggageStressContribution(area.streetLuggageStressLevel);
   const crowdNetwork = Math.round(lineOp * 0.35);
 
   // Per-sub-score aggregates, each clamped to +/- SUB_SCORE_DELTA_CAP.
@@ -331,9 +351,10 @@ function deriveUsabilityContribution(
     -SUB_SCORE_DELTA_CAP,
     SUB_SCORE_DELTA_CAP,
   );
-  // Light influence from exit complexity + the (positive-only) step-free signal.
+  // Exit complexity + step-free + editorial street-luggage-stress. Each
+  // input is small; the ±10 aggregate cap protects against overshoot.
   const luggageFriendlyDelta = clamp(
-    0.5 * exit + stepFree,
+    0.5 * exit + stepFree + streetLuggage,
     -SUB_SCORE_DELTA_CAP,
     SUB_SCORE_DELTA_CAP,
   );
@@ -344,6 +365,7 @@ function deriveUsabilityContribution(
     lineOperator: lineOp,
     transferHub: hub,
     rawTotal: passenger + exit + lineOp + hub,
+    streetLuggageStress: streetLuggage,
     crowdStressDelta,
     stationSimplicityDelta,
     luggageFriendlyDelta,
