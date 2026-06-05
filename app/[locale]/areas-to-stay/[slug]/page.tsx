@@ -12,12 +12,10 @@ import { AreaCard } from "@/components/content/AreaCard";
 import { ComparisonTable } from "@/components/content/ComparisonTable";
 import { ProTip } from "@/components/content/ProTip";
 import { StayAreaMap } from "@/components/content/StayAreaMap";
-import { HotelPicks } from "@/components/content/HotelPicks";
 import { NextActions } from "@/components/content/NextActions";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
-import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
@@ -26,8 +24,7 @@ import { getAllStaySlugs, getStayBySlug, type StayPage as StayContentPage } from
 import { getAlternates } from "@/i18n/hreflang";
 import { getAffUrl } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
-import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
-import { getHotelProviderLinks, type HotelAffiliatePlacement } from "@/lib/hotel-affiliate-links";
+import type { HotelAreaKey } from "@/lib/hotel-links";
 import { buttonClassName } from "@/components/ui/Button";
 import type { AdPlacement } from "@/lib/ads";
 
@@ -35,40 +32,41 @@ type Props = {
   params: Promise<{ slug: string; locale: string }>;
 };
 
-const stayComparisonHotelPickSlugs = new Set([
-  "asakusa-vs-ueno",
-  "tokyo-station-vs-shinjuku",
-  "ueno-vs-shinjuku",
-  "shinjuku-vs-ueno-vs-asakusa",
-  "kyoto-station-vs-gion",
-  "namba-vs-umeda",
-  "shin-osaka-vs-namba",
-]);
-
 const stayComparisonAdPlacements: Partial<Record<string, AdPlacement>> = {
   "asakusa-vs-ueno": "asakusa_ueno_after_hotel_cta",
   "ueno-vs-shinjuku": "ueno_shinjuku_after_hotel_cta",
 };
 
-const bookingAreaIdByHotelAreaKey: Partial<Record<HotelAreaKey, string>> = {
+const finderAreaIdByHotelAreaKey: Partial<Record<HotelAreaKey, string>> = {
   shinjuku: "shinjuku",
   ueno: "ueno",
   asakusa: "asakusa",
   tokyoStation: "tokyo-station",
+  kyotoStation: "kyoto-station",
+  gionKawaramachi: "gion-higashiyama",
+  namba: "namba",
+  umeda: "umeda",
+  shinOsaka: "shin-osaka",
 };
 
-const comparisonAreaCtas: Partial<Record<string, Array<{ title: string; hotelKey: HotelAreaKey; bookingAreaId: string }>>> = {
+const pilotAreaHotelPages: Partial<Record<string, string>> = {
+  asakusa: "/areas-to-stay/tokyo-hotels/asakusa",
+  ueno: "/areas-to-stay/tokyo-hotels/ueno",
+  "tokyo-station": "/areas-to-stay/tokyo-hotels/tokyo-station",
+};
+
+const comparisonAreaCtas: Partial<Record<string, Array<{ title: string; hotelKey: HotelAreaKey; areaId: string }>>> = {
   "tokyo-station-vs-shinjuku": [
-    { title: "Tokyo Station / Ginza", hotelKey: "tokyoStation", bookingAreaId: "tokyo-station" },
-    { title: "Shinjuku", hotelKey: "shinjuku", bookingAreaId: "shinjuku" },
+    { title: "Tokyo Station / Ginza", hotelKey: "tokyoStation", areaId: "tokyo-station" },
+    { title: "Shinjuku", hotelKey: "shinjuku", areaId: "shinjuku" },
   ],
   "ueno-vs-shinjuku": [
-    { title: "Ueno", hotelKey: "ueno", bookingAreaId: "ueno" },
-    { title: "Shinjuku", hotelKey: "shinjuku", bookingAreaId: "shinjuku" },
+    { title: "Ueno", hotelKey: "ueno", areaId: "ueno" },
+    { title: "Shinjuku", hotelKey: "shinjuku", areaId: "shinjuku" },
   ],
   "asakusa-vs-ueno": [
-    { title: "Asakusa", hotelKey: "asakusa", bookingAreaId: "asakusa" },
-    { title: "Ueno", hotelKey: "ueno", bookingAreaId: "ueno" },
+    { title: "Asakusa", hotelKey: "asakusa", areaId: "asakusa" },
+    { title: "Ueno", hotelKey: "ueno", areaId: "ueno" },
   ],
 };
 
@@ -76,6 +74,8 @@ const filledNextStepClass =
   buttonClassName({ variant: "internal", fullWidth: true, className: "p-4 text-center" });
 const filledCommercialNextStepClass =
   buttonClassName({ variant: "commercial", fullWidth: true, className: "p-4 text-center" });
+const supportTextLinkClass =
+  "inline-flex text-sm font-semibold text-[#106b43] underline underline-offset-4 transition-colors hover:text-[#0f6f45] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200";
 
 type StayPageTranslation = Partial<Pick<StayContentPage, "title" | "description" | "proTip">> & {
   quickRec?: Partial<StayContentPage["quickRec"]>;
@@ -1602,72 +1602,58 @@ function publicImageIfExists(src: string) {
   return fs.existsSync(filePath) ? src : undefined;
 }
 
-function providerChoices(...providers: Array<ProviderChoiceButton | null | undefined>) {
-  return providers.filter((provider): provider is ProviderChoiceButton => Boolean(provider));
+function areaSupportLinkForHotelKey(areaKey?: HotelAreaKey) {
+  if (!areaKey) {
+    return {
+      href: "/areas-to-stay/tokyo-stay-area-index",
+      label: "Open Tokyo Hotel Area Finder",
+      placement: "stay_support_finder_area",
+    };
+  }
+
+  const areaId = finderAreaIdByHotelAreaKey[areaKey];
+  const pilotHref = areaId ? pilotAreaHotelPages[areaId] : undefined;
+  if (pilotHref) {
+    return {
+      href: pilotHref,
+      label: "View hotel search page",
+      placement: "stay_support_area_hotel_page",
+    };
+  }
+
+  return {
+    href: areaId ? `/areas-to-stay/tokyo-stay-area-index?area=${areaId}` : "/areas-to-stay/tokyo-stay-area-index",
+    label: areaId ? "Compare this area in the Finder" : "Open Tokyo Hotel Area Finder",
+    placement: "stay_support_finder_area",
+  };
 }
 
-function bookingProviderChoices({
-  areaId,
-  locale,
-  placement,
-  pageGroup,
-}: {
-  areaId?: string;
-  locale: string;
-  placement: HotelAffiliatePlacement;
-  pageGroup?: string;
-}) {
-  if (!areaId) return [];
-  return getHotelProviderLinks({ areaId, locale, placement, pageGroup }).map((link) => ({
-    label: "Booking.com",
-    href: link.href,
-    trackingHref: link.trackingHref,
-    provider: link.provider,
-    product: "hotel",
-    linkId: link.linkId,
-    placement,
-    variant: "primary",
-    category: "hotel",
-    areaId,
-    subId: link.subId,
-  })) satisfies ProviderChoiceButton[];
-}
-
-function hotelProviderChoices({
+function AreaSupportHotelLink({
   areaKey,
-  placement,
+  sourcePage,
   locale,
-  bookingPlacement,
-  bookingAreaId = bookingAreaIdByHotelAreaKey[areaKey],
-  bookingPageGroup,
+  areaLabel,
+  className = supportTextLinkClass,
 }: {
-  areaKey: HotelAreaKey;
-  placement: ProviderChoiceButton["placement"];
+  areaKey?: HotelAreaKey;
+  sourcePage: string;
   locale: string;
-  bookingPlacement?: HotelAffiliatePlacement;
-  bookingAreaId?: string;
-  bookingPageGroup?: string;
+  areaLabel: string;
+  className?: string;
 }) {
-  const hotel = getHotelLink(areaKey);
-  const config = getTripHotelConfig(areaKey);
-  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
-  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
+  const link = areaSupportLinkForHotelKey(areaKey);
 
-  return providerChoices(
-    ...(bookingPlacement ? bookingProviderChoices({ areaId: bookingAreaId, locale, placement: bookingPlacement, pageGroup: bookingPageGroup }) : []),
-    tripHref
-      ? {
-          label: "Trip.com",
-          href: tripHref,
-          trackingHref: tripTrackingHref,
-          provider: "trip",
-          product: "hotel",
-          linkId: `hotelArea.${areaKey}.trip`,
-          placement,
-          variant: "primary",
-          category: "hotel",
-        }
-      : null,
+  return (
+    <TrackedInternalLink
+      href={link.href}
+      sourcePage={sourcePage}
+      placement={link.placement}
+      label={`${link.label}: ${areaLabel}`}
+      locale={locale}
+      className={className}
+    >
+      {link.label} →
+    </TrackedInternalLink>
   );
 }
 
@@ -1716,12 +1702,10 @@ function ProblemHotelBaseSection({
   areas,
   locale,
   pagePath,
-  placement,
 }: {
   areas: ProblemHotelBaseArea[];
   locale: string;
   pagePath: string;
-  placement: ProviderChoiceButton["placement"];
 }) {
   return (
     <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
@@ -1732,12 +1716,6 @@ function ProblemHotelBaseSection({
       </p>
       <div className="mt-5 grid gap-4 lg:grid-cols-2">
         {areas.map((area) => {
-          const choices = hotelProviderChoices({
-            areaKey: area.hotelKey,
-            placement,
-            locale,
-            bookingPlacement: "before_shinkansen_card",
-          });
           return (
             <article
               key={area.title}
@@ -1776,18 +1754,16 @@ function ProblemHotelBaseSection({
                   <dd className="text-slate-700">{area.logic}</dd>
                 </div>
               </dl>
-              <ProviderChoiceCTA
-                actionLabel={area.primary ? "Compare hotels around Tokyo Station / Ginza" : `Compare hotels in ${area.title}`}
-                providers={choices}
-                pagePath={pagePath}
-                locale={locale}
-                area={area.title}
-                city="Tokyo"
-                maxProviders={3}
-                className="mt-4"
-              />
+              <div className="mt-4">
+                <AreaSupportHotelLink
+                  areaKey={area.hotelKey}
+                  sourcePage={pagePath}
+                  locale={locale}
+                  areaLabel={area.title}
+                />
+              </div>
               <p className="mt-2 text-[11px] leading-5 text-slate-500">
-                Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site.
+                Use the next page to compare broad hotel-search options after checking exact station distance, room size, and luggage route.
               </p>
             </article>
           );
@@ -1799,7 +1775,6 @@ function ProblemHotelBaseSection({
           { href: "/areas-to-stay/tokyo-first-time", label: "Tokyo first-time hotel base guide" },
           { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Tokyo with luggage" },
           { href: "/airport-transfers", label: "Airport transfer by hotel area" },
-          { href: "/local-hotel-picks#hotel-examples-matrix", label: "Local hotel examples" },
         ].map((link) => (
           <TrackedInternalLink
             key={link.href}
@@ -1838,29 +1813,22 @@ function ComparisonAreaHotelCtas({
         Use these broad area searches after comparing the station-area trade-offs. They are not individual hotel rankings.
       </p>
       <div className="mt-5 grid gap-4 lg:grid-cols-2">
-        {areas.map((area) => {
-          const providers = hotelProviderChoices({
-            areaKey: area.hotelKey,
-            placement: "comparison_area_cta",
-            locale,
-            bookingPlacement: "comparison_area_cta",
-            bookingAreaId: area.bookingAreaId,
-            bookingPageGroup: slug,
-          });
-          return (
-            <ProviderChoiceCTA
-              key={`${slug}-${area.bookingAreaId}`}
-              actionLabel={`Compare hotels around ${area.title}`}
-              description="Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site."
-              providers={providers}
-              pagePath={pagePath}
-              locale={locale}
-              area={area.title}
-              city="Tokyo"
-              maxProviders={3}
-            />
-          );
-        })}
+        {areas.map((area) => (
+          <div key={`${slug}-${area.areaId}`} className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
+            <h3 className="text-sm font-semibold text-slate-950">{area.title}</h3>
+            <p className="mt-2 text-xs leading-5 text-slate-600">
+              Continue to the dedicated hotel-search page if it exists, or compare this area in the Finder.
+            </p>
+            <div className="mt-3">
+              <AreaSupportHotelLink
+                areaKey={area.hotelKey}
+                sourcePage={pagePath}
+                locale={locale}
+                areaLabel={area.title}
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -2006,8 +1974,8 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-orange-700">Hotel search shortcut</p>
               <h2 className="mt-1 text-xl font-semibold text-slate-950">Already know your Tokyo base?</h2>
               <p className="mt-2 text-sm leading-6 text-slate-700">
-                Jump to the major area card first. Each card explains the trade-offs before showing Booking.com / Trip.com
-                broad-area search buttons.
+                Jump to the major area card first. Each card explains the trade-offs before sending you to the Finder or an
+                existing area hotel-search page.
               </p>
             </div>
             <div className="grid gap-2 sm:grid-cols-2 lg:min-w-[420px]">
@@ -2074,7 +2042,6 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose a luggage-friendly Tokyo base", placement: "first_time_comparison_click" },
               { href: "/areas-to-stay/where-to-stay-before-shinkansen", label: "Where to stay before Shinkansen", placement: "first_time_comparison_click" },
               { href: "/airport-transfers", label: "Match airport transfer to hotel area", placement: "first_time_comparison_click" },
-              { href: "/local-hotel-picks#hotel-examples-matrix", label: "See local hotel examples", placement: "first_time_local_examples_click" },
             ].map((link) => (
               <TrackedInternalLink
                 key={link.href}
@@ -2108,14 +2075,6 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
 
           <div className="mt-6 grid gap-4 lg:grid-cols-2">
             {matrixGroups.map((group) => {
-              const hotelProviders = group.hotelAreaKey
-                ? hotelProviderChoices({
-                    areaKey: group.hotelAreaKey,
-                    placement: "tokyo_first_time_hotel_base_matrix",
-                    locale,
-                    bookingPlacement: "tokyo_first_time_card",
-                  })
-                : [];
               const cardImage = group.image ? publicImageIfExists(group.image) : undefined;
 
               return (
@@ -2168,19 +2127,18 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                   </dl>
 
                   <div className="mt-auto pt-4">
-                    {hotelProviders.length > 0 && group.hotelActionLabel ? (
-                      <ProviderChoiceCTA
-                        actionLabel={group.hotelActionLabel}
-                        providers={hotelProviders}
-                        pagePath={pagePath}
-                        locale={locale}
-                        area={group.title}
-                        city="Tokyo"
-                        maxProviders={3}
-                      />
-                    ) : null}
-                    {hotelProviders.length > 0 && group.hotelActionLabel ? (
-                      <p className="mt-2 text-[11px] leading-5 text-slate-500">{supplement.matrix.providerDescription}</p>
+                    {group.hotelAreaKey ? (
+                      <div>
+                        <AreaSupportHotelLink
+                          areaKey={group.hotelAreaKey}
+                          sourcePage={pagePath}
+                          locale={locale}
+                          areaLabel={group.title}
+                        />
+                        <p className="mt-2 text-[11px] leading-5 text-slate-500">
+                          Continue to the dedicated hotel-search page if it exists, or compare this area in the Finder.
+                        </p>
+                      </div>
                     ) : null}
 
                     <div className="mt-3 flex flex-wrap gap-2">
@@ -2272,16 +2230,6 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                   className="inline-flex min-h-10 items-center rounded-xl bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
                 >
                   {supplement.priceTiming.matrixCta}
-                </TrackedInternalLink>
-                <TrackedInternalLink
-                  href="/local-hotel-picks#hotel-examples-matrix"
-                  sourcePage={pagePath}
-                  placement="tokyo_first_time_price_timing"
-                  label={supplement.priceTiming.examplesCta}
-                  locale={locale}
-                  className="inline-flex min-h-10 items-center rounded-xl border border-emerald-200 bg-white px-4 py-2 text-sm font-semibold text-[#106b43] transition-colors hover:bg-emerald-50"
-                >
-                  {supplement.priceTiming.examplesCta}
                 </TrackedInternalLink>
               </div>
             </div>
@@ -2376,9 +2324,6 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
             )}
             <TrackedCtaLink href="/airport-transfers" placement="next_steps" label={t("continue.airport")} pagePath={pagePath} locale={locale} category="transfer" className={filledNextStepClass}>
               {t("continue.airport")}
-            </TrackedCtaLink>
-            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label={t("continue.localPicks")} pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
-              {t("continue.localPicks")}
             </TrackedCtaLink>
           </div>
         </section>
@@ -2603,10 +2548,7 @@ async function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeS
             <h2 className="mt-2 text-2xl font-semibold text-slate-950">{t("glance.title")}</h2>
           </div>
           <div className="mt-5 grid gap-5 lg:grid-cols-2">
-            {localizedAreas.map((area) => {
-              const choices = area.hotelKey ? hotelProviderChoices({ areaKey: area.hotelKey, placement: "stay_area_glance_card", locale }) : [];
-
-              return (
+            {localizedAreas.map((area) => (
                 <article key={area.id} id={area.id} className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("city")}</p>
                   <h3 className="mt-2 text-xl font-semibold text-slate-950">{area.name}</h3>
@@ -2624,16 +2566,15 @@ async function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeS
                       <p className="mt-1 leading-5 text-slate-700">{area.transportNote}</p>
                     </div>
                   </div>
-                  {choices.length > 0 && area.actionLabel ? (
-                    <ProviderChoiceCTA
-                      actionLabel={area.actionLabel}
-                      providers={choices}
-                      pagePath={pagePath}
-                      locale={locale}
-                      area={`${config.city}: ${area.name}`}
-                      city={config.city}
-                      className="mt-4"
-                    />
+                  {area.hotelKey ? (
+                    <div className="mt-4">
+                      <AreaSupportHotelLink
+                        areaKey={area.hotelKey}
+                        sourcePage={pagePath}
+                        locale={locale}
+                        areaLabel={`${config.city}: ${area.name}`}
+                      />
+                    </div>
                   ) : null}
                   {area.detailHref && area.detailLabel ? (
                     <Link href={area.detailHref} className="mt-4 inline-flex text-sm font-semibold text-[#106b43] underline underline-offset-4">
@@ -2643,8 +2584,7 @@ async function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeS
                     <p className="mt-4 text-xs font-semibold text-slate-500">{t("labels.detailGuidePlanned")}</p>
                   )}
                 </article>
-              );
-            })}
+            ))}
           </div>
         </section>
 
@@ -2679,9 +2619,6 @@ async function FirstTimeStayDecisionHub({ config, locale }: { config: FirstTimeS
           <div className="mt-4 grid gap-3 md:grid-cols-4">
             <TrackedCtaLink href="/areas-to-stay" placement="next_steps" label={t("continue.areas")} pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
               {t("continue.areas")}
-            </TrackedCtaLink>
-            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label={t("continue.localPicks")} pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
-              {t("continue.localPicks")}
             </TrackedCtaLink>
             <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label={t("continue.plan")} pagePath={pagePath} locale={locale} className={filledNextStepClass}>
               {t("continue.plan")}
@@ -2741,7 +2678,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function StayPage({ params }: Props) {
   const { slug, locale } = await params;
-  const localHotelT = await getTranslations("localHotelPicks");
   const stayPagesT = await getTranslations({ locale, namespace: "stayPages" });
   const stayPagesCommon = stayPagesT.raw("common") as Record<string, string>;
   const pageTranslations = stayPagesT.raw("pages") as Record<string, StayPageTranslation>;
@@ -2846,7 +2782,6 @@ export default async function StayPage({ params }: Props) {
                 areas={shinkansenHotelBaseAreas}
                 locale={locale}
                 pagePath={pagePath}
-                placement="shinkansen_page_area_cta"
               />
               <FujiseatAreaLogic
                 sourcePage={pagePath}
@@ -2878,34 +2813,6 @@ export default async function StayPage({ params }: Props) {
           <ProTip>{page.proTip}</ProTip>
 
           <ComparisonAreaHotelCtas slug={page.slug} locale={locale} pagePath={pagePath} />
-
-          <section>
-            <HotelPicks
-              picks={page.hotelPicks}
-              locale={locale}
-              pagePath={pagePath}
-              placement={stayComparisonHotelPickSlugs.has(page.slug) ? "stay_comparison_hotel_pick" : "hotel_pick"}
-            />
-            <div className="mt-4 rounded-[18px] border border-emerald-100 bg-emerald-50/70 p-4">
-              <p className="text-sm font-semibold text-slate-950">
-                {stayPagesCommon.localHotelBoxTitle}
-              </p>
-              <p className="mt-1 text-xs leading-5 text-slate-600">
-                {stayPagesCommon.localHotelBoxBody}
-              </p>
-              <TrackedCtaLink
-                href="/local-hotel-picks"
-                placement="stay_detail_local_hotel_picks"
-                label={stayPagesCommon.localHotelCtaLabel}
-                pagePath={pagePath}
-                locale={locale}
-                category="hotel"
-                className="mt-3 inline-flex rounded-xl border border-[#168a56] bg-[#168a56] px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
-              >
-                {localHotelT("seeLocalHotelPicks")}
-              </TrackedCtaLink>
-            </div>
-          </section>
 
           {stayComparisonAdPlacement ? (
             <AdSlot placement={stayComparisonAdPlacement} format="horizontal" />
