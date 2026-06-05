@@ -809,42 +809,6 @@ function SelectedAreaHotelSearch({
           ? t("hotelSearch.fallbackNote", { selected: hotel.selectedAreaName, area: hotel.areaName })
           : t("hotelSearch.note")}
       </p>
-      <div className="mt-3 grid gap-2 sm:grid-cols-2">
-        {hotel.providers.map((provider) => (
-          <ProviderButton
-            key={provider.linkId}
-            provider={provider.provider}
-            href={provider.href}
-            trackingHref={provider.trackingHref}
-            placement={provider.placement}
-            pagePath={pagePath}
-            locale={locale}
-            linkId={provider.linkId}
-            product="hotel"
-            area={hotel.areaName}
-            areaId={area.id}
-            city={hotel.city}
-            subId={provider.subId}
-            fullWidth
-            className="min-h-11 rounded-xl text-sm"
-          >
-            {t(`hotelSearch.providers.${provider.provider}`)}
-          </ProviderButton>
-        ))}
-      </div>
-      <div className="mt-2 grid gap-2">
-        <TrackedStayAreaContinueLink
-          href="/local-hotel-picks#hotel-examples-matrix"
-          sourcePage={pagePath}
-          placement="finder_local_examples_click"
-          label={t("hotelSearch.examples")}
-          locale={locale}
-          areaId={area.id}
-          className="inline-flex min-h-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-100"
-        >
-          {t("hotelSearch.examples")}
-        </TrackedStayAreaContinueLink>
-      </div>
     </div>
   );
 }
@@ -1314,7 +1278,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
 
         <section className="mt-10 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
           <h2 className="text-xl font-semibold text-slate-950">{t("continue.title")}</h2>
-          <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-4 grid gap-3 md:grid-cols-3">
             <TrackedStayAreaContinueLink
               href="/areas-to-stay/tokyo-first-time"
               sourcePage={pagePath}
@@ -1347,17 +1311,6 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
               {t("continue.links.airport")}
-            </TrackedStayAreaContinueLink>
-            <TrackedStayAreaContinueLink
-              href="/local-hotel-picks#hotel-examples-matrix"
-              sourcePage={pagePath}
-              placement="tokyo_stay_area_index_continue"
-              label={t("continue.links.examples")}
-              locale={locale}
-              areaId={selected.area.id}
-              className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
-            >
-              {t("continue.links.examples")}
             </TrackedStayAreaContinueLink>
           </div>
         </section>

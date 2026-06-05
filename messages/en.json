@@ -1889,7 +1889,6 @@
       "title": "Where to Stay in Japan",
       "subtitle": "Not sure where to stay in Japan? Start by choosing the right city and hotel area before comparing hotel names. Use Tokyo, Kyoto, Osaka, or Mt. Fuji as your route starting point.",
       "primaryCta": "Find your Tokyo hotel base",
-      "secondaryCta": "See local hotel examples",
       "tagline": "Choose your hotel base before choosing a hotel.",
       "body": "The best station area depends on your airport, luggage, Shinkansen plans, and the kind of trip you want.",
       "imageAlt": "Tokyo hotel base planning"
@@ -1930,29 +1929,6 @@
         "subtitle": "Use this if you want an overnight Mt. Fuji base instead of only seeing Fuji from the Shinkansen.",
         "cta": "Choose Fuji overnight base",
         "placementLabel": "Kawaguchiko city card"
-      }
-    },
-    "localPicks": {
-      "eyebrow": "Hotel examples",
-      "title": "Need hotel examples after choosing the area?",
-      "body": "See practical hotel examples for Tokyo, Kyoto, and Osaka. These are not rankings — use them only after the city and station-area decision.",
-      "cta": "See local hotel examples",
-      "previewTitle": "Local hotel examples",
-      "previewBody": "These are not rankings. Use them as examples of what each area feels like before checking live prices.",
-      "exampleImageAlt": "{title} hotel base example",
-      "examples": {
-        "oshiage": {
-          "title": "Oshiage / Skytree",
-          "body": "Useful for Narita-side access, Asakusa and Skytree plans, and calmer nights than major hubs."
-        },
-        "kiyosumi": {
-          "title": "Kiyosumi-Shirakawa",
-          "body": "A quieter east Tokyo base for cafes, museums, and travelers who do not need nightlife outside the hotel."
-        },
-        "ryogoku": {
-          "title": "Ryogoku",
-          "body": "Good for a local-feeling stay around sumo, museums, and simple east-side sightseeing."
-        }
       }
     },
     "problemSection": {
@@ -2327,8 +2303,7 @@
         "Choose Tokyo Station if you have an early Shinkansen.",
         "Choose East Tokyo if you want a calmer local base."
       ],
-      "cta": "Compare hotels in Shinjuku",
-      "secondaryCta": "See local hotel examples"
+      "cta": "Compare hotels in Shinjuku"
     },
     "travelPlan": {
       "title": "Choose by Your Travel Plan",
@@ -3933,8 +3908,7 @@
       "disclaimer": "Scores are editorial travel-fit scores informed by public data signals where available. They are not official ratings, hotel rankings, or guarantees of price, comfort, availability, or route conditions.",
       "freshness": "Passenger-data-informed local refresh · Last source check: {date}",
       "cta": "Start",
-      "startCta": "Start Tokyo hotel base finder",
-      "localExamplesCta": "Prefer examples? See local hotel examples"
+      "startCta": "Start Tokyo hotel base finder"
     },
     "situations": {
       "eyebrow": "Start by travel situation",
@@ -4052,13 +4026,7 @@
       "headingNear": "Compare hotels near {area}",
       "headingAround": "Compare hotels around {area}",
       "note": "Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site.",
-      "fallbackNote": "Broad area search only. No dedicated {selected} hotel URL is set yet, so this opens the nearest existing broad search area: {area}. Check exact station distance, room size, bed setup, and latest price on the provider site.",
-      "providers": {
-        "trip": "Trip.com",
-        "booking_travelpayouts": "Booking.com",
-        "klook": "Klook"
-      },
-      "examples": "See local hotel examples"
+      "fallbackNote": "Broad area search only. No dedicated {selected} hotel URL is set yet, so this opens the nearest existing broad search area: {area}. Check exact station distance, room size, bed setup, and latest price on the provider site."
     },
     "stationRouteNote": {
       "title": "Station & hotel-route note",
@@ -4225,9 +4193,7 @@
       "links": {
         "firstTime": "Where to stay in Tokyo",
         "airport": "Match airport transfer",
-        "shinkansen": "Shinkansen hotel base",
-        "luggage": "Luggage-friendly Tokyo base",
-        "examples": "See local hotel examples"
+        "shinkansen": "Shinkansen hotel base"
       }
     },
     "accessBadges": {
@@ -4341,13 +4307,7 @@
       "topBody": "These matches use the same 36-area data and existing fujiseat scores, then re-rank them by your answers.",
       "whyFits": "Why it fits you",
       "bestFor": "Best for",
-      "hotelsIntro": "Check hotels in this area",
-      "hotelSearchNote": "Broad area search. Check exact station distance, room size, bed setup, and latest price before booking.",
-      "recommendedNextAction": "Recommended next action",
-      "localExamplesCta": "Prefer examples? See local hotel examples",
-      "hotelsButton": "Hotels",
       "detailsButton": "Details",
-      "noHotelLinks": "No approved hotel search link is set for this area yet.",
       "showMore": "Show more matches",
       "compareAll": "Compare all areas",
       "moreTitle": "More matches",
@@ -4528,10 +4488,6 @@
         "airportAccess": "Airport access",
         "shinkansenAccess": "Shinkansen access",
         "hotelChoice": "Hotel choice"
-      },
-      "providerLabels": {
-        "booking_travelpayouts": "Booking.com",
-        "trip": "Trip.com"
       },
       "rankLabels": {
         "topPick": "Top pick",

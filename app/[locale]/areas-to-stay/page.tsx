@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import fs from "node:fs";
 import path from "node:path";
-import { ArrowRight, Bed, Building2, Landmark, MapPin, Mountain, Search, Utensils } from "lucide-react";
+import { ArrowRight, Bed, Building2, Landmark, Mountain, Search, Utensils } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { buttonClassName } from "@/components/ui/Button";
 import { SiteHeader } from "../components/SiteHeader";
@@ -103,24 +103,6 @@ const guideGroups = [
 const quickAnswerKeys = ["firstTime", "narita", "shinkansen", "quiet"] as const;
 
 const finderFactorKeys = ["luggage", "airport", "shinkansen", "plans", "quiet"] as const;
-
-const localExampleCards = [
-  {
-    key: "oshiage",
-    href: "/areas-to-stay/tokyo-stay-area-index?area=oshiage#selected-area",
-    imageCandidates: ["/images/stay/tokyo/stay-east-tokyo.png", "/images/home/local-tokyo-ideas.png"],
-  },
-  {
-    key: "kiyosumi",
-    href: "/areas-to-stay/tokyo-stay-area-index?area=kiyosumi-shirakawa#selected-area",
-    imageCandidates: ["/images/stay/tokyo/stay-kiyosumi-shirakawa.png", "/images/home/local-tokyo-ideas.png"],
-  },
-  {
-    key: "ryogoku",
-    href: "/areas-to-stay/tokyo-stay-area-index?area=ryogoku#selected-area",
-    imageCandidates: ["/design-home-assets/quiet-ryogoku.jpg", "/images/stay/tokyo/stay-asakusa.png"],
-  },
-] as const;
 
 const guideGroupChrome = {
   tokyo: { icon: Building2, className: "border-sky-100 bg-sky-50/60 text-sky-800" },
@@ -284,17 +266,6 @@ export default async function AreasToStayIndex({ params }: Props) {
                 {t("hero.primaryCta")}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </TrackedInternalLink>
-              <TrackedInternalLink
-                href="/local-hotel-picks"
-                sourcePage={pagePath}
-                placement="stay_hub_hero_local_examples"
-                label={t("hero.secondaryCta")}
-                locale={locale}
-                className={buttonClassName({ variant: "internal", size: "lg", className: "sm:min-w-56" })}
-              >
-                {t("hero.secondaryCta")}
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </TrackedInternalLink>
               </div>
             </div>
             <div className="relative flex min-h-80 items-end overflow-hidden bg-[linear-gradient(135deg,#eff6ff,#f8fafc_52%,#ecfdf5)] p-6 md:p-8">
@@ -391,64 +362,6 @@ export default async function AreasToStayIndex({ params }: Props) {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        <section className="mt-10 rounded-[26px] border border-slate-200 bg-white p-5 shadow-sm md:p-6">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">{t("localPicks.eyebrow")}</p>
-              <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("localPicks.previewTitle")}</h2>
-              <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">
-                {t("localPicks.previewBody")}
-              </p>
-            </div>
-            <TrackedInternalLink
-              href="/local-hotel-picks"
-              sourcePage={pagePath}
-              placement="stay_hub_local_picks"
-              label={t("localPicks.cta")}
-              locale={locale}
-              className={buttonClassName({ variant: "internal", size: "md", className: "shrink-0" })}
-            >
-              {t("localPicks.cta")}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </TrackedInternalLink>
-          </div>
-          <div className="mt-5 grid gap-3 md:grid-cols-3">
-            {localExampleCards.map((item) => {
-              const title = t(`localPicks.examples.${item.key}.title`);
-              const image = publicImageIfExists(item.imageCandidates);
-              return (
-              <TrackedInternalLink
-                key={item.key}
-                href={item.href}
-                sourcePage={pagePath}
-                placement="stay_hub_local_example_preview"
-                label={title}
-                locale={locale}
-                className="group overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 text-left transition-colors hover:border-[#9fd7bd] hover:bg-[#f7fffb]"
-              >
-                {image ? (
-                  <div className="relative h-32 bg-slate-100">
-                    <Image
-                      src={image}
-                      alt={t("localPicks.exampleImageAlt", { title })}
-                      fill
-                      sizes="(min-width: 768px) 30vw, 100vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.02),rgba(15,23,42,0.18))]" aria-hidden="true" />
-                  </div>
-                ) : null}
-                <div className="p-4">
-                  <MapPin className="h-5 w-5 text-[#106b43]" aria-hidden="true" />
-                  <h3 className="mt-3 text-base font-semibold text-slate-950">{title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">{t(`localPicks.examples.${item.key}.body`)}</p>
-                </div>
-              </TrackedInternalLink>
-              );
-            })}
           </div>
         </section>
 

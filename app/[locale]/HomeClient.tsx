@@ -45,7 +45,6 @@ const homeHotelCopyByLocale: Record<
     body: string;
     links: Array<{ href: string; label: string }>;
     imageNote: string;
-    matrixCta: string;
   }
 > = {
   en: {
@@ -56,95 +55,70 @@ const homeHotelCopyByLocale: Record<
       { href: "/areas-to-stay/tokyo-stay-area-index", label: "Compare Tokyo station areas" },
     ],
     imageNote: "Use fujiseat to choose the broad hotel area first, then check current prices, room size, bed setup, and station distance on booking sites.",
-    matrixCta: "Find your Tokyo hotel base",
   },
   "pt-BR": {
     title: "Escolha onde ficar antes de comparar hotéis",
     body: "Comece pela sua base em Tóquio, não pelos nomes dos hotéis. A melhor área depende de aeroporto, bagagem, dias de Shinkansen, estações grandes e noites agitadas ou mais calmas.",
     links: [
-      { href: "/areas-to-stay/asakusa-vs-ueno", label: "Comparar Asakusa e Ueno" },
-      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Comparar Tokyo Station e Shinjuku" },
-      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Escolher área em Tóquio com bagagem" },
+      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Comparar áreas de Tóquio" },
     ],
     imageNote: "Compare estações famosas, bases próximas mais calmas e áreas práticas antes de buscar hotéis.",
-    matrixCta: "Encontrar a melhor área de Tóquio",
   },
   es: {
     title: "Elige dónde alojarte antes de comparar hoteles",
     body: "Empieza por tu base en Tokio, no por nombres de hoteles. La mejor zona depende del aeropuerto, equipaje, días de Shinkansen, estaciones grandes y noches animadas o tranquilas.",
     links: [
-      { href: "/areas-to-stay/asakusa-vs-ueno", label: "Comparar Asakusa y Ueno" },
-      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Comparar Tokyo Station y Shinjuku" },
-      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Elegir zona en Tokio con equipaje" },
+      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Comparar zonas de Tokio" },
     ],
     imageNote: "Compara estaciones famosas, bases cercanas más tranquilas y zonas logísticas antes de buscar hoteles.",
-    matrixCta: "Encontrar la mejor zona de Tokio",
   },
   ko: {
     title: "호텔을 비교하기 전에 묵을 지역부터 고르기",
     body: "호텔 이름보다 도쿄 거점부터 정하세요. 좋은 지역은 공항 접근, 짐, 신칸센 일정, 큰 역의 복잡도, 활기찬 밤 또는 조용한 밤에 따라 달라집니다.",
     links: [
-      { href: "/areas-to-stay/asakusa-vs-ueno", label: "아사쿠사와 우에노 비교" },
-      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "도쿄역과 신주쿠 비교" },
-      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "짐이 있을 때 도쿄 호텔 지역 선택" },
+      { href: "/areas-to-stay/tokyo-stay-area-index", label: "도쿄 숙소 지역 비교하기" },
     ],
     imageNote: "호텔을 찾기 전에 유명 역, 더 차분한 인근 거점, 이동에 편한 지역을 비교하세요.",
-    matrixCta: "도쿄에서 묵기 좋은 지역 찾기",
   },
   "zh-TW": {
     title: "比較飯店前，先選住宿區域",
     body: "先從東京住宿基地開始，不要先看飯店名稱。適合的區域取決於機場交通、行李、新幹線日程、車站複雜度，以及你想要熱鬧或安靜的夜晚。",
     links: [
-      { href: "/areas-to-stay/asakusa-vs-ueno", label: "比較淺草與上野" },
-      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "比較東京站與新宿" },
-      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "選擇適合行李的東京飯店區域" },
+      { href: "/areas-to-stay/tokyo-stay-area-index", label: "比較東京住宿區域" },
     ],
     imageNote: "搜尋飯店前，先比較知名車站、較安靜的附近基地與動線友善區域。",
-    matrixCta: "找出適合住宿的東京區域",
   },
   "zh-CN": {
     title: "比较酒店前，先选择住宿区域",
     body: "先从东京住宿基地开始，不要先看酒店名称。适合的区域取决于机场交通、行李、新干线日程、车站复杂度，以及你想要热闹或安静的夜晚。",
     links: [
-      { href: "/areas-to-stay/asakusa-vs-ueno", label: "比较浅草与上野" },
-      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "比较东京站与新宿" },
-      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "选择适合行李的东京酒店区域" },
+      { href: "/areas-to-stay/tokyo-stay-area-index", label: "比较东京住宿区域" },
     ],
     imageNote: "搜索酒店前，先比较知名车站、较安静的附近基地和动线友好区域。",
-    matrixCta: "找出适合住宿的东京区域",
   },
   fr: {
     title: "Choisissez où dormir avant de comparer les hôtels",
     body: "Commencez par votre base à Tokyo, pas par les noms d'hôtels. Le bon quartier dépend de l'aéroport, des bagages, du Shinkansen, des grandes gares et de nuits animées ou plus calmes.",
     links: [
-      { href: "/areas-to-stay/asakusa-vs-ueno", label: "Comparer Asakusa et Ueno" },
-      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Comparer Tokyo Station et Shinjuku" },
-      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choisir un quartier à Tokyo avec bagages" },
+      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Comparer les quartiers de Tokyo" },
     ],
     imageNote: "Comparez gares connues, bases plus calmes et quartiers pratiques avant de chercher des hôtels.",
-    matrixCta: "Trouver le meilleur quartier de Tokyo",
   },
   de: {
     title: "Erst die Hotelgegend wählen, dann Hotels vergleichen",
     body: "Beginne mit deiner Tokio-Basis, nicht mit Hotelnamen. Die beste Gegend hängt von Flughafen, Gepäck, Shinkansen-Tagen, großen Bahnhöfen und lebhaften oder ruhigeren Nächten ab.",
     links: [
-      { href: "/areas-to-stay/asakusa-vs-ueno", label: "Asakusa und Ueno vergleichen" },
-      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Tokyo Station und Shinjuku vergleichen" },
-      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Tokio-Hotelgegend mit Gepäck wählen" },
+      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Tokio-Hotelgegenden vergleichen" },
     ],
     imageNote: "Vergleiche bekannte Bahnhöfe, ruhigere nahe Basen und logistische Gegenden, bevor du Hotels suchst.",
-    matrixCta: "Beste Tokio-Gegend finden",
   },
   ru: {
     title: "Сначала выберите район, потом сравнивайте отели",
     body: "Начните с базы в Токио, а не с названий отелей. Подходящий район зависит от аэропорта, багажа, синкансэна, сложности станций и того, нужны ли вам оживленные или спокойные ночи.",
     links: [
-      { href: "/areas-to-stay/asakusa-vs-ueno", label: "Сравнить Асакуса и Уэно" },
-      { href: "/areas-to-stay/tokyo-station-vs-shinjuku", label: "Сравнить Tokyo Station и Синдзюку" },
-      { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Выбрать район Токио с багажом" },
+      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Сравнить районы Токио" },
     ],
     imageNote: "Сравните известные станции, более спокойные соседние базы и удобные районы до поиска отелей.",
-    matrixCta: "Найти лучший район Токио",
   },
 };
 

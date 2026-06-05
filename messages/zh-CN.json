@@ -1889,7 +1889,6 @@
       "title": "日本住哪里",
       "subtitle": "预订酒店前先选好城市和区域。根据路线、机场、新干线计划和旅行风格，从东京、京都、大阪或富士山开始。",
       "primaryCta": "寻找东京酒店住宿区域",
-      "secondaryCta": "查看本地酒店示例",
       "tagline": "先选酒店住宿区域，再选具体酒店。",
       "body": "最合适的车站区域取决于你的机场、行李、新干线计划和旅行风格。",
       "imageAlt": "东京酒店住宿区域规划"
@@ -1930,29 +1929,6 @@
         "subtitle": "如果你想在富士山附近住一晚，而不只是从新干线上看一眼。",
         "cta": "查找富士山景住宿",
         "placementLabel": "河口湖城市卡片"
-      }
-    },
-    "localPicks": {
-      "eyebrow": "酒店示例",
-      "title": "需要实际酒店示例？",
-      "body": "查看东京、京都和大阪的实用酒店示例。这不是排名，而是按区域逻辑给出的起点。",
-      "cta": "查看本地酒店",
-      "previewTitle": "本地酒店示例",
-      "previewBody": "这些不是排名。请把它们当作了解各区域氛围的例子，再去查看实时价格。",
-      "exampleImageAlt": "{title} 酒店住宿区域示例",
-      "examples": {
-        "oshiage": {
-          "title": "押上 / 晴空塔",
-          "body": "适合成田方向交通、浅草和晴空塔行程，也比大型枢纽夜晚更安静。"
-        },
-        "kiyosumi": {
-          "title": "清澄白河",
-          "body": "东京东侧较安静的住宿区域，适合咖啡馆、博物馆，以及不需要酒店旁边有夜生活的旅客。"
-        },
-        "ryogoku": {
-          "title": "两国",
-          "body": "适合想体验相扑、博物馆和东京东侧轻松观光的本地感住宿区域。"
-        }
       }
     },
     "problemSection": {
@@ -2327,8 +2303,7 @@
         "有早班新干线，选择东京站。",
         "想要更安静的本地基地，选择东京东部。"
       ],
-      "cta": "比较新宿酒店",
-      "secondaryCta": "查看本地酒店示例"
+      "cta": "比较新宿酒店"
     },
     "travelPlan": {
       "title": "按旅行计划选择",
@@ -3933,8 +3908,7 @@
       "disclaimer": "分数是编辑型旅行适合度分数，在可用时参考公开数据信号。它们不是官方评分、酒店排名，也不保证价格、舒适度、空房或路线状况。",
       "freshness": "参考乘客数据的本地更新 · 最后来源检查：{date}",
       "cta": "开始",
-      "startCta": "Start Tokyo hotel base finder",
-      "localExamplesCta": "Prefer examples? See local hotel examples"
+      "startCta": "Start Tokyo hotel base finder"
     },
     "situations": {
       "eyebrow": "从旅行情况开始",
@@ -4052,13 +4026,7 @@
       "headingNear": "比较 {area} 附近酒店",
       "headingAround": "比较 {area} 酒店",
       "note": "仅为大区域搜索。请在预订网站确认准确车站距离、房间大小、床型和最新价格。",
-      "fallbackNote": "仅为大区域搜索。尚未设置 {selected} 专用链接，因此打开最近的大区域：{area}。请在预订网站确认准确车站距离、房间大小、床型和最新价格。",
-      "providers": {
-        "trip": "Trip.com",
-        "booking_travelpayouts": "Booking.com",
-        "klook": "Klook"
-      },
-      "examples": "查看本地酒店示例"
+      "fallbackNote": "仅为大区域搜索。尚未设置 {selected} 专用链接，因此打开最近的大区域：{area}。请在预订网站确认准确车站距离、房间大小、床型和最新价格。"
     },
     "stationRouteNote": {
       "title": "车站与酒店路线提示",
@@ -4225,9 +4193,7 @@
       "links": {
         "firstTime": "东京住哪里",
         "airport": "匹配机场交通",
-        "shinkansen": "新干线前住宿区域",
-        "luggage": "适合行李的东京区域",
-        "examples": "查看本地酒店示例"
+        "shinkansen": "新干线前住宿区域"
       }
     },
     "accessBadges": {
@@ -4341,13 +4307,7 @@
       "topBody": "这些结果使用同一组 36 个区域数据和既有 fujiseat 分数，再按你的回答重新排序。",
       "whyFits": "为什么适合你",
       "bestFor": "适合",
-      "hotelsIntro": "查看此区域酒店",
-      "hotelSearchNote": "Broad area search. Check exact station distance, room size, bed setup, and latest price before booking.",
-      "recommendedNextAction": "Recommended next action",
-      "localExamplesCta": "Prefer examples? See local hotel examples",
-      "hotelsButton": "酒店",
       "detailsButton": "详情",
-      "noHotelLinks": "此区域尚未设置已批准的酒店搜索链接。",
       "showMore": "显示更多候选",
       "compareAll": "比较所有区域",
       "moreTitle": "更多候选",
@@ -4528,10 +4488,6 @@
         "airportAccess": "机场交通",
         "shinkansenAccess": "Shinkansen 交通",
         "hotelChoice": "酒店选择"
-      },
-      "providerLabels": {
-        "booking_travelpayouts": "Booking.com",
-        "trip": "Trip.com"
       },
       "rankLabels": {
         "topPick": "首选",

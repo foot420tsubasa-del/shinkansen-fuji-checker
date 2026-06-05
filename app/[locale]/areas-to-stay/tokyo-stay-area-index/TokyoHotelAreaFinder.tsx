@@ -2,8 +2,7 @@
 
 import { forwardRef, useMemo, useRef, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
-import { Link } from "@/i18n/navigation";
-import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
+import type { ProviderId } from "@/components/ui/ProviderButton";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import {
   trackCtaClick,
@@ -99,14 +98,8 @@ type FinderCopy = {
   topBody: string;
   whyFits: string;
   bestFor: string;
-  hotelsIntro: string;
-  hotelSearchNote: string;
-  recommendedNextAction: string;
-  localExamplesCta: string;
-  hotelsButton: string;
   detailsButton: string;
   viewHotelPageLabel: string;
-  noHotelLinks: string;
   showMore: string;
   compareAll: string;
   moreTitle: string;
@@ -131,10 +124,6 @@ type FinderCopy = {
     airportAccess: string;
     shinkansenAccess: string;
     hotelChoice: string;
-  };
-  providerLabels: {
-    booking_travelpayouts: string;
-    trip: string;
   };
   rankLabels: {
     topPick: string;
@@ -286,7 +275,6 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
   const ranked = useMemo(() => rankAreas(areas, answers), [areas, answers]);
   const topThree = ranked.slice(0, 3);
   const moreMatches = ranked.slice(3, 10);
-  const selectedRank = selectedAreaId ? ranked.findIndex((area) => area.id === selectedAreaId) + 1 : 0;
   const selectedArea = selectedAreaId ? ranked.find((area) => area.id === selectedAreaId) ?? null : null;
 
   const start = () => {
@@ -381,22 +369,6 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
           >
             {copy.startLabel}
           </button>
-          <Link
-            href="/local-hotel-picks#hotel-examples-matrix"
-            onClick={() =>
-              trackCtaClick({
-                placement: "finder_local_examples_click",
-                href: "/local-hotel-picks#hotel-examples-matrix",
-                label: copy.localExamplesCta,
-                category: "hotel",
-                page_path: pagePath,
-                locale,
-              })
-            }
-            className="mt-3 inline-flex w-full items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50 sm:ml-2 sm:mt-5 sm:w-auto"
-          >
-            {copy.localExamplesCta}
-          </Link>
         </div>
       ) : (
         <div className="mt-5 rounded-[24px] border border-emerald-100 bg-white p-4 shadow-sm md:p-5">
@@ -489,7 +461,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
           </div>
           <div className="mt-4 grid gap-4 lg:grid-cols-3">
             {topThree.map((area, index) => (
-              <ResultCard key={area.id} area={area} rank={index + 1} copy={copy} locale={locale} pagePath={pagePath} onOpenDetails={openAreaDetails} />
+              <ResultCard key={area.id} area={area} rank={index + 1} copy={copy} locale={locale} onOpenDetails={openAreaDetails} />
             ))}
           </div>
 
@@ -497,10 +469,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
             <FinderSelectedAreaPanel
               ref={selectedDetailRef}
               area={selectedArea}
-              rank={selectedRank}
               copy={copy}
-              locale={locale}
-              pagePath={pagePath}
             />
           ) : null}
 
@@ -576,14 +545,12 @@ function ResultCard({
   rank,
   copy,
   locale,
-  pagePath,
   onOpenDetails,
 }: {
   area: FinderArea & { matchScore: number };
   rank: number;
   copy: FinderCopy;
   locale: string;
-  pagePath: string;
   onOpenDetails: (area: FinderArea & { matchScore: number }, rank: number) => void;
 }) {
   const matchLabel = matchLabelForRank(rank, copy);
@@ -624,7 +591,6 @@ function ResultCard({
           <p className="text-xs font-semibold text-slate-950">{copy.watchOut}</p>
           <p className="mt-1 text-xs leading-5 text-slate-700">{area.watchOut.slice(0, 2).join(" · ")}</p>
         </div>
-        <HotelButtons area={area} rank={rank} copy={copy} locale={locale} pagePath={pagePath} />
         {PILOT_HOTEL_PAGE_IDS.has(area.id) ? (
           <TrackedInternalLink
             href={`/areas-to-stay/tokyo-hotels/${area.id}`}
@@ -652,69 +618,13 @@ function ResultCard({
   );
 }
 
-function HotelButtons({
-  area,
-  rank,
-  copy,
-  locale,
-  pagePath,
-  hotel,
-}: {
-  area: FinderArea;
-  rank: number;
-  copy: FinderCopy;
-  locale: string;
-  pagePath: string;
-  hotel?: FinderArea["hotel"];
-}) {
-  const activeHotel = hotel ?? area.hotel;
-  if (!activeHotel?.providers.length) {
-    return <p className="mt-4 text-xs leading-5 text-slate-500">{copy.noHotelLinks}</p>;
-  }
-
-  return (
-    <div className="mt-4">
-      <p className="text-xs font-semibold text-slate-950">{copy.recommendedNextAction}</p>
-      <p className="mt-1 text-sm font-semibold text-slate-950">{copy.hotelsIntro}</p>
-      <div className="mt-2 grid gap-2 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-        {activeHotel.providers.map((provider) => (
-          <ProviderButton
-            key={provider.linkId}
-            provider={provider.provider}
-            href={provider.href}
-            trackingHref={provider.trackingHref}
-            placement={provider.placement}
-            pagePath={pagePath}
-            locale={locale}
-            linkId={provider.linkId}
-            product="hotel"
-            area={activeHotel.areaName}
-            areaId={area.id}
-            city={activeHotel.city}
-            subId={provider.subId}
-            rank={rank}
-            fullWidth
-            className="min-h-10 rounded-xl text-xs"
-          >
-            {copy.providerLabels[provider.provider as keyof typeof copy.providerLabels] ?? provider.provider}
-          </ProviderButton>
-        ))}
-      </div>
-      <p className="mt-2 text-[11px] leading-4 text-slate-500">{copy.hotelSearchNote}</p>
-    </div>
-  );
-}
-
 const FinderSelectedAreaPanel = forwardRef<
   HTMLDivElement,
   {
     area: FinderArea & { matchScore: number };
-    rank: number;
     copy: FinderCopy;
-    locale: string;
-    pagePath: string;
   }
->(function FinderSelectedAreaPanel({ area, rank, copy, locale, pagePath }, ref) {
+>(function FinderSelectedAreaPanel({ area, copy }, ref) {
   return (
     <div
       ref={ref}
@@ -770,8 +680,6 @@ const FinderSelectedAreaPanel = forwardRef<
           <p className="mt-2 text-sm leading-6 text-slate-700">{area.stationRouteNote}</p>
         </div>
       ) : null}
-
-      <HotelButtons area={area} rank={rank} copy={copy} locale={locale} pagePath={pagePath} hotel={area.detailHotel ?? area.hotel} />
     </div>
   );
 });
