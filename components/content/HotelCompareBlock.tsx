@@ -4,10 +4,10 @@ import type { ReactNode } from "react";
 import { ProviderButton } from "@/components/ui/ProviderButton";
 import type { AffiliateClickParams } from "@/lib/analytics";
 
-// "Compare hotels in [Area]" block with balanced Trip.com / Agoda buttons.
+// "Compare hotels in [Area]" block with a mapped Trip.com button.
 //
-// Graceful fallback: if only one provider URL is supplied, the block renders
-// a single full-width provider button. We do NOT invent missing URLs.
+// Graceful fallback: if no provider URL is supplied, the block renders nothing.
+// We do NOT invent missing URLs.
 //
 // All user-facing strings are passed in as props so callers can localize
 // them with next-intl. This component does not call useTranslations itself,
@@ -16,8 +16,7 @@ import type { AffiliateClickParams } from "@/lib/analytics";
 
 export type HotelCompareBlockProps = {
   /**
-   * Translated section title used when both Trip.com and Agoda URLs are
-   * present, e.g. "Compare hotels in Shinjuku".
+   * Translated section title, e.g. "Compare hotels in Shinjuku".
    */
   title: ReactNode;
   /**
@@ -30,17 +29,12 @@ export type HotelCompareBlockProps = {
   note?: ReactNode;
   /** Translated Trip.com button label, e.g. "Compare on Trip.com". */
   tripLabel: ReactNode;
-  /** Translated Agoda button label, e.g. "Compare on Agoda". */
-  agodaLabel: ReactNode;
 
   /** Trip.com URL. Pass empty string / undefined if not mapped yet. */
   tripHref?: string;
-  /** Agoda URL. Pass empty string / undefined if not mapped yet. */
-  agodaHref?: string;
 
   /** Tracking URL overrides (for server-redirect routes). */
   tripTrackingHref?: string;
-  agodaTrackingHref?: string;
 
   /** Analytics context. */
   placement: AffiliateClickParams["placement"];
@@ -61,11 +55,8 @@ export function HotelCompareBlock({
   singleProviderTitle,
   note,
   tripLabel,
-  agodaLabel,
   tripHref,
-  agodaHref,
   tripTrackingHref,
-  agodaTrackingHref,
   placement,
   pagePath,
   locale,
@@ -74,14 +65,10 @@ export function HotelCompareBlock({
   className = "",
 }: HotelCompareBlockProps) {
   const showTrip = hasHref(tripHref);
-  const showAgoda = false;
 
-  if (!showTrip && !showAgoda) return null;
+  if (!showTrip) return null;
 
-  // Two-up grid on desktop when both providers are present; stack on mobile.
-  // When only one provider is present, the single button spans the row.
-  const bothPresent = showTrip && showAgoda;
-  const resolvedTitle = bothPresent ? title : singleProviderTitle ?? title;
+  const resolvedTitle = singleProviderTitle ?? title;
 
   return (
     <section
@@ -94,37 +81,20 @@ export function HotelCompareBlock({
       <div
         className={[
           "mt-3 grid gap-2",
-          bothPresent ? "sm:grid-cols-2" : "",
         ].join(" ")}
       >
-        {showTrip ? (
-          <ProviderButton
-            provider="trip"
-            href={tripHref as string}
-            trackingHref={tripTrackingHref}
-            placement={placement}
-            pagePath={pagePath}
-            locale={locale}
-            area={area}
-            city={city}
-          >
-            {tripLabel}
-          </ProviderButton>
-        ) : null}
-        {showAgoda ? (
-          <ProviderButton
-            provider="agoda"
-            href={agodaHref as string}
-            trackingHref={agodaTrackingHref}
-            placement={placement}
-            pagePath={pagePath}
-            locale={locale}
-            area={area}
-            city={city}
-          >
-            {agodaLabel}
-          </ProviderButton>
-        ) : null}
+        <ProviderButton
+          provider="trip"
+          href={tripHref as string}
+          trackingHref={tripTrackingHref}
+          placement={placement}
+          pagePath={pagePath}
+          locale={locale}
+          area={area}
+          city={city}
+        >
+          {tripLabel}
+        </ProviderButton>
       </div>
       {note ? (
         <p className="mt-3 text-[11px] leading-5 text-slate-500">{note}</p>

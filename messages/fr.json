@@ -1114,7 +1114,7 @@
         },
         {
           "title": "Hôtels de l’Est de Tokyo",
-          "description": "Liens Klook et Agoda à venir.",
+          "description": "Klook links coming soon.",
           "href": "/local-tokyo"
         }
       ],
@@ -1591,8 +1591,7 @@
   },
   "localHotelPicks": {
     "checkOnTrip": "Voir sur Trip.com",
-    "checkOnAgoda": "Voir sur Agoda",
-    "comingSoon": "Lien Agoda bientôt disponible",
+    "comingSoon": "Hotel link coming soon",
     "seeLocalHotelPicks": "Voir les hôtels sélectionnés par un local japonais",
     "bestFor": "Idéal pour",
     "whyThisLocalPick": "Pourquoi ce choix local",
@@ -1868,7 +1867,6 @@
       "title": "Comparer les hôtels à {areaName}",
       "singleTitle": "Voir les hôtels à {areaName}",
       "tripLabel": "Comparer sur Trip.com",
-      "agodaLabel": "Comparer sur Agoda",
       "note": "Les tarifs et la disponibilité peuvent varier selon la date."
     },
     "index": {
@@ -3922,11 +3920,6 @@
       "ogTitle": "Tokyo Hotel Area Finder",
       "ogDescription": "Comparez les zones de gares de Tokyo avant de réserver un hôtel avec la logique fujiseat."
     },
-    "breadcrumb": {
-      "home": "Accueil",
-      "parent": "Où dormir",
-      "current": "Tokyo Hotel Area Finder"
-    },
     "hero": {
       "eyebrow": "Tokyo hotel area finder",
       "title": "Find where to stay in Tokyo",
@@ -4062,7 +4055,6 @@
       "fallbackNote": "Recherche par grande zone uniquement. Aucune URL dédiée à {selected} n'est encore définie, donc ce lien ouvre la grande zone la plus proche : {area}. Vérifiez la distance exacte, la taille de chambre, les lits et le prix actuel chez le fournisseur.",
       "providers": {
         "trip": "Trip.com",
-        "agoda": "Agoda",
         "booking_travelpayouts": "Booking.com",
         "klook": "Klook"
       },
@@ -4540,8 +4532,7 @@
       },
       "providerLabels": {
         "booking_travelpayouts": "Booking.com",
-        "trip": "Trip.com",
-        "agoda": "Agoda"
+        "trip": "Trip.com"
       },
       "rankLabels": {
         "topPick": "Premier choix",

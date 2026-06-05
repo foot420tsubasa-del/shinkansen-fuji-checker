@@ -11,11 +11,11 @@ type HotelPick = {
   link: string;
   hotelKey?: HotelAreaKey;
   tag?: string;
-  provider?: "trip" | "klook" | "agoda";
+  provider?: "trip" | "klook";
   trackingHref?: string;
   label?: string;
   providerLinks?: Array<{
-    provider: "trip" | "agoda";
+    provider: "trip";
     href: string;
     trackingHref?: string;
     label: string;
@@ -47,6 +47,7 @@ export function HotelPicks({
       <div className="grid gap-3 sm:grid-cols-2">
         {picks.map((h) => {
           const hotel = h.provider ? null : h.hotelKey ? getHotelLink(h.hotelKey) : null;
+          const ctaProvider = h.provider ?? (hotel?.provider === "trip" || hotel?.provider === "klook" ? hotel.provider : undefined);
           const priceLabel =
             h.price.includes("¥") || h.price.toLowerCase() === "check latest price"
               ? t("compareRates")
@@ -97,7 +98,7 @@ export function HotelPicks({
                 <HotelCTA
                   areaName={hotel?.areaName ?? h.area}
                   city={hotel?.city ?? "Tokyo"}
-                  provider={h.provider ?? hotel?.provider}
+                  provider={ctaProvider}
                   href={hotel?.href ?? h.link}
                   placement={placement}
                   locale={locale}

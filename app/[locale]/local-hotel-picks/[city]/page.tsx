@@ -333,7 +333,7 @@ export default async function CityLocalHotelPicksPage({ params }: Props) {
                   <div className="mt-4 rounded-[18px] border border-dashed border-slate-300 bg-white p-4">
                     <p className="text-sm font-semibold text-slate-900">No active hotel example here yet.</p>
                     <p className="mt-1 text-xs leading-5 text-slate-600">
-                      This section stays area-first until an approved Trip.com or Agoda hotel example URL exists.
+                      This section stays area-first until an approved Trip.com hotel example URL exists.
                     </p>
                   </div>
                 )}

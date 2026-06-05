@@ -14,7 +14,7 @@ import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { Link } from "@/i18n/navigation";
 import { getAlternates } from "@/i18n/hreflang";
 import { getTranslations } from "next-intl/server";
-import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { getAllHotelPickLinkConfigs } from "@/lib/hotel-pick-links";
 import type { StayAreaMapKey } from "@/lib/stay-area-maps";
 import { buttonClassName } from "@/components/ui/Button";
@@ -191,7 +191,6 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
   const config = getTripHotelConfig(areaKey);
   const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
   const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
-  const agodaLink = getAgodaHotelAreaUrl(areaKey);
 
   return providerChoices(
     tripHref
@@ -204,19 +203,6 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
           linkId: `hotelArea.${areaKey}.trip`,
           placement,
           variant: "primary",
-          category: "hotel",
-        }
-      : null,
-    agodaLink
-      ? {
-          label: "Agoda",
-          href: agodaLink.href,
-          trackingHref: agodaLink.trackingHref,
-          provider: "agoda",
-          product: "hotel",
-          linkId: agodaLink.linkId,
-          placement,
-          variant: "secondary",
           category: "hotel",
         }
       : null,
@@ -387,8 +373,8 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
           {examples.length > 0 ? (
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {examples.map((hotel) => {
-                const provider = hotel.primaryProvider === "agoda" && hotel.agodaUrl ? "agoda" : "trip";
-                const href = provider === "agoda" ? hotel.agodaUrl as string : hotel.tripUrl;
+                const provider = "trip";
+                const href = hotel.tripUrl;
                 return (
                   <div key={hotel.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                     <p className="text-sm font-semibold text-slate-950">{hotel.name}</p>

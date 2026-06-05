@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, useMemo, useRef, useState } from "react";
-import { ArrowRight, Check, ChevronDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
 import {
@@ -121,7 +121,6 @@ type FinderCopy = {
   providerLabels: {
     booking_travelpayouts: string;
     trip: string;
-    agoda: string;
   };
   rankLabels: {
     topPick: string;
@@ -367,7 +366,6 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
             className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#106b43] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0b5736] sm:w-auto"
           >
             {copy.startLabel}
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </button>
           <Link
             href="/local-hotel-picks#hotel-examples-matrix"
@@ -440,7 +438,6 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
                 className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#106b43] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0b5736]"
               >
                 {copy.nextLabel}
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </button>
             ) : (
               <button
@@ -449,7 +446,6 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
                 className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#106b43] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0b5736]"
               >
                 {copy.showResultsLabel}
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </button>
             )}
           </div>

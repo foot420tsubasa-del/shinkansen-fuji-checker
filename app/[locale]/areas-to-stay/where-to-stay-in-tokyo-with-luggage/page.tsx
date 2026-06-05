@@ -8,7 +8,7 @@ import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affil
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { getAlternates } from "@/i18n/hreflang";
-import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { SiteHeader } from "../../components/SiteHeader";
 
 type Props = {
@@ -336,7 +336,6 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
   const config = getTripHotelConfig(areaKey);
   const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
   const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
-  const agodaLink = getAgodaHotelAreaUrl(areaKey);
 
   return providerChoices(
     tripHref
@@ -349,19 +348,6 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
           linkId: `hotelArea.${areaKey}.trip`,
           placement,
           variant: "primary",
-          category: "hotel",
-        }
-      : null,
-    agodaLink
-      ? {
-          label: "Agoda",
-          href: agodaLink.href,
-          trackingHref: agodaLink.trackingHref,
-          provider: "agoda",
-          product: "hotel",
-          linkId: agodaLink.linkId,
-          placement,
-          variant: "secondary",
           category: "hotel",
         }
       : null,

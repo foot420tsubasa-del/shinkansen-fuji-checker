@@ -1114,7 +1114,7 @@
         },
         {
           "title": "East Tokyo hotels",
-          "description": "Klook and Agoda links coming soon.",
+          "description": "Klook links coming soon.",
           "href": "/local-tokyo"
         }
       ],
@@ -1591,8 +1591,7 @@
   },
   "localHotelPicks": {
     "checkOnTrip": "Check on Trip.com",
-    "checkOnAgoda": "Check on Agoda",
-    "comingSoon": "Agoda link coming soon",
+    "comingSoon": "Hotel link coming soon",
     "seeLocalHotelPicks": "See Japanese local hotel picks",
     "bestFor": "Best for",
     "whyThisLocalPick": "Why this local pick",
@@ -1868,7 +1867,6 @@
       "title": "Compare hotels in {areaName}",
       "singleTitle": "Check hotels in {areaName}",
       "tripLabel": "Compare on Trip.com",
-      "agodaLabel": "Compare on Agoda",
       "note": "Prices and availability may differ by date."
     },
     "index": {
@@ -2113,7 +2111,7 @@
     },
     "preBooking": {
       "title": "Start here if you have not booked hotels yet",
-      "body": "Use this page before opening Trip.com, Agoda, or other hotel booking sites. First choose the city, then compare station areas, then check broad hotel searches or examples. In Japan, a good hotel base should make airport transfers, luggage days, Shinkansen trips, and first nights easier. These guides are general starting points, not personalized hotel recommendations."
+      "body": "Use this page before opening Booking.com, Trip.com, or other hotel booking sites. First choose the city, then compare station areas, then check broad hotel searches or examples. In Japan, a good hotel base should make airport transfers, luggage days, Shinkansen trips, and first nights easier. These guides are general starting points, not personalized hotel recommendations."
     },
     "heroRoute": {
       "title": "Main route",
@@ -3922,11 +3920,6 @@
       "ogTitle": "Tokyo Hotel Area Finder",
       "ogDescription": "Compare Tokyo station areas before booking hotels using fujiseat's station-area logic."
     },
-    "breadcrumb": {
-      "home": "Home",
-      "parent": "Areas to stay",
-      "current": "Tokyo Hotel Area Finder"
-    },
     "hero": {
       "eyebrow": "Tokyo hotel area finder",
       "title": "Find where to stay in Tokyo",
@@ -4062,7 +4055,6 @@
       "fallbackNote": "Broad area search only. No dedicated {selected} hotel URL is set yet, so this opens the nearest existing broad search area: {area}. Check exact station distance, room size, bed setup, and latest price on the provider site.",
       "providers": {
         "trip": "Trip.com",
-        "agoda": "Agoda",
         "booking_travelpayouts": "Booking.com",
         "klook": "Klook"
       },
@@ -4539,8 +4531,7 @@
       },
       "providerLabels": {
         "booking_travelpayouts": "Booking.com",
-        "trip": "Trip.com",
-        "agoda": "Agoda"
+        "trip": "Trip.com"
       },
       "rankLabels": {
         "topPick": "Top pick",

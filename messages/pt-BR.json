@@ -1114,7 +1114,7 @@
         },
         {
           "title": "Hotéis no leste de Tokyo",
-          "description": "Links Klook e Agoda em breve.",
+          "description": "Klook links coming soon.",
           "href": "/local-tokyo"
         }
       ],
@@ -1591,8 +1591,7 @@
   },
   "localHotelPicks": {
     "checkOnTrip": "Ver no Trip.com",
-    "checkOnAgoda": "Ver na Agoda",
-    "comingSoon": "Link da Agoda em breve",
+    "comingSoon": "Hotel link coming soon",
     "seeLocalHotelPicks": "Ver hotéis escolhidos por um local japonês",
     "bestFor": "Melhor para",
     "whyThisLocalPick": "Por que este hotel local",
@@ -1868,7 +1867,6 @@
       "title": "Comparar hotéis em {areaName}",
       "singleTitle": "Ver hotéis em {areaName}",
       "tripLabel": "Comparar no Trip.com",
-      "agodaLabel": "Comparar no Agoda",
       "note": "Preços e disponibilidade podem variar conforme a data."
     },
     "index": {
@@ -3922,11 +3920,6 @@
       "ogTitle": "Tokyo Hotel Area Finder",
       "ogDescription": "Compare áreas de estações em Tóquio antes de reservar hotéis usando a lógica de áreas da fujiseat."
     },
-    "breadcrumb": {
-      "home": "Início",
-      "parent": "Onde ficar",
-      "current": "Tokyo Hotel Area Finder"
-    },
     "hero": {
       "eyebrow": "Tokyo hotel area finder",
       "title": "Find where to stay in Tokyo",
@@ -4062,7 +4055,6 @@
       "fallbackNote": "Busca ampla por área. Ainda não há URL específica para {selected}, então abrimos a área ampla mais próxima: {area}. Confira distância exata da estação, tamanho do quarto, camas e preço atual no site.",
       "providers": {
         "trip": "Trip.com",
-        "agoda": "Agoda",
         "booking_travelpayouts": "Booking.com",
         "klook": "Klook"
       },
@@ -4540,8 +4532,7 @@
       },
       "providerLabels": {
         "booking_travelpayouts": "Booking.com",
-        "trip": "Trip.com",
-        "agoda": "Agoda"
+        "trip": "Trip.com"
       },
       "rankLabels": {
         "topPick": "Melhor opção",

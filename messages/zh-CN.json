@@ -1114,7 +1114,7 @@
         },
         {
           "title": "East Tokyo 酒店",
-          "description": "Klook 和 Agoda 链接即将加入。",
+          "description": "Klook links coming soon.",
           "href": "/local-tokyo"
         }
       ],
@@ -1591,8 +1591,7 @@
   },
   "localHotelPicks": {
     "checkOnTrip": "在 Trip.com 查看",
-    "checkOnAgoda": "在 Agoda 查看",
-    "comingSoon": "Agoda 链接即将上线",
+    "comingSoon": "Hotel link coming soon",
     "seeLocalHotelPicks": "查看日本本地视角酒店推荐",
     "bestFor": "适合",
     "whyThisLocalPick": "为什么推荐这家",
@@ -1868,7 +1867,6 @@
       "title": "比较 {areaName} 的酒店",
       "singleTitle": "查看 {areaName} 的酒店",
       "tripLabel": "在 Trip.com 上比较",
-      "agodaLabel": "在 Agoda 上比较",
       "note": "价格和可订状态会因日期而异。"
     },
     "index": {
@@ -3922,11 +3920,6 @@
       "ogTitle": "Tokyo Hotel Area Finder",
       "ogDescription": "订酒店前，用 fujiseat 的车站区域逻辑比较东京住宿区域。"
     },
-    "breadcrumb": {
-      "home": "首页",
-      "parent": "住宿区域",
-      "current": "Tokyo Hotel Area Finder"
-    },
     "hero": {
       "eyebrow": "Tokyo hotel area finder",
       "title": "Find where to stay in Tokyo",
@@ -4062,7 +4055,6 @@
       "fallbackNote": "仅为大区域搜索。尚未设置 {selected} 专用链接，因此打开最近的大区域：{area}。请在预订网站确认准确车站距离、房间大小、床型和最新价格。",
       "providers": {
         "trip": "Trip.com",
-        "agoda": "Agoda",
         "booking_travelpayouts": "Booking.com",
         "klook": "Klook"
       },
@@ -4539,8 +4531,7 @@
       },
       "providerLabels": {
         "booking_travelpayouts": "Booking.com",
-        "trip": "Trip.com",
-        "agoda": "Agoda"
+        "trip": "Trip.com"
       },
       "rankLabels": {
         "topPick": "首选",

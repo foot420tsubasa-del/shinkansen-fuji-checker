@@ -2,7 +2,7 @@ import { Check, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { HotelCTA } from "@/components/affiliate/HotelCTA";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
-import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 
 type AreaCardProps = {
@@ -17,7 +17,7 @@ type AreaCardProps = {
   locale?: string;
   city?: string;
   pagePath?: string;
-  provider?: "agoda" | "trip" | "klook";
+  provider?: "trip" | "klook";
   hotelKey?: HotelAreaKey;
   showHotelCta?: boolean;
 };
@@ -52,13 +52,13 @@ export function AreaCard({
   const t = useTranslations("stayShared.areaCard");
   const hotel = hotelKey ? getHotelLink(hotelKey) : null;
   const hotelConfig = hotelKey ? getTripHotelConfig(hotelKey) : null;
+  const ctaProvider = hotel?.provider === "trip" || hotel?.provider === "klook" ? hotel.provider : provider;
   const hotelActionLabel =
     hotelKey === "tokyoStation"
       ? t("compareTokyoStation")
       : t("compareAreaHotels", { area: hotel?.areaName ?? name });
   const tripHref = hotel?.provider === "trip" ? hotel.href : hotelConfig?.tripUrl ?? (provider === "trip" ? hotelLink : undefined);
   const tripTrackingHref = hotel?.provider === "trip" ? hotel.trackingHref : hotelConfig?.tripUrl ?? (provider === "trip" ? hotelLink : undefined);
-  const agodaLink = hotelKey ? getAgodaHotelAreaUrl(hotelKey) : null;
   const bookingAreaId = hotelKey ? bookingAreaIdByHotelAreaKey[hotelKey] : undefined;
   const bookingLinks = bookingAreaId
     ? getHotelProviderLinks({ areaId: bookingAreaId, locale, placement: "tokyo_first_time_card" })
@@ -140,19 +140,6 @@ export function AreaCard({
                   category: "hotel",
               }
               : null,
-            agodaLink
-              ? {
-                  label: "Agoda",
-                  href: agodaLink.href,
-                  trackingHref: agodaLink.trackingHref,
-                  provider: "agoda",
-                  product: "hotel",
-                  linkId: agodaLink.linkId,
-                  placement: "tokyo_first_time_card",
-                  variant: "secondary",
-                  category: "hotel",
-              }
-              : null,
           )}
           maxProviders={3}
         />
@@ -160,7 +147,7 @@ export function AreaCard({
         <HotelCTA
           areaName={hotel?.areaName ?? name}
           city={hotel?.city ?? city}
-          provider={hotel?.provider ?? provider}
+          provider={ctaProvider}
           href={hotel?.href ?? hotelLink}
           placement="stay_area_hotel_card"
           locale={locale}

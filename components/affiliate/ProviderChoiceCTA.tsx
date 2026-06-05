@@ -70,9 +70,6 @@ function providerClass(provider: AffiliateProvider, product: string, variant: Pr
     if (provider === "trip") {
       return [base, "border border-[#0a4ca8] bg-[#0a4ca8] text-white hover:bg-[#0a3f8b] focus-visible:ring-blue-200"].join(" ");
     }
-    if (provider === "agoda") {
-      return [base, "border border-[#9a3f9a] bg-[#9a3f9a] text-white hover:bg-[#7e3380] focus-visible:ring-fuchsia-200"].join(" ");
-    }
     return [base, "border border-[#168a56] bg-[#168a56] text-white hover:bg-[#0f6f45] focus-visible:ring-emerald-200"].join(" ");
   }
 
@@ -84,9 +81,6 @@ function providerClass(provider: AffiliateProvider, product: string, variant: Pr
   }
   if (provider === "trip") {
     return [base, "border border-[#0a4ca8] bg-[#0a4ca8] text-white hover:bg-[#0a3f8b] focus-visible:ring-blue-200"].join(" ");
-  }
-  if (provider === "agoda") {
-    return [base, "border border-[#9a3f9a] bg-[#9a3f9a] text-white hover:bg-[#7e3380] focus-visible:ring-fuchsia-200"].join(" ");
   }
   if (provider === "other") {
     return [base, "border border-[#168a56] bg-[#168a56] text-white hover:bg-[#0f6f45] focus-visible:ring-emerald-200"].join(" ");

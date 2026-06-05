@@ -11,11 +11,9 @@ type HotelPickMatrixProps = {
 
 function providerLinksForPick(pick: LocalHotelPick): Array<{ provider: ProviderId; href: string; label: string; linkId: string }> {
   const tripUrl = pick.tripFallbackUrl.trim();
-  const agodaUrl = pick.agodaUrl.trim();
 
   return [
     tripUrl ? { provider: "trip" as const, href: tripUrl, label: "Trip.com", linkId: `localHotelPick.${pick.id}.trip` } : null,
-    agodaUrl ? { provider: "agoda" as const, href: agodaUrl, label: "Agoda", linkId: `localHotelPick.${pick.id}.agoda` } : null,
   ].filter(Boolean) as Array<{ provider: ProviderId; href: string; label: string; linkId: string }>;
 }
 

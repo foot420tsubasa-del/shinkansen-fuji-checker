@@ -1114,7 +1114,7 @@
         },
         {
           "title": "East Tokyo Hotels",
-          "description": "Klook- und Agoda-Links folgen später.",
+          "description": "Klook links coming soon.",
           "href": "/local-tokyo"
         }
       ],
@@ -1591,8 +1591,7 @@
   },
   "localHotelPicks": {
     "checkOnTrip": "Auf Trip.com ansehen",
-    "checkOnAgoda": "Auf Agoda ansehen",
-    "comingSoon": "Agoda-Link folgt in Kürze",
+    "comingSoon": "Hotel link coming soon",
     "seeLocalHotelPicks": "Lokale japanische Hotel-Empfehlungen ansehen",
     "bestFor": "Am besten für",
     "whyThisLocalPick": "Warum diese lokale Empfehlung",
@@ -1868,7 +1867,6 @@
       "title": "Hotels in {areaName} vergleichen",
       "singleTitle": "Hotels in {areaName} ansehen",
       "tripLabel": "Auf Trip.com vergleichen",
-      "agodaLabel": "Auf Agoda vergleichen",
       "note": "Preise und Verfügbarkeit können je nach Datum abweichen."
     },
     "index": {
@@ -3922,11 +3920,6 @@
       "ogTitle": "Tokyo Hotel Area Finder",
       "ogDescription": "Vergleiche Tokios Stationsbereiche vor der Hotelbuchung mit fujiseats Logik."
     },
-    "breadcrumb": {
-      "home": "Start",
-      "parent": "Übernachten",
-      "current": "Tokyo Hotel Area Finder"
-    },
     "hero": {
       "eyebrow": "Tokyo hotel area finder",
       "title": "Find where to stay in Tokyo",
@@ -4062,7 +4055,6 @@
       "fallbackNote": "Nur breite Gebietssuche. Für {selected} ist noch keine eigene URL gesetzt; geöffnet wird der nächste breite Suchbereich: {area}. Prüfe genaue Stationsentfernung, Zimmergröße, Betten und aktuellen Preis beim Anbieter.",
       "providers": {
         "trip": "Trip.com",
-        "agoda": "Agoda",
         "booking_travelpayouts": "Booking.com",
         "klook": "Klook"
       },
@@ -4539,8 +4531,7 @@
       },
       "providerLabels": {
         "booking_travelpayouts": "Booking.com",
-        "trip": "Trip.com",
-        "agoda": "Agoda"
+        "trip": "Trip.com"
       },
       "rankLabels": {
         "topPick": "Top-Auswahl",

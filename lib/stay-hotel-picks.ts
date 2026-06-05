@@ -23,11 +23,11 @@ export type ResolvedStayHotelPick = {
   link: string;
   hotelKey?: HotelAreaKey;
   tag?: string;
-  provider?: "trip" | "klook" | "agoda";
+  provider?: "trip" | "klook";
   trackingHref?: string;
   label?: string;
   providerLinks?: Array<{
-    provider: "trip" | "agoda";
+    provider: "trip";
     href: string;
     trackingHref?: string;
     label: string;
@@ -46,8 +46,6 @@ export function getManagedStayHotelPicks(slug: string, fallback: ResolvedStayHot
   return picks.map((pick) => {
     const shared = getHotelPickLinkConfig(pick.id);
     const hotelKey = shared?.hotelKey ?? pick.hotelKey;
-    const primaryProvider = shared?.primaryProvider ?? pick.primaryProvider;
-    const agodaUrl = shared?.agodaUrl?.trim() || pick.agodaUrl?.trim();
     const tripUrl = shared?.tripUrl?.trim() || pick.tripUrl?.trim();
     const areaHotel = getHotelLink(hotelKey);
     const providerLinks: StayHotelPickProviderLink[] = [];
@@ -60,27 +58,12 @@ export function getManagedStayHotelPicks(slug: string, fallback: ResolvedStayHot
         linkId: `hotelPick.${pick.id}.trip`,
       });
     }
-    if (agodaUrl) {
-      providerLinks.push({
-        provider: "agoda",
-        href: agodaUrl,
-        trackingHref: agodaUrl,
-        label: "Agoda",
-        linkId: `hotelPick.${pick.id}.agoda`,
-      });
-    }
     const specificUrl =
-      primaryProvider === "agoda" && agodaUrl
-        ? agodaUrl
-        : primaryProvider === "trip" && tripUrl
-          ? tripUrl
-          : agodaUrl || tripUrl;
-    const specificProvider = specificUrl
-      ? specificUrl === agodaUrl
-        ? "agoda"
-        : "trip"
-      : undefined;
-    const providerLabel = specificProvider === "agoda" ? "Agoda" : "Trip.com";
+      tripUrl
+        ? tripUrl
+        : undefined;
+    const specificProvider = specificUrl ? "trip" : undefined;
+    const providerLabel = "Trip.com";
     const specificLabel = shared?.label || pick.label || `Check ${pick.name} on ${providerLabel}`;
     return {
       id: pick.id,
@@ -91,7 +74,7 @@ export function getManagedStayHotelPicks(slug: string, fallback: ResolvedStayHot
       tag: pick.tag || undefined,
       link: specificUrl || areaHotel.href,
       trackingHref: specificUrl || areaHotel.trackingHref,
-      provider: specificProvider ?? areaHotel.provider,
+      provider: specificProvider ?? (areaHotel.provider === "trip" || areaHotel.provider === "klook" ? areaHotel.provider : undefined),
       label: specificUrl ? specificLabel.replace("Trip.com", providerLabel) : areaHotel.label,
       providerLinks: providerLinks.length ? providerLinks : undefined,
     };

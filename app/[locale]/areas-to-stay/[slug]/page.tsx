@@ -17,7 +17,6 @@ import { NextActions } from "@/components/content/NextActions";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
-import { AgodaHotelMap } from "@/components/affiliate/AgodaHotelMap";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
@@ -27,20 +26,13 @@ import { getAllStaySlugs, getStayBySlug, type StayPage as StayContentPage } from
 import { getAlternates } from "@/i18n/hreflang";
 import { getAffUrl } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
-import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelProviderLinks, type HotelAffiliatePlacement } from "@/lib/hotel-affiliate-links";
 import { buttonClassName } from "@/components/ui/Button";
 import type { AdPlacement } from "@/lib/ads";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
-};
-
-const agodaMapIdsByStaySlug: Record<string, string[]> = {
-  "where-to-stay-before-shinkansen": ["tokyoStation"],
-  "kyoto-station-vs-gion": ["kyotoStation"],
-  "namba-vs-umeda": ["namba"],
-  "shin-osaka-vs-namba": ["shinOsaka", "namba"],
 };
 
 const stayComparisonHotelPickSlugs = new Set([
@@ -1660,7 +1652,6 @@ function hotelProviderChoices({
   const config = getTripHotelConfig(areaKey);
   const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
   const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
-  const agodaLink = getAgodaHotelAreaUrl(areaKey);
 
   return providerChoices(
     ...(bookingPlacement ? bookingProviderChoices({ areaId: bookingAreaId, locale, placement: bookingPlacement, pageGroup: bookingPageGroup }) : []),
@@ -1674,19 +1665,6 @@ function hotelProviderChoices({
           linkId: `hotelArea.${areaKey}.trip`,
           placement,
           variant: "primary",
-          category: "hotel",
-        }
-      : null,
-    agodaLink
-      ? {
-          label: "Agoda",
-          href: agodaLink.href,
-          trackingHref: agodaLink.trackingHref,
-          provider: "agoda",
-          product: "hotel",
-          linkId: agodaLink.linkId,
-          placement,
-          variant: "secondary",
           category: "hotel",
         }
       : null,
@@ -2028,7 +2006,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-orange-700">Hotel search shortcut</p>
               <h2 className="mt-1 text-xl font-semibold text-slate-950">Already know your Tokyo base?</h2>
               <p className="mt-2 text-sm leading-6 text-slate-700">
-                Jump to the major area card first. Each card explains the trade-offs before showing Booking.com / Trip.com / Agoda
+                Jump to the major area card first. Each card explains the trade-offs before showing Booking.com / Trip.com
                 broad-area search buttons.
               </p>
             </div>
@@ -2955,15 +2933,6 @@ export default async function StayPage({ params }: Props) {
               </dl>
             </section>
           )}
-
-          {(agodaMapIdsByStaySlug[page.slug] ?? []).map((mapId) => (
-            <AgodaHotelMap
-              key={mapId}
-              mapId={mapId}
-              placement="stay_area_map"
-              locale={locale}
-            />
-          ))}
 
           <SuggestedNextSteps currentPageType="stay" locale={locale} excludeTypes={["esim"]} />
         </div>

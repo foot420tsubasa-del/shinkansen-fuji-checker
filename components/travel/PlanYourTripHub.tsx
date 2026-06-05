@@ -10,7 +10,7 @@ import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLin
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { getAffUrl } from "@/src/affiliateLinks";
-import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import type { AffiliateClickParams } from "@/lib/analytics";
 
@@ -157,7 +157,6 @@ function hotelProviderChoicesForKey(hotelKey: HotelAreaKey) {
   const config = getTripHotelConfig(hotelKey);
   const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
   const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
-  const agodaLink = getAgodaHotelAreaUrl(hotelKey);
 
   return providerChoices(
     tripHref
@@ -170,19 +169,6 @@ function hotelProviderChoicesForKey(hotelKey: HotelAreaKey) {
           linkId: `hotelArea.${hotelKey}.trip`,
           placement: "plan_trip_hotel_cards",
           variant: "primary",
-          category: "hotel",
-        }
-      : null,
-    agodaLink
-      ? {
-          label: "Agoda",
-          href: agodaLink.href,
-          trackingHref: agodaLink.trackingHref,
-          provider: "agoda",
-          product: "hotel",
-          linkId: agodaLink.linkId,
-          placement: "plan_trip_hotel_cards",
-          variant: "secondary",
           category: "hotel",
         }
       : null,

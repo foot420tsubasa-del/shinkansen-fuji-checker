@@ -17,7 +17,7 @@ import { getAirportTransferRouteImage } from "@/lib/airport-transfer-images";
 import { AirportHeroCard, AirportNextSteps, AirportRouteCompareCard, ArrivalSetupCard } from "@/components/airport/AirportTransferUi";
 import { ESIM_URL, getAffiliateConfig, getReadyAffUrl } from "@/src/affiliateLinks";
 import { getAirportRouteUiCopy, localizedLateArrivalNote, localizedProTip, localizedRouteDescription, localizedRouteTitle, localizeTripPick, routeSpecific } from "@/lib/content/airport-transfer-i18n";
-import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 
 type Props = {
@@ -60,7 +60,6 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
   const config = getTripHotelConfig(areaKey);
   const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
   const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
-  const agodaLink = getAgodaHotelAreaUrl(areaKey);
   const bookingAreaId = bookingAreaIdByHotelAreaKey[areaKey];
   const bookingLinks = bookingAreaId
     ? getHotelProviderLinks({ areaId: bookingAreaId, locale, placement: "airport_page_first_night_cta" }).map((link) => ({
@@ -90,19 +89,6 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
           linkId: `hotelArea.${areaKey}.trip`,
           placement,
           variant: "primary",
-          category: "hotel",
-        }
-      : null,
-    agodaLink
-      ? {
-          label: "Agoda",
-          href: agodaLink.href,
-          trackingHref: agodaLink.trackingHref,
-          provider: "agoda",
-          product: "hotel",
-          linkId: agodaLink.linkId,
-          placement,
-          variant: "secondary",
           category: "hotel",
         }
       : null,

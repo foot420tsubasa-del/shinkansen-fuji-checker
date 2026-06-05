@@ -10,11 +10,10 @@ import {
 
 // Brand-inspired colors for hotel/provider CTAs. Text-only labels — no logos.
 //   trip                 → bright cyan-blue (#0875c9) with white text
-//   agoda                → magenta     (#9a3f9a) with white text
 //   booking_travelpayouts → dark blue   (#003b95) with white text
 // Use only for provider-specific buttons. For generic "Compare hotels" CTAs
 // use Button variant="commercial" instead.
-export type ProviderId = "trip" | "agoda" | "booking_travelpayouts";
+export type ProviderId = "trip" | "booking_travelpayouts";
 
 type ProviderButtonProps = {
   provider: ProviderId;
@@ -48,9 +47,6 @@ const PROVIDER_STYLES: Record<ProviderId, string> = {
   // Trip.com — brighter cyan-blue so it stays distinct from Booking.com's dark blue.
   trip:
     "border border-[#0875c9] bg-[#0875c9] text-white hover:bg-[#0662aa] focus-visible:ring-sky-200",
-  // Agoda — magenta/purple.
-  agoda:
-    "border border-[#9a3f9a] bg-[#9a3f9a] text-white hover:bg-[#7e3380] focus-visible:ring-fuchsia-200",
   // Booking.com via Travelpayouts — dark blue with white text.
   booking_travelpayouts:
     "border border-[#003b95] bg-[#003b95] text-white hover:bg-[#002f78] focus-visible:ring-blue-200",
@@ -78,8 +74,6 @@ export function ProviderButton({
   fullWidth = true,
   className = "",
 }: ProviderButtonProps) {
-  if (provider === "agoda") return null;
-
   const analyticsHref = trackingHref ?? href;
   const analyticsLabel = typeof children === "string" ? children : provider;
 

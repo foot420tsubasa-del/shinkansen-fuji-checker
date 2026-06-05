@@ -9,7 +9,7 @@ import { AFFILIATE_REL } from "@/lib/link-rel";
 type HotelCTAProps = {
   areaName: string;
   city: string;
-  provider?: "agoda" | "trip" | "klook";
+  provider?: "trip" | "klook";
   href: string;
   placement: AffiliateClickParams["placement"];
   locale: string;
@@ -44,10 +44,9 @@ export function HotelCTA({
   // we never report a non-Klook click as a Klook conversion in analytics.
   const resolvedProvider = provider ?? hrefProvider;
 
-  // Provider-specific hotel CTAs use brand-inspired colors (deep blue for
-  // Trip.com, magenta for Agoda) so the user can tell at a glance which
-  // provider they are about to open. Any other hotel CTA (klook-routed or
-  // an unrecognized href) keeps the commercial orange style.
+  // Provider-specific hotel CTAs use brand-inspired colors so the user can
+  // tell at a glance which provider they are about to open. Any other hotel
+  // CTA (klook-routed or an unrecognized href) keeps the commercial orange style.
   if (resolvedProvider === "agoda") return null;
 
   if (resolvedProvider === "trip") {

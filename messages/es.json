@@ -1114,7 +1114,7 @@
         },
         {
           "title": "Hoteles del este de Tokyo",
-          "description": "Enlaces de Klook y Agoda próximamente.",
+          "description": "Klook links coming soon.",
           "href": "/local-tokyo"
         }
       ],
@@ -1591,8 +1591,7 @@
   },
   "localHotelPicks": {
     "checkOnTrip": "Ver en Trip.com",
-    "checkOnAgoda": "Ver en Agoda",
-    "comingSoon": "Enlace de Agoda próximamente",
+    "comingSoon": "Hotel link coming soon",
     "seeLocalHotelPicks": "Ver hoteles elegidos por un local japonés",
     "bestFor": "Ideal para",
     "whyThisLocalPick": "Por qué este hotel local",
@@ -1868,7 +1867,6 @@
       "title": "Comparar hoteles en {areaName}",
       "singleTitle": "Ver hoteles en {areaName}",
       "tripLabel": "Comparar en Trip.com",
-      "agodaLabel": "Comparar en Agoda",
       "note": "Los precios y la disponibilidad pueden variar según la fecha."
     },
     "index": {
@@ -3922,11 +3920,6 @@
       "ogTitle": "Tokyo Hotel Area Finder",
       "ogDescription": "Compara zonas de estaciones de Tokio antes de reservar hoteles usando la lógica de fujiseat."
     },
-    "breadcrumb": {
-      "home": "Inicio",
-      "parent": "Dónde alojarse",
-      "current": "Tokyo Hotel Area Finder"
-    },
     "hero": {
       "eyebrow": "Tokyo hotel area finder",
       "title": "Find where to stay in Tokyo",
@@ -4062,7 +4055,6 @@
       "fallbackNote": "Búsqueda amplia por zona. Aún no hay URL específica para {selected}, así que se abre la zona amplia más cercana: {area}. Comprueba distancia exacta a la estación, tamaño de habitación, camas y precio actual en el proveedor.",
       "providers": {
         "trip": "Trip.com",
-        "agoda": "Agoda",
         "booking_travelpayouts": "Booking.com",
         "klook": "Klook"
       },
@@ -4540,8 +4532,7 @@
       },
       "providerLabels": {
         "booking_travelpayouts": "Booking.com",
-        "trip": "Trip.com",
-        "agoda": "Agoda"
+        "trip": "Trip.com"
       },
       "rankLabels": {
         "topPick": "Mejor opción",

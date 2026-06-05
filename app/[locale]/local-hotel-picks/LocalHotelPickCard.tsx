@@ -19,11 +19,9 @@ type LocalHotelPickCardProps = {
 
 export function LocalHotelPickCard({ pick, locale, pagePath, groupLabel, copy }: LocalHotelPickCardProps) {
   const t = useTranslations("localHotelPicks");
-  const agodaUrl = pick.agodaUrl.trim();
   const tripUrl = pick.tripFallbackUrl.trim();
   const providerLinks: Array<{ provider: ProviderId; href: string; label: string; linkId: string }> = [
     tripUrl ? { provider: "trip", href: tripUrl, label: "Trip.com", linkId: `localHotelPick.${pick.id}.trip` } : null,
-    agodaUrl ? { provider: "agoda", href: agodaUrl, label: "Agoda", linkId: `localHotelPick.${pick.id}.agoda` } : null,
   ].filter(Boolean) as Array<{ provider: ProviderId; href: string; label: string; linkId: string }>;
 
   return (

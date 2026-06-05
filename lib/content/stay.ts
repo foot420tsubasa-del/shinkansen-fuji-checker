@@ -27,7 +27,7 @@ export type HotelPick = {
   link: string;
   hotelKey?: HotelAreaKey;
   tag?: string;
-  provider?: "trip" | "klook" | "agoda";
+  provider?: "trip" | "klook";
   trackingHref?: string;
   label?: string;
 };

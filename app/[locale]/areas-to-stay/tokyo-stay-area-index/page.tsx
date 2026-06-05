@@ -14,7 +14,6 @@ import {
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
-import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
 import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
 import { getAlternates } from "@/i18n/hreflang";
@@ -23,7 +22,7 @@ import signalsJson from "@/data/generated/tokyo-stay-area-signals.json";
 import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import sourceStatusJson from "@/data/generated/tokyo-stay-area-source-status.json";
 import { tokyoStayAreaSourceRegistry } from "@/data/stay-area/source-registry";
-import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelProviderLinks, type HotelAffiliatePlacement } from "@/lib/hotel-affiliate-links";
 import { getTranslations } from "next-intl/server";
 import type {
@@ -158,7 +157,6 @@ function hotelSearchForArea(area: StayAreaBase, locale: string, placement: Hotel
   const config = getTripHotelConfig(hotelAreaKey);
   const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl.trim();
   const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl.trim();
-  const agodaLink = getAgodaHotelAreaUrl(hotelAreaKey);
   const bookingLinks = getHotelProviderLinks({ areaId: area.id, locale, placement });
   const providers = [
     ...bookingLinks,
@@ -170,17 +168,6 @@ function hotelSearchForArea(area: StayAreaBase, locale: string, placement: Hotel
           label: "Search this area on Trip.com",
           linkId: `hotelArea.${hotelAreaKey}.trip`,
           priority: 20,
-          placement,
-        }
-      : null,
-    agodaLink && agodaLink.href !== "#"
-      ? {
-          provider: "agoda" as ProviderId,
-          href: agodaLink.href,
-          trackingHref: agodaLink.trackingHref,
-          label: "Search this area on Agoda",
-          linkId: agodaLink.linkId,
-          priority: 30,
           placement,
         }
       : null,
@@ -1075,7 +1062,7 @@ function deriveCoreSignals(
 
   // Step-free status reflects both the upstream sources AND how many areas
   // actually have stepFreeSignal coverage. If at least one operator source
-  // succeeded and any areas matched → success / partial; otherwise next.
+  // succeeded and any areas matched: success / partial; otherwise next.
   const stepFreeAreas = Object.values(signals.areas).filter(
     (a) => a.stepFreeSignal?.status === "success" || a.stepFreeSignal?.status === "partial",
   ).length;
@@ -1197,15 +1184,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
     <main className="min-h-screen bg-[#fffaf2] text-slate-950">
       <SiteHeader />
       <Container className="py-8 md:py-12">
-        <Breadcrumb
-          items={[
-            { label: t("breadcrumb.home"), href: "/" },
-            { label: t("breadcrumb.parent"), href: "/areas-to-stay" },
-            { label: t("breadcrumb.current") },
-          ]}
-        />
-
-        <section className="mt-6 overflow-hidden rounded-[28px] border border-emerald-100 bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.07)] md:p-8">
+        <section className="overflow-hidden rounded-[28px] border border-emerald-100 bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.07)] md:p-8">
           <p className="inline-flex rounded-full border border-emerald-100 bg-emerald-50 px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-[#106b43]">
             {t("hero.eyebrow")}
           </p>
@@ -1367,7 +1346,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               areaId={selected.area.id}
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              {t("continue.links.firstTime")} →
+              {t("continue.links.firstTime")}
             </TrackedStayAreaContinueLink>
             <TrackedStayAreaContinueLink
               href="/areas-to-stay/where-to-stay-before-shinkansen"
@@ -1378,7 +1357,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               areaId={selected.area.id}
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              {t("continue.links.shinkansen")} →
+              {t("continue.links.shinkansen")}
             </TrackedStayAreaContinueLink>
             <TrackedStayAreaContinueLink
               href="/airport-transfers"
@@ -1389,7 +1368,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               areaId={selected.area.id}
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              {t("continue.links.airport")} →
+              {t("continue.links.airport")}
             </TrackedStayAreaContinueLink>
             <TrackedStayAreaContinueLink
               href="/local-hotel-picks#hotel-examples-matrix"
@@ -1400,7 +1379,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               areaId={selected.area.id}
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
-              {t("continue.links.examples")} →
+              {t("continue.links.examples")}
             </TrackedStayAreaContinueLink>
           </div>
         </section>

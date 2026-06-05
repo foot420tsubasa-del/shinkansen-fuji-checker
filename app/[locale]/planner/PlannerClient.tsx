@@ -20,7 +20,7 @@ import { Link } from "@/i18n/navigation";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { getAffUrl, requireAffUrl } from "@/src/affiliateLinks";
 import { getProviderFromHref, trackAffiliateClick, trackChecklistComplete, trackTemplateSelect } from "@/lib/analytics";
-import { getAgodaHotelAreaUrl, getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
 // ─── Constants ──────────────────────────────────────────────────────────────
@@ -97,7 +97,7 @@ type CheckData = {
   hasLink?: boolean;
   affiliate?: {
     category: "hotel" | "esim" | "transfer" | "train" | "activity" | "tour" | "insurance";
-    provider: "klook" | "agoda" | "trip" | "other";
+    provider: "klook" | "trip" | "other";
     label: string;
     area?: string;
     href?: string;
@@ -105,6 +105,7 @@ type CheckData = {
 };
 
 const plannerHotel = getHotelLink("shinjuku");
+const plannerHotelProvider = plannerHotel.provider === "trip" ? "trip" : "other";
 
 const CHECKLIST_DATA: CheckData[] = [
   { id: "passport", critical: true },
@@ -118,7 +119,7 @@ const CHECKLIST_DATA: CheckData[] = [
     hasLink: true,
     affiliate: {
       category: "hotel",
-      provider: plannerHotel.provider,
+      provider: plannerHotelProvider,
       label: plannerHotel.label,
       area: `${plannerHotel.city}: ${plannerHotel.areaName}`,
       href: plannerHotel.trackingHref,
@@ -133,7 +134,7 @@ const CHECKLIST_DATA: CheckData[] = [
 type RouteBookingAction = {
   label: string;
   href: string;
-  provider?: "klook" | "omio" | "trip" | "agoda";
+  provider?: "klook" | "omio" | "trip";
   category?: "hotel" | "esim" | "transfer" | "train" | "insurance";
   linkId?: string;
   product?: string;
@@ -184,7 +185,6 @@ function plannerHotelProviders(hotelKey: HotelAreaKey): ProviderChoiceButton[] {
   const hotelLink = getHotelLink(hotelKey);
   const config = getTripHotelConfig(hotelKey);
   const tripUrl = config.tripUrl?.trim() ?? "";
-  const agodaLink = getAgodaHotelAreaUrl(hotelKey);
   const providers: ProviderChoiceButton[] = [];
 
   if (tripUrl) {
@@ -197,20 +197,6 @@ function plannerHotelProviders(hotelKey: HotelAreaKey): ProviderChoiceButton[] {
       linkId: `hotelArea.${hotelKey}.trip`,
       placement: "planner_route_stack",
       variant: "primary",
-      category: "hotel",
-    });
-  }
-
-  if (agodaLink) {
-    providers.push({
-      label: "Agoda",
-      href: agodaLink.href,
-      trackingHref: agodaLink.trackingHref,
-      provider: "agoda",
-      product: "hotel",
-      linkId: agodaLink.linkId,
-      placement: "planner_route_stack",
-      variant: providers.length > 0 ? "secondary" : "primary",
       category: "hotel",
     });
   }

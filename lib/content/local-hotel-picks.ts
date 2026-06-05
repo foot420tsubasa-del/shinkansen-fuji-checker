@@ -11,14 +11,23 @@ export type LocalHotelPick = {
   localReason: string;
   notIdealFor: string;
   tags: string[];
-  agodaUrl: string;
   tripFallbackUrl: string;
   officialUrl: string;
   status: LocalHotelPickStatus;
   lastChecked: string;
 };
 
-const picks = localHotelPicksData as Record<string, LocalHotelPick>;
+type RawLocalHotelPick = LocalHotelPick & {
+  agodaUrl?: string;
+};
+
+const picks = localHotelPicksData as Record<string, RawLocalHotelPick>;
+
+function toPublicPick(pick: RawLocalHotelPick): LocalHotelPick {
+  const publicPick = { ...pick };
+  delete publicPick.agodaUrl;
+  return publicPick;
+}
 
 export const LOCAL_HOTEL_PICK_CITIES = ["Tokyo", "Kyoto", "Osaka"] as const;
 
@@ -36,7 +45,9 @@ export function normalizeLocalHotelPickCity(city: string): LocalHotelPickCity | 
 }
 
 export function getAllLocalHotelPicks(): LocalHotelPick[] {
-  return Object.values(picks).filter((p) => p.status === "active");
+  return Object.values(picks)
+    .filter((p) => p.status === "active")
+    .map(toPublicPick);
 }
 
 export function getLocalHotelPicksByCity(city: string): LocalHotelPick[] {
