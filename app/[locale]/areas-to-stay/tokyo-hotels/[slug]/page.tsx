@@ -27,12 +27,6 @@ import type {
 } from "@/lib/stay-area/types";
 
 /*
- * Phase 1 pilot: per-area Tokyo hotel-search landing pages.
- *
- *   /areas-to-stay/tokyo-hotels/asakusa
- *   /areas-to-stay/tokyo-hotels/ueno
- *   /areas-to-stay/tokyo-hotels/tokyo-station
- *
  * Server component. Content is generated from existing data
  * (tokyo-areas.base.json + tokyo-stay-area-scores.json + accessProfiles)
  * so the page works in any locale without per-locale editorial copy.
@@ -40,19 +34,32 @@ import type {
  * across all 9 locales; non-EN locales are noindex below).
  */
 
-const PILOT_SLUGS = ["asakusa", "ueno", "tokyo-station"] as const;
-type PilotSlug = (typeof PILOT_SLUGS)[number];
+const SUPPORTED_SLUGS = [
+  "asakusa",
+  "ueno",
+  "tokyo-station",
+  "ginza-yurakucho",
+  "nihombashi",
+  "shinjuku",
+  "shibuya",
+  "hamamatsucho-daimon",
+  "shinagawa",
+  "kuramae",
+] as const;
+type SupportedSlug = (typeof SUPPORTED_SLUGS)[number];
 
-const hotelAreaKeyByPilot: Record<PilotSlug, HotelAreaKey> = {
+const hotelAreaKeyBySlug: Partial<Record<SupportedSlug, HotelAreaKey>> = {
   asakusa: "asakusa",
   ueno: "ueno",
   "tokyo-station": "tokyoStation",
+  shinjuku: "shinjuku",
+  shibuya: "shibuya",
 };
 
-/** sub_id suffixes per placement, per pilot. Booking sub_ids come from
+/** sub_id suffixes per placement, per supported area. Booking sub_ids come from
  *  data/hotel-affiliate-links.json; Trip sub_ids are passed inline here so
  *  the click event carries `sub_id` as a stable identifier. */
-const tripSubIdByPilot: Record<PilotSlug, { hero: string; bottom: string }> = {
+const tripSubIdBySlug: Partial<Record<SupportedSlug, { hero: string; bottom: string }>> = {
   asakusa: {
     hero: "fs_hotels_asakusa_hero_trip",
     bottom: "fs_hotels_asakusa_bottom_trip",
@@ -65,11 +72,19 @@ const tripSubIdByPilot: Record<PilotSlug, { hero: string; bottom: string }> = {
     hero: "fs_hotels_tokyo_station_hero_trip",
     bottom: "fs_hotels_tokyo_station_bottom_trip",
   },
+  shinjuku: {
+    hero: "fs_hotels_shinjuku_hero_trip",
+    bottom: "fs_hotels_shinjuku_bottom_trip",
+  },
+  shibuya: {
+    hero: "fs_hotels_shibuya_hero_trip",
+    bottom: "fs_hotels_shibuya_bottom_trip",
+  },
 };
 
 type NearbyAlternative = { targetSlug: string; reason: string };
 
-const nearbyByPilot: Record<PilotSlug, NearbyAlternative[]> = {
+const nearbyBySlug: Record<SupportedSlug, NearbyAlternative[]> = {
   asakusa: [
     { targetSlug: "ueno", reason: "Better for museums and transport" },
     { targetSlug: "kuramae", reason: "Quieter local-feeling base" },
@@ -85,10 +100,45 @@ const nearbyByPilot: Record<PilotSlug, NearbyAlternative[]> = {
     { targetSlug: "nihombashi", reason: "Calmer central base" },
     { targetSlug: "ueno", reason: "Better for museums and value" },
   ],
+  "ginza-yurakucho": [
+    { targetSlug: "tokyo-station", reason: "Simpler for early Shinkansen" },
+    { targetSlug: "nihombashi", reason: "Calmer central logistics base" },
+    { targetSlug: "shimbashi", reason: "More salaryman nightlife and bay access" },
+  ],
+  nihombashi: [
+    { targetSlug: "tokyo-station", reason: "Stronger Shinkansen access" },
+    { targetSlug: "ginza-yurakucho", reason: "More shopping and dining" },
+    { targetSlug: "ningyocho", reason: "More local old-merchant feel" },
+  ],
+  shinjuku: [
+    { targetSlug: "shibuya", reason: "Another big-city nightlife base" },
+    { targetSlug: "ueno", reason: "More practical Narita-side base" },
+    { targetSlug: "tokyo-station", reason: "Simpler for early Shinkansen" },
+  ],
+  shibuya: [
+    { targetSlug: "shinjuku", reason: "More hotel choice and rail coverage" },
+    { targetSlug: "shinagawa", reason: "Better for Haneda and Shinkansen" },
+    { targetSlug: "ginza-yurakucho", reason: "More polished central base" },
+  ],
+  "hamamatsucho-daimon": [
+    { targetSlug: "shinagawa", reason: "Stronger rail and Shinkansen access" },
+    { targetSlug: "ginza-yurakucho", reason: "More shopping and dining" },
+    { targetSlug: "tokyo-station", reason: "Simpler for early Shinkansen" },
+  ],
+  shinagawa: [
+    { targetSlug: "hamamatsucho-daimon", reason: "More direct Tokyo Monorail logic" },
+    { targetSlug: "shibuya", reason: "More nightlife and youth-Tokyo energy" },
+    { targetSlug: "tokyo-station", reason: "More central Shinkansen departure point" },
+  ],
+  kuramae: [
+    { targetSlug: "asakusa", reason: "More classic sightseeing atmosphere" },
+    { targetSlug: "ueno", reason: "Better rail coverage and museums" },
+    { targetSlug: "oshiage", reason: "Stronger airport and Skytree logic" },
+  ],
 };
 
 /** Map area id → display name so the nearby cards show a friendly label
- *  even for non-pilot targets (which link to the Finder query param). */
+ *  even for non-supported targets (which link to the Finder query param). */
 function areaDisplayName(id: string): string {
   const area = tokyoStayAreasBase.find((a) => a.id === id);
   return area?.displayName ?? id;
@@ -110,10 +160,10 @@ function areaWithStationSuffix(displayName: string): string {
 }
 
 function nearbyHref(targetSlug: string): string {
-  if ((PILOT_SLUGS as readonly string[]).includes(targetSlug)) {
+  if ((SUPPORTED_SLUGS as readonly string[]).includes(targetSlug)) {
     return `/areas-to-stay/tokyo-hotels/${targetSlug}`;
   }
-  // Phase 1: non-pilot targets land on the Finder with the area pre-selected.
+  // Non-supported targets land on the Finder with the area pre-selected.
   return `/areas-to-stay/tokyo-stay-area-index?area=${encodeURIComponent(targetSlug)}`;
 }
 
@@ -164,17 +214,17 @@ type Translation = Awaited<ReturnType<typeof getTranslations>>;
 
 const scoresFile = scoresJson as StayAreaScoresFile;
 
-function resolvePilot(slug: string): PilotSlug | null {
-  return (PILOT_SLUGS as readonly string[]).includes(slug) ? (slug as PilotSlug) : null;
+function resolveSupportedSlug(slug: string): SupportedSlug | null {
+  return (SUPPORTED_SLUGS as readonly string[]).includes(slug) ? (slug as SupportedSlug) : null;
 }
 
-function areaForPilot(slug: PilotSlug): StayAreaBase {
+function areaForSlug(slug: SupportedSlug): StayAreaBase {
   const area = tokyoStayAreasBase.find((a) => a.id === slug);
   if (!area) throw new Error(`Missing Tokyo stay area base data for ${slug}`);
   return area;
 }
 
-function scoreForPilot(slug: PilotSlug): ComputedStayAreaScore {
+function scoreForSlug(slug: SupportedSlug): ComputedStayAreaScore {
   const score = scoresFile.areas.find((s) => s.id === slug);
   if (!score) throw new Error(`Missing computed stay-area score for ${slug}`);
   return score;
@@ -183,16 +233,16 @@ function scoreForPilot(slug: PilotSlug): ComputedStayAreaScore {
 // ---------- metadata + static params ---------------------------------------
 
 export function generateStaticParams() {
-  return PILOT_SLUGS.map((slug) => ({ slug }));
+  return SUPPORTED_SLUGS.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const pilot = resolvePilot(slug);
-  if (!pilot) return {};
-  const area = areaForPilot(pilot);
+  const supportedSlug = resolveSupportedSlug(slug);
+  if (!supportedSlug) return {};
+  const area = areaForSlug(supportedSlug);
   const t = await getTranslations({ locale, namespace: "tokyoHotelsPage.meta" });
-  const path = `/areas-to-stay/tokyo-hotels/${pilot}`;
+  const path = `/areas-to-stay/tokyo-hotels/${supportedSlug}`;
   const areaWithStation = areaWithStationSuffix(area.displayName);
   const title = t("titleTemplate", { area: area.displayName, areaWithStation });
   const description = t("descriptionTemplate", { area: area.displayName, areaWithStation });
@@ -222,13 +272,13 @@ type ProviderLink = {
 };
 
 function assembleProviderLinks(
-  pilot: PilotSlug,
+  slug: SupportedSlug,
   locale: string,
   placement: HotelAffiliatePlacement,
   t: Translation,
 ): ProviderLink[] {
   const bookingLinks = getHotelProviderLinks({
-    areaId: pilot,
+    areaId: slug,
     locale,
     placement,
   }).map<ProviderLink>((link) => ({
@@ -241,26 +291,29 @@ function assembleProviderLinks(
     priority: link.priority,
   }));
 
-  const hotelAreaKey = hotelAreaKeyByPilot[pilot];
-  const hotel = getHotelLink(hotelAreaKey);
-  const config = getTripHotelConfig(hotelAreaKey);
-  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl.trim();
-  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl.trim();
+  const hotelAreaKey = hotelAreaKeyBySlug[slug];
+  const tripSubIds = tripSubIdBySlug[slug];
   const tripSubIdSlot = placement === "tokyo_hotels_hero" ? "hero" : "bottom";
-  const tripSubId = tripSubIdByPilot[pilot][tripSubIdSlot];
+  let tripLink: ProviderLink | null = null;
+  if (hotelAreaKey && tripSubIds) {
+    const hotel = getHotelLink(hotelAreaKey);
+    const config = getTripHotelConfig(hotelAreaKey);
+    const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl.trim();
+    const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl.trim();
 
-  const tripLink: ProviderLink | null =
-    tripHref && tripHref !== "#"
-      ? {
-          provider: "trip",
-          href: tripHref,
-          trackingHref: tripTrackingHref,
-          label: t("hero.tripButton"),
-          linkId: `hotelArea.${hotelAreaKey}.trip`,
-          subId: tripSubId,
-          priority: 20,
-        }
-      : null;
+    tripLink =
+      tripHref && tripHref !== "#"
+        ? {
+            provider: "trip",
+            href: tripHref,
+            trackingHref: tripTrackingHref,
+            label: t("hero.tripButton"),
+            linkId: `hotelArea.${hotelAreaKey}.trip`,
+            subId: tripSubIds[tripSubIdSlot],
+            priority: 20,
+          }
+        : null;
+  }
 
   return [...bookingLinks, ...(tripLink ? [tripLink] : [])].sort(
     (a, b) => a.priority - b.priority || a.linkId.localeCompare(b.linkId),
@@ -330,13 +383,13 @@ function AccessRow({
 
 export default async function TokyoHotelsAreaPage({ params }: Props) {
   const { locale, slug } = await params;
-  const pilot = resolvePilot(slug);
-  if (!pilot) notFound();
+  const supportedSlug = resolveSupportedSlug(slug);
+  if (!supportedSlug) notFound();
 
-  const area = areaForPilot(pilot);
-  const score = scoreForPilot(pilot);
+  const area = areaForSlug(supportedSlug);
+  const score = scoreForSlug(supportedSlug);
   const t = await getTranslations({ locale, namespace: "tokyoHotelsPage" });
-  const pagePath = `/areas-to-stay/tokyo-hotels/${pilot}`;
+  const pagePath = `/areas-to-stay/tokyo-hotels/${supportedSlug}`;
 
   // Cross-namespace lookup for the per-area station route disambiguation note.
   const tStationNote = await getTranslations({
@@ -345,7 +398,7 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
   });
   let stationNote: string | null = null;
   try {
-    stationNote = tStationNote(pilot);
+    stationNote = tStationNote(supportedSlug);
   } catch {
     stationNote = null;
   }
@@ -383,8 +436,8 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
   const areaWithStation = areaWithStationSuffix(area.displayName);
 
   // ----- hero + bottom CTAs
-  const heroLinks = assembleProviderLinks(pilot, locale, "tokyo_hotels_hero", t);
-  const bottomLinks = assembleProviderLinks(pilot, locale, "tokyo_hotels_bottom", t);
+  const heroLinks = assembleProviderLinks(supportedSlug, locale, "tokyo_hotels_hero", t);
+  const bottomLinks = assembleProviderLinks(supportedSlug, locale, "tokyo_hotels_bottom", t);
 
   // ----- best-for / watch-out / before-you-book content
   const bestFor = area.editorial.bestFor.slice(0, 3);
@@ -434,7 +487,7 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
     },
   ];
 
-  const nearbyAlternatives = nearbyByPilot[pilot];
+  const nearbyAlternatives = nearbyBySlug[supportedSlug];
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -617,7 +670,7 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
             {nearbyAlternatives.map((alt) => {
               const href = nearbyHref(alt.targetSlug);
               const name = areaDisplayName(alt.targetSlug);
-              const isPilotTarget = (PILOT_SLUGS as readonly string[]).includes(alt.targetSlug);
+              const isPilotTarget = (SUPPORTED_SLUGS as readonly string[]).includes(alt.targetSlug);
               return isPilotTarget ? (
                 <TrackedInternalLink
                   key={alt.targetSlug}

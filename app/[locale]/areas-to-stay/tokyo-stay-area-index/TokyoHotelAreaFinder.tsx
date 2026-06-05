@@ -16,14 +16,21 @@ import type { AffiliatePlacement } from "@/lib/affiliate/links";
 
 /**
  * Areas that already have a dedicated /areas-to-stay/tokyo-hotels/<slug>
- * landing page (Phase 1 pilots). When a result card matches one of these
+ * landing page. When a result card matches one of these
  * ids, we render a secondary "View hotel search page" CTA that links to
  * that page. Other areas do not show the link yet.
  */
-const PILOT_HOTEL_PAGE_IDS: ReadonlySet<string> = new Set([
+const SUPPORTED_HOTEL_PAGE_IDS: ReadonlySet<string> = new Set([
   "asakusa",
   "ueno",
   "tokyo-station",
+  "ginza-yurakucho",
+  "nihombashi",
+  "shinjuku",
+  "shibuya",
+  "hamamatsucho-daimon",
+  "shinagawa",
+  "kuramae",
 ]);
 
 type FinderProviderLink = {
@@ -591,7 +598,7 @@ function ResultCard({
           <p className="text-xs font-semibold text-slate-950">{copy.watchOut}</p>
           <p className="mt-1 text-xs leading-5 text-slate-700">{area.watchOut.slice(0, 2).join(" · ")}</p>
         </div>
-        {PILOT_HOTEL_PAGE_IDS.has(area.id) ? (
+        {SUPPORTED_HOTEL_PAGE_IDS.has(area.id) ? (
           <TrackedInternalLink
             href={`/areas-to-stay/tokyo-hotels/${area.id}`}
             sourcePage="tokyo_stay_area_index"

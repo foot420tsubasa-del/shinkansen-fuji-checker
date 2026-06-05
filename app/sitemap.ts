@@ -52,6 +52,13 @@ const englishOnlyContentPaths = [
   "/areas-to-stay/tokyo-hotels/asakusa",
   "/areas-to-stay/tokyo-hotels/ueno",
   "/areas-to-stay/tokyo-hotels/tokyo-station",
+  "/areas-to-stay/tokyo-hotels/ginza-yurakucho",
+  "/areas-to-stay/tokyo-hotels/nihombashi",
+  "/areas-to-stay/tokyo-hotels/shinjuku",
+  "/areas-to-stay/tokyo-hotels/shibuya",
+  "/areas-to-stay/tokyo-hotels/hamamatsucho-daimon",
+  "/areas-to-stay/tokyo-hotels/shinagawa",
+  "/areas-to-stay/tokyo-hotels/kuramae",
 ];
 
 const dynamicPaths = [

@@ -11,13 +11,18 @@ import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
 import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import type { StayAreaBase, StayAreaScoresFile } from "@/lib/stay-area/types";
 
-/*
- * Phase 1 pilot index: lists the three pilot tokyo-hotels pages so the
- * /areas-to-stay/tokyo-hotels URL is not a 404 and the breadcrumb on the
- * detail pages has a real parent.
- */
-
-const PILOT_SLUGS = ["asakusa", "ueno", "tokyo-station"] as const;
+const SUPPORTED_SLUGS = [
+  "asakusa",
+  "ueno",
+  "tokyo-station",
+  "ginza-yurakucho",
+  "nihombashi",
+  "shinjuku",
+  "shibuya",
+  "hamamatsucho-daimon",
+  "shinagawa",
+  "kuramae",
+] as const;
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -79,7 +84,7 @@ export default async function TokyoHotelsIndexPage({ params }: Props) {
         </section>
 
         <section className="mt-6 grid gap-3 md:grid-cols-3">
-          {PILOT_SLUGS.map((slug) => {
+          {SUPPORTED_SLUGS.map((slug) => {
             const area = areaFor(slug);
             if (!area) return null;
             const score = overallScoreFor(slug);
