@@ -122,19 +122,18 @@ export default async function TokyoHotelsIndexPage({ params }: Props) {
           })}
         </section>
 
-        <section className="mt-6 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
+        <p className="mt-6">
           <TrackedInternalLink
             href="/areas-to-stay/tokyo-stay-area-index"
             sourcePage="/areas-to-stay/tokyo-hotels"
             placement="tokyo_hotels_index_back_to_finder"
             label={t("index.finderLinkLabel")}
             locale={locale}
-            className="inline-flex items-center gap-1 text-sm font-semibold text-[#106b43] underline underline-offset-4 hover:no-underline"
+            className="text-sm font-semibold text-slate-600 underline underline-offset-4 transition-colors hover:text-[#106b43]"
           >
             {t("index.finderLinkLabel")}
-            <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
           </TrackedInternalLink>
-        </section>
+        </p>
 
         <p className="mt-6 text-xs leading-5 text-slate-500">{t("legal.body")}</p>
       </Container>

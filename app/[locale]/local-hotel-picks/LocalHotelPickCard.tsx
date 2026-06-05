@@ -1,6 +1,7 @@
 "use client";
 
-import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
+import { trackAffiliateClick } from "@/lib/analytics";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 import type { LocalHotelPick } from "@/lib/content/local-hotel-picks";
 import { useTranslations } from "next-intl";
 
@@ -20,9 +21,9 @@ type LocalHotelPickCardProps = {
 export function LocalHotelPickCard({ pick, locale, pagePath, groupLabel, copy }: LocalHotelPickCardProps) {
   const t = useTranslations("localHotelPicks");
   const tripUrl = pick.tripFallbackUrl.trim();
-  const providerLinks: Array<{ provider: ProviderId; href: string; label: string; linkId: string }> = [
-    tripUrl ? { provider: "trip", href: tripUrl, label: "Trip.com", linkId: `localHotelPick.${pick.id}.trip` } : null,
-  ].filter(Boolean) as Array<{ provider: ProviderId; href: string; label: string; linkId: string }>;
+  const providerLinks = [
+    tripUrl ? { href: tripUrl, label: "Search on Trip.com →", linkId: `localHotelPick.${pick.id}.trip` } : null,
+  ].filter(Boolean) as Array<{ href: string; label: string; linkId: string }>;
 
   return (
     <article className="overflow-hidden rounded-[18px] border border-slate-200 bg-white shadow-sm">
@@ -61,26 +62,33 @@ export function LocalHotelPickCard({ pick, locale, pagePath, groupLabel, copy }:
         </div>
 
         {providerLinks.length > 0 ? (
-          <div className={`mt-4 grid gap-2 ${providerLinks.length > 1 ? "grid-cols-2" : ""}`}>
+          <div className="mt-4 grid gap-1.5">
             {providerLinks.map((link) => (
-              <ProviderButton
-                key={link.provider}
-                provider={link.provider}
+              <a
+                key={link.linkId}
                 href={link.href}
-                placement="local_hotel_pick"
-                pagePath={pagePath}
-                locale={locale}
-                linkId={link.linkId}
-                product="local_hotel_pick"
-                category="hotel"
-                area={pick.area}
-                city={pick.city}
-                hotelName={pick.hotelName}
-                fullWidth
-                className="min-h-10 px-3 py-2 text-xs"
+                target="_blank"
+                rel={AFFILIATE_REL}
+                className="inline-flex text-xs font-semibold text-slate-600 underline underline-offset-4 transition-colors hover:text-[#0875c9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
+                onClick={() =>
+                  trackAffiliateClick({
+                    category: "hotel",
+                    provider: "trip",
+                    placement: "local_hotel_pick",
+                    page_path: pagePath,
+                    locale,
+                    href: link.href,
+                    label: link.label,
+                    link_id: link.linkId,
+                    product: "local_hotel_pick",
+                    area: pick.area,
+                    city: pick.city,
+                    hotel_name: pick.hotelName,
+                  })
+                }
               >
                 {link.label}
-              </ProviderButton>
+              </a>
             ))}
           </div>
         ) : null}

@@ -613,11 +613,12 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
           </p>
           <h2 className="mt-2 text-xl font-semibold text-slate-950">{t("nearby.title")}</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{t("nearby.intro")}</p>
-          <div className="mt-4 grid gap-3 sm:grid-cols-3">
+          <div className="mt-4 grid gap-3">
             {nearbyAlternatives.map((alt) => {
               const href = nearbyHref(alt.targetSlug);
               const name = areaDisplayName(alt.targetSlug);
-              return (
+              const isPilotTarget = (PILOT_SLUGS as readonly string[]).includes(alt.targetSlug);
+              return isPilotTarget ? (
                 <TrackedInternalLink
                   key={alt.targetSlug}
                   href={href}
@@ -632,6 +633,19 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
                   <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#106b43]">
                     →
                   </span>
+                </TrackedInternalLink>
+              ) : (
+                <TrackedInternalLink
+                  key={alt.targetSlug}
+                  href={href}
+                  sourcePage={pagePath}
+                  placement="tokyo_hotels_nearby"
+                  label={`Nearby: ${name}`}
+                  locale={locale}
+                  className="block border-b border-slate-100 py-2 text-sm text-slate-600 underline underline-offset-4 transition-colors last:border-b-0 hover:text-[#106b43]"
+                >
+                  <span className="font-semibold text-slate-700">{name}</span>
+                  <span className="ml-2 text-xs text-slate-500">{alt.reason}</span>
                 </TrackedInternalLink>
               );
             })}

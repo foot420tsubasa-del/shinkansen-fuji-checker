@@ -1,6 +1,7 @@
 "use client";
 
-import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
+import { trackAffiliateClick } from "@/lib/analytics";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 import type { LocalHotelPick } from "@/lib/content/local-hotel-picks";
 
 type HotelPickMatrixProps = {
@@ -9,12 +10,59 @@ type HotelPickMatrixProps = {
   pagePath: string;
 };
 
-function providerLinksForPick(pick: LocalHotelPick): Array<{ provider: ProviderId; href: string; label: string; linkId: string }> {
+type TripTextLink = {
+  href: string;
+  label: string;
+  linkId: string;
+};
+
+function providerLinksForPick(pick: LocalHotelPick): TripTextLink[] {
   const tripUrl = pick.tripFallbackUrl.trim();
 
   return [
-    tripUrl ? { provider: "trip" as const, href: tripUrl, label: "Trip.com", linkId: `localHotelPick.${pick.id}.trip` } : null,
-  ].filter(Boolean) as Array<{ provider: ProviderId; href: string; label: string; linkId: string }>;
+    tripUrl ? { href: tripUrl, label: "Search on Trip.com →", linkId: `localHotelPick.${pick.id}.trip` } : null,
+  ].filter(Boolean) as TripTextLink[];
+}
+
+function TripTextAffiliateLink({
+  link,
+  pick,
+  locale,
+  pagePath,
+  placement,
+}: {
+  link: TripTextLink;
+  pick: LocalHotelPick;
+  locale: string;
+  pagePath: string;
+  placement: "local_hotel_picks_matrix";
+}) {
+  return (
+    <a
+      href={link.href}
+      target="_blank"
+      rel={AFFILIATE_REL}
+      className="inline-flex text-xs font-semibold text-slate-600 underline underline-offset-4 transition-colors hover:text-[#0875c9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
+      onClick={() =>
+        trackAffiliateClick({
+          category: "hotel",
+          provider: "trip",
+          placement,
+          page_path: pagePath,
+          locale,
+          href: link.href,
+          label: link.label,
+          link_id: link.linkId,
+          product: "local_hotel_pick",
+          area: pick.area,
+          city: pick.city,
+          hotel_name: pick.hotelName,
+        })
+      }
+    >
+      {link.label}
+    </a>
+  );
 }
 
 function roomGroupAngle(pick: LocalHotelPick) {
@@ -67,26 +115,16 @@ export function HotelPickMatrix({ picks, locale, pagePath }: HotelPickMatrixProp
                   <td className="w-[150px] px-3 py-4 align-top leading-6 text-slate-600">{roomGroupAngle(pick)}</td>
                   <td className="w-[170px] px-3 py-4 align-top">
                     {providerLinks.length > 0 ? (
-                      <div className="grid gap-2">
+                      <div className="grid gap-1.5">
                         {providerLinks.map((link) => (
-                          <ProviderButton
-                            key={link.provider}
-                            provider={link.provider}
-                            href={link.href}
+                          <TripTextAffiliateLink
+                            key={link.linkId}
+                            link={link}
+                            pick={pick}
                             placement="local_hotel_picks_matrix"
                             pagePath={pagePath}
                             locale={locale}
-                            linkId={link.linkId}
-                            product="local_hotel_pick"
-                            category="hotel"
-                            area={pick.area}
-                            city={pick.city}
-                            hotelName={pick.hotelName}
-                            fullWidth
-                            className="min-h-9 px-3 py-2 text-xs"
-                          >
-                            {link.label}
-                          </ProviderButton>
+                          />
                         ))}
                       </div>
                     ) : null}
@@ -115,26 +153,16 @@ export function HotelPickMatrix({ picks, locale, pagePath }: HotelPickMatrixProp
                 <p><span className="font-semibold text-slate-900">Room / group angle:</span> {roomGroupAngle(pick)}</p>
               </div>
               {providerLinks.length > 0 ? (
-                <div className={`mt-4 grid gap-2 ${providerLinks.length > 1 ? "grid-cols-2" : ""}`}>
+                <div className="mt-4 grid gap-1.5">
                   {providerLinks.map((link) => (
-                    <ProviderButton
-                      key={link.provider}
-                      provider={link.provider}
-                      href={link.href}
+                    <TripTextAffiliateLink
+                      key={link.linkId}
+                      link={link}
+                      pick={pick}
                       placement="local_hotel_picks_matrix"
                       pagePath={pagePath}
                       locale={locale}
-                      linkId={link.linkId}
-                      product="local_hotel_pick"
-                      category="hotel"
-                      area={pick.area}
-                      city={pick.city}
-                      hotelName={pick.hotelName}
-                      fullWidth
-                      className="min-h-10 px-3 py-2 text-xs"
-                    >
-                      {link.label}
-                    </ProviderButton>
+                    />
                   ))}
                 </div>
               ) : null}
