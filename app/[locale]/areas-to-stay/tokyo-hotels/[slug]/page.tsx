@@ -176,6 +176,146 @@ const nearbyBySlug: Partial<Record<SupportedSlug, NearbyAlternative[]>> = {
     { targetSlug: "shinagawa", reason: "Better for Haneda and Shinkansen" },
     { targetSlug: "tokyo-station", reason: "Better for central sightseeing" },
   ],
+
+  // ---- East Tokyo (remaining)
+  ryogoku: [
+    { targetSlug: "kuramae", reason: "Quieter calm East Tokyo base" },
+    { targetSlug: "asakusa", reason: "More sightseeing and old-town energy" },
+    { targetSlug: "oshiage", reason: "Stronger airport access via Asakusa Line" },
+  ],
+  "kiyosumi-shirakawa": [
+    { targetSlug: "monzen-nakacho", reason: "Similar Fukagawa calm with metro access" },
+    { targetSlug: "kuramae", reason: "More rail options and cafés" },
+    { targetSlug: "ryogoku", reason: "Stronger JR connections" },
+  ],
+  "monzen-nakacho": [
+    { targetSlug: "kiyosumi-shirakawa", reason: "Similar calm with more café streets" },
+    { targetSlug: "toyosu", reason: "Bay-side base with wider sidewalks" },
+    { targetSlug: "ryogoku", reason: "Stronger JR access" },
+  ],
+  asakusabashi: [
+    { targetSlug: "bakurocho-higashinihombashi", reason: "Similar quiet wholesale base" },
+    { targetSlug: "kuramae", reason: "Calmer river-side feel with more cafés" },
+    { targetSlug: "ueno", reason: "Stronger Narita and rail access" },
+  ],
+  kinshicho: [
+    { targetSlug: "oshiage", reason: "Stronger Skytree and airport logic" },
+    { targetSlug: "kuramae", reason: "Calmer East Tokyo street feel" },
+    { targetSlug: "ryogoku", reason: "Similar local energy with JR options" },
+  ],
+
+  // ---- Central Tokyo
+  ningyocho: [
+    { targetSlug: "nihombashi", reason: "More central rail and shopping" },
+    { targetSlug: "kayabacho", reason: "Quieter business-side base" },
+    { targetSlug: "asakusabashi", reason: "More local-feeling old-merchant streets" },
+  ],
+  hatchobori: [
+    { targetSlug: "kayabacho", reason: "Similar quiet business district" },
+    { targetSlug: "nihombashi", reason: "More central with stronger rail" },
+    { targetSlug: "tokyo-station", reason: "Better for early Shinkansen" },
+  ],
+  kayabacho: [
+    { targetSlug: "hatchobori", reason: "Similar calm business streets" },
+    { targetSlug: "nihombashi", reason: "More central retail and dining" },
+    { targetSlug: "monzen-nakacho", reason: "Similar calm with Fukagawa atmosphere" },
+  ],
+  nihombashi: [
+    { targetSlug: "tokyo-station", reason: "Stronger Shinkansen and rail logistics" },
+    { targetSlug: "ginza-yurakucho", reason: "More shopping and dining" },
+    { targetSlug: "ningyocho", reason: "More local old-merchant atmosphere" },
+  ],
+  "ginza-yurakucho": [
+    { targetSlug: "tokyo-station", reason: "Simpler early Shinkansen logistics" },
+    { targetSlug: "shimbashi", reason: "More salaryman nightlife" },
+    { targetSlug: "nihombashi", reason: "Calmer central base" },
+  ],
+  shimbashi: [
+    { targetSlug: "ginza-yurakucho", reason: "More polished retail and dining" },
+    { targetSlug: "hamamatsucho-daimon", reason: "Better Tokyo Monorail / Haneda access" },
+    { targetSlug: "tokyo-station", reason: "Stronger Shinkansen and JR" },
+  ],
+  kanda: [
+    { targetSlug: "akihabara", reason: "More energy and electronics access" },
+    { targetSlug: "nihombashi", reason: "More polished central base" },
+    { targetSlug: "ochanomizu", reason: "Calmer university-area streets" },
+  ],
+  akihabara: [
+    { targetSlug: "ueno", reason: "Better Narita-side logistics" },
+    { targetSlug: "kanda", reason: "Calmer JR-adjacent base" },
+    { targetSlug: "bakurocho-higashinihombashi", reason: "Quieter wholesale streets nearby" },
+  ],
+  "bakurocho-higashinihombashi": [
+    { targetSlug: "asakusabashi", reason: "Similar quiet wholesale district" },
+    { targetSlug: "kayabacho", reason: "Quiet business base with stronger metro" },
+    { targetSlug: "ningyocho", reason: "More local old-merchant streets" },
+  ],
+  "akasaka-mitsuke": [
+    { targetSlug: "roppongi", reason: "More nightlife energy" },
+    { targetSlug: "aoyama-omotesando", reason: "More retail and design" },
+    { targetSlug: "ginza-yurakucho", reason: "More central shopping" },
+  ],
+  roppongi: [
+    { targetSlug: "akasaka-mitsuke", reason: "Calmer business-side base" },
+    { targetSlug: "aoyama-omotesando", reason: "More retail and gallery streets" },
+    { targetSlug: "shibuya", reason: "Bigger nightlife hub" },
+  ],
+
+  // ---- South Central / South / West Tokyo
+  "hamamatsucho-daimon": [
+    { targetSlug: "shinagawa", reason: "Stronger Shinkansen and Haneda access" },
+    { targetSlug: "shimbashi", reason: "More walkable salaryman nightlife" },
+    { targetSlug: "tokyo-station", reason: "More central sightseeing" },
+  ],
+  gotanda: [
+    { targetSlug: "meguro", reason: "Calmer streets and design feel" },
+    { targetSlug: "shinagawa", reason: "Stronger Shinkansen and airport access" },
+    { targetSlug: "ebisu", reason: "More polished retail and dining" },
+  ],
+  meguro: [
+    { targetSlug: "ebisu", reason: "More polished cafés and retail" },
+    { targetSlug: "gotanda", reason: "Similar mid-Yamanote base with more rail" },
+    { targetSlug: "shibuya", reason: "Bigger entertainment hub" },
+  ],
+  ebisu: [
+    { targetSlug: "meguro", reason: "Calmer side streets" },
+    { targetSlug: "shibuya", reason: "Bigger transit hub and nightlife" },
+    { targetSlug: "ginza-yurakucho", reason: "More polished central base" },
+  ],
+  yoyogi: [
+    { targetSlug: "shinjuku", reason: "More hotel choice and transit options" },
+    { targetSlug: "shibuya", reason: "Bigger entertainment hub" },
+    { targetSlug: "aoyama-omotesando", reason: "More polished retail base" },
+  ],
+  "aoyama-omotesando": [
+    { targetSlug: "shibuya", reason: "Bigger entertainment and rail hub" },
+    { targetSlug: "akasaka-mitsuke", reason: "Calmer business-side base" },
+    { targetSlug: "roppongi", reason: "More nightlife energy" },
+  ],
+
+  // ---- Central-North / Central-West
+  ochanomizu: [
+    { targetSlug: "iidabashi", reason: "Calmer canal-side base" },
+    { targetSlug: "kanda", reason: "More energy near JR" },
+    { targetSlug: "korakuen-kasuga", reason: "Quieter Bunkyo residential streets" },
+  ],
+  iidabashi: [
+    { targetSlug: "korakuen-kasuga", reason: "Quieter Bunkyo residential base" },
+    { targetSlug: "ochanomizu", reason: "Stronger JR access" },
+    { targetSlug: "ikebukuro", reason: "Bigger transit hub for more flights" },
+  ],
+  "korakuen-kasuga": [
+    { targetSlug: "iidabashi", reason: "Stronger JR and canal-side dining" },
+    { targetSlug: "ochanomizu", reason: "More university-area energy" },
+    { targetSlug: "ikebukuro", reason: "Bigger transit hub nearby" },
+  ],
+
+  // ---- Bay Area
+  toyosu: [
+    { targetSlug: "ariake-odaiba", reason: "More bay-side promenade space" },
+    { targetSlug: "monzen-nakacho", reason: "Calmer Fukagawa-side base" },
+    { targetSlug: "tokyo-station", reason: "More central sightseeing" },
+  ],
 };
 
 // ---------- pure helpers ----------------------------------------------------
