@@ -4517,204 +4517,204 @@
   },
   "tokyoHotelsPage": {
     "meta": {
-      "titleTemplate": "Hotels near {areaWithStation}: Is This the Right Tokyo Base?",
-      "descriptionTemplate": "See whether {area} is a good Tokyo hotel base for your trip, with luggage, airport, Shinkansen, quietness, and hotel-search guidance.",
+      "titleTemplate": "{areaWithStation} 附近的酒店：是否是东京住宿的合适选择？",
+      "descriptionTemplate": "看看 {area} 是否适合作为东京住宿基地，包含行李、机场、新干线、安静度与酒店搜索指引。",
       "ogSiteName": "fujiseat"
     },
     "breadcrumb": {
-      "home": "Home",
-      "areasToStay": "Areas to stay",
-      "category": "Tokyo hotel search pages"
+      "home": "首页",
+      "areasToStay": "住宿区域",
+      "category": "东京酒店搜索页面"
     },
-    "eyebrow": "Tokyo Hotel Search Pages",
+    "eyebrow": "东京酒店搜索页面",
     "hero": {
-      "titleTemplate": "{area} hotels: is this the right Tokyo base?",
-      "introTemplate": "See who {area} fits best, what to watch out for, and then search hotels near the station.",
-      "fitBadgeLabel": "Hotel-base fit",
+      "titleTemplate": "{area} 酒店：是否是合适的东京住宿基地？",
+      "introTemplate": "看看 {area} 适合哪种旅客、要注意什么，然后再搜索车站附近的酒店。",
+      "fitBadgeLabel": "住宿基地适配度",
       "fitBadgeOutOf": "/100",
-      "confidencePrefix": "Confidence",
-      "freshnessPrefix": "Data freshness",
-      "trustNote": "We link to trusted booking partners. No extra fees.",
+      "confidencePrefix": "信心度",
+      "freshnessPrefix": "数据新鲜度",
+      "trustNote": "我们链接到值得信任的预订合作伙伴。没有额外费用。",
       "bookingButton": "Booking.com",
       "tripButton": "Trip.com",
       "headline": {
-        "topPick": "Top pick",
-        "strongFit": "Strong fit",
-        "goodFit": "Good fit",
-        "mixedFit": "Mixed fit",
-        "checkCarefully": "Check carefully"
+        "topPick": "首选",
+        "strongFit": "高度适配",
+        "goodFit": "适配",
+        "mixedFit": "混合适配",
+        "checkCarefully": "请仔细确认"
       },
-      "fitScoreNote": "Based on the editorial travel-fit score (passenger data, exit complexity, line / operator complexity, step-free, street luggage stress, lodging density)."
+      "fitScoreNote": "依编辑部的旅行适配分数计算（乘客数据、出口复杂度、线路/运营商复杂度、无障碍、街道行李压力、住宿密度）。"
     },
     "glance": {
-      "eyebrow": "At a glance",
-      "title": "What this area is",
-      "bestForTitle": "Best for"
+      "eyebrow": "概览",
+      "title": "这个区域是什么样",
+      "bestForTitle": "适合对象"
     },
     "areaLogic": {
-      "eyebrow": "Hotel-base logic",
-      "title": "Why this area works as a hotel base",
-      "whyTitle": "Why it can fit",
-      "localFeelTitle": "Local feel",
-      "signalsTitle": "Signals considered"
+      "eyebrow": "住宿基地逻辑",
+      "title": "为何这个区域适合作为酒店基地",
+      "whyTitle": "为何可能适配",
+      "localFeelTitle": "在地氛围",
+      "signalsTitle": "考量的信号"
     },
     "scoreCards": {
-      "eyebrow": "Quick fit",
-      "title": "Quick fit score",
-      "airportAccess": "Airport access",
-      "luggageFriendly": "Luggage friendly",
-      "quietAtNight": "Station stress",
-      "shinkansenDayFit": "Shinkansen day fit",
-      "hotelChoice": "Hotel choice"
+      "eyebrow": "快速适配",
+      "title": "快速适配分数",
+      "airportAccess": "机场交通",
+      "luggageFriendly": "行李友好度",
+      "quietAtNight": "车站压力",
+      "shinkansenDayFit": "新干线移动日",
+      "hotelChoice": "酒店选择"
     },
     "detailScores": {
-      "stationSimplicity": "Station simplicity",
-      "luggageFriendly": "Luggage-friendly",
-      "airportAccess": "Airport access",
-      "shinkansenAccess": "Shinkansen access",
-      "touristAccess": "Tourist access",
-      "localFeel": "Local feel",
-      "crowdStress": "Less crowd stress",
-      "hotelChoice": "Hotel choice"
+      "stationSimplicity": "车站简明度",
+      "luggageFriendly": "行李友好",
+      "airportAccess": "机场交通",
+      "shinkansenAccess": "新干线交通",
+      "touristAccess": "观光便利度",
+      "localFeel": "在地氛围",
+      "crowdStress": "较少拥挤压力",
+      "hotelChoice": "酒店选择"
     },
     "scoreLabels": {
-      "veryGood": "Very good",
-      "good": "Good",
-      "mixed": "Mixed",
-      "checkCarefully": "Check carefully"
+      "veryGood": "非常好",
+      "good": "良好",
+      "mixed": "普通",
+      "checkCarefully": "请仔细确认"
     },
     "lodgingDensity": {
-      "veryHigh": "Lots of hotels nearby",
-      "high": "Good range of hotels nearby",
-      "medium": "Some hotels nearby",
-      "low": "Limited hotel choice nearby"
+      "veryHigh": "附近酒店众多",
+      "high": "酒店选择丰富",
+      "medium": "附近有部分酒店",
+      "low": "酒店选择有限"
     },
     "whoFor": {
-      "eyebrow": "Who this area is for",
-      "title": "Who this area fits"
+      "eyebrow": "适合对象",
+      "title": "适合的人"
     },
     "beforeBook": {
-      "eyebrow": "Before you book",
-      "title": "Things to check first",
-      "walkingDistanceCaution": "Check the exact walking distance from your hotel to the station exit you actually need — \"near {area}\" can mean 3 to 15 minutes on foot."
+      "eyebrow": "订房前注意",
+      "title": "优先确认事项",
+      "walkingDistanceCaution": "请确认从酒店到实际要走的车站出口的步行距离——「{area} 附近」可能是步行 3 到 15 分钟。"
     },
     "access": {
-      "eyebrow": "Access notes",
-      "title": "Airport and Shinkansen access",
-      "narita": "Narita Airport",
-      "haneda": "Haneda Airport",
-      "airportEase": "Overall airport ease",
-      "shinkansen": "Shinkansen day fit",
-      "tokyoStationAccess": "Tokyo Station access"
+      "eyebrow": "交通备注",
+      "title": "机场与新干线交通",
+      "narita": "成田机场",
+      "haneda": "羽田机场",
+      "airportEase": "机场便利度",
+      "shinkansen": "新干线移动日",
+      "tokyoStationAccess": "东京站交通"
     },
     "nearby": {
-      "eyebrow": "Nearby alternatives",
-      "title": "Other Tokyo bases nearby",
-      "intro": "If this area is not quite right, here are nearby Tokyo bases that fit different travel plans.",
-      "openLabel": "Open",
+      "eyebrow": "附近替代选择",
+      "title": "邻近的东京住宿基地",
+      "intro": "如果这个区域不完全合适，看看符合不同旅行计划的邻近基地。",
+      "openLabel": "打开",
       "metrics": {
-        "overall": "Overall",
-        "airport": "Airport",
-        "luggage": "Luggage",
-        "station": "Station",
-        "localFeel": "Stay feel"
+        "overall": "综合",
+        "airport": "机场",
+        "luggage": "行李",
+        "station": "车站",
+        "localFeel": "氛围"
       }
     },
     "bottomCta": {
-      "title": "Ready to check prices?",
-      "bodyTemplate": "Compare real hotel options near {areaWithStation} on trusted sites.",
-      "backLink": "Back to Tokyo Hotel Area Finder"
+      "title": "准备好查看价格了吗？",
+      "bodyTemplate": "在信任的网站上比较 {areaWithStation} 附近的实际酒店选择。",
+      "backLink": "返回 Tokyo Hotel Area Finder"
     },
     "legal": {
-      "body": "This page compares station areas, not individual hotels. It does not guarantee price, availability, safety, route conditions, or hotel quality. Always check the exact hotel location, walking route, cancellation terms, and current booking details on the partner site."
+      "body": "本页比较的是车站区域而非个别酒店。不保证价格、空房、安全、路线状况或酒店品质。请务必在合作网站上确认酒店的确切位置、步行路线、取消条件以及最新订房信息。"
     },
     "index": {
-      "breadcrumb": "Tokyo hotel search pages",
-      "eyebrow": "Tokyo Hotel Search Pages",
-      "title": "Tokyo hotel search pages",
-      "intro": "Choose a station area before checking hotel prices. Each page summarises who the area fits, what to watch out for, and links straight to trusted hotel partners.",
-      "cardOpenLabel": "Open area",
-      "finderLinkLabel": "Back to Tokyo Hotel Area Finder",
-      "metaTitle": "Tokyo hotel search pages: choose your station area first | fujiseat",
-      "metaDescription": "Compare Tokyo hotel search pages by station area, then check hotels near the base that fits your trip."
+      "breadcrumb": "东京酒店搜索页面",
+      "eyebrow": "东京酒店搜索页面",
+      "title": "东京酒店搜索页面",
+      "intro": "先选择车站区域再查看价格。每个页面摘要适合的对象、注意事项，并直接链接至受信任的合作伙伴。",
+      "cardOpenLabel": "打开区域",
+      "finderLinkLabel": "返回 Tokyo Hotel Area Finder",
+      "metaTitle": "东京酒店搜索页面：先选择车站区域 | fujiseat",
+      "metaDescription": "比较东京的车站区域，再查看适合您旅程的基地附近的酒店。"
     },
     "primaryGraph": {
-      "eyebrow": "Score graph",
-      "title": "Primary score graph",
-      "intro": "Four headline metrics that matter most when picking a Tokyo hotel base.",
-      "airportAccess": "Airport access",
-      "luggageFriendly": "Luggage ease",
-      "stationSimplicity": "Station usability",
-      "localFeel": "Stay feel"
+      "eyebrow": "分数图表",
+      "title": "主要分数图表",
+      "intro": "选择东京酒店基地时最重要的四项主要指标。",
+      "airportAccess": "机场交通",
+      "luggageFriendly": "行李便利度",
+      "stationSimplicity": "车站易用度",
+      "localFeel": "住宿氛围"
     },
     "detailedBreakdown": {
-      "eyebrow": "Detailed breakdown",
-      "title": "Detailed score breakdown",
-      "intro": "Every sub-score grouped into three buckets. Same data, finer view.",
+      "eyebrow": "详细分解",
+      "title": "详细分数分解",
+      "intro": "所有子分数分为三大组。相同数据，更细的视角。",
       "groups": {
-        "access": "Access",
-        "ease": "Ease",
-        "stayFeel": "Stay feel"
+        "access": "交通",
+        "ease": "便利度",
+        "stayFeel": "住宿氛围"
       },
       "metrics": {
-        "shinkansenAccess": "Shinkansen access",
-        "touristAccess": "Tourist access",
-        "stationStress": "Less station stress",
-        "hotelChoice": "Hotel choice"
+        "shinkansenAccess": "新干线交通",
+        "touristAccess": "观光便利度",
+        "stationStress": "较少车站压力",
+        "hotelChoice": "酒店选择"
       }
     },
     "featureLabels": {
-      "eyebrow": "At a glance",
-      "title": "Why this area is appealing",
+      "eyebrow": "概览",
+      "title": "为何这个区域吸引人",
       "airport": {
-        "title": "Strong airport access",
-        "body": "A practical first-night base when arriving from Narita or Haneda."
+        "title": "机场交通强",
+        "body": "从成田或羽田抵达后实用的第一晚住宿基地。"
       },
       "luggage": {
-        "title": "Easier luggage moves",
-        "body": "Calmer streets and friendlier station exits when rolling suitcases."
+        "title": "行李移动更轻松",
+        "body": "拖行李时较安静的街道与更友好的车站出口。"
       },
       "shinkansen": {
-        "title": "Smooth Shinkansen days",
-        "body": "Short hop to Tokyo or Shinagawa for an early-morning bullet train."
+        "title": "顺畅的新干线移动日",
+        "body": "前往东京站或品川车站搭乘清晨新干线非常便利。"
       },
       "station": {
-        "title": "Simpler station",
-        "body": "Fewer exits and clearer ground-level orientation."
+        "title": "车站较简单",
+        "body": "出口较少，地面方向更清晰。"
       },
       "local": {
-        "title": "Calmer Tokyo feel",
-        "body": "Quieter blocks and a more residential rhythm in the evening."
+        "title": "较安静的东京氛围",
+        "body": "夜晚街区较安静，更接近住宅区的步调。"
       },
       "quiet": {
-        "title": "Less daytime stress",
-        "body": "Lower passenger throughput than the busiest mega-terminals."
+        "title": "白天压力较小",
+        "body": "乘客流量低于最繁忙的大型枢纽车站。"
       },
       "sights": {
-        "title": "Tourist access",
-        "body": "Close to well-known sightseeing spots without changing trains."
+        "title": "观光便利度",
+        "body": "无需换乘即可前往知名观光景点。"
       },
       "hotels": {
-        "title": "Lots of hotels nearby",
-        "body": "Plenty of options across price points and room layouts."
+        "title": "附近酒店众多",
+        "body": "不同价位与房型的选择丰富。"
       },
       "balanced": {
-        "title": "Balanced fit",
-        "body": "A solid all-rounder for trips without a single dominant constraint."
+        "title": "均衡的适配",
+        "body": "适合没有单一限制条件的旅程，整体表现均衡。"
       }
     },
     "fitProfile": {
-      "eyebrow": "Is this for me?",
-      "title": "Good fit for / Watch out for",
-      "goodFitTitle": "Good fit for",
-      "watchOutTitle": "Watch out for"
+      "eyebrow": "适合我吗？",
+      "title": "适合对象 / 需要注意",
+      "goodFitTitle": "适合对象",
+      "watchOutTitle": "需要注意"
     },
     "accessSnapshot": {
-      "eyebrow": "Access snapshot",
-      "title": "How this area connects",
-      "intro": "A qualitative snapshot — not a real map. Always check the exact route from the hotel to your station entrance.",
-      "centerSublabel": "You are here",
-      "qualitativeNote": "Qualitative levels (Excellent / Good / Fair / Weak) are editorial summaries of the existing access profiles. They are not exact travel times.",
+      "eyebrow": "交通快照",
+      "title": "这个区域如何连接",
+      "intro": "这是质性概览，不是真正的地图。请务必确认从酒店到车站入口的实际路线。",
+      "centerSublabel": "您在这里",
+      "qualitativeNote": "质性等级（Excellent / Good / Fair / Weak）是现有交通档案的编辑摘要，并非精确的交通时间。",
       "commandMap": {
         "oshiage": {
           "intro": "Oshiage works as an east Tokyo base because it connects airport access, Skytree-side stays, Asakusa, and central rail links without acting like a mega-terminal.",
@@ -4744,21 +4744,21 @@
           }
         }
       },
-      "mapCaption": "Interactive map centered on {area}. Use the standard Google Maps controls to zoom, pan, or open a full-screen view.",
-      "mapAriaLabel": "Google Maps view of {area}"
+      "mapCaption": "以 {area} 为中心的互动地图。使用 Google Maps 标准控件可缩放、平移或开启全屏。",
+      "mapAriaLabel": "{area} 的 Google Maps 视图"
     },
     "visuals": {
       "howThisAreaConnects": {
-        "alt": "How {area} connects to key Tokyo and airport destinations",
-        "caption": "Visual summary of how {area} connects to major Tokyo and airport destinations."
+        "alt": "{area} 如何连接东京主要目的地与机场",
+        "caption": "{area} 如何连接东京主要目的地与机场的视觉摘要。"
       },
       "areaVibe": {
-        "alt": "Visual summary of why {area} works as a Tokyo hotel base",
-        "caption": "A glance at the {area} vibe — pace, surroundings, and what to expect on arrival."
+        "alt": "{area} 作为东京住宿基地的视觉摘要",
+        "caption": "一眼掌握 {area} 的氛围——节奏、周边环境，以及抵达时的感受。"
       },
       "nearbyAlternatives": {
-        "alt": "Comparison of {area} with nearby alternative hotel areas",
-        "caption": "{area} side-by-side with nearby alternatives."
+        "alt": "{area} 与邻近替代住宿区域的比较",
+        "caption": "{area} 与邻近替代区域并列比较。"
       }
     }
   }

@@ -4518,204 +4518,204 @@
   },
   "tokyoHotelsPage": {
     "meta": {
-      "titleTemplate": "Hotels near {areaWithStation}: Is This the Right Tokyo Base?",
-      "descriptionTemplate": "See whether {area} is a good Tokyo hotel base for your trip, with luggage, airport, Shinkansen, quietness, and hotel-search guidance.",
+      "titleTemplate": "Hotéis perto de {areaWithStation}: É a área certa para Tóquio?",
+      "descriptionTemplate": "Veja se {area} é uma boa base em Tóquio: bagagem, aeroporto, Shinkansen, tranquilidade e busca de hotéis.",
       "ogSiteName": "fujiseat"
     },
     "breadcrumb": {
-      "home": "Home",
-      "areasToStay": "Areas to stay",
-      "category": "Tokyo hotel search pages"
+      "home": "Início",
+      "areasToStay": "Onde ficar",
+      "category": "Páginas de busca de hotéis em Tóquio"
     },
-    "eyebrow": "Tokyo Hotel Search Pages",
+    "eyebrow": "PÁGINAS DE BUSCA DE HOTÉIS EM TÓQUIO",
     "hero": {
-      "titleTemplate": "{area} hotels: is this the right Tokyo base?",
-      "introTemplate": "See who {area} fits best, what to watch out for, and then search hotels near the station.",
-      "fitBadgeLabel": "Hotel-base fit",
+      "titleTemplate": "Hotéis em {area}: é a base certa em Tóquio?",
+      "introTemplate": "Veja para quem {area} funciona melhor, o que considerar, e depois busque hotéis perto da estação.",
+      "fitBadgeLabel": "Adequação da base",
       "fitBadgeOutOf": "/100",
-      "confidencePrefix": "Confidence",
-      "freshnessPrefix": "Data freshness",
-      "trustNote": "We link to trusted booking partners. No extra fees.",
+      "confidencePrefix": "Confiança",
+      "freshnessPrefix": "Atualização",
+      "trustNote": "Conectamos a parceiros de reserva confiáveis. Sem taxas extras.",
       "bookingButton": "Booking.com",
       "tripButton": "Trip.com",
       "headline": {
-        "topPick": "Top pick",
-        "strongFit": "Strong fit",
-        "goodFit": "Good fit",
-        "mixedFit": "Mixed fit",
-        "checkCarefully": "Check carefully"
+        "topPick": "Melhor escolha",
+        "strongFit": "Forte adequação",
+        "goodFit": "Boa adequação",
+        "mixedFit": "Adequação mista",
+        "checkCarefully": "Verifique com cuidado"
       },
-      "fitScoreNote": "Based on the editorial travel-fit score (passenger data, exit complexity, line / operator complexity, step-free, street luggage stress, lodging density)."
+      "fitScoreNote": "Baseado na pontuação editorial de adequação (dados de passageiros, complexidade de saídas, linhas/operadoras, acessibilidade sem degraus, estresse de bagagem nas ruas, densidade hoteleira)."
     },
     "glance": {
-      "eyebrow": "At a glance",
-      "title": "What this area is",
-      "bestForTitle": "Best for"
+      "eyebrow": "Visão geral",
+      "title": "O que é esta área",
+      "bestForTitle": "Ideal para"
     },
     "areaLogic": {
-      "eyebrow": "Hotel-base logic",
-      "title": "Why this area works as a hotel base",
-      "whyTitle": "Why it can fit",
-      "localFeelTitle": "Local feel",
-      "signalsTitle": "Signals considered"
+      "eyebrow": "Lógica da base",
+      "title": "Por que esta área funciona como base hoteleira",
+      "whyTitle": "Por que pode encaixar",
+      "localFeelTitle": "Atmosfera local",
+      "signalsTitle": "Sinais considerados"
     },
     "scoreCards": {
-      "eyebrow": "Quick fit",
-      "title": "Quick fit score",
-      "airportAccess": "Airport access",
-      "luggageFriendly": "Luggage friendly",
-      "quietAtNight": "Station stress",
-      "shinkansenDayFit": "Shinkansen day fit",
-      "hotelChoice": "Hotel choice"
+      "eyebrow": "Adequação rápida",
+      "title": "Pontuação rápida de adequação",
+      "airportAccess": "Acesso ao aeroporto",
+      "luggageFriendly": "Bom com bagagem",
+      "quietAtNight": "Estresse da estação",
+      "shinkansenDayFit": "Dia de Shinkansen",
+      "hotelChoice": "Variedade de hotéis"
     },
     "detailScores": {
-      "stationSimplicity": "Station simplicity",
-      "luggageFriendly": "Luggage-friendly",
-      "airportAccess": "Airport access",
-      "shinkansenAccess": "Shinkansen access",
-      "touristAccess": "Tourist access",
-      "localFeel": "Local feel",
-      "crowdStress": "Less crowd stress",
-      "hotelChoice": "Hotel choice"
+      "stationSimplicity": "Simplicidade da estação",
+      "luggageFriendly": "Bom com bagagem",
+      "airportAccess": "Acesso ao aeroporto",
+      "shinkansenAccess": "Acesso ao Shinkansen",
+      "touristAccess": "Acesso turístico",
+      "localFeel": "Atmosfera local",
+      "crowdStress": "Menos estresse de multidão",
+      "hotelChoice": "Variedade de hotéis"
     },
     "scoreLabels": {
-      "veryGood": "Very good",
-      "good": "Good",
-      "mixed": "Mixed",
-      "checkCarefully": "Check carefully"
+      "veryGood": "Muito bom",
+      "good": "Bom",
+      "mixed": "Misto",
+      "checkCarefully": "Verifique com cuidado"
     },
     "lodgingDensity": {
-      "veryHigh": "Lots of hotels nearby",
-      "high": "Good range of hotels nearby",
-      "medium": "Some hotels nearby",
-      "low": "Limited hotel choice nearby"
+      "veryHigh": "Muitos hotéis por perto",
+      "high": "Boa variedade de hotéis",
+      "medium": "Alguns hotéis por perto",
+      "low": "Pouca variedade de hotéis"
     },
     "whoFor": {
-      "eyebrow": "Who this area is for",
-      "title": "Who this area fits"
+      "eyebrow": "Para quem é esta área",
+      "title": "Para quem se encaixa"
     },
     "beforeBook": {
-      "eyebrow": "Before you book",
-      "title": "Things to check first",
-      "walkingDistanceCaution": "Check the exact walking distance from your hotel to the station exit you actually need — \"near {area}\" can mean 3 to 15 minutes on foot."
+      "eyebrow": "Antes de reservar",
+      "title": "O que verificar primeiro",
+      "walkingDistanceCaution": "Verifique a distância exata a pé do hotel até a saída da estação que você realmente precisa — \"perto de {area}\" pode significar de 3 a 15 minutos a pé."
     },
     "access": {
-      "eyebrow": "Access notes",
-      "title": "Airport and Shinkansen access",
-      "narita": "Narita Airport",
-      "haneda": "Haneda Airport",
-      "airportEase": "Overall airport ease",
-      "shinkansen": "Shinkansen day fit",
-      "tokyoStationAccess": "Tokyo Station access"
+      "eyebrow": "Notas de acesso",
+      "title": "Acesso a aeroportos e Shinkansen",
+      "narita": "Aeroporto de Narita",
+      "haneda": "Aeroporto de Haneda",
+      "airportEase": "Facilidade de aeroporto",
+      "shinkansen": "Dia de Shinkansen",
+      "tokyoStationAccess": "Acesso a Tokyo Station"
     },
     "nearby": {
-      "eyebrow": "Nearby alternatives",
-      "title": "Other Tokyo bases nearby",
-      "intro": "If this area is not quite right, here are nearby Tokyo bases that fit different travel plans.",
-      "openLabel": "Open",
+      "eyebrow": "Alternativas próximas",
+      "title": "Outras bases de Tóquio por perto",
+      "intro": "Se esta área não for ideal, veja bases próximas que se encaixam em diferentes planos de viagem.",
+      "openLabel": "Abrir",
       "metrics": {
-        "overall": "Overall",
-        "airport": "Airport",
-        "luggage": "Luggage",
-        "station": "Station",
-        "localFeel": "Stay feel"
+        "overall": "Geral",
+        "airport": "Aeroporto",
+        "luggage": "Bagagem",
+        "station": "Estação",
+        "localFeel": "Atmosfera"
       }
     },
     "bottomCta": {
-      "title": "Ready to check prices?",
-      "bodyTemplate": "Compare real hotel options near {areaWithStation} on trusted sites.",
-      "backLink": "Back to Tokyo Hotel Area Finder"
+      "title": "Pronto para verificar preços?",
+      "bodyTemplate": "Compare opções reais de hotéis perto de {areaWithStation} em sites de confiança.",
+      "backLink": "Voltar ao Tokyo Hotel Area Finder"
     },
     "legal": {
-      "body": "This page compares station areas, not individual hotels. It does not guarantee price, availability, safety, route conditions, or hotel quality. Always check the exact hotel location, walking route, cancellation terms, and current booking details on the partner site."
+      "body": "Esta página compara áreas de estação, não hotéis individuais. Não garante preço, disponibilidade, segurança, condições de rota ou qualidade dos hotéis. Sempre verifique a localização exata do hotel, o trajeto a pé, as condições de cancelamento e os detalhes atuais de reserva no site do parceiro."
     },
     "index": {
-      "breadcrumb": "Tokyo hotel search pages",
-      "eyebrow": "Tokyo Hotel Search Pages",
-      "title": "Tokyo hotel search pages",
-      "intro": "Choose a station area before checking hotel prices. Each page summarises who the area fits, what to watch out for, and links straight to trusted hotel partners.",
-      "cardOpenLabel": "Open area",
-      "finderLinkLabel": "Back to Tokyo Hotel Area Finder",
-      "metaTitle": "Tokyo hotel search pages: choose your station area first | fujiseat",
-      "metaDescription": "Compare Tokyo hotel search pages by station area, then check hotels near the base that fits your trip."
+      "breadcrumb": "Páginas de busca de hotéis em Tóquio",
+      "eyebrow": "PÁGINAS DE BUSCA DE HOTÉIS EM TÓQUIO",
+      "title": "Páginas de busca de hotéis em Tóquio",
+      "intro": "Escolha uma área de estação antes de verificar preços. Cada página resume para quem a área serve, o que considerar e leva direto a parceiros confiáveis.",
+      "cardOpenLabel": "Abrir área",
+      "finderLinkLabel": "Voltar ao Tokyo Hotel Area Finder",
+      "metaTitle": "Páginas de busca de hotéis em Tóquio: escolha a área de estação primeiro | fujiseat",
+      "metaDescription": "Compare áreas de estação em Tóquio e depois confira hotéis perto da base que se encaixa na sua viagem."
     },
     "primaryGraph": {
-      "eyebrow": "Score graph",
-      "title": "Primary score graph",
-      "intro": "Four headline metrics that matter most when picking a Tokyo hotel base.",
-      "airportAccess": "Airport access",
-      "luggageFriendly": "Luggage ease",
-      "stationSimplicity": "Station usability",
-      "localFeel": "Stay feel"
+      "eyebrow": "Gráfico de pontuação",
+      "title": "Gráfico principal de pontuação",
+      "intro": "Quatro métricas principais que mais importam ao escolher uma base hoteleira em Tóquio.",
+      "airportAccess": "Acesso ao aeroporto",
+      "luggageFriendly": "Facilidade com bagagem",
+      "stationSimplicity": "Usabilidade da estação",
+      "localFeel": "Atmosfera da estadia"
     },
     "detailedBreakdown": {
-      "eyebrow": "Detailed breakdown",
-      "title": "Detailed score breakdown",
-      "intro": "Every sub-score grouped into three buckets. Same data, finer view.",
+      "eyebrow": "Análise detalhada",
+      "title": "Análise detalhada das pontuações",
+      "intro": "Todas as sub-pontuações agrupadas em três blocos. Mesmos dados, visão mais fina.",
       "groups": {
-        "access": "Access",
-        "ease": "Ease",
-        "stayFeel": "Stay feel"
+        "access": "Acesso",
+        "ease": "Facilidade",
+        "stayFeel": "Atmosfera da estadia"
       },
       "metrics": {
-        "shinkansenAccess": "Shinkansen access",
-        "touristAccess": "Tourist access",
-        "stationStress": "Less station stress",
-        "hotelChoice": "Hotel choice"
+        "shinkansenAccess": "Acesso ao Shinkansen",
+        "touristAccess": "Acesso turístico",
+        "stationStress": "Menos estresse na estação",
+        "hotelChoice": "Variedade de hotéis"
       }
     },
     "featureLabels": {
-      "eyebrow": "At a glance",
-      "title": "Why this area is appealing",
+      "eyebrow": "Visão geral",
+      "title": "Por que esta área é interessante",
       "airport": {
-        "title": "Strong airport access",
-        "body": "A practical first-night base when arriving from Narita or Haneda."
+        "title": "Forte acesso ao aeroporto",
+        "body": "Uma base prática para a primeira noite ao chegar de Narita ou Haneda."
       },
       "luggage": {
-        "title": "Easier luggage moves",
-        "body": "Calmer streets and friendlier station exits when rolling suitcases."
+        "title": "Bagagem mais fácil",
+        "body": "Ruas mais calmas e saídas de estação amigáveis quando arrastando malas."
       },
       "shinkansen": {
-        "title": "Smooth Shinkansen days",
-        "body": "Short hop to Tokyo or Shinagawa for an early-morning bullet train."
+        "title": "Dias de Shinkansen tranquilos",
+        "body": "Curta distância até Tokyo ou Shinagawa para um Shinkansen de manhã cedo."
       },
       "station": {
-        "title": "Simpler station",
-        "body": "Fewer exits and clearer ground-level orientation."
+        "title": "Estação mais simples",
+        "body": "Menos saídas e orientação mais clara ao nível da rua."
       },
       "local": {
-        "title": "Calmer Tokyo feel",
-        "body": "Quieter blocks and a more residential rhythm in the evening."
+        "title": "Atmosfera mais calma",
+        "body": "Quarteirões mais tranquilos e ritmo mais residencial à noite."
       },
       "quiet": {
-        "title": "Less daytime stress",
-        "body": "Lower passenger throughput than the busiest mega-terminals."
+        "title": "Menos estresse diurno",
+        "body": "Menor fluxo de passageiros que os mega-terminais mais movimentados."
       },
       "sights": {
-        "title": "Tourist access",
-        "body": "Close to well-known sightseeing spots without changing trains."
+        "title": "Acesso turístico",
+        "body": "Perto de pontos turísticos conhecidos sem trocas de trem."
       },
       "hotels": {
-        "title": "Lots of hotels nearby",
-        "body": "Plenty of options across price points and room layouts."
+        "title": "Muitos hotéis por perto",
+        "body": "Muitas opções em diferentes faixas de preço e layouts de quarto."
       },
       "balanced": {
-        "title": "Balanced fit",
-        "body": "A solid all-rounder for trips without a single dominant constraint."
+        "title": "Adequação equilibrada",
+        "body": "Uma opção sólida para viagens sem uma restrição dominante."
       }
     },
     "fitProfile": {
-      "eyebrow": "Is this for me?",
-      "title": "Good fit for / Watch out for",
-      "goodFitTitle": "Good fit for",
-      "watchOutTitle": "Watch out for"
+      "eyebrow": "É para mim?",
+      "title": "Para quem encaixa / O que observar",
+      "goodFitTitle": "Bom para",
+      "watchOutTitle": "Atenção a"
     },
     "accessSnapshot": {
-      "eyebrow": "Access snapshot",
-      "title": "How this area connects",
-      "intro": "A qualitative snapshot — not a real map. Always check the exact route from the hotel to your station entrance.",
-      "centerSublabel": "You are here",
-      "qualitativeNote": "Qualitative levels (Excellent / Good / Fair / Weak) are editorial summaries of the existing access profiles. They are not exact travel times.",
+      "eyebrow": "Acesso em destaque",
+      "title": "Como esta área se conecta",
+      "intro": "Um resumo qualitativo — não é um mapa real. Sempre verifique o trajeto exato do hotel até a entrada da sua estação.",
+      "centerSublabel": "Você está aqui",
+      "qualitativeNote": "Os níveis qualitativos (Excellent / Good / Fair / Weak) são resumos editoriais dos perfis de acesso existentes. Não são tempos exatos de viagem.",
       "commandMap": {
         "oshiage": {
           "intro": "Oshiage works as an east Tokyo base because it connects airport access, Skytree-side stays, Asakusa, and central rail links without acting like a mega-terminal.",
@@ -4745,21 +4745,21 @@
           }
         }
       },
-      "mapCaption": "Interactive map centered on {area}. Use the standard Google Maps controls to zoom, pan, or open a full-screen view.",
-      "mapAriaLabel": "Google Maps view of {area}"
+      "mapCaption": "Mapa interativo centrado em {area}. Use os controles padrão do Google Maps para fazer zoom, deslocar ou abrir em tela cheia.",
+      "mapAriaLabel": "Visualização do Google Maps de {area}"
     },
     "visuals": {
       "howThisAreaConnects": {
-        "alt": "How {area} connects to key Tokyo and airport destinations",
-        "caption": "Visual summary of how {area} connects to major Tokyo and airport destinations."
+        "alt": "Como {area} se conecta a destinos principais de Tóquio e aos aeroportos",
+        "caption": "Resumo visual de como {area} se conecta aos principais destinos de Tóquio e aos aeroportos."
       },
       "areaVibe": {
-        "alt": "Visual summary of why {area} works as a Tokyo hotel base",
-        "caption": "A glance at the {area} vibe — pace, surroundings, and what to expect on arrival."
+        "alt": "Resumo visual de por que {area} funciona como base hoteleira em Tóquio",
+        "caption": "Uma olhada na atmosfera de {area} — ritmo, vizinhança e o que esperar na chegada."
       },
       "nearbyAlternatives": {
-        "alt": "Comparison of {area} with nearby alternative hotel areas",
-        "caption": "{area} side-by-side with nearby alternatives."
+        "alt": "Comparação de {area} com áreas hoteleiras alternativas próximas",
+        "caption": "{area} lado a lado com alternativas próximas."
       }
     }
   }
