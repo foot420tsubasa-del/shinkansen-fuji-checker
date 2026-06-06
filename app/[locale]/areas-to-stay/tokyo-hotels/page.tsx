@@ -11,18 +11,7 @@ import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
 import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import type { StayAreaBase, StayAreaScoresFile } from "@/lib/stay-area/types";
 
-const SUPPORTED_SLUGS = [
-  "asakusa",
-  "ueno",
-  "tokyo-station",
-  "ginza-yurakucho",
-  "nihombashi",
-  "shinjuku",
-  "shibuya",
-  "hamamatsucho-daimon",
-  "shinagawa",
-  "kuramae",
-] as const;
+const SUPPORTED_SLUGS = tokyoStayAreasBase.map((area) => area.id);
 
 type Props = {
   params: Promise<{ locale: string }>;

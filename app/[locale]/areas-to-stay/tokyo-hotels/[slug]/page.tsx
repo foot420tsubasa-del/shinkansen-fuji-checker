@@ -34,21 +34,11 @@ import type {
  * across all 9 locales; non-EN locales are noindex below).
  */
 
-const SUPPORTED_SLUGS = [
-  "asakusa",
-  "ueno",
-  "tokyo-station",
-  "ginza-yurakucho",
-  "nihombashi",
-  "shinjuku",
-  "shibuya",
-  "hamamatsucho-daimon",
-  "shinagawa",
-  "kuramae",
-] as const;
-type SupportedSlug = (typeof SUPPORTED_SLUGS)[number];
+const SUPPORTED_SLUGS = tokyoStayAreasBase.map((area) => area.id);
+type SupportedSlug = string;
 
 const hotelAreaKeyBySlug: Partial<Record<SupportedSlug, HotelAreaKey>> = {
+  oshiage: "oshiage",
   asakusa: "asakusa",
   ueno: "ueno",
   "tokyo-station": "tokyoStation",
@@ -60,6 +50,10 @@ const hotelAreaKeyBySlug: Partial<Record<SupportedSlug, HotelAreaKey>> = {
  *  data/hotel-affiliate-links.json; Trip sub_ids are passed inline here so
  *  the click event carries `sub_id` as a stable identifier. */
 const tripSubIdBySlug: Partial<Record<SupportedSlug, { hero: string; bottom: string }>> = {
+  oshiage: {
+    hero: "fs_hotels_oshiage_hero_trip",
+    bottom: "fs_hotels_oshiage_bottom_trip",
+  },
   asakusa: {
     hero: "fs_hotels_asakusa_hero_trip",
     bottom: "fs_hotels_asakusa_bottom_trip",
@@ -82,9 +76,27 @@ const tripSubIdBySlug: Partial<Record<SupportedSlug, { hero: string; bottom: str
   },
 };
 
+const stationRouteNoteAreaIds = new Set([
+  "asakusa",
+  "oshiage",
+  "kuramae",
+  "kiyosumi-shirakawa",
+  "roppongi",
+  "shinjuku",
+  "shibuya",
+  "tokyo-station",
+  "ueno",
+  "ginza-yurakucho",
+  "hamamatsucho-daimon",
+  "shinagawa",
+  "ikebukuro",
+  "akihabara",
+  "nihombashi",
+]);
+
 type NearbyAlternative = { targetSlug: string; reason: string };
 
-const nearbyBySlug: Record<SupportedSlug, NearbyAlternative[]> = {
+const nearbyBySlug: Partial<Record<SupportedSlug, NearbyAlternative[]>> = {
   asakusa: [
     { targetSlug: "ueno", reason: "Better for museums and transport" },
     { targetSlug: "kuramae", reason: "Quieter local-feeling base" },
@@ -228,6 +240,18 @@ function scoreForSlug(slug: SupportedSlug): ComputedStayAreaScore {
   const score = scoresFile.areas.find((s) => s.id === slug);
   if (!score) throw new Error(`Missing computed stay-area score for ${slug}`);
   return score;
+}
+
+function defaultNearbyAlternatives(slug: SupportedSlug): NearbyAlternative[] {
+  const area = areaForSlug(slug);
+  const sameGroup = tokyoStayAreasBase.filter((candidate) => candidate.id !== slug && candidate.areaGroup === area.areaGroup);
+  const fallback = tokyoStayAreasBase.filter((candidate) => candidate.id !== slug && candidate.areaGroup !== area.areaGroup);
+  return [...sameGroup, ...fallback]
+    .slice(0, 3)
+    .map((candidate) => ({
+      targetSlug: candidate.id,
+      reason: candidate.editorial.overallLabel,
+    }));
 }
 
 // ---------- metadata + static params ---------------------------------------
@@ -396,12 +420,7 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
     locale,
     namespace: "tokyoStayAreaIndex.stationRouteNote.areas",
   });
-  let stationNote: string | null = null;
-  try {
-    stationNote = tStationNote(supportedSlug);
-  } catch {
-    stationNote = null;
-  }
+  const stationNote = stationRouteNoteAreaIds.has(supportedSlug) ? tStationNote(supportedSlug) : null;
 
   // ----- score-card toneLabels (translated)
   const scoreLabel = (n: number): string => {
@@ -487,7 +506,7 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
     },
   ];
 
-  const nearbyAlternatives = nearbyBySlug[supportedSlug];
+  const nearbyAlternatives = nearbyBySlug[supportedSlug] ?? defaultNearbyAlternatives(supportedSlug);
 
   return (
     <main className="page-shell min-h-screen text-slate-950">

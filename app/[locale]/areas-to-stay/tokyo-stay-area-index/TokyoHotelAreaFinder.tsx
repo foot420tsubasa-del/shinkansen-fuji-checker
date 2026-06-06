@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef, useMemo, useRef, useState } from "react";
+import { forwardRef, useEffect, useMemo, useRef, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import type { ProviderId } from "@/components/ui/ProviderButton";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
@@ -18,19 +18,45 @@ import type { AffiliatePlacement } from "@/lib/affiliate/links";
  * Areas that already have a dedicated /areas-to-stay/tokyo-hotels/<slug>
  * landing page. When a result card matches one of these
  * ids, we render a secondary "View hotel search page" CTA that links to
- * that page. Other areas do not show the link yet.
+ * that page.
  */
 const SUPPORTED_HOTEL_PAGE_IDS: ReadonlySet<string> = new Set([
+  "oshiage",
+  "kuramae",
   "asakusa",
   "ueno",
+  "ryogoku",
+  "kiyosumi-shirakawa",
+  "monzen-nakacho",
+  "ningyocho",
+  "hatchobori",
+  "kayabacho",
+  "nihombashi",
   "tokyo-station",
   "ginza-yurakucho",
-  "nihombashi",
-  "shinjuku",
-  "shibuya",
+  "shimbashi",
   "hamamatsucho-daimon",
   "shinagawa",
-  "kuramae",
+  "gotanda",
+  "meguro",
+  "ebisu",
+  "shibuya",
+  "shinjuku",
+  "yoyogi",
+  "ikebukuro",
+  "akihabara",
+  "kanda",
+  "asakusabashi",
+  "bakurocho-higashinihombashi",
+  "kinshicho",
+  "akasaka-mitsuke",
+  "roppongi",
+  "aoyama-omotesando",
+  "ochanomizu",
+  "iidabashi",
+  "korakuen-kasuga",
+  "toyosu",
+  "ariake-odaiba",
 ]);
 
 type FinderProviderLink = {
@@ -159,6 +185,84 @@ const emptyAnswers: Answers = {
   shinkansen: [],
 };
 
+const FINDER_STORAGE_KEY = "fujiseat:tokyoHotelAreaFinder:v1";
+const finderStepIds: FinderStep["id"][] = ["destinations", "airport", "luggage", "stay", "shinkansen"];
+
+type PersistedFinderState = {
+  started: boolean;
+  stepIndex: number;
+  answers: Answers;
+  showResults: boolean;
+  showMore: boolean;
+  showAll: boolean;
+  selectedAreaId: string | null;
+};
+
+function sanitizeAnswers(value: unknown): Answers | null {
+  if (!value || typeof value !== "object") return null;
+  const source = value as Partial<Record<FinderStep["id"], unknown>>;
+  const next = { ...emptyAnswers };
+
+  for (const stepId of finderStepIds) {
+    const answer = source[stepId];
+    if (!Array.isArray(answer) || !answer.every((item) => typeof item === "string")) {
+      return null;
+    }
+    next[stepId] = answer;
+  }
+
+  return next;
+}
+
+function readPersistedFinderState(): PersistedFinderState | null {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const raw = window.sessionStorage.getItem(FINDER_STORAGE_KEY);
+    if (!raw) return null;
+
+    const parsed = JSON.parse(raw) as Partial<PersistedFinderState>;
+    const answers = sanitizeAnswers(parsed.answers);
+    if (!answers) return null;
+
+    return {
+      started: parsed.started === true,
+      stepIndex: typeof parsed.stepIndex === "number" ? Math.max(0, Math.min(finderStepIds.length - 1, parsed.stepIndex)) : 0,
+      answers,
+      showResults: parsed.showResults === true,
+      showMore: parsed.showMore === true,
+      showAll: parsed.showAll === true,
+      selectedAreaId: typeof parsed.selectedAreaId === "string" ? parsed.selectedAreaId : null,
+    };
+  } catch {
+    return null;
+  }
+}
+
+function writePersistedFinderState(state: PersistedFinderState) {
+  if (typeof window === "undefined") return;
+
+  try {
+    window.sessionStorage.setItem(FINDER_STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    // Session storage is best-effort; the finder still works with in-memory state.
+  }
+}
+
+function clearPersistedFinderState() {
+  if (typeof window === "undefined") return;
+
+  try {
+    window.sessionStorage.removeItem(FINDER_STORAGE_KEY);
+  } catch {
+    // Ignore storage failures.
+  }
+}
+
+function isEmptyAnswerSet(answers: Answers) {
+  return finderStepIds.every((stepId) => answers[stepId].length === 0);
+}
+
 function matchLabelForRank(rank: number, copy: FinderCopy) {
   if (rank === 1) return copy.rankLabels.topPick;
   if (rank === 2) return copy.rankLabels.strongMatch;
@@ -278,11 +382,63 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
   const [selectedAreaId, setSelectedAreaId] = useState<string | null>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
   const selectedDetailRef = useRef<HTMLDivElement>(null);
+  const restoredStorageRef = useRef(false);
   const currentStep = copy.steps[stepIndex];
   const ranked = useMemo(() => rankAreas(areas, answers), [areas, answers]);
   const topThree = ranked.slice(0, 3);
   const moreMatches = ranked.slice(3, 10);
   const selectedArea = selectedAreaId ? ranked.find((area) => area.id === selectedAreaId) ?? null : null;
+
+  useEffect(() => {
+    const restoreTimer = window.setTimeout(() => {
+      const persisted = readPersistedFinderState();
+      if (persisted) {
+        const restoredSelectedAreaId =
+          persisted.selectedAreaId && areas.some((area) => area.id === persisted.selectedAreaId)
+            ? persisted.selectedAreaId
+            : null;
+        setStarted(persisted.started);
+        setStepIndex(persisted.stepIndex);
+        setAnswers(persisted.answers);
+        setShowResults(persisted.showResults);
+        setShowMore(persisted.showMore);
+        setShowAll(persisted.showAll);
+        setSelectedAreaId(restoredSelectedAreaId);
+      }
+      restoredStorageRef.current = true;
+    }, 0);
+
+    return () => window.clearTimeout(restoreTimer);
+  }, [areas]);
+
+  useEffect(() => {
+    const syncSelectedAreaFromUrl = () => {
+      const areaId = new URLSearchParams(window.location.search).get("area");
+      setSelectedAreaId(areaId);
+    };
+
+    window.addEventListener("popstate", syncSelectedAreaFromUrl);
+    return () => window.removeEventListener("popstate", syncSelectedAreaFromUrl);
+  }, []);
+
+  useEffect(() => {
+    if (!restoredStorageRef.current) return;
+
+    if (!started && stepIndex === 0 && !showResults && !showMore && !showAll && !selectedAreaId && isEmptyAnswerSet(answers)) {
+      clearPersistedFinderState();
+      return;
+    }
+
+    writePersistedFinderState({
+      started,
+      stepIndex,
+      answers,
+      showResults,
+      showMore,
+      showAll,
+      selectedAreaId,
+    });
+  }, [answers, selectedAreaId, showAll, showMore, showResults, started, stepIndex]);
 
   const start = () => {
     setStarted(true);
@@ -333,6 +489,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
   };
 
   const reset = () => {
+    clearPersistedFinderState();
     setStarted(false);
     setStepIndex(0);
     setAnswers(emptyAnswers);
@@ -340,6 +497,9 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
     setShowMore(false);
     setShowAll(false);
     setSelectedAreaId(null);
+    if (typeof window !== "undefined") {
+      window.history.replaceState(null, "", pagePath);
+    }
   };
 
   const openAreaDetails = (area: FinderArea & { matchScore: number }, rank: number) => {

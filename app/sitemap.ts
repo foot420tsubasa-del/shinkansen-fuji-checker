@@ -1,10 +1,13 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
+import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
 import { publicItineraryPages } from "@/lib/content/itineraries";
 import { stayPages } from "@/lib/content/stay";
 import { transferPages } from "@/lib/content/transfers";
 
 const siteUrl = "https://fujiseat.com";
+
+const tokyoHotelAreaPaths = tokyoStayAreasBase.map((area) => `/areas-to-stay/tokyo-hotels/${area.id}`);
 
 const translatedPaths = [
   "",
@@ -49,16 +52,7 @@ const englishOnlyContentPaths = [
   "/areas-to-stay/tokyo/tokyo-station",
   "/areas-to-stay/tokyo/east-tokyo",
   "/areas-to-stay/tokyo-hotels",
-  "/areas-to-stay/tokyo-hotels/asakusa",
-  "/areas-to-stay/tokyo-hotels/ueno",
-  "/areas-to-stay/tokyo-hotels/tokyo-station",
-  "/areas-to-stay/tokyo-hotels/ginza-yurakucho",
-  "/areas-to-stay/tokyo-hotels/nihombashi",
-  "/areas-to-stay/tokyo-hotels/shinjuku",
-  "/areas-to-stay/tokyo-hotels/shibuya",
-  "/areas-to-stay/tokyo-hotels/hamamatsucho-daimon",
-  "/areas-to-stay/tokyo-hotels/shinagawa",
-  "/areas-to-stay/tokyo-hotels/kuramae",
+  ...tokyoHotelAreaPaths,
 ];
 
 const dynamicPaths = [
