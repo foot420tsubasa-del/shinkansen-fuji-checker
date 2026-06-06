@@ -11,8 +11,8 @@
     "jrPass": "JR Pass vergleichen"
   },
   "home": {
-    "brandTitle": "Check your Mt. Fuji-side Shinkansen seat",
-    "brandSubtitle": "Then choose your Tokyo hotel base, rail option, and arrival prep in the right order.",
+    "brandTitle": "Prüfe deinen Shinkansen-Platz auf der Fuji-Seite",
+    "brandSubtitle": "Wähle dann deine Tokio-Hotelbasis, deine Bahnoption und deine Ankunftsvorbereitung in der richtigen Reihenfolge.",
     "seatCheckerHeading": "Shinkansen Mt. Fuji Sitzplatzcheck",
     "brandBuiltBy": "Erstellt von einem japanischen Creator für internationale Reisende, die den Mt. Fuji-Blick nicht verpassen wollen.",
     "brandSource": "Basierend auf öffentlich verfügbaren Informationen von JR Central",
@@ -106,22 +106,22 @@
     "footerIndependent": "Unabhängig und inoffiziell. Basierend auf öffentlich verfügbaren Informationen von JR Central.",
     "footerAffiliate": "Einige Links sind Klook-Affiliate-Links — ihre Nutzung hilft, diese Seite kostenlos zu halten.",
     "nav": {
-      "hub": "SHINKANSEN SEAT CHECKER",
-      "seat": "Check Seat",
+      "hub": "SHINKANSEN-SITZPLATZ-CHECKER",
+      "seat": "Sitz prüfen",
       "planner": "Planer",
-      "stay": "Hotel Base",
+      "stay": "Hotelbasis",
       "essentials": "Essentials",
       "about": "Über uns",
       "guide": "Reiseführer",
       "decisions": "Reiseentscheidungen",
       "questions": "Rückmeldung",
-      "tagline": "Fuji seat & Tokyo hotel base",
+      "tagline": "Fuji-Sitz & Tokio-Hotelbasis",
       "tickets": "Tickets",
       "esim": "eSIM",
-      "railGuide": "Rail Guide",
-      "arrivalPrep": "Arrival Prep",
-      "rail": "Rail",
-      "arrival": "Arrival"
+      "railGuide": "Bahn-Guide",
+      "arrivalPrep": "Ankunft vorbereiten",
+      "rail": "Bahn",
+      "arrival": "Ankunft"
     },
     "decisions": {
       "eyebrow": "Travel Utility Hub",
@@ -223,7 +223,7 @@
     "popularLinks": {
       "eyebrow": "Beliebte Links",
       "tokyo": {
-        "title": "Tokyo",
+        "title": "Tokio",
         "desc": "Beginne dein Abenteuer in Tokyo."
       },
       "fujiView": {
@@ -273,7 +273,7 @@
         "weakness": "Geschäftlicher und meist teurer als Ueno oder Asakusa."
       },
       "eastTokyo": {
-        "name": "Kiyosumi-Shirakawa / East Tokyo",
+        "name": "Kiyosumi-Shirakawa / Ost-Tokio",
         "bestFor": "Ruhiges lokales Tokyo, Kaffee, Gärten, Museen und langsamere Morgen.",
         "mood": "Lokaler Blick",
         "weakness": "Eher ein ruhiger Abstecher oder eine Basis für Wiederholer als die Standardwahl für die erste Nacht."
@@ -396,25 +396,25 @@
       "commandCenter": "Command Center öffnen"
     },
     "heroCtas": {
-      "primary": "Check Fuji-side seat",
-      "secondary": "Choose hotel base",
-      "tickets": "Rail guide",
-      "esim": "Arrival prep"
+      "primary": "Fuji-Seite prüfen",
+      "secondary": "Hotelbasis wählen",
+      "tickets": "Bahn-Guide",
+      "esim": "Ankunft vorbereiten"
     },
     "supportTools": {
-      "eyebrow": "More tools",
-      "description": "Use these after the seat, hotel base, tickets, and arrival basics are clear.",
-      "localTokyo": "Local Tokyo",
-      "routeSupport": "Route support",
-      "planner": "Trip Planner",
-      "itinerary": "7-day itinerary",
+      "eyebrow": "Weitere Tools",
+      "description": "Nutze diese Tools, wenn Sitz, Hotelbasis, Tickets und Ankunfts-Basics geklärt sind.",
+      "localTokyo": "Lokales Tokio",
+      "routeSupport": "Routen-Hilfe",
+      "planner": "Trip-Planer",
+      "itinerary": "7-Tage-Route",
       "commandCenter": "Command Center",
-      "stationPractice": "Station Practice",
-      "featuredLabel": "Featured tool",
-      "stationPracticeTitle": "Station Practice",
-      "stationPracticeDesc": "Practice Japanese station navigation before your trip.",
-      "stationPracticeCta": "Open practice",
-      "otherLabel": "Other tools"
+      "stationPractice": "Bahnhofs-Training",
+      "featuredLabel": "Empfohlenes Tool",
+      "stationPracticeTitle": "Bahnhofs-Training",
+      "stationPracticeDesc": "Übe vor der Reise die Orientierung in japanischen Bahnhöfen.",
+      "stationPracticeCta": "Training öffnen",
+      "otherLabel": "Andere Tools"
     }
   },
   "guide": {
@@ -1987,18 +1987,18 @@
           "title": "Wo in Tokio übernachten — Guide für Erstbesucher",
           "description": "Vergleiche Shinjuku, Ueno, Asakusa, Tokyo Station und das ruhigere Ost-Tokio.",
           "tags": [
-            "Tokyo",
-            "First-time",
-            "Area guide"
+            "Tokio",
+            "Erstbesuch",
+            "Gebietsguide"
           ]
         },
         "where-to-stay-before-shinkansen": {
           "title": "Wo vor dem Shinkansen in Tokio übernachten",
           "description": "Nutze das, wenn Gepäck und eine frühe Abfahrt ab Tokyo Station wichtig sind.",
           "tags": [
-            "Tokyo",
+            "Tokio",
             "Shinkansen",
-            "Luggage"
+            "Gepäck"
           ]
         },
         "tokyo-station-vs-shinjuku": {
@@ -2030,8 +2030,8 @@
           "description": "Vergleiche Kyoto Station, Kawaramachi / Shijo, Gion, Arashiyama und den ruhigeren Norden.",
           "tags": [
             "Kyoto",
-            "First-time",
-            "Area guide"
+            "Erstbesuch",
+            "Gebietsguide"
           ]
         },
         "kyoto-station-vs-gion": {
@@ -2047,8 +2047,8 @@
           "description": "Vergleiche Namba, Umeda, Shin-Osaka, Tennoji und ruhigere zentrale Viertel.",
           "tags": [
             "Osaka",
-            "First-time",
-            "Area guide"
+            "Erstbesuch",
+            "Gebietsguide"
           ]
         },
         "namba-vs-umeda": {
@@ -2073,7 +2073,7 @@
           "tags": [
             "Mt. Fuji",
             "Kawaguchiko",
-            "Overnight"
+            "Übernachtung"
           ]
         }
       }
@@ -3896,9 +3896,9 @@
       "ogDescription": "Vergleiche Tokios Stationsbereiche vor der Hotelbuchung mit fujiseats Logik."
     },
     "hero": {
-      "eyebrow": "Tokyo hotel area finder",
-      "title": "Find where to stay in Tokyo",
-      "body": "Pick the places you want to visit. Answer a few travel questions. Get your top 3 Tokyo hotel base areas.",
+      "eyebrow": "Tokyo Hotel Area Finder",
+      "title": "Finde, wo du in Tokio bleiben sollst",
+      "body": "Wähle die Orte, die du besuchen möchtest. Beantworte ein paar Reise-Fragen. Erhalte deine Top-3-Tokio-Hotelbasen.",
       "signals": [
         "Flughafenzugang",
         "Gepäckfreundlich",
@@ -3908,7 +3908,7 @@
       "disclaimer": "Die Scores sind redaktionelle Reise-Fit-Wertungen, soweit verfügbar durch öffentliche Datensignale informiert. Sie sind keine offiziellen Bewertungen, Hotelrankings oder Garantien für Preis, Komfort, Verfügbarkeit oder Route.",
       "freshness": "Lokale Aktualisierung mit Passagierdaten · Letzte Quellenprüfung: {date}",
       "cta": "Starten",
-      "startCta": "Start Tokyo hotel base finder"
+      "startCta": "Tokyo Hotel Base Finder starten"
     },
     "situations": {
       "eyebrow": "Mit der Reisesituation starten",
@@ -3970,14 +3970,14 @@
       "count": "{count} Bereiche · Filter: {filter}"
     },
     "detailScores": {
-      "stationSimplicity": "Station simplicity",
-      "luggageFriendly": "Luggage-friendly",
-      "airportAccess": "Airport access",
-      "shinkansenAccess": "Shinkansen access",
-      "touristAccess": "Tourist access",
-      "localFeel": "Local feel",
-      "crowdStress": "Less crowd stress",
-      "hotelChoice": "Hotel choice"
+      "stationSimplicity": "Bahnhofs-Einfachheit",
+      "luggageFriendly": "Gepäckfreundlich",
+      "airportAccess": "Flughafenzugang",
+      "shinkansenAccess": "Shinkansen-Zugang",
+      "touristAccess": "Touristen-Zugang",
+      "localFeel": "Lokales Flair",
+      "crowdStress": "Weniger Gedränge",
+      "hotelChoice": "Hotelauswahl"
     },
     "scoreLabels": {
       "stationSimplicity": "Stationssimpelheit",
@@ -4119,7 +4119,7 @@
       },
       "exit": {
         "title": "Ausgangs- / Eingangskomplexität",
-        "bodyMatched": "Tokyo Metro exit feed parsed — {matched} of {count} areas use a bucketed open-exit count. Areas without Tokyo Metro coverage use the editorial level.",
+        "bodyMatched": "Tokyo-Metro-Ausgangsdaten ausgewertet — {matched} von {count} Gebieten nutzen eine gebündelte Komplexitätsstufe für offene Ausgänge.",
         "bodyFallback": "Redaktionelle Tags erklären die Stationsgröße. Das beeinflusst Stationsklarheit und leicht die Gepäckfreundlichkeit."
       },
       "lines": {
@@ -4128,12 +4128,12 @@
       },
       "stepFree": {
         "title": "Stufenfreie / Aufzug-Route",
-        "bodyMatched": "Toei barrier-free CSVs parsed — {matched} of {count} areas have a confirmed step-free route. Missing data is not penalised.",
+        "bodyMatched": "Toei-Barrierefrei-CSVs analysiert — {matched} von {count} Gebieten haben eine bestätigte stufenfreie Route. Fehlende Daten werden nicht bestraft. Tokyo-Metro-Detailseiten je Station noch nicht ausgewertet.",
         "bodyFallback": "Stufenfreie Routendaten werden nur genutzt, wenn eine öffentliche Quelle zuverlässig passt. Fehlende Daten werden nicht bestraft."
       },
       "access": {
-        "title": "Airport / Shinkansen access",
-        "body": "Curated route logic explains Narita, Haneda, Tokyo Station, Shinagawa, and Shinkansen fit. No live timetable data is implied."
+        "title": "Flughafen / Shinkansen Zugang",
+        "body": "Kuratierte Routenlogik erklärt Narita, Haneda, Tokyo Station, Shinagawa und Shinkansen für jedes Gebiet."
       },
       "hotelChoice": {
         "title": "Dichte der Hotelauswahl",
@@ -4155,7 +4155,7 @@
     },
     "methodology": {
       "title": "Wie die Scores funktionieren",
-      "summary": "Methodology, station-name notes, and source details are here if you want to inspect the scoring.",
+      "summary": "Methodik, Hinweise zu Bahnhofsnamen und Quellen-Details, falls du nachschauen möchtest.",
       "p1": "Dies vergleicht Stationsbereiche, nicht einzelne Hotels.",
       "p2": "Die Scores kombinieren redaktionelle Reiselogik, Stationsnutzbarkeit und Datenstatus.",
       "p3": "Fehlende Daten werden nicht bestraft. Hotelauswahl-Dichte ist redaktionell und bewertet keine einzelnen Hotels, Preise oder Verfügbarkeit.",
@@ -4184,7 +4184,7 @@
     },
     "dataNote": {
       "title": "Datenfrische / Quellenhinweis",
-      "summary": "Source status and public-data notes. This is not live hotel inventory or official travel advice.",
+      "summary": "Quellenstatus und Notizen zu öffentlichen Daten. Kein Live-Hotelbestand oder offizielles Ranking.",
       "body": "fujiseat.com-Scores sind redaktionelle Reise-Fit-Scores, wo möglich durch Daten informiert. Sie sind keine offiziellen Bewertungen und keine Garantien.",
       "currentMode": "Aktueller Modus: <strong>{mode}</strong>. Letzte Prüfung: {date}.",
       "registryTitle": "Quellenregister",
@@ -4313,7 +4313,7 @@
       "showResultsLabel": "Ergebnisse anzeigen",
       "selectedLabel": "Ausgewählt",
       "stepLabel": "Schritt",
-      "topTitle": "Your top 3 Tokyo hotel base areas",
+      "topTitle": "Deine Top-3-Tokio-Hotelbasen",
       "topBody": "Diese Treffer nutzen dieselben 36-Gebiete-Daten und bestehenden fujiseat-Scores und werden danach nach deinen Antworten neu sortiert.",
       "whyFits": "Warum es passt",
       "bestFor": "Gut für",
@@ -4321,7 +4321,7 @@
       "showMore": "Mehr Treffer anzeigen",
       "compareAll": "Alle Gebiete vergleichen",
       "moreTitle": "Weitere Treffer",
-      "allTitle": "Compare all 36 Tokyo station areas",
+      "allTitle": "Vergleiche alle 36 Tokio-Bahnhofsgegenden",
       "allBody": "Dies öffnet die vollständige Liste. Scores sind Reise-Fit-Signale, keine offiziellen Bewertungen oder Hotelrankings.",
       "matchLabel": "Treffer",
       "noAnswers": "Starte mit ein paar schnellen Antworten. Ergebnisse bleiben verborgen, bis der Assistent fertig ist.",
@@ -4396,11 +4396,11 @@
           "options": [
             {
               "id": "narita",
-              "label": "Narita Airport (NRT)"
+              "label": "Flughafen Narita (NRT)"
             },
             {
               "id": "haneda",
-              "label": "Haneda Airport (HND)"
+              "label": "Flughafen Haneda (HND)"
             },
             {
               "id": "not-sure",
@@ -4505,7 +4505,7 @@
         "goodMatch": "Guter Treffer",
         "areaOption": "Gebietsoption"
       },
-      "viewHotelPageLabel": "View hotel search page"
+      "viewHotelPageLabel": "Hotel-Suchseite öffnen"
     }
   },
   "fujiseatAreaLogic": {

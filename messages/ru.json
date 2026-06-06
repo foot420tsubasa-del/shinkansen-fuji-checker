@@ -11,8 +11,8 @@
     "jrPass": "Сравнить JR Pass"
   },
   "home": {
-    "brandTitle": "Check your Mt. Fuji-side Shinkansen seat",
-    "brandSubtitle": "Then choose your Tokyo hotel base, rail option, and arrival prep in the right order.",
+    "brandTitle": "Проверьте место в синкансэне со стороны Фудзи",
+    "brandSubtitle": "Затем выберите базу отеля в Токио, вариант поезда и подготовку к прилёту в правильном порядке.",
     "seatCheckerHeading": "Проверка мест Синкансэна с видом на Фудзи",
     "brandBuiltBy": "Создано японским автором для иностранных путешественников, которые не хотят пропустить вид на гору Фудзи.",
     "brandSource": "На основе общедоступной информации от JR Central",
@@ -106,22 +106,22 @@
     "footerIndependent": "Независимый и неофициальный. На основе общедоступной информации от JR Central.",
     "footerAffiliate": "Некоторые ссылки являются партнёрскими ссылками Klook — их использование помогает поддерживать бесплатность этого сайта.",
     "nav": {
-      "hub": "SHINKANSEN SEAT CHECKER",
-      "seat": "Check Seat",
+      "hub": "ПРОВЕРКА МЕСТА В СИНКАНСЭНЕ",
+      "seat": "Проверить место",
       "planner": "Планировщик",
-      "stay": "Hotel Base",
+      "stay": "База отелей",
       "essentials": "Главное",
       "about": "О сайте",
       "guide": "Гид",
       "decisions": "Решения для поездки",
       "questions": "Обратная связь",
-      "tagline": "Fuji seat & Tokyo hotel base",
-      "tickets": "Tickets",
+      "tagline": "Место с видом на Фудзи и база в Токио",
+      "tickets": "Билеты",
       "esim": "eSIM",
-      "railGuide": "Rail Guide",
-      "arrivalPrep": "Arrival Prep",
-      "rail": "Rail",
-      "arrival": "Arrival"
+      "railGuide": "Гид по поездам",
+      "arrivalPrep": "Подготовка к прилёту",
+      "rail": "Поезд",
+      "arrival": "Прилёт"
     },
     "decisions": {
       "eyebrow": "Хаб путешествий",
@@ -267,7 +267,7 @@
         "weakness": "Нет линии JR Яманотэ, поэтому поездки по городу требуют пересадок."
       },
       "tokyoStation": {
-        "name": "Вокзал Токио",
+        "name": "Tokyo Station",
         "bestFor": "Ранние поезда Синкансэн, удобная логистика, доступ к Гиндзе и эффективные дни переездов.",
         "mood": "Спокойный и эффективный",
         "weakness": "Более деловой и обычно дороже, чем Уэно или Асакуса."
@@ -280,7 +280,7 @@
       },
       "seeAll": "Посмотреть все районы для проживания в Tokyo",
       "uenoAsakusa": {
-        "name": "Ueno / Asakusa",
+        "name": "Уэно / Асакуса",
         "bestFor": "доступ к Narita, более бюджетные отели и старый Tokyo",
         "mood": "практичная база на востоке",
         "weakness": "меньше ночной жизни, чем в Shinjuku или Shibuya",
@@ -396,25 +396,25 @@
       "commandCenter": "Открыть Command Center"
     },
     "heroCtas": {
-      "primary": "Check Fuji-side seat",
-      "secondary": "Choose hotel base",
-      "tickets": "Rail guide",
-      "esim": "Arrival prep"
+      "primary": "Место с видом на Фудзи",
+      "secondary": "Выбрать базу отелей",
+      "tickets": "Гид по поездам",
+      "esim": "Подготовка к прилёту"
     },
     "supportTools": {
-      "eyebrow": "More tools",
-      "description": "Use these after the seat, hotel base, tickets, and arrival basics are clear.",
-      "localTokyo": "Local Tokyo",
-      "routeSupport": "Route support",
-      "planner": "Trip Planner",
-      "itinerary": "7-day itinerary",
-      "commandCenter": "Command Center",
-      "stationPractice": "Station Practice",
-      "featuredLabel": "Featured tool",
-      "stationPracticeTitle": "Station Practice",
-      "stationPracticeDesc": "Practice Japanese station navigation before your trip.",
-      "stationPracticeCta": "Open practice",
-      "otherLabel": "Other tools"
+      "eyebrow": "Больше инструментов",
+      "description": "Используйте эти инструменты после того, как разобрались с местом, базой, билетами и подготовкой к прилёту.",
+      "localTokyo": "Местный Токио",
+      "routeSupport": "Помощь по маршрутам",
+      "planner": "Планер поездки",
+      "itinerary": "7-дневный маршрут",
+      "commandCenter": "Командный центр",
+      "stationPractice": "Тренировка вокзала",
+      "featuredLabel": "Рекомендуемый инструмент",
+      "stationPracticeTitle": "Тренировка вокзала",
+      "stationPracticeDesc": "Потренируйтесь ориентироваться на японских вокзалах до поездки.",
+      "stationPracticeCta": "Открыть тренировку",
+      "otherLabel": "Другие инструменты"
     }
   },
   "guide": {
@@ -1987,18 +1987,18 @@
           "title": "Где остановиться в Токио — гид для первого визита",
           "description": "Сравните Shinjuku, Ueno, Asakusa, Tokyo Station и более спокойный восток Токио.",
           "tags": [
-            "Tokyo",
-            "First-time",
-            "Area guide"
+            "Токио",
+            "Впервые",
+            "Гид по районам"
           ]
         },
         "where-to-stay-before-shinkansen": {
           "title": "Где остановиться в Токио перед синкансэном",
           "description": "Используйте, если важны багаж и ранний выезд с Tokyo Station.",
           "tags": [
-            "Tokyo",
-            "Shinkansen",
-            "Luggage"
+            "Токио",
+            "Синкансэн",
+            "Багаж"
           ]
         },
         "tokyo-station-vs-shinjuku": {
@@ -2006,32 +2006,32 @@
           "description": "Сравните железнодорожную логистику, еду, ночную жизнь и удобство первого визита.",
           "tags": [
             "Tokyo Station",
-            "Shinjuku"
+            "Синдзюку"
           ]
         },
         "ueno-vs-shinjuku": {
           "title": "Ueno или Shinjuku",
           "description": "Выберите между доступом к Narita и энергией западного Токио.",
           "tags": [
-            "Ueno",
-            "Shinjuku"
+            "Уэно",
+            "Синдзюку"
           ]
         },
         "asakusa-vs-ueno": {
           "title": "Asakusa или Ueno",
           "description": "Сравните атмосферу старого города с практичным доступом к поездам.",
           "tags": [
-            "Asakusa",
-            "Ueno"
+            "Асакуса",
+            "Уэно"
           ]
         },
         "kyoto-first-time": {
           "title": "Где остановиться в Киото при первом визите",
           "description": "Сравните Kyoto Station, Kawaramachi / Shijo, Gion, Arashiyama и более спокойный север.",
           "tags": [
-            "Kyoto",
-            "First-time",
-            "Area guide"
+            "Киото",
+            "Впервые",
+            "Гид по районам"
           ]
         },
         "kyoto-station-vs-gion": {
@@ -2039,41 +2039,41 @@
           "description": "Решите, что важнее: логистика или классическая атмосфера Киото.",
           "tags": [
             "Kyoto Station",
-            "Gion"
+            "Гион"
           ]
         },
         "osaka-first-time": {
           "title": "Где остановиться в Осаке при первом визите",
           "description": "Сравните Namba, Umeda, Shin-Osaka, Tennoji и более спокойные центральные районы.",
           "tags": [
-            "Osaka",
-            "First-time",
-            "Area guide"
+            "Осака",
+            "Впервые",
+            "Гид по районам"
           ]
         },
         "namba-vs-umeda": {
           "title": "Namba или Umeda",
           "description": "Выберите между едой/ночной жизнью и железнодорожным доступом.",
           "tags": [
-            "Namba",
-            "Umeda"
+            "Намба",
+            "Умэда"
           ]
         },
         "shin-osaka-vs-namba": {
           "title": "Shin-Osaka или Namba",
           "description": "Решите, должна ли логистика синкансэна определять вашу базу в Осаке.",
           "tags": [
-            "Shin-Osaka",
-            "Namba"
+            "Син-Осака",
+            "Намба"
           ]
         },
         "kawaguchiko": {
           "title": "Где остановиться в Kawaguchiko — отели с видом на Фудзи",
           "description": "Для ночевки с видом на Mt. Fuji вокруг Kawaguchiko.",
           "tags": [
-            "Mt. Fuji",
-            "Kawaguchiko",
-            "Overnight"
+            "Гора Фудзи",
+            "Кавагутико",
+            "С ночёвкой"
           ]
         }
       }
@@ -2115,7 +2115,7 @@
         "luggage": "Крупный багаж",
         "airport": "Прилет в Narita или Haneda",
         "shinkansen": "Ранний синкансэн",
-        "plans": "Disney / teamLab / Asakusa / Shibuya",
+        "plans": "Disney / teamLab / Асакуса / Сибуя",
         "quiet": "Спокойный локальный Токио vs удобство больших станций"
       }
     },
@@ -3896,9 +3896,9 @@
       "ogDescription": "Сравните районы у станций Токио перед бронированием отеля с логикой fujiseat."
     },
     "hero": {
-      "eyebrow": "Tokyo hotel area finder",
-      "title": "Find where to stay in Tokyo",
-      "body": "Pick the places you want to visit. Answer a few travel questions. Get your top 3 Tokyo hotel base areas.",
+      "eyebrow": "Tokyo Hotel Area Finder",
+      "title": "Найдите, где остановиться в Токио",
+      "body": "Выберите места для посещения. Ответьте на несколько вопросов. Получите топ-3 районов-баз в Токио.",
       "signals": [
         "Доступ к аэропорту",
         "Удобно с багажом",
@@ -3908,7 +3908,7 @@
       "disclaimer": "Оценки — редакционные показатели пригодности для поездки, по возможности основанные на публичных данных. Это не официальные рейтинги, не рейтинги отелей и не гарантия цены, комфорта, наличия мест или условий маршрута.",
       "freshness": "Локальное обновление с учетом пассажирских данных · Последняя проверка источников: {date}",
       "cta": "Начать",
-      "startCta": "Start Tokyo hotel base finder"
+      "startCta": "Запустить Tokyo Hotel Base Finder"
     },
     "situations": {
       "eyebrow": "Начните с ситуации поездки",
@@ -3970,14 +3970,14 @@
       "count": "{count} районов · фильтр: {filter}"
     },
     "detailScores": {
-      "stationSimplicity": "Station simplicity",
-      "luggageFriendly": "Luggage-friendly",
-      "airportAccess": "Airport access",
-      "shinkansenAccess": "Shinkansen access",
-      "touristAccess": "Tourist access",
-      "localFeel": "Local feel",
-      "crowdStress": "Less crowd stress",
-      "hotelChoice": "Hotel choice"
+      "stationSimplicity": "Простота станции",
+      "luggageFriendly": "Удобно с багажом",
+      "airportAccess": "Доступ к аэропорту",
+      "shinkansenAccess": "Доступ к синкансэну",
+      "touristAccess": "Доступ к достопримечательностям",
+      "localFeel": "Местный колорит",
+      "crowdStress": "Меньше толп",
+      "hotelChoice": "Выбор отелей"
     },
     "scoreLabels": {
       "stationSimplicity": "Простота станции",
@@ -4119,7 +4119,7 @@
       },
       "exit": {
         "title": "Сложность выходов / входов",
-        "bodyMatched": "Tokyo Metro exit feed parsed — {matched} of {count} areas use a bucketed open-exit count. Areas without Tokyo Metro coverage use the editorial level.",
+        "bodyMatched": "Канал выходов Tokyo Metro обработан — {matched} из {count} районов используют сгруппированный уровень сложности открытых выходов.",
         "bodyFallback": "Редакционные теги объясняют масштаб станции. Это влияет на простоту станции и немного на удобство с багажом."
       },
       "lines": {
@@ -4128,12 +4128,12 @@
       },
       "stepFree": {
         "title": "Маршрут без ступеней / лифт",
-        "bodyMatched": "Toei barrier-free CSVs parsed — {matched} of {count} areas have a confirmed step-free route. Missing data is not penalised.",
+        "bodyMatched": "CSV безбарьерных маршрутов Toei проанализированы — {matched} из {count} районов имеют подтверждённый маршрут без ступеней. Отсутствие данных не штрафуется. Детальные страницы Tokyo Metro по станциям пока не разбираются.",
         "bodyFallback": "Данные о маршруте без ступеней используются только при надежном совпадении с публичным источником. Отсутствие данных не штрафуется."
       },
       "access": {
-        "title": "Airport / Shinkansen access",
-        "body": "Curated route logic explains Narita, Haneda, Tokyo Station, Shinagawa, and Shinkansen fit. No live timetable data is implied."
+        "title": "Доступ к аэропорту / синкансэну",
+        "body": "Кураторская логика маршрутов объясняет Нариту, Ханэду, Tokyo Station, Синагаву и синкансэн для каждого района."
       },
       "hotelChoice": {
         "title": "Плотность выбора отелей",
@@ -4155,7 +4155,7 @@
     },
     "methodology": {
       "title": "Как работают баллы",
-      "summary": "Methodology, station-name notes, and source details are here if you want to inspect the scoring.",
+      "summary": "Методология, заметки об именах станций и подробности об источниках доступны для проверки.",
       "p1": "Здесь сравниваются районы у станций, а не отдельные отели.",
       "p2": "Баллы объединяют редакционную логику поездки, удобство станции и статус данных.",
       "p3": "Отсутствие данных не штрафуется. Плотность выбора отелей — редакционный сигнал; он не оценивает отдельные отели, цены или доступность.",
@@ -4184,7 +4184,7 @@
     },
     "dataNote": {
       "title": "Свежесть данных / источники",
-      "summary": "Source status and public-data notes. This is not live hotel inventory or official travel advice.",
+      "summary": "Статус источников и заметки о публичных данных. Это не реальный остаток отелей и не официальный рейтинг.",
       "body": "Баллы fujiseat.com — редакционная оценка пригодности поездки, где возможно информированная данными. Это не официальные рейтинги и не гарантии.",
       "currentMode": "Текущий режим: <strong>{mode}</strong>. Последняя проверка: {date}.",
       "registryTitle": "Реестр источников",
@@ -4313,7 +4313,7 @@
       "showResultsLabel": "Показать результаты",
       "selectedLabel": "Выбрано",
       "stepLabel": "Шаг",
-      "topTitle": "Your top 3 Tokyo hotel base areas",
+      "topTitle": "Ваш топ-3 районов-баз в Токио",
       "topBody": "Эти варианты используют те же данные по 36 районам и существующие оценки fujiseat, затем пересортируются по вашим ответам.",
       "whyFits": "Почему подходит",
       "bestFor": "Подходит для",
@@ -4321,7 +4321,7 @@
       "showMore": "Показать больше вариантов",
       "compareAll": "Сравнить все районы",
       "moreTitle": "Другие варианты",
-      "allTitle": "Compare all 36 Tokyo station areas",
+      "allTitle": "Сравните все 36 районов станций Токио",
       "allBody": "Открывается полный список. Оценки — сигналы пригодности для поездки, а не официальные рейтинги или рейтинги отелей.",
       "matchLabel": "Совпадение",
       "noAnswers": "Начните с нескольких быстрых ответов. Результаты скрыты до завершения мастера.",
@@ -4340,27 +4340,27 @@
           "options": [
             {
               "id": "shibuya-harajuku",
-              "label": "Shibuya / Harajuku"
+              "label": "Сибуя / Харадзюку"
             },
             {
               "id": "shinjuku",
-              "label": "Shinjuku"
+              "label": "Синдзюку"
             },
             {
               "id": "asakusa",
-              "label": "Asakusa / Senso-ji"
+              "label": "Асакуса / Сэнсо-дзи"
             },
             {
               "id": "ueno",
-              "label": "Ueno"
+              "label": "Уэно"
             },
             {
               "id": "ginza-tsukiji",
-              "label": "Ginza / Tsukiji"
+              "label": "Гиндза / Цукидзи"
             },
             {
               "id": "akihabara",
-              "label": "Akihabara"
+              "label": "Акихабара"
             },
             {
               "id": "tokyo-station-palace",
@@ -4368,7 +4368,7 @@
             },
             {
               "id": "toyosu-odaiba",
-              "label": "Toyosu / teamLab / Odaiba"
+              "label": "Тоёсу / teamLab / Одайба"
             },
             {
               "id": "disney",
@@ -4380,7 +4380,7 @@
             },
             {
               "id": "kamakura-yokohama",
-              "label": "Kamakura / Yokohama"
+              "label": "Камакура / Иокогама"
             },
             {
               "id": "kyoto-osaka",
@@ -4396,11 +4396,11 @@
           "options": [
             {
               "id": "narita",
-              "label": "Narita Airport (NRT)"
+              "label": "Аэропорт Нарита (NRT)"
             },
             {
               "id": "haneda",
-              "label": "Haneda Airport (HND)"
+              "label": "Аэропорт Ханэда (HND)"
             },
             {
               "id": "not-sure",
@@ -4464,11 +4464,11 @@
           "options": [
             {
               "id": "kyoto-osaka",
-              "label": "Kyoto / Osaka"
+              "label": "Киото / Осака"
             },
             {
               "id": "fuji-hakone",
-              "label": "Mt. Fuji / Hakone"
+              "label": "Гора Фудзи / Хаконэ"
             },
             {
               "id": "tokyo-only",
@@ -4505,7 +4505,7 @@
         "goodMatch": "Хорошее совпадение",
         "areaOption": "Вариант района"
       },
-      "viewHotelPageLabel": "View hotel search page"
+      "viewHotelPageLabel": "Открыть страницу поиска отелей"
     }
   },
   "fujiseatAreaLogic": {

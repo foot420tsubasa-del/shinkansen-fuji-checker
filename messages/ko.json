@@ -11,8 +11,8 @@
     "jrPass": "JR 패스 비교"
   },
   "home": {
-    "brandTitle": "Check your Mt. Fuji-side Shinkansen seat",
-    "brandSubtitle": "Then choose your Tokyo hotel base, rail option, and arrival prep in the right order.",
+    "brandTitle": "후지산이 보이는 신칸센 좌석을 확인하세요",
+    "brandSubtitle": "그 다음 도쿄 호텔 거점, 철도 옵션, 도착 준비를 올바른 순서로 선택하세요.",
     "seatCheckerHeading": "신칸센 후지산 좌석 확인기",
     "brandBuiltBy": "일본인 제작자가 후지산 뷰를 놓치고 싶지 않은 해외 여행자들을 위해 만들었습니다.",
     "brandSource": "JR 센트럴 공개 정보 기반",
@@ -106,22 +106,22 @@
     "footerIndependent": "독립적인 비공식 사이트입니다. JR 센트럴 공개 정보를 바탕으로 합니다.",
     "footerAffiliate": "일부 링크는 Klook 제휴 링크이며, 사용해 주시면 사이트를 무료로 유지하는 데 도움이 됩니다.",
     "nav": {
-      "hub": "SHINKANSEN SEAT CHECKER",
-      "seat": "Check Seat",
+      "hub": "신칸센 좌석 체커",
+      "seat": "좌석 확인",
       "planner": "여행 플래너",
-      "stay": "Hotel Base",
+      "stay": "호텔 거점",
       "essentials": "필수 준비",
       "about": "소개",
       "guide": "가이드",
       "decisions": "여행 결정",
       "questions": "피드백",
-      "tagline": "Fuji seat & Tokyo hotel base",
-      "tickets": "Tickets",
+      "tagline": "후지 좌석 & 도쿄 호텔 거점",
+      "tickets": "티켓",
       "esim": "eSIM",
-      "railGuide": "Rail Guide",
-      "arrivalPrep": "Arrival Prep",
-      "rail": "Rail",
-      "arrival": "Arrival"
+      "railGuide": "철도 가이드",
+      "arrivalPrep": "도착 준비",
+      "rail": "철도",
+      "arrival": "도착"
     },
     "decisions": {
       "eyebrow": "여행 유틸리티 허브",
@@ -223,7 +223,7 @@
     "popularLinks": {
       "eyebrow": "인기 링크",
       "tokyo": {
-        "title": "Tokyo",
+        "title": "도쿄",
         "desc": "Tokyo에서 여행을 시작합니다."
       },
       "fujiView": {
@@ -231,11 +231,11 @@
         "desc": "좋은 좌석이 좋은 전망을 만듭니다. 예약 전에 E 좌석을 확인하세요."
       },
       "kyoto": {
-        "title": "Kyoto",
+        "title": "교토",
         "desc": "사찰, 정원, 오래 남는 거리 풍경을 만납니다."
       },
       "osaka": {
-        "title": "Osaka",
+        "title": "오사카",
         "desc": "먹거리, 활기, 쉬운 당일치기 여행이 있습니다."
       }
     },
@@ -243,44 +243,44 @@
       "eyebrow": "Tokyo 숙박 거점 고르기",
       "desc": "Tokyo 숙소는 먼저 세 가지 대표 거점으로 좁혀 보세요. 활기라면 Shinjuku, 동쪽 접근성은 Ueno / Asakusa, Shinkansen과 짐 이동은 Tokyo Station이 좋습니다.",
       "shinjuku": {
-        "name": "Shinjuku",
+        "name": "신주쿠",
         "bestFor": "첫 Tokyo 여행의 활기, 밤 문화, 쇼핑, 유연한 열차 이동에 좋습니다.",
         "mood": "Tokyo의 에너지를 최대로",
         "weakness": "큰 역과 늦은 밤 인파가 도착 첫날에는 부담스러울 수 있습니다. Kabukicho에서 길거리 호객을 따라가지 마세요. 바가지요금과 사기성 바의 위험이 실제로 있습니다."
       },
       "shibuya": {
-        "name": "Shibuya",
+        "name": "시부야",
         "bestFor": "패션, 음식, 밤 문화, 젊은 분위기, Tokyo 서쪽 접근에 좋습니다.",
         "mood": "상징적이고 활기찬 분위기",
         "weakness": "붐비고 일부 호텔 주변은 언덕이 있으며, 이른 Shinkansen 이동에는 아주 단순하지 않습니다."
       },
       "ueno": {
-        "name": "Ueno",
+        "name": "우에노",
         "bestFor": "합리적인 호텔, Narita 접근, 박물관, 시장 먹거리에 좋습니다.",
         "mood": "실용적이고 문화적인 분위기",
         "weakness": "Shinjuku나 Shibuya보다 늦은 밤 선택지가 적습니다."
       },
       "asakusa": {
-        "name": "Asakusa",
+        "name": "아사쿠사",
         "bestFor": "전통적인 Tokyo, Senso-ji, 강변 산책, 옛 동네 분위기에 좋습니다.",
         "mood": "동쪽의 클래식 Tokyo",
         "weakness": "JR Yamanote Line에 있지 않아 도심을 가로지르는 이동에는 환승이 필요합니다."
       },
       "tokyoStation": {
-        "name": "Tokyo Station",
+        "name": "도쿄역",
         "bestFor": "이른 Shinkansen, 깔끔한 동선, Ginza 접근, 효율적인 이동일에 좋습니다.",
         "mood": "차분하고 효율적인 분위기",
         "weakness": "업무 지구 느낌이 강하고 보통 Ueno나 Asakusa보다 비쌉니다."
       },
       "eastTokyo": {
-        "name": "Kiyosumi-Shirakawa / East Tokyo",
+        "name": "기요스미시라카와 / 동도쿄",
         "bestFor": "조용한 로컬 Tokyo, 커피, 정원, 박물관, 느긋한 아침에 좋습니다.",
         "mood": "로컬 시선",
         "weakness": "첫날 기본 숙소보다는 차분한 우회 코스나 두 번째 Tokyo 여행의 거점으로 더 잘 맞습니다."
       },
       "seeAll": "Tokyo 숙박 지역 모두 보기",
       "uenoAsakusa": {
-        "name": "Ueno / Asakusa",
+        "name": "우에노 / 아사쿠사",
         "bestFor": "Narita 접근, 합리적인 숙소, 오래된 Tokyo 분위기",
         "mood": "동쪽의 실용적인 거점",
         "weakness": "Shinjuku나 Shibuya보다 밤 문화는 적습니다",
@@ -293,42 +293,42 @@
       "desc": "Shinjuku와 Shibuya를 벗어나 더 조용한 동쪽 동네를 로컬 시선으로 소개합니다. Skytree 전망과 강변 산책이 좋은 Oshiage도 포함됩니다.",
       "seeAll": "Local Tokyo 추천 모두 보기",
       "kiyosumi": {
-        "name": "Kiyosumi-Shirakawa",
+        "name": "기요스미시라카와",
         "summary": "커피, Kiyosumi Garden, Fukagawa Edo Museum, 미술관, 운하 옆 느긋한 산책을 즐길 수 있습니다. 붐비는 관광지보다 조용한 동쪽 Tokyo의 아침을 원할 때 좋습니다.",
         "bestFor": "커피, 정원, 박물관",
         "avoidIf": "밤 문화나 첫날의 단순한 동선을 원한다면 피하는 편이 좋습니다",
         "timing": "아침부터 이른 오후까지"
       },
       "kuramae": {
-        "name": "Kuramae",
+        "name": "구라마에",
         "summary": "디자인 숍, 작은 공방, 강변 카페, Asakusa와 부드럽게 이어지는 코스가 있습니다.",
         "bestFor": "디자인 숍과 여유로운 카페",
         "avoidIf": "한 정거장에서 대표 관광지를 많이 보고 싶다면 맞지 않습니다",
         "timing": "늦은 오전부터 오후까지"
       },
       "oshiage": {
-        "name": "Oshiage",
+        "name": "오시아게",
         "summary": "Skytree 전망, Sumida 강변 산책, 차분한 동쪽 숙박에 좋습니다. 옆 동네 Kinshicho에는 넓은 Daiso, Muji, 가샤폰 층이 있어 Shibuya 인파 없이 둘러볼 수 있습니다.",
         "bestFor": "Skytree 전망과 합리적인 숙박",
         "avoidIf": "밤 문화나 중심지 느낌을 원한다면 맞지 않습니다",
         "timing": "오후부터 저녁까지"
       },
       "monzenNakacho": {
-        "name": "Monzen-Nakacho",
+        "name": "몬젠나카초",
         "summary": "오래된 Tokyo 거리, 신사, 동네 이자카야, East Tokyo와 이어지는 쉬운 코스가 있습니다.",
         "bestFor": "신사, 현지 음식, 옛 동네 분위기",
         "avoidIf": "영어 관광 인프라가 많이 필요하다면 피하는 편이 좋습니다",
         "timing": "오후부터 이른 저녁까지"
       },
       "ryogoku": {
-        "name": "Ryogoku",
+        "name": "료고쿠",
         "summary": "스모 문화, Edo 역사, 박물관, Asakusa로 이어지는 유용한 동선이 있습니다.",
         "bestFor": "스모와 Edo 역사",
         "avoidIf": "쇼핑이나 밤 문화를 원한다면 맞지 않습니다",
         "timing": "아침 또는 이른 오후"
       },
       "suitengumae": {
-        "name": "Suitengumae / Ningyocho",
+        "name": "스이텐구마에 / 닌교초",
         "summary": "T-CAT 공항버스 접근, 조용한 호텔, Ningyocho 음식 골목, Tokyo Station과 East Tokyo를 잇는 실용적인 거점입니다.",
         "bestFor": "공항 이동, 조용한 호텔, 옛 동네 음식",
         "avoidIf": "밤문화나 대표 관광지를 원한다면 맞지 않습니다",
@@ -350,7 +350,7 @@
         "desc": "번거롭지 않은 공항 이동 경로를 비교합니다."
       },
       "jrPass": {
-        "title": "JR Pass",
+        "title": "JR 패스",
         "desc": "장거리 이동이 여러 번 있을 때만 확인하면 됩니다."
       },
       "insurance": {
@@ -396,25 +396,25 @@
       "commandCenter": "Command Center 열기"
     },
     "heroCtas": {
-      "primary": "Check Fuji-side seat",
-      "secondary": "Choose hotel base",
-      "tickets": "Rail guide",
-      "esim": "Arrival prep"
+      "primary": "후지 측 좌석 확인",
+      "secondary": "호텔 거점 선택",
+      "tickets": "철도 가이드",
+      "esim": "도착 준비"
     },
     "supportTools": {
-      "eyebrow": "More tools",
-      "description": "Use these after the seat, hotel base, tickets, and arrival basics are clear.",
-      "localTokyo": "Local Tokyo",
-      "routeSupport": "Route support",
-      "planner": "Trip Planner",
-      "itinerary": "7-day itinerary",
-      "commandCenter": "Command Center",
-      "stationPractice": "Station Practice",
-      "featuredLabel": "Featured tool",
-      "stationPracticeTitle": "Station Practice",
-      "stationPracticeDesc": "Practice Japanese station navigation before your trip.",
-      "stationPracticeCta": "Open practice",
-      "otherLabel": "Other tools"
+      "eyebrow": "더 많은 도구",
+      "description": "좌석, 호텔 거점, 티켓, 도착 준비의 기본이 정해진 후 이 도구들을 활용하세요.",
+      "localTokyo": "로컬 도쿄",
+      "routeSupport": "경로 지원",
+      "planner": "여행 플래너",
+      "itinerary": "7일 여행 일정",
+      "commandCenter": "커맨드 센터",
+      "stationPractice": "역 사용 연습",
+      "featuredLabel": "추천 도구",
+      "stationPracticeTitle": "역 사용 연습",
+      "stationPracticeDesc": "여행 전에 일본의 역 사용법을 미리 연습하세요.",
+      "stationPracticeCta": "연습 시작",
+      "otherLabel": "기타 도구"
     }
   },
   "guide": {
@@ -1987,93 +1987,93 @@
           "title": "도쿄 숙소 위치 — 첫 방문자 가이드",
           "description": "신주쿠, 우에노, 아사쿠사, 도쿄역, 조용한 동쪽 도쿄를 비교합니다.",
           "tags": [
-            "Tokyo",
-            "First-time",
-            "Area guide"
+            "도쿄",
+            "첫 방문",
+            "지역 가이드"
           ]
         },
         "where-to-stay-before-shinkansen": {
           "title": "도쿄에서 신칸센 타기 전 어디에 묵을까",
           "description": "짐과 이른 도쿄역 출발이 중요할 때 참고하세요.",
           "tags": [
-            "Tokyo",
-            "Shinkansen",
-            "Luggage"
+            "도쿄",
+            "신칸센",
+            "짐"
           ]
         },
         "tokyo-station-vs-shinjuku": {
           "title": "도쿄역 vs 신주쿠",
           "description": "철도 이동 편의와 음식, 밤 문화, 첫 방문 편의성을 비교합니다.",
           "tags": [
-            "Tokyo Station",
-            "Shinjuku"
+            "도쿄역",
+            "신주쿠"
           ]
         },
         "ueno-vs-shinjuku": {
           "title": "우에노 vs 신주쿠",
           "description": "나리타 접근성과 서쪽 도쿄의 활기를 비교합니다.",
           "tags": [
-            "Ueno",
-            "Shinjuku"
+            "우에노",
+            "신주쿠"
           ]
         },
         "asakusa-vs-ueno": {
           "title": "아사쿠사 vs 우에노",
           "description": "옛 도쿄 분위기와 실용적인 철도 접근성을 비교합니다.",
           "tags": [
-            "Asakusa",
-            "Ueno"
+            "아사쿠사",
+            "우에노"
           ]
         },
         "kyoto-first-time": {
           "title": "교토 첫 방문자는 어디에 묵을까",
           "description": "교토역, 가와라마치 / 시조, 기온, 아라시야마, 조용한 북쪽을 비교합니다.",
           "tags": [
-            "Kyoto",
-            "First-time",
-            "Area guide"
+            "교토",
+            "첫 방문",
+            "지역 가이드"
           ]
         },
         "kyoto-station-vs-gion": {
           "title": "교토역 vs 기온",
           "description": "이동 편의와 전통적인 교토 분위기 중 무엇을 우선할지 정합니다.",
           "tags": [
-            "Kyoto Station",
-            "Gion"
+            "교토역",
+            "기온"
           ]
         },
         "osaka-first-time": {
           "title": "오사카 첫 방문자는 어디에 묵을까",
           "description": "난바, 우메다, 신오사카, 덴노지, 조용한 중심부를 비교합니다.",
           "tags": [
-            "Osaka",
-            "First-time",
-            "Area guide"
+            "오사카",
+            "첫 방문",
+            "지역 가이드"
           ]
         },
         "namba-vs-umeda": {
           "title": "난바 vs 우메다",
           "description": "음식/밤 문화와 철도 접근성을 비교합니다.",
           "tags": [
-            "Namba",
-            "Umeda"
+            "난바",
+            "우메다"
           ]
         },
         "shin-osaka-vs-namba": {
           "title": "신오사카 vs 난바",
           "description": "신칸센 이동 편의가 오사카 숙소 선택을 좌우하는지 판단합니다.",
           "tags": [
-            "Shin-Osaka",
-            "Namba"
+            "신오사카",
+            "난바"
           ]
         },
         "kawaguchiko": {
           "title": "가와구치코 숙소 위치 — 후지산 전망 호텔",
           "description": "가와구치코 주변에서 후지산 전망으로 하룻밤 묵을 때 참고하세요.",
           "tags": [
-            "Mt. Fuji",
-            "Kawaguchiko",
-            "Overnight"
+            "후지산",
+            "가와구치코",
+            "1박"
           ]
         }
       }
@@ -2107,7 +2107,7 @@
       "quiet": "조용한 로컬 도쿄를 원한다면 기요스미시라카와, 구라마에, 오시아게, 료고쿠를 보세요."
     },
     "finderPreview": {
-      "eyebrow": "Tokyo Hotel Base Finder",
+      "eyebrow": "도쿄 호텔 거점 파인더",
       "title": "도쿄에서 어디에 머물지 모르겠나요?",
       "body": "호텔 순위가 아니라 여행 상황으로 판단하세요.",
       "cta": "Tokyo Hotel Base Finder로 시작하기",
@@ -2115,7 +2115,7 @@
         "luggage": "큰 짐",
         "airport": "나리타 또는 하네다 도착",
         "shinkansen": "이른 신칸센",
-        "plans": "Disney / teamLab / Asakusa / Shibuya",
+        "plans": "디즈니 / teamLab / 아사쿠사 / 시부야",
         "quiet": "조용한 로컬 도쿄 vs 큰 역의 편리함"
       }
     },
@@ -3896,9 +3896,9 @@
       "ogDescription": "fujiseat의 역 주변 지역 로직으로 호텔 예약 전 도쿄 숙박 지역을 비교하세요."
     },
     "hero": {
-      "eyebrow": "Tokyo hotel area finder",
-      "title": "Find where to stay in Tokyo",
-      "body": "Pick the places you want to visit. Answer a few travel questions. Get your top 3 Tokyo hotel base areas.",
+      "eyebrow": "도쿄 호텔 지역 파인더",
+      "title": "도쿄에서 묵을 곳 찾기",
+      "body": "방문하고 싶은 장소를 선택하고 몇 가지 여행 질문에 답하면 도쿄 호텔 거점 상위 3곳을 받아볼 수 있습니다.",
       "signals": [
         "공항 접근",
         "짐 이동 편리",
@@ -3908,7 +3908,7 @@
       "disclaimer": "점수는 가능한 경우 공개 데이터 신호를 참고한 편집 기반 여행 적합도 점수입니다. 공식 평가, 호텔 순위, 가격·편안함·예약 가능 여부·경로 상태 보장이 아닙니다.",
       "freshness": "승객 데이터 기반 로컬 갱신 · 마지막 소스 확인: {date}",
       "cta": "시작",
-      "startCta": "Start Tokyo hotel base finder"
+      "startCta": "도쿄 호텔 거점 파인더 시작"
     },
     "situations": {
       "eyebrow": "여행 상황부터 시작",
@@ -3970,14 +3970,14 @@
       "count": "{count}개 지역 · 필터: {filter}"
     },
     "detailScores": {
-      "stationSimplicity": "Station simplicity",
-      "luggageFriendly": "Luggage-friendly",
-      "airportAccess": "Airport access",
-      "shinkansenAccess": "Shinkansen access",
-      "touristAccess": "Tourist access",
-      "localFeel": "Local feel",
-      "crowdStress": "Less crowd stress",
-      "hotelChoice": "Hotel choice"
+      "stationSimplicity": "역 단순함",
+      "luggageFriendly": "짐 이동 편의성",
+      "airportAccess": "공항 접근성",
+      "shinkansenAccess": "신칸센 접근성",
+      "touristAccess": "관광지 접근성",
+      "localFeel": "현지 분위기",
+      "crowdStress": "낮은 혼잡 스트레스",
+      "hotelChoice": "호텔 선택지"
     },
     "scoreLabels": {
       "stationSimplicity": "역 단순함",
@@ -4119,7 +4119,7 @@
       },
       "exit": {
         "title": "출구 / 입구 복잡도",
-        "bodyMatched": "Tokyo Metro exit feed parsed — {matched} of {count} areas use a bucketed open-exit count. Areas without Tokyo Metro coverage use the editorial level.",
+        "bodyMatched": "도쿄 메트로 출구 데이터 분석 — {count}개 지역 중 {matched}개가 개방 출구의 버킷화된 복잡도 등급을 사용합니다.",
         "bodyFallback": "편집 태그가 역 규모를 설명합니다. 역 단순성과 짐 이동 편의성에 약하게 영향을 줍니다."
       },
       "lines": {
@@ -4128,12 +4128,12 @@
       },
       "stepFree": {
         "title": "계단 없는 / 엘리베이터 동선",
-        "bodyMatched": "Toei barrier-free CSVs parsed — {matched} of {count} areas have a confirmed step-free route. Missing data is not penalised.",
+        "bodyMatched": "도에이 무장애 CSV 분석 — {count}개 지역 중 {matched}개가 무계단 경로를 보유. 데이터 누락은 감점되지 않습니다. 도쿄 메트로 역별 상세 페이지는 아직 분석되지 않았습니다.",
         "bodyFallback": "계단 없는 동선 데이터는 공개 소스와 신뢰도 있게 매칭될 때만 사용합니다. 누락 데이터는 감점하지 않습니다."
       },
       "access": {
-        "title": "Airport / Shinkansen access",
-        "body": "Curated route logic explains Narita, Haneda, Tokyo Station, Shinagawa, and Shinkansen fit. No live timetable data is implied."
+        "title": "공항 / 신칸센 접근",
+        "body": "큐레이션된 경로 로직이 각 지역의 나리타, 하네다, 도쿄역, 시나가와, 신칸센을 설명합니다."
       },
       "hotelChoice": {
         "title": "호텔 선택 밀도",
@@ -4155,7 +4155,7 @@
     },
     "methodology": {
       "title": "점수 계산 방식",
-      "summary": "Methodology, station-name notes, and source details are here if you want to inspect the scoring.",
+      "summary": "방법론, 역 이름 메모, 데이터 출처 상세는 여기서 확인하실 수 있습니다.",
       "p1": "개별 호텔이 아니라 역 주변 지역을 비교합니다.",
       "p2": "점수는 편집 기반 여행 로직, 역 사용성 신호, 데이터 상태를 함께 봅니다.",
       "p3": "데이터가 없다고 감점하지 않습니다. 호텔 선택 밀도는 편집 기반이며 개별 호텔, 가격, 예약 가능 여부를 평가하지 않습니다.",
@@ -4184,7 +4184,7 @@
     },
     "dataNote": {
       "title": "데이터 최신성 / 출처 노트",
-      "summary": "Source status and public-data notes. This is not live hotel inventory or official travel advice.",
+      "summary": "출처 상태와 공공 데이터 메모입니다. 실시간 호텔 재고나 공식 순위가 아닙니다.",
       "body": "fujiseat.com 점수는 가능한 경우 데이터를 참고한 편집 기반 여행 적합도입니다. 공식 평가나 보장이 아닙니다.",
       "currentMode": "현재 모드: <strong>{mode}</strong>. 마지막 확인: {date}.",
       "registryTitle": "출처 목록",
@@ -4313,7 +4313,7 @@
       "showResultsLabel": "결과 보기",
       "selectedLabel": "선택됨",
       "stepLabel": "단계",
-      "topTitle": "Your top 3 Tokyo hotel base areas",
+      "topTitle": "도쿄 호텔 거점 상위 3곳",
       "topBody": "같은 36개 지역 데이터와 기존 fujiseat 점수를 사용한 뒤, 답변에 따라 다시 정렬합니다.",
       "whyFits": "왜 맞는지",
       "bestFor": "적합한 경우",
@@ -4321,7 +4321,7 @@
       "showMore": "더 많은 후보 보기",
       "compareAll": "모든 지역 비교",
       "moreTitle": "추가 후보",
-      "allTitle": "Compare all 36 Tokyo station areas",
+      "allTitle": "도쿄의 36개 역 지역 모두 비교",
       "allBody": "전체 비교 목록을 펼칩니다. 점수는 여행 적합도 신호이며 공식 평가나 호텔 순위가 아닙니다.",
       "matchLabel": "매칭",
       "noAnswers": "몇 가지 빠른 선택으로 시작하세요. 마법사를 끝낼 때까지 결과는 숨겨집니다.",
@@ -4340,27 +4340,27 @@
           "options": [
             {
               "id": "shibuya-harajuku",
-              "label": "Shibuya / Harajuku"
+              "label": "시부야 / 하라주쿠"
             },
             {
               "id": "shinjuku",
-              "label": "Shinjuku"
+              "label": "신주쿠"
             },
             {
               "id": "asakusa",
-              "label": "Asakusa / Senso-ji"
+              "label": "아사쿠사 / 센소지"
             },
             {
               "id": "ueno",
-              "label": "Ueno"
+              "label": "우에노"
             },
             {
               "id": "ginza-tsukiji",
-              "label": "Ginza / Tsukiji"
+              "label": "긴자 / 츠키지"
             },
             {
               "id": "akihabara",
-              "label": "Akihabara"
+              "label": "아키하바라"
             },
             {
               "id": "tokyo-station-palace",
@@ -4368,11 +4368,11 @@
             },
             {
               "id": "toyosu-odaiba",
-              "label": "Toyosu / teamLab / Odaiba"
+              "label": "도요스 / teamLab / 오다이바"
             },
             {
               "id": "disney",
-              "label": "Tokyo Disney Resort"
+              "label": "도쿄 디즈니 리조트"
             },
             {
               "id": "fuji",
@@ -4380,7 +4380,7 @@
             },
             {
               "id": "kamakura-yokohama",
-              "label": "Kamakura / Yokohama"
+              "label": "가마쿠라 / 요코하마"
             },
             {
               "id": "kyoto-osaka",
@@ -4396,11 +4396,11 @@
           "options": [
             {
               "id": "narita",
-              "label": "Narita Airport (NRT)"
+              "label": "나리타 공항 (NRT)"
             },
             {
               "id": "haneda",
-              "label": "Haneda Airport (HND)"
+              "label": "하네다 공항 (HND)"
             },
             {
               "id": "not-sure",
@@ -4464,11 +4464,11 @@
           "options": [
             {
               "id": "kyoto-osaka",
-              "label": "Kyoto / Osaka"
+              "label": "교토 / 오사카"
             },
             {
               "id": "fuji-hakone",
-              "label": "Mt. Fuji / Hakone"
+              "label": "후지산 / 하코네"
             },
             {
               "id": "tokyo-only",
@@ -4505,7 +4505,7 @@
         "goodMatch": "좋은 매칭",
         "areaOption": "지역 후보"
       },
-      "viewHotelPageLabel": "View hotel search page"
+      "viewHotelPageLabel": "호텔 검색 페이지 보기"
     }
   },
   "fujiseatAreaLogic": {

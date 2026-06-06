@@ -11,8 +11,8 @@
     "jrPass": "比較 JR Pass"
   },
   "home": {
-    "brandTitle": "Check your Mt. Fuji-side Shinkansen seat",
-    "brandSubtitle": "Then choose your Tokyo hotel base, rail option, and arrival prep in the right order.",
+    "brandTitle": "確認富士山側的新幹線座位",
+    "brandSubtitle": "然後依正確順序選擇東京飯店基地、鐵道方案與抵達準備。",
     "seatCheckerHeading": "新幹線富士山座位查詢",
     "brandBuiltBy": "由日本製作者製作，專為不想錯過富士山美景的海外旅客設計。",
     "brandSource": "資料來源：JR 東海公開資訊",
@@ -106,22 +106,22 @@
     "footerIndependent": "獨立非官方網站。基於 JR 東海公開資訊。",
     "footerAffiliate": "部分連結為 Klook 聯盟連結，使用它們有助於維持本站免費。",
     "nav": {
-      "hub": "SHINKANSEN SEAT CHECKER",
-      "seat": "Check Seat",
+      "hub": "新幹線座位確認工具",
+      "seat": "確認座位",
       "planner": "旅行規劃器",
-      "stay": "Hotel Base",
+      "stay": "住宿基地",
       "essentials": "必備準備",
       "about": "關於",
       "guide": "指南",
       "decisions": "旅行決策",
       "questions": "回饋",
-      "tagline": "Fuji seat & Tokyo hotel base",
-      "tickets": "Tickets",
+      "tagline": "富士座位 & 東京住宿基地",
+      "tickets": "車票",
       "esim": "eSIM",
-      "railGuide": "Rail Guide",
-      "arrivalPrep": "Arrival Prep",
-      "rail": "Rail",
-      "arrival": "Arrival"
+      "railGuide": "鐵道指南",
+      "arrivalPrep": "抵達準備",
+      "rail": "鐵道",
+      "arrival": "抵達"
     },
     "decisions": {
       "eyebrow": "旅行實用工具",
@@ -223,7 +223,7 @@
     "popularLinks": {
       "eyebrow": "熱門連結",
       "tokyo": {
-        "title": "Tokyo",
+        "title": "東京",
         "desc": "從 Tokyo 開始你的旅程。"
       },
       "fujiView": {
@@ -231,11 +231,11 @@
         "desc": "好座位，才有好景色。預訂前先確認 E 座。"
       },
       "kyoto": {
-        "title": "Kyoto",
+        "title": "京都",
         "desc": "寺院、庭園和歷久彌新的街道。"
       },
       "osaka": {
-        "title": "Osaka",
+        "title": "大阪",
         "desc": "美食、活力和輕鬆的一日遊。"
       }
     },
@@ -243,44 +243,44 @@
       "eyebrow": "選擇你的 Tokyo 據點",
       "desc": "先從三個常見的 Tokyo 住宿據點開始：Shinjuku 適合感受活力，Ueno / Asakusa 適合東側交通，Tokyo Station 適合 Shinkansen 和行李移動。",
       "shinjuku": {
-        "name": "Shinjuku",
+        "name": "新宿",
         "bestFor": "第一次來 Tokyo 的熱鬧感、夜生活、購物和靈活的鐵路交通。",
         "mood": "Tokyo 能量全開",
         "weakness": "大型車站和深夜人潮在抵達當天可能會讓人吃不消。不要跟隨 Kabukicho 的街頭拉客，亂收費和詐騙酒吧是真實風險。"
       },
       "shibuya": {
-        "name": "Shibuya",
+        "name": "渋谷",
         "bestFor": "時尚、美食、夜生活、年輕文化，以及前往 Tokyo 西側的便利交通。",
         "mood": "經典又有活力",
         "weakness": "人多，部分飯店周邊有坡路，而且不太適合清早趕 Shinkansen。"
       },
       "ueno": {
-        "name": "Ueno",
+        "name": "上野",
         "bestFor": "平價飯店、Narita 交通、博物館和市場美食。",
         "mood": "實用又有文化感",
         "weakness": "深夜選擇比 Shinjuku 或 Shibuya 少。"
       },
       "asakusa": {
-        "name": "Asakusa",
+        "name": "淺草",
         "bestFor": "傳統 Tokyo、Senso-ji、河邊散步和老街氛圍。",
         "mood": "東側的經典 Tokyo",
         "weakness": "不在 JR Yamanote Line 上，跨城移動需要轉乘。"
       },
       "tokyoStation": {
-        "name": "Tokyo Station",
+        "name": "東京站",
         "bestFor": "清早 Shinkansen、順暢動線、前往 Ginza，以及高效率移動日。",
         "mood": "安靜高效",
         "weakness": "商務感更強，通常也比 Ueno 或 Asakusa 貴。"
       },
       "eastTokyo": {
-        "name": "Kiyosumi-Shirakawa / East Tokyo",
+        "name": "清澄白河 / 東東京",
         "bestFor": "安靜的在地 Tokyo、咖啡、庭園、博物館和慢節奏早晨。",
         "mood": "在地視角",
         "weakness": "比起第一次入住的預設選擇，更適合作為安靜繞行或第二次來 Tokyo 的據點。"
       },
       "seeAll": "查看所有 Tokyo 住宿區域",
       "uenoAsakusa": {
-        "name": "Ueno / Asakusa",
+        "name": "上野 / 淺草",
         "bestFor": "Narita 交通、預算住宿和老東京氛圍",
         "mood": "實用的東側住宿據點",
         "weakness": "夜生活少於 Shinjuku 或 Shibuya",
@@ -293,42 +293,42 @@
       "desc": "用在地視角探索 Shinjuku 和 Shibuya 之外更安靜的東側街區，也包括適合看 Skytree 和河邊散步的 Oshiage。",
       "seeAll": "查看全部 Local Tokyo 精選",
       "kiyosumi": {
-        "name": "Kiyosumi-Shirakawa",
+        "name": "清澄白河",
         "summary": "咖啡、Kiyosumi Garden、Fukagawa Edo Museum、美術館，以及運河邊的慢步調散步。適合想要安靜的東側早晨，而不是又一個擁擠觀光點的時候。",
         "bestFor": "咖啡、庭園、博物館",
         "avoidIf": "你想要夜生活或第一晚的簡單動線",
         "timing": "上午到午後早些時候"
       },
       "kuramae": {
-        "name": "Kuramae",
+        "name": "藏前",
         "summary": "設計小店、小型手作品牌、河邊咖啡館，以及和 Asakusa 更柔和的搭配。",
         "bestFor": "設計小店和悠閒咖啡館",
         "avoidIf": "你想在一站內看完主要景點",
         "timing": "上午晚些時候到下午"
       },
       "oshiage": {
-        "name": "Oshiage",
+        "name": "押上",
         "summary": "Skytree 景觀、Sumida 河邊散步，以及更安靜的東側住宿。旁邊的 Kinshicho 有寬敞的 Daiso、Muji 和扭蛋樓層，沒有 Shibuya 那樣的人潮。",
         "bestFor": "Skytree 景觀和平價住宿",
         "avoidIf": "你想要夜生活或市中心感",
         "timing": "下午到晚上"
       },
       "monzenNakacho": {
-        "name": "Monzen-Nakacho",
+        "name": "門前仲町",
         "summary": "老 Tokyo 街道、神社、社區 izakaya，以及輕鬆串聯 East Tokyo 的路線。",
         "bestFor": "神社、在地美食、老街氛圍",
         "avoidIf": "你需要大量英語旅遊設施",
         "timing": "下午到傍晚"
       },
       "ryogoku": {
-        "name": "Ryogoku",
+        "name": "兩國",
         "summary": "相撲文化、Edo 歷史、博物館，以及通往 Asakusa 的實用銜接點。",
         "bestFor": "相撲和 Edo 歷史",
         "avoidIf": "你想購物或體驗夜生活",
         "timing": "上午或午後早些時候"
       },
       "suitengumae": {
-        "name": "Suitengumae / Ningyocho",
+        "name": "水天宮前 / 人形町",
         "summary": "T-CAT 機場巴士、安靜飯店、Ningyocho 美食街，以及連接 Tokyo Station 和 East Tokyo 的實用據點。",
         "bestFor": "機場移動、安靜飯店、老街美食",
         "avoidIf": "你想要夜生活或標誌性景點",
@@ -396,25 +396,25 @@
       "commandCenter": "開啟 Command Center"
     },
     "heroCtas": {
-      "primary": "Check Fuji-side seat",
-      "secondary": "Choose hotel base",
-      "tickets": "Rail guide",
-      "esim": "Arrival prep"
+      "primary": "確認富士側座位",
+      "secondary": "選擇住宿基地",
+      "tickets": "鐵道指南",
+      "esim": "抵達準備"
     },
     "supportTools": {
-      "eyebrow": "More tools",
-      "description": "Use these after the seat, hotel base, tickets, and arrival basics are clear.",
-      "localTokyo": "Local Tokyo",
-      "routeSupport": "Route support",
-      "planner": "Trip Planner",
-      "itinerary": "7-day itinerary",
-      "commandCenter": "Command Center",
-      "stationPractice": "Station Practice",
-      "featuredLabel": "Featured tool",
-      "stationPracticeTitle": "Station Practice",
-      "stationPracticeDesc": "Practice Japanese station navigation before your trip.",
-      "stationPracticeCta": "Open practice",
-      "otherLabel": "Other tools"
+      "eyebrow": "更多工具",
+      "description": "在確定座位、住宿基地、車票與抵達基本資訊之後使用這些工具。",
+      "localTokyo": "在地東京",
+      "routeSupport": "路線支援",
+      "planner": "旅行規劃器",
+      "itinerary": "7 日行程",
+      "commandCenter": "指揮中心",
+      "stationPractice": "車站練習",
+      "featuredLabel": "精選工具",
+      "stationPracticeTitle": "車站練習",
+      "stationPracticeDesc": "在旅行前先練習日本車站的動線。",
+      "stationPracticeCta": "開啟練習",
+      "otherLabel": "其他工具"
     }
   },
   "guide": {
@@ -1987,93 +1987,93 @@
           "title": "東京住哪裡 — 首次旅客指南",
           "description": "比較新宿、上野、淺草、東京站和更安靜的東京東部。",
           "tags": [
-            "Tokyo",
-            "First-time",
-            "Area guide"
+            "東京",
+            "首次造訪",
+            "區域指南"
           ]
         },
         "where-to-stay-before-shinkansen": {
           "title": "在東京搭新幹線前住哪裡",
           "description": "如果行李和東京站早班出發很重要，先看這篇。",
           "tags": [
-            "Tokyo",
-            "Shinkansen",
-            "Luggage"
+            "東京",
+            "新幹線",
+            "行李"
           ]
         },
         "tokyo-station-vs-shinjuku": {
           "title": "東京站 vs 新宿",
           "description": "比較鐵路交通、餐飲夜生活和首次旅行便利性。",
           "tags": [
-            "Tokyo Station",
-            "Shinjuku"
+            "東京站",
+            "新宿"
           ]
         },
         "ueno-vs-shinjuku": {
           "title": "上野 vs 新宿",
           "description": "在成田機場交通和東京西側活力之間選擇。",
           "tags": [
-            "Ueno",
-            "Shinjuku"
+            "上野",
+            "新宿"
           ]
         },
         "asakusa-vs-ueno": {
           "title": "淺草 vs 上野",
           "description": "比較老東京氛圍和實用鐵路交通。",
           "tags": [
-            "Asakusa",
-            "Ueno"
+            "淺草",
+            "上野"
           ]
         },
         "kyoto-first-time": {
           "title": "第一次去京都住哪裡",
           "description": "比較京都站、河原町 / 四條、祇園、嵐山和更安靜的京都北部。",
           "tags": [
-            "Kyoto",
-            "First-time",
-            "Area guide"
+            "京都",
+            "首次造訪",
+            "區域指南"
           ]
         },
         "kyoto-station-vs-gion": {
           "title": "京都站 vs 祇園",
           "description": "決定是交通便利還是經典京都氛圍更重要。",
           "tags": [
-            "Kyoto Station",
-            "Gion"
+            "京都站",
+            "祇園"
           ]
         },
         "osaka-first-time": {
           "title": "第一次去大阪住哪裡",
           "description": "比較難波、梅田、新大阪、天王寺和較安靜的市中心區域。",
           "tags": [
-            "Osaka",
-            "First-time",
-            "Area guide"
+            "大阪",
+            "首次造訪",
+            "區域指南"
           ]
         },
         "namba-vs-umeda": {
           "title": "難波 vs 梅田",
           "description": "在美食夜生活和鐵路交通之間選擇。",
           "tags": [
-            "Namba",
-            "Umeda"
+            "難波",
+            "梅田"
           ]
         },
         "shin-osaka-vs-namba": {
           "title": "新大阪 vs 難波",
           "description": "判斷新幹線交通是否應決定你在大阪的住宿點。",
           "tags": [
-            "Shin-Osaka",
-            "Namba"
+            "新大阪",
+            "難波"
           ]
         },
         "kawaguchiko": {
           "title": "河口湖住哪裡 — 富士山景飯店",
           "description": "適合在河口湖周邊住一晚看富士山。",
           "tags": [
-            "Mt. Fuji",
-            "Kawaguchiko",
-            "Overnight"
+            "富士山",
+            "河口湖",
+            "過夜"
           ]
         }
       }
@@ -2107,7 +2107,7 @@
       "quiet": "想要更安靜的在地東京氛圍？可以看清澄白河、藏前、押上或兩國。"
     },
     "finderPreview": {
-      "eyebrow": "Tokyo Hotel Base Finder",
+      "eyebrow": "東京住宿基地搜尋器",
       "title": "不知道東京住哪裡？",
       "body": "按旅行情況判斷，而不是按酒店排名判斷。",
       "cta": "從 Tokyo Hotel Base Finder 開始",
@@ -2115,7 +2115,7 @@
         "luggage": "大型行李",
         "airport": "成田或羽田抵達",
         "shinkansen": "早班新幹線",
-        "plans": "Disney / teamLab / Asakusa / Shibuya",
+        "plans": "迪士尼 / teamLab / 淺草 / 渋谷",
         "quiet": "安靜在地東京 vs 大站便利"
       }
     },
@@ -3896,9 +3896,9 @@
       "ogDescription": "訂酒店前，用 fujiseat 的車站區域邏輯比較東京住宿區域。"
     },
     "hero": {
-      "eyebrow": "Tokyo hotel area finder",
-      "title": "Find where to stay in Tokyo",
-      "body": "Pick the places you want to visit. Answer a few travel questions. Get your top 3 Tokyo hotel base areas.",
+      "eyebrow": "東京飯店區域搜尋器",
+      "title": "找出在東京住哪裡",
+      "body": "選擇您想造訪的地點，回答幾個旅行問題，獲得最適合您的東京住宿基地前 3 名。",
       "signals": [
         "机场交通",
         "行李友好",
@@ -3908,7 +3908,7 @@
       "disclaimer": "分数是编辑型旅行适合度分数，在可用时参考公开数据信号。它们不是官方评分、酒店排名，也不保证价格、舒适度、空房或路线状况。",
       "freshness": "参考乘客数据的本地更新 · 最后来源检查：{date}",
       "cta": "开始",
-      "startCta": "Start Tokyo hotel base finder"
+      "startCta": "啟動 Tokyo Hotel Base Finder"
     },
     "situations": {
       "eyebrow": "从旅行情况开始",
@@ -3970,14 +3970,14 @@
       "count": "{count}個區域 · 篩選：{filter}"
     },
     "detailScores": {
-      "stationSimplicity": "Station simplicity",
-      "luggageFriendly": "Luggage-friendly",
-      "airportAccess": "Airport access",
-      "shinkansenAccess": "Shinkansen access",
-      "touristAccess": "Tourist access",
-      "localFeel": "Local feel",
-      "crowdStress": "Less crowd stress",
-      "hotelChoice": "Hotel choice"
+      "stationSimplicity": "車站簡明度",
+      "luggageFriendly": "行李友善",
+      "airportAccess": "機場交通",
+      "shinkansenAccess": "新幹線交通",
+      "touristAccess": "觀光便利度",
+      "localFeel": "在地氛圍",
+      "crowdStress": "較少擁擠壓力",
+      "hotelChoice": "飯店選擇"
     },
     "scoreLabels": {
       "stationSimplicity": "車站簡單度",
@@ -4119,7 +4119,7 @@
       },
       "exit": {
         "title": "出口 / 入口複雜度",
-        "bodyMatched": "Tokyo Metro exit feed parsed — {matched} of {count} areas use a bucketed open-exit count. Areas without Tokyo Metro coverage use the editorial level.",
+        "bodyMatched": "已解析 Tokyo Metro 出口資料——{count} 個區域中有 {matched} 個使用開放出口的分類複雜度等級。",
         "bodyFallback": "編輯標籤說明車站規模。這會影響車站簡單度，並輕微影響行李友善度。"
       },
       "lines": {
@@ -4128,12 +4128,12 @@
       },
       "stepFree": {
         "title": "無階梯 / 電梯路線",
-        "bodyMatched": "Toei barrier-free CSVs parsed — {matched} of {count} areas have a confirmed step-free route. Missing data is not penalised.",
+        "bodyMatched": "已解析 Toei 無障礙 CSV——{count} 個區域中有 {matched} 個已確認無障礙路線。資料缺失不會被扣分。Tokyo Metro 各站詳細頁面尚未解析。",
         "bodyFallback": "無階梯路線資料只在能可靠匹配公開來源時使用。缺少資料不扣分。"
       },
       "access": {
-        "title": "Airport / Shinkansen access",
-        "body": "Curated route logic explains Narita, Haneda, Tokyo Station, Shinagawa, and Shinkansen fit. No live timetable data is implied."
+        "title": "機場 / 新幹線交通",
+        "body": "編輯路線邏輯為每個區域說明成田、羽田、東京站、品川與新幹線。"
       },
       "hotelChoice": {
         "title": "酒店選擇密度",
@@ -4155,7 +4155,7 @@
     },
     "methodology": {
       "title": "分數如何計算",
-      "summary": "Methodology, station-name notes, and source details are here if you want to inspect the scoring.",
+      "summary": "如果想要檢視，方法論、車站名稱說明與資料來源細節都在這裡。",
       "p1": "這裡比較的是車站區域，不是單個酒店。",
       "p2": "分數結合編輯型旅行邏輯、車站使用性信號和資料狀態。",
       "p3": "缺少資料不會被扣分。酒店選擇密度是編輯信號，不評價單個酒店、價格或空房。",
@@ -4184,7 +4184,7 @@
     },
     "dataNote": {
       "title": "資料新鮮度 / 來源說明",
-      "summary": "Source status and public-data notes. This is not live hotel inventory or official travel advice.",
+      "summary": "資料來源狀態與公開資料說明。並非即時飯店庫存或官方排名。",
       "body": "fujiseat.com 分數是編輯型旅行適合度，在可用時參考資料。它不是官方評分，也不是保證。",
       "currentMode": "目前模式：<strong>{mode}</strong>。最後檢查：{date}。",
       "registryTitle": "來源列表",
@@ -4313,7 +4313,7 @@
       "showResultsLabel": "显示结果",
       "selectedLabel": "已选",
       "stepLabel": "步骤",
-      "topTitle": "Your top 3 Tokyo hotel base areas",
+      "topTitle": "您的東京住宿基地前 3 名",
       "topBody": "这些结果使用同一组 36 个区域数据和既有 fujiseat 分数，再按你的回答重新排序。",
       "whyFits": "为什么适合你",
       "bestFor": "适合",
@@ -4321,7 +4321,7 @@
       "showMore": "显示更多候选",
       "compareAll": "比较所有区域",
       "moreTitle": "更多候选",
-      "allTitle": "Compare all 36 Tokyo station areas",
+      "allTitle": "比較全部 36 個東京車站區域",
       "allBody": "这会展开完整比较列表。分数是旅行适合度信号，不是官方评分或酒店排名。",
       "matchLabel": "匹配",
       "noAnswers": "先回答几个快速问题。完成向导前结果会保持隐藏。",
@@ -4340,27 +4340,27 @@
           "options": [
             {
               "id": "shibuya-harajuku",
-              "label": "Shibuya / Harajuku"
+              "label": "渋谷 / 原宿"
             },
             {
               "id": "shinjuku",
-              "label": "Shinjuku"
+              "label": "新宿"
             },
             {
               "id": "asakusa",
-              "label": "Asakusa / Senso-ji"
+              "label": "淺草 / 淺草寺"
             },
             {
               "id": "ueno",
-              "label": "Ueno"
+              "label": "上野"
             },
             {
               "id": "ginza-tsukiji",
-              "label": "Ginza / Tsukiji"
+              "label": "銀座 / 築地"
             },
             {
               "id": "akihabara",
-              "label": "Akihabara"
+              "label": "秋葉原"
             },
             {
               "id": "tokyo-station-palace",
@@ -4368,11 +4368,11 @@
             },
             {
               "id": "toyosu-odaiba",
-              "label": "Toyosu / teamLab / Odaiba"
+              "label": "豐洲 / teamLab / 台場"
             },
             {
               "id": "disney",
-              "label": "Tokyo Disney Resort"
+              "label": "東京迪士尼度假區"
             },
             {
               "id": "fuji",
@@ -4380,7 +4380,7 @@
             },
             {
               "id": "kamakura-yokohama",
-              "label": "Kamakura / Yokohama"
+              "label": "鎌倉 / 橫濱"
             },
             {
               "id": "kyoto-osaka",
@@ -4396,11 +4396,11 @@
           "options": [
             {
               "id": "narita",
-              "label": "Narita Airport (NRT)"
+              "label": "成田機場 (NRT)"
             },
             {
               "id": "haneda",
-              "label": "Haneda Airport (HND)"
+              "label": "羽田機場 (HND)"
             },
             {
               "id": "not-sure",
@@ -4464,11 +4464,11 @@
           "options": [
             {
               "id": "kyoto-osaka",
-              "label": "Kyoto / Osaka"
+              "label": "京都 / 大阪"
             },
             {
               "id": "fuji-hakone",
-              "label": "Mt. Fuji / Hakone"
+              "label": "富士山 / 箱根"
             },
             {
               "id": "tokyo-only",
@@ -4505,7 +4505,7 @@
         "goodMatch": "不错的匹配",
         "areaOption": "区域候选"
       },
-      "viewHotelPageLabel": "View hotel search page"
+      "viewHotelPageLabel": "查看飯店搜尋頁面"
     }
   },
   "fujiseatAreaLogic": {
