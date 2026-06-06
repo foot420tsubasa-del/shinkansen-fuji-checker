@@ -875,6 +875,9 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
               alt: t("visuals.howThisAreaConnects.alt", { area: area.displayName }),
               caption: t("visuals.howThisAreaConnects.caption", { area: area.displayName }),
             }}
+            coordinates={area.coordinates ?? null}
+            mapCaption={t("accessSnapshot.mapCaption", { area: area.displayName })}
+            mapAriaLabel={t("accessSnapshot.mapAriaLabel", { area: area.displayName })}
           />
         )}
 

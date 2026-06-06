@@ -1,18 +1,22 @@
 import { MapPin } from "lucide-react";
 import { AreaOptionalImage } from "./AreaOptionalImage";
+import { AreaMapEmbed } from "./AreaMapEmbed";
 
 /**
- * Lightweight schematic — center node = current area, surrounded by 3–4
- * named destinations with qualitative access labels (no fabricated minutes).
+ * "How this area connects" section.
  *
- * Layout: 2x2 destination grid on desktop, 1-column on mobile, with a clear
- * "you are here" center pill above. No real map, no heavy dependencies.
+ * Visual tier (priority order):
+ *   1. hand-drawn image asset (image.src present)  — best for editorialised
+ *      area maps with labelled destinations
+ *   2. live Google Maps embed (coordinates present) — works for every area
+ *      out of the box, no API key required
+ *   3. in-code schematic ("you are here" pill + chip grid) — last-resort
+ *      fallback that still communicates the area's position relative to
+ *      Narita / Haneda / Shinkansen / Tokyo Station
  *
- * Image-slot behaviour (priority slot per the spec):
- *   - if `image.src` is a valid path, the section renders an image-first
- *     card in place of the in-code schematic — title, intro, qualitative
- *     note stay as text so essential meaning is never image-only.
- *   - if `image.src` is null/undefined, the in-code schematic renders.
+ * Whatever tier renders, the text labels (Narita Airport / Haneda Airport
+ * etc. + qualitative level chips) always render below so essential meaning
+ * is never trapped inside a visual element.
  */
 
 export type AccessNode = {
@@ -31,6 +35,9 @@ export function AreaAccessSnapshot({
   nodes,
   qualitativeNote,
   image,
+  coordinates,
+  mapCaption,
+  mapAriaLabel,
 }: {
   eyebrow: string;
   title: string;
@@ -39,9 +46,18 @@ export function AreaAccessSnapshot({
   centerSublabel?: string;
   nodes: AccessNode[];
   qualitativeNote: string;
-  /** Optional generated image. Replaces the schematic when present. */
+  /** Optional generated image. Highest-priority visual tier. */
   image?: { src: string | null | undefined; alt: string; caption?: string };
+  /** Area lat/lng. When present and no image is supplied, the section
+   *  renders a live Google Maps embed. */
+  coordinates?: { lat: number; lng: number } | null;
+  /** Caption rendered below the live map embed. */
+  mapCaption?: string;
+  /** Aria-label for the map iframe. */
+  mapAriaLabel?: string;
 }) {
+  const hasImage = Boolean(image?.src);
+  const hasMap = !hasImage && Boolean(coordinates);
   return (
     <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm md:p-6">
       <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">
@@ -50,33 +66,26 @@ export function AreaAccessSnapshot({
       <h2 className="mt-2 text-xl font-semibold text-slate-950">{title}</h2>
       {intro ? <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{intro}</p> : null}
 
-      {image?.src ? (
+      {hasImage ? (
         <div className="mt-5">
           <AreaOptionalImage
-            src={image.src}
-            alt={image.alt}
-            caption={image.caption}
+            src={image?.src ?? null}
+            alt={image?.alt ?? ""}
+            caption={image?.caption}
             aspect="video"
           />
-          {/* Keep text labels accessible even when the image stands in for the schematic */}
-          <dl className="mt-4 grid gap-2 sm:grid-cols-2">
-            {nodes.map((node) => (
-              <div
-                key={node.key}
-                className="flex items-center justify-between gap-3 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2"
-              >
-                <dt className="text-xs font-semibold text-slate-700">{node.label}</dt>
-                <dd
-                  className={[
-                    "inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.06em]",
-                    levelTone(node.level),
-                  ].join(" ")}
-                >
-                  {node.level}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <DestinationDl nodes={nodes} />
+          <p className="mt-3 text-[11px] leading-4 text-slate-500">{qualitativeNote}</p>
+        </div>
+      ) : hasMap ? (
+        <div className="mt-5">
+          <AreaMapEmbed
+            coordinates={coordinates ?? null}
+            areaName={centerLabel}
+            caption={mapCaption}
+            ariaLabel={mapAriaLabel}
+          />
+          <DestinationDl nodes={nodes} />
           <p className="mt-3 text-[11px] leading-4 text-slate-500">{qualitativeNote}</p>
         </div>
       ) : (
@@ -105,6 +114,31 @@ export function AreaAccessSnapshot({
         </div>
       )}
     </section>
+  );
+}
+
+/** Compact destination list rendered below the image or map so qualitative
+ *  level chips remain accessible regardless of which visual tier is active. */
+function DestinationDl({ nodes }: { nodes: AccessNode[] }) {
+  return (
+    <dl className="mt-4 grid gap-2 sm:grid-cols-2">
+      {nodes.map((node) => (
+        <div
+          key={node.key}
+          className="flex items-center justify-between gap-3 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2"
+        >
+          <dt className="text-xs font-semibold text-slate-700">{node.label}</dt>
+          <dd
+            className={[
+              "inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-[0.06em]",
+              levelTone(node.level),
+            ].join(" ")}
+          >
+            {node.level}
+          </dd>
+        </div>
+      ))}
+    </dl>
   );
 }
 

@@ -4743,7 +4743,9 @@
             }
           }
         }
-      }
+      },
+      "mapCaption": "Interactive map centered on {area}. Use the standard Google Maps controls to zoom, pan, or open a full-screen view.",
+      "mapAriaLabel": "Google Maps view of {area}"
     },
     "visuals": {
       "howThisAreaConnects": {
