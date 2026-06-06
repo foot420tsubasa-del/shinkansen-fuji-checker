@@ -531,7 +531,6 @@ export default function HomeClient() {
               </p>
               <div className="flex flex-wrap gap-2 text-xs font-semibold">
                 {[
-                  { href: "/command-center", label: t("supportTools.commandCenter"), category: "itinerary" },
                   { href: "/local-tokyo", label: t("supportTools.localTokyo"), category: "local_tokyo" },
                   { href: "/itineraries/7-day-first-time-japan", label: t("supportTools.itinerary"), category: "itinerary" },
                   { href: "/plan-your-trip", label: t("supportTools.planner"), category: "itinerary" },
