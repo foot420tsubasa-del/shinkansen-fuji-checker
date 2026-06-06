@@ -38,6 +38,10 @@ import {
 import { AreaFitProfile } from "../_components/AreaFitProfile";
 import { AreaAccessSnapshot, type AccessNode } from "../_components/AreaAccessSnapshot";
 import {
+  AreaConnectionCommandMap,
+  type AreaConnectionCommandNode,
+} from "../_components/AreaConnectionCommandMap";
+import {
   AreaNearbyComparison,
   type ComparisonRow,
 } from "../_components/AreaNearbyComparison";
@@ -537,6 +541,36 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
       note: area.accessProfiles.tokyoStationAccess?.note,
     },
   ];
+  const oshiageCommandNodes: AreaConnectionCommandNode[] = [
+    {
+      key: "narita",
+      label: t("accessSnapshot.commandMap.oshiage.nodes.narita.label"),
+      chip: t("accessSnapshot.commandMap.oshiage.nodes.narita.chip"),
+      note: t("accessSnapshot.commandMap.oshiage.nodes.narita.note"),
+      position: "topLeft",
+    },
+    {
+      key: "haneda",
+      label: t("accessSnapshot.commandMap.oshiage.nodes.haneda.label"),
+      chip: t("accessSnapshot.commandMap.oshiage.nodes.haneda.chip"),
+      note: t("accessSnapshot.commandMap.oshiage.nodes.haneda.note"),
+      position: "topRight",
+    },
+    {
+      key: "asakusa",
+      label: t("accessSnapshot.commandMap.oshiage.nodes.asakusa.label"),
+      chip: t("accessSnapshot.commandMap.oshiage.nodes.asakusa.chip"),
+      note: t("accessSnapshot.commandMap.oshiage.nodes.asakusa.note"),
+      position: "bottomLeft",
+    },
+    {
+      key: "tokyoStation",
+      label: t("accessSnapshot.commandMap.oshiage.nodes.tokyoStation.label"),
+      chip: t("accessSnapshot.commandMap.oshiage.nodes.tokyoStation.chip"),
+      note: t("accessSnapshot.commandMap.oshiage.nodes.tokyoStation.note"),
+      position: "bottomRight",
+    },
+  ];
 
   // ----- Nearby comparison
   const nearbyAlternatives = nearbyBySlug[supportedSlug] ?? defaultNearbyAlternatives(supportedSlug);
@@ -676,21 +710,33 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
           watchOut={watchOut}
         />
 
-        {/* 5. Access snapshot (priority slot: image replaces schematic when present) */}
-        <AreaAccessSnapshot
-          eyebrow={t("accessSnapshot.eyebrow")}
-          title={t("accessSnapshot.title")}
-          intro={t("accessSnapshot.intro")}
-          centerLabel={area.displayName}
-          centerSublabel={t("accessSnapshot.centerSublabel")}
-          nodes={nodes}
-          qualitativeNote={t("accessSnapshot.qualitativeNote")}
-          image={{
-            src: visualAssets["how-this-area-connects"],
-            alt: t("visuals.howThisAreaConnects.alt", { area: area.displayName }),
-            caption: t("visuals.howThisAreaConnects.caption", { area: area.displayName }),
-          }}
-        />
+        {/* 5. Access snapshot. Oshiage uses the code-rendered command map experiment; other areas keep image/fallback behavior. */}
+        {supportedSlug === "oshiage" ? (
+          <AreaConnectionCommandMap
+            eyebrow={t("accessSnapshot.eyebrow")}
+            title={t("accessSnapshot.title")}
+            intro={t("accessSnapshot.commandMap.oshiage.intro")}
+            centerLabel={t("accessSnapshot.commandMap.oshiage.centerLabel")}
+            centerSubLabel={t("accessSnapshot.commandMap.oshiage.centerSubLabel")}
+            qualitativeNote={t("accessSnapshot.qualitativeNote")}
+            nodes={oshiageCommandNodes}
+          />
+        ) : (
+          <AreaAccessSnapshot
+            eyebrow={t("accessSnapshot.eyebrow")}
+            title={t("accessSnapshot.title")}
+            intro={t("accessSnapshot.intro")}
+            centerLabel={area.displayName}
+            centerSublabel={t("accessSnapshot.centerSublabel")}
+            nodes={nodes}
+            qualitativeNote={t("accessSnapshot.qualitativeNote")}
+            image={{
+              src: visualAssets["how-this-area-connects"],
+              alt: t("visuals.howThisAreaConnects.alt", { area: area.displayName }),
+              caption: t("visuals.howThisAreaConnects.caption", { area: area.displayName }),
+            }}
+          />
+        )}
 
         {/* 6. Nearby alternatives comparison (optional comparison image banner) */}
         {alternativeRows.length > 0 ? (

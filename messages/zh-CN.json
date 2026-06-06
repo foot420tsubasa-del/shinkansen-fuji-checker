@@ -4714,7 +4714,36 @@
       "title": "How this area connects",
       "intro": "A qualitative snapshot — not a real map. Always check the exact route from the hotel to your station entrance.",
       "centerSublabel": "You are here",
-      "qualitativeNote": "Qualitative levels (Excellent / Good / Fair / Weak) are editorial summaries of the existing access profiles. They are not exact travel times."
+      "qualitativeNote": "Qualitative levels (Excellent / Good / Fair / Weak) are editorial summaries of the existing access profiles. They are not exact travel times.",
+      "commandMap": {
+        "oshiage": {
+          "intro": "Oshiage works as an east Tokyo base because it connects airport access, Skytree-side stays, Asakusa, and central rail links without acting like a mega-terminal.",
+          "centerLabel": "Oshiage / 押上",
+          "centerSubLabel": "East Tokyo base",
+          "nodes": {
+            "narita": {
+              "label": "Narita Airport / 成田空港",
+              "chip": "Good",
+              "note": "Good airport access for many Narita arrivals."
+            },
+            "haneda": {
+              "label": "Haneda Airport / 羽田空港",
+              "chip": "Good",
+              "note": "Good airport access without using a giant station as the base."
+            },
+            "asakusa": {
+              "label": "Asakusa / 浅草",
+              "chip": "Near",
+              "note": "Nearby old Tokyo sightseeing and river-side walks."
+            },
+            "tokyoStation": {
+              "label": "Tokyo Station / 東京駅",
+              "chip": "Reasonable",
+              "note": "A reasonable rail link for Tokyo Station and Shinkansen days."
+            }
+          }
+        }
+      }
     },
     "visuals": {
       "howThisAreaConnects": {
