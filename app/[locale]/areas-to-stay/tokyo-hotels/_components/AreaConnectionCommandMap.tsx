@@ -20,6 +20,30 @@ export type AreaConnectionCommandNode = {
   position: "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
 };
 
+/**
+ * Per-area map configuration. The page assembles this from the area's
+ * coordinates + a fixed set of Tokyo-side destinations (Narita, Haneda,
+ * Tokyo Station, etc.) and passes it in as a prop so this component
+ * stays slug-agnostic and works for all 36 area pages.
+ */
+export type AreaConnectionMapConfig = {
+  centerKey: string;
+  centerPosition: google.maps.LatLngLiteral;
+  centerShortLabel?: string;
+  /** Pre-computed midpoint between center and the cluster of destinations.
+   *  When omitted, the component falls back to centerPosition. */
+  initialMapCenter?: google.maps.LatLngLiteral;
+  /** Initial zoom level when no destination is selected. */
+  defaultZoom?: number;
+  destinations: Array<{
+    key: string;
+    label: string;
+    shortLabel: string;
+    position: google.maps.LatLngLiteral;
+    tone: "city" | "airport";
+  }>;
+};
+
 type AreaConnectionCommandMapProps = {
   eyebrow: string;
   title: string;
@@ -28,6 +52,7 @@ type AreaConnectionCommandMapProps = {
   centerSubLabel: string;
   qualitativeNote: string;
   nodes: AreaConnectionCommandNode[];
+  map: AreaConnectionMapConfig;
 };
 
 type MapPoint = {
@@ -40,54 +65,6 @@ type MapPoint = {
 
 const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
 const MAP_ID = process.env.NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID || "";
-
-const OSHIAGE_POSITION = { lat: 35.7101, lng: 139.812 };
-const MAP_CENTER = { lat: 35.701, lng: 139.795 };
-const airportPoints: MapPoint[] = [
-  {
-    key: "narita",
-    label: "Narita Airport",
-    shortLabel: "N",
-    position: { lat: 35.772, lng: 140.3929 },
-    tone: "airport",
-  },
-  {
-    key: "haneda",
-    label: "Haneda Airport",
-    shortLabel: "H",
-    position: { lat: 35.5494, lng: 139.7798 },
-    tone: "airport",
-  },
-];
-
-const mapPoints: MapPoint[] = [
-  {
-    key: "oshiage",
-    label: "Oshiage / 押上",
-    shortLabel: "O",
-    position: OSHIAGE_POSITION,
-    tone: "center",
-  },
-  {
-    key: "asakusa",
-    label: "Asakusa",
-    shortLabel: "A",
-    position: { lat: 35.7148, lng: 139.7967 },
-    tone: "city",
-  },
-  {
-    key: "tokyoStation",
-    label: "Tokyo Station",
-    shortLabel: "T",
-    position: { lat: 35.6812, lng: 139.7671 },
-    tone: "city",
-  },
-];
-const mapPointByKey = new globalThis.Map(
-  [...mapPoints, ...airportPoints].map((point) => [point.key, point]),
-);
-const LOCAL_MAP_KEYS = new Set(["asakusa", "tokyoStation"]);
-const AIRPORT_MAP_KEYS = new Set(["narita", "haneda"]);
 
 export function AreaConnectionCommandMap(props: AreaConnectionCommandMapProps) {
   const { eyebrow, title, intro } = props;
@@ -103,20 +80,26 @@ export function AreaConnectionCommandMap(props: AreaConnectionCommandMapProps) {
 
       {hasMapConfig ? (
         <APIProvider apiKey={API_KEY} language="en" region="JP">
-          <OshiageGoogleMapPanel {...props} />
+          <CommandMapPanel {...props} />
         </APIProvider>
       ) : (
-        <FallbackSchematic {...props} />
+        <FallbackSchematic
+          centerLabel={props.centerLabel}
+          centerSubLabel={props.centerSubLabel}
+          qualitativeNote={props.qualitativeNote}
+          nodes={props.nodes}
+        />
       )}
     </section>
   );
 }
 
-function OshiageGoogleMapPanel({
+function CommandMapPanel({
   centerLabel,
   centerSubLabel,
   qualitativeNote,
   nodes,
+  map,
 }: AreaConnectionCommandMapProps) {
   const loadingStatus = useApiLoadingStatus();
   const [activeKey, setActiveKey] = useState<string | null>(null);
@@ -126,7 +109,49 @@ function OshiageGoogleMapPanel({
   };
 
   if (loadingStatus === APILoadingStatus.FAILED) {
-    return <FallbackSchematic centerLabel={centerLabel} centerSubLabel={centerSubLabel} qualitativeNote={qualitativeNote} nodes={nodes} activeKey={activeKey} onSelect={selectConnection} />;
+    return (
+      <FallbackSchematic
+        centerLabel={centerLabel}
+        centerSubLabel={centerSubLabel}
+        qualitativeNote={qualitativeNote}
+        nodes={nodes}
+        activeKey={activeKey}
+        onSelect={selectConnection}
+      />
+    );
+  }
+
+  const initialMapCenter = map.initialMapCenter ?? map.centerPosition;
+  const defaultZoom = map.defaultZoom ?? 13;
+  const allPoints: MapPoint[] = [
+    {
+      key: map.centerKey,
+      label: centerLabel,
+      shortLabel: map.centerShortLabel ?? centerLabel.charAt(0).toUpperCase(),
+      position: map.centerPosition,
+      tone: "center",
+    },
+    ...map.destinations.map<MapPoint>((d) => ({ ...d })),
+  ];
+  const destinationByKey = new globalThis.Map(map.destinations.map((d) => [d.key, d]));
+
+  function visibleDestinations(): MapPoint[] {
+    if (!activeKey) return allPoints.filter((p) => p.key !== map.centerKey);
+    const active = destinationByKey.get(activeKey);
+    if (!active) return allPoints.filter((p) => p.key !== map.centerKey);
+    if (active.tone === "airport") return [active];
+    return allPoints.filter((p) => p.key !== map.centerKey);
+  }
+
+  function visibleMarkers(): MapPoint[] {
+    if (!activeKey) return allPoints;
+    const active = destinationByKey.get(activeKey);
+    if (!active) return allPoints;
+    if (active.tone === "airport") {
+      // Keep center marker visible alongside the airport marker
+      return [allPoints[0], { ...active }];
+    }
+    return allPoints;
   }
 
   return (
@@ -134,8 +159,8 @@ function OshiageGoogleMapPanel({
       <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
         <div className="relative h-[360px] min-h-[360px] w-full md:h-[430px]">
           <Map
-            defaultCenter={MAP_CENTER}
-            defaultZoom={13}
+            defaultCenter={initialMapCenter}
+            defaultZoom={defaultZoom}
             mapId={MAP_ID}
             colorScheme="LIGHT"
             disableDefaultUI={true}
@@ -143,24 +168,30 @@ function OshiageGoogleMapPanel({
             backgroundColor="#f8fafc"
             style={{ width: "100%", height: "100%" }}
           >
-            <MapViewportController activeKey={activeKey} />
-            {visibleDestinationPoints(activeKey).map((point) => (
+            <MapViewportController
+              activeKey={activeKey}
+              centerPosition={map.centerPosition}
+              initialMapCenter={initialMapCenter}
+              defaultZoom={defaultZoom}
+              destinationByKey={destinationByKey}
+            />
+            {visibleDestinations().map((point) => (
               <Polyline
                 key={`line-${point.key}`}
-                path={[OSHIAGE_POSITION, point.position]}
+                path={[map.centerPosition, point.position]}
                 strokeColor="#dc2626"
                 strokeOpacity={activeKey === point.key ? 0.92 : 0.62}
                 strokeWeight={activeKey === point.key ? 7 : 4}
                 zIndex={activeKey === point.key ? 3 : 1}
               />
             ))}
-            {visibleMapPoints(activeKey).map((point) => (
+            {visibleMarkers().map((point) => (
               <AdvancedMarker
                 key={point.key}
                 position={point.position}
                 title={point.label}
                 onClick={() => {
-                  if (point.key === "oshiage") {
+                  if (point.key === map.centerKey) {
                     setActiveKey(null);
                     return;
                   }
@@ -176,7 +207,7 @@ function OshiageGoogleMapPanel({
             type="button"
             onClick={() => setActiveKey(null)}
             className="absolute left-3 top-3 max-w-[calc(100%-1.5rem)] rounded-2xl border border-white/90 bg-white/95 px-3 py-2 text-left shadow-sm backdrop-blur-sm transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-300 md:left-4 md:top-4"
-            aria-label="Reset map to Oshiage"
+            aria-label={`Reset map to ${centerLabel}`}
           >
             <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#106b43]">
               {centerSubLabel}
@@ -200,39 +231,49 @@ function OshiageGoogleMapPanel({
   );
 }
 
-function MapViewportController({ activeKey }: { activeKey: string | null }) {
+function MapViewportController({
+  activeKey,
+  centerPosition,
+  initialMapCenter,
+  defaultZoom,
+  destinationByKey,
+}: {
+  activeKey: string | null;
+  centerPosition: google.maps.LatLngLiteral;
+  initialMapCenter: google.maps.LatLngLiteral;
+  defaultZoom: number;
+  destinationByKey: globalThis.Map<string, { position: google.maps.LatLngLiteral; tone: "city" | "airport" }>;
+}) {
   const map = useMap();
 
   useEffect(() => {
     if (!map) return;
 
     if (!activeKey) {
-      map.panTo(MAP_CENTER);
-      map.setZoom(13);
+      map.panTo(initialMapCenter);
+      map.setZoom(defaultZoom);
       return;
     }
 
-    if (AIRPORT_MAP_KEYS.has(activeKey)) {
-      const point = mapPointByKey.get(activeKey);
-      if (!point) return;
+    const active = destinationByKey.get(activeKey);
+    if (!active) {
+      map.panTo(initialMapCenter);
+      map.setZoom(defaultZoom);
+      return;
+    }
+
+    if (active.tone === "airport") {
       const bounds = new google.maps.LatLngBounds();
-      bounds.extend(OSHIAGE_POSITION);
-      bounds.extend(point.position);
+      bounds.extend(centerPosition);
+      bounds.extend(active.position);
       map.fitBounds(bounds, 72);
       return;
     }
 
-    if (!LOCAL_MAP_KEYS.has(activeKey)) {
-      map.panTo(MAP_CENTER);
-      map.setZoom(13);
-      return;
-    }
-
-    const point = mapPointByKey.get(activeKey);
-    if (!point) return;
-    map.panTo(point.position);
-    map.setZoom(activeKey === "tokyoStation" ? 12.8 : 13.4);
-  }, [activeKey, map]);
+    // City destination — pan + zoom in slightly
+    map.panTo(active.position);
+    map.setZoom(13.2);
+  }, [activeKey, map, centerPosition, initialMapCenter, defaultZoom, destinationByKey]);
 
   return null;
 }
@@ -269,24 +310,6 @@ function MapMarker({ point, isActive }: { point: MapPoint; isActive: boolean }) 
       </span>
     </div>
   );
-}
-
-function visibleDestinationPoints(activeKey: string | null): MapPoint[] {
-  if (activeKey && AIRPORT_MAP_KEYS.has(activeKey)) {
-    const airport = mapPointByKey.get(activeKey);
-    return airport ? [airport] : [];
-  }
-
-  return mapPoints.filter((point) => point.key !== "oshiage");
-}
-
-function visibleMapPoints(activeKey: string | null): MapPoint[] {
-  if (activeKey && AIRPORT_MAP_KEYS.has(activeKey)) {
-    const airport = mapPointByKey.get(activeKey);
-    return airport ? [mapPoints[0], airport] : [mapPoints[0]];
-  }
-
-  return mapPoints;
 }
 
 function FallbackSchematic({

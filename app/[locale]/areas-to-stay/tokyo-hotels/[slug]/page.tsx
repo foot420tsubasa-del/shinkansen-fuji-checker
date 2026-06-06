@@ -36,10 +36,10 @@ import {
   type FeatureIconKey,
 } from "../_components/AreaFeatureHighlights";
 import { AreaFitProfile } from "../_components/AreaFitProfile";
-import { AreaAccessSnapshot, type AccessNode } from "../_components/AreaAccessSnapshot";
 import {
   AreaConnectionCommandMap,
   type AreaConnectionCommandNode,
+  type AreaConnectionMapConfig,
 } from "../_components/AreaConnectionCommandMap";
 import {
   AreaNearbyComparison,
@@ -654,63 +654,123 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
     t("beforeBook.walkingDistanceCaution", { area: area.displayName }),
   ];
 
-  // ----- Access snapshot nodes
-  const nodes: AccessNode[] = [
-    {
-      key: "narita",
-      label: t("access.narita"),
-      level: area.accessProfiles.narita?.level ?? "Fair",
-      note: area.accessProfiles.narita?.note,
-    },
-    {
-      key: "haneda",
-      label: t("access.haneda"),
-      level: area.accessProfiles.haneda?.level ?? "Fair",
-      note: area.accessProfiles.haneda?.note,
-    },
-    {
-      key: "shinkansen",
-      label: t("access.shinkansen"),
-      level: area.accessProfiles.shinkansen?.level ?? "Fair",
-      note: area.accessProfiles.shinkansen?.note,
-    },
-    {
-      key: "tokyoStation",
-      label: t("access.tokyoStationAccess"),
-      level: area.accessProfiles.tokyoStationAccess?.level ?? "Fair",
-      note: area.accessProfiles.tokyoStationAccess?.note,
-    },
-  ];
-  const oshiageCommandNodes: AreaConnectionCommandNode[] = [
-    {
-      key: "narita",
-      label: t("accessSnapshot.commandMap.oshiage.nodes.narita.label"),
-      chip: t("accessSnapshot.commandMap.oshiage.nodes.narita.chip"),
-      note: t("accessSnapshot.commandMap.oshiage.nodes.narita.note"),
-      position: "topLeft",
-    },
-    {
-      key: "haneda",
-      label: t("accessSnapshot.commandMap.oshiage.nodes.haneda.label"),
-      chip: t("accessSnapshot.commandMap.oshiage.nodes.haneda.chip"),
-      note: t("accessSnapshot.commandMap.oshiage.nodes.haneda.note"),
-      position: "topRight",
-    },
-    {
-      key: "asakusa",
-      label: t("accessSnapshot.commandMap.oshiage.nodes.asakusa.label"),
-      chip: t("accessSnapshot.commandMap.oshiage.nodes.asakusa.chip"),
-      note: t("accessSnapshot.commandMap.oshiage.nodes.asakusa.note"),
-      position: "bottomLeft",
-    },
-    {
-      key: "tokyoStation",
-      label: t("accessSnapshot.commandMap.oshiage.nodes.tokyoStation.label"),
-      chip: t("accessSnapshot.commandMap.oshiage.nodes.tokyoStation.chip"),
-      note: t("accessSnapshot.commandMap.oshiage.nodes.tokyoStation.note"),
-      position: "bottomRight",
-    },
-  ];
+  // Build the interactive command-map data for every area.
+  //
+  // For Oshiage we keep the existing hand-curated translation block so its
+  // editorial polish is preserved; every other area derives its 4 access
+  // cards from area.accessProfiles (already curated per area).
+  const isOshiage = supportedSlug === "oshiage";
+
+  // Fixed Tokyo-side destination coordinates. Tokyo Station is the access
+  // anchor for the "Tokyo Station access" card; Shinagawa is used for the
+  // Shinkansen card so the two don't overlap on the map.
+  const TOKYO_STATION_POS: { lat: number; lng: number } = { lat: 35.6812, lng: 139.7671 };
+  const SHINAGAWA_POS: { lat: number; lng: number } = { lat: 35.6285, lng: 139.7387 };
+  const NARITA_POS: { lat: number; lng: number } = { lat: 35.772, lng: 140.3929 };
+  const HANEDA_POS: { lat: number; lng: number } = { lat: 35.5494, lng: 139.7798 };
+
+  function paddedLevel(level: string | undefined): string {
+    return (level ?? "Fair").toUpperCase();
+  }
+
+  // Oshiage retains its curated translation block; other areas use
+  // accessProfiles data (level → chip, note → note).
+  const commandNodes: AreaConnectionCommandNode[] = isOshiage
+    ? [
+        {
+          key: "narita",
+          label: t("accessSnapshot.commandMap.oshiage.nodes.narita.label"),
+          chip: t("accessSnapshot.commandMap.oshiage.nodes.narita.chip"),
+          note: t("accessSnapshot.commandMap.oshiage.nodes.narita.note"),
+          position: "topLeft",
+        },
+        {
+          key: "haneda",
+          label: t("accessSnapshot.commandMap.oshiage.nodes.haneda.label"),
+          chip: t("accessSnapshot.commandMap.oshiage.nodes.haneda.chip"),
+          note: t("accessSnapshot.commandMap.oshiage.nodes.haneda.note"),
+          position: "topRight",
+        },
+        {
+          key: "asakusa",
+          label: t("accessSnapshot.commandMap.oshiage.nodes.asakusa.label"),
+          chip: t("accessSnapshot.commandMap.oshiage.nodes.asakusa.chip"),
+          note: t("accessSnapshot.commandMap.oshiage.nodes.asakusa.note"),
+          position: "bottomLeft",
+        },
+        {
+          key: "tokyoStation",
+          label: t("accessSnapshot.commandMap.oshiage.nodes.tokyoStation.label"),
+          chip: t("accessSnapshot.commandMap.oshiage.nodes.tokyoStation.chip"),
+          note: t("accessSnapshot.commandMap.oshiage.nodes.tokyoStation.note"),
+          position: "bottomRight",
+        },
+      ]
+    : [
+        {
+          key: "narita",
+          label: t("access.narita"),
+          chip: paddedLevel(area.accessProfiles.narita?.level),
+          note: area.accessProfiles.narita?.note ?? "",
+          position: "topLeft",
+        },
+        {
+          key: "haneda",
+          label: t("access.haneda"),
+          chip: paddedLevel(area.accessProfiles.haneda?.level),
+          note: area.accessProfiles.haneda?.note ?? "",
+          position: "topRight",
+        },
+        {
+          key: "tokyoStation",
+          label: t("access.tokyoStationAccess"),
+          chip: paddedLevel(area.accessProfiles.tokyoStationAccess?.level),
+          note: area.accessProfiles.tokyoStationAccess?.note ?? "",
+          position: "bottomLeft",
+        },
+        {
+          key: "shinkansen",
+          label: t("access.shinkansen"),
+          chip: paddedLevel(area.accessProfiles.shinkansen?.level),
+          note: area.accessProfiles.shinkansen?.note ?? "",
+          position: "bottomRight",
+        },
+      ];
+
+  // Compose the dynamic map config. For Oshiage we keep its existing 4-marker
+  // layout (Narita / Haneda / Asakusa / Tokyo Station). Other areas use the
+  // 4-card set above (Narita / Haneda / Tokyo Station / Shinkansen at Shinagawa).
+  const centerPosition = area.coordinates
+    ? { lat: area.coordinates.lat, lng: area.coordinates.lng }
+    : TOKYO_STATION_POS;
+  const commandMapDestinations: AreaConnectionMapConfig["destinations"] = isOshiage
+    ? [
+        { key: "narita", label: "Narita Airport", shortLabel: "N", position: NARITA_POS, tone: "airport" },
+        { key: "haneda", label: "Haneda Airport", shortLabel: "H", position: HANEDA_POS, tone: "airport" },
+        { key: "asakusa", label: "Asakusa", shortLabel: "A", position: { lat: 35.7148, lng: 139.7967 }, tone: "city" },
+        { key: "tokyoStation", label: "Tokyo Station", shortLabel: "T", position: TOKYO_STATION_POS, tone: "city" },
+      ]
+    : [
+        { key: "narita", label: t("access.narita"), shortLabel: "N", position: NARITA_POS, tone: "airport" },
+        { key: "haneda", label: t("access.haneda"), shortLabel: "H", position: HANEDA_POS, tone: "airport" },
+        { key: "tokyoStation", label: t("access.tokyoStationAccess"), shortLabel: "T", position: TOKYO_STATION_POS, tone: "city" },
+        { key: "shinkansen", label: t("access.shinkansen"), shortLabel: "S", position: SHINAGAWA_POS, tone: "city" },
+      ];
+
+  // Midpoint between the area and Tokyo Station so both fit in the initial
+  // view comfortably. Slightly biased toward the area so it stays prominent.
+  const initialMapCenter = {
+    lat: centerPosition.lat * 0.6 + TOKYO_STATION_POS.lat * 0.4,
+    lng: centerPosition.lng * 0.6 + TOKYO_STATION_POS.lng * 0.4,
+  };
+  const commandMapConfig: AreaConnectionMapConfig = {
+    centerKey: supportedSlug,
+    centerPosition,
+    centerShortLabel: area.displayName.charAt(0).toUpperCase(),
+    initialMapCenter,
+    defaultZoom: 13,
+    destinations: commandMapDestinations,
+  };
 
   // ----- Nearby comparison
   const nearbyAlternatives = nearbyBySlug[supportedSlug] ?? defaultNearbyAlternatives(supportedSlug);
@@ -850,36 +910,32 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
           watchOut={watchOut}
         />
 
-        {/* 5. Access snapshot. Oshiage uses the code-rendered command map experiment; other areas keep image/fallback behavior. */}
-        {supportedSlug === "oshiage" ? (
-          <AreaConnectionCommandMap
-            eyebrow={t("accessSnapshot.eyebrow")}
-            title={t("accessSnapshot.title")}
-            intro={t("accessSnapshot.commandMap.oshiage.intro")}
-            centerLabel={t("accessSnapshot.commandMap.oshiage.centerLabel")}
-            centerSubLabel={t("accessSnapshot.commandMap.oshiage.centerSubLabel")}
-            qualitativeNote={t("accessSnapshot.qualitativeNote")}
-            nodes={oshiageCommandNodes}
-          />
-        ) : (
-          <AreaAccessSnapshot
-            eyebrow={t("accessSnapshot.eyebrow")}
-            title={t("accessSnapshot.title")}
-            intro={t("accessSnapshot.intro")}
-            centerLabel={area.displayName}
-            centerSublabel={t("accessSnapshot.centerSublabel")}
-            nodes={nodes}
-            qualitativeNote={t("accessSnapshot.qualitativeNote")}
-            image={{
-              src: visualAssets["how-this-area-connects"],
-              alt: t("visuals.howThisAreaConnects.alt", { area: area.displayName }),
-              caption: t("visuals.howThisAreaConnects.caption", { area: area.displayName }),
-            }}
-            coordinates={area.coordinates ?? null}
-            mapCaption={t("accessSnapshot.mapCaption", { area: area.displayName })}
-            mapAriaLabel={t("accessSnapshot.mapAriaLabel", { area: area.displayName })}
-          />
-        )}
+        {/* 5. "How this area connects" — interactive Google Maps command map
+            with clickable destination markers + access cards. The same
+            component handles all 36 areas; Oshiage keeps its curated
+            translation block for the access cards. */}
+        <AreaConnectionCommandMap
+          eyebrow={t("accessSnapshot.eyebrow")}
+          title={t("accessSnapshot.title")}
+          intro={
+            isOshiage
+              ? t("accessSnapshot.commandMap.oshiage.intro")
+              : t("accessSnapshot.intro")
+          }
+          centerLabel={
+            isOshiage
+              ? t("accessSnapshot.commandMap.oshiage.centerLabel")
+              : area.displayName
+          }
+          centerSubLabel={
+            isOshiage
+              ? t("accessSnapshot.commandMap.oshiage.centerSubLabel")
+              : t("accessSnapshot.centerSublabel")
+          }
+          qualitativeNote={t("accessSnapshot.qualitativeNote")}
+          nodes={commandNodes}
+          map={commandMapConfig}
+        />
 
         {/* 6. Nearby alternatives comparison (optional comparison image banner) */}
         {alternativeRows.length > 0 ? (
