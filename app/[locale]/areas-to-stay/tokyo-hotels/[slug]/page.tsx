@@ -1,16 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
-import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
+import type { ProviderId } from "@/components/ui/ProviderButton";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { getAlternates } from "@/i18n/hreflang";
 import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
-import signalsJson from "@/data/generated/tokyo-stay-area-signals.json";
 import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import {
   getHotelProviderLinks,
@@ -23,23 +21,45 @@ import {
 } from "@/lib/hotel-links";
 import type {
   ComputedStayAreaScore,
-  ExitComplexityLevel,
   StayAreaBase,
-  StayAreaSignalsFile,
   StayAreaScoresFile,
 } from "@/lib/stay-area/types";
+import { AreaHeroSummary } from "../_components/AreaHeroSummary";
+import { AreaPrimaryScoreGraph } from "../_components/AreaPrimaryScoreGraph";
+import {
+  AreaDetailedScoreBreakdown,
+  type ScoreBreakdownGroup,
+} from "../_components/AreaDetailedScoreBreakdown";
+import {
+  AreaFeatureHighlights,
+  type FeatureHighlight,
+  type FeatureIconKey,
+} from "../_components/AreaFeatureHighlights";
+import { AreaFitProfile } from "../_components/AreaFitProfile";
+import { AreaAccessSnapshot, type AccessNode } from "../_components/AreaAccessSnapshot";
+import {
+  AreaNearbyComparison,
+  type ComparisonRow,
+} from "../_components/AreaNearbyComparison";
+import { AreaBottomCta } from "../_components/AreaBottomCta";
+import type { AreaProviderLink } from "../_components/types";
+import { getAreaVisualAssets } from "@/lib/hotel-area-visuals";
 
 /*
- * Server component. Content is generated from existing data
- * (tokyo-areas.base.json + tokyo-stay-area-scores.json + accessProfiles)
- * so the page works in any locale without per-locale editorial copy.
- * Structural strings come from messages.tokyoHotelsPage (duplicated EN copy
- * across all 9 locales; non-EN locales are noindex below).
+ * Server component. Visual area-hotel-page template. Content is generated
+ * from existing data — tokyo-areas.base.json (editorial + accessProfiles) +
+ * tokyo-stay-area-scores.json (computed scores). Structural strings come
+ * from messages.tokyoHotelsPage; English copy is duplicated across all 9
+ * locales (non-EN are noindex per the existing convention).
  */
 
 const SUPPORTED_SLUGS = tokyoStayAreasBase.map((area) => area.id);
 type SupportedSlug = string;
 
+/**
+ * Slugs that have a verified Trip.com per-area URL in lib/hotel-links.ts.
+ * Areas absent from this map will render Booking-only — by design.
+ */
 const hotelAreaKeyBySlug: Partial<Record<SupportedSlug, HotelAreaKey>> = {
   oshiage: "oshiage",
   asakusa: "asakusa",
@@ -49,9 +69,7 @@ const hotelAreaKeyBySlug: Partial<Record<SupportedSlug, HotelAreaKey>> = {
   shibuya: "shibuya",
 };
 
-/** sub_id suffixes per placement, per supported area. Booking sub_ids come from
- *  data/hotel-affiliate-links.json; Trip sub_ids are passed inline here so
- *  the click event carries `sub_id` as a stable identifier. */
+/** sub_id suffixes per placement, per Trip-enabled area. */
 const tripSubIdBySlug: Partial<Record<SupportedSlug, { hero: string; bottom: string }>> = {
   oshiage: {
     hero: "fs_hotels_oshiage_hero_trip",
@@ -97,8 +115,12 @@ const stationRouteNoteAreaIds = new Set([
   "nihombashi",
 ]);
 
-type NearbyAlternative = { targetSlug: string; reason: string };
+type NearbyAlternative = { targetSlug: string; reason?: string };
 
+/**
+ * Hand-curated nearby pairs for areas where editorial nuance matters.
+ * Other areas fall back to `defaultNearbyAlternatives()` (same areaGroup).
+ */
 const nearbyBySlug: Partial<Record<SupportedSlug, NearbyAlternative[]>> = {
   asakusa: [
     { targetSlug: "ueno", reason: "Better for museums and transport" },
@@ -108,22 +130,22 @@ const nearbyBySlug: Partial<Record<SupportedSlug, NearbyAlternative[]>> = {
   ueno: [
     { targetSlug: "asakusa", reason: "More traditional Tokyo atmosphere" },
     { targetSlug: "tokyo-station", reason: "Better for Shinkansen access" },
-    { targetSlug: "akihabara", reason: "Better for electronics and central train access" },
+    { targetSlug: "akihabara", reason: "Better for electronics and central rail" },
   ],
   "tokyo-station": [
     { targetSlug: "ginza-yurakucho", reason: "Better for shopping and dining" },
     { targetSlug: "nihombashi", reason: "Calmer central base" },
     { targetSlug: "ueno", reason: "Better for museums and value" },
   ],
-  "ginza-yurakucho": [
-    { targetSlug: "tokyo-station", reason: "Simpler for early Shinkansen" },
-    { targetSlug: "nihombashi", reason: "Calmer central logistics base" },
-    { targetSlug: "shimbashi", reason: "More salaryman nightlife and bay access" },
+  oshiage: [
+    { targetSlug: "asakusa", reason: "More traditional Tokyo atmosphere" },
+    { targetSlug: "kuramae", reason: "Quieter East Tokyo base" },
+    { targetSlug: "ueno", reason: "Stronger rail and museums" },
   ],
-  nihombashi: [
-    { targetSlug: "tokyo-station", reason: "Stronger Shinkansen access" },
-    { targetSlug: "ginza-yurakucho", reason: "More shopping and dining" },
-    { targetSlug: "ningyocho", reason: "More local old-merchant feel" },
+  kuramae: [
+    { targetSlug: "asakusa", reason: "More classic sightseeing" },
+    { targetSlug: "ueno", reason: "Better rail coverage" },
+    { targetSlug: "oshiage", reason: "Stronger airport and Skytree logic" },
   ],
   shinjuku: [
     { targetSlug: "shibuya", reason: "Another big-city nightlife base" },
@@ -135,41 +157,30 @@ const nearbyBySlug: Partial<Record<SupportedSlug, NearbyAlternative[]>> = {
     { targetSlug: "shinagawa", reason: "Better for Haneda and Shinkansen" },
     { targetSlug: "ginza-yurakucho", reason: "More polished central base" },
   ],
-  "hamamatsucho-daimon": [
-    { targetSlug: "shinagawa", reason: "Stronger rail and Shinkansen access" },
-    { targetSlug: "ginza-yurakucho", reason: "More shopping and dining" },
-    { targetSlug: "tokyo-station", reason: "Simpler for early Shinkansen" },
-  ],
   shinagawa: [
     { targetSlug: "hamamatsucho-daimon", reason: "More direct Tokyo Monorail logic" },
     { targetSlug: "shibuya", reason: "More nightlife and youth-Tokyo energy" },
     { targetSlug: "tokyo-station", reason: "More central Shinkansen departure point" },
   ],
-  kuramae: [
-    { targetSlug: "asakusa", reason: "More classic sightseeing atmosphere" },
-    { targetSlug: "ueno", reason: "Better rail coverage and museums" },
-    { targetSlug: "oshiage", reason: "Stronger airport and Skytree logic" },
+  ikebukuro: [
+    { targetSlug: "shinjuku", reason: "Bigger transit hub with more choice" },
+    { targetSlug: "ueno", reason: "Better Narita-side logistics" },
+    { targetSlug: "korakuen-kasuga", reason: "Calmer Bunkyo-side base" },
+  ],
+  "ariake-odaiba": [
+    { targetSlug: "toyosu", reason: "Closer bay-side base with strong rail" },
+    { targetSlug: "shinagawa", reason: "Better for Haneda and Shinkansen" },
+    { targetSlug: "tokyo-station", reason: "Better for central sightseeing" },
   ],
 };
 
-/** Map area id → display name so the nearby cards show a friendly label
- *  even for non-supported targets (which link to the Finder query param). */
+// ---------- pure helpers ----------------------------------------------------
+
 function areaDisplayName(id: string): string {
   const area = tokyoStayAreasBase.find((a) => a.id === id);
   return area?.displayName ?? id;
 }
 
-/**
- * Returns a search-friendly variant of the display name that does NOT
- * duplicate the word "Station" when the display name already contains it.
- *
- *   "Asakusa"                  → "Asakusa Station"
- *   "Tokyo Station / Marunouchi" → "Tokyo Station / Marunouchi"
- *
- * Used in the SEO `<title>` and the bottom-CTA body to keep both reading
- * naturally without breaking the "Hotels near X Station" SEO pattern for
- * areas whose display name is just a place name.
- */
 function areaWithStationSuffix(displayName: string): string {
   return /\bStation\b/i.test(displayName) ? displayName : `${displayName} Station`;
 }
@@ -178,180 +189,13 @@ function nearbyHref(targetSlug: string): string {
   if ((SUPPORTED_SLUGS as readonly string[]).includes(targetSlug)) {
     return `/areas-to-stay/tokyo-hotels/${targetSlug}`;
   }
-  // Non-supported targets land on the Finder with the area pre-selected.
   return `/areas-to-stay/tokyo-stay-area-index?area=${encodeURIComponent(targetSlug)}`;
 }
 
-// ---------- score → label helpers (UI-only, no methodology terms) -----------
-
-type ScoreTone = "very-good" | "good" | "mixed" | "check";
-
-function scoreTone(value: number): ScoreTone {
-  if (value >= 85) return "very-good";
-  if (value >= 70) return "good";
-  if (value >= 55) return "mixed";
-  return "check";
-}
-
-function scoreToneClass(tone: ScoreTone): string {
-  switch (tone) {
-    case "very-good":
-      return "border-emerald-200 bg-emerald-50 text-[#106b43]";
-    case "good":
-      return "border-emerald-100 bg-emerald-50/60 text-[#106b43]";
-    case "mixed":
-      return "border-amber-200 bg-amber-50 text-amber-800";
-    case "check":
-      return "border-rose-200 bg-rose-50 text-rose-700";
-  }
-}
-
-function lodgingDensityKey(level: StayAreaBase["lodgingDensityLevel"]): "veryHigh" | "high" | "medium" | "low" {
-  if (level === "Very High") return "veryHigh";
-  if (level === "High") return "high";
-  if (level === "Medium") return "medium";
-  return "low";
-}
-
-function lodgingDensityTone(level: StayAreaBase["lodgingDensityLevel"]): ScoreTone {
-  if (level === "Very High" || level === "High") return "very-good";
-  if (level === "Medium") return "mixed";
-  return "check";
-}
-
-// ---------- types + props ---------------------------------------------------
-
-type Props = {
-  params: Promise<{ locale: string; slug: string }>;
-};
-
-type Translation = Awaited<ReturnType<typeof getTranslations>>;
-
 const scoresFile = scoresJson as StayAreaScoresFile;
-const signalsFile = signalsJson as StayAreaSignalsFile;
-
-function exitComplexityDisplay(
-  signal: StayAreaSignalsFile["areas"][string] | undefined,
-  fallback: ExitComplexityLevel,
-): {
-  level: ExitComplexityLevel;
-  fromData: boolean;
-  exitCount: number | null;
-  coverage: number;
-} {
-  const sig = signal?.exitComplexitySignal;
-  if (
-    sig &&
-    (sig.status === "success" || sig.status === "partial") &&
-    sig.derivedLevel != null
-  ) {
-    return {
-      level: sig.derivedLevel,
-      fromData: true,
-      exitCount: sig.exitCount,
-      coverage: sig.sourceCoverage,
-    };
-  }
-  return { level: fallback, fromData: false, exitCount: null, coverage: 0 };
-}
-
-function clampDisplayScore(score: number): number {
-  return Math.max(45, Math.min(92, Math.round(score)));
-}
-
-function deriveDisplayFitScore({
-  area,
-  score,
-  signal,
-}: {
-  area: StayAreaBase;
-  score: ComputedStayAreaScore;
-  signal: StayAreaSignalsFile["areas"][string] | undefined;
-}): number {
-  const network = signal?.networkComplexitySignal;
-  const exit = exitComplexityDisplay(signal, area.exitComplexityLevel);
-  let penalty = 0;
-  let bonus = 0;
-
-  if (network?.terminalType === "mega-terminal") penalty += 9;
-  else if (network?.terminalType === "terminal") penalty += 3;
-
-  if (exit.level === "Mega station") penalty += 5;
-  else if (exit.level === "Complex") penalty += 2;
-
-  if (score.scores.stationSimplicity < 35) penalty += 5;
-  else if (score.scores.stationSimplicity < 50) penalty += 3;
-  else if (score.scores.stationSimplicity < 65) penalty += 1;
-
-  if (score.scores.crowdStress < 30) penalty += 5;
-  else if (score.scores.crowdStress < 45) penalty += 3;
-  else if (score.scores.crowdStress < 60) penalty += 1;
-
-  if (area.lodgingDensityLevel === "Very High" && score.scores.stationSimplicity < 60) penalty += 2;
-  if (score.overallScore >= 75 && score.scores.stationSimplicity < 65) penalty += 3;
-  if (score.overallScore >= 75 && score.scores.crowdStress < 60) penalty += 2;
-  if (score.scores.stationSimplicity >= 85 && score.scores.luggageFriendly >= 80 && score.scores.crowdStress >= 80) bonus += 2;
-
-  return clampDisplayScore(score.overallScore - penalty + bonus);
-}
-
-function areaGroupLabel(areaGroup: string, t: Translation): string {
-  const key = areaGroup
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-  return t(`areaGroups.${key}`);
-}
-
-function fitReasonKeys(area: StayAreaBase, score: ComputedStayAreaScore): string[] {
-  const reasons: string[] = [];
-  if (score.scores.airportAccess >= 82) reasons.push("airportAccess");
-  if (score.scores.luggageFriendly >= 82) reasons.push("luggage");
-  if (score.scores.shinkansenAccess >= 82) reasons.push("shinkansen");
-  if (score.scores.stationSimplicity >= 78) reasons.push("stationSimplicity");
-  if (score.scores.localFeel >= 80) reasons.push("localFeel");
-  if (score.scores.touristAccess >= 82) reasons.push("sightseeing");
-  if (area.lodgingDensityLevel === "Very High" || area.lodgingDensityLevel === "High") reasons.push("hotelChoice");
-  if (reasons.length === 0) reasons.push("balancedBase");
-  return [...new Set(reasons)].slice(0, 4);
-}
-
-function watchOutKeys(area: StayAreaBase, score: ComputedStayAreaScore): string[] {
-  const items: string[] = [];
-  if (score.scores.stationSimplicity < 55) items.push("stationComplexity");
-  if (score.scores.crowdStress < 55) items.push("crowds");
-  if (score.scores.airportAccess < 65) items.push("airportTransfers");
-  if (score.scores.shinkansenAccess < 65) items.push("shinkansen");
-  if (area.lodgingDensityLevel === "Low") items.push("limitedHotels");
-  if (score.scores.localFeel < 60) items.push("businesslike");
-  if (items.length === 0) items.push("exactHotelLocation");
-  return [...new Set(items)].slice(0, 4);
-}
-
-function areaSummary(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string {
-  const group = areaGroupLabel(area.areaGroup, t);
-  if (score.scores.luggageFriendly >= 82 && score.scores.airportAccess >= 80) {
-    return t("areaCopy.summaryAirportLuggage", { area: area.displayName, group });
-  }
-  if (score.scores.shinkansenAccess >= 84) {
-    return t("areaCopy.summaryRail", { area: area.displayName, group });
-  }
-  if (score.scores.localFeel >= 80) {
-    return t("areaCopy.summaryLocal", { area: area.displayName, group });
-  }
-  return t("areaCopy.summaryDefault", { area: area.displayName, group });
-}
-
-function translatedFitReasons(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string[] {
-  return fitReasonKeys(area, score).map((key) => t(`areaCopy.reasons.${key}`));
-}
-
-function translatedWatchOuts(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string[] {
-  return watchOutKeys(area, score).map((key) => t(`areaCopy.watchOut.${key}`));
-}
 
 function resolveSupportedSlug(slug: string): SupportedSlug | null {
-  return (SUPPORTED_SLUGS as readonly string[]).includes(slug) ? (slug as SupportedSlug) : null;
+  return (SUPPORTED_SLUGS as readonly string[]).includes(slug) ? slug : null;
 }
 
 function areaForSlug(slug: SupportedSlug): StayAreaBase {
@@ -366,16 +210,144 @@ function scoreForSlug(slug: SupportedSlug): ComputedStayAreaScore {
   return score;
 }
 
+function scoreLookup(slug: string): ComputedStayAreaScore | undefined {
+  return scoresFile.areas.find((s) => s.id === slug);
+}
+
 function defaultNearbyAlternatives(slug: SupportedSlug): NearbyAlternative[] {
   const area = areaForSlug(slug);
-  const sameGroup = tokyoStayAreasBase.filter((candidate) => candidate.id !== slug && candidate.areaGroup === area.areaGroup);
-  const fallback = tokyoStayAreasBase.filter((candidate) => candidate.id !== slug && candidate.areaGroup !== area.areaGroup);
+  const sameGroup = tokyoStayAreasBase
+    .filter((c) => c.id !== slug && c.areaGroup === area.areaGroup)
+    .map((c) => ({
+      targetSlug: c.id,
+      reason: c.editorial.overallLabel,
+      score: scoreLookup(c.id)?.overallScore ?? 0,
+    }))
+    .sort((a, b) => b.score - a.score);
+  const fallback = tokyoStayAreasBase
+    .filter((c) => c.id !== slug && c.areaGroup !== area.areaGroup)
+    .map((c) => ({
+      targetSlug: c.id,
+      reason: c.editorial.overallLabel,
+      score: scoreLookup(c.id)?.overallScore ?? 0,
+    }))
+    .sort((a, b) => b.score - a.score);
   return [...sameGroup, ...fallback]
     .slice(0, 3)
-    .map((candidate) => ({
-      targetSlug: candidate.id,
-      reason: candidate.editorial.overallLabel,
-    }));
+    .map(({ targetSlug, reason }) => ({ targetSlug, reason }));
+}
+
+// ---------- feature derivation ----------------------------------------------
+
+/**
+ * Derive 4 "At a glance" features from existing area + score data. Order is
+ * stable; if fewer than 4 trigger, top up with a balanced fallback. No
+ * hardcoded per-slug copy — content comes from message templates filled with
+ * the area display name + level data already on the area record.
+ */
+function deriveFeatures(
+  area: StayAreaBase,
+  score: ComputedStayAreaScore,
+  t: Awaited<ReturnType<typeof getTranslations>>,
+): FeatureHighlight[] {
+  const candidates: Array<{ key: string; iconKey: FeatureIconKey; score: number; title: string; body: string }> = [];
+
+  if (score.scores.airportAccess >= 78) {
+    candidates.push({
+      key: "airport",
+      iconKey: "airport",
+      score: score.scores.airportAccess,
+      title: t("featureLabels.airport.title"),
+      body: t("featureLabels.airport.body"),
+    });
+  }
+  if (score.scores.luggageFriendly >= 78) {
+    candidates.push({
+      key: "luggage",
+      iconKey: "luggage",
+      score: score.scores.luggageFriendly,
+      title: t("featureLabels.luggage.title"),
+      body: t("featureLabels.luggage.body"),
+    });
+  }
+  if (score.scores.shinkansenAccess >= 80) {
+    candidates.push({
+      key: "shinkansen",
+      iconKey: "trains",
+      score: score.scores.shinkansenAccess,
+      title: t("featureLabels.shinkansen.title"),
+      body: t("featureLabels.shinkansen.body"),
+    });
+  }
+  if (score.scores.stationSimplicity >= 78) {
+    candidates.push({
+      key: "station",
+      iconKey: "station",
+      score: score.scores.stationSimplicity,
+      title: t("featureLabels.station.title"),
+      body: t("featureLabels.station.body"),
+    });
+  }
+  if (score.scores.localFeel >= 78) {
+    candidates.push({
+      key: "local",
+      iconKey: "local",
+      score: score.scores.localFeel,
+      title: t("featureLabels.local.title"),
+      body: t("featureLabels.local.body"),
+    });
+  }
+  if (score.scores.crowdStress >= 75) {
+    candidates.push({
+      key: "quiet",
+      iconKey: "quiet",
+      score: score.scores.crowdStress,
+      title: t("featureLabels.quiet.title"),
+      body: t("featureLabels.quiet.body"),
+    });
+  }
+  if (score.scores.touristAccess >= 80) {
+    candidates.push({
+      key: "sights",
+      iconKey: "sights",
+      score: score.scores.touristAccess,
+      title: t("featureLabels.sights.title"),
+      body: t("featureLabels.sights.body"),
+    });
+  }
+  if (area.lodgingDensityLevel === "Very High" || area.lodgingDensityLevel === "High") {
+    candidates.push({
+      key: "hotels",
+      iconKey: "hotels",
+      score: 80,
+      title: t("featureLabels.hotels.title"),
+      body: t("featureLabels.hotels.body"),
+    });
+  }
+
+  // Order by triggering score desc and take 4
+  candidates.sort((a, b) => b.score - a.score);
+  const top = candidates.slice(0, 4);
+
+  // If fewer than 4, top up with balanced fallbacks
+  if (top.length < 4) {
+    const used = new Set(top.map((f) => f.key));
+    const fallbacks: typeof candidates = [
+      { key: "balanced", iconKey: "group", score: 0, title: t("featureLabels.balanced.title"), body: t("featureLabels.balanced.body") },
+      { key: "hotels", iconKey: "hotels", score: 0, title: t("featureLabels.hotels.title"), body: t("featureLabels.hotels.body") },
+      { key: "sights", iconKey: "sights", score: 0, title: t("featureLabels.sights.title"), body: t("featureLabels.sights.body") },
+      { key: "quiet", iconKey: "quiet", score: 0, title: t("featureLabels.quiet.title"), body: t("featureLabels.quiet.body") },
+    ];
+    for (const fb of fallbacks) {
+      if (top.length >= 4) break;
+      if (!used.has(fb.key)) {
+        top.push(fb);
+        used.add(fb.key);
+      }
+    }
+  }
+
+  return top.map(({ key, iconKey, title, body }) => ({ key, iconKey, title, body }));
 }
 
 // ---------- metadata + static params ---------------------------------------
@@ -407,29 +379,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// ---------- hotel provider link assembly ------------------------------------
+type Props = { params: Promise<{ locale: string; slug: string }> };
+type Translation = Awaited<ReturnType<typeof getTranslations>>;
 
-type ProviderLink = {
-  provider: ProviderId;
-  href: string;
-  trackingHref: string;
-  label: string;
-  linkId: string;
-  subId?: string;
-  priority: number;
-};
+// ---------- hotel provider link assembly ------------------------------------
 
 function assembleProviderLinks(
   slug: SupportedSlug,
   locale: string,
   placement: HotelAffiliatePlacement,
   t: Translation,
-): ProviderLink[] {
-  const bookingLinks = getHotelProviderLinks({
+): AreaProviderLink[] {
+  const bookingLinks: AreaProviderLink[] = getHotelProviderLinks({
     areaId: slug,
     locale,
     placement,
-  }).map<ProviderLink>((link) => ({
+  }).map((link) => ({
     provider: link.provider,
     href: link.href,
     trackingHref: link.trackingHref,
@@ -441,23 +406,22 @@ function assembleProviderLinks(
 
   const hotelAreaKey = hotelAreaKeyBySlug[slug];
   const tripSubIds = tripSubIdBySlug[slug];
-  const tripSubIdSlot = placement === "tokyo_hotels_hero" ? "hero" : "bottom";
-  let tripLink: ProviderLink | null = null;
+  let tripLink: AreaProviderLink | null = null;
   if (hotelAreaKey && tripSubIds) {
     const hotel = getHotelLink(hotelAreaKey);
     const config = getTripHotelConfig(hotelAreaKey);
     const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl.trim();
     const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl.trim();
-
+    const slot = placement === "tokyo_hotels_hero" ? "hero" : "bottom";
     tripLink =
       tripHref && tripHref !== "#"
         ? {
-            provider: "trip",
+            provider: "trip" as ProviderId,
             href: tripHref,
             trackingHref: tripTrackingHref,
             label: t("hero.tripButton"),
             linkId: `hotelArea.${hotelAreaKey}.trip`,
-            subId: tripSubIds[tripSubIdSlot],
+            subId: tripSubIds[slot],
             priority: 20,
           }
         : null;
@@ -465,91 +429,6 @@ function assembleProviderLinks(
 
   return [...bookingLinks, ...(tripLink ? [tripLink] : [])].sort(
     (a, b) => a.priority - b.priority || a.linkId.localeCompare(b.linkId),
-  );
-}
-
-// ---------- presentational helpers ------------------------------------------
-
-function FitBadge({ score, label, outOf }: { score: number; label: string; outOf: string }) {
-  return (
-    <div className="inline-flex items-center gap-3 rounded-2xl bg-[#ff7a00] px-4 py-3 text-white shadow-sm">
-      <span className="text-[10px] font-bold uppercase tracking-[0.12em] opacity-90">{label}</span>
-      <span className="text-2xl font-black leading-none">
-        {score}
-        <span className="text-xs font-bold opacity-90">{outOf}</span>
-      </span>
-    </div>
-  );
-}
-
-function ScoreCard({
-  title,
-  toneLabel,
-  tone,
-  value,
-  hint,
-}: {
-  title: string;
-  toneLabel: string;
-  tone: ScoreTone;
-  value?: number;
-  hint?: string;
-}) {
-  return (
-    <div className={["rounded-2xl border p-4 shadow-sm", scoreToneClass(tone)].join(" ")}>
-      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[0.1em] opacity-80">{title}</p>
-          <p className="mt-1 text-sm font-bold">{toneLabel}</p>
-        </div>
-        {typeof value === "number" ? (
-          <span className="rounded-full bg-white/80 px-2.5 py-1 text-xs font-black tabular-nums text-slate-950 shadow-sm">
-            {Math.max(0, Math.min(100, Math.round(value)))}
-          </span>
-        ) : null}
-      </div>
-      {hint ? <p className="mt-1 text-[11px] leading-4 opacity-80">{hint}</p> : null}
-    </div>
-  );
-}
-
-function AccessRow({
-  title,
-  level,
-  note,
-}: {
-  title: string;
-  level?: string;
-  note?: string;
-}) {
-  if (!note) return null;
-  return (
-    <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
-      <div className="flex items-center justify-between gap-2">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-500">{title}</p>
-        {level ? (
-          <span className="rounded-full border border-emerald-100 bg-white px-2 py-0.5 text-[10px] font-semibold text-[#106b43]">
-            {level}
-          </span>
-        ) : null}
-      </div>
-      <p className="mt-2 text-xs leading-5 text-slate-700">{note}</p>
-    </div>
-  );
-}
-
-function DetailScoreBar({ label, value }: { label: string; value: number }) {
-  const normalized = Math.max(0, Math.min(100, Math.round(value)));
-  return (
-    <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
-      <div className="flex items-center justify-between gap-3 text-xs font-semibold text-slate-700">
-        <span>{label}</span>
-        <span className="tabular-nums">{normalized}</span>
-      </div>
-      <div className="mt-2 h-2 overflow-hidden rounded-full bg-white">
-        <div className="h-full rounded-full bg-[#168a56]" style={{ width: `${normalized}%` }} />
-      </div>
-    </div>
   );
 }
 
@@ -563,106 +442,144 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
   const area = areaForSlug(supportedSlug);
   const score = scoreForSlug(supportedSlug);
   const t = await getTranslations({ locale, namespace: "tokyoHotelsPage" });
-  const tStay = await getTranslations({ locale, namespace: "tokyoStayAreaIndex" });
-  const tFinder = await getTranslations({ locale, namespace: "tokyoStayAreaIndex.finder" });
-  const pagePath = `/areas-to-stay/tokyo-hotels/${supportedSlug}`;
-
-  // Cross-namespace lookup for the per-area station route disambiguation note.
   const tStationRouteNote = await getTranslations({
     locale,
     namespace: "tokyoStayAreaIndex.stationRouteNote",
   });
-  const stationNote = stationRouteNoteAreaIds.has(supportedSlug) ? tStationRouteNote(`areas.${supportedSlug}`) : null;
-  const signal = signalsFile.areas[supportedSlug];
-  const displayScore = deriveDisplayFitScore({ area, score, signal });
-  const finderAreaGroup = areaGroupLabel(area.areaGroup, tStay);
-  const finderSummary = areaSummary(area, score, tStay);
-  const finderBestFor = translatedFitReasons(area, score, tStay);
-  const finderWatchOut = translatedWatchOuts(area, score, tStay);
-
-  // ----- score-card toneLabels (translated)
-  const scoreLabel = (n: number): string => {
-    const tone = scoreTone(n);
-    if (tone === "very-good") return t("scoreLabels.veryGood");
-    if (tone === "good") return t("scoreLabels.good");
-    if (tone === "mixed") return t("scoreLabels.mixed");
-    return t("scoreLabels.checkCarefully");
-  };
-
-  const quietAtNightScore = score.scores.crowdStress;
-  // Surface the street-luggage-stress note as a hint on the existing
-  // Luggage friendly card *only* when the editorial level is high or
-  // very_high — keeps the card minimal for calm/medium areas.
-  const elevatedStreetStress =
-    area.streetLuggageStressLevel === "high" ||
-    area.streetLuggageStressLevel === "very_high";
-  const luggageHint = elevatedStreetStress ? area.streetLuggageStressNote : undefined;
-  const fitScoreCards: Array<{ titleKey: string; value: number; hint?: string }> = [
-    { titleKey: "scoreCards.airportAccess", value: score.scores.airportAccess },
-    { titleKey: "scoreCards.luggageFriendly", value: score.scores.luggageFriendly, hint: luggageHint },
-    { titleKey: "scoreCards.quietAtNight", value: quietAtNightScore },
-    { titleKey: "scoreCards.shinkansenDayFit", value: score.scores.shinkansenAccess },
-  ];
-
-  const lodgingKey = lodgingDensityKey(area.lodgingDensityLevel);
-  const lodgingLabel = t(`lodgingDensity.${lodgingKey}`);
-  const lodgingTone = lodgingDensityTone(area.lodgingDensityLevel);
-
-  // SEO + bottom-CTA-friendly variant: "{area} Station" unless the display
-  // name already contains "Station" (e.g. "Tokyo Station / Marunouchi").
+  const pagePath = `/areas-to-stay/tokyo-hotels/${supportedSlug}`;
+  const stationNote = stationRouteNoteAreaIds.has(supportedSlug)
+    ? tStationRouteNote(`areas.${supportedSlug}`)
+    : null;
   const areaWithStation = areaWithStationSuffix(area.displayName);
 
-  // ----- hero + bottom CTAs
+  // ----- per-area optional visual assets
+  // Files live at /public/images/hotel-areas/<slug>/<slot>.{png,jpg,jpeg,webp}.
+  // Missing files → null → components render their in-code fallback UIs.
+  const visualAssets = getAreaVisualAssets(supportedSlug);
+
+  // ----- hero + bottom provider links
   const heroLinks = assembleProviderLinks(supportedSlug, locale, "tokyo_hotels_hero", t);
   const bottomLinks = assembleProviderLinks(supportedSlug, locale, "tokyo_hotels_bottom", t);
 
-  // ----- best-for / watch-out / before-you-book content
-  const bestFor = area.editorial.bestFor.slice(0, 3);
-  const whoFor = area.editorial.bestFor.slice(0, 3);
-  // Cap Before-you-book at 3 cards. Preferred order:
-  //   1) first editorial watch-out
-  //   2) walking-distance / station-entrance caution (always)
-  //   3) second editorial watch-out where available
-  const watchOut = area.editorial.watchOut;
-  const beforeYouBookItems: string[] = [];
-  if (watchOut[0]) beforeYouBookItems.push(watchOut[0]);
-  beforeYouBookItems.push(
-    t("beforeBook.walkingDistanceCaution", { area: area.displayName }),
-  );
-  if (watchOut[1]) {
-    beforeYouBookItems.push(watchOut[1]);
-  }
+  // ----- Primary 4 score bars
+  const primaryBars = [
+    { key: "airportAccess", label: t("primaryGraph.airportAccess"), value: score.scores.airportAccess },
+    { key: "luggageFriendly", label: t("primaryGraph.luggageFriendly"), value: score.scores.luggageFriendly },
+    { key: "stationSimplicity", label: t("primaryGraph.stationSimplicity"), value: score.scores.stationSimplicity },
+    { key: "localFeel", label: t("primaryGraph.localFeel"), value: score.scores.localFeel },
+  ];
 
-  // ----- access notes
-  const accessRows: Array<{ title: string; level?: string; note?: string }> = [
+  // ----- Detailed breakdown (3 buckets, every sub-score grouped)
+  const detailedGroups: ScoreBreakdownGroup[] = [
     {
-      title: t("access.narita"),
-      level: area.accessProfiles.narita?.level,
+      key: "access",
+      title: t("detailedBreakdown.groups.access"),
+      metrics: [
+        { key: "airport", label: t("primaryGraph.airportAccess"), value: score.scores.airportAccess },
+        { key: "shinkansen", label: t("detailedBreakdown.metrics.shinkansenAccess"), value: score.scores.shinkansenAccess },
+        { key: "tourist", label: t("detailedBreakdown.metrics.touristAccess"), value: score.scores.touristAccess },
+      ],
+    },
+    {
+      key: "ease",
+      title: t("detailedBreakdown.groups.ease"),
+      metrics: [
+        { key: "station", label: t("primaryGraph.stationSimplicity"), value: score.scores.stationSimplicity },
+        { key: "luggage", label: t("primaryGraph.luggageFriendly"), value: score.scores.luggageFriendly },
+        { key: "stationStress", label: t("detailedBreakdown.metrics.stationStress"), value: score.scores.crowdStress },
+      ],
+    },
+    {
+      key: "stayFeel",
+      title: t("detailedBreakdown.groups.stayFeel"),
+      metrics: [
+        { key: "localFeel", label: t("primaryGraph.localFeel"), value: score.scores.localFeel },
+        { key: "hotelChoice", label: t("detailedBreakdown.metrics.hotelChoice"), value: score.scores.lodgingChoice },
+      ],
+    },
+  ];
+
+  // ----- At a glance features
+  const features = deriveFeatures(area, score, t);
+
+  // ----- Good fit / Watch out columns (existing editorial + walking-distance caution)
+  const goodFit = area.editorial.bestFor.slice(0, 4);
+  const watchBase = area.editorial.watchOut.slice(0, 2);
+  const watchOut: string[] = [
+    ...watchBase,
+    t("beforeBook.walkingDistanceCaution", { area: area.displayName }),
+  ];
+
+  // ----- Access snapshot nodes
+  const nodes: AccessNode[] = [
+    {
+      key: "narita",
+      label: t("access.narita"),
+      level: area.accessProfiles.narita?.level ?? "Fair",
       note: area.accessProfiles.narita?.note,
     },
     {
-      title: t("access.haneda"),
-      level: area.accessProfiles.haneda?.level,
+      key: "haneda",
+      label: t("access.haneda"),
+      level: area.accessProfiles.haneda?.level ?? "Fair",
       note: area.accessProfiles.haneda?.note,
     },
     {
-      title: t("access.airportEase"),
-      level: area.accessProfiles.airportArrivalEase?.level,
-      note: area.accessProfiles.airportArrivalEase?.note,
-    },
-    {
-      title: t("access.shinkansen"),
-      level: area.accessProfiles.shinkansen?.level,
+      key: "shinkansen",
+      label: t("access.shinkansen"),
+      level: area.accessProfiles.shinkansen?.level ?? "Fair",
       note: area.accessProfiles.shinkansen?.note,
     },
     {
-      title: t("access.tokyoStationAccess"),
-      level: area.accessProfiles.tokyoStationAccess?.level,
+      key: "tokyoStation",
+      label: t("access.tokyoStationAccess"),
+      level: area.accessProfiles.tokyoStationAccess?.level ?? "Fair",
       note: area.accessProfiles.tokyoStationAccess?.note,
     },
   ];
 
+  // ----- Nearby comparison
   const nearbyAlternatives = nearbyBySlug[supportedSlug] ?? defaultNearbyAlternatives(supportedSlug);
+  const comparisonMetricLabels = [
+    { key: "overall", label: t("nearby.metrics.overall") },
+    { key: "airport", label: t("nearby.metrics.airport") },
+    { key: "luggage", label: t("nearby.metrics.luggage") },
+    { key: "station", label: t("nearby.metrics.station") },
+    { key: "localFeel", label: t("nearby.metrics.localFeel") },
+  ];
+  const currentRow: ComparisonRow = {
+    key: supportedSlug,
+    name: area.displayName,
+    href: pagePath,
+    hasOwnPage: true,
+    metrics: {
+      overall: score.overallScore,
+      airport: score.scores.airportAccess,
+      luggage: score.scores.luggageFriendly,
+      station: score.scores.stationSimplicity,
+      localFeel: score.scores.localFeel,
+    },
+  };
+  const alternativeRows: ComparisonRow[] = nearbyAlternatives.flatMap((alt) => {
+    const altScore = scoreLookup(alt.targetSlug);
+    if (!altScore) return [];
+    return [
+      {
+        key: alt.targetSlug,
+        name: areaDisplayName(alt.targetSlug),
+        reason: alt.reason,
+        href: nearbyHref(alt.targetSlug),
+        hasOwnPage: (SUPPORTED_SLUGS as readonly string[]).includes(alt.targetSlug),
+        metrics: {
+          overall: altScore.overallScore,
+          airport: altScore.scores.airportAccess,
+          luggage: altScore.scores.luggageFriendly,
+          station: altScore.scores.stationSimplicity,
+          localFeel: altScore.scores.localFeel,
+        },
+      },
+    ];
+  });
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -691,328 +608,133 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
           </TrackedInternalLink>
         </div>
 
-        {/* A. Hero */}
-        <section className="mt-4 overflow-hidden rounded-[24px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">
-            {t("eyebrow")}
-          </p>
-          <h1 className="mt-3 text-3xl font-semibold leading-tight text-slate-950 md:text-5xl">
-            {t("hero.titleTemplate", { area: area.displayName, areaWithStation })}
-          </h1>
-          <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">
-            {t("hero.introTemplate", { area: area.displayName })}
-          </p>
+        {/* 1. Hero */}
+        <AreaHeroSummary
+          eyebrow={t("eyebrow")}
+          title={t("hero.titleTemplate", { area: area.displayName, areaWithStation })}
+          intro={t("hero.introTemplate", { area: area.displayName })}
+          trustNote={t("hero.trustNote")}
+          fitBadgeLabel={t("hero.fitBadgeLabel")}
+          fitBadgeOutOf={t("hero.fitBadgeOutOf")}
+          fitHeadlineLabels={{
+            topPick: t("hero.headline.topPick"),
+            strongFit: t("hero.headline.strongFit"),
+            goodFit: t("hero.headline.goodFit"),
+            mixedFit: t("hero.headline.mixedFit"),
+            checkCarefully: t("hero.headline.checkCarefully"),
+          }}
+          fitScoreNote={t("hero.fitScoreNote")}
+          score={{
+            overallScore: score.overallScore,
+            scores: score.scores,
+            confidenceLabel: `${t("hero.confidencePrefix")}: ${score.confidence.label}`,
+            sourceFreshnessLabel: `${t("hero.freshnessPrefix")}: ${score.sourceFreshness.label}`,
+          }}
+          pagePath={pagePath}
+          locale={locale}
+          area={{ displayName: area.displayName, areaId: area.id }}
+          city="Tokyo"
+          providers={heroLinks}
+        />
 
-          <div className="mt-5">
-            <FitBadge
-              score={score.overallScore}
-              label={t("hero.fitBadgeLabel")}
-              outOf={t("hero.fitBadgeOutOf")}
-            />
-            <p className="mt-2 text-[11px] leading-4 text-slate-500">
-              {t("hero.confidencePrefix")}: {score.confidence.label} ·{" "}
-              {t("hero.freshnessPrefix")}: {score.sourceFreshness.label}
-            </p>
-          </div>
+        {/* 2. Primary score graph */}
+        <AreaPrimaryScoreGraph
+          eyebrow={t("primaryGraph.eyebrow")}
+          title={t("primaryGraph.title")}
+          intro={t("primaryGraph.intro")}
+          bars={primaryBars}
+        />
 
-          {heroLinks.length > 0 ? (
-            <div className="mt-5 grid gap-3 sm:grid-cols-2 sm:max-w-xl">
-              {heroLinks.map((link) => (
-                <ProviderButton
-                  key={`hero-${link.linkId}`}
-                  provider={link.provider}
-                  href={link.href}
-                  trackingHref={link.trackingHref}
-                  placement="tokyo_hotels_hero"
-                  pagePath={pagePath}
-                  locale={locale}
-                  linkId={link.linkId}
-                  subId={link.subId}
-                  category="hotel"
-                  product="hotel_area_search"
-                  area={area.displayName}
-                  areaId={area.id}
-                  city="Tokyo"
-                  fullWidth
-                >
-                  {link.label}
-                </ProviderButton>
-              ))}
-            </div>
-          ) : null}
+        {/* 2b. Detailed breakdown */}
+        <AreaDetailedScoreBreakdown
+          eyebrow={t("detailedBreakdown.eyebrow")}
+          title={t("detailedBreakdown.title")}
+          intro={t("detailedBreakdown.intro")}
+          groups={detailedGroups}
+        />
 
-          <p className="mt-3 text-xs leading-5 text-slate-500">{t("hero.trustNote")}</p>
-        </section>
+        {/* 3. At-a-glance features (optional area-vibe image banner) */}
+        <AreaFeatureHighlights
+          eyebrow={t("featureLabels.eyebrow")}
+          title={t("featureLabels.title")}
+          intro={area.editorial.overallLabel}
+          features={features}
+          image={{
+            src: visualAssets["area-vibe"],
+            alt: t("visuals.areaVibe.alt", { area: area.displayName }),
+            caption: t("visuals.areaVibe.caption", { area: area.displayName }),
+          }}
+        />
 
-        <section className="mt-6 rounded-[24px] border border-sky-100 bg-white p-4 shadow-[0_16px_36px_rgba(15,23,42,0.08)] md:p-5">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#106b43]">{tFinder("selectedArea")}</p>
-              <h2 className="mt-1 text-2xl font-semibold text-slate-950">{area.displayName}</h2>
-              <p className="mt-1 text-sm text-slate-500">
-                {area.japaneseName} · {finderAreaGroup}
-              </p>
-            </div>
-            <div className="rounded-2xl bg-slate-950 px-4 py-3 text-center text-white shadow-sm">
-              <p className="text-2xl font-black leading-none">{displayScore}</p>
-              <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.08em]">{tFinder("scoreSuffix")}</p>
-            </div>
-          </div>
+        {/* 4. Good fit / Watch out */}
+        <AreaFitProfile
+          eyebrow={t("fitProfile.eyebrow")}
+          title={t("fitProfile.title")}
+          goodFitTitle={t("fitProfile.goodFitTitle")}
+          watchOutTitle={t("fitProfile.watchOutTitle")}
+          goodFit={goodFit}
+          watchOut={watchOut}
+        />
 
-          <p className="mt-4 text-sm leading-6 text-slate-700">{finderSummary}</p>
+        {/* 5. Access snapshot (priority slot: image replaces schematic when present) */}
+        <AreaAccessSnapshot
+          eyebrow={t("accessSnapshot.eyebrow")}
+          title={t("accessSnapshot.title")}
+          intro={t("accessSnapshot.intro")}
+          centerLabel={area.displayName}
+          centerSublabel={t("accessSnapshot.centerSublabel")}
+          nodes={nodes}
+          qualitativeNote={t("accessSnapshot.qualitativeNote")}
+          image={{
+            src: visualAssets["how-this-area-connects"],
+            alt: t("visuals.howThisAreaConnects.alt", { area: area.displayName }),
+            caption: t("visuals.howThisAreaConnects.caption", { area: area.displayName }),
+          }}
+        />
 
-          <div className="mt-5 grid gap-2">
-            <DetailScoreBar label={t("detailScores.stationSimplicity")} value={score.scores.stationSimplicity} />
-            <DetailScoreBar label={t("detailScores.luggageFriendly")} value={score.scores.luggageFriendly} />
-            <DetailScoreBar label={t("detailScores.airportAccess")} value={score.scores.airportAccess} />
-            <DetailScoreBar label={t("detailScores.shinkansenAccess")} value={score.scores.shinkansenAccess} />
-            <DetailScoreBar label={t("detailScores.touristAccess")} value={score.scores.touristAccess} />
-            <DetailScoreBar label={t("detailScores.localFeel")} value={score.scores.localFeel} />
-            <DetailScoreBar label={t("detailScores.crowdStress")} value={score.scores.crowdStress} />
-            <DetailScoreBar label={t("detailScores.hotelChoice")} value={score.scores.lodgingChoice} />
-          </div>
+        {/* 6. Nearby alternatives comparison (optional comparison image banner) */}
+        {alternativeRows.length > 0 ? (
+          <AreaNearbyComparison
+            eyebrow={t("nearby.eyebrow")}
+            title={t("nearby.title")}
+            intro={t("nearby.intro")}
+            currentAreaName={area.displayName}
+            currentHref={pagePath}
+            currentRow={currentRow}
+            alternatives={alternativeRows}
+            metricLabels={comparisonMetricLabels}
+            openLabel={t("nearby.openLabel")}
+            sourcePage={pagePath}
+            locale={locale}
+            image={{
+              src: visualAssets["nearby-alternatives"],
+              alt: t("visuals.nearbyAlternatives.alt", { area: area.displayName }),
+              caption: t("visuals.nearbyAlternatives.caption", { area: area.displayName }),
+            }}
+          />
+        ) : null}
 
-          <div className="mt-5 grid gap-4 md:grid-cols-2">
-            <div>
-              <h3 className="text-sm font-semibold text-slate-950">{tFinder("bestFor")}</h3>
-              <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
-                {finderBestFor.map((item) => (
-                  <li key={item}>· {item}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-slate-950">{tFinder("watchOut")}</h3>
-              <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
-                {finderWatchOut.map((item) => (
-                  <li key={item}>· {item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {area.editorial.dataSignals.length > 0 ? (
-            <div className="mt-5">
-              <h3 className="text-sm font-semibold text-slate-950">{t("areaLogic.signalsTitle")}</h3>
-              <div className="mt-2 flex flex-wrap gap-2">
-                {area.editorial.dataSignals.map((signal) => (
-                  <span
-                    key={signal}
-                    className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700"
-                  >
-                    {signal}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ) : null}
-
-          {stationNote ? (
-            <div className="mt-5 rounded-2xl border border-sky-100 bg-sky-50/80 p-4">
-              <h3 className="text-sm font-semibold text-slate-950">{tStationRouteNote("title")}</h3>
-              <p className="mt-2 text-sm leading-6 text-slate-700">{stationNote}</p>
-            </div>
-          ) : null}
-        </section>
-
-        {/* C. At-a-glance */}
-        <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">
-            {t("glance.eyebrow")}
-          </p>
-          <h2 className="mt-2 text-xl font-semibold text-slate-950">{t("glance.title")}</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
-            {area.editorial.overallLabel}
-          </p>
-          {bestFor.length > 0 ? (
-            <>
-              <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.1em] text-slate-500">
-                {t("glance.bestForTitle")}
-              </p>
-              <ul className="mt-2 grid gap-2 sm:grid-cols-3">
-                {bestFor.map((item) => (
-                  <li
-                    key={item}
-                    className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-3 text-xs leading-5 text-[#106b43]"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : null}
-        </section>
-
-        {/* D. Quick fit score cards */}
-        <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">
-            {t("scoreCards.eyebrow")}
-          </p>
-          <h2 className="mt-2 text-xl font-semibold text-slate-950">{t("scoreCards.title")}</h2>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-            {fitScoreCards.map(({ titleKey, value, hint }) => (
-              <ScoreCard
-                key={titleKey}
-                title={t(titleKey)}
-                toneLabel={scoreLabel(value)}
-                tone={scoreTone(value)}
-                value={value}
-                hint={hint}
-              />
-            ))}
-            <ScoreCard
-              title={t("scoreCards.hotelChoice")}
-              toneLabel={lodgingLabel}
-              tone={lodgingTone}
-              value={score.scores.lodgingChoice}
-            />
-          </div>
-        </section>
-
-        {/* E. Who this area is for */}
-        {whoFor.length > 0 ? (
-          <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">
-              {t("whoFor.eyebrow")}
-            </p>
-            <h2 className="mt-2 text-xl font-semibold text-slate-950">{t("whoFor.title")}</h2>
-            <ul className="mt-4 grid gap-3 sm:grid-cols-3">
-              {whoFor.map((item) => (
-                <li
-                  key={item}
-                  className="rounded-2xl border border-emerald-100 bg-emerald-50/60 p-4 text-sm leading-6 text-[#106b43]"
-                >
-                  {item}
-                </li>
-              ))}
-            </ul>
+        {/* 6b. Station-name disambiguation note (only when authored) */}
+        {stationNote ? (
+          <section className="mt-6 rounded-[22px] border border-sky-100 bg-sky-50/80 p-5 shadow-sm">
+            <h2 className="text-sm font-semibold text-slate-950">{tStationRouteNote("title")}</h2>
+            <p className="mt-2 text-sm leading-6 text-slate-700">{stationNote}</p>
           </section>
         ) : null}
 
-        {/* F. Before you book */}
-        <section className="mt-6 rounded-[22px] border border-amber-100 bg-amber-50/40 p-5 shadow-sm">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-amber-800">
-            {t("beforeBook.eyebrow")}
-          </p>
-          <h2 className="mt-2 text-xl font-semibold text-slate-950">{t("beforeBook.title")}</h2>
-          <ul className="mt-4 grid gap-3 sm:grid-cols-3">
-            {beforeYouBookItems.map((item) => (
-              <li
-                key={item}
-                className="rounded-2xl border border-amber-100 bg-white p-3 text-xs leading-5 text-amber-900"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </section>
+        {/* 7. Bottom CTA */}
+        <AreaBottomCta
+          title={t("bottomCta.title")}
+          body={t("bottomCta.bodyTemplate", { area: area.displayName, areaWithStation })}
+          backLabel={t("bottomCta.backLink")}
+          providers={bottomLinks}
+          pagePath={pagePath}
+          locale={locale}
+          area={{ displayName: area.displayName, areaId: area.id }}
+          city="Tokyo"
+        />
 
-        {/* G. Access notes */}
-        <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">
-            {t("access.eyebrow")}
-          </p>
-          <h2 className="mt-2 text-xl font-semibold text-slate-950">{t("access.title")}</h2>
-          <div className="mt-4 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-            {accessRows.map((row) => (
-              <AccessRow key={row.title} title={row.title} level={row.level} note={row.note} />
-            ))}
-          </div>
-        </section>
-
-        {/* H. Nearby alternatives */}
-        <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">
-            {t("nearby.eyebrow")}
-          </p>
-          <h2 className="mt-2 text-xl font-semibold text-slate-950">{t("nearby.title")}</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{t("nearby.intro")}</p>
-          <div className="mt-4 grid gap-3">
-            {nearbyAlternatives.map((alt) => {
-              const href = nearbyHref(alt.targetSlug);
-              const name = areaDisplayName(alt.targetSlug);
-              const isPilotTarget = (SUPPORTED_SLUGS as readonly string[]).includes(alt.targetSlug);
-              return isPilotTarget ? (
-                <TrackedInternalLink
-                  key={alt.targetSlug}
-                  href={href}
-                  sourcePage={pagePath}
-                  placement="tokyo_hotels_nearby"
-                  label={`Nearby: ${name}`}
-                  locale={locale}
-                  className="group flex min-h-[100px] flex-col justify-between rounded-2xl border border-emerald-200 bg-white p-4 shadow-sm transition-colors hover:border-[#168a56] hover:bg-emerald-50"
-                >
-                  <span className="text-sm font-semibold text-slate-950">{name}</span>
-                  <span className="mt-2 text-xs leading-5 text-slate-600">{alt.reason}</span>
-                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-[#106b43]">
-                    →
-                  </span>
-                </TrackedInternalLink>
-              ) : (
-                <TrackedInternalLink
-                  key={alt.targetSlug}
-                  href={href}
-                  sourcePage={pagePath}
-                  placement="tokyo_hotels_nearby"
-                  label={`Nearby: ${name}`}
-                  locale={locale}
-                  className="block border-b border-slate-100 py-2 text-sm text-slate-600 underline underline-offset-4 transition-colors last:border-b-0 hover:text-[#106b43]"
-                >
-                  <span className="font-semibold text-slate-700">{name}</span>
-                  <span className="ml-2 text-xs text-slate-500">{alt.reason}</span>
-                </TrackedInternalLink>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* I. Bottom CTA */}
-        <section className="mt-6 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">{t("bottomCta.title")}</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">
-            {t("bottomCta.bodyTemplate", { area: area.displayName, areaWithStation })}
-          </p>
-          {bottomLinks.length > 0 ? (
-            <div className="mt-4 grid gap-3 sm:grid-cols-2 sm:max-w-xl">
-              {bottomLinks.map((link) => (
-                <ProviderButton
-                  key={`bottom-${link.linkId}`}
-                  provider={link.provider}
-                  href={link.href}
-                  trackingHref={link.trackingHref}
-                  placement="tokyo_hotels_bottom"
-                  pagePath={pagePath}
-                  locale={locale}
-                  linkId={link.linkId}
-                  subId={link.subId}
-                  category="hotel"
-                  product="hotel_area_search"
-                  area={area.displayName}
-                  areaId={area.id}
-                  city="Tokyo"
-                  fullWidth
-                >
-                  {link.label}
-                </ProviderButton>
-              ))}
-            </div>
-          ) : null}
-          <p className="mt-4">
-            <TrackedInternalLink
-              href="/areas-to-stay/tokyo-stay-area-index"
-              sourcePage={pagePath}
-              placement="tokyo_hotels_back_to_finder"
-              label={t("bottomCta.backLink")}
-              locale={locale}
-              className="inline-flex items-center gap-1 text-sm font-semibold text-[#106b43] underline underline-offset-4 hover:no-underline"
-            >
-              {t("bottomCta.backLink")}
-              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
-            </TrackedInternalLink>
-          </p>
-        </section>
-
-        {/* J. Legal */}
+        {/* 8. Legal */}
         <p className="mt-6 text-xs leading-5 text-slate-500">{t("legal.body")}</p>
       </Container>
 

@@ -4537,7 +4537,15 @@
       "freshnessPrefix": "Data freshness",
       "trustNote": "We link to trusted booking partners. No extra fees.",
       "bookingButton": "Booking.com",
-      "tripButton": "Trip.com"
+      "tripButton": "Trip.com",
+      "headline": {
+        "topPick": "Top pick",
+        "strongFit": "Strong fit",
+        "goodFit": "Good fit",
+        "mixedFit": "Mixed fit",
+        "checkCarefully": "Check carefully"
+      },
+      "fitScoreNote": "Based on the editorial travel-fit score (passenger data, exit complexity, line / operator complexity, step-free, street luggage stress, lodging density)."
     },
     "glance": {
       "eyebrow": "At a glance",
@@ -4603,7 +4611,15 @@
     "nearby": {
       "eyebrow": "Nearby alternatives",
       "title": "Other Tokyo bases nearby",
-      "intro": "If this area is not quite right, here are nearby Tokyo bases that fit different travel plans."
+      "intro": "If this area is not quite right, here are nearby Tokyo bases that fit different travel plans.",
+      "openLabel": "Open",
+      "metrics": {
+        "overall": "Overall",
+        "airport": "Airport",
+        "luggage": "Luggage",
+        "station": "Station",
+        "localFeel": "Stay feel"
+      }
     },
     "bottomCta": {
       "title": "Ready to check prices?",
@@ -4622,6 +4638,98 @@
       "finderLinkLabel": "Back to Tokyo Hotel Area Finder",
       "metaTitle": "Tokyo hotel search pages: choose your station area first | fujiseat",
       "metaDescription": "Compare Tokyo hotel search pages by station area, then check hotels near the base that fits your trip."
+    },
+    "primaryGraph": {
+      "eyebrow": "Score graph",
+      "title": "Primary score graph",
+      "intro": "Four headline metrics that matter most when picking a Tokyo hotel base.",
+      "airportAccess": "Airport access",
+      "luggageFriendly": "Luggage ease",
+      "stationSimplicity": "Station usability",
+      "localFeel": "Stay feel"
+    },
+    "detailedBreakdown": {
+      "eyebrow": "Detailed breakdown",
+      "title": "Detailed score breakdown",
+      "intro": "Every sub-score grouped into three buckets. Same data, finer view.",
+      "groups": {
+        "access": "Access",
+        "ease": "Ease",
+        "stayFeel": "Stay feel"
+      },
+      "metrics": {
+        "shinkansenAccess": "Shinkansen access",
+        "touristAccess": "Tourist access",
+        "stationStress": "Less station stress",
+        "hotelChoice": "Hotel choice"
+      }
+    },
+    "featureLabels": {
+      "eyebrow": "At a glance",
+      "title": "Why this area is appealing",
+      "airport": {
+        "title": "Strong airport access",
+        "body": "A practical first-night base when arriving from Narita or Haneda."
+      },
+      "luggage": {
+        "title": "Easier luggage moves",
+        "body": "Calmer streets and friendlier station exits when rolling suitcases."
+      },
+      "shinkansen": {
+        "title": "Smooth Shinkansen days",
+        "body": "Short hop to Tokyo or Shinagawa for an early-morning bullet train."
+      },
+      "station": {
+        "title": "Simpler station",
+        "body": "Fewer exits and clearer ground-level orientation."
+      },
+      "local": {
+        "title": "Calmer Tokyo feel",
+        "body": "Quieter blocks and a more residential rhythm in the evening."
+      },
+      "quiet": {
+        "title": "Less daytime stress",
+        "body": "Lower passenger throughput than the busiest mega-terminals."
+      },
+      "sights": {
+        "title": "Tourist access",
+        "body": "Close to well-known sightseeing spots without changing trains."
+      },
+      "hotels": {
+        "title": "Lots of hotels nearby",
+        "body": "Plenty of options across price points and room layouts."
+      },
+      "balanced": {
+        "title": "Balanced fit",
+        "body": "A solid all-rounder for trips without a single dominant constraint."
+      }
+    },
+    "fitProfile": {
+      "eyebrow": "Is this for me?",
+      "title": "Good fit for / Watch out for",
+      "goodFitTitle": "Good fit for",
+      "watchOutTitle": "Watch out for"
+    },
+    "accessSnapshot": {
+      "eyebrow": "Access snapshot",
+      "title": "How this area connects",
+      "intro": "A qualitative snapshot — not a real map. Always check the exact route from the hotel to your station entrance.",
+      "centerSublabel": "You are here",
+      "qualitativeNote": "Qualitative levels (Excellent / Good / Fair / Weak) are editorial summaries of the existing access profiles. They are not exact travel times."
+    },
+    "visuals": {
+      "howThisAreaConnects": {
+        "alt": "How {area} connects to key Tokyo and airport destinations",
+        "caption": "Visual summary of how {area} connects to major Tokyo and airport destinations."
+      },
+      "areaVibe": {
+        "alt": "Visual summary of why {area} works as a Tokyo hotel base",
+        "caption": "A glance at the {area} vibe — pace, surroundings, and what to expect on arrival."
+      },
+      "nearbyAlternatives": {
+        "alt": "Comparison of {area} with nearby alternative hotel areas",
+        "caption": "{area} side-by-side with nearby alternatives."
+      }
     }
   }
 }
