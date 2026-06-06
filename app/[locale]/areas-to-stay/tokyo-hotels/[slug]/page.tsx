@@ -10,6 +10,7 @@ import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton"
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { getAlternates } from "@/i18n/hreflang";
 import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
+import signalsJson from "@/data/generated/tokyo-stay-area-signals.json";
 import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import {
   getHotelProviderLinks,
@@ -22,7 +23,9 @@ import {
 } from "@/lib/hotel-links";
 import type {
   ComputedStayAreaScore,
+  ExitComplexityLevel,
   StayAreaBase,
+  StayAreaSignalsFile,
   StayAreaScoresFile,
 } from "@/lib/stay-area/types";
 
@@ -225,6 +228,127 @@ type Props = {
 type Translation = Awaited<ReturnType<typeof getTranslations>>;
 
 const scoresFile = scoresJson as StayAreaScoresFile;
+const signalsFile = signalsJson as StayAreaSignalsFile;
+
+function exitComplexityDisplay(
+  signal: StayAreaSignalsFile["areas"][string] | undefined,
+  fallback: ExitComplexityLevel,
+): {
+  level: ExitComplexityLevel;
+  fromData: boolean;
+  exitCount: number | null;
+  coverage: number;
+} {
+  const sig = signal?.exitComplexitySignal;
+  if (
+    sig &&
+    (sig.status === "success" || sig.status === "partial") &&
+    sig.derivedLevel != null
+  ) {
+    return {
+      level: sig.derivedLevel,
+      fromData: true,
+      exitCount: sig.exitCount,
+      coverage: sig.sourceCoverage,
+    };
+  }
+  return { level: fallback, fromData: false, exitCount: null, coverage: 0 };
+}
+
+function clampDisplayScore(score: number): number {
+  return Math.max(45, Math.min(92, Math.round(score)));
+}
+
+function deriveDisplayFitScore({
+  area,
+  score,
+  signal,
+}: {
+  area: StayAreaBase;
+  score: ComputedStayAreaScore;
+  signal: StayAreaSignalsFile["areas"][string] | undefined;
+}): number {
+  const network = signal?.networkComplexitySignal;
+  const exit = exitComplexityDisplay(signal, area.exitComplexityLevel);
+  let penalty = 0;
+  let bonus = 0;
+
+  if (network?.terminalType === "mega-terminal") penalty += 9;
+  else if (network?.terminalType === "terminal") penalty += 3;
+
+  if (exit.level === "Mega station") penalty += 5;
+  else if (exit.level === "Complex") penalty += 2;
+
+  if (score.scores.stationSimplicity < 35) penalty += 5;
+  else if (score.scores.stationSimplicity < 50) penalty += 3;
+  else if (score.scores.stationSimplicity < 65) penalty += 1;
+
+  if (score.scores.crowdStress < 30) penalty += 5;
+  else if (score.scores.crowdStress < 45) penalty += 3;
+  else if (score.scores.crowdStress < 60) penalty += 1;
+
+  if (area.lodgingDensityLevel === "Very High" && score.scores.stationSimplicity < 60) penalty += 2;
+  if (score.overallScore >= 75 && score.scores.stationSimplicity < 65) penalty += 3;
+  if (score.overallScore >= 75 && score.scores.crowdStress < 60) penalty += 2;
+  if (score.scores.stationSimplicity >= 85 && score.scores.luggageFriendly >= 80 && score.scores.crowdStress >= 80) bonus += 2;
+
+  return clampDisplayScore(score.overallScore - penalty + bonus);
+}
+
+function areaGroupLabel(areaGroup: string, t: Translation): string {
+  const key = areaGroup
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+  return t(`areaGroups.${key}`);
+}
+
+function fitReasonKeys(area: StayAreaBase, score: ComputedStayAreaScore): string[] {
+  const reasons: string[] = [];
+  if (score.scores.airportAccess >= 82) reasons.push("airportAccess");
+  if (score.scores.luggageFriendly >= 82) reasons.push("luggage");
+  if (score.scores.shinkansenAccess >= 82) reasons.push("shinkansen");
+  if (score.scores.stationSimplicity >= 78) reasons.push("stationSimplicity");
+  if (score.scores.localFeel >= 80) reasons.push("localFeel");
+  if (score.scores.touristAccess >= 82) reasons.push("sightseeing");
+  if (area.lodgingDensityLevel === "Very High" || area.lodgingDensityLevel === "High") reasons.push("hotelChoice");
+  if (reasons.length === 0) reasons.push("balancedBase");
+  return [...new Set(reasons)].slice(0, 4);
+}
+
+function watchOutKeys(area: StayAreaBase, score: ComputedStayAreaScore): string[] {
+  const items: string[] = [];
+  if (score.scores.stationSimplicity < 55) items.push("stationComplexity");
+  if (score.scores.crowdStress < 55) items.push("crowds");
+  if (score.scores.airportAccess < 65) items.push("airportTransfers");
+  if (score.scores.shinkansenAccess < 65) items.push("shinkansen");
+  if (area.lodgingDensityLevel === "Low") items.push("limitedHotels");
+  if (score.scores.localFeel < 60) items.push("businesslike");
+  if (items.length === 0) items.push("exactHotelLocation");
+  return [...new Set(items)].slice(0, 4);
+}
+
+function areaSummary(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string {
+  const group = areaGroupLabel(area.areaGroup, t);
+  if (score.scores.luggageFriendly >= 82 && score.scores.airportAccess >= 80) {
+    return t("areaCopy.summaryAirportLuggage", { area: area.displayName, group });
+  }
+  if (score.scores.shinkansenAccess >= 84) {
+    return t("areaCopy.summaryRail", { area: area.displayName, group });
+  }
+  if (score.scores.localFeel >= 80) {
+    return t("areaCopy.summaryLocal", { area: area.displayName, group });
+  }
+  return t("areaCopy.summaryDefault", { area: area.displayName, group });
+}
+
+function translatedFitReasons(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string[] {
+  return fitReasonKeys(area, score).map((key) => t(`areaCopy.reasons.${key}`));
+}
+
+function translatedWatchOuts(area: StayAreaBase, score: ComputedStayAreaScore, t: Translation): string[] {
+  return watchOutKeys(area, score).map((key) => t(`areaCopy.watchOut.${key}`));
+}
 
 function resolveSupportedSlug(slug: string): SupportedSlug | null {
   return (SUPPORTED_SLUGS as readonly string[]).includes(slug) ? (slug as SupportedSlug) : null;
@@ -362,17 +486,28 @@ function ScoreCard({
   title,
   toneLabel,
   tone,
+  value,
   hint,
 }: {
   title: string;
   toneLabel: string;
   tone: ScoreTone;
+  value?: number;
   hint?: string;
 }) {
   return (
     <div className={["rounded-2xl border p-4 shadow-sm", scoreToneClass(tone)].join(" ")}>
-      <p className="text-[11px] font-semibold uppercase tracking-[0.1em] opacity-80">{title}</p>
-      <p className="mt-1 text-sm font-bold">{toneLabel}</p>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.1em] opacity-80">{title}</p>
+          <p className="mt-1 text-sm font-bold">{toneLabel}</p>
+        </div>
+        {typeof value === "number" ? (
+          <span className="rounded-full bg-white/80 px-2.5 py-1 text-xs font-black tabular-nums text-slate-950 shadow-sm">
+            {Math.max(0, Math.min(100, Math.round(value)))}
+          </span>
+        ) : null}
+      </div>
       {hint ? <p className="mt-1 text-[11px] leading-4 opacity-80">{hint}</p> : null}
     </div>
   );
@@ -403,6 +538,21 @@ function AccessRow({
   );
 }
 
+function DetailScoreBar({ label, value }: { label: string; value: number }) {
+  const normalized = Math.max(0, Math.min(100, Math.round(value)));
+  return (
+    <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
+      <div className="flex items-center justify-between gap-3 text-xs font-semibold text-slate-700">
+        <span>{label}</span>
+        <span className="tabular-nums">{normalized}</span>
+      </div>
+      <div className="mt-2 h-2 overflow-hidden rounded-full bg-white">
+        <div className="h-full rounded-full bg-[#168a56]" style={{ width: `${normalized}%` }} />
+      </div>
+    </div>
+  );
+}
+
 // ---------- page ------------------------------------------------------------
 
 export default async function TokyoHotelsAreaPage({ params }: Props) {
@@ -413,14 +563,22 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
   const area = areaForSlug(supportedSlug);
   const score = scoreForSlug(supportedSlug);
   const t = await getTranslations({ locale, namespace: "tokyoHotelsPage" });
+  const tStay = await getTranslations({ locale, namespace: "tokyoStayAreaIndex" });
+  const tFinder = await getTranslations({ locale, namespace: "tokyoStayAreaIndex.finder" });
   const pagePath = `/areas-to-stay/tokyo-hotels/${supportedSlug}`;
 
   // Cross-namespace lookup for the per-area station route disambiguation note.
-  const tStationNote = await getTranslations({
+  const tStationRouteNote = await getTranslations({
     locale,
-    namespace: "tokyoStayAreaIndex.stationRouteNote.areas",
+    namespace: "tokyoStayAreaIndex.stationRouteNote",
   });
-  const stationNote = stationRouteNoteAreaIds.has(supportedSlug) ? tStationNote(supportedSlug) : null;
+  const stationNote = stationRouteNoteAreaIds.has(supportedSlug) ? tStationRouteNote(`areas.${supportedSlug}`) : null;
+  const signal = signalsFile.areas[supportedSlug];
+  const displayScore = deriveDisplayFitScore({ area, score, signal });
+  const finderAreaGroup = areaGroupLabel(area.areaGroup, tStay);
+  const finderSummary = areaSummary(area, score, tStay);
+  const finderBestFor = translatedFitReasons(area, score, tStay);
+  const finderWatchOut = translatedWatchOuts(area, score, tStay);
 
   // ----- score-card toneLabels (translated)
   const scoreLabel = (n: number): string => {
@@ -464,16 +622,14 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
   // Cap Before-you-book at 3 cards. Preferred order:
   //   1) first editorial watch-out
   //   2) walking-distance / station-entrance caution (always)
-  //   3) station-route disambiguation note OR second editorial watch-out
+  //   3) second editorial watch-out where available
   const watchOut = area.editorial.watchOut;
   const beforeYouBookItems: string[] = [];
   if (watchOut[0]) beforeYouBookItems.push(watchOut[0]);
   beforeYouBookItems.push(
     t("beforeBook.walkingDistanceCaution", { area: area.displayName }),
   );
-  if (stationNote) {
-    beforeYouBookItems.push(stationNote);
-  } else if (watchOut[1]) {
+  if (watchOut[1]) {
     beforeYouBookItems.push(watchOut[1]);
   }
 
@@ -521,6 +677,19 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
             { label: area.displayName },
           ]}
         />
+
+        <div className="mt-4">
+          <TrackedInternalLink
+            href="/areas-to-stay/tokyo-stay-area-index"
+            sourcePage={pagePath}
+            placement="tokyo_hotels_top_back_to_finder"
+            label={t("bottomCta.backLink")}
+            locale={locale}
+            className="inline-flex min-h-10 items-center justify-center rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-[#0b214a] shadow-sm transition-colors hover:border-sky-200 hover:bg-sky-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2"
+          >
+            {t("bottomCta.backLink")}
+          </TrackedInternalLink>
+        </div>
 
         {/* A. Hero */}
         <section className="mt-4 overflow-hidden rounded-[24px] border border-slate-200 bg-white p-6 shadow-sm md:p-8">
@@ -575,6 +744,77 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
           <p className="mt-3 text-xs leading-5 text-slate-500">{t("hero.trustNote")}</p>
         </section>
 
+        <section className="mt-6 rounded-[24px] border border-sky-100 bg-white p-4 shadow-[0_16px_36px_rgba(15,23,42,0.08)] md:p-5">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#106b43]">{tFinder("selectedArea")}</p>
+              <h2 className="mt-1 text-2xl font-semibold text-slate-950">{area.displayName}</h2>
+              <p className="mt-1 text-sm text-slate-500">
+                {area.japaneseName} · {finderAreaGroup}
+              </p>
+            </div>
+            <div className="rounded-2xl bg-slate-950 px-4 py-3 text-center text-white shadow-sm">
+              <p className="text-2xl font-black leading-none">{displayScore}</p>
+              <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.08em]">{tFinder("scoreSuffix")}</p>
+            </div>
+          </div>
+
+          <p className="mt-4 text-sm leading-6 text-slate-700">{finderSummary}</p>
+
+          <div className="mt-5 grid gap-2">
+            <DetailScoreBar label={t("detailScores.stationSimplicity")} value={score.scores.stationSimplicity} />
+            <DetailScoreBar label={t("detailScores.luggageFriendly")} value={score.scores.luggageFriendly} />
+            <DetailScoreBar label={t("detailScores.airportAccess")} value={score.scores.airportAccess} />
+            <DetailScoreBar label={t("detailScores.shinkansenAccess")} value={score.scores.shinkansenAccess} />
+            <DetailScoreBar label={t("detailScores.touristAccess")} value={score.scores.touristAccess} />
+            <DetailScoreBar label={t("detailScores.localFeel")} value={score.scores.localFeel} />
+            <DetailScoreBar label={t("detailScores.crowdStress")} value={score.scores.crowdStress} />
+            <DetailScoreBar label={t("detailScores.hotelChoice")} value={score.scores.lodgingChoice} />
+          </div>
+
+          <div className="mt-5 grid gap-4 md:grid-cols-2">
+            <div>
+              <h3 className="text-sm font-semibold text-slate-950">{tFinder("bestFor")}</h3>
+              <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
+                {finderBestFor.map((item) => (
+                  <li key={item}>· {item}</li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-slate-950">{tFinder("watchOut")}</h3>
+              <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
+                {finderWatchOut.map((item) => (
+                  <li key={item}>· {item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {area.editorial.dataSignals.length > 0 ? (
+            <div className="mt-5">
+              <h3 className="text-sm font-semibold text-slate-950">{t("areaLogic.signalsTitle")}</h3>
+              <div className="mt-2 flex flex-wrap gap-2">
+                {area.editorial.dataSignals.map((signal) => (
+                  <span
+                    key={signal}
+                    className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700"
+                  >
+                    {signal}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ) : null}
+
+          {stationNote ? (
+            <div className="mt-5 rounded-2xl border border-sky-100 bg-sky-50/80 p-4">
+              <h3 className="text-sm font-semibold text-slate-950">{tStationRouteNote("title")}</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-700">{stationNote}</p>
+            </div>
+          ) : null}
+        </section>
+
         {/* C. At-a-glance */}
         <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
           <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#106b43]">
@@ -616,6 +856,7 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
                 title={t(titleKey)}
                 toneLabel={scoreLabel(value)}
                 tone={scoreTone(value)}
+                value={value}
                 hint={hint}
               />
             ))}
@@ -623,6 +864,7 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
               title={t("scoreCards.hotelChoice")}
               toneLabel={lodgingLabel}
               tone={lodgingTone}
+              value={score.scores.lodgingChoice}
             />
           </div>
         </section>

@@ -1,12 +1,11 @@
 "use client";
 
-import { forwardRef, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import type { ProviderId } from "@/components/ui/ProviderButton";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import {
   trackCtaClick,
-  trackFinderAreaDetailsClick,
   trackFinderResultsView,
   trackFinderShowMoreClick,
   trackFinderStart,
@@ -131,7 +130,6 @@ type FinderCopy = {
   topBody: string;
   whyFits: string;
   bestFor: string;
-  detailsButton: string;
   viewHotelPageLabel: string;
   showMore: string;
   compareAll: string;
@@ -195,7 +193,6 @@ type PersistedFinderState = {
   showResults: boolean;
   showMore: boolean;
   showAll: boolean;
-  selectedAreaId: string | null;
 };
 
 function sanitizeAnswers(value: unknown): Answers | null {
@@ -232,7 +229,6 @@ function readPersistedFinderState(): PersistedFinderState | null {
       showResults: parsed.showResults === true,
       showMore: parsed.showMore === true,
       showAll: parsed.showAll === true,
-      selectedAreaId: typeof parsed.selectedAreaId === "string" ? parsed.selectedAreaId : null,
     };
   } catch {
     return null;
@@ -379,52 +375,34 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
   const [showResults, setShowResults] = useState(false);
   const [showMore, setShowMore] = useState(false);
   const [showAll, setShowAll] = useState(false);
-  const [selectedAreaId, setSelectedAreaId] = useState<string | null>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
-  const selectedDetailRef = useRef<HTMLDivElement>(null);
   const restoredStorageRef = useRef(false);
   const currentStep = copy.steps[stepIndex];
   const ranked = useMemo(() => rankAreas(areas, answers), [areas, answers]);
   const topThree = ranked.slice(0, 3);
   const moreMatches = ranked.slice(3, 10);
-  const selectedArea = selectedAreaId ? ranked.find((area) => area.id === selectedAreaId) ?? null : null;
 
   useEffect(() => {
     const restoreTimer = window.setTimeout(() => {
       const persisted = readPersistedFinderState();
       if (persisted) {
-        const restoredSelectedAreaId =
-          persisted.selectedAreaId && areas.some((area) => area.id === persisted.selectedAreaId)
-            ? persisted.selectedAreaId
-            : null;
         setStarted(persisted.started);
         setStepIndex(persisted.stepIndex);
         setAnswers(persisted.answers);
         setShowResults(persisted.showResults);
         setShowMore(persisted.showMore);
         setShowAll(persisted.showAll);
-        setSelectedAreaId(restoredSelectedAreaId);
       }
       restoredStorageRef.current = true;
     }, 0);
 
     return () => window.clearTimeout(restoreTimer);
-  }, [areas]);
-
-  useEffect(() => {
-    const syncSelectedAreaFromUrl = () => {
-      const areaId = new URLSearchParams(window.location.search).get("area");
-      setSelectedAreaId(areaId);
-    };
-
-    window.addEventListener("popstate", syncSelectedAreaFromUrl);
-    return () => window.removeEventListener("popstate", syncSelectedAreaFromUrl);
   }, []);
 
   useEffect(() => {
     if (!restoredStorageRef.current) return;
 
-    if (!started && stepIndex === 0 && !showResults && !showMore && !showAll && !selectedAreaId && isEmptyAnswerSet(answers)) {
+    if (!started && stepIndex === 0 && !showResults && !showMore && !showAll && isEmptyAnswerSet(answers)) {
       clearPersistedFinderState();
       return;
     }
@@ -436,9 +414,8 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
       showResults,
       showMore,
       showAll,
-      selectedAreaId,
     });
-  }, [answers, selectedAreaId, showAll, showMore, showResults, started, stepIndex]);
+  }, [answers, showAll, showMore, showResults, started, stepIndex]);
 
   const start = () => {
     setStarted(true);
@@ -474,7 +451,6 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
   const showMyResults = () => {
     trackCurrentStep();
     setShowResults(true);
-    setSelectedAreaId(null);
     const top = topThree[0];
     if (top) {
       trackFinderResultsView({
@@ -496,23 +472,6 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
     setShowResults(false);
     setShowMore(false);
     setShowAll(false);
-    setSelectedAreaId(null);
-    if (typeof window !== "undefined") {
-      window.history.replaceState(null, "", pagePath);
-    }
-  };
-
-  const openAreaDetails = (area: FinderArea & { matchScore: number }, rank: number) => {
-    setSelectedAreaId(area.id);
-    trackFinderAreaDetailsClick({
-      area_id: area.id,
-      area_name: area.displayName,
-      rank,
-      page_path: pagePath,
-      locale,
-    });
-    window.history.pushState(null, "", area.detailHref);
-    window.setTimeout(() => selectedDetailRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
   };
 
   return (
@@ -628,17 +587,9 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
           </div>
           <div className="mt-4 grid gap-4 lg:grid-cols-3">
             {topThree.map((area, index) => (
-              <ResultCard key={area.id} area={area} rank={index + 1} copy={copy} locale={locale} onOpenDetails={openAreaDetails} />
+              <ResultCard key={area.id} area={area} rank={index + 1} copy={copy} locale={locale} />
             ))}
           </div>
-
-          {selectedArea ? (
-            <FinderSelectedAreaPanel
-              ref={selectedDetailRef}
-              area={selectedArea}
-              copy={copy}
-            />
-          ) : null}
 
           <div className="mt-5 grid gap-2 sm:grid-cols-2">
             <button
@@ -684,7 +635,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
               <h3 className="text-lg font-semibold text-slate-950">{copy.moreTitle}</h3>
               <div className="mt-3 grid gap-3">
                 {moreMatches.map((area, index) => (
-                  <CompactAreaRow key={area.id} area={area} rank={index + 4} copy={copy} onOpenDetails={openAreaDetails} />
+                  <CompactAreaRow key={area.id} area={area} rank={index + 4} copy={copy} locale={locale} />
                 ))}
               </div>
             </div>
@@ -696,7 +647,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
               <p className="mt-1 text-sm leading-6 text-slate-600">{copy.allBody}</p>
               <div className="mt-3 grid gap-3">
                 {ranked.map((area, index) => (
-                  <CompactAreaRow key={area.id} area={area} rank={index + 1} copy={copy} onOpenDetails={openAreaDetails} />
+                  <CompactAreaRow key={area.id} area={area} rank={index + 1} copy={copy} locale={locale} />
                 ))}
               </div>
             </div>
@@ -712,18 +663,16 @@ function ResultCard({
   rank,
   copy,
   locale,
-  onOpenDetails,
 }: {
   area: FinderArea & { matchScore: number };
   rank: number;
   copy: FinderCopy;
   locale: string;
-  onOpenDetails: (area: FinderArea & { matchScore: number }, rank: number) => void;
 }) {
   const matchLabel = matchLabelForRank(rank, copy);
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-[24px] border border-emerald-100 bg-white shadow-[0_16px_36px_rgba(15,23,42,0.08)]">
-      <div className="min-h-[118px] border-b border-emerald-200 bg-[linear-gradient(135deg,#d9f3e6,#eef8ff_55%,#d8ecff)] p-4">
+      <div className="min-h-[118px] border-b border-sky-100 bg-[#eaf6ff] p-4">
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.12em] text-[#106b43]">{copy.rankPrefix} #{rank}</p>
@@ -737,9 +686,8 @@ function ResultCard({
       </div>
       <div className="flex flex-1 flex-col p-4">
         <div className="lg:h-[214px] lg:overflow-hidden">
-          <div className="mb-3 flex items-center justify-between gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-2">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-500">{copy.hotelBaseFit}</span>
-            <span className="rounded-full bg-slate-950 px-2.5 py-1 text-xs font-black text-white">{area.displayScore}{copy.scoreSuffix}</span>
+          <div className="mb-3 flex justify-end">
+            <span className="rounded-full bg-slate-950 px-3 py-1.5 text-sm font-black leading-none text-white">{area.displayScore}</span>
           </div>
           <p className="overflow-hidden text-sm font-medium leading-6 text-slate-800 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">{area.summary}</p>
           <div className="mt-3 flex max-h-[58px] flex-wrap gap-1.5 overflow-hidden">
@@ -758,111 +706,22 @@ function ResultCard({
           <p className="text-xs font-semibold text-slate-950">{copy.watchOut}</p>
           <p className="mt-1 text-xs leading-5 text-slate-700">{area.watchOut.slice(0, 2).join(" · ")}</p>
         </div>
-        {SUPPORTED_HOTEL_PAGE_IDS.has(area.id) ? (
-          <TrackedInternalLink
-            href={`/areas-to-stay/tokyo-hotels/${area.id}`}
-            sourcePage="tokyo_stay_area_index"
-            placement="finder_result_hotel_page"
-            label={copy.viewHotelPageLabel}
-            locale={locale}
-            className="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-2xl border border-emerald-200 bg-emerald-50/60 px-4 py-2.5 text-sm font-semibold text-[#106b43] transition-colors hover:bg-emerald-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-2"
-          >
-            {copy.viewHotelPageLabel}
-          </TrackedInternalLink>
-        ) : null}
-        <a
-          href={area.detailHref}
-          onClick={(event) => {
-            event.preventDefault();
-            onOpenDetails(area, rank);
-          }}
-          className="mt-2 inline-flex min-h-11 w-full items-center justify-center rounded-2xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-teal-700 transition-colors hover:bg-slate-50 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
-        >
-          {copy.detailsButton}
-        </a>
+        <div className="mt-auto pt-3">
+          {SUPPORTED_HOTEL_PAGE_IDS.has(area.id) ? (
+            <TrackedInternalLink
+              href={`/areas-to-stay/tokyo-hotels/${area.id}`}
+              sourcePage="tokyo_stay_area_index"
+              placement="finder_result_hotel_page"
+              label={copy.viewHotelPageLabel}
+              locale={locale}
+              className="inline-flex min-h-11 w-full items-center justify-center rounded-2xl border border-[#0b214a] bg-[#0b214a] px-4 py-2.5 text-sm font-bold text-[#facc15] shadow-sm transition-colors hover:border-[#071733] hover:bg-[#071733] hover:text-[#fde047] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#facc15] focus-visible:ring-offset-2"
+            >
+              {copy.viewHotelPageLabel}
+            </TrackedInternalLink>
+          ) : null}
+        </div>
       </div>
     </article>
-  );
-}
-
-const FinderSelectedAreaPanel = forwardRef<
-  HTMLDivElement,
-  {
-    area: FinderArea & { matchScore: number };
-    copy: FinderCopy;
-  }
->(function FinderSelectedAreaPanel({ area, copy }, ref) {
-  return (
-    <div
-      ref={ref}
-      id="selected-area"
-      className="mt-6 scroll-mt-24 rounded-[24px] border border-sky-100 bg-white p-4 shadow-[0_16px_36px_rgba(15,23,42,0.08)] md:p-5"
-    >
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#106b43]">{copy.selectedArea}</p>
-          <h3 className="mt-1 text-2xl font-semibold text-slate-950">{area.displayName}</h3>
-          <p className="mt-1 text-sm text-slate-500">
-            {area.japaneseName} · {area.areaGroup}
-          </p>
-        </div>
-        <div className="rounded-2xl bg-slate-950 px-4 py-3 text-center text-white shadow-sm">
-          <p className="text-2xl font-black leading-none">{area.displayScore}</p>
-          <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.08em]">/100</p>
-        </div>
-      </div>
-
-      <p className="mt-4 text-sm leading-6 text-slate-700">{area.summary}</p>
-
-      <div className="mt-5 grid gap-2">
-        <ClientScoreBar label={copy.scoreLabels.stationSimplicity} value={area.scores.stationSimplicity} scoreSuffix={copy.scoreSuffix} />
-        <ClientScoreBar label={copy.scoreLabels.luggageFriendly} value={area.scores.luggageFriendly} scoreSuffix={copy.scoreSuffix} />
-        <ClientScoreBar label={copy.scoreLabels.airportAccess} value={area.scores.airportAccess} scoreSuffix={copy.scoreSuffix} />
-        <ClientScoreBar label={copy.scoreLabels.shinkansenAccess} value={area.scores.shinkansenAccess} scoreSuffix={copy.scoreSuffix} />
-        <ClientScoreBar label={copy.scoreLabels.hotelChoice} value={area.scores.lodgingChoice} scoreSuffix={copy.scoreSuffix} />
-      </div>
-
-      <div className="mt-5 grid gap-4 md:grid-cols-2">
-        <div>
-          <h4 className="text-sm font-semibold text-slate-950">{copy.bestFor}</h4>
-          <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
-            {area.bestFor.map((item) => (
-              <li key={item}>· {item}</li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-sm font-semibold text-slate-950">{copy.watchOut}</h4>
-          <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
-            {area.watchOut.map((item) => (
-              <li key={item}>· {item}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      {area.stationRouteNote ? (
-        <div className="mt-5 rounded-2xl border border-sky-100 bg-sky-50/80 p-4">
-          <h4 className="text-sm font-semibold text-slate-950">{copy.stationRouteNoteTitle}</h4>
-          <p className="mt-2 text-sm leading-6 text-slate-700">{area.stationRouteNote}</p>
-        </div>
-      ) : null}
-    </div>
-  );
-});
-
-function ClientScoreBar({ label, value, scoreSuffix }: { label: string; value: number; scoreSuffix: string }) {
-  const normalized = Math.max(0, Math.min(100, Math.round(value)));
-  return (
-    <div className="rounded-2xl border border-slate-100 bg-slate-50 p-3">
-      <div className="flex items-center justify-between gap-3 text-xs font-semibold text-slate-700">
-        <span>{label}</span>
-        <span>{normalized}{scoreSuffix}</span>
-      </div>
-      <div className="mt-2 h-2 overflow-hidden rounded-full bg-white">
-        <div className="h-full rounded-full bg-[#168a56]" style={{ width: `${normalized}%` }} />
-      </div>
-    </div>
   );
 }
 
@@ -870,12 +729,12 @@ function CompactAreaRow({
   area,
   rank,
   copy,
-  onOpenDetails,
+  locale,
 }: {
   area: FinderArea & { matchScore: number };
   rank: number;
   copy: FinderCopy;
-  onOpenDetails: (area: FinderArea & { matchScore: number }, rank: number) => void;
+  locale: string;
 }) {
   return (
     <div className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
@@ -895,16 +754,16 @@ function CompactAreaRow({
       </div>
       <p className="mt-3 text-sm leading-6 text-slate-700">{area.summary}</p>
       <div className="mt-3">
-        <a
-          href={area.detailHref}
-          onClick={(event) => {
-            event.preventDefault();
-            onOpenDetails(area, rank);
-          }}
-          className="inline-flex min-h-10 w-full items-center justify-center rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-semibold text-teal-700 transition-colors hover:bg-slate-100 hover:text-teal-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
+        <TrackedInternalLink
+          href={`/areas-to-stay/tokyo-hotels/${area.id}`}
+          sourcePage="tokyo_stay_area_index"
+          placement="finder_result_hotel_page"
+          label={copy.viewHotelPageLabel}
+          locale={locale}
+          className="inline-flex min-h-10 w-full items-center justify-center rounded-xl border border-[#0b214a] bg-[#0b214a] px-4 py-2 text-sm font-bold text-[#facc15] shadow-sm transition-colors hover:border-[#071733] hover:bg-[#071733] hover:text-[#fde047] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#facc15] focus-visible:ring-offset-2"
         >
-          {copy.detailsButton}
-        </a>
+          {copy.viewHotelPageLabel}
+        </TrackedInternalLink>
       </div>
     </div>
   );

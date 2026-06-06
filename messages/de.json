@@ -3969,6 +3969,16 @@
       "title": "Bereichs-Fit und Kompromisse",
       "count": "{count} Bereiche · Filter: {filter}"
     },
+    "detailScores": {
+      "stationSimplicity": "Station simplicity",
+      "luggageFriendly": "Luggage-friendly",
+      "airportAccess": "Airport access",
+      "shinkansenAccess": "Shinkansen access",
+      "touristAccess": "Tourist access",
+      "localFeel": "Local feel",
+      "crowdStress": "Less crowd stress",
+      "hotelChoice": "Hotel choice"
+    },
     "scoreLabels": {
       "stationSimplicity": "Stationssimpelheit",
       "luggageFriendly": "Gepäckfreundlich",
@@ -4525,13 +4535,20 @@
       "confidencePrefix": "Confidence",
       "freshnessPrefix": "Data freshness",
       "trustNote": "We link to trusted booking partners. No extra fees.",
-      "bookingButton": "Search hotels on Booking.com",
-      "tripButton": "Search hotels on Trip.com"
+      "bookingButton": "Booking.com",
+      "tripButton": "Trip.com"
     },
     "glance": {
       "eyebrow": "At a glance",
       "title": "What this area is",
       "bestForTitle": "Best for"
+    },
+    "areaLogic": {
+      "eyebrow": "Hotel-base logic",
+      "title": "Why this area works as a hotel base",
+      "whyTitle": "Why it can fit",
+      "localFeelTitle": "Local feel",
+      "signalsTitle": "Signals considered"
     },
     "scoreCards": {
       "eyebrow": "Quick fit",
@@ -4540,6 +4557,16 @@
       "luggageFriendly": "Luggage friendly",
       "quietAtNight": "Station stress",
       "shinkansenDayFit": "Shinkansen day fit",
+      "hotelChoice": "Hotel choice"
+    },
+    "detailScores": {
+      "stationSimplicity": "Station simplicity",
+      "luggageFriendly": "Luggage-friendly",
+      "airportAccess": "Airport access",
+      "shinkansenAccess": "Shinkansen access",
+      "touristAccess": "Tourist access",
+      "localFeel": "Local feel",
+      "crowdStress": "Less crowd stress",
       "hotelChoice": "Hotel choice"
     },
     "scoreLabels": {
