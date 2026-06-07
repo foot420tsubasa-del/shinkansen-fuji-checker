@@ -885,12 +885,12 @@
           "hotelRecommendation": "Короткая поездка, меньше пересадок и проще ранние поезда.",
           "hotelRecommendedAreas": [
             "Tokyo Station",
-            "Shinjuku"
+            "Синдзюку"
           ],
           "hotelPrimaryAction": "Выбрать базу в Токио",
           "hotelDetailLinks": [
-            "Tokyo Station details",
-            "Shinjuku details"
+            "Tokyo Station детали",
+            "Синдзюку детали"
           ],
           "hotelActions": [
             "Сравнить отели рядом с Tokyo Station"
@@ -915,16 +915,16 @@
           ],
           "hotelRecommendation": "Хороший баланс для первого Токио, переезда в Kyoto / Osaka и аэропорта.",
           "hotelRecommendedAreas": [
-            "Shinjuku",
-            "Ueno / Asakusa",
+            "Синдзюку",
+            "Уэно / Асакуса",
             "Tokyo Station"
           ],
           "hotelPrimaryAction": "Выбрать базу в Токио",
           "hotelDetailLinks": [
-            "Shinjuku details",
-            "Ueno details",
-            "Asakusa details",
-            "Tokyo Station details"
+            "Синдзюку детали",
+            "Уэно детали",
+            "Асакуса детали",
+            "Tokyo Station детали"
           ],
           "hotelActions": [
             "Сравнить отели в Shinjuku"
@@ -949,13 +949,13 @@
           ],
           "hotelRecommendation": "Хороший баланс Токио и дальнейших поездов.",
           "hotelRecommendedAreas": [
-            "Shinjuku",
+            "Синдзюку",
             "Tokyo Station"
           ],
           "hotelPrimaryAction": "Выбрать базу в Токио",
           "hotelDetailLinks": [
-            "Shinjuku details",
-            "Tokyo Station details"
+            "Синдзюку детали",
+            "Tokyo Station детали"
           ],
           "hotelActions": [
             "Сравнить отели в Shinjuku",
@@ -982,12 +982,12 @@
           "hotelRecommendation": "Дальние поезда и багаж делают логистику важнее.",
           "hotelRecommendedAreas": [
             "Tokyo Station",
-            "Ueno"
+            "Уэно"
           ],
           "hotelPrimaryAction": "Выбрать базу в Токио",
           "hotelDetailLinks": [
-            "Tokyo Station details",
-            "Ueno details"
+            "Tokyo Station детали",
+            "Уэно детали"
           ],
           "hotelActions": [
             "Сравнить отели рядом с Tokyo Station",
@@ -2138,8 +2138,8 @@
       "ogDescription": "Вы проверили место со стороны Фудзи. Теперь подготовьте остальную поездку."
     },
     "providers": {
-      "omio": "Compare on Omio",
-      "readGuide": "Read guide"
+      "omio": "Сравнить на Omio",
+      "readGuide": "Читать гид"
     },
     "hero": {
       "eyebrow": "Маршрут бронирования fujiseat",
@@ -2279,7 +2279,7 @@
       "title": "Полезно, но не первый шаг",
       "insurance": "Проверить страховку",
       "station": "Тренировка станции",
-      "commandCenter": "Command Center",
+      "commandCenter": "Командный центр",
       "localTokyo": "Локальный Токио"
     }
   },
@@ -4717,29 +4717,29 @@
       "qualitativeNote": "Качественные уровни (Excellent / Good / Fair / Weak) — это редакторские сводки имеющихся профилей доступа, а не точные времена в пути.",
       "commandMap": {
         "oshiage": {
-          "intro": "Oshiage works as an east Tokyo base because it connects airport access, Skytree-side stays, Asakusa, and central rail links without acting like a mega-terminal.",
-          "centerLabel": "Oshiage / 押上",
-          "centerSubLabel": "East Tokyo base",
+          "intro": "Осиагэ работает как база в восточном Токио, потому что объединяет доступ к аэропорту, район Skytree и тихую Суми́ду в один узел. Нажмите любой чип, чтобы увидеть связь.",
+          "centerLabel": "Осиагэ / 押上",
+          "centerSubLabel": "База в восточном Токио",
           "nodes": {
             "narita": {
-              "label": "Narita Airport / 成田空港",
-              "chip": "Good",
-              "note": "Good airport access for many Narita arrivals."
+              "label": "Аэропорт Нарита / 成田空港",
+              "chip": "Хорошо",
+              "note": "Хороший доступ к аэропорту для многих прилётов в Нариту."
             },
             "haneda": {
-              "label": "Haneda Airport / 羽田空港",
-              "chip": "Good",
-              "note": "Good airport access without using a giant station as the base."
+              "label": "Аэропорт Ханэда / 羽田空港",
+              "chip": "Хорошо",
+              "note": "Хороший доступ к аэропорту без огромного вокзала в качестве базы."
             },
             "asakusa": {
-              "label": "Asakusa / 浅草",
-              "chip": "Near",
-              "note": "Nearby old Tokyo sightseeing and river-side walks."
+              "label": "Асакуса / 浅草",
+              "chip": "Рядом",
+              "note": "Прогулки по старому Токио и вдоль реки прямо рядом."
             },
             "tokyoStation": {
               "label": "Tokyo Station / 東京駅",
-              "chip": "Reasonable",
-              "note": "A reasonable rail link for Tokyo Station and Shinkansen days."
+              "chip": "Приемлемо",
+              "note": "Приемлемая железнодорожная связь для дней Tokyo Station и синкансэна."
             }
           }
         }

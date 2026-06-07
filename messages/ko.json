@@ -884,13 +884,13 @@
           ],
           "hotelRecommendation": "짧은 여행, 적은 환승, 이른 철도 이동에 유리합니다.",
           "hotelRecommendedAreas": [
-            "Tokyo Station",
-            "Shinjuku"
+            "도쿄역",
+            "신주쿠"
           ],
           "hotelPrimaryAction": "도쿄 거점 선택",
           "hotelDetailLinks": [
-            "Tokyo Station details",
-            "Shinjuku details"
+            "도쿄역 상세",
+            "신주쿠 상세"
           ],
           "hotelActions": [
             "도쿄역 근처 호텔 비교"
@@ -915,16 +915,16 @@
           ],
           "hotelRecommendation": "첫 도쿄, 교토 / 오사카 이동, 공항 접근의 균형이 좋습니다.",
           "hotelRecommendedAreas": [
-            "Shinjuku",
-            "Ueno / Asakusa",
-            "Tokyo Station"
+            "신주쿠",
+            "우에노 / 아사쿠사",
+            "도쿄역"
           ],
           "hotelPrimaryAction": "도쿄 거점 선택",
           "hotelDetailLinks": [
-            "Shinjuku details",
-            "Ueno details",
-            "Asakusa details",
-            "Tokyo Station details"
+            "신주쿠 상세",
+            "우에노 상세",
+            "아사쿠사 상세",
+            "도쿄역 상세"
           ],
           "hotelActions": [
             "신주쿠 호텔 비교"
@@ -949,13 +949,13 @@
           ],
           "hotelRecommendation": "도쿄 관광과 이후 철도 이동의 균형이 좋습니다.",
           "hotelRecommendedAreas": [
-            "Shinjuku",
-            "Tokyo Station"
+            "신주쿠",
+            "도쿄역"
           ],
           "hotelPrimaryAction": "도쿄 거점 선택",
           "hotelDetailLinks": [
-            "Shinjuku details",
-            "Tokyo Station details"
+            "신주쿠 상세",
+            "도쿄역 상세"
           ],
           "hotelActions": [
             "신주쿠 호텔 비교",
@@ -981,13 +981,13 @@
           ],
           "hotelRecommendation": "여러 장거리 철도일과 짐 이동으로 물류가 더 중요합니다.",
           "hotelRecommendedAreas": [
-            "Tokyo Station",
-            "Ueno"
+            "도쿄역",
+            "우에노"
           ],
           "hotelPrimaryAction": "도쿄 거점 선택",
           "hotelDetailLinks": [
-            "Tokyo Station details",
-            "Ueno details"
+            "도쿄역 상세",
+            "우에노 상세"
           ],
           "hotelActions": [
             "도쿄역 근처 호텔 비교",
@@ -2138,8 +2138,8 @@
       "ogDescription": "후지산 쪽 좌석을 확인했습니다. 이제 나머지 여행을 준비하세요."
     },
     "providers": {
-      "omio": "Compare on Omio",
-      "readGuide": "Read guide"
+      "omio": "Omio에서 비교",
+      "readGuide": "가이드 읽기"
     },
     "hero": {
       "eyebrow": "fujiseat 예약 흐름",
@@ -2279,7 +2279,7 @@
       "title": "유용하지만 첫 단계 결정은 아닙니다",
       "insurance": "여행 보험 확인",
       "station": "역 연습",
-      "commandCenter": "Command Center",
+      "commandCenter": "커맨드 센터",
       "localTokyo": "로컬 도쿄"
     }
   },
@@ -4717,29 +4717,29 @@
       "qualitativeNote": "정성적 레벨(Excellent / Good / Fair / Weak)은 기존 접근 프로필의 편집 요약입니다. 정확한 이동 시간이 아닙니다.",
       "commandMap": {
         "oshiage": {
-          "intro": "Oshiage works as an east Tokyo base because it connects airport access, Skytree-side stays, Asakusa, and central rail links without acting like a mega-terminal.",
-          "centerLabel": "Oshiage / 押上",
-          "centerSubLabel": "East Tokyo base",
+          "intro": "오시아게는 공항 접근성, 스카이트리 주변, 조용한 스미다 지역을 하나의 거점으로 연결하기 때문에 동도쿄 호텔 거점으로 적합합니다. 칩을 눌러 각 연결을 확인하세요.",
+          "centerLabel": "오시아게 / 押上",
+          "centerSubLabel": "동도쿄 거점",
           "nodes": {
             "narita": {
-              "label": "Narita Airport / 成田空港",
-              "chip": "Good",
-              "note": "Good airport access for many Narita arrivals."
+              "label": "나리타 공항 / 成田空港",
+              "chip": "양호",
+              "note": "나리타 도착편 대부분에 양호한 공항 접근성을 제공합니다."
             },
             "haneda": {
-              "label": "Haneda Airport / 羽田空港",
-              "chip": "Good",
-              "note": "Good airport access without using a giant station as the base."
+              "label": "하네다 공항 / 羽田空港",
+              "chip": "양호",
+              "note": "거대한 역을 거점으로 삼지 않고도 양호한 공항 접근성을 확보할 수 있습니다."
             },
             "asakusa": {
-              "label": "Asakusa / 浅草",
-              "chip": "Near",
-              "note": "Nearby old Tokyo sightseeing and river-side walks."
+              "label": "아사쿠사 / 浅草",
+              "chip": "가까움",
+              "note": "옛 도쿄 관광과 강가 산책이 바로 옆에 있습니다."
             },
             "tokyoStation": {
-              "label": "Tokyo Station / 東京駅",
-              "chip": "Reasonable",
-              "note": "A reasonable rail link for Tokyo Station and Shinkansen days."
+              "label": "도쿄역 / 東京駅",
+              "chip": "보통",
+              "note": "도쿄역 및 신칸센 이용일에 무난한 철도 연결을 제공합니다."
             }
           }
         }

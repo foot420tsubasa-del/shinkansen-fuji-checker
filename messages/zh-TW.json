@@ -884,13 +884,13 @@
           ],
           "hotelRecommendation": "短途旅行、较少换乘，早班铁路日更轻松。",
           "hotelRecommendedAreas": [
-            "Tokyo Station",
-            "Shinjuku"
+            "東京站",
+            "新宿"
           ],
           "hotelPrimaryAction": "選擇東京住宿點",
           "hotelDetailLinks": [
-            "Tokyo Station details",
-            "Shinjuku details"
+            "東京站詳細",
+            "新宿詳細"
           ],
           "hotelActions": [
             "比较东京站附近酒店"
@@ -915,16 +915,16 @@
           ],
           "hotelRecommendation": "首次东京、京都 / 大阪转移和机场交通的平衡较好。",
           "hotelRecommendedAreas": [
-            "Shinjuku",
-            "Ueno / Asakusa",
-            "Tokyo Station"
+            "新宿",
+            "上野 / 淺草",
+            "東京站"
           ],
           "hotelPrimaryAction": "選擇東京住宿點",
           "hotelDetailLinks": [
-            "Shinjuku details",
-            "Ueno details",
-            "Asakusa details",
-            "Tokyo Station details"
+            "新宿詳細",
+            "上野詳細",
+            "淺草詳細",
+            "東京站詳細"
           ],
           "hotelActions": [
             "比较新宿酒店"
@@ -949,13 +949,13 @@
           ],
           "hotelRecommendation": "东京观光和后续铁路移动的平衡较好。",
           "hotelRecommendedAreas": [
-            "Shinjuku",
-            "Tokyo Station"
+            "新宿",
+            "東京站"
           ],
           "hotelPrimaryAction": "選擇東京住宿點",
           "hotelDetailLinks": [
-            "Shinjuku details",
-            "Tokyo Station details"
+            "新宿詳細",
+            "東京站詳細"
           ],
           "hotelActions": [
             "比较新宿酒店",
@@ -981,13 +981,13 @@
           ],
           "hotelRecommendation": "多天长距离铁路和行李移动让交通逻辑更重要。",
           "hotelRecommendedAreas": [
-            "Tokyo Station",
-            "Ueno"
+            "東京站",
+            "上野"
           ],
           "hotelPrimaryAction": "選擇東京住宿點",
           "hotelDetailLinks": [
-            "Tokyo Station details",
-            "Ueno details"
+            "東京站詳細",
+            "上野詳細"
           ],
           "hotelActions": [
             "比较东京站附近酒店",
@@ -2138,8 +2138,8 @@
       "ogDescription": "你已確認富士山側座位。現在準備剩下的日本行程。"
     },
     "providers": {
-      "omio": "Compare on Omio",
-      "readGuide": "Read guide"
+      "omio": "在 Omio 比較",
+      "readGuide": "閱讀指南"
     },
     "hero": {
       "eyebrow": "fujiseat 預訂路徑",
@@ -2279,7 +2279,7 @@
       "title": "有用，但不是第一步決策",
       "insurance": "查看旅行保險",
       "station": "車站練習",
-      "commandCenter": "Command Center",
+      "commandCenter": "指揮中心",
       "localTokyo": "在地東京"
     }
   },
@@ -4717,29 +4717,29 @@
       "qualitativeNote": "質性等級（Excellent / Good / Fair / Weak）是現有交通檔案的編輯摘要，並非精確的交通時間。",
       "commandMap": {
         "oshiage": {
-          "intro": "Oshiage works as an east Tokyo base because it connects airport access, Skytree-side stays, Asakusa, and central rail links without acting like a mega-terminal.",
-          "centerLabel": "Oshiage / 押上",
-          "centerSubLabel": "East Tokyo base",
+          "intro": "押上之所以適合作為東東京基地，是因為它將機場交通、晴空塔周邊與寧靜的隅田一帶整合在一個樞紐。點選任一晶片即可查看連結方式。",
+          "centerLabel": "押上 / Oshiage",
+          "centerSubLabel": "東東京基地",
           "nodes": {
             "narita": {
-              "label": "Narita Airport / 成田空港",
-              "chip": "Good",
-              "note": "Good airport access for many Narita arrivals."
+              "label": "成田機場 / 成田空港",
+              "chip": "良好",
+              "note": "對大多數成田抵達航班而言為良好的機場交通。"
             },
             "haneda": {
-              "label": "Haneda Airport / 羽田空港",
-              "chip": "Good",
-              "note": "Good airport access without using a giant station as the base."
+              "label": "羽田機場 / 羽田空港",
+              "chip": "良好",
+              "note": "不必以巨型車站作為基地，也能擁有良好的機場交通。"
             },
             "asakusa": {
-              "label": "Asakusa / 浅草",
-              "chip": "Near",
-              "note": "Nearby old Tokyo sightseeing and river-side walks."
+              "label": "淺草 / 浅草",
+              "chip": "鄰近",
+              "note": "鄰近舊東京觀光與隅田川沿岸散步。"
             },
             "tokyoStation": {
-              "label": "Tokyo Station / 東京駅",
-              "chip": "Reasonable",
-              "note": "A reasonable rail link for Tokyo Station and Shinkansen days."
+              "label": "東京站 / 東京駅",
+              "chip": "尚可",
+              "note": "在前往東京站與新幹線的日子提供尚可的鐵道連結。"
             }
           }
         }

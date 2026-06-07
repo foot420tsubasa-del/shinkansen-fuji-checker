@@ -889,8 +889,8 @@
           ],
           "hotelPrimaryAction": "Escolher base em Tóquio",
           "hotelDetailLinks": [
-            "Detalhes de Tokyo Station",
-            "Detalhes de Shinjuku"
+            "Tokyo Station detalhes",
+            "Shinjuku detalhes"
           ],
           "hotelActions": [
             "Comparar hotéis perto de Tokyo Station"
@@ -921,10 +921,10 @@
           ],
           "hotelPrimaryAction": "Escolher base em Tóquio",
           "hotelDetailLinks": [
-            "Detalhes de Shinjuku",
-            "Detalhes de Ueno",
-            "Detalhes de Asakusa",
-            "Detalhes de Tokyo Station"
+            "Shinjuku detalhes",
+            "Ueno detalhes",
+            "Asakusa detalhes",
+            "Tokyo Station detalhes"
           ],
           "hotelActions": [
             "Comparar hotéis em Shinjuku"
@@ -954,8 +954,8 @@
           ],
           "hotelPrimaryAction": "Escolher base em Tóquio",
           "hotelDetailLinks": [
-            "Detalhes de Shinjuku",
-            "Detalhes de Tokyo Station"
+            "Shinjuku detalhes",
+            "Tokyo Station detalhes"
           ],
           "hotelActions": [
             "Comparar hotéis em Shinjuku",
@@ -986,8 +986,8 @@
           ],
           "hotelPrimaryAction": "Escolher base em Tóquio",
           "hotelDetailLinks": [
-            "Detalhes de Tokyo Station",
-            "Detalhes de Ueno"
+            "Tokyo Station detalhes",
+            "Ueno detalhes"
           ],
           "hotelActions": [
             "Comparar hotéis perto de Tokyo Station",
@@ -2138,8 +2138,8 @@
       "ogDescription": "Você conferiu o assento do lado do Fuji. Agora prepare o resto da viagem."
     },
     "providers": {
-      "omio": "Compare on Omio",
-      "readGuide": "Read guide"
+      "omio": "Comparar no Omio",
+      "readGuide": "Ler guia"
     },
     "hero": {
       "eyebrow": "Caminho de reserva fujiseat",
@@ -2279,7 +2279,7 @@
       "title": "Úteis, mas não decisões de primeiro passo",
       "insurance": "Ver seguro viagem",
       "station": "Prática de estação",
-      "commandCenter": "Command Center",
+      "commandCenter": "Centro de comando",
       "localTokyo": "Tokyo local"
     }
   },
@@ -4718,29 +4718,29 @@
       "qualitativeNote": "Os níveis qualitativos (Excellent / Good / Fair / Weak) são resumos editoriais dos perfis de acesso existentes. Não são tempos exatos de viagem.",
       "commandMap": {
         "oshiage": {
-          "intro": "Oshiage works as an east Tokyo base because it connects airport access, Skytree-side stays, Asakusa, and central rail links without acting like a mega-terminal.",
+          "intro": "Oshiage funciona como base no leste de Tóquio porque conecta o acesso ao aeroporto, o lado da Skytree e a tranquila Sumida em um único hub. Toque em qualquer chip para ver como ele se conecta.",
           "centerLabel": "Oshiage / 押上",
-          "centerSubLabel": "East Tokyo base",
+          "centerSubLabel": "Base no leste de Tóquio",
           "nodes": {
             "narita": {
-              "label": "Narita Airport / 成田空港",
-              "chip": "Good",
-              "note": "Good airport access for many Narita arrivals."
+              "label": "Aeroporto de Narita / 成田空港",
+              "chip": "Bom",
+              "note": "Bom acesso ao aeroporto para muitos voos vindos de Narita."
             },
             "haneda": {
-              "label": "Haneda Airport / 羽田空港",
-              "chip": "Good",
-              "note": "Good airport access without using a giant station as the base."
+              "label": "Aeroporto de Haneda / 羽田空港",
+              "chip": "Bom",
+              "note": "Bom acesso aeroportuário sem usar uma estação enorme como base."
             },
             "asakusa": {
               "label": "Asakusa / 浅草",
-              "chip": "Near",
-              "note": "Nearby old Tokyo sightseeing and river-side walks."
+              "chip": "Próximo",
+              "note": "Passeios na Tóquio antiga e ao longo do rio bem ao lado."
             },
             "tokyoStation": {
               "label": "Tokyo Station / 東京駅",
-              "chip": "Reasonable",
-              "note": "A reasonable rail link for Tokyo Station and Shinkansen days."
+              "chip": "Razoável",
+              "note": "Conexão ferroviária razoável para dias na Tokyo Station e Shinkansen."
             }
           }
         }

@@ -889,8 +889,8 @@
           ],
           "hotelPrimaryAction": "Tokio-Basis wählen",
           "hotelDetailLinks": [
-            "Tokyo Station details",
-            "Shinjuku details"
+            "Tokyo Station-Details",
+            "Shinjuku-Details"
           ],
           "hotelActions": [
             "Hotels nahe Tokyo Station vergleichen"
@@ -921,10 +921,10 @@
           ],
           "hotelPrimaryAction": "Tokio-Basis wählen",
           "hotelDetailLinks": [
-            "Shinjuku details",
-            "Ueno details",
-            "Asakusa details",
-            "Tokyo Station details"
+            "Shinjuku-Details",
+            "Ueno-Details",
+            "Asakusa-Details",
+            "Tokyo Station-Details"
           ],
           "hotelActions": [
             "Hotels in Shinjuku vergleichen"
@@ -954,8 +954,8 @@
           ],
           "hotelPrimaryAction": "Tokio-Basis wählen",
           "hotelDetailLinks": [
-            "Shinjuku details",
-            "Tokyo Station details"
+            "Shinjuku-Details",
+            "Tokyo Station-Details"
           ],
           "hotelActions": [
             "Hotels in Shinjuku vergleichen",
@@ -986,8 +986,8 @@
           ],
           "hotelPrimaryAction": "Tokio-Basis wählen",
           "hotelDetailLinks": [
-            "Tokyo Station details",
-            "Ueno details"
+            "Tokyo Station-Details",
+            "Ueno-Details"
           ],
           "hotelActions": [
             "Hotels nahe Tokyo Station vergleichen",
@@ -2138,8 +2138,8 @@
       "ogDescription": "Du hast den Sitz auf der Fuji-Seite geprüft. Bereite jetzt den Rest der Reise vor."
     },
     "providers": {
-      "omio": "Compare on Omio",
-      "readGuide": "Read guide"
+      "omio": "Auf Omio vergleichen",
+      "readGuide": "Guide lesen"
     },
     "hero": {
       "eyebrow": "fujiseat Buchungspfad",
@@ -4717,29 +4717,29 @@
       "qualitativeNote": "Die qualitativen Stufen (Excellent / Good / Fair / Weak) sind redaktionelle Zusammenfassungen der vorhandenen Zugangsprofile. Sie sind keine exakten Reisezeiten.",
       "commandMap": {
         "oshiage": {
-          "intro": "Oshiage works as an east Tokyo base because it connects airport access, Skytree-side stays, Asakusa, and central rail links without acting like a mega-terminal.",
+          "intro": "Oshiage funktioniert als Basis im Osten Tokios, weil es Flughafenzugang, Skytree-Gegend und das ruhige Sumida-Viertel in einem Hub bündelt. Tippe auf einen Chip, um die Verbindung zu sehen.",
           "centerLabel": "Oshiage / 押上",
-          "centerSubLabel": "East Tokyo base",
+          "centerSubLabel": "Basis im Osten Tokios",
           "nodes": {
             "narita": {
-              "label": "Narita Airport / 成田空港",
-              "chip": "Good",
-              "note": "Good airport access for many Narita arrivals."
+              "label": "Flughafen Narita / 成田空港",
+              "chip": "Gut",
+              "note": "Gute Flughafenanbindung für viele Narita-Ankünfte."
             },
             "haneda": {
-              "label": "Haneda Airport / 羽田空港",
-              "chip": "Good",
-              "note": "Good airport access without using a giant station as the base."
+              "label": "Flughafen Haneda / 羽田空港",
+              "chip": "Gut",
+              "note": "Gute Flughafenanbindung ohne einen Riesenbahnhof als Basis."
             },
             "asakusa": {
               "label": "Asakusa / 浅草",
-              "chip": "Near",
-              "note": "Nearby old Tokyo sightseeing and river-side walks."
+              "chip": "Nah",
+              "note": "Alt-Tokio-Sightseeing und Spaziergänge am Fluss direkt nebenan."
             },
             "tokyoStation": {
               "label": "Tokyo Station / 東京駅",
-              "chip": "Reasonable",
-              "note": "A reasonable rail link for Tokyo Station and Shinkansen days."
+              "chip": "Brauchbar",
+              "note": "Brauchbare Bahnverbindung für Tokyo-Station- und Shinkansen-Tage."
             }
           }
         }
