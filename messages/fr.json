@@ -619,7 +619,10 @@
     "priorityP3": "En tant que visiteur, l'approche la plus sûre est d'éviter complètement les sièges prioritaires. Si le train est bondé et que personne n'en a besoin à proximité, s'asseoir brièvement est compréhensible — mais soyez prêt à vous lever immédiatement si quelqu'un en a besoin.",
     "priorityTip": "Repérez les autocollants sur les vitres et le tissu de couleur différente (généralement gris ou à motifs) pour identifier les sièges prioritaires. En cas de doute, choisissez un siège normal.",
     "devH2": "Du développeur",
-    "devP": "Je développe également un petit projet appelé KanjiFlick — une liste de kanji en format swipe avec les significations des idéogrammes (ceux que les enfants japonais apprennent). Ce n'est pas une appli de voyage, mais si vous êtes curieux des caractères que vous verrez partout au Japon, cela pourrait vous plaire."
+    "devP": "Je développe également un petit projet appelé KanjiFlick — une liste de kanji en format swipe avec les significations des idéogrammes (ceux que les enfants japonais apprennent). Ce n'est pas une appli de voyage, mais si vous êtes curieux des caractères que vous verrez partout au Japon, cela pourrait vous plaire.",
+    "priorityShortNoteLabel": "Note d'étiquette dans les trains locaux :",
+    "priorityShortNoteBody": "les sièges prioritaires (優先席) sont différents des places réservées du Shinkansen. En cas de doute, évite-les ou cède immédiatement la place.",
+    "priorityShortNoteLink": "Lire les bases des panneaux et de l'étiquette des trains japonais"
   },
   "cc": {
     "title": "CENTRE DE COMMANDE — VOYAGE AU JAPON",

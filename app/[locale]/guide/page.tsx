@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Mountain, Train, Info, AlertTriangle } from "lucide-react";
+import { Mountain, Train, Info } from "lucide-react";
 import Script from "next/script";
 import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "../components/SiteHeader";
@@ -173,7 +173,6 @@ const enGuideCopy = {
   mistakesLink: "do not make the same mistake on arrival day",
   mistakesTextAfter: "by choosing the wrong airport transfer for your luggage and arrival time.",
   mistakesH2: "Common mistakes when trying to see Mt. Fuji from the Shinkansen",
-  priorityH2: "Priority seats (優先席) — etiquette foreigners should know",
   faqH2: "Frequently Asked Questions",
   makeEasyH2: "Make it easy with the Shinkansen Mt. Fuji Seat Checker",
   footerBrand: "fujiseat.com — Japan travel utility hub",
@@ -256,7 +255,6 @@ const frGuideCopy = {
   mistakesLink: "ne commettez pas la même erreur le jour de l'arrivée",
   mistakesTextAfter: "en choisissant un transfert aéroport inadapté à vos bagages et à votre heure d'arrivée.",
   mistakesH2: "Erreurs fréquentes lorsqu'on essaie de voir le mont Fuji depuis le Shinkansen",
-  priorityH2: "Sièges prioritaires (優先席) — l'étiquette à connaître",
   faqH2: "Questions fréquentes",
   makeEasyH2: "Simplifiez-vous la tâche avec le Shinkansen Mt. Fuji Seat Checker",
   footerBrand: "fujiseat.com — outils de voyage au Japon",
@@ -1833,19 +1831,17 @@ export default async function GuidePage({ params }: Props) {
           </section>
 
           <section id="etiquette" className="rounded-2xl border border-amber-200/80 bg-amber-50/30 px-4 py-4 md:px-6 md:py-5 shadow-sm">
-            <h2 className="flex items-center gap-2 text-sm md:text-[15px] font-semibold text-slate-900 mb-3">
-              <AlertTriangle className="h-4 w-4 text-amber-500" />
-              {copy.priorityH2 ?? t("priorityH2")}
-            </h2>
-            <div className="space-y-3 text-[13px] md:text-sm leading-relaxed text-slate-700">
-              <p>{t("priorityP1")}</p>
-              <p>{t("priorityP2")}</p>
-              <p>{t("priorityP3")}</p>
-            </div>
-            <div className="mt-4 flex items-start gap-2.5 rounded-xl bg-white/80 border border-amber-200/60 px-3.5 py-3 md:px-4">
-              <Info className="shrink-0 h-4 w-4 text-amber-600 mt-0.5" />
-              <p className="text-[11px] md:text-xs text-amber-800 leading-relaxed">{t("priorityTip")}</p>
-            </div>
+            <p className="text-[13px] md:text-sm leading-relaxed text-slate-700">
+              <span className="font-semibold text-slate-900">{t("priorityShortNoteLabel")}</span>{" "}
+              {t("priorityShortNoteBody")}{" "}
+              <Link
+                href="/how-to-read-japanese-train-signs#priority-seats"
+                className="font-semibold text-sky-700 underline underline-offset-2 hover:text-sky-900"
+              >
+                {t("priorityShortNoteLink")}
+              </Link>
+              .
+            </p>
           </section>
 
           {renderTravelEssentials()}

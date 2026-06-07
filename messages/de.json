@@ -619,7 +619,10 @@
     "priorityP3": "Als Besucher ist es am sichersten, Priority Seats einfach zu vermeiden. Wenn der Zug sehr voll ist und niemand in der Nähe den Sitz braucht, ist kurzes Sitzen verständlich — aber steh sofort auf, wenn jemand einsteigt, der ihn braucht.",
     "priorityTip": "Achte auf Aufkleber an den Fenstern und andersfarbige Sitzbezüge (meist grau oder gemustert), um Priority Seats zu erkennen. Im Zweifel nimm einen normalen Sitz.",
     "devH2": "Vom Entwickler",
-    "devP": "Ich baue außerdem ein kleines Nebenprojekt namens KanjiFlick — eine Swipe-Liste mit Bedeutungen einzelner Kanji, wie japanische Kinder sie lernen. Es ist keine Reise-App, aber wenn dich die Zeichen interessieren, die du in Japan sehen wirst, gefällt es dir vielleicht."
+    "devP": "Ich baue außerdem ein kleines Nebenprojekt namens KanjiFlick — eine Swipe-Liste mit Bedeutungen einzelner Kanji, wie japanische Kinder sie lernen. Es ist keine Reise-App, aber wenn dich die Zeichen interessieren, die du in Japan sehen wirst, gefällt es dir vielleicht.",
+    "priorityShortNoteLabel": "Hinweis zur Etikette in Nahverkehrszügen:",
+    "priorityShortNoteBody": "Priority Seats (優先席) sind nicht dasselbe wie Shinkansen-Reservierungen. Im Zweifel meiden oder den Platz sofort anbieten.",
+    "priorityShortNoteLink": "Japanische Bahnschilder und Etikette — Basics lesen"
   },
   "cc": {
     "title": "JAPAN-REISE-KOMMANDOZENTRALE",

@@ -619,7 +619,10 @@
     "priorityP3": "As a visitor, the safest approach is to simply avoid priority seats altogether. If the train is packed and no one who needs the seat is nearby, sitting briefly is understandable — but be ready to stand immediately when someone who needs it boards.",
     "priorityTip": "Look for the stickers on windows and the different-colored seat fabric (usually grey or patterned) to identify priority seats. When in doubt, choose a regular seat.",
     "devH2": "From the developer",
-    "devP": "I'm also building a small side project called KanjiFlick — a swipe-style list of single kanji meanings (the kind Japanese kids learn). It's not a travel app, but if you're curious about the characters you'll see around Japan, you might enjoy it."
+    "devP": "I'm also building a small side project called KanjiFlick — a swipe-style list of single kanji meanings (the kind Japanese kids learn). It's not a travel app, but if you're curious about the characters you'll see around Japan, you might enjoy it.",
+    "priorityShortNoteLabel": "Local train etiquette note:",
+    "priorityShortNoteBody": "priority seats (優先席) are different from Shinkansen reserved seats. If you are unsure, avoid them or offer the seat immediately.",
+    "priorityShortNoteLink": "Read basic Japanese train signs and etiquette"
   },
   "cc": {
     "title": "JAPAN TRIP COMMAND CENTER",

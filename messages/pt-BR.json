@@ -619,7 +619,10 @@
     "priorityP3": "Como visitante, a abordagem mais segura é simplesmente evitar os assentos prioritários. Se o trem estiver lotado e ninguém que precise estiver por perto, sentar-se brevemente é compreensível — mas esteja pronto para levantar imediatamente quando alguém que precise embarcar.",
     "priorityTip": "Procure os adesivos nas janelas e o tecido de cor diferente (geralmente cinza ou estampado) para identificar os assentos prioritários. Na dúvida, escolha um assento comum.",
     "devH2": "Do desenvolvedor",
-    "devP": "Também estou desenvolvendo um pequeno projeto chamado KanjiFlick — uma lista de kanji estilo swipe com os significados dos ideogramas (os que as crianças japonesas aprendem). Não é um app de viagem, mas se você tiver curiosidade sobre os caracteres que verá pelo Japão, pode gostar."
+    "devP": "Também estou desenvolvendo um pequeno projeto chamado KanjiFlick — uma lista de kanji estilo swipe com os significados dos ideogramas (os que as crianças japonesas aprendem). Não é um app de viagem, mas se você tiver curiosidade sobre os caracteres que verá pelo Japão, pode gostar.",
+    "priorityShortNoteLabel": "Etiqueta em trens locais:",
+    "priorityShortNoteBody": "os assentos prioritários (優先席) são diferentes dos assentos reservados do Shinkansen. Na dúvida, evite-os ou ceda o lugar imediatamente.",
+    "priorityShortNoteLink": "Leia o básico sobre sinais e etiqueta dos trens japoneses"
   },
   "cc": {
     "title": "CENTRO DE COMANDO — VIAGEM AO JAPÃO",

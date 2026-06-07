@@ -395,6 +395,23 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
               </div>
             </section>
 
+            <section id="priority-seats">
+              <SectionHeading eyebrow="Local train etiquette" title="Priority seats (優先席)">
+                One small thing to recognize on local trains before you start riding around Tokyo, Kyoto, or Osaka.
+              </SectionHeading>
+              <div className="mt-5 space-y-5 text-sm leading-7 text-slate-700 md:text-base">
+                <p>
+                  On local trains, you may see seats marked 優先席 (yūsen-seki), usually near the doors. These seats are intended for elderly passengers, pregnant women, people with disabilities, injured or sick passengers, and people traveling with small children.
+                </p>
+                <p>
+                  As a visitor, the easiest rule is simple: avoid priority seats if you do not need them. If you sit there on a crowded train, be ready to stand immediately when someone who may need the seat boards.
+                </p>
+                <p>
+                  Look for the priority seat stickers near the windows or above the seats. Some trains also use different seat fabric, straps, or floor markings around the priority seat area.
+                </p>
+              </div>
+            </section>
+
             <section>
               <SectionHeading eyebrow="FAQ" title="Japanese train signs FAQ" />
               <div className="mt-5 divide-y divide-slate-200 rounded-[22px] border border-slate-200 bg-white shadow-sm">
