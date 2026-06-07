@@ -1127,7 +1127,18 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
     },
     hotel: hotelSearchForFinderArea(areaItem, locale, "top3"),
   }));
-  const finderCopy = t.raw("finder") as ComponentProps<typeof TokyoHotelAreaFinder>["copy"];
+  // Reuse the already-translated `hotelSearch.headingAround` template + `note`
+  // string for the per-result Compare-hotels block. No new i18n keys needed.
+  type FinderCopyShape = ComponentProps<typeof TokyoHotelAreaFinder>["copy"];
+  const baseFinderCopy = t.raw("finder") as Omit<
+    FinderCopyShape,
+    "compareHotelsTitle" | "compareHotelsNote"
+  >;
+  const finderCopy: FinderCopyShape = {
+    ...baseFinderCopy,
+    compareHotelsTitle: t.raw("hotelSearch.headingAround") as string,
+    compareHotelsNote: t.raw("hotelSearch.note") as string,
+  };
   const generatedScoreCount = scoresFile.areas.length;
   const lastChecked = formatLastChecked(sourceStatusFile.generatedAt);
 

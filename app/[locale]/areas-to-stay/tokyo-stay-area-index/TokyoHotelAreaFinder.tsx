@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
-import type { ProviderId } from "@/components/ui/ProviderButton";
+import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import {
   trackCtaClick,
@@ -149,6 +149,17 @@ type FinderCopy = {
   scoreSuffix: string;
   watchOut: string;
   stationRouteNoteTitle: string;
+  /**
+   * Title for the per-result hotel-provider block. Uses {area} placeholder,
+   * substituted with the area's display name (e.g. "Compare hotels around Ueno").
+   * Sourced from the existing translated `tokyoStayAreaIndex.hotelSearch.headingAround`.
+   */
+  compareHotelsTitle: string;
+  /**
+   * Note shown under the hotel-provider block. Sourced from the existing
+   * translated `tokyoStayAreaIndex.hotelSearch.note`.
+   */
+  compareHotelsNote: string;
   scoreLabels: {
     stationSimplicity: string;
     luggageFriendly: string;
@@ -587,7 +598,14 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
           </div>
           <div className="mt-4 grid gap-4 lg:grid-cols-3">
             {topThree.map((area, index) => (
-              <ResultCard key={area.id} area={area} rank={index + 1} copy={copy} locale={locale} />
+              <ResultCard
+                key={area.id}
+                area={area}
+                rank={index + 1}
+                copy={copy}
+                locale={locale}
+                pagePath={pagePath}
+              />
             ))}
           </div>
 
@@ -663,13 +681,26 @@ function ResultCard({
   rank,
   copy,
   locale,
+  pagePath,
 }: {
   area: FinderArea & { matchScore: number };
   rank: number;
   copy: FinderCopy;
   locale: string;
+  pagePath: string;
 }) {
   const matchLabel = matchLabelForRank(rank, copy);
+  const hotel = area.hotel;
+  const compareTitle = copy.compareHotelsTitle.replace("{area}", area.displayName);
+  // Surface Booking.com + Trip.com only — Agoda is intentionally not restored.
+  // The providers list is already filtered upstream in page.tsx, but we double-
+  // gate here so any future provider can't leak into this slot without review.
+  const compareProviders = hotel
+    ? hotel.providers.filter(
+        (provider) =>
+          provider.provider === "booking_travelpayouts" || provider.provider === "trip",
+      )
+    : [];
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-[24px] border border-emerald-100 bg-white shadow-[0_16px_36px_rgba(15,23,42,0.08)]">
       <div className="min-h-[118px] border-b border-sky-100 bg-[#eaf6ff] p-4">
@@ -706,7 +737,35 @@ function ResultCard({
           <p className="text-xs font-semibold text-slate-950">{copy.watchOut}</p>
           <p className="mt-1 text-xs leading-5 text-slate-700">{area.watchOut.slice(0, 2).join(" · ")}</p>
         </div>
-        <div className="mt-auto pt-3">
+        <div className="mt-auto pt-3 space-y-3">
+          {hotel && compareProviders.length > 0 ? (
+            <div className="rounded-2xl border border-emerald-100 bg-white p-3">
+              <p className="text-xs font-semibold text-slate-950">{compareTitle}</p>
+              <p className="mt-1 text-xs leading-5 text-slate-600">{copy.compareHotelsNote}</p>
+              <div className="mt-2.5 grid gap-2">
+                {compareProviders.map((provider) => (
+                  <ProviderButton
+                    key={provider.linkId}
+                    provider={provider.provider}
+                    href={provider.href}
+                    trackingHref={provider.trackingHref}
+                    placement={provider.placement}
+                    pagePath={pagePath}
+                    locale={locale}
+                    linkId={provider.linkId}
+                    subId={provider.subId}
+                    area={hotel.areaName}
+                    areaId={area.id}
+                    city={hotel.city}
+                    rank={rank}
+                    className="text-sm"
+                  >
+                    {provider.provider === "trip" ? "Trip.com" : "Booking.com"}
+                  </ProviderButton>
+                ))}
+              </div>
+            </div>
+          ) : null}
           {SUPPORTED_HOTEL_PAGE_IDS.has(area.id) ? (
             <TrackedInternalLink
               href={`/areas-to-stay/tokyo-hotels/${area.id}`}
