@@ -12,7 +12,6 @@ import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
-import { RailDecisionCard } from "@/components/affiliate/RailDecisionCard";
 
 const SITE_URL = "https://fujiseat.com";
 
@@ -1112,14 +1111,23 @@ export default async function GuidePage({ params }: Props) {
         </p>
       </div>
       <div className="p-3.5 md:p-4">
-        <div className="flex flex-wrap gap-x-4 gap-y-2 text-[12px] leading-5 text-slate-600">
-          <Link href="/plan-your-trip" className="font-semibold text-slate-700 underline underline-offset-4 hover:text-slate-950">
+        <div className="grid gap-2 text-[12px] leading-5 sm:grid-cols-2">
+          <Link
+            href="/plan-your-trip"
+            className="inline-flex min-h-10 items-center justify-center rounded-xl border border-sky-200 bg-sky-50 px-3 py-2 font-semibold text-sky-800 transition-colors hover:border-sky-300 hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
+          >
             {ui.chooseRoute}
           </Link>
-          <Link href="/airport-transfers" className="font-semibold text-slate-700 underline underline-offset-4 hover:text-slate-950">
+          <Link
+            href="/airport-transfers"
+            className="inline-flex min-h-10 items-center justify-center rounded-xl border border-indigo-200 bg-indigo-50 px-3 py-2 font-semibold text-indigo-800 transition-colors hover:border-indigo-300 hover:bg-indigo-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-200"
+          >
             {ui.planAirportTransfer}
           </Link>
-          <Link href="/areas-to-stay" className="font-semibold text-slate-700 underline underline-offset-4 hover:text-slate-950">
+          <Link
+            href="/areas-to-stay/tokyo-stay-area-index"
+            className="inline-flex min-h-10 items-center justify-center rounded-xl border border-[#0b214a] bg-[#0b214a] px-3 py-2 font-semibold text-yellow-300 transition-colors hover:bg-[#081a3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b214a]/30"
+          >
             {ui.chooseStayArea}
           </Link>
           <TrackedAffiliateLink
@@ -1134,39 +1142,11 @@ export default async function GuidePage({ params }: Props) {
             label="Get Japan eSIM"
             linkId="esim"
             product="esim"
-            className="font-semibold text-slate-700 underline underline-offset-4 hover:text-slate-950"
+            className="inline-flex min-h-10 items-center justify-center rounded-xl border border-orange-200 bg-orange-50 px-3 py-2 font-semibold text-orange-700 transition-colors hover:border-orange-300 hover:bg-orange-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
           >
             {ui.getJapanEsim}
           </TrackedAffiliateLink>
         </div>
-      </div>
-    </section>
-  );
-
-  const renderShinkansenDaySetup = () => (
-    <section className="mb-5 rounded-2xl border border-emerald-100 bg-emerald-50/60 px-4 py-4 shadow-sm shadow-emerald-100/60 lg:px-5">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">
-        {ui.shinkansenDayLabel}
-      </p>
-      <div className="mt-2 grid gap-3 md:grid-cols-[1fr_auto] md:items-center">
-        <div>
-          <h2 className="text-base font-semibold text-slate-950">
-            {ui.shinkansenDayTitle}
-          </h2>
-          <p className="mt-2 text-[13px] leading-6 text-slate-600">
-            {ui.shinkansenDayBody}
-          </p>
-        </div>
-        <TrackedInternalLink
-          href="/areas-to-stay/tokyo-first-time"
-          sourcePage="/guide"
-          placement="guide_shinkansen_day_setup"
-          label="Choose Tokyo stay area"
-          locale={locale}
-          className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
-        >
-          {ui.chooseTokyoStayArea}
-        </TrackedInternalLink>
       </div>
     </section>
   );
@@ -1188,12 +1168,54 @@ export default async function GuidePage({ params }: Props) {
           placement="guide_top_after_quick_answer"
           label="Compare Tokyo hotel bases"
           locale={locale}
-          className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full border border-sky-200 bg-white px-3.5 py-2 text-[12px] font-semibold text-sky-800 shadow-sm transition-colors hover:border-sky-300 hover:bg-sky-100"
+          className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full border border-[#0b214a] bg-[#0b214a] px-3.5 py-2 text-[12px] font-semibold text-yellow-300 shadow-sm transition-colors hover:bg-[#081a3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b214a]/30"
         >
-          Compare Tokyo hotel bases →
+          Choose Tokyo hotel base
         </TrackedInternalLink>
       </div>
     </div>
+  );
+
+  const renderTopBookingCtas = () => (
+    <section className="mb-5 rounded-2xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm shadow-slate-200/70 lg:px-5">
+      <div className="flex flex-col gap-2.5 sm:flex-row">
+        <TrackedAffiliateLink
+          href={KLOOK_URL}
+          target="_blank"
+          rel={AFFILIATE_REL}
+          category="train"
+          provider="klook"
+          placement="guide_top_klook_shinkansen"
+          pagePath="/guide"
+          locale={locale}
+          label="Book Shinkansen ticket on Klook"
+          linkId="shinkansenTicket"
+          product="shinkansen_ticket"
+          adid="1265303"
+          className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+        >
+          Book Shinkansen ticket on Klook
+        </TrackedAffiliateLink>
+        {OMIO_SHINKANSEN_URL ? (
+          <TrackedAffiliateLink
+            href={OMIO_SHINKANSEN_URL}
+            target="_blank"
+            rel={AFFILIATE_REL}
+            category="train"
+            provider="omio"
+            placement="guide_top_omio_compare"
+            pagePath="/guide"
+            locale={locale}
+            label="Compare route on Omio"
+            linkId="omioShinkansen"
+            product="route_compare"
+            className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-200"
+          >
+            Compare route on Omio
+          </TrackedAffiliateLink>
+        ) : null}
+      </div>
+    </section>
   );
 
   const renderAfterSeatNextSteps = () => (
@@ -1217,13 +1239,15 @@ export default async function GuidePage({ params }: Props) {
           label="Book Shinkansen ticket"
           linkId="shinkansenTicket"
           product="shinkansen_ticket"
-          className="rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3.5 text-[12px] shadow-sm transition-colors hover:border-orange-300 hover:bg-orange-100"
+          className="flex h-full flex-col rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3.5 text-[12px] shadow-sm transition-colors hover:border-orange-300 hover:bg-orange-100"
         >
           <span className="block font-semibold text-slate-950">Book Shinkansen ticket</span>
           <span className="mt-1 block leading-5 text-slate-600">
             For users who already know the route and want to reserve the right seat.
           </span>
-          <span className="mt-3 inline-flex font-semibold text-orange-700">Open Klook →</span>
+          <span className="mt-auto inline-flex w-fit rounded-full border border-orange-300 bg-white px-3 py-1.5 font-semibold text-orange-700">
+            Open Klook
+          </span>
         </TrackedAffiliateLink>
 
         <TrackedAffiliateLink
@@ -1239,13 +1263,15 @@ export default async function GuidePage({ params }: Props) {
           linkId="jrPass"
           product="jr_pass"
           adid="1165791"
-          className="rounded-2xl border border-orange-100 bg-white px-4 py-3.5 text-[12px] transition-colors hover:border-orange-200 hover:bg-orange-50"
+          className="flex h-full flex-col rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3.5 text-[12px] shadow-sm transition-colors hover:border-orange-300 hover:bg-orange-100"
         >
           <span className="block font-semibold text-slate-950">Check JR Pass options</span>
           <span className="mt-1 block leading-5 text-slate-600">
             Use this only if your itinerary includes several long JR rides.
           </span>
-          <span className="mt-3 inline-flex font-semibold text-orange-700">Open Klook →</span>
+          <span className="mt-auto inline-flex w-fit rounded-full border border-orange-300 bg-white px-3 py-1.5 font-semibold text-orange-700">
+            Open Klook
+          </span>
         </TrackedAffiliateLink>
 
         {OMIO_SHINKANSEN_URL ? (
@@ -1261,13 +1287,15 @@ export default async function GuidePage({ params }: Props) {
             label="Compare train options"
             linkId="omioShinkansen"
             product="route_compare"
-            className="rounded-2xl border border-indigo-100 bg-indigo-50 px-4 py-3.5 text-[12px] transition-colors hover:border-indigo-200 hover:bg-indigo-100"
+          className="flex h-full flex-col rounded-2xl border border-indigo-200 bg-indigo-50 px-4 py-3.5 text-[12px] shadow-sm transition-colors hover:border-indigo-300 hover:bg-indigo-100"
           >
             <span className="block font-semibold text-slate-950">Compare train options</span>
             <span className="mt-1 block leading-5 text-slate-600">
               Use Omio if you are still comparing route options before booking.
             </span>
-            <span className="mt-3 inline-flex font-semibold text-indigo-700">Open Omio →</span>
+            <span className="mt-auto inline-flex w-fit rounded-full border border-indigo-300 bg-white px-3 py-1.5 font-semibold text-indigo-700">
+              Open Omio
+            </span>
           </TrackedAffiliateLink>
         ) : null}
 
@@ -1277,13 +1305,15 @@ export default async function GuidePage({ params }: Props) {
           placement="guide_after_seat_next_step"
           label="Choose hotel base before Shinkansen"
           locale={locale}
-          className="rounded-2xl border border-sky-100 bg-sky-50 px-4 py-3.5 text-[12px] transition-colors hover:border-sky-200 hover:bg-sky-100"
+          className="flex h-full flex-col rounded-2xl border border-[#0b214a] bg-[#0b214a] px-4 py-3.5 text-[12px] shadow-sm transition-colors hover:bg-[#081a3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b214a]/30"
         >
-          <span className="block font-semibold text-slate-950">Choose hotel base before Shinkansen</span>
-          <span className="mt-1 block leading-5 text-slate-600">
+          <span className="block font-semibold text-yellow-300">Choose hotel base before Shinkansen</span>
+          <span className="mt-1 block leading-5 text-slate-200">
             Useful if you have luggage or an early train from Tokyo.
           </span>
-          <span className="mt-3 inline-flex font-semibold text-sky-700">Open stay guide →</span>
+          <span className="mt-auto inline-flex w-fit rounded-full border border-yellow-300/70 bg-yellow-300 px-3 py-1.5 font-semibold text-[#0b214a]">
+            Open stay guide
+          </span>
         </TrackedInternalLink>
 
       </div>
@@ -1304,7 +1334,7 @@ export default async function GuidePage({ params }: Props) {
           locale={locale}
           className="inline-flex min-h-9 items-center rounded-xl border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
         >
-          Stay before Shinkansen →
+          Stay before Shinkansen
         </TrackedInternalLink>
         <TrackedInternalLink
           href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
@@ -1312,9 +1342,9 @@ export default async function GuidePage({ params }: Props) {
           placement="guide_hotel_bridge"
           label="Tokyo hotel base matrix"
           locale={locale}
-          className="inline-flex min-h-9 items-center rounded-xl border border-emerald-200 bg-white px-3 py-2 text-xs font-semibold text-[#106b43] transition-colors hover:bg-emerald-50"
+          className="inline-flex min-h-9 items-center rounded-xl border border-[#0b214a] bg-[#0b214a] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#081a3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b214a]/30"
         >
-          Tokyo hotel base matrix →
+          Tokyo hotel base matrix
         </TrackedInternalLink>
       </div>
     </div>
@@ -1364,11 +1394,13 @@ export default async function GuidePage({ params }: Props) {
           label="Book Shinkansen ticket"
           linkId="shinkansenTicket"
           product="shinkansen_ticket"
-          className="rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3.5 text-[12px] transition-colors hover:border-slate-300 hover:bg-white"
+          className="group flex h-full flex-col rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3.5 text-[12px] shadow-sm shadow-orange-100/60 transition-colors hover:border-[#ff7a00] hover:bg-[#fff8f0]"
         >
           <span className="block font-semibold text-slate-900">Book Shinkansen ticket</span>
           <span className="mt-0.5 block text-slate-500">Reserve after confirming the Fuji-side seat.</span>
-          <span className="mt-3 inline-flex text-[11px] font-semibold text-slate-600">Open Klook →</span>
+          <span className="mt-auto inline-flex w-fit rounded-full border border-[#ff7a00] bg-[#ff7a00] px-3 py-1.5 text-[11px] font-semibold text-white shadow-sm transition-colors group-hover:bg-[#e66700]">
+            Open Klook
+          </span>
         </TrackedAffiliateLink>
         <TrackedInternalLink
           href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
@@ -1376,11 +1408,13 @@ export default async function GuidePage({ params }: Props) {
           placement="guide_continue_planning"
           label="Choose Tokyo hotel base"
           locale={locale}
-          className="rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3.5 text-[12px] transition-colors hover:border-slate-300 hover:bg-white"
+          className="group flex h-full flex-col rounded-2xl border border-[#0b214a] bg-[#0b214a] px-4 py-3.5 text-[12px] shadow-sm shadow-slate-200/70 transition-colors hover:bg-[#081a3a]"
         >
-          <span className="block font-semibold text-slate-900">Choose Tokyo hotel base</span>
-          <span className="mt-0.5 block text-slate-500">Compare famous stations, calmer bases, and luggage logic.</span>
-          <span className="mt-3 inline-flex text-[11px] font-semibold text-slate-600">Open matrix →</span>
+          <span className="block font-semibold text-yellow-300">Choose Tokyo hotel base</span>
+          <span className="mt-0.5 block text-slate-200">Compare famous stations, calmer bases, and luggage logic.</span>
+          <span className="mt-auto inline-flex w-fit rounded-full border border-yellow-300/70 bg-yellow-300 px-3 py-1.5 text-[11px] font-semibold text-[#0b214a] shadow-sm transition-colors group-hover:bg-yellow-200">
+            Open matrix
+          </span>
         </TrackedInternalLink>
         <TrackedCtaLink
           href="/jr-pass-vs-single-ticket"
@@ -1389,11 +1423,13 @@ export default async function GuidePage({ params }: Props) {
           pagePath="/guide"
           locale={locale}
           category="rail"
-          className="rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3.5 text-[12px] transition-colors hover:border-slate-300 hover:bg-white"
+          className="group flex h-full flex-col rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3.5 text-[12px] shadow-sm shadow-amber-100/60 transition-colors hover:border-amber-300 hover:bg-amber-100/70"
         >
           <span className="block font-semibold text-slate-900">Compare JR Pass</span>
           <span className="mt-0.5 block text-slate-500">Check only if your route has several long JR rides.</span>
-          <span className="mt-3 inline-flex text-[11px] font-semibold text-slate-600">Open guide →</span>
+          <span className="mt-auto inline-flex w-fit rounded-full border border-amber-300 bg-white px-3 py-1.5 text-[11px] font-semibold text-amber-800 shadow-sm transition-colors group-hover:bg-amber-50">
+            Open guide
+          </span>
         </TrackedCtaLink>
         <TrackedCtaLink
           href="/how-to-read-japanese-train-signs"
@@ -1402,11 +1438,13 @@ export default async function GuidePage({ params }: Props) {
           pagePath="/guide"
           locale={locale}
           category="station_practice"
-          className="rounded-2xl border border-slate-200 bg-slate-50/80 px-4 py-3.5 text-[12px] transition-colors hover:border-slate-300 hover:bg-white"
+          className="group flex h-full flex-col rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3.5 text-[12px] shadow-sm shadow-sky-100/60 transition-colors hover:border-sky-300 hover:bg-sky-100/70"
         >
           <span className="block font-semibold text-slate-900">Read station signs / practice station navigation</span>
           <span className="mt-0.5 block text-slate-500">Prepare for exits, transfer gates, and platform signs.</span>
-          <span className="mt-3 inline-flex text-[11px] font-semibold text-slate-600">Open train signs guide →</span>
+          <span className="mt-auto inline-flex w-fit rounded-full border border-sky-300 bg-white px-3 py-1.5 text-[11px] font-semibold text-sky-800 shadow-sm transition-colors group-hover:bg-sky-50">
+            Open train signs guide
+          </span>
         </TrackedCtaLink>
       </div>
     </section>
@@ -1515,6 +1553,8 @@ export default async function GuidePage({ params }: Props) {
           </div>
         </section>
 
+        {renderTopBookingCtas()}
+
         {renderEarlyShinkansenHotelStrip()}
 
         {/* Two-column layout on desktop: article + sidebar */}
@@ -1532,53 +1572,6 @@ export default async function GuidePage({ params }: Props) {
           <p>{t("introP1")}</p>
           <p className="mt-2 text-[12px] text-slate-600">{t("introP2")}</p>
         </section>
-
-        <div className="mb-5">
-          <RailDecisionCard
-            sectionLabel={ui.railDecisionLabel}
-            title={ui.bookShinkansenTitle}
-            body={ui.bookShinkansenBody}
-            primaryCta={{
-              label: "Book on Klook",
-              href: KLOOK_URL,
-              provider: "klook",
-              placement: "guide_top_klook_shinkansen",
-              linkId: "shinkansenTicket",
-              product: "shinkansen_ticket",
-              adid: "1265303",
-            }}
-            secondaryCta={{
-              label: "Check on Klook",
-              href: JR_PASS_URL,
-              provider: "klook",
-              placement: "guide_top_klook_jr_pass",
-              linkId: "jrPass",
-              product: "jr_pass",
-              adid: "1165791",
-            }}
-            tertiaryTextLink={
-              OMIO_SHINKANSEN_URL
-                ? {
-                    label: "Compare on Omio",
-                    href: OMIO_SHINKANSEN_URL,
-                    provider: "omio",
-                    placement: "guide_top_omio_compare",
-                    linkId: "omioShinkansen",
-                    product: "route_compare",
-                  }
-                : undefined
-            }
-            secondaryTitle={ui.checkJrPassTitle}
-            secondaryBody={ui.checkJrPassBody}
-            placement="guide_rail_decision"
-            locale={locale}
-            routeType="simple-shinkansen"
-          />
-        </div>
-
-        {renderAfterSeatNextSteps()}
-
-        {renderShinkansenDaySetup()}
 
         {/* TL;DR */}
         <section id="tldr" className="mb-5 text-[13px] lg:text-sm leading-relaxed text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 lg:px-6 lg:py-4 shadow-sm shadow-slate-200/70">
@@ -1821,6 +1814,8 @@ export default async function GuidePage({ params }: Props) {
             {renderHotelBridge()}
             {renderSeatBookingReminder()}
           </section>
+
+          {renderAfterSeatNextSteps()}
 
           <section id="common-mistakes" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
