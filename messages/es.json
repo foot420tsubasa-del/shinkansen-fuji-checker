@@ -4765,5 +4765,244 @@
         "caption": "{area} en paralelo con alternativas cercanas."
       }
     }
+  },
+  "trainSigns": {
+    "meta": {
+      "title": "Cómo leer las señales de tren en Japón: línea, sentido, andén y salida",
+      "description": "Guía práctica para la primera visita a Japón: cómo leer señales de tren, confirmar la línea, el sentido, el andén, el tipo de tren y la salida sin liarte."
+    },
+    "hero": {
+      "pillLabel": "Trenes en Japón — lo básico",
+      "title": "Cómo leer las señales de tren en Japón",
+      "body": "Quien visita por primera vez suele buscar la estación de destino y seguir la primera señal que parece encajar. En Japón eso no basta. Para viajar tranquilo, confirma línea, sentido, tipo de tren, andén y salida en orden.",
+      "mentalEyebrow": "Modelo mental",
+      "mentalSteps": {
+        "line": "1. Nombre de la línea",
+        "direction": "2. Sentido",
+        "type": "3. Tipo de tren",
+        "platform": "4. Andén",
+        "exit": "5. Salida o puerta de transbordo"
+      }
+    },
+    "quick": {
+      "eyebrow": "Respuesta rápida",
+      "title": "No te quedes solo con el nombre de la estación.",
+      "bodyRich": "Para coger trenes en Japón empieza por el nombre de la estación, pero no te quedes ahí. Antes de embarcar confirma estas cinco cosas: <s1>línea</s1>, <s2>sentido</s2>, <s3>tipo de tren</s3>, <s4>andén</s4> y <s5>salida o puerta de transbordo</s5>. Los pasajeros japoneses lo hacen casi automáticamente; los visitantes suelen leer los letreros en ese orden con más calma.",
+      "list": {
+        "lineName": "Línea",
+        "direction": "Sentido",
+        "type": "Tipo de tren",
+        "platform": "Andén",
+        "exit": "Salida o puerta de transbordo"
+      }
+    },
+    "why": {
+      "eyebrow": "Por qué pasa",
+      "title": "Por qué el nombre de la estación no basta",
+      "intro": "Un viaje en tren en Japón no es una sola pregunta —“¿a qué estación voy?”— sino una secuencia de pequeñas confirmaciones. Las grandes estaciones pueden tener varias compañías ferroviarias, varios grupos de tornos, andenes del Shinkansen, pasajes del metro, galerías comerciales, terminales de autobuses y salidas hacia barrios totalmente distintos.",
+      "p1": "Tokyo Station es un buen ejemplo. Es un solo nombre, pero incluye líneas JR convencionales, Tokaido Shinkansen, Tohoku y Joetsu Shinkansen, acceso al metro Marunouchi, el lado Yaesu, el lado Marunouchi, galerías subterráneas, terminales de autobuses y muchas salidas. Si tu hotel está cerca de la Salida Sur Yaesu, llegar al lado Marunouchi no está mal, pero puede sumar una caminata larga justo cuando tienes equipaje y cansancio de vuelo.",
+      "p2": "Shinjuku es aún más extremo. Reúne JR, Odakyu, Keio, Tokyo Metro, Toei Subway y enormes pasajes subterráneos. La gente dice “quedamos en Shinjuku” como si fuera un punto del mapa, pero en la práctica es una máquina de transporte del tamaño de un barrio. Lo mismo ocurre, en menor grado, en Ueno: JR Ueno, Keisei Ueno, Tokyo Metro Ueno y el lado del parque están conectados, pero no son lo mismo. Shin-Osaka es otro caso: es estación de metro y de Shinkansen a la vez, y los letreros cambian según el próximo tren.",
+      "p3": "Kyoto Station parece más sencilla en el mapa, pero igualmente tiene tornos del Shinkansen, andenes JR locales y limited express, acceso al metro, terminal de autobuses y lados distintos de hoteles. Buscar solo “Kyoto Station” sirve para llegar al entorno, no para encontrar el andén correcto ni la salida adecuada.",
+      "p4": "El hábito práctico es cruzar las indicaciones del app con las señales reales de la estación. Si la ruta dice “JR Yamanote Line for Ueno”, busca primero la señal de JR, luego la línea Yamanote, luego el sentido a Ueno. Si la ruta dice “Toei Asakusa Line Airport Express”, no sigas una señal de Tokyo Metro solo porque aparezca el nombre de la estación. El nombre es el destino; la línea y el sentido son el camino."
+    },
+    "mental": {
+      "eyebrow": "Modelo mental",
+      "title": "El modelo mental en 5 pasos",
+      "intro": "No necesitas entender todo el sistema ferroviario. Solo necesitas una checklist repetible para la siguiente decisión.",
+      "steps": {
+        "line": {
+          "title": "1. Encuentra la línea",
+          "body": "Empieza por el nombre de la línea antes de pensar en el destino. Las grandes estaciones combinan líneas JR, metro, ferrocarriles privados y puertas de Shinkansen en un mismo complejo. Si el app dice Tokyo Metro Ginza Line, no sigas una señal de JR solo porque el nombre de la estación te suena.",
+          "examples": "JR Yamanote Line · Tokyo Metro Ginza Line · Toei Asakusa Line · Tokaido Shinkansen"
+        },
+        "direction": {
+          "title": "2. Comprueba el sentido",
+          "body": "El sentido te dice de qué lado de la línea estás. Los letreros japoneses suelen indicar las estaciones grandes del final de la ruta, no cada parada. Aunque vayas solo dos estaciones, sigue el destino mayor que aparece en el cartel del andén.",
+          "examples": "for Shibuya · for Ueno · for Oshiage · for Kyoto · for Shin-Osaka"
+        },
+        "type": {
+          "title": "3. Comprueba el tipo de tren",
+          "body": "El tipo de tren importa porque trenes de la misma línea y sentido pueden no parar en las mismas estaciones. Un Local suele parar en todas; un Rapid o Express se salta paradas; un Limited Express o Airport Express puede requerir billete extra o seguir otro patrón.",
+          "examples": "Local · Rapid · Express · Limited Express · Airport Express · Shinkansen"
+        },
+        "platform": {
+          "title": "4. Comprueba el andén",
+          "body": "Usa el número de andén como confirmación, no como única pista. Los andenes cambian y uno mismo puede recibir trenes distintos según la hora. Antes de subir, verifica línea, sentido, hora y tipo.",
+          "examples": "Andén 3 · Vía 14 · Andenes Shinkansen · Mismo andén, sentidos distintos"
+        },
+        "exit": {
+          "title": "5. Comprueba la salida o la puerta de transbordo",
+          "body": "En Japón, la salida es parte del viaje. Equivocarte de salida en Tokyo Station, Shinjuku Station o Kyoto Station puede dejarte a 10–20 minutos del hotel o del punto de encuentro. Tras bajarte, sigue los nombres, números de salida y puertas de transbordo.",
+          "examples": "Yaesu South Exit · Hachiko Exit · A1 Exit · Portón Shinkansen"
+        }
+      }
+    },
+    "maps": {
+      "eyebrow": "Mapa + señales",
+      "title": "Cómo usar Google Maps con las señales de las estaciones",
+      "intro": "Google Maps es útil en Japón: sobre todo para elegir ruta, calcular tiempo, ver el andén y confirmar la hora de salida. Pero dentro de las estaciones japonesas, hay que cruzar el app con los letreros reales del entorno.",
+      "p1": "El error más común es fiarse solo del número de andén. Ayuda, pero no es una instrucción completa: el mismo andén puede recibir líneas, sentidos o tipos distintos según la hora. Si el app dice Andén 3, úsalo como pista y luego lee el panel encima del andén. Confirma línea, sentido, tipo de tren y hora. Si los cuatro coinciden, puedes subir con mucha más confianza.",
+      "p2": "Otra costumbre importante es comparar el tipo de tren con calma. Google Maps puede mostrar “Rapid” por ser el más rápido. Si pierdes ese Rapid y el siguiente tren del mismo andén es un Express, puede no seguir la misma ruta. Si dudas, espera un momento y mira el destino en el lateral del tren o en el panel sobre el andén. No tienes que memorizar el sistema; solo cotejar con el siguiente cartel.",
+      "p3": "Las salidas también requieren app + letreros reales. Google Maps puede decirte A1, Hachiko Exit, Yaesu South Exit o Central Gate. Dentro de la estación el nombre puede aparecer muchas veces, pero solo si entras al pasillo correcto. Si el número de salida desaparece, párate y busca un panel general de salidas — muchas estaciones tienen planos cerca de los tornos con todas las salidas y las calles cercanas.",
+      "p4": "Si ya pasaste los tornos y sigues perdido en un pasillo subterráneo, suele estar totalmente bien subir a la calle y reiniciar. Es más fácil que resolver el laberinto bajo tierra cansado o con equipaje. Ya fuera, puedes usar puntos de referencia, carteles de calle y de nuevo el app. En Shinjuku, Tokyo, Ueno o Kyoto, subir suma unos minutos, pero reduce confusión y aclara en qué lado de la estación estás.",
+      "footnote": "Mapa y traducción son mucho más fáciles cuando el móvil funciona antes del primer tren. Antes de llegar, guarda la primera ruta, la dirección del hotel y la salida de la estación."
+    },
+    "confusing": {
+      "eyebrow": "Casos confusos",
+      "title": "Situaciones que suelen confundir",
+      "intro": "Estas situaciones confunden a los visitantes, pero son manejables. No necesitas entenderlo todo: solo mira el siguiente cartel.",
+      "cases": {
+        "sameName": {
+          "title": "Mismo nombre, distinta compañía",
+          "body": "Un mismo nombre puede pertenecer a JR, Tokyo Metro, Toei Subway, Keisei, Keikyu, Odakyu, Tobu, Kintetsu, Hankyu u otra compañía. Las estaciones pueden conectarse por debajo, pero suelen tener tornos y andenes propios. Cuando el app dice JR Ueno, Tokyo Metro Ueno o Keisei Ueno, ese detalle cuenta."
+        },
+        "types": {
+          "title": "Local vs Rapid vs Express",
+          "body": "Los Local suelen parar en cada estación. Rapid y Express se saltan algunas. Limited Express puede requerir suplemento, especialmente en ferrocarriles privados o rutas a aeropuertos. Más rápido no siempre es mejor: solo lo es si para donde tú bajas."
+        },
+        "skip": {
+          "title": "Trenes que saltan tu estación",
+          "body": "Es uno de los errores más comunes en la primera visita. Estás en el andén correcto, subes a un tren del sentido correcto y aun así pasas por tu estación porque ese tipo no para. Comprueba el patrón de paradas en el panel del andén o en el app antes de subir."
+        },
+        "transfer": {
+          "title": "Puertas de transbordo",
+          "body": "Una puerta de transbordo no es lo mismo que una salida normal. En grandes estaciones, sobre todo entre JR y Shinkansen o entre compañías, puedes pasar por un portón que te mantiene dentro de la zona de pago. Si sales sin querer, tendrás que reentrar y a veces reajustar el billete."
+        },
+        "exits": {
+          "title": "Múltiples salidas",
+          "body": "Las estaciones japonesas pueden tener muchas salidas porque sirven a barrios enormes. En Shinjuku, salidas distintas se sienten como pueblos distintos. Tokyo Station tiene los lados Marunouchi y Yaesu. El metro usa salidas A1, A2, B3, C... La salida puede importar tanto como la estación."
+        },
+        "shinkansenGate": {
+          "title": "Puertas del Shinkansen dentro de estaciones grandes",
+          "body": "Los portones del Shinkansen suelen estar dentro o al lado de una estación JR más grande. En Tokyo Station, Kyoto Station, Shin-Osaka y Ueno, no te detengas al ver el edificio: sigue las señales “Shinkansen” y luego comprueba el portón de transbordo, el torno, el andén, el número de coche y la zona de asientos."
+        },
+        "airport": {
+          "title": "Trenes de aeropuerto y rutas con ramales",
+          "body": "Los trenes de aeropuerto despistan porque una línea puede bifurcarse, continuar con otro nombre de ferrocarril o tener servicios distintos en las mismas vías. Narita, Haneda, Asakusa, Oshiage, Shinagawa, Ueno y Shinjuku aparecen en distintas rutas. Confirma nombre del tren y destino antes de subir."
+        },
+        "reserved": {
+          "title": "Confusión entre asiento reservado y no reservado",
+          "body": "En el Shinkansen y en algunos Limited Express, las zonas reservadas y no reservadas pueden estar en coches distintos. Tu billete puede indicar coche y asiento, o permitir solo asiento no reservado. Antes de subir, verifica los letreros de número de coche en el andén."
+        }
+      }
+    },
+    "shinkansen": {
+      "eyebrow": "Shinkansen",
+      "title": "Nota específica sobre el Shinkansen",
+      "intro": "Una vez entendido el orden, el Shinkansen es más sencillo que muchas estaciones locales — los trenes de larga distancia tienen horarios, andenes, coches y asientos claros. Pero conserva sus propios letreros.",
+      "p1Rich": "Para el Shinkansen, comprueba <b1>nombre del tren</b1>, <b2>hora de salida</b2>, <b3>andén</b3>, <b4>número de coche</b4>, <b5>asiento reservado</b5>, <b6>zona de asiento libre</b6> y, en el Tokaido Shinkansen, el <b7>asiento del lado del Monte Fuji</b7>. Nombres como Nozomi, Hikari y Kodama importan porque paran en estaciones distintas. La hora importa porque varios trenes pueden salir hacia destinos similares en pocos minutos.",
+      "p2Rich": "Si vas a comprar Tokio-Kioto, lee primero la <link1>guía del billete Shinkansen Tokio-Kioto</link1>. Si dudas con un pase ferroviario, compara <link2>JR Pass vs billetes sueltos</link2>. Para elegir asiento, empieza por la <link3>guía del asiento del Monte Fuji</link3> y luego usa el <link4>hub de guías de asiento del Shinkansen</link4>. Si vas hacia el oeste desde Tokio, la <link5>guía Tokio-Kioto del asiento Monte Fuji</link5> explica los detalles.",
+      "ctas": {
+        "seatChecker": "Comprueba tu asiento Shinkansen del lado del Monte Fuji",
+        "fullGuide": "Leer la guía completa de asientos del Shinkansen"
+      }
+    },
+    "before": {
+      "eyebrow": "Antes de subir",
+      "title": "Checklist antes de subir",
+      "intro": "Repasa esta checklist antes de subir al tren. Tarda menos de un minuto y evita la mayoría de errores.",
+      "checklist": {
+        "line": "¿Estoy en la línea correcta?",
+        "direction": "¿Voy en el sentido correcto?",
+        "stops": "¿Para este tren en mi estación?",
+        "platform": "¿Es el andén correcto?",
+        "exit": "¿Sé qué salida o puerta de transbordo seguir?",
+        "internet": "¿Tengo internet para mapa y traducción?",
+        "shinkansen": "Si tomo el Shinkansen, ¿sé mi coche y mi asiento?"
+      },
+      "practical": {
+        "eyebrow": "Siguiente paso práctico",
+        "title": "Prueba Station Practice antes de tu primer viaje",
+        "body": "Tras entender los letreros, practica salidas, puertas de transbordo, andenes y recuperación de ruta errónea en una misión rápida de navegación.",
+        "start": "Iniciar Station Practice",
+        "chooseHotel": "Elegir base hotelera",
+        "airport": "Comprobar traslado al aeropuerto",
+        "esim": "Conseguir eSIM antes de llegar"
+      }
+    },
+    "priority": {
+      "eyebrow": "Etiqueta en trenes locales",
+      "title": "Asientos prioritarios (優先席)",
+      "intro": "Un detalle que conviene reconocer en los trenes locales antes de moverte por Tokio, Kioto u Osaka.",
+      "p1": "En los trenes locales se ven asientos marcados 優先席 (yūsen-seki), normalmente cerca de las puertas. Están pensados para personas mayores, embarazadas, personas con discapacidad, personas heridas o enfermas y quienes viajan con niños pequeños.",
+      "p2": "Como visitante, la regla más simple es: evita los asientos prioritarios si no los necesitas. Si te sientas en uno con el tren lleno, estate listo para levantarte de inmediato cuando suba alguien que pueda necesitarlo.",
+      "p3": "Busca las pegatinas de asiento prioritario cerca de las ventanas o sobre los asientos. Algunos trenes también utilizan tapizado diferente, agarraderas distintas o marcas en el suelo alrededor de la zona prioritaria."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes sobre señales de tren en Japón",
+      "items": {
+        "hard": {
+          "q": "¿Es difícil usar los trenes en Japón como turista?",
+          "a": "No es difícil si sigues los letreros en orden. El sistema es detallado pero coherente. No intentes entender toda la estación a la vez: confirma línea, sentido, tipo de tren, andén y salida paso a paso."
+        },
+        "maps": {
+          "q": "¿Sigo Google Maps o las señales de la estación?",
+          "a": "Usa ambos. Google Maps ayuda a planificar ruta, andén y horario. Dentro de la estación, contrasta esa información con los letreros reales — andenes, salidas y tipos de tren todavía requieren confirmación."
+        },
+        "types": {
+          "q": "¿Qué diferencia hay entre Local, Rapid y Express?",
+          "a": "Los Local suelen parar en cada estación. Rapid y Express se saltan algunas. Limited Express se saltan más y pueden requerir billete extra. Comprueba siempre si el tren para en tu destino."
+        },
+        "stops": {
+          "q": "¿Cómo sé si un tren para en mi estación?",
+          "a": "Mira el patrón de paradas en tu app de transporte, el panel del andén o el mapa de la línea. Si tu estación no aparece para ese tipo de tren, espera un Local u otro servicio que sí pare."
+        },
+        "shinkansen": {
+          "q": "¿Qué debo comprobar antes de subir al Shinkansen?",
+          "a": "Comprueba nombre del tren, hora, andén, número de coche, zona reservada o no reservada y tu asiento. Para ver el Monte Fuji en el Tokaido Shinkansen, comprueba también el asiento del lado Fuji antes de reservar."
+        },
+        "exits": {
+          "q": "¿Por qué hay tantas salidas en las estaciones japonesas?",
+          "a": "Las estaciones grandes sirven a barrios enormes, grandes almacenes, galerías subterráneas, terminales de autobús, torres de oficinas y varias compañías ferroviarias. Las salidas se numeran o se nombran para llegar al lado correcto sin caminar mucho por fuera."
+        },
+        "internet": {
+          "q": "¿Necesito internet para usar trenes en Japón?",
+          "a": "Puedes usar los trenes sin internet, pero los datos móviles facilitan mucho el primer viaje. Mapa, traducción, cambios de andén e indicaciones de salida son mucho más cómodos cuando el móvil funciona al aterrizar."
+        }
+      }
+    },
+    "suggested": {
+      "eyebrow": "Próximos pasos sugeridos",
+      "cards": {
+        "seat": {
+          "title": "Comprueba tu asiento Shinkansen del Monte Fuji",
+          "desc": "Usa el verificador gratuito antes de reservar."
+        },
+        "jrPass": {
+          "title": "Compara JR Pass vs billetes sueltos",
+          "desc": "Decide si el pase encaja en tu ruta."
+        },
+        "beforeShinkansen": {
+          "title": "Dónde alojarse antes del Shinkansen",
+          "desc": "Evita transbordos complicados con equipaje."
+        },
+        "airport": {
+          "title": "Compara el traslado al aeropuerto",
+          "desc": "Planifica el primer tren o bus tras aterrizar."
+        },
+        "itinerary": {
+          "title": "Abrir itinerario de 7 días en Japón",
+          "desc": "Pon trenes, hoteles y visitas en orden."
+        }
+      }
+    },
+    "sidebar": {
+      "remember": {
+        "eyebrow": "Recuerda",
+        "body": "No resuelvas toda la estación. Resuelve el siguiente letrero: línea, sentido, tipo de tren, andén, salida."
+      },
+      "plan": {
+        "title": "Planifica lo esencial",
+        "desc": "Decisiones de eSIM, traslado, tren y alojamiento."
+      },
+      "airport": {
+        "title": "Guía de traslado al aeropuerto",
+        "desc": "Reduce el estrés de la primera estación."
+      }
+    },
+    "share": {
+      "title": "Cómo leer las señales de tren en Japón",
+      "description": "¿Conoces a alguien que va a Japón por primera vez? Comparte esta guía de señales de tren."
+    }
   }
 }

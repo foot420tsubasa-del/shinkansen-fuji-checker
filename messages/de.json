@@ -4764,5 +4764,244 @@
         "caption": "{area} im direkten Vergleich mit Alternativen in der Nähe."
       }
     }
+  },
+  "trainSigns": {
+    "meta": {
+      "title": "Japanische Bahnschilder lesen: Linie, Richtung, Bahnsteig und Ausgang",
+      "description": "Praktischer Guide für Japan-Erstbesucher: Bahnschilder lesen und Linie, Richtung, Bahnsteig, Zugtyp und Ausgang prüfen, ohne sich zu verlaufen."
+    },
+    "hero": {
+      "pillLabel": "Japan-Bahn-Basics",
+      "title": "Japanische Bahnschilder lesen",
+      "body": "Erstbesucher suchen oft nur den Zielbahnhof und folgen dem ersten passenden Schild. In Japan reicht das nicht. Ruhig fährst du, wenn du Linie, Richtung, Zugtyp, Bahnsteig und Ausgang in dieser Reihenfolge prüfst.",
+      "mentalEyebrow": "Denkmodell",
+      "mentalSteps": {
+        "line": "1. Linienname",
+        "direction": "2. Richtung",
+        "type": "3. Zugtyp",
+        "platform": "4. Bahnsteignummer",
+        "exit": "5. Ausgang oder Umsteige-Tor"
+      }
+    },
+    "quick": {
+      "eyebrow": "Schnelle Antwort",
+      "title": "Verlass dich nicht nur auf den Bahnhofsnamen.",
+      "bodyRich": "Für japanische Züge schaust du zuerst auf den Bahnhofsnamen — bleibst dort aber nicht stehen. Bestätige vor dem Einsteigen fünf Dinge: <s1>Linienname</s1>, <s2>Richtung</s2>, <s3>Zugtyp</s3>, <s4>Bahnsteignummer</s4> und <s5>Ausgang oder Umsteige-Tor</s5>. Japanische Pendler machen das fast automatisch — Besucher lesen die Schilder in derselben Reihenfolge, nur langsamer.",
+      "list": {
+        "lineName": "Linienname",
+        "direction": "Richtung",
+        "type": "Zugtyp",
+        "platform": "Bahnsteignummer",
+        "exit": "Ausgang oder Umsteige-Tor"
+      }
+    },
+    "why": {
+      "eyebrow": "Warum das passiert",
+      "title": "Warum der Bahnhofsname nicht reicht",
+      "intro": "Eine japanische Zugfahrt ist nicht eine einzelne Frage — “In welchen Bahnhof fahre ich?” — sondern eine Folge kleinerer Bestätigungen. Große Bahnhöfe können mehrere Bahnunternehmen, mehrere Ticketgate-Bereiche, Shinkansen-Bahnsteige, U-Bahn-Passagen, Ladenebenen, Busterminals und Ausgänge zu völlig verschiedenen Vierteln vereinen.",
+      "p1": "Tokyo Station ist ein gutes Beispiel. Ein einziger Name, der aber konventionelle JR-Linien, den Tokaido-Shinkansen, Tohoku- und Joetsu-Shinkansen, den Zugang zur Marunouchi-U-Bahn, die Yaesu- und Marunouchi-Seite, unterirdische Einkaufspassagen, Busterminals und viele Ausgänge umfasst. Liegt dein Hotel am Yaesu South Exit, ist die Marunouchi-Seite nicht falsch, kostet aber im ungünstigsten Moment einen langen Fußweg — mit Gepäck und Flugmüdigkeit.",
+      "p2": "Shinjuku ist noch extremer: JR, Odakyu, Keio, Tokyo Metro, Toei Subway und riesige unterirdische Passagen. “Treffen wir uns am Shinjuku-Bahnhof” klingt nach einem Punkt auf der Karte, in Wirklichkeit ist es eine ganze Verkehrsmaschine. Ähnlich, aber sanfter, in Ueno — JR Ueno, Keisei Ueno, Tokyo Metro Ueno und die Parkseite sind verbunden, aber nicht identisch. Shin-Osaka ist nochmal anders: gleichzeitig U-Bahn- und Shinkansen-Station; welchen Schildern du folgst, hängt vom nächsten Zug ab.",
+      "p3": "Kyoto Station wirkt auf der Karte einfacher, hat aber dennoch Shinkansen-Gates, JR-Bahnsteige für Nahverkehr und Limited Express, U-Bahn-Zugang, Busterminals und unterschiedliche Hotelseiten. Nur “Kyoto Station” zu suchen, bringt dich in die Nähe — nicht zum richtigen Bahnsteig oder Ausgang.",
+      "p4": "Praktischer Reflex: App-Anweisungen mit echten Bahnhofsschildern abgleichen. Sagt die Route “JR Yamanote Line for Ueno”, suchst du erst JR, dann Yamanote, dann Richtung Ueno. Sagt sie “Toei Asakusa Line Airport Express”, folge nicht einem Tokyo-Metro-Schild, nur weil der Bahnhofsname dort steht. Der Bahnhof ist das Ziel; Linie und Richtung sind der Weg."
+    },
+    "mental": {
+      "eyebrow": "Denkmodell",
+      "title": "Das 5-Schritt-Denkmodell",
+      "intro": "Du musst nicht das ganze Bahnnetz verstehen. Du brauchst nur eine wiederholbare Checkliste für die nächste Entscheidung.",
+      "steps": {
+        "line": {
+          "title": "1. Linie finden",
+          "body": "Starte mit dem Linienname, nicht mit dem Ziel. Große Bahnhöfe vereinen JR-, U-Bahn-, Privatbahn- und Shinkansen-Gates im selben Komplex. Sagt deine App “Tokyo Metro Ginza Line”, folge keinem JR-Schild, nur weil dir der Stationsname bekannt vorkommt.",
+          "examples": "JR Yamanote · Tokyo Metro Ginza · Toei Asakusa · Tokaido Shinkansen"
+        },
+        "direction": {
+          "title": "2. Richtung prüfen",
+          "body": "Die Richtung sagt dir, welche Seite der Linie du brauchst. Japanische Schilder nennen oft die großen Endbahnhöfe, nicht jeden kleinen Halt. Selbst für zwei Stationen folgst du dem größeren Ziel auf dem Bahnsteigschild.",
+          "examples": "Richtung Shibuya · Ueno · Oshiage · Kyoto · Shin-Osaka"
+        },
+        "type": {
+          "title": "3. Zugtyp prüfen",
+          "body": "Der Zugtyp ist wichtig, denn auf derselben Linie und Richtung halten Züge unterschiedlich. Ein Local hält überall, Rapid / Express überspringen kleinere Halte, Limited Express oder Airport Express brauchen oft ein Extra-Ticket und haben ein eigenes Haltemuster.",
+          "examples": "Local · Rapid · Express · Limited Express · Airport Express · Shinkansen"
+        },
+        "platform": {
+          "title": "4. Bahnsteig prüfen",
+          "body": "Nimm die Bahnsteignummer als Bestätigung, nicht als einzigen Hinweis. Bahnsteige können wechseln, derselbe Bahnsteig kann zu verschiedenen Zeiten andere Züge bedienen. Vor dem Einsteigen Linie, Richtung, Abfahrtszeit und Zugtyp abgleichen.",
+          "examples": "Bahnsteig 3 · Gleis 14 · Shinkansen-Gleise · Gleicher Bahnsteig, andere Richtung"
+        },
+        "exit": {
+          "title": "5. Ausgang oder Umsteige-Tor prüfen",
+          "body": "In Japan ist der Ausgang Teil der Reise. Der falsche Ausgang an Tokyo Station, Shinjuku oder Kyoto kostet schnell 10–20 Minuten zum Hotel oder Treffpunkt. Nach dem Aussteigen Ausgangsnamen, -nummern und Umsteige-Tore beachten.",
+          "examples": "Yaesu South Exit · Hachiko Exit · Ausgang A1 · Shinkansen-Umsteige-Tor"
+        }
+      }
+    },
+    "maps": {
+      "eyebrow": "Karten plus Schilder",
+      "title": "Google Maps mit Bahnhofsschildern kombinieren",
+      "intro": "Google Maps ist in Japan nützlich — vor allem für Route, Zeit, Bahnsteignummer und Abfahrtszeit. Innerhalb des Bahnhofs gleichst du die App aber immer mit den realen Schildern ab.",
+      "p1": "Der häufigste Fehler ist, nur auf die Bahnsteignummer zu vertrauen. Sie ist ein Hinweis, keine vollständige Anweisung — derselbe Bahnsteig kann zu unterschiedlichen Zeiten andere Linien, Richtungen oder Zugtypen bedienen. Sagt deine App Bahnsteig 3, nimm das als Hinweis und lies dann die Abfahrtstafel über dem Bahnsteig. Linie, Richtung, Zugtyp und Abfahrtszeit bestätigen — stimmt das, kannst du viel sicherer einsteigen.",
+      "p2": "Ein weiterer wichtiger Reflex: den Zugtyp genau vergleichen. Google Maps zeigt vielleicht “Rapid”, weil er am schnellsten ist. Verpasst du diesen Rapid und der nächste Zug am selben Bahnsteig ist ein Express, ist es vielleicht nicht dieselbe Route. Im Zweifel kurz warten und das Ziel an der Zugflanke oder am Bahnsteigbildschirm prüfen. Du musst das Bahnsystem nicht auswendig lernen — du gleichst nur das nächste Schild ab.",
+      "p3": "Auch bei Ausgängen müssen App und Schilder zusammenspielen. Google Maps nennt vielleicht A1, Hachiko Exit, Yaesu South Exit oder Central Gate. Im Bahnhof taucht der Ausgangsname mehrfach auf, aber erst, wenn du den richtigen Gang nimmst. Verschwindet die Ausgangsnummer: stehenbleiben und nach einer Ausgangs-Übersichtstafel suchen. Viele Bahnhöfe haben nahe den Schranken Pläne mit allen Ausgängen und Straßen.",
+      "p4": "Bist du schon durch die Schranken und steckst in einem tiefen Untergeschoss-Gang fest, ist es oft völlig okay, einfach an die Oberfläche zu gehen und neu zu starten. Das ist leichter, als müde oder mit Gepäck einen Untergrund-Irrgarten zu lösen. Draußen helfen Landmarken, Straßenschilder und deine App wieder weiter. In Shinjuku, Tokio, Ueno oder Kyoto kosten ein paar Minuten ans Tageslicht zwar Zeit, reduzieren aber Verwirrung und zeigen, auf welcher Seite des Bahnhofs du bist.",
+      "footnote": "Karten und Übersetzung sind viel einfacher, wenn das Handy schon vor der ersten Zugfahrt funktioniert. Speichere vor der Ankunft erste Route, Hoteladresse und Bahnhofsausgang."
+    },
+    "confusing": {
+      "eyebrow": "Verwirrende Fälle",
+      "title": "Häufige Stolperfallen",
+      "intro": "Diese Situationen verwirren Besucher, sind aber lösbar. Du musst nicht alles verstehen — prüfe nur das nächste Schild.",
+      "cases": {
+        "sameName": {
+          "title": "Gleicher Bahnhofsname, anderes Unternehmen",
+          "body": "Ein Bahnhofsname kann von JR, Tokyo Metro, Toei, Keisei, Keikyu, Odakyu, Tobu, Kintetsu, Hankyu oder anderen geteilt werden. Unterirdisch verbunden, oben aber oft mit eigenen Schranken und Bahnsteigen. Wenn die App JR Ueno, Tokyo Metro Ueno oder Keisei Ueno sagt, zählt dieser Zusatz."
+        },
+        "types": {
+          "title": "Local vs Rapid vs Express",
+          "body": "Local-Züge halten meist überall, Rapid und Express lassen Halte aus, Limited Express verlangt — besonders auf Privatbahnen und Flughafenrouten — oft Aufpreis. Schneller ist nicht automatisch besser — nur, wenn der Zug an deinem Halt stoppt."
+        },
+        "skip": {
+          "title": "Züge, die deinen Halt überspringen",
+          "body": "Einer der häufigsten Fehler beim ersten Mal: richtiger Bahnsteig, richtige Richtung — und der Zug fährt trotzdem an deinem Halt vorbei, weil dieser Zugtyp dort nicht hält. Vor dem Einsteigen das Haltemuster auf dem Bahnsteigbildschirm oder in der App prüfen."
+        },
+        "transfer": {
+          "title": "Umsteige-Tore",
+          "body": "Ein Umsteige-Tor ist kein normaler Ausgang. In großen Bahnhöfen — vor allem zwischen JR und Shinkansen oder zwischen Unternehmen — leitet es dich innerhalb der bezahlten Zone weiter. Verlässt du den Bahnhof versehentlich, musst du neu rein und ggf. den Fahrpreis nachregeln."
+        },
+        "exits": {
+          "title": "Viele Ausgänge",
+          "body": "Japanische Bahnhöfe haben oft viele Ausgänge, weil sie ganze Stadtteile bedienen. Shinjuku wirkt je nach Ausgang wie andere Städte. Tokyo Station hat Marunouchi- und Yaesu-Seite. U-Bahnen nutzen A1, A2, B3, C… Der Ausgang kann genauso wichtig sein wie der Bahnhof."
+        },
+        "shinkansenGate": {
+          "title": "Shinkansen-Gates in großen Bahnhöfen",
+          "body": "Shinkansen-Gates liegen oft in oder neben einem größeren JR-Bahnhof. In Tokyo Station, Kyoto Station, Shin-Osaka und Ueno: nicht stehenbleiben, sobald du das Gebäude siehst. Den “Shinkansen”-Schildern folgen, dann Umsteige-Tor, Einstiegsschranken, Bahnsteig, Wagennummer und Sitzbereich prüfen."
+        },
+        "airport": {
+          "title": "Flughafenzüge und verzweigte Linien",
+          "body": "Flughafenzüge sind tricky: Eine Linie kann sich teilen, unter anderem Bahnnamen weiterfahren oder verschiedene Services auf denselben Gleisen haben. Narita, Haneda, Asakusa, Oshiage, Shinagawa, Ueno und Shinjuku tauchen alle in Flughafenrouten auf. Vor dem Einsteigen Zugname und Ziel bestätigen."
+        },
+        "reserved": {
+          "title": "Verwechslung Reserviert vs. Nicht reserviert",
+          "body": "Im Shinkansen und einigen Limited Express liegen reservierte und nicht reservierte Bereiche oft in unterschiedlichen Wagen. Dein Ticket nennt evtl. Wagen- und Sitznummer, oder erlaubt nur den Nicht-reserviert-Bereich. Vor dem Einsteigen die Wagennummer-Schilder am Bahnsteig prüfen."
+        }
+      }
+    },
+    "shinkansen": {
+      "eyebrow": "Shinkansen",
+      "title": "Hinweis speziell zum Shinkansen",
+      "intro": "Hat man die Reihenfolge verstanden, ist der Shinkansen oft einfacher als manche Nahverkehrsbahnhöfe — Abfahrt, Bahnsteig, Wagen und Platz sind klar. Eigene Schilder hat er trotzdem.",
+      "p1Rich": "Beim Shinkansen prüfst du <b1>Zugname</b1>, <b2>Abfahrtszeit</b2>, <b3>Bahnsteig</b3>, <b4>Wagennummer</b4>, <b5>reservierten Platz</b5>, <b6>Nicht-reserviert-Bereich</b6> und auf dem Tokaido-Shinkansen den <b7>Fuji-Seiten-Platz</b7>. Namen wie Nozomi, Hikari und Kodama zählen — sie halten unterschiedlich. Auch die Abfahrtszeit zählt: Mehrere Züge zu ähnlichen Zielen können nur wenige Minuten auseinanderliegen.",
+      "p2Rich": "Für Tokio–Kyoto lies zuerst den <link1>Tokio–Kyoto-Shinkansen-Ticketguide</link1>. Beim Bahnpass-Vergleich nimm <link2>JR Pass vs Einzeltickets</link2>. Für die Sitzwahl mit dem <link3>Fuji-Sitz-Guide</link3> starten und dann den <link4>Shinkansen-Sitz-Guide-Hub</link4> nutzen. Wer von Tokio nach Westen fährt: der <link5>Tokio–Kyoto-Fuji-Sitz-Guide</link5> nennt die Details.",
+      "ctas": {
+        "seatChecker": "Prüfe deinen Fuji-Seiten-Shinkansen-Platz",
+        "fullGuide": "Vollständigen Shinkansen-Sitz-Guide lesen"
+      }
+    },
+    "before": {
+      "eyebrow": "Vor dem Einsteigen",
+      "title": "Checkliste vor dem Einsteigen",
+      "intro": "Geh diese Liste vor dem Einsteigen durch. Unter einer Minute — und die meisten Fehler sind vermieden.",
+      "checklist": {
+        "line": "Bin ich auf der richtigen Linie?",
+        "direction": "Fahre ich in die richtige Richtung?",
+        "stops": "Hält dieser Zug an meinem Halt?",
+        "platform": "Ist das der richtige Bahnsteig?",
+        "exit": "Weiß ich, welchem Ausgang oder Umsteige-Tor ich folgen muss?",
+        "internet": "Habe ich Internet für Karten und Übersetzung?",
+        "shinkansen": "Beim Shinkansen: kenne ich Wagen und Platz?"
+      },
+      "practical": {
+        "eyebrow": "Praktischer nächster Schritt",
+        "title": "Vor der ersten Fahrt: Station Practice ausprobieren",
+        "body": "Wenn die Schilder klar sind, übe Ausgänge, Umsteige-Tore, Bahnsteige und Routenkorrektur in einer kurzen Bahnhofs-Mission.",
+        "start": "Station Practice starten",
+        "chooseHotel": "Hotelbasis wählen",
+        "airport": "Flughafentransfer prüfen",
+        "esim": "eSIM vor Ankunft holen"
+      }
+    },
+    "priority": {
+      "eyebrow": "Etikette im Nahverkehr",
+      "title": "Priority Seats (優先席)",
+      "intro": "Ein kleines Detail im Nahverkehr, das du erkennen solltest, bevor du in Tokio, Kyoto oder Osaka unterwegs bist.",
+      "p1": "In Nahverkehrszügen findest du nahe der Türen Sitze mit der Markierung 優先席 (yūsen-seki). Sie sind gedacht für ältere Fahrgäste, Schwangere, Menschen mit Behinderung, verletzte oder kranke Fahrgäste und Reisende mit kleinen Kindern.",
+      "p2": "Als Besucher gilt die einfachste Regel: Lass Priority Seats frei, wenn du sie nicht brauchst. Wenn du dich im vollen Zug doch hinsetzt, sei bereit, sofort aufzustehen, sobald jemand zusteigt, der den Platz brauchen könnte.",
+      "p3": "Achte auf die Priority-Seat-Aufkleber an den Fenstern oder über den Sitzen. Manche Züge verwenden im Priority-Bereich außerdem andere Sitzbezüge, andere Haltegurte oder Bodenmarkierungen."
+    },
+    "faq": {
+      "title": "FAQ — Japanische Bahnschilder",
+      "items": {
+        "hard": {
+          "q": "Ist es als Tourist schwer, Züge in Japan zu nutzen?",
+          "a": "Nicht schwer, wenn du den Schildern der Reihe nach folgst. Das System ist detailliert, aber konsistent. Versuch nicht, den ganzen Bahnhof auf einmal zu verstehen — bestätige Linie, Richtung, Zugtyp, Bahnsteig und Ausgang Schritt für Schritt."
+        },
+        "maps": {
+          "q": "Soll ich Google Maps oder den Bahnhofsschildern folgen?",
+          "a": "Beides. Google Maps hilft bei Route, Bahnsteig und Abfahrt. Im Bahnhof gleichst du das mit den echten Schildern ab — Bahnsteige, Ausgänge und Zugtypen brauchen weiterhin Bestätigung."
+        },
+        "types": {
+          "q": "Was unterscheidet Local, Rapid und Express?",
+          "a": "Local hält meist überall, Rapid und Express überspringen Halte, Limited Express noch mehr und braucht oft ein Extra-Ticket. Immer prüfen, ob der Zug am Ziel hält."
+        },
+        "stops": {
+          "q": "Wie weiß ich, ob ein Zug an meinem Halt stoppt?",
+          "a": "Schaue im Transit-App, auf die Abfahrtstafel oder auf den Streckenplan am Bahnsteig. Steht dein Halt nicht beim Zugtyp, warte auf einen Local oder einen anderen Zug, der dort hält."
+        },
+        "shinkansen": {
+          "q": "Was vor dem Einsteigen in den Shinkansen prüfen?",
+          "a": "Prüfe Zugname, Abfahrt, Bahnsteig, Wagennummer, reservierten/nicht reservierten Bereich und Platz. Wer auf dem Tokaido-Shinkansen den Fuji sehen will, prüft vor der Buchung den Fuji-Seiten-Platz."
+        },
+        "exits": {
+          "q": "Warum haben japanische Bahnhöfe so viele Ausgänge?",
+          "a": "Große Bahnhöfe bedienen ganze Stadtteile, Kaufhäuser, Untergrund-Malls, Busterminals, Bürotürme und mehrere Bahnen. Ausgänge sind nummeriert oder benannt, damit man oben nicht weit laufen muss."
+        },
+        "internet": {
+          "q": "Brauche ich Internet, um in Japan Zug zu fahren?",
+          "a": "Du kannst Züge auch ohne Internet nutzen — mobiles Datenvolumen macht die erste Fahrt aber viel angenehmer. Karten, Übersetzung, Bahnsteigänderungen und Ausgangshinweise sind viel entspannter, wenn das Handy gleich nach der Landung funktioniert."
+        }
+      }
+    },
+    "suggested": {
+      "eyebrow": "Empfohlene nächste Schritte",
+      "cards": {
+        "seat": {
+          "title": "Shinkansen-Fuji-Sitz prüfen",
+          "desc": "Vor der Buchung den kostenlosen Checker nutzen."
+        },
+        "jrPass": {
+          "title": "JR Pass vs Einzeltickets vergleichen",
+          "desc": "Entscheide, ob ein Pass zur Route passt."
+        },
+        "beforeShinkansen": {
+          "title": "Wo vor dem Shinkansen übernachten",
+          "desc": "Vermeide schwierige Umstiege mit Gepäck."
+        },
+        "airport": {
+          "title": "Flughafentransfer vergleichen",
+          "desc": "Den ersten Zug oder Bus nach der Landung planen."
+        },
+        "itinerary": {
+          "title": "7-Tage-Japan-Reiseplan öffnen",
+          "desc": "Züge, Hotels und Sightseeing in Reihenfolge bringen."
+        }
+      }
+    },
+    "sidebar": {
+      "remember": {
+        "eyebrow": "Merken",
+        "body": "Versuch nicht, den ganzen Bahnhof zu lösen — nur das nächste Schild: Linie, Richtung, Zugtyp, Bahnsteig, Ausgang."
+      },
+      "plan": {
+        "title": "Reise-Essentials planen",
+        "desc": "Entscheidungen zu eSIM, Transfer, Bahn und Hotel."
+      },
+      "airport": {
+        "title": "Flughafentransfer-Guide",
+        "desc": "Damit der erste Bahnhof entspannter wird."
+      }
+    },
+    "share": {
+      "title": "Japanische Bahnschilder lesen",
+      "description": "Kennst du jemanden auf erstem Japan-Trip? Teil diesen Bahnschilder-Guide."
+    }
   }
 }
