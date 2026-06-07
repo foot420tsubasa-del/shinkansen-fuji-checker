@@ -1072,8 +1072,8 @@
       "whyVisit": "当 Tokyo 显得太吵时，Kiyosumi-Shirakawa 很有用。這里有獨立咖啡館、經典庭園、小型博物館，以及仍帶住宅感的街道，適合安排一个踏實的東侧早晨。",
       "route": [
         "在 Kiyosumi-Shirakawa Station 附近喝咖啡",
-        "Kiyosumi Garden",
-        "Fukagawa Edo Museum",
+        "清澄庭園",
+        "深川江戶資料館",
         "Museum of Contemporary Art Tokyo 或河邊散步",
         "繼續前往 Monzen-Nakacho 或 Ryogoku"
       ],
@@ -1098,23 +1098,23 @@
       "shouldStay": "如果你已經解決基本動線，想要安靜的在地據點，可以住這裡。第一次抵達 Tokyo 的晚上，Shinjuku、Ueno、Asakusa 或 Tokyo Station 通常更簡單。",
       "nearby": [
         {
-          "title": "Tokyo Station",
+          "title": "東京站",
           "description": "適合 Shinkansen 出發和簡單動線。",
           "href": "/areas-to-stay/tokyo-first-time"
         },
         {
-          "title": "Asakusa",
+          "title": "淺草",
           "description": "傳統觀光和旅遊設施更方便。",
           "href": "/areas-to-stay/tokyo-first-time"
         },
         {
-          "title": "Ueno",
+          "title": "上野",
           "description": "飯店較實惠，Narita 交通方便。",
           "href": "/areas-to-stay/tokyo-first-time"
         },
         {
           "title": "East Tokyo 飯店",
-          "description": "Klook links coming soon.",
+          "description": "Klook 連結即將推出。",
           "href": "/local-tokyo"
         }
       ],
@@ -1174,12 +1174,12 @@
       "shouldStay": "適合再訪旅客，或比起景點密度更重視設計的人。第一次來通常住 Asakusa 或 Ueno 更簡單。",
       "nearby": [
         {
-          "title": "Asakusa",
+          "title": "淺草",
           "description": "飯店、餐飲和交通選擇更多。",
           "href": "/areas-to-stay/tokyo-first-time"
         },
         {
-          "title": "Ueno",
+          "title": "上野",
           "description": "價格友好，Narita 交通方便。",
           "href": "/areas-to-stay/tokyo-first-time"
         },
@@ -1331,12 +1331,12 @@
       "shouldStay": "Oshiage 是 Asakusa 的實用平價替代選擇。飯店通常更便宜，機場交通直接，Asakusa 也很近。",
       "nearby": [
         {
-          "title": "Asakusa",
+          "title": "淺草",
           "description": "飯店、餐飲和交通選擇更多。",
           "href": "/areas-to-stay/tokyo-first-time"
         },
         {
-          "title": "Ueno",
+          "title": "上野",
           "description": "價格友好，Narita 交通方便。",
           "href": "/areas-to-stay/tokyo-first-time"
         },
@@ -1385,7 +1385,7 @@
       "imageAlt": "Ryogoku 街區",
       "bestFor": [
         "相扑文化",
-        "Edo-Tokyo Museum",
+        "江戶東京博物館",
         "歷史散步",
         "河景"
       ],
@@ -1407,17 +1407,17 @@
       "shouldStay": "Ryogoku 更適合作為半日目的地，而不是住宿據點。飯店選擇少於 Asakusa 或 Ueno，晚上也更安靜。",
       "nearby": [
         {
-          "title": "Asakusa",
+          "title": "淺草",
           "description": "飯店、餐飲和交通選擇更多。",
           "href": "/areas-to-stay/tokyo-first-time"
         },
         {
-          "title": "Ueno",
+          "title": "上野",
           "description": "價格友好，Narita 交通方便。",
           "href": "/areas-to-stay/tokyo-first-time"
         },
         {
-          "title": "Kiyosumi-Shirakawa",
+          "title": "清澄白河",
           "description": "把歷史或購物與咖啡、庭園搭配。",
           "href": "/local-tokyo/kiyosumi-shirakawa"
         },
@@ -1483,17 +1483,17 @@
       "shouldStay": "如果機場交通、安靜飯店和移動效率比夜生活更重要，可以住這裡。它特別適合長途飛行後的第一晚、機場巴士前的最後一晚，或想靠近 Tokyo Station 但不想支付 Tokyo Station 價格的旅人。",
       "nearby": [
         {
-          "title": "Tokyo Station",
+          "title": "東京站",
           "description": "適合 Shinkansen 出發和直接城市動線。",
           "href": "/areas-to-stay/tokyo-first-time"
         },
         {
-          "title": "Kiyosumi-Shirakawa",
+          "title": "清澄白河",
           "description": "在實用抵達據點之後，加入咖啡、庭園和博物館。",
           "href": "/local-tokyo/kiyosumi-shirakawa"
         },
         {
-          "title": "Asakusa",
+          "title": "淺草",
           "description": "傳統觀光更多，旅客設施也更完整。",
           "href": "/areas-to-stay/tokyo-first-time"
         },

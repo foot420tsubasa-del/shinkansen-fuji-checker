@@ -1073,7 +1073,7 @@
       "route": [
         "Café près de Kiyosumi-Shirakawa Station",
         "Jardin Kiyosumi",
-        "Fukagawa Edo Museum",
+        "Musée Edo de Fukagawa",
         "Museum of Contemporary Art Tokyo ou balade au bord de la rivière",
         "Continuer vers Monzen-Nakacho ou Ryogoku"
       ],
@@ -1114,7 +1114,7 @@
         },
         {
           "title": "Hôtels de l’Est de Tokyo",
-          "description": "Klook links coming soon.",
+          "description": "Liens Klook bientôt disponibles.",
           "href": "/local-tokyo"
         }
       ],
@@ -1385,7 +1385,7 @@
       "imageAlt": "Quartier de Ryogoku",
       "bestFor": [
         "Culture du sumo",
-        "Edo-Tokyo Museum",
+        "Musée Edo-Tokyo",
         "Balades historiques",
         "Vues sur la rivière"
       ],

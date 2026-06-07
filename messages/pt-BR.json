@@ -1072,8 +1072,8 @@
       "whyVisit": "Kiyosumi-Shirakawa ajuda quando Tokyo começa a parecer barulhenta demais. O bairro oferece uma manhã local no lado leste: cafés independentes, um jardim clássico, museus compactos e ruas ainda residenciais.",
       "route": [
         "Café perto de Kiyosumi-Shirakawa Station",
-        "Kiyosumi Garden",
-        "Fukagawa Edo Museum",
+        "Jardim Kiyosumi",
+        "Museu Edo de Fukagawa",
         "Museum of Contemporary Art Tokyo ou caminhada à beira-rio",
         "Continuar para Monzen-Nakacho ou Ryogoku"
       ],
@@ -1114,7 +1114,7 @@
         },
         {
           "title": "Hotéis no leste de Tokyo",
-          "description": "Klook links coming soon.",
+          "description": "Links da Klook em breve.",
           "href": "/local-tokyo"
         }
       ],
@@ -1385,7 +1385,7 @@
       "imageAlt": "Bairro de Ryogoku",
       "bestFor": [
         "Cultura do sumô",
-        "Edo-Tokyo Museum",
+        "Museu Edo-Tokyo",
         "Caminhadas históricas",
         "Vistas do rio"
       ],

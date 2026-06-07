@@ -1072,8 +1072,8 @@
       "whyVisit": "Kiyosumi-Shirakawa sirve cuando Tokyo empieza a sentirse demasiado ruidoso. Ofrece una mañana local en el este: café independiente, un jardín clásico, museos compactos y calles que todavía se sienten residenciales.",
       "route": [
         "Café cerca de Kiyosumi-Shirakawa Station",
-        "Kiyosumi Garden",
-        "Fukagawa Edo Museum",
+        "Jardín Kiyosumi",
+        "Museo Edo de Fukagawa",
         "Museum of Contemporary Art Tokyo o paseo junto al río",
         "Continuar a Monzen-Nakacho o Ryogoku"
       ],
@@ -1114,7 +1114,7 @@
         },
         {
           "title": "Hoteles del este de Tokyo",
-          "description": "Klook links coming soon.",
+          "description": "Enlaces de Klook próximamente.",
           "href": "/local-tokyo"
         }
       ],
@@ -1385,7 +1385,7 @@
       "imageAlt": "Barrio de Ryogoku",
       "bestFor": [
         "Cultura de sumo",
-        "Edo-Tokyo Museum",
+        "Museo Edo-Tokyo",
         "Paseos históricos",
         "Vistas del río"
       ],

@@ -1072,8 +1072,8 @@
       "whyVisit": "Kiyosumi-Shirakawa ist nützlich, wenn Tokyo zu laut wirkt. Es bietet einen geerdeten Morgen im Osten: unabhängigen Kaffee, einen klassischen Garten, kompakte Museen und Straßen, die noch wohnlich wirken.",
       "route": [
         "Kaffee nahe Kiyosumi-Shirakawa Station",
-        "Kiyosumi Garden",
-        "Fukagawa Edo Museum",
+        "Kiyosumi-Garten",
+        "Fukagawa-Edo-Museum",
         "Museum of Contemporary Art Tokyo oder Spaziergang am Fluss",
         "Weiter nach Monzen-Nakacho oder Ryogoku"
       ],
@@ -1114,7 +1114,7 @@
         },
         {
           "title": "East Tokyo Hotels",
-          "description": "Klook links coming soon.",
+          "description": "Klook-Links folgen in Kürze.",
           "href": "/local-tokyo"
         }
       ],
@@ -1385,7 +1385,7 @@
       "imageAlt": "Viertel Ryogoku",
       "bestFor": [
         "Sumo-Kultur",
-        "Edo-Tokyo Museum",
+        "Edo-Tokio-Museum",
         "Historische Spaziergänge",
         "Flussblicke"
       ],
