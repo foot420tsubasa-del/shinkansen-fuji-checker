@@ -1591,17 +1591,17 @@
   },
   "localHotelPicks": {
     "checkOnTrip": "Trip.com에서 확인하기",
-    "comingSoon": "Hotel link coming soon",
+    "comingSoon": "호텔 링크 준비 중",
     "seeLocalHotelPicks": "일본 현지 시선의 호텔 추천 보기",
     "bestFor": "추천 대상",
     "whyThisLocalPick": "이 현지 추천의 이유",
     "notIdealFor": "맞지 않을 수 있는 경우",
     "page": {
       "meta": {
-        "title": "Japanese Local Hotel Picks for Tokyo, Kyoto and Osaka | fujiseat",
-        "description": "A curated set of hotel picks in Tokyo, Kyoto and Osaka based on Japanese local area logic, including calmer Shinjuku stays, Kyoto Station bases, family-friendly rooms and practical Osaka locations.",
-        "ogTitle": "Japanese Local Hotel Picks for Tokyo, Kyoto and Osaka",
-        "ogDescription": "A curated set of hotel picks in Tokyo, Kyoto and Osaka based on Japanese local area logic, including calmer Shinjuku stays, Kyoto Station bases, family-friendly rooms and practical Osaka locations."
+        "title": "도쿄, 교토, 오사카의 일본 로컬 호텔 추천 | fujiseat",
+        "description": "일본 현지의 지역 로직을 바탕으로 도쿄, 교토, 오사카의 호텔을 큐레이션. 조용한 신주쿠, 간편한 도쿄역, 가족용 옵션 등을 포함.",
+        "ogTitle": "도쿄, 교토, 오사카의 일본 로컬 호텔 추천",
+        "ogDescription": "일본 현지의 지역 로직을 바탕으로 도쿄, 교토, 오사카의 호텔을 큐레이션. 조용한 신주쿠, 간편한 도쿄역, 가족용 옵션 등을 포함."
       },
       "breadcrumb": "로컬 호텔 예시",
       "cityLabels": {
@@ -1615,71 +1615,71 @@
         "subtitle": "순위가 아닙니다. 도쿄, 교토, 오사카의 지역 선택 논리에 따른 실용적인 호텔 예시입니다."
       },
       "tokyo": {
-        "title": "Tokyo examples by area logic",
-        "guideLink": "Tokyo stay area guide",
+        "title": "지역 로직으로 본 도쿄 예시",
+        "guideLink": "도쿄 숙박 지역 가이드",
         "groups": {
           "calmShinjuku": {
-            "label": "Calm Shinjuku",
-            "description": "Shinjuku access without sleeping in the loudest nightlife blocks.",
-            "fallbackLabel": "See Shinjuku area logic"
+            "label": "조용한 신주쿠",
+            "description": "가장 시끄러운 나이트라이프 블록에서 자지 않고도 신주쿠에 접근.",
+            "fallbackLabel": "신주쿠 지역 로직 보기"
           },
           "familyGroup": {
-            "label": "Family / group",
-            "description": "Apartment-style rooms and practical layouts for families or friends.",
-            "fallbackLabel": "See Shinjuku area logic"
+            "label": "가족 / 단체",
+            "description": "가족이나 친구에게 실용적인 아파트형 객실과 동선.",
+            "fallbackLabel": "신주쿠 지역 로직 보기"
           },
           "nishiShinjuku": {
-            "label": "Practical Nishi-Shinjuku",
-            "description": "West-side Shinjuku examples for calmer logistics and first Tokyo stays.",
-            "fallbackLabel": "See Shinjuku area logic"
+            "label": "실용적인 니시신주쿠",
+            "description": "보다 차분한 동선과 첫 도쿄 숙박을 위한 서쪽 신주쿠 예시.",
+            "fallbackLabel": "신주쿠 지역 로직 보기"
           },
           "eastTokyo": {
-            "label": "East Tokyo personality stay",
-            "description": "A more local-feeling base for travelers who care about cafes, streets, and atmosphere.",
-            "fallbackLabel": "See East Tokyo area logic"
+            "label": "개성 있는 동도쿄 숙박",
+            "description": "카페, 거리, 분위기를 중시하는 여행자를 위한 보다 로컬한 거점.",
+            "fallbackLabel": "동도쿄 지역 로직 보기"
           },
           "tokyoStation": {
-            "label": "Tokyo Station logistics",
-            "description": "Best when early Shinkansen, luggage, and transfers matter more than nightlife.",
-            "fallbackLabel": "See Tokyo Station area logic"
+            "label": "도쿄역 로지스틱스",
+            "description": "이른 신칸센, 짐, 환승이 나이트라이프보다 중요할 때 최적.",
+            "fallbackLabel": "도쿄역 지역 로직 보기"
           }
         }
       },
       "empty": {
-        "title": "No individual hotel example here yet.",
-        "body": "Use the area guide first, then compare hotels once this base fits your route."
+        "title": "이곳에는 아직 개별 호텔 예시가 없습니다.",
+        "body": "먼저 지역 가이드를 본 뒤, 이 거점이 동선에 맞을 때 호텔을 비교하세요."
       },
       "citySection": {
-        "title": "{city} examples by area logic",
+        "title": "지역 로직으로 본 {city} 예시",
         "intros": {
-          "Kyoto": "Examples that map to station convenience, quieter Kyoto streets, and temple-side walking.",
-          "Osaka": "Examples that map to Namba food access, KIX convenience, group stays, and Kita-side logistics."
+          "Kyoto": "역의 편의성, 조용한 교토의 골목, 사찰 인근 산책에 맞춘 예시.",
+          "Osaka": "난바 음식 접근성, KIX 편의성, 단체 숙박, 기타 지역 로지스틱스에 맞춘 예시."
         },
-        "kyotoGuide": "Kyoto stay area guide",
-        "osakaGuide": "Osaka stay area guide"
+        "kyotoGuide": "교토 숙박 지역 가이드",
+        "osakaGuide": "오사카 숙박 지역 가이드"
       },
       "continue": {
-        "eyebrow": "Continue planning",
+        "eyebrow": "계속 계획하기",
         "links": [
           {
             "href": "/areas-to-stay/tokyo-first-time",
-            "label": "Tokyo stay area guide",
-            "desc": "Choose Shinjuku, Ueno, Asakusa, Tokyo Station, or East Tokyo."
+            "label": "도쿄 숙박 지역 가이드",
+            "desc": "신주쿠, 우에노, 아사쿠사, 도쿄역, 또는 동도쿄 중에서 선택하세요."
           },
           {
             "href": "/areas-to-stay/kyoto-station-vs-gion",
-            "label": "Kyoto stay area guide",
-            "desc": "Pick between station convenience and Kyoto atmosphere."
+            "label": "교토 숙박 지역 가이드",
+            "desc": "역의 편의성과 교토의 분위기 중에서 선택하세요."
           },
           {
             "href": "/areas-to-stay/namba-vs-umeda",
-            "label": "Osaka stay area guide",
-            "desc": "Compare Osaka's two main hotel zones."
+            "label": "오사카 숙박 지역 가이드",
+            "desc": "오사카의 두 주요 호텔 지역을 비교하세요."
           },
           {
             "href": "/plan-your-trip",
-            "label": "Plan Your Trip",
-            "desc": "Rail, hotels, arrival setup, and route order."
+            "label": "여행 계획하기",
+            "desc": "철도, 호텔, 도착 준비, 동선 순서."
           }
         ]
       }
@@ -1690,9 +1690,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Good if you want Shinjuku access without sleeping deep inside the loudest nightlife blocks.",
         "notIdealFor": "추천하지 않는 경우: Travelers who need to be right next to JR Shinjuku Station.",
         "tags": [
-          "Japanese-modern",
-          "calm Shinjuku",
-          "couples"
+          "일본 모던",
+          "조용한 신주쿠",
+          "커플"
         ]
       },
       "mimaruShinjukuWest": {
@@ -1700,9 +1700,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Apartment-style rooms make more sense for families than small business hotels around Shinjuku.",
         "notIdealFor": "추천하지 않는 경우: Solo travelers who only need a very basic low-budget bed.",
         "tags": [
-          "family",
-          "group",
-          "kitchen"
+          "가족",
+          "단체",
+          "주방"
         ]
       },
       "daiwaRoynetNishiShinjuku": {
@@ -1710,9 +1710,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: A practical west-side Shinjuku option away from the loudest nightlife blocks.",
         "notIdealFor": "추천하지 않는 경우: Travelers who want nightlife immediately outside the hotel.",
         "tags": [
-          "practical",
-          "calm",
-          "west Shinjuku"
+          "실용적",
+          "조용함",
+          "서쪽 신주쿠"
         ]
       },
       "theKnotShinjuku": {
@@ -1720,9 +1720,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Better if you like the west-side park and government building area rather than Kabukicho.",
         "notIdealFor": "추천하지 않는 경우: Travelers who want to be directly at JR Shinjuku Station.",
         "tags": [
-          "design",
-          "park-side",
-          "Nishi-Shinjuku"
+          "디자인",
+          "공원 쪽",
+          "니시신주쿠"
         ]
       },
       "citanHostel": {
@@ -1730,9 +1730,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: A social East Tokyo base with cafe and bar culture, better as a personality pick than a family hotel.",
         "notIdealFor": "추천하지 않는 경우: Families who want a quiet full-service hotel.",
         "tags": [
-          "hostel",
-          "social",
-          "East Tokyo"
+          "호스텔",
+          "소셜",
+          "동도쿄"
         ]
       },
       "theThousandKyoto": {
@@ -1740,9 +1740,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: A more polished Kyoto Station-side option for travelers who want convenience without a purely business-hotel feel.",
         "notIdealFor": "추천하지 않는 경우: Travelers who want to sleep inside old-town Gion.",
         "tags": [
-          "polished",
-          "Kyoto Station",
-          "couples"
+          "세련됨",
+          "교토역",
+          "커플"
         ]
       },
       "mimaruKyotoStation": {
@@ -1750,10 +1750,10 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Apartment-style rooms near Kyoto Station make luggage, day trips, and family travel easier.",
         "notIdealFor": "추천하지 않는 경우: Travelers who want a ryokan-style atmosphere.",
         "tags": [
-          "family",
-          "group",
-          "kitchen",
-          "Kyoto Station"
+          "가족",
+          "단체",
+          "주방",
+          "교토역"
         ]
       },
       "nohgaKiyomizu": {
@@ -1761,9 +1761,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: A good pick if you want Kyoto atmosphere without staying deep in the most crowded Gion lanes.",
         "notIdealFor": "추천하지 않는 경우: Travelers who prioritize being next to Kyoto Station.",
         "tags": [
-          "local culture",
-          "design",
-          "Kiyomizu"
+          "로컬 문화",
+          "디자인",
+          "기요미즈"
         ]
       },
       "sequenceKyotoGojo": {
@@ -1771,9 +1771,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Good balance between Kyoto Station access and central Kyoto streets.",
         "notIdealFor": "추천하지 않는 경우: Travelers who want classic ryokan service.",
         "tags": [
-          "practical",
-          "Gojo",
-          "Shijo-Karasuma"
+          "실용적",
+          "고조",
+          "시조 가라스마"
         ]
       },
       "nokuKyoto": {
@@ -1781,9 +1781,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Better for travelers who want a quieter side of Kyoto rather than the busiest tourist streets.",
         "notIdealFor": "추천하지 않는 경우: Travelers who want nightlife or station-first convenience.",
         "tags": [
-          "quiet",
-          "Imperial Palace",
-          "calm Kyoto"
+          "조용함",
+          "교토 고쇼",
+          "조용한 교토"
         ]
       },
       "hotelRoyalClassicOsaka": {
@@ -1791,9 +1791,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: A practical Namba pick when you want food, transport, and easy orientation.",
         "notIdealFor": "추천하지 않는 경우: Travelers who want a very quiet residential area.",
         "tags": [
-          "Namba",
-          "practical",
-          "first Osaka"
+          "난바",
+          "실용적",
+          "첫 오사카"
         ]
       },
       "swissotelNankaiOsaka": {
@@ -1801,9 +1801,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Strong if you want Namba plus simple KIX access via Nankai.",
         "notIdealFor": "추천하지 않는 경우: Budget travelers.",
         "tags": [
-          "KIX access",
-          "Namba",
-          "upper stay"
+          "KIX 접근성",
+          "난바",
+          "고급 숙박"
         ]
       },
       "mimaruOsakaNamba": {
@@ -1811,10 +1811,10 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Apartment-style rooms and group-friendly setup work well for families in Osaka.",
         "notIdealFor": "추천하지 않는 경우: Travelers who want a quiet luxury hotel.",
         "tags": [
-          "family",
-          "group",
-          "kitchen",
-          "Namba"
+          "가족",
+          "단체",
+          "주방",
+          "난바"
         ]
       },
       "hotelHankyuRespire": {
@@ -1822,9 +1822,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: A practical Umeda pick when rail access matters more than nightlife.",
         "notIdealFor": "추천하지 않는 경우: Travelers who want to be near Dotonbori every night.",
         "tags": [
-          "Umeda",
-          "transport",
-          "practical"
+          "우메다",
+          "교통",
+          "실용적"
         ]
       },
       "zentisOsaka": {
@@ -1832,9 +1832,9 @@
         "localReason": "이 지역 선택 논리가 맞는 여행자에게 좋습니다: Better for travelers who want a calmer, more polished north Osaka base.",
         "notIdealFor": "추천하지 않는 경우: Families who want maximum room size and kitchen facilities.",
         "tags": [
-          "design",
-          "Kitashinchi",
-          "adult stay"
+          "디자인",
+          "기타신치",
+          "성인 숙박"
         ]
       }
     }

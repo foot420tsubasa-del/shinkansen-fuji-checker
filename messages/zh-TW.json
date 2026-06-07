@@ -1591,17 +1591,17 @@
   },
   "localHotelPicks": {
     "checkOnTrip": "在 Trip.com 查看",
-    "comingSoon": "Hotel link coming soon",
+    "comingSoon": "飯店連結即將推出",
     "seeLocalHotelPicks": "查看日本在地視角飯店推薦",
     "bestFor": "適合",
     "whyThisLocalPick": "為什麼推薦這間",
     "notIdealFor": "不太適合",
     "page": {
       "meta": {
-        "title": "Japanese Local Hotel Picks for Tokyo, Kyoto and Osaka | fujiseat",
-        "description": "A curated set of hotel picks in Tokyo, Kyoto and Osaka based on Japanese local area logic, including calmer Shinjuku stays, Kyoto Station bases, family-friendly rooms and practical Osaka locations.",
-        "ogTitle": "Japanese Local Hotel Picks for Tokyo, Kyoto and Osaka",
-        "ogDescription": "A curated set of hotel picks in Tokyo, Kyoto and Osaka based on Japanese local area logic, including calmer Shinjuku stays, Kyoto Station bases, family-friendly rooms and practical Osaka locations."
+        "title": "東京、京都與大阪的日式在地飯店精選 | fujiseat",
+        "description": "以日本在地區域邏輯為基礎，精選東京、京都與大阪的飯店，包含寧靜新宿、東京站便利與家庭友善等選擇。",
+        "ogTitle": "東京、京都與大阪的日式在地飯店精選",
+        "ogDescription": "以日本在地區域邏輯為基礎，精選東京、京都與大阪的飯店，包含寧靜新宿、東京站便利與家庭友善等選擇。"
       },
       "breadcrumb": "在地飯店範例",
       "cityLabels": {
@@ -1615,71 +1615,71 @@
         "subtitle": "這不是排名，而是依照東京、京都和大阪的區域邏輯給出的實用飯店範例。"
       },
       "tokyo": {
-        "title": "Tokyo examples by area logic",
-        "guideLink": "Tokyo stay area guide",
+        "title": "以區域邏輯整理的東京範例",
+        "guideLink": "東京住宿區域指南",
         "groups": {
           "calmShinjuku": {
-            "label": "Calm Shinjuku",
-            "description": "Shinjuku access without sleeping in the loudest nightlife blocks.",
-            "fallbackLabel": "See Shinjuku area logic"
+            "label": "寧靜新宿",
+            "description": "享受新宿交通，但不必住在最吵雜的夜生活街區。",
+            "fallbackLabel": "查看新宿區域邏輯"
           },
           "familyGroup": {
-            "label": "Family / group",
-            "description": "Apartment-style rooms and practical layouts for families or friends.",
-            "fallbackLabel": "See Shinjuku area logic"
+            "label": "家庭 / 團體",
+            "description": "公寓式房型與務實格局，適合家庭或朋友。",
+            "fallbackLabel": "查看新宿區域邏輯"
           },
           "nishiShinjuku": {
-            "label": "Practical Nishi-Shinjuku",
-            "description": "West-side Shinjuku examples for calmer logistics and first Tokyo stays.",
-            "fallbackLabel": "See Shinjuku area logic"
+            "label": "務實西新宿",
+            "description": "西新宿側範例，動線寧靜，適合首次造訪東京。",
+            "fallbackLabel": "查看新宿區域邏輯"
           },
           "eastTokyo": {
-            "label": "East Tokyo personality stay",
-            "description": "A more local-feeling base for travelers who care about cafes, streets, and atmosphere.",
-            "fallbackLabel": "See East Tokyo area logic"
+            "label": "個性派的東東京住宿",
+            "description": "重視咖啡、街道與氛圍的旅客所偏好的在地感基地。",
+            "fallbackLabel": "查看東東京區域邏輯"
           },
           "tokyoStation": {
-            "label": "Tokyo Station logistics",
-            "description": "Best when early Shinkansen, luggage, and transfers matter more than nightlife.",
-            "fallbackLabel": "See Tokyo Station area logic"
+            "label": "東京站物流",
+            "description": "當早班新幹線、行李與轉乘比夜生活更重要時最適合。",
+            "fallbackLabel": "查看東京站區域邏輯"
           }
         }
       },
       "empty": {
-        "title": "No individual hotel example here yet.",
-        "body": "Use the area guide first, then compare hotels once this base fits your route."
+        "title": "此處目前還沒有個別飯店範例。",
+        "body": "請先閱讀區域指南，當這個基地符合您的路線時再比較飯店。"
       },
       "citySection": {
-        "title": "{city} examples by area logic",
+        "title": "以區域邏輯整理的 {city} 範例",
         "intros": {
-          "Kyoto": "Examples that map to station convenience, quieter Kyoto streets, and temple-side walking.",
-          "Osaka": "Examples that map to Namba food access, KIX convenience, group stays, and Kita-side logistics."
+          "Kyoto": "對應車站便利性、京都寧靜街區與寺廟側散步的範例。",
+          "Osaka": "對應難波美食、KIX 便利、團體住宿與北側物流的範例。"
         },
-        "kyotoGuide": "Kyoto stay area guide",
-        "osakaGuide": "Osaka stay area guide"
+        "kyotoGuide": "京都住宿區域指南",
+        "osakaGuide": "大阪住宿區域指南"
       },
       "continue": {
-        "eyebrow": "Continue planning",
+        "eyebrow": "繼續規劃",
         "links": [
           {
             "href": "/areas-to-stay/tokyo-first-time",
-            "label": "Tokyo stay area guide",
-            "desc": "Choose Shinjuku, Ueno, Asakusa, Tokyo Station, or East Tokyo."
+            "label": "東京住宿區域指南",
+            "desc": "在新宿、上野、淺草、東京站或東東京之間選擇。"
           },
           {
             "href": "/areas-to-stay/kyoto-station-vs-gion",
-            "label": "Kyoto stay area guide",
-            "desc": "Pick between station convenience and Kyoto atmosphere."
+            "label": "京都住宿區域指南",
+            "desc": "在車站便利性與京都氛圍之間做選擇。"
           },
           {
             "href": "/areas-to-stay/namba-vs-umeda",
-            "label": "Osaka stay area guide",
-            "desc": "Compare Osaka's two main hotel zones."
+            "label": "大阪住宿區域指南",
+            "desc": "比較大阪兩大主要住宿區域。"
           },
           {
             "href": "/plan-your-trip",
-            "label": "Plan Your Trip",
-            "desc": "Rail, hotels, arrival setup, and route order."
+            "label": "規劃您的旅行",
+            "desc": "鐵道、飯店、抵達準備與路線順序。"
           }
         ]
       }
@@ -1690,9 +1690,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Good if you want Shinjuku access without sleeping deep inside the loudest nightlife blocks.",
         "notIdealFor": "不太適合：Travelers who need to be right next to JR Shinjuku Station.",
         "tags": [
-          "Japanese-modern",
-          "calm Shinjuku",
-          "couples"
+          "日式現代",
+          "寧靜新宿",
+          "情侶"
         ]
       },
       "mimaruShinjukuWest": {
@@ -1700,9 +1700,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Apartment-style rooms make more sense for families than small business hotels around Shinjuku.",
         "notIdealFor": "不太適合：Solo travelers who only need a very basic low-budget bed.",
         "tags": [
-          "family",
-          "group",
-          "kitchen"
+          "家庭",
+          "團體",
+          "廚房"
         ]
       },
       "daiwaRoynetNishiShinjuku": {
@@ -1710,9 +1710,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：A practical west-side Shinjuku option away from the loudest nightlife blocks.",
         "notIdealFor": "不太適合：Travelers who want nightlife immediately outside the hotel.",
         "tags": [
-          "practical",
-          "calm",
-          "west Shinjuku"
+          "務實",
+          "寧靜",
+          "西新宿"
         ]
       },
       "theKnotShinjuku": {
@@ -1720,9 +1720,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Better if you like the west-side park and government building area rather than Kabukicho.",
         "notIdealFor": "不太適合：Travelers who want to be directly at JR Shinjuku Station.",
         "tags": [
-          "design",
-          "park-side",
-          "Nishi-Shinjuku"
+          "設計",
+          "公園側",
+          "西新宿"
         ]
       },
       "citanHostel": {
@@ -1730,9 +1730,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：A social East Tokyo base with cafe and bar culture, better as a personality pick than a family hotel.",
         "notIdealFor": "不太適合：Families who want a quiet full-service hotel.",
         "tags": [
-          "hostel",
-          "social",
-          "East Tokyo"
+          "青年旅館",
+          "交誼",
+          "東東京"
         ]
       },
       "theThousandKyoto": {
@@ -1740,9 +1740,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：A more polished Kyoto Station-side option for travelers who want convenience without a purely business-hotel feel.",
         "notIdealFor": "不太適合：Travelers who want to sleep inside old-town Gion.",
         "tags": [
-          "polished",
-          "Kyoto Station",
-          "couples"
+          "精緻",
+          "京都站",
+          "情侶"
         ]
       },
       "mimaruKyotoStation": {
@@ -1750,10 +1750,10 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Apartment-style rooms near Kyoto Station make luggage, day trips, and family travel easier.",
         "notIdealFor": "不太適合：Travelers who want a ryokan-style atmosphere.",
         "tags": [
-          "family",
-          "group",
-          "kitchen",
-          "Kyoto Station"
+          "家庭",
+          "團體",
+          "廚房",
+          "京都站"
         ]
       },
       "nohgaKiyomizu": {
@@ -1761,9 +1761,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：A good pick if you want Kyoto atmosphere without staying deep in the most crowded Gion lanes.",
         "notIdealFor": "不太適合：Travelers who prioritize being next to Kyoto Station.",
         "tags": [
-          "local culture",
-          "design",
-          "Kiyomizu"
+          "在地文化",
+          "設計",
+          "清水"
         ]
       },
       "sequenceKyotoGojo": {
@@ -1771,9 +1771,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Good balance between Kyoto Station access and central Kyoto streets.",
         "notIdealFor": "不太適合：Travelers who want classic ryokan service.",
         "tags": [
-          "practical",
-          "Gojo",
-          "Shijo-Karasuma"
+          "務實",
+          "五條",
+          "四條烏丸"
         ]
       },
       "nokuKyoto": {
@@ -1781,9 +1781,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Better for travelers who want a quieter side of Kyoto rather than the busiest tourist streets.",
         "notIdealFor": "不太適合：Travelers who want nightlife or station-first convenience.",
         "tags": [
-          "quiet",
-          "Imperial Palace",
-          "calm Kyoto"
+          "安靜",
+          "京都御所",
+          "寧靜京都"
         ]
       },
       "hotelRoyalClassicOsaka": {
@@ -1791,9 +1791,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：A practical Namba pick when you want food, transport, and easy orientation.",
         "notIdealFor": "不太適合：Travelers who want a very quiet residential area.",
         "tags": [
-          "Namba",
-          "practical",
-          "first Osaka"
+          "難波",
+          "務實",
+          "首次大阪"
         ]
       },
       "swissotelNankaiOsaka": {
@@ -1801,9 +1801,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Strong if you want Namba plus simple KIX access via Nankai.",
         "notIdealFor": "不太適合：Budget travelers.",
         "tags": [
-          "KIX access",
-          "Namba",
-          "upper stay"
+          "KIX 交通",
+          "難波",
+          "高階住宿"
         ]
       },
       "mimaruOsakaNamba": {
@@ -1811,10 +1811,10 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Apartment-style rooms and group-friendly setup work well for families in Osaka.",
         "notIdealFor": "不太適合：Travelers who want a quiet luxury hotel.",
         "tags": [
-          "family",
-          "group",
-          "kitchen",
-          "Namba"
+          "家庭",
+          "團體",
+          "廚房",
+          "難波"
         ]
       },
       "hotelHankyuRespire": {
@@ -1822,9 +1822,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：A practical Umeda pick when rail access matters more than nightlife.",
         "notIdealFor": "不太適合：Travelers who want to be near Dotonbori every night.",
         "tags": [
-          "Umeda",
-          "transport",
-          "practical"
+          "梅田",
+          "交通",
+          "務實"
         ]
       },
       "zentisOsaka": {
@@ -1832,9 +1832,9 @@
         "localReason": "如果這個區域邏輯符合你的行程，會比較合適：Better for travelers who want a calmer, more polished north Osaka base.",
         "notIdealFor": "不太適合：Families who want maximum room size and kitchen facilities.",
         "tags": [
-          "design",
-          "Kitashinchi",
-          "adult stay"
+          "設計",
+          "北新地",
+          "成人住宿"
         ]
       }
     }

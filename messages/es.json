@@ -1591,17 +1591,17 @@
   },
   "localHotelPicks": {
     "checkOnTrip": "Ver en Trip.com",
-    "comingSoon": "Hotel link coming soon",
+    "comingSoon": "Enlace del hotel próximamente",
     "seeLocalHotelPicks": "Ver hoteles elegidos por un local japonés",
     "bestFor": "Ideal para",
     "whyThisLocalPick": "Por qué este hotel local",
     "notIdealFor": "No ideal para",
     "page": {
       "meta": {
-        "title": "Hoteles locales recomendados en Tokio, Kioto y Osaka | fujiseat",
-        "description": "Ejemplos de hoteles en Tokio, Kioto y Osaka basados en lógica local de zonas: Shinjuku tranquilo, Kyoto Station, habitaciones familiares y ubicaciones prácticas en Osaka.",
-        "ogTitle": "Hoteles locales recomendados en Tokio, Kioto y Osaka",
-        "ogDescription": "Ejemplos de hoteles en Tokio, Kioto y Osaka basados en lógica local de zonas."
+        "title": "Selección de hoteles locales en Japón para Tokio, Kioto y Osaka | fujiseat",
+        "description": "Una selección curada de hoteles en Tokio, Kioto y Osaka basada en la lógica de zonas locales japonesas, con opciones tranquilas en Shinjuku, fáciles en Tokyo Station y aptas para familias.",
+        "ogTitle": "Selección de hoteles locales en Japón para Tokio, Kioto y Osaka",
+        "ogDescription": "Una selección curada de hoteles en Tokio, Kioto y Osaka basada en la lógica de zonas locales japonesas, con opciones tranquilas en Shinjuku, fáciles en Tokyo Station y aptas para familias."
       },
       "breadcrumb": "Hoteles locales",
       "cityLabels": {
@@ -1615,71 +1615,71 @@
         "subtitle": "No son rankings. Son ejemplos prácticos de hoteles por lógica de zona para Tokio, Kioto y Osaka."
       },
       "tokyo": {
-        "title": "Ejemplos de Tokio por lógica de zona",
+        "title": "Ejemplos de Tokio por lógica de zonas",
         "guideLink": "Guía de zonas para alojarse en Tokio",
         "groups": {
           "calmShinjuku": {
             "label": "Shinjuku tranquilo",
-            "description": "Acceso a Shinjuku sin dormir en los bloques más ruidosos de ocio nocturno.",
+            "description": "Acceso a Shinjuku sin dormir en las manzanas más ruidosas de la vida nocturna.",
             "fallbackLabel": "Ver lógica de zona de Shinjuku"
           },
           "familyGroup": {
             "label": "Familia / grupo",
-            "description": "Habitaciones tipo apartamento y distribuciones prácticas para familias o amigos.",
+            "description": "Habitaciones tipo apartamento y plantas prácticas para familias o amigos.",
             "fallbackLabel": "Ver lógica de zona de Shinjuku"
           },
           "nishiShinjuku": {
             "label": "Nishi-Shinjuku práctico",
-            "description": "Ejemplos del oeste de Shinjuku para logística más tranquila y primera estancia en Tokio.",
+            "description": "Ejemplos del lado oeste de Shinjuku para una logística más tranquila y primeras estancias en Tokio.",
             "fallbackLabel": "Ver lógica de zona de Shinjuku"
           },
           "eastTokyo": {
             "label": "Estancia con personalidad en el este de Tokio",
-            "description": "Una base con sensación más local para viajeros que valoran cafés, calles y ambiente.",
-            "fallbackLabel": "Ver lógica del este de Tokio"
+            "description": "Una base con un toque más local para viajeros que valoran cafés, calles y atmósfera.",
+            "fallbackLabel": "Ver lógica de zona del este de Tokio"
           },
           "tokyoStation": {
-            "label": "Logística Tokyo Station",
-            "description": "Mejor cuando importan más Shinkansen temprano, equipaje y transbordos que la vida nocturna.",
-            "fallbackLabel": "Ver lógica de Tokyo Station"
+            "label": "Logística de Tokyo Station",
+            "description": "Mejor cuando Shinkansen temprano, equipaje y transbordos importan más que la vida nocturna.",
+            "fallbackLabel": "Ver lógica de zona de Tokyo Station"
           }
         }
       },
       "empty": {
-        "title": "Todavía no hay ejemplo individual aquí.",
-        "body": "Usa primero la guía de zona y compara hoteles cuando esta base encaje con tu ruta."
+        "title": "Aún no hay un ejemplo de hotel concreto aquí.",
+        "body": "Usa primero la guía de zonas y luego compara hoteles cuando esta base encaje en tu ruta."
       },
       "citySection": {
-        "title": "Ejemplos de {city} por lógica de zona",
+        "title": "Ejemplos en {city} por lógica de zonas",
         "intros": {
-          "Kyoto": "Ejemplos pensados para comodidad de estación, calles más tranquilas de Kioto y paseos cerca de templos.",
-          "Osaka": "Ejemplos para acceso a comida en Namba, comodidad de KIX, grupos y logística del lado Kita."
+          "Kyoto": "Ejemplos vinculados a la comodidad de la estación, las calles más tranquilas de Kioto y los paseos junto a templos.",
+          "Osaka": "Ejemplos que mapean acceso a comida en Namba, comodidad KIX, estancias en grupo y logística del lado Kita."
         },
-        "kyotoGuide": "Guía de zonas de Kioto",
-        "osakaGuide": "Guía de zonas de Osaka"
+        "kyotoGuide": "Guía de zonas para alojarse en Kioto",
+        "osakaGuide": "Guía de zonas para alojarse en Osaka"
       },
       "continue": {
-        "eyebrow": "Continuar planificando",
+        "eyebrow": "Sigue planificando",
         "links": [
           {
             "href": "/areas-to-stay/tokyo-first-time",
-            "label": "Guía de zonas de Tokio",
+            "label": "Guía de zonas para alojarse en Tokio",
             "desc": "Elige Shinjuku, Ueno, Asakusa, Tokyo Station o el este de Tokio."
           },
           {
             "href": "/areas-to-stay/kyoto-station-vs-gion",
-            "label": "Guía de zonas de Kioto",
-            "desc": "Elige entre comodidad de estación y ambiente de Kioto."
+            "label": "Guía de zonas para alojarse en Kioto",
+            "desc": "Elige entre la comodidad de la estación y la atmósfera de Kioto."
           },
           {
             "href": "/areas-to-stay/namba-vs-umeda",
-            "label": "Guía de zonas de Osaka",
-            "desc": "Compara las dos zonas principales de hotel en Osaka."
+            "label": "Guía de zonas para alojarse en Osaka",
+            "desc": "Compara las dos principales zonas hoteleras de Osaka."
           },
           {
             "href": "/plan-your-trip",
             "label": "Planifica tu viaje",
-            "desc": "Trenes, hoteles, llegada y orden de ruta."
+            "desc": "Trenes, hoteles, preparación para la llegada y orden de la ruta."
           }
         ]
       }
@@ -1690,9 +1690,9 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: Good if you want Shinjuku access without sleeping deep inside the loudest nightlife blocks.",
         "notIdealFor": "No es ideal para: Travelers who need to be right next to JR Shinjuku Station.",
         "tags": [
-          "Japanese-modern",
-          "calm Shinjuku",
-          "couples"
+          "japonés moderno",
+          "Shinjuku tranquilo",
+          "parejas"
         ]
       },
       "mimaruShinjukuWest": {
@@ -1700,9 +1700,9 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: Apartment-style rooms make more sense for families than small business hotels around Shinjuku.",
         "notIdealFor": "No es ideal para: Solo travelers who only need a very basic low-budget bed.",
         "tags": [
-          "family",
-          "group",
-          "kitchen"
+          "familia",
+          "grupo",
+          "cocina"
         ]
       },
       "daiwaRoynetNishiShinjuku": {
@@ -1710,9 +1710,9 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: A practical west-side Shinjuku option away from the loudest nightlife blocks.",
         "notIdealFor": "No es ideal para: Travelers who want nightlife immediately outside the hotel.",
         "tags": [
-          "practical",
-          "calm",
-          "west Shinjuku"
+          "práctico",
+          "tranquilo",
+          "Shinjuku oeste"
         ]
       },
       "theKnotShinjuku": {
@@ -1720,8 +1720,8 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: Better if you like the west-side park and government building area rather than Kabukicho.",
         "notIdealFor": "No es ideal para: Travelers who want to be directly at JR Shinjuku Station.",
         "tags": [
-          "design",
-          "park-side",
+          "diseño",
+          "junto al parque",
           "Nishi-Shinjuku"
         ]
       },
@@ -1730,9 +1730,9 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: A social East Tokyo base with cafe and bar culture, better as a personality pick than a family hotel.",
         "notIdealFor": "No es ideal para: Families who want a quiet full-service hotel.",
         "tags": [
-          "hostel",
+          "hostal",
           "social",
-          "East Tokyo"
+          "Este de Tokio"
         ]
       },
       "theThousandKyoto": {
@@ -1740,9 +1740,9 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: A more polished Kyoto Station-side option for travelers who want convenience without a purely business-hotel feel.",
         "notIdealFor": "No es ideal para: Travelers who want to sleep inside old-town Gion.",
         "tags": [
-          "polished",
+          "refinado",
           "Kyoto Station",
-          "couples"
+          "parejas"
         ]
       },
       "mimaruKyotoStation": {
@@ -1750,9 +1750,9 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: Apartment-style rooms near Kyoto Station make luggage, day trips, and family travel easier.",
         "notIdealFor": "No es ideal para: Travelers who want a ryokan-style atmosphere.",
         "tags": [
-          "family",
-          "group",
-          "kitchen",
+          "familia",
+          "grupo",
+          "cocina",
           "Kyoto Station"
         ]
       },
@@ -1761,8 +1761,8 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: A good pick if you want Kyoto atmosphere without staying deep in the most crowded Gion lanes.",
         "notIdealFor": "No es ideal para: Travelers who prioritize being next to Kyoto Station.",
         "tags": [
-          "local culture",
-          "design",
+          "cultura local",
+          "diseño",
           "Kiyomizu"
         ]
       },
@@ -1771,7 +1771,7 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: Good balance between Kyoto Station access and central Kyoto streets.",
         "notIdealFor": "No es ideal para: Travelers who want classic ryokan service.",
         "tags": [
-          "practical",
+          "práctico",
           "Gojo",
           "Shijo-Karasuma"
         ]
@@ -1781,9 +1781,9 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: Better for travelers who want a quieter side of Kyoto rather than the busiest tourist streets.",
         "notIdealFor": "No es ideal para: Travelers who want nightlife or station-first convenience.",
         "tags": [
-          "quiet",
-          "Imperial Palace",
-          "calm Kyoto"
+          "silencioso",
+          "Palacio Imperial",
+          "Kioto tranquilo"
         ]
       },
       "hotelRoyalClassicOsaka": {
@@ -1792,8 +1792,8 @@
         "notIdealFor": "No es ideal para: Travelers who want a very quiet residential area.",
         "tags": [
           "Namba",
-          "practical",
-          "first Osaka"
+          "práctico",
+          "primera Osaka"
         ]
       },
       "swissotelNankaiOsaka": {
@@ -1801,9 +1801,9 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: Strong if you want Namba plus simple KIX access via Nankai.",
         "notIdealFor": "No es ideal para: Budget travelers.",
         "tags": [
-          "KIX access",
+          "acceso a KIX",
           "Namba",
-          "upper stay"
+          "estancia superior"
         ]
       },
       "mimaruOsakaNamba": {
@@ -1811,9 +1811,9 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: Apartment-style rooms and group-friendly setup work well for families in Osaka.",
         "notIdealFor": "No es ideal para: Travelers who want a quiet luxury hotel.",
         "tags": [
-          "family",
-          "group",
-          "kitchen",
+          "familia",
+          "grupo",
+          "cocina",
           "Namba"
         ]
       },
@@ -1823,8 +1823,8 @@
         "notIdealFor": "No es ideal para: Travelers who want to be near Dotonbori every night.",
         "tags": [
           "Umeda",
-          "transport",
-          "practical"
+          "transporte",
+          "práctico"
         ]
       },
       "zentisOsaka": {
@@ -1832,9 +1832,9 @@
         "localReason": "Tiene sentido si esta lógica de zona encaja: Better for travelers who want a calmer, more polished north Osaka base.",
         "notIdealFor": "No es ideal para: Families who want maximum room size and kitchen facilities.",
         "tags": [
-          "design",
+          "diseño",
           "Kitashinchi",
-          "adult stay"
+          "estancia para adultos"
         ]
       }
     }
