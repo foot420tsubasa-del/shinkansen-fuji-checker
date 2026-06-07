@@ -2495,7 +2495,7 @@
       "parent": "住宿區域",
       "hub": "東京住宿區域指南"
     },
-    "heroImageAlt": "{area} hotel area",
+    "heroImageAlt": "{area} 飯店區域",
     "backToHub": "返回東京住宿區域指南",
     "quickAnswer": {
       "title": "快速答案",
@@ -2512,7 +2512,7 @@
       "cardNote": "把它作為區域和房型風格參考，不要當作排名。",
       "empty": "此區域的具體飯店範例在在地飯店頁面中整理。"
     },
-    "faqTitle": "FAQ",
+    "faqTitle": "常見問題",
     "continue": {
       "title": "繼續規劃",
       "hub": "東京住宿區域指南",
@@ -2524,232 +2524,232 @@
       "shinjuku": {
         "title": "住哪裡： Shinjuku",
         "subtitle": "適合： Best for first-time energy, food, nightlife, and train options — but choose the calmer side if you want quiet nights.",
-        "areaLabel": "Tokyo: Shinjuku",
+        "areaLabel": "東京：新宿",
         "primaryAction": "比較飯店： Shinjuku",
         "bestFor": "適合： First-timers who want food, nightlife, shopping, and flexible train access in one base.",
-        "avoid": "Light sleepers who book directly inside the loudest nightlife blocks without checking the micro-area.",
-        "bestMicroAreas": "Nishi-Shinjuku, Shinjuku-Gyoenmae / Shinjuku-sanchome, and Yoyogi / South Shinjuku.",
+        "avoid": "睡眠較淺、未確認微區域便直接訂在最吵雜的夜生活街區的旅客。",
+        "bestMicroAreas": "西新宿、新宿御苑前 / 新宿三丁目，以及代代木 / 南新宿。",
         "microAreas": [
           {
-            "name": "Nishi-Shinjuku",
-            "body": "Business hotels, quieter nights, good for families and comfort."
+            "name": "西新宿",
+            "body": "商務飯店、夜晚寧靜，適合家庭與舒適度。"
           },
           {
-            "name": "Shinjuku-Gyoenmae / Shinjuku-sanchome",
-            "body": "Still central, calmer, good food access."
+            "name": "新宿御苑前 / 新宿三丁目",
+            "body": "仍位於中心、更為寧靜，美食方便。"
           },
           {
-            "name": "Yoyogi / South Shinjuku",
-            "body": "More residential, balanced, easier nights."
+            "name": "代代木 / 南新宿",
+            "body": "更為住宅、平衡，夜晚較舒適。"
           },
           {
-            "name": "Kabukicho",
-            "body": "Bright, loud, convenient, but not ideal for quiet stays."
+            "name": "歌舞伎町",
+            "body": "明亮熱鬧、方便，但不適合追求安靜的住宿。"
           }
         ],
         "faqs": [
           {
-            "question": "Is Shinjuku too noisy?",
-            "answer": "Some blocks are. Stay west, south, or near Shinjuku-Gyoenmae if quiet matters."
+            "question": "新宿會不會太吵？",
+            "answer": "部分街區會。重視安靜可選西側、南側或新宿御苑前一帶。"
           },
           {
-            "question": "Is Shinjuku good for families?",
-            "answer": "Yes, especially Nishi-Shinjuku or Yoyogi / South Shinjuku."
+            "question": "新宿適合家庭嗎？",
+            "answer": "適合，特別是西新宿或代代木 / 南新宿。"
           },
           {
-            "question": "Is Kabukicho a bad place to stay?",
-            "answer": "Not automatically, but it is loud and nightlife-heavy. It is not the calmest first-night choice."
+            "question": "歌舞伎町不適合住宿嗎？",
+            "answer": "並非絕對，但吵雜且夜生活濃，首晚住宿選擇較不寧靜。"
           },
           {
-            "question": "How far is Shinjuku from Tokyo Station?",
-            "answer": "Usually 10-15 minutes by JR Chuo Line, plus walking time inside stations."
+            "question": "新宿到東京站要多久？",
+            "answer": "JR 中央線通常 10–15 分鐘，加上站內步行時間。"
           }
         ],
-        "breadcrumbLabel": "Shinjuku"
+        "breadcrumbLabel": "新宿"
       },
       "ueno": {
         "title": "住哪裡： Ueno",
         "subtitle": "適合： Best for Narita access, museums, parks, and better-value hotels.",
-        "areaLabel": "Tokyo: Ueno",
+        "areaLabel": "東京：上野",
         "primaryAction": "比較飯店： Ueno",
         "bestFor": "適合： Travelers arriving at Narita, museum days, Ueno Park, and practical central Tokyo value.",
-        "avoid": "Travelers who want late-night nightlife at their hotel doorstep.",
-        "bestMicroAreas": "Ueno Station / Okachimachi, Ueno Park side, Inaricho / Taito side, and Ameyoko side.",
+        "avoid": "想要在飯店門口享受深夜夜生活的旅客。",
+        "bestMicroAreas": "上野站 / 御徒町、上野公園側、稻荷町 / 台東側，以及阿美橫町側。",
         "microAreas": [
           {
-            "name": "Ueno Station / Okachimachi",
-            "body": "Easiest transport and food."
+            "name": "上野站 / 御徒町",
+            "body": "交通與美食最為方便。"
           },
           {
-            "name": "Ueno Park side",
-            "body": "Museums, park, calmer daytime feel."
+            "name": "上野公園側",
+            "body": "博物館、公園、日間氛圍寧靜。"
           },
           {
-            "name": "Inaricho / Taito side",
-            "body": "Quieter, often better value."
+            "name": "稻荷町 / 台東側",
+            "body": "較寧靜，通常 CP 值較高。"
           },
           {
-            "name": "Ameyoko side",
-            "body": "Lively, food, budget energy."
+            "name": "阿美橫町側",
+            "body": "熱鬧、美食、平價活力。"
           }
         ],
         "faqs": [
           {
-            "question": "Is Ueno good for first-time visitors?",
-            "answer": "Yes, especially if Narita access and value matter more than nightlife."
+            "question": "上野適合首次造訪者嗎？",
+            "answer": "適合，特別是當成田交通與 CP 值比夜生活更重要時。"
           },
           {
-            "question": "Is Ueno convenient for the Shinkansen?",
-            "answer": "Tokyo Station is about 7 minutes away by JR, and some northern Shinkansen services also stop at Ueno."
+            "question": "上野搭新幹線方便嗎？",
+            "answer": "搭 JR 約 7 分鐘到東京站，部分往北的新幹線也停靠上野。"
           },
           {
-            "question": "Is Ueno lively at night?",
-            "answer": "It has food and market energy, but it is much quieter than Shinjuku."
+            "question": "上野夜晚熱鬧嗎？",
+            "answer": "有美食與市場活力，但比新宿安靜得多。"
           },
           {
-            "question": "Where should I stay near Ueno?",
-            "answer": "Station / Okachimachi is easiest; Inaricho can feel calmer and better value."
+            "question": "上野附近建議住哪？",
+            "answer": "上野站 / 御徒町最方便，稻荷町通常更安靜且 CP 值更高。"
           }
         ],
-        "breadcrumbLabel": "Ueno"
+        "breadcrumbLabel": "上野"
       },
       "asakusa": {
         "title": "住哪裡： Asakusa",
         "subtitle": "適合： Best for old-town Tokyo, Senso-ji, riverside walks, and a traditional atmosphere.",
-        "areaLabel": "Tokyo: Asakusa",
+        "areaLabel": "東京：淺草",
         "primaryAction": "比較飯店： Asakusa",
         "bestFor": "適合： Travelers who want temples, old-town atmosphere, Tokyo Skytree views, and calmer evenings.",
-        "avoid": "Travelers who want JR Yamanote access or late-night west-side nightlife every night.",
-        "bestMicroAreas": "Senso-ji / Kaminarimon side, Tawaramachi side, Sumida River side, and Kuramae edge.",
+        "avoid": "想要每晚都有 JR 山手線交通或西側夜生活的旅客。",
+        "bestMicroAreas": "淺草寺 / 雷門側、田原町側、隅田川側，以及藏前邊緣。",
         "microAreas": [
           {
-            "name": "Senso-ji / Kaminarimon side",
-            "body": "Most atmospheric, tourist-friendly."
+            "name": "淺草寺 / 雷門側",
+            "body": "氛圍最佳、最適合觀光客。"
           },
           {
-            "name": "Tawaramachi side",
-            "body": "Quieter, good Ginza Line access."
+            "name": "田原町側",
+            "body": "較寧靜，銀座線交通便利。"
           },
           {
-            "name": "Sumida River side",
-            "body": "Calmer walks and skyline views."
+            "name": "隅田川側",
+            "body": "散步寧靜，可眺望天際線。"
           },
           {
-            "name": "Kuramae edge",
-            "body": "Cafes, design shops, east-side feel."
+            "name": "藏前邊緣",
+            "body": "咖啡、設計選物店、東側氛圍。"
           }
         ],
         "faqs": [
           {
-            "question": "Is Asakusa convenient without JR?",
-            "answer": "Yes for east Tokyo and old-town sights, but you will use subway transfers more often."
+            "question": "沒有 JR，淺草方便嗎？",
+            "answer": "對東東京與舊街區方便，但會更常轉乘地鐵。"
           },
           {
-            "question": "Is Asakusa good for families?",
-            "answer": "Yes. It is calmer than Shinjuku and has easy temple and river walks."
+            "question": "淺草適合家庭嗎？",
+            "answer": "適合，比新宿安靜，寺廟與河畔散步都方便。"
           },
           {
-            "question": "Is Asakusa too quiet at night?",
-            "answer": "It quiets down earlier than Shinjuku, which can be a benefit if you want calm nights."
+            "question": "淺草夜晚會不會太安靜？",
+            "answer": "比新宿更早安靜下來，如果想要寧靜夜晚反而是優點。"
           },
           {
-            "question": "Where is the best Asakusa micro-area?",
-            "answer": "Kaminarimon is easiest for first-timers; Tawaramachi and Kuramae edge are calmer."
+            "question": "淺草最好的微區域是哪裡？",
+            "answer": "首次造訪以雷門最容易；田原町與藏前邊緣較寧靜。"
           }
         ],
-        "breadcrumbLabel": "Asakusa"
+        "breadcrumbLabel": "淺草"
       },
       "tokyo-station": {
         "title": "住哪裡： Tokyo Station",
         "subtitle": "適合： Best for early Shinkansen, luggage, business-like comfort, and easy Kyoto / Osaka transfers.",
-        "areaLabel": "Tokyo: Tokyo Station",
+        "areaLabel": "東京：東京站",
         "primaryAction": "比較飯店： Tokyo Station",
         "bestFor": "適合： Early Shinkansen departures, heavy luggage, Kyoto / Osaka transfers, and clean logistics.",
-        "avoid": "Travelers who want late-night local neighborhood energy right outside the hotel.",
-        "bestMicroAreas": "Marunouchi side, Yaesu side, Nihonbashi / Kyobashi side, and Ginza edge.",
+        "avoid": "想要走出飯店就有深夜在地街區活力的旅客。",
+        "bestMicroAreas": "丸之內側、八重洲側、日本橋 / 京橋側，以及銀座邊緣。",
         "microAreas": [
           {
-            "name": "Marunouchi side",
-            "body": "Clean, premium, business-like."
+            "name": "丸之內側",
+            "body": "整潔、高階，帶商務感。"
           },
           {
-            "name": "Yaesu side",
-            "body": "Practical for Shinkansen and buses."
+            "name": "八重洲側",
+            "body": "新幹線與巴士便利。"
           },
           {
-            "name": "Nihonbashi / Kyobashi side",
-            "body": "Calmer, walkable, still convenient."
+            "name": "日本橋 / 京橋側",
+            "body": "較寧靜、步行佳，仍方便。"
           },
           {
-            "name": "Ginza edge",
-            "body": "Shopping and restaurants, higher-end feel."
+            "name": "銀座邊緣",
+            "body": "購物與餐廳，氛圍較高階。"
           }
         ],
         "faqs": [
           {
-            "question": "Should I stay near Tokyo Station before Kyoto?",
-            "answer": "Yes if your train is early or luggage is heavy. It removes the morning transfer."
+            "question": "前往京都前要住東京站附近嗎？",
+            "answer": "若列車很早或行李很多就建議，可省去早晨轉乘。"
           },
           {
-            "question": "Is Tokyo Station too business-like?",
-            "answer": "It can feel less local at night, but it is excellent for logistics."
+            "question": "東京站會不會太商務？",
+            "answer": "夜晚在地感較淡，但物流非常方便。"
           },
           {
-            "question": "Which side is best for the Shinkansen?",
-            "answer": "Yaesu is usually the practical side for Shinkansen and bus access."
+            "question": "哪一側對新幹線最方便？",
+            "answer": "八重洲側通常對新幹線與巴士最方便。"
           },
           {
-            "question": "Is Ginza close enough?",
-            "answer": "Yes for many travelers, especially if shopping and restaurants matter."
+            "question": "銀座夠近嗎？",
+            "answer": "對多數旅客足夠，特別在意購物與餐廳時。"
           }
         ],
-        "breadcrumbLabel": "Tokyo Station"
+        "breadcrumbLabel": "東京站"
       },
       "east-tokyo": {
         "title": "住哪裡： East Tokyo",
         "subtitle": "適合： Best for quieter local walks, coffee, riverside neighborhoods, and second-time Tokyo visitors.",
-        "areaLabel": "Tokyo: East Tokyo",
+        "areaLabel": "東京：東東京",
         "primaryAction": "探索本地东京",
         "bestFor": "適合： Travelers who want slower streets, coffee, museums, riverside walks, and a quieter base.",
-        "avoid": "First-timers who want the simplest default base for every major Tokyo sight.",
-        "bestMicroAreas": "Kiyosumi-Shirakawa, Kuramae, Ryogoku, and Monzen-Nakacho.",
+        "avoid": "想要前往每個主要景點都最簡單之預設基地的首次旅客。",
+        "bestMicroAreas": "清澄白河、藏前、兩國與門前仲町。",
         "microAreas": [
           {
-            "name": "Kiyosumi-Shirakawa",
-            "body": "Coffee, museums, calm streets."
+            "name": "清澄白河",
+            "body": "咖啡、美術館、寧靜街道。"
           },
           {
-            "name": "Kuramae",
-            "body": "Design shops, cafes, river walks."
+            "name": "藏前",
+            "body": "設計選物店、咖啡、河畔散步。"
           },
           {
-            "name": "Ryogoku",
-            "body": "Sumo, history, local food."
+            "name": "兩國",
+            "body": "相撲、歷史、在地美食。"
           },
           {
-            "name": "Monzen-Nakacho",
-            "body": "Local food, temples, slower pace."
+            "name": "門前仲町",
+            "body": "在地美食、寺廟、步調緩慢。"
           }
         ],
         "faqs": [
           {
-            "question": "Is East Tokyo good for a first Tokyo hotel?",
-            "answer": "It can be, but it is better if you already know you want a quieter local base."
+            "question": "東東京適合作為首次的東京住宿嗎？",
+            "answer": "可以，但已知想要安靜在地基地的旅客更合適。"
           },
           {
-            "question": "Which East Tokyo area is best for coffee?",
-            "answer": "Kiyosumi-Shirakawa is the strongest coffee and museum base."
+            "question": "東東京哪個區域咖啡最強？",
+            "answer": "清澄白河是咖啡與美術館最強的基地。"
           },
           {
-            "question": "Is Kuramae convenient?",
-            "answer": "It is good for Asakusa and riverside walks, but less direct for west-side nightlife."
+            "question": "藏前方便嗎？",
+            "answer": "前往淺草與河畔散步方便，但對西側夜生活較不直接。"
           },
           {
-            "question": "Should I stay in Ryogoku?",
-            "answer": "It works for sumo, museums, and local food, but it is usually better as a focused local base than a default first stay."
+            "question": "應該住在兩國嗎？",
+            "answer": "適合相撲、博物館與在地美食，但比起首晚住宿，更適合作為目標明確的在地基地。"
           }
         ],
-        "breadcrumbLabel": "East Tokyo"
+        "breadcrumbLabel": "東東京"
       }
     }
   },

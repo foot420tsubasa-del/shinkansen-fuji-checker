@@ -2495,7 +2495,7 @@
       "parent": "Übernachten",
       "hub": "Tokio Viertelguide"
     },
-    "heroImageAlt": "{area} hotel area",
+    "heroImageAlt": "{area} Hotelgegend",
     "backToHub": "Zurück zum Tokio-Guide",
     "quickAnswer": {
       "title": "Kurzantwort",
@@ -2512,7 +2512,7 @@
       "cardNote": "Als Referenz für Viertel und Zimmerstil nutzen, nicht als Ranking.",
       "empty": "Konkrete Hotelbeispiele sind auf der lokalen Hotelseite."
     },
-    "faqTitle": "FAQ",
+    "faqTitle": "Häufige Fragen",
     "continue": {
       "title": "Weiter planen",
       "hub": "Tokio Viertelguide",
@@ -2524,45 +2524,45 @@
       "shinjuku": {
         "title": "Wo in Shinjuku",
         "subtitle": "Gut für Best for first-time energy, food, nightlife, and train options — but choose the calmer side if you want quiet nights.",
-        "areaLabel": "Tokyo: Shinjuku",
+        "areaLabel": "Tokio: Shinjuku",
         "primaryAction": "Hotels vergleichen: Shinjuku",
         "bestFor": "Gut für First-timers who want food, nightlife, shopping, and flexible train access in one base.",
-        "avoid": "Light sleepers who book directly inside the loudest nightlife blocks without checking the micro-area.",
-        "bestMicroAreas": "Nishi-Shinjuku, Shinjuku-Gyoenmae / Shinjuku-sanchome, and Yoyogi / South Shinjuku.",
+        "avoid": "Empfindlich Schlafende, die direkt in den lautesten Nachtleben-Blöcken buchen, ohne die Mikro-Lage zu prüfen.",
+        "bestMicroAreas": "Nishi-Shinjuku, Shinjuku-Gyoenmae / Shinjuku-sanchome und Yoyogi / Süd-Shinjuku.",
         "microAreas": [
           {
             "name": "Nishi-Shinjuku",
-            "body": "Business hotels, quieter nights, good for families and comfort."
+            "body": "Businesshotels, ruhige Nächte, gut für Familien und Komfort."
           },
           {
             "name": "Shinjuku-Gyoenmae / Shinjuku-sanchome",
-            "body": "Still central, calmer, good food access."
+            "body": "Weiterhin zentral, ruhiger, gute Esskultur."
           },
           {
-            "name": "Yoyogi / South Shinjuku",
-            "body": "More residential, balanced, easier nights."
+            "name": "Yoyogi / Süd-Shinjuku",
+            "body": "Eher Wohngegend, ausgewogen, ruhigere Nächte."
           },
           {
             "name": "Kabukicho",
-            "body": "Bright, loud, convenient, but not ideal for quiet stays."
+            "body": "Bunt, laut, praktisch, aber nicht ideal für ruhige Aufenthalte."
           }
         ],
         "faqs": [
           {
-            "question": "Is Shinjuku too noisy?",
-            "answer": "Some blocks are. Stay west, south, or near Shinjuku-Gyoenmae if quiet matters."
+            "question": "Ist Shinjuku zu laut?",
+            "answer": "Manche Blöcke schon. Übernachte westlich, südlich oder nahe Shinjuku-Gyoenmae für Ruhe."
           },
           {
-            "question": "Is Shinjuku good for families?",
-            "answer": "Yes, especially Nishi-Shinjuku or Yoyogi / South Shinjuku."
+            "question": "Ist Shinjuku gut für Familien?",
+            "answer": "Ja, vor allem Nishi-Shinjuku oder Yoyogi / Süd-Shinjuku."
           },
           {
-            "question": "Is Kabukicho a bad place to stay?",
-            "answer": "Not automatically, but it is loud and nightlife-heavy. It is not the calmest first-night choice."
+            "question": "Ist Kabukicho ein schlechter Ort zum Übernachten?",
+            "answer": "Nicht automatisch, aber laut und nachtlebenslastig. Keine ruhige Wahl für die erste Nacht."
           },
           {
-            "question": "How far is Shinjuku from Tokyo Station?",
-            "answer": "Usually 10-15 minutes by JR Chuo Line, plus walking time inside stations."
+            "question": "Wie weit ist Shinjuku von Tokyo Station entfernt?",
+            "answer": "Meist 10–15 Minuten mit der JR-Chuo-Linie, plus Laufwege im Bahnhof."
           }
         ],
         "breadcrumbLabel": "Shinjuku"
@@ -2570,45 +2570,45 @@
       "ueno": {
         "title": "Wo in Ueno",
         "subtitle": "Gut für Best for Narita access, museums, parks, and better-value hotels.",
-        "areaLabel": "Tokyo: Ueno",
+        "areaLabel": "Tokio: Ueno",
         "primaryAction": "Hotels vergleichen: Ueno",
         "bestFor": "Gut für Travelers arriving at Narita, museum days, Ueno Park, and practical central Tokyo value.",
-        "avoid": "Travelers who want late-night nightlife at their hotel doorstep.",
-        "bestMicroAreas": "Ueno Station / Okachimachi, Ueno Park side, Inaricho / Taito side, and Ameyoko side.",
+        "avoid": "Reisende, die spätes Nachtleben direkt vor dem Hotel wollen.",
+        "bestMicroAreas": "Bahnhof Ueno / Okachimachi, Ueno-Park-Seite, Inaricho-/Taito-Seite und Ameyoko-Seite.",
         "microAreas": [
           {
-            "name": "Ueno Station / Okachimachi",
-            "body": "Easiest transport and food."
+            "name": "Bahnhof Ueno / Okachimachi",
+            "body": "Einfachster Transport und Essen."
           },
           {
-            "name": "Ueno Park side",
-            "body": "Museums, park, calmer daytime feel."
+            "name": "Ueno-Park-Seite",
+            "body": "Museen, Park, ruhigere Tagesstimmung."
           },
           {
-            "name": "Inaricho / Taito side",
-            "body": "Quieter, often better value."
+            "name": "Inaricho / Taito-Seite",
+            "body": "Ruhiger, oft besseres Preis-Leistungs-Verhältnis."
           },
           {
-            "name": "Ameyoko side",
-            "body": "Lively, food, budget energy."
+            "name": "Ameyoko-Seite",
+            "body": "Lebhaft, Essen, günstig."
           }
         ],
         "faqs": [
           {
-            "question": "Is Ueno good for first-time visitors?",
-            "answer": "Yes, especially if Narita access and value matter more than nightlife."
+            "question": "Ist Ueno gut für Erstbesucher?",
+            "answer": "Ja, vor allem wenn Narita-Zugang und Preis wichtiger als Nachtleben sind."
           },
           {
-            "question": "Is Ueno convenient for the Shinkansen?",
-            "answer": "Tokyo Station is about 7 minutes away by JR, and some northern Shinkansen services also stop at Ueno."
+            "question": "Ist Ueno für den Shinkansen praktisch?",
+            "answer": "Tokyo Station ist ca. 7 Min mit JR entfernt, einige Nord-Shinkansen halten auch in Ueno."
           },
           {
-            "question": "Is Ueno lively at night?",
-            "answer": "It has food and market energy, but it is much quieter than Shinjuku."
+            "question": "Ist Ueno nachts lebhaft?",
+            "answer": "Essens- und Marktstimmung, aber deutlich ruhiger als Shinjuku."
           },
           {
-            "question": "Where should I stay near Ueno?",
-            "answer": "Station / Okachimachi is easiest; Inaricho can feel calmer and better value."
+            "question": "Wo nahe Ueno übernachten?",
+            "answer": "Bahnhof / Okachimachi am einfachsten; Inaricho oft ruhiger und günstiger."
           }
         ],
         "breadcrumbLabel": "Ueno"
@@ -2616,45 +2616,45 @@
       "asakusa": {
         "title": "Wo in Asakusa",
         "subtitle": "Gut für Best for old-town Tokyo, Senso-ji, riverside walks, and a traditional atmosphere.",
-        "areaLabel": "Tokyo: Asakusa",
+        "areaLabel": "Tokio: Asakusa",
         "primaryAction": "Hotels vergleichen: Asakusa",
         "bestFor": "Gut für Travelers who want temples, old-town atmosphere, Tokyo Skytree views, and calmer evenings.",
-        "avoid": "Travelers who want JR Yamanote access or late-night west-side nightlife every night.",
-        "bestMicroAreas": "Senso-ji / Kaminarimon side, Tawaramachi side, Sumida River side, and Kuramae edge.",
+        "avoid": "Reisende, die JR-Yamanote-Zugang oder jeden Abend Westviertel-Nachtleben wollen.",
+        "bestMicroAreas": "Senso-ji / Kaminarimon-Seite, Tawaramachi-Seite, Sumida-Fluss-Seite und Kuramae-Rand.",
         "microAreas": [
           {
-            "name": "Senso-ji / Kaminarimon side",
-            "body": "Most atmospheric, tourist-friendly."
+            "name": "Senso-ji / Kaminarimon-Seite",
+            "body": "Am atmosphärischsten, touristenfreundlich."
           },
           {
-            "name": "Tawaramachi side",
-            "body": "Quieter, good Ginza Line access."
+            "name": "Tawaramachi-Seite",
+            "body": "Ruhiger, guter Zugang zur Ginza-Linie."
           },
           {
-            "name": "Sumida River side",
-            "body": "Calmer walks and skyline views."
+            "name": "Sumida-Fluss-Seite",
+            "body": "Ruhige Spaziergänge und Skyline-Blick."
           },
           {
-            "name": "Kuramae edge",
-            "body": "Cafes, design shops, east-side feel."
+            "name": "Kuramae-Rand",
+            "body": "Cafés, Design-Shops, Ostseiten-Flair."
           }
         ],
         "faqs": [
           {
-            "question": "Is Asakusa convenient without JR?",
-            "answer": "Yes for east Tokyo and old-town sights, but you will use subway transfers more often."
+            "question": "Ist Asakusa ohne JR praktisch?",
+            "answer": "Ja für Ost-Tokio und Alt-Tokio, aber öfter U-Bahn-Umstiege."
           },
           {
-            "question": "Is Asakusa good for families?",
-            "answer": "Yes. It is calmer than Shinjuku and has easy temple and river walks."
+            "question": "Ist Asakusa gut für Familien?",
+            "answer": "Ja. Ruhiger als Shinjuku, mit einfachen Tempel- und Flussspaziergängen."
           },
           {
-            "question": "Is Asakusa too quiet at night?",
-            "answer": "It quiets down earlier than Shinjuku, which can be a benefit if you want calm nights."
+            "question": "Ist Asakusa nachts zu still?",
+            "answer": "Es wird früher ruhig als Shinjuku, was für ruhige Nächte ein Plus ist."
           },
           {
-            "question": "Where is the best Asakusa micro-area?",
-            "answer": "Kaminarimon is easiest for first-timers; Tawaramachi and Kuramae edge are calmer."
+            "question": "Welche Asakusa-Mikrolage ist am besten?",
+            "answer": "Kaminarimon ist für Erstbesucher am einfachsten; Tawaramachi und Kuramae-Rand sind ruhiger."
           }
         ],
         "breadcrumbLabel": "Asakusa"
@@ -2662,45 +2662,45 @@
       "tokyo-station": {
         "title": "Wo in Tokyo Station",
         "subtitle": "Gut für Best for early Shinkansen, luggage, business-like comfort, and easy Kyoto / Osaka transfers.",
-        "areaLabel": "Tokyo: Tokyo Station",
+        "areaLabel": "Tokio: Tokyo Station",
         "primaryAction": "Hotels vergleichen: Tokyo Station",
         "bestFor": "Gut für Early Shinkansen departures, heavy luggage, Kyoto / Osaka transfers, and clean logistics.",
-        "avoid": "Travelers who want late-night local neighborhood energy right outside the hotel.",
-        "bestMicroAreas": "Marunouchi side, Yaesu side, Nihonbashi / Kyobashi side, and Ginza edge.",
+        "avoid": "Reisende, die spätes lokales Viertel-Feeling direkt vor dem Hotel wollen.",
+        "bestMicroAreas": "Marunouchi-Seite, Yaesu-Seite, Nihonbashi-/Kyobashi-Seite und Ginza-Rand.",
         "microAreas": [
           {
-            "name": "Marunouchi side",
-            "body": "Clean, premium, business-like."
+            "name": "Marunouchi-Seite",
+            "body": "Sauber, hochwertig, businesslastig."
           },
           {
-            "name": "Yaesu side",
-            "body": "Practical for Shinkansen and buses."
+            "name": "Yaesu-Seite",
+            "body": "Praktisch für Shinkansen und Busse."
           },
           {
-            "name": "Nihonbashi / Kyobashi side",
-            "body": "Calmer, walkable, still convenient."
+            "name": "Nihonbashi / Kyobashi-Seite",
+            "body": "Ruhiger, gut zu Fuß, weiterhin praktisch."
           },
           {
-            "name": "Ginza edge",
-            "body": "Shopping and restaurants, higher-end feel."
+            "name": "Ginza-Rand",
+            "body": "Shopping und Restaurants, gehobenes Flair."
           }
         ],
         "faqs": [
           {
-            "question": "Should I stay near Tokyo Station before Kyoto?",
-            "answer": "Yes if your train is early or luggage is heavy. It removes the morning transfer."
+            "question": "Vor Kyoto nahe Tokyo Station übernachten?",
+            "answer": "Ja, wenn dein Zug früh ist oder das Gepäck schwer. Spart die Morgenfahrt."
           },
           {
-            "question": "Is Tokyo Station too business-like?",
-            "answer": "It can feel less local at night, but it is excellent for logistics."
+            "question": "Ist Tokyo Station zu geschäftlich?",
+            "answer": "Abends weniger lokal, aber logistisch exzellent."
           },
           {
-            "question": "Which side is best for the Shinkansen?",
-            "answer": "Yaesu is usually the practical side for Shinkansen and bus access."
+            "question": "Welche Seite ist am besten für den Shinkansen?",
+            "answer": "Yaesu ist meist die praktische Seite für Shinkansen und Busse."
           },
           {
-            "question": "Is Ginza close enough?",
-            "answer": "Yes for many travelers, especially if shopping and restaurants matter."
+            "question": "Ist Ginza nah genug?",
+            "answer": "Ja für viele, vor allem wenn Shopping und Restaurants zählen."
           }
         ],
         "breadcrumbLabel": "Tokyo Station"
@@ -2708,48 +2708,48 @@
       "east-tokyo": {
         "title": "Wo in East Tokyo",
         "subtitle": "Gut für Best for quieter local walks, coffee, riverside neighborhoods, and second-time Tokyo visitors.",
-        "areaLabel": "Tokyo: East Tokyo",
+        "areaLabel": "Tokio: Ost-Tokio",
         "primaryAction": "Lokales Tokio entdecken",
         "bestFor": "Gut für Travelers who want slower streets, coffee, museums, riverside walks, and a quieter base.",
-        "avoid": "First-timers who want the simplest default base for every major Tokyo sight.",
-        "bestMicroAreas": "Kiyosumi-Shirakawa, Kuramae, Ryogoku, and Monzen-Nakacho.",
+        "avoid": "Erstbesucher, die die einfachste Standardbasis für alle großen Tokio-Sehenswürdigkeiten wollen.",
+        "bestMicroAreas": "Kiyosumi-Shirakawa, Kuramae, Ryogoku und Monzen-Nakacho.",
         "microAreas": [
           {
             "name": "Kiyosumi-Shirakawa",
-            "body": "Coffee, museums, calm streets."
+            "body": "Kaffee, Museen, ruhige Straßen."
           },
           {
             "name": "Kuramae",
-            "body": "Design shops, cafes, river walks."
+            "body": "Design-Shops, Cafés, Flussspaziergänge."
           },
           {
             "name": "Ryogoku",
-            "body": "Sumo, history, local food."
+            "body": "Sumo, Geschichte, lokales Essen."
           },
           {
             "name": "Monzen-Nakacho",
-            "body": "Local food, temples, slower pace."
+            "body": "Lokales Essen, Tempel, gemächliches Tempo."
           }
         ],
         "faqs": [
           {
-            "question": "Is East Tokyo good for a first Tokyo hotel?",
-            "answer": "It can be, but it is better if you already know you want a quieter local base."
+            "question": "Ist Ost-Tokio gut für das erste Tokio-Hotel?",
+            "answer": "Möglich, aber besser, wenn du schon weißt, dass du eine ruhigere lokale Basis willst."
           },
           {
-            "question": "Which East Tokyo area is best for coffee?",
-            "answer": "Kiyosumi-Shirakawa is the strongest coffee and museum base."
+            "question": "Welches Ost-Tokio-Gebiet ist am besten für Kaffee?",
+            "answer": "Kiyosumi-Shirakawa ist die stärkste Basis für Kaffee und Museen."
           },
           {
-            "question": "Is Kuramae convenient?",
-            "answer": "It is good for Asakusa and riverside walks, but less direct for west-side nightlife."
+            "question": "Ist Kuramae praktisch?",
+            "answer": "Gut für Asakusa und Flussspaziergänge, weniger direkt fürs West-Nachtleben."
           },
           {
-            "question": "Should I stay in Ryogoku?",
-            "answer": "It works for sumo, museums, and local food, but it is usually better as a focused local base than a default first stay."
+            "question": "Sollte ich in Ryogoku übernachten?",
+            "answer": "Gut für Sumo, Museen und lokales Essen, eher als gezielte lokale Basis statt Standard-Erstnacht."
           }
         ],
-        "breadcrumbLabel": "East Tokyo"
+        "breadcrumbLabel": "Ost-Tokio"
       }
     }
   },
