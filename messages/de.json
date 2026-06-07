@@ -3028,7 +3028,7 @@
       "localHotelCtaLabel": "Lokale Hotelbeispiele in Japan",
       "nextActionsTitle": "Weitere Aufenthaltsplanung",
       "nextActionsSubtitle": "Nutze diese Links, nachdem du dein Hotelgebiet gewählt hast.",
-      "faqTitle": "FAQ"
+      "faqTitle": "Häufige Fragen"
     },
     "pages": {
       "tokyo-first-time": {
@@ -3150,29 +3150,29 @@
         ],
         "nextActions": [
           {
-            "title": "Vollständiger Kyoto-Stay-Guide",
+            "title": "Vollständiger Kyoto-Guide",
             "description": "Vergleiche Kyoto Station, Gion, Kawaramachi und ruhigere Gebiete.",
-            "cta": "Guide öffnen"
+            "cta": "Vollständigen Guide ansehen"
           },
           {
-            "title": "Flughafentransfer-Routen",
-            "description": "Vergleiche Airport-Züge, Busse und Transfers.",
+            "title": "Flughafen-Transfer-Routen",
+            "description": "Vergleiche Flughafenzüge, Busse und Transferoptionen.",
             "cta": "Routen ansehen"
           },
           {
-            "title": "Flughafentransfer-Routen",
-            "description": "Vergleiche Airport-Züge, Busse und Transfers.",
+            "title": "Flughafen-Transfer-Routen",
+            "description": "Vergleiche Flughafenzüge, Busse und Transferoptionen.",
             "cta": "Routen ansehen"
           },
           {
             "title": "Fuji-Seite prüfen",
-            "description": "Finde den richtigen Fensterplatz mit Fuji-Blick.",
+            "description": "Finde den richtigen Fensterplatz für den Fuji-Blick.",
             "cta": "Sitz prüfen"
           },
           {
-            "title": "Japan-Route",
-            "description": "Ordne Tokyo, Kyoto und Osaka praktisch.",
-            "cta": "Route ansehen"
+            "title": "Japan-Reiseplan",
+            "description": "Setze Tokio, Kyoto und Osaka in eine praktische Route.",
+            "cta": "Reiseplan ansehen"
           }
         ],
         "faqs": [
@@ -3428,77 +3428,77 @@
           {
             "feature": "Shinkansen-Zugang",
             "values": {
-              "Tokyo Station": "Direkt (0 Min.)",
-              "Shinjuku": "10 Min. JR Chuo"
+              "Tokyo Station": "Direkt (0 Min)",
+              "Shinjuku": "10 Min Umstieg JR Chuo"
             }
           },
           {
             "feature": "Nachtleben & Essen",
             "values": {
               "Tokyo Station": "★★★☆☆ (Marunouchi)",
-              "Shinjuku": "★★★★★ (Golden Gai usw.)"
+              "Shinjuku": "★★★★★ (Golden Gai etc.)"
             }
           },
           {
             "feature": "Narita-Zugang",
             "values": {
-              "Tokyo Station": "N'EX 55 Min.",
-              "Shinjuku": "N'EX 80 Min."
+              "Tokyo Station": "N'EX 55 Min",
+              "Shinjuku": "N'EX 80 Min"
             }
           },
           {
             "feature": "Haneda-Zugang",
             "values": {
-              "Tokyo Station": "Monorail + JR 30 Min.",
-              "Shinjuku": "Bus 40 Min."
+              "Tokyo Station": "Monorail + JR 30 Min",
+              "Shinjuku": "Bus 40 Min"
             }
           },
           {
-            "feature": "Gepäckkomfort",
+            "feature": "Gepäck-Handling",
             "values": {
               "Tokyo Station": "★★★★★",
               "Shinjuku": "★★★☆☆"
             }
           },
           {
-            "feature": "Hotelpreisgefühl",
+            "feature": "Hotelpreis-Gefühl",
             "values": {
               "Tokyo Station": "Premium-Businesshotels",
-              "Shinjuku": "Breitere Auswahl"
+              "Shinjuku": "Größere Auswahl"
             }
           },
           {
-            "feature": "Atmosphäre nach 21 Uhr",
+            "feature": "Stimmung nach 21 Uhr",
             "values": {
-              "Tokyo Station": "Ruhige Büros",
+              "Tokyo Station": "Stille Büroviertel",
               "Shinjuku": "Neon und Lärm"
             }
           }
         ],
         "nextActions": [
           {
-            "title": "Vollständiger Tokyo-Gebietsguide",
-            "description": "Vergleiche die wichtigsten Tokyo-Standorte.",
+            "title": "Vollständiger Tokio-Gebietsguide",
+            "description": "Vergleiche die vier wichtigsten Tokio-Basen.",
             "cta": "Alle Gebiete ansehen"
           },
           {
-            "title": "Fuji-Seite im Zug prüfen",
-            "description": "Finde den richtigen Fensterplatz mit Mt.-Fuji-Blick.",
+            "title": "Fuji-Seite prüfen",
+            "description": "Finde den Fuji-Fensterplatz für deine Route.",
             "cta": "Sitz prüfen"
           },
           {
             "title": "Flughafentransfer planen",
-            "description": "Narita oder Haneda zu deinem Hotelgebiet.",
+            "description": "Von Narita oder Haneda zum Hotelgebiet.",
             "cta": "Transfers vergleichen"
           },
           {
-            "title": "Japan eSIM holen",
-            "description": "Internet vor der Landung vorbereiten.",
+            "title": "Japan-eSIM holen",
+            "description": "Verbindung vor der Landung einrichten.",
             "cta": "eSIM holen"
           },
           {
-            "title": "JR-Pass-Guide",
-            "description": "Prüfe vor dem Kauf, ob deine Route genug lange JR-Fahrten enthält.",
+            "title": "JR-Pass-Eignungsguide",
+            "description": "Prüfe vor dem Kauf, ob deine Route genug JR-Fernfahrten enthält.",
             "cta": "Guide lesen"
           }
         ]
@@ -3586,28 +3586,28 @@
         ],
         "nextActions": [
           {
-            "title": "Vollständiger Osaka-Stay-Guide",
+            "title": "Vollständiger Osaka-Guide",
             "description": "Vergleiche Namba, Umeda und Shin-Osaka.",
-            "cta": "Guide öffnen"
+            "cta": "Vollständigen Guide ansehen"
           },
           {
-            "title": "Flughafentransfer-Routen",
-            "description": "Vergleiche Airport-Züge, Busse und Transfers.",
+            "title": "Flughafen-Transfer-Routen",
+            "description": "Vergleiche Flughafenzüge, Busse und Transferoptionen.",
             "cta": "Routen ansehen"
           },
           {
-            "title": "Flughafentransfer-Routen",
-            "description": "Vergleiche Airport-Züge, Busse und Transfers.",
+            "title": "Flughafen-Transfer-Routen",
+            "description": "Vergleiche Flughafenzüge, Busse und Transferoptionen.",
             "cta": "Routen ansehen"
           },
           {
-            "title": "Flughafentransfer-Routen",
-            "description": "Vergleiche Airport-Züge, Busse und Transfers.",
+            "title": "Flughafen-Transfer-Routen",
+            "description": "Vergleiche Flughafenzüge, Busse und Transferoptionen.",
             "cta": "Routen ansehen"
           },
           {
             "title": "Fuji-Seite prüfen",
-            "description": "Finde den richtigen Fensterplatz mit Fuji-Blick.",
+            "description": "Finde den richtigen Fensterplatz für den Fuji-Blick.",
             "cta": "Sitz prüfen"
           }
         ],
@@ -3672,29 +3672,29 @@
         ],
         "nextActions": [
           {
-            "title": "Vollständiger Osaka-Stay-Guide",
+            "title": "Vollständiger Osaka-Guide",
             "description": "Vergleiche Namba, Umeda und Shin-Osaka.",
-            "cta": "Guide öffnen"
+            "cta": "Vollständigen Guide ansehen"
           },
           {
             "title": "Namba vs Umeda",
-            "description": "Vergleiche die zwei wichtigsten Sightseeing-Basen in Osaka.",
+            "description": "Vergleiche die beiden wichtigsten Sightseeing-Basen Osakas.",
             "cta": "Vergleichen"
           },
           {
-            "title": "Flughafentransfer-Routen",
-            "description": "Vergleiche Airport-Züge, Busse und Transfers.",
+            "title": "Flughafen-Transfer-Routen",
+            "description": "Vergleiche Flughafenzüge, Busse und Transferoptionen.",
             "cta": "Routen ansehen"
           },
           {
             "title": "Fuji-Seite prüfen",
-            "description": "Finde den richtigen Fensterplatz mit Fuji-Blick.",
+            "description": "Finde den richtigen Fensterplatz für den Fuji-Blick.",
             "cta": "Sitz prüfen"
           },
           {
-            "title": "Japan-Route",
-            "description": "Ordne Tokyo, Kyoto und Osaka praktisch.",
-            "cta": "Route ansehen"
+            "title": "Japan-Reiseplan",
+            "description": "Setze Tokio, Kyoto und Osaka in eine praktische Route.",
+            "cta": "Reiseplan ansehen"
           }
         ],
         "faqs": [

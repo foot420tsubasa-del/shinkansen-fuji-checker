@@ -3028,14 +3028,14 @@
       "localHotelCtaLabel": "Локальные примеры отелей в Японии",
       "nextActionsTitle": "Дальше по планированию жилья",
       "nextActionsSubtitle": "Используйте эти ссылки после выбора района отеля.",
-      "faqTitle": "FAQ"
+      "faqTitle": "Часто задаваемые вопросы"
     },
     "pages": {
       "tokyo-first-time": {
         "title": "Где остановиться: Токио — first-time visitor guide",
         "description": "Сравнение: Compare Shinjuku, Ueno, Asakusa, and Токио Station for your first trip to Japan. Find the best area based on transport access, nightlife, and luggage ease.",
         "quickRec": {
-          "area": "Shinjuku",
+          "area": "Синдзюку",
           "why": "Практичная рекомендация, чтобы выбрать район отеля и не усложнить маршрут."
         },
         "proTip": "Совет: выбирайте район по багажу, первой ночи и дням с поездами."
@@ -3044,7 +3044,7 @@
         "title": "Shinjuku vs Ueno vs Asakusa — which Токио base is right?",
         "description": "Сравнение: A head-to-head comparison of Токио's three most popular tourist areas: transport, budget, vibe, and best traveler fit.",
         "quickRec": {
-          "area": "Shinjuku",
+          "area": "Синдзюку",
           "why": "Практичная рекомендация, чтобы выбрать район отеля и не усложнить маршрут."
         },
         "proTip": "Совет: выбирайте район по багажу, первой ночи и дням с поездами.",
@@ -3150,29 +3150,29 @@
         ],
         "nextActions": [
           {
-            "title": "Full Kyoto stay guide",
-            "description": "Compare Kyoto Station, Gion, Kawaramachi, and quieter areas.",
-            "cta": "See full guide"
+            "title": "Полный гид по Киото",
+            "description": "Сравните Kyoto Station, Гион, Каварамати и более тихие районы.",
+            "cta": "Открыть полный гид"
           },
           {
-            "title": "Airport transfer routes",
-            "description": "Compare airport trains, buses, and transfer options.",
-            "cta": "See routes"
+            "title": "Маршруты от аэропорта",
+            "description": "Сравните аэроэкспрессы, автобусы и трансферы.",
+            "cta": "Посмотреть маршруты"
           },
           {
-            "title": "Airport transfer routes",
-            "description": "Compare airport trains, buses, and transfer options.",
-            "cta": "See routes"
+            "title": "Маршруты от аэропорта",
+            "description": "Сравните аэроэкспрессы, автобусы и трансферы.",
+            "cta": "Посмотреть маршруты"
           },
           {
-            "title": "Check Fuji-side seat",
-            "description": "Find the right window seat for Mt. Fuji views.",
-            "cta": "Check seat"
+            "title": "Проверить место со стороны Фудзи",
+            "description": "Найдите подходящее место у окна с видом на Фудзи.",
+            "cta": "Проверить место"
           },
           {
-            "title": "Japan itinerary",
-            "description": "Place Tokyo, Kyoto, and Osaka in a practical route.",
-            "cta": "View itinerary"
+            "title": "Маршрут по Японии",
+            "description": "Расположите Токио, Киото и Осаку в практичном маршруте.",
+            "cta": "Открыть маршрут"
           }
         ],
         "faqs": [
@@ -3198,7 +3198,7 @@
         "title": "Где остановиться: Kawaguchiko — best Mt. Fuji view hotels",
         "description": "Сравнение: Compare Lake Kawaguchiko areas for an overnight Mt. Fuji stay, including north shore, south shore, station area, and onsen ryokan choices.",
         "quickRec": {
-          "area": "North shore",
+          "area": "Северный берег",
           "why": "Практичная рекомендация, чтобы выбрать район отеля и не усложнить маршрут."
         },
         "proTip": "Совет: выбирайте район по багажу, первой ночи и дням с поездами.",
@@ -3388,7 +3388,7 @@
         "title": "Токио Station vs Shinjuku: Где остановиться: Токио?",
         "description": "Сравнение: Compare Токио Station and Shinjuku for Shinkansen access, nightlife, food, airport transfers, and luggage.",
         "quickRec": {
-          "area": "Shinjuku",
+          "area": "Синдзюку",
           "why": "Практичная рекомендация, чтобы выбрать район отеля и не усложнить маршрут."
         },
         "proTip": "Совет: выбирайте район по багажу, первой ночи и дням с поездами.",
@@ -3426,80 +3426,80 @@
         ],
         "comparison": [
           {
-            "feature": "Shinkansen access",
+            "feature": "Доступ к синкансэну",
             "values": {
-              "Tokyo Station": "Direct (0 min)",
-              "Shinjuku": "10 min JR Chuo transfer"
+              "Tokyo Station": "Прямо (0 мин)",
+              "Shinjuku": "10 мин пересадки на JR Chuo"
             }
           },
           {
-            "feature": "Nightlife & food",
+            "feature": "Ночная жизнь и еда",
             "values": {
-              "Tokyo Station": "★★★☆☆ (Marunouchi)",
-              "Shinjuku": "★★★★★ (Golden Gai etc.)"
+              "Tokyo Station": "★★★☆☆ (Маруноути)",
+              "Shinjuku": "★★★★★ (Golden Gai и т. д.)"
             }
           },
           {
-            "feature": "Narita access",
+            "feature": "Доступ к Нарите",
             "values": {
-              "Tokyo Station": "N'EX 55 min",
-              "Shinjuku": "N'EX 80 min"
+              "Tokyo Station": "N'EX 55 мин",
+              "Shinjuku": "N'EX 80 мин"
             }
           },
           {
-            "feature": "Haneda access",
+            "feature": "Доступ к Ханэде",
             "values": {
-              "Tokyo Station": "Monorail + JR 30 min",
-              "Shinjuku": "Bus 40 min"
+              "Tokyo Station": "Монорельс + JR 30 мин",
+              "Shinjuku": "Автобус 40 мин"
             }
           },
           {
-            "feature": "Luggage ease",
+            "feature": "Удобство с багажом",
             "values": {
               "Tokyo Station": "★★★★★",
               "Shinjuku": "★★★☆☆"
             }
           },
           {
-            "feature": "Hotel cost feel",
+            "feature": "Ощущение цен на отели",
             "values": {
-              "Tokyo Station": "Premium business hotels",
-              "Shinjuku": "Wider range"
+              "Tokyo Station": "Премиум бизнес-отели",
+              "Shinjuku": "Шире выбор"
             }
           },
           {
-            "feature": "Vibe after 9pm",
+            "feature": "Атмосфера после 21:00",
             "values": {
-              "Tokyo Station": "Quiet offices",
-              "Shinjuku": "Neon and noise"
+              "Tokyo Station": "Тихие офисы",
+              "Shinjuku": "Неон и шум"
             }
           }
         ],
         "nextActions": [
           {
-            "title": "Full Tokyo area guide",
-            "description": "Compare all four major Tokyo bases.",
-            "cta": "See all areas"
+            "title": "Полный гид по районам Токио",
+            "description": "Сравните четыре основные базы Токио.",
+            "cta": "Все районы"
           },
           {
-            "title": "Check Fuji-side seat",
-            "description": "Find the Mt. Fuji window seat for your route.",
-            "cta": "Check seat"
+            "title": "Проверить место со стороны Фудзи",
+            "description": "Найдите место у окна с видом на Фудзи для вашего маршрута.",
+            "cta": "Проверить место"
           },
           {
-            "title": "Sort airport transfer",
-            "description": "Narita or Haneda to your hotel area.",
-            "cta": "Compare transfers"
+            "title": "Решить вопрос с трансфером",
+            "description": "Из Нариты или Ханэды в район вашего отеля.",
+            "cta": "Сравнить трансферы"
           },
           {
-            "title": "Get Japan eSIM",
-            "description": "Set up connectivity before landing.",
-            "cta": "Get eSIM"
+            "title": "Получить eSIM для Японии",
+            "description": "Подключитесь до приземления.",
+            "cta": "Получить eSIM"
           },
           {
-            "title": "JR Pass fit guide",
-            "description": "Check whether your route has enough long-distance JR rides before buying.",
-            "cta": "Read guide"
+            "title": "Гид по выбору JR Pass",
+            "description": "Перед покупкой убедитесь, что в маршруте достаточно дальних поездок JR.",
+            "cta": "Читать гид"
           }
         ]
       },
@@ -3507,7 +3507,7 @@
         "title": "Ueno vs Shinjuku: Which Токио Area Should You Stay In?",
         "description": "Сравнение: Compare Ueno and Shinjuku for Narita access, hotel value, nightlife, food, museums, luggage, and train convenience.",
         "quickRec": {
-          "area": "Ueno",
+          "area": "Уэно",
           "why": "Практичная рекомендация, чтобы выбрать район отеля и не усложнить маршрут."
         },
         "proTip": "Совет: выбирайте район по багажу, первой ночи и дням с поездами.",
@@ -3548,7 +3548,7 @@
         "title": "Namba vs Umeda: Где остановиться: Осаке?",
         "description": "Сравнение: Compare Namba and Umeda for food, nightlife, shopping, transport, Киото day trips, and Kansai Airport access.",
         "quickRec": {
-          "area": "Namba",
+          "area": "Намба",
           "why": "Практичная рекомендация, чтобы выбрать район отеля и не усложнить маршрут."
         },
         "proTip": "Совет: выбирайте район по багажу, первой ночи и дням с поездами.",
@@ -3586,29 +3586,29 @@
         ],
         "nextActions": [
           {
-            "title": "Full Osaka stay guide",
-            "description": "Compare Namba, Umeda, and Shin-Osaka.",
-            "cta": "See full guide"
+            "title": "Полный гид по Осаке",
+            "description": "Сравните Намбу, Умэду и Син-Осаку.",
+            "cta": "Открыть полный гид"
           },
           {
-            "title": "Airport transfer routes",
-            "description": "Compare airport trains, buses, and transfer options.",
-            "cta": "See routes"
+            "title": "Маршруты от аэропорта",
+            "description": "Сравните аэроэкспрессы, автобусы и трансферы.",
+            "cta": "Посмотреть маршруты"
           },
           {
-            "title": "Airport transfer routes",
-            "description": "Compare airport trains, buses, and transfer options.",
-            "cta": "See routes"
+            "title": "Маршруты от аэропорта",
+            "description": "Сравните аэроэкспрессы, автобусы и трансферы.",
+            "cta": "Посмотреть маршруты"
           },
           {
-            "title": "Airport transfer routes",
-            "description": "Compare airport trains, buses, and transfer options.",
-            "cta": "See routes"
+            "title": "Маршруты от аэропорта",
+            "description": "Сравните аэроэкспрессы, автобусы и трансферы.",
+            "cta": "Посмотреть маршруты"
           },
           {
-            "title": "Check Fuji-side seat",
-            "description": "Find the right window seat for Mt. Fuji views.",
-            "cta": "Check seat"
+            "title": "Проверить место со стороны Фудзи",
+            "description": "Найдите подходящее место у окна с видом на Фудзи.",
+            "cta": "Проверить место"
           }
         ],
         "faqs": [
@@ -3634,7 +3634,7 @@
         "title": "Shin-Осаке vs Namba: Где остановиться: Осаке?",
         "description": "Сравнение: Compare Shin-Осаке and Namba for Shinkansen access, nightlife, food, luggage, early trains, and first-time Осаке trips.",
         "quickRec": {
-          "area": "Namba",
+          "area": "Намба",
           "why": "Практичная рекомендация, чтобы выбрать район отеля и не усложнить маршрут."
         },
         "proTip": "Совет: выбирайте район по багажу, первой ночи и дням с поездами.",
@@ -3672,29 +3672,29 @@
         ],
         "nextActions": [
           {
-            "title": "Full Osaka stay guide",
-            "description": "Compare Namba, Umeda, and Shin-Osaka.",
-            "cta": "See full guide"
+            "title": "Полный гид по Осаке",
+            "description": "Сравните Намбу, Умэду и Син-Осаку.",
+            "cta": "Открыть полный гид"
           },
           {
-            "title": "Namba vs Umeda",
-            "description": "Compare the two main sightseeing bases in Osaka.",
-            "cta": "Compare"
+            "title": "Намба и Умэда",
+            "description": "Сравните две основные туристические базы Осаки.",
+            "cta": "Сравнить"
           },
           {
-            "title": "Airport transfer routes",
-            "description": "Compare airport trains, buses, and transfer options.",
-            "cta": "See routes"
+            "title": "Маршруты от аэропорта",
+            "description": "Сравните аэроэкспрессы, автобусы и трансферы.",
+            "cta": "Посмотреть маршруты"
           },
           {
-            "title": "Check Fuji-side seat",
-            "description": "Find the right window seat for Mt. Fuji views.",
-            "cta": "Check seat"
+            "title": "Проверить место со стороны Фудзи",
+            "description": "Найдите подходящее место у окна с видом на Фудзи.",
+            "cta": "Проверить место"
           },
           {
-            "title": "Japan itinerary",
-            "description": "Place Tokyo, Kyoto, and Osaka in a practical route.",
-            "cta": "View itinerary"
+            "title": "Маршрут по Японии",
+            "description": "Расположите Токио, Киото и Осаку в практичном маршруте.",
+            "cta": "Открыть маршрут"
           }
         ],
         "faqs": [
@@ -3720,7 +3720,7 @@
         "title": "Где остановиться: Токио",
         "description": "Сравнение: Compare Токио Station, Shinjuku, Ueno, and Asakusa before taking the Shinkansen to Киото or Осаке.",
         "quickRec": {
-          "area": "Tokyo Station or Ueno",
+          "area": "Tokyo Station или Уэно",
           "why": "Практичная рекомендация, чтобы выбрать район отеля и не усложнить маршрут."
         },
         "proTip": "Совет: выбирайте район по багажу, первой ночи и дням с поездами.",
@@ -3831,7 +3831,7 @@
         "title": "Asakusa vs Ueno: Где остановиться: Токио?",
         "description": "Сравнение: Compare Asakusa and Ueno for old Токио atmosphere, Narita access, budget hotels, museums, and food.",
         "quickRec": {
-          "area": "Ueno",
+          "area": "Уэно",
           "why": "Практичная рекомендация, чтобы выбрать район отеля и не усложнить маршрут."
         },
         "proTip": "Совет: выбирайте район по багажу, первой ночи и дням с поездами.",

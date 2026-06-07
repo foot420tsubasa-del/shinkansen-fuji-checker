@@ -3150,28 +3150,28 @@
         ],
         "nextActions": [
           {
-            "title": "Guía completa de alojamiento en Kioto",
-            "description": "Compara Kyoto Station, Gion, Kawaramachi y zonas tranquilas.",
-            "cta": "Ver guía"
+            "title": "Guía completa de Kioto",
+            "description": "Compara Kyoto Station, Gion, Kawaramachi y zonas más tranquilas.",
+            "cta": "Ver guía completa"
           },
           {
             "title": "Rutas de traslado al aeropuerto",
-            "description": "Compara trenes, buses y transfers.",
+            "description": "Compara trenes, autobuses y opciones de traslado desde el aeropuerto.",
             "cta": "Ver rutas"
           },
           {
             "title": "Rutas de traslado al aeropuerto",
-            "description": "Compara trenes, buses y transfers.",
+            "description": "Compara trenes, autobuses y opciones de traslado desde el aeropuerto.",
             "cta": "Ver rutas"
           },
           {
-            "title": "Comprobar asiento lado Fuji",
-            "description": "Encuentra la ventanilla con vista al Fuji.",
-            "cta": "Comprobar"
+            "title": "Verificar asiento lado Fuji",
+            "description": "Encuentra el asiento de ventana adecuado para ver el Monte Fuji.",
+            "cta": "Verificar asiento"
           },
           {
             "title": "Itinerario por Japón",
-            "description": "Ordena Tokio, Kioto y Osaka.",
+            "description": "Ubica Tokio, Kioto y Osaka en una ruta práctica.",
             "cta": "Ver itinerario"
           }
         ],
@@ -3198,7 +3198,7 @@
         "title": "Dónde alojarse: Kawaguchiko — best Mt. Fuji view hotels",
         "description": "Compara Compare Lake Kawaguchiko areas for an overnight Mt. Fuji stay, including north shore, south shore, station area, and onsen ryokan choices.",
         "quickRec": {
-          "area": "North shore",
+          "area": "Orilla norte",
           "why": "Recomendación práctica para elegir zona de hotel sin complicar la ruta."
         },
         "proTip": "Consejo: elige la zona según equipaje, primera noche y días de tren.",
@@ -3429,11 +3429,11 @@
             "feature": "Acceso al Shinkansen",
             "values": {
               "Tokyo Station": "Directo (0 min)",
-              "Shinjuku": "10 min en JR Chuo"
+              "Shinjuku": "10 min de transbordo JR Chuo"
             }
           },
           {
-            "feature": "Noche y comida",
+            "feature": "Vida nocturna y comida",
             "values": {
               "Tokyo Station": "★★★☆☆ (Marunouchi)",
               "Shinjuku": "★★★★★ (Golden Gai, etc.)"
@@ -3449,8 +3449,8 @@
           {
             "feature": "Acceso a Haneda",
             "values": {
-              "Tokyo Station": "Monorraíl + JR 30 min",
-              "Shinjuku": "Bus 40 min"
+              "Tokyo Station": "Monorrail + JR 30 min",
+              "Shinjuku": "Autobús 40 min"
             }
           },
           {
@@ -3461,7 +3461,7 @@
             }
           },
           {
-            "feature": "Sensación de coste hotelero",
+            "feature": "Sensación de precio del hotel",
             "values": {
               "Tokyo Station": "Hoteles business premium",
               "Shinjuku": "Rango más amplio"
@@ -3470,35 +3470,35 @@
           {
             "feature": "Ambiente después de las 21:00",
             "values": {
-              "Tokyo Station": "Oficinas tranquilas",
+              "Tokyo Station": "Oficinas silenciosas",
               "Shinjuku": "Neón y ruido"
             }
           }
         ],
         "nextActions": [
           {
-            "title": "Guía completa de zonas de Tokio",
-            "description": "Compara las principales bases de Tokio.",
+            "title": "Guía completa de las zonas de Tokio",
+            "description": "Compara las cuatro bases principales de Tokio.",
             "cta": "Ver todas las zonas"
           },
           {
-            "title": "Comprobar asiento del lado Fuji",
-            "description": "Encuentra la ventanilla con vista al Mt. Fuji.",
-            "cta": "Comprobar asiento"
+            "title": "Verificar asiento lado Fuji",
+            "description": "Encuentra el asiento de ventana del Monte Fuji para tu ruta.",
+            "cta": "Verificar asiento"
           },
           {
-            "title": "Organizar traslado de aeropuerto",
-            "description": "Narita o Haneda hasta tu zona de hotel.",
+            "title": "Organizar traslado al aeropuerto",
+            "description": "De Narita o Haneda hasta tu zona de hotel.",
             "cta": "Comparar traslados"
           },
           {
-            "title": "Conseguir eSIM para Japón",
-            "description": "Prepara la conexión antes de aterrizar.",
-            "cta": "Conseguir eSIM"
+            "title": "Obtener eSIM para Japón",
+            "description": "Configura tu conectividad antes de aterrizar.",
+            "cta": "Obtener eSIM"
           },
           {
-            "title": "Guía de JR Pass",
-            "description": "Comprueba si tu ruta tiene suficientes trayectos JR largos.",
+            "title": "Guía de idoneidad del JR Pass",
+            "description": "Comprueba si tu ruta tiene suficientes trayectos JR de larga distancia antes de comprar.",
             "cta": "Leer guía"
           }
         ]
@@ -3586,29 +3586,29 @@
         ],
         "nextActions": [
           {
-            "title": "Guía completa de alojamiento en Osaka",
+            "title": "Guía completa de Osaka",
             "description": "Compara Namba, Umeda y Shin-Osaka.",
-            "cta": "Ver guía"
+            "cta": "Ver guía completa"
           },
           {
             "title": "Rutas de traslado al aeropuerto",
-            "description": "Compara trenes, buses y transfers.",
+            "description": "Compara trenes, autobuses y opciones de traslado desde el aeropuerto.",
             "cta": "Ver rutas"
           },
           {
             "title": "Rutas de traslado al aeropuerto",
-            "description": "Compara trenes, buses y transfers.",
+            "description": "Compara trenes, autobuses y opciones de traslado desde el aeropuerto.",
             "cta": "Ver rutas"
           },
           {
             "title": "Rutas de traslado al aeropuerto",
-            "description": "Compara trenes, buses y transfers.",
+            "description": "Compara trenes, autobuses y opciones de traslado desde el aeropuerto.",
             "cta": "Ver rutas"
           },
           {
-            "title": "Comprobar asiento lado Fuji",
-            "description": "Encuentra la ventanilla con vista al Fuji.",
-            "cta": "Comprobar"
+            "title": "Verificar asiento lado Fuji",
+            "description": "Encuentra el asiento de ventana adecuado para ver el Monte Fuji.",
+            "cta": "Verificar asiento"
           }
         ],
         "faqs": [
@@ -3672,28 +3672,28 @@
         ],
         "nextActions": [
           {
-            "title": "Guía completa de alojamiento en Osaka",
+            "title": "Guía completa de Osaka",
             "description": "Compara Namba, Umeda y Shin-Osaka.",
-            "cta": "Ver guía"
+            "cta": "Ver guía completa"
           },
           {
             "title": "Namba vs Umeda",
-            "description": "Compara las dos bases principales de Osaka.",
+            "description": "Compara las dos bases turísticas principales de Osaka.",
             "cta": "Comparar"
           },
           {
             "title": "Rutas de traslado al aeropuerto",
-            "description": "Compara trenes, buses y transfers.",
+            "description": "Compara trenes, autobuses y opciones de traslado desde el aeropuerto.",
             "cta": "Ver rutas"
           },
           {
-            "title": "Comprobar asiento lado Fuji",
-            "description": "Encuentra la ventanilla con vista al Fuji.",
-            "cta": "Comprobar"
+            "title": "Verificar asiento lado Fuji",
+            "description": "Encuentra el asiento de ventana adecuado para ver el Monte Fuji.",
+            "cta": "Verificar asiento"
           },
           {
             "title": "Itinerario por Japón",
-            "description": "Ordena Tokio, Kioto y Osaka.",
+            "description": "Ubica Tokio, Kioto y Osaka en una ruta práctica.",
             "cta": "Ver itinerario"
           }
         ],
@@ -3720,7 +3720,7 @@
         "title": "Dónde alojarse: Tokio",
         "description": "Compara Compare Tokio Station, Shinjuku, Ueno, and Asakusa before taking the Shinkansen to Kioto or Osaka.",
         "quickRec": {
-          "area": "Tokyo Station or Ueno",
+          "area": "Tokyo Station o Ueno",
           "why": "Recomendación práctica para elegir zona de hotel sin complicar la ruta."
         },
         "proTip": "Consejo: elige la zona según equipaje, primera noche y días de tren.",

@@ -3035,7 +3035,7 @@
         "title": "住宿区域指南：东京 — first-time visitor guide",
         "description": "比较：Compare Shinjuku, Ueno, Asakusa, and 东京 Station for your first trip to Japan. Find the best area based on transport access, nightlife, and luggage ease.",
         "quickRec": {
-          "area": "Shinjuku",
+          "area": "新宿",
           "why": "实用建议：先按路线、行李和到达时间选择酒店区域。"
         },
         "proTip": "提示：根据行李、第一晚和新干线日程来选住宿区域。"
@@ -3044,7 +3044,7 @@
         "title": "Shinjuku vs Ueno vs Asakusa — which 东京 base is right?",
         "description": "比较：A head-to-head comparison of 东京's three most popular tourist areas: transport, budget, vibe, and best traveler fit.",
         "quickRec": {
-          "area": "Shinjuku",
+          "area": "新宿",
           "why": "实用建议：先按路线、行李和到达时间选择酒店区域。"
         },
         "proTip": "提示：根据行李、第一晚和新干线日程来选住宿区域。",
@@ -3112,7 +3112,7 @@
         "title": "京都 Station vs Gion: 住宿区域指南：京都?",
         "description": "比较：Compare 京都 Station and Gion for Shinkansen access, luggage, sightseeing, food, and atmosphere.",
         "quickRec": {
-          "area": "Kyoto Station",
+          "area": "京都站",
           "why": "实用建议：先按路线、行李和到达时间选择酒店区域。"
         },
         "proTip": "提示：根据行李、第一晚和新干线日程来选住宿区域。",
@@ -3150,29 +3150,29 @@
         ],
         "nextActions": [
           {
-            "title": "Full Kyoto stay guide",
-            "description": "Compare Kyoto Station, Gion, Kawaramachi, and quieter areas.",
-            "cta": "See full guide"
+            "title": "京都住宿完整指南",
+            "description": "比较京都站、祇园、河原町与较宁静的区域。",
+            "cta": "查看完整指南"
           },
           {
-            "title": "Airport transfer routes",
-            "description": "Compare airport trains, buses, and transfer options.",
-            "cta": "See routes"
+            "title": "机场接驳路线",
+            "description": "比较机场列车、巴士与接驳选择。",
+            "cta": "查看路线"
           },
           {
-            "title": "Airport transfer routes",
-            "description": "Compare airport trains, buses, and transfer options.",
-            "cta": "See routes"
+            "title": "机场接驳路线",
+            "description": "比较机场列车、巴士与接驳选择。",
+            "cta": "查看路线"
           },
           {
-            "title": "Check Fuji-side seat",
-            "description": "Find the right window seat for Mt. Fuji views.",
-            "cta": "Check seat"
+            "title": "确认富士侧座位",
+            "description": "找出观赏富士山的最佳靠窗座位。",
+            "cta": "确认座位"
           },
           {
-            "title": "Japan itinerary",
-            "description": "Place Tokyo, Kyoto, and Osaka in a practical route.",
-            "cta": "View itinerary"
+            "title": "日本行程",
+            "description": "将东京、京都、大阪安排于实用路线中。",
+            "cta": "查看行程"
           }
         ],
         "faqs": [
@@ -3198,7 +3198,7 @@
         "title": "住宿区域指南：Kawaguchiko — best Mt. Fuji view hotels",
         "description": "比较：Compare Lake Kawaguchiko areas for an overnight Mt. Fuji stay, including north shore, south shore, station area, and onsen ryokan choices.",
         "quickRec": {
-          "area": "North shore",
+          "area": "北岸",
           "why": "实用建议：先按路线、行李和到达时间选择酒店区域。"
         },
         "proTip": "提示：根据行李、第一晚和新干线日程来选住宿区域。",
@@ -3300,7 +3300,7 @@
         "title": "Where to Stay Before Taking the Shinkansen in 东京",
         "description": "比较：Compare 东京 Station, Shinjuku, Ueno, Asakusa, and East 东京 before a Shinkansen day to 京都 or 大阪.",
         "quickRec": {
-          "area": "Tokyo Station",
+          "area": "东京站",
           "why": "实用建议：先按路线、行李和到达时间选择酒店区域。"
         },
         "proTip": "提示：根据行李、第一晚和新干线日程来选住宿区域。",
@@ -3388,7 +3388,7 @@
         "title": "东京 Station vs Shinjuku: 住宿区域指南：东京?",
         "description": "比较：Compare 东京 Station and Shinjuku for Shinkansen access, nightlife, food, airport transfers, and luggage.",
         "quickRec": {
-          "area": "Shinjuku",
+          "area": "新宿",
           "why": "实用建议：先按路线、行李和到达时间选择酒店区域。"
         },
         "proTip": "提示：根据行李、第一晚和新干线日程来选住宿区域。",
@@ -3426,80 +3426,80 @@
         ],
         "comparison": [
           {
-            "feature": "Shinkansen access",
+            "feature": "新干线交通",
             "values": {
-              "Tokyo Station": "Direct (0 min)",
-              "Shinjuku": "10 min JR Chuo transfer"
+              "Tokyo Station": "直达（0 分钟）",
+              "Shinjuku": "JR 中央线转乘 10 分钟"
             }
           },
           {
-            "feature": "Nightlife & food",
+            "feature": "夜生活与美食",
             "values": {
-              "Tokyo Station": "★★★☆☆ (Marunouchi)",
-              "Shinjuku": "★★★★★ (Golden Gai etc.)"
+              "Tokyo Station": "★★★☆☆（丸之内）",
+              "Shinjuku": "★★★★★（黄金街等）"
             }
           },
           {
-            "feature": "Narita access",
+            "feature": "成田交通",
             "values": {
-              "Tokyo Station": "N'EX 55 min",
-              "Shinjuku": "N'EX 80 min"
+              "Tokyo Station": "N'EX 55 分钟",
+              "Shinjuku": "N'EX 80 分钟"
             }
           },
           {
-            "feature": "Haneda access",
+            "feature": "羽田交通",
             "values": {
-              "Tokyo Station": "Monorail + JR 30 min",
-              "Shinjuku": "Bus 40 min"
+              "Tokyo Station": "单轨电车 + JR 30 分钟",
+              "Shinjuku": "巴士 40 分钟"
             }
           },
           {
-            "feature": "Luggage ease",
+            "feature": "行李便利度",
             "values": {
               "Tokyo Station": "★★★★★",
               "Shinjuku": "★★★☆☆"
             }
           },
           {
-            "feature": "Hotel cost feel",
+            "feature": "酒店价位感受",
             "values": {
-              "Tokyo Station": "Premium business hotels",
-              "Shinjuku": "Wider range"
+              "Tokyo Station": "高阶商务酒店",
+              "Shinjuku": "选择更广"
             }
           },
           {
-            "feature": "Vibe after 9pm",
+            "feature": "晚上 9 点后氛围",
             "values": {
-              "Tokyo Station": "Quiet offices",
-              "Shinjuku": "Neon and noise"
+              "Tokyo Station": "办公区宁静",
+              "Shinjuku": "霓虹与喧闹"
             }
           }
         ],
         "nextActions": [
           {
-            "title": "Full Tokyo area guide",
-            "description": "Compare all four major Tokyo bases.",
-            "cta": "See all areas"
+            "title": "东京区域完整指南",
+            "description": "比较东京四大主要基地。",
+            "cta": "查看全部区域"
           },
           {
-            "title": "Check Fuji-side seat",
-            "description": "Find the Mt. Fuji window seat for your route.",
-            "cta": "Check seat"
+            "title": "确认富士侧座位",
+            "description": "找出符合您路线的富士山靠窗座位。",
+            "cta": "确认座位"
           },
           {
-            "title": "Sort airport transfer",
-            "description": "Narita or Haneda to your hotel area.",
-            "cta": "Compare transfers"
+            "title": "规划机场接驳",
+            "description": "从成田或羽田到您的酒店区域。",
+            "cta": "比较接驳"
           },
           {
-            "title": "Get Japan eSIM",
-            "description": "Set up connectivity before landing.",
-            "cta": "Get eSIM"
+            "title": "取得日本 eSIM",
+            "description": "在抵达前先安排好网络。",
+            "cta": "取得 eSIM"
           },
           {
-            "title": "JR Pass fit guide",
-            "description": "Check whether your route has enough long-distance JR rides before buying.",
-            "cta": "Read guide"
+            "title": "JR Pass 适用指南",
+            "description": "购买前确认您的路线是否有足够的长途 JR 行程。",
+            "cta": "阅读指南"
           }
         ]
       },
@@ -3507,7 +3507,7 @@
         "title": "Ueno vs Shinjuku: Which 东京 Area Should You Stay In?",
         "description": "比较：Compare Ueno and Shinjuku for Narita access, hotel value, nightlife, food, museums, luggage, and train convenience.",
         "quickRec": {
-          "area": "Ueno",
+          "area": "上野",
           "why": "实用建议：先按路线、行李和到达时间选择酒店区域。"
         },
         "proTip": "提示：根据行李、第一晚和新干线日程来选住宿区域。",
@@ -3548,7 +3548,7 @@
         "title": "Namba vs Umeda: 住宿区域指南：大阪?",
         "description": "比较：Compare Namba and Umeda for food, nightlife, shopping, transport, 京都 day trips, and Kansai Airport access.",
         "quickRec": {
-          "area": "Namba",
+          "area": "难波",
           "why": "实用建议：先按路线、行李和到达时间选择酒店区域。"
         },
         "proTip": "提示：根据行李、第一晚和新干线日程来选住宿区域。",
@@ -3586,29 +3586,29 @@
         ],
         "nextActions": [
           {
-            "title": "Full Osaka stay guide",
-            "description": "Compare Namba, Umeda, and Shin-Osaka.",
-            "cta": "See full guide"
+            "title": "大阪住宿完整指南",
+            "description": "比较难波、梅田与新大阪。",
+            "cta": "查看完整指南"
           },
           {
-            "title": "Airport transfer routes",
-            "description": "Compare airport trains, buses, and transfer options.",
-            "cta": "See routes"
+            "title": "机场接驳路线",
+            "description": "比较机场列车、巴士与接驳选择。",
+            "cta": "查看路线"
           },
           {
-            "title": "Airport transfer routes",
-            "description": "Compare airport trains, buses, and transfer options.",
-            "cta": "See routes"
+            "title": "机场接驳路线",
+            "description": "比较机场列车、巴士与接驳选择。",
+            "cta": "查看路线"
           },
           {
-            "title": "Airport transfer routes",
-            "description": "Compare airport trains, buses, and transfer options.",
-            "cta": "See routes"
+            "title": "机场接驳路线",
+            "description": "比较机场列车、巴士与接驳选择。",
+            "cta": "查看路线"
           },
           {
-            "title": "Check Fuji-side seat",
-            "description": "Find the right window seat for Mt. Fuji views.",
-            "cta": "Check seat"
+            "title": "确认富士侧座位",
+            "description": "找出观赏富士山的最佳靠窗座位。",
+            "cta": "确认座位"
           }
         ],
         "faqs": [
@@ -3634,7 +3634,7 @@
         "title": "Shin-大阪 vs Namba: 住宿区域指南：大阪?",
         "description": "比较：Compare Shin-大阪 and Namba for Shinkansen access, nightlife, food, luggage, early trains, and first-time 大阪 trips.",
         "quickRec": {
-          "area": "Namba",
+          "area": "难波",
           "why": "实用建议：先按路线、行李和到达时间选择酒店区域。"
         },
         "proTip": "提示：根据行李、第一晚和新干线日程来选住宿区域。",
@@ -3672,29 +3672,29 @@
         ],
         "nextActions": [
           {
-            "title": "Full Osaka stay guide",
-            "description": "Compare Namba, Umeda, and Shin-Osaka.",
-            "cta": "See full guide"
+            "title": "大阪住宿完整指南",
+            "description": "比较难波、梅田与新大阪。",
+            "cta": "查看完整指南"
           },
           {
-            "title": "Namba vs Umeda",
-            "description": "Compare the two main sightseeing bases in Osaka.",
-            "cta": "Compare"
+            "title": "难波 vs 梅田",
+            "description": "比较大阪两大观光主要基地。",
+            "cta": "比较"
           },
           {
-            "title": "Airport transfer routes",
-            "description": "Compare airport trains, buses, and transfer options.",
-            "cta": "See routes"
+            "title": "机场接驳路线",
+            "description": "比较机场列车、巴士与接驳选择。",
+            "cta": "查看路线"
           },
           {
-            "title": "Check Fuji-side seat",
-            "description": "Find the right window seat for Mt. Fuji views.",
-            "cta": "Check seat"
+            "title": "确认富士侧座位",
+            "description": "找出观赏富士山的最佳靠窗座位。",
+            "cta": "确认座位"
           },
           {
-            "title": "Japan itinerary",
-            "description": "Place Tokyo, Kyoto, and Osaka in a practical route.",
-            "cta": "View itinerary"
+            "title": "日本行程",
+            "description": "将东京、京都、大阪安排于实用路线中。",
+            "cta": "查看行程"
           }
         ],
         "faqs": [
@@ -3720,7 +3720,7 @@
         "title": "住宿区域指南：东京",
         "description": "比较：Compare 东京 Station, Shinjuku, Ueno, and Asakusa before taking the Shinkansen to 京都 or 大阪.",
         "quickRec": {
-          "area": "Tokyo Station or Ueno",
+          "area": "东京站或上野",
           "why": "实用建议：先按路线、行李和到达时间选择酒店区域。"
         },
         "proTip": "提示：根据行李、第一晚和新干线日程来选住宿区域。",
@@ -3831,7 +3831,7 @@
         "title": "Asakusa vs Ueno: 住宿区域指南：东京?",
         "description": "比较：Compare Asakusa and Ueno for old 东京 atmosphere, Narita access, budget hotels, museums, and food.",
         "quickRec": {
-          "area": "Ueno",
+          "area": "上野",
           "why": "实用建议：先按路线、行李和到达时间选择酒店区域。"
         },
         "proTip": "提示：根据行李、第一晚和新干线日程来选住宿区域。",
