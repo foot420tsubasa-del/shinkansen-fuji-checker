@@ -2285,14 +2285,14 @@
   },
   "tokyoStayHub": {
     "breadcrumb": {
-      "parent": "Areas to stay",
-      "current": "Tokyo first-time hotel areas"
+      "parent": "Районы для проживания",
+      "current": "Районы отелей в Токио для первого визита"
     },
     "hero": {
       "eyebrow": "Гид по районам отелей Токио",
       "title": "Где остановиться в Токио при первом визите",
       "subtitle": "Выберите правильный район до бронирования. Сравните Shinjuku, Ueno, Asakusa, Tokyo Station и тихий East Tokyo по аэропорту, Shinkansen, ночной жизни и багажу.",
-      "imageAlt": "Tokyo hotel area skyline and neighborhood view"
+      "imageAlt": "Панорама и кварталы гостиничных районов Токио"
     },
     "quickAnswer": {
       "title": "Короткий ответ",
@@ -2309,28 +2309,28 @@
       "title": "Выбрать по плану поездки",
       "cards": [
         {
-          "label": "I want the easiest first Tokyo base",
-          "area": "Shinjuku",
+          "label": "Хочу самую простую первую базу в Токио",
+          "area": "Синдзюку",
           "href": "#shinjuku"
         },
         {
-          "label": "I arrive at Narita Airport",
-          "area": "Ueno / Asakusa",
+          "label": "Прилетаю в аэропорт Нарита",
+          "area": "Уэно / Асакуса",
           "href": "#ueno"
         },
         {
-          "label": "I take an early Shinkansen",
+          "label": "Еду ранним синкансэном",
           "area": "Tokyo Station",
           "href": "#tokyo-station"
         },
         {
-          "label": "I want temples and old-town vibe",
-          "area": "Asakusa",
+          "label": "Хочу храмы и атмосферу старого района",
+          "area": "Асакуса",
           "href": "#asakusa"
         },
         {
-          "label": "I want a quiet, local neighborhood",
-          "area": "East Tokyo",
+          "label": "Хочу тихий местный район",
+          "area": "Восточный Токио",
           "href": "#east-tokyo"
         }
       ]
@@ -2339,43 +2339,43 @@
       "eyebrow": "Районы Токио кратко",
       "title": "Сначала сравните базу, потом отель",
       "detailLabel": "Подробнее",
-      "cardImageAlt": "{area} hotel area in Tokyo"
+      "cardImageAlt": "Гостиничный район {area} в Токио"
     },
     "cards": {
       "shinjuku": {
-        "title": "Shinjuku",
-        "subtitle": "Best for first-time energy, food, nightlife, and flexible trains.",
-        "bestFor": "First-time convenience, food, nightlife, and train options.",
-        "weakness": "Can feel intense around Kabukicho.",
-        "primaryAction": "Compare Shinjuku hotels"
+        "title": "Синдзюку",
+        "subtitle": "Лучше всего для энергии первого визита, еды, ночной жизни и гибких поездов.",
+        "bestFor": "Удобство для первого визита, еда, ночная жизнь и варианты поездов.",
+        "weakness": "Может ощущаться насыщенно у Кабукитё.",
+        "primaryAction": "Сравнить отели в Синдзюку"
       },
       "ueno": {
-        "title": "Ueno",
-        "subtitle": "Best for Narita access, museums, and better-value hotels.",
-        "bestFor": "Narita access, museums, and better-value hotels.",
-        "weakness": "Quieter nightlife than Shinjuku.",
-        "primaryAction": "Compare Ueno hotels"
+        "title": "Уэно",
+        "subtitle": "Лучше всего для доступа в Нариту, музеев и отелей с хорошей ценой.",
+        "bestFor": "Доступ в Нариту, музеи и отели с хорошей ценой.",
+        "weakness": "Ночная жизнь спокойнее, чем в Синдзюку.",
+        "primaryAction": "Сравнить отели в Уэно"
       },
       "asakusa": {
-        "title": "Asakusa",
-        "subtitle": "Best for old-town Tokyo, Senso-ji, and riverside walks.",
-        "bestFor": "Old-town Tokyo, Senso-ji, and riverside walks.",
-        "weakness": "Not on the JR Yamanote Line.",
-        "primaryAction": "Compare Asakusa hotels"
+        "title": "Асакуса",
+        "subtitle": "Лучше всего для старого Токио, Сэнсо-дзи и прогулок у реки.",
+        "bestFor": "Старый Токио, Сэнсо-дзи и прогулки у реки.",
+        "weakness": "Не на линии JR Yamanote.",
+        "primaryAction": "Сравнить отели в Асакусе"
       },
       "tokyoStation": {
         "title": "Tokyo Station",
-        "subtitle": "Best for early Shinkansen, luggage, and clean logistics.",
-        "bestFor": "Early Shinkansen, luggage, and smooth transfer to Kyoto / Osaka.",
-        "weakness": "Usually more business-like and less local at night.",
-        "primaryAction": "Compare hotels near Tokyo Station"
+        "subtitle": "Лучше всего для ранних синкансэнов, багажа и логистики.",
+        "bestFor": "Ранние синкансэны, багаж и плавная пересадка до Киото / Осаки.",
+        "weakness": "По вечерам скорее деловой, чем местный.",
+        "primaryAction": "Сравнить отели рядом с Tokyo Station"
       },
       "eastTokyo": {
-        "title": "East Tokyo",
-        "subtitle": "Best for calmer walks, coffee, riverside neighborhoods, and second-time Tokyo.",
-        "bestFor": "Quiet local walks, coffee, and riverside neighborhoods.",
-        "weakness": "Better as a second base than the default first-night stay.",
-        "primaryAction": "Explore Local Tokyo"
+        "title": "Восточный Токио",
+        "subtitle": "Лучше всего для тихих прогулок, кофе, кварталов у реки и второй поездки в Токио.",
+        "bestFor": "Тихие прогулки, кофе и кварталы у реки.",
+        "weakness": "Подходит больше как вторая база, чем как первая ночёвка.",
+        "primaryAction": "Изучить местный Токио"
       }
     },
     "benefits": {
@@ -2411,73 +2411,73 @@
       ],
       "rows": [
         [
-          "Shinjuku",
-          "N'EX direct, slower from Narita",
-          "10-15 min to Tokyo Station",
-          "Strongest",
-          "Wide range, weekend spikes",
-          "Energetic"
+          "Синдзюку",
+          "N'EX напрямую, медленнее из Нариты",
+          "10–15 мин до Tokyo Station",
+          "Сильнее всего",
+          "Большой выбор, скачки в выходные",
+          "Энергично"
         ],
         [
-          "Ueno",
-          "Best Narita access",
-          "7 min to Tokyo Station",
-          "Moderate",
-          "Often better value",
-          "Practical, cultural"
+          "Уэно",
+          "Лучший доступ к Нарите",
+          "7 мин до Tokyo Station",
+          "Умеренно",
+          "Обычно выгоднее по цене",
+          "Практично, культурно"
         ],
         [
-          "Asakusa",
-          "Good via Access Express",
-          "Transfer needed",
-          "Quiet evenings",
-          "Good value",
-          "Old-town"
+          "Асакуса",
+          "Хорошо через Access Express",
+          "Нужна пересадка",
+          "Тихие вечера",
+          "Хорошая цена",
+          "Старый район"
         ],
         [
           "Tokyo Station",
-          "N'EX direct",
-          "Best",
-          "Business dining",
-          "Usually higher",
-          "Clean logistics"
+          "N'EX напрямую",
+          "Лучший",
+          "Деловой общепит",
+          "Обычно выше",
+          "Чёткая логистика"
         ],
         [
-          "East Tokyo",
-          "Varies by neighborhood",
-          "Usually transfer needed",
-          "Local and calm",
-          "Mixed",
-          "Quiet, slower"
+          "Восточный Токио",
+          "Зависит от района",
+          "Обычно нужна пересадка",
+          "Местный и тихий",
+          "Смешанно",
+          "Тихо, неспешно"
         ]
       ]
     },
     "faq": {
-      "title": "FAQ",
+      "title": "Часто задаваемые вопросы",
       "items": [
         {
-          "question": "Is Shinjuku too noisy for families?",
-          "answer": "It can be around Kabukicho. Families usually do better around Nishi-Shinjuku, Yoyogi, or Shinjuku-Gyoenmae."
+          "question": "Шумно ли в Синдзюку для семей?",
+          "answer": "Возле Кабукитё — да. Семьям обычно удобнее в Ниси-Синдзюку, Ёёги или Синдзюку-Гёэнмаэ."
         },
         {
-          "question": "Is Ueno good for first-time visitors?",
-          "answer": "Yes, especially if you arrive at Narita or want better-value hotels with museums and markets nearby."
+          "question": "Подходит ли Уэно для первого визита?",
+          "answer": "Да, особенно если прилетаете в Нариту или ищете отели с хорошей ценой рядом с музеями и рынками."
         },
         {
-          "question": "Should I stay near Tokyo Station before Kyoto or Osaka?",
-          "answer": "Yes if your Shinkansen is early or you have heavy luggage. Otherwise Shinjuku or Ueno can still work well."
+          "question": "Стоит ли жить у Tokyo Station перед Киото или Осакой?",
+          "answer": "Да, если синкансэн ранний или много багажа. Иначе Синдзюку или Уэно тоже подойдут."
         },
         {
-          "question": "Is Asakusa convenient without the JR Yamanote Line?",
-          "answer": "It is convenient for old-town sightseeing, but you will use subway transfers more often than in Ueno or Shinjuku."
+          "question": "Удобно ли в Асакусе без линии JR Yamanote?",
+          "answer": "Удобно для старого города, но пересадок в метро будет больше, чем в Уэно или Синдзюку."
         },
         {
-          "question": "Where should I stay if I arrive late at Narita?",
-          "answer": "Ueno is usually the simplest because the Skyliner is fast and the area is calmer on arrival night."
+          "question": "Где остановиться при позднем прилёте в Нариту?",
+          "answer": "Обычно проще всего Уэно: Skyliner быстрый, район спокойнее в вечер прилёта."
         },
         {
-          "question": "Is East Tokyo good for a first Tokyo hotel?",
-          "answer": "It can be, but it is better for travelers who already know they want a quieter local base."
+          "question": "Подходит ли восточный Токио для первого отеля?",
+          "answer": "Можно, но лучше для тех, кто уже знает, что хочет тихую местную базу."
         }
       ]
     },

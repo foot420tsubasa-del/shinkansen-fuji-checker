@@ -2285,14 +2285,14 @@
   },
   "tokyoStayHub": {
     "breadcrumb": {
-      "parent": "Areas to stay",
-      "current": "Tokyo first-time hotel areas"
+      "parent": "Zones d'hébergement",
+      "current": "Zones d'hôtels pour première visite à Tokyo"
     },
     "hero": {
       "eyebrow": "Guide des quartiers hôteliers de Tokyo",
       "title": "Où dormir à Tokyo pour une première visite",
       "subtitle": "Choisissez le bon quartier avant de réserver. Comparez Shinjuku, Ueno, Asakusa, Tokyo Station et East Tokyo selon aéroport, Shinkansen, vie nocturne et bagages.",
-      "imageAlt": "Tokyo hotel area skyline and neighborhood view"
+      "imageAlt": "Vue d'ensemble des quartiers hôteliers de Tokyo"
     },
     "quickAnswer": {
       "title": "Réponse rapide",
@@ -2309,28 +2309,28 @@
       "title": "Choisir selon votre plan",
       "cards": [
         {
-          "label": "I want the easiest first Tokyo base",
+          "label": "Je veux la première base la plus simple à Tokyo",
           "area": "Shinjuku",
           "href": "#shinjuku"
         },
         {
-          "label": "I arrive at Narita Airport",
+          "label": "J'arrive à l'aéroport de Narita",
           "area": "Ueno / Asakusa",
           "href": "#ueno"
         },
         {
-          "label": "I take an early Shinkansen",
+          "label": "Je prends un Shinkansen tôt",
           "area": "Tokyo Station",
           "href": "#tokyo-station"
         },
         {
-          "label": "I want temples and old-town vibe",
+          "label": "Je veux des temples et une ambiance vieux quartier",
           "area": "Asakusa",
           "href": "#asakusa"
         },
         {
-          "label": "I want a quiet, local neighborhood",
-          "area": "East Tokyo",
+          "label": "Je veux un quartier calme et local",
+          "area": "Est de Tokyo",
           "href": "#east-tokyo"
         }
       ]
@@ -2339,43 +2339,43 @@
       "eyebrow": "Quartiers de Tokyo en un coup d’œil",
       "title": "Comparez la base avant l’hôtel",
       "detailLabel": "Voir détails",
-      "cardImageAlt": "{area} hotel area in Tokyo"
+      "cardImageAlt": "Zone hôtelière {area} à Tokyo"
     },
     "cards": {
       "shinjuku": {
         "title": "Shinjuku",
-        "subtitle": "Best for first-time energy, food, nightlife, and flexible trains.",
-        "bestFor": "First-time convenience, food, nightlife, and train options.",
-        "weakness": "Can feel intense around Kabukicho.",
-        "primaryAction": "Compare Shinjuku hotels"
+        "subtitle": "Idéal pour l'énergie d'une première visite, la cuisine, la vie nocturne et les options ferroviaires flexibles.",
+        "bestFor": "Confort pour première visite, cuisine, vie nocturne et options de train.",
+        "weakness": "Peut sembler intense près de Kabukicho.",
+        "primaryAction": "Comparer les hôtels de Shinjuku"
       },
       "ueno": {
         "title": "Ueno",
-        "subtitle": "Best for Narita access, museums, and better-value hotels.",
-        "bestFor": "Narita access, museums, and better-value hotels.",
-        "weakness": "Quieter nightlife than Shinjuku.",
-        "primaryAction": "Compare Ueno hotels"
+        "subtitle": "Idéal pour l'accès à Narita, les musées et les hôtels avec un bon rapport qualité-prix.",
+        "bestFor": "Accès à Narita, musées et hôtels avec un bon rapport qualité-prix.",
+        "weakness": "Vie nocturne plus calme qu'à Shinjuku.",
+        "primaryAction": "Comparer les hôtels d'Ueno"
       },
       "asakusa": {
         "title": "Asakusa",
-        "subtitle": "Best for old-town Tokyo, Senso-ji, and riverside walks.",
-        "bestFor": "Old-town Tokyo, Senso-ji, and riverside walks.",
-        "weakness": "Not on the JR Yamanote Line.",
-        "primaryAction": "Compare Asakusa hotels"
+        "subtitle": "Idéal pour le vieux Tokyo, Senso-ji et les balades au bord du fleuve.",
+        "bestFor": "Vieux Tokyo, Senso-ji et balades au bord du fleuve.",
+        "weakness": "N'est pas sur la ligne JR Yamanote.",
+        "primaryAction": "Comparer les hôtels d'Asakusa"
       },
       "tokyoStation": {
         "title": "Tokyo Station",
-        "subtitle": "Best for early Shinkansen, luggage, and clean logistics.",
-        "bestFor": "Early Shinkansen, luggage, and smooth transfer to Kyoto / Osaka.",
-        "weakness": "Usually more business-like and less local at night.",
-        "primaryAction": "Compare hotels near Tokyo Station"
+        "subtitle": "Idéal pour les Shinkansen tôt, les bagages et la logistique fluide.",
+        "bestFor": "Shinkansen tôt, bagages et correspondance fluide vers Kyoto / Osaka.",
+        "weakness": "Plutôt business et moins local le soir.",
+        "primaryAction": "Comparer les hôtels près de Tokyo Station"
       },
       "eastTokyo": {
-        "title": "East Tokyo",
-        "subtitle": "Best for calmer walks, coffee, riverside neighborhoods, and second-time Tokyo.",
-        "bestFor": "Quiet local walks, coffee, and riverside neighborhoods.",
-        "weakness": "Better as a second base than the default first-night stay.",
-        "primaryAction": "Explore Local Tokyo"
+        "title": "Est de Tokyo",
+        "subtitle": "Idéal pour des balades calmes, cafés, quartiers en bord de fleuve et un deuxième Tokyo.",
+        "bestFor": "Balades locales calmes, cafés et quartiers en bord de fleuve.",
+        "weakness": "Convient mieux comme deuxième base que comme première nuit par défaut.",
+        "primaryAction": "Explorer le Tokyo local"
       }
     },
     "benefits": {
@@ -2412,72 +2412,72 @@
       "rows": [
         [
           "Shinjuku",
-          "N'EX direct, slower from Narita",
-          "10-15 min to Tokyo Station",
-          "Strongest",
-          "Wide range, weekend spikes",
-          "Energetic"
+          "N'EX direct, plus lent depuis Narita",
+          "10–15 min jusqu'à Tokyo Station",
+          "Le plus fort",
+          "Large gamme, pics le week-end",
+          "Énergique"
         ],
         [
           "Ueno",
-          "Best Narita access",
-          "7 min to Tokyo Station",
-          "Moderate",
-          "Often better value",
-          "Practical, cultural"
+          "Meilleur accès à Narita",
+          "7 min jusqu'à Tokyo Station",
+          "Modéré",
+          "Souvent meilleur rapport qualité-prix",
+          "Pratique, culturel"
         ],
         [
           "Asakusa",
-          "Good via Access Express",
-          "Transfer needed",
-          "Quiet evenings",
-          "Good value",
-          "Old-town"
+          "Bon via Access Express",
+          "Correspondance nécessaire",
+          "Soirées calmes",
+          "Bon rapport qualité-prix",
+          "Vieux quartier"
         ],
         [
           "Tokyo Station",
           "N'EX direct",
-          "Best",
-          "Business dining",
-          "Usually higher",
-          "Clean logistics"
+          "Meilleur",
+          "Restauration business",
+          "Souvent plus élevé",
+          "Logistique fluide"
         ],
         [
-          "East Tokyo",
-          "Varies by neighborhood",
-          "Usually transfer needed",
-          "Local and calm",
-          "Mixed",
-          "Quiet, slower"
+          "Est de Tokyo",
+          "Variable selon le quartier",
+          "Correspondance souvent nécessaire",
+          "Local et calme",
+          "Variable",
+          "Calme, rythme lent"
         ]
       ]
     },
     "faq": {
-      "title": "FAQ",
+      "title": "Questions fréquentes",
       "items": [
         {
-          "question": "Is Shinjuku too noisy for families?",
-          "answer": "It can be around Kabukicho. Families usually do better around Nishi-Shinjuku, Yoyogi, or Shinjuku-Gyoenmae."
+          "question": "Shinjuku est-il trop bruyant pour les familles ?",
+          "answer": "Cela peut l'être autour de Kabukicho. Les familles s'en sortent mieux vers Nishi-Shinjuku, Yoyogi ou Shinjuku-Gyoenmae."
         },
         {
-          "question": "Is Ueno good for first-time visitors?",
-          "answer": "Yes, especially if you arrive at Narita or want better-value hotels with museums and markets nearby."
+          "question": "Ueno convient-il pour une première visite ?",
+          "answer": "Oui, surtout si tu arrives à Narita ou cherches des hôtels au bon rapport qualité-prix près des musées et marchés."
         },
         {
-          "question": "Should I stay near Tokyo Station before Kyoto or Osaka?",
-          "answer": "Yes if your Shinkansen is early or you have heavy luggage. Otherwise Shinjuku or Ueno can still work well."
+          "question": "Dois-je dormir près de Tokyo Station avant Kyoto ou Osaka ?",
+          "answer": "Oui si ton Shinkansen est tôt ou si tu as beaucoup de bagages. Sinon, Shinjuku ou Ueno conviennent aussi."
         },
         {
-          "question": "Is Asakusa convenient without the JR Yamanote Line?",
-          "answer": "It is convenient for old-town sightseeing, but you will use subway transfers more often than in Ueno or Shinjuku."
+          "question": "Asakusa est-il pratique sans la ligne JR Yamanote ?",
+          "answer": "Pratique pour visiter le vieux Tokyo, mais tu utiliseras plus de correspondances en métro qu'à Ueno ou Shinjuku."
         },
         {
-          "question": "Where should I stay if I arrive late at Narita?",
-          "answer": "Ueno is usually the simplest because the Skyliner is fast and the area is calmer on arrival night."
+          "question": "Où dormir si j'arrive tard à Narita ?",
+          "answer": "Ueno est généralement le plus simple : le Skyliner est rapide et le quartier est plus calme à l'arrivée."
         },
         {
-          "question": "Is East Tokyo good for a first Tokyo hotel?",
-          "answer": "It can be, but it is better for travelers who already know they want a quieter local base."
+          "question": "L'est de Tokyo convient-il pour un premier hôtel à Tokyo ?",
+          "answer": "Possible, mais c'est plus adapté aux voyageurs qui savent déjà qu'ils veulent une base locale plus calme."
         }
       ]
     },

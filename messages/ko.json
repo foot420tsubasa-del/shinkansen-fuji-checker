@@ -2285,14 +2285,14 @@
   },
   "tokyoStayHub": {
     "breadcrumb": {
-      "parent": "Areas to stay",
-      "current": "Tokyo first-time hotel areas"
+      "parent": "숙박 지역",
+      "current": "도쿄 첫 방문 호텔 지역"
     },
     "hero": {
       "eyebrow": "도쿄 호텔 지역 가이드",
       "title": "처음 도쿄에서 어디에 묵을까",
       "subtitle": "예약 전에 호텔 지역을 먼저 고르세요. 공항, 신칸센, 밤 문화, 짐 기준으로 신주쿠, 우에노, 아사쿠사, 도쿄역, 조용한 동쪽 도쿄를 비교합니다.",
-      "imageAlt": "Tokyo hotel area skyline and neighborhood view"
+      "imageAlt": "도쿄 호텔 지역 스카이라인과 동네 풍경"
     },
     "quickAnswer": {
       "title": "빠른 답변",
@@ -2309,28 +2309,28 @@
       "title": "여행 계획별로 선택",
       "cards": [
         {
-          "label": "I want the easiest first Tokyo base",
-          "area": "Shinjuku",
+          "label": "도쿄에서 가장 쉬운 첫 거점이 좋아요",
+          "area": "신주쿠",
           "href": "#shinjuku"
         },
         {
-          "label": "I arrive at Narita Airport",
-          "area": "Ueno / Asakusa",
+          "label": "나리타 공항에 도착해요",
+          "area": "우에노 / 아사쿠사",
           "href": "#ueno"
         },
         {
-          "label": "I take an early Shinkansen",
-          "area": "Tokyo Station",
+          "label": "이른 시간에 신칸센을 타요",
+          "area": "도쿄역",
           "href": "#tokyo-station"
         },
         {
-          "label": "I want temples and old-town vibe",
-          "area": "Asakusa",
+          "label": "사찰과 옛 동네 분위기를 원해요",
+          "area": "아사쿠사",
           "href": "#asakusa"
         },
         {
-          "label": "I want a quiet, local neighborhood",
-          "area": "East Tokyo",
+          "label": "조용한 로컬 동네를 원해요",
+          "area": "동도쿄",
           "href": "#east-tokyo"
         }
       ]
@@ -2339,43 +2339,43 @@
       "eyebrow": "도쿄 숙소 지역 한눈에 보기",
       "title": "호텔보다 먼저 거점을 비교하세요",
       "detailLabel": "자세히 보기",
-      "cardImageAlt": "{area} hotel area in Tokyo"
+      "cardImageAlt": "도쿄의 {area} 호텔 지역"
     },
     "cards": {
       "shinjuku": {
-        "title": "Shinjuku",
-        "subtitle": "Best for first-time energy, food, nightlife, and flexible trains.",
-        "bestFor": "First-time convenience, food, nightlife, and train options.",
-        "weakness": "Can feel intense around Kabukicho.",
-        "primaryAction": "Compare Shinjuku hotels"
+        "title": "신주쿠",
+        "subtitle": "첫 방문의 활기, 식사, 나이트라이프, 유연한 환승에 가장 좋습니다.",
+        "bestFor": "첫 방문의 편의성, 식사, 나이트라이프, 열차 옵션.",
+        "weakness": "가부키초 근처는 다소 강렬하게 느껴질 수 있습니다.",
+        "primaryAction": "신주쿠 호텔 비교"
       },
       "ueno": {
-        "title": "Ueno",
-        "subtitle": "Best for Narita access, museums, and better-value hotels.",
-        "bestFor": "Narita access, museums, and better-value hotels.",
-        "weakness": "Quieter nightlife than Shinjuku.",
-        "primaryAction": "Compare Ueno hotels"
+        "title": "우에노",
+        "subtitle": "나리타 접근성, 박물관, 가성비 좋은 호텔에 가장 좋습니다.",
+        "bestFor": "나리타 접근성, 박물관, 가성비 좋은 호텔.",
+        "weakness": "신주쿠보다 나이트라이프는 조용한 편입니다.",
+        "primaryAction": "우에노 호텔 비교"
       },
       "asakusa": {
-        "title": "Asakusa",
-        "subtitle": "Best for old-town Tokyo, Senso-ji, and riverside walks.",
-        "bestFor": "Old-town Tokyo, Senso-ji, and riverside walks.",
-        "weakness": "Not on the JR Yamanote Line.",
-        "primaryAction": "Compare Asakusa hotels"
+        "title": "아사쿠사",
+        "subtitle": "옛 도쿄, 센소지, 강변 산책에 가장 좋습니다.",
+        "bestFor": "옛 도쿄, 센소지, 강변 산책.",
+        "weakness": "JR 야마노테 선 노선상에 있지 않습니다.",
+        "primaryAction": "아사쿠사 호텔 비교"
       },
       "tokyoStation": {
-        "title": "Tokyo Station",
-        "subtitle": "Best for early Shinkansen, luggage, and clean logistics.",
-        "bestFor": "Early Shinkansen, luggage, and smooth transfer to Kyoto / Osaka.",
-        "weakness": "Usually more business-like and less local at night.",
-        "primaryAction": "Compare hotels near Tokyo Station"
+        "title": "도쿄역",
+        "subtitle": "이른 신칸센, 짐, 깔끔한 동선에 가장 좋습니다.",
+        "bestFor": "이른 신칸센, 짐, 교토 / 오사카로의 매끄러운 환승.",
+        "weakness": "저녁에는 비즈니스 분위기가 강하고 로컬 느낌은 덜합니다.",
+        "primaryAction": "도쿄역 인근 호텔 비교"
       },
       "eastTokyo": {
-        "title": "East Tokyo",
-        "subtitle": "Best for calmer walks, coffee, riverside neighborhoods, and second-time Tokyo.",
-        "bestFor": "Quiet local walks, coffee, and riverside neighborhoods.",
-        "weakness": "Better as a second base than the default first-night stay.",
-        "primaryAction": "Explore Local Tokyo"
+        "title": "동도쿄",
+        "subtitle": "여유로운 산책, 카페, 강변 동네, 두 번째 방문 도쿄에 가장 좋습니다.",
+        "bestFor": "조용한 로컬 산책, 카페, 강변 동네.",
+        "weakness": "기본 첫날 숙박지보다는 두 번째 거점으로 더 잘 어울립니다.",
+        "primaryAction": "로컬 도쿄 탐색"
       }
     },
     "benefits": {
@@ -2411,73 +2411,73 @@
       ],
       "rows": [
         [
-          "Shinjuku",
-          "N'EX direct, slower from Narita",
-          "10-15 min to Tokyo Station",
-          "Strongest",
-          "Wide range, weekend spikes",
-          "Energetic"
+          "신주쿠",
+          "N'EX 직통, 나리타에서 다소 느림",
+          "도쿄역까지 10~15분",
+          "가장 강함",
+          "선택 폭 넓음, 주말에 가격 상승",
+          "활기참"
         ],
         [
-          "Ueno",
-          "Best Narita access",
-          "7 min to Tokyo Station",
-          "Moderate",
-          "Often better value",
-          "Practical, cultural"
+          "우에노",
+          "나리타 접근성 최고",
+          "도쿄역까지 7분",
+          "보통",
+          "일반적으로 가성비 우수",
+          "실용적이고 문화적"
         ],
         [
-          "Asakusa",
-          "Good via Access Express",
-          "Transfer needed",
-          "Quiet evenings",
-          "Good value",
-          "Old-town"
+          "아사쿠사",
+          "Access Express로 양호",
+          "환승 필요",
+          "조용한 저녁",
+          "좋은 가성비",
+          "옛 시가지"
         ],
         [
-          "Tokyo Station",
-          "N'EX direct",
-          "Best",
-          "Business dining",
-          "Usually higher",
-          "Clean logistics"
+          "도쿄역",
+          "N'EX 직통",
+          "최고",
+          "비즈니스 다이닝",
+          "일반적으로 더 비쌈",
+          "깔끔한 동선"
         ],
         [
-          "East Tokyo",
-          "Varies by neighborhood",
-          "Usually transfer needed",
-          "Local and calm",
-          "Mixed",
-          "Quiet, slower"
+          "동도쿄",
+          "동네별로 다름",
+          "보통 환승 필요",
+          "현지스럽고 차분함",
+          "혼합",
+          "조용하고 느린 흐름"
         ]
       ]
     },
     "faq": {
-      "title": "FAQ",
+      "title": "자주 묻는 질문",
       "items": [
         {
-          "question": "Is Shinjuku too noisy for families?",
-          "answer": "It can be around Kabukicho. Families usually do better around Nishi-Shinjuku, Yoyogi, or Shinjuku-Gyoenmae."
+          "question": "신주쿠는 가족에게 너무 시끄럽나요?",
+          "answer": "가부키초 부근은 시끄러울 수 있습니다. 가족 여행은 보통 니시신주쿠, 요요기, 신주쿠교엔마에 쪽이 더 좋습니다."
         },
         {
-          "question": "Is Ueno good for first-time visitors?",
-          "answer": "Yes, especially if you arrive at Narita or want better-value hotels with museums and markets nearby."
+          "question": "우에노는 첫 방문자에게 좋은가요?",
+          "answer": "네, 특히 나리타로 도착하거나 박물관과 시장이 가까운 가성비 호텔을 원할 때 좋습니다."
         },
         {
-          "question": "Should I stay near Tokyo Station before Kyoto or Osaka?",
-          "answer": "Yes if your Shinkansen is early or you have heavy luggage. Otherwise Shinjuku or Ueno can still work well."
+          "question": "교토나 오사카로 가기 전에 도쿄역 인근에 묵어야 할까요?",
+          "answer": "신칸센이 이른 시간이거나 짐이 많다면 네. 그 외에는 신주쿠나 우에노도 괜찮습니다."
         },
         {
-          "question": "Is Asakusa convenient without the JR Yamanote Line?",
-          "answer": "It is convenient for old-town sightseeing, but you will use subway transfers more often than in Ueno or Shinjuku."
+          "question": "JR 야마노테 선이 없어도 아사쿠사는 편리한가요?",
+          "answer": "옛 도쿄 관광에는 편리하지만, 우에노나 신주쿠보다 지하철 환승이 자주 필요합니다."
         },
         {
-          "question": "Where should I stay if I arrive late at Narita?",
-          "answer": "Ueno is usually the simplest because the Skyliner is fast and the area is calmer on arrival night."
+          "question": "나리타에 늦게 도착할 경우 어디에 묵어야 할까요?",
+          "answer": "스카이라이너가 빠르고 도착일 밤이 비교적 차분하므로 우에노가 보통 가장 무난합니다."
         },
         {
-          "question": "Is East Tokyo good for a first Tokyo hotel?",
-          "answer": "It can be, but it is better for travelers who already know they want a quieter local base."
+          "question": "동도쿄는 도쿄 첫 호텔로 좋은가요?",
+          "answer": "가능합니다만, 조용한 로컬 거점을 이미 원한다고 확실히 아는 여행자에게 더 적합합니다."
         }
       ]
     },
