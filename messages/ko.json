@@ -2767,19 +2767,19 @@
       "hero": {
         "eyebrow": "교토 hotel area guide",
         "title": "교토 첫 방문자는 어디에 묵을까",
-        "subtitle": "Pick the right Kyoto base before you book. Kyoto Station solves luggage and day trips; Gion and Higashiyama solve atmosphere; Kawaramachi / Shijo keeps food and shopping central."
+        "subtitle": "예약 전에 적합한 교토 거점을 고르세요. 교토역은 짐과 당일치기에 강하고, 가와라마치 / 시조는 더 중심적이며, 기온 / 히가시야마는 분위기를 우선합니다."
       },
       "quickAnswerTitle": "빠른 답변",
       "quickAnswer": [
-        "Choose Kyoto Station if transport, luggage, and day trips matter most.",
-        "Choose Kawaramachi / Shijo if you want food, shopping, and central convenience.",
-        "Choose Gion / Higashiyama if temples and traditional Kyoto atmosphere matter most.",
-        "Choose Arashiyama for a scenic stay, but expect a less central base.",
-        "Choose Kyoto Imperial Palace / quieter north if you want calmer streets on a repeat visit."
+        "교통, 짐, 당일치기가 가장 중요하다면 교토역을 선택하세요.",
+        "음식, 쇼핑, 중심부 편의성이 좋다면 가와라마치 / 시조를 선택하세요.",
+        "사찰과 전통 교토 분위기가 가장 중요하다면 기온 / 히가시야마를 선택하세요.",
+        "풍경 좋은 숙박이 좋다면 아라시야마를 선택하세요. 다만 중심부에서는 조금 떨어집니다.",
+        "재방문자라면 더 조용한 거리를 원할 때 교토 고쇼 / 북부를 선택하세요."
       ],
       "glance": {
-        "eyebrow": "Kyoto Stay Areas at a Glance",
-        "title": "Choose the area before the hotel"
+        "eyebrow": "교토 숙박 지역 한눈에",
+        "title": "호텔보다 지역을 먼저 고르세요"
       },
       "labels": {
         "bestFor": "추천 대상",
@@ -2789,85 +2789,85 @@
       },
       "areas": {
         "kyoto-station": {
-          "name": "Kyoto Station",
-          "bestFor": "추천 대상: Transport, luggage, day trips.",
-          "watchOut": "Modern and practical rather than atmospheric.",
-          "transportNote": "Direct Shinkansen, JR, subway, buses, and Haruka airport train.",
-          "actionLabel": "Compare Kyoto Station hotels",
-          "detailLabel": "See Kyoto Station vs Gion"
+          "name": "교토역",
+          "bestFor": "교통, 짐, 당일치기.",
+          "watchOut": "분위기보다는 현대적이고 실용적.",
+          "transportNote": "신칸센 직통, JR, 지하철, 버스, 하루카 공항 열차.",
+          "actionLabel": "교토역 호텔 비교",
+          "detailLabel": "교토역 vs 기온 보기"
         },
         "kawaramachi-shijo": {
-          "name": "Kawaramachi / Shijo",
-          "bestFor": "추천 대상: Food, shopping, central convenience.",
-          "watchOut": "Less direct for Shinkansen luggage days.",
-          "transportNote": "Good Hankyu, subway, bus, and taxi access across central Kyoto.",
-          "actionLabel": "Compare Kawaramachi / Shijo hotels",
-          "detailLabel": "See Kyoto Station vs Gion"
+          "name": "가와라마치 / 시조",
+          "bestFor": "음식, 쇼핑, 중심부 편의성.",
+          "watchOut": "신칸센 짐 이동에는 다소 불편.",
+          "transportNote": "한큐, 지하철, 버스, 택시로 교토 중심부 이동에 좋음.",
+          "actionLabel": "가와라마치 / 시조 호텔 비교",
+          "detailLabel": "교토역 vs 기온 보기"
         },
         "gion-higashiyama": {
-          "name": "Gion / Higashiyama",
-          "bestFor": "추천 대상: Temples, atmosphere, traditional Kyoto.",
-          "watchOut": "Narrow streets and luggage are less convenient.",
-          "transportNote": "Best on foot and by taxi; Kyoto Station is usually a bus or taxi ride away.",
-          "actionLabel": "Compare Gion / Higashiyama hotels",
-          "detailLabel": "See Kyoto Station vs Gion"
+          "name": "기온 / 히가시야마",
+          "bestFor": "사찰, 분위기, 전통 교토.",
+          "watchOut": "좁은 골목과 짐 이동이 다소 불편.",
+          "transportNote": "도보와 택시가 가장 좋음; 교토역까지는 보통 버스나 택시.",
+          "actionLabel": "기온 / 히가시야마 호텔 비교",
+          "detailLabel": "교토역 vs 기온 보기"
         },
         "arashiyama": {
-          "name": "Arashiyama",
-          "bestFor": "추천 대상: Scenic stays, bamboo grove, riverside walks.",
-          "watchOut": "Less central for first-time city sightseeing.",
-          "transportNote": "Useful JR and Hankyu access, but most central Kyoto plans require extra travel."
+          "name": "아라시야마",
+          "bestFor": "풍경 좋은 숙박, 대나무 숲, 강변 산책.",
+          "watchOut": "첫 방문 도심 관광에는 위치가 다소 멀다.",
+          "transportNote": "JR과 한큐로 이동 가능하나, 중심 일정에는 추가 이동이 필요."
         },
         "imperial-palace-north": {
-          "name": "Kyoto Imperial Palace / quieter north",
-          "bestFor": "추천 대상: Calmer repeat visitors.",
-          "watchOut": "Not the default first-night base for temple-heavy trips.",
-          "transportNote": "Subway and buses work, but taxis may be useful at night."
+          "name": "교토 고쇼 / 북부",
+          "bestFor": "좀 더 조용함을 원하는 재방문자.",
+          "watchOut": "사찰 중심 여행의 기본 첫날 거점으로는 부적합.",
+          "transportNote": "지하철과 버스 이용 가능, 밤에는 택시가 유용할 수 있음."
         }
       },
       "comparisonTitle": "빠른 지역 비교",
       "comparisonHeadings": [
-        "Area",
-        "Airport access",
-        "Shinkansen access",
-        "Food / nightlife",
-        "Vibe"
+        "지역",
+        "공항 접근성",
+        "신칸센 접근성",
+        "음식 / 나이트라이프",
+        "분위기"
       ],
       "comparisonRows": [
         [
-          "Kyoto Station",
-          "Best",
-          "Best",
-          "Practical",
-          "Modern logistics"
+          "교토역",
+          "최고",
+          "최고",
+          "실용적",
+          "현대적 동선"
         ],
         [
-          "Kawaramachi / Shijo",
-          "Good",
-          "Transfer needed",
-          "Strongest",
-          "Central city"
+          "가와라마치 / 시조",
+          "양호",
+          "환승 필요",
+          "가장 강함",
+          "도심 중심"
         ],
         [
-          "Gion / Higashiyama",
-          "Atmospheric",
-          "Taxi/bus needed",
-          "Good but touristy",
-          "Traditional"
+          "기온 / 히가시야마",
+          "분위기 있음",
+          "택시/버스 필요",
+          "좋지만 관광객 많음",
+          "전통적"
         ],
         [
-          "Arashiyama",
-          "Scenic",
-          "Less central",
-          "Limited at night",
-          "Riverside"
+          "아라시야마",
+          "풍경 좋음",
+          "중심에서 멀어짐",
+          "밤에는 제한적",
+          "강변"
         ],
         [
-          "Imperial Palace / north",
-          "Calm",
-          "Moderate",
-          "Quiet",
-          "Residential"
+          "교토 고쇼 / 북부",
+          "차분함",
+          "보통",
+          "조용함",
+          "주거지구"
         ]
       ],
       "continue": {
@@ -2891,19 +2891,19 @@
       "hero": {
         "eyebrow": "오사카 hotel area guide",
         "title": "오사카 첫 방문자는 어디에 묵을까",
-        "subtitle": "Pick the Osaka base by how you will use the city. Namba is easiest for food and nightlife; Umeda is stronger for rail; Shin-Osaka is a logistics choice."
+        "subtitle": "도시를 어떻게 활용할지에 맞춰 오사카 거점을 고르세요. 난바는 음식과 나이트라이프에 가장 쉽고, 우메다는 철도가 강하며, 신오사카는 로지스틱스 선택지입니다."
       },
       "quickAnswerTitle": "빠른 답변",
       "quickAnswer": [
-        "Choose Namba if food, nightlife, and first-time Osaka energy matter most.",
-        "Choose Umeda if rail access, Kyoto / Kobe trips, and airport connections matter most.",
-        "Choose Shin-Osaka if Shinkansen logistics are the main priority.",
-        "Choose Tennoji if you want value and south Osaka access.",
-        "Choose Osaka Castle / quieter central if you want a calmer base."
+        "음식, 나이트라이프, 첫 오사카 활기가 중요하다면 난바를 선택하세요.",
+        "철도 접근성, 교토 / 고베 당일치기, 공항 연결이 중요하다면 우메다를 선택하세요.",
+        "신칸센 로지스틱스가 최우선이라면 신오사카를 선택하세요.",
+        "가성비와 남부 오사카 접근성을 원한다면 덴노지를 선택하세요.",
+        "더 차분한 거점을 원한다면 오사카성 / 조용한 도심을 선택하세요."
       ],
       "glance": {
-        "eyebrow": "Osaka Stay Areas at a Glance",
-        "title": "Choose the area before the hotel"
+        "eyebrow": "오사카 숙박 지역 한눈에",
+        "title": "호텔보다 지역을 먼저 고르세요"
       },
       "labels": {
         "bestFor": "추천 대상",
@@ -2913,85 +2913,85 @@
       },
       "areas": {
         "namba": {
-          "name": "Namba",
-          "bestFor": "추천 대상: Food, nightlife, first-time Osaka.",
-          "watchOut": "Can feel busy and loud at night.",
-          "transportNote": "Strong subway and Nankai access; practical for KIX and Dotonbori.",
-          "actionLabel": "Compare Namba hotels",
-          "detailLabel": "See Namba vs Umeda"
+          "name": "난바",
+          "bestFor": "음식, 나이트라이프, 첫 오사카.",
+          "watchOut": "밤에 시끄럽고 번잡할 수 있음.",
+          "transportNote": "지하철과 난카이 접근성 우수; KIX와 도톤보리에 편리.",
+          "actionLabel": "난바 호텔 비교",
+          "detailLabel": "난바 vs 우메다 보기"
         },
         "umeda": {
-          "name": "Umeda",
-          "bestFor": "추천 대상: Rail access, Kyoto / Kobe / airport connections.",
-          "watchOut": "Less classic Osaka nightlife than Namba.",
-          "transportNote": "Best for JR, Hankyu, Hanshin, subway, and Kansai rail day trips.",
-          "actionLabel": "Compare Umeda hotels",
-          "detailLabel": "See Namba vs Umeda"
+          "name": "우메다",
+          "bestFor": "철도 접근성, 교토 / 고베 / 공항 연결.",
+          "watchOut": "난바보다는 오사카 고전적 나이트라이프가 덜함.",
+          "transportNote": "JR, 한큐, 한신, 지하철, 간사이 당일치기에 최적.",
+          "actionLabel": "우메다 호텔 비교",
+          "detailLabel": "난바 vs 우메다 보기"
         },
         "shin-osaka": {
-          "name": "Shin-Osaka",
-          "bestFor": "추천 대상: Shinkansen logistics.",
-          "watchOut": "Not a lively neighborhood base.",
-          "transportNote": "Direct Shinkansen and subway to central Osaka; useful for early rail days.",
-          "actionLabel": "Compare Shin-Osaka hotels",
-          "detailLabel": "See Shin-Osaka vs Namba"
+          "name": "신오사카",
+          "bestFor": "신칸센 로지스틱스.",
+          "watchOut": "활기찬 동네 거점은 아님.",
+          "transportNote": "신칸센 직통과 지하철로 오사카 중심부 이동; 이른 철도일에 유용.",
+          "actionLabel": "신오사카 호텔 비교",
+          "detailLabel": "신오사카 vs 난바 보기"
         },
         "tennoji": {
-          "name": "Tennoji",
-          "bestFor": "추천 대상: Value and south Osaka access.",
-          "watchOut": "Less central for Kyoto or Kobe day trips.",
-          "transportNote": "JR and subway access works well for south Osaka, Nara, and KIX routes."
+          "name": "덴노지",
+          "bestFor": "가성비와 남부 오사카 접근성.",
+          "watchOut": "교토나 고베 당일치기에는 중심에서 멀어짐.",
+          "transportNote": "JR과 지하철로 남부 오사카, 나라, KIX 경로에 편리."
         },
         "osaka-castle": {
-          "name": "Osaka Castle / quieter central",
-          "bestFor": "추천 대상: Calmer stays.",
-          "watchOut": "Less food-and-nightlife density than Namba or Umeda.",
-          "transportNote": "Good if your plans cluster around central Osaka, but check station distance carefully."
+          "name": "오사카성 / 조용한 도심",
+          "bestFor": "보다 차분한 숙박.",
+          "watchOut": "난바나 우메다보다 음식·나이트라이프 밀도가 낮음.",
+          "transportNote": "오사카 도심에 일정이 몰려 있다면 좋지만 역까지의 거리를 잘 확인하세요."
         }
       },
       "comparisonTitle": "빠른 지역 비교",
       "comparisonHeadings": [
-        "Area",
-        "Airport access",
-        "Shinkansen access",
-        "Food / nightlife",
-        "Vibe"
+        "지역",
+        "공항 접근성",
+        "신칸센 접근성",
+        "음식 / 나이트라이프",
+        "분위기"
       ],
       "comparisonRows": [
         [
-          "Namba",
-          "Good via Nankai",
-          "Transfer to Shin-Osaka",
-          "Strongest",
-          "Food-first"
+          "난바",
+          "난카이 경유 양호",
+          "신오사카로 환승",
+          "가장 강함",
+          "음식 중심"
         ],
         [
-          "Umeda",
-          "Good rail links",
-          "Good via JR/subway",
-          "Strong but polished",
-          "Transport hub"
+          "우메다",
+          "우수한 철도 연결",
+          "JR/지하철 경유 양호",
+          "강하지만 세련됨",
+          "교통 허브"
         ],
         [
-          "Shin-Osaka",
-          "Transfer needed",
-          "Best",
-          "Limited",
-          "Logistics"
+          "신오사카",
+          "환승 필요",
+          "최고",
+          "제한적",
+          "로지스틱스"
         ],
         [
-          "Tennoji",
-          "Good for KIX",
-          "Transfer needed",
-          "Moderate",
-          "Value"
+          "덴노지",
+          "KIX에 좋음",
+          "환승 필요",
+          "보통",
+          "가성비"
         ],
         [
-          "Osaka Castle / quieter central",
-          "Varies",
-          "Transfer needed",
-          "Calmer",
-          "Central quiet"
+          "오사카성 / 조용한 도심",
+          "다양함",
+          "환승 필요",
+          "보다 조용함",
+          "조용한 도심"
         ]
       ],
       "continue": {

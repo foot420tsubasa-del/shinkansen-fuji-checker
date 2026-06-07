@@ -2767,19 +2767,19 @@
       "hero": {
         "eyebrow": "京都 hotel area guide",
         "title": "第一次去京都住哪里",
-        "subtitle": "Pick the right Kyoto base before you book. Kyoto Station solves luggage and day trips; Gion and Higashiyama solve atmosphere; Kawaramachi / Shijo keeps food and shopping central."
+        "subtitle": "預訂前先選擇合適的京都基地。京都站解決行李與一日遊，河原町 / 四條更為市中心，祇園 / 東山則以氛圍為先。"
       },
       "quickAnswerTitle": "快速答案",
       "quickAnswer": [
-        "Choose Kyoto Station if transport, luggage, and day trips matter most.",
-        "Choose Kawaramachi / Shijo if you want food, shopping, and central convenience.",
-        "Choose Gion / Higashiyama if temples and traditional Kyoto atmosphere matter most.",
-        "Choose Arashiyama for a scenic stay, but expect a less central base.",
-        "Choose Kyoto Imperial Palace / quieter north if you want calmer streets on a repeat visit."
+        "若最在意交通、行李與一日遊，請選京都站。",
+        "若想要美食、購物與市中心便利性，請選河原町 / 四條。",
+        "若寺廟與京都傳統氛圍最重要，請選祇園 / 東山。",
+        "想要風景宜人的住宿可選嵐山，但要接受較不中心的基地。",
+        "重複造訪時想要寧靜街道，可選京都御所 / 北部。"
       ],
       "glance": {
-        "eyebrow": "Kyoto Stay Areas at a Glance",
-        "title": "Choose the area before the hotel"
+        "eyebrow": "京都住宿區域一覽",
+        "title": "先選區域再選飯店"
       },
       "labels": {
         "bestFor": "適合",
@@ -2789,85 +2789,85 @@
       },
       "areas": {
         "kyoto-station": {
-          "name": "Kyoto Station",
-          "bestFor": "適合: Transport, luggage, day trips.",
-          "watchOut": "Modern and practical rather than atmospheric.",
-          "transportNote": "Direct Shinkansen, JR, subway, buses, and Haruka airport train.",
-          "actionLabel": "Compare Kyoto Station hotels",
-          "detailLabel": "See Kyoto Station vs Gion"
+          "name": "京都站",
+          "bestFor": "交通、行李、一日遊。",
+          "watchOut": "較現代實用，少氛圍。",
+          "transportNote": "新幹線直達、JR、地鐵、巴士與 Haruka 機場列車。",
+          "actionLabel": "比較京都站飯店",
+          "detailLabel": "查看京都站 vs 祇園"
         },
         "kawaramachi-shijo": {
-          "name": "Kawaramachi / Shijo",
-          "bestFor": "適合: Food, shopping, central convenience.",
-          "watchOut": "Less direct for Shinkansen luggage days.",
-          "transportNote": "Good Hankyu, subway, bus, and taxi access across central Kyoto.",
-          "actionLabel": "Compare Kawaramachi / Shijo hotels",
-          "detailLabel": "See Kyoto Station vs Gion"
+          "name": "河原町 / 四條",
+          "bestFor": "美食、購物、市中心便利性。",
+          "watchOut": "在新幹線行李日較不直接。",
+          "transportNote": "前往京都中心的阪急、地鐵、巴士與計程車交通良好。",
+          "actionLabel": "比較河原町 / 四條飯店",
+          "detailLabel": "查看京都站 vs 祇園"
         },
         "gion-higashiyama": {
-          "name": "Gion / Higashiyama",
-          "bestFor": "適合: Temples, atmosphere, traditional Kyoto.",
-          "watchOut": "Narrow streets and luggage are less convenient.",
-          "transportNote": "Best on foot and by taxi; Kyoto Station is usually a bus or taxi ride away.",
-          "actionLabel": "Compare Gion / Higashiyama hotels",
-          "detailLabel": "See Kyoto Station vs Gion"
+          "name": "祇園 / 東山",
+          "bestFor": "寺廟、氛圍、傳統京都。",
+          "watchOut": "街道狹窄，攜帶行李較不便。",
+          "transportNote": "以步行與計程車為主，前往京都站通常需巴士或計程車。",
+          "actionLabel": "比較祇園 / 東山飯店",
+          "detailLabel": "查看京都站 vs 祇園"
         },
         "arashiyama": {
-          "name": "Arashiyama",
-          "bestFor": "適合: Scenic stays, bamboo grove, riverside walks.",
-          "watchOut": "Less central for first-time city sightseeing.",
-          "transportNote": "Useful JR and Hankyu access, but most central Kyoto plans require extra travel."
+          "name": "嵐山",
+          "bestFor": "風景宜人住宿、竹林、河畔散步。",
+          "watchOut": "首次城市觀光時不夠中心。",
+          "transportNote": "JR 與阪急可達，但多數市中心行程需額外移動。"
         },
         "imperial-palace-north": {
-          "name": "Kyoto Imperial Palace / quieter north",
-          "bestFor": "適合: Calmer repeat visitors.",
-          "watchOut": "Not the default first-night base for temple-heavy trips.",
-          "transportNote": "Subway and buses work, but taxis may be useful at night."
+          "name": "京都御所 / 北部",
+          "bestFor": "想要更安靜的回訪旅客。",
+          "watchOut": "以寺廟為主的行程不適合作為首晚基地。",
+          "transportNote": "地鐵與巴士可用，夜間建議搭計程車。"
         }
       },
       "comparisonTitle": "區域快速比較",
       "comparisonHeadings": [
-        "Area",
-        "Airport access",
-        "Shinkansen access",
-        "Food / nightlife",
-        "Vibe"
+        "區域",
+        "機場交通",
+        "新幹線交通",
+        "美食 / 夜生活",
+        "氛圍"
       ],
       "comparisonRows": [
         [
-          "Kyoto Station",
-          "Best",
-          "Best",
-          "Practical",
-          "Modern logistics"
+          "京都站",
+          "最佳",
+          "最佳",
+          "務實",
+          "現代化動線"
         ],
         [
-          "Kawaramachi / Shijo",
-          "Good",
-          "Transfer needed",
-          "Strongest",
-          "Central city"
+          "河原町 / 四條",
+          "良好",
+          "需要轉乘",
+          "最強",
+          "市中心"
         ],
         [
-          "Gion / Higashiyama",
-          "Atmospheric",
-          "Taxi/bus needed",
-          "Good but touristy",
-          "Traditional"
+          "祇園 / 東山",
+          "氛圍佳",
+          "需計程車/巴士",
+          "良好但較觀光",
+          "傳統"
         ],
         [
-          "Arashiyama",
-          "Scenic",
-          "Less central",
-          "Limited at night",
-          "Riverside"
+          "嵐山",
+          "景色宜人",
+          "較不中心",
+          "夜間選擇有限",
+          "河畔"
         ],
         [
-          "Imperial Palace / north",
-          "Calm",
-          "Moderate",
-          "Quiet",
-          "Residential"
+          "京都御所 / 北部",
+          "寧靜",
+          "中等",
+          "安靜",
+          "住宅區"
         ]
       ],
       "continue": {
@@ -2891,19 +2891,19 @@
       "hero": {
         "eyebrow": "大阪 hotel area guide",
         "title": "第一次去大阪住哪里",
-        "subtitle": "Pick the Osaka base by how you will use the city. Namba is easiest for food and nightlife; Umeda is stronger for rail; Shin-Osaka is a logistics choice."
+        "subtitle": "依照使用城市的方式選擇大阪基地。難波最適合美食與夜生活，梅田鐵道強，新大阪是物流選擇。"
       },
       "quickAnswerTitle": "快速答案",
       "quickAnswer": [
-        "Choose Namba if food, nightlife, and first-time Osaka energy matter most.",
-        "Choose Umeda if rail access, Kyoto / Kobe trips, and airport connections matter most.",
-        "Choose Shin-Osaka if Shinkansen logistics are the main priority.",
-        "Choose Tennoji if you want value and south Osaka access.",
-        "Choose Osaka Castle / quieter central if you want a calmer base."
+        "若最在意美食、夜生活與首次大阪活力，請選難波。",
+        "若最在意鐵道交通、京都 / 神戶一日遊與機場連結，請選梅田。",
+        "若新幹線物流是首要考量，請選新大阪。",
+        "想要高 CP 值與南大阪交通，請選天王寺。",
+        "想要更寧靜的基地，可選大阪城 / 較寧靜的中心。"
       ],
       "glance": {
-        "eyebrow": "Osaka Stay Areas at a Glance",
-        "title": "Choose the area before the hotel"
+        "eyebrow": "大阪住宿區域一覽",
+        "title": "先選區域再選飯店"
       },
       "labels": {
         "bestFor": "適合",
@@ -2913,85 +2913,85 @@
       },
       "areas": {
         "namba": {
-          "name": "Namba",
-          "bestFor": "適合: Food, nightlife, first-time Osaka.",
-          "watchOut": "Can feel busy and loud at night.",
-          "transportNote": "Strong subway and Nankai access; practical for KIX and Dotonbori.",
-          "actionLabel": "Compare Namba hotels",
-          "detailLabel": "See Namba vs Umeda"
+          "name": "難波",
+          "bestFor": "美食、夜生活、首次大阪。",
+          "watchOut": "夜晚可能感到熱鬧吵雜。",
+          "transportNote": "地鐵與南海交通強，前往 KIX 與道頓堀方便。",
+          "actionLabel": "比較難波飯店",
+          "detailLabel": "查看難波 vs 梅田"
         },
         "umeda": {
-          "name": "Umeda",
-          "bestFor": "適合: Rail access, Kyoto / Kobe / airport connections.",
-          "watchOut": "Less classic Osaka nightlife than Namba.",
-          "transportNote": "Best for JR, Hankyu, Hanshin, subway, and Kansai rail day trips.",
-          "actionLabel": "Compare Umeda hotels",
-          "detailLabel": "See Namba vs Umeda"
+          "name": "梅田",
+          "bestFor": "鐵道交通、京都 / 神戶 / 機場連結。",
+          "watchOut": "夜生活不如難波經典。",
+          "transportNote": "最適合 JR、阪急、阪神、地鐵與關西一日遊。",
+          "actionLabel": "比較梅田飯店",
+          "detailLabel": "查看難波 vs 梅田"
         },
         "shin-osaka": {
-          "name": "Shin-Osaka",
-          "bestFor": "適合: Shinkansen logistics.",
-          "watchOut": "Not a lively neighborhood base.",
-          "transportNote": "Direct Shinkansen and subway to central Osaka; useful for early rail days.",
-          "actionLabel": "Compare Shin-Osaka hotels",
-          "detailLabel": "See Shin-Osaka vs Namba"
+          "name": "新大阪",
+          "bestFor": "新幹線物流。",
+          "watchOut": "並非熱鬧的街區基地。",
+          "transportNote": "新幹線直達與地鐵連接大阪中心，適合早班鐵道日。",
+          "actionLabel": "比較新大阪飯店",
+          "detailLabel": "查看新大阪 vs 難波"
         },
         "tennoji": {
-          "name": "Tennoji",
-          "bestFor": "適合: Value and south Osaka access.",
-          "watchOut": "Less central for Kyoto or Kobe day trips.",
-          "transportNote": "JR and subway access works well for south Osaka, Nara, and KIX routes."
+          "name": "天王寺",
+          "bestFor": "高 CP 值與南大阪交通。",
+          "watchOut": "前往京都或神戶較不中心。",
+          "transportNote": "JR 與地鐵交通對南大阪、奈良與 KIX 路線都很方便。"
         },
         "osaka-castle": {
-          "name": "Osaka Castle / quieter central",
-          "bestFor": "適合: Calmer stays.",
-          "watchOut": "Less food-and-nightlife density than Namba or Umeda.",
-          "transportNote": "Good if your plans cluster around central Osaka, but check station distance carefully."
+          "name": "大阪城 / 較寧靜的中心",
+          "bestFor": "較為寧靜的住宿。",
+          "watchOut": "美食與夜生活密度不及難波或梅田。",
+          "transportNote": "若行程集中於大阪中心很合適，但請仔細確認與車站的距離。"
         }
       },
       "comparisonTitle": "區域快速比較",
       "comparisonHeadings": [
-        "Area",
-        "Airport access",
-        "Shinkansen access",
-        "Food / nightlife",
-        "Vibe"
+        "區域",
+        "機場交通",
+        "新幹線交通",
+        "美食 / 夜生活",
+        "氛圍"
       ],
       "comparisonRows": [
         [
-          "Namba",
-          "Good via Nankai",
-          "Transfer to Shin-Osaka",
-          "Strongest",
-          "Food-first"
+          "難波",
+          "透過南海良好",
+          "轉乘至新大阪",
+          "最強",
+          "美食優先"
         ],
         [
-          "Umeda",
-          "Good rail links",
-          "Good via JR/subway",
-          "Strong but polished",
-          "Transport hub"
+          "梅田",
+          "鐵道連結佳",
+          "透過 JR / 地鐵良好",
+          "強而精緻",
+          "交通樞紐"
         ],
         [
-          "Shin-Osaka",
-          "Transfer needed",
-          "Best",
-          "Limited",
-          "Logistics"
+          "新大阪",
+          "需要轉乘",
+          "最佳",
+          "有限",
+          "物流"
         ],
         [
-          "Tennoji",
-          "Good for KIX",
-          "Transfer needed",
-          "Moderate",
-          "Value"
+          "天王寺",
+          "前往 KIX 良好",
+          "需要轉乘",
+          "中等",
+          "高 CP 值"
         ],
         [
-          "Osaka Castle / quieter central",
-          "Varies",
-          "Transfer needed",
-          "Calmer",
-          "Central quiet"
+          "大阪城 / 較寧靜的中心",
+          "視情況而定",
+          "需要轉乘",
+          "較寧靜",
+          "中心寧靜"
         ]
       ],
       "continue": {

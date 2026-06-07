@@ -2767,19 +2767,19 @@
       "hero": {
         "eyebrow": "Киото hotel area guide",
         "title": "Где остановиться в Киото при первом визите",
-        "subtitle": "Pick the right Kyoto base before you book. Kyoto Station solves luggage and day trips; Gion and Higashiyama solve atmosphere; Kawaramachi / Shijo keeps food and shopping central."
+        "subtitle": "Выберите подходящую базу в Киото до бронирования. Kyoto Station решает багаж и поездки, Каварамати / Сидзё центральнее, Гион / Хигасияма — про атмосферу."
       },
       "quickAnswerTitle": "Короткий ответ",
       "quickAnswer": [
-        "Choose Kyoto Station if transport, luggage, and day trips matter most.",
-        "Choose Kawaramachi / Shijo if you want food, shopping, and central convenience.",
-        "Choose Gion / Higashiyama if temples and traditional Kyoto atmosphere matter most.",
-        "Choose Arashiyama for a scenic stay, but expect a less central base.",
-        "Choose Kyoto Imperial Palace / quieter north if you want calmer streets on a repeat visit."
+        "Выбирайте Kyoto Station, если важнее всего транспорт, багаж и поездки.",
+        "Выбирайте Каварамати / Сидзё ради еды, шопинга и удобства центра.",
+        "Выбирайте Гион / Хигасияму ради храмов и традиционной атмосферы Киото.",
+        "Выбирайте Арасияму ради живописного отдыха, но база будет не такой центральной.",
+        "Выбирайте Императорский дворец / тихий север для спокойных улиц при повторном визите."
       ],
       "glance": {
-        "eyebrow": "Kyoto Stay Areas at a Glance",
-        "title": "Choose the area before the hotel"
+        "eyebrow": "Районы Киото с первого взгляда",
+        "title": "Сначала район, потом отель"
       },
       "labels": {
         "bestFor": "Подходит для",
@@ -2790,84 +2790,84 @@
       "areas": {
         "kyoto-station": {
           "name": "Kyoto Station",
-          "bestFor": "Подходит для: Transport, luggage, day trips.",
-          "watchOut": "Modern and practical rather than atmospheric.",
-          "transportNote": "Direct Shinkansen, JR, subway, buses, and Haruka airport train.",
-          "actionLabel": "Compare Kyoto Station hotels",
-          "detailLabel": "See Kyoto Station vs Gion"
+          "bestFor": "Транспорт, багаж, экскурсии.",
+          "watchOut": "Современно и практично, не атмосферно.",
+          "transportNote": "Прямой синкансэн, JR, метро, автобусы и Haruka в аэропорт.",
+          "actionLabel": "Сравнить отели у Kyoto Station",
+          "detailLabel": "Сравнить Kyoto Station и Гион"
         },
         "kawaramachi-shijo": {
-          "name": "Kawaramachi / Shijo",
-          "bestFor": "Подходит для: Food, shopping, central convenience.",
-          "watchOut": "Less direct for Shinkansen luggage days.",
-          "transportNote": "Good Hankyu, subway, bus, and taxi access across central Kyoto.",
-          "actionLabel": "Compare Kawaramachi / Shijo hotels",
-          "detailLabel": "See Kyoto Station vs Gion"
+          "name": "Каварамати / Сидзё",
+          "bestFor": "Еда, шопинг, удобство центра.",
+          "watchOut": "Менее удобно для дней с синкансэном и багажом.",
+          "transportNote": "Хороший доступ к Hankyu, метро, автобусам и такси по центру Киото.",
+          "actionLabel": "Сравнить отели Каварамати / Сидзё",
+          "detailLabel": "Сравнить Kyoto Station и Гион"
         },
         "gion-higashiyama": {
-          "name": "Gion / Higashiyama",
-          "bestFor": "Подходит для: Temples, atmosphere, traditional Kyoto.",
-          "watchOut": "Narrow streets and luggage are less convenient.",
-          "transportNote": "Best on foot and by taxi; Kyoto Station is usually a bus or taxi ride away.",
-          "actionLabel": "Compare Gion / Higashiyama hotels",
-          "detailLabel": "See Kyoto Station vs Gion"
+          "name": "Гион / Хигасияма",
+          "bestFor": "Храмы, атмосфера, традиционный Киото.",
+          "watchOut": "Узкие улицы и багаж — менее удобно.",
+          "transportNote": "Лучше пешком и на такси; до Kyoto Station обычно автобусом или такси.",
+          "actionLabel": "Сравнить отели Гион / Хигасияма",
+          "detailLabel": "Сравнить Kyoto Station и Гион"
         },
         "arashiyama": {
-          "name": "Arashiyama",
-          "bestFor": "Подходит для: Scenic stays, bamboo grove, riverside walks.",
-          "watchOut": "Less central for first-time city sightseeing.",
-          "transportNote": "Useful JR and Hankyu access, but most central Kyoto plans require extra travel."
+          "name": "Арасияма",
+          "bestFor": "Живописное проживание, бамбуковая роща, прогулки у реки.",
+          "watchOut": "Не очень центрально для первого визита.",
+          "transportNote": "Полезный доступ через JR и Hankyu, но центральные планы потребуют дополнительной дороги."
         },
         "imperial-palace-north": {
-          "name": "Kyoto Imperial Palace / quieter north",
-          "bestFor": "Подходит для: Calmer repeat visitors.",
-          "watchOut": "Not the default first-night base for temple-heavy trips.",
-          "transportNote": "Subway and buses work, but taxis may be useful at night."
+          "name": "Императорский дворец / север",
+          "bestFor": "Повторным гостям, ищущим тишину.",
+          "watchOut": "Не базовый вариант для первой ночи в храмовых поездках.",
+          "transportNote": "Метро и автобусы работают, но ночью пригодится такси."
         }
       },
       "comparisonTitle": "Быстрое сравнение районов",
       "comparisonHeadings": [
-        "Area",
-        "Airport access",
-        "Shinkansen access",
-        "Food / nightlife",
-        "Vibe"
+        "Район",
+        "Доступ к аэропорту",
+        "Доступ к синкансэну",
+        "Еда / ночная жизнь",
+        "Атмосфера"
       ],
       "comparisonRows": [
         [
           "Kyoto Station",
-          "Best",
-          "Best",
-          "Practical",
-          "Modern logistics"
+          "Лучший",
+          "Лучший",
+          "Практично",
+          "Современная логистика"
         ],
         [
-          "Kawaramachi / Shijo",
-          "Good",
-          "Transfer needed",
-          "Strongest",
-          "Central city"
+          "Каварамати / Сидзё",
+          "Хорошо",
+          "Нужна пересадка",
+          "Сильнее всего",
+          "Центр города"
         ],
         [
-          "Gion / Higashiyama",
-          "Atmospheric",
-          "Taxi/bus needed",
-          "Good but touristy",
-          "Traditional"
+          "Гион / Хигасияма",
+          "Атмосферно",
+          "Нужно такси/автобус",
+          "Хорошо, но туристически",
+          "Традиционно"
         ],
         [
-          "Arashiyama",
-          "Scenic",
-          "Less central",
-          "Limited at night",
-          "Riverside"
+          "Арасияма",
+          "Живописно",
+          "Менее центрально",
+          "Ограничено вечером",
+          "У реки"
         ],
         [
-          "Imperial Palace / north",
-          "Calm",
-          "Moderate",
-          "Quiet",
-          "Residential"
+          "Императорский дворец / север",
+          "Спокойно",
+          "Умеренно",
+          "Тихо",
+          "Жилой район"
         ]
       ],
       "continue": {
@@ -2891,19 +2891,19 @@
       "hero": {
         "eyebrow": "Осака hotel area guide",
         "title": "Где остановиться в Осака при первом визите",
-        "subtitle": "Pick the Osaka base by how you will use the city. Namba is easiest for food and nightlife; Umeda is stronger for rail; Shin-Osaka is a logistics choice."
+        "subtitle": "Выбирайте базу в Осаке по тому, как используете город. Намба — еда и ночная жизнь, Умэда сильна по поездам, Син-Осака — логистический выбор."
       },
       "quickAnswerTitle": "Короткий ответ",
       "quickAnswer": [
-        "Choose Namba if food, nightlife, and first-time Osaka energy matter most.",
-        "Choose Umeda if rail access, Kyoto / Kobe trips, and airport connections matter most.",
-        "Choose Shin-Osaka if Shinkansen logistics are the main priority.",
-        "Choose Tennoji if you want value and south Osaka access.",
-        "Choose Osaka Castle / quieter central if you want a calmer base."
+        "Выбирайте Намбу ради еды, ночной жизни и энергии первой Осаки.",
+        "Выбирайте Умэду ради железной дороги, поездок в Киото / Кобе и аэропорта.",
+        "Выбирайте Син-Осаку, если приоритет — логистика синкансэна.",
+        "Выбирайте Тэнно-дзи ради цены и доступа к югу Осаки.",
+        "Выбирайте Замок Осака / тихий центр ради более спокойной базы."
       ],
       "glance": {
-        "eyebrow": "Osaka Stay Areas at a Glance",
-        "title": "Choose the area before the hotel"
+        "eyebrow": "Районы Осаки с первого взгляда",
+        "title": "Сначала район, потом отель"
       },
       "labels": {
         "bestFor": "Подходит для",
@@ -2913,85 +2913,85 @@
       },
       "areas": {
         "namba": {
-          "name": "Namba",
-          "bestFor": "Подходит для: Food, nightlife, first-time Osaka.",
-          "watchOut": "Can feel busy and loud at night.",
-          "transportNote": "Strong subway and Nankai access; practical for KIX and Dotonbori.",
-          "actionLabel": "Compare Namba hotels",
-          "detailLabel": "See Namba vs Umeda"
+          "name": "Намба",
+          "bestFor": "Еда, ночная жизнь, первая Осака.",
+          "watchOut": "Может быть шумно и оживлённо ночью.",
+          "transportNote": "Сильный доступ к метро и Nankai; удобно для KIX и Дотонбори.",
+          "actionLabel": "Сравнить отели в Намбе",
+          "detailLabel": "Сравнить Намбу и Умэду"
         },
         "umeda": {
-          "name": "Umeda",
-          "bestFor": "Подходит для: Rail access, Kyoto / Kobe / airport connections.",
-          "watchOut": "Less classic Osaka nightlife than Namba.",
-          "transportNote": "Best for JR, Hankyu, Hanshin, subway, and Kansai rail day trips.",
-          "actionLabel": "Compare Umeda hotels",
-          "detailLabel": "See Namba vs Umeda"
+          "name": "Умэда",
+          "bestFor": "Доступ к поездам, связь с Киото / Кобе / аэропортом.",
+          "watchOut": "Ночная жизнь менее классическая, чем в Намбе.",
+          "transportNote": "Лучше всего для JR, Hankyu, Hanshin, метро и дневных поездок по Кансай.",
+          "actionLabel": "Сравнить отели в Умэде",
+          "detailLabel": "Сравнить Намбу и Умэду"
         },
         "shin-osaka": {
-          "name": "Shin-Osaka",
-          "bestFor": "Подходит для: Shinkansen logistics.",
-          "watchOut": "Not a lively neighborhood base.",
-          "transportNote": "Direct Shinkansen and subway to central Osaka; useful for early rail days.",
-          "actionLabel": "Compare Shin-Osaka hotels",
-          "detailLabel": "See Shin-Osaka vs Namba"
+          "name": "Син-Осака",
+          "bestFor": "Логистика синкансэна.",
+          "watchOut": "Не оживлённая местная база.",
+          "transportNote": "Прямой синкансэн и метро в центр Осаки; полезно для ранних поездов.",
+          "actionLabel": "Сравнить отели в Син-Осаке",
+          "detailLabel": "Сравнить Син-Осаку и Намбу"
         },
         "tennoji": {
-          "name": "Tennoji",
-          "bestFor": "Подходит для: Value and south Osaka access.",
-          "watchOut": "Less central for Kyoto or Kobe day trips.",
-          "transportNote": "JR and subway access works well for south Osaka, Nara, and KIX routes."
+          "name": "Тэнно-дзи",
+          "bestFor": "Цена и доступ к югу Осаки.",
+          "watchOut": "Менее центрально для поездок в Киото и Кобе.",
+          "transportNote": "JR и метро удобны для юга Осаки, Нары и KIX."
         },
         "osaka-castle": {
-          "name": "Osaka Castle / quieter central",
-          "bestFor": "Подходит для: Calmer stays.",
-          "watchOut": "Less food-and-nightlife density than Namba or Umeda.",
-          "transportNote": "Good if your plans cluster around central Osaka, but check station distance carefully."
+          "name": "Замок Осака / тихий центр",
+          "bestFor": "Более спокойное проживание.",
+          "watchOut": "Меньше еды и ночной жизни, чем в Намбе или Умэде.",
+          "transportNote": "Хорошо, если планы в центре Осаки, но проверьте расстояние до станции."
         }
       },
       "comparisonTitle": "Быстрое сравнение районов",
       "comparisonHeadings": [
-        "Area",
-        "Airport access",
-        "Shinkansen access",
-        "Food / nightlife",
-        "Vibe"
+        "Район",
+        "Доступ к аэропорту",
+        "Доступ к синкансэну",
+        "Еда / ночная жизнь",
+        "Атмосфера"
       ],
       "comparisonRows": [
         [
-          "Namba",
-          "Good via Nankai",
-          "Transfer to Shin-Osaka",
-          "Strongest",
-          "Food-first"
+          "Намба",
+          "Хорошо через Nankai",
+          "Пересадка на Син-Осаку",
+          "Сильнее всего",
+          "Еда в первую очередь"
         ],
         [
-          "Umeda",
-          "Good rail links",
-          "Good via JR/subway",
-          "Strong but polished",
-          "Transport hub"
+          "Умэда",
+          "Хорошие связи по железной дороге",
+          "Хорошо через JR/метро",
+          "Сильно, но отполировано",
+          "Транспортный узел"
         ],
         [
-          "Shin-Osaka",
-          "Transfer needed",
-          "Best",
-          "Limited",
-          "Logistics"
+          "Син-Осака",
+          "Нужна пересадка",
+          "Лучший",
+          "Ограничено",
+          "Логистика"
         ],
         [
-          "Tennoji",
-          "Good for KIX",
-          "Transfer needed",
-          "Moderate",
-          "Value"
+          "Тэнно-дзи",
+          "Хорошо для KIX",
+          "Нужна пересадка",
+          "Умеренно",
+          "Соотношение цены"
         ],
         [
-          "Osaka Castle / quieter central",
-          "Varies",
-          "Transfer needed",
-          "Calmer",
-          "Central quiet"
+          "Замок Осака / тихий центр",
+          "Зависит",
+          "Нужна пересадка",
+          "Спокойнее",
+          "Тихий центр"
         ]
       ],
       "continue": {
