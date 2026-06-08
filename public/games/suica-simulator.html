@@ -412,6 +412,7 @@
     {code:'de',name:'Deutsch',sub:'German',flag:'🇩🇪'},
     {code:'fr',name:'Français',sub:'French',flag:'🇫🇷'},
     {code:'es',name:'Español',sub:'Spanish',flag:'🇪🇸'},
+    {code:'pt-BR',name:'Português',sub:'Portuguese',flag:'🇧🇷'},
     {code:'ru',name:'Русский',sub:'Russian',flag:'🇷🇺'}
   ];
 
@@ -576,6 +577,26 @@
     c_amount:"Elige un importe (depósito incluido)",c_payment:"Elige un método de pago",c_done:"Recoge tu tarjeta y tu cambio",
     hw_cash:"BILLETES / MONEDAS",hw_card:"TARJETA / CAMBIO",hw_call:"Llamar",hw_ic:"TARJETA IC",help_label:"Guía"},
 
+   "pt-BR":{m_label:"Máquina multifuncional",idle_title:"Vamos comprar um\ncartão Suica",idle_sub:"Experimente os passos reais de uma máquina de bilhetes",idle_btn:"TOQUE PARA COMEÇAR",
+    lang_title:"Selecione um idioma",menu_title:"Menu",menu_suica:"Comprar Suica",menu_tickets:"Bilhetes",menu_charge:"Recarregar",menu_pass:"Passe",
+    back:"Voltar",next:"Próximo",cancel:"Cancelar",confirm:"Confirmar",
+    ct_title:"Escolha o tipo de Suica",ct_unreg_t:"Cartão Suica (anônimo)",ct_unreg_s:"Sem dados pessoais, o mais rápido. Ideal para viajantes.",ct_unreg_tag:"Fácil",
+    ct_reg_t:"My Suica (nominal)",ct_reg_s:"Pode ser reemitido em caso de perda (exige seus dados).",ct_reg_tag:"Seguro",
+    ct_deposit:"Ambos exigem um depósito de ¥500 (devolvido quando o cartão é entregue).",
+    reg_title:"Insira seus dados",reg_name:"Nome",reg_phone:"Telefone",reg_note:"As máquinas reais também pedem data de nascimento e sexo.",
+    amt_title:"Escolha um valor",amt_balance:"Saldo utilizável",amt_deposit:"Depósito",amt_refund:"reembolsável",amt_youpay:"A pagar",
+    pay_due:"Total a pagar",pay_more:"Faltam ¥{n}",pay_change:"Troco ¥{n}",pay_exact:"Valor exato — obrigado",pay_hint:"Aceita cédulas de ¥1.000–¥10.000 e moedas de ¥10–¥500.",
+    pay_method:"Forma de pagamento",pm_cash:"Dinheiro",pm_credit:"Cartão de crédito",pm_credit_sub:"Somente View Card",
+    pm_credit_note:"Na máquina, só o “View Card” da JR East compra um Suica. Cartões estrangeiros ou de outras emissoras não são aceitos aqui. Para pagar com seu próprio cartão, use o “Mobile Suica” no celular (sem depósito).",
+    dep_incl:"inclui depósito de ¥500",r_method:"Pagamento",v_cash:"Dinheiro",v_credit:"Crédito (View Card)",
+    disp_t:"Emitindo…",disp_s:"Emitindo seu cartão Suica",done_unreg:"Anônimo",done_reg:"Nominal",done_title:"Compra concluída",
+    r_type:"Tipo",r_balance:"Saldo do cartão",r_deposit:"Depósito",r_inserted:"Inserido",r_change:"Troco",
+    v_reg:"My Suica (nominal)",v_unreg:"Cartão Suica (anônimo)",
+    tips:"<b>Dica para viajantes:</b> se não houver cartões físicos disponíveis, pegue um <b>Welcome Suica</b> (sem depósito, válido por 28 dias) nos aeroportos e principais estações. No iPhone / Apple Watch dá para emitir o <b>Mobile Suica</b> na hora e recarregar com qualquer cartão de crédito.",
+    playagain:"Jogar de novo",c_menu:"Toque em “Comprar Suica”",c_cardtype:"Escolha o tipo de cartão",c_register:"Insira seus dados",
+    c_amount:"Escolha um valor (depósito incluso)",c_payment:"Escolha a forma de pagamento",c_done:"Retire seu cartão e seu troco",
+    hw_cash:"CÉDULAS / MOEDAS",hw_card:"CARTÃO / TROCO",hw_call:"Chamar",hw_ic:"CARTÃO IC",help_label:"Guia"},
+
    ru:{m_label:"Многофункциональный автомат",idle_title:"Давайте купим\nкарту Suica",idle_sub:"Пройдите реальные шаги покупки в автомате",idle_btn:"КОСНИТЕСЬ, ЧТОБЫ НАЧАТЬ",
     lang_title:"Выберите язык",menu_title:"Меню",menu_suica:"Купить Suica",menu_tickets:"Билеты",menu_charge:"Пополнить",menu_pass:"Проездной",
     back:"Назад",next:"Далее",cancel:"Отмена",confirm:"Подтвердить",
@@ -599,55 +620,53 @@
 
   /* ============================================================
      HOTEL AFFILIATE — wired to fujiseat.com.
-     - Trip.com uses per-area short-links from data/hotel-links.json
-       (the same district deep-links used across the rest of the
-       site). When an area has no short-link configured we fall
-       back to Agoda Tokyo (city=5085, cid=1963497).
-     - Agoda uses the standard partnersearch.aspx pattern with the
-       site's partner cid 1963497 and Tokyo city id 5085.
-     - stayIndexUrl points at the real Stay Area Index route.
+     The end-of-flow CTA surfaces both providers fujiseat already
+     uses elsewhere on the site, with no Agoda fallback:
+       - Booking.com via Travelpayouts short-links (per area)
+         sourced from data/booking-hotel-destinations.json.
+       - Trip.com short-links (per area) sourced from
+         data/hotel-links.json.
+     The "index" footer link routes to the Tokyo Hotel Area Finder
+     instead of a generic stay index, matching the site IA.
      ============================================================ */
   var AFFILIATE={
-    agodaCid:'1963497',                  // fujiseat.com Agoda partner cid
-    agodaTokyoCity:'5085',               // Agoda city id for Tokyo
-    tripAllianceId:'',                   // not used: trip uses short-links
-    tripSid:'',                          // not used: trip uses short-links
-    stayIndexUrl:'/areas-to-stay/tokyo-stay-area-index',
-    primary:'trip'                       // matches site default (trip first)
+    stayIndexUrl:'/areas-to-stay/tokyo-stay-area-index', // Tokyo Hotel Area Finder
+    primary:'booking'                                    // area chips → Booking.com
   };
-  // Well-connected Tokyo areas. tripShortUrl = per-district short-link
-  // sourced from data/hotel-links.json; empty string means fall back to Agoda.
+  // Well-connected Tokyo areas. bookingShortUrl / tripShortUrl come
+  // straight from the site's existing per-district affiliate config —
+  // no new IDs invented here.
   var STAY_AREAS=[
-    {label:'Tokyo Station', q:'Tokyo Station',  tripShortUrl:'https://www.trip.com/t/PgV216VBXU2'},
-    {label:'Shinjuku',      q:'Shinjuku Tokyo', tripShortUrl:'https://www.trip.com/t/48qXpVIBXU2'},
-    {label:'Shibuya',       q:'Shibuya Tokyo',  tripShortUrl:'https://www.trip.com/t/PEM7YWXBXU2'},
-    {label:'Ueno / Asakusa',q:'Ueno Tokyo',     tripShortUrl:'https://www.trip.com/t/B0JQEdOBXU2'},
-    {label:'Ginza',         q:'Ginza Tokyo',    tripShortUrl:''}
+    {label:'Tokyo Station', q:'Tokyo Station',  bookingShortUrl:'https://booking.tpx.lv/ul91rcR5', tripShortUrl:'https://www.trip.com/t/PgV216VBXU2'},
+    {label:'Shinjuku',      q:'Shinjuku Tokyo', bookingShortUrl:'https://booking.tpx.lv/YJ1oTwDi', tripShortUrl:'https://www.trip.com/t/48qXpVIBXU2'},
+    {label:'Shibuya',       q:'Shibuya Tokyo',  bookingShortUrl:'https://booking.tpx.lv/JHUtVslP', tripShortUrl:'https://www.trip.com/t/PEM7YWXBXU2'},
+    {label:'Ueno / Asakusa',q:'Ueno Tokyo',     bookingShortUrl:'https://booking.tpx.lv/PwPdGCBO', tripShortUrl:'https://www.trip.com/t/B0JQEdOBXU2'},
+    {label:'Ginza',         q:'Ginza Tokyo',    bookingShortUrl:'https://booking.tpx.lv/WcwkmbKH', tripShortUrl:'https://www.trip.com/t/PgV216VBXU2'}
   ];
-  // Build a hotel URL for an area, reusing the site's existing scheme.
+  // Build a hotel URL for an area. Booking.com is the primary provider for
+  // area chips; Trip.com is used by the "Compare on Trip.com" footer button.
+  // If a future area is missing one of the two short-links, we fall back to
+  // the other instead of reaching for Agoda (which the rest of the site
+  // does not surface in district CTAs).
   function hotelUrl(area, provider){
-    var q=encodeURIComponent(area.q);
-    if(provider==='trip' && area.tripShortUrl){
-      return area.tripShortUrl;
+    if(provider==='trip'){
+      return area.tripShortUrl || area.bookingShortUrl || AFFILIATE.stayIndexUrl;
     }
-    // Agoda partnersearch with Tokyo city id + keyword text.
-    return 'https://www.agoda.com/partners/partnersearch.aspx?pcs=1'+
-      '&cid='+AFFILIATE.agodaCid+
-      '&hl=en-us&city='+AFFILIATE.agodaTokyoCity+
-      '&text='+q;
+    return area.bookingShortUrl || area.tripShortUrl || AFFILIATE.stayIndexUrl;
   }
 
   /* stay-CTA copy (kept separate from main I18N for easy editing) */
   var STAY={
-   ja:{title:"駅近のホテルを探す",sub:"Suicaでの移動なら、主要駅の近くが便利。エリアを選んでホテルを見る：",index:"エリア別・住みやすさランキングを見る",compare:"Trip.comでも比較する",pr:"PR"},
-   en:{title:"Find a hotel near a station",sub:"With Suica, staying near a major station is convenient. Pick an area:",index:"See the Stay Area Index",compare:"Compare on Trip.com",pr:"Ad"},
-   "zh-CN":{title:"寻找车站附近的酒店",sub:"用 Suica 出行，住在主要车站附近很方便。选择区域：",index:"查看地区宜居排行榜",compare:"在 Trip.com 比较",pr:"广告"},
-   "zh-TW":{title:"尋找車站附近的飯店",sub:"用 Suica 出行，住在主要車站附近很方便。選擇區域：",index:"查看地區宜居排行榜",compare:"在 Trip.com 比較",pr:"廣告"},
-   ko:{title:"역 근처 호텔 찾기",sub:"Suica로 이동하면 주요 역 근처가 편리합니다. 지역을 선택하세요:",index:"지역별 거주 편의 랭킹 보기",compare:"Trip.com에서 비교",pr:"광고"},
-   de:{title:"Hotel nahe einem Bahnhof finden",sub:"Mit Suica ist eine Unterkunft nahe einem großen Bahnhof praktisch. Wähle ein Gebiet:",index:"Stay Area Index ansehen",compare:"Auf Trip.com vergleichen",pr:"Anzeige"},
-   fr:{title:"Trouver un hôtel près d'une gare",sub:"Avec Suica, loger près d'une grande gare est pratique. Choisissez un quartier :",index:"Voir le Stay Area Index",compare:"Comparer sur Trip.com",pr:"Annonce"},
-   es:{title:"Hotel cerca de una estación",sub:"Con Suica, alojarse cerca de una estación principal es práctico. Elige una zona:",index:"Ver el Stay Area Index",compare:"Comparar en Trip.com",pr:"Anuncio"},
-   ru:{title:"Отель рядом со станцией",sub:"С Suica удобно жить рядом с крупной станцией. Выберите район:",index:"Открыть Stay Area Index",compare:"Сравнить на Trip.com",pr:"Реклама"}
+   ja:{title:"駅近のホテルを探す",sub:"Suicaでの移動なら、主要駅の近くが便利。エリアを選んで Booking.com で見る：",index:"Tokyo Hotel Area Finder を開く",compare:"Trip.com でも比較する",pr:"PR"},
+   en:{title:"Find a hotel near a station",sub:"With Suica, staying near a major station is convenient. Pick an area to search Booking.com:",index:"Open the Tokyo Hotel Area Finder",compare:"Compare on Trip.com",pr:"Ad"},
+   "zh-CN":{title:"寻找车站附近的酒店",sub:"用 Suica 出行，住在主要车站附近很方便。选择区域在 Booking.com 上搜索：",index:"打开 Tokyo Hotel Area Finder",compare:"在 Trip.com 比较",pr:"广告"},
+   "zh-TW":{title:"尋找車站附近的飯店",sub:"用 Suica 出行，住在主要車站附近很方便。選擇區域在 Booking.com 上搜尋：",index:"打開 Tokyo Hotel Area Finder",compare:"在 Trip.com 比較",pr:"廣告"},
+   ko:{title:"역 근처 호텔 찾기",sub:"Suica로 이동하면 주요 역 근처가 편리합니다. 지역을 선택해 Booking.com에서 검색하세요:",index:"Tokyo Hotel Area Finder 열기",compare:"Trip.com에서 비교",pr:"광고"},
+   de:{title:"Hotel nahe einem Bahnhof finden",sub:"Mit Suica ist eine Unterkunft nahe einem großen Bahnhof praktisch. Wähle ein Gebiet und such auf Booking.com:",index:"Tokyo Hotel Area Finder öffnen",compare:"Auf Trip.com vergleichen",pr:"Anzeige"},
+   fr:{title:"Trouver un hôtel près d'une gare",sub:"Avec Suica, loger près d'une grande gare est pratique. Choisis un quartier et cherche sur Booking.com :",index:"Ouvrir le Tokyo Hotel Area Finder",compare:"Comparer sur Trip.com",pr:"Annonce"},
+   es:{title:"Hotel cerca de una estación",sub:"Con Suica, alojarse cerca de una estación principal es práctico. Elige una zona y busca en Booking.com:",index:"Abrir el Tokyo Hotel Area Finder",compare:"Comparar en Trip.com",pr:"Anuncio"},
+   "pt-BR":{title:"Encontre um hotel perto da estação",sub:"Com Suica, ficar perto de uma estação principal é prático. Escolha uma área para buscar no Booking.com:",index:"Abrir o Tokyo Hotel Area Finder",compare:"Comparar no Trip.com",pr:"Anúncio"},
+   ru:{title:"Отель рядом со станцией",sub:"С Suica удобно жить рядом с крупной станцией. Выберите район и ищите на Booking.com:",index:"Открыть Tokyo Hotel Area Finder",compare:"Сравнить на Trip.com",pr:"Реклама"}
   };
 
   var lang='ja';
@@ -764,9 +783,13 @@
       '<div class="row tot"><span>'+t('amt_youpay')+'</span><b>'+yen(a)+'</b></div>';
   }
   function selectAmount(a){
+    // Used to flash the inline breakdown on the amount panel for 260ms
+    // before transitioning to payment, which read as a glitch. The amount
+    // cards themselves already preview the usable balance, and the payment
+    // panel header still shows "Due ¥X (incl. ¥500 deposit)", so we now
+    // transition straight to payment with no intermediate reveal.
     state.amount=a;
-    var info=document.getElementById('amount-info');info.style.display='block';info.innerHTML=amtBreakdownHTML(a);
-    setTimeout(startPayment,260);
+    startPayment();
   }
 
   /* payment method */

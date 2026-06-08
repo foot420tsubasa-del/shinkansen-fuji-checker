@@ -12,21 +12,19 @@ type Props = { params: Promise<{ locale: string }> };
 const PAGE_PATH = "/how-to-buy-suica";
 
 /**
- * The simulator HTML supports nine UI languages of its own:
- *   ja, en, zh-CN, zh-TW, ko, de, fr, es, ru
+ * The simulator HTML now supports ten UI languages of its own:
+ *   ja, en, zh-CN, zh-TW, ko, de, fr, es, pt-BR, ru
  *
  * fujiseat.com supports nine site locales:
  *   en, pt-BR, es, ko, zh-TW, zh-CN, fr, de, ru
  *
- * Most overlap directly. Portuguese is the only fujiseat locale that
- * the simulator does not ship a UI translation for, so we fall back
- * to English (the simulator itself also falls back to English for
- * unknown codes, but mapping here keeps the intent explicit and lets
- * us swap the fallback later without editing the simulator).
+ * Every fujiseat locale maps 1:1 to a simulator translation; the
+ * map is kept explicit so the fallback stays controllable from
+ * the page side without having to edit the simulator HTML.
  */
 const GAME_LANG_BY_LOCALE: Record<string, string> = {
   en: "en",
-  "pt-BR": "en",
+  "pt-BR": "pt-BR",
   es: "es",
   ko: "ko",
   "zh-TW": "zh-TW",
