@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Suica購入シミュレーター | Suica Ticket Machine Simulator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --suica:#0aa89e;--suica-d:#067a72;--suica-l:#3fd0c6;
+    --jr:#00833e;--jr-d:#00622e;
+    --metal-1:#3a3f45;--metal-2:#23272c;--metal-3:#15181c;
+    --screen:#eef3f2;--ink:#1b2528;--line:#d2ddda;--gold:#f6d68a;--warn:#ff7a3d;--ic:#19c3ff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;}
+  body{font-family:"Zen Kaku Gothic New",system-ui,sans-serif;
+    background:radial-gradient(1000px 600px at 50% -8%, #2f3b34 0%, transparent 58%),linear-gradient(170deg,#0c1110 0%,#161d1b 48%,#0a0f0e 100%);
+    color:var(--ink);min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:12px;overflow-x:hidden;}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.04;
+    background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:50px 50px;}
+
+  .kiosk{width:100%;max-width:412px;position:relative;z-index:1;
+    background:linear-gradient(180deg,var(--metal-1),var(--metal-2) 30%,var(--metal-3));
+    border-radius:26px;padding:14px 14px 18px;
+    box-shadow:0 30px 70px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.07), inset 0 -2px 8px rgba(0,0,0,.6);
+    border:1px solid rgba(255,255,255,.06);}
+  .kiosk::before{content:"";position:absolute;inset:0;border-radius:26px;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px);}
+  .screw{position:absolute;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6a7077,#2b2f34);box-shadow:inset 0 0 2px #000;}
+  .screw.tl{top:9px;left:9px}.screw.tr{top:9px;right:9px}.screw.bl{bottom:9px;left:9px}.screw.br{bottom:9px;right:9px}
+
+  .signage{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(180deg,var(--jr),var(--jr-d));
+    border-radius:12px;padding:8px 12px;margin-bottom:11px;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.18);}
+  .signage .pics{display:flex;gap:8px;font-size:11px;font-weight:700;align-items:center;opacity:.95}
+  .signage .pics span{background:rgba(255,255,255,.16);padding:3px 8px;border-radius:6px;}
+  .signage .stn{font-family:"Zen Maru Gothic";font-weight:900;font-size:13px;letter-spacing:.04em;display:flex;align-items:center;gap:7px}
+  .signage .stn .ic{width:22px;height:22px;border-radius:7px;background:rgba(0,0,0,.18);display:grid;place-items:center;font-size:14px}
+
+  .bezel{background:#05080a;border-radius:16px;padding:10px;box-shadow:inset 0 0 0 2px #000, 0 2px 6px rgba(0,0,0,.5);}
+  .screen{position:relative;background:var(--screen);border-radius:9px;overflow:hidden;aspect-ratio:3/3.95;box-shadow:inset 0 0 24px rgba(0,0,0,.12);}
+  .screen::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:40;border-radius:9px;
+    background:linear-gradient(125deg,rgba(255,255,255,.16) 0%,rgba(255,255,255,0) 22%,rgba(255,255,255,0) 78%,rgba(255,255,255,.06) 100%);}
+
+  .sysbar{height:30px;background:linear-gradient(180deg,#1d2a27,#13201d);color:#bfe9e2;display:flex;align-items:center;justify-content:space-between;
+    padding:0 10px;font-size:10.5px;font-weight:700;letter-spacing:.04em;z-index:30;position:relative;}
+  .sysbar .mid{display:flex;align-items:center;gap:6px;}.sysbar .clock{font-variant-numeric:tabular-nums;}
+  .globe{display:flex;align-items:center;gap:5px;background:rgba(63,208,198,.16);color:#7fe8df;border:1px solid rgba(127,232,223,.3);
+    border-radius:20px;padding:3px 9px;font-size:10px;font-weight:700;cursor:pointer;}.globe:active{transform:scale(.96)}
+
+  .stage{position:absolute;top:30px;left:0;right:0;bottom:0;}
+  .panel{position:absolute;inset:0;display:none;flex-direction:column;}
+  .panel.active{display:flex;animation:fade .3s ease both;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .scr-head{background:linear-gradient(180deg,var(--jr),var(--jr-d));color:#fff;padding:10px 14px;box-shadow:0 2px 6px rgba(0,0,0,.18);position:relative;z-index:5;}
+  .scr-head h2{font-family:"Zen Maru Gothic";font-weight:900;font-size:16px;display:flex;align-items:center;gap:8px;}
+  .scr-head h2::before{content:"";width:5px;height:18px;background:var(--gold);border-radius:3px;}
+
+  .body{flex:1;padding:13px;overflow-y:auto;display:flex;flex-direction:column;background:linear-gradient(180deg,#f6faf9,#e9f1ef);}
+  .body::-webkit-scrollbar{width:5px}.body::-webkit-scrollbar-thumb{background:#c2cfcc;border-radius:6px}
+
+  .guide{display:flex;align-items:center;gap:9px;background:#fffefb;border:1px solid #e7eeec;border-left:4px solid var(--suica);
+    border-radius:10px;padding:8px 11px;margin-bottom:11px;box-shadow:0 2px 6px rgba(0,0,0,.05);}
+  .guide .peng{flex:0 0 auto}
+  .guide .txt{font-size:12px;font-weight:700;color:#33484a;line-height:1.3}
+  .guide .lab{font-size:8.5px;font-weight:700;color:var(--suica-d);letter-spacing:.14em;display:block;margin-bottom:1px;}
+
+  .grid{display:grid;gap:9px;}.grid.two{grid-template-columns:1fr 1fr;}
+  .opt{position:relative;border:2px solid var(--line);background:#fff;border-radius:11px;padding:13px 13px;text-align:left;cursor:pointer;
+    font-family:inherit;color:var(--ink);box-shadow:0 2px 0 #d8e2df;transition:transform .1s,border-color .12s,box-shadow .1s;}
+  .opt:active{transform:translateY(2px);box-shadow:0 0 0 #d8e2df;}
+  .opt.primary{border-color:var(--suica);background:linear-gradient(180deg,#eafffc,#d6faf5);box-shadow:0 2px 0 #9fded7;}
+  .opt .t{font-family:"Zen Maru Gothic";font-weight:700;font-size:14.5px;display:flex;align-items:center;gap:8px;}
+  .opt .s{font-size:11px;color:#5f7470;margin-top:3px;line-height:1.35;}
+  .opt .tag{position:absolute;top:-8px;right:10px;font-size:9px;font-weight:700;color:#fff;background:var(--warn);padding:2px 8px;border-radius:20px;box-shadow:0 2px 4px rgba(0,0,0,.2);}
+  .opt.green-tag .tag{background:var(--suica)}.opt.blue-tag .tag{background:#4f8bb3}
+  .opt.dim{opacity:.45;pointer-events:none;border-style:dashed;background:#f3f7f6;box-shadow:none}
+
+  .note{background:#eef6f4;border:1px solid #d8e7e3;border-radius:10px;padding:9px 11px;margin-top:11px;font-size:11px;color:#4a5b5e;line-height:1.55}
+  .note b{color:var(--suica-d)}
+
+  #p-idle{align-items:center;justify-content:center;text-align:center;padding:24px;background:radial-gradient(120% 80% at 50% 0%,#d8fbf6 0%,#eef3f2 60%);position:relative;}
+  #p-idle .ribbon{position:absolute;top:14px;left:0;right:0;font-size:10px;letter-spacing:.3em;color:#8fb1ab;font-weight:700;}
+  .penbig{margin-bottom:6px;animation:bob 2.6s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  #idle-title{font-family:"Zen Maru Gothic";font-weight:900;font-size:23px;color:var(--suica-d);white-space:pre-line;line-height:1.25}
+  #idle-sub{color:#5d7470;font-size:12px;margin-top:8px;line-height:1.5}
+  .touch{margin-top:20px;border:none;cursor:pointer;font-family:"Zen Maru Gothic";font-weight:900;color:#fff;font-size:15px;padding:14px 28px;border-radius:40px;
+    background:linear-gradient(135deg,var(--suica-l),var(--suica-d));box-shadow:0 8px 20px -6px rgba(10,168,158,.7);animation:pulse 1.8s infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+
+  .langlist{display:grid;grid-template-columns:1fr 1fr;gap:9px;}.langlist .opt .t{justify-content:flex-start}
+
+  .breakdown{background:#fff;border:1px solid #e0eae7;border-radius:11px;padding:11px 13px;margin-top:11px;font-size:12px;color:#4a5b5e;}
+  .breakdown .row{display:flex;justify-content:space-between;align-items:center;padding:3px 0}
+  .breakdown .row.tot{border-top:1px dashed #c2d2ce;margin-top:5px;padding-top:6px;font-weight:700;color:var(--ink)}
+  .pill{display:inline-block;background:var(--suica);color:#fff;font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:6px}
+
+  .pay-top{text-align:center;margin:4px 0 8px}
+  .pay-top .due{font-size:11.5px;color:#5f7470}.pay-top .due small{color:#8a9b97;font-weight:700}
+  .pay-top .ins{font-family:"Zen Maru Gothic";font-weight:900;font-size:30px;color:var(--ink);line-height:1.1}
+  .pay-top .ins.ok{color:var(--suica-d)}
+  .meter{height:9px;background:#dde9e6;border-radius:9px;overflow:hidden;margin:9px 0 5px}
+  .meter>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--suica-l),var(--suica));transition:width .35s}
+  .pay-top .remain{font-size:12px;color:#5f7470}.pay-top .remain b{color:var(--ink)}
+
+  .paymethod{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:2px 0 10px}
+  .pm-btn{border:2px solid var(--line);background:#fff;border-radius:10px;padding:9px 4px;cursor:pointer;font-family:"Zen Maru Gothic";font-weight:700;
+    font-size:13px;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:2px;transition:.12s}
+  .pm-btn small{font-weight:500;font-size:9px;color:#7d8e8a}
+  .pm-btn.active{border-color:var(--suica);background:#e9fffb;box-shadow:0 2px 0 #9fded7}
+  .pm-btn:active{transform:scale(.98)}
+
+  .money{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;margin-top:4px}
+  .cash{cursor:pointer;border:none;font-family:inherit;border-radius:10px;padding:11px 4px;font-weight:700;font-size:12.5px;
+    display:flex;flex-direction:column;align-items:center;gap:3px;transition:transform .1s}
+  .cash:active{transform:translateY(2px) scale(.97)}.cash em{font-style:normal;font-size:15px}
+  .cash.bill{background:linear-gradient(135deg,#fdf3d3,#f3df9f);color:#7a5a16;box-shadow:0 3px 0 #e3ca7d}
+  .cash.coin{background:linear-gradient(135deg,#edf1f3,#cdd7db);color:#43575f;box-shadow:0 3px 0 #b3bfc4}
+  .pay-hint{font-size:10.5px;color:#7d8e8a;text-align:center;margin-top:9px}
+  .credit-note{background:#fff4ee;border:1px solid #ffd6bf;color:#8a4a25;line-height:1.6}
+  .credit-note b{color:#c2521f}
+
+  .field{margin-top:10px}
+  .field label{font-size:11px;font-weight:700;color:#5f7470;display:block;margin-bottom:4px}
+  .field input{width:100%;border:2px solid #dbe5e2;border-radius:9px;padding:11px 12px;font-family:inherit;font-size:14px;background:#fff}
+  .field input:focus{outline:none;border-color:var(--suica)}
+
+  #p-dispense{align-items:center;justify-content:center;text-align:center;background:#0c1513;color:#dff5f1}
+  .spin{width:46px;height:46px;border-radius:50%;border:5px solid rgba(255,255,255,.12);border-top-color:var(--suica-l);animation:spin .8s linear infinite;margin-bottom:14px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  #p-dispense .dt{font-family:"Zen Maru Gothic";font-weight:900;font-size:17px}#p-dispense .ds{font-size:12px;opacity:.8;margin-top:4px}
+
+  #done-body{align-items:center;text-align:center}
+  .card-pop{animation:cardpop .6s cubic-bezier(.2,1.4,.5,1) both;margin:2px auto 6px}
+  @keyframes cardpop{from{transform:scale(.5) rotate(-7deg);opacity:0}to{transform:none;opacity:1}}
+  .card3d{width:196px;height:122px;border-radius:13px;position:relative;overflow:hidden;text-align:left;padding:12px 14px;color:#fff;
+    background:linear-gradient(135deg,var(--suica-l) 0%,var(--suica) 46%,var(--suica-d) 100%);box-shadow:0 14px 26px -8px rgba(6,122,114,.7)}
+  .card3d::after{content:"";position:absolute;right:-28px;top:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.13)}
+  .card3d .peng{position:absolute;right:10px;bottom:8px;opacity:.9}
+  .card3d .nm{font-family:"Zen Maru Gothic";font-weight:900;font-size:21px;letter-spacing:.04em}
+  .card3d .bal{position:absolute;bottom:12px;left:14px}
+  .card3d .bal small{font-size:9px;opacity:.9;display:block}.card3d .bal b{font-size:19px;font-family:"Zen Maru Gothic"}
+  .done-title{font-family:"Zen Maru Gothic";font-weight:900;font-size:18px;color:var(--suica-d);margin-top:8px}
+  .receipt{width:100%;background:#fff;border:2px dashed #cfdad7;border-radius:11px;padding:11px 13px;margin-top:11px;text-align:left;font-size:12px;color:#4a5b5e}
+  .receipt .r{display:flex;justify-content:space-between;padding:2.5px 0}.receipt .r b{color:var(--ink)}
+  .tips{width:100%;background:#fff7e6;border:1px solid #ffe6a8;border-radius:11px;padding:11px 13px;margin-top:10px;text-align:left;font-size:11px;color:#7a5d1c;line-height:1.55}.tips b{color:#5e4710}
+
+  /* hotel affiliate CTA */
+  .stay-cta{width:100%;margin-top:12px;text-align:left;background:linear-gradient(180deg,#ffffff,#f1f9f7);border:2px solid var(--suica);
+    border-radius:14px;padding:13px 14px;box-shadow:0 8px 20px -10px rgba(10,168,158,.5);position:relative;}
+  .stay-cta .pr{position:absolute;top:10px;right:12px;font-size:8.5px;font-weight:700;color:#9aa7a4;border:1px solid #d3ddda;border-radius:5px;padding:1px 5px;letter-spacing:.08em}
+  .stay-cta h4{font-family:"Zen Maru Gothic";font-weight:900;font-size:14.5px;color:var(--ink);display:flex;align-items:center;gap:7px;padding-right:34px}
+  .stay-cta p{font-size:11px;color:#5f7470;margin-top:4px;line-height:1.5}
+  .stay-areas{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+  .stay-areas a{display:inline-flex;align-items:center;gap:5px;text-decoration:none;background:#fff;border:1.5px solid var(--line);
+    border-radius:30px;padding:7px 12px;font-family:"Zen Maru Gothic";font-weight:700;font-size:12px;color:var(--suica-d);transition:.12s}
+  .stay-areas a:hover{border-color:var(--suica);background:#eafffc}
+  .stay-areas a:active{transform:scale(.97)}
+  .stay-foot{display:flex;flex-wrap:wrap;gap:10px;margin-top:11px;align-items:center}
+  .stay-foot a{font-size:11px;font-weight:700;text-decoration:none;color:var(--suica-d)}
+  .stay-foot a.idx{color:#4f8bb3}
+  .stay-foot a:hover{text-decoration:underline}
+
+  .actions{display:flex;gap:8px;margin-top:auto;padding-top:13px}
+  .btn{flex:1;border:none;cursor:pointer;font-family:"Zen Maru Gothic";font-weight:700;font-size:13px;padding:12px;border-radius:10px;transition:transform .1s}
+  .btn:active{transform:translateY(2px)}
+  .btn.ghost{background:#e6efed;color:#5f7470}
+  .btn.go{background:linear-gradient(135deg,var(--suica-l),var(--suica-d));color:#fff;box-shadow:0 5px 12px -4px rgba(10,168,158,.6)}
+  .btn:disabled{opacity:.4;pointer-events:none}
+
+  .progress{display:flex;gap:5px;justify-content:center;padding:9px 0 3px}
+  .progress i{width:6px;height:6px;border-radius:50%;background:#454c52;transition:.3s}
+  .progress i.on{background:var(--suica-l);box-shadow:0 0 6px var(--suica-l)}
+
+  .console{margin-top:13px;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .ctile{background:linear-gradient(180deg,#1b2025,#0e1216);border-radius:13px;padding:11px;border:1px solid rgba(255,255,255,.05);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 4px 10px rgba(0,0,0,.4)}
+  .ctile .clbl{font-size:8.5px;color:#83b3ac;letter-spacing:.12em;font-weight:700;text-align:center;margin-top:8px}
+
+  .ic-pad{height:62px;border-radius:11px;display:grid;place-items:center;position:relative;background:radial-gradient(circle at 50% 45%,#103a4a,#0a2129);border:2px solid rgba(25,195,255,.35)}
+  .ic-ring{width:44px;height:44px;border-radius:50%;border:3px solid var(--ic);display:grid;place-items:center;color:var(--ic);font-weight:900;font-size:13px;font-family:"Zen Maru Gothic";
+    box-shadow:0 0 14px rgba(25,195,255,.5),inset 0 0 10px rgba(25,195,255,.35);animation:icpulse 2.2s infinite}
+  @keyframes icpulse{0%,100%{box-shadow:0 0 12px rgba(25,195,255,.45),inset 0 0 8px rgba(25,195,255,.3)}50%{box-shadow:0 0 22px rgba(25,195,255,.8),inset 0 0 14px rgba(25,195,255,.5)}}
+  .call-btn{height:62px;border-radius:11px;display:grid;place-items:center;cursor:pointer;background:radial-gradient(circle at 50% 40%,#ff8a4a,#c23c10);color:#fff;
+    font-family:"Zen Maru Gothic";font-weight:900;font-size:13px;border:2px solid rgba(255,255,255,.25);box-shadow:0 4px 10px rgba(0,0,0,.4),inset 0 2px 4px rgba(255,255,255,.3)}
+  .call-btn:active{transform:translateY(2px)}
+
+  .bill-slot{height:18px;border-radius:5px;background:#000;position:relative;overflow:hidden;box-shadow:inset 0 3px 6px rgba(0,0,0,.9)}
+  .bill-slot::before{content:"";position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent,var(--suica-l),transparent);opacity:0;transition:.3s}
+  .coin-slot{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#2a3036,#000);margin:10px auto 0;box-shadow:inset 0 2px 5px rgba(0,0,0,.9)}
+  .slots-active .bill-slot::before{opacity:1;animation:scanline 1.4s linear infinite}
+  @keyframes scanline{0%{transform:translateY(0)}100%{transform:translateY(16px)}}
+
+  /* tray + card emergence */
+  .tray{grid-column:1/-1;margin-top:2px;background:linear-gradient(180deg,#0a0e10,#05080a);border-radius:13px;height:74px;position:relative;overflow:hidden;
+    border:1px solid rgba(255,255,255,.04);box-shadow:inset 0 6px 14px rgba(0,0,0,.85)}
+  .tray .slotline{position:absolute;top:9px;left:18%;right:18%;height:4px;border-radius:3px;background:#000;box-shadow:inset 0 1px 2px rgba(0,0,0,.9);transition:.3s}
+  .tray.eject .slotline{box-shadow:inset 0 1px 2px #000,0 0 12px var(--suica-l);background:linear-gradient(90deg,#031,#063,#031)}
+  .tray .tlbl{position:absolute;bottom:5px;left:0;right:0;text-align:center;font-size:8.5px;color:#5d7a75;letter-spacing:.12em;font-weight:700}
+  .tray .mini-card{position:absolute;left:50%;top:-46px;transform:translateX(-50%) rotate(-1deg);width:104px;height:46px;border-radius:7px;
+    background:linear-gradient(135deg,var(--suica-l),var(--suica) 55%,var(--suica-d));box-shadow:0 8px 16px rgba(0,0,0,.55);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-family:"Zen Maru Gothic";font-weight:900;font-size:13px;letter-spacing:.05em;opacity:0;z-index:2}
+  .tray .mini-card.out{animation:eject 1.1s cubic-bezier(.25,1.05,.4,1) forwards}
+  @keyframes eject{0%{top:-46px;opacity:0}25%{opacity:1}55%{top:26px}70%{top:20px}100%{top:24px;opacity:1}}
+  .tray .mini-card.out::after{content:"";position:absolute;inset:-3px;border-radius:9px;box-shadow:0 0 0 0 rgba(63,208,198,.6);animation:glow 1.4s ease-out .6s 2}
+  @keyframes glow{0%{box-shadow:0 0 0 0 rgba(63,208,198,.55)}100%{box-shadow:0 0 0 14px rgba(63,208,198,0)}}
+
+  .credit{text-align:center;color:#5d7470;font-size:9.5px;margin-top:13px;letter-spacing:.04em}.credit b{color:#7fe8df}
+
+  .overlay{position:absolute;inset:0;z-index:60;background:rgba(8,14,13,.78);display:none;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(2px)}
+  .overlay.show{display:flex;animation:fade .25s ease both}
+  .ov-card{background:#fff;border-radius:16px;padding:16px;width:100%;max-width:300px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+  .ov-card h3{font-family:"Zen Maru Gothic";font-weight:900;font-size:15px;margin-bottom:11px;color:var(--ink);text-align:center}
+  .ov-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .ov-grid button{border:2px solid var(--line);background:#fff;border-radius:10px;padding:10px 6px;cursor:pointer;font-family:inherit;font-weight:700;font-size:13px;color:var(--ink);transition:.12s}
+  .ov-grid button.sel{border-color:var(--suica);background:#e9fffb}.ov-grid button:active{transform:scale(.97)}
+</style>
+</head>
+<body>
+<div class="kiosk">
+  <span class="screw tl"></span><span class="screw tr"></span><span class="screw bl"></span><span class="screw br"></span>
+  <div class="signage">
+    <div class="stn"><span class="ic">🐧</span><span>Fuji&nbsp;Station</span></div>
+    <div class="pics"><span>きっぷ</span><span>Suica</span><span>IC</span></div>
+  </div>
+
+  <div class="bezel"><div class="screen">
+    <div class="sysbar">
+      <span>No.7&nbsp;·&nbsp;<span data-t="m_label"></span></span>
+      <span class="mid"><span class="clock" id="clock">--:--</span>
+        <span class="globe" id="globe">🌐 <span id="globe-label">日本語</span></span></span>
+    </div>
+
+    <div class="stage">
+      <!-- IDLE -->
+      <div class="panel active" id="p-idle">
+        <div class="ribbon">JR EAST · 東日本旅客鉄道</div>
+        <div class="penbig" id="penbig"></div>
+        <div id="idle-title"></div><div id="idle-sub"></div>
+        <button class="touch" id="touch-btn" data-go="p-language"></button>
+      </div>
+
+      <!-- LANGUAGE -->
+      <div class="panel" id="p-language">
+        <div class="scr-head"><h2 data-t="lang_title"></h2></div>
+        <div class="body"><div class="langlist" id="langlist"></div></div>
+      </div>
+
+      <!-- MENU -->
+      <div class="panel" id="p-menu">
+        <div class="scr-head"><h2 data-t="menu_title"></h2></div>
+        <div class="body">
+          <div class="guide"><span class="peng pg"></span><span class="txt"><span class="lab" data-t="help_label"></span><span data-t="c_menu"></span></span></div>
+          <div class="grid two">
+            <button class="opt primary" data-go="route-suica"><div class="t">💳 <span data-t="menu_suica"></span></div></button>
+            <button class="opt dim"><div class="t">🎫 <span data-t="menu_tickets"></span></div></button>
+            <button class="opt dim"><div class="t">💴 <span data-t="menu_charge"></span></div></button>
+            <button class="opt dim"><div class="t">📅 <span data-t="menu_pass"></span></div></button>
+          </div>
+          <div class="actions"><button class="btn ghost" data-go="p-language">← <span data-t="back"></span></button></div>
+        </div>
+      </div>
+
+      <!-- CARD TYPE -->
+      <div class="panel" id="p-cardtype">
+        <div class="scr-head"><h2 data-t="ct_title"></h2></div>
+        <div class="body">
+          <div class="guide"><span class="peng pg"></span><span class="txt"><span class="lab" data-t="help_label"></span><span data-t="c_cardtype"></span></span></div>
+          <div class="grid">
+            <button class="opt green-tag" data-card="unreg"><span class="tag" data-t="ct_unreg_tag"></span>
+              <div class="t">🐧 <span data-t="ct_unreg_t"></span></div><div class="s" data-t="ct_unreg_s"></div></button>
+            <button class="opt blue-tag" data-card="reg"><span class="tag" data-t="ct_reg_tag"></span>
+              <div class="t">📝 <span data-t="ct_reg_t"></span></div><div class="s" data-t="ct_reg_s"></div></button>
+          </div>
+          <div class="note" data-t="ct_deposit"></div>
+          <div class="actions"><button class="btn ghost" data-go="p-menu">← <span data-t="back"></span></button></div>
+        </div>
+      </div>
+
+      <!-- REGISTER -->
+      <div class="panel" id="p-register">
+        <div class="scr-head"><h2 data-t="reg_title"></h2></div>
+        <div class="body">
+          <div class="guide"><span class="peng pg"></span><span class="txt"><span class="lab" data-t="help_label"></span><span data-t="c_register"></span></span></div>
+          <div class="field"><label data-t="reg_name"></label><input id="f-name" autocomplete="off" placeholder="TARO TABI"></div>
+          <div class="field"><label data-t="reg_phone"></label><input id="f-phone" inputmode="numeric" autocomplete="off" placeholder="090-0000-0000"></div>
+          <div class="note" data-t="reg_note"></div>
+          <div class="actions">
+            <button class="btn ghost" data-go="p-cardtype">← <span data-t="back"></span></button>
+            <button class="btn go" id="reg-next"><span data-t="next"></span> →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AMOUNT -->
+      <div class="panel" id="p-amount">
+        <div class="scr-head"><h2 data-t="amt_title"></h2></div>
+        <div class="body">
+          <div class="guide"><span class="peng pg"></span><span class="txt"><span class="lab" data-t="help_label"></span><span data-t="c_amount"></span></span></div>
+          <div class="grid two" id="amount-grid"></div>
+          <div class="breakdown" id="amount-info" style="display:none"></div>
+          <div class="actions"><button class="btn ghost" id="amt-back">← <span data-t="back"></span></button></div>
+        </div>
+      </div>
+
+      <!-- PAYMENT -->
+      <div class="panel" id="p-payment">
+        <div class="scr-head"><h2 data-t="c_payment"></h2></div>
+        <div class="body">
+          <div class="pay-top">
+            <div class="due"><span data-t="pay_due"></span>: <b id="due-amt"></b> <small id="dep-incl"></small></div>
+          </div>
+          <div class="paymethod">
+            <button class="pm-btn active" data-method="cash">💴 <span data-t="pm_cash"></span></button>
+            <button class="pm-btn" data-method="credit">💳 <span data-t="pm_credit"></span><small data-t="pm_credit_sub"></small></button>
+          </div>
+
+          <div id="cash-area">
+            <div class="pay-top">
+              <div class="ins" id="inserted">¥0</div>
+              <div class="meter"><i id="meter-bar"></i></div>
+              <div class="remain" id="remain"></div>
+            </div>
+            <div class="money">
+              <button class="cash bill" data-cash="10000"><em>💴</em>¥10,000</button>
+              <button class="cash bill" data-cash="5000"><em>💴</em>¥5,000</button>
+              <button class="cash bill" data-cash="1000"><em>💴</em>¥1,000</button>
+              <button class="cash coin" data-cash="500"><em>🪙</em>¥500</button>
+              <button class="cash coin" data-cash="100"><em>🪙</em>¥100</button>
+              <button class="cash coin" data-cash="50"><em>🪙</em>¥50</button>
+            </div>
+            <div class="pay-hint" data-t="pay_hint"></div>
+          </div>
+
+          <div id="credit-area" style="display:none">
+            <div class="note credit-note" data-t="pm_credit_note"></div>
+          </div>
+
+          <div class="actions">
+            <button class="btn ghost" id="pay-cancel"><span data-t="cancel"></span></button>
+            <button class="btn go" id="pay-confirm" disabled><span data-t="confirm"></span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DISPENSE -->
+      <div class="panel" id="p-dispense">
+        <div class="spin"></div><div class="dt" data-t="disp_t"></div><div class="ds" data-t="disp_s"></div>
+      </div>
+
+      <!-- DONE -->
+      <div class="panel" id="p-done">
+        <div class="scr-head"><h2 data-t="done_title"></h2></div>
+        <div class="body" id="done-body">
+          <div class="guide" style="margin-bottom:8px"><span class="peng pg"></span><span class="txt"><span class="lab" data-t="help_label"></span><span data-t="c_done"></span></span></div>
+          <div class="card-pop"><div class="card3d">
+            <div class="nm" id="card-name">Suica</div>
+            <div class="bal"><small id="card-sub"></small><b id="card-bal">¥0</b></div>
+            <span class="peng pgsmall"></span>
+          </div></div>
+          <div class="done-title">🎉 <span data-t="done_title"></span></div>
+          <div class="stay-cta" id="stay-cta"></div>
+          <div class="receipt" id="receipt"></div>
+          <div class="tips" data-thtml="tips"></div>
+          <div class="actions"><button class="btn go" data-go="p-idle"><span data-t="playagain"></span></button></div>
+        </div>
+      </div>
+    </div><!-- /stage -->
+
+    <div class="overlay" id="overlay"><div class="ov-card">
+      <h3 data-t="lang_title"></h3><div class="ov-grid" id="ov-grid"></div>
+    </div></div>
+  </div></div><!-- /screen /bezel -->
+
+  <div class="progress" id="progress"></div>
+
+  <div class="console" id="console">
+    <div class="ctile"><div class="ic-pad"><div class="ic-ring">IC</div></div><div class="clbl" data-t="hw_ic"></div></div>
+    <div class="ctile"><button class="call-btn" id="call-btn" data-t="hw_call"></button><div class="clbl">SOS</div></div>
+    <div class="ctile"><div class="bill-slot"></div><div class="coin-slot"></div><div class="clbl" data-t="hw_cash"></div></div>
+    <div class="ctile"><div class="tray" id="tray"><div class="slotline"></div><div class="mini-card" id="mini-card">Suica</div><div class="tlbl" data-t="hw_card"></div></div></div>
+  </div>
+
+  <div class="credit">Powered by <b>fujiseat.com</b> · Suica Simulator</div>
+</div>
+
+<script>
+(function(){
+  function peng(size){return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 64 64">'+
+    '<ellipse cx="32" cy="59" rx="15" ry="3.5" fill="rgba(0,0,0,.18)"/>'+
+    '<path d="M32 5c-11 0-18 9-18 23 0 15 6 29 18 29s18-14 18-29C50 14 43 5 32 5z" fill="#163742"/>'+
+    '<path d="M32 16c-7 0-11 6-11 17 0 12 4 23 11 23s11-11 11-23c0-11-4-17-11-17z" fill="#fff"/>'+
+    '<ellipse cx="25" cy="26" rx="2.8" ry="3.8" fill="#163742"/><ellipse cx="39" cy="26" rx="2.8" ry="3.8" fill="#163742"/>'+
+    '<circle cx="26" cy="25" r=".9" fill="#fff"/><circle cx="40" cy="25" r=".9" fill="#fff"/>'+
+    '<path d="M28 31h8l-4 5z" fill="#ffb13d"/>'+
+    '<ellipse cx="20" cy="40" rx="3.3" ry="5.5" fill="#163742" transform="rotate(18 20 40)"/>'+
+    '<ellipse cx="44" cy="40" rx="3.3" ry="5.5" fill="#163742" transform="rotate(-18 44 40)"/></svg>';}
+  document.getElementById('penbig').innerHTML=peng(64);
+  document.querySelectorAll('.peng.pg').forEach(function(e){e.innerHTML=peng(34);});
+  document.querySelectorAll('.peng.pgsmall').forEach(function(e){e.innerHTML=peng(30);});
+
+  var LANGS=[
+    {code:'ja',name:'日本語',sub:'Japanese',flag:'🇯🇵'},
+    {code:'en',name:'English',sub:'英語',flag:'🇬🇧'},
+    {code:'zh-CN',name:'简体中文',sub:'Chinese',flag:'🇨🇳'},
+    {code:'zh-TW',name:'繁體中文',sub:'Chinese',flag:'🇹🇼'},
+    {code:'ko',name:'한국어',sub:'Korean',flag:'🇰🇷'},
+    {code:'de',name:'Deutsch',sub:'German',flag:'🇩🇪'},
+    {code:'fr',name:'Français',sub:'French',flag:'🇫🇷'},
+    {code:'es',name:'Español',sub:'Spanish',flag:'🇪🇸'},
+    {code:'ru',name:'Русский',sub:'Russian',flag:'🇷🇺'}
+  ];
+
+  var I18N={
+   ja:{m_label:"多機能券売機",idle_title:"Suicaカードを\n買ってみよう",idle_sub:"本物の券売機と同じ手順を体験できます",idle_btn:"画面にタッチして開始",
+    lang_title:"言語をお選びください",menu_title:"メニュー",menu_suica:"Suicaの購入",menu_tickets:"きっぷ",menu_charge:"チャージ（入金）",menu_pass:"定期券",
+    back:"もどる",next:"次へ",cancel:"取消",confirm:"確定",
+    ct_title:"Suicaの種類を選ぶ",ct_unreg_t:"Suicaカード（無記名）",ct_unreg_s:"名前の登録なし・最速。旅行者におすすめ。",ct_unreg_tag:"かんたん",
+    ct_reg_t:"My Suica（記名式）",ct_reg_s:"紛失時に再発行できます（情報の入力が必要）。",ct_reg_tag:"安心",
+    ct_deposit:"どちらもデポジット ¥500 が必要です（カード返却時に返金されます）。",
+    reg_title:"お客さま情報の入力",reg_name:"お名前",reg_phone:"電話番号",reg_note:"実際の券売機では、生年月日・性別なども入力します。",
+    amt_title:"購入金額を選ぶ",amt_balance:"使える残高",amt_deposit:"デポジット",amt_refund:"返金されます",amt_youpay:"お支払い金額",
+    pay_due:"必要金額",pay_more:"あと ¥{n} 必要です",pay_change:"おつり ¥{n}",pay_exact:"ちょうどのお支払いです",pay_hint:"紙幣 ¥1,000〜¥10,000、硬貨 ¥10〜¥500 が使えます。",
+    pay_method:"お支払い方法",pm_cash:"現金",pm_credit:"クレジット",pm_credit_sub:"ビューカードのみ",
+    pm_credit_note:"券売機でSuicaカードを買えるクレジットは JR東日本「ビューカード」のみです。海外発行カードなど他社カードは使えません。お手持ちのカードで払いたい場合は、スマホの「モバイルSuica」をご利用ください（デポジット不要）。",
+    dep_incl:"うちデポジット ¥500",r_method:"お支払い方法",v_cash:"現金",v_credit:"クレジット（ビューカード）",
+    disp_t:"発行中…",disp_s:"Suicaカードを発行しています",done_unreg:"無記名",done_reg:"記名式",done_title:"購入が完了しました",
+    r_type:"種類",r_balance:"カード残高",r_deposit:"デポジット",r_inserted:"投入額",r_change:"おつり",
+    v_reg:"My Suica（記名式）",v_unreg:"Suicaカード（無記名）",
+    tips:"<b>旅行者向けメモ：</b>物理カードが手に入らない時は、空港や主要駅で <b>Welcome Suica</b>（デポジット不要・28日間有効）が買えます。iPhone / Apple Watch なら <b>モバイルSuica</b> をアプリから即発行でき、お手持ちのクレジットカードでチャージできます。",
+    playagain:"もう一度",c_menu:"「Suicaの購入」を押してください",c_cardtype:"カードの種類を選んでください",c_register:"お客さま情報を入力してください",
+    c_amount:"購入金額を選んでください（デポジット込み）",c_payment:"お支払い方法を選んでください",c_done:"カードとおつりをお受け取りください",
+    hw_cash:"紙幣・硬貨",hw_card:"カード・おつり",hw_call:"呼出",hw_ic:"ICカード",help_label:"案内"},
+
+   en:{m_label:"Multi-Function Machine",idle_title:"Let's buy a\nSuica IC card",idle_sub:"Experience the real ticket-machine steps",idle_btn:"TOUCH TO START",
+    lang_title:"Please select a language",menu_title:"Menu",menu_suica:"Purchase Suica",menu_tickets:"Tickets",menu_charge:"Charge (Top-up)",menu_pass:"Commuter Pass",
+    back:"Back",next:"Next",cancel:"Cancel",confirm:"Confirm",
+    ct_title:"Choose a Suica type",ct_unreg_t:"Suica Card (Unregistered)",ct_unreg_s:"No details needed, fastest. Best for travelers.",ct_unreg_tag:"Easy",
+    ct_reg_t:"My Suica (Registered)",ct_reg_s:"Can be reissued if lost (requires your details).",ct_reg_tag:"Secure",
+    ct_deposit:"Both require a ¥500 deposit (refunded when you return the card).",
+    reg_title:"Enter your details",reg_name:"Name",reg_phone:"Phone number",reg_note:"Real machines also ask for date of birth and gender.",
+    amt_title:"Choose an amount",amt_balance:"Usable balance",amt_deposit:"Deposit",amt_refund:"Refundable",amt_youpay:"You pay",
+    pay_due:"Amount due",pay_more:"¥{n} more needed",pay_change:"Change ¥{n}",pay_exact:"Exact amount — thank you",pay_hint:"Accepts ¥1,000–¥10,000 notes and ¥10–¥500 coins.",
+    pay_method:"Payment method",pm_cash:"Cash",pm_credit:"Credit card",pm_credit_sub:"View Card only",
+    pm_credit_note:"At the machine, only JR East \u201cView Card\u201d can buy a Suica. Overseas or other credit cards are not accepted here. To pay with your own card, use \u201cMobile Suica\u201d on your phone (no deposit).",
+    dep_incl:"incl. ¥500 deposit",r_method:"Payment",v_cash:"Cash",v_credit:"Credit (View Card)",
+    disp_t:"Issuing…",disp_s:"Issuing your Suica card",done_unreg:"Unregistered",done_reg:"Registered",done_title:"Purchase complete",
+    r_type:"Type",r_balance:"Card balance",r_deposit:"Deposit",r_inserted:"Inserted",r_change:"Change",
+    v_reg:"My Suica (Registered)",v_unreg:"Suica Card (Unregistered)",
+    tips:"<b>Traveler tip:</b> If physical cards are unavailable, get a <b>Welcome Suica</b> (no deposit, valid 28 days) at airports & major stations. On iPhone / Apple Watch you can issue <b>Mobile Suica</b> instantly and top it up with any credit card.",
+    playagain:"Play again",c_menu:"Tap \u201cPurchase Suica\u201d",c_cardtype:"Choose a card type",c_register:"Enter your details",
+    c_amount:"Choose an amount (deposit included)",c_payment:"Choose a payment method",c_done:"Please take your card & change",
+    hw_cash:"NOTES / COINS",hw_card:"CARD / CHANGE",hw_call:"Call",hw_ic:"IC CARD",help_label:"Guide"},
+
+   "zh-CN":{m_label:"多功能售票机",idle_title:"来买一张\nSuica 卡吧",idle_sub:"体验与真实售票机相同的操作步骤",idle_btn:"触摸屏幕开始",
+    lang_title:"请选择语言",menu_title:"菜单",menu_suica:"购买 Suica",menu_tickets:"车票",menu_charge:"充值",menu_pass:"定期票",
+    back:"返回",next:"下一步",cancel:"取消",confirm:"确定",
+    ct_title:"选择 Suica 种类",ct_unreg_t:"Suica 卡（不记名）",ct_unreg_s:"无需登记信息、最快捷。推荐游客使用。",ct_unreg_tag:"简便",
+    ct_reg_t:"My Suica（记名式）",ct_reg_s:"遗失时可补办（需填写个人信息）。",ct_reg_tag:"安心",
+    ct_deposit:"两者均需 ¥500 押金（退卡时退还）。",
+    reg_title:"填写个人信息",reg_name:"姓名",reg_phone:"电话号码",reg_note:"真实售票机还会要求填写出生日期、性别等。",
+    amt_title:"选择购买金额",amt_balance:"可用余额",amt_deposit:"押金",amt_refund:"可退还",amt_youpay:"应付金额",
+    pay_due:"应付金额",pay_more:"还需 ¥{n}",pay_change:"找零 ¥{n}",pay_exact:"金额刚好，谢谢",pay_hint:"可使用 ¥1,000–¥10,000 纸币与 ¥10–¥500 硬币。",
+    pay_method:"支付方式",pm_cash:"现金",pm_credit:"信用卡",pm_credit_sub:"仅限 View Card",
+    pm_credit_note:"在售票机用信用卡购买 Suica 仅限 JR东日本「View Card」。境外发行等其他信用卡无法使用。若想用自己的信用卡支付，请使用手机「移动 Suica」（免押金）。",
+    dep_incl:"含 ¥500 押金",r_method:"支付方式",v_cash:"现金",v_credit:"信用卡（View Card）",
+    disp_t:"正在出卡…",disp_s:"正在发行您的 Suica 卡",done_unreg:"不记名",done_reg:"记名式",done_title:"购买完成",
+    r_type:"种类",r_balance:"卡内余额",r_deposit:"押金",r_inserted:"投入金额",r_change:"找零",
+    v_reg:"My Suica（记名式）",v_unreg:"Suica 卡（不记名）",
+    tips:"<b>旅行提示：</b>如无实体卡，可在机场及主要车站购买 <b>Welcome Suica</b>（免押金、有效期 28 天）。iPhone / Apple Watch 可在 App 内即时开通 <b>移动 Suica</b>，并用任意信用卡充值。",
+    playagain:"再玩一次",c_menu:"请点击「购买 Suica」",c_cardtype:"请选择卡的种类",c_register:"请填写个人信息",
+    c_amount:"请选择购买金额（含押金）",c_payment:"请选择支付方式",c_done:"请取走您的卡和找零",
+    hw_cash:"纸币・硬币",hw_card:"卡・找零",hw_call:"呼叫",hw_ic:"IC 卡",help_label:"引导"},
+
+   "zh-TW":{m_label:"多功能售票機",idle_title:"來買一張\nSuica 卡吧",idle_sub:"體驗與真實售票機相同的操作步驟",idle_btn:"觸碰螢幕開始",
+    lang_title:"請選擇語言",menu_title:"選單",menu_suica:"購買 Suica",menu_tickets:"車票",menu_charge:"加值",menu_pass:"定期票",
+    back:"返回",next:"下一步",cancel:"取消",confirm:"確定",
+    ct_title:"選擇 Suica 種類",ct_unreg_t:"Suica 卡（無記名）",ct_unreg_s:"無需登記資料、最快速。推薦旅客使用。",ct_unreg_tag:"簡便",
+    ct_reg_t:"My Suica（記名式）",ct_reg_s:"遺失時可補發（需填寫個人資料）。",ct_reg_tag:"安心",
+    ct_deposit:"兩者均需 ¥500 押金（退卡時退還）。",
+    reg_title:"填寫個人資料",reg_name:"姓名",reg_phone:"電話號碼",reg_note:"真實售票機還會要求填寫出生日期、性別等。",
+    amt_title:"選擇購買金額",amt_balance:"可用餘額",amt_deposit:"押金",amt_refund:"可退還",amt_youpay:"應付金額",
+    pay_due:"應付金額",pay_more:"還需 ¥{n}",pay_change:"找零 ¥{n}",pay_exact:"金額剛好，謝謝",pay_hint:"可使用 ¥1,000–¥10,000 紙鈔與 ¥10–¥500 硬幣。",
+    pay_method:"付款方式",pm_cash:"現金",pm_credit:"信用卡",pm_credit_sub:"僅限 View Card",
+    pm_credit_note:"在售票機以信用卡購買 Suica 僅限 JR東日本「View Card」。海外發行等其他信用卡無法使用。若想以自己的信用卡付款，請使用手機「行動 Suica」（免押金）。",
+    dep_incl:"含 ¥500 押金",r_method:"付款方式",v_cash:"現金",v_credit:"信用卡（View Card）",
+    disp_t:"出卡中…",disp_s:"正在發行您的 Suica 卡",done_unreg:"無記名",done_reg:"記名式",done_title:"購買完成",
+    r_type:"種類",r_balance:"卡內餘額",r_deposit:"押金",r_inserted:"投入金額",r_change:"找零",
+    v_reg:"My Suica（記名式）",v_unreg:"Suica 卡（無記名）",
+    tips:"<b>旅行提示：</b>如無實體卡，可在機場及主要車站購買 <b>Welcome Suica</b>（免押金、效期 28 天）。iPhone / Apple Watch 可在 App 內即時開通 <b>行動 Suica</b>，並以任意信用卡加值。",
+    playagain:"再玩一次",c_menu:"請點選「購買 Suica」",c_cardtype:"請選擇卡的種類",c_register:"請填寫個人資料",
+    c_amount:"請選擇購買金額（含押金）",c_payment:"請選擇付款方式",c_done:"請取走您的卡與找零",
+    hw_cash:"紙鈔・硬幣",hw_card:"卡・找零",hw_call:"呼叫",hw_ic:"IC 卡",help_label:"導引"},
+
+   ko:{m_label:"다기능 발매기",idle_title:"Suica 카드를\n사 봅시다",idle_sub:"실제 발매기와 동일한 순서를 체험할 수 있습니다",idle_btn:"화면을 터치하여 시작",
+    lang_title:"언어를 선택하세요",menu_title:"메뉴",menu_suica:"Suica 구입",menu_tickets:"승차권",menu_charge:"충전",menu_pass:"정기권",
+    back:"뒤로",next:"다음",cancel:"취소",confirm:"확인",
+    ct_title:"Suica 종류 선택",ct_unreg_t:"Suica 카드 (무기명)",ct_unreg_s:"정보 등록 없이 가장 빠릅니다. 여행자 추천.",ct_unreg_tag:"간편",
+    ct_reg_t:"My Suica (기명식)",ct_reg_s:"분실 시 재발급 가능 (정보 입력 필요).",ct_reg_tag:"안심",
+    ct_deposit:"둘 다 보증금 ¥500이 필요합니다 (카드 반납 시 환불).",
+    reg_title:"고객 정보 입력",reg_name:"이름",reg_phone:"전화번호",reg_note:"실제 발매기에서는 생년월일·성별 등도 입력합니다.",
+    amt_title:"구입 금액 선택",amt_balance:"사용 가능 잔액",amt_deposit:"보증금",amt_refund:"환불 가능",amt_youpay:"결제 금액",
+    pay_due:"결제 금액",pay_more:"¥{n} 더 필요합니다",pay_change:"거스름돈 ¥{n}",pay_exact:"정확한 금액입니다. 감사합니다",pay_hint:"¥1,000–¥10,000 지폐와 ¥10–¥500 동전을 사용할 수 있습니다.",
+    pay_method:"결제 방법",pm_cash:"현금",pm_credit:"신용카드",pm_credit_sub:"View Card만 가능",
+    pm_credit_note:"발매기에서 신용카드로 Suica를 살 수 있는 것은 JR동일본 「View Card」뿐입니다. 해외 발행 등 다른 카드는 사용할 수 없습니다. 본인 카드로 결제하려면 스마트폰 「모바일 Suica」를 이용하세요 (보증금 없음).",
+    dep_incl:"보증금 ¥500 포함",r_method:"결제 방법",v_cash:"현금",v_credit:"신용카드(View Card)",
+    disp_t:"발행 중…",disp_s:"Suica 카드를 발행하고 있습니다",done_unreg:"무기명",done_reg:"기명식",done_title:"구입이 완료되었습니다",
+    r_type:"종류",r_balance:"카드 잔액",r_deposit:"보증금",r_inserted:"투입 금액",r_change:"거스름돈",
+    v_reg:"My Suica (기명식)",v_unreg:"Suica 카드 (무기명)",
+    tips:"<b>여행자 팁:</b> 실물 카드가 없을 때는 공항·주요 역에서 <b>Welcome Suica</b>(보증금 없음, 28일 유효)를 살 수 있습니다. iPhone / Apple Watch는 앱에서 <b>모바일 Suica</b>를 즉시 발급하고 아무 신용카드로 충전할 수 있습니다.",
+    playagain:"다시 하기",c_menu:"「Suica 구입」을 누르세요",c_cardtype:"카드 종류를 선택하세요",c_register:"고객 정보를 입력하세요",
+    c_amount:"구입 금액을 선택하세요 (보증금 포함)",c_payment:"결제 방법을 선택하세요",c_done:"카드와 거스름돈을 받으세요",
+    hw_cash:"지폐・동전",hw_card:"카드・거스름돈",hw_call:"호출",hw_ic:"IC 카드",help_label:"안내"},
+
+   de:{m_label:"Mehrzweck-Automat",idle_title:"Kaufen wir eine\nSuica-Karte",idle_sub:"Erlebe die echten Schritte am Automaten",idle_btn:"ZUM STARTEN BERÜHREN",
+    lang_title:"Bitte Sprache wählen",menu_title:"Menü",menu_suica:"Suica kaufen",menu_tickets:"Fahrkarten",menu_charge:"Aufladen",menu_pass:"Zeitkarte",
+    back:"Zurück",next:"Weiter",cancel:"Abbrechen",confirm:"Bestätigen",
+    ct_title:"Suica-Typ wählen",ct_unreg_t:"Suica-Karte (anonym)",ct_unreg_s:"Keine Daten nötig, am schnellsten. Ideal für Reisende.",ct_unreg_tag:"Einfach",
+    ct_reg_t:"My Suica (registriert)",ct_reg_s:"Bei Verlust ersetzbar (Daten erforderlich).",ct_reg_tag:"Sicher",
+    ct_deposit:"Beide erfordern ¥500 Pfand (wird bei Rückgabe der Karte erstattet).",
+    reg_title:"Daten eingeben",reg_name:"Name",reg_phone:"Telefon",reg_note:"Echte Automaten fragen auch Geburtsdatum und Geschlecht ab.",
+    amt_title:"Betrag wählen",amt_balance:"Verfügbares Guthaben",amt_deposit:"Pfand",amt_refund:"erstattbar",amt_youpay:"Zu zahlen",
+    pay_due:"Fälliger Betrag",pay_more:"Noch ¥{n} nötig",pay_change:"Wechselgeld ¥{n}",pay_exact:"Passender Betrag — danke",pay_hint:"Akzeptiert Scheine ¥1.000–¥10.000 und Münzen ¥10–¥500.",
+    pay_method:"Zahlungsart",pm_cash:"Bargeld",pm_credit:"Kreditkarte",pm_credit_sub:"nur View Card",
+    pm_credit_note:"Am Automaten kann nur die JR-East-„View Card“ eine Suica kaufen. Andere (ausländische usw.) Karten werden hier nicht akzeptiert. Um mit deiner eigenen Karte zu zahlen, nutze „Mobile Suica“ auf dem Handy (kein Pfand).",
+    dep_incl:"inkl. ¥500 Pfand",r_method:"Zahlung",v_cash:"Bargeld",v_credit:"Kredit (View Card)",
+    disp_t:"Wird ausgegeben…",disp_s:"Ihre Suica-Karte wird ausgegeben",done_unreg:"Anonym",done_reg:"Registriert",done_title:"Kauf abgeschlossen",
+    r_type:"Typ",r_balance:"Kartenguthaben",r_deposit:"Pfand",r_inserted:"Eingezahlt",r_change:"Wechselgeld",
+    v_reg:"My Suica (registriert)",v_unreg:"Suica-Karte (anonym)",
+    tips:"<b>Reisetipp:</b> Falls keine physischen Karten verfügbar sind, hol dir eine <b>Welcome Suica</b> (kein Pfand, 28 Tage gültig) an Flughäfen und großen Bahnhöfen. Auf iPhone / Apple Watch erstellst du sofort eine <b>Mobile Suica</b> und lädst sie mit jeder Kreditkarte auf.",
+    playagain:"Nochmal",c_menu:"Tippe auf „Suica kaufen“",c_cardtype:"Kartentyp wählen",c_register:"Daten eingeben",
+    c_amount:"Betrag wählen (Pfand inklusive)",c_payment:"Zahlungsart wählen",c_done:"Bitte Karte und Wechselgeld entnehmen",
+    hw_cash:"SCHEINE / MÜNZEN",hw_card:"KARTE / GELD",hw_call:"Ruf",hw_ic:"IC-KARTE",help_label:"Hilfe"},
+
+   fr:{m_label:"Distributeur multifonction",idle_title:"Achetons une\ncarte Suica",idle_sub:"Vivez les vraies étapes du distributeur",idle_btn:"TOUCHEZ POUR COMMENCER",
+    lang_title:"Veuillez choisir une langue",menu_title:"Menu",menu_suica:"Acheter une Suica",menu_tickets:"Billets",menu_charge:"Recharger",menu_pass:"Abonnement",
+    back:"Retour",next:"Suivant",cancel:"Annuler",confirm:"Confirmer",
+    ct_title:"Choisir un type de Suica",ct_unreg_t:"Carte Suica (anonyme)",ct_unreg_s:"Aucune info requise, la plus rapide. Idéale en voyage.",ct_unreg_tag:"Facile",
+    ct_reg_t:"My Suica (nominative)",ct_reg_s:"Remplaçable en cas de perte (infos requises).",ct_reg_tag:"Sûre",
+    ct_deposit:"Les deux requièrent une caution de ¥500 (remboursée au retour de la carte).",
+    reg_title:"Saisissez vos informations",reg_name:"Nom",reg_phone:"Téléphone",reg_note:"Les vrais distributeurs demandent aussi la date de naissance et le sexe.",
+    amt_title:"Choisir un montant",amt_balance:"Solde utilisable",amt_deposit:"Caution",amt_refund:"Remboursable",amt_youpay:"À payer",
+    pay_due:"Montant dû",pay_more:"Il manque ¥{n}",pay_change:"Monnaie ¥{n}",pay_exact:"Montant exact — merci",pay_hint:"Accepte les billets ¥1,000–¥10,000 et les pièces ¥10–¥500.",
+    pay_method:"Mode de paiement",pm_cash:"Espèces",pm_credit:"Carte",pm_credit_sub:"View Card uniquement",
+    pm_credit_note:"Au distributeur, seule la « View Card » de JR East permet d'acheter une Suica. Les autres cartes (étrangères, etc.) ne sont pas acceptées ici. Pour payer avec votre propre carte, utilisez « Suica mobile » sur votre téléphone (sans caution).",
+    dep_incl:"caution ¥500 incl.",r_method:"Paiement",v_cash:"Espèces",v_credit:"Carte (View Card)",
+    disp_t:"Émission…",disp_s:"Émission de votre carte Suica",done_unreg:"Anonyme",done_reg:"Nominative",done_title:"Achat terminé",
+    r_type:"Type",r_balance:"Solde de la carte",r_deposit:"Caution",r_inserted:"Inséré",r_change:"Monnaie",
+    v_reg:"My Suica (nominative)",v_unreg:"Carte Suica (anonyme)",
+    tips:"<b>Astuce voyage :</b> si les cartes physiques manquent, prenez une <b>Welcome Suica</b> (sans caution, valable 28 jours) aux aéroports et grandes gares. Sur iPhone / Apple Watch, créez une <b>Suica mobile</b> instantanément et rechargez-la avec n'importe quelle carte.",
+    playagain:"Rejouer",c_menu:"Touchez « Acheter une Suica »",c_cardtype:"Choisissez un type de carte",c_register:"Saisissez vos informations",
+    c_amount:"Choisissez un montant (caution incluse)",c_payment:"Choisissez un mode de paiement",c_done:"Prenez votre carte et votre monnaie",
+    hw_cash:"BILLETS / PIÈCES",hw_card:"CARTE / MONNAIE",hw_call:"Appel",hw_ic:"CARTE IC",help_label:"Guide"},
+
+   es:{m_label:"Máquina multifunción",idle_title:"Compremos una\ntarjeta Suica",idle_sub:"Vive los pasos reales de la máquina de billetes",idle_btn:"TOCA PARA EMPEZAR",
+    lang_title:"Elige un idioma",menu_title:"Menú",menu_suica:"Comprar Suica",menu_tickets:"Billetes",menu_charge:"Recargar",menu_pass:"Abono",
+    back:"Atrás",next:"Siguiente",cancel:"Cancelar",confirm:"Confirmar",
+    ct_title:"Elige un tipo de Suica",ct_unreg_t:"Tarjeta Suica (anónima)",ct_unreg_s:"Sin datos, la más rápida. Ideal para viajeros.",ct_unreg_tag:"Fácil",
+    ct_reg_t:"My Suica (nominativa)",ct_reg_s:"Se puede reemitir si se pierde (requiere tus datos).",ct_reg_tag:"Segura",
+    ct_deposit:"Ambas requieren un depósito de ¥500 (reembolsable al devolver la tarjeta).",
+    reg_title:"Introduce tus datos",reg_name:"Nombre",reg_phone:"Teléfono",reg_note:"Las máquinas reales también piden fecha de nacimiento y sexo.",
+    amt_title:"Elige un importe",amt_balance:"Saldo disponible",amt_deposit:"Depósito",amt_refund:"Reembolsable",amt_youpay:"A pagar",
+    pay_due:"Importe a pagar",pay_more:"Faltan ¥{n}",pay_change:"Cambio ¥{n}",pay_exact:"Importe exacto — gracias",pay_hint:"Acepta billetes de ¥1,000–¥10,000 y monedas de ¥10–¥500.",
+    pay_method:"Método de pago",pm_cash:"Efectivo",pm_credit:"Tarjeta",pm_credit_sub:"Solo View Card",
+    pm_credit_note:"En la máquina, solo la « View Card » de JR East permite comprar una Suica. Otras tarjetas (extranjeras, etc.) no se aceptan aquí. Para pagar con tu propia tarjeta, usa « Suica móvil » en tu teléfono (sin depósito).",
+    dep_incl:"depósito ¥500 incl.",r_method:"Pago",v_cash:"Efectivo",v_credit:"Tarjeta (View Card)",
+    disp_t:"Emitiendo…",disp_s:"Emitiendo tu tarjeta Suica",done_unreg:"Anónima",done_reg:"Nominativa",done_title:"Compra completada",
+    r_type:"Tipo",r_balance:"Saldo de la tarjeta",r_deposit:"Depósito",r_inserted:"Insertado",r_change:"Cambio",
+    v_reg:"My Suica (nominativa)",v_unreg:"Tarjeta Suica (anónima)",
+    tips:"<b>Consejo de viaje:</b> si no hay tarjetas físicas, consigue una <b>Welcome Suica</b> (sin depósito, válida 28 días) en aeropuertos y estaciones principales. En iPhone / Apple Watch puedes emitir <b>Suica móvil</b> al instante y recargarla con cualquier tarjeta.",
+    playagain:"Jugar de nuevo",c_menu:"Toca «Comprar Suica»",c_cardtype:"Elige un tipo de tarjeta",c_register:"Introduce tus datos",
+    c_amount:"Elige un importe (depósito incluido)",c_payment:"Elige un método de pago",c_done:"Recoge tu tarjeta y tu cambio",
+    hw_cash:"BILLETES / MONEDAS",hw_card:"TARJETA / CAMBIO",hw_call:"Llamar",hw_ic:"TARJETA IC",help_label:"Guía"},
+
+   ru:{m_label:"Многофункциональный автомат",idle_title:"Давайте купим\nкарту Suica",idle_sub:"Пройдите реальные шаги покупки в автомате",idle_btn:"КОСНИТЕСЬ, ЧТОБЫ НАЧАТЬ",
+    lang_title:"Выберите язык",menu_title:"Меню",menu_suica:"Купить Suica",menu_tickets:"Билеты",menu_charge:"Пополнить",menu_pass:"Проездной",
+    back:"Назад",next:"Далее",cancel:"Отмена",confirm:"Подтвердить",
+    ct_title:"Выберите тип Suica",ct_unreg_t:"Карта Suica (анонимная)",ct_unreg_s:"Без данных, самый быстрый способ. Идеально для туристов.",ct_unreg_tag:"Просто",
+    ct_reg_t:"My Suica (именная)",ct_reg_s:"Восстанавливается при утере (нужны ваши данные).",ct_reg_tag:"Надёжно",
+    ct_deposit:"Обе требуют залог ¥500 (возвращается при сдаче карты).",
+    reg_title:"Введите данные",reg_name:"Имя",reg_phone:"Телефон",reg_note:"Настоящие автоматы также спрашивают дату рождения и пол.",
+    amt_title:"Выберите сумму",amt_balance:"Доступный баланс",amt_deposit:"Залог",amt_refund:"возвращается",amt_youpay:"К оплате",
+    pay_due:"К оплате",pay_more:"Нужно ещё ¥{n}",pay_change:"Сдача ¥{n}",pay_exact:"Точная сумма — спасибо",pay_hint:"Принимаются купюры ¥1,000–¥10,000 и монеты ¥10–¥500.",
+    pay_method:"Способ оплаты",pm_cash:"Наличные",pm_credit:"Карта",pm_credit_sub:"только View Card",
+    pm_credit_note:"В автомате купить Suica по карте можно только картой «View Card» от JR East. Зарубежные и другие карты здесь не принимаются. Чтобы платить своей картой, используйте «Mobile Suica» в телефоне (без залога).",
+    dep_incl:"вкл. залог ¥500",r_method:"Оплата",v_cash:"Наличные",v_credit:"Карта (View Card)",
+    disp_t:"Выпуск…",disp_s:"Выпускается ваша карта Suica",done_unreg:"Анонимная",done_reg:"Именная",done_title:"Покупка завершена",
+    r_type:"Тип",r_balance:"Баланс карты",r_deposit:"Залог",r_inserted:"Внесено",r_change:"Сдача",
+    v_reg:"My Suica (именная)",v_unreg:"Карта Suica (анонимная)",
+    tips:"<b>Совет туристу:</b> если физических карт нет, возьмите <b>Welcome Suica</b> (без залога, действует 28 дней) в аэропортах и на крупных станциях. На iPhone / Apple Watch можно мгновенно выпустить <b>Mobile Suica</b> и пополнять её любой картой.",
+    playagain:"Ещё раз",c_menu:"Нажмите «Купить Suica»",c_cardtype:"Выберите тип карты",c_register:"Введите данные",
+    c_amount:"Выберите сумму (залог включён)",c_payment:"Выберите способ оплаты",c_done:"Заберите карту и сдачу",
+    hw_cash:"КУПЮРЫ / МОНЕТЫ",hw_card:"КАРТА / СДАЧА",hw_call:"Вызов",hw_ic:"IC-КАРТА",help_label:"Помощь"}
+  };
+
+  /* ============================================================
+     HOTEL AFFILIATE — wired to fujiseat.com.
+     - Trip.com uses per-area short-links from data/hotel-links.json
+       (the same district deep-links used across the rest of the
+       site). When an area has no short-link configured we fall
+       back to Agoda Tokyo (city=5085, cid=1963497).
+     - Agoda uses the standard partnersearch.aspx pattern with the
+       site's partner cid 1963497 and Tokyo city id 5085.
+     - stayIndexUrl points at the real Stay Area Index route.
+     ============================================================ */
+  var AFFILIATE={
+    agodaCid:'1963497',                  // fujiseat.com Agoda partner cid
+    agodaTokyoCity:'5085',               // Agoda city id for Tokyo
+    tripAllianceId:'',                   // not used: trip uses short-links
+    tripSid:'',                          // not used: trip uses short-links
+    stayIndexUrl:'/areas-to-stay/tokyo-stay-area-index',
+    primary:'trip'                       // matches site default (trip first)
+  };
+  // Well-connected Tokyo areas. tripShortUrl = per-district short-link
+  // sourced from data/hotel-links.json; empty string means fall back to Agoda.
+  var STAY_AREAS=[
+    {label:'Tokyo Station', q:'Tokyo Station',  tripShortUrl:'https://www.trip.com/t/PgV216VBXU2'},
+    {label:'Shinjuku',      q:'Shinjuku Tokyo', tripShortUrl:'https://www.trip.com/t/48qXpVIBXU2'},
+    {label:'Shibuya',       q:'Shibuya Tokyo',  tripShortUrl:'https://www.trip.com/t/PEM7YWXBXU2'},
+    {label:'Ueno / Asakusa',q:'Ueno Tokyo',     tripShortUrl:'https://www.trip.com/t/B0JQEdOBXU2'},
+    {label:'Ginza',         q:'Ginza Tokyo',    tripShortUrl:''}
+  ];
+  // Build a hotel URL for an area, reusing the site's existing scheme.
+  function hotelUrl(area, provider){
+    var q=encodeURIComponent(area.q);
+    if(provider==='trip' && area.tripShortUrl){
+      return area.tripShortUrl;
+    }
+    // Agoda partnersearch with Tokyo city id + keyword text.
+    return 'https://www.agoda.com/partners/partnersearch.aspx?pcs=1'+
+      '&cid='+AFFILIATE.agodaCid+
+      '&hl=en-us&city='+AFFILIATE.agodaTokyoCity+
+      '&text='+q;
+  }
+
+  /* stay-CTA copy (kept separate from main I18N for easy editing) */
+  var STAY={
+   ja:{title:"駅近のホテルを探す",sub:"Suicaでの移動なら、主要駅の近くが便利。エリアを選んでホテルを見る：",index:"エリア別・住みやすさランキングを見る",compare:"Trip.comでも比較する",pr:"PR"},
+   en:{title:"Find a hotel near a station",sub:"With Suica, staying near a major station is convenient. Pick an area:",index:"See the Stay Area Index",compare:"Compare on Trip.com",pr:"Ad"},
+   "zh-CN":{title:"寻找车站附近的酒店",sub:"用 Suica 出行，住在主要车站附近很方便。选择区域：",index:"查看地区宜居排行榜",compare:"在 Trip.com 比较",pr:"广告"},
+   "zh-TW":{title:"尋找車站附近的飯店",sub:"用 Suica 出行，住在主要車站附近很方便。選擇區域：",index:"查看地區宜居排行榜",compare:"在 Trip.com 比較",pr:"廣告"},
+   ko:{title:"역 근처 호텔 찾기",sub:"Suica로 이동하면 주요 역 근처가 편리합니다. 지역을 선택하세요:",index:"지역별 거주 편의 랭킹 보기",compare:"Trip.com에서 비교",pr:"광고"},
+   de:{title:"Hotel nahe einem Bahnhof finden",sub:"Mit Suica ist eine Unterkunft nahe einem großen Bahnhof praktisch. Wähle ein Gebiet:",index:"Stay Area Index ansehen",compare:"Auf Trip.com vergleichen",pr:"Anzeige"},
+   fr:{title:"Trouver un hôtel près d'une gare",sub:"Avec Suica, loger près d'une grande gare est pratique. Choisissez un quartier :",index:"Voir le Stay Area Index",compare:"Comparer sur Trip.com",pr:"Annonce"},
+   es:{title:"Hotel cerca de una estación",sub:"Con Suica, alojarse cerca de una estación principal es práctico. Elige una zona:",index:"Ver el Stay Area Index",compare:"Comparar en Trip.com",pr:"Anuncio"},
+   ru:{title:"Отель рядом со станцией",sub:"С Suica удобно жить рядом с крупной станцией. Выберите район:",index:"Открыть Stay Area Index",compare:"Сравнить на Trip.com",pr:"Реклама"}
+  };
+
+  var lang='ja';
+  function t(k){return (I18N[lang] && I18N[lang][k]) || I18N.en[k] || k;}
+  function st(k){return (STAY[lang] && STAY[lang][k]) || STAY.en[k] || k;}
+  function yen(n){return '¥'+n.toLocaleString('en-US');}
+
+  function indexUrl(){
+    // fujiseat.com locale routing: defaultLocale 'en' has no prefix,
+    // every other supported locale is prefixed with /<lang>. The 'ja'
+    // game language is not a site locale, so we fall back to the
+    // English (no-prefix) index URL for it.
+    var base=AFFILIATE.stayIndexUrl;
+    return (lang==='en'||lang==='ja')? base : ('/'+lang+base);
+  }
+  function buildStayCTA(){
+    var el=document.getElementById('stay-cta'); if(!el)return;
+    var chips=STAY_AREAS.map(function(a){
+      return '<a href="'+hotelUrl(a,AFFILIATE.primary)+'" target="_blank" rel="sponsored noopener">🏨 '+a.label+'</a>';
+    }).join('');
+    el.innerHTML=
+      '<span class="pr">'+st('pr')+'</span>'+
+      '<h4>🛏️ '+st('title')+'</h4>'+
+      '<p>'+st('sub')+'</p>'+
+      '<div class="stay-areas">'+chips+'</div>'+
+      '<div class="stay-foot">'+
+        '<a class="idx" href="'+indexUrl()+'" target="_top">📊 '+st('index')+' →</a>'+
+        '<a href="'+hotelUrl(STAY_AREAS[0],'trip')+'" target="_blank" rel="sponsored noopener">'+st('compare')+' →</a>'+
+      '</div>';
+  }
+
+  function applyLang(){
+    document.documentElement.lang=lang;
+    document.querySelectorAll('[data-t]').forEach(function(el){el.textContent=t(el.getAttribute('data-t'));});
+    document.querySelectorAll('[data-thtml]').forEach(function(el){el.innerHTML=t(el.getAttribute('data-thtml'));});
+    document.getElementById('idle-title').textContent=t('idle_title');
+    document.getElementById('idle-sub').textContent=t('idle_sub');
+    document.getElementById('touch-btn').textContent=t('idle_btn');
+    var gl=LANGS.filter(function(l){return l.code===lang;})[0];
+    document.getElementById('globe-label').textContent=gl?gl.name:'';
+    refreshDynamic();
+  }
+
+  var STEPS=['p-language','p-menu','p-cardtype','p-amount','p-payment','p-done'];
+  function show(id){
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('active');});
+    var el=document.getElementById(id);if(el)el.classList.add('active');
+    var body=el&&el.querySelector('.body');if(body)body.scrollTop=0;
+    document.getElementById('console').classList.toggle('slots-active', id==='p-payment'&&state.method==='cash');
+    updateProgress(id);
+  }
+  var prog=document.getElementById('progress');
+  STEPS.forEach(function(){var i=document.createElement('i');prog.appendChild(i);});
+  function updateProgress(id){
+    var idx=STEPS.indexOf(id);if(id==='p-register')idx=STEPS.indexOf('p-cardtype');
+    prog.querySelectorAll('i').forEach(function(d,k){d.classList.toggle('on',idx>=0&&k<=idx);});
+    prog.style.visibility=(id==='p-idle'||id==='p-dispense')?'hidden':'visible';
+  }
+
+  document.body.addEventListener('click',function(e){
+    var t2=e.target.closest('[data-go]');if(!t2)return;
+    var go=t2.getAttribute('data-go');
+    if(go==='route-suica'){show('p-cardtype');return;}
+    if(go==='p-idle'){resetAll();}
+    show(go);
+  });
+
+  /* language overlay */
+  var overlay=document.getElementById('overlay'), ovGrid=document.getElementById('ov-grid');
+  LANGS.forEach(function(l){
+    var b=document.createElement('button');b.innerHTML=l.flag+' '+l.name;b.setAttribute('data-lang',l.code);
+    b.addEventListener('click',function(){setLang(l.code);overlay.classList.remove('show');});
+    ovGrid.appendChild(b);
+  });
+  function markSel(){ovGrid.querySelectorAll('button').forEach(function(b){b.classList.toggle('sel',b.getAttribute('data-lang')===lang);});}
+  document.getElementById('globe').addEventListener('click',function(){markSel();overlay.classList.add('show');});
+  overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.classList.remove('show');});
+  function setLang(code){lang=code;applyLang();}
+
+  var langlist=document.getElementById('langlist');
+  LANGS.forEach(function(l){
+    var b=document.createElement('button');b.className='opt';
+    b.innerHTML='<div class="t">'+l.flag+' '+l.name+'</div><div class="s">'+l.sub+'</div>';
+    b.addEventListener('click',function(){setLang(l.code);show('p-menu');});
+    langlist.appendChild(b);
+  });
+
+  /* state & flow */
+  var DEPOSIT=500, AMOUNTS=[1000,2000,3000,5000,10000];
+  var state={card:null,amount:0,inserted:0,method:'cash'};
+
+  document.querySelectorAll('[data-card]').forEach(function(b){
+    b.addEventListener('click',function(){
+      state.card=this.getAttribute('data-card');
+      if(state.card==='reg'){show('p-register');}else{buildAmounts();show('p-amount');}
+    });
+  });
+  document.getElementById('reg-next').addEventListener('click',function(){buildAmounts();show('p-amount');});
+  document.getElementById('amt-back').addEventListener('click',function(){show(state.card==='reg'?'p-register':'p-cardtype');});
+
+  function buildAmounts(){
+    var g=document.getElementById('amount-grid');g.innerHTML='';
+    AMOUNTS.forEach(function(a){
+      var btn=document.createElement('button');btn.className='opt';
+      btn.innerHTML='<div class="t">'+yen(a)+'</div><div class="s">'+t('amt_balance')+': <b>'+yen(a-DEPOSIT)+'</b></div>';
+      btn.addEventListener('click',function(){selectAmount(a);});
+      g.appendChild(btn);
+    });
+    document.getElementById('amount-info').style.display='none';
+  }
+  function amtBreakdownHTML(a){
+    return '<div class="row"><span>'+t('amt_balance')+'</span><b>'+yen(a-DEPOSIT)+'</b></div>'+
+      '<div class="row"><span>'+t('amt_deposit')+'<span class="pill">'+t('amt_refund')+'</span></span><b>'+yen(DEPOSIT)+'</b></div>'+
+      '<div class="row tot"><span>'+t('amt_youpay')+'</span><b>'+yen(a)+'</b></div>';
+  }
+  function selectAmount(a){
+    state.amount=a;
+    var info=document.getElementById('amount-info');info.style.display='block';info.innerHTML=amtBreakdownHTML(a);
+    setTimeout(startPayment,260);
+  }
+
+  /* payment method */
+  function setMethod(m){
+    state.method=m;
+    document.querySelectorAll('.pm-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-method')===m);});
+    document.getElementById('cash-area').style.display=(m==='cash')?'block':'none';
+    document.getElementById('credit-area').style.display=(m==='credit')?'block':'none';
+    document.getElementById('console').classList.toggle('slots-active', m==='cash');
+    if(m==='credit'){state.inserted=state.amount;document.getElementById('pay-confirm').disabled=false;}
+    else{renderPay();}
+  }
+  document.querySelectorAll('.pm-btn').forEach(function(b){b.addEventListener('click',function(){setMethod(this.getAttribute('data-method'));});});
+
+  function startPayment(){
+    state.inserted=0;document.getElementById('due-amt').textContent=yen(state.amount);
+    document.getElementById('dep-incl').textContent='('+t('dep_incl')+')';
+    setMethod('cash');renderPay();show('p-payment');
+  }
+  function renderPay(){
+    document.getElementById('inserted').textContent=yen(state.inserted);
+    var enough=state.inserted>=state.amount;
+    document.getElementById('inserted').classList.toggle('ok',enough);
+    document.getElementById('meter-bar').style.width=Math.min(100,state.inserted/state.amount*100)+'%';
+    var rem=document.getElementById('remain');
+    if(enough){var ch=state.inserted-state.amount;rem.innerHTML=ch>0?t('pay_change').replace('{n}',ch.toLocaleString('en-US')):'✅ '+t('pay_exact');}
+    else{rem.innerHTML=t('pay_more').replace('{n}',(state.amount-state.inserted).toLocaleString('en-US'));}
+    document.getElementById('pay-confirm').disabled=!enough;
+  }
+  document.querySelectorAll('[data-cash]').forEach(function(b){b.addEventListener('click',function(){if(state.method!=='cash')return;state.inserted+=parseInt(this.getAttribute('data-cash'),10);renderPay();});});
+  document.getElementById('pay-cancel').addEventListener('click',function(){state.inserted=0;buildAmounts();show('p-amount');});
+  document.getElementById('pay-confirm').addEventListener('click',function(){show('p-dispense');setTimeout(finish,1700);});
+
+  function receiptHTML(){
+    var usable=state.amount-DEPOSIT, change=(state.method==='credit')?0:(state.inserted-state.amount), reg=(state.card==='reg');
+    var h='<div class="r"><span>'+t('r_type')+'</span><b>'+(reg?t('v_reg'):t('v_unreg'))+'</b></div>'+
+      '<div class="r"><span>'+t('r_balance')+'</span><b>'+yen(usable)+'</b></div>'+
+      '<div class="r"><span>'+t('r_deposit')+'</span><b>'+yen(DEPOSIT)+'</b></div>'+
+      '<div class="r"><span>'+t('r_method')+'</span><b>'+(state.method==='credit'?t('v_credit'):t('v_cash'))+'</b></div>';
+    if(state.method==='cash'){
+      h+='<div class="r"><span>'+t('r_inserted')+'</span><b>'+yen(state.inserted)+'</b></div>'+
+         '<div class="r"><span>'+t('r_change')+'</span><b>'+yen(change>0?change:0)+'</b></div>';
+    }
+    return h;
+  }
+  function finish(){
+    var usable=state.amount-DEPOSIT, reg=(state.card==='reg');
+    var name=(document.getElementById('f-name').value||'').trim().toUpperCase();
+    document.getElementById('card-name').textContent=reg?(name?name.split(' ')[0]||'My Suica':'My Suica'):'Suica';
+    document.getElementById('card-sub').textContent=reg?t('done_reg'):t('done_unreg');
+    document.getElementById('card-bal').textContent=yen(usable);
+    document.getElementById('receipt').innerHTML=receiptHTML();
+    // physical card ejection
+    var tray=document.getElementById('tray'), mc=document.getElementById('mini-card');
+    mc.textContent=reg?(name?name.split(' ')[0]||'Suica':'My Suica'):'Suica';
+    tray.classList.add('eject');mc.classList.remove('out');void mc.offsetWidth;mc.classList.add('out');
+    setTimeout(function(){tray.classList.remove('eject');},2600);
+    buildStayCTA();
+    show('p-done');
+  }
+
+  function refreshDynamic(){
+    var active=document.querySelector('.panel.active');var id=active?active.id:'';
+    if(id==='p-amount'){buildAmounts();if(state.amount){var info=document.getElementById('amount-info');info.style.display='block';info.innerHTML=amtBreakdownHTML(state.amount);}}
+    if(id==='p-payment'){document.getElementById('due-amt').textContent=yen(state.amount);document.getElementById('dep-incl').textContent='('+t('dep_incl')+')';renderPay();}
+    if(id==='p-done'&&state.amount){document.getElementById('card-sub').textContent=(state.card==='reg')?t('done_reg'):t('done_unreg');document.getElementById('receipt').innerHTML=receiptHTML();buildStayCTA();}
+  }
+
+  function resetAll(){
+    state={card:null,amount:0,inserted:0,method:'cash'};
+    var n=document.getElementById('f-name'),p=document.getElementById('f-phone');if(n)n.value='';if(p)p.value='';
+    var mc=document.getElementById('mini-card');mc.classList.remove('out');
+  }
+
+  /* call button */
+  var CALL={ja:'係員を呼び出しています…（デモ）',en:'Calling a staff member… (demo)',"zh-CN":'正在呼叫工作人员…（演示）',"zh-TW":'正在呼叫服務人員…（示範）',ko:'담당자를 호출하고 있습니다… (데모)',de:'Ein Mitarbeiter wird gerufen… (Demo)',fr:'Appel d\u2019un agent… (démo)',es:'Llamando a un agente… (demo)',ru:'Вызываем сотрудника… (демо)'};
+  document.getElementById('call-btn').addEventListener('click',function(){
+    this.animate([{transform:'scale(1)'},{transform:'scale(.92)'},{transform:'scale(1)'}],{duration:240});
+    var clk=document.getElementById('clock');var prev=clk.textContent;clk.textContent='📞';
+    var tip=document.createElement('div');tip.textContent=CALL[lang]||CALL.en;
+    tip.style.cssText='position:absolute;left:50%;top:34px;transform:translateX(-50%);z-index:55;background:#c23c10;color:#fff;font-size:11px;font-weight:700;padding:6px 12px;border-radius:8px;box-shadow:0 6px 16px rgba(0,0,0,.4);white-space:nowrap;max-width:90%;text-align:center;';
+    document.querySelector('.screen').appendChild(tip);
+    setTimeout(function(){tip.remove();clk.textContent=prev;},1900);
+  });
+
+  function tick(){var d=new Date();document.getElementById('clock').textContent=('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);}
+  tick();setInterval(tick,15000);
+
+  // sync language with parent site via ?lang= (e.g. iframe src="...?lang=fr")
+  try{
+    var qp=new URLSearchParams(location.search).get('lang');
+    if(qp){ var hit=LANGS.filter(function(l){return l.code===qp || l.code.toLowerCase()===qp.toLowerCase();})[0]; if(hit) lang=hit.code; }
+  }catch(e){}
+
+  applyLang();updateProgress('p-idle');
+})();
+</script>
+</body>
+</html>

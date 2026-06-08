@@ -98,7 +98,14 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
     { href: "/areas-to-stay/where-to-stay-before-shinkansen", key: "beforeShinkansen", type: "stay" as const },
     { href: "/airport-transfers", key: "airport", type: "transfer" as const },
     { href: "/itineraries/7-day-first-time-japan", key: "itinerary", type: "itinerary" as const },
+    { href: "/how-to-buy-suica", key: "suica", type: "station_practice" as const },
   ];
+
+  // The Suica card lives in the dedicated suicaGuide namespace, which is
+  // already translated across every locale. Read its label + desc here so
+  // we can render it alongside the trainSigns-scoped cards without
+  // duplicating the strings.
+  const tSuica = await getTranslations({ locale, namespace: "suicaGuide" });
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -418,8 +425,12 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                       <ArrowRight className="h-5 w-5" />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block font-bold text-[#082653]">{t(`suggested.cards.${item.key}.title`)}</span>
-                      <span className="mt-1 block text-xs leading-5 text-[#5f7190]">{t(`suggested.cards.${item.key}.desc`)}</span>
+                      <span className="block font-bold text-[#082653]">
+                        {item.key === "suica" ? tSuica("ctaLabel") : t(`suggested.cards.${item.key}.title`)}
+                      </span>
+                      <span className="mt-1 block text-xs leading-5 text-[#5f7190]">
+                        {item.key === "suica" ? tSuica("ctaDescription") : t(`suggested.cards.${item.key}.desc`)}
+                      </span>
                     </span>
                   </Link>
                 ))}

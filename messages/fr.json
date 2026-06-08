@@ -5004,5 +5004,14 @@
       "title": "Lire les panneaux des trains au Japon",
       "description": "Tu connais quelqu'un qui visite le Japon pour la première fois ? Partage-lui ce guide des panneaux des trains."
     }
+  },
+  "suicaGuide": {
+    "title": "Comment acheter une carte Suica — simulateur interactif",
+    "metaDescription": "Simule l'achat d'une carte IC Suica à un distributeur japonais sur un écran fidèle. À la fin, trouve un hôtel près d'une gare bien connectée.",
+    "intro": "Entraîne-toi à acheter un Suica à un distributeur japonais sur un écran fidèle au réel. À la fin, trouve un hôtel près d'une gare bien connectée.",
+    "iframeTitle": "Simulateur d'achat de Suica",
+    "back": "Voir le Tokyo Stay Area Index",
+    "ctaLabel": "Ouvrir le simulateur d'achat de Suica",
+    "ctaDescription": "Essaie un simulateur de distributeur fidèle à la réalité avant ton premier voyage."
   }
 }

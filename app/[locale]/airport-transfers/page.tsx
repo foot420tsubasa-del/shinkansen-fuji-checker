@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { ArrowRight, Clock, Luggage, MapPin, Plane, Train } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -438,6 +439,9 @@ function ProblemCard({
 export default async function AirportTransfersIndex({ params }: Props) {
   const { locale } = await params;
   const copy = getAirportTransferHubCopy(locale);
+  // Reuse the suicaGuide labels for the Continue-planning Suica card so the
+  // copy stays in one place across pages.
+  const tSuicaGuide = await getTranslations({ locale, namespace: "suicaGuide" });
   const firstHotelAreaCopy = firstHotelAreaCopyByLocale[locale] ?? firstHotelAreaCopyByLocale.en;
   const transferTogetherCopy = transferTogetherCopyByLocale[locale] ?? transferTogetherCopyByLocale.en;
   const heroImage = getAirportTransferHubImage();
@@ -732,6 +736,9 @@ export default async function AirportTransfersIndex({ params }: Props) {
           </TrackedInternalLink>
           <TrackedInternalLink href="/itineraries/7-day-first-time-japan" sourcePage={pagePath} placement="airport_hub_continue_planning" label={copy.continueCards[3].title} locale={locale} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-900 shadow-sm transition-colors hover:bg-slate-50">
             {copy.continueCards[3].title} <span className="mt-1 block text-xs font-normal text-slate-500">{copy.continueCards[3].body}</span>
+          </TrackedInternalLink>
+          <TrackedInternalLink href="/how-to-buy-suica" sourcePage={pagePath} placement="airport_hub_continue_planning" label={tSuicaGuide("ctaLabel")} locale={locale} className="rounded-2xl border border-slate-200 bg-white p-4 text-sm font-semibold text-slate-900 shadow-sm transition-colors hover:bg-slate-50">
+            {tSuicaGuide("ctaLabel")} <span className="mt-1 block text-xs font-normal text-slate-500">{tSuicaGuide("ctaDescription")}</span>
           </TrackedInternalLink>
         </div>
       </section>

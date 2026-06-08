@@ -5003,5 +5003,14 @@
       "title": "Japanische Bahnschilder lesen",
       "description": "Kennst du jemanden auf erstem Japan-Trip? Teil diesen Bahnschilder-Guide."
     }
+  },
+  "suicaGuide": {
+    "title": "So kaufst du eine Suica-Karte — interaktiver Simulator",
+    "metaDescription": "Übe den Kauf einer Suica-IC-Karte am japanischen Ticketautomaten auf einem realistischen Bildschirm. Am Ende findest du ein Hotel nahe einem gut angebundenen Bahnhof.",
+    "intro": "Übe den Kauf eines Suica am japanischen Ticketautomaten auf einem realitätsnahen Bildschirm. Am Ende findest du ein Hotel in der Nähe eines gut angebundenen Bahnhofs.",
+    "iframeTitle": "Suica-Kauf-Simulator",
+    "back": "Tokyo Stay Area Index ansehen",
+    "ctaLabel": "Suica-Kauf-Simulator öffnen",
+    "ctaDescription": "Probiere vor der ersten Reise einen realitätsnahen Ticketautomaten-Simulator."
   }
 }

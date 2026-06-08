@@ -1082,6 +1082,10 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
   const { locale } = await params;
   const { filter, area } = await searchParams;
   const t = await getTranslations({ locale, namespace: "tokyoStayAreaIndex" });
+  // The Suica simulator link in the Continue-planning grid reuses the
+  // already-translated label from the suicaGuide namespace so there is no
+  // string duplication across pages.
+  const tSuicaGuide = await getTranslations({ locale, namespace: "suicaGuide" });
   const activeFilter = parseFilter(filter);
 
   const baselineScores = scoresFile.areas;
@@ -1322,6 +1326,17 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
             >
               {t("continue.links.airport")}
+            </TrackedStayAreaContinueLink>
+            <TrackedStayAreaContinueLink
+              href="/how-to-buy-suica"
+              sourcePage={pagePath}
+              placement="tokyo_stay_area_index_continue"
+              label={tSuicaGuide("ctaLabel")}
+              locale={locale}
+              areaId={selected.area.id}
+              className="rounded-2xl border border-[#106b43] bg-white p-4 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
+            >
+              {tSuicaGuide("ctaLabel")}
             </TrackedStayAreaContinueLink>
           </div>
         </section>

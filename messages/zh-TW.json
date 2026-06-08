@@ -5003,5 +5003,14 @@
       "title": "看懂日本電車標誌",
       "description": "認識首次造訪日本的朋友嗎？把這份電車標誌指南分享給他們。"
     }
+  },
+  "suicaGuide": {
+    "title": "如何購買 Suica 卡片：互動式模擬器",
+    "metaDescription": "用接近真實的螢幕，模擬在日本售票機購買 Suica IC 卡。完成後可順便挑選交通方便的車站附近飯店。",
+    "intro": "用接近真實的畫面，體驗在日本售票機購買 Suica 的流程。完成後，還能順便挑選交通方便的車站附近飯店。",
+    "iframeTitle": "Suica 購買模擬器",
+    "back": "查看東京住宿區域索引",
+    "ctaLabel": "打開 Suica 購買模擬器",
+    "ctaDescription": "在第一次旅行前體驗接近真實的售票機模擬器。"
   }
 }

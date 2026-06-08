@@ -5004,5 +5004,14 @@
       "title": "Cómo leer las señales de tren en Japón",
       "description": "¿Conoces a alguien que va a Japón por primera vez? Comparte esta guía de señales de tren."
     }
+  },
+  "suicaGuide": {
+    "title": "Cómo comprar una tarjeta Suica — simulador interactivo",
+    "metaDescription": "Simula la compra de una tarjeta IC Suica en una máquina de billetes japonesa con una pantalla realista. Al terminar, elige un hotel cerca de una estación bien conectada.",
+    "intro": "Practica la compra de un Suica en una máquina de billetes japonesa con una pantalla realista. Cuando acabes, elige un hotel cerca de una estación bien conectada.",
+    "iframeTitle": "Simulador de compra del Suica",
+    "back": "Ver el Tokyo Stay Area Index",
+    "ctaLabel": "Abrir el simulador de compra del Suica",
+    "ctaDescription": "Prueba un simulador realista de máquina de billetes antes de tu primer viaje."
   }
 }

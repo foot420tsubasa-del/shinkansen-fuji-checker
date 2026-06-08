@@ -5003,5 +5003,14 @@
       "title": "看懂日本电车标志",
       "description": "认识首次造访日本的朋友吗？把这份电车标志指南分享给他们。"
     }
+  },
+  "suicaGuide": {
+    "title": "如何购买 Suica 卡片：互动式模拟器",
+    "metaDescription": "用接近真实的屏幕，模拟在日本售票机购买 Suica IC 卡。完成后可顺便挑选交通方便的车站附近酒店。",
+    "intro": "用接近真实的画面，体验在日本售票机购买 Suica 的流程。完成后，还能顺便挑选交通方便的车站附近酒店。",
+    "iframeTitle": "Suica 购买模拟器",
+    "back": "查看东京住宿区域索引",
+    "ctaLabel": "打开 Suica 购买模拟器",
+    "ctaDescription": "在第一次旅行前体验接近真实的售票机模拟器。"
   }
 }

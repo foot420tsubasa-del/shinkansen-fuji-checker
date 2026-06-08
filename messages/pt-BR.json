@@ -5004,5 +5004,14 @@
       "title": "Como ler sinais de trem no Japão",
       "description": "Conhece alguém visitando o Japão pela primeira vez? Compartilhe este guia de sinais de trem."
     }
+  },
+  "suicaGuide": {
+    "title": "Como comprar um cartão Suica — simulador interativo",
+    "metaDescription": "Simule a compra de um cartão IC Suica numa máquina de bilhetes japonesa, com uma tela fiel ao original. Ao terminar, escolha um hotel perto de uma estação bem conectada.",
+    "intro": "Pratique a compra de um Suica numa máquina de bilhetes japonesa com uma tela fiel ao original. Quando terminar, escolha um hotel perto de uma estação bem conectada.",
+    "iframeTitle": "Simulador de compra do Suica",
+    "back": "Ver o Tokyo Stay Area Index",
+    "ctaLabel": "Abrir o simulador de compra do Suica",
+    "ctaDescription": "Teste um simulador realista de máquina de bilhetes antes da primeira viagem."
   }
 }

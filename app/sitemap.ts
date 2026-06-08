@@ -35,6 +35,7 @@ const englishOnlyContentPaths = [
   "/privacy",
   "/terms",
   "/how-to-read-japanese-train-signs",
+  "/how-to-buy-suica",
   "/shinkansen-seat-e",
   "/tokyo-to-kyoto-mt-fuji-seat",
   "/kyoto-to-tokyo-mt-fuji-seat",
