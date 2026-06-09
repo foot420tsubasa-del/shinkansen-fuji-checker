@@ -42,6 +42,7 @@ import type {
 import {
   TrackedStayAreaContinueLink,
 } from "./StayAreaIndexTracking";
+import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { TokyoHotelAreaFinder, type FinderArea } from "./TokyoHotelAreaFinder";
 
 type Props = {
@@ -53,30 +54,20 @@ type Translation = Awaited<ReturnType<typeof getTranslations>>;
 
 const pagePath = "/areas-to-stay/tokyo-stay-area-index";
 
-const hotelAreaKeyByStayAreaId: Partial<Record<string, HotelAreaKey>> = {
+/**
+ * Trip.com short-links exist for exactly six Tokyo areas. We map ONLY those
+ * areas to their own Trip key — no borrowing a parent/nearby area's Trip URL
+ * for the other 30 areas (Phase 3 rule). Booking.com is assembled separately
+ * for all 36 areas by each area's own area_id, so Trip-less areas render a
+ * clean Booking-only row. This mirrors hotelAreaKeyBySlug in the
+ * tokyo-hotels/[slug] detail page (the SSOT for the same six areas).
+ */
+const realTripHotelKeyByAreaId: Partial<Record<string, HotelAreaKey>> = {
   oshiage: "oshiage",
-  kuramae: "asakusa",
   asakusa: "asakusa",
   ueno: "ueno",
-  ryogoku: "oshiage",
-  "kiyosumi-shirakawa": "oshiage",
-  "monzen-nakacho": "oshiage",
-  ningyocho: "tokyoStation",
-  hatchobori: "tokyoStation",
-  kayabacho: "tokyoStation",
-  nihombashi: "tokyoStation",
   "tokyo-station": "tokyoStation",
-  "ginza-yurakucho": "tokyoStation",
-  shimbashi: "tokyoStation",
-  "hamamatsucho-daimon": "tokyoStation",
-  shinagawa: "tokyoStation",
-  kanda: "tokyoStation",
-  akihabara: "ueno",
-  asakusabashi: "asakusa",
-  "bakurocho-higashinihombashi": "tokyoStation",
-  kinshicho: "oshiage",
   shinjuku: "shinjuku",
-  yoyogi: "shinjuku",
   shibuya: "shibuya",
 };
 
@@ -151,43 +142,53 @@ function areaById(id: string): StayAreaBase {
 }
 
 function hotelSearchForArea(area: StayAreaBase, locale: string, placement: HotelAffiliatePlacement) {
-  const hotelAreaKey = hotelAreaKeyByStayAreaId[area.id];
-  if (!hotelAreaKey) return null;
-  const hotel = getHotelLink(hotelAreaKey);
-  const config = getTripHotelConfig(hotelAreaKey);
-  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl.trim();
-  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl.trim();
+  // Booking.com for all 36 areas, keyed by the area's OWN id.
   const bookingLinks = getHotelProviderLinks({ areaId: area.id, locale, placement });
-  const providers = [
-    ...bookingLinks,
-    tripHref && tripHref !== "#"
-      ? {
-          provider: "trip" as ProviderId,
-          href: tripHref,
-          trackingHref: tripTrackingHref,
-          label: "Search this area on Trip.com",
-          linkId: `hotelArea.${hotelAreaKey}.trip`,
-          priority: 20,
-          placement,
-        }
-      : null,
-  ].filter((provider): provider is {
-    provider: ProviderId;
-    href: string;
-    trackingHref: string;
-    label: string;
-    linkId: string;
-    subId?: string;
-    priority: number;
-    placement: Parameters<typeof ProviderButton>[0]["placement"];
-  } => Boolean(provider)).sort((a, b) => a.priority - b.priority || a.linkId.localeCompare(b.linkId));
+
+  // Trip.com only for the six areas that have their own verified short-link.
+  // No parent/nearby Trip URL is ever borrowed for the other 30 areas.
+  const tripHotelKey = realTripHotelKeyByAreaId[area.id];
+  let tripLink:
+    | {
+        provider: ProviderId;
+        href: string;
+        trackingHref: string;
+        label: string;
+        linkId: string;
+        subId?: string;
+        priority: number;
+        placement: Parameters<typeof ProviderButton>[0]["placement"];
+      }
+    | null = null;
+  if (tripHotelKey) {
+    const hotel = getHotelLink(tripHotelKey);
+    const config = getTripHotelConfig(tripHotelKey);
+    const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl.trim();
+    const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl.trim();
+    if (tripHref && tripHref !== "#") {
+      tripLink = {
+        provider: "trip" as ProviderId,
+        href: tripHref,
+        trackingHref: tripTrackingHref,
+        label: "Search this area on Trip.com",
+        linkId: `hotelArea.${tripHotelKey}.trip`,
+        priority: 20,
+        placement,
+      };
+    }
+  }
+
+  const providers = [...bookingLinks, ...(tripLink ? [tripLink] : [])].sort(
+    (a, b) => a.priority - b.priority || a.linkId.localeCompare(b.linkId),
+  );
 
   if (providers.length === 0) return null;
+  // Own area name for both fields → no "broad-area fallback" messaging.
   return {
-    hotelAreaKey,
-    areaName: config.areaName,
+    hotelAreaKey: tripHotelKey,
+    areaName: area.displayName,
     selectedAreaName: area.displayName,
-    city: config.city,
+    city: "Tokyo",
     providers,
   };
 }
@@ -870,6 +871,22 @@ function AreaDetailPanel({
       </div>
       <p className="mt-4 text-sm leading-6 text-slate-700">{areaSummary(area, score, t)}</p>
 
+      {/* Primary CTA → the 36-area detail page (revenue SSOT). Sits high in
+          the panel, above the score detail, so the "open the hotel page"
+          action is the clear next step. */}
+      <div className="mt-4">
+        <TrackedInternalLink
+          href={`/areas-to-stay/tokyo-hotels/${area.id}`}
+          sourcePage="tokyo_stay_area_index"
+          placement="finder_result_hotel_page"
+          label={t("finder.openHotelPageLabel", { area: area.displayName })}
+          locale={locale}
+          className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#0b214a] bg-[#0b214a] px-4 py-2.5 text-sm font-bold text-[#facc15] shadow-sm transition-colors hover:border-[#071733] hover:bg-[#071733] hover:text-[#fde047] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#facc15] focus-visible:ring-offset-2"
+        >
+          {t("finder.openHotelPageLabel", { area: area.displayName })}
+        </TrackedInternalLink>
+      </div>
+
       <div className="mt-5 grid gap-2">
         {scoreLabels.map(({ key, label }) => (
           <ScoreBar key={key} label={t(`scoreLabels.${label}`)} value={score.scores[key]} />
@@ -1169,10 +1186,22 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           </p>
           <div className="mt-5">
             <div>
-              <h1 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">{t("hero.title")}</h1>
+              <h1 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">{t("hero.titleShort")}</h1>
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">
-                {t("hero.body")}
+                {t("hero.leadShort")}
               </p>
+              {/* Secondary browse door to the Tokyo Hotels parent page, for
+                  users who would rather skip the questions. */}
+              <TrackedInternalLink
+                href="/areas-to-stay/tokyo-hotels"
+                sourcePage={pagePath}
+                placement="finder_hero_browse_all"
+                label={t("hero.browseCta")}
+                locale={locale}
+                className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[#106b43] underline underline-offset-4 hover:no-underline"
+              >
+                {t("hero.browseCta")}
+              </TrackedInternalLink>
               <p className="mt-3 max-w-3xl text-xs leading-5 text-slate-500">
                 {t("hero.disclaimer")}
               </p>

@@ -27,6 +27,13 @@ export type HotelAreaProviderLink = {
   label: string;
   linkId: string;
   subId?: string;
+  /**
+   * Optional per-link placement override. When set it wins over the
+   * row-level `placement`. Used by the Finder result cards, where each
+   * provider link already carries its own placement; the hotel-detail
+   * hero/bottom rows leave this unset and rely on the row-level value.
+   */
+  placement?: AffiliateClickParams["placement"];
 };
 
 type HotelAreaProviderRowProps = {
@@ -43,6 +50,12 @@ type HotelAreaProviderRowProps = {
   rank?: number;
   /** product param for analytics; defaults to the existing value. */
   product?: string;
+  /**
+   * Compact mode for narrow surfaces (e.g. the Finder Top-3 result cards):
+   * always single-column stack with a tighter gap, sitting visually BELOW
+   * the primary "Open hotel page" CTA as a secondary affiliate row.
+   */
+  compact?: boolean;
   className?: string;
 };
 
@@ -56,31 +69,30 @@ export function HotelAreaProviderRow({
   keyPrefix,
   rank,
   product = "hotel_area_search",
+  compact = false,
   className = "",
 }: HotelAreaProviderRowProps) {
   if (providers.length === 0) return null;
 
   // One provider → full-width single button (Booking-only areas). Two →
   // 2-col grid on sm+, stacked on mobile. Never more than two providers.
+  // Compact surfaces always stack so two buttons fit a narrow card column.
   const isSingle = providers.length === 1;
+  const layout = compact
+    ? "gap-2"
+    : isSingle
+      ? "gap-3 sm:max-w-sm"
+      : "gap-3 sm:grid-cols-2 sm:max-w-xl";
 
   return (
-    <div
-      className={[
-        "grid gap-3",
-        isSingle ? "sm:max-w-sm" : "sm:grid-cols-2 sm:max-w-xl",
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
-    >
+    <div className={["grid", layout, className].filter(Boolean).join(" ")}>
       {providers.map((link) => (
         <ProviderButton
           key={`${keyPrefix}-${link.linkId}`}
           provider={link.provider}
           href={link.href}
           trackingHref={link.trackingHref}
-          placement={placement}
+          placement={link.placement ?? placement}
           pagePath={pagePath}
           locale={locale}
           linkId={link.linkId}
@@ -92,6 +104,7 @@ export function HotelAreaProviderRow({
           city={city}
           rank={rank}
           fullWidth
+          className={compact ? "min-h-11 text-[13px]" : undefined}
         >
           {link.label}
         </ProviderButton>

@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
-import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
+import { type ProviderId } from "@/components/ui/ProviderButton";
+import { HotelAreaProviderRow } from "@/components/affiliate/HotelAreaProviderRow";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import {
   trackCtaClick,
@@ -175,6 +176,8 @@ type FinderCopy = {
   };
   badges: string[];
   steps: FinderStep[];
+  /** "Open {area} hotel page" — primary CTA to the 36-area detail SSOT. */
+  openHotelPageLabel: string;
 };
 
 type TokyoHotelAreaFinderProps = {
@@ -692,6 +695,7 @@ function ResultCard({
   const matchLabel = matchLabelForRank(rank, copy);
   const hotel = area.hotel;
   const compareTitle = copy.compareHotelsTitle.replace("{area}", area.displayName);
+  const openHotelPageLabel = copy.openHotelPageLabel.replace("{area}", area.displayName);
   // Surface Booking.com + Trip.com only — Agoda is intentionally not restored.
   // The providers list is already filtered upstream in page.tsx, but we double-
   // gate here so any future provider can't leak into this slot without review.
@@ -738,45 +742,47 @@ function ResultCard({
           <p className="mt-1 text-xs leading-5 text-slate-700">{area.watchOut.slice(0, 2).join(" · ")}</p>
         </div>
         <div className="mt-auto pt-3 space-y-3">
-          {hotel && compareProviders.length > 0 ? (
-            <div className="rounded-2xl border border-emerald-100 bg-white p-3">
-              <p className="text-xs font-semibold text-slate-950">{compareTitle}</p>
-              <p className="mt-1 text-xs leading-5 text-slate-600">{copy.compareHotelsNote}</p>
-              <div className="mt-2.5 grid gap-2">
-                {compareProviders.map((provider) => (
-                  <ProviderButton
-                    key={provider.linkId}
-                    provider={provider.provider}
-                    href={provider.href}
-                    trackingHref={provider.trackingHref}
-                    placement={provider.placement}
-                    pagePath={pagePath}
-                    locale={locale}
-                    linkId={provider.linkId}
-                    subId={provider.subId}
-                    area={hotel.areaName}
-                    areaId={area.id}
-                    city={hotel.city}
-                    rank={rank}
-                    className="text-sm"
-                  >
-                    {provider.provider === "trip" ? "Trip.com" : "Booking.com"}
-                  </ProviderButton>
-                ))}
-              </div>
-            </div>
-          ) : null}
+          {/* Primary CTA → the 36-area detail page (revenue SSOT). Strongest
+              button in the card; the affiliate row below is secondary. */}
           {SUPPORTED_HOTEL_PAGE_IDS.has(area.id) ? (
             <TrackedInternalLink
               href={`/areas-to-stay/tokyo-hotels/${area.id}`}
               sourcePage="tokyo_stay_area_index"
               placement="finder_result_hotel_page"
-              label={copy.viewHotelPageLabel}
+              label={openHotelPageLabel}
               locale={locale}
               className="inline-flex min-h-11 w-full items-center justify-center rounded-2xl border border-[#0b214a] bg-[#0b214a] px-4 py-2.5 text-sm font-bold text-[#facc15] shadow-sm transition-colors hover:border-[#071733] hover:bg-[#071733] hover:text-[#fde047] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#facc15] focus-visible:ring-offset-2"
             >
-              {copy.viewHotelPageLabel}
+              {openHotelPageLabel}
             </TrackedInternalLink>
+          ) : null}
+          {/* Secondary compact affiliate row. Booking everywhere; Trip only
+              where a real short-link exists. Visually quieter than the
+              primary CTA above. */}
+          {compareProviders.length > 0 ? (
+            <div className="rounded-2xl border border-slate-200 bg-white p-3">
+              <p className="text-xs font-semibold text-slate-950">{compareTitle}</p>
+              <HotelAreaProviderRow
+                providers={compareProviders.map((provider) => ({
+                  provider: provider.provider,
+                  href: provider.href,
+                  trackingHref: provider.trackingHref,
+                  label: provider.provider === "trip" ? "Trip.com" : "Booking.com",
+                  linkId: provider.linkId,
+                  subId: provider.subId,
+                  placement: provider.placement,
+                }))}
+                placement={compareProviders[0].placement}
+                pagePath={pagePath}
+                locale={locale}
+                area={{ displayName: hotel?.areaName ?? area.displayName, areaId: area.id }}
+                city={hotel?.city ?? "Tokyo"}
+                keyPrefix={`finder-${rank}`}
+                rank={rank}
+                compact
+                className="mt-2.5"
+              />
+            </div>
           ) : null}
         </div>
       </div>
@@ -795,6 +801,7 @@ function CompactAreaRow({
   copy: FinderCopy;
   locale: string;
 }) {
+  const openHotelPageLabel = copy.openHotelPageLabel.replace("{area}", area.displayName);
   return (
     <div className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
       <div className="flex items-start justify-between gap-3">
@@ -817,11 +824,11 @@ function CompactAreaRow({
           href={`/areas-to-stay/tokyo-hotels/${area.id}`}
           sourcePage="tokyo_stay_area_index"
           placement="finder_result_hotel_page"
-          label={copy.viewHotelPageLabel}
+          label={openHotelPageLabel}
           locale={locale}
           className="inline-flex min-h-10 w-full items-center justify-center rounded-xl border border-[#0b214a] bg-[#0b214a] px-4 py-2 text-sm font-bold text-[#facc15] shadow-sm transition-colors hover:border-[#071733] hover:bg-[#071733] hover:text-[#fde047] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#facc15] focus-visible:ring-offset-2"
         >
-          {copy.viewHotelPageLabel}
+          {openHotelPageLabel}
         </TrackedInternalLink>
       </div>
     </div>

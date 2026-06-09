@@ -3911,7 +3911,10 @@
       "disclaimer": "分数是编辑型旅行适合度分数，在可用时参考公开数据信号。它们不是官方评分、酒店排名，也不保证价格、舒适度、空房或路线状况。",
       "freshness": "参考乘客数据的本地更新 · 最后来源检查：{date}",
       "cta": "开始",
-      "startCta": "啟動 Tokyo Hotel Base Finder"
+      "startCta": "啟動 Tokyo Hotel Base Finder",
+      "titleShort": "60 秒找出你的東京住宿區域",
+      "leadShort": "回答幾個問題，先打開對應的東京住宿區域頁面，再去看 Booking.com 或 Trip.com。",
+      "browseCta": "想直接瀏覽？查看所有東京住宿區域"
     },
     "situations": {
       "eyebrow": "从旅行情况开始",
@@ -4508,7 +4511,8 @@
         "goodMatch": "不错的匹配",
         "areaOption": "区域候选"
       },
-      "viewHotelPageLabel": "查看飯店搜尋頁面"
+      "viewHotelPageLabel": "查看飯店搜尋頁面",
+      "openHotelPageLabel": "開啟 {area} 飯店頁面"
     }
   },
   "fujiseatAreaLogic": {

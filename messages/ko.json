@@ -3911,7 +3911,10 @@
       "disclaimer": "점수는 가능한 경우 공개 데이터 신호를 참고한 편집 기반 여행 적합도 점수입니다. 공식 평가, 호텔 순위, 가격·편안함·예약 가능 여부·경로 상태 보장이 아닙니다.",
       "freshness": "승객 데이터 기반 로컬 갱신 · 마지막 소스 확인: {date}",
       "cta": "시작",
-      "startCta": "도쿄 호텔 거점 파인더 시작"
+      "startCta": "도쿄 호텔 거점 파인더 시작",
+      "titleShort": "60초 만에 도쿄 호텔 지역 찾기",
+      "leadShort": "몇 가지 질문에 답한 뒤, Booking.com이나 Trip.com을 확인하기 전에 맞는 도쿄 호텔 지역 페이지를 열어 보세요.",
+      "browseCta": "둘러보고 싶나요? 모든 도쿄 호텔 지역 보기"
     },
     "situations": {
       "eyebrow": "여행 상황부터 시작",
@@ -4508,7 +4511,8 @@
         "goodMatch": "좋은 매칭",
         "areaOption": "지역 후보"
       },
-      "viewHotelPageLabel": "호텔 검색 페이지 보기"
+      "viewHotelPageLabel": "호텔 검색 페이지 보기",
+      "openHotelPageLabel": "{area} 호텔 페이지 열기"
     }
   },
   "fujiseatAreaLogic": {

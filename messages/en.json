@@ -3911,7 +3911,10 @@
       "disclaimer": "Scores are editorial travel-fit scores informed by public data signals where available. They are not official ratings, hotel rankings, or guarantees of price, comfort, availability, or route conditions.",
       "freshness": "Passenger-data-informed local refresh · Last source check: {date}",
       "cta": "Start",
-      "startCta": "Start Tokyo hotel base finder"
+      "startCta": "Start Tokyo hotel base finder",
+      "titleShort": "Find your Tokyo hotel area in 60 seconds",
+      "leadShort": "Answer a few questions, then open the matching Tokyo hotel area pages before checking Booking.com or Trip.com.",
+      "browseCta": "Prefer browsing? See all Tokyo hotel areas"
     },
     "situations": {
       "eyebrow": "Start by travel situation",
@@ -4508,7 +4511,8 @@
         "goodMatch": "Good match",
         "areaOption": "Area option"
       },
-      "viewHotelPageLabel": "View hotel search page"
+      "viewHotelPageLabel": "View hotel search page",
+      "openHotelPageLabel": "Open {area} hotel page"
     }
   },
   "fujiseatAreaLogic": {

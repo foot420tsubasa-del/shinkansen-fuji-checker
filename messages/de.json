@@ -3911,7 +3911,10 @@
       "disclaimer": "Die Scores sind redaktionelle Reise-Fit-Wertungen, soweit verfügbar durch öffentliche Datensignale informiert. Sie sind keine offiziellen Bewertungen, Hotelrankings oder Garantien für Preis, Komfort, Verfügbarkeit oder Route.",
       "freshness": "Lokale Aktualisierung mit Passagierdaten · Letzte Quellenprüfung: {date}",
       "cta": "Starten",
-      "startCta": "Tokyo Hotel Base Finder starten"
+      "startCta": "Tokyo Hotel Base Finder starten",
+      "titleShort": "Finde dein Tokio-Hotelgebiet in 60 Sekunden",
+      "leadShort": "Beantworte ein paar Fragen und öffne dann die passenden Tokio-Hotelgebietsseiten, bevor du Booking.com oder Trip.com prüfst.",
+      "browseCta": "Lieber stöbern? Alle Tokio-Hotelgebiete ansehen"
     },
     "situations": {
       "eyebrow": "Mit der Reisesituation starten",
@@ -4508,7 +4511,8 @@
         "goodMatch": "Guter Treffer",
         "areaOption": "Gebietsoption"
       },
-      "viewHotelPageLabel": "Hotel-Suchseite öffnen"
+      "viewHotelPageLabel": "Hotel-Suchseite öffnen",
+      "openHotelPageLabel": "{area}-Hotelseite öffnen"
     }
   },
   "fujiseatAreaLogic": {

@@ -3911,7 +3911,10 @@
       "disclaimer": "Las puntuaciones son evaluaciones editoriales de encaje de viaje, informadas por datos públicos cuando existen. No son notas oficiales, rankings de hoteles ni garantías de precio, comodidad, disponibilidad o condiciones de ruta.",
       "freshness": "Actualización local con datos de pasajeros · Última revisión de fuentes: {date}",
       "cta": "Empezar",
-      "startCta": "Iniciar Tokyo Hotel Base Finder"
+      "startCta": "Iniciar Tokyo Hotel Base Finder",
+      "titleShort": "Encuentra tu zona de hotel en Tokio en 60 segundos",
+      "leadShort": "Responde unas preguntas y abre las páginas de las zonas de hotel en Tokio que encajen antes de mirar Booking.com o Trip.com.",
+      "browseCta": "¿Prefieres explorar? Ver todas las zonas de hotel en Tokio"
     },
     "situations": {
       "eyebrow": "Empieza por tu situación",
@@ -4509,7 +4512,8 @@
         "goodMatch": "Buena coincidencia",
         "areaOption": "Opción de área"
       },
-      "viewHotelPageLabel": "Ver página de búsqueda de hoteles"
+      "viewHotelPageLabel": "Ver página de búsqueda de hoteles",
+      "openHotelPageLabel": "Abrir página de hoteles de {area}"
     }
   },
   "fujiseatAreaLogic": {
