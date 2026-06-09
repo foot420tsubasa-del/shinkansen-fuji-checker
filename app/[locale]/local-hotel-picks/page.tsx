@@ -74,7 +74,7 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
 ];
 
 const filledPlanningLinkClass =
-  "flex flex-col rounded-2xl border border-[#168a56] bg-[#168a56] p-4 text-white transition-colors hover:bg-[#0f6f45]";
+  "flex flex-col rounded-2xl border border-[#2E7D5B] bg-[#2E7D5B] p-4 text-white transition-colors hover:bg-[#246449]";
 
 const cityPageCards: Record<string, { href: string; title: string; body: string }> = {
   Tokyo: {

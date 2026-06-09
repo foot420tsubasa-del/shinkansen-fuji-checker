@@ -641,7 +641,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
                   locale,
                 });
               }}
-              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#168a56] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#2E7D5B] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#246449]"
             >
               {showAll ? copy.hideFullComparison : copy.compareAllAreas}
               <ChevronDown className="h-4 w-4" aria-hidden="true" />

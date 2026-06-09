@@ -8,11 +8,25 @@ import {
   type AffiliateClickParams,
 } from "@/lib/analytics";
 
-// Brand-inspired colors for hotel/provider CTAs. Text-only labels — no logos.
-//   trip                 → bright cyan-blue (#0875c9) with white text
-//   booking_travelpayouts → dark blue   (#003b95) with white text
-// Use only for provider-specific buttons. For generic "Compare hotels" CTAs
-// use Button variant="commercial" instead.
+/**
+ * Provider Button — Phase 2 design system.
+ *
+ * Booking.com / Trip.com are NOT the headline CTA. They live one tier
+ * below the "Compare hotels in <area>" hotel-action button. So the
+ * provider button is:
+ *
+ *   - white background
+ *   - slate-300 border (strong enough to read on the cream site bg)
+ *   - dark slate text
+ *   - small colored brand mark on the left (the brand color survives
+ *     here as a wordmark accent instead of dominating the surface)
+ *   - external-link icon on the right
+ *   - subtle shadow so the white surface doesn't get lost on
+ *     low-contrast page backgrounds
+ *
+ * Analytics dimensions and event names are unchanged — this is a
+ * visual update only. Existing callers do not need to migrate props.
+ */
 export type ProviderId = "trip" | "booking_travelpayouts";
 
 type ProviderButtonProps = {
@@ -20,15 +34,12 @@ type ProviderButtonProps = {
   href: string;
   /** Visible label. Caller supplies text translated via next-intl. */
   children: ReactNode;
-  /** Analytics placement; same union as the rest of the app. */
   placement: AffiliateClickParams["placement"];
-  /** Page path for analytics. */
   pagePath: string;
   locale: string;
   linkId?: string;
   product?: string;
   adid?: string;
-  /** Optional category override. Defaults to "hotel". */
   category?: AffiliateClickParams["category"];
   area?: string;
   areaId?: string;
@@ -43,14 +54,32 @@ type ProviderButtonProps = {
   className?: string;
 };
 
-const PROVIDER_STYLES: Record<ProviderId, string> = {
-  // Trip.com — brighter cyan-blue so it stays distinct from Booking.com's dark blue.
-  trip:
-    "border border-[#0875c9] bg-[#0875c9] text-white hover:bg-[#0662aa] focus-visible:ring-sky-200",
-  // Booking.com via Travelpayouts — dark blue with white text.
-  booking_travelpayouts:
-    "border border-[#003b95] bg-[#003b95] text-white hover:bg-[#002f78] focus-visible:ring-blue-200",
-};
+/**
+ * Compact brand wordmark — keeps Booking.com / Trip.com recognizable
+ * without dominating the surface. Each mark stays at ~20px square.
+ * Colors are taken from each brand's public site guidance.
+ */
+function ProviderMark({ provider }: { provider: ProviderId }) {
+  if (provider === "booking_travelpayouts") {
+    return (
+      <span
+        aria-hidden="true"
+        className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#003b95] text-[10px] font-black leading-none text-white"
+      >
+        B
+      </span>
+    );
+  }
+  // Trip.com — cyan brand color.
+  return (
+    <span
+      aria-hidden="true"
+      className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#0875c9] text-[10px] font-black leading-none text-white"
+    >
+      T
+    </span>
+  );
+}
 
 export function ProviderButton({
   provider,
@@ -104,15 +133,18 @@ export function ProviderButton({
         })
       }
       className={[
-        "inline-flex min-h-12 items-center justify-center gap-1.5 rounded-[12px] px-4 py-2.5 text-sm font-semibold no-underline transition-colors md:min-h-11",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-white",
-        PROVIDER_STYLES[provider],
+        // Phase 2 provider chrome: white surface, slate-300 border,
+        // dark text, subtle shadow so it survives the cream backdrop.
+        "inline-flex min-h-11 items-center justify-center gap-2 rounded-[12px] border border-slate-300 bg-white px-3.5 py-2 text-sm font-semibold text-slate-900 no-underline shadow-sm transition-colors",
+        "hover:border-slate-400 hover:bg-slate-50",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-white focus-visible:ring-slate-300",
         fullWidth ? "w-full" : "",
         className,
       ].join(" ")}
     >
-      {children}
-      <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+      <ProviderMark provider={provider} />
+      <span className="flex-1 truncate text-center">{children}</span>
+      <ExternalLink className="h-3.5 w-3.5 text-slate-500" aria-hidden="true" />
     </a>
   );
 }

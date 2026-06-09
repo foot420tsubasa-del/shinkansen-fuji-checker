@@ -133,7 +133,7 @@ export default function AboutPage() {
             <div className="mt-5 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/#seat-checker"
-                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#2E7D5B] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#246449]"
               >
                 Start with the Seat Checker
                 <ArrowRight className="h-4 w-4" />

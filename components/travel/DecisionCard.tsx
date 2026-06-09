@@ -82,8 +82,8 @@ export function DecisionCard({
         <span className={[
           "inline-flex w-full items-center justify-center gap-1.5 rounded-2xl px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors",
           external
-            ? "bg-[#ff7a00] group-hover:bg-[#e66700]"
-            : "bg-[#168a56] group-hover:bg-[#0f6f45]",
+            ? "bg-[#D94A32] group-hover:bg-[#bf3d28]"
+            : "bg-[#2E7D5B] group-hover:bg-[#246449]",
         ].join(" ")}>
           {cta}
           {external ? (

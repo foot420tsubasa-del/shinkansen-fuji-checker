@@ -105,7 +105,7 @@ function ctaColor(title: string, provider?: AffiliateClickParams["provider"]) {
     return "border-[#2563eb] bg-[#2563eb] hover:bg-[#1d4ed8] focus-visible:ring-sky-200";
   }
   if (provider === "klook") {
-    return "border-[#ff7a00] bg-[#ff7a00] hover:bg-[#e66700] focus-visible:ring-orange-200";
+    return "border-[#D94A32] bg-[#D94A32] hover:bg-[#bf3d28] focus-visible:ring-orange-200";
   }
   if (normalized.includes("private") || normalized.includes("taxi")) {
     return "border-[#082653] bg-[#082653] hover:bg-[#061d40] focus-visible:ring-slate-300";
@@ -113,7 +113,7 @@ function ctaColor(title: string, provider?: AffiliateClickParams["provider"]) {
   if (normalized.includes("bus") || normalized.includes("limousine")) {
     return "border-[#145aa0] bg-[#145aa0] hover:bg-[#0f477f] focus-visible:ring-sky-200";
   }
-  return "border-[#ff7a00] bg-[#ff7a00] hover:bg-[#e66700] focus-visible:ring-orange-200";
+  return "border-[#D94A32] bg-[#D94A32] hover:bg-[#bf3d28] focus-visible:ring-orange-200";
 }
 
 function tagClass(tone: TransferOptionTag["tone"]) {
@@ -263,7 +263,7 @@ export function ArrivalSetupCard({
           placement={placement}
           label={ctaLabel}
           locale={locale}
-          className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+          className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-[#2E7D5B] bg-[#2E7D5B] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
         >
           {ctaLabel}
         </TrackedInternalLink>

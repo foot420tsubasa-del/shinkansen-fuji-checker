@@ -105,7 +105,7 @@ export function SeatResultCard({
                   locale,
                 })
               }
-              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-center text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700] active:brightness-95"
+              className="inline-flex items-center justify-center gap-2 rounded-2xl border border-[#D94A32] bg-[#D94A32] px-4 py-2.5 text-center text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#bf3d28] active:brightness-95"
             >
               <Train className="h-4 w-4" />
               Book your Shinkansen ticket

@@ -6,7 +6,7 @@ import { BrandMark } from "@/components/ui/BrandMark";
 import { trackCtaClick } from "@/lib/analytics";
 
 const feedbackButton =
-  "inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-[#168a56] bg-[#168a56] px-4 text-sm font-extrabold text-white shadow-[0_8px_22px_rgba(22,138,86,0.18)] transition-colors hover:bg-[#0f6f45]";
+  "inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-4 text-sm font-extrabold text-white shadow-[0_8px_22px_rgba(22,138,86,0.18)] transition-colors hover:bg-[#246449]";
 
 export function SiteFooter() {
   const t = useTranslations("home");

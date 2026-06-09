@@ -6,9 +6,9 @@ import { AFFILIATE_REL } from "@/lib/link-rel";
 import { trackCtaClick } from "@/lib/analytics";
 
 const buttonPage =
-  "inline-flex items-center justify-center gap-1.5 rounded-lg border border-[#168a56] bg-[#168a56] font-extrabold text-white shadow-[0_8px_22px_rgba(22,138,86,0.14)] transition-colors hover:bg-[#0f6f45]";
+  "inline-flex items-center justify-center gap-1.5 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] font-extrabold text-white shadow-[0_8px_22px_rgba(22,138,86,0.14)] transition-colors hover:bg-[#246449]";
 const buttonPageSecondary =
-  "inline-flex items-center justify-center gap-1.5 rounded-lg border border-[#168a56] bg-[#168a56] font-extrabold text-white shadow-[0_6px_16px_rgba(22,138,86,0.10)] transition-colors hover:bg-[#0f6f45]";
+  "inline-flex items-center justify-center gap-1.5 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] font-extrabold text-white shadow-[0_6px_16px_rgba(22,138,86,0.10)] transition-colors hover:bg-[#246449]";
 
 export type AreaChoice = {
   name: string;
@@ -67,7 +67,7 @@ function renderLinkedSummary(summary: string, links: LocalLensSummaryLink[] = []
         href={next.link.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="font-bold text-[#106b43] underline underline-offset-2 transition-colors hover:text-[#0f6f45]"
+        className="font-bold text-[#106b43] underline underline-offset-2 transition-colors hover:text-[#246449]"
       >
         {next.link.text}
       </a>,

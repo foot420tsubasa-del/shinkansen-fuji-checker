@@ -59,7 +59,7 @@ export function QuickRec({
               product: "hotel",
             })
           }
-          className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#e66700]"
+          className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[#D94A32] bg-[#D94A32] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#bf3d28]"
         >
           {ctaLabel}
           <ArrowRight className="h-4 w-4" />

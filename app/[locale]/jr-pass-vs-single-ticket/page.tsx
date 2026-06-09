@@ -222,7 +222,7 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
             <div className="mt-4 flex flex-wrap gap-3">
               <Link
                 href="/#seat-checker"
-                className="inline-flex items-center gap-2 rounded-lg border border-[#168a56] bg-[#168a56] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#0f6f45]"
+                className="inline-flex items-center gap-2 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#246449]"
               >
                 Open Seat Checker
                 <ArrowRight className="h-4 w-4" />

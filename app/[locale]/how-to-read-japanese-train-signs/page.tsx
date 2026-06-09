@@ -317,7 +317,7 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                     key={key}
                     className="flex gap-3 rounded-[16px] border border-slate-200 bg-white p-4 text-sm font-semibold leading-6 text-slate-700 shadow-sm"
                   >
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#168a56]" />
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#2E7D5B]" />
                     {t(`before.checklist.${key}`)}
                   </li>
                 ))}
@@ -344,7 +344,7 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                       pagePath="/how-to-read-japanese-train-signs"
                       locale={locale}
                       category="station_practice"
-                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-4 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#246449]"
                     >
                       {t("before.practical.start")}
                       <ArrowRight className="h-4 w-4" />
@@ -419,7 +419,7 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="flex h-full items-center gap-3 rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:border-[#168a56] hover:bg-[#f0fbf6]"
+                    className="flex h-full items-center gap-3 rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:border-[#2E7D5B] hover:bg-[#f0fbf6]"
                   >
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#f0fbf6] text-[#106b43]">
                       <ArrowRight className="h-5 w-5" />

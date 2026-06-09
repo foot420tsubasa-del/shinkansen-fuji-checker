@@ -169,7 +169,7 @@ export function PlannerPreview() {
       <div className="mt-4 grid gap-2 sm:grid-cols-3">
         <Link
           href="/planner"
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#0f6f45] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200"
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-[#2E7D5B] bg-[#2E7D5B] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#246449] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200"
         >
           {t("planTrip")}
           <ArrowRight className="h-4 w-4" />
@@ -190,7 +190,7 @@ export function PlannerPreview() {
               adid: "1165791",
             })
           }
-          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#e66700] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-[#D94A32] bg-[#D94A32] px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#bf3d28] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
         >
           {t("checkJrPass")}
           <ExternalLink className="h-4 w-4" />

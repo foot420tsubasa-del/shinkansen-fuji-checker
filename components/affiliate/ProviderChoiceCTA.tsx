@@ -49,43 +49,57 @@ function providerCategory(product: string): AffiliateClickParams["category"] {
 }
 
 function providerClass(provider: AffiliateProvider, product: string, variant: ProviderChoiceVariant) {
+  // Phase 2 design system mapping:
+  //   Klook (default / other paid)  → purchase   (terracotta filled)
+  //   Omio                          → compare    (white + blue border)
+  //   Booking.com / Trip.com        → provider   (white + slate border + brand mark)
+  //   Internal "other" actions      → hotel      (sage green filled)
+  // The chrome below mirrors components/ui/Button.tsx + ProviderButton.tsx
+  // so the row stays visually in lockstep with stand-alone buttons.
   const base =
-    "inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl px-3 py-2 text-xs font-semibold no-underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-white sm:min-w-28 sm:flex-1";
+    "inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-[12px] px-3 py-2 text-xs font-semibold no-underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-white sm:min-w-28 sm:flex-1";
 
   if (variant === "text") {
     return [
       base,
       "min-h-8 justify-start rounded-none px-0 py-1 underline underline-offset-4",
-      provider === "omio" ? "text-indigo-700 hover:text-indigo-900" : "text-[#106b43] hover:text-[#0f6f45]",
+      provider === "omio" ? "text-[#0B3A75] hover:text-[#081D3A]" : "text-[#246449] hover:text-[#1d4f39]",
     ].join(" ");
   }
 
-  if (variant === "secondary") {
-    if (provider === "booking_travelpayouts") {
-      return [base, "border border-[#003b95] bg-[#003b95] text-white hover:bg-[#002f78] focus-visible:ring-blue-200"].join(" ");
-    }
-    if (provider === "omio") {
-      return [base, "border border-indigo-600 bg-indigo-600 text-white hover:bg-indigo-700 focus-visible:ring-indigo-200"].join(" ");
-    }
-    if (provider === "trip") {
-      return [base, "border border-[#0a4ca8] bg-[#0a4ca8] text-white hover:bg-[#0a3f8b] focus-visible:ring-blue-200"].join(" ");
-    }
-    return [base, "border border-[#168a56] bg-[#168a56] text-white hover:bg-[#0f6f45] focus-visible:ring-emerald-200"].join(" ");
+  // Omio = Compare CTA — white with strong blue border, regardless of variant.
+  if (provider === "omio") {
+    return [
+      base,
+      "border border-[#2563EB] bg-white text-[#0B3A75] shadow-sm shadow-blue-100/70 hover:bg-[#F0F6FF] hover:border-[#1D4ED8] focus-visible:ring-blue-200",
+    ].join(" ");
   }
 
-  if (provider === "omio") {
-    return [base, "border border-indigo-700 bg-indigo-700 text-white hover:bg-indigo-800 focus-visible:ring-indigo-200"].join(" ");
+  // Booking.com / Trip.com = Provider Button — white + slate border. We
+  // omit the brand-mark badge here (ProviderChoiceCTA stays text-only to
+  // keep the inline row compact); the stand-alone ProviderButton
+  // component renders the colored brand mark when used 1:1 next to a
+  // Hotel Action CTA.
+  if (provider === "booking_travelpayouts" || provider === "trip") {
+    return [
+      base,
+      "border border-slate-300 bg-white text-slate-900 shadow-sm hover:border-slate-400 hover:bg-slate-50 focus-visible:ring-slate-300",
+    ].join(" ");
   }
-  if (provider === "booking_travelpayouts") {
-    return [base, "border border-[#003b95] bg-[#003b95] text-white hover:bg-[#002f78] focus-visible:ring-blue-200"].join(" ");
-  }
-  if (provider === "trip") {
-    return [base, "border border-[#0a4ca8] bg-[#0a4ca8] text-white hover:bg-[#0a3f8b] focus-visible:ring-blue-200"].join(" ");
-  }
+
+  // Internal "other" decision actions = Hotel Action style.
   if (provider === "other") {
-    return [base, "border border-[#168a56] bg-[#168a56] text-white hover:bg-[#0f6f45] focus-visible:ring-emerald-200"].join(" ");
+    return [
+      base,
+      "border border-[#2E7D5B] bg-[#2E7D5B] text-white shadow-sm shadow-emerald-100/60 hover:bg-[#246449] focus-visible:ring-emerald-200",
+    ].join(" ");
   }
-  return [base, "border border-[#ff7a00] bg-[#ff7a00] text-white hover:bg-[#e66700] focus-visible:ring-orange-200"].join(" ");
+
+  // Klook + remaining paid providers = Purchase CTA — terracotta filled.
+  return [
+    base,
+    "border border-[#D94A32] bg-[#D94A32] text-white shadow-sm hover:bg-[#bf3d28] focus-visible:ring-orange-200",
+  ].join(" ");
 }
 
 export function ProviderChoiceCTA({

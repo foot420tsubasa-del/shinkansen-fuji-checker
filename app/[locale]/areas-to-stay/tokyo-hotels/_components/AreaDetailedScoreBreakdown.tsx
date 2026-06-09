@@ -67,7 +67,7 @@ function MiniBar({ label, value }: { label: string; value: number }) {
       </div>
       <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-white">
         <div
-          className="h-full rounded-full bg-[#168a56]"
+          className="h-full rounded-full bg-[#2E7D5B]"
           style={{ width: `${Math.max(4, normalized)}%` }}
         />
       </div>

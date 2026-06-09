@@ -1703,7 +1703,7 @@ export default function AdminPage() {
             <button
               onClick={saveHotelPickLink}
               disabled={saving}
-              className="rounded-lg bg-[#ff7a00] px-4 py-2 text-xs font-semibold text-white hover:bg-[#e66700] disabled:opacity-50"
+              className="rounded-lg bg-[#D94A32] px-4 py-2 text-xs font-semibold text-white hover:bg-[#bf3d28] disabled:opacity-50"
             >
               {saving ? "保存中..." : "保存する"}
             </button>

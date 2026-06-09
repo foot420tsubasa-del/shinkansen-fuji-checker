@@ -107,12 +107,12 @@ function chipClass(selected: boolean) {
   if (selected) {
     return [
       base,
-      "border-[#168a56] bg-[#168a56] text-white hover:bg-[#0f6f45]",
+      "border-[#2E7D5B] bg-[#2E7D5B] text-white hover:bg-[#246449]",
     ].join(" ");
   }
   return [
     base,
-    "border-[#9fd7bd] bg-[#f0fbf6] text-[#106b43] hover:border-[#168a56] hover:bg-[#e3f6ec]",
+    "border-[#9fd7bd] bg-[#f0fbf6] text-[#106b43] hover:border-[#2E7D5B] hover:bg-[#e3f6ec]",
   ].join(" ");
 }
 

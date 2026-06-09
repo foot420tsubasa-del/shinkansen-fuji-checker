@@ -124,11 +124,11 @@ export default async function LocalTokyoPage({ params }: Props) {
                 {t("description")}
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/local-tokyo/kiyosumi-shirakawa" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#168a56] bg-[#168a56] px-5 text-sm font-extrabold text-white transition-colors hover:bg-[#0f6f45]">
+                <Link href="/local-tokyo/kiyosumi-shirakawa" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-5 text-sm font-extrabold text-white transition-colors hover:bg-[#246449]">
                   {t("startCta")}
                   <ArrowRight className="h-4 w-4" />
                 </Link>
-                <Link href="/areas-to-stay/tokyo-first-time" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#9fd7bd] bg-white px-5 text-sm font-extrabold text-[#106b43] transition-colors hover:border-[#168a56] hover:bg-[#f0fbf6]">
+                <Link href="/areas-to-stay/tokyo-first-time" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#9fd7bd] bg-white px-5 text-sm font-extrabold text-[#106b43] transition-colors hover:border-[#2E7D5B] hover:bg-[#f0fbf6]">
                   {t("compareCta")}
                   <ArrowRight className="h-4 w-4" />
                 </Link>

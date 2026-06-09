@@ -86,7 +86,7 @@ export default async function TokyoHotelsIndexPage({ params }: Props) {
                 placement="tokyo_hotels_index_card"
                 label={area.displayName}
                 locale={locale}
-                className="group flex min-h-[160px] flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-colors hover:border-[#168a56] hover:bg-emerald-50"
+                className="group flex min-h-[160px] flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-colors hover:border-[#2E7D5B] hover:bg-emerald-50"
               >
                 <div>
                   <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-[#106b43]">
@@ -101,7 +101,7 @@ export default async function TokyoHotelsIndexPage({ params }: Props) {
                 </div>
                 <div className="mt-3 flex items-center justify-between gap-3">
                   {score != null ? (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-[#ff7a00] px-3 py-1 text-xs font-bold text-white">
+                    <span className="inline-flex items-center gap-1 rounded-full bg-[#D94A32] px-3 py-1 text-xs font-bold text-white">
                       {t("hero.fitBadgeLabel")} {score}
                       <span className="text-[10px] opacity-80">{t("hero.fitBadgeOutOf")}</span>
                     </span>

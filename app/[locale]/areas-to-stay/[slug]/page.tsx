@@ -110,7 +110,7 @@ const filledNextStepClass =
 const filledCommercialNextStepClass =
   buttonClassName({ variant: "commercial", fullWidth: true, className: "p-4 text-center" });
 const supportTextLinkClass =
-  "inline-flex text-sm font-semibold text-[#106b43] underline underline-offset-4 transition-colors hover:text-[#0f6f45] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200";
+  "inline-flex text-sm font-semibold text-[#106b43] underline underline-offset-4 transition-colors hover:text-[#246449] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200";
 
 type StayPageTranslation = Partial<Pick<StayContentPage, "title" | "description" | "proTip">> & {
   quickRec?: Partial<StayContentPage["quickRec"]>;
@@ -1958,7 +1958,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                 placement="first_time_finder_click"
                 label={supplement.quickAnswerOverride.matrixCta}
                 locale={locale}
-                className="inline-flex min-h-10 items-center rounded-xl bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                className="inline-flex min-h-10 items-center rounded-xl bg-[#2E7D5B] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#246449]"
               >
                 {supplement.quickAnswerOverride.matrixCta} →
               </TrackedInternalLink>
@@ -2047,7 +2047,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               <a
                 key={label}
                 href={href}
-                className="group flex min-h-[104px] flex-col justify-between rounded-2xl border border-[#168a56] bg-[#168a56] p-4 text-sm text-white shadow-sm transition-all hover:bg-[#0f6f45] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-1"
+                className="group flex min-h-[104px] flex-col justify-between rounded-2xl border border-[#2E7D5B] bg-[#2E7D5B] p-4 text-sm text-white shadow-sm transition-all hover:bg-[#246449] hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-300 focus-visible:ring-offset-1"
               >
                 <span className="block text-xs font-medium leading-5 text-emerald-50">{label}</span>
                 <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-white">
@@ -2188,7 +2188,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                           placement="tokyo_first_time_hotel_base_detail"
                           label={group.detailLink.label}
                           locale={locale}
-                          className="inline-flex min-h-9 items-center rounded-xl bg-[#168a56] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+                          className="inline-flex min-h-9 items-center rounded-xl bg-[#2E7D5B] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
                         >
                           {group.detailLink.label} →
                         </TrackedInternalLink>
@@ -2266,7 +2266,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                   placement="tokyo_first_time_price_timing"
                   label={supplement.priceTiming.matrixCta}
                   locale={locale}
-                  className="inline-flex min-h-10 items-center rounded-xl bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                  className="inline-flex min-h-10 items-center rounded-xl bg-[#2E7D5B] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#246449]"
                 >
                   {supplement.priceTiming.matrixCta}
                 </TrackedInternalLink>
@@ -2802,7 +2802,7 @@ export default async function StayPage({ params }: Props) {
                   placement="shinkansen_stay_primary_area_click"
                   label="Compare hotels around Tokyo Station / Ginza"
                   locale={locale}
-                  className="mt-3 inline-flex min-h-10 items-center rounded-xl bg-[#168a56] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+                  className="mt-3 inline-flex min-h-10 items-center rounded-xl bg-[#2E7D5B] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
                 >
                   Compare hotels around Tokyo Station / Ginza
                 </TrackedInternalLink>

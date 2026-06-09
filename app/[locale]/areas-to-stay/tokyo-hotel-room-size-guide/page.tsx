@@ -371,7 +371,7 @@ export default async function TokyoHotelRoomSizeGuidePage({ params }: Props) {
           <ul className="mt-5 grid gap-2 text-sm leading-6 text-slate-700 md:grid-cols-2">
             {copy.bookingChecks.map((item) => (
               <li key={item} className="flex gap-2 rounded-2xl bg-slate-50 px-4 py-3">
-                <SearchCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#168a56]" aria-hidden="true" />
+                <SearchCheck className="mt-0.5 h-4 w-4 shrink-0 text-[#2E7D5B]" aria-hidden="true" />
                 <span>{item}</span>
               </li>
             ))}

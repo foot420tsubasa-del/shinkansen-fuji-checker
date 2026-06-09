@@ -77,7 +77,7 @@ export function StayBaseCard({
           />
         ) : null}
         {secondaryInternalLink ? (
-          <Link href={secondaryInternalLink.href} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#106b43] underline underline-offset-4 transition-colors hover:text-[#0f6f45]">
+          <Link href={secondaryInternalLink.href} className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#106b43] underline underline-offset-4 transition-colors hover:text-[#246449]">
             {secondaryInternalLink.label}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>

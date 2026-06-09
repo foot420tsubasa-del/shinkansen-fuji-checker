@@ -126,7 +126,7 @@ export function LanguageSelector() {
                 }`}
               >
                 <span className="flex h-5 w-5 items-center justify-center">
-                  {selected ? <Check className="h-4 w-4 text-[#168a56]" /> : null}
+                  {selected ? <Check className="h-4 w-4 text-[#2E7D5B]" /> : null}
                 </span>
                 <span className="min-w-0 flex-1 text-sm font-bold">{option.label}</span>
                 <span className="rounded-md border border-slate-200 bg-white px-2 py-1 text-[10px] font-black uppercase tracking-[0.08em] text-slate-500">

@@ -42,7 +42,7 @@ function PrimaryBar({ label, value, hint }: { label: string; value: number; hint
       </div>
       <div className="mt-2 h-3 overflow-hidden rounded-full bg-slate-100">
         <div
-          className="h-full rounded-full bg-[#168a56]"
+          className="h-full rounded-full bg-[#2E7D5B]"
           style={{ width: `${Math.max(4, normalized)}%` }}
         />
       </div>

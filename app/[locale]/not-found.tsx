@@ -15,7 +15,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-[#168a56] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+          className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-[#2E7D5B] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#246449]"
         >
           <ArrowLeft className="h-4 w-4" />
           Back to fujiseat

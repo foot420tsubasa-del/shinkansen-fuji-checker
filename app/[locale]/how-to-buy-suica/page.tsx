@@ -96,7 +96,7 @@ export default async function HowToBuySuicaPage({ params }: Props) {
         <section className="mt-8 flex justify-center">
           <Link
             href="/areas-to-stay/tokyo-stay-area-index"
-            className="inline-flex items-center gap-2 rounded-2xl border border-[#168a56] bg-[#168a56] px-5 py-3 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+            className="inline-flex items-center gap-2 rounded-2xl border border-[#2E7D5B] bg-[#2E7D5B] px-5 py-3 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#246449]"
           >
             {t("back")}
             <ArrowRight className="h-4 w-4" />

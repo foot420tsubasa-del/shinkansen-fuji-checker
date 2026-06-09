@@ -339,7 +339,7 @@ export default function HomeClient() {
                       adid: "1265303",
                       locale,
                     })}
-                    className="inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+                    className="inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
                   >
                     <Train className="h-3.5 w-3.5" />
                     Klook
@@ -360,7 +360,7 @@ export default function HomeClient() {
                         route_type: "route-comparison",
                         locale,
                       })}
-                      className="inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-indigo-700 bg-indigo-700 px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-indigo-800"
+                      className="inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-[#2563EB] bg-white px-3 py-2 text-xs font-bold text-[#0B3A75] shadow-sm shadow-blue-100/70 transition-colors hover:border-[#1D4ED8] hover:bg-[#F0F6FF]"
                     >
                       Omio
                       <ExternalLink className="h-3.5 w-3.5" />
@@ -389,7 +389,7 @@ export default function HomeClient() {
                       adid: "1165791",
                       locale,
                     })}
-                    className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+                    className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
                   >
                     <Train className="h-3.5 w-3.5" />
                     Klook

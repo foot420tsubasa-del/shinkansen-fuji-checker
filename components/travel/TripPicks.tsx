@@ -109,16 +109,16 @@ export function TripPicks({ picks, compact = false }: TripPicksProps) {
           const isExternal = pick.href.startsWith("http");
           const actionTone = isExternal
             ? {
-                hover: "hover:border-[#ff7a00] hover:bg-[#fff8f0]",
+                hover: "hover:border-[#D94A32] hover:bg-[#fff8f0]",
                 icon: "border-orange-100 bg-[#fff3e7] text-[#b44b00] hover:bg-[#ffe7cf]",
                 mobile: "text-[#b44b00]",
-                pill: "border-[#ff7a00] bg-[#ff7a00] text-white group-hover:bg-[#e66700]",
+                pill: "border-[#D94A32] bg-[#D94A32] text-white group-hover:bg-[#bf3d28]",
               }
             : {
-                hover: "hover:border-[#168a56] hover:bg-[#f0fbf6]",
+                hover: "hover:border-[#2E7D5B] hover:bg-[#f0fbf6]",
                 icon: "border-[#9fd7bd] bg-[#f0fbf6] text-[#106b43] hover:bg-[#dff6eb]",
                 mobile: "text-[#106b43]",
-                pill: "border-[#168a56] bg-[#168a56] text-white group-hover:bg-[#0f6f45]",
+                pill: "border-[#2E7D5B] bg-[#2E7D5B] text-white group-hover:bg-[#246449]",
               };
 
           const inner = (

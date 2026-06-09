@@ -611,7 +611,7 @@ function ScoreBar({ label, value }: { label: string; value: number }) {
         <span>{Math.round(value)}/100</span>
       </div>
       <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-slate-100">
-        <div className="h-full rounded-full bg-[#168a56]" style={{ width: `${Math.max(4, Math.min(100, value))}%` }} />
+        <div className="h-full rounded-full bg-[#2E7D5B]" style={{ width: `${Math.max(4, Math.min(100, value))}%` }} />
       </div>
     </div>
   );
@@ -855,7 +855,7 @@ function AreaDetailPanel({
             {area.japaneseName} · {areaGroupLabel(area.areaGroup, t)}
           </p>
         </div>
-        <div className="rounded-2xl bg-[#ff7a00] px-4 py-3 text-center text-white shadow-sm">
+        <div className="rounded-2xl bg-[#D94A32] px-4 py-3 text-center text-white shadow-sm">
           <p className="text-2xl font-black leading-none">{displayScore}</p>
           <p className="mt-1 text-[10px] font-bold uppercase tracking-[0.08em]">/100</p>
         </div>
@@ -1301,7 +1301,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               label={t("continue.links.firstTime")}
               locale={locale}
               areaId={selected.area.id}
-              className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+              className="rounded-2xl border border-[#106b43] bg-[#2E7D5B] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
             >
               {t("continue.links.firstTime")}
             </TrackedStayAreaContinueLink>
@@ -1312,7 +1312,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               label={t("continue.links.shinkansen")}
               locale={locale}
               areaId={selected.area.id}
-              className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+              className="rounded-2xl border border-[#106b43] bg-[#2E7D5B] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
             >
               {t("continue.links.shinkansen")}
             </TrackedStayAreaContinueLink>
@@ -1323,7 +1323,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               label={t("continue.links.airport")}
               locale={locale}
               areaId={selected.area.id}
-              className="rounded-2xl border border-[#106b43] bg-[#168a56] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+              className="rounded-2xl border border-[#106b43] bg-[#2E7D5B] p-4 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
             >
               {t("continue.links.airport")}
             </TrackedStayAreaContinueLink>

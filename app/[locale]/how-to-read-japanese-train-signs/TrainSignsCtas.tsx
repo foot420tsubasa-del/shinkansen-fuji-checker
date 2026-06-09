@@ -16,13 +16,13 @@ type EsimCtaProps = {
 const buttonBase =
   "inline-flex items-center justify-center gap-2 rounded-lg text-sm font-extrabold transition-colors";
 const affiliateButton =
-  "border border-[#ff7a00] bg-[#ff7a00] px-5 py-3 text-white shadow-[0_10px_24px_rgba(255,122,0,0.18)] hover:bg-[#e86d00]";
+  "border border-[#D94A32] bg-[#D94A32] px-5 py-3 text-white shadow-[0_10px_24px_rgba(255,122,0,0.18)] hover:bg-[#e86d00]";
 const subtleAffiliateButton =
   "border border-[#ffd1a3] bg-white px-4 py-2.5 text-[#b44b00] hover:bg-[#fff8f0]";
 const pageButton =
-  "border border-[#168a56] bg-[#168a56] px-5 py-3 text-white shadow-[0_10px_24px_rgba(22,138,86,0.14)] hover:bg-[#0f6f45]";
+  "border border-[#2E7D5B] bg-[#2E7D5B] px-5 py-3 text-white shadow-[0_10px_24px_rgba(22,138,86,0.14)] hover:bg-[#246449]";
 const secondaryButton =
-  "border border-[#9fd7bd] bg-white px-5 py-3 text-[#106b43] hover:border-[#168a56] hover:bg-[#f0fbf6]";
+  "border border-[#9fd7bd] bg-white px-5 py-3 text-[#106b43] hover:border-[#2E7D5B] hover:bg-[#f0fbf6]";
 
 export function EsimCta({ label, placement, locale, variant = "primary" }: EsimCtaProps) {
   return (

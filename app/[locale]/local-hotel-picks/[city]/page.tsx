@@ -243,7 +243,7 @@ export default async function CityLocalHotelPicksPage({ params }: Props) {
               placement="city_hotel_picks_hero"
               label={config.guideLabel}
               locale={locale}
-              className="inline-flex min-h-10 items-center rounded-xl bg-[#168a56] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+              className="inline-flex min-h-10 items-center rounded-xl bg-[#2E7D5B] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
             >
               {config.guideLabel}
             </TrackedInternalLink>
@@ -353,7 +353,7 @@ export default async function CityLocalHotelPicksPage({ params }: Props) {
                 placement="city_hotel_picks_continue"
                 label={link.label}
                 locale={locale}
-                className="flex flex-col rounded-2xl border border-[#168a56] bg-[#168a56] p-4 text-white transition-colors hover:bg-[#0f6f45]"
+                className="flex flex-col rounded-2xl border border-[#2E7D5B] bg-[#2E7D5B] p-4 text-white transition-colors hover:bg-[#246449]"
               >
                 <span className="text-sm font-semibold text-white">{link.label}</span>
                 <span className="mt-1 text-xs leading-5 text-white/80">Use the area logic before opening hotel booking sites.</span>

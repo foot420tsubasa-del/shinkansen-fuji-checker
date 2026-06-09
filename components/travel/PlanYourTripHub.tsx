@@ -256,7 +256,7 @@ export function PlanYourTripHub() {
                     routeType: "simple-shinkansen",
                   }}
                   locale={locale}
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] border border-[#ff7a00] bg-[#ff7a00] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] border border-[#D94A32] bg-[#D94A32] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
                 >
                   {t("hero.shinkansenCta")}
                   <ExternalLink className="h-4 w-4" />
@@ -400,7 +400,7 @@ export function PlanYourTripHub() {
             category="hotel"
             pagePath="/plan-your-trip"
             locale={locale}
-            className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] border border-[#168a56] bg-[#168a56] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+            className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] border border-[#2E7D5B] bg-[#2E7D5B] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
           >
             {t("hotel.hubCta")}
             <ArrowRight className="h-4 w-4" />
@@ -422,7 +422,7 @@ export function PlanYourTripHub() {
                     category="hotel"
                     pagePath="/plan-your-trip"
                     locale={locale}
-                    className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-xl border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                    className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-xl border border-[#2E7D5B] bg-[#2E7D5B] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#246449]"
                   >
                     {base.detailLabel}
                     <ArrowRight className="h-3.5 w-3.5" />
@@ -435,7 +435,7 @@ export function PlanYourTripHub() {
                       category="hotel"
                       pagePath="/plan-your-trip"
                       locale={locale}
-                      className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-xl border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                      className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-xl border border-[#2E7D5B] bg-[#2E7D5B] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#246449]"
                     >
                       {base.extraDetailLabel}
                       <ArrowRight className="h-3.5 w-3.5" />
@@ -472,7 +472,7 @@ export function PlanYourTripHub() {
                   placement="plan_trip_arrival_cards"
                   item={{ label: t("arrival.esim.cta"), linkId: "esim", category: "esim", provider: "klook", product: "esim", adid: "1166001" }}
                   locale={locale}
-                  className="mt-5 inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#e66700]"
+                  className="mt-5 inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#bf3d28]"
                 >
                   {t("arrival.esim.cta")}
                   <ExternalLink className="h-4 w-4" />
@@ -489,7 +489,7 @@ export function PlanYourTripHub() {
                   placement="plan_trip_arrival_cards"
                   item={{ label: t("arrival.airport.cta"), linkId: "airportTransfer", category: "transfer", provider: "klook", product: "airport_transfer", adid: "1165996" }}
                   locale={locale}
-                  className="mt-5 inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#e66700]"
+                  className="mt-5 inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#bf3d28]"
                 >
                   {t("arrival.airport.cta")}
                   <ExternalLink className="h-4 w-4" />
@@ -507,7 +507,7 @@ export function PlanYourTripHub() {
                 category="station_practice"
                 pagePath="/plan-your-trip"
                 locale={locale}
-                className="mt-5 inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#168a56] bg-[#168a56] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                className="mt-5 inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#2E7D5B] bg-[#2E7D5B] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#246449]"
               >
                 {t("arrival.station.cta")}
                 <ArrowRight className="h-4 w-4" />
@@ -543,7 +543,7 @@ export function PlanYourTripHub() {
                     placement="plan_trip_activity_cards"
                     item={{ label: city.cta, linkId: city.linkId, category: "activity", provider: "klook", product: "activity" }}
                   locale={locale}
-                    className="mt-5 inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#e66700]"
+                    className="mt-5 inline-flex min-h-10 items-center justify-center gap-2 rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#bf3d28]"
                   >
                     {city.cta}
                     <ExternalLink className="h-4 w-4" />
@@ -581,7 +581,7 @@ export function PlanYourTripHub() {
               <MapPinned className="h-4 w-4" />
               {t("optional.commandCenter")}
             </TrackedCtaLink>
-            <TrackedCtaLink href="/local-tokyo" placement="plan_trip_hotel_cards" label={t("optional.localTokyo")} category="navigation" pagePath="/plan-your-trip" locale={locale} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#106b43] bg-[#106b43] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]">
+            <TrackedCtaLink href="/local-tokyo" placement="plan_trip_hotel_cards" label={t("optional.localTokyo")} category="navigation" pagePath="/plan-your-trip" locale={locale} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#106b43] bg-[#106b43] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#246449]">
               <CalendarDays className="h-4 w-4" />
               {t("optional.localTokyo")}
             </TrackedCtaLink>

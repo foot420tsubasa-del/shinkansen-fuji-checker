@@ -22,7 +22,7 @@ export default function SuccessPage() {
       <div className="space-x-3">
         <Link
           href="/guide"
-          className="inline-flex items-center rounded-lg border border-[#168a56] bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+          className="inline-flex items-center rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#246449]"
         >
           Back to the guide
         </Link>

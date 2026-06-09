@@ -386,22 +386,22 @@ function routeActionClass(action: RouteBookingAction) {
   if (action.priority === "text") {
     return [
       "inline-flex min-h-9 items-center gap-1 text-xs font-semibold underline underline-offset-4 transition-colors",
-      action.provider === "omio" ? "text-indigo-700 hover:text-indigo-900" : "text-[#106b43] hover:text-[#0f6f45]",
+      action.provider === "omio" ? "text-indigo-700 hover:text-indigo-900" : "text-[#106b43] hover:text-[#246449]",
     ].join(" ");
   }
   if (action.priority === "primary") {
     if (action.provider === "omio") {
-      return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-indigo-700 bg-indigo-700 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-indigo-800";
+      return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#2563EB] bg-white px-3 py-2 text-xs font-semibold text-[#0B3A75] shadow-sm shadow-blue-100/70 transition-colors hover:border-[#1D4ED8] hover:bg-[#F0F6FF]";
     }
-    return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#e66700]";
+    return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#bf3d28]";
   }
   if (action.provider === "trip") {
-    return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#0a4ca8] bg-[#0a4ca8] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0a3f8b]";
+    return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-900 shadow-sm transition-colors hover:border-slate-400 hover:bg-slate-50";
   }
   if (action.provider === "omio") {
-    return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-indigo-700 bg-indigo-700 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-indigo-800";
+    return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#2563EB] bg-white px-3 py-2 text-xs font-semibold text-[#0B3A75] shadow-sm shadow-blue-100/70 transition-colors hover:border-[#1D4ED8] hover:bg-[#F0F6FF]";
   }
-  return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]";
+  return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#246449]";
 }
 
 function RouteBookingActionLink({ action, routeId, locale }: { action: RouteBookingAction; routeId: string; locale?: string }) {
@@ -966,7 +966,7 @@ export function PlannerClient() {
                     <button
                       type="button"
                       onClick={() => toggleCheck(item.id)}
-                      className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-slate-300 transition-colors hover:border-[#168a56]"
+                      className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md border border-slate-300 transition-colors hover:border-[#2E7D5B]"
                     >
                       {isDone && <Check className="h-3.5 w-3.5 text-emerald-600" />}
                     </button>
@@ -1001,7 +1001,7 @@ export function PlannerClient() {
                               area: item.affiliate?.area,
                             })
                           }
-                          className="inline-flex min-h-10 items-center gap-1 rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#e66700]"
+                          className="inline-flex min-h-10 items-center gap-1 rounded-lg border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#bf3d28]"
                         >
                           {checkLinkLabel}
                           <ExternalLink className="h-3 w-3" />
@@ -1009,7 +1009,7 @@ export function PlannerClient() {
                       ) : (
                         <Link
                           href={item.href}
-                          className="inline-flex min-h-10 items-center gap-1 rounded-lg border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+                          className="inline-flex min-h-10 items-center gap-1 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#246449]"
                         >
                           {checkLinkLabel}
                           <ArrowRight className="h-3 w-3" />

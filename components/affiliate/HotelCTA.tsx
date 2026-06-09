@@ -93,7 +93,7 @@ export function HotelCTA({
         })
       }
       className={[
-        "inline-flex items-center justify-center gap-1.5 rounded-2xl border border-[#ff7a00] bg-[#ff7a00] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#e66700] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200",
+        "inline-flex items-center justify-center gap-1.5 rounded-2xl border border-[#D94A32] bg-[#D94A32] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#bf3d28] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200",
         className ?? "",
       ].join(" ")}
     >

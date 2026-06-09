@@ -1190,7 +1190,7 @@ export default async function GuidePage({ params }: Props) {
           linkId="shinkansenTicket"
           product="shinkansen_ticket"
           adid="1265303"
-          className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+          className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
         >
           Book Shinkansen ticket on Klook
         </TrackedAffiliateLink>
@@ -1207,7 +1207,7 @@ export default async function GuidePage({ params }: Props) {
             label="Compare route on Omio"
             linkId="omioShinkansen"
             product="route_compare"
-            className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-indigo-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-200"
+            className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#2563EB] bg-white px-3 py-2 text-xs font-semibold text-[#0B3A75] shadow-sm shadow-blue-100/70 transition-colors hover:border-[#1D4ED8] hover:bg-[#F0F6FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-200"
           >
             Compare route on Omio
           </TrackedAffiliateLink>
@@ -1330,7 +1330,7 @@ export default async function GuidePage({ params }: Props) {
           placement="guide_hotel_bridge"
           label="Stay before Shinkansen"
           locale={locale}
-          className="inline-flex min-h-9 items-center rounded-xl border border-[#168a56] bg-[#168a56] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+          className="inline-flex min-h-9 items-center rounded-xl border border-[#2E7D5B] bg-[#2E7D5B] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#246449]"
         >
           Stay before Shinkansen
         </TrackedInternalLink>
@@ -1392,11 +1392,11 @@ export default async function GuidePage({ params }: Props) {
           label="Book Shinkansen ticket"
           linkId="shinkansenTicket"
           product="shinkansen_ticket"
-          className="group flex h-full flex-col rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3.5 text-[12px] shadow-sm shadow-orange-100/60 transition-colors hover:border-[#ff7a00] hover:bg-[#fff8f0]"
+          className="group flex h-full flex-col rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3.5 text-[12px] shadow-sm shadow-orange-100/60 transition-colors hover:border-[#D94A32] hover:bg-[#fff8f0]"
         >
           <span className="block font-semibold text-slate-900">Book Shinkansen ticket</span>
           <span className="mt-0.5 block text-slate-500">Reserve after confirming the Fuji-side seat.</span>
-          <span className="mt-auto inline-flex w-fit rounded-full border border-[#ff7a00] bg-[#ff7a00] px-3 py-1.5 text-[11px] font-semibold text-white shadow-sm transition-colors group-hover:bg-[#e66700]">
+          <span className="mt-auto inline-flex w-fit rounded-full border border-[#D94A32] bg-[#D94A32] px-3 py-1.5 text-[11px] font-semibold text-white shadow-sm transition-colors group-hover:bg-[#bf3d28]">
             Open Klook
           </span>
         </TrackedAffiliateLink>
@@ -1468,7 +1468,7 @@ export default async function GuidePage({ params }: Props) {
           linkId="shinkansenTicket"
           product="shinkansen_ticket"
           adid="1265303"
-          className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+          className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
         >
           {ui.bookShinkansenButton}
         </TrackedAffiliateLink>
@@ -1485,7 +1485,7 @@ export default async function GuidePage({ params }: Props) {
           linkId="jrPass"
           product="jr_pass"
           adid="1165791"
-          className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+          className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
         >
           {ui.checkJrPassButton}
         </TrackedAffiliateLink>
@@ -1544,7 +1544,7 @@ export default async function GuidePage({ params }: Props) {
           <div className="mt-4 flex flex-wrap gap-2">
             <Link
               href="/#seat-checker"
-              className="inline-flex items-center rounded-full border border-[#168a56] bg-[#168a56] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+              className="inline-flex items-center rounded-full border border-[#2E7D5B] bg-[#2E7D5B] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
             >
               {quickAnswer.cta}
             </Link>
@@ -1779,7 +1779,7 @@ export default async function GuidePage({ params }: Props) {
                 linkId="jrPass"
                 product="jr_pass"
                 adid="1165791"
-                className="mt-3 inline-flex min-h-10 items-center justify-center rounded-xl border border-[#ff7a00] bg-[#ff7a00] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#e66700]"
+                className="mt-3 inline-flex min-h-10 items-center justify-center rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
               >
                 Check JR Pass options on Klook
               </TrackedAffiliateLink>
@@ -1880,7 +1880,7 @@ export default async function GuidePage({ params }: Props) {
             <div className="mt-3">
               <Link
                 href="/"
-                className="inline-flex items-center justify-center rounded-2xl border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-100 transition-colors hover:bg-[#0f6f45] active:brightness-95"
+                className="inline-flex items-center justify-center rounded-2xl border border-[#2E7D5B] bg-[#2E7D5B] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-100 transition-colors hover:bg-[#246449] active:brightness-95"
               >
                 {t("openChecker")}
               </Link>

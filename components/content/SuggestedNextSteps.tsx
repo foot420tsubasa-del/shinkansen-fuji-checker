@@ -67,12 +67,12 @@ export function SuggestedNextSteps({
           const Icon = step.icon;
           const tone = step.external
             ? {
-                card: "hover:border-[#ff7a00] hover:bg-[#fff8f0]",
+                card: "hover:border-[#D94A32] hover:bg-[#fff8f0]",
                 icon: "bg-[#fff3e7] text-[#b44b00]",
                 arrow: "text-[#b44b00]",
               }
             : {
-                card: "hover:border-[#168a56] hover:bg-[#f0fbf6]",
+                card: "hover:border-[#2E7D5B] hover:bg-[#f0fbf6]",
                 icon: "bg-[#f0fbf6] text-[#106b43]",
                 arrow: "text-[#106b43]",
               };

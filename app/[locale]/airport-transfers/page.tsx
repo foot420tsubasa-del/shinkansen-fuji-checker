@@ -491,7 +491,7 @@ export default async function AirportTransfersIndex({ params }: Props) {
               placement="airport_hub_hero"
               label={copy.heroPrimary}
               locale={locale}
-              className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-[#168a56] bg-[#168a56] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f6f45]"
+              className="inline-flex min-h-11 items-center justify-center rounded-2xl border border-[#2E7D5B] bg-[#2E7D5B] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
             >
               {copy.heroPrimary}
             </TrackedInternalLink>

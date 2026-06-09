@@ -191,11 +191,11 @@ export async function LocalTokyoDetailPage({ locale, pageKey }: LocalTokyoDetail
               </h1>
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">{t("description")}</p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/areas-to-stay/tokyo-first-time" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#168a56] bg-[#168a56] px-5 text-sm font-extrabold text-white transition-colors hover:bg-[#0f6f45]">
+                <Link href="/areas-to-stay/tokyo-first-time" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-5 text-sm font-extrabold text-white transition-colors hover:bg-[#246449]">
                   {common("compareBases")}
                   <MapPinned className="h-4 w-4" />
                 </Link>
-                <Link href="/itineraries/7-day-first-time-japan" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#9fd7bd] bg-white px-5 text-sm font-extrabold text-[#106b43] transition-colors hover:border-[#168a56] hover:bg-[#f0fbf6]">
+                <Link href="/itineraries/7-day-first-time-japan" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#9fd7bd] bg-white px-5 text-sm font-extrabold text-[#106b43] transition-colors hover:border-[#2E7D5B] hover:bg-[#f0fbf6]">
                   {common("placeItinerary")}
                   <MapPinned className="h-4 w-4" />
                 </Link>
@@ -281,7 +281,7 @@ export async function LocalTokyoDetailPage({ locale, pageKey }: LocalTokyoDetail
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`${pick.name} Instagram`}
-                          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm transition-colors hover:border-[#168a56] hover:bg-[#f0fbf6]"
+                          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white shadow-sm transition-colors hover:border-[#2E7D5B] hover:bg-[#f0fbf6]"
                         >
                           <span className="flex h-[32px] w-[32px] items-center justify-center">
                             <Image src="/instagram-glyph-gradient.svg" alt="" width={29} height={29} aria-hidden="true" />

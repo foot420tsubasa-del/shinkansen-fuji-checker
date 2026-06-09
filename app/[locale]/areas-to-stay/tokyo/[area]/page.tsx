@@ -304,7 +304,7 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
                 locale={locale}
                 area={localized.areaLabel}
               />
-              <Link href="/areas-to-stay/tokyo-first-time" className="mt-3 inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-[#168a56] bg-[#168a56] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]">
+              <Link href="/areas-to-stay/tokyo-first-time" className="mt-3 inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-[#2E7D5B] bg-[#2E7D5B] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#246449]">
                 {t("backToHub")}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>

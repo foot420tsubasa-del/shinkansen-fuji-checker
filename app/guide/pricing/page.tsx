@@ -58,7 +58,7 @@ export default function PricingPage() {
         <button
           onClick={handleCheckout}
           disabled={loading}
-          className="inline-flex w-full items-center justify-center rounded-lg border border-[#ff7a00] bg-[#ff7a00] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#e66700] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+          className="inline-flex w-full items-center justify-center rounded-lg border border-[#D94A32] bg-[#D94A32] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#bf3d28] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
         >
           {loading ? "Redirecting to checkout..." : "Unlock the full guide"}
         </button>

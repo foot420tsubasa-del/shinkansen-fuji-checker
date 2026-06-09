@@ -34,7 +34,7 @@ export default function Error({
           </button>
           <Link
             href="/"
-            className="rounded-2xl bg-[#168a56] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0f6f45]"
+            className="rounded-2xl bg-[#2E7D5B] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#246449]"
           >
             Back to fujiseat
           </Link>
