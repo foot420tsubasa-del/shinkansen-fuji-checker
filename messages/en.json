@@ -5011,6 +5011,10 @@
     "iframeTitle": "Suica purchase simulator",
     "back": "See the Tokyo Stay Area Index",
     "ctaLabel": "Open the Suica purchase simulator",
-    "ctaDescription": "Try a true-to-life ticket-machine simulator before your first trip."
+    "ctaDescription": "Try a true-to-life ticket-machine simulator before your first trip.",
+    "share": {
+      "title": "How to Buy a Suica Card — Interactive Simulator",
+      "description": "Know someone visiting Japan for the first time? Share this Suica ticket-machine simulator so they can practice before they land."
+    }
   }
 }

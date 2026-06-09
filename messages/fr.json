@@ -5012,6 +5012,10 @@
     "iframeTitle": "Simulateur d'achat de Suica",
     "back": "Voir le Tokyo Stay Area Index",
     "ctaLabel": "Ouvrir le simulateur d'achat de Suica",
-    "ctaDescription": "Essaie un simulateur de distributeur fidèle à la réalité avant ton premier voyage."
+    "ctaDescription": "Essaie un simulateur de distributeur fidèle à la réalité avant ton premier voyage.",
+    "share": {
+      "title": "Comment acheter une carte Suica — simulateur interactif",
+      "description": "Tu connais quelqu'un qui visite le Japon pour la première fois ? Partage-lui ce simulateur de distributeur Suica pour qu'il s'entraîne avant l'arrivée."
+    }
   }
 }

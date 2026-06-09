@@ -5012,6 +5012,10 @@
     "iframeTitle": "Simulador de compra del Suica",
     "back": "Ver el Tokyo Stay Area Index",
     "ctaLabel": "Abrir el simulador de compra del Suica",
-    "ctaDescription": "Prueba un simulador realista de máquina de billetes antes de tu primer viaje."
+    "ctaDescription": "Prueba un simulador realista de máquina de billetes antes de tu primer viaje.",
+    "share": {
+      "title": "Cómo comprar una tarjeta Suica — simulador interactivo",
+      "description": "¿Conoces a alguien que va a Japón por primera vez? Comparte este simulador de máquina de billetes Suica para que pueda practicar antes de aterrizar."
+    }
   }
 }

@@ -12,6 +12,7 @@ import { EsimCta, InternalCta } from "./TrainSignsCtas";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { AdSlot } from "@/components/ads/AdSlot";
+import { buttonClassName } from "@/components/ui/Button";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -91,20 +92,22 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
     })),
   };
 
-  // 5 suggested-next-step cards.
+  // Five generic next-step cards. The Suica simulator used to be the
+  // sixth card here, but it is an interactive tool launch (not just
+  // another article link), so it has been promoted to a dedicated
+  // primaryTool CTA block rendered above this grid — see the
+  // <section> with the navy "Open the Suica purchase simulator"
+  // button just before Suggested next steps.
   const suggestedCards = [
     { href: "/#seat-checker", key: "seat", type: "seat_checker" as const },
     { href: "/jr-pass-vs-single-ticket", key: "jrPass", type: "rail" as const },
     { href: "/areas-to-stay/where-to-stay-before-shinkansen", key: "beforeShinkansen", type: "stay" as const },
     { href: "/airport-transfers", key: "airport", type: "transfer" as const },
     { href: "/itineraries/7-day-first-time-japan", key: "itinerary", type: "itinerary" as const },
-    { href: "/how-to-buy-suica", key: "suica", type: "station_practice" as const },
   ];
 
-  // The Suica card lives in the dedicated suicaGuide namespace, which is
-  // already translated across every locale. Read its label + desc here so
-  // we can render it alongside the trainSigns-scoped cards without
-  // duplicating the strings.
+  // The Suica simulator promotion uses the dedicated suicaGuide
+  // namespace, which is already translated across every locale.
   const tSuica = await getTranslations({ locale, namespace: "suicaGuide" });
 
   return (
@@ -412,6 +415,35 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
               </div>
             </section>
 
+            {/*
+              Suica simulator tool-launch block — promoted to its own
+              section so the primaryTool (navy) CTA reads as a real
+              interactive-tool entry point rather than just another
+              article-end link card. This replaces the sixth grid card
+              the simulator used to share with Seat Checker / JR Pass /
+              etc.; no new CTA was added.
+            */}
+            <section className="rounded-[22px] border border-[#d9e5f2] bg-[linear-gradient(135deg,#f8fcff,#fff)] p-5 shadow-sm">
+              <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#145aa0]">
+                Practical next step
+              </p>
+              <h3 className="mt-1 text-lg font-bold text-slate-950 md:text-xl">
+                {tSuica("ctaLabel")}
+              </h3>
+              <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-600">
+                {tSuica("ctaDescription")}
+              </p>
+              <div className="mt-4">
+                <Link
+                  href="/how-to-buy-suica"
+                  className={buttonClassName({ variant: "primaryTool", size: "lg" })}
+                >
+                  {tSuica("ctaLabel")}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </section>
+
             <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
               <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">{t("suggested.eyebrow")}</p>
               <div className="mt-4 grid gap-3 md:grid-cols-2">
@@ -425,12 +457,8 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                       <ArrowRight className="h-5 w-5" />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block font-bold text-[#082653]">
-                        {item.key === "suica" ? tSuica("ctaLabel") : t(`suggested.cards.${item.key}.title`)}
-                      </span>
-                      <span className="mt-1 block text-xs leading-5 text-[#5f7190]">
-                        {item.key === "suica" ? tSuica("ctaDescription") : t(`suggested.cards.${item.key}.desc`)}
-                      </span>
+                      <span className="block font-bold text-[#082653]">{t(`suggested.cards.${item.key}.title`)}</span>
+                      <span className="mt-1 block text-xs leading-5 text-[#5f7190]">{t(`suggested.cards.${item.key}.desc`)}</span>
                     </span>
                   </Link>
                 ))}

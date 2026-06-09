@@ -5011,6 +5011,10 @@
     "iframeTitle": "Suica-Kauf-Simulator",
     "back": "Tokyo Stay Area Index ansehen",
     "ctaLabel": "Suica-Kauf-Simulator öffnen",
-    "ctaDescription": "Probiere vor der ersten Reise einen realitätsnahen Ticketautomaten-Simulator."
+    "ctaDescription": "Probiere vor der ersten Reise einen realitätsnahen Ticketautomaten-Simulator.",
+    "share": {
+      "title": "So kaufst du eine Suica-Karte — interaktiver Simulator",
+      "description": "Kennst du jemanden auf erstem Japan-Trip? Teil diesen Suica-Ticketautomaten-Simulator, damit er sich vor der Landung vertraut machen kann."
+    }
   }
 }

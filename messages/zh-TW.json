@@ -5011,6 +5011,10 @@
     "iframeTitle": "Suica 購買模擬器",
     "back": "查看東京住宿區域索引",
     "ctaLabel": "打開 Suica 購買模擬器",
-    "ctaDescription": "在第一次旅行前體驗接近真實的售票機模擬器。"
+    "ctaDescription": "在第一次旅行前體驗接近真實的售票機模擬器。",
+    "share": {
+      "title": "如何購買 Suica 卡片：互動式模擬器",
+      "description": "認識首次造訪日本的朋友嗎？把這個 Suica 售票機模擬器分享給他們，讓他們在出發前先練習。"
+    }
   }
 }

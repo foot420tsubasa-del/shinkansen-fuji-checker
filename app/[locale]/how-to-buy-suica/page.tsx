@@ -6,6 +6,8 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAlternates } from "@/i18n/hreflang";
+import { ShareThisPage } from "@/components/share/ShareThisPage";
+import { buttonClassName } from "@/components/ui/Button";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -94,14 +96,29 @@ export default async function HowToBuySuicaPage({ params }: Props) {
         </section>
 
         <section className="mt-8 flex justify-center">
+          {/*
+            The simulator IS the primary tool on this page (the iframe
+            above), so the only secondary CTA here is the Hotel Action
+            link forward to the Tokyo Hotel Area Finder — sage filled,
+            matching the rest of the site's "Compare hotels in X" /
+            "Choose Tokyo hotel base" hierarchy.
+          */}
           <Link
             href="/areas-to-stay/tokyo-stay-area-index"
-            className="inline-flex items-center gap-2 rounded-2xl border border-[#2E7D5B] bg-[#2E7D5B] px-5 py-3 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#246449]"
+            className={buttonClassName({ variant: "hotel", size: "lg" })}
           >
             {t("back")}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </section>
+
+        <ShareThisPage
+          title={t("share.title")}
+          placement="suica_guide_footer"
+          description={t("share.description")}
+          locale={locale}
+          className="mt-10"
+        />
 
         <SiteLegalLinks className="mt-10 text-slate-500" />
       </Container>
