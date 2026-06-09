@@ -75,18 +75,29 @@ function providerClass(provider: AffiliateProvider, product: string, variant: Pr
     ].join(" ");
   }
 
-  // Booking.com / Trip.com = Provider Button — white + slate-400 border,
-  // matching the visibility-strengthened ProviderButton chrome. We omit
-  // the brand-mark badge here (ProviderChoiceCTA stays text-only to keep
-  // the inline row compact); the stand-alone ProviderButton component
-  // renders the colored brand mark when used 1:1 next to a Hotel Action
-  // CTA. Border / shadow / text-weight intentionally one notch stronger
-  // than the default white CTA so the row reads as pressable without
-  // crossing into Hotel-Action territory.
-  if (provider === "booking_travelpayouts" || provider === "trip") {
+  // Booking.com = Provider Button with very light Booking-blue tint.
+  // Matches the round-3 ProviderButton chrome. The inline row stays
+  // brand-mark-less to keep the compact text-only layout that
+  // ProviderChoiceCTA promises; the stand-alone ProviderButton
+  // component still renders the colored brand badge when used 1:1
+  // next to a Hotel Action CTA. Border / shadow / hover intentionally
+  // one notch stronger than secondary so the row reads as pressable
+  // without crossing into Hotel-Action territory.
+  if (provider === "booking_travelpayouts") {
     return [
       base,
-      "border border-slate-400 bg-white text-slate-900 shadow-sm shadow-slate-200/80 hover:border-slate-500 hover:bg-[#F8FAFC] hover:shadow-[0_3px_10px_-2px_rgba(15,23,42,0.18)] focus-visible:ring-slate-400",
+      "border border-[#2563EB] bg-[#F0F6FF] text-[#0B2345] shadow-sm shadow-blue-100/80",
+      "hover:border-[#1D4ED8] hover:bg-[#EAF2FF] hover:shadow-[0_3px_10px_-2px_rgba(29,78,216,0.22)]",
+      "focus-visible:ring-blue-300",
+    ].join(" ");
+  }
+  // Trip.com = Provider Button with very light Trip-cyan tint.
+  if (provider === "trip") {
+    return [
+      base,
+      "border border-[#0891B2] bg-[#EFFAFE] text-[#0F172A] shadow-sm shadow-cyan-100/80",
+      "hover:border-[#0284C7] hover:bg-[#E6F9FF] hover:shadow-[0_3px_10px_-2px_rgba(2,132,199,0.22)]",
+      "focus-visible:ring-cyan-300",
     ].join(" ");
   }
 

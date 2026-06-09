@@ -135,26 +135,39 @@ export function ProviderButton({
         })
       }
       className={[
-        // Phase 2 provider chrome — visibility-strengthened (round 2).
-        // White surface stays, but the border, shadow, text weight and
-        // padding all step up one notch so the row reads as a real,
-        // pressable Provider Button without crossing into Hotel-Action
-        // territory.
-        //   border  : slate-300  → slate-400
-        //   shadow  : shadow-sm  → shadow-sm + soft slate halo
-        //   text    : font-semibold + tracking tighter for confidence
-        //   padding : px-3.5     → px-4
-        //   min-h   : 11 (44px)  → [46px] (a hair taller for tap area)
-        "inline-flex min-h-[46px] items-center justify-center gap-2 rounded-[12px] border border-slate-400 bg-white px-4 py-2 text-sm font-semibold tracking-tight text-slate-900 no-underline shadow-sm shadow-slate-200/80 transition-all",
-        "hover:border-slate-500 hover:bg-[#F8FAFC] hover:shadow-[0_3px_10px_-2px_rgba(15,23,42,0.18)]",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-white focus-visible:ring-slate-400",
+        // Phase 2 provider chrome — visibility-strengthened (round 3).
+        // Still white-ish surface, but a very light brand TINT (Booking
+        // blue / Trip cyan) replaces pure white so the row reads as a
+        // real, pressable Provider Button on the cream backdrop without
+        // crossing into Hotel-Action territory. Hotel Action (sage
+        // filled) stays the strongest hotel CTA; this tier only steps
+        // up from "secondary white card" to "clearly-pressable provider".
+        "inline-flex min-h-[46px] items-center justify-center gap-2 rounded-[12px] border px-4 py-2 text-sm font-semibold tracking-tight no-underline shadow-sm transition-all",
+        // Per-provider tint, border, hover, and focus ring. Keeping the
+        // class lists separate (rather than a single object lookup) lets
+        // Tailwind's JIT statically discover every utility.
+        provider === "booking_travelpayouts"
+          ? [
+              "bg-[#F0F6FF] border-[#2563EB] text-[#0B2345] shadow-blue-100/80",
+              "hover:bg-[#EAF2FF] hover:border-[#1D4ED8] hover:shadow-[0_3px_10px_-2px_rgba(29,78,216,0.22)]",
+              "focus-visible:ring-blue-300 focus-visible:ring-offset-1 focus-visible:ring-offset-white focus-visible:outline-none focus-visible:ring-2",
+            ].join(" ")
+          : [
+              // Trip.com — cyan tint.
+              "bg-[#EFFAFE] border-[#0891B2] text-[#0F172A] shadow-cyan-100/80",
+              "hover:bg-[#E6F9FF] hover:border-[#0284C7] hover:shadow-[0_3px_10px_-2px_rgba(2,132,199,0.22)]",
+              "focus-visible:ring-cyan-300 focus-visible:ring-offset-1 focus-visible:ring-offset-white focus-visible:outline-none focus-visible:ring-2",
+            ].join(" "),
         fullWidth ? "w-full" : "",
         className,
       ].join(" ")}
     >
       <ProviderMark provider={provider} />
-      <span className="flex-1 truncate text-center">{children}</span>
-      <ExternalLink className="h-4 w-4 text-slate-600" aria-hidden="true" />
+      <span className="min-w-0 flex-1 truncate text-center">{children}</span>
+      <ExternalLink
+        className={`h-4 w-4 ${provider === "booking_travelpayouts" ? "text-blue-700" : "text-cyan-700"}`}
+        aria-hidden="true"
+      />
     </a>
   );
 }

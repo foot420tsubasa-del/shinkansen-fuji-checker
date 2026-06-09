@@ -396,7 +396,9 @@ function routeActionClass(action: RouteBookingAction) {
     return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#bf3d28]";
   }
   if (action.provider === "trip") {
-    return "inline-flex min-h-11 items-center justify-center gap-1 rounded-[12px] border border-slate-400 bg-white px-3.5 py-2 text-xs font-semibold text-slate-900 shadow-sm shadow-slate-200/80 transition-all hover:border-slate-500 hover:bg-[#F8FAFC] hover:shadow-[0_3px_10px_-2px_rgba(15,23,42,0.18)]";
+    // Trip.com Provider Button — light cyan tint, in lockstep with
+    // ProviderButton.tsx / ProviderChoiceCTA.tsx.
+    return "inline-flex min-h-11 items-center justify-center gap-1 rounded-[12px] border border-[#0891B2] bg-[#EFFAFE] px-3.5 py-2 text-xs font-semibold text-[#0F172A] shadow-sm shadow-cyan-100/80 transition-all hover:border-[#0284C7] hover:bg-[#E6F9FF] hover:shadow-[0_3px_10px_-2px_rgba(2,132,199,0.22)]";
   }
   if (action.provider === "omio") {
     return "inline-flex min-h-10 items-center justify-center gap-1 rounded-lg border border-[#2563EB] bg-white px-3 py-2 text-xs font-semibold text-[#0B3A75] shadow-sm shadow-blue-100/70 transition-colors hover:border-[#1D4ED8] hover:bg-[#F0F6FF]";
