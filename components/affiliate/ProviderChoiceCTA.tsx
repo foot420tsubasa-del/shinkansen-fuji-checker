@@ -75,15 +75,18 @@ function providerClass(provider: AffiliateProvider, product: string, variant: Pr
     ].join(" ");
   }
 
-  // Booking.com / Trip.com = Provider Button — white + slate border. We
-  // omit the brand-mark badge here (ProviderChoiceCTA stays text-only to
-  // keep the inline row compact); the stand-alone ProviderButton
-  // component renders the colored brand mark when used 1:1 next to a
-  // Hotel Action CTA.
+  // Booking.com / Trip.com = Provider Button — white + slate-400 border,
+  // matching the visibility-strengthened ProviderButton chrome. We omit
+  // the brand-mark badge here (ProviderChoiceCTA stays text-only to keep
+  // the inline row compact); the stand-alone ProviderButton component
+  // renders the colored brand mark when used 1:1 next to a Hotel Action
+  // CTA. Border / shadow / text-weight intentionally one notch stronger
+  // than the default white CTA so the row reads as pressable without
+  // crossing into Hotel-Action territory.
   if (provider === "booking_travelpayouts" || provider === "trip") {
     return [
       base,
-      "border border-slate-300 bg-white text-slate-900 shadow-sm hover:border-slate-400 hover:bg-slate-50 focus-visible:ring-slate-300",
+      "border border-slate-400 bg-white text-slate-900 shadow-sm shadow-slate-200/80 hover:border-slate-500 hover:bg-[#F8FAFC] hover:shadow-[0_3px_10px_-2px_rgba(15,23,42,0.18)] focus-visible:ring-slate-400",
     ].join(" ");
   }
 

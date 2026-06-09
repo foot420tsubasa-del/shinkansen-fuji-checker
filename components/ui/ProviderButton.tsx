@@ -56,7 +56,9 @@ type ProviderButtonProps = {
 
 /**
  * Compact brand wordmark — keeps Booking.com / Trip.com recognizable
- * without dominating the surface. Each mark stays at ~20px square.
+ * without dominating the surface. The badge is intentionally a bit
+ * larger than the average leading-icon (22×22 px) so the row reads
+ * as a real, pressable Provider Button rather than a faint chip.
  * Colors are taken from each brand's public site guidance.
  */
 function ProviderMark({ provider }: { provider: ProviderId }) {
@@ -64,7 +66,7 @@ function ProviderMark({ provider }: { provider: ProviderId }) {
     return (
       <span
         aria-hidden="true"
-        className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#003b95] text-[10px] font-black leading-none text-white"
+        className="inline-flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-[#003b95] text-[11px] font-black leading-none text-white shadow-sm shadow-blue-900/20"
       >
         B
       </span>
@@ -74,7 +76,7 @@ function ProviderMark({ provider }: { provider: ProviderId }) {
   return (
     <span
       aria-hidden="true"
-      className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#0875c9] text-[10px] font-black leading-none text-white"
+      className="inline-flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-[#0875c9] text-[11px] font-black leading-none text-white shadow-sm shadow-cyan-900/20"
     >
       T
     </span>
@@ -133,18 +135,26 @@ export function ProviderButton({
         })
       }
       className={[
-        // Phase 2 provider chrome: white surface, slate-300 border,
-        // dark text, subtle shadow so it survives the cream backdrop.
-        "inline-flex min-h-11 items-center justify-center gap-2 rounded-[12px] border border-slate-300 bg-white px-3.5 py-2 text-sm font-semibold text-slate-900 no-underline shadow-sm transition-colors",
-        "hover:border-slate-400 hover:bg-slate-50",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-white focus-visible:ring-slate-300",
+        // Phase 2 provider chrome — visibility-strengthened (round 2).
+        // White surface stays, but the border, shadow, text weight and
+        // padding all step up one notch so the row reads as a real,
+        // pressable Provider Button without crossing into Hotel-Action
+        // territory.
+        //   border  : slate-300  → slate-400
+        //   shadow  : shadow-sm  → shadow-sm + soft slate halo
+        //   text    : font-semibold + tracking tighter for confidence
+        //   padding : px-3.5     → px-4
+        //   min-h   : 11 (44px)  → [46px] (a hair taller for tap area)
+        "inline-flex min-h-[46px] items-center justify-center gap-2 rounded-[12px] border border-slate-400 bg-white px-4 py-2 text-sm font-semibold tracking-tight text-slate-900 no-underline shadow-sm shadow-slate-200/80 transition-all",
+        "hover:border-slate-500 hover:bg-[#F8FAFC] hover:shadow-[0_3px_10px_-2px_rgba(15,23,42,0.18)]",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-white focus-visible:ring-slate-400",
         fullWidth ? "w-full" : "",
         className,
       ].join(" ")}
     >
       <ProviderMark provider={provider} />
       <span className="flex-1 truncate text-center">{children}</span>
-      <ExternalLink className="h-3.5 w-3.5 text-slate-500" aria-hidden="true" />
+      <ExternalLink className="h-4 w-4 text-slate-600" aria-hidden="true" />
     </a>
   );
 }
