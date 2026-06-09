@@ -4640,7 +4640,34 @@
       "cardOpenLabel": "Ouvrir le quartier",
       "finderLinkLabel": "Retour au Tokyo Hotel Area Finder",
       "metaTitle": "Pages de recherche d'hôtels à Tokyo : choisissez le quartier d'abord | fujiseat",
-      "metaDescription": "Comparez les quartiers de gare à Tokyo, puis voyez les hôtels près de la base qui convient à votre voyage."
+      "metaDescription": "Comparez les quartiers de gare à Tokyo, puis voyez les hôtels près de la base qui convient à votre voyage.",
+      "lp": {
+        "h1": "Hôtels de Tokyo par quartier : choisis ta base avant de réserver",
+        "lead": "Compare Tokyo Station, Shinjuku, Ueno, Asakusa, Ginza, Shinagawa et des bases voisines plus calmes selon l'accès aéroport, les bagages, les plans Shinkansen, le stress en gare et l'offre hôtelière.",
+        "popularHeading": "Quartiers d'hôtel populaires à Tokyo",
+        "seeHotels": "Voir les hôtels",
+        "popular": {
+          "tokyoStation": "Idéal pour Shinkansen / première nuit",
+          "shinjuku": "Idéal pour vie nocturne / shopping",
+          "ueno": "Idéal pour Narita / rapport qualité-prix",
+          "asakusa": "Idéal pour le Tokyo classique / tourisme",
+          "ginzaYurakucho": "Idéal pour rues soignées / shopping",
+          "shinagawa": "Idéal pour Haneda / Shinkansen"
+        },
+        "situationHeading": "Choisir selon la situation",
+        "situation": {
+          "firstTime": "Première fois à Tokyo",
+          "beforeShinkansen": "Avant de prendre le Shinkansen",
+          "fromNarita": "Arrivée depuis Narita",
+          "fromHaneda": "Arrivée depuis Haneda",
+          "familyLuggage": "Famille avec bagages",
+          "hateCrowds": "Tu détestes la foule"
+        },
+        "finderHelperText": "Tu ne sais pas par où commencer ? Utilise le Tokyo Hotel Area Finder.",
+        "finderHelperCta": "Ouvrir le Tokyo Hotel Area Finder",
+        "allAreasHeading": "Toutes les pages de quartiers d'hôtel à Tokyo",
+        "allAreasDescription": "Parcours les 36 quartiers de gare de Tokyo. Chaque page explique à qui le quartier convient, ce qu'il faut surveiller et où vérifier les hôtels."
+      }
     },
     "primaryGraph": {
       "eyebrow": "Graphique des scores",

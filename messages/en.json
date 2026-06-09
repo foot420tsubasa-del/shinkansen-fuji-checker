@@ -4639,7 +4639,34 @@
       "cardOpenLabel": "Open area",
       "finderLinkLabel": "Back to Tokyo Hotel Area Finder",
       "metaTitle": "Tokyo hotel search pages: choose your station area first | fujiseat",
-      "metaDescription": "Compare Tokyo hotel search pages by station area, then check hotels near the base that fits your trip."
+      "metaDescription": "Compare Tokyo hotel search pages by station area, then check hotels near the base that fits your trip.",
+      "lp": {
+        "h1": "Tokyo Hotels by Area: Choose Your Base Before Booking",
+        "lead": "Compare Tokyo Station, Shinjuku, Ueno, Asakusa, Ginza, Shinagawa and calmer nearby bases by airport access, luggage, Shinkansen plans, station stress and hotel choice.",
+        "popularHeading": "Popular Tokyo hotel areas",
+        "seeHotels": "See hotels",
+        "popular": {
+          "tokyoStation": "Best for Shinkansen / first night",
+          "shinjuku": "Best for nightlife / shopping",
+          "ueno": "Best for Narita / value",
+          "asakusa": "Best for classic Tokyo / sightseeing",
+          "ginzaYurakucho": "Best for clean streets / shopping",
+          "shinagawa": "Best for Haneda / Shinkansen"
+        },
+        "situationHeading": "Choose by situation",
+        "situation": {
+          "firstTime": "First time in Tokyo",
+          "beforeShinkansen": "Before taking the Shinkansen",
+          "fromNarita": "Arriving from Narita",
+          "fromHaneda": "Arriving from Haneda",
+          "familyLuggage": "Family with luggage",
+          "hateCrowds": "Hate crowds"
+        },
+        "finderHelperText": "Not sure where to start? Use the Tokyo Hotel Area Finder.",
+        "finderHelperCta": "Open the Tokyo Hotel Area Finder",
+        "allAreasHeading": "All Tokyo hotel area pages",
+        "allAreasDescription": "Browse all 36 Tokyo station areas. Each page explains who should stay there, what to watch out for, and where to check hotels."
+      }
     },
     "primaryGraph": {
       "eyebrow": "Score graph",

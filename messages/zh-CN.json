@@ -4639,7 +4639,34 @@
       "cardOpenLabel": "打开区域",
       "finderLinkLabel": "返回 Tokyo Hotel Area Finder",
       "metaTitle": "东京酒店搜索页面：先选择车站区域 | fujiseat",
-      "metaDescription": "比较东京的车站区域，再查看适合您旅程的基地附近的酒店。"
+      "metaDescription": "比较东京的车站区域，再查看适合您旅程的基地附近的酒店。",
+      "lp": {
+        "h1": "按区域选东京酒店：订房前先确定你的基地",
+        "lead": "按机场交通、行李、新干线计划、车站压力与酒店选择，比较东京站、新宿、上野、浅草、银座、品川与更安静的邻近基地。",
+        "popularHeading": "热门东京酒店区域",
+        "seeHotels": "查看酒店",
+        "popular": {
+          "tokyoStation": "最适合新干线 / 第一晚",
+          "shinjuku": "最适合夜生活 / 购物",
+          "ueno": "最适合成田 / 高性价比",
+          "asakusa": "最适合经典东京 / 观光",
+          "ginzaYurakucho": "最适合整洁街区 / 购物",
+          "shinagawa": "最适合羽田 / 新干线"
+        },
+        "situationHeading": "按情境选择",
+        "situation": {
+          "firstTime": "第一次到东京",
+          "beforeShinkansen": "坐新干线之前",
+          "fromNarita": "从成田抵达",
+          "fromHaneda": "从羽田抵达",
+          "familyLuggage": "带行李的家庭",
+          "hateCrowds": "讨厌人潮"
+        },
+        "finderHelperText": "不知道从何开始？使用 Tokyo Hotel Area Finder。",
+        "finderHelperCta": "打开 Tokyo Hotel Area Finder",
+        "allAreasHeading": "所有东京酒店区域页面",
+        "allAreasDescription": "浏览全部 36 个东京车站区域。每页说明适合谁入住、要注意什么，以及在哪里查酒店。"
+      }
     },
     "primaryGraph": {
       "eyebrow": "分数图表",

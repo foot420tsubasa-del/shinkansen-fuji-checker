@@ -51,7 +51,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const cityCardConfigs = [
   {
     key: "tokyo",
-    href: "/areas-to-stay/tokyo-stay-area-index",
+    // Primary Tokyo door → the Tokyo Hotels parent page (revenue spine).
+    // The Finder stays reachable as a secondary door via the quick-answer
+    // and finder-preview sections lower on this page.
+    href: "/areas-to-stay/tokyo-hotels",
     icon: Building2,
     imageCandidates: ["/images/stay/tokyo/tokyo-stay-hero.png"],
   },
@@ -256,7 +259,7 @@ export default async function AreasToStayIndex({ params }: Props) {
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <TrackedInternalLink
-                href="/areas-to-stay/tokyo-stay-area-index"
+                href="/areas-to-stay/tokyo-hotels"
                 sourcePage={pagePath}
                 placement="stay_hub_hero_finder"
                 label={t("hero.primaryCta")}

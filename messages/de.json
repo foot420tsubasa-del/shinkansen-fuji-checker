@@ -4639,7 +4639,34 @@
       "cardOpenLabel": "Gebiet öffnen",
       "finderLinkLabel": "Zurück zum Tokyo Hotel Area Finder",
       "metaTitle": "Tokio-Hotel-Suchseiten: Erst die Gegend wählen | fujiseat",
-      "metaDescription": "Vergleiche Bahnhofsgegenden in Tokio und schaue dann Hotels in der Nähe der passenden Basis."
+      "metaDescription": "Vergleiche Bahnhofsgegenden in Tokio und schaue dann Hotels in der Nähe der passenden Basis.",
+      "lp": {
+        "h1": "Tokio-Hotels nach Gebiet: Wähle deine Basis vor der Buchung",
+        "lead": "Vergleiche Tokyo Station, Shinjuku, Ueno, Asakusa, Ginza, Shinagawa und ruhigere Nachbarbasen nach Flughafenzugang, Gepäck, Shinkansen-Plänen, Bahnhofsstress und Hotelauswahl.",
+        "popularHeading": "Beliebte Tokio-Hotelgebiete",
+        "seeHotels": "Hotels ansehen",
+        "popular": {
+          "tokyoStation": "Top für Shinkansen / erste Nacht",
+          "shinjuku": "Top für Nachtleben / Shopping",
+          "ueno": "Top für Narita / Preis-Leistung",
+          "asakusa": "Top für klassisches Tokio / Sightseeing",
+          "ginzaYurakucho": "Top für gepflegte Straßen / Shopping",
+          "shinagawa": "Top für Haneda / Shinkansen"
+        },
+        "situationHeading": "Nach Situation wählen",
+        "situation": {
+          "firstTime": "Zum ersten Mal in Tokio",
+          "beforeShinkansen": "Vor der Shinkansen-Fahrt",
+          "fromNarita": "Ankunft von Narita",
+          "fromHaneda": "Ankunft von Haneda",
+          "familyLuggage": "Familie mit Gepäck",
+          "hateCrowds": "Menschenmengen meiden"
+        },
+        "finderHelperText": "Unsicher, wo du anfangen sollst? Nutze den Tokyo Hotel Area Finder.",
+        "finderHelperCta": "Tokyo Hotel Area Finder öffnen",
+        "allAreasHeading": "Alle Tokio-Hotelgebietsseiten",
+        "allAreasDescription": "Durchstöbere alle 36 Tokio-Bahnhofsgebiete. Jede Seite erklärt, für wen sie passt, worauf zu achten ist und wo man Hotels prüft."
+      }
     },
     "primaryGraph": {
       "eyebrow": "Bewertungsdiagramm",

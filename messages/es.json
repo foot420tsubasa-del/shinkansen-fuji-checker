@@ -4640,7 +4640,34 @@
       "cardOpenLabel": "Abrir zona",
       "finderLinkLabel": "Volver al Tokyo Hotel Area Finder",
       "metaTitle": "Páginas de búsqueda de hoteles en Tokio: elige la zona primero | fujiseat",
-      "metaDescription": "Compara áreas de estación en Tokio y luego mira hoteles cerca de la base que encaja con tu viaje."
+      "metaDescription": "Compara áreas de estación en Tokio y luego mira hoteles cerca de la base que encaja con tu viaje.",
+      "lp": {
+        "h1": "Hoteles en Tokio por zona: elige tu base antes de reservar",
+        "lead": "Compara Tokyo Station, Shinjuku, Ueno, Asakusa, Ginza, Shinagawa y bases cercanas más tranquilas por acceso al aeropuerto, equipaje, planes de Shinkansen, estrés de estación y oferta de hoteles.",
+        "popularHeading": "Zonas de hotel populares en Tokio",
+        "seeHotels": "Ver hoteles",
+        "popular": {
+          "tokyoStation": "Ideal para Shinkansen / primera noche",
+          "shinjuku": "Ideal para vida nocturna / compras",
+          "ueno": "Ideal para Narita / relación calidad-precio",
+          "asakusa": "Ideal para el Tokio clásico / turismo",
+          "ginzaYurakucho": "Ideal para calles cuidadas / compras",
+          "shinagawa": "Ideal para Haneda / Shinkansen"
+        },
+        "situationHeading": "Elige según tu situación",
+        "situation": {
+          "firstTime": "Primera vez en Tokio",
+          "beforeShinkansen": "Antes de tomar el Shinkansen",
+          "fromNarita": "Llegando desde Narita",
+          "fromHaneda": "Llegando desde Haneda",
+          "familyLuggage": "Familia con equipaje",
+          "hateCrowds": "Odias las multitudes"
+        },
+        "finderHelperText": "¿No sabes por dónde empezar? Usa el Tokyo Hotel Area Finder.",
+        "finderHelperCta": "Abrir el Tokyo Hotel Area Finder",
+        "allAreasHeading": "Todas las páginas de zonas de hotel en Tokio",
+        "allAreasDescription": "Explora las 36 zonas de estación de Tokio. Cada página explica para quién es la zona, qué tener en cuenta y dónde mirar hoteles."
+      }
     },
     "primaryGraph": {
       "eyebrow": "Gráfico de puntuación",

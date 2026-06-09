@@ -1123,7 +1123,7 @@ export default async function GuidePage({ params }: Props) {
             {ui.planAirportTransfer}
           </Link>
           <Link
-            href="/areas-to-stay/tokyo-stay-area-index"
+            href="/areas-to-stay/tokyo-hotels"
             className="inline-flex min-h-10 items-center justify-center rounded-xl border border-[#0b214a] bg-[#0b214a] px-3 py-2 font-semibold text-yellow-300 transition-colors hover:bg-[#081a3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b214a]/30"
           >
             {ui.chooseStayArea}
@@ -1335,14 +1335,14 @@ export default async function GuidePage({ params }: Props) {
           Stay before Shinkansen
         </TrackedInternalLink>
         <TrackedInternalLink
-          href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
+          href="/areas-to-stay/tokyo-hotels"
           sourcePage="/guide"
           placement="guide_hotel_bridge"
-          label="Tokyo hotel base matrix"
+          label="Compare Tokyo hotel areas"
           locale={locale}
           className="inline-flex min-h-9 items-center rounded-xl border border-[#0b214a] bg-[#0b214a] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#081a3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b214a]/30"
         >
-          Tokyo hotel base matrix
+          Compare Tokyo hotel areas
         </TrackedInternalLink>
       </div>
     </div>
@@ -1401,7 +1401,7 @@ export default async function GuidePage({ params }: Props) {
           </span>
         </TrackedAffiliateLink>
         <TrackedInternalLink
-          href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
+          href="/areas-to-stay/tokyo-hotels"
           sourcePage="/guide"
           placement="guide_continue_planning"
           label="Choose Tokyo hotel base"
@@ -1411,7 +1411,7 @@ export default async function GuidePage({ params }: Props) {
           <span className="block font-semibold text-yellow-300">Choose Tokyo hotel base</span>
           <span className="mt-0.5 block text-slate-200">Compare famous stations, calmer bases, and luggage logic.</span>
           <span className="mt-auto inline-flex w-fit rounded-full border border-yellow-300/70 bg-yellow-300 px-3 py-1.5 text-[11px] font-semibold text-[#0b214a] shadow-sm transition-colors group-hover:bg-yellow-200">
-            Open matrix
+            See hotel areas
           </span>
         </TrackedInternalLink>
         <TrackedCtaLink

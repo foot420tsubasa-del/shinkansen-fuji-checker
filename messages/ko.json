@@ -4639,7 +4639,34 @@
       "cardOpenLabel": "지역 열기",
       "finderLinkLabel": "Tokyo Hotel Area Finder로 돌아가기",
       "metaTitle": "도쿄 호텔 검색 페이지: 역 지역을 먼저 선택하세요 | fujiseat",
-      "metaDescription": "도쿄의 역 지역들을 비교하고 여행에 어울리는 거점 근처의 호텔을 확인하세요."
+      "metaDescription": "도쿄의 역 지역들을 비교하고 여행에 어울리는 거점 근처의 호텔을 확인하세요.",
+      "lp": {
+        "h1": "지역별 도쿄 호텔: 예약 전에 거점부터 정하세요",
+        "lead": "도쿄역, 신주쿠, 우에노, 아사쿠사, 긴자, 시나가와와 더 조용한 인근 거점을 공항 접근성, 짐, 신칸센 계획, 역 혼잡도, 호텔 선택지 기준으로 비교하세요.",
+        "popularHeading": "인기 도쿄 호텔 지역",
+        "seeHotels": "호텔 보기",
+        "popular": {
+          "tokyoStation": "신칸센 / 첫날 밤에 최적",
+          "shinjuku": "나이트라이프 / 쇼핑에 최적",
+          "ueno": "나리타 / 가성비에 최적",
+          "asakusa": "클래식 도쿄 / 관광에 최적",
+          "ginzaYurakucho": "깔끔한 거리 / 쇼핑에 최적",
+          "shinagawa": "하네다 / 신칸센에 최적"
+        },
+        "situationHeading": "상황별로 선택",
+        "situation": {
+          "firstTime": "도쿄 첫 방문",
+          "beforeShinkansen": "신칸센 타기 전",
+          "fromNarita": "나리타에서 도착",
+          "fromHaneda": "하네다에서 도착",
+          "familyLuggage": "짐 많은 가족",
+          "hateCrowds": "혼잡함이 싫어요"
+        },
+        "finderHelperText": "어디서 시작할지 모르겠다면 Tokyo Hotel Area Finder를 사용하세요.",
+        "finderHelperCta": "Tokyo Hotel Area Finder 열기",
+        "allAreasHeading": "모든 도쿄 호텔 지역 페이지",
+        "allAreasDescription": "도쿄의 36개 역 지역을 모두 살펴보세요. 각 페이지는 누구에게 맞는지, 주의할 점, 호텔 확인 방법을 설명합니다."
+      }
     },
     "primaryGraph": {
       "eyebrow": "점수 그래프",

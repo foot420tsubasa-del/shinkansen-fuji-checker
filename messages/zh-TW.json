@@ -4639,7 +4639,34 @@
       "cardOpenLabel": "開啟區域",
       "finderLinkLabel": "返回 Tokyo Hotel Area Finder",
       "metaTitle": "東京飯店搜尋頁面：先選擇車站區域 | fujiseat",
-      "metaDescription": "比較東京的車站區域，再查看適合您旅程的基地附近的飯店。"
+      "metaDescription": "比較東京的車站區域，再查看適合您旅程的基地附近的飯店。",
+      "lp": {
+        "h1": "依區域選東京飯店：訂房前先決定你的基地",
+        "lead": "依機場交通、行李、新幹線計畫、車站壓力與飯店選擇，比較東京站、新宿、上野、淺草、銀座、品川與更安靜的鄰近基地。",
+        "popularHeading": "熱門東京飯店區域",
+        "seeHotels": "查看飯店",
+        "popular": {
+          "tokyoStation": "最適合新幹線 / 第一晚",
+          "shinjuku": "最適合夜生活 / 購物",
+          "ueno": "最適合成田 / 高 CP 值",
+          "asakusa": "最適合經典東京 / 觀光",
+          "ginzaYurakucho": "最適合整潔街區 / 購物",
+          "shinagawa": "最適合羽田 / 新幹線"
+        },
+        "situationHeading": "依情境選擇",
+        "situation": {
+          "firstTime": "第一次到東京",
+          "beforeShinkansen": "搭新幹線之前",
+          "fromNarita": "從成田抵達",
+          "fromHaneda": "從羽田抵達",
+          "familyLuggage": "帶行李的家庭",
+          "hateCrowds": "討厭人潮"
+        },
+        "finderHelperText": "不知道從何開始？使用 Tokyo Hotel Area Finder。",
+        "finderHelperCta": "開啟 Tokyo Hotel Area Finder",
+        "allAreasHeading": "所有東京飯店區域頁面",
+        "allAreasDescription": "瀏覽全部 36 個東京車站區域。每頁說明適合誰入住、要注意什麼，以及在哪裡查飯店。"
+      }
     },
     "primaryGraph": {
       "eyebrow": "分數圖表",

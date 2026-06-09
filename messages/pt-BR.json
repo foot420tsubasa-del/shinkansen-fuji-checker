@@ -4640,7 +4640,34 @@
       "cardOpenLabel": "Abrir área",
       "finderLinkLabel": "Voltar ao Tokyo Hotel Area Finder",
       "metaTitle": "Páginas de busca de hotéis em Tóquio: escolha a área de estação primeiro | fujiseat",
-      "metaDescription": "Compare áreas de estação em Tóquio e depois confira hotéis perto da base que se encaixa na sua viagem."
+      "metaDescription": "Compare áreas de estação em Tóquio e depois confira hotéis perto da base que se encaixa na sua viagem.",
+      "lp": {
+        "h1": "Hotéis em Tóquio por área: escolha sua base antes de reservar",
+        "lead": "Compare Tokyo Station, Shinjuku, Ueno, Asakusa, Ginza, Shinagawa e bases vizinhas mais tranquilas por acesso ao aeroporto, bagagem, planos de Shinkansen, estresse de estação e oferta de hotéis.",
+        "popularHeading": "Áreas de hotel populares em Tóquio",
+        "seeHotels": "Ver hotéis",
+        "popular": {
+          "tokyoStation": "Melhor para Shinkansen / primeira noite",
+          "shinjuku": "Melhor para vida noturna / compras",
+          "ueno": "Melhor para Narita / custo-benefício",
+          "asakusa": "Melhor para a Tóquio clássica / turismo",
+          "ginzaYurakucho": "Melhor para ruas tranquilas / compras",
+          "shinagawa": "Melhor para Haneda / Shinkansen"
+        },
+        "situationHeading": "Escolha pela situação",
+        "situation": {
+          "firstTime": "Primeira vez em Tóquio",
+          "beforeShinkansen": "Antes de pegar o Shinkansen",
+          "fromNarita": "Chegando de Narita",
+          "fromHaneda": "Chegando de Haneda",
+          "familyLuggage": "Família com bagagem",
+          "hateCrowds": "Detesta multidões"
+        },
+        "finderHelperText": "Não sabe por onde começar? Use o Tokyo Hotel Area Finder.",
+        "finderHelperCta": "Abrir o Tokyo Hotel Area Finder",
+        "allAreasHeading": "Todas as páginas de áreas de hotel em Tóquio",
+        "allAreasDescription": "Veja todas as 36 áreas de estação de Tóquio. Cada página explica para quem a área serve, o que observar e onde checar hotéis."
+      }
     },
     "primaryGraph": {
       "eyebrow": "Gráfico de pontuação",
