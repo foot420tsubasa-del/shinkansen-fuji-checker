@@ -534,6 +534,13 @@ function assembleProviderLinks(
   placement: HotelAffiliatePlacement,
   t: Translation,
 ): AreaProviderLink[] {
+  // Action-oriented, placement-specific labels: "Check hotels on …" near
+  // the hero, "Compare hotels on …" at the bottom. Falls back to the bare
+  // brand-name labels if the long keys are ever missing.
+  const isBottom = placement === "tokyo_hotels_bottom";
+  const bookingLabel = isBottom ? t("bottomCta.providerBooking") : t("hero.providerBooking");
+  const tripLabel = isBottom ? t("bottomCta.providerTrip") : t("hero.providerTrip");
+
   const bookingLinks: AreaProviderLink[] = getHotelProviderLinks({
     areaId: slug,
     locale,
@@ -542,7 +549,7 @@ function assembleProviderLinks(
     provider: link.provider,
     href: link.href,
     trackingHref: link.trackingHref,
-    label: t("hero.bookingButton"),
+    label: bookingLabel,
     linkId: link.linkId,
     subId: link.subId,
     priority: link.priority,
@@ -563,7 +570,7 @@ function assembleProviderLinks(
             provider: "trip" as ProviderId,
             href: tripHref,
             trackingHref: tripTrackingHref,
-            label: t("hero.tripButton"),
+            label: tripLabel,
             linkId: `hotelArea.${hotelAreaKey}.trip`,
             subId: tripSubIds[slot],
             priority: 20,
@@ -653,6 +660,26 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
     ...watchBase,
     t("beforeBook.walkingDistanceCaution", { area: area.displayName }),
   ];
+
+  // ----- Quick decision (derived from existing editorial data; no new JSON)
+  //   lead     → area.editorial.overallLabel (a natural per-area sentence)
+  //   choose   → "Choose X if you want: <bestFor tags>."
+  //   watch    → "Think twice if these matter: <watchOut tags>."
+  // The bestFor / watchOut tags are the same editorial values shown in the
+  // Best-for / Watch-out cards, so the quick decision stays consistent.
+  const quickDecision = {
+    lead: area.editorial.overallLabel,
+    chooseLabel: t("quickDecision.chooseLabel"),
+    choose: t("quickDecision.chooseTemplate", {
+      area: area.displayName,
+      reasons: goodFit.slice(0, 3).join(", "),
+    }),
+    watchLabel: t("quickDecision.watchLabel"),
+    watch: t("quickDecision.watchTemplate", {
+      area: area.displayName,
+      cautions: watchBase.join(", "),
+    }),
+  };
 
   // Build the interactive command-map data for every area.
   //
@@ -871,6 +898,43 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
           providers={heroLinks}
         />
 
+        {/* 1b. Quick decision — decision-first, before any score detail.
+            Derived from existing editorial data (overallLabel + bestFor /
+            watchOut tags). Mobile: single column, short, scannable. */}
+        <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">
+            {t("quickDecision.eyebrow")}
+          </p>
+          <p className="mt-2 text-base font-semibold leading-6 text-slate-950 md:text-lg">
+            {quickDecision.lead}
+          </p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-4">
+              <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-[#106b43]">
+                {quickDecision.chooseLabel}
+              </p>
+              <p className="mt-1 text-sm leading-5 text-slate-700">{quickDecision.choose}</p>
+            </div>
+            <div className="rounded-2xl border border-amber-200 bg-amber-50/60 p-4">
+              <p className="text-[11px] font-bold uppercase tracking-[0.08em] text-amber-800">
+                {quickDecision.watchLabel}
+              </p>
+              <p className="mt-1 text-sm leading-5 text-slate-700">{quickDecision.watch}</p>
+            </div>
+          </div>
+        </section>
+
+        {/* 1c. Good fit / Watch out — promoted above the score detail so the
+            "should I stay here?" answer comes before the numbers. */}
+        <AreaFitProfile
+          eyebrow={t("fitProfile.eyebrow")}
+          title={t("fitProfile.title")}
+          goodFitTitle={t("fitProfile.goodFitTitle")}
+          watchOutTitle={t("fitProfile.watchOutTitle")}
+          goodFit={goodFit}
+          watchOut={watchOut}
+        />
+
         {/* 2. Primary score graph */}
         <AreaPrimaryScoreGraph
           eyebrow={t("primaryGraph.eyebrow")}
@@ -898,16 +962,6 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
             alt: t("visuals.areaVibe.alt", { area: area.displayName }),
             caption: t("visuals.areaVibe.caption", { area: area.displayName }),
           }}
-        />
-
-        {/* 4. Good fit / Watch out */}
-        <AreaFitProfile
-          eyebrow={t("fitProfile.eyebrow")}
-          title={t("fitProfile.title")}
-          goodFitTitle={t("fitProfile.goodFitTitle")}
-          watchOutTitle={t("fitProfile.watchOutTitle")}
-          goodFit={goodFit}
-          watchOut={watchOut}
         />
 
         {/* 5. "How this area connects" — interactive Google Maps command map

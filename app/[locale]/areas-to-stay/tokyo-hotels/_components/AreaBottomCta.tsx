@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { ProviderButton } from "@/components/ui/ProviderButton";
+import { HotelAreaProviderRow } from "@/components/affiliate/HotelAreaProviderRow";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import type { AreaProviderLink } from "./types";
 
@@ -32,31 +32,16 @@ export function AreaBottomCta({
       <h2 className="text-xl font-semibold text-slate-950">{title}</h2>
       <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">{body}</p>
 
-      {providers.length > 0 ? (
-        <div className="mt-4 grid gap-3 sm:grid-cols-2 sm:max-w-xl">
-          {providers.map((link) => (
-            <ProviderButton
-              key={`bottom-${link.linkId}`}
-              provider={link.provider}
-              href={link.href}
-              trackingHref={link.trackingHref}
-              placement="tokyo_hotels_bottom"
-              pagePath={pagePath}
-              locale={locale}
-              linkId={link.linkId}
-              subId={link.subId}
-              category="hotel"
-              product="hotel_area_search"
-              area={area.displayName}
-              areaId={area.areaId}
-              city={city}
-              fullWidth
-            >
-              {link.label}
-            </ProviderButton>
-          ))}
-        </div>
-      ) : null}
+      <HotelAreaProviderRow
+        providers={providers}
+        placement="tokyo_hotels_bottom"
+        pagePath={pagePath}
+        locale={locale}
+        area={area}
+        city={city}
+        keyPrefix="bottom"
+        className="mt-4"
+      />
 
       <p className="mt-4">
         <TrackedInternalLink

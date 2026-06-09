@@ -4547,7 +4547,9 @@
         "mixedFit": "混合適配",
         "checkCarefully": "請仔細確認"
       },
-      "fitScoreNote": "依編輯部的旅行適配分數計算（乘客資料、出口複雜度、路線/業者複雜度、無障礙、街道行李壓力、住宿密度）。"
+      "fitScoreNote": "依編輯部的旅行適配分數計算（乘客資料、出口複雜度、路線/業者複雜度、無障礙、街道行李壓力、住宿密度）。",
+      "providerBooking": "在 Booking.com 查看飯店",
+      "providerTrip": "在 Trip.com 查看飯店"
     },
     "glance": {
       "eyebrow": "概觀",
@@ -4626,7 +4628,9 @@
     "bottomCta": {
       "title": "準備好查看價格了嗎？",
       "bodyTemplate": "在信任的網站上比較 {areaWithStation} 附近的實際飯店選擇。",
-      "backLink": "返回 Tokyo Hotel Area Finder"
+      "backLink": "返回 Tokyo Hotel Area Finder",
+      "providerBooking": "在 Booking.com 比較飯店",
+      "providerTrip": "在 Trip.com 比較飯店"
     },
     "legal": {
       "body": "本頁比較的是車站區域而非個別飯店。不保證價格、空房、安全、路線狀況或飯店品質。請務必在合作網站上確認飯店的確切位置、步行路線、取消條件以及最新訂房資訊。"
@@ -4790,6 +4794,13 @@
         "alt": "{area} 與鄰近替代住宿區域的比較",
         "caption": "{area} 與鄰近替代區域並列比較。"
       }
+    },
+    "quickDecision": {
+      "eyebrow": "快速判斷",
+      "chooseTemplate": "如果你想要：{reasons}，就選 {area}。",
+      "watchTemplate": "如果這些對你的行程很重要，請再考慮：{cautions}。",
+      "chooseLabel": "適合入住",
+      "watchLabel": "可能不適合"
     }
   },
   "trainSigns": {

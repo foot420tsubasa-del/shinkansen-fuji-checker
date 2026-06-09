@@ -1,4 +1,4 @@
-import { ProviderButton } from "@/components/ui/ProviderButton";
+import { HotelAreaProviderRow } from "@/components/affiliate/HotelAreaProviderRow";
 import type { AreaProviderLink, AreaScoreView } from "./types";
 import { fitHeadlineLabel } from "./types";
 
@@ -69,31 +69,16 @@ export function AreaHeroSummary({
           </h1>
           <p className="mt-4 max-w-2xl text-sm leading-6 text-slate-600 md:text-base">{intro}</p>
 
-          {providers.length > 0 ? (
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 sm:max-w-xl">
-              {providers.map((link) => (
-                <ProviderButton
-                  key={`hero-${link.linkId}`}
-                  provider={link.provider}
-                  href={link.href}
-                  trackingHref={link.trackingHref}
-                  placement="tokyo_hotels_hero"
-                  pagePath={pagePath}
-                  locale={locale}
-                  linkId={link.linkId}
-                  subId={link.subId}
-                  category="hotel"
-                  product="hotel_area_search"
-                  area={area.displayName}
-                  areaId={area.areaId}
-                  city={city}
-                  fullWidth
-                >
-                  {link.label}
-                </ProviderButton>
-              ))}
-            </div>
-          ) : null}
+          <HotelAreaProviderRow
+            providers={providers}
+            placement="tokyo_hotels_hero"
+            pagePath={pagePath}
+            locale={locale}
+            area={area}
+            city={city}
+            keyPrefix="hero"
+            className="mt-6"
+          />
 
           <p className="mt-3 text-xs leading-5 text-slate-500">{trustNote}</p>
         </div>

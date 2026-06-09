@@ -4548,7 +4548,9 @@
         "mixedFit": "Adecuación mixta",
         "checkCarefully": "Revisa con cuidado"
       },
-      "fitScoreNote": "Basado en la puntuación editorial de adecuación (datos de pasajeros, complejidad de salidas, líneas/operadores, accesibilidad sin escalones, estrés de equipaje en la calle, densidad hotelera)."
+      "fitScoreNote": "Basado en la puntuación editorial de adecuación (datos de pasajeros, complejidad de salidas, líneas/operadores, accesibilidad sin escalones, estrés de equipaje en la calle, densidad hotelera).",
+      "providerBooking": "Ver hoteles en Booking.com",
+      "providerTrip": "Ver hoteles en Trip.com"
     },
     "glance": {
       "eyebrow": "Visión general",
@@ -4627,7 +4629,9 @@
     "bottomCta": {
       "title": "¿Listo para comprobar precios?",
       "bodyTemplate": "Compara opciones reales de hoteles cerca de {areaWithStation} en sitios de confianza.",
-      "backLink": "Volver al Tokyo Hotel Area Finder"
+      "backLink": "Volver al Tokyo Hotel Area Finder",
+      "providerBooking": "Comparar hoteles en Booking.com",
+      "providerTrip": "Comparar hoteles en Trip.com"
     },
     "legal": {
       "body": "Esta página compara áreas de estación, no hoteles individuales. No garantiza precio, disponibilidad, seguridad, condiciones de ruta ni calidad hotelera. Comprueba siempre la ubicación exacta del hotel, la ruta a pie, las condiciones de cancelación y los detalles actuales de la reserva en el sitio del socio."
@@ -4791,6 +4795,13 @@
         "alt": "Comparación de {area} con áreas hoteleras alternativas cercanas",
         "caption": "{area} en paralelo con alternativas cercanas."
       }
+    },
+    "quickDecision": {
+      "eyebrow": "Decisión rápida",
+      "chooseTemplate": "Elige {area} si buscas: {reasons}.",
+      "watchTemplate": "Piénsalo si esto importa en tu viaje: {cautions}.",
+      "chooseLabel": "Alójate aquí si",
+      "watchLabel": "Quizá no si"
     }
   },
   "trainSigns": {

@@ -4547,7 +4547,9 @@
         "mixedFit": "Gemischte Passung",
         "checkCarefully": "Sorgfältig prüfen"
       },
-      "fitScoreNote": "Basierend auf dem redaktionellen Travel-Fit-Score (Fahrgastdaten, Ausgangskomplexität, Linien-/Betreiberkomplexität, Stufenfrei, Straßen-Gepäck-Stress, Hoteldichte)."
+      "fitScoreNote": "Basierend auf dem redaktionellen Travel-Fit-Score (Fahrgastdaten, Ausgangskomplexität, Linien-/Betreiberkomplexität, Stufenfrei, Straßen-Gepäck-Stress, Hoteldichte).",
+      "providerBooking": "Hotels auf Booking.com ansehen",
+      "providerTrip": "Hotels auf Trip.com ansehen"
     },
     "glance": {
       "eyebrow": "Auf einen Blick",
@@ -4626,7 +4628,9 @@
     "bottomCta": {
       "title": "Bereit, Preise zu prüfen?",
       "bodyTemplate": "Vergleiche echte Hoteloptionen in der Nähe von {areaWithStation} auf vertrauenswürdigen Seiten.",
-      "backLink": "Zurück zum Tokyo Hotel Area Finder"
+      "backLink": "Zurück zum Tokyo Hotel Area Finder",
+      "providerBooking": "Hotels auf Booking.com vergleichen",
+      "providerTrip": "Hotels auf Trip.com vergleichen"
     },
     "legal": {
       "body": "Diese Seite vergleicht Bahnhofsgegenden, nicht einzelne Hotels. Sie garantiert weder Preis, Verfügbarkeit, Sicherheit, Streckenbedingungen noch Hotelqualität. Prüfe immer den genauen Hotelstandort, den Fußweg, die Stornobedingungen und die aktuellen Buchungsdetails auf der Partnerseite."
@@ -4790,6 +4794,13 @@
         "alt": "Vergleich von {area} mit benachbarten alternativen Hotelgegenden",
         "caption": "{area} im direkten Vergleich mit Alternativen in der Nähe."
       }
+    },
+    "quickDecision": {
+      "eyebrow": "Schnelle Entscheidung",
+      "chooseTemplate": "Wähle {area}, wenn du willst: {reasons}.",
+      "watchTemplate": "Überlege es dir, wenn dir das wichtig ist: {cautions}.",
+      "chooseLabel": "Übernachte hier, wenn",
+      "watchLabel": "Eher nicht, wenn"
     }
   },
   "trainSigns": {

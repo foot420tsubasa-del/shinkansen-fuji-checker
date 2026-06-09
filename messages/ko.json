@@ -4547,7 +4547,9 @@
         "mixedFit": "혼합 적합",
         "checkCarefully": "주의 깊게 확인"
       },
-      "fitScoreNote": "편집부 travel-fit 점수 기반 (승객 데이터, 출구 복잡도, 노선/운영사 복잡도, 무장애 경로, 거리에서의 짐 스트레스, 숙소 밀도)."
+      "fitScoreNote": "편집부 travel-fit 점수 기반 (승객 데이터, 출구 복잡도, 노선/운영사 복잡도, 무장애 경로, 거리에서의 짐 스트레스, 숙소 밀도).",
+      "providerBooking": "Booking.com에서 호텔 보기",
+      "providerTrip": "Trip.com에서 호텔 보기"
     },
     "glance": {
       "eyebrow": "한눈에 보기",
@@ -4626,7 +4628,9 @@
     "bottomCta": {
       "title": "가격을 확인할 준비가 되셨나요?",
       "bodyTemplate": "{areaWithStation} 근처의 실제 호텔 옵션을 신뢰할 수 있는 사이트에서 비교하세요.",
-      "backLink": "Tokyo Hotel Area Finder로 돌아가기"
+      "backLink": "Tokyo Hotel Area Finder로 돌아가기",
+      "providerBooking": "Booking.com에서 호텔 비교",
+      "providerTrip": "Trip.com에서 호텔 비교"
     },
     "legal": {
       "body": "이 페이지는 호텔이 아닌 역 지역을 비교합니다. 가격, 공실, 안전, 노선 상태, 호텔 품질을 보장하지 않습니다. 호텔 정확한 위치, 도보 경로, 취소 조건, 최신 예약 정보는 항상 파트너 사이트에서 확인하세요."
@@ -4790,6 +4794,13 @@
         "alt": "{area}과 근처 대안 호텔 지역들과의 비교",
         "caption": "{area}과 근처 대안들을 나란히 비교."
       }
+    },
+    "quickDecision": {
+      "eyebrow": "빠른 판단",
+      "chooseTemplate": "{area}을(를) 선택하세요 — 원하는 것이: {reasons}.",
+      "watchTemplate": "여행에서 다음이 중요하다면 다시 생각하세요: {cautions}.",
+      "chooseLabel": "이럴 때 추천",
+      "watchLabel": "이럴 땐 주의"
     }
   },
   "trainSigns": {
