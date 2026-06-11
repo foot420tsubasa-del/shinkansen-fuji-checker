@@ -2754,7 +2754,10 @@
         ],
         "breadcrumbLabel": "東東京"
       }
-    }
+    },
+    "updatedNotice": "這是較舊的微區域指南。要訂房請使用更新後的東京飯店區域頁面。",
+    "seeHotelsCta": "查看 {area} 飯店",
+    "openUpdatedPage": "開啟更新後的飯店區域頁面"
   },
   "firstTimeStayHubs": {
     "kyoto-first-time": {

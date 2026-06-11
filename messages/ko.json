@@ -2754,7 +2754,10 @@
         ],
         "breadcrumbLabel": "동도쿄"
       }
-    }
+    },
+    "updatedNotice": "이 페이지는 예전 마이크로 지역 가이드입니다. 예약하려면 업데이트된 도쿄 호텔 지역 페이지를 이용하세요.",
+    "seeHotelsCta": "{area} 호텔 보기",
+    "openUpdatedPage": "업데이트된 호텔 지역 페이지 열기"
   },
   "firstTimeStayHubs": {
     "kyoto-first-time": {

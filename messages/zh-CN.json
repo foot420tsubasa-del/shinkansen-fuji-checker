@@ -2754,7 +2754,10 @@
         ],
         "breadcrumbLabel": "东东京"
       }
-    }
+    },
+    "updatedNotice": "这是较旧的微区域指南。要订房请使用更新后的东京酒店区域页面。",
+    "seeHotelsCta": "查看 {area} 酒店",
+    "openUpdatedPage": "打开更新后的酒店区域页面"
   },
   "firstTimeStayHubs": {
     "kyoto-first-time": {

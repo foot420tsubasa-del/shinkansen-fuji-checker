@@ -209,6 +209,21 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
   );
 }
 
+/**
+ * These five pages are older micro-area guides. The 36-area hotel detail
+ * pages (/areas-to-stay/tokyo-hotels/<slug>) are now the booking SSOT, so
+ * each old page funnels its PRIMARY action there. east-tokyo spans several
+ * neighbourhoods, so it points at the Tokyo Hotels parent index instead of
+ * forcing a single slug.
+ */
+const updatedHotelPageBySlug: Record<string, string> = {
+  shinjuku: "/areas-to-stay/tokyo-hotels/shinjuku",
+  ueno: "/areas-to-stay/tokyo-hotels/ueno",
+  asakusa: "/areas-to-stay/tokyo-hotels/asakusa",
+  "tokyo-station": "/areas-to-stay/tokyo-hotels/tokyo-station",
+  "east-tokyo": "/areas-to-stay/tokyo-hotels",
+};
+
 function hotelExamples(areaKey?: HotelAreaKey) {
   if (!areaKey) return [];
   return Object.entries(getAllHotelPickLinkConfigs())
@@ -273,6 +288,13 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
         category: "hotel",
       });
 
+  // Primary funnel to the updated 36-area hotel detail page (booking SSOT).
+  const updatedHotelHref = updatedHotelPageBySlug[area] ?? "/areas-to-stay/tokyo-hotels";
+  const updatedHotelLabel =
+    area === "east-tokyo"
+      ? t("openUpdatedPage")
+      : t("seeHotelsCta", { area: localized.breadcrumbLabel });
+
   return (
     <main className="page-shell min-h-screen text-slate-950">
       <SiteHeader />
@@ -282,6 +304,24 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
           { label: t("breadcrumb.hub"), href: "/areas-to-stay/tokyo-first-time" },
           { label: localized.breadcrumbLabel },
         ]} />
+
+        {/* Older micro-area guide → funnel booking intent to the updated
+            36-area hotel detail page (SSOT). Primary CTA, navy filled. */}
+        <div className="mt-4 flex flex-col gap-3 rounded-2xl border border-[#0b214a] bg-[#0b214a]/[0.04] p-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm leading-6 text-slate-700">{t("updatedNotice")}</p>
+          <TrackedCtaLink
+            href={updatedHotelHref}
+            placement="tokyo_area_old_to_detail"
+            label={updatedHotelLabel}
+            pagePath={pagePath}
+            locale={locale}
+            category="hotel"
+            className="inline-flex min-h-11 shrink-0 items-center justify-center gap-1.5 rounded-xl border border-[#0b214a] bg-[#0b214a] px-4 py-2 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#071733]"
+          >
+            {updatedHotelLabel}
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </TrackedCtaLink>
+        </div>
 
         <section className="mt-5 overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-sm">
           {image ? (
@@ -296,15 +336,24 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
               <h1 className="mt-3 text-3xl font-semibold leading-tight text-slate-950 md:text-5xl">{localized.title}</h1>
               <p className="mt-4 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">{localized.subtitle}</p>
             </div>
-            <div>
-              <ProviderChoiceCTA
-                actionLabel={localized.primaryAction}
-                providers={primaryChoices}
+            {/* Hero CTA column. The booking-intent primary is the updated
+                36-area detail page; the direct Booking/Trip affiliate block
+                is kept once, lower on the page, as a secondary option (it
+                duplicated this hero slot). */}
+            <div className="flex flex-col gap-3">
+              <TrackedCtaLink
+                href={updatedHotelHref}
+                placement="tokyo_area_hero_to_detail"
+                label={updatedHotelLabel}
                 pagePath={pagePath}
                 locale={locale}
-                area={localized.areaLabel}
-              />
-              <Link href="/areas-to-stay/tokyo-first-time" className="mt-3 inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-[#2E7D5B] bg-[#2E7D5B] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#246449]">
+                category="hotel"
+                className={buttonClassName({ variant: "hotel", size: "md", fullWidth: true, className: "justify-center" })}
+              >
+                {updatedHotelLabel}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </TrackedCtaLink>
+              <Link href="/areas-to-stay/tokyo-first-time" className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
                 {t("backToHub")}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>

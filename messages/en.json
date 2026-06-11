@@ -2754,7 +2754,10 @@
         ],
         "breadcrumbLabel": "East Tokyo"
       }
-    }
+    },
+    "updatedNotice": "This is an older micro-area guide. To book, use the updated Tokyo hotel area page.",
+    "seeHotelsCta": "See {area} hotels",
+    "openUpdatedPage": "Open the updated hotel area page"
   },
   "firstTimeStayHubs": {
     "kyoto-first-time": {

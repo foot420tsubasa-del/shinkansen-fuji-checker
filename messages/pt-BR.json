@@ -2754,7 +2754,10 @@
         ],
         "breadcrumbLabel": "Leste de Tóquio"
       }
-    }
+    },
+    "updatedNotice": "Este é um guia de micro-área mais antigo. Para reservar, use a página de área de hotéis de Tóquio atualizada.",
+    "seeHotelsCta": "Ver hotéis em {area}",
+    "openUpdatedPage": "Abrir a página de área de hotéis atualizada"
   },
   "firstTimeStayHubs": {
     "kyoto-first-time": {

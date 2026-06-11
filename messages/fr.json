@@ -2754,7 +2754,10 @@
         ],
         "breadcrumbLabel": "Est de Tokyo"
       }
-    }
+    },
+    "updatedNotice": "Ceci est un ancien guide de micro-quartier. Pour réserver, utilise la page de quartier d'hôtels de Tokyo mise à jour.",
+    "seeHotelsCta": "Voir les hôtels de {area}",
+    "openUpdatedPage": "Ouvrir la page de quartier d'hôtels mise à jour"
   },
   "firstTimeStayHubs": {
     "kyoto-first-time": {

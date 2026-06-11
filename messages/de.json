@@ -2754,7 +2754,10 @@
         ],
         "breadcrumbLabel": "Ost-Tokio"
       }
-    }
+    },
+    "updatedNotice": "Dies ist ein älterer Mikro-Gebietsguide. Zum Buchen nutze die aktualisierte Tokio-Hotelgebietsseite.",
+    "seeHotelsCta": "{area}-Hotels ansehen",
+    "openUpdatedPage": "Aktualisierte Hotelgebietsseite öffnen"
   },
   "firstTimeStayHubs": {
     "kyoto-first-time": {

@@ -2754,7 +2754,10 @@
         ],
         "breadcrumbLabel": "Este de Tokio"
       }
-    }
+    },
+    "updatedNotice": "Esta es una guía de microzona más antigua. Para reservar, usa la página de zona de hoteles de Tokio actualizada.",
+    "seeHotelsCta": "Ver hoteles en {area}",
+    "openUpdatedPage": "Abrir la página de zona de hoteles actualizada"
   },
   "firstTimeStayHubs": {
     "kyoto-first-time": {
