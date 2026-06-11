@@ -72,18 +72,19 @@ const tokyoBaseCardConfigs: ReadonlyArray<
 > = [
   {
     key: "shinjuku",
-    href: "/areas-to-stay/tokyo/shinjuku",
+    // Primary funnel → 36-area hotel detail SSOT.
+    href: "/areas-to-stay/tokyo-hotels/shinjuku",
     hotelKeys: ["shinjuku"],
   },
   {
     key: "uenoAsakusa",
-    href: "/areas-to-stay/tokyo/ueno",
-    extraDetailHref: "/areas-to-stay/tokyo/asakusa",
+    href: "/areas-to-stay/tokyo-hotels/ueno",
+    extraDetailHref: "/areas-to-stay/tokyo-hotels/asakusa",
     hotelKeys: ["ueno", "asakusa"],
   },
   {
     key: "tokyoStation",
-    href: "/areas-to-stay/tokyo-station-vs-shinjuku",
+    href: "/areas-to-stay/tokyo-hotels/tokyo-station",
     hotelKeys: ["tokyoStation"],
   },
   {

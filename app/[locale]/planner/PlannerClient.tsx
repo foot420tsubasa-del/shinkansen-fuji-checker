@@ -226,8 +226,8 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     hotelRecommendedAreas: ["Tokyo Station", "Shinjuku"],
     hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
     hotelDetailLinks: [
-      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
-      { label: "Shinjuku details", href: "/areas-to-stay/tokyo/shinjuku" },
+      { label: "See Tokyo Station hotels", href: "/areas-to-stay/tokyo-hotels/tokyo-station" },
+      { label: "See Shinjuku hotels", href: "/areas-to-stay/tokyo-hotels/shinjuku" },
     ],
     hotelActions: [
       { actionLabel: "Compare hotels near Tokyo Station", hotelKey: "tokyoStation", area: "Tokyo: Tokyo Station" },
@@ -260,10 +260,10 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     hotelRecommendedAreas: ["Shinjuku", "Ueno / Asakusa", "Tokyo Station"],
     hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
     hotelDetailLinks: [
-      { label: "Shinjuku details", href: "/areas-to-stay/tokyo/shinjuku" },
-      { label: "Ueno details", href: "/areas-to-stay/tokyo/ueno" },
-      { label: "Asakusa details", href: "/areas-to-stay/tokyo/asakusa" },
-      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
+      { label: "See Shinjuku hotels", href: "/areas-to-stay/tokyo-hotels/shinjuku" },
+      { label: "See Ueno hotels", href: "/areas-to-stay/tokyo-hotels/ueno" },
+      { label: "See Asakusa hotels", href: "/areas-to-stay/tokyo-hotels/asakusa" },
+      { label: "See Tokyo Station hotels", href: "/areas-to-stay/tokyo-hotels/tokyo-station" },
     ],
     hotelActions: [
       { actionLabel: "Compare Shinjuku hotels", hotelKey: "shinjuku", area: "Tokyo: Shinjuku" },
@@ -296,8 +296,8 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     hotelRecommendedAreas: ["Shinjuku", "Tokyo Station"],
     hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
     hotelDetailLinks: [
-      { label: "Shinjuku details", href: "/areas-to-stay/tokyo/shinjuku" },
-      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
+      { label: "See Shinjuku hotels", href: "/areas-to-stay/tokyo-hotels/shinjuku" },
+      { label: "See Tokyo Station hotels", href: "/areas-to-stay/tokyo-hotels/tokyo-station" },
     ],
     hotelActions: [
       { actionLabel: "Compare Shinjuku hotels", hotelKey: "shinjuku", area: "Tokyo: Shinjuku" },
@@ -331,8 +331,8 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     hotelRecommendedAreas: ["Tokyo Station", "Ueno"],
     hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
     hotelDetailLinks: [
-      { label: "Tokyo Station details", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
-      { label: "Ueno details", href: "/areas-to-stay/tokyo/ueno" },
+      { label: "See Tokyo Station hotels", href: "/areas-to-stay/tokyo-hotels/tokyo-station" },
+      { label: "See Ueno hotels", href: "/areas-to-stay/tokyo-hotels/ueno" },
     ],
     hotelActions: [
       { actionLabel: "Compare hotels near Tokyo Station", hotelKey: "tokyoStation", area: "Tokyo: Tokyo Station" },
