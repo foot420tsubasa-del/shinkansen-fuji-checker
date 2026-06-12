@@ -4808,6 +4808,12 @@
       "watchTemplate": "여행에서 다음이 중요하다면 다시 생각하세요: {cautions}.",
       "chooseLabel": "이럴 때 추천",
       "watchLabel": "이럴 땐 주의"
+    },
+    "faqSchema": {
+      "isGoodQ": "{area}은(는) 도쿄에서 숙박하기 좋은 지역인가요?",
+      "isGoodA": "{label} {area}은(는) 공항 접근성, 짐 이동 편의성, 역 단순함, 호텔 선택지를 종합한 fujiseat 호텔 거점 적합도 지수에서 {score}/100점입니다.",
+      "whoQ": "{area}은(는) 어떤 여행자에게 적합한가요?",
+      "watchQ": "{area}에 숙박할 때 주의할 점은 무엇인가요?"
     }
   },
   "trainSigns": {

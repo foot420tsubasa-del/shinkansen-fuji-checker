@@ -29,6 +29,8 @@ export type AffiliatePlacement =
   | "home_hero_secondary"
   | "guide_rail_decision"
   | "guide_top_klook_shinkansen"
+  | "guide_sticky_klook"
+  | "tokyo_hotels_sticky"
   | "guide_top_omio_compare"
   | "guide_top_klook_jr_pass"
   | "guide_jrpass_section_klook"

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { getTranslations } from "next-intl/server";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
-import type { ProviderId } from "@/components/ui/ProviderButton";
+import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
+import { StickyMobileCta } from "@/components/affiliate/StickyMobileCta";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { getAlternates } from "@/i18n/hreflang";
 import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
@@ -681,6 +683,43 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
     }),
   };
 
+  // ----- FAQPage JSON-LD (SEO rich results on the EN revenue pages).
+  // Q&A is assembled from the same editorial data the visible page uses,
+  // so schema content always matches what the reader sees.
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: t("faqSchema.isGoodQ", { area: area.displayName }),
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: t("faqSchema.isGoodA", {
+            label: area.editorial.overallLabel,
+            area: area.displayName,
+            score: score.overallScore,
+          }),
+        },
+      },
+      {
+        "@type": "Question",
+        name: t("faqSchema.whoQ", { area: area.displayName }),
+        acceptedAnswer: { "@type": "Answer", text: goodFit.join(", ") + "." },
+      },
+      {
+        "@type": "Question",
+        name: t("faqSchema.watchQ", { area: area.displayName }),
+        acceptedAnswer: { "@type": "Answer", text: watchOut.join(" ") },
+      },
+    ],
+  };
+
+  // ----- Sticky mobile CTA: keep the Booking.com action reachable while
+  // the reader scrolls the long score/access sections. Booking only —
+  // one action, no Trip crowding, never borrowed URLs.
+  const stickyBookingLink = heroLinks.find((link) => link.provider === "booking_travelpayouts") ?? null;
+
   // Build the interactive command-map data for every area.
   //
   // For Oshiage we keep the existing hand-curated translation block so its
@@ -844,6 +883,11 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
+      <Script
+        id={`faq-schema-tokyo-hotels-${supportedSlug}`}
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <SiteHeader />
 
       <Container className="py-8 md:py-12">
@@ -1038,6 +1082,33 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
       </Container>
 
       <SiteFooter />
+
+      {/* Mobile-only sticky Booking CTA — appears after the hero scrolls
+          away so the booking action stays one thumb-tap away through the
+          long score / access sections. Same link assembly + analytics as
+          the hero row, with its own placement for measurement. */}
+      {stickyBookingLink ? (
+        <StickyMobileCta>
+          <ProviderButton
+            provider={stickyBookingLink.provider}
+            href={stickyBookingLink.href}
+            trackingHref={stickyBookingLink.trackingHref}
+            placement="tokyo_hotels_sticky"
+            pagePath={pagePath}
+            locale={locale}
+            linkId={stickyBookingLink.linkId}
+            subId={stickyBookingLink.subId}
+            category="hotel"
+            product="hotel_area_search"
+            area={area.displayName}
+            areaId={area.id}
+            city="Tokyo"
+            fullWidth
+          >
+            {stickyBookingLink.label}
+          </ProviderButton>
+        </StickyMobileCta>
+      ) : null}
     </main>
   );
 }

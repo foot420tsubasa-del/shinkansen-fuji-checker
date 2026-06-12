@@ -10,6 +10,7 @@ import { SiteFooter } from "@/components/content/SiteFooter";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
+import { StickyMobileCta } from "@/components/affiliate/StickyMobileCta";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 
@@ -1926,6 +1927,31 @@ export default async function GuidePage({ params }: Props) {
         </div>{/* close 2-column grid */}
       </div>
       <SiteFooter />
+
+      {/* Mobile-only sticky Klook CTA — the Shinkansen ticket is this
+          page's highest-value conversion, and the top booking strip
+          scrolls away early in a very long article. Purchase (terracotta)
+          styling per the design system; same affiliate params as the top
+          strip with a dedicated placement for measurement. */}
+      <StickyMobileCta>
+        <TrackedAffiliateLink
+          href={KLOOK_URL}
+          target="_blank"
+          rel={AFFILIATE_REL}
+          category="train"
+          provider="klook"
+          placement="guide_sticky_klook"
+          pagePath="/guide"
+          locale={locale}
+          label="Book Shinkansen ticket on Klook"
+          linkId="shinkansenTicket"
+          product="shinkansen_ticket"
+          adid="1265303"
+          className="inline-flex min-h-12 w-full items-center justify-center gap-1.5 rounded-[12px] border border-[#D94A32] bg-[#D94A32] px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
+        >
+          Book Shinkansen ticket on Klook
+        </TrackedAffiliateLink>
+      </StickyMobileCta>
     </main>
   );
 }

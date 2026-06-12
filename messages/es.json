@@ -4809,6 +4809,12 @@
       "watchTemplate": "Piénsalo si esto importa en tu viaje: {cautions}.",
       "chooseLabel": "Alójate aquí si",
       "watchLabel": "Quizá no si"
+    },
+    "faqSchema": {
+      "isGoodQ": "¿Es {area} una buena zona para alojarse en Tokio?",
+      "isGoodA": "{label} {area} obtiene {score}/100 en el índice de idoneidad de base hotelera de fujiseat, que combina acceso al aeropuerto, facilidad con equipaje, simplicidad de la estación y oferta de hoteles.",
+      "whoQ": "¿Para quién es más adecuado {area}?",
+      "watchQ": "¿Qué debo tener en cuenta al alojarme en {area}?"
     }
   },
   "trainSigns": {

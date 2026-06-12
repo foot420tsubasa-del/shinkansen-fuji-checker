@@ -4808,6 +4808,12 @@
       "watchTemplate": "Überlege es dir, wenn dir das wichtig ist: {cautions}.",
       "chooseLabel": "Übernachte hier, wenn",
       "watchLabel": "Eher nicht, wenn"
+    },
+    "faqSchema": {
+      "isGoodQ": "Ist {area} eine gute Gegend zum Übernachten in Tokio?",
+      "isGoodA": "{label} {area} erreicht {score}/100 im Hotelbasis-Index von fujiseat, der Flughafenzugang, Gepäckfreundlichkeit, Bahnhofs-Einfachheit und Hotelauswahl kombiniert.",
+      "whoQ": "Für wen eignet sich {area} am besten?",
+      "watchQ": "Worauf sollte ich beim Übernachten in {area} achten?"
     }
   },
   "trainSigns": {

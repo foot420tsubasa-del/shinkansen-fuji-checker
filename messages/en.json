@@ -4808,6 +4808,12 @@
       "watchTemplate": "Think twice if these matter for your trip: {cautions}.",
       "chooseLabel": "Stay here if",
       "watchLabel": "Maybe not if"
+    },
+    "faqSchema": {
+      "isGoodQ": "Is {area} a good area to stay in Tokyo?",
+      "isGoodA": "{label} {area} scores {score}/100 in fujiseat's hotel-base fit index, which combines airport access, luggage ease, station simplicity and hotel choice.",
+      "whoQ": "Who should stay in {area}?",
+      "watchQ": "What should I watch out for when staying in {area}?"
     }
   },
   "trainSigns": {

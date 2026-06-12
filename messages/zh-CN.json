@@ -4808,6 +4808,12 @@
       "watchTemplate": "如果这些对你的行程很重要，请再考虑：{cautions}。",
       "chooseLabel": "适合入住",
       "watchLabel": "可能不适合"
+    },
+    "faqSchema": {
+      "isGoodQ": "{area} 是适合在东京住宿的区域吗？",
+      "isGoodA": "{label} {area} 在 fujiseat 酒店基地适配指数中获得 {score}/100 分，该指数综合机场交通、行李便利度、车站简明度与酒店选择。",
+      "whoQ": "{area} 适合什么样的旅客入住？",
+      "watchQ": "入住 {area} 时要注意什么？"
     }
   },
   "trainSigns": {

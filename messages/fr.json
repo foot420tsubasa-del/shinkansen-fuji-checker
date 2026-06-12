@@ -4809,6 +4809,12 @@
       "watchTemplate": "Réfléchis à deux fois si cela compte pour ton voyage : {cautions}.",
       "chooseLabel": "Loge ici si",
       "watchLabel": "Peut-être pas si"
+    },
+    "faqSchema": {
+      "isGoodQ": "{area} est-il un bon quartier où loger à Tokyo ?",
+      "isGoodA": "{label} {area} obtient {score}/100 dans l'indice d'adéquation de base hôtelière de fujiseat, qui combine accès aéroport, facilité bagages, simplicité de la gare et offre hôtelière.",
+      "whoQ": "À qui convient le mieux {area} ?",
+      "watchQ": "À quoi faire attention en logeant à {area} ?"
     }
   },
   "trainSigns": {
