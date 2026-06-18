@@ -219,6 +219,8 @@ const rawStayPages: StayPage[] = [
     ],
     nextActions: [
       { id: "transfer-narita", category: "transfer", title: "Narita to your area", description: "Compare the fastest route to Shinjuku, Ueno, or Asakusa.", cta: "See transfers", href: "/airport-transfers/narita-to-shinjuku" },
+      { id: "compare-asakusa-ueno", category: "stay", title: "Asakusa vs Ueno", description: "Old-town atmosphere vs rail-hub convenience.", cta: "Compare areas", href: "/areas-to-stay/asakusa-vs-ueno" },
+      { id: "compare-tokyo-station-shinjuku", category: "stay", title: "Tokyo Station vs Shinjuku", description: "Shinkansen-side vs nightlife-and-transport hub.", cta: "Compare areas", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
       { id: "itinerary", category: "experience", title: "Plan your Tokyo days", description: "See a sample 7-day Japan itinerary.", cta: "View itinerary", href: "/itineraries/7-day-first-time-japan" },
       ...commonNextActions,
     ],
@@ -487,6 +489,8 @@ const rawStayPages: StayPage[] = [
     ],
     nextActions: [
       { id: "stay-tokyo", category: "stay", title: "Full Tokyo area guide", description: "Compare all four major Tokyo bases.", cta: "See all areas", href: "/areas-to-stay/tokyo-first-time" },
+      { id: "compare-ueno-shinjuku", category: "stay", title: "Ueno vs Shinjuku", description: "Budget rail-hub vs nightlife-and-transport hub.", cta: "Compare areas", href: "/areas-to-stay/ueno-vs-shinjuku" },
+      { id: "compare-asakusa-ueno", category: "stay", title: "Asakusa vs Ueno", description: "Old-town atmosphere vs Narita access.", cta: "Compare areas", href: "/areas-to-stay/asakusa-vs-ueno" },
       { id: "shinkansen-seat", category: "train", title: "Check Fuji-side seat", description: "Find the Mt. Fuji window seat for your route.", cta: "Check seat", href: "/guide" },
       { id: "transfer", category: "transfer", title: "Sort airport transfer", description: "Narita or Haneda to your hotel area.", cta: "Compare transfers", href: "/airport-transfers/narita-to-shinjuku" },
       ...commonNextActions,
@@ -545,6 +549,8 @@ const rawStayPages: StayPage[] = [
     nextActions: [
       { id: "transfer-narita", category: "transfer", title: "Narita to Ueno or Shinjuku", description: "Compare Skyliner, N'EX and bus options.", cta: "Compare transfers", href: "/airport-transfers/narita-to-ueno" },
       { id: "stay-full", category: "stay", title: "Full Tokyo area guide", description: "Add Asakusa and Tokyo Station to the comparison.", cta: "See all areas", href: "/areas-to-stay/tokyo-first-time" },
+      { id: "compare-asakusa-ueno", category: "stay", title: "Asakusa vs Ueno", description: "If you're torn between the two east-side bases.", cta: "Compare areas", href: "/areas-to-stay/asakusa-vs-ueno" },
+      { id: "compare-tokyo-station-shinjuku", category: "stay", title: "Tokyo Station vs Shinjuku", description: "Shinkansen-side vs west-side transport hub.", cta: "Compare areas", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
       { id: "itinerary", category: "experience", title: "7-day Japan itinerary", description: "Place Tokyo, Fuji, Kyoto and Osaka in order.", cta: "View itinerary", href: "/itineraries/7-day-first-time-japan" },
       ...commonNextActions,
     ],
@@ -964,6 +970,8 @@ const rawStayPages: StayPage[] = [
       { id: "narita-asakusa", category: "transfer", title: "Narita → Asakusa", description: "Access Express and other routes from Narita.", cta: "See routes", href: "/airport-transfers/narita-to-asakusa" },
       { id: "narita-ueno", category: "transfer", title: "Narita → Ueno", description: "Skyliner and other routes from Narita.", cta: "See routes", href: "/airport-transfers/narita-to-ueno" },
       { id: "local-oshiage", category: "experience", title: "Explore Oshiage / Skytree area", description: "One stop from Asakusa — local food and Skytree.", cta: "See guide", href: "/local-tokyo/oshiage" },
+      { id: "compare-shinjuku-ueno-asakusa", category: "stay", title: "Add Shinjuku to the comparison", description: "Shinjuku vs Ueno vs Asakusa — three bases side by side.", cta: "Compare areas", href: "/areas-to-stay/shinjuku-vs-ueno-vs-asakusa" },
+      { id: "compare-ueno-shinjuku", category: "stay", title: "Ueno vs Shinjuku", description: "Compare Ueno and Shinjuku directly.", cta: "Compare areas", href: "/areas-to-stay/ueno-vs-shinjuku" },
       { id: "seat", category: "train", title: "Check Fuji-side seat", description: "Find the right window seat for Mt. Fuji views.", cta: "Check seat", href: "/guide" },
       ...commonNextActions,
     ],

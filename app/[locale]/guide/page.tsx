@@ -752,9 +752,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
-  const guideTitle = locale === "en" ? "Which Shinkansen Seat to See Mt. Fuji? Seat E Guide for Tokyo to Kyoto" : t("guideTitle");
+  const guideTitle = locale === "en" ? "Which Shinkansen Seat for Mt. Fuji? Right Side, Seat E" : t("guideTitle");
   const guideDesc = locale === "en"
-    ? "Find the Mt. Fuji side of the Shinkansen before booking. For Tokyo to Kyoto or Osaka, choose the right side and Seat E in standard cars. Includes seat checker, timing, JR Pass notes, and booking tips."
+    ? "Mt. Fuji is on the right going Tokyo→Kyoto/Osaka (left coming back) — book Seat E. Free seat checker finds your exact window seat, plus when Fuji appears and JR Pass tips."
     : t("guideDesc");
   return {
     title: guideTitle,
@@ -1322,28 +1322,41 @@ export default async function GuidePage({ params }: Props) {
   const renderHotelBridge = () => (
     <div className="mt-4 rounded-2xl border border-emerald-100 bg-emerald-50/70 px-4 py-3.5">
       <p className="text-sm font-semibold text-slate-950">
-        Have luggage or an early train? Choose a hotel base before booking your final plan.
+        Staying in Tokyo around your Shinkansen? Pick your hotel area first.
+      </p>
+      <p className="mt-1 text-[12px] leading-5 text-slate-600">
+        The right base near your route saves time with luggage and early trains.
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
         <TrackedInternalLink
-          href="/areas-to-stay/where-to-stay-before-shinkansen"
+          href="/areas-to-stay/tokyo-first-time"
           sourcePage="/guide"
-          placement="guide_hotel_bridge"
-          label="Stay before Shinkansen"
+          placement="guide_to_hotels"
+          label="Where to stay in Tokyo"
           locale={locale}
           className="inline-flex min-h-9 items-center rounded-xl border border-[#2E7D5B] bg-[#2E7D5B] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#246449]"
         >
-          Stay before Shinkansen
+          Where to stay in Tokyo
         </TrackedInternalLink>
         <TrackedInternalLink
-          href="/areas-to-stay/tokyo-hotels"
+          href="/areas-to-stay/tokyo-stay-area-index"
           sourcePage="/guide"
-          placement="guide_hotel_bridge"
-          label="Compare Tokyo hotel areas"
+          placement="guide_to_hotels"
+          label="Compare station areas"
           locale={locale}
           className="inline-flex min-h-9 items-center rounded-xl border border-[#0b214a] bg-[#0b214a] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#081a3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b214a]/30"
         >
-          Compare Tokyo hotel areas
+          Compare station areas
+        </TrackedInternalLink>
+        <TrackedInternalLink
+          href="/areas-to-stay/asakusa-vs-ueno"
+          sourcePage="/guide"
+          placement="guide_to_hotels"
+          label="Ueno or Asakusa?"
+          locale={locale}
+          className="inline-flex min-h-9 items-center rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800 transition-colors hover:border-slate-400 hover:bg-slate-50"
+        >
+          Ueno or Asakusa?
         </TrackedInternalLink>
       </div>
     </div>

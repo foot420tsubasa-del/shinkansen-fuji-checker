@@ -47,6 +47,10 @@ yarn-error.log*
 *gcp*key*.json
 secrets/
 
+# Raw GA4 / GSC exports (private analytics dumps). The generated markdown
+# reports under reports/ are kept; the raw drop folder is not committed.
+reports/raw/
+
 # vercel
 .vercel
 
