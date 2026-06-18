@@ -5067,5 +5067,81 @@
       "title": "So kaufst du eine Suica-Karte — interaktiver Simulator",
       "description": "Kennst du jemanden auf erstem Japan-Trip? Teil diesen Suica-Ticketautomaten-Simulator, damit er sich vor der Landung vertraut machen kann."
     }
+  },
+  "stationPractice": {
+    "ui": {
+      "kicker": "Knoten-Navigation · Test",
+      "goal": "Ziel",
+      "floor": "Ebene",
+      "youAreHere": "Sie sind hier",
+      "stationMap": "Bahnhofsplan",
+      "location": "Sie sind bei",
+      "mission": "Nächster Schritt",
+      "choices": "Welcher Weg?",
+      "hintShow": "Hinweis anzeigen",
+      "hintHide": "Hinweis ausblenden",
+      "correct": "Richtiger Weg",
+      "wrong": "Fast",
+      "continue": "Weiter",
+      "restart": "Neu starten",
+      "back": "Zurück zu den Missionen",
+      "stopOf": "Stopp {current} von {total}",
+      "keyboardHint": "Tipp: 1–3 (oder A–C) zum Wählen, Enter zum Fortfahren.",
+      "clearTitle": "Sie haben den Westausgang (西口) erreicht",
+      "lessons": "Das haben Sie geübt",
+      "playAgain": "Nochmal spielen"
+    },
+    "mission": {
+      "title": "Rote Metro → Westausgang",
+      "subtitle": "Bahnhof Sakura Central · 4 Ebenen nach oben",
+      "goal": "Vom Bahnsteig der roten Metro-Linie (B3) hinauf zum Westausgang (西口) im Erdgeschoss.",
+      "n1": {
+        "loc": "Bahnsteig der roten Metro-Linie (B3)",
+        "step": "Sie sind gerade ausgestiegen. Finden Sie den Weg nach oben zu den Ausgängen.",
+        "hint": "Achten Sie auf die gelben 出口-Schilder (Ausgang) — sie zeigen immer nach oben und hinaus.",
+        "a": "出口 / 上り folgen (Rolltreppe nach oben)",
+        "b": "Weiter den Bahnsteig entlanggehen",
+        "c": "Zur blauen Metro-Linie wechseln",
+        "fb": "Bahnsteige sind Sackgassen zum Verlassen. Folgen Sie den gelben 出口-Schildern nach oben.",
+        "fc": "Das ist der Bahnsteig einer anderen Linie — zum Verlassen müssen Sie nicht umsteigen."
+      },
+      "n2": {
+        "loc": "Metro-Umsteigehalle (B2)",
+        "step": "Weiter nach oben Richtung 中央出口 (Hauptausgang) — nicht durch das Tor einer anderen Linie.",
+        "hint": "Tore mit Linienfarbe führen ZU den Bahnsteigen. Der Ausgang ist mit 中央出口 ausgeschildert.",
+        "a": "中央出口 folgen (hinauf zu B1)",
+        "b": "Durch das Tor der blauen Linie gehen",
+        "c": "Rolltreppe zur Halle im 2. OG",
+        "fb": "Dieses Tor führt zu den Bahnsteigen der blauen Linie, nicht auf die Straße.",
+        "fc": "Die Halle im 2. OG ist für die JR-Linien. Für die Straße folgen Sie 中央出口."
+      },
+      "n3": {
+        "loc": "Unterirdische Ladenpassage (B1)",
+        "step": "Fast auf Straßenniveau — folgen Sie 中央出口 nach oben. Den unterirdischen Gang auslassen.",
+        "hint": "中央出口 mit Aufwärtspfeil führt zum Platz im Erdgeschoss.",
+        "a": "中央出口 folgen (hinauf ins EG)",
+        "b": "Den 東西地下連絡通路 (Gang) nehmen",
+        "c": "Zurück zu den Bahnsteigen",
+        "fb": "Dieser Gang kreuzt nur unter dem Bahnhof. Der Ausgang ist oben, über 中央出口.",
+        "fc": "Falsche Richtung — Sie wollen ins Erdgeschoss hinauf."
+      },
+      "n4": {
+        "loc": "Hauptausgangsplatz (EG)",
+        "step": "Sie sind auf Straßenniveau. Der 西口 (Westausgang) ist links von Ihnen.",
+        "hint": "西 bedeutet West. Das 西口-Schild ist auf der linken Seite des Platzes.",
+        "a": "Zum 西口 (Westausgang, links)",
+        "b": "Zum 東口 (Ostausgang, rechts)",
+        "c": "Zur バスターミナル (Busbahnhof)",
+        "fb": "Das ist die andere Seite — 東 bedeutet Ost. Der 西口 ist links von Ihnen.",
+        "fc": "Der Busbahnhof ist kein Straßenausgang. Nehmen Sie den 西口."
+      },
+      "clear": {
+        "loc": "Westausgang (西口) · Erdgeschoss",
+        "summary": "Gut gemacht. Sie haben die Schilder vom Bahnsteig bis zur Straße gelesen — ohne einen falschen Abzweig.",
+        "l1": "出口 bedeutet immer Ausgang und zeigt nach oben und hinaus.",
+        "l2": "中央出口 ist der zentrale Hauptausgang — Ihr Standardweg zur Straße.",
+        "l3": "西 = West, 東 = Ost. 西口 ist der Westausgang."
+      }
+    }
   }
 }

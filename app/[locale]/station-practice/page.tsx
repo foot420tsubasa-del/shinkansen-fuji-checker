@@ -22,7 +22,17 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-const missionCards = [
+type MissionCardData = {
+  id: string;
+  title: string;
+  description: string;
+  status: string;
+  cta: string;
+  href: string | null;
+  routeLabel: string;
+};
+
+const missionCards: readonly MissionCardData[] = [
   {
     id: "mission-1",
     title: "High-Speed Rail → West Central Gate",
@@ -31,6 +41,7 @@ const missionCards = [
     status: "Playable",
     cta: "Start Mission 1",
     href: "/station-practice/branching",
+    routeLabel: "Branching route",
   },
   {
     id: "mission-2",
@@ -40,17 +51,19 @@ const missionCards = [
     status: "Playable",
     cta: "Start Mission 2",
     href: "/station-practice/branching?mission=2",
+    routeLabel: "Branching route",
   },
   {
     id: "mission-3",
-    title: "Airport Train → Hotel Area Exit",
+    title: "Sakura Central — Red Metro → West Exit",
     description:
-      "Practice your first station arrival route after landing in Japan.",
-    status: "Coming Soon",
-    cta: "Coming Soon",
-    href: null,
+      "New node-navigation mode: walk a 4-floor station from the subway platform up to the street exit. Available in 9 languages.",
+    status: "New",
+    cta: "Try node navigation",
+    href: "/station-practice/sakura",
+    routeLabel: "Node navigation",
   },
-] as const;
+];
 
 const supportCtas = [
   {
@@ -364,7 +377,7 @@ function MissionCard({
         {mission.description}
       </p>
       <div className="mt-6 flex items-center justify-between text-xs text-neutral-500">
-        <span>{mission.href ? "Branching route" : "Future route"}</span>
+        <span>{mission.routeLabel}</span>
         {mission.href ? (
           <span className="inline-flex items-center gap-1 text-yellow-300/80 transition-colors group-hover:text-yellow-200">
             {mission.cta} <ArrowRight className="h-3.5 w-3.5" />

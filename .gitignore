@@ -48,3 +48,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# station-practice raw image sources (428MB) — only the optimized webp subset
+# under public/images/station-practice/sakura/ is committed.
+/station_practice

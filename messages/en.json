@@ -5067,5 +5067,81 @@
       "title": "How to Buy a Suica Card — Interactive Simulator",
       "description": "Know someone visiting Japan for the first time? Share this Suica ticket-machine simulator so they can practice before they land."
     }
+  },
+  "stationPractice": {
+    "ui": {
+      "kicker": "Node navigation · trial",
+      "goal": "Goal",
+      "floor": "Floor",
+      "youAreHere": "You are here",
+      "stationMap": "Station map",
+      "location": "You are at",
+      "mission": "Next step",
+      "choices": "Which way?",
+      "hintShow": "Show hint",
+      "hintHide": "Hide hint",
+      "correct": "Correct route",
+      "wrong": "Not quite",
+      "continue": "Continue",
+      "restart": "Start over",
+      "back": "Back to missions",
+      "stopOf": "Stop {current} of {total}",
+      "keyboardHint": "Tip: press 1–3 (or A–C) to choose, Enter to continue.",
+      "clearTitle": "You reached the West Exit (西口)",
+      "lessons": "What you practised",
+      "playAgain": "Play again"
+    },
+    "mission": {
+      "title": "Red Metro → West Exit",
+      "subtitle": "Sakura Central Station · 4 floors up",
+      "goal": "Get from the Red Metro Line platform (B3) up to the West Exit (西口) on the ground floor.",
+      "n1": {
+        "loc": "Red Metro Line platform (B3)",
+        "step": "You just got off the train. Find the way up toward the exits.",
+        "hint": "Look for the yellow 出口 (Exit) signs — they always point up and out.",
+        "a": "Follow 出口 / 上り (escalator up)",
+        "b": "Walk further down the platform",
+        "c": "Cross to the Blue Metro Line",
+        "fb": "Platforms are dead-ends for leaving. Follow the yellow 出口 (Exit) signs upward.",
+        "fc": "That's another line's platform — you don't need to change trains to get out."
+      },
+      "n2": {
+        "loc": "Subway Transfer Hall (B2)",
+        "step": "Keep heading up toward 中央出口 (Central Exit) — don't go through another line's gate.",
+        "hint": "Gates with a line colour lead INTO platforms. The exit is signed 中央出口.",
+        "a": "Follow 中央出口 (up to B1)",
+        "b": "Enter the Blue Metro Line gate",
+        "c": "Escalator up to the 2F concourse",
+        "fb": "That gate leads to the Blue Line platforms, not the street.",
+        "fc": "The 2F concourse is for the JR lines. For the street exit, follow 中央出口."
+      },
+      "n3": {
+        "loc": "Underground Mall (B1)",
+        "step": "Almost at street level — follow 中央出口 up. Skip the underground passage.",
+        "hint": "中央出口 with an up-arrow takes you to the ground-floor plaza.",
+        "a": "Follow 中央出口 (up to 1F)",
+        "b": "Take the 東西地下連絡通路 (passage)",
+        "c": "Go back down to the platforms",
+        "fb": "That passage only crosses under the station. The exit is up, via 中央出口.",
+        "fc": "Wrong way — you want to go up to the ground floor."
+      },
+      "n4": {
+        "loc": "Central Exit Plaza (1F)",
+        "step": "You're at ground level. The 西口 (West Exit) is on your left.",
+        "hint": "西 means west. The 西口 sign is on the left side of the plaza.",
+        "a": "Go to 西口 (West Exit, left)",
+        "b": "Go to 東口 (East Exit, right)",
+        "c": "Head to the バスターミナル (Bus Terminal)",
+        "fb": "That's the opposite side — 東 means east. The 西口 is to your left.",
+        "fc": "The bus terminal isn't a street exit. Take the 西口 (West Exit)."
+      },
+      "clear": {
+        "loc": "West Exit (西口) · ground level",
+        "summary": "Nicely done. You read the signs from the platform all the way to the street — no wrong turns needed.",
+        "l1": "出口 always means exit, and points up & out.",
+        "l2": "中央出口 is the main central exit — your default way to the street.",
+        "l3": "西 = west, 東 = east. 西口 is the West Exit."
+      }
+    }
   }
 }

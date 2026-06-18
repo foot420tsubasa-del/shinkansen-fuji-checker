@@ -5068,5 +5068,81 @@
       "title": "Comment acheter une carte Suica — simulateur interactif",
       "description": "Tu connais quelqu'un qui visite le Japon pour la première fois ? Partage-lui ce simulateur de distributeur Suica pour qu'il s'entraîne avant l'arrivée."
     }
+  },
+  "stationPractice": {
+    "ui": {
+      "kicker": "Navigation par nœuds · essai",
+      "goal": "Objectif",
+      "floor": "Niveau",
+      "youAreHere": "Vous êtes ici",
+      "stationMap": "Plan de la gare",
+      "location": "Vous êtes à",
+      "mission": "Étape suivante",
+      "choices": "Par où ?",
+      "hintShow": "Afficher l'indice",
+      "hintHide": "Masquer l'indice",
+      "correct": "Bon itinéraire",
+      "wrong": "Presque",
+      "continue": "Continuer",
+      "restart": "Recommencer",
+      "back": "Retour aux missions",
+      "stopOf": "Arrêt {current} sur {total}",
+      "keyboardHint": "Astuce : appuyez sur 1–3 (ou A–C) pour choisir, Entrée pour continuer.",
+      "clearTitle": "Vous avez atteint la Sortie Ouest (西口)",
+      "lessons": "Ce que vous avez travaillé",
+      "playAgain": "Rejouer"
+    },
+    "mission": {
+      "title": "Métro Rouge → Sortie Ouest",
+      "subtitle": "Gare Sakura Central · 4 niveaux à remonter",
+      "goal": "Allez du quai de la ligne Rouge du métro (B3) jusqu'à la Sortie Ouest (西口) au rez-de-chaussée.",
+      "n1": {
+        "loc": "Quai de la ligne Rouge (B3)",
+        "step": "Vous venez de descendre du train. Trouvez le chemin vers le haut, vers les sorties.",
+        "hint": "Cherchez les panneaux jaunes 出口 (Sortie) — ils pointent toujours vers le haut et l'extérieur.",
+        "a": "Suivez 出口 / 上り (escalator vers le haut)",
+        "b": "Marchez plus loin sur le quai",
+        "c": "Passez à la ligne Bleue",
+        "fb": "Les quais sont des impasses pour sortir. Suivez les panneaux jaunes 出口 vers le haut.",
+        "fc": "C'est le quai d'une autre ligne — pas besoin de changer de train pour sortir."
+      },
+      "n2": {
+        "loc": "Hall de correspondance du métro (B2)",
+        "step": "Continuez à monter vers 中央出口 (Sortie Centrale) — n'entrez pas par la porte d'une autre ligne.",
+        "hint": "Les portiques aux couleurs de ligne mènent AUX quais. La sortie est indiquée 中央出口.",
+        "a": "Suivez 中央出口 (montée vers B1)",
+        "b": "Entrez par le portique de la ligne Bleue",
+        "c": "Escalator vers le hall du 2e niveau",
+        "fb": "Ce portique mène aux quais de la ligne Bleue, pas à la rue.",
+        "fc": "Le hall du 2e niveau est pour les lignes JR. Pour la rue, suivez 中央出口."
+      },
+      "n3": {
+        "loc": "Galerie souterraine (B1)",
+        "step": "Presque au niveau de la rue — suivez 中央出口 vers le haut. Évitez le passage souterrain.",
+        "hint": "中央出口 avec une flèche vers le haut mène à l'esplanade du rez-de-chaussée.",
+        "a": "Suivez 中央出口 (montée vers le 1er niveau)",
+        "b": "Prenez le 東西地下連絡通路 (passage)",
+        "c": "Redescendez vers les quais",
+        "fb": "Ce passage ne fait que traverser sous la gare. La sortie est en haut, via 中央出口.",
+        "fc": "Mauvais sens — vous voulez monter au rez-de-chaussée."
+      },
+      "n4": {
+        "loc": "Esplanade de la Sortie Centrale (RdC)",
+        "step": "Vous êtes au niveau de la rue. La 西口 (Sortie Ouest) est sur votre gauche.",
+        "hint": "西 signifie ouest. Le panneau 西口 est du côté gauche de l'esplanade.",
+        "a": "Allez vers 西口 (Sortie Ouest, gauche)",
+        "b": "Allez vers 東口 (Sortie Est, droite)",
+        "c": "Dirigez-vous vers la バスターミナル (Gare routière)",
+        "fb": "C'est le côté opposé — 東 signifie est. La 西口 est sur votre gauche.",
+        "fc": "La gare routière n'est pas une sortie sur rue. Prenez la 西口."
+      },
+      "clear": {
+        "loc": "Sortie Ouest (西口) · rez-de-chaussée",
+        "summary": "Bien joué. Vous avez lu les panneaux du quai jusqu'à la rue, sans un seul faux pas.",
+        "l1": "出口 signifie toujours sortie et pointe vers le haut et l'extérieur.",
+        "l2": "中央出口 est la sortie centrale principale — votre itinéraire par défaut vers la rue.",
+        "l3": "西 = ouest, 東 = est. 西口 est la Sortie Ouest."
+      }
+    }
   }
 }
