@@ -1,19 +1,21 @@
 /**
- * Sakura Central Station — full free-walk node graph (all 7 floors).
+ * Sakura Central Station — dense free-walk node graph (all 7 floors).
  *
- * A Street-View / Myst-style navigable map of the whole station, B3 → 4F.
- * Each node is one POV viewpoint; each exit is a directional hotspot overlaid
- * on the scene that walks you to a connected viewpoint. Movement is free — take
- * detours, ride up to the observation deck, backtrack — and you navigate by
- * reading the Japanese wayfinding signs toward your goal.
+ * A Street-View / Myst-style navigable map of the whole station, B3 → 4F, with
+ * each floor built as a small walkable MESH (6–8 viewpoints) rather than a
+ * single corridor — so you can genuinely wander, take detours, ride up to the
+ * observation deck, and backtrack. You navigate by reading the Japanese
+ * wayfinding signs toward your goal.
  *
- * Two missions share this one graph:
- *   - west: B3 Red Metro platform → 1F 西口 (West Exit)   [underground spine]
- *   - jr:   B3 Red Metro platform → 3F JR平台 (JR platform) [subway → JR transfer]
+ * Two missions share this one graph (BFS auto-routes whichever is active):
+ *   - west: B3 Red Metro platform → 1F 西口 (West Exit)
+ *   - jr:   B3 Red Metro platform → 3F JR platform (subway → JR transfer)
  *
  * Copy lives in messages/*.json under `stationPractice.mission.*`; this file is
  * language-agnostic. Japanese sign tokens stay verbatim in the copy.
  */
+
+import { exploreNodes, exploreHubLinks } from "./explore";
 
 export type ExitDir = "up" | "down" | "left" | "right";
 
@@ -21,172 +23,272 @@ export type SakuraExit = {
   to: string;
   /** i18n key under mission.exits.* */
   labelKey: string;
-  /** Placement zone + arrow direction of the hotspot. */
   dir: ExitDir;
 };
 
 export type SakuraNode = {
   id: string;
   floor: string;
-  /** Scene still (without extension) under .../sakura/. */
   image: string;
-  /** Floor blueprint (without extension) used as the minimap. */
   blueprint: string;
-  /** "You are here" marker position as % of the blueprint image. */
   marker: { x: number; y: number };
-  /** i18n keys under mission.nodes.{names,caps}.* */
   nameKey: string;
   captionKey: string;
+  /** Sequence number for generic "explore" viewpoints (rendered after the name). */
+  view?: number;
   exits: SakuraExit[];
 };
 
-/** Floors top → bottom (for the minimap rail). */
 export const SAKURA_FLOORS = ["4F", "3F", "2F", "1F", "B1", "B2", "B3"] as const;
-
 export const SAKURA_IMAGE_BASE = "/images/station-practice/sakura";
 
-const nodes: Record<string, SakuraNode> = {
-  // ---- B3 · Metro platforms ----
-  "b3-platform": {
-    id: "b3-platform", floor: "B3", image: "b3-red-platform", blueprint: "blueprint-b3",
-    marker: { x: 50, y: 58 }, nameKey: "b3Platform", captionKey: "b3Platform",
-    exits: [
-      { to: "b3-concourse", labelKey: "toB3Concourse", dir: "up" },
-      { to: "b3-end", labelKey: "b3PlatformEnd", dir: "right" },
-    ],
-  },
-  "b3-end": {
-    id: "b3-end", floor: "B3", image: "b3-platform-end", blueprint: "blueprint-b3",
-    marker: { x: 72, y: 42 }, nameKey: "b3End", captionKey: "b3End",
-    exits: [{ to: "b3-platform", labelKey: "backToPlatform", dir: "down" }],
-  },
-  "b3-concourse": {
-    id: "b3-concourse", floor: "B3", image: "b3-concourse", blueprint: "blueprint-b3",
-    marker: { x: 50, y: 40 }, nameKey: "b3Concourse", captionKey: "b3Concourse",
-    exits: [
-      { to: "b2-hall", labelKey: "escUpToB2", dir: "up" },
-      { to: "b3-platform", labelKey: "backToPlatform", dir: "down" },
-    ],
-  },
+// Shorthand for terser node definitions.
+const n = (
+  id: string,
+  floor: string,
+  image: string,
+  blueprint: string,
+  marker: { x: number; y: number },
+  key: string,
+  exits: SakuraExit[],
+): [string, SakuraNode] => [
+  id,
+  { id, floor, image, blueprint, marker, nameKey: key, captionKey: key, exits },
+];
+const e = (to: string, labelKey: string, dir: ExitDir): SakuraExit => ({ to, labelKey, dir });
 
-  // ---- B2 · Subway transfer hall ----
-  "b2-hall": {
-    id: "b2-hall", floor: "B2", image: "b2-hall", blueprint: "blueprint-b2",
-    marker: { x: 50, y: 50 }, nameKey: "b2Hall", captionKey: "b2Hall",
-    exits: [
-      { to: "b1-mall", labelKey: "toB1West", dir: "up" },
-      { to: "b2-platdir", labelKey: "b2PlatformDirs", dir: "right" },
-    ],
-  },
-  "b2-platdir": {
-    id: "b2-platdir", floor: "B2", image: "b2-transfer-hall", blueprint: "blueprint-b2",
-    marker: { x: 34, y: 56 }, nameKey: "b2Platdir", captionKey: "b2Platdir",
-    exits: [{ to: "b2-hall", labelKey: "backToHall", dir: "down" }],
-  },
+const BP_B3 = "blueprint-b3";
+const BP_B2 = "blueprint-b2";
+const BP_B1 = "blueprint-b1";
+const BP_1F = "blueprint-1f";
+const BP_2F = "blueprint-2f";
+const BP_3F = "blueprint-3f";
+const BP_4F = "blueprint-4f";
 
-  // ---- B1 · Underground mall ----
-  "b1-mall": {
-    id: "b1-mall", floor: "B1", image: "b1-underground-mall", blueprint: "blueprint-b1",
-    marker: { x: 48, y: 60 }, nameKey: "b1Mall", captionKey: "b1Mall",
-    exits: [
-      { to: "f1-concourse", labelKey: "toCentralExit1F", dir: "up" },
-      { to: "b1-shops", labelKey: "b1Shops", dir: "right" },
-    ],
-  },
-  "b1-shops": {
-    id: "b1-shops", floor: "B1", image: "b1-shops", blueprint: "blueprint-b1",
-    marker: { x: 66, y: 46 }, nameKey: "b1Shops", captionKey: "b1Shops",
-    exits: [{ to: "b1-mall", labelKey: "backToMall", dir: "down" }],
-  },
+const nodes: Record<string, SakuraNode> = Object.fromEntries([
+  // ---------------------------------------------------------------- B3
+  n("b3-platform", "B3", "b3-red-platform", BP_B3, { x: 50, y: 58 }, "b3Platform", [
+    e("b3-concourse", "toB3Concourse", "up"),
+    e("b3-platform-mid", "goRight", "right"),
+    e("b3-end", "b3PlatformEnd", "left"),
+  ]),
+  n("b3-end", "B3", "b3-platform-end", BP_B3, { x: 72, y: 42 }, "b3End", [
+    e("b3-platform", "backToPlatform", "right"),
+  ]),
+  n("b3-platform-mid", "B3", "b3-platform-mid", BP_B3, { x: 40, y: 64 }, "b3PlatformMid", [
+    e("b3-platform", "goBack", "left"),
+    e("b3-platform-far", "goRight", "right"),
+    e("b3-gate-hall", "goUp", "up"),
+  ]),
+  n("b3-platform-far", "B3", "b3-platform-far", BP_B3, { x: 28, y: 70 }, "b3PlatformFar", [
+    e("b3-platform-mid", "goBack", "down"),
+  ]),
+  n("b3-gate-hall", "B3", "b3-gate-hall", BP_B3, { x: 44, y: 46 }, "b3GateHall", [
+    e("b3-platform-mid", "goBack", "down"),
+    e("b3-gates", "goRight", "right"),
+    e("b3-concourse", "goUp", "up"),
+  ]),
+  n("b3-gates", "B3", "b3-gates", BP_B3, { x: 60, y: 44 }, "b3Gates", [
+    e("b3-gate-hall", "goBack", "left"),
+    e("b3-down-corridor", "goDown", "down"),
+  ]),
+  n("b3-down-corridor", "B3", "b3-down-corridor", BP_B3, { x: 66, y: 60 }, "b3DownCorridor", [
+    e("b3-gates", "goBack", "up"),
+  ]),
+  n("b3-concourse", "B3", "b3-concourse", BP_B3, { x: 50, y: 40 }, "b3Concourse", [
+    e("b2-hall", "escUpToB2", "up"),
+    e("b3-platform", "backToPlatform", "down"),
+    e("b3-gate-hall", "goLeft", "left"),
+  ]),
 
-  // ---- 1F · Ground-level exits ----
-  "f1-concourse": {
-    id: "f1-concourse", floor: "1F", image: "1f-central-plaza", blueprint: "blueprint-1f",
-    marker: { x: 42, y: 55 }, nameKey: "f1Concourse", captionKey: "f1Concourse",
-    exits: [
-      { to: "f1-west", labelKey: "west", dir: "left" },
-      { to: "f2-concourse", labelKey: "to2FConcourse", dir: "up" },
-      { to: "f1-plaza", labelKey: "centralPlazaOutside", dir: "right" },
-    ],
-  },
-  "f1-plaza": {
-    id: "f1-plaza", floor: "1F", image: "1f-plaza-outdoor", blueprint: "blueprint-1f",
-    marker: { x: 42, y: 82 }, nameKey: "f1Plaza", captionKey: "f1Plaza",
-    exits: [{ to: "f1-concourse", labelKey: "backIndoors", dir: "down" }],
-  },
-  "f1-west": {
-    id: "f1-west", floor: "1F", image: "1f-west-exit", blueprint: "blueprint-1f",
-    marker: { x: 22, y: 54 }, nameKey: "f1West", captionKey: "f1West",
-    exits: [{ to: "f1-concourse", labelKey: "backGeneric", dir: "down" }],
-  },
+  // ---------------------------------------------------------------- B2
+  n("b2-hall", "B2", "b2-hall", BP_B2, { x: 50, y: 50 }, "b2Hall", [
+    e("b1-mall", "toB1West", "up"),
+    e("b2-platdir", "b2PlatformDirs", "right"),
+    e("b2-concourse", "goLeft", "left"),
+    e("b3-concourse", "goDown", "down"),
+  ]),
+  n("b2-platdir", "B2", "b2-transfer-hall", BP_B2, { x: 34, y: 56 }, "b2Platdir", [
+    e("b2-hall", "backToHall", "down"),
+  ]),
+  n("b2-concourse", "B2", "b2-concourse", BP_B2, { x: 40, y: 44 }, "b2Concourse", [
+    e("b2-hall", "goBack", "right"),
+    e("b2-rotunda", "goLeft", "left"),
+    e("b2-line-gates", "goUp", "up"),
+  ]),
+  n("b2-rotunda", "B2", "b2-rotunda", BP_B2, { x: 30, y: 50 }, "b2Rotunda", [
+    e("b2-concourse", "goBack", "right"),
+    e("b2-line-corridor", "goLeft", "left"),
+    e("b2-shops", "goDown", "down"),
+  ]),
+  n("b2-line-gates", "B2", "b2-line-gates", BP_B2, { x: 44, y: 34 }, "b2LineGates", [
+    e("b2-concourse", "goBack", "down"),
+  ]),
+  n("b2-line-corridor", "B2", "b2-line-corridor", BP_B2, { x: 20, y: 50 }, "b2LineCorridor", [
+    e("b2-rotunda", "goBack", "right"),
+  ]),
+  n("b2-shops", "B2", "b2-shops", BP_B2, { x: 30, y: 64 }, "b2Shops", [
+    e("b2-rotunda", "goBack", "up"),
+  ]),
 
-  // ---- 2F · Main concourse ----
-  "f2-concourse": {
-    id: "f2-concourse", floor: "2F", image: "f2-concourse", blueprint: "blueprint-2f",
-    marker: { x: 50, y: 52 }, nameKey: "f2Concourse", captionKey: "f2Concourse",
-    exits: [
-      { to: "f2-jrgates", labelKey: "toJrGates", dir: "up" },
-      { to: "f2-westhall", labelKey: "f2WestHall", dir: "left" },
-      { to: "f1-concourse", labelKey: "down1FExits", dir: "down" },
-    ],
-  },
-  "f2-jrgates": {
-    id: "f2-jrgates", floor: "2F", image: "f2-jrgates", blueprint: "blueprint-2f",
-    marker: { x: 50, y: 38 }, nameKey: "f2Jrgates", captionKey: "f2Jrgates",
-    exits: [
-      { to: "f3-jr-concourse", labelKey: "escUpTo3FJr", dir: "up" },
-      { to: "f2-concourse", labelKey: "backToConcourse2F", dir: "down" },
-    ],
-  },
-  "f2-westhall": {
-    id: "f2-westhall", floor: "2F", image: "f2-westhall", blueprint: "blueprint-2f",
-    marker: { x: 24, y: 52 }, nameKey: "f2Westhall", captionKey: "f2Westhall",
-    exits: [{ to: "f2-concourse", labelKey: "backToConcourse2F", dir: "down" }],
-  },
+  // ---------------------------------------------------------------- B1
+  n("b1-mall", "B1", "b1-underground-mall", BP_B1, { x: 48, y: 60 }, "b1Mall", [
+    e("f1-concourse", "toCentralExit1F", "up"),
+    e("b2-hall", "goDown", "down"),
+    e("b1-shops", "b1Shops", "right"),
+    e("b1-concourse", "goLeft", "left"),
+  ]),
+  n("b1-shops", "B1", "b1-shops", BP_B1, { x: 66, y: 46 }, "b1Shops", [
+    e("b1-mall", "backToMall", "down"),
+  ]),
+  n("b1-concourse", "B1", "b1-concourse", BP_B1, { x: 36, y: 58 }, "b1Concourse", [
+    e("b1-mall", "goBack", "right"),
+    e("b1-foodhall", "goLeft", "left"),
+    e("b1-junction", "goUp", "up"),
+  ]),
+  n("b1-foodhall", "B1", "b1-foodhall", BP_B1, { x: 24, y: 56 }, "b1Foodhall", [
+    e("b1-concourse", "goBack", "right"),
+  ]),
+  n("b1-junction", "B1", "b1-junction", BP_B1, { x: 40, y: 44 }, "b1Junction", [
+    e("b1-concourse", "goBack", "down"),
+    e("b1-crossing", "goRight", "right"),
+    e("b1-up-escalator", "goUp", "up"),
+  ]),
+  n("b1-crossing", "B1", "b1-crossing", BP_B1, { x: 56, y: 42 }, "b1Crossing", [
+    e("b1-junction", "goBack", "left"),
+  ]),
+  n("b1-up-escalator", "B1", "b1-up-escalator", BP_B1, { x: 42, y: 30 }, "b1UpEscalator", [
+    e("f1-concourse", "toCentralExit1F", "up"),
+    e("b1-junction", "goBack", "down"),
+  ]),
 
-  // ---- 3F · JR platforms & North Deck ----
-  "f3-jr-concourse": {
-    id: "f3-jr-concourse", floor: "3F", image: "f3-jr-concourse", blueprint: "blueprint-3f",
-    marker: { x: 50, y: 60 }, nameKey: "f3JrConcourse", captionKey: "f3JrConcourse",
-    exits: [
-      { to: "f3-jr-platform", labelKey: "toJrPlatform", dir: "left" },
-      { to: "f4-sky", labelKey: "escUpTo4F", dir: "up" },
-      { to: "f3-northdeck", labelKey: "f3NorthDeck", dir: "right" },
-      { to: "f2-jrgates", labelKey: "backToGates", dir: "down" },
-    ],
-  },
-  "f3-jr-platform": {
-    id: "f3-jr-platform", floor: "3F", image: "f3-jr-platform", blueprint: "blueprint-3f",
-    marker: { x: 50, y: 40 }, nameKey: "f3JrPlatform", captionKey: "f3JrPlatform",
-    exits: [{ to: "f3-jr-concourse", labelKey: "backToJrConcourse", dir: "down" }],
-  },
-  "f3-northdeck": {
-    id: "f3-northdeck", floor: "3F", image: "f3-northdeck", blueprint: "blueprint-3f",
-    marker: { x: 50, y: 20 }, nameKey: "f3Northdeck", captionKey: "f3Northdeck",
-    exits: [{ to: "f3-jr-concourse", labelKey: "backToJrConcourse", dir: "down" }],
-  },
+  // ---------------------------------------------------------------- 1F
+  n("f1-concourse", "1F", "1f-central-plaza", BP_1F, { x: 42, y: 55 }, "f1Concourse", [
+    e("f1-west", "west", "left"),
+    e("f2-concourse", "to2FConcourse", "up"),
+    e("b1-mall", "goDown", "down"),
+    e("f1-concourse-2", "goRight", "right"),
+  ]),
+  n("f1-west", "1F", "1f-west-exit", BP_1F, { x: 22, y: 54 }, "f1West", [
+    e("f1-concourse", "backGeneric", "down"),
+  ]),
+  n("f1-plaza", "1F", "1f-plaza-outdoor", BP_1F, { x: 42, y: 82 }, "f1Plaza", [
+    e("f1-concourse-2", "backIndoors", "down"),
+  ]),
+  n("f1-concourse-2", "1F", "1f-concourse-2", BP_1F, { x: 54, y: 55 }, "f1Concourse2", [
+    e("f1-concourse", "goBack", "left"),
+    e("f1-glass-exit", "goRight", "right"),
+    e("f1-plaza", "centralPlazaOutside", "up"),
+  ]),
+  n("f1-glass-exit", "1F", "1f-glass-exit", BP_1F, { x: 68, y: 50 }, "f1GlassExit", [
+    e("f1-concourse-2", "goBack", "left"),
+    e("f1-east-street", "goDown", "down"),
+  ]),
+  n("f1-east-street", "1F", "1f-east-street", BP_1F, { x: 78, y: 64 }, "f1EastStreet", [
+    e("f1-glass-exit", "goBack", "up"),
+    e("f1-outdoor-street", "goRight", "right"),
+  ]),
+  n("f1-outdoor-street", "1F", "1f-outdoor-street", BP_1F, { x: 88, y: 70 }, "f1OutdoorStreet", [
+    e("f1-east-street", "goBack", "left"),
+  ]),
 
-  // ---- 4F · Hotel Skyway & Observation Deck ----
-  "f4-sky": {
-    id: "f4-sky", floor: "4F", image: "f4-sky", blueprint: "blueprint-4f",
-    marker: { x: 50, y: 55 }, nameKey: "f4Sky", captionKey: "f4Sky",
-    exits: [
-      { to: "f4-observation", labelKey: "f4Observation", dir: "right" },
-      { to: "f4-restaurants", labelKey: "f4Restaurants", dir: "left" },
-      { to: "f3-jr-concourse", labelKey: "backDownToJr", dir: "down" },
-    ],
-  },
-  "f4-observation": {
-    id: "f4-observation", floor: "4F", image: "f4-observation", blueprint: "blueprint-4f",
-    marker: { x: 50, y: 28 }, nameKey: "f4Observation", captionKey: "f4Observation",
-    exits: [{ to: "f4-sky", labelKey: "backToSky", dir: "down" }],
-  },
-  "f4-restaurants": {
-    id: "f4-restaurants", floor: "4F", image: "f4-restaurants", blueprint: "blueprint-4f",
-    marker: { x: 22, y: 55 }, nameKey: "f4Restaurants", captionKey: "f4Restaurants",
-    exits: [{ to: "f4-sky", labelKey: "backToSky", dir: "down" }],
-  },
-};
+  // ---------------------------------------------------------------- 2F
+  n("f2-concourse", "2F", "f2-concourse", BP_2F, { x: 50, y: 52 }, "f2Concourse", [
+    e("f2-jrgates", "toJrGates", "up"),
+    e("f2-westhall", "f2WestHall", "left"),
+    e("f1-concourse", "down1FExits", "down"),
+    e("f2-concourse-2", "goRight", "right"),
+  ]),
+  n("f2-jrgates", "2F", "f2-jrgates", BP_2F, { x: 50, y: 38 }, "f2Jrgates", [
+    e("f3-jr-concourse", "escUpTo3FJr", "up"),
+    e("f2-concourse", "backToConcourse2F", "down"),
+  ]),
+  n("f2-westhall", "2F", "f2-westhall", BP_2F, { x: 24, y: 52 }, "f2Westhall", [
+    e("f2-concourse", "backToConcourse2F", "down"),
+  ]),
+  n("f2-concourse-2", "2F", "f2-concourse-2", BP_2F, { x: 62, y: 52 }, "f2Concourse2", [
+    e("f2-concourse", "goBack", "left"),
+    e("f2-east-hall", "goRight", "right"),
+    e("f2-fare-gates", "goUp", "up"),
+  ]),
+  n("f2-fare-gates", "2F", "f2-fare-gates", BP_2F, { x: 56, y: 38 }, "f2FareGates", [
+    e("f2-concourse-2", "goBack", "down"),
+  ]),
+  n("f2-east-hall", "2F", "f2-east-hall", BP_2F, { x: 76, y: 52 }, "f2EastHall", [
+    e("f2-concourse-2", "goBack", "left"),
+    e("f2-corridor", "goDown", "down"),
+  ]),
+  n("f2-corridor", "2F", "f2-corridor", BP_2F, { x: 76, y: 64 }, "f2Corridor", [
+    e("f2-east-hall", "goBack", "up"),
+  ]),
+
+  // ---------------------------------------------------------------- 3F
+  n("f3-jr-concourse", "3F", "f3-jr-concourse", BP_3F, { x: 50, y: 60 }, "f3JrConcourse", [
+    e("f3-jr-platform", "toJrPlatform", "left"),
+    e("f4-sky", "escUpTo4F", "up"),
+    e("f3-northdeck", "f3NorthDeck", "right"),
+    e("f2-jrgates", "backToGates", "down"),
+  ]),
+  n("f3-jr-platform", "3F", "f3-jr-platform", BP_3F, { x: 40, y: 44 }, "f3JrPlatform", [
+    e("f3-jr-concourse", "backToJrConcourse", "down"),
+    e("f3-platform-green", "goRight", "right"),
+  ]),
+  n("f3-platform-green", "3F", "f3-platform-green", BP_3F, { x: 30, y: 44 }, "f3PlatformGreen", [
+    e("f3-jr-platform", "goBack", "left"),
+    e("f3-platform-twin", "goRight", "right"),
+  ]),
+  n("f3-platform-twin", "3F", "f3-platform-twin", BP_3F, { x: 22, y: 40 }, "f3PlatformTwin", [
+    e("f3-platform-green", "goBack", "left"),
+    e("f3-platform-overview", "goUp", "up"),
+  ]),
+  n("f3-platform-overview", "3F", "f3-platform-overview", BP_3F, { x: 24, y: 26 }, "f3PlatformOverview", [
+    e("f3-platform-twin", "goBack", "down"),
+  ]),
+  n("f3-northdeck", "3F", "f3-northdeck", BP_3F, { x: 62, y: 28 }, "f3Northdeck", [
+    e("f3-jr-concourse", "backToJrConcourse", "down"),
+    e("f3-departure-boards", "goRight", "right"),
+  ]),
+  n("f3-departure-boards", "3F", "f3-departure-boards", BP_3F, { x: 74, y: 30 }, "f3DepartureBoards", [
+    e("f3-northdeck", "goBack", "left"),
+  ]),
+
+  // ---------------------------------------------------------------- 4F
+  n("f4-sky", "4F", "f4-sky", BP_4F, { x: 50, y: 55 }, "f4Sky", [
+    e("f3-jr-concourse", "backDownToJr", "down"),
+    e("f4-observation", "f4Observation", "right"),
+    e("f4-restaurants", "f4Restaurants", "left"),
+    e("f4-sky-garden", "goUp", "up"),
+  ]),
+  n("f4-observation", "4F", "f4-observation", BP_4F, { x: 64, y: 32 }, "f4Observation", [
+    e("f4-sky", "backToSky", "down"),
+    e("f4-deck-view", "goRight", "right"),
+  ]),
+  n("f4-deck-view", "4F", "f4-deck-view", BP_4F, { x: 76, y: 28 }, "f4DeckView", [
+    e("f4-observation", "goBack", "left"),
+    e("f4-night-deck", "goDown", "down"),
+  ]),
+  n("f4-night-deck", "4F", "f4-night-deck", BP_4F, { x: 78, y: 42 }, "f4NightDeck", [
+    e("f4-deck-view", "goBack", "up"),
+  ]),
+  n("f4-restaurants", "4F", "f4-restaurants", BP_4F, { x: 24, y: 55 }, "f4Restaurants", [
+    e("f4-sky", "backToSky", "down"),
+    e("f4-lounge", "goLeft", "left"),
+  ]),
+  n("f4-lounge", "4F", "f4-lounge", BP_4F, { x: 14, y: 52 }, "f4Lounge", [
+    e("f4-restaurants", "goBack", "right"),
+  ]),
+  n("f4-sky-garden", "4F", "f4-sky-garden", BP_4F, { x: 50, y: 30 }, "f4SkyGarden", [
+    e("f4-sky", "goBack", "down"),
+  ]),
+]);
+
+// Fold in every remaining floor viewpoint as a walkable "explore" chain, and
+// give each floor's hub a "look around" exit into its chain. This puts all of
+// the provided imagery in play so the player can roam each floor freely.
+Object.assign(nodes, exploreNodes);
+for (const { hub, to, dir } of exploreHubLinks) {
+  nodes[hub]?.exits.push({ to, labelKey: "lookAround", dir });
+}
 
 export type SakuraGoalKey = "west" | "jr";
 
@@ -217,7 +319,10 @@ function bfs(fromId: string, goalId: string): string[] | null {
       if (exit.to === goalId) {
         const path = [goalId];
         let p: string | null = cur;
-        while (p) { path.unshift(p); p = prev[p]; }
+        while (p) {
+          path.unshift(p);
+          p = prev[p];
+        }
         return path;
       }
       queue.push(exit.to);

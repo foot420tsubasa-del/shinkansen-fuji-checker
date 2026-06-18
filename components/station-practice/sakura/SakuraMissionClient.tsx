@@ -57,6 +57,9 @@ export function SakuraMissionClient({ goal }: { goal: SakuraGoalKey }) {
   const node = sakuraWalk.nodes[nodeId];
   const cleared = nodeId === mission.goalNodeId;
   const recommendedTo = showHint ? nextStepToward(nodeId, mission.goalNodeId) : null;
+  const nodeName =
+    t(`mission.nodes.names.${node.nameKey}` as never) +
+    (node.view ? ` · ${node.view}` : "");
 
   const move = useCallback((exit: SakuraExit) => {
     setSteps((s) => s + 1);
@@ -126,7 +129,7 @@ export function SakuraMissionClient({ goal }: { goal: SakuraGoalKey }) {
                 <Image
                   key={node.image}
                   src={`${SAKURA_IMAGE_BASE}/${node.image}.webp`}
-                  alt={t(`mission.nodes.names.${node.nameKey}` as never)}
+                  alt={nodeName}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 760px"
@@ -177,7 +180,7 @@ export function SakuraMissionClient({ goal }: { goal: SakuraGoalKey }) {
                     {t("ui.youAreHere")}
                   </span>
                   <span className="text-sm font-medium text-white">
-                    {t(`mission.nodes.names.${node.nameKey}` as never)}
+                    {nodeName}
                   </span>
                 </div>
                 <p className="mt-1 text-sm leading-6 text-neutral-300">

@@ -15,6 +15,14 @@ import path from "node:path";
 
 const DIR = "messages";
 
+// Extra per-floor "dense walk" viewpoints + generic directional exits, added
+// when each floor was expanded into a walkable mesh. Kept in a side file
+// (translated via the agent pipeline) and merged in below so re-running this
+// script never drops them.
+const dense = JSON.parse(
+  fs.readFileSync(path.join("scripts", "sp-dense-i18n.json"), "utf8"),
+);
+
 const ui = {
   en: {
     kicker: "Free walk", objective: "Mission", youAreHere: "You are here",
@@ -890,14 +898,18 @@ for (const file of fs.readdirSync(DIR)) {
   const full = path.join(DIR, file);
   const json = JSON.parse(fs.readFileSync(full, "utf8"));
   const loc = m[locale];
+  const d = dense[locale] ?? dense.en;
   json.stationPractice = {
     ui: ui[locale],
     mission: {
       title: loc.title,
       subtitle: loc.subtitle,
       objectives: loc.objectives,
-      exits: exits[locale],
-      nodes: { names: loc.names, caps: loc.caps },
+      exits: { ...exits[locale], ...d.exits },
+      nodes: {
+        names: { ...loc.names, ...d.names },
+        caps: { ...loc.caps, ...d.caps },
+      },
       clear: loc.clear,
     },
   };
