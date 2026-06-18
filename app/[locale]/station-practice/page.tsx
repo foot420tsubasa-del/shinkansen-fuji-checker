@@ -57,11 +57,21 @@ const missionCards: readonly MissionCardData[] = [
     id: "mission-3",
     title: "Sakura Central — walk to the West Exit",
     description:
-      "New free-walk mode: explore a 4-floor station, follow the Japanese signs, and find your own way from the subway platform to the street exit. Available in 9 languages.",
+      "New free-walk mode: explore a full 7-floor station, follow the Japanese signs, and find your own way from the subway platform up to the 西口 street exit. Available in 9 languages.",
     status: "New",
-    cta: "Try free walk",
-    href: "/station-practice/sakura",
-    routeLabel: "Free walk",
+    cta: "Walk to the West Exit",
+    href: "/station-practice/sakura?goal=west",
+    routeLabel: "Free walk · B3 → 1F",
+  },
+  {
+    id: "mission-4",
+    title: "Sakura Central — subway → JR transfer",
+    description:
+      "Free-walk the same station on a harder route: follow JR のりかえ口 from the Red Metro platform up to the JR platforms on 3F. Available in 9 languages.",
+    status: "New",
+    cta: "Walk the JR transfer",
+    href: "/station-practice/sakura?goal=jr",
+    routeLabel: "Free walk · B3 → 3F",
   },
 ];
 

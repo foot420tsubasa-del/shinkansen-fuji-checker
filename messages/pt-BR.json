@@ -5071,7 +5071,7 @@
   },
   "stationPractice": {
     "ui": {
-      "kicker": "Caminhada livre · teste",
+      "kicker": "Caminhada livre",
       "objective": "Missão",
       "youAreHere": "Você está aqui",
       "stationMap": "Mapa da estação",
@@ -5079,19 +5079,21 @@
       "look": "O que você vê",
       "hintShow": "Dica",
       "hintHide": "Ocultar dica",
-      "hintText": "A placa rumo à Saída Oeste está destacada.",
+      "hintText": "A placa rumo ao seu objetivo está destacada.",
       "back": "Voltar às missões",
       "moves": "{n} passos",
       "keyboardHint": "Setas movem você · ou clique numa placa.",
-      "clearTitle": "Você chegou à Saída Oeste (西口)",
       "lessons": "O que você praticou",
       "playAgain": "Andar de novo",
       "bestRoute": "Melhor rota: {n} passos"
     },
     "mission": {
-      "title": "Sakura Central — caminhe até a Saída Oeste",
-      "subtitle": "Caminhada livre · siga as placas · B3 → 1F",
-      "objective": "Siga as placas da plataforma do Metrô Vermelho até a 西口 (Saída Oeste).",
+      "title": "Sakura Central — caminhe pela estação",
+      "subtitle": "Caminhada livre · siga as placas · B3 → 4F",
+      "objectives": {
+        "west": "Siga as placas da plataforma do Metrô Vermelho até a 西口 (Saída Oeste, 1º andar).",
+        "jr": "Baldeie do Metrô Vermelho (B3) às plataformas JR (3º) — siga JR のりかえ口."
+      },
       "exits": {
         "toB3Concourse": "中央連絡ホール — Hall de Interligação (para B2)",
         "b3PlatformEnd": "赤メトロ 1–4番線 — fim da plataforma (sem saída)",
@@ -5105,7 +5107,23 @@
         "backToMall": "戻る — voltar à galeria",
         "west": "西口 — Saída Oeste",
         "centralPlazaOutside": "中央出口広場 — sair para a praça",
-        "backIndoors": "戻る — voltar para dentro"
+        "backIndoors": "戻る — voltar para dentro",
+        "backGeneric": "戻る — voltar",
+        "to2FConcourse": "2F 中央コンコース — subir ao saguão principal",
+        "down1FExits": "1F 中央出口・西口 — descer às saídas térreas",
+        "toJrGates": "JR のりかえ口 — portões de baldeação JR",
+        "f2WestHall": "西口（2F） — saguão da Saída Oeste (2F)",
+        "backToConcourse2F": "戻る — voltar ao saguão principal",
+        "escUpTo3FJr": "3F JRホーム — subir às plataformas JR",
+        "toJrPlatform": "JRホーム 17–22番線 — para a plataforma JR",
+        "escUpTo4F": "4F 展望デッキ — subir ao deck panorâmico",
+        "f3NorthDeck": "北口デッキ — North Deck (desvio)",
+        "backToGates": "戻る — voltar aos portões JR",
+        "backToJrConcourse": "戻る — voltar ao saguão JR",
+        "backDownToJr": "JRコンコースへ — descer ao saguão JR",
+        "f4Observation": "展望デッキ — Deck de Observação",
+        "f4Restaurants": "レストラン・スカイガーデン — restaurantes e jardim",
+        "backToSky": "戻る — voltar ao deck panorâmico"
       },
       "nodes": {
         "names": {
@@ -5118,26 +5136,46 @@
           "b1Shops": "Lojas da galeria (B1)",
           "f1Concourse": "Praça da saída central (1º andar)",
           "f1Plaza": "Praça em frente à estação (1º, fora)",
-          "f1West": "西口 / Saída Oeste (1º andar)"
+          "f1West": "西口 / Saída Oeste (1º andar)",
+          "f2Concourse": "Saguão principal (2º andar)",
+          "f2Jrgates": "Portões de baldeação JR (2º)",
+          "f2Westhall": "Saguão da Saída Oeste (2º)",
+          "f3JrConcourse": "Saguão JR (3º andar)",
+          "f3JrPlatform": "Plataformas JR 17–22 (3º)",
+          "f3Northdeck": "North Deck (3º)",
+          "f4Sky": "Hotel Skyway e deck (4º)",
+          "f4Observation": "Deck de observação (4º)",
+          "f4Restaurants": "Restaurantes e jardim (4º)"
         },
         "caps": {
           "b3Platform": "Você acabou de descer da Linha Vermelha. Suba rumo às saídas.",
           "b3End": "Um beco sem saída na plataforma — as saídas são para o outro lado.",
           "b3Concourse": "Escadas rolantes ao hall de interligação do B2. Suba por elas.",
           "b2Hall": "A rota da 西口 sobe para o B1. As plataformas das linhas saem para o lado.",
-          "b2Platdir": "Isto só leva às plataformas das linhas. Volte ao saguão.",
+          "b2Platdir": "Isto só leva às plataformas. Volte ao saguão.",
           "b1Mall": "A galeria subterrânea. 中央出口 sobe para o térreo.",
           "b1Shops": "Só lojas aqui — um desvio. A saída é de volta na 中央出口.",
-          "f1Concourse": "Térreo. 西口 fica à esquerda; outras saídas em frente.",
+          "f1Concourse": "Térreo. 西口 fica à esquerda; o saguão superior é para cima.",
           "f1Plaza": "Você saiu. As placas mostram 西口 à esquerda — volte se passou.",
-          "f1West": "Você chegou à Saída Oeste."
+          "f1West": "Você chegou à Saída Oeste.",
+          "f2Concourse": "O saguão principal. 西口 à esquerda, 中央改札 / JR のりかえ口 à frente, 東口 à direita.",
+          "f2Jrgates": "Os portões JR のりかえ口. As plataformas JR ficam subindo a escada.",
+          "f2Westhall": "O saguão da Saída Oeste (2º) — um desvio. Volte ao saguão principal.",
+          "f3JrConcourse": "Saguão JR. As plataformas 17–22 são por aqui; o deck é para cima.",
+          "f3JrPlatform": "Plataformas JR 17–22, incl. o Airport Express. Baldeação metrô → JR feita.",
+          "f3Northdeck": "O North Deck ao ar livre — longe das plataformas. Volte.",
+          "f4Sky": "Nível Hotel Skyway — o deck de observação e o jardim.",
+          "f4Observation": "O deck de observação, com vista da cidade. Depois desça.",
+          "f4Restaurants": "Restaurantes e o jardim — um desvio. Volte para descer."
         }
       },
       "clear": {
-        "summary": "Muito bem. Você leu as placas da plataforma até a rua.",
-        "l1": "出口 sempre significa saída; 中央出口 é a saída central principal.",
-        "l2": "西 = oeste, 東 = leste — então 西口 é a Saída Oeste.",
-        "l3": "Siga as placas subindo andar a andar; のりば leva às plataformas, não à rua."
+        "titleWest": "Você chegou à Saída Oeste (西口)!",
+        "titleJr": "Você chegou à plataforma JR (3º)!",
+        "summary": "Muito bem. Você leu as placas o caminho todo — sem mapa.",
+        "l1": "出口 significa saída; のりかえ口 / 乗換 significa baldeação.",
+        "l2": "中央改札 é a catraca principal; JR のりかえ口 leva às plataformas JR.",
+        "l3": "Siga as placas andar a andar — 西 = oeste, 東 = leste."
       }
     }
   }

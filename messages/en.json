@@ -5070,7 +5070,7 @@
   },
   "stationPractice": {
     "ui": {
-      "kicker": "Free walk · trial",
+      "kicker": "Free walk",
       "objective": "Mission",
       "youAreHere": "You are here",
       "stationMap": "Station map",
@@ -5078,19 +5078,21 @@
       "look": "What you see",
       "hintShow": "Hint",
       "hintHide": "Hide hint",
-      "hintText": "The sign toward the West Exit is highlighted.",
+      "hintText": "The sign toward your goal is highlighted.",
       "back": "Back to missions",
       "moves": "{n} moves",
       "keyboardHint": "Arrow keys move you · or click a sign.",
-      "clearTitle": "You reached the West Exit (西口)",
       "lessons": "What you practised",
       "playAgain": "Walk it again",
       "bestRoute": "Best route: {n} moves"
     },
     "mission": {
-      "title": "Sakura Central — walk to the West Exit",
-      "subtitle": "Free walk · follow the signs · B3 → 1F",
-      "objective": "Follow the signs from the Red Metro platform up to the 西口 (West Exit).",
+      "title": "Sakura Central — walk the station",
+      "subtitle": "Free walk · follow the signs · B3 → 4F",
+      "objectives": {
+        "west": "Follow the signs from the Red Metro platform up to the 西口 (West Exit, 1F).",
+        "jr": "Transfer from the Red Metro (B3) up to the JR platforms (3F) — follow JR のりかえ口."
+      },
       "exits": {
         "toB3Concourse": "中央連絡ホール — Interchange Hall (to B2)",
         "b3PlatformEnd": "赤メトロ 1–4番線 — platform end (dead end)",
@@ -5104,7 +5106,23 @@
         "backToMall": "戻る — back to the mall",
         "west": "西口 — West Exit",
         "centralPlazaOutside": "中央出口広場 — out to the plaza",
-        "backIndoors": "戻る — back inside"
+        "backIndoors": "戻る — back inside",
+        "backGeneric": "戻る — go back",
+        "to2FConcourse": "2F 中央コンコース — up to the main concourse",
+        "down1FExits": "1F 中央出口・西口 — down to the ground-floor exits",
+        "toJrGates": "JR のりかえ口 — JR transfer gates",
+        "f2WestHall": "西口（2F） — 2F West Exit hall",
+        "backToConcourse2F": "戻る — back to the main concourse",
+        "escUpTo3FJr": "3F JRホーム — up to the JR platforms",
+        "toJrPlatform": "JRホーム 17–22番線 — to the JR platform",
+        "escUpTo4F": "4F 展望デッキ — up to the sky deck",
+        "f3NorthDeck": "北口デッキ — North Deck (detour)",
+        "backToGates": "戻る — back to the JR gates",
+        "backToJrConcourse": "戻る — back to the JR concourse",
+        "backDownToJr": "JRコンコースへ — down to the JR concourse",
+        "f4Observation": "展望デッキ — Observation Deck",
+        "f4Restaurants": "レストラン・スカイガーデン — restaurants & sky garden",
+        "backToSky": "戻る — back to the sky deck"
       },
       "nodes": {
         "names": {
@@ -5117,7 +5135,16 @@
           "b1Shops": "Mall shops (B1)",
           "f1Concourse": "Central exit plaza (1F)",
           "f1Plaza": "Station-front plaza (1F, outside)",
-          "f1West": "西口 / West Exit (1F)"
+          "f1West": "西口 / West Exit (1F)",
+          "f2Concourse": "Main concourse (2F)",
+          "f2Jrgates": "JR transfer gates (2F)",
+          "f2Westhall": "West Exit hall (2F)",
+          "f3JrConcourse": "JR concourse (3F)",
+          "f3JrPlatform": "JR platforms 17–22 (3F)",
+          "f3Northdeck": "North Deck (3F)",
+          "f4Sky": "Hotel Skyway & sky deck (4F)",
+          "f4Observation": "Observation deck (4F)",
+          "f4Restaurants": "Restaurants & sky garden (4F)"
         },
         "caps": {
           "b3Platform": "You just got off the Red Metro Line. Head up toward the exits.",
@@ -5127,16 +5154,27 @@
           "b2Platdir": "This only leads to the line platforms. Head back to the concourse.",
           "b1Mall": "The underground mall. 中央出口 is signed up to the ground floor.",
           "b1Shops": "Just shops down here — a detour. The exit is back at 中央出口.",
-          "f1Concourse": "Ground level. 西口 is to your left; other exits are straight ahead.",
+          "f1Concourse": "Ground level. 西口 is to your left; the upper concourse is up.",
           "f1Plaza": "You've stepped outside. The signs show 西口 to the left — go back in if you overshot.",
-          "f1West": "You made it to the West Exit."
+          "f1West": "You made it to the West Exit.",
+          "f2Concourse": "The main concourse. 西口 is left, 中央改札 / JR のりかえ口 are ahead, 東口 is right.",
+          "f2Jrgates": "The JR のりかえ口 (transfer gates). The JR platforms are up the escalator.",
+          "f2Westhall": "The 2F West Exit hall — a detour. Head back to the main concourse.",
+          "f3JrConcourse": "JR concourse. Platforms 17–22 are this way; the sky deck is up.",
+          "f3JrPlatform": "JR platforms 17–22, including the Airport Express. Subway → JR transfer done.",
+          "f3Northdeck": "The open-air North Deck — away from the platforms. Head back.",
+          "f4Sky": "Hotel Skyway level — the observation deck and sky garden.",
+          "f4Observation": "The observation deck, with a view over the city. Then head back down.",
+          "f4Restaurants": "Restaurants and the sky garden — a detour. Head back to ride down."
         }
       },
       "clear": {
-        "summary": "Nicely done. You read the signs from the platform all the way to the street.",
-        "l1": "出口 always means exit; 中央出口 is the main central exit.",
-        "l2": "西 = west, 東 = east — so 西口 is the West Exit.",
-        "l3": "Follow the signs up floor by floor; のりば leads to platforms, not the street."
+        "titleWest": "You reached the West Exit (西口)",
+        "titleJr": "You reached the JR platform (3F)",
+        "summary": "Nicely done. You read the signs the whole way — no map needed.",
+        "l1": "出口 means exit; のりかえ口 / 乗換 means transfer.",
+        "l2": "中央改札 is the main fare gate; JR のりかえ口 leads to the JR platforms.",
+        "l3": "Follow the signs floor by floor — 西 = west, 東 = east."
       }
     }
   }

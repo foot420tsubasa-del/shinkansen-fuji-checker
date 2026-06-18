@@ -5071,7 +5071,7 @@
   },
   "stationPractice": {
     "ui": {
-      "kicker": "Paseo libre · prueba",
+      "kicker": "Paseo libre",
       "objective": "Misión",
       "youAreHere": "Estás aquí",
       "stationMap": "Plano de la estación",
@@ -5079,19 +5079,21 @@
       "look": "Lo que ves",
       "hintShow": "Pista",
       "hintHide": "Ocultar pista",
-      "hintText": "El cartel hacia la Salida Oeste está resaltado.",
+      "hintText": "El cartel hacia tu objetivo está resaltado.",
       "back": "Volver a las misiones",
       "moves": "{n} pasos",
       "keyboardHint": "Las flechas te mueven · o haz clic en un cartel.",
-      "clearTitle": "Llegaste a la Salida Oeste (西口)",
       "lessons": "Lo que practicaste",
       "playAgain": "Caminar otra vez",
       "bestRoute": "Mejor ruta: {n} pasos"
     },
     "mission": {
-      "title": "Sakura Central — camina a la Salida Oeste",
-      "subtitle": "Paseo libre · sigue los carteles · B3 → 1F",
-      "objective": "Sigue los carteles desde el andén del Metro Rojo hasta la 西口 (Salida Oeste).",
+      "title": "Sakura Central — recorre la estación",
+      "subtitle": "Paseo libre · sigue los carteles · B3 → 4F",
+      "objectives": {
+        "west": "Sigue los carteles desde el andén del Metro Rojo hasta la 西口 (Salida Oeste, 1.ª planta).",
+        "jr": "Transborda del Metro Rojo (B3) a los andenes JR (3.ª) — sigue JR のりかえ口."
+      },
       "exits": {
         "toB3Concourse": "中央連絡ホール — Vestíbulo de Enlace (a B2)",
         "b3PlatformEnd": "赤メトロ 1–4番線 — fin del andén (sin salida)",
@@ -5105,7 +5107,23 @@
         "backToMall": "戻る — volver a la galería",
         "west": "西口 — Salida Oeste",
         "centralPlazaOutside": "中央出口広場 — salir a la plaza",
-        "backIndoors": "戻る — volver adentro"
+        "backIndoors": "戻る — volver adentro",
+        "backGeneric": "戻る — volver",
+        "to2FConcourse": "2F 中央コンコース — subir al vestíbulo principal",
+        "down1FExits": "1F 中央出口・西口 — bajar a las salidas de planta baja",
+        "toJrGates": "JR のりかえ口 — puertas de transbordo JR",
+        "f2WestHall": "西口（2F） — vestíbulo de la Salida Oeste (2F)",
+        "backToConcourse2F": "戻る — volver al vestíbulo principal",
+        "escUpTo3FJr": "3F JRホーム — subir a los andenes JR",
+        "toJrPlatform": "JRホーム 17–22番線 — al andén JR",
+        "escUpTo4F": "4F 展望デッキ — subir a la terraza panorámica",
+        "f3NorthDeck": "北口デッキ — North Deck (desvío)",
+        "backToGates": "戻る — volver a las puertas JR",
+        "backToJrConcourse": "戻る — volver al vestíbulo JR",
+        "backDownToJr": "JRコンコースへ — bajar al vestíbulo JR",
+        "f4Observation": "展望デッキ — Mirador",
+        "f4Restaurants": "レストラン・スカイガーデン — restaurantes y jardín",
+        "backToSky": "戻る — volver a la terraza"
       },
       "nodes": {
         "names": {
@@ -5118,26 +5136,46 @@
           "b1Shops": "Tiendas de la galería (B1)",
           "f1Concourse": "Plaza de la salida central (1.ª planta)",
           "f1Plaza": "Plaza frente a la estación (1.ª, fuera)",
-          "f1West": "西口 / Salida Oeste (1.ª planta)"
+          "f1West": "西口 / Salida Oeste (1.ª planta)",
+          "f2Concourse": "Vestíbulo principal (2.ª planta)",
+          "f2Jrgates": "Puertas de transbordo JR (2.ª)",
+          "f2Westhall": "Vestíbulo de la Salida Oeste (2.ª)",
+          "f3JrConcourse": "Vestíbulo JR (3.ª planta)",
+          "f3JrPlatform": "Andenes JR 17–22 (3.ª)",
+          "f3Northdeck": "North Deck (3.ª)",
+          "f4Sky": "Hotel Skyway y terraza (4.ª)",
+          "f4Observation": "Mirador (4.ª)",
+          "f4Restaurants": "Restaurantes y jardín (4.ª)"
         },
         "caps": {
           "b3Platform": "Acabas de bajar de la Línea Roja. Sube hacia las salidas.",
           "b3End": "Un callejón sin salida en el andén: las salidas están al otro lado.",
           "b3Concourse": "Escaleras mecánicas al vestíbulo de enlace del B2. Súbelas.",
-          "b2Hall": "La ruta de la 西口 sube al B1. Los andenes de las líneas se desvían al lado.",
+          "b2Hall": "La ruta de la 西口 sube al B1. Los andenes se desvían al lado.",
           "b2Platdir": "Esto solo lleva a los andenes. Vuelve al vestíbulo.",
           "b1Mall": "La galería subterránea. 中央出口 sube a la planta baja.",
           "b1Shops": "Solo tiendas aquí: un desvío. La salida está de vuelta en 中央出口.",
-          "f1Concourse": "Planta baja. 西口 está a tu izquierda; otras salidas al frente.",
+          "f1Concourse": "Planta baja. 西口 está a tu izquierda; el vestíbulo superior, arriba.",
           "f1Plaza": "Has salido. Los carteles muestran 西口 a la izquierda; vuelve si te pasaste.",
-          "f1West": "Llegaste a la Salida Oeste."
+          "f1West": "Llegaste a la Salida Oeste.",
+          "f2Concourse": "El vestíbulo principal. 西口 izquierda, 中央改札 / JR のりかえ口 al frente, 東口 derecha.",
+          "f2Jrgates": "Las puertas JR のりかえ口. Los andenes JR están subiendo la escalera.",
+          "f2Westhall": "El vestíbulo de la Salida Oeste (2.ª): un desvío. Vuelve al vestíbulo principal.",
+          "f3JrConcourse": "Vestíbulo JR. Los andenes 17–22 por aquí; el mirador, arriba.",
+          "f3JrPlatform": "Andenes JR 17–22, incl. el Airport Express. Transbordo metro → JR hecho.",
+          "f3Northdeck": "El North Deck al aire libre, lejos de los andenes. Vuelve.",
+          "f4Sky": "Nivel Hotel Skyway: el mirador y el jardín.",
+          "f4Observation": "El mirador, con vistas a la ciudad. Luego baja.",
+          "f4Restaurants": "Restaurantes y el jardín: un desvío. Vuelve para bajar."
         }
       },
       "clear": {
-        "summary": "Bien hecho. Leíste los carteles desde el andén hasta la calle.",
-        "l1": "出口 siempre significa salida; 中央出口 es la salida central principal.",
-        "l2": "西 = oeste, 東 = este, así que 西口 es la Salida Oeste.",
-        "l3": "Sigue los carteles subiendo planta a planta; のりば lleva a los andenes, no a la calle."
+        "titleWest": "¡Llegaste a la Salida Oeste (西口)!",
+        "titleJr": "¡Llegaste al andén JR (3.ª)!",
+        "summary": "Bien hecho. Leíste los carteles todo el camino, sin mapa.",
+        "l1": "出口 significa salida; のりかえ口 / 乗換 significa transbordo.",
+        "l2": "中央改札 es la barrera principal; JR のりかえ口 lleva a los andenes JR.",
+        "l3": "Sigue los carteles planta a planta — 西 = oeste, 東 = este."
       }
     }
   }

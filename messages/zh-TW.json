@@ -5070,7 +5070,7 @@
   },
   "stationPractice": {
     "ui": {
-      "kicker": "自由步行 · 試玩",
+      "kicker": "自由步行",
       "objective": "任務",
       "youAreHere": "你的位置",
       "stationMap": "車站地圖",
@@ -5078,19 +5078,21 @@
       "look": "你看到的",
       "hintShow": "提示",
       "hintHide": "隱藏提示",
-      "hintText": "通往西口的標示已標亮。",
+      "hintText": "通往目標的標示已標亮。",
       "back": "返回任務",
       "moves": "{n} 步",
       "keyboardHint": "方向鍵移動 · 或點選標示。",
-      "clearTitle": "你抵達了西口（West Exit）",
       "lessons": "你練習到的重點",
       "playAgain": "再走一次",
       "bestRoute": "最短路線：{n} 步"
     },
     "mission": {
-      "title": "櫻中央站 — 走到西口",
-      "subtitle": "自由步行 · 跟著標示 · B3 → 1F",
-      "objective": "從紅線地鐵月台跟著標示，走到 西口（West Exit）。",
+      "title": "櫻中央站 — 走訪車站",
+      "subtitle": "自由步行 · 跟著標示 · B3 → 4F",
+      "objectives": {
+        "west": "從紅線地鐵月台跟著標示，走到 西口（West Exit・1 樓）。",
+        "jr": "從紅線地鐵（B3）轉乘到 JR 月台（3 樓）——跟著 JR のりかえ口。"
+      },
       "exits": {
         "toB3Concourse": "中央連絡ホール — 中央聯絡大廳（往 B2）",
         "b3PlatformEnd": "赤メトロ 1–4番線 — 月台盡頭（死路）",
@@ -5104,7 +5106,23 @@
         "backToMall": "戻る — 回到地下街",
         "west": "西口 — 西出口",
         "centralPlazaOutside": "中央出口広場 — 走到廣場",
-        "backIndoors": "戻る — 回到站內"
+        "backIndoors": "戻る — 回到站內",
+        "backGeneric": "戻る — 返回",
+        "to2FConcourse": "2F 中央コンコース — 上到主大廳",
+        "down1FExits": "1F 中央出口・西口 — 下到地面層出口",
+        "toJrGates": "JR のりかえ口 — JR 轉乘閘口",
+        "f2WestHall": "西口（2F） — 2 樓西出口大廳",
+        "backToConcourse2F": "戻る — 回到主大廳",
+        "escUpTo3FJr": "3F JRホーム — 上到 JR 月台",
+        "toJrPlatform": "JRホーム 17–22番線 — 前往 JR 月台",
+        "escUpTo4F": "4F 展望デッキ — 上到觀景台",
+        "f3NorthDeck": "北口デッキ — 北口甲板（繞路）",
+        "backToGates": "戻る — 回到 JR 閘口",
+        "backToJrConcourse": "戻る — 回到 JR 大廳",
+        "backDownToJr": "JRコンコースへ — 下到 JR 大廳",
+        "f4Observation": "展望デッキ — 觀景台",
+        "f4Restaurants": "レストラン・スカイガーデン — 餐廳與空中花園",
+        "backToSky": "戻る — 回到觀景層"
       },
       "nodes": {
         "names": {
@@ -5117,7 +5135,16 @@
           "b1Shops": "地下街商店（B1）",
           "f1Concourse": "中央出口廣場（1 樓）",
           "f1Plaza": "站前廣場（1 樓・室外）",
-          "f1West": "西口 / West Exit（1 樓）"
+          "f1West": "西口 / West Exit（1 樓）",
+          "f2Concourse": "中央大廳（2 樓）",
+          "f2Jrgates": "JR 轉乘閘口（2 樓）",
+          "f2Westhall": "西口大廳（2 樓）",
+          "f3JrConcourse": "JR 大廳（3 樓）",
+          "f3JrPlatform": "JR 月台 17–22（3 樓）",
+          "f3Northdeck": "北口甲板（3 樓）",
+          "f4Sky": "飯店空橋・觀景（4 樓）",
+          "f4Observation": "觀景台（4 樓）",
+          "f4Restaurants": "餐廳・空中花園（4 樓）"
         },
         "caps": {
           "b3Platform": "你剛下紅線地鐵。往上朝出口走。",
@@ -5127,16 +5154,27 @@
           "b2Platdir": "這裡只通往各線月台。回到大廳吧。",
           "b1Mall": "地下商店街。中央出口標示往上到地面。",
           "b1Shops": "這裡只有商店——繞路。出口要回到中央出口。",
-          "f1Concourse": "地面層。西口在左邊，其他出口在前方。",
+          "f1Concourse": "地面層。西口在左邊，上層大廳往上。",
           "f1Plaza": "你走到外面了。標示顯示西口在左——走過頭就回去。",
-          "f1West": "你到達了西口。"
+          "f1West": "你到達了西口。",
+          "f2Concourse": "中央大廳。西口在左，中央改札 / JR のりかえ口 在前，東口在右。",
+          "f2Jrgates": "JR のりかえ口（轉乘閘口）。JR 月台在電扶梯上方。",
+          "f2Westhall": "2 樓西口大廳——繞路。回到中央大廳吧。",
+          "f3JrConcourse": "JR 大廳。17–22 月台在這邊；觀景台往上。",
+          "f3JrPlatform": "JR 月台 17–22，含機場特急。地鐵 → JR 轉乘完成。",
+          "f3Northdeck": "戶外北口甲板——遠離月台。回去吧。",
+          "f4Sky": "飯店空橋層——觀景台與空中花園。",
+          "f4Observation": "觀景台，俯瞰城市。看完就下去。",
+          "f4Restaurants": "餐廳與空中花園——繞路。回去搭電扶梯下樓。"
         }
       },
       "clear": {
-        "summary": "做得好。你從月台一路讀標示走到街上。",
-        "l1": "出口永遠表示 exit；中央出口是主要的中央出口。",
-        "l2": "西 = west，東 = east——所以西口是西出口。",
-        "l3": "跟著標示一層層往上；のりば通往月台，不是街道。"
+        "titleWest": "你抵達了西口（West Exit）！",
+        "titleJr": "你抵達了 JR 月台（3 樓）！",
+        "summary": "做得好。你一路讀標示走到底——不用地圖。",
+        "l1": "出口表示 exit；のりかえ口 / 乗換 表示轉乘。",
+        "l2": "中央改札 是主要驗票閘門；JR のりかえ口 通往 JR 月台。",
+        "l3": "跟著標示一層層走——西 = west，東 = east。"
       }
     }
   }

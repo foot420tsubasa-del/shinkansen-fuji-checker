@@ -5070,7 +5070,7 @@
   },
   "stationPractice": {
     "ui": {
-      "kicker": "Freies Gehen · Test",
+      "kicker": "Freies Gehen",
       "objective": "Mission",
       "youAreHere": "Sie sind hier",
       "stationMap": "Bahnhofsplan",
@@ -5078,19 +5078,21 @@
       "look": "Was Sie sehen",
       "hintShow": "Hinweis",
       "hintHide": "Hinweis ausblenden",
-      "hintText": "Das Schild zum Westausgang ist hervorgehoben.",
+      "hintText": "Das Schild zu Ihrem Ziel ist hervorgehoben.",
       "back": "Zurück zu den Missionen",
       "moves": "{n} Schritte",
       "keyboardHint": "Pfeiltasten bewegen Sie · oder klicken Sie ein Schild.",
-      "clearTitle": "Sie haben den Westausgang (西口) erreicht",
       "lessons": "Das haben Sie geübt",
       "playAgain": "Nochmal gehen",
       "bestRoute": "Beste Route: {n} Schritte"
     },
     "mission": {
-      "title": "Sakura Central — zum Westausgang gehen",
-      "subtitle": "Freies Gehen · den Schildern folgen · B3 → 1F",
-      "objective": "Folgen Sie den Schildern vom Bahnsteig der roten Metro bis zum 西口 (Westausgang).",
+      "title": "Sakura Central — den Bahnhof erkunden",
+      "subtitle": "Freies Gehen · den Schildern folgen · B3 → 4F",
+      "objectives": {
+        "west": "Folgen Sie den Schildern vom Bahnsteig der roten Metro bis zum 西口 (Westausgang, EG).",
+        "jr": "Steigen Sie von der roten Metro (B3) zu den JR-Bahnsteigen (3. OG) um — folgen Sie JR のりかえ口."
+      },
       "exits": {
         "toB3Concourse": "中央連絡ホール — Verbindungshalle (nach B2)",
         "b3PlatformEnd": "赤メトロ 1–4番線 — Bahnsteigende (Sackgasse)",
@@ -5104,7 +5106,23 @@
         "backToMall": "戻る — zurück zur Passage",
         "west": "西口 — Westausgang",
         "centralPlazaOutside": "中央出口広場 — hinaus auf den Platz",
-        "backIndoors": "戻る — zurück nach drinnen"
+        "backIndoors": "戻る — zurück nach drinnen",
+        "backGeneric": "戻る — zurück",
+        "to2FConcourse": "2F 中央コンコース — hinauf zur Haupthalle",
+        "down1FExits": "1F 中央出口・西口 — hinunter zu den EG-Ausgängen",
+        "toJrGates": "JR のりかえ口 — JR-Umsteigetore",
+        "f2WestHall": "西口（2F） — Westausgangshalle (2F)",
+        "backToConcourse2F": "戻る — zurück zur Haupthalle",
+        "escUpTo3FJr": "3F JRホーム — hinauf zu den JR-Bahnsteigen",
+        "toJrPlatform": "JRホーム 17–22番線 — zum JR-Bahnsteig",
+        "escUpTo4F": "4F 展望デッキ — hinauf zum Aussichtsdeck",
+        "f3NorthDeck": "北口デッキ — North Deck (Umweg)",
+        "backToGates": "戻る — zurück zu den JR-Toren",
+        "backToJrConcourse": "戻る — zurück zur JR-Halle",
+        "backDownToJr": "JRコンコースへ — hinunter zur JR-Halle",
+        "f4Observation": "展望デッキ — Aussichtsdeck",
+        "f4Restaurants": "レストラン・スカイガーデン — Restaurants & Skygarten",
+        "backToSky": "戻る — zurück zum Aussichtsdeck"
       },
       "nodes": {
         "names": {
@@ -5117,26 +5135,46 @@
           "b1Shops": "Ladenpassage (B1)",
           "f1Concourse": "Hauptausgangsplatz (EG)",
           "f1Plaza": "Bahnhofsvorplatz (EG, draußen)",
-          "f1West": "西口 / Westausgang (EG)"
+          "f1West": "西口 / Westausgang (EG)",
+          "f2Concourse": "Haupthalle (2. OG)",
+          "f2Jrgates": "JR-Umsteigetore (2. OG)",
+          "f2Westhall": "Westausgangshalle (2. OG)",
+          "f3JrConcourse": "JR-Halle (3. OG)",
+          "f3JrPlatform": "JR-Bahnsteige 17–22 (3. OG)",
+          "f3Northdeck": "North Deck (3. OG)",
+          "f4Sky": "Hotel Skyway & Deck (4. OG)",
+          "f4Observation": "Aussichtsdeck (4. OG)",
+          "f4Restaurants": "Restaurants & Garten (4. OG)"
         },
         "caps": {
           "b3Platform": "Sie sind gerade aus der roten Linie ausgestiegen. Gehen Sie hinauf zu den Ausgängen.",
           "b3End": "Eine Sackgasse am Bahnsteigende — die Ausgänge sind in die andere Richtung.",
           "b3Concourse": "Rolltreppen zur Verbindungshalle im B2. Fahren Sie hinauf.",
-          "b2Hall": "Die 西口-Route ist nach B1 ausgeschildert. Die Bahnsteige zweigen zur Seite ab.",
+          "b2Hall": "Die 西口-Route führt nach B1. Die Bahnsteige zweigen zur Seite ab.",
           "b2Platdir": "Das führt nur zu den Bahnsteigen. Gehen Sie zurück zur Halle.",
           "b1Mall": "Die unterirdische Passage. 中央出口 führt hinauf ins Erdgeschoss.",
           "b1Shops": "Hier nur Läden — ein Umweg. Der Ausgang ist zurück bei 中央出口.",
-          "f1Concourse": "Erdgeschoss. 西口 ist links; andere Ausgänge geradeaus.",
+          "f1Concourse": "Erdgeschoss. 西口 ist links; die obere Halle ist oben.",
           "f1Plaza": "Sie sind draußen. Die Schilder zeigen 西口 links — gehen Sie zurück, falls zu weit.",
-          "f1West": "Sie haben den Westausgang erreicht."
+          "f1West": "Sie haben den Westausgang erreicht.",
+          "f2Concourse": "Die Haupthalle. 西口 links, 中央改札 / JR のりかえ口 voraus, 東口 rechts.",
+          "f2Jrgates": "Die JR のりかえ口 (Umsteigetore). Die JR-Bahnsteige sind oben über die Rolltreppe.",
+          "f2Westhall": "Die Westausgangshalle (2. OG) — ein Umweg. Zurück zur Haupthalle.",
+          "f3JrConcourse": "JR-Halle. Bahnsteige 17–22 hier entlang; das Deck ist oben.",
+          "f3JrPlatform": "JR-Bahnsteige 17–22, inkl. Airport Express. Umstieg Metro → JR geschafft.",
+          "f3Northdeck": "Das North Deck im Freien — weg von den Bahnsteigen. Gehen Sie zurück.",
+          "f4Sky": "Hotel-Skyway-Ebene — Aussichtsdeck und Skygarten.",
+          "f4Observation": "Das Aussichtsdeck mit Blick über die Stadt. Dann hinunter.",
+          "f4Restaurants": "Restaurants und Skygarten — ein Umweg. Zurück, um hinunterzufahren."
         }
       },
       "clear": {
-        "summary": "Gut gemacht. Sie haben die Schilder vom Bahnsteig bis zur Straße gelesen.",
-        "l1": "出口 bedeutet immer Ausgang; 中央出口 ist der zentrale Hauptausgang.",
-        "l2": "西 = West, 東 = Ost — also ist 西口 der Westausgang.",
-        "l3": "Folgen Sie den Schildern Etage für Etage; のりば führt zu den Bahnsteigen, nicht zur Straße."
+        "titleWest": "Sie haben den Westausgang (西口) erreicht!",
+        "titleJr": "Sie haben den JR-Bahnsteig (3. OG) erreicht!",
+        "summary": "Gut gemacht. Sie haben den ganzen Weg die Schilder gelesen — ohne Karte.",
+        "l1": "出口 heißt Ausgang; のりかえ口 / 乗換 heißt Umstieg.",
+        "l2": "中央改札 ist die Hauptsperre; JR のりかえ口 führt zu den JR-Bahnsteigen.",
+        "l3": "Folgen Sie den Schildern Etage für Etage — 西 = West, 東 = Ost."
       }
     }
   }

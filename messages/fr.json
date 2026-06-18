@@ -5071,7 +5071,7 @@
   },
   "stationPractice": {
     "ui": {
-      "kicker": "Marche libre · essai",
+      "kicker": "Marche libre",
       "objective": "Mission",
       "youAreHere": "Vous êtes ici",
       "stationMap": "Plan de la gare",
@@ -5079,19 +5079,21 @@
       "look": "Ce que vous voyez",
       "hintShow": "Indice",
       "hintHide": "Masquer l'indice",
-      "hintText": "Le panneau vers la Sortie Ouest est mis en évidence.",
+      "hintText": "Le panneau vers votre objectif est mis en évidence.",
       "back": "Retour aux missions",
       "moves": "{n} pas",
       "keyboardHint": "Les flèches vous déplacent · ou cliquez un panneau.",
-      "clearTitle": "Vous avez atteint la Sortie Ouest (西口)",
       "lessons": "Ce que vous avez travaillé",
       "playAgain": "Recommencer la marche",
       "bestRoute": "Meilleur trajet : {n} pas"
     },
     "mission": {
-      "title": "Sakura Central — marchez vers la Sortie Ouest",
-      "subtitle": "Marche libre · suivez les panneaux · B3 → 1F",
-      "objective": "Suivez les panneaux du quai du Métro Rouge jusqu'à la 西口 (Sortie Ouest).",
+      "title": "Sakura Central — parcourez la gare",
+      "subtitle": "Marche libre · suivez les panneaux · B3 → 4F",
+      "objectives": {
+        "west": "Suivez les panneaux du quai du Métro Rouge jusqu'à la 西口 (Sortie Ouest, RdC).",
+        "jr": "Changez du Métro Rouge (B3) vers les quais JR (3e) — suivez JR のりかえ口."
+      },
       "exits": {
         "toB3Concourse": "中央連絡ホール — Hall de correspondance (vers B2)",
         "b3PlatformEnd": "赤メトロ 1–4番線 — bout du quai (impasse)",
@@ -5105,7 +5107,23 @@
         "backToMall": "戻る — retour à la galerie",
         "west": "西口 — Sortie Ouest",
         "centralPlazaOutside": "中央出口広場 — sortir sur l'esplanade",
-        "backIndoors": "戻る — revenir à l'intérieur"
+        "backIndoors": "戻る — revenir à l'intérieur",
+        "backGeneric": "戻る — revenir",
+        "to2FConcourse": "2F 中央コンコース — monter au hall principal",
+        "down1FExits": "1F 中央出口・西口 — descendre aux sorties du RdC",
+        "toJrGates": "JR のりかえ口 — portiques de correspondance JR",
+        "f2WestHall": "西口（2F） — hall de la Sortie Ouest (2F)",
+        "backToConcourse2F": "戻る — retour au hall principal",
+        "escUpTo3FJr": "3F JRホーム — monter aux quais JR",
+        "toJrPlatform": "JRホーム 17–22番線 — vers le quai JR",
+        "escUpTo4F": "4F 展望デッキ — monter au pont panoramique",
+        "f3NorthDeck": "北口デッキ — North Deck (détour)",
+        "backToGates": "戻る — retour aux portiques JR",
+        "backToJrConcourse": "戻る — retour au hall JR",
+        "backDownToJr": "JRコンコースへ — descendre au hall JR",
+        "f4Observation": "展望デッキ — Pont d'observation",
+        "f4Restaurants": "レストラン・スカイガーデン — restaurants et jardin",
+        "backToSky": "戻る — retour au pont panoramique"
       },
       "nodes": {
         "names": {
@@ -5118,26 +5136,46 @@
           "b1Shops": "Boutiques de la galerie (B1)",
           "f1Concourse": "Esplanade de la sortie centrale (RdC)",
           "f1Plaza": "Parvis de la gare (RdC, extérieur)",
-          "f1West": "西口 / Sortie Ouest (RdC)"
+          "f1West": "西口 / Sortie Ouest (RdC)",
+          "f2Concourse": "Hall principal (2e)",
+          "f2Jrgates": "Portiques de correspondance JR (2e)",
+          "f2Westhall": "Hall de la Sortie Ouest (2e)",
+          "f3JrConcourse": "Hall JR (3e)",
+          "f3JrPlatform": "Quais JR 17–22 (3e)",
+          "f3Northdeck": "North Deck (3e)",
+          "f4Sky": "Hotel Skyway & pont (4e)",
+          "f4Observation": "Pont d'observation (4e)",
+          "f4Restaurants": "Restaurants & jardin (4e)"
         },
         "caps": {
           "b3Platform": "Vous venez de descendre de la ligne Rouge. Montez vers les sorties.",
           "b3End": "Une impasse au bout du quai — les sorties sont de l'autre côté.",
           "b3Concourse": "Escalators vers le hall de correspondance du B2. Montez-les.",
-          "b2Hall": "La route de la 西口 monte vers le B1. Les quais des lignes bifurquent sur le côté.",
-          "b2Platdir": "Cela ne mène qu'aux quais des lignes. Revenez au hall.",
+          "b2Hall": "La route de la 西口 monte vers le B1. Les quais bifurquent sur le côté.",
+          "b2Platdir": "Cela ne mène qu'aux quais. Revenez au hall.",
           "b1Mall": "La galerie souterraine. 中央出口 monte vers le rez-de-chaussée.",
           "b1Shops": "Que des boutiques ici — un détour. La sortie est de retour à 中央出口.",
-          "f1Concourse": "Rez-de-chaussée. 西口 est à gauche ; les autres sorties tout droit.",
-          "f1Plaza": "Vous êtes sorti. Les panneaux montrent 西口 à gauche — revenez si vous avez dépassé.",
-          "f1West": "Vous avez atteint la Sortie Ouest."
+          "f1Concourse": "Rez-de-chaussée. 西口 est à gauche ; le hall supérieur est en haut.",
+          "f1Plaza": "Vous êtes sorti. Les panneaux montrent 西口 à gauche — revenez si trop loin.",
+          "f1West": "Vous avez atteint la Sortie Ouest.",
+          "f2Concourse": "Le hall principal. 西口 à gauche, 中央改札 / JR のりかえ口 devant, 東口 à droite.",
+          "f2Jrgates": "Les portiques JR のりかえ口. Les quais JR sont en haut de l'escalator.",
+          "f2Westhall": "Le hall de la Sortie Ouest (2e) — un détour. Revenez au hall principal.",
+          "f3JrConcourse": "Hall JR. Les quais 17–22 par ici ; le pont est en haut.",
+          "f3JrPlatform": "Quais JR 17–22, dont l'Airport Express. Correspondance métro → JR faite.",
+          "f3Northdeck": "Le North Deck en plein air — loin des quais. Revenez.",
+          "f4Sky": "Niveau Hotel Skyway — le pont d'observation et le jardin.",
+          "f4Observation": "Le pont d'observation, vue sur la ville. Puis redescendez.",
+          "f4Restaurants": "Restaurants et jardin — un détour. Revenez pour redescendre."
         }
       },
       "clear": {
-        "summary": "Bien joué. Vous avez lu les panneaux du quai jusqu'à la rue.",
-        "l1": "出口 signifie toujours sortie ; 中央出口 est la sortie centrale principale.",
-        "l2": "西 = ouest, 東 = est — donc 西口 est la Sortie Ouest.",
-        "l3": "Suivez les panneaux étage par étage ; のりば mène aux quais, pas à la rue."
+        "titleWest": "Vous avez atteint la Sortie Ouest (西口) !",
+        "titleJr": "Vous avez atteint le quai JR (3e) !",
+        "summary": "Bien joué. Vous avez lu les panneaux jusqu'au bout — sans plan.",
+        "l1": "出口 = sortie ; のりかえ口 / 乗換 = correspondance.",
+        "l2": "中央改札 est le portique principal ; JR のりかえ口 mène aux quais JR.",
+        "l3": "Suivez les panneaux étage par étage — 西 = ouest, 東 = est."
       }
     }
   }

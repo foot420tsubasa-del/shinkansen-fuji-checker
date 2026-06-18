@@ -15,10 +15,14 @@ import {
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import {
+  nextStepToward,
+  optimalSteps,
   SAKURA_IMAGE_BASE,
+  sakuraMissions,
   sakuraWalk,
   type ExitDir,
   type SakuraExit,
+  type SakuraGoalKey,
 } from "@/data/station-practice/sakura/nodes";
 import { SakuraMiniMap } from "./SakuraMiniMap";
 
@@ -29,7 +33,6 @@ const DIR_ICON: Record<ExitDir, typeof ArrowUp> = {
   right: ArrowRight,
 };
 
-// Absolute placement of each directional hotspot over the scene image.
 const DIR_POS: Record<ExitDir, string> = {
   up: "left-1/2 top-3 -translate-x-1/2",
   down: "left-1/2 bottom-3 -translate-x-1/2",
@@ -44,13 +47,16 @@ const KEY_TO_DIR: Record<string, ExitDir> = {
   ArrowRight: "right",
 };
 
-export function SakuraMissionClient() {
+export function SakuraMissionClient({ goal }: { goal: SakuraGoalKey }) {
   const t = useTranslations("stationPractice");
-  const [nodeId, setNodeId] = useState(sakuraWalk.startNodeId);
+  const mission = sakuraMissions[goal];
+  const [nodeId, setNodeId] = useState(mission.startNodeId);
   const [steps, setSteps] = useState(0);
   const [showHint, setShowHint] = useState(false);
 
   const node = sakuraWalk.nodes[nodeId];
+  const cleared = nodeId === mission.goalNodeId;
+  const recommendedTo = showHint ? nextStepToward(nodeId, mission.goalNodeId) : null;
 
   const move = useCallback((exit: SakuraExit) => {
     setSteps((s) => s + 1);
@@ -59,18 +65,16 @@ export function SakuraMissionClient() {
   }, []);
 
   const restart = useCallback(() => {
-    setNodeId(sakuraWalk.startNodeId);
+    setNodeId(mission.startNodeId);
     setSteps(0);
     setShowHint(false);
-  }, []);
+  }, [mission.startNodeId]);
 
-  // Arrow keys walk through a matching hotspot; 1–9 pick exits in order.
   useEffect(() => {
-    if (node.goal) return;
+    if (cleared) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key in KEY_TO_DIR) {
-        const dir = KEY_TO_DIR[e.key];
-        const exit = node.exits.find((x) => x.dir === dir);
+        const exit = node.exits.find((x) => x.dir === KEY_TO_DIR[e.key]);
         if (exit) {
           e.preventDefault();
           move(exit);
@@ -85,14 +89,15 @@ export function SakuraMissionClient() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [node, move]);
+  }, [node, move, cleared]);
 
-  if (node.goal) {
+  if (cleared) {
     return (
       <CompletionScreen
-        image={node.image}
-        floor={node.floor}
+        node={node}
         steps={steps}
+        bestRoute={optimalSteps(goal)}
+        clearTitle={t(goal === "west" ? "mission.clear.titleWest" : "mission.clear.titleJr")}
         t={t}
         onRestart={restart}
       />
@@ -104,18 +109,18 @@ export function SakuraMissionClient() {
       <TopBar t={t} />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-4 pb-10 pt-4 sm:px-6">
-        {/* Objective */}
         <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl border border-yellow-300/20 bg-yellow-300/[0.04] px-4 py-3">
           <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-yellow-300">
             <Compass className="h-3.5 w-3.5" />
             {t("ui.objective")}
           </span>
-          <span className="text-sm text-neutral-200">{t("mission.objective")}</span>
+          <span className="text-sm text-neutral-200">
+            {t(`mission.objectives.${goal}` as never)}
+          </span>
         </div>
 
         <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
           <div className="flex flex-col gap-4">
-            {/* Scene with directional hotspots */}
             <figure className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40">
               <div className="relative aspect-video">
                 <Image
@@ -134,7 +139,7 @@ export function SakuraMissionClient() {
 
                 {node.exits.map((exit, i) => {
                   const Icon = DIR_ICON[exit.dir];
-                  const highlight = showHint && exit.recommended;
+                  const highlight = exit.to === recommendedTo;
                   return (
                     <button
                       key={exit.to}
@@ -181,7 +186,6 @@ export function SakuraMissionClient() {
               </figcaption>
             </figure>
 
-            {/* Exit list (clear, tappable fallback that mirrors the hotspots) */}
             <div>
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-500">
@@ -200,7 +204,7 @@ export function SakuraMissionClient() {
               <div className="grid gap-2.5">
                 {node.exits.map((exit, i) => {
                   const Icon = DIR_ICON[exit.dir];
-                  const highlight = showHint && exit.recommended;
+                  const highlight = exit.to === recommendedTo;
                   return (
                     <button
                       key={exit.to}
@@ -235,7 +239,6 @@ export function SakuraMissionClient() {
             </div>
           </div>
 
-          {/* Side rail */}
           <aside className="flex flex-col gap-3">
             <SakuraMiniMap
               blueprint={node.blueprint}
@@ -285,15 +288,17 @@ function TopBar({ t }: { t: ReturnType<typeof useTranslations> }) {
 }
 
 function CompletionScreen({
-  image,
-  floor,
+  node,
   steps,
+  bestRoute,
+  clearTitle,
   t,
   onRestart,
 }: {
-  image: string;
-  floor: string;
+  node: { image: string; floor: string; nameKey: string };
   steps: number;
+  bestRoute: number;
+  clearTitle: string;
   t: ReturnType<typeof useTranslations>;
   onRestart: () => void;
 }) {
@@ -304,21 +309,21 @@ function CompletionScreen({
         <figure className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40">
           <div className="relative aspect-video">
             <Image
-              src={`${SAKURA_IMAGE_BASE}/${image}.webp`}
-              alt={t("mission.nodes.names.f1West")}
+              src={`${SAKURA_IMAGE_BASE}/${node.image}.webp`}
+              alt={t(`mission.nodes.names.${node.nameKey}` as never)}
               fill
               priority
               sizes="(max-width: 768px) 100vw, 700px"
               className="object-cover"
             />
             <div className="absolute left-3 top-3 rounded-full bg-yellow-300 px-3 py-1 text-xs font-semibold text-black">
-              {floor}
+              {node.floor}
             </div>
           </div>
         </figure>
 
         <h1 className="mt-6 text-2xl font-semibold tracking-tight text-white">
-          {t("ui.clearTitle")}
+          {clearTitle}
         </h1>
         <p className="mt-2 text-sm leading-6 text-neutral-300">
           {t("mission.clear.summary")}
@@ -328,7 +333,7 @@ function CompletionScreen({
             {t("ui.moves", { n: steps })}
           </span>
           <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1">
-            {t("ui.bestRoute", { n: sakuraWalk.optimalSteps })}
+            {t("ui.bestRoute", { n: bestRoute })}
           </span>
         </div>
 
