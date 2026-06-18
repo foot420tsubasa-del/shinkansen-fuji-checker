@@ -916,7 +916,7 @@ const rawStayPages: StayPage[] = [
   {
     slug: "asakusa-vs-ueno",
     title: "Asakusa vs Ueno: Where Should You Stay in Tokyo?",
-    description: "Compare Asakusa and Ueno for first-time Tokyo visitors. Choose the better hotel base for old Tokyo atmosphere, Narita access, budget hotels, museums and food.",
+    description: "Asakusa or Ueno for your Tokyo hotel? Ueno wins on Narita access (Skyliner 36 min), budget hotels, and a 7-min hop to Tokyo Station; Asakusa wins on old-town atmosphere and Senso-ji. Side-by-side compare with hotel picks for first-time visitors.",
     quickRec: {
       area: "Ueno",
       why: "Ueno is more practical: direct Skyliner from Narita, JR to Tokyo Station in 7 min, budget hotels, and Ameyoko market. Asakusa is more atmospheric but slightly less convenient for rail connections. Both areas are only 5 minutes apart by Metro.",
@@ -980,6 +980,9 @@ const rawStayPages: StayPage[] = [
       { question: "Which is closer to Narita Airport?", answer: "Ueno — the Keisei Skyliner runs directly from Narita to Ueno in 36 minutes. From Asakusa, the Access Express takes about 55 minutes." },
       { question: "Is Asakusa good for families?", answer: "Yes — Senso-ji, Nakamise shopping street, and nearby Tokyo Skytree are family-friendly. The area is calmer than Shinjuku. Ueno also works well with the zoo, parks, and museums." },
       { question: "Can I walk from Ueno to Asakusa?", answer: "Yes — it's about a 20-minute walk through Kappabashi (Kitchen Town) or along the river. By Metro (Ginza Line), it's one stop, about 5 minutes." },
+      { question: "Is Asakusa or Ueno cheaper for hotels?", answer: "Ueno generally has more budget hotels and hostels, especially around Ueno Station and Okachimachi, so it's the easier area to find a low-priced room. Asakusa has good value too but fewer rooms overall, so prices can rise on busy dates. Check live prices for both before deciding." },
+      { question: "Ueno or Asakusa for an easy first night with luggage?", answer: "Ueno is easier: the Keisei Skyliner runs direct from Narita (36 min) straight to Ueno, so you arrive with minimal transfers. From Asakusa the Access Express takes about 55 minutes. If your first night is right after a long flight, Ueno keeps luggage handling simplest." },
+      { question: "Which has more to do at night, Asakusa or Ueno?", answer: "Ueno has more late dining and izakaya, especially around Ameyoko, while Asakusa is quieter after the temples close in the evening. For nightlife you'd still go to Shinjuku or Shibuya, but between these two, Ueno stays livelier later." },
     ],
   },
   {

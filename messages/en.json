@@ -3044,11 +3044,25 @@
           "area": "Shinjuku",
           "why": "Best balance of nightlife, transport access, and hotel density. 10 min to Tokyo Station for Shinkansen day trips. Most first-timers start here."
         },
-        "proTip": "If you're taking the Shinkansen to Kyoto on Day 3+, staying in Shinjuku and transferring to Tokyo Station is more fun than staying near Tokyo Station the whole time."
+        "proTip": "If you're taking the Shinkansen to Kyoto on Day 3+, staying in Shinjuku and transferring to Tokyo Station is more fun than staying near Tokyo Station the whole time.",
+        "faqs": [
+          {
+            "question": "Where should a first-time visitor stay in Tokyo?",
+            "answer": "Shinjuku is the best all-round base — strong transport, lots of hotels, and about 10 minutes to Tokyo Station for Shinkansen day trips. Choose Ueno for value and Narita access, Asakusa for atmosphere, or Tokyo Station if you have an early Shinkansen."
+          },
+          {
+            "question": "Which Tokyo area is easiest with luggage after a long flight?",
+            "answer": "Ueno (direct Keisei Skyliner from Narita) or Tokyo Station are the easiest first-night bases. If you are jet-lagged, the huge Shinjuku station can be tiring on the first night — it is a better base once you are oriented."
+          },
+          {
+            "question": "How many nights should I stay in Tokyo?",
+            "answer": "Most first-timers spend 3 to 4 nights in Tokyo, based in one area, and day-trip from there. Pick a single well-connected base rather than moving hotels every night, which wastes time with luggage."
+          }
+        ]
       },
       "shinjuku-vs-ueno-vs-asakusa": {
         "title": "Shinjuku vs Ueno vs Asakusa — which Tokyo base is right?",
-        "description": "A head-to-head comparison of Tokyo's three most popular tourist areas: transport, budget, vibe, and best traveler fit.",
+        "description": "Shinjuku vs Ueno vs Asakusa for your Tokyo hotel: Shinjuku for transport and nightlife, Ueno for value and Narita access (Skyliner 36 min), Asakusa for old-town atmosphere and Senso-ji. A head-to-head with hotel picks for first-time visitors.",
         "quickRec": {
           "area": "Shinjuku",
           "why": "If you can only pick one, Shinjuku wins on transport flexibility, dining variety, and nightlife. Ueno is better for value, while Asakusa is stronger for atmosphere."
@@ -3111,6 +3125,20 @@
             "title": "7-day Japan itinerary",
             "description": "Place Tokyo, Fuji, Kyoto and Osaka in order.",
             "cta": "View itinerary"
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Which of Shinjuku, Ueno, or Asakusa is best for first-time Tokyo?",
+            "answer": "Shinjuku is the best all-rounder for transport flexibility, dining, and hotel choice. Ueno is better for value and Narita access, and Asakusa is stronger for old-town atmosphere. Most first-timers do well starting in Shinjuku unless budget or airport convenience is the priority."
+          },
+          {
+            "question": "Which of the three is cheapest for hotels?",
+            "answer": "Ueno and Asakusa are generally cheaper than Shinjuku, and Ueno has the most budget hotels and hostels. Shinjuku's central rooms tend to cost more, though it also has the widest overall range. Compare live prices before booking."
+          },
+          {
+            "question": "Which is easiest from Narita Airport?",
+            "answer": "Ueno — the Keisei Skyliner reaches it directly in 36 minutes. Asakusa is about 55 minutes via the Access Express, and Shinjuku takes longer (N'EX roughly 80 minutes or a limousine bus). For a smooth first night after a long flight, Ueno is simplest."
           }
         ]
       },
@@ -3392,7 +3420,7 @@
       },
       "tokyo-station-vs-shinjuku": {
         "title": "Tokyo Station vs Shinjuku: Where Should You Stay in Tokyo?",
-        "description": "Compare Tokyo Station and Shinjuku for Shinkansen access, nightlife, food, airport transfers, and luggage.",
+        "description": "Tokyo Station or Shinjuku for your hotel? Stay near Tokyo Station for early Shinkansen and luggage-first trips (every Shinkansen line, zero transfer); pick Shinjuku for nightlife, dining, and hotel choice with a 10-min JR hop to the Shinkansen. Compared side by side with hotel picks.",
         "quickRec": {
           "area": "Shinjuku",
           "why": "Shinjuku is the better all-round base if a short transfer to Tokyo Station is acceptable. Tokyo Station wins for early Shinkansen and luggage-first trips."
@@ -3507,11 +3535,25 @@
             "description": "Check whether your route has enough long-distance JR rides before buying.",
             "cta": "Read guide"
           }
+        ],
+        "faqs": [
+          {
+            "question": "Should I stay near Tokyo Station for the Shinkansen?",
+            "answer": "Yes if you have an early Shinkansen or are travelling luggage-first — Tokyo Station has every Shinkansen line with zero transfer, so departure mornings are effortless. If your train is later or mid-trip, Shinjuku is fine: it is about 10 minutes away by JR Chuo Line and has far more to do."
+          },
+          {
+            "question": "Which is cheaper, Tokyo Station or Shinjuku hotels?",
+            "answer": "Shinjuku usually offers a wider price range, including mid-range and budget rooms. The Tokyo Station, Marunouchi, and Ginza side skews toward business and upscale hotels, so nightly rates tend to be higher. Check live prices for both before booking."
+          },
+          {
+            "question": "Is Shinjuku or Tokyo Station better for the airport?",
+            "answer": "Both have the Narita Express (N'EX) running direct, so Narita is easy from either. Shinjuku also has frequent limousine buses straight to many hotels, which is handy with luggage. For Haneda, both connect simply via train or bus."
+          }
         ]
       },
       "ueno-vs-shinjuku": {
         "title": "Ueno vs Shinjuku: Which Tokyo Area Should You Stay In?",
-        "description": "Compare Ueno and Shinjuku for Narita access, hotel value, nightlife, food, museums, luggage, and train convenience.",
+        "description": "Ueno or Shinjuku for your Tokyo hotel? Ueno wins on Narita access (Keisei Skyliner 36 min) and budget rooms; Shinjuku wins on nightlife, dining density, and transport flexibility. The two are 25 min apart on the JR Yamanote Line. Compared with hotel picks.",
         "quickRec": {
           "area": "Ueno",
           "why": "Ueno is smarter for Narita arrivals and value. Shinjuku is stronger for nightlife, food density, and first-time Tokyo energy."
@@ -3547,6 +3589,20 @@
             ],
             "bestFor": "Nightlife + flexibility",
             "transport": "10 min to Tokyo Station. Narita Express direct. Odakyu to Hakone."
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Ueno or Shinjuku for Narita Airport?",
+            "answer": "Ueno — the Keisei Skyliner runs direct from Narita to Ueno in 36 minutes, cheaper and with fewer transfers. Shinjuku from Narita takes longer (N'EX about 80 minutes, or a limousine bus), so Ueno is the easier first-night base for Narita arrivals."
+          },
+          {
+            "question": "Which is cheaper for hotels, Ueno or Shinjuku?",
+            "answer": "Ueno. It has more budget hotels and hostels, especially around the station and Okachimachi. Shinjuku has a wider overall range but central rooms generally cost more. Check live prices for both."
+          },
+          {
+            "question": "Is Shinjuku worth it over Ueno for first-timers?",
+            "answer": "If you want nightlife, big-city energy, and the most transport options, Shinjuku is worth it. If you prioritise value, Narita access, and museums, Ueno is smarter. They are only 25 minutes apart on the JR Yamanote Line, so you can easily visit both."
           }
         ]
       },
@@ -3835,7 +3891,7 @@
       },
       "asakusa-vs-ueno": {
         "title": "Asakusa vs Ueno: Where Should You Stay in Tokyo?",
-        "description": "Compare Asakusa and Ueno for old Tokyo atmosphere, Narita access, budget hotels, museums, and food.",
+        "description": "Asakusa or Ueno for your Tokyo hotel? Ueno wins on Narita access (Skyliner 36 min), budget hotels, and a 7-min hop to Tokyo Station; Asakusa wins on old-town atmosphere and Senso-ji. Side-by-side compare with hotel picks for first-time visitors.",
         "quickRec": {
           "area": "Ueno",
           "why": "Ueno is usually the more practical first-time base thanks to Narita access and JR links. Asakusa is better for atmosphere and temple walks."
@@ -3889,6 +3945,18 @@
           {
             "question": "Can I walk from Ueno to Asakusa?",
             "answer": "Yes. It is about a 20-minute walk, or one short ride on the Ginza Line."
+          },
+          {
+            "question": "Is Asakusa or Ueno cheaper for hotels?",
+            "answer": "Ueno generally has more budget hotels and hostels, especially around Ueno Station and Okachimachi, so it is the easier area to find a low-priced room. Asakusa has good value too but fewer rooms overall, so prices can rise on busy dates. Check live prices for both before deciding."
+          },
+          {
+            "question": "Ueno or Asakusa for an easy first night with luggage?",
+            "answer": "Ueno is easier: the Keisei Skyliner runs direct from Narita (36 min) straight to Ueno, so you arrive with minimal transfers. From Asakusa the Access Express takes about 55 minutes. If your first night is right after a long flight, Ueno keeps luggage handling simplest."
+          },
+          {
+            "question": "Which has more to do at night, Asakusa or Ueno?",
+            "answer": "Ueno has more late dining and izakaya, especially around Ameyoko, while Asakusa is quieter after the temples close in the evening. For nightlife you would still go to Shinjuku or Shibuya, but between these two, Ueno stays livelier later."
           }
         ]
       }
