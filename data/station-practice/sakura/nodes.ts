@@ -1,31 +1,33 @@
 /**
- * Sakura Central Station — node-navigation trial mission.
+ * Sakura Central Station — free-walk node graph.
  *
- * "Red Metro Line platform (B3) → West Exit (西口, 1F)".
+ * A Street-View / Myst-style navigable map. Each node is one POV viewpoint;
+ * each exit is a directional hotspot overlaid on the scene that walks you to a
+ * connected viewpoint. Movement is free — you can take detours, hit dead-ends,
+ * and backtrack. There is no "wrong answer" punishment; you navigate by reading
+ * the Japanese wayfinding signs toward the goal (西口 / West Exit, 1F).
  *
- * This is the language-agnostic scene GRAPH only. All user-facing copy lives in
- * messages/*.json under `stationPractice.mission.*` and is resolved at render
- * time, so the same graph drives all 9 locales. Japanese wayfinding tokens
- * (出口 / 中央出口 / 西口 …) are embedded inside the localized strings because
- * reading those signs is the point of the exercise.
- *
+ * Copy lives in messages/*.json under `stationPractice.mission.*`; this file is
+ * the language-agnostic graph. Japanese sign tokens stay verbatim in the copy.
  * Images are the optimized webp set under public/images/station-practice/sakura/.
  */
 
-export type SakuraChoiceKey = "a" | "b" | "c";
+export type ExitDir = "up" | "down" | "left" | "right";
 
-export type SakuraChoice = {
-  /** Maps to mission.<node>.<key> in the message catalog. */
-  key: SakuraChoiceKey;
-  /** Exactly one choice per node is correct. */
-  correct?: boolean;
-  /** Next node id when correct; "clear" finishes the mission. */
-  next?: string;
+export type SakuraExit = {
+  /** Destination node id. */
+  to: string;
+  /** i18n key under mission.exits.* */
+  labelKey: string;
+  /** Placement zone + arrow direction of the hotspot. */
+  dir: ExitDir;
+  /** On the optimal path to the goal — surfaced when the player asks for a hint. */
+  recommended?: boolean;
 };
 
 export type SakuraNode = {
   id: string;
-  /** Floor label shown in the minimap rail, e.g. "B3", "1F". */
+  /** Floor label, e.g. "B3", "1F". */
   floor: string;
   /** Scene still (without extension) under .../sakura/. */
   image: string;
@@ -33,82 +35,145 @@ export type SakuraNode = {
   blueprint: string;
   /** "You are here" marker position as % of the blueprint image. */
   marker: { x: number; y: number };
-  /**
-   * Display order of the three choices. The correct option is NOT always first,
-   * so players read the signs rather than memorising a button position.
-   */
-  order: SakuraChoiceKey[];
-  choices: Record<SakuraChoiceKey, SakuraChoice>;
+  /** i18n keys under mission.nodes.<id>.* */
+  nameKey: string;
+  captionKey: string;
+  exits: SakuraExit[];
+  /** Reaching this node completes the mission. */
+  goal?: boolean;
 };
 
-/** Floors this mission passes through, top → bottom (for the minimap rail). */
+/** Floors this mission spans, top → bottom (for the minimap rail). */
 export const SAKURA_FLOORS = ["1F", "B1", "B2", "B3"] as const;
 
 export const SAKURA_IMAGE_BASE = "/images/station-practice/sakura";
 
-export const sakuraMission = {
-  id: "sakura-red-west",
-  startNodeId: "n1",
-  totalStops: 4,
-  /** Final scene shown after the last correct choice. */
-  clear: {
-    image: "1f-west-exit",
-    floor: "1F",
+const nodes: Record<string, SakuraNode> = {
+  "b3-platform": {
+    id: "b3-platform",
+    floor: "B3",
+    image: "b3-red-platform",
+    blueprint: "blueprint-b3",
+    marker: { x: 50, y: 58 },
+    nameKey: "b3Platform",
+    captionKey: "b3Platform",
+    exits: [
+      { to: "b3-concourse", labelKey: "toB3Concourse", dir: "up", recommended: true },
+      { to: "b3-end", labelKey: "b3PlatformEnd", dir: "right" },
+    ],
   },
-  nodes: {
-    n1: {
-      id: "n1",
-      floor: "B3",
-      image: "b3-red-platform",
-      blueprint: "blueprint-b3",
-      marker: { x: 50, y: 56 },
-      order: ["a", "b", "c"],
-      choices: {
-        a: { key: "a", correct: true, next: "n2" },
-        b: { key: "b" },
-        c: { key: "c" },
-      },
-    },
-    n2: {
-      id: "n2",
-      floor: "B2",
-      image: "b2-transfer-hall",
-      blueprint: "blueprint-b2",
-      marker: { x: 50, y: 58 },
-      order: ["b", "a", "c"],
-      choices: {
-        a: { key: "a", correct: true, next: "n3" },
-        b: { key: "b" },
-        c: { key: "c" },
-      },
-    },
-    n3: {
-      id: "n3",
-      floor: "B1",
-      image: "b1-underground-mall",
-      blueprint: "blueprint-b1",
-      marker: { x: 48, y: 60 },
-      order: ["a", "c", "b"],
-      choices: {
-        a: { key: "a", correct: true, next: "n4" },
-        b: { key: "b" },
-        c: { key: "c" },
-      },
-    },
-    n4: {
-      id: "n4",
-      floor: "1F",
-      image: "1f-central-plaza",
-      blueprint: "blueprint-1f",
-      marker: { x: 24, y: 54 },
-      order: ["c", "a", "b"],
-      choices: {
-        a: { key: "a", correct: true, next: "clear" },
-        b: { key: "b" },
-        c: { key: "c" },
-      },
-    },
-  } as Record<string, SakuraNode>,
+  "b3-end": {
+    id: "b3-end",
+    floor: "B3",
+    image: "b3-platform-end",
+    blueprint: "blueprint-b3",
+    marker: { x: 72, y: 42 },
+    nameKey: "b3End",
+    captionKey: "b3End",
+    exits: [{ to: "b3-platform", labelKey: "backToPlatform", dir: "down" }],
+  },
+  "b3-concourse": {
+    id: "b3-concourse",
+    floor: "B3",
+    image: "b3-concourse",
+    blueprint: "blueprint-b3",
+    marker: { x: 50, y: 40 },
+    nameKey: "b3Concourse",
+    captionKey: "b3Concourse",
+    exits: [
+      { to: "b2-hall", labelKey: "escUpToB2", dir: "up", recommended: true },
+      { to: "b3-platform", labelKey: "backToPlatform", dir: "down" },
+    ],
+  },
+  "b2-hall": {
+    id: "b2-hall",
+    floor: "B2",
+    image: "b2-hall",
+    blueprint: "blueprint-b2",
+    marker: { x: 50, y: 50 },
+    nameKey: "b2Hall",
+    captionKey: "b2Hall",
+    exits: [
+      { to: "b1-mall", labelKey: "toB1West", dir: "up", recommended: true },
+      { to: "b2-platdir", labelKey: "b2PlatformDirs", dir: "right" },
+    ],
+  },
+  "b2-platdir": {
+    id: "b2-platdir",
+    floor: "B2",
+    image: "b2-transfer-hall",
+    blueprint: "blueprint-b2",
+    marker: { x: 34, y: 56 },
+    nameKey: "b2Platdir",
+    captionKey: "b2Platdir",
+    exits: [{ to: "b2-hall", labelKey: "backToHall", dir: "down" }],
+  },
+  "b1-mall": {
+    id: "b1-mall",
+    floor: "B1",
+    image: "b1-underground-mall",
+    blueprint: "blueprint-b1",
+    marker: { x: 48, y: 60 },
+    nameKey: "b1Mall",
+    captionKey: "b1Mall",
+    exits: [
+      { to: "f1-concourse", labelKey: "toCentralExit1F", dir: "up", recommended: true },
+      { to: "b1-shops", labelKey: "b1Shops", dir: "right" },
+    ],
+  },
+  "b1-shops": {
+    id: "b1-shops",
+    floor: "B1",
+    image: "b1-shops",
+    blueprint: "blueprint-b1",
+    marker: { x: 66, y: 46 },
+    nameKey: "b1Shops",
+    captionKey: "b1Shops",
+    exits: [{ to: "b1-mall", labelKey: "backToMall", dir: "down" }],
+  },
+  "f1-concourse": {
+    id: "f1-concourse",
+    floor: "1F",
+    image: "1f-central-plaza",
+    blueprint: "blueprint-1f",
+    marker: { x: 42, y: 55 },
+    nameKey: "f1Concourse",
+    captionKey: "f1Concourse",
+    exits: [
+      { to: "f1-west", labelKey: "west", dir: "left", recommended: true },
+      { to: "f1-plaza", labelKey: "centralPlazaOutside", dir: "up" },
+    ],
+  },
+  "f1-plaza": {
+    id: "f1-plaza",
+    floor: "1F",
+    image: "1f-plaza-outdoor",
+    blueprint: "blueprint-1f",
+    marker: { x: 42, y: 82 },
+    nameKey: "f1Plaza",
+    captionKey: "f1Plaza",
+    exits: [{ to: "f1-concourse", labelKey: "backIndoors", dir: "down" }],
+  },
+  "f1-west": {
+    id: "f1-west",
+    floor: "1F",
+    image: "1f-west-exit",
+    blueprint: "blueprint-1f",
+    marker: { x: 22, y: 54 },
+    nameKey: "f1West",
+    captionKey: "f1West",
+    exits: [],
+    goal: true,
+  },
 };
 
-export type SakuraMission = typeof sakuraMission;
+export const sakuraWalk = {
+  id: "sakura-red-west",
+  startNodeId: "b3-platform",
+  goalNodeId: "f1-west",
+  /** Fewest moves from start to goal (for the "best route" stat). */
+  optimalSteps: 5,
+  nodes,
+};
+
+export type SakuraWalk = typeof sakuraWalk;

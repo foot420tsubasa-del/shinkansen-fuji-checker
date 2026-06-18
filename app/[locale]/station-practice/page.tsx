@@ -55,13 +55,13 @@ const missionCards: readonly MissionCardData[] = [
   },
   {
     id: "mission-3",
-    title: "Sakura Central — Red Metro → West Exit",
+    title: "Sakura Central — walk to the West Exit",
     description:
-      "New node-navigation mode: walk a 4-floor station from the subway platform up to the street exit. Available in 9 languages.",
+      "New free-walk mode: explore a 4-floor station, follow the Japanese signs, and find your own way from the subway platform to the street exit. Available in 9 languages.",
     status: "New",
-    cta: "Try node navigation",
+    cta: "Try free walk",
     href: "/station-practice/sakura",
-    routeLabel: "Node navigation",
+    routeLabel: "Free walk",
   },
 ];
 

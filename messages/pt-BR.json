@@ -5071,77 +5071,73 @@
   },
   "stationPractice": {
     "ui": {
-      "kicker": "Navegação por nós · teste",
-      "goal": "Objetivo",
-      "floor": "Andar",
+      "kicker": "Caminhada livre · teste",
+      "objective": "Missão",
       "youAreHere": "Você está aqui",
       "stationMap": "Mapa da estação",
-      "location": "Você está em",
-      "mission": "Próximo passo",
-      "choices": "Por onde ir?",
-      "hintShow": "Mostrar dica",
+      "whereTo": "Por onde você anda?",
+      "look": "O que você vê",
+      "hintShow": "Dica",
       "hintHide": "Ocultar dica",
-      "correct": "Caminho certo",
-      "wrong": "Quase lá",
-      "continue": "Continuar",
-      "restart": "Recomeçar",
+      "hintText": "A placa rumo à Saída Oeste está destacada.",
       "back": "Voltar às missões",
-      "stopOf": "Parada {current} de {total}",
-      "keyboardHint": "Dica: pressione 1–3 (ou A–C) para escolher, Enter para continuar.",
+      "moves": "{n} passos",
+      "keyboardHint": "Setas movem você · ou clique numa placa.",
       "clearTitle": "Você chegou à Saída Oeste (西口)",
       "lessons": "O que você praticou",
-      "playAgain": "Jogar de novo"
+      "playAgain": "Andar de novo",
+      "bestRoute": "Melhor rota: {n} passos"
     },
     "mission": {
-      "title": "Metrô Vermelho → Saída Oeste",
-      "subtitle": "Estação Sakura Central · 4 andares para cima",
-      "goal": "Vá da plataforma da Linha Vermelha do metrô (B3) até a Saída Oeste (西口) no térreo.",
-      "n1": {
-        "loc": "Plataforma da Linha Vermelha (B3)",
-        "step": "Você acabou de descer do trem. Encontre o caminho para cima, rumo às saídas.",
-        "hint": "Procure as placas amarelas 出口 (Saída) — elas sempre apontam para cima e para fora.",
-        "a": "Siga 出口 / 上り (escada rolante para cima)",
-        "b": "Caminhe mais para o fundo da plataforma",
-        "c": "Atravesse para a Linha Azul",
-        "fb": "Plataformas são becos sem saída para sair. Siga as placas amarelas 出口 para cima.",
-        "fc": "É a plataforma de outra linha — você não precisa trocar de trem para sair."
+      "title": "Sakura Central — caminhe até a Saída Oeste",
+      "subtitle": "Caminhada livre · siga as placas · B3 → 1F",
+      "objective": "Siga as placas da plataforma do Metrô Vermelho até a 西口 (Saída Oeste).",
+      "exits": {
+        "toB3Concourse": "中央連絡ホール — Hall de Interligação (para B2)",
+        "b3PlatformEnd": "赤メトロ 1–4番線 — fim da plataforma (sem saída)",
+        "escUpToB2": "エスカレーター上り — subir para B2",
+        "backToPlatform": "戻る — voltar à plataforma",
+        "toB1West": "B1 地下街連絡口・西口 — subir rumo à Saída Oeste",
+        "b2PlatformDirs": "各線のりば — para as plataformas das linhas",
+        "backToHall": "戻る — voltar ao saguão",
+        "toCentralExit1F": "中央出口 — subir para o 1º andar",
+        "b1Shops": "地下街の売店 — lojas da galeria (desvio)",
+        "backToMall": "戻る — voltar à galeria",
+        "west": "西口 — Saída Oeste",
+        "centralPlazaOutside": "中央出口広場 — sair para a praça",
+        "backIndoors": "戻る — voltar para dentro"
       },
-      "n2": {
-        "loc": "Hall de Transferência do Metrô (B2)",
-        "step": "Continue subindo rumo à 中央出口 (Saída Central) — não entre no portão de outra linha.",
-        "hint": "Portões com a cor da linha levam ÀS plataformas. A saída é sinalizada 中央出口.",
-        "a": "Siga 中央出口 (sobe para B1)",
-        "b": "Entre no portão da Linha Azul",
-        "c": "Escada rolante para o saguão do 2º andar",
-        "fb": "Esse portão leva às plataformas da Linha Azul, não à rua.",
-        "fc": "O saguão do 2º andar é das linhas JR. Para a rua, siga 中央出口."
-      },
-      "n3": {
-        "loc": "Galeria Subterrânea (B1)",
-        "step": "Quase no nível da rua — siga 中央出口 para cima. Ignore a passagem subterrânea.",
-        "hint": "中央出口 com seta para cima leva à praça do térreo.",
-        "a": "Siga 中央出口 (sobe para o 1º andar)",
-        "b": "Pegue a 東西地下連絡通路 (passagem)",
-        "c": "Volte para as plataformas",
-        "fb": "Essa passagem só cruza por baixo da estação. A saída é para cima, via 中央出口.",
-        "fc": "Caminho errado — você quer subir até o térreo."
-      },
-      "n4": {
-        "loc": "Praça da Saída Central (1º andar)",
-        "step": "Você está no térreo. A 西口 (Saída Oeste) fica à sua esquerda.",
-        "hint": "西 significa oeste. A placa 西口 fica do lado esquerdo da praça.",
-        "a": "Vá para 西口 (Saída Oeste, esquerda)",
-        "b": "Vá para 東口 (Saída Leste, direita)",
-        "c": "Vá para a バスターミナル (Terminal de Ônibus)",
-        "fb": "É o lado oposto — 東 significa leste. A 西口 fica à sua esquerda.",
-        "fc": "O terminal de ônibus não é uma saída para a rua. Pegue a 西口."
+      "nodes": {
+        "names": {
+          "b3Platform": "Plataforma da Linha Vermelha (B3)",
+          "b3End": "Fim da plataforma (B3)",
+          "b3Concourse": "Acesso ao hall de interligação (B3)",
+          "b2Hall": "Hall de transferência do metrô (B2)",
+          "b2Platdir": "Rumo às plataformas das linhas (B2)",
+          "b1Mall": "Galeria subterrânea (B1)",
+          "b1Shops": "Lojas da galeria (B1)",
+          "f1Concourse": "Praça da saída central (1º andar)",
+          "f1Plaza": "Praça em frente à estação (1º, fora)",
+          "f1West": "西口 / Saída Oeste (1º andar)"
+        },
+        "caps": {
+          "b3Platform": "Você acabou de descer da Linha Vermelha. Suba rumo às saídas.",
+          "b3End": "Um beco sem saída na plataforma — as saídas são para o outro lado.",
+          "b3Concourse": "Escadas rolantes ao hall de interligação do B2. Suba por elas.",
+          "b2Hall": "A rota da 西口 sobe para o B1. As plataformas das linhas saem para o lado.",
+          "b2Platdir": "Isto só leva às plataformas das linhas. Volte ao saguão.",
+          "b1Mall": "A galeria subterrânea. 中央出口 sobe para o térreo.",
+          "b1Shops": "Só lojas aqui — um desvio. A saída é de volta na 中央出口.",
+          "f1Concourse": "Térreo. 西口 fica à esquerda; outras saídas em frente.",
+          "f1Plaza": "Você saiu. As placas mostram 西口 à esquerda — volte se passou.",
+          "f1West": "Você chegou à Saída Oeste."
+        }
       },
       "clear": {
-        "loc": "Saída Oeste (西口) · térreo",
-        "summary": "Muito bem. Você leu as placas da plataforma até a rua — sem nenhuma curva errada.",
-        "l1": "出口 sempre significa saída e aponta para cima e para fora.",
-        "l2": "中央出口 é a saída central principal — sua rota padrão para a rua.",
-        "l3": "西 = oeste, 東 = leste. 西口 é a Saída Oeste."
+        "summary": "Muito bem. Você leu as placas da plataforma até a rua.",
+        "l1": "出口 sempre significa saída; 中央出口 é a saída central principal.",
+        "l2": "西 = oeste, 東 = leste — então 西口 é a Saída Oeste.",
+        "l3": "Siga as placas subindo andar a andar; のりば leva às plataformas, não à rua."
       }
     }
   }

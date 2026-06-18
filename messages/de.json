@@ -5070,77 +5070,73 @@
   },
   "stationPractice": {
     "ui": {
-      "kicker": "Knoten-Navigation · Test",
-      "goal": "Ziel",
-      "floor": "Ebene",
+      "kicker": "Freies Gehen · Test",
+      "objective": "Mission",
       "youAreHere": "Sie sind hier",
       "stationMap": "Bahnhofsplan",
-      "location": "Sie sind bei",
-      "mission": "Nächster Schritt",
-      "choices": "Welcher Weg?",
-      "hintShow": "Hinweis anzeigen",
+      "whereTo": "Wohin gehen Sie?",
+      "look": "Was Sie sehen",
+      "hintShow": "Hinweis",
       "hintHide": "Hinweis ausblenden",
-      "correct": "Richtiger Weg",
-      "wrong": "Fast",
-      "continue": "Weiter",
-      "restart": "Neu starten",
+      "hintText": "Das Schild zum Westausgang ist hervorgehoben.",
       "back": "Zurück zu den Missionen",
-      "stopOf": "Stopp {current} von {total}",
-      "keyboardHint": "Tipp: 1–3 (oder A–C) zum Wählen, Enter zum Fortfahren.",
+      "moves": "{n} Schritte",
+      "keyboardHint": "Pfeiltasten bewegen Sie · oder klicken Sie ein Schild.",
       "clearTitle": "Sie haben den Westausgang (西口) erreicht",
       "lessons": "Das haben Sie geübt",
-      "playAgain": "Nochmal spielen"
+      "playAgain": "Nochmal gehen",
+      "bestRoute": "Beste Route: {n} Schritte"
     },
     "mission": {
-      "title": "Rote Metro → Westausgang",
-      "subtitle": "Bahnhof Sakura Central · 4 Ebenen nach oben",
-      "goal": "Vom Bahnsteig der roten Metro-Linie (B3) hinauf zum Westausgang (西口) im Erdgeschoss.",
-      "n1": {
-        "loc": "Bahnsteig der roten Metro-Linie (B3)",
-        "step": "Sie sind gerade ausgestiegen. Finden Sie den Weg nach oben zu den Ausgängen.",
-        "hint": "Achten Sie auf die gelben 出口-Schilder (Ausgang) — sie zeigen immer nach oben und hinaus.",
-        "a": "出口 / 上り folgen (Rolltreppe nach oben)",
-        "b": "Weiter den Bahnsteig entlanggehen",
-        "c": "Zur blauen Metro-Linie wechseln",
-        "fb": "Bahnsteige sind Sackgassen zum Verlassen. Folgen Sie den gelben 出口-Schildern nach oben.",
-        "fc": "Das ist der Bahnsteig einer anderen Linie — zum Verlassen müssen Sie nicht umsteigen."
+      "title": "Sakura Central — zum Westausgang gehen",
+      "subtitle": "Freies Gehen · den Schildern folgen · B3 → 1F",
+      "objective": "Folgen Sie den Schildern vom Bahnsteig der roten Metro bis zum 西口 (Westausgang).",
+      "exits": {
+        "toB3Concourse": "中央連絡ホール — Verbindungshalle (nach B2)",
+        "b3PlatformEnd": "赤メトロ 1–4番線 — Bahnsteigende (Sackgasse)",
+        "escUpToB2": "エスカレーター上り — hinauf nach B2",
+        "backToPlatform": "戻る — zurück zum Bahnsteig",
+        "toB1West": "B1 地下街連絡口・西口 — hinauf Richtung Westausgang",
+        "b2PlatformDirs": "各線のりば — zu den Bahnsteigen der Linien",
+        "backToHall": "戻る — zurück zur Halle",
+        "toCentralExit1F": "中央出口 — hinauf ins EG",
+        "b1Shops": "地下街の売店 — Ladenpassage (Umweg)",
+        "backToMall": "戻る — zurück zur Passage",
+        "west": "西口 — Westausgang",
+        "centralPlazaOutside": "中央出口広場 — hinaus auf den Platz",
+        "backIndoors": "戻る — zurück nach drinnen"
       },
-      "n2": {
-        "loc": "Metro-Umsteigehalle (B2)",
-        "step": "Weiter nach oben Richtung 中央出口 (Hauptausgang) — nicht durch das Tor einer anderen Linie.",
-        "hint": "Tore mit Linienfarbe führen ZU den Bahnsteigen. Der Ausgang ist mit 中央出口 ausgeschildert.",
-        "a": "中央出口 folgen (hinauf zu B1)",
-        "b": "Durch das Tor der blauen Linie gehen",
-        "c": "Rolltreppe zur Halle im 2. OG",
-        "fb": "Dieses Tor führt zu den Bahnsteigen der blauen Linie, nicht auf die Straße.",
-        "fc": "Die Halle im 2. OG ist für die JR-Linien. Für die Straße folgen Sie 中央出口."
-      },
-      "n3": {
-        "loc": "Unterirdische Ladenpassage (B1)",
-        "step": "Fast auf Straßenniveau — folgen Sie 中央出口 nach oben. Den unterirdischen Gang auslassen.",
-        "hint": "中央出口 mit Aufwärtspfeil führt zum Platz im Erdgeschoss.",
-        "a": "中央出口 folgen (hinauf ins EG)",
-        "b": "Den 東西地下連絡通路 (Gang) nehmen",
-        "c": "Zurück zu den Bahnsteigen",
-        "fb": "Dieser Gang kreuzt nur unter dem Bahnhof. Der Ausgang ist oben, über 中央出口.",
-        "fc": "Falsche Richtung — Sie wollen ins Erdgeschoss hinauf."
-      },
-      "n4": {
-        "loc": "Hauptausgangsplatz (EG)",
-        "step": "Sie sind auf Straßenniveau. Der 西口 (Westausgang) ist links von Ihnen.",
-        "hint": "西 bedeutet West. Das 西口-Schild ist auf der linken Seite des Platzes.",
-        "a": "Zum 西口 (Westausgang, links)",
-        "b": "Zum 東口 (Ostausgang, rechts)",
-        "c": "Zur バスターミナル (Busbahnhof)",
-        "fb": "Das ist die andere Seite — 東 bedeutet Ost. Der 西口 ist links von Ihnen.",
-        "fc": "Der Busbahnhof ist kein Straßenausgang. Nehmen Sie den 西口."
+      "nodes": {
+        "names": {
+          "b3Platform": "Bahnsteig der roten Linie (B3)",
+          "b3End": "Bahnsteigende (B3)",
+          "b3Concourse": "Zugang zur Verbindungshalle (B3)",
+          "b2Hall": "Metro-Umsteigehalle (B2)",
+          "b2Platdir": "Zu den Bahnsteigen der Linien (B2)",
+          "b1Mall": "Unterirdische Passage (B1)",
+          "b1Shops": "Ladenpassage (B1)",
+          "f1Concourse": "Hauptausgangsplatz (EG)",
+          "f1Plaza": "Bahnhofsvorplatz (EG, draußen)",
+          "f1West": "西口 / Westausgang (EG)"
+        },
+        "caps": {
+          "b3Platform": "Sie sind gerade aus der roten Linie ausgestiegen. Gehen Sie hinauf zu den Ausgängen.",
+          "b3End": "Eine Sackgasse am Bahnsteigende — die Ausgänge sind in die andere Richtung.",
+          "b3Concourse": "Rolltreppen zur Verbindungshalle im B2. Fahren Sie hinauf.",
+          "b2Hall": "Die 西口-Route ist nach B1 ausgeschildert. Die Bahnsteige zweigen zur Seite ab.",
+          "b2Platdir": "Das führt nur zu den Bahnsteigen. Gehen Sie zurück zur Halle.",
+          "b1Mall": "Die unterirdische Passage. 中央出口 führt hinauf ins Erdgeschoss.",
+          "b1Shops": "Hier nur Läden — ein Umweg. Der Ausgang ist zurück bei 中央出口.",
+          "f1Concourse": "Erdgeschoss. 西口 ist links; andere Ausgänge geradeaus.",
+          "f1Plaza": "Sie sind draußen. Die Schilder zeigen 西口 links — gehen Sie zurück, falls zu weit.",
+          "f1West": "Sie haben den Westausgang erreicht."
+        }
       },
       "clear": {
-        "loc": "Westausgang (西口) · Erdgeschoss",
-        "summary": "Gut gemacht. Sie haben die Schilder vom Bahnsteig bis zur Straße gelesen — ohne einen falschen Abzweig.",
-        "l1": "出口 bedeutet immer Ausgang und zeigt nach oben und hinaus.",
-        "l2": "中央出口 ist der zentrale Hauptausgang — Ihr Standardweg zur Straße.",
-        "l3": "西 = West, 東 = Ost. 西口 ist der Westausgang."
+        "summary": "Gut gemacht. Sie haben die Schilder vom Bahnsteig bis zur Straße gelesen.",
+        "l1": "出口 bedeutet immer Ausgang; 中央出口 ist der zentrale Hauptausgang.",
+        "l2": "西 = West, 東 = Ost — also ist 西口 der Westausgang.",
+        "l3": "Folgen Sie den Schildern Etage für Etage; のりば führt zu den Bahnsteigen, nicht zur Straße."
       }
     }
   }

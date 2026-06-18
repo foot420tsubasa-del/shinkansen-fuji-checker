@@ -5071,77 +5071,73 @@
   },
   "stationPractice": {
     "ui": {
-      "kicker": "Navegación por nodos · prueba",
-      "goal": "Objetivo",
-      "floor": "Planta",
+      "kicker": "Paseo libre · prueba",
+      "objective": "Misión",
       "youAreHere": "Estás aquí",
       "stationMap": "Plano de la estación",
-      "location": "Estás en",
-      "mission": "Siguiente paso",
-      "choices": "¿Por dónde?",
-      "hintShow": "Mostrar pista",
+      "whereTo": "¿Por dónde caminas?",
+      "look": "Lo que ves",
+      "hintShow": "Pista",
       "hintHide": "Ocultar pista",
-      "correct": "Ruta correcta",
-      "wrong": "Casi",
-      "continue": "Continuar",
-      "restart": "Empezar de nuevo",
+      "hintText": "El cartel hacia la Salida Oeste está resaltado.",
       "back": "Volver a las misiones",
-      "stopOf": "Parada {current} de {total}",
-      "keyboardHint": "Consejo: pulsa 1–3 (o A–C) para elegir, Enter para continuar.",
+      "moves": "{n} pasos",
+      "keyboardHint": "Las flechas te mueven · o haz clic en un cartel.",
       "clearTitle": "Llegaste a la Salida Oeste (西口)",
       "lessons": "Lo que practicaste",
-      "playAgain": "Jugar otra vez"
+      "playAgain": "Caminar otra vez",
+      "bestRoute": "Mejor ruta: {n} pasos"
     },
     "mission": {
-      "title": "Metro Rojo → Salida Oeste",
-      "subtitle": "Estación Sakura Central · 4 plantas hacia arriba",
-      "goal": "Ve desde el andén de la Línea Roja del metro (B3) hasta la Salida Oeste (西口) en la planta baja.",
-      "n1": {
-        "loc": "Andén de la Línea Roja (B3)",
-        "step": "Acabas de bajar del tren. Busca el camino hacia arriba, hacia las salidas.",
-        "hint": "Busca los carteles amarillos 出口 (Salida): siempre señalan hacia arriba y afuera.",
-        "a": "Sigue 出口 / 上り (escalera mecánica hacia arriba)",
-        "b": "Camina más al fondo del andén",
-        "c": "Cruza a la Línea Azul",
-        "fb": "Los andenes no tienen salida. Sigue los carteles amarillos 出口 hacia arriba.",
-        "fc": "Es el andén de otra línea: no necesitas cambiar de tren para salir."
+      "title": "Sakura Central — camina a la Salida Oeste",
+      "subtitle": "Paseo libre · sigue los carteles · B3 → 1F",
+      "objective": "Sigue los carteles desde el andén del Metro Rojo hasta la 西口 (Salida Oeste).",
+      "exits": {
+        "toB3Concourse": "中央連絡ホール — Vestíbulo de Enlace (a B2)",
+        "b3PlatformEnd": "赤メトロ 1–4番線 — fin del andén (sin salida)",
+        "escUpToB2": "エスカレーター上り — subir a B2",
+        "backToPlatform": "戻る — volver al andén",
+        "toB1West": "B1 地下街連絡口・西口 — subir hacia la Salida Oeste",
+        "b2PlatformDirs": "各線のりば — a los andenes de las líneas",
+        "backToHall": "戻る — volver al vestíbulo",
+        "toCentralExit1F": "中央出口 — subir a la 1.ª planta",
+        "b1Shops": "地下街の売店 — tiendas de la galería (desvío)",
+        "backToMall": "戻る — volver a la galería",
+        "west": "西口 — Salida Oeste",
+        "centralPlazaOutside": "中央出口広場 — salir a la plaza",
+        "backIndoors": "戻る — volver adentro"
       },
-      "n2": {
-        "loc": "Vestíbulo de Transbordo del Metro (B2)",
-        "step": "Sigue subiendo hacia 中央出口 (Salida Central); no entres por la puerta de otra línea.",
-        "hint": "Las puertas con color de línea llevan A los andenes. La salida está señalada 中央出口.",
-        "a": "Sigue 中央出口 (sube a B1)",
-        "b": "Entra por la puerta de la Línea Azul",
-        "c": "Escalera mecánica al vestíbulo de la 2.ª planta",
-        "fb": "Esa puerta lleva a los andenes de la Línea Azul, no a la calle.",
-        "fc": "El vestíbulo de la 2.ª planta es para las líneas JR. Para la calle, sigue 中央出口."
-      },
-      "n3": {
-        "loc": "Galería Subterránea (B1)",
-        "step": "Casi al nivel de la calle: sigue 中央出口 hacia arriba. Evita el pasaje subterráneo.",
-        "hint": "中央出口 con flecha hacia arriba lleva a la plaza de la planta baja.",
-        "a": "Sigue 中央出口 (sube a la 1.ª planta)",
-        "b": "Toma el 東西地下連絡通路 (pasaje)",
-        "c": "Vuelve a los andenes",
-        "fb": "Ese pasaje solo cruza bajo la estación. La salida es arriba, por 中央出口.",
-        "fc": "Camino equivocado: quieres subir a la planta baja."
-      },
-      "n4": {
-        "loc": "Plaza de la Salida Central (planta baja)",
-        "step": "Estás a nivel de calle. La 西口 (Salida Oeste) está a tu izquierda.",
-        "hint": "西 significa oeste. El cartel 西口 está en el lado izquierdo de la plaza.",
-        "a": "Ve a 西口 (Salida Oeste, izquierda)",
-        "b": "Ve a 東口 (Salida Este, derecha)",
-        "c": "Ve a la バスターミナル (Terminal de Autobuses)",
-        "fb": "Es el lado opuesto: 東 significa este. La 西口 está a tu izquierda.",
-        "fc": "La terminal de autobuses no es una salida a la calle. Toma la 西口."
+      "nodes": {
+        "names": {
+          "b3Platform": "Andén de la Línea Roja (B3)",
+          "b3End": "Fin del andén (B3)",
+          "b3Concourse": "Acceso al vestíbulo de enlace (B3)",
+          "b2Hall": "Vestíbulo de transbordo del metro (B2)",
+          "b2Platdir": "Hacia los andenes de las líneas (B2)",
+          "b1Mall": "Galería subterránea (B1)",
+          "b1Shops": "Tiendas de la galería (B1)",
+          "f1Concourse": "Plaza de la salida central (1.ª planta)",
+          "f1Plaza": "Plaza frente a la estación (1.ª, fuera)",
+          "f1West": "西口 / Salida Oeste (1.ª planta)"
+        },
+        "caps": {
+          "b3Platform": "Acabas de bajar de la Línea Roja. Sube hacia las salidas.",
+          "b3End": "Un callejón sin salida en el andén: las salidas están al otro lado.",
+          "b3Concourse": "Escaleras mecánicas al vestíbulo de enlace del B2. Súbelas.",
+          "b2Hall": "La ruta de la 西口 sube al B1. Los andenes de las líneas se desvían al lado.",
+          "b2Platdir": "Esto solo lleva a los andenes. Vuelve al vestíbulo.",
+          "b1Mall": "La galería subterránea. 中央出口 sube a la planta baja.",
+          "b1Shops": "Solo tiendas aquí: un desvío. La salida está de vuelta en 中央出口.",
+          "f1Concourse": "Planta baja. 西口 está a tu izquierda; otras salidas al frente.",
+          "f1Plaza": "Has salido. Los carteles muestran 西口 a la izquierda; vuelve si te pasaste.",
+          "f1West": "Llegaste a la Salida Oeste."
+        }
       },
       "clear": {
-        "loc": "Salida Oeste (西口) · planta baja",
-        "summary": "Bien hecho. Leíste los carteles desde el andén hasta la calle, sin un solo giro equivocado.",
-        "l1": "出口 siempre significa salida y señala hacia arriba y afuera.",
-        "l2": "中央出口 es la salida central principal: tu ruta por defecto a la calle.",
-        "l3": "西 = oeste, 東 = este. 西口 es la Salida Oeste."
+        "summary": "Bien hecho. Leíste los carteles desde el andén hasta la calle.",
+        "l1": "出口 siempre significa salida; 中央出口 es la salida central principal.",
+        "l2": "西 = oeste, 東 = este, así que 西口 es la Salida Oeste.",
+        "l3": "Sigue los carteles subiendo planta a planta; のりば lleva a los andenes, no a la calle."
       }
     }
   }

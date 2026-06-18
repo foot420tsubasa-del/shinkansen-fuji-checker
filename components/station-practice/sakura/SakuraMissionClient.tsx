@@ -1,281 +1,241 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import {
+  ArrowDown,
   ArrowLeft,
   ArrowRight,
+  ArrowUp,
   Check,
+  Compass,
   Lightbulb,
   RotateCcw,
-  X,
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import {
   SAKURA_IMAGE_BASE,
-  sakuraMission,
-  type SakuraChoiceKey,
+  sakuraWalk,
+  type ExitDir,
+  type SakuraExit,
 } from "@/data/station-practice/sakura/nodes";
 import { SakuraMiniMap } from "./SakuraMiniMap";
 
-const BADGES = ["A", "B", "C"] as const;
+const DIR_ICON: Record<ExitDir, typeof ArrowUp> = {
+  up: ArrowUp,
+  down: ArrowDown,
+  left: ArrowLeft,
+  right: ArrowRight,
+};
 
-type Feedback = { key: SakuraChoiceKey; correct: boolean } | null;
+// Absolute placement of each directional hotspot over the scene image.
+const DIR_POS: Record<ExitDir, string> = {
+  up: "left-1/2 top-3 -translate-x-1/2",
+  down: "left-1/2 bottom-3 -translate-x-1/2",
+  left: "left-3 top-1/2 -translate-y-1/2",
+  right: "right-3 top-1/2 -translate-y-1/2",
+};
+
+const KEY_TO_DIR: Record<string, ExitDir> = {
+  ArrowUp: "up",
+  ArrowDown: "down",
+  ArrowLeft: "left",
+  ArrowRight: "right",
+};
 
 export function SakuraMissionClient() {
   const t = useTranslations("stationPractice");
-  const [nodeId, setNodeId] = useState(sakuraMission.startNodeId);
-  const [feedback, setFeedback] = useState<Feedback>(null);
+  const [nodeId, setNodeId] = useState(sakuraWalk.startNodeId);
+  const [steps, setSteps] = useState(0);
   const [showHint, setShowHint] = useState(false);
-  const [cleared, setCleared] = useState(false);
 
-  const continueRef = useRef<HTMLButtonElement>(null);
-  const firstChoiceRef = useRef<HTMLButtonElement>(null);
+  const node = sakuraWalk.nodes[nodeId];
 
-  const node = sakuraMission.nodes[nodeId];
-  const stopNumber = Number(nodeId.replace("n", ""));
-
-  const advance = useCallback(() => {
-    const correctKey = node.order.find((k) => node.choices[k].correct)!;
-    const next = node.choices[correctKey].next;
-    setFeedback(null);
+  const move = useCallback((exit: SakuraExit) => {
+    setSteps((s) => s + 1);
     setShowHint(false);
-    if (next === "clear") {
-      setCleared(true);
-    } else if (next) {
-      setNodeId(next);
-    }
-  }, [node]);
+    setNodeId(exit.to);
+  }, []);
 
-  const select = useCallback(
-    (key: SakuraChoiceKey) => {
-      if (feedback?.correct) return; // already solved this node
-      setFeedback({ key, correct: !!node.choices[key].correct });
-    },
-    [feedback, node],
-  );
+  const restart = useCallback(() => {
+    setNodeId(sakuraWalk.startNodeId);
+    setSteps(0);
+    setShowHint(false);
+  }, []);
 
-  // Keyboard: 1–3 / A–C choose; Enter continues a solved node.
+  // Arrow keys walk through a matching hotspot; 1–9 pick exits in order.
   useEffect(() => {
-    if (cleared) return;
+    if (node.goal) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Enter" && feedback?.correct) {
-        e.preventDefault();
-        advance();
+      if (e.key in KEY_TO_DIR) {
+        const dir = KEY_TO_DIR[e.key];
+        const exit = node.exits.find((x) => x.dir === dir);
+        if (exit) {
+          e.preventDefault();
+          move(exit);
+        }
         return;
       }
-      const k = e.key.toLowerCase();
-      const posMap: Record<string, number> = {
-        "1": 0, a: 0, "2": 1, b: 1, "3": 2, c: 2,
-      };
-      if (k in posMap && node.order[posMap[k]]) {
+      const n = Number(e.key);
+      if (n >= 1 && n <= node.exits.length) {
         e.preventDefault();
-        select(node.order[posMap[k]]);
+        move(node.exits[n - 1]);
       }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [advance, select, feedback, node, cleared]);
+  }, [node, move]);
 
-  // Focus management: jump to Continue when solved, else first choice per node.
-  useEffect(() => {
-    if (feedback?.correct) continueRef.current?.focus();
-  }, [feedback]);
-  useEffect(() => {
-    firstChoiceRef.current?.focus();
-  }, [nodeId]);
-
-  const restart = () => {
-    setNodeId(sakuraMission.startNodeId);
-    setFeedback(null);
-    setShowHint(false);
-    setCleared(false);
-  };
-
-  if (cleared) {
+  if (node.goal) {
     return (
       <CompletionScreen
-        image={sakuraMission.clear.image}
-        floor={sakuraMission.clear.floor}
+        image={node.image}
+        floor={node.floor}
+        steps={steps}
         t={t}
         onRestart={restart}
       />
     );
   }
 
-  const feedbackBody =
-    feedback && !feedback.correct
-      ? t(`mission.${nodeId}.f${feedback.key}` as never)
-      : "";
-
   return (
     <div className="flex flex-1 flex-col">
       <TopBar t={t} />
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 pb-28 pt-4 sm:px-6 lg:pb-10">
-        {/* Goal banner */}
-        <div className="mb-4 rounded-2xl border border-yellow-300/20 bg-yellow-300/[0.04] px-4 py-3">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-yellow-300">
-              {t("ui.goal")}
-            </span>
-            <span className="text-sm text-neutral-200">{t("mission.goal")}</span>
-          </div>
+      <main className="mx-auto w-full max-w-6xl flex-1 px-4 pb-10 pt-4 sm:px-6">
+        {/* Objective */}
+        <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl border border-yellow-300/20 bg-yellow-300/[0.04] px-4 py-3">
+          <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-yellow-300">
+            <Compass className="h-3.5 w-3.5" />
+            {t("ui.objective")}
+          </span>
+          <span className="text-sm text-neutral-200">{t("mission.objective")}</span>
         </div>
 
         <div className="grid gap-5 lg:grid-cols-[1fr_320px]">
-          {/* Scene + controls */}
           <div className="flex flex-col gap-4">
+            {/* Scene with directional hotspots */}
             <figure className="relative overflow-hidden rounded-2xl border border-white/10 bg-black/40">
               <div className="relative aspect-video">
                 <Image
                   key={node.image}
                   src={`${SAKURA_IMAGE_BASE}/${node.image}.webp`}
-                  alt={t(`mission.${nodeId}.loc` as never)}
+                  alt={t(`mission.nodes.names.${node.nameKey}` as never)}
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 760px"
                   className="object-cover"
                 />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/25" />
                 <div className="absolute left-3 top-3 rounded-full bg-black/60 px-3 py-1 text-xs font-medium text-neutral-200 backdrop-blur">
-                  {t("ui.stopOf", { current: stopNumber, total: sakuraMission.totalStops })}
+                  {node.floor}
                 </div>
-              </div>
-              <figcaption className="flex items-center gap-2 border-t border-white/10 px-4 py-2.5 text-sm text-neutral-300">
-                <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-500">
-                  {t("ui.location")}
-                </span>
-                {t(`mission.${nodeId}.loc` as never)}
-              </figcaption>
-            </figure>
 
-            {/* Next-step prompt */}
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-500">
-                {t("ui.mission")}
-              </div>
-              <p className="mt-1 text-sm leading-6 text-neutral-100">
-                {t(`mission.${nodeId}.step` as never)}
-              </p>
-              <button
-                type="button"
-                onClick={() => setShowHint((v) => !v)}
-                className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-yellow-300/90 hover:text-yellow-200"
-                aria-expanded={showHint}
-              >
-                <Lightbulb className="h-3.5 w-3.5" />
-                {showHint ? t("ui.hintHide") : t("ui.hintShow")}
-              </button>
-              {showHint && (
-                <p className="mt-2 rounded-lg bg-yellow-300/[0.06] px-3 py-2 text-xs leading-5 text-yellow-100/90">
-                  {t(`mission.${nodeId}.hint` as never)}
-                </p>
-              )}
-            </div>
-
-            {/* Choices */}
-            <div>
-              <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-500">
-                {t("ui.choices")}
-              </div>
-              <div className="grid gap-2.5" role="group" aria-label={t("ui.choices")}>
-                {node.order.map((key, i) => {
-                  const isSelected = feedback?.key === key;
-                  const isWrong = isSelected && !feedback?.correct;
-                  const isRight = isSelected && feedback?.correct;
-                  const locked = feedback?.correct;
+                {node.exits.map((exit, i) => {
+                  const Icon = DIR_ICON[exit.dir];
+                  const highlight = showHint && exit.recommended;
                   return (
                     <button
-                      key={key}
-                      ref={i === 0 ? firstChoiceRef : undefined}
+                      key={exit.to}
                       type="button"
-                      onClick={() => select(key)}
-                      disabled={locked && !isRight}
-                      aria-label={`${BADGES[i]}: ${t(`mission.${nodeId}.${key}` as never)}`}
+                      onClick={() => move(exit)}
+                      aria-label={`${i + 1}. ${t(`mission.exits.${exit.labelKey}` as never)}`}
                       className={[
-                        "flex min-h-[56px] w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors",
-                        "focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300/80",
-                        isRight
-                          ? "border-emerald-400/60 bg-emerald-400/10"
-                          : isWrong
-                            ? "border-rose-400/60 bg-rose-400/10"
-                            : "border-white/10 bg-white/[0.03] hover:border-yellow-300/40 hover:bg-white/[0.06]",
-                        locked && !isRight ? "opacity-50" : "",
+                        "absolute flex max-w-[44%] items-center gap-2 rounded-full border px-3 py-2 text-left backdrop-blur transition-colors",
+                        "focus:outline-none focus-visible:ring-2 focus-visible:ring-white",
+                        DIR_POS[exit.dir],
+                        highlight
+                          ? "animate-pulse border-yellow-300 bg-yellow-300/90 text-black"
+                          : "border-white/25 bg-black/60 text-white hover:border-yellow-300/70 hover:bg-black/75",
                       ].join(" ")}
                     >
                       <span
                         className={[
-                          "flex h-7 w-7 shrink-0 items-center justify-center rounded-md text-sm font-bold",
-                          isRight
-                            ? "bg-emerald-400 text-black"
-                            : isWrong
-                              ? "bg-rose-400 text-black"
-                              : "bg-yellow-300/15 text-yellow-300",
+                          "flex h-6 w-6 shrink-0 items-center justify-center rounded-full",
+                          highlight ? "bg-black/15" : "bg-yellow-300/20 text-yellow-300",
                         ].join(" ")}
                       >
-                        {BADGES[i]}
+                        <Icon className="h-4 w-4" />
                       </span>
-                      <span className="text-sm leading-5 text-neutral-100">
-                        {t(`mission.${nodeId}.${key}` as never)}
+                      <span className="text-xs font-medium leading-4">
+                        {t(`mission.exits.${exit.labelKey}` as never)}
                       </span>
                     </button>
                   );
                 })}
               </div>
 
-              {/* Feedback */}
-              <div aria-live="polite" className="mt-3">
-                {feedback && (
-                  <div
-                    className={[
-                      "rounded-xl border px-4 py-3",
-                      feedback.correct
-                        ? "border-emerald-400/40 bg-emerald-400/[0.08]"
-                        : "border-rose-400/40 bg-rose-400/[0.08]",
-                    ].join(" ")}
-                  >
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={[
-                          "flex h-5 w-5 items-center justify-center rounded-full",
-                          feedback.correct ? "bg-emerald-400" : "bg-rose-400",
-                        ].join(" ")}
-                      >
-                        {feedback.correct ? (
-                          <Check className="h-3.5 w-3.5 text-black" />
-                        ) : (
-                          <X className="h-3.5 w-3.5 text-black" />
-                        )}
-                      </span>
-                      <span className="text-sm font-semibold text-white">
-                        {feedback.correct ? t("ui.correct") : t("ui.wrong")}
-                      </span>
-                    </div>
-                    {!feedback.correct && (
-                      <p className="mt-1.5 pl-7 text-sm leading-5 text-neutral-200">
-                        {feedbackBody}
-                      </p>
-                    )}
-                    {feedback.correct && (
-                      <div className="mt-2.5 pl-7">
-                        <button
-                          ref={continueRef}
-                          type="button"
-                          onClick={advance}
-                          className="inline-flex h-10 items-center gap-2 rounded-full bg-yellow-300 px-5 text-sm font-semibold text-black transition-colors hover:bg-yellow-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                        >
-                          {t("ui.continue")} <ArrowRight className="h-4 w-4" />
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
+              <figcaption className="border-t border-white/10 px-4 py-2.5">
+                <div className="flex items-center gap-2">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-500">
+                    {t("ui.youAreHere")}
+                  </span>
+                  <span className="text-sm font-medium text-white">
+                    {t(`mission.nodes.names.${node.nameKey}` as never)}
+                  </span>
+                </div>
+                <p className="mt-1 text-sm leading-6 text-neutral-300">
+                  {t(`mission.nodes.caps.${node.captionKey}` as never)}
+                </p>
+              </figcaption>
+            </figure>
+
+            {/* Exit list (clear, tappable fallback that mirrors the hotspots) */}
+            <div>
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-neutral-500">
+                  {t("ui.whereTo")}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setShowHint((v) => !v)}
+                  aria-expanded={showHint}
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-yellow-300/90 hover:text-yellow-200"
+                >
+                  <Lightbulb className="h-3.5 w-3.5" />
+                  {showHint ? t("ui.hintHide") : t("ui.hintShow")}
+                </button>
               </div>
+              <div className="grid gap-2.5">
+                {node.exits.map((exit, i) => {
+                  const Icon = DIR_ICON[exit.dir];
+                  const highlight = showHint && exit.recommended;
+                  return (
+                    <button
+                      key={exit.to}
+                      type="button"
+                      onClick={() => move(exit)}
+                      className={[
+                        "flex min-h-[52px] w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors",
+                        "focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-300/80",
+                        highlight
+                          ? "border-yellow-300/70 bg-yellow-300/[0.10]"
+                          : "border-white/10 bg-white/[0.03] hover:border-yellow-300/40 hover:bg-white/[0.06]",
+                      ].join(" ")}
+                    >
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-yellow-300/15 text-yellow-300">
+                        <Icon className="h-4 w-4" />
+                      </span>
+                      <span className="flex-1 text-sm leading-5 text-neutral-100">
+                        {t(`mission.exits.${exit.labelKey}` as never)}
+                      </span>
+                      <span className="text-[11px] font-semibold text-neutral-600">
+                        {i + 1}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+              {showHint && (
+                <p className="mt-2 rounded-lg bg-yellow-300/[0.06] px-3 py-2 text-xs leading-5 text-yellow-100/90">
+                  {t("ui.hintText")}
+                </p>
+              )}
             </div>
           </div>
 
-          {/* Side rail: minimap + keyboard hint */}
+          {/* Side rail */}
           <aside className="flex flex-col gap-3">
             <SakuraMiniMap
               blueprint={node.blueprint}
@@ -284,6 +244,9 @@ export function SakuraMissionClient() {
               mapLabel={t("ui.stationMap")}
               youAreHereLabel={t("ui.youAreHere")}
             />
+            <div className="flex items-center justify-between rounded-xl border border-white/5 bg-white/[0.02] px-3 py-2 text-[11px] text-neutral-500">
+              <span>{t("ui.moves", { n: steps })}</span>
+            </div>
             <p className="hidden rounded-xl border border-white/5 bg-white/[0.02] px-3 py-2 text-[11px] leading-4 text-neutral-500 lg:block">
               {t("ui.keyboardHint")}
             </p>
@@ -324,11 +287,13 @@ function TopBar({ t }: { t: ReturnType<typeof useTranslations> }) {
 function CompletionScreen({
   image,
   floor,
+  steps,
   t,
   onRestart,
 }: {
   image: string;
   floor: string;
+  steps: number;
   t: ReturnType<typeof useTranslations>;
   onRestart: () => void;
 }) {
@@ -340,7 +305,7 @@ function CompletionScreen({
           <div className="relative aspect-video">
             <Image
               src={`${SAKURA_IMAGE_BASE}/${image}.webp`}
-              alt={t("mission.clear.loc")}
+              alt={t("mission.nodes.names.f1West")}
               fill
               priority
               sizes="(max-width: 768px) 100vw, 700px"
@@ -358,6 +323,14 @@ function CompletionScreen({
         <p className="mt-2 text-sm leading-6 text-neutral-300">
           {t("mission.clear.summary")}
         </p>
+        <div className="mt-3 flex flex-wrap gap-2 text-xs text-neutral-400">
+          <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1">
+            {t("ui.moves", { n: steps })}
+          </span>
+          <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1">
+            {t("ui.bestRoute", { n: sakuraWalk.optimalSteps })}
+          </span>
+        </div>
 
         <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
           <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-yellow-300">
