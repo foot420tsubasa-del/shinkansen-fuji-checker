@@ -42,6 +42,11 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# Google service-account keys — NEVER commit. Used by scripts/hotel-funnel-report.mjs.
+*service-account*.json
+*gcp*key*.json
+secrets/
+
 # vercel
 .vercel
 
