@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useMemo, useReducer, useState } from "react";
+import { useLocale } from "next-intl";
 import type {
   Choice,
   Mission,
   StationScene,
 } from "@/data/station-practice/branching/types";
 import { getBranchingMission } from "@/data/station-practice/branching/missions";
+import { localizeMission, tr } from "@/data/station-practice/i18n";
 import { TopBar } from "./TopBar";
 import { MissionPanel } from "./MissionPanel";
 import { SceneViewport } from "./SceneViewport";
@@ -136,7 +138,11 @@ type Props = {
 };
 
 export function BranchingPracticeClient({ missionId }: Props) {
-  const mission = useMemo(() => getBranchingMission(missionId), [missionId]);
+  const locale = useLocale();
+  const mission = useMemo(
+    () => localizeMission(getBranchingMission(missionId), locale),
+    [missionId, locale],
+  );
   const [state, dispatch] = useReducer(reducer, mission, initialState);
   const [zoomOpen, setZoomOpen] = useState(false);
 
@@ -174,7 +180,7 @@ export function BranchingPracticeClient({ missionId }: Props) {
   if (!currentScene) {
     return (
       <div className="flex flex-1 items-center justify-center text-sm text-neutral-400">
-        Scene not found.
+        {tr(locale, "Scene not found.")}
       </div>
     );
   }
@@ -234,10 +240,10 @@ export function BranchingPracticeClient({ missionId }: Props) {
             {state.status === "transitioning" && (
               <div className="rounded-full border border-yellow-300/20 bg-yellow-300/10 px-3 py-1 text-xs font-medium text-yellow-100">
                 {state.lastResult === "wrong"
-                  ? "Taking the wrong route..."
+                  ? tr(locale, "Taking the wrong route...")
                   : currentScene.isDetour
-                    ? "Returning to the junction..."
-                    : "Following the signs..."}
+                    ? tr(locale, "Returning to the junction...")
+                    : tr(locale, "Following the signs...")}
               </div>
             )}
             <FeedbackToast
@@ -251,7 +257,7 @@ export function BranchingPracticeClient({ missionId }: Props) {
               onDismiss={() => dispatch({ type: "DISMISS_FEEDBACK" })}
             />
             <p className="text-center text-xs text-neutral-400">
-              Match the sign with your destination, then choose a direction.
+              {tr(locale, "Match the sign with your destination, then choose a direction.")}
             </p>
           </div>
 
@@ -273,23 +279,29 @@ export function BranchingPracticeClient({ missionId }: Props) {
           />
           <section className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 text-xs leading-6 text-neutral-400">
             <div className="text-[10px] uppercase tracking-[0.2em] text-yellow-300">
-              How this practice works
+              {tr(locale, "How this practice works")}
             </div>
             <p className="mt-2">
-              Read the signs, match the Japanese shape and English label, and
-              choose the direction that matches your destination.
+              {tr(
+                locale,
+                "Read the signs, match the Japanese shape and English label, and choose the direction that matches your destination.",
+              )}
             </p>
             <p className="mt-2">
-              Some wrong choices lead to short detours. They show why the
-              route is wrong, then let you return to the decision point.
+              {tr(
+                locale,
+                "Some wrong choices lead to short detours. They show why the route is wrong, then let you return to the decision point.",
+              )}
             </p>
           </section>
         </aside>
       </section>
 
       <footer className="border-t border-white/5 px-6 py-4 text-xs text-neutral-500">
-        Inspired by complex Tokyo-style stations. Layouts, signage, and
-        line names are fictional.
+        {tr(
+          locale,
+          "Inspired by complex Tokyo-style stations. Layouts, signage, and line names are fictional.",
+        )}
       </footer>
 
       <SignZoomModal

@@ -1,16 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { useLocale } from "next-intl";
 import { ChevronDown } from "lucide-react";
 import { faqItems } from "@/data/station-practice/faq";
+import { localizeFaq } from "@/data/station-practice/i18n";
 import { cn } from "@/components/station-practice/lib/utils";
 
 export function FaqAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const locale = useLocale();
+  const items = localizeFaq(faqItems, locale);
 
   return (
     <ul className="divide-y divide-white/5 overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02]">
-      {faqItems.map((item, i) => {
+      {items.map((item, i) => {
         const isOpen = openIndex === i;
         return (
           <li key={item.question}>

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CheckCircle2, XCircle } from "lucide-react";
 import type { ChoiceResult } from "@/data/station-practice/branching/types";
 import { cn } from "@/components/station-practice/lib/utils";
+import { useTr } from "@/components/station-practice/lib/useTr";
 
 type Props = {
   open: boolean;
@@ -14,6 +15,7 @@ type Props = {
 };
 
 export function FeedbackToast({ open, result, message, onDismiss }: Props) {
+  const t = useTr();
   return (
     <AnimatePresence>
       {open && result && message && (
@@ -42,10 +44,10 @@ export function FeedbackToast({ open, result, message, onDismiss }: Props) {
             <div className="flex-1">
               <div className="font-semibold">
                 {result === "correct"
-                  ? "Right call"
+                  ? t("Right call")
                   : result === "wrong"
-                    ? "Not quite"
-                    : "Note"}
+                    ? t("Not quite")
+                    : t("Note")}
               </div>
               <p className="mt-1 leading-6">{message}</p>
             </div>
@@ -55,7 +57,7 @@ export function FeedbackToast({ open, result, message, onDismiss }: Props) {
                 onClick={onDismiss}
                 className="ml-2 shrink-0 rounded border border-white/15 bg-white/5 px-2 py-1 text-[11px] font-medium text-neutral-200 hover:bg-white/10"
               >
-                Try again
+                {t("Try again")}
               </button>
             )}
           </div>

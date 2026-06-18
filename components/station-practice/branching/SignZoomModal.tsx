@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import type { SignOverlay } from "@/data/station-practice/branching/types";
 import { SignBadge } from "./SignBadge";
+import { useTr } from "@/components/station-practice/lib/useTr";
 
 /*
  * Fullscreen "inspect signs" modal.
@@ -22,6 +23,7 @@ type Props = {
 };
 
 export function SignZoomModal({ open, signs, onClose }: Props) {
+  const t = useTr();
   useEffect(() => {
     if (!open) return;
     const onEsc = (e: KeyboardEvent) => {
@@ -43,11 +45,11 @@ export function SignZoomModal({ open, signs, onClose }: Props) {
           className="fixed inset-0 z-50 flex flex-col bg-black/85 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
-          aria-label="Inspect signs"
+          aria-label={t("Inspect signs")}
         >
           <header className="flex items-center justify-between border-b border-white/10 px-5 py-4">
             <div className="text-xs uppercase tracking-[0.2em] text-yellow-300">
-              Inspect signs
+              {t("Inspect signs")}
             </div>
             <button
               type="button"
@@ -55,14 +57,14 @@ export function SignZoomModal({ open, signs, onClose }: Props) {
               className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-neutral-200 hover:bg-white/10"
             >
               <X className="h-3.5 w-3.5" />
-              Close
+              {t("Close")}
             </button>
           </header>
           <div className="flex-1 overflow-y-auto px-5 py-8">
             <div className="mx-auto flex max-w-3xl flex-col gap-4">
               {signs.length === 0 ? (
                 <p className="text-sm text-neutral-400">
-                  No signs visible in this scene.
+                  {t("No signs visible in this scene.")}
                 </p>
               ) : (
                 signs.map((sign) => (

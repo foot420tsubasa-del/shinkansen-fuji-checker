@@ -2,6 +2,7 @@
 
 import type { SignOverlay } from "@/data/station-practice/branching/types";
 import { DirectionIcon } from "./SignBadge";
+import { useTr } from "@/components/station-practice/lib/useTr";
 
 type Props = {
   signs: SignOverlay[];
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export function KeySignsPanel({ signs, onInspectSigns }: Props) {
+  const t = useTr();
   if (signs.length === 0) return null;
 
   return (
@@ -16,10 +18,12 @@ export function KeySignsPanel({ signs, onInspectSigns }: Props) {
       <div className="flex items-center justify-between gap-3">
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-yellow-300">
-            Key signs in this scene
+            {t("Key signs in this scene")}
           </div>
           <p className="mt-1 text-[11px] leading-4 text-neutral-500">
-            Use these as reading targets; the station image stays unobstructed.
+            {t(
+              "Use these as reading targets; the station image stays unobstructed.",
+            )}
           </p>
         </div>
         <button
@@ -27,7 +31,7 @@ export function KeySignsPanel({ signs, onInspectSigns }: Props) {
           onClick={onInspectSigns}
           className="shrink-0 rounded-full border border-yellow-300/25 px-3 py-1.5 text-[11px] font-semibold text-yellow-200 transition-colors hover:bg-yellow-300/10"
         >
-          Inspect signs
+          {t("Inspect signs")}
         </button>
       </div>
 

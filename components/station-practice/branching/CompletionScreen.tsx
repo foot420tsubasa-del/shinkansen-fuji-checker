@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import type { Mission, StationScene } from "@/data/station-practice/branching/types";
+import { useTr } from "@/components/station-practice/lib/useTr";
 
 type Props = {
   mission: Mission;
@@ -29,6 +30,7 @@ export function CompletionScreen({
   mistakes,
   onRestart,
 }: Props) {
+  const t = useTr();
   const m = Math.floor(elapsedSeconds / 60);
   const s = elapsedSeconds % 60;
   const time = `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
@@ -46,7 +48,7 @@ export function CompletionScreen({
           <CheckCircle2 className="h-6 w-6" />
         </div>
         <h1 className="mt-6 text-3xl font-semibold tracking-tight text-white">
-          Mission cleared
+          {t("Mission cleared")}
         </h1>
         <p className="mt-1 text-sm text-yellow-300">
           {mission.title}
@@ -67,12 +69,12 @@ export function CompletionScreen({
           </p>
         )}
         <div className="mt-8 grid grid-cols-3 gap-3 text-sm">
-          <Stat label="Time" value={time} icon={<Timer className="h-3 w-3" />} />
-          <Stat label="Hints" value={String(hintsUsed)} />
+          <Stat label={t("Time")} value={time} icon={<Timer className="h-3 w-3" />} />
+          <Stat label={t("Hints")} value={String(hintsUsed)} />
           <Stat
-            label="Detours"
+            label={t("Detours")}
             value={String(mistakes)}
-            highlight={cleanRun ? "Clean exit" : undefined}
+            highlight={cleanRun ? t("Clean exit") : undefined}
           />
         </div>
         {clearScene.clearLessons && clearScene.clearLessons.length > 0 && (
@@ -80,7 +82,7 @@ export function CompletionScreen({
             <div className="flex items-center gap-2">
               <GraduationCap className="h-3.5 w-3.5 text-yellow-300" />
               <span className="text-xs font-semibold uppercase tracking-[0.2em] text-yellow-300">
-                What you learned
+                {t("What you learned")}
               </span>
             </div>
             <ul className="mt-3 space-y-2 text-sm leading-6 text-neutral-200">
@@ -100,14 +102,14 @@ export function CompletionScreen({
             className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-yellow-300 px-6 text-sm font-semibold text-black transition-colors hover:bg-yellow-200"
           >
             <RotateCcw className="h-4 w-4" />
-            Practice again
+            {t("Practice again")}
           </button>
           <Link
             href="/station-practice"
             className="inline-flex h-11 items-center justify-center gap-2 rounded-full border border-white/15 px-6 text-sm font-semibold text-white/90 transition-colors hover:bg-white/5"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to landing
+            {t("Back to landing")}
           </Link>
         </div>
       </motion.div>

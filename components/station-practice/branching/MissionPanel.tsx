@@ -2,6 +2,7 @@
 
 import { MapPin, Target } from "lucide-react";
 import type { Mission, StationScene } from "@/data/station-practice/branching/types";
+import { useTr } from "@/components/station-practice/lib/useTr";
 
 type Props = {
   mission: Mission;
@@ -9,6 +10,7 @@ type Props = {
 };
 
 export function MissionPanel({ mission, scene }: Props) {
+  const t = useTr();
   return (
     <section className="rounded-2xl border border-white/5 bg-white/[0.02] p-5">
       <div className="text-xs font-semibold uppercase tracking-[0.2em] text-yellow-300">
@@ -20,7 +22,7 @@ export function MissionPanel({ mission, scene }: Props) {
       <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-black/30 px-3 py-1 text-[11px] text-neutral-300">
         <MapPin className="h-3 w-3 text-yellow-300" />
         <span className="uppercase tracking-[0.15em] text-neutral-500">
-          You are here
+          {t("You are here")}
         </span>
         <span className="text-neutral-200">{scene.currentLocation}</span>
       </div>
@@ -31,7 +33,7 @@ export function MissionPanel({ mission, scene }: Props) {
         <div className="flex items-center gap-2">
           <Target className="h-3.5 w-3.5 text-yellow-300" />
           <span className="text-xs font-semibold uppercase tracking-[0.2em] text-neutral-500">
-            Goal
+            {t("Goal")}
           </span>
         </div>
         <p className="mt-1 text-sm leading-6 text-neutral-200">

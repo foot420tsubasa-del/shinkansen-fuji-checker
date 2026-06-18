@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ArrowLeft, Eye, Lightbulb, Timer } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { useTr } from "@/components/station-practice/lib/useTr";
 
 type Props = {
   startedAt: number | null;
@@ -26,6 +27,7 @@ export function TopBar({
   signsAvailable,
 }: Props) {
   const elapsed = useElapsedSeconds(startedAt);
+  const t = useTr();
 
   const sceneNumber =
     progressIndex >= totalGameplayScenes
@@ -40,11 +42,13 @@ export function TopBar({
       >
         <ArrowLeft className="h-4 w-4" />
         <span className="hidden sm:inline">Tokyo Mega Station Practice</span>
-        <span className="sm:hidden">Back</span>
+        <span className="sm:hidden">{t("Back")}</span>
       </Link>
       <div className="flex flex-wrap items-center gap-2 text-xs text-neutral-400 sm:gap-4">
         <span className="rounded-full border border-white/10 px-3 py-1">
-          {isDetour ? "Wrong route" : `Scene ${sceneNumber}/${totalGameplayScenes}`}
+          {isDetour
+            ? t("Wrong route")
+            : `${t("Scene")} ${sceneNumber}/${totalGameplayScenes}`}
         </span>
         <span className="hidden items-center gap-1.5 sm:inline-flex">
           <Timer className="h-3.5 w-3.5" />
@@ -55,7 +59,7 @@ export function TopBar({
           {hintsUsed}
         </span>
         <span className="hidden items-center gap-1.5 sm:inline-flex">
-          Detours&nbsp;
+          {t("Detours")}&nbsp;
           <span className="font-medium text-neutral-200">{mistakes}</span>
         </span>
         <button
@@ -65,10 +69,10 @@ export function TopBar({
           className="inline-flex items-center gap-1.5 rounded-full border border-yellow-300/40 bg-yellow-300/10 px-3 py-1 text-xs font-medium text-yellow-200 hover:border-yellow-300/70 disabled:cursor-not-allowed disabled:opacity-50"
         >
           <Eye className="h-3.5 w-3.5" />
-          Inspect signs
+          {t("Inspect signs")}
         </button>
         <span className="text-[10px] uppercase tracking-[0.2em] text-yellow-300">
-          Branching · Preview
+          {t("Branching · Preview")}
         </span>
       </div>
     </header>

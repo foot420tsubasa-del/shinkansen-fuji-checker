@@ -10,8 +10,10 @@ import {
   Signpost,
   Wifi,
 } from "lucide-react";
+import { getLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { branchingMissions } from "@/data/station-practice/branching/missions";
+import { tr } from "@/data/station-practice/i18n";
 import { FaqAccordion } from "@/components/station-practice/landing/FaqAccordion";
 import { LanguageSelector } from "../components/LanguageSelector";
 
@@ -96,10 +98,26 @@ const supportCtas = [
   },
 ] as const;
 
-export default function StationPracticeLandingPage() {
+export default async function StationPracticeLandingPage() {
+  const locale = await getLocale();
+  const t = (s: string) => tr(locale, s);
+  const cards = missionCards.map((c) => ({
+    ...c,
+    title: t(c.title),
+    description: t(c.description),
+    status: t(c.status),
+    cta: t(c.cta),
+    routeLabel: t(c.routeLabel),
+  }));
+  const missionLabel = t("Mission");
+
   return (
     <>
       <header className="absolute left-0 right-0 top-0 z-20 px-6 py-5 sm:px-10">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-32 bg-gradient-to-b from-[#070a13] via-[#070a13]/75 to-transparent"
+        />
         <div className="mx-auto flex max-w-7xl items-center justify-between">
           <Link href="/station-practice" className="flex items-center gap-2">
             <span className="inline-block h-2.5 w-6 rounded-sm bg-yellow-300" />
@@ -110,20 +128,20 @@ export default function StationPracticeLandingPage() {
           <div className="flex items-center gap-3">
             <nav className="hidden items-center gap-8 text-sm text-neutral-300 lg:flex">
               <a href="#missions" className="hover:text-white">
-                Missions
+                {t("Missions")}
               </a>
               <a href="#how-it-works" className="hover:text-white">
-                How it works
+                {t("How it works")}
               </a>
               <a href="#faq" className="hover:text-white">
-                FAQ
+                {t("FAQ")}
               </a>
             </nav>
             <Link
               href="/station-practice/branching"
               className="hidden items-center gap-1.5 rounded-full bg-yellow-300 px-4 py-2 text-xs font-semibold text-black transition-colors hover:bg-yellow-200 sm:inline-flex"
             >
-              Start Mission 1 <ArrowRight className="h-3.5 w-3.5" />
+              {t("Start Mission 1")} <ArrowRight className="h-3.5 w-3.5" />
             </Link>
             <LanguageSelector />
           </div>
@@ -152,32 +170,32 @@ export default function StationPracticeLandingPage() {
           <div className="mx-auto w-full max-w-7xl px-6 pb-20 pt-32 sm:px-10 sm:pb-28 sm:pt-40">
             <span className="inline-flex items-center gap-2 rounded-full border border-yellow-400/30 bg-yellow-400/5 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-yellow-300">
               <Signpost className="h-3.5 w-3.5" />
-              Pre-travel simulation
+              {t("Pre-travel simulation")}
             </span>
             <h1 className="mt-6 max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
-              Practice Japanese stations
+              {t("Practice Japanese stations")}
               <span className="block text-yellow-300">
-                before your trip.
+                {t("before your trip.")}
               </span>
             </h1>
             <p className="mt-6 max-w-xl text-base leading-7 text-neutral-300 sm:text-lg">
-              A free navigation practice tool inspired by complex Tokyo-style
-              stations. Learn how to read exits, transfers, gates, and platform
-              signs before arriving in Japan.
+              {t(
+                "A free navigation practice tool inspired by complex Tokyo-style stations. Learn how to read exits, transfers, gates, and platform signs before arriving in Japan.",
+              )}
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/station-practice/branching"
                 className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-yellow-300 px-7 text-sm font-semibold text-black transition-colors hover:bg-yellow-200"
               >
-                Start Mission 1
+                {t("Start Mission 1")}
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href="#missions"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-white/15 px-7 text-sm font-semibold text-white/90 transition-colors hover:bg-white/5"
               >
-                See the missions
+                {t("See the missions")}
               </a>
             </div>
           </div>
@@ -186,28 +204,28 @@ export default function StationPracticeLandingPage() {
         <section className="border-t border-white/5 bg-[#080b14] px-6 py-14 sm:px-10">
           <div className="mx-auto max-w-7xl">
             <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              Why this helps
+              {t("Why this helps")}
             </h2>
             <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             <Feature
               icon={<MapPinned className="h-5 w-5" />}
-              title="Read station signs"
-              body="Read Japanese-first station signs with English support."
+              title={t("Read station signs")}
+              body={t("Read Japanese-first station signs with English support.")}
             />
             <Feature
               icon={<Signpost className="h-5 w-5" />}
-              title="Tell routes apart"
-              body="Tell exits, transfer gates, and platforms apart."
+              title={t("Tell routes apart")}
+              body={t("Tell exits, transfer gates, and platforms apart.")}
             />
             <Feature
               icon={<Compass className="h-5 w-5" />}
-              title="Recover calmly"
-              body="Learn what to do when you follow the wrong route."
+              title={t("Recover calmly")}
+              body={t("Learn what to do when you follow the wrong route.")}
             />
             <Feature
               icon={<ShieldCheck className="h-5 w-5" />}
-              title="Practice first"
-              body="Practice before your real trip."
+              title={t("Practice first")}
+              body={t("Practice before your real trip.")}
             />
             </div>
           </div>
@@ -218,25 +236,26 @@ export default function StationPracticeLandingPage() {
             <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
               <div>
                 <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                  Station Practice missions
+                  {t("Station Practice missions")}
                 </h2>
                 <p className="mt-2 max-w-xl text-sm leading-6 text-neutral-400">
-                  Mission 1 and Mission 2 are playable through the branching
-                  route. Mission 3 is staged as a future arrival scenario.
+                  {t(
+                    "Play any mission below. The two Sakura Central free-walk missions are available in all 9 languages.",
+                  )}
                 </p>
               </div>
               <Link
                 href="/station-practice/branching"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-yellow-300 hover:text-yellow-200"
               >
-                Start Mission 1 <ArrowRight className="h-4 w-4" />
+                {t("Start Mission 1")} <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
 
             <ul className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {missionCards.map((mission, idx) => (
+              {cards.map((mission, idx) => (
                 <li key={mission.id}>
-                  <MissionCard mission={mission} index={idx} />
+                  <MissionCard mission={mission} index={idx} missionLabel={missionLabel} />
                 </li>
               ))}
             </ul>
@@ -247,13 +266,12 @@ export default function StationPracticeLandingPage() {
           <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_1.2fr] lg:items-start">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                Free tool, supported by travel planning links
+                {t("Free tool, supported by travel planning links")}
               </h2>
               <p className="mt-3 text-sm leading-6 text-neutral-400">
-                This tool is free to use. Some links on fujiseat may be
-                affiliate links, which means we may earn a small commission if
-                you book through them, at no extra cost to you. Your support
-                helps us keep building free Japan travel tools.
+                {t(
+                  "This tool is free to use. Some links on fujiseat may be affiliate links, which means we may earn a small commission if you book through them, at no extra cost to you. Your support helps us keep building free Japan travel tools.",
+                )}
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
@@ -269,13 +287,13 @@ export default function StationPracticeLandingPage() {
                       <Icon className="h-4 w-4" />
                     </div>
                     <h3 className="mt-4 text-sm font-semibold text-white">
-                      {cta.title}
+                      {t(cta.title)}
                     </h3>
                     <p className="mt-2 text-xs leading-5 text-neutral-400">
-                      {cta.body}
+                      {t(cta.body)}
                     </p>
                     <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-yellow-300/80 group-hover:text-yellow-200">
-                      Open guide <ArrowRight className="h-3.5 w-3.5" />
+                      {t("Open guide")} <ArrowRight className="h-3.5 w-3.5" />
                     </span>
                   </Link>
                 );
@@ -290,23 +308,32 @@ export default function StationPracticeLandingPage() {
         >
           <div className="mx-auto max-w-7xl">
             <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              How it works
+              {t("How it works")}
             </h2>
             <ol className="mt-10 grid gap-6 sm:grid-cols-3">
               <Step
                 step="01"
-                title="Choose a mission"
-                body="Pick a realistic scenario such as finding an exit or transferring to a subway line."
+                stepLabel={t("Step")}
+                title={t("Choose a mission")}
+                body={t(
+                  "Pick a realistic scenario such as finding an exit or transferring to a subway line.",
+                )}
               />
               <Step
                 step="02"
-                title="Read the signs"
-                body="Use Japanese-first signs, English helper labels, route colors, and gate names to choose your next move."
+                stepLabel={t("Step")}
+                title={t("Read the signs")}
+                body={t(
+                  "Use Japanese-first signs, English helper labels, route colors, and gate names to choose your next move.",
+                )}
               />
               <Step
                 step="03"
-                title="Recover from detours"
-                body="Wrong routes teach why the path is wrong, then return you to the decision point so you can continue."
+                stepLabel={t("Step")}
+                title={t("Recover from detours")}
+                body={t(
+                  "Wrong routes teach why the path is wrong, then return you to the decision point so you can continue.",
+                )}
               />
             </ol>
           </div>
@@ -315,10 +342,10 @@ export default function StationPracticeLandingPage() {
         <section id="faq" className="px-6 py-20 sm:px-10">
           <div className="mx-auto max-w-3xl">
             <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-              FAQ
+              {t("FAQ")}
             </h2>
             <p className="mt-2 text-sm leading-6 text-neutral-400">
-              Quick answers about what this is and how it works.
+              {t("Quick answers about what this is and how it works.")}
             </p>
             <div className="mt-8">
               <FaqAccordion />
@@ -330,18 +357,19 @@ export default function StationPracticeLandingPage() {
           <div className="mx-auto flex max-w-5xl flex-col items-start gap-8 rounded-3xl border border-white/5 bg-white/[0.02] p-10 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
-                Practice the first two routes.
+                {t("Practice the routes.")}
               </h2>
               <p className="mt-3 max-w-xl text-sm leading-6 text-neutral-400">
-                Mission 1 covers station exits. Mission 2 covers subway
-                transfers. More arrival scenarios can be added later.
+                {t(
+                  "Mission 1 covers station exits, Mission 2 subway transfers, and the Sakura Central missions let you free-walk the whole station in 9 languages.",
+                )}
               </p>
             </div>
             <Link
               href="/station-practice/branching"
               className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-yellow-300 px-7 text-sm font-semibold text-black transition-colors hover:bg-yellow-200"
             >
-              Start Mission 1 <ArrowRight className="h-4 w-4" />
+              {t("Start Mission 1")} <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </section>
@@ -349,12 +377,12 @@ export default function StationPracticeLandingPage() {
         <footer className="border-t border-white/5 bg-[#070a13] px-6 py-8 text-xs text-neutral-500 sm:px-10">
           <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-2 sm:flex-row sm:items-center">
             <span>
-              This is a practice simulator, not an official station map.
-              Inspired by complex Tokyo-style stations. Layouts and signage
-              are original.
+              {t(
+                "This is a practice simulator, not an official station map. Inspired by complex Tokyo-style stations. Layouts and signage are original.",
+              )}
             </span>
             <span>
-              Station navigation practice &middot; free travel-prep simulator
+              {t("Station navigation practice · free travel-prep simulator")}
             </span>
           </div>
         </footer>
@@ -366,9 +394,11 @@ export default function StationPracticeLandingPage() {
 function MissionCard({
   mission,
   index,
+  missionLabel,
 }: {
-  mission: (typeof missionCards)[number];
+  mission: MissionCardData;
   index: number;
+  missionLabel: string;
 }) {
   const content = (
     <>
@@ -377,7 +407,9 @@ function MissionCard({
         className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-yellow-300/0 via-yellow-300 to-yellow-300/0"
       />
       <div className="flex items-center justify-between text-xs uppercase tracking-[0.18em] text-neutral-500">
-        <span>Mission {String(index + 1).padStart(2, "0")}</span>
+        <span>
+          {missionLabel} {String(index + 1).padStart(2, "0")}
+        </span>
         <span className={mission.href ? "text-yellow-300" : "text-neutral-400"}>
           {mission.status}
         </span>
@@ -441,17 +473,19 @@ function Feature({
 
 function Step({
   step,
+  stepLabel,
   title,
   body,
 }: {
   step: string;
+  stepLabel: string;
   title: string;
   body: string;
 }) {
   return (
     <li className="rounded-2xl border border-white/5 bg-white/[0.02] p-6">
       <div className="text-xs font-semibold uppercase tracking-[0.2em] text-yellow-300">
-        Step {step}
+        {stepLabel} {step}
       </div>
       <div className="mt-3 text-lg font-medium text-white">{title}</div>
       <p className="mt-2 text-sm leading-6 text-neutral-400">{body}</p>

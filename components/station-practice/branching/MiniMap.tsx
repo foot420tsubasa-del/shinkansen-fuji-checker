@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { StationScene } from "@/data/station-practice/branching/types";
+import { useTr } from "@/components/station-practice/lib/useTr";
 
 type Props = {
   scenes: StationScene[];
@@ -17,6 +18,7 @@ type Props = {
  */
 
 export function MiniMap({ scenes, currentSceneId, cleared }: Props) {
+  const t = useTr();
   const gameplay = scenes.filter((s) => !s.clearOnEnter && !s.isDetour);
   const currentScene = scenes.find((s) => s.id === currentSceneId);
   const isDetour = !!currentScene?.isDetour;
@@ -28,7 +30,7 @@ export function MiniMap({ scenes, currentSceneId, cleared }: Props) {
   const currentIndex = isDetour ? detourContextIndex : mainIndex;
   const reachedTerminal =
     cleared || (mainIndex < 0 && currentScene?.clearOnEnter);
-  const detourMessage = getDetourMessage(currentScene);
+  const detourMessage = t(getDetourMessage(currentScene));
 
   // Place each gameplay node at evenly-spaced x positions, alternating y
   // slightly so the polyline reads as a station route, not a flat line.
@@ -43,9 +45,11 @@ export function MiniMap({ scenes, currentSceneId, cleared }: Props) {
   return (
     <section className="rounded-2xl border border-white/5 bg-white/[0.02] p-5">
       <div className="flex items-center justify-between text-[10px] uppercase tracking-[0.2em] text-neutral-500">
-        <span>Route</span>
+        <span>{t("Route")}</span>
         <span>
-          {isDetour ? "Detour" : `${Math.min(currentIndex + 1, gameplay.length)}/${gameplay.length}`}
+          {isDetour
+            ? t("Detour")
+            : `${Math.min(currentIndex + 1, gameplay.length)}/${gameplay.length}`}
         </span>
       </div>
       {isDetour && (
@@ -58,7 +62,7 @@ export function MiniMap({ scenes, currentSceneId, cleared }: Props) {
         preserveAspectRatio="none"
         className="mt-3 h-24 w-full"
         role="img"
-        aria-label="Mission route progression"
+        aria-label={t("Mission route progression")}
       >
         <polyline
           points={polyline}
