@@ -235,7 +235,7 @@ export default async function PassVsTicketTKOPage({ params }: Props) {
                 locale={locale}
                 providers={[
                   { label: "Klook", href: SHINKANSEN_TICKET_URL, provider: "klook", product: "shinkansen_ticket", adid: "1265303", linkId: "shinkansenTicket", placement: "jrpass_booking_options", variant: "primary", category: "train" },
-                  ...(OMIO_SHINKANSEN_URL ? [{ label: "Omio", href: OMIO_SHINKANSEN_URL, provider: "omio" as const, product: "route_compare", linkId: "omioShinkansen", placement: "jrpass_booking_options" as const, variant: "secondary" as const, category: "train" as const, route: "tokyo-kyoto-osaka" }] : []),
+                  ...(OMIO_SHINKANSEN_URL ? [{ label: "Omio", href: OMIO_SHINKANSEN_URL, provider: "omio" as const, product: "route_compare", linkId: "omioShinkansen", placement: "jrpass_booking_options" as const, variant: "text" as const, category: "train" as const, route: "tokyo-kyoto-osaka" }] : []),
                 ]}
               />
               <ProviderChoiceCTA

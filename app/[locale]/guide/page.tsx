@@ -1177,25 +1177,26 @@ export default async function GuidePage({ params }: Props) {
 
   const renderTopBookingCtas = () => (
     <section className="mb-5 rounded-2xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm shadow-slate-200/70 lg:px-5">
-      <div className="flex flex-col gap-2.5 sm:flex-row">
-        <TrackedAffiliateLink
-          href={KLOOK_URL}
-          target="_blank"
-          rel={AFFILIATE_REL}
-          category="train"
-          provider="klook"
-          placement="guide_top_klook_shinkansen"
-          pagePath="/guide"
-          locale={locale}
-          label="Book Shinkansen ticket on Klook"
-          linkId="shinkansenTicket"
-          product="shinkansen_ticket"
-          adid="1265303"
-          className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
-        >
-          Book Shinkansen ticket on Klook
-        </TrackedAffiliateLink>
-        {OMIO_SHINKANSEN_URL ? (
+      <TrackedAffiliateLink
+        href={KLOOK_URL}
+        target="_blank"
+        rel={AFFILIATE_REL}
+        category="train"
+        provider="klook"
+        placement="guide_top_klook_shinkansen"
+        pagePath="/guide"
+        locale={locale}
+        label="Book Shinkansen ticket on Klook"
+        linkId="shinkansenTicket"
+        product="shinkansen_ticket"
+        adid="1265303"
+        className="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
+      >
+        Book Shinkansen ticket on Klook
+      </TrackedAffiliateLink>
+      {OMIO_SHINKANSEN_URL ? (
+        <p className="mt-2 text-center text-[12px] text-slate-500">
+          Still comparing routes?{" "}
           <TrackedAffiliateLink
             href={OMIO_SHINKANSEN_URL}
             target="_blank"
@@ -1208,12 +1209,12 @@ export default async function GuidePage({ params }: Props) {
             label="Compare route on Omio"
             linkId="omioShinkansen"
             product="route_compare"
-            className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#2563EB] bg-white px-3 py-2 text-xs font-semibold text-[#0B3A75] shadow-sm shadow-blue-100/70 transition-colors hover:border-[#1D4ED8] hover:bg-[#F0F6FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-200"
+            className="font-medium text-slate-600 underline underline-offset-2 hover:text-slate-800"
           >
-            Compare route on Omio
+            Compare on Omio
           </TrackedAffiliateLink>
-        ) : null}
-      </div>
+        </p>
+      ) : null}
     </section>
   );
 
@@ -1273,31 +1274,6 @@ export default async function GuidePage({ params }: Props) {
           </span>
         </TrackedAffiliateLink>
 
-        {OMIO_SHINKANSEN_URL ? (
-          <TrackedAffiliateLink
-            href={OMIO_SHINKANSEN_URL}
-            target="_blank"
-            rel={AFFILIATE_REL}
-            category="train"
-            provider="omio"
-            placement="guide_top_omio_compare"
-            pagePath="/guide"
-            locale={locale}
-            label="Compare train options"
-            linkId="omioShinkansen"
-            product="route_compare"
-          className="flex h-full flex-col rounded-2xl border border-indigo-200 bg-indigo-50 px-4 py-3.5 text-[12px] shadow-sm transition-colors hover:border-indigo-300 hover:bg-indigo-100"
-          >
-            <span className="block font-semibold text-slate-950">Compare train options</span>
-            <span className="mt-1 block leading-5 text-slate-600">
-              Use Omio if you are still comparing route options before booking.
-            </span>
-            <span className="mt-auto inline-flex w-fit rounded-full border border-indigo-300 bg-white px-3 py-1.5 font-semibold text-indigo-700">
-              Open Omio
-            </span>
-          </TrackedAffiliateLink>
-        ) : null}
-
         <TrackedInternalLink
           href="/areas-to-stay/where-to-stay-before-shinkansen"
           sourcePage="/guide"
@@ -1316,6 +1292,27 @@ export default async function GuidePage({ params }: Props) {
         </TrackedInternalLink>
 
       </div>
+      {OMIO_SHINKANSEN_URL ? (
+        <p className="mt-3 text-[12px] text-slate-500">
+          Still comparing trains, buses, and routes?{" "}
+          <TrackedAffiliateLink
+            href={OMIO_SHINKANSEN_URL}
+            target="_blank"
+            rel={AFFILIATE_REL}
+            category="train"
+            provider="omio"
+            placement="guide_top_omio_compare"
+            pagePath="/guide"
+            locale={locale}
+            label="Compare train options"
+            linkId="omioShinkansen"
+            product="route_compare"
+            className="font-medium text-slate-600 underline underline-offset-2 hover:text-slate-800"
+          >
+            Compare options on Omio
+          </TrackedAffiliateLink>
+        </p>
+      ) : null}
     </section>
   );
 

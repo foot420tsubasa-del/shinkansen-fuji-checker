@@ -220,7 +220,7 @@ export default async function TokyoToKyotoTicketPage({ params }: Props) {
                 locale={locale}
                 providers={[
                   { label: "Klook", href: SHINKANSEN_TICKET_URL, provider: "klook", product: "shinkansen_ticket", placement: "shinkansen_ticket", variant: "primary", category: "train" },
-                  ...(OMIO_TOKYO_KYOTO_URL ? [{ label: "Omio", href: OMIO_TOKYO_KYOTO_URL, provider: "omio" as const, product: "route_compare", placement: "train_route_comparison" as const, variant: "secondary" as const, category: "train" as const, route: "tokyo-kyoto" }] : []),
+                  ...(OMIO_TOKYO_KYOTO_URL ? [{ label: "Omio", href: OMIO_TOKYO_KYOTO_URL, provider: "omio" as const, product: "route_compare", placement: "train_route_comparison" as const, variant: "text" as const, category: "train" as const, route: "tokyo-kyoto" }] : []),
                 ]}
               />
             </div>

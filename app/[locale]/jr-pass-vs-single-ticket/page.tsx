@@ -248,7 +248,7 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
                 locale={locale}
                 providers={[
                   { label: "Klook", href: SHINKANSEN_TICKET_URL, provider: "klook", product: "shinkansen_ticket", adid: "1265303", linkId: "shinkansenTicket", placement: "jrpass_booking_options", variant: "primary", category: "train" },
-                  ...(OMIO_JAPAN_RAIL_PASS_URL ? [{ label: "Omio", href: OMIO_JAPAN_RAIL_PASS_URL, provider: "omio" as const, product: "route_compare", linkId: "omioJapanRailPass", placement: "jrpass_booking_options" as const, variant: "secondary" as const, category: "train" as const }] : []),
+                  ...(OMIO_JAPAN_RAIL_PASS_URL ? [{ label: "Omio", href: OMIO_JAPAN_RAIL_PASS_URL, provider: "omio" as const, product: "route_compare", linkId: "omioJapanRailPass", placement: "jrpass_booking_options" as const, variant: "text" as const, category: "train" as const }] : []),
                 ]}
               />
               <ProviderChoiceCTA
