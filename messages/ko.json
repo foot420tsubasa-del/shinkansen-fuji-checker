@@ -4337,6 +4337,7 @@
       "badges": [
         "공항 접근",
         "짐 이동 편리",
+        "역 복잡도",
         "Shinkansen 준비",
         "호텔 선택지"
       ],
@@ -5066,7 +5067,8 @@
     "share": {
       "title": "Suica 카드 구매 방법 — 인터랙티브 시뮬레이터",
       "description": "일본을 처음 방문하는 분이 있다면, 이 Suica 매표기 시뮬레이터를 공유해 도착 전에 미리 연습할 수 있도록 알려주세요."
-    }
+    },
+    "startSimulator": "Suica 시뮬레이터 시작"
   },
   "stationPractice": {
     "ui": {

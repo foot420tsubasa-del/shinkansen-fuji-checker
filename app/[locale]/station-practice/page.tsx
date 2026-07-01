@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   title: "Station Practice — Japanese station navigation simulator",
   description:
     "Practice Japanese station navigation before your trip. Learn exits, transfer gates, platforms, and Japanese-first station signs with short guided missions.",
-  robots: { index: false, follow: false },
+  robots: { index: false, follow: true },
 };
 
 type MissionCardData = {
@@ -198,6 +198,68 @@ export default async function StationPracticeLandingPage() {
                 {t("See the missions")}
               </a>
             </div>
+          </div>
+        </section>
+
+        {/*
+          Plain-language explainer directly in the initial HTML: what this tool
+          is, who it is for, and a clear "not a live map" disclaimer. Kept as an
+          experience-page intro (the tool is noindex) rather than an SEO block —
+          search traffic is meant to land on the article pages that link here.
+        */}
+        <section className="border-t border-white/5 bg-[#080b14] px-6 py-14 sm:px-10">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+              {t("What Station Practice is")}
+            </h2>
+            <p className="mt-4 text-sm leading-7 text-neutral-300 sm:text-base">
+              {t(
+                "Station Practice is a free, browser-based way to rehearse moving through a complex Japanese station before your trip. It recreates the feel of a big Tokyo-style station — Japanese-first signage with English support — and asks you to make the real decisions: find the right exit, follow transfer gates, and read platform and direction signs. Take a wrong turn and it explains why, then returns you to the decision so you can try again. There is nothing to install and no account needed; you can run through a mission in a few minutes.",
+              )}
+            </p>
+            <p className="mt-4 rounded-2xl border border-yellow-300/25 bg-yellow-300/5 px-4 py-3 text-sm leading-6 text-yellow-100">
+              {t(
+                "This is a practice tool, not a live station map. The layouts and signs are original and designed for learning, not for finding a specific real-world exit on the day.",
+              )}
+            </p>
+
+            <h3 className="mt-8 text-sm font-semibold uppercase tracking-[0.16em] text-yellow-300">
+              {t("Who it is for")}
+            </h3>
+            <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+              {[
+                "First-time visitors to Japan",
+                "Travelers arriving with luggage",
+                "People changing trains between lines",
+                "Families keeping everyone together",
+              ].map((who) => (
+                <li
+                  key={who}
+                  className="flex items-center gap-2 rounded-xl border border-white/5 bg-white/[0.02] px-3 py-2 text-sm text-neutral-200"
+                >
+                  <span className="inline-block h-1.5 w-3 rounded-sm bg-yellow-300" />
+                  {t(who)}
+                </li>
+              ))}
+            </ul>
+
+            <p className="mt-6 text-sm leading-6 text-neutral-400">
+              {t("New to reading the signs? Start with our guides:")}{" "}
+              <Link
+                href="/how-to-navigate-japanese-train-stations"
+                className="font-medium text-yellow-300 underline underline-offset-2 hover:text-yellow-200"
+              >
+                {t("how to navigate Japanese train stations")}
+              </Link>{" "}
+              {t("and")}{" "}
+              <Link
+                href="/how-to-read-japanese-train-signs"
+                className="font-medium text-yellow-300 underline underline-offset-2 hover:text-yellow-200"
+              >
+                {t("how to read Japanese train signs")}
+              </Link>
+              .
+            </p>
           </div>
         </section>
 

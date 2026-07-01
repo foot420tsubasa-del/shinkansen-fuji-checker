@@ -4338,6 +4338,7 @@
       "badges": [
         "Acesso ao aeroporto",
         "Boa com bagagem",
+        "Complexidade da estação",
         "Pronto para Shinkansen",
         "Opções de hotéis"
       ],
@@ -5067,7 +5068,8 @@
     "share": {
       "title": "Como comprar um cartão Suica — simulador interativo",
       "description": "Conhece alguém visitando o Japão pela primeira vez? Compartilhe este simulador de máquina de bilhetes Suica para que possa praticar antes do voo."
-    }
+    },
+    "startSimulator": "Iniciar o simulador do Suica"
   },
   "stationPractice": {
     "ui": {

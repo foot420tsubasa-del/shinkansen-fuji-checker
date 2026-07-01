@@ -4335,10 +4335,11 @@
       "matchLabel": "匹配",
       "noAnswers": "先回答几个快速问题。完成向导前结果会保持隐藏。",
       "badges": [
-        "机场交通",
-        "行李友好",
-        "适合 Shinkansen",
-        "酒店选择"
+        "機場交通",
+        "行李友善",
+        "車站複雜度",
+        "適合 Shinkansen",
+        "飯店選擇"
       ],
       "steps": [
         {
@@ -5066,7 +5067,8 @@
     "share": {
       "title": "如何購買 Suica 卡片：互動式模擬器",
       "description": "認識首次造訪日本的朋友嗎？把這個 Suica 售票機模擬器分享給他們，讓他們在出發前先練習。"
-    }
+    },
+    "startSimulator": "開始 Suica 模擬器"
   },
   "stationPractice": {
     "ui": {

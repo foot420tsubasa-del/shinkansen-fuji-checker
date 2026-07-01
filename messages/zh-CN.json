@@ -4337,6 +4337,7 @@
       "badges": [
         "机场交通",
         "行李友好",
+        "车站复杂度",
         "适合 Shinkansen",
         "酒店选择"
       ],
@@ -5066,7 +5067,8 @@
     "share": {
       "title": "如何购买 Suica 卡片：互动式模拟器",
       "description": "认识首次造访日本的朋友吗？把这个 Suica 售票机模拟器分享给他们，让他们在出发前先练习。"
-    }
+    },
+    "startSimulator": "开始 Suica 模拟器"
   },
   "stationPractice": {
     "ui": {

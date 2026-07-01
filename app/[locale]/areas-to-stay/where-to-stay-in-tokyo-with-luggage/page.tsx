@@ -72,6 +72,7 @@ type LuggageCopy = {
   nextTitle: string;
   nextBody: string;
   stayGuideLink: string;
+  finderCtaLabel: string;
   continueTitle: string;
   continueLinks: Array<[string, string]>;
 };
@@ -133,6 +134,7 @@ const luggageCopyByLocale: Record<string, LuggageCopy> = {
     nextTitle: "Next step: compare Tokyo hotel areas",
     nextBody: "Use this luggage logic with the Tokyo stay area guide before comparing hotels. The right hotel base depends on airport access, walking distance, station complexity, room size, and your Shinkansen plans.",
     stayGuideLink: "Open Tokyo stay area guide",
+    finderCtaLabel: "Compare areas by luggage, airport & Shinkansen access",
     continueTitle: "Continue planning",
     continueLinks: [["/areas-to-stay/tokyo-first-time", "Tokyo stay area guide"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "Room size guide"], ["/airport-transfers", "Airport transfers"], ["/local-hotel-picks", "Local hotel examples"], ["/guide", "Shinkansen Seat E guide"]],
   },
@@ -175,6 +177,7 @@ const luggageCopyByLocale: Record<string, LuggageCopy> = {
     nextTitle: "Próximo passo: compare áreas de hotel em Tokyo",
     nextBody: "Use esta lógica de bagagem com o guia de áreas de Tokyo antes de comparar hotéis. A base certa depende de aeroporto, caminhada, estação, tamanho do quarto e Shinkansen.",
     stayGuideLink: "Abrir guia de áreas de Tokyo",
+    finderCtaLabel: "Compare áreas por bagagem, aeroporto e acesso ao Shinkansen",
     continueTitle: "Continue planejando",
     continueLinks: [["/areas-to-stay/tokyo-first-time", "Guia de áreas de Tokyo"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "Guia de tamanho do quarto"], ["/airport-transfers", "Transfers do aeroporto"], ["/local-hotel-picks", "Exemplos de hotéis"], ["/guide", "Guia Seat E do Shinkansen"]],
   },
@@ -197,7 +200,7 @@ const luggageCopyByLocale: Record<string, LuggageCopy> = {
     areas: [{ title: "Shinjuku", bestFor: "Opciones de transporte y vida nocturna.", watchOut: "La escala de la estación y zonas animadas cansan con equipaje.", goodIf: "Quieres máxima flexibilidad y no te importa una base movida.", notIdealIf: "Quieres la primera noche más tranquila o no te gustan estaciones grandes." }, { title: "Ueno / Asakusa", bestFor: "Acceso a Narita y noches más tranquilas.", watchOut: "Algunas rutas dependen más del metro.", goodIf: "Quieres acceso práctico a Narita, ambiente antiguo o base menos intensa.", notIdealIf: "Necesitas la mañana de Shinkansen más simple." }, { title: "Tokyo Station", bestFor: "Shinkansen temprano y logística limpia.", watchOut: "Puede sentirse comercial y menos local por la noche.", goodIf: "Quieres reducir estrés con maletas antes de Kioto u Osaka.", notIdealIf: "Quieres vida nocturna o sensación de barrio." }, { title: "East Tokyo", bestFor: "Barrios tranquilos y viajeros repetidores.", watchOut: "No siempre es la base predeterminada para primera visita.", goodIf: "Valoras calles tranquilas, cafés, ríos y ambiente local.", notIdealIf: "Necesitas la llegada más simple la primera noche." }],
     famousTitle: "No elijas solo por nombres de estaciones famosas", famousBody: "Una estación famosa no siempre es el lugar más fácil para dormir. Con equipaje, puede ser mejor una zona con ruta a pie simple, salidas claras, ascensores y una habitación adecuada.",
     nextTitle: "Siguiente paso: compara zonas hoteleras de Tokio", nextBody: "Usa esta lógica de equipaje con la guía de zonas de Tokio antes de comparar hoteles. La base correcta depende de aeropuerto, caminata, estación, tamaño de habitación y Shinkansen.",
-    stayGuideLink: "Abrir guía de zonas de Tokio", continueTitle: "Continuar planificación", continueLinks: [["/areas-to-stay/tokyo-first-time", "Guía de zonas de Tokio"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "Guía de tamaño de habitación"], ["/airport-transfers", "Traslados de aeropuerto"], ["/local-hotel-picks", "Ejemplos de hoteles"], ["/guide", "Guía Seat E del Shinkansen"]],
+    stayGuideLink: "Abrir guía de zonas de Tokio", finderCtaLabel: "Compara zonas por equipaje, aeropuerto y acceso al Shinkansen", continueTitle: "Continuar planificación", continueLinks: [["/areas-to-stay/tokyo-first-time", "Guía de zonas de Tokio"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "Guía de tamaño de habitación"], ["/airport-transfers", "Traslados de aeropuerto"], ["/local-hotel-picks", "Ejemplos de hoteles"], ["/guide", "Guía Seat E del Shinkansen"]],
   },
   ko: {
     metadataTitle: "짐이 있을 때 도쿄 어디에 묵을까: 공항, 역, 호텔 지역 팁",
@@ -218,7 +221,7 @@ const luggageCopyByLocale: Record<string, LuggageCopy> = {
     areas: [{ title: "Shinjuku", bestFor: "교통 선택지와 밤 문화.", watchOut: "큰 역 규모와 활기찬 유흥가는 짐이 있으면 피곤할 수 있습니다.", goodIf: "최대 경로 선택지를 원하고 붐비는 base도 괜찮다면.", notIdealIf: "가장 조용한 첫날 밤이나 큰 역 이동을 피하고 싶다면." }, { title: "Ueno / Asakusa", bestFor: "나리타 접근과 차분한 도착 밤.", watchOut: "일부 경로는 지하철 환승 의존도가 높습니다.", goodIf: "나리타 접근, 옛 도쿄 분위기, 덜 복잡한 base를 원한다면.", notIdealIf: "가장 쉬운 신칸센 아침 동선이 필요하다면." }, { title: "Tokyo Station", bestFor: "이른 신칸센과 깔끔한 물류.", watchOut: "밤에는 비즈니스 지구 느낌이고 지역감이 약할 수 있습니다.", goodIf: "교토나 오사카 이동 전 짐 스트레스를 줄이고 싶다면.", notIdealIf: "밤 문화나 동네 분위기를 원한다면." }, { title: "East Tokyo", bestFor: "차분한 동네와 재방문자.", watchOut: "첫 도쿄 숙소의 기본 선택지는 아닐 수 있습니다.", goodIf: "조용한 거리, 카페, 강변, 로컬 분위기를 중시한다면.", notIdealIf: "첫날 가장 단순한 도착 경로가 필요하다면." }],
     famousTitle: "유명한 역 이름만 보고 고르지 마세요", famousBody: "유명한 역이 항상 잠자기 쉬운 곳은 아닙니다. 짐이 있다면 더 단순한 도보 경로, 명확한 출구, 엘리베이터, 그룹에 맞는 객실이 있는 지역이 더 쉬울 수 있습니다.",
     nextTitle: "다음 단계: 도쿄 호텔 지역 비교", nextBody: "호텔을 비교하기 전에 이 짐 동선 논리를 도쿄 숙소 지역 가이드와 함께 사용하세요. 적절한 base는 공항 접근, 도보 거리, 역 복잡도, 객실 크기, 신칸센 계획에 따라 달라집니다.",
-    stayGuideLink: "도쿄 숙소 지역 가이드 열기", continueTitle: "계속 계획하기", continueLinks: [["/areas-to-stay/tokyo-first-time", "도쿄 숙소 지역 가이드"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "객실 크기 가이드"], ["/airport-transfers", "공항 이동"], ["/local-hotel-picks", "로컬 호텔 예시"], ["/guide", "신칸센 Seat E 가이드"]],
+    stayGuideLink: "도쿄 숙소 지역 가이드 열기", finderCtaLabel: "짐·공항·신칸센 접근성으로 지역 비교", continueTitle: "계속 계획하기", continueLinks: [["/areas-to-stay/tokyo-first-time", "도쿄 숙소 지역 가이드"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "객실 크기 가이드"], ["/airport-transfers", "공항 이동"], ["/local-hotel-picks", "로컬 호텔 예시"], ["/guide", "신칸센 Seat E 가이드"]],
   },
   "zh-TW": {
     metadataTitle: "帶行李時東京住哪裡：機場、車站與飯店區域提示",
@@ -239,7 +242,7 @@ const luggageCopyByLocale: Record<string, LuggageCopy> = {
     areas: [{ title: "Shinjuku", bestFor: "交通選擇和夜生活。", watchOut: "巨大車站和熱鬧街區拖行李會累。", goodIf: "想要最多路線選擇且不介意熱鬧基地。", notIdealIf: "想要最安靜的第一晚或不喜歡大型車站。"}, { title: "Ueno / Asakusa", bestFor: "成田交通和較安靜抵達夜晚。", watchOut: "部分路線較依賴地下鐵轉乘。", goodIf: "想要實用成田交通、老東京氣氛或較不緊張的基地。", notIdealIf: "需要最簡單的新幹線早晨。"}, { title: "Tokyo Station", bestFor: "早班新幹線和清楚物流。", watchOut: "夜晚較商務、在地感較弱。", goodIf: "想在去京都或大阪前降低行李壓力。", notIdealIf: "想要夜生活或街區感。"}, { title: "East Tokyo", bestFor: "安靜街區和重遊旅客。", watchOut: "不一定是首次東京的預設基地。", goodIf: "重視安靜街道、咖啡、河邊和在地感。", notIdealIf: "第一晚需要最簡單抵達路線。"}],
     famousTitle: "不要只看有名車站名稱", famousBody: "有名車站不一定是最容易睡覺的地方。帶行李時，步行路線較簡單、出口清楚、有電梯、房間大小合適的區域可能更好。",
     nextTitle: "下一步：比較東京飯店區域", nextBody: "比較飯店前，請把這套行李邏輯和東京住宿區域指南一起使用。適合的基地取決於機場交通、步行距離、車站複雜度、房間大小和新幹線計畫。",
-    stayGuideLink: "打開東京住宿區域指南", continueTitle: "繼續規劃", continueLinks: [["/areas-to-stay/tokyo-first-time", "東京住宿區域指南"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "房間大小指南"], ["/airport-transfers", "機場交通"], ["/local-hotel-picks", "在地飯店例子"], ["/guide", "新幹線 Seat E 指南"]],
+    stayGuideLink: "打開東京住宿區域指南", finderCtaLabel: "依行李、機場與新幹線便利度比較區域", continueTitle: "繼續規劃", continueLinks: [["/areas-to-stay/tokyo-first-time", "東京住宿區域指南"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "房間大小指南"], ["/airport-transfers", "機場交通"], ["/local-hotel-picks", "在地飯店例子"], ["/guide", "新幹線 Seat E 指南"]],
   },
   "zh-CN": {
     metadataTitle: "带行李时东京住哪里：机场、车站和酒店区域提示",
@@ -260,7 +263,7 @@ const luggageCopyByLocale: Record<string, LuggageCopy> = {
     areas: [{ title: "Shinjuku", bestFor: "交通选择和夜生活。", watchOut: "巨大车站和热闹街区拖行李会累。", goodIf: "想要最多路线选择且不介意热闹基地。", notIdealIf: "想要最安静的第一晚或不喜欢大型车站。" }, { title: "Ueno / Asakusa", bestFor: "成田交通和较安静抵达夜晚。", watchOut: "部分路线较依赖地铁换乘。", goodIf: "想要实用成田交通、老东京氛围或较不紧张的基地。", notIdealIf: "需要最简单的新干线早晨。" }, { title: "Tokyo Station", bestFor: "早班新干线和清楚物流。", watchOut: "夜晚较商务、在地感较弱。", goodIf: "想在去京都或大阪前降低行李压力。", notIdealIf: "想要夜生活或街区感。" }, { title: "East Tokyo", bestFor: "安静街区和重游旅客。", watchOut: "不一定是首次东京的默认基地。", goodIf: "重视安静街道、咖啡、河边和在地感。", notIdealIf: "第一晚需要最简单抵达路线。" }],
     famousTitle: "不要只看有名车站名称", famousBody: "有名车站不一定是最容易睡觉的地方。带行李时，步行路线较简单、出口清楚、有电梯、房间大小合适的区域可能更好。",
     nextTitle: "下一步：比较东京酒店区域", nextBody: "比较酒店前，请把这套行李逻辑和东京住宿区域指南一起使用。合适的基地取决于机场交通、步行距离、车站复杂度、房间大小和新干线计划。",
-    stayGuideLink: "打开东京住宿区域指南", continueTitle: "继续规划", continueLinks: [["/areas-to-stay/tokyo-first-time", "东京住宿区域指南"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "房间大小指南"], ["/airport-transfers", "机场交通"], ["/local-hotel-picks", "本地酒店示例"], ["/guide", "新干线 Seat E 指南"]],
+    stayGuideLink: "打开东京住宿区域指南", finderCtaLabel: "按行李、机场与新干线便利度比较区域", continueTitle: "继续规划", continueLinks: [["/areas-to-stay/tokyo-first-time", "东京住宿区域指南"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "房间大小指南"], ["/airport-transfers", "机场交通"], ["/local-hotel-picks", "本地酒店示例"], ["/guide", "新干线 Seat E 指南"]],
   },
   fr: {
     metadataTitle: "Où loger à Tokyo avec des bagages : aéroport, gares et quartiers",
@@ -281,7 +284,7 @@ const luggageCopyByLocale: Record<string, LuggageCopy> = {
     areas: [{ title: "Shinjuku", bestFor: "Choix de transport et vie nocturne.", watchOut: "La taille de la gare et les blocs animés fatiguent avec des valises.", goodIf: "Vous voulez le plus de choix et acceptez une base animée.", notIdealIf: "Vous voulez la première nuit la plus calme." }, { title: "Ueno / Asakusa", bestFor: "Accès Narita et nuits plus calmes.", watchOut: "Certains trajets reposent davantage sur le métro.", goodIf: "Vous voulez Narita pratique, atmosphère ancienne ou base moins intense.", notIdealIf: "Vous voulez le matin Shinkansen le plus simple." }, { title: "Tokyo Station", bestFor: "Shinkansen tôt et logistique claire.", watchOut: "Peut sembler business et moins local le soir.", goodIf: "Vous voulez réduire le stress bagages avant Kyoto ou Osaka.", notIdealIf: "Vous voulez vie nocturne ou ambiance de quartier." }, { title: "East Tokyo", bestFor: "Quartiers calmes et voyageurs qui reviennent.", watchOut: "Pas toujours la base par défaut d'un premier séjour.", goodIf: "Vous aimez rues calmes, cafés, rivières et ambiance locale.", notIdealIf: "Vous avez besoin de l'arrivée la plus simple." }],
     famousTitle: "Ne choisissez pas seulement un nom de gare célèbre", famousBody: "Une gare célèbre n'est pas toujours l'endroit le plus facile pour dormir. Avec des bagages, un trajet à pied simple, des sorties claires, des ascenseurs et une bonne taille de chambre comptent davantage.",
     nextTitle: "Étape suivante : comparer les quartiers hôteliers de Tokyo", nextBody: "Utilisez cette logique bagages avec le guide des quartiers de Tokyo avant de comparer les hôtels. La bonne base dépend de l'aéroport, de la marche, de la gare, de la chambre et du Shinkansen.",
-    stayGuideLink: "Ouvrir le guide des quartiers de Tokyo", continueTitle: "Continuer la planification", continueLinks: [["/areas-to-stay/tokyo-first-time", "Guide des quartiers de Tokyo"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "Guide taille de chambre"], ["/airport-transfers", "Transferts aéroport"], ["/local-hotel-picks", "Exemples d'hôtels"], ["/guide", "Guide Seat E Shinkansen"]],
+    stayGuideLink: "Ouvrir le guide des quartiers de Tokyo", finderCtaLabel: "Comparez les quartiers selon les bagages, l'aéroport et l'accès au Shinkansen", continueTitle: "Continuer la planification", continueLinks: [["/areas-to-stay/tokyo-first-time", "Guide des quartiers de Tokyo"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "Guide taille de chambre"], ["/airport-transfers", "Transferts aéroport"], ["/local-hotel-picks", "Exemples d'hôtels"], ["/guide", "Guide Seat E Shinkansen"]],
   },
   de: {
     metadataTitle: "Wo in Tokyo mit Gepäck übernachten: Flughafen, Bahnhöfe und Hotelgegenden",
@@ -302,7 +305,7 @@ const luggageCopyByLocale: Record<string, LuggageCopy> = {
     areas: [{ title: "Shinjuku", bestFor: "Verkehrsauswahl und Nachtleben.", watchOut: "Riesiger Bahnhof und lebhafte Blöcke ermüden mit Gepäck.", goodIf: "Du maximale Routenwahl willst und Trubel akzeptierst.", notIdealIf: "Du die ruhigste erste Nacht oder wenig Bahnhofskomplexität willst." }, { title: "Ueno / Asakusa", bestFor: "Narita-Zugang und ruhigere Ankunftsnächte.", watchOut: "Einige Routen hängen stärker von U-Bahn-Umstiegen ab.", goodIf: "Du praktischen Narita-Zugang, altes Tokyo oder weniger Intensität willst.", notIdealIf: "Du den einfachsten Shinkansen-Morgen brauchst." }, { title: "Tokyo Station", bestFor: "Früher Shinkansen und klare Logistik.", watchOut: "Kann geschäftlich wirken und abends weniger lokal.", goodIf: "Du Gepäckstress vor Kyoto oder Osaka reduzieren willst.", notIdealIf: "Du Nachtleben oder Nachbarschaftsgefühl willst." }, { title: "East Tokyo", bestFor: "Ruhigere Viertel und Wiederholungsbesucher.", watchOut: "Nicht immer die Standardbasis für Erstbesucher.", goodIf: "Du ruhige Straßen, Cafes, Flusswege und lokales Gefühl schätzt.", notIdealIf: "Du die einfachste erste Ankunft brauchst." }],
     famousTitle: "Nicht nur nach berühmten Bahnhofsnamen wählen", famousBody: "Ein berühmter Bahnhof ist nicht immer der einfachste Ort zum Schlafen. Mit Gepäck können einfache Fußwege, klare Ausgänge, Aufzüge und passende Zimmergröße wichtiger sein.",
     nextTitle: "Nächster Schritt: Hotelgebiete in Tokyo vergleichen", nextBody: "Nutze diese Gepäcklogik mit dem Tokyo-Unterkunftsguide, bevor du Hotels vergleichst. Die richtige Basis hängt von Flughafen, Fußweg, Bahnhof, Zimmergröße und Shinkansen-Plänen ab.",
-    stayGuideLink: "Tokyo Unterkunfts-Guide öffnen", continueTitle: "Weiter planen", continueLinks: [["/areas-to-stay/tokyo-first-time", "Tokyo Unterkunfts-Guide"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "Zimmergrößen-Guide"], ["/airport-transfers", "Flughafentransfers"], ["/local-hotel-picks", "Hotelbeispiele"], ["/guide", "Shinkansen Seat E Guide"]],
+    stayGuideLink: "Tokyo Unterkunfts-Guide öffnen", finderCtaLabel: "Gebiete nach Gepäck, Flughafen & Shinkansen-Anbindung vergleichen", continueTitle: "Weiter planen", continueLinks: [["/areas-to-stay/tokyo-first-time", "Tokyo Unterkunfts-Guide"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "Zimmergrößen-Guide"], ["/airport-transfers", "Flughafentransfers"], ["/local-hotel-picks", "Hotelbeispiele"], ["/guide", "Shinkansen Seat E Guide"]],
   },
   ru: {
     metadataTitle: "Где остановиться в Токио с багажом: аэропорт, станции и районы",
@@ -323,7 +326,7 @@ const luggageCopyByLocale: Record<string, LuggageCopy> = {
     areas: [{ title: "Shinjuku", bestFor: "Выбор транспорта и ночная жизнь.", watchOut: "Огромная станция и оживленные кварталы утомляют с багажом.", goodIf: "Нужен максимум маршрутов и не пугает шумная база.", notIdealIf: "Нужна самая спокойная первая ночь или вы не любите большие станции." }, { title: "Ueno / Asakusa", bestFor: "Доступ к Narita и более спокойный вечер прибытия.", watchOut: "Некоторые маршруты сильнее зависят от метро.", goodIf: "Нужен практичный Narita, старый Токио или менее напряженная база.", notIdealIf: "Нужно самое простое утро Shinkansen." }, { title: "Tokyo Station", bestFor: "Ранний Shinkansen и простая логистика.", watchOut: "Может быть деловой и менее локальной вечером.", goodIf: "Хотите снизить стресс с багажом перед Киото или Осакой.", notIdealIf: "Нужна ночная жизнь или атмосфера района." }, { title: "East Tokyo", bestFor: "Спокойные районы и повторные поездки.", watchOut: "Не всегда стандартная база для первой поездки.", goodIf: "Важны тихие улицы, кафе, река и локальная атмосфера.", notIdealIf: "Нужен самый простой приезд в первую ночь." }],
     famousTitle: "Не выбирайте только по известному названию станции", famousBody: "Известная станция не всегда самое простое место для сна. С багажом важнее простой пеший маршрут, понятные выходы, лифты и подходящий размер номера.",
     nextTitle: "Следующий шаг: сравнить районы отелей Токио", nextBody: "Используйте эту логику багажа вместе с гидом по районам Токио перед сравнением отелей. Правильная база зависит от аэропорта, пешего пути, станции, размера номера и планов Shinkansen.",
-    stayGuideLink: "Открыть гид по районам Токио", continueTitle: "Продолжить планирование", continueLinks: [["/areas-to-stay/tokyo-first-time", "Гид по районам Токио"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "Гид по размеру номера"], ["/airport-transfers", "Трансферы из аэропорта"], ["/local-hotel-picks", "Примеры отелей"], ["/guide", "Гид Shinkansen Seat E"]],
+    stayGuideLink: "Открыть гид по районам Токио", finderCtaLabel: "Сравнить районы по багажу, аэропорту и доступу к Синкансэну", continueTitle: "Продолжить планирование", continueLinks: [["/areas-to-stay/tokyo-first-time", "Гид по районам Токио"], ["/areas-to-stay/tokyo-hotel-room-size-guide", "Гид по размеру номера"], ["/airport-transfers", "Трансферы из аэропорта"], ["/local-hotel-picks", "Примеры отелей"], ["/guide", "Гид Shinkansen Seat E"]],
   },
 };
 
@@ -644,16 +647,34 @@ export default async function WhereToStayInTokyoWithLuggagePage({ params }: Prop
           <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-700">
             {copy.nextBody}
           </p>
-          <TrackedInternalLink
-            href="/areas-to-stay/tokyo-first-time"
-            sourcePage={pagePath}
-            placement="luggage_pack_cta"
-            label="Tokyo stay area guide"
-            locale={locale}
-            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#106b43] underline underline-offset-4"
-          >
-            {copy.stayGuideLink} →
-          </TrackedInternalLink>
+          {/*
+            The Finder is the tool that ranks the 36 areas by luggage-friendliness,
+            station complexity, and airport/Shinkansen access — the exact factors
+            this luggage guide describes. Lead with it, then keep the existing
+            first-time guide link as the secondary option (nothing removed).
+          */}
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <TrackedInternalLink
+              href="/areas-to-stay/tokyo-stay-area-index"
+              sourcePage={pagePath}
+              placement="luggage_next_finder_cta"
+              label="Compare areas by luggage in the Finder"
+              locale={locale}
+              className="inline-flex min-h-10 items-center gap-1.5 rounded-xl bg-[#2E7D5B] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
+            >
+              {copy.finderCtaLabel} →
+            </TrackedInternalLink>
+            <TrackedInternalLink
+              href="/areas-to-stay/tokyo-first-time"
+              sourcePage={pagePath}
+              placement="luggage_pack_cta"
+              label="Tokyo stay area guide"
+              locale={locale}
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#106b43] underline underline-offset-4"
+            >
+              {copy.stayGuideLink} →
+            </TrackedInternalLink>
+          </div>
         </section>
 
         <section className="mt-10 rounded-[24px] border border-slate-200 bg-white p-6 shadow-sm">

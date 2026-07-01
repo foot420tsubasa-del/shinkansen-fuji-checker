@@ -4405,6 +4405,7 @@
       "badges": [
         "Airport access",
         "Luggage friendly",
+        "Station complexity",
         "Shinkansen ready",
         "Hotel choice"
       ],
@@ -5124,9 +5125,9 @@
     }
   },
   "suicaGuide": {
-    "title": "How to Buy a Suica Card — Interactive Simulator",
-    "metaDescription": "Practice buying a Suica IC card at a Japanese ticket machine on a true-to-life simulator screen. When you finish, find a hotel near a well-connected station.",
-    "intro": "Practice buying a Suica at a Japanese ticket machine on a true-to-life screen. When you finish, find a hotel near a well-connected station.",
+    "title": "How to Buy a Suica Card in Japan: Ticket Machine Steps + Simulator",
+    "metaDescription": "How to buy a Suica IC card in Japan: where to buy it, step-by-step ticket-machine instructions, Welcome Suica vs Suica, how much to charge first, and a free interactive simulator to practice before you land. Availability varies by station and date.",
+    "intro": "A Suica is a rechargeable IC card that lets you tap through train and subway gates and pay at buses, convenience stores, and many shops in Japan — no paper tickets, no fare math. This guide covers where to buy a Suica, how to buy one at a station ticket machine step by step, what you need before you start, the difference between a regular Suica and the tourist Welcome Suica, and how much to charge first. Quick answer: yes, tourists can buy a Suica in Japan, usually at ticket machines and staffed windows in major stations and at the airport train stations — though availability can vary by station and date. First, practice the whole ticket-machine flow on the free simulator below; then read the step-by-step buying guide, tips, and FAQ. A few minutes of prep makes your first real machine at the airport feel familiar.",
     "iframeTitle": "Suica purchase simulator",
     "back": "See the Tokyo Stay Area Index",
     "ctaLabel": "Open the Suica purchase simulator",
@@ -5134,7 +5135,8 @@
     "share": {
       "title": "How to Buy a Suica Card — Interactive Simulator",
       "description": "Know someone visiting Japan for the first time? Share this Suica ticket-machine simulator so they can practice before they land."
-    }
+    },
+    "startSimulator": "Start the Suica simulator"
   },
   "stationPractice": {
     "ui": {

@@ -4337,6 +4337,7 @@
       "badges": [
         "Flughafenzugang",
         "Gepäckfreundlich",
+        "Bahnhofskomplexität",
         "Shinkansen-tauglich",
         "Hotelauswahl"
       ],
@@ -5066,7 +5067,8 @@
     "share": {
       "title": "So kaufst du eine Suica-Karte — interaktiver Simulator",
       "description": "Kennst du jemanden auf erstem Japan-Trip? Teil diesen Suica-Ticketautomaten-Simulator, damit er sich vor der Landung vertraut machen kann."
-    }
+    },
+    "startSimulator": "Suica-Simulator starten"
   },
   "stationPractice": {
     "ui": {

@@ -168,6 +168,39 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
           </ul>
         </section>
 
+        {/*
+          Early interlink + practice CTA. Reading the signs is one half; moving
+          through a station is the other. We link across to the navigation guide
+          (different search intent, no cannibalisation) and offer an immediate
+          Station Practice launch near the top of the page.
+        */}
+        <section className="mt-6 flex flex-col gap-3 rounded-[22px] border border-[#d9e5f2] bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-sm leading-6 text-slate-600">
+            Want the bigger picture — exits, platforms, and transfers end to end?
+            Read{" "}
+            <Link
+              href="/how-to-navigate-japanese-train-stations"
+              className="font-bold text-[#145aa0] underline underline-offset-2"
+            >
+              how to navigate Japanese train stations
+            </Link>
+            , or practice reading the signs right now.
+          </p>
+          <TrackedCtaLink
+            href="/station-practice"
+            placement="train_signs_quickanswer"
+            label="Practice reading station signs"
+            pagePath="/how-to-read-japanese-train-signs"
+            locale={locale}
+            category="station_practice"
+            ctaType="station_practice"
+            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-4 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#246449]"
+          >
+            Practice reading station signs
+            <ArrowRight className="h-4 w-4" />
+          </TrackedCtaLink>
+        </section>
+
         <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
           <article className="space-y-12">
             <section>

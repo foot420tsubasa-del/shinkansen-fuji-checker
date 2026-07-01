@@ -490,7 +490,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
 
   return (
     <section id="finder" className="mt-6 rounded-[28px] border border-emerald-100 bg-[#fffdf8] p-5 shadow-sm md:p-7">
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
         {copy.badges.map((badge) => (
           <div key={badge} className="flex items-center gap-2 rounded-2xl border border-emerald-100 bg-white px-3 py-3 text-sm font-semibold text-slate-800 shadow-sm">
             <Check className="h-4 w-4 text-[#106b43]" aria-hidden="true" />
