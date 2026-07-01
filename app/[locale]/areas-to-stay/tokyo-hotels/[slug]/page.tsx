@@ -48,6 +48,7 @@ import {
   type ComparisonRow,
 } from "../_components/AreaNearbyComparison";
 import { AreaBottomCta } from "../_components/AreaBottomCta";
+import { AreaNeighborhoodFeel } from "../_components/AreaNeighborhoodFeel";
 import type { AreaProviderLink } from "../_components/types";
 import { getAreaVisualAssets } from "@/lib/hotel-area-visuals";
 
@@ -1064,6 +1065,20 @@ export default async function TokyoHotelsAreaPage({ params }: Props) {
             <p className="mt-2 text-sm leading-6 text-slate-700">{stationNote}</p>
           </section>
         ) : null}
+
+        {/* 6c. Neighborhood feel — editorial "what the street feels like after
+            you leave the station" read. Placed after the score / access /
+            comparison content and before the booking CTA so travellers
+            understand the area before tapping a provider link. */}
+        <AreaNeighborhoodFeel
+          eyebrow={t("neighborhoodFeel.eyebrow")}
+          title={t("neighborhoodFeel.title")}
+          summary={area.neighborhoodFeel.summary}
+          goodForTitle={t("neighborhoodFeel.goodForTitle")}
+          watchOutTitle={t("neighborhoodFeel.watchOutTitle")}
+          goodFor={area.neighborhoodFeel.goodFor}
+          watchOutFor={area.neighborhoodFeel.watchOutFor}
+        />
 
         {/* 7. Bottom CTA */}
         <AreaBottomCta

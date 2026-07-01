@@ -4815,6 +4815,12 @@
       "isGoodA": "{label} {area} erreicht {score}/100 im Hotelbasis-Index von fujiseat, der Flughafenzugang, Gepäckfreundlichkeit, Bahnhofs-Einfachheit und Hotelauswahl kombiniert.",
       "whoQ": "Für wen eignet sich {area} am besten?",
       "watchQ": "Worauf sollte ich beim Übernachten in {area} achten?"
+    },
+    "neighborhoodFeel": {
+      "eyebrow": "Area feel",
+      "title": "Neighborhood feel after leaving the station",
+      "goodForTitle": "Good for",
+      "watchOutTitle": "Watch out for"
     }
   },
   "trainSigns": {

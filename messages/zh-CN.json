@@ -4815,6 +4815,12 @@
       "isGoodA": "{label} {area} 在 fujiseat 酒店基地适配指数中获得 {score}/100 分，该指数综合机场交通、行李便利度、车站简明度与酒店选择。",
       "whoQ": "{area} 适合什么样的旅客入住？",
       "watchQ": "入住 {area} 时要注意什么？"
+    },
+    "neighborhoodFeel": {
+      "eyebrow": "Area feel",
+      "title": "Neighborhood feel after leaving the station",
+      "goodForTitle": "Good for",
+      "watchOutTitle": "Watch out for"
     }
   },
   "trainSigns": {

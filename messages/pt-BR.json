@@ -4816,6 +4816,12 @@
       "isGoodA": "{label} {area} pontua {score}/100 no índice de adequação de base hoteleira do fujiseat, que combina acesso ao aeroporto, facilidade com bagagem, simplicidade da estação e oferta de hotéis.",
       "whoQ": "Para quem {area} é mais indicado?",
       "watchQ": "O que devo observar ao me hospedar em {area}?"
+    },
+    "neighborhoodFeel": {
+      "eyebrow": "Area feel",
+      "title": "Neighborhood feel after leaving the station",
+      "goodForTitle": "Good for",
+      "watchOutTitle": "Watch out for"
     }
   },
   "trainSigns": {

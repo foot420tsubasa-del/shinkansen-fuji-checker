@@ -107,7 +107,18 @@
       }
     },
     "streetLuggageStressLevel": "low",
-    "streetLuggageStressNote": "Planned wide sidewalks around Skytree with low pedestrian density. Easy luggage walking."
+    "streetLuggageStressNote": "Planned wide sidewalks around Skytree with low pedestrian density. Easy luggage walking.",
+    "neighborhoodFeel": {
+      "summary": "Oshiage sits at the foot of Tokyo Skytree and feels modern, open, and calm. The station connects to the Solamachi mall directly, so your first steps out are sheltered, spacious, and easy with luggage — a relief compared with the crowded central hubs. Beyond the tower the surroundings are largely residential and quiet in the evening, with mall dining covering most needs but fewer late independent options. Keisei lines here give a useful route toward Narita. It suits families and travelers who want room to breathe, step-free convenience, and a quieter night, and is less suited to those who want to walk straight into central buzz, nightlife, or a dense restaurant scene. The direct mall link means you can reach many hotels without stepping outside, a genuine help in rain, heat, or with a heavy case.",
+      "goodFor": [
+        "Families and anyone wanting space and easy, sheltered station access",
+        "Travelers who like a calm evening with mall dining nearby"
+      ],
+      "watchOutFor": [
+        "Evenings are quiet and residential away from the mall",
+        "Not central — reaching the west side of the city takes time"
+      ]
+    }
   },
   {
     "id": "kuramae",
@@ -214,7 +225,18 @@
       }
     },
     "streetLuggageStressLevel": "low",
-    "streetLuggageStressNote": "Calm river-side streets with low foot traffic. Easy luggage walking."
+    "streetLuggageStressNote": "Calm river-side streets with low foot traffic. Easy luggage walking.",
+    "neighborhoodFeel": {
+      "summary": "Kuramae is a quiet riverside pocket that has drawn craft makers, coffee roasters, and small design studios, giving it a low-key, creative calm. Streets are flat and unhurried, so walking with luggage is easy, though the station is a modest subway stop rather than a big terminal and lacks the round-the-clock conveniences of the hubs. Evenings are peaceful, with a handful of cafes and small restaurants rather than a busy dining scene. It suits design-minded, independent travelers who value atmosphere and quiet over convenience, and repeat visitors who already know the city. It is less ideal for first-timers who want nightlife, a wide choice of late food, or major transport on the doorstep. Come with a rough dinner plan, as the best small spots keep short hours and there is little late-night convenience nearby.",
+      "goodFor": [
+        "Calm-seeking, design-minded travelers who like small cafes",
+        "Repeat visitors comfortable without a major station nearby"
+      ],
+      "watchOutFor": [
+        "Small subway station and quiet nights — few late-night options",
+        "Less convenient for travelers who want everything close and busy"
+      ]
+    }
   },
   {
     "id": "asakusa",
@@ -322,7 +344,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Tourist crowds near Senso-ji can slow luggage walks; quieter side streets exist. Check the route from the hotel to the station entrance."
+    "streetLuggageStressNote": "Tourist crowds near Senso-ji can slow luggage walks; quieter side streets exist. Check the route from the hotel to the station entrance.",
+    "neighborhoodFeel": {
+      "summary": "Asakusa keeps an old-town, low-rise rhythm around Senso-ji temple. Streets are mostly flat and walkable, which is kind on luggage, but the area is served by subway and private lines rather than the JR Yamanote loop, so transfers are part of daily travel. Days are touristy and cheerful around Nakamise; evenings turn quiet early, with traditional restaurants closing sooner than in the big hubs. The riverside and Skytree views add a calm, photogenic feel. As a base it suits travelers who want atmosphere, an easy walking neighborhood, and a slower pace, and is less ideal for anyone needing late-night food, nightlife, or the smoothest possible Shinkansen mornings. Because last trains and kitchens close earlier here, plan dinner and any late transfers before the neighborhood winds down.",
+      "goodFor": [
+        "Culture-first travelers who want traditional, walkable streets",
+        "Those who prefer a calmer, flat neighborhood with luggage"
+      ],
+      "watchOutFor": [
+        "No JR Yamanote line — expect transfers to reach many places",
+        "Quiet nights: many restaurants close relatively early"
+      ]
+    }
   },
   {
     "id": "ueno",
@@ -434,7 +467,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Ameyoko and Shinobazu-dori stay busy into the evening; other approaches are calmer. Check the exact route from the hotel."
+    "streetLuggageStressNote": "Ameyoko and Shinobazu-dori stay busy into the evening; other approaches are calmer. Check the exact route from the hotel.",
+    "neighborhoodFeel": {
+      "summary": "Ueno has a lively, down-to-earth market-town character. Leaving the station you meet the bustle of Ameyoko's stalls on one side and the calm of Ueno Park and its museums on the other, with the Keisei Skyliner giving a direct Narita link that many travelers value. Hotels skew more budget-friendly than central Tokyo, and casual eating is everywhere by day, though the market streets wind down in the evening and it grows quieter at night. The station is a solid JR hub but has multiple exits, so check yours before wheeling bags out. It suits budget and culture-minded travelers and Narita arrivals; it is less suited to those after nightlife or a polished, upscale base. The park side feels markedly calmer than the market side, so your exact street can change the whole mood of the stay.",
+      "goodFor": [
+        "Budget travelers and museum-goers who want value near the center",
+        "Narita arrivals wanting a direct Skyliner connection"
+      ],
+      "watchOutFor": [
+        "Nightlife and late dining are limited once the market closes",
+        "Some streets feel dated compared with newer central districts"
+      ]
+    }
   },
   {
     "id": "ryogoku",
@@ -538,7 +582,18 @@
       }
     },
     "streetLuggageStressLevel": "low",
-    "streetLuggageStressNote": "Wide streets around the Kokugikan; calm outside sumo days. Easy luggage walking."
+    "streetLuggageStressNote": "Wide streets around the Kokugikan; calm outside sumo days. Easy luggage walking.",
+    "neighborhoodFeel": {
+      "summary": "Ryogoku is the sumo district, calm and low-key with a riverside setting and the Kokugikan arena and Edo-Tokyo history nearby. Leaving the station is easy and uncrowded, and flat streets make luggage simple to manage. Outside tournament days the neighborhood is genuinely quiet, especially at night, with chanko and casual eateries but limited late options. It has a settled, local feel rather than a tourist buzz. As a base it suits travelers who want a peaceful, characterful stay with straightforward JR Sobu access to Akihabara and Tokyo Station, and it is less suited to those who want nightlife, a dense dining scene, or to step straight into central energy. On tournament days the calm flips to crowds around the arena, so check the sumo schedule if you want a quiet arrival.",
+      "goodFor": [
+        "Travelers who want a calm, characterful riverside base",
+        "Easy JR Sobu access toward Akihabara and Tokyo Station"
+      ],
+      "watchOutFor": [
+        "Quiet at night with limited late dining outside event days",
+        "Not a place for nightlife or central bustle"
+      ]
+    }
   },
   {
     "id": "kiyosumi-shirakawa",
@@ -644,7 +699,18 @@
       }
     },
     "streetLuggageStressLevel": "low",
-    "streetLuggageStressNote": "Quiet canal-side residential streets, easy to move luggage on."
+    "streetLuggageStressNote": "Quiet canal-side residential streets, easy to move luggage on.",
+    "neighborhoodFeel": {
+      "summary": "Kiyosumi-Shirakawa is known for coffee roasters, a contemporary art museum, and canal-side calm, giving it an artsy, residential quiet. Coming out of the station you find low-rise streets, small galleries and cafes, and an unhurried pace that is easy on luggage. Transport is subway-only (Hanzomon and Oedo lines), so it feels a step removed from the main tourist flow, and evenings are peaceful with few late venues. It suits design- and coffee-minded travelers who prize a calm, local atmosphere and do not need constant convenience. It is less ideal for first-timers who want central access, nightlife, or a wide spread of restaurants open late. The trade-off for the calm is time: most trips into the tourist core need a subway ride and sometimes a transfer.",
+      "goodFor": [
+        "Coffee and art lovers who want a calm, local neighborhood",
+        "Travelers happy with a slower pace away from crowds"
+      ],
+      "watchOutFor": [
+        "Subway-only access — a bit removed from major sights and JR lines",
+        "Very quiet evenings with limited late-night food"
+      ]
+    }
   },
   {
     "id": "monzen-nakacho",
@@ -749,7 +815,18 @@
       }
     },
     "streetLuggageStressLevel": "low",
-    "streetLuggageStressNote": "Calm Fukagawa streets with low surface density. Easy luggage walking."
+    "streetLuggageStressNote": "Calm Fukagawa streets with low surface density. Easy luggage walking.",
+    "neighborhoodFeel": {
+      "summary": "Monzen-Nakacho is an old shitamachi temple town with a warm, local-life feel around Tomioka Hachiman shrine and its canals. Out of the station you find down-to-earth streets, standing bars and family-run izakaya that give lively, unpretentious evenings without a tourist crowd. Walking is flat and easy with bags, though the area is subway-only (Tozai and Oedo lines) and lacks JR. It has real neighborhood character rather than polish. As a base it suits travelers who want to feel local Tokyo life and enjoy casual evenings out, and it is less suited to those who want landmark sightseeing on the doorstep, JR access, or an upscale, quiet-refined atmosphere. Evenings here are about neighborhood izakaya rather than sights, so come for the atmosphere, not a landmark checklist.",
+      "goodFor": [
+        "Travelers who want authentic local nightlife and shitamachi character",
+        "Casual izakaya evenings away from tourist crowds"
+      ],
+      "watchOutFor": [
+        "Subway-only, no JR — transfers needed for many destinations",
+        "Not a landmark-sightseeing base"
+      ]
+    }
   },
   {
     "id": "ningyocho",
@@ -856,7 +933,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Traditional shopping streets are narrow but flow is moderate. Confirm the closest station entrance."
+    "streetLuggageStressNote": "Traditional shopping streets are narrow but flow is moderate. Confirm the closest station entrance.",
+    "neighborhoodFeel": {
+      "summary": "Ningyocho is a refined old merchant quarter of traditional sweet shops, long-standing eateries, and quiet, dignified streets near the business core. Leaving the station is calm and uncrowded, and flat sidewalks make luggage easy. The mood is grown-up and understated: pleasant by day, quiet by evening as the district settles down early. It offers central location without the intensity of the big hubs. As a base it suits travelers who want a calm, traditional-but-central stay with good subway links, and it is less ideal for those seeking nightlife, budget prices, or a lively, buzzing neighborhood after dark. Because the district sleeps early, it helps to note a nearby convenience store for late snacks and essentials.",
+      "goodFor": [
+        "Travelers wanting a calm, traditional yet central base",
+        "Those who like quiet evenings with subway access to everywhere"
+      ],
+      "watchOutFor": [
+        "Quiet after dark with little nightlife",
+        "Central location tends to mean mid-to-higher room prices"
+      ]
+    }
   },
   {
     "id": "hatchobori",
@@ -961,7 +1049,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Business sidewalks; office-side gets denser at lunch hour. Confirm the route."
+    "streetLuggageStressNote": "Business sidewalks; office-side gets denser at lunch hour. Confirm the route.",
+    "neighborhoodFeel": {
+      "summary": "Hatchobori is a plain, efficient business pocket close to Tokyo Station and Ginza, valued more for logistics than character. Out of the station the streets are orderly and calm, easy to navigate with luggage, and evenings are quiet as offices empty. Its quiet virtue is access: JR Keiyo (handy for Tokyo Disney Resort) and the Hibiya line, with the center a short hop away. Dining is workmanlike and thins out at night. As a base it suits travelers who prize a central, well-connected, low-key stay — especially Disney or Ginza plans — and it is less suited to those who want atmosphere, sightseeing on the doorstep, or a lively evening scene. Its quiet efficiency shines for Disney or early Ginza plans, where a calm, central base beats a lively one.",
+      "goodFor": [
+        "Travelers wanting quiet, central convenience near Tokyo Station",
+        "Tokyo Disney Resort visitors using the JR Keiyo line"
+      ],
+      "watchOutFor": [
+        "Plain and business-like with little neighborhood character",
+        "Quiet nights and limited late dining"
+      ]
+    }
   },
   {
     "id": "kayabacho",
@@ -1065,7 +1164,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Quiet business streets; the Eitai-dori crossing is the busy point. Confirm the route."
+    "streetLuggageStressNote": "Quiet business streets; the Eitai-dori crossing is the busy point. Confirm the route.",
+    "neighborhoodFeel": {
+      "summary": "Kayabacho is a finance district that runs on weekday office hours, which means very calm, quiet evenings and weekends. Coming out of the station you find tidy, low-key streets next to Nihombashi, easy to walk with luggage and simple to orient. Convenience stores and lunch spots serve the workday crowd, but the area empties and dining options shrink after hours. It offers a central position with strong subway links minus the crowds. As a base it suits travelers who want a quiet, central, well-connected stay and do not mind a sleepy evening, and it is less ideal for those who want liveliness, nightlife, or plentiful late-night food nearby. On weekends the finance crowd vanishes entirely, leaving peaceful streets but few open restaurants.",
+      "goodFor": [
+        "Travelers who want a very quiet, central base with good subway links",
+        "Light sleepers who value calm evenings"
+      ],
+      "watchOutFor": [
+        "Empties out after office hours — limited night dining",
+        "Little atmosphere or nightlife"
+      ]
+    }
   },
   {
     "id": "nihombashi",
@@ -1176,7 +1286,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Calm business district with some narrow back-streets near Mitsukoshimae. Confirm the route from the hotel."
+    "streetLuggageStressNote": "Calm business district with some narrow back-streets near Mitsukoshimae. Confirm the route from the hotel.",
+    "neighborhoodFeel": {
+      "summary": "Nihombashi is a historic, upscale business and department-store district with a composed, dignified feel. Out of the station you find grand buildings, long-established shops, and bridges over the river, all flat and easy to walk with luggage. It is central and polished, quiet in the evenings once the shops and offices close, with refined rather than casual dining. As a base it suits travelers who want a calm, central, refined stay with strong subway access and a short walk to Tokyo Station, and it is less suited to those after budget prices, buzzing nightlife, or a youthful, casual neighborhood atmosphere. The department-store food halls are a real asset for takeaway meals when the streets themselves go quiet.",
+      "goodFor": [
+        "Travelers wanting a refined, central base near Tokyo Station",
+        "Those who value calm, orderly streets and easy walking"
+      ],
+      "watchOutFor": [
+        "Quiet evenings once shops and offices close",
+        "Upscale feel usually means higher room rates"
+      ]
+    }
   },
   {
     "id": "tokyo-station",
@@ -1293,7 +1414,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Marunouchi sidewalks are wide and orderly; Yaesu-side gets denser at peak. Confirm the correct station exit for the hotel."
+    "streetLuggageStressNote": "Marunouchi sidewalks are wide and orderly; Yaesu-side gets denser at peak. Confirm the correct station exit for the hotel.",
+    "neighborhoodFeel": {
+      "summary": "The Tokyo Station area is grand and business-like, built for efficient travel rather than neighborhood life. The Marunouchi side is stately and the Yaesu side is being redeveloped; the station itself is vast, with long underground corridors that are step-free but big, so allow time when moving with luggage — the payoff is direct Shinkansen platforms with zero cross-city transfer. Dining is excellent inside and around the station (depachika, restaurant floors), but the surrounding blocks quieten sharply at night as offices empty. It suits Shinkansen-heavy trips, early departures, and business travelers who value clean logistics, and is less ideal for those wanting local character, nightlife, or a lively evening street scene. The zero-transfer Shinkansen access is the main reason to stay here; treat the neighborhood as logistics rather than sightseeing.",
+      "goodFor": [
+        "Shinkansen-heavy itineraries wanting zero-transfer departures",
+        "Early starts, late arrivals, and business-efficient stays"
+      ],
+      "watchOutFor": [
+        "Offices empty at night — little neighborhood life after hours",
+        "The station is huge; give yourself time with luggage"
+      ]
+    }
   },
   {
     "id": "ginza-yurakucho",
@@ -1409,7 +1541,18 @@
       }
     },
     "streetLuggageStressLevel": "high",
-    "streetLuggageStressNote": "Dense retail flows on Chuo-dori and around Yurakucho can slow luggage walks. Check the exact station entrance for the hotel."
+    "streetLuggageStressNote": "Dense retail flows on Chuo-dori and around Yurakucho can slow luggage walks. Check the exact station entrance for the hotel.",
+    "neighborhoodFeel": {
+      "summary": "Ginza-Yurakucho pairs luxury shopping boulevards with the lively railway-arch izakaya of Yurakucho. Wide, flat sidewalks make it one of the easiest central areas to walk with luggage, and the setting is polished and spacious. Ginza is refined and quietens at night as the department stores close, while under the tracks at Yurakucho the after-work crowd keeps things convivial into the evening. Dining ranges from upscale to cheerful. As a base it suits travelers who want an elegant, very central location with excellent transport and don't mind premium prices, and is less suited to budget travelers or those chasing club-style nightlife. The flat, wide sidewalks make it unusually easy to wheel a large case from the station to your hotel.",
+      "goodFor": [
+        "Travelers wanting an elegant, central base with wide, easy streets",
+        "Shoppers and diners who like a mix of upscale and casual izakaya"
+      ],
+      "watchOutFor": [
+        "Premium pricing across the district",
+        "Ginza proper is quiet late once shops close"
+      ]
+    }
   },
   {
     "id": "shimbashi",
@@ -1518,7 +1661,18 @@
       }
     },
     "streetLuggageStressLevel": "high",
-    "streetLuggageStressNote": "Narrow under-track sidewalks and salaryman density can slow luggage movement at peak times. Check the route in advance."
+    "streetLuggageStressNote": "Narrow under-track sidewalks and salaryman density can slow luggage movement at peak times. Check the route in advance.",
+    "neighborhoodFeel": {
+      "summary": "Shimbashi is the classic salaryman district — business by day, and a warren of after-work izakaya, many under the railway arches, that get cheerfully loud in the early evening before quietening late. Out of the station it is busy and a little rough-and-ready, but flat and central, with strong transport including the Yurikamome toward the bay. Casual food is everywhere and reliably open in the evening. As a base it suits travelers who want central transport and an unpretentious, lively izakaya scene, and it is less ideal for those seeking a polished, calm atmosphere, quiet sleep near the arches, or an upscale neighborhood. If your room faces the arches, expect cheerful evening noise; a higher or rear-facing room helps light sleepers.",
+      "goodFor": [
+        "Travelers who want central transport and a lively izakaya scene",
+        "Those who like casual, reliably-open evening food"
+      ],
+      "watchOutFor": [
+        "Busy, workaday and a bit rough around the edges",
+        "Evening noise near the railway-arch bars"
+      ]
+    }
   },
   {
     "id": "hamamatsucho-daimon",
@@ -1629,7 +1783,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Business district with wide sidewalks; airport-bound luggage flows are common. Confirm the exit."
+    "streetLuggageStressNote": "Business district with wide sidewalks; airport-bound luggage flows are common. Confirm the exit.",
+    "neighborhoodFeel": {
+      "summary": "Hamamatsucho-Daimon is a quiet, efficient business area whose big draw is the monorail straight to Haneda Airport. Out of the station the streets are orderly and calm, easy with luggage, with Zojoji temple and Tokyo Tower giving a pleasant backdrop. Evenings are subdued as offices close, and dining is practical rather than exciting. Transport is strong — JR, monorail, and subway — making it a smooth first or last night for Haneda travelers. As a base it suits airport-timing convenience and calm, and is less suited to those who want a lively neighborhood, nightlife, or a dense choice of late-night restaurants. For an early Haneda flight, the monorail on your doorstep can be worth more than any amount of nightlife.",
+      "goodFor": [
+        "Haneda travelers wanting a smooth monorail airport connection",
+        "Those who value a calm, efficient, central-ish base"
+      ],
+      "watchOutFor": [
+        "Quiet business area with limited nightlife",
+        "Dining is practical rather than characterful"
+      ]
+    }
   },
   {
     "id": "shinagawa",
@@ -1741,7 +1906,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Konan-side has wide planned sidewalks; Takanawa-side has busier crossings. Confirm which exit matches the hotel."
+    "streetLuggageStressNote": "Konan-side has wide planned sidewalks; Takanawa-side has busier crossings. Confirm which exit matches the hotel.",
+    "neighborhoodFeel": {
+      "summary": "Shinagawa is a major terminal built for business travel, with wide, clean concourses that are relatively easy to cross with luggage despite the crowds. It offers strong Haneda access and some Shinkansen services, and a cluster of reliable business hotels. The east (Konan) side is modern and calmer, while the classic side is busier around the station. The mood is efficient rather than charming, and while there is decent dining, the area is more functional than atmospheric and quietens at night. As a base it suits Haneda and Shinkansen travelers and anyone prioritising smooth transit, and is less ideal for those wanting nightlife, sightseeing on the doorstep, or local neighborhood character. The Konan (east) side is calmer and more modern, while the classic side stays busier around the gates.",
+      "goodFor": [
+        "Haneda and Shinkansen travelers wanting a smooth transport base",
+        "Business trips valuing reliable hotels and clean concourses"
+      ],
+      "watchOutFor": [
+        "Functional and business-like rather than atmospheric",
+        "Limited nightlife and local character"
+      ]
+    }
   },
   {
     "id": "gotanda",
@@ -1846,7 +2022,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Wide main roads with some narrow side-street routes to hotels. Check the walking route."
+    "streetLuggageStressNote": "Wide main roads with some narrow side-street routes to hotels. Check the walking route.",
+    "neighborhoodFeel": {
+      "summary": "Gotanda is a practical, slightly under-the-radar transport spot on the Yamanote loop with useful Asakusa-line and Ikegami-line connections. Out of the station it mixes offices with a compact, local nightlife strip, giving lively but unglamorous evenings. It is flat and manageable with luggage, and prices tend to be gentler than the marquee hubs. The feel is workaday and a touch gritty rather than polished. As a base it suits budget-aware travelers who want easy Yamanote access and don't need a tourist-facing neighborhood, and it is less suited to those wanting sightseeing on the doorstep, refinement, or a quiet, upmarket atmosphere. It is a practical, money-saving base rather than a destination, best if you plan to be out most of the day.",
+      "goodFor": [
+        "Value-minded travelers wanting easy Yamanote-line access",
+        "Those comfortable with a local, non-touristy district"
+      ],
+      "watchOutFor": [
+        "Workaday feel with a small, unpolished nightlife strip",
+        "Few sights or tourist conveniences nearby"
+      ]
+    }
   },
   {
     "id": "meguro",
@@ -1954,7 +2141,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Wide Meguro-dori but a slope from the station toward the river. Confirm the route."
+    "streetLuggageStressNote": "Wide Meguro-dori but a slope from the station toward the river. Confirm the route.",
+    "neighborhoodFeel": {
+      "summary": "Meguro is a calm, upscale-residential area known for its cherry-lined river and quiet, stylish streets. Out of the station you find cafes, small restaurants, and a settled, grown-up atmosphere rather than crowds. It is flat to gently sloped and easy with luggage, with good Yamanote and subway access. Evenings are relaxed and low-key, with dining that is pleasant but not a nightlife scene. As a base it suits calm-seeking, style-minded travelers and repeat visitors who want a residential feel with easy transport, and it is less ideal for first-timers who want to be in the middle of major sights or a busy, buzzing district. The riverside is lovely in cherry season, but otherwise this is a place to sleep well and commute in, not to sightsee.",
+      "goodFor": [
+        "Calm, style-minded travelers wanting a residential feel",
+        "Repeat visitors who value quiet streets with good transport"
+      ],
+      "watchOutFor": [
+        "Few major sights on the doorstep",
+        "Relaxed evenings rather than nightlife"
+      ]
+    }
   },
   {
     "id": "ebisu",
@@ -2059,7 +2257,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Garden Place and West Exit crossings get busy after dark. Confirm the route from the hotel."
+    "streetLuggageStressNote": "Garden Place and West Exit crossings get busy after dark. Confirm the route from the hotel.",
+    "neighborhoodFeel": {
+      "summary": "Ebisu is a stylish, grown-up dining district next to Yebisu Garden Place, popular for its food and relaxed-but-lively evenings. Out of the station the streets are polished and pleasant, easy to walk with luggage, with an atmosphere that is sociable without feeling rowdy. It has strong Yamanote and Hibiya-line access and a residential calm just off the main strips. Dining and bars are a highlight and stay open into the evening. As a base it suits food-focused adults and travelers who want a refined, sociable neighborhood, and it is less ideal for budget travelers or first-timers who want a central sightseeing hub or big-name attractions nearby. Book here for the food: the neighborhood rewards a relaxed dinner more than a packed sightseeing schedule.",
+      "goodFor": [
+        "Food- and bar-focused adults who want a stylish, sociable base",
+        "Travelers wanting good dining with residential calm nearby"
+      ],
+      "watchOutFor": [
+        "Pricier dining and hotels than average",
+        "Not a sightseeing-hub base for first-timers"
+      ]
+    }
   },
   {
     "id": "shibuya",
@@ -2173,7 +2382,18 @@
       }
     },
     "streetLuggageStressLevel": "very_high",
-    "streetLuggageStressNote": "Scramble Crossing and packed retail sidewalks make street walking with luggage slow. Confirm the closest station exit before booking."
+    "streetLuggageStressNote": "Scramble Crossing and packed retail sidewalks make street walking with luggage slow. Confirm the closest station exit before booking.",
+    "neighborhoodFeel": {
+      "summary": "Shibuya greets you with crowds and movement — the scramble crossing, streams of people, and a station still being rebuilt, so signage and routes can change and stairs are frequent. Rolling luggage across the crossings and up the slopes takes patience. The mood is young, fashion-driven, and commercial, with endless casual food and late-night options radiating from the station. It stays busy well into the night and is rarely calm near the center. As a hotel base it suits people who want to be in the middle of shopping and nightlife and do not mind noise and bustle; those wanting a smooth, step-free arrival or a quiet evening will find the constant crowd and construction tiring. Many hotels sit up a slope from the station, so a short taxi hop on arrival can save a sweaty climb with bags.",
+      "goodFor": [
+        "Shoppers and nightlife-first travelers who want to be in the action",
+        "Younger visitors comfortable with crowds and a fast pace"
+      ],
+      "watchOutFor": [
+        "Arriving with heavy luggage — crowded crossings, slopes, and ongoing station works",
+        "Anyone wanting quiet evenings or a simple step-free route from the platform"
+      ]
+    }
   },
   {
     "id": "shinjuku",
@@ -2288,7 +2508,19 @@
       }
     },
     "streetLuggageStressLevel": "very_high",
-    "streetLuggageStressNote": "Kabukicho-side crowds and Scramble-class crosswalks slow luggage moves. Check the exact walking route from the hotel to the closest station exit."
+    "streetLuggageStressNote": "Kabukicho-side crowds and Scramble-class crosswalks slow luggage moves. Check the exact walking route from the hotel to the closest station exit.",
+    "neighborhoodFeel": {
+      "summary": "Stepping out at Shinjuku is a jump straight into the deep end. The station is a maze with dozens of exits across several levels, so your first walk out with a suitcase can be disorienting until you learn which exit your hotel uses. Above ground the west side is high-rise and corporate, the east side is neon, shopping, and the Kabukicho nightlife blocks that stay loud late. Food and convenience are effectively 24-hour, which is a real plus after a long flight. It is busy from morning until deep into the night, rarely quiet. As a base it rewards travelers who want energy, transport in every direction, and options at any hour. If you can, note whether your hotel is on the west (skyscraper) or east (shopping) side before you arrive, because crossing between them underground eats time with a suitcase.",
+      "goodFor": [
+        "Travelers who want maximum train and bus connections in one place",
+        "Late arrivals and night owls who value 24-hour food and shops",
+        "Anyone who wants the widest range of hotels and price levels"
+      ],
+      "watchOutFor": [
+        "First-timers with luggage: the station's scale and exit count is genuinely confusing",
+        "Light sleepers near Kabukicho, where nightlife noise carries late"
+      ]
+    }
   },
   {
     "id": "yoyogi",
@@ -2394,7 +2626,18 @@
       }
     },
     "streetLuggageStressLevel": "low",
-    "streetLuggageStressNote": "Wider, calmer streets than neighbouring Shinjuku. Easy luggage walking."
+    "streetLuggageStressNote": "Wider, calmer streets than neighbouring Shinjuku. Easy luggage walking.",
+    "neighborhoodFeel": {
+      "summary": "Yoyogi sits quietly between Shinjuku and Shibuya, close to Yoyogi Park and Meiji Shrine, offering big-hub proximity with a calmer, residential feel. Out of the station the streets are lower-key and easy to walk with luggage, and you are one stop from Shinjuku's transport without its intensity. Evenings are relatively quiet, with casual local eateries rather than a nightlife scene. As a base it suits travelers who want to be near the action but sleep somewhere calmer, and who value green space nearby. It is less ideal for those who want nightlife on the doorstep or the fullest range of shops and late-night convenience. One stop from Shinjuku's transport with a fraction of the noise, it works well as a quiet base for a busy itinerary.",
+      "goodFor": [
+        "Travelers wanting Shinjuku/Shibuya proximity with a calmer base",
+        "Those who like green space and quieter evenings nearby"
+      ],
+      "watchOutFor": [
+        "Fewer late-night options than the neighboring hubs",
+        "More residential than lively"
+      ]
+    }
   },
   {
     "id": "ikebukuro",
@@ -2507,7 +2750,18 @@
       }
     },
     "streetLuggageStressLevel": "high",
-    "streetLuggageStressNote": "Major terminal with dense retail sidewalks. Confirm the hotel-side station exit to keep the luggage walk short."
+    "streetLuggageStressNote": "Major terminal with dense retail sidewalks. Confirm the hotel-side station exit to keep the luggage walk short.",
+    "neighborhoodFeel": {
+      "summary": "Ikebukuro is a big, practical terminal with a slightly rougher, less polished feel than Shinjuku or Shibuya. The station splits clearly into an east side (department stores, Sunshine City, anime culture) and a west side, and knowing which you need makes arrival much easier. Prices tend to be friendlier, and dense, casual eating means you rarely go hungry, including late. It is consistently busy and a little gritty around the edges rather than refined. With luggage the station is large but the two-sided layout is easier to grasp than the mega-hubs. It suits budget-minded travelers and anyone prioritising transport value over atmosphere, and is less ideal if you want a stylish or calm neighborhood. Because the east and west sides feel like different towns, matching your hotel to the correct exit saves a long underground detour on day one.",
+      "goodFor": [
+        "Budget-conscious travelers who still want a major transport hub",
+        "Visitors who value plentiful, affordable food day and night"
+      ],
+      "watchOutFor": [
+        "If you want a refined or quiet atmosphere, the area feels busy and workaday",
+        "Pick the correct (east/west) exit before you set off with bags"
+      ]
+    }
   },
   {
     "id": "akihabara",
@@ -2617,7 +2871,18 @@
       }
     },
     "streetLuggageStressLevel": "high",
-    "streetLuggageStressNote": "Busy electronics streets and weekend pedestrian zones can tighten luggage paths. Check the closest exit for the hotel."
+    "streetLuggageStressNote": "Busy electronics streets and weekend pedestrian zones can tighten luggage paths. Check the closest exit for the hotel.",
+    "neighborhoodFeel": {
+      "summary": "Akihabara is bright, busy, and unmistakable — electronics and anime culture stacked into vivid streets. Out of the station it is crowded and stimulating by day, with themed cafes and chain dining, and it quietens noticeably at night as shops close. The station is a good JR and subway hub and reasonably manageable with luggage, though the sidewalks are busy. The vibe is hobby-driven and energetic rather than calm or refined. As a base it suits travelers into tech, gaming, and anime, or anyone wanting a central transport hub, and it is less suited to those who want a quiet, elegant, or non-commercial neighborhood. Once the electronics stores shut, the streets empty quickly, so it is far livelier by day than by night.",
+      "goodFor": [
+        "Tech, gaming, and anime fans who want to be in the culture",
+        "Travelers wanting a central JR/subway hub"
+      ],
+      "watchOutFor": [
+        "Busy, commercial streets that quieten once shops close",
+        "Not a calm or refined atmosphere"
+      ]
+    }
   },
   {
     "id": "kanda",
@@ -2722,7 +2987,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Narrow under-track sidewalks; evening flows are moderate. Confirm the exit and route."
+    "streetLuggageStressNote": "Narrow under-track sidewalks; evening flows are moderate. Confirm the exit and route.",
+    "neighborhoodFeel": {
+      "summary": "Kanda is an understated central district where old offices meet time-worn izakaya, a short walk from Tokyo Station and the second-hand book town of Jimbocho. Out of the station the streets are calm and workmanlike, easy with luggage, with a real after-work izakaya scene that livens the early evening before quietening late. It is very central with strong JR and subway links, without the crowds or price of the marquee areas. As a base it suits travelers who want a quiet, well-connected, value-leaning central stay with a bit of old-Tokyo character, and it is less ideal for those seeking sightseeing on the doorstep or a lively, polished nightlife scene. Its value and central position suit travelers who will be out exploring and just want an easy, quiet place to return to.",
+      "goodFor": [
+        "Travelers wanting a central, well-connected, value-leaning base",
+        "Those who enjoy low-key old-Tokyo izakaya streets"
+      ],
+      "watchOutFor": [
+        "Quiet late and light on major sights",
+        "Workaday rather than polished"
+      ]
+    }
   },
   {
     "id": "asakusabashi",
@@ -2827,7 +3103,18 @@
       }
     },
     "streetLuggageStressLevel": "low",
-    "streetLuggageStressNote": "Wholesale shop district, calm outside weekdays. Easy luggage walking."
+    "streetLuggageStressNote": "Wholesale shop district, calm outside weekdays. Easy luggage walking.",
+    "neighborhoodFeel": {
+      "summary": "Asakusabashi is a wholesale district of doll, craft, and hobby shops beside the river, with a quiet, workaday character and budget-friendly lodging. Out of the station the streets are flat and calm, easy with luggage, and JR Sobu plus Asakusa-line access makes it practical. It is close to Asakusa's sights without the crowds, but evenings are quiet as the wholesalers close and late dining is limited. The feel is local and unpolished rather than touristy. As a base it suits budget travelers who want a calm, central-east location near Asakusa, and it is less ideal for those wanting nightlife, a lively food scene, or attractions right outside the door. It gives you Asakusa's proximity at lower prices, in exchange for quiet, workaday streets after dark.",
+      "goodFor": [
+        "Budget travelers wanting a calm base near Asakusa",
+        "Those who value practical JR Sobu and Asakusa-line access"
+      ],
+      "watchOutFor": [
+        "Wholesale streets go quiet at night with limited dining",
+        "Local and plain rather than tourist-facing"
+      ]
+    }
   },
   {
     "id": "bakurocho-higashinihombashi",
@@ -2935,7 +3222,18 @@
       }
     },
     "streetLuggageStressLevel": "low",
-    "streetLuggageStressNote": "Quiet wholesale streets, easy surface walking with luggage."
+    "streetLuggageStressNote": "Quiet wholesale streets, easy surface walking with luggage.",
+    "neighborhoodFeel": {
+      "summary": "Bakurocho-Higashinihombashi is a former textile-wholesale quarter that has quietly gained small cafes, galleries, and design studios, giving it a low-key, creative-industrial feel. Out of the station the streets are flat and calm, easy with luggage, and it is genuinely central-east with JR Sobu and several subway lines. Prices tend to be reasonable for the location. Evenings are quiet, with a scattering of cafes rather than a busy dining scene. As a base it suits value-minded, design-curious travelers who want a calm central stay, and it is less ideal for those wanting nightlife, major sights nearby, or a lively neighborhood after dark. The central-east location and reasonable rates are the draw; the atmosphere is understated rather than lively.",
+      "goodFor": [
+        "Value- and design-minded travelers wanting a calm central base",
+        "Those who like emerging cafe/gallery pockets over tourist streets"
+      ],
+      "watchOutFor": [
+        "Quiet evenings with limited dining and nightlife",
+        "Few landmark sights within walking distance"
+      ]
+    }
   },
   {
     "id": "kinshicho",
@@ -3041,7 +3339,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Wide arterials with a denser North-Exit retail strip. Confirm the route from the hotel."
+    "streetLuggageStressNote": "Wide arterials with a denser North-Exit retail strip. Confirm the route from the hotel.",
+    "neighborhoodFeel": {
+      "summary": "Kinshicho is a spacious east-side hub near Skytree that mixes business, shopping malls, and a pocket of nightlife, at gentler prices than central Tokyo. Out of the station it is roomy and straightforward, easier with luggage than the packed western hubs, with JR Sobu giving a quick run to Tokyo Station and Akihabara. Evenings can be lively around the station and calmer a few streets away. The feel is practical and local rather than refined. As a base it suits value-seeking travelers who want space, decent transport, and an east-Tokyo location, and it is less ideal for those who need central Yamanote-loop access or a polished, upmarket neighborhood. The extra space and lower prices come with a Sobu-line ride into the center, which many travelers find a fair trade.",
+      "goodFor": [
+        "Value travelers wanting space and quick JR access to the center",
+        "Those happy with an east-Tokyo base near Skytree"
+      ],
+      "watchOutFor": [
+        "Off the Yamanote loop — some journeys need transfers",
+        "Practical rather than refined atmosphere"
+      ]
+    }
   },
   {
     "id": "akasaka-mitsuke",
@@ -3148,7 +3457,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Mixed commercial and nightlife streets, calmer than the busiest hubs. Confirm the closest exit."
+    "streetLuggageStressNote": "Mixed commercial and nightlife streets, calmer than the busiest hubs. Confirm the closest exit.",
+    "neighborhoodFeel": {
+      "summary": "Akasaka-Mitsuke is a polished business-and-dining district with embassies, hotels, and a grown-up nightlife of restaurants and bars. Out of the station the streets are orderly and central, easy with luggage, with strong subway access in several directions. Evenings are lively but refined rather than raucous, and dining runs from casual to high-end. The mood is professional and sophisticated. As a base it suits business travelers and adults who want good food and a central, upmarket feel, and it is less ideal for budget travelers or families after sightseeing-hub convenience and a casual, everyday neighborhood atmosphere. It is a confident, grown-up base for dining out, better suited to business trips than to family sightseeing.",
+      "goodFor": [
+        "Business travelers and adults wanting refined central dining",
+        "Those who value strong subway access in a polished district"
+      ],
+      "watchOutFor": [
+        "Upmarket pricing on hotels and restaurants",
+        "Less suited to families or budget sightseeing trips"
+      ]
+    }
   },
   {
     "id": "roppongi",
@@ -3253,7 +3573,18 @@
       }
     },
     "streetLuggageStressLevel": "high",
-    "streetLuggageStressNote": "Busy crossings and some slopes near Roppongi-dori can slow luggage movement. Confirm the walking route in advance."
+    "streetLuggageStressNote": "Busy crossings and some slopes near Roppongi-dori can slow luggage movement. Confirm the walking route in advance.",
+    "neighborhoodFeel": {
+      "summary": "Roppongi is Tokyo's international nightlife-and-art district, home to major museums and design complexes alongside a famously late bar and club scene. Out of the station it is busy and cosmopolitan, flat and walkable with luggage, and central with good subway links. Nights run long and can feel raucous around the main crossing, while the art complexes bring a more refined daytime side. As a base it suits nightlife-focused adults and art lovers who want to be in the middle of it, and it is decidedly less suited to families, light sleepers, or budget travelers, who may find the late-night energy and pricing wearing. Weekend nights near the crossing can be loud and crowded, so choose a room set back from the main strip.",
+      "goodFor": [
+        "Nightlife-focused adults and art lovers wanting to be central",
+        "Those who want late bars and major museums within walking distance"
+      ],
+      "watchOutFor": [
+        "Late-night noise and crowds around the main strip",
+        "Not ideal for families, light sleepers, or tight budgets"
+      ]
+    }
   },
   {
     "id": "aoyama-omotesando",
@@ -3362,7 +3693,18 @@
       }
     },
     "streetLuggageStressLevel": "high",
-    "streetLuggageStressNote": "Omotesando retail crowds and sloped side streets can slow luggage routes. Confirm the closest exit before booking."
+    "streetLuggageStressNote": "Omotesando retail crowds and sloped side streets can slow luggage routes. Confirm the closest exit before booking.",
+    "neighborhoodFeel": {
+      "summary": "Aoyama-Omotesando is Tokyo's fashion-boulevard district — tree-lined avenues, flagship architecture, and stylish cafes. Out of the station the wide, elegant streets are among the pleasantest to walk with luggage, and the atmosphere is calm-refined rather than crowded. It is central with good subway access, and evenings are relatively quiet as the boutiques close, with dining that is chic rather than raucous. As a base it suits style-minded travelers who want an upscale, walkable neighborhood with a designer edge, and it is less ideal for budget travelers, nightlife-seekers, or those who want a lively, casual district with late-night bustle. The elegant, tree-lined avenues are a pleasure to walk, but the boutiques and prices set a distinctly upmarket tone.",
+      "goodFor": [
+        "Style-minded travelers wanting an upscale, walkable base",
+        "Those who value calm, elegant streets with good subway access"
+      ],
+      "watchOutFor": [
+        "Premium pricing and boutiques that close in the evening",
+        "Quiet at night rather than lively"
+      ]
+    }
   },
   {
     "id": "ochanomizu",
@@ -3471,7 +3813,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Bridge crossings and a slope toward Surugadai can slow luggage. Confirm the walking route."
+    "streetLuggageStressNote": "Bridge crossings and a slope toward Surugadai can slow luggage. Confirm the walking route.",
+    "neighborhoodFeel": {
+      "summary": "Ochanomizu is a hilly student-and-university quarter known for music-instrument shops, big hospitals, and proximity to Akihabara and the Jimbocho book town. Out of the station the streets slope and can mean stairs, so luggage takes a little effort, but it is very central with JR and subway links over the Kanda River. The mood is studious and calm, with casual student-priced eating and quiet evenings. As a base it suits travelers who want a calm, central, value-leaning stay with easy access to Akihabara and central Tokyo, and it is less ideal for those wanting nightlife, flat step-free routes, or a tourist-facing neighborhood. The slopes are the catch: a hilltop hotel can mean stairs and an uphill push with a suitcase.",
+      "goodFor": [
+        "Travelers wanting a calm, central, value-leaning base",
+        "Easy access to Akihabara, Jimbocho, and central lines"
+      ],
+      "watchOutFor": [
+        "Slopes and stairs can make luggage harder here",
+        "Quiet evenings with little nightlife"
+      ]
+    }
   },
   {
     "id": "iidabashi",
@@ -3580,7 +3933,18 @@
       }
     },
     "streetLuggageStressLevel": "medium",
-    "streetLuggageStressNote": "Several busy corner crosswalks and canal-side slopes can slow luggage walks. Confirm the exit."
+    "streetLuggageStressNote": "Several busy corner crosswalks and canal-side slopes can slow luggage walks. Confirm the exit.",
+    "neighborhoodFeel": {
+      "summary": "Iidabashi is a canal-side district beside Kagurazaka's cobbled, French-influenced dining streets, mixing students, offices, and a quietly stylish evening scene. Out of the station it is central and manageable with luggage, though Kagurazaka itself is sloped. Several subway lines plus JR Sobu make transport easy. Evenings are pleasant and low-key, with characterful restaurants rather than a big nightlife scene, and it stays calmer than the major hubs. As a base it suits travelers who want good, atmospheric dining and central transport in a relaxed setting, and it is less ideal for those wanting landmark sights on the doorstep or a lively, buzzing district. Kagurazaka's charm is worth the gentle climb, and the many converging lines make onward travel simple.",
+      "goodFor": [
+        "Travelers wanting atmospheric Kagurazaka dining and central transport",
+        "Those who like a relaxed, quietly stylish evening scene"
+      ],
+      "watchOutFor": [
+        "Kagurazaka's slopes can be work with luggage",
+        "Few major sights immediately nearby"
+      ]
+    }
   },
   {
     "id": "korakuen-kasuga",
@@ -3688,7 +4052,18 @@
       }
     },
     "streetLuggageStressLevel": "low",
-    "streetLuggageStressNote": "Calm Bunkyo residential streets with a gentle slope near the dome."
+    "streetLuggageStressNote": "Calm Bunkyo residential streets with a gentle slope near the dome.",
+    "neighborhoodFeel": {
+      "summary": "Korakuen-Kasuga wraps around Tokyo Dome, its amusement park, and the classic Koishikawa Korakuen garden, giving a spread-out, event-driven character. Out of the station it is fairly open and easy with luggage, and event days bring big crowds and energy while ordinary evenings are calm and residential. Transport is strong, with several subway lines converging. Dining leans toward the dome complex and casual local spots. As a base it suits travelers attending events at the dome, families wanting space, and anyone valuing good transport with a calmer neighborhood, and it is less ideal for those seeking a lively night-out scene or a compact, characterful street life. If your dates clash with a big dome event, expect crowds and busier hotels; otherwise it stays calm.",
+      "goodFor": [
+        "Event-goers at Tokyo Dome and families wanting open space",
+        "Travelers valuing strong subway links with calmer streets"
+      ],
+      "watchOutFor": [
+        "Big crowds on event days near the dome",
+        "Quiet, residential feel otherwise, with modest nightlife"
+      ]
+    }
   },
   {
     "id": "toyosu",
@@ -3794,7 +4169,18 @@
       }
     },
     "streetLuggageStressLevel": "low",
-    "streetLuggageStressNote": "Bay-side planned sidewalks with low pedestrian density. Easy luggage walking."
+    "streetLuggageStressNote": "Bay-side planned sidewalks with low pedestrian density. Easy luggage walking.",
+    "neighborhoodFeel": {
+      "summary": "Toyosu is a modern, reclaimed-waterfront district of glass towers, the wholesale fish market, and teamLab Planets, with wide, open spaces and a calm, orderly feel. Out of the station everything is spacious and step-friendly, making it one of the easiest areas to move through with luggage, and malls cover most dining and shopping needs. It runs on the Yurikamome and Yurakucho lines and is quiet in the evenings away from the malls. As a base it suits families and travelers who want space, cleanliness, and modern comfort, and it is less ideal for those who want central access, a quick Yamanote connection, or a lively, characterful street scene. The step-free, spacious layout is a real plus for families and heavy luggage, at the cost of central proximity.",
+      "goodFor": [
+        "Families and travelers wanting space and easy, step-friendly access",
+        "Those who like modern, clean surroundings with mall convenience"
+      ],
+      "watchOutFor": [
+        "Not central — journeys to the west side take time",
+        "Quiet evenings and a low-character, corporate feel"
+      ]
+    }
   },
   {
     "id": "ariake-odaiba",
@@ -3903,6 +4289,17 @@
       }
     },
     "streetLuggageStressLevel": "low",
-    "streetLuggageStressNote": "Very wide bay-side promenades and low density. Easy luggage walking."
+    "streetLuggageStressNote": "Very wide bay-side promenades and low density. Easy luggage walking.",
+    "neighborhoodFeel": {
+      "summary": "Ariake-Odaiba is a bayside area of convention halls, big malls, and family attractions, defined by very open space and a calm, resort-like feel. Out of the station everything is broad, flat, and easy with luggage, and the malls handle most dining and shopping. Transport relies on the Yurikamome and Rinkai lines, which are scenic but slower into central Tokyo, and evenings are quiet once events and shops wind down. As a base it suits families, event and convention attendees, and travelers who want space and modern comfort, and it is less ideal for those who want central access, nightlife, or quick, transfer-free connections to the main sights. Budget extra minutes for transfers into central Tokyo, and treat the bayside calm as the trade-off for space.",
+      "goodFor": [
+        "Families and event/convention attendees wanting space and malls",
+        "Travelers who like a calm, modern bayside setting"
+      ],
+      "watchOutFor": [
+        "Slower, transfer-reliant transport into central Tokyo",
+        "Quiet at night with limited local street life"
+      ]
+    }
   }
 ]

@@ -4815,6 +4815,12 @@
       "isGoodA": "{label} {area} набирает {score}/100 в индексе пригодности fujiseat, который объединяет доступ к аэропорту, удобство с багажом, простоту станции и выбор отелей.",
       "whoQ": "Кому лучше всего остановиться в районе {area}?",
       "watchQ": "На что обратить внимание при проживании в районе {area}?"
+    },
+    "neighborhoodFeel": {
+      "eyebrow": "Area feel",
+      "title": "Neighborhood feel after leaving the station",
+      "goodForTitle": "Good for",
+      "watchOutTitle": "Watch out for"
     }
   },
   "trainSigns": {

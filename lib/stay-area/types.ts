@@ -162,6 +162,18 @@ export type StayAreaBase = {
     agoda?: string;
     klook?: string;
   };
+  /**
+   * Editorial "what the street feels like after you leave the station"
+   * write-up, aimed at the pre-booking decision (exit feel, walking with
+   * luggage, night convenience, quiet vs busy, who it suits / should avoid).
+   * Distinct from `editorial.bestFor/watchOut` (score-derived tags). English
+   * only; duplicated across locales like the rest of the detail-page copy.
+   */
+  neighborhoodFeel: {
+    summary: string;
+    goodFor: string[];
+    watchOutFor: string[];
+  };
 };
 
 // ----- Signals (public-data-driven layer) ---------------------------------
