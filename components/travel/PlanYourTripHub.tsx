@@ -11,6 +11,7 @@ import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { getAffUrl } from "@/src/affiliateLinks";
 import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import type { AffiliateClickParams } from "@/lib/analytics";
 
@@ -153,11 +154,26 @@ function AffiliateButton({
   );
 }
 
-function hotelProviderChoicesForKey(hotelKey: HotelAreaKey) {
+// Trip.com uses the hotel-links config; Booking.com comes from the registry
+// (data/hotel-affiliate-links.json, placement plan_trip_hotel_cards) keyed by
+// the stay-area id, so its clicks are attributed with a plan-trip sub_id.
+const HOTEL_AREA_KEY_TO_AREA_ID: Partial<Record<HotelAreaKey, string>> = {
+  shinjuku: "shinjuku",
+  ueno: "ueno",
+  asakusa: "asakusa",
+  tokyoStation: "tokyo-station",
+};
+
+function hotelProviderChoicesForKey(hotelKey: HotelAreaKey, locale: string) {
   const hotel = getHotelLink(hotelKey);
   const config = getTripHotelConfig(hotelKey);
   const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
   const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
+
+  const areaId = HOTEL_AREA_KEY_TO_AREA_ID[hotelKey];
+  const bookingLink = areaId
+    ? getHotelProviderLinks({ areaId, locale, placement: "plan_trip_hotel_cards" })[0]
+    : undefined;
 
   return providerChoices(
     tripHref
@@ -170,6 +186,20 @@ function hotelProviderChoicesForKey(hotelKey: HotelAreaKey) {
           linkId: `hotelArea.${hotelKey}.trip`,
           placement: "plan_trip_hotel_cards",
           variant: "primary",
+          category: "hotel",
+        }
+      : null,
+    bookingLink
+      ? {
+          label: "Booking.com",
+          href: bookingLink.href,
+          trackingHref: bookingLink.trackingHref,
+          provider: "booking_travelpayouts",
+          product: "hotel",
+          linkId: bookingLink.linkId,
+          subId: bookingLink.subId,
+          placement: "plan_trip_hotel_cards",
+          variant: "secondary",
           category: "hotel",
         }
       : null,
@@ -189,8 +219,8 @@ function HotelProviderChoice({
 }) {
   const providers =
     hotelKeys.length === 1
-      ? hotelProviderChoicesForKey(hotelKeys[0])
-      : hotelKeys.flatMap((hotelKey) => hotelProviderChoicesForKey(hotelKey)).slice(0, 2);
+      ? hotelProviderChoicesForKey(hotelKeys[0], locale)
+      : hotelKeys.flatMap((hotelKey) => hotelProviderChoicesForKey(hotelKey, locale)).slice(0, 2);
 
   if (providers.length === 0) return null;
 
@@ -394,18 +424,35 @@ export function PlanYourTripHub() {
               {t("hotel.subtitle")}
             </p>
           </div>
-          <TrackedCtaLink
-            href="/areas-to-stay/tokyo-first-time"
-            placement="plan_trip_stay_hub"
-            label={t("hotel.hubCta")}
-            category="hotel"
-            pagePath="/plan-your-trip"
-            locale={locale}
-            className="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] border border-[#2E7D5B] bg-[#2E7D5B] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
-          >
-            {t("hotel.hubCta")}
-            <ArrowRight className="h-4 w-4" />
-          </TrackedCtaLink>
+          {/* Primary "Compare stay areas" guide link + a sibling quiz-style
+              entry into the Tokyo Hotel Area Finder, so undecided readers can
+              answer a few questions instead of opening a guide. */}
+          <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <TrackedCtaLink
+              href="/areas-to-stay/tokyo-first-time"
+              placement="plan_trip_stay_hub"
+              label={t("hotel.hubCta")}
+              category="hotel"
+              pagePath="/plan-your-trip"
+              locale={locale}
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] border border-[#2E7D5B] bg-[#2E7D5B] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
+            >
+              {t("hotel.hubCta")}
+              <ArrowRight className="h-4 w-4" />
+            </TrackedCtaLink>
+            <TrackedCtaLink
+              href="/areas-to-stay/tokyo-stay-area-index"
+              placement="plan_trip_stay_hub_finder"
+              label={t("hotel.finderCta")}
+              category="stay"
+              pagePath="/plan-your-trip"
+              locale={locale}
+              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[14px] border border-[#2E7D5B] bg-white px-5 py-3 text-sm font-semibold text-[#106b43] shadow-sm transition-colors hover:bg-emerald-50"
+            >
+              {t("hotel.finderCta")}
+              <ArrowRight className="h-4 w-4" />
+            </TrackedCtaLink>
+          </div>
           <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {tokyoBaseCards.map((base) => (
               <Card key={base.title} className="flex flex-col p-5">

@@ -2328,5 +2328,61 @@
     "last_checked_at": "",
     "notes": "",
     "destination_ref": "booking_ariake-odaiba"
+  },
+  "plantrip_shinjuku_booking_hotelcards_all": {
+    "provider": "booking_travelpayouts",
+    "area_id": "shinjuku",
+    "locale": "all",
+    "placement": "plan_trip_hotel_cards",
+    "destination_url": "",
+    "affiliate_url": "",
+    "sub_id": "fs_plantrip_hotelcards_shinjuku_all",
+    "enabled": true,
+    "priority": 10,
+    "last_checked_at": "",
+    "notes": "Booking.com alongside Trip.com on the /plan-your-trip hotel cards.",
+    "destination_ref": "booking_shinjuku"
+  },
+  "plantrip_ueno_booking_hotelcards_all": {
+    "provider": "booking_travelpayouts",
+    "area_id": "ueno",
+    "locale": "all",
+    "placement": "plan_trip_hotel_cards",
+    "destination_url": "",
+    "affiliate_url": "",
+    "sub_id": "fs_plantrip_hotelcards_ueno_all",
+    "enabled": true,
+    "priority": 10,
+    "last_checked_at": "",
+    "notes": "Booking.com alongside Trip.com on the /plan-your-trip hotel cards.",
+    "destination_ref": "booking_ueno"
+  },
+  "plantrip_asakusa_booking_hotelcards_all": {
+    "provider": "booking_travelpayouts",
+    "area_id": "asakusa",
+    "locale": "all",
+    "placement": "plan_trip_hotel_cards",
+    "destination_url": "",
+    "affiliate_url": "",
+    "sub_id": "fs_plantrip_hotelcards_asakusa_all",
+    "enabled": true,
+    "priority": 10,
+    "last_checked_at": "",
+    "notes": "Booking.com alongside Trip.com on the /plan-your-trip hotel cards.",
+    "destination_ref": "booking_asakusa"
+  },
+  "plantrip_tokyo_station_booking_hotelcards_all": {
+    "provider": "booking_travelpayouts",
+    "area_id": "tokyo-station",
+    "locale": "all",
+    "placement": "plan_trip_hotel_cards",
+    "destination_url": "",
+    "affiliate_url": "",
+    "sub_id": "fs_plantrip_hotelcards_tokyo-station_all",
+    "enabled": true,
+    "priority": 10,
+    "last_checked_at": "",
+    "notes": "Booking.com alongside Trip.com on the /plan-your-trip hotel cards.",
+    "destination_ref": "booking_tokyo-station"
   }
 }

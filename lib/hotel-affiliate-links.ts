@@ -11,7 +11,8 @@ export type HotelAffiliatePlacement =
   | "airport_page_first_night_cta"
   | "comparison_area_cta"
   | "tokyo_hotels_hero"
-  | "tokyo_hotels_bottom";
+  | "tokyo_hotels_bottom"
+  | "plan_trip_hotel_cards";
 export type HotelAffiliateProvider = "booking_travelpayouts";
 export type HotelAffiliateLocale = string | "all";
 
