@@ -4351,9 +4351,7 @@
     "finder": {
       "startLabel": "Empezar",
       "restartLabel": "Reiniciar",
-      "nextLabel": "Siguiente",
       "backLabel": "Atrás",
-      "showResultsLabel": "Mostrar resultados",
       "selectedLabel": "Seleccionado",
       "stepLabel": "Paso",
       "topTitle": "Tus 3 mejores zonas para base en Tokio",
@@ -4473,8 +4471,6 @@
         "goodMatch": "Buena coincidencia",
         "areaOption": "Opción de área"
       },
-      "viewHotelPageLabel": "Ver página de búsqueda de hoteles",
-      "openHotelPageLabel": "Abrir página de hoteles de {area}",
       "stayNear": "Alójate cerca de {area}",
       "practicalTitle": "Detalles prácticos (salidas, ascensores, horarios)",
       "practicalExit": "Salidas y accesos",

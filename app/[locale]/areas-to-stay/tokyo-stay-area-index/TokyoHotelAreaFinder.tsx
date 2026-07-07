@@ -99,16 +99,13 @@ type FinderStep = {
 type FinderCopy = {
   startLabel: string;
   restartLabel: string;
-  nextLabel: string;
   backLabel: string;
-  showResultsLabel: string;
   selectedLabel: string;
   stepLabel: string;
   topTitle: string;
   topBody: string;
   whyFits: string;
   bestFor: string;
-  viewHotelPageLabel: string;
   showMore: string;
   compareAll: string;
   moreTitle: string;
@@ -153,8 +150,6 @@ type FinderCopy = {
   };
   badges: string[];
   steps: FinderStep[];
-  /** "Open {area} hotel page" — legacy label, kept for compatibility. */
-  openHotelPageLabel: string;
   /** §4-2 result card: instant-answer headline "Stay near {area}". */
   stayNear: string;
   practicalTitle: string;
@@ -311,7 +306,9 @@ function boostFromAnswers(answers: Answers) {
 
   const evenings = answers.evenings[0];
   if (evenings === "nightlife") {
-    ["shinjuku", "shibuya", "ginza-yurakucho", "ueno", "roppongi", "ebisu"].forEach((id, index) => addBoost(boosts, id, 16 - index * 2));
+    // Nightlife areas have lower base scores than the calm east-side bases,
+    // so this preference needs enough weight to actually flip the ranking.
+    ["shinjuku", "shibuya", "ginza-yurakucho", "roppongi", "ebisu", "ueno"].forEach((id, index) => addBoost(boosts, id, 28 - index * 3));
   }
   if (evenings === "quiet") {
     ["kuramae", "kiyosumi-shirakawa", "monzen-nakacho", "ryogoku", "oshiage", "ningyocho", "yoyogi"].forEach((id, index) => addBoost(boosts, id, 16 - index));

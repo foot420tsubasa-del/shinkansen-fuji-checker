@@ -4351,9 +4351,7 @@
     "finder": {
       "startLabel": "Commencer",
       "restartLabel": "Réinitialiser",
-      "nextLabel": "Suivant",
       "backLabel": "Retour",
-      "showResultsLabel": "Afficher mes résultats",
       "selectedLabel": "Sélectionné",
       "stepLabel": "Étape",
       "topTitle": "Ton top 3 des bases hôtelières à Tokyo",
@@ -4473,8 +4471,6 @@
         "goodMatch": "Bonne correspondance",
         "areaOption": "Option de zone"
       },
-      "viewHotelPageLabel": "Voir la page de recherche d'hôtels",
-      "openHotelPageLabel": "Ouvrir la page hôtels de {area}",
       "stayNear": "Logez près de {area}",
       "practicalTitle": "Détails pratiques (sorties, ascenseurs, horaires)",
       "practicalExit": "Sorties et portiques",

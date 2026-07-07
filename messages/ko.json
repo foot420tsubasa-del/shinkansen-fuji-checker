@@ -4350,9 +4350,7 @@
     "finder": {
       "startLabel": "시작",
       "restartLabel": "초기화",
-      "nextLabel": "다음",
       "backLabel": "뒤로",
-      "showResultsLabel": "결과 보기",
       "selectedLabel": "선택됨",
       "stepLabel": "단계",
       "topTitle": "도쿄 호텔 거점 상위 3곳",
@@ -4472,8 +4470,6 @@
         "goodMatch": "좋은 매칭",
         "areaOption": "지역 후보"
       },
-      "viewHotelPageLabel": "호텔 검색 페이지 보기",
-      "openHotelPageLabel": "{area} 호텔 페이지 열기",
       "stayNear": "{area} 근처 숙박",
       "practicalTitle": "실용 정보 (출구·엘리베이터·시간대)",
       "practicalExit": "출구·개찰구",

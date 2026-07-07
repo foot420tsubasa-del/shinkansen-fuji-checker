@@ -4350,9 +4350,7 @@
     "finder": {
       "startLabel": "开始",
       "restartLabel": "重置",
-      "nextLabel": "下一步",
       "backLabel": "返回",
-      "showResultsLabel": "显示结果",
       "selectedLabel": "已选",
       "stepLabel": "步骤",
       "topTitle": "您的東京住宿基地前 3 名",
@@ -4472,8 +4470,6 @@
         "goodMatch": "不错的匹配",
         "areaOption": "区域候选"
       },
-      "viewHotelPageLabel": "查看飯店搜尋頁面",
-      "openHotelPageLabel": "開啟 {area} 飯店頁面",
       "stayNear": "住在 {area} 附近",
       "practicalTitle": "實用資訊（出口、電梯、時段）",
       "practicalExit": "出口與剪票口",

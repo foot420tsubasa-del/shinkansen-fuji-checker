@@ -4418,9 +4418,7 @@
     "finder": {
       "startLabel": "Start",
       "restartLabel": "Reset",
-      "nextLabel": "Next",
       "backLabel": "Back",
-      "showResultsLabel": "Show my results",
       "selectedLabel": "Selected",
       "stepLabel": "Step",
       "topTitle": "Your top 3 Tokyo hotel base areas",
@@ -4540,8 +4538,6 @@
         "goodMatch": "Good match",
         "areaOption": "Area option"
       },
-      "viewHotelPageLabel": "View hotel search page",
-      "openHotelPageLabel": "Open {area} hotel page",
       "stayNear": "Stay near {area}",
       "practicalTitle": "Practical details (exits, elevators, timing)",
       "practicalExit": "Exits & gates",

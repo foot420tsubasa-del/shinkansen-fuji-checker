@@ -4350,9 +4350,7 @@
     "finder": {
       "startLabel": "Начать",
       "restartLabel": "Сбросить",
-      "nextLabel": "Далее",
       "backLabel": "Назад",
-      "showResultsLabel": "Показать результаты",
       "selectedLabel": "Выбрано",
       "stepLabel": "Шаг",
       "topTitle": "Ваш топ-3 районов-баз в Токио",
@@ -4472,8 +4470,6 @@
         "goodMatch": "Хорошее совпадение",
         "areaOption": "Вариант района"
       },
-      "viewHotelPageLabel": "Открыть страницу поиска отелей",
-      "openHotelPageLabel": "Открыть страницу отелей {area}",
       "stayNear": "Жильё рядом с {area}",
       "practicalTitle": "Практические детали (выходы, лифты, время)",
       "practicalExit": "Выходы и турникеты",

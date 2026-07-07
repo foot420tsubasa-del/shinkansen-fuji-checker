@@ -4350,9 +4350,7 @@
     "finder": {
       "startLabel": "Starten",
       "restartLabel": "Zurücksetzen",
-      "nextLabel": "Weiter",
       "backLabel": "Zurück",
-      "showResultsLabel": "Ergebnisse anzeigen",
       "selectedLabel": "Ausgewählt",
       "stepLabel": "Schritt",
       "topTitle": "Deine Top-3-Tokio-Hotelbasen",
@@ -4472,8 +4470,6 @@
         "goodMatch": "Guter Treffer",
         "areaOption": "Gebietsoption"
       },
-      "viewHotelPageLabel": "Hotel-Suchseite öffnen",
-      "openHotelPageLabel": "{area}-Hotelseite öffnen",
       "stayNear": "Übernachte nahe {area}",
       "practicalTitle": "Praktische Details (Ausgänge, Aufzüge, Zeiten)",
       "practicalExit": "Ausgänge & Gates",

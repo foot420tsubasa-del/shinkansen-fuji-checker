@@ -4351,9 +4351,7 @@
     "finder": {
       "startLabel": "Começar",
       "restartLabel": "Reiniciar",
-      "nextLabel": "Próximo",
       "backLabel": "Voltar",
-      "showResultsLabel": "Mostrar resultados",
       "selectedLabel": "Selecionado",
       "stepLabel": "Etapa",
       "topTitle": "Suas 3 melhores áreas de base em Tóquio",
@@ -4473,8 +4471,6 @@
         "goodMatch": "Boa combinação",
         "areaOption": "Opção de área"
       },
-      "viewHotelPageLabel": "Ver página de busca de hotéis",
-      "openHotelPageLabel": "Abrir página de hotéis de {area}",
       "stayNear": "Fique perto de {area}",
       "practicalTitle": "Detalhes práticos (saídas, elevadores, horários)",
       "practicalExit": "Saídas e portões",
