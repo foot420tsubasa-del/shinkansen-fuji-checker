@@ -5,6 +5,9 @@ import { Check, ChevronDown } from "lucide-react";
 import { type ProviderId } from "@/components/ui/ProviderButton";
 import { HotelAreaProviderRow } from "@/components/affiliate/HotelAreaProviderRow";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
+import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
+import { getAffUrl } from "@/src/affiliateLinks";
+import { AFFILIATE_REL } from "@/lib/link-rel";
 import {
   trackCtaClick,
   trackFinderResultsView,
@@ -13,51 +16,6 @@ import {
   trackFinderStepAnswered,
 } from "@/lib/analytics";
 import type { AffiliatePlacement } from "@/lib/affiliate/links";
-
-/**
- * Areas that already have a dedicated /areas-to-stay/tokyo-hotels/<slug>
- * landing page. When a result card matches one of these
- * ids, we render a secondary "View hotel search page" CTA that links to
- * that page.
- */
-const SUPPORTED_HOTEL_PAGE_IDS: ReadonlySet<string> = new Set([
-  "oshiage",
-  "kuramae",
-  "asakusa",
-  "ueno",
-  "ryogoku",
-  "kiyosumi-shirakawa",
-  "monzen-nakacho",
-  "ningyocho",
-  "hatchobori",
-  "kayabacho",
-  "nihombashi",
-  "tokyo-station",
-  "ginza-yurakucho",
-  "shimbashi",
-  "hamamatsucho-daimon",
-  "shinagawa",
-  "gotanda",
-  "meguro",
-  "ebisu",
-  "shibuya",
-  "shinjuku",
-  "yoyogi",
-  "ikebukuro",
-  "akihabara",
-  "kanda",
-  "asakusabashi",
-  "bakurocho-higashinihombashi",
-  "kinshicho",
-  "akasaka-mitsuke",
-  "roppongi",
-  "aoyama-omotesando",
-  "ochanomizu",
-  "iidabashi",
-  "korakuen-kasuga",
-  "toyosu",
-  "ariake-odaiba",
-]);
 
 type FinderProviderLink = {
   provider: ProviderId;
@@ -103,6 +61,25 @@ export type FinderArea = {
     city: string;
     providers: FinderProviderLink[];
   } | null;
+  /** §4-2 upper layer: data-driven one-liners for the instant answer. */
+  instant: {
+    shinkansen: string;
+    luggage: string;
+    narita: string;
+    haneda: string;
+  };
+  /** §4-2 lower layer (accordion): per-area practical notes where authored. */
+  practical: {
+    exitNote: string | null;
+    elevatorNote: string | null;
+  };
+  /** §4-2 revenue block: named hotels with movement-logic reasons. */
+  namedHotels: Array<{
+    name: string;
+    href: string;
+    linkId: string;
+    reason: string;
+  }>;
 };
 
 type FinderOption = {
@@ -112,7 +89,7 @@ type FinderOption = {
 };
 
 type FinderStep = {
-  id: "destinations" | "airport" | "luggage" | "stay" | "shinkansen";
+  id: "shinkansen" | "luggage" | "airport" | "evenings";
   title: string;
   helper: string;
   multi: boolean;
@@ -176,8 +153,22 @@ type FinderCopy = {
   };
   badges: string[];
   steps: FinderStep[];
-  /** "Open {area} hotel page" — primary CTA to the 36-area detail SSOT. */
+  /** "Open {area} hotel page" — legacy label, kept for compatibility. */
   openHotelPageLabel: string;
+  /** §4-2 result card: instant-answer headline "Stay near {area}". */
+  stayNear: string;
+  practicalTitle: string;
+  practicalExit: string;
+  practicalElevator: string;
+  practicalRush: string;
+  practicalPhrase: string;
+  phraseText: string;
+  rushText: string;
+  namedHotelsTitle: string;
+  namedHotelsNote: string;
+  klookLabel: string;
+  seeDetailsLabel: string;
+  helperTapHint: string;
 };
 
 type TokyoHotelAreaFinderProps = {
@@ -190,15 +181,16 @@ type TokyoHotelAreaFinderProps = {
 type Answers = Record<FinderStep["id"], string[]>;
 
 const emptyAnswers: Answers = {
-  destinations: [],
-  airport: [],
-  luggage: [],
-  stay: [],
   shinkansen: [],
+  luggage: [],
+  airport: [],
+  evenings: [],
 };
 
-const FINDER_STORAGE_KEY = "fujiseat:tokyoHotelAreaFinder:v1";
-const finderStepIds: FinderStep["id"][] = ["destinations", "airport", "luggage", "stay", "shinkansen"];
+// v2: the 4-question quiz (spec §4-1) replaced the old 5-step wizard, so
+// persisted v1 answers are intentionally invalidated by the new key.
+const FINDER_STORAGE_KEY = "fujiseat:tokyoHotelAreaFinder:v2";
+const finderStepIds: FinderStep["id"][] = ["shinkansen", "luggage", "airport", "evenings"];
 
 type PersistedFinderState = {
   started: boolean;
@@ -280,31 +272,34 @@ function matchLabelForRank(rank: number, copy: FinderCopy) {
   return copy.rankLabels.areaOption;
 }
 
-const destinationBoosts: Record<string, Record<string, number>> = {
-  "shibuya-harajuku": { shibuya: 18, shinjuku: 8, yoyogi: 6, ebisu: 5, "aoyama-omotesando": 5 },
-  shinjuku: { shinjuku: 18, yoyogi: 9, "aoyama-omotesando": 4 },
-  asakusa: { asakusa: 18, kuramae: 14, oshiage: 10, asakusabashi: 8, ueno: 6 },
-  ueno: { ueno: 18, akihabara: 9, asakusa: 6, nippori: 10 },
-  "ginza-tsukiji": { "ginza-yurakucho": 18, "tokyo-station": 12, nihombashi: 10, hatchobori: 8, shimbashi: 8 },
-  akihabara: { akihabara: 18, kanda: 10, ueno: 8, asakusabashi: 8, "ochanomizu": 7 },
-  "tokyo-station-palace": { "tokyo-station": 18, nihombashi: 12, "ginza-yurakucho": 10, kanda: 8 },
-  "toyosu-odaiba": { toyosu: 18, "ariake-odaiba": 15, shimbashi: 8, "ginza-yurakucho": 6 },
-  disney: { "tokyo-station": 11, hatchobori: 10, kayabacho: 8, "ginza-yurakucho": 8 },
-  fuji: { shinjuku: 12, "tokyo-station": 10, shibuya: 8, shinagawa: 8 },
-  "kamakura-yokohama": { shinagawa: 15, shibuya: 9, "tokyo-station": 8, shimbashi: 7 },
-  "kyoto-osaka": { "tokyo-station": 18, shinagawa: 16, "ginza-yurakucho": 11, nihombashi: 10 },
-};
-
 function addBoost(boosts: Map<string, number>, areaId: string, delta: number) {
   boosts.set(areaId, (boosts.get(areaId) ?? 0) + delta);
 }
 
+/**
+ * §4-1 scoring: the 4 quiz answers re-rank the existing 36-area scores.
+ * The boost lists reuse the same editorial area logic the old wizard used
+ * (airport + luggage lists unchanged; evenings maps to the old
+ * nightlife/quiet lists; shinkansen maps to the old kyoto-osaka list with
+ * an extra weight for pre-8am departures).
+ */
 function boostFromAnswers(answers: Answers) {
   const boosts = new Map<string, number>();
 
-  answers.destinations.forEach((id) => {
-    Object.entries(destinationBoosts[id] ?? {}).forEach(([areaId, delta]) => addBoost(boosts, areaId, delta));
-  });
+  const shinkansen = answers.shinkansen[0];
+  if (shinkansen === "before8am") {
+    // A pre-8am departure is the hardest constraint in the quiz — zero-transfer
+    // shinkansen access has to outweigh softer preferences like "quiet".
+    ["tokyo-station", "ginza-yurakucho", "shinagawa", "nihombashi", "shimbashi", "hatchobori"].forEach((id, index) => addBoost(boosts, id, 44 - index * 3));
+  }
+  if (shinkansen === "daytime") {
+    ["tokyo-station", "shinagawa", "ginza-yurakucho", "nihombashi", "shimbashi"].forEach((id, index) => addBoost(boosts, id, 10 - index));
+  }
+
+  const luggage = answers.luggage[0];
+  if (luggage === "large") {
+    ["oshiage", "kuramae", "ningyocho", "hatchobori", "shinagawa", "hamamatsucho-daimon", "tokyo-station"].forEach((id, index) => addBoost(boosts, id, 12 - index));
+  }
 
   const airport = answers.airport[0];
   if (airport === "narita") {
@@ -314,37 +309,12 @@ function boostFromAnswers(answers: Answers) {
     ["shinagawa", "hamamatsucho-daimon", "shimbashi", "tokyo-station", "ginza-yurakucho", "oshiage"].forEach((id, index) => addBoost(boosts, id, 16 - index * 2));
   }
 
-  const luggage = answers.luggage[0];
-  if (luggage === "large") {
-    ["oshiage", "kuramae", "ningyocho", "hatchobori", "shinagawa", "hamamatsucho-daimon"].forEach((id, index) => addBoost(boosts, id, 12 - index));
+  const evenings = answers.evenings[0];
+  if (evenings === "nightlife") {
+    ["shinjuku", "shibuya", "ginza-yurakucho", "ueno", "roppongi", "ebisu"].forEach((id, index) => addBoost(boosts, id, 16 - index * 2));
   }
-  if (luggage === "family") {
-    ["oshiage", "kuramae", "ryogoku", "ueno", "shinagawa", "tokyo-station"].forEach((id, index) => addBoost(boosts, id, 14 - index));
-  }
-
-  const stay = answers.stay[0];
-  if (stay === "first-time") {
-    ["ueno", "asakusa", "oshiage", "shinjuku", "tokyo-station", "ginza-yurakucho"].forEach((id, index) => addBoost(boosts, id, 12 - index));
-  }
-  if (stay === "quiet-local") {
-    ["kuramae", "kiyosumi-shirakawa", "monzen-nakacho", "ryogoku", "oshiage", "ningyocho"].forEach((id, index) => addBoost(boosts, id, 16 - index));
-  }
-  if (stay === "nightlife-shopping") {
-    ["shinjuku", "shibuya", "ginza-yurakucho", "ueno", "roppongi"].forEach((id, index) => addBoost(boosts, id, 16 - index * 2));
-  }
-  if (stay === "easy-transfers") {
-    ["tokyo-station", "shinagawa", "ueno", "nihombashi", "ginza-yurakucho"].forEach((id, index) => addBoost(boosts, id, 14 - index));
-  }
-  if (stay === "budget-friendly") {
-    ["ueno", "asakusa", "ryogoku", "oshiage", "kuramae", "akihabara"].forEach((id, index) => addBoost(boosts, id, 14 - index));
-  }
-
-  const shinkansen = answers.shinkansen[0];
-  if (shinkansen === "kyoto-osaka") {
-    ["tokyo-station", "shinagawa", "ginza-yurakucho", "nihombashi", "shimbashi"].forEach((id, index) => addBoost(boosts, id, 16 - index * 2));
-  }
-  if (shinkansen === "fuji-hakone") {
-    ["shinjuku", "shinagawa", "tokyo-station", "shibuya"].forEach((id, index) => addBoost(boosts, id, 12 - index * 2));
+  if (evenings === "quiet") {
+    ["kuramae", "kiyosumi-shirakawa", "monzen-nakacho", "ryogoku", "oshiage", "ningyocho", "yoyogi"].forEach((id, index) => addBoost(boosts, id, 16 - index));
   }
 
   return boosts;
@@ -445,37 +415,39 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
     trackFinderStart({ page_path: pagePath, locale });
   };
 
-  const trackCurrentStep = () => {
-    const answerIds = answers[currentStep.id] ?? [];
+  // §4-1: tap-only quiz — selecting an option answers the question and
+  // auto-advances (or finishes on the last question). Ranking for the
+  // results-view event is computed from the tapped answers, not stale state.
+  const answerAndAdvance = (option: FinderOption) => {
+    const step = currentStep;
+    const nextAnswers = toggleAnswer(answers, step, option.id);
+    setAnswers(nextAnswers);
     trackFinderStepAnswered({
-      step_id: currentStep.id,
-      step_label: currentStep.title,
-      answer_ids: answerIds.join(","),
-      answer_count: answerIds.length,
+      step_id: step.id,
+      step_label: step.title,
+      answer_ids: option.id,
+      answer_count: 1,
       page_path: pagePath,
       locale,
     });
-  };
-
-  const next = () => {
-    trackCurrentStep();
-    setStepIndex((index) => Math.min(copy.steps.length - 1, index + 1));
-  };
-
-  const showMyResults = () => {
-    trackCurrentStep();
-    setShowResults(true);
-    const top = topThree[0];
-    if (top) {
-      trackFinderResultsView({
-        page_path: pagePath,
-        locale,
-        result_count: topThree.length,
-        top_area_id: top.id,
-        top_area_score: top.matchScore,
-      });
-    }
-    window.setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+    window.setTimeout(() => {
+      if (stepIndex < copy.steps.length - 1) {
+        setStepIndex(stepIndex + 1);
+        return;
+      }
+      setShowResults(true);
+      const top = rankAreas(areas, nextAnswers)[0];
+      if (top) {
+        trackFinderResultsView({
+          page_path: pagePath,
+          locale,
+          result_count: Math.min(3, areas.length),
+          top_area_id: top.id,
+          top_area_score: top.matchScore,
+        });
+      }
+      window.setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
+    }, 160);
   };
 
   const reset = () => {
@@ -529,7 +501,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
                 <button
                   key={option.id}
                   type="button"
-                  onClick={() => setAnswers((current) => toggleAnswer(current, currentStep, option.id))}
+                  onClick={() => answerAndAdvance(option)}
                   className={[
                     "min-h-12 rounded-2xl border px-4 py-3 text-left text-sm font-semibold transition-colors",
                     selected
@@ -557,22 +529,10 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
                 {copy.backLabel}
               </button>
             ) : null}
-            {stepIndex < copy.steps.length - 1 ? (
-              <button
-                type="button"
-                onClick={next}
-                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#106b43] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0b5736]"
-              >
-                {copy.nextLabel}
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={showMyResults}
-                className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-2xl bg-[#106b43] px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#0b5736]"
-              >
-                {copy.showResultsLabel}
-              </button>
+            {showResults ? null : (
+              <p className="inline-flex min-h-11 w-full items-center justify-center text-xs font-semibold text-slate-500">
+                {copy.helperTapHint}
+              </p>
             )}
           </div>
         </div>
@@ -608,6 +568,7 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
                 copy={copy}
                 locale={locale}
                 pagePath={pagePath}
+                answers={answers}
               />
             ))}
           </div>
@@ -679,23 +640,37 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
   );
 }
 
+// Klook shinkansen-ticket sub-CTA (§4-2 revenue block item 3). Resolved once
+// from the existing admin-managed affiliate registry — no new URLs.
+const klookTicketUrl = getAffUrl("shinkansenTicket");
+
 function ResultCard({
   area,
   rank,
   copy,
   locale,
   pagePath,
+  answers,
 }: {
   area: FinderArea & { matchScore: number };
   rank: number;
   copy: FinderCopy;
   locale: string;
   pagePath: string;
+  answers: Answers;
 }) {
   const matchLabel = matchLabelForRank(rank, copy);
   const hotel = area.hotel;
   const compareTitle = copy.compareHotelsTitle.replace("{area}", area.displayName);
-  const openHotelPageLabel = copy.openHotelPageLabel.replace("{area}", area.displayName);
+  const seeDetailsLabel = copy.seeDetailsLabel.replace("{area}", area.displayName);
+  // §4-2 upper layer: pick up to 3 answer-relevant one-liners.
+  const airportAnswer = answers.airport[0];
+  const instantBullets = [
+    answers.shinkansen[0] !== "none" ? area.instant.shinkansen : null,
+    answers.luggage[0] === "large" ? area.instant.luggage : null,
+    airportAnswer === "narita" ? area.instant.narita : airportAnswer === "haneda" ? area.instant.haneda : null,
+  ].filter((line): line is string => Boolean(line && line.trim()));
+  if (instantBullets.length === 0) instantBullets.push(...area.bestFor.slice(0, 2));
   // Surface Booking.com + Trip.com only — Agoda is intentionally not restored.
   // The providers list is already filtered upstream in page.tsx, but we double-
   // gate here so any future provider can't leak into this slot without review.
@@ -720,48 +695,32 @@ function ResultCard({
         </div>
       </div>
       <div className="flex flex-1 flex-col p-4">
-        <div className="lg:h-[214px] lg:overflow-hidden">
-          <div className="mb-3 flex justify-end">
-            <span className="rounded-full bg-slate-950 px-3 py-1.5 text-sm font-black leading-none text-white">{area.displayScore}</span>
-          </div>
-          <p className="overflow-hidden text-sm font-medium leading-6 text-slate-800 [display:-webkit-box] [-webkit-box-orient:vertical] [-webkit-line-clamp:3]">{area.summary}</p>
-          <div className="mt-3 flex max-h-[58px] flex-wrap gap-1.5 overflow-hidden">
-            {area.tags.slice(0, 4).map((tag) => (
-              <span key={tag} className="rounded-full border border-emerald-100 bg-emerald-50 px-2.5 py-1 text-[11px] font-semibold text-[#106b43]">
-                {tag}
-              </span>
+        {/* §4-2 upper layer: 3-second instant answer. */}
+        <div>
+          <p className="text-base font-bold text-slate-950">✅ {copy.stayNear.replace("{area}", area.displayName)}</p>
+          <ul className="mt-2 space-y-1.5 text-xs leading-5 text-slate-700">
+            {instantBullets.map((line) => (
+              <li key={line} className="flex gap-1.5">
+                <span aria-hidden="true">·</span>
+                <span>{line}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
-        <div className="mt-4 rounded-2xl border border-sky-100 bg-sky-50/70 p-3">
-          <p className="text-xs font-semibold text-slate-950">{copy.whyFits}</p>
-          <p className="mt-1 text-xs leading-5 text-slate-700">{area.bestFor.slice(0, 2).join(" · ") || area.summary}</p>
-        </div>
+
         <div className="mt-3 rounded-2xl border border-amber-100 bg-amber-50/60 p-3">
           <p className="text-xs font-semibold text-slate-950">{copy.watchOut}</p>
           <p className="mt-1 text-xs leading-5 text-slate-700">{area.watchOut.slice(0, 2).join(" · ")}</p>
         </div>
-        <div className="mt-auto pt-3 space-y-3">
-          {/* Primary CTA → the 36-area detail page (revenue SSOT). Strongest
-              button in the card; the affiliate row below is secondary. */}
-          {SUPPORTED_HOTEL_PAGE_IDS.has(area.id) ? (
-            <TrackedInternalLink
-              href={`?area=${area.id}#selected-area`}
-              sourcePage="tokyo_stay_area_index"
-              placement="finder_result_hotel_page"
-              label={openHotelPageLabel}
-              locale={locale}
-              className="inline-flex min-h-11 w-full items-center justify-center rounded-2xl border border-[#0b214a] bg-[#0b214a] px-4 py-2.5 text-sm font-bold text-[#facc15] shadow-sm transition-colors hover:border-[#071733] hover:bg-[#071733] hover:text-[#fde047] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#facc15] focus-visible:ring-offset-2"
-            >
-              {openHotelPageLabel}
-            </TrackedInternalLink>
-          ) : null}
-          {/* Secondary compact affiliate row. Booking everywhere; Trip only
-              where a real short-link exists. Visually quieter than the
-              primary CTA above. */}
+
+        {/* §4-2 revenue block — always visible without scrolling inside the
+            card: 1) area deep links (main CTA, Booking + Trip measured
+            separately via provider dimension), 2) named hotels with
+            movement-logic reasons, 3) Klook ticket sub-CTA. */}
+        <div className="mt-4 space-y-3">
           {compareProviders.length > 0 ? (
-            <div className="rounded-2xl border border-slate-200 bg-white p-3">
-              <p className="text-xs font-semibold text-slate-950">{compareTitle}</p>
+            <div className="rounded-2xl border border-emerald-200 bg-emerald-50/60 p-3">
+              <p className="text-sm font-bold text-slate-950">{compareTitle}</p>
               <HotelAreaProviderRow
                 providers={compareProviders.map((provider) => ({
                   provider: provider.provider,
@@ -779,11 +738,106 @@ function ResultCard({
                 city={hotel?.city ?? "Tokyo"}
                 keyPrefix={`finder-${rank}`}
                 rank={rank}
-                compact
                 className="mt-2.5"
               />
+              <p className="mt-2 text-[11px] leading-4 text-slate-500">{copy.compareHotelsNote}</p>
             </div>
           ) : null}
+
+          {area.namedHotels.length > 0 ? (
+            <div className="rounded-2xl border border-slate-200 bg-white p-3">
+              <p className="text-xs font-semibold text-slate-950">{copy.namedHotelsTitle}</p>
+              <ul className="mt-2 space-y-2">
+                {area.namedHotels.slice(0, 3).map((hotelPick) => (
+                  <li key={hotelPick.linkId}>
+                    <TrackedAffiliateLink
+                      href={hotelPick.href}
+                      target="_blank"
+                      rel={AFFILIATE_REL}
+                      category="hotel"
+                      provider="trip"
+                      placement="finder_result_named_hotel"
+                      label={hotelPick.name}
+                      linkId={hotelPick.linkId}
+                      product="hotel_named"
+                      pagePath={pagePath}
+                      locale={locale}
+                      area={area.displayName}
+                      city="Tokyo"
+                      hotelName={hotelPick.name}
+                      className="group block rounded-xl border border-slate-200 bg-white px-3 py-2 transition-colors hover:border-sky-200 hover:bg-sky-50"
+                    >
+                      <span className="block text-xs font-bold text-[#082653] group-hover:text-sky-800">{hotelPick.name} →</span>
+                      <span className="mt-0.5 block text-[11px] leading-4 text-slate-600">{hotelPick.reason}</span>
+                    </TrackedAffiliateLink>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-2 text-[11px] leading-4 text-slate-500">{copy.namedHotelsNote}</p>
+            </div>
+          ) : null}
+
+          {klookTicketUrl ? (
+            <TrackedAffiliateLink
+              href={klookTicketUrl}
+              target="_blank"
+              rel={AFFILIATE_REL}
+              category="train"
+              provider="klook"
+              placement="finder_result_klook"
+              label={copy.klookLabel}
+              linkId="shinkansenTicket"
+              product="shinkansen_ticket"
+              pagePath={pagePath}
+              locale={locale}
+              className="inline-flex min-h-10 w-full items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-bold text-[#246449] transition-colors hover:bg-emerald-50"
+            >
+              {copy.klookLabel} →
+            </TrackedAffiliateLink>
+          ) : null}
+        </div>
+
+        {/* §4-2 lower layer: accordion with the practical, walkable detail. */}
+        <details className="group mt-3 rounded-2xl border border-slate-200 bg-slate-50/70">
+          <summary className="flex min-h-10 cursor-pointer list-none items-center justify-between gap-2 px-3 py-2 text-xs font-semibold text-slate-800 [&::-webkit-details-marker]:hidden">
+            {copy.practicalTitle}
+            <ChevronDown className="h-4 w-4 shrink-0 transition-transform group-open:rotate-180" aria-hidden="true" />
+          </summary>
+          <div className="space-y-2.5 px-3 pb-3 text-[11px] leading-5 text-slate-700">
+            {area.practical.exitNote ? (
+              <div>
+                <p className="font-bold text-slate-900">🚪 {copy.practicalExit}</p>
+                <p className="mt-0.5">{area.practical.exitNote}</p>
+              </div>
+            ) : null}
+            {area.practical.elevatorNote ? (
+              <div>
+                <p className="font-bold text-slate-900">🛗 {copy.practicalElevator}</p>
+                <p className="mt-0.5">{area.practical.elevatorNote}</p>
+              </div>
+            ) : null}
+            <div>
+              <p className="font-bold text-slate-900">⏰ {copy.practicalRush}</p>
+              <p className="mt-0.5">{copy.rushText}</p>
+            </div>
+            <div>
+              <p className="font-bold text-slate-900">💬 {copy.practicalPhrase}</p>
+              <p className="mt-0.5">{copy.phraseText}</p>
+            </div>
+          </div>
+        </details>
+
+        <div className="mt-auto pt-3">
+          <TrackedInternalLink
+            href={`?area=${area.id}#selected-area`}
+            sourcePage="tokyo_stay_area_index"
+            placement="finder_result_hotel_page"
+            label={seeDetailsLabel}
+            locale={locale}
+            className="inline-flex min-h-10 w-full items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition-colors hover:bg-slate-50"
+          >
+            {seeDetailsLabel}
+          </TrackedInternalLink>
         </div>
       </div>
     </article>
@@ -801,7 +855,7 @@ function CompactAreaRow({
   copy: FinderCopy;
   locale: string;
 }) {
-  const openHotelPageLabel = copy.openHotelPageLabel.replace("{area}", area.displayName);
+  const seeDetailsLabel = copy.seeDetailsLabel.replace("{area}", area.displayName);
   return (
     <div className="rounded-2xl border border-emerald-100 bg-white p-4 shadow-sm">
       <div className="flex items-start justify-between gap-3">
@@ -824,11 +878,11 @@ function CompactAreaRow({
           href={`?area=${area.id}#selected-area`}
           sourcePage="tokyo_stay_area_index"
           placement="finder_result_hotel_page"
-          label={openHotelPageLabel}
+          label={seeDetailsLabel}
           locale={locale}
           className="inline-flex min-h-10 w-full items-center justify-center rounded-xl border border-[#0b214a] bg-[#0b214a] px-4 py-2 text-sm font-bold text-[#facc15] shadow-sm transition-colors hover:border-[#071733] hover:bg-[#071733] hover:text-[#fde047] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#facc15] focus-visible:ring-offset-2"
         >
-          {openHotelPageLabel}
+          {seeDetailsLabel}
         </TrackedInternalLink>
       </div>
     </div>

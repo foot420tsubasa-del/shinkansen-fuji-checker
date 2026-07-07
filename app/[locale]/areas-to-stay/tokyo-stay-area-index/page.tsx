@@ -23,6 +23,7 @@ import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import sourceStatusJson from "@/data/generated/tokyo-stay-area-source-status.json";
 import { tokyoStayAreaSourceRegistry } from "@/data/stay-area/source-registry";
 import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelPickLinkConfig } from "@/lib/hotel-pick-links";
 import { getHotelProviderLinks, type HotelAffiliatePlacement } from "@/lib/hotel-affiliate-links";
 import { getTranslations } from "next-intl/server";
 import type {
@@ -346,6 +347,44 @@ function applyFilterBoost(scores: ComputedStayAreaScore[], filter: FilterKey) {
 function localizedIndexHref(locale: string, suffix = ""): string {
   const localizedPath = `/${locale === "en" ? "" : `${locale}/`}${pagePath.replace(/^\//, "")}`;
   return `${localizedPath}${suffix}`;
+}
+
+
+// ---------- §4-2 revenue block: named hotels from the admin registry --------
+// Links come from data/hotel-pick-links.json (admin-managed); only the
+// movement-logic one-liners are editorial. No structured data is attached to
+// these (spec §4-5) and they are examples, not a ranking.
+const NAMED_HOTEL_IDS_BY_AREA: Partial<Record<string, string[]>> = {
+  shinjuku: ["hotel-gracery-shinjuku", "tokyu-stay-shinjuku-eastside"],
+  ueno: ["dormy-inn-ueno-okachimachi", "nohga-hotel-ueno-tokyo", "mimaru-tokyo-ueno"],
+  asakusa: ["richmond-hotel-asakusa", "gate-hotel-kaminarimon"],
+  "tokyo-station": ["hotel-metropolitan-tokyo-marunouchi", "hotel-ryumeikan-tokyo", "hotel-metropolitan-tokyo"],
+};
+
+const NAMED_HOTEL_REASONS: Record<string, string> = {
+  "hotel-gracery-shinjuku": "East-side Kabukicho block — flat ~5-min walk from Shinjuku Station east exits; lively at night.",
+  "tokyu-stay-shinjuku-eastside": "Shinjuku-sanchome side — calmer street with direct subway access below.",
+  "dormy-inn-ueno-okachimachi": "Flat walk from Okachimachi / Ueno-hirokoji — avoids Ueno Station's park-side level changes.",
+  "nohga-hotel-ueno-tokyo": "Quiet street a few minutes east of Ueno Station — easy Skyliner run to Narita.",
+  "mimaru-tokyo-ueno": "Apartment-style rooms near Ueno — practical for families with large suitcases.",
+  "richmond-hotel-asakusa": "Mid-Asakusa location — flat streets from the Tsukuba Express / Ginza Line exits.",
+  "gate-hotel-kaminarimon": "Right at Kaminarimon gate — easy taxi and bus drop-off with minimal walking.",
+  "hotel-metropolitan-tokyo-marunouchi": "Directly above Tokyo Station (Marunouchi north) — concourse elevators, no street walk.",
+  "hotel-ryumeikan-tokyo": "Short, flat walk from the Yaesu north exit — a classic early-Shinkansen base.",
+  "hotel-metropolitan-tokyo": "Marunouchi side of Tokyo Station — station-concourse access for early departures.",
+};
+
+function namedHotelsForFinderArea(areaId: string): FinderArea["namedHotels"] {
+  const ids = NAMED_HOTEL_IDS_BY_AREA[areaId] ?? [];
+  return ids
+    .map((id) => {
+      const config = getHotelPickLinkConfig(id);
+      const reason = NAMED_HOTEL_REASONS[id];
+      if (!config?.tripUrl?.trim() || !reason) return null;
+      return { name: config.name, href: config.tripUrl, linkId: `hotelPick.${id}`, reason };
+    })
+    .filter((entry): entry is FinderArea["namedHotels"][number] => entry !== null)
+    .slice(0, 3);
 }
 
 function finderAreaDetailHref(locale: string, areaId: string): string {
@@ -1136,6 +1175,19 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
       lodgingChoice: score.scores.lodgingChoice,
     },
     hotel: hotelSearchForFinderArea(areaItem, locale, "top3"),
+    // §4-2 instant-answer one-liners, straight from the editorial access
+    // profiles (no new claims invented at render time).
+    instant: {
+      shinkansen: areaItem.accessProfiles.shinkansen.note,
+      luggage: areaItem.accessProfiles.luggageArrivalEase.note,
+      narita: areaItem.accessProfiles.narita.note,
+      haneda: areaItem.accessProfiles.haneda.note,
+    },
+    practical: {
+      exitNote: stationRouteNote(areaItem.id, t),
+      elevatorNote: areaItem.streetLuggageStressNote ?? null,
+    },
+    namedHotels: namedHotelsForFinderArea(areaItem.id),
   }));
   // Reuse the already-translated `hotelSearch.headingAround` template + `note`
   // string for the per-result Compare-hotels block. No new i18n keys needed.
@@ -1165,8 +1217,26 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
   const partialCount = baselineScores.filter((s) => s.matchLabel === "partial-public-data").length;
   const fallbackCount = baselineScores.filter((s) => s.matchLabel === "editorial-fallback").length;
 
+  // §4-5: the Finder is an interactive tool — WebApplication schema,
+  // server-rendered as a plain <script> so it lands in the initial HTML.
+  const webApplicationSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Tokyo Stay Finder",
+    alternateName: "Tokyo Hotel Area Finder",
+    url: `https://fujiseat.com${locale === "en" ? "" : `/${locale}`}${pagePath}`,
+    applicationCategory: "TravelApplication",
+    operatingSystem: "Web",
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    description: t("meta.description"),
+  };
+
   return (
     <main className="min-h-screen bg-[#fffaf2] text-slate-950">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webApplicationSchema) }}
+      />
       <SiteHeader />
       <Container className="py-8 md:py-12">
         <section className="overflow-hidden rounded-[28px] border border-emerald-100 bg-white p-6 shadow-[0_18px_45px_rgba(15,23,42,0.07)] md:p-8">

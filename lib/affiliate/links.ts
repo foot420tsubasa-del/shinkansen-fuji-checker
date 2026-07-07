@@ -24,6 +24,8 @@ export type AffiliateDestinationType =
   | "transport";
 
 export type AffiliatePlacement =
+  | "finder_result_named_hotel"
+  | "finder_result_klook"
   | "home_seat_result"
   | "home_essentials"
   | "home_hero_secondary"

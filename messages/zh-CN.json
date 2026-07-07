@@ -4344,150 +4344,74 @@
       ],
       "steps": [
         {
-          "id": "destinations",
-          "title": "你想去东京哪些地方？",
-          "helper": "如果行程混合多个区域，可以选多个。",
-          "multi": true,
-          "options": [
-            {
-              "id": "shibuya-harajuku",
-              "label": "涩谷 / 原宿"
-            },
-            {
-              "id": "shinjuku",
-              "label": "新宿"
-            },
-            {
-              "id": "asakusa",
-              "label": "浅草 / 浅草寺"
-            },
-            {
-              "id": "ueno",
-              "label": "上野"
-            },
-            {
-              "id": "ginza-tsukiji",
-              "label": "银座 / 筑地"
-            },
-            {
-              "id": "akihabara",
-              "label": "秋叶原"
-            },
-            {
-              "id": "tokyo-station-palace",
-              "label": "Tokyo Station / 皇居"
-            },
-            {
-              "id": "toyosu-odaiba",
-              "label": "丰洲 / teamLab / 台场"
-            },
-            {
-              "id": "disney",
-              "label": "东京迪士尼度假区"
-            },
-            {
-              "id": "fuji",
-              "label": "Mt. Fuji 一日游"
-            },
-            {
-              "id": "kamakura-yokohama",
-              "label": "镰仓 / 横滨"
-            },
-            {
-              "id": "kyoto-osaka",
-              "label": "搭 Shinkansen 去 Kyoto / Osaka"
-            }
-          ]
-        },
-        {
-          "id": "airport",
-          "title": "你会抵达哪个机场？",
-          "helper": "机场会影响第一晚最容易的酒店基地。",
+          "id": "shinkansen",
+          "title": "🚄 新干线出发时间？",
+          "helper": "早班车会改变哪个住宿据点最轻松。",
           "multi": false,
           "options": [
             {
-              "id": "narita",
-              "label": "成田机场 (NRT)"
+              "id": "before8am",
+              "label": "早上8点前"
             },
             {
-              "id": "haneda",
-              "label": "羽田机场 (HND)"
+              "id": "daytime",
+              "label": "白天"
             },
             {
-              "id": "not-sure",
-              "label": "还不确定"
+              "id": "none",
+              "label": "不坐新干线"
             }
           ]
         },
         {
           "id": "luggage",
-          "title": "你会带多少行李？",
-          "helper": "大型行李会让出口、换乘和步行距离更重要。",
+          "title": "🧳 行李？",
+          "helper": "大行李箱时，出口、电梯与人流都很重要。",
           "multi": false,
           "options": [
-            {
-              "id": "light",
-              "label": "轻便行李"
-            },
             {
               "id": "large",
-              "label": "大型行李箱"
+              "label": "大行李箱"
             },
             {
-              "id": "family",
-              "label": "家庭 / 多件行李"
+              "id": "carryon",
+              "label": "只有随身行李"
             }
           ]
         },
         {
-          "id": "stay",
-          "title": "你偏好哪种住宿？",
-          "helper": "选择对酒店基地最重要的旅行风格。",
+          "id": "airport",
+          "title": "✈️ 到达机场？",
+          "helper": "到达机场决定东京哪一侧更方便。",
           "multi": false,
           "options": [
             {
-              "id": "first-time",
-              "label": "第一次来东京"
+              "id": "narita",
+              "label": "成田"
             },
             {
-              "id": "quiet-local",
-              "label": "安静本地住宿"
+              "id": "haneda",
+              "label": "羽田"
             },
             {
-              "id": "nightlife-shopping",
-              "label": "夜生活 / 购物"
-            },
-            {
-              "id": "easy-transfers",
-              "label": "换乘简单"
-            },
-            {
-              "id": "budget-friendly",
-              "label": "预算友好"
+              "id": "already",
+              "label": "已在东京"
             }
           ]
         },
         {
-          "id": "shinkansen",
-          "title": "你会搭 Shinkansen 吗？",
-          "helper": "铁路移动日会改变最容易住宿的区域。",
+          "id": "evenings",
+          "title": "🌙 你的夜晚？",
+          "helper": "选择想入睡的夜间氛围。",
           "multi": false,
           "options": [
             {
-              "id": "kyoto-osaka",
-              "label": "京都 / 大阪"
+              "id": "nightlife",
+              "label": "夜生活与美食"
             },
             {
-              "id": "fuji-hakone",
-              "label": "富士山 / 箱根"
-            },
-            {
-              "id": "tokyo-only",
-              "label": "否 / 只在东京"
-            },
-            {
-              "id": "not-sure",
-              "label": "不确定"
+              "id": "quiet",
+              "label": "安静本地"
             }
           ]
         }
@@ -4517,7 +4441,20 @@
         "areaOption": "区域候选"
       },
       "viewHotelPageLabel": "查看酒店搜索页面",
-      "openHotelPageLabel": "打开 {area} 酒店页面"
+      "openHotelPageLabel": "打开 {area} 酒店页面",
+      "stayNear": "住在 {area} 附近",
+      "practicalTitle": "实用信息（出口、电梯、时段）",
+      "practicalExit": "出口与检票口",
+      "practicalElevator": "行李与电梯",
+      "practicalRush": "早高峰",
+      "practicalPhrase": "入住前寄存行李",
+      "phraseText": "“Can I leave my luggage here before check-in?” — 酒店很习惯这句话，多数可免费寄存。",
+      "rushText": "工作日电车约 7:30–9:00 最拥挤。带大行李建议 7:15 前或 9:30 后出发。",
+      "namedHotelsTitle": "旅客常选的酒店",
+      "namedHotelsNote": "按步行动线挑选的编辑示例，并非排名。价格与评价请在预订网站确认。",
+      "klookLabel": "预订新干线车票",
+      "seeDetailsLabel": "查看 {area} 详情",
+      "helperTapHint": "点选答案即可继续 — 全程约 20 秒。"
     }
   },
   "fujiseatAreaLogic": {

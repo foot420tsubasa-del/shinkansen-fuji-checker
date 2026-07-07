@@ -4344,150 +4344,74 @@
       ],
       "steps": [
         {
-          "id": "destinations",
-          "title": "도쿄에서 어디에 가고 싶나요?",
-          "helper": "일정이 여러 지역이면 여러 개를 선택하세요.",
-          "multi": true,
-          "options": [
-            {
-              "id": "shibuya-harajuku",
-              "label": "시부야 / 하라주쿠"
-            },
-            {
-              "id": "shinjuku",
-              "label": "신주쿠"
-            },
-            {
-              "id": "asakusa",
-              "label": "아사쿠사 / 센소지"
-            },
-            {
-              "id": "ueno",
-              "label": "우에노"
-            },
-            {
-              "id": "ginza-tsukiji",
-              "label": "긴자 / 츠키지"
-            },
-            {
-              "id": "akihabara",
-              "label": "아키하바라"
-            },
-            {
-              "id": "tokyo-station-palace",
-              "label": "Tokyo Station / 황궁"
-            },
-            {
-              "id": "toyosu-odaiba",
-              "label": "도요스 / teamLab / 오다이바"
-            },
-            {
-              "id": "disney",
-              "label": "도쿄 디즈니 리조트"
-            },
-            {
-              "id": "fuji",
-              "label": "Mt. Fuji 당일치기"
-            },
-            {
-              "id": "kamakura-yokohama",
-              "label": "가마쿠라 / 요코하마"
-            },
-            {
-              "id": "kyoto-osaka",
-              "label": "Shinkansen으로 Kyoto / Osaka"
-            }
-          ]
-        },
-        {
-          "id": "airport",
-          "title": "어느 공항으로 도착하나요?",
-          "helper": "공항 선택은 첫날 밤에 쉬운 호텔 베이스를 바꿉니다.",
+          "id": "shinkansen",
+          "title": "🚄 신칸센 출발 시간은?",
+          "helper": "이른 기차라면 편한 거점이 달라집니다.",
           "multi": false,
           "options": [
             {
-              "id": "narita",
-              "label": "나리타 공항 (NRT)"
+              "id": "before8am",
+              "label": "오전 8시 이전"
             },
             {
-              "id": "haneda",
-              "label": "하네다 공항 (HND)"
+              "id": "daytime",
+              "label": "낮 시간"
             },
             {
-              "id": "not-sure",
-              "label": "아직 모름"
+              "id": "none",
+              "label": "신칸센 안 탐"
             }
           ]
         },
         {
           "id": "luggage",
-          "title": "짐은 얼마나 있나요?",
-          "helper": "큰 짐은 출구, 환승, 도보 거리를 더 중요하게 만듭니다.",
+          "title": "🧳 짐은?",
+          "helper": "큰 캐리어라면 출구·엘리베이터·혼잡이 중요합니다.",
           "multi": false,
           "options": [
-            {
-              "id": "light",
-              "label": "가벼운 짐"
-            },
             {
               "id": "large",
-              "label": "큰 캐리어"
+              "label": "대형 캐리어"
             },
             {
-              "id": "family",
-              "label": "가족 / 여러 개의 짐"
+              "id": "carryon",
+              "label": "기내용만"
             }
           ]
         },
         {
-          "id": "stay",
-          "title": "어떤 숙박 스타일을 선호하나요?",
-          "helper": "호텔 베이스에서 가장 중요한 여행 스타일을 고르세요.",
+          "id": "airport",
+          "title": "✈️ 도착 공항은?",
+          "helper": "도착 공항에 따라 유리한 지역이 다릅니다.",
           "multi": false,
           "options": [
             {
-              "id": "first-time",
-              "label": "도쿄 첫 방문"
+              "id": "narita",
+              "label": "나리타"
             },
             {
-              "id": "quiet-local",
-              "label": "조용한 로컬 숙박"
+              "id": "haneda",
+              "label": "하네다"
             },
             {
-              "id": "nightlife-shopping",
-              "label": "나이트라이프 / 쇼핑"
-            },
-            {
-              "id": "easy-transfers",
-              "label": "쉬운 환승"
-            },
-            {
-              "id": "budget-friendly",
-              "label": "예산 친화적"
+              "id": "already",
+              "label": "이미 도쿄에 있음"
             }
           ]
         },
         {
-          "id": "shinkansen",
-          "title": "Shinkansen을 이용하나요?",
-          "helper": "철도 이동일은 숙박하기 쉬운 지역을 바꿀 수 있습니다.",
+          "id": "evenings",
+          "title": "🌙 저녁 시간은?",
+          "helper": "잠들 동네의 밤 분위기를 골라주세요.",
           "multi": false,
           "options": [
             {
-              "id": "kyoto-osaka",
-              "label": "교토 / 오사카"
+              "id": "nightlife",
+              "label": "나이트라이프·맛집"
             },
             {
-              "id": "fuji-hakone",
-              "label": "후지산 / 하코네"
-            },
-            {
-              "id": "tokyo-only",
-              "label": "아니요 / 도쿄만"
-            },
-            {
-              "id": "not-sure",
-              "label": "모름"
+              "id": "quiet",
+              "label": "조용한 로컬"
             }
           ]
         }
@@ -4517,7 +4441,20 @@
         "areaOption": "지역 후보"
       },
       "viewHotelPageLabel": "호텔 검색 페이지 보기",
-      "openHotelPageLabel": "{area} 호텔 페이지 열기"
+      "openHotelPageLabel": "{area} 호텔 페이지 열기",
+      "stayNear": "{area} 근처 숙박",
+      "practicalTitle": "실용 정보 (출구·엘리베이터·시간대)",
+      "practicalExit": "출구·개찰구",
+      "practicalElevator": "짐·엘리베이터",
+      "practicalRush": "아침 러시아워",
+      "practicalPhrase": "체크인 전 짐 맡기기",
+      "phraseText": "“Can I leave my luggage here before check-in?” — 호텔은 익숙합니다. 대부분 무료로 보관해 줍니다.",
+      "rushText": "평일 전철은 약 7:30~9:00가 가장 혼잡합니다. 큰 캐리어라면 7:15 이전이나 9:30 이후 출발을 권합니다.",
+      "namedHotelsTitle": "여행자들이 고르는 호텔",
+      "namedHotelsNote": "도보 동선 기준의 편집 예시이며 순위가 아닙니다. 가격과 리뷰는 예약 사이트에서 확인하세요.",
+      "klookLabel": "신칸센 티켓 예약",
+      "seeDetailsLabel": "{area} 상세 보기",
+      "helperTapHint": "답을 탭하면 다음으로 넘어갑니다 — 총 20초 정도."
     }
   },
   "fujiseatAreaLogic": {

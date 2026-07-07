@@ -4344,150 +4344,74 @@
       ],
       "steps": [
         {
-          "id": "destinations",
-          "title": "Куда вы хотите поехать в Токио?",
-          "helper": "Выберите несколько вариантов, если маршрут смешанный.",
-          "multi": true,
-          "options": [
-            {
-              "id": "shibuya-harajuku",
-              "label": "Сибуя / Харадзюку"
-            },
-            {
-              "id": "shinjuku",
-              "label": "Синдзюку"
-            },
-            {
-              "id": "asakusa",
-              "label": "Асакуса / Сэнсо-дзи"
-            },
-            {
-              "id": "ueno",
-              "label": "Уэно"
-            },
-            {
-              "id": "ginza-tsukiji",
-              "label": "Гиндза / Цукидзи"
-            },
-            {
-              "id": "akihabara",
-              "label": "Акихабара"
-            },
-            {
-              "id": "tokyo-station-palace",
-              "label": "Tokyo Station / Императорский дворец"
-            },
-            {
-              "id": "toyosu-odaiba",
-              "label": "Тоёсу / teamLab / Одайба"
-            },
-            {
-              "id": "disney",
-              "label": "Tokyo Disney Resort"
-            },
-            {
-              "id": "fuji",
-              "label": "Однодневная поездка к Mt. Fuji"
-            },
-            {
-              "id": "kamakura-yokohama",
-              "label": "Камакура / Иокогама"
-            },
-            {
-              "id": "kyoto-osaka",
-              "label": "Kyoto / Osaka на Shinkansen"
-            }
-          ]
-        },
-        {
-          "id": "airport",
-          "title": "В какой аэропорт вы прилетаете?",
-          "helper": "Аэропорт меняет самую удобную базу для первой ночи.",
+          "id": "shinkansen",
+          "title": "🚄 Отправление на синкансэне?",
+          "helper": "Ранний поезд меняет, какая база удобнее.",
           "multi": false,
           "options": [
             {
-              "id": "narita",
-              "label": "Аэропорт Нарита (NRT)"
+              "id": "before8am",
+              "label": "До 8 утра"
             },
             {
-              "id": "haneda",
-              "label": "Аэропорт Ханэда (HND)"
+              "id": "daytime",
+              "label": "Днём"
             },
             {
-              "id": "not-sure",
-              "label": "Пока не знаю"
+              "id": "none",
+              "label": "Без синкансэна"
             }
           ]
         },
         {
           "id": "luggage",
-          "title": "Сколько у вас будет багажа?",
-          "helper": "Большие чемоданы делают выходы, пересадки и пешие расстояния важнее.",
+          "title": "🧳 Багаж?",
+          "helper": "С большими чемоданами важны выходы, лифты и толпы.",
           "multi": false,
           "options": [
-            {
-              "id": "light",
-              "label": "Легкий багаж"
-            },
             {
               "id": "large",
-              "label": "Большой чемодан"
+              "label": "Большие чемоданы"
             },
             {
-              "id": "family",
-              "label": "Семья / несколько сумок"
+              "id": "carryon",
+              "label": "Только ручная кладь"
             }
           ]
         },
         {
-          "id": "stay",
-          "title": "Какой тип проживания вы предпочитаете?",
-          "helper": "Выберите стиль поездки, который важнее всего для базы отеля.",
+          "id": "airport",
+          "title": "✈️ Прилетаете в?",
+          "helper": "Аэропорт прилёта указывает на разные стороны Токио.",
           "multi": false,
           "options": [
             {
-              "id": "first-time",
-              "label": "Первый раз в Токио"
+              "id": "narita",
+              "label": "Нарита"
             },
             {
-              "id": "quiet-local",
-              "label": "Тихая локальная база"
+              "id": "haneda",
+              "label": "Ханэда"
             },
             {
-              "id": "nightlife-shopping",
-              "label": "Ночная жизнь / шопинг"
-            },
-            {
-              "id": "easy-transfers",
-              "label": "Простые пересадки"
-            },
-            {
-              "id": "budget-friendly",
-              "label": "Бюджетно"
+              "id": "already",
+              "label": "Уже в Токио"
             }
           ]
         },
         {
-          "id": "shinkansen",
-          "title": "Вы будете пользоваться Shinkansen?",
-          "helper": "Дни с поездом могут изменить район, где проще ночевать.",
+          "id": "evenings",
+          "title": "🌙 Ваши вечера?",
+          "helper": "Выберите вечернюю атмосферу рядом с местом сна.",
           "multi": false,
           "options": [
             {
-              "id": "kyoto-osaka",
-              "label": "Киото / Осака"
+              "id": "nightlife",
+              "label": "Ночная жизнь и еда"
             },
             {
-              "id": "fuji-hakone",
-              "label": "Гора Фудзи / Хаконэ"
-            },
-            {
-              "id": "tokyo-only",
-              "label": "Нет / только Токио"
-            },
-            {
-              "id": "not-sure",
-              "label": "Не знаю"
+              "id": "quiet",
+              "label": "Тихо и по-местному"
             }
           ]
         }
@@ -4517,7 +4441,20 @@
         "areaOption": "Вариант района"
       },
       "viewHotelPageLabel": "Открыть страницу поиска отелей",
-      "openHotelPageLabel": "Открыть страницу отелей {area}"
+      "openHotelPageLabel": "Открыть страницу отелей {area}",
+      "stayNear": "Жильё рядом с {area}",
+      "practicalTitle": "Практические детали (выходы, лифты, время)",
+      "practicalExit": "Выходы и турникеты",
+      "practicalElevator": "Багаж и лифты",
+      "practicalRush": "Утренний час пик",
+      "practicalPhrase": "Оставить багаж до заселения",
+      "phraseText": "“Can I leave my luggage here before check-in?” — отели к этому привыкли; большинство хранит багаж бесплатно.",
+      "rushText": "В будни поезда переполнены примерно с 7:30 до 9:00. С большим чемоданом выходите до 7:15 или после 9:30.",
+      "namedHotelsTitle": "Отели, которые выбирают путешественники",
+      "namedHotelsNote": "Редакционные примеры по пешей логистике, не рейтинг. Цены и отзывы проверяйте на сайте бронирования.",
+      "klookLabel": "Забронировать билет на синкансэн",
+      "seeDetailsLabel": "Все детали {area}",
+      "helperTapHint": "Нажмите ответ, чтобы продолжить — всего около 20 секунд."
     }
   },
   "fujiseatAreaLogic": {

@@ -4345,150 +4345,74 @@
       ],
       "steps": [
         {
-          "id": "destinations",
-          "title": "Où voulez-vous aller à Tokyo ?",
-          "helper": "Choisissez plusieurs options si votre voyage est varié.",
-          "multi": true,
-          "options": [
-            {
-              "id": "shibuya-harajuku",
-              "label": "Shibuya / Harajuku"
-            },
-            {
-              "id": "shinjuku",
-              "label": "Shinjuku"
-            },
-            {
-              "id": "asakusa",
-              "label": "Asakusa / Senso-ji"
-            },
-            {
-              "id": "ueno",
-              "label": "Ueno"
-            },
-            {
-              "id": "ginza-tsukiji",
-              "label": "Ginza / Tsukiji"
-            },
-            {
-              "id": "akihabara",
-              "label": "Akihabara"
-            },
-            {
-              "id": "tokyo-station-palace",
-              "label": "Tokyo Station / Palais impérial"
-            },
-            {
-              "id": "toyosu-odaiba",
-              "label": "Toyosu / teamLab / Odaiba"
-            },
-            {
-              "id": "disney",
-              "label": "Tokyo Disney Resort"
-            },
-            {
-              "id": "fuji",
-              "label": "Excursion au Mt. Fuji"
-            },
-            {
-              "id": "kamakura-yokohama",
-              "label": "Kamakura / Yokohama"
-            },
-            {
-              "id": "kyoto-osaka",
-              "label": "Kyoto / Osaka en Shinkansen"
-            }
-          ]
-        },
-        {
-          "id": "airport",
-          "title": "À quel aéroport arrivez-vous ?",
-          "helper": "L'aéroport change la base la plus simple pour la première nuit.",
+          "id": "shinkansen",
+          "title": "🚄 Départ en Shinkansen ?",
+          "helper": "Un train tôt change la base la plus simple.",
           "multi": false,
           "options": [
             {
-              "id": "narita",
-              "label": "Aéroport de Narita (NRT)"
+              "id": "before8am",
+              "label": "Avant 8h"
             },
             {
-              "id": "haneda",
-              "label": "Aéroport de Haneda (HND)"
+              "id": "daytime",
+              "label": "En journée"
             },
             {
-              "id": "not-sure",
-              "label": "Pas encore sûr"
+              "id": "none",
+              "label": "Pas de shinkansen"
             }
           ]
         },
         {
           "id": "luggage",
-          "title": "Combien de bagages aurez-vous ?",
-          "helper": "Les grosses valises rendent les sorties, correspondances et distances à pied plus importantes.",
+          "title": "🧳 Bagages ?",
+          "helper": "Avec de grosses valises, sorties, ascenseurs et foule comptent.",
           "multi": false,
           "options": [
-            {
-              "id": "light",
-              "label": "Bagage léger"
-            },
             {
               "id": "large",
-              "label": "Grande valise"
+              "label": "Grosse(s) valise(s)"
             },
             {
-              "id": "family",
-              "label": "Famille / plusieurs bagages"
+              "id": "carryon",
+              "label": "Bagage cabine seulement"
             }
           ]
         },
         {
-          "id": "stay",
-          "title": "Quel type de séjour préférez-vous ?",
-          "helper": "Choisissez le style de voyage le plus important pour votre base hôtelière.",
+          "id": "airport",
+          "title": "✈️ Arrivée à ?",
+          "helper": "Votre aéroport d'arrivée oriente vers différents côtés de Tokyo.",
           "multi": false,
           "options": [
             {
-              "id": "first-time",
-              "label": "Premier voyage à Tokyo"
+              "id": "narita",
+              "label": "Narita"
             },
             {
-              "id": "quiet-local",
-              "label": "Séjour local calme"
+              "id": "haneda",
+              "label": "Haneda"
             },
             {
-              "id": "nightlife-shopping",
-              "label": "Vie nocturne / shopping"
-            },
-            {
-              "id": "easy-transfers",
-              "label": "Correspondances faciles"
-            },
-            {
-              "id": "budget-friendly",
-              "label": "Budget maîtrisé"
+              "id": "already",
+              "label": "Déjà à Tokyo"
             }
           ]
         },
         {
-          "id": "shinkansen",
-          "title": "Allez-vous utiliser le Shinkansen ?",
-          "helper": "Les jours de train peuvent changer la zone la plus simple où dormir.",
+          "id": "evenings",
+          "title": "🌙 Vos soirées ?",
+          "helper": "Choisissez l'ambiance nocturne près de laquelle dormir.",
           "multi": false,
           "options": [
             {
-              "id": "kyoto-osaka",
-              "label": "Kyoto / Osaka"
+              "id": "nightlife",
+              "label": "Vie nocturne et cuisine"
             },
             {
-              "id": "fuji-hakone",
-              "label": "Mont Fuji / Hakone"
-            },
-            {
-              "id": "tokyo-only",
-              "label": "Non / Tokyo seulement"
-            },
-            {
-              "id": "not-sure",
-              "label": "Pas sûr"
+              "id": "quiet",
+              "label": "Calme et local"
             }
           ]
         }
@@ -4518,7 +4442,20 @@
         "areaOption": "Option de zone"
       },
       "viewHotelPageLabel": "Voir la page de recherche d'hôtels",
-      "openHotelPageLabel": "Ouvrir la page hôtels de {area}"
+      "openHotelPageLabel": "Ouvrir la page hôtels de {area}",
+      "stayNear": "Logez près de {area}",
+      "practicalTitle": "Détails pratiques (sorties, ascenseurs, horaires)",
+      "practicalExit": "Sorties et portiques",
+      "practicalElevator": "Bagages et ascenseurs",
+      "practicalRush": "Pointe du matin",
+      "practicalPhrase": "Laisser ses bagages avant le check-in",
+      "phraseText": "“Can I leave my luggage here before check-in?” — les hôtels y sont habitués ; la plupart gardent les bagages gratuitement.",
+      "rushText": "En semaine, les trains sont bondés d'environ 7h30 à 9h00. Avec une grosse valise, partez avant 7h15 ou après 9h30.",
+      "namedHotelsTitle": "Hôtels choisis par les voyageurs ici",
+      "namedHotelsNote": "Exemples éditoriaux choisis pour l'itinéraire à pied, pas un classement. Vérifiez prix et avis sur le site de réservation.",
+      "klookLabel": "Réservez votre billet de shinkansen",
+      "seeDetailsLabel": "Voir les détails de {area}",
+      "helperTapHint": "Touchez une réponse pour continuer — environ 20 secondes au total."
     }
   },
   "fujiseatAreaLogic": {
