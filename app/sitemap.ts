@@ -1,13 +1,10 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
-import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
 import { publicItineraryPages } from "@/lib/content/itineraries";
 import { stayPages } from "@/lib/content/stay";
 import { transferPages } from "@/lib/content/transfers";
 
 const siteUrl = "https://fujiseat.com";
-
-const tokyoHotelAreaPaths = tokyoStayAreasBase.map((area) => `/areas-to-stay/tokyo-hotels/${area.id}`);
 
 const translatedPaths = [
   "",
@@ -54,7 +51,6 @@ const englishOnlyContentPaths = [
   "/areas-to-stay/tokyo/tokyo-station",
   "/areas-to-stay/tokyo/east-tokyo",
   "/areas-to-stay/tokyo-hotels",
-  ...tokyoHotelAreaPaths,
 ];
 
 const dynamicPaths = [

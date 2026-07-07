@@ -746,7 +746,7 @@ function ResultCard({
               button in the card; the affiliate row below is secondary. */}
           {SUPPORTED_HOTEL_PAGE_IDS.has(area.id) ? (
             <TrackedInternalLink
-              href={`/areas-to-stay/tokyo-hotels/${area.id}`}
+              href={`?area=${area.id}#selected-area`}
               sourcePage="tokyo_stay_area_index"
               placement="finder_result_hotel_page"
               label={openHotelPageLabel}
@@ -821,7 +821,7 @@ function CompactAreaRow({
       <p className="mt-3 text-sm leading-6 text-slate-700">{area.summary}</p>
       <div className="mt-3">
         <TrackedInternalLink
-          href={`/areas-to-stay/tokyo-hotels/${area.id}`}
+          href={`?area=${area.id}#selected-area`}
           sourcePage="tokyo_stay_area_index"
           placement="finder_result_hotel_page"
           label={openHotelPageLabel}

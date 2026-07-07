@@ -59,6 +59,60 @@ const nextConfig: NextConfig = {
         destination: "/:locale/airport-transfers",
         permanent: true,
       },
+      // §3: the 36 tokyo-hotels/* inventory-style area pages (ranked 26-43,
+      // zero clicks) are consolidated. Areas with a matching decision page go
+      // there; everything else lands on the Stay Finder's detail view for the
+      // same area. Specific rules must precede the catch-all.
+      {
+        source: "/areas-to-stay/tokyo-hotels/tokyo-station",
+        destination: "/areas-to-stay/where-to-stay-before-shinkansen",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/tokyo-hotels/tokyo-station`,
+        destination: "/:locale/areas-to-stay/where-to-stay-before-shinkansen",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/tokyo-hotels/shinjuku",
+        destination: "/areas-to-stay/tokyo-station-vs-shinjuku",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/tokyo-hotels/shinjuku`,
+        destination: "/:locale/areas-to-stay/tokyo-station-vs-shinjuku",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/tokyo-hotels/ueno",
+        destination: "/areas-to-stay/ueno-vs-shinjuku",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/tokyo-hotels/ueno`,
+        destination: "/:locale/areas-to-stay/ueno-vs-shinjuku",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/tokyo-hotels/asakusa",
+        destination: "/areas-to-stay/asakusa-vs-ueno",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/tokyo-hotels/asakusa`,
+        destination: "/:locale/areas-to-stay/asakusa-vs-ueno",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/tokyo-hotels/:slug",
+        destination: "/areas-to-stay/tokyo-stay-area-index?area=:slug#selected-area",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/tokyo-hotels/:slug`,
+        destination: "/:locale/areas-to-stay/tokyo-stay-area-index?area=:slug#selected-area",
+        permanent: true,
+      },
     ];
   },
 };

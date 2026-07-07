@@ -871,21 +871,10 @@ function AreaDetailPanel({
       </div>
       <p className="mt-4 text-sm leading-6 text-slate-700">{areaSummary(area, score, t)}</p>
 
-      {/* Primary CTA → the 36-area detail page (revenue SSOT). Sits high in
-          the panel, above the score detail, so the "open the hotel page"
-          action is the clear next step. */}
-      <div className="mt-4">
-        <TrackedInternalLink
-          href={`/areas-to-stay/tokyo-hotels/${area.id}`}
-          sourcePage="tokyo_stay_area_index"
-          placement="finder_result_hotel_page"
-          label={t("finder.openHotelPageLabel", { area: area.displayName })}
-          locale={locale}
-          className="inline-flex min-h-11 w-full items-center justify-center gap-1.5 rounded-2xl border border-[#0b214a] bg-[#0b214a] px-4 py-2.5 text-sm font-bold text-[#facc15] shadow-sm transition-colors hover:border-[#071733] hover:bg-[#071733] hover:text-[#fde047] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#facc15] focus-visible:ring-offset-2"
-        >
-          {t("finder.openHotelPageLabel", { area: area.displayName })}
-        </TrackedInternalLink>
-      </div>
+      {/* The former "Open {area} hotel page" CTA linked the 36-area detail
+          pages, which were 301'd per redesign spec §3. The panel's revenue
+          exit is the SelectedAreaHotelSearch provider block below; Phase 4
+          replaces this with the full revenue block. */}
 
       <div className="mt-5 grid gap-2">
         {scoreLabels.map(({ key, label }) => (

@@ -54,8 +54,8 @@ const POPULAR_AREAS: ReadonlyArray<{ slug: string; labelKey: string }> = [
 const SITUATION_CARDS: ReadonlyArray<{ href: string; labelKey: string }> = [
   { href: "/areas-to-stay/tokyo-first-time", labelKey: "firstTime" },
   { href: "/areas-to-stay/where-to-stay-before-shinkansen", labelKey: "beforeShinkansen" },
-  { href: "/areas-to-stay/tokyo-hotels/ueno", labelKey: "fromNarita" },
-  { href: "/areas-to-stay/tokyo-hotels/shinagawa", labelKey: "fromHaneda" },
+  { href: "/areas-to-stay/tokyo-stay-area-index?area=ueno#selected-area", labelKey: "fromNarita" },
+  { href: "/areas-to-stay/tokyo-stay-area-index?area=shinagawa#selected-area", labelKey: "fromHaneda" },
   { href: "/areas-to-stay/tokyo-stay-area-index", labelKey: "familyLuggage" },
   { href: "/areas-to-stay/tokyo-stay-area-index", labelKey: "hateCrowds" },
 ];
@@ -116,7 +116,7 @@ export default async function TokyoHotelsIndexPage({ params }: Props) {
               const area = areaFor(slug);
               if (!area) return null;
               const score = overallScoreFor(slug);
-              const href = `/areas-to-stay/tokyo-hotels/${slug}`;
+              const href = `/areas-to-stay/tokyo-stay-area-index?area=${slug}#selected-area`;
               return (
                 <TrackedInternalLink
                   key={slug}
@@ -210,7 +210,7 @@ export default async function TokyoHotelsIndexPage({ params }: Props) {
               const area = areaFor(slug);
               if (!area) return null;
               const score = overallScoreFor(slug);
-              const href = `/areas-to-stay/tokyo-hotels/${slug}`;
+              const href = `/areas-to-stay/tokyo-stay-area-index?area=${slug}#selected-area`;
               return (
                 <TrackedInternalLink
                   key={slug}

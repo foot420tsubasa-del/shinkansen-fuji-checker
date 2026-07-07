@@ -217,10 +217,10 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
  * forcing a single slug.
  */
 const updatedHotelPageBySlug: Record<string, string> = {
-  shinjuku: "/areas-to-stay/tokyo-hotels/shinjuku",
-  ueno: "/areas-to-stay/tokyo-hotels/ueno",
-  asakusa: "/areas-to-stay/tokyo-hotels/asakusa",
-  "tokyo-station": "/areas-to-stay/tokyo-hotels/tokyo-station",
+  shinjuku: "/areas-to-stay/tokyo-stay-area-index?area=shinjuku#selected-area",
+  ueno: "/areas-to-stay/tokyo-stay-area-index?area=ueno#selected-area",
+  asakusa: "/areas-to-stay/tokyo-stay-area-index?area=asakusa#selected-area",
+  "tokyo-station": "/areas-to-stay/tokyo-stay-area-index?area=tokyo-station#selected-area",
   "east-tokyo": "/areas-to-stay/tokyo-hotels",
 };
 

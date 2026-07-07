@@ -36,7 +36,7 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     label: "Calm Shinjuku",
     description: "Shinjuku access without sleeping in the loudest nightlife blocks.",
     pickIds: ["yuenShinjuku"],
-    fallbackHref: "/areas-to-stay/tokyo-hotels/shinjuku",
+    fallbackHref: "/areas-to-stay/tokyo-stay-area-index?area=shinjuku#selected-area",
     fallbackLabel: "See Shinjuku hotels",
   },
   {
@@ -44,7 +44,7 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     label: "Family / group",
     description: "Apartment-style rooms and practical layouts for families or friends.",
     pickIds: ["mimaruShinjukuWest"],
-    fallbackHref: "/areas-to-stay/tokyo-hotels/shinjuku",
+    fallbackHref: "/areas-to-stay/tokyo-stay-area-index?area=shinjuku#selected-area",
     fallbackLabel: "See Shinjuku hotels",
   },
   {
@@ -52,7 +52,7 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     label: "Practical Nishi-Shinjuku",
     description: "West-side Shinjuku examples for calmer logistics and first Tokyo stays.",
     pickIds: ["daiwaRoynetNishiShinjuku", "theKnotShinjuku"],
-    fallbackHref: "/areas-to-stay/tokyo-hotels/shinjuku",
+    fallbackHref: "/areas-to-stay/tokyo-stay-area-index?area=shinjuku#selected-area",
     fallbackLabel: "See Shinjuku hotels",
   },
   {
@@ -60,7 +60,7 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     label: "East Tokyo personality stay",
     description: "A more local-feeling base for travelers who care about cafes, streets, and atmosphere.",
     pickIds: ["citanHostel"],
-    fallbackHref: "/areas-to-stay/tokyo-hotels/kuramae",
+    fallbackHref: "/areas-to-stay/tokyo-stay-area-index?area=kuramae#selected-area",
     fallbackLabel: "See Kuramae hotels",
   },
   {
@@ -68,7 +68,7 @@ const TOKYO_PICK_GROUPS: TokyoPickGroup[] = [
     label: "Tokyo Station logistics",
     description: "Best when early Shinkansen, luggage, and transfers matter more than nightlife.",
     pickIds: [],
-    fallbackHref: "/areas-to-stay/tokyo-hotels/tokyo-station",
+    fallbackHref: "/areas-to-stay/tokyo-stay-area-index?area=tokyo-station#selected-area",
     fallbackLabel: "See Tokyo Station hotels",
   },
 ];
