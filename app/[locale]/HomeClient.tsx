@@ -202,7 +202,7 @@ export default function HomeClient() {
   const [visError, setVisError] = useState(false);
 
   const popularLinks: PopularLink[] = useMemo(() => [
-    { label: "Seat E guide", href: "/shinkansen-seat-e", icon: Train },
+    { label: "Seat E guide", href: "/guide#seat-e", icon: Train },
     { label: "Seat letters A-E", href: "/shinkansen-seat-letters", icon: Train },
     { label: "All seat guides", href: "/shinkansen-seat-guides", icon: Train },
   ], []);

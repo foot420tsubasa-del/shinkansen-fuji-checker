@@ -1364,7 +1364,7 @@ export default async function GuidePage({ params }: Props) {
         {ui.seatGuidesLabel}
       </p>
       <div className="mt-3 grid gap-2.5 sm:grid-cols-2">
-        <Link href="/shinkansen-seat-e" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
+        <Link href="#seat-e" className="rounded-xl border border-sky-100 bg-white px-3.5 py-3 text-[12px] transition-colors hover:bg-sky-50">
           <span className="block font-semibold text-slate-900">{ui.seatGuideTitle}</span>
           <span className="mt-0.5 block text-slate-500">{ui.seatGuideBody}</span>
         </Link>
@@ -1647,7 +1647,7 @@ export default async function GuidePage({ params }: Props) {
             <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
               <strong>{quickLabel}</strong> {copy.lettersQuick}
             </p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.seatEH3}</h3>
+            <h3 id="seat-e" className="mt-3 scroll-mt-24 text-[13px] font-semibold text-slate-900">{copy.seatEH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               {carStandard.map((item, i) => (
                 <li key={i}>{item}</li>

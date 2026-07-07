@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const guides = [
   {
-    href: "/shinkansen-seat-e",
+    href: "/guide#seat-e",
     icon: Mountain,
     title: "Is Seat E the Mt. Fuji Side?",
     summary: "When Seat E is the Fuji-side window in Ordinary and Green Cars.",

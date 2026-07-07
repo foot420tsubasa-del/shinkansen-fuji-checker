@@ -212,7 +212,7 @@ export default async function SeatLettersPage({ params }: Props) {
           <section>
             <h2 className="text-lg font-bold text-slate-950">Related pages</h2>
             <div className="mt-3 grid gap-3 md:grid-cols-2">
-              <Link href="/shinkansen-seat-e" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
+              <Link href="/guide#seat-e" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Is Seat E the Mt. Fuji side?</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">Seat E explained for Ordinary and Green Cars.</span>
               </Link>

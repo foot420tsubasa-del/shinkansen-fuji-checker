@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ArrowRight, Info, Train, Mountain, Calculator } from "lucide-react";
-import Script from "next/script";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
@@ -59,6 +58,22 @@ const faqSchema = {
     },
     {
       "@type": "Question",
+      name: "Do I need a JR Pass for Tokyo, Kyoto and Osaka?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Usually not. The classic Tokyo → Kyoto → Osaka route needs only one Shinkansen ride (Tokyo to Kyoto, about ¥13,320). Kyoto to Osaka is a short local train, so single tickets total far less than a 7-day JR Pass.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How much does Kyoto to Osaka cost without a JR Pass?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "About ¥580 by JR Special Rapid train (roughly 30 minutes). You can pay with an IC card — no reservation or Shinkansen needed.",
+      },
+    },
+    {
+      "@type": "Question",
       name: "Which Shinkansen seat is best for Mt. Fuji?",
       acceptedAnswer: {
         "@type": "Answer",
@@ -67,6 +82,15 @@ const faqSchema = {
     },
   ],
 };
+
+// Absorbed from /shinkansen-ticket-vs-jr-pass-tokyo-kyoto-osaka (301'd here):
+// per-leg costs for the classic golden-route one-way.
+const costBreakdown = [
+  { leg: "Tokyo → Kyoto (Shinkansen Nozomi)", cost: "~¥13,320", note: "Reserved Ordinary Car" },
+  { leg: "Kyoto → Osaka (JR Special Rapid)", cost: "~¥580", note: "IC card, no reservation" },
+  { leg: "Osaka → KIX (Nankai Rapi:t)", cost: "~¥1,450", note: "If flying from Kansai" },
+  { leg: "Total (one-way, fly out KIX)", cost: "~¥15,350", note: "vs ~¥50,000 for 7-day JR Pass" },
+];
 
 const routes = [
   {
@@ -103,8 +127,7 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
-      <Script
-        id="faq-schema-jr-pass"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
@@ -213,6 +236,32 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
             </div>
           </section>
 
+          {/* Cost breakdown (absorbed from the consolidated Tokyo/Kyoto/Osaka page) */}
+          <section>
+            <h2 className="text-xl font-bold text-slate-950">Cost breakdown: Tokyo → Kyoto → Osaka</h2>
+            <p className="mt-2 text-sm text-slate-500">Approximate prices — always confirm current rates before booking.</p>
+            <div className="mt-4 overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-slate-200 text-left">
+                    <th className="py-2 pr-4 font-semibold text-slate-900">Leg</th>
+                    <th className="py-2 pr-4 font-semibold text-slate-900">Cost</th>
+                    <th className="py-2 font-semibold text-slate-900">Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {costBreakdown.map((row) => (
+                    <tr key={row.leg} className={["border-b border-slate-100", row.leg.startsWith("Total") ? "bg-emerald-50 font-semibold" : ""].join(" ")}>
+                      <td className="py-2.5 pr-4 text-slate-900">{row.leg}</td>
+                      <td className="py-2.5 pr-4 text-slate-600">{row.cost}</td>
+                      <td className="py-2.5 text-slate-600">{row.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+
           {/* Seat planning note */}
           <section className="rounded-[22px] border border-sky-100 bg-sky-50/70 p-5 shadow-sm">
             <p className="text-sm font-semibold text-slate-950">Before you book: check your Fuji-side seat</p>
@@ -284,9 +333,9 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
                 <span className="font-bold text-[#082653]">Tokyo to Kyoto ticket guide</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">Station choice, seat, luggage, and booking tips.</span>
               </Link>
-              <Link href="/shinkansen-ticket-vs-jr-pass-tokyo-kyoto-osaka" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Tokyo–Kyoto–Osaka: pass or ticket?</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">Route-specific comparison for the classic trip.</span>
+              <Link href="/tokyo-to-osaka-mt-fuji-seat" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
+                <span className="font-bold text-[#082653]">Tokyo to Osaka: Which seat for Mt. Fuji?</span>
+                <span className="mt-1 block text-xs text-[#5f7190]">Right side, Seat E — timing for the 2.5-hour ride.</span>
               </Link>
               <Link href="/itineraries/tokyo-kyoto-osaka-without-jr-pass" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Itinerary without JR Pass</span>
