@@ -333,9 +333,9 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
                 <span className="font-bold text-[#082653]">Tokyo to Kyoto ticket guide</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">Station choice, seat, luggage, and booking tips.</span>
               </Link>
-              <Link href="/tokyo-to-osaka-mt-fuji-seat" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Tokyo to Osaka: Which seat for Mt. Fuji?</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">Right side, Seat E — timing for the 2.5-hour ride.</span>
+              <Link href="/nozomi-vs-hikari-vs-kodama" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
+                <span className="font-bold text-[#082653]">Nozomi vs Hikari vs Kodama</span>
+                <span className="mt-1 block text-xs text-[#5f7190]">The train-type decision behind the pass question.</span>
               </Link>
               <Link href="/itineraries/tokyo-kyoto-osaka-without-jr-pass" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Itinerary without JR Pass</span>

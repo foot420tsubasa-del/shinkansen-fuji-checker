@@ -62,6 +62,30 @@ const guides = [
     title: "Seat Letters A–E Explained",
     summary: "Window, aisle, and middle seats in Ordinary and Green Cars.",
   },
+  {
+    href: "/shinkansen-oversized-baggage-seat",
+    icon: Train,
+    title: "Oversized Baggage: Which Seat to Reserve?",
+    summary: "Bags over 160cm need a free last-row seat reservation.",
+  },
+  {
+    href: "/nozomi-vs-hikari-vs-kodama",
+    icon: ArrowLeftRight,
+    title: "Nozomi vs Hikari vs Kodama",
+    summary: "Same seats, different stops — and the JR Pass catch.",
+  },
+  {
+    href: "/shinkansen-reserved-vs-non-reserved",
+    icon: LayoutList,
+    title: "Reserved vs Non-Reserved Seats",
+    summary: "When the small reserved fee is clearly worth it.",
+  },
+  {
+    href: "/shinkansen-green-car-worth-it",
+    icon: Mountain,
+    title: "Is the Green Car Worth It?",
+    summary: "2+2 comfort, ~¥5,000 extra — and Seat D for Fuji.",
+  },
 ];
 
 export default async function SeatGuidesHubPage({ params }: Props) {

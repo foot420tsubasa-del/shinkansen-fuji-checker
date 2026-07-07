@@ -24,6 +24,10 @@ export type AffiliateDestinationType =
   | "transport";
 
 export type AffiliatePlacement =
+  | "baggage_seat_booking"
+  | "train_type_booking"
+  | "reserved_seat_booking"
+  | "green_car_booking"
   | "finder_result_named_hotel"
   | "finder_result_klook"
   | "home_seat_result"
