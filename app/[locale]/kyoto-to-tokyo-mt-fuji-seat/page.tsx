@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { ArrowRight, Mountain, Train, Clock3, Cloud } from "lucide-react";
-import Script from "next/script";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
@@ -61,8 +60,7 @@ export default async function KyotoToTokyoSeatPage({ params }: Props) {
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
-      <Script
-        id="faq-schema-kyoto-tokyo"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
@@ -177,6 +175,10 @@ export default async function KyotoToTokyoSeatPage({ params }: Props) {
               <Link href="/tokyo-to-kyoto-mt-fuji-seat" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Tokyo → Kyoto: Which seat?</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">Outbound direction guide.</span>
+              </Link>
+              <Link href="/osaka-to-tokyo-mt-fuji-seat" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
+                <span className="font-bold text-[#082653]">Osaka → Tokyo: Which seat?</span>
+                <span className="mt-1 block text-xs text-[#5f7190]">Same return direction from Shin-Osaka.</span>
               </Link>
               <Link href="/shinkansen-seat-letters" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Seat letters A–E explained</span>

@@ -9,9 +9,9 @@ import { getAlternates } from "@/i18n/hreflang";
 
 type Props = { params: Promise<{ locale: string }> };
 
-const title = "Tokyo to Kyoto Shinkansen: Which Seat to See Mt. Fuji?";
+const title = "Osaka to Tokyo Shinkansen: Which Seat to See Mt. Fuji?";
 const description =
-  "For Tokyo to Kyoto or Osaka, sit on the right side of the Tokaido Shinkansen. In Ordinary Car, Seat E is usually the Mt. Fuji-side window seat.";
+  "For Osaka to Tokyo, sit on the left side of the Tokaido Shinkansen. In Ordinary Car, Seat E is usually the Mt. Fuji-side window seat — the view comes late in the ride.";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
     openGraph: { title, description, siteName: "fujiseat" },
-    alternates: getAlternates("/tokyo-to-kyoto-mt-fuji-seat", locale),
+    alternates: getAlternates("/osaka-to-tokyo-mt-fuji-seat", locale),
   };
 }
 
@@ -30,36 +30,37 @@ const faqSchema = {
   mainEntity: [
     {
       "@type": "Question",
-      name: "Which side of the Shinkansen is Mt. Fuji on from Tokyo to Kyoto?",
+      name: "Which side of the Shinkansen is Mt. Fuji on from Osaka to Tokyo?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Mt. Fuji is on the right side of the train when traveling from Tokyo to Kyoto. In Ordinary Cars, Seat E is usually the right-side window seat.",
+        text: "Mt. Fuji is on the left side of the train when traveling from Shin-Osaka to Tokyo. In Ordinary Cars, Seat E is usually the Fuji-side window seat.",
       },
     },
     {
       "@type": "Question",
-      name: "How long after leaving Tokyo can I see Mt. Fuji?",
+      name: "How long after leaving Shin-Osaka can I see Mt. Fuji?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "About 40–50 minutes after departing Tokyo Station, near Shin-Fuji station. The view lasts about 30–60 seconds at speed.",
+        text: "About 85–95 minutes after leaving Shin-Osaka, near Shin-Fuji station. This is roughly 40–50 minutes before arriving at Tokyo Station.",
       },
     },
     {
       "@type": "Question",
-      name: "Can I see Mt. Fuji from non-reserved seats?",
+      name: "Is Seat E still correct going back to Tokyo?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes, but you may end up in an aisle seat with no view. Reserve Seat E in advance for the best chance.",
+        text: "Yes. Seats rotate to face forward, so Seat E is usually the Fuji-side window in both directions — right side going to Osaka, left side coming back to Tokyo.",
       },
     },
   ],
 };
 
-export default async function TokyoToKyotoSeatPage({ params }: Props) {
+export default async function OsakaToTokyoSeatPage({ params }: Props) {
   const { locale } = await params;
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
+      {/* Plain <script> so the JSON-LD server-renders into the initial HTML. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -68,7 +69,7 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
 
       <Container className="py-8 md:py-12">
         <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-sky-700">
-          Tokyo → Kyoto / Osaka
+          Osaka → Tokyo
         </p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
           {title}
@@ -84,19 +85,19 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
           <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
             <li className="flex gap-2">
               <Train className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-              <span><strong>Direction:</strong> Tokyo → Kyoto/Osaka — sit on the right side.</span>
+              <span><strong>Direction:</strong> Shin-Osaka → Tokyo — sit on the left side.</span>
             </li>
             <li className="flex gap-2">
               <Mountain className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-              <span><strong>Ordinary Car:</strong> Seat E (right-side window).</span>
+              <span><strong>Ordinary Car:</strong> Seat E (Fuji-side window in both directions).</span>
             </li>
             <li className="flex gap-2">
               <Mountain className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-              <span><strong>Green Car:</strong> Seat D (right-side window in 2+2 layout).</span>
+              <span><strong>Green Car:</strong> Seat D (Fuji-side window in 2+2 layout).</span>
             </li>
             <li className="flex gap-2">
               <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-              <span><strong>Best viewing area:</strong> Around Shin-Fuji station, ~40–50 min from Tokyo.</span>
+              <span><strong>Watch for it:</strong> Around Shin-Fuji, ~85–95 min after Shin-Osaka departure.</span>
             </li>
             <li className="flex gap-2">
               <Cloud className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
@@ -108,7 +109,7 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
         <section className="mt-6 rounded-[22px] border border-sky-100 bg-sky-50/70 p-5 shadow-sm">
           <p className="text-sm font-semibold text-slate-950">Check your seat instantly</p>
           <p className="mt-1 text-xs leading-5 text-slate-600">
-            Select Tokyo → Osaka/Kyoto and see the seat map with the Fuji side highlighted.
+            Select Osaka → Tokyo and see the seat map with the Fuji side highlighted.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Link
@@ -130,38 +131,38 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
 
         <div className="mt-10 space-y-8">
           <section>
-            <h2 className="text-xl font-bold text-slate-950">Timing your view</h2>
+            <h2 className="text-xl font-bold text-slate-950">Why the side changes but Seat E doesn&rsquo;t</h2>
             <div className="mt-3 space-y-3 text-sm leading-7 text-slate-600">
               <p>
-                When traveling from Tokyo toward Kyoto or Osaka on the Tokaido Shinkansen, Mt. Fuji appears on the right side approximately 40–50 minutes after leaving Tokyo Station. The best viewing stretch is around Shin-Fuji station in Shizuoka Prefecture.
-              </p>
-              <p>
-                The view lasts roughly 30–60 seconds at full speed. Have your camera ready a few minutes before — the mountain appears quickly and passes just as fast.
+                Mt. Fuji sits on the same physical side of the track in both directions. Because Shinkansen seats rotate to face forward, Seat E in Ordinary Cars is usually the Fuji-side window whether you ride Tokyo→Osaka or Osaka→Tokyo. The only real difference is when the mountain appears — early from Tokyo, late from Osaka.
               </p>
             </div>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-950">What affects visibility</h2>
+            <h2 className="text-xl font-bold text-slate-950">Timing from Shin-Osaka</h2>
             <div className="mt-3 space-y-3 text-sm leading-7 text-slate-600">
               <p>
-                Weather is the biggest factor. Clear winter mornings (November–February) give the highest chance. Summer months often have clouds and haze. The fujiseat Seat Checker includes a real-time visibility estimate to help you set expectations.
+                From Shin-Osaka, expect the Mt. Fuji viewing window around 85–95 minutes into your journey, near Shin-Fuji station — about 15 minutes later than from Kyoto. This means the view comes roughly 40–50 minutes before Tokyo Station arrival.
+              </p>
+              <p>
+                Set a timer or watch for Shizuoka station announcements — Shin-Fuji is the next major stretch after that. The view lasts about 30–60 seconds at speed.
               </p>
             </div>
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-950">Before your Shinkansen day</h2>
+            <h2 className="text-xl font-bold text-slate-950">Arriving in Tokyo</h2>
             <div className="mt-3 text-sm leading-7 text-slate-600">
               <p>
-                Most travelers take the Shinkansen from Tokyo to Kyoto on day 3 or 4 of a Japan trip. Where you stay the night before affects how easy the departure is — compare bases near Tokyo Station, Shinjuku, and Ueno.
+                If Tokyo is your last stop before flying home, where you stay near the station affects your airport run. Compare bases around Tokyo Station, Ginza, and Ueno for easy Narita or Haneda access.
               </p>
             </div>
             <Link
-              href="/areas-to-stay/where-to-stay-before-shinkansen"
+              href="/areas-to-stay/tokyo-first-time"
               className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[#2E7D5B] transition-colors hover:text-[#246449]"
             >
-              Where to stay before Shinkansen
+              Where to stay in Tokyo
               <ArrowRight className="h-4 w-4" />
             </Link>
           </section>
@@ -181,17 +182,13 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
           <section>
             <h2 className="text-lg font-bold text-slate-950">Related pages</h2>
             <div className="mt-3 grid gap-3 md:grid-cols-2">
-              <Link href="/shinkansen-seat-e" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Is Seat E the Mt. Fuji side?</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">Seat E explained for both directions.</span>
+              <Link href="/tokyo-to-osaka-mt-fuji-seat" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
+                <span className="font-bold text-[#082653]">Tokyo → Osaka: Which seat?</span>
+                <span className="mt-1 block text-xs text-[#5f7190]">Outbound direction seat and viewing tips.</span>
               </Link>
               <Link href="/kyoto-to-tokyo-mt-fuji-seat" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Kyoto → Tokyo: Which seat?</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">Return direction seat and viewing tips.</span>
-              </Link>
-              <Link href="/tokyo-to-osaka-mt-fuji-seat" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Tokyo → Osaka: Which seat?</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">Same line, same answer — Osaka-specific timing.</span>
+                <span className="mt-1 block text-xs text-[#5f7190]">Same line — Kyoto-specific timing.</span>
               </Link>
               <Link href="/shinkansen-seat-letters" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Seat letters A–E explained</span>

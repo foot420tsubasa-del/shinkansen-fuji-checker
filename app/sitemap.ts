@@ -40,6 +40,8 @@ const englishOnlyContentPaths = [
   "/shinkansen-seat-e",
   "/tokyo-to-kyoto-mt-fuji-seat",
   "/kyoto-to-tokyo-mt-fuji-seat",
+  "/tokyo-to-osaka-mt-fuji-seat",
+  "/osaka-to-tokyo-mt-fuji-seat",
   "/shinkansen-seat-letters",
   "/shinkansen-seat-guides",
   "/jr-pass-vs-single-ticket",

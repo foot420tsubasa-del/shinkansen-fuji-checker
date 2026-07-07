@@ -45,6 +45,18 @@ const guides = [
     summary: "Why the same seat works on the return and when to watch.",
   },
   {
+    href: "/tokyo-to-osaka-mt-fuji-seat",
+    icon: Train,
+    title: "Tokyo to Osaka: Which Seat for Mt. Fuji?",
+    summary: "Right side, Seat E — the view comes early in the 2.5-hour ride.",
+  },
+  {
+    href: "/osaka-to-tokyo-mt-fuji-seat",
+    icon: ArrowLeftRight,
+    title: "Osaka to Tokyo: Which Seat for Mt. Fuji?",
+    summary: "Left side, Seat E — timing from Shin-Osaka and when to watch.",
+  },
+  {
     href: "/shinkansen-seat-letters",
     icon: LayoutList,
     title: "Seat Letters A–E Explained",
