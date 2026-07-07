@@ -46,7 +46,6 @@ const naritaSlugs = [
   "narita-to-shinjuku",
   "narita-to-tokyo-station",
   "narita-to-ueno",
-  "narita-to-shibuya",
   "narita-to-asakusa",
   "narita-to-oshiage",
 ] as const;
@@ -55,14 +54,6 @@ const hanedaSlugs = [
   "haneda-to-asakusa",
   "haneda-to-ueno",
   "haneda-to-tokyo-station",
-  "haneda-to-shibuya",
-] as const;
-const kansaiSlugs = [
-  "kansai-airport-to-kyoto",
-  "kansai-airport-to-namba",
-  "kansai-airport-to-umeda",
-  "osaka-to-kansai-airport",
-  "kyoto-to-kansai-airport",
 ] as const;
 const lateArrivalSlugs = ["narita-late-arrival", "haneda-late-arrival"] as const;
 const pagePath = "/airport-transfers";
@@ -450,7 +441,6 @@ export default async function AirportTransfersIndex({ params }: Props) {
   const kansaiImage = getAirportTransferRouteImage("kansai-airport");
   const naritaPages = orderedPages(naritaSlugs);
   const hanedaPages = orderedPages(hanedaSlugs);
-  const kansaiPages = orderedPages(kansaiSlugs);
   const lateArrivalPages = orderedPages(lateArrivalSlugs);
 
   return (
@@ -666,14 +656,46 @@ export default async function AirportTransfersIndex({ params }: Props) {
             locale={locale}
           />
           <div id="kansai-airport-routes" className="scroll-mt-24">
-            <AirportCard
-              title={copy.airportCards.kansai.title}
-              body={copy.airportCards.kansai.body}
-              image={kansaiImage}
-              imageAlt={copy.airportCards.kansai.imageAlt}
-              pages={kansaiPages.filter((page) => ["kansai-airport-to-kyoto", "kansai-airport-to-namba", "kansai-airport-to-umeda"].includes(page.slug))}
-              locale={locale}
-            />
+            {/* The individual KIX route pages (ranked 26+) were consolidated
+                here per the redesign spec §3 — their key facts are absorbed
+                as a static quick reference instead of links. */}
+            <section className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              {kansaiImage ? (
+                <div className="relative aspect-[16/9] w-full">
+                  <Image src={kansaiImage} alt={copy.airportCards.kansai.imageAlt} fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover" />
+                </div>
+              ) : (
+                <div className="flex aspect-[16/9] items-center justify-center bg-sky-50">
+                  <Plane className="h-10 w-10 text-sky-300" />
+                </div>
+              )}
+              <div className="p-5">
+                <h3 className="text-lg font-bold text-slate-950">{copy.airportCards.kansai.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{copy.airportCards.kansai.body}</p>
+                <dl className="mt-4 grid gap-2 text-xs leading-5">
+                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+                    <dt className="font-bold text-slate-900">KIX → Kyoto</dt>
+                    <dd className="text-slate-600">JR Haruka Express — 75 min, ~¥3,000–4,000. Bus 85–100 min.</dd>
+                  </div>
+                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+                    <dt className="font-bold text-slate-900">KIX → Namba (Osaka)</dt>
+                    <dd className="text-slate-600">Nankai Rapi:t — 34 min, ~¥1,400–1,600. Airport Express 43 min, ~¥1,000.</dd>
+                  </div>
+                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+                    <dt className="font-bold text-slate-900">KIX → Umeda / Osaka Station</dt>
+                    <dd className="text-slate-600">JR Kansai Airport Rapid — 65–70 min, ~¥1,200–1,400. Bus 60–80 min.</dd>
+                  </div>
+                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+                    <dt className="font-bold text-slate-900">Back to KIX</dt>
+                    <dd className="text-slate-600">Namba: Rapi:t 34 min · Osaka Stn: JR Rapid 65–70 min · Kyoto: Haruka 75 min.</dd>
+                  </div>
+                  <div className="rounded-xl border border-slate-200 bg-white px-3 py-2">
+                    <dt className="font-bold text-slate-900">Late arrival / heavy luggage</dt>
+                    <dd className="text-slate-600">Airport limousine bus stores bags under the bus; private transfer runs 24/7 and is best for families.</dd>
+                  </div>
+                </dl>
+              </div>
+            </section>
           </div>
         </div>
       </section>
@@ -685,8 +707,8 @@ export default async function AirportTransfersIndex({ params }: Props) {
           <ProblemCard icon={<Luggage className="h-4 w-4" />} title={copy.problems[0].title} body={copy.problems[0].body} href="/airport-transfers/narita-to-shinjuku" label={copy.problems[0].label} locale={locale} />
           <ProblemCard icon={<Clock className="h-4 w-4" />} title={copy.problems[1].title} body={copy.problems[1].body} href="/airport-transfers/haneda-late-arrival" label={copy.problems[1].label} locale={locale} />
           <ProblemCard icon={<MapPin className="h-4 w-4" />} title={copy.problems[2].title} body={copy.problems[2].body} href="/areas-to-stay/tokyo-first-time" label={copy.problems[2].label} locale={locale} />
-          <ProblemCard icon={<Train className="h-4 w-4" />} title={copy.problems[3].title} body={copy.problems[3].body} href="/airport-transfers/kansai-airport-to-kyoto" label={copy.problems[3].label} locale={locale} />
-          <ProblemCard icon={<MapPin className="h-4 w-4" />} title={copy.problems[4].title} body={copy.problems[4].body} href="/airport-transfers/kansai-airport-to-namba" label={copy.problems[4].label} locale={locale} />
+          <ProblemCard icon={<Train className="h-4 w-4" />} title={copy.problems[3].title} body={copy.problems[3].body} href="#kansai-airport-routes" label={copy.problems[3].label} locale={locale} />
+          <ProblemCard icon={<MapPin className="h-4 w-4" />} title={copy.problems[4].title} body={copy.problems[4].body} href="#kansai-airport-routes" label={copy.problems[4].label} locale={locale} />
           <ProblemCard icon={<Train className="h-4 w-4" />} title={copy.problems[5].title} body={copy.problems[5].body} href="/areas-to-stay/where-to-stay-before-shinkansen" label={copy.problems[5].label} locale={locale} />
         </div>
       </section>
@@ -710,7 +732,10 @@ export default async function AirportTransfersIndex({ params }: Props) {
           <div>
             <h3 className="text-sm font-bold text-slate-900">Kansai</h3>
             <div className="mt-2 grid gap-2">
-              {kansaiPages.map((page) => <RouteTextLink key={page.slug} page={page} locale={locale} placement="airport_hub_airport_card" />)}
+              <a href="#kansai-airport-routes" className="inline-flex items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition-colors hover:border-sky-200 hover:bg-sky-50 hover:text-sky-800">
+                <span>KIX quick reference (Kyoto / Namba / Umeda)</span>
+                <ArrowRight className="h-3.5 w-3.5 shrink-0" />
+              </a>
             </div>
           </div>
           <div>

@@ -95,7 +95,7 @@ const cityPageConfigs: Record<LocalHotelPickCity, CityHotelPickPageConfig> = {
     guideLabel: "Kyoto first-time stay guide",
     comparisonLinks: [
       { href: "/areas-to-stay/kyoto-station-vs-gion", label: "Compare Kyoto Station vs Gion" },
-      { href: "/airport-transfers/kansai-airport-to-kyoto", label: "Kansai Airport to Kyoto" },
+      { href: "/airport-transfers#kansai-airport-routes", label: "Kansai Airport to Kyoto" },
       { href: "/areas-to-stay/where-to-stay-before-shinkansen", label: "Hotel base before Shinkansen" },
     ],
     groups: [
@@ -134,7 +134,7 @@ const cityPageConfigs: Record<LocalHotelPickCity, CityHotelPickPageConfig> = {
     comparisonLinks: [
       { href: "/areas-to-stay/namba-vs-umeda", label: "Compare Namba vs Umeda" },
       { href: "/areas-to-stay/shin-osaka-vs-namba", label: "Compare Shin-Osaka vs Namba" },
-      { href: "/airport-transfers/kansai-airport-to-namba", label: "Kansai Airport to Namba" },
+      { href: "/airport-transfers#kansai-airport-routes", label: "Kansai Airport to Namba" },
     ],
     groups: [
       {

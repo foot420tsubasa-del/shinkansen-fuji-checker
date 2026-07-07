@@ -184,11 +184,6 @@ const routeOmioIds: Record<string, string> = {
   "/airport-transfers/haneda-to-tokyo-station": "omioHanedaAirportToTokyo",
   "/airport-transfers/haneda-to-ueno": "omioHanedaAirportToUeno",
   "/airport-transfers/haneda-to-asakusa": "omioHanedaAirportToAsakusa",
-  "/airport-transfers/kansai-airport-to-kyoto": "omioKansaiAirportToKyoto",
-  "/airport-transfers/kyoto-to-kansai-airport": "omioKansaiAirportToKyoto",
-  "/airport-transfers/kansai-airport-to-namba": "omioKansaiAirportToNamba",
-  "/airport-transfers/kansai-airport-to-umeda": "omioKansaiAirportToOsaka",
-  "/airport-transfers/osaka-to-kansai-airport": "omioKansaiAirportToOsaka",
 };
 
 function omioForOption(name: string, pagePath?: string) {

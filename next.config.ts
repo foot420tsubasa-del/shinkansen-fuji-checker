@@ -34,6 +34,31 @@ const nextConfig: NextConfig = {
         destination: "/:locale/jr-pass-vs-single-ticket",
         permanent: true,
       },
+      // §3: airport-transfer pages ranked 26+ (Shibuya + Kansai routes) are
+      // consolidated into the airport hub. KIX facts are absorbed as a quick
+      // reference at #kansai-airport-routes; Shibuya is covered by the
+      // Shinjuku routes one JR stop away.
+      {
+        source:
+          "/airport-transfers/:slug(kansai-airport-to-kyoto|kansai-airport-to-namba|kansai-airport-to-umeda|osaka-to-kansai-airport|kyoto-to-kansai-airport)",
+        destination: "/airport-transfers#kansai-airport-routes",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/airport-transfers/:slug(kansai-airport-to-kyoto|kansai-airport-to-namba|kansai-airport-to-umeda|osaka-to-kansai-airport|kyoto-to-kansai-airport)`,
+        destination: "/:locale/airport-transfers#kansai-airport-routes",
+        permanent: true,
+      },
+      {
+        source: "/airport-transfers/:slug(narita-to-shibuya|haneda-to-shibuya)",
+        destination: "/airport-transfers",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/airport-transfers/:slug(narita-to-shibuya|haneda-to-shibuya)`,
+        destination: "/:locale/airport-transfers",
+        permanent: true,
+      },
     ];
   },
 };
