@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Mountain, Train, Info } from "lucide-react";
-import Script from "next/script";
 import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
@@ -65,14 +64,14 @@ function isDuplicateGuideFaq(item: { q: string }, index?: number) {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Mt. Fuji Shinkansen Seat Guide",
-  description: "Which side and seat letter to choose for seeing Mt. Fuji from the Tokaido Shinkansen, plus timing, route, JR Pass context, and booking steps.",
+  headline: "Which Side of the Shinkansen for Mt. Fuji? Right Side, Seat E",
+  description: "Tokyo→Kyoto/Osaka: right side, Seat E. Coming back: left side, still Seat E. Timing near Shin-Fuji, route map, JR Pass context, and booking steps.",
   author: {
     "@type": "Person",
     name: "fujiseat (Tokyo-based Japanese creator)",
   },
   datePublished: "2026-04-01",
-  dateModified: "2026-04-27",
+  dateModified: "2026-07-07",
 };
 
 const howToSchema = {
@@ -752,9 +751,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
-  const guideTitle = locale === "en" ? "Which Shinkansen Seat for Mt. Fuji? Right Side, Seat E" : t("guideTitle");
+  const guideTitle = locale === "en" ? "Which Side of the Shinkansen for Mt. Fuji? Right Side, Seat E" : t("guideTitle");
   const guideDesc = locale === "en"
-    ? "Mt. Fuji is on the right going Tokyo→Kyoto/Osaka (left coming back) — book Seat E. Free seat checker finds your exact window seat, plus when Fuji appears and JR Pass tips."
+    ? "Tokyo→Kyoto/Osaka: right side, Seat E. Coming back: left side, still Seat E. Free seat checker finds your exact window seat, plus when Fuji appears near Shin-Fuji and JR Pass tips."
     : t("guideDesc");
   return {
     title: guideTitle,
@@ -1001,7 +1000,7 @@ export default async function GuidePage({ params }: Props) {
   const ui = guideUiByLocale[locale as keyof typeof guideUiByLocale] ?? guideUiByLocale.en;
   const quickLabel = `${quickAnswer.title}:`;
   const displayTitle = locale === "en"
-    ? "Which Shinkansen Seat to See Mt. Fuji? Seat E, Side & Timing Guide"
+    ? "Which Side of the Shinkansen for Mt. Fuji? Right Side, Seat E"
     : t("h1");
 
   const tldrItems = t.raw("tldr") as Array<{ bold: string; text: string }>;
@@ -1506,23 +1505,22 @@ export default async function GuidePage({ params }: Props) {
 
   return (
     <main className="page-shell flex min-h-screen flex-col text-slate-900">
-      <Script
-        id="faq-schema"
+      {/* Plain <script> (not next/script) so the JSON-LD is server-rendered
+          into the initial HTML — next/script injects client-side via the RSC
+          payload, which search engines cannot rely on. */}
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchemaData) }}
       />
-      <Script
-        id="article-schema"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchemaData) }}
       />
-      <Script
-        id="howto-seat-e-schema"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchemaData) }}
       />
-      <Script
-        id="breadcrumb-guide-schema"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }}
       />

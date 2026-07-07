@@ -2,8 +2,8 @@
   "meta": {
     "homeTitle": "Japan-Reiseplaner — Kostenloser Shinkansen-Sitzplatzcheck, Unterkünfte & Routen",
     "homeDesc": "Plane deine Japanreise mit einem Tool. Finde den Mt. Fuji-Sitz im Shinkansen, vergleiche Stadtteile zum Übernachten in Tokyo, Flughafentransfers und eine 7-Tage-Route. Erstellt von einem japanischen Creator.",
-    "guideTitle": "Mt. Fuji aus dem Shinkansen sehen — Sitzplatz, Seite & Timing",
-    "guideDesc": "Welchen Sitzplatz solltest du für den besten Mt. Fuji-Blick im Shinkansen buchen? Sitz E, rechte Seite (Tokyo→Osaka). Kompletter Guide mit Saison-Tipps, Wageninfos, JR Pass vs. Ticket und FAQ."
+    "guideTitle": "Auf welcher Seite des Shinkansen liegt der Mt. Fuji? Rechts, Sitz E",
+    "guideDesc": "Tokyo→Kyoto/Osaka: rechte Seite, Sitz E. Zurück: linke Seite, ebenfalls Sitz E. Der kostenlose Seat Checker zeigt deinen Fensterplatz, das Zeitfenster bei Shin-Fuji und JR-Pass-Tipps."
   },
   "klook": {
     "heading": "Bereit zum Buchen? Hol dir dein Shinkansen-Ticket über Klook (Englisch OK)",
@@ -418,7 +418,7 @@
     }
   },
   "guide": {
-    "h1": "Mt. Fuji aus dem Shinkansen sehen (Tokyo ⇄ Osaka/Kyoto)",
+    "h1": "Auf welcher Seite des Shinkansen liegt der Mt. Fuji? Rechts, Sitz E",
     "subtitle": "Ein praktischer Guide zu den besten Shinkansen-Sitzen, Streckenabschnitten und dem richtigen Timing für Mt. Fuji-Blicke.",
     "writtenBy": "Geschrieben von einem japanischen Local für Besucher, die den Mt. Fuji × Shinkansen-Blick nicht verpassen wollen.",
     "backToChecker": "Zurück zum Sitzplatzcheck",

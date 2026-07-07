@@ -2,8 +2,8 @@
   "meta": {
     "homeTitle": "Planejador de Viagem ao Japão — Assento no Shinkansen, Hospedagem e Roteiros",
     "homeDesc": "Planeje sua viagem ao Japão com uma só ferramenta. Encontre o assento para ver o Monte Fuji no Shinkansen, compare áreas para ficar em Tóquio, traslados de aeroporto e um roteiro de 7 dias.",
-    "guideTitle": "Como Ver o Monte Fuji do Shinkansen — Guia de Assento, Lado e Horário",
-    "guideDesc": "Qual assento reservar para a melhor vista do Monte Fuji no Shinkansen? Assento E, lado direito (Tóquio→Osaka). Guia completo com dicas de temporada, vagões, JR Pass vs passagem avulsa e FAQ."
+    "guideTitle": "De que lado do Shinkansen fica o Monte Fuji? Lado direito, assento E",
+    "guideDesc": "Tóquio→Kyoto/Osaka: lado direito, assento E. Na volta: lado esquerdo, também assento E. Verificador de assento gratuito mostra sua janela exata, o momento perto de Shin-Fuji e dicas de JR Pass."
   },
   "klook": {
     "heading": "Pronto para reservar? Compre seu bilhete do Shinkansen via Klook (em inglês)",
@@ -418,7 +418,7 @@
     }
   },
   "guide": {
-    "h1": "Como ver o Monte Fuji do Shinkansen (Tóquio ⇄ Osaka/Kyoto)",
+    "h1": "De que lado do Shinkansen fica o Monte Fuji? Lado direito, assento E",
     "subtitle": "Um guia prático com os melhores assentos, seções e horários para ver o Monte Fuji do Shinkansen.",
     "writtenBy": "Escrito por um morador local do Japão, para visitantes que não querem perder a vista do Monte Fuji × Shinkansen.",
     "backToChecker": "Voltar ao Verificador de Assento",
