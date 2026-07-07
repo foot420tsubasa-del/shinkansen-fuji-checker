@@ -368,6 +368,24 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
 
   useEffect(() => {
     const restoreTimer = window.setTimeout(() => {
+      // §4-3: the compact 2-question embeds hand Q1/Q2 over via query params
+      // (q_shinkansen / q_luggage) — prefill them and resume at Q3. The
+      // handoff wins over any persisted session state.
+      const params = new URLSearchParams(window.location.search);
+      const qShinkansen = params.get("q_shinkansen");
+      const qLuggage = params.get("q_luggage");
+      const shinkansenStep = copy.steps.find((step) => step.id === "shinkansen");
+      const luggageStep = copy.steps.find((step) => step.id === "luggage");
+      const validShinkansen = shinkansenStep?.options.some((option) => option.id === qShinkansen);
+      const validLuggage = luggageStep?.options.some((option) => option.id === qLuggage);
+      if (qShinkansen && qLuggage && validShinkansen && validLuggage) {
+        setStarted(true);
+        setAnswers({ ...emptyAnswers, shinkansen: [qShinkansen], luggage: [qLuggage] });
+        setStepIndex(Math.min(2, copy.steps.length - 1));
+        restoredStorageRef.current = true;
+        trackFinderStart({ page_path: pagePath, locale });
+        return;
+      }
       const persisted = readPersistedFinderState();
       if (persisted) {
         setStarted(persisted.started);

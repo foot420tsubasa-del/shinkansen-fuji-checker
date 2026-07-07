@@ -8,6 +8,7 @@ import { KLOOK_URL, ESIM_URL, JR_PASS_URL, OMIO_SHINKANSEN_URL } from "@/src/aff
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
+import { CompactStayFinder } from "@/components/stay/CompactStayFinder";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { StickyMobileCta } from "@/components/affiliate/StickyMobileCta";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
@@ -1897,6 +1898,10 @@ export default async function GuidePage({ params }: Props) {
           </section>
 
           {renderSeatGuides()}
+
+          {/* §4-3 compact Stay Finder embed — navigation-layer module kept
+              below the answer article per the phase-1 structure constraint. */}
+          <CompactStayFinder locale={locale} pagePath="/guide" placement="guide_compact_finder" />
 
           {renderContinuePlanning()}
 

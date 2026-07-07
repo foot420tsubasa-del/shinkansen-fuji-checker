@@ -4454,7 +4454,10 @@
       "namedHotelsNote": "Redaktionelle Beispiele nach Fußweg gewählt, kein Ranking. Preise und Bewertungen auf der Buchungsseite prüfen.",
       "klookLabel": "Shinkansen-Ticket buchen",
       "seeDetailsLabel": "Alle Details zu {area}",
-      "helperTapHint": "Tippe eine Antwort an, um fortzufahren — insgesamt ca. 20 Sekunden."
+      "helperTapHint": "Tippe eine Antwort an, um fortzufahren — insgesamt ca. 20 Sekunden.",
+      "compactTitle": "Noch unsicher, wo du übernachten sollst?",
+      "compactBody": "Beantworte 2 Fragen — deine Tokyo-Basis in 20 Sekunden.",
+      "compactCta": "Meine Tokyo-Basis ansehen"
     }
   },
   "fujiseatAreaLogic": {

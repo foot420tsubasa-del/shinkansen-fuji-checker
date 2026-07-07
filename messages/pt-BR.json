@@ -4455,7 +4455,10 @@
       "namedHotelsNote": "Exemplos editoriais escolhidos pela rota a pé, não um ranking. Confira preços e avaliações no site de reserva.",
       "klookLabel": "Reserve seu bilhete de shinkansen",
       "seeDetailsLabel": "Ver detalhes de {area}",
-      "helperTapHint": "Toque em uma resposta para continuar — cerca de 20 segundos no total."
+      "helperTapHint": "Toque em uma resposta para continuar — cerca de 20 segundos no total.",
+      "compactTitle": "Ainda não sabe onde ficar?",
+      "compactBody": "Responda 2 perguntas — sua base em Tokyo em 20 segundos.",
+      "compactCta": "Ver minha base em Tokyo"
     }
   },
   "fujiseatAreaLogic": {

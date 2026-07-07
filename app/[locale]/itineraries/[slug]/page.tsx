@@ -11,6 +11,7 @@ import { HotelBaseNextStep } from "@/components/content/HotelBaseNextStep";
 import { ProTip } from "@/components/content/ProTip";
 import { NextActions } from "@/components/content/NextActions";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
+import { CompactStayFinder } from "@/components/stay/CompactStayFinder";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAllItinerarySlugs, getItineraryBySlug } from "@/lib/content/itineraries";
 import { getAlternates } from "@/i18n/hreflang";
@@ -182,6 +183,14 @@ export default async function ItineraryPage({ params }: Props) {
               </Link>
             </div>
           </section>
+
+          {slug === "7-day-first-time-japan" ? (
+            <CompactStayFinder
+              locale={locale}
+              pagePath={`/itineraries/${slug}`}
+              placement="itinerary_compact_finder"
+            />
+          ) : null}
 
           <SuggestedNextSteps currentPageType="itinerary" locale={locale} />
         </div>

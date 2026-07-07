@@ -4455,7 +4455,10 @@
       "namedHotelsNote": "Exemples éditoriaux choisis pour l'itinéraire à pied, pas un classement. Vérifiez prix et avis sur le site de réservation.",
       "klookLabel": "Réservez votre billet de shinkansen",
       "seeDetailsLabel": "Voir les détails de {area}",
-      "helperTapHint": "Touchez une réponse pour continuer — environ 20 secondes au total."
+      "helperTapHint": "Touchez une réponse pour continuer — environ 20 secondes au total.",
+      "compactTitle": "Toujours pas sûr d’où loger ?",
+      "compactBody": "Répondez à 2 questions — votre base à Tokyo en 20 secondes.",
+      "compactCta": "Voir ma base à Tokyo"
     }
   },
   "fujiseatAreaLogic": {

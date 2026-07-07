@@ -19,6 +19,7 @@ import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { AreaNeighborhoodFeel } from "@/components/content/AreaNeighborhoodFeel";
+import { CompactStayFinder } from "@/components/stay/CompactStayFinder";
 import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { AdSlot } from "@/components/ads/AdSlot";
@@ -2727,6 +2728,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+
+// §4-3: pages that get the compact 2-question Stay Finder embed (Tokyo
+// stay-decision surfaces only — the Finder recommends Tokyo bases).
+const COMPACT_FINDER_SLUGS = new Set([
+  "asakusa-vs-ueno",
+  "tokyo-station-vs-shinjuku",
+  "ueno-vs-shinjuku",
+  "shinjuku-vs-ueno-vs-asakusa",
+  "where-to-stay-before-shinkansen",
+]);
+
 export default async function StayPage({ params }: Props) {
   const { slug, locale } = await params;
   const stayPagesT = await getTranslations({ locale, namespace: "stayPages" });
@@ -2908,6 +2920,14 @@ export default async function StayPage({ params }: Props) {
               </dl>
             </section>
           )}
+
+          {COMPACT_FINDER_SLUGS.has(page.slug) ? (
+            <CompactStayFinder
+              locale={locale}
+              pagePath={pagePath}
+              placement="stay_page_compact_finder"
+            />
+          ) : null}
 
           <SuggestedNextSteps currentPageType="stay" locale={locale} excludeTypes={["esim"]} />
         </div>

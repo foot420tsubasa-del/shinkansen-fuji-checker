@@ -4454,7 +4454,10 @@
       "namedHotelsNote": "도보 동선 기준의 편집 예시이며 순위가 아닙니다. 가격과 리뷰는 예약 사이트에서 확인하세요.",
       "klookLabel": "신칸센 티켓 예약",
       "seeDetailsLabel": "{area} 상세 보기",
-      "helperTapHint": "답을 탭하면 다음으로 넘어갑니다 — 총 20초 정도."
+      "helperTapHint": "답을 탭하면 다음으로 넘어갑니다 — 총 20초 정도.",
+      "compactTitle": "아직 숙소 지역을 못 정했나요?",
+      "compactBody": "2개 질문에 답하면 20초 만에 도쿄 거점이 나옵니다.",
+      "compactCta": "내 도쿄 거점 보기"
     }
   },
   "fujiseatAreaLogic": {

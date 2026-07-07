@@ -4454,7 +4454,10 @@
       "namedHotelsNote": "依步行動線挑選的編輯範例，並非排名。價格與評價請於訂房網站確認。",
       "klookLabel": "預訂新幹線車票",
       "seeDetailsLabel": "查看 {area} 詳情",
-      "helperTapHint": "點選答案即可繼續 — 全程約 20 秒。"
+      "helperTapHint": "點選答案即可繼續 — 全程約 20 秒。",
+      "compactTitle": "還不確定住哪裡？",
+      "compactBody": "回答 2 個問題，20 秒找到你的東京住宿據點。",
+      "compactCta": "查看我的東京據點"
     }
   },
   "fujiseatAreaLogic": {

@@ -4454,7 +4454,10 @@
       "namedHotelsNote": "按步行动线挑选的编辑示例，并非排名。价格与评价请在预订网站确认。",
       "klookLabel": "预订新干线车票",
       "seeDetailsLabel": "查看 {area} 详情",
-      "helperTapHint": "点选答案即可继续 — 全程约 20 秒。"
+      "helperTapHint": "点选答案即可继续 — 全程约 20 秒。",
+      "compactTitle": "还不确定住哪里？",
+      "compactBody": "回答 2 个问题，20 秒找到你的东京住宿据点。",
+      "compactCta": "查看我的东京据点"
     }
   },
   "fujiseatAreaLogic": {

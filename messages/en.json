@@ -4522,7 +4522,10 @@
       "namedHotelsNote": "Editorial examples chosen for walking routes, not a ranking. Check current prices and reviews on the booking site.",
       "klookLabel": "Book your shinkansen ticket",
       "seeDetailsLabel": "See full {area} details",
-      "helperTapHint": "Tap an answer to continue — about 20 seconds total."
+      "helperTapHint": "Tap an answer to continue — about 20 seconds total.",
+      "compactTitle": "Still not sure where to stay?",
+      "compactBody": "Answer 2 questions — get your Tokyo base in 20 seconds.",
+      "compactCta": "See my Tokyo base"
     }
   },
   "fujiseatAreaLogic": {
