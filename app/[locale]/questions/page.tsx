@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: "Feedback and Japan travel tips",
       description: "Send feedback, trip reports, or Japan travel tips for future fujiseat improvements.",
-      siteName: "fujiseat",
+      siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
     },
     alternates: getAlternates("/questions", locale),
   };

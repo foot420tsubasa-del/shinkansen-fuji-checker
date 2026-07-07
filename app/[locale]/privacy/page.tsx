@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: "Privacy Policy | fujiseat",
       description: "Privacy policy for fujiseat, including analytics, affiliate links, and local browser storage.",
-      siteName: "fujiseat",
+      siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
     },
     alternates: getAlternates("/privacy", locale),
   };

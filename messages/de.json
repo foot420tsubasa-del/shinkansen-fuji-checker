@@ -3897,13 +3897,13 @@
   },
   "tokyoStayAreaIndex": {
     "meta": {
-      "title": "Tokyo Hotel Area Finder: Stationsbereiche vor der Hotelbuchung vergleichen",
+      "title": "Tokyo Stay Finder: Stationsbereiche vor der Hotelbuchung vergleichen",
       "description": "Vergleiche 36 Stationsbereiche in Tokio nach Gepäckfreundlichkeit, Flughafenanbindung, Stationskomplexität, Shinkansen-Fit und Hotelauswahl.",
-      "ogTitle": "Tokyo Hotel Area Finder",
+      "ogTitle": "Tokyo Stay Finder",
       "ogDescription": "Vergleiche Tokios Stationsbereiche vor der Hotelbuchung mit fujiseats Logik."
     },
     "hero": {
-      "eyebrow": "Tokyo Hotel Area Finder",
+      "eyebrow": "Tokyo Stay Finder",
       "title": "Finde, wo du in Tokio bleiben sollst",
       "body": "Wähle die Orte, die du besuchen möchtest. Beantworte ein paar Reise-Fragen. Erhalte deine Top-3-Tokio-Hotelbasen.",
       "signals": [
@@ -4464,8 +4464,8 @@
     "eyebrow": "fujiseat-Bereichslogik",
     "title": "Warum fujiseats Bereichslogik anders ist",
     "body": "fujiseat vergleicht Hotelbasen nach Stationskomplexität, Gepäckstress, Flughafenankunft, Shinkansen-Tagen, ruhigeren nahegelegenen Basen und lokaler Tokio-Perspektive. Es rankt keine Hotels, erfindet keine Preise und behandelt den berühmtesten Bahnhof nicht automatisch als Antwort.",
-    "finderCta": "Tokyo Hotel Area Finder öffnen",
-    "note": "Der Tokyo Hotel Area Finder ist ein redaktionelles Reise-Fit-Tool, das verfügbare Stationsnutzbarkeits-Signale berücksichtigt. Es ist kein offizielles Ranking."
+    "finderCta": "Tokyo Stay Finder öffnen",
+    "note": "Der Tokyo Stay Finder ist ein redaktionelles Reise-Fit-Tool, das verfügbare Stationsnutzbarkeits-Signale berücksichtigt. Es ist kein offizielles Ranking."
   },
   "tokyoHotelsPage": {
     "meta": {
@@ -4577,7 +4577,7 @@
     "bottomCta": {
       "title": "Bereit, Preise zu prüfen?",
       "bodyTemplate": "Vergleiche echte Hoteloptionen in der Nähe von {areaWithStation} auf vertrauenswürdigen Seiten.",
-      "backLink": "Zurück zum Tokyo Hotel Area Finder",
+      "backLink": "Zurück zum Tokyo Stay Finder",
       "providerBooking": "Hotels auf Booking.com vergleichen",
       "providerTrip": "Hotels auf Trip.com vergleichen"
     },
@@ -4590,7 +4590,7 @@
       "title": "Tokio-Hotel-Suchseiten",
       "intro": "Wähle ein Bahnhofs-Gebiet, bevor du Preise prüfst. Jede Seite fasst zusammen, für wen die Gegend passt, worauf zu achten ist, und führt direkt zu vertrauenswürdigen Partnern.",
       "cardOpenLabel": "Gebiet öffnen",
-      "finderLinkLabel": "Zurück zum Tokyo Hotel Area Finder",
+      "finderLinkLabel": "Zurück zum Tokyo Stay Finder",
       "metaTitle": "Tokio-Hotel-Suchseiten: Erst die Gegend wählen | fujiseat",
       "metaDescription": "Vergleiche Bahnhofsgegenden in Tokio und schaue dann Hotels in der Nähe der passenden Basis.",
       "lp": {
@@ -4615,8 +4615,8 @@
           "familyLuggage": "Familie mit Gepäck",
           "hateCrowds": "Menschenmengen meiden"
         },
-        "finderHelperText": "Unsicher, wo du anfangen sollst? Nutze den Tokyo Hotel Area Finder.",
-        "finderHelperCta": "Tokyo Hotel Area Finder öffnen",
+        "finderHelperText": "Unsicher, wo du anfangen sollst? Nutze den Tokyo Stay Finder.",
+        "finderHelperCta": "Tokyo Stay Finder öffnen",
         "allAreasHeading": "Alle Tokio-Hotelgebietsseiten",
         "allAreasDescription": "Durchstöbere alle 36 Tokio-Bahnhofsgebiete. Jede Seite erklärt, für wen sie passt, worauf zu achten ist und wo man Hotels prüft."
       }

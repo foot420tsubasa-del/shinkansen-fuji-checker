@@ -433,7 +433,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      siteName: "fujiseat",
+      siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
       ...(image ? { images: [{ url: image, width: 1200, height: 630 }] } : {}),
     },
     alternates: getAlternates(`/airport-transfers/${slug}`, locale),
@@ -558,7 +558,7 @@ export default async function TransferPage({ params }: Props) {
             </div>
             <div className="mt-4 flex flex-wrap gap-2">
               {[
-                { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Hotel Area Finder" },
+                { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Stay Finder" },
                 { href: stayHrefForRoute(slug), label: "First-time hotel base guide" },
                 { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Hotel base with luggage" },
                 { href: "/local-hotel-picks#hotel-examples-matrix", label: "Local hotel examples" },

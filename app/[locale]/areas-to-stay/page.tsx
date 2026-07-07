@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: t("title"),
       description: t("ogDescription"),
-      siteName: "fujiseat",
+      siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
       images: [{ url: "https://fujiseat.com/og-areas-to-stay.png", width: 1200, height: 630 }],
     },
   };

@@ -1843,7 +1843,7 @@ function ProblemHotelBaseSection({
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
         {[
-          { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Hotel Area Finder" },
+          { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Stay Finder" },
           { href: "/areas-to-stay/tokyo-first-time", label: "Tokyo first-time hotel base guide" },
           { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Tokyo with luggage" },
           { href: "/airport-transfers", label: "Airport transfer by hotel area" },
@@ -2111,7 +2111,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {[
-              { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Hotel Area Finder", placement: "first_time_finder_click" },
+              { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Stay Finder", placement: "first_time_finder_click" },
               { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose a luggage-friendly Tokyo base", placement: "first_time_comparison_click" },
               { href: "/areas-to-stay/where-to-stay-before-shinkansen", label: "Where to stay before Shinkansen", placement: "first_time_comparison_click" },
               { href: "/airport-transfers", label: "Match airport transfer to hotel area", placement: "first_time_comparison_click" },
@@ -2705,7 +2705,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         title: t("title"),
         description: t("description"),
-        siteName: "fujiseat",
+        siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
       },
       alternates: getAlternates(`/areas-to-stay/${slug}`, locale),
     };
@@ -2722,7 +2722,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: page.title,
       description: page.description,
-      siteName: "fujiseat",
+      siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
     },
     alternates: getAlternates(`/areas-to-stay/${slug}`, locale),
   };

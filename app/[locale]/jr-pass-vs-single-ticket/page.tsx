@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${title} | fujiseat`,
     description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
-    openGraph: { title, description, siteName: "fujiseat" },
+    openGraph: { title, description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
     alternates: getAlternates("/jr-pass-vs-single-ticket", locale),
   };
 }

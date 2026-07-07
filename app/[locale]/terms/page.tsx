@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: "Terms & Notices | fujiseat",
       description: "Terms, travel notices, affiliate disclosure, and important limitations for using fujiseat.",
-      siteName: "fujiseat",
+      siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
     },
     alternates: getAlternates("/terms", locale),
   };

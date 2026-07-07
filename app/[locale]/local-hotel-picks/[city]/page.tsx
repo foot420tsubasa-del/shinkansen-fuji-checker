@@ -48,7 +48,7 @@ const cityPageConfigs: Record<LocalHotelPickCity, CityHotelPickPageConfig> = {
     guideHref: "/areas-to-stay/tokyo-first-time",
     guideLabel: "Where to stay in Tokyo for first-time visitors",
     comparisonLinks: [
-      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Tokyo Hotel Area Finder" },
+      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Tokyo Stay Finder" },
       { href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix", label: "Compare Tokyo hotel bases" },
       { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Tokyo with luggage" },
     ],
@@ -201,7 +201,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: config.title,
       description: `Practical ${config.city} hotel examples by area logic. Not rankings.`,
-      siteName: "fujiseat",
+      siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
     },
   };
 }

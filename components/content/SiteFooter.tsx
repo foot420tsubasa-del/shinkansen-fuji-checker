@@ -29,7 +29,7 @@ export function SiteFooter() {
           <div>
             <Link href="/" className="flex items-center gap-3">
               <BrandMark size="sm" />
-              <span className="text-xl font-extrabold text-white">fujiseat.com</span>
+              <span className="text-xl font-extrabold text-white">fujiseat<span className="block text-[11px] font-semibold tracking-wide text-slate-400">Japan Rail Seats, Stays &amp; Routes</span></span>
             </Link>
             <p className="mt-3 max-w-sm text-sm leading-6 text-slate-300">
               {t("footer.tagline")}

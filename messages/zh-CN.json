@@ -3897,9 +3897,9 @@
   },
   "tokyoStayAreaIndex": {
     "meta": {
-      "title": "Tokyo Hotel Area Finder：订酒店前比较车站区域",
+      "title": "Tokyo Stay Finder：订酒店前比较车站区域",
       "description": "按行李便利度、机场交通、车站复杂度、新干线适合度和酒店选择密度，比较东京36个车站区域。",
-      "ogTitle": "Tokyo Hotel Area Finder",
+      "ogTitle": "Tokyo Stay Finder",
       "ogDescription": "订酒店前，用 fujiseat 的车站区域逻辑比较东京住宿区域。"
     },
     "hero": {
@@ -4464,8 +4464,8 @@
     "eyebrow": "fujiseat 区域逻辑",
     "title": "为什么 fujiseat 的区域逻辑不同",
     "body": "fujiseat 按车站复杂度、行李压力、机场抵达路线、新干线日程、更安静的附近住宿区，以及东京本地视角来比较酒店基地。它不做酒店排名，不编造价格，也不会把最有名的车站自动当成答案。",
-    "finderCta": "打开 Tokyo Hotel Area Finder",
-    "note": "Tokyo Hotel Area Finder 是一个编辑型旅行适合度工具，在可用时参考车站使用性信号。它不是官方排名。"
+    "finderCta": "打开 Tokyo Stay Finder",
+    "note": "Tokyo Stay Finder 是一个编辑型旅行适合度工具，在可用时参考车站使用性信号。它不是官方排名。"
   },
   "tokyoHotelsPage": {
     "meta": {
@@ -4577,7 +4577,7 @@
     "bottomCta": {
       "title": "准备好查看价格了吗？",
       "bodyTemplate": "在信任的网站上比较 {areaWithStation} 附近的实际酒店选择。",
-      "backLink": "返回 Tokyo Hotel Area Finder",
+      "backLink": "返回 Tokyo Stay Finder",
       "providerBooking": "在 Booking.com 比较酒店",
       "providerTrip": "在 Trip.com 比较酒店"
     },
@@ -4590,7 +4590,7 @@
       "title": "东京酒店搜索页面",
       "intro": "先选择车站区域再查看价格。每个页面摘要适合的对象、注意事项，并直接链接至受信任的合作伙伴。",
       "cardOpenLabel": "打开区域",
-      "finderLinkLabel": "返回 Tokyo Hotel Area Finder",
+      "finderLinkLabel": "返回 Tokyo Stay Finder",
       "metaTitle": "东京酒店搜索页面：先选择车站区域 | fujiseat",
       "metaDescription": "比较东京的车站区域，再查看适合您旅程的基地附近的酒店。",
       "lp": {
@@ -4615,8 +4615,8 @@
           "familyLuggage": "带行李的家庭",
           "hateCrowds": "讨厌人潮"
         },
-        "finderHelperText": "不知道从何开始？使用 Tokyo Hotel Area Finder。",
-        "finderHelperCta": "打开 Tokyo Hotel Area Finder",
+        "finderHelperText": "不知道从何开始？使用 Tokyo Stay Finder。",
+        "finderHelperCta": "打开 Tokyo Stay Finder",
         "allAreasHeading": "所有东京酒店区域页面",
         "allAreasDescription": "浏览全部 36 个东京车站区域。每页说明适合谁入住、要注意什么，以及在哪里查酒店。"
       }

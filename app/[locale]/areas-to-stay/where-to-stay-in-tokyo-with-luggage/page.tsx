@@ -610,7 +610,7 @@ export default async function WhereToStayInTokyoWithLuggagePage({ params }: Prop
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {[
-              { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Hotel Area Finder" },
+              { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Stay Finder" },
               { href: "/areas-to-stay/tokyo-first-time", label: "Tokyo first-time hotel base guide" },
               { href: "/airport-transfers", label: "Airport transfers by hotel area" },
               { href: "/local-hotel-picks#hotel-examples-matrix", label: "Local hotel examples" },

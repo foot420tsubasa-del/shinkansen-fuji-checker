@@ -176,7 +176,7 @@ const enGuideCopy = {
   mistakesH2: "Common mistakes when trying to see Mt. Fuji from the Shinkansen",
   faqH2: "Frequently Asked Questions",
   makeEasyH2: "Make it easy with the Shinkansen Mt. Fuji Seat Checker",
-  footerBrand: "fujiseat.com — Japan travel utility hub",
+  footerBrand: "fujiseat — Japan Rail Seats, Stays & Routes",
   footerPartner: "Partner links shown where they match the planning step.",
 };
 
@@ -258,7 +258,7 @@ const frGuideCopy = {
   mistakesH2: "Erreurs fréquentes lorsqu'on essaie de voir le mont Fuji depuis le Shinkansen",
   faqH2: "Questions fréquentes",
   makeEasyH2: "Simplifiez-vous la tâche avec le Shinkansen Mt. Fuji Seat Checker",
-  footerBrand: "fujiseat.com — outils de voyage au Japon",
+  footerBrand: "fujiseat — Japan Rail Seats, Stays & Routes",
   footerPartner: "Liens partenaires affichés uniquement lorsqu'ils correspondent à l'étape de préparation.",
 };
 
@@ -747,7 +747,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       openGraph: {
         title: "Mont Fuji depuis le Shinkansen — côté, siège et timing",
         description: "Guide gratuit par un Tokyoïte : quel côté du Shinkansen pour voir le mont Fuji.",
-        siteName: "fujiseat",
+        siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
         images: [{ url: "https://fujiseat.com/og-guide.png", width: 1200, height: 630 }],
       },
     };
@@ -763,7 +763,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: guideTitle,
       description: guideDesc,
-      siteName: "fujiseat",
+      siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
       images: [{ url: "https://fujiseat.com/og-guide.png", width: 1200, height: 630 }],
     },
   };

@@ -72,7 +72,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${META_TITLE} | fujiseat`,
     description: META_DESCRIPTION,
     robots: locale === "en" ? undefined : { index: false, follow: true },
-    openGraph: { title: META_TITLE, description: META_DESCRIPTION, siteName: "fujiseat" },
+    openGraph: { title: META_TITLE, description: META_DESCRIPTION, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
     alternates: getAlternates(PAGE_PATH, locale),
   };
 }

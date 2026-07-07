@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: t("homeTitle"),
       description: t("homeDesc"),
-      siteName: "fujiseat",
+      siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
       images: [{ url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fujiseat.com"}/og-home.png`, width: 1200, height: 630 }],
     },
     other: {
@@ -26,6 +26,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// §1: WebSite schema — the expanded site name for search engines, with the
+// short brand kept as alternateName. Server-rendered as a plain <script>.
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "fujiseat — Japan Rail Seats, Stays & Routes",
+  alternateName: "fujiseat",
+  url: "https://fujiseat.com",
+};
+
 export default function HomePage() {
-  return <HomeClient />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+      />
+      <HomeClient />
+    </>
+  );
 }

@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: "Japan Itineraries — Day-by-Day Trip Plans",
       description:
         "Detailed itineraries from 5 to 14 days. Hotels, transport, and activities included.",
-      siteName: "fujiseat",
+      siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
       images: [{ url: "https://fujiseat.com/og-itineraries.png", width: 1200, height: 630 }],
     },
   };

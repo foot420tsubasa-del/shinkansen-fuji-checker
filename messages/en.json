@@ -3965,9 +3965,9 @@
   },
   "tokyoStayAreaIndex": {
     "meta": {
-      "title": "Tokyo Hotel Area Finder: Compare Station Areas Before Booking Hotels",
+      "title": "Tokyo Stay Finder: Compare Station Areas Before Booking Hotels",
       "description": "Compare 36 Tokyo station areas by luggage-friendliness, airport access, station complexity, Shinkansen fit, and hotel choice density before booking hotels.",
-      "ogTitle": "Tokyo Hotel Area Finder",
+      "ogTitle": "Tokyo Stay Finder",
       "ogDescription": "Compare Tokyo station areas before booking hotels using fujiseat's station-area logic."
     },
     "hero": {
@@ -4532,8 +4532,8 @@
     "eyebrow": "fujiseat area logic",
     "title": "Why fujiseat's area logic is different",
     "body": "fujiseat compares hotel bases by station complexity, luggage stress, airport arrival route, Shinkansen days, calmer nearby bases, and a local Tokyo perspective. It does not rank hotels, invent prices, or treat the most famous station as the automatic answer.",
-    "finderCta": "Open Tokyo Hotel Area Finder",
-    "note": "The Tokyo Hotel Area Finder is an editorial travel-fit tool informed by station-usability signals where available. It is not an official ranking."
+    "finderCta": "Open Tokyo Stay Finder",
+    "note": "The Tokyo Stay Finder is an editorial travel-fit tool informed by station-usability signals where available. It is not an official ranking."
   },
   "tokyoHotelsPage": {
     "meta": {
@@ -4645,7 +4645,7 @@
     "bottomCta": {
       "title": "Ready to check prices?",
       "bodyTemplate": "Compare real hotel options near {areaWithStation} on trusted sites.",
-      "backLink": "Back to Tokyo Hotel Area Finder",
+      "backLink": "Back to Tokyo Stay Finder",
       "providerBooking": "Compare hotels on Booking.com",
       "providerTrip": "Compare hotels on Trip.com"
     },
@@ -4658,7 +4658,7 @@
       "title": "Tokyo hotel search pages",
       "intro": "Choose a station area before checking hotel prices. Each page summarises who the area fits, what to watch out for, and links straight to trusted hotel partners.",
       "cardOpenLabel": "Open area",
-      "finderLinkLabel": "Back to Tokyo Hotel Area Finder",
+      "finderLinkLabel": "Back to Tokyo Stay Finder",
       "metaTitle": "Tokyo hotel search pages: choose your station area first | fujiseat",
       "metaDescription": "Compare Tokyo hotel search pages by station area, then check hotels near the base that fits your trip.",
       "lp": {
@@ -4683,8 +4683,8 @@
           "familyLuggage": "Family with luggage",
           "hateCrowds": "Hate crowds"
         },
-        "finderHelperText": "Not sure where to start? Use the Tokyo Hotel Area Finder.",
-        "finderHelperCta": "Open the Tokyo Hotel Area Finder",
+        "finderHelperText": "Not sure where to start? Use the Tokyo Stay Finder.",
+        "finderHelperCta": "Open the Tokyo Stay Finder",
         "allAreasHeading": "All Tokyo hotel area pages",
         "allAreasDescription": "Browse all 36 Tokyo station areas. Each page explains who should stay there, what to watch out for, and where to check hotels."
       }

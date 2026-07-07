@@ -3897,9 +3897,9 @@
   },
   "tokyoStayAreaIndex": {
     "meta": {
-      "title": "Tokyo Hotel Area Finder: 호텔 예약 전 역 주변 지역 비교",
+      "title": "Tokyo Stay Finder: 호텔 예약 전 역 주변 지역 비교",
       "description": "도쿄의 36개 역 주변 지역을 짐, 공항 접근, 역 복잡도, 신칸센 적합도, 호텔 선택 폭으로 비교합니다.",
-      "ogTitle": "Tokyo Hotel Area Finder",
+      "ogTitle": "Tokyo Stay Finder",
       "ogDescription": "fujiseat의 역 주변 지역 로직으로 호텔 예약 전 도쿄 숙박 지역을 비교하세요."
     },
     "hero": {
@@ -4464,8 +4464,8 @@
     "eyebrow": "fujiseat 지역 로직",
     "title": "fujiseat의 지역 로직이 다른 이유",
     "body": "fujiseat는 역 복잡도, 짐 스트레스, 공항 도착 동선, 신칸센 일정, 더 차분한 주변 거점, 도쿄 현지 관점으로 호텔 거점을 비교합니다. 호텔 순위를 매기거나 가격을 만들거나 가장 유명한 역을 자동 정답으로 보지 않습니다.",
-    "finderCta": "Tokyo Hotel Area Finder 열기",
-    "note": "Tokyo Hotel Area Finder는 가능한 경우 역 사용성 신호를 참고하는 편집 기반 여행 적합도 도구입니다. 공식 순위가 아닙니다."
+    "finderCta": "Tokyo Stay Finder 열기",
+    "note": "Tokyo Stay Finder는 가능한 경우 역 사용성 신호를 참고하는 편집 기반 여행 적합도 도구입니다. 공식 순위가 아닙니다."
   },
   "tokyoHotelsPage": {
     "meta": {
@@ -4577,7 +4577,7 @@
     "bottomCta": {
       "title": "가격을 확인할 준비가 되셨나요?",
       "bodyTemplate": "{areaWithStation} 근처의 실제 호텔 옵션을 신뢰할 수 있는 사이트에서 비교하세요.",
-      "backLink": "Tokyo Hotel Area Finder로 돌아가기",
+      "backLink": "Tokyo Stay Finder로 돌아가기",
       "providerBooking": "Booking.com에서 호텔 비교",
       "providerTrip": "Trip.com에서 호텔 비교"
     },
@@ -4590,7 +4590,7 @@
       "title": "도쿄 호텔 검색 페이지",
       "intro": "가격을 확인하기 전에 역 지역부터 선택하세요. 각 페이지는 누구에게 어울리는지, 주의할 점은 무엇인지 요약하고 신뢰할 수 있는 파트너로 바로 연결합니다.",
       "cardOpenLabel": "지역 열기",
-      "finderLinkLabel": "Tokyo Hotel Area Finder로 돌아가기",
+      "finderLinkLabel": "Tokyo Stay Finder로 돌아가기",
       "metaTitle": "도쿄 호텔 검색 페이지: 역 지역을 먼저 선택하세요 | fujiseat",
       "metaDescription": "도쿄의 역 지역들을 비교하고 여행에 어울리는 거점 근처의 호텔을 확인하세요.",
       "lp": {
@@ -4615,8 +4615,8 @@
           "familyLuggage": "짐 많은 가족",
           "hateCrowds": "혼잡함이 싫어요"
         },
-        "finderHelperText": "어디서 시작할지 모르겠다면 Tokyo Hotel Area Finder를 사용하세요.",
-        "finderHelperCta": "Tokyo Hotel Area Finder 열기",
+        "finderHelperText": "어디서 시작할지 모르겠다면 Tokyo Stay Finder를 사용하세요.",
+        "finderHelperCta": "Tokyo Stay Finder 열기",
         "allAreasHeading": "모든 도쿄 호텔 지역 페이지",
         "allAreasDescription": "도쿄의 36개 역 지역을 모두 살펴보세요. 각 페이지는 누구에게 맞는지, 주의할 점, 호텔 확인 방법을 설명합니다."
       }

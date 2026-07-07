@@ -82,7 +82,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${title} | fujiseat`,
     description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
-    openGraph: { title, description, siteName: "fujiseat" },
+    openGraph: { title, description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
     alternates: getAlternates(PAGE_PATH, locale),
   };
 }
@@ -159,7 +159,7 @@ export default async function HowToBuySuicaPage({ params }: Props) {
           {/*
             The simulator IS the primary tool on this page (the iframe
             above), so the only secondary CTA here is the Hotel Action
-            link forward to the Tokyo Hotel Area Finder — sage filled,
+            link forward to the Tokyo Stay Finder — sage filled,
             matching the rest of the site's "Compare hotels in X" /
             "Choose Tokyo hotel base" hierarchy.
           */}

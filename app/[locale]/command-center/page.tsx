@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Japan Trip Command Center",
     description: "Interactive route map and planning checklist for Tokyo, Mt. Fuji Shinkansen views, Kyoto, Osaka, stay areas, airport transfers, and booking essentials.",
-    siteName: "fujiseat",
+    siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
     images: [{ url: "https://fujiseat.com/og-command-center.png", width: 1200, height: 630 }],
   },
 };

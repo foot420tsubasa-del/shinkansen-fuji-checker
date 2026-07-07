@@ -338,7 +338,7 @@ export function PlanYourTripHub() {
           placement="plan_trip_hotel_base_next_step"
           title="Do not book hotels before the route shape is clear"
           body="Before choosing hotel names, decide your arrival airport, first-night area, Shinkansen day, luggage plan, and whether Kyoto, Osaka, Mt. Fuji, or Disney affects your base."
-          primaryLabel="Open Tokyo Hotel Area Finder"
+          primaryLabel="Open Tokyo Stay Finder"
           secondaryLabel="See local hotel examples"
           className="mt-6"
         />
@@ -425,7 +425,7 @@ export function PlanYourTripHub() {
             </p>
           </div>
           {/* Primary "Compare stay areas" guide link + a sibling quiz-style
-              entry into the Tokyo Hotel Area Finder, so undecided readers can
+              entry into the Tokyo Stay Finder, so undecided readers can
               answer a few questions instead of opening a guide. */}
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <TrackedCtaLink
