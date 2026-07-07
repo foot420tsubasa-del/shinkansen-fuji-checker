@@ -415,6 +415,38 @@
       "stationPracticeDesc": "在旅行前先練習日本車站的動線。",
       "stationPracticeCta": "開啟練習",
       "otherLabel": "其他工具"
+    },
+    "decisionFlow": {
+      "eyebrow": "按正確順序規劃",
+      "title": "五個決定，按旅程發生的順序",
+      "body": "每一步都連到約一分鐘就能給答案的工具或指南。",
+      "steps": [
+        {
+          "title": "抵達準備",
+          "desc": "eSIM、現金，以及落地前要裝的兩個 App。",
+          "cta": "準備抵達"
+        },
+        {
+          "title": "機場交通",
+          "desc": "把成田、羽田或關西對應到你的第一個飯店區域。",
+          "cta": "比較交通"
+        },
+        {
+          "title": "住宿據點",
+          "desc": "點 4 下 — Tokyo Stay Finder 幫你選據點。",
+          "cta": "開啟 Stay Finder"
+        },
+        {
+          "title": "新幹線車票",
+          "desc": "JR Pass 還是單程票？短程通常不需要 Pass。",
+          "cta": "比較車票"
+        },
+        {
+          "title": "你的座位",
+          "desc": "富士山在右側 E 席 — 用檢查器確認。",
+          "cta": "確認座位"
+        }
+      ]
     }
   },
   "guide": {

@@ -5,6 +5,7 @@ import {
   Car,
   ExternalLink,
   Train,
+  ArrowRight,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -454,6 +455,57 @@ export default function HomeClient() {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* §6 (redesign spec §2): the "decision flow" strip — the five travel
+            decisions in the order the trip actually happens, each linking to
+            the tool or guide that answers it. Sits below the hero + seat
+            checker, which stay untouched. */}
+        <section className="py-7">
+          <SectionTitle
+            eyebrow={t("decisionFlow.eyebrow")}
+            description={t("decisionFlow.body")}
+          />
+          <h2 className="sr-only">{t("decisionFlow.title")}</h2>
+          <ol className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+            {([
+              { href: "/plan-your-trip", placement: "home_decision_flow_arrival" },
+              { href: "/airport-transfers", placement: "home_decision_flow_transfer" },
+              { href: "/areas-to-stay/tokyo-stay-area-index", placement: "home_decision_flow_stay" },
+              { href: "/jr-pass-vs-single-ticket", placement: "home_decision_flow_ticket" },
+              { href: "/#seat-checker", placement: "home_decision_flow_seat" },
+            ] as const).map((step, index) => (
+              <li key={step.href} className="h-full">
+                <Link
+                  href={step.href}
+                  onClick={() =>
+                    trackCtaClick({
+                      placement: step.placement,
+                      href: step.href,
+                      label: t(`decisionFlow.steps.${index}.title`),
+                      category: "navigation",
+                      locale,
+                    })
+                  }
+                  className="flex h-full flex-col rounded-2xl border border-[#d9e5f2] bg-white p-4 shadow-[0_10px_25px_rgba(8,38,83,0.06)] transition-colors hover:border-[#2E7D5B] hover:bg-[#f0fbf6]"
+                >
+                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#082653] text-xs font-black text-[#f6c343]">
+                    {index + 1}
+                  </span>
+                  <span className="mt-2.5 text-sm font-bold text-[#082653]">
+                    {t(`decisionFlow.steps.${index}.title`)}
+                  </span>
+                  <span className="mt-1 text-xs leading-5 text-[#5f7190]">
+                    {t(`decisionFlow.steps.${index}.desc`)}
+                  </span>
+                  <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-[#106b43]">
+                    {t(`decisionFlow.steps.${index}.cta`)}
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ol>
         </section>
 
         <section className="py-7">

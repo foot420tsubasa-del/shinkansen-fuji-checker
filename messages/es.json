@@ -415,6 +415,38 @@
       "stationPracticeDesc": "Practica la orientación en estaciones japonesas antes del viaje.",
       "stationPracticeCta": "Abrir práctica",
       "otherLabel": "Otras herramientas"
+    },
+    "decisionFlow": {
+      "eyebrow": "Planifica en el orden correcto",
+      "title": "Cinco decisiones, en el orden en que ocurre tu viaje",
+      "body": "Cada paso lleva a la herramienta o guía que lo resuelve en un minuto.",
+      "steps": [
+        {
+          "title": "Preparar la llegada",
+          "desc": "eSIM, efectivo y las dos apps para instalar antes de aterrizar.",
+          "cta": "Preparar llegada"
+        },
+        {
+          "title": "Traslado del aeropuerto",
+          "desc": "Combina Narita, Haneda o KIX con tu primera zona de hotel.",
+          "cta": "Comparar traslados"
+        },
+        {
+          "title": "Dónde alojarte",
+          "desc": "Responde 4 toques — el Tokyo Stay Finder elige tu base.",
+          "cta": "Abrir Stay Finder"
+        },
+        {
+          "title": "Billete de Shinkansen",
+          "desc": "¿JR Pass o billetes sueltos? Los viajes cortos suelen no necesitar pass.",
+          "cta": "Comparar billetes"
+        },
+        {
+          "title": "Tu asiento",
+          "desc": "Lado derecho, asiento E para el Monte Fuji — confírmalo en el verificador.",
+          "cta": "Verificar asiento"
+        }
+      ]
     }
   },
   "guide": {

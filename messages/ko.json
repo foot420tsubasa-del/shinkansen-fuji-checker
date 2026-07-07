@@ -415,6 +415,38 @@
       "stationPracticeDesc": "여행 전에 일본의 역 사용법을 미리 연습하세요.",
       "stationPracticeCta": "연습 시작",
       "otherLabel": "기타 도구"
+    },
+    "decisionFlow": {
+      "eyebrow": "여행 순서대로 계획하기",
+      "title": "여행이 진행되는 순서대로, 다섯 가지 결정",
+      "body": "각 단계는 약 1분 만에 답을 주는 도구·가이드로 연결됩니다.",
+      "steps": [
+        {
+          "title": "도착 준비",
+          "desc": "eSIM, 현금, 착륙 전 설치할 앱 2가지.",
+          "cta": "도착 준비하기"
+        },
+        {
+          "title": "공항 이동",
+          "desc": "나리타·하네다·간사이를 첫 호텔 지역과 맞춰보세요.",
+          "cta": "이동 비교"
+        },
+        {
+          "title": "숙소 지역",
+          "desc": "4번 탭하면 Tokyo Stay Finder가 거점을 골라줍니다.",
+          "cta": "Stay Finder 열기"
+        },
+        {
+          "title": "신칸센 티켓",
+          "desc": "JR 패스 vs 개별 티켓? 짧은 여행은 대개 패스가 불필요.",
+          "cta": "티켓 비교"
+        },
+        {
+          "title": "좌석",
+          "desc": "후지산은 오른쪽 E석 — 체커로 확인하세요.",
+          "cta": "좌석 확인"
+        }
+      ]
     }
   },
   "guide": {
