@@ -45,6 +45,8 @@ const englishOnlyContentPaths = [
   "/nozomi-vs-hikari-vs-kodama",
   "/shinkansen-reserved-vs-non-reserved",
   "/shinkansen-green-car-worth-it",
+  "/tokyo-rail-3d.html",
+  "/kansai-rail-3d.html",
   "/tokyo-to-kyoto-shinkansen-ticket",
   "/areas-to-stay/tokyo-stay-area-index",
   "/areas-to-stay/tokyo-hotel-room-size-guide",

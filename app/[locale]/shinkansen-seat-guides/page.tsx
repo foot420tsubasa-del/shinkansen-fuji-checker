@@ -180,6 +180,14 @@ export default async function SeatGuidesHubPage({ params }: Props) {
               Compare stay areas
               <ArrowRight className="h-4 w-4 text-sky-600" />
             </Link>
+            {/* Plain <a>: static single-file tool outside the locale prefix. */}
+            <a
+              href="/tokyo-rail-3d.html"
+              className="flex items-center justify-between rounded-xl border border-sky-100 bg-white px-4 py-3 text-sm font-semibold text-slate-800 transition-colors hover:bg-sky-50"
+            >
+              Tokyo Rail 3D — interactive network model
+              <ArrowRight className="h-4 w-4 text-sky-600" />
+            </a>
           </div>
         </section>
 

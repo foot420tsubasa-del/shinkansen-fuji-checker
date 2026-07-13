@@ -1,0 +1,1982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kansai Rail 3D — Osaka · Kyoto · Kobe Railway Model | fujiseat</title>
+<meta name="description" content="Interactive 3D model of Kansai&#39;s railways on a real map: JR West, Osaka Metro and private lines from Kobe to Kyoto, Nara and Kansai Airport, with simulated weekday trains, in-car signage and flat line diagrams. A fujiseat.com project.">
+<link rel="canonical" href="https://fujiseat.com/kansai-rail-3d.html">
+<link rel="alternate" hreflang="ja" href="https://fujiseat.com/kansai-rail-3d.html?lang=ja">
+<link rel="alternate" hreflang="en" href="https://fujiseat.com/kansai-rail-3d.html?lang=en">
+<link rel="alternate" hreflang="zh-Hant" href="https://fujiseat.com/kansai-rail-3d.html?lang=zh-Hant">
+<link rel="alternate" hreflang="zh-Hans" href="https://fujiseat.com/kansai-rail-3d.html?lang=zh-Hans">
+<link rel="alternate" hreflang="ko" href="https://fujiseat.com/kansai-rail-3d.html?lang=ko">
+<link rel="alternate" hreflang="x-default" href="https://fujiseat.com/kansai-rail-3d.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="fujiseat — Japan Rail Seats, Stays &amp; Routes">
+<meta property="og:title" content="Kansai Rail 3D — Interactive Railway Model | fujiseat">
+<meta property="og:description" content="Interactive 3D model of Kansai's railways on a real map: JR West, Osaka Metro and private lines with approximate real depths, simulated weekday trains and in-car signage.">
+<meta property="og:url" content="https://fujiseat.com/kansai-rail-3d.html">
+<meta property="og:image" content="https://fujiseat.com/images/og/kansai-rail-3d.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kansai Rail 3D — Interactive Railway Model | fujiseat">
+<meta name="twitter:description" content="Interactive 3D model of Kansai's railways on a real map: JR West, Osaka Metro and private lines with approximate real depths, simulated weekday trains and in-car signage.">
+<meta name="twitter:image" content="https://fujiseat.com/images/og/kansai-rail-3d.png">
+
+<style>
+  :root{
+    --bg0:#ffffff; --bg1:#f3f6fa; --ink:#1c2740; --sub:#64748f; --acc:#e8637d; --acc2:#2f7fd6;
+    --panel:rgba(255,255,255,.94); --line:rgba(28,49,90,.13); --shadow:0 10px 34px rgba(30,45,80,.14);
+    --btn:#ffffff; --card:#ffffff; --bgTop:#eef3f9;
+  }
+  body.dark{
+    --bg0:#070a12; --bg1:#0c1424; --ink:#eef3ff; --sub:#93a4c8;
+    --panel:rgba(10,15,28,.9); --line:rgba(130,152,200,.18); --shadow:0 10px 34px rgba(0,0,0,.45);
+    --btn:rgba(255,255,255,.07); --card:#101726; --bgTop:#142038;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%;overflow:hidden}
+  body{
+    font-family:"Hiragino Sans","Yu Gothic UI","Noto Sans JP","Noto Sans",sans-serif;color:var(--ink);
+    background:radial-gradient(120% 90% at 50% 0%, var(--bgTop) 0%, var(--bg1) 45%, var(--bg0) 100%);
+  }
+  button{font:inherit;color:inherit;cursor:pointer}
+  select{font:inherit;color:var(--ink)}
+  #gl{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+  #gl:active{cursor:grabbing}
+
+  .ts{position:fixed;left:0;right:0;z-index:3;pointer-events:none;display:none}
+  body.tilt .ts{display:block}
+  #ts-top{top:0;height:26vh;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+    -webkit-mask-image:linear-gradient(#000,transparent);mask-image:linear-gradient(#000,transparent)}
+  #ts-bot{bottom:0;height:26vh;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);
+    -webkit-mask-image:linear-gradient(transparent,#000);mask-image:linear-gradient(transparent,#000)}
+  .cab-vig{position:fixed;inset:0;z-index:2;pointer-events:none;display:none;
+    background:radial-gradient(95% 80% at 50% 45%, transparent 55%, rgba(15,20,35,.6) 100%)}
+  body.cab .cab-vig{display:block}
+  body.cab #panel,body.cab #hint,body.cab #karte,body.cab #linebar{display:none}
+
+  header{position:fixed;top:0;left:0;right:0;z-index:6;pointer-events:none;
+    padding:10px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+  .brand{display:flex;gap:10px;align-items:flex-start}
+  .brand svg{flex:none;margin-top:2px}
+  .title h1{font-size:17px;font-weight:800;letter-spacing:.05em}
+  .title h1 b{color:var(--acc)}
+  .title p{font-size:10px;color:var(--sub);letter-spacing:.06em;margin-top:2px;max-width:46vw}
+  .stats{display:flex;gap:8px;margin-top:8px}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:5px 10px;box-shadow:var(--shadow)}
+  .stat b{display:block;font-size:8.5px;letter-spacing:.14em;color:var(--sub);font-weight:700;text-transform:uppercase}
+  .stat span{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums}
+  .stat small{font-size:9.5px;color:var(--sub);margin-left:4px}
+  nav{pointer-events:auto;display:flex;gap:7px;align-items:center}
+  nav a,nav button,nav select{font-size:12px;font-weight:700;text-decoration:none;color:var(--ink);
+    background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:8px 13px;box-shadow:var(--shadow);white-space:nowrap}
+  nav a:hover,nav button:hover{border-color:rgba(232,99,125,.6)}
+  nav a.fs{color:var(--acc2);font-weight:800}
+  nav select{appearance:none;-webkit-appearance:none;padding-right:24px;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6'%3E%3Cpath d='M0 0l4 6 4-6z' fill='%2364748f'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 10px center}
+
+  /* ---- control panel ---- */
+  #panel{position:fixed;left:12px;top:64px;bottom:118px;z-index:6;width:274px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);
+    display:flex;flex-direction:column;overflow:hidden;transition:transform .25s,opacity .25s}
+  #panel.closed{transform:translateX(calc(-100% - 20px));opacity:0;pointer-events:none}
+  #panel .scroll{overflow-y:auto;padding:4px 10px 12px;flex:1}
+  #panel .scroll::-webkit-scrollbar{width:7px}
+  #panel .scroll::-webkit-scrollbar-thumb{background:rgba(100,116,143,.35);border-radius:4px}
+  .sec{border-bottom:1px solid var(--line);padding:10px 2px}
+  .sec:last-child{border-bottom:none}
+  .sec>h3{font-size:9.5px;letter-spacing:.2em;color:var(--sub);margin-bottom:8px;font-weight:700}
+  .sec>h3 span{color:var(--ink);letter-spacing:.03em;margin-left:6px}
+  #search{width:100%;background:var(--btn);border:1px solid var(--line);border-radius:8px;
+    color:var(--ink);font:inherit;font-size:12.5px;padding:7px 10px;outline:none}
+  #search:focus{border-color:rgba(232,99,125,.6)}
+  #search-res{display:flex;flex-direction:column;gap:2px;margin-top:6px}
+  #search-res button{text-align:left;background:none;border:none;border-radius:7px;padding:6px 8px;font-size:12px}
+  #search-res button:hover{background:rgba(30,60,120,.07)}
+  #search-res button small{color:var(--sub);margin-left:6px;font-size:10px}
+  .quick{display:flex;gap:5px;margin-bottom:6px}
+  .quick button{flex:1;font-size:10.5px;font-weight:700;background:var(--btn);
+    border:1px solid var(--line);border-radius:7px;padding:5px 2px}
+  .quick button:hover{background:rgba(30,60,120,.06)}
+  .row{display:flex;align-items:center;gap:7px;padding:4px 5px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600}
+  .row:hover{background:rgba(30,60,120,.06)}
+  .row.active{background:rgba(232,99,125,.12)}
+  .row.active span{color:var(--acc)}
+  .row input{accent-color:var(--acc);flex:none}
+  .row i{width:13px;height:5px;border-radius:3px;flex:none}
+  .row span{flex:1;line-height:1.2}
+  .row small{display:block;font-size:9.5px;font-weight:500;color:var(--sub)}
+  .row em{font-style:normal;font-size:9.5px;color:var(--sub);font-variant-numeric:tabular-nums;white-space:nowrap}
+  body.latin .row span{font-size:11px}
+  .sec label.opt{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;padding:4px 2px;cursor:pointer}
+  .sec label.opt input{accent-color:var(--acc)}
+  .sec .slider-row{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--sub);padding:3px 2px}
+  .sec input[type=range]{flex:1;accent-color:var(--acc)}
+  .seg{display:flex;gap:5px}
+  .seg button{flex:1;font-size:11px;font-weight:700;background:var(--btn);
+    border:1px solid var(--line);border-radius:7px;padding:6px 0}
+  .seg button.on{background:rgba(232,99,125,.12);border-color:rgba(232,99,125,.5);color:var(--acc)}
+  .camgrid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+  .camgrid button{font-size:11px;font-weight:700;background:var(--btn);border:1px solid var(--line);border-radius:7px;padding:7px 0}
+  .camgrid button:hover{background:rgba(30,60,120,.06)}
+  #btn-tour{width:100%;margin-top:6px;font-size:12px;font-weight:800;letter-spacing:.04em;
+    background:linear-gradient(90deg,rgba(232,99,125,.14),rgba(47,127,214,.1));
+    border:1px solid rgba(232,99,125,.5);border-radius:8px;padding:9px 0;color:var(--acc)}
+  .note{font-size:9.5px;color:var(--sub);line-height:1.6}
+
+  /* ---- line badge bar ---- */
+  #linebar{position:fixed;left:50%;bottom:60px;transform:translateX(-50%);z-index:7;
+    display:flex;gap:5px;align-items:center;max-width:calc(100% - 24px);overflow-x:auto;
+    background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 12px;box-shadow:var(--shadow)}
+  #linebar::-webkit-scrollbar{height:5px}
+  #linebar::-webkit-scrollbar-thumb{background:rgba(100,116,143,.3);border-radius:3px}
+  .lb{flex:none;min-width:27px;height:27px;padding:0 5px;border-radius:999px;border:2px solid #fff;
+    color:#fff;font-size:9.5px;font-weight:900;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 1px 3px rgba(20,35,70,.3);transition:transform .12s}
+  .lb:hover{transform:scale(1.18)}
+  .lb.on{outline:2.5px solid var(--ink);outline-offset:1px;transform:scale(1.12)}
+  .lb-sep{flex:none;width:1px;height:20px;background:var(--line);margin:0 3px}
+
+  /* ---- time bar ---- */
+  #timebar{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:8;
+    display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);
+    border-radius:999px;padding:7px 13px;box-shadow:var(--shadow);white-space:nowrap}
+  #btn-pause{width:29px;height:29px;border-radius:50%;background:var(--btn);border:1px solid var(--line);font-size:11px}
+  #clock{font-size:17px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:.04em;min-width:58px;text-align:center}
+  .presets,.speeds{display:flex;gap:4px}
+  .presets button,.speeds button{font-size:10px;font-weight:700;background:var(--btn);
+    border:1px solid var(--line);border-radius:999px;padding:5px 9px}
+  .presets button.on,.speeds button.on{background:rgba(232,99,125,.12);border-color:rgba(232,99,125,.55);color:var(--acc)}
+  #traincount{font-size:11px;color:var(--sub);font-variant-numeric:tabular-nums}
+  #traincount b{color:var(--ink);font-size:13px}
+  #btn-photo{background:none;border:none;font-size:16px;padding:0 2px}
+
+  /* ---- strip: image-style flat line diagram ---- */
+  #strip{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);z-index:9;
+    width:min(1120px,calc(100% - 24px));background:var(--card);border:1px solid var(--line);
+    border-radius:14px;box-shadow:0 18px 60px rgba(25,40,80,.22);overflow:hidden;animation:rise .28s ease}
+  @keyframes rise{from{transform:translate(-50%,16px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
+  @media (prefers-reduced-motion:reduce){#strip{animation:none}}
+  .s-head{display:flex;align-items:center;gap:10px;padding:11px 14px 6px}
+  #s-badge{width:32px;height:32px;border-radius:50%;border:3.5px solid var(--c);flex:none;
+    display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--ink);background:#fff}
+  .s-head .tt b{font-size:16px;display:block;line-height:1.15}
+  .s-head .tt small{font-size:10px;color:var(--sub)}
+  .s-head .sp{flex:1}
+  #s-meta{font-size:10px;color:var(--sub);text-align:right;line-height:1.5;max-width:40%}
+  .s-names-toggle{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--sub);cursor:pointer;flex:none}
+  .s-names-toggle input{accent-color:var(--acc)}
+  #s-close{font-size:14px;color:var(--sub);background:var(--btn);border:1px solid var(--line);border-radius:8px;width:27px;height:27px;flex:none}
+  #s-profile{display:block;margin:0 14px}
+  .s-scroll{overflow-x:auto;overflow-y:hidden;padding:2px 12px 12px}
+  .s-scroll::-webkit-scrollbar{height:8px}
+  .s-scroll::-webkit-scrollbar-thumb{background:rgba(100,116,143,.4);border-radius:4px}
+  .s-bar{display:flex;min-width:max-content;padding:0 10px}
+  .st{width:56px;flex:none;display:flex;flex-direction:column;align-items:center;position:relative}
+  .st::before{content:"";position:absolute;left:0;right:0;top:calc(var(--xfh) + 9px);height:9px;background:var(--c);z-index:0}
+  .st:first-child::before{left:50%;border-radius:5px 0 0 5px}
+  .st:last-child::before{right:50%;border-radius:0 5px 5px 0}
+  .xf-col{height:var(--xfh);display:flex;flex-direction:column-reverse;align-items:center;gap:2px;padding-bottom:4px}
+  .xf-col i{width:15px;height:15px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
+    color:#fff;font-style:normal;font-size:6.5px;font-weight:900;cursor:pointer;border:1.5px solid #fff;
+    box-shadow:0 1px 2px rgba(20,35,70,.35);transition:transform .12s}
+  .xf-col i:hover{transform:scale(1.35)}
+  .dot-num{width:27px;height:27px;border-radius:50%;background:var(--btn);border:3px solid var(--c);z-index:1;flex:none;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+  .dot-num small{font-size:6.5px;font-weight:800;color:#1c2740}
+  .dot-num b{font-size:9px;font-weight:900;color:#1c2740}
+  .names{display:flex;gap:2px;justify-content:center;margin-top:7px;height:104px}
+  #strip.nonames .names{display:none}
+  #strip.nonames .s-scroll{padding-bottom:14px}
+  .names .nm{writing-mode:vertical-rl;text-orientation:upright;font-size:11.5px;font-weight:800;letter-spacing:.08em;
+    line-height:1.05;white-space:nowrap;background:none;border:none;color:var(--ink);cursor:pointer;padding:0;max-height:104px;overflow:hidden}
+  .names .rj{writing-mode:vertical-rl;text-orientation:mixed;font-size:8.5px;color:var(--sub);max-height:104px;overflow:hidden;white-space:nowrap}
+  body.latin .names .nm{text-orientation:mixed;letter-spacing:.02em;font-size:10px}
+  body.latin .names .rj{text-orientation:upright;letter-spacing:.06em}
+  .st.xfer .nm{color:var(--acc2)}
+  .names .nm:hover{color:var(--acc)}
+
+  /* ---- station karte ---- */
+  #karte{position:fixed;right:12px;top:64px;z-index:7;width:256px;background:var(--panel);
+    border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;animation:rise2 .25s ease}
+  @keyframes rise2{from{transform:translateX(14px);opacity:0}to{transform:none;opacity:1}}
+  .k-head{display:flex;align-items:flex-start;gap:8px;padding:11px 13px 7px}
+  .k-head>div{flex:1}
+  .k-head b{font-size:16px;display:block;line-height:1.2}
+  .k-head i{font-style:normal;font-size:10px;color:var(--sub)}
+  .k-head small{font-size:9px;letter-spacing:.14em;color:var(--sub);white-space:nowrap;padding-top:4px}
+  #k-close{font-size:13px;color:var(--sub);background:var(--btn);border:1px solid var(--line);border-radius:7px;width:25px;height:25px;flex:none}
+  #k-body{padding:2px 13px 12px}
+  .k-row{display:flex;align-items:center;gap:8px;padding:6px 0;border-top:1px dashed var(--line);font-size:12px;font-weight:600;cursor:pointer;background:none;border-left:none;border-right:none;border-bottom:none;width:100%;text-align:left;color:var(--ink)}
+  .k-row:first-child{border-top:none}
+  .k-row i{width:12px;height:12px;border-radius:3px;flex:none}
+  .k-row span{flex:1;line-height:1.25}
+  .k-row em{font-style:normal;font-size:11px;color:var(--sub);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .k-note{font-size:9px;color:var(--sub);padding-top:7px}
+
+  /* ---- chase / cab badge ---- */
+  #chase{position:fixed;right:12px;bottom:108px;z-index:9;display:flex;gap:8px;align-items:center;
+    background:var(--panel);border:1px solid rgba(232,99,125,.5);border-radius:999px;padding:7px 8px 7px 16px;box-shadow:var(--shadow)}
+  #chase b{font-size:12px;letter-spacing:.04em}
+  #chase button{font-size:11px;font-weight:700;border-radius:999px;border:1px solid var(--line);background:var(--btn);padding:5px 11px}
+  #btn-cab{border-color:rgba(232,99,125,.55);color:var(--acc)}
+
+  /* ---- in-car signage (kept dark, like real train displays) ---- */
+  #sign{position:fixed;top:58px;left:50%;transform:translateX(-50%);z-index:8;
+    width:min(690px,calc(100% - 20px));background:rgba(14,17,26,.95);border:1px solid rgba(255,255,255,.1);
+    border-radius:16px;padding:13px 18px 12px;color:#eef3ff;box-shadow:0 18px 50px rgba(10,18,40,.45)}
+  #sign .mut{color:#93a4c8}
+  .sg-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+  .sg-line{display:flex;gap:9px;align-items:center;min-width:0}
+  #sg-badge{min-width:30px;height:30px;padding:0 6px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+    color:#0b0e16;font-weight:900;font-size:12px;border:2.5px solid #fff;flex:none}
+  #sg-line-name{font-size:13.5px;font-weight:800;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  #sg-line-sub{font-size:9.5px;color:#93a4c8;display:block}
+  .sg-dir{text-align:right;flex:none}
+  #sg-for{font-size:8.5px;letter-spacing:.2em;color:#93a4c8;display:block;text-transform:uppercase}
+  #sg-dest{color:#ffb3c1;font-weight:800;font-size:13px}
+  .sg-mid{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:10px;margin-top:10px;align-items:start}
+  .sg-now small,.sg-next small{font-size:8.5px;letter-spacing:.16em;color:#93a4c8;display:block}
+  .sg-now b,.sg-next b{font-size:23px;font-weight:800;display:block;line-height:1.25;margin-top:2px}
+  .sg-next{text-align:right}
+  .sg-next b{color:#ffb3c1}
+  .sg-now span,.sg-next span{font-size:10px;color:#93a4c8}
+  .sg-prog{text-align:center;padding-top:5px}
+  #sg-dist{font-size:12px;font-variant-numeric:tabular-nums;font-weight:700}
+  .sg-prog .bar{display:block;height:4px;background:rgba(255,255,255,.16);border-radius:3px;margin:7px 12px;overflow:hidden}
+  #sg-bar{display:block;height:100%;background:linear-gradient(90deg,#ff8298,#7cc4ff);border-radius:3px;width:0%}
+  #sg-next-msg{font-size:12px;margin-top:5px;display:block}
+  #sg-next-msg b{color:#ffb3c1}
+  @media (max-width:640px){
+    .sg-now b,.sg-next b{font-size:17px}
+    #sg-line-sub{display:none}
+  }
+  #sg-strip{position:fixed;left:0;right:0;bottom:100px;z-index:7;display:flex;overflow-x:auto;
+    background:rgba(10,13,21,.94);border-top:1px solid rgba(255,255,255,.08);padding:12px 30px 10px;scroll-behavior:smooth;color:#eef3ff}
+  #sg-strip::-webkit-scrollbar{height:6px}
+  #sg-strip::-webkit-scrollbar-thumb{background:rgba(147,164,200,.35);border-radius:4px}
+  .sg-st{flex:none;width:48px;display:flex;flex-direction:column;align-items:center;position:relative}
+  .sg-st::before{content:"";position:absolute;top:5px;left:0;right:0;height:3px;background:var(--c)}
+  .sg-st:first-child::before{left:50%}
+  .sg-st:last-child::before{right:50%}
+  .sg-st i{width:10px;height:10px;border-radius:50%;background:var(--btn);border:2.5px solid var(--c);z-index:1;flex:none;transition:transform .2s}
+  .sg-st span{writing-mode:vertical-rl;text-orientation:upright;font-size:10.5px;font-weight:600;letter-spacing:.08em;line-height:1.05;margin-top:7px;max-height:92px;overflow:hidden;white-space:nowrap}
+  body.latin .sg-st span{text-orientation:mixed;letter-spacing:.02em;font-size:9.5px}
+  .sg-st.cur i{background:#ff8298;border-color:#fff;transform:scale(1.3)}
+  .sg-st.cur span{color:#ffb3c1;font-weight:800}
+  .sg-st.done{opacity:.35}
+
+  /* ---- tour overlay ---- */
+  #tour{position:fixed;inset:auto 0 108px 0;z-index:9;display:flex;justify-content:center;pointer-events:none}
+  #tour .card{pointer-events:auto;max-width:520px;background:var(--panel);border:1px solid rgba(232,99,125,.45);
+    border-radius:14px;padding:14px 18px;box-shadow:var(--shadow)}
+  #tour .card small{font-size:9px;letter-spacing:.25em;color:var(--acc);font-weight:800}
+  #tour .card h4{font-size:15px;margin:4px 0 4px}
+  #tour .card p{font-size:12px;color:var(--sub);line-height:1.7}
+  #tour .card button{margin-top:8px;font-size:11px;background:var(--btn);border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+
+  #tip{position:fixed;z-index:10;display:none;pointer-events:none;max-width:260px;background:var(--panel);
+    border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:12px;line-height:1.4;box-shadow:var(--shadow)}
+  #tip b{display:block;font-size:13px}
+  #tip .rj{display:block;color:var(--sub);font-size:10px;margin-bottom:4px}
+  #tip .chip{display:inline-block;color:#fff;font-size:10px;font-weight:700;border-radius:4px;padding:2px 6px;margin:2px 4px 0 0;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+
+  #hint{position:fixed;right:14px;bottom:104px;z-index:4;font-size:10px;color:var(--sub);text-align:right;line-height:1.7}
+  #hint b{color:var(--ink)}
+  #credit{position:fixed;left:12px;bottom:12px;z-index:4;font-size:9px;color:var(--sub);opacity:.85;line-height:1.5}
+  #credit a{color:var(--sub)}
+  #credit .fs{color:var(--acc2);font-weight:700}
+
+  [hidden]{display:none!important}
+  button:focus-visible,input:focus-visible,a:focus-visible,select:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+
+  @media (max-width:760px){
+    .title h1{font-size:14px}
+    .title p{display:none}
+    .stats{display:none}
+    #panel{width:min(80vw,274px);top:56px;bottom:150px}
+    #timebar{flex-wrap:wrap;justify-content:center;border-radius:16px;max-width:calc(100% - 20px);gap:6px}
+    .speeds{display:none}
+    #hint,#credit{display:none}
+    #karte{width:min(74vw,256px)}
+    #linebar{bottom:88px;max-width:calc(100% - 16px)}
+    #strip{bottom:128px}
+    #chase{bottom:136px}
+    .st{width:46px}
+    #sign{top:52px;padding:10px 12px 9px}
+    #sg-strip{bottom:128px}
+    .sg-st{width:40px}
+  }
+</style>
+
+<style>
+/* ---- fujiseat integration: simplified UI / CTAs / embed mode ---- */
+#btn-tour{display:none!important}
+#panel .sec:has(#sl-exagg){display:none!important}
+#panel label.opt:has(#ck-tilt),#panel label.opt:has(#ck-rot),#panel label.opt:has(#ck-pillar),#panel label.opt:has(#ck-shaft){display:none!important}
+.speeds button[data-s="30"],.speeds button[data-s="180"],.speeds button[data-s="480"]{display:none!important}
+.presets button[data-h="5"],.presets button[data-h="13"],.presets button[data-h="18"],.presets button[data-h="23.8"]{display:none!important}
+#s-profile{display:none!important}
+#karte .k-row em{font-size:9px;opacity:.62}
+.k-cta{display:flex;align-items:center;justify-content:center;margin-top:10px;padding:9px 12px;border-radius:12px;background:var(--acc);color:#fff;font-size:12px;font-weight:800;text-decoration:none;letter-spacing:.02em}
+.k-cta:hover{filter:brightness(1.08)}
+.s-guide{font-size:11px;font-weight:800;color:var(--acc);text-decoration:none;border:1px solid rgba(232,99,125,.5);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.s-guide:hover{background:rgba(232,99,125,.1)}
+body.embed header .stats,body.embed #hint,body.embed #credit,body.embed header nav a{display:none!important}
+body.embed header{padding-top:6px;padding-bottom:6px}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-label="Kansai Rail 3D — Osaka · Kyoto · Kobe Railway Model | fujiseat"></canvas>
+<div class="ts" id="ts-top"></div>
+<div class="ts" id="ts-bot"></div>
+<div class="cab-vig"></div>
+
+<header>
+  <div class="brand">
+    <svg width="34" height="26" viewBox="0 0 48 34" aria-hidden="true">
+      <path d="M2 32 L18 7 Q24 14 30 7 L46 32 Z" fill="#33456c"/>
+      <path d="M18 7 Q24 14 30 7 L33.5 12.5 Q31 16 28 13.5 Q26 17 24 14.5 Q22 17 20 13.5 Q17 16 14.5 12.5 Z" fill="#f2f6ff"/>
+      <circle cx="40" cy="6.5" r="4.2" fill="#e8637d"/>
+    </svg>
+    <div class="title">
+      <h1>KANSAI <b>RAIL 3D</b></h1>
+      <p id="sub"></p>
+      <div class="stats">
+        <div class="stat"><b data-i18n="statDeep">MAX DEPTH</b><span id="stat-deep">—</span><small id="stat-deep-st"></small></div>
+        <div class="stat"><b data-i18n="statHigh">MAX HEIGHT</b><span id="stat-high">—</span><small id="stat-high-st"></small></div>
+        <div class="stat"><b data-i18n="statLines">LINES</b><span id="stat-lines">—</span></div>
+      </div>
+    </div>
+  </div>
+  <nav>
+    <button id="btn-theme" type="button" title="Light / Dark">🌙</button>
+    <select id="lang" aria-label="Language"></select>
+    <button id="btn-panel" type="button" data-i18n="panel">PANEL</button>
+    <a href="tokyo-rail-3d.html">← TOKYO</a>
+    <a class="fs" href="https://fujiseat.com/" target="_blank" rel="noopener">fujiseat.com</a>
+  </nav>
+</header>
+
+<aside id="panel">
+  <div class="scroll">
+    <div class="sec">
+      <h3>SEARCH<span data-i18n="search"></span></h3>
+      <input id="search" type="text" data-i18n-ph="searchPh" placeholder="" autocomplete="off">
+      <div id="search-res"></div>
+    </div>
+    <div class="sec">
+      <h3>LINES<span data-i18n="lines"></span></h3>
+      <div class="quick" id="quick"></div>
+      <div id="legend-root"></div>
+    </div>
+    <div class="sec">
+      <h3>DEPTH<span data-i18n="depth"></span></h3>
+      <div class="slider-row"><span data-i18n="exaggL"></span> <input id="sl-exagg" type="range" min="25" max="250" value="100"> <span id="exagg-val">×—</span></div>
+      <p class="note" data-i18n="depthNote"></p>
+    </div>
+    <div class="sec">
+      <h3>MAP<span data-i18n="map"></span></h3>
+      <label class="opt"><input id="ck-map" type="checkbox"><span data-i18n="showMap"></span></label>
+      <div class="slider-row"><span data-i18n="opacity"></span> <input id="sl-map" type="range" min="10" max="90" value="45"> <span id="map-val">45%</span></div>
+    </div>
+    <div class="sec">
+      <h3>LABELS<span data-i18n="labels"></span></h3>
+      <div class="seg" id="seg-label">
+        <button data-mode="none" class="on" type="button" data-i18n="lNone"></button>
+        <button data-mode="hub" type="button" data-i18n="lHub"></button>
+        <button data-mode="all" type="button" data-i18n="lAll"></button>
+      </div>
+    </div>
+    <div class="sec">
+      <h3>DISPLAY<span data-i18n="display"></span></h3>
+      <label class="opt"><input id="ck-train" type="checkbox" checked><span data-i18n="oTrain"></span></label>
+      <label class="opt"><input id="ck-tilt" type="checkbox"><span data-i18n="oTilt"></span></label>
+      <label class="opt"><input id="ck-rot" type="checkbox" checked><span data-i18n="oRot"></span></label>
+      <label class="opt"><input id="ck-pillar" type="checkbox"><span data-i18n="oPillar"></span></label>
+      <label class="opt"><input id="ck-shaft" type="checkbox" checked><span data-i18n="oShaft"></span></label>
+      <label class="opt"><input id="ck-grid" type="checkbox" checked><span data-i18n="oGrid"></span></label>
+    </div>
+    <div class="sec">
+      <h3>CAMERA<span data-i18n="camera"></span></h3>
+      <div class="camgrid">
+        <button id="cam-bird" type="button" data-i18n="cBird"></button>
+        <button id="cam-top" type="button" data-i18n="cTop"></button>
+        <button id="cam-side" type="button" data-i18n="cSide"></button>
+        <button id="cam-under" type="button" data-i18n="cUnder"></button>
+      </div>
+      <button id="btn-tour" type="button" data-i18n="tour"></button>
+    </div>
+  </div>
+</aside>
+
+<div id="linebar" aria-label="line buttons"></div>
+
+<div id="timebar">
+  <button id="btn-pause" type="button" aria-label="pause">❚❚</button>
+  <span id="clock">08:00</span>
+  <span class="presets">
+    <button data-h="5"  type="button" data-i18n="pFirst"></button>
+    <button data-h="8"  type="button" class="on" data-i18n="pRush"></button>
+    <button data-h="13" type="button" data-i18n="pDay"></button>
+    <button data-h="18" type="button" data-i18n="pEve"></button>
+    <button data-h="23.8" type="button" data-i18n="pLast"></button>
+    <button data-h="now" type="button" data-i18n="pNow"></button>
+  </span>
+  <span class="speeds">
+    <button data-s="1"   type="button">×1</button>
+    <button data-s="30"  type="button">×30</button>
+    <button data-s="60"  type="button" class="on">×60</button>
+    <button data-s="180" type="button">×180</button>
+    <button data-s="480" type="button">×480</button>
+  </span>
+  <span id="traincount"><b>0</b> <span data-i18n="running"></span></span>
+  <button id="btn-photo" type="button" title="screenshot">📷</button>
+</div>
+
+<section id="strip" hidden aria-label="line diagram">
+  <div class="s-head">
+    <span id="s-badge"></span>
+    <div class="tt"><b id="s-name"></b><small id="s-sub"></small></div>
+    <span class="sp"></span>
+    <small id="s-meta"></small>
+    <label class="s-names-toggle"><input id="ck-stnames" type="checkbox" checked><span data-i18n="stNames"></span></label>
+    <button id="s-close" type="button" aria-label="close">×</button>
+  </div>
+  <svg id="s-profile" height="54"></svg>
+  <div class="s-scroll"><div class="s-bar" id="s-bar"></div></div>
+</section>
+
+<aside id="karte" hidden>
+  <div class="k-head">
+    <div><b id="k-name"></b><i id="k-name-sub"></i></div>
+    <small data-i18n="karte"></small>
+    <button id="k-close" type="button" aria-label="close">×</button>
+  </div>
+  <div id="k-body"></div>
+</aside>
+
+<div id="chase" hidden>
+  <b id="chase-label"></b>
+  <button id="btn-cab" type="button" data-i18n="cabBtn"></button>
+  <button id="btn-unchase" type="button" data-i18n="release"></button>
+</div>
+
+<div id="sign" hidden aria-label="in-car signage">
+  <div class="sg-top">
+    <div class="sg-line">
+      <i id="sg-badge"></i>
+      <div><b id="sg-line-name"></b><small id="sg-line-sub"></small></div>
+    </div>
+    <div class="sg-dir"><small id="sg-for"></small><b id="sg-dest"></b></div>
+  </div>
+  <div class="sg-mid">
+    <div class="sg-now"><small id="sg-now-l"></small><b id="sg-now"></b><span id="sg-now-r"></span></div>
+    <div class="sg-prog"><small id="sg-dist"></small><span class="bar"><i id="sg-bar"></i></span><b id="sg-next-msg"></b></div>
+    <div class="sg-next"><small id="sg-next-l"></small><b id="sg-next"></b><span id="sg-next-r"></span></div>
+  </div>
+</div>
+<div id="sg-strip" hidden></div>
+
+<div id="tour" hidden>
+  <div class="card">
+    <small>CINEMATIC TOUR <span id="tour-step"></span></small>
+    <h4 id="tour-title"></h4>
+    <p id="tour-text"></p>
+    <button id="tour-exit" type="button" data-i18n="tourEnd"></button>
+  </div>
+</div>
+
+<div id="tip" role="tooltip"></div>
+
+<div id="hint">
+  <span data-i18n="hint1"></span><br>
+  <b data-i18n="hint2"></b><br>
+  <span data-i18n="hint3"></span>
+</div>
+
+<div id="credit">
+  <span data-i18n="credit1"></span> ／ <span class="fs">fujiseat.com</span><br>
+  Map tiles © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors, © <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a> ・ Station data: ekidata.jp / <a href="https://www.odpt.org/" target="_blank" rel="noopener">ODPT</a>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+window.PAGE = {
+  center: [34.70, 135.50],
+  scale: 4,            // units per km(神戸〜京都〜奈良〜関空をカバー)
+  tubeR: 0.5,
+  exagg: 1.0,
+  tileZ: 11,
+  mapDefault: true,
+  labelScale: 5.5,
+  photoName: "fujiseat-kansai-rail-3d",
+  tour: [
+    { st:"梅田", title:"梅田 — 5駅が重なるキタの心臓", text:"大阪・梅田・東梅田・西梅田・北新地。名前の違う駅が縦にも横にも絡み合う巨大クラスタ。", phi:1.15, r:60, dur:8 },
+    { st:"本町", title:"本町 — 船場の十字路", text:"御堂筋・四つ橋・中央の3線が交差。大阪の地下鉄は碁盤の目の下を素直に走る。", phi:1.3, r:55, dur:7 },
+    { st:"大阪港", title:"中央線、海へ", text:"大阪港〜朝潮橋は高架区間。地下鉄が空を走り、湾岸のコスモスクエアへ向かう。", phi:1.0, r:72, dur:8 },
+    { st:"京橋", title:"京橋 — 東の玄関", text:"環状線・学研都市線・JR東西線・京阪・長堀鶴見緑地線が集結する乗換の要。", phi:1.05, r:60, dur:7 },
+    { st:"天王寺", title:"天王寺 — 南のターミナル", text:"環状線・大和路線・阪和線と御堂筋線・谷町線。ここから関空と奈良へ道が分かれる。", phi:1.0, r:66, dur:7 },
+    { st:"関西空港", title:"海を渡って、関西空港", text:"JRと南海が連絡橋で乗り入れる海上空港。模型の南の果て。", phi:0.95, r:120, dur:9 }
+  ],
+  groups: [
+    { id: "jr",      label: "JR西日本 ─ 地上・高架",   short: "JR" },
+    { id: "metro",   label: "Osaka Metro ─ 地層",      short: "地下鉄" },
+    { id: "private", label: "私鉄 ─ 地上",              short: "私鉄" }
+  ]
+};
+
+window.STATIONS = {
+  "大阪": [34.702398, 135.495188],
+  "天満": [34.704552, 135.511755],
+  "桜ノ宮": [34.704976, 135.520944],
+  "京橋": [34.696298, 135.533735],
+  "大阪城公園": [34.68858, 135.534482],
+  "森ノ宮": [34.68126, 135.533388],
+  "玉造": [34.67411, 135.531576],
+  "鶴橋": [34.665526, 135.530044],
+  "桃谷": [34.658453, 135.527908],
+  "寺田町": [34.647957, 135.523437],
+  "天王寺": [34.64698, 135.513834],
+  "新今宮": [34.649952, 135.501606],
+  "今宮": [34.654156, 135.492975],
+  "芦原橋": [34.658608, 135.48924],
+  "大正": [34.665718, 135.479407],
+  "弁天町": [34.668975, 135.462364],
+  "西九条": [34.682756, 135.466404],
+  "野田": [34.689248, 135.475287],
+  "福島": [34.696304, 135.487093],
+  "新大阪": [34.73373, 135.500754],
+  "吹田": [34.763209, 135.523642],
+  "茨木": [34.815091, 135.56208],
+  "高槻": [34.8512, 135.617016],
+  "長岡京": [34.923483, 135.700882],
+  "京都": [34.985555, 135.75785],
+  "尼崎": [34.718634, 135.417309],
+  "西宮": [34.738985, 135.348703],
+  "芦屋": [34.728052, 135.303969],
+  "三ノ宮": [34.694766, 135.195058],
+  "神戸": [34.679273, 135.178308],
+  "伊丹": [34.779875, 135.413618],
+  "宝塚": [34.810833, 135.340836],
+  "JR難波": [34.666438, 135.495265],
+  "久宝寺": [34.622558, 135.583988],
+  "王寺": [34.597558, 135.703605],
+  "法隆寺": [34.601377, 135.738604],
+  "奈良": [34.680482, 135.818935],
+  "ユニバーサルシティ": [34.667842, 135.438705],
+  "桜島": [34.662065, 135.432136],
+  "堺市": [34.577765, 135.498644],
+  "鳳": [34.531674, 135.458734],
+  "日根野": [34.39075, 135.331309],
+  "関西空港": [34.435924, 135.24351],
+  "御幣島": [34.71259, 135.45568],
+  "海老江": [34.694924, 135.474661],
+  "新福島": [34.695094, 135.48593],
+  "北新地": [34.698323, 135.497038],
+  "大阪天満宮": [34.697404, 135.513442],
+  "大阪城北詰": [34.694283, 135.525538],
+  "放出": [34.688103, 135.563296],
+  "住道": [34.706238, 135.621496],
+  "四条畷": [34.730128, 135.639297],
+  "JR淡路": [34.749, 135.5203],
+  "西中島南方": [34.726584, 135.498579],
+  "中津": [34.710227, 135.49432],
+  "梅田": [34.703583, 135.497253],
+  "淀屋橋": [34.692757, 135.50113],
+  "本町": [34.681936, 135.498982],
+  "心斎橋": [34.675012, 135.50033],
+  "なんば": [34.666759, 135.49914],
+  "大国町": [34.656075, 135.4978],
+  "動物園前": [34.648815, 135.504413],
+  "昭和町": [34.633564, 135.516954],
+  "西田辺": [34.621627, 135.515152],
+  "長居": [34.610387, 135.513265],
+  "東梅田": [34.701031, 135.49969],
+  "南森町": [34.69764, 135.511551],
+  "天満橋": [34.689952, 135.516879],
+  "谷町四丁目": [34.681914, 135.517253],
+  "谷町六丁目": [34.674923, 135.516912],
+  "谷町九丁目": [34.667146, 135.515801],
+  "四天王寺前夕陽ケ丘": [34.658536, 135.514134],
+  "阿倍野": [34.642374, 135.51198],
+  "西梅田": [34.699642, 135.495802],
+  "肥後橋": [34.691355, 135.496388],
+  "四ツ橋": [34.674112, 135.496783],
+  "花園町": [34.644371, 135.496636],
+  "岸里": [34.634372, 135.493859],
+  "玉出": [34.624096, 135.490527],
+  "住之江公園": [34.609269, 135.471879],
+  "コスモスクエア": [34.642888, 135.412472],
+  "大阪港": [34.65388, 135.434336],
+  "朝潮橋": [34.661035, 135.448863],
+  "九条": [34.674452, 135.474116],
+  "阿波座": [34.681483, 135.486297],
+  "堺筋本町": [34.681867, 135.506912],
+  "緑橋": [34.680756, 135.545242],
+  "深江橋": [34.67909, 135.557186],
+  "野田阪神": [34.694384, 135.476031],
+  "玉川": [34.689607, 135.476187],
+  "西長堀": [34.675256, 135.487223],
+  "桜川": [34.668322, 135.487413],
+  "日本橋": [34.667107, 135.506472],
+  "今里": [34.664788, 135.549917],
+  "天神橋筋六丁目": [34.710435, 135.510932],
+  "扇町": [34.703809, 135.5108],
+  "北浜": [34.691921, 135.506704],
+  "長堀橋": [34.674645, 135.506357],
+  "恵美須町": [34.654674, 135.505339],
+  "天下茶屋": [34.636847, 135.496673],
+  "ドーム前千代崎": [34.670757, 135.479415],
+  "松屋町": [34.675479, 135.512467],
+  "大阪ビジネスパーク": [34.692144, 135.529688],
+  "蒲生四丁目": [34.700368, 135.547709],
+  "今福鶴見": [34.701913, 135.560044],
+  "鶴見緑地": [34.710754, 135.580239],
+  "太子橋今市": [34.731376, 135.55493],
+  "清水": [34.721379, 135.563149],
+  "新森古市": [34.715197, 135.558296],
+  "関目成育": [34.712975, 135.546353],
+  "鴫野": [34.692687, 135.545115],
+  "大阪梅田": [34.703583, 135.497253],
+  "十三": [34.720226, 135.48248],
+  "淡路": [34.738827, 135.516527],
+  "茨木市": [34.816472, 135.575815],
+  "高槻市": [34.849905, 135.623265],
+  "烏丸": [35.003228, 135.75928],
+  "京都河原町": [35.003765, 135.769463],
+  "西宮北口": [34.745951, 135.356702],
+  "神戸三宮": [34.693705, 135.194092],
+  "豊中": [34.787248, 135.462073],
+  "阪神尼崎": [34.718634, 135.417309],
+  "甲子園": [34.723987, 135.363157],
+  "大阪難波": [34.667113, 135.499144],
+  "ドーム前": [34.67043, 135.47868],
+  "守口市": [34.735323, 135.565273],
+  "枚方市": [34.816171, 135.648814],
+  "祇園四条": [35.003714, 135.771128],
+  "出町柳": [35.029917, 135.772748],
+  "大阪上本町": [34.665513, 135.522189],
+  "生駒": [34.69299, 135.697741],
+  "近鉄奈良": [34.684323, 135.827472],
+  "堺": [34.581958, 135.468754],
+  "岸和田": [34.460304, 135.37819]
+};
+
+window.LINES = [
+  /* ===== JR ===== */
+  { id:"O", group:"jr", name:"大阪環状線", nameEn:"JR Osaka Loop Line", color:0xE60012, level:2.0, loop:true,
+    stations:["大阪","天満","桜ノ宮","京橋","大阪城公園","森ノ宮","玉造","鶴橋","桃谷","寺田町","天王寺","新今宮","今宮","芦原橋","大正","弁天町","西九条","野田","福島"] },
+  { id:"A", group:"jr", name:"JR京都線・神戸線", nameEn:"JR Kyoto Line / Kobe Line", note:"神戸—京都(主要駅)", color:0x0072BC, level:2.8,
+    stations:["神戸","三ノ宮","芦屋","西宮","尼崎","大阪","新大阪","吹田","茨木","高槻","長岡京","京都"] },
+  { id:"Q", group:"jr", name:"大和路線", nameEn:"JR Yamatoji Line", note:"JR難波—奈良(主要駅)", color:0x6DBB4A, level:2.4,
+    stations:["JR難波","今宮","新今宮","天王寺","久宝寺","王寺","法隆寺","奈良"] },
+  { id:"P", group:"jr", name:"JRゆめ咲線", nameEn:"JR Yumesaki Line", color:0xE799B0, level:2.2,
+    stations:["西九条","ユニバーサルシティ","桜島"] },
+  { id:"R", group:"jr", name:"阪和線・関西空港線", nameEn:"JR Hanwa Line / Airport Line", note:"天王寺—関西空港(主要駅)", color:0xF68B1E, level:2.6,
+    stations:["天王寺","堺市","鳳","日根野","関西空港"] },
+  { id:"GT", group:"jr", name:"JR宝塚線", nameEn:"JR Takarazuka Line", note:"大阪—宝塚(主要駅)", color:0xF8B500, level:3.2,
+    stations:["大阪","尼崎","伊丹","宝塚"] },
+  { id:"HG", group:"jr", name:"学研都市線", nameEn:"JR Gakkentoshi Line", note:"京橋—四条畷(主要駅)", color:0xE07EA5, level:3.0,
+    stations:["京橋","鴫野","放出","住道","四条畷"] },
+  { id:"FO", group:"jr", name:"おおさか東線", nameEn:"JR Osaka Higashi Line", note:"主要駅", color:0x40749B, level:3.4,
+    stations:["新大阪","JR淡路","放出","久宝寺"] },
+  { id:"TZ", group:"jr", name:"JR東西線", nameEn:"JR Tozai Line", note:"地下区間", color:0xC787AF, depthM:-15, prof:{ "北新地":-20, "尼崎":4, "京橋":6 },
+    stations:["尼崎","御幣島","海老江","新福島","北新地","大阪天満宮","大阪城北詰","京橋"] },
+
+  /* ===== Osaka Metro(開業順に深く) ===== */
+  { id:"M", group:"metro", name:"御堂筋線", nameEn:"Midosuji Line", note:"新大阪—長居", color:0xE5171F, depthM:-8, prof:{ "新大阪":12, "西中島南方":12 },
+    stations:["新大阪","西中島南方","中津","梅田","淀屋橋","本町","心斎橋","なんば","大国町","動物園前","天王寺","昭和町","西田辺","長居"] },
+  { id:"Y", group:"metro", name:"四つ橋線", nameEn:"Yotsubashi Line", color:0x0078BA, depthM:-12,
+    stations:["西梅田","肥後橋","本町","四ツ橋","なんば","大国町","花園町","岸里","玉出","住之江公園"] },
+  { id:"C", group:"metro", name:"中央線", nameEn:"Chuo Line", note:"コスモスクエア—深江橋", color:0x019A66, depthM:-13, prof:{ "コスモスクエア":-12, "大阪港":12, "朝潮橋":12, "弁天町":14 },
+    stations:["コスモスクエア","大阪港","朝潮橋","弁天町","九条","阿波座","本町","堺筋本町","谷町四丁目","森ノ宮","緑橋","深江橋"] },
+  { id:"T", group:"metro", name:"谷町線", nameEn:"Tanimachi Line", note:"東梅田—阿倍野", color:0x522886, depthM:-15,
+    stations:["東梅田","南森町","天満橋","谷町四丁目","谷町六丁目","谷町九丁目","四天王寺前夕陽ケ丘","天王寺","阿倍野"] },
+  { id:"S", group:"metro", name:"千日前線", nameEn:"Sennichimae Line", color:0xE44D93, depthM:-18,
+    stations:["野田阪神","玉川","阿波座","西長堀","桜川","なんば","日本橋","谷町九丁目","鶴橋","今里"] },
+  { id:"K", group:"metro", name:"堺筋線", nameEn:"Sakaisuji Line", color:0x814721, depthM:-16,
+    stations:["天神橋筋六丁目","扇町","南森町","北浜","堺筋本町","長堀橋","日本橋","恵美須町","動物園前","天下茶屋"] },
+  { id:"N", group:"metro", name:"長堀鶴見緑地線", nameEn:"Nagahori Tsurumi-ryokuchi Line", color:0xA9CC51, depthM:-25, prof:{ "京橋":-28 },
+    stations:["大正","ドーム前千代崎","西長堀","心斎橋","長堀橋","松屋町","谷町六丁目","玉造","森ノ宮","大阪ビジネスパーク","京橋","蒲生四丁目","今福鶴見","鶴見緑地"] },
+  { id:"I", group:"metro", name:"今里筋線", nameEn:"Imazatosuji Line", color:0xEE7B1A, depthM:-30,
+    stations:["太子橋今市","清水","新森古市","関目成育","蒲生四丁目","鴫野","緑橋","今里"] },
+
+  /* ===== 私鉄(主要駅) ===== */
+  { id:"HK1", group:"private", name:"阪急京都線", nameEn:"Hankyu Kyoto Line", note:"大阪梅田—京都河原町", color:0x7A1F2B, level:1.5,
+    stations:["大阪梅田","十三","淡路","茨木市","高槻市","烏丸","京都河原町"] },
+  { id:"HK2", group:"private", name:"阪急神戸線", nameEn:"Hankyu Kobe Line", color:0x7A1F2B, level:1.4,
+    stations:["大阪梅田","十三","西宮北口","神戸三宮"] },
+  { id:"HK3", group:"private", name:"阪急宝塚線", nameEn:"Hankyu Takarazuka Line", color:0x7A1F2B, level:1.3,
+    stations:["大阪梅田","十三","豊中","宝塚"] },
+  { id:"HS", group:"private", name:"阪神本線", nameEn:"Hanshin Main Line", color:0x0068B7, level:1.6,
+    stations:["大阪梅田","野田阪神","阪神尼崎","甲子園","神戸三宮"] },
+  { id:"HN", group:"private", name:"阪神なんば線", nameEn:"Hanshin Namba Line", color:0xEC6C00, level:1.7,
+    stations:["大阪難波","桜川","ドーム前","九条","西九条","阪神尼崎"] },
+  { id:"KH", group:"private", name:"京阪本線", nameEn:"Keihan Main Line", note:"淀屋橋—出町柳(主要駅)", color:0x00815C, level:1.8,
+    stations:["淀屋橋","北浜","天満橋","京橋","守口市","枚方市","祇園四条","出町柳"] },
+  { id:"KT", group:"private", name:"近鉄奈良線", nameEn:"Kintetsu Nara Line", color:0xC8102E, level:1.9,
+    stations:["大阪難波","日本橋","大阪上本町","鶴橋","生駒","近鉄奈良"] },
+  { id:"NK", group:"private", name:"南海本線・空港線", nameEn:"Nankai Main / Airport Line", note:"なんば—関西空港(主要駅)", color:0x123C7C, level:1.2,
+    stations:["なんば","新今宮","天下茶屋","堺","岸和田","関西空港"] }
+];
+
+window.HUBS = ["大阪","梅田","新大阪","京都","三ノ宮","神戸","天王寺","なんば","本町","京橋","鶴橋","弁天町","西九条","奈良","関西空港","堺","枚方市","西宮北口","生駒","住之江公園","北新地","宝塚"];
+
+window.ROMAJI = {"大阪": "Osaka", "天満": "Temma", "桜ノ宮": "Sakuranomiya", "京橋": "Kyobashi", "大阪城公園": "Osakajokoen", "森ノ宮": "Morinomiya", "玉造": "Tamatsukuri", "鶴橋": "Tsuruhashi", "桃谷": "Momodani", "寺田町": "Teradacho", "天王寺": "Tennoji", "新今宮": "Shin-Imamiya", "今宮": "Imamiya", "芦原橋": "Ashiharabashi", "大正": "Taisho", "弁天町": "Bentencho", "西九条": "Nishikujo", "野田": "Noda", "福島": "Fukushima", "新大阪": "Shin-Osaka", "吹田": "Suita", "茨木": "Ibaraki", "高槻": "Takatsuki", "長岡京": "Nagaokakyo", "京都": "Kyoto", "尼崎": "Amagasaki", "西宮": "Nishinomiya", "芦屋": "Ashiya", "三ノ宮": "Sannomiya", "神戸": "Kobe", "伊丹": "Itami", "宝塚": "Takarazuka", "JR難波": "JR-Namba", "久宝寺": "Kyuhoji", "王寺": "Oji", "法隆寺": "Horyuji", "奈良": "Nara", "ユニバーサルシティ": "Universal City", "桜島": "Sakurajima", "堺市": "Sakaishi", "鳳": "Otori", "日根野": "Hineno", "関西空港": "Kansai Airport", "御幣島": "Mitejima", "海老江": "Ebie", "新福島": "Shin-Fukushima", "北新地": "Kitashinchi", "大阪天満宮": "Osakatemmangu", "大阪城北詰": "Osakajo-kitazume", "放出": "Hanaten", "住道": "Suminodo", "四条畷": "Shijonawate", "JR淡路": "JR-Awaji", "西中島南方": "Nishinakajima-Minamigata", "中津": "Nakatsu", "梅田": "Umeda", "淀屋橋": "Yodoyabashi", "本町": "Hommachi", "心斎橋": "Shinsaibashi", "なんば": "Namba", "大国町": "Daikokucho", "動物園前": "Dobutsuen-mae", "昭和町": "Showacho", "西田辺": "Nishitanabe", "長居": "Nagai", "東梅田": "Higashi-Umeda", "南森町": "Minami-morimachi", "天満橋": "Temmabashi", "谷町四丁目": "Tanimachi 4-chome", "谷町六丁目": "Tanimachi 6-chome", "谷町九丁目": "Tanimachi 9-chome", "四天王寺前夕陽ケ丘": "Shitennoji-mae Yuhigaoka", "阿倍野": "Abeno", "西梅田": "Nishi-Umeda", "肥後橋": "Higobashi", "四ツ橋": "Yotsubashi", "花園町": "Hanazonocho", "岸里": "Kishinosato", "玉出": "Tamade", "住之江公園": "Suminoekoen", "コスモスクエア": "Cosmosquare", "大阪港": "Osakako", "朝潮橋": "Asashiobashi", "九条": "Kujo", "阿波座": "Awaza", "堺筋本町": "Sakaisuji-Hommachi", "緑橋": "Midoribashi", "深江橋": "Fukaebashi", "野田阪神": "Noda-Hanshin", "玉川": "Tamagawa", "西長堀": "Nishi-Nagahori", "桜川": "Sakuragawa", "日本橋": "Nippombashi", "今里": "Imazato", "天神橋筋六丁目": "Tenjimbashisuji 6-chome", "扇町": "Ogimachi", "北浜": "Kitahama", "長堀橋": "Nagahoribashi", "恵美須町": "Ebisucho", "天下茶屋": "Tengachaya", "ドーム前千代崎": "Dome-mae Chiyozaki", "松屋町": "Matsuyamachi", "大阪ビジネスパーク": "Osaka Business Park", "蒲生四丁目": "Gamo 4-chome", "今福鶴見": "Imafuku-Tsurumi", "鶴見緑地": "Tsurumi-ryokuchi", "太子橋今市": "Taishibashi-Imaichi", "清水": "Shimizu", "新森古市": "Shimmori-Furuichi", "関目成育": "Sekime-Seiiku", "鴫野": "Shigino", "大阪梅田": "Osaka-Umeda", "十三": "Juso", "淡路": "Awaji", "茨木市": "Ibaraki-shi", "高槻市": "Takatsuki-shi", "烏丸": "Karasuma", "京都河原町": "Kyoto-kawaramachi", "西宮北口": "Nishinomiya-kitaguchi", "神戸三宮": "Kobe-Sannomiya", "豊中": "Toyonaka", "阪神尼崎": "Hanshin Amagasaki", "甲子園": "Koshien", "大阪難波": "Osaka-Namba", "ドーム前": "Dome-mae", "守口市": "Moriguchi-shi", "枚方市": "Hirakata-shi", "祇園四条": "Gion-shijo", "出町柳": "Demachiyanagi", "大阪上本町": "Osaka-Uehommachi", "生駒": "Ikoma", "近鉄奈良": "Kintetsu-Nara", "堺": "Sakai", "岸和田": "Kishiwada"};
+window.PAGE.tourEn = [{"title": "Umeda — Five stations, one heart", "text": "Osaka, Umeda, Higashi-Umeda, Nishi-Umeda and Kitashinchi: different names, one giant tangled cluster."}, {"title": "Hommachi — The Semba crossroads", "text": "The Midosuji, Yotsubashi and Chuo lines intersect beneath Osaka's business grid."}, {"title": "Chuo Line, to the sea", "text": "Between Osakako and Asashiobashi the subway runs elevated, heading for the bay at Cosmosquare."}, {"title": "Kyobashi — The eastern gate", "text": "The Osaka Loop Line, Gakkentoshi Line, JR Tozai Line, Keihan and Nagahori Tsurumi-ryokuchi Line all converge here."}, {"title": "Tennoji — The southern terminal", "text": "The Loop, Yamatoji and Hanwa lines meet the Midosuji and Tanimachi. Roads split here for KIX and Nara."}, {"title": "Across the sea to Kansai Airport", "text": "JR and Nankai cross the long bridge to the airport on the water — the southern edge of the model."}];
+window.PAGE.subs = {"ja": "関西圏 立体路線模型 — JR西日本 × Osaka Metro × 私鉄", "en": "Kansai 3D railway model — JR West × Osaka Metro × Private lines", "zh-Hant": "關西圈 立體路線模型 — JR西日本 × Osaka Metro × 私鐵", "zh-Hans": "关西圈 立体路线模型 — JR西日本 × Osaka Metro × 私铁", "ko": "간사이권 입체 노선 모형 — JR서일본 × Osaka Metro × 사철"};
+
+</script>
+<script>
+window.I18N = (function () {
+  const S = {
+    ja: {
+      search: "駅検索", searchPh: "駅名を入力…", lines: "路線", all: "すべて",
+      depth: "深さ表現", exaggL: "強調", depthNote: "地下路線は実深度(概算)×強調倍率で表示",
+      map: "地図", showMap: "地形マップを表示", opacity: "濃さ",
+      labels: "駅名表示", stNames: "駅名を表示", lNone: "なし", lHub: "主要駅", lAll: "全駅",
+      display: "表示", oTrain: "列車の運行", oTilt: "ミニチュア効果(チルトシフト)", oRot: "自動回転",
+      oPillar: "模型支柱(地上との接続)", oShaft: "乗換駅の連絡柱", oGrid: "地上グリッド",
+      camera: "視点", cBird: "鳥瞰", cTop: "真上", cSide: "断面(横)", cUnder: "地底から",
+      tour: "▶ シネマティックツアー", tourEnd: "✕ ツアーを終了(ESC)",
+      pFirst: "始発", pRush: "朝ラッシュ", pDay: "日中", pEve: "夕ラッシュ", pLast: "終電", pNow: "いま",
+      running: "運行中", chase: "追尾中 — ESCで解除", cabBtn: "運転台", release: "解除",
+      karte: "駅カルテ", karteNote: "深度は代表値・概算。行をクリックで路線を選択", ctaHotel: "この駅周辺のホテル →", ctaGuide: "この路線の乗り方ガイド →",
+      ug: "地下路線", sf: "地上・高架", loop: "環状運転", stn: "駅",
+      deepest: "最深", highest: "最高", elevated: "高架", underground: "地下",
+      sgNow: "NOW —— いま", sgNext: "つぎ —— NEXT", sgFor: "ゆき",
+      dist: "あと {n} m", nextMsg: "次は {st} です", dest: "{st} 方面",
+      loopIn: "内回り", loopOut: "外回り",
+      hint1: "路線クリック＝停車駅と縦断面　駅クリック＝駅カルテ",
+      hint2: "列車をクリック → 追尾モード(ESCで解除)",
+      hint3: "ドラッグ:回転 ／ Shift+ドラッグ:移動 ／ ホイール:拡縮",
+      credit1: "駅位置は実データ準拠・深度は代表値(模式) ／ ダイヤは概略再現",
+      panel: "パネル", statDeep: "最深部", statHigh: "最高部", statLines: "路線数"
+    },
+    en: {
+      search: "Station search", searchPh: "Type a station name…", lines: "Lines", all: "All",
+      depth: "Depth", exaggL: "Exaggerate", depthNote: "Underground lines: approx. real depth × exaggeration",
+      map: "Map", showMap: "Show terrain map", opacity: "Opacity",
+      labels: "Station labels", stNames: "Show station names", lNone: "None", lHub: "Major", lAll: "All",
+      display: "Display", oTrain: "Running trains", oTilt: "Miniature effect (tilt-shift)", oRot: "Auto rotate",
+      oPillar: "Model pillars", oShaft: "Transfer columns", oGrid: "Ground grid",
+      camera: "Camera", cBird: "Bird's eye", cTop: "Top-down", cSide: "Cross-section", cUnder: "From below",
+      tour: "▶ Cinematic tour", tourEnd: "✕ End tour (ESC)",
+      pFirst: "First", pRush: "AM rush", pDay: "Midday", pEve: "PM rush", pLast: "Last", pNow: "Now",
+      running: "running", chase: "Following — ESC to exit", cabBtn: "Cab view", release: "Exit",
+      karte: "Station chart", karteNote: "Depths are approximate. Click a row to select the line", ctaHotel: "Hotels near this station →", ctaGuide: "How to ride this line →",
+      ug: "Underground", sf: "Surface / viaduct", loop: "Loop service", stn: "stations",
+      deepest: "Deepest", highest: "Highest", elevated: "Elevated", underground: "Depth",
+      sgNow: "NOW", sgNext: "NEXT", sgFor: "BOUND FOR",
+      dist: "{n} m to go", nextMsg: "Next stop: {st}", dest: "{st}",
+      loopIn: "Inner loop", loopOut: "Outer loop",
+      hint1: "Click a line = stops & profile / Click a station = chart",
+      hint2: "Click a train → follow mode (ESC to exit)",
+      hint3: "Drag: rotate / Shift+drag: pan / Wheel: zoom",
+      credit1: "Station positions from open data; depths representative / rough weekday timetable",
+      panel: "PANEL", statDeep: "Max depth", statHigh: "Max height", statLines: "Lines"
+    },
+    "zh-Hant": {
+      search: "車站搜尋", searchPh: "輸入車站名稱…", lines: "路線", all: "全部",
+      depth: "深度表現", exaggL: "強調", depthNote: "地下路線以實際深度(約略)×強調倍率顯示",
+      map: "地圖", showMap: "顯示地形圖", opacity: "濃度",
+      labels: "站名顯示", stNames: "顯示站名", lNone: "無", lHub: "主要車站", lAll: "全部車站",
+      display: "顯示", oTrain: "列車運行", oTilt: "微縮模型效果", oRot: "自動旋轉",
+      oPillar: "模型支柱", oShaft: "轉乘站連絡柱", oGrid: "地面網格",
+      camera: "視角", cBird: "鳥瞰", cTop: "正上方", cSide: "剖面(側)", cUnder: "從地底",
+      tour: "▶ 電影式導覽", tourEnd: "✕ 結束導覽(ESC)",
+      pFirst: "首班車", pRush: "早尖峰", pDay: "日間", pEve: "晚尖峰", pLast: "末班車", pNow: "現在",
+      running: "運行中", chase: "追蹤中 — 按ESC解除", cabBtn: "駕駛室", release: "解除",
+      karte: "車站資訊", karteNote: "深度為約略代表值。點擊列可選擇路線", ctaHotel: "這個車站附近的飯店 →", ctaGuide: "這條路線的乘車指南 →",
+      ug: "地下路線", sf: "地面・高架", loop: "環狀運行", stn: "站",
+      deepest: "最深", highest: "最高", elevated: "高架", underground: "地下",
+      sgNow: "NOW —— 本站", sgNext: "NEXT —— 下一站", sgFor: "開往",
+      dist: "還有 {n} m", nextMsg: "下一站 {st}", dest: "{st} 方向",
+      loopIn: "內環", loopOut: "外環",
+      hint1: "點路線＝停靠站與縱斷面　點車站＝車站資訊",
+      hint2: "點擊列車 → 追蹤模式(ESC解除)",
+      hint3: "拖曳:旋轉 ／ Shift+拖曳:平移 ／ 滾輪:縮放",
+      credit1: "車站位置依開放資料・深度為代表值 ／ 時刻表為概略重現",
+      panel: "面板", statDeep: "最深", statHigh: "最高", statLines: "路線數"
+    },
+    "zh-Hans": {
+      search: "车站搜索", searchPh: "输入车站名称…", lines: "路线", all: "全部",
+      depth: "深度表现", exaggL: "强调", depthNote: "地下路线以实际深度(约)×强调倍率显示",
+      map: "地图", showMap: "显示地形图", opacity: "浓度",
+      labels: "站名显示", stNames: "显示站名", lNone: "无", lHub: "主要车站", lAll: "全部车站",
+      display: "显示", oTrain: "列车运行", oTilt: "微缩模型效果", oRot: "自动旋转",
+      oPillar: "模型支柱", oShaft: "换乘站连络柱", oGrid: "地面网格",
+      camera: "视角", cBird: "鸟瞰", cTop: "正上方", cSide: "剖面(侧)", cUnder: "从地底",
+      tour: "▶ 电影式导览", tourEnd: "✕ 结束导览(ESC)",
+      pFirst: "首班车", pRush: "早高峰", pDay: "日间", pEve: "晚高峰", pLast: "末班车", pNow: "现在",
+      running: "运行中", chase: "追踪中 — 按ESC解除", cabBtn: "驾驶室", release: "解除",
+      karte: "车站信息", karteNote: "深度为约略代表值。点击行可选择路线", ctaHotel: "这个车站附近的酒店 →", ctaGuide: "这条路线的乘车指南 →",
+      ug: "地下路线", sf: "地面・高架", loop: "环状运行", stn: "站",
+      deepest: "最深", highest: "最高", elevated: "高架", underground: "地下",
+      sgNow: "NOW —— 本站", sgNext: "NEXT —— 下一站", sgFor: "开往",
+      dist: "还有 {n} m", nextMsg: "下一站 {st}", dest: "{st} 方向",
+      loopIn: "内环", loopOut: "外环",
+      hint1: "点路线＝停靠站与纵断面　点车站＝车站信息",
+      hint2: "点击列车 → 追踪模式(ESC解除)",
+      hint3: "拖拽:旋转 ／ Shift+拖拽:平移 ／ 滚轮:缩放",
+      credit1: "车站位置依开放数据・深度为代表值 ／ 时刻表为概略重现",
+      panel: "面板", statDeep: "最深", statHigh: "最高", statLines: "路线数"
+    },
+    ko: {
+      search: "역 검색", searchPh: "역 이름 입력…", lines: "노선", all: "전체",
+      depth: "깊이 표현", exaggL: "강조", depthNote: "지하 노선은 실제 깊이(약)×강조 배율로 표시",
+      map: "지도", showMap: "지형 지도 표시", opacity: "농도",
+      labels: "역명 표시", stNames: "역명 표시", lNone: "없음", lHub: "주요역", lAll: "전체역",
+      display: "표시", oTrain: "열차 운행", oTilt: "미니어처 효과", oRot: "자동 회전",
+      oPillar: "모형 지주", oShaft: "환승역 연결 기둥", oGrid: "지상 그리드",
+      camera: "시점", cBird: "조감", cTop: "바로 위", cSide: "단면(측면)", cUnder: "지하에서",
+      tour: "▶ 시네마틱 투어", tourEnd: "✕ 투어 종료(ESC)",
+      pFirst: "첫차", pRush: "아침 러시", pDay: "낮", pEve: "저녁 러시", pLast: "막차", pNow: "지금",
+      running: "운행 중", chase: "추적 중 — ESC로 해제", cabBtn: "운전실", release: "해제",
+      karte: "역 정보", karteNote: "깊이는 대략적인 대표값. 행을 클릭하면 노선 선택", ctaHotel: "이 역 주변 호텔 →", ctaGuide: "이 노선 이용 가이드 →",
+      ug: "지하 노선", sf: "지상・고가", loop: "순환 운행", stn: "역",
+      deepest: "최심", highest: "최고", elevated: "고가", underground: "지하",
+      sgNow: "NOW —— 현재", sgNext: "NEXT —— 다음", sgFor: "행선",
+      dist: "{n} m 남음", nextMsg: "다음 역은 {st} 입니다", dest: "{st} 방면",
+      loopIn: "내선순환", loopOut: "외선순환",
+      hint1: "노선 클릭＝정차역과 종단면　역 클릭＝역 정보",
+      hint2: "열차 클릭 → 추적 모드(ESC로 해제)",
+      hint3: "드래그:회전 ／ Shift+드래그:이동 ／ 휠:확대축소",
+      credit1: "역 위치는 오픈 데이터 기준・깊이는 대표값 ／ 시간표는 개략 재현",
+      panel: "패널", statDeep: "최심부", statHigh: "최고부", statLines: "노선 수"
+    }
+  };
+  const LANGS = [
+    { id: "ja", label: "日本語" }, { id: "en", label: "English" },
+    { id: "zh-Hant", label: "繁體中文" }, { id: "zh-Hans", label: "简体中文" }, { id: "ko", label: "한국어" }
+  ];
+  let cur = "en";
+  try {
+    const q = new URLSearchParams(location.search).get("lang");
+    const saved = localStorage.getItem("fs-rail3d-lang");
+    if (q && S[q]) cur = q; else if (saved && S[saved]) cur = saved;
+    else if ((navigator.language || "").startsWith("ja")) cur = "ja";
+    else if ((navigator.language || "").startsWith("ko")) cur = "ko";
+    else if (/^zh\b/.test(navigator.language || "")) cur = /TW|HK|Hant/i.test(navigator.language) ? "zh-Hant" : "zh-Hans";
+  } catch (e) { /* storage unavailable */ }
+
+  const isJa = () => cur === "ja";
+  const isCJK = () => cur === "ja" || cur.startsWith("zh");
+  const R = () => window.ROMAJI || {};
+  const api = {
+    langs: LANGS,
+    get lang() { return cur; },
+    set lang(v) {
+      if (!S[v]) return;
+      cur = v;
+      try { localStorage.setItem("fs-rail3d-lang", v); } catch (e) {}
+      document.documentElement.lang = v;
+      document.body.classList.toggle("latin", !isCJK());
+      api.applyStatic();
+      listeners.forEach(fn => fn(v));
+    },
+    t(key) { return (S[cur] && S[cur][key]) || S.en[key] || S.ja[key] || key; },
+    f(key, vars) {
+      let s = api.t(key);
+      Object.keys(vars || {}).forEach(k => { s = s.replace("{" + k + "}", vars[k]); });
+      return s;
+    },
+    stN(n) { return isCJK() ? n : (R()[n] || n); },            // primary
+    stS(n) { return isCJK() ? (R()[n] || "") : n; },           // subtitle
+    lineN(L) { return isCJK() ? L.name : (L.nameEn || L.name); },
+    noteLoc(note) {
+      if (!note || isCJK()) return note || "";
+      let s = note;
+      Object.keys(R()).sort((a, b) => b.length - a.length).forEach(k => { s = s.split(k).join(R()[k]); });
+      return s.replace("(6の字)", "(figure-6)").replace("主要駅", "major stops").replace("地下区間", "underground section");
+    },
+    groupLabel(g) { return isCJK() ? g.label : (g.labelEn || g.label); },
+    groupShort(g) { return isCJK() ? g.short : (g.shortEn || g.short); },
+    tourSteps(PAGE) { return isJa() ? PAGE.tour : PAGE.tour.map((s, i) => Object.assign({}, s, PAGE.tourEn[i])); },
+    applyStatic() {
+      document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = api.t(el.dataset.i18n); });
+      document.querySelectorAll("[data-i18n-ph]").forEach(el => { el.placeholder = api.t(el.dataset.i18nPh); });
+      const sub = document.getElementById("sub");
+      if (sub && window.PAGE && window.PAGE.subs) sub.textContent = window.PAGE.subs[cur] || window.PAGE.subs.en;
+    },
+    onChange(fn) { listeners.push(fn); }
+  };
+  const listeners = [];
+  return api;
+})();
+
+</script>
+<script>
+(function () {
+  'use strict';
+  const RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cfg = window.PAGE, ST = window.STATIONS, LINES = window.LINES, HUBS = window.HUBS || [];
+  const I = window.I18N;
+  const THEME = { dark: false };
+  const $ = id => document.getElementById(id);
+  const hex = c => '#' + c.toString(16).padStart(6, '0');
+
+  /* ================= projection (Web Mercator, units) ================= */
+  const D2R = Math.PI / 180, RAD = 6378137;
+  const clat = cfg.center[0], clng = cfg.center[1];
+  const mx = lng => RAD * lng * D2R;
+  const my = lat => RAD * Math.log(Math.tan(Math.PI / 4 + lat * D2R / 2));
+  const KU = Math.cos(clat * D2R) * cfg.scale / 1000; // units per mercator-meter
+  const mx0 = mx(clng), my0 = my(clat);
+  function posXZ(name) {
+    const s = ST[name];
+    if (!s) { console.warn('missing station:', name); return { x: 0, z: 0 }; }
+    return { x: (mx(s[1]) - mx0) * KU, z: -(my(s[0]) - my0) * KU };
+  }
+
+  /* depth (meters, negative=underground) of a station on a line */
+  const isUG = L => L.depthM !== undefined;
+  function depthOf(L, name) {
+    if (L.prof && L.prof[name] !== undefined) return L.prof[name];
+    return isUG(L) ? L.depthM : null;
+  }
+  let EX = cfg.exagg; // units per meter (underground exaggeration)
+  const trueUPM = cfg.scale / 1000;
+  function yOf(L, name) {
+    if (!isUG(L)) {
+      const p = L.prof && L.prof[name];
+      return p !== undefined ? Math.max(1.2, p * EX) : L.level;
+    }
+    const d = depthOf(L, name);
+    return d > 0 ? Math.max(1.2, d * EX) : d * EX;
+  }
+
+  /* ================= three basics ================= */
+  const canvas = $('gl');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, preserveDrawingBuffer: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+  renderer.setClearColor(0xf4f6fa, 1);
+  const scene = new THREE.Scene();
+  const hemi = new THREE.HemisphereLight(0xffffff, 0xcfd8e6, 1.0);
+  scene.add(hemi);
+  const dl = new THREE.DirectionalLight(0xffffff, 0.5);
+  dl.position.set(120, 260, 80);
+  scene.add(dl);
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.5, 9000);
+
+  /* ================= bounds ================= */
+  let minX = 1e9, maxX = -1e9, minZ = 1e9, maxZ = -1e9, minLat = 90, maxLat = -90, minLng = 999, maxLng = -999;
+  Object.keys(ST).forEach(n => {
+    const p = posXZ(n), s = ST[n];
+    minX = Math.min(minX, p.x); maxX = Math.max(maxX, p.x);
+    minZ = Math.min(minZ, p.z); maxZ = Math.max(maxZ, p.z);
+    minLat = Math.min(minLat, s[0]); maxLat = Math.max(maxLat, s[0]);
+    minLng = Math.min(minLng, s[1]); maxLng = Math.max(maxLng, s[1]);
+  });
+  const cx = (minX + maxX) / 2, cz = (minZ + maxZ) / 2;
+  const spanX = maxX - minX, spanZ = maxZ - minZ;
+
+  /* ================= ground: grid + CARTO tiles ================= */
+  const size = Math.max(spanX, spanZ) * 1.3;
+  let grid = null;
+  function makeGrid(dark) {
+    if (grid) { scene.remove(grid); grid.geometry.dispose(); grid.material.dispose(); }
+    const vis = grid ? grid.visible : true;
+    grid = new THREE.GridHelper(size, 34, dark ? 0x33415e : 0xaab6c9, dark ? 0x1c2740 : 0xd9e0ea);
+    grid.position.set(cx, 0, cz);
+    grid.material.transparent = true;
+    grid.material.opacity = dark ? 0.55 : 0.85;
+    grid.visible = vis;
+    scene.add(grid);
+  }
+  makeGrid(false);
+  const basePlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(size, size),
+    new THREE.MeshBasicMaterial({ color: 0xf0f4f9, transparent: true, opacity: 0.75, depthWrite: false, side: THREE.DoubleSide }));
+  basePlane.rotation.x = -Math.PI / 2;
+  basePlane.position.set(cx, -0.06, cz);
+  scene.add(basePlane);
+
+  const mapGroup = new THREE.Group();
+  mapGroup.visible = false;
+  scene.add(mapGroup);
+  let mapBuilt = false, mapOpacity = 0.45;
+  const mapMats = [];
+  function buildMap() {
+    if (mapBuilt) return; mapBuilt = true;
+    const z = cfg.tileZ, n = Math.pow(2, z);
+    const lon2t = lon => (lon + 180) / 360 * n;
+    const lat2t = lat => (1 - Math.log(Math.tan(lat * D2R) + 1 / Math.cos(lat * D2R)) / Math.PI) / 2 * n;
+    const t2lon = x => x / n * 360 - 180;
+    const t2lat = y => Math.atan(Math.sinh(Math.PI * (1 - 2 * y / n))) / D2R;
+    const padLng = (maxLng - minLng) * 0.06, padLat = (maxLat - minLat) * 0.06;
+    const x0 = Math.floor(lon2t(minLng - padLng)), x1 = Math.floor(lon2t(maxLng + padLng));
+    const y0 = Math.floor(lat2t(maxLat + padLat)), y1 = Math.floor(lat2t(minLat - padLat));
+    const loader = new THREE.TextureLoader();
+    loader.crossOrigin = 'anonymous';
+    let count = 0;
+    for (let tx = x0; tx <= x1; tx++) for (let ty = y0; ty <= y1; ty++) {
+      if (++count > 80) return;
+      const lngA = t2lon(tx), lngB = t2lon(tx + 1), latA = t2lat(ty), latB = t2lat(ty + 1);
+      const xa = (mx(lngA) - mx0) * KU, xb = (mx(lngB) - mx0) * KU;
+      const za = -(my(latA) - my0) * KU, zb = -(my(latB) - my0) * KU;
+      const tex = loader.load('https://basemaps.cartocdn.com/' + (THEME.dark ? 'dark_nolabels' : 'light_nolabels') + '/' + z + '/' + tx + '/' + ty + '.png');
+      tex.minFilter = THREE.LinearFilter;
+      const mat = new THREE.MeshBasicMaterial({ map: tex, transparent: true, opacity: mapOpacity, depthWrite: false });
+      mapMats.push(mat);
+      const mesh = new THREE.Mesh(new THREE.PlaneGeometry(Math.abs(xb - xa), Math.abs(zb - za)), mat);
+      mesh.rotation.x = -Math.PI / 2;
+      mesh.position.set((xa + xb) / 2, -0.03, (za + zb) / 2);
+      mapGroup.add(mesh);
+    }
+  }
+
+  /* ================= network build (rebuildable for exaggeration) ================= */
+  const netGroup = new THREE.Group();
+  scene.add(netGroup);
+  const lineGroups = {}, lineMats = {}, lineCurves = {};
+  const stationIndex = {};
+  let pickStations = [], pickTubes = [];
+  const shaftsG = new THREE.Group(), pillarsG = new THREE.Group();
+  pillarsG.visible = false;
+  scene.add(shaftsG, pillarsG);
+  const labelsG = new THREE.Group();
+  scene.add(labelsG);
+  let labelMode = 'none';
+
+  // static station index (lines per station)
+  LINES.forEach(L => L.stations.forEach(n => {
+    if (!stationIndex[n]) stationIndex[n] = { lines: [] };
+    if (!stationIndex[n].lines.includes(L)) stationIndex[n].lines.push(L);
+  }));
+
+  function disposeGroup(g) {
+    g.traverse(o => {
+      if (o.geometry) o.geometry.dispose();
+      if (o.material) { (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => { if (m.map) m.map.dispose(); m.dispose(); }); }
+    });
+    while (g.children.length) g.remove(g.children[0]);
+  }
+
+  function buildNetwork() {
+    clearSelection(); exitFollow();
+    disposeGroup(netGroup); disposeGroup(shaftsG); disposeGroup(pillarsG);
+    pickStations = []; pickTubes = [];
+    stopCache = {}; sgKey = '';
+    const shaftMat = new THREE.MeshBasicMaterial({ color: THEME.dark ? 0xcfe0ff : 0x51678c, transparent: true, opacity: THEME.dark ? 0.2 : 0.28, depthWrite: false });
+    const pillarMat = new THREE.MeshBasicMaterial({ color: THEME.dark ? 0x8fa8d8 : 0x74879f, transparent: true, opacity: THEME.dark ? 0.28 : 0.32, depthWrite: false });
+    shaftsG.userData.mat = shaftMat;
+    const stLevels = {}; // name -> [y...]
+    LINES.forEach(L => {
+      const prevVisible = lineGroups[L.id] ? lineGroups[L.id].visible : true;
+      const g = new THREE.Group();
+      g.visible = prevVisible;
+      const mat = new THREE.MeshLambertMaterial({ color: L.color, emissive: L.color, emissiveIntensity: THEME.dark ? 0.42 : 0.22 });
+      const pts = L.stations.map(n => { const p = posXZ(n); return new THREE.Vector3(p.x, yOf(L, n), p.z); });
+      const curve = new THREE.CatmullRomCurve3(pts, !!L.loop, 'catmullrom', 0.08);
+      lineCurves[L.id] = curve;
+      const tube = new THREE.Mesh(new THREE.TubeGeometry(curve, Math.max(64, pts.length * 10), cfg.tubeR, 8, !!L.loop), mat);
+      tube.userData.lineId = L.id;
+      g.add(tube); pickTubes.push(tube);
+      const smat = new THREE.MeshLambertMaterial({ color: 0xffffff, emissive: THEME.dark ? 0xdfe8ff : 0x5a6b8a, emissiveIntensity: THEME.dark ? 0.5 : 0.08 });
+      const sGeo = new THREE.SphereGeometry(cfg.tubeR * 1.8, 12, 10);
+      L.stations.forEach((n, i) => {
+        const m = new THREE.Mesh(sGeo, smat);
+        m.position.copy(pts[i]);
+        m.userData.station = n; m.userData.lineId = L.id;
+        g.add(m); pickStations.push(m);
+        (stLevels[n] = stLevels[n] || []).push(pts[i].y);
+      });
+      lineGroups[L.id] = g; lineMats[L.id] = [mat, smat];
+      netGroup.add(g);
+    });
+    // transfer shafts + model pillars
+    Object.keys(stLevels).forEach(n => {
+      const ys = stLevels[n], p = posXZ(n);
+      const top = Math.max(...ys), bot = Math.min(...ys);
+      if (ys.length >= 2 && top - bot > 0.8) {
+        const cyl = new THREE.Mesh(new THREE.CylinderGeometry(cfg.tubeR * 0.5, cfg.tubeR * 0.5, top - bot + 2, 8), shaftMat);
+        cyl.position.set(p.x, (top + bot) / 2, p.z);
+        shaftsG.add(cyl);
+      }
+      // pillar: connect deepest/highest to ground (模型の支柱)
+      const far = Math.abs(bot) > Math.abs(top) ? bot : top;
+      if (Math.abs(far) > 1.5) {
+        const pil = new THREE.Mesh(new THREE.BoxGeometry(cfg.tubeR * 0.4, Math.abs(far), cfg.tubeR * 0.4), pillarMat);
+        pil.position.set(p.x, far / 2, p.z);
+        pillarsG.add(pil);
+      }
+    });
+    if (selHold) applySelDim();
+    buildLabels();
+  }
+
+  /* ================= labels ================= */
+  function makeLabel(text, sub) {
+    const c = document.createElement('canvas');
+    const fs = 42, pad = 16;
+    let ctx = c.getContext('2d');
+    ctx.font = '700 ' + fs + 'px "Hiragino Sans","Yu Gothic UI",sans-serif';
+    const w = Math.ceil(ctx.measureText(text).width) + pad * 2;
+    c.width = w; c.height = fs + pad * 2;
+    ctx = c.getContext('2d');
+    ctx.font = '700 ' + fs + 'px "Hiragino Sans","Yu Gothic UI",sans-serif';
+    ctx.textBaseline = 'middle'; ctx.textAlign = 'center';
+    ctx.lineWidth = 8; ctx.strokeStyle = THEME.dark ? 'rgba(5,9,18,.92)' : 'rgba(255,255,255,.96)';
+    ctx.strokeText(text, w / 2, c.height / 2 + 2);
+    ctx.fillStyle = THEME.dark ? (sub ? '#ffd76a' : '#dfe8fb') : (sub ? '#c9445e' : '#22304a');
+    ctx.fillText(text, w / 2, c.height / 2 + 2);
+    const tex = new THREE.CanvasTexture(c);
+    tex.minFilter = THREE.LinearFilter;
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false }));
+    const k = cfg.labelScale || 5.5;
+    sp.scale.set(k * c.width / c.height, k, 1);
+    sp.renderOrder = 10;
+    return sp;
+  }
+  function buildLabels() {
+    disposeGroup(labelsG);
+    if (labelMode === 'none') return;
+    const names = labelMode === 'hub' ? HUBS : Object.keys(ST);
+    const hubSet = new Set(HUBS);
+    names.forEach(n => {
+      if (!ST[n] || !stationIndex[n]) return;
+      const sp = makeLabel(I.stN(n), hubSet.has(n));
+      const p = posXZ(n);
+      let top = 2;
+      stationIndex[n].lines.forEach(L => { top = Math.max(top, yOf(L, n)); });
+      sp.position.set(p.x, top + (labelMode === 'all' ? 3.4 : 4.6), p.z);
+      labelsG.add(sp);
+    });
+  }
+
+  /* ================= trains ================= */
+  const trainsG = new THREE.Group();
+  scene.add(trainsG);
+  const trainRT = {}; // id -> {pool:[mesh], active:n}
+  const TRAIN_MAX = 46;
+  function vmaxOf(L) { return L.vmax || (L.group === 'jr' ? 72 : L.group === 'private' ? 62 : 44); }
+  function headwayMin(h) {
+    if (h < 5 || h >= 24.6) return Infinity;
+    if (h < 7) return 7;
+    if (h < 9.5) return 2.5;
+    if (h < 17) return 5;
+    if (h < 19.5) return 3;
+    return 6;
+  }
+  function buildTrains() {
+    disposeGroup(trainsG);
+    LINES.forEach(L => {
+      const bodyMat = new THREE.MeshLambertMaterial({ color: THEME.dark ? 0xffffff : L.color, emissive: L.color, emissiveIntensity: THEME.dark ? 0.6 : 0.35 });
+      const geo = new THREE.BoxGeometry(cfg.tubeR * 5.2, cfg.tubeR * 1.7, cfg.tubeR * 1.7);
+      const pool = [];
+      for (let i = 0; i < TRAIN_MAX; i++) {
+        const m = new THREE.Mesh(geo, bodyMat);
+        m.visible = false;
+        m.userData = { lineId: L.id, idx: i };
+        trainsG.add(m); pool.push(m);
+      }
+      trainRT[L.id] = { pool };
+    });
+  }
+  const _ahead = new THREE.Vector3();
+  function updateTrains() {
+    let running = 0;
+    const h = simTime / 3600;
+    const hw = headwayMin(h);
+    LINES.forEach(L => {
+      const rt = trainRT[L.id]; if (!rt) return;
+      const curve = lineCurves[L.id]; if (!curve) return;
+      const show = trainsOn && lineGroups[L.id].visible && hw !== Infinity;
+      const lenKm = curve.getLength() / cfg.scale;
+      const tripS = lenKm / vmaxOf(L) * 3600;
+      const nPerDir = show ? Math.max(1, Math.min(TRAIN_MAX / 2 | 0, Math.round(tripS / 60 / hw))) : 0;
+      for (let i = 0; i < TRAIN_MAX; i++) {
+        const m = rt.pool[i];
+        const dir = i % 2 ? -1 : 1;
+        const k = i >> 1;
+        if (k >= nPerDir) { m.visible = false; continue; }
+        m.visible = true; running++;
+        let t, mdir = dir;
+        if (L.loop) {
+          t = ((dir > 0 ? simTime : -simTime) / tripS + k / nPerDir + (dir > 0 ? 0 : 0.5)) % 1;
+          if (t < 0) t += 1;
+          mdir = dir;
+        } else {
+          let u = (simTime / (2 * tripS) + k / nPerDir + (dir > 0 ? 0 : 0.5)) % 1;
+          if (u < 0) u += 1;
+          t = u < 0.5 ? u * 2 : 2 - 2 * u;
+          mdir = u < 0.5 ? 1 : -1;
+        }
+        t = Math.min(0.9995, Math.max(0.0005, t));
+        const p = curve.getPointAt(t);
+        m.position.copy(p);
+        const t2 = Math.min(0.9999, t + 0.0008);
+        curve.getPointAt(t2, _ahead);
+        m.lookAt(_ahead);
+        m.rotateY(Math.PI / 2);
+        m.userData.t = t; m.userData.dir = mdir;
+      }
+    });
+    $('traincount').firstElementChild.textContent = running;
+  }
+
+  /* ================= time engine ================= */
+  let simTime = 8 * 3600, simSpeed = 60, paused = false, trainsOn = true;
+  const clockEl = $('clock');
+  function fmtClock(s) {
+    s = ((s % 86400) + 86400) % 86400;
+    const hh = String(Math.floor(s / 3600)).padStart(2, '0');
+    const mm = String(Math.floor(s % 3600 / 60)).padStart(2, '0');
+    return hh + ':' + mm;
+  }
+  document.querySelectorAll('.presets button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.presets button').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      if (b.dataset.h === 'now') {
+        const d = new Date();
+        simTime = d.getHours() * 3600 + d.getMinutes() * 60;
+      } else simTime = parseFloat(b.dataset.h) * 3600;
+    });
+  });
+  document.querySelectorAll('.speeds button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('.speeds button').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      simSpeed = parseFloat(b.dataset.s);
+    });
+  });
+  $('btn-pause').addEventListener('click', () => {
+    paused = !paused;
+    $('btn-pause').textContent = paused ? '▶' : '❚❚';
+  });
+
+  /* ================= camera / controls / modes ================= */
+  const target = new THREE.Vector3(cx, -6, cz);
+  let theta = -0.55, phi = 1.0;
+  let radius = Math.max(spanX / 1.1, spanZ) * 1.3 + 40;
+  const R0 = radius;
+  let auto = !RM;
+  let mode = 'orbit'; // orbit | chase | cab | tour
+  let followTrain = null;
+
+  function applyCam() {
+    if (mode === 'cab' && followTrain) {
+      const L = LINES.find(l => l.id === followTrain.userData.lineId);
+      const curve = lineCurves[L.id];
+      const t = followTrain.userData.t || 0.5;
+      const p = curve.getPointAt(t);
+      camera.position.set(p.x, p.y + cfg.tubeR * 2.4, p.z);
+      const t2 = Math.min(0.9999, t + 0.004);
+      curve.getPointAt(t2, _ahead);
+      camera.lookAt(_ahead.x, _ahead.y + cfg.tubeR * 2, _ahead.z);
+      return;
+    }
+    if (mode === 'chase' && followTrain) target.lerp(followTrain.position, 0.12);
+    camera.position.set(
+      target.x + radius * Math.sin(phi) * Math.sin(theta),
+      target.y + radius * Math.cos(phi),
+      target.z + radius * Math.sin(phi) * Math.cos(theta));
+    camera.lookAt(target);
+  }
+  function clampR(r) { return Math.min(R0 * 3, Math.max(R0 * 0.05, r)); }
+  function pan(dx, dy) {
+    const right = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 0);
+    const up = new THREE.Vector3().setFromMatrixColumn(camera.matrix, 1);
+    target.addScaledVector(right, -dx * radius * 0.0011);
+    target.addScaledVector(up, dy * radius * 0.0011);
+  }
+  function flyTo(name, r) {
+    const p = posXZ(name);
+    target.set(p.x, 0, p.z);
+    radius = r || Math.max(R0 * 0.12, 55);
+    exitFollow(); mode = 'orbit';
+  }
+  const camPresets = {
+    'cam-bird': () => { theta = -0.55; phi = 1.0; radius = R0; target.set(cx, -6, cz); },
+    'cam-top': () => { phi = 0.06; radius = R0 * 0.95; target.set(cx, 0, cz); },
+    'cam-side': () => { phi = 1.5; radius = R0 * 0.7; target.set(cx, -8, cz); },
+    'cam-under': () => { phi = 2.35; radius = R0 * 0.65; target.set(cx, -4, cz); }
+  };
+  Object.keys(camPresets).forEach(id => $(id).addEventListener('click', () => { exitFollow(); mode = 'orbit'; auto = false; camPresets[id](); }));
+
+  const ptrs = new Map();
+  let lastPinch = 0;
+  canvas.addEventListener('pointerdown', e => {
+    ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY, sx: e.clientX, sy: e.clientY, b: e.button, moved: false });
+    canvas.setPointerCapture(e.pointerId);
+    auto = false; $('ck-rot').checked = false;
+    if (mode === 'tour') endTour();
+  });
+  canvas.addEventListener('pointermove', e => {
+    if (!ptrs.has(e.pointerId)) { hover(e); return; }
+    const p = ptrs.get(e.pointerId);
+    const dx = e.clientX - p.x, dy = e.clientY - p.y;
+    p.x = e.clientX; p.y = e.clientY;
+    if (Math.hypot(e.clientX - p.sx, e.clientY - p.sy) > 6) p.moved = true;
+    if (mode === 'cab') return;
+    if (ptrs.size === 2) {
+      const a = [...ptrs.values()];
+      const d = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y);
+      if (lastPinch) radius = clampR(radius * lastPinch / d);
+      lastPinch = d;
+      pan(dx / 2, dy / 2);
+    } else if (p.b === 2 || e.shiftKey) pan(dx, dy);
+    else {
+      theta -= dx * 0.005;
+      phi = Math.min(2.6, Math.max(0.06, phi - dy * 0.005));
+    }
+  });
+  canvas.addEventListener('pointerup', e => {
+    const p = ptrs.get(e.pointerId);
+    ptrs.delete(e.pointerId);
+    if (ptrs.size < 2) lastPinch = 0;
+    if (p && !p.moved && p.b === 0 && ptrs.size === 0) pick(e);
+  });
+  canvas.addEventListener('pointercancel', e => { ptrs.delete(e.pointerId); if (ptrs.size < 2) lastPinch = 0; });
+  canvas.addEventListener('contextmenu', e => e.preventDefault());
+  canvas.addEventListener('wheel', e => {
+    e.preventDefault(); auto = false; $('ck-rot').checked = false;
+    if (mode === 'cab') return;
+    radius = clampR(radius * Math.exp(e.deltaY * 0.0011));
+  }, { passive: false });
+
+  /* ================= picking / tooltip ================= */
+  const ray = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+  const tip = $('tip');
+  let hovered = null;
+  function castAt(e, objs) {
+    const r = canvas.getBoundingClientRect();
+    mouse.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(mouse, camera);
+    return ray.intersectObjects(objs, false).filter(h => h.object.visible && (!h.object.parent.isGroup || h.object.parent.visible));
+  }
+  function hover(e) {
+    const hits = castAt(e, pickStations);
+    const name = hits.length ? hits[0].object.userData.station : null;
+    if (name === hovered) { if (name) placeTip(e); return; }
+    hovered = name;
+    if (!name) { tip.style.display = 'none'; return; }
+    tip.innerHTML = '<b>' + I.stN(name) + '</b><span class="rj">' + I.stS(name) + '</span>' + stationIndex[name].lines.map(L =>
+      '<span class="chip" style="background:' + hex(L.color) + '">' + I.lineN(L) + '</span>').join('');
+    tip.style.display = 'block';
+    placeTip(e);
+  }
+  function placeTip(e) {
+    tip.style.left = Math.min(innerWidth - tip.offsetWidth - 10, e.clientX + 14) + 'px';
+    tip.style.top = (e.clientY + 14) + 'px';
+  }
+  function pick(e) {
+    // trains first, then stations, then tubes
+    let hits = castAt(e, trainsG.children);
+    if (hits.length) { startChase(hits[0].object); return; }
+    hits = castAt(e, pickStations);
+    if (hits.length) { openKarte(hits[0].object.userData.station); return; }
+    hits = castAt(e, pickTubes);
+    if (hits.length) { selectLine(hits[0].object.userData.lineId); return; }
+    clearSelection(); closeKarte();
+  }
+
+  /* ================= chase / cab ================= */
+  const chaseEl = $('chase');
+  function startChase(train) {
+    followTrain = train;
+    try { if (window.fsTrack) window.fsTrack('rail3d_follow_start', { event_category: 'rail3d', event_label: train.userData.lineId || '', line_id: train.userData.lineId || '' }); } catch (e) {}
+    mode = 'chase';
+    radius = Math.min(radius, Math.max(R0 * 0.08, 42));
+    const L = LINES.find(l => l.id === train.userData.lineId);
+    $('chase-label').textContent = I.lineN(L) + ' — ' + I.t('chase');
+    chaseEl.hidden = false;
+  }
+  function exitFollowUI() { chaseEl.hidden = true; }
+  function exitFollow() {
+    document.body.classList.remove('cab');
+    if (!followTrain) return;
+    followTrain = null;
+    if (mode === 'chase' || mode === 'cab') mode = 'orbit';
+    exitFollowUI();
+    sgHide();
+  }
+  $('btn-cab').addEventListener('click', () => { if (followTrain) { mode = 'cab'; document.body.classList.add('cab'); } });
+  $('btn-unchase').addEventListener('click', exitFollow);
+
+  /* ================= line selection + strip + profile ================= */
+  const strip = $('strip'), sBar = $('s-bar'), sProfile = $('s-profile');
+  const rowEls = {}, checks = {};
+  const lbEls = {};
+  let selHold = null;
+  function setDim(id, dim) {
+    lineMats[id].forEach(m => { m.transparent = dim; m.opacity = dim ? 0.08 : 1; m.needsUpdate = true; });
+    trainRT[id] && trainRT[id].pool.forEach(m => { m.material.transparent = dim; m.material.opacity = dim ? 0.06 : 1; });
+  }
+  function applySelDim() { LINES.forEach(l => setDim(l.id, l.id !== selHold)); }
+  function selectLine(id) {
+    if (selHold === id) { clearSelection(); return; }
+    selHold = id;
+    applySelDim();
+    shaftsG.userData.mat.opacity = 0.05;
+    lineGroups[id].visible = true; checks[id].checked = true;
+    Object.keys(rowEls).forEach(k => rowEls[k].classList.toggle('active', k === id));
+    Object.keys(lbEls).forEach(k => lbEls[k].classList.toggle('on', k === id));
+    const L = LINES.find(l => l.id === id);
+    const c = hex(L.color);
+    $('s-badge').style.borderColor = c;
+    $('s-badge').textContent = L.id;
+    $('s-sub').textContent = I.lang === 'ja' ? (L.nameEn || '') : L.name;
+    $('s-name').textContent = I.lineN(L);
+    // depth summary
+    let dmin = 1e9, dminSt = '', dmax = -1e9, dmaxSt = '';
+    L.stations.forEach(n => {
+      const d = isUG(L) ? depthOf(L, n) : (L.prof && L.prof[n] !== undefined ? L.prof[n] : null);
+      if (d === null) return;
+      if (d < dmin) { dmin = d; dminSt = n; }
+      if (d > dmax) { dmax = d; dmaxSt = n; }
+    });
+    let meta = (isUG(L) ? I.t('ug') : I.t('sf')) + (L.loop ? ' ・ ' + I.t('loop') : '') + ' ・ ' + L.stations.length + ' ' + I.t('stn');
+    if (isUG(L) && dmin < 1e9) meta += ' ・ ' + I.t('deepest') + ' ' + dmin + 'm (' + I.stN(dminSt) + ')' + (dmax > 0 ? ' ・ ' + I.t('highest') + ' +' + dmax + 'm (' + I.stN(dmaxSt) + ')' : '');
+    $('s-meta').textContent = meta;
+    /* fujiseat integration: line guide CTA + select event */
+    try {
+      let g = document.getElementById('s-guide');
+      const gl = (window.FS_LINKS && window.FS_LINKS.lines) ? window.FS_LINKS.lines[id] : null;
+      if (!g) {
+        g = document.createElement('a');
+        g.id = 's-guide'; g.className = 's-guide'; g.target = '_top';
+        g.setAttribute('data-i18n', 'ctaGuide');
+        const headEl = strip.querySelector('.s-head');
+        headEl.insertBefore(g, headEl.querySelector('.s-names-toggle'));
+        g.addEventListener('click', function () {
+          if (window.fsTrack) window.fsTrack('cta_click', { event_category: 'rail3d', event_label: 'rail3d_strip_guide:' + (selHold || ''), placement: 'rail3d_strip_guide', href: g.getAttribute('href') || '', label: selHold || '' });
+        });
+      }
+      g.textContent = I.t('ctaGuide');
+      if (gl) { g.href = gl.href; g.style.display = ''; } else { g.style.display = 'none'; }
+      if (window.fsTrack) window.fsTrack('rail3d_line_select', { event_category: 'rail3d', event_label: id, line_id: id });
+    } catch (e) {}
+    const maxXf = Math.max(0, ...L.stations.map(n => stationIndex[n].lines.length - 1));
+    const xfh = Math.min(8, maxXf) * 17 + 6;
+    sBar.style.setProperty('--c', c);
+    sBar.style.setProperty('--xfh', xfh + 'px');
+    sBar.innerHTML = '';
+    L.stations.forEach((n, i) => {
+      const others = stationIndex[n].lines.filter(o => o.id !== id);
+      const st = document.createElement('div');
+      st.className = 'st' + (others.length ? ' xfer' : '');
+      const num = String(i + 1).padStart(2, '0');
+      st.innerHTML =
+        '<span class="xf-col">' + others.slice(0, 8).map(o =>
+          '<i style="background:' + hex(o.color) + '" title="' + I.lineN(o) + '" data-line="' + o.id + '">' + o.id + '</i>').join('') + '</span>' +
+        '<span class="dot-num"><small>' + L.id + '</small><b>' + num + '</b></span>' +
+        '<span class="names"><button class="nm" type="button">' + I.stN(n) + '</button><span class="rj">' + I.stS(n) + '</span></span>';
+      st.querySelector('.nm').addEventListener('click', () => { flyTo(n); openKarte(n); });
+      sBar.appendChild(st);
+    });
+    sBar.querySelectorAll('.xf-col i').forEach(el =>
+      el.addEventListener('click', ev => { ev.stopPropagation(); selectLine(el.dataset.line); }));
+    drawProfile(L);
+    strip.hidden = false;
+  }
+  function drawProfile(L) {
+    const W = Math.max(400, L.stations.length * 54), H = 54;
+    sProfile.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    sProfile.style.width = '100%';
+    if (!isUG(L) && !L.prof) { sProfile.innerHTML = ''; sProfile.setAttribute('height', 0); return; }
+    sProfile.setAttribute('height', H);
+    const ds = L.stations.map(n => { const d = depthOf(L, n); return d === null ? 0 : d; });
+    const vmin = Math.min(...ds), vmax = Math.max(...ds);
+    if (vmin === vmax) { sProfile.innerHTML = ''; sProfile.setAttribute('height', 0); return; }
+    const dmin = Math.min(vmin, -5), dmax = Math.max(vmax, 5);
+    const yFor = d => 8 + (dmax - d) / (dmax - dmin) * (H - 18);
+    const xFor = i => 26 + i * (W - 52) / Math.max(1, ds.length - 1);
+    const gl = yFor(0);
+    let html = '<line x1="10" x2="' + (W - 10) + '" y1="' + gl + '" y2="' + gl + '" stroke="rgba(90,110,150,.4)" stroke-dasharray="4 4"/>' +
+      '<text x="12" y="' + (gl - 3) + '" fill="rgba(90,110,150,.75)" font-size="8">GL</text>';
+    const ptsStr = ds.map((d, i) => xFor(i) + ',' + yFor(d)).join(' ');
+    html += '<polyline points="' + ptsStr + '" fill="none" stroke="' + hex(L.color) + '" stroke-width="2.5" stroke-linejoin="round"/>';
+    const marks = ds.indexOf(vmin) === ds.indexOf(vmax) ? [ds.indexOf(vmin)] : [ds.indexOf(vmin), ds.indexOf(vmax)];
+    marks.forEach(i => {
+      const d = ds[i];
+      html += '<circle cx="' + xFor(i) + '" cy="' + yFor(d) + '" r="3" fill="#fff" stroke="' + hex(L.color) + '" stroke-width="2"/>' +
+        '<text x="' + xFor(i) + '" y="' + (yFor(d) + (d < 0 ? 12 : -6)) + '" style="fill:var(--ink)" font-size="9" text-anchor="middle">' + (d > 0 ? '+' : '') + d + 'm</text>';
+    });
+    sProfile.innerHTML = html;
+  }
+  function clearSelection() {
+    if (selHold === null) return;
+    selHold = null;
+    LINES.forEach(l => setDim(l.id, false));
+    if (shaftsG.userData.mat) shaftsG.userData.mat.opacity = THEME.dark ? 0.2 : 0.28;
+    Object.keys(rowEls).forEach(k => rowEls[k].classList.remove('active'));
+    Object.keys(lbEls).forEach(k => lbEls[k].classList.remove('on'));
+    strip.hidden = true;
+  }
+  $('s-close').addEventListener('click', clearSelection);
+  $('ck-stnames').addEventListener('change', e => { strip.classList.toggle('nonames', !e.target.checked); });
+
+  /* ================= station karte ================= */
+  const karte = $('karte');
+  let lastKarte = null;
+  function openKarte(name, noFly) {
+    lastKarte = name;
+    $('k-name').textContent = I.stN(name);
+    $('k-name-sub').textContent = I.stS(name);
+    const body = $('k-body');
+    body.innerHTML = '';
+    const rows = stationIndex[name].lines.map(L => {
+      const d = depthOf(L, name);
+      const y = isUG(L) ? d : (L.prof && L.prof[name] !== undefined ? L.prof[name] : L.level / EX);
+      return { L, d, y };
+    }).sort((a, b) => b.y - a.y);
+    rows.forEach(r => {
+      const b = document.createElement('button');
+      b.className = 'k-row'; b.type = 'button';
+      const dep = isUG(r.L)
+        ? (r.d > 0 ? I.t('elevated') + ' +' + r.d + 'm' : I.t('underground') + ' ' + r.d + 'm')
+        : (r.L.prof && r.L.prof[name] !== undefined ? I.t('elevated') + ' +' + r.L.prof[name] + 'm' : I.t('sf'));
+      b.innerHTML = '<i style="background:' + hex(r.L.color) + '"></i><span>' + I.lineN(r.L) + '</span><em>' + dep + '</em>';
+      b.addEventListener('click', () => selectLine(r.L.id));
+      body.appendChild(b);
+    });
+    const note = document.createElement('p');
+    note.className = 'k-note';
+    note.textContent = I.t('karteNote');
+    body.appendChild(note);
+    /* fujiseat integration: hotel CTA resolved from the runtime link master */
+    try {
+      const fsLink = (window.FS_LINKS && window.FS_LINKS.stations) ? window.FS_LINKS.stations[name] : null;
+      if (fsLink) {
+        const cta = document.createElement('a');
+        cta.className = 'k-cta';
+        cta.href = fsLink.href;
+        cta.target = '_top';
+        if (fsLink.external) { cta.target = '_blank'; cta.rel = 'sponsored nofollow noopener noreferrer'; }
+        cta.setAttribute('data-i18n', 'ctaHotel');
+        cta.textContent = I.t('ctaHotel');
+        cta.addEventListener('click', function () {
+          if (window.fsTrack) window.fsTrack(fsLink.external ? 'affiliate_click' : 'cta_click', {
+            event_category: 'hotel', event_label: 'rail3d_karte_hotel:' + name,
+            placement: 'rail3d_karte_hotel', href: fsLink.href, label: name,
+            provider: fsLink.provider, category: 'hotel'
+          });
+        });
+        body.appendChild(cta);
+      }
+      if (!noFly && window.fsTrack) window.fsTrack('rail3d_station_view', { event_category: 'rail3d', event_label: name, station: name });
+    } catch (e) {}
+    karte.hidden = false;
+    if (!noFly) flyTo(name, Math.max(R0 * 0.1, 48));
+  }
+  function closeKarte() { karte.hidden = true; }
+  $('k-close').addEventListener('click', closeKarte);
+
+  /* ================= legend / panel ================= */
+  const legendRoot = $('legend-root'), quick = $('quick');
+  function setAll(pred) {
+    LINES.forEach(L => {
+      const v = pred(L);
+      lineGroups[L.id].visible = v;
+      checks[L.id].checked = v;
+    });
+  }
+  function addQuick(label, pred) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.textContent = label;
+    b.addEventListener('click', () => setAll(pred));
+    quick.appendChild(b);
+  }
+  function buildLegend() {
+    legendRoot.innerHTML = ''; quick.innerHTML = '';
+    const groupsEl = {};
+    cfg.groups.forEach(g => {
+      const h = document.createElement('h3');
+      h.style.cssText = 'font-size:9px;letter-spacing:.14em;color:var(--sub);padding:7px 2px 3px';
+      h.textContent = I.groupLabel(g);
+      legendRoot.appendChild(h);
+      const d = document.createElement('div');
+      legendRoot.appendChild(d);
+      groupsEl[g.id] = d;
+    });
+    LINES.forEach(L => {
+      const row = document.createElement('div');
+      row.className = 'row' + (selHold === L.id ? ' active' : '');
+      const depTxt = isUG(L) ? L.depthM + 'm' : 'GL';
+      const noteTxt = L.note ? '<small>' + I.noteLoc(L.note) + '</small>' : '';
+      row.innerHTML = '<input type="checkbox" aria-label="' + I.lineN(L) + '"><i style="background:' + hex(L.color) + '"></i>' +
+        '<span>' + I.lineN(L) + noteTxt + '</span><em>' + depTxt + '</em>';
+      const cb = row.querySelector('input');
+      cb.checked = lineGroups[L.id] ? lineGroups[L.id].visible : true;
+      cb.addEventListener('click', ev => ev.stopPropagation());
+      cb.addEventListener('change', () => { lineGroups[L.id].visible = cb.checked; });
+      row.addEventListener('click', () => selectLine(L.id));
+      checks[L.id] = cb; rowEls[L.id] = row;
+      groupsEl[L.group].appendChild(row);
+    });
+    addQuick(I.t('all'), () => true);
+    cfg.groups.forEach(g => addQuick(I.groupShort(g), L => L.group === g.id));
+  }
+  buildLegend();
+  const linebar = $('linebar');
+  function buildLinebar() {
+    linebar.innerHTML = '';
+    Object.keys(lbEls).forEach(k => delete lbEls[k]);
+    cfg.groups.forEach((g, gi) => {
+      if (gi) { const s = document.createElement('i'); s.className = 'lb-sep'; linebar.appendChild(s); }
+      LINES.filter(L => L.group === g.id).forEach(L => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'lb' + (selHold === L.id ? ' on' : '');
+        b.style.background = hex(L.color);
+        b.textContent = L.id;
+        b.title = I.lineN(L);
+        b.setAttribute('aria-label', I.lineN(L));
+        b.addEventListener('click', () => selectLine(L.id));
+        lbEls[L.id] = b;
+        linebar.appendChild(b);
+      });
+    });
+  }
+  buildLinebar();
+  $('btn-panel').addEventListener('click', () => $('panel').classList.toggle('closed'));
+
+  /* ================= search ================= */
+  const searchIn = $('search'), searchRes = $('search-res');
+  searchIn.addEventListener('input', () => {
+    const q = searchIn.value.trim();
+    searchRes.innerHTML = '';
+    if (!q) return;
+    const ql = q.toLowerCase();
+    const RJ = window.ROMAJI || {};
+    Object.keys(ST).filter(n => n.includes(q) || (RJ[n] || '').toLowerCase().includes(ql)).slice(0, 8).forEach(n => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.innerHTML = I.stN(n) + '<small>' + I.stS(n) + '</small>';
+      b.addEventListener('click', () => { openKarte(n); searchRes.innerHTML = ''; searchIn.value = I.stN(n); });
+      searchRes.appendChild(b);
+    });
+  });
+
+  /* ================= panel toggles ================= */
+  $('ck-train').addEventListener('change', e => { trainsOn = e.target.checked; });
+  $('ck-tilt').addEventListener('change', e => document.body.classList.toggle('tilt', e.target.checked));
+  $('ck-rot').addEventListener('change', e => { auto = e.target.checked; });
+  $('ck-pillar').addEventListener('change', e => { pillarsG.visible = e.target.checked; });
+  $('ck-shaft').addEventListener('change', e => { shaftsG.visible = e.target.checked; });
+  $('ck-grid').addEventListener('change', e => { grid.visible = basePlane.visible = e.target.checked; });
+  $('ck-map').addEventListener('change', e => { if (e.target.checked) buildMap(); mapGroup.visible = e.target.checked; });
+  $('sl-map').addEventListener('input', e => {
+    mapOpacity = e.target.value / 100;
+    $('map-val').textContent = e.target.value + '%';
+    mapMats.forEach(m => m.opacity = mapOpacity);
+  });
+  const slEx = $('sl-exagg');
+  function exaggLabel() { $('exagg-val').textContent = '×' + Math.round(EX / trueUPM); }
+  slEx.addEventListener('change', () => { EX = cfg.exagg * slEx.value / 100; exaggLabel(); buildNetwork(); });
+  slEx.addEventListener('input', exaggLabel);
+  document.querySelectorAll('#seg-label button').forEach(b => {
+    b.addEventListener('click', () => {
+      document.querySelectorAll('#seg-label button').forEach(x => x.classList.remove('on'));
+      b.classList.add('on');
+      labelMode = b.dataset.mode;
+      buildLabels();
+    });
+  });
+  $('btn-photo').addEventListener('click', () => {
+    const a = document.createElement('a');
+    a.download = (cfg.photoName || 'rail-strata') + '-' + fmtClock(simTime).replace(':', '') + '.png';
+    a.href = renderer.domElement.toDataURL('image/png');
+    a.click();
+  });
+
+  /* ================= cinematic tour ================= */
+  const tourEl = $('tour');
+  let tourIdx = -1, tourT = 0;
+  const tourFrom = { theta: 0, phi: 0, radius: 0, tx: 0, tz: 0 };
+  function startTour() {
+    if (!cfg.tour || !cfg.tour.length) return;
+    mode = 'tour'; exitFollow(); clearSelection(); closeKarte();
+    tourIdx = -1;
+    nextTourStep();
+    tourEl.hidden = false;
+  }
+  function nextTourStep() {
+    tourIdx++;
+    if (tourIdx >= cfg.tour.length) { endTour(); return; }
+    const s = I.tourSteps(cfg)[tourIdx];
+    tourFrom.theta = theta; tourFrom.phi = phi; tourFrom.radius = radius;
+    tourFrom.tx = target.x; tourFrom.tz = target.z;
+    tourT = 0;
+    $('tour-step').textContent = (tourIdx + 1) + ' / ' + cfg.tour.length;
+    $('tour-title').textContent = s.title;
+    $('tour-text').textContent = s.text;
+  }
+  function tickTour(dt) {
+    const s = cfg.tour[tourIdx]; if (!s) return;
+    tourT += dt / (s.dur || 7);
+    const p = posXZ(s.st);
+    const k = Math.min(1, tourT * 2.2);
+    const e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+    theta = tourFrom.theta + ((s.theta !== undefined ? s.theta : tourFrom.theta + 0.7) - tourFrom.theta) * e;
+    phi = tourFrom.phi + ((s.phi || 1.05) - tourFrom.phi) * e;
+    radius = tourFrom.radius + ((s.r || R0 * 0.14) - tourFrom.radius) * e;
+    target.x = tourFrom.tx + (p.x - tourFrom.tx) * e;
+    target.z = tourFrom.tz + (p.z - tourFrom.tz) * e;
+    target.y = -4;
+    if (tourT > 0.55) theta += dt * 0.12; // slow drift while reading
+    if (tourT >= 1) nextTourStep();
+  }
+  function endTour() {
+    if (mode === 'tour') mode = 'orbit';
+    tourEl.hidden = true;
+    tourIdx = -1;
+  }
+  $('btn-tour').addEventListener('click', startTour);
+  $('tour-exit').addEventListener('click', endTour);
+
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape') { exitFollow(); endTour(); clearSelection(); closeKarte(); }
+  });
+
+  /* ================= header stats ================= */
+  function updateStats() {
+    let deep = 0, deepSt = '', deepLn = '', high = 0, highSt = '', highLn = '';
+    LINES.forEach(L => L.stations.forEach(n => {
+      const d = depthOf(L, n);
+      if (d === null) return;
+      if (d < deep) { deep = d; deepSt = n; deepLn = L.name; }
+      if (d > high) { high = d; highSt = n; highLn = L.name; }
+    }));
+    $('stat-deep').textContent = deep + 'm';
+    $('stat-deep-st').textContent = I.stN(deepSt);
+    $('stat-high').textContent = '+' + high + 'm';
+    $('stat-high-st').textContent = I.stN(highSt) + (I.lang === 'ja' ? '(' + highLn.replace('線', '') + '線)' : '');
+    $('stat-lines').textContent = LINES.length;
+  }
+  updateStats();
+
+  /* ================= in-car signage ================= */
+  const sign = $('sign'), sgStrip = $('sg-strip');
+  let stopCache = {};
+  let sgKey = '', sgNextIdx = -1;
+  function stopsOf(id) {
+    if (stopCache[id]) return stopCache[id];
+    const curve = lineCurves[id], L = LINES.find(l => l.id === id);
+    const S = 600, pts = [];
+    for (let i = 0; i <= S; i++) pts.push(curve.getPointAt(i / S));
+    const arr = L.stations.map(n => {
+      const p = posXZ(n);
+      let bi = 0, bd = Infinity;
+      for (let i = 0; i <= S; i++) {
+        const dx = pts[i].x - p.x, dz = pts[i].z - p.z, d = dx * dx + dz * dz;
+        if (d < bd) { bd = d; bi = i; }
+      }
+      return { name: n, u: bi / S };
+    });
+    stopCache[id] = arr;
+    return arr;
+  }
+  function sgHide() {
+    if (!sign.hidden) sign.hidden = true;
+    if (!sgStrip.hidden) sgStrip.hidden = true;
+    sgKey = ''; sgNextIdx = -1;
+  }
+  function renderSgStatic(L, stops) {
+    sgNextIdx = -1;
+    const badge = $('sg-badge');
+    badge.textContent = L.id;
+    badge.style.background = hex(L.color);
+    $('sg-line-name').textContent = I.lineN(L);
+    $('sg-line-sub').textContent = I.lang === 'ja' ? (L.nameEn || '') : L.name;
+    $('sg-for').textContent = I.t('sgFor');
+    $('sg-now-l').textContent = I.t('sgNow');
+    $('sg-next-l').textContent = I.t('sgNext');
+    sgStrip.style.setProperty('--c', hex(L.color));
+    sgStrip.innerHTML = '';
+    stops.forEach(s => {
+      const d = document.createElement('div');
+      d.className = 'sg-st';
+      d.innerHTML = '<i></i><span>' + I.stN(s.name) + '</span>';
+      sgStrip.appendChild(d);
+    });
+  }
+  function updateSign() {
+    if (!followTrain || (mode !== 'chase' && mode !== 'cab')) { sgHide(); return; }
+    if (!followTrain.visible) { exitFollow(); return; }
+    const L = LINES.find(l => l.id === followTrain.userData.lineId);
+    const curve = lineCurves[L.id];
+    const stops = stopsOf(L.id);
+    const t = followTrain.userData.t || 0, dir = followTrain.userData.dir || 1;
+    const n0 = stops.length;
+    let ni = -1;
+    if (dir > 0) {
+      for (let i = 0; i < n0; i++) if (stops[i].u > t + 1e-4) { ni = i; break; }
+      if (ni < 0) ni = L.loop ? 0 : n0 - 1;
+    } else {
+      for (let i = n0 - 1; i >= 0; i--) if (stops[i].u < t - 1e-4) { ni = i; break; }
+      if (ni < 0) ni = L.loop ? n0 - 1 : 0;
+    }
+    const pi = L.loop ? (ni - dir + n0) % n0 : Math.min(n0 - 1, Math.max(0, ni - dir));
+    const nextS = stops[ni], prevS = stops[pi];
+    const lenM = curve.getLength() / cfg.scale * 1000;
+    let du = dir > 0 ? nextS.u - t : t - nextS.u;
+    if (L.loop && du < 0) du += 1;
+    du = Math.max(0, du);
+    const meters = Math.max(0, Math.round(du * lenM / 10) * 10);
+    let span = dir > 0 ? nextS.u - prevS.u : prevS.u - nextS.u;
+    if (L.loop && span <= 0) span += 1;
+    const prog = span > 1e-6 ? Math.min(1, Math.max(0, 1 - du / span)) : 1;
+    let destName;
+    if (L.loop) destName = I.f('dest', { st: I.stN(stops[(ni + dir * 3 + n0 * 3) % n0].name) });
+    else destName = I.f('dest', { st: I.stN(stops[dir > 0 ? n0 - 1 : 0].name) });
+    const key = L.id + '|' + dir + '|' + I.lang;
+    if (key !== sgKey) { sgKey = key; renderSgStatic(L, stops); }
+    $('sg-dest').textContent = destName;
+    $('sg-now').textContent = I.stN(prevS.name);
+    $('sg-now-r').textContent = I.stS(prevS.name);
+    $('sg-next').textContent = I.stN(nextS.name);
+    $('sg-next-r').textContent = I.stS(nextS.name);
+    $('sg-dist').textContent = I.f('dist', { n: meters });
+    $('sg-bar').style.width = (prog * 100).toFixed(1) + '%';
+    $('sg-next-msg').innerHTML = I.f('nextMsg', { st: '<b>' + I.stN(nextS.name) + '</b>' });
+    if (ni !== sgNextIdx) {
+      sgNextIdx = ni;
+      const els = sgStrip.children;
+      for (let i = 0; i < els.length; i++) {
+        els[i].classList.toggle('cur', i === ni);
+        els[i].classList.toggle('done', dir > 0 ? i < ni : i > ni);
+      }
+      const el = els[ni];
+      if (el) sgStrip.scrollLeft = el.offsetLeft - sgStrip.clientWidth / 2 + el.offsetWidth / 2;
+    }
+    if (sign.hidden) { sign.hidden = false; sgStrip.hidden = false; }
+  }
+
+  /* ================= theme ================= */
+  function setTheme(dark) {
+    THEME.dark = dark;
+    document.body.classList.toggle('dark', dark);
+    renderer.setClearColor(dark ? 0x070a12 : 0xf4f6fa, 1);
+    hemi.color.setHex(dark ? 0xbfd4ff : 0xffffff);
+    hemi.groundColor.setHex(dark ? 0x0a0f1c : 0xcfd8e6);
+    hemi.intensity = dark ? 0.9 : 1.0;
+    makeGrid(dark);
+    basePlane.material.color.setHex(dark ? 0x0d1526 : 0xf0f4f9);
+    basePlane.material.opacity = dark ? 0.5 : 0.75;
+    buildNetwork();
+    buildTrains();
+    buildLabels();
+    disposeGroup(mapGroup); mapMats.length = 0; mapBuilt = false;
+    if ($('ck-map').checked) { buildMap(); mapGroup.visible = true; }
+    try { localStorage.setItem('fs-rail3d-theme', dark ? 'dark' : 'light'); } catch (err) {}
+    $('btn-theme').textContent = dark ? '☀️' : '🌙';
+  }
+
+  /* ================= boot / loop ================= */
+  exaggLabel();
+  buildNetwork();
+  buildTrains();
+  $('ck-rot').checked = auto;
+  if (cfg.mapDefault) { $('ck-map').checked = true; }
+  let themeInit = 'dark';
+  try {
+    const tq = new URLSearchParams(location.search).get('theme');
+    const ts = localStorage.getItem('fs-rail3d-theme');
+    themeInit = (tq === 'light' || tq === 'dark') ? tq : (ts === 'light' || ts === 'dark') ? ts : 'dark';
+  } catch (err) {}
+  setTheme(themeInit === 'dark');
+  $('btn-theme').addEventListener('click', () => setTheme(!THEME.dark));
+
+  /* ---- language wiring ---- */
+  const langSel = $('lang');
+  I.langs.forEach(l => {
+    const o = document.createElement('option');
+    o.value = l.id; o.textContent = l.label;
+    langSel.appendChild(o);
+  });
+  langSel.value = I.lang;
+  langSel.addEventListener('change', () => { I.lang = langSel.value; });
+  I.onChange(() => {
+    buildLegend();
+    buildLinebar();
+    buildLabels();
+    updateStats();
+    sgKey = '';
+    if (selHold) { const id = selHold; selHold = null; selectLine(id); }
+    if (!karte.hidden && lastKarte) openKarte(lastKarte, true);
+    langSel.value = I.lang;
+  });
+  document.documentElement.lang = I.lang;
+  document.body.classList.toggle('latin', !(I.lang === 'ja' || I.lang.indexOf('zh') === 0));
+  I.applyStatic();
+  updateStats();
+  buildLegend();
+
+  function resize() {
+    renderer.setSize(innerWidth, innerHeight, false);
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+  }
+  addEventListener('resize', resize); resize();
+
+  let last = performance.now();
+  function tick(now) {
+    requestAnimationFrame(tick);
+    const dt = Math.min(0.1, (now - last) / 1000);
+    last = now;
+    if (!paused) {
+      simTime += dt * simSpeed;
+      if (simTime > 26 * 3600) simTime = 3 * 3600; // wrap deep night
+      clockEl.textContent = fmtClock(simTime);
+    }
+    updateTrains();
+    updateSign();
+    if (mode === 'tour') tickTour(dt);
+    else if (auto && mode === 'orbit') theta += 0.0013;
+    applyCam();
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(tick);
+})();
+
+</script>
+
+<script>
+(function () {
+  /* ---- fujiseat integration: embed mode / defaults / link master / gtag ---- */
+  var params = new URLSearchParams(location.search);
+  if (params.get('embed') === '1') {
+    document.body.classList.add('embed');
+    var p = document.getElementById('panel');
+    if (p) p.classList.add('closed');
+  }
+  /* auto-rotate off by default — its toggle is hidden in the simplified UI */
+  var rot = document.getElementById('ck-rot');
+  if (rot && rot.checked) { rot.checked = false; rot.dispatchEvent(new Event('change')); }
+  /* runtime link master (single source: admin-managed data via public API) */
+  window.FS_LINKS = null;
+  fetch('/api/rail3d-links?city=kansai')
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (d) { window.FS_LINKS = d; })
+    .catch(function () {});
+  /* analytics — same GA4 property + event shape as the main site */
+  var isProd = /(^|\.)fujiseat\.com$/.test(location.hostname);
+  window.fsTrack = function (action, extra) {
+    try {
+      if (!isProd || typeof window.gtag !== 'function') return;
+      var payload = { page_path: location.pathname + location.search };
+      for (var k in extra) if (extra[k] !== undefined) payload[k] = extra[k];
+      window.gtag('event', action, payload);
+    } catch (e) {}
+  };
+  if (isProd) {
+    var s = document.createElement('script');
+    s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=G-YTHCL1QHMG';
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', 'G-YTHCL1QHMG');
+  }
+})();
+</script>
+</body>
+</html>

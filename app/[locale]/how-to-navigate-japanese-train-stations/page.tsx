@@ -21,6 +21,7 @@ import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAlternates } from "@/i18n/hreflang";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
+import { Rail3dEmbed } from "@/components/rail3d/Rail3dEmbed";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -314,6 +315,16 @@ export default async function NavigateJapaneseStationsPage({ params }: Props) {
               a new ticket.
             </p>
           </ArticleSection>
+
+          {/* Interactive context: the Tokyo rail network in 3D — see how the
+              lines and depths you just read about actually stack up. */}
+          <Rail3dEmbed
+            city="tokyo"
+            locale={locale}
+            pagePath={PAGE_PATH}
+            title="Explore Tokyo's rail network in 3D"
+            caption="Every JR, Metro, Toei and private line at its approximate real depth, with simulated weekday trains. Click a line for its stops, or a station for its layers."
+          />
 
           {/* 6 — Common mistakes */}
           <ArticleSection

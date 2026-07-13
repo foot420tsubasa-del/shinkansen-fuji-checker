@@ -14,6 +14,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
+import { Rail3dEmbed } from "@/components/rail3d/Rail3dEmbed";
 import { ESIM_URL } from "@/src/affiliateLinks";
 import { getAirportTransferHubImage, getAirportTransferRouteImage } from "@/lib/airport-transfer-images";
 import { getAirportTransferHubCopy, localizedRouteTitle } from "@/lib/content/airport-transfer-i18n";
@@ -698,6 +699,16 @@ export default async function AirportTransfersIndex({ params }: Props) {
             </section>
           </div>
         </div>
+      </section>
+
+      <section className="mt-10">
+        <Rail3dEmbed
+          city="kansai"
+          locale={locale}
+          pagePath={pagePath}
+          title="Explore the Kansai rail network in 3D"
+          caption="JR West, Osaka Metro and private lines between KIX, Osaka and Kyoto — click a line for its stops, or a station for its layers."
+        />
       </section>
 
       <section className="mt-10">

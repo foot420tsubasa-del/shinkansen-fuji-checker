@@ -11,6 +11,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { EsimCta, InternalCta } from "./TrainSignsCtas";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
+import { Rail3dEmbed } from "@/components/rail3d/Rail3dEmbed";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { buttonClassName } from "@/components/ui/Button";
 
@@ -200,6 +201,16 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
             <ArrowRight className="h-4 w-4" />
           </TrackedCtaLink>
         </section>
+
+        <div className="mt-6">
+          <Rail3dEmbed
+            city="tokyo"
+            locale={locale}
+            pagePath="/how-to-read-japanese-train-signs"
+            title="See the lines behind the signs — Tokyo Rail 3D"
+            caption="The line colors and letters on every sign, as a 3D model of the real network. Click a line to see its stops in order."
+          />
+        </div>
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
           <article className="space-y-12">
