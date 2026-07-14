@@ -173,7 +173,9 @@
   #s-meta{font-size:10px;color:var(--sub);text-align:right;line-height:1.5;max-width:40%}
   .s-names-toggle{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--sub);cursor:pointer;flex:none}
   .s-names-toggle input{accent-color:var(--acc)}
-  #s-close{font-size:14px;color:var(--sub);background:var(--btn);border:1px solid var(--line);border-radius:8px;width:27px;height:27px;flex:none}
+  #s-close,#s-collapse{font-size:14px;color:var(--sub);background:var(--btn);border:1px solid var(--line);border-radius:8px;width:27px;height:27px;flex:none}
+  #strip.mini .s-scroll{display:none}
+  #strip.mini .s-head{padding-bottom:8px}
   #s-profile{display:block;margin:0 14px}
   .s-scroll{overflow-x:auto;overflow-y:hidden;padding:2px 12px 8px}
   .s-scroll::-webkit-scrollbar{height:8px}
@@ -447,6 +449,7 @@ body.embed header{padding-top:6px;padding-bottom:6px}
     <span class="sp"></span>
     <small id="s-meta"></small>
     <label class="s-names-toggle"><input id="ck-stnames" type="checkbox" checked><span data-i18n="stNames"></span></label>
+    <button id="s-collapse" type="button" aria-label="minimize">▾</button>
     <button id="s-close" type="button" aria-label="close">×</button>
   </div>
   <svg id="s-profile" height="54"></svg>
@@ -1537,8 +1540,8 @@ window.I18N = (function () {
   const rowEls = {}, checks = {};
   const lbEls = {};
   function setDim(id, dim) {
-    lineMats[id].forEach(m => { m.transparent = dim; m.opacity = dim ? 0.08 : 1; m.needsUpdate = true; });
-    trainRT[id] && trainRT[id].pool.forEach(m => { m.material.transparent = dim; m.material.opacity = dim ? 0.06 : 1; });
+    lineMats[id].forEach(m => { m.transparent = dim; m.opacity = dim ? 0.3 : 1; m.needsUpdate = true; });
+    trainRT[id] && trainRT[id].pool.forEach(m => { m.material.transparent = dim; m.material.opacity = dim ? 0.22 : 1; });
   }
   function applySelDim() { LINES.forEach(l => setDim(l.id, l.id !== selHold)); }
   function selectLine(id) {
@@ -1644,6 +1647,10 @@ window.I18N = (function () {
     buildLabels();
   }
   $('s-close').addEventListener('click', clearSelection);
+  $('s-collapse').addEventListener('click', () => {
+    const mini = strip.classList.toggle('mini');
+    $('s-collapse').textContent = mini ? '\u25b8' : '\u25be';
+  });
   $('ck-stnames').addEventListener('change', e => { strip.classList.toggle('nonames', !e.target.checked); });
 
   /* ================= station karte ================= */
