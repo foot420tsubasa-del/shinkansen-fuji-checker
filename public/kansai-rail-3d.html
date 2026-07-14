@@ -319,7 +319,7 @@
 /* ---- fujiseat integration: simplified UI / CTAs / embed mode ---- */
 #btn-tour{display:none!important}
 #panel .sec:has(#sl-exagg){display:none!important}
-#panel label.opt:has(#ck-tilt),#panel label.opt:has(#ck-rot),#panel label.opt:has(#ck-pillar),#panel label.opt:has(#ck-shaft),#cam-under{display:none!important}
+#panel label.opt:has(#ck-tilt),#panel label.opt:has(#ck-rot),#panel label.opt:has(#ck-pillar),#panel label.opt:has(#ck-shaft){display:none!important}
 .speeds button[data-s="30"],.speeds button[data-s="180"],.speeds button[data-s="480"]{display:none!important}
 .presets button[data-h="5"],.presets button[data-h="13"],.presets button[data-h="18"],.presets button[data-h="23.8"]{display:none!important}
 #s-profile{display:none!important}
@@ -1454,8 +1454,8 @@ window.I18N = (function () {
       lastPinch = d;
       pan(dx / 2, dy / 2);
     } else if (p.b === 2 || e.ctrlKey || e.altKey || e.metaKey) {
-      theta -= dx * 0.0035;
-      phi = Math.min(1.45, Math.max(0.12, phi - dy * 0.0035));
+      theta -= dx * 0.005;
+      phi = Math.min(2.6, Math.max(0.06, phi - dy * 0.005));
     } else pan(dx, dy);
   });
   canvas.addEventListener('pointerup', e => {
