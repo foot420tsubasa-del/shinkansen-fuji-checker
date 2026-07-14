@@ -20,7 +20,7 @@ const DIR = "messages";
 // (translated via the agent pipeline) and merged in below so re-running this
 // script never drops them.
 const dense = JSON.parse(
-  fs.readFileSync(path.join("scripts", "sp-dense-i18n.json"), "utf8"),
+  fs.readFileSync(path.join("scripts", "station-practice", "sp-dense-i18n.json"), "utf8"),
 );
 
 const ui = {

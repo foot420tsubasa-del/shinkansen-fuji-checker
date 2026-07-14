@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="1200" height="620">
-  <defs>
-    <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#dceeff"/><stop offset="0.55" stop-color="#f5fbff"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
-    <linearGradient id="water" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#7fb0d6"/><stop offset="1" stop-color="#d7edf7"/></linearGradient>
-    <linearGradient id="navy" x1="0" x2="1"><stop offset="0" stop-color="#0b2b57"/><stop offset="1" stop-color="#214f8f"/></linearGradient>
-    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#0c2344" flood-opacity=".16"/></filter>
-  </defs>
-  <rect width="1200" height="620" fill="url(#sky)"/><path d="M0 460 Q250 420 450 455 T820 448 T1200 410 L1200 620 L0 620Z" fill="#edf4ed"/><g transform="translate(390 170)"><path d="M0 160 L420 160 L360 110 L60 110 Z" fill="#9c2e27"/><path d="M35 110 L385 110 L330 70 L90 70 Z" fill="#d85b44"/><path d="M70 70 L350 70 L300 35 L120 35 Z" fill="#9c2e27"/><rect x="112" y="160" width="196" height="165" fill="#f7e8cf"/><rect x="145" y="210" width="54" height="115" fill="#315779"/><rect x="220" y="210" width="54" height="115" fill="#315779"/><path d="M80 325 L340 325" stroke="#0b2b57" stroke-width="14"/></g><circle cx="176" cy="170" r="85" fill="#fff" opacity=".45"/>
-</svg>

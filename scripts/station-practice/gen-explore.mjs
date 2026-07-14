@@ -8,7 +8,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const manifest = JSON.parse(fs.readFileSync(path.join("scripts", "sp-explore-manifest.json"), "utf8"));
+const manifest = JSON.parse(fs.readFileSync(path.join("scripts", "station-practice", "sp-explore-manifest.json"), "utf8"));
 
 const FLOORS = {
   b3: { label: "B3", blueprint: "blueprint-b3", hub: "b3-platform-mid", dir: "down" },

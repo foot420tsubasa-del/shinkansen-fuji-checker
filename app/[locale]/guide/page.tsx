@@ -12,7 +12,6 @@ import { AFFILIATE_REL } from "@/lib/link-rel";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { CompactStayFinder } from "@/components/stay/CompactStayFinder";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
-import { StickyMobileCta } from "@/components/affiliate/StickyMobileCta";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 

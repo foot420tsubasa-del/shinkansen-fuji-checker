@@ -73,5 +73,5 @@ for (const { dir, code } of FLOORS) {
   console.log(`${code}: ${list.length} explore views`);
 }
 
-fs.writeFileSync(path.join("scripts", "sp-explore-manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
+fs.writeFileSync(path.join("scripts", "station-practice", "sp-explore-manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
 console.log(`\n${count} files, +${(total / 1024 / 1024).toFixed(2)} MB → manifest written`);
