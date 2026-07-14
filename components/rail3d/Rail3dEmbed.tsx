@@ -3,12 +3,17 @@
 import { ExternalLink } from "lucide-react";
 import { trackCtaClick } from "@/lib/analytics";
 
-/** Maps site locales to the Rail 3D pages' 5 supported UI languages. */
+/** Maps site locales to the Rail 3D pages' supported UI languages (all 9 site locales + ja). */
 const RAIL3D_LANG: Record<string, string> = {
   en: "en",
   ko: "ko",
   "zh-TW": "zh-Hant",
   "zh-CN": "zh-Hans",
+  fr: "fr",
+  es: "es",
+  "pt-BR": "pt-BR",
+  de: "de",
+  ru: "ru",
 };
 
 /**
