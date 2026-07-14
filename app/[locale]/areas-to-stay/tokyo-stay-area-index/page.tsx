@@ -16,6 +16,7 @@ import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
 import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
+import { HotelAreaProviderRow } from "@/components/affiliate/HotelAreaProviderRow";
 import { getAlternates } from "@/i18n/hreflang";
 import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
 import signalsJson from "@/data/generated/tokyo-stay-area-signals.json";
@@ -831,24 +832,40 @@ function SelectedAreaHotelSearch({
   locale: string;
   t: Translation;
 }) {
+  /* Finder result primary CTA (revenue-funnel spec Phase 3): a real
+     booking-intent block with provider buttons, rendered ABOVE the score
+     detail. Links come from the managed registry; the analytics placement is
+     overridden to finder_result_primary for funnel reporting. */
   const hotel = hotelSearchForArea(area, locale, "detail");
   if (!hotel) return null;
-  const isBroadAreaFallback = hotel.selectedAreaName !== hotel.areaName;
-  const heading = isBroadAreaFallback
-    ? t("hotelSearch.headingNear", { area: hotel.selectedAreaName })
-    : t("hotelSearch.headingAround", { area: hotel.areaName });
 
   return (
-    <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+    <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50/60 p-4 shadow-sm">
       <div className="flex items-center gap-2 text-[#106b43]">
         <Building2 className="h-4 w-4" aria-hidden="true" />
-        <h3 className="text-sm font-semibold text-slate-950">{heading}</h3>
+        <h3 className="text-sm font-bold text-slate-950">
+          {t("hotelSearch.checkDates", { area: hotel.areaName })}
+        </h3>
       </div>
-      <p className="mt-2 text-xs leading-5 text-slate-600">
-        {isBroadAreaFallback
-          ? t("hotelSearch.fallbackNote", { selected: hotel.selectedAreaName, area: hotel.areaName })
-          : t("hotelSearch.note")}
-      </p>
+      <HotelAreaProviderRow
+        providers={hotel.providers.map((link) => ({
+          provider: link.provider,
+          href: link.href,
+          trackingHref: link.trackingHref,
+          label: link.provider === "trip" ? "Trip.com" : "Booking.com",
+          linkId: link.linkId,
+          subId: link.subId,
+          placement: "finder_result_primary",
+        }))}
+        placement="finder_result_primary"
+        pagePath="/areas-to-stay/tokyo-stay-area-index"
+        locale={locale}
+        area={{ displayName: hotel.areaName, areaId: area.id }}
+        city={hotel.city}
+        keyPrefix="finder-primary"
+        className="mt-3"
+      />
+      <p className="mt-2 text-xs leading-5 text-slate-600">{t("hotelSearch.note")}</p>
     </div>
   );
 }
@@ -910,10 +927,20 @@ function AreaDetailPanel({
       </div>
       <p className="mt-4 text-sm leading-6 text-slate-700">{areaSummary(area, score, t)}</p>
 
-      {/* The former "Open {area} hotel page" CTA linked the 36-area detail
-          pages, which were 301'd per redesign spec §3. The panel's revenue
-          exit is the SelectedAreaHotelSearch provider block below; Phase 4
-          replaces this with the full revenue block. */}
+      {/* Spec order: reasons (3) -> caution (1) -> primary hotel CTA, all
+          ABOVE the score detail and data-source blocks. */}
+      <div className="mt-4">
+        <h3 className="text-sm font-semibold text-slate-950">{t("selected.bestFor")}</h3>
+        <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
+          {translatedFitReasons(area, score, t).slice(0, 3).map((item) => (<li key={item}>· {item}</li>))}
+        </ul>
+        <h3 className="mt-3 text-sm font-semibold text-slate-950">{t("selected.watchOut")}</h3>
+        <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
+          {translatedWatchOuts(area, score, t).slice(0, 1).map((item) => (<li key={item}>· {item}</li>))}
+        </ul>
+      </div>
+
+      <SelectedAreaHotelSearch area={area} locale={locale} t={t} />
 
       <div className="mt-5 grid gap-2">
         {scoreLabels.map(({ key, label }) => (
@@ -924,22 +951,6 @@ function AreaDetailPanel({
       <StationUsabilityPanel area={area} signal={signal} contribution={score.usabilityContribution} t={t} />
       <AirportShinkansenAccessPanel area={area} t={t} />
       <StationRouteNoteCard area={area} t={t} />
-      <SelectedAreaHotelSearch area={area} locale={locale} t={t} />
-
-      <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-1">
-        <div>
-          <h3 className="text-sm font-semibold text-slate-950">{t("selected.bestFor")}</h3>
-          <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
-            {translatedFitReasons(area, score, t).map((item) => (<li key={item}>· {item}</li>))}
-          </ul>
-        </div>
-        <div>
-          <h3 className="text-sm font-semibold text-slate-950">{t("selected.watchOut")}</h3>
-          <ul className="mt-2 space-y-1.5 text-sm leading-5 text-slate-700">
-            {translatedWatchOuts(area, score, t).map((item) => (<li key={item}>· {item}</li>))}
-          </ul>
-        </div>
-      </div>
 
       <div className="mt-5 rounded-2xl border border-emerald-100 bg-emerald-50/70 p-4">
         <h3 className="text-sm font-semibold text-slate-950">{t("selected.why")}</h3>

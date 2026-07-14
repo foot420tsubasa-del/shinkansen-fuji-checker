@@ -3046,14 +3046,18 @@
     "quickRec": {
       "title": "Recommandation rapide",
       "stayIn": "Dormir à",
-      "seeHotels": "Voir les hôtels"
+      "seeHotels": "Voir les hôtels",
+      "checkDates": "Voir les hôtels à {area} pour vos dates",
+      "readGuide": "Lire le guide du quartier {area}"
     },
     "areaCard": {
       "pros": "Avantages",
       "cons": "Inconvénients",
       "transport": "Transport",
       "compareTokyoStation": "Comparer les hôtels près de Tokyo Station",
-      "compareAreaHotels": "Comparer les hôtels à {area}"
+      "compareAreaHotels": "Comparer les hôtels à {area}",
+      "viewDetails": "Voir les détails du quartier {area}",
+      "checkAreaHotels": "Voir les hôtels à {area}"
     }
   },
   "stayPages": {
@@ -4078,7 +4082,8 @@
       "headingNear": "Comparer les hôtels près de {area}",
       "headingAround": "Comparer les hôtels à {area}",
       "note": "Recherche par grande zone uniquement. Vérifiez la distance exacte, la taille de chambre, les lits et le prix actuel chez le fournisseur.",
-      "fallbackNote": "Recherche par grande zone uniquement. Aucune URL dédiée à {selected} n'est encore définie, donc ce lien ouvre la grande zone la plus proche : {area}. Vérifiez la distance exacte, la taille de chambre, les lits et le prix actuel chez le fournisseur."
+      "fallbackNote": "Recherche par grande zone uniquement. Aucune URL dédiée à {selected} n'est encore définie, donc ce lien ouvre la grande zone la plus proche : {area}. Vérifiez la distance exacte, la taille de chambre, les lits et le prix actuel chez le fournisseur.",
+      "checkDates": "Voir les hôtels à {area} pour vos dates"
     },
     "stationRouteNote": {
       "title": "Note gare et trajet hôtel",

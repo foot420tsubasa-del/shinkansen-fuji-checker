@@ -3046,14 +3046,18 @@
     "quickRec": {
       "title": "快速推薦",
       "stayIn": "建議住在",
-      "seeHotels": "查看飯店"
+      "seeHotels": "查看飯店",
+      "checkDates": "依你的日期查看 {area} 飯店",
+      "readGuide": "閱讀 {area} 區域指南"
     },
     "areaCard": {
       "pros": "優點",
       "cons": "注意點",
       "transport": "交通",
       "compareTokyoStation": "比較東京站附近飯店",
-      "compareAreaHotels": "比較{area}飯店"
+      "compareAreaHotels": "比較{area}飯店",
+      "viewDetails": "查看 {area} 區域詳情",
+      "checkAreaHotels": "查看 {area} 飯店"
     }
   },
   "stayPages": {
@@ -4078,7 +4082,8 @@
       "headingNear": "比較 {area} 附近酒店",
       "headingAround": "比較 {area} 酒店",
       "note": "僅為大區域搜尋。請在預訂網站確認準確車站距離、房間大小、床型和最新價格。",
-      "fallbackNote": "僅為大區域搜尋。尚未設定 {selected} 專用連結，因此開啟最近的大區域：{area}。請在預訂網站確認準確車站距離、房間大小、床型和最新價格。"
+      "fallbackNote": "僅為大區域搜尋。尚未設定 {selected} 專用連結，因此開啟最近的大區域：{area}。請在預訂網站確認準確車站距離、房間大小、床型和最新價格。",
+      "checkDates": "依你的日期查看 {area} 飯店"
     },
     "stationRouteNote": {
       "title": "車站與酒店路線提示",

@@ -298,6 +298,16 @@ export default function HomeClient() {
               onDirectionChange={handleDirectionChange}
               onCheck={() => {
                 setHasChecked(true);
+                // Persist the answered direction so the guide's Klook CTA and
+                // mobile sticky can react to a completed seat check.
+                try {
+                  window.localStorage.setItem(
+                    "fs-seat-direction",
+                    JSON.stringify({ direction, ts: Date.now() }),
+                  );
+                } catch {
+                  // Storage is best-effort.
+                }
                 trackSeatCheckComplete({
                   direction,
                   route: direction,

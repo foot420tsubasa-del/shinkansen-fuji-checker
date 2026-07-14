@@ -3046,14 +3046,18 @@
     "quickRec": {
       "title": "Recomendação rápida",
       "stayIn": "Fique em",
-      "seeHotels": "Ver hotéis"
+      "seeHotels": "Ver hotéis",
+      "checkDates": "Veja hotéis em {area} para suas datas",
+      "readGuide": "Leia o guia da área de {area}"
     },
     "areaCard": {
       "pros": "Pontos fortes",
       "cons": "Pontos fracos",
       "transport": "Transporte",
       "compareTokyoStation": "Comparar hotéis perto da Tokyo Station",
-      "compareAreaHotels": "Comparar hotéis em {area}"
+      "compareAreaHotels": "Comparar hotéis em {area}",
+      "viewDetails": "Ver detalhes da área de {area}",
+      "checkAreaHotels": "Ver hotéis em {area}"
     }
   },
   "stayPages": {
@@ -4078,7 +4082,8 @@
       "headingNear": "Compare hotéis perto de {area}",
       "headingAround": "Compare hotéis em {area}",
       "note": "Busca ampla por área. Confira distância exata da estação, tamanho do quarto, camas e preço atual no site.",
-      "fallbackNote": "Busca ampla por área. Ainda não há URL específica para {selected}, então abrimos a área ampla mais próxima: {area}. Confira distância exata da estação, tamanho do quarto, camas e preço atual no site."
+      "fallbackNote": "Busca ampla por área. Ainda não há URL específica para {selected}, então abrimos a área ampla mais próxima: {area}. Confira distância exata da estação, tamanho do quarto, camas e preço atual no site.",
+      "checkDates": "Veja hotéis em {area} para suas datas"
     },
     "stationRouteNote": {
       "title": "Nota sobre estação e rota até o hotel",

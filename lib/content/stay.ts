@@ -46,7 +46,7 @@ export type StayPage = {
   slug: string;
   title: string;
   description: string;
-  quickRec: { area: string; why: string; link: string };
+  quickRec: { area: string; why: string; link: string; areaId?: string };
   mapId?: StayAreaMapKey;
   mapDescription?: string[];
   areas: StayArea[];
@@ -167,6 +167,7 @@ const rawStayPages: StayPage[] = [
     title: "Shinjuku vs Ueno vs Asakusa — which Tokyo base is right?",
     description: "A head-to-head comparison of Tokyo's three most popular tourist areas. Covers transport, budget, vibe, and which type of traveler each area suits best.",
     quickRec: {
+      areaId: "shinjuku",
       area: "Shinjuku",
       why: "If you can only pick one: Shinjuku wins on transport flexibility, dining variety, and nightlife. But Ueno beats it on budget, and Asakusa beats it on atmosphere.",
       link: hotelShinjuku.href,
@@ -445,6 +446,7 @@ const rawStayPages: StayPage[] = [
     title: "Tokyo Station vs Shinjuku: Where Should You Stay in Tokyo?",
     description: "Compare Tokyo Station and Shinjuku for first-time Japan travelers. Choose the better hotel base for Shinkansen access, nightlife, food, airport transfers and luggage.",
     quickRec: {
+      areaId: "tokyo-station",
       area: "Shinjuku",
       why: "For most first-time visitors, Shinjuku is the better all-round base. You get nightlife, food variety, and easy transfers. Tokyo Station wins only if you have very early Shinkansen departures or want zero-hassle luggage logistics.",
       link: hotelShinjuku.href,
@@ -503,6 +505,7 @@ const rawStayPages: StayPage[] = [
     title: "Ueno vs Shinjuku: Which Tokyo Area Should You Stay In?",
     description: "Compare Ueno and Shinjuku for first-time Tokyo travelers. Decide based on Narita access, hotel budget, nightlife, food, museums, luggage and train convenience.",
     quickRec: {
+      areaId: "ueno",
       area: "Shinjuku",
       why: "For most first-timers, Shinjuku gives the best overall experience: nightlife, food, shopping, and flexible transport. Ueno wins on budget, Narita speed, and a calmer daytime vibe with museums and Ameyoko.",
       link: hotelShinjuku.href,
@@ -921,6 +924,7 @@ const rawStayPages: StayPage[] = [
     title: "Asakusa vs Ueno: Where Should You Stay in Tokyo?",
     description: "Asakusa or Ueno for your Tokyo hotel? Ueno wins on Narita access (Skyliner 36 min), budget hotels, and a 7-min hop to Tokyo Station; Asakusa wins on old-town atmosphere and Senso-ji. Side-by-side compare with hotel picks for first-time visitors.",
     quickRec: {
+      areaId: "ueno",
       area: "Ueno",
       why: "Ueno is more practical: direct Skyliner from Narita, JR to Tokyo Station in 7 min, budget hotels, and Ameyoko market. Asakusa is more atmospheric but slightly less convenient for rail connections. Both areas are only 5 minutes apart by Metro.",
       link: hotelUeno.href,

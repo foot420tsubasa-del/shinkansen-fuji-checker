@@ -22,6 +22,7 @@ type TrackedAffiliateLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "
   route?: string;
   routeType?: string;
   transportType?: string;
+  pageType?: AffiliateClickParams["page_type"];
 };
 
 export function TrackedAffiliateLink({
@@ -43,6 +44,7 @@ export function TrackedAffiliateLink({
   route,
   routeType,
   transportType,
+  pageType,
   ...anchorProps
 }: TrackedAffiliateLinkProps) {
   const analyticsHref = trackingHref ?? href;
@@ -68,6 +70,7 @@ export function TrackedAffiliateLink({
           route,
           route_type: routeType,
           transport_type: transportType,
+          page_type: pageType,
         })
       }
       {...anchorProps}

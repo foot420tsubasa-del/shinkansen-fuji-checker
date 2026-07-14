@@ -27,7 +27,7 @@ import { getAllStaySlugs, getStayBySlug, type StayPage as StayContentPage } from
 import { getAlternates } from "@/i18n/hreflang";
 import { getAffUrl } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
-import type { HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { buttonClassName } from "@/components/ui/Button";
 import type { AdPlacement } from "@/lib/ads";
 
@@ -1691,23 +1691,58 @@ function AreaSupportHotelLink({
   areaLabel: string;
   className?: string;
 }) {
+  /* Revenue-funnel spec (Phase 3): split booking intent from reading intent.
+     Primary "Check {area} hotels" goes STRAIGHT to the hotel provider (never
+     via the Finder); the secondary text link opens the in-site area guide. */
   const link = areaSupportLinkForHotelKey(areaKey, areaId);
-  // Action-oriented, area-aware label when we resolve to a real detail page;
-  // a quieter "compare in the Finder" label for the fallback case.
-  const text = link.kind === "detail" ? `See ${areaLabel} hotels` : `Compare ${areaLabel} in the Finder`;
+  const hotel = areaKey ? getHotelLink(areaKey) : null;
+  const bookingHref =
+    hotel && hotel.provider === "trip" && hotel.href && hotel.href !== "#" ? hotel.href : null;
+  const placement = sourcePage.includes("before-shinkansen")
+    ? ("before_shinkansen_area_card" as const)
+    : ("comparison_area_card" as const);
 
   return (
-    <TrackedInternalLink
-      href={link.href}
-      sourcePage={sourcePage}
-      placement={link.placement}
-      label={`${text}: ${areaLabel}`}
-      locale={locale}
-      className={className}
-    >
-      {text} →
-    </TrackedInternalLink>
+    <div className="flex flex-col gap-1.5">
+      {bookingHref ? (
+        <TrackedAffiliateLink
+          href={withTripSub(bookingHref, `${placement}_${areaId ?? areaKey ?? "area"}`)}
+          target="_blank"
+          rel={AFFILIATE_REL}
+          category="hotel"
+          provider="trip"
+          product="hotel"
+          placement={placement}
+          pageType="hotel_comparison"
+          pagePath={sourcePage}
+          locale={locale}
+          label={`Check ${areaLabel} hotels`}
+          linkId={`${placement}_${areaId ?? areaKey ?? "area"}`}
+          area={areaLabel}
+          className="inline-flex min-h-10 w-fit items-center rounded-xl bg-[#2E7D5B] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E7D5B]/40"
+        >
+          Check {areaLabel} hotels →
+        </TrackedAffiliateLink>
+      ) : null}
+      <TrackedInternalLink
+        href={link.href}
+        sourcePage={sourcePage}
+        placement={link.placement}
+        label={`Read the ${areaLabel} area guide`}
+        locale={locale}
+        className={className}
+      >
+        Read the {areaLabel} area guide →
+      </TrackedInternalLink>
+    </div>
   );
+}
+
+/** Append the placement sub id to /api/trip-hotel-redirect links only. */
+function withTripSub(href: string, sub: string): string {
+  if (!href.startsWith("/api/trip-hotel-redirect")) return href;
+  const separator = href.includes("?") ? "&" : "?";
+  return `${href}${separator}sub=${encodeURIComponent(sub.replace(/[^a-zA-Z0-9_-]/g, "_").slice(0, 60))}`;
 }
 
 type ProblemHotelBaseArea = {
@@ -2820,7 +2855,13 @@ export default async function StayPage({ params }: Props) {
             link={page.quickRec.link}
             locale={locale}
             pagePath={pagePath}
+            placement="comparison_quick_recommendation"
             showCta={!isTokyoFirstTime && !isShinkansenProblemPage}
+            secondaryHref={
+              page.quickRec.areaId
+                ? `/areas-to-stay/tokyo-stay-area-index?area=${page.quickRec.areaId}#selected-area`
+                : undefined
+            }
           />
 
           {isShinkansenProblemPage ? (

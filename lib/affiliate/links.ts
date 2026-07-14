@@ -24,6 +24,16 @@ export type AffiliateDestinationType =
   | "transport";
 
 export type AffiliatePlacement =
+  | "guide_quick_answer"
+  | "guide_how_to_book"
+  | "guide_mobile_sticky_after_checker"
+  | "guide_jr_pass_section"
+  | "guide_esim_checklist"
+  | "guide_route_comparison_text"
+  | "comparison_quick_recommendation"
+  | "comparison_area_card"
+  | "finder_result_primary"
+  | "before_shinkansen_area_card"
   | "baggage_seat_booking"
   | "train_type_booking"
   | "reserved_seat_booking"

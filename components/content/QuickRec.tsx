@@ -3,7 +3,8 @@
 import { ArrowRight, Zap } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { AFFILIATE_REL } from "@/lib/link-rel";
-import { trackAffiliateClick, type AffiliateClickParams } from "@/lib/analytics";
+import { Link } from "@/i18n/navigation";
+import { trackAffiliateClick, trackCtaClick, type AffiliateClickParams } from "@/lib/analytics";
 
 type QuickRecProps = {
   area: string;
@@ -15,6 +16,9 @@ type QuickRecProps = {
   provider?: AffiliateClickParams["provider"];
   placement?: AffiliateClickParams["placement"];
   showCta?: boolean;
+  /** Internal area-guide link (reading intent), rendered as a small text link. */
+  secondaryHref?: string;
+  secondaryLabel?: string;
 };
 
 export function QuickRec({
@@ -27,9 +31,12 @@ export function QuickRec({
   provider = "trip",
   placement = "stay_quick_recommendation",
   showCta = true,
+  secondaryHref,
+  secondaryLabel,
 }: QuickRecProps) {
   const t = useTranslations("stayShared.quickRec");
-  const ctaLabel = cta ?? t("seeHotels");
+  // Booking-intent wording (spec Phase 3): say where the click goes.
+  const ctaLabel = cta ?? t("checkDates", { area });
 
   return (
     <div className="rounded-[22px] border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5 shadow-sm">
@@ -64,6 +71,26 @@ export function QuickRec({
           {ctaLabel}
           <ArrowRight className="h-4 w-4" />
         </a>
+      ) : null}
+      {secondaryHref ? (
+        <div className="mt-2">
+          <Link
+            href={secondaryHref}
+            onClick={() =>
+              trackCtaClick({
+                placement: `${placement}_guide`,
+                href: secondaryHref,
+                label: secondaryLabel ?? t("readGuide", { area }),
+                category: "stay",
+                page_path: pagePath,
+                locale,
+              })
+            }
+            className="text-sm font-semibold text-[#106b43] underline underline-offset-4 hover:text-[#0b5736]"
+          >
+            {secondaryLabel ?? t("readGuide", { area })}
+          </Link>
+        </div>
       ) : null}
     </div>
   );

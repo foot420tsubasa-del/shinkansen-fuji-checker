@@ -3046,14 +3046,18 @@
     "quickRec": {
       "title": "빠른 추천",
       "stayIn": "추천 숙박 지역:",
-      "seeHotels": "호텔 보기"
+      "seeHotels": "호텔 보기",
+      "checkDates": "내 날짜로 {area} 호텔 확인",
+      "readGuide": "{area} 지역 가이드 읽기"
     },
     "areaCard": {
       "pros": "장점",
       "cons": "주의점",
       "transport": "교통",
       "compareTokyoStation": "도쿄역 근처 호텔 비교",
-      "compareAreaHotels": "{area} 호텔 비교"
+      "compareAreaHotels": "{area} 호텔 비교",
+      "viewDetails": "{area} 지역 상세 보기",
+      "checkAreaHotels": "{area} 호텔 확인"
     }
   },
   "stayPages": {
@@ -4078,7 +4082,8 @@
       "headingNear": "{area} 근처 호텔 비교",
       "headingAround": "{area} 호텔 비교",
       "note": "넓은 지역 검색입니다. 정확한 역 거리, 객실 크기, 침대 구성, 최신 가격은 제공 사이트에서 확인하세요.",
-      "fallbackNote": "넓은 지역 검색입니다. 아직 {selected} 전용 URL이 없어 가장 가까운 넓은 지역인 {area}를 엽니다. 정확한 역 거리, 객실 크기, 침대 구성, 최신 가격은 제공 사이트에서 확인하세요."
+      "fallbackNote": "넓은 지역 검색입니다. 아직 {selected} 전용 URL이 없어 가장 가까운 넓은 지역인 {area}를 엽니다. 정확한 역 거리, 객실 크기, 침대 구성, 최신 가격은 제공 사이트에서 확인하세요.",
+      "checkDates": "내 날짜로 {area} 호텔 확인"
     },
     "stationRouteNote": {
       "title": "역과 호텔 동선 참고",

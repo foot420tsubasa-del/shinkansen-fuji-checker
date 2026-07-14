@@ -3046,14 +3046,18 @@
     "quickRec": {
       "title": "Schnelle Empfehlung",
       "stayIn": "Übernachten in",
-      "seeHotels": "Hotels ansehen"
+      "seeHotels": "Hotels ansehen",
+      "checkDates": "{area}-Hotels für deine Daten prüfen",
+      "readGuide": "Den {area}-Gebietsguide lesen"
     },
     "areaCard": {
       "pros": "Vorteile",
       "cons": "Nachteile",
       "transport": "Verkehr",
       "compareTokyoStation": "Hotels nahe Tokyo Station vergleichen",
-      "compareAreaHotels": "Hotels in {area} vergleichen"
+      "compareAreaHotels": "Hotels in {area} vergleichen",
+      "viewDetails": "Details zum Gebiet {area} ansehen",
+      "checkAreaHotels": "{area}-Hotels prüfen"
     }
   },
   "stayPages": {
@@ -4078,7 +4082,8 @@
       "headingNear": "Hotels nahe {area} vergleichen",
       "headingAround": "Hotels in {area} vergleichen",
       "note": "Nur breite Gebietssuche. Prüfe genaue Stationsentfernung, Zimmergröße, Betten und aktuellen Preis beim Anbieter.",
-      "fallbackNote": "Nur breite Gebietssuche. Für {selected} ist noch keine eigene URL gesetzt; geöffnet wird der nächste breite Suchbereich: {area}. Prüfe genaue Stationsentfernung, Zimmergröße, Betten und aktuellen Preis beim Anbieter."
+      "fallbackNote": "Nur breite Gebietssuche. Für {selected} ist noch keine eigene URL gesetzt; geöffnet wird der nächste breite Suchbereich: {area}. Prüfe genaue Stationsentfernung, Zimmergröße, Betten und aktuellen Preis beim Anbieter.",
+      "checkDates": "{area}-Hotels für deine Daten prüfen"
     },
     "stationRouteNote": {
       "title": "Hinweis zu Station und Hotelweg",

@@ -10,7 +10,8 @@
     "check:translations": "node scripts/check-translations.mjs",
     "stay-area:update-signals": "node scripts/update-tokyo-stay-area-signals.mjs",
     "stay-area:build-scores": "node scripts/build-tokyo-stay-area-scores.mjs",
-    "stay-area:refresh": "npm run stay-area:update-signals && npm run stay-area:build-scores"
+    "stay-area:refresh": "npm run stay-area:update-signals && npm run stay-area:build-scores",
+    "test:funnel": "node --test scripts/affiliate-checks.test.mjs"
   },
   "dependencies": {
     "@vis.gl/react-google-maps": "^1.8.3",

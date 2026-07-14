@@ -3046,14 +3046,18 @@
     "quickRec": {
       "title": "Quick recommendation",
       "stayIn": "Stay in",
-      "seeHotels": "See hotels"
+      "seeHotels": "See hotels",
+      "checkDates": "Check {area} hotels for your dates",
+      "readGuide": "Read the {area} area guide"
     },
     "areaCard": {
       "pros": "Pros",
       "cons": "Cons",
       "transport": "Transport",
       "compareTokyoStation": "Compare hotels near Tokyo Station",
-      "compareAreaHotels": "Compare {area} hotels"
+      "compareAreaHotels": "Compare {area} hotels",
+      "viewDetails": "View {area} area details",
+      "checkAreaHotels": "Check {area} hotels"
     }
   },
   "stayPages": {
@@ -4146,7 +4150,8 @@
       "headingNear": "Compare hotels near {area}",
       "headingAround": "Compare hotels around {area}",
       "note": "Broad area search only. Check exact station distance, room size, bed setup, and latest price on the provider site.",
-      "fallbackNote": "Broad area search only. No dedicated {selected} hotel URL is set yet, so this opens the nearest existing broad search area: {area}. Check exact station distance, room size, bed setup, and latest price on the provider site."
+      "fallbackNote": "Broad area search only. No dedicated {selected} hotel URL is set yet, so this opens the nearest existing broad search area: {area}. Check exact station distance, room size, bed setup, and latest price on the provider site.",
+      "checkDates": "Check {area} hotels for your dates"
     },
     "stationRouteNote": {
       "title": "Station & hotel-route note",

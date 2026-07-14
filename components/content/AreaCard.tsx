@@ -1,5 +1,6 @@
 import { Check, X } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { HotelCTA } from "@/components/affiliate/HotelCTA";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
@@ -107,55 +108,82 @@ export function AreaCard({
       </div>
 
       {showHotelCta && useProviderChoice ? (
-        <ProviderChoiceCTA
-          actionLabel={hotelActionLabel}
-          pagePath={pagePath}
-          locale={locale}
-          area={`${hotel?.city ?? city}: ${hotel?.areaName ?? name}`}
-          className="mt-4"
-          providers={providerChoices(
-            ...bookingLinks.map((link) => ({
-              label: "Booking.com",
-              href: link.href,
-              trackingHref: link.trackingHref,
-              provider: link.provider,
-              product: "hotel",
-              linkId: link.linkId,
-              placement: "tokyo_first_time_card",
-              variant: "primary",
-              category: "hotel",
-              areaId: bookingAreaId,
-              subId: link.subId,
-            }) satisfies ProviderChoiceButton),
-            tripHref
-              ? {
-                  label: "Trip.com",
-                  href: tripHref,
-                  trackingHref: tripTrackingHref,
-                  provider: "trip",
-                  product: "hotel",
-                  linkId: hotelKey ? `hotelArea.${hotelKey}.trip` : undefined,
-                  placement: "tokyo_first_time_card",
-                  variant: "primary",
-                  category: "hotel",
-              }
-              : null,
-          )}
-          maxProviders={3}
-        />
+        <>
+          {/* Spec Phase 3: one primary provider per area card (Trip.com where a
+              verified link exists, else Booking.com) — never side-by-side. */}
+          <ProviderChoiceCTA
+            actionLabel={hotelActionLabel}
+            pagePath={pagePath}
+            locale={locale}
+            area={`${hotel?.city ?? city}: ${hotel?.areaName ?? name}`}
+            className="mt-4"
+            providers={providerChoices(
+              tripHref
+                ? {
+                    label: `Check ${name} hotels`,
+                    href: tripHref,
+                    trackingHref: tripTrackingHref,
+                    provider: "trip",
+                    product: "hotel",
+                    linkId: hotelKey ? `hotelArea.${hotelKey}.trip` : undefined,
+                    placement: "comparison_area_card",
+                    variant: "primary",
+                    category: "hotel",
+                  }
+                : bookingLinks.slice(0, 1).map((link) => ({
+                    label: `Check ${name} hotels`,
+                    href: link.href,
+                    trackingHref: link.trackingHref,
+                    provider: link.provider,
+                    product: "hotel",
+                    linkId: link.linkId,
+                    placement: "comparison_area_card",
+                    variant: "primary",
+                    category: "hotel",
+                    areaId: bookingAreaId,
+                    subId: link.subId,
+                  }) satisfies ProviderChoiceButton)[0] ?? null,
+            )}
+            maxProviders={1}
+          />
+          {bookingAreaId ? (
+            <div className="mt-2">
+              <Link
+                href={`/areas-to-stay/tokyo-stay-area-index?area=${bookingAreaId}#selected-area`}
+                className="text-xs font-semibold text-[#106b43] underline underline-offset-4 hover:text-[#0b5736]"
+              >
+                {t("viewDetails", { area: name })}
+              </Link>
+            </div>
+          ) : null}
+        </>
       ) : showHotelCta ? (
-        <HotelCTA
-          areaName={hotel?.areaName ?? name}
-          city={hotel?.city ?? city}
-          provider={ctaProvider}
-          href={hotel?.href ?? hotelLink}
-          placement="stay_area_hotel_card"
-          locale={locale}
-          pagePath={pagePath}
-          label={hotel?.label ?? t("compareAreaHotels", { area: name })}
-          trackingHref={hotel?.trackingHref}
-          className="mt-4"
-        />
+        <>
+          {/* Booking intent: explicit provider label, straight to the hotel
+              search (spec Phase 3 — never via the Finder). */}
+          <HotelCTA
+            areaName={hotel?.areaName ?? name}
+            city={hotel?.city ?? city}
+            provider={ctaProvider}
+            href={hotel?.href ?? hotelLink}
+            placement="comparison_area_card"
+            locale={locale}
+            pagePath={pagePath}
+            label={t("checkAreaHotels", { area: hotel?.areaName ?? name })}
+            trackingHref={hotel?.trackingHref}
+            className="mt-4"
+          />
+          {bookingAreaId ? (
+            <div className="mt-2">
+              <Link
+                href={`/areas-to-stay/tokyo-stay-area-index?area=${bookingAreaId}#selected-area`}
+                className="text-xs font-semibold text-[#106b43] underline underline-offset-4 hover:text-[#0b5736]"
+              >
+                {t("viewDetails", { area: name })}
+              </Link>
+            </div>
+          ) : null}
+        </>
       ) : null}
     </div>
   );

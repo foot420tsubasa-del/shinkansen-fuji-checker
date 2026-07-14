@@ -5,6 +5,8 @@ import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
 import { KLOOK_URL, ESIM_URL, JR_PASS_URL, OMIO_SHINKANSEN_URL } from "@/src/affiliateLinks";
+import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
+import { GuideStickyCta } from "@/components/affiliate/GuideStickyCta";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
@@ -384,7 +386,7 @@ const guideUiByLocale = {
     readyTitle: "Ready to book Seat E?",
     readyBody: "Book your Shinkansen ticket after confirming the Fuji-side seat. Use route comparison if you are still deciding the train path, and check JR Pass only for multi-city JR-heavy routes.",
     bookShinkansenButton: "Book Shinkansen ticket",
-    checkJrPassButton: "Check JR Pass options",
+    checkJrPassButton: "Check JR Pass options", quickKlookTitle: "Book Seat E after checking your direction", quickKlookNote: "Reserve your Shinkansen ticket in English and select the Fuji-side seat when available.", quickKlookButton: "Book Shinkansen ticket on Klook", dirToKyoto: "Book Tokyo → Kyoto / Osaka", dirToTokyo: "Book Kyoto / Osaka → Tokyo", dirSeatNote: "Choose Seat E on the seat map when available.", bookCtaButton: "Book Seat E on Klook", bookCtaNote: "Select your route first, then choose Seat E when seat selection is available.", omioLead: "Comparing the train with buses or flights?", omioLink: "View other route options on Omio.", stickyConfirmed: "Seat E confirmed", stickyButton: "Book Shinkansen ticket",
   },
   "pt-BR": {
     travelEssentialsTitle: "Checklist antes da partida",
@@ -427,7 +429,7 @@ const guideUiByLocale = {
     readyTitle: "Pronto para reservar o assento E?",
     readyBody: "Reserve o Shinkansen depois de confirmar o assento do lado do Fuji. Veja o JR Pass apenas se sua rota tiver vários trajetos longos de JR.",
     bookShinkansenButton: "Reservar Shinkansen",
-    checkJrPassButton: "Ver JR Pass",
+    checkJrPassButton: "Ver JR Pass", quickKlookTitle: "Reserve o assento E após confirmar sua direção", quickKlookNote: "Reserve seu bilhete de Shinkansen em inglês e selecione o assento do lado do Fuji quando disponível.", quickKlookButton: "Reservar bilhete de Shinkansen na Klook", dirToKyoto: "Reservar Tóquio → Kyoto / Osaka", dirToTokyo: "Reservar Kyoto / Osaka → Tóquio", dirSeatNote: "Escolha o assento E no mapa de assentos quando disponível.", bookCtaButton: "Reservar o assento E na Klook", bookCtaNote: "Escolha a rota primeiro e depois o assento E quando a seleção estiver disponível.", omioLead: "Comparando o trem com ônibus ou voos?", omioLink: "Veja outras opções de rota na Omio.", stickyConfirmed: "Assento E confirmado", stickyButton: "Reservar bilhete de Shinkansen",
   },
   es: {
     travelEssentialsTitle: "Checklist antes de salir",
@@ -470,7 +472,7 @@ const guideUiByLocale = {
     readyTitle: "¿Listo para reservar el asiento E?",
     readyBody: "Reserva el Shinkansen después de confirmar el asiento del lado del Fuji. Revisa el JR Pass solo si tu ruta incluye varios trayectos largos de JR.",
     bookShinkansenButton: "Reservar Shinkansen",
-    checkJrPassButton: "Ver JR Pass",
+    checkJrPassButton: "Ver JR Pass", quickKlookTitle: "Reserva el asiento E tras confirmar tu dirección", quickKlookNote: "Reserva tu billete de Shinkansen en inglés y elige el asiento del lado del Fuji cuando esté disponible.", quickKlookButton: "Reservar billete de Shinkansen en Klook", dirToKyoto: "Reservar Tokio → Kioto / Osaka", dirToTokyo: "Reservar Kioto / Osaka → Tokio", dirSeatNote: "Elige el asiento E en el mapa de asientos cuando esté disponible.", bookCtaButton: "Reservar el asiento E en Klook", bookCtaNote: "Elige primero la ruta y luego el asiento E cuando la selección esté disponible.", omioLead: "¿Comparando el tren con autobuses o vuelos?", omioLink: "Ver otras opciones de ruta en Omio.", stickyConfirmed: "Asiento E confirmado", stickyButton: "Reservar billete de Shinkansen",
   },
   ko: {
     travelEssentialsTitle: "출발 전 체크리스트",
@@ -513,7 +515,7 @@ const guideUiByLocale = {
     readyTitle: "E석을 예약할 준비가 되었나요?",
     readyBody: "후지산 쪽 좌석을 확인한 뒤 신칸센 티켓을 예약하세요. 여러 장거리 JR 이동이 있을 때만 JR Pass를 확인하세요.",
     bookShinkansenButton: "신칸센 예약",
-    checkJrPassButton: "JR Pass 확인",
+    checkJrPassButton: "JR Pass 확인", quickKlookTitle: "방향 확인 후 E석을 예약하세요", quickKlookNote: "영어로 신칸센 티켓을 예약하고, 가능하면 후지산 쪽 좌석을 선택하세요.", quickKlookButton: "Klook에서 신칸센 티켓 예약", dirToKyoto: "도쿄 → 교토 / 오사카 예약", dirToTokyo: "교토 / 오사카 → 도쿄 예약", dirSeatNote: "좌석표에서 가능하면 E석을 선택하세요.", bookCtaButton: "Klook에서 E석 예약", bookCtaNote: "먼저 노선을 고른 뒤, 좌석 선택이 가능하면 E석을 선택하세요.", omioLead: "기차를 버스·항공과 비교하고 싶나요?", omioLink: "Omio에서 다른 경로 옵션 보기.", stickyConfirmed: "E석 확인 완료", stickyButton: "신칸센 티켓 예약",
   },
   "zh-TW": {
     travelEssentialsTitle: "出發前檢查清單",
@@ -556,7 +558,7 @@ const guideUiByLocale = {
     readyTitle: "準備好預訂 E 座了嗎？",
     readyBody: "確認富士山側座位後再預訂新幹線車票。只有多段長距離 JR 移動時才需要查看 JR Pass。",
     bookShinkansenButton: "預訂新幹線",
-    checkJrPassButton: "查看 JR Pass",
+    checkJrPassButton: "查看 JR Pass", quickKlookTitle: "確認方向後預訂 E 席", quickKlookNote: "以英文介面預訂新幹線車票，可選時請選富士山側座位。", quickKlookButton: "在 Klook 預訂新幹線車票", dirToKyoto: "預訂 東京 → 京都 / 大阪", dirToTokyo: "預訂 京都 / 大阪 → 東京", dirSeatNote: "可選座時請在座位圖選擇 E 席。", bookCtaButton: "在 Klook 預訂 E 席", bookCtaNote: "先選路線，可選座時再選擇 E 席。", omioLead: "想比較火車、巴士或航班？", omioLink: "在 Omio 查看其他路線選項。", stickyConfirmed: "E 席已確認", stickyButton: "預訂新幹線車票",
   },
   "zh-CN": {
     travelEssentialsTitle: "出发前检查清单",
@@ -599,7 +601,7 @@ const guideUiByLocale = {
     readyTitle: "准备好预订 E 座了吗？",
     readyBody: "确认富士山侧座位后再预订新干线车票。只有多段长距离 JR 移动时才需要查看 JR Pass。",
     bookShinkansenButton: "预订新干线",
-    checkJrPassButton: "查看 JR Pass",
+    checkJrPassButton: "查看 JR Pass", quickKlookTitle: "确认方向后预订 E 座", quickKlookNote: "以英文界面预订新干线车票，可选时请选富士山侧座位。", quickKlookButton: "在 Klook 预订新干线车票", dirToKyoto: "预订 东京 → 京都 / 大阪", dirToTokyo: "预订 京都 / 大阪 → 东京", dirSeatNote: "可选座时请在座位图选择 E 座。", bookCtaButton: "在 Klook 预订 E 座", bookCtaNote: "先选路线，可选座时再选择 E 座。", omioLead: "想比较火车、巴士或航班？", omioLink: "在 Omio 查看其他路线选项。", stickyConfirmed: "E 座已确认", stickyButton: "预订新干线车票",
   },
   fr: {
     travelEssentialsTitle: "Checklist avant le départ",
@@ -642,7 +644,7 @@ const guideUiByLocale = {
     readyTitle: "Prêt à réserver le siège E ?",
     readyBody: "Réservez votre Shinkansen après avoir confirmé le siège côté Fuji. Vérifiez le JR Pass seulement si votre itinéraire comprend plusieurs longs trajets JR.",
     bookShinkansenButton: "Réserver Shinkansen",
-    checkJrPassButton: "Voir JR Pass",
+    checkJrPassButton: "Voir JR Pass", quickKlookTitle: "Réservez le siège E après avoir vérifié votre direction", quickKlookNote: "Réservez votre billet de Shinkansen en anglais et choisissez le siège côté Fuji lorsque c'est possible.", quickKlookButton: "Réserver le billet de Shinkansen sur Klook", dirToKyoto: "Réserver Tokyo → Kyoto / Osaka", dirToTokyo: "Réserver Kyoto / Osaka → Tokyo", dirSeatNote: "Choisissez le siège E sur le plan lorsque la sélection est possible.", bookCtaButton: "Réserver le siège E sur Klook", bookCtaNote: "Choisissez d'abord votre trajet, puis le siège E lorsque la sélection est disponible.", omioLead: "Vous comparez le train avec le bus ou l'avion ?", omioLink: "Voir d'autres options d'itinéraire sur Omio.", stickyConfirmed: "Siège E confirmé", stickyButton: "Réserver le billet de Shinkansen",
   },
   de: {
     travelEssentialsTitle: "Checkliste vor der Abfahrt",
@@ -685,7 +687,7 @@ const guideUiByLocale = {
     readyTitle: "Bereit, Sitz E zu buchen?",
     readyBody: "Buche dein Shinkansen-Ticket nach der Fuji-Sitzprüfung. Prüfe den JR Pass nur bei mehreren langen JR-Fahrten.",
     bookShinkansenButton: "Shinkansen buchen",
-    checkJrPassButton: "JR Pass prüfen",
+    checkJrPassButton: "JR Pass prüfen", quickKlookTitle: "Buche Sitz E, nachdem du deine Richtung geprüft hast", quickKlookNote: "Reserviere dein Shinkansen-Ticket auf Englisch und wähle, wenn möglich, den Sitz auf der Fuji-Seite.", quickKlookButton: "Shinkansen-Ticket auf Klook buchen", dirToKyoto: "Tokyo → Kyoto / Osaka buchen", dirToTokyo: "Kyoto / Osaka → Tokyo buchen", dirSeatNote: "Wähle Sitz E im Sitzplan, wenn verfügbar.", bookCtaButton: "Sitz E auf Klook buchen", bookCtaNote: "Wähle zuerst die Strecke, dann Sitz E, sobald die Sitzwahl verfügbar ist.", omioLead: "Vergleichst du den Zug mit Bus oder Flug?", omioLink: "Weitere Routenoptionen auf Omio ansehen.", stickyConfirmed: "Sitz E bestätigt", stickyButton: "Shinkansen-Ticket buchen",
   },
   ru: {
     travelEssentialsTitle: "Чек-лист перед отправлением",
@@ -728,7 +730,7 @@ const guideUiByLocale = {
     readyTitle: "Готовы забронировать место E?",
     readyBody: "Бронируйте Shinkansen после проверки места на сторону Фудзи. JR Pass проверяйте только при нескольких длинных поездках JR.",
     bookShinkansenButton: "Забронировать Shinkansen",
-    checkJrPassButton: "Проверить JR Pass",
+    checkJrPassButton: "Проверить JR Pass", quickKlookTitle: "Забронируйте место E после проверки направления", quickKlookNote: "Забронируйте билет на синкансэн на английском и выберите место со стороны Фудзи, если доступно.", quickKlookButton: "Забронировать билет на Klook", dirToKyoto: "Бронировать Токио → Киото / Осака", dirToTokyo: "Бронировать Киото / Осака → Токио", dirSeatNote: "Выберите место E на схеме, когда выбор доступен.", bookCtaButton: "Забронировать место E на Klook", bookCtaNote: "Сначала выберите маршрут, затем место E, когда доступен выбор мест.", omioLead: "Сравниваете поезд с автобусами или самолётами?", omioLink: "Посмотреть другие варианты маршрута на Omio.", stickyConfirmed: "Место E подтверждено", stickyButton: "Забронировать билет на синкансэн",
   },
 };
 
@@ -1135,7 +1137,7 @@ export default async function GuidePage({ params }: Props) {
             rel={AFFILIATE_REL}
             category="esim"
             provider="klook"
-            placement="guide_checklist"
+            placement="guide_esim_checklist"
             pagePath="/guide"
             locale={locale}
             label="Get Japan eSIM"
@@ -1176,46 +1178,21 @@ export default async function GuidePage({ params }: Props) {
   );
 
   const renderTopBookingCtas = () => (
-    <section className="mb-5 rounded-2xl border border-slate-200 bg-white px-4 py-3.5 shadow-sm shadow-slate-200/70 lg:px-5">
-      <TrackedAffiliateLink
-        href={KLOOK_URL}
-        target="_blank"
-        rel={AFFILIATE_REL}
-        category="train"
-        provider="klook"
-        placement="guide_top_klook_shinkansen"
-        pagePath="/guide"
-        locale={locale}
-        label="Book Shinkansen ticket on Klook"
-        linkId="shinkansenTicket"
-        product="shinkansen_ticket"
-        adid="1265303"
-        className="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
-      >
-        Book Shinkansen ticket on Klook
-      </TrackedAffiliateLink>
-      {OMIO_SHINKANSEN_URL ? (
-        <p className="mt-2 text-center text-[12px] text-slate-500">
-          Still comparing routes?{" "}
-          <TrackedAffiliateLink
-            href={OMIO_SHINKANSEN_URL}
-            target="_blank"
-            rel={AFFILIATE_REL}
-            category="train"
-            provider="omio"
-            placement="guide_top_omio_compare"
-            pagePath="/guide"
-            locale={locale}
-            label="Compare route on Omio"
-            linkId="omioShinkansen"
-            product="route_compare"
-            className="font-medium text-slate-600 underline underline-offset-2 hover:text-slate-800"
-          >
-            Compare on Omio
-          </TrackedAffiliateLink>
-        </p>
-      ) : null}
-    </section>
+    /* Primary Shinkansen CTA (Klook only — Omio never appears in this slot).
+       Copy switches to the direction-specific wording once the Seat Checker
+       has been answered; the link stays the verified Klook Shinkansen link. */
+    <GuideKlookCta
+      href={KLOOK_URL}
+      locale={locale}
+      copy={{
+        title: ui.quickKlookTitle,
+        note: ui.quickKlookNote,
+        button: ui.quickKlookButton,
+        dirToKyoto: ui.dirToKyoto,
+        dirToTokyo: ui.dirToTokyo,
+        dirSeatNote: ui.dirSeatNote,
+      }}
+    />
   );
 
   const renderAfterSeatNextSteps = () => (
@@ -1250,29 +1227,24 @@ export default async function GuidePage({ params }: Props) {
           </span>
         </TrackedAffiliateLink>
 
-        <TrackedAffiliateLink
-          href={JR_PASS_URL}
-          target="_blank"
-          rel={AFFILIATE_REL}
-          category="train"
-          provider="klook"
-          placement="guide_top_klook_jr_pass"
-          pagePath="/guide"
+        {/* Secondary: internal JR Pass comparison — the article routes to
+            Klook itself; the gateway never lines up multiple Klook offers. */}
+        <TrackedInternalLink
+          href="/jr-pass-vs-single-ticket"
+          sourcePage="/guide"
+          placement="guide_after_seat_next_step"
+          label="Check whether a JR Pass fits your itinerary"
           locale={locale}
-          label="Check JR Pass options"
-          linkId="jrPass"
-          product="jr_pass"
-          adid="1165791"
-          className="flex h-full flex-col rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3.5 text-[12px] shadow-sm transition-colors hover:border-orange-300 hover:bg-orange-100"
+          className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-[12px] shadow-sm transition-colors hover:border-slate-300 hover:bg-slate-50"
         >
-          <span className="block font-semibold text-slate-950">Check JR Pass options</span>
+          <span className="block font-semibold text-slate-950">Check whether a JR Pass fits your itinerary</span>
           <span className="mt-1 block leading-5 text-slate-600">
-            Use this only if your itinerary includes several long JR rides.
+            Only for itineraries with several long-distance JR rides.
           </span>
-          <span className="mt-auto inline-flex w-fit rounded-full border border-orange-300 bg-white px-3 py-1.5 font-semibold text-orange-700">
-            Open Klook
+          <span className="mt-auto inline-flex w-fit rounded-full border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-700">
+            Open comparison guide
           </span>
-        </TrackedAffiliateLink>
+        </TrackedInternalLink>
 
         <TrackedInternalLink
           href="/areas-to-stay/where-to-stay-before-shinkansen"
@@ -1293,23 +1265,25 @@ export default async function GuidePage({ params }: Props) {
 
       </div>
       {OMIO_SHINKANSEN_URL ? (
+        /* The ONLY Omio link on the guide: a small text link for genuine
+           multimodal comparison, never a button, never beside Klook. */
         <p className="mt-3 text-[12px] text-slate-500">
-          Still comparing trains, buses, and routes?{" "}
+          {ui.omioLead}{" "}
           <TrackedAffiliateLink
             href={OMIO_SHINKANSEN_URL}
             target="_blank"
             rel={AFFILIATE_REL}
             category="train"
             provider="omio"
-            placement="guide_top_omio_compare"
+            placement="guide_route_comparison_text"
             pagePath="/guide"
             locale={locale}
-            label="Compare train options"
-            linkId="omioShinkansen"
-            product="route_compare"
+            label="View other route options on Omio"
+            linkId="guide_omio_route_comparison"
+            product="multimodal_route_comparison"
             className="font-medium text-slate-600 underline underline-offset-2 hover:text-slate-800"
           >
-            Compare options on Omio
+            {ui.omioLink}
           </TrackedAffiliateLink>
         </p>
       ) : null}
@@ -1460,47 +1434,26 @@ export default async function GuidePage({ params }: Props) {
   );
 
   const renderSeatBookingReminder = () => (
+    /* The how-to-book section's only online-booking CTA (Klook, spec 1-3). */
     <div className="mt-4 rounded-2xl border border-orange-100 bg-orange-50/60 px-3.5 py-3">
-      <p className="text-sm font-semibold text-slate-950">{ui.readyTitle}</p>
-      <p className="mt-1 text-xs leading-5 text-slate-600">
-        {ui.readyBody}
-      </p>
-      <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-        <TrackedAffiliateLink
-          href={KLOOK_URL}
-          target="_blank"
-          rel={AFFILIATE_REL}
-          category="train"
-          provider="klook"
-          placement="guide_ready_klook_shinkansen"
-          pagePath="/guide"
-          locale={locale}
-          label="Book Shinkansen ticket"
-          linkId="shinkansenTicket"
-          product="shinkansen_ticket"
-          adid="1265303"
-          className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
-        >
-          {ui.bookShinkansenButton}
-        </TrackedAffiliateLink>
-        <TrackedAffiliateLink
-          href={JR_PASS_URL}
-          target="_blank"
-          rel={AFFILIATE_REL}
-          category="train"
-          provider="klook"
-          placement="guide_ready_klook_jr_pass"
-          pagePath="/guide"
-          locale={locale}
-          label="Check JR Pass options"
-          linkId="jrPass"
-          product="jr_pass"
-          adid="1165791"
-          className="inline-flex min-h-10 flex-1 items-center justify-center rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
-        >
-          {ui.checkJrPassButton}
-        </TrackedAffiliateLink>
-      </div>
+      <TrackedAffiliateLink
+        href={KLOOK_URL}
+        target="_blank"
+        rel={AFFILIATE_REL}
+        category="train"
+        provider="klook"
+        placement="guide_how_to_book"
+        pagePath="/guide"
+        locale={locale}
+        label="Book Seat E on Klook"
+        linkId="guide_klook_how_to_book"
+        product="shinkansen"
+        adid="1265303"
+        className="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
+      >
+        {ui.bookCtaButton}
+      </TrackedAffiliateLink>
+      <p className="mt-2 text-center text-[11px] leading-4 text-slate-500">{ui.bookCtaNote}</p>
     </div>
   );
 
@@ -1782,7 +1735,7 @@ export default async function GuidePage({ params }: Props) {
                 rel={AFFILIATE_REL}
                 category="train"
                 provider="klook"
-                placement="guide_jrpass_section_klook"
+                placement="guide_jr_pass_section"
                 pagePath="/guide"
                 locale={locale}
                 label="Check JR Pass options on Klook"
@@ -1941,30 +1894,14 @@ export default async function GuidePage({ params }: Props) {
       </div>
       <SiteFooter />
 
-      {/* Mobile-only sticky Klook CTA — the Shinkansen ticket is this
-          page's highest-value conversion, and the top booking strip
-          scrolls away early in a very long article. Purchase (terracotta)
-          styling per the design system; same affiliate params as the top
-          strip with a dedicated placement for measurement. */}
-      <StickyMobileCta>
-        <TrackedAffiliateLink
-          href={KLOOK_URL}
-          target="_blank"
-          rel={AFFILIATE_REL}
-          category="train"
-          provider="klook"
-          placement="guide_sticky_klook"
-          pagePath="/guide"
-          locale={locale}
-          label="Book Shinkansen ticket on Klook"
-          linkId="shinkansenTicket"
-          product="shinkansen_ticket"
-          adid="1265303"
-          className="inline-flex min-h-12 w-full items-center justify-center gap-1.5 rounded-[12px] border border-[#D94A32] bg-[#D94A32] px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
-        >
-          Book Shinkansen ticket on Klook
-        </TrackedAffiliateLink>
-      </StickyMobileCta>
+      {/* Mobile sticky CTA — only after the Seat Checker has been answered
+          (direction persisted), dismissible per session, hides near the
+          footer, zero CLS (fixed overlay). */}
+      <GuideStickyCta
+        href={KLOOK_URL}
+        locale={locale}
+        copy={{ confirmed: ui.stickyConfirmed, button: ui.stickyButton }}
+      />
     </main>
   );
 }

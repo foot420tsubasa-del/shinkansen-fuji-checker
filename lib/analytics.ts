@@ -21,13 +21,17 @@ function isGaDebugMode() {
 export function trackEvent({ action, category, label, value, params }: GtagEvent) {
   if (typeof window === "undefined") return;
   const gaWindow = window as GtagWindow;
-  const eventParams = {
+  const merged: Record<string, unknown> = {
     event_category: category,
     event_label: label,
     value,
     ...params,
     ...(isGaDebugMode() ? { debug_mode: true } : {}),
   };
+  // Omit absent values instead of sending empty strings / undefined.
+  const eventParams = Object.fromEntries(
+    Object.entries(merged).filter(([, v]) => v !== undefined && v !== null && v !== ""),
+  );
 
   if (process.env.NODE_ENV === "development") {
     console.debug("[GA4 event]", action, eventParams);
@@ -62,6 +66,19 @@ export type AffiliateClickParams = {
   itinerary_slug?: string;
   day_number?: number;
   cta_type?: "stay" | "booking" | "prepare" | "esim" | "rail" | "seat_checker" | "guide";
+  /** Revenue-funnel spec (Phase 6) dimensions — all optional, omitted when absent. */
+  page_type?:
+    | "shinkansen_guide"
+    | "shinkansen_tool"
+    | "hotel_comparison"
+    | "hotel_area"
+    | "hotel_finder"
+    | "arrival_guide"
+    | "rail_guide";
+  direction?: string;
+  origin?: string;
+  destination?: string;
+  selected_seat?: string;
   hotel_name?: string;
   hotel_id?: string;
   sub_id?: string;
@@ -120,6 +137,11 @@ export function trackAffiliateClick(params: AffiliateClickParams) {
       itinerary_slug: params.itinerary_slug,
       day_number: params.day_number,
       cta_type: params.cta_type,
+      page_type: params.page_type,
+      direction: params.direction,
+      origin: params.origin,
+      destination: params.destination,
+      selected_seat: params.selected_seat,
       hotel_name: params.hotel_name,
       hotel_id: params.hotel_id,
       sub_id: params.sub_id,
@@ -129,6 +151,34 @@ export function trackAffiliateClick(params: AffiliateClickParams) {
       route_from: params.route_from ?? registryMeta.route_from,
       route_to: params.route_to ?? registryMeta.route_to,
       url_status: params.url_status ?? registryMeta.url_status,
+    },
+  });
+}
+
+/**
+ * CTA impression (affiliate_cta_view). Callers must dedupe per page view —
+ * use the useCtaImpression hook, which observes once per mount.
+ */
+export function trackAffiliateCtaView(params: {
+  provider: AffiliateClickParams["provider"];
+  product?: string;
+  placement: AffiliateClickParams["placement"];
+  page_path?: string;
+  link_id?: string;
+  locale?: string;
+}) {
+  trackEvent({
+    action: "affiliate_cta_view",
+    category: "cta_view",
+    label: params.placement,
+    params: {
+      provider: params.provider,
+      product: params.product,
+      placement: params.placement,
+      page_path:
+        params.page_path ?? (typeof window === "undefined" ? undefined : window.location.pathname),
+      link_id: params.link_id,
+      locale: params.locale,
     },
   });
 }

@@ -27,7 +27,7 @@ export function DayCard({
   const hotel = stayHotelKey ? getHotelLink(stayHotelKey) : null;
   const resolvedStayLink = hotel?.href ?? stayLink;
   const analyticsStayLink = hotel?.trackingHref ?? resolvedStayLink ?? "";
-  const stayLabel = hotel?.label ?? "See hotels";
+  const stayLabel = hotel?.label ?? "Check hotels for your dates";
 
   return (
     <div className="relative flex gap-4">
