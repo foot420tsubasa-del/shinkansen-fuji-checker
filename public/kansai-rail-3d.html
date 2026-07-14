@@ -159,15 +159,15 @@
   #btn-photo{background:none;border:none;font-size:16px;padding:0 2px}
 
   /* ---- strip: image-style flat line diagram ---- */
-  #strip{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);z-index:9;
+  #strip{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);z-index:9;
     width:min(1120px,calc(100% - 24px));background:var(--card);border:1px solid var(--line);
     border-radius:14px;box-shadow:0 18px 60px rgba(25,40,80,.22);overflow:hidden;animation:rise .28s ease}
   @keyframes rise{from{transform:translate(-50%,16px);opacity:0}to{transform:translate(-50%,0);opacity:1}}
   @media (prefers-reduced-motion:reduce){#strip{animation:none}}
-  .s-head{display:flex;align-items:center;gap:10px;padding:11px 14px 6px}
-  #s-badge{width:32px;height:32px;border-radius:50%;border:3.5px solid var(--c);flex:none;
+  .s-head{display:flex;align-items:center;gap:10px;padding:8px 12px 4px}
+  #s-badge{width:28px;height:28px;border-radius:50%;border:3px solid var(--c);flex:none;
     display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--ink);background:#fff}
-  .s-head .tt b{font-size:16px;display:block;line-height:1.15}
+  .s-head .tt b{font-size:14px;display:block;line-height:1.15}
   .s-head .tt small{font-size:10px;color:var(--sub)}
   .s-head .sp{flex:1}
   #s-meta{font-size:10px;color:var(--sub);text-align:right;line-height:1.5;max-width:40%}
@@ -175,29 +175,29 @@
   .s-names-toggle input{accent-color:var(--acc)}
   #s-close{font-size:14px;color:var(--sub);background:var(--btn);border:1px solid var(--line);border-radius:8px;width:27px;height:27px;flex:none}
   #s-profile{display:block;margin:0 14px}
-  .s-scroll{overflow-x:auto;overflow-y:hidden;padding:2px 12px 12px}
+  .s-scroll{overflow-x:auto;overflow-y:hidden;padding:2px 12px 8px}
   .s-scroll::-webkit-scrollbar{height:8px}
   .s-scroll::-webkit-scrollbar-thumb{background:rgba(100,116,143,.4);border-radius:4px}
   .s-bar{display:flex;min-width:max-content;padding:0 10px}
-  .st{width:56px;flex:none;display:flex;flex-direction:column;align-items:center;position:relative}
-  .st::before{content:"";position:absolute;left:0;right:0;top:calc(var(--xfh) + 9px);height:9px;background:var(--c);z-index:0}
+  .st{width:52px;flex:none;display:flex;flex-direction:column;align-items:center;position:relative}
+  .st::before{content:"";position:absolute;left:0;right:0;top:calc(var(--xfh) + 7px);height:9px;background:var(--c);z-index:0}
   .st:first-child::before{left:50%;border-radius:5px 0 0 5px}
   .st:last-child::before{right:50%;border-radius:0 5px 5px 0}
-  .xf-col{height:var(--xfh);display:flex;flex-direction:column-reverse;align-items:center;gap:2px;padding-bottom:4px}
-  .xf-col i{width:15px;height:15px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
-    color:#fff;font-style:normal;font-size:6.5px;font-weight:900;cursor:pointer;border:1.5px solid #fff;
+  .xf-col{height:var(--xfh);display:flex;flex-direction:column-reverse;align-items:center;gap:1px;padding-bottom:3px}
+  .xf-col i{width:12px;height:12px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;
+    color:#fff;font-style:normal;font-size:5.5px;font-weight:900;cursor:pointer;border:1px solid #fff;
     box-shadow:0 1px 2px rgba(20,35,70,.35);transition:transform .12s}
   .xf-col i:hover{transform:scale(1.35)}
-  .dot-num{width:27px;height:27px;border-radius:50%;background:var(--btn);border:3px solid var(--c);z-index:1;flex:none;
+  .dot-num{width:23px;height:23px;border-radius:50%;background:var(--btn);border:2.5px solid var(--c);z-index:1;flex:none;
     display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
   .dot-num small{font-size:6.5px;font-weight:800;color:#1c2740}
   .dot-num b{font-size:9px;font-weight:900;color:#1c2740}
-  .names{display:flex;gap:2px;justify-content:center;margin-top:7px;height:104px}
+  .names{display:flex;gap:2px;justify-content:center;margin-top:5px;height:78px}
   #strip.nonames .names{display:none}
   #strip.nonames .s-scroll{padding-bottom:14px}
   .names .nm{writing-mode:vertical-rl;text-orientation:upright;font-size:11.5px;font-weight:800;letter-spacing:.08em;
-    line-height:1.05;white-space:nowrap;background:none;border:none;color:var(--ink);cursor:pointer;padding:0;max-height:104px;overflow:hidden}
-  .names .rj{writing-mode:vertical-rl;text-orientation:mixed;font-size:8.5px;color:var(--sub);max-height:104px;overflow:hidden;white-space:nowrap}
+    line-height:1.05;white-space:nowrap;background:none;border:none;color:var(--ink);cursor:pointer;padding:0;max-height:78px;overflow:hidden}
+  .names .rj{writing-mode:vertical-rl;text-orientation:mixed;font-size:8.5px;color:var(--sub);max-height:78px;overflow:hidden;white-space:nowrap}
   body.latin .names .nm{text-orientation:mixed;letter-spacing:.02em;font-size:10px}
   body.latin .names .rj{text-orientation:upright;letter-spacing:.06em}
   .names .nm:hover{color:var(--acc)}
@@ -319,7 +319,7 @@
 /* ---- fujiseat integration: simplified UI / CTAs / embed mode ---- */
 #btn-tour{display:none!important}
 #panel .sec:has(#sl-exagg){display:none!important}
-#panel label.opt:has(#ck-tilt),#panel label.opt:has(#ck-rot),#panel label.opt:has(#ck-pillar),#panel label.opt:has(#ck-shaft){display:none!important}
+#panel label.opt:has(#ck-tilt),#panel label.opt:has(#ck-rot),#panel label.opt:has(#ck-pillar),#panel label.opt:has(#ck-shaft),#cam-under{display:none!important}
 .speeds button[data-s="30"],.speeds button[data-s="180"],.speeds button[data-s="480"]{display:none!important}
 .presets button[data-h="5"],.presets button[data-h="13"],.presets button[data-h="18"],.presets button[data-h="23.8"]{display:none!important}
 #s-profile{display:none!important}
@@ -738,7 +738,7 @@ window.PAGE.subs = {"ja": "関西圏 立体路線模型 — JR西日本 × Osaka
 window.I18N = (function () {
   const S = {
     ja: {
-      search: "駅検索", searchPh: "駅名を入力…", lines: "路線", all: "すべて",
+      search: "駅検索", searchPh: "駅名を入力…", lines: "路線", all: "すべて", clear: "クリア",
       depth: "深さ表現", exaggL: "強調", depthNote: "地下路線は実深度(概算)×強調倍率で表示",
       map: "地図", showMap: "地形マップを表示", opacity: "濃さ",
       labels: "駅名表示", stNames: "駅名を表示", lNone: "なし", lHub: "主要駅", lAll: "全駅",
@@ -756,12 +756,12 @@ window.I18N = (function () {
       loopIn: "内回り", loopOut: "外回り",
       hint1: "路線クリック＝停車駅と縦断面　駅クリック＝駅カルテ",
       hint2: "列車をクリック → 追尾モード(ESCで解除)",
-      hint3: "ドラッグ:回転 ／ Shift+ドラッグ:移動 ／ ホイール:拡縮",
+      hint3: "ドラッグ: 移動 / 右ドラッグ・Ctrl+ドラッグ: 回転 / ホイール: ズーム",
       credit1: "駅位置は実データ準拠・深度は代表値(模式) ／ ダイヤは概略再現",
       panel: "パネル", statDeep: "最深部", statHigh: "最高部", statLines: "路線数"
     },
     en: {
-      search: "Station search", searchPh: "Type a station name…", lines: "Lines", all: "All",
+      search: "Station search", searchPh: "Type a station name…", lines: "Lines", all: "All", clear: "Clear",
       depth: "Depth", exaggL: "Exaggerate", depthNote: "Underground lines: approx. real depth × exaggeration",
       map: "Map", showMap: "Show terrain map", opacity: "Opacity",
       labels: "Station labels", stNames: "Show station names", lNone: "None", lHub: "Major", lAll: "All",
@@ -779,12 +779,12 @@ window.I18N = (function () {
       loopIn: "Inner loop", loopOut: "Outer loop",
       hint1: "Click a line = stops & profile / Click a station = chart",
       hint2: "Click a train → follow mode (ESC to exit)",
-      hint3: "Drag: rotate / Shift+drag: pan / Wheel: zoom",
+      hint3: "Drag: move / Right-drag or Ctrl+drag: rotate / Wheel: zoom",
       credit1: "Station positions from open data; depths representative / rough weekday timetable",
       panel: "PANEL", statDeep: "Max depth", statHigh: "Max height", statLines: "Lines"
     },
     "zh-Hant": {
-      search: "車站搜尋", searchPh: "輸入車站名稱…", lines: "路線", all: "全部",
+      search: "車站搜尋", searchPh: "輸入車站名稱…", lines: "路線", all: "全部", clear: "清除",
       depth: "深度表現", exaggL: "強調", depthNote: "地下路線以實際深度(約略)×強調倍率顯示",
       map: "地圖", showMap: "顯示地形圖", opacity: "濃度",
       labels: "站名顯示", stNames: "顯示站名", lNone: "無", lHub: "主要車站", lAll: "全部車站",
@@ -802,12 +802,12 @@ window.I18N = (function () {
       loopIn: "內環", loopOut: "外環",
       hint1: "點路線＝停靠站與縱斷面　點車站＝車站資訊",
       hint2: "點擊列車 → 追蹤模式(ESC解除)",
-      hint3: "拖曳:旋轉 ／ Shift+拖曳:平移 ／ 滾輪:縮放",
+      hint3: "拖曳：移動 / 右鍵拖曳或 Ctrl+拖曳：旋轉 / 滾輪：縮放",
       credit1: "車站位置依開放資料・深度為代表值 ／ 時刻表為概略重現",
       panel: "面板", statDeep: "最深", statHigh: "最高", statLines: "路線數"
     },
     "zh-Hans": {
-      search: "车站搜索", searchPh: "输入车站名称…", lines: "路线", all: "全部",
+      search: "车站搜索", searchPh: "输入车站名称…", lines: "路线", all: "全部", clear: "清除",
       depth: "深度表现", exaggL: "强调", depthNote: "地下路线以实际深度(约)×强调倍率显示",
       map: "地图", showMap: "显示地形图", opacity: "浓度",
       labels: "站名显示", stNames: "显示站名", lNone: "无", lHub: "主要车站", lAll: "全部车站",
@@ -825,12 +825,12 @@ window.I18N = (function () {
       loopIn: "内环", loopOut: "外环",
       hint1: "点路线＝停靠站与纵断面　点车站＝车站信息",
       hint2: "点击列车 → 追踪模式(ESC解除)",
-      hint3: "拖拽:旋转 ／ Shift+拖拽:平移 ／ 滚轮:缩放",
+      hint3: "拖动：移动 / 右键拖动或 Ctrl+拖动：旋转 / 滚轮：缩放",
       credit1: "车站位置依开放数据・深度为代表值 ／ 时刻表为概略重现",
       panel: "面板", statDeep: "最深", statHigh: "最高", statLines: "路线数"
     },
     ko: {
-      search: "역 검색", searchPh: "역 이름 입력…", lines: "노선", all: "전체",
+      search: "역 검색", searchPh: "역 이름 입력…", lines: "노선", all: "전체", clear: "전체 해제",
       depth: "깊이 표현", exaggL: "강조", depthNote: "지하 노선은 실제 깊이(약)×강조 배율로 표시",
       map: "지도", showMap: "지형 지도 표시", opacity: "농도",
       labels: "역명 표시", stNames: "역명 표시", lNone: "없음", lHub: "주요역", lAll: "전체역",
@@ -848,12 +848,12 @@ window.I18N = (function () {
       loopIn: "내선순환", loopOut: "외선순환",
       hint1: "노선 클릭＝정차역과 종단면　역 클릭＝역 정보",
       hint2: "열차 클릭 → 추적 모드(ESC로 해제)",
-      hint3: "드래그:회전 ／ Shift+드래그:이동 ／ 휠:확대축소",
+      hint3: "드래그: 이동 / 우클릭 드래그 또는 Ctrl+드래그: 회전 / 휠: 확대·축소",
       credit1: "역 위치는 오픈 데이터 기준・깊이는 대표값 ／ 시간표는 개략 재현",
       panel: "패널", statDeep: "최심부", statHigh: "최고부", statLines: "노선 수"
     },
     fr: {
-      search: "Recherche de gare", searchPh: "Saisissez un nom de gare…", lines: "Lignes", all: "Toutes",
+      search: "Recherche de gare", searchPh: "Saisissez un nom de gare…", lines: "Lignes", all: "Toutes", clear: "Effacer",
       depth: "Profondeur", exaggL: "Exagération", depthNote: "Lignes souterraines : profondeur réelle approx. × exagération",
       map: "Carte", showMap: "Afficher la carte du terrain", opacity: "Opacité",
       labels: "Noms des gares", stNames: "Afficher les noms de gares", lNone: "Aucun", lHub: "Principales", lAll: "Toutes",
@@ -871,12 +871,12 @@ window.I18N = (function () {
       loopIn: "Boucle intérieure", loopOut: "Boucle extérieure",
       hint1: "Cliquez sur une ligne = arrêts et profil / sur une gare = fiche",
       hint2: "Cliquez sur un train → mode suivi (ESC pour quitter)",
-      hint3: "Glisser : rotation / Maj+glisser : déplacer / Molette : zoom",
+      hint3: "Glisser : déplacer / Clic droit ou Ctrl+glisser : pivoter / Molette : zoom",
       credit1: "Positions des gares issues de données ouvertes ; profondeurs indicatives / horaires approximatifs",
       panel: "PANNEAU", statDeep: "Prof. max", statHigh: "Haut. max", statLines: "Lignes"
     },
     es: {
-      search: "Buscar estación", searchPh: "Escribe el nombre de una estación…", lines: "Líneas", all: "Todas",
+      search: "Buscar estación", searchPh: "Escribe el nombre de una estación…", lines: "Líneas", all: "Todas", clear: "Borrar",
       depth: "Profundidad", exaggL: "Exageración", depthNote: "Líneas subterráneas: profundidad real aprox. × exageración",
       map: "Mapa", showMap: "Mostrar mapa del terreno", opacity: "Opacidad",
       labels: "Nombres de estaciones", stNames: "Mostrar nombres de estaciones", lNone: "Ninguno", lHub: "Principales", lAll: "Todas",
@@ -894,12 +894,12 @@ window.I18N = (function () {
       loopIn: "Circular interior", loopOut: "Circular exterior",
       hint1: "Clic en una línea = paradas y perfil / en una estación = ficha",
       hint2: "Clic en un tren → modo seguimiento (ESC para salir)",
-      hint3: "Arrastrar: rotar / Mayús+arrastrar: mover / Rueda: zoom",
+      hint3: "Arrastrar: mover / Clic derecho o Ctrl+arrastrar: rotar / Rueda: zoom",
       credit1: "Posiciones de estaciones de datos abiertos; profundidades orientativas / horarios aproximados",
       panel: "PANEL", statDeep: "Prof. máx.", statHigh: "Alt. máx.", statLines: "Líneas"
     },
     "pt-BR": {
-      search: "Buscar estação", searchPh: "Digite o nome de uma estação…", lines: "Linhas", all: "Todas",
+      search: "Buscar estação", searchPh: "Digite o nome de uma estação…", lines: "Linhas", all: "Todas", clear: "Limpar",
       depth: "Profundidade", exaggL: "Exagero", depthNote: "Linhas subterrâneas: profundidade real aprox. × exagero",
       map: "Mapa", showMap: "Mostrar mapa do terreno", opacity: "Opacidade",
       labels: "Nomes das estações", stNames: "Mostrar nomes das estações", lNone: "Nenhum", lHub: "Principais", lAll: "Todas",
@@ -917,12 +917,12 @@ window.I18N = (function () {
       loopIn: "Circular interna", loopOut: "Circular externa",
       hint1: "Clique em uma linha = paradas e perfil / em uma estação = ficha",
       hint2: "Clique em um trem → modo de seguir (ESC para sair)",
-      hint3: "Arrastar: girar / Shift+arrastar: mover / Roda: zoom",
+      hint3: "Arrastar: mover / Botão direito ou Ctrl+arrastar: girar / Roda: zoom",
       credit1: "Posições das estações de dados abertos; profundidades indicativas / horários aproximados",
       panel: "PAINEL", statDeep: "Prof. máx.", statHigh: "Alt. máx.", statLines: "Linhas"
     },
     de: {
-      search: "Bahnhofssuche", searchPh: "Bahnhofsnamen eingeben…", lines: "Linien", all: "Alle",
+      search: "Bahnhofssuche", searchPh: "Bahnhofsnamen eingeben…", lines: "Linien", all: "Alle", clear: "Leeren",
       depth: "Tiefe", exaggL: "Überhöhung", depthNote: "U-Bahn-Linien: ca. reale Tiefe × Überhöhung",
       map: "Karte", showMap: "Geländekarte anzeigen", opacity: "Deckkraft",
       labels: "Bahnhofsnamen", stNames: "Bahnhofsnamen anzeigen", lNone: "Keine", lHub: "Wichtige", lAll: "Alle",
@@ -940,12 +940,12 @@ window.I18N = (function () {
       loopIn: "Innenring", loopOut: "Außenring",
       hint1: "Klick auf Linie = Halte & Profil / auf Bahnhof = Profilkarte",
       hint2: "Klick auf Zug → Verfolgungsmodus (ESC zum Beenden)",
-      hint3: "Ziehen: drehen / Shift+Ziehen: verschieben / Mausrad: zoomen",
+      hint3: "Ziehen: verschieben / Rechtsklick- oder Strg+Ziehen: drehen / Mausrad: zoomen",
       credit1: "Bahnhofspositionen aus offenen Daten; Tiefen repräsentativ / Fahrplan grob nachgebildet",
       panel: "PANEL", statDeep: "Max. Tiefe", statHigh: "Max. Höhe", statLines: "Linien"
     },
     ru: {
-      search: "Поиск станции", searchPh: "Введите название станции…", lines: "Линии", all: "Все",
+      search: "Поиск станции", searchPh: "Введите название станции…", lines: "Линии", all: "Все", clear: "Сброс",
       depth: "Глубина", exaggL: "Преувеличение", depthNote: "Подземные линии: прибл. реальная глубина × коэффициент",
       map: "Карта", showMap: "Показать карту местности", opacity: "Прозрачность",
       labels: "Названия станций", stNames: "Показывать названия станций", lNone: "Нет", lHub: "Крупные", lAll: "Все",
@@ -963,7 +963,7 @@ window.I18N = (function () {
       loopIn: "Внутреннее кольцо", loopOut: "Внешнее кольцо",
       hint1: "Клик по линии = остановки и профиль / по станции = карточка",
       hint2: "Клик по поезду → режим слежения (ESC для выхода)",
-      hint3: "Перетаскивание: вращение / Shift+перетаскивание: сдвиг / Колесо: масштаб",
+      hint3: "Перетаскивание: сдвиг / ПКМ или Ctrl+перетаскивание: вращение / Колесо: масштаб",
       credit1: "Позиции станций из открытых данных; глубины ориентировочные / расписание приблизительное",
       panel: "ПАНЕЛЬ", statDeep: "Макс. глубина", statHigh: "Макс. высота", statLines: "Линий"
     }
@@ -1166,6 +1166,7 @@ window.I18N = (function () {
   const labelsG = new THREE.Group();
   scene.add(labelsG);
   let labelMode = 'none';
+  let selHold = null;
 
   // static station index (lines per station)
   LINES.forEach(L => L.stations.forEach(n => {
@@ -1259,8 +1260,15 @@ window.I18N = (function () {
   }
   function buildLabels() {
     disposeGroup(labelsG);
-    if (labelMode === 'none') return;
-    const names = labelMode === 'hub' ? HUBS : Object.keys(ST);
+    let names;
+    const dense = labelMode === 'all' || !!selHold;
+    if (selHold) {
+      const SL = LINES.find(l => l.id === selHold);
+      names = SL ? SL.stations : [];
+    } else {
+      if (labelMode === 'none') return;
+      names = labelMode === 'hub' ? HUBS : Object.keys(ST);
+    }
     const hubSet = new Set(HUBS);
     names.forEach(n => {
       if (!ST[n] || !stationIndex[n]) return;
@@ -1268,7 +1276,7 @@ window.I18N = (function () {
       const p = posXZ(n);
       let top = 2;
       stationIndex[n].lines.forEach(L => { top = Math.max(top, yOf(L, n)); });
-      sp.position.set(p.x, top + (labelMode === 'all' ? 3.4 : 4.6), p.z);
+      sp.position.set(p.x, top + (dense ? 3.4 : 4.6), p.z);
       labelsG.add(sp);
     });
   }
@@ -1380,7 +1388,7 @@ window.I18N = (function () {
   let theta = -0.55, phi = 1.0;
   let radius = Math.max(spanX / 1.1, spanZ) * 1.3 + 40;
   const R0 = radius;
-  let auto = !RM;
+  let auto = false;
   let mode = 'orbit'; // orbit | chase | cab | tour
   let followTrain = null;
 
@@ -1445,11 +1453,10 @@ window.I18N = (function () {
       if (lastPinch) radius = clampR(radius * lastPinch / d);
       lastPinch = d;
       pan(dx / 2, dy / 2);
-    } else if (p.b === 2 || e.shiftKey) pan(dx, dy);
-    else {
-      theta -= dx * 0.005;
-      phi = Math.min(2.6, Math.max(0.06, phi - dy * 0.005));
-    }
+    } else if (p.b === 2 || e.ctrlKey || e.altKey || e.metaKey) {
+      theta -= dx * 0.0035;
+      phi = Math.min(1.45, Math.max(0.12, phi - dy * 0.0035));
+    } else pan(dx, dy);
   });
   canvas.addEventListener('pointerup', e => {
     const p = ptrs.get(e.pointerId);
@@ -1529,7 +1536,6 @@ window.I18N = (function () {
   const strip = $('strip'), sBar = $('s-bar'), sProfile = $('s-profile');
   const rowEls = {}, checks = {};
   const lbEls = {};
-  let selHold = null;
   function setDim(id, dim) {
     lineMats[id].forEach(m => { m.transparent = dim; m.opacity = dim ? 0.08 : 1; m.needsUpdate = true; });
     trainRT[id] && trainRT[id].pool.forEach(m => { m.material.transparent = dim; m.material.opacity = dim ? 0.06 : 1; });
@@ -1539,6 +1545,7 @@ window.I18N = (function () {
     if (selHold === id) { clearSelection(); return; }
     selHold = id;
     applySelDim();
+    buildLabels();
     shaftsG.userData.mat.opacity = 0.05;
     lineGroups[id].visible = true; checks[id].checked = true;
     Object.keys(rowEls).forEach(k => rowEls[k].classList.toggle('active', k === id));
@@ -1579,7 +1586,7 @@ window.I18N = (function () {
       if (window.fsTrack) window.fsTrack('rail3d_line_select', { event_category: 'rail3d', event_label: id, line_id: id });
     } catch (e) {}
     const maxXf = Math.max(0, ...L.stations.map(n => stationIndex[n].lines.length - 1));
-    const xfh = Math.min(8, maxXf) * 17 + 6;
+    const xfh = Math.min(8, maxXf) * 13 + 4;
     sBar.style.setProperty('--c', c);
     sBar.style.setProperty('--xfh', xfh + 'px');
     sBar.innerHTML = '';
@@ -1634,6 +1641,7 @@ window.I18N = (function () {
     Object.keys(rowEls).forEach(k => rowEls[k].classList.remove('active'));
     Object.keys(lbEls).forEach(k => lbEls[k].classList.remove('on'));
     strip.hidden = true;
+    buildLabels();
   }
   $('s-close').addEventListener('click', clearSelection);
   $('ck-stnames').addEventListener('change', e => { strip.classList.toggle('nonames', !e.target.checked); });
@@ -1702,6 +1710,7 @@ window.I18N = (function () {
       lineGroups[L.id].visible = v;
       checks[L.id].checked = v;
     });
+    if (selHold && lineGroups[selHold] && !lineGroups[selHold].visible) clearSelection();
   }
   function addQuick(label, pred) {
     const b = document.createElement('button');
@@ -1737,6 +1746,7 @@ window.I18N = (function () {
       groupsEl[L.group].appendChild(row);
     });
     addQuick(I.t('all'), () => true);
+    addQuick(I.t('clear'), () => false);
     cfg.groups.forEach(g => addQuick(I.groupShort(g), L => L.group === g.id));
   }
   buildLegend();
