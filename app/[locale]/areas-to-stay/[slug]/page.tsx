@@ -28,6 +28,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { getAffUrl } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 import { buttonClassName } from "@/components/ui/Button";
 import type { AdPlacement } from "@/lib/ads";
 
@@ -1676,6 +1677,29 @@ function areaSupportLinkForHotelKey(
   };
 }
 
+/**
+ * Admin-managed Booking.com link for a comparison page's area CTA.
+ * Resolves data/hotel-affiliate-links.json entries with
+ * placement "comparison_area_cta" and page_group == the page slug, so the
+ * provider per comparison page is controlled entirely from the admin list
+ * (registered pages get Booking.com; everything else keeps the Trip flow).
+ */
+function comparisonBookingLink(
+  areaId: string | undefined,
+  sourcePage: string,
+  locale: string,
+) {
+  if (!areaId) return undefined;
+  const pageGroup = sourcePage.split("/").filter(Boolean).pop();
+  if (!pageGroup) return undefined;
+  return getHotelProviderLinks({
+    areaId,
+    locale,
+    placement: "comparison_area_cta",
+    pageGroup,
+  })[0];
+}
+
 function AreaSupportHotelLink({
   areaKey,
   areaId,
@@ -1701,10 +1725,32 @@ function AreaSupportHotelLink({
   const placement = sourcePage.includes("before-shinkansen")
     ? ("before_shinkansen_area_card" as const)
     : ("comparison_area_card" as const);
+  const resolvedAreaId =
+    areaId ?? (areaKey ? finderAreaIdByHotelAreaKey[areaKey] : undefined);
+  const adminBooking = comparisonBookingLink(resolvedAreaId, sourcePage, locale);
 
   return (
     <div className="flex flex-col gap-1.5">
-      {bookingHref ? (
+      {adminBooking ? (
+        <TrackedAffiliateLink
+          href={adminBooking.href}
+          target="_blank"
+          rel={AFFILIATE_REL}
+          category="hotel"
+          provider="booking_travelpayouts"
+          product="hotel"
+          placement={placement}
+          pageType="hotel_comparison"
+          pagePath={sourcePage}
+          locale={locale}
+          label={`Check ${areaLabel} hotels on Booking.com`}
+          linkId={adminBooking.linkId}
+          area={areaLabel}
+          className="inline-flex min-h-10 w-fit items-center rounded-xl bg-[#2E7D5B] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E7D5B]/40"
+        >
+          Check {areaLabel} hotels on Booking.com →
+        </TrackedAffiliateLink>
+      ) : bookingHref ? (
         <TrackedAffiliateLink
           href={withTripSub(bookingHref, `${placement}_${areaId ?? areaKey ?? "area"}`)}
           target="_blank"
@@ -2784,6 +2830,7 @@ export default async function StayPage({ params }: Props) {
   const page = applyStayPageTranslation(rawPage, pageTranslations[slug]);
   const pagePath = `/areas-to-stay/${slug}`;
   const stayComparisonAdPlacement = stayComparisonAdPlacements[page.slug];
+  const quickRecBooking = comparisonBookingLink(page.quickRec.areaId, pagePath, locale);
 
   const isTokyoFirstTime = page.slug === "tokyo-first-time";
   const firstTimeStayHub = firstTimeStayHubs[page.slug];
@@ -2852,7 +2899,8 @@ export default async function StayPage({ params }: Props) {
           <QuickRec
             area={page.quickRec.area}
             why={page.quickRec.why}
-            link={page.quickRec.link}
+            link={quickRecBooking?.href ?? page.quickRec.link}
+            provider={quickRecBooking ? "booking_travelpayouts" : "trip"}
             locale={locale}
             pagePath={pagePath}
             placement="comparison_quick_recommendation"
