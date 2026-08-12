@@ -20,13 +20,15 @@ Median affiliate-click rate across hotel pages: **8.0%**
 | finder_result_hotel_page | 0 | 0.0% |
 
 ## 3. CTA impressions vs clicks by month (180d)
-| Month | affiliate_cta_view | affiliate_click | Conversion |
-|---|--:|--:|--:|
-| 202604 | 0 | 3 | — |
-| 202605 | 0 | 52 | — |
-| 202606 | 0 | 30 | — |
-| 202607 | 517 | 46 | 8.9% |
-| 202608 | 320 | 11 | 3.4% |
+Judge trends on the **organic** column — direct bot traffic distorts the raw totals.
+
+| Month | cta_view | click | Conversion | Organic conversion |
+|---|--:|--:|--:|--:|
+| 202604 | 0 | 3 | — | — |
+| 202605 | 0 | 52 | — | — |
+| 202606 | 0 | 30 | — | — |
+| 202607 | 517 | 46 | 8.9% | 6.0% |
+| 202608 | 320 | 11 | 3.4% | 3.4% |
 
 ## 4. Affiliate clicks by placement
 | Placement | Clicks |

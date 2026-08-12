@@ -117,28 +117,46 @@ async function ga4EventTotals() {
   return m;
 }
 
+/* A large block of direct, single-pageview, ~5-second sessions inflates every
+   ratio here (1,421 sessions at a 2.3% engagement rate in the 2026-08 audit,
+   against 49.9% for organic). Reporting organic alongside the raw totals keeps
+   that pollution visible instead of letting it look like a conversion drop. */
+const ORGANIC_ONLY = {
+  filter: {
+    fieldName: "sessionDefaultChannelGroup",
+    stringFilter: { value: "Organic Search" },
+  },
+};
+
 async function ga4MonthlyCtaConversion() {
   // CTA impressions vs clicks per month — surfaces drift in how well the
   // rendered CTAs convert, independent of traffic volume.
-  const [res] = await analytics.runReport({
-    property: `properties/${PROPERTY}`,
-    dateRanges: [{ startDate: "180daysAgo", endDate: "yesterday" }],
-    dimensions: [{ name: "yearMonth" }, { name: "eventName" }],
-    metrics: [{ name: "eventCount" }],
-    dimensionFilter: {
-      filter: {
-        fieldName: "eventName",
-        inListFilter: { values: ["affiliate_cta_view", "affiliate_click"] },
-      },
+  const ctaEvents = {
+    filter: {
+      fieldName: "eventName",
+      inListFilter: { values: ["affiliate_cta_view", "affiliate_click"] },
     },
-    limit: 200,
-  });
-  const m = {};
-  for (const r of res.rows || []) {
-    const [ym, ev] = r.dimensionValues.map((v) => v.value);
-    (m[ym] = m[ym] || {})[ev] = Number(r.metricValues[0].value);
-  }
-  return m;
+  };
+  const run = async (extraFilter) => {
+    const [res] = await analytics.runReport({
+      property: `properties/${PROPERTY}`,
+      dateRanges: [{ startDate: "180daysAgo", endDate: "yesterday" }],
+      dimensions: [{ name: "yearMonth" }, { name: "eventName" }],
+      metrics: [{ name: "eventCount" }],
+      dimensionFilter: extraFilter
+        ? { andGroup: { expressions: [ctaEvents, extraFilter] } }
+        : ctaEvents,
+      limit: 200,
+    });
+    const m = {};
+    for (const r of res.rows || []) {
+      const [ym, ev] = r.dimensionValues.map((v) => v.value);
+      (m[ym] = m[ym] || {})[ev] = Number(r.metricValues[0].value);
+    }
+    return m;
+  };
+  const [all, organic] = await Promise.all([run(null), run(ORGANIC_ONLY)]);
+  return { all, organic };
 }
 
 async function ga4PlacementBreakdown() {
@@ -230,13 +248,18 @@ function buildMarkdown({ pages, events, placements, queries, ctaByMonth }) {
 
   // CTA conversion trend (watch item from the 2026-08 deep dive)
   L.push(`\n## 3. CTA impressions vs clicks by month (180d)`);
-  L.push(`| Month | affiliate_cta_view | affiliate_click | Conversion |`);
-  L.push(`|---|--:|--:|--:|`);
-  for (const ym of Object.keys(ctaByMonth).sort()) {
-    const d = ctaByMonth[ym];
+  L.push(`Judge trends on the **organic** column — direct bot traffic distorts the raw totals.\n`);
+  L.push(`| Month | cta_view | click | Conversion | Organic conversion |`);
+  L.push(`|---|--:|--:|--:|--:|`);
+  const months = new Set([...Object.keys(ctaByMonth.all), ...Object.keys(ctaByMonth.organic)]);
+  for (const ym of [...months].sort()) {
+    const d = ctaByMonth.all[ym] || {};
+    const o = ctaByMonth.organic[ym] || {};
     const v = d.affiliate_cta_view || 0;
     const c = d.affiliate_click || 0;
-    L.push(`| ${ym} | ${v} | ${c} | ${v ? fmtPct(pct(c, v)) : "—"} |`);
+    const ov = o.affiliate_cta_view || 0;
+    const oc = o.affiliate_click || 0;
+    L.push(`| ${ym} | ${v} | ${c} | ${v ? fmtPct(pct(c, v)) : "—"} | ${ov ? fmtPct(pct(oc, ov)) : "—"} |`);
   }
 
   // Affiliate by placement
