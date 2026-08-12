@@ -42,7 +42,7 @@ type RoomSizeCopy = {
 
 const roomSizeCopyByLocale: Record<string, RoomSizeCopy> = {
   en: {
-    metadataTitle: "Tokyo Hotel Room Size Guide: How Small Is Too Small?",
+    metadataTitle: "Tokyo Hotel Rooms: How Many m² Do You Need With Luggage?",
     metadataDescription:
       "Tokyo hotel rooms can feel compact with luggage. Learn what room sizes mean for two travelers, families, large suitcases, and Tokyo hotel-base planning.",
     breadcrumbHome: "Home",
@@ -50,7 +50,7 @@ const roomSizeCopyByLocale: Record<string, RoomSizeCopy> = {
     breadcrumbTokyo: "Tokyo",
     breadcrumbCurrent: "Room size guide",
     eyebrow: "Tokyo hotel planning",
-    title: "Tokyo Hotel Room Size Guide: How Small Is Too Small?",
+    title: "Tokyo Hotel Rooms: How Many m² Do You Need With Luggage?",
     intro:
       "Tokyo hotel rooms can feel compact compared with hotels or apartments in some countries. Photos can make rooms look easier than they feel once you add suitcases, beds, and a compact bathroom.",
     quickTitle: "Quick answer",

@@ -66,8 +66,8 @@ function isDuplicateGuideFaq(item: { q: string }, index?: number) {
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "Which Side of the Shinkansen for Mt. Fuji? Right Side, Seat E",
-  description: "Tokyo→Kyoto/Osaka: right side, Seat E. Coming back: left side, still Seat E. Timing near Shin-Fuji, route map, JR Pass context, and booking steps.",
+  headline: "Which Side for Mt. Fuji? Right to Kyoto, Left to Tokyo",
+  description: "Tokyo → Kyoto/Osaka: sit on the right, seat E. Kyoto/Osaka → Tokyo: sit on the left, seat E. Free seat checker, best timing near Shin-Fuji, and how to book.",
   author: {
     "@type": "Person",
     name: "fujiseat (Tokyo-based Japanese creator)",
@@ -753,9 +753,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       },
     };
   }
-  const guideTitle = locale === "en" ? "Which Side of the Shinkansen for Mt. Fuji? Right Side, Seat E" : t("guideTitle");
+  const guideTitle = locale === "en" ? "Which Side for Mt. Fuji? Right to Kyoto, Left to Tokyo" : t("guideTitle");
   const guideDesc = locale === "en"
-    ? "Tokyo→Kyoto/Osaka: right side, Seat E. Coming back: left side, still Seat E. Free seat checker finds your exact window seat, plus when Fuji appears near Shin-Fuji and JR Pass tips."
+    ? "Tokyo → Kyoto/Osaka: sit on the right, seat E. Kyoto/Osaka → Tokyo: sit on the left, seat E. Free seat checker, best timing near Shin-Fuji, and how to book."
     : t("guideDesc");
   return {
     title: guideTitle,

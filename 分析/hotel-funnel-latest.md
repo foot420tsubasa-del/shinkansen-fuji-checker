@@ -19,7 +19,16 @@ Median affiliate-click rate across hotel pages: **8.0%**
 | finder_area_details_click | 0 | 0.0% |
 | finder_result_hotel_page | 0 | 0.0% |
 
-## 3. Affiliate clicks by placement
+## 3. CTA impressions vs clicks by month (180d)
+| Month | affiliate_cta_view | affiliate_click | Conversion |
+|---|--:|--:|--:|
+| 202604 | 0 | 3 | — |
+| 202605 | 0 | 52 | — |
+| 202606 | 0 | 30 | — |
+| 202607 | 517 | 46 | 8.9% |
+| 202608 | 320 | 11 | 3.4% |
+
+## 4. Affiliate clicks by placement
 | Placement | Clicks |
 |---|--:|
 | guide_quick_answer | 12 |
@@ -31,14 +40,14 @@ Median affiliate-click rate across hotel pages: **8.0%**
 | plan_trip_arrival_cards | 1 |
 | train_signs_checklist | 1 |
 
-## 4. Search Console — hotel-intent quick wins
+## 5. Search Console — hotel-intent quick wins
 Hotel-intent queries ranking 5–20 with real impressions (push these onto page 1):
 
 | Query | Impressions | Clicks | CTR | Avg position |
 |---|--:|--:|--:|--:|
 _No hotel-intent queries in the 5–20 band this period._
 
-## 5. Suggested next steps (heuristic)
+## 6. Suggested next steps (heuristic)
 1. **CTA:** `/areas-to-stay/asakusa-vs-ueno` gets 50 views but only 8.0% affiliate-click rate — add/raise a clearer hotel CTA (sticky bar, in-content provider button) and re-check.
 2. **Finder → hotel:** few results lead to an area/hotel click — make result cards more clickable and surface a hotel CTA right on the results.
 

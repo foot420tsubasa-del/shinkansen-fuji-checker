@@ -228,7 +228,7 @@ const rawStayPages: StayPage[] = [
   },
   {
     slug: "kyoto-station-vs-gion",
-    title: "Kyoto Station vs Gion: Where Should You Stay in Kyoto?",
+    title: "Kyoto Station or Gion? Luggage vs Atmosphere, Decided",
     description: "Compare Kyoto Station and Gion for first-time Kyoto visitors. Choose the better hotel base for Shinkansen access, luggage, sightseeing, food and atmosphere.",
     quickRec: {
       area: "Kyoto Station",
@@ -443,7 +443,7 @@ const rawStayPages: StayPage[] = [
   },
   {
     slug: "tokyo-station-vs-shinjuku",
-    title: "Tokyo Station vs Shinjuku: Where Should You Stay in Tokyo?",
+    title: "Tokyo Station or Shinjuku? Shinkansen Access vs Nightlife",
     description: "Compare Tokyo Station and Shinjuku for first-time Japan travelers. Choose the better hotel base for Shinkansen access, nightlife, food, airport transfers and luggage.",
     quickRec: {
       areaId: "tokyo-station",

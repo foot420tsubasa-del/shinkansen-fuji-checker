@@ -117,6 +117,30 @@ async function ga4EventTotals() {
   return m;
 }
 
+async function ga4MonthlyCtaConversion() {
+  // CTA impressions vs clicks per month — surfaces drift in how well the
+  // rendered CTAs convert, independent of traffic volume.
+  const [res] = await analytics.runReport({
+    property: `properties/${PROPERTY}`,
+    dateRanges: [{ startDate: "180daysAgo", endDate: "yesterday" }],
+    dimensions: [{ name: "yearMonth" }, { name: "eventName" }],
+    metrics: [{ name: "eventCount" }],
+    dimensionFilter: {
+      filter: {
+        fieldName: "eventName",
+        inListFilter: { values: ["affiliate_cta_view", "affiliate_click"] },
+      },
+    },
+    limit: 200,
+  });
+  const m = {};
+  for (const r of res.rows || []) {
+    const [ym, ev] = r.dimensionValues.map((v) => v.value);
+    (m[ym] = m[ym] || {})[ev] = Number(r.metricValues[0].value);
+  }
+  return m;
+}
+
 async function ga4PlacementBreakdown() {
   // Best-effort: requires a registered custom dimension `placement`.
   try {
@@ -167,7 +191,7 @@ async function gscQueries() {
 }
 
 // ── Report ────────────────────────────────────────────────────────────────────
-function buildMarkdown({ pages, events, placements, queries }) {
+function buildMarkdown({ pages, events, placements, queries, ctaByMonth }) {
   const L = [];
   const today = new Date().toISOString().slice(0, 10);
   L.push(`# Hotel funnel report — fujiseat.com`);
@@ -204,8 +228,19 @@ function buildMarkdown({ pages, events, placements, queries }) {
   const startN = steps[0][1];
   for (const [name, n] of steps) L.push(`| ${name} | ${n} | ${startN ? fmtPct(pct(n, startN)) : "—"} |`);
 
+  // CTA conversion trend (watch item from the 2026-08 deep dive)
+  L.push(`\n## 3. CTA impressions vs clicks by month (180d)`);
+  L.push(`| Month | affiliate_cta_view | affiliate_click | Conversion |`);
+  L.push(`|---|--:|--:|--:|`);
+  for (const ym of Object.keys(ctaByMonth).sort()) {
+    const d = ctaByMonth[ym];
+    const v = d.affiliate_cta_view || 0;
+    const c = d.affiliate_click || 0;
+    L.push(`| ${ym} | ${v} | ${c} | ${v ? fmtPct(pct(c, v)) : "—"} |`);
+  }
+
   // Affiliate by placement
-  L.push(`\n## 3. Affiliate clicks by placement`);
+  L.push(`\n## 4. Affiliate clicks by placement`);
   if (Array.isArray(placements)) {
     placements.sort((a, b) => b.clicks - a.clicks);
     L.push(`| Placement | Clicks |`);
@@ -217,7 +252,7 @@ function buildMarkdown({ pages, events, placements, queries }) {
   }
 
   // GSC quick wins
-  L.push(`\n## 4. Search Console — hotel-intent quick wins`);
+  L.push(`\n## 5. Search Console — hotel-intent quick wins`);
   if (Array.isArray(queries)) {
     const wins = queries
       .filter((q) => isHotelQuery(q.query) && q.impressions >= 30 && q.position >= 5 && q.position <= 20)
@@ -234,7 +269,7 @@ function buildMarkdown({ pages, events, placements, queries }) {
   }
 
   // Heuristic next steps
-  L.push(`\n## 5. Suggested next steps (heuristic)`);
+  L.push(`\n## 6. Suggested next steps (heuristic)`);
   const recs = [];
   const worst = hotelPages.filter((p) => p.views >= 50).map((p) => ({ ...p, ctr: pct(p.affiliate_click, p.views) }))
     .sort((a, b) => a.ctr - b.ctr)[0];
@@ -255,13 +290,14 @@ function buildMarkdown({ pages, events, placements, queries }) {
 
 async function main() {
   console.log(`Pulling GA4 + GSC for the last ${DAYS} days…`);
-  const [pages, events, placements, queries] = await Promise.all([
+  const [pages, events, placements, queries, ctaByMonth] = await Promise.all([
     ga4PagesWithAffiliate(),
     ga4EventTotals(),
     ga4PlacementBreakdown(),
     gscQueries(),
+    ga4MonthlyCtaConversion(),
   ]);
-  const md = buildMarkdown({ pages, events, placements, queries });
+  const md = buildMarkdown({ pages, events, placements, queries, ctaByMonth });
   const dir = "分析";
   fs.mkdirSync(dir, { recursive: true });
   const dated = path.join(dir, `hotel-funnel-${new Date().toISOString().slice(0, 10)}.md`);

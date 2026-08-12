@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import {
   trackAffiliateClick,
   trackAffiliateCtaView,
+  type AffiliateClickParams,
 } from "@/lib/analytics";
+import type { AffiliatePlacement } from "@/lib/affiliate/links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import type { DirectionId } from "@/lib/seat-checker";
 
@@ -58,10 +60,19 @@ export function GuideKlookCta({
   href,
   locale,
   copy,
+  placement = "guide_quick_answer",
+  linkId = "guide_klook_quick_answer",
+  pagePath = "/guide",
+  pageType = "shinkansen_guide",
 }: {
   href: string;
   locale: string;
   copy: GuideKlookCtaCopy;
+  /** Overridable so other booking-intent pages report separately in GA4. */
+  placement?: AffiliatePlacement;
+  linkId?: string;
+  pagePath?: string;
+  pageType?: AffiliateClickParams["page_type"];
 }) {
   const [direction, setDirection] = useState<DirectionId | null>(null);
   const rootRef = useRef<HTMLElement>(null);
@@ -84,9 +95,9 @@ export function GuideKlookCta({
         trackAffiliateCtaView({
           provider: "klook",
           product: "shinkansen",
-          placement: "guide_quick_answer",
-          page_path: "/guide",
-          link_id: "guide_klook_quick_answer",
+          placement,
+          page_path: pagePath,
+          link_id: linkId,
           locale,
         });
         observer.disconnect();
@@ -94,7 +105,7 @@ export function GuideKlookCta({
     });
     observer.observe(el);
     return () => observer.disconnect();
-  }, [locale]);
+  }, [locale, placement, linkId, pagePath]);
 
   const heading = direction === "tokyo-osaka" ? copy.dirToKyoto : direction === "osaka-tokyo" ? copy.dirToTokyo : copy.title;
   const note = direction ? copy.dirSeatNote : copy.note;
@@ -115,10 +126,10 @@ export function GuideKlookCta({
             category: "train",
             provider: "klook",
             product: "shinkansen",
-            placement: "guide_quick_answer",
-            link_id: "guide_klook_quick_answer",
-            page_path: "/guide",
-            page_type: "shinkansen_guide",
+            placement,
+            link_id: linkId,
+            page_path: pagePath,
+            page_type: pageType,
             locale,
             href,
             label: copy.button,

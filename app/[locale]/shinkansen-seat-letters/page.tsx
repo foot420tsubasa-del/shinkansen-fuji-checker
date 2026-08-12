@@ -7,10 +7,12 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
+import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
+import { KLOOK_URL } from "@/src/affiliateLinks";
 
 type Props = { params: Promise<{ locale: string }> };
 
-const title = "Shinkansen Seat Letters Explained: A, B, C, D, E and Mt. Fuji Side";
+const title = "Shinkansen Seat Letters A–E: Which Seat Gets the Fuji View";
 const description =
   "Understand Shinkansen seat letters A, B, C, D and E, including which seats are windows, aisles, and usually best for Mt. Fuji views.";
 
@@ -145,6 +147,27 @@ export default async function SeatLettersPage({ params }: Props) {
             </Link>
           </div>
         </section>
+
+        {/* Booking-intent slot: readers checking seat letters are usually about
+            to book. Same direction-aware Klook CTA as the guide. */}
+        <div className="mt-6">
+          <GuideKlookCta
+            href={KLOOK_URL}
+            locale={locale}
+            placement="seat_letters_booking"
+            linkId="seat_letters_klook_booking"
+            pagePath="/shinkansen-seat-letters"
+            pageType="shinkansen_tool"
+            copy={{
+              title: "Ready to book your Shinkansen seat?",
+              note: "Reserve a specific seat letter when you book — E on the Tokaido line is the Mt. Fuji window.",
+              button: "Check Shinkansen tickets on Klook",
+              dirToKyoto: "Booking Tokyo → Kyoto / Osaka? Ask for Seat E.",
+              dirToTokyo: "Booking Kyoto / Osaka → Tokyo? Ask for Seat E on the left side.",
+              dirSeatNote: "Seat E is the Mt. Fuji window for your direction. Reserve it when you book.",
+            }}
+          />
+        </div>
 
         <div className="mt-10 space-y-8">
           <section>
