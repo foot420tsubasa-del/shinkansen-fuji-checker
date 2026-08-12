@@ -107,6 +107,18 @@ const comparisonAreaCtas: Partial<Record<string, Array<{ title: string; hotelKey
     { title: "Ueno", hotelKey: "ueno", areaId: "ueno" },
     { title: "Asakusa", hotelKey: "asakusa", areaId: "asakusa" },
   ],
+  "kyoto-station-vs-gion": [
+    { title: "Kyoto Station", hotelKey: "kyotoStation", areaId: "kyoto-station" },
+    { title: "Gion / Kawaramachi", hotelKey: "gionKawaramachi", areaId: "gion" },
+  ],
+  "namba-vs-umeda": [
+    { title: "Namba", hotelKey: "namba", areaId: "namba" },
+    { title: "Umeda / Osaka Station", hotelKey: "umeda", areaId: "umeda" },
+  ],
+  "shin-osaka-vs-namba": [
+    { title: "Shin-Osaka", hotelKey: "shinOsaka", areaId: "shin-osaka" },
+    { title: "Namba", hotelKey: "namba", areaId: "namba" },
+  ],
 };
 
 const filledNextStepClass =

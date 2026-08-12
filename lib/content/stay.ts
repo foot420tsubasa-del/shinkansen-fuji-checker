@@ -231,6 +231,7 @@ const rawStayPages: StayPage[] = [
     title: "Kyoto Station or Gion? Luggage vs Atmosphere, Decided",
     description: "Compare Kyoto Station and Gion for first-time Kyoto visitors. Choose the better hotel base for Shinkansen access, luggage, sightseeing, food and atmosphere.",
     quickRec: {
+      areaId: "kyoto-station",
       area: "Kyoto Station",
       why: "First-time visitors with heavy luggage usually do better near Kyoto Station. Shinkansen access is direct, buses depart from the main terminal, and luggage storage is easy. Choose Gion if you value traditional atmosphere over convenience.",
       link: hotelKyotoStation.href,
@@ -565,6 +566,7 @@ const rawStayPages: StayPage[] = [
     title: "Where to Stay in Kyoto for First-Time Visitors",
     description: "Compare Kyoto Station, Gion, Kawaramachi and quieter Kyoto areas for first-time visitors. Choose the best hotel base for Shinkansen access, sightseeing, food and luggage.",
     quickRec: {
+      areaId: "kyoto-station",
       area: "Kyoto Station area",
       why: "For first-time visitors arriving by Shinkansen, Kyoto Station is the safest bet. Direct platform access, every bus line departs from here, and luggage handling is simple. Gion/Kawaramachi is better for atmosphere but harder with big bags.",
       link: hotelKyotoStation.href,
@@ -633,6 +635,7 @@ const rawStayPages: StayPage[] = [
     title: "Where to Stay in Osaka for First-Time Visitors",
     description: "Compare Namba, Umeda and Shin-Osaka for first-time Osaka visitors. Choose the best hotel base for food, nightlife, Shinkansen access, USJ and airport transfers.",
     quickRec: {
+      areaId: "namba",
       area: "Namba",
       why: "Namba puts you at the heart of Osaka's food and nightlife scene — Dotonbori, Shinsekai, and Kuromon Market are all walking distance. For Shinkansen-first logistics, Shin-Osaka is more practical but less fun.",
       link: hotelNamba.href,
@@ -703,6 +706,7 @@ const rawStayPages: StayPage[] = [
     title: "Namba vs Umeda: Where Should You Stay in Osaka?",
     description: "Compare Namba and Umeda for first-time Osaka visitors. Choose the better hotel base for food, nightlife, shopping, transport, Kyoto day trips and Kansai Airport access.",
     quickRec: {
+      areaId: "namba",
       area: "Namba",
       why: "First-time visitors who want the classic Osaka experience should stay near Namba. Dotonbori, Shinsekai, and Kuromon Market are walking distance. Nankai Line runs direct to Kansai Airport. Umeda is better for shopping, business hotels, and easier Kyoto access.",
       link: hotelNamba.href,
@@ -770,6 +774,7 @@ const rawStayPages: StayPage[] = [
     title: "Shin-Osaka vs Namba: Where Should You Stay in Osaka?",
     description: "Compare Shin-Osaka and Namba for Osaka hotels. Choose the better base for Shinkansen access, nightlife, food, luggage, early trains and first-time Osaka trips.",
     quickRec: {
+      areaId: "shin-osaka",
       area: "Namba",
       why: "For first-time sightseeing, Namba is usually more memorable — Dotonbori, street food, and nightlife are walking distance. Choose Shin-Osaka only if you have an early Shinkansen, heavy luggage, or a short overnight stop between rail legs.",
       link: hotelNamba.href,
