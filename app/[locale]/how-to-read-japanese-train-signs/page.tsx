@@ -437,7 +437,6 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                         label={t("before.practical.esim")}
                         placement="train_signs_checklist"
                         locale={locale}
-                        variant="subtle"
                       />
                     </div>
                   </div>

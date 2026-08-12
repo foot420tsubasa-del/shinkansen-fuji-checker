@@ -16,6 +16,9 @@ import { branchingMissions } from "@/data/station-practice/branching/missions";
 import { tr } from "@/data/station-practice/i18n";
 import { FaqAccordion } from "@/components/station-practice/landing/FaqAccordion";
 import { LanguageSelector } from "../components/LanguageSelector";
+import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
+import { AFFILIATE_REL } from "@/lib/link-rel";
+import { ESIM_URL } from "@/src/affiliateLinks";
 
 export const metadata: Metadata = {
   title: "Station Practice — Japanese station navigation simulator",
@@ -91,10 +94,13 @@ const supportCtas = [
     icon: Plane,
   },
   {
+    // Straight to the provider: routing eSIM intent through an internal hub
+    // costs a hop, the same pattern the hotel CTAs moved away from.
     title: "Get eSIM / Wi-Fi before arrival",
     body: "Prepare maps, translation, and station searches before landing.",
-    href: "/plan-your-trip",
+    href: ESIM_URL,
     icon: Wifi,
+    affiliate: true,
   },
 ] as const;
 
@@ -339,12 +345,10 @@ export default async function StationPracticeLandingPage() {
             <div className="grid gap-3 sm:grid-cols-3">
               {supportCtas.map((cta) => {
                 const Icon = cta.icon;
-                return (
-                  <Link
-                    key={cta.title}
-                    href={cta.href}
-                    className="group rounded-2xl border border-white/5 bg-white/[0.02] p-5 transition-colors hover:border-yellow-300/35 hover:bg-white/[0.04]"
-                  >
+                const cardClass =
+                  "group rounded-2xl border border-white/5 bg-white/[0.02] p-5 transition-colors hover:border-yellow-300/35 hover:bg-white/[0.04]";
+                const body = (
+                  <>
                     <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-yellow-300/10 text-yellow-300">
                       <Icon className="h-4 w-4" />
                     </div>
@@ -355,8 +359,32 @@ export default async function StationPracticeLandingPage() {
                       {t(cta.body)}
                     </p>
                     <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-yellow-300/80 group-hover:text-yellow-200">
-                      {t("Open guide")} <ArrowRight className="h-3.5 w-3.5" />
+                      {t("affiliate" in cta && cta.affiliate ? "Check options" : "Open guide")}{" "}
+                      <ArrowRight className="h-3.5 w-3.5" />
                     </span>
+                  </>
+                );
+                return "affiliate" in cta && cta.affiliate ? (
+                  <TrackedAffiliateLink
+                    key={cta.title}
+                    href={cta.href}
+                    target="_blank"
+                    rel={AFFILIATE_REL}
+                    category="esim"
+                    provider="klook"
+                    product="esim"
+                    placement="station_practice_support_esim"
+                    linkId="station_practice_klook_esim"
+                    pagePath="/station-practice"
+                    locale={locale}
+                    label={cta.title}
+                    className={cardClass}
+                  >
+                    {body}
+                  </TrackedAffiliateLink>
+                ) : (
+                  <Link key={cta.title} href={cta.href} className={cardClass}>
+                    {body}
                   </Link>
                 );
               })}
