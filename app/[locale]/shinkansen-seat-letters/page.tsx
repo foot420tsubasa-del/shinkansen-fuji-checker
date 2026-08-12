@@ -247,6 +247,10 @@ export default async function SeatLettersPage({ params }: Props) {
                 <span className="font-bold text-[#082653]">Kyoto → Tokyo: Which seat?</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">Return direction seat and viewing tips.</span>
               </Link>
+              <Link href="/areas-to-stay/asakusa-vs-ueno" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
+                <span className="font-bold text-[#082653]">Ueno or Asakusa for your Tokyo nights?</span>
+                <span className="mt-1 block text-xs text-[#5f7190]">Rail-hub convenience versus old-town streets, compared.</span>
+              </Link>
               <Link href="/plan-your-trip" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Plan your trip essentials</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">eSIM, airport transfer, and rail booking links.</span>

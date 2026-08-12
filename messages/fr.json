@@ -4937,7 +4937,8 @@
         "start": "Lancer Station Practice",
         "chooseHotel": "Choisir la base hôtel",
         "airport": "Vérifier le transfert aéroport",
-        "esim": "Obtenir un eSIM avant l'arrivée"
+        "esim": "Obtenir un eSIM avant l'arrivée",
+        "uenoAsakusa": "Ueno ou Asakusa ?"
       }
     },
     "priority": {

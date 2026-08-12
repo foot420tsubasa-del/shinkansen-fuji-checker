@@ -4937,7 +4937,8 @@
         "start": "Iniciar Station Practice",
         "chooseHotel": "Elegir base hotelera",
         "airport": "Comprobar traslado al aeropuerto",
-        "esim": "Conseguir eSIM antes de llegar"
+        "esim": "Conseguir eSIM antes de llegar",
+        "uenoAsakusa": "¿Ueno o Asakusa?"
       }
     },
     "priority": {

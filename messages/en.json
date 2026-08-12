@@ -4855,8 +4855,8 @@
   },
   "trainSigns": {
     "meta": {
-      "title": "How to Read Japanese Train Signs: Line, Direction, Platform and Exit",
-      "description": "A practical guide for first-time visitors to Japan: how to read train signs, check the line, direction, platform, train type and station exit without getting confused."
+      "title": "Japanese Train Station Signs: Symbols, Lines and Exits",
+      "description": "Read Japanese station signs with confidence: what the line letters and numbers mean, how to check direction and platform, and which exit to take."
     },
     "hero": {
       "pillLabel": "Japan train basics",
@@ -5004,7 +5004,8 @@
         "start": "Start Station Practice",
         "chooseHotel": "Choose hotel base",
         "airport": "Check airport transfer",
-        "esim": "Get eSIM before arrival"
+        "esim": "Get eSIM before arrival",
+        "uenoAsakusa": "Ueno or Asakusa?"
       }
     },
     "priority": {

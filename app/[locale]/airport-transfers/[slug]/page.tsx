@@ -368,8 +368,19 @@ function routeCompareLink(slug: string) {
   };
 }
 
-function ContinuePlanningCards({ locale, pagePath }: { locale: string; pagePath: string }) {
+/** Arrivals into Ueno or Asakusa are literally choosing between the two, so the
+ *  first card sends them to the comparison instead of the generic stay hub. */
+const UENO_ASAKUSA_ROUTES = new Set([
+  "narita-to-ueno",
+  "narita-to-asakusa",
+  "haneda-to-ueno",
+  "haneda-to-asakusa",
+  "narita-to-oshiage",
+]);
+
+function ContinuePlanningCards({ locale, pagePath, slug }: { locale: string; pagePath: string; slug?: string }) {
   const ui = getAirportRouteUiCopy(locale);
+  const uenoAsakusa = Boolean(slug && UENO_ASAKUSA_ROUTES.has(slug));
   return (
     <AirportNextSteps
       sourcePage={pagePath}
@@ -377,10 +388,12 @@ function ContinuePlanningCards({ locale, pagePath }: { locale: string; pagePath:
       locale={locale}
       cards={[
         {
-          title: ui.nextCards[0].title,
-          body: ui.nextCards[0].body,
-          label: ui.nextCards[0].label,
-          href: "/areas-to-stay",
+          title: uenoAsakusa ? "Ueno or Asakusa?" : ui.nextCards[0].title,
+          body: uenoAsakusa
+            ? "They are five minutes apart by Metro but suit different trips — compare rail access, evenings and luggage before you book."
+            : ui.nextCards[0].body,
+          label: uenoAsakusa ? "Compare Ueno and Asakusa" : ui.nextCards[0].label,
+          href: uenoAsakusa ? "/areas-to-stay/asakusa-vs-ueno" : "/areas-to-stay",
           icon: <Bed className="h-4 w-4 text-[#106b43]" />,
         },
         {
@@ -633,7 +646,7 @@ export default async function TransferPage({ params }: Props) {
                 locale={locale}
                 city={enhanced.stayHref.includes("kyoto") ? "kyoto" : enhanced.stayHref.includes("osaka") ? "osaka" : "tokyo"}
               />
-              <ContinuePlanningCards locale={locale} pagePath={pagePath} />
+              <ContinuePlanningCards locale={locale} pagePath={pagePath} slug={slug} />
             </>
           ) : (
             <>

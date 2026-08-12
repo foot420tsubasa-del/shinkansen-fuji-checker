@@ -4936,7 +4936,8 @@
         "start": "啟動 Station Practice",
         "chooseHotel": "選擇住宿基地",
         "airport": "確認機場接駁",
-        "esim": "抵達前先取得 eSIM"
+        "esim": "抵達前先取得 eSIM",
+        "uenoAsakusa": "上野還是淺草？"
       }
     },
     "priority": {

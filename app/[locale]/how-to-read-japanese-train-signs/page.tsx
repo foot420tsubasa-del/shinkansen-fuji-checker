@@ -409,6 +409,18 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                       <ArrowRight className="h-4 w-4" />
                     </TrackedCtaLink>
                     <TrackedCtaLink
+                      href="/areas-to-stay/asakusa-vs-ueno"
+                      placement="train_signs_station_practice"
+                      label="Compare Ueno and Asakusa"
+                      pagePath="/how-to-read-japanese-train-signs"
+                      locale={locale}
+                      category="stay"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#145aa0] bg-white px-4 py-2.5 text-sm font-extrabold text-[#145aa0] shadow-sm transition-colors hover:bg-[#f2f7fc]"
+                    >
+                      {t("before.practical.uenoAsakusa")}
+                      <ArrowRight className="h-4 w-4" />
+                    </TrackedCtaLink>
+                    <TrackedCtaLink
                       href="/airport-transfers"
                       placement="train_signs_station_practice"
                       label="Check airport transfer to hotel area"
