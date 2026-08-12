@@ -6,6 +6,7 @@ import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
 import { KLOOK_URL, ESIM_URL, JR_PASS_URL, OMIO_SHINKANSEN_URL } from "@/src/affiliateLinks";
 import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
+import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
 import { GuideStickyCta } from "@/components/affiliate/GuideStickyCta";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -386,6 +387,7 @@ const guideUiByLocale = {
     readyBody: "Book your Shinkansen ticket after confirming the Fuji-side seat. Use route comparison if you are still deciding the train path, and check JR Pass only for multi-city JR-heavy routes.",
     bookShinkansenButton: "Book Shinkansen ticket",
     checkJrPassButton: "Check JR Pass options", quickKlookTitle: "Book Seat E after checking your direction", quickKlookNote: "Reserve your Shinkansen ticket in English and select the Fuji-side seat when available.", quickKlookButton: "Book Shinkansen ticket on Klook", dirToKyoto: "Book Tokyo → Kyoto / Osaka", dirToTokyo: "Book Kyoto / Osaka → Tokyo", dirSeatNote: "Choose Seat E on the seat map when available.", bookCtaButton: "Book Seat E on Klook", bookCtaNote: "Select your route first, then choose Seat E when seat selection is available.", omioLead: "Comparing the train with buses or flights?", omioLink: "View other route options on Omio.", stickyConfirmed: "Seat E confirmed", stickyButton: "Book Shinkansen ticket",
+    seatCheckEyebrow: "Free seat checker", seatCheckQuestion: "Which way are you travelling?", seatCheckDirToKyoto: "Tokyo → Kyoto / Osaka", seatCheckDirToTokyo: "Kyoto / Osaka → Tokyo", seatCheckResult: "Sit on the {side} side — seat {seat}.", seatCheckSideRight: "right", seatCheckSideLeft: "left", seatCheckGreenCar: "In the Green Car, the Fuji-side window is usually seat {seat}.", seatCheckBookNote: "Reserve that seat when you book — window seats near Shin-Fuji go first in high season.", seatCheckBook: "Book this seat on Klook",
   },
   "pt-BR": {
     travelEssentialsTitle: "Checklist antes da partida",
@@ -429,6 +431,7 @@ const guideUiByLocale = {
     readyBody: "Reserve o Shinkansen depois de confirmar o assento do lado do Fuji. Veja o JR Pass apenas se sua rota tiver vários trajetos longos de JR.",
     bookShinkansenButton: "Reservar Shinkansen",
     checkJrPassButton: "Ver JR Pass", quickKlookTitle: "Reserve o assento E após confirmar sua direção", quickKlookNote: "Reserve seu bilhete de Shinkansen em inglês e selecione o assento do lado do Fuji quando disponível.", quickKlookButton: "Reservar bilhete de Shinkansen na Klook", dirToKyoto: "Reservar Tóquio → Kyoto / Osaka", dirToTokyo: "Reservar Kyoto / Osaka → Tóquio", dirSeatNote: "Escolha o assento E no mapa de assentos quando disponível.", bookCtaButton: "Reservar o assento E na Klook", bookCtaNote: "Escolha a rota primeiro e depois o assento E quando a seleção estiver disponível.", omioLead: "Comparando o trem com ônibus ou voos?", omioLink: "Veja outras opções de rota na Omio.", stickyConfirmed: "Assento E confirmado", stickyButton: "Reservar bilhete de Shinkansen",
+    seatCheckEyebrow: "Verificador gratuito", seatCheckQuestion: "Em qual direção você viaja?", seatCheckDirToKyoto: "Tóquio → Quioto / Osaka", seatCheckDirToTokyo: "Quioto / Osaka → Tóquio", seatCheckResult: "Sente-se do lado {side} — assento {seat}.", seatCheckSideRight: "direito", seatCheckSideLeft: "esquerdo", seatCheckGreenCar: "No Green Car, a janela do lado do Fuji costuma ser o assento {seat}.", seatCheckBookNote: "Reserve esse assento ao comprar — as janelas esgotam primeiro na alta temporada.", seatCheckBook: "Reservar este assento na Klook",
   },
   es: {
     travelEssentialsTitle: "Checklist antes de salir",
@@ -472,6 +475,7 @@ const guideUiByLocale = {
     readyBody: "Reserva el Shinkansen después de confirmar el asiento del lado del Fuji. Revisa el JR Pass solo si tu ruta incluye varios trayectos largos de JR.",
     bookShinkansenButton: "Reservar Shinkansen",
     checkJrPassButton: "Ver JR Pass", quickKlookTitle: "Reserva el asiento E tras confirmar tu dirección", quickKlookNote: "Reserva tu billete de Shinkansen en inglés y elige el asiento del lado del Fuji cuando esté disponible.", quickKlookButton: "Reservar billete de Shinkansen en Klook", dirToKyoto: "Reservar Tokio → Kioto / Osaka", dirToTokyo: "Reservar Kioto / Osaka → Tokio", dirSeatNote: "Elige el asiento E en el mapa de asientos cuando esté disponible.", bookCtaButton: "Reservar el asiento E en Klook", bookCtaNote: "Elige primero la ruta y luego el asiento E cuando la selección esté disponible.", omioLead: "¿Comparando el tren con autobuses o vuelos?", omioLink: "Ver otras opciones de ruta en Omio.", stickyConfirmed: "Asiento E confirmado", stickyButton: "Reservar billete de Shinkansen",
+    seatCheckEyebrow: "Verificador gratuito", seatCheckQuestion: "¿En qué dirección viajas?", seatCheckDirToKyoto: "Tokio → Kioto / Osaka", seatCheckDirToTokyo: "Kioto / Osaka → Tokio", seatCheckResult: "Siéntate en el lado {side} — asiento {seat}.", seatCheckSideRight: "derecho", seatCheckSideLeft: "izquierdo", seatCheckGreenCar: "En el Green Car, la ventanilla del lado del Fuji suele ser el asiento {seat}.", seatCheckBookNote: "Reserva ese asiento al comprar: las ventanillas se agotan primero en temporada alta.", seatCheckBook: "Reservar este asiento en Klook",
   },
   ko: {
     travelEssentialsTitle: "출발 전 체크리스트",
@@ -515,6 +519,7 @@ const guideUiByLocale = {
     readyBody: "후지산 쪽 좌석을 확인한 뒤 신칸센 티켓을 예약하세요. 여러 장거리 JR 이동이 있을 때만 JR Pass를 확인하세요.",
     bookShinkansenButton: "신칸센 예약",
     checkJrPassButton: "JR Pass 확인", quickKlookTitle: "방향 확인 후 E석을 예약하세요", quickKlookNote: "영어로 신칸센 티켓을 예약하고, 가능하면 후지산 쪽 좌석을 선택하세요.", quickKlookButton: "Klook에서 신칸센 티켓 예약", dirToKyoto: "도쿄 → 교토 / 오사카 예약", dirToTokyo: "교토 / 오사카 → 도쿄 예약", dirSeatNote: "좌석표에서 가능하면 E석을 선택하세요.", bookCtaButton: "Klook에서 E석 예약", bookCtaNote: "먼저 노선을 고른 뒤, 좌석 선택이 가능하면 E석을 선택하세요.", omioLead: "기차를 버스·항공과 비교하고 싶나요?", omioLink: "Omio에서 다른 경로 옵션 보기.", stickyConfirmed: "E석 확인 완료", stickyButton: "신칸센 티켓 예약",
+    seatCheckEyebrow: "무료 좌석 확인", seatCheckQuestion: "어느 방향으로 이동하시나요?", seatCheckDirToKyoto: "도쿄 → 교토 / 오사카", seatCheckDirToTokyo: "교토 / 오사카 → 도쿄", seatCheckResult: "{side}쪽에 앉으세요 — {seat}석입니다.", seatCheckSideRight: "오른", seatCheckSideLeft: "왼", seatCheckGreenCar: "그린샤에서는 후지산 쪽 창가가 보통 {seat}석입니다.", seatCheckBookNote: "예약할 때 그 좌석을 지정하세요. 성수기에는 창가부터 매진됩니다.", seatCheckBook: "Klook에서 이 좌석 예약",
   },
   "zh-TW": {
     travelEssentialsTitle: "出發前檢查清單",
@@ -558,6 +563,7 @@ const guideUiByLocale = {
     readyBody: "確認富士山側座位後再預訂新幹線車票。只有多段長距離 JR 移動時才需要查看 JR Pass。",
     bookShinkansenButton: "預訂新幹線",
     checkJrPassButton: "查看 JR Pass", quickKlookTitle: "確認方向後預訂 E 席", quickKlookNote: "以英文介面預訂新幹線車票，可選時請選富士山側座位。", quickKlookButton: "在 Klook 預訂新幹線車票", dirToKyoto: "預訂 東京 → 京都 / 大阪", dirToTokyo: "預訂 京都 / 大阪 → 東京", dirSeatNote: "可選座時請在座位圖選擇 E 席。", bookCtaButton: "在 Klook 預訂 E 席", bookCtaNote: "先選路線，可選座時再選擇 E 席。", omioLead: "想比較火車、巴士或航班？", omioLink: "在 Omio 查看其他路線選項。", stickyConfirmed: "E 席已確認", stickyButton: "預訂新幹線車票",
+    seatCheckEyebrow: "免費座位查詢", seatCheckQuestion: "您的行進方向是？", seatCheckDirToKyoto: "東京 → 京都 / 大阪", seatCheckDirToTokyo: "京都 / 大阪 → 東京", seatCheckResult: "請坐{side}側 — {seat} 座位。", seatCheckSideRight: "右", seatCheckSideLeft: "左", seatCheckGreenCar: "綠色車廂中，富士山側的窗邊通常是 {seat} 座位。", seatCheckBookNote: "訂票時請指定該座位，旺季時靠窗座位最先售罄。", seatCheckBook: "在 Klook 預訂此座位",
   },
   "zh-CN": {
     travelEssentialsTitle: "出发前检查清单",
@@ -601,6 +607,7 @@ const guideUiByLocale = {
     readyBody: "确认富士山侧座位后再预订新干线车票。只有多段长距离 JR 移动时才需要查看 JR Pass。",
     bookShinkansenButton: "预订新干线",
     checkJrPassButton: "查看 JR Pass", quickKlookTitle: "确认方向后预订 E 座", quickKlookNote: "以英文界面预订新干线车票，可选时请选富士山侧座位。", quickKlookButton: "在 Klook 预订新干线车票", dirToKyoto: "预订 东京 → 京都 / 大阪", dirToTokyo: "预订 京都 / 大阪 → 东京", dirSeatNote: "可选座时请在座位图选择 E 座。", bookCtaButton: "在 Klook 预订 E 座", bookCtaNote: "先选路线，可选座时再选择 E 座。", omioLead: "想比较火车、巴士或航班？", omioLink: "在 Omio 查看其他路线选项。", stickyConfirmed: "E 座已确认", stickyButton: "预订新干线车票",
+    seatCheckEyebrow: "免费座位查询", seatCheckQuestion: "您的行进方向是？", seatCheckDirToKyoto: "东京 → 京都 / 大阪", seatCheckDirToTokyo: "京都 / 大阪 → 东京", seatCheckResult: "请坐{side}侧 — {seat} 座位。", seatCheckSideRight: "右", seatCheckSideLeft: "左", seatCheckGreenCar: "绿色车厢中，富士山侧的靠窗座位通常是 {seat}。", seatCheckBookNote: "订票时请指定该座位，旺季时靠窗座位最先售罄。", seatCheckBook: "在 Klook 预订此座位",
   },
   fr: {
     travelEssentialsTitle: "Checklist avant le départ",
@@ -644,6 +651,7 @@ const guideUiByLocale = {
     readyBody: "Réservez votre Shinkansen après avoir confirmé le siège côté Fuji. Vérifiez le JR Pass seulement si votre itinéraire comprend plusieurs longs trajets JR.",
     bookShinkansenButton: "Réserver Shinkansen",
     checkJrPassButton: "Voir JR Pass", quickKlookTitle: "Réservez le siège E après avoir vérifié votre direction", quickKlookNote: "Réservez votre billet de Shinkansen en anglais et choisissez le siège côté Fuji lorsque c'est possible.", quickKlookButton: "Réserver le billet de Shinkansen sur Klook", dirToKyoto: "Réserver Tokyo → Kyoto / Osaka", dirToTokyo: "Réserver Kyoto / Osaka → Tokyo", dirSeatNote: "Choisissez le siège E sur le plan lorsque la sélection est possible.", bookCtaButton: "Réserver le siège E sur Klook", bookCtaNote: "Choisissez d'abord votre trajet, puis le siège E lorsque la sélection est disponible.", omioLead: "Vous comparez le train avec le bus ou l'avion ?", omioLink: "Voir d'autres options d'itinéraire sur Omio.", stickyConfirmed: "Siège E confirmé", stickyButton: "Réserver le billet de Shinkansen",
+    seatCheckEyebrow: "Vérificateur gratuit", seatCheckQuestion: "Dans quel sens voyagez-vous ?", seatCheckDirToKyoto: "Tokyo → Kyoto / Osaka", seatCheckDirToTokyo: "Kyoto / Osaka → Tokyo", seatCheckResult: "Asseyez-vous côté {side} — siège {seat}.", seatCheckSideRight: "droit", seatCheckSideLeft: "gauche", seatCheckGreenCar: "En Green Car, la fenêtre côté Fuji est généralement le siège {seat}.", seatCheckBookNote: "Réservez ce siège dès l'achat : les places fenêtre partent en premier en haute saison.", seatCheckBook: "Réserver ce siège sur Klook",
   },
   de: {
     travelEssentialsTitle: "Checkliste vor der Abfahrt",
@@ -687,6 +695,7 @@ const guideUiByLocale = {
     readyBody: "Buche dein Shinkansen-Ticket nach der Fuji-Sitzprüfung. Prüfe den JR Pass nur bei mehreren langen JR-Fahrten.",
     bookShinkansenButton: "Shinkansen buchen",
     checkJrPassButton: "JR Pass prüfen", quickKlookTitle: "Buche Sitz E, nachdem du deine Richtung geprüft hast", quickKlookNote: "Reserviere dein Shinkansen-Ticket auf Englisch und wähle, wenn möglich, den Sitz auf der Fuji-Seite.", quickKlookButton: "Shinkansen-Ticket auf Klook buchen", dirToKyoto: "Tokyo → Kyoto / Osaka buchen", dirToTokyo: "Kyoto / Osaka → Tokyo buchen", dirSeatNote: "Wähle Sitz E im Sitzplan, wenn verfügbar.", bookCtaButton: "Sitz E auf Klook buchen", bookCtaNote: "Wähle zuerst die Strecke, dann Sitz E, sobald die Sitzwahl verfügbar ist.", omioLead: "Vergleichst du den Zug mit Bus oder Flug?", omioLink: "Weitere Routenoptionen auf Omio ansehen.", stickyConfirmed: "Sitz E bestätigt", stickyButton: "Shinkansen-Ticket buchen",
+    seatCheckEyebrow: "Kostenlose Sitzplatzprüfung", seatCheckQuestion: "In welche Richtung fährst du?", seatCheckDirToKyoto: "Tokio → Kyoto / Osaka", seatCheckDirToTokyo: "Kyoto / Osaka → Tokio", seatCheckResult: "Setz dich auf die {side} Seite — Sitz {seat}.", seatCheckSideRight: "rechte", seatCheckSideLeft: "linke", seatCheckGreenCar: "Im Green Car ist das Fenster zur Fuji-Seite meist Sitz {seat}.", seatCheckBookNote: "Reserviere den Sitz direkt bei der Buchung — Fensterplätze sind in der Hochsaison zuerst weg.", seatCheckBook: "Diesen Sitz auf Klook buchen",
   },
   ru: {
     travelEssentialsTitle: "Чек-лист перед отправлением",
@@ -730,6 +739,7 @@ const guideUiByLocale = {
     readyBody: "Бронируйте Shinkansen после проверки места на сторону Фудзи. JR Pass проверяйте только при нескольких длинных поездках JR.",
     bookShinkansenButton: "Забронировать Shinkansen",
     checkJrPassButton: "Проверить JR Pass", quickKlookTitle: "Забронируйте место E после проверки направления", quickKlookNote: "Забронируйте билет на синкансэн на английском и выберите место со стороны Фудзи, если доступно.", quickKlookButton: "Забронировать билет на Klook", dirToKyoto: "Бронировать Токио → Киото / Осака", dirToTokyo: "Бронировать Киото / Осака → Токио", dirSeatNote: "Выберите место E на схеме, когда выбор доступен.", bookCtaButton: "Забронировать место E на Klook", bookCtaNote: "Сначала выберите маршрут, затем место E, когда доступен выбор мест.", omioLead: "Сравниваете поезд с автобусами или самолётами?", omioLink: "Посмотреть другие варианты маршрута на Omio.", stickyConfirmed: "Место E подтверждено", stickyButton: "Забронировать билет на синкансэн",
+    seatCheckEyebrow: "Бесплатная проверка места", seatCheckQuestion: "В каком направлении вы едете?", seatCheckDirToKyoto: "Токио → Киото / Осака", seatCheckDirToTokyo: "Киото / Осака → Токио", seatCheckResult: "Садитесь с {side} стороны — место {seat}.", seatCheckSideRight: "правой", seatCheckSideLeft: "левой", seatCheckGreenCar: "В Green Car окно со стороны Фудзи — обычно место {seat}.", seatCheckBookNote: "Бронируйте это место сразу: в высокий сезон места у окна разбирают первыми.", seatCheckBook: "Забронировать это место на Klook",
   },
 };
 
@@ -1176,6 +1186,28 @@ export default async function GuidePage({ params }: Props) {
     </div>
   );
 
+  const renderSeatCheck = () => (
+    /* The homepage seat-result slot converts best on the whole site but sits on
+       a page with a fraction of the guide's organic traffic; this reproduces
+       the answer-then-book moment where the readers actually are. */
+    <GuideSeatCheck
+      href={KLOOK_URL}
+      locale={locale}
+      copy={{
+        eyebrow: ui.seatCheckEyebrow,
+        question: ui.seatCheckQuestion,
+        dirToKyoto: ui.seatCheckDirToKyoto,
+        dirToTokyo: ui.seatCheckDirToTokyo,
+        result: ui.seatCheckResult,
+        sideRight: ui.seatCheckSideRight,
+        sideLeft: ui.seatCheckSideLeft,
+        greenCar: ui.seatCheckGreenCar,
+        bookNote: ui.seatCheckBookNote,
+        book: ui.seatCheckBook,
+      }}
+    />
+  );
+
   const renderTopBookingCtas = () => (
     /* Primary Shinkansen CTA (Klook only — Omio never appears in this slot).
        Copy switches to the direction-specific wording once the Seat Checker
@@ -1513,6 +1545,7 @@ export default async function GuidePage({ params }: Props) {
           </div>
         </section>
 
+        {renderSeatCheck()}
         {renderTopBookingCtas()}
 
         {renderEarlyShinkansenHotelStrip()}
