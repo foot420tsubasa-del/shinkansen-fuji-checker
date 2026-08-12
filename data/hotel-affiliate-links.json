@@ -2397,8 +2397,8 @@
     "sub_id": "fs_compare_kyoto-station-vs-gion_kyoto-station_all",
     "enabled": true,
     "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "compare_kyoto_station_vs_gion_gion_booking_area_all": {
     "provider": "booking_travelpayouts",
@@ -2412,8 +2412,8 @@
     "sub_id": "fs_compare_kyoto-station-vs-gion_gion_all",
     "enabled": true,
     "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "compare_namba_vs_umeda_namba_booking_area_all": {
     "provider": "booking_travelpayouts",
@@ -2427,8 +2427,8 @@
     "sub_id": "fs_compare_namba-vs-umeda_namba_all",
     "enabled": true,
     "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "compare_namba_vs_umeda_umeda_booking_area_all": {
     "provider": "booking_travelpayouts",
@@ -2442,8 +2442,8 @@
     "sub_id": "fs_compare_namba-vs-umeda_umeda_all",
     "enabled": true,
     "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "compare_shin_osaka_vs_namba_shin_osaka_booking_area_all": {
     "provider": "booking_travelpayouts",
@@ -2457,8 +2457,8 @@
     "sub_id": "fs_compare_shin-osaka-vs-namba_shin-osaka_all",
     "enabled": true,
     "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "compare_shin_osaka_vs_namba_namba_booking_area_all": {
     "provider": "booking_travelpayouts",
@@ -2472,68 +2472,8 @@
     "sub_id": "fs_compare_shin-osaka-vs-namba_namba_all",
     "enabled": true,
     "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
-  },
-  "compare_kyoto_first_time_kyoto_station_booking_area_all": {
-    "provider": "booking_travelpayouts",
-    "area_id": "kyoto-station",
-    "locale": "all",
-    "placement": "comparison_area_cta",
-    "destination_ref": "booking_kyoto-station",
-    "destination_url": "",
-    "affiliate_url": "",
-    "page_group": "kyoto-first-time",
-    "sub_id": "fs_compare_kyoto-first-time_kyoto-station_all",
-    "enabled": true,
-    "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
-  },
-  "compare_kyoto_first_time_gion_booking_area_all": {
-    "provider": "booking_travelpayouts",
-    "area_id": "gion",
-    "locale": "all",
-    "placement": "comparison_area_cta",
-    "destination_ref": "booking_gion",
-    "destination_url": "",
-    "affiliate_url": "",
-    "page_group": "kyoto-first-time",
-    "sub_id": "fs_compare_kyoto-first-time_gion_all",
-    "enabled": true,
-    "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
-  },
-  "compare_osaka_first_time_namba_booking_area_all": {
-    "provider": "booking_travelpayouts",
-    "area_id": "namba",
-    "locale": "all",
-    "placement": "comparison_area_cta",
-    "destination_ref": "booking_namba",
-    "destination_url": "",
-    "affiliate_url": "",
-    "page_group": "osaka-first-time",
-    "sub_id": "fs_compare_osaka-first-time_namba_all",
-    "enabled": true,
-    "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
-  },
-  "compare_osaka_first_time_umeda_booking_area_all": {
-    "provider": "booking_travelpayouts",
-    "area_id": "umeda",
-    "locale": "all",
-    "placement": "comparison_area_cta",
-    "destination_ref": "booking_umeda",
-    "destination_url": "",
-    "affiliate_url": "",
-    "page_group": "osaka-first-time",
-    "sub_id": "fs_compare_osaka-first-time_umeda_all",
-    "enabled": true,
-    "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "compare_kyoto_before_shinkansen_kyoto_station_booking_area_all": {
     "provider": "booking_travelpayouts",
@@ -2547,8 +2487,8 @@
     "sub_id": "fs_compare_kyoto-before-shinkansen_kyoto-station_all",
     "enabled": true,
     "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "compare_osaka_before_shinkansen_shin_osaka_booking_area_all": {
     "provider": "booking_travelpayouts",
@@ -2562,8 +2502,8 @@
     "sub_id": "fs_compare_osaka-before-shinkansen_shin-osaka_all",
     "enabled": true,
     "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "compare_osaka_before_shinkansen_umeda_booking_area_all": {
     "provider": "booking_travelpayouts",
@@ -2577,7 +2517,7 @@
     "sub_id": "fs_compare_osaka-before-shinkansen_umeda_all",
     "enabled": true,
     "priority": 10,
-    "last_checked_at": "",
-    "notes": "Kansai slot — activates automatically once the destination has an affiliate_url and url_status=active."
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   }
 }

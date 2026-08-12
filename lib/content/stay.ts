@@ -1040,6 +1040,7 @@ const rawStayPages: StayPage[] = [
     title: "Where to Stay in Kyoto Before an Early Shinkansen",
     description: "Catching an early Shinkansen from Kyoto Station? Compare the Hachijo (Shinkansen) side, the central Karasuma side, and Gion / Kawaramachi by gate walk, luggage, and evening atmosphere.",
     quickRec: {
+      areaId: "kyoto-station",
       area: "Kyoto Station (Hachijo side)",
       why: "The Shinkansen gates are on the Hachijo (south) side of Kyoto Station. Sleeping on that side turns your departure into a flat 3–8 minute walk — no taxi timing, no crossing the station complex with luggage.",
       link: hotelKyotoStation.href,
@@ -1108,6 +1109,7 @@ const rawStayPages: StayPage[] = [
     title: "Where to Stay in Osaka Before an Early Shinkansen",
     description: "The Shinkansen leaves from Shin-Osaka, not Namba or Umeda. Compare Shin-Osaka, Umeda / Osaka Station, and Namba by morning transfer, luggage, and what your last Osaka evening feels like.",
     quickRec: {
+      areaId: "shin-osaka",
       area: "Shin-Osaka",
       why: "The Shinkansen leaves from Shin-Osaka station — not Namba, not Umeda. Sleeping at Shin-Osaka removes the morning transfer entirely: elevator down, gates, train. It is a logistics choice, and for pre-9am departures the right one.",
       link: hotelShinOsaka.href,

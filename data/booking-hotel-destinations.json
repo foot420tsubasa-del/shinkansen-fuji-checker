@@ -112,12 +112,12 @@
     "label": "Gion / Kawaramachi",
     "booking_query_label": "Gion, Kyoto",
     "booking_scope": "neighborhood",
-    "destination_url": "",
-    "affiliate_url": "",
+    "destination_url": "https://www.booking.com/searchresults.html?ss=Gion%2C+Kyoto%2C+Kyoto%2C+Japan&ssne=Kyoto+Station+Area&ssne_untouched=Kyoto+Station+Area&efdco=1&label=gen173nr-10CAEoggI46AdIM1gEaHWIAQGYATO4AQfIAQzYAQPoAQH4AQGIAgGoAgG4AsPa89MGwAIB0gIkOTI1MWEyY2EtNmYyOC00YTk1LWJkN2ItOTMyYzI2ZjM3NTAx2AIB4AIB&aid=304142&lang=en-us&sb=1&src_elem=sb&src=searchresults&dest_id=2516&dest_type=district&ac_position=0&ac_click_type=b&ac_langcode=xu&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=0dfa9b043cad068a&ac_meta=GhAwZGZhOWIwNDNjYWQwNjhhIAAoATICeHU6BEdpb24%3D&group_adults=2&no_rooms=1&group_children=0",
+    "affiliate_url": "https://booking.tpx.lv/PRlXMola",
     "inventory_confidence": "high",
-    "url_status": "needs_review",
-    "last_checked_at": "",
-    "notes": "Kansai slot — paste the Booking.com search URL and the Travelpayouts link, then set url_status to active."
+    "url_status": "active",
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "booking_gotanda": {
     "area_id": "gotanda",
@@ -256,12 +256,12 @@
     "label": "Kyoto Station",
     "booking_query_label": "Kyoto Station, Kyoto",
     "booking_scope": "station",
-    "destination_url": "",
-    "affiliate_url": "",
+    "destination_url": "https://www.booking.com/searchresults.html?ss=Kyoto+Station+Area%2C+Kyoto%2C+Kyoto%2C+Japan&map=1&ssne=%E6%9D%B1%E4%BA%AC%E9%A7%85&ssne_untouched=%E6%9D%B1%E4%BA%AC%E9%A7%85&efdco=1&label=gen173nr-10CAEoggI46AdIM1gEaHWIAQGYATO4AQfIAQzYAQPoAQH4AQGIAgGoAgG4AsPa89MGwAIB0gIkOTI1MWEyY2EtNmYyOC00YTk1LWJkN2ItOTMyYzI2ZjM3NTAx2AIB4AIB&aid=304142&lang=en-us&sb=1&src_elem=sb&src=index&dest_id=3173&dest_type=district&ac_position=0&ac_click_type=b&ac_langcode=xu&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=ae889ae115d909b3&ac_meta=GhBhZTg4OWFlMTE1ZDkwOWIzIAAoATICeHU6DUt5b3RvIFN0YXRpb24%3D&group_adults=2&no_rooms=1&group_children=0&soz=1&lang_changed=1&selected_currency=USD#map_closed",
+    "affiliate_url": "https://booking.tpx.lv/Rr7r5TNw",
     "inventory_confidence": "high",
-    "url_status": "needs_review",
-    "last_checked_at": "",
-    "notes": "Kansai slot — paste the Booking.com search URL and the Travelpayouts link, then set url_status to active."
+    "url_status": "active",
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "booking_meguro": {
     "area_id": "meguro",
@@ -292,12 +292,12 @@
     "label": "Namba",
     "booking_query_label": "Namba, Osaka",
     "booking_scope": "neighborhood",
-    "destination_url": "",
-    "affiliate_url": "",
+    "destination_url": "https://www.booking.com/searchresults.html?ss=Namba&ssne=Namba&ssne_untouched=Namba&efdco=1&label=gen173nr-10CAEoggI46AdIM1gEaHWIAQGYATO4AQfIAQzYAQPoAQH4AQGIAgGoAgG4AsPa89MGwAIB0gIkOTI1MWEyY2EtNmYyOC00YTk1LWJkN2ItOTMyYzI2ZjM3NTAx2AIB4AIB&aid=304142&lang=en-us&sb=1&src_elem=sb&src=searchresults&dest_id=2076&dest_type=district&group_adults=2&no_rooms=1&group_children=0",
+    "affiliate_url": "https://booking.tpx.lv/yGcoe8DW",
     "inventory_confidence": "high",
-    "url_status": "needs_review",
-    "last_checked_at": "",
-    "notes": "Kansai slot — paste the Booking.com search URL and the Travelpayouts link, then set url_status to active."
+    "url_status": "active",
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "booking_nihombashi": {
     "area_id": "nihombashi",
@@ -400,12 +400,12 @@
     "label": "Shin-Osaka",
     "booking_query_label": "Shin-Osaka, Osaka",
     "booking_scope": "station",
-    "destination_url": "",
-    "affiliate_url": "",
+    "destination_url": "https://www.booking.com/searchresults.html?ss=Shin+Osaka%2C+Osaka%2C+Osaka+Prefecture%2C+Japan&ssne=Umeda&ssne_untouched=Umeda&efdco=1&label=gen173nr-10CAEoggI46AdIM1gEaHWIAQGYATO4AQfIAQzYAQPoAQH4AQGIAgGoAgG4AsPa89MGwAIB0gIkOTI1MWEyY2EtNmYyOC00YTk1LWJkN2ItOTMyYzI2ZjM3NTAx2AIB4AIB&aid=304142&lang=en-us&sb=1&src_elem=sb&src=searchresults&dest_id=2831&dest_type=district&ac_position=1&ac_click_type=b&ac_langcode=en&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=26539d03d33d08a1&ac_meta=GhAyNjUzOWQwM2QzM2QwOGExIAEoATICZW46ClNoaW4tT3Nha2E%3D&group_adults=2&no_rooms=1&group_children=0",
+    "affiliate_url": "https://booking.tpx.lv/lnUgQXQF",
     "inventory_confidence": "high",
-    "url_status": "needs_review",
-    "last_checked_at": "",
-    "notes": "Kansai slot — paste the Booking.com search URL and the Travelpayouts link, then set url_status to active."
+    "url_status": "active",
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "booking_shinagawa": {
     "area_id": "shinagawa",
@@ -472,12 +472,12 @@
     "label": "Umeda / Osaka Station",
     "booking_query_label": "Umeda, Osaka",
     "booking_scope": "neighborhood",
-    "destination_url": "",
-    "affiliate_url": "",
+    "destination_url": "https://www.booking.com/searchresults.html?ss=Umeda%2C+Osaka%2C+Osaka+Prefecture%2C+Japan&ssne=Namba&ssne_untouched=Namba&efdco=1&label=gen173nr-10CAEoggI46AdIM1gEaHWIAQGYATO4AQfIAQzYAQPoAQH4AQGIAgGoAgG4AsPa89MGwAIB0gIkOTI1MWEyY2EtNmYyOC00YTk1LWJkN2ItOTMyYzI2ZjM3NTAx2AIB4AIB&aid=304142&lang=en-us&sb=1&src_elem=sb&src=searchresults&dest_id=2832&dest_type=district&ac_position=1&ac_click_type=b&ac_langcode=en&ac_suggestion_list_length=5&search_selected=true&search_pageview_id=f3c89cae9eb00b27&ac_meta=GhBmM2M4OWNhZTllYjAwYjI3IAEoATICZW46BglVbWVkYQ%3D%3D&group_adults=2&no_rooms=1&group_children=0",
+    "affiliate_url": "https://booking.tpx.lv/cMLoOBRO",
     "inventory_confidence": "high",
-    "url_status": "needs_review",
-    "last_checked_at": "",
-    "notes": "Kansai slot — paste the Booking.com search URL and the Travelpayouts link, then set url_status to active."
+    "url_status": "active",
+    "last_checked_at": "2026-08-13",
+    "notes": ""
   },
   "booking_yoyogi": {
     "area_id": "yoyogi",

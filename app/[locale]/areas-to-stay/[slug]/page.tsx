@@ -119,6 +119,13 @@ const comparisonAreaCtas: Partial<Record<string, Array<{ title: string; hotelKey
     { title: "Shin-Osaka", hotelKey: "shinOsaka", areaId: "shin-osaka" },
     { title: "Namba", hotelKey: "namba", areaId: "namba" },
   ],
+  "kyoto-before-shinkansen": [
+    { title: "Kyoto Station", hotelKey: "kyotoStation", areaId: "kyoto-station" },
+  ],
+  "osaka-before-shinkansen": [
+    { title: "Shin-Osaka", hotelKey: "shinOsaka", areaId: "shin-osaka" },
+    { title: "Umeda / Osaka Station", hotelKey: "umeda", areaId: "umeda" },
+  ],
 };
 
 const filledNextStepClass =
