@@ -19,6 +19,8 @@ export type TransferOption = {
   bookingLabel?: string;
 };
 
+export type TransferFaq = { q: string; a: string };
+
 export type TransferPage = {
   slug: string;
   title: string;
@@ -29,6 +31,9 @@ export type TransferPage = {
   lateArrivalNote: string;
   proTip: string;
   nextActions: TripPick[];
+  /** Rendered as a visible Q&A block and mirrored into FAQPage JSON-LD.
+   *  English-only, so the schema is emitted on the EN route alone. */
+  faqs?: TransferFaq[];
 };
 
 // ─── Affiliate URLs ─────────────────────────────────────────────────────────
@@ -159,6 +164,32 @@ export const transferPages: TransferPage[] = [
     ],
     lateArrivalNote: "Catching a Shinkansen the same day? N'EX is usually the simplest way to reach Tokyo Station with zero transfers. If you already have a JR Pass, N'EX may be covered after activation at the Narita JR counter.",
     proTip: "Do not buy a JR Pass just for N'EX. It only starts to make sense when your wider route has multiple long-distance JR rides. If you already have one, activate it at the JR East Travel Service Center in Narita Terminal 1 or 2 before boarding.",
+    faqs: [
+      {
+        q: "What is the fastest way from Narita Airport to Tokyo Station?",
+        a: "The Narita Express (N'EX) is the fastest single-seat ride at roughly 55 minutes, and it stops directly under Tokyo Station. Keisei Skyliner to Ueno plus a 7-minute JR hop is slightly quicker on paper but adds a transfer with luggage, so N'EX usually wins door to door.",
+      },
+      {
+        q: "How much does it cost to get from Narita to Tokyo Station?",
+        a: "Expect roughly ¥3,000-3,500 for the Narita Express, about ¥2,700-3,000 for Skyliner plus the JR transfer, and around ¥1,000-1,500 for Access Express or the airport bus. Prices shift with seat class and any round-trip deals.",
+      },
+      {
+        q: "Can I catch a Shinkansen the same day I land at Narita?",
+        a: "Yes, if you land before mid-afternoon. Allow about 60 minutes for immigration and baggage, 55 minutes on N'EX, and at least 30 minutes at Tokyo Station to find the Shinkansen gates and platform. Landing after roughly 17:00 makes a same-day departure to Kyoto or Osaka tight — a night near Tokyo Station is the calmer plan.",
+      },
+      {
+        q: "Where do I buy Narita Express tickets at the airport?",
+        a: "At the JR East Travel Service Center or the ticket machines in the basement of Terminal 1 and Terminal 2-3, right beside the platforms. Reserved seats can sell out at peak arrival times, so book before you land if you are arriving on a weekend or in high season.",
+      },
+      {
+        q: "What if I arrive at Narita late at night?",
+        a: "The last N'EX and Skyliner departures are around 21:30, and the last Access Express runs slightly later. After that, the realistic choices are a night bus, a taxi that can exceed ¥20,000, or an airport-area hotel. For most travelers the airport hotel is the cheaper and calmer option.",
+      },
+      {
+        q: "Is the JR Pass worth it just for the Narita Express?",
+        a: "No. A JR Pass only pays off when your wider route includes several long-distance JR rides. If you already hold one, activate it at the JR East Travel Service Center in Terminal 1 or 2 before boarding so the N'EX ride is covered.",
+      },
+    ],
     nextActions: [
       { id: "jr-pass", category: "train", title: "JR Pass fit guide", description: "Check whether your route has enough long-distance JR rides before buying.", cta: "Read guide", href: "/jr-pass-vs-single-ticket" },
       { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare areas by Shinkansen access.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },

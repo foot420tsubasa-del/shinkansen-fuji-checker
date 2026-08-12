@@ -96,6 +96,14 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
 }
 
 const enhancedRouteCopy: Record<string, EnhancedRouteCopy> = {
+  "narita-to-tokyo-station": {
+    routeLabel: "Narita Airport → Tokyo Station",
+    quickTitle: "Most travelers should take the Narita Express.",
+    quickBody: "It runs straight into the basement of Tokyo Station in about 55 minutes with a reserved seat and luggage racks — which matters here, because most people making this trip are connecting to a Shinkansen the same day.",
+    luggageNote: "Tokyo Station is large and the Shinkansen gates are a long walk from the N'EX platform. With two or more suitcases, allow 30 minutes inside the station rather than the 10 you would allow at a smaller stop.",
+    arrivalSetupBody: "If you land after about 17:00, a same-day Shinkansen becomes tight. Compare hotel bases within a few minutes of Tokyo Station before you commit to the connection.",
+    stayHref: "/areas-to-stay/where-to-stay-before-shinkansen",
+  },
   "narita-to-shinjuku": {
     routeLabel: "Narita Airport → Shinjuku",
     quickTitle: "Most travelers should start with Narita Express.",
@@ -633,6 +641,34 @@ export default async function TransferPage({ params }: Props) {
           </div>
 
           <ProTip>{localizedProTip(page, locale)}</ProTip>
+
+          {locale === "en" && page.faqs?.length ? (
+            <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
+              <h2 className="text-lg font-semibold text-slate-950">Common questions</h2>
+              <dl className="mt-4 space-y-4">
+                {page.faqs.map((faq) => (
+                  <div key={faq.q}>
+                    <dt className="text-sm font-semibold text-slate-950">{faq.q}</dt>
+                    <dd className="mt-1 text-sm leading-6 text-slate-600">{faq.a}</dd>
+                  </div>
+                ))}
+              </dl>
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                  __html: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "FAQPage",
+                    mainEntity: page.faqs.map((faq) => ({
+                      "@type": "Question",
+                      name: faq.q,
+                      acceptedAnswer: { "@type": "Answer", text: faq.a },
+                    })),
+                  }),
+                }}
+              />
+            </section>
+          ) : null}
 
           {enhanced ? (
             <>
