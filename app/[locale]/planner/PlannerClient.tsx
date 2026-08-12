@@ -1146,7 +1146,6 @@ export function PlannerClient() {
                 { key: "stay", href: "/areas-to-stay/tokyo-first-time", icon: MapPin },
                 { key: "seat", href: "/", icon: Train },
                 { key: "itinerary", href: `/itineraries/${templateData.itinerarySlug}`, icon: Calendar },
-                { key: "map", href: "/command-center", icon: MapPin },
               ] as const).map((link) => (
                 <Link
                   key={link.key}

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Bed, CalendarDays, ExternalLink, Landmark, Luggage, MapPinned, Plane, ShieldCheck, Signpost, Train, Wifi } from "lucide-react";
+import { ArrowRight, Bed, CalendarDays, ExternalLink, Landmark, Luggage, Plane, ShieldCheck, Signpost, Train, Wifi } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
@@ -624,10 +624,6 @@ export function PlanYourTripHub() {
             <TrackedCtaLink href="/station-practice" placement="plan_trip_arrival_cards" label={t("optional.station")} category="station_practice" pagePath="/plan-your-trip" locale={locale} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#111827] bg-[#111827] px-3 py-2 text-sm font-semibold text-[#f6c343] transition-colors hover:bg-[#020617]">
               <Signpost className="h-4 w-4" />
               {t("optional.station")}
-            </TrackedCtaLink>
-            <TrackedCtaLink href="/command-center" placement="plan_trip_hero" label={t("optional.commandCenter")} category="navigation" pagePath="/plan-your-trip" locale={locale} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#082653] bg-[#082653] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#061d40]">
-              <MapPinned className="h-4 w-4" />
-              {t("optional.commandCenter")}
             </TrackedCtaLink>
             <TrackedCtaLink href="/local-tokyo" placement="plan_trip_hotel_cards" label={t("optional.localTokyo")} category="navigation" pagePath="/plan-your-trip" locale={locale} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#106b43] bg-[#106b43] px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#246449]">
               <CalendarDays className="h-4 w-4" />

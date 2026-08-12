@@ -89,9 +89,6 @@
     "insuranceDesc": "Stornierung, medizinische Absicherung und mehr. Für mehr Ruhe im Kopf.",
     "carTitle": "Privater Wagen mit Fahrer",
     "carDesc": "Englischsprachiger Fahrer. Praktisch für Familien und Tagesausflüge.",
-    "commandCenterCta": "Plane deine gesamte Japanreise",
-    "commandCenterDesc": "Routenvorlagen, Buchungs-Essentials, Wetter, Währung und Checkliste — alles in einem Planer.",
-    "commandCenterBtn": "Reiseplaner öffnen",
     "planEssentialsEyebrow": "Reise-Essentials",
     "planEssentialsTitle": "Plane die wichtigsten Punkte deiner Japanreise",
     "planEssentialsDesc": "Zug, Ankunft, Hotels, Fuji-Ausflüge und Aktivitäten in der Stadt, nachdem du deinen Shinkansen-Sitz gewählt hast.",
@@ -369,7 +366,6 @@
       "shinkansenGuide": "Shinkansen-Sitzplatzguide",
       "itineraries": "Routen",
       "airportTransfers": "Flughafentransfers",
-      "commandCenter": "Kommandozentrale",
       "support": "Hilfe",
       "about": "Über uns",
       "localTokyo": "Lokales Tokyo",
@@ -392,8 +388,7 @@
       "desc": "Beginne mit einer einfachen Route und wähle danach Sitzplätze, Hotels und Ankunfts-Essentials.",
       "primaryCta": "Trip Planner öffnen",
       "sevenDay": "7-Tage-Route ansehen",
-      "tenDay": "10-Tage-Route ansehen",
-      "commandCenter": "Command Center öffnen"
+      "tenDay": "10-Tage-Route ansehen"
     },
     "heroCtas": {
       "primary": "Fuji-Seite prüfen",
@@ -408,7 +403,6 @@
       "routeSupport": "Routen-Hilfe",
       "planner": "Trip-Planer",
       "itinerary": "7-Tage-Route",
-      "commandCenter": "Command Center",
       "stationPractice": "Bahnhofs-Training",
       "featuredLabel": "Empfohlenes Tool",
       "stationPracticeTitle": "Bahnhofs-Training",
@@ -642,9 +636,6 @@
     "makeEasyP1": "Wenn du dir nicht alle Details merken willst, nutze unseren kostenlosen Shinkansen Mt. Fuji Sitzplatzcheck. Wähle einfach deine Richtung und er zeigt dir, welchen Sitz du für die beste Chance auf Mt. Fuji buchen solltest.",
     "makeEasyP2": "Das Tool funktioniert gut auf Mobilgeräten, sodass du es beim Ticketkauf oder unterwegs in Japan schnell prüfen kannst.",
     "openChecker": "Sitzplatzcheck öffnen",
-    "commandCenterH2": "Plane deine gesamte Japanreise",
-    "commandCenterP": "Shinkansen-Sitz geklärt? Plane den Rest der Reise mit Routenvorlagen, Buchungs-Essentials, Wetter, Währung und Checkliste vor der Abreise.",
-    "commandCenterBtn": "Reiseplaner öffnen",
     "priorityH2": "Priority Seats — was ausländische Besucher wissen sollten",
     "priorityP1": "In den meisten japanischen Zügen siehst du Sitze mit der Markierung 優先席 (yūsen-seki) nahe den Türen. Diese Prioritätssitze sind für ältere Fahrgäste, Schwangere, Menschen mit Behinderung und Personen mit kleinen Kindern vorgesehen.",
     "priorityP2": "Auch wenn es nicht gesetzlich verboten ist, gilt es in Japan als unhöflich, dort zu sitzen, wenn du sie nicht brauchst. Viele Japaner meiden diese Sitze komplett — selbst wenn der Zug nicht voll ist — weil sie sozial sensibel sind.",
@@ -852,8 +843,7 @@
       "airport": "Flughafentransfers",
       "stay": "Wo übernachten",
       "seat": "Sitzplatzcheck",
-      "itinerary": "Vollständige Route",
-      "map": "Kommandozentrale"
+      "itinerary": "Vollständige Route"
     },
     "footer": {
       "brand": "fujiseat.com — Japan Travel Utility Hub",
@@ -861,8 +851,7 @@
       "jrPass": "JR Pass auf Klook prüfen",
       "or": "oder",
       "esim": "Japan eSIM holen",
-      "mapQuestion": "Brauchst du die interaktive Karte?",
-      "commandCenter": "Command Center ansehen"
+      "mapQuestion": "Brauchst du die interaktive Karte?"
     },
     "preview": {
       "badge": "Japan-Reiseplaner",
@@ -2315,7 +2304,6 @@
       "title": "Nützlich, aber keine ersten Entscheidungen",
       "insurance": "Reiseversicherung prüfen",
       "station": "Station Practice",
-      "commandCenter": "Command Center",
       "localTokyo": "Lokales Tokio"
     }
   },

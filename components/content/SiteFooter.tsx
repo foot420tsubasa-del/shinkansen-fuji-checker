@@ -49,7 +49,6 @@ export function SiteFooter() {
             <Link className={footerLinkClass} href="/guide" onClick={() => trackFooterLink("/guide", t("footer.shinkansenGuide"), "rail")}>{t("footer.shinkansenGuide")}</Link>
             <Link className={footerLinkClass} href="/areas-to-stay" onClick={() => trackFooterLink("/areas-to-stay", t("footer.stayAreas"), "stay")}>{t("footer.stayAreas")}</Link>
             <Link className={footerLinkClass} href="/airport-transfers" onClick={() => trackFooterLink("/airport-transfers", t("footer.airportTransfers"), "transfer")}>{t("footer.airportTransfers")}</Link>
-            <Link className={footerLinkClass} href="/command-center" onClick={() => trackFooterLink("/command-center", t("footer.commandCenter"), "navigation")}>{t("footer.commandCenter")}</Link>
           </div>
 
           <div>

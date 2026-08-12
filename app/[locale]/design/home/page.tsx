@@ -44,7 +44,6 @@ const navItems = [
   ["Quiet Tokyo", "/quiet-tokyo"],
   ["Stay", "/areas-to-stay"],
   ["Essentials", "/guide"],
-  ["Command Center", "/command-center"],
   ["About", "/about"],
 ] as const;
 

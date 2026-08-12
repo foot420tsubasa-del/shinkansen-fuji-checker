@@ -89,9 +89,6 @@
     "insuranceDesc": "Annulation, frais médicaux et plus encore. Voyagez serein.",
     "carTitle": "Voiture avec Chauffeur Privé",
     "carDesc": "Chauffeur anglophone. Idéal pour les familles et excursions.",
-    "commandCenterCta": "Planifiez tout votre voyage au Japon",
-    "commandCenterDesc": "Itinéraires, réservations essentielles, météo, devise et checklist — tout dans un planificateur.",
-    "commandCenterBtn": "Ouvrir le Trip Planner",
     "planEssentialsEyebrow": "Essentiels du voyage",
     "planEssentialsTitle": "Planifiez les essentiels de votre voyage au Japon",
     "planEssentialsDesc": "Train, arrivée, hôtels, excursions vers le Fuji et activités en ville après avoir choisi votre siège Shinkansen.",
@@ -369,7 +366,6 @@
       "shinkansenGuide": "Guide du siège Shinkansen",
       "itineraries": "Itinéraires",
       "airportTransfers": "Transferts aéroport",
-      "commandCenter": "Centre de commande",
       "support": "Liens utiles",
       "about": "À propos",
       "localTokyo": "Tokyo local",
@@ -392,8 +388,7 @@
       "desc": "Commencez par un itinéraire simple, puis choisissez les sièges, les hôtels et les essentiels d’arrivée.",
       "primaryCta": "Ouvrir le planificateur",
       "sevenDay": "Voir l’itinéraire de 7 jours",
-      "tenDay": "Voir l’itinéraire de 10 jours",
-      "commandCenter": "Ouvrir le Command Center"
+      "tenDay": "Voir l’itinéraire de 10 jours"
     },
     "heroCtas": {
       "primary": "Vérifier le siège côté Fuji",
@@ -408,7 +403,6 @@
       "routeSupport": "Aide aux itinéraires",
       "planner": "Planificateur de voyage",
       "itinerary": "Itinéraire 7 jours",
-      "commandCenter": "Centre de commande",
       "stationPractice": "Entraînement en gare",
       "featuredLabel": "Outil mis en avant",
       "stationPracticeTitle": "Entraînement en gare",
@@ -642,9 +636,6 @@
     "makeEasyP1": "Si vous ne voulez pas mémoriser tous ces détails, utilisez notre Vérificateur de Siège Shinkansen gratuit. Choisissez simplement votre direction et il vous indique quel siège réserver pour avoir les meilleures chances de voir le Mont Fuji.",
     "makeEasyP2": "L'outil est conçu pour fonctionner parfaitement sur mobile, vous pouvez donc le consulter rapidement lors de la réservation de billets ou pendant votre voyage au Japon.",
     "openChecker": "Ouvrir le Vérificateur de Siège",
-    "commandCenterH2": "Planifiez tout votre voyage au Japon",
-    "commandCenterP": "Vous avez trouvé votre siège Shinkansen ? Planifiez le reste du voyage avec itinéraires, réservations essentielles, météo, devise et checklist.",
-    "commandCenterBtn": "Ouvrir le Trip Planner",
     "priorityH2": "Sièges prioritaires — Ce que les visiteurs doivent savoir",
     "priorityP1": "Vous remarquerez des sièges marqués 優先席 (yūsen-seki) près des portes dans la plupart des trains japonais. Ces sièges sont réservés aux personnes âgées, aux femmes enceintes, aux personnes handicapées et à celles accompagnées de jeunes enfants.",
     "priorityP2": "Bien que ce ne soit pas légalement interdit, s'asseoir sur un siège prioritaire sans en avoir besoin est considéré comme un manque de savoir-vivre au Japon. De nombreux Japonais évitent systématiquement ces sièges — même quand le train n'est pas bondé — car les occuper porte une stigmatisation sociale tacite.",
@@ -852,8 +843,7 @@
       "airport": "Transferts aéroport",
       "stay": "Où séjourner",
       "seat": "Vérificateur de siège",
-      "itinerary": "Itinéraire complet",
-      "map": "Centre de voyage"
+      "itinerary": "Itinéraire complet"
     },
     "footer": {
       "brand": "fujiseat.com — outils de voyage au Japon",
@@ -861,8 +851,7 @@
       "jrPass": "Acheter le JR Pass sur Klook",
       "or": "ou",
       "esim": "acheter un eSIM Japon",
-      "mapQuestion": "Besoin de la carte interactive ?",
-      "commandCenter": "Explorer le Command Center"
+      "mapQuestion": "Besoin de la carte interactive ?"
     },
     "preview": {
       "badge": "Planificateur Japon",
@@ -2315,7 +2304,6 @@
       "title": "Utiles, mais pas des décisions de première étape",
       "insurance": "Voir l’assurance voyage",
       "station": "Entraînement gare",
-      "commandCenter": "Centre de commande",
       "localTokyo": "Tokyo local"
     }
   },

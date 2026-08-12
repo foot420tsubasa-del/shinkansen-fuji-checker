@@ -12,7 +12,6 @@ export function klookAff(path: string, adid = "1165791", utm?: { source?: string
   return `${base}&${params.toString()}`;
 }
 
-export const UTM_COMMAND_CENTER = { source: "fujiseat", medium: "command-center", campaign: "trip-planner" } as const;
 export const UTM_GUIDE = { source: "fujiseat", medium: "guide", campaign: "fuji-guide" } as const;
 export const UTM_HOME = { source: "fujiseat", medium: "homepage", campaign: "seat-checker" } as const;
 

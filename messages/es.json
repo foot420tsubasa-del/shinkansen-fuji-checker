@@ -89,9 +89,6 @@
     "insuranceDesc": "Cancelación, médico y más. Viaja tranquilo.",
     "carTitle": "Coche Privado con Chófer",
     "carDesc": "Conductor de habla inglesa. Ideal para familias y excursiones.",
-    "commandCenterCta": "Planifica todo tu viaje a Japón",
-    "commandCenterDesc": "Rutas, reservas esenciales, clima, moneda y checklist — todo en un planificador.",
-    "commandCenterBtn": "Abrir Trip Planner",
     "planEssentialsEyebrow": "Esenciales del viaje",
     "planEssentialsTitle": "Planifica lo esencial de tu viaje a Japón",
     "planEssentialsDesc": "Tren, llegada, hoteles, excursiones al Fuji y actividades urbanas después de elegir tu asiento en el Shinkansen.",
@@ -369,7 +366,6 @@
       "shinkansenGuide": "Guía de asientos del Shinkansen",
       "itineraries": "Itinerarios",
       "airportTransfers": "Traslados al aeropuerto",
-      "commandCenter": "Centro de control",
       "support": "Soporte",
       "about": "Acerca de",
       "localTokyo": "Tokyo local",
@@ -392,8 +388,7 @@
       "desc": "Empieza con una ruta simple y luego elige asientos, hoteles y preparativos de llegada.",
       "primaryCta": "Abrir planificador",
       "sevenDay": "Ver itinerario de 7 días",
-      "tenDay": "Ver itinerario de 10 días",
-      "commandCenter": "Abrir Command Center"
+      "tenDay": "Ver itinerario de 10 días"
     },
     "heroCtas": {
       "primary": "Verificar asiento lado Fuji",
@@ -408,7 +403,6 @@
       "routeSupport": "Soporte de ruta",
       "planner": "Planificador de viaje",
       "itinerary": "Itinerario de 7 días",
-      "commandCenter": "Centro de control",
       "stationPractice": "Práctica de estación",
       "featuredLabel": "Herramienta destacada",
       "stationPracticeTitle": "Práctica de estación",
@@ -642,9 +636,6 @@
     "makeEasyP1": "Si no quieres memorizar todos los detalles, usa nuestro Verificador de Asientos del Shinkansen gratuito. Solo elige tu dirección y te dice qué asiento reservar para la mejor oportunidad de ver el Monte Fuji.",
     "makeEasyP2": "La herramienta está diseñada para funcionar bien en móvil, así que puedes consultarla rápidamente al reservar billetes o mientras viajas por Japón.",
     "openChecker": "Abrir Verificador de Asiento",
-    "commandCenterH2": "Planifica todo tu viaje a Japón",
-    "commandCenterP": "¿Ya tienes tu asiento en el Shinkansen? Planifica el resto del viaje con rutas, reservas esenciales, clima, moneda y checklist.",
-    "commandCenterBtn": "Abrir Trip Planner",
     "priorityH2": "Asientos Prioritarios — Lo que los visitantes deben saber",
     "priorityP1": "Notarás asientos marcados como 優先席 (yūsen-seki) cerca de las puertas en la mayoría de los trenes japoneses. Estos asientos están reservados para personas mayores, mujeres embarazadas, personas con discapacidad y quienes llevan niños pequeños.",
     "priorityP2": "Aunque no está legalmente prohibido, sentarse en asientos prioritarios sin necesitarlos se considera mala educación en Japón. Muchos japoneses evitan estos asientos por completo — incluso cuando el tren no está lleno — porque ocuparlos conlleva un estigma social tácito.",
@@ -852,8 +843,7 @@
       "airport": "Traslados aeropuerto",
       "stay": "Dónde alojarse",
       "seat": "Verificador de asiento",
-      "itinerary": "Itinerario completo",
-      "map": "Centro de viaje"
+      "itinerary": "Itinerario completo"
     },
     "footer": {
       "brand": "fujiseat.com — herramientas de viaje a Japón",
@@ -861,8 +851,7 @@
       "jrPass": "Comprar JR Pass en Klook",
       "or": "o",
       "esim": "comprar eSIM Japón",
-      "mapQuestion": "¿Necesitas el mapa interactivo?",
-      "commandCenter": "Explorar Command Center"
+      "mapQuestion": "¿Necesitas el mapa interactivo?"
     },
     "preview": {
       "badge": "Planificador de viaje a Japón",
@@ -2315,7 +2304,6 @@
       "title": "Útiles, pero no decisiones iniciales",
       "insurance": "Ver seguro de viaje",
       "station": "Práctica de estación",
-      "commandCenter": "Centro de control",
       "localTokyo": "Tokio local"
     }
   },

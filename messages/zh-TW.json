@@ -89,9 +89,6 @@
     "insuranceDesc": "涵蓋行程取消、醫療等項目，安心出行。",
     "carTitle": "私人包車服務",
     "carDesc": "英語司機，適合家庭旅遊及一日遊。",
-    "commandCenterCta": "規劃您的完整日本之旅",
-    "commandCenterDesc": "路線模板、預訂重點、天氣、匯率和清單——盡在一個旅行規劃器中。",
-    "commandCenterBtn": "開啟旅行規劃器",
     "planEssentialsEyebrow": "旅行必備",
     "planEssentialsTitle": "規劃日本旅行必備項目",
     "planEssentialsDesc": "選好新幹線座位後，整理鐵路、抵達交通、住宿、富士山近郊與城市活動。",
@@ -369,7 +366,6 @@
       "shinkansenGuide": "Shinkansen 座位指南",
       "itineraries": "行程",
       "airportTransfers": "機場交通",
-      "commandCenter": "指揮中心",
       "support": "支援",
       "about": "關於",
       "localTokyo": "在地 Tokyo",
@@ -392,8 +388,7 @@
       "desc": "先從簡單路線開始，再選擇座位、飯店和抵達準備事項。",
       "primaryCta": "開啟行程規劃",
       "sevenDay": "查看7天行程",
-      "tenDay": "查看10天行程",
-      "commandCenter": "開啟 Command Center"
+      "tenDay": "查看10天行程"
     },
     "heroCtas": {
       "primary": "確認富士側座位",
@@ -408,7 +403,6 @@
       "routeSupport": "路線支援",
       "planner": "旅行規劃器",
       "itinerary": "7 日行程",
-      "commandCenter": "指揮中心",
       "stationPractice": "車站練習",
       "featuredLabel": "精選工具",
       "stationPracticeTitle": "車站練習",
@@ -642,9 +636,6 @@
     "makeEasyP1": "不想記住所有細節？使用我們免費的新幹線富士山座位查詢器。只需選擇方向，即可知道應預訂哪個座位來提高看到富士山的機會。",
     "makeEasyP2": "本工具針對手機優化，方便您在購票或日本旅途中隨時查詢。",
     "openChecker": "開啟座位查詢器",
-    "commandCenterH2": "規劃您的完整日本之旅",
-    "commandCenterP": "新幹線座位選好了？用路線模板、預訂重點、天氣、匯率和出發前清單規劃剩餘行程。",
-    "commandCenterBtn": "開啟旅行規劃器",
     "priorityH2": "優先席 — 外國旅客須知",
     "priorityP1": "在日本大多數列車上，您會注意到車門附近標有「優先席」(yūsen-seki) 的座位。這些座位是為年長者、孕婦、殘障人士和攜帶幼兒的乘客準備的。",
     "priorityP2": "雖然沒有法律禁止，但在不需要時坐優先席在日本被視為缺乏禮貌。許多日本人即使列車不擁擠也會完全避開這些座位——因為坐在優先席上帶有一種無形的社會壓力。",
@@ -852,8 +843,7 @@
       "airport": "機場接駁",
       "stay": "住哪裡",
       "seat": "座位查詢器",
-      "itinerary": "完整行程",
-      "map": "旅行中心"
+      "itinerary": "完整行程"
     },
     "footer": {
       "brand": "fujiseat.com — 日本旅行實用工具",
@@ -861,8 +851,7 @@
       "jrPass": "在 Klook 查看 JR Pass",
       "or": "或",
       "esim": "購買日本 eSIM",
-      "mapQuestion": "需要互動地圖？",
-      "commandCenter": "探索指揮中心"
+      "mapQuestion": "需要互動地圖？"
     },
     "preview": {
       "badge": "日本旅行規劃器",
@@ -2315,7 +2304,6 @@
       "title": "有用，但不是第一步決策",
       "insurance": "查看旅行保險",
       "station": "車站練習",
-      "commandCenter": "指揮中心",
       "localTokyo": "在地東京"
     }
   },

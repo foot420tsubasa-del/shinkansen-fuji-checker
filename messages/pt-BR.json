@@ -89,9 +89,6 @@
     "insuranceDesc": "Cancelamento, médico e muito mais. Viaje tranquilo.",
     "carTitle": "Carro Fretado Privado",
     "carDesc": "Motorista que fala inglês. Ótimo para famílias e passeios.",
-    "commandCenterCta": "Planeje toda a sua viagem ao Japão",
-    "commandCenterDesc": "Rotas, reservas essenciais, clima, moeda e checklist — tudo em um planejador.",
-    "commandCenterBtn": "Abrir Trip Planner",
     "planEssentialsEyebrow": "Essenciais da viagem",
     "planEssentialsTitle": "Planeje o essencial da sua viagem ao Japão",
     "planEssentialsDesc": "Trens, chegada, hotéis, passeios ao Fuji e atividades nas cidades depois de escolher seu assento no Shinkansen.",
@@ -369,7 +366,6 @@
       "shinkansenGuide": "Guia de assentos do Shinkansen",
       "itineraries": "Roteiros",
       "airportTransfers": "Transfers do aeroporto",
-      "commandCenter": "Central de planejamento",
       "support": "Suporte",
       "about": "Sobre",
       "localTokyo": "Tokyo local",
@@ -392,8 +388,7 @@
       "desc": "Comece com uma rota simples e depois escolha assentos, hotéis e itens essenciais de chegada.",
       "primaryCta": "Abrir planejador",
       "sevenDay": "Ver roteiro de 7 dias",
-      "tenDay": "Ver roteiro de 10 dias",
-      "commandCenter": "Abrir Command Center"
+      "tenDay": "Ver roteiro de 10 dias"
     },
     "heroCtas": {
       "primary": "Verificar assento lado Fuji",
@@ -408,7 +403,6 @@
       "routeSupport": "Suporte de rota",
       "planner": "Planejador de viagem",
       "itinerary": "Roteiro de 7 dias",
-      "commandCenter": "Centro de comando",
       "stationPractice": "Prática de estação",
       "featuredLabel": "Ferramenta em destaque",
       "stationPracticeTitle": "Prática de estação",
@@ -642,9 +636,6 @@
     "makeEasyP1": "Se não quiser memorizar todos os detalhes, use nosso Verificador de Assento Shinkansen gratuito. Basta escolher a direção e ele mostra qual assento reservar para a melhor chance de ver o Monte Fuji.",
     "makeEasyP2": "A ferramenta foi desenvolvida para funcionar bem no celular, então você pode consultá-la rapidamente ao reservar passagens ou durante a viagem no Japão.",
     "openChecker": "Abrir Verificador de Assento",
-    "commandCenterH2": "Planeje toda a sua viagem ao Japão",
-    "commandCenterP": "Já escolheu seu assento no Shinkansen? Planeje o resto da viagem com rotas, reservas essenciais, clima, moeda e checklist.",
-    "commandCenterBtn": "Abrir Trip Planner",
     "priorityH2": "Assentos Prioritários — O que visitantes devem saber",
     "priorityP1": "Você verá assentos marcados como 優先席 (yūsen-seki) perto das portas na maioria dos trens japoneses. Esses assentos são reservados para idosos, gestantes, pessoas com deficiência e acompanhantes de crianças pequenas.",
     "priorityP2": "Embora não seja legalmente proibido, sentar em assentos prioritários sem necessidade é considerado falta de educação no Japão. Muitos japoneses evitam esses assentos completamente — mesmo quando o trem não está lotado — porque ocupá-los carrega um estigma social implícito.",
@@ -852,8 +843,7 @@
       "airport": "Traslados aeroporto",
       "stay": "Onde ficar",
       "seat": "Verificador de assento",
-      "itinerary": "Roteiro completo",
-      "map": "Central de viagem"
+      "itinerary": "Roteiro completo"
     },
     "footer": {
       "brand": "fujiseat.com — ferramentas de viagem ao Japão",
@@ -861,8 +851,7 @@
       "jrPass": "Comprar JR Pass no Klook",
       "or": "ou",
       "esim": "comprar eSIM Japão",
-      "mapQuestion": "Precisa do mapa interativo?",
-      "commandCenter": "Explorar Command Center"
+      "mapQuestion": "Precisa do mapa interativo?"
     },
     "preview": {
       "badge": "Planejador Japão",
@@ -2315,7 +2304,6 @@
       "title": "Úteis, mas não decisões de primeiro passo",
       "insurance": "Ver seguro viagem",
       "station": "Prática de estação",
-      "commandCenter": "Centro de comando",
       "localTokyo": "Tokyo local"
     }
   },

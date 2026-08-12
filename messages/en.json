@@ -89,9 +89,6 @@
     "insuranceDesc": "Trip cancellation, medical, and more. Peace of mind.",
     "carTitle": "Private Car Charter",
     "carDesc": "English-speaking driver. Great for families & day trips.",
-    "commandCenterCta": "Plan your full Japan trip",
-    "commandCenterDesc": "Route templates, booking essentials, weather, currency and checklist — all in one planner.",
-    "commandCenterBtn": "Open Trip Planner",
     "planEssentialsEyebrow": "Trip essentials",
     "planEssentialsTitle": "Plan your Japan trip essentials",
     "planEssentialsDesc": "Rail, arrival, hotels, Fuji side trips, and city activities after choosing your Shinkansen seat.",
@@ -369,7 +366,6 @@
       "shinkansenGuide": "Shinkansen Seat Guide",
       "itineraries": "Itineraries",
       "airportTransfers": "Airport Transfers",
-      "commandCenter": "Command Center",
       "support": "Support",
       "about": "About",
       "localTokyo": "Local Tokyo",
@@ -392,8 +388,7 @@
       "desc": "Start with a simple route plan, then choose seats, hotels, and arrival essentials.",
       "primaryCta": "Open trip planner",
       "sevenDay": "See 7-day itinerary",
-      "tenDay": "See 10-day itinerary",
-      "commandCenter": "Open Command Center"
+      "tenDay": "See 10-day itinerary"
     },
     "heroCtas": {
       "primary": "Check Fuji-side seat",
@@ -408,7 +403,6 @@
       "routeSupport": "Route support",
       "planner": "Trip Planner",
       "itinerary": "7-day itinerary",
-      "commandCenter": "Command Center",
       "stationPractice": "Station Practice",
       "featuredLabel": "Featured tool",
       "stationPracticeTitle": "Station Practice",
@@ -642,9 +636,6 @@
     "makeEasyP1": "If you don't want to remember all the details, you can use our free Shinkansen Mt. Fuji Seat Checker. Just choose your direction and it tells you which seat to book for the best chance of seeing Mt. Fuji.",
     "makeEasyP2": "The tool is designed to work well on mobile, so you can quickly check it while booking tickets or travelling in Japan.",
     "openChecker": "Open Seat Checker",
-    "commandCenterH2": "Plan your entire Japan trip",
-    "commandCenterP": "Got your Shinkansen seat sorted? Plan the rest of the trip with route templates, booking essentials, weather, currency and a pre-departure checklist.",
-    "commandCenterBtn": "Open Trip Planner",
     "priorityH2": "Priority Seats — What Foreigners Should Know",
     "priorityP1": "You'll notice seats marked 優先席 (yūsen-seki) near the doors of most Japanese trains. These are priority seats reserved for elderly passengers, pregnant women, people with disabilities, and those carrying small children.",
     "priorityP2": "While not legally prohibited, sitting in priority seats when you don't need them is considered poor manners in Japan. Many Japanese people avoid these seats entirely — even when the train is not crowded — because occupying them carries an unspoken social stigma.",
@@ -852,8 +843,7 @@
       "airport": "Airport transfers",
       "stay": "Where to stay",
       "seat": "Seat checker",
-      "itinerary": "Full itinerary",
-      "map": "Command Center"
+      "itinerary": "Full itinerary"
     },
     "footer": {
       "brand": "fujiseat.com — Japan travel utility hub",
@@ -861,8 +851,7 @@
       "jrPass": "Check JR Pass on Klook",
       "or": "or",
       "esim": "get a Japan eSIM",
-      "mapQuestion": "Need the interactive map?",
-      "commandCenter": "Explore Command Center"
+      "mapQuestion": "Need the interactive map?"
     },
     "preview": {
       "badge": "Japan Trip Planner",
@@ -2315,7 +2304,6 @@
       "title": "Useful, but not first-step decisions",
       "insurance": "Check travel insurance",
       "station": "Station practice",
-      "commandCenter": "Command Center",
       "localTokyo": "Local Tokyo"
     }
   },
