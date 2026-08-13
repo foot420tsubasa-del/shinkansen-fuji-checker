@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
 import { KLOOK_URL } from "@/src/affiliateLinks";
+import { SeatLayoutDiagram } from "@/components/content/SeatLayoutDiagram";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -175,6 +176,10 @@ export default async function SeatLettersPage({ params }: Props) {
             <p className="mt-2 text-sm leading-7 text-slate-600">
               Most Tokaido Shinkansen Ordinary Cars have five seats per row: three on one side (A, B, C) and two on the other (D, E), separated by an aisle.
             </p>
+            <SeatLayoutDiagram
+              variant="ordinary"
+              directionNote="Seat positions are shown for Tokyo → Kyoto / Osaka. Travelling back to Tokyo, the letters stay the same but the train faces the other way, so Seat E is on the left of the carriage — still the Mt. Fuji window."
+            />
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
@@ -209,6 +214,10 @@ export default async function SeatLettersPage({ params }: Props) {
                 On the Tokaido Shinkansen, the Mt. Fuji-side window in Green Cars is usually <strong>Seat D</strong>. Seat A is the sea-side window.
               </p>
             </div>
+            <SeatLayoutDiagram
+              variant="green"
+              directionNote="Green Cars have no Seat E. Ask for Seat D when you want the Mt. Fuji window on the Tokaido line."
+            />
           </section>
 
           <section>
