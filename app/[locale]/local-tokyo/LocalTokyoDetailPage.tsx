@@ -13,6 +13,8 @@ import {
 } from "@/components/content/LocalTokyoCards";
 import { getAlternates } from "@/i18n/hreflang";
 import { SiteHeader } from "../components/SiteHeader";
+import { ProviderButton } from "@/components/ui/ProviderButton";
+import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 
 const pageConfig = {
   "kiyosumi-shirakawa": {
@@ -52,6 +54,18 @@ const pageConfig = {
     extraIcon: null,
   },
 } as const;
+
+/* Local Tokyo pages carried no booking route at all, even though five of the
+   six areas already have an active Booking.com destination in the admin
+   registry. Readers who get this far have picked their neighbourhood — the
+   remaining step is the hotel. */
+const BOOKING_AREA_BY_PAGE: Partial<Record<string, string>> = {
+  "kiyosumi-shirakawa": "kiyosumi-shirakawa",
+  kuramae: "kuramae",
+  "monzen-nakacho": "monzen-nakacho",
+  oshiage: "oshiage",
+  ryogoku: "ryogoku",
+};
 
 const SITE_URL = "https://fujiseat.com";
 
@@ -124,6 +138,10 @@ export async function LocalTokyoDetailPage({ locale, pageKey }: LocalTokyoDetail
   const developerPicks = pageKey === "kiyosumi-shirakawa"
     ? t.raw("developerPicks.items") as DeveloperPick[]
     : [];
+  const bookingAreaId = BOOKING_AREA_BY_PAGE[pageKey];
+  const bookingLink = bookingAreaId
+    ? getHotelProviderLinks({ areaId: bookingAreaId, locale, placement: "detail" })[0]
+    : undefined;
   const pageUrl = localizedUrl(locale, config.path);
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -297,6 +315,26 @@ export async function LocalTokyoDetailPage({ locale, pageKey }: LocalTokyoDetail
             <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
               <h2 className="text-xl font-bold text-[#082653]">{common("shouldStay")}</h2>
               <p className="mt-3 text-sm leading-7 text-slate-600">{t("shouldStay")}</p>
+              {bookingLink ? (
+                <div className="mt-4 flex flex-col gap-1.5">
+                  <p className="text-sm font-semibold text-[#082653]">{common("checkHotels")}</p>
+                  <ProviderButton
+                    provider="booking_travelpayouts"
+                    href={bookingLink.href}
+                    placement="local_tokyo"
+                    pagePath={config.path}
+                    locale={locale}
+                    linkId={bookingLink.linkId}
+                    product="hotel"
+                    category="hotel"
+                    areaId={bookingAreaId}
+                    subId={bookingLink.subId}
+                    className="w-fit"
+                  >
+                    Booking.com
+                  </ProviderButton>
+                </div>
+              ) : null}
             </section>
 
             <section>

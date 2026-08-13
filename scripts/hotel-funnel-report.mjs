@@ -5,8 +5,8 @@
  * Pulls GA4 (Data API) + Google Search Console (Search Analytics API) for the
  * last N days, focuses on the HOTEL funnel (traffic → affiliate_click, the
  * Tokyo hotel-area finder steps, and hotel-intent search queries), and writes a
- * prioritized, human-readable `分析/hotel-funnel-<date>.md` plus updates
- * `分析/hotel-funnel-latest.md`.
+ * prioritized, human-readable `分析/reports/hotel-funnel-<date>.md` plus updates
+ * `分析/reports/hotel-funnel-latest.md`.
  *
  * It is read-only against Google and never prints credentials.
  *
@@ -321,12 +321,12 @@ async function main() {
     ga4MonthlyCtaConversion(),
   ]);
   const md = buildMarkdown({ pages, events, placements, queries, ctaByMonth });
-  const dir = "分析";
+  const dir = "分析/reports";
   fs.mkdirSync(dir, { recursive: true });
   const dated = path.join(dir, `hotel-funnel-${new Date().toISOString().slice(0, 10)}.md`);
   fs.writeFileSync(dated, md);
   fs.writeFileSync(path.join(dir, "hotel-funnel-latest.md"), md);
-  console.log(`Wrote ${dated} and 分析/hotel-funnel-latest.md`);
+  console.log(`Wrote ${dated} and 分析/reports/hotel-funnel-latest.md`);
 }
 
 main().catch((e) => {
