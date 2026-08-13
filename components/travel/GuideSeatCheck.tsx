@@ -23,6 +23,9 @@ export type GuideSeatCheckCopy = {
   greenCar: string;
   bookNote: string;
   book: string;
+  /** Conditional JR Pass route — shown under the ticket CTA. */
+  jrPassLead: string;
+  jrPassLink: string;
 };
 
 /**
@@ -35,10 +38,12 @@ export type GuideSeatCheckCopy = {
  */
 export function GuideSeatCheck({
   href,
+  jrPassHref,
   locale,
   copy,
 }: {
   href: string;
+  jrPassHref: string;
   locale: string;
   copy: GuideSeatCheckCopy;
 }) {
@@ -152,6 +157,36 @@ export function GuideSeatCheck({
               {copy.book}
               <ArrowRight className="h-4 w-4" />
             </a>
+            {/* Klook data: the Pass converts at ~2.5x the single-ticket rate for
+                the readers it actually fits, so it gets a route from the
+                highest-attention moment — conditional, never as a hard sell. */}
+            <p className="mt-2.5 text-[12px] leading-5 text-slate-600">
+              {copy.jrPassLead}{" "}
+              <a
+                href={jrPassHref}
+                target="_blank"
+                rel={AFFILIATE_REL}
+                onClick={() =>
+                  trackAffiliateClick({
+                    category: "train",
+                    provider: "klook",
+                    product: "jr_pass",
+                    placement: "guide_seat_result_jr_pass",
+                    link_id: "jrPass",
+                    adid: "1165791",
+                    page_path: "/guide",
+                    page_type: "shinkansen_guide",
+                    locale,
+                    href: jrPassHref,
+                    label: copy.jrPassLink,
+                    ...directionGaParams(direction),
+                  })
+                }
+                className="font-semibold text-[#1d4e89] underline underline-offset-2 hover:text-[#0b214a]"
+              >
+                {copy.jrPassLink}
+              </a>
+            </p>
           </div>
         ) : null}
       </div>

@@ -26,11 +26,13 @@ export type AffiliateDestinationType =
 export type AffiliatePlacement =
   | "guide_quick_answer"
   | "guide_seat_result"
+  | "guide_seat_result_jr_pass"
   | "station_practice_support_esim"
   | "seat_letters_booking"
   | "guide_how_to_book"
   | "guide_mobile_sticky_after_checker"
   | "guide_jr_pass_section"
+  | "guide_jr_pass_gateway"
   | "guide_esim_checklist"
   | "guide_route_comparison_text"
   | "comparison_quick_recommendation"
