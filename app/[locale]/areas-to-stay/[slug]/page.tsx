@@ -29,6 +29,7 @@ import { getAffUrl } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
+import { ProviderButton } from "@/components/ui/ProviderButton";
 import { buttonClassName } from "@/components/ui/Button";
 import type { AdPlacement } from "@/lib/ads";
 
@@ -1751,24 +1752,27 @@ function AreaSupportHotelLink({
   return (
     <div className="flex flex-col gap-1.5">
       {adminBooking ? (
-        <TrackedAffiliateLink
-          href={adminBooking.href}
-          target="_blank"
-          rel={AFFILIATE_REL}
-          category="hotel"
-          provider="booking_travelpayouts"
-          product="hotel"
-          placement={placement}
-          pageType="hotel_comparison"
-          pagePath={sourcePage}
-          locale={locale}
-          label={`Check ${areaLabel} hotels on Booking.com`}
-          linkId={adminBooking.linkId}
-          area={areaLabel}
-          className="inline-flex min-h-10 w-fit items-center rounded-xl bg-[#2E7D5B] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#246449] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E7D5B]/40"
-        >
-          Check {areaLabel} hotels on Booking.com →
-        </TrackedAffiliateLink>
+        <div className="flex flex-col gap-1.5">
+          <p className="text-sm font-semibold text-slate-950">
+            Check {areaLabel} hotels for your dates
+          </p>
+          <ProviderButton
+            provider="booking_travelpayouts"
+            href={adminBooking.href}
+            placement={placement}
+            pagePath={sourcePage}
+            locale={locale}
+            linkId={adminBooking.linkId}
+            product="hotel"
+            category="hotel"
+            area={areaLabel}
+            areaId={resolvedAreaId}
+            subId={adminBooking.subId}
+            className="w-fit"
+          >
+            Booking.com
+          </ProviderButton>
+        </div>
       ) : bookingHref ? (
         <TrackedAffiliateLink
           href={withTripSub(bookingHref, `${placement}_${areaId ?? areaKey ?? "area"}`)}

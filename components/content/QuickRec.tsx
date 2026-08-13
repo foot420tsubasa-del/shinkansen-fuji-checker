@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { Link } from "@/i18n/navigation";
 import { trackAffiliateClick, trackCtaClick, type AffiliateClickParams } from "@/lib/analytics";
+import { ProviderButton } from "@/components/ui/ProviderButton";
 
 type QuickRecProps = {
   area: string;
@@ -49,28 +50,47 @@ export function QuickRec({
       </p>
       <p className="mt-2 text-sm leading-6 text-slate-600">{why}</p>
       {showCta ? (
-        <a
-          href={link}
-          target="_blank"
-          rel={AFFILIATE_REL}
-          onClick={() =>
-            trackAffiliateClick({
-              category: "hotel",
-              provider,
-              placement,
-              page_path: pagePath,
-              locale,
-              href: link,
-              label: ctaLabel,
-              area,
-              product: "hotel",
-            })
-          }
-          className="mt-4 inline-flex items-center gap-2 rounded-xl border border-[#D94A32] bg-[#D94A32] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#bf3d28]"
-        >
-          {ctaLabel}
-          <ArrowRight className="h-4 w-4" />
-        </a>
+        <div className="mt-4 flex flex-col gap-1.5">
+          <p className="text-sm font-semibold text-slate-950">{ctaLabel}</p>
+          {provider === "booking_travelpayouts" || provider === "trip" ? (
+            <ProviderButton
+              provider={provider}
+              href={link}
+              placement={placement}
+              pagePath={pagePath ?? ""}
+              locale={locale ?? "en"}
+              product="hotel"
+              category="hotel"
+              area={area}
+              className="w-fit"
+            >
+              {provider === "booking_travelpayouts" ? "Booking.com" : "Trip.com"}
+            </ProviderButton>
+          ) : (
+            <a
+              href={link}
+              target="_blank"
+              rel={AFFILIATE_REL}
+              onClick={() =>
+                trackAffiliateClick({
+                  category: "hotel",
+                  provider,
+                  placement,
+                  page_path: pagePath,
+                  locale,
+                  href: link,
+                  label: ctaLabel,
+                  area,
+                  product: "hotel",
+                })
+              }
+              className="inline-flex w-fit items-center gap-2 rounded-xl border border-[#D94A32] bg-[#D94A32] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-orange-200 transition-all hover:bg-[#bf3d28]"
+            >
+              {ctaLabel}
+              <ArrowRight className="h-4 w-4" />
+            </a>
+          )}
+        </div>
       ) : null}
       {secondaryHref ? (
         <div className="mt-2">
