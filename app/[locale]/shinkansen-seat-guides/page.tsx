@@ -9,6 +9,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
 import { KLOOK_URL } from "@/src/affiliateLinks";
+import { KlookProductRow } from "@/components/affiliate/KlookProductRow";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -213,6 +214,22 @@ export default async function SeatGuidesHubPage({ params }: Props) {
             </a>
           </div>
         </section>
+
+        {/* Registry-driven — hidden until the Klook links are registered. */}
+        <KlookProductRow
+          heading="Seeing Mt. Fuji up close"
+          intro="The train window is one view. If you want a day at the mountain, these are the usual ways in."
+          placement="fuji_activity_row"
+          pagePath="/shinkansen-seat-guides"
+          locale={locale}
+          className="mt-8"
+          items={[
+            { linkId: "fujiDayTourTokyo", note: "One day from Tokyo, no planning required.", product: "activity" },
+            { linkId: "fujiKawaguchikoPass", note: "Lake Kawaguchiko sightseeing bus pass.", product: "activity" },
+            { linkId: "fujiChureitoPagoda", note: "The pagoda-and-Fuji viewpoint at Arakurayama.", product: "activity" },
+            { linkId: "fujiHakoneRopeway", note: "Fuji seen across Owakudani from the ropeway.", product: "activity" },
+          ]}
+        />
 
         <SuggestedNextSteps currentPageType="seat" locale={locale} />
 

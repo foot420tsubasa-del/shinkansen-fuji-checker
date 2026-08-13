@@ -10,6 +10,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { JR_PASS_URL, OMIO_JAPAN_RAIL_PASS_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { ProviderChoiceCTA } from "@/components/affiliate/ProviderChoiceCTA";
+import { KlookProductRow } from "@/components/affiliate/KlookProductRow";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -347,6 +348,38 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
               </Link>
             </div>
           </section>
+
+          {/* Registry-driven: each product appears only once its Klook link is
+              registered in admin, so this can ship before the links exist. */}
+          <KlookProductRow
+            heading="Regional passes worth comparing"
+            intro="A whole-Japan pass is not the only option. If your route stays in one region, these are usually cheaper."
+            placement="regional_pass_row"
+            pagePath="/jr-pass-vs-single-ticket"
+            locale={locale}
+            className="mb-8"
+            items={[
+              { linkId: "passKansaiThru", note: "Private rail and subway across Osaka, Kyoto and Nara.", product: "regional_pass" },
+              { linkId: "passKansaiWide", note: "JR West across Kansai plus Okayama and Kinosaki.", product: "regional_pass" },
+              { linkId: "passHokuriku", note: "Tokyo to Osaka the long way, via Kanazawa.", product: "regional_pass" },
+              { linkId: "passTokyoSubway", note: "24 / 48 / 72-hour unlimited Tokyo subway.", product: "regional_pass" },
+            ]}
+          />
+
+          <KlookProductRow
+            heading="Book a single route instead"
+            intro="If the Pass does not pay off, reserve the individual legs. Seat selection is available on most routes."
+            placement="shinkansen_route_row"
+            pagePath="/jr-pass-vs-single-ticket"
+            locale={locale}
+            className="mb-8"
+            items={[
+              { linkId: "shinkansenTokyoHiroshima", note: "The leg that usually decides whether a Pass is worth it.", product: "shinkansen_ticket" },
+              { linkId: "shinkansenTokyoKanazawa", note: "Hokuriku Shinkansen, often paired with the Arch Pass.", product: "shinkansen_ticket" },
+              { linkId: "shinkansenOsakaHiroshima", note: "Sanyo Shinkansen from Kansai.", product: "shinkansen_ticket" },
+              { linkId: "shinkansenTokyoSendai", note: "Tohoku Shinkansen towards Matsushima and Zao.", product: "shinkansen_ticket" },
+            ]}
+          />
 
           <SuggestedNextSteps currentPageType="train" locale={locale} />
 
