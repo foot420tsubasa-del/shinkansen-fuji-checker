@@ -6,6 +6,8 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
+import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
+import { KLOOK_URL } from "@/src/affiliateLinks";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -127,6 +129,27 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
             </Link>
           </div>
         </section>
+
+        {/* Booking-intent slot: readers who reached a direction-specific
+            seat page are usually one step from reserving. */}
+        <div className="mt-6">
+          <GuideKlookCta
+            href={KLOOK_URL}
+            locale={locale}
+            placement="direction_tokyo_kyoto_booking"
+            linkId="direction_klook_tokyo_kyoto"
+            pagePath="/tokyo-to-kyoto-mt-fuji-seat"
+            pageType="shinkansen_tool"
+            copy={{
+              title: "Ready to book Tokyo → Kyoto?",
+              note: "Reserve Seat E when you book — it is the Mt. Fuji window on this leg.",
+              button: "Check Shinkansen tickets on Klook",
+              dirToKyoto: "Booking Tokyo → Kyoto / Osaka? Ask for Seat E.",
+              dirToTokyo: "Booking Tokyo → Kyoto / Osaka? Ask for Seat E.",
+              dirSeatNote: "Seat E is the Mt. Fuji window for your direction. Reserve it when you book.",
+            }}
+          />
+        </div>
 
         <div className="mt-10 space-y-8">
           <section>

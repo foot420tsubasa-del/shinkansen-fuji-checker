@@ -7,6 +7,8 @@ import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
+import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
+import { KLOOK_URL } from "@/src/affiliateLinks";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -123,6 +125,27 @@ export default async function SeatGuidesHubPage({ params }: Props) {
             </Link>
           </div>
         </section>
+
+        {/* Booking-intent slot: this hub collects the "which seat" searches,
+            which sit one step from a reservation. */}
+        <div className="mt-6">
+          <GuideKlookCta
+            href={KLOOK_URL}
+            locale={locale}
+            placement="seat_guides_booking"
+            linkId="seat_guides_klook_booking"
+            pagePath="/shinkansen-seat-guides"
+            pageType="shinkansen_tool"
+            copy={{
+              title: "Ready to book your Shinkansen seat?",
+              note: "Pick your route first, then reserve Seat E from the seat map when it is offered.",
+              button: "Check Shinkansen tickets on Klook",
+              dirToKyoto: "Booking Tokyo → Kyoto / Osaka? Ask for Seat E.",
+              dirToTokyo: "Booking Kyoto / Osaka → Tokyo? Seat E, left side of the carriage.",
+              dirSeatNote: "Seat E is the Mt. Fuji window for your direction. Reserve it when you book.",
+            }}
+          />
+        </div>
 
         <section className="mt-8 grid gap-4 sm:grid-cols-2">
           {guides.map((guide) => {

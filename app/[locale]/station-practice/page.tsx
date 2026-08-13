@@ -8,6 +8,7 @@ import {
   Plane,
   ShieldCheck,
   Signpost,
+  Train,
   Wifi,
 } from "lucide-react";
 import { getLocale } from "next-intl/server";
@@ -18,7 +19,7 @@ import { FaqAccordion } from "@/components/station-practice/landing/FaqAccordion
 import { LanguageSelector } from "../components/LanguageSelector";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { AFFILIATE_REL } from "@/lib/link-rel";
-import { ESIM_URL } from "@/src/affiliateLinks";
+import { ESIM_URL, JR_PASS_URL } from "@/src/affiliateLinks";
 
 export const metadata: Metadata = {
   title: "Station Practice — Japanese station navigation simulator",
@@ -101,6 +102,19 @@ const supportCtas = [
     href: ESIM_URL,
     icon: Wifi,
     affiliate: true,
+  },
+  {
+    // The rail product this audience actually buys: readers practising station
+    // navigation are planning the trip, and the Pass has to be decided early.
+    title: "Check JR Pass before you travel",
+    body: "Worth it for Hiroshima, several long JR rides, or a multi-city week.",
+    href: JR_PASS_URL,
+    icon: Train,
+    affiliate: true,
+    product: "jr_pass",
+    linkId: "station_practice_klook_jr_pass",
+    placement: "station_practice_support_jr_pass",
+    adid: "1165791",
   },
 ] as const;
 
@@ -370,11 +384,12 @@ export default async function StationPracticeLandingPage() {
                     href={cta.href}
                     target="_blank"
                     rel={AFFILIATE_REL}
-                    category="esim"
+                    category={"product" in cta && cta.product === "jr_pass" ? "train" : "esim"}
                     provider="klook"
-                    product="esim"
-                    placement="station_practice_support_esim"
-                    linkId="station_practice_klook_esim"
+                    product={"product" in cta ? cta.product : "esim"}
+                    placement={"placement" in cta ? cta.placement : "station_practice_support_esim"}
+                    linkId={"linkId" in cta ? cta.linkId : "station_practice_klook_esim"}
+                    adid={"adid" in cta ? cta.adid : undefined}
                     pagePath="/station-practice"
                     locale={locale}
                     label={cta.title}
