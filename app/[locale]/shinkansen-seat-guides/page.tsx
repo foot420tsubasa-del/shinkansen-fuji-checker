@@ -227,6 +227,7 @@ export default async function SeatGuidesHubPage({ params }: Props) {
             { linkId: "fujiDayTourTokyo", note: "One day from Tokyo, no planning required.", product: "activity" },
             { linkId: "fujiKawaguchikoPass", note: "Lake Kawaguchiko sightseeing bus pass.", product: "activity" },
             { linkId: "fujiChureitoPagoda", note: "The pagoda-and-Fuji viewpoint at Arakurayama.", product: "activity" },
+            { linkId: "fujiOshinoHakkai", note: "Oshino Hakkai springs and the Fuji Five Lakes.", product: "activity" },
           ]}
         />
 
