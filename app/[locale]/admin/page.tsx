@@ -366,6 +366,7 @@ export default function AdminPage() {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [showAdd, setShowAdd] = useState(false);
   const [klookUrlInput, setKlookUrlInput] = useState("");
+  const [linkQuery, setLinkQuery] = useState("");
   const [tab, setTab] = useState<"hotel" | "hotel-affiliate" | "booking-destinations" | "stay-picks" | "local-picks" | "stay-maps" | "agoda-maps" | "todo" | "all">("hotel");
   const [adminToken, setAdminToken] = useState("");
   const [editingHotelId, setEditingHotelId] = useState<string | null>(null);
@@ -1068,8 +1069,20 @@ export default function AdminPage() {
 
   // ─── Computed ─────────────────────────────────────────────────────────────
 
+  /* 83件を目視で追うのは無理があり、キー名はコードヒントの中にしか出ていない。
+     キー・ラベル・ADID のいずれでも絞り込めるようにする。 */
+  const matchesQuery = (l: LinkEntry) => {
+    const q = linkQuery.trim().toLowerCase();
+    if (!q) return true;
+    return (
+      l.id.toLowerCase().includes(q) ||
+      (l.label ?? "").toLowerCase().includes(q) ||
+      (l.adid ?? "").toLowerCase().includes(q)
+    );
+  };
+
   const byProvider = (provider: string) =>
-    links.filter((l) => l.provider === provider);
+    links.filter((l) => l.provider === provider && matchesQuery(l));
 
   const todoItems = links.filter((l) => getStatus(l) !== "done");
   const doneItems = links.filter((l) => getStatus(l) === "done");
@@ -1280,6 +1293,10 @@ export default function AdminPage() {
             <div className="flex-1">
               <div className="flex flex-wrap items-center gap-2">
                 <p className="text-sm font-semibold text-slate-900">{entry.label}</p>
+                {/* 登録キー。手順書ではキーで指示されるので、行の見出しに出す。 */}
+                <code className="rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[10px] text-slate-600">
+                  {entry.id}
+                </code>
                 <span className={`rounded-md border px-1.5 py-0.5 text-[9px] font-bold ${style.badge}`}>
                   {style.label}
                 </span>
@@ -3349,6 +3366,23 @@ export default function AdminPage() {
         {/* ALL tab */}
         {!loading && tab === "all" && (
           <div className="space-y-6">
+            <div className="flex flex-wrap items-center gap-2">
+              <input
+                value={linkQuery}
+                onChange={(e) => setLinkQuery(e.target.value)}
+                placeholder="キー / ラベル / ADID で絞り込み（例: passTokyoSubway、Subway、1552）"
+                className="min-w-0 flex-1 rounded-xl border border-slate-200 px-3 py-2 text-xs outline-none focus:border-sky-300"
+              />
+              {linkQuery ? (
+                <button
+                  onClick={() => setLinkQuery("")}
+                  className="rounded-xl border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-500 hover:bg-slate-50"
+                >
+                  クリア
+                </button>
+              ) : null}
+            </div>
+
             {/* Add button */}
             {!showAdd && editingId === null && (
               <button
@@ -3386,7 +3420,7 @@ export default function AdminPage() {
                 <p className="mb-2 text-xs font-bold text-slate-700">その他</p>
                 <div className="space-y-2">
                   {links
-                    .filter((l) => !["klook", "agoda"].includes(l.provider))
+                    .filter((l) => !["klook", "agoda"].includes(l.provider) && matchesQuery(l))
                     .map((entry) => <LinkCard key={entry.id} entry={entry} />)}
                 </div>
               </div>
