@@ -359,7 +359,7 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
             locale={locale}
             className="mb-8"
             items={[
-              { linkId: "passKansaiThru", note: "Private rail and subway across Osaka, Kyoto and Nara.", product: "regional_pass" },
+              { linkId: "passKansaiThru", note: "Private rail and subway across Osaka, Kyoto and Nara — formerly the Kansai Thru Pass.", product: "regional_pass" },
               { linkId: "passKansaiWide", note: "JR West across Kansai plus Okayama and Kinosaki.", product: "regional_pass" },
               { linkId: "passHokuriku", note: "Tokyo to Osaka the long way, via Kanazawa.", product: "regional_pass" },
               { linkId: "passTokyoSubway", note: "24 / 48 / 72-hour unlimited Tokyo subway.", product: "regional_pass" },

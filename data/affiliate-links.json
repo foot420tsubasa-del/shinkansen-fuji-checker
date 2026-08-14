@@ -994,110 +994,110 @@
     "adminNotes": "If Namba is unsupported, fallback to Osaka in the comparison block only."
   },
   "passKansaiThru": {
-    "label": "Kansai Thru Pass",
+    "label": "Kansai Railway Pass Lite",
     "provider": "klook",
-    "adid": "",
-    "klookPath": "activity/1329-kansai-thru-pass-osaka/",
-    "directUrl": "",
+    "adid": "1385350",
+    "klookPath": "activity/1329-kansai-railway-pass-lite/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385350&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F1329-kansai-railway-pass-lite%2F%3Fdd_referrer%3D",
     "usedOn": [],
     "notes": "[kansai] Osaka/Kyoto/Nara の私鉄・地下鉄乗り放題。関西比較ページと関西Rail 3Dの受け皿 — 対象商品: https://www.klook.com/en-US/activity/1329-kansai-thru-pass-osaka/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
   },
   "passKansaiWide": {
     "label": "JR Kansai WIDE Area Pass",
     "provider": "klook",
-    "adid": "",
+    "adid": "1385357",
     "klookPath": "activity/2771-7-day-jr-kansai-hokuriku-area-pass-jr-pass/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385357&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F2771-7-day-jr-kansai-hokuriku-area-pass-jr-pass%2F",
     "usedOn": [],
     "notes": "[kansai] 関西+岡山・城崎。京都/大阪発の周遊読者向け — 対象商品: https://www.klook.com/en-US/activity/2771-7-day-jr-kansai-hokuriku-area-pass-jr-pass/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
   },
   "passHokuriku": {
     "label": "Hokuriku Arch Pass",
     "provider": "klook",
-    "adid": "",
+    "adid": "1385358",
     "klookPath": "activity/2781-7-day-jr-hokuriku-arch-pass-jr-pass/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385358&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F2781-7-day-jr-hokuriku-arch-pass-jr-pass%2F",
     "usedOn": [],
     "notes": "[route] 東京〜金沢〜大阪。北陸経由の周遊。JRパスの代替検討層 — 対象商品: https://www.klook.com/en-US/activity/2781-7-day-jr-hokuriku-arch-pass-jr-pass/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
   },
   "passTokyoSubway": {
     "label": "Tokyo Subway 24/48/72h Ticket",
     "provider": "klook",
-    "adid": "",
+    "adid": "1385352",
     "klookPath": "activity/1552-subway-ticket-tokyo/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385352&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F1552-subway-ticket-tokyo%2F",
     "usedOn": [],
     "notes": "[tokyo] 滞在中の東京読者に最も刺さる低価格・高頻度商材 — 対象商品: https://www.klook.com/en-US/activity/1552-subway-ticket-tokyo/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
   },
   "shinkansenTokyoHiroshima": {
     "label": "Shinkansen Tokyo – Hiroshima",
     "provider": "klook",
-    "adid": "",
+    "adid": "1385360",
     "klookPath": "japan-rail/shinkansen/28-tokyo/24323-hiroshima/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385360&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fjapan-rail%2Fshinkansen%2F28-tokyo%2F24323-hiroshima%2F",
     "usedOn": [],
     "notes": "[route] 広島はJRパス判定の分岐点。単券との比較文脈で使う — 対象商品: https://www.klook.com/en-US/japan-rail/shinkansen/28-tokyo/24323-hiroshima/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
   },
   "shinkansenTokyoKanazawa": {
     "label": "Shinkansen Tokyo – Kanazawa",
     "provider": "klook",
-    "adid": "",
+    "adid": "1385361",
     "klookPath": "japan-rail/shinkansen/28-tokyo/kanazawa-station/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385361&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fjapan-rail%2Fshinkansen%2F28-tokyo%2Fkanazawa-station%2F",
     "usedOn": [],
     "notes": "[route] 北陸新幹線。Hokuriku Arch Pass と並べる — 対象商品: https://www.klook.com/en-US/japan-rail/shinkansen/28-tokyo/kanazawa-station/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
   },
   "shinkansenOsakaHiroshima": {
     "label": "Shinkansen Osaka – Hiroshima",
     "provider": "klook",
-    "adid": "",
+    "adid": "1385363",
     "klookPath": "japan-rail/shinkansen/29-osaka/24323-hiroshima/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385363&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fjapan-rail%2Fshinkansen%2F29-osaka%2F24323-hiroshima%2F",
     "usedOn": [],
     "notes": "[route] 山陽新幹線。関西滞在中の読者向け — 対象商品: https://www.klook.com/en-US/japan-rail/shinkansen/29-osaka/24323-hiroshima/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
   },
   "shinkansenTokyoSendai": {
     "label": "Shinkansen Tokyo – Sendai",
     "provider": "klook",
-    "adid": "",
+    "adid": "1385364",
     "klookPath": "japan-rail/shinkansen/tohoku-shinkansen/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385364&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fjapan-rail%2Fshinkansen%2Ftohoku-shinkansen%2F",
     "usedOn": [],
     "notes": "[route] 東北新幹線。将来の記事拡張用 — 対象商品: https://www.klook.com/en-US/japan-rail/shinkansen/tohoku-shinkansen/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
   },
   "fujiKawaguchikoPass": {
     "label": "Kawaguchiko / Mt Fuji Area Pass",
     "provider": "klook",
-    "adid": "",
+    "adid": "1385367",
     "klookPath": "activity/132532-mt-fuji-pass/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385367&k_site=https%3A%2F%2Fwww.klook.com%2Factivity%2F132532-mt-fuji-pass%2F",
     "usedOn": [],
     "notes": "[fuji] 河口湖周遊バス。富士山を見に行く読者の実移動手段 — 対象商品: https://www.klook.com/en-US/activity/132532-mt-fuji-pass/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
   },
   "fujiDayTourTokyo": {
     "label": "Mt Fuji Day Tour from Tokyo",
     "provider": "klook",
-    "adid": "",
+    "adid": "1385366",
     "klookPath": "activity/2675-mount-fuji-classic-route-day-tour-tokyo/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385366&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F2675-mount-fuji-classic-route-day-tour-tokyo%2F",
     "usedOn": [],
     "notes": "[fuji] 1日で富士山を見る最短手段。単価が高い — 対象商品: https://www.klook.com/en-US/activity/2675-mount-fuji-classic-route-day-tour-tokyo/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
   },
   "fujiOshinoHakkai": {
     "label": "Oshino Hakkai / Fuji Five Lakes Tour",
     "provider": "klook",
-    "adid": "",
+    "adid": "1385370",
     "klookPath": "activity/100747-mount-fuji-arakurayama-park-oshino-hakkai-kawaguchiko-bus-tour-tokyo/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385370&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F100747-mount-fuji-arakurayama-park-oshino-hakkai-kawaguchiko-bus-tour-tokyo%2F",
     "usedOn": [],
     "notes": "[fuji] 富士五湖エリアの周遊 — 対象商品: https://www.klook.com/en-US/activity/100747-mount-fuji-arakurayama-park-oshino-hakkai-kawaguchiko-bus-tour-tokyo/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
   },
   "fujiChureitoPagoda": {
     "label": "Chureito Pagoda / Arakurayama",
     "provider": "klook",
-    "adid": "",
+    "adid": "1385369",
     "klookPath": "activity/94004-mt-fuji-oishi-park-arakurayama-sengen-park-one-day-bus-tour-tokyo/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385369&k_site=https%3A%2F%2Fwww.klook.com%2Factivity%2F94004-mt-fuji-oishi-park-arakurayama-sengen-park-one-day-bus-tour-tokyo%2F",
     "usedOn": [],
     "notes": "[fuji] 富士山＋五重塔の定番展望。写真目的の読者向け — 対象商品: https://www.klook.com/en-US/activity/94004-mt-fuji-oishi-park-arakurayama-sengen-park-one-day-bus-tour-tokyo/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
   }
