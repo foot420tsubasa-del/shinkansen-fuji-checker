@@ -1020,6 +1020,8 @@ export default async function GuidePage({ params }: Props) {
   const copy = locale === "fr" ? frGuideCopy : { ...enGuideCopy, ...guideCopyOverridesByLocale[locale] };
   const quickAnswer = quickAnswerCopyByLocale[locale] ?? quickAnswerCopyByLocale.en;
   const ui = guideUiByLocale[locale as keyof typeof guideUiByLocale] ?? guideUiByLocale.en;
+  // Locale-aware so GA4 attributes each language's clicks to its own page.
+  const guidePath = locale === "en" ? "/guide" : `/${locale}/guide`;
   const quickLabel = `${quickAnswer.title}:`;
   const displayTitle = locale === "en"
     ? "Which Side of the Shinkansen for Mt. Fuji? Right Side, Seat E"
@@ -1157,7 +1159,7 @@ export default async function GuidePage({ params }: Props) {
             category="esim"
             provider="klook"
             placement="guide_esim_checklist"
-            pagePath="/guide"
+            pagePath={guidePath}
             locale={locale}
             label="Get Japan eSIM"
             linkId="esim"
@@ -1204,6 +1206,7 @@ export default async function GuidePage({ params }: Props) {
       href={KLOOK_URL}
       jrPassHref={JR_PASS_URL}
       locale={locale}
+      pagePath={guidePath}
       copy={{
         eyebrow: ui.seatCheckEyebrow,
         question: ui.seatCheckQuestion,
@@ -1255,7 +1258,7 @@ export default async function GuidePage({ params }: Props) {
           category="train"
           provider="klook"
           placement="guide_top_klook_shinkansen"
-          pagePath="/guide"
+          pagePath={guidePath}
           locale={locale}
           label="Book Shinkansen ticket"
           linkId="shinkansenTicket"
@@ -1289,7 +1292,7 @@ export default async function GuidePage({ params }: Props) {
               category="train"
               provider="klook"
               placement="guide_jr_pass_gateway"
-              pagePath="/guide"
+              pagePath={guidePath}
               locale={locale}
               label="Check JR Pass options on Klook"
               linkId="jrPass"
@@ -1342,7 +1345,7 @@ export default async function GuidePage({ params }: Props) {
             category="train"
             provider="omio"
             placement="guide_route_comparison_text"
-            pagePath="/guide"
+            pagePath={guidePath}
             locale={locale}
             label="View other route options on Omio"
             linkId="guide_omio_route_comparison"
@@ -1438,7 +1441,7 @@ export default async function GuidePage({ params }: Props) {
           category="train"
           provider="klook"
           placement="guide_article_inline"
-          pagePath="/guide"
+          pagePath={guidePath}
           locale={locale}
           label="Book Shinkansen ticket"
           linkId="shinkansenTicket"
@@ -1469,7 +1472,7 @@ export default async function GuidePage({ params }: Props) {
           href="/jr-pass-vs-single-ticket"
           placement="guide_continue_planning"
           label="Compare JR Pass"
-          pagePath="/guide"
+          pagePath={guidePath}
           locale={locale}
           category="rail"
           className="group flex h-full flex-col rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3.5 text-[12px] shadow-sm shadow-amber-100/60 transition-colors hover:border-amber-300 hover:bg-amber-100/70"
@@ -1484,7 +1487,7 @@ export default async function GuidePage({ params }: Props) {
           href="/how-to-read-japanese-train-signs"
           placement="guide_continue_planning"
           label="Read station signs and practice station navigation"
-          pagePath="/guide"
+          pagePath={guidePath}
           locale={locale}
           category="station_practice"
           className="group flex h-full flex-col rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3.5 text-[12px] shadow-sm shadow-sky-100/60 transition-colors hover:border-sky-300 hover:bg-sky-100/70"
@@ -1509,7 +1512,7 @@ export default async function GuidePage({ params }: Props) {
         category="train"
         provider="klook"
         placement="guide_how_to_book"
-        pagePath="/guide"
+        pagePath={guidePath}
         locale={locale}
         label="Book Seat E on Klook"
         linkId="guide_klook_how_to_book"
@@ -1799,7 +1802,7 @@ export default async function GuidePage({ params }: Props) {
               heading="Staying in one region?"
               intro="A whole-Japan pass rarely pays off for a single region. These cover the same ground for less."
               placement="regional_pass_row"
-              pagePath="/guide"
+              pagePath={guidePath}
               locale={locale}
               limit={2}
               className="mt-3"
@@ -1819,7 +1822,7 @@ export default async function GuidePage({ params }: Props) {
                 category="train"
                 provider="klook"
                 placement="guide_jr_pass_section"
-                pagePath="/guide"
+                pagePath={guidePath}
                 locale={locale}
                 label="Check JR Pass options on Klook"
                 linkId="jrPass"
@@ -1941,7 +1944,7 @@ export default async function GuidePage({ params }: Props) {
             heading="Want to see Mt. Fuji up close?"
             intro="The train window is a few minutes. These are the usual ways to spend a day at the mountain."
             placement="fuji_activity_row"
-            pagePath="/guide"
+            pagePath={guidePath}
             locale={locale}
             limit={2}
             className="mb-5"
@@ -1953,7 +1956,7 @@ export default async function GuidePage({ params }: Props) {
 
           {/* §4-3 compact Stay Finder embed — navigation-layer module kept
               below the answer article per the phase-1 structure constraint. */}
-          <CompactStayFinder locale={locale} pagePath="/guide" placement="guide_compact_finder" />
+          <CompactStayFinder locale={locale} pagePath={guidePath} placement="guide_compact_finder" />
 
           {renderContinuePlanning()}
 
@@ -1999,6 +2002,7 @@ export default async function GuidePage({ params }: Props) {
       <GuideStickyCta
         href={KLOOK_URL}
         locale={locale}
+        pagePath={guidePath}
         copy={{ confirmed: ui.stickyConfirmed, button: ui.stickyButton }}
       />
     </main>

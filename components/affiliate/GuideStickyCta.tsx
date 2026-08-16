@@ -29,10 +29,13 @@ export type GuideStickyCtaCopy = {
 export function GuideStickyCta({
   href,
   locale,
+  pagePath,
   copy,
 }: {
   href: string;
   locale: string;
+  /** Locale-aware path, so GA4 does not fold every language into /guide. */
+  pagePath: string;
   copy: GuideStickyCtaCopy;
 }) {
   const [direction, setDirection] = useState<DirectionId | null>(null);
@@ -79,11 +82,11 @@ export function GuideStickyCta({
       provider: "klook",
       product: "shinkansen",
       placement: "guide_mobile_sticky_after_checker",
-      page_path: "/guide",
+      page_path: pagePath,
       link_id: "guide_klook_mobile_sticky",
       locale,
     });
-  }, [visible, locale]);
+  }, [visible, locale, pagePath]);
 
   const dismiss = () => {
     setDismissed(true);
@@ -119,7 +122,7 @@ export function GuideStickyCta({
                 product: "shinkansen",
                 placement: "guide_mobile_sticky_after_checker",
                 link_id: "guide_klook_mobile_sticky",
-                page_path: "/guide",
+                page_path: pagePath,
                 page_type: "shinkansen_guide",
                 locale,
                 href,

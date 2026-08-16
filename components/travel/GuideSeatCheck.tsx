@@ -40,11 +40,14 @@ export function GuideSeatCheck({
   href,
   jrPassHref,
   locale,
+  pagePath,
   copy,
 }: {
   href: string;
   jrPassHref: string;
   locale: string;
+  /** Locale-aware path, so GA4 does not fold every language into /guide. */
+  pagePath: string;
   copy: GuideSeatCheckCopy;
 }) {
   const [direction, setDirection] = useState<DirectionId | null>(null);
@@ -71,13 +74,13 @@ export function GuideSeatCheck({
       result_seat: result.standardWindowSeat,
       result_side: result.sideLabel,
       locale,
-      page_path: "/guide",
+      page_path: pagePath,
     });
     trackAffiliateCtaView({
       provider: "klook",
       product: "shinkansen",
       placement: "guide_seat_result",
-      page_path: "/guide",
+      page_path: pagePath,
       link_id: "guide_klook_seat_result",
       locale,
     });
@@ -144,7 +147,7 @@ export function GuideSeatCheck({
                   product: "shinkansen",
                   placement: "guide_seat_result",
                   link_id: "guide_klook_seat_result",
-                  page_path: "/guide",
+                  page_path: pagePath,
                   page_type: "shinkansen_guide",
                   locale,
                   href,
@@ -174,7 +177,7 @@ export function GuideSeatCheck({
                     placement: "guide_seat_result_jr_pass",
                     link_id: "jrPass",
                     adid: "1165791",
-                    page_path: "/guide",
+                    page_path: pagePath,
                     page_type: "shinkansen_guide",
                     locale,
                     href: jrPassHref,
