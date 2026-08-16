@@ -10,6 +10,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
 import { KLOOK_URL } from "@/src/affiliateLinks";
 import { SeatLayoutDiagram } from "@/components/content/SeatLayoutDiagram";
+import { KlookProductRow } from "@/components/affiliate/KlookProductRow";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -266,6 +267,21 @@ export default async function SeatLettersPage({ params }: Props) {
               </Link>
             </div>
           </section>
+
+          <KlookProductRow
+            heading="Booking a specific route?"
+            intro="Seat selection is offered on most of these. Reserve the letter you want when you book."
+            placement="shinkansen_route_row"
+            pagePath="/shinkansen-seat-letters"
+            locale={locale}
+            className="mb-8"
+            items={[
+              { linkId: "shinkansenTokyoHiroshima", note: "Tokyo – Hiroshima on the Tokaido / Sanyo line.", product: "shinkansen_ticket" },
+              { linkId: "shinkansenOsakaHiroshima", note: "Osaka – Hiroshima on the Sanyo line.", product: "shinkansen_ticket" },
+              { linkId: "shinkansenTokyoKanazawa", note: "Tokyo – Kanazawa on the Hokuriku line.", product: "shinkansen_ticket" },
+              { linkId: "shinkansenTokyoSendai", note: "Tokyo – Sendai on the Tohoku line.", product: "shinkansen_ticket" },
+            ]}
+          />
 
           <SuggestedNextSteps currentPageType="seat" locale={locale} />
         </div>

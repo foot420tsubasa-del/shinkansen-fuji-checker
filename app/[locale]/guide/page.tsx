@@ -15,6 +15,7 @@ import { CompactStayFinder } from "@/components/stay/CompactStayFinder";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
+import { KlookProductRow } from "@/components/affiliate/KlookProductRow";
 
 const SITE_URL = "https://fujiseat.com";
 
@@ -1791,6 +1792,22 @@ export default async function GuidePage({ params }: Props) {
               </Link>
               .
             </p>
+            {/* Moved here from /jr-pass-vs-single-ticket, which sits at
+                position 36 and drew no impressions on these rows at all. The
+                readers deciding between a pass and a ticket are on this page. */}
+            <KlookProductRow
+              heading="Staying in one region?"
+              intro="A whole-Japan pass rarely pays off for a single region. These cover the same ground for less."
+              placement="regional_pass_row"
+              pagePath="/guide"
+              locale={locale}
+              limit={2}
+              className="mt-3"
+              items={[
+                { linkId: "passKansaiThru", note: "Private rail and subway across Osaka, Kyoto and Nara.", product: "regional_pass" },
+                { linkId: "passTokyoSubway", note: "24 / 48 / 72-hour unlimited Tokyo subway.", product: "regional_pass" },
+              ]}
+            />
             <div className="mt-3 rounded-2xl border border-orange-100 bg-orange-50/70 px-3.5 py-3">
               <p className="text-[12px] font-semibold leading-5 text-slate-950">
                 If your route includes Tokyo → Kyoto/Osaka → Hiroshima, several long JR rides, or a return to Tokyo, check JR Pass options before booking single tickets.
@@ -1917,6 +1934,22 @@ export default async function GuidePage({ params }: Props) {
           </section>
 
           {renderSeatGuides()}
+
+          {/* The closest contextual match on the site: this page exists to get
+              readers a view of Fuji from the train. */}
+          <KlookProductRow
+            heading="Want to see Mt. Fuji up close?"
+            intro="The train window is a few minutes. These are the usual ways to spend a day at the mountain."
+            placement="fuji_activity_row"
+            pagePath="/guide"
+            locale={locale}
+            limit={2}
+            className="mb-5"
+            items={[
+              { linkId: "fujiDayTourTokyo", note: "One day from Tokyo, no planning required.", product: "activity" },
+              { linkId: "fujiKawaguchikoPass", note: "Lake Kawaguchiko area pass for getting around.", product: "activity" },
+            ]}
+          />
 
           {/* §4-3 compact Stay Finder embed — navigation-layer module kept
               below the answer article per the phase-1 structure constraint. */}

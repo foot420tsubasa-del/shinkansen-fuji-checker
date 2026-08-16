@@ -26,6 +26,7 @@ export function KlookProductRow({
   placement,
   pagePath,
   locale,
+  limit,
   className = "",
 }: {
   items: KlookProductItem[];
@@ -34,6 +35,9 @@ export function KlookProductRow({
   placement: AffiliatePlacement;
   pagePath: string;
   locale: string;
+  /** Cap the cards shown. The guide already carries eleven affiliate links,
+   *  so it takes a curated pair rather than a full row. */
+  limit?: number;
   className?: string;
 }) {
   const ready = items
@@ -42,7 +46,8 @@ export function KlookProductRow({
       const entry = AFFILIATE_LINKS[item.linkId];
       return href && entry ? { ...item, href, label: item.title ?? entry.label } : null;
     })
-    .filter((x): x is KlookProductItem & { href: string; label: string } => x !== null);
+    .filter((x): x is KlookProductItem & { href: string; label: string } => x !== null)
+    .slice(0, limit ?? undefined);
 
   if (!ready.length) return null;
 
