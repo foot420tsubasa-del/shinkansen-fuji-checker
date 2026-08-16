@@ -24,7 +24,12 @@
 
 ### 収益導線
 - **未検証のアフィリエイトURLを作らない。** admin のリンクマスタにあるものだけを使う。無ければ枠だけ用意して登録を依頼する。
-- **プロバイダ名を出すCTAは `ProviderButton` を使う。** Booking.com を緑の塗りボタンや Klook のオレンジで出さない。
+- **ホテル系プロバイダ（Booking.com / Trip.com）のCTAは `ProviderButton` を使う。** 緑の塗りボタン（中立的な「hotel action」階層）や Klook のオレンジで出さない。
+- **Klook は `ProviderButton` に非対応。** 代わりに次の2階調を守る。
+  - 塗り `#D94A32` — 答えの直後の主要CTA（座席診断の結果、Quick Answer など）
+  - 淡色 `orange-50` / `orange-200` — 一覧カード・二次選択肢
+  - **どちらの場合もラベルに「Klook」を必ず入れる。** Booking.com と違いロゴバッジが無く、文字表記が唯一の識別子になる。
+  - ダークテーマのページ（Station Practice など）はオレンジを持ち込まず、ラベルの明記だけで識別させる。
 - Omio: ボタン化しない／Klook と並べない／ファーストビューに置かない／ガイド内は最大1本。
 - ホテル予約意図はプロバイダ直行。Finder 経由にしない。
 - 新しいCTA枠を作ったら `lib/affiliate/links.ts` に新しい `placement` を追加する（既存に相乗りさせない）。

@@ -373,7 +373,7 @@ export default async function StationPracticeLandingPage() {
                       {t(cta.body)}
                     </p>
                     <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-yellow-300/80 group-hover:text-yellow-200">
-                      {t("affiliate" in cta && cta.affiliate ? "Check options" : "Open guide")}{" "}
+                      {t("affiliate" in cta && cta.affiliate ? "Check on Klook" : "Open guide")}{" "}
                       <ArrowRight className="h-3.5 w-3.5" />
                     </span>
                   </>
