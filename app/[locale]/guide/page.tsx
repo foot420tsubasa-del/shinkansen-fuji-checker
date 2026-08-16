@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
 import { KLOOK_URL, ESIM_URL, JR_PASS_URL, OMIO_SHINKANSEN_URL } from "@/src/affiliateLinks";
-import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
+import { GuideKlookCta, KLOOK_FILLED_CTA } from "@/components/affiliate/GuideKlookCta";
 import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
 import { GuideStickyCta } from "@/components/affiliate/GuideStickyCta";
 import { SiteFooter } from "@/components/content/SiteFooter";
@@ -1515,7 +1515,7 @@ export default async function GuidePage({ params }: Props) {
         linkId="guide_klook_how_to_book"
         product="shinkansen"
         adid="1265303"
-        className="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
+        className={KLOOK_FILLED_CTA}
       >
         {ui.bookCtaButton}
       </TrackedAffiliateLink>
@@ -1825,7 +1825,7 @@ export default async function GuidePage({ params }: Props) {
                 linkId="jrPass"
                 product="jr_pass"
                 adid="1165791"
-                className="mt-3 inline-flex min-h-10 items-center justify-center rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
+                className={`mt-3 ${KLOOK_FILLED_CTA}`}
               >
                 Check JR Pass options on Klook
               </TrackedAffiliateLink>

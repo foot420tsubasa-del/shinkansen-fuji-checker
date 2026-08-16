@@ -9,7 +9,7 @@ import {
   trackSeatCheckComplete,
 } from "@/lib/analytics";
 import { getSeatRecommendation, type DirectionId } from "@/lib/seat-checker";
-import { SEAT_DIRECTION_STORAGE_KEY, directionGaParams } from "@/components/affiliate/GuideKlookCta";
+import { SEAT_DIRECTION_STORAGE_KEY, directionGaParams, KLOOK_FILLED_CTA } from "@/components/affiliate/GuideKlookCta";
 
 export type GuideSeatCheckCopy = {
   eyebrow: string;
@@ -152,7 +152,7 @@ export function GuideSeatCheck({
                   ...directionGaParams(direction),
                 })
               }
-              className="mt-3 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D94A32]/40"
+              className={`mt-3 ${KLOOK_FILLED_CTA}`}
             >
               {copy.book}
               <ArrowRight className="h-4 w-4" />
@@ -182,7 +182,7 @@ export function GuideSeatCheck({
                     ...directionGaParams(direction),
                   })
                 }
-                className="font-semibold text-[#1d4e89] underline underline-offset-2 hover:text-[#0b214a]"
+                className="font-semibold text-[#D94A32] underline underline-offset-2 hover:text-[#bf3d28]"
               >
                 {copy.jrPassLink}
               </a>

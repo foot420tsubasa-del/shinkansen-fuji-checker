@@ -127,7 +127,7 @@ export function GuideStickyCta({
                 ...directionGaParams(direction),
               })
             }
-            className="mt-1 inline-flex min-h-10 w-full items-center justify-center rounded-[10px] border border-[#D94A32] bg-[#D94A32] px-4 py-2 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#bf3d28] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D94A32]/40"
+            className="mt-1 inline-flex min-h-11 w-full items-center justify-center rounded-[12px] border border-[#D94A32] bg-[#D94A32] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#bf3d28] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D94A32]/40"
           >
             {copy.button}
           </a>
