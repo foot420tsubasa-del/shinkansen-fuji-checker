@@ -13,7 +13,7 @@ import { getAlternates } from "@/i18n/hreflang";
 type Props = { params: Promise<{ locale: string }> };
 
 const PAGE_PATH = "/shinkansen-green-car-worth-it";
-const title = "Is the Shinkansen Green Car Worth It? Seats, Price, and the Fuji Window";
+const title = "Shinkansen Green Car Cost: About ¥4,000–6,000 More, Is It Worth It?";
 const description =
   "The Green Car is the Shinkansen's first class: 2+2 seating, more recline and legroom, quieter cars. It costs roughly ¥4,000–6,000 extra Tokyo–Kyoto. The Mt. Fuji view is the same — the window just becomes Seat D.";
 
