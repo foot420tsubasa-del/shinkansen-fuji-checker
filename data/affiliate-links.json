@@ -154,7 +154,8 @@
       "Transfers",
       "Stay",
       "Itineraries"
-    ]
+    ],
+    "notes": "【要再発行】directUrl が空のため、コードが自動生成したURLを使っている。6ヶ月48クリックで成約ゼロ。Klookで正規リンクを発行して貼ること。"
   },
   "airportTransfer": {
     "label": "N'EX (Narita Express)",
@@ -164,7 +165,8 @@
     "directUrl": "",
     "usedOn": [
       "Guide"
-    ]
+    ],
+    "notes": "【要再発行】directUrl が空のため、コードが自動生成したURLを使っている。6ヶ月48クリックで成約ゼロ。Klookで正規リンクを発行して貼ること。"
   },
   "insurance": {
     "label": "Travel Insurance (Klook Protect)",
@@ -176,7 +178,8 @@
       "Guide",
       "Planner",
       "TripPicks"
-    ]
+    ],
+    "notes": "【要再発行】directUrl が空のため、コードが自動生成したURLを使っている。6ヶ月48クリックで成約ゼロ。Klookで正規リンクを発行して貼ること。"
   },
   "carRental": {
     "label": "Car Charter (Tokyo)",
@@ -186,7 +189,8 @@
     "directUrl": "",
     "usedOn": [
       "Guide"
-    ]
+    ],
+    "notes": "【要再発行】directUrl が空のため、コードが自動生成したURLを使っている。6ヶ月48クリックで成約ゼロ。Klookで正規リンクを発行して貼ること。"
   },
   "cityTokyo": {
     "label": "Tokyo Activities",
@@ -315,7 +319,8 @@
     "directUrl": "",
     "usedOn": [
       "Stay"
-    ]
+    ],
+    "notes": "【要再発行】directUrl が空のため、コードが自動生成したURLを使っている。6ヶ月48クリックで成約ゼロ。Klookで正規リンクを発行して貼ること。"
   },
   "hotelKawaguchiko": {
     "label": "Kawaguchiko Hotels",
@@ -336,7 +341,8 @@
     "directUrl": "",
     "usedOn": [
       "Transfer"
-    ]
+    ],
+    "notes": "【要再発行】directUrl が空のため、コードが自動生成したURLを使っている。6ヶ月48クリックで成約ゼロ。Klookで正規リンクを発行して貼ること。"
   },
   "skyliner": {
     "label": "Skyliner (Narita to Ueno/Nippori)",
@@ -1100,5 +1106,14 @@
     "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1385369&k_site=https%3A%2F%2Fwww.klook.com%2Factivity%2F94004-mt-fuji-oishi-park-arakurayama-sengen-park-one-day-bus-tour-tokyo%2F",
     "usedOn": [],
     "notes": "[fuji] 富士山＋五重塔の定番展望。写真目的の読者向け — 対象商品: https://www.klook.com/en-US/activity/94004-mt-fuji-oishi-park-arakurayama-sengen-park-one-day-bus-tour-tokyo/ — この商品でKlookのリンクを発行し、adid と directUrl を入力してください。空のままなら表示されません。"
+  },
+  "simCard": {
+    "label": "Japan Prepaid SIM Card (physical)",
+    "provider": "klook",
+    "adid": "",
+    "klookPath": "activity/28305-4g-sim-japan/",
+    "directUrl": "",
+    "usedOn": [],
+    "notes": "eSIM が使えない端末・SIMロック解除済みの物理SIM派向け。対象商品: https://www.klook.com/en-US/activity/28305-4g-sim-japan/ — Klookでリンクを発行し adid と directUrl を入力してください。空のままなら表示されません。"
   }
 }

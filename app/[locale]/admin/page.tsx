@@ -127,8 +127,11 @@ type MissingTransportAffiliate = {
 
 function getStatus(entry: LinkEntry): SetupStatus {
   if (entry.directUrl) return "done";
+  // A Klook adid alone is NOT enough. Without directUrl the site falls back to
+  // building the URL in code, and those links have never converted: 48 clicks
+  // and zero bookings across six months, against 5.4% for Klook-issued URLs.
   if (entry.provider === "klook") {
-    return entry.adid && entry.adid !== DEFAULT_KLOOK_ADID ? "done" : "needs-adid";
+    return entry.adid && entry.adid !== DEFAULT_KLOOK_ADID ? "needs-url" : "needs-adid";
   }
   return "needs-url";
 }
@@ -136,7 +139,7 @@ function getStatus(entry: LinkEntry): SetupStatus {
 const STATUS_CONFIG = {
   done: { label: "設定済み", dot: "bg-emerald-400", bg: "" },
   "needs-adid": { label: "adid 未設定", dot: "bg-amber-400", bg: "bg-amber-50/50" },
-  "needs-url": { label: "URL 未設定", dot: "bg-red-400", bg: "bg-red-50/50" },
+  "needs-url": { label: "正規URL未登録", dot: "bg-red-400", bg: "bg-red-50/50" },
 };
 
 const AGODA_HOTEL_MAP_DISABLED_REASON =
