@@ -1133,7 +1133,7 @@ export default async function GuidePage({ params }: Props) {
         </p>
       </div>
       <div className="p-3.5 md:p-4">
-        <div className="grid gap-2 text-[12px] leading-5 sm:grid-cols-2">
+        <div className="grid gap-2 text-[12px] leading-5 sm:grid-cols-3">
           <Link
             href="/plan-your-trip"
             className="inline-flex min-h-10 items-center justify-center rounded-xl border border-sky-200 bg-sky-50 px-3 py-2 font-semibold text-sky-800 transition-colors hover:border-sky-300 hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
@@ -1152,6 +1152,10 @@ export default async function GuidePage({ params }: Props) {
           >
             {ui.chooseStayArea}
           </Link>
+        </div>
+        {/* Connectivity is one decision in two formats — an eSIM needs a
+            handset that supports it — so the pair always shares a row. */}
+        <div className="mt-2 grid gap-2 text-[12px] leading-5 sm:grid-cols-2">
           <TrackedAffiliateLink
             href={ESIM_URL}
             target="_blank"
