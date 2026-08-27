@@ -5025,6 +5025,12 @@
     "share": {
       "title": "Cómo leer las señales de tren en Japón",
       "description": "¿Conoces a alguien que va a Japón por primera vez? Comparte esta guía de señales de tren."
+    },
+    "lineCodes": {
+      "title": "Códigos de línea en las señales de Tokio",
+      "intro": "Las señales muestran un código de letra y el número de estación: JY 08 es Shibuya en la línea Yamanote. El número cambia en cada parada; la letra indica la línea.",
+      "columnCode": "Código",
+      "columnLine": "Línea"
     }
   },
   "suicaGuide": {

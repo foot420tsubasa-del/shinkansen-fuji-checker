@@ -5024,6 +5024,12 @@
     "share": {
       "title": "Japanische Bahnschilder lesen",
       "description": "Kennst du jemanden auf erstem Japan-Trip? Teil diesen Bahnschilder-Guide."
+    },
+    "lineCodes": {
+      "title": "Linien-Codes auf Tokioter Schildern",
+      "intro": "Schilder zeigen einen Buchstabencode und eine zweistellige Stationsnummer — JY 08 ist Shibuya auf der Yamanote-Linie. Die Nummer wechselt an jeder Station, der Buchstabe nennt die Linie.",
+      "columnCode": "Code",
+      "columnLine": "Linie"
     }
   },
   "suicaGuide": {

@@ -5025,6 +5025,12 @@
     "share": {
       "title": "Como ler sinais de trem no Japão",
       "description": "Conhece alguém visitando o Japão pela primeira vez? Compartilhe este guia de sinais de trem."
+    },
+    "lineCodes": {
+      "title": "Códigos de linha nas placas de Tóquio",
+      "intro": "As placas mostram um código de letra e o número da estação — JY 08 é Shibuya na linha Yamanote. O número muda a cada parada; a letra indica a linha.",
+      "columnCode": "Código",
+      "columnLine": "Linha"
     }
   },
   "suicaGuide": {

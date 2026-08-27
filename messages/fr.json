@@ -5025,6 +5025,12 @@
     "share": {
       "title": "Lire les panneaux des trains au Japon",
       "description": "Tu connais quelqu'un qui visite le Japon pour la première fois ? Partage-lui ce guide des panneaux des trains."
+    },
+    "lineCodes": {
+      "title": "Codes de ligne sur les panneaux de Tokyo",
+      "intro": "Les panneaux affichent un code de lettre et un numéro de station à deux chiffres : JY 08 est Shibuya sur la ligne Yamanote. Le numéro change à chaque arrêt ; la lettre indique la ligne.",
+      "columnCode": "Code",
+      "columnLine": "Ligne"
     }
   },
   "suicaGuide": {

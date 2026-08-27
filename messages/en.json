@@ -5092,6 +5092,12 @@
     "share": {
       "title": "How to Read Japanese Train Signs",
       "description": "Know someone visiting Japan for the first time? Share this train sign guide with them."
+    },
+    "lineCodes": {
+      "title": "Line codes on Tokyo signs",
+      "intro": "Signs show a letter code and a two-digit station number — JY 08 is Shibuya on the Yamanote Line. The number changes at every stop; the letter tells you which line you are on.",
+      "columnCode": "Code",
+      "columnLine": "Line"
     }
   },
   "suicaGuide": {

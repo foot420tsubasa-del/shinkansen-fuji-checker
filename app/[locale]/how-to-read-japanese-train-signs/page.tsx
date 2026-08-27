@@ -14,6 +14,7 @@ import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { Rail3dEmbed } from "@/components/rail3d/Rail3dEmbed";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { buttonClassName } from "@/components/ui/Button";
+import { LineCodeTable } from "@/components/content/LineCodeTable";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -443,6 +444,16 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                 </div>
               </div>
             </section>
+
+            {/* The letter code is the one part of a sign a traveller cannot
+                work out from the station name, and the page ranks 7th-12th for
+                queries asking what the symbols mean. */}
+            <LineCodeTable
+              heading={t("lineCodes.title")}
+              intro={t("lineCodes.intro")}
+              columnCode={t("lineCodes.columnCode")}
+              columnLine={t("lineCodes.columnLine")}
+            />
 
             <section id="priority-seats">
               <SectionHeading eyebrow={t("priority.eyebrow")} title={t("priority.title")}>
