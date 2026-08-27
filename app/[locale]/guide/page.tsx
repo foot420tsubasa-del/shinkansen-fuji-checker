@@ -4,7 +4,7 @@ import { Mountain, Train, Info } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
-import { KLOOK_URL, ESIM_URL, JR_PASS_URL, OMIO_SHINKANSEN_URL } from "@/src/affiliateLinks";
+import { KLOOK_URL, ESIM_URL, SIM_CARD_URL, JR_PASS_URL, OMIO_SHINKANSEN_URL } from "@/src/affiliateLinks";
 import { GuideKlookCta, KLOOK_FILLED_CTA } from "@/components/affiliate/GuideKlookCta";
 import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
 import { GuideStickyCta } from "@/components/affiliate/GuideStickyCta";
@@ -352,7 +352,7 @@ const guideUiByLocale = {
     chooseRoute: "Choose your route",
     planAirportTransfer: "Plan airport transfer",
     chooseStayArea: "Choose stay area",
-    getJapanEsim: "Get Japan eSIM on Klook",
+    getJapanEsim: "Get Japan eSIM on Klook", getSimCard: "Get Japan SIM card on Klook",
     railDecisionLabel: "Rail booking options",
     bookShinkansenTitle: "Book Shinkansen ticket",
     bookShinkansenBody: "For a simple Tokyo → Kyoto / Osaka trip, choose Seat E if available. Use Klook to book a specific Shinkansen ticket, or Omio to compare route options before booking.",
@@ -397,7 +397,7 @@ const guideUiByLocale = {
     chooseRoute: "Escolher rota",
     planAirportTransfer: "Planejar traslado do aeroporto",
     chooseStayArea: "Escolher área para ficar",
-    getJapanEsim: "Obter eSIM do Japão na Klook",
+    getJapanEsim: "Obter eSIM do Japão na Klook", getSimCard: "Comprar chip SIM na Klook",
     railDecisionLabel: "Decisão de reserva de trem",
     bookShinkansenTitle: "Reservar bilhete Shinkansen",
     bookShinkansenBody: "Para uma rota simples Tokyo → Kyoto / Osaka, escolha o assento E se estiver disponível e reserve um bilhete avulso de Shinkansen.",
@@ -442,7 +442,7 @@ const guideUiByLocale = {
     chooseRoute: "Elegir ruta",
     planAirportTransfer: "Planificar traslado",
     chooseStayArea: "Elegir zona para alojarse",
-    getJapanEsim: "Obtener eSIM de Japón en Klook",
+    getJapanEsim: "Obtener eSIM de Japón en Klook", getSimCard: "Comprar tarjeta SIM en Klook",
     railDecisionLabel: "Decisión de reserva de tren",
     bookShinkansenTitle: "Reservar billete Shinkansen",
     bookShinkansenBody: "Para una ruta simple Tokio → Kioto / Osaka, elige el asiento E si está disponible y reserva un billete individual de Shinkansen.",
@@ -487,7 +487,7 @@ const guideUiByLocale = {
     chooseRoute: "노선 선택",
     planAirportTransfer: "공항 이동 계획",
     chooseStayArea: "숙소 지역 선택",
-    getJapanEsim: "Klook에서 일본 eSIM 받기",
+    getJapanEsim: "Klook에서 일본 eSIM 받기", getSimCard: "Klook에서 일본 SIM 카드 구매",
     railDecisionLabel: "철도 예약 결정",
     bookShinkansenTitle: "신칸센 티켓 예약",
     bookShinkansenBody: "도쿄 → 교토 / 오사카처럼 단순한 이동이라면 E석을 확인한 뒤 신칸센 단일 티켓을 예약하세요.",
@@ -532,7 +532,7 @@ const guideUiByLocale = {
     chooseRoute: "選擇路線",
     planAirportTransfer: "規劃機場交通",
     chooseStayArea: "選擇住宿區域",
-    getJapanEsim: "在 Klook 取得日本 eSIM",
+    getJapanEsim: "在 Klook 取得日本 eSIM", getSimCard: "在 Klook 購買日本 SIM 卡",
     railDecisionLabel: "鐵路預訂決策",
     bookShinkansenTitle: "預訂新幹線車票",
     bookShinkansenBody: "東京 → 京都 / 大阪這類簡單路線，請先確認 E 座是否可選，再預訂單程新幹線車票。",
@@ -577,7 +577,7 @@ const guideUiByLocale = {
     chooseRoute: "选择路线",
     planAirportTransfer: "规划机场交通",
     chooseStayArea: "选择住宿区域",
-    getJapanEsim: "在 Klook 获取日本 eSIM",
+    getJapanEsim: "在 Klook 获取日本 eSIM", getSimCard: "在 Klook 购买日本 SIM 卡",
     railDecisionLabel: "铁路预订决策",
     bookShinkansenTitle: "预订新干线车票",
     bookShinkansenBody: "东京 → 京都 / 大阪这类简单路线，请先确认 E 座是否可选，再预订单程新干线车票。",
@@ -622,7 +622,7 @@ const guideUiByLocale = {
     chooseRoute: "Choisir l'itinéraire",
     planAirportTransfer: "Prévoir le transfert aéroport",
     chooseStayArea: "Choisir le quartier",
-    getJapanEsim: "Obtenir une eSIM Japon sur Klook",
+    getJapanEsim: "Obtenir une eSIM Japon sur Klook", getSimCard: "Carte SIM Japon sur Klook",
     railDecisionLabel: "Décision de réservation ferroviaire",
     bookShinkansenTitle: "Réserver un billet Shinkansen",
     bookShinkansenBody: "Pour un trajet simple Tokyo → Kyoto / Osaka, choisissez le siège E si disponible et réservez un billet Shinkansen à l'unité.",
@@ -667,7 +667,7 @@ const guideUiByLocale = {
     chooseRoute: "Route wählen",
     planAirportTransfer: "Flughafentransfer planen",
     chooseStayArea: "Übernachtungsviertel wählen",
-    getJapanEsim: "Japan-eSIM auf Klook holen",
+    getJapanEsim: "Japan-eSIM auf Klook holen", getSimCard: "Japan-SIM-Karte auf Klook",
     railDecisionLabel: "Bahn-Buchungsentscheidung",
     bookShinkansenTitle: "Shinkansen-Ticket buchen",
     bookShinkansenBody: "Für eine einfache Strecke Tokyo → Kyoto / Osaka wähle Sitz E, wenn verfügbar, und buche ein einzelnes Shinkansen-Ticket.",
@@ -712,7 +712,7 @@ const guideUiByLocale = {
     chooseRoute: "Выбрать маршрут",
     planAirportTransfer: "Спланировать трансфер",
     chooseStayArea: "Выбрать район проживания",
-    getJapanEsim: "Купить eSIM для Японии на Klook",
+    getJapanEsim: "Купить eSIM для Японии на Klook", getSimCard: "SIM-карта для Японии на Klook",
     railDecisionLabel: "Выбор железнодорожного билета",
     bookShinkansenTitle: "Забронировать билет Shinkansen",
     bookShinkansenBody: "Для простого маршрута Токио → Киото / Осака выберите место E, если оно доступно, и купите отдельный билет на синкансэн.",
@@ -1167,6 +1167,25 @@ export default async function GuidePage({ params }: Props) {
             className="inline-flex min-h-10 items-center justify-center rounded-xl border border-orange-200 bg-orange-50 px-3 py-2 font-semibold text-orange-700 transition-colors hover:border-orange-300 hover:bg-orange-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
           >
             {ui.getJapanEsim}
+          </TrackedAffiliateLink>
+          {/* Same decision, other format: an eSIM needs a handset that supports
+              one, so the physical card sits beside it rather than replacing it. */}
+          <TrackedAffiliateLink
+            href={SIM_CARD_URL}
+            target="_blank"
+            rel={AFFILIATE_REL}
+            category="esim"
+            provider="klook"
+            placement="guide_sim_card_checklist"
+            pagePath={guidePath}
+            locale={locale}
+            label="Get Japan SIM card"
+            linkId="simCard"
+            product="sim_card"
+            adid="1403938"
+            className="inline-flex min-h-10 items-center justify-center rounded-xl border border-orange-200 bg-orange-50 px-3 py-2 font-semibold text-orange-700 transition-colors hover:border-orange-300 hover:bg-orange-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
+          >
+            {ui.getSimCard}
           </TrackedAffiliateLink>
         </div>
       </div>

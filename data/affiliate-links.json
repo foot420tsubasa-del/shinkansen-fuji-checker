@@ -142,9 +142,9 @@
   "esim": {
     "label": "Japan eSIM",
     "provider": "klook",
-    "adid": "1166001",
+    "adid": "1403925",
     "klookPath": "activity/109393-japan-esim-high-speed-internet-qr-code-voucher/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1403925&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F109393-japan-esim-high-speed-internet-qr-code-voucher%2F%3Fdd_referrer%3D",
     "usedOn": [
       "Top",
       "Guide",
@@ -160,20 +160,20 @@
   "airportTransfer": {
     "label": "N'EX (Narita Express)",
     "provider": "klook",
-    "adid": "1165996",
+    "adid": "1403926",
     "klookPath": "activity/173165-narita-express-n-ex-round-trip-train-ticket-narita-airport-tokyo/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1403926&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F173165-narita-express-n-ex-round-trip-train-ticket-narita-airport-tokyo%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3D49e6609297",
     "usedOn": [
       "Guide"
     ],
-    "notes": "【要再発行】directUrl が空のため、コードが自動生成したURLを使っている。6ヶ月48クリックで成約ゼロ。Klookで正規リンクを発行して貼ること。"
+    "notes": "nex と同一商品（Narita Express）。同じ正規リンクを共有。"
   },
   "insurance": {
     "label": "Travel Insurance (Klook Protect)",
     "provider": "klook",
-    "adid": "1166002",
+    "adid": "1403929",
     "klookPath": "insurance/klook-protect/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1403929&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Finsurance%2Fklook-protect%2F",
     "usedOn": [
       "Guide",
       "Planner",
@@ -184,9 +184,9 @@
   "carRental": {
     "label": "Car Charter (Tokyo)",
     "provider": "klook",
-    "adid": "1166009",
+    "adid": "1403930",
     "klookPath": "activity/15420-tokyo-private-car-charter-karuizawa-hakuba-izu-englishspeakingdriver/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1403930&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F120898-car-rental-with-driver-tokyo-mtfuji-chinesespeaking%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3D62bad26eb5",
     "usedOn": [
       "Guide"
     ],
@@ -314,9 +314,9 @@
   "hotelGion": {
     "label": "Gion Hotels",
     "provider": "klook",
-    "adid": "1263590",
+    "adid": "1403935",
     "klookPath": "hotel/list/17-kyoto-japan-hotels/?area=gion",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1403935&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fsearch%2Fresult%2F%3Fquery%3Dhotel%2520Gion%26search_scope%3Dmain_search",
     "usedOn": [
       "Stay"
     ],
@@ -336,13 +336,13 @@
   "nex": {
     "label": "Narita Express (N'EX)",
     "provider": "klook",
-    "adid": "1165996",
+    "adid": "1403926",
     "klookPath": "activity/173165-narita-express-n-ex-round-trip-train-ticket-narita-airport-tokyo/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1403926&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F173165-narita-express-n-ex-round-trip-train-ticket-narita-airport-tokyo%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3D49e6609297",
     "usedOn": [
       "Transfer"
     ],
-    "notes": "【要再発行】directUrl が空のため、コードが自動生成したURLを使っている。6ヶ月48クリックで成約ゼロ。Klookで正規リンクを発行して貼ること。"
+    "notes": "airportTransfer と同一商品。"
   },
   "skyliner": {
     "label": "Skyliner (Narita to Ueno/Nippori)",
@@ -1110,9 +1110,9 @@
   "simCard": {
     "label": "Japan Prepaid SIM Card (physical)",
     "provider": "klook",
-    "adid": "",
+    "adid": "1403938",
     "klookPath": "activity/28305-4g-sim-japan/",
-    "directUrl": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1403938&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F28305-4g-sim-japan%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3Dbd237c4a4f",
     "usedOn": [],
     "notes": "eSIM が使えない端末・SIMロック解除済みの物理SIM派向け。対象商品: https://www.klook.com/en-US/activity/28305-4g-sim-japan/ — Klookでリンクを発行し adid と directUrl を入力してください。空のままなら表示されません。"
   }

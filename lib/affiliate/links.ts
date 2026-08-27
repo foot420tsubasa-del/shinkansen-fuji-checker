@@ -42,6 +42,7 @@ export type AffiliatePlacement =
   | "guide_jr_pass_section"
   | "guide_jr_pass_gateway"
   | "guide_esim_checklist"
+  | "guide_sim_card_checklist"
   | "guide_route_comparison_text"
   | "comparison_quick_recommendation"
   | "comparison_area_card"
