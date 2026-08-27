@@ -11,6 +11,7 @@ import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
 import { KLOOK_URL } from "@/src/affiliateLinks";
 import { SeatLayoutDiagram } from "@/components/content/SeatLayoutDiagram";
 import { KlookProductRow } from "@/components/affiliate/KlookProductRow";
+import { SeatMapTool } from "@/components/travel/SeatMapTool";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -149,6 +150,34 @@ export default async function SeatLettersPage({ params }: Props) {
             </Link>
           </div>
         </section>
+
+        {/* The page's top query is "shinkansen seat map" by a wide margin, so
+            the map comes before the prose. Pick a car, see that car's rows. */}
+        <SeatMapTool
+          href={KLOOK_URL}
+          locale={locale}
+          pagePath="/shinkansen-seat-letters"
+          copy={{
+            eyebrow: "Seat map",
+            question: "Which car are you booking?",
+            carLabels: {
+              "ordinary-nonreserved": "Ordinary — non-reserved",
+              "ordinary-reserved": "Ordinary — reserved",
+              green: "Green Car",
+            },
+            result: "The Mt. Fuji-side window is seat {seat}.",
+            seaNote: "Seat {seat} is the opposite window, facing the sea side.",
+            rowsNote: "Rows repeat the same letters down the whole car — row numbers only change how far you sit from the doors.",
+            directionNote: "Shown for Tokyo → Kyoto / Osaka. Coming back the letters do not change; the train faces the other way, so the same seat is on the other side of the carriage — still the Mt. Fuji window.",
+            book: "Check Shinkansen tickets on Klook",
+            legendFuji: "Seat {seat} — Mt. Fuji side",
+            legendWindow: "Sea-side window",
+            legendOther: "Aisle / middle",
+            aisle: "Aisle",
+            seaSide: "Sea side",
+            fujiSide: "Fuji side",
+          }}
+        />
 
         {/* Booking-intent slot: readers checking seat letters are usually about
             to book. Same direction-aware Klook CTA as the guide. */}

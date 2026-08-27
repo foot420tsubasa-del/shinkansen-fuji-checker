@@ -30,6 +30,8 @@ export type AffiliatePlacement =
   | "station_practice_support_esim"
   | "station_practice_support_jr_pass"
   | "seat_letters_booking"
+  | "seat_map_result"
+  | "seat_map_car_select"
   | "direction_kyoto_tokyo_booking"
   | "direction_tokyo_kyoto_booking"
   | "direction_osaka_tokyo_booking"
