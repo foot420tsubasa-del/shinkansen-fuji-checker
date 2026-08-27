@@ -926,7 +926,7 @@ const rawStayPages: StayPage[] = [
   },
   {
     slug: "asakusa-vs-ueno",
-    title: "Asakusa vs Ueno: Where Should You Stay in Tokyo?",
+    title: "Ueno vs Asakusa: Rail Access or Old-Town Atmosphere",
     description: "Asakusa or Ueno for your Tokyo hotel? Ueno wins on Narita access (Skyliner 36 min), budget hotels, and a 7-min hop to Tokyo Station; Asakusa wins on old-town atmosphere and Senso-ji. Side-by-side compare with hotel picks for first-time visitors.",
     quickRec: {
       areaId: "ueno",
