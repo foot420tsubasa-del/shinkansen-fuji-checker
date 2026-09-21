@@ -5332,5 +5332,163 @@
         "l3": "Follow the signs floor by floor — 西 = west, 東 = east."
       }
     }
+  },
+  "seatLetters": {
+    "meta": {
+      "title": "Shinkansen Seat Letters A–E: Which Seat Gets the Fuji View",
+      "description": "Understand Shinkansen seat letters A, B, C, D and E, including which seats are windows, aisles, and usually best for Mt. Fuji views."
+    },
+    "eyebrow": "Seat layout guide",
+    "h1": "Shinkansen Seat Letters Explained",
+    "quick": {
+      "label": "Quick answer",
+      "a1": "<b>A and E</b> are window seats in most Ordinary Cars.",
+      "a2": "<b>C and D</b> are aisle seats.",
+      "a3": "<b>Seat E</b> is usually the Mt. Fuji-side window on the Tokaido Shinkansen.",
+      "a4": "<b>Green Car</b> layouts differ — usually 2+2, no Seat E.",
+      "a5": "Always check the seat map before booking."
+    },
+    "checker": {
+      "title": "Check your seat instantly",
+      "note": "Use the free checker to see which seat letter faces Mt. Fuji for your direction.",
+      "open": "Open Seat Checker",
+      "guide": "Read full guide"
+    },
+    "map": {
+      "eyebrow": "Seat map",
+      "question": "Which car are you booking?",
+      "carOrdinaryNonReserved": "Ordinary — non-reserved",
+      "carOrdinaryReserved": "Ordinary — reserved",
+      "carGreen": "Green Car",
+      "result": "The Mt. Fuji-side window is seat '{seat}'.",
+      "seaNote": "Seat '{seat}' is the opposite window, facing the sea side.",
+      "rowsNote": "Rows repeat the same letters down the whole car — row numbers only change how far you sit from the doors.",
+      "directionNote": "Shown for Tokyo → Kyoto / Osaka. Coming back the letters do not change; the train faces the other way, so the same seat is on the other side of the carriage — still the Mt. Fuji window.",
+      "book": "Check Shinkansen tickets on Klook",
+      "legendFuji": "Seat '{seat}' — Mt. Fuji side",
+      "legendWindow": "Sea-side window",
+      "legendOther": "Aisle / middle",
+      "aisle": "Aisle",
+      "seaSide": "Sea side",
+      "fujiSide": "Fuji side"
+    },
+    "cta": {
+      "title": "Ready to book your Shinkansen seat?",
+      "note": "Reserve a specific seat letter when you book — E on the Tokaido line is the Mt. Fuji window.",
+      "button": "Check Shinkansen tickets on Klook",
+      "dirToKyoto": "Booking Tokyo → Kyoto / Osaka? Ask for Seat E.",
+      "dirToTokyo": "Booking Kyoto / Osaka → Tokyo? Ask for Seat E on the left side.",
+      "dirSeatNote": "Seat E is the Mt. Fuji window for your direction. Reserve it when you book."
+    },
+    "ordinary": {
+      "title": "Ordinary Car: 3+2 layout (A B C | D E)",
+      "body": "Most Tokaido Shinkansen Ordinary Cars have five seats per row: three on one side (A, B, C) and two on the other (D, E), separated by an aisle.",
+      "directionNote": "Seat positions are shown for Tokyo → Kyoto / Osaka. Travelling back to Tokyo, the letters stay the same but the train faces the other way, so Seat E is on the left of the carriage — still the Mt. Fuji window."
+    },
+    "table": {
+      "seat": "Seat",
+      "type": "Type",
+      "side": "Tokaido side",
+      "note": "Note"
+    },
+    "seats": {
+      "A": {
+        "type": "Window",
+        "side": "Sea side (opposite Fuji)",
+        "note": "Window with ocean-side views"
+      },
+      "B": {
+        "type": "Middle",
+        "side": "—",
+        "note": "Between A and C; no direct window"
+      },
+      "C": {
+        "type": "Aisle",
+        "side": "—",
+        "note": "Aisle seat, three-seat side"
+      },
+      "D": {
+        "type": "Aisle",
+        "side": "—",
+        "note": "Aisle seat, two-seat side. Green Car Fuji window."
+      },
+      "E": {
+        "type": "Window",
+        "side": "Mt. Fuji side",
+        "note": "Best seat for Mt. Fuji in Ordinary Cars"
+      }
+    },
+    "diagram": {
+      "ordinaryCaption": "Ordinary Car — 3+2 seating",
+      "greenCaption": "Green Car — 2+2 seating",
+      "seaSide": "Sea side",
+      "fujiSide": "Fuji side",
+      "aisle": "Aisle",
+      "legendFuji": "Seat '{seat}' — Mt. Fuji-side window",
+      "legendWindow": "Other window seat",
+      "legendOther": "Aisle / middle"
+    },
+    "green": {
+      "title": "Green Car: 2+2 layout (A B | C D)",
+      "body1": "Green Cars (first class) have wider seats in a 2+2 configuration. There is no Seat E. The layout is A–B on one side and C–D on the other, with A and D as window seats.",
+      "body2": "On the Tokaido Shinkansen, the Mt. Fuji-side window in Green Cars is usually <b>Seat D</b>. Seat A is the sea-side window.",
+      "directionNote": "Green Cars have no Seat E. Ask for Seat D when you want the Mt. Fuji window on the Tokaido line."
+    },
+    "otherLines": {
+      "title": "Other Shinkansen lines",
+      "body": "Seat letter layouts vary by train type and line. The Tokaido Shinkansen (Tokyo–Kyoto–Osaka) consistently uses the 3+2 Ordinary Car layout described above. Other lines (Tohoku, Hokuriku, Sanyo) may have different configurations — always check the seat map for your specific train."
+    },
+    "faq": {
+      "title": "FAQ",
+      "items": [
+        {
+          "q": "What do the letters A, B, C, D, E mean on the Shinkansen?",
+          "a": "In Ordinary Cars with 3+2 seating, seats A, B, C are on the three-seat side and D, E are on the two-seat side. A and E are window seats; C and D are aisle seats; B is a middle seat."
+        },
+        {
+          "q": "Which seat letter is best for Mt. Fuji?",
+          "a": "On the Tokaido Shinkansen, Seat E is usually the Mt. Fuji-side window in Ordinary Cars. In Green Cars (2+2), the Fuji-side window is Seat D."
+        },
+        {
+          "q": "Is Seat A a window seat?",
+          "a": "Yes. In most Ordinary Cars, Seat A is a window seat on the opposite side from E. On the Tokaido Shinkansen, Seat A faces the sea side, not Mt. Fuji."
+        },
+        {
+          "q": "Are Green Car seat letters different?",
+          "a": "Yes. Green Cars typically use a 2+2 layout with seats A, B (one side) and C, D (other side). There is no Seat E. The Fuji-side window is usually D."
+        }
+      ]
+    },
+    "related": {
+      "title": "Related pages",
+      "seatE": {
+        "title": "Is Seat E the Mt. Fuji side?",
+        "desc": "Seat E explained for Ordinary and Green Cars."
+      },
+      "tokyoKyoto": {
+        "title": "Tokyo → Kyoto: Which seat?",
+        "desc": "Direction-specific seat and timing guide."
+      },
+      "kyotoTokyo": {
+        "title": "Kyoto → Tokyo: Which seat?",
+        "desc": "Return direction seat and viewing tips."
+      },
+      "stay": {
+        "title": "Ueno or Asakusa for your Tokyo nights?",
+        "desc": "Rail-hub convenience versus old-town streets, compared."
+      },
+      "planTrip": {
+        "title": "Plan your trip essentials",
+        "desc": "eSIM, airport transfer, and rail booking links."
+      }
+    },
+    "products": {
+      "heading": "Booking a specific route?",
+      "intro": "Seat selection is offered on most of these. Reserve the letter you want when you book.",
+      "tokyoHiroshima": "Tokyo – Hiroshima on the Tokaido / Sanyo line.",
+      "osakaHiroshima": "Osaka – Hiroshima on the Sanyo line.",
+      "tokyoKanazawa": "Tokyo – Kanazawa on the Hokuriku line.",
+      "tokyoSendai": "Tokyo – Sendai on the Tohoku line."
+    }
   }
 }

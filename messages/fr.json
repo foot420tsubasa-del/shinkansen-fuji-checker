@@ -5277,5 +5277,163 @@
         "l3": "Suivez les panneaux étage par étage — 西 = ouest, 東 = est."
       }
     }
+  },
+  "seatLetters": {
+    "meta": {
+      "title": "Lettres de siège du Shinkansen A–E : laquelle voit le Fuji",
+      "description": "Ce que signifient les lettres de siège A, B, C, D et E du Shinkansen : lesquelles sont côté fenêtre, lesquelles côté couloir, et laquelle offre la meilleure vue sur le mont Fuji."
+    },
+    "eyebrow": "Guide du plan de voiture",
+    "h1": "Les lettres de siège du Shinkansen expliquées",
+    "quick": {
+      "label": "Réponse rapide",
+      "a1": "<b>A et E</b> sont côté fenêtre dans la plupart des voitures ordinaires.",
+      "a2": "<b>C et D</b> sont côté couloir.",
+      "a3": "<b>Le siège E</b> est généralement la fenêtre côté Fuji sur le Tokaido Shinkansen.",
+      "a4": "Les <b>Green Car</b> sont agencées différemment — souvent 2+2, sans siège E.",
+      "a5": "Vérifiez toujours le plan des sièges avant de réserver."
+    },
+    "checker": {
+      "title": "Vérifiez votre siège tout de suite",
+      "note": "Utilisez l'outil gratuit pour voir quelle lettre de siège fait face au mont Fuji dans votre sens de trajet.",
+      "open": "Ouvrir l'outil",
+      "guide": "Lire le guide complet"
+    },
+    "map": {
+      "eyebrow": "Plan des sièges",
+      "question": "Quelle voiture réservez-vous ?",
+      "carOrdinaryNonReserved": "Ordinaire — sans réservation",
+      "carOrdinaryReserved": "Ordinaire — réservée",
+      "carGreen": "Green Car",
+      "result": "La fenêtre côté Fuji est le siège '{seat}'.",
+      "seaNote": "Le siège '{seat}' est la fenêtre opposée, côté mer.",
+      "rowsNote": "Les lettres se répètent à chaque rangée de la voiture : le numéro de rangée change seulement votre distance aux portes.",
+      "directionNote": "Affiché pour Tokyo → Kyoto / Osaka. Au retour, les lettres ne changent pas ; le train roule dans l'autre sens, donc le même siège se retrouve de l'autre côté de la voiture — et reste la fenêtre côté Fuji.",
+      "book": "Voir les billets de Shinkansen sur Klook",
+      "legendFuji": "Siège '{seat}' — côté Fuji",
+      "legendWindow": "Fenêtre côté mer",
+      "legendOther": "Couloir / milieu",
+      "aisle": "Couloir",
+      "seaSide": "Côté mer",
+      "fujiSide": "Côté Fuji"
+    },
+    "cta": {
+      "title": "Prêt à réserver votre place dans le Shinkansen ?",
+      "note": "Réservez une lettre précise au moment de l'achat : sur la ligne Tokaido, E est la fenêtre côté Fuji.",
+      "button": "Voir les billets de Shinkansen sur Klook",
+      "dirToKyoto": "Vous réservez Tokyo → Kyoto / Osaka ? Demandez le siège E.",
+      "dirToTokyo": "Vous réservez Kyoto / Osaka → Tokyo ? Demandez le siège E, côté gauche.",
+      "dirSeatNote": "Le siège E est la fenêtre côté Fuji pour votre sens de trajet. Réservez-le à l'achat."
+    },
+    "ordinary": {
+      "title": "Voiture ordinaire : agencement 3+2 (A B C | D E)",
+      "body": "La plupart des voitures ordinaires du Tokaido Shinkansen comptent cinq sièges par rangée : trois d'un côté (A, B, C) et deux de l'autre (D, E), séparés par le couloir.",
+      "directionNote": "Les positions sont indiquées pour Tokyo → Kyoto / Osaka. Au retour vers Tokyo, les lettres restent les mêmes mais le train roule dans l'autre sens : le siège E passe à gauche de la voiture, et reste la fenêtre côté Fuji."
+    },
+    "table": {
+      "seat": "Siège",
+      "type": "Type",
+      "side": "Côté (Tokaido)",
+      "note": "Remarque"
+    },
+    "seats": {
+      "A": {
+        "type": "Fenêtre",
+        "side": "Côté mer (opposé au Fuji)",
+        "note": "Fenêtre avec vue sur l'océan"
+      },
+      "B": {
+        "type": "Milieu",
+        "side": "—",
+        "note": "Entre A et C ; pas de fenêtre directe"
+      },
+      "C": {
+        "type": "Couloir",
+        "side": "—",
+        "note": "Couloir, côté trois sièges"
+      },
+      "D": {
+        "type": "Couloir",
+        "side": "—",
+        "note": "Couloir, côté deux sièges. Fenêtre Fuji en Green Car."
+      },
+      "E": {
+        "type": "Fenêtre",
+        "side": "Côté Fuji",
+        "note": "Le meilleur siège pour le Fuji en voiture ordinaire"
+      }
+    },
+    "diagram": {
+      "ordinaryCaption": "Voiture ordinaire — sièges 3+2",
+      "greenCaption": "Green Car — sièges 2+2",
+      "seaSide": "Côté mer",
+      "fujiSide": "Côté Fuji",
+      "aisle": "Couloir",
+      "legendFuji": "Siège '{seat}' — fenêtre côté Fuji",
+      "legendWindow": "Autre siège fenêtre",
+      "legendOther": "Couloir / milieu"
+    },
+    "green": {
+      "title": "Green Car : agencement 2+2 (A B | C D)",
+      "body1": "Les Green Car (première classe) offrent des sièges plus larges en configuration 2+2. Il n'y a pas de siège E. L'agencement est A–B d'un côté et C–D de l'autre, A et D étant côté fenêtre.",
+      "body2": "Sur le Tokaido Shinkansen, la fenêtre côté Fuji en Green Car est généralement le <b>siège D</b>. Le siège A est la fenêtre côté mer.",
+      "directionNote": "Les Green Car n'ont pas de siège E. Demandez le siège D pour la fenêtre côté Fuji sur la ligne Tokaido."
+    },
+    "otherLines": {
+      "title": "Les autres lignes de Shinkansen",
+      "body": "L'agencement des lettres varie selon le type de train et la ligne. Le Tokaido Shinkansen (Tokyo–Kyoto–Osaka) utilise systématiquement la disposition 3+2 décrite ci-dessus. D'autres lignes (Tohoku, Hokuriku, Sanyo) peuvent différer : vérifiez toujours le plan de votre train."
+    },
+    "faq": {
+      "title": "Questions fréquentes",
+      "items": [
+        {
+          "q": "Que signifient les lettres A, B, C, D, E dans le Shinkansen ?",
+          "a": "Dans les voitures ordinaires en 3+2, A, B et C sont du côté à trois sièges et D, E du côté à deux. A et E sont côté fenêtre, C et D côté couloir, B est le siège du milieu."
+        },
+        {
+          "q": "Quelle lettre de siège est la meilleure pour le mont Fuji ?",
+          "a": "Sur le Tokaido Shinkansen, le siège E est généralement la fenêtre côté Fuji en voiture ordinaire. En Green Car (2+2), c'est le siège D."
+        },
+        {
+          "q": "Le siège A est-il côté fenêtre ?",
+          "a": "Oui. Dans la plupart des voitures ordinaires, A est une fenêtre du côté opposé à E. Sur le Tokaido Shinkansen, il donne côté mer et non côté Fuji."
+        },
+        {
+          "q": "Les lettres sont-elles différentes en Green Car ?",
+          "a": "Oui. Les Green Car utilisent généralement une disposition 2+2 avec A, B d'un côté et C, D de l'autre. Il n'y a pas de siège E. La fenêtre côté Fuji est en général D."
+        }
+      ]
+    },
+    "related": {
+      "title": "Pages liées",
+      "seatE": {
+        "title": "Le siège E est-il côté Fuji ?",
+        "desc": "Le siège E expliqué en voiture ordinaire et en Green Car."
+      },
+      "tokyoKyoto": {
+        "title": "Tokyo → Kyoto : quel siège ?",
+        "desc": "Siège et moment du trajet pour ce sens."
+      },
+      "kyotoTokyo": {
+        "title": "Kyoto → Tokyo : quel siège ?",
+        "desc": "Siège et conseils pour le trajet retour."
+      },
+      "stay": {
+        "title": "Ueno ou Asakusa pour vos nuits à Tokyo ?",
+        "desc": "Praticité du nœud ferroviaire contre ruelles de la vieille ville."
+      },
+      "planTrip": {
+        "title": "L'essentiel pour préparer le voyage",
+        "desc": "eSIM, transfert aéroport et réservation ferroviaire."
+      }
+    },
+    "products": {
+      "heading": "Vous réservez un trajet précis ?",
+      "intro": "Le choix du siège est proposé sur la plupart d'entre eux. Réservez la lettre voulue au moment de l'achat.",
+      "tokyoHiroshima": "Tokyo – Hiroshima sur la ligne Tokaido / Sanyo.",
+      "osakaHiroshima": "Osaka – Hiroshima sur la ligne Sanyo.",
+      "tokyoKanazawa": "Tokyo – Kanazawa sur la ligne Hokuriku.",
+      "tokyoSendai": "Tokyo – Sendai sur la ligne Tohoku."
+    }
   }
 }

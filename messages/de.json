@@ -5276,5 +5276,163 @@
         "l3": "Folgen Sie den Schildern Etage für Etage — 西 = West, 東 = Ost."
       }
     }
+  },
+  "seatLetters": {
+    "meta": {
+      "title": "Shinkansen-Sitzbuchstaben A–E: Welcher Platz sieht den Fuji",
+      "description": "Die Shinkansen-Sitzbuchstaben A, B, C, D und E erklärt: welche Plätze am Fenster liegen, welche am Gang, und welcher meist den besten Blick auf den Fuji bietet."
+    },
+    "eyebrow": "Sitzplan-Ratgeber",
+    "h1": "Shinkansen-Sitzbuchstaben erklärt",
+    "quick": {
+      "label": "Kurze Antwort",
+      "a1": "<b>A und E</b> sind in den meisten Standardwagen Fensterplätze.",
+      "a2": "<b>C und D</b> sind Gangplätze.",
+      "a3": "<b>Platz E</b> liegt im Tokaido-Shinkansen meist auf der Fuji-Seite am Fenster.",
+      "a4": "<b>Green Car</b>-Wagen sind anders aufgeteilt — meist 2+2, ohne Platz E.",
+      "a5": "Prüfen Sie vor der Buchung immer den Sitzplan."
+    },
+    "checker": {
+      "title": "Sitzplatz sofort prüfen",
+      "note": "Mit dem kostenlosen Checker sehen Sie, welcher Sitzbuchstabe für Ihre Fahrtrichtung zum Fuji zeigt.",
+      "open": "Sitzplatz-Checker öffnen",
+      "guide": "Vollständigen Ratgeber lesen"
+    },
+    "map": {
+      "eyebrow": "Sitzplan",
+      "question": "Welchen Wagen buchen Sie?",
+      "carOrdinaryNonReserved": "Standard — ohne Reservierung",
+      "carOrdinaryReserved": "Standard — reserviert",
+      "carGreen": "Green Car",
+      "result": "Das Fenster auf der Fuji-Seite ist Platz '{seat}'.",
+      "seaNote": "Platz '{seat}' ist das gegenüberliegende Fenster, zur Meerseite.",
+      "rowsNote": "Die Buchstaben wiederholen sich in jeder Reihe des Wagens — die Reihennummer bestimmt nur, wie weit Sie von den Türen sitzen.",
+      "directionNote": "Dargestellt für Tokio → Kyoto / Osaka. Auf dem Rückweg ändern sich die Buchstaben nicht; der Zug fährt andersherum, derselbe Platz liegt also auf der anderen Wagenseite — weiterhin das Fuji-Fenster.",
+      "book": "Shinkansen-Tickets auf Klook ansehen",
+      "legendFuji": "Platz '{seat}' — Fuji-Seite",
+      "legendWindow": "Fenster zur Meerseite",
+      "legendOther": "Gang / Mitte",
+      "aisle": "Gang",
+      "seaSide": "Meerseite",
+      "fujiSide": "Fuji-Seite"
+    },
+    "cta": {
+      "title": "Bereit, Ihren Shinkansen-Platz zu buchen?",
+      "note": "Reservieren Sie bei der Buchung einen konkreten Sitzbuchstaben — auf der Tokaido-Linie ist E das Fuji-Fenster.",
+      "button": "Shinkansen-Tickets auf Klook ansehen",
+      "dirToKyoto": "Buchen Sie Tokio → Kyoto / Osaka? Fragen Sie nach Platz E.",
+      "dirToTokyo": "Buchen Sie Kyoto / Osaka → Tokio? Fragen Sie nach Platz E auf der linken Seite.",
+      "dirSeatNote": "Platz E ist für Ihre Richtung das Fuji-Fenster. Reservieren Sie ihn bei der Buchung."
+    },
+    "ordinary": {
+      "title": "Standardwagen: 3+2-Aufteilung (A B C | D E)",
+      "body": "Die meisten Standardwagen im Tokaido-Shinkansen haben fünf Sitze pro Reihe: drei auf der einen Seite (A, B, C) und zwei auf der anderen (D, E), getrennt durch einen Gang.",
+      "directionNote": "Die Sitzpositionen gelten für Tokio → Kyoto / Osaka. Auf der Rückfahrt nach Tokio bleiben die Buchstaben gleich, aber der Zug fährt andersherum — Platz E liegt dann links im Wagen und ist weiterhin das Fuji-Fenster."
+    },
+    "table": {
+      "seat": "Platz",
+      "type": "Art",
+      "side": "Seite (Tokaido)",
+      "note": "Hinweis"
+    },
+    "seats": {
+      "A": {
+        "type": "Fenster",
+        "side": "Meerseite (gegenüber vom Fuji)",
+        "note": "Fenster mit Blick aufs Meer"
+      },
+      "B": {
+        "type": "Mitte",
+        "side": "—",
+        "note": "Zwischen A und C; kein direktes Fenster"
+      },
+      "C": {
+        "type": "Gang",
+        "side": "—",
+        "note": "Gangplatz, Dreierseite"
+      },
+      "D": {
+        "type": "Gang",
+        "side": "—",
+        "note": "Gangplatz, Zweierseite. Im Green Car das Fuji-Fenster."
+      },
+      "E": {
+        "type": "Fenster",
+        "side": "Fuji-Seite",
+        "note": "Bester Platz für den Fuji in Standardwagen"
+      }
+    },
+    "diagram": {
+      "ordinaryCaption": "Standardwagen — 3+2-Bestuhlung",
+      "greenCaption": "Green Car — 2+2-Bestuhlung",
+      "seaSide": "Meerseite",
+      "fujiSide": "Fuji-Seite",
+      "aisle": "Gang",
+      "legendFuji": "Platz '{seat}' — Fenster zur Fuji-Seite",
+      "legendWindow": "Anderer Fensterplatz",
+      "legendOther": "Gang / Mitte"
+    },
+    "green": {
+      "title": "Green Car: 2+2-Aufteilung (A B | C D)",
+      "body1": "Green Cars (erste Klasse) haben breitere Sitze in 2+2-Anordnung. Einen Platz E gibt es nicht. Die Aufteilung ist A–B auf der einen und C–D auf der anderen Seite, wobei A und D am Fenster liegen.",
+      "body2": "Im Tokaido-Shinkansen ist das Fenster auf der Fuji-Seite im Green Car meist <b>Platz D</b>. Platz A ist das Fenster zur Meerseite.",
+      "directionNote": "Green Cars haben keinen Platz E. Fragen Sie nach Platz D, wenn Sie auf der Tokaido-Linie das Fuji-Fenster möchten."
+    },
+    "otherLines": {
+      "title": "Andere Shinkansen-Linien",
+      "body": "Die Sitzbuchstaben unterscheiden sich je nach Zugtyp und Linie. Der Tokaido-Shinkansen (Tokio–Kyoto–Osaka) nutzt durchgängig die oben beschriebene 3+2-Aufteilung. Andere Linien (Tohoku, Hokuriku, Sanyo) können abweichen — prüfen Sie immer den Sitzplan Ihres konkreten Zuges."
+    },
+    "faq": {
+      "title": "Häufige Fragen",
+      "items": [
+        {
+          "q": "Was bedeuten die Buchstaben A, B, C, D, E im Shinkansen?",
+          "a": "In Standardwagen mit 3+2-Bestuhlung liegen A, B, C auf der Dreierseite und D, E auf der Zweierseite. A und E sind Fensterplätze, C und D Gangplätze, B ist der Mittelplatz."
+        },
+        {
+          "q": "Welcher Sitzbuchstabe ist am besten für den Fuji?",
+          "a": "Im Tokaido-Shinkansen ist Platz E in Standardwagen meist das Fenster auf der Fuji-Seite. Im Green Car (2+2) ist es Platz D."
+        },
+        {
+          "q": "Ist Platz A ein Fensterplatz?",
+          "a": "Ja. In den meisten Standardwagen ist A ein Fensterplatz auf der Gegenseite von E. Im Tokaido-Shinkansen zeigt Platz A zur Meerseite, nicht zum Fuji."
+        },
+        {
+          "q": "Sind die Sitzbuchstaben im Green Car anders?",
+          "a": "Ja. Green Cars nutzen meist eine 2+2-Aufteilung mit A, B auf der einen und C, D auf der anderen Seite. Einen Platz E gibt es nicht. Das Fuji-Fenster ist in der Regel D."
+        }
+      ]
+    },
+    "related": {
+      "title": "Verwandte Seiten",
+      "seatE": {
+        "title": "Ist Platz E die Fuji-Seite?",
+        "desc": "Platz E erklärt für Standard- und Green Cars."
+      },
+      "tokyoKyoto": {
+        "title": "Tokio → Kyoto: Welcher Platz?",
+        "desc": "Sitzplatz und Timing für diese Richtung."
+      },
+      "kyotoTokyo": {
+        "title": "Kyoto → Tokio: Welcher Platz?",
+        "desc": "Sitzplatz und Tipps für die Rückfahrt."
+      },
+      "stay": {
+        "title": "Ueno oder Asakusa für Ihre Nächte in Tokio?",
+        "desc": "Bahnknoten-Komfort gegen Altstadtgassen, im Vergleich."
+      },
+      "planTrip": {
+        "title": "Reisevorbereitung kompakt",
+        "desc": "eSIM, Flughafentransfer und Bahnbuchung."
+      }
+    },
+    "products": {
+      "heading": "Buchen Sie eine bestimmte Strecke?",
+      "intro": "Bei den meisten ist eine Sitzplatzwahl möglich. Reservieren Sie den gewünschten Buchstaben direkt bei der Buchung.",
+      "tokyoHiroshima": "Tokio – Hiroshima auf der Tokaido-/Sanyo-Linie.",
+      "osakaHiroshima": "Osaka – Hiroshima auf der Sanyo-Linie.",
+      "tokyoKanazawa": "Tokio – Kanazawa auf der Hokuriku-Linie.",
+      "tokyoSendai": "Tokio – Sendai auf der Tohoku-Linie."
+    }
   }
 }

@@ -5277,5 +5277,163 @@
         "l3": "Sigue los carteles planta a planta — 西 = oeste, 東 = este."
       }
     }
+  },
+  "seatLetters": {
+    "meta": {
+      "title": "Letras de asiento del Shinkansen A–E: cuál ve el Fuji",
+      "description": "Qué significan las letras de asiento A, B, C, D y E del Shinkansen: cuáles son ventanilla, cuáles pasillo y cuál suele ser la mejor para ver el monte Fuji."
+    },
+    "eyebrow": "Guía de distribución de asientos",
+    "h1": "Las letras de asiento del Shinkansen, explicadas",
+    "quick": {
+      "label": "Respuesta rápida",
+      "a1": "<b>A y E</b> son ventanilla en la mayoría de los vagones ordinarios.",
+      "a2": "<b>C y D</b> son de pasillo.",
+      "a3": "<b>El asiento E</b> suele ser la ventanilla del lado del Fuji en el Tokaido Shinkansen.",
+      "a4": "Los <b>Green Car</b> tienen otra distribución — normalmente 2+2, sin asiento E.",
+      "a5": "Consulta siempre el plano de asientos antes de reservar."
+    },
+    "checker": {
+      "title": "Comprueba tu asiento al instante",
+      "note": "Usa el comprobador gratuito para ver qué letra de asiento mira al monte Fuji según tu dirección.",
+      "open": "Abrir el comprobador",
+      "guide": "Leer la guía completa"
+    },
+    "map": {
+      "eyebrow": "Plano de asientos",
+      "question": "¿Qué vagón vas a reservar?",
+      "carOrdinaryNonReserved": "Ordinario — sin reserva",
+      "carOrdinaryReserved": "Ordinario — reservado",
+      "carGreen": "Green Car",
+      "result": "La ventanilla del lado del Fuji es el asiento '{seat}'.",
+      "seaNote": "El asiento '{seat}' es la ventanilla opuesta, hacia el mar.",
+      "rowsNote": "Las letras se repiten en todas las filas del vagón: el número de fila solo cambia lo lejos que te sientas de las puertas.",
+      "directionNote": "Mostrado para Tokio → Kioto / Osaka. A la vuelta las letras no cambian; el tren va en sentido contrario, así que el mismo asiento queda al otro lado del vagón, y sigue siendo la ventanilla del Fuji.",
+      "book": "Ver billetes de Shinkansen en Klook",
+      "legendFuji": "Asiento '{seat}' — lado del Fuji",
+      "legendWindow": "Ventanilla al mar",
+      "legendOther": "Pasillo / centro",
+      "aisle": "Pasillo",
+      "seaSide": "Lado mar",
+      "fujiSide": "Lado Fuji"
+    },
+    "cta": {
+      "title": "¿Listo para reservar tu asiento del Shinkansen?",
+      "note": "Reserva una letra concreta al comprar: en la línea Tokaido, la E es la ventanilla del Fuji.",
+      "button": "Ver billetes de Shinkansen en Klook",
+      "dirToKyoto": "¿Reservas Tokio → Kioto / Osaka? Pide el asiento E.",
+      "dirToTokyo": "¿Reservas Kioto / Osaka → Tokio? Pide el asiento E, en el lado izquierdo.",
+      "dirSeatNote": "El asiento E es la ventanilla del Fuji para tu dirección. Resérvalo al comprar."
+    },
+    "ordinary": {
+      "title": "Vagón ordinario: distribución 3+2 (A B C | D E)",
+      "body": "La mayoría de los vagones ordinarios del Tokaido Shinkansen tienen cinco asientos por fila: tres a un lado (A, B, C) y dos al otro (D, E), separados por el pasillo.",
+      "directionNote": "Las posiciones se muestran para Tokio → Kioto / Osaka. De vuelta a Tokio las letras no cambian, pero el tren va al revés: el asiento E queda a la izquierda del vagón y sigue siendo la ventanilla del Fuji."
+    },
+    "table": {
+      "seat": "Asiento",
+      "type": "Tipo",
+      "side": "Lado (Tokaido)",
+      "note": "Nota"
+    },
+    "seats": {
+      "A": {
+        "type": "Ventanilla",
+        "side": "Lado mar (opuesto al Fuji)",
+        "note": "Ventanilla con vistas al océano"
+      },
+      "B": {
+        "type": "Centro",
+        "side": "—",
+        "note": "Entre A y C; sin ventanilla directa"
+      },
+      "C": {
+        "type": "Pasillo",
+        "side": "—",
+        "note": "Pasillo, lado de tres asientos"
+      },
+      "D": {
+        "type": "Pasillo",
+        "side": "—",
+        "note": "Pasillo, lado de dos asientos. Ventanilla del Fuji en Green Car."
+      },
+      "E": {
+        "type": "Ventanilla",
+        "side": "Lado del Fuji",
+        "note": "El mejor asiento para el Fuji en vagones ordinarios"
+      }
+    },
+    "diagram": {
+      "ordinaryCaption": "Vagón ordinario — asientos 3+2",
+      "greenCaption": "Green Car — asientos 2+2",
+      "seaSide": "Lado mar",
+      "fujiSide": "Lado Fuji",
+      "aisle": "Pasillo",
+      "legendFuji": "Asiento '{seat}' — ventanilla del lado del Fuji",
+      "legendWindow": "Otra ventanilla",
+      "legendOther": "Pasillo / centro"
+    },
+    "green": {
+      "title": "Green Car: distribución 2+2 (A B | C D)",
+      "body1": "Los Green Car (primera clase) tienen asientos más anchos en configuración 2+2. No hay asiento E. La distribución es A–B a un lado y C–D al otro, con A y D en ventanilla.",
+      "body2": "En el Tokaido Shinkansen, la ventanilla del lado del Fuji en Green Car suele ser el <b>asiento D</b>. El asiento A es la ventanilla al mar.",
+      "directionNote": "Los Green Car no tienen asiento E. Pide el D si quieres la ventanilla del Fuji en la línea Tokaido."
+    },
+    "otherLines": {
+      "title": "Otras líneas de Shinkansen",
+      "body": "La distribución de letras varía según el tipo de tren y la línea. El Tokaido Shinkansen (Tokio–Kioto–Osaka) usa siempre la disposición 3+2 descrita arriba. Otras líneas (Tohoku, Hokuriku, Sanyo) pueden ser distintas: consulta siempre el plano de tu tren concreto."
+    },
+    "faq": {
+      "title": "Preguntas frecuentes",
+      "items": [
+        {
+          "q": "¿Qué significan las letras A, B, C, D, E en el Shinkansen?",
+          "a": "En vagones ordinarios con distribución 3+2, A, B y C están en el lado de tres asientos y D, E en el de dos. A y E son ventanilla; C y D, pasillo; B es el asiento central."
+        },
+        {
+          "q": "¿Qué letra de asiento es mejor para ver el monte Fuji?",
+          "a": "En el Tokaido Shinkansen, el asiento E suele ser la ventanilla del lado del Fuji en vagones ordinarios. En Green Car (2+2), es el asiento D."
+        },
+        {
+          "q": "¿El asiento A es de ventanilla?",
+          "a": "Sí. En la mayoría de los vagones ordinarios, el A es ventanilla en el lado opuesto al E. En el Tokaido Shinkansen mira al mar, no al Fuji."
+        },
+        {
+          "q": "¿Las letras del Green Car son diferentes?",
+          "a": "Sí. Los Green Car suelen usar 2+2 con A, B a un lado y C, D al otro. No hay asiento E. La ventanilla del Fuji suele ser la D."
+        }
+      ]
+    },
+    "related": {
+      "title": "Páginas relacionadas",
+      "seatE": {
+        "title": "¿El asiento E es el lado del Fuji?",
+        "desc": "El asiento E explicado para vagones ordinarios y Green Car."
+      },
+      "tokyoKyoto": {
+        "title": "Tokio → Kioto: ¿qué asiento?",
+        "desc": "Asiento y momento del trayecto para esta dirección."
+      },
+      "kyotoTokyo": {
+        "title": "Kioto → Tokio: ¿qué asiento?",
+        "desc": "Asiento y consejos para el trayecto de vuelta."
+      },
+      "stay": {
+        "title": "¿Ueno o Asakusa para tus noches en Tokio?",
+        "desc": "Comodidad de nudo ferroviario frente a calles del casco antiguo."
+      },
+      "planTrip": {
+        "title": "Lo esencial para preparar el viaje",
+        "desc": "eSIM, traslado del aeropuerto y reserva de trenes."
+      }
+    },
+    "products": {
+      "heading": "¿Reservas una ruta concreta?",
+      "intro": "En casi todas se puede elegir asiento. Reserva la letra que quieras al comprar.",
+      "tokyoHiroshima": "Tokio – Hiroshima por la línea Tokaido / Sanyo.",
+      "osakaHiroshima": "Osaka – Hiroshima por la línea Sanyo.",
+      "tokyoKanazawa": "Tokio – Kanazawa por la línea Hokuriku.",
+      "tokyoSendai": "Tokio – Sendai por la línea Tohoku."
+    }
   }
 }

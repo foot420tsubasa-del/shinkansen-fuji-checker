@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { ArrowRight, Mountain, Info } from "lucide-react";
-import Script from "next/script";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
@@ -15,75 +15,55 @@ import { SeatMapTool } from "@/components/travel/SeatMapTool";
 
 type Props = { params: Promise<{ locale: string }> };
 
-const title = "Shinkansen Seat Letters A–E: Which Seat Gets the Fuji View";
-const description =
-  "Understand Shinkansen seat letters A, B, C, D and E, including which seats are windows, aisles, and usually best for Mt. Fuji views.";
+const SEAT_LETTERS = ["A", "B", "C", "D", "E"] as const;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "seatLetters" });
+  const title = t("meta.title");
+  const description = t("meta.description");
   return {
     title: `${title} | fujiseat`,
     description,
-    robots: locale === "en" ? undefined : { index: false, follow: true },
+    // No locale gate: every language carries its own translated copy, so each
+    // one is indexable on its own terms rather than duplicating the English.
     openGraph: { title, description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
     alternates: getAlternates("/shinkansen-seat-letters", locale),
   };
 }
 
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "What do the letters A, B, C, D, E mean on the Shinkansen?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "In Ordinary Cars with 3+2 seating, seats A, B, C are on the three-seat side and D, E are on the two-seat side. A and E are window seats; C and D are aisle seats; B is a middle seat.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Which seat letter is best for Mt. Fuji?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "On the Tokaido Shinkansen, Seat E is usually the Mt. Fuji-side window in Ordinary Cars. In Green Cars (2+2), the Fuji-side window is Seat D.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Is Seat A a window seat?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. In most Ordinary Cars, Seat A is a window seat on the opposite side from E. On the Tokaido Shinkansen, Seat A faces the sea side, not Mt. Fuji.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Are Green Car seat letters different?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Yes. Green Cars typically use a 2+2 layout with seats A, B (one side) and C, D (other side). There is no Seat E. The Fuji-side window is usually D.",
-      },
-    },
-  ],
-};
-
-const seatLayout = [
-  { letter: "A", type: "Window", side: "Sea side (opposite Fuji)", note: "Window with ocean-side views" },
-  { letter: "B", type: "Middle", side: "—", note: "Between A and C; no direct window" },
-  { letter: "C", type: "Aisle", side: "—", note: "Aisle seat, three-seat side" },
-  { letter: "D", type: "Aisle", side: "—", note: "Aisle seat, two-seat side. Green Car Fuji window." },
-  { letter: "E", type: "Window", side: "Mt. Fuji side", note: "Best seat for Mt. Fuji in Ordinary Cars" },
-];
-
 export default async function SeatLettersPage({ params }: Props) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "seatLetters" });
+  const pagePath = locale === "en" ? "/shinkansen-seat-letters" : `/${locale}/shinkansen-seat-letters`;
+
+  const faqItems = t.raw("faq.items") as Array<{ q: string; a: string }>;
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+
+  const diagramLabels = {
+    seaSide: t("diagram.seaSide"),
+    fujiSide: t("diagram.fujiSide"),
+    aisle: t("diagram.aisle"),
+    legendFuji: t("diagram.legendFuji"),
+    legendWindow: t("diagram.legendWindow"),
+    legendOther: t("diagram.legendOther"),
+  };
+
+  const bold = { b: (chunks: React.ReactNode) => <strong>{chunks}</strong> };
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
-      <Script
-        id="faq-schema-seat-letters"
+      {/* Plain script tag: next/script only reaches the RSC payload, so the
+          crawler would never see this block. */}
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
@@ -91,61 +71,49 @@ export default async function SeatLettersPage({ params }: Props) {
 
       <Container className="py-8 md:py-12">
         <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-sky-700">
-          Seat layout guide
+          {t("eyebrow")}
         </p>
         <h1 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 md:text-4xl">
-          Shinkansen Seat Letters Explained
+          {t("h1")}
         </h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600 md:text-base">
-          {description}
+          {t("meta.description")}
         </p>
 
         <section className="mt-8 rounded-[22px] border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
           <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-emerald-700">
-            Quick answer
+            {t("quick.label")}
           </p>
           <ul className="mt-3 space-y-2 text-sm leading-6 text-slate-700">
-            <li className="flex gap-2">
-              <Info className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-              <span><strong>A and E</strong> are window seats in most Ordinary Cars.</span>
-            </li>
-            <li className="flex gap-2">
-              <Info className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-              <span><strong>C and D</strong> are aisle seats.</span>
-            </li>
-            <li className="flex gap-2">
-              <Mountain className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-              <span><strong>Seat E</strong> is usually the Mt. Fuji-side window on the Tokaido Shinkansen.</span>
-            </li>
-            <li className="flex gap-2">
-              <Info className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-              <span><strong>Green Car</strong> layouts differ — usually 2+2, no Seat E.</span>
-            </li>
-            <li className="flex gap-2">
-              <Info className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-              <span>Always check the seat map before booking.</span>
-            </li>
+            {(["a1", "a2", "a3", "a4", "a5"] as const).map((key) => (
+              <li key={key} className="flex gap-2">
+                {key === "a3" ? (
+                  <Mountain className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+                ) : (
+                  <Info className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+                )}
+                <span>{t.rich(`quick.${key}`, bold)}</span>
+              </li>
+            ))}
           </ul>
         </section>
 
         <section className="mt-6 rounded-[22px] border border-sky-100 bg-sky-50/70 p-5 shadow-sm">
-          <p className="text-sm font-semibold text-slate-950">Check your seat instantly</p>
-          <p className="mt-1 text-xs leading-5 text-slate-600">
-            Use the free checker to see which seat letter faces Mt. Fuji for your direction.
-          </p>
+          <p className="text-sm font-semibold text-slate-950">{t("checker.title")}</p>
+          <p className="mt-1 text-xs leading-5 text-slate-600">{t("checker.note")}</p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Link
               href="/#seat-checker"
               className="inline-flex items-center gap-2 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#246449]"
             >
-              Open Seat Checker
+              {t("checker.open")}
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/guide"
               className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition-colors hover:bg-slate-50"
             >
-              Read full guide
+              {t("checker.guide")}
               <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
@@ -156,26 +124,26 @@ export default async function SeatLettersPage({ params }: Props) {
         <SeatMapTool
           href={KLOOK_URL}
           locale={locale}
-          pagePath="/shinkansen-seat-letters"
+          pagePath={pagePath}
           copy={{
-            eyebrow: "Seat map",
-            question: "Which car are you booking?",
+            eyebrow: t("map.eyebrow"),
+            question: t("map.question"),
             carLabels: {
-              "ordinary-nonreserved": "Ordinary — non-reserved",
-              "ordinary-reserved": "Ordinary — reserved",
-              green: "Green Car",
+              "ordinary-nonreserved": t("map.carOrdinaryNonReserved"),
+              "ordinary-reserved": t("map.carOrdinaryReserved"),
+              green: t("map.carGreen"),
             },
-            result: "The Mt. Fuji-side window is seat {seat}.",
-            seaNote: "Seat {seat} is the opposite window, facing the sea side.",
-            rowsNote: "Rows repeat the same letters down the whole car — row numbers only change how far you sit from the doors.",
-            directionNote: "Shown for Tokyo → Kyoto / Osaka. Coming back the letters do not change; the train faces the other way, so the same seat is on the other side of the carriage — still the Mt. Fuji window.",
-            book: "Check Shinkansen tickets on Klook",
-            legendFuji: "Seat {seat} — Mt. Fuji side",
-            legendWindow: "Sea-side window",
-            legendOther: "Aisle / middle",
-            aisle: "Aisle",
-            seaSide: "Sea side",
-            fujiSide: "Fuji side",
+            result: t("map.result"),
+            seaNote: t("map.seaNote"),
+            rowsNote: t("map.rowsNote"),
+            directionNote: t("map.directionNote"),
+            book: t("map.book"),
+            legendFuji: t("map.legendFuji"),
+            legendWindow: t("map.legendWindow"),
+            legendOther: t("map.legendOther"),
+            aisle: t("map.aisle"),
+            seaSide: t("map.seaSide"),
+            fujiSide: t("map.fujiSide"),
           }}
         />
 
@@ -187,46 +155,48 @@ export default async function SeatLettersPage({ params }: Props) {
             locale={locale}
             placement="seat_letters_booking"
             linkId="seat_letters_klook_booking"
-            pagePath="/shinkansen-seat-letters"
+            pagePath={pagePath}
             pageType="shinkansen_tool"
             copy={{
-              title: "Ready to book your Shinkansen seat?",
-              note: "Reserve a specific seat letter when you book — E on the Tokaido line is the Mt. Fuji window.",
-              button: "Check Shinkansen tickets on Klook",
-              dirToKyoto: "Booking Tokyo → Kyoto / Osaka? Ask for Seat E.",
-              dirToTokyo: "Booking Kyoto / Osaka → Tokyo? Ask for Seat E on the left side.",
-              dirSeatNote: "Seat E is the Mt. Fuji window for your direction. Reserve it when you book.",
+              title: t("cta.title"),
+              note: t("cta.note"),
+              button: t("cta.button"),
+              dirToKyoto: t("cta.dirToKyoto"),
+              dirToTokyo: t("cta.dirToTokyo"),
+              dirSeatNote: t("cta.dirSeatNote"),
             }}
           />
         </div>
 
         <div className="mt-10 space-y-8">
           <section>
-            <h2 className="text-xl font-bold text-slate-950">Ordinary Car: 3+2 layout (A B C | D E)</h2>
-            <p className="mt-2 text-sm leading-7 text-slate-600">
-              Most Tokaido Shinkansen Ordinary Cars have five seats per row: three on one side (A, B, C) and two on the other (D, E), separated by an aisle.
-            </p>
+            <h2 className="text-xl font-bold text-slate-950">{t("ordinary.title")}</h2>
+            <p className="mt-2 text-sm leading-7 text-slate-600">{t("ordinary.body")}</p>
             <SeatLayoutDiagram
               variant="ordinary"
-              directionNote="Seat positions are shown for Tokyo → Kyoto / Osaka. Travelling back to Tokyo, the letters stay the same but the train faces the other way, so Seat E is on the left of the carriage — still the Mt. Fuji window."
+              directionNote={t("ordinary.directionNote")}
+              labels={{ ...diagramLabels, caption: t("diagram.ordinaryCaption") }}
             />
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-slate-200 text-left">
-                    <th className="py-2 pr-4 font-semibold text-slate-900">Seat</th>
-                    <th className="py-2 pr-4 font-semibold text-slate-900">Type</th>
-                    <th className="py-2 pr-4 font-semibold text-slate-900">Tokaido side</th>
-                    <th className="py-2 font-semibold text-slate-900">Note</th>
+                    <th className="py-2 pr-4 font-semibold text-slate-900">{t("table.seat")}</th>
+                    <th className="py-2 pr-4 font-semibold text-slate-900">{t("table.type")}</th>
+                    <th className="py-2 pr-4 font-semibold text-slate-900">{t("table.side")}</th>
+                    <th className="py-2 font-semibold text-slate-900">{t("table.note")}</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {seatLayout.map((seat) => (
-                    <tr key={seat.letter} className={["border-b border-slate-100", seat.letter === "E" ? "bg-emerald-50" : ""].join(" ")}>
-                      <td className="py-2.5 pr-4 font-bold text-slate-900">{seat.letter}</td>
-                      <td className="py-2.5 pr-4 text-slate-600">{seat.type}</td>
-                      <td className="py-2.5 pr-4 text-slate-600">{seat.side}</td>
-                      <td className="py-2.5 text-slate-600">{seat.note}</td>
+                  {SEAT_LETTERS.map((letter) => (
+                    <tr
+                      key={letter}
+                      className={["border-b border-slate-100", letter === "E" ? "bg-emerald-50" : ""].join(" ")}
+                    >
+                      <td className="py-2.5 pr-4 font-bold text-slate-900">{letter}</td>
+                      <td className="py-2.5 pr-4 text-slate-600">{t(`seats.${letter}.type`)}</td>
+                      <td className="py-2.5 pr-4 text-slate-600">{t(`seats.${letter}.side`)}</td>
+                      <td className="py-2.5 text-slate-600">{t(`seats.${letter}.note`)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -235,86 +205,78 @@ export default async function SeatLettersPage({ params }: Props) {
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-950">Green Car: 2+2 layout (A B | C D)</h2>
+            <h2 className="text-xl font-bold text-slate-950">{t("green.title")}</h2>
             <div className="mt-3 space-y-3 text-sm leading-7 text-slate-600">
-              <p>
-                Green Cars (first class) have wider seats in a 2+2 configuration. There is no Seat E. The layout is A–B on one side and C–D on the other, with A and D as window seats.
-              </p>
-              <p>
-                On the Tokaido Shinkansen, the Mt. Fuji-side window in Green Cars is usually <strong>Seat D</strong>. Seat A is the sea-side window.
-              </p>
+              <p>{t("green.body1")}</p>
+              <p>{t.rich("green.body2", bold)}</p>
             </div>
             <SeatLayoutDiagram
               variant="green"
-              directionNote="Green Cars have no Seat E. Ask for Seat D when you want the Mt. Fuji window on the Tokaido line."
+              directionNote={t("green.directionNote")}
+              labels={{ ...diagramLabels, caption: t("diagram.greenCaption") }}
             />
           </section>
 
           <section>
-            <h2 className="text-xl font-bold text-slate-950">Other Shinkansen lines</h2>
+            <h2 className="text-xl font-bold text-slate-950">{t("otherLines.title")}</h2>
             <div className="mt-3 text-sm leading-7 text-slate-600">
-              <p>
-                Seat letter layouts vary by train type and line. The Tokaido Shinkansen (Tokyo–Kyoto–Osaka) consistently uses the 3+2 Ordinary Car layout described above. Other lines (Tohoku, Hokuriku, Sanyo) may have different configurations — always check the seat map for your specific train.
-              </p>
+              <p>{t("otherLines.body")}</p>
             </div>
           </section>
 
           <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
-            <h2 className="text-lg font-bold text-slate-950">FAQ</h2>
+            <h2 className="text-lg font-bold text-slate-950">{t("faq.title")}</h2>
             <dl className="mt-4 space-y-4 text-sm">
-              {faqSchema.mainEntity.map((item) => (
-                <div key={item.name}>
-                  <dt className="font-semibold text-slate-900">{item.name}</dt>
-                  <dd className="mt-1 leading-6 text-slate-600">{item.acceptedAnswer.text}</dd>
+              {faqItems.map((item) => (
+                <div key={item.q}>
+                  <dt className="font-semibold text-slate-900">{item.q}</dt>
+                  <dd className="mt-1 leading-6 text-slate-600">{item.a}</dd>
                 </div>
               ))}
             </dl>
           </section>
 
           <section>
-            <h2 className="text-lg font-bold text-slate-950">Related pages</h2>
+            <h2 className="text-lg font-bold text-slate-950">{t("related.title")}</h2>
             <div className="mt-3 grid gap-3 md:grid-cols-2">
-              <Link href="/guide#seat-e" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Is Seat E the Mt. Fuji side?</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">Seat E explained for Ordinary and Green Cars.</span>
-              </Link>
-              <Link href="/tokyo-to-kyoto-mt-fuji-seat" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Tokyo → Kyoto: Which seat?</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">Direction-specific seat and timing guide.</span>
-              </Link>
-              <Link href="/kyoto-to-tokyo-mt-fuji-seat" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Kyoto → Tokyo: Which seat?</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">Return direction seat and viewing tips.</span>
-              </Link>
-              <Link href="/areas-to-stay/asakusa-vs-ueno" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Ueno or Asakusa for your Tokyo nights?</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">Rail-hub convenience versus old-town streets, compared.</span>
-              </Link>
-              <Link href="/plan-your-trip" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Plan your trip essentials</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">eSIM, airport transfer, and rail booking links.</span>
-              </Link>
+              {(
+                [
+                  ["/guide#seat-e", "seatE"],
+                  ["/tokyo-to-kyoto-mt-fuji-seat", "tokyoKyoto"],
+                  ["/kyoto-to-tokyo-mt-fuji-seat", "kyotoTokyo"],
+                  ["/areas-to-stay/asakusa-vs-ueno", "stay"],
+                  ["/plan-your-trip", "planTrip"],
+                ] as const
+              ).map(([href, key]) => (
+                <Link
+                  key={key}
+                  href={href}
+                  className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]"
+                >
+                  <span className="font-bold text-[#082653]">{t(`related.${key}.title`)}</span>
+                  <span className="mt-1 block text-xs text-[#5f7190]">{t(`related.${key}.desc`)}</span>
+                </Link>
+              ))}
             </div>
           </section>
 
           <KlookProductRow
-            heading="Booking a specific route?"
-            intro="Seat selection is offered on most of these. Reserve the letter you want when you book."
+            heading={t("products.heading")}
+            intro={t("products.intro")}
             placement="shinkansen_route_row"
-            pagePath="/shinkansen-seat-letters"
+            pagePath={pagePath}
             locale={locale}
             className="mb-8"
             items={[
-              { linkId: "shinkansenTokyoHiroshima", note: "Tokyo – Hiroshima on the Tokaido / Sanyo line.", product: "shinkansen_ticket" },
-              { linkId: "shinkansenOsakaHiroshima", note: "Osaka – Hiroshima on the Sanyo line.", product: "shinkansen_ticket" },
-              { linkId: "shinkansenTokyoKanazawa", note: "Tokyo – Kanazawa on the Hokuriku line.", product: "shinkansen_ticket" },
-              { linkId: "shinkansenTokyoSendai", note: "Tokyo – Sendai on the Tohoku line.", product: "shinkansen_ticket" },
+              { linkId: "shinkansenTokyoHiroshima", note: t("products.tokyoHiroshima"), product: "shinkansen_ticket" },
+              { linkId: "shinkansenOsakaHiroshima", note: t("products.osakaHiroshima"), product: "shinkansen_ticket" },
+              { linkId: "shinkansenTokyoKanazawa", note: t("products.tokyoKanazawa"), product: "shinkansen_ticket" },
+              { linkId: "shinkansenTokyoSendai", note: t("products.tokyoSendai"), product: "shinkansen_ticket" },
             ]}
           />
 
           <SuggestedNextSteps currentPageType="seat" locale={locale} />
         </div>
-
       </Container>
       <SiteFooter />
     </main>

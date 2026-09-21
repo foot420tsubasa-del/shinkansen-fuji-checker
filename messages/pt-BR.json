@@ -5277,5 +5277,163 @@
         "l3": "Siga as placas andar a andar — 西 = oeste, 東 = leste."
       }
     }
+  },
+  "seatLetters": {
+    "meta": {
+      "title": "Letras de assento do Shinkansen A–E: qual vê o Fuji",
+      "description": "O que significam as letras de assento A, B, C, D e E do Shinkansen: quais são janela, quais são corredor e qual costuma ser a melhor para ver o monte Fuji."
+    },
+    "eyebrow": "Guia de disposição dos assentos",
+    "h1": "As letras de assento do Shinkansen, explicadas",
+    "quick": {
+      "label": "Resposta rápida",
+      "a1": "<b>A e E</b> são janela na maioria dos vagões comuns.",
+      "a2": "<b>C e D</b> são corredor.",
+      "a3": "<b>O assento E</b> costuma ser a janela do lado do Fuji no Tokaido Shinkansen.",
+      "a4": "Os <b>Green Car</b> têm outra disposição — geralmente 2+2, sem assento E.",
+      "a5": "Confira sempre o mapa de assentos antes de reservar."
+    },
+    "checker": {
+      "title": "Confira seu assento na hora",
+      "note": "Use o verificador gratuito para ver qual letra de assento fica de frente para o monte Fuji no seu sentido de viagem.",
+      "open": "Abrir o verificador",
+      "guide": "Ler o guia completo"
+    },
+    "map": {
+      "eyebrow": "Mapa de assentos",
+      "question": "Qual vagão você vai reservar?",
+      "carOrdinaryNonReserved": "Comum — sem reserva",
+      "carOrdinaryReserved": "Comum — reservado",
+      "carGreen": "Green Car",
+      "result": "A janela do lado do Fuji é o assento '{seat}'.",
+      "seaNote": "O assento '{seat}' é a janela oposta, voltada para o mar.",
+      "rowsNote": "As letras se repetem em todas as fileiras do vagão: o número da fileira só muda a distância até as portas.",
+      "directionNote": "Mostrado para Tóquio → Quioto / Osaka. Na volta as letras não mudam; o trem segue no sentido contrário, então o mesmo assento fica do outro lado do vagão — e continua sendo a janela do Fuji.",
+      "book": "Ver passagens de Shinkansen na Klook",
+      "legendFuji": "Assento '{seat}' — lado do Fuji",
+      "legendWindow": "Janela para o mar",
+      "legendOther": "Corredor / meio",
+      "aisle": "Corredor",
+      "seaSide": "Lado mar",
+      "fujiSide": "Lado Fuji"
+    },
+    "cta": {
+      "title": "Pronto para reservar seu assento no Shinkansen?",
+      "note": "Reserve uma letra específica ao comprar: na linha Tokaido, a E é a janela do Fuji.",
+      "button": "Ver passagens de Shinkansen na Klook",
+      "dirToKyoto": "Reservando Tóquio → Quioto / Osaka? Peça o assento E.",
+      "dirToTokyo": "Reservando Quioto / Osaka → Tóquio? Peça o assento E, do lado esquerdo.",
+      "dirSeatNote": "O assento E é a janela do Fuji no seu sentido de viagem. Reserve-o ao comprar."
+    },
+    "ordinary": {
+      "title": "Vagão comum: disposição 3+2 (A B C | D E)",
+      "body": "A maioria dos vagões comuns do Tokaido Shinkansen tem cinco assentos por fileira: três de um lado (A, B, C) e dois do outro (D, E), separados pelo corredor.",
+      "directionNote": "As posições valem para Tóquio → Quioto / Osaka. Na volta para Tóquio as letras continuam iguais, mas o trem vai no sentido contrário: o assento E passa para a esquerda do vagão e segue sendo a janela do Fuji."
+    },
+    "table": {
+      "seat": "Assento",
+      "type": "Tipo",
+      "side": "Lado (Tokaido)",
+      "note": "Observação"
+    },
+    "seats": {
+      "A": {
+        "type": "Janela",
+        "side": "Lado mar (oposto ao Fuji)",
+        "note": "Janela com vista para o oceano"
+      },
+      "B": {
+        "type": "Meio",
+        "side": "—",
+        "note": "Entre A e C; sem janela direta"
+      },
+      "C": {
+        "type": "Corredor",
+        "side": "—",
+        "note": "Corredor, lado de três assentos"
+      },
+      "D": {
+        "type": "Corredor",
+        "side": "—",
+        "note": "Corredor, lado de dois assentos. Janela do Fuji no Green Car."
+      },
+      "E": {
+        "type": "Janela",
+        "side": "Lado do Fuji",
+        "note": "O melhor assento para o Fuji em vagões comuns"
+      }
+    },
+    "diagram": {
+      "ordinaryCaption": "Vagão comum — assentos 3+2",
+      "greenCaption": "Green Car — assentos 2+2",
+      "seaSide": "Lado mar",
+      "fujiSide": "Lado Fuji",
+      "aisle": "Corredor",
+      "legendFuji": "Assento '{seat}' — janela do lado do Fuji",
+      "legendWindow": "Outra janela",
+      "legendOther": "Corredor / meio"
+    },
+    "green": {
+      "title": "Green Car: disposição 2+2 (A B | C D)",
+      "body1": "Os Green Car (primeira classe) têm assentos mais largos em configuração 2+2. Não existe assento E. A disposição é A–B de um lado e C–D do outro, com A e D na janela.",
+      "body2": "No Tokaido Shinkansen, a janela do lado do Fuji no Green Car costuma ser o <b>assento D</b>. O assento A é a janela para o mar.",
+      "directionNote": "Green Car não tem assento E. Peça o assento D quando quiser a janela do Fuji na linha Tokaido."
+    },
+    "otherLines": {
+      "title": "Outras linhas de Shinkansen",
+      "body": "A disposição das letras varia conforme o tipo de trem e a linha. O Tokaido Shinkansen (Tóquio–Quioto–Osaka) usa sempre a configuração 3+2 descrita acima. Outras linhas (Tohoku, Hokuriku, Sanyo) podem ser diferentes — confira sempre o mapa do seu trem."
+    },
+    "faq": {
+      "title": "Perguntas frequentes",
+      "items": [
+        {
+          "q": "O que significam as letras A, B, C, D, E no Shinkansen?",
+          "a": "Em vagões comuns com disposição 3+2, A, B e C ficam no lado de três assentos e D, E no de dois. A e E são janela; C e D, corredor; B é o assento do meio."
+        },
+        {
+          "q": "Qual letra de assento é a melhor para o monte Fuji?",
+          "a": "No Tokaido Shinkansen, o assento E costuma ser a janela do lado do Fuji nos vagões comuns. No Green Car (2+2), é o assento D."
+        },
+        {
+          "q": "O assento A é janela?",
+          "a": "Sim. Na maioria dos vagões comuns, o A é janela do lado oposto ao E. No Tokaido Shinkansen ele fica voltado para o mar, não para o Fuji."
+        },
+        {
+          "q": "As letras do Green Car são diferentes?",
+          "a": "Sim. Green Car normalmente usa 2+2, com A, B de um lado e C, D do outro. Não há assento E. A janela do Fuji costuma ser a D."
+        }
+      ]
+    },
+    "related": {
+      "title": "Páginas relacionadas",
+      "seatE": {
+        "title": "O assento E é o lado do Fuji?",
+        "desc": "O assento E explicado para vagões comuns e Green Car."
+      },
+      "tokyoKyoto": {
+        "title": "Tóquio → Quioto: qual assento?",
+        "desc": "Assento e momento do trajeto para este sentido."
+      },
+      "kyotoTokyo": {
+        "title": "Quioto → Tóquio: qual assento?",
+        "desc": "Assento e dicas para a viagem de volta."
+      },
+      "stay": {
+        "title": "Ueno ou Asakusa para suas noites em Tóquio?",
+        "desc": "Praticidade de polo ferroviário versus ruas da cidade velha."
+      },
+      "planTrip": {
+        "title": "O essencial para planejar a viagem",
+        "desc": "eSIM, transfer do aeroporto e reserva de trens."
+      }
+    },
+    "products": {
+      "heading": "Reservando uma rota específica?",
+      "intro": "Na maioria delas dá para escolher o assento. Reserve a letra que quiser na hora da compra.",
+      "tokyoHiroshima": "Tóquio – Hiroshima pela linha Tokaido / Sanyo.",
+      "osakaHiroshima": "Osaka – Hiroshima pela linha Sanyo.",
+      "tokyoKanazawa": "Tóquio – Kanazawa pela linha Hokuriku.",
+      "tokyoSendai": "Tóquio – Sendai pela linha Tohoku."
+    }
   }
 }
