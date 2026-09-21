@@ -25,6 +25,7 @@ import {
   JR_PASS_URL,
   OMIO_SHINKANSEN_URL,
   SHINKANSEN_TICKET_URL,
+  getDirectionTicketLink,
 } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
@@ -244,6 +245,11 @@ export default function HomeClient() {
   }, []);
 
   const recommendation = useMemo(() => getSeatRecommendation(direction), [direction]);
+  // Route the ticket CTA only once the reader has actually answered — the
+  // direction state defaults to tokyo-osaka, and routing on that default would
+  // be a guess rather than a stated direction.
+  const ticket = hasChecked ? getDirectionTicketLink(direction) : null;
+  const ticketHref = ticket?.href ?? SHINKANSEN_TICKET_URL;
   const currentDirectionLabel =
     direction === "tokyo-osaka" ? t("dirToOsaka") : t("dirToTokyo");
 
@@ -345,18 +351,19 @@ export default function HomeClient() {
                 </p>
                 <div className="mt-auto flex flex-col gap-2 pt-3 sm:flex-row">
                   <a
-                    href={SHINKANSEN_TICKET_URL}
+                    href={ticketHref}
                     target="_blank"
                     rel={AFFILIATE_REL}
                     onClick={() => trackAffiliateClick({
                       category: "train",
                       provider: "klook",
                       placement: "home_seat_result",
-                      href: SHINKANSEN_TICKET_URL,
+                      href: ticketHref,
                       label: "Book Shinkansen ticket",
-                      link_id: "shinkansenTicket",
+                      link_id: ticket?.linkId ?? "shinkansenTicket",
                       product: "shinkansen_ticket",
-                      adid: "1265303",
+                      adid: ticket?.adid ?? "1265303",
+                      direction: hasChecked ? direction : undefined,
                       locale,
                     })}
                     className="inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"

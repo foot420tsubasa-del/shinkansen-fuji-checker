@@ -1115,5 +1115,21 @@
     "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1403938&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F28305-4g-sim-japan%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3Dbd237c4a4f",
     "usedOn": [],
     "notes": "eSIM が使えない端末・SIMロック解除済みの物理SIM派向け。対象商品: https://www.klook.com/en-US/activity/28305-4g-sim-japan/ — Klookでリンクを発行し adid と directUrl を入力してください。空のままなら表示されません。"
+  },
+  "shinkansenKyotoTokyo": {
+    "label": "京都→東京",
+    "provider": "klook",
+    "adid": "1443748",
+    "klookPath": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1443748&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fjapan-rail%2Fshinkansen%2F30-kyoto%2F28-tokyo%2F",
+    "usedOn": []
+  },
+  "shinkansenTokyoKyoto": {
+    "label": "東京→京都",
+    "provider": "klook",
+    "adid": "1443754",
+    "klookPath": "",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1443754&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fjapan-rail%2Fshinkansen%2F28-tokyo%2F30-kyoto%2F",
+    "usedOn": []
   }
 }

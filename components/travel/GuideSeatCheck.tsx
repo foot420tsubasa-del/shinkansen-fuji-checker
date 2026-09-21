@@ -9,6 +9,7 @@ import {
   trackSeatCheckComplete,
 } from "@/lib/analytics";
 import { getSeatRecommendation, type DirectionId } from "@/lib/seat-checker";
+import { getDirectionTicketLink } from "@/src/affiliateLinks";
 import { SEAT_DIRECTION_STORAGE_KEY, directionGaParams, KLOOK_FILLED_CTA } from "@/components/affiliate/GuideKlookCta";
 
 export type GuideSeatCheckCopy = {
@@ -52,6 +53,11 @@ export function GuideSeatCheck({
 }) {
   const [direction, setDirection] = useState<DirectionId | null>(null);
   const recommendation = direction ? getSeatRecommendation(direction) : null;
+  // Once the reader has stated a direction, book the exact route rather than
+  // the Shinkansen category list. Falls back to the generic link if the route
+  // link is not registered.
+  const ticket = getDirectionTicketLink(direction);
+  const ticketHref = ticket?.href ?? href;
 
   const choose = (next: DirectionId) => {
     setDirection(next);
@@ -137,7 +143,7 @@ export function GuideSeatCheck({
             </p>
             <p className="mt-2 text-[12px] leading-5 text-slate-600">{copy.bookNote}</p>
             <a
-              href={href}
+              href={ticketHref}
               target="_blank"
               rel={AFFILIATE_REL}
               onClick={() =>
@@ -146,11 +152,12 @@ export function GuideSeatCheck({
                   provider: "klook",
                   product: "shinkansen",
                   placement: "guide_seat_result",
-                  link_id: "guide_klook_seat_result",
+                  link_id: ticket?.linkId ?? "guide_klook_seat_result",
+                  adid: ticket?.adid,
                   page_path: pagePath,
                   page_type: "shinkansen_guide",
                   locale,
-                  href,
+                  href: ticketHref,
                   label: copy.book,
                   ...directionGaParams(direction),
                 })

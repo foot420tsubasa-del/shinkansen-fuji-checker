@@ -89,6 +89,34 @@ export const AIRPORT_TRANSFER_URL = requireAffUrl("airportTransfer");
 export const INSURANCE_URL = requireAffUrl("insurance");
 export const CAR_RENTAL_URL = requireAffUrl("carRental");
 export const KLOOK_URL = SHINKANSEN_TICKET_URL;
+
+/**
+ * Klook link for an answered Seat Checker direction, or null when the direction
+ * is unknown (the caller then keeps the generic category link).
+ *
+ * Klook retired the single Tokaido ticket product page during 2026; its
+ * replacement is a per-route booking page, so an answered direction can now put
+ * the reader on the exact route with the date picker already on Tokyo–Kyoto,
+ * instead of the Shinkansen category list. The Seat Checker groups Kyoto and
+ * Osaka into one direction, and Kyoto outdraws Osaka on every direction page,
+ * so both directions resolve to the Kyoto route.
+ */
+export function getDirectionTicketLink(
+  direction: "tokyo-osaka" | "osaka-tokyo" | null,
+): { href: string; linkId: string; adid: string | undefined } | null {
+  const linkId =
+    direction === "tokyo-osaka"
+      ? "shinkansenTokyoKyoto"
+      : direction === "osaka-tokyo"
+        ? "shinkansenKyotoTokyo"
+        : null;
+  if (!linkId) return null;
+  const href = getAffUrl(linkId);
+  // Registry-driven like every other slot: until the link has a URL this
+  // returns null and the caller falls back, so no deep link is invented.
+  if (!href) return null;
+  return { href, linkId, adid: AFFILIATE_LINKS[linkId]?.adid || undefined };
+}
 export const OMIO_SHINKANSEN_URL = getAffUrl("omioShinkansen");
 export const OMIO_TOKYO_KYOTO_URL = getAffUrl("omioTokyoKyoto");
 export const OMIO_TOKYO_OSAKA_URL = getAffUrl("omioTokyoOsaka");
