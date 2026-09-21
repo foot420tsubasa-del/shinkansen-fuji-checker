@@ -9,6 +9,7 @@ import { SiteHeader } from "../../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { QuickRec } from "@/components/content/QuickRec";
 import { AreaCard } from "@/components/content/AreaCard";
+import { BetweenAreas } from "@/components/content/BetweenAreas";
 import { ComparisonTable } from "@/components/content/ComparisonTable";
 import { ProTip } from "@/components/content/ProTip";
 import { StayAreaMap } from "@/components/content/StayAreaMap";
@@ -23,7 +24,12 @@ import { CompactStayFinder } from "@/components/stay/CompactStayFinder";
 import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { AdSlot } from "@/components/ads/AdSlot";
-import { getAllStaySlugs, getStayBySlug, type StayPage as StayContentPage } from "@/lib/content/stay";
+import {
+  getAllStaySlugs,
+  getStayBySlug,
+  type BetweenAreasBlock,
+  type StayPage as StayContentPage,
+} from "@/lib/content/stay";
 import { getAlternates } from "@/i18n/hreflang";
 import { getAffUrl } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -145,6 +151,10 @@ type StayPageTranslation = Partial<Pick<StayContentPage, "title" | "description"
   hotelPicks?: Array<Partial<StayContentPage["hotelPicks"][number]>>;
   nextActions?: Array<Partial<StayContentPage["nextActions"][number]>>;
   faqs?: StayContentPage["faqs"];
+  betweenAreas?: Partial<Omit<BetweenAreasBlock, "routes">> & {
+    /** Merged by index onto the English routes, so times and flags stay put. */
+    routes?: Array<Partial<BetweenAreasBlock["routes"][number]>>;
+  };
 };
 
 type TokyoHotelBaseMatrixGroup = {
@@ -1648,6 +1658,18 @@ function applyStayPageTranslation(page: StayContentPage, translation?: StayPageT
         }))
       : page.nextActions,
     faqs: translation.faqs ?? page.faqs,
+    betweenAreas: page.betweenAreas
+      ? {
+          ...page.betweenAreas,
+          ...translation.betweenAreas,
+          // Merge per route so a translation only has to carry the prose;
+          // journey times and the "best" flag stay with the English source.
+          routes: page.betweenAreas.routes.map((route, index) => ({
+            ...route,
+            ...translation.betweenAreas?.routes?.[index],
+          })),
+        }
+      : undefined,
     quickRec: {
       ...page.quickRec,
       ...translation.quickRec,
@@ -3001,6 +3023,8 @@ export default async function StayPage({ params }: Props) {
               highlight={page.quickRec.area}
             />
           </section>
+
+          {page.betweenAreas ? <BetweenAreas {...page.betweenAreas} /> : null}
 
           <ProTip>{page.proTip}</ProTip>
 

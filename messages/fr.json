@@ -3915,8 +3915,47 @@
           {
             "question": "Peut-on marcher de Ueno à Asakusa ?",
             "answer": "Oui. Comptez environ 20 minutes à pied ou un court trajet sur la Ginza Line."
+          },
+          {
+            "question": "Asakusa ou Ueno : où les hôtels sont-ils moins chers ?",
+            "answer": "Ueno compte davantage d'hôtels économiques et d'auberges, surtout autour de la gare d'Ueno et d'Okachimachi : c'est le quartier où trouver une chambre bon marché est le plus simple. Asakusa offre aussi un bon rapport qualité-prix, mais avec moins de chambres au total, donc les prix montent aux dates chargées. Comparez les tarifs en direct des deux quartiers avant de choisir."
+          },
+          {
+            "question": "Ueno ou Asakusa pour une première nuit avec des bagages ?",
+            "answer": "Ueno est plus simple : le Keisei Skyliner relie Narita à Ueno directement en 36 minutes, avec très peu de correspondances. Depuis Asakusa, l'Access Express met environ 55 minutes. Si votre première nuit suit un long vol, Ueno reste le plus facile à gérer avec des valises."
+          },
+          {
+            "question": "Où y a-t-il plus d'animation le soir, à Asakusa ou à Ueno ?",
+            "answer": "Ueno propose plus de restaurants tardifs et d'izakayas, surtout du côté d'Ameyoko, tandis qu'Asakusa devient calme une fois les temples fermés. Pour une vraie vie nocturne, vous iriez à Shinjuku ou Shibuya, mais entre ces deux-là, Ueno reste animé plus tard."
+          },
+          {
+            "question": "Y a-t-il des hôtels onsen ou ryokan à Ueno ou Asakusa ?",
+            "answer": "Les chambres de style ryokan se trouvent plus facilement à Asakusa, où le vieux quartier conserve de petites auberges traditionnelles près du Senso-ji. Le véritable onsen — une source chaude naturelle — est rare dans le centre de Tokyo. Ce que l'on trouve dans les deux quartiers, ce sont des hôtels avec grand bain commun (daiyokujo) : cela ressemble à un onsen, mais c'est de l'eau du robinet chauffée. Si une vraie source chaude compte pour vous, ce sera une excursion à Hakone ou Kusatsu : cherchez donc un bain commun plutôt qu'un onsen."
+          },
+          {
+            "question": "Où sont les hôtels 4 étoiles dans le secteur Ueno–Asakusa ?",
+            "answer": "Ueno concentre davantage de moyen-haut de gamme, à quelques minutes de la gare, parce que c'est un pôle d'affaires et de transport. Asakusa compte moins de chambres quatre étoiles, mais ses meilleurs établissements donnent souvent sur la rivière ou sur le Skytree : moins de choix, plus de vue. Les hôtels de luxe de Tokyo ne sont ni dans l'un ni dans l'autre — ils sont à Marunouchi, Ginza et Roppongi — alors vérifiez les prix réels avant de supposer qu'une étoile vaut la même chose des deux côtés."
           }
-        ]
+        ],
+        "betweenAreas": {
+          "title": "Aller de Ueno à Asakusa (et retour)",
+          "intro": "Les deux gares sont à trois stations l'une de l'autre sur une seule ligne de métro : c'est pourquoi vous pouvez les considérer comme un seul secteur au moment de choisir un hôtel. Asakusa n'a pas de quais JR, donc ce court trajet est le seul segment ici que le Japan Rail Pass ne couvre pas.",
+          "routes": [
+            {
+              "mode": "Ligne Ginza (G)",
+              "detail": "Asakusa G19 → Tawaramachi → Inaricho → Ueno G16. Trois stations, direct, sans correspondance. Trains toutes les quelques minutes en journée."
+            },
+            {
+              "mode": "À pied",
+              "detail": "Tout droit par Kappabashi-dori (la rue où les restaurants achètent couteaux et plats en plastique) ou le long de la rivière Sumida. Agréable sans bagages."
+            },
+            {
+              "mode": "JR",
+              "detail": "Impossible. Ueno est une grande gare JR, mais Asakusa n'est desservie que par Tokyo Metro, Toei et Tobu : le JR Pass ne sert à rien sur ce trajet."
+            }
+          ],
+          "note": "Asakusa est le terminus de la ligne Ginza : les trains vers Ueno y démarrent. Toujours le même quai, et vous montez en général dans une rame vide où vous trouverez une place assise — utile le jour où vous transportez vos bagages d'un hôtel à l'autre."
+        }
       }
     }
   },

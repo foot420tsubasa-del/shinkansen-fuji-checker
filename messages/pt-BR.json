@@ -3915,8 +3915,47 @@
           {
             "question": "Dá para caminhar de Ueno a Asakusa?",
             "answer": "Sim. São cerca de 20 minutos a pé ou uma viagem curta pela Ginza Line."
+          },
+          {
+            "question": "Asakusa ou Ueno é mais barato para hotéis?",
+            "answer": "Ueno tem mais hotéis econômicos e hostels, principalmente em volta da estação de Ueno e de Okachimachi, então é a área onde fica mais fácil achar quarto barato. Asakusa também tem bom custo-benefício, mas com menos quartos no total, e os preços sobem em datas cheias. Compare os preços atuais das duas antes de decidir."
+          },
+          {
+            "question": "Ueno ou Asakusa para a primeira noite com bagagem?",
+            "answer": "Ueno é mais fácil: o Keisei Skyliner vai direto de Narita até Ueno em 36 minutos, com pouquíssima baldeação. De Asakusa, o Access Express leva cerca de 55 minutos. Se a primeira noite vem logo depois de um voo longo, Ueno deixa a bagagem muito mais simples de administrar."
+          },
+          {
+            "question": "Onde tem mais movimento à noite, Asakusa ou Ueno?",
+            "answer": "Ueno tem mais jantares tardios e izakayas, especialmente na região de Ameyoko, enquanto Asakusa fica quieta depois que os templos fecham. Para vida noturna de verdade você iria a Shinjuku ou Shibuya, mas entre essas duas, Ueno continua animada até mais tarde."
+          },
+          {
+            "question": "Existem hotéis com onsen ou ryokan em Ueno ou Asakusa?",
+            "answer": "Quartos em estilo ryokan são mais fáceis de achar em Asakusa, onde o bairro antigo ainda tem pequenas pousadas tradicionais perto do Senso-ji. Onsen de verdade — fonte termal natural — é raro em qualquer lugar do centro de Tóquio. O que existe nas duas áreas são hotéis com grande banho coletivo (daiyokujo): parece um onsen, mas é água da torneira aquecida. Se uma termal de verdade importa, isso é bate-volta para Hakone ou Kusatsu, então procure por banho coletivo em vez de onsen ao filtrar."
+          },
+          {
+            "question": "Onde ficam os hotéis 4 estrelas na região de Ueno–Asakusa?",
+            "answer": "Ueno concentra mais da faixa média-alta, a poucos minutos da estação, por ser um polo de negócios e transporte. Asakusa tem menos quartos quatro estrelas no total, mas seus melhores hotéis costumam ficar à beira do rio ou virados para o Skytree: menos opção, mais vista. Nenhuma das duas é onde estão os hotéis de luxo de Tóquio — isso é Marunouchi, Ginza e Roppongi — então confira preços reais antes de supor que a estrela significa o mesmo nos dois lados."
           }
-        ]
+        ],
+        "betweenAreas": {
+          "title": "Como ir de Ueno a Asakusa e voltar",
+          "intro": "As duas estações ficam a três paradas uma da outra em uma única linha de metrô, e é por isso que dá para tratá-las como uma área só na hora de escolher hotel. Asakusa não tem plataformas da JR, então esse trecho curto é o único aqui que o Japan Rail Pass não cobre.",
+          "routes": [
+            {
+              "mode": "Linha Ginza (G)",
+              "detail": "Asakusa G19 → Tawaramachi → Inaricho → Ueno G16. Três paradas, direto, sem baldeação. Trens a cada poucos minutos durante o dia."
+            },
+            {
+              "mode": "A pé",
+              "detail": "Reto pela Kappabashi-dori (a rua onde os restaurantes compram facas e réplicas de comida) ou pela beira do rio Sumida. Agradável sem bagagem."
+            },
+            {
+              "mode": "JR",
+              "detail": "Não dá. Ueno é uma grande estação da JR, mas Asakusa é atendida só por Tokyo Metro, Toei e Tobu — o JR Pass não ajuda nesse trecho."
+            }
+          ],
+          "note": "Asakusa é o fim da linha Ginza, então os trens para Ueno partem de lá: sempre a mesma plataforma e normalmente você entra num trem vazio e senta — o que ajuda no dia em que está levando malas de um hotel para outro."
+        }
       }
     }
   },

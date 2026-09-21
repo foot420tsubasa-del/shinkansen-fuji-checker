@@ -42,6 +42,18 @@ export type FaqItem = {
   answer: string;
 };
 
+/**
+ * How to travel between the two areas a comparison page weighs up. Optional:
+ * only pages whose two areas are close enough that readers search for the hop
+ * carry it.
+ */
+export type BetweenAreasBlock = {
+  title: string;
+  intro: string;
+  routes: Array<{ mode: string; detail: string; time: string; best?: boolean }>;
+  note?: string;
+};
+
 export type StayPage = {
   slug: string;
   title: string;
@@ -56,6 +68,7 @@ export type StayPage = {
   hotelPicks: HotelPick[];
   nextActions: TripPick[];
   faqs?: FaqItem[];
+  betweenAreas?: BetweenAreasBlock;
 };
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
@@ -971,6 +984,33 @@ const rawStayPages: StayPage[] = [
       { feature: "Hotel cost feel", values: { "Asakusa": "Good value, fewer options", "Ueno": "More budget options" } },
     ],
     proTip: "Asakusa and Ueno are only 5 minutes apart by Metro (Ginza Line). If you stay in Ueno for the practical benefits, you can walk to Senso-ji in 20 minutes or take one Metro stop. You get both areas without choosing.",
+    betweenAreas: {
+      title: "Getting between Ueno and Asakusa",
+      intro:
+        "The two stations are three stops apart on one Metro line, which is why you can treat them as a single area when you choose a hotel. Asakusa Station has no JR platforms, so this short hop is the one leg here a Japan Rail Pass will not cover.",
+      routes: [
+        {
+          mode: "Ginza Line (G)",
+          detail:
+            "Asakusa G19 → Tawaramachi → Inaricho → Ueno G16. Three stops, direct, no transfer. Trains run every few minutes all day.",
+          time: "5 min",
+          best: true,
+        },
+        {
+          mode: "On foot",
+          detail:
+            "Straight down Kappabashi-dori (Kitchen Town, where restaurants buy their knives and plastic food samples) or along the Sumida River. Pleasant without luggage.",
+          time: "20–25 min",
+        },
+        {
+          mode: "JR",
+          detail:
+            "Not possible. Ueno is a major JR station, but Asakusa is served only by Tokyo Metro, Toei and Tobu — so a JR Pass is no help on this leg.",
+          time: "—",
+        },
+      ],
+      note: "Asakusa is the Ginza Line's terminus, so trains toward Ueno start there: same platform every time, and you normally board an empty train and get a seat — worth knowing on a day you are carrying bags between hotels.",
+    },
     hotelPicks: [
       { name: "Gate Hotel Kaminarimon", area: "Asakusa", price: "Check latest price", link: hotelAsakusa.href, hotelKey: "asakusa", tag: "Views" },
       { name: "Richmond Hotel Asakusa", area: "Asakusa", price: "Check latest price", link: hotelAsakusa.href, hotelKey: "asakusa", tag: "Value" },
@@ -995,6 +1035,8 @@ const rawStayPages: StayPage[] = [
       { question: "Is Asakusa or Ueno cheaper for hotels?", answer: "Ueno generally has more budget hotels and hostels, especially around Ueno Station and Okachimachi, so it's the easier area to find a low-priced room. Asakusa has good value too but fewer rooms overall, so prices can rise on busy dates. Check live prices for both before deciding." },
       { question: "Ueno or Asakusa for an easy first night with luggage?", answer: "Ueno is easier: the Keisei Skyliner runs direct from Narita (36 min) straight to Ueno, so you arrive with minimal transfers. From Asakusa the Access Express takes about 55 minutes. If your first night is right after a long flight, Ueno keeps luggage handling simplest." },
       { question: "Which has more to do at night, Asakusa or Ueno?", answer: "Ueno has more late dining and izakaya, especially around Ameyoko, while Asakusa is quieter after the temples close in the evening. For nightlife you'd still go to Shinjuku or Shibuya, but between these two, Ueno stays livelier later." },
+      { question: "Are there onsen or ryokan hotels in Ueno or Asakusa?", answer: "Ryokan-style rooms are easier to find in Asakusa, where the old-town district still has small traditional inns near Senso-ji. Genuine onsen — a natural hot spring — is rare anywhere in central Tokyo. What you will find in both areas is hotels with a large communal bath (daiyokujo), which looks and feels like an onsen but is heated tap water. If a real hot spring matters to you, that is a day trip to Hakone or Kusatsu rather than a hotel choice here, so search for a public bath rather than an onsen when you filter." },
+      { question: "Where are the 4-star hotels in the Ueno–Asakusa area?", answer: "Ueno carries more of the upper-mid range, clustered within a few minutes of Ueno Station, because it is a business and transport hub. Asakusa has fewer four-star rooms overall, but its better properties tend to be riverside or Skytree-facing, so you trade choice for a view. Neither area is where Tokyo's luxury hotels sit — that is Marunouchi, Ginza and Roppongi — so check live prices before assuming a star rating means the same thing across the two." },
     ],
   },
   {

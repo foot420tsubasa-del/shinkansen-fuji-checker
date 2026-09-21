@@ -3915,8 +3915,47 @@
           {
             "question": "Kann ich von Ueno nach Asakusa laufen?",
             "answer": "Ja. Es sind etwa 20 Minuten zu Fuß oder eine kurze Fahrt mit der Ginza Line."
+          },
+          {
+            "question": "Ist Asakusa oder Ueno günstiger für Hotels?",
+            "answer": "Ueno hat mehr Budget-Hotels und Hostels, vor allem rund um den Bahnhof Ueno und Okachimachi — dort findet man am ehesten ein günstiges Zimmer. Asakusa bietet ebenfalls gutes Preis-Leistungs-Verhältnis, hat aber insgesamt weniger Zimmer, sodass die Preise an stark gebuchten Tagen steigen. Vergleichen Sie vorher die aktuellen Preise beider Viertel."
+          },
+          {
+            "question": "Ueno oder Asakusa für die erste Nacht mit Gepäck?",
+            "answer": "Ueno ist einfacher: Der Keisei Skyliner fährt direkt von Narita nach Ueno (36 Min.), also kaum Umsteigen. Von Asakusa braucht der Access Express etwa 55 Minuten. Wenn die erste Nacht direkt auf einen langen Flug folgt, ist Ueno mit Gepäck am unkompliziertesten."
+          },
+          {
+            "question": "Wo ist abends mehr los, in Asakusa oder Ueno?",
+            "answer": "Ueno hat mehr späte Restaurants und Izakaya, besonders rund um Ameyoko. Asakusa wird ruhig, sobald die Tempel abends schließen. Für richtiges Nachtleben fährt man nach Shinjuku oder Shibuya — zwischen diesen beiden bleibt Ueno aber länger lebendig."
+          },
+          {
+            "question": "Gibt es Onsen- oder Ryokan-Hotels in Ueno oder Asakusa?",
+            "answer": "Zimmer im Ryokan-Stil findet man eher in Asakusa, wo es in der Altstadt noch kleine traditionelle Gasthäuser nahe dem Senso-ji gibt. Echtes Onsen — eine natürliche heiße Quelle — ist in der Innenstadt von Tokio selten. In beiden Vierteln gibt es dagegen Hotels mit großem Gemeinschaftsbad (Daiyokujo): sieht aus wie ein Onsen, ist aber erhitztes Leitungswasser. Wer eine echte heiße Quelle möchte, macht einen Tagesausflug nach Hakone oder Kusatsu — suchen Sie also nach einem Gemeinschaftsbad statt nach Onsen."
+          },
+          {
+            "question": "Wo liegen die 4-Sterne-Hotels im Raum Ueno–Asakusa?",
+            "answer": "Ueno hat mehr von der gehobenen Mittelklasse, gebündelt wenige Minuten vom Bahnhof entfernt, weil es ein Geschäfts- und Verkehrsknoten ist. Asakusa hat insgesamt weniger Vier-Sterne-Zimmer, dafür liegen die besseren Häuser am Fluss oder mit Blick auf den Skytree — weniger Auswahl, mehr Aussicht. Tokios Luxushotels stehen ohnehin in Marunouchi, Ginza und Roppongi, prüfen Sie also die aktuellen Preise, bevor Sie Sterne gleichsetzen."
           }
-        ]
+        ],
+        "betweenAreas": {
+          "title": "Zwischen Ueno und Asakusa unterwegs",
+          "intro": "Die beiden Bahnhöfe liegen drei Stationen auseinander auf einer einzigen Metro-Linie — deshalb können Sie sie bei der Hotelwahl als ein Gebiet behandeln. Asakusa hat keine JR-Gleise, deshalb ist dieser kurze Weg die eine Strecke hier, die ein Japan Rail Pass nicht abdeckt.",
+          "routes": [
+            {
+              "mode": "Ginza-Linie (G)",
+              "detail": "Asakusa G19 → Tawaramachi → Inaricho → Ueno G16. Drei Stationen, direkt, kein Umsteigen. Tagsüber alle paar Minuten."
+            },
+            {
+              "mode": "Zu Fuß",
+              "detail": "Geradeaus die Kappabashi-dori entlang (Küchenstraße, wo Restaurants ihre Messer und Speisemodelle kaufen) oder am Sumida-Fluss. Ohne Gepäck ein schöner Weg."
+            },
+            {
+              "mode": "JR",
+              "detail": "Nicht möglich. Ueno ist ein großer JR-Bahnhof, Asakusa wird jedoch nur von Tokyo Metro, Toei und Tobu bedient — ein JR Pass hilft auf dieser Strecke nicht."
+            }
+          ],
+          "note": "Asakusa ist Endstation der Ginza-Linie: Züge Richtung Ueno starten dort. Immer dasselbe Gleis, und meist steigen Sie in einen leeren Zug ein und bekommen einen Sitzplatz — praktisch an einem Tag, an dem Sie Gepäck zwischen Hotels tragen."
+        }
       }
     }
   },
