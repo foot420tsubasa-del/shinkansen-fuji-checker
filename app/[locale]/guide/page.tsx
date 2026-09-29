@@ -7,6 +7,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { KLOOK_URL, ESIM_URL, SIM_CARD_URL, JR_PASS_URL, OMIO_SHINKANSEN_URL } from "@/src/affiliateLinks";
 import { GuideKlookCta, KLOOK_FILLED_CTA } from "@/components/affiliate/GuideKlookCta";
 import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
+import { FujiWindowForecast } from "@/components/travel/FujiWindowForecast";
 import { GuideStickyCta } from "@/components/affiliate/GuideStickyCta";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -1016,6 +1017,7 @@ const priorityGuideFaqByLocale: Record<string, GuideFaqItem[]> = {
 export default async function GuidePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "guide" });
+  const fw = await getTranslations({ locale, namespace: "fujiWindow" });
   const isFr = locale === "fr";
   const copy = locale === "fr" ? frGuideCopy : { ...enGuideCopy, ...guideCopyOverridesByLocale[locale] };
   const quickAnswer = quickAnswerCopyByLocale[locale] ?? quickAnswerCopyByLocale.en;
@@ -1608,6 +1610,39 @@ export default async function GuidePage({ params }: Props) {
 
         {renderSeatCheck()}
         {renderTopBookingCtas()}
+
+        {/* Deliberately below the measured seat-check funnel: the forecast is a
+            reason to come back, not a replacement for the answer above it. */}
+        <FujiWindowForecast
+          locale={locale}
+          pagePath={guidePath}
+          copy={{
+            eyebrow: fw("eyebrow"),
+            title: fw("title"),
+            intro: fw("intro"),
+            fromLabel: fw("fromLabel"),
+            originTokyo: fw("originTokyo"),
+            originKyoto: fw("originKyoto"),
+            originOsaka: fw("originOsaka"),
+            dateLabel: fw("dateLabel"),
+            timeLabel: fw("timeLabel"),
+            check: fw("check"),
+            loading: fw("loading"),
+            error: fw("error"),
+            result: fw("result"),
+            sideRight: fw("sideRight"),
+            sideLeft: fw("sideLeft"),
+            cloud: fw("cloud"),
+            rain: fw("rain"),
+            levelHigh: fw("levelHigh"),
+            levelMedium: fw("levelMedium"),
+            levelLow: fw("levelLow"),
+            better: fw("better"),
+            slowerTrains: fw("slowerTrains"),
+            book: fw("book"),
+            updated: fw("updated"),
+          }}
+        />
 
         {renderEarlyShinkansenHotelStrip()}
 

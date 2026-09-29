@@ -5434,5 +5434,31 @@
       "tokyoKanazawa": "Tokio – Kanazawa auf der Hokuriku-Linie.",
       "tokyoSendai": "Tokio – Sendai auf der Tohoku-Linie."
     }
+  },
+  "fujiWindow": {
+    "eyebrow": "Fuji-Sichtfenster",
+    "title": "Werden Sie den Fuji von Ihrem Zug aus sehen?",
+    "intro": "Wählen Sie Ihre Abfahrt, und wir berechnen die Minute, in der Ihr Zug den Fuji-Abschnitt erreicht — samt Himmelsprognose für genau diese Stunde. Täglich aktualisiert, also kurz vor der Reise noch einmal nachsehen.",
+    "fromLabel": "Abfahrt von",
+    "originTokyo": "Tokio",
+    "originKyoto": "Kyoto",
+    "originOsaka": "Shin-Osaka",
+    "dateLabel": "Reisedatum",
+    "timeLabel": "Abfahrtszeit",
+    "check": "Meinen Zug prüfen",
+    "loading": "Prognose wird geladen…",
+    "error": "Die Prognose ist gerade nicht verfügbar. Bitte später erneut versuchen.",
+    "result": "Der Fuji kommt gegen '{time}' in Sicht, auf der '{side}'.",
+    "sideRight": "rechten Seite (Platz E)",
+    "sideLeft": "linken Seite (Platz E)",
+    "cloud": "Bewölkung '{percent}'%",
+    "rain": "Regen vorhergesagt",
+    "levelHigh": "Gute Chance",
+    "levelMedium": "Kann so oder so ausgehen",
+    "levelLow": "Wahrscheinlich verdeckt",
+    "better": "Eine Abfahrt um '{time}' läge unter klarerem Himmel.",
+    "slowerTrains": "Zeiten gelten für den Nozomi. Hikari und Kodama sind langsamer, planen Sie etwas mehr ein.",
+    "book": "Shinkansen-Tickets auf Klook ansehen",
+    "updated": "Prognose von open-meteo.com, stündlich aktualisiert."
   }
 }

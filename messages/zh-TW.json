@@ -5434,5 +5434,31 @@
       "tokyoKanazawa": "北陸線的東京 – 金澤。",
       "tokyoSendai": "東北線的東京 – 仙台。"
     }
+  },
+  "fujiWindow": {
+    "eyebrow": "富士山可見時段預報",
+    "title": "你的這班車看得到富士山嗎？",
+    "intro": "選擇你的班次，我們會算出列車抵達富士山路段的時刻，並顯示那個時段的天空預報。每天更新，接近出發時可以再看一次。",
+    "fromLabel": "出發地",
+    "originTokyo": "東京",
+    "originKyoto": "京都",
+    "originOsaka": "新大阪",
+    "dateLabel": "出行日期",
+    "timeLabel": "出發時刻",
+    "check": "查看我的班次",
+    "loading": "正在載入預報…",
+    "error": "目前無法取得預報，請稍後再試。",
+    "result": "富士山大約在 '{time}' 出現在'{side}'。",
+    "sideRight": "右側（E座）",
+    "sideLeft": "左側（E座）",
+    "cloud": "雲量 '{percent}'%",
+    "rain": "預報有雨",
+    "levelHigh": "機會不錯",
+    "levelMedium": "兩可之間",
+    "levelLow": "很可能被遮住",
+    "better": "改搭 '{time}' 出發的班次，天空會更晴朗。",
+    "slowerTrains": "時間以Nozomi為準。Hikari和Kodama較慢，請多留一些餘裕。",
+    "book": "在Klook查看新幹線車票",
+    "updated": "預報來自 open-meteo.com，每小時更新。"
   }
 }

@@ -5435,5 +5435,31 @@
       "tokyoKanazawa": "Tóquio – Kanazawa pela linha Hokuriku.",
       "tokyoSendai": "Tóquio – Sendai pela linha Tohoku."
     }
+  },
+  "fujiWindow": {
+    "eyebrow": "Janela de visão do Fuji",
+    "title": "Você vai ver o monte Fuji do seu trem?",
+    "intro": "Escolha sua partida e calculamos o minuto em que o trem chega ao trecho do Fuji, com a previsão do céu para aquela hora exata. Atualizado diariamente — volte a conferir perto do dia.",
+    "fromLabel": "Partindo de",
+    "originTokyo": "Tóquio",
+    "originKyoto": "Quioto",
+    "originOsaka": "Shin-Osaka",
+    "dateLabel": "Data da viagem",
+    "timeLabel": "Horário de partida",
+    "check": "Conferir meu trem",
+    "loading": "Carregando previsão…",
+    "error": "A previsão está indisponível agora. Tente novamente mais tarde.",
+    "result": "O monte Fuji aparece por volta das '{time}', do '{side}'.",
+    "sideRight": "lado direito (assento E)",
+    "sideLeft": "lado esquerdo (assento E)",
+    "cloud": "Cobertura de nuvens '{percent}'%",
+    "rain": "Previsão de chuva",
+    "levelHigh": "Boas chances",
+    "levelMedium": "Pode ir para qualquer lado",
+    "levelLow": "Provavelmente encoberto",
+    "better": "Sair às '{time}' colocaria você sob um céu mais limpo.",
+    "slowerTrains": "Horários para um Nozomi. Hikari e Kodama são mais lentos, considere um pouco mais.",
+    "book": "Ver passagens de Shinkansen na Klook",
+    "updated": "Previsão de open-meteo.com, atualizada a cada hora."
   }
 }

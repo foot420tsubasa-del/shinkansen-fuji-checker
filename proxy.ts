@@ -2,6 +2,7 @@ import createMiddleware from "next-intl/middleware";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { routing } from "./i18n/routing";
+import { isRetiredPath } from "./lib/retired-routes";
 
 const intlMiddleware = createMiddleware(routing);
 const itineraryRedirects: Record<string, string> = {
@@ -23,7 +24,17 @@ export default function proxy(request: NextRequest) {
     return NextResponse.redirect(url, 301);
   }
 
-  return intlMiddleware(request);
+  const response = intlMiddleware(request);
+
+  // Retiring a page here rather than in each route's metadata keeps the
+  // decision in one list and the page files untouched. X-Robots-Tag carries
+  // the same weight as the meta tag, and "follow" is deliberate: these pages
+  // still link to the ones worth ranking.
+  if (isRetiredPath(pathname, routing.locales)) {
+    response.headers.set("X-Robots-Tag", "noindex, follow");
+  }
+
+  return response;
 }
 
 export const config = {

@@ -3,6 +3,7 @@ import { routing } from "@/i18n/routing";
 import { publicItineraryPages } from "@/lib/content/itineraries";
 import { stayPages } from "@/lib/content/stay";
 import { transferPages } from "@/lib/content/transfers";
+import { RETIRED_PATHS } from "@/lib/retired-routes";
 
 const siteUrl = "https://fujiseat.com";
 
@@ -89,10 +90,15 @@ function makeEntry(path: string, priority: number, includeAlternates = true): Me
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  // Retired pages stay reachable but are no longer offered to crawlers; see
+  // lib/retired-routes.ts for why each one is on the list.
+  const retired = new Set<string>(RETIRED_PATHS);
+  const live = (paths: string[]) => paths.filter((path) => !retired.has(path || "/"));
+
   const entries = [
-    ...translatedPaths.map((path, index) => makeEntry(path, index === 0 ? 1 : 0.8)),
-    ...englishOnlyContentPaths.map((path) => makeEntry(path, 0.8, false)),
-    ...dynamicPaths.map((path) => makeEntry(path, 0.7, false)),
+    ...live(translatedPaths).map((path, index) => makeEntry(path, index === 0 ? 1 : 0.8)),
+    ...live(englishOnlyContentPaths).map((path) => makeEntry(path, 0.8, false)),
+    ...live(dynamicPaths).map((path) => makeEntry(path, 0.7, false)),
   ];
   return Array.from(new Map(entries.map((entry) => [entry.url, entry])).values());
 }

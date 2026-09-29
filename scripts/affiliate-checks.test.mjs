@@ -132,3 +132,127 @@ test("direction changes the quick-answer CTA copy", () => {
   assert.ok(cta.includes("dirToTokyo"));
   assert.ok(cta.includes('direction === "tokyo-osaka"'));
 });
+
+/* ── Fuji viewing window (lib/fuji-window.ts) ─────────────────────────────
+ * Transpiled from the real source, so the timing model and the grading
+ * thresholds cannot drift away from what the page shows readers. */
+
+const fw = await importTsModule("lib/fuji-window.ts");
+
+test("fuji window: Tokyo departures reach Fuji 42 minutes out, on the right", () => {
+  const r = fw.resolveWindow("tokyo", "2026-10-14", "09:10", null);
+  assert.equal(r.fujiTime, "09:52");
+  assert.equal(r.fujiDate, "2026-10-14");
+  assert.equal(r.side, "right");
+});
+
+test("fuji window: eastbound runs put Fuji on the left, later in the trip", () => {
+  assert.equal(fw.resolveWindow("kyoto", "2026-10-14", "09:00", null).fujiTime, "10:31");
+  assert.equal(fw.resolveWindow("shin-osaka", "2026-10-14", "09:00", null).fujiTime, "10:45");
+  assert.equal(fw.resolveWindow("kyoto", "2026-10-14", "09:00", null).side, "left");
+});
+
+test("fuji window: a departure that crosses midnight moves to the next day", () => {
+  const r = fw.resolveWindow("tokyo", "2026-10-14", "23:40", null);
+  assert.equal(r.fujiTime, "00:22");
+  assert.equal(r.fujiDate, "2026-10-15", "must read the next day's sky, not the same day's");
+});
+
+test("fuji window: grading matches the homepage widget, and rain overrides", () => {
+  assert.equal(fw.gradeCloud(30), "high");
+  assert.equal(fw.gradeCloud(31), "medium");
+  assert.equal(fw.gradeCloud(70), "medium");
+  assert.equal(fw.gradeCloud(71), "low");
+  // Clear sky but raining at the Fuji stretch is not a sighting.
+  assert.equal(fw.gradeHour(10, 0.5), "low");
+  assert.equal(fw.gradeHour(10, 0.4), "high");
+});
+
+test("fuji window: reads the forecast hour the train actually passes", () => {
+  const forecast = {
+    time: ["2026-10-14T09:00", "2026-10-14T10:00", "2026-10-14T11:00"],
+    cloud: [90, 20, 95],
+    precip: [0, 0, 0],
+  };
+  // 09:30 + 42min = 10:12, which falls in the 10:00 hour.
+  const r = fw.resolveWindow("tokyo", "2026-10-14", "09:30", forecast);
+  assert.equal(r.fujiTime, "10:12");
+  assert.equal(r.cloudPercent, 20);
+  assert.equal(r.level, "high");
+});
+
+test("fuji window: offers a clearer departure only when one exists", () => {
+  const time = [];
+  const cloud = [];
+  const precip = [];
+  for (let h = 0; h < 24; h++) {
+    time.push(`2026-10-14T${String(h).padStart(2, "0")}:00`);
+    // Only the 10:00 hour is clear.
+    cloud.push(h === 10 ? 5 : 95);
+    precip.push(0);
+  }
+  const forecast = { time, cloud, precip };
+  const picked = fw.resolveWindow("tokyo", "2026-10-14", "08:00", forecast);
+  assert.equal(picked.level, "low");
+  const better = fw.findBetterDeparture("tokyo", "2026-10-14", "08:00", forecast, picked.level);
+  assert.ok(better, "a clear departure exists and should be offered");
+  // The sighting is read at the hour it falls in, so reaching the clear 10:00
+  // hour means leaving at 10:00 (10:42) — not 09:00, whose 09:42 is still 09.
+  assert.equal(better.time, "10:00");
+  assert.equal(better.cloudPercent, 5);
+
+  // When the reader already has a clear run, do not nag them with another.
+  assert.equal(fw.findBetterDeparture("tokyo", "2026-10-14", "10:00", forecast, "high"), null);
+});
+
+/* ── Retired routes (lib/retired-routes.ts) ───────────────────────────────
+ * The list is the only thing standing between a page and the index, so the
+ * pages that actually earn must never drift onto it by accident. */
+
+const retired = await importTsModule("lib/retired-routes.ts");
+const LOCALES = ["en", "fr", "es", "pt-BR", "ko", "ru", "de", "zh-TW", "zh-CN"];
+
+test("retired routes: the pages carrying the traffic are never retired", () => {
+  // Six-month clicks, 2026-04-01 to 09-26. Between them these are 99% of the
+  // site; retiring one would take the business off the index.
+  for (const path of [
+    "/", // 57 clicks
+    "/guide", // 1,916
+    "/shinkansen-seat-letters", // 469
+    "/areas-to-stay/asakusa-vs-ueno", // 103
+    "/how-to-read-japanese-train-signs", // 70
+    "/areas-to-stay/ueno-vs-shinjuku", // 37
+    "/kyoto-to-tokyo-mt-fuji-seat", // 27
+  ]) {
+    assert.equal(retired.isRetiredPath(path, LOCALES), false, `must stay indexable: ${path}`);
+  }
+});
+
+test("retired routes: a locale prefix does not hide a retired path", () => {
+  assert.equal(retired.isRetiredPath("/itineraries", LOCALES), true);
+  for (const locale of ["fr", "ru", "zh-TW", "pt-BR"]) {
+    assert.equal(
+      retired.isRetiredPath(`/${locale}/itineraries`, LOCALES),
+      true,
+      `${locale} must be retired too`,
+    );
+  }
+  // A trailing slash is the same page.
+  assert.equal(retired.isRetiredPath("/itineraries/", LOCALES), true);
+  // A locale root is not the same thing as a retired child.
+  assert.equal(retired.isRetiredPath("/fr", LOCALES), false);
+});
+
+test("retired routes: the sitemap offers nothing that is retired", () => {
+  const src = readFileSync("app/sitemap.ts", "utf8");
+  assert.ok(src.includes("RETIRED_PATHS"), "sitemap must consult the retired list");
+  const listed = [
+    ...(src.match(/const englishOnlyContentPaths = \[([\s\S]*?)\n\];/)?.[1] ?? "").matchAll(/"([^"]*)"/g),
+  ].map((m) => m[1]);
+  for (const path of listed) {
+    if (!retired.isRetiredPath(path || "/", LOCALES)) continue;
+    // Retired entries may stay in the source array; the filter removes them.
+    assert.ok(src.includes("live(englishOnlyContentPaths)"), "retired paths must be filtered out");
+    break;
+  }
+});

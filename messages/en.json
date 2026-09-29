@@ -5490,5 +5490,31 @@
       "tokyoKanazawa": "Tokyo – Kanazawa on the Hokuriku line.",
       "tokyoSendai": "Tokyo – Sendai on the Tohoku line."
     }
+  },
+  "fujiWindow": {
+    "eyebrow": "Fuji window forecast",
+    "title": "Will you see Mt. Fuji from your train?",
+    "intro": "Pick your departure and we'll work out the minute your train reaches the Fuji stretch — then show the sky forecast for that exact hour. Updated daily, so check again closer to the day.",
+    "fromLabel": "Departing from",
+    "originTokyo": "Tokyo",
+    "originKyoto": "Kyoto",
+    "originOsaka": "Shin-Osaka",
+    "dateLabel": "Travel date",
+    "timeLabel": "Departure time",
+    "check": "Check my train",
+    "loading": "Loading forecast…",
+    "error": "The forecast is unavailable right now. Please try again later.",
+    "result": "Mt. Fuji comes into view around '{time}', on the '{side}'.",
+    "sideRight": "right side (seat E)",
+    "sideLeft": "left side (seat E)",
+    "cloud": "Cloud cover '{percent}'%",
+    "rain": "Rain forecast",
+    "levelHigh": "Good chance",
+    "levelMedium": "Could go either way",
+    "levelLow": "Likely hidden",
+    "better": "Leaving at '{time}' instead would put you under a clearer sky.",
+    "slowerTrains": "Timing is for a Nozomi. Hikari and Kodama run slower, so allow a little longer.",
+    "book": "Check Shinkansen tickets on Klook",
+    "updated": "Forecast from open-meteo.com, refreshed hourly."
   }
 }

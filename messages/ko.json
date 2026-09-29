@@ -5434,5 +5434,31 @@
       "tokyoKanazawa": "호쿠리쿠선의 도쿄 – 가나자와.",
       "tokyoSendai": "도호쿠선의 도쿄 – 센다이."
     }
+  },
+  "fujiWindow": {
+    "eyebrow": "후지산 관측 시간대 예보",
+    "title": "당신의 열차에서 후지산이 보일까요?",
+    "intro": "출발 편을 고르면 열차가 후지산 구간에 도달하는 시각을 계산하고, 바로 그 시간대의 하늘 예보를 보여드립니다. 매일 갱신되니 출발이 가까워지면 다시 확인하세요.",
+    "fromLabel": "출발지",
+    "originTokyo": "도쿄",
+    "originKyoto": "교토",
+    "originOsaka": "신오사카",
+    "dateLabel": "여행 날짜",
+    "timeLabel": "출발 시각",
+    "check": "내 열차 확인하기",
+    "loading": "예보를 불러오는 중…",
+    "error": "지금은 예보를 불러올 수 없습니다. 잠시 후 다시 시도해 주세요.",
+    "result": "후지산은 '{time}'쯤 '{side}'에 보입니다.",
+    "sideRight": "오른쪽(E석)",
+    "sideLeft": "왼쪽(E석)",
+    "cloud": "구름량 '{percent}'%",
+    "rain": "비 예보",
+    "levelHigh": "볼 가능성 높음",
+    "levelMedium": "반반",
+    "levelLow": "가려질 가능성 높음",
+    "better": "'{time}'에 출발하면 더 맑은 하늘 아래를 지납니다.",
+    "slowerTrains": "노조미 기준입니다. 히카리·고다마는 더 느리므로 여유를 두세요.",
+    "book": "Klook에서 신칸센 티켓 보기",
+    "updated": "open-meteo.com 예보, 매시간 갱신."
   }
 }
