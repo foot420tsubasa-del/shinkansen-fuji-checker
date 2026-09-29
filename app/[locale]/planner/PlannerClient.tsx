@@ -18,7 +18,7 @@ import {
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
-import { getAffUrl, requireAffUrl } from "@/src/affiliateLinks";
+import { getAffUrl, requireAffUrl, getOmioUrl } from "@/src/affiliateLinks";
 import { getProviderFromHref, trackAffiliateClick, trackChecklistComplete, trackTemplateSelect } from "@/lib/analytics";
 import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -175,8 +175,8 @@ type RouteBookingRecommendation = {
 
 const shinkansenTicketUrl = getAffUrl("shinkansenTicket");
 const jrPassUrl = getAffUrl("jrPass");
-const omioJapanTrainUrl = getAffUrl("omioJapanTrain");
-const omioTrainUrl = omioJapanTrainUrl ?? getAffUrl("omioShinkansen");
+const omioJapanTrainUrl = getOmioUrl("omioJapanTrain");
+const omioTrainUrl = omioJapanTrainUrl ?? getOmioUrl("omioShinkansen");
 const omioTrainLinkId = omioJapanTrainUrl ? "omioJapanTrain" : "omioShinkansen";
 const esimUrl = getAffUrl("esim");
 const insuranceUrl = getAffUrl("insurance");

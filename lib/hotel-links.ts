@@ -46,6 +46,8 @@ function agodaLabel(config: HotelLinkConfig) {
 }
 
 export function getAgodaHotelAreaUrl(areaKey: HotelAreaKey) {
+  // Agoda: 5 clicks, zero revenue. Same decision as the rest.
+  if (KLOOK_ONLY) return null;
   const config = hotelLinks[areaKey];
   const explicitAgodaUrl = config.agodaUrl?.trim();
 
@@ -69,8 +71,36 @@ export function getAgodaHotelAreaUrl(areaKey: HotelAreaKey) {
   };
 }
 
+/**
+ * One affiliate programme, decided 2026-09-29.
+ *
+ * Six months across five of them: Klook produced every yen the site has ever
+ * earned (~¥9,000). Omio, Booking.com, Trip.com and Agoda together took 43
+ * clicks and returned nothing. Splitting the revenue also split it below every
+ * programme's payout threshold at once — Klook alone pays out at $150, so
+ * money spread across five accounts reaches none of them.
+ *
+ * The Agoda and Trip branches below are left intact rather than deleted, so
+ * reversing this is one line.
+ */
+const KLOOK_ONLY = true;
+
+function klookHotelLink(config: HotelLinkConfig) {
+  const href = getAffUrl(config.fallbackLinkId) ?? "#";
+  return {
+    ...config,
+    href,
+    trackingHref: href,
+    provider: "klook" as const,
+    label: `Compare ${config.areaName} hotels`,
+    checkinType: "fixed_date" as const,
+  };
+}
+
 export function getHotelLink(areaKey: HotelAreaKey) {
   const config = hotelLinks[areaKey];
+  if (KLOOK_ONLY) return klookHotelLink(config);
+
   const agodaUrl = config.agodaUrl?.trim() ?? "";
   const tripUrl = config.tripUrl.trim();
   const primaryProvider = config.primaryProvider;
@@ -111,14 +141,7 @@ export function getHotelLink(areaKey: HotelAreaKey) {
     };
   }
 
-  return {
-    ...config,
-    href: getAffUrl(config.fallbackLinkId) ?? "#",
-    trackingHref: getAffUrl(config.fallbackLinkId) ?? "#",
-    provider: "klook" as const,
-    label: `Compare ${config.areaName} hotels`,
-    checkinType: "fixed_date" as const,
-  };
+  return klookHotelLink(config);
 }
 
 export function getTripHotelConfig(areaKey: HotelAreaKey) {

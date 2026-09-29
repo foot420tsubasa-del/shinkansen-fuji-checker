@@ -117,9 +117,21 @@ export function getDirectionTicketLink(
   if (!href) return null;
   return { href, linkId, adid: AFFILIATE_LINKS[linkId]?.adid || undefined };
 }
-export const OMIO_SHINKANSEN_URL = getAffUrl("omioShinkansen");
-export const OMIO_TOKYO_KYOTO_URL = getAffUrl("omioTokyoKyoto");
-export const OMIO_TOKYO_OSAKA_URL = getAffUrl("omioTokyoOsaka");
-export const OMIO_JAPAN_RAIL_PASS_URL = getAffUrl("omioJapanRailPass");
-export const OMIO_JAPAN_TRAIN_URL = getAffUrl("omioJapanTrain");
-export const OMIO_JAPAN_BUS_URL = getAffUrl("omioJapanBus");
+/**
+ * One affiliate programme, decided 2026-09-29 — see lib/hotel-links.ts for the
+ * six-month numbers behind it. Omio took 15 clicks and returned nothing, and
+ * every CTA that used these already renders nothing when the URL is null, so
+ * withdrawing them here removes the links without touching a page. The entries
+ * stay in data/affiliate-links.json; flipping KLOOK_ONLY brings them back.
+ */
+const KLOOK_ONLY = true;
+/** Omio URL, or null while the site runs on Klook alone. */
+export const getOmioUrl = (linkId: string) => (KLOOK_ONLY ? null : getAffUrl(linkId));
+const omio = getOmioUrl;
+
+export const OMIO_SHINKANSEN_URL = omio("omioShinkansen");
+export const OMIO_TOKYO_KYOTO_URL = omio("omioTokyoKyoto");
+export const OMIO_TOKYO_OSAKA_URL = omio("omioTokyoOsaka");
+export const OMIO_JAPAN_RAIL_PASS_URL = omio("omioJapanRailPass");
+export const OMIO_JAPAN_TRAIN_URL = omio("omioJapanTrain");
+export const OMIO_JAPAN_BUS_URL = omio("omioJapanBus");

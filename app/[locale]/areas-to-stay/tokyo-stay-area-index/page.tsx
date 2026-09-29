@@ -23,7 +23,7 @@ import signalsJson from "@/data/generated/tokyo-stay-area-signals.json";
 import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import sourceStatusJson from "@/data/generated/tokyo-stay-area-source-status.json";
 import { tokyoStayAreaSourceRegistry } from "@/data/stay-area/source-registry";
-import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelPickLinkConfig } from "@/lib/hotel-pick-links";
 import { getHotelProviderLinks, type HotelAffiliatePlacement } from "@/lib/hotel-affiliate-links";
 import { getTranslations } from "next-intl/server";
@@ -164,9 +164,8 @@ function hotelSearchForArea(area: StayAreaBase, locale: string, placement: Hotel
     | null = null;
   if (tripHotelKey) {
     const hotel = getHotelLink(tripHotelKey);
-    const config = getTripHotelConfig(tripHotelKey);
-    const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl.trim();
-    const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl.trim();
+    const tripHref = hotel.href;
+    const tripTrackingHref = hotel.trackingHref;
     if (tripHref && tripHref !== "#") {
       tripLink = {
         provider: "trip" as ProviderId,

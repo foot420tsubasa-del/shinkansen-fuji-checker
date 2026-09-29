@@ -9,7 +9,7 @@ import { HotelBaseNextStep } from "@/components/content/HotelBaseNextStep";
 import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
-import { getAffUrl } from "@/src/affiliateLinks";
+import { getAffUrl, getOmioUrl } from "@/src/affiliateLinks";
 import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -57,8 +57,8 @@ const jrPass = getAffUrl("jrPass");
 const esim = getAffUrl("esim");
 const airportTransfer = getAffUrl("airportTransfer");
 const insurance = getAffUrl("insurance");
-const omioJapanTrain = getAffUrl("omioJapanTrain");
-const omioRouteCompare = omioJapanTrain ?? getAffUrl("omioShinkansen");
+const omioJapanTrain = getOmioUrl("omioJapanTrain");
+const omioRouteCompare = omioJapanTrain ?? getOmioUrl("omioShinkansen");
 const omioRouteCompareLinkId = omioJapanTrain ? "omioJapanTrain" : "omioShinkansen";
 
 function providerChoices(...providers: Array<ProviderChoiceButton | null | undefined>) {
@@ -165,10 +165,11 @@ const HOTEL_AREA_KEY_TO_AREA_ID: Partial<Record<HotelAreaKey, string>> = {
 };
 
 function hotelProviderChoicesForKey(hotelKey: HotelAreaKey, locale: string) {
+  // One affiliate programme (see lib/hotel-links.ts): getHotelLink resolves to
+  // Klook, so the card carries that rather than a Trip.com wordmark over a
+  // Klook link.
   const hotel = getHotelLink(hotelKey);
-  const config = getTripHotelConfig(hotelKey);
-  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
-  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
+  const hotelHref = hotel.href && hotel.href !== "#" ? hotel.href : null;
 
   const areaId = HOTEL_AREA_KEY_TO_AREA_ID[hotelKey];
   const bookingLink = areaId
@@ -176,14 +177,14 @@ function hotelProviderChoicesForKey(hotelKey: HotelAreaKey, locale: string) {
     : undefined;
 
   return providerChoices(
-    tripHref
+    hotelHref
       ? {
-          label: "Trip.com",
-          href: tripHref,
-          trackingHref: tripTrackingHref,
-          provider: "trip",
+          label: hotel.label,
+          href: hotelHref,
+          trackingHref: hotel.trackingHref,
+          provider: "klook",
           product: "hotel",
-          linkId: `hotelArea.${hotelKey}.trip`,
+          linkId: hotel.fallbackLinkId,
           placement: "plan_trip_hotel_cards",
           variant: "primary",
           category: "hotel",

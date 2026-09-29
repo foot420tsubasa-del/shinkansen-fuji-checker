@@ -8,7 +8,7 @@ import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affil
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { getAlternates } from "@/i18n/hreflang";
-import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { SiteHeader } from "../../components/SiteHeader";
 
 type Props = {
@@ -336,9 +336,8 @@ function providerChoices(...providers: Array<ProviderChoiceButton | null | undef
 
 function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"]) {
   const hotel = getHotelLink(areaKey);
-  const config = getTripHotelConfig(areaKey);
-  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
-  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
+  const tripHref = hotel.href;
+  const tripTrackingHref = hotel.trackingHref;
 
   return providerChoices(
     tripHref

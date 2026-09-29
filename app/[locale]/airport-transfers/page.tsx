@@ -18,7 +18,7 @@ import { Rail3dEmbed } from "@/components/rail3d/Rail3dEmbed";
 import { ESIM_URL } from "@/src/affiliateLinks";
 import { getAirportTransferHubImage, getAirportTransferRouteImage } from "@/lib/airport-transfer-images";
 import { getAirportTransferHubCopy, localizedRouteTitle } from "@/lib/content/airport-transfer-i18n";
-import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 
 type Props = {
@@ -82,9 +82,8 @@ const bookingAreaIdByHotelAreaKey: Partial<Record<HotelAreaKey, string>> = {
 
 function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"], locale: string) {
   const hotel = getHotelLink(areaKey);
-  const config = getTripHotelConfig(areaKey);
-  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
-  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
+  const tripHref = hotel.href;
+  const tripTrackingHref = hotel.trackingHref;
   const bookingAreaId = bookingAreaIdByHotelAreaKey[areaKey];
   const bookingLinks = bookingAreaId
     ? getHotelProviderLinks({ areaId: bookingAreaId, locale, placement: "airport_page_first_night_cta" }).map((link) => ({

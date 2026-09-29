@@ -14,7 +14,7 @@ import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { Link } from "@/i18n/navigation";
 import { getAlternates } from "@/i18n/hreflang";
 import { getTranslations } from "next-intl/server";
-import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { getAllHotelPickLinkConfigs } from "@/lib/hotel-pick-links";
 import type { StayAreaMapKey } from "@/lib/stay-area-maps";
 import { buttonClassName } from "@/components/ui/Button";
@@ -188,9 +188,8 @@ function providerChoices(...providers: Array<ProviderChoiceButton | null | undef
 
 function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"]) {
   const hotel = getHotelLink(areaKey);
-  const config = getTripHotelConfig(areaKey);
-  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
-  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
+  const tripHref = hotel.href;
+  const tripTrackingHref = hotel.trackingHref;
 
   return providerChoices(
     tripHref

@@ -1762,8 +1762,10 @@ function AreaSupportHotelLink({
      via the Finder); the secondary text link opens the in-site area guide. */
   const link = areaSupportLinkForHotelKey(areaKey, areaId);
   const hotel = areaKey ? getHotelLink(areaKey) : null;
-  const bookingHref =
-    hotel && hotel.provider === "trip" && hotel.href && hotel.href !== "#" ? hotel.href : null;
+  // Gate on having a usable link, not on which programme issued it — pinning
+  // this to "trip" silently removed every area CTA the moment the site moved
+  // to Klook alone.
+  const bookingHref = hotel && hotel.href && hotel.href !== "#" ? hotel.href : null;
   const placement = sourcePage.includes("before-shinkansen")
     ? ("before_shinkansen_area_card" as const)
     : ("comparison_area_card" as const);
@@ -1801,7 +1803,7 @@ function AreaSupportHotelLink({
           target="_blank"
           rel={AFFILIATE_REL}
           category="hotel"
-          provider="trip"
+          provider="klook"
           product="hotel"
           placement={placement}
           pageType="hotel_comparison"
@@ -2945,7 +2947,11 @@ export default async function StayPage({ params }: Props) {
             area={page.quickRec.area}
             why={page.quickRec.why}
             link={quickRecBooking?.href ?? page.quickRec.link}
-            provider={quickRecBooking ? "booking_travelpayouts" : "trip"}
+            /* The provider must follow the link, not the layout: with the site
+               on Klook alone, quickRec.link resolves to a Klook URL and calling
+               it "Trip.com" would both mislabel the button and file the click
+               under the wrong programme in GA4. */
+            provider={quickRecBooking ? "booking_travelpayouts" : "klook"}
             locale={locale}
             pagePath={pagePath}
             placement="comparison_quick_recommendation"

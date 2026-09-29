@@ -83,6 +83,9 @@ function ProviderMark({ provider }: { provider: ProviderId }) {
   );
 }
 
+/** @see lib/hotel-links.ts */
+const KLOOK_ONLY = true;
+
 export function ProviderButton({
   provider,
   href,
@@ -105,6 +108,13 @@ export function ProviderButton({
   fullWidth = true,
   className = "",
 }: ProviderButtonProps) {
+  // One affiliate programme, 2026-09-29 (see lib/hotel-links.ts). This button
+  // exists to wear a provider's brand, so while the site runs on Klook alone
+  // there is nothing for it to say: a Booking.com or Trip.com wordmark over a
+  // Klook link would mislabel the destination and file the click wrongly.
+  // ProviderId covers only the non-Klook brands, so this hides all of them.
+  if (KLOOK_ONLY) return null;
+
   const analyticsHref = trackingHref ?? href;
   const analyticsLabel = typeof children === "string" ? children : provider;
 

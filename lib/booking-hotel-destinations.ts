@@ -25,7 +25,16 @@ export function getBookingHotelDestination(destinationRef: string) {
   return bookingHotelDestinations[ref] ?? null;
 }
 
+/**
+ * One affiliate programme, 2026-09-29 — see lib/hotel-links.ts. Booking.com
+ * took 12 clicks in six months and returned nothing. Every CTA asks this
+ * question before rendering, so answering "no" withdraws them all without
+ * touching a page, and data/booking-hotel-destinations.json is left intact.
+ */
+const KLOOK_ONLY = true;
+
 export function isActiveBookingHotelDestination(destination: BookingHotelDestinationConfig | null) {
+  if (KLOOK_ONLY) return false;
   return Boolean(destination && destination.url_status === "active" && destination.affiliate_url.trim());
 }
 

@@ -367,3 +367,66 @@ Search Console 2026-04-01〜09-26（英語URL）: 121ページで2,768クリッ�
 `lint` 既知の警告1件のみ / `build` 788ページ成功 / `check:translations` 32件（増減なし）。
 
 実施日: **2026-09-29**
+
+---
+
+# 追記: Klook 1社への統合（2026-09-29 実施）
+
+## 根拠
+
+6ヶ月・5社の実績:
+
+| プログラム | クリック | 報酬 |
+|---|--:|--:|
+| **Klook** | 152+ | **約 ¥9,000（サイトの全収益）** |
+| Omio | 15 | ¥0 |
+| Booking.com | 12 | ¥0 |
+| Trip.com | 11 | ¥0 |
+| Agoda | 5 | ¥0 |
+
+加えて**支払い閾値の問題**がある。Klookは$150到達で初めて振り込まれる。
+収益を5社に分散させると、どの口座も閾値に届かないまま滞留する。
+1社に集約すれば、全ての収益が1つの閾値に向かって積み上がる。
+
+## 方式 — 各所に `KLOOK_ONLY` フラグ、データは無傷
+
+| ファイル | 効果 |
+|---|---|
+| `lib/hotel-links.ts` | `getHotelLink()` が常にKlookを返す。Agodaは null |
+| `lib/booking-hotel-destinations.ts` | `isActiveBookingHotelDestination()` が false |
+| `src/affiliateLinks.ts` | `OMIO_*_URL` と `getOmioUrl()` が null |
+| `components/ui/ProviderButton.tsx` | 他社ブランドのボタンは描画しない |
+
+`data/*.json`（hotel-links / booking-hotel-destinations / affiliate-links）は
+1行も削っていない。**各フラグを false にすれば全て戻る。**
+
+## 途中で見つけた不具合（修正済み）
+
+1. **Klookリンクに「Trip.com」のバッジ** — QuickRec とエリアCTAが provider を
+   ハードコードしていた。表示と遷移先が食い違い、GA4も誤ったプログラムに記録していた。
+   実リンクに合わせて `provider="klook"` に修正。
+2. **比較ページのエリアCTAが全部消えた** — `AreaSupportHotelLink` が
+   `hotel.provider === "trip"` を条件にしていたため、Klook化した瞬間に何も描画されなくなった。
+   リンクの有無で判定するよう修正。**検知できたのはブラウザで実見したからで、型チェックは通っていた。**
+
+## 検証
+
+| ページ | アフィリエイト | 他社ブランドの露出 |
+|---|---|---|
+| `/` | Klook 2本 | なし |
+| `/guide` | Klook 13本 | なし |
+| `/areas-to-stay/asakusa-vs-ueno` | Klook 3本 | なし |
+| `/areas-to-stay/ueno-vs-shinjuku` | Klook 1本 | なし |
+| `/plan-your-trip` | Klook 14本 | なし |
+
+ガードレール: `tsc` クリーン / `test:funnel` 22件全通過 / `lint` 既知の警告1件のみ /
+`build` 788ページ / `check:translations` 32件（増減なし）。
+
+## 積み残し
+
+`/areas-to-stay/tokyo-stay-area-index`（Hotel Finder・退役済み）は
+他社ボタンが消えた結果、**予約リンクが1本も無い状態**になった。
+本文に「Booking.com」「Trip.com」の説明文も残っている。
+退役済みで6ヶ月3クリックのページだが、体験としては中途半端。要対応。
+
+実施日: **2026-09-29**
