@@ -68,7 +68,7 @@ const commonNextActions: TripPick[] = [
   { id: "jr-pass", category: "train", title: "JR Pass fit guide", description: "Check whether your route has enough long-distance JR rides before buying.", cta: "Read guide", href: "/jr-pass-vs-single-ticket" },
   { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Set up data before landing — maps, translate, transit apps.", cta: "Get eSIM", href: esimUrl },
   { id: "transfer", category: "transfer", title: "Airport transfer", description: "Plan your Narita/Haneda to city route.", cta: "Compare options", href: "/airport-transfers/narita-to-shinjuku" },
-  { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare Shinjuku, Ueno, Asakusa for your base.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
+  { id: "stay-tokyo", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
 ];
 
 // ─── Page Data ──────────────────────────────────────────────────────────────
@@ -596,9 +596,7 @@ export const itineraryPages: ItineraryPage[] = [
     ],
     proTip: "With 10 days on a Tokyo → Kyoto → Osaka route, a JR Pass usually does not pay off unless you add Hiroshima or return to Tokyo by Shinkansen. Single Shinkansen tickets are simpler. Spend the saved complexity on enjoying the extra days.",
     nextActions: [
-      { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare Shinjuku, Ueno, Asakusa, Tokyo Station.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
-      { id: "stay-kyoto", category: "stay", title: "Where to stay in Kyoto", description: "Kyoto Station vs Gion vs Kawaramachi.", cta: "Compare areas", href: "/areas-to-stay/kyoto-first-time" },
-      { id: "stay-osaka", category: "stay", title: "Where to stay in Osaka", description: "Namba, Umeda, or Shin-Osaka — which base?", cta: "Compare areas", href: "/areas-to-stay/osaka-first-time" },
+      { id: "stay-tokyo", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
       { id: "seat", category: "train", title: "Check Fuji-side seat", description: "Find the right window seat for Mt. Fuji views.", cta: "Check seat", href: "/tokyo-to-kyoto-mt-fuji-seat" },
       { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Set up data before landing.", cta: "Get eSIM", href: esimUrl },
       { id: "local-tokyo", category: "experience", title: "Explore Local Tokyo", description: "Kiyosumi-Shirakawa, Kuramae, Oshiage and more.", cta: "See neighbourhoods", href: "/local-tokyo" },
@@ -764,9 +762,7 @@ export const itineraryPages: ItineraryPage[] = [
     ],
     proTip: "14 days on the golden route gives you flexibility most itineraries don't have. Use it: skip a temple if you're tired, spend an extra evening in Dotonbori, or add the Hiroshima day trip. A JR Pass may be worth it if you do the Hiroshima round trip — otherwise single tickets are usually simpler.",
     nextActions: [
-      { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare Shinjuku, Ueno, Asakusa, Tokyo Station.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
-      { id: "stay-kyoto", category: "stay", title: "Where to stay in Kyoto", description: "Kyoto Station vs Gion vs Kawaramachi.", cta: "Compare areas", href: "/areas-to-stay/kyoto-first-time" },
-      { id: "stay-osaka", category: "stay", title: "Where to stay in Osaka", description: "Namba, Umeda, or Shin-Osaka — which base?", cta: "Compare areas", href: "/areas-to-stay/osaka-first-time" },
+      { id: "stay-tokyo", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
       { id: "seat", category: "train", title: "Check Fuji-side seat", description: "Find the right window seat for Mt. Fuji views.", cta: "Check seat", href: "/tokyo-to-kyoto-mt-fuji-seat" },
       { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Set up data before landing.", cta: "Get eSIM", href: esimUrl },
       { id: "local-tokyo", category: "experience", title: "Explore Local Tokyo", description: "Kiyosumi-Shirakawa, Kuramae, Oshiage and more.", cta: "See neighbourhoods", href: "/local-tokyo" },
@@ -863,10 +859,7 @@ export const itineraryPages: ItineraryPage[] = [
     ],
     proTip: "For the basic Tokyo → Kyoto → Osaka route, a single Tokyo → Kyoto Shinkansen ticket is usually around ¥13,000–14,000 one-way, while a 7-day JR Pass is usually around ¥50,000. Unless you're adding Hiroshima, multiple long-distance rides, or returning to Tokyo by Shinkansen, the pass often doesn't pay off. Keep it simple: buy tickets at the station or book online.",
     nextActions: [
-      { id: "stay-before-shinkansen", category: "stay", title: "Where to stay before the Shinkansen", description: "Choose between Tokyo Station, Shinjuku, and Ueno.", cta: "Compare areas", href: "/areas-to-stay/where-to-stay-before-shinkansen" },
       { id: "seat", category: "train", title: "Check Fuji-side seat", description: "Which window seat faces Mt. Fuji.", cta: "Check seat", href: "/tokyo-to-kyoto-mt-fuji-seat" },
-      { id: "stay-kyoto", category: "stay", title: "Where to stay in Kyoto", description: "Station area vs Gion vs Kawaramachi.", cta: "Compare areas", href: "/areas-to-stay/kyoto-first-time" },
-      { id: "stay-osaka", category: "stay", title: "Where to stay in Osaka", description: "Namba, Umeda, Shin-Osaka — which base?", cta: "Compare areas", href: "/areas-to-stay/osaka-first-time" },
       { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Maps, translate, transit apps from landing.", cta: "Get eSIM", href: esimUrl },
       { id: "transfer", category: "transfer", title: "Airport transfer", description: "Compare Narita/Haneda to city options.", cta: "Compare options", href: "/airport-transfers" },
     ],

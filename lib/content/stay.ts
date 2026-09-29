@@ -294,7 +294,6 @@ const rawStayPages: StayPage[] = [
     ],
     nextActions: [
       { id: "kyoto-before-shinkansen", category: "stay", title: "Before an early Shinkansen from Kyoto", description: "Which station side to sleep on for a stress-free departure.", cta: "See departure bases", href: "/areas-to-stay/kyoto-before-shinkansen" },
-      { id: "kyoto-first-time", category: "stay", title: "Full Kyoto stay guide", description: "Compare all three Kyoto areas including Kawaramachi.", cta: "See full guide", href: "/areas-to-stay/kyoto-first-time" },
       { id: "airport-kansai-kyoto", category: "transfer", title: "Kansai Airport → Kyoto", description: "Haruka express, bus, and transfer options.", cta: "See routes", href: "/airport-transfers#kansai-airport-routes" },
       { id: "airport-kyoto-kansai", category: "transfer", title: "Kyoto → Kansai Airport", description: "Departure-day routes from Kyoto to KIX.", cta: "See routes", href: "/airport-transfers#kansai-airport-routes" },
       { id: "seat", category: "train", title: "Check Fuji-side seat", description: "Find the right window seat for Mt. Fuji views.", cta: "Check seat", href: "/guide" },
@@ -355,7 +354,7 @@ const rawStayPages: StayPage[] = [
     ],
     nextActions: [
       { id: "itinerary-fuji", category: "experience", title: "Tokyo to Fuji day trip", description: "Plan a 1-day Kawaguchiko itinerary from Tokyo.", cta: "See itinerary", href: "/itineraries/tokyo-to-fuji-1day" },
-      { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare Shinjuku, Ueno, Asakusa for your Tokyo base.", cta: "See Tokyo areas", href: "/areas-to-stay/tokyo-first-time" },
+      { id: "stay-tokyo", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
       ...commonNextActions,
     ],
   },
@@ -506,7 +505,7 @@ const rawStayPages: StayPage[] = [
       { name: "Tokyu Stay Shinjuku Eastside", area: "Shinjuku", price: "Check latest price", link: hotelShinjuku.href, hotelKey: "shinjuku", tag: "Value" },
     ],
     nextActions: [
-      { id: "stay-tokyo", category: "stay", title: "Full Tokyo area guide", description: "Compare all four major Tokyo bases.", cta: "See all areas", href: "/areas-to-stay/tokyo-first-time" },
+      { id: "stay-tokyo", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
       { id: "compare-ueno-shinjuku", category: "stay", title: "Ueno vs Shinjuku", description: "Budget rail-hub vs nightlife-and-transport hub.", cta: "Compare areas", href: "/areas-to-stay/ueno-vs-shinjuku" },
       { id: "compare-asakusa-ueno", category: "stay", title: "Asakusa vs Ueno", description: "Old-town atmosphere vs Narita access.", cta: "Compare areas", href: "/areas-to-stay/asakusa-vs-ueno" },
       { id: "shinkansen-seat", category: "train", title: "Check Fuji-side seat", description: "Find the Mt. Fuji window seat for your route.", cta: "Check seat", href: "/guide" },
@@ -567,7 +566,7 @@ const rawStayPages: StayPage[] = [
     ],
     nextActions: [
       { id: "transfer-narita", category: "transfer", title: "Narita to Ueno or Shinjuku", description: "Compare Skyliner, N'EX and bus options.", cta: "Compare transfers", href: "/airport-transfers/narita-to-ueno" },
-      { id: "stay-full", category: "stay", title: "Full Tokyo area guide", description: "Add Asakusa and Tokyo Station to the comparison.", cta: "See all areas", href: "/areas-to-stay/tokyo-first-time" },
+      { id: "stay-full", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
       { id: "compare-asakusa-ueno", category: "stay", title: "Asakusa vs Ueno", description: "If you're torn between the two east-side bases.", cta: "Compare areas", href: "/areas-to-stay/asakusa-vs-ueno" },
       { id: "compare-tokyo-station-shinjuku", category: "stay", title: "Tokyo Station vs Shinjuku", description: "Shinkansen-side vs west-side transport hub.", cta: "Compare areas", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
       { id: "itinerary", category: "experience", title: "7-day Japan itinerary", description: "Place Tokyo, Fuji, Kyoto and Osaka in order.", cta: "View itinerary", href: "/itineraries/7-day-first-time-japan" },
@@ -637,7 +636,7 @@ const rawStayPages: StayPage[] = [
     ],
     nextActions: [
       { id: "shinkansen-seat", category: "train", title: "Check Fuji-side seat", description: "Tokyo → Kyoto: Seat E for Mt. Fuji views.", cta: "Check seat", href: "/guide" },
-      { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Sort your Tokyo base before heading to Kyoto.", cta: "See Tokyo areas", href: "/areas-to-stay/tokyo-first-time" },
+      { id: "stay-tokyo", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
       { id: "airport-kansai-kyoto", category: "transfer", title: "Kansai Airport → Kyoto", description: "Haruka express, bus, and private transfer options.", cta: "See routes", href: "/airport-transfers#kansai-airport-routes" },
       { id: "itinerary", category: "experience", title: "7-day Japan itinerary", description: "Place Tokyo and Kyoto in a first-time route.", cta: "View itinerary", href: "/itineraries/7-day-first-time-japan" },
       ...commonNextActions,
@@ -706,7 +705,6 @@ const rawStayPages: StayPage[] = [
     ],
     nextActions: [
       { id: "shinkansen-seat", category: "train", title: "Check Fuji-side seat", description: "Find the Mt. Fuji window seat for Tokyo → Osaka.", cta: "Check seat", href: "/guide" },
-      { id: "stay-kyoto", category: "stay", title: "Where to stay in Kyoto", description: "Compare Kyoto Station vs Gion for your Kyoto nights.", cta: "See Kyoto areas", href: "/areas-to-stay/kyoto-first-time" },
       { id: "airport-kansai-namba", category: "transfer", title: "Kansai Airport → Namba", description: "Nankai Rapi:t, bus, and transfer options to Namba.", cta: "See routes", href: "/airport-transfers#kansai-airport-routes" },
       { id: "airport-kansai-umeda", category: "transfer", title: "Kansai Airport → Umeda", description: "JR, bus, and transfer options to Umeda / Osaka Station.", cta: "See routes", href: "/airport-transfers#kansai-airport-routes" },
       { id: "airport-osaka-kansai", category: "transfer", title: "Osaka → Kansai Airport", description: "Departure-day routes from Osaka to KIX.", cta: "See routes", href: "/airport-transfers#kansai-airport-routes" },
@@ -768,7 +766,6 @@ const rawStayPages: StayPage[] = [
       { name: "Hotel Hankyu International", area: "Umeda", price: "Check latest price", link: hotelUmeda.href, hotelKey: "umeda" },
     ],
     nextActions: [
-      { id: "osaka-first-time", category: "stay", title: "Full Osaka stay guide", description: "Compare Namba, Umeda, and Shin-Osaka.", cta: "See full guide", href: "/areas-to-stay/osaka-first-time" },
       { id: "airport-kansai-namba", category: "transfer", title: "Kansai Airport → Namba", description: "Nankai Rapi:t, bus, and transfer options.", cta: "See routes", href: "/airport-transfers#kansai-airport-routes" },
       { id: "airport-kansai-umeda", category: "transfer", title: "Kansai Airport → Umeda", description: "JR, bus, and transfer options to Umeda.", cta: "See routes", href: "/airport-transfers#kansai-airport-routes" },
       { id: "airport-osaka-kansai", category: "transfer", title: "Osaka → Kansai Airport", description: "Departure-day routes from Osaka to KIX.", cta: "See routes", href: "/airport-transfers#kansai-airport-routes" },
@@ -837,8 +834,6 @@ const rawStayPages: StayPage[] = [
     ],
     nextActions: [
       { id: "osaka-before-shinkansen", category: "stay", title: "Before an early Shinkansen from Osaka", description: "Shin-Osaka vs Umeda vs Namba for departure morning.", cta: "See departure bases", href: "/areas-to-stay/osaka-before-shinkansen" },
-      { id: "osaka-first-time", category: "stay", title: "Full Osaka stay guide", description: "Compare Namba, Umeda, and Shin-Osaka.", cta: "See full guide", href: "/areas-to-stay/osaka-first-time" },
-      { id: "namba-vs-umeda", category: "stay", title: "Namba vs Umeda", description: "Compare the two main sightseeing bases in Osaka.", cta: "Compare", href: "/areas-to-stay/namba-vs-umeda" },
       { id: "airport-osaka-kansai", category: "transfer", title: "Osaka → Kansai Airport", description: "Departure-day routes from Osaka to KIX.", cta: "See routes", href: "/airport-transfers#kansai-airport-routes" },
       { id: "seat", category: "train", title: "Check Fuji-side seat", description: "Find the right window seat for Mt. Fuji views.", cta: "Check seat", href: "/guide" },
       { id: "itinerary", category: "itinerary", title: "No-JR-Pass itinerary", description: "Tokyo → Kyoto → Osaka without a JR Pass.", cta: "View itinerary", href: "/itineraries/tokyo-kyoto-osaka-without-jr-pass" },
@@ -924,7 +919,7 @@ const rawStayPages: StayPage[] = [
       { name: "Nohga Hotel Ueno Tokyo", area: "Ueno", price: "Check latest price", link: hotelUeno.href, hotelKey: "ueno", tag: "Budget" },
     ],
     nextActions: [
-      { id: "tokyo-first-time", category: "stay", title: "Full Tokyo stay guide", description: "Compare Shinjuku, Ueno, Asakusa, and Tokyo Station.", cta: "See full guide", href: "/areas-to-stay/tokyo-first-time" },
+      { id: "tokyo-first-time", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
       { id: "seat", category: "train", title: "Check Fuji-side seat", description: "Tokyo → Kyoto: find the right window seat for Mt. Fuji.", cta: "Check seat", href: "/tokyo-to-kyoto-mt-fuji-seat" },
       { id: "ticket", category: "train", title: "Shinkansen ticket guide", description: "How to book Tokyo → Kyoto Shinkansen tickets.", cta: "Read guide", href: "/tokyo-to-kyoto-shinkansen-ticket" },
       { id: "itinerary", category: "itinerary", title: "7-day Japan itinerary", description: "Place your Shinkansen day in a full Japan route.", cta: "View itinerary", href: "/itineraries/7-day-first-time-japan" },
@@ -1018,7 +1013,7 @@ const rawStayPages: StayPage[] = [
       { name: "MIMARU Tokyo Ueno", area: "Ueno", price: "Check latest price", link: hotelUeno.href, hotelKey: "ueno", tag: "Family" },
     ],
     nextActions: [
-      { id: "tokyo-first-time", category: "stay", title: "Full Tokyo stay guide", description: "Compare Shinjuku, Ueno, Asakusa, and Tokyo Station.", cta: "See full guide", href: "/areas-to-stay/tokyo-first-time" },
+      { id: "tokyo-first-time", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
       { id: "narita-asakusa", category: "transfer", title: "Narita → Asakusa", description: "Access Express and other routes from Narita.", cta: "See routes", href: "/airport-transfers/narita-to-asakusa" },
       { id: "narita-ueno", category: "transfer", title: "Narita → Ueno", description: "Skyliner and other routes from Narita.", cta: "See routes", href: "/airport-transfers/narita-to-ueno" },
       { id: "local-oshiage", category: "experience", title: "Explore Oshiage / Skytree area", description: "One stop from Asakusa — local food and Skytree.", cta: "See guide", href: "/local-tokyo/oshiage" },
@@ -1054,7 +1049,6 @@ const rawStayPages: StayPage[] = [
     proTip: "Pick Kyoto Station for logistics, Kawaramachi / Shijo for central food and shopping, and Gion / Higashiyama for atmosphere.",
     hotelPicks: [],
     nextActions: [
-      { id: "kyoto-station-vs-gion", category: "stay", title: "Kyoto Station vs Gion", description: "Compare the main Kyoto first-time tradeoff.", cta: "Read guide", href: "/areas-to-stay/kyoto-station-vs-gion" },
       { id: "plan-trip", category: "itinerary", title: "Plan Your Trip", description: "Place Kyoto inside the full Japan route.", cta: "Plan trip", href: "/plan-your-trip" },
     ],
   },
@@ -1073,8 +1067,6 @@ const rawStayPages: StayPage[] = [
     proTip: "Pick Namba for food and nightlife, Umeda for rail connections, and Shin-Osaka only when the Shinkansen is the main priority.",
     hotelPicks: [],
     nextActions: [
-      { id: "namba-vs-umeda", category: "stay", title: "Namba vs Umeda", description: "Compare Osaka's two most useful first-time bases.", cta: "Read guide", href: "/areas-to-stay/namba-vs-umeda" },
-      { id: "shin-osaka-vs-namba", category: "stay", title: "Shin-Osaka vs Namba", description: "Decide whether Shinkansen logistics should drive your Osaka base.", cta: "Read guide", href: "/areas-to-stay/shin-osaka-vs-namba" },
     ],
   },
   {
@@ -1137,7 +1129,6 @@ const rawStayPages: StayPage[] = [
     ],
     nextActions: [
       { id: "seat", category: "train", title: "Pick the Mt. Fuji-side seat", description: "Kyoto → Tokyo: left side, Seat E. Check your exact window.", cta: "Check seat", href: "/kyoto-to-tokyo-mt-fuji-seat" },
-      { id: "kyoto-vs", category: "stay", title: "Kyoto Station vs Gion", description: "The full comparison for your non-departure nights.", cta: "Compare areas", href: "/areas-to-stay/kyoto-station-vs-gion" },
       ...commonNextActions,
     ],
     faqs: [
@@ -1206,7 +1197,6 @@ const rawStayPages: StayPage[] = [
     ],
     nextActions: [
       { id: "seat", category: "train", title: "Pick the Mt. Fuji-side seat", description: "Osaka → Tokyo: left side, Seat E. The view comes ~85–95 min in.", cta: "Check seat", href: "/osaka-to-tokyo-mt-fuji-seat" },
-      { id: "osaka-vs", category: "stay", title: "Shin-Osaka vs Namba", description: "The full comparison for your non-departure nights.", cta: "Compare areas", href: "/areas-to-stay/shin-osaka-vs-namba" },
       ...commonNextActions,
     ],
     faqs: [

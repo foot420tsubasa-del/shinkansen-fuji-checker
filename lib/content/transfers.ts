@@ -53,7 +53,7 @@ const hotelUeno = getHotelLink("ueno");
 
 const commonNextActions: TripPick[] = [
   { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Set up data before landing — maps, translate, transit apps.", cta: "Get eSIM", href: esimUrl },
-  { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare Shinjuku, Ueno, Asakusa for your base.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
+  { id: "stay-tokyo", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
 ];
 
 function arrivalBundle(stayAction: TripPick): TripPick[] {
@@ -115,7 +115,7 @@ export const transferPages: TransferPage[] = [
     lateArrivalNote: "Flight landing after 21:00? The Limousine Bus and Keisei Access Express run later than N'EX. If you land after 23:00, budget around ¥20,000–25,000 for a taxi, depending on time, traffic, and destination, or book an airport hotel for the night.",
     proTip: "If you have 2+ large suitcases, the Limousine Bus is the least stressful option. N'EX is fast but Shinjuku Station is enormous — navigating to your exit with heavy luggage is the hidden cost.",
     nextActions: [
-      { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare Shinjuku, Ueno, Asakusa for your base.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
+      { id: "stay-tokyo", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
       ...commonNextActions.filter(a => a.id !== "stay-tokyo"),
     ],
   },
@@ -192,7 +192,7 @@ export const transferPages: TransferPage[] = [
     ],
     nextActions: [
       { id: "jr-pass", category: "train", title: "JR Pass fit guide", description: "Check whether your route has enough long-distance JR rides before buying.", cta: "Read guide", href: "/jr-pass-vs-single-ticket" },
-      { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Compare areas by Shinkansen access.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
+      { id: "stay-tokyo", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
       ...commonNextActions.filter(a => a.id !== "stay-tokyo"),
     ],
   },
@@ -570,7 +570,7 @@ export const transferPages: TransferPage[] = [
       { id: "transfer", category: "transfer", title: "Book airport transfer", description: "Pre-book a private transfer as late-night backup.", cta: "Book transfer", href: airportTransferUrl },
       { id: "narita-shinjuku", category: "transfer", title: "Narita to Shinjuku options", description: "Full comparison if Shinjuku is your destination.", cta: "See options", href: "/airport-transfers/narita-to-shinjuku" },
       { id: "narita-asakusa", category: "transfer", title: "Narita to Asakusa options", description: "Direct Access Express route to East Tokyo.", cta: "See options", href: "/airport-transfers/narita-to-asakusa" },
-      { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Pick a base that's easy to reach late at night.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
+      { id: "stay-tokyo", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
     ],
   },
   {
@@ -623,7 +623,7 @@ export const transferPages: TransferPage[] = [
       { id: "transfer", category: "transfer", title: "Book airport transfer", description: "Pre-book a private transfer for peace of mind.", cta: "Book transfer", href: airportTransferUrl },
       { id: "haneda-shinjuku", category: "transfer", title: "Haneda to Shinjuku options", description: "Full comparison for the most popular late-night destination.", cta: "See options", href: "/airport-transfers/haneda-to-shinjuku" },
       { id: "haneda-asakusa", category: "transfer", title: "Haneda to Asakusa options", description: "Direct Keikyu through-service to East Tokyo.", cta: "See options", href: "/airport-transfers/haneda-to-asakusa" },
-      { id: "stay-tokyo", category: "stay", title: "Where to stay in Tokyo", description: "Choose your hotel area based on late-night access.", cta: "Compare areas", href: "/areas-to-stay/tokyo-first-time" },
+      { id: "stay-tokyo", category: "stay", title: "All Tokyo area comparisons", description: "Ueno, Asakusa, Shinjuku and Tokyo Station, scored side by side.", cta: "See all areas", href: "/areas-to-stay" },
     ],
   },
 

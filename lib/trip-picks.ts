@@ -60,7 +60,7 @@ export const starterTripPicks: TripPick[] = [
     title: "Tokyo stay",
     description: "Use Shinjuku, Ueno, or Tokyo Station as your base.",
     cta: "Compare areas",
-    href: "/areas-to-stay/tokyo-first-time",
+    href: "/areas-to-stay",
   },
   {
     id: "insurance",
@@ -90,7 +90,7 @@ export const homeDecisionModules: DecisionModule[] = [
     title: "Tokyo base decision",
     description: "Shinjuku, Ueno, Asakusa, or Tokyo Station.",
     tradeoff: "Balance nightlife, airport access, and luggage ease.",
-    href: "/areas-to-stay/tokyo-first-time",
+    href: "/areas-to-stay",
     cta: "Compare Tokyo bases",
   },
   {
