@@ -5515,6 +5515,23 @@
     "better": "Leaving at '{time}' instead would put you under a clearer sky.",
     "slowerTrains": "Timing is for a Nozomi. Hikari and Kodama run slower, so allow a little longer.",
     "book": "Check Shinkansen tickets on Klook",
-    "updated": "Forecast from open-meteo.com, refreshed hourly."
+    "updated": "Forecast from open-meteo.com, refreshed hourly.",
+    "cloudyAlt": "Clouded in on that run? Mt. Fuji is often still out at ground level near Kawaguchiko, where a day trip gets you close enough to see it without the window.",
+    "tourCta": "See Mt Fuji day tours on Klook"
+  },
+  "areaScores": {
+    "title": "Scored side by side",
+    "intro": "Our own scores for the things that decide a hotel base, from 0 to 100. Calm is scored so that a higher number means a quieter street; the rest read as you would expect.",
+    "best": "best",
+    "labels": {
+      "airportAccess": "Airport access",
+      "shinkansenAccess": "Shinkansen access",
+      "luggageFriendly": "Luggage ease",
+      "stationSimplicity": "Station simplicity",
+      "touristAccess": "Sightseeing access",
+      "lodgingChoice": "Hotel choice",
+      "localFeel": "Local character",
+      "crowdStress": "Calm"
+    }
   }
 }

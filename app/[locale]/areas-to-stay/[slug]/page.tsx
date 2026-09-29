@@ -9,6 +9,7 @@ import { SiteHeader } from "../../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { QuickRec } from "@/components/content/QuickRec";
 import { AreaCard } from "@/components/content/AreaCard";
+import { AreaScoreCompare, SCORE_KEYS, type ScoreKey } from "@/components/content/AreaScoreCompare";
 import { BetweenAreas } from "@/components/content/BetweenAreas";
 import { ComparisonTable } from "@/components/content/ComparisonTable";
 import { ProTip } from "@/components/content/ProTip";
@@ -1993,6 +1994,16 @@ function ProblemHotelBaseSection({
   );
 }
 
+/* Scored comparison, moved off the folded Stay Finder (2026-09-29). Only the
+   comparison pages that survived the cut, and only where every area has a
+   scored record. */
+const SCORED_COMPARISONS: Record<string, string[]> = {
+  "asakusa-vs-ueno": ["asakusa", "ueno"],
+  "ueno-vs-shinjuku": ["ueno", "shinjuku"],
+  "tokyo-station-vs-shinjuku": ["tokyo-station", "shinjuku"],
+  "shinjuku-vs-ueno-vs-asakusa": ["shinjuku", "ueno", "asakusa"],
+};
+
 function ComparisonAreaHotelCtas({
   slug,
   locale,
@@ -2878,6 +2889,8 @@ export default async function StayPage({ params }: Props) {
   const pagePath = `/areas-to-stay/${slug}`;
   const stayComparisonAdPlacement = stayComparisonAdPlacements[page.slug];
   const quickRecBooking = comparisonBookingLink(page.quickRec.areaId, pagePath, locale);
+  const scoredAreaIds = SCORED_COMPARISONS[slug];
+  const scoreT = await getTranslations({ locale, namespace: "areaScores" });
 
   const isTokyoFirstTime = page.slug === "tokyo-first-time";
   const firstTimeStayHub = firstTimeStayHubs[page.slug];
@@ -3028,6 +3041,20 @@ export default async function StayPage({ params }: Props) {
               highlight={page.quickRec.area}
             />
           </section>
+
+          {scoredAreaIds ? (
+            <AreaScoreCompare
+              areaIds={scoredAreaIds}
+              copy={{
+                title: scoreT("title"),
+                intro: scoreT("intro"),
+                best: scoreT("best"),
+                labels: Object.fromEntries(
+                  SCORE_KEYS.map((k) => [k, scoreT(`labels.${k}`)]),
+                ) as Record<ScoreKey, string>,
+              }}
+            />
+          ) : null}
 
           {page.betweenAreas ? <BetweenAreas {...page.betweenAreas} /> : null}
 

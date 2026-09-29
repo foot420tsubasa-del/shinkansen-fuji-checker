@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { ArrowRight, CloudRain, Loader2 } from "lucide-react";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { trackAffiliateClick, trackAffiliateCtaView, trackCtaClick } from "@/lib/analytics";
-import { getDirectionTicketLink, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
+import { getAffUrl, getDirectionTicketLink, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import {
   findBetterDeparture,
   resolveWindow,
@@ -40,6 +40,9 @@ export type FujiWindowCopy = {
   better: string;
   slowerTrains: string;
   book: string;
+  /** Shown only when the chosen run is forecast to be clouded in. */
+  cloudyAlt: string;
+  tourCta: string;
   updated: string;
 };
 
@@ -118,6 +121,10 @@ export function FujiWindowForecast({
     () => (checked ? findBetterDeparture(origin, day, time, forecast, result.level) : null),
     [checked, origin, day, time, forecast, result.level],
   );
+
+  // Offered only on a clouded-in run: a day tour is what you do instead of
+  // looking out of the window, not a competitor to the ticket above it.
+  const tourHref = getAffUrl("fujiDayTourTokyo");
 
   const ticket =
     getDirectionTicketLink(origin === "tokyo" ? "tokyo-osaka" : "osaka-tokyo") ?? {
@@ -313,6 +320,36 @@ export function FujiWindowForecast({
               {copy.book}
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
+
+            {result.level === "low" && tourHref ? (
+              <div className="mt-3.5 border-t border-slate-100 pt-3">
+                <p className="text-[12px] leading-5 text-slate-600">{copy.cloudyAlt}</p>
+                <a
+                  href={tourHref}
+                  target="_blank"
+                  rel={AFFILIATE_REL}
+                  onClick={() =>
+                    trackAffiliateClick({
+                      category: "tour",
+                      provider: "klook",
+                      product: "fuji_day_tour",
+                      placement: "fuji_window_cloudy_tour",
+                      link_id: "fujiDayTourTokyo",
+                      adid: "1385366",
+                      page_path: pagePath,
+                      page_type: "shinkansen_guide",
+                      locale,
+                      href: tourHref,
+                      label: copy.tourCta,
+                    })
+                  }
+                  className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-[12px] border border-[#D94A32] bg-white px-4 py-2 text-sm font-semibold text-[#D94A32] transition-colors hover:bg-[#fdf3f1] sm:w-auto sm:min-w-[15rem] sm:max-w-[22rem]"
+                >
+                  {copy.tourCta}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </div>
+            ) : null}
 
             <p className="mt-2.5 text-[11px] text-slate-400">{copy.updated}</p>
           </div>

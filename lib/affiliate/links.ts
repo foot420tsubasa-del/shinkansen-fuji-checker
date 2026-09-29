@@ -34,6 +34,7 @@ export type AffiliatePlacement =
   | "seat_map_car_select"
   | "fuji_window_check"
   | "fuji_window_result"
+  | "fuji_window_cloudy_tour"
   | "direction_kyoto_tokyo_booking"
   | "direction_tokyo_kyoto_booking"
   | "direction_osaka_tokyo_booking"

@@ -5459,6 +5459,23 @@
     "better": "'{time}'에 출발하면 더 맑은 하늘 아래를 지납니다.",
     "slowerTrains": "노조미 기준입니다. 히카리·고다마는 더 느리므로 여유를 두세요.",
     "book": "Klook에서 신칸센 티켓 보기",
-    "updated": "open-meteo.com 예보, 매시간 갱신."
+    "updated": "open-meteo.com 예보, 매시간 갱신.",
+    "cloudyAlt": "그 열차는 구름에 가릴 것 같나요? 가와구치코 주변에서는 지상에서 후지산이 보이는 날이 많습니다. 당일 투어라면 창밖에 기대지 않고 가까이서 볼 수 있습니다.",
+    "tourCta": "Klook에서 후지산 당일 투어 보기"
+  },
+  "areaScores": {
+    "title": "점수로 비교",
+    "intro": "숙소 지역을 정할 때 실제로 영향을 주는 항목을 0~100점으로 자체 평가했습니다. '조용함'은 점수가 높을수록 거리가 한산하다는 뜻이고, 나머지는 보이는 대로입니다.",
+    "best": "우위",
+    "labels": {
+      "airportAccess": "공항 접근성",
+      "shinkansenAccess": "신칸센 접근성",
+      "luggageFriendly": "짐 들고 다니기",
+      "stationSimplicity": "역의 단순함",
+      "touristAccess": "관광지 접근성",
+      "lodgingChoice": "숙소 선택지",
+      "localFeel": "동네 분위기",
+      "crowdStress": "조용함"
+    }
   }
 }

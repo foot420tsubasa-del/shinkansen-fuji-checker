@@ -5459,6 +5459,23 @@
     "better": "改搭 '{time}' 出发的班次，天空会更晴朗。",
     "slowerTrains": "时间以Nozomi为准。Hikari和Kodama较慢，请多留一些余裕。",
     "book": "在Klook查看新干线车票",
-    "updated": "预报来自 open-meteo.com，每小时更新。"
+    "updated": "预报来自 open-meteo.com，每小时更新。",
+    "cloudyAlt": "这班车会被云挡住？在河口湖一带的地面上，富士山往往仍然看得到——一日游能让你靠得够近，不必靠车窗。",
+    "tourCta": "在Klook查看富士山一日游"
+  },
+  "areaScores": {
+    "title": "评分对比",
+    "intro": "我们自己对决定住宿区域的各项打分，满分100。「清静」分数越高代表街区越安静，其余按字面理解即可。",
+    "best": "更优",
+    "labels": {
+      "airportAccess": "机场交通",
+      "shinkansenAccess": "新干线交通",
+      "luggageFriendly": "带行李的方便度",
+      "stationSimplicity": "车站好认程度",
+      "touristAccess": "景点交通",
+      "lodgingChoice": "住宿选择",
+      "localFeel": "街区氛围",
+      "crowdStress": "清静"
+    }
   }
 }

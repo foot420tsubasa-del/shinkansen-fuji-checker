@@ -500,3 +500,64 @@ affiliate_click           3   ← 完了者の33%
 `lint` 既知の警告1件 / `build` 788ページ / サイトマップ21件 / `check:translations` 32件。
 
 実施日: **2026-09-29**
+
+---
+
+# 追記: 富士山ツアー導線とスコア移植（2026-09-29）
+
+## 1. 予報ツールに曇天時のツアー導線
+
+`/guide` の可視予報が **low（見えにくい）** と判定したときだけ、
+富士山日帰りツアー（`fujiDayTourTokyo` / adid 1385366）を出す。
+
+- 晴れ・五分の判定では**出さない**。切符CTAと競合させないため
+- 文脈: 「その便は曇る → 列車の窓に頼らず地上から見る手がある」
+- 報酬率: ツアー5.0% 対 鉄道2.4%。同じ1クリックの価値が約2倍
+
+新 placement: `fuji_window_cloudy_tour`
+
+### 検証（実データで両側）
+
+| 条件 | 判定 | ツアー表示 |
+|---|---|---|
+| 雲量100%の時間帯 | Likely hidden | **表示・adid 1385366** |
+| 雲量1%の時間帯 | Good chance | **非表示** |
+
+## 2. Stay Finder のスコアを比較ページへ移植
+
+畳んだFinderが抱えていた `data/stay-area/tokyo-areas.base.json`（36エリア・
+8指標の独自スコア）を、**既に順位のある比較ページ**で使う。
+
+| 移植先 | 6ヶ月検索クリック | 対象エリア |
+|---|--:|---|
+| `/areas-to-stay/asakusa-vs-ueno` | 103 | asakusa / ueno |
+| `/areas-to-stay/ueno-vs-shinjuku` | 37 | ueno / shinjuku |
+| `/areas-to-stay/tokyo-station-vs-shinjuku` | 11 | tokyo-station / shinjuku |
+| `/areas-to-stay/shinjuku-vs-ueno-vs-asakusa` | 8 | 3エリア |
+
+Finderは6ヶ月で1クリック。同じスコアが**100倍の読者に届く**場所に移った。
+
+指標8件: airportAccess / shinkansenAccess / luggageFriendly / stationSimplicity /
+touristAccess / lodgingChoice / localFeel / crowdStress。
+`crowdStress` は高いほど静か、という向きなので UI 上は「Calm」と表記し、導入文でも明示。
+
+棒は**単色**で、エリア名と数値を各棒に併記している。色だけで識別させないため
+（3エリア版でも同じ読み方ができる）。
+
+## 判断: 「後回し」から「今やる」に変えた理由
+
+当初はasakusa-vs-uenoの10月下旬判定を守るため後回しにしていたが、
+**¥0のページの計測純度のために収益機会を止めるのは本末転倒**というユーザー指摘を受けて実施。
+
+ただし移植先は当初案（asakusa-vs-uenoのみ）から広げ、残した比較ページ4枚すべてに入れた。
+なお **asakusa-vs-ueno の移動セクション判定（10月下旬）は、これで完全に濁る。**
+判定時は「9/22移動節のみ → 9/29スコア＋Klook化込み」として分けて読むこと。
+
+ガードレール: `tsc` クリーン / `test:funnel` 24件 / `lint` 既知の警告1件 /
+`build` 788ページ / `check:translations` 32件（増減なし）。
+
+検証: en の asakusa-vs-ueno で8指標・BEST表示、ru の3エリア版で
+「Доступ к аэропорту / Shinjuku 64 / Ueno 86 ЛУЧШЕ / Asakusa 74」、
+375px で横スクロールなし、キー露出なし。
+
+実施日: **2026-09-29**

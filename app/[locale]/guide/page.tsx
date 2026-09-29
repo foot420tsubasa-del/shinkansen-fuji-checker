@@ -1640,6 +1640,8 @@ export default async function GuidePage({ params }: Props) {
             better: fw("better"),
             slowerTrains: fw("slowerTrains"),
             book: fw("book"),
+            cloudyAlt: fw("cloudyAlt"),
+            tourCta: fw("tourCta"),
             updated: fw("updated"),
           }}
         />

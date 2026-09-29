@@ -5460,6 +5460,23 @@
     "better": "Sair às '{time}' colocaria você sob um céu mais limpo.",
     "slowerTrains": "Horários para um Nozomi. Hikari e Kodama são mais lentos, considere um pouco mais.",
     "book": "Ver passagens de Shinkansen na Klook",
-    "updated": "Previsão de open-meteo.com, atualizada a cada hora."
+    "updated": "Previsão de open-meteo.com, atualizada a cada hora.",
+    "cloudyAlt": "Esse trem deve pegar nuvem? No chão, perto de Kawaguchiko, o Fuji costuma aparecer mesmo assim — um bate-volta te leva perto o bastante, sem depender da janela.",
+    "tourCta": "Ver passeios ao monte Fuji na Klook"
+  },
+  "areaScores": {
+    "title": "Comparados por pontuação",
+    "intro": "Nossas próprias notas de 0 a 100 para o que decide a região do hotel. Em «Calma», nota mais alta significa rua mais tranquila; o resto se lê como você espera.",
+    "best": "melhor",
+    "labels": {
+      "airportAccess": "Acesso ao aeroporto",
+      "shinkansenAccess": "Acesso ao Shinkansen",
+      "luggageFriendly": "Facilidade com bagagem",
+      "stationSimplicity": "Estação simples",
+      "touristAccess": "Acesso aos passeios",
+      "lodgingChoice": "Oferta de hotéis",
+      "localFeel": "Caráter do bairro",
+      "crowdStress": "Calma"
+    }
   }
 }

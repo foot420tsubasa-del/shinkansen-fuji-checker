@@ -5460,6 +5460,23 @@
     "better": "Partir à '{time}' vous placerait sous un ciel plus dégagé.",
     "slowerTrains": "Horaires donnés pour un Nozomi. Hikari et Kodama sont plus lents, prévoyez un peu plus.",
     "book": "Voir les billets de Shinkansen sur Klook",
-    "updated": "Prévision open-meteo.com, actualisée chaque heure."
+    "updated": "Prévision open-meteo.com, actualisée chaque heure.",
+    "cloudyAlt": "Ce train s'annonce bouché ? Au sol, du côté de Kawaguchiko, le Fuji reste souvent visible : une excursion à la journée vous en approche assez, sans dépendre de la fenêtre.",
+    "tourCta": "Voir les excursions au mont Fuji sur Klook"
+  },
+  "areaScores": {
+    "title": "Comparés, en points",
+    "intro": "Nos propres notes de 0 à 100 sur ce qui décide du quartier d'hôtel. Pour « Calme », plus le chiffre est haut, plus la rue est tranquille ; le reste se lit comme on s'y attend.",
+    "best": "meilleur",
+    "labels": {
+      "airportAccess": "Accès aéroport",
+      "shinkansenAccess": "Accès Shinkansen",
+      "luggageFriendly": "Facilité avec bagages",
+      "stationSimplicity": "Gare lisible",
+      "touristAccess": "Accès aux sites",
+      "lodgingChoice": "Choix d'hôtels",
+      "localFeel": "Caractère du quartier",
+      "crowdStress": "Calme"
+    }
   }
 }
