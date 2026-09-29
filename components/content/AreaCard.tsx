@@ -149,7 +149,7 @@ export function AreaCard({
           {bookingAreaId ? (
             <div className="mt-2">
               <Link
-                href={`/areas-to-stay/tokyo-stay-area-index?area=${bookingAreaId}#selected-area`}
+                href={`/areas-to-stay?legacyArea=${bookingAreaId}#selected-area`}
                 className="text-xs font-semibold text-[#106b43] underline underline-offset-4 hover:text-[#0b5736]"
               >
                 {t("viewDetails", { area: name })}
@@ -176,7 +176,7 @@ export function AreaCard({
           {bookingAreaId ? (
             <div className="mt-2">
               <Link
-                href={`/areas-to-stay/tokyo-stay-area-index?area=${bookingAreaId}#selected-area`}
+                href={`/areas-to-stay?legacyArea=${bookingAreaId}#selected-area`}
                 className="text-xs font-semibold text-[#106b43] underline underline-offset-4 hover:text-[#0b5736]"
               >
                 {t("viewDetails", { area: name })}

@@ -37,7 +37,6 @@ export const RETIRED_PATHS: readonly string[] = [
   "/areas-to-stay/tokyo-first-time",
   "/areas-to-stay/tokyo-hotels",
   "/areas-to-stay/tokyo-station-hotels-before-shinkansen",
-  "/areas-to-stay/tokyo-stay-area-index",
   "/areas-to-stay/tokyo/asakusa",
   "/areas-to-stay/tokyo/east-tokyo",
   "/areas-to-stay/tokyo/shinjuku",

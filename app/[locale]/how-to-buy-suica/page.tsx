@@ -164,7 +164,7 @@ export default async function HowToBuySuicaPage({ params }: Props) {
             "Choose Tokyo hotel base" hierarchy.
           */}
           <Link
-            href="/areas-to-stay/tokyo-stay-area-index"
+            href="/areas-to-stay"
             className={buttonClassName({ variant: "hotel", size: "lg" })}
           >
             {t("back")}

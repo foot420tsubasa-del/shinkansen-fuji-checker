@@ -29,7 +29,7 @@ const NO_STORE_HEADERS = {
 };
 
 /** Safe internal fallback for unknown areas — a hotel-decision page, not "/". */
-const FALLBACK_PATH = "/areas-to-stay/tokyo-stay-area-index";
+const FALLBACK_PATH = "/areas-to-stay";
 
 /** Keep sub ids within the provider's expected shape. */
 function sanitizeSubId(value: string | null): string | null {

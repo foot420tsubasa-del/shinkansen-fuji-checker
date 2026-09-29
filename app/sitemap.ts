@@ -49,7 +49,6 @@ const englishOnlyContentPaths = [
   "/tokyo-rail-3d.html",
   "/kansai-rail-3d.html",
   "/tokyo-to-kyoto-shinkansen-ticket",
-  "/areas-to-stay/tokyo-stay-area-index",
   "/areas-to-stay/tokyo-hotel-room-size-guide",
   "/areas-to-stay/where-to-stay-in-tokyo-with-luggage",
   "/areas-to-stay/tokyo/shinjuku",

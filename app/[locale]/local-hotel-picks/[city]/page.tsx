@@ -48,7 +48,7 @@ const cityPageConfigs: Record<LocalHotelPickCity, CityHotelPickPageConfig> = {
     guideHref: "/areas-to-stay/tokyo-first-time",
     guideLabel: "Where to stay in Tokyo for first-time visitors",
     comparisonLinks: [
-      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Tokyo Stay Finder" },
+      { href: "/areas-to-stay", label: "Tokyo Stay Finder" },
       { href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix", label: "Compare Tokyo hotel bases" },
       { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Tokyo with luggage" },
     ],
@@ -58,7 +58,7 @@ const cityPageConfigs: Record<LocalHotelPickCity, CityHotelPickPageConfig> = {
         title: "Calm Shinjuku",
         body: "Shinjuku access without sleeping in the loudest nightlife blocks.",
         pickIds: ["yuenShinjuku", "daiwaRoynetNishiShinjuku", "theKnotShinjuku"],
-        fallbackHref: "/areas-to-stay/tokyo-stay-area-index?area=shinjuku#selected-area",
+        fallbackHref: "/areas-to-stay?legacyArea=shinjuku#selected-area",
         fallbackLabel: "See Shinjuku hotels",
       },
       {
@@ -66,7 +66,7 @@ const cityPageConfigs: Record<LocalHotelPickCity, CityHotelPickPageConfig> = {
         title: "Narita / East Tokyo",
         body: "East-side examples for travelers who want a more local-feeling base after choosing the broad area.",
         pickIds: ["citanHostel"],
-        fallbackHref: "/areas-to-stay/tokyo-stay-area-index?area=kuramae#selected-area",
+        fallbackHref: "/areas-to-stay?legacyArea=kuramae#selected-area",
         fallbackLabel: "See Kuramae hotels",
       },
       {
@@ -74,7 +74,7 @@ const cityPageConfigs: Record<LocalHotelPickCity, CityHotelPickPageConfig> = {
         title: "Tokyo Station / Ginza logistics",
         body: "For early Shinkansen, first/last nights, and luggage-heavy rail days. No active hotel example is shown until an approved link exists.",
         pickIds: [],
-        fallbackHref: "/areas-to-stay/tokyo-stay-area-index?area=tokyo-station#selected-area",
+        fallbackHref: "/areas-to-stay?legacyArea=tokyo-station#selected-area",
         fallbackLabel: "See Tokyo Station hotels",
       },
       {

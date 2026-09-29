@@ -21,7 +21,7 @@ export function HotelBaseNextStep({
   placement,
   title = "Before booking hotels, choose your station area",
   body = "Choose the hotel base that fits your airport, luggage, rail days, and station-complexity tolerance before opening booking sites.",
-  primaryHref = "/areas-to-stay/tokyo-stay-area-index",
+  primaryHref = "/areas-to-stay",
   primaryLabel = "Open Tokyo Stay Finder",
   secondaryHref = "/local-hotel-picks",
   secondaryLabel = "See local hotel examples",

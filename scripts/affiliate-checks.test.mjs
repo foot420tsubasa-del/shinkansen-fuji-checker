@@ -63,7 +63,13 @@ test("malformed and impossible dates fall back", () => {
 const redirectSrc = readFileSync("app/api/trip-hotel-redirect/route.ts", "utf8");
 
 test("unknown areas never fall back to the homepage", () => {
-  assert.ok(redirectSrc.includes('FALLBACK_PATH = "/areas-to-stay/tokyo-stay-area-index"'));
+  // The point is where an unknown area lands, not which page happens to be
+  // the stay entry point: the Stay Finder was folded on 2026-09-29 and the
+  // fallback moved to the hub it redirects to.
+  const fallback = redirectSrc.match(/FALLBACK_PATH = "([^"]*)"/)?.[1];
+  assert.ok(fallback, "the route must declare a fallback path");
+  assert.ok(fallback.startsWith("/areas-to-stay"), `fallback must stay inside the stay section, got ${fallback}`);
+  assert.notEqual(fallback, "/", "the homepage is not a stay-area fallback");
   assert.ok(!redirectSrc.includes('new URL("/", request.url)'));
 });
 
@@ -254,5 +260,26 @@ test("retired routes: the sitemap offers nothing that is retired", () => {
     // Retired entries may stay in the source array; the filter removes them.
     assert.ok(src.includes("live(englishOnlyContentPaths)"), "retired paths must be filtered out");
     break;
+  }
+});
+
+test("retired routes: the areas-to-stay hub stays indexable", () => {
+  // It is the entry point to the comparison pages, which are the site's
+  // third-biggest source of clicks. A bulk rename once swept it onto the
+  // retired list by accident; this is the tripwire for that.
+  assert.equal(retired.isRetiredPath("/areas-to-stay", LOCALES), false);
+});
+
+test("sitemap offers no URL that redirects away", () => {
+  const sitemapSrc = readFileSync("app/sitemap.ts", "utf8");
+  const listed = [
+    ...(sitemapSrc.match(/const englishOnlyContentPaths = \[([\s\S]*?)\n\];/)?.[1] ?? "").matchAll(/"([^"]*)"/g),
+    ...(sitemapSrc.match(/const translatedPaths = \[([\s\S]*?)\n\];/)?.[1] ?? "").matchAll(/"([^"]*)"/g),
+  ].map((m) => m[1]);
+  const redirected = [...readFileSync("next.config.ts", "utf8").matchAll(/source: "(\/[a-z0-9/-]+)"/g)]
+    .map((m) => m[1])
+    .filter((p) => !p.includes(":locale"));
+  for (const path of redirected) {
+    assert.ok(!listed.includes(path), `sitemap still offers the redirected ${path}`);
   }
 });

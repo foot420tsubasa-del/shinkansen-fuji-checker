@@ -1404,7 +1404,7 @@ export default async function GuidePage({ params }: Props) {
           Where to stay in Tokyo
         </TrackedInternalLink>
         <TrackedInternalLink
-          href="/areas-to-stay/tokyo-stay-area-index"
+          href="/areas-to-stay"
           sourcePage="/guide"
           placement="guide_to_hotels"
           label="Compare station areas"

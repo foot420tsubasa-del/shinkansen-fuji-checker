@@ -35,8 +35,8 @@ export function CompactStayFinderClient({
   const [picked, setPicked] = useState<Record<string, string>>({});
   const ready = copy.questions.every((question) => picked[question.id]);
   const href = ready
-    ? `/areas-to-stay/tokyo-stay-area-index?q_shinkansen=${encodeURIComponent(picked.shinkansen)}&q_luggage=${encodeURIComponent(picked.luggage)}#finder`
-    : "/areas-to-stay/tokyo-stay-area-index#finder";
+    ? `/areas-to-stay?q_shinkansen=${encodeURIComponent(picked.shinkansen)}&q_luggage=${encodeURIComponent(picked.luggage)}#finder`
+    : "/areas-to-stay#finder";
 
   return (
     <section className="rounded-[22px] border border-emerald-100 bg-[#fffdf8] p-5 shadow-sm">

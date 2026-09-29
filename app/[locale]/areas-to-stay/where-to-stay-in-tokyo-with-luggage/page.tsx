@@ -609,7 +609,7 @@ export default async function WhereToStayInTokyoWithLuggagePage({ params }: Prop
           </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {[
-              { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Stay Finder" },
+              { href: "/areas-to-stay", label: "Open Tokyo Stay Finder" },
               { href: "/areas-to-stay/tokyo-first-time", label: "Tokyo first-time hotel base guide" },
               { href: "/airport-transfers", label: "Airport transfers by hotel area" },
               { href: "/local-hotel-picks#hotel-examples-matrix", label: "Local hotel examples" },
@@ -654,7 +654,7 @@ export default async function WhereToStayInTokyoWithLuggagePage({ params }: Prop
           */}
           <div className="mt-4 flex flex-wrap items-center gap-3">
             <TrackedInternalLink
-              href="/areas-to-stay/tokyo-stay-area-index"
+              href="/areas-to-stay"
               sourcePage={pagePath}
               placement="luggage_next_finder_cta"
               label="Compare areas by luggage in the Finder"

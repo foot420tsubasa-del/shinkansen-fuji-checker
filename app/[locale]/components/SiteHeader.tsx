@@ -12,13 +12,13 @@ export function SiteHeader() {
 
   const desktopNavLinks = [
     { href: "/#seat-checker", label: t("nav.seat"), category: "seat_checker" },
-    { href: "/areas-to-stay/tokyo-stay-area-index", label: t("nav.stay"), category: "stay" },
+    { href: "/areas-to-stay", label: t("nav.stay"), category: "stay" },
     { href: "/plan-your-trip#rail", label: t("nav.railGuide"), category: "rail" },
     { href: "/plan-your-trip#arrival", label: t("nav.arrivalPrep"), category: "arrival" },
   ];
   const mobileNavLinks = [
     { href: "/#seat-checker", label: t("nav.seat"), category: "seat_checker" },
-    { href: "/areas-to-stay/tokyo-stay-area-index", label: t("nav.stay"), category: "stay" },
+    { href: "/areas-to-stay", label: t("nav.stay"), category: "stay" },
     { href: "/plan-your-trip#rail", label: t("nav.rail"), category: "rail" },
     { href: "/plan-your-trip#arrival", label: t("nav.arrival"), category: "arrival" },
   ];

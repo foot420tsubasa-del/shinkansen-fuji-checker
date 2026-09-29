@@ -54,8 +54,7 @@ const homeHotelCopyByLocale: Record<
     body:
       "Choose your Tokyo hotel base before booking hotels. Your hotel area affects airport arrival, luggage, Shinkansen days, and how busy your nights feel.",
     links: [
-      { href: "/areas-to-stay/tokyo-hotels", label: "Tokyo hotels by area", variant: "primary" },
-      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Compare Tokyo station areas", variant: "secondary" },
+      { href: "/areas-to-stay", label: "Compare Tokyo station areas", variant: "primary" },
     ],
     imageNote: "Use fujiseat to choose the broad hotel area first, then check current prices, room size, bed setup, and station distance on booking sites.",
   },
@@ -63,8 +62,7 @@ const homeHotelCopyByLocale: Record<
     title: "Escolha onde ficar antes de comparar hotéis",
     body: "Comece pela sua base em Tóquio, não pelos nomes dos hotéis. A melhor área depende de aeroporto, bagagem, dias de Shinkansen, estações grandes e noites agitadas ou mais calmas.",
     links: [
-      { href: "/areas-to-stay/tokyo-hotels", label: "Hotéis em Tóquio por área", variant: "primary" },
-      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Comparar áreas de Tóquio", variant: "secondary" },
+      { href: "/areas-to-stay", label: "Comparar áreas de Tóquio", variant: "primary" },
     ],
     imageNote: "Compare estações famosas, bases próximas mais calmas e áreas práticas antes de buscar hotéis.",
   },
@@ -72,8 +70,7 @@ const homeHotelCopyByLocale: Record<
     title: "Elige dónde alojarte antes de comparar hoteles",
     body: "Empieza por tu base en Tokio, no por nombres de hoteles. La mejor zona depende del aeropuerto, equipaje, días de Shinkansen, estaciones grandes y noches animadas o tranquilas.",
     links: [
-      { href: "/areas-to-stay/tokyo-hotels", label: "Hoteles en Tokio por zona", variant: "primary" },
-      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Comparar zonas de Tokio", variant: "secondary" },
+      { href: "/areas-to-stay", label: "Comparar zonas de Tokio", variant: "primary" },
     ],
     imageNote: "Compara estaciones famosas, bases cercanas más tranquilas y zonas logísticas antes de buscar hoteles.",
   },
@@ -81,8 +78,7 @@ const homeHotelCopyByLocale: Record<
     title: "호텔을 비교하기 전에 묵을 지역부터 고르기",
     body: "호텔 이름보다 도쿄 거점부터 정하세요. 좋은 지역은 공항 접근, 짐, 신칸센 일정, 큰 역의 복잡도, 활기찬 밤 또는 조용한 밤에 따라 달라집니다.",
     links: [
-      { href: "/areas-to-stay/tokyo-hotels", label: "지역별 도쿄 호텔", variant: "primary" },
-      { href: "/areas-to-stay/tokyo-stay-area-index", label: "도쿄 숙소 지역 비교하기", variant: "secondary" },
+      { href: "/areas-to-stay", label: "도쿄 숙소 지역 비교하기", variant: "primary" },
     ],
     imageNote: "호텔을 찾기 전에 유명 역, 더 차분한 인근 거점, 이동에 편한 지역을 비교하세요.",
   },
@@ -90,8 +86,7 @@ const homeHotelCopyByLocale: Record<
     title: "比較飯店前，先選住宿區域",
     body: "先從東京住宿基地開始，不要先看飯店名稱。適合的區域取決於機場交通、行李、新幹線日程、車站複雜度，以及你想要熱鬧或安靜的夜晚。",
     links: [
-      { href: "/areas-to-stay/tokyo-hotels", label: "依區域選東京飯店", variant: "primary" },
-      { href: "/areas-to-stay/tokyo-stay-area-index", label: "比較東京住宿區域", variant: "secondary" },
+      { href: "/areas-to-stay", label: "比較東京住宿區域", variant: "primary" },
     ],
     imageNote: "搜尋飯店前，先比較知名車站、較安靜的附近基地與動線友善區域。",
   },
@@ -99,8 +94,7 @@ const homeHotelCopyByLocale: Record<
     title: "比较酒店前，先选择住宿区域",
     body: "先从东京住宿基地开始，不要先看酒店名称。适合的区域取决于机场交通、行李、新干线日程、车站复杂度，以及你想要热闹或安静的夜晚。",
     links: [
-      { href: "/areas-to-stay/tokyo-hotels", label: "按区域选东京酒店", variant: "primary" },
-      { href: "/areas-to-stay/tokyo-stay-area-index", label: "比较东京住宿区域", variant: "secondary" },
+      { href: "/areas-to-stay", label: "比较东京住宿区域", variant: "primary" },
     ],
     imageNote: "搜索酒店前，先比较知名车站、较安静的附近基地和动线友好区域。",
   },
@@ -108,8 +102,7 @@ const homeHotelCopyByLocale: Record<
     title: "Choisissez où dormir avant de comparer les hôtels",
     body: "Commencez par votre base à Tokyo, pas par les noms d'hôtels. Le bon quartier dépend de l'aéroport, des bagages, du Shinkansen, des grandes gares et de nuits animées ou plus calmes.",
     links: [
-      { href: "/areas-to-stay/tokyo-hotels", label: "Hôtels de Tokyo par quartier", variant: "primary" },
-      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Comparer les quartiers de Tokyo", variant: "secondary" },
+      { href: "/areas-to-stay", label: "Comparer les quartiers de Tokyo", variant: "primary" },
     ],
     imageNote: "Comparez gares connues, bases plus calmes et quartiers pratiques avant de chercher des hôtels.",
   },
@@ -117,8 +110,7 @@ const homeHotelCopyByLocale: Record<
     title: "Erst die Hotelgegend wählen, dann Hotels vergleichen",
     body: "Beginne mit deiner Tokio-Basis, nicht mit Hotelnamen. Die beste Gegend hängt von Flughafen, Gepäck, Shinkansen-Tagen, großen Bahnhöfen und lebhaften oder ruhigeren Nächten ab.",
     links: [
-      { href: "/areas-to-stay/tokyo-hotels", label: "Tokio-Hotels nach Gebiet", variant: "primary" },
-      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Tokio-Hotelgegenden vergleichen", variant: "secondary" },
+      { href: "/areas-to-stay", label: "Tokio-Hotelgegenden vergleichen", variant: "primary" },
     ],
     imageNote: "Vergleiche bekannte Bahnhöfe, ruhigere nahe Basen und logistische Gegenden, bevor du Hotels suchst.",
   },
@@ -126,8 +118,7 @@ const homeHotelCopyByLocale: Record<
     title: "Сначала выберите район, потом сравнивайте отели",
     body: "Начните с базы в Токио, а не с названий отелей. Подходящий район зависит от аэропорта, багажа, синкансэна, сложности станций и того, нужны ли вам оживленные или спокойные ночи.",
     links: [
-      { href: "/areas-to-stay/tokyo-hotels", label: "Отели Токио по районам", variant: "primary" },
-      { href: "/areas-to-stay/tokyo-stay-area-index", label: "Сравнить районы Токио", variant: "secondary" },
+      { href: "/areas-to-stay", label: "Сравнить районы Токио", variant: "primary" },
     ],
     imageNote: "Сравните известные станции, более спокойные соседние базы и удобные районы до поиска отелей.",
   },
@@ -488,7 +479,7 @@ export default function HomeClient() {
             {([
               { href: "/plan-your-trip", placement: "home_decision_flow_arrival" },
               { href: "/airport-transfers", placement: "home_decision_flow_transfer" },
-              { href: "/areas-to-stay/tokyo-stay-area-index", placement: "home_decision_flow_stay" },
+              { href: "/areas-to-stay", placement: "home_decision_flow_stay" },
               { href: "/jr-pass-vs-single-ticket", placement: "home_decision_flow_ticket" },
               { href: "/#seat-checker", placement: "home_decision_flow_seat" },
             ] as const).map((step, index) => (

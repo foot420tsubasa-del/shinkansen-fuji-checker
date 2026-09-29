@@ -9,6 +9,23 @@ const LOCALES = "fr|es|pt-BR|ko|ru|de|zh-TW|zh-CN";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      // Tokyo Stay Finder, folded 2026-09-29. Six months: 1 search click on
+      // 116 impressions, 3 affiliate clicks, zero revenue. The tool itself
+      // converted well — every one of the nine people who started it finished,
+      // and a third of those clicked through — it simply had no distribution,
+      // and it carries its own scoring pipeline to maintain. The route, the
+      // component and data/stay-area/ are all left in place; deleting these
+      // two lines brings it back.
+      {
+        source: "/areas-to-stay/tokyo-stay-area-index",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/tokyo-stay-area-index`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
       // §3: shinkansen-seat-e cannibalized /guide (7.9 vs 6.9) — consolidate
       // into the guide's Seat E section.
       {

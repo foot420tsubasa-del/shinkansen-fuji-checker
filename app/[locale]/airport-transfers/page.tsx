@@ -580,7 +580,7 @@ export default async function AirportTransfersIndex({ params }: Props) {
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
           {[
-            { href: "/areas-to-stay/tokyo-stay-area-index", label: "Open Tokyo Stay Finder" },
+            { href: "/areas-to-stay", label: "Open Tokyo Stay Finder" },
             { href: "/areas-to-stay/tokyo-first-time", label: "Tokyo first-time hotel base guide" },
             { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose a luggage-friendly Tokyo base" },
             { href: "/local-hotel-picks#hotel-examples-matrix", label: "Local hotel examples" },

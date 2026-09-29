@@ -305,7 +305,7 @@ export default async function AreasToStayIndex({ params }: Props) {
               <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("quickAnswerIntro")}</p>
             </div>
             <TrackedInternalLink
-              href="/areas-to-stay/tokyo-stay-area-index"
+              href="/areas-to-stay"
               sourcePage={pagePath}
               placement="stay_hub_quick_answer_finder"
               label={t("quickAnswerCta")}
@@ -346,7 +346,7 @@ export default async function AreasToStayIndex({ params }: Props) {
               <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950">{t("finderPreview.title")}</h2>
               <p className="mt-3 text-base leading-7 text-slate-600">{t("finderPreview.body")}</p>
               <TrackedInternalLink
-                href="/areas-to-stay/tokyo-stay-area-index"
+                href="/areas-to-stay"
                 sourcePage={pagePath}
                 placement="stay_hub_finder_preview"
                 label={t("finderPreview.cta")}
@@ -410,7 +410,7 @@ export default async function AreasToStayIndex({ params }: Props) {
             {t("bottomCta.body")}
           </p>
           <TrackedInternalLink
-            href="/areas-to-stay/tokyo-stay-area-index"
+            href="/areas-to-stay"
             sourcePage={pagePath}
             placement="stay_hub_bottom_finder"
             label={t("bottomCta.cta")}

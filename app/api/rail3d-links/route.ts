@@ -90,7 +90,7 @@ const KANSAI_LINE_GUIDES: Record<string, string> = {
 };
 
 function finderHref(areaId: string) {
-  return `/areas-to-stay/tokyo-stay-area-index?area=${areaId}#selected-area`;
+  return `/areas-to-stay?legacyArea=${areaId}#selected-area`;
 }
 
 function readHotelLinks(): Record<string, HotelLinkConfig> {

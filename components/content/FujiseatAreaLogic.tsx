@@ -33,7 +33,7 @@ export function FujiseatAreaLogic({
       {showFinderLink ? (
         <div className="mt-4 flex flex-wrap gap-2">
           <TrackedInternalLink
-            href="/areas-to-stay/tokyo-stay-area-index"
+            href="/areas-to-stay"
             sourcePage={sourcePage}
             placement={placement}
             label={t("finderCta")}

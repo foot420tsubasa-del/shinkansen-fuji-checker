@@ -10,7 +10,7 @@ import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLin
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { getAffUrl, getOmioUrl } from "@/src/affiliateLinks";
-import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import type { AffiliateClickParams } from "@/lib/analytics";
@@ -74,18 +74,18 @@ const tokyoBaseCardConfigs: ReadonlyArray<
   {
     key: "shinjuku",
     // Primary funnel → 36-area hotel detail SSOT.
-    href: "/areas-to-stay/tokyo-stay-area-index?area=shinjuku#selected-area",
+    href: "/areas-to-stay?legacyArea=shinjuku#selected-area",
     hotelKeys: ["shinjuku"],
   },
   {
     key: "uenoAsakusa",
-    href: "/areas-to-stay/tokyo-stay-area-index?area=ueno#selected-area",
-    extraDetailHref: "/areas-to-stay/tokyo-stay-area-index?area=asakusa#selected-area",
+    href: "/areas-to-stay?legacyArea=ueno#selected-area",
+    extraDetailHref: "/areas-to-stay?legacyArea=asakusa#selected-area",
     hotelKeys: ["ueno", "asakusa"],
   },
   {
     key: "tokyoStation",
-    href: "/areas-to-stay/tokyo-stay-area-index?area=tokyo-station#selected-area",
+    href: "/areas-to-stay?legacyArea=tokyo-station#selected-area",
     hotelKeys: ["tokyoStation"],
   },
   {
@@ -442,7 +442,7 @@ export function PlanYourTripHub() {
               <ArrowRight className="h-4 w-4" />
             </TrackedCtaLink>
             <TrackedCtaLink
-              href="/areas-to-stay/tokyo-stay-area-index"
+              href="/areas-to-stay"
               placement="plan_trip_stay_hub_finder"
               label={t("hotel.finderCta")}
               category="stay"
