@@ -606,3 +606,69 @@ Stay Finder を畳んだ余波で、`/areas-to-stay/asakusa-vs-ueno` に
 
 検証後の asakusa-vs-ueno: Klook 3本のみ、Finder 言及ゼロ、
 `legacyArea` / `#selected-area` ゼロ、エリアガイドの偽リンクゼロ、QuickRec の重複解消。
+
+---
+
+# 追記: ホテル誘導ページ14本を畳む（2026-09-29）
+
+## 根拠 — 「ホテル系」は2種類あった
+
+| | ページ数 | 6ヶ月クリック | 表示 |
+|---|--:|--:|--:|
+| 比較ページ（残す） | 6 | **163** | **18,970** |
+| ホテル誘導ページ（畳む） | 14 | **3** | 1,530 |
+
+比較6本はサイト全体クリックの **5.9%**、`/guide`・seat-letters に次ぐ3番目のブロック。
+誘導14本は6ヶ月で3クリック。**「ホテルに需要がない」は後者にだけ当てはまる。**
+
+さらに、ホテルのKlookリンク切替は**同日**なので、Klook経由の実績はまだ1日も無い。
+比較ページを今消すと、Klookホテルが売れるかを永久に知らないまま終わる。
+→ **比較6本は90日保留、12月末に判定**（Klook経由で1件も売れなければ削除）。
+
+## 畳んだ14本
+
+```
+/local-hotel-picks ＋ /tokyo /kyoto /osaka
+/areas-to-stay/tokyo-first-time ・ kyoto-first-time ・ osaka-first-time
+/areas-to-stay/kawaguchiko ・ where-to-stay-before-shinkansen
+/areas-to-stay/kyoto-station-vs-gion ・ namba-vs-umeda ・ shin-osaka-vs-namba
+/areas-to-stay/where-to-stay-in-tokyo-with-luggage ・ tokyo-hotels
+```
+
+失うアフィリエイト: 8クリック・**全額0円**（Trip/Agoda 経由）。
+`/local-hotel-picks` は **Trip.com 46本の発生源**でもあった。
+
+## ハブとトップの前提が変わった（ユーザー指摘）
+
+`/areas-to-stay` は残す21ページの1つだが、中身が畳んだページばかりになった。
+
+| 直した箇所 | 内容 |
+|---|---|
+| 都市カード4枚 | 全て畳んだページ行き → **セクションごと削除** |
+| guideGroups | 4都市11本 → **東京の生存4本のみ** |
+| ヒーローCTA | `/areas-to-stay/tokyo-hotels` → `asakusa-vs-ueno` |
+| meta.title | 「Tokyo, Kyoto, Osaka and Mt. Fuji」→ **東京特化に書き換え（9言語）** |
+| hero / featuredGuides | 同上 |
+
+**タイトルが4都市を約束したまま中身が東京だけ、という状態を避けるため。**
+「where to stay in Kyoto」で順位が付いて東京しか出ないのは、順位が無いより悪い。
+
+トップの Hotel Base カードは `/areas-to-stay` 行きで、ラベルが
+「Compare Tokyo station areas」なので**そのまま正しくなった**。
+
+## 作業中に見つけた不具合（修正済み）
+
+1. **サイトマップが21→29件に増えた** — 14本を退役リストから外した（301が上位の措置）結果、
+   `dynamicPaths` が `lib/content/stay.ts` から畳んだslugを拾い直した。
+   `FOLDED_PATHS` を新設して両方除外。**テストも `dynamicPaths` を見ていなかったので拡張。**
+2. **`/planner` に Trip.com が1本残っていた** — `config.tripUrl` を直接読んでいて
+   Klook専用リゾルバを迂回していた。サイト最後のTrip.comリンク。
+
+## 現状
+
+サイトマップ **21件**。レンダリング後の Trip.com **0本**（全ページ）。
+
+ガードレール: `tsc` クリーン / `test:funnel` 24件 / `lint` 既知の警告1件 /
+`build` 788ページ / `check:translations` 32件（増減なし）。
+
+実施日: **2026-09-29** ／ 比較6本の判定: **12月末**

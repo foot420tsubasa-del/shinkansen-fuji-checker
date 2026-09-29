@@ -430,7 +430,7 @@ export function PlanYourTripHub() {
               answer a few questions instead of opening a guide. */}
           <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <TrackedCtaLink
-              href="/areas-to-stay/tokyo-first-time"
+              href="/areas-to-stay"
               placement="plan_trip_stay_hub"
               label={t("hotel.hubCta")}
               category="hotel"

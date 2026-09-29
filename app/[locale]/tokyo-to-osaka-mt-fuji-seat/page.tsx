@@ -159,7 +159,7 @@ export default async function TokyoToOsakaSeatPage({ params }: Props) {
               </p>
             </div>
             <Link
-              href="/areas-to-stay/shin-osaka-vs-namba"
+              href="/areas-to-stay"
               className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[#2E7D5B] transition-colors hover:text-[#246449]"
             >
               Shin-Osaka vs Namba — where to stay

@@ -113,11 +113,11 @@ export function SeatResultCard({
           </div>
           <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-[11px] font-semibold">
             <Link
-              href="/areas-to-stay/tokyo-first-time"
+              href="/areas-to-stay"
               onClick={() =>
                 trackCtaClick({
                   placement: "seat_result",
-                  href: "/areas-to-stay/tokyo-first-time",
+                  href: "/areas-to-stay",
                   label: "Choose where to stay",
                   category: "stay",
                 })

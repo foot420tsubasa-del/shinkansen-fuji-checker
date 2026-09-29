@@ -102,7 +102,7 @@ const enhancedRouteCopy: Record<string, EnhancedRouteCopy> = {
     quickBody: "It runs straight into the basement of Tokyo Station in about 55 minutes with a reserved seat and luggage racks — which matters here, because most people making this trip are connecting to a Shinkansen the same day.",
     luggageNote: "Tokyo Station is large and the Shinkansen gates are a long walk from the N'EX platform. With two or more suitcases, allow 30 minutes inside the station rather than the 10 you would allow at a smaller stop.",
     arrivalSetupBody: "If you land after about 17:00, a same-day Shinkansen becomes tight. Compare hotel bases within a few minutes of Tokyo Station before you commit to the connection.",
-    stayHref: "/areas-to-stay/where-to-stay-before-shinkansen",
+    stayHref: "/areas-to-stay/asakusa-vs-ueno",
   },
   "narita-to-shinjuku": {
     routeLabel: "Narita Airport → Shinjuku",
@@ -110,7 +110,7 @@ const enhancedRouteCopy: Record<string, EnhancedRouteCopy> = {
     quickBody: "It is direct, reserved, luggage-friendly, and avoids transfers. If your hotel is near a limousine bus stop or you have heavy luggage, the bus may be easier.",
     luggageNote: "With two or more large suitcases, compare N'EX against Limousine Bus based on your exact Shinjuku hotel side.",
     arrivalSetupBody: "Before booking a Shinjuku hotel, check whether your hotel is closer to Shinjuku Station, Busta Shinjuku, Nishi-Shinjuku, or the East Exit nightlife area.",
-    stayHref: "/areas-to-stay/tokyo-first-time",
+    stayHref: "/areas-to-stay",
   },
   "haneda-to-shinjuku": {
     routeLabel: "Haneda Airport → Shinjuku",
@@ -118,7 +118,7 @@ const enhancedRouteCopy: Record<string, EnhancedRouteCopy> = {
     quickBody: "Haneda is closer than Narita. Trains are fast and affordable, while the bus is easier if your hotel is near a stop or you have large luggage.",
     luggageNote: "Haneda is close enough that bus or taxi can be worth it when you arrive tired with large suitcases.",
     arrivalSetupBody: "Haneda is easy, but your Shinjuku hotel location still matters. Bus stops and station exits can change the easiest route.",
-    stayHref: "/areas-to-stay/tokyo-first-time",
+    stayHref: "/areas-to-stay",
   },
   "kansai-airport-to-kyoto": {
     routeLabel: "Kansai Airport → Kyoto",
@@ -126,18 +126,18 @@ const enhancedRouteCopy: Record<string, EnhancedRouteCopy> = {
     quickBody: "It is the simplest train route to Kyoto Station. Airport bus or private transfer may be easier with heavy luggage or late arrivals.",
     luggageNote: "If you arrive late or carry several large bags, compare Haruka against airport bus and private transfer before committing.",
     arrivalSetupBody: "If you arrive at Kansai Airport and go straight to Kyoto, staying near Kyoto Station can reduce first-night luggage stress.",
-    stayHref: "/areas-to-stay/kyoto-first-time",
+    stayHref: "/areas-to-stay",
   },
 };
 
 function stayHrefForRoute(slug: string) {
   if (slug.includes("kansai-airport-to-kyoto") || slug.includes("kyoto-to-kansai-airport")) {
-    return "/areas-to-stay/kyoto-first-time";
+    return "/areas-to-stay";
   }
   if (slug.includes("kansai-airport-to-namba") || slug.includes("kansai-airport-to-umeda") || slug.includes("osaka-to-kansai-airport")) {
-    return "/areas-to-stay/osaka-first-time";
+    return "/areas-to-stay";
   }
-  return "/areas-to-stay/tokyo-first-time";
+  return "/areas-to-stay";
 }
 
 function hotelAreasForTransferRoute(slug: string): RouteHotelBaseArea[] {
@@ -581,8 +581,8 @@ export default async function TransferPage({ params }: Props) {
               {[
                 { href: "/areas-to-stay", label: "Open Tokyo Stay Finder" },
                 { href: stayHrefForRoute(slug), label: "First-time hotel base guide" },
-                { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Hotel base with luggage" },
-                { href: "/local-hotel-picks#hotel-examples-matrix", label: "Local hotel examples" },
+                { href: "/areas-to-stay/asakusa-vs-ueno", label: "Hotel base with luggage" },
+                { href: "/areas-to-stay#hotel-examples-matrix", label: "Local hotel examples" },
               ].map((link) => (
                 <TrackedInternalLink
                   key={link.href}

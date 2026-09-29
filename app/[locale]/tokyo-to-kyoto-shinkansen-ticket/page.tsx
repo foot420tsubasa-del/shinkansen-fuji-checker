@@ -194,7 +194,7 @@ export default async function TokyoToKyotoTicketPage({ params }: Props) {
               </p>
             </div>
             <div className="mt-3 grid gap-3 md:grid-cols-2">
-              <Link href="/areas-to-stay/where-to-stay-before-shinkansen" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
+              <Link href="/areas-to-stay/asakusa-vs-ueno" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Where to stay before the Shinkansen</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">Compare Tokyo Station, Shinjuku, and Ueno for departure day.</span>
               </Link>

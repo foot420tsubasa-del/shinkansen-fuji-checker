@@ -9,6 +9,152 @@ const LOCALES = "fr|es|pt-BR|ko|ru|de|zh-TW|zh-CN";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      /* Hotel pages folded 2026-09-29. Six months: 3 search clicks on 1,530
+         impressions across all fourteen, 8 affiliate clicks, zero revenue —
+         every one of those clicks went to Trip.com or Agoda, which the site
+         dropped the same day. /local-hotel-picks was also the last place
+         Trip.com links were still being rendered. Routes and data are left in
+         place; deleting these entries brings them all back. */
+      {
+        source: "/local-hotel-picks",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/local-hotel-picks`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: "/local-hotel-picks/tokyo",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/local-hotel-picks/tokyo`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: "/local-hotel-picks/kyoto",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/local-hotel-picks/kyoto`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: "/local-hotel-picks/osaka",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/local-hotel-picks/osaka`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/tokyo-first-time",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/tokyo-first-time`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/kyoto-first-time",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/kyoto-first-time`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/osaka-first-time",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/osaka-first-time`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/kawaguchiko",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/kawaguchiko`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/where-to-stay-before-shinkansen",
+        destination: "/areas-to-stay/asakusa-vs-ueno",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/where-to-stay-before-shinkansen`,
+        destination: "/:locale/areas-to-stay/asakusa-vs-ueno",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/kyoto-station-vs-gion",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/kyoto-station-vs-gion`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/namba-vs-umeda",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/namba-vs-umeda`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/shin-osaka-vs-namba",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/shin-osaka-vs-namba`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage",
+        destination: "/areas-to-stay/asakusa-vs-ueno",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/where-to-stay-in-tokyo-with-luggage`,
+        destination: "/:locale/areas-to-stay/asakusa-vs-ueno",
+        permanent: true,
+      },
+      {
+        source: "/areas-to-stay/tokyo-hotels",
+        destination: "/areas-to-stay",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/areas-to-stay/tokyo-hotels`,
+        destination: "/:locale/areas-to-stay",
+        permanent: true,
+      },
       // Tokyo Stay Finder, folded 2026-09-29. Six months: 1 search click on
       // 116 impressions, 3 affiliate clicks, zero revenue. The tool itself
       // converted well — every one of the nine people who started it finished,

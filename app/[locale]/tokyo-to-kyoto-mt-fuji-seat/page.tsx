@@ -181,7 +181,7 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
               </p>
             </div>
             <Link
-              href="/areas-to-stay/where-to-stay-before-shinkansen"
+              href="/areas-to-stay/asakusa-vs-ueno"
               className="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-[#2E7D5B] transition-colors hover:text-[#246449]"
             >
               Where to stay before Shinkansen

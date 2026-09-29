@@ -326,12 +326,12 @@ function SuicaGuideBody() {
         </p>
         <ul className="mt-3 grid gap-2 sm:grid-cols-2">
           <li>
-            <Link href="/areas-to-stay/tokyo-first-time" className="font-semibold text-[#145aa0] underline underline-offset-2">
+            <Link href="/areas-to-stay" className="font-semibold text-[#145aa0] underline underline-offset-2">
               Where to stay in Tokyo →
             </Link>
           </li>
           <li>
-            <Link href="/areas-to-stay/tokyo-hotels" className="font-semibold text-[#145aa0] underline underline-offset-2">
+            <Link href="/areas-to-stay" className="font-semibold text-[#145aa0] underline underline-offset-2">
               Compare Tokyo hotel areas →
             </Link>
           </li>

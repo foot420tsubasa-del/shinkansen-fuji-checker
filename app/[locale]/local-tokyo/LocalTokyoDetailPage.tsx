@@ -209,7 +209,7 @@ export async function LocalTokyoDetailPage({ locale, pageKey }: LocalTokyoDetail
               </h1>
               <p className="mt-4 max-w-3xl text-base leading-7 text-slate-600">{t("description")}</p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href="/areas-to-stay/tokyo-first-time" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-5 text-sm font-extrabold text-white transition-colors hover:bg-[#246449]">
+                <Link href="/areas-to-stay" className="inline-flex h-11 items-center gap-2 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-5 text-sm font-extrabold text-white transition-colors hover:bg-[#246449]">
                   {common("compareBases")}
                   <MapPinned className="h-4 w-4" />
                 </Link>

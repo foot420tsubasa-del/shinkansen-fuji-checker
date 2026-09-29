@@ -24,7 +24,7 @@ type SuggestedNextStepsProps = {
 };
 
 const steps = [
-  { type: "stay", title: "Choose where to stay", desc: "Compare Tokyo bases before booking hotels.", href: "/areas-to-stay/tokyo-first-time", icon: Bed },
+  { type: "stay", title: "Choose where to stay", desc: "Compare Tokyo bases before booking hotels.", href: "/areas-to-stay", icon: Bed },
   { type: "transfer", title: "Compare airport transfer", desc: "Pick the route that fits luggage and arrival time.", href: "/airport-transfers/narita-to-shinjuku", icon: Plane },
   { type: "train-signs", title: "Read Japanese train signs", desc: "Learn line, direction, train type, platform, and exit.", href: "/how-to-read-japanese-train-signs", icon: Signpost },
   { type: "esim", title: "Get Japan eSIM", desc: "Set up maps, translation, and transit before landing.", href: ESIM_URL, icon: Wifi, external: true },

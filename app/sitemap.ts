@@ -3,7 +3,7 @@ import { routing } from "@/i18n/routing";
 import { publicItineraryPages } from "@/lib/content/itineraries";
 import { stayPages } from "@/lib/content/stay";
 import { transferPages } from "@/lib/content/transfers";
-import { RETIRED_PATHS } from "@/lib/retired-routes";
+import { FOLDED_PATHS, RETIRED_PATHS } from "@/lib/retired-routes";
 
 const siteUrl = "https://fujiseat.com";
 
@@ -20,10 +20,6 @@ const englishOnlyContentPaths = [
   "/areas-to-stay",
   "/airport-transfers",
   "/local-tokyo",
-  "/local-hotel-picks",
-  "/local-hotel-picks/tokyo",
-  "/local-hotel-picks/kyoto",
-  "/local-hotel-picks/osaka",
   "/local-tokyo/kiyosumi-shirakawa",
   "/local-tokyo/kuramae",
   "/local-tokyo/monzen-nakacho",
@@ -50,13 +46,11 @@ const englishOnlyContentPaths = [
   "/kansai-rail-3d.html",
   "/tokyo-to-kyoto-shinkansen-ticket",
   "/areas-to-stay/tokyo-hotel-room-size-guide",
-  "/areas-to-stay/where-to-stay-in-tokyo-with-luggage",
   "/areas-to-stay/tokyo/shinjuku",
   "/areas-to-stay/tokyo/ueno",
   "/areas-to-stay/tokyo/asakusa",
   "/areas-to-stay/tokyo/tokyo-station",
   "/areas-to-stay/tokyo/east-tokyo",
-  "/areas-to-stay/tokyo-hotels",
 ];
 
 const dynamicPaths = [
@@ -91,7 +85,7 @@ function makeEntry(path: string, priority: number, includeAlternates = true): Me
 export default function sitemap(): MetadataRoute.Sitemap {
   // Retired pages stay reachable but are no longer offered to crawlers; see
   // lib/retired-routes.ts for why each one is on the list.
-  const retired = new Set<string>(RETIRED_PATHS);
+  const retired = new Set<string>([...RETIRED_PATHS, ...FOLDED_PATHS]);
   const live = (paths: string[]) => paths.filter((path) => !retired.has(path || "/"));
 
   const entries = [

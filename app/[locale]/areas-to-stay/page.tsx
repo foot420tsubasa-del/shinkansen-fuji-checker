@@ -17,18 +17,6 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-type CityCard = {
-  key: CityCardKey;
-  title: string;
-  subtitle: string;
-  href: string;
-  cta: string;
-  placementLabel: string;
-  icon: typeof Building2;
-  imageCandidates: string[];
-};
-
-type CityCardKey = "tokyo" | "kyoto" | "osaka" | "kawaguchiko";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -48,58 +36,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const cityCardConfigs = [
-  {
-    key: "tokyo",
-    // Primary Tokyo door → the Tokyo Hotels parent page (revenue spine).
-    // The Finder stays reachable as a secondary door via the quick-answer
-    // and finder-preview sections lower on this page.
-    href: "/areas-to-stay/tokyo-hotels",
-    icon: Building2,
-    imageCandidates: ["/images/stay/tokyo/tokyo-stay-hero.png"],
-  },
-  {
-    key: "kyoto",
-    href: "/areas-to-stay/kyoto-first-time",
-    icon: Landmark,
-    imageCandidates: ["/images/stay/japan/stay-kyoto.jpg", "/images/Kyoto.png"],
-  },
-  {
-    key: "osaka",
-    href: "/areas-to-stay/osaka-first-time",
-    icon: Utensils,
-    imageCandidates: ["/images/stay/japan/stay-osaka.jpg", "/images/Osaka.png"],
-  },
-  {
-    key: "kawaguchiko",
-    href: "/areas-to-stay/kawaguchiko",
-    icon: Mountain,
-    imageCandidates: ["/images/stay/japan/stay-kawaguchiko.jpg", "/images/Kawaguchiko.png"],
-  },
-] as const satisfies ReadonlyArray<Omit<CityCard, "title" | "subtitle" | "cta" | "placementLabel">>;
+/* The "choose your city" section was removed on 2026-09-29. All four of its
+   cards led to pages folded the same day: Kyoto, Osaka and Kawaguchiko have no
+   surviving stay content, and the Tokyo card opened the retired tokyo-hotels
+   parent. What remains under /areas-to-stay is four Tokyo station-area
+   comparisons, so the hub lists those instead of offering doors that redirect
+   straight back to it. */
 
 const guideGroups = [
   {
     cityKey: "tokyo",
+    // The five comparison pages still in the index; everything else under
+    // /areas-to-stay was folded on 2026-09-29.
     slugs: [
-      "tokyo-first-time",
-      "where-to-stay-before-shinkansen",
-      "tokyo-station-vs-shinjuku",
-      "ueno-vs-shinjuku",
       "asakusa-vs-ueno",
+      "ueno-vs-shinjuku",
+      "tokyo-station-vs-shinjuku",
+      "shinjuku-vs-ueno-vs-asakusa",
     ],
-  },
-  {
-    cityKey: "kyoto",
-    slugs: ["kyoto-first-time", "kyoto-station-vs-gion"],
-  },
-  {
-    cityKey: "osaka",
-    slugs: ["osaka-first-time", "namba-vs-umeda", "shin-osaka-vs-namba"],
-  },
-  {
-    cityKey: "fuji",
-    slugs: ["kawaguchiko"],
   },
 ] as const;
 
@@ -120,54 +74,6 @@ function pageBySlug(slug: string) {
 
 function publicImageIfExists(candidates: readonly string[]) {
   return candidates.find((src) => fs.existsSync(path.join(process.cwd(), "public", src.replace(/^\//, ""))));
-}
-
-function CityDecisionCard({ card, locale, pagePath }: { card: CityCard; locale: string; pagePath: string }) {
-  const Icon = card.icon;
-  const image = publicImageIfExists(card.imageCandidates);
-  const isTokyo = card.key === "tokyo";
-  const placement = isTokyo ? "stay_hub_city_tokyo" : "stay_hub_city_card";
-
-  return (
-    <TrackedInternalLink
-      href={card.href}
-      sourcePage={pagePath}
-      placement={placement}
-      label={card.placementLabel}
-      locale={locale}
-      className={[
-        "group flex h-full flex-col overflow-hidden rounded-[24px] bg-white text-left shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-200",
-        isTokyo ? "border-2 border-[#0b1a33]" : "border border-slate-200 hover:border-[#9fd7bd]",
-      ].join(" ")}
-    >
-      {image ? (
-        <div className="relative h-52 bg-slate-100">
-          <Image src={image} alt={`${card.title} stay area guide`} fill sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
-        </div>
-      ) : (
-        <div className="flex h-52 items-center justify-center bg-[linear-gradient(135deg,#f8fafc,#ecfdf5)]">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#9fd7bd] bg-white text-[#106b43] shadow-sm">
-            <Icon className="h-8 w-8" aria-hidden="true" />
-          </div>
-        </div>
-      )}
-      <div className="flex flex-1 flex-col p-5">
-        <div>
-          <h3 className="text-xl font-semibold text-slate-950">{card.title}</h3>
-          <p className="mt-2 text-sm leading-6 text-slate-600">{card.subtitle}</p>
-        </div>
-        <span
-          className={[
-            "mt-auto inline-flex w-fit items-center gap-1 rounded-[12px] px-3 py-2 text-sm font-semibold text-white transition-colors",
-            isTokyo ? "bg-[#0b1a33] group-hover:bg-[#132744]" : "bg-[#2E7D5B] group-hover:bg-[#246449]",
-          ].join(" ")}
-        >
-          {card.cta}
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
-        </span>
-      </div>
-    </TrackedInternalLink>
-  );
 }
 
 function GuideCard({
@@ -222,13 +128,6 @@ export default async function AreasToStayIndex({ params }: Props) {
     "/images/home/tokyo-hotel-base.png",
     "/images/stay/tokyo/tokyo-stay-hero.png",
   ]);
-  const cityCards: CityCard[] = cityCardConfigs.map((card) => ({
-    ...card,
-    title: t(`cityCards.${card.key}.title`),
-    subtitle: t(`cityCards.${card.key}.subtitle`),
-    cta: t(`cityCards.${card.key}.cta`),
-    placementLabel: t(`cityCards.${card.key}.placementLabel`),
-  }));
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -259,7 +158,9 @@ export default async function AreasToStayIndex({ params }: Props) {
               </p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
               <TrackedInternalLink
-                href="/areas-to-stay/tokyo-hotels"
+                /* Was the folded tokyo-hotels parent; now the biggest
+                   comparison page still in the index (103 clicks / 6 months). */
+                href="/areas-to-stay/asakusa-vs-ueno"
                 sourcePage={pagePath}
                 placement="stay_hub_hero_finder"
                 label={t("hero.primaryCta")}
@@ -323,20 +224,6 @@ export default async function AreasToStayIndex({ params }: Props) {
               </li>
             ))}
           </ul>
-        </section>
-
-        <section id="choose-your-city" className="mt-10 scroll-mt-24">
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">{t("citySection.eyebrow")}</p>
-              <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("citySection.title")}</h2>
-            </div>
-          </div>
-          <div className="mt-5 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {cityCards.map((card) => (
-              <CityDecisionCard key={card.title} card={card} locale={locale} pagePath={pagePath} />
-            ))}
-          </div>
         </section>
 
         <section className="mt-10 rounded-[30px] border border-[#c9d8ee] bg-[linear-gradient(135deg,#f8fbff,#eef6ff)] p-6 shadow-sm md:p-8">

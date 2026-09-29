@@ -89,8 +89,8 @@ const roomSizeCopyByLocale: Record<string, RoomSizeCopy> = {
     stayGuideLink: "Open Tokyo stay area guide",
     continueTitle: "Continue planning",
     continueLinks: [
-      ["/areas-to-stay/tokyo-first-time", "Tokyo stay area guide"],
-      ["/local-hotel-picks", "Local hotel examples"],
+      ["/areas-to-stay", "Tokyo stay area guide"],
+      ["/areas-to-stay", "Local hotel examples"],
       ["/airport-transfers", "Airport transfers"],
       ["/guide", "Shinkansen Seat E guide"],
     ],
@@ -125,7 +125,7 @@ const roomSizeCopyByLocale: Record<string, RoomSizeCopy> = {
     planningBody: "Tamanho do quarto é só uma parte da decisão de base. Compare com acesso ao aeroporto, planos de Shinkansen, bagagem e ruído do bairro antes de escolher onde reservar.",
     stayGuideLink: "Abrir guia de áreas de Tokyo",
     continueTitle: "Continue planejando",
-    continueLinks: [["/areas-to-stay/tokyo-first-time", "Guia de áreas de Tokyo"], ["/local-hotel-picks", "Exemplos de hotéis locais"], ["/airport-transfers", "Traslados do aeroporto"], ["/guide", "Guia Seat E do Shinkansen"]],
+    continueLinks: [["/areas-to-stay", "Guia de áreas de Tokyo"], ["/areas-to-stay", "Exemplos de hotéis locais"], ["/airport-transfers", "Traslados do aeroporto"], ["/guide", "Guia Seat E do Shinkansen"]],
   },
   es: {
     metadataTitle: "Guía de tamaño de habitación en hoteles de Tokio: ¿cuándo es demasiado pequeña?",
@@ -150,7 +150,7 @@ const roomSizeCopyByLocale: Record<string, RoomSizeCopy> = {
     planningBody: "El tamaño de habitación es solo una parte de la decisión. Compáralo con acceso al aeropuerto, planes de Shinkansen, equipaje y ruido del barrio antes de elegir dónde reservar.",
     stayGuideLink: "Abrir guía de zonas de Tokio",
     continueTitle: "Continuar planificación",
-    continueLinks: [["/areas-to-stay/tokyo-first-time", "Guía de zonas de Tokio"], ["/local-hotel-picks", "Ejemplos de hoteles locales"], ["/airport-transfers", "Traslados de aeropuerto"], ["/guide", "Guía Seat E del Shinkansen"]],
+    continueLinks: [["/areas-to-stay", "Guía de zonas de Tokio"], ["/areas-to-stay", "Ejemplos de hoteles locales"], ["/airport-transfers", "Traslados de aeropuerto"], ["/guide", "Guía Seat E del Shinkansen"]],
   },
   ko: {
     metadataTitle: "도쿄 호텔 객실 크기 가이드: 어느 정도면 너무 작을까?",
@@ -175,7 +175,7 @@ const roomSizeCopyByLocale: Record<string, RoomSizeCopy> = {
     planningBody: "객실 크기는 숙소 지역 결정의 한 요소입니다. 공항 접근, 신칸센 일정, 짐, 동네 소음을 함께 비교한 뒤 예약 지역을 정하세요.",
     stayGuideLink: "도쿄 숙소 지역 가이드 열기",
     continueTitle: "계속 계획하기",
-    continueLinks: [["/areas-to-stay/tokyo-first-time", "도쿄 숙소 지역 가이드"], ["/local-hotel-picks", "로컬 호텔 예시"], ["/airport-transfers", "공항 이동"], ["/guide", "신칸센 Seat E 가이드"]],
+    continueLinks: [["/areas-to-stay", "도쿄 숙소 지역 가이드"], ["/areas-to-stay", "로컬 호텔 예시"], ["/airport-transfers", "공항 이동"], ["/guide", "신칸센 Seat E 가이드"]],
   },
   "zh-TW": {
     metadataTitle: "東京飯店房間大小指南：多小算太小？",
@@ -200,7 +200,7 @@ const roomSizeCopyByLocale: Record<string, RoomSizeCopy> = {
     planningBody: "房間大小只是住宿基地決策的一部分。選擇預訂區域前，請一起比較機場交通、新幹線計畫、行李和街區噪音。",
     stayGuideLink: "打開東京住宿區域指南",
     continueTitle: "繼續規劃",
-    continueLinks: [["/areas-to-stay/tokyo-first-time", "東京住宿區域指南"], ["/local-hotel-picks", "在地飯店例子"], ["/airport-transfers", "機場交通"], ["/guide", "新幹線 Seat E 指南"]],
+    continueLinks: [["/areas-to-stay", "東京住宿區域指南"], ["/areas-to-stay", "在地飯店例子"], ["/airport-transfers", "機場交通"], ["/guide", "新幹線 Seat E 指南"]],
   },
   "zh-CN": {
     metadataTitle: "东京酒店房间大小指南：多小算太小？",
@@ -225,7 +225,7 @@ const roomSizeCopyByLocale: Record<string, RoomSizeCopy> = {
     planningBody: "房间大小只是住宿基地决策的一部分。选择预订区域前，请一起比较机场交通、新干线计划、行李和街区噪音。",
     stayGuideLink: "打开东京住宿区域指南",
     continueTitle: "继续规划",
-    continueLinks: [["/areas-to-stay/tokyo-first-time", "东京住宿区域指南"], ["/local-hotel-picks", "本地酒店示例"], ["/airport-transfers", "机场交通"], ["/guide", "新干线 Seat E 指南"]],
+    continueLinks: [["/areas-to-stay", "东京住宿区域指南"], ["/areas-to-stay", "本地酒店示例"], ["/airport-transfers", "机场交通"], ["/guide", "新干线 Seat E 指南"]],
   },
   fr: {
     metadataTitle: "Guide des tailles de chambres d'hôtel à Tokyo : quand est-ce trop petit ?",
@@ -250,7 +250,7 @@ const roomSizeCopyByLocale: Record<string, RoomSizeCopy> = {
     planningBody: "La taille de chambre n'est qu'une partie du choix de base hôtelière. Comparez-la avec l'accès aéroport, les plans Shinkansen, les bagages et le bruit du quartier avant de réserver.",
     stayGuideLink: "Ouvrir le guide des quartiers de Tokyo",
     continueTitle: "Continuer la planification",
-    continueLinks: [["/areas-to-stay/tokyo-first-time", "Guide des quartiers de Tokyo"], ["/local-hotel-picks", "Exemples d'hôtels locaux"], ["/airport-transfers", "Transferts aéroport"], ["/guide", "Guide Seat E Shinkansen"]],
+    continueLinks: [["/areas-to-stay", "Guide des quartiers de Tokyo"], ["/areas-to-stay", "Exemples d'hôtels locaux"], ["/airport-transfers", "Transferts aéroport"], ["/guide", "Guide Seat E Shinkansen"]],
   },
   de: {
     metadataTitle: "Tokyo Hotelzimmer-Größen: Wie klein ist zu klein?",
@@ -275,7 +275,7 @@ const roomSizeCopyByLocale: Record<string, RoomSizeCopy> = {
     planningBody: "Zimmergröße ist nur ein Teil der Hotelbasis-Entscheidung. Vergleiche sie mit Flughafenzugang, Shinkansen-Plänen, Gepäck und Nachbarschaftslärm, bevor du buchst.",
     stayGuideLink: "Tokyo Unterkunfts-Guide öffnen",
     continueTitle: "Weiter planen",
-    continueLinks: [["/areas-to-stay/tokyo-first-time", "Tokyo Unterkunfts-Guide"], ["/local-hotel-picks", "Lokale Hotelbeispiele"], ["/airport-transfers", "Flughafentransfers"], ["/guide", "Shinkansen Seat E Guide"]],
+    continueLinks: [["/areas-to-stay", "Tokyo Unterkunfts-Guide"], ["/areas-to-stay", "Lokale Hotelbeispiele"], ["/airport-transfers", "Flughafentransfers"], ["/guide", "Shinkansen Seat E Guide"]],
   },
   ru: {
     metadataTitle: "Размер номера в отеле Токио: когда слишком тесно?",
@@ -300,7 +300,7 @@ const roomSizeCopyByLocale: Record<string, RoomSizeCopy> = {
     planningBody: "Размер номера - только часть решения о базе в Токио. Сравните его с доступом из аэропорта, планами Shinkansen, багажом и шумом района до бронирования.",
     stayGuideLink: "Открыть гид по районам Токио",
     continueTitle: "Продолжить планирование",
-    continueLinks: [["/areas-to-stay/tokyo-first-time", "Гид по районам Токио"], ["/local-hotel-picks", "Примеры местных отелей"], ["/airport-transfers", "Трансферы из аэропорта"], ["/guide", "Гид Shinkansen Seat E"]],
+    continueLinks: [["/areas-to-stay", "Гид по районам Токио"], ["/areas-to-stay", "Примеры местных отелей"], ["/airport-transfers", "Трансферы из аэропорта"], ["/guide", "Гид Shinkansen Seat E"]],
   },
 };
 
@@ -327,7 +327,7 @@ export default async function TokyoHotelRoomSizeGuidePage({ params }: Props) {
           items={[
             { href: "/", label: copy.breadcrumbHome },
             { href: "/areas-to-stay", label: copy.breadcrumbStay },
-            { href: "/areas-to-stay/tokyo-first-time", label: copy.breadcrumbTokyo },
+            { href: "/areas-to-stay", label: copy.breadcrumbTokyo },
             { label: copy.breadcrumbCurrent },
           ]}
         />
@@ -391,7 +391,7 @@ export default async function TokyoHotelRoomSizeGuidePage({ params }: Props) {
               {copy.planningBody}
             </p>
             <TrackedInternalLink
-              href="/areas-to-stay/tokyo-first-time"
+              href="/areas-to-stay"
               sourcePage={pagePath}
               placement="room_size_pack_cta"
               label="Tokyo stay area guide"

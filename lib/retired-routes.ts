@@ -26,24 +26,14 @@ export const RETIRED_PATHS: readonly string[] = [
   "/airport-transfers/narita-to-shinjuku",
   "/airport-transfers/narita-to-tokyo-station",
   "/airport-transfers/narita-to-ueno",
-  "/areas-to-stay/kawaguchiko",
   "/areas-to-stay/kyoto-before-shinkansen",
-  "/areas-to-stay/kyoto-first-time",
-  "/areas-to-stay/kyoto-station-vs-gion",
-  "/areas-to-stay/namba-vs-umeda",
   "/areas-to-stay/osaka-before-shinkansen",
-  "/areas-to-stay/osaka-first-time",
-  "/areas-to-stay/shin-osaka-vs-namba",
-  "/areas-to-stay/tokyo-first-time",
-  "/areas-to-stay/tokyo-hotels",
   "/areas-to-stay/tokyo-station-hotels-before-shinkansen",
   "/areas-to-stay/tokyo/asakusa",
   "/areas-to-stay/tokyo/east-tokyo",
   "/areas-to-stay/tokyo/shinjuku",
   "/areas-to-stay/tokyo/tokyo-station",
   "/areas-to-stay/tokyo/ueno",
-  "/areas-to-stay/where-to-stay-before-shinkansen",
-  "/areas-to-stay/where-to-stay-in-tokyo-with-luggage",
   "/how-to-navigate-japanese-train-stations",
   "/itineraries",
   "/itineraries/10-day-japan-with-fuji",
@@ -54,10 +44,6 @@ export const RETIRED_PATHS: readonly string[] = [
   "/itineraries/7-day-first-time-japan",
   "/itineraries/tokyo-kyoto-osaka-without-jr-pass",
   "/jr-pass-vs-single-ticket",
-  "/local-hotel-picks",
-  "/local-hotel-picks/kyoto",
-  "/local-hotel-picks/osaka",
-  "/local-hotel-picks/tokyo",
   "/local-tokyo/kiyosumi-shirakawa",
   "/local-tokyo/kuramae",
   "/local-tokyo/monzen-nakacho",
@@ -72,6 +58,30 @@ export const RETIRED_PATHS: readonly string[] = [
   "/shinkansen-reserved-vs-non-reserved",
   "/tokyo-to-kyoto-shinkansen-ticket",
   "/tokyo-to-osaka-mt-fuji-seat",
+];
+
+/**
+ * Paths that 301 elsewhere, listed separately from the retired ones because a
+ * redirect is a stronger measure than a noindex: these pages no longer render
+ * at all. The sitemap has to exclude both, and offering a URL that redirects
+ * is a defect the build should catch.
+ */
+export const FOLDED_PATHS: readonly string[] = [
+  "/local-hotel-picks",
+  "/local-hotel-picks/tokyo",
+  "/local-hotel-picks/kyoto",
+  "/local-hotel-picks/osaka",
+  "/areas-to-stay/tokyo-stay-area-index",
+  "/areas-to-stay/tokyo-first-time",
+  "/areas-to-stay/kyoto-first-time",
+  "/areas-to-stay/osaka-first-time",
+  "/areas-to-stay/kawaguchiko",
+  "/areas-to-stay/where-to-stay-before-shinkansen",
+  "/areas-to-stay/kyoto-station-vs-gion",
+  "/areas-to-stay/namba-vs-umeda",
+  "/areas-to-stay/shin-osaka-vs-namba",
+  "/areas-to-stay/where-to-stay-in-tokyo-with-luggage",
+  "/areas-to-stay/tokyo-hotels",
 ];
 
 const RETIRED = new Set(RETIRED_PATHS);

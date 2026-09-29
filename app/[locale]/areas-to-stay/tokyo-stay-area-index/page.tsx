@@ -1262,7 +1262,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               {/* Secondary browse door to the Tokyo Hotels parent page, for
                   users who would rather skip the questions. */}
               <TrackedInternalLink
-                href="/areas-to-stay/tokyo-hotels"
+                href="/areas-to-stay"
                 sourcePage={pagePath}
                 placement="finder_hero_browse_all"
                 label={t("hero.browseCta")}
@@ -1393,7 +1393,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
           <h2 className="text-xl font-semibold text-slate-950">{t("continue.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-3">
             <TrackedStayAreaContinueLink
-              href="/areas-to-stay/tokyo-first-time"
+              href="/areas-to-stay"
               sourcePage={pagePath}
               placement="tokyo_stay_area_index_continue"
               label={t("continue.links.firstTime")}
@@ -1404,7 +1404,7 @@ export default async function TokyoStayAreaIndexPage({ params, searchParams }: P
               {t("continue.links.firstTime")}
             </TrackedStayAreaContinueLink>
             <TrackedStayAreaContinueLink
-              href="/areas-to-stay/where-to-stay-before-shinkansen"
+              href="/areas-to-stay/asakusa-vs-ueno"
               sourcePage={pagePath}
               placement="tokyo_stay_area_index_continue"
               label={t("continue.links.shinkansen")}

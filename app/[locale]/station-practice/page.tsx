@@ -85,7 +85,7 @@ const supportCtas = [
   {
     title: "Compare hotels near convenient stations",
     body: "Choose practical hotel areas near stations that fit your route.",
-    href: "/areas-to-stay/tokyo-first-time",
+    href: "/areas-to-stay",
     icon: Hotel,
   },
   {

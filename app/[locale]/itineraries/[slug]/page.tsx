@@ -140,7 +140,7 @@ export default async function ItineraryPage({ params }: Props) {
             body="For this itinerary, the hotel area affects airport arrival, luggage movement, Shinkansen days, and how hard the first night feels."
             primaryHref="/areas-to-stay"
             primaryLabel="Choose a Japan hotel area"
-            secondaryHref="/local-hotel-picks"
+            secondaryHref="/areas-to-stay"
             secondaryLabel="See local hotel examples"
           />
 
@@ -173,7 +173,7 @@ export default async function ItineraryPage({ params }: Props) {
                 </span>
               </Link>
               <Link
-                href="/areas-to-stay/tokyo-first-time"
+                href="/areas-to-stay"
                 className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]"
               >
                 <span className="block font-bold text-[#082653]">Areas to stay</span>

@@ -342,7 +342,7 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
                 <span className="font-bold text-[#082653]">Itinerary without JR Pass</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">Full day-by-day plan using single tickets.</span>
               </Link>
-              <Link href="/areas-to-stay/where-to-stay-before-shinkansen" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
+              <Link href="/areas-to-stay/asakusa-vs-ueno" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Where to stay before the Shinkansen</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">Pick a hotel base near your departure station.</span>
               </Link>

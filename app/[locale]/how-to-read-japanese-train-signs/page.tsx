@@ -103,7 +103,7 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
   const suggestedCards = [
     { href: "/#seat-checker", key: "seat", type: "seat_checker" as const },
     { href: "/jr-pass-vs-single-ticket", key: "jrPass", type: "rail" as const },
-    { href: "/areas-to-stay/where-to-stay-before-shinkansen", key: "beforeShinkansen", type: "stay" as const },
+    { href: "/areas-to-stay/asakusa-vs-ueno", key: "beforeShinkansen", type: "stay" as const },
     { href: "/airport-transfers", key: "airport", type: "transfer" as const },
     { href: "/itineraries/7-day-first-time-japan", key: "itinerary", type: "itinerary" as const },
   ];
@@ -398,7 +398,7 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                       <ArrowRight className="h-4 w-4" />
                     </TrackedCtaLink>
                     <TrackedCtaLink
-                      href="/areas-to-stay/where-to-stay-in-tokyo-with-luggage"
+                      href="/areas-to-stay/asakusa-vs-ueno"
                       placement="train_signs_station_practice"
                       label="Choose luggage-friendly hotel base"
                       pagePath="/how-to-read-japanese-train-signs"

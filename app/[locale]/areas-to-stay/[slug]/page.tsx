@@ -214,7 +214,7 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
     detailLink: { label: "See Tokyo Station hotels", href: "/areas-to-stay" },
     internalLinks: [
       { label: "Tokyo Station vs Shinjuku", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
-      { label: "Where to stay before Shinkansen", href: "/areas-to-stay/where-to-stay-before-shinkansen" },
+      { label: "Where to stay before Shinkansen", href: "/areas-to-stay/asakusa-vs-ueno" },
     ],
   },
   {
@@ -230,11 +230,11 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
     // Ambiguous multi-base category → send to the Tokyo Hotels parent page
     // rather than forcing one detail slug. Editorial East Tokyo guide kept
     // as a secondary internal link.
-    detailLink: { label: "See Tokyo hotel areas", href: "/areas-to-stay/tokyo-hotels" },
+    detailLink: { label: "See Tokyo hotel areas", href: "/areas-to-stay" },
     internalLinks: [
       { label: "See East Tokyo area guide", href: "/local-tokyo" },
-      { label: "Use the Tokyo first-time guide", href: "/areas-to-stay/tokyo-first-time" },
-      { label: "Choose by luggage / airport logic", href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage" },
+      { label: "Use the Tokyo first-time guide", href: "/areas-to-stay" },
+      { label: "Choose by luggage / airport logic", href: "/areas-to-stay/asakusa-vs-ueno" },
     ],
   },
   {
@@ -249,7 +249,7 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
     watchOut: "Businesslike and less atmospheric.",
     detailLink: { label: "See Shinagawa hotels", href: "/areas-to-stay" },
     internalLinks: [
-      { label: "See Shinkansen-friendly stays", href: "/areas-to-stay/where-to-stay-before-shinkansen" },
+      { label: "See Shinkansen-friendly stays", href: "/areas-to-stay/asakusa-vs-ueno" },
       { label: "Check airport transfer", href: "/airport-transfers" },
     ],
   },
@@ -452,7 +452,7 @@ const tokyoFirstTimeSupplementCopyByLocale: Record<string, TokyoFirstTimeSupplem
           broadBase: "Central Tokyo",
           bestFor: "Food, subway access, and a more controlled night base than the busiest station areas.",
           watchOut: "Not as direct for Shinkansen mornings as staying near Tokyo Station.",
-          href: "/areas-to-stay/tokyo-first-time",
+          href: "/areas-to-stay",
         },
         {
           name: "Kuramae / Tawaramachi",
@@ -989,7 +989,7 @@ tokyoFirstTimeSupplementCopyByLocale.ru = {
 
 tokyoFirstTimeSupplementCopyByLocale["pt-BR"].nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "Leste de Toquio / lado Tokyo Station", bestFor: "Noites mais calmas, logistica por Haneda ou Narita e ruas mais simples que os grandes hubs.", watchOut: "Menos vida noturna que Shinjuku e menos pontos classicos de primeira viagem fora do hotel.", href: "/local-tokyo" },
-  { name: "Akasaka / Akasaka-mitsuke", broadBase: "Centro de Toquio", bestFor: "Comida, acesso de metro e uma base noturna mais controlada que as areas mais movimentadas.", watchOut: "Menos direto para manhas de Shinkansen que ficar perto da Tokyo Station.", href: "/areas-to-stay/tokyo-first-time" },
+  { name: "Akasaka / Akasaka-mitsuke", broadBase: "Centro de Toquio", bestFor: "Comida, acesso de metro e uma base noturna mais controlada que as areas mais movimentadas.", watchOut: "Menos direto para manhas de Shinkansen que ficar perto da Tokyo Station.", href: "/areas-to-stay" },
   { name: "Kuramae / Tawaramachi", broadBase: "Asakusa / Leste de Toquio", bestFor: "Cafes, lojas de design, ruas calmas e acesso ao velho Tokyo sem dormir nos blocos mais turisticos.", watchOut: "Algumas rotas de aeroporto ou Shinkansen podem exigir uma baldeacao extra.", href: "/areas-to-stay" },
   { name: "Hatchobori / Kyobashi / Nihombashi", broadBase: "Lado Tokyo Station", bestFor: "Shinkansen cedo, logistica com bagagem e uma base mais calma perto de rotas centrais.", watchOut: "Menos energia local a noite que Shinjuku, Ueno ou Asakusa.", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
   { name: "Nippori / Okachimachi", broadBase: "Lado Ueno", bestFor: "Acesso a Narita, busca de hoteis com melhor valor e comida pratica no corredor de Ueno.", watchOut: "Escolha com cuidado se quiser vida noturna ou uma chegada mais polida.", href: "/areas-to-stay" },
@@ -1039,7 +1039,7 @@ tokyoFirstTimeSupplementCopyByLocale["pt-BR"].quickAnswerOverride = {
 
 tokyoFirstTimeSupplementCopyByLocale.es.nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "Este de Tokio / lado Tokyo Station", bestFor: "Noches mas tranquilas, logistica desde Haneda o Narita y calles mas faciles que los grandes hubs.", watchOut: "Menos vida nocturna que Shinjuku y menos iconos obvios de primer viaje fuera del hotel.", href: "/local-tokyo" },
-  { name: "Akasaka / Akasaka-mitsuke", broadBase: "Centro de Tokio", bestFor: "Comida, acceso en metro y una base nocturna mas controlada que las zonas mas concurridas.", watchOut: "Menos directo para mananas de Shinkansen que alojarse cerca de Tokyo Station.", href: "/areas-to-stay/tokyo-first-time" },
+  { name: "Akasaka / Akasaka-mitsuke", broadBase: "Centro de Tokio", bestFor: "Comida, acceso en metro y una base nocturna mas controlada que las zonas mas concurridas.", watchOut: "Menos directo para mananas de Shinkansen que alojarse cerca de Tokyo Station.", href: "/areas-to-stay" },
   { name: "Kuramae / Tawaramachi", broadBase: "Asakusa / Este de Tokio", bestFor: "Cafes, tiendas de diseno, calles mas calmas y acceso al viejo Tokio sin dormir en los bloques mas turisticos.", watchOut: "Algunas rutas de aeropuerto o Shinkansen pueden necesitar un transbordo extra.", href: "/areas-to-stay" },
   { name: "Hatchobori / Kyobashi / Nihombashi", broadBase: "Lado Tokyo Station", bestFor: "Shinkansen temprano, equipaje y una base de negocios mas tranquila cerca de rutas centrales.", watchOut: "Menos energia local de noche que Shinjuku, Ueno o Asakusa.", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
   { name: "Nippori / Okachimachi", broadBase: "Lado Ueno", bestFor: "Acceso a Narita, busquedas de hotel de mejor valor y comida practica en el corredor de Ueno.", watchOut: "Elige con cuidado si quieres vida nocturna o una primera noche mas pulida.", href: "/areas-to-stay" },
@@ -1089,7 +1089,7 @@ tokyoFirstTimeSupplementCopyByLocale.es.quickAnswerOverride = {
 
 tokyoFirstTimeSupplementCopyByLocale.ko.nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "동쪽 도쿄 / 도쿄역 쪽", bestFor: "조용한 밤, 하네다 또는 나리타 동선, 큰 허브보다 걷기 쉬운 거리.", watchOut: "신주쿠보다 밤문화가 적고 호텔 밖 첫 여행 명소가 덜 뚜렷합니다.", href: "/local-tokyo" },
-  { name: "Akasaka / Akasaka-mitsuke", broadBase: "도쿄 중심부", bestFor: "음식, 지하철 접근, 가장 붐비는 역 주변보다 안정적인 밤 거점.", watchOut: "도쿄역 근처보다 신칸센 아침 동선은 덜 직접적입니다.", href: "/areas-to-stay/tokyo-first-time" },
+  { name: "Akasaka / Akasaka-mitsuke", broadBase: "도쿄 중심부", bestFor: "음식, 지하철 접근, 가장 붐비는 역 주변보다 안정적인 밤 거점.", watchOut: "도쿄역 근처보다 신칸센 아침 동선은 덜 직접적입니다.", href: "/areas-to-stay" },
   { name: "Kuramae / Tawaramachi", broadBase: "아사쿠사 / 동쪽 도쿄", bestFor: "카페, 디자인 숍, 조용한 거리, 가장 관광객 많은 블록 밖의 옛 도쿄 접근.", watchOut: "공항이나 신칸센 동선에 환승이 하나 더 필요할 수 있습니다.", href: "/areas-to-stay" },
   { name: "Hatchobori / Kyobashi / Nihombashi", broadBase: "도쿄역 쪽", bestFor: "이른 신칸센, 짐 이동, 중앙 철도 동선 근처의 조용한 비즈니스 거점.", watchOut: "신주쿠, 우에노, 아사쿠사보다 밤의 현지 에너지는 적습니다.", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
   { name: "Nippori / Okachimachi", broadBase: "우에노 쪽", bestFor: "나리타 접근, 더 나은 가격대의 호텔 검색, 우에노 축의 실용적인 식사.", watchOut: "밤문화나 세련된 첫날 느낌을 원하면 신중히 고르세요.", href: "/areas-to-stay" },
@@ -1139,7 +1139,7 @@ tokyoFirstTimeSupplementCopyByLocale.ko.quickAnswerOverride = {
 
 tokyoFirstTimeSupplementCopyByLocale["zh-TW"].nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "東東京 / 東京站側", bestFor: "較安靜的夜晚、羽田或成田動線，以及比大型樞紐更好走的街道。", watchOut: "夜生活少於新宿，飯店外的第一次東京地標也較不明顯。", href: "/local-tokyo" },
-  { name: "Akasaka / Akasaka-mitsuke", broadBase: "東京中心", bestFor: "餐飲、地鐵交通，以及比最繁忙車站區更可控的夜晚基地。", watchOut: "新幹線早晨動線不如住在東京站附近直接。", href: "/areas-to-stay/tokyo-first-time" },
+  { name: "Akasaka / Akasaka-mitsuke", broadBase: "東京中心", bestFor: "餐飲、地鐵交通，以及比最繁忙車站區更可控的夜晚基地。", watchOut: "新幹線早晨動線不如住在東京站附近直接。", href: "/areas-to-stay" },
   { name: "Kuramae / Tawaramachi", broadBase: "淺草 / 東東京", bestFor: "咖啡館、設計小店、安靜街道，以及不用住在最觀光街區也能接近老東京。", watchOut: "部分機場或新幹線路線可能需要多一次轉乘。", href: "/areas-to-stay" },
   { name: "Hatchobori / Kyobashi / Nihombashi", broadBase: "東京站側", bestFor: "早班新幹線、行李動線，以及靠近中央鐵道路線的較安靜商務基地。", watchOut: "夜晚地方感少於新宿、上野或淺草。", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
   { name: "Nippori / Okachimachi", broadBase: "上野側", bestFor: "成田交通、較有價值感的飯店搜尋，以及上野走廊周邊實用餐飲。", watchOut: "若想要夜生活或精緻第一晚，請仔細挑選。", href: "/areas-to-stay" },
@@ -1189,7 +1189,7 @@ tokyoFirstTimeSupplementCopyByLocale["zh-TW"].quickAnswerOverride = {
 
 tokyoFirstTimeSupplementCopyByLocale["zh-CN"].nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "东东京 / 东京站侧", bestFor: "较安静的夜晚、羽田或成田动线，以及比大型枢纽更好走的街道。", watchOut: "夜生活少于新宿，酒店外的第一次东京地标也较不明显。", href: "/local-tokyo" },
-  { name: "Akasaka / Akasaka-mitsuke", broadBase: "东京中心", bestFor: "餐饮、地铁交通，以及比最繁忙车站区更可控的夜晚基地。", watchOut: "新干线早晨动线不如住在东京站附近直接。", href: "/areas-to-stay/tokyo-first-time" },
+  { name: "Akasaka / Akasaka-mitsuke", broadBase: "东京中心", bestFor: "餐饮、地铁交通，以及比最繁忙车站区更可控的夜晚基地。", watchOut: "新干线早晨动线不如住在东京站附近直接。", href: "/areas-to-stay" },
   { name: "Kuramae / Tawaramachi", broadBase: "浅草 / 东东京", bestFor: "咖啡馆、设计小店、安静街道，以及不用住在最观光街区也能接近老东京。", watchOut: "部分机场或新干线路线可能需要多一次换乘。", href: "/areas-to-stay" },
   { name: "Hatchobori / Kyobashi / Nihombashi", broadBase: "东京站侧", bestFor: "早班新干线、行李动线，以及靠近中央铁路路线的较安静商务基地。", watchOut: "夜晚地方感少于新宿、上野或浅草。", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
   { name: "Nippori / Okachimachi", broadBase: "上野侧", bestFor: "成田交通、较有性价比的酒店搜索，以及上野走廊周边实用餐饮。", watchOut: "若想要夜生活或精致第一晚，请仔细挑选。", href: "/areas-to-stay" },
@@ -1239,7 +1239,7 @@ tokyoFirstTimeSupplementCopyByLocale["zh-CN"].quickAnswerOverride = {
 
 tokyoFirstTimeSupplementCopyByLocale.fr.nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "Est de Tokyo / cote Tokyo Station", bestFor: "Nuits plus calmes, logistique Haneda ou Narita et rues plus faciles que les grands hubs.", watchOut: "Moins de vie nocturne que Shinjuku et moins de reperes evidents de premier sejour hors de l'hotel.", href: "/local-tokyo" },
-  { name: "Akasaka / Akasaka-mitsuke", broadBase: "Centre de Tokyo", bestFor: "Restaurants, acces metro et base de nuit plus controlee que les zones les plus chargees.", watchOut: "Moins direct pour les matins Shinkansen que pres de Tokyo Station.", href: "/areas-to-stay/tokyo-first-time" },
+  { name: "Akasaka / Akasaka-mitsuke", broadBase: "Centre de Tokyo", bestFor: "Restaurants, acces metro et base de nuit plus controlee que les zones les plus chargees.", watchOut: "Moins direct pour les matins Shinkansen que pres de Tokyo Station.", href: "/areas-to-stay" },
   { name: "Kuramae / Tawaramachi", broadBase: "Asakusa / Est de Tokyo", bestFor: "Cafes, boutiques de design, rues calmes et acces au vieux Tokyo sans dormir dans les blocs les plus touristiques.", watchOut: "Certains trajets aeroport ou Shinkansen peuvent demander une correspondance de plus.", href: "/areas-to-stay" },
   { name: "Hatchobori / Kyobashi / Nihombashi", broadBase: "Cote Tokyo Station", bestFor: "Shinkansen tot, bagages et base business plus calme pres des lignes centrales.", watchOut: "Moins d'energie locale le soir que Shinjuku, Ueno ou Asakusa.", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
   { name: "Nippori / Okachimachi", broadBase: "Cote Ueno", bestFor: "Acces Narita, recherche d'hotels bon rapport qualite-prix et repas pratiques autour du corridor Ueno.", watchOut: "Choisissez avec soin si vous voulez de la vie nocturne ou une premiere nuit plus raffinee.", href: "/areas-to-stay" },
@@ -1289,7 +1289,7 @@ tokyoFirstTimeSupplementCopyByLocale.fr.quickAnswerOverride = {
 
 tokyoFirstTimeSupplementCopyByLocale.de.nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "Ost-Tokio / Seite Tokyo Station", bestFor: "Ruhigere Nachte, Haneda- oder Narita-Logistik und einfachere Strassen als die grossen Hubs.", watchOut: "Weniger Nachtleben als Shinjuku und weniger offensichtliche Erstbesucher-Orte direkt am Hotel.", href: "/local-tokyo" },
-  { name: "Akasaka / Akasaka-mitsuke", broadBase: "Zentrales Tokio", bestFor: "Essen, U-Bahn-Zugang und kontrolliertere Nachtbasis als die vollsten Bahnhofsgebiete.", watchOut: "Fur Shinkansen-Morgen weniger direkt als nahe Tokyo Station.", href: "/areas-to-stay/tokyo-first-time" },
+  { name: "Akasaka / Akasaka-mitsuke", broadBase: "Zentrales Tokio", bestFor: "Essen, U-Bahn-Zugang und kontrolliertere Nachtbasis als die vollsten Bahnhofsgebiete.", watchOut: "Fur Shinkansen-Morgen weniger direkt als nahe Tokyo Station.", href: "/areas-to-stay" },
   { name: "Kuramae / Tawaramachi", broadBase: "Asakusa / Ost-Tokio", bestFor: "Cafes, Designshops, ruhigere Strassen und Alt-Tokio-Zugang ohne die touristischsten Blocks.", watchOut: "Einige Flughafen- oder Shinkansen-Routen brauchen eventuell einen Umstieg mehr.", href: "/areas-to-stay" },
   { name: "Hatchobori / Kyobashi / Nihombashi", broadBase: "Seite Tokyo Station", bestFor: "Fruher Shinkansen, Gepacklogistik und ruhigere Business-Basis nahe zentralen Bahnlinien.", watchOut: "Weniger lokale Abendenergie als Shinjuku, Ueno oder Asakusa.", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
   { name: "Nippori / Okachimachi", broadBase: "Seite Ueno", bestFor: "Narita-Zugang, bessere Hotelsuche nach Wert und praktische Essensoptionen im Ueno-Korridor.", watchOut: "Sorgfaltig wahlen, wenn du Nachtleben oder ein polierteres Ankunftsgefuhl willst.", href: "/areas-to-stay" },
@@ -1339,7 +1339,7 @@ tokyoFirstTimeSupplementCopyByLocale.de.quickAnswerOverride = {
 
 tokyoFirstTimeSupplementCopyByLocale.ru.nearby.items = [
   { name: "Suitengumae / Ningyocho", broadBase: "Восточный Токио / сторона Tokyo Station", bestFor: "Более тихие ночи, логистика Ханэда или Нарита и улицы проще, чем у крупных узлов.", watchOut: "Меньше ночной жизни, чем в Синдзюку, и меньше очевидных мест первого визита рядом с отелем.", href: "/local-tokyo" },
-  { name: "Akasaka / Akasaka-mitsuke", broadBase: "Центр Токио", bestFor: "Еда, метро и более спокойная ночная база, чем самые загруженные районы станций.", watchOut: "Менее прямой вариант для утреннего синкансэна, чем район Tokyo Station.", href: "/areas-to-stay/tokyo-first-time" },
+  { name: "Akasaka / Akasaka-mitsuke", broadBase: "Центр Токио", bestFor: "Еда, метро и более спокойная ночная база, чем самые загруженные районы станций.", watchOut: "Менее прямой вариант для утреннего синкансэна, чем район Tokyo Station.", href: "/areas-to-stay" },
   { name: "Kuramae / Tawaramachi", broadBase: "Асакуса / Восточный Токио", bestFor: "Кафе, дизайн-магазины, спокойные улицы и доступ к старому Токио без самых туристических кварталов.", watchOut: "Для некоторых маршрутов из аэропорта или к синкансэну может понадобиться лишняя пересадка.", href: "/areas-to-stay" },
   { name: "Hatchobori / Kyobashi / Nihombashi", broadBase: "Сторона Tokyo Station", bestFor: "Ранний синкансэн, багаж и более спокойная деловая база рядом с центральными линиями.", watchOut: "Меньше местной вечерней энергии, чем в Синдзюку, Уэно или Асакуса.", href: "/areas-to-stay/tokyo-station-vs-shinjuku" },
   { name: "Nippori / Okachimachi", broadBase: "Сторона Уэно", bestFor: "Доступ к Нарите, поиск отелей с лучшей ценностью и практичная еда вокруг коридора Уэно.", watchOut: "Выбирайте внимательно, если нужны ночная жизнь или более аккуратное первое впечатление.", href: "/areas-to-stay" },
@@ -1900,8 +1900,8 @@ function ProblemHotelBaseSection({
       <div className="mt-4 flex flex-wrap gap-2">
         {[
           { href: "/areas-to-stay", label: "Open Tokyo Stay Finder" },
-          { href: "/areas-to-stay/tokyo-first-time", label: "Tokyo first-time hotel base guide" },
-          { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Tokyo with luggage" },
+          { href: "/areas-to-stay", label: "Tokyo first-time hotel base guide" },
+          { href: "/areas-to-stay/asakusa-vs-ueno", label: "Tokyo with luggage" },
           { href: "/airport-transfers", label: "Airport transfer by hotel area" },
         ].map((link) => (
           <TrackedInternalLink
@@ -1976,7 +1976,7 @@ function ComparisonAreaHotelCtas({
 async function TokyoFirstTimeHub({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: "tokyoStayHub" });
   const supplement = tokyoFirstTimeSupplementCopyByLocale[locale] ?? tokyoFirstTimeSupplementCopyByLocale.en;
-  const pagePath = "/areas-to-stay/tokyo-first-time";
+  const pagePath = "/areas-to-stay";
   const esimHref = getAffUrl("esim");
   const heroImage = publicImageIfExists(tokyoStayImages.hero);
   const planCards = (t.raw("travelPlan.cards") as Array<{ label: string; area: string; href: string }>).map((card) => ({
@@ -2093,7 +2093,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                 <div className="mt-3 rounded-2xl border border-slate-200 bg-white/70 p-4">
                   <p className="text-sm font-semibold leading-6 text-slate-900">{supplement.earlyDecision.note}</p>
                   <TrackedInternalLink
-                    href="/areas-to-stay/tokyo-first-time#hotel-price-timing"
+                    href="/areas-to-stay#hotel-price-timing"
                     sourcePage={pagePath}
                     placement="first_time_top_room_dates"
                     label={supplement.earlyDecision.roomDateCta}
@@ -2178,8 +2178,8 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
           <div className="mt-4 flex flex-wrap gap-2">
             {[
               { href: "/areas-to-stay", label: "Open Tokyo Stay Finder", placement: "first_time_finder_click" },
-              { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Choose a luggage-friendly Tokyo base", placement: "first_time_comparison_click" },
-              { href: "/areas-to-stay/where-to-stay-before-shinkansen", label: "Where to stay before Shinkansen", placement: "first_time_comparison_click" },
+              { href: "/areas-to-stay/asakusa-vs-ueno", label: "Choose a luggage-friendly Tokyo base", placement: "first_time_comparison_click" },
+              { href: "/areas-to-stay/asakusa-vs-ueno", label: "Where to stay before Shinkansen", placement: "first_time_comparison_click" },
               { href: "/airport-transfers", label: "Match airport transfer to hotel area", placement: "first_time_comparison_click" },
             ].map((link) => (
               <TrackedInternalLink
@@ -2350,7 +2350,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               </ul>
               <div className="mt-4 flex flex-wrap gap-3">
                 <TrackedInternalLink
-                  href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
+                  href="/areas-to-stay#hotel-base-matrix"
                   sourcePage={pagePath}
                   placement="tokyo_first_time_price_timing"
                   label={supplement.priceTiming.matrixCta}
@@ -2505,7 +2505,7 @@ const firstTimeStayHubs: Record<string, FirstTimeStayHubConfig> = {
         transportNote: "Direct Shinkansen, JR, subway, buses, and Haruka airport train.",
         hotelKey: "kyotoStation",
         actionLabel: "Compare Kyoto Station hotels",
-        detailHref: "/areas-to-stay/kyoto-station-vs-gion",
+        detailHref: "/areas-to-stay",
         detailLabel: "See Kyoto Station vs Gion",
       },
       {
@@ -2516,7 +2516,7 @@ const firstTimeStayHubs: Record<string, FirstTimeStayHubConfig> = {
         transportNote: "Good Hankyu, subway, bus, and taxi access across central Kyoto.",
         hotelKey: "gionKawaramachi",
         actionLabel: "Compare Kawaramachi / Shijo hotels",
-        detailHref: "/areas-to-stay/kyoto-station-vs-gion",
+        detailHref: "/areas-to-stay",
         detailLabel: "See Kyoto Station vs Gion",
       },
       {
@@ -2527,7 +2527,7 @@ const firstTimeStayHubs: Record<string, FirstTimeStayHubConfig> = {
         transportNote: "Best on foot and by taxi; Kyoto Station is usually a bus or taxi ride away.",
         hotelKey: "gionKawaramachi",
         actionLabel: "Compare Gion / Higashiyama hotels",
-        detailHref: "/areas-to-stay/kyoto-station-vs-gion",
+        detailHref: "/areas-to-stay",
         detailLabel: "See Kyoto Station vs Gion",
       },
       {
@@ -2574,7 +2574,7 @@ const firstTimeStayHubs: Record<string, FirstTimeStayHubConfig> = {
         transportNote: "Strong subway and Nankai access; practical for KIX and Dotonbori.",
         hotelKey: "namba",
         actionLabel: "Compare Namba hotels",
-        detailHref: "/areas-to-stay/namba-vs-umeda",
+        detailHref: "/areas-to-stay",
         detailLabel: "See Namba vs Umeda",
       },
       {
@@ -2585,7 +2585,7 @@ const firstTimeStayHubs: Record<string, FirstTimeStayHubConfig> = {
         transportNote: "Best for JR, Hankyu, Hanshin, subway, and Kansai rail day trips.",
         hotelKey: "umeda",
         actionLabel: "Compare Umeda hotels",
-        detailHref: "/areas-to-stay/namba-vs-umeda",
+        detailHref: "/areas-to-stay",
         detailLabel: "See Namba vs Umeda",
       },
       {
@@ -2596,7 +2596,7 @@ const firstTimeStayHubs: Record<string, FirstTimeStayHubConfig> = {
         transportNote: "Direct Shinkansen and subway to central Osaka; useful for early rail days.",
         hotelKey: "shinOsaka",
         actionLabel: "Compare Shin-Osaka hotels",
-        detailHref: "/areas-to-stay/shin-osaka-vs-namba",
+        detailHref: "/areas-to-stay",
         detailLabel: "See Shin-Osaka vs Namba",
       },
       {

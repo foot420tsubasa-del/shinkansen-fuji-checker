@@ -401,10 +401,10 @@ export default async function NavigateJapaneseStationsPage({ params }: Props) {
               smoother — especially with luggage.
             </p>
             <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-              <RelatedLink href="/areas-to-stay/tokyo-first-time">
+              <RelatedLink href="/areas-to-stay">
                 Where to stay in Tokyo for first-timers
               </RelatedLink>
-              <RelatedLink href="/areas-to-stay/where-to-stay-before-shinkansen">
+              <RelatedLink href="/areas-to-stay/asakusa-vs-ueno">
                 Where to stay before a Shinkansen trip
               </RelatedLink>
               <RelatedLink href="/areas-to-stay/tokyo/shinjuku">
@@ -419,7 +419,7 @@ export default async function NavigateJapaneseStationsPage({ params }: Props) {
               <RelatedLink href="/areas-to-stay/tokyo/asakusa">
                 Staying in Asakusa
               </RelatedLink>
-              <RelatedLink href="/areas-to-stay/tokyo-hotels">
+              <RelatedLink href="/areas-to-stay">
                 Compare all Tokyo hotel areas
               </RelatedLink>
               <RelatedLink href="/how-to-buy-suica">

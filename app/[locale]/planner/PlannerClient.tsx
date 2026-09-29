@@ -20,7 +20,7 @@ import { Link } from "@/i18n/navigation";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { getAffUrl, requireAffUrl, getOmioUrl } from "@/src/affiliateLinks";
 import { getProviderFromHref, trackAffiliateClick, trackChecklistComplete, trackTemplateSelect } from "@/lib/analytics";
-import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
 // ─── Constants ──────────────────────────────────────────────────────────────
@@ -182,26 +182,25 @@ const esimUrl = getAffUrl("esim");
 const insuranceUrl = getAffUrl("insurance");
 
 function plannerHotelProviders(hotelKey: HotelAreaKey): ProviderChoiceButton[] {
+  // One affiliate programme (see lib/hotel-links.ts). This was reading
+  // config.tripUrl directly, which sidestepped the Klook-only resolver and
+  // left the last Trip.com link on the site rendering here.
   const hotelLink = getHotelLink(hotelKey);
-  const config = getTripHotelConfig(hotelKey);
-  const tripUrl = config.tripUrl?.trim() ?? "";
-  const providers: ProviderChoiceButton[] = [];
+  if (!hotelLink.href || hotelLink.href === "#") return [];
 
-  if (tripUrl) {
-    providers.push({
-      label: "Trip.com",
-      href: hotelLink.provider === "trip" ? hotelLink.href : tripUrl,
-      trackingHref: tripUrl,
-      provider: "trip",
+  return [
+    {
+      label: hotelLink.label,
+      href: hotelLink.href,
+      trackingHref: hotelLink.trackingHref,
+      provider: "klook",
       product: "hotel",
-      linkId: `hotelArea.${hotelKey}.trip`,
+      linkId: hotelLink.fallbackLinkId,
       placement: "planner_route_stack",
       variant: "primary",
       category: "hotel",
-    });
-  }
-
-  return providers;
+    },
+  ];
 }
 
 const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = {
@@ -224,7 +223,7 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     ].filter(Boolean) as RouteBookingAction[],
     hotelRecommendation: "Short trip, fewer transfers, and easier early rail days.",
     hotelRecommendedAreas: ["Tokyo Station", "Shinjuku"],
-    hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
+    hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay", external: false, priority: "secondary" },
     hotelDetailLinks: [
       { label: "See Tokyo Station hotels", href: "/areas-to-stay" },
       { label: "See Shinjuku hotels", href: "/areas-to-stay" },
@@ -258,7 +257,7 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     ].filter(Boolean) as RouteBookingAction[],
     hotelRecommendation: "Best balance for first-time Tokyo, Kyoto / Osaka transfer, and airport access.",
     hotelRecommendedAreas: ["Shinjuku", "Ueno / Asakusa", "Tokyo Station"],
-    hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
+    hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay", external: false, priority: "secondary" },
     hotelDetailLinks: [
       { label: "See Shinjuku hotels", href: "/areas-to-stay" },
       { label: "See Ueno hotels", href: "/areas-to-stay" },
@@ -294,7 +293,7 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     ].filter(Boolean) as RouteBookingAction[],
     hotelRecommendation: "Good balance between Tokyo sightseeing and onward rail movement.",
     hotelRecommendedAreas: ["Shinjuku", "Tokyo Station"],
-    hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
+    hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay", external: false, priority: "secondary" },
     hotelDetailLinks: [
       { label: "See Shinjuku hotels", href: "/areas-to-stay" },
       { label: "See Tokyo Station hotels", href: "/areas-to-stay" },
@@ -329,7 +328,7 @@ const routeBookingRecommendations: Record<string, RouteBookingRecommendation> = 
     ].filter(Boolean) as RouteBookingAction[],
     hotelRecommendation: "Multiple long-distance rail days and luggage movement make logistics more important.",
     hotelRecommendedAreas: ["Tokyo Station", "Ueno"],
-    hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay/tokyo-first-time", external: false, priority: "secondary" },
+    hotelPrimaryAction: { label: "Choose Tokyo base", href: "/areas-to-stay", external: false, priority: "secondary" },
     hotelDetailLinks: [
       { label: "See Tokyo Station hotels", href: "/areas-to-stay" },
       { label: "See Ueno hotels", href: "/areas-to-stay" },
@@ -1143,7 +1142,7 @@ export function PlannerClient() {
             <div className="mt-3 space-y-1.5">
               {([
                 { key: "airport", href: "/airport-transfers/narita-to-shinjuku", icon: Plane },
-                { key: "stay", href: "/areas-to-stay/tokyo-first-time", icon: MapPin },
+                { key: "stay", href: "/areas-to-stay", icon: MapPin },
                 { key: "seat", href: "/", icon: Train },
                 { key: "itinerary", href: `/itineraries/${templateData.itinerarySlug}`, icon: Calendar },
               ] as const).map((link) => (

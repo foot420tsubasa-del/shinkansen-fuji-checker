@@ -272,10 +272,25 @@ test("retired routes: the areas-to-stay hub stays indexable", () => {
 
 test("sitemap offers no URL that redirects away", () => {
   const sitemapSrc = readFileSync("app/sitemap.ts", "utf8");
+  // dynamicPaths is generated from lib/content, so a folded slug reaches the
+  // sitemap without ever appearing in the literal arrays — that is how eight
+  // redirecting URLs got back in once already.
+  const dynamicSlugs = [
+    ...[...readFileSync("lib/content/stay.ts", "utf8").matchAll(/^\s+slug: "([^"]+)"/gm)].map((m) => `/areas-to-stay/${m[1]}`),
+    ...[...readFileSync("lib/content/itineraries.ts", "utf8").matchAll(/^\s+slug: "([^"]+)"/gm)].map((m) => `/itineraries/${m[1]}`),
+    ...[...readFileSync("lib/content/transfers.ts", "utf8").matchAll(/^\s+slug: "([^"]+)"/gm)].map((m) => `/airport-transfers/${m[1]}`),
+  ];
   const listed = [
     ...(sitemapSrc.match(/const englishOnlyContentPaths = \[([\s\S]*?)\n\];/)?.[1] ?? "").matchAll(/"([^"]*)"/g),
     ...(sitemapSrc.match(/const translatedPaths = \[([\s\S]*?)\n\];/)?.[1] ?? "").matchAll(/"([^"]*)"/g),
   ].map((m) => m[1]);
+  const excluded = new Set([
+    ...[...readFileSync("lib/retired-routes.ts", "utf8").matchAll(/^  "([^"]+)",$/gm)].map((m) => m[1]),
+  ]);
+  for (const path of dynamicSlugs) {
+    if (excluded.has(path)) continue;
+    listed.push(path);
+  }
   const redirected = [...readFileSync("next.config.ts", "utf8").matchAll(/source: "(\/[a-z0-9/-]+)"/g)]
     .map((m) => m[1])
     .filter((p) => !p.includes(":locale"));

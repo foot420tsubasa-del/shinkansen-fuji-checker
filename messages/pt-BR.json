@@ -1125,17 +1125,17 @@
         {
           "title": "Tokyo Station",
           "description": "Melhor para Shinkansen e logística simples.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Asakusa",
           "description": "Mais passeios tradicionais e estrutura turística.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Ueno",
           "description": "Hotéis econômicos e bom acesso a Narita.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Hotéis no leste de Tokyo",
@@ -1147,7 +1147,7 @@
         {
           "title": "Guia de áreas de Tokyo",
           "description": "Compare bases para primeira viagem antes de escolher hotel.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Japão em 7 dias pela primeira vez",
@@ -1201,12 +1201,12 @@
         {
           "title": "Asakusa",
           "description": "Mais hotéis, comida e transporte por perto.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Ueno",
           "description": "Econômico e com bom acesso a Narita.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Kiyosumi-Shirakawa",
@@ -1223,7 +1223,7 @@
         {
           "title": "Guia de áreas de Tokyo",
           "description": "Compare bases para primeira viagem antes de escolher hotel.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Japão em 7 dias pela primeira vez",
@@ -1277,12 +1277,12 @@
         {
           "title": "Asakusa",
           "description": "Mais hotéis, comida e transporte por perto.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Ueno",
           "description": "Econômico e com bom acesso a Narita.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Kiyosumi-Shirakawa",
@@ -1299,7 +1299,7 @@
         {
           "title": "Guia de áreas de Tokyo",
           "description": "Compare bases para primeira viagem antes de escolher hotel.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Japão em 7 dias pela primeira vez",
@@ -1358,12 +1358,12 @@
         {
           "title": "Asakusa",
           "description": "Mais hotéis, comida e transporte por perto.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Ueno",
           "description": "Econômico e com bom acesso a Narita.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Kiyosumi-Shirakawa",
@@ -1380,7 +1380,7 @@
         {
           "title": "Guia de áreas de Tokyo",
           "description": "Compare bases para primeira viagem antes de escolher hotel.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Japão em 7 dias pela primeira vez",
@@ -1434,12 +1434,12 @@
         {
           "title": "Asakusa",
           "description": "Mais hotéis, comida e transporte por perto.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Ueno",
           "description": "Econômico e com bom acesso a Narita.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Kiyosumi-Shirakawa",
@@ -1456,7 +1456,7 @@
         {
           "title": "Guia de áreas de Tokyo",
           "description": "Compare bases para primeira viagem antes de escolher hotel.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Japão em 7 dias pela primeira vez",
@@ -1510,7 +1510,7 @@
         {
           "title": "Tokyo Station",
           "description": "Melhor para saídas de Shinkansen e logística direta.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Kiyosumi-Shirakawa",
@@ -1520,7 +1520,7 @@
         {
           "title": "Asakusa",
           "description": "Mais passeios tradicionais e melhor estrutura para visitantes.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Transfers do aeroporto",
@@ -1532,7 +1532,7 @@
         {
           "title": "Guia de áreas de Tokyo",
           "description": "Compare bases de primeira viagem antes de escolher hotel.",
-          "href": "/areas-to-stay/tokyo-first-time"
+          "href": "/areas-to-stay"
         },
         {
           "title": "Guia de transfer do aeroporto",
@@ -1581,7 +1581,7 @@
       {
         "title": "Comparar áreas de Tokyo",
         "description": "Use antes de escolher onde dormir.",
-        "href": "/areas-to-stay/tokyo-first-time"
+        "href": "/areas-to-stay"
       },
       {
         "title": "Abrir roteiro de 7 dias",
@@ -1687,17 +1687,17 @@
         "eyebrow": "Continue planejando",
         "links": [
           {
-            "href": "/areas-to-stay/tokyo-first-time",
+            "href": "/areas-to-stay",
             "label": "Guia de áreas para se hospedar em Tóquio",
             "desc": "Escolha Shinjuku, Ueno, Asakusa, Tokyo Station ou leste de Tóquio."
           },
           {
-            "href": "/areas-to-stay/kyoto-station-vs-gion",
+            "href": "/areas-to-stay",
             "label": "Guia de áreas para se hospedar em Quioto",
             "desc": "Escolha entre conveniência da estação e atmosfera de Quioto."
           },
           {
-            "href": "/areas-to-stay/namba-vs-umeda",
+            "href": "/areas-to-stay",
             "label": "Guia de áreas para se hospedar em Osaka",
             "desc": "Compare as duas principais zonas de hotéis de Osaka."
           },
@@ -1901,9 +1901,9 @@
   },
   "areasToStayHub": {
     "meta": {
-      "title": "Onde ficar no Japão — guias de áreas em Tóquio, Kyoto, Osaka e Mt. Fuji",
-      "description": "Escolha onde ficar no Japão por cidade, rota, acesso ao aeroporto, planos de Shinkansen e estilo de viagem. Compare áreas de hotéis em Tóquio, Kyoto, Osaka e Mt. Fuji.",
-      "ogDescription": "Escolha onde ficar no Japão por cidade, rota, aeroporto, Shinkansen e estilo de viagem."
+      "title": "Onde ficar em Tóquio — compare as regiões de estação",
+      "description": "Compare as regiões de estação de Tóquio antes de reservar: Ueno, Asakusa, Shinjuku e Tokyo Station, pontuadas por acesso ao aeroporto, bagagem, dias de Shinkansen e tranquilidade.",
+      "ogDescription": "Compare as regiões de estação de Tóquio antes de reservar: Ueno, Asakusa, Shinjuku e Tokyo Station, pontuadas por acesso ao aeroporto, bagagem, dias de Shinkansen e tranquilidade."
     },
     "breadcrumb": {
       "home": "Início",
@@ -1911,9 +1911,9 @@
     },
     "hero": {
       "eyebrow": "Hub de áreas para ficar",
-      "title": "Onde ficar no Japão",
-      "subtitle": "Escolha a cidade e a área do hotel antes de reservar. Comece por Tóquio, Kyoto, Osaka ou Mt. Fuji conforme sua rota, aeroporto, planos de Shinkansen e estilo de viagem.",
-      "primaryCta": "Encontrar minha base de hotel em Tóquio",
+      "title": "Onde ficar em Tóquio",
+      "subtitle": "Escolha a região antes do hotel. Cada comparação pontua as áreas por acesso ao aeroporto, bagagem, dias de Shinkansen e barulho.",
+      "primaryCta": "Comparar Ueno e Asakusa",
       "tagline": "Escolha sua base de hotel antes de escolher um hotel.",
       "body": "A melhor área de estação depende do seu aeroporto, bagagem, planos de Shinkansen e do tipo de viagem que você quer.",
       "imageAlt": "Planejamento de base de hotel em Tóquio"
@@ -1926,36 +1926,6 @@
       "Shinkansen cedo -> escolha uma base boa para malas e trens matinais.",
       "Perto do Mt. Fuji -> use Kawaguchiko para uma noite com vista do Fuji."
     ],
-    "citySection": {
-      "eyebrow": "Cidade primeiro",
-      "title": "Escolha sua cidade"
-    },
-    "cityCards": {
-      "tokyo": {
-        "title": "Tóquio",
-        "subtitle": "Melhor para primeira viagem ao Japão, vida noturna, aeroportos e planejamento do Shinkansen.",
-        "cta": "Abrir guia de Tóquio",
-        "placementLabel": "Cartão de cidade Tóquio"
-      },
-      "kyoto": {
-        "title": "Kyoto",
-        "subtitle": "Melhor para templos, atmosfera clássica, ruas tradicionais e bate-voltas.",
-        "cta": "Abrir guia de Kyoto",
-        "placementLabel": "Cartão de cidade Kyoto"
-      },
-      "osaka": {
-        "title": "Osaka",
-        "subtitle": "Melhor para comida, vida noturna, acesso ao aeroporto de Kansai e bate-voltas para Kyoto / Nara.",
-        "cta": "Abrir guia de Osaka",
-        "placementLabel": "Cartão de cidade Osaka"
-      },
-      "kawaguchiko": {
-        "title": "Mt. Fuji / Kawaguchiko",
-        "subtitle": "Melhor se você quer dormir perto do Mt. Fuji em vez de vê-lo só do Shinkansen.",
-        "cta": "Encontrar estadias com vista do Fuji",
-        "placementLabel": "Cartão de cidade Kawaguchiko"
-      }
-    },
     "problemSection": {
       "eyebrow": "Lógica da rota",
       "title": "Escolha pelo problema da viagem"
@@ -2000,7 +1970,7 @@
     },
     "featuredGuides": {
       "eyebrow": "Guias existentes",
-      "title": "Guias de estadia em destaque",
+      "title": "Comparações de regiões de estação",
       "groups": {
         "tokyo": "Tóquio",
         "kyoto": "Kyoto",
@@ -2008,24 +1978,6 @@
         "fuji": "Mt. Fuji"
       },
       "guides": {
-        "tokyo-first-time": {
-          "title": "Onde ficar em Tóquio — guia para primeira viagem",
-          "description": "Compare Shinjuku, Ueno, Asakusa, Tokyo Station e o leste mais tranquilo de Tóquio.",
-          "tags": [
-            "Tóquio",
-            "Primeira vez",
-            "Guia de áreas"
-          ]
-        },
-        "where-to-stay-before-shinkansen": {
-          "title": "Onde ficar antes de pegar o Shinkansen em Tóquio",
-          "description": "Use quando malas e uma saída cedo de Tokyo Station forem importantes.",
-          "tags": [
-            "Tóquio",
-            "Shinkansen",
-            "Bagagem"
-          ]
-        },
         "tokyo-station-vs-shinjuku": {
           "title": "Tokyo Station vs Shinjuku",
           "description": "Compare logística de trem com comida, vida noturna e conveniência para iniciantes.",
@@ -2050,55 +2002,13 @@
             "Ueno"
           ]
         },
-        "kyoto-first-time": {
-          "title": "Onde ficar em Kyoto para primeira viagem",
-          "description": "Compare Kyoto Station, Kawaramachi / Shijo, Gion, Arashiyama e o norte mais calmo.",
+        "shinjuku-vs-ueno-vs-asakusa": {
+          "title": "Shinjuku vs Ueno vs Asakusa",
+          "description": "Três bases de Tóquio lado a lado quando duas não bastam.",
           "tags": [
-            "Quioto",
-            "Primeira vez",
-            "Guia de áreas"
-          ]
-        },
-        "kyoto-station-vs-gion": {
-          "title": "Kyoto Station vs Gion",
-          "description": "Decida se logística ou atmosfera clássica de Kyoto deve vir primeiro.",
-          "tags": [
-            "Kyoto Station",
-            "Gion"
-          ]
-        },
-        "osaka-first-time": {
-          "title": "Onde ficar em Osaka para primeira viagem",
-          "description": "Compare Namba, Umeda, Shin-Osaka, Tennoji e áreas centrais mais tranquilas.",
-          "tags": [
-            "Osaka",
-            "Primeira vez",
-            "Guia de áreas"
-          ]
-        },
-        "namba-vs-umeda": {
-          "title": "Namba vs Umeda",
-          "description": "Escolha entre comida/vida noturna e melhor acesso ferroviário.",
-          "tags": [
-            "Namba",
-            "Umeda"
-          ]
-        },
-        "shin-osaka-vs-namba": {
-          "title": "Shin-Osaka vs Namba",
-          "description": "Decida se a logística do Shinkansen deve definir sua base em Osaka.",
-          "tags": [
-            "Shin-Osaka",
-            "Namba"
-          ]
-        },
-        "kawaguchiko": {
-          "title": "Onde ficar em Kawaguchiko — hotéis com vista para o Mt. Fuji",
-          "description": "Use para uma noite com vista do Mt. Fuji em Kawaguchiko.",
-          "tags": [
-            "Monte Fuji",
-            "Kawaguchiko",
-            "Pernoite"
+            "Shinjuku",
+            "Ueno",
+            "Asakusa"
           ]
         }
       }

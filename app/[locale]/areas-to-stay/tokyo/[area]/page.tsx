@@ -220,7 +220,7 @@ const updatedHotelPageBySlug: Record<string, string> = {
   ueno: "/areas-to-stay",
   asakusa: "/areas-to-stay",
   "tokyo-station": "/areas-to-stay",
-  "east-tokyo": "/areas-to-stay/tokyo-hotels",
+  "east-tokyo": "/areas-to-stay",
 };
 
 function hotelExamples(areaKey?: HotelAreaKey) {
@@ -288,7 +288,7 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
       });
 
   // Primary funnel to the updated 36-area hotel detail page (booking SSOT).
-  const updatedHotelHref = updatedHotelPageBySlug[area] ?? "/areas-to-stay/tokyo-hotels";
+  const updatedHotelHref = updatedHotelPageBySlug[area] ?? "/areas-to-stay";
   const updatedHotelLabel =
     area === "east-tokyo"
       ? t("openUpdatedPage")
@@ -300,7 +300,7 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
       <Container className="py-8 md:py-12">
         <Breadcrumb items={[
           { label: t("breadcrumb.parent"), href: "/areas-to-stay" },
-          { label: t("breadcrumb.hub"), href: "/areas-to-stay/tokyo-first-time" },
+          { label: t("breadcrumb.hub"), href: "/areas-to-stay" },
           { label: localized.breadcrumbLabel },
         ]} />
 
@@ -352,7 +352,7 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
                 {updatedHotelLabel}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </TrackedCtaLink>
-              <Link href="/areas-to-stay/tokyo-first-time" className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
+              <Link href="/areas-to-stay" className="inline-flex min-h-10 items-center justify-center gap-1.5 rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:bg-slate-50">
                 {t("backToHub")}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
@@ -414,7 +414,7 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
               <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-sky-700">{t("examples.eyebrow")}</p>
               <h2 className="mt-1 text-xl font-semibold text-slate-950">{t("examples.title")}</h2>
             </div>
-            <Link href="/local-hotel-picks" className="text-sm font-semibold text-[#106b43] underline underline-offset-4">
+            <Link href="/areas-to-stay" className="text-sm font-semibold text-[#106b43] underline underline-offset-4">
               {t("examples.more")}
             </Link>
           </div>
@@ -469,10 +469,10 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
         <section className="mt-10">
           <h2 className="text-lg font-semibold text-slate-950">{t("continue.title")}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-4">
-            <TrackedCtaLink href="/areas-to-stay/tokyo-first-time" placement="next_steps" label={t("continue.hub")} pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
+            <TrackedCtaLink href="/areas-to-stay" placement="next_steps" label={t("continue.hub")} pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
               {t("continue.hub")}
             </TrackedCtaLink>
-            <TrackedCtaLink href="/local-hotel-picks" placement="next_steps" label={t("continue.localPicks")} pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
+            <TrackedCtaLink href="/areas-to-stay" placement="next_steps" label={t("continue.localPicks")} pagePath={pagePath} locale={locale} category="hotel" className={filledNextStepClass}>
               {t("continue.localPicks")}
             </TrackedCtaLink>
             <TrackedCtaLink href="/plan-your-trip" placement="next_steps" label={t("continue.plan")} pagePath={pagePath} locale={locale} className={filledNextStepClass}>

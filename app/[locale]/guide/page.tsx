@@ -1149,7 +1149,7 @@ export default async function GuidePage({ params }: Props) {
             {ui.planAirportTransfer}
           </Link>
           <Link
-            href="/areas-to-stay/tokyo-hotels"
+            href="/areas-to-stay"
             className="inline-flex min-h-10 items-center justify-center rounded-xl border border-[#0b214a] bg-[#0b214a] px-3 py-2 font-semibold text-yellow-300 transition-colors hover:bg-[#081a3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b214a]/30"
           >
             {ui.chooseStayArea}
@@ -1210,7 +1210,7 @@ export default async function GuidePage({ params }: Props) {
           </p>
         </div>
         <TrackedInternalLink
-          href="/areas-to-stay/where-to-stay-before-shinkansen"
+          href="/areas-to-stay/asakusa-vs-ueno"
           sourcePage="/guide"
           placement="guide_top_after_quick_answer"
           label="Compare Tokyo hotel bases"
@@ -1341,7 +1341,7 @@ export default async function GuidePage({ params }: Props) {
         </div>
 
         <TrackedInternalLink
-          href="/areas-to-stay/where-to-stay-before-shinkansen"
+          href="/areas-to-stay/asakusa-vs-ueno"
           sourcePage="/guide"
           placement="guide_after_seat_next_step"
           label="Choose hotel base before Shinkansen"
@@ -1394,7 +1394,7 @@ export default async function GuidePage({ params }: Props) {
       </p>
       <div className="mt-3 flex flex-wrap gap-2">
         <TrackedInternalLink
-          href="/areas-to-stay/tokyo-first-time"
+          href="/areas-to-stay"
           sourcePage="/guide"
           placement="guide_to_hotels"
           label="Where to stay in Tokyo"
@@ -1480,7 +1480,7 @@ export default async function GuidePage({ params }: Props) {
           </span>
         </TrackedAffiliateLink>
         <TrackedInternalLink
-          href="/areas-to-stay/tokyo-hotels"
+          href="/areas-to-stay"
           sourcePage="/guide"
           placement="guide_continue_planning"
           label="Choose Tokyo hotel base"
@@ -1917,7 +1917,7 @@ export default async function GuidePage({ params }: Props) {
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.klookH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.klookText}</p>
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.jrPassCounterH3}</h3>
-            <p className="text-[12px] text-slate-600">{copy.jrPassCounterTextBefore} <Link href="/areas-to-stay/tokyo-first-time" className="font-semibold text-sky-700 underline underline-offset-2">{copy.stayLink}</Link>.</p>
+            <p className="text-[12px] text-slate-600">{copy.jrPassCounterTextBefore} <Link href="/areas-to-stay" className="font-semibold text-sky-700 underline underline-offset-2">{copy.stayLink}</Link>.</p>
             {renderHotelBridge()}
             {renderSeatBookingReminder()}
           </section>
