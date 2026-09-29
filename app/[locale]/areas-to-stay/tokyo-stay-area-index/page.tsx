@@ -390,7 +390,7 @@ function namedHotelsForFinderArea(areaId: string): FinderArea["namedHotels"] {
 function finderAreaDetailHref(locale: string, areaId: string): string {
   const params = new URLSearchParams();
   params.set("area", areaId);
-  return localizedIndexHref(locale, `?${params.toString()}#selected-area`);
+  return localizedIndexHref(locale, `?${params.toString()}`);
 }
 
 function formatLastChecked(iso: string): string {

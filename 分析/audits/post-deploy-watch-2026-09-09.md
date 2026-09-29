@@ -561,3 +561,48 @@ touristAccess / lodgingChoice / localFeel / crowdStress。
 375px で横スクロールなし、キー露出なし。
 
 実施日: **2026-09-29**
+
+---
+
+# 追記: 比較ページの導線整理（2026-09-29）
+
+Stay Finder を畳んだ余波で、`/areas-to-stay/asakusa-vs-ueno` に
+壊れた導線が残っていた。ユーザー指摘により整理。
+
+## 直した5件
+
+| 症状 | 原因 |
+|---|---|
+| 「Read the Asakusa area guide →」が `/areas-to-stay` に飛ぶ | Finderのエリア別ビューが消え、一括置換で `?legacyArea=…#selected-area` という**誰も読まないパラメータ**に化けていた |
+| 「See my Tokyo base」が `#finder` へ | 畳んだページのアンカー |
+| 「compare this area in the Finder」という説明文 | 到達できないFinderを前提にした文言 |
+| QuickRec が同じ文を見出しとボタンで二重表示 | `ctaLabel` を両方に出していた |
+| `legacyArea` / `#selected-area` が11ファイル133箇所 | 一括置換の残骸 |
+
+いずれも**リンク先が存在しないのではなく、ラベルが約束したものを届けていなかった**種類の不具合。
+「エリアガイドを読む」と書いてハブに飛ばすくらいなら、リンク自体を消した。
+
+## Klookのホテル飛び先について（改善できない）
+
+`/search/result/?query=Ueno hotel` が「微妙」という指摘は妥当。
+実際に開くと74件の実在ホテルが価格・評価付きで並ぶので機能はするが、
+タブが「All」でツアーや交通も混ざる。
+
+**Klookを調べた結果、ホテルにはエリア別ランディングページが存在しない。**
+`/hotels/` は検索フォームのみで、その下は `/hotels/detail/<id>` という個別ホテルページ。
+鉄道が `japan-rail/shinkansen/28-tokyo/30-kyoto/` のような区間ページを持つのとは構造が違う。
+
+| 候補 | 評価 |
+|---|---|
+| `/search/result/?query=Ueno hotel` | **現行。取れる中では最善** |
+| `/hotels/` | エリア指定なし。より悪い |
+| `/hotels/detail/<id>` | 特定1軒に限定される |
+
+手でURLを組み替えるのは過去に0%成約を招いた手口なので行わない。
+**ここは現状が上限**という記録。
+
+ガードレール: `tsc` クリーン / `test:funnel` 24件 / `lint` 既知の警告1件 /
+`build` 788ページ / `check:translations` 32件。
+
+検証後の asakusa-vs-ueno: Klook 3本のみ、Finder 言及ゼロ、
+`legacyArea` / `#selected-area` ゼロ、エリアガイドの偽リンクゼロ、QuickRec の重複解消。

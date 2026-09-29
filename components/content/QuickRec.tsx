@@ -51,7 +51,7 @@ export function QuickRec({
       <p className="mt-2 text-sm leading-6 text-slate-600">{why}</p>
       {showCta ? (
         <div className="mt-4 flex flex-col gap-1.5">
-          <p className="text-sm font-semibold text-slate-950">{ctaLabel}</p>
+          {/* The button already says this; printing it twice read as a bug. */}
           {provider === "booking_travelpayouts" || provider === "trip" ? (
             <ProviderButton
               provider={provider}

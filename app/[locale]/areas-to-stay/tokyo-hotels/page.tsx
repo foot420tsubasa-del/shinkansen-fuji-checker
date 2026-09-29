@@ -54,8 +54,8 @@ const POPULAR_AREAS: ReadonlyArray<{ slug: string; labelKey: string }> = [
 const SITUATION_CARDS: ReadonlyArray<{ href: string; labelKey: string }> = [
   { href: "/areas-to-stay/tokyo-first-time", labelKey: "firstTime" },
   { href: "/areas-to-stay/where-to-stay-before-shinkansen", labelKey: "beforeShinkansen" },
-  { href: "/areas-to-stay?legacyArea=ueno#selected-area", labelKey: "fromNarita" },
-  { href: "/areas-to-stay?legacyArea=shinagawa#selected-area", labelKey: "fromHaneda" },
+  { href: "/areas-to-stay", labelKey: "fromNarita" },
+  { href: "/areas-to-stay", labelKey: "fromHaneda" },
   { href: "/areas-to-stay", labelKey: "familyLuggage" },
   { href: "/areas-to-stay", labelKey: "hateCrowds" },
 ];
@@ -116,7 +116,7 @@ export default async function TokyoHotelsIndexPage({ params }: Props) {
               const area = areaFor(slug);
               if (!area) return null;
               const score = overallScoreFor(slug);
-              const href = `/areas-to-stay?legacyArea=${slug}#selected-area`;
+              const href = `/areas-to-stay?legacyArea=${slug}`;
               return (
                 <TrackedInternalLink
                   key={slug}
@@ -210,7 +210,7 @@ export default async function TokyoHotelsIndexPage({ params }: Props) {
               const area = areaFor(slug);
               if (!area) return null;
               const score = overallScoreFor(slug);
-              const href = `/areas-to-stay?legacyArea=${slug}#selected-area`;
+              const href = `/areas-to-stay?legacyArea=${slug}`;
               return (
                 <TrackedInternalLink
                   key={slug}

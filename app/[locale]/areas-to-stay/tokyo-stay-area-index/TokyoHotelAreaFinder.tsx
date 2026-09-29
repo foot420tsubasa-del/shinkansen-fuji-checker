@@ -844,7 +844,7 @@ function ResultCard({
 
         <div className="mt-auto pt-3">
           <TrackedInternalLink
-            href={`?area=${area.id}#selected-area`}
+            href={`?area=${area.id}`}
             sourcePage="tokyo_stay_area_index"
             placement="finder_result_hotel_page"
             label={seeDetailsLabel}
@@ -890,7 +890,7 @@ function CompactAreaRow({
       <p className="mt-3 text-sm leading-6 text-slate-700">{area.summary}</p>
       <div className="mt-3">
         <TrackedInternalLink
-          href={`?area=${area.id}#selected-area`}
+          href={`?area=${area.id}`}
           sourcePage="tokyo_stay_area_index"
           placement="finder_result_hotel_page"
           label={seeDetailsLabel}
