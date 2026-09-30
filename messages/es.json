@@ -2034,35 +2034,16 @@
       ]
     },
     "quickAnswerIntro": "Usa esta página como primer paso antes de abrir sitios de reserva de hoteles.",
-    "quickAnswerCta": "Abrir Tokyo Hotel Base Finder",
     "quickAnswersNew": {
       "firstTime": "¿Primera vez en Tokio? Empieza con Tokyo Hotel Base Finder.",
       "narita": "¿Llegas por Narita? Ueno, Asakusa y el este de Tokio suelen ser más fáciles.",
       "shinkansen": "¿Tomas un Shinkansen temprano? Tokyo Station, Ginza y Nihombashi son bases más seguras.",
       "quiet": "¿Quieres una zona local y tranquila? Mira Kiyosumi-Shirakawa, Kuramae, Oshiage o Ryogoku."
     },
-    "finderPreview": {
-      "eyebrow": "Tokyo Hotel Base Finder",
-      "title": "¿No sabes dónde alojarte en Tokio?",
-      "body": "Decide por situación de viaje, no por ranking de hoteles.",
-      "cta": "Empezar con Tokyo Hotel Base Finder",
-      "factors": {
-        "luggage": "Equipaje grande",
-        "airport": "Llegada por Narita o Haneda",
-        "shinkansen": "Shinkansen temprano",
-        "plans": "Disney / teamLab / Asakusa / Shibuya",
-        "quiet": "Tokio local tranquila vs comodidad de grandes estaciones"
-      }
-    },
     "detailedGuides": {
       "eyebrow": "Guías detalladas de alojamiento",
       "title": "Leer guías de zonas más completas",
       "body": "Úsalas después de decidir la base de hotel. Siguen siendo guías de texto, no listas de botones de reserva."
-    },
-    "bottomCta": {
-      "title": "¿Aún no sabes dónde alojarte?",
-      "body": "Empieza con Tokyo Hotel Base Finder. Reduce Tokio según aeropuerto, equipaje, planes de Shinkansen y estilo de viaje.",
-      "cta": "Encontrar mi base de hotel en Tokio"
     }
   },
   "planYourTrip": {

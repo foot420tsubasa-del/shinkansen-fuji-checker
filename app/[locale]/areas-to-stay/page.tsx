@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import fs from "node:fs";
 import path from "node:path";
-import { ArrowRight, Bed, Building2, Landmark, Mountain, Search, Utensils } from "lucide-react";
+import { ArrowRight, Bed, Building2, Landmark, Mountain, Utensils } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { buttonClassName } from "@/components/ui/Button";
 import { SiteHeader } from "../components/SiteHeader";
@@ -59,7 +59,6 @@ const guideGroups = [
 
 const quickAnswerKeys = ["firstTime", "narita", "shinkansen", "quiet"] as const;
 
-const finderFactorKeys = ["luggage", "airport", "shinkansen", "plans", "quiet"] as const;
 
 const guideGroupChrome = {
   tokyo: { icon: Building2, className: "border-sky-100 bg-sky-50/60 text-sky-800" },
@@ -200,22 +199,9 @@ export default async function AreasToStayIndex({ params }: Props) {
         </section>
 
         <section className="mt-8 rounded-[26px] border border-slate-200 bg-white p-5 shadow-sm md:p-6">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <h2 className="text-2xl font-semibold text-slate-950">{t("quickAnswerTitle")}</h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("quickAnswerIntro")}</p>
-            </div>
-            <TrackedInternalLink
-              href="/areas-to-stay"
-              sourcePage={pagePath}
-              placement="stay_hub_quick_answer_finder"
-              label={t("quickAnswerCta")}
-              locale={locale}
-              className={buttonClassName({ variant: "internal", size: "md", className: "shrink-0" })}
-            >
-              {t("quickAnswerCta")}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </TrackedInternalLink>
+          <div>
+            <h2 className="text-2xl font-semibold text-slate-950">{t("quickAnswerTitle")}</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("quickAnswerIntro")}</p>
           </div>
           <ul className="mt-5 grid gap-3 md:grid-cols-2">
             {quickAnswerKeys.map((key) => (
@@ -226,34 +212,6 @@ export default async function AreasToStayIndex({ params }: Props) {
           </ul>
         </section>
 
-        <section className="mt-10 rounded-[30px] border border-[#c9d8ee] bg-[linear-gradient(135deg,#f8fbff,#eef6ff)] p-6 shadow-sm md:p-8">
-          <div className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-            <div>
-              <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#0b1a33]">{t("finderPreview.eyebrow")}</p>
-              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-950">{t("finderPreview.title")}</h2>
-              <p className="mt-3 text-base leading-7 text-slate-600">{t("finderPreview.body")}</p>
-              <TrackedInternalLink
-                href="/areas-to-stay"
-                sourcePage={pagePath}
-                placement="stay_hub_finder_preview"
-                label={t("finderPreview.cta")}
-                locale={locale}
-                className={buttonClassName({ variant: "navy", size: "lg", className: "mt-5 text-white" })}
-              >
-                {t("finderPreview.cta")}
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </TrackedInternalLink>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {finderFactorKeys.map((factor) => (
-                <div key={factor} className="flex items-center gap-3 rounded-2xl border border-white/80 bg-white px-4 py-4 text-sm font-semibold text-slate-800 shadow-sm">
-                  <Search className="h-4 w-4 shrink-0 text-[#0b1a33]" aria-hidden="true" />
-                  {t(`finderPreview.factors.${factor}`)}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
         <section className="mt-10">
           <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">{t("detailedGuides.eyebrow")}</p>
@@ -291,23 +249,6 @@ export default async function AreasToStayIndex({ params }: Props) {
           </div>
         </section>
 
-        <section className="mt-10 rounded-[28px] border border-[#0b1a33]/10 bg-[#0b1a33] p-6 text-white shadow-sm md:p-8">
-          <h2 className="text-2xl font-semibold">{t("bottomCta.title")}</h2>
-          <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-200">
-            {t("bottomCta.body")}
-          </p>
-          <TrackedInternalLink
-            href="/areas-to-stay"
-            sourcePage={pagePath}
-            placement="stay_hub_bottom_finder"
-            label={t("bottomCta.cta")}
-            locale={locale}
-            className={buttonClassName({ variant: "internal", size: "lg", className: "mt-5" })}
-          >
-            {t("bottomCta.cta")}
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </TrackedInternalLink>
-        </section>
       </Container>
       <SiteFooter />
     </main>

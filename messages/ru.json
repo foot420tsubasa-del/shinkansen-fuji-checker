@@ -2034,35 +2034,16 @@
       ]
     },
     "quickAnswerIntro": "Используйте эту страницу как первый шаг перед открытием сайтов бронирования отелей.",
-    "quickAnswerCta": "Открыть Tokyo Hotel Base Finder",
     "quickAnswersNew": {
       "firstTime": "Первый раз в Токио? Начните с Tokyo Hotel Base Finder.",
       "narita": "Прилетаете в Нариту? Ueno, Asakusa и восточный Токио часто проще.",
       "shinkansen": "Ранний синкансэн? Tokyo Station, Ginza и Nihombashi — более надежные базы.",
       "quiet": "Хотите более спокойный локальный Токио? Посмотрите Kiyosumi-Shirakawa, Kuramae, Oshiage или Ryogoku."
     },
-    "finderPreview": {
-      "eyebrow": "Tokyo Hotel Base Finder",
-      "title": "Не уверены, где остановиться в Токио?",
-      "body": "Ориентируйтесь на ситуацию поездки, а не на рейтинг отелей.",
-      "cta": "Начать с Tokyo Hotel Base Finder",
-      "factors": {
-        "luggage": "Крупный багаж",
-        "airport": "Прилет в Narita или Haneda",
-        "shinkansen": "Ранний синкансэн",
-        "plans": "Disney / teamLab / Асакуса / Сибуя",
-        "quiet": "Спокойный локальный Токио vs удобство больших станций"
-      }
-    },
     "detailedGuides": {
       "eyebrow": "Подробные гиды по районам",
       "title": "Читать более подробные гиды",
       "body": "Используйте их после выбора основной базы для отеля. Это текстовые гиды, а не списки кнопок бронирования."
-    },
-    "bottomCta": {
-      "title": "Все еще не уверены, где остановиться?",
-      "body": "Начните с Tokyo Hotel Base Finder. Он сужает выбор по аэропорту, багажу, планам на синкансэн и стилю поездки.",
-      "cta": "Найти район для отеля в Токио"
     }
   },
   "planYourTrip": {

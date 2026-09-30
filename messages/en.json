@@ -427,8 +427,8 @@
         },
         {
           "title": "Where to stay",
-          "desc": "Answer 4 taps — the Tokyo Stay Finder picks your base.",
-          "cta": "Open Stay Finder"
+          "desc": "Compare Tokyo station areas side by side and pick your base.",
+          "cta": "Compare stay areas"
         },
         {
           "title": "Shinkansen ticket",
@@ -2034,35 +2034,16 @@
       ]
     },
     "quickAnswerIntro": "Use this page as the first stop before opening hotel booking sites.",
-    "quickAnswerCta": "Open Tokyo Hotel Base Finder",
     "quickAnswersNew": {
-      "firstTime": "First time in Tokyo? Start with the Tokyo Hotel Base Finder.",
+      "firstTime": "First time in Tokyo? Compare Ueno and Asakusa first — they are the two bases most first-timers end up choosing between.",
       "narita": "Using Narita Airport? Ueno, Asakusa, and East Tokyo are often easier.",
       "shinkansen": "Taking an early Shinkansen? Tokyo Station, Ginza, and Nihombashi are safer bases.",
       "quiet": "Want a quieter local Tokyo feel? Look at Kiyosumi-Shirakawa, Kuramae, Oshiage, or Ryogoku."
-    },
-    "finderPreview": {
-      "eyebrow": "Tokyo Hotel Base Finder",
-      "title": "Not sure where to stay in Tokyo?",
-      "body": "Answer by travel situation, not by hotel ranking.",
-      "cta": "Start with Tokyo Hotel Base Finder",
-      "factors": {
-        "luggage": "Large luggage",
-        "airport": "Narita or Haneda arrival",
-        "shinkansen": "Early Shinkansen",
-        "plans": "Disney / teamLab / Asakusa / Shibuya",
-        "quiet": "Quiet local Tokyo vs big-station convenience"
-      }
     },
     "detailedGuides": {
       "eyebrow": "Detailed Stay Guides",
       "title": "Read deeper area guides",
       "body": "Use these after the main hotel-base decision. They stay as detailed text guides, not booking-button lists."
-    },
-    "bottomCta": {
-      "title": "Still not sure where to stay?",
-      "body": "Start with the Tokyo Hotel Base Finder. It narrows Tokyo down by airport, luggage, Shinkansen plans, and travel style.",
-      "cta": "Find your Tokyo hotel base"
     }
   },
   "planYourTrip": {
@@ -2157,7 +2138,7 @@
           "detailLabel": "See East Tokyo details"
         }
       },
-      "finderCta": "Try the hotel area finder"
+      "finderCta": "Compare Tokyo stay areas"
     },
     "arrival": {
       "eyebrow": "Arrival essentials",
@@ -4491,7 +4472,7 @@
     "eyebrow": "fujiseat area logic",
     "title": "Why fujiseat's area logic is different",
     "body": "fujiseat compares hotel bases by station complexity, luggage stress, airport arrival route, Shinkansen days, calmer nearby bases, and a local Tokyo perspective. It does not rank hotels, invent prices, or treat the most famous station as the automatic answer.",
-    "finderCta": "Open Tokyo Stay Finder",
+    "finderCta": "Compare Tokyo stay areas",
     "note": "The Tokyo Stay Finder is an editorial travel-fit tool informed by station-usability signals where available. It is not an official ranking."
   },
   "tokyoHotelsPage": {

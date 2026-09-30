@@ -2034,35 +2034,16 @@
       ]
     },
     "quickAnswerIntro": "打開酒店預訂網站前，先從這個頁面開始。",
-    "quickAnswerCta": "開啟 Tokyo Hotel Base Finder",
     "quickAnswersNew": {
       "firstTime": "第一次來東京？先使用 Tokyo Hotel Base Finder。",
       "narita": "從成田機場抵達？上野、淺草和東京東側通常更方便。",
       "shinkansen": "要搭早班新幹線？東京站、銀座和日本橋是更穩妥的住宿區域。",
       "quiet": "想要更安靜的在地東京氛圍？可以看清澄白河、藏前、押上或兩國。"
     },
-    "finderPreview": {
-      "eyebrow": "東京住宿基地搜尋器",
-      "title": "不知道東京住哪裡？",
-      "body": "按旅行情況判斷，而不是按酒店排名判斷。",
-      "cta": "從 Tokyo Hotel Base Finder 開始",
-      "factors": {
-        "luggage": "大型行李",
-        "airport": "成田或羽田抵達",
-        "shinkansen": "早班新幹線",
-        "plans": "迪士尼 / teamLab / 淺草 / 渋谷",
-        "quiet": "安靜在地東京 vs 大站便利"
-      }
-    },
     "detailedGuides": {
       "eyebrow": "詳細住宿指南",
       "title": "閱讀更深入的區域指南",
       "body": "請在決定主要酒店住宿區域後使用。這些是詳細文字指南，不是預訂按鈕列表。"
-    },
-    "bottomCta": {
-      "title": "還是不確定住哪裡？",
-      "body": "從 Tokyo Hotel Base Finder 開始。它會按機場、行李、新幹線計畫和旅行風格縮小東京選擇範圍。",
-      "cta": "尋找東京酒店住宿區域"
     }
   },
   "planYourTrip": {

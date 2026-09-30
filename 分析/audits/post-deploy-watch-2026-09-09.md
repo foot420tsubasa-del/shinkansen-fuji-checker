@@ -720,3 +720,64 @@ scored side by side.」に統一。ハブの実際の中身と一致させた。
 ガードレール: `tsc` クリーン / `test:funnel` 24件 / `lint` 既知の警告1件 /
 `build` 788ページ / サイトマップ21件 / `check:translations` 32件 /
 23ページ全て200・ループ0・301経由0。
+
+---
+
+# 追記: ハブに残っていた Finder 導線の除去（2026-09-30）
+
+## 指摘と、私の検査の誤り
+
+「`/areas-to-stay` の Quick Answer に Open Tokyo Hotel Base Finder が残っている。
+なぜホテル関連を残しているのか」というユーザー指摘。**正しかった。**
+
+前回の検査で「今いるページに戻るリンク: 0件」と報告したが、
+**検査スクリプトが `if (target === page) continue;` で自己リンクを除外していた。**
+「リダイレクトではないから」という理由だったが、
+**押すとページが再読み込みされるボタンは、301経由でも直接でも同じ欠陥**である。
+ユーザーが問題にしていたまさにその形を、定義から外して0件と報告していた。
+
+## 実際に残っていたもの
+
+`/areas-to-stay` から `/areas-to-stay` への自己リンクが3本、
+さらに存在しないツールを宣伝するセクションが1つ。
+
+| 箇所 | 文言 |
+|---|---|
+| Quick Answer の CTA | 「Open Tokyo Hotel Base Finder」 |
+| finderPreview セクション（丸ごと） | 「Start with Tokyo Hotel Base Finder」＋説明5枚 |
+| bottomCta セクション | 「Find your Tokyo hotel base」 |
+
+原因: 9/29 の一括付け替えで **href だけ `/areas-to-stay` に書き換わり、
+ラベルとセクションがそのまま残った**。比較ページ側（`[slug]/page.tsx`）は
+QuickRec を直したが、**ハブは別実装**であることを見落としていた。
+
+## 対応
+
+- 3つの自己リンクと2セクションを削除。Quick Answer の回答4件は有用なので残置
+- 9言語から `quickAnswerCta` / `finderPreview` / `bottomCta` を削除
+- `/plan-your-trip` 他に残っていた「Open Tokyo Stay Finder」等の文言を
+  「Compare Tokyo stay areas」系に9言語で置換
+- 未使用になった `finderFactorKeys` と `Search` アイコンを除去
+
+## 検査スクリプトの修正
+
+自己リンクも欠陥として計上するよう変更。再実行の結果:
+
+| | |
+|---|--:|
+| 押すと今いるページに戻るリンク | **5件** |
+| うちヘッダ/フッタのナビ | **5件**（現在地を示す通常の挙動） |
+| 本文中の自己リンク | **0件** |
+| 301を経由するリンク | **0件** |
+
+残る5件は「About」「Hotel Base」等のナビ項目で、どのサイトにもある挙動。
+
+## 残存（画面には出ない）
+
+`tokyoStayAreaIndex` と `tokyoHotelsPage` の名前空間に Finder 表記が16件残るが、
+これらは301するページ専用のメッセージで、**生きたページの表示文言には一切出ない**
+（`/areas-to-stay` `/plan-your-trip` `/guide` `/` の描画テキストで確認済み）。
+名前空間ごと削除するとビルド時に MISSING_MESSAGE を招く恐れがあるため残置。
+
+ガードレール: `tsc` クリーン / `test:funnel` 24件 / `lint` 既知の警告1件 /
+`build` 788ページ / サイトマップ21件 / `check:translations` 32件。
