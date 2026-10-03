@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>変更後の分析と不具合スイープ</title>
+<style>
+  :root{
+    --bg:#0f1420; --panel:#161d2c; --line:#27314a; --ink:#e8ecf4; --dim:#9aa6bd;
+    --accent:#f2c23e; --good:#4fbf8b; --warn:#e9a23b; --bad:#e2685f; --flat:#7b8aa8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+    line-height:1.85;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:40px 28px 72px}
+  h1{font-size:25px;margin:0 0 6px;letter-spacing:.01em}
+  .sub{color:var(--dim);font-size:13px;margin-bottom:34px}
+  h2{font-size:18px;margin:44px 0 14px;padding-bottom:9px;border-bottom:2px solid var(--line)}
+  h3{font-size:15px;margin:26px 0 10px;color:var(--accent)}
+  p{margin:10px 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:16px 0}
+  .verdict{border-left:4px solid var(--accent)}
+  .correction{border-left:4px solid var(--bad)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;
+    font-variant-numeric:tabular-nums}
+  th,td{padding:10px 14px;border-bottom:1px solid var(--line);text-align:left;
+    white-space:nowrap}
+  th{color:var(--dim);font-weight:600;font-size:12px;letter-spacing:.04em}
+  td.wide,th.wide{white-space:normal;min-width:19em}
+  tr:last-child td{border-bottom:none}
+  .num{text-align:right}
+  .good{color:var(--good)} .bad{color:var(--bad)} .warn{color:var(--warn)} .flat{color:var(--flat)}
+  .dim{color:var(--dim)}
+  code{background:#0b0f18;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px}
+  .bars{margin:18px 0}
+  .row{display:flex;align-items:center;gap:12px;margin:7px 0;font-size:13px}
+  .row .lab{width:9.5em;flex:none;color:var(--dim);font-variant-numeric:tabular-nums}
+  .row .track{flex:1;height:20px;background:#0b0f18;border-radius:4px;overflow:hidden;min-width:120px}
+  .row .fill{height:100%;background:var(--accent);opacity:.85}
+  .row .val{width:5.5em;flex:none;text-align:right;font-variant-numeric:tabular-nums}
+  ul{margin:10px 0;padding-left:1.3em}
+  li{margin:7px 0}
+  .pill{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:99px;
+    border:1px solid var(--line);color:var(--dim);margin-right:7px}
+  .big{font-size:27px;font-weight:700;font-variant-numeric:tabular-nums}
+  .kpis{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0}
+  .kpi{flex:1 1 200px;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;padding:16px 18px}
+  .kpi .cap{font-size:11.5px;color:var(--dim);letter-spacing:.04em;margin-bottom:4px}
+  .kpi .note{font-size:12px;color:var(--dim);margin-top:3px}
+  .foot{margin-top:46px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>9/29 の変更後の分析 ＋ サイト全体の不具合スイープ</h1>
+<div class="sub">2026-10-03 作成 ／ GSC 最終データ日 2026-09-29 ／ GA4 は 10/03 の途中まで</div>
+
+<div class="card verdict">
+  <h3 style="margin-top:0">先に結論</h3>
+  <p><strong>検索の数字はまだ判定できません。</strong>GSC の最終データ日は 9/29 で、
+  変更を入れた当日ぶんしかありません。比較する材料がそもそも存在しない状態です。</p>
+  <p><strong>予報ツールは動いていて、使われています。</strong>4日間で27回チェックされ、
+  1日あたり 2 → 5 → 14 回と増えています。セッションの滞在時間も 34秒 → 44秒 に伸びました。</p>
+  <p><strong>再訪率は伸びていません。</strong>ただしこれは失敗の証拠ではなく、
+  4日間では構造的に測れないという話です（下記）。判定は予定どおり <strong>11月下旬</strong>。</p>
+</div>
+
+<h2>1. 前回お伝えした再訪率の読みを訂正します</h2>
+
+<div class="card correction">
+  <p>前回「再訪率が 8.3%、直前の 4.4% から改善」とお伝えしましたが、<strong>この読みは誤りでした。</strong>
+  原因は2つあります。</p>
+  <ul>
+    <li><strong>Direct 流入のボットが分母を汚していた。</strong>
+      Direct のセッションは4日ごとに 595 → 88 → 181 と乱れ、しかも
+      1ユーザーあたり 1.00 セッション ―― 全員が一度来て二度と来ない、典型的なボットの形です。
+      これを含めたまま再訪率を出していました。</li>
+    <li><strong>同じ期間を再取得すると数字が変わった。</strong>
+      GA4 の確定前データを読んでいたため、閉じた期間のユーザー数まで動きました。</li>
+  </ul>
+  <p>Organic Search だけに絞って取り直したのが下の表です。こちらが正しい値です。</p>
+</div>
+
+<h3>再訪率（Organic Search のみ・4日窓をそろえて比較）</h3>
+<table>
+  <tr><th class="wide">期間</th><th class="num">新規</th><th class="num">再訪</th><th class="num">再訪率</th><th class="wide">位置づけ</th></tr>
+  <tr><td class="wide"><strong>投入後 9/29–10/02</strong></td><td class="num">174</td><td class="num">20</td><td class="num"><strong>10.3%</strong></td><td class="wide flat">過去4期間のほぼ中央〜下寄り</td></tr>
+  <tr><td class="wide">直前 9/25–9/28</td><td class="num">153</td><td class="num">29</td><td class="num">15.9%</td><td class="wide dim">この4期間で最高</td></tr>
+  <tr><td class="wide">その前 9/21–9/24</td><td class="num">207</td><td class="num">31</td><td class="num">13.0%</td><td class="wide dim">—</td></tr>
+  <tr><td class="wide">さらに前 9/17–9/20</td><td class="num">162</td><td class="num">17</td><td class="num">9.5%</td><td class="wide dim">この4期間で最低</td></tr>
+  <tr><td class="wide">8月の同曜 8/25–8/28</td><td class="num">127</td><td class="num">21</td><td class="num">14.2%</td><td class="wide dim">参考</td></tr>
+</table>
+
+<div class="card">
+  <h3 style="margin-top:0">なぜ「まだ測れない」で正しいのか</h3>
+  <p>再訪とは「一度来た人が、もう一度来る」ことです。予報ツールは 9/29 に出したので、
+  <strong>ツールが原因の再訪が起きるには、まず9/29以降に来て、それからまた来る必要があります。</strong>
+  4日間の窓では、その往復がほぼ収まりません。</p>
+  <p>つまり 10.3% という数字は「ツールの効果が出ていない」ではなく
+  <strong>「ツールの効果がまだ入りうる期間に達していない」</strong>という意味です。
+  9.5〜15.9% のばらつきの中にいるのも当然で、ここから何かを結論するのは
+  以前 /guide のタイトル変更を6日で誤判定したときと同じ間違いになります。</p>
+</div>
+
+<h2>2. 予報ツールの実績（これは本当に動いている）</h2>
+
+<div class="kpis">
+  <div class="kpi"><div class="cap">チェック実行</div><div class="big">27<span style="font-size:14px">回</span></div><div class="note">9/30〜10/03（4日間）</div></div>
+  <div class="kpi"><div class="cap">1日あたりの推移</div><div class="big">2→5→14</div><div class="note">10/03 は途中で6回</div></div>
+  <div class="kpi"><div class="cap">Organic 平均滞在</div><div class="big good">44<span style="font-size:14px">秒</span></div><div class="note">直前4日は34秒（+29%）</div></div>
+  <div class="kpi"><div class="cap">ここからの成果クリック</div><div class="big">1<span style="font-size:14px">件</span></div><div class="note">10/01・新幹線チケット</div></div>
+</div>
+
+<h3>日別の利用回数</h3>
+<div class="bars">
+  <div class="row"><div class="lab">9/30（水）</div><div class="track"><div class="fill" style="width:14%"></div></div><div class="val">2回</div></div>
+  <div class="row"><div class="lab">10/01（木）</div><div class="track"><div class="fill" style="width:36%"></div></div><div class="val">5回</div></div>
+  <div class="row"><div class="lab">10/02（金）</div><div class="track"><div class="fill" style="width:100%"></div></div><div class="val">14回</div></div>
+  <div class="row"><div class="lab">10/03（土・途中）</div><div class="track"><div class="fill" style="width:43%;opacity:.45"></div></div><div class="val">6回</div></div>
+</div>
+<p class="dim" style="font-size:13px">右肩上がりですが、4日で27回はまだ「壊れていない」ことの確認に足るだけの量です。
+傾向の判定には足りません。</p>
+
+<h3>滞在時間だけは、短期でも意味がある指標</h3>
+<table>
+  <tr><th class="wide">期間（Organic のみ）</th><th class="num">セッション</th><th class="num">PV/セッション</th><th class="num">平均滞在</th></tr>
+  <tr><td class="wide"><strong>投入後 9/29–10/02</strong></td><td class="num">211</td><td class="num">1.29</td><td class="num good"><strong>44秒</strong></td></tr>
+  <tr><td class="wide">直前 9/25–9/28</td><td class="num">203</td><td class="num">1.28</td><td class="num">34秒</td></tr>
+  <tr><td class="wide">その前 9/21–9/24</td><td class="num">258</td><td class="num">1.22</td><td class="num">35秒</td></tr>
+</table>
+<p>再訪と違い、滞在時間は<strong>その場で完結する</strong>ので4日でも読めます。
+34〜35秒で安定していたものが44秒になった ―― これは予報ツールを操作している時間そのものだと考えられます。
+PV/セッションは動いていないので、ページを回遊させたのではなく
+<strong>同じ1ページに長く留まらせた</strong>という形です。狙いどおりの効き方です。</p>
+
+<h2>3. 検索（GSC）は手つかず ―― ただし誤解しやすい段差が1つ</h2>
+
+<p>GSC の最終データ日は <strong>9/29</strong>。変更当日のみで、比較になりません。
+ただ日次を見ると 9/24 に段差があり、これを「変更のせい」と読みたくなるので先に潰しておきます。</p>
+
+<div class="bars">
+  <div class="row"><div class="lab">9/20（日）</div><div class="track"><div class="fill" style="width:93%"></div></div><div class="val">55</div></div>
+  <div class="row"><div class="lab">9/21（月）</div><div class="track"><div class="fill" style="width:88%"></div></div><div class="val">52</div></div>
+  <div class="row"><div class="lab">9/22（火）</div><div class="track"><div class="fill" style="width:92%"></div></div><div class="val">54</div></div>
+  <div class="row"><div class="lab">9/23（水）</div><div class="track"><div class="fill" style="width:95%"></div></div><div class="val">56</div></div>
+  <div class="row"><div class="lab">9/24（木）</div><div class="track"><div class="fill" style="width:63%"></div></div><div class="val">37</div></div>
+  <div class="row"><div class="lab">9/25（金）</div><div class="track"><div class="fill" style="width:61%"></div></div><div class="val">36</div></div>
+  <div class="row"><div class="lab">9/26（土）</div><div class="track"><div class="fill" style="width:61%"></div></div><div class="val">36</div></div>
+  <div class="row"><div class="lab">9/27（日）</div><div class="track"><div class="fill" style="width:69%"></div></div><div class="val">41</div></div>
+  <div class="row"><div class="lab">9/28（月）</div><div class="track"><div class="fill" style="width:71%"></div></div><div class="val">42</div></div>
+  <div class="row"><div class="lab">9/29（火・変更日）</div><div class="track"><div class="fill" style="width:63%"></div></div><div class="val">37</div></div>
+</div>
+
+<div class="card">
+  <p><strong>この段差は変更とは無関係です。</strong>理由は3つ。</p>
+  <ul>
+    <li><strong>時系列が合わない。</strong>段差は 9/24。変更を入れたのは 9/29 で、<strong>5日あと</strong>です。</li>
+    <li><strong>9月全体では平均的な水準。</strong>9月は 27〜59 クリック/日で動いており、月平均は約41。
+      下がった側（36〜42）が平均そのもので、<strong>9/20〜23 の52〜56 が高めの数日だった</strong>という形です。</li>
+    <li><strong>特定のクエリが落ちたのではない。</strong>クエリ別に突き合わせると最大の下げ幅が
+      「2クリック → 0クリック」で、多数のクエリに薄く散っています。掲載順位も 5.9〜6.0 で動いていません。
+      順位を失ったときに出る形ではありません。</li>
+  </ul>
+  <p class="dim">※ 9/29 からの301（16本）の影響が出るのは、Google が再クロールしてからです。
+  サーチコンソールでのサイトマップ再送信はまだ未実施なら、やっておくと早まります。</p>
+</div>
+
+<h2>4. スイープで見つかった不具合（修正済み・プッシュ済み）</h2>
+
+<p>公開中の19ページを取得して6種類の欠陥を機械的に検査しました。</p>
+
+<table>
+  <tr><th class="wide">検査項目</th><th>結果</th><th class="wide">対応</th></tr>
+  <tr><td class="wide">404など到達できない内部リンク</td><td class="good">0件</td><td class="wide dim">—</td></tr>
+  <tr><td class="wide">着地先に id が無いアンカー</td><td class="bad">6件</td><td class="wide">修正（19箇所／7ファイル）</td></tr>
+  <tr><td class="wide">重複タイトル・重複ディスクリプション</td><td class="good">0件</td><td class="wide dim">—</td></tr>
+  <tr><td class="wide">退役ページを指す hreflang</td><td class="good">0件</td><td class="wide dim">—</td></tr>
+  <tr><td class="wide">どこからもリンクされていないページ</td><td class="bad">1件</td><td class="wide">ハブからリンク追加（9言語）</td></tr>
+  <tr><td class="wide">alt 属性の無い画像</td><td class="good">0件</td><td class="wide dim">—</td></tr>
+  <tr><td class="wide">ツアーCTAの表示回数の計測</td><td class="bad">欠落</td><td class="wide">計測を追加・ブラウザで検証</td></tr>
+</table>
+
+<h3>(1) 死んだアンカー 6件</h3>
+<p><code>/areas-to-stay#finder</code> が5ページから、<code>/areas-to-stay#hotel-base-matrix</code> が
+<code>/about</code> から出ていました。いずれも9/29に畳んだセクションを指しており、
+<strong>押すとページの先頭に着地する</strong>状態です。リンク自体は200を返すので、
+ステータスコードを見る検査では絶対に見つかりません。
+<code>#selected-area</code> <code>#hotel-examples-matrix</code> <code>#hotel-price-timing</code> も含めて除去しました。</p>
+
+<h3>(2) 孤立ページ 1件</h3>
+<p><code>/areas-to-stay/tokyo-hotel-room-size-guide</code> が
+<strong>サイトマップに載っているのに、サイト内のどこからもリンクされていない</strong>状態でした
+（6ヶ月で4クリック・980表示）。Google にはインデックスしろと指示しておきながら、
+読者には到達する手段がない、という矛盾した形です。ハブの下部にカードを追加しました。</p>
+
+<h3>(3) ツアーCTAの表示回数が計測されていなかった <span class="pill">分析上はこれが一番大きい</span></h3>
+<p>先日入れた「曇りの日は富士山ツアー」の導線は、<strong>クリック数だけを記録して、
+表示回数を記録していませんでした。</strong>この導線は曇り判定のときだけ出るので、
+クリック数だけでは意味を持ちません ―― 1クリックが「1回出て1回取られた」のか
+「40回出て39回無視された」のか区別できないからです。</p>
+<p>実際、4日間でこの導線のイベントは<strong>両方とも0件</strong>でした。
+つまり<strong>一度も表示されなかったのか、計測が抜けていたのかすら分からない</strong>状態で、
+このままでは何ヶ月待っても判定できませんでした。</p>
+<p>表示回数の計測を追加し、実際の予報データでブラウザ検証しました。</p>
+<table>
+  <tr><th class="wide">検証ケース</th><th class="wide">送信されたイベント</th></tr>
+  <tr><td class="wide">曇り（10/06 18:00発・通過時刻の雲量100%）</td>
+      <td class="wide good">チェック／チケット表示／<strong>ツアー表示</strong> を各1回。ツアーリンクも表示あり</td></tr>
+  <tr><td class="wide">晴れ（雲量30%・降水なし）</td>
+      <td class="wide good">チェック／チケット表示 のみ。<strong>ツアー表示は送信されない</strong></td></tr>
+</table>
+
+<h2>5. この先の判定スケジュール（変更なし）</h2>
+<table>
+  <tr><th class="wide">対象</th><th class="wide">見る指標</th><th>判定時期</th></tr>
+  <tr><td class="wide">予報ツール</td><td class="wide">再訪率（Organic のみ）・利用回数</td><td class="warn">11月下旬</td></tr>
+  <tr><td class="wide">富士山ツアー導線</td><td class="wide">表示→クリック率（計測が今日から有効）</td><td class="warn">11月下旬</td></tr>
+  <tr><td class="wide">上野⇄浅草の交通セクション</td><td class="wide">当該クエリの順位・クリック</td><td>10月下旬</td></tr>
+  <tr><td class="wide">座席記号ページの多言語</td><td class="wide">各言語のインデックス状況</td><td>11月下旬</td></tr>
+  <tr><td class="wide">路線別リンクのEPC</td><td class="wide">Klook EPC（基準 ¥28.6）</td><td>12月</td></tr>
+  <tr><td class="wide">比較4ページのKlookホテル試験</td><td class="wide">ホテル経由の成果</td><td>12月下旬</td></tr>
+</table>
+
+<h2>6. 今日やったこと・今やるべきこと</h2>
+<div class="card">
+  <p><strong>完了（コミット＆プッシュ済み）</strong></p>
+  <ul>
+    <li>死んだアンカー19箇所の除去</li>
+    <li>孤立ページへのリンク追加（9言語）</li>
+    <li>ツアーCTAの表示回数の計測追加＋ブラウザ検証</li>
+  </ul>
+  <p style="margin-top:16px"><strong>そちら側でやると良いこと</strong></p>
+  <ul>
+    <li>サーチコンソールでサイトマップを再送信（9/29以降の301を早く拾わせる）</li>
+  </ul>
+  <p style="margin-top:16px"><strong>今やらないほうがいいこと</strong></p>
+  <ul>
+    <li><strong>数字を見て施策を足すこと。</strong>GSC は変更後1日、GA4 は4日しかありません。
+      今動かすと、11月下旬に「何が効いたのか」を分離できなくなります。</li>
+  </ul>
+</div>
+
+<div class="foot">
+  検証: <code>tsc --noEmit</code> エラーなし ／ テスト 24件すべて通過 ／
+  lint は既知の1警告のみ ／ ビルド 788ページ成功。<br>
+  データ出典: Search Console API（<code>https://fujiseat.com/</code>）、GA4 Data API（プロパティ 534386847）。
+  再訪率・滞在時間はすべて Organic Search に限定。
+</div>
+
+</div>
+</body>
+</html>
