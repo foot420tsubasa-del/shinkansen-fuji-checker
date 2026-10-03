@@ -2093,7 +2093,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
                 <div className="mt-3 rounded-2xl border border-slate-200 bg-white/70 p-4">
                   <p className="text-sm font-semibold leading-6 text-slate-900">{supplement.earlyDecision.note}</p>
                   <TrackedInternalLink
-                    href="/areas-to-stay#hotel-price-timing"
+                    href="/areas-to-stay"
                     sourcePage={pagePath}
                     placement="first_time_top_room_dates"
                     label={supplement.earlyDecision.roomDateCta}
@@ -2350,7 +2350,7 @@ async function TokyoFirstTimeHub({ locale }: { locale: string }) {
               </ul>
               <div className="mt-4 flex flex-wrap gap-3">
                 <TrackedInternalLink
-                  href="/areas-to-stay#hotel-base-matrix"
+                  href="/areas-to-stay"
                   sourcePage={pagePath}
                   placement="tokyo_first_time_price_timing"
                   label={supplement.priceTiming.matrixCta}

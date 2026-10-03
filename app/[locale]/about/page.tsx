@@ -139,7 +139,7 @@ export default function AboutPage() {
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
-                href="/areas-to-stay#hotel-base-matrix"
+                href="/areas-to-stay"
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#082653] px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#123967]"
               >
                 Choose a Tokyo hotel base

@@ -2044,6 +2044,10 @@
       "eyebrow": "Guides détaillés de séjour",
       "title": "Lire des guides de quartier plus complets",
       "body": "À utiliser après la décision principale sur la base d'hôtel. Ils restent des guides textuels, pas des listes de boutons de réservation."
+    },
+    "roomSizeGuide": {
+      "title": "Une chambre à Tokyo, c’est petit comment ?",
+      "description": "Surfaces habituelles par type d’hôtel et ce qui tient à côté de deux valises."
     }
   },
   "planYourTrip": {

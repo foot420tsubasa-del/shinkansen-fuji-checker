@@ -516,7 +516,7 @@ export default async function WhereToStayInTokyoWithLuggagePage({ params }: Prop
               {copy.airportTransferLink} →
             </TrackedInternalLink>
             <TrackedInternalLink
-              href="/areas-to-stay/tokyo-first-time#hotel-base-matrix"
+              href="/areas-to-stay"
               sourcePage={pagePath}
               placement="luggage_pack_cta"
               label="Tokyo hotel base guide"
@@ -612,7 +612,7 @@ export default async function WhereToStayInTokyoWithLuggagePage({ params }: Prop
               { href: "/areas-to-stay", label: "Open Tokyo Stay Finder" },
               { href: "/areas-to-stay/tokyo-first-time", label: "Tokyo first-time hotel base guide" },
               { href: "/airport-transfers", label: "Airport transfers by hotel area" },
-              { href: "/local-hotel-picks#hotel-examples-matrix", label: "Local hotel examples" },
+              { href: "/areas-to-stay", label: "Local hotel examples" },
             ].map((link) => (
               <TrackedInternalLink
                 key={link.href}

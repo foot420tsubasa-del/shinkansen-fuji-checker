@@ -49,7 +49,7 @@ const cityPageConfigs: Record<LocalHotelPickCity, CityHotelPickPageConfig> = {
     guideLabel: "Where to stay in Tokyo for first-time visitors",
     comparisonLinks: [
       { href: "/areas-to-stay", label: "Tokyo Stay Finder" },
-      { href: "/areas-to-stay/tokyo-first-time#hotel-base-matrix", label: "Compare Tokyo hotel bases" },
+      { href: "/areas-to-stay", label: "Compare Tokyo hotel bases" },
       { href: "/areas-to-stay/where-to-stay-in-tokyo-with-luggage", label: "Tokyo with luggage" },
     ],
     groups: [

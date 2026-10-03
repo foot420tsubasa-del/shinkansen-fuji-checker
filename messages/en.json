@@ -2044,6 +2044,10 @@
       "eyebrow": "Detailed Stay Guides",
       "title": "Read deeper area guides",
       "body": "Use these after the main hotel-base decision. They stay as detailed text guides, not booking-button lists."
+    },
+    "roomSizeGuide": {
+      "title": "How small is a Tokyo hotel room?",
+      "description": "Typical room sizes by hotel type, and what fits beside two suitcases."
     }
   },
   "planYourTrip": {

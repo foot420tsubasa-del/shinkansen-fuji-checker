@@ -2044,6 +2044,10 @@
       "eyebrow": "Guias detalhados de estadia",
       "title": "Leia guias de áreas mais completos",
       "body": "Use depois da decisão principal da base de hotel. Eles continuam como guias de texto, não listas de botões de reserva."
+    },
+    "roomSizeGuide": {
+      "title": "Quão pequeno é um quarto em Tóquio?",
+      "description": "Tamanhos típicos por tipo de hotel e o que cabe ao lado de duas malas."
     }
   },
   "planYourTrip": {

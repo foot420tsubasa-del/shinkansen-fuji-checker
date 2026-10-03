@@ -582,7 +582,7 @@ export default async function TransferPage({ params }: Props) {
                 { href: "/areas-to-stay", label: "Open Tokyo Stay Finder" },
                 { href: stayHrefForRoute(slug), label: "First-time hotel base guide" },
                 { href: "/areas-to-stay/asakusa-vs-ueno", label: "Hotel base with luggage" },
-                { href: "/areas-to-stay#hotel-examples-matrix", label: "Local hotel examples" },
+                { href: "/areas-to-stay", label: "Local hotel examples" },
               ].map((link) => (
                 <TrackedInternalLink
                   key={link.href}

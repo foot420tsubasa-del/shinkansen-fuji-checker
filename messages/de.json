@@ -2044,6 +2044,10 @@
       "eyebrow": "Detaillierte Aufenthaltsguides",
       "title": "Tiefere Gebietsguides lesen",
       "body": "Nutze sie nach der Hauptentscheidung zur Hotelbasis. Es bleiben Textguides, keine Listen von Buchungsbuttons."
+    },
+    "roomSizeGuide": {
+      "title": "Wie klein ist ein Hotelzimmer in Tokio?",
+      "description": "Typische Zimmergrößen nach Hoteltyp — und was neben zwei Koffern noch passt."
     }
   },
   "planYourTrip": {

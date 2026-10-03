@@ -2044,6 +2044,10 @@
       "eyebrow": "Guías detalladas de alojamiento",
       "title": "Leer guías de zonas más completas",
       "body": "Úsalas después de decidir la base de hotel. Siguen siendo guías de texto, no listas de botones de reserva."
+    },
+    "roomSizeGuide": {
+      "title": "¿Qué tan pequeña es una habitación en Tokio?",
+      "description": "Tamaños habituales por tipo de hotel y qué cabe junto a dos maletas."
     }
   },
   "planYourTrip": {
