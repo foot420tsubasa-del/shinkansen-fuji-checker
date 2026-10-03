@@ -151,6 +151,19 @@ export function FujiWindowForecast({
       link_id: ticket.linkId,
       locale,
     });
+    // The tour is offered on clouded-in runs only, so its click count means
+    // nothing without the matching impression — the same condition the render
+    // below uses, kept here so the two cannot drift apart.
+    if (result.level === "low" && tourHref) {
+      trackAffiliateCtaView({
+        provider: "klook",
+        product: "fuji_day_tour",
+        placement: "fuji_window_cloudy_tour",
+        page_path: pagePath,
+        link_id: "fujiDayTourTokyo",
+        locale,
+      });
+    }
   };
 
   const levelText =
