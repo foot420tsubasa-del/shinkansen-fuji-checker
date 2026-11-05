@@ -99,17 +99,20 @@ export const KLOOK_URL = SHINKANSEN_TICKET_URL;
  * the reader on the exact route with the date picker already on Tokyo–Kyoto,
  * instead of the Shinkansen category list. The Seat Checker groups Kyoto and
  * Osaka into one direction, and Kyoto outdraws Osaka on every direction page,
- * so both directions resolve to the Kyoto route.
+ * so the outbound direction resolves to the Kyoto route.
  */
 export function getDirectionTicketLink(
   direction: "tokyo-osaka" | "osaka-tokyo" | null,
 ): { href: string; linkId: string; adid: string | undefined } | null {
-  const linkId =
-    direction === "tokyo-osaka"
-      ? "shinkansenTokyoKyoto"
-      : direction === "osaka-tokyo"
-        ? "shinkansenKyotoTokyo"
-        : null;
+  // Only the outbound leg resolves to a route link. October: Tokyo->Kyoto took
+  // 20 clicks for 3 bookings — 15.0% CVR, EPC 69.00 yen, the best slot on the
+  // site — while Kyoto->Tokyo took 22 clicks for none. If the return leg
+  // converted like the outbound, 22 clicks with nothing is a 2.8% outcome, so
+  // the asymmetry is the audience, not the link: the return traveller has
+  // already bought the round trip or is inside a JR Pass. Returning null hands
+  // every caller back to the generic ticket link, which did convert (28 clicks,
+  // 3 bookings, EPC 37.70 yen). Revisit once the return leg has 40 clicks.
+  const linkId = direction === "tokyo-osaka" ? "shinkansenTokyoKyoto" : null;
   if (!linkId) return null;
   const href = getAffUrl(linkId);
   // Registry-driven like every other slot: until the link has a URL this

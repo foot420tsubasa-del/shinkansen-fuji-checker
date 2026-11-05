@@ -5412,7 +5412,8 @@
     "book": "Check Shinkansen tickets on Klook",
     "updated": "Forecast from open-meteo.com, refreshed hourly.",
     "cloudyAlt": "Clouded in on that run? Mt. Fuji is often still out at ground level near Kawaguchiko, where a day trip gets you close enough to see it without the window.",
-    "tourCta": "See Mt Fuji day tours on Klook"
+    "tourCta": "See Mt Fuji day tours on Klook",
+    "clearAlt": "Good odds from the train. Standing under Mt. Fuji is a different day out — Kawaguchiko is a day trip from Tokyo."
   },
   "areaScores": {
     "title": "Scored side by side",

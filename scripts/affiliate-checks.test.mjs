@@ -97,17 +97,19 @@ test("guide Omio is a text link with the multimodal wording, never a button", ()
   assert.ok(!guideSrc.includes("Still comparing Shinkansen"), "banned Omio wording");
 });
 
-test("guide quick answer slot is Klook-only (no Omio in the top component)", () => {
-  const start = guideSrc.indexOf("const renderTopBookingCtas");
-  const end = guideSrc.indexOf("const renderAfterSeatNextSteps");
-  const top = guideSrc.slice(start, end);
-  assert.ok(top.includes("GuideKlookCta"));
-  assert.ok(!top.includes("OMIO_SHINKANSEN_URL"), "no Omio link in the quick-answer slot");
+test("the guide's quick-answer booking slot stays withdrawn", () => {
+  // This asserted the slot was Klook-only and carried no Omio link. The slot
+  // itself was withdrawn on 2026-11-06 for taking 1,214 impressions at 0.41%,
+  // so the Omio half is moot here — Omio still appears elsewhere in the guide
+  // source, rendering nothing under KLOOK_ONLY, and the test above keeps it
+  // styled as a text link if it ever comes back.
+  assert.ok(!guideSrc.includes("<GuideKlookCta"), "the quick-answer slot stays withdrawn");
 });
 
 test("required guide placements exist", () => {
   for (const placement of [
-    "guide_quick_answer",
+    // guide_quick_answer was here until 2026-11-06; the slot it named is gone,
+    // and "pre-interaction booking CTAs stay withdrawn" now guards its absence.
     "guide_how_to_book",
     "guide_mobile_sticky_after_checker",
     "guide_jr_pass_section",
@@ -297,4 +299,112 @@ test("sitemap offers no URL that redirects away", () => {
   for (const path of redirected) {
     assert.ok(!listed.includes(path), `sitemap still offers the redirected ${path}`);
   }
+});
+
+test("seat-check copy: the shared module matches the guide's own strings", () => {
+  // The guide still reads these from its inline per-locale UI object; the module
+  // was lifted from it verbatim so the other booking pages could carry the
+  // checker. A translation fixed in one place must not diverge in the other.
+  const guide = readFileSync("app/[locale]/guide/page.tsx", "utf8");
+  const shared = readFileSync("lib/copy/seat-check.ts", "utf8");
+  const PAIRS = [
+    ["seatCheckEyebrow", "eyebrow"],
+    ["seatCheckQuestion", "question"],
+    ["seatCheckResult", "result"],
+    ["seatCheckGreenCar", "greenCar"],
+    ["seatCheckBook", "book"],
+    ["seatCheckJrPassLink", "jrPassLink"],
+  ];
+  for (const [guideKey, sharedKey] of PAIRS) {
+    const inGuide = [...guide.matchAll(new RegExp(`${guideKey}:\\s*"((?:[^"\\\\]|\\\\.)*)"`, "g"))].map((m) => m[1]);
+    const inShared = [...shared.matchAll(new RegExp(`^    ${sharedKey}: "((?:[^"\\\\]|\\\\.)*)",$`, "gm"))].map((m) => m[1]);
+    assert.ok(inGuide.length >= 9, `${guideKey}: expected 9 locales in the guide, found ${inGuide.length}`);
+    assert.equal(inShared.length, 9, `${sharedKey}: expected 9 locales in the module, found ${inShared.length}`);
+    for (const value of inShared) {
+      assert.ok(
+        inGuide.includes(value),
+        `${sharedKey} has a string the guide does not: ${JSON.stringify(value)}`,
+      );
+    }
+  }
+});
+
+test("return leg: the link that booked nothing is not served", () => {
+  // October: Kyoto->Tokyo took 22 clicks and booked none, Tokyo->Kyoto booked 3
+  // of 20. Resolving the return leg to its own route link sent readers to the
+  // one slot on the site with no revenue at all; null hands them the generic
+  // ticket link, which did convert.
+  const src = readFileSync("src/affiliateLinks.ts", "utf8");
+  const body = src.match(/export function getDirectionTicketLink\(([\s\S]*?)\n\}/)?.[1] ?? "";
+  assert.ok(body, "getDirectionTicketLink must exist");
+  assert.ok(
+    !body.includes("shinkansenKyotoTokyo"),
+    "the return leg must not resolve to shinkansenKyotoTokyo again without new data",
+  );
+  assert.ok(body.includes("shinkansenTokyoKyoto"), "the outbound leg must still resolve");
+});
+
+test("pre-interaction booking CTAs stay withdrawn", () => {
+  // Over 10/01-11/05 these six slots took 1,839 impressions for 8 clicks
+  // (0.43%) while the result-moment CTAs took 1,131 for 35 (3.09%). They were
+  // removed on 2026-11-06; re-adding one needs a reason recorded first.
+  const WITHDRAWN = [
+    ["app/[locale]/guide/page.tsx", "guide_quick_answer"],
+    ["app/[locale]/shinkansen-seat-letters/page.tsx", "seat_letters_booking"],
+    ["app/[locale]/shinkansen-seat-guides/page.tsx", "seat_guides_booking"],
+    ["app/[locale]/kyoto-to-tokyo-mt-fuji-seat/page.tsx", "direction_kyoto_tokyo_booking"],
+    ["app/[locale]/tokyo-to-kyoto-mt-fuji-seat/page.tsx", "direction_tokyo_kyoto_booking"],
+    ["app/[locale]/osaka-to-tokyo-mt-fuji-seat/page.tsx", "direction_osaka_tokyo_booking"],
+  ];
+  for (const [file, placement] of WITHDRAWN) {
+    const src = readFileSync(file, "utf8");
+    assert.ok(
+      !src.includes(`placement="${placement}"`) && !src.includes(`placement: "${placement}"`),
+      `${file} mounts the withdrawn ${placement} again`,
+    );
+  }
+});
+
+test("the four direction pages carry the seat checker instead", () => {
+  // Removing a dead CTA must not leave the page with no path to a booking: the
+  // checker replaces it, so the page gains a 3.80% result moment.
+  for (const file of [
+    "app/[locale]/shinkansen-seat-guides/page.tsx",
+    "app/[locale]/kyoto-to-tokyo-mt-fuji-seat/page.tsx",
+    "app/[locale]/tokyo-to-kyoto-mt-fuji-seat/page.tsx",
+    "app/[locale]/osaka-to-tokyo-mt-fuji-seat/page.tsx",
+  ]) {
+    const src = readFileSync(file, "utf8");
+    assert.ok(src.includes("<GuideSeatCheck"), `${file} must mount the seat checker`);
+    assert.ok(src.includes("seatCheckCopy(locale)"), `${file} must use the shared copy`);
+  }
+});
+
+test("forecast tour: shown on every verdict, and counted on every verdict", () => {
+  // Gated on a clouded-in run it drew 42 impressions against 210 checks in 34
+  // days with no clicks — too rare to tell a bad offer from a starved one.
+  const src = readFileSync("components/travel/FujiWindowForecast.tsx", "utf8");
+  assert.ok(
+    !src.includes('result.level === "low" && tourHref'),
+    "the tour must not be gated on the cloudy verdict again",
+  );
+  // The impression and the click must carry the same label, or the rate is not
+  // divisible by verdict.
+  const labels = [...src.matchAll(/label: `fuji_window_tour:\$\{result\.level\}`/g)];
+  assert.equal(labels.length, 2, "both the impression and the click must label the verdict");
+  assert.ok(src.includes("copy.clearAlt"), "a non-cloudy verdict needs its own wording");
+});
+
+test("return-leg tour: offered only on the return leg, and labelled there", () => {
+  const src = readFileSync("components/travel/GuideSeatCheck.tsx", "utf8");
+  assert.ok(
+    src.includes('direction === "osaka-tokyo" ? getAffUrl("fujiDayTourTokyo") : null'),
+    "the tour must be scoped to the return leg, where the ticket booked nothing",
+  );
+  // The impression is fired from `next`, not from state that has not landed.
+  assert.ok(
+    src.includes('next === "osaka-tokyo" && getAffUrl("fujiDayTourTokyo")'),
+    "the impression must read the chosen direction, not the stale state",
+  );
+  assert.ok(src.includes('placement: "seat_result_return_tour"'), "needs its own placement");
 });

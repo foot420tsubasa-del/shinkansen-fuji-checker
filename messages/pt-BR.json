@@ -5357,7 +5357,8 @@
     "book": "Ver passagens de Shinkansen na Klook",
     "updated": "Previsão de open-meteo.com, atualizada a cada hora.",
     "cloudyAlt": "Esse trem deve pegar nuvem? No chão, perto de Kawaguchiko, o Fuji costuma aparecer mesmo assim — um bate-volta te leva perto o bastante, sem depender da janela.",
-    "tourCta": "Ver passeios ao monte Fuji na Klook"
+    "tourCta": "Ver passeios ao monte Fuji na Klook",
+    "clearAlt": "Boas chances pela janela. Estar ao pé do Fuji é outra experiência: Kawaguchiko é um passeio de um dia saindo de Tóquio."
   },
   "areaScores": {
     "title": "Comparados por pontuação",

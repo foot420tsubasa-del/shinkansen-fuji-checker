@@ -1086,3 +1086,75 @@ Klookのツアーは5.00%固定。10月の実績は
 - 東京→京都: 累計10予約を超えてからCVR・EPCを判定。3件では判断しない
 - 京都→東京: 累計40クリックで0件なら切符枠を完全撤去
 - 施策1・2: `guide_seat_result` の率が3.80%から上がるか。1ヶ月では判定しない
+
+---
+
+# 施策1〜3 実装（2026-11-06）
+
+## 実装前に判明した重要事実
+
+**操作前CTA6箇所は全て ADID 1265303（汎用リンク）を指していた。**
+`GuideKlookCta` は href を prop で受け取るだけで方向別リンクに解決しない
+（コメント「the link stays the verified Klook Shinkansen link」）。
+1265303 は10月に 28クリック・3予約・¥1,055.73・EPC ¥37.70 を稼いでいる。
+**つまり撤去はタダではない。** 操作前CTAの GA4 クリックは月8件で、
+EPC ¥37.70 換算で **月¥450前後（10月収益の19%）が失われる可能性**がある。
+
+この事実は撤去を止める理由にはしなかった（効果は仮説だが、
+1,839表示を0.43%で消費している事実のほうが重い）。ただし
+**4ページは「撤去」ではなく「座席チェッカーへの置換」にした** ——
+死んだボタンを消すだけでは、そのページから予約経路が無くなるため。
+
+## 変更内容
+
+| 対象 | 変更 |
+|---|---|
+| `/guide` | 上部予約CTA（`guide_quick_answer` 1,214表示/0.41%）を撤去。チェッカーは既に直上にあった |
+| `/shinkansen-seat-letters` | 予約CTA（420表示/0.48%）を撤去。`SeatMapTool`（3.85%）が直上にあるため置換不要。**到達420 > マップ完了130 = 離脱者の注意を集めていた** |
+| `/shinkansen-seat-guides` | 死んだCTA → `GuideSeatCheck` に置換 |
+| `/kyoto-to-tokyo-mt-fuji-seat` | 同上 |
+| `/tokyo-to-kyoto-mt-fuji-seat` | 同上 |
+| `/osaka-to-tokyo-mt-fuji-seat` | 同上 |
+| `src/affiliateLinks.ts` | `getDirectionTicketLink("osaka-tokyo")` → **null**。死んだ1443748を配信しない。全呼び出し元が汎用1265303（EPC ¥37.70）に戻る |
+| `GuideSeatCheck` | 復路のみツアー導線を追加（`seat_result_return_tour`・ADID 1385366）。往路は変更なし（EPC ¥69を邪魔しない） |
+| `FujiWindowForecast` | ツアーを**全判定で表示**（旧: 曇りのみ）。placement を `fuji_window_cloudy_tour` → **`fuji_window_tour`** に改名。`event_label` に判定（`fuji_window_tour:low|medium|high`）を載せて曇り/晴れを分離可能に |
+| `lib/copy/seat-check.ts`（新規） | 座席チェッカーのコピー9言語。/guide の値から機械抽出。drift をテストで固定 |
+| `messages/*.json` | `fujiWindow.clearAlt` を9言語追加 |
+
+**`GuideKlookCta` は描画されなくなったが削除していない**（従来方針どおり可逆に残す）。
+
+## ブラウザ検証（実データ）
+
+| ケース | 結果 |
+|---|---|
+| /guide 往路 | ADID **1443754**（¥69リンク）に解決・ツアー非表示・`guide_seat_result` のみ発火 |
+| /guide 復路 | **1443748 は消滅**・1265303 に解決・ツアー1385366 表示・`seat_result_return_tour` 発火 |
+| /guide 上部CTA | `guide_quick_answer` はDOMから消滅 |
+| 予報 晴れ(雲量0) | `fuji_window_tour:high` / lead = clearAlt「Good odds from the train...」 |
+| 予報 曇り(雲量84) | `fuji_window_tour:low` / lead = cloudyAlt「Clouded in on that run?...」 |
+| /kyoto-to-tokyo | チェッカー表示・復路選択でツアー発火・1443748 なし |
+| /shinkansen-seat-letters | 死んだCTA消滅・SeatMapTool 健在 |
+
+検証中の寄り道: 開発サーバのキャッシュが10/3の予報を保持していて判定が常に medium になった
+（コードではなく環境の問題）。`fetch(..., {cache:"reload"})` で解消。
+また `event_label` を `label` で読もうとして空に見えた —— 送信側は正しかった。
+
+## 検証
+
+tsc エラーなし / lint 既知の1警告のみ / **テスト30件すべて通過**（6件追加） /
+ビルド788ページ / clearAlt 9言語すべて存在。
+
+**既存テスト2件が陳腐化したので書き換えた**:
+`guide quick answer slot is Klook-only` は守る対象が消えたので
+「撤去されたままであること」に変更（Omio部分は別テストが担保）。
+`required guide placements exist` から `guide_quick_answer` を削除。
+
+## 12月に見る数字
+
+| 対象 | 判定条件 |
+|---|---|
+| 撤去の効果 | `guide_seat_result` の率が 3.80% から上がるか。**1ヶ月では判定しない** |
+| 撤去の損失 | 1265303 のクリック・予約が月28/3から落ちていないか。**落ちていたら撤去は失敗** |
+| 復路ツアー | `seat_result_return_tour` の表示→クリック率。ベースは切符0件 |
+| 予報ツアー | `fuji_window_tour:low` と `:high` を分けて比較。旧ベースは42表示0クリック |
+| 4ページのチェッカー | `guide_seat_result` の表示が631から増えるか |

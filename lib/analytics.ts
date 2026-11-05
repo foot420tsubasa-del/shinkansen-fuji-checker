@@ -166,11 +166,14 @@ export function trackAffiliateCtaView(params: {
   page_path?: string;
   link_id?: string;
   locale?: string;
+  /** Overrides the default (the placement) when one slot needs its variants
+   *  told apart — e.g. the forecast tour by the verdict that produced it. */
+  label?: string;
 }) {
   trackEvent({
     action: "affiliate_cta_view",
     category: "cta_view",
-    label: params.placement,
+    label: params.label ?? params.placement,
     params: {
       provider: params.provider,
       product: params.product,

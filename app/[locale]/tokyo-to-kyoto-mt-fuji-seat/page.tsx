@@ -6,8 +6,9 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
-import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
-import { KLOOK_URL } from "@/src/affiliateLinks";
+import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
+import { seatCheckCopy } from "@/lib/copy/seat-check";
+import { JR_PASS_URL, KLOOK_URL } from "@/src/affiliateLinks";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -130,24 +131,17 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Booking-intent slot: readers who reached a direction-specific
-            seat page are usually one step from reserving. */}
+        {/* Was a booking CTA that asked for the sale on arrival; over
+            10/01–11/05 that slot drew impressions and almost no clicks across
+            all four of these pages. The seat checker earns its CTA instead —
+            answer the direction, get the seat, then book the exact route. */}
         <div className="mt-6">
-          <GuideKlookCta
+          <GuideSeatCheck
             href={KLOOK_URL}
+            jrPassHref={JR_PASS_URL}
             locale={locale}
-            placement="direction_tokyo_kyoto_booking"
-            linkId="direction_klook_tokyo_kyoto"
             pagePath="/tokyo-to-kyoto-mt-fuji-seat"
-            pageType="shinkansen_tool"
-            copy={{
-              title: "Ready to book Tokyo → Kyoto?",
-              note: "Reserve Seat E when you book — it is the Mt. Fuji window on this leg.",
-              button: "Check Shinkansen tickets on Klook",
-              dirToKyoto: "Booking Tokyo → Kyoto / Osaka? Ask for Seat E.",
-              dirToTokyo: "Booking Tokyo → Kyoto / Osaka? Ask for Seat E.",
-              dirSeatNote: "Seat E is the Mt. Fuji window for your direction. Reserve it when you book.",
-            }}
+            copy={seatCheckCopy(locale)}
           />
         </div>
 

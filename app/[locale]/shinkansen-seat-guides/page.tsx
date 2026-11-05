@@ -7,8 +7,9 @@ import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
-import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
-import { KLOOK_URL } from "@/src/affiliateLinks";
+import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
+import { seatCheckCopy } from "@/lib/copy/seat-check";
+import { JR_PASS_URL, KLOOK_URL } from "@/src/affiliateLinks";
 import { KlookProductRow } from "@/components/affiliate/KlookProductRow";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -127,24 +128,17 @@ export default async function SeatGuidesHubPage({ params }: Props) {
           </div>
         </section>
 
-        {/* Booking-intent slot: this hub collects the "which seat" searches,
-            which sit one step from a reservation. */}
+        {/* Was a booking CTA that asked for the sale on arrival; over
+            10/01–11/05 that slot drew impressions and almost no clicks across
+            all four of these pages. The seat checker earns its CTA instead —
+            answer the direction, get the seat, then book the exact route. */}
         <div className="mt-6">
-          <GuideKlookCta
+          <GuideSeatCheck
             href={KLOOK_URL}
+            jrPassHref={JR_PASS_URL}
             locale={locale}
-            placement="seat_guides_booking"
-            linkId="seat_guides_klook_booking"
             pagePath="/shinkansen-seat-guides"
-            pageType="shinkansen_tool"
-            copy={{
-              title: "Ready to book your Shinkansen seat?",
-              note: "Pick your route first, then reserve Seat E from the seat map when it is offered.",
-              button: "Check Shinkansen tickets on Klook",
-              dirToKyoto: "Booking Tokyo → Kyoto / Osaka? Ask for Seat E.",
-              dirToTokyo: "Booking Kyoto / Osaka → Tokyo? Seat E, left side of the carriage.",
-              dirSeatNote: "Seat E is the Mt. Fuji window for your direction. Reserve it when you book.",
-            }}
+            copy={seatCheckCopy(locale)}
           />
         </div>
 

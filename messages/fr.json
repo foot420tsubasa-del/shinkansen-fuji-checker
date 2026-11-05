@@ -5357,7 +5357,8 @@
     "book": "Voir les billets de Shinkansen sur Klook",
     "updated": "Prévision open-meteo.com, actualisée chaque heure.",
     "cloudyAlt": "Ce train s'annonce bouché ? Au sol, du côté de Kawaguchiko, le Fuji reste souvent visible : une excursion à la journée vous en approche assez, sans dépendre de la fenêtre.",
-    "tourCta": "Voir les excursions au mont Fuji sur Klook"
+    "tourCta": "Voir les excursions au mont Fuji sur Klook",
+    "clearAlt": "Bonnes chances depuis le train. Se tenir au pied du Fuji est tout autre chose : Kawaguchiko est une excursion d'une journée depuis Tokyo."
   },
   "areaScores": {
     "title": "Comparés, en points",

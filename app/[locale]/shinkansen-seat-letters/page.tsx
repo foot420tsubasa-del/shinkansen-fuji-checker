@@ -7,7 +7,6 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
-import { GuideKlookCta } from "@/components/affiliate/GuideKlookCta";
 import { KLOOK_URL } from "@/src/affiliateLinks";
 import { SeatLayoutDiagram } from "@/components/content/SeatLayoutDiagram";
 import { KlookProductRow } from "@/components/affiliate/KlookProductRow";
@@ -147,26 +146,14 @@ export default async function SeatLettersPage({ params }: Props) {
           }}
         />
 
-        {/* Booking-intent slot: readers checking seat letters are usually about
-            to book. Same direction-aware Klook CTA as the guide. */}
-        <div className="mt-6">
-          <GuideKlookCta
-            href={KLOOK_URL}
-            locale={locale}
-            placement="seat_letters_booking"
-            linkId="seat_letters_klook_booking"
-            pagePath={pagePath}
-            pageType="shinkansen_tool"
-            copy={{
-              title: t("cta.title"),
-              note: t("cta.note"),
-              button: t("cta.button"),
-              dirToKyoto: t("cta.dirToKyoto"),
-              dirToTokyo: t("cta.dirToTokyo"),
-              dirSeatNote: t("cta.dirSeatNote"),
-            }}
-          />
-        </div>
+        {/* A booking CTA sat here until 2026-11-06, on the assumption that a
+            reader checking seat letters is about to book. The numbers over
+            10/01–11/05 say otherwise: 420 impressions, 2 clicks, 0.48%, against
+            3.85% for the map's own result CTA directly above it. More readers
+            scrolled past it (420) than finished the map (130), so it was
+            collecting the attention of people leaving, not of people deciding.
+            The map already carries the booking link at the moment it is worth
+            something, which is why nothing replaces this. */}
 
         <div className="mt-10 space-y-8">
           <section>

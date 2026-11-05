@@ -42,6 +42,8 @@ export type FujiWindowCopy = {
   book: string;
   /** Shown only when the chosen run is forecast to be clouded in. */
   cloudyAlt: string;
+  /** Same offer, worded for a verdict that is not clouded in. */
+  clearAlt: string;
   tourCta: string;
   updated: string;
 };
@@ -151,17 +153,19 @@ export function FujiWindowForecast({
       link_id: ticket.linkId,
       locale,
     });
-    // The tour is offered on clouded-in runs only, so its click count means
-    // nothing without the matching impression — the same condition the render
-    // below uses, kept here so the two cannot drift apart.
-    if (result.level === "low" && tourHref) {
+    // Same condition as the render below, kept here so the two cannot drift
+    // apart and the click count stays divisible by something real.
+    if (tourHref) {
       trackAffiliateCtaView({
         provider: "klook",
         product: "fuji_day_tour",
-        placement: "fuji_window_cloudy_tour",
+        placement: "fuji_window_tour",
         page_path: pagePath,
         link_id: "fujiDayTourTokyo",
         locale,
+        // Carries the verdict so a clouded-in offer stays separable from a
+        // clear-sky one now that both are shown.
+        label: `fuji_window_tour:${result.level}`,
       });
     }
   };
@@ -334,9 +338,17 @@ export function FujiWindowForecast({
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </a>
 
-            {result.level === "low" && tourHref ? (
+            {/* Shown on every verdict since 2026-11-06. Gated on a clouded-in
+                run, it appeared 42 times against 210 checks in 34 days and was
+                never clicked — too rare to tell a bad offer from a starved one.
+                A clear forecast is no reason to hide it either: standing under
+                the mountain is a different day out from passing it at 270km/h,
+                so only the wording changes with the verdict. */}
+            {tourHref ? (
               <div className="mt-3.5 border-t border-slate-100 pt-3">
-                <p className="text-[12px] leading-5 text-slate-600">{copy.cloudyAlt}</p>
+                <p className="text-[12px] leading-5 text-slate-600">
+                  {result.level === "low" ? copy.cloudyAlt : copy.clearAlt}
+                </p>
                 <a
                   href={tourHref}
                   target="_blank"
@@ -346,14 +358,15 @@ export function FujiWindowForecast({
                       category: "tour",
                       provider: "klook",
                       product: "fuji_day_tour",
-                      placement: "fuji_window_cloudy_tour",
+                      placement: "fuji_window_tour",
                       link_id: "fujiDayTourTokyo",
                       adid: "1385366",
                       page_path: pagePath,
                       page_type: "shinkansen_guide",
                       locale,
                       href: tourHref,
-                      label: copy.tourCta,
+                      // Matches the impression's label, so the two divide.
+                      label: `fuji_window_tour:${result.level}`,
                     })
                   }
                   className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-[12px] border border-[#D94A32] bg-white px-4 py-2 text-sm font-semibold text-[#D94A32] transition-colors hover:bg-[#fdf3f1] sm:w-auto sm:min-w-[15rem] sm:max-w-[22rem]"

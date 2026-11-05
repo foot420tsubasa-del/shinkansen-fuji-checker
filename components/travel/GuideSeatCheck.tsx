@@ -9,7 +9,8 @@ import {
   trackSeatCheckComplete,
 } from "@/lib/analytics";
 import { getSeatRecommendation, type DirectionId } from "@/lib/seat-checker";
-import { getDirectionTicketLink } from "@/src/affiliateLinks";
+import { getAffUrl, getDirectionTicketLink } from "@/src/affiliateLinks";
+import { returnTourCopy } from "@/lib/copy/seat-check";
 import { SEAT_DIRECTION_STORAGE_KEY, directionGaParams, KLOOK_FILLED_CTA } from "@/components/affiliate/GuideKlookCta";
 
 export type GuideSeatCheckCopy = {
@@ -58,6 +59,12 @@ export function GuideSeatCheck({
   // link is not registered.
   const ticket = getDirectionTicketLink(direction);
   const ticketHref = ticket?.href ?? href;
+  // Offered on the return leg only. The outbound reader is on the site's
+  // best-earning slot already (EPC 69.00 yen) and nothing should compete with
+  // it; the return reader's ticket link booked nothing across 22 clicks in
+  // October, so a tour is the thing they might actually still buy.
+  const tour = direction === "osaka-tokyo" ? getAffUrl("fujiDayTourTokyo") : null;
+  const tourCopy = returnTourCopy(locale);
 
   const choose = (next: DirectionId) => {
     setDirection(next);
@@ -90,6 +97,19 @@ export function GuideSeatCheck({
       link_id: "guide_klook_seat_result",
       locale,
     });
+    // Read from `next`, not from `direction`: the state write above has not
+    // landed yet, and an impression counted on the wrong leg would make the
+    // tour's click rate meaningless.
+    if (next === "osaka-tokyo" && getAffUrl("fujiDayTourTokyo")) {
+      trackAffiliateCtaView({
+        provider: "klook",
+        product: "fuji_day_tour",
+        placement: "seat_result_return_tour",
+        page_path: pagePath,
+        link_id: "fujiDayTourTokyo",
+        locale,
+      });
+    }
   };
 
   return (
@@ -197,6 +217,36 @@ export function GuideSeatCheck({
                 {copy.jrPassLink}
               </a>
             </p>
+            {tour ? (
+              <div className="mt-3.5 border-t border-slate-100 pt-3">
+                <p className="text-[12px] leading-5 text-slate-600">{tourCopy.lead}</p>
+                <a
+                  href={tour}
+                  target="_blank"
+                  rel={AFFILIATE_REL}
+                  onClick={() =>
+                    trackAffiliateClick({
+                      category: "tour",
+                      provider: "klook",
+                      product: "fuji_day_tour",
+                      placement: "seat_result_return_tour",
+                      link_id: "fujiDayTourTokyo",
+                      adid: "1385366",
+                      page_path: pagePath,
+                      page_type: "shinkansen_guide",
+                      locale,
+                      href: tour,
+                      label: tourCopy.cta,
+                      ...directionGaParams(direction),
+                    })
+                  }
+                  className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-[12px] border border-[#D94A32] bg-white px-4 py-2 text-sm font-semibold text-[#D94A32] transition-colors hover:bg-[#fdf3f1] sm:w-auto sm:min-w-[15rem] sm:max-w-[22rem]"
+                >
+                  {tourCopy.cta}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </div>
+            ) : null}
           </div>
         ) : null}
       </div>

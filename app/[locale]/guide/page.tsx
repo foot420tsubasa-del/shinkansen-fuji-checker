@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
 import { KLOOK_URL, ESIM_URL, SIM_CARD_URL, JR_PASS_URL, OMIO_SHINKANSEN_URL } from "@/src/affiliateLinks";
-import { GuideKlookCta, KLOOK_FILLED_CTA } from "@/components/affiliate/GuideKlookCta";
+import { KLOOK_FILLED_CTA } from "@/components/affiliate/GuideKlookCta";
 import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
 import { FujiWindowForecast } from "@/components/travel/FujiWindowForecast";
 import { GuideStickyCta } from "@/components/affiliate/GuideStickyCta";
@@ -1249,23 +1249,14 @@ export default async function GuidePage({ params }: Props) {
     />
   );
 
-  const renderTopBookingCtas = () => (
-    /* Primary Shinkansen CTA (Klook only — Omio never appears in this slot).
-       Copy switches to the direction-specific wording once the Seat Checker
-       has been answered; the link stays the verified Klook Shinkansen link. */
-    <GuideKlookCta
-      href={KLOOK_URL}
-      locale={locale}
-      copy={{
-        title: ui.quickKlookTitle,
-        note: ui.quickKlookNote,
-        button: ui.quickKlookButton,
-        dirToKyoto: ui.dirToKyoto,
-        dirToTokyo: ui.dirToTokyo,
-        dirSeatNote: ui.dirSeatNote,
-      }}
-    />
-  );
+  /* The booking CTA that used to sit here, directly under the Seat Checker, was
+     withdrawn on 2026-11-06. Over 10/01–11/05 it drew 1,214 impressions — 41%
+     of every affiliate impression on the site — and 5 clicks, a rate of 0.41%,
+     while the checker's own result CTA immediately above it took 631 and 24, a
+     rate of 3.80%. It asked for a booking before the reader had asked their
+     question. The five clicks it did win are a real loss; the wager is that the
+     impressions it consumed were costing more than that across the page.
+     Judged in December on whether guide_seat_result's rate rises above 3.80%. */
 
   const renderAfterSeatNextSteps = () => (
     <section className="mb-5 rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm shadow-slate-200/70 lg:px-5">
@@ -1609,7 +1600,6 @@ export default async function GuidePage({ params }: Props) {
         </section>
 
         {renderSeatCheck()}
-        {renderTopBookingCtas()}
 
         {/* Deliberately below the measured seat-check funnel: the forecast is a
             reason to come back, not a replacement for the answer above it. */}
@@ -1641,6 +1631,7 @@ export default async function GuidePage({ params }: Props) {
             slowerTrains: fw("slowerTrains"),
             book: fw("book"),
             cloudyAlt: fw("cloudyAlt"),
+            clearAlt: fw("clearAlt"),
             tourCta: fw("tourCta"),
             updated: fw("updated"),
           }}

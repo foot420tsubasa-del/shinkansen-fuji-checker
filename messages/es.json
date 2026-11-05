@@ -5357,7 +5357,8 @@
     "book": "Ver billetes de Shinkansen en Klook",
     "updated": "Previsión de open-meteo.com, actualizada cada hora.",
     "cloudyAlt": "¿Ese tren queda tapado por las nubes? A pie de tierra, cerca de Kawaguchiko, el Fuji suele verse igualmente: una excursión de un día te acerca lo suficiente sin depender de la ventanilla.",
-    "tourCta": "Ver excursiones al monte Fuji en Klook"
+    "tourCta": "Ver excursiones al monte Fuji en Klook",
+    "clearAlt": "Buenas probabilidades desde el tren. Estar al pie del Fuji es otra cosa: Kawaguchiko es una excursión de un día desde Tokio."
   },
   "areaScores": {
     "title": "Comparados con puntuación",
