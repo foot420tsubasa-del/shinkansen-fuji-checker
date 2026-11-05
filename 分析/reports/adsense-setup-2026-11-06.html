@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdSense 設定手順と判断材料</title>
+<style>
+  :root{
+    --bg:#0f1420; --panel:#161d2c; --panel2:#1b2436; --line:#27314a; --ink:#e8ecf4; --dim:#9aa6bd;
+    --accent:#f2c23e; --good:#4fbf8b; --warn:#e9a23b; --bad:#e2685f; --flat:#7b8aa8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+    line-height:1.85;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 28px 80px}
+  h1{font-size:25px;margin:0 0 6px}
+  .sub{color:var(--dim);font-size:13px;margin-bottom:30px}
+  h2{font-size:19px;margin:46px 0 14px;padding-bottom:9px;border-bottom:2px solid var(--line)}
+  h3{font-size:15px;margin:26px 0 10px;color:var(--accent)}
+  p{margin:10px 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:16px 0}
+  .done{border-left:4px solid var(--good)}
+  .todo{border-left:4px solid var(--accent)}
+  .alert{border-left:4px solid var(--bad)}
+  .warnbox{border-left:4px solid var(--warn)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;
+    font-variant-numeric:tabular-nums}
+  th,td{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+  th{color:var(--dim);font-weight:600;font-size:12px}
+  td.wide,th.wide{white-space:normal;min-width:16em}
+  tr:last-child td{border-bottom:none}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--panel2)}
+  .num{text-align:right}
+  .good{color:var(--good)} .bad{color:var(--bad)} .warn{color:var(--warn)} .flat{color:var(--flat)}
+  .dim{color:var(--dim)}
+  code{background:#0b0f18;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px}
+  ul{margin:10px 0;padding-left:1.35em} li{margin:8px 0}
+  ol{margin:10px 0;padding-left:1.4em} ol li{margin:12px 0}
+  .big{font-size:25px;font-weight:700;font-variant-numeric:tabular-nums}
+  .kpis{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0}
+  .kpi{flex:1 1 210px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .kpi .cap{font-size:11.5px;color:var(--dim);margin-bottom:4px}
+  .kpi .note{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.6}
+  .step{display:flex;gap:4px;align-items:flex-start;margin:20px 0}
+  .n{display:inline-block;width:1.9em;height:1.9em;line-height:1.9em;text-align:center;
+    border-radius:50%;background:var(--accent);color:#1a1205;font-weight:700;font-size:13px;
+    margin-right:10px;flex:none}
+  .foot{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>AdSense を設定する ― 手順と、その前に潰すべきこと</h1>
+<div class="sub">2026-11-06 ／ パブリッシャーID <code>pub-5844175658360101</code> ／ コード側は実装・プッシュ済み</div>
+
+<div class="card done">
+  <h3 style="margin-top:0">結論：配線はもう通しました。残りは管理画面の作業です</h3>
+  <p>調べたら、AdSenseの仕組みは<strong>以前から入っていて完全に休止していました</strong>
+  （<code>AdSlot</code>・スロット定義・検証用metaタグはあるが、環境変数が未設定で全スロットが <code>null</code>）。
+  審査に通る前提が4つ欠けていたので、そこを直しました。</p>
+  <p><strong>ただし、申請の前にやるべきことが1つあります（後述の課題A）。</strong>
+  前回「有用性の低いコンテンツ」で落ちているので、同じ形のページを残したまま再申請すべきではありません。</p>
+</div>
+
+<h2>1. 今回コード側で直したこと（完了・プッシュ済み）</h2>
+
+<table>
+  <tr><th class="wide">項目</th><th class="wide">何が問題だったか</th></tr>
+  <tr><td class="wide"><code>/ads.txt</code> を新規作成</td>
+      <td class="wide">そもそも存在しなかった。これが無いとAdSenseは「許可されていない在庫」として扱います</td></tr>
+  <tr><td class="wide bad"><code>proxy.ts</code> のマッチャー修正</td>
+      <td class="wide"><strong>ファイルを置くだけでは404でした。</strong>next-intl のマッチャーが
+      <code>robots.txt</code> と <code>sitemap.xml</code> は除外しているのに <code>ads.txt</code> を除外しておらず、
+      ロケールルーターに取り込まれていました。<strong>リポジトリ上は正しく見えるのに配信は404</strong>という、
+      気づきにくい形です</td></tr>
+  <tr><td class="wide">AdSenseタグをサイト全体で読み込み</td>
+      <td class="wide">タグが <code>AdSlot</code> の中から読み込まれていたため、
+      <strong>広告枠の無いページには存在しませんでした</strong>（流入69%の <code>/guide</code> を含む）。
+      審査と同意メッセージはどちらもタグの存在が前提です</td></tr>
+  <tr><td class="wide">プライバシーポリシーに広告の記載を追加</td>
+      <td class="wide">Analyticsとアフィリエイトの記載はあったが<strong>広告の記載が無かった</strong>。
+      広告配信の必須要件です</td></tr>
+  <tr><td class="wide">退役ページから広告枠を削除</td>
+      <td class="wide">9/29にnoindexにした手荷物ガイドに広告枠が残っていた。
+      <strong>AdSenseのポリシーはコードが置かれた全ページに適用されます</strong> ――
+      インデックスされないページに広告を載せるのはアカウント単位のリスクで、見返りがゼロ</td></tr>
+</table>
+
+<p>検証: tsc エラーなし／テスト36件通過（6件追加）／ビルド788ページ／
+<code>/ads.txt</code> は 200・<code>text/plain</code>、<code>robots.txt</code>・<code>sitemap.xml</code>・<code>/de/guide</code> も無事。</p>
+
+<div class="card warnbox">
+  <p><strong>自動広告（Auto ads）は必ずOFFのままにしてください。</strong>
+  自由にやらせるとGoogleは好きな場所に広告を置きます。
+  このサイトで唯一稼いでいるのは座席チェッカーの結果CTA（3.80%）で、
+  そこに広告が入ると収益源そのものを潰します。広告枠はコード側で指定します。</p>
+</div>
+
+<h2>2. 申請の前に ― 課題A：薄いページが1枚残っています</h2>
+
+<div class="card alert">
+  <p><strong><code>/shinkansen-seat-guides</code> を先に畳むことを強く勧めます。</strong></p>
+  <table style="margin-top:10px">
+    <tr><th class="wide">指標</th><th class="num">値</th><th class="wide">意味</th></tr>
+    <tr><td class="wide">本文語数</td><td class="num bad">496</td><td class="wide">サイト内で最も薄い</td></tr>
+    <tr><td class="wide">アフィリエイトリンク</td><td class="num bad">8</td><td class="wide">62語に1本</td></tr>
+    <tr><td class="wide">h2見出し</td><td class="num bad">1</td><td class="wide">構造がほぼ無い</td></tr>
+    <tr><td class="wide">90日クリック</td><td class="num bad">5</td><td class="wide">表示369・順位9.6</td></tr>
+  </table>
+  <p><strong>これは前回AdSenseに弾かれたときの典型的な形そのものです。</strong>
+  Googleの初回審査はほぼ自動で、こういうページを拾います。
+  90日で5クリックなので、畳んでも失うのは月2クリック程度です。</p>
+  <p class="dim">12月のCTA実験には影響しません（このページは1日あたり4PV程度で、
+  判定指標への寄与が無視できる水準）。</p>
+</div>
+
+<h2>3. 課題B ― EEA向けの同意管理（CMP）が必須です</h2>
+
+<p>国別のクリックを数えました。</p>
+<table>
+  <tr><th class="wide">国</th><th class="num">90日クリック</th><th class="num">比率</th></tr>
+  <tr><td class="wide">日本</td><td class="num">908</td><td class="num">27.5%</td></tr>
+  <tr><td class="wide">米国</td><td class="num">503</td><td class="num">15.2%</td></tr>
+  <tr><td class="wide">オーストラリア</td><td class="num">250</td><td class="num">7.6%</td></tr>
+  <tr><td class="wide warn">ドイツ</td><td class="num">218</td><td class="num">6.6%</td></tr>
+  <tr><td class="wide warn">英国</td><td class="num">184</td><td class="num">5.6%</td></tr>
+  <tr><td class="wide warn">フランス・スペイン・オランダ 他</td><td class="num">256</td><td class="num">7.8%</td></tr>
+  <tr class="tot"><td class="wide">EEA + 英国 + スイス 合計</td><td class="num bad">858</td><td class="num bad">26.0%</td></tr>
+</table>
+
+<p><strong>流入の4分の1がEEA/英国です。</strong>2024年1月16日から、この地域にパーソナライズ広告を出すには
+<strong>Google認定のCMP</strong>が必須です。無いとその26%には非パーソナライズ広告（または制限付き広告）しか出ず、収益が落ちます。</p>
+
+<div class="card todo">
+  <p><strong>一番楽なのはGoogle自身のCMPを使うことです。</strong>認定リストに入っていて、
+  <strong>管理画面で有効にするだけでコードを書く必要がありません</strong>
+  （既にサイト全体でAdSenseタグを読み込むようにしたので、同意メッセージはそこから表示されます）。</p>
+  <p>AdSense管理画面 → <strong>プライバシーとメッセージ</strong> → <strong>欧州の規制に関するメッセージ</strong>
+  → 対象サイトを選んで公開。</p>
+</div>
+
+<h2>4. 管理画面での手順（こちらでは代行できません）</h2>
+
+<div class="step"><span class="n">1</span><div>
+  <h3 style="margin:0 0 4px">サイトを追加する</h3>
+  <p style="margin:4px 0">いただいたURLの <strong>サイト</strong> 一覧で <code>fujiseat.com</code> を追加します。
+  すでに登録済みなら状態（「準備完了」「要対応」「審査中」など）を教えてください。
+  <strong>前回の却下が残っている場合、同じ画面から再審査をリクエストします。</strong></p>
+</div></div>
+
+<div class="step"><span class="n">2</span><div>
+  <h3 style="margin:0 0 4px">欧州の規制に関するメッセージ（CMP）を公開する</h3>
+  <p style="margin:4px 0">課題Bのとおり。<strong>審査を出す前にこれを済ませてください。</strong></p>
+</div></div>
+
+<div class="step"><span class="n">3</span><div>
+  <h3 style="margin:0 0 4px">審査をリクエストする</h3>
+  <p style="margin:4px 0">コード側の前提は揃っています（<code>ads.txt</code>・検証metaタグ・サイト全体のタグ・
+  プライバシーポリシー・<code>/privacy</code> と <code>/terms</code> と <code>/about</code> の3点セットは既に存在）。
+  <strong>課題Aを片付けてから出すこと。</strong></p>
+</div></div>
+
+<div class="step"><span class="n">4</span><div>
+  <h3 style="margin:0 0 4px">承認後：広告ユニットを作って、IDを教えてください</h3>
+  <p style="margin:4px 0">広告 → <strong>広告ユニットごと</strong> → ディスプレイ広告 で作成すると
+  <code>data-ad-slot</code> の数値IDが出ます。それを環境変数に入れると表示が始まります。</p>
+  <table style="margin-top:8px">
+    <tr><th class="wide">環境変数</th><th class="wide">対象ページ</th></tr>
+    <tr><td class="wide"><code>NEXT_PUBLIC_ADSENSE_ENABLED</code></td><td class="wide"><code>true</code> にすると有効化</td></tr>
+    <tr><td class="wide"><code>NEXT_PUBLIC_ADSENSE_CLIENT_ID</code></td><td class="wide"><code>ca-pub-5844175658360101</code></td></tr>
+    <tr><td class="wide"><code>NEXT_PUBLIC_ADSENSE_SLOT_TRAIN_SIGNS_MID_ARTICLE</code></td><td class="wide">/how-to-read-japanese-train-signs</td></tr>
+    <tr><td class="wide"><code>NEXT_PUBLIC_ADSENSE_SLOT_ROOM_SIZE_MID_ARTICLE</code></td><td class="wide">/areas-to-stay/tokyo-hotel-room-size-guide</td></tr>
+    <tr><td class="wide"><code>NEXT_PUBLIC_ADSENSE_SLOT_ASAKUSA_UENO_AFTER_HOTEL_CTA</code></td><td class="wide">/areas-to-stay/asakusa-vs-ueno</td></tr>
+    <tr><td class="wide"><code>NEXT_PUBLIC_ADSENSE_SLOT_UENO_SHINJUKU_AFTER_HOTEL_CTA</code></td><td class="wide">/areas-to-stay/ueno-vs-shinjuku</td></tr>
+  </table>
+  <p style="margin:8px 0" class="dim">※ 環境変数の設定はそちらでお願いします（<code>.env.local</code> は私からは触りません）。
+  値を教えていただければ、入れる場所だけ案内します。</p>
+</div></div>
+
+<h2>5. いくらになるのか ― 期待値</h2>
+
+<div class="kpis">
+  <div class="kpi"><div class="cap">10月のOrganic PV</div><div class="big">2,202</div><div class="note">広告が出るのはこのPVに対して</div></div>
+  <div class="kpi"><div class="cap">想定RPM（旅行系）</div><div class="big">$4〜12</div><div class="note">米15%・豪8%・英6%は高め／日27%は低め</div></div>
+  <div class="kpi"><div class="cap">月額の目安</div><div class="big good">$9〜26</div><div class="note">Klook（約$16）と同規模</div></div>
+  <div class="kpi"><div class="cap">AdSenseの支払い基準</div><div class="big">$100</div><div class="note">Klookの$150より低い</div></div>
+</div>
+
+<p><strong>Klookと同じくらい稼げる可能性があります。</strong>しかも広告は座席チェッカーのCTAと競合しない場所に置くので、
+<strong>アフィリエイト収益を削らずに上積みできる</strong>のが利点です。</p>
+
+<div class="card warnbox">
+  <p><strong>ただし「しきい値が2つになる」点は認識しておいてください。</strong>
+  以前5つのアフィリエイトを1本に絞った理由は「収益が5つのしきい値に分散すると、どれにも到達しない」でした。
+  AdSenseを足すと支払い基準が2本になります。</p>
+  <p>今回が当時と違うのは、<strong>5つは同じクリックを奪い合っていたのに対し、広告は別の在庫</strong>だという点です。
+  とはいえ月$15なら$100到達まで約7ヶ月です。<strong>上積みにはなるが、即金にはなりません。</strong></p>
+</div>
+
+<div class="card alert">
+  <p><strong>もう1つのリスク：Direct流入のボットです。</strong>
+  9〜10月のDirectは4日ごとに595→88→181セッションと乱れ、1ユーザー1.00セッション ――
+  ボットの形でした。<strong>ボットの広告表示は「無効なトラフィック」と判定されうる</strong>ので、
+  承認後は管理画面の無効トラフィック率を見ておいてください。</p>
+</div>
+
+<h2>6. 推奨する順番</h2>
+<table>
+  <tr><th class="num">順</th><th class="wide">やること</th><th class="wide">誰が</th></tr>
+  <tr><td class="num">1</td><td class="wide"><code>/shinkansen-seat-guides</code> を畳む（課題A）</td><td class="wide">私（指示をいただければ即）</td></tr>
+  <tr><td class="num">2</td><td class="wide">サイト一覧の現状を確認・共有</td><td class="wide">そちら</td></tr>
+  <tr><td class="num">3</td><td class="wide">欧州の規制に関するメッセージを公開（課題B）</td><td class="wide">そちら</td></tr>
+  <tr><td class="num">4</td><td class="wide">審査をリクエスト</td><td class="wide">そちら</td></tr>
+  <tr><td class="num">5</td><td class="wide">承認後、広告ユニットを作成してIDを共有</td><td class="wide">そちら</td></tr>
+  <tr><td class="num">6</td><td class="wide">既存4枠を有効化（<code>/guide</code> は<strong>まだ入れない</strong>）</td><td class="wide">そちら＋私</td></tr>
+  <tr><td class="num">7</td><td class="wide">12月のCTA判定が終わってから <code>/guide</code> に広告枠を追加</td><td class="wide">私</td></tr>
+</table>
+
+<div class="card">
+  <p><strong>なぜ <code>/guide</code> を後回しにするか。</strong>
+  流入69%・90日で193,574表示という最大のページなので、広告収益のほとんどはここから出ます。
+  しかし<strong>今まさにCTA撤去の効果を測っている最中</strong>で、同時に広告を入れると
+  「クリック率が変わったのはCTA撤去のせいか、広告のせいか」が永久に分離できなくなります。</p>
+  <p>1ヶ月待つだけです。<strong>/guide のタイトル変更を6日で誤判定した前例</strong>を繰り返さないための遅延です。</p>
+</div>
+
+<div class="foot">
+  要件は Google の公開ドキュメントで確認しました（CMPは2024年1月16日から必須、2026年時点で変更の告知なし）。
+  国別クリックは Search Console API（2026-08-06〜11-03）。PVは GA4（Organic Search限定・2026年10月）。
+  RPMは旅行系の一般的なレンジによる推定で、実測値ではありません。<br>
+  パブリッシャーIDは <code>public/ads.txt</code> と <code>app/layout.tsx</code> の検証metaタグで一致を
+  テストで固定済み（不一致は無言で審査に落ちるため）。
+</div>
+
+</div>
+</body>
+</html>
