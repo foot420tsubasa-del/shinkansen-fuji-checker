@@ -422,11 +422,16 @@ test("adsense: ads.txt declares the publisher and nothing else", () => {
   assert.equal(tagId, "f08c47fec0942fa0", "Google's own TAG id");
 });
 
-test("adsense: the publisher id is the same in ads.txt and the meta tag", () => {
-  const meta = readFileSync("app/layout.tsx", "utf8").match(/"google-adsense-account":\s*"ca-(pub-\d+)"/)?.[1];
+test("adsense: the publisher id is the same in ads.txt and in the code", () => {
+  // The meta tag now reads the same constant the script tag does, so only two
+  // places state the id: lib/ads.ts and public/ads.txt. A mismatch between
+  // them fails verification silently.
+  const code = readFileSync("lib/ads.ts", "utf8").match(/ADSENSE_CLIENT_ID = "ca-(pub-\d+)"/)?.[1];
   const ads = readFileSync("public/ads.txt", "utf8").match(/(pub-\d+)/)?.[1];
-  assert.ok(meta, "the verification meta tag must exist");
-  assert.equal(ads, meta, "a mismatch here fails verification silently");
+  assert.ok(code, "lib/ads.ts must declare the publisher id");
+  assert.equal(ads, code, "ads.txt and lib/ads.ts disagree on the publisher id");
+  const layout = readFileSync("app/layout.tsx", "utf8");
+  assert.ok(layout.includes("ADSENSE_CLIENT_ID"), "the meta tag must use the same constant");
 });
 
 test("adsense: the tag is loaded once, site-wide, not from the ad unit", () => {

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { ADSENSE_CLIENT_ID } from "@/lib/ads";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://fujiseat.com"),
   other: {
     "agd-partner-manual-verification": "",
-    "google-adsense-account": "ca-pub-5844175658360101",
+    // Same constant the tag and public/ads.txt use, so the three cannot drift.
+    "google-adsense-account": ADSENSE_CLIENT_ID,
   },
 };
 
