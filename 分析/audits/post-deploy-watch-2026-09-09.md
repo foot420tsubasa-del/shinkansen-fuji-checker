@@ -1339,3 +1339,51 @@ Vercel の Deployments が1本ずつ処理されて詰まっており、
 3. **`/shinkansen-seat-guides` を畳む**（未着手・ユーザー判断待ち）
 4. 承認後、広告ユニットを作成してスロットIDを設定
 5. **`/guide` への広告枠追加は12月のCTA判定後**
+
+## /shinkansen-seat-guides を畳んだ（2026-11-06）
+
+**noindex ではなく 301**（→ `/shinkansen-seat-letters`）。
+リスクは「Googleがインデックスすること」ではなく**ページが存在すること**なので、
+退役（noindex）では AdSense 対策にならない。コードは残す（従来方針どおり可逆）。
+
+### 根拠
+
+**自分のクエリが1つも無かった。** 出現した全クエリを他ページが上回っている:
+
+| クエリ | seat-guides | 勝っているページ |
+|---|---|---|
+| shinkansen seat map | 1表示・**順位47.0** | seat-letters **34クリック** 2,376表示・順位6.0 |
+| shinkansen seat e | 1表示・順位11 | seat-letters 23表示・順位2.5 |
+| 富士山の長文クエリ | 1表示・順位20 | /guide 39表示・順位10.5 |
+| fujiseat（ブランド） | 1クリック | トップ 5クリック |
+
+**90日のクエリ別クリックは1件のみで、それもブランド名。** ページのテーマでの獲得はゼロ。
+加えて 496語 / アフィリエイト8本 / h2が1個 — 前回のAdSense却下と同じ形で、審査が走っている最中。
+
+### 内部リンク2本を先に処理（誰も301を踏まないように）
+
+- **トップの人気リンク**: 「All seat guides」→ 直下の行が既に seat-letters を指しているため
+  単純な付け替えは重複になる。**`/kyoto-to-tokyo-mt-fuji-seat`（90日89クリック・10,988表示、
+  サイト最強の直進ページ。今は座席チェッカーも載っている）に差し替え。**
+- **train-signs の link4**: href を seat-letters に変更。
+  アンカー文言「Shinkansen seat guide hub」は存在しないページを指す名前になるため、
+  **9言語すべてで「座席記号A–E表」相当に書き換え**（各言語の文中での格・役割を維持）。
+
+### テストが設計どおり機能した
+
+`sitemap offers no URL that redirects away` が
+「`app/sitemap.ts` の配列に `/shinkansen-seat-guides` が残っている」を検出。
+既に畳んだ15パスは全て配列から除去済みで、それが既存の作法だった。配列から削除して解消。
+
+### 検証
+
+| 項目 | 結果 |
+|---|---|
+| `/shinkansen-seat-guides` | 308 → `/shinkansen-seat-letters` |
+| `/de/` `/fr/` 版 | それぞれ自ロケールへ308 |
+| 行き先 | 200（en / de 確認） |
+| サイトマップ | **21 → 20 URL**、seat-guides 除外 |
+| 内部リンク | en / de の トップ・train-signs すべて残存なし |
+| 差し替え文言 | 英「seat letters A–E chart」/ 独「Übersicht der Sitzplatzbuchstaben A–E」描画確認 |
+
+tsc / テスト36件 / lint既知1件 / ビルド788ページ。

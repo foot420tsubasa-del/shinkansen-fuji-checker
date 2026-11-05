@@ -4845,7 +4845,7 @@
       "title": "Hinweis speziell zum Shinkansen",
       "intro": "Hat man die Reihenfolge verstanden, ist der Shinkansen oft einfacher als manche Nahverkehrsbahnhöfe — Abfahrt, Bahnsteig, Wagen und Platz sind klar. Eigene Schilder hat er trotzdem.",
       "p1Rich": "Beim Shinkansen prüfst du <b1>Zugname</b1>, <b2>Abfahrtszeit</b2>, <b3>Bahnsteig</b3>, <b4>Wagennummer</b4>, <b5>reservierten Platz</b5>, <b6>Nicht-reserviert-Bereich</b6> und auf dem Tokaido-Shinkansen den <b7>Fuji-Seiten-Platz</b7>. Namen wie Nozomi, Hikari und Kodama zählen — sie halten unterschiedlich. Auch die Abfahrtszeit zählt: Mehrere Züge zu ähnlichen Zielen können nur wenige Minuten auseinanderliegen.",
-      "p2Rich": "Für Tokio–Kyoto lies zuerst den <link1>Tokio–Kyoto-Shinkansen-Ticketguide</link1>. Beim Bahnpass-Vergleich nimm <link2>JR Pass vs Einzeltickets</link2>. Für die Sitzwahl mit dem <link3>Fuji-Sitz-Guide</link3> starten und dann den <link4>Shinkansen-Sitz-Guide-Hub</link4> nutzen. Wer von Tokio nach Westen fährt: der <link5>Tokio–Kyoto-Fuji-Sitz-Guide</link5> nennt die Details.",
+      "p2Rich": "Für Tokio–Kyoto lies zuerst den <link1>Tokio–Kyoto-Shinkansen-Ticketguide</link1>. Beim Bahnpass-Vergleich nimm <link2>JR Pass vs Einzeltickets</link2>. Für die Sitzwahl mit dem <link3>Fuji-Sitz-Guide</link3> starten und dann den <link4>Übersicht der Sitzplatzbuchstaben A–E</link4> nutzen. Wer von Tokio nach Westen fährt: der <link5>Tokio–Kyoto-Fuji-Sitz-Guide</link5> nennt die Details.",
       "ctas": {
         "seatChecker": "Prüfe deinen Fuji-Seiten-Shinkansen-Platz",
         "fullGuide": "Vollständigen Shinkansen-Sitz-Guide lesen"

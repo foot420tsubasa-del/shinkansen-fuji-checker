@@ -366,11 +366,12 @@ test("pre-interaction booking CTAs stay withdrawn", () => {
   }
 });
 
-test("the four direction pages carry the seat checker instead", () => {
+test("the surviving direction pages carry the seat checker instead", () => {
   // Removing a dead CTA must not leave the page with no path to a booking: the
   // checker replaces it, so the page gains a 3.80% result moment.
+  // shinkansen-seat-guides was in this list until it was folded on 2026-11-06;
+  // its route still exists but 301s, so asserting on it would prove nothing.
   for (const file of [
-    "app/[locale]/shinkansen-seat-guides/page.tsx",
     "app/[locale]/kyoto-to-tokyo-mt-fuji-seat/page.tsx",
     "app/[locale]/tokyo-to-kyoto-mt-fuji-seat/page.tsx",
     "app/[locale]/osaka-to-tokyo-mt-fuji-seat/page.tsx",

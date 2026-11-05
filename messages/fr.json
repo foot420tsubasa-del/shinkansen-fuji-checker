@@ -4846,7 +4846,7 @@
       "title": "Note spécifique au Shinkansen",
       "intro": "Une fois la séquence comprise, le Shinkansen est plus simple que beaucoup de gares locales : horaires, quais, voitures et sièges sont bien définis. Mais il a ses propres panneaux.",
       "p1Rich": "Pour le Shinkansen, vérifie <b1>nom du train</b1>, <b2>horaire</b2>, <b3>quai</b3>, <b4>numéro de voiture</b4>, <b5>siège réservé</b5>, <b6>zone non réservée</b6> et, sur le Tokaido Shinkansen, le <b7>siège côté Mont Fuji</b7>. Les noms comme Nozomi, Hikari et Kodama comptent : ils ne s'arrêtent pas aux mêmes gares. L'horaire compte aussi : plusieurs trains peuvent partir vers des destinations proches à quelques minutes d'écart.",
-      "p2Rich": "Pour Tokyo–Kyoto, lis d'abord le <link1>guide du billet Shinkansen Tokyo–Kyoto</link1>. Si tu hésites sur un pass, compare <link2>JR Pass vs billets à l'unité</link2>. Pour le siège, commence par le <link3>guide du siège Mont Fuji</link3>, puis utilise le <link4>hub des guides de sièges Shinkansen</link4>. Si tu pars vers l'ouest depuis Tokyo, le <link5>guide Tokyo–Kyoto du siège Mont Fuji</link5> précise ce qu'il faut surveiller.",
+      "p2Rich": "Pour Tokyo–Kyoto, lis d'abord le <link1>guide du billet Shinkansen Tokyo–Kyoto</link1>. Si tu hésites sur un pass, compare <link2>JR Pass vs billets à l'unité</link2>. Pour le siège, commence par le <link3>guide du siège Mont Fuji</link3>, puis utilise le <link4>tableau des lettres de sièges A–E</link4>. Si tu pars vers l'ouest depuis Tokyo, le <link5>guide Tokyo–Kyoto du siège Mont Fuji</link5> précise ce qu'il faut surveiller.",
       "ctas": {
         "seatChecker": "Vérifie ton siège Shinkansen côté Mont Fuji",
         "fullGuide": "Lire le guide complet des sièges Shinkansen"

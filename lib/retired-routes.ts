@@ -82,6 +82,15 @@ export const FOLDED_PATHS: readonly string[] = [
   "/areas-to-stay/shin-osaka-vs-namba",
   "/areas-to-stay/where-to-stay-in-tokyo-with-luggage",
   "/areas-to-stay/tokyo-hotels",
+  /* Folded 2026-11-06. It had no query of its own: every term it appeared for
+     was already served better elsewhere — "shinkansen seat map" reached it at
+     position 47.0 for one impression while /shinkansen-seat-letters took 34
+     clicks on 2,376 impressions at 6.0 — and its single query-level click in
+     ninety days came from the brand name. 496 words carrying 8 affiliate links
+     under one h2 is also the shape that drew the AdSense rejection, and a
+     review is running now. Redirected rather than noindexed because the risk
+     is the page existing at all, not Google indexing it. */
+  "/shinkansen-seat-guides",
 ];
 
 const RETIRED = new Set(RETIRED_PATHS);

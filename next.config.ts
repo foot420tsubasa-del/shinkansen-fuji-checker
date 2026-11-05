@@ -155,6 +155,22 @@ const nextConfig: NextConfig = {
         destination: "/:locale/areas-to-stay",
         permanent: true,
       },
+      // Seat guides index, folded 2026-11-06. It owned no query: every term it
+      // showed for was served better by another page, most pointedly
+      // "shinkansen seat map", where it sat at position 47.0 on one impression
+      // and /shinkansen-seat-letters took 34 clicks on 2,376 at 6.0. Its one
+      // query-level click in ninety days was the brand name. It sent readers
+      // to the page that already wins, which is where the redirect points.
+      {
+        source: "/shinkansen-seat-guides",
+        destination: "/shinkansen-seat-letters",
+        permanent: true,
+      },
+      {
+        source: `/:locale(${LOCALES})/shinkansen-seat-guides`,
+        destination: "/:locale/shinkansen-seat-letters",
+        permanent: true,
+      },
       // Tokyo Stay Finder, folded 2026-09-29. Six months: 1 search click on
       // 116 impressions, 3 affiliate clicks, zero revenue. The tool itself
       // converted well — every one of the nine people who started it finished,

@@ -324,7 +324,7 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                       </Link>
                     ),
                     link4: (chunks) => (
-                      <Link href="/shinkansen-seat-guides" className="font-bold text-[#106b43] underline underline-offset-2">
+                      <Link href="/shinkansen-seat-letters" className="font-bold text-[#106b43] underline underline-offset-2">
                         {chunks}
                       </Link>
                     ),

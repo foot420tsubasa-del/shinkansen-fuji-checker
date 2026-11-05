@@ -197,7 +197,7 @@ export default function HomeClient() {
   const popularLinks: PopularLink[] = useMemo(() => [
     { label: "Seat E guide", href: "/guide#seat-e", icon: Train },
     { label: "Seat letters A-E", href: "/shinkansen-seat-letters", icon: Train },
-    { label: "All seat guides", href: "/shinkansen-seat-guides", icon: Train },
+    { label: "Kyoto → Tokyo seat", href: "/kyoto-to-tokyo-mt-fuji-seat", icon: Train },
   ], []);
 
   const omioRouteCompareHref = OMIO_SHINKANSEN_URL;
