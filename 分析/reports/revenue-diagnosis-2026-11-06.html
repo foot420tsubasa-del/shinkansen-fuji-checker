@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>流入は増えたのに収益が動かない理由</title>
+<style>
+  :root{
+    --bg:#0f1420; --panel:#161d2c; --panel2:#1b2436; --line:#27314a; --ink:#e8ecf4; --dim:#9aa6bd;
+    --accent:#f2c23e; --good:#4fbf8b; --warn:#e9a23b; --bad:#e2685f; --flat:#7b8aa8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+    line-height:1.85;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1100px;margin:0 auto;padding:40px 28px 80px}
+  h1{font-size:25px;margin:0 0 6px;letter-spacing:.01em}
+  .sub{color:var(--dim);font-size:13px;margin-bottom:34px}
+  h2{font-size:19px;margin:48px 0 14px;padding-bottom:9px;border-bottom:2px solid var(--line)}
+  h3{font-size:15px;margin:26px 0 10px;color:var(--accent)}
+  p{margin:10px 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:16px 0}
+  .verdict{border-left:4px solid var(--accent)}
+  .alert{border-left:4px solid var(--bad)}
+  .okbox{border-left:4px solid var(--good)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;
+    font-variant-numeric:tabular-nums}
+  th,td{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+  th{color:var(--dim);font-weight:600;font-size:12px;letter-spacing:.03em}
+  td.wide,th.wide{white-space:normal;min-width:15em}
+  tr:last-child td{border-bottom:none}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--panel2)}
+  .num{text-align:right}
+  .good{color:var(--good)} .bad{color:var(--bad)} .warn{color:var(--warn)} .flat{color:var(--flat)}
+  .dim{color:var(--dim)}
+  code{background:#0b0f18;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px}
+  .bars{margin:18px 0}
+  .row{display:flex;align-items:center;gap:12px;margin:7px 0;font-size:13px}
+  .row .lab{width:7em;flex:none;color:var(--dim)}
+  .row .track{flex:1;height:22px;background:#0b0f18;border-radius:4px;overflow:hidden;min-width:110px;position:relative}
+  .row .fill{height:100%;opacity:.9}
+  .row .val{width:8.5em;flex:none;text-align:right;font-variant-numeric:tabular-nums}
+  ul{margin:10px 0;padding-left:1.35em}
+  li{margin:8px 0}
+  ol{margin:10px 0;padding-left:1.4em}
+  .pill{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:99px;
+    border:1px solid var(--line);color:var(--dim);margin-right:7px;white-space:nowrap}
+  .big{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+  .kpis{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0}
+  .kpi{flex:1 1 210px;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;padding:16px 18px}
+  .kpi .cap{font-size:11.5px;color:var(--dim);letter-spacing:.03em;margin-bottom:4px}
+  .kpi .note{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.6}
+  .foot{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);
+    font-size:12px;color:var(--dim)}
+  .funnel{margin:20px 0}
+  .fstep{display:flex;align-items:center;gap:14px;margin:10px 0;font-size:13.5px}
+  .fstep .fbar{height:34px;background:linear-gradient(90deg,#f2c23e,#d9a62c);border-radius:5px;
+    display:flex;align-items:center;padding-left:12px;color:#1a1205;font-weight:700;
+    font-variant-numeric:tabular-nums;white-space:nowrap;min-width:5em}
+  .fstep .fnote{color:var(--dim);font-size:12.5px}
+  .prio{display:inline-block;width:1.9em;height:1.9em;line-height:1.9em;text-align:center;
+    border-radius:50%;background:var(--accent);color:#1a1205;font-weight:700;font-size:13px;
+    margin-right:9px;flex:none}
+  .act{display:flex;gap:4px;align-items:flex-start;margin:18px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>流入は増えたのに収益が動かない ―― その理由</h1>
+<div class="sub">
+  2026-11-06 作成 ／ GSC 最終データ日 2026-11-03 ／ GA4 11/05まで ／
+  Klook <code>klook-2026-08-01_11-05.csv</code>（旧 <code>ads_performance (4).csv</code>）
+</div>
+
+<div class="card verdict">
+  <h3 style="margin-top:0">結論：おかしくありません。原因は2つ、どちらも数字で特定できました</h3>
+  <p><strong>① 流入は増えたが、アフィリエイトのクリックは増えていない。</strong>
+  CTAの表示回数は 7月の517回から10月は2,566回へ<strong>約5倍</strong>になったのに、
+  クリックは 46 → 52 と<strong>ほぼ横ばい</strong>。
+  表示→クリック率が <strong>8.90% → 2.03%</strong> に落ちています。
+  CTAを増やした分だけ「表示」が増え、「クリック」は増えませんでした。</p>
+  <p><strong>② 売れているものが、ほとんど手数料にならない商品だった。</strong>
+  この90日で <strong>¥216,233 ぶん売れています</strong>。手数料は <strong>¥3,917</strong> ―― <strong>1.81%</strong>です。
+  鉄道チケットの料率が 1.3〜2.5% しかないためです。</p>
+  <p class="dim">つまり「月1,000円」は、流入が足りないのではなく
+  <strong>クリックに変換できていない（①）＋ 売れても手残りがない（②）</strong>の掛け算の結果です。</p>
+</div>
+
+<h2>1. 流入が増えたのは事実です</h2>
+
+<p>ご認識は正しいです。7〜8月を基準に、9〜10月で明確に伸びています。</p>
+
+<table>
+  <tr><th class="wide">月</th><th class="num">検索クリック</th><th class="num">検索表示</th><th class="num">平均順位</th><th class="num">Organicセッション</th></tr>
+  <tr><td class="wide">2026-07</td><td class="num">832</td><td class="num">71,332</td><td class="num">6.43</td><td class="num">1,110</td></tr>
+  <tr><td class="wide">2026-08</td><td class="num">847</td><td class="num">73,901</td><td class="num">6.68</td><td class="num">1,052</td></tr>
+  <tr><td class="wide">2026-09</td><td class="num good">1,205</td><td class="num good">89,841</td><td class="num">6.09</td><td class="num good">1,458</td></tr>
+  <tr><td class="wide">2026-10</td><td class="num good">1,268</td><td class="num good">108,767</td><td class="num">6.25</td><td class="num good">1,688</td></tr>
+  <tr><td class="wide dim">2026-11（3日間）</td><td class="num dim">120</td><td class="num dim">10,370</td><td class="num dim">6.01</td><td class="num dim">282</td></tr>
+  <tr class="tot"><td class="wide">8月 → 10月</td><td class="num good">+50%</td><td class="num good">+47%</td><td class="num flat">改善</td><td class="num good">+60%</td></tr>
+</table>
+
+<p>打ち手は効いています。10月の検索表示 108,767 は過去最高で、
+9/29 の大幅整理（105ページ退役・16本の301）でも落ちていません。
+<strong>問題は流入より下の段にあります。</strong></p>
+
+<h2>2. 増えたのは「表示」だけ ―― ここが本体の原因</h2>
+
+<div class="bars">
+  <div class="row"><div class="lab">7月</div>
+    <div class="track"><div class="fill" style="width:20%;background:#f2c23e"></div></div>
+    <div class="val">表示 517</div></div>
+  <div class="row"><div class="lab">8月</div>
+    <div class="track"><div class="fill" style="width:49%;background:#f2c23e"></div></div>
+    <div class="val">表示 1,267</div></div>
+  <div class="row"><div class="lab">9月</div>
+    <div class="track"><div class="fill" style="width:79%;background:#f2c23e"></div></div>
+    <div class="val">表示 2,032</div></div>
+  <div class="row"><div class="lab">10月</div>
+    <div class="track"><div class="fill" style="width:100%;background:#f2c23e"></div></div>
+    <div class="val">表示 2,566</div></div>
+</div>
+<div class="bars">
+  <div class="row"><div class="lab">7月</div>
+    <div class="track"><div class="fill" style="width:81%;background:#4fbf8b"></div></div>
+    <div class="val">クリック 46</div></div>
+  <div class="row"><div class="lab">8月</div>
+    <div class="track"><div class="fill" style="width:70%;background:#7b8aa8"></div></div>
+    <div class="val">クリック 40</div></div>
+  <div class="row"><div class="lab">9月</div>
+    <div class="track"><div class="fill" style="width:100%;background:#4fbf8b"></div></div>
+    <div class="val">クリック 57</div></div>
+  <div class="row"><div class="lab">10月</div>
+    <div class="track"><div class="fill" style="width:91%;background:#7b8aa8"></div></div>
+    <div class="val">クリック 52</div></div>
+</div>
+
+<table>
+  <tr><th class="wide">月</th><th class="num">CTA表示</th><th class="num">クリック</th><th class="num">表示→クリック率</th></tr>
+  <tr><td class="wide">7月</td><td class="num">517</td><td class="num">46</td><td class="num good">8.90%</td></tr>
+  <tr><td class="wide">8月</td><td class="num">1,267</td><td class="num">40</td><td class="num warn">3.16%</td></tr>
+  <tr><td class="wide">9月</td><td class="num">2,032</td><td class="num">57</td><td class="num warn">2.81%</td></tr>
+  <tr><td class="wide">10月</td><td class="num">2,566</td><td class="num">52</td><td class="num bad">2.03%</td></tr>
+  <tr class="tot"><td class="wide">7月 → 10月</td><td class="num">約5.0倍</td><td class="num flat">1.1倍</td><td class="num bad">1/4.4 に低下</td></tr>
+</table>
+
+<div class="card alert">
+  <p><strong>CTAを足すたびに率が下がっています。</strong>表示を5倍にしてクリックが1.1倍なら、
+  増やした4,000回ぶんの表示はほぼ何も生んでいません。</p>
+  <p>しかも率の低下は単なる「薄まり」では済みません。
+  CTAが多い画面は全体として無視されるようになるため、<strong>既にあった良いCTAの率まで下げます。</strong>
+  7月に 8.90% あったことが、そのポテンシャルの証拠です。</p>
+</div>
+
+<h2>3. どのCTAが悪いのか ―― 「操作前」と「操作後」で8倍ちがう</h2>
+
+<p>設置場所ごとに分けると、原因が一箇所に集まります。</p>
+
+<table>
+  <tr><th class="wide">設置場所</th><th>タイミング</th><th class="num">表示</th><th class="num">クリック</th><th class="num">率</th></tr>
+  <tr><td class="wide"><code>guide_quick_answer</code></td><td class="bad">操作前（ページ上部）</td><td class="num">1,214</td><td class="num">5</td><td class="num bad">0.41%</td></tr>
+  <tr><td class="wide"><code>seat_letters_booking</code></td><td class="bad">操作前</td><td class="num">420</td><td class="num">2</td><td class="num bad">0.48%</td></tr>
+  <tr><td class="wide"><code>direction_kyoto_tokyo_booking</code></td><td class="bad">操作前</td><td class="num">139</td><td class="num">1</td><td class="num bad">0.72%</td></tr>
+  <tr><td class="wide"><code>seat_guides_booking</code></td><td class="bad">操作前</td><td class="num">34</td><td class="num">0</td><td class="num bad">0%</td></tr>
+  <tr><td class="wide"><code>direction_tokyo_kyoto_booking</code></td><td class="bad">操作前</td><td class="num">25</td><td class="num">0</td><td class="num bad">0%</td></tr>
+  <tr><td class="wide"><code>direction_osaka_tokyo_booking</code></td><td class="bad">操作前</td><td class="num">7</td><td class="num">0</td><td class="num bad">0%</td></tr>
+  <tr class="tot"><td class="wide">操作前 小計</td><td class="bad">—</td><td class="num">1,839</td><td class="num">8</td><td class="num bad">0.43%</td></tr>
+  <tr><td class="wide"><code>seat_map_result</code></td><td class="good">操作後（結果表示）</td><td class="num">130</td><td class="num">5</td><td class="num good">3.85%</td></tr>
+  <tr><td class="wide"><code>guide_seat_result</code></td><td class="good">操作後</td><td class="num">631</td><td class="num">24</td><td class="num good">3.80%</td></tr>
+  <tr><td class="wide"><code>fuji_window_result</code></td><td class="good">操作後（予報ツール）</td><td class="num">229</td><td class="num">5</td><td class="num warn">2.18%</td></tr>
+  <tr><td class="wide"><code>guide_mobile_sticky_after_checker</code></td><td class="good">操作後</td><td class="num">99</td><td class="num">1</td><td class="num warn">1.01%</td></tr>
+  <tr><td class="wide"><code>fuji_window_cloudy_tour</code></td><td class="good">操作後（曇り時のみ）</td><td class="num">42</td><td class="num">0</td><td class="num bad">0%</td></tr>
+  <tr class="tot"><td class="wide">操作後 小計</td><td class="good">—</td><td class="num">1,131</td><td class="num">35</td><td class="num good">3.09%</td></tr>
+</table>
+
+<div class="card">
+  <p><strong>表示の62%（1,839回）が、クリックの19%（8回）しか生んでいません。</strong>
+  とくに <code>guide_quick_answer</code> ―― <code>/guide</code> 上部の予約ボタン ―― が
+  単独で全表示の41%を占めて、率 0.41%。サイト最大の表示源が、ほぼ死んでいます。</p>
+  <p>逆に「座席チェックを答えた直後」に出るCTAは <strong>3.8%</strong>。<strong>約9倍</strong>です。
+  読者は<strong>答えを受け取った瞬間だけ</strong>行動します。
+  ページを開いた時点ではまだ買う気がありません。</p>
+</div>
+
+<h2>4. 売れているものの正体 ―― ¥216,233 売って ¥3,917</h2>
+
+<table>
+  <tr><th class="wide">リンク（ADID）</th><th class="num">クリック</th><th class="num">予約</th><th class="num">CVR</th><th class="num">売上</th><th class="num">手数料</th><th class="num">料率</th><th class="num">EPC</th></tr>
+  <tr><td class="wide">1265303　新幹線チケット（汎用）</td><td class="num">85</td><td class="num">5</td><td class="num">5.9%</td><td class="num">¥111,920</td><td class="num">¥2,537</td><td class="num warn">2.27%</td><td class="num">¥29.85</td></tr>
+  <tr><td class="wide">1443754　路線別 東京→京都</td><td class="num">29</td><td class="num">3</td><td class="num good">10.3%</td><td class="num">¥104,313</td><td class="num">¥1,380</td><td class="num bad">1.32%</td><td class="num good">¥47.59</td></tr>
+  <tr><td class="wide">1443748　路線別 京都→東京</td><td class="num">30</td><td class="num bad">0</td><td class="num bad">0%</td><td class="num">¥0</td><td class="num">¥0</td><td class="num">—</td><td class="num bad">¥0</td></tr>
+  <tr><td class="wide dim">その他8本（旧リンク等）</td><td class="num dim">20</td><td class="num dim">0</td><td class="num dim">0%</td><td class="num dim">¥0</td><td class="num dim">¥0</td><td class="num dim">—</td><td class="num dim">¥0</td></tr>
+  <tr class="tot"><td class="wide">合計（約90日）</td><td class="num">164</td><td class="num">8</td><td class="num">4.9%</td><td class="num">¥216,233</td><td class="num">¥3,917</td><td class="num bad">1.81%</td><td class="num">¥23.88</td></tr>
+</table>
+
+<div class="kpis">
+  <div class="kpi"><div class="cap">90日の手数料</div><div class="big">¥3,917</div><div class="note">月あたり <strong>約¥1,228</strong>。ご認識どおりです</div></div>
+  <div class="kpi"><div class="cap">送客した売上</div><div class="big">¥216,233</div><div class="note">ちゃんと買われている。足りないのは<strong>料率</strong></div></div>
+  <div class="kpi"><div class="cap">実効料率</div><div class="big bad">1.81%</div><div class="note">ツアーなら 5.0%。<strong>2.8倍の差</strong></div></div>
+  <div class="kpi"><div class="cap">1クリックの価値</div><div class="big">¥23.88</div><div class="note">$150到達には ¥442 必要（18倍）</div></div>
+</div>
+
+<h3>9月に売れた2件は、どちらも「新幹線」ではなくツアーでした</h3>
+<p>ticket report（予約明細）を見ると、決定的なことが分かります。
+<strong>新幹線チケットのリンクを押した人が、Klook に着いてから全く別のものを買っています。</strong></p>
+<table>
+  <tr><th class="wide">実際に売れた商品</th><th>経由リンク</th><th class="num">売上</th><th class="num">料率</th><th class="num">手数料</th></tr>
+  <tr><td class="wide">立山黒部アルペンルート 1日ツアー（金沢発）</td><td>新幹線チケット</td><td class="num">USD 140.25</td><td class="num good">5.00%</td><td class="num good">¥1,096</td></tr>
+  <tr><td class="wide">上高地ハイキング 1日ツアー（名古屋発）</td><td>新幹線チケット</td><td class="num">USD 48.94</td><td class="num good">5.00%</td><td class="num good">¥385</td></tr>
+</table>
+
+<div class="card okbox">
+  <p><strong>これは前回お話に出ていた「ニッチなツアーが買われている」の正体です。</strong>
+  しかも金額を見てください。立山のツアー1件 <strong>¥1,096</strong> は、
+  <strong>この90日の手数料の28%を1件で稼いでいます。</strong></p>
+  <p>一方で、鉄道は ¥104,313 売って ¥1,380（1.32%）。
+  <strong>ツアー1件 ≒ 鉄道¥83,000ぶん</strong>です。</p>
+  <p class="dim">ツアーは単価が高いうえ料率が4倍。この site が送っている客層（綿密に調べる個人旅行者）は、
+  ツアーを買う力があることが実証されました ―― ただし<strong>自力で見つけた場合に限って</strong>。
+  こちらから案内はしていません。</p>
+</div>
+
+<h3>方向の非対称：東京→京都は売れる、京都→東京は売れない</h3>
+<p>9/29 に発行した路線別リンク2本は、クリック数がほぼ同じ（29 対 30）なのに結果が真逆です。</p>
+<ul>
+  <li><strong>東京→京都</strong>：CVR <strong>10.3%</strong>、EPC <strong>¥47.59</strong> ―― <strong>サイト最高の成績</strong></li>
+  <li><strong>京都→東京</strong>：30クリックで予約 <strong>0件</strong></li>
+</ul>
+<p>往路は「これから買う」ので売れ、復路は往復で既に買っているか JR Pass 圏内、という読みが素直です。
+<strong>京都→東京のリンクに枠を割く意味は薄い</strong>と判断できます。</p>
+
+<h2>5. 月$150 の算数 ―― 正直に申し上げます</h2>
+
+<p>$150 ≒ ¥22,500。現在の月¥1,228 から <strong>18.3倍</strong>です。分解します。</p>
+
+<table>
+  <tr><th class="wide">経路</th><th class="wide">必要な変化</th><th class="wide">現実性</th></tr>
+  <tr><td class="wide">クリック数だけで届かせる</td><td class="wide">月52 → 月962クリック（18倍）</td><td class="wide bad">流入18倍が必要。無理</td></tr>
+  <tr><td class="wide">EPCだけで届かせる</td><td class="wide">¥23.9 → ¥442（18倍）</td><td class="wide bad">料率の上限が5%。無理</td></tr>
+  <tr><td class="wide">両方を現実的な範囲で</td><td class="wide">クリック約2倍 × EPC約2.2倍</td><td class="wide warn">月¥5,300 ≒ <strong>$35</strong> まで</td></tr>
+</table>
+
+<div class="card alert">
+  <p><strong>今の流入で $150/月 には届きません。</strong>
+  打ち手を全部成功させても <strong>$30〜40/月</strong> が上限です。
+  そこから $150 へは、さらに<strong>検索流入4倍</strong>（月1,268 → 5,400クリック）が必要です。</p>
+  <p style="margin-top:14px">ただし <strong>$30〜40/月 は意味のない数字ではありません。</strong>
+  Klook の最低支払額が $150 だからです。</p>
+  <ul>
+    <li>現在のペース（月¥1,228）→ 到達まで <strong>約18ヶ月</strong></li>
+    <li>月¥5,300 まで上げる → 到達まで <strong>約4ヶ月</strong></li>
+  </ul>
+  <p><strong>目的は「月収を増やす」ではなく「いつまでも振り込まれない状態から抜ける」</strong>
+  と置き直したほうが、判断を間違えないと思います。</p>
+</div>
+
+<h2>6. 次の方針（優先順）</h2>
+
+<div class="act"><span class="prio">1</span><div>
+  <h3 style="margin:0 0 6px">操作前のCTAを畳んで、結果の瞬間に集中させる</h3>
+  <p style="margin:6px 0"><code>guide_quick_answer</code>（表示1,214・率0.41%）を筆頭に、操作前のCTA6箇所を撤去または非アフィリエイト化します。
+  失うのは<strong>月8クリック</strong>。狙いは率の回復です。
+  7月の 8.90% まで戻らなくても、全体が 3.0% に戻れば <strong>月52 → 月77クリック</strong>。</p>
+  <p style="margin:6px 0" class="dim">※ これは因果の仮説です（「CTAが多いと全体が無視される」）。
+  撤去前後で <code>guide_seat_result</code> の率が上がるかを見れば検証できます。1ヶ月では判定しません。</p>
+</div></div>
+
+<div class="act"><span class="prio">2</span><div>
+  <h3 style="margin:0 0 6px">結果の瞬間に「ツアー」を並べる</h3>
+  <p style="margin:6px 0">唯一 ¥1,000超を稼いだのはツアーで、しかも<strong>こちらが案内していない</strong>のに買われました。
+  率 3.80% の <code>guide_seat_result</code> に、新幹線チケットと並べてツアーを置きます。</p>
+  <p style="margin:6px 0">今あるツアー導線は <code>fuji_window_cloudy_tour</code> だけで、
+  <strong>曇り判定のときしか出ません</strong>。予報ツール210回の実行に対して表示42回（20%）、クリック0。
+  <strong>構造的に露出が足りません</strong> ―― 晴れの日にも出す設計に変えます。</p>
+</div></div>
+
+<div class="act"><span class="prio">3</span><div>
+  <h3 style="margin:0 0 6px">座席チェックに到達する人を増やす</h3>
+  <p style="margin:6px 0"><code>/guide</code> を開いた約1,214に対し、チェックを完了して結果CTAを見たのは631 ―― <strong>約半分</strong>。
+  残り半分を結果まで運べれば、3.80% で <strong>+22クリック/月</strong>。
+  上部に置くのは予約ボタンではなく<strong>チェッカー本体</strong>にすべきです（施策1と同じ方向）。</p>
+</div></div>
+
+<div class="act"><span class="prio">4</span><div>
+  <h3 style="margin:0 0 6px">京都→東京のリンクを畳む</h3>
+  <p style="margin:6px 0">30クリックで0件。枠を東京→京都（CVR 10.3%・EPC ¥47.59）に寄せます。小さい話ですが確実です。</p>
+</div></div>
+
+<div class="card">
+  <p><strong>やらないこと</strong></p>
+  <ul>
+    <li><strong>CTAを新しく足すこと。</strong>5倍に増やして率が1/4.4になった原因そのものです。</li>
+    <li><strong>ページを増やすこと。</strong>流入は足りています。詰まっているのは下流です。</li>
+    <li><strong>鉄道の訴求を強めること。</strong>1.32%です。送客を増やしても手残りが出ません。</li>
+  </ul>
+</div>
+
+<h2>7. 足りないデータ</h2>
+<div class="card">
+  <p><strong>10月分の ticket report（予約明細）をエクスポートしていただきたいです。</strong>
+  今回いただいた <code>ads_performance</code> には「何件・いくら」はありますが
+  <strong>「何が売れたか」がありません</strong>。
+  9月は明細があったので「2件とも実はツアー」と分かりました。</p>
+  <p>10月の6件（1265303 の3件 + 1443754 の3件）の中身が分かれば、
+  <strong>施策2（ツアーを並べる）の期待値が推測から実測に変わります。</strong>
+  Klook管理画面 → <em>Ticket Report</em> → 期間 2026-10-01〜2026-11-05 でCSV出力してください。</p>
+</div>
+
+<div class="foot">
+  データ出典: Search Console API（<code>https://fujiseat.com/</code>・最終データ日 2026-11-03）、
+  GA4 Data API（プロパティ 534386847・11/05まで。セッション・ユーザーは
+  Direct のボット流入を除くため Organic Search 限定）、
+  Klook <code>klook-2026-08-01_11-05.csv</code> / <code>klook-tickets-2026-09.csv</code>。<br>
+  Klook CSV の集計期間は書かれていないため、クリック164件を GA4 の Klook クリック実数と突き合わせて推定しました
+  （8/1〜11/5=149件・比1.10／9/1〜11/5=115件・比1.43）。<strong>8月頭始まりとみて命名しています ―― 管理画面で選んだ期間が違っていたらお知らせください。</strong>
+</div>
+
+</div>
+</body>
+</html>
