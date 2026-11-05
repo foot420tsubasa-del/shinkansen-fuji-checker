@@ -15,7 +15,7 @@
     line-height:1.85;-webkit-font-smoothing:antialiased}
   .wrap{max-width:1100px;margin:0 auto;padding:40px 28px 80px}
   h1{font-size:25px;margin:0 0 6px;letter-spacing:.01em}
-  .sub{color:var(--dim);font-size:13px;margin-bottom:34px}
+  .sub{color:var(--dim);font-size:13px;margin-bottom:30px}
   h2{font-size:19px;margin:48px 0 14px;padding-bottom:9px;border-bottom:2px solid var(--line)}
   h3{font-size:15px;margin:26px 0 10px;color:var(--accent)}
   p{margin:10px 0}
@@ -23,6 +23,7 @@
   .verdict{border-left:4px solid var(--accent)}
   .alert{border-left:4px solid var(--bad)}
   .okbox{border-left:4px solid var(--good)}
+  .fix{border-left:4px solid var(--warn)}
   table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;
     font-variant-numeric:tabular-nums}
   th,td{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
@@ -37,14 +38,11 @@
   .bars{margin:18px 0}
   .row{display:flex;align-items:center;gap:12px;margin:7px 0;font-size:13px}
   .row .lab{width:7em;flex:none;color:var(--dim)}
-  .row .track{flex:1;height:22px;background:#0b0f18;border-radius:4px;overflow:hidden;min-width:110px;position:relative}
+  .row .track{flex:1;height:22px;background:#0b0f18;border-radius:4px;overflow:hidden;min-width:110px}
   .row .fill{height:100%;opacity:.9}
   .row .val{width:8.5em;flex:none;text-align:right;font-variant-numeric:tabular-nums}
   ul{margin:10px 0;padding-left:1.35em}
   li{margin:8px 0}
-  ol{margin:10px 0;padding-left:1.4em}
-  .pill{display:inline-block;font-size:11.5px;padding:2px 9px;border-radius:99px;
-    border:1px solid var(--line);color:var(--dim);margin-right:7px;white-space:nowrap}
   .big{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
   .kpis{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0}
   .kpi{flex:1 1 210px;background:var(--panel);border:1px solid var(--line);
@@ -53,12 +51,6 @@
   .kpi .note{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.6}
   .foot{margin-top:50px;padding-top:18px;border-top:1px solid var(--line);
     font-size:12px;color:var(--dim)}
-  .funnel{margin:20px 0}
-  .fstep{display:flex;align-items:center;gap:14px;margin:10px 0;font-size:13.5px}
-  .fstep .fbar{height:34px;background:linear-gradient(90deg,#f2c23e,#d9a62c);border-radius:5px;
-    display:flex;align-items:center;padding-left:12px;color:#1a1205;font-weight:700;
-    font-variant-numeric:tabular-nums;white-space:nowrap;min-width:5em}
-  .fstep .fnote{color:var(--dim);font-size:12.5px}
   .prio{display:inline-block;width:1.9em;height:1.9em;line-height:1.9em;text-align:center;
     border-radius:50%;background:var(--accent);color:#1a1205;font-weight:700;font-size:13px;
     margin-right:9px;flex:none}
@@ -71,7 +63,19 @@
 <h1>流入は増えたのに収益が動かない ―― その理由</h1>
 <div class="sub">
   2026-11-06 作成 ／ GSC 最終データ日 2026-11-03 ／ GA4 11/05まで ／
-  Klook <code>klook-2026-08-01_11-05.csv</code>（旧 <code>ads_performance (4).csv</code>）
+  Klook <code>klook-2026-09_10.csv</code>（旧 <code>ads_performance (4).csv</code>・<strong>2026-09-01〜10-31 / 61日</strong>）
+</div>
+
+<div class="card fix">
+  <p><strong>訂正。</strong>初版では集計期間を 8/1〜11/5（97日）と推定していましたが、
+  実際は <strong>9/1〜10/31（61日）</strong>でした。期間が短いぶん月あたりの収益は上がり、
+  <strong>月¥1,228 → 月¥1,955</strong>、$150までの距離も <strong>18.3倍 → 11.5倍</strong> に変わります。
+  原因の診断そのものは変わりません。</p>
+  <p class="dim">推定を誤った理由も記録しておきます。クリック164件を GA4 の実数と突き合わせ、
+  「Klook と GA4 の差は1割程度」と仮定して期間を逆算しました。
+  実際の差は <strong>1.56倍</strong>（GA4が36%取りこぼす）で、仮定が外れていました。
+  旧リンク8本が今回のCSVに出てこない事実は9月始まりを示していたのに、
+  比率のほうを優先してしまったのが判断ミスです。</p>
 </div>
 
 <div class="card verdict">
@@ -82,15 +86,13 @@
   表示→クリック率が <strong>8.90% → 2.03%</strong> に落ちています。
   CTAを増やした分だけ「表示」が増え、「クリック」は増えませんでした。</p>
   <p><strong>② 売れているものが、ほとんど手数料にならない商品だった。</strong>
-  この90日で <strong>¥216,233 ぶん売れています</strong>。手数料は <strong>¥3,917</strong> ―― <strong>1.81%</strong>です。
-  鉄道チケットの料率が 1.3〜2.5% しかないためです。</p>
+  この2ヶ月で <strong>¥216,233 ぶん売れています</strong>。手数料は <strong>¥3,917</strong> ―― <strong>1.81%</strong>です。
+  鉄道チケットの料率が 1.3〜2.3% しかないためです。</p>
   <p class="dim">つまり「月1,000円」は、流入が足りないのではなく
   <strong>クリックに変換できていない（①）＋ 売れても手残りがない（②）</strong>の掛け算の結果です。</p>
 </div>
 
 <h2>1. 流入が増えたのは事実です</h2>
-
-<p>ご認識は正しいです。7〜8月を基準に、9〜10月で明確に伸びています。</p>
 
 <table>
   <tr><th class="wide">月</th><th class="num">検索クリック</th><th class="num">検索表示</th><th class="num">平均順位</th><th class="num">Organicセッション</th></tr>
@@ -152,11 +154,11 @@
   <p>しかも率の低下は単なる「薄まり」では済みません。
   CTAが多い画面は全体として無視されるようになるため、<strong>既にあった良いCTAの率まで下げます。</strong>
   7月に 8.90% あったことが、そのポテンシャルの証拠です。</p>
+  <p class="dim">※ この表はすべてGA4の数字で、絶対値は実態より低めに出ます（下記のとおりGA4はクリックを36%取りこぼす）。
+  ただし表示もクリックも同じGA4のイベントなので、<strong>比率の推移は信用できます。</strong></p>
 </div>
 
-<h2>3. どのCTAが悪いのか ―― 「操作前」と「操作後」で8倍ちがう</h2>
-
-<p>設置場所ごとに分けると、原因が一箇所に集まります。</p>
+<h2>3. どのCTAが悪いのか ―― 「操作前」と「操作後」で約7倍ちがう</h2>
 
 <table>
   <tr><th class="wide">設置場所</th><th>タイミング</th><th class="num">表示</th><th class="num">クリック</th><th class="num">率</th></tr>
@@ -174,6 +176,7 @@
   <tr><td class="wide"><code>fuji_window_cloudy_tour</code></td><td class="good">操作後（曇り時のみ）</td><td class="num">42</td><td class="num">0</td><td class="num bad">0%</td></tr>
   <tr class="tot"><td class="wide">操作後 小計</td><td class="good">—</td><td class="num">1,131</td><td class="num">35</td><td class="num good">3.09%</td></tr>
 </table>
+<p class="dim" style="font-size:12.5px">※ この表のみ 2026-10-01〜11-05（直近の実態を見るため）。他はCSVの期間に合わせています。</p>
 
 <div class="card">
   <p><strong>表示の62%（1,839回）が、クリックの19%（8回）しか生んでいません。</strong>
@@ -192,14 +195,21 @@
   <tr><td class="wide">1443754　路線別 東京→京都</td><td class="num">29</td><td class="num">3</td><td class="num good">10.3%</td><td class="num">¥104,313</td><td class="num">¥1,380</td><td class="num bad">1.32%</td><td class="num good">¥47.59</td></tr>
   <tr><td class="wide">1443748　路線別 京都→東京</td><td class="num">30</td><td class="num bad">0</td><td class="num bad">0%</td><td class="num">¥0</td><td class="num">¥0</td><td class="num">—</td><td class="num bad">¥0</td></tr>
   <tr><td class="wide dim">その他8本（旧リンク等）</td><td class="num dim">20</td><td class="num dim">0</td><td class="num dim">0%</td><td class="num dim">¥0</td><td class="num dim">¥0</td><td class="num dim">—</td><td class="num dim">¥0</td></tr>
-  <tr class="tot"><td class="wide">合計（約90日）</td><td class="num">164</td><td class="num">8</td><td class="num">4.9%</td><td class="num">¥216,233</td><td class="num">¥3,917</td><td class="num bad">1.81%</td><td class="num">¥23.88</td></tr>
+  <tr class="tot"><td class="wide">合計（9/1〜10/31・61日）</td><td class="num">164</td><td class="num">8</td><td class="num">4.9%</td><td class="num">¥216,233</td><td class="num">¥3,917</td><td class="num bad">1.81%</td><td class="num">¥23.88</td></tr>
 </table>
 
 <div class="kpis">
-  <div class="kpi"><div class="cap">90日の手数料</div><div class="big">¥3,917</div><div class="note">月あたり <strong>約¥1,228</strong>。ご認識どおりです</div></div>
+  <div class="kpi"><div class="cap">2ヶ月の手数料</div><div class="big">¥3,917</div><div class="note">月あたり <strong>¥1,955</strong></div></div>
   <div class="kpi"><div class="cap">送客した売上</div><div class="big">¥216,233</div><div class="note">ちゃんと買われている。足りないのは<strong>料率</strong></div></div>
   <div class="kpi"><div class="cap">実効料率</div><div class="big bad">1.81%</div><div class="note">ツアーなら 5.0%。<strong>2.8倍の差</strong></div></div>
-  <div class="kpi"><div class="cap">1クリックの価値</div><div class="big">¥23.88</div><div class="note">$150到達には ¥442 必要（18倍）</div></div>
+  <div class="kpi"><div class="cap">1クリックの価値</div><div class="big">¥23.88</div><div class="note">$150到達には ¥275 必要（11.5倍）</div></div>
+</div>
+
+<div class="card fix">
+  <p><strong>「月1,000円」との差について。</strong>計算上は月¥1,955ですが、体感が¥1,000なのは自然です。
+  Klookの手数料は<strong>旅行者が実際に参加し終えてから確定</strong>します。
+  9月に予約された2件の参加日は <strong>10/13 と 10/16</strong> ―― 予約から確定まで1ヶ月ずれています。
+  管理画面で「確定済み」として見える額は、常に1〜2ヶ月前のぶんです。</p>
 </div>
 
 <h3>9月に売れた2件は、どちらも「新幹線」ではなくツアーでした</h3>
@@ -214,13 +224,24 @@
 <div class="card okbox">
   <p><strong>これは前回お話に出ていた「ニッチなツアーが買われている」の正体です。</strong>
   しかも金額を見てください。立山のツアー1件 <strong>¥1,096</strong> は、
-  <strong>この90日の手数料の28%を1件で稼いでいます。</strong></p>
+  <strong>この2ヶ月の手数料の28%を1件で稼いでいます。</strong></p>
   <p>一方で、鉄道は ¥104,313 売って ¥1,380（1.32%）。
   <strong>ツアー1件 ≒ 鉄道¥83,000ぶん</strong>です。</p>
   <p class="dim">ツアーは単価が高いうえ料率が4倍。この site が送っている客層（綿密に調べる個人旅行者）は、
   ツアーを買う力があることが実証されました ―― ただし<strong>自力で見つけた場合に限って</strong>。
   こちらから案内はしていません。</p>
 </div>
+
+<h3>9月と10月の分解</h3>
+<table>
+  <tr><th class="wide">期間</th><th class="num">手数料</th><th class="wide">内訳の確度</th></tr>
+  <tr><td class="wide">9/1〜9/21</td><td class="num">¥1,481</td><td class="wide good">確定。明細あり（立山¥1,096＋上高地¥385）</td></tr>
+  <tr><td class="wide">9/22〜10/31</td><td class="num">¥2,436</td><td class="wide warn">うち¥1,380は路線別リンク（9/29発行なので実質10月）。残り¥1,056の中身は不明</td></tr>
+  <tr class="tot"><td class="wide">合計</td><td class="num">¥3,917</td><td class="wide dim">—</td></tr>
+</table>
+<p>少なくとも <strong>9月後半〜10月のほうが9月前半より稼いでいます</strong>。
+収益が完全に止まっているわけではありません。
+ただし伸びの主役は料率1.32%の鉄道なので、<strong>売上は増えても手数料は増えにくい</strong>構造です。</p>
 
 <h3>方向の非対称：東京→京都は売れる、京都→東京は売れない</h3>
 <p>9/29 に発行した路線別リンク2本は、クリック数がほぼ同じ（29 対 30）なのに結果が真逆です。</p>
@@ -231,38 +252,53 @@
 <p>往路は「これから買う」ので売れ、復路は往復で既に買っているか JR Pass 圏内、という読みが素直です。
 <strong>京都→東京のリンクに枠を割く意味は薄い</strong>と判断できます。</p>
 
-<h2>5. 月$150 の算数 ―― 正直に申し上げます</h2>
+<h2>5. 計測のずれ ―― GA4はクリックを36%取りこぼしています</h2>
+<div class="card">
+  <p>同じ 9/1〜10/31 で、<strong>Klook管理画面は164クリック、GA4は105クリック</strong>。
+  <strong>GA4はKlookの64%しか記録していません。</strong></p>
+  <p>理由は仕組み上のものです。<code>affiliate_click</code> はクリック直後に送信しますが、
+  その直後にブラウザが Klook へ移動するため、送信が間に合わず消えることがあります。
+  一方 <code>affiliate_cta_view</code> は表示した時点なので、ほぼ確実に残ります。
+  <strong>つまり率（2.03%等）は構造的に低めに出ます。</strong></p>
+  <p><strong>実務上の結論：</strong>金額とクリック数は <strong>Klookの数字を正</strong>とし、
+  GA4は<strong>設置場所どうしの比較と推移</strong>にだけ使います。
+  今回の「操作前0.43% vs 操作後3.09%」はどちらもGA4なので、比較としては有効です。</p>
+</div>
 
-<p>$150 ≒ ¥22,500。現在の月¥1,228 から <strong>18.3倍</strong>です。分解します。</p>
+<h2>6. 月$150 の算数</h2>
+
+<p>$150 ≒ ¥22,500。現在の月¥1,955 から <strong>11.5倍</strong>です。分解します。</p>
 
 <table>
   <tr><th class="wide">経路</th><th class="wide">必要な変化</th><th class="wide">現実性</th></tr>
-  <tr><td class="wide">クリック数だけで届かせる</td><td class="wide">月52 → 月962クリック（18倍）</td><td class="wide bad">流入18倍が必要。無理</td></tr>
-  <tr><td class="wide">EPCだけで届かせる</td><td class="wide">¥23.9 → ¥442（18倍）</td><td class="wide bad">料率の上限が5%。無理</td></tr>
-  <tr><td class="wide">両方を現実的な範囲で</td><td class="wide">クリック約2倍 × EPC約2.2倍</td><td class="wide warn">月¥5,300 ≒ <strong>$35</strong> まで</td></tr>
+  <tr><td class="wide">クリック数だけで届かせる</td><td class="wide">月82 → 月942クリック（11.5倍）</td><td class="wide bad">流入11倍が必要。無理</td></tr>
+  <tr><td class="wide">EPCだけで届かせる</td><td class="wide">¥23.88 → ¥275（11.5倍）</td><td class="wide bad">料率の上限が5%。無理</td></tr>
+  <tr><td class="wide">両方を現実的な範囲で</td><td class="wide">クリック×1.48（率2.03%→3.0%）<br>× EPC×2.24（1予約¥490→ツアー¥1,096）</td><td class="wide warn">月<strong>¥6,466</strong> ≒ <strong>$43</strong> まで</td></tr>
 </table>
 
 <div class="card alert">
   <p><strong>今の流入で $150/月 には届きません。</strong>
-  打ち手を全部成功させても <strong>$30〜40/月</strong> が上限です。
-  そこから $150 へは、さらに<strong>検索流入4倍</strong>（月1,268 → 5,400クリック）が必要です。</p>
-  <p style="margin-top:14px">ただし <strong>$30〜40/月 は意味のない数字ではありません。</strong>
+  打ち手を全部成功させても <strong>$43/月</strong> が上限です。
+  そこから $150 へは、さらに<strong>検索流入3.5倍</strong>（月1,268 → 4,400クリック）が必要です。</p>
+  <p style="margin-top:14px">ただし <strong>$43/月 は意味のない数字ではありません。</strong>
   Klook の最低支払額が $150 だからです。</p>
-  <ul>
-    <li>現在のペース（月¥1,228）→ 到達まで <strong>約18ヶ月</strong></li>
-    <li>月¥5,300 まで上げる → 到達まで <strong>約4ヶ月</strong></li>
-  </ul>
-  <p><strong>目的は「月収を増やす」ではなく「いつまでも振り込まれない状態から抜ける」</strong>
-  と置き直したほうが、判断を間違えないと思います。</p>
+  <table style="margin-top:10px">
+    <tr><th class="wide">ペース</th><th class="num">月額</th><th class="num">$150到達まで</th></tr>
+    <tr><td class="wide">現在</td><td class="num">¥1,955</td><td class="num bad">11.5ヶ月</td></tr>
+    <tr><td class="wide">施策1〜4をやり切った場合</td><td class="num good">¥6,466</td><td class="num good">3.5ヶ月</td></tr>
+  </table>
+  <p style="margin-top:12px"><strong>目的は「月収を増やす」ではなく「いつまでも振り込まれない状態から抜ける」</strong>
+  と置き直したほうが、判断を間違えないと思います。
+  11.5ヶ月を3.5ヶ月にするのは、十分やる価値があります。</p>
 </div>
 
-<h2>6. 次の方針（優先順）</h2>
+<h2>7. 次の方針（優先順）</h2>
 
 <div class="act"><span class="prio">1</span><div>
   <h3 style="margin:0 0 6px">操作前のCTAを畳んで、結果の瞬間に集中させる</h3>
   <p style="margin:6px 0"><code>guide_quick_answer</code>（表示1,214・率0.41%）を筆頭に、操作前のCTA6箇所を撤去または非アフィリエイト化します。
   失うのは<strong>月8クリック</strong>。狙いは率の回復です。
-  7月の 8.90% まで戻らなくても、全体が 3.0% に戻れば <strong>月52 → 月77クリック</strong>。</p>
+  7月の 8.90% まで戻らなくても、全体が 3.0% に戻れば <strong>月82 → 月121クリック</strong>（Klook計測）。</p>
   <p style="margin:6px 0" class="dim">※ これは因果の仮説です（「CTAが多いと全体が無視される」）。
   撤去前後で <code>guide_seat_result</code> の率が上がるかを見れば検証できます。1ヶ月では判定しません。</p>
 </div></div>
@@ -297,24 +333,24 @@
   </ul>
 </div>
 
-<h2>7. 足りないデータ</h2>
+<h2>8. 足りないデータ</h2>
 <div class="card">
   <p><strong>10月分の ticket report（予約明細）をエクスポートしていただきたいです。</strong>
   今回いただいた <code>ads_performance</code> には「何件・いくら」はありますが
   <strong>「何が売れたか」がありません</strong>。
   9月は明細があったので「2件とも実はツアー」と分かりました。</p>
-  <p>10月の6件（1265303 の3件 + 1443754 の3件）の中身が分かれば、
-  <strong>施策2（ツアーを並べる）の期待値が推測から実測に変わります。</strong>
-  Klook管理画面 → <em>Ticket Report</em> → 期間 2026-10-01〜2026-11-05 でCSV出力してください。</p>
+  <p>9/22〜10/31 の6件 ―― とくに中身の分からない <strong>¥1,056ぶん</strong> ――
+  が鉄道なのかツアーなのかで、<strong>施策2の期待値が推測から実測に変わります。</strong>
+  Klook管理画面 → <em>Ticket Report</em> → 期間 2026-10-01〜2026-10-31 でCSV出力してください。</p>
 </div>
 
 <div class="foot">
   データ出典: Search Console API（<code>https://fujiseat.com/</code>・最終データ日 2026-11-03）、
   GA4 Data API（プロパティ 534386847・11/05まで。セッション・ユーザーは
   Direct のボット流入を除くため Organic Search 限定）、
-  Klook <code>klook-2026-08-01_11-05.csv</code> / <code>klook-tickets-2026-09.csv</code>。<br>
-  Klook CSV の集計期間は書かれていないため、クリック164件を GA4 の Klook クリック実数と突き合わせて推定しました
-  （8/1〜11/5=149件・比1.10／9/1〜11/5=115件・比1.43）。<strong>8月頭始まりとみて命名しています ―― 管理画面で選んだ期間が違っていたらお知らせください。</strong>
+  Klook <code>klook-2026-09_10.csv</code>（2026-09-01〜10-31）/ <code>klook-tickets-2026-09.csv</code>。<br>
+  金額・クリック数・CVR・EPC は Klook の数字。表示→クリック率と設置場所別の比較は GA4。
+  両者は同一期間でクリック 164 対 105（GA4が36%少ない）のため、混ぜずに併記しています。
 </div>
 
 </div>
