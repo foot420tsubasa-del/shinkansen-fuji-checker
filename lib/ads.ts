@@ -23,8 +23,29 @@ const adSlots: Record<AdPlacement, string | undefined> = {
  */
 export const ADSENSE_CLIENT_ID = "ca-pub-5844175658360101";
 
+/**
+ * Whether the AdSense tag loads at all.
+ *
+ * This was NEXT_PUBLIC_ADSENSE_ENABLED. Two deploys meant to turn the tag on
+ * shipped without it, and a browser on production showed gtag and Travelpayouts
+ * loading while adsbygoogle stayed undefined — a flag that fails silently and
+ * leaves nothing in the repo to read. NEXT_PUBLIC_ values are inlined at build
+ * time, so the console and the running site can disagree indefinitely.
+ *
+ * It lives in code now, like KLOOK_ONLY in src/affiliateLinks.ts: turning ads
+ * on is a reviewable commit rather than a console toggle, and whether the tag
+ * should be loading is answerable by reading this file.
+ *
+ * On does not mean ads appear. Each unit needs its slot id in the environment,
+ * and with none set AdSlot renders nothing — which is the state the site wants
+ * while the AdSense review is still running. What this buys now is the tag
+ * itself, which the review looks for and which the EEA consent message
+ * requires before it can be published.
+ */
+const ADSENSE_ENABLED = true;
+
 export function isAdsenseEnabled() {
-  return process.env.NEXT_PUBLIC_ADSENSE_ENABLED === "true";
+  return ADSENSE_ENABLED;
 }
 
 export function getAdsenseClientId() {

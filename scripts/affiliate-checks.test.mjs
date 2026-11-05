@@ -443,6 +443,15 @@ test("adsense: the tag is loaded once, site-wide, not from the ad unit", () => {
   assert.ok(layout.includes("<AdsenseScript />"), "the locale layout must load it");
   const script = readFileSync("components/ads/AdsenseScript.tsx", "utf8");
   assert.ok(script.includes("isAdsenseEnabled"), "it must stay behind the flag");
+  // The flag itself lives in code, not in the Vercel console: two deploys
+  // meant to turn it on shipped without it and nothing in the repo said why.
+  const ads = readFileSync("lib/ads.ts", "utf8");
+  // Matches the usage, not the comment that records why it was removed.
+  assert.ok(
+    !/process\.env\.NEXT_PUBLIC_ADSENSE_ENABLED/.test(ads),
+    "the on/off switch must not go back to an environment variable",
+  );
+  assert.ok(/const ADSENSE_ENABLED = (true|false);/.test(ads), "it must be a readable constant");
 });
 
 test("adsense: no ad unit sits on a retired page", () => {
