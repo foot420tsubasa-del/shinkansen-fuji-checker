@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>今回の変更はSEO的に良いのか</title>
+<style>
+  :root{
+    --bg:#0f1420; --panel:#161d2c; --panel2:#1b2436; --line:#27314a; --ink:#e8ecf4; --dim:#9aa6bd;
+    --accent:#f2c23e; --good:#4fbf8b; --warn:#e9a23b; --bad:#e2685f; --flat:#7b8aa8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+    line-height:1.85;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:40px 28px 80px}
+  h1{font-size:25px;margin:0 0 6px}
+  .sub{color:var(--dim);font-size:13px;margin-bottom:30px}
+  h2{font-size:19px;margin:46px 0 14px;padding-bottom:9px;border-bottom:2px solid var(--line)}
+  h3{font-size:15px;margin:26px 0 10px;color:var(--accent)}
+  p{margin:10px 0}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin:16px 0}
+  .verdict{border-left:4px solid var(--good)}
+  .alert{border-left:4px solid var(--bad)}
+  .warnbox{border-left:4px solid var(--warn)}
+  .fix{border-left:4px solid var(--flat)}
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;
+    font-variant-numeric:tabular-nums}
+  th,td{padding:10px 13px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+  th{color:var(--dim);font-weight:600;font-size:12px;letter-spacing:.03em}
+  td.wide,th.wide{white-space:normal;min-width:15em}
+  tr:last-child td{border-bottom:none}
+  tr.tot td{border-top:2px solid var(--line);font-weight:700;background:var(--panel2)}
+  .num{text-align:right}
+  .good{color:var(--good)} .bad{color:var(--bad)} .warn{color:var(--warn)} .flat{color:var(--flat)}
+  .dim{color:var(--dim)}
+  code{background:#0b0f18;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12.5px}
+  ul{margin:10px 0;padding-left:1.35em} li{margin:8px 0}
+  .big{font-size:25px;font-weight:700;font-variant-numeric:tabular-nums}
+  .kpis{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0}
+  .kpi{flex:1 1 210px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .kpi .cap{font-size:11.5px;color:var(--dim);margin-bottom:4px}
+  .kpi .note{font-size:12px;color:var(--dim);margin-top:3px;line-height:1.6}
+  .foot{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>今回の変更はSEO的に良いのか</h1>
+<div class="sub">2026-11-06 ／ 配信HTMLの実測 ＋ Search Console 過去90日（8/06〜11/03）</div>
+
+<div class="card verdict">
+  <h3 style="margin-top:0">結論：わずかにプラス、リスクはゼロ</h3>
+  <p>推測ではなく、配信されているHTMLを実測して確認しました。</p>
+  <ul>
+    <li><strong>クロールされるアフィリエイトリンクが減りました。</strong>直進3ページは
+      <code>rel="sponsored"</code> のアンカーが<strong>初期HTMLから0本</strong>になりました
+      （チェッカーの予約リンクはタップ後に生成されるため、Googlebotには見えません）。
+      以前「有用性の低いコンテンツ」で弾かれた site にとって、本文量に対するアフィリエイト密度が下がるのは素直な改善です。</li>
+    <li><strong>内部リンクは1本も失っていません。</strong>差分と配信HTMLの両方で確認（各ページ14〜23本、変化なし）。
+      撤去したCTAに内部リンクは含まれていませんでした。</li>
+    <li><strong>canonical / hreflang / サイトマップ / robots は一切変えていません。</strong>
+      構造的に再評価されるものがないので、順位が揺れる要素がありません。</li>
+    <li><strong>追加した文言は各ページ18語（本文の約3%）。</strong>重複コンテンツとして意味を持つ量ではありません。</li>
+  </ul>
+  <p class="dim">タップ後にリンクが出るのはクローキングではありません。
+  人間とBotに同じものを出していて、操作が条件になっているだけです。ウィジェットとして普通の挙動です。</p>
+</div>
+
+<h2>1. 実測値</h2>
+<table>
+  <tr><th class="wide">ページ</th><th class="num">本文語数</th><th class="num">sponsored<br>アンカー</th><th class="num">内部リンク</th><th class="num">h2</th></tr>
+  <tr><td class="wide">/guide</td><td class="num">2,973</td><td class="num">23</td><td class="num">18</td><td class="num">17</td></tr>
+  <tr><td class="wide">/shinkansen-seat-letters</td><td class="num">899</td><td class="num">8</td><td class="num">15</td><td class="num">6</td></tr>
+  <tr><td class="wide">/shinkansen-seat-guides</td><td class="num bad">496</td><td class="num bad">8</td><td class="num">23</td><td class="num bad">1</td></tr>
+  <tr><td class="wide">/kyoto-to-tokyo-mt-fuji-seat</td><td class="num">563</td><td class="num good">0</td><td class="num">14</td><td class="num">4</td></tr>
+  <tr><td class="wide">/tokyo-to-kyoto-mt-fuji-seat</td><td class="num">574</td><td class="num good">0</td><td class="num">16</td><td class="num">5</td></tr>
+  <tr><td class="wide">/osaka-to-tokyo-mt-fuji-seat</td><td class="num">591</td><td class="num good">0</td><td class="num">15</td><td class="num">5</td></tr>
+</table>
+<p>直進3ページの <code>sponsored</code> が 0 になったのが今回の変更の効果です。
+<code>/guide</code> の23本は本文2,973語に対してなので密度としては問題ありません。</p>
+
+<h3>重複の心配もありませんでした</h3>
+<p>同じウィジェットを4ページに入れたので本文の似通りを測りました（3-gram Jaccard）。</p>
+<table>
+  <tr><th class="wide">組み合わせ</th><th class="num">類似度</th><th class="wide">評価</th></tr>
+  <tr><td class="wide">kyoto-to-tokyo ↔ osaka-to-tokyo</td><td class="num warn">37.6%</td><td class="wide">最大。ただし元々似たページ（どちらも「東京行き・左側」）</td></tr>
+  <tr><td class="wide">tokyo-to-kyoto ↔ osaka-to-tokyo</td><td class="num">32.1%</td><td class="wide dim">—</td></tr>
+  <tr><td class="wide">kyoto-to-tokyo ↔ tokyo-to-kyoto</td><td class="num">26.9%</td><td class="wide dim">—</td></tr>
+  <tr><td class="wide">各ページ ↔ seat-guides</td><td class="num good">18〜19%</td><td class="wide dim">—</td></tr>
+</table>
+<p><strong>今回の追加分は各ページ18語で、類似度の主因ではありません。</strong>
+37.6%は変更前から存在していた性質です（後述の課題3）。</p>
+
+<h2>2. 正直に言うと、1ページ分は無駄打ちでした</h2>
+
+<div class="card warnbox">
+  <p>チェッカーを入れた4ページの検索実績を見たら、効くのは1ページだけでした。</p>
+  <table style="margin-top:10px">
+    <tr><th class="wide">ページ</th><th class="num">クリック</th><th class="num">表示</th><th class="num">順位</th><th class="wide">今回の価値</th></tr>
+    <tr><td class="wide">/kyoto-to-tokyo-mt-fuji-seat</td><td class="num good">89</td><td class="num good">10,988</td><td class="num">7.2</td><td class="wide good">ここだけ本当に効く</td></tr>
+    <tr><td class="wide">/tokyo-to-kyoto-mt-fuji-seat</td><td class="num">5</td><td class="num">1,253</td><td class="num">8.4</td><td class="wide flat">わずか</td></tr>
+    <tr><td class="wide">/shinkansen-seat-guides</td><td class="num">5</td><td class="num">369</td><td class="num">9.6</td><td class="wide flat">わずか</td></tr>
+    <tr><td class="wide">/osaka-to-tokyo-mt-fuji-seat</td><td class="num bad">0</td><td class="num bad">0</td><td class="num">—</td><td class="wide bad">noindex・退役済。無意味だった</td></tr>
+  </table>
+  <p><strong><code>/osaka-to-tokyo-mt-fuji-seat</code> は既に noindex で退役させたページでした。</strong>
+  90日で表示0。ここにチェッカーを入れたのは無駄でした ――
+  害はありません（直接流入があれば動く）が、実装前に検索実績を見るべきでした。</p>
+</div>
+
+<div class="card fix">
+  <p><strong>一方、疑った不整合はありませんでした。</strong>
+  退役ページがサイトマップに残っているのではと疑って実際の <code>/sitemap.xml</code> を取得しましたが、
+  <strong>21URLでクリーン</strong>、退役2ページは正しく除外されています
+  （ソース上の配列には残っていますが、生成時に <code>live()</code> が落としています）。</p>
+</div>
+
+<h2>3. では、SEOの伸びしろは本当はどこか</h2>
+
+<div class="kpis">
+  <div class="kpi"><div class="cap">/guide の90日表示</div><div class="big">193,574</div><div class="note">クリック2,207・CTR 1.14%・順位6.1</div></div>
+  <div class="kpi"><div class="cap">/shinkansen-seat-letters</div><div class="big">44,360</div><div class="note">クリック751・CTR 1.69%・順位6.0</div></div>
+  <div class="kpi"><div class="cap">/kyoto-to-tokyo</div><div class="big">10,988</div><div class="note">クリック89・<span class="bad">CTR 0.81%</span>・順位7.2</div></div>
+</div>
+
+<h3>課題1：/guide のCTRは低いが、半分は構造的な天井</h3>
+<p>順位6.1で CTR 1.14% は数字だけ見ると低いです。順位帯で割ると:</p>
+<table>
+  <tr><th class="wide">順位帯</th><th class="num">クリック</th><th class="num">表示</th><th class="num">CTR</th></tr>
+  <tr><td class="wide">1〜3位</td><td class="num">28</td><td class="num">1,318</td><td class="num">2.12%</td></tr>
+  <tr><td class="wide">4〜6位</td><td class="num">110</td><td class="num">9,814</td><td class="num">1.12%</td></tr>
+  <tr><td class="wide">7〜10位</td><td class="num">58</td><td class="num">10,048</td><td class="num bad">0.58%</td></tr>
+  <tr><td class="wide">11位以下</td><td class="num">0</td><td class="num">1,717</td><td class="num bad">0%</td></tr>
+</table>
+<p class="dim" style="font-size:12.5px">※ GSCのクエリ別は匿名化が強く、見えているのは193,574表示のうち22,897（12%）だけです。
+この表はその12%の内訳で、全体の断面としては偏っています。</p>
+<p><strong>1〜3位でも 2.12% しかありません。</strong>通常なら10〜30%出る位置です。
+これはタイトルの問題というより、<strong>このサイトの中心クエリがGoogleが自分で答えてしまう種類</strong>だからです ――
+「どちら側に座るか」の答えは一行で、強調スニペットやAI概要で表示すればクリックが発生しません。</p>
+<p>つまり<strong>CTR改善だけで大きく伸ばすのは期待できません。</strong>
+伸ばせるのは「7〜10位の10,048表示を4〜6位に押し上げる」側で、これはタイトルではなく順位の仕事です。</p>
+
+<h3>課題2：/shinkansen-seat-guides が「薄いアフィリエイトページ」の形をしている</h3>
+<table>
+  <tr><th class="wide">指標</th><th class="num">値</th><th class="wide">意味</th></tr>
+  <tr><td class="wide">本文語数</td><td class="num bad">496</td><td class="wide">サイト内で最も薄い</td></tr>
+  <tr><td class="wide">sponsoredリンク</td><td class="num bad">8</td><td class="wide">62語に1本</td></tr>
+  <tr><td class="wide">h2</td><td class="num bad">1</td><td class="wide">構造がほぼ無い</td></tr>
+  <tr><td class="wide">90日クリック</td><td class="num bad">5</td><td class="wide">表示369・順位9.6</td></tr>
+</table>
+<p><strong>以前AdSenseで弾かれたときの典型的な形です。</strong>
+今回チェッカーを足しましたが、薄さは解決していません。
+<strong>畳む（noindex）か、中身を厚くするかの二択</strong>だと思います。
+90日で5クリックなので、畳んでも失うものはほぼありません。</p>
+
+<h3>課題3：/tokyo-to-kyoto が /kyoto-to-tokyo を薄めている可能性</h3>
+<table>
+  <tr><th class="wide">ページ</th><th class="num">クリック</th><th class="num">表示</th><th class="num">CTR</th><th class="num">順位</th></tr>
+  <tr><td class="wide">/kyoto-to-tokyo-mt-fuji-seat</td><td class="num">89</td><td class="num">10,988</td><td class="num">0.81%</td><td class="num">7.2</td></tr>
+  <tr><td class="wide">/tokyo-to-kyoto-mt-fuji-seat</td><td class="num bad">5</td><td class="num">1,253</td><td class="num bad">0.40%</td><td class="num">8.4</td></tr>
+</table>
+<p>類似度26.9%、どちらも500語台、狙うクエリも近い。
+弱い側（CTR 0.40%・5クリック）が強い側の評価を食っている形が疑われます。
+ただし<strong>これは仮説です</strong> ―― 同一クエリで両方が表示されているかを
+GSCのクエリ×ページで確認してから判断すべきで、今回は未確認です。</p>
+
+<h2>4. 推奨する次の一手（SEO観点）</h2>
+<table>
+  <tr><th class="num">順</th><th class="wide">やること</th><th class="wide">根拠</th><th class="wide">注意</th></tr>
+  <tr><td class="num">1</td><td class="wide">何もしないで12月まで待つ</td><td class="wide">CTA変更の判定が終わっていない。同時に動かすと原因が分離できない</td><td class="wide">これが一番大事です</td></tr>
+  <tr><td class="num">2</td><td class="wide">/shinkansen-seat-guides を畳む</td><td class="wide">496語に8本のアフィリエイト・90日5クリック。品質リスクのほうが大きい</td><td class="wide">失うのは月2クリック程度</td></tr>
+  <tr><td class="wide num">3</td><td class="wide">/tokyo-to-kyoto と /kyoto-to-tokyo の共食いを<strong>確認</strong></td><td class="wide">類似26.9%、弱い側CTR 0.40%</td><td class="wide">確認してから。統合を先に決めない</td></tr>
+  <tr><td class="num">4</td><td class="wide">/kyoto-to-tokyo のタイトル改善</td><td class="wide">10,988表示でCTR 0.81%。サイト平均1.14%なら125クリック（現在89）</td><td class="wide">効果は +36クリック/90日程度。小さい</td></tr>
+</table>
+
+<div class="card alert">
+  <p><strong>やらないほうがいいこと</strong></p>
+  <ul>
+    <li><strong>CTR改善に期待をかけること。</strong>1〜3位でも2.12%しか出ていません。
+      Googleが答えを出してしまうクエリなので、タイトルでは覆せません。</li>
+    <li><strong>ページを増やすこと。</strong>表示は193,574あって足りています。
+      増やすと今回畳んだのと同じ「薄いページ」が復活します。</li>
+    <li><strong>今回の変更を触り直すこと。</strong>12月の判定まで動かさないのが条件です。</li>
+  </ul>
+</div>
+
+<div class="foot">
+  計測方法: 開発サーバが配信したHTMLを実取得し、<code>&lt;script&gt;</code>／<code>&lt;style&gt;</code>／タグを除去して本文語数を算出。
+  <code>rel="sponsored nofollow"</code> の出現数、<code>affiliate.klook.com</code> の出現数、
+  内部リンク（<code>href="/..."</code> のユニーク数）、<code>&lt;h2&gt;</code> 数を同じHTMLから数えています。
+  類似度は本文の3-gram Jaccard係数。<br>
+  検索実績は Search Console API（2026-08-06〜11-03・全言語合算、順位帯の内訳のみ英語<code>/guide</code>）。
+  <code>/sitemap.xml</code> は実際に取得して21URLを確認。
+</div>
+
+</div>
+</body>
+</html>
