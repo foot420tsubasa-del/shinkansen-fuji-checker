@@ -40,6 +40,14 @@ const sections = [
     ],
   },
   {
+    title: "Advertising",
+    body: [
+      "fujiseat may show ads supplied by Google AdSense. Google and its partners use cookies or similar identifiers to serve and measure those ads, and may do so based on your previous visits to this or other sites.",
+      "If you are in the EEA, the UK, or Switzerland, a consent message asks you before any personalised advertising identifier is used, and your answer is stored so it can be honoured on later visits. You can reopen that message at any time to change your answer.",
+      "You can opt out of personalised advertising in Google's own Ads Settings, and the ad vendors Google works with are listed in Google's advertising documentation. Declining personalised ads does not remove ads; it makes them non-personalised.",
+    ],
+  },
+  {
     title: "Affiliate and third-party links",
     body: [
       "fujiseat includes links to third-party services such as booking, eSIM, transport, hotel, activity, insurance, and map providers. When you click those links, the third party may receive information such as your browser, device, referral URL, and any information you provide on their site.",

@@ -1,6 +1,5 @@
 "use client";
 
-import Script from "next/script";
 import { useEffect } from "react";
 import {
   getAdsenseClientId,
@@ -48,13 +47,9 @@ export function AdSlot({ placement, className = "", format = "horizontal" }: AdS
       aria-label="Advertisement"
       className={`my-8 rounded-[18px] border border-slate-200 bg-white/80 p-3 shadow-sm ${minHeight} ${className}`}
     >
-      <Script
-        id="adsense-script"
-        async
-        strategy="afterInteractive"
-        src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`}
-        crossOrigin="anonymous"
-      />
+      {/* The tag itself is loaded once site-wide by AdsenseScript in the
+          locale layout; loading it here left it absent from every page with no
+          ad unit, which is where the consent message and the review need it. */}
       <p className="mb-2 text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-slate-400">
         Advertisement
       </p>

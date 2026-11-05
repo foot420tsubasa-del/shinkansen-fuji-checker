@@ -6,7 +6,6 @@ import { SiteFooter } from "@/components/content/SiteFooter";
 import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
-import { AdSlot } from "@/components/ads/AdSlot";
 import { getAlternates } from "@/i18n/hreflang";
 import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { SiteHeader } from "../../components/SiteHeader";
@@ -503,7 +502,10 @@ export default async function WhereToStayInTokyoWithLuggagePage({ params }: Prop
               </a>
             </div>
           </div>
-          <AdSlot placement="luggage_guide_after_delivery" format="horizontal" />
+          {/* Ad slot removed 2026-11-06. This page was retired to noindex on
+              2026-09-29, and AdSense policy applies wherever the code appears,
+              not only where Google indexes it — carrying ads on a page judged
+              not worth indexing is an account-level risk for no upside. */}
           <div className="mt-5 flex flex-wrap gap-2">
             <TrackedInternalLink
               href="/airport-transfers"

@@ -9,6 +9,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { execSync } from "node:child_process";
 import ts from "typescript";
 
 async function importTsModule(path) {
@@ -407,4 +408,75 @@ test("return-leg tour: offered only on the return leg, and labelled there", () =
     "the impression must read the chosen direction, not the stale state",
   );
   assert.ok(src.includes('placement: "seat_result_return_tour"'), "needs its own placement");
+});
+
+test("adsense: ads.txt declares the publisher and nothing else", () => {
+  // Without it AdSense reports the site as unauthorised inventory.
+  const txt = readFileSync("public/ads.txt", "utf8").trim();
+  const lines = txt.split("\n").filter((l) => l.trim() && !l.startsWith("#"));
+  assert.equal(lines.length, 1, "one seller line is all this site needs");
+  const [domain, pub, rel, tagId] = lines[0].split(",").map((s) => s.trim());
+  assert.equal(domain, "google.com");
+  assert.equal(pub, "pub-5844175658360101", "must match the meta tag in app/layout.tsx");
+  assert.equal(rel, "DIRECT");
+  assert.equal(tagId, "f08c47fec0942fa0", "Google's own TAG id");
+});
+
+test("adsense: the publisher id is the same in ads.txt and the meta tag", () => {
+  const meta = readFileSync("app/layout.tsx", "utf8").match(/"google-adsense-account":\s*"ca-(pub-\d+)"/)?.[1];
+  const ads = readFileSync("public/ads.txt", "utf8").match(/(pub-\d+)/)?.[1];
+  assert.ok(meta, "the verification meta tag must exist");
+  assert.equal(ads, meta, "a mismatch here fails verification silently");
+});
+
+test("adsense: the tag is loaded once, site-wide, not from the ad unit", () => {
+  // Loading it from AdSlot left it absent from every page without an ad unit —
+  // including /guide, 69% of traffic — where the consent message needs it.
+  const slot = readFileSync("components/ads/AdSlot.tsx", "utf8");
+  assert.ok(!slot.includes("adsbygoogle.js"), "AdSlot must not load the tag itself");
+  const layout = readFileSync("app/[locale]/layout.tsx", "utf8");
+  assert.ok(layout.includes("<AdsenseScript />"), "the locale layout must load it");
+  const script = readFileSync("components/ads/AdsenseScript.tsx", "utf8");
+  assert.ok(script.includes("isAdsenseEnabled"), "it must stay behind the flag");
+});
+
+test("adsense: no ad unit sits on a retired page", () => {
+  // AdSense policy applies wherever the code appears, not only where Google
+  // indexes it. Carrying ads on a page judged not worth indexing risks the
+  // account for no upside — this is how the luggage guide was caught.
+  const retiredSrc = readFileSync("lib/retired-routes.ts", "utf8");
+  const retired = [...retiredSrc.matchAll(/^  "([^"]+)",$/gm)].map((m) => m[1]);
+  const withAds = execSync(
+    "grep -rl '<AdSlot' 'app' || true",
+    { encoding: "utf8" },
+  ).trim().split("\n").filter(Boolean);
+  for (const file of withAds) {
+    // app/[locale]/some/path/page.tsx -> /some/path
+    const route = "/" + file.replace(/^app\/\[locale\]\//, "").replace(/\/page\.tsx$/, "");
+    assert.ok(
+      !retired.includes(route),
+      `${route} is retired but still carries an ad unit (${file})`,
+    );
+  }
+});
+
+test("adsense: the privacy policy discloses advertising", () => {
+  // Required before serving ads, and separately required of a CMP's disclosures.
+  const src = readFileSync("app/[locale]/privacy/page.tsx", "utf8");
+  assert.ok(/title: "Advertising"/.test(src), "there must be an Advertising section");
+  assert.ok(/AdSense/.test(src), "it must name the ad network");
+  assert.ok(/EEA/.test(src) && /consent/i.test(src), "it must describe the consent message");
+});
+
+test("adsense: the middleware lets /ads.txt through", () => {
+  // next-intl's matcher swallowed it at first and /ads.txt answered 404 while
+  // the file sat correctly in public/ — AdSense would have read the site as
+  // unauthorised inventory with nothing in the repo looking wrong.
+  const matcher = readFileSync("proxy.ts", "utf8").match(/matcher: \[([\s\S]*?)\]/)?.[1] ?? "";
+  for (const file of ["robots\\\\.txt", "sitemap\\\\.xml", "ads\\\\.txt"]) {
+    assert.ok(
+      matcher.includes(file),
+      `${file.replace(/\\\\/g, "")} must be excluded from the locale middleware`,
+    );
+  }
 });

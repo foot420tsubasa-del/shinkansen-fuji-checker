@@ -6,6 +6,7 @@ import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { AdsenseScript } from "@/components/ads/AdsenseScript";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -64,6 +65,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           `}
         </Script>
         <GoogleAnalytics />
+        <AdsenseScript />
         <NextIntlClientProvider messages={messages}>
           {children}
         </NextIntlClientProvider>

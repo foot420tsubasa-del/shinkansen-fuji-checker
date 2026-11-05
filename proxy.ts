@@ -40,6 +40,6 @@ export default function proxy(request: NextRequest) {
 export const config = {
   // Match all paths except: API routes, Next.js internals, static assets, verification files, and stub pages
   matcher: [
-    "/((?!api|_next/static|_next/image|robots\\.txt|sitemap\\.xml|favicon\\.ico|icon\\.png|icon\\.ico|apple-icon\\.png|opengraph-image|.*\\.svg|.*\\.png|.*\\.ico|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.webp|.*\\.html|.*\\.htm|guide/pricing|guide/success|guide/cancel).*)",
+    "/((?!api|_next/static|_next/image|robots\\.txt|sitemap\\.xml|ads\\.txt|favicon\\.ico|icon\\.png|icon\\.ico|apple-icon\\.png|opengraph-image|.*\\.svg|.*\\.png|.*\\.ico|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.webp|.*\\.html|.*\\.htm|guide/pricing|guide/success|guide/cancel).*)",
   ],
 };
