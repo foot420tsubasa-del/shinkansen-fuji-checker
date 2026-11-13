@@ -32,7 +32,6 @@ import { AFFILIATE_REL } from "@/lib/link-rel";
 const JR_CENTRAL_SOURCE_URL =
   "https://recommend.jr-central.co.jp/shizuoka-tabi/articles/01/";
 
-const image2Placeholder = (name: string) => `/design-home-assets/${name}`;
 
 type PopularLink = {
   label: string;
@@ -253,42 +252,45 @@ export default function HomeClient() {
     <main className="page-shell min-h-screen text-[#102748]">
       <Header />
 
-      <section className="relative min-h-[410px] overflow-hidden bg-[#e8f3fb] md:min-h-[430px]">
-        <Image
-          className="absolute inset-0 h-full w-full object-cover object-[66%_center] opacity-90 md:object-center md:opacity-100"
-          src={image2Placeholder("home-hero-train-fuji.png")}
-          alt=""
-          aria-hidden="true"
-          fill
-          sizes="100vw"
-          priority
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,#fff_0%,rgba(255,255,255,0.94)_62%,rgba(255,255,255,0.18)_100%),linear-gradient(180deg,rgba(255,255,255,0.08)_0%,rgba(255,255,255,0.32)_100%)] md:bg-[linear-gradient(90deg,#fff_0%,#fff_43%,rgba(255,255,255,0.92)_55%,rgba(255,255,255,0.24)_65%,rgba(255,255,255,0.02)_78%),linear-gradient(180deg,rgba(255,255,255,0.05)_0%,rgba(255,255,255,0.23)_100%)]" />
-        <div className="relative z-10 mx-auto max-w-[1180px] px-5 py-14 md:px-7 md:py-[72px] md:pb-[48px]">
-          <div className="max-w-[700px]">
-            <p className="mb-4 inline-flex rounded-full border border-[#d9e5f2] bg-[#f4f9ff] px-3 py-2 text-xs font-black uppercase tracking-[0.08em] text-[#145aa0]">
+      {/* Hero, reworked 2026-11-13. The background here was a 1055x295 design
+          mockup with its own headline and dead buttons baked in. A phone showed
+          26% of it, stretched about four times its height, behind a white
+          wash — it read as a broken image. It is now the real photograph, shown
+          whole: under the headline on a phone, beside it from md up. */}
+      <section className="bg-[linear-gradient(180deg,#f4f9ff_0%,#ffffff_100%)]">
+        <div className="mx-auto grid max-w-[1180px] items-center gap-6 px-5 pb-6 pt-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] md:gap-10 md:px-7 md:py-14">
+          <div>
+            <p className="mb-4 inline-flex rounded-full border border-[#d9e5f2] bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.08em] text-[#145aa0]">
               {t("nav.hub")}
             </p>
-            <h1 className="font-serif text-[35px] font-bold leading-[1.03] tracking-[-0.02em] text-[#082653] sm:text-[42px] md:text-[58px] md:leading-[0.98] md:tracking-[-0.035em]">
+            <h1 className="font-serif text-[34px] font-bold leading-[1.05] tracking-[-0.02em] text-[#082653] sm:text-[42px] md:text-[52px] md:leading-[1] md:tracking-[-0.03em]">
               {t("brandTitle").split("\n").map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h1>
-            <p className="mt-5 max-w-[560px] text-lg leading-8 text-[#263a5d] md:text-xl">
+            <p className="mt-4 max-w-[520px] text-base leading-7 text-[#263a5d] md:mt-5 md:text-lg md:leading-8">
               {t("brandSubtitle")}
             </p>
+          </div>
+          <div className="relative aspect-[16/10] overflow-hidden rounded-[22px] border border-[#d9e5f2] bg-[#07111f] shadow-[0_18px_50px_rgba(8,38,83,0.16)] md:aspect-[4/3]">
+            <Image
+              src="/seat-checker-fuji-window-20260423.png"
+              alt="Mt. Fuji seen from a Shinkansen window seat"
+              fill
+              priority
+              sizes="(min-width: 1180px) 580px, (min-width: 768px) 50vw, calc(100vw - 40px)"
+              className="object-cover object-[72%_center]"
+            />
           </div>
         </div>
       </section>
 
       <div className="mx-auto max-w-[1180px] px-5 md:px-7">
-        <section id="seat-checker" className="scroll-mt-28 py-10">
-          <SectionTitle
-            eyebrow="Fuji-side seat checker"
-            description="Choose your direction and check the Mt. Fuji-side seat."
-          />
+        {/* The section title that sat here repeated the hero's eyebrow; the
+            panel carries its own heading now that it no longer repeats the h1. */}
+        <section id="seat-checker" className="scroll-mt-28 pb-10 pt-4 md:pt-6">
           <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_410px]">
             <SeatCheckerPanel
               direction={direction}

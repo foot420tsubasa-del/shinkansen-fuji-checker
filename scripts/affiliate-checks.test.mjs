@@ -556,3 +556,15 @@ test("adsense: the middleware lets /ads.txt through", () => {
     );
   }
 });
+
+test("homepage: one h1, and the hero is the real photograph", () => {
+  // The hero used to be a 1055x295 design mockup with its own headline and
+  // dead buttons baked in — a phone showed 26% of it, stretched — and the seat
+  // checker repeated the hero's headline as a second h1.
+  const home = readFileSync("app/[locale]/HomeClient.tsx", "utf8");
+  const panel = readFileSync("components/travel/SeatCheckerPanel.tsx", "utf8");
+  assert.equal((home.match(/<h1\b/g) ?? []).length, 1, "the homepage hero owns the only h1");
+  assert.ok(!/<h1\b/.test(panel), "the seat checker panel must not add a second h1");
+  assert.ok(!home.includes("home-hero-train-fuji"), "the mockup screenshot must not come back as the hero");
+  assert.ok(home.includes('id="seat-checker"'), "/#seat-checker links depend on this anchor");
+});

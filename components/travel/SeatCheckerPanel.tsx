@@ -2,7 +2,6 @@
 
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { directions, type DirectionId, type FujiVisibility } from "@/lib/seat-checker";
@@ -94,23 +93,19 @@ export function SeatCheckerPanel({
   return (
     <section className="relative h-full overflow-hidden rounded-[22px] bg-[#061a3c] text-white shadow-[0_24px_70px_rgba(6,26,60,0.28)]">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_22%,rgba(56,189,248,0.22),transparent_34%),linear-gradient(115deg,#061a3c_0%,#08224f_50%,#0b1d39_100%)]" />
-      <div className="relative grid h-full lg:grid-cols-[minmax(0,0.98fr)_minmax(260px,0.78fr)]">
-        <div className="flex flex-col justify-center px-5 py-6 sm:px-6 sm:py-8">
-          <div>
-            <h1 className="max-w-[460px] text-[30px] font-semibold leading-[1.02] text-white sm:text-[38px] lg:text-[42px]">
-              {t("brandTitle")}
-            </h1>
-            <p className="mt-3 max-w-[380px] text-sm leading-6 text-slate-300">
-              {t("brandSubtitle")}
-            </p>
-            <div className="mt-4 flex flex-wrap items-center gap-2">
-              <span className="inline-flex rounded-full bg-sky-400/15 px-2.5 py-1 text-[10px] font-bold uppercase text-sky-200 ring-1 ring-sky-300/20">
-                Free tool
-              </span>
-              <h2 className="inline-flex rounded-full border border-white/10 bg-white/8 px-3 py-1.5 text-xs font-semibold text-sky-100">
-                {t("seatCheckerHeading")}
-              </h2>
-            </div>
+      {/* Single column since 2026-11-13. This panel used to open with a second
+          h1 repeating the hero word for word, and carried the window photo in a
+          right-hand column on large screens; the photo now leads the hero, so
+          the panel is the tool and nothing else. */}
+      <div className="relative h-full">
+        <div className="flex flex-col justify-center px-5 py-6 sm:px-6 sm:py-7">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex rounded-full bg-sky-400/15 px-2.5 py-1 text-[10px] font-bold uppercase text-sky-200 ring-1 ring-sky-300/20">
+              Free tool
+            </span>
+            <h2 className="text-lg font-semibold leading-tight text-white sm:text-xl">
+              {t("seatCheckerHeading")}
+            </h2>
           </div>
 
           <div className="mt-5 space-y-3">
@@ -154,28 +149,6 @@ export function SeatCheckerPanel({
 
           <div className="mt-5">
             <FujiWeatherStrip data={visibility} loading={visibilityLoading} slowLoading={visibilitySlowLoading} error={visibilityError} />
-          </div>
-        </div>
-
-        <div className="relative hidden overflow-hidden lg:block">
-          <div className="absolute -left-14 inset-y-0 z-20 w-32 bg-[linear-gradient(90deg,#061a3c_0%,rgba(6,26,60,0.72)_42%,rgba(6,26,60,0)_100%)]" />
-          <div className="absolute inset-y-6 right-5 w-[92%] overflow-hidden rounded-[34px] border border-white/15 bg-[#07111f] shadow-[inset_0_0_0_7px_rgba(255,255,255,0.045),0_30px_80px_rgba(0,0,0,0.38)]">
-            <Image
-              src="/seat-checker-fuji-window-20260423.png"
-              alt="Mt. Fuji seen from a Shinkansen train window"
-              fill
-              priority
-              sizes="(min-width: 1280px) 34vw, 0vw"
-              className="object-cover object-[70%_center]"
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(3,10,24,0.38)_0%,rgba(3,10,24,0.05)_42%,rgba(3,10,24,0.18)_100%)]" />
-            <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,rgba(6,26,60,0),rgba(6,26,60,0.58))]" />
-          </div>
-          <div className="absolute bottom-4 left-[12%] z-30 rounded-full border border-white/15 bg-white/12 px-3 py-1 text-[10px] font-semibold text-sky-100 backdrop-blur-md">
-            Window view
-          </div>
-          <div className="absolute right-8 top-8 z-30 rounded-full bg-white/90 px-3 py-1 text-[10px] font-semibold text-slate-700 shadow-sm">
-            Fuji side
           </div>
         </div>
       </div>
