@@ -36,6 +36,7 @@ const englishOnlyContentPaths = [
   "/tokyo-to-osaka-mt-fuji-seat",
   "/osaka-to-tokyo-mt-fuji-seat",
   "/shinkansen-seat-letters",
+  "/when-to-see-mt-fuji-shinkansen",
   "/jr-pass-vs-single-ticket",
   "/shinkansen-oversized-baggage-seat",
   "/nozomi-vs-hikari-vs-kodama",

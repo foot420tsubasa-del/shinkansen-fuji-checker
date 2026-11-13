@@ -5357,7 +5357,18 @@
     "updated": "預報來自 open-meteo.com，每小時更新。",
     "cloudyAlt": "這班車會被雲擋住？在河口湖一帶的地面上，富士山往往仍然看得到——一日遊能讓你靠得夠近，不必靠車窗。",
     "tourCta": "在Klook查看富士山一日遊",
-    "clearAlt": "從車窗看到的機會不小。站在富士山腳下是另一種體驗 —— 河口湖從東京出發一天可往返。"
+    "clearAlt": "從車窗看到的機會不小。站在富士山腳下是另一種體驗 —— 河口湖從東京出發一天可往返。",
+    "whenTitle": "什麼時候能看到？",
+    "window": "富士山大約在 {from} 至 {to} 之間可見，{peak} 前後最佳。",
+    "oddsLine": "現在做預報還太早。{month}富士山路段上午晴朗的比例約為 {percent}%。",
+    "oddsNote": "依據 {start}–{end} 年該路段的雲量紀錄。僅供了解季節規律，並非實際觀測紀錄。",
+    "forecastOpens": "您所搭列車的精確預報將在出發前 10 天開放，屆時請再來查看。",
+    "lowOddsAlt": "這個月從車窗看到的機會不大。河口湖一日遊可以讓您近距離看到富士山，即使列車上看不到。",
+    "originShinagawa": "品川",
+    "originShinYokohama": "新橫濱",
+    "originNagoya": "名古屋",
+    "oddsTitle": "富士山路段各月上午晴朗比例",
+    "oddsCaption": "07:00–10:00 時段中雲量不超過 30% 的比例。"
   },
   "areaScores": {
     "title": "評分對比",

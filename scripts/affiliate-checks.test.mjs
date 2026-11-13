@@ -148,22 +148,25 @@ test("direction changes the quick-answer CTA copy", () => {
 
 const fw = await importTsModule("lib/fuji-window.ts");
 
-test("fuji window: Tokyo departures reach Fuji 42 minutes out, on the right", () => {
+test("fuji window: out of Tokyo the view opens at 40 minutes, peaks at 45, closes at 48", () => {
   const r = fw.resolveWindow("tokyo", "2026-10-14", "09:10", null);
-  assert.equal(r.fujiTime, "09:52");
+  assert.equal(r.firstTime, "09:50");
+  assert.equal(r.fujiTime, "09:55");
+  assert.equal(r.lastTime, "09:58");
   assert.equal(r.fujiDate, "2026-10-14");
   assert.equal(r.side, "right");
 });
 
 test("fuji window: eastbound runs put Fuji on the left, later in the trip", () => {
-  assert.equal(fw.resolveWindow("kyoto", "2026-10-14", "09:00", null).fujiTime, "10:31");
-  assert.equal(fw.resolveWindow("shin-osaka", "2026-10-14", "09:00", null).fujiTime, "10:45");
+  assert.equal(fw.resolveWindow("kyoto", "2026-10-14", "09:00", null).fujiTime, "10:28");
+  assert.equal(fw.resolveWindow("shin-osaka", "2026-10-14", "09:00", null).fujiTime, "10:43");
+  assert.equal(fw.resolveWindow("nagoya", "2026-10-14", "09:00", null).fujiTime, "09:51");
   assert.equal(fw.resolveWindow("kyoto", "2026-10-14", "09:00", null).side, "left");
 });
 
 test("fuji window: a departure that crosses midnight moves to the next day", () => {
   const r = fw.resolveWindow("tokyo", "2026-10-14", "23:40", null);
-  assert.equal(r.fujiTime, "00:22");
+  assert.equal(r.fujiTime, "00:25");
   assert.equal(r.fujiDate, "2026-10-15", "must read the next day's sky, not the same day's");
 });
 
@@ -183,9 +186,9 @@ test("fuji window: reads the forecast hour the train actually passes", () => {
     cloud: [90, 20, 95],
     precip: [0, 0, 0],
   };
-  // 09:30 + 42min = 10:12, which falls in the 10:00 hour.
+  // 09:30 + 45min = 10:15, which falls in the 10:00 hour.
   const r = fw.resolveWindow("tokyo", "2026-10-14", "09:30", forecast);
-  assert.equal(r.fujiTime, "10:12");
+  assert.equal(r.fujiTime, "10:15");
   assert.equal(r.cloudPercent, 20);
   assert.equal(r.level, "high");
 });
@@ -206,7 +209,7 @@ test("fuji window: offers a clearer departure only when one exists", () => {
   const better = fw.findBetterDeparture("tokyo", "2026-10-14", "08:00", forecast, picked.level);
   assert.ok(better, "a clear departure exists and should be offered");
   // The sighting is read at the hour it falls in, so reaching the clear 10:00
-  // hour means leaving at 10:00 (10:42) — not 09:00, whose 09:42 is still 09.
+  // hour means leaving at 10:00 (10:45) — not 09:00, whose 09:45 is still 09.
   assert.equal(better.time, "10:00");
   assert.equal(better.cloudPercent, 5);
 
@@ -382,19 +385,77 @@ test("the surviving direction pages carry the seat checker instead", () => {
   }
 });
 
-test("forecast tour: shown on every verdict, and counted on every verdict", () => {
-  // Gated on a clouded-in run it drew 42 impressions against 210 checks in 34
-  // days with no clicks — too rare to tell a bad offer from a starved one.
-  const src = readFileSync("components/travel/FujiWindowForecast.tsx", "utf8");
+test("fuji window: every origin's view opens, peaks and closes in that order", () => {
+  for (const [id, o] of Object.entries(fw.ORIGINS)) {
+    assert.ok(o.first < o.peak && o.peak < o.last, `${id}: first < peak < last`);
+    assert.ok(o.last - o.first <= 10, `${id}: the view is minutes long, not tens of minutes`);
+  }
+  // The same train, boarded further down the line.
+  assert.equal(fw.ORIGINS.tokyo.peak - fw.ORIGINS.shinagawa.peak, 7);
+  assert.equal(fw.ORIGINS.tokyo.peak - fw.ORIGINS["shin-yokohama"].peak, 18);
+  // Each leg offers only origins that travel that way.
+  for (const id of fw.ORIGINS_BY_DIRECTION["tokyo-osaka"]) assert.equal(fw.ORIGINS[id].westbound, true);
+  for (const id of fw.ORIGINS_BY_DIRECTION["osaka-tokyo"]) assert.equal(fw.ORIGINS[id].westbound, false);
+});
+
+test("timing lives inside the seat checker, below the booking CTA", () => {
+  // The forecast used to be a second card that asked for the direction again.
+  // It moved into the checker on 2026-11-13 — after the CTA, so the one slot
+  // that earns keeps the position it was measured in.
+  const src = readFileSync("components/travel/GuideSeatCheck.tsx", "utf8");
+  const cta = src.indexOf('placement: "guide_seat_result"', src.indexOf("<a"));
+  const timing = src.indexOf("<FujiTiming");
+  assert.ok(timing > 0, "the checker must mount the timing block");
+  assert.ok(cta > 0 && cta < timing, "the booking CTA must come before the timing block");
+  assert.ok(src.includes("key={direction}"), "switching legs must reset the origin");
+  assert.ok(!guideSrc.includes("FujiWindowForecast"), "the separate forecast card must not come back");
+});
+
+test("timing tour: only for an outbound reader looking at a poor sky", () => {
+  const src = readFileSync("components/travel/FujiTiming.tsx", "utf8");
+  // The return leg has its own tour line; a clear outbound run has none.
   assert.ok(
-    !src.includes('result.level === "low" && tourHref'),
-    "the tour must not be gated on the cloudy verdict again",
+    src.includes('direction === "tokyo-osaka" ? getAffUrl("fujiDayTourTokyo") : null'),
+    "must be scoped to the outbound leg",
   );
-  // The impression and the click must carry the same label, or the rate is not
-  // divisible by verdict.
-  const labels = [...src.matchAll(/label: `fuji_window_tour:\$\{result\.level\}`/g)];
-  assert.equal(labels.length, 2, "both the impression and the click must label the verdict");
-  assert.ok(src.includes("copy.clearAlt"), "a non-cloudy verdict needs its own wording");
+  assert.ok(src.includes('result.level === "low" ? "low"'), "a clouded-in forecast shows it");
+  assert.ok(src.includes("odds < LOW_ODDS_THRESHOLD"), "so does a low-odds month beyond the forecast");
+  // Impression and click share one label, or the rate is not divisible.
+  assert.equal([...src.matchAll(/label: tourLabel,/g)].length, 2);
+});
+
+test("clear-sky odds: twelve months, a winter peak and a summer trough", () => {
+  const data = JSON.parse(readFileSync("data/fuji-clear-sky-odds.json", "utf8"));
+  assert.equal(data.morning.length, 12);
+  for (const v of data.morning) assert.ok(Number.isInteger(v) && v >= 0 && v <= 100);
+  const winter = Math.min(data.morning[11], data.morning[0]);
+  const summer = Math.max(data.morning[5], data.morning[6]);
+  assert.ok(winter > summer * 2, "December/January must be far clearer than June/July");
+  // The hour-by-hour grid misstates the morning-to-afternoon slide and must
+  // not be what the site publishes.
+  const lib = readFileSync("lib/fuji-odds.ts", "utf8");
+  assert.ok(lib.includes("data.morning") && !lib.includes("data.odds"), "publish the monthly figure only");
+});
+
+test("timing strings: every locale has them, and none breaks ICU", () => {
+  const KEYS = ["whenTitle", "window", "oddsLine", "oddsNote", "forecastOpens", "lowOddsAlt",
+    "originShinagawa", "originShinYokohama", "originNagoya", "oddsTitle", "oddsCaption"];
+  for (const locale of LOCALES) {
+    const fwMsg = JSON.parse(readFileSync(`messages/${locale}.json`, "utf8")).fujiWindow;
+    for (const k of KEYS) assert.ok(fwMsg[k], `${locale}: fujiWindow.${k} is missing`);
+    for (const p of ["{from}", "{to}", "{peak}"]) assert.ok(fwMsg.window.includes(p), `${locale}: window needs ${p}`);
+    for (const p of ["{month}", "{percent}"]) assert.ok(fwMsg.oddsLine.includes(p), `${locale}: oddsLine needs ${p}`);
+    // An apostrophe straight before a brace is an ICU escape and eats the value.
+    for (const k of ["window", "oddsLine", "oddsNote"]) assert.ok(!/'\{/.test(fwMsg[k]), `${locale}: ${k} escapes a placeholder`);
+  }
+});
+
+test("the timing page is offered to search and computes from the model", () => {
+  const src = readFileSync("app/[locale]/when-to-see-mt-fuji-shinkansen/page.tsx", "utf8");
+  assert.ok(src.includes("ORIGINS") && src.includes("addMinutes"), "tables must come from lib/fuji-window");
+  assert.ok(src.includes('"@type": "FAQPage"'), "needs FAQ markup");
+  assert.ok(src.includes("<GuideSeatCheck"), "the tool belongs on the page about timing");
+  assert.ok(readFileSync("app/sitemap.ts", "utf8").includes('"/when-to-see-mt-fuji-shinkansen"'));
 });
 
 test("return-leg tour: offered only on the return leg, and labelled there", () => {

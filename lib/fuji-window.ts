@@ -8,34 +8,61 @@
  * page visited once and a page visited three times.
  */
 
-export type OriginId = "tokyo" | "kyoto" | "shin-osaka";
+export type OriginId =
+  | "tokyo"
+  | "shinagawa"
+  | "shin-yokohama"
+  | "nagoya"
+  | "kyoto"
+  | "shin-osaka";
 
 export type VisibilityLevel = "high" | "medium" | "low";
 
 export type Origin = {
   id: OriginId;
-  /** Minutes from this origin until the train reaches the Fuji stretch. */
-  minutesToFuji: number;
+  /** Minutes after departure that Fuji first comes into view. */
+  first: number;
+  /** Minutes after departure that the train passes Shin-Fuji, where Fuji is largest. */
+  peak: number;
+  /** Minutes after departure that the view closes. */
+  last: number;
   /** Travelling away from Tokyo, so Fuji is on the right-hand side. */
   westbound: boolean;
 };
 
 /*
- * Fuji is in view either side of Shin-Fuji station, roughly 40-45 minutes out
- * of Tokyo on a Nozomi. The eastbound figures are that same point measured
- * from the other end: Tokyo–Kyoto is about 2h13 and Tokyo–Shin-Osaka about
- * 2h27, so the stretch falls ~42 minutes before arrival in both cases.
- * Hikari and Kodama are slower; the UI says so rather than pretending to a
- * precision a timetable-free model does not have.
+ * Estimates for a Nozomi, which is what most readers ride and which passes
+ * Shin-Fuji without a published time. Recalibrated 2026-11-13: the earlier
+ * model put the whole sighting at a single 42 minutes out of Tokyo, which is
+ * closer to where the view opens than to where it is best.
+ *
+ * Westbound the view opens once the train clears the Izu hills past Mishima,
+ * about 40 minutes out of Tokyo, is largest passing Shin-Fuji at about 45, and
+ * closes after the Fuji River bridge at about 48. Shinagawa and Shin-Yokohama
+ * are the same train 7 and 18 minutes later.
+ *
+ * Eastbound it runs in reverse — bridge first, then Shin-Fuji, then a longer
+ * fade toward Mishima — and Shin-Fuji falls about 45 minutes before Tokyo:
+ * 51 minutes out of Nagoya (about 1h36 to Tokyo), 88 out of Kyoto (about 2h13)
+ * and 103 out of Shin-Osaka (about 2h28).
+ *
+ * Hikari and Kodama stop more and run later; the UI says so rather than
+ * pretending to a precision a timetable-free model does not have.
  */
 export const ORIGINS: Record<OriginId, Origin> = {
-  tokyo: { id: "tokyo", minutesToFuji: 42, westbound: true },
-  kyoto: { id: "kyoto", minutesToFuji: 91, westbound: false },
-  "shin-osaka": { id: "shin-osaka", minutesToFuji: 105, westbound: false },
+  tokyo: { id: "tokyo", first: 40, peak: 45, last: 48, westbound: true },
+  shinagawa: { id: "shinagawa", first: 33, peak: 38, last: 41, westbound: true },
+  "shin-yokohama": { id: "shin-yokohama", first: 22, peak: 27, last: 30, westbound: true },
+  nagoya: { id: "nagoya", first: 48, peak: 51, last: 56, westbound: false },
+  kyoto: { id: "kyoto", first: 85, peak: 88, last: 93, westbound: false },
+  "shin-osaka": { id: "shin-osaka", first: 100, peak: 103, last: 108, westbound: false },
 };
 
-/** The stretch is in view for roughly this long, centred on the estimate. */
-export const WINDOW_MINUTES = 10;
+/** Which origins belong to which leg, in the order the UI offers them. */
+export const ORIGINS_BY_DIRECTION: Record<"tokyo-osaka" | "osaka-tokyo", OriginId[]> = {
+  "tokyo-osaka": ["tokyo", "shinagawa", "shin-yokohama"],
+  "osaka-tokyo": ["kyoto", "shin-osaka", "nagoya"],
+};
 
 /**
  * Same thresholds as the homepage visibility strip, so the two never disagree
@@ -73,8 +100,12 @@ export type HourlyForecast = {
 };
 
 export type WindowResult = {
-  /** When the train reaches the Fuji stretch, local time. */
+  /** When Fuji first comes into view, local time. */
+  firstTime: string;
+  /** When the train passes Shin-Fuji and Fuji is largest, local time. */
   fujiTime: string;
+  /** When the view closes, local time. */
+  lastTime: string;
   /** The day that time falls on — a late departure can roll past midnight. */
   fujiDate: string;
   cloudPercent: number | null;
@@ -91,10 +122,10 @@ export function resolveWindow(
   forecast: HourlyForecast | null,
 ): WindowResult {
   const spec = ORIGINS[origin];
-  const fujiTime = addMinutes(departure, spec.minutesToFuji);
+  const fujiTime = addMinutes(departure, spec.peak);
   // A departure late enough to cross midnight lands the sighting on the next
   // day; without this the lookup would silently read the wrong day's sky.
-  const rolled = Number(departure.slice(0, 2)) * 60 + Number(departure.slice(3)) + spec.minutesToFuji >= 1440;
+  const rolled = Number(departure.slice(0, 2)) * 60 + Number(departure.slice(3)) + spec.peak >= 1440;
   const fujiDate = rolled ? nextDay(date) : date;
 
   const key = hourKey(fujiDate, fujiTime);
@@ -103,7 +134,9 @@ export function resolveWindow(
   const precipMm = index >= 0 ? forecast!.precip[index] ?? null : null;
 
   return {
+    firstTime: addMinutes(departure, spec.first),
     fujiTime,
+    lastTime: addMinutes(departure, spec.last),
     fujiDate,
     cloudPercent,
     precipMm,
@@ -133,7 +166,6 @@ export function findBetterDeparture(
   current: VisibilityLevel | null,
 ): Alternative | null {
   if (!forecast || current === "high") return null;
-  const spec = ORIGINS[origin];
   let best: Alternative | null = null;
 
   // Tokaido departures run roughly 06:00-21:00.
@@ -147,6 +179,5 @@ export function findBetterDeparture(
       best = { time: dep, cloudPercent: r.cloudPercent, level: r.level };
     }
   }
-  void spec;
   return best;
 }

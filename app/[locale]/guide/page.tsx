@@ -7,7 +7,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { KLOOK_URL, ESIM_URL, SIM_CARD_URL, JR_PASS_URL, OMIO_SHINKANSEN_URL } from "@/src/affiliateLinks";
 import { KLOOK_FILLED_CTA } from "@/components/affiliate/GuideKlookCta";
 import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
-import { FujiWindowForecast } from "@/components/travel/FujiWindowForecast";
+import { MonthlyOdds } from "@/components/content/MonthlyOdds";
 import { GuideStickyCta } from "@/components/affiliate/GuideStickyCta";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -1017,7 +1017,6 @@ const priorityGuideFaqByLocale: Record<string, GuideFaqItem[]> = {
 export default async function GuidePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "guide" });
-  const fw = await getTranslations({ locale, namespace: "fujiWindow" });
   const isFr = locale === "fr";
   const copy = locale === "fr" ? frGuideCopy : { ...enGuideCopy, ...guideCopyOverridesByLocale[locale] };
   const quickAnswer = quickAnswerCopyByLocale[locale] ?? quickAnswerCopyByLocale.en;
@@ -1601,41 +1600,9 @@ export default async function GuidePage({ params }: Props) {
 
         {renderSeatCheck()}
 
-        {/* Deliberately below the measured seat-check funnel: the forecast is a
-            reason to come back, not a replacement for the answer above it. */}
-        <FujiWindowForecast
-          locale={locale}
-          pagePath={guidePath}
-          copy={{
-            eyebrow: fw("eyebrow"),
-            title: fw("title"),
-            intro: fw("intro"),
-            fromLabel: fw("fromLabel"),
-            originTokyo: fw("originTokyo"),
-            originKyoto: fw("originKyoto"),
-            originOsaka: fw("originOsaka"),
-            dateLabel: fw("dateLabel"),
-            timeLabel: fw("timeLabel"),
-            check: fw("check"),
-            loading: fw("loading"),
-            error: fw("error"),
-            result: fw("result"),
-            sideRight: fw("sideRight"),
-            sideLeft: fw("sideLeft"),
-            cloud: fw("cloud"),
-            rain: fw("rain"),
-            levelHigh: fw("levelHigh"),
-            levelMedium: fw("levelMedium"),
-            levelLow: fw("levelLow"),
-            better: fw("better"),
-            slowerTrains: fw("slowerTrains"),
-            book: fw("book"),
-            cloudyAlt: fw("cloudyAlt"),
-            clearAlt: fw("clearAlt"),
-            tourCta: fw("tourCta"),
-            updated: fw("updated"),
-          }}
-        />
+        {/* The forecast card that sat here was folded into the seat checker on
+            2026-11-13 (components/travel/FujiTiming.tsx): it asked for the
+            direction a second time and only knew ten days by the hour. */}
 
         {renderEarlyShinkansenHotelStrip()}
 
@@ -1768,6 +1735,19 @@ export default async function GuidePage({ params }: Props) {
                 </div>
               ))}
             </div>
+            {/* The season table above rates each quarter in stars; this puts
+                a measured figure on every month, from the same data the seat
+                checker falls back on beyond the ten-day forecast. */}
+            <MonthlyOdds locale={locale} className="mt-4 rounded-xl border border-slate-200 bg-white px-3 py-3" />
+            {locale === "en" ? (
+              <p className="mt-3 text-[12px] text-slate-600">
+                For the minute your own train passes —{" "}
+                <Link href="/when-to-see-mt-fuji-shinkansen" className="font-semibold text-sky-700 underline underline-offset-2">
+                  when you see Mt. Fuji, by departure time
+                </Link>
+                .
+              </p>
+            ) : null}
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.nightH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.nightText}</p>
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.liveH3}</h3>

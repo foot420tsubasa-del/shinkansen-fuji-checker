@@ -11,6 +11,7 @@ import {
 import { getSeatRecommendation, type DirectionId } from "@/lib/seat-checker";
 import { getAffUrl, getDirectionTicketLink } from "@/src/affiliateLinks";
 import { returnTourCopy } from "@/lib/copy/seat-check";
+import { FujiTiming } from "@/components/travel/FujiTiming";
 import { SEAT_DIRECTION_STORAGE_KEY, directionGaParams, KLOOK_FILLED_CTA } from "@/components/affiliate/GuideKlookCta";
 
 export type GuideSeatCheckCopy = {
@@ -217,6 +218,14 @@ export function GuideSeatCheck({
                 {copy.jrPassLink}
               </a>
             </p>
+            {/* Below the booking CTA on purpose: that slot is the one that
+                earns, and it keeps the exact position it was measured in. The
+                timing answers the next question without moving the first.
+                Keyed on direction so a reader who switches legs starts from
+                that leg's own origins rather than a stale one. */}
+            {direction ? (
+              <FujiTiming key={direction} direction={direction} locale={locale} pagePath={pagePath} />
+            ) : null}
             {tour ? (
               <div className="mt-3.5 border-t border-slate-100 pt-3">
                 <p className="text-[12px] leading-5 text-slate-600">{tourCopy.lead}</p>

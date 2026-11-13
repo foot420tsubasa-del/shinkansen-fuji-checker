@@ -5413,7 +5413,18 @@
     "updated": "Forecast from open-meteo.com, refreshed hourly.",
     "cloudyAlt": "Clouded in on that run? Mt. Fuji is often still out at ground level near Kawaguchiko, where a day trip gets you close enough to see it without the window.",
     "tourCta": "See Mt Fuji day tours on Klook",
-    "clearAlt": "Good odds from the train. Standing under Mt. Fuji is a different day out — Kawaguchiko is a day trip from Tokyo."
+    "clearAlt": "Good odds from the train. Standing under Mt. Fuji is a different day out — Kawaguchiko is a day trip from Tokyo.",
+    "whenTitle": "When will you see it?",
+    "window": "Mt. Fuji is in view from about {from} to {to} — at its best around {peak}.",
+    "oddsLine": "Too far ahead for a forecast. In {month}, mornings over the Fuji stretch are clear about {percent}% of the time.",
+    "oddsNote": "From {start}–{end} cloud-cover records for this stretch. A guide to the season, not a sighting log.",
+    "forecastOpens": "A forecast for your exact train opens 10 days before you travel — check back then.",
+    "lowOddsAlt": "Long odds from the window that month. Near Kawaguchiko, a day trip gets you close enough to see Mt. Fuji when the train view fails.",
+    "originShinagawa": "Shinagawa",
+    "originShinYokohama": "Shin-Yokohama",
+    "originNagoya": "Nagoya",
+    "oddsTitle": "Clear mornings over the Fuji stretch, by month",
+    "oddsCaption": "Share of 07:00–10:00 hours with cloud cover of 30% or less."
   },
   "areaScores": {
     "title": "Scored side by side",

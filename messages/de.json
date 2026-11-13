@@ -5357,7 +5357,18 @@
     "updated": "Prognose von open-meteo.com, stündlich aktualisiert.",
     "cloudyAlt": "Auf dieser Fahrt zugezogen? Am Boden rund um Kawaguchiko ist der Fuji oft trotzdem zu sehen — ein Tagesausflug bringt Sie nah genug heran, auch ohne Zugfenster.",
     "tourCta": "Fuji-Tagestouren auf Klook ansehen",
-    "clearAlt": "Gute Chancen vom Zug aus. Direkt unter dem Fuji zu stehen ist etwas anderes — Kawaguchiko ist ein Tagesausflug von Tokio."
+    "clearAlt": "Gute Chancen vom Zug aus. Direkt unter dem Fuji zu stehen ist etwas anderes — Kawaguchiko ist ein Tagesausflug von Tokio.",
+    "whenTitle": "Wann sehen Sie ihn?",
+    "window": "Der Fuji ist etwa von {from} bis {to} zu sehen – am besten gegen {peak}.",
+    "oddsLine": "Für eine Vorhersage ist es noch zu früh. Im {month} sind die Vormittage über dem Fuji-Abschnitt in etwa {percent} % der Fälle klar.",
+    "oddsNote": "Aus Bewölkungsdaten {start}–{end} für diesen Abschnitt. Ein Anhaltspunkt für die Jahreszeit, kein Sichtungsprotokoll.",
+    "forecastOpens": "Eine Vorhersage für genau Ihren Zug gibt es ab 10 Tage vor der Reise – schauen Sie dann wieder vorbei.",
+    "lowOddsAlt": "In diesem Monat stehen die Chancen vom Zugfenster aus schlecht. Ein Tagesausflug nach Kawaguchiko bringt Sie nah genug heran, um den Fuji auch dann zu sehen.",
+    "originShinagawa": "Shinagawa",
+    "originShinYokohama": "Shin-Yokohama",
+    "originNagoya": "Nagoya",
+    "oddsTitle": "Klare Vormittage über dem Fuji-Abschnitt nach Monat",
+    "oddsCaption": "Anteil der Stunden von 07:00 bis 10:00 Uhr mit höchstens 30 % Bewölkung."
   },
   "areaScores": {
     "title": "Direkt verglichen, in Punkten",

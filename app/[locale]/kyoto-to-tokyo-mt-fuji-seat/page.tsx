@@ -44,7 +44,7 @@ const faqSchema = {
       name: "How long before arriving in Tokyo can I see Mt. Fuji?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "About 70–80 minutes after leaving Kyoto, near Shin-Fuji station. This is roughly 40–50 minutes before arriving at Tokyo Station.",
+        text: "About 85 to 93 minutes after leaving Kyoto on a Nozomi, passing Shin-Fuji Station at about 88. That is roughly 45 minutes before arriving at Tokyo Station.",
       },
     },
     {
@@ -99,7 +99,7 @@ export default async function KyotoToTokyoSeatPage({ params }: Props) {
             </li>
             <li className="flex gap-2">
               <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-              <span><strong>Watch for it:</strong> Around Shin-Fuji, ~70–80 min after Kyoto departure.</span>
+              <span><strong>Watch for it:</strong> Around Shin-Fuji, about 85–93 min after a Nozomi leaves Kyoto.</span>
             </li>
             <li className="flex gap-2">
               <Cloud className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
@@ -162,10 +162,10 @@ export default async function KyotoToTokyoSeatPage({ params }: Props) {
             <h2 className="text-xl font-bold text-slate-950">Timing from Kyoto</h2>
             <div className="mt-3 space-y-3 text-sm leading-7 text-slate-600">
               <p>
-                From Kyoto Station, expect the Mt. Fuji viewing window around 70–80 minutes into your journey, near Shin-Fuji station. From Shin-Osaka, add about 15 minutes. This means the view comes roughly 40–50 minutes before Tokyo Station arrival.
+                From Kyoto Station on a Nozomi, expect Mt. Fuji about 85 to 93 minutes into your journey, at its largest passing Shin-Fuji Station at about 88. From Shin-Osaka, add about 15 minutes. That puts the view roughly 45 minutes before Tokyo Station.
               </p>
               <p>
-                Set a timer or watch for Shizuoka station announcements — Shin-Fuji is the next major stretch after that.
+                Set a timer, or watch for Shizuoka Station going past — the Fuji River bridge and Shin-Fuji come a few minutes after it. The <Link href="/when-to-see-mt-fuji-shinkansen" className="font-semibold text-sky-700 underline underline-offset-2">timing page</Link> turns this into clock times for your departure.
               </p>
             </div>
           </section>

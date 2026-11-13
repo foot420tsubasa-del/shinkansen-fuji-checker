@@ -5358,7 +5358,18 @@
     "updated": "Previsão de open-meteo.com, atualizada a cada hora.",
     "cloudyAlt": "Esse trem deve pegar nuvem? No chão, perto de Kawaguchiko, o Fuji costuma aparecer mesmo assim — um bate-volta te leva perto o bastante, sem depender da janela.",
     "tourCta": "Ver passeios ao monte Fuji na Klook",
-    "clearAlt": "Boas chances pela janela. Estar ao pé do Fuji é outra experiência: Kawaguchiko é um passeio de um dia saindo de Tóquio."
+    "clearAlt": "Boas chances pela janela. Estar ao pé do Fuji é outra experiência: Kawaguchiko é um passeio de um dia saindo de Tóquio.",
+    "whenTitle": "Quando você vai ver?",
+    "window": "O Fuji fica visível de cerca de {from} até {to} — no melhor momento por volta de {peak}.",
+    "oddsLine": "Ainda é cedo para uma previsão. Em {month}, as manhãs sobre o trecho do Fuji ficam limpas cerca de {percent}% das vezes.",
+    "oddsNote": "Com base em registros de nebulosidade de {start}–{end} neste trecho. Um guia da estação, não um registro de avistamentos.",
+    "forecastOpens": "A previsão para o seu trem exato abre 10 dias antes da viagem — volte nessa data.",
+    "lowOddsAlt": "Nesse mês as chances pela janela são baixas. Um passeio de um dia a Kawaguchiko leva você perto o bastante para ver o Fuji mesmo quando a vista do trem falha.",
+    "originShinagawa": "Shinagawa",
+    "originShinYokohama": "Shin-Yokohama",
+    "originNagoya": "Nagoya",
+    "oddsTitle": "Manhãs limpas sobre o trecho do Fuji, por mês",
+    "oddsCaption": "Parcela das horas entre 07:00 e 10:00 com nebulosidade de 30% ou menos."
   },
   "areaScores": {
     "title": "Comparados por pontuação",

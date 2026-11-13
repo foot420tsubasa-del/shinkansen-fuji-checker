@@ -150,10 +150,10 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
             <h2 className="text-xl font-bold text-slate-950">Timing your view</h2>
             <div className="mt-3 space-y-3 text-sm leading-7 text-slate-600">
               <p>
-                When traveling from Tokyo toward Kyoto or Osaka on the Tokaido Shinkansen, Mt. Fuji appears on the right side approximately 40–50 minutes after leaving Tokyo Station. The best viewing stretch is around Shin-Fuji station in Shizuoka Prefecture.
+                When traveling from Tokyo toward Kyoto or Osaka on a Nozomi, Mt. Fuji comes into view on the right side about 40 minutes after leaving Tokyo Station and is largest at about 45, passing Shin-Fuji Station in Shizuoka Prefecture. By about 48 minutes it is behind you.
               </p>
               <p>
-                The view lasts roughly 30–60 seconds at full speed. Have your camera ready a few minutes before — the mountain appears quickly and passes just as fast.
+                It is in view on and off for those eight minutes, but the wide-open stretch — Shin-Fuji and the Fuji River bridge just after it — lasts well under a minute at full speed. Have your camera ready a few minutes before. The <Link href="/when-to-see-mt-fuji-shinkansen" className="font-semibold text-sky-700 underline underline-offset-2">timing page</Link> gives clock times for your departure.
               </p>
             </div>
           </section>

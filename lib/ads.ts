@@ -42,7 +42,12 @@ export const ADSENSE_CLIENT_ID = "ca-pub-5844175658360101";
  * itself, which the review looks for and which the EEA consent message
  * requires before it can be published.
  */
-const ADSENSE_ENABLED = true;
+// Off since 2026-11-13. The site was rejected a second time for low-value
+// content — at 20 pages, as it had been at about 125 — so the tag was loading
+// two ad scripts on every page for ads that could never serve. Reapplying is
+// a traffic question, not a structure one; turn this back on when there is a
+// review to pass.
+const ADSENSE_ENABLED = false;
 
 export function isAdsenseEnabled() {
   return ADSENSE_ENABLED;

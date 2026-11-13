@@ -44,7 +44,7 @@ const faqSchema = {
       name: "How long after leaving Shin-Osaka can I see Mt. Fuji?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "About 85–95 minutes after leaving Shin-Osaka, near Shin-Fuji station. This is roughly 40–50 minutes before arriving at Tokyo Station.",
+        text: "About 100–108 minutes after leaving Shin-Osaka, near Shin-Fuji station. This is roughly 45 minutes before arriving at Tokyo Station.",
       },
     },
     {
@@ -100,7 +100,7 @@ export default async function OsakaToTokyoSeatPage({ params }: Props) {
             </li>
             <li className="flex gap-2">
               <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-              <span><strong>Watch for it:</strong> Around Shin-Fuji, ~85–95 min after Shin-Osaka departure.</span>
+              <span><strong>Watch for it:</strong> Around Shin-Fuji, about 100–108 min after Shin-Osaka departure.</span>
             </li>
             <li className="flex gap-2">
               <Cloud className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
@@ -160,7 +160,7 @@ export default async function OsakaToTokyoSeatPage({ params }: Props) {
             <h2 className="text-xl font-bold text-slate-950">Timing from Shin-Osaka</h2>
             <div className="mt-3 space-y-3 text-sm leading-7 text-slate-600">
               <p>
-                From Shin-Osaka, expect the Mt. Fuji viewing window around 85–95 minutes into your journey, near Shin-Fuji station — about 15 minutes later than from Kyoto. This means the view comes roughly 40–50 minutes before Tokyo Station arrival.
+                From Shin-Osaka, expect the Mt. Fuji viewing window around 100–108 minutes into your journey, near Shin-Fuji station — about 15 minutes later than from Kyoto. This means the view comes roughly 45 minutes before Tokyo Station arrival.
               </p>
               <p>
                 Set a timer or watch for Shizuoka station announcements — Shin-Fuji is the next major stretch after that. The view lasts about 30–60 seconds at speed.
