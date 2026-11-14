@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/content/SiteFooter";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { AdSlot } from "@/components/ads/AdSlot";
 import { getAlternates } from "@/i18n/hreflang";
+import { linksToLivePage } from "@/lib/retired-routes";
 import { SiteHeader } from "../../components/SiteHeader";
 
 type Props = {
@@ -406,7 +407,7 @@ export default async function TokyoHotelRoomSizeGuidePage({ params }: Props) {
         <section className="mt-10 rounded-[24px] border border-slate-200 bg-white p-6 shadow-sm">
           <h2 className="text-xl font-semibold text-slate-950">{copy.continueTitle}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-4">
-            {copy.continueLinks.map(([href, label]) => (
+            {copy.continueLinks.filter(([href]) => linksToLivePage(href)).map(([href, label]) => (
               <TrackedInternalLink
                 key={href}
                 href={href}

@@ -1,15 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import {
-  Car,
-  ExternalLink,
-  Train,
-  ArrowRight,
-} from "lucide-react";
+import { ExternalLink, Train } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import Image from "next/image";
@@ -336,7 +330,7 @@ export default function HomeClient() {
           </p>
           <div className="mt-5 rounded-2xl border border-[#d9e5f2] bg-white p-4 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
             <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#5f7190]">After checking your seat</p>
-            <div className="mt-3 grid items-stretch gap-3 lg:grid-cols-3">
+            <div className="mt-3 grid items-stretch gap-3 lg:grid-cols-2">
               <div className="flex h-full flex-col rounded-2xl border border-orange-100 bg-orange-50/70 p-3">
                 <p className="text-sm font-bold text-[#082653]">Book Shinkansen ticket</p>
                 <p className="mt-1 text-xs leading-5 text-slate-600">
@@ -416,25 +410,6 @@ export default function HomeClient() {
                   </a>
                 </div>
               </div>
-              <TrackedCtaLink
-                href="/airport-transfers"
-                placement="home_seat_result"
-                label="Get eSIM / airport transfer"
-                category="transfer"
-                ctaType="transfer"
-                pagePath="/"
-                locale={locale}
-                className="rounded-2xl border border-sky-100 bg-sky-50/70 p-3 transition-colors hover:bg-sky-50"
-              >
-                <span className="flex items-center gap-2 text-sm font-bold text-[#082653]">
-                  <Car className="h-3.5 w-3.5 text-[#145aa0]" />
-                  Get eSIM / airport transfer
-                </span>
-                <span className="mt-1 block text-xs leading-5 text-slate-600">
-                  Sort your first arrival route, then prepare data for maps, translation, and transit apps.
-                </span>
-                <span className="mt-2 inline-flex text-xs font-bold text-[#145aa0]">Plan arrival essentials →</span>
-              </TrackedCtaLink>
             </div>
             <div className="mt-4 border-t border-slate-100 pt-3">
               <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#5f7190]">More seat guides</p>
@@ -467,56 +442,12 @@ export default function HomeClient() {
           </div>
         </section>
 
-        {/* §6 (redesign spec §2): the "decision flow" strip — the five travel
-            decisions in the order the trip actually happens, each linking to
-            the tool or guide that answers it. Sits below the hero + seat
-            checker, which stay untouched. */}
-        <section className="py-7">
-          <SectionTitle
-            eyebrow={t("decisionFlow.eyebrow")}
-            description={t("decisionFlow.body")}
-          />
-          <h2 className="sr-only">{t("decisionFlow.title")}</h2>
-          <ol className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
-            {([
-              { href: "/plan-your-trip", placement: "home_decision_flow_arrival" },
-              { href: "/airport-transfers", placement: "home_decision_flow_transfer" },
-              { href: "/areas-to-stay", placement: "home_decision_flow_stay" },
-              { href: "/jr-pass-vs-single-ticket", placement: "home_decision_flow_ticket" },
-              { href: "/#seat-checker", placement: "home_decision_flow_seat" },
-            ] as const).map((step, index) => (
-              <li key={step.href} className="h-full">
-                <Link
-                  href={step.href}
-                  onClick={() =>
-                    trackCtaClick({
-                      placement: step.placement,
-                      href: step.href,
-                      label: t(`decisionFlow.steps.${index}.title`),
-                      category: "navigation",
-                      locale,
-                    })
-                  }
-                  className="flex h-full flex-col rounded-2xl border border-[#d9e5f2] bg-white p-4 shadow-[0_10px_25px_rgba(8,38,83,0.06)] transition-colors hover:border-[#2E7D5B] hover:bg-[#f0fbf6]"
-                >
-                  <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#082653] text-xs font-black text-[#f6c343]">
-                    {index + 1}
-                  </span>
-                  <span className="mt-2.5 text-sm font-bold text-[#082653]">
-                    {t(`decisionFlow.steps.${index}.title`)}
-                  </span>
-                  <span className="mt-1 text-xs leading-5 text-[#5f7190]">
-                    {t(`decisionFlow.steps.${index}.desc`)}
-                  </span>
-                  <span className="mt-auto inline-flex items-center gap-1 pt-3 text-xs font-semibold text-[#106b43]">
-                    {t(`decisionFlow.steps.${index}.cta`)}
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ol>
-        </section>
+        {/* The five-step "decision flow" strip that stood here was cut on
+            2026-11-14: four of its five steps led to pages retired from the
+            index (plan-your-trip, airport-transfers, jr-pass-vs-single-ticket)
+            or to the hotel funnel, and over ninety days the five together drew
+            31 clicks, 26 of them on the step that scrolled back up to the
+            checker above. */}
 
         <section className="py-7">
           <div className="overflow-hidden rounded-[18px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-[0_10px_25px_rgba(8,38,83,0.06)] md:grid md:grid-cols-[minmax(0,1fr)_240px] md:items-center md:gap-6">
@@ -576,7 +507,7 @@ export default function HomeClient() {
             eyebrow={t("supportTools.eyebrow")}
             description={t("supportTools.description")}
           />
-          <div className="grid gap-3 lg:grid-cols-[minmax(0,320px)_1fr] lg:items-center">
+          <div className="max-w-[420px]">
             <Link
               href="/station-practice"
               onClick={() =>
@@ -603,35 +534,6 @@ export default function HomeClient() {
                 {t("supportTools.stationPracticeCta")}
               </span>
             </Link>
-            <div>
-              <p className="mb-2 text-[11px] font-black uppercase tracking-[0.1em] text-slate-500">
-                {t("supportTools.otherLabel")}
-              </p>
-              <div className="flex flex-wrap gap-2 text-xs font-semibold">
-                {[
-                  { href: "/local-tokyo", label: t("supportTools.localTokyo"), category: "local_tokyo" },
-                  { href: "/itineraries/7-day-first-time-japan", label: t("supportTools.itinerary"), category: "itinerary" },
-                  { href: "/plan-your-trip", label: t("supportTools.planner"), category: "itinerary" },
-                ].map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() =>
-                      trackCtaClick({
-                        placement: "home_more_tools",
-                        href: link.href,
-                        label: link.label,
-                        category: link.category,
-                        locale,
-                      })
-                    }
-                    className="inline-flex min-h-9 items-center rounded-full border border-[#b7ddf6] bg-white px-3 py-1.5 text-[#0b5ea8] shadow-sm transition-colors hover:bg-[#eff6ff] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#145aa0]"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
           </div>
         </section>
 

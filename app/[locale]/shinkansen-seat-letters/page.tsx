@@ -232,7 +232,6 @@ export default async function SeatLettersPage({ params }: Props) {
                   ["/tokyo-to-kyoto-mt-fuji-seat", "tokyoKyoto"],
                   ["/kyoto-to-tokyo-mt-fuji-seat", "kyotoTokyo"],
                   ["/areas-to-stay/asakusa-vs-ueno", "stay"],
-                  ["/plan-your-trip", "planTrip"],
                 ] as const
               ).map(([href, key]) => (
                 <Link

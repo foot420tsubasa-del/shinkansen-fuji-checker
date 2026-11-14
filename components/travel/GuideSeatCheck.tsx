@@ -114,7 +114,9 @@ export function GuideSeatCheck({
   };
 
   return (
-    <section className="mb-5 overflow-hidden rounded-2xl border border-[#0b214a]/15 bg-[#f4f8fd] shadow-sm">
+    // The anchor in-page links use, so a page that carries the checker sends
+    // readers to its own copy rather than to the homepage's.
+    <section id="fuji-seat-check" className="mb-5 scroll-mt-24 overflow-hidden rounded-2xl border border-[#0b214a]/15 bg-[#f4f8fd] shadow-sm">
       <div className="px-4 py-3.5 lg:px-5">
         <p className="text-[11px] font-bold uppercase tracking-[0.1em] text-[#1d4e89]">
           {copy.eyebrow}

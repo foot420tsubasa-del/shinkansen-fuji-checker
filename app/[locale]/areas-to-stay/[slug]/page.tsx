@@ -38,6 +38,7 @@ import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 import { ProviderButton } from "@/components/ui/ProviderButton";
 import { buttonClassName } from "@/components/ui/Button";
+import { linksToLivePage } from "@/lib/retired-routes";
 import type { AdPlacement } from "@/lib/ads";
 
 type Props = {
@@ -2994,7 +2995,7 @@ export default async function StayPage({ params }: Props) {
           ) : null}
 
           <NextActions
-            picks={page.nextActions}
+            picks={page.nextActions.filter((action) => linksToLivePage(action.href))}
             title={stayPagesCommon.nextActionsTitle}
             subtitle={stayPagesCommon.nextActionsSubtitle}
             maxItems={3}

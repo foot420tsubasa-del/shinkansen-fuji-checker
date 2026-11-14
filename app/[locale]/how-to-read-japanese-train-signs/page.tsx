@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Script from "next/script";
 import { getTranslations } from "next-intl/server";
-import { ArrowRight, CheckCircle2, DoorOpen, HelpCircle, MapPinned, Route, Signpost, Smartphone, Train, Waypoints } from "lucide-react";
+import { ArrowRight, CheckCircle2, DoorOpen, HelpCircle, Route, Signpost, Train, Waypoints } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
@@ -102,10 +102,7 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
   // button just before Suggested next steps.
   const suggestedCards = [
     { href: "/#seat-checker", key: "seat", type: "seat_checker" as const },
-    { href: "/jr-pass-vs-single-ticket", key: "jrPass", type: "rail" as const },
     { href: "/areas-to-stay/asakusa-vs-ueno", key: "beforeShinkansen", type: "stay" as const },
-    { href: "/airport-transfers", key: "airport", type: "transfer" as const },
-    { href: "/itineraries/7-day-first-time-japan", key: "itinerary", type: "itinerary" as const },
   ];
 
   // The Suica simulator promotion uses the dedicated suicaGuide
@@ -178,15 +175,7 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
         */}
         <section className="mt-6 flex flex-col gap-3 rounded-[22px] border border-[#d9e5f2] bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between">
           <p className="text-sm leading-6 text-slate-600">
-            Want the bigger picture — exits, platforms, and transfers end to end?
-            Read{" "}
-            <Link
-              href="/how-to-navigate-japanese-train-stations"
-              className="font-bold text-[#145aa0] underline underline-offset-2"
-            >
-              how to navigate Japanese train stations
-            </Link>
-            , or practice reading the signs right now.
+            Want to try it before your trip? Practice reading the signs right now.
           </p>
           <TrackedCtaLink
             href="/station-practice"
@@ -308,16 +297,8 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                 </p>
                 <p>
                   {t.rich("shinkansen.p2Rich", {
-                    link1: (chunks) => (
-                      <Link href="/tokyo-to-kyoto-shinkansen-ticket" className="font-bold text-[#106b43] underline underline-offset-2">
-                        {chunks}
-                      </Link>
-                    ),
-                    link2: (chunks) => (
-                      <Link href="/jr-pass-vs-single-ticket" className="font-bold text-[#106b43] underline underline-offset-2">
-                        {chunks}
-                      </Link>
-                    ),
+                    link1: (chunks) => <>{chunks}</>,
+                    link2: (chunks) => <>{chunks}</>,
                     link3: (chunks) => (
                       <Link href="/guide" className="font-bold text-[#106b43] underline underline-offset-2">
                         {chunks}
@@ -419,18 +400,6 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                       className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#145aa0] bg-white px-4 py-2.5 text-sm font-extrabold text-[#145aa0] shadow-sm transition-colors hover:bg-[#f2f7fc]"
                     >
                       {t("before.practical.uenoAsakusa")}
-                      <ArrowRight className="h-4 w-4" />
-                    </TrackedCtaLink>
-                    <TrackedCtaLink
-                      href="/airport-transfers"
-                      placement="train_signs_station_practice"
-                      label="Check airport transfer to hotel area"
-                      pagePath="/how-to-read-japanese-train-signs"
-                      locale={locale}
-                      category="transfer"
-                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#0f766e] bg-[#0f766e] px-4 py-2.5 text-sm font-extrabold text-white shadow-sm transition-colors hover:bg-[#115e59]"
-                    >
-                      {t("before.practical.airport")}
                       <ArrowRight className="h-4 w-4" />
                     </TrackedCtaLink>
                     <div className="pt-1">
@@ -546,26 +515,6 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
                 {t("sidebar.remember.body")}
               </p>
             </div>
-            <Link
-              href="/plan-your-trip"
-              className="flex items-center gap-3 rounded-[18px] border border-[#d9e5f2] bg-white p-4 shadow-sm transition-colors hover:bg-[#f8fbff]"
-            >
-              <Smartphone className="h-5 w-5 text-[#145aa0]" />
-              <span>
-                <span className="block text-sm font-bold text-[#082653]">{t("sidebar.plan.title")}</span>
-                <span className="mt-1 block text-xs leading-5 text-[#5f7190]">{t("sidebar.plan.desc")}</span>
-              </span>
-            </Link>
-            <Link
-              href="/airport-transfers"
-              className="flex items-center gap-3 rounded-[18px] border border-[#d9e5f2] bg-white p-4 shadow-sm transition-colors hover:bg-[#f8fbff]"
-            >
-              <MapPinned className="h-5 w-5 text-[#145aa0]" />
-              <span>
-                <span className="block text-sm font-bold text-[#082653]">{t("sidebar.airport.title")}</span>
-                <span className="mt-1 block text-xs leading-5 text-[#5f7190]">{t("sidebar.airport.desc")}</span>
-              </span>
-            </Link>
           </aside>
         </div>
 

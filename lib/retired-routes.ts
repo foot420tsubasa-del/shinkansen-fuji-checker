@@ -110,3 +110,19 @@ export function isRetiredPath(pathname: string, locales: readonly string[]): boo
   }
   return RETIRED.has(p || "/");
 }
+
+const GONE = new Set<string>([...RETIRED_PATHS, ...FOLDED_PATHS]);
+
+/**
+ * False for an internal link whose page has been retired or folded; true for
+ * anything else, external links and in-page anchors included.
+ *
+ * For lists rendered from content data. Filtering at render time rather than
+ * deleting entries from the data means a page brought back into the index gets
+ * its inbound links back with it.
+ */
+export function linksToLivePage(href: string | undefined): boolean {
+  if (!href || !href.startsWith("/")) return true;
+  const path = href.split(/[?#]/)[0].replace(/\/+$/, "") || "/";
+  return !GONE.has(path);
+}

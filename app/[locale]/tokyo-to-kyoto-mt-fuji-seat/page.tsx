@@ -114,13 +114,12 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
             Select Tokyo → Osaka/Kyoto and see the seat map with the Fuji side highlighted.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
-            <Link
-              href="/#seat-checker"
+            <a href="#fuji-seat-check"
               className="inline-flex items-center gap-2 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#246449]"
             >
               Open Seat Checker
               <ArrowRight className="h-4 w-4" />
-            </Link>
+            </a>
             <Link
               href="/guide"
               className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition-colors hover:bg-slate-50"
@@ -206,17 +205,13 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
                 <span className="font-bold text-[#082653]">Kyoto → Tokyo: Which seat?</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">Return direction seat and viewing tips.</span>
               </Link>
-              <Link href="/tokyo-to-osaka-mt-fuji-seat" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Tokyo → Osaka: Which seat?</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">Same line, same answer — Osaka-specific timing.</span>
-              </Link>
               <Link href="/shinkansen-seat-letters" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Seat letters A–E explained</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">Window, aisle, and layout breakdown.</span>
               </Link>
-              <Link href="/plan-your-trip" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Plan your trip essentials</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">eSIM, airport transfer, and rail booking links.</span>
+              <Link href="/shinkansen-green-car-worth-it" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
+                <span className="font-bold text-[#082653]">Is the Green Car worth it?</span>
+                <span className="mt-1 block text-xs text-[#5f7190]">Seat D in the Green Car is the Fuji-side window — and when the extra cost pays.</span>
               </Link>
             </div>
           </section>

@@ -193,17 +193,9 @@ export default async function GreenCarWorthItPage({ params }: Props) {
           <section>
             <h2 className="text-lg font-bold text-slate-950">Related pages</h2>
             <div className="mt-3 grid gap-3 md:grid-cols-2">
-              <Link href="/shinkansen-reserved-vs-non-reserved" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Reserved vs non-reserved</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">The cheaper decision to make first.</span>
-              </Link>
               <Link href="/shinkansen-seat-letters" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Seat letters A–E explained</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">Why E becomes D in the Green Car.</span>
-              </Link>
-              <Link href="/nozomi-vs-hikari-vs-kodama" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
-                <span className="font-bold text-[#082653]">Nozomi vs Hikari vs Kodama</span>
-                <span className="mt-1 block text-xs text-[#5f7190]">Pick the train type before the car class.</span>
               </Link>
               <Link href="/guide" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
                 <span className="font-bold text-[#082653]">Full Mt. Fuji seat guide</span>

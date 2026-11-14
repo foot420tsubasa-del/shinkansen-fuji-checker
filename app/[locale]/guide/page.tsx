@@ -4,19 +4,10 @@ import { Mountain, Train, Info } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
-import { KLOOK_URL, ESIM_URL, SIM_CARD_URL, JR_PASS_URL, OMIO_SHINKANSEN_URL } from "@/src/affiliateLinks";
-import { KLOOK_FILLED_CTA } from "@/components/affiliate/GuideKlookCta";
+import { KLOOK_URL, JR_PASS_URL } from "@/src/affiliateLinks";
 import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
 import { MonthlyOdds } from "@/components/content/MonthlyOdds";
-import { GuideStickyCta } from "@/components/affiliate/GuideStickyCta";
 import { SiteFooter } from "@/components/content/SiteFooter";
-import { AFFILIATE_REL } from "@/lib/link-rel";
-import { ShareThisPage } from "@/components/share/ShareThisPage";
-import { CompactStayFinder } from "@/components/stay/CompactStayFinder";
-import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLink";
-import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
-import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
-import { KlookProductRow } from "@/components/affiliate/KlookProductRow";
 
 const SITE_URL = "https://fujiseat.com";
 
@@ -1123,105 +1114,6 @@ export default async function GuidePage({ params }: Props) {
     "text-slate-500",
   ];
 
-  const renderTravelEssentials = () => (
-    <section className="rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-sm">
-      <div className="px-4 py-3.5 md:px-6 md:py-4 border-b border-slate-100 bg-slate-50/60">
-        <h2 className="text-[13px] md:text-[15px] font-semibold text-slate-900">
-          {ui.travelEssentialsTitle}
-        </h2>
-        <p className="text-[11px] md:text-xs text-slate-400 mt-0.5">
-          {ui.travelEssentialsBody}
-        </p>
-      </div>
-      <div className="p-3.5 md:p-4">
-        <div className="grid gap-2 text-[12px] leading-5 sm:grid-cols-3">
-          <Link
-            href="/plan-your-trip"
-            className="inline-flex min-h-10 items-center justify-center rounded-xl border border-sky-200 bg-sky-50 px-3 py-2 font-semibold text-sky-800 transition-colors hover:border-sky-300 hover:bg-sky-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-200"
-          >
-            {ui.chooseRoute}
-          </Link>
-          <Link
-            href="/airport-transfers"
-            className="inline-flex min-h-10 items-center justify-center rounded-xl border border-indigo-200 bg-indigo-50 px-3 py-2 font-semibold text-indigo-800 transition-colors hover:border-indigo-300 hover:bg-indigo-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-200"
-          >
-            {ui.planAirportTransfer}
-          </Link>
-          <Link
-            href="/areas-to-stay"
-            className="inline-flex min-h-10 items-center justify-center rounded-xl border border-[#0b214a] bg-[#0b214a] px-3 py-2 font-semibold text-yellow-300 transition-colors hover:bg-[#081a3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b214a]/30"
-          >
-            {ui.chooseStayArea}
-          </Link>
-        </div>
-        {/* Connectivity is one decision in two formats — an eSIM needs a
-            handset that supports it — so the pair always shares a row. */}
-        <div className="mt-2 grid gap-2 text-[12px] leading-5 sm:grid-cols-2">
-          <TrackedAffiliateLink
-            href={ESIM_URL}
-            target="_blank"
-            rel={AFFILIATE_REL}
-            category="esim"
-            provider="klook"
-            placement="guide_esim_checklist"
-            pagePath={guidePath}
-            locale={locale}
-            label="Get Japan eSIM"
-            linkId="esim"
-            product="esim"
-            className="inline-flex min-h-10 items-center justify-center rounded-xl border border-orange-200 bg-orange-50 px-3 py-2 font-semibold text-orange-700 transition-colors hover:border-orange-300 hover:bg-orange-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
-          >
-            {ui.getJapanEsim}
-          </TrackedAffiliateLink>
-          {/* Same decision, other format: an eSIM needs a handset that supports
-              one, so the physical card sits beside it rather than replacing it. */}
-          <TrackedAffiliateLink
-            href={SIM_CARD_URL}
-            target="_blank"
-            rel={AFFILIATE_REL}
-            category="esim"
-            provider="klook"
-            placement="guide_sim_card_checklist"
-            pagePath={guidePath}
-            locale={locale}
-            label="Get Japan SIM card"
-            linkId="simCard"
-            product="sim_card"
-            adid="1403938"
-            className="inline-flex min-h-10 items-center justify-center rounded-xl border border-orange-200 bg-orange-50 px-3 py-2 font-semibold text-orange-700 transition-colors hover:border-orange-300 hover:bg-orange-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-200"
-          >
-            {ui.getSimCard}
-          </TrackedAffiliateLink>
-        </div>
-      </div>
-    </section>
-  );
-
-  const renderEarlyShinkansenHotelStrip = () => (
-    <div className="mb-5 rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-3 shadow-sm shadow-sky-100/60 lg:px-5">
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <p className="text-sm font-semibold text-slate-950">
-            Taking an early Shinkansen from Tokyo?
-          </p>
-          <p className="mt-1 text-[12px] leading-5 text-slate-600">
-            Seat E solves the Fuji view. Your hotel base solves luggage stress if you are leaving early with bags.
-          </p>
-        </div>
-        <TrackedInternalLink
-          href="/areas-to-stay/asakusa-vs-ueno"
-          sourcePage="/guide"
-          placement="guide_top_after_quick_answer"
-          label="Compare Tokyo hotel bases"
-          locale={locale}
-          className="inline-flex min-h-10 shrink-0 items-center justify-center rounded-full border border-[#0b214a] bg-[#0b214a] px-3.5 py-2 text-[12px] font-semibold text-yellow-300 shadow-sm transition-colors hover:bg-[#081a3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b214a]/30"
-        >
-          Choose Tokyo hotel base
-        </TrackedInternalLink>
-      </div>
-    </div>
-  );
-
   const renderSeatCheck = () => (
     /* The homepage seat-result slot converts best on the whole site but sits on
        a page with a fraction of the guide's organic traffic; this reproduces
@@ -1257,166 +1149,6 @@ export default async function GuidePage({ params }: Props) {
      impressions it consumed were costing more than that across the page.
      Judged in December on whether guide_seat_result's rate rises above 3.80%. */
 
-  const renderAfterSeatNextSteps = () => (
-    <section className="mb-5 rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm shadow-slate-200/70 lg:px-5">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-slate-400">
-        Decision gateway
-      </p>
-      <h2 className="mt-1 text-base font-semibold text-slate-950">
-        After checking Seat E, choose your next step
-      </h2>
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <TrackedAffiliateLink
-          href={KLOOK_URL}
-          target="_blank"
-          rel={AFFILIATE_REL}
-          category="train"
-          provider="klook"
-          placement="guide_top_klook_shinkansen"
-          pagePath={guidePath}
-          locale={locale}
-          label="Book Shinkansen ticket"
-          linkId="shinkansenTicket"
-          product="shinkansen_ticket"
-          className="flex h-full flex-col rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3.5 text-[12px] shadow-sm transition-colors hover:border-orange-300 hover:bg-orange-100"
-        >
-          <span className="block font-semibold text-slate-950">Book Shinkansen ticket</span>
-          <span className="mt-1 block leading-5 text-slate-600">
-            For users who already know the route and want to reserve the right seat.
-          </span>
-          <span className="mt-auto inline-flex w-fit rounded-full border border-orange-300 bg-white px-3 py-1.5 font-semibold text-orange-700">
-            Open Klook
-          </span>
-        </TrackedAffiliateLink>
-
-        {/* JR Pass converts at roughly 2.5x the single-ticket rate (Klook,
-            Feb-Apr: 12.8% CVR across 86 clicks) but had been reachable only
-            through an internal detour, and its clicks fell to 12. Undecided
-            readers still get the comparison; readers who already know the
-            Pass fits get a direct route. The qualifying line stays, because
-            for a plain Tokyo-Kyoto round trip single tickets really are
-            cheaper. */}
-        <div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-[12px] shadow-sm">
-          <span className="block font-semibold text-slate-950">{ui.gatewayJrPassTitle}</span>
-          <span className="mt-1 block leading-5 text-slate-600">{ui.gatewayJrPassBody}</span>
-          <div className="mt-auto flex flex-wrap items-center gap-2 pt-3">
-            <TrackedAffiliateLink
-              href={JR_PASS_URL}
-              target="_blank"
-              rel={AFFILIATE_REL}
-              category="train"
-              provider="klook"
-              placement="guide_jr_pass_gateway"
-              pagePath={guidePath}
-              locale={locale}
-              label="Check JR Pass options on Klook"
-              linkId="jrPass"
-              product="jr_pass"
-              adid="1165791"
-              className="inline-flex min-h-9 items-center rounded-full border border-orange-300 bg-orange-50 px-3 py-1.5 font-semibold text-orange-700 transition-colors hover:bg-orange-100"
-            >
-              {ui.gatewayJrPassCta}
-            </TrackedAffiliateLink>
-            <TrackedInternalLink
-              href="/jr-pass-vs-single-ticket"
-              sourcePage="/guide"
-              placement="guide_after_seat_next_step"
-              label="Compare JR Pass with single tickets"
-              locale={locale}
-              className="inline-flex min-h-9 items-center rounded-full border border-slate-300 bg-white px-3 py-1.5 font-semibold text-slate-700 transition-colors hover:bg-slate-50"
-            >
-              {ui.gatewayJrPassCompare}
-            </TrackedInternalLink>
-          </div>
-        </div>
-
-        <TrackedInternalLink
-          href="/areas-to-stay/asakusa-vs-ueno"
-          sourcePage="/guide"
-          placement="guide_after_seat_next_step"
-          label="Choose hotel base before Shinkansen"
-          locale={locale}
-          className="flex h-full flex-col rounded-2xl border border-[#0b214a] bg-[#0b214a] px-4 py-3.5 text-[12px] shadow-sm transition-colors hover:bg-[#081a3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b214a]/30"
-        >
-          <span className="block font-semibold text-yellow-300">Choose hotel base before Shinkansen</span>
-          <span className="mt-1 block leading-5 text-slate-200">
-            Useful if you have luggage or an early train from Tokyo.
-          </span>
-          <span className="mt-auto inline-flex w-fit rounded-full border border-yellow-300/70 bg-yellow-300 px-3 py-1.5 font-semibold text-[#0b214a]">
-            Open stay guide
-          </span>
-        </TrackedInternalLink>
-
-      </div>
-      {OMIO_SHINKANSEN_URL ? (
-        /* The ONLY Omio link on the guide: a small text link for genuine
-           multimodal comparison, never a button, never beside Klook. */
-        <p className="mt-3 text-[12px] text-slate-500">
-          {ui.omioLead}{" "}
-          <TrackedAffiliateLink
-            href={OMIO_SHINKANSEN_URL}
-            target="_blank"
-            rel={AFFILIATE_REL}
-            category="train"
-            provider="omio"
-            placement="guide_route_comparison_text"
-            pagePath={guidePath}
-            locale={locale}
-            label="View other route options on Omio"
-            linkId="guide_omio_route_comparison"
-            product="multimodal_route_comparison"
-            className="font-medium text-slate-600 underline underline-offset-2 hover:text-slate-800"
-          >
-            {ui.omioLink}
-          </TrackedAffiliateLink>
-        </p>
-      ) : null}
-    </section>
-  );
-
-  const renderHotelBridge = () => (
-    <div className="mt-4 rounded-2xl border border-emerald-100 bg-emerald-50/70 px-4 py-3.5">
-      <p className="text-sm font-semibold text-slate-950">
-        Staying in Tokyo around your Shinkansen? Pick your hotel area first.
-      </p>
-      <p className="mt-1 text-[12px] leading-5 text-slate-600">
-        The right base near your route saves time with luggage and early trains.
-      </p>
-      <div className="mt-3 flex flex-wrap gap-2">
-        <TrackedInternalLink
-          href="/areas-to-stay"
-          sourcePage="/guide"
-          placement="guide_to_hotels"
-          label="Where to stay in Tokyo"
-          locale={locale}
-          className="inline-flex min-h-9 items-center rounded-xl border border-[#2E7D5B] bg-[#2E7D5B] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#246449]"
-        >
-          Where to stay in Tokyo
-        </TrackedInternalLink>
-        <TrackedInternalLink
-          href="/areas-to-stay"
-          sourcePage="/guide"
-          placement="guide_to_hotels"
-          label="Compare station areas"
-          locale={locale}
-          className="inline-flex min-h-9 items-center rounded-xl border border-[#0b214a] bg-[#0b214a] px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-[#081a3a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0b214a]/30"
-        >
-          Compare station areas
-        </TrackedInternalLink>
-        <TrackedInternalLink
-          href="/areas-to-stay/asakusa-vs-ueno"
-          sourcePage="/guide"
-          placement="guide_to_hotels"
-          label="Ueno or Asakusa?"
-          locale={locale}
-          className="inline-flex min-h-9 items-center rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-semibold text-slate-800 transition-colors hover:border-slate-400 hover:bg-slate-50"
-        >
-          Ueno or Asakusa?
-        </TrackedInternalLink>
-      </div>
-    </div>
-  );
-
   const renderSeatGuides = () => (
     <section className="rounded-2xl border border-sky-100 bg-sky-50/70 px-4 py-4 shadow-sm">
       <p className="text-[11px] font-semibold uppercase tracking-wide text-sky-700">
@@ -1441,104 +1173,6 @@ export default async function GuidePage({ params }: Props) {
         </Link>
       </div>
     </section>
-  );
-
-  const renderContinuePlanning = () => (
-    <section className="rounded-2xl border border-slate-200 bg-white px-4 py-4 shadow-sm shadow-slate-200/70">
-      <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400">
-        {ui.continuePlanningLabel}
-      </p>
-      <div className="mt-3 grid gap-3 sm:grid-cols-2">
-        <TrackedAffiliateLink
-          href={KLOOK_URL}
-          target="_blank"
-          rel={AFFILIATE_REL}
-          category="train"
-          provider="klook"
-          placement="guide_article_inline"
-          pagePath={guidePath}
-          locale={locale}
-          label="Book Shinkansen ticket"
-          linkId="shinkansenTicket"
-          product="shinkansen_ticket"
-          className="group flex h-full flex-col rounded-2xl border border-orange-200 bg-orange-50 px-4 py-3.5 text-[12px] shadow-sm shadow-orange-100/60 transition-colors hover:border-[#D94A32] hover:bg-[#fff8f0]"
-        >
-          <span className="block font-semibold text-slate-900">Book Shinkansen ticket</span>
-          <span className="mt-0.5 block text-slate-500">Reserve after confirming the Fuji-side seat.</span>
-          <span className="mt-auto inline-flex w-fit rounded-full border border-[#D94A32] bg-[#D94A32] px-3 py-1.5 text-[11px] font-semibold text-white shadow-sm transition-colors group-hover:bg-[#bf3d28]">
-            Open Klook
-          </span>
-        </TrackedAffiliateLink>
-        <TrackedInternalLink
-          href="/areas-to-stay"
-          sourcePage="/guide"
-          placement="guide_continue_planning"
-          label="Choose Tokyo hotel base"
-          locale={locale}
-          className="group flex h-full flex-col rounded-2xl border border-[#0b214a] bg-[#0b214a] px-4 py-3.5 text-[12px] shadow-sm shadow-slate-200/70 transition-colors hover:bg-[#081a3a]"
-        >
-          <span className="block font-semibold text-yellow-300">Choose Tokyo hotel base</span>
-          <span className="mt-0.5 block text-slate-200">Compare famous stations, calmer bases, and luggage logic.</span>
-          <span className="mt-auto inline-flex w-fit rounded-full border border-yellow-300/70 bg-yellow-300 px-3 py-1.5 text-[11px] font-semibold text-[#0b214a] shadow-sm transition-colors group-hover:bg-yellow-200">
-            See hotel areas
-          </span>
-        </TrackedInternalLink>
-        <TrackedCtaLink
-          href="/jr-pass-vs-single-ticket"
-          placement="guide_continue_planning"
-          label="Compare JR Pass"
-          pagePath={guidePath}
-          locale={locale}
-          category="rail"
-          className="group flex h-full flex-col rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3.5 text-[12px] shadow-sm shadow-amber-100/60 transition-colors hover:border-amber-300 hover:bg-amber-100/70"
-        >
-          <span className="block font-semibold text-slate-900">Compare JR Pass</span>
-          <span className="mt-0.5 block text-slate-500">Check only if your route has several long JR rides.</span>
-          <span className="mt-auto inline-flex w-fit rounded-full border border-amber-300 bg-white px-3 py-1.5 text-[11px] font-semibold text-amber-800 shadow-sm transition-colors group-hover:bg-amber-50">
-            Open guide
-          </span>
-        </TrackedCtaLink>
-        <TrackedCtaLink
-          href="/how-to-read-japanese-train-signs"
-          placement="guide_continue_planning"
-          label="Read station signs and practice station navigation"
-          pagePath={guidePath}
-          locale={locale}
-          category="station_practice"
-          className="group flex h-full flex-col rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3.5 text-[12px] shadow-sm shadow-sky-100/60 transition-colors hover:border-sky-300 hover:bg-sky-100/70"
-        >
-          <span className="block font-semibold text-slate-900">Read station signs / practice station navigation</span>
-          <span className="mt-0.5 block text-slate-500">Prepare for exits, transfer gates, and platform signs.</span>
-          <span className="mt-auto inline-flex w-fit rounded-full border border-sky-300 bg-white px-3 py-1.5 text-[11px] font-semibold text-sky-800 shadow-sm transition-colors group-hover:bg-sky-50">
-            Open train signs guide
-          </span>
-        </TrackedCtaLink>
-      </div>
-    </section>
-  );
-
-  const renderSeatBookingReminder = () => (
-    /* The how-to-book section's only online-booking CTA (Klook, spec 1-3). */
-    <div className="mt-4 rounded-2xl border border-orange-100 bg-orange-50/60 px-3.5 py-3">
-      <TrackedAffiliateLink
-        href={KLOOK_URL}
-        target="_blank"
-        rel={AFFILIATE_REL}
-        category="train"
-        provider="klook"
-        placement="guide_how_to_book"
-        pagePath={guidePath}
-        locale={locale}
-        label="Book Seat E on Klook"
-        linkId="guide_klook_how_to_book"
-        product="shinkansen"
-        adid="1265303"
-        className={KLOOK_FILLED_CTA}
-      >
-        {ui.bookCtaButton}
-      </TrackedAffiliateLink>
-      <p className="mt-2 text-center text-[11px] leading-4 text-slate-500">{ui.bookCtaNote}</p>
-    </div>
   );
 
   return (
@@ -1588,14 +1222,6 @@ export default async function GuidePage({ params }: Props) {
               </li>
             ))}
           </ul>
-          <div className="mt-4 flex flex-wrap gap-2">
-            <Link
-              href="/#seat-checker"
-              className="inline-flex items-center rounded-full border border-[#2E7D5B] bg-[#2E7D5B] px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition-colors hover:bg-[#246449]"
-            >
-              {quickAnswer.cta}
-            </Link>
-          </div>
         </section>
 
         {renderSeatCheck()}
@@ -1604,7 +1230,6 @@ export default async function GuidePage({ params }: Props) {
             2026-11-13 (components/travel/FujiTiming.tsx): it asked for the
             direction a second time and only knew ten days by the hour. */}
 
-        {renderEarlyShinkansenHotelStrip()}
 
         {/* Two-column layout on desktop: article + sidebar */}
         <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-10 lg:items-start">
@@ -1752,7 +1377,7 @@ export default async function GuidePage({ params }: Props) {
             <p className="text-[12px] text-slate-600">{copy.nightText}</p>
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.liveH3}</h3>
             <p className="text-[12px] text-slate-600">
-              {copy.liveTextBefore} <Link href="/#seat-checker" className="font-semibold text-sky-700 underline underline-offset-2">{copy.liveLink}</Link> {copy.liveTextAfter}
+              {copy.liveTextBefore} <a href="#fuji-seat-check" className="font-semibold text-sky-700 underline underline-offset-2">{copy.liveLink}</a> {copy.liveTextAfter}
             </p>
           </section>
 
@@ -1819,54 +1444,6 @@ export default async function GuidePage({ params }: Props) {
                 {t("jrNozomiNote")}
               </p>
             </div>
-            <p className="mt-3 text-[12px] text-slate-600">
-              For a route-level decision before buying, use the{" "}
-              <Link href="/jr-pass-vs-single-ticket" className="font-semibold text-sky-700 underline underline-offset-2">
-                JR Pass vs single ticket guide
-              </Link>
-              .
-            </p>
-            {/* Moved here from /jr-pass-vs-single-ticket, which sits at
-                position 36 and drew no impressions on these rows at all. The
-                readers deciding between a pass and a ticket are on this page. */}
-            <KlookProductRow
-              heading="Staying in one region?"
-              intro="A whole-Japan pass rarely pays off for a single region. These cover the same ground for less."
-              placement="regional_pass_row"
-              pagePath={guidePath}
-              locale={locale}
-              limit={2}
-              className="mt-3"
-              items={[
-                { linkId: "passKansaiThru", note: "Private rail and subway across Osaka, Kyoto and Nara.", product: "regional_pass" },
-                { linkId: "passTokyoSubway", note: "24 / 48 / 72-hour unlimited Tokyo subway.", product: "regional_pass" },
-              ]}
-            />
-            <div className="mt-3 rounded-2xl border border-orange-100 bg-orange-50/70 px-3.5 py-3">
-              <p className="text-[12px] font-semibold leading-5 text-slate-950">
-                If your route includes Tokyo → Kyoto/Osaka → Hiroshima, several long JR rides, or a return to Tokyo, check JR Pass options before booking single tickets.
-              </p>
-              <TrackedAffiliateLink
-                href={JR_PASS_URL}
-                target="_blank"
-                rel={AFFILIATE_REL}
-                category="train"
-                provider="klook"
-                placement="guide_jr_pass_section"
-                pagePath={guidePath}
-                locale={locale}
-                label="Check JR Pass options on Klook"
-                linkId="jrPass"
-                product="jr_pass"
-                adid="1165791"
-                className={`mt-3 ${KLOOK_FILLED_CTA}`}
-              >
-                Check JR Pass options on Klook
-              </TrackedAffiliateLink>
-            </div>
-            <p className="mt-3 text-[12px] text-slate-600">
-              {copy.itineraryBefore} <Link href="/itineraries/7-day-first-time-japan" className="font-semibold text-sky-700 underline underline-offset-2">{copy.itineraryLink}</Link>.
-            </p>
           </section>
 
           <section id="book-seat-e" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
@@ -1889,11 +1466,8 @@ export default async function GuidePage({ params }: Props) {
             <p className="text-[12px] text-slate-600">{copy.klookText}</p>
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.jrPassCounterH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.jrPassCounterTextBefore} <Link href="/areas-to-stay" className="font-semibold text-sky-700 underline underline-offset-2">{copy.stayLink}</Link>.</p>
-            {renderHotelBridge()}
-            {renderSeatBookingReminder()}
           </section>
 
-          {renderAfterSeatNextSteps()}
 
           <section id="common-mistakes" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
             <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
@@ -1906,7 +1480,7 @@ export default async function GuidePage({ params }: Props) {
               <li><span className="font-semibold">{t("s4Bullet3Bold")}</span> {t("s4Bullet3")}</li>
             </ul>
             <p className="mt-3 text-[12px] text-slate-600">
-              {copy.mistakesTextBefore} <Link href="/airport-transfers/narita-to-shinjuku" className="font-semibold text-sky-700 underline underline-offset-2">{copy.mistakesLink}</Link> {copy.mistakesTextAfter}
+              {copy.mistakesTextBefore} {copy.mistakesLink} {copy.mistakesTextAfter}
             </p>
           </section>
 
@@ -1924,7 +1498,6 @@ export default async function GuidePage({ params }: Props) {
             </p>
           </section>
 
-          {renderTravelEssentials()}
 
           {/* Section D: FAQ */}
           <section id="faq" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
@@ -1958,45 +1531,17 @@ export default async function GuidePage({ params }: Props) {
               {t("makeEasyP2")}
             </p>
             <div className="mt-3">
-              <Link
-                href="/"
+              <a
+                href="#fuji-seat-check"
                 className="inline-flex items-center justify-center rounded-2xl border border-[#2E7D5B] bg-[#2E7D5B] px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-emerald-100 transition-colors hover:bg-[#246449] active:brightness-95"
               >
                 {t("openChecker")}
-              </Link>
+              </a>
             </div>
           </section>
 
           {renderSeatGuides()}
 
-          {/* The closest contextual match on the site: this page exists to get
-              readers a view of Fuji from the train. */}
-          <KlookProductRow
-            heading="Want to see Mt. Fuji up close?"
-            intro="The train window is a few minutes. These are the usual ways to spend a day at the mountain."
-            placement="fuji_activity_row"
-            pagePath={guidePath}
-            locale={locale}
-            limit={2}
-            className="mb-5"
-            items={[
-              { linkId: "fujiDayTourTokyo", note: "One day from Tokyo, no planning required.", product: "activity" },
-              { linkId: "fujiKawaguchikoPass", note: "Lake Kawaguchiko area pass for getting around.", product: "activity" },
-            ]}
-          />
-
-          {/* §4-3 compact Stay Finder embed — navigation-layer module kept
-              below the answer article per the phase-1 structure constraint. */}
-          <CompactStayFinder locale={locale} pagePath={guidePath} placement="guide_compact_finder" />
-
-          {renderContinuePlanning()}
-
-          <ShareThisPage
-            title="Which Shinkansen Seat to See Mt. Fuji?"
-            placement="guide_footer"
-            description="Was this Shinkansen seat guide helpful? Share it with someone planning a Japan trip."
-            locale={locale}
-          />
 
         </div>
         </div>{/* close main column */}
@@ -2027,15 +1572,6 @@ export default async function GuidePage({ params }: Props) {
       </div>
       <SiteFooter />
 
-      {/* Mobile sticky CTA — only after the Seat Checker has been answered
-          (direction persisted), dismissible per session, hides near the
-          footer, zero CLS (fixed overlay). */}
-      <GuideStickyCta
-        href={KLOOK_URL}
-        locale={locale}
-        pagePath={guidePath}
-        copy={{ confirmed: ui.stickyConfirmed, button: ui.stickyButton }}
-      />
     </main>
   );
 }

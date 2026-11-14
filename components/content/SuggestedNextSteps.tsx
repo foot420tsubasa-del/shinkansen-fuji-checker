@@ -1,9 +1,8 @@
 "use client";
 
-import { ArrowRight, Bed, CalendarDays, Leaf, Plane, Signpost, Train, Wifi } from "lucide-react";
+import { ArrowRight, Bed, Leaf, Signpost, Train } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { ESIM_URL } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { trackAffiliateClick } from "@/lib/analytics";
 
@@ -23,26 +22,36 @@ type SuggestedNextStepsProps = {
   excludeTypes?: string[];
 };
 
-const steps = [
+type Step = {
+  type: string;
+  title: string;
+  desc: string;
+  href: string;
+  icon: typeof Train;
+  /** An affiliate destination, styled and tracked as one. None at present. */
+  external?: boolean;
+};
+
+const steps: Step[] = [
   { type: "stay", title: "Choose where to stay", desc: "Compare Tokyo bases before booking hotels.", href: "/areas-to-stay", icon: Bed },
-  { type: "transfer", title: "Compare airport transfer", desc: "Pick the route that fits luggage and arrival time.", href: "/airport-transfers/narita-to-shinjuku", icon: Plane },
   { type: "train-signs", title: "Read Japanese train signs", desc: "Learn line, direction, train type, platform, and exit.", href: "/how-to-read-japanese-train-signs", icon: Signpost },
-  { type: "esim", title: "Get Japan eSIM", desc: "Set up maps, translation, and transit before landing.", href: ESIM_URL, icon: Wifi, external: true },
   { type: "guide", title: "Check Shinkansen seat", desc: "Find the Fuji-side seat before booking.", href: "/guide", icon: Train },
-  { type: "itinerary", title: "Open 7-day itinerary", desc: "Place Tokyo, Fuji, Kyoto, and Osaka in order.", href: "/itineraries/7-day-first-time-japan", icon: CalendarDays },
   { type: "local-tokyo", title: "Explore Local Tokyo", desc: "Add quieter local neighborhoods without changing your base.", href: "/local-tokyo", icon: Leaf },
 ];
 
+/* Cut 2026-11-14: the airport-transfer and 7-day-itinerary cards pointed at
+   pages retired from the index, and the eSIM card drew no clicks. What is left
+   only links to pages that are live and in the sitemap. */
 const pageTypeStepOrder: Record<SuggestedNextStepsProps["currentPageType"], string[]> = {
-  guide: ["seat", "train-signs", "itinerary"],
-  seat: ["guide", "train-signs", "itinerary"],
-  stay: ["transfer", "itinerary", "train-signs"],
-  transfer: ["stay", "esim", "itinerary"],
-  itinerary: ["stay", "transfer", "guide"],
-  "local-tokyo": ["stay", "itinerary", "train-signs"],
-  planner: ["stay", "transfer", "guide"],
-  train: ["guide", "stay", "itinerary"],
-  "train-signs": ["guide", "transfer", "stay"],
+  guide: ["train-signs", "stay"],
+  seat: ["guide", "train-signs"],
+  stay: ["train-signs", "guide"],
+  transfer: ["stay", "guide"],
+  itinerary: ["stay", "guide"],
+  "local-tokyo": ["stay", "train-signs"],
+  planner: ["stay", "guide"],
+  train: ["guide", "stay"],
+  "train-signs": ["guide", "stay"],
 };
 
 export function SuggestedNextSteps({

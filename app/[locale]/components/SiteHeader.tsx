@@ -4,7 +4,25 @@ import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { BrandMark } from "@/components/ui/BrandMark";
 import { LanguageSelector } from "./LanguageSelector";
+import type { MouseEvent } from "react";
 import { trackCtaClick } from "@/lib/analytics";
+
+/**
+ * "Check Seat" goes to the homepage's checker by default. On a page that
+ * carries its own checker — the guide, the direction pages, the timing page —
+ * that sent readers away from the copy in front of them, so there it scrolls
+ * to the one on the page instead. The href stays, so the link still works
+ * without JavaScript and still reads as a link to the checker.
+ */
+function preferOnPageChecker(event: MouseEvent<HTMLAnchorElement>, category: string) {
+  if (category !== "seat_checker") return;
+  const target = document.getElementById("fuji-seat-check");
+  if (!target) return;
+  event.preventDefault();
+  // An instant jump, like any in-page anchor: smooth scrolling is not run in
+  // every browser context, and a link that silently does nothing is worse.
+  target.scrollIntoView({ block: "start" });
+}
 
 export function SiteHeader() {
   const t = useTranslations("home");
@@ -13,14 +31,17 @@ export function SiteHeader() {
   const desktopNavLinks = [
     { href: "/#seat-checker", label: t("nav.seat"), category: "seat_checker" },
     { href: "/areas-to-stay", label: t("nav.stay"), category: "stay" },
-    { href: "/plan-your-trip#rail", label: t("nav.railGuide"), category: "rail" },
-    { href: "/plan-your-trip#arrival", label: t("nav.arrivalPrep"), category: "arrival" },
+    // Was /plan-your-trip#rail, a page retired from the index; the Shinkansen
+    // guide is the rail content that ranks.
+    { href: "/guide", label: t("nav.railGuide"), category: "rail" },
+    // Was /plan-your-trip#arrival (retired); Suica is the arrival step readers search for.
+    { href: "/how-to-buy-suica", label: t("nav.arrivalPrep"), category: "arrival" },
   ];
   const mobileNavLinks = [
     { href: "/#seat-checker", label: t("nav.seat"), category: "seat_checker" },
     { href: "/areas-to-stay", label: t("nav.stay"), category: "stay" },
-    { href: "/plan-your-trip#rail", label: t("nav.rail"), category: "rail" },
-    { href: "/plan-your-trip#arrival", label: t("nav.arrival"), category: "arrival" },
+    { href: "/guide", label: t("nav.rail"), category: "rail" },
+    { href: "/how-to-buy-suica", label: t("nav.arrival"), category: "arrival" },
   ];
 
   return (
@@ -41,15 +62,16 @@ export function SiteHeader() {
             <Link
               key={link.href}
               href={link.href}
-              onClick={() =>
+              onClick={(event) => {
                 trackCtaClick({
                   placement: "header",
                   href: link.href,
                   label: link.label,
                   category: link.category,
                   locale,
-                })
-              }
+                });
+                preferOnPageChecker(event, link.category);
+              }}
               className="transition-colors hover:text-white"
             >
               {link.label}
@@ -66,15 +88,16 @@ export function SiteHeader() {
           <Link
             key={link.href}
             href={link.href}
-            onClick={() =>
+            onClick={(event) => {
               trackCtaClick({
                 placement: "mobile_header",
                 href: link.href,
                 label: link.label,
                 category: link.category,
                 locale,
-              })
-            }
+              });
+              preferOnPageChecker(event, link.category);
+            }}
             className="rounded-lg px-2 py-2 transition-colors hover:bg-slate-800 hover:text-white"
           >
             {link.label}

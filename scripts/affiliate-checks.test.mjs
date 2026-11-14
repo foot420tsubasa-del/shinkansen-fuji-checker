@@ -83,19 +83,21 @@ test("redirect uses the shared JST-safe date resolver, not its own clock math", 
 
 const guideSrc = readFileSync("app/[locale]/guide/page.tsx", "utf8");
 
-test("guide has exactly one Omio link", () => {
-  const renders = guideSrc.match(/OMIO_SHINKANSEN_URL \?/g) ?? [];
-  assert.equal(renders.length, 1, "expected exactly one conditional Omio render");
-});
-
-test("guide Omio is a text link with the multimodal wording, never a button", () => {
-  const idx = guideSrc.indexOf('placement="guide_route_comparison_text"');
-  assert.ok(idx > -1, "guide_route_comparison_text placement missing");
-  const block = guideSrc.slice(idx - 1200, idx + 1200);
-  assert.ok(block.includes('product="multimodal_route_comparison"'));
-  assert.ok(block.includes("underline"), "Omio must be styled as a text link");
-  assert.ok(!/rounded-(xl|2xl|\[12px\]) border.*bg-\[#D94A32\]/.test(block), "Omio must not use button chrome");
-  assert.ok(!guideSrc.includes("Still comparing Shinkansen"), "banned Omio wording");
+test("guide: the only booking links are the ones inside the seat checker", () => {
+  // Cut 2026-11-14. Over ninety days the seat checker's result CTA took 62
+  // clicks; the twenty-odd other booking links on the page — eSIM and SIM,
+  // regional passes, the JR Pass section, three generic "Book Shinkansen"
+  // buttons, the Fuji tour row, the mobile sticky bar — took 0-2 each. Omio
+  // went with them; it has rendered nothing since KLOOK_ONLY.
+  assert.ok(!guideSrc.includes("TrackedAffiliateLink"), "no standalone affiliate links on the guide");
+  assert.ok(!guideSrc.includes("KlookProductRow"), "no product rows on the guide");
+  assert.ok(!guideSrc.includes("<GuideStickyCta"), "the mobile sticky bar stays withdrawn");
+  assert.ok(!guideSrc.includes("OMIO_SHINKANSEN_URL"), "no Omio render on the guide");
+  for (const placement of ["guide_how_to_book", "guide_jr_pass_section", "guide_esim_checklist",
+    "guide_top_klook_shinkansen", "guide_article_inline", "regional_pass_row", "fuji_activity_row"]) {
+    assert.ok(!guideSrc.includes(placement), `${placement} was withdrawn and must not come back unmeasured`);
+  }
+  assert.ok(guideSrc.includes("<GuideSeatCheck"), "the checker is what earns; it stays");
 });
 
 test("the guide's quick-answer booking slot stays withdrawn", () => {
@@ -107,32 +109,44 @@ test("the guide's quick-answer booking slot stays withdrawn", () => {
   assert.ok(!guideSrc.includes("<GuideKlookCta"), "the quick-answer slot stays withdrawn");
 });
 
-test("required guide placements exist", () => {
-  for (const placement of [
-    // guide_quick_answer was here until 2026-11-06; the slot it named is gone,
-    // and "pre-interaction booking CTAs stay withdrawn" now guards its absence.
-    "guide_how_to_book",
-    "guide_mobile_sticky_after_checker",
-    "guide_jr_pass_section",
-    "guide_esim_checklist",
-    "guide_route_comparison_text",
-  ]) {
-    const inGuide = guideSrc.includes(placement);
-    const inComponents =
-      readFileSync("components/affiliate/GuideKlookCta.tsx", "utf8").includes(placement) ||
-      readFileSync("components/affiliate/GuideStickyCta.tsx", "utf8").includes(placement);
-    assert.ok(inGuide || inComponents, `missing placement: ${placement}`);
+test("main pages and shared parts link to no retired page", () => {
+  // Header, next-steps cards and the main pages were sending readers to pages
+  // this site had already retired from the index — two of the four header
+  // items among them. Footer excepted: it is the site map.
+  const retired = [...readFileSync("lib/retired-routes.ts", "utf8").matchAll(/^  "([^"]+)",$/gm)].map((m) => m[1]);
+  const files = [
+    "app/[locale]/components/SiteHeader.tsx",
+    "components/content/SuggestedNextSteps.tsx",
+    "app/[locale]/HomeClient.tsx",
+    "app/[locale]/guide/page.tsx",
+    "app/[locale]/shinkansen-seat-letters/page.tsx",
+    "app/[locale]/tokyo-to-kyoto-mt-fuji-seat/page.tsx",
+    "app/[locale]/kyoto-to-tokyo-mt-fuji-seat/page.tsx",
+    "app/[locale]/when-to-see-mt-fuji-shinkansen/page.tsx",
+    "app/[locale]/how-to-read-japanese-train-signs/page.tsx",
+    "app/[locale]/shinkansen-green-car-worth-it/page.tsx",
+  ];
+  for (const file of files) {
+    const src = readFileSync(file, "utf8");
+    for (const path of retired) {
+      // Any quoted occurrence of the path: href="…", href: "…", and the
+      // ["/path", "key"] tuples some pages build their link lists from.
+      const quote = "[\"'`]";
+      const escaped = path.replace(/[/-]/g, (m) => "\\" + m);
+      const re = new RegExp(quote + escaped + "([\"'`#?])");
+      assert.ok(!re.test(src), `${file} links to the retired ${path}`);
+    }
   }
 });
 
-test("guide Klook CTAs carry the spec link ids", () => {
-  assert.ok(
-    readFileSync("components/affiliate/GuideKlookCta.tsx", "utf8").includes("guide_klook_quick_answer"),
-  );
-  assert.ok(guideSrc.includes("guide_klook_how_to_book"));
-  assert.ok(
-    readFileSync("components/affiliate/GuideStickyCta.tsx", "utf8").includes("guide_klook_mobile_sticky"),
-  );
+test("a page with its own checker sends readers to it, not to the homepage's", () => {
+  const checker = readFileSync("components/travel/GuideSeatCheck.tsx", "utf8");
+  assert.ok(checker.includes('id="fuji-seat-check"'), "the anchor in-page links rely on");
+  for (const file of ["app/[locale]/guide/page.tsx", "app/[locale]/tokyo-to-kyoto-mt-fuji-seat/page.tsx", "app/[locale]/kyoto-to-tokyo-mt-fuji-seat/page.tsx"]) {
+    assert.ok(!readFileSync(file, "utf8").includes('href="/#seat-checker"'), `${file} still sends readers to the homepage checker`);
+  }
+  const header = readFileSync("app/[locale]/components/SiteHeader.tsx", "utf8");
+  assert.ok(header.includes('getElementById("fuji-seat-check")'), "the header's Check Seat must prefer an on-page checker");
 });
 
 test("direction changes the quick-answer CTA copy", () => {
