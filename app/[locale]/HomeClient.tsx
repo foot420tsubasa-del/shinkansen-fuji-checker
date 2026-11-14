@@ -159,7 +159,7 @@ function VisibilityChip({
       ].join(" ")}
     >
       <span aria-hidden="true">{data ? VIS_EMOJI[data.visibility] : "🌤️"}</span>
-      <span className="truncate">
+      <span className="min-w-0 truncate">
         <span className={tone === "dark" ? "text-white/60" : "text-slate-500"}>{t("hero.today")}:</span> {label}
       </span>
     </p>
@@ -351,8 +351,8 @@ export default function HomeClient() {
           below the headline and the photo; now they are the first thing to
           press, and the answer opens where the photo was. */}
       <section id="seat-checker" className="scroll-mt-16 bg-white">
-        <div className="mx-auto grid max-w-[1180px] items-center gap-8 px-5 pb-10 pt-8 md:grid-cols-2 md:gap-12 md:px-7 md:pb-16 md:pt-14">
-          <div className="text-center md:text-left">
+        <div className="mx-auto grid max-w-[1180px] grid-cols-1 items-center gap-8 px-5 pb-10 pt-8 md:grid-cols-2 md:gap-12 md:px-7 md:pb-16 md:pt-14">
+          <div className="min-w-0 text-center md:text-left">
             <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">{t("hero.eyebrow")}</p>
             <h1 className="mt-3 text-[34px] font-extrabold leading-[1.06] tracking-[-0.03em] text-ink sm:text-[42px] md:text-[52px] md:leading-[1.02]">
               {t("brandTitle").split("\n").map((line) => (
@@ -401,9 +401,9 @@ export default function HomeClient() {
             </ul>
           </div>
 
-          <div ref={answerRef} className="scroll-mt-20">
+          <div ref={answerRef} className="min-w-0 scroll-mt-20">
             {hasChecked ? (
-              <div className="grid gap-4">
+              <div className="grid grid-cols-1 gap-4">
                 <div className="rounded-[24px] bg-ink p-6 text-left text-white shadow-[0_18px_44px_rgba(11,18,32,0.25)] md:p-7">
                   <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/60">{currentDirectionLabel}</p>
                   <p className="mt-2 text-[48px] font-extrabold leading-none tracking-[-0.03em] md:text-[60px]">
@@ -437,7 +437,7 @@ export default function HomeClient() {
       </section>
 
       <div className="mx-auto max-w-[1180px] px-5 md:px-7">
-        <section className="grid gap-5 pb-4 pt-8 lg:grid-cols-2">
+        <section className="grid grid-cols-1 gap-5 pb-4 pt-8 lg:grid-cols-2">
           {hasChecked ? (
             <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.05)] md:p-6">
               <p className="text-lg font-bold tracking-[-0.01em] text-ink">When to look</p>
