@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Bed, Leaf, Signpost, Train } from "lucide-react";
+import { ArrowRight, Bed, Signpost, Train } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -36,7 +36,6 @@ const steps: Step[] = [
   { type: "stay", title: "Choose where to stay", desc: "Compare Tokyo bases before booking hotels.", href: "/areas-to-stay", icon: Bed },
   { type: "train-signs", title: "Read Japanese train signs", desc: "Learn line, direction, train type, platform, and exit.", href: "/how-to-read-japanese-train-signs", icon: Signpost },
   { type: "guide", title: "Check Shinkansen seat", desc: "Find the Fuji-side seat before booking.", href: "/guide", icon: Train },
-  { type: "local-tokyo", title: "Explore Local Tokyo", desc: "Add quieter local neighborhoods without changing your base.", href: "/local-tokyo", icon: Leaf },
 ];
 
 /* Cut 2026-11-14: the airport-transfer and 7-day-itinerary cards pointed at

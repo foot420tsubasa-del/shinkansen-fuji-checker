@@ -13,7 +13,6 @@ import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { Rail3dEmbed } from "@/components/rail3d/Rail3dEmbed";
 import { AdSlot } from "@/components/ads/AdSlot";
-import { buttonClassName } from "@/components/ui/Button";
 import { LineCodeTable } from "@/components/content/LineCodeTable";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -105,9 +104,6 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
     { href: "/areas-to-stay/asakusa-vs-ueno", key: "beforeShinkansen", type: "stay" as const },
   ];
 
-  // The Suica simulator promotion uses the dedicated suicaGuide
-  // namespace, which is already translated across every locale.
-  const tSuica = await getTranslations({ locale, namespace: "suicaGuide" });
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -458,27 +454,6 @@ export default async function JapaneseTrainSignsPage({ params }: Props) {
               the simulator used to share with Seat Checker / JR Pass /
               etc.; no new CTA was added.
             */}
-            <section className="rounded-[22px] border border-[#d9e5f2] bg-[linear-gradient(135deg,#f8fcff,#fff)] p-5 shadow-sm">
-              <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#145aa0]">
-                Practical next step
-              </p>
-              <h3 className="mt-1 text-lg font-bold text-slate-950 md:text-xl">
-                {tSuica("ctaLabel")}
-              </h3>
-              <p className="mt-1 max-w-3xl text-sm leading-6 text-slate-600">
-                {tSuica("ctaDescription")}
-              </p>
-              <div className="mt-4">
-                <Link
-                  href="/how-to-buy-suica"
-                  className={buttonClassName({ variant: "primaryTool", size: "lg" })}
-                >
-                  {tSuica("ctaLabel")}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </section>
-
             <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
               <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">{t("suggested.eyebrow")}</p>
               <div className="mt-4 grid gap-3 md:grid-cols-2">

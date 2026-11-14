@@ -109,7 +109,7 @@
       "stay": "Hotelbasis",
       "essentials": "Essentials",
       "about": "Über uns",
-      "guide": "Reiseführer",
+      "guide": "Fuji-Guide",
       "decisions": "Reiseentscheidungen",
       "questions": "Rückmeldung",
       "tagline": "Fuji-Sitz & Tokio-Hotelbasis",
@@ -118,7 +118,12 @@
       "railGuide": "Bahn-Guide",
       "arrivalPrep": "Ankunft vorbereiten",
       "rail": "Bahn",
-      "arrival": "Ankunft"
+      "arrival": "Ankunft",
+      "seatMap": "Sitzplan",
+      "when": "Wann sichtbar",
+      "guideShort": "Guide",
+      "seatMapShort": "Plan",
+      "whenShort": "Wann"
     },
     "decisions": {
       "eyebrow": "Travel Utility Hub",
@@ -374,7 +379,9 @@
       "feedbackTitle": "Feedback senden",
       "feedbackDesc": "Noch kein Newsletter. Anonyme Hinweise helfen zu entscheiden, welche Japan-Reisetools als Nächstes gebaut werden.",
       "feedbackCta": "Notiz hinterlassen",
-      "affiliateNote": "Einige Links sind Affiliate-Links — Details siehe Bedingungen."
+      "affiliateNote": "Einige Links sind Affiliate-Links — Details siehe Bedingungen.",
+      "kyotoTokyo": "Sitz Kyoto → Tokio",
+      "trainSigns": "Japanische Bahnschilder"
     },
     "stationPractice": {
       "label": "Neues Tool",

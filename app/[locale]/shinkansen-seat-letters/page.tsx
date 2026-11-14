@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { ArrowRight, Mountain, Info } from "lucide-react";
+import { Mountain, Info } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
-import { KLOOK_URL } from "@/src/affiliateLinks";
+import { JR_PASS_URL, KLOOK_URL } from "@/src/affiliateLinks";
+import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
+import { seatCheckCopy } from "@/lib/copy/seat-check";
 import { SeatLayoutDiagram } from "@/components/content/SeatLayoutDiagram";
 import { KlookProductRow } from "@/components/affiliate/KlookProductRow";
 import { SeatMapTool } from "@/components/travel/SeatMapTool";
@@ -97,26 +99,24 @@ export default async function SeatLettersPage({ params }: Props) {
           </ul>
         </section>
 
-        <section className="mt-6 rounded-[22px] border border-sky-100 bg-sky-50/70 p-5 shadow-sm">
-          <p className="text-sm font-semibold text-slate-950">{t("checker.title")}</p>
-          <p className="mt-1 text-xs leading-5 text-slate-600">{t("checker.note")}</p>
-          <div className="mt-4 flex flex-wrap gap-3">
-            <Link
-              href="/#seat-checker"
-              className="inline-flex items-center gap-2 rounded-lg border border-[#2E7D5B] bg-[#2E7D5B] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#246449]"
-            >
-              {t("checker.open")}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/guide"
-              className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-bold text-slate-700 transition-colors hover:bg-slate-50"
-            >
+        {/* Was a button to the homepage's checker: 94 readers in thirty days —
+            about one in five here — left this page to use it. The checker now
+            sits where they were looking, and an outbound answer books the
+            Tokyo–Kyoto route link directly. */}
+        <div className="mt-6">
+          <GuideSeatCheck
+            href={KLOOK_URL}
+            jrPassHref={JR_PASS_URL}
+            locale={locale}
+            pagePath={pagePath}
+            copy={seatCheckCopy(locale)}
+          />
+          <p className="-mt-2 text-xs">
+            <Link href="/guide" className="font-semibold text-sky-700 underline underline-offset-2">
               {t("checker.guide")}
-              <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
-        </section>
+          </p>
+        </div>
 
         {/* The page's top query is "shinkansen seat map" by a wide margin, so
             the map comes before the prose. Pick a car, see that car's rows. */}

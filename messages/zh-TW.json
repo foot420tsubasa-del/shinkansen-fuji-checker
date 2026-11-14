@@ -109,7 +109,7 @@
       "stay": "住宿基地",
       "essentials": "必備準備",
       "about": "關於",
-      "guide": "指南",
+      "guide": "富士山指南",
       "decisions": "旅行決策",
       "questions": "回饋",
       "tagline": "富士座位 & 東京住宿基地",
@@ -118,7 +118,12 @@
       "railGuide": "鐵道指南",
       "arrivalPrep": "抵達準備",
       "rail": "鐵道",
-      "arrival": "抵達"
+      "arrival": "抵達",
+      "seatMap": "座位圖",
+      "when": "何時可見",
+      "guideShort": "指南",
+      "seatMapShort": "座位圖",
+      "whenShort": "時間"
     },
     "decisions": {
       "eyebrow": "旅行實用工具",
@@ -374,7 +379,9 @@
       "feedbackTitle": "傳送回饋",
       "feedbackDesc": "目前還沒有 newsletter。匿名留言能幫助決定接下來要做哪些日本旅行工具。",
       "feedbackCta": "留一條建議",
-      "affiliateNote": "部分連結為聯盟連結，詳情請查看條款。"
+      "affiliateNote": "部分連結為聯盟連結，詳情請查看條款。",
+      "kyotoTokyo": "京都 → 東京座位",
+      "trainSigns": "日本車站標示"
     },
     "stationPractice": {
       "label": "新工具",

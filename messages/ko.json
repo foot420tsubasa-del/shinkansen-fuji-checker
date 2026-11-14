@@ -109,7 +109,7 @@
       "stay": "호텔 거점",
       "essentials": "필수 준비",
       "about": "소개",
-      "guide": "가이드",
+      "guide": "후지산 가이드",
       "decisions": "여행 결정",
       "questions": "피드백",
       "tagline": "후지 좌석 & 도쿄 호텔 거점",
@@ -118,7 +118,12 @@
       "railGuide": "철도 가이드",
       "arrivalPrep": "도착 준비",
       "rail": "철도",
-      "arrival": "도착"
+      "arrival": "도착",
+      "seatMap": "좌석 배치도",
+      "when": "보이는 시간",
+      "guideShort": "가이드",
+      "seatMapShort": "배치도",
+      "whenShort": "시간"
     },
     "decisions": {
       "eyebrow": "여행 유틸리티 허브",
@@ -374,7 +379,9 @@
       "feedbackTitle": "피드백 보내기",
       "feedbackDesc": "아직 뉴스레터는 없습니다. 익명 메모는 다음에 만들 일본 여행 도구를 정하는 데 도움이 됩니다.",
       "feedbackCta": "메모 남기기",
-      "affiliateNote": "일부 링크는 제휴 링크입니다. 자세한 내용은 이용약관을 확인하세요."
+      "affiliateNote": "일부 링크는 제휴 링크입니다. 자세한 내용은 이용약관을 확인하세요.",
+      "kyotoTokyo": "교토 → 도쿄 좌석",
+      "trainSigns": "일본 역 표지판"
     },
     "stationPractice": {
       "label": "새 도구",

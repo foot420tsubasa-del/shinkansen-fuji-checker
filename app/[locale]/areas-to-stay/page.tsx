@@ -46,13 +46,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 const guideGroups = [
   {
     cityKey: "tokyo",
-    // The five comparison pages still in the index; everything else under
-    // /areas-to-stay was folded on 2026-09-29.
+    // The two comparison pages still in the index. Tokyo Station vs Shinjuku
+    // (7 search clicks in ninety days) and the three-way comparison (5) were
+    // retired on 2026-11-14 with the cut to five core pages.
     slugs: [
       "asakusa-vs-ueno",
       "ueno-vs-shinjuku",
-      "tokyo-station-vs-shinjuku",
-      "shinjuku-vs-ueno-vs-asakusa",
     ],
   },
 ] as const;
@@ -248,22 +247,6 @@ export default async function AreasToStayIndex({ params }: Props) {
             })}
           </div>
 
-          {/* The room-size guide is in the sitemap but is not a stayPages slug,
-              so the grid above never listed it — leaving an indexed page with
-              no way in. */}
-          <TrackedInternalLink
-            href="/areas-to-stay/tokyo-hotel-room-size-guide"
-            sourcePage={pagePath}
-            placement="stay_hub_room_size_guide"
-            label={t("roomSizeGuide.title")}
-            locale={locale}
-            className="group mt-4 block rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left transition-colors hover:border-slate-300 hover:bg-slate-50"
-          >
-            <h3 className="text-sm font-semibold leading-5 text-slate-950 group-hover:text-[#106b43]">
-              {t("roomSizeGuide.title")}
-            </h3>
-            <p className="mt-1.5 text-xs leading-5 text-slate-600">{t("roomSizeGuide.description")}</p>
-          </TrackedInternalLink>
         </section>
 
       </Container>

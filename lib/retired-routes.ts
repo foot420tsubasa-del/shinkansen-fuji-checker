@@ -58,6 +58,17 @@ export const RETIRED_PATHS: readonly string[] = [
   "/shinkansen-reserved-vs-non-reserved",
   "/tokyo-to-kyoto-shinkansen-ticket",
   "/tokyo-to-osaka-mt-fuji-seat",
+  /* Retired 2026-11-14, when the site was cut to five core pages. Ninety days
+     of search clicks / booking clicks: local-tokyo 4/0 (its six area pages
+     were already retired), room-size guide 4/0, green-car 13/0,
+     tokyo-station-vs-shinjuku 7/0, shinjuku-vs-ueno-vs-asakusa 5/2,
+     how-to-buy-suica 2/0. Together under 1% of search clicks. */
+  "/local-tokyo",
+  "/areas-to-stay/tokyo-hotel-room-size-guide",
+  "/shinkansen-green-car-worth-it",
+  "/areas-to-stay/tokyo-station-vs-shinjuku",
+  "/areas-to-stay/shinjuku-vs-ueno-vs-asakusa",
+  "/how-to-buy-suica",
 ];
 
 /**

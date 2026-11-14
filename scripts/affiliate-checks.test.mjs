@@ -124,7 +124,8 @@ test("main pages and shared parts link to no retired page", () => {
     "app/[locale]/kyoto-to-tokyo-mt-fuji-seat/page.tsx",
     "app/[locale]/when-to-see-mt-fuji-shinkansen/page.tsx",
     "app/[locale]/how-to-read-japanese-train-signs/page.tsx",
-    "app/[locale]/shinkansen-green-car-worth-it/page.tsx",
+    // shinkansen-green-car-worth-it left this list when it was retired on
+    // 2026-11-14; a retired page naming its own URL is not a link to it.
   ];
   for (const file of files) {
     const src = readFileSync(file, "utf8");

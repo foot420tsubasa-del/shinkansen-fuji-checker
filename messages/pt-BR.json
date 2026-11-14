@@ -109,7 +109,7 @@
       "stay": "Base hoteleira",
       "essentials": "Essenciais",
       "about": "Sobre",
-      "guide": "Guia",
+      "guide": "Guia do Fuji",
       "decisions": "Decisões de viagem",
       "questions": "Comentários",
       "tagline": "Assento Fuji e base hoteleira em Tóquio",
@@ -118,7 +118,12 @@
       "railGuide": "Guia ferroviário",
       "arrivalPrep": "Preparação de chegada",
       "rail": "Ferrovia",
-      "arrival": "Chegada"
+      "arrival": "Chegada",
+      "seatMap": "Mapa de assentos",
+      "when": "Quando ver",
+      "guideShort": "Guia",
+      "seatMapShort": "Mapa",
+      "whenShort": "Quando"
     },
     "decisions": {
       "eyebrow": "Ferramentas de viagem",
@@ -374,7 +379,9 @@
       "feedbackTitle": "Enviar feedback",
       "feedbackDesc": "Ainda não há newsletter. Notas anônimas ajudam a decidir quais ferramentas de viagem para o Japão criar depois.",
       "feedbackCta": "Deixar uma nota",
-      "affiliateNote": "Alguns links são de afiliados; veja os Termos para detalhes."
+      "affiliateNote": "Alguns links são de afiliados; veja os Termos para detalhes.",
+      "kyotoTokyo": "Assento Quioto → Tóquio",
+      "trainSigns": "Placas de trem no Japão"
     },
     "stationPractice": {
       "label": "Nova ferramenta",
