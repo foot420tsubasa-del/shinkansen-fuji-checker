@@ -209,6 +209,10 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
                 <span className="font-bold text-[#082653]">Seat letters A–E explained</span>
                 <span className="mt-1 block text-xs text-[#5f7190]">Window, aisle, and layout breakdown.</span>
               </Link>
+              <Link href="/shinkansen-green-car-worth-it" className="rounded-[18px] border border-[#d9e5f2] bg-white p-4 text-sm shadow-sm transition-colors hover:bg-[#f8fbff]">
+                <span className="font-bold text-[#082653]">Is the Green Car worth it?</span>
+                <span className="mt-1 block text-xs text-[#5f7190]">Seat D in the Green Car is the Fuji-side window — and when the extra cost pays.</span>
+              </Link>
             </div>
           </section>
 

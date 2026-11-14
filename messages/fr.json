@@ -109,7 +109,7 @@
       "stay": "Base hôtel",
       "essentials": "Essentiels",
       "about": "À propos",
-      "guide": "Guide du Fuji",
+      "guide": "Le guide",
       "decisions": "Décisions de voyage",
       "questions": "Avis",
       "tagline": "Siège Fuji & base hôtel Tokyo",
@@ -118,12 +118,7 @@
       "railGuide": "Guide ferroviaire",
       "arrivalPrep": "Préparation à l'arrivée",
       "rail": "Train",
-      "arrival": "Arrivée",
-      "seatMap": "Plan des sièges",
-      "when": "Quand le voir",
-      "guideShort": "Guide",
-      "seatMapShort": "Plan",
-      "whenShort": "Quand"
+      "arrival": "Arrivée"
     },
     "decisions": {
       "eyebrow": "Outils de voyage",
@@ -379,9 +374,7 @@
       "feedbackTitle": "Envoyer un avis",
       "feedbackDesc": "Pas de newsletter. Vos notes anonymes aident à choisir les prochains outils de voyage à développer.",
       "feedbackCta": "Laisser un message",
-      "affiliateNote": "Certains liens sont des liens affiliés — voir Conditions pour plus de détails.",
-      "kyotoTokyo": "Siège Kyoto → Tokyo",
-      "trainSigns": "Panneaux de gare japonais"
+      "affiliateNote": "Certains liens sont des liens affiliés — voir Conditions pour plus de détails."
     },
     "stationPractice": {
       "label": "Nouvel outil",

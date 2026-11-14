@@ -28,20 +28,20 @@ export function SiteHeader() {
   const t = useTranslations("home");
   const locale = useLocale();
 
-  // The five core pages (2026-11-14). Together with the homepage they take
-  // 90% of search clicks and 87% of booking clicks; everything else left the
-  // navigation.
   const desktopNavLinks = [
     { href: "/#seat-checker", label: t("nav.seat"), category: "seat_checker" },
-    { href: "/guide", label: t("nav.guide"), category: "rail" },
-    { href: "/shinkansen-seat-letters", label: t("nav.seatMap"), category: "rail" },
-    { href: "/when-to-see-mt-fuji-shinkansen", label: t("nav.when"), category: "rail" },
+    { href: "/areas-to-stay", label: t("nav.stay"), category: "stay" },
+    // Was /plan-your-trip#rail, a page retired from the index; the Shinkansen
+    // guide is the rail content that ranks.
+    { href: "/guide", label: t("nav.railGuide"), category: "rail" },
+    // Was /plan-your-trip#arrival (retired); Suica is the arrival step readers search for.
+    { href: "/how-to-buy-suica", label: t("nav.arrivalPrep"), category: "arrival" },
   ];
   const mobileNavLinks = [
     { href: "/#seat-checker", label: t("nav.seat"), category: "seat_checker" },
-    { href: "/guide", label: t("nav.guideShort"), category: "rail" },
-    { href: "/shinkansen-seat-letters", label: t("nav.seatMapShort"), category: "rail" },
-    { href: "/when-to-see-mt-fuji-shinkansen", label: t("nav.whenShort"), category: "rail" },
+    { href: "/areas-to-stay", label: t("nav.stay"), category: "stay" },
+    { href: "/guide", label: t("nav.rail"), category: "rail" },
+    { href: "/how-to-buy-suica", label: t("nav.arrival"), category: "arrival" },
   ];
 
   return (

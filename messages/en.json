@@ -109,7 +109,7 @@
       "stay": "Hotel Base",
       "essentials": "Essentials",
       "about": "About",
-      "guide": "Fuji Guide",
+      "guide": "Guide",
       "decisions": "Trip decisions",
       "questions": "Feedback",
       "tagline": "Fuji seat & Tokyo hotel base",
@@ -118,12 +118,7 @@
       "railGuide": "Rail Guide",
       "arrivalPrep": "Arrival Prep",
       "rail": "Rail",
-      "arrival": "Arrival",
-      "seatMap": "Seat Map",
-      "when": "When to See",
-      "guideShort": "Guide",
-      "seatMapShort": "Map",
-      "whenShort": "When"
+      "arrival": "Arrival"
     },
     "decisions": {
       "eyebrow": "Travel utility hub",
@@ -379,9 +374,7 @@
       "feedbackTitle": "Send feedback",
       "feedbackDesc": "No newsletter yet. Anonymous notes help decide which Japan travel tools to build next.",
       "feedbackCta": "Leave a note",
-      "affiliateNote": "Some links are affiliate links — see Terms for details.",
-      "kyotoTokyo": "Kyoto → Tokyo seat",
-      "trainSigns": "Japanese train signs"
+      "affiliateNote": "Some links are affiliate links — see Terms for details."
     },
     "stationPractice": {
       "label": "New tool",

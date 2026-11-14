@@ -39,21 +39,21 @@ export function SiteFooter() {
           <div>
             <h4 className="mb-3 text-xs font-black uppercase tracking-[0.06em] text-sky-200">{t("footer.plan")}</h4>
             <Link className={footerLinkClass} href="/#seat-checker" onClick={() => trackFooterLink("/#seat-checker", t("footer.seatChecker"), "seat_checker")}>{t("footer.seatChecker")}</Link>
-            <Link className={footerLinkClass} href="/guide" onClick={() => trackFooterLink("/guide", t("nav.guide"), "rail")}>{t("nav.guide")}</Link>
-            <Link className={footerLinkClass} href="/shinkansen-seat-letters" onClick={() => trackFooterLink("/shinkansen-seat-letters", t("nav.seatMap"), "rail")}>{t("nav.seatMap")}</Link>
-            <Link className={footerLinkClass} href="/when-to-see-mt-fuji-shinkansen" onClick={() => trackFooterLink("/when-to-see-mt-fuji-shinkansen", t("nav.when"), "rail")}>{t("nav.when")}</Link>
+            <Link className={footerLinkClass} href="/areas-to-stay" onClick={() => trackFooterLink("/areas-to-stay", t("nav.stay"), "stay")}>{t("nav.stay")}</Link>
+            <Link className={footerLinkClass} href="/guide" onClick={() => trackFooterLink("/guide", t("nav.railGuide"), "rail")}>{t("nav.railGuide")}</Link>
+            <Link className={footerLinkClass} href="/how-to-buy-suica" onClick={() => trackFooterLink("/how-to-buy-suica", t("nav.arrivalPrep"), "arrival")}>{t("nav.arrivalPrep")}</Link>
           </div>
 
           <div>
             <h4 className="mb-3 text-xs font-black uppercase tracking-[0.06em] text-sky-200">{t("footer.guides")}</h4>
-            <Link className={footerLinkClass} href="/kyoto-to-tokyo-mt-fuji-seat" onClick={() => trackFooterLink("/kyoto-to-tokyo-mt-fuji-seat", t("footer.kyotoTokyo"), "rail")}>{t("footer.kyotoTokyo")}</Link>
-            <Link className={footerLinkClass} href="/how-to-read-japanese-train-signs" onClick={() => trackFooterLink("/how-to-read-japanese-train-signs", t("footer.trainSigns"), "rail")}>{t("footer.trainSigns")}</Link>
+            <Link className={footerLinkClass} href="/guide" onClick={() => trackFooterLink("/guide", t("footer.shinkansenGuide"), "rail")}>{t("footer.shinkansenGuide")}</Link>
             <Link className={footerLinkClass} href="/areas-to-stay" onClick={() => trackFooterLink("/areas-to-stay", t("footer.stayAreas"), "stay")}>{t("footer.stayAreas")}</Link>
           </div>
 
           <div>
             <h4 className="mb-3 text-xs font-black uppercase tracking-[0.06em] text-sky-200">{t("footer.support")}</h4>
             <Link className={footerLinkClass} href="/about" onClick={() => trackFooterLink("/about", t("footer.about"), "support")}>{t("footer.about")}</Link>
+            <Link className={footerLinkClass} href="/local-tokyo" onClick={() => trackFooterLink("/local-tokyo", t("footer.localTokyo"), "local_tokyo")}>{t("footer.localTokyo")}</Link>
             <Link className={footerLinkClass} href="/privacy" onClick={() => trackFooterLink("/privacy", t("footer.privacy"), "support")}>{t("footer.privacy")}</Link>
             <Link className={footerLinkClass} href="/terms" onClick={() => trackFooterLink("/terms", t("footer.terms"), "support")}>{t("footer.terms")}</Link>
           </div>

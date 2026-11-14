@@ -124,8 +124,7 @@ test("main pages and shared parts link to no retired page", () => {
     "app/[locale]/kyoto-to-tokyo-mt-fuji-seat/page.tsx",
     "app/[locale]/when-to-see-mt-fuji-shinkansen/page.tsx",
     "app/[locale]/how-to-read-japanese-train-signs/page.tsx",
-    // shinkansen-green-car-worth-it left this list when it was retired on
-    // 2026-11-14; a retired page naming its own URL is not a link to it.
+    "app/[locale]/shinkansen-green-car-worth-it/page.tsx",
   ];
   for (const file of files) {
     const src = readFileSync(file, "utf8");
@@ -582,4 +581,36 @@ test("homepage: one h1, and the hero is the real photograph", () => {
   assert.ok(!/<h1\b/.test(panel), "the seat checker panel must not add a second h1");
   assert.ok(!home.includes("home-hero-train-fuji"), "the mockup screenshot must not come back as the hero");
   assert.ok(home.includes('id="seat-checker"'), "/#seat-checker links depend on this anchor");
+});
+
+test("revenue: the slots and links that earn stay wired", () => {
+  // The site earns about 1,000-2,000 yen a month, nearly all of it from the
+  // moment the seat checker answers. Over ninety days to 2026-11-13:
+  // guide_seat_result 62 clicks, home_seat_result 27, seat_map_result 9.
+  // Any cut that removes one of these, or breaks the links behind them,
+  // stops the income. This fails before that can ship.
+  const guide = readFileSync("app/[locale]/guide/page.tsx", "utf8");
+  const home = readFileSync("app/[locale]/HomeClient.tsx", "utf8");
+  const seatLetters = readFileSync("app/[locale]/shinkansen-seat-letters/page.tsx", "utf8");
+  const checker = readFileSync("components/travel/GuideSeatCheck.tsx", "utf8");
+  const seatMap = readFileSync("components/travel/SeatMapTool.tsx", "utf8");
+  assert.ok(guide.includes("<GuideSeatCheck"), "/guide must carry the seat checker");
+  assert.ok(seatLetters.includes("<GuideSeatCheck"), "seat-letters must carry the seat checker");
+  assert.ok(seatLetters.includes("<SeatMapTool"), "seat-letters must carry the seat map");
+  assert.ok(checker.includes('placement: "guide_seat_result"'), "the checker's booking CTA is the top earner");
+  assert.ok(checker.includes("getDirectionTicketLink"), "the outbound answer must book the route link");
+  assert.ok(home.includes('placement: "home_seat_result"'), "the homepage's result CTA earns too");
+  assert.ok(seatMap.includes('placement: "seat_map_result"'), "so does the seat map's");
+
+  // The links themselves: right programme id, right ad id, a real Klook redirect.
+  const links = JSON.parse(readFileSync("data/affiliate-links.json", "utf8"));
+  for (const [id, adid] of [["shinkansenTicket", "1265303"], ["shinkansenTokyoKyoto", "1443754"], ["jrPass", "1165791"]]) {
+    const link = links[id];
+    assert.ok(link, `${id} is missing from the link registry`);
+    assert.equal(link.adid, adid, `${id} must keep ad id ${adid}`);
+    assert.ok(
+      link.directUrl?.startsWith(`https://affiliate.klook.com/redirect?aid=104861&aff_adid=${adid}&k_site=`),
+      `${id} must point through Klook's affiliate redirect with aid 104861`,
+    );
+  }
 });

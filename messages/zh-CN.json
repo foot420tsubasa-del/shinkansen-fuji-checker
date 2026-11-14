@@ -109,7 +109,7 @@
       "stay": "住宿基地",
       "essentials": "必备准备",
       "about": "关于",
-      "guide": "富士山指南",
+      "guide": "指南",
       "decisions": "旅行决策",
       "questions": "反馈",
       "tagline": "富士座位 & 东京住宿基地",
@@ -118,12 +118,7 @@
       "railGuide": "铁道指南",
       "arrivalPrep": "抵达准备",
       "rail": "铁道",
-      "arrival": "抵达",
-      "seatMap": "座位图",
-      "when": "何时可见",
-      "guideShort": "指南",
-      "seatMapShort": "座位图",
-      "whenShort": "时间"
+      "arrival": "抵达"
     },
     "decisions": {
       "eyebrow": "旅行实用工具",
@@ -379,9 +374,7 @@
       "feedbackTitle": "发送反馈",
       "feedbackDesc": "目前还没有 newsletter。匿名留言能帮助决定接下来要做哪些日本旅行工具。",
       "feedbackCta": "留一条建议",
-      "affiliateNote": "部分链接为联盟链接，详情请查看条款。",
-      "kyotoTokyo": "京都 → 东京座位",
-      "trainSigns": "日本车站标识"
+      "affiliateNote": "部分链接为联盟链接，详情请查看条款。"
     },
     "stationPractice": {
       "label": "新工具",
