@@ -614,3 +614,13 @@ test("revenue: the slots and links that earn stay wired", () => {
     );
   }
 });
+
+test("posthog: inert until a project key is set", () => {
+  // Installed 2026-11-15 ahead of the key. With POSTHOG_KEY empty nothing is
+  // initialised, so the site behaves exactly as before.
+  const lib = readFileSync("lib/posthog.ts", "utf8");
+  const init = readFileSync("instrumentation-client.ts", "utf8");
+  assert.ok(init.includes("if (isPosthogEnabled())"), "init must stay behind the key check");
+  assert.ok(lib.includes('startsWith("phc_")'), "only a real project key turns it on");
+  assert.ok(init.includes('cookieless_mode: "always"'), "no cookies without a consent banner");
+});
