@@ -441,6 +441,14 @@
           "cta": "Sitz prüfen"
         }
       ]
+    },
+    "hero": {
+      "eyebrow": "Kostenlos · Ohne Anmeldung · 5 Sekunden",
+      "sub": "Tippe auf deine Fahrtrichtung. Wir zeigen dir genau den Fensterplatz, den du buchen solltest.",
+      "trustLocal": "Geschrieben von jemandem, der in Japan lebt",
+      "trustSource": "Basierend auf Angaben von JR Central",
+      "today": "Heute am Mt. Fuji",
+      "affiliateNote": "Wenn du über diese Links buchst, erhalten wir eventuell eine Provision – für dich ohne Mehrkosten."
     }
   },
   "guide": {

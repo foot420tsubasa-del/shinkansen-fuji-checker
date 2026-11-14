@@ -3,13 +3,21 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Shared palette, 2026-11-15 redesign: ink for text and dark surfaces, the
+     Mt. Fuji red for the one primary action on a screen. */
+  --ink: #0b1220;
+  --fuji-red: #d94a32;
+  --fuji-red-hover: #bf3d28;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--ink);
+  --color-fuji: var(--fuji-red);
+  --color-fuji-hover: var(--fuji-red-hover);
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", "Noto Sans KR", "Noto Sans SC", "Noto Sans TC", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,17 +30,17 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Was a peach-to-pink wash. US travel sites read clean: white, then the
+   faintest grey further down so white cards still separate from the page. */
 .page-shell {
-  background:
-    radial-gradient(circle at 14% 0%, rgba(251, 191, 36, 0.16), transparent 28rem),
-    radial-gradient(circle at 82% 2%, rgba(244, 114, 182, 0.12), transparent 24rem),
-    linear-gradient(180deg, #fff7ed 0%, #f0f7ff 22rem, #f6f8fb 48rem);
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 28rem, #f6f7f9 48rem);
 }
 
 .page-header {
-  background:
-    linear-gradient(90deg, rgba(255, 247, 237, 0.94), rgba(239, 246, 255, 0.94) 48%, rgba(255, 241, 242, 0.92));
+  background: linear-gradient(180deg, #ffffff 0%, #f6f7f9 100%);
 }

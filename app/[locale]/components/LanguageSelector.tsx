@@ -43,7 +43,8 @@ function getLocalizedPathname(pathname: string, nextLocale: string) {
   return basePath === "/" ? `/${nextLocale}` : `/${nextLocale}${basePath}`;
 }
 
-export function LanguageSelector() {
+/** "dark" sits on a dark header (station practice); "light" on the white site header. */
+export function LanguageSelector({ tone = "dark" }: { tone?: "dark" | "light" } = {}) {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -98,11 +99,15 @@ export function LanguageSelector() {
         aria-expanded={open}
         aria-haspopup="menu"
         onClick={() => setOpen((value) => !value)}
-        className="inline-flex h-10 items-center gap-2 rounded-lg border border-white/15 bg-white/8 px-3 text-xs font-black text-white shadow-sm transition-colors hover:border-sky-200/70 hover:bg-white/14 focus:outline-none focus:ring-2 focus:ring-sky-300"
+        className={
+          tone === "light"
+            ? "inline-flex h-9 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3 text-xs font-bold text-slate-800 transition-colors hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-slate-300"
+            : "inline-flex h-10 items-center gap-2 rounded-lg border border-white/15 bg-white/8 px-3 text-xs font-black text-white shadow-sm transition-colors hover:border-sky-200/70 hover:bg-white/14 focus:outline-none focus:ring-2 focus:ring-sky-300"
+        }
       >
-        <Globe2 className="h-4 w-4 text-sky-200" />
-        <span className="min-w-[2.4rem] text-left">{current.code}</span>
-        <ChevronDown className={`h-3.5 w-3.5 text-slate-300 transition-transform ${open ? "rotate-180" : ""}`} />
+        <Globe2 className={tone === "light" ? "h-4 w-4 text-slate-500" : "h-4 w-4 text-sky-200"} />
+        <span className={tone === "light" ? "text-left" : "min-w-[2.4rem] text-left"}>{current.code}</span>
+        <ChevronDown className={`h-3.5 w-3.5 ${tone === "light" ? "text-slate-400" : "text-slate-300"} transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
 
       {open ? (

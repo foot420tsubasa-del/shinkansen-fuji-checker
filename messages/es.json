@@ -441,6 +441,14 @@
           "cta": "Verificar asiento"
         }
       ]
+    },
+    "hero": {
+      "eyebrow": "Gratis · Sin registro · 5 segundos",
+      "sub": "Toca la dirección de tu viaje. Te mostramos el asiento de ventanilla exacto que debes reservar.",
+      "trustLocal": "Escrito por alguien que vive en Japón",
+      "trustSource": "Basado en información de JR Central",
+      "today": "Hoy en el Monte Fuji",
+      "affiliateNote": "Podemos recibir una comisión si reservas con estos enlaces, sin coste adicional para ti."
     }
   },
   "guide": {

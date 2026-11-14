@@ -7,7 +7,16 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { AdsenseScript } from "@/components/ads/AdsenseScript";
+import { Inter } from "next/font/google";
 import "../globals.css";
+
+// One modern sans for every locale: Latin and Cyrillic come from Inter, and
+// CJK and Korean fall through to the system font in globals.css.
+const inter = Inter({
+  subsets: ["latin", "latin-ext", "cyrillic"],
+  display: "swap",
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://fujiseat.com"),
@@ -44,7 +53,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={inter.variable}>
       <head>
         <meta name="agd-partner-manual-verification" />
       </head>

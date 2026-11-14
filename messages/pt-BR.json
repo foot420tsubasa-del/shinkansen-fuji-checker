@@ -441,6 +441,14 @@
           "cta": "Verificar assento"
         }
       ]
+    },
+    "hero": {
+      "eyebrow": "Grátis · Sem cadastro · 5 segundos",
+      "sub": "Toque no sentido da sua viagem. Mostramos o assento exato na janela para reservar.",
+      "trustLocal": "Escrito por um morador do Japão",
+      "trustSource": "Com base em informações da JR Central",
+      "today": "Hoje no Monte Fuji",
+      "affiliateNote": "Podemos receber uma comissão se você reservar por estes links, sem custo extra para você."
     }
   },
   "guide": {

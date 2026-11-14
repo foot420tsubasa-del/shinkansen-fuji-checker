@@ -441,6 +441,14 @@
           "cta": "Check my seat"
         }
       ]
+    },
+    "hero": {
+      "eyebrow": "Free · No sign-up · 5 seconds",
+      "sub": "Tap the way you are travelling. We will show the exact window seat to book.",
+      "trustLocal": "Written by a Japan-based local",
+      "trustSource": "Based on JR Central seat info",
+      "today": "Today at Mt. Fuji",
+      "affiliateNote": "We may earn a commission if you book through these links, at no extra cost to you."
     }
   },
   "guide": {

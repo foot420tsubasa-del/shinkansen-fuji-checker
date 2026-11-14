@@ -441,6 +441,14 @@
           "cta": "Vérifier mon siège"
         }
       ]
+    },
+    "hero": {
+      "eyebrow": "Gratuit · Sans inscription · 5 secondes",
+      "sub": "Touche ton sens de trajet. On te montre le siège côté fenêtre à réserver.",
+      "trustLocal": "Écrit par un habitant du Japon",
+      "trustSource": "Basé sur les infos de JR Central",
+      "today": "Aujourd’hui au Mont Fuji",
+      "affiliateNote": "Nous pouvons toucher une commission si tu réserves via ces liens, sans surcoût pour toi."
     }
   },
   "guide": {

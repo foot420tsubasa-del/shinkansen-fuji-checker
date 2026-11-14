@@ -1,18 +1,18 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { ExternalLink, Train } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowRight, Check, Train } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import Image from "next/image";
-import { SeatCheckerPanel } from "@/components/travel/SeatCheckerPanel";
 import { SeatMapCard } from "@/components/travel/SeatResultCard";
 import { trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
   type DirectionId,
   type FujiVisibility,
+  directions,
   getSeatRecommendation,
 } from "@/lib/seat-checker";
 import {
@@ -26,12 +26,30 @@ import { AFFILIATE_REL } from "@/lib/link-rel";
 const JR_CENTRAL_SOURCE_URL =
   "https://recommend.jr-central.co.jp/shizuoka-tabi/articles/01/";
 
+/** Existing photographs, reused as covers for the guide cards. */
+const SEAT_GUIDES: Array<{ href: string; title: string; body: string; image?: string; alt?: string }> = [
+  {
+    href: "/guide#seat-e",
+    title: "Seat E guide",
+    body: "Why Seat E, when to look, and what to do if it's taken.",
+    image: "/images/Kawaguchiko.png",
+    alt: "Mt. Fuji above Lake Kawaguchi at dusk",
+  },
+  {
+    href: "/shinkansen-seat-letters",
+    title: "Seat letters A–E",
+    body: "What every seat letter means on the Tokaido Shinkansen.",
+  },
+  {
+    href: "/kyoto-to-tokyo-mt-fuji-seat",
+    title: "Kyoto → Tokyo seat",
+    body: "Heading back to Tokyo? Mt. Fuji is on the left.",
+    image: "/images/Kyoto.png",
+    alt: "Yasaka Pagoda on a Kyoto lane at sunset",
+  },
+];
 
-type PopularLink = {
-  label: string;
-  href: string;
-  icon: typeof Train;
-};
+const VIS_EMOJI = { high: "☀️", medium: "🌤️", low: "☁️" } as const;
 
 const homeHotelCopyByLocale: Record<
   string,
@@ -117,62 +135,34 @@ const homeHotelCopyByLocale: Record<
   },
 };
 
-function Header() {
-  return <SiteHeader />;
-}
-
-function SmartLink({
-  href,
-  children,
-  className,
+function VisibilityChip({
+  data,
+  loading,
+  error,
+  tone,
 }: {
-  href: string;
-  children: React.ReactNode;
-  className: string;
+  data: FujiVisibility | null;
+  loading: boolean;
+  error: boolean;
+  tone: "light" | "dark";
 }) {
-  if (href.startsWith("http")) {
-    return (
-      <a href={href} target="_blank" rel={AFFILIATE_REL} className={className}>
-        {children}
-      </a>
-    );
-  }
-
-  if (href.startsWith("#")) {
-    return (
-      <a href={href} className={className}>
-        {children}
-      </a>
-    );
-  }
-
+  const t = useTranslations("home");
+  if (error || (!loading && !data)) return null;
+  const label = loading || !data
+    ? t("visChecking")
+    : `${t(`vis${data.visibility.charAt(0).toUpperCase() + data.visibility.slice(1)}`)} · ${data.cloudPercent}% clouds`;
   return (
-    <Link href={href} className={className}>
-      {children}
-    </Link>
-  );
-}
-
-function SectionTitle({
-  eyebrow,
-  description,
-  centered = false,
-}: {
-  eyebrow: string;
-  description?: string;
-  centered?: boolean;
-}) {
-  return (
-    <div className={["mb-5", centered ? "text-center" : ""].join(" ")}>
-      <p className="text-sm font-black uppercase tracking-[0.12em] text-[#082653]">
-        {eyebrow}
-      </p>
-      {description && (
-        <p className={["mt-2 text-sm leading-6 text-[#5f7190]", centered ? "mx-auto max-w-2xl" : "max-w-2xl"].join(" ")}>
-          {description}
-        </p>
-      )}
-    </div>
+    <p
+      className={[
+        "inline-flex max-w-full items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold",
+        tone === "dark" ? "bg-white/10 text-white/90" : "border border-slate-200 bg-white text-slate-700",
+      ].join(" ")}
+    >
+      <span aria-hidden="true">{data ? VIS_EMOJI[data.visibility] : "🌤️"}</span>
+      <span className="truncate">
+        <span className={tone === "dark" ? "text-white/60" : "text-slate-500"}>{t("hero.today")}:</span> {label}
+      </span>
+    </p>
   );
 }
 
@@ -184,26 +174,16 @@ export default function HomeClient() {
   const [hasChecked, setHasChecked] = useState(false);
   const [visData, setVisData] = useState<FujiVisibility | null>(null);
   const [visLoading, setVisLoading] = useState(true);
-  const [visSlowLoading, setVisSlowLoading] = useState(false);
   const [visError, setVisError] = useState(false);
-
-  const popularLinks: PopularLink[] = useMemo(() => [
-    { label: "Seat E guide", href: "/guide#seat-e", icon: Train },
-    { label: "Seat letters A-E", href: "/shinkansen-seat-letters", icon: Train },
-    { label: "Kyoto → Tokyo seat", href: "/kyoto-to-tokyo-mt-fuji-seat", icon: Train },
-  ], []);
-
-  const omioRouteCompareHref = OMIO_SHINKANSEN_URL;
+  const answerRef = useRef<HTMLDivElement>(null);
+  const [scrollToAnswer, setScrollToAnswer] = useState(0);
 
   useEffect(() => {
     const fetchVisibility = async () => {
       const startedAt = performance.now();
-      let slowTimer: ReturnType<typeof setTimeout> | undefined;
       try {
         setVisLoading(true);
-        setVisSlowLoading(false);
         setVisError(false);
-        slowTimer = setTimeout(() => setVisSlowLoading(true), 3000);
         const res = await fetch("/api/fuji-visibility");
         if (!res.ok) throw new Error("Failed to fetch visibility");
         const json = await res.json();
@@ -215,7 +195,6 @@ export default function HomeClient() {
       } catch {
         setVisError(true);
       } finally {
-        if (slowTimer) clearTimeout(slowTimer);
         setVisLoading(false);
         const elapsedMs = Math.round(performance.now() - startedAt);
         trackEvent({
@@ -228,6 +207,17 @@ export default function HomeClient() {
     fetchVisibility();
   }, []);
 
+  // On a phone the answer opens below the buttons, mostly off screen; bring it
+  // up. On a wide screen it opens beside them and is already in view.
+  useEffect(() => {
+    if (!scrollToAnswer) return;
+    const el = answerRef.current;
+    if (!el) return;
+    if (el.getBoundingClientRect().top > window.innerHeight * 0.55) {
+      el.scrollIntoView({ block: "start" });
+    }
+  }, [scrollToAnswer]);
+
   const recommendation = useMemo(() => getSeatRecommendation(direction), [direction]);
   // Route the ticket CTA only once the reader has actually answered — the
   // direction state defaults to tokyo-osaka, and routing on that default would
@@ -237,210 +227,239 @@ export default function HomeClient() {
   const currentDirectionLabel =
     direction === "tokyo-osaka" ? t("dirToOsaka") : t("dirToTokyo");
 
-  const handleDirectionChange = (nextDirection: DirectionId) => {
-    setDirection(nextDirection);
-    setHasChecked(false);
+  // One tap answers. The checker used to ask for a direction and then a second
+  // press of "Check best seat"; US tools (Hopper, Google Flights) answer on the
+  // first choice, and the answer is the same either way.
+  const chooseDirection = (next: DirectionId) => {
+    const nextRecommendation = getSeatRecommendation(next);
+    setDirection(next);
+    setHasChecked(true);
+    setScrollToAnswer((n) => n + 1);
+    // Persist the answered direction so the guide's Klook CTA and mobile
+    // sticky can react to a completed seat check.
+    try {
+      window.localStorage.setItem(
+        "fs-seat-direction",
+        JSON.stringify({ direction: next, ts: Date.now() }),
+      );
+    } catch {
+      // Storage is best-effort.
+    }
+    trackSeatCheckComplete({
+      direction: next,
+      route: next,
+      result_seat: nextRecommendation.standardWindowSeat,
+      result_side: nextRecommendation.sideLabel,
+      locale,
+    });
   };
 
-  return (
-    <main className="page-shell min-h-screen text-[#102748]">
-      <Header />
+  const omioHref = OMIO_SHINKANSEN_URL;
 
-      {/* Hero, reworked 2026-11-13. The background here was a 1055x295 design
-          mockup with its own headline and dead buttons baked in. A phone showed
-          26% of it, stretched about four times its height, behind a white
-          wash — it read as a broken image. It is now the real photograph, shown
-          whole: under the headline on a phone, beside it from md up. */}
-      <section className="bg-[linear-gradient(180deg,#f4f9ff_0%,#ffffff_100%)]">
-        <div className="mx-auto grid max-w-[1180px] items-center gap-6 px-5 pb-6 pt-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] md:gap-10 md:px-7 md:py-14">
-          <div>
-            <p className="mb-4 inline-flex rounded-full border border-[#d9e5f2] bg-white px-3 py-2 text-xs font-black uppercase tracking-[0.08em] text-[#145aa0]">
-              {t("nav.hub")}
-            </p>
-            <h1 className="font-serif text-[34px] font-bold leading-[1.05] tracking-[-0.02em] text-[#082653] sm:text-[42px] md:text-[52px] md:leading-[1] md:tracking-[-0.03em]">
+  const bookingCard = (
+    <div className="rounded-[24px] border border-slate-200 bg-white p-5 text-left shadow-[0_12px_32px_rgba(11,18,32,0.07)] md:p-6">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-lg font-bold tracking-[-0.01em] text-ink">
+            {hasChecked ? `Book Seat ${recommendation.standardWindowSeat}` : "Book your Shinkansen ticket"}
+          </p>
+          <p className="mt-1 text-sm leading-6 text-slate-600">
+            {hasChecked
+              ? `${currentDirectionLabel}. Choose Seat ${recommendation.standardWindowSeat} if available.`
+              : "Reserved Tokaido Shinkansen seats. Choose Seat E if available."}
+          </p>
+        </div>
+        <span className="shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">Klook</span>
+      </div>
+      <a
+        href={ticketHref}
+        target="_blank"
+        rel={AFFILIATE_REL}
+        onClick={() => trackAffiliateClick({
+          category: "train",
+          provider: "klook",
+          placement: "home_seat_result",
+          href: ticketHref,
+          label: "Book Shinkansen ticket",
+          link_id: ticket?.linkId ?? "shinkansenTicket",
+          product: "shinkansen_ticket",
+          adid: ticket?.adid ?? "1265303",
+          direction: hasChecked ? direction : undefined,
+          locale,
+        })}
+        className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-fuji px-5 text-[15px] font-bold text-white shadow-[0_8px_20px_rgba(217,74,50,0.28)] transition-colors hover:bg-fuji-hover"
+      >
+        <Train className="h-4 w-4" />
+        {hasChecked ? `Book Seat ${recommendation.standardWindowSeat} on Klook` : "Book on Klook"}
+        <ArrowRight className="h-4 w-4" />
+      </a>
+      <a
+        href={JR_PASS_URL}
+        target="_blank"
+        rel={AFFILIATE_REL}
+        onClick={() => trackAffiliateClick({
+          category: "train",
+          provider: "klook",
+          placement: "home_seat_result",
+          href: JR_PASS_URL,
+          label: "Check JR Pass options",
+          link_id: "jrPass",
+          product: "jr_pass",
+          adid: "1165791",
+          locale,
+        })}
+        className="mt-2.5 flex h-11 w-full items-center justify-center rounded-full border border-slate-300 bg-white px-5 text-sm font-semibold text-ink transition-colors hover:bg-slate-50"
+      >
+        Compare JR Pass
+      </a>
+      <p className="mt-2 text-center text-xs leading-5 text-slate-500">
+        Worth it with Hiroshima, several long JR rides, or a return to Tokyo.
+      </p>
+      {omioHref ? (
+        <a
+          href={omioHref}
+          target="_blank"
+          rel={AFFILIATE_REL}
+          onClick={() => trackAffiliateClick({
+            category: "train",
+            provider: "omio",
+            placement: "home_seat_result",
+            href: omioHref,
+            label: "Still planning? Compare routes on Omio",
+            link_id: "omioShinkansen",
+            product: "route_compare",
+            route_type: "route-comparison",
+            locale,
+          })}
+          className="mt-3 block text-center text-xs font-semibold text-slate-600 underline underline-offset-2 hover:text-ink"
+        >
+          Still planning? Compare routes on Omio
+        </a>
+      ) : null}
+      <p className="mt-4 border-t border-slate-100 pt-3 text-center text-[11px] leading-4 text-slate-500">
+        {t("hero.affiliateNote")}
+      </p>
+    </div>
+  );
+
+  return (
+    <main className="page-shell min-h-screen text-ink">
+      <SiteHeader />
+
+      {/* Hero, redesigned 2026-11-15 after US travel tools: the checker is the
+          hero. The direction buttons used to sit about two phone screens down,
+          below the headline and the photo; now they are the first thing to
+          press, and the answer opens where the photo was. */}
+      <section id="seat-checker" className="scroll-mt-16 bg-white">
+        <div className="mx-auto grid max-w-[1180px] items-center gap-8 px-5 pb-10 pt-8 md:grid-cols-2 md:gap-12 md:px-7 md:pb-16 md:pt-14">
+          <div className="text-center md:text-left">
+            <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">{t("hero.eyebrow")}</p>
+            <h1 className="mt-3 text-[34px] font-extrabold leading-[1.06] tracking-[-0.03em] text-ink sm:text-[42px] md:text-[52px] md:leading-[1.02]">
               {t("brandTitle").split("\n").map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h1>
-            <p className="mt-4 max-w-[520px] text-base leading-7 text-[#263a5d] md:mt-5 md:text-lg md:leading-8">
-              {t("brandSubtitle")}
+            <p className="mx-auto mt-4 max-w-[460px] text-base leading-7 text-slate-600 md:mx-0 md:text-lg md:leading-8">
+              {t("hero.sub")}
             </p>
+
+            <div className="mx-auto mt-7 grid max-w-[440px] gap-3 md:mx-0" role="group" aria-label={t("seatCheckerHeading")}>
+              {directions.map((opt, index) => {
+                const chosen = hasChecked && opt.id === direction;
+                const primary = hasChecked ? chosen : index === 0;
+                return (
+                  <button
+                    key={opt.id}
+                    type="button"
+                    aria-pressed={chosen}
+                    onClick={() => chooseDirection(opt.id)}
+                    className={[
+                      "flex min-h-14 w-full items-center justify-between gap-3 rounded-full px-6 text-left text-base font-bold transition-all active:scale-[0.99]",
+                      primary
+                        ? "bg-fuji text-white shadow-[0_10px_24px_rgba(217,74,50,0.3)] hover:bg-fuji-hover"
+                        : "border-2 border-ink/85 bg-white text-ink hover:bg-slate-50",
+                    ].join(" ")}
+                  >
+                    <span>{t(opt.labelKey)}</span>
+                    {chosen ? <Check className="h-5 w-5 shrink-0" /> : <ArrowRight className="h-5 w-5 shrink-0" />}
+                  </button>
+                );
+              })}
+            </div>
+
+            <ul className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-1.5 text-[13px] font-medium text-slate-600 md:justify-start">
+              <li className="inline-flex items-center gap-1.5">
+                <Check className="h-4 w-4 text-emerald-600" />
+                {t("hero.trustLocal")}
+              </li>
+              <li className="inline-flex items-center gap-1.5">
+                <Check className="h-4 w-4 text-emerald-600" />
+                {t("hero.trustSource")}
+              </li>
+            </ul>
           </div>
-          <div className="relative aspect-[16/10] overflow-hidden rounded-[22px] border border-[#d9e5f2] bg-[#07111f] shadow-[0_18px_50px_rgba(8,38,83,0.16)] md:aspect-[4/3]">
-            <Image
-              src="/seat-checker-fuji-window-20260423.png"
-              alt="Mt. Fuji seen from a Shinkansen window seat"
-              fill
-              priority
-              sizes="(min-width: 1180px) 580px, (min-width: 768px) 50vw, calc(100vw - 40px)"
-              className="object-cover object-[72%_center]"
-            />
+
+          <div ref={answerRef} className="scroll-mt-20">
+            {hasChecked ? (
+              <div className="grid gap-4">
+                <div className="rounded-[24px] bg-ink p-6 text-left text-white shadow-[0_18px_44px_rgba(11,18,32,0.25)] md:p-7">
+                  <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/60">{currentDirectionLabel}</p>
+                  <p className="mt-2 text-[48px] font-extrabold leading-none tracking-[-0.03em] md:text-[60px]">
+                    Seat <span className="text-[#ff7a5c]">{recommendation.standardWindowSeat}</span>
+                  </p>
+                  <p className="mt-3 text-[15px] leading-6 text-white/85">{t("resultSeatEMain")}</p>
+                  <p className="mt-1 text-xs leading-5 text-white/60">{t("resultSeatDFallback")}</p>
+                  <div className="mt-4">
+                    <VisibilityChip data={visData} loading={visLoading} error={visError} tone="dark" />
+                  </div>
+                </div>
+                {bookingCard}
+              </div>
+            ) : (
+              <div className="relative aspect-[16/10] overflow-hidden rounded-[24px] bg-[#07111f] shadow-[0_18px_50px_rgba(11,18,32,0.16)] md:aspect-[4/3]">
+                <Image
+                  src="/seat-checker-fuji-window-20260423.png"
+                  alt="Mt. Fuji seen from a Shinkansen window seat"
+                  fill
+                  priority
+                  sizes="(min-width: 1180px) 560px, (min-width: 768px) 50vw, calc(100vw - 40px)"
+                  className="object-cover object-[72%_center]"
+                />
+                <div className="absolute bottom-3 left-3 right-3 flex">
+                  <VisibilityChip data={visData} loading={visLoading} error={visError} tone="light" />
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
       <div className="mx-auto max-w-[1180px] px-5 md:px-7">
-        {/* The section title that sat here repeated the hero's eyebrow; the
-            panel carries its own heading now that it no longer repeats the h1. */}
-        <section id="seat-checker" className="scroll-mt-28 pb-10 pt-4 md:pt-6">
-          <div className="grid gap-5 xl:grid-cols-[minmax(0,1fr)_410px]">
-            <SeatCheckerPanel
-              direction={direction}
-              onDirectionChange={handleDirectionChange}
-              onCheck={() => {
-                setHasChecked(true);
-                // Persist the answered direction so the guide's Klook CTA and
-                // mobile sticky can react to a completed seat check.
-                try {
-                  window.localStorage.setItem(
-                    "fs-seat-direction",
-                    JSON.stringify({ direction, ts: Date.now() }),
-                  );
-                } catch {
-                  // Storage is best-effort.
-                }
-                trackSeatCheckComplete({
-                  direction,
-                  route: direction,
-                  result_seat: recommendation.standardWindowSeat,
-                  result_side: recommendation.sideLabel,
-                  locale,
-                });
-              }}
-              visibility={visData}
-              visibilityLoading={visLoading}
-              visibilitySlowLoading={visSlowLoading}
-              visibilityError={visError}
-            />
-            <SeatMapCard
-              recommendation={recommendation}
-              directionLabel={currentDirectionLabel}
-              highlighted={hasChecked}
-            />
-          </div>
-          <p className="mt-3 text-[11px] leading-5 text-slate-400">
-            {t("brandSource")}{" "}
-            <a href={JR_CENTRAL_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="font-medium text-sky-600 underline underline-offset-2">
-              [view source]
-            </a>
-            {" · "}
-            {t("brandDisclaimer")}
-          </p>
-          <div className="mt-5 rounded-2xl border border-[#d9e5f2] bg-white p-4 shadow-[0_10px_25px_rgba(8,38,83,0.07)]">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#5f7190]">After checking your seat</p>
-            <div className="mt-3 grid items-stretch gap-3 lg:grid-cols-2">
-              <div className="flex h-full flex-col rounded-2xl border border-orange-100 bg-orange-50/70 p-3">
-                <p className="text-sm font-bold text-[#082653]">Book Shinkansen ticket</p>
-                <p className="mt-1 text-xs leading-5 text-slate-600">
-                  Choose Seat E if available, then book the simple Tokyo to Kyoto / Osaka ticket.
-                </p>
-                <div className="mt-auto flex flex-col gap-2 pt-3 sm:flex-row">
-                  <a
-                    href={ticketHref}
-                    target="_blank"
-                    rel={AFFILIATE_REL}
-                    onClick={() => trackAffiliateClick({
-                      category: "train",
-                      provider: "klook",
-                      placement: "home_seat_result",
-                      href: ticketHref,
-                      label: "Book Shinkansen ticket",
-                      link_id: ticket?.linkId ?? "shinkansenTicket",
-                      product: "shinkansen_ticket",
-                      adid: ticket?.adid ?? "1265303",
-                      direction: hasChecked ? direction : undefined,
-                      locale,
-                    })}
-                    className="inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
-                  >
-                    <Train className="h-3.5 w-3.5" />
-                    Klook
-                  </a>
-                  {omioRouteCompareHref ? (
-                    <a
-                      href={omioRouteCompareHref}
-                      target="_blank"
-                      rel={AFFILIATE_REL}
-                      onClick={() => trackAffiliateClick({
-                        category: "train",
-                        provider: "omio",
-                        placement: "home_seat_result",
-                        href: omioRouteCompareHref,
-                        label: "Still planning? Compare routes on Omio",
-                        link_id: "omioShinkansen",
-                        product: "route_compare",
-                        route_type: "route-comparison",
-                        locale,
-                      })}
-                      className="inline-flex min-h-10 flex-1 items-center justify-center gap-1.5 rounded-xl border border-[#2563EB] bg-white px-3 py-2 text-xs font-bold text-[#0B3A75] shadow-sm shadow-blue-100/70 transition-colors hover:border-[#1D4ED8] hover:bg-[#F0F6FF]"
-                    >
-                      Omio
-                      <ExternalLink className="h-3.5 w-3.5" />
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-              <div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-slate-50 p-3">
-                <p className="text-sm font-bold text-[#082653]">Compare JR Pass</p>
-                <p className="mt-1 text-xs leading-5 text-slate-600">
-                  Use this if your route includes Hiroshima, multiple long JR rides, or a return to Tokyo.
-                </p>
-                <div className="mt-auto pt-3">
-                  <a
-                    href={JR_PASS_URL}
-                    target="_blank"
-                    rel={AFFILIATE_REL}
-                    onClick={() => trackAffiliateClick({
-                      category: "train",
-                      provider: "klook",
-                      placement: "home_seat_result",
-                      href: JR_PASS_URL,
-                      label: "Check JR Pass options",
-                      link_id: "jrPass",
-                      product: "jr_pass",
-                      adid: "1165791",
-                      locale,
-                    })}
-                    className="inline-flex min-h-10 w-full items-center justify-center gap-1.5 rounded-xl border border-[#D94A32] bg-[#D94A32] px-3 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#bf3d28]"
-                  >
-                    <Train className="h-3.5 w-3.5" />
-                    Klook
-                  </a>
-                </div>
-              </div>
+        <section className="grid gap-5 pb-4 pt-8 lg:grid-cols-2">
+          {hasChecked ? (
+            <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.05)] md:p-6">
+              <p className="text-lg font-bold tracking-[-0.01em] text-ink">When to look</p>
+              <p className="mt-2 text-sm leading-6 text-slate-600">{t("timingNote")}</p>
             </div>
-            <div className="mt-4 border-t border-slate-100 pt-3">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#5f7190]">More seat guides</p>
-              <div className="mt-2 flex flex-wrap gap-2">
-              {popularLinks.map((link, index) => {
-                const Icon = link.icon;
-                const content = (
-                  <>
-                    <Icon className="h-3 w-3" />
-                    {link.label}
-                  </>
-                );
-                return (
-                  <SmartLink
-                    key={link.label}
-                    href={link.href}
-                    className={[
-                      "inline-flex min-h-8 items-center gap-1.5 rounded-lg border px-3 py-1.5 text-[11px] font-extrabold shadow-sm transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#15803d]",
-                      index === 0
-                        ? "border-[#15803d] bg-[#15803d] text-white hover:border-[#166534] hover:bg-[#166534]"
-                        : "border-[#86efac] bg-white text-[#166534] hover:border-[#22c55e] hover:bg-[#f0fdf4] hover:text-[#14532d]",
-                    ].join(" ")}
-                  >
-                    {content}
-                  </SmartLink>
-                );
-              })}
-              </div>
-            </div>
-          </div>
+          ) : (
+            bookingCard
+          )}
+          <SeatMapCard
+            recommendation={recommendation}
+            directionLabel={currentDirectionLabel}
+            highlighted={hasChecked}
+          />
         </section>
+        <p className="text-[11px] leading-5 text-slate-500">
+          {t("brandSource")}{" "}
+          <a href={JR_CENTRAL_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="font-medium text-slate-600 underline underline-offset-2">
+            [view source]
+          </a>
+          {" · "}
+          {t("brandDisclaimer")}
+        </p>
 
         {/* The five-step "decision flow" strip that stood here was cut on
             2026-11-14: four of its five steps led to pages retired from the
@@ -449,94 +468,130 @@ export default function HomeClient() {
             31 clicks, 26 of them on the step that scrolled back up to the
             checker above. */}
 
-        <section className="py-7">
-          <div className="overflow-hidden rounded-[18px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-[0_10px_25px_rgba(8,38,83,0.06)] md:grid md:grid-cols-[minmax(0,1fr)_240px] md:items-center md:gap-6">
-            <div>
-              <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#106b43]">
-                Tokyo hotel base
-              </p>
-              <h2 className="mt-1 text-xl font-bold text-[#082653]">{homeHotelCopy.title}</h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-[#5f7190]">{homeHotelCopy.body}</p>
-              <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
-                {homeHotelCopy.links.map((link) => {
-                  const isSecondary = link.variant === "secondary";
-                  return (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() =>
-                        trackCtaClick({
-                          placement: "home_hotel_base_click",
-                          href: link.href,
-                          label: link.label,
-                          category: "stay",
-                          locale,
-                        })
-                      }
-                      className={
-                        isSecondary
-                          ? "inline-flex min-h-11 items-center justify-center rounded-xl border border-[#082653]/30 bg-white px-4 py-2.5 text-sm font-semibold text-[#082653] transition-colors hover:bg-[#eef2f8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#082653]"
-                          : "inline-flex min-h-11 items-center justify-center rounded-xl bg-[#082653] px-5 py-2.5 text-sm font-bold text-[#f6c343] shadow-sm transition-colors hover:bg-[#123967] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#082653]"
-                      }
-                    >
-                      {link.label}
-                    </Link>
-                  );
-                })}
+        <section className="pt-12">
+          <h2 className="text-2xl font-extrabold tracking-[-0.02em] text-ink md:text-[28px]">More seat guides</h2>
+          <div className="mt-5 grid gap-4 sm:grid-cols-3">
+            {SEAT_GUIDES.map((guide) => (
+              <Link
+                key={guide.href}
+                href={guide.href}
+                className="group overflow-hidden rounded-[20px] border border-slate-200 bg-white shadow-[0_8px_24px_rgba(11,18,32,0.05)] transition-shadow hover:shadow-[0_14px_34px_rgba(11,18,32,0.1)]"
+              >
+                <div className="relative aspect-[16/9] overflow-hidden bg-ink">
+                  {guide.image ? (
+                    <Image
+                      src={guide.image}
+                      alt={guide.alt ?? ""}
+                      fill
+                      sizes="(min-width: 640px) 33vw, calc(100vw - 40px)"
+                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                  ) : (
+                    <div className="flex h-full items-center justify-center gap-1.5" aria-hidden="true">
+                      {["A", "B", "C", "D", "E"].map((letter) => (
+                        <span
+                          key={letter}
+                          className={[
+                            "flex h-10 w-9 items-center justify-center rounded-lg text-base font-extrabold",
+                            letter === "E" ? "bg-fuji text-white" : "bg-white/10 text-white/80",
+                          ].join(" ")}
+                        >
+                          {letter}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                <div className="p-4">
+                  <p className="flex items-center justify-between gap-2 text-base font-bold text-ink">
+                    {guide.title}
+                    <ArrowRight className="h-4 w-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-ink" />
+                  </p>
+                  <p className="mt-1 text-sm leading-5 text-slate-600">{guide.body}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="pt-12">
+          <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_12px_32px_rgba(11,18,32,0.05)] md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
+            <div className="p-6 md:p-8">
+              <p className="text-xs font-bold uppercase tracking-[0.1em] text-emerald-700">Tokyo hotel base</p>
+              <h2 className="mt-2 text-2xl font-extrabold tracking-[-0.02em] text-ink">{homeHotelCopy.title}</h2>
+              <p className="mt-3 max-w-xl text-[15px] leading-7 text-slate-600">{homeHotelCopy.body}</p>
+              <div className="mt-5 flex flex-wrap items-center gap-2">
+                {homeHotelCopy.links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    onClick={() =>
+                      trackCtaClick({
+                        placement: "home_hotel_base_click",
+                        href: link.href,
+                        label: link.label,
+                        category: "stay",
+                        locale,
+                      })
+                    }
+                    className={
+                      link.variant === "secondary"
+                        ? "inline-flex h-11 items-center justify-center rounded-full border border-slate-300 bg-white px-5 text-sm font-semibold text-ink transition-colors hover:bg-slate-50"
+                        : "inline-flex h-11 items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-white transition-colors hover:bg-[#1c2740]"
+                    }
+                  >
+                    {link.label}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                ))}
               </div>
+              <p className="mt-4 text-xs leading-5 text-slate-500">{homeHotelCopy.imageNote}</p>
             </div>
-            <div className="mt-5 md:mt-0">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/70 bg-white shadow-sm">
-                <Image
-                  src="/images/home/tokyo-hotel-base.png"
-                  alt="Luggage near a Tokyo station hotel area"
-                  fill
-                  sizes="(min-width: 768px) 240px, 100vw"
-                  className="object-cover"
-                />
-              </div>
-              <p className="mt-3 text-xs leading-5 text-slate-600">
-                {homeHotelCopy.imageNote}
-              </p>
+            <div className="relative aspect-[16/10] md:aspect-auto md:min-h-full">
+              <Image
+                src="/images/home/tokyo-hotel-base.png"
+                alt="Luggage near a Tokyo station hotel area"
+                fill
+                sizes="(min-width: 768px) 520px, 100vw"
+                className="object-cover"
+              />
             </div>
           </div>
         </section>
 
-        <section className="py-7">
-          <SectionTitle
-            eyebrow={t("supportTools.eyebrow")}
-            description={t("supportTools.description")}
-          />
-          <div className="max-w-[420px]">
-            <Link
-              href="/station-practice"
-              onClick={() =>
-                trackCtaClick({
-                  placement: "home_more_tools_featured",
-                  href: "/station-practice",
-                  label: t("supportTools.stationPracticeCta"),
-                  category: "station_practice",
-                  locale,
-                })
-              }
-              className="block rounded-2xl border border-[#bfdbfe] bg-[#eff6ff] p-4 shadow-sm transition-colors hover:bg-[#dbeafe] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#1d4ed8]"
-            >
-              <span className="text-[11px] font-black uppercase tracking-[0.1em] text-[#1d4ed8]">
+        <section className="pb-14 pt-12">
+          <h2 className="text-2xl font-extrabold tracking-[-0.02em] text-ink md:text-[28px]">{t("supportTools.eyebrow")}</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("supportTools.description")}</p>
+          <Link
+            href="/station-practice"
+            onClick={() =>
+              trackCtaClick({
+                placement: "home_more_tools_featured",
+                href: "/station-practice",
+                label: t("supportTools.stationPracticeCta"),
+                category: "station_practice",
+                locale,
+              })
+            }
+            className="mt-5 flex max-w-[520px] items-center justify-between gap-4 rounded-[20px] border border-slate-200 bg-white p-5 shadow-[0_8px_24px_rgba(11,18,32,0.05)] transition-shadow hover:shadow-[0_14px_34px_rgba(11,18,32,0.1)]"
+          >
+            <span className="min-w-0">
+              <span className="text-xs font-bold uppercase tracking-[0.1em] text-blue-700">
                 {t("supportTools.featuredLabel")}
               </span>
-              <span className="mt-1 block text-base font-bold text-[#0b214a]">
+              <span className="mt-1 block text-base font-bold text-ink">
                 {t("supportTools.stationPracticeTitle")}
               </span>
               <span className="mt-1 block text-sm leading-5 text-slate-600">
                 {t("supportTools.stationPracticeDesc")}
               </span>
-              <span className="mt-3 inline-flex min-h-9 items-center rounded-xl bg-[#0b214a] px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-[#123967]">
-                {t("supportTools.stationPracticeCta")}
-              </span>
-            </Link>
-          </div>
+            </span>
+            <span className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-ink px-4 text-xs font-bold text-white">
+              {t("supportTools.stationPracticeCta")}
+              <ArrowRight className="h-3.5 w-3.5" />
+            </span>
+          </Link>
         </section>
-
       </div>
 
       <SiteFooter />
