@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>削ったものと次の打ち手</title>
+<style>
+  :root{--bg:#0f1420;--panel:#161d2c;--line:#27314a;--ink:#e8ecf4;--dim:#9aa6bd;--accent:#f2c23e;--good:#4fbf8b;--bad:#e2685f}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.8}
+  .wrap{max-width:860px;margin:0 auto;padding:32px 20px 60px}
+  h1{font-size:22px;margin:0 0 4px}
+  .sub{color:var(--dim);font-size:13px;margin-bottom:24px}
+  h2{font-size:17px;margin:32px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0}
+  .key{border-left:4px solid var(--accent)}
+  table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+  th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+  td.w{white-space:normal}
+  th{color:var(--dim);font-size:12px}
+  .good{color:var(--good);font-weight:700}.bad{color:var(--bad);font-weight:700}
+  ol{padding-left:1.3em}li{margin:10px 0}
+  .tag{display:inline-block;font-size:11px;padding:1px 8px;border-radius:99px;background:#24304a;color:var(--accent);margin-left:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>削ったものと次の打ち手</h1>
+<div class="sub">2026-11-14 ／ GA4・GSC 直近90日</div>
+
+<div class="card key">
+  <b>結論：お金になっているのは「座席チェッカーの答えの直後に出る予約ボタン」だけ。</b><br>
+  それ以外のボタンは90日でほぼ0クリックだったので、一斉に削りました。
+</div>
+
+<h2>1. 今の状況</h2>
+<table>
+  <tr><th>指標</th><th>9月末</th><th>11月初め</th></tr>
+  <tr><td>検索クリック（週）</td><td>309</td><td class="bad">265（−14%）</td></tr>
+  <tr><td>検索順位</td><td>6.1</td><td>6.1（変わらず）</td></tr>
+  <tr><td>予約クリック（週）</td><td>14</td><td>13（横ばい）</td></tr>
+</table>
+
+<h2>2. どのボタンが稼いでいたか（90日）</h2>
+<table>
+  <tr><th>ボタン</th><th>クリック</th></tr>
+  <tr><td class="w">/guide のチェッカー結果</td><td class="good">62</td></tr>
+  <tr><td class="w">トップのチェッカー結果</td><td class="good">27</td></tr>
+  <tr><td class="w">/guide の他の予約リンク19本（eSIM・JR Pass・ツアー等）</td><td class="bad">0〜2ずつ</td></tr>
+</table>
+
+<h2>3. 削ったもの</h2>
+<table>
+  <tr><th>場所</th><th>前</th><th>後</th></tr>
+  <tr><td class="w">/guide の本文リンク</td><td>51本</td><td class="good">25本</td></tr>
+  <tr><td class="w">/guide の予約リンク</td><td>21本</td><td class="good">2本</td></tr>
+  <tr><td class="w">退役済みページへのリンク（全ページ）</td><td>137件</td><td class="good">26件</td></tr>
+  <tr><td class="w">トップページの長さ（スマホ）</td><td>5,354px</td><td class="good">4,170px</td></tr>
+</table>
+<div class="card">
+  ・ヘッダー4項目のうち2つが、検索から外したページに飛んでいた → 直した<br>
+  ・/guide 冒頭のボタンが、同じページにチェッカーがあるのにトップへ送っていた（30日で73人）→ 削除<br>
+  ・失ったクリックは90日で約5回（月¥60程度）
+</div>
+
+<h2>4. 次の打ち手</h2>
+<ol>
+  <li><b>プッシュして本番に出す</b><span class="tag">最優先・費用ゼロ</span><br>
+    11/06以降の作業（「いつ見える」ページ、トップの写真、今回の削除）はまだ手元だけ。出さないと判定もできない。</li>
+  <li><b>/shinkansen-seat-letters にチェッカーを置く</b><span class="tag">根拠が一番強い</span><br>
+    2番目に見られているページ（30日485PV）で、<b>約2割の94人がトップのチェッカーへ移動</b>している。需要はある、遠回りさせているだけ。</li>
+  <li><b>東京→大阪の予約リンクを試す</b><span class="tag">仮説</span><br>
+    大阪へ行く人も東京→京都の予約ページに着いている。Klookでリンク発行が必要。</li>
+  <li><b>/local-tokyo を畳むか決める</b><br>
+    中身が検索から外した6ページの一覧。30日で18PV。</li>
+</ol>
+</div>
+</body>
+</html>
