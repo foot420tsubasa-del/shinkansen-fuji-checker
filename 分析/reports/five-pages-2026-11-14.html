@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5ページ化しました</title>
+<style>
+  :root{--bg:#0f1420;--panel:#161d2c;--line:#27314a;--ink:#e8ecf4;--dim:#9aa6bd;--accent:#f2c23e;--good:#4fbf8b;--bad:#e2685f}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.8}
+  .wrap{max-width:820px;margin:0 auto;padding:32px 20px 60px}
+  h1{font-size:22px;margin:0 0 4px}.sub{color:var(--dim);font-size:13px;margin-bottom:22px}
+  h2{font-size:17px;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0}
+  .key{border-left:4px solid var(--good)}
+  table{width:100%;border-collapse:collapse;font-size:14px;font-variant-numeric:tabular-nums}
+  th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+  td.w{white-space:normal}th{color:var(--dim);font-size:12px}
+  .good{color:var(--good);font-weight:700}.dim{color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>5ページ化しました（本番反映済み）</h1>
+<div class="sub">2026-11-14 ／ 判断の根拠：検索・予約クリック 直近90日</div>
+
+<div class="card key"><b>トップ・/guide・座席表の3ページで、検索の90%・予約の87%。</b><br>だから中心は5ページで十分、と判断しました。</div>
+
+<h2>中心の5ページ（ヘッダーはこの4つ＋トップ）</h2>
+<table>
+  <tr><th>ページ</th><th>検索</th><th>予約</th></tr>
+  <tr><td>トップ（チェッカー）</td><td>36</td><td class="good">27</td></tr>
+  <tr><td>/guide</td><td class="good">2,228</td><td class="good">92</td></tr>
+  <tr><td>座席表 /shinkansen-seat-letters</td><td class="good">811</td><td class="good">20</td></tr>
+  <tr><td>いつ見える /when-to-see（新）</td><td colspan="2" class="dim">公開直後</td></tr>
+  <tr><td>京都→東京の座席</td><td>98</td><td>4</td></tr>
+</table>
+
+<h2>検索には残す（メニューには出さない）</h2>
+<div class="card">駅の看板ガイド（検索75）・東京→京都（予約3）・ホテル比較2本（12月末までKlook試験中）</div>
+
+<h2>検索から外した（コードは残す）</h2>
+<div class="card">local-tokyo / 部屋サイズ / グリーン車 / 比較2本 / Suica / 3Dページ2本<br><span class="dim">合わせて検索の1%未満・予約ほぼ0</span></div>
+
+<h2>数字</h2>
+<table>
+  <tr><th></th><th>前</th><th>後</th></tr>
+  <tr><td>サイトマップ</td><td>21 URL</td><td class="good">13 URL（うち3つは規約類）</td></tr>
+  <tr><td>退役ページへのリンク</td><td>137件</td><td class="good">0件</td></tr>
+  <tr><td>どこからもリンクされないページ</td><td>1</td><td class="good">0</td></tr>
+</table>
+
+<h2>あわせてやったこと</h2>
+<div class="card">
+  <b>座席表ページにチェッカーを設置。</b>約2割（30日で94人）がトップのチェッカーへ移動していたので、その場で使えるようにしました。答えると一番稼ぐ東京→京都の予約リンクに直結します。
+</div>
+
+<h2>次に見るもの</h2>
+<table>
+  <tr><th>いつ</th><th>何を</th></tr>
+  <tr><td>12月</td><td class="w">チェッカー結果の予約ボタンの押される率（画面を軽くした効果）</td></tr>
+  <tr><td>12月末</td><td class="w">ホテル比較2本のKlook試験 → 残すか外すか</td></tr>
+  <tr><td>1月末</td><td class="w">「いつ見える」ページの検索流入</td></tr>
+</table>
+</div>
+</body>
+</html>
