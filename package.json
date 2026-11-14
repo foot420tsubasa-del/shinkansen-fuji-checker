@@ -27,7 +27,7 @@
     "zustand": "^5.0.13"
   },
   "devDependencies": {
-    "@google-analytics/data": "^6.1.0",
+    "@google-analytics/data": "^7.3.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
