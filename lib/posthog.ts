@@ -7,10 +7,10 @@
  * Empty key = PostHog is not loaded at all. Fill in the project key ("phc_…")
  * and the host for the project's region to turn it on.
  */
-export const POSTHOG_KEY = "";
+export const POSTHOG_KEY = "phc_sPmKpUgxzzsMx677PF7YmAGEDbatAzBVF2HQQuvpXJh2";
 
 /** "https://us.i.posthog.com" for a US project, "https://eu.i.posthog.com" for EU. */
-export const POSTHOG_HOST = "https://us.i.posthog.com";
+export const POSTHOG_HOST = "https://eu.i.posthog.com";
 
 export function isPosthogEnabled(): boolean {
   return POSTHOG_KEY.startsWith("phc_");

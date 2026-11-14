@@ -37,6 +37,7 @@ const sections = [
     body: [
       "In production, fujiseat uses Google Analytics to understand aggregate site usage, such as pages viewed, interactions, device/browser information, and general traffic patterns.",
       "Google Analytics may use cookies or similar identifiers. Google states that site owners using Google Analytics should disclose its use and how data is collected and processed.",
+      "fujiseat also uses PostHog, hosted in the EU, to see how the seat checker and pages are used — for example which buttons are clicked and where people scroll. It runs in cookieless mode: it stores nothing in your browser, does not record your session, and does not identify you. Visits are counted with a daily-rotating hash computed on PostHog's servers.",
     ],
   },
   {
