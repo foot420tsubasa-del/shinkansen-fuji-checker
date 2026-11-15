@@ -35,6 +35,10 @@ export function RouteViewMap({
   directionLabel: [string, string];
   highlight?: string | null;
 }) {
+  // Only summits a listed view uses, and only real points: the sea has no
+  // single location, and a mountain 70 km off would shrink the line to a dot.
+  const used = new Set(views.flatMap((v) => v.targets));
+  targets = targets.filter((t) => used.has(t.id) && (t.lat !== 0 || t.lng !== 0));
   const all = [...points, ...targets];
   const minLat = Math.min(...all.map((p) => p.lat));
   const maxLat = Math.max(...all.map((p) => p.lat));
@@ -149,7 +153,7 @@ export function RouteViewMap({
         </g>
       </svg>
       <figcaption className="px-5 pb-4 pt-2 text-[11.5px] leading-5 text-slate-500">
-        Coloured where a terrain model says the summit clears the hills: sight lines over elevation data from the Geospatial Information Authority of Japan (国土地理院), with the curve of the earth. Trees, buildings, noise barriers and weather are not modelled. Dashed sections are tunnels. Track © OpenStreetMap contributors.
+        Coloured where a terrain model finds the view — a summit clearing the hills, or open water beside the line: sight lines over elevation data from the Geospatial Information Authority of Japan (国土地理院), with the curve of the earth. Trees, buildings, noise barriers and weather are not modelled. Dashed sections are tunnels. Track © OpenStreetMap contributors.
       </figcaption>
     </figure>
   );

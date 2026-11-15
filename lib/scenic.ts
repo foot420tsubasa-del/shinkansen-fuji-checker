@@ -73,6 +73,10 @@ export type ScenicRoute = {
     | { kind: "timetable"; source: string; sourceUrl?: string; trains: TrainPattern[] }
     | { kind: "fuji-model"; source: string; origins: Record<Direction, string[]> };
   verification?: string;
+  /** Booking link for the line; linkId "jrPass" only where the JR Pass covers it. */
+  ticket?: { provider: string; linkId: string; note?: string } | null;
+  /** Plain-language caveats shown on the route page. */
+  notes?: string[];
   page?: { title: string; description: string; h1: string; labelStations: string[] };
 };
 
@@ -151,7 +155,7 @@ export function suggestStations(input: string, limit = 6): StationOption[] {
 
 export type RouteMatch =
   | { kind: "live"; route: ScenicRoute; direction: Direction; from: string; to: string }
-  | { kind: "unsupported"; from: string; to: string; comingSoon: ScenicRoute[] };
+  | { kind: "unsupported"; from: string; to: string; comingSoon: ScenicRoute[]; nearbyLive: ScenicRoute[] };
 
 function position(route: ScenicRoute, name: string): number | null {
   const st = route.timelineStations?.find((s) => s.name === name);
@@ -171,7 +175,15 @@ export function matchRoute(from: string, to: string): RouteMatch {
     (r) => r.status !== "live" && (r.near ?? []).some((n) => words.some((w) => norm(n) === w || w.includes(norm(n)))),
   );
   const fallback = ROUTES.filter((r) => r.status !== "live" && r.image);
-  return { kind: "unsupported", from, to, comingSoon: (related.length ? related : fallback).slice(0, 3) };
+  // A mapped line that serves one end of the trip (Tokyo → Kamakura: the Enoden).
+  const nearbyLive = LIVE_ROUTES.filter((r) => position(r, from) !== null || position(r, to) !== null);
+  return {
+    kind: "unsupported",
+    from,
+    to,
+    nearbyLive,
+    comingSoon: (related.length ? related : fallback).filter((r) => !nearbyLive.includes(r)).slice(0, nearbyLive.length ? 2 : 3),
+  };
 }
 
 /** Routes that carry a view with this tag, for a chip chosen before a route. */
@@ -293,14 +305,26 @@ export function timeline(
     if (!seen.length) continue;
     const times = seen.map((p) => at(p.km + offset)).filter((t) => Number.isFinite(t));
     if (!times.length) continue;
-    // Each visible point stands for the half-km bin around it.
-    const minutesPerKm = Math.abs(at(seen[seen.length - 1].km + offset) - at(seen[0].km + offset)) / Math.max(0.5, Math.abs(seen[seen.length - 1].km - seen[0].km));
+    // Minutes in sight: add up the run time between neighbouring track
+    // points that are both in view (tunnels and hills drop out), so the result
+    // does not depend on how densely the line was sampled.
+    const inView = (q: ViewshedPoint) =>
+      !q.tunnel && view.targets.some((t) => q.see[t] && q.see[t].side === view.side.forward);
+    const ordered = points.filter((q) => q.km + offset >= lo && q.km + offset <= hi);
+    let visible = 0;
+    for (let i = 1; i < ordered.length; i++) {
+      const a = ordered[i - 1];
+      const b = ordered[i];
+      if (b.km < view.kmFrom || a.km > view.kmTo || !inView(a) || !inView(b)) continue;
+      const dt = Math.abs(at(b.km + offset) - at(a.km + offset));
+      if (Number.isFinite(dt)) visible += dt;
+    }
     items.push({
       view,
       side,
       start: Math.min(...times),
       end: Math.max(...times),
-      visibleMinutes: Math.max(1, Math.round(seen.length * 0.5 * minutesPerKm)),
+      visibleMinutes: Math.max(1, Math.round(visible)),
     });
   }
   items.sort((a, b) => a.start - b.start);

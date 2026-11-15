@@ -795,7 +795,10 @@ test("route search: Tokaido and Hokuriku both ways, anything else is coming soon
   assert.equal(hk.direction, "backward");
   const none = scenic.matchRoute("Tokyo", "Kamakura");
   assert.equal(none.kind, "unsupported");
-  assert.ok(none.comingSoon.some((r) => r.id === "enoden-coast"), "Kamakura points at the Enoden");
+  assert.ok(none.nearbyLive.some((r) => r.id === "enoden-coast"), "Kamakura points at the live Enoden page");
+  const far = scenic.matchRoute("Tokyo", "Sendai");
+  assert.equal(far.kind, "unsupported");
+  assert.ok(far.comingSoon.length > 0, "an unmapped trip still offers what is next");
 });
 
 test("timeline: Tokyo → Kanazawa runs Asama (right), Myoko (left), Alps (left), in order, from the JR timetable", () => {
@@ -832,4 +835,52 @@ test("route search: through-running Nozomi destinations past Osaka still get the
     assert.equal(m.direction, "forward");
   }
   assert.equal(scenic.resolveStation("Fukuoka"), "Hakata");
+});
+
+test("Enoden: the sea is on the right to Kamakura, on the left to Fujisawa, Koshigoe to Inamuragasaki", () => {
+  const pts = JSON.parse(readFileSync("data/routes/enoden-coast-viewshed.json", "utf8")).points;
+  const m = scenic.matchRoute("Fujisawa", "Kamakura");
+  assert.equal(m.route.id, "enoden-coast");
+  const { items } = scenic.timeline(m.route, m.direction, "Fujisawa", "Kamakura", pts);
+  assert.deepEqual(items.map((i) => [i.view.id, i.side]), [["sea", "right"]]);
+  assert.ok(items[0].visibleMinutes >= 5 && items[0].visibleMinutes <= 15, `sea in view ${items[0].visibleMinutes} min`);
+  const back = scenic.timeline(m.route, "backward", "Kamakura", "Fujisawa", pts);
+  assert.equal(back.items[0].side, "left");
+});
+
+test("Fujikyu: Mt. Fuji on the left to Kawaguchiko, from the official timetable, no seat letters", () => {
+  const pts = JSON.parse(readFileSync("data/routes/fujikyu-fuji-viewshed.json", "utf8")).points;
+  const m = scenic.matchRoute("Otsuki", "Kawaguchiko");
+  assert.equal(m.route.id, "fujikyu-fuji");
+  const { items, train } = scenic.timeline(m.route, m.direction, "Otsuki", "Kawaguchiko", pts, "local");
+  assert.equal(train.forward.train, "Local 13:55 from Otsuki");
+  assert.equal(items[0].side, "left");
+  assert.equal(items[0].view.seat, null);
+  assert.equal(scenic.matchRoute("Kawaguchiko", "Otsuki").direction, "backward");
+});
+
+test("viewshed: every live route's minutes stay sane (no view longer than the journey)", () => {
+  for (const route of scenic.LIVE_ROUTES.filter((r) => r.timing?.kind === "timetable")) {
+    const pts = JSON.parse(readFileSync(route.viewshed, "utf8")).points;
+    const [from, to] = route.directions.forward;
+    for (const train of route.timing.trains) {
+      const stops = train.forward.stops;
+      if (stops[0][0] !== from || stops[stops.length - 1][0] !== to) continue;
+      const { items } = scenic.timeline(route, "forward", from, to, pts, train.id);
+      const toMin = (t) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3));
+      const journey = toMin(stops[stops.length - 1][1]) - toMin(stops[0][2]);
+      for (const it of items) assert.ok(it.visibleMinutes <= journey, `${route.id}/${train.id}/${it.view.id}: ${it.visibleMinutes} > ${journey}`);
+    }
+  }
+});
+
+test("JR Pass card: only on lines the pass covers (not the Enoden or the Fujikyu Line)", () => {
+  const { routes } = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
+  for (const id of ["enoden-coast", "fujikyu-fuji"]) {
+    assert.notEqual(routes.find((r) => r.id === id).ticket?.linkId, "jrPass", `${id} is a private railway`);
+  }
+  assert.equal(routes.find((r) => r.id === "hokuriku-alps").ticket.linkId, "jrPass");
+  for (const file of ["app/[locale]/HomeClient.tsx", "app/[locale]/scenic/[slug]/page.tsx"]) {
+    assert.match(readFileSync(file, "utf8"), /ticket\?\.linkId === "jrPass"/, `${file} must gate the JR Pass card`);
+  }
 });

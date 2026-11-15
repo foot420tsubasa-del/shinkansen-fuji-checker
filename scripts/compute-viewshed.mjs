@@ -87,16 +87,37 @@ async function loadTile(tx, ty) {
   const h = new Float32Array(256 * 256);
   for (let i = 0; i < 256 * 256; i++) {
     const v = data[i * 3] * 65536 + data[i * 3 + 1] * 256 + data[i * 3 + 2];
-    h[i] = v === 8388608 ? 0 : v < 8388608 ? v * 0.01 : (v - 16777216) * 0.01;
+    // GSI marks sea and missing cells as 2^23; keep them as NaN so the sea can be found.
+    h[i] = v === 8388608 ? NaN : v < 8388608 ? v * 0.01 : (v - 16777216) * 0.01;
   }
   tiles.set(key, h);
   return h;
 }
-function elevationSync(lat, lng) {
+/** Elevation in metres; NaN means sea (a sea cell, or an open-sea tile GSI does not serve). */
+function elevationRaw(lat, lng) {
   const { tx, ty, px, py } = tileOf(lat, lng);
-  const h = tiles.get(`${tx}/${ty}`);
-  return h ? Math.max(0, h[py * 256 + px]) : 0;
+  const key = `${tx}/${ty}`;
+  if (!tiles.has(key)) return 0;
+  const h = tiles.get(key);
+  return h ? h[py * 256 + px] : NaN;
 }
+function elevationSync(lat, lng) {
+  const v = elevationRaw(lat, lng);
+  return Number.isNaN(v) ? 0 : Math.max(0, v);
+}
+function destination(p, bearingDeg, metres) {
+  const b = rad(bearingDeg);
+  return {
+    lat: p.lat + ((metres * Math.cos(b)) / R) * (180 / Math.PI),
+    lng: p.lng + ((metres * Math.sin(b)) / (R * Math.cos(rad(p.lat)))) * (180 / Math.PI),
+  };
+}
+// Metres: the sea counts as a view when open water is this close. Per route
+// (seaReach), because buildings are not modelled: in a town only water right
+// beside the line is really seen.
+const SEA_REACH = route.seaReach ?? 1500;
+const SEA_STEP = 30;
+const SEA_ANGLES = [60, 90, 120];
 
 // ── Track: fill unnamed gaps (long tunnels) and stop at the last station ───
 const last = route.stations[route.stations.length - 1];
@@ -139,6 +160,7 @@ for (let i = 0; i < filled.length; i++) {
   const p = filled[i];
   if (p.tunnel) continue;
   for (const target of route.targets) {
+    if (target.type === "sea") continue;
     const d = distM(p, target);
     if (d > MAX_KM * 1000) continue;
     rays.push({ i, target, d });
@@ -146,6 +168,23 @@ for (let i = 0; i < filled.length; i++) {
       const t = s / d;
       const { tx, ty } = tileOf(p.lat + (target.lat - p.lat) * t, p.lng + (target.lng - p.lng) * t);
       needed.add(`${tx}/${ty}`);
+    }
+  }
+}
+const seaTarget = route.targets.find((t) => t.type === "sea");
+const travelBearing = (i) => bearing(filled[Math.max(0, i - 2)], filled[Math.min(filled.length - 1, i + 2)]);
+if (seaTarget) {
+  for (let i = 0; i < filled.length; i++) {
+    if (filled[i].tunnel) continue;
+    const heading = travelBearing(i);
+    for (const sign of [-1, 1]) {
+      for (const rel of SEA_ANGLES) {
+        for (let m = SEA_STEP; m <= SEA_REACH; m += SEA_STEP * 4) {
+          const q = destination(filled[i], heading + sign * rel, m);
+          const { tx, ty } = tileOf(q.lat, q.lng);
+          needed.add(`${tx}/${ty}`);
+        }
+      }
     }
   }
 }
@@ -165,7 +204,10 @@ for (const { i, target, d } of rays) {
   const eye = elevationSync(p.lat, p.lng) + OBSERVER_ABOVE_GROUND;
   const top = target.elevation - drop(d);
   let clear = true;
-  for (let s = STEP; s < d - 400; s += STEP) {
+  // The last stretch before the summit is the mountain itself: seeing the rim of
+  // Fuji's crater is seeing Fuji, even when the rim hides the highest point.
+  const ignore = (target.ignoreKm ?? 0.4) * 1000;
+  for (let s = STEP; s < d - ignore; s += STEP) {
     const t = s / d;
     const ground = elevationSync(p.lat + (target.lat - p.lat) * t, p.lng + (target.lng - p.lng) * t) - drop(s);
     const sight = eye + (top - eye) * t;
@@ -183,6 +225,33 @@ for (const { i, target, d } of rays) {
   rel = ((rel + 540) % 360) - 180;
   const side = Math.abs(rel) < 12 ? "ahead" : Math.abs(rel) > 168 ? "behind" : rel > 0 ? "right" : "left";
   results[i].see[target.id] = { side, angle: +angle.toFixed(2), km: +(d / 1000).toFixed(1) };
+}
+
+// ── The sea: open water within reach to the left or right, not hidden by land ──
+if (seaTarget) {
+  for (let i = 0; i < filled.length; i++) {
+    const p = filled[i];
+    if (p.tunnel) continue;
+    const eye = elevationSync(p.lat, p.lng) + OBSERVER_ABOVE_GROUND;
+    const heading = travelBearing(i);
+    let best = null;
+    for (const [sign, side] of [[1, "right"], [-1, "left"]]) {
+      for (const rel of SEA_ANGLES) {
+        let steepest = -Infinity;
+        for (let m = SEA_STEP; m <= SEA_REACH; m += SEA_STEP) {
+          const q = destination(p, heading + sign * rel, m);
+          const v = elevationRaw(q.lat, q.lng);
+          if (Number.isNaN(v)) {
+            const toSea = Math.atan2(-eye, m);
+            if (toSea >= steepest && (!best || m < best.m)) best = { side, m };
+            break;
+          }
+          steepest = Math.max(steepest, Math.atan2(v - eye, m));
+        }
+      }
+    }
+    if (best) results[i].see[seaTarget.id] = { side: best.side, angle: 0, km: +(best.m / 1000).toFixed(2) };
+  }
 }
 
 // ── Sections: runs of visibility per summit, small breaks bridged ──────────

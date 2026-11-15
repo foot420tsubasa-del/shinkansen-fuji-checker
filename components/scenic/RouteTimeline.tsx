@@ -25,6 +25,8 @@ type MapPoint = ViewshedPoint & { lat: number; lng: number };
 const VIEWSHED_LOADERS: Record<string, () => Promise<{ points: MapPoint[] }>> = {
   "hokuriku-alps": () => import("@/data/routes/hokuriku-alps-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
   "tokaido-fuji": () => import("@/data/routes/tokaido-fuji-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
+  "enoden-coast": () => import("@/data/routes/enoden-coast-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
+  "fujikyu-fuji": () => import("@/data/routes/fujikyu-fuji-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
 };
 
 function tokyoDate(): string {

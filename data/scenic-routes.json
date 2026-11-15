@@ -83,7 +83,8 @@
           "name": "Mt. Fuji",
           "lat": 35.3606,
           "lng": 138.7274,
-          "elevation": 3776
+          "elevation": 3776,
+          "ignoreKm": 2
         }
       ],
       "slug": "tokaido-shinkansen",
@@ -892,23 +893,23 @@
     },
     {
       "id": "enoden-coast",
-      "status": "verifying",
+      "status": "live",
       "tier": 1,
       "view": [
         "sea",
         "mountain"
       ],
       "title": "The Shonan coast from the Enoden",
-      "line": "Enoshima Electric Railway (Enoden)",
+      "line": "Enoden (Enoshima Electric Railway)",
       "operator": "Enoshima Electric Railway",
       "between": [
-        "Kamakura",
-        "Fujisawa"
+        "Fujisawa",
+        "Kamakura"
       ],
       "side": null,
       "seat": null,
-      "section": null,
-      "season": null,
+      "section": "Koshigoe – Inamuragasaki",
+      "season": "All year",
       "ticket": null,
       "evidence": "Day trip from Tokyo popular with overseas visitors.",
       "osm": {
@@ -916,7 +917,7 @@
         "bbox": [
           35.29,
           139.47,
-          35.34,
+          35.35,
           139.56
         ]
       },
@@ -928,7 +929,7 @@
         "alt": "Beach, an island and distant Mt. Fuji through the window of a small seaside train",
         "illustrative": true
       },
-      "teaser": "Kamakura · day trip from Tokyo",
+      "teaser": "Kamakura · the sea on the right",
       "near": [
         "Kamakura",
         "Fujisawa",
@@ -938,11 +939,441 @@
       ],
       "tags": [
         "sea"
-      ]
+      ],
+      "stations": [
+        {
+          "name": "Fujisawa",
+          "ja": "藤沢",
+          "lat": 35.3372,
+          "lng": 139.4872
+        },
+        {
+          "name": "Ishigami",
+          "ja": "石上",
+          "lat": 35.3321,
+          "lng": 139.4855
+        },
+        {
+          "name": "Yanagikoji",
+          "ja": "柳小路",
+          "lat": 35.3276,
+          "lng": 139.4852
+        },
+        {
+          "name": "Kugenuma",
+          "ja": "鵠沼",
+          "lat": 35.3214,
+          "lng": 139.4826
+        },
+        {
+          "name": "Shonan-Kaigan-Koen",
+          "ja": "湘南海岸公園",
+          "lat": 35.3149,
+          "lng": 139.4836
+        },
+        {
+          "name": "Enoshima",
+          "ja": "江ノ島",
+          "lat": 35.311,
+          "lng": 139.4875
+        },
+        {
+          "name": "Koshigoe",
+          "ja": "腰越",
+          "lat": 35.3084,
+          "lng": 139.4932
+        },
+        {
+          "name": "Kamakurakokomae",
+          "ja": "鎌倉高校前",
+          "lat": 35.3067,
+          "lng": 139.5007
+        },
+        {
+          "name": "Shichirigahama",
+          "ja": "七里ヶ浜",
+          "lat": 35.3063,
+          "lng": 139.5101
+        },
+        {
+          "name": "Inamuragasaki",
+          "ja": "稲村ヶ崎",
+          "lat": 35.3044,
+          "lng": 139.5219
+        },
+        {
+          "name": "Gokurakuji",
+          "ja": "極楽寺",
+          "lat": 35.3092,
+          "lng": 139.5287
+        },
+        {
+          "name": "Hase",
+          "ja": "長谷",
+          "lat": 35.3113,
+          "lng": 139.5359
+        },
+        {
+          "name": "Yuigahama",
+          "ja": "由比ヶ浜",
+          "lat": 35.3128,
+          "lng": 139.5414
+        },
+        {
+          "name": "Wadazuka",
+          "ja": "和田塚",
+          "lat": 35.3137,
+          "lng": 139.5455
+        },
+        {
+          "name": "Kamakura",
+          "ja": "鎌倉",
+          "lat": 35.3184,
+          "lng": 139.5501
+        }
+      ],
+      "targets": [
+        {
+          "id": "sea",
+          "name": "The sea (Sagami Bay)",
+          "type": "sea",
+          "lat": 0,
+          "lng": 0,
+          "elevation": 0
+        },
+        {
+          "id": "enoshima",
+          "name": "Enoshima",
+          "lat": 35.2995,
+          "lng": 139.4799,
+          "elevation": 60
+        },
+        {
+          "id": "fuji",
+          "name": "Mt. Fuji",
+          "lat": 35.3606,
+          "lng": 138.7274,
+          "elevation": 3776,
+          "ignoreKm": 2
+        }
+      ],
+      "seaReach": 250,
+      "slug": "enoden",
+      "href": "/scenic/enoden",
+      "viewshed": "data/routes/enoden-coast-viewshed.json",
+      "trackKmOffset": 0,
+      "directions": {
+        "forward": [
+          "Fujisawa",
+          "Kamakura"
+        ],
+        "backward": [
+          "Kamakura",
+          "Fujisawa"
+        ]
+      },
+      "chip": {
+        "emoji": "🌊",
+        "label": "Sea view"
+      },
+      "timelineStations": [
+        {
+          "name": "Fujisawa",
+          "ja": "藤沢",
+          "km": 0
+        },
+        {
+          "name": "Ishigami",
+          "ja": "石上",
+          "km": 0.59
+        },
+        {
+          "name": "Yanagikoji",
+          "ja": "柳小路",
+          "km": 1.12
+        },
+        {
+          "name": "Kugenuma",
+          "ja": "鵠沼",
+          "km": 1.81
+        },
+        {
+          "name": "Shonan-Kaigan-Koen",
+          "ja": "湘南海岸公園",
+          "km": 2.62
+        },
+        {
+          "name": "Enoshima",
+          "ja": "江ノ島",
+          "km": 3.23
+        },
+        {
+          "name": "Koshigoe",
+          "ja": "腰越",
+          "km": 3.84
+        },
+        {
+          "name": "Kamakurakokomae",
+          "ja": "鎌倉高校前",
+          "km": 4.63
+        },
+        {
+          "name": "Shichirigahama",
+          "ja": "七里ヶ浜",
+          "km": 5.42
+        },
+        {
+          "name": "Inamuragasaki",
+          "ja": "稲村ヶ崎",
+          "km": 6.59
+        },
+        {
+          "name": "Gokurakuji",
+          "ja": "極楽寺",
+          "km": 7.44
+        },
+        {
+          "name": "Hase",
+          "ja": "長谷",
+          "km": 8.17
+        },
+        {
+          "name": "Yuigahama",
+          "ja": "由比ヶ浜",
+          "km": 8.72
+        },
+        {
+          "name": "Wadazuka",
+          "ja": "和田塚",
+          "km": 9.15
+        },
+        {
+          "name": "Kamakura",
+          "ja": "鎌倉",
+          "km": 9.8
+        }
+      ],
+      "timing": {
+        "kind": "timetable",
+        "source": "Enoden station timetables (enoden.co.jp), weekday, read November 2026: the 13:04 from Fujisawa and the 13:04 from Kamakura. Between stops, spread by distance; the last stop is taken as 2 minutes after the one before.",
+        "sourceUrl": "https://www.enoden.co.jp/train/station/",
+        "trains": [
+          {
+            "id": "enoden",
+            "label": "Enoden",
+            "note": "every station, about every 12 minutes",
+            "forward": {
+              "train": "Enoden 13:04 from Fujisawa",
+              "stops": [
+                [
+                  "Fujisawa",
+                  null,
+                  "13:04"
+                ],
+                [
+                  "Ishigami",
+                  "13:05",
+                  "13:05"
+                ],
+                [
+                  "Yanagikoji",
+                  "13:07",
+                  "13:07"
+                ],
+                [
+                  "Kugenuma",
+                  "13:09",
+                  "13:09"
+                ],
+                [
+                  "Shonan-Kaigan-Koen",
+                  "13:12",
+                  "13:12"
+                ],
+                [
+                  "Enoshima",
+                  "13:17",
+                  "13:17"
+                ],
+                [
+                  "Koshigoe",
+                  "13:19",
+                  "13:19"
+                ],
+                [
+                  "Kamakurakokomae",
+                  "13:21",
+                  "13:21"
+                ],
+                [
+                  "Shichirigahama",
+                  "13:24",
+                  "13:24"
+                ],
+                [
+                  "Inamuragasaki",
+                  "13:31",
+                  "13:31"
+                ],
+                [
+                  "Gokurakuji",
+                  "13:34",
+                  "13:34"
+                ],
+                [
+                  "Hase",
+                  "13:37",
+                  "13:37"
+                ],
+                [
+                  "Yuigahama",
+                  "13:38",
+                  "13:38"
+                ],
+                [
+                  "Wadazuka",
+                  "13:40",
+                  "13:40"
+                ],
+                [
+                  "Kamakura",
+                  "13:42",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Enoden 13:04 from Kamakura",
+              "stops": [
+                [
+                  "Kamakura",
+                  null,
+                  "13:04"
+                ],
+                [
+                  "Wadazuka",
+                  "13:05",
+                  "13:05"
+                ],
+                [
+                  "Yuigahama",
+                  "13:07",
+                  "13:07"
+                ],
+                [
+                  "Hase",
+                  "13:09",
+                  "13:09"
+                ],
+                [
+                  "Gokurakuji",
+                  "13:11",
+                  "13:11"
+                ],
+                [
+                  "Inamuragasaki",
+                  "13:17",
+                  "13:17"
+                ],
+                [
+                  "Shichirigahama",
+                  "13:20",
+                  "13:20"
+                ],
+                [
+                  "Kamakurakokomae",
+                  "13:24",
+                  "13:24"
+                ],
+                [
+                  "Koshigoe",
+                  "13:26",
+                  "13:26"
+                ],
+                [
+                  "Enoshima",
+                  "13:32",
+                  "13:32"
+                ],
+                [
+                  "Shonan-Kaigan-Koen",
+                  "13:33",
+                  "13:33"
+                ],
+                [
+                  "Kugenuma",
+                  "13:37",
+                  "13:37"
+                ],
+                [
+                  "Yanagikoji",
+                  "13:38",
+                  "13:38"
+                ],
+                [
+                  "Ishigami",
+                  "13:40",
+                  "13:40"
+                ],
+                [
+                  "Fujisawa",
+                  "13:42",
+                  null
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "views": [
+        {
+          "id": "sea",
+          "name": "The sea (Sagami Bay)",
+          "targets": [
+            "sea"
+          ],
+          "tags": [
+            "sea"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Koshigoe",
+          "to": "Inamuragasaki",
+          "kmFrom": 3.8,
+          "kmTo": 6.8,
+          "sectionKm": 3,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "All year; the sun sets over the sea in the late afternoon",
+          "seat": null,
+          "basis": "terrain model only: open water within 250 m of the track"
+        }
+      ],
+      "notes": [
+        "Enoden cars have long bench seats along the sides. To face the sea, sit on the land-side bench, or stand by the sea-side windows; the cab window at the front of the train works too.",
+        "On clear days Mt. Fuji and Enoshima show over the sea from the same stretch — behind you going to Kamakura, ahead going to Fujisawa. The terrain model shows both; they are not given a side because they sit ahead of or behind the train, not to one side."
+      ],
+      "verification": "Side and section from a terrain model (GSI elevation, OSM track), counting the sea as a view only where open water lies within 250 m of the line, because buildings are not modelled. No seat letters: the cars have bench seats.",
+      "page": {
+        "title": "Enoden: Which Side for the Sea, Between Fujisawa and Kamakura?",
+        "description": "Going from Fujisawa to Kamakura, the sea is on the right from Koshigoe past Kamakurakokomae and Shichirigahama to Inamuragasaki — about 3 km of open water beside the line. A terrain model, a map and the minutes from the Enoden timetable.",
+        "h1": "Enoden: which side for the sea?",
+        "labelStations": [
+          "Fujisawa",
+          "Enoshima",
+          "Koshigoe",
+          "Kamakurakokomae",
+          "Shichirigahama",
+          "Inamuragasaki",
+          "Hase",
+          "Kamakura"
+        ]
+      }
     },
     {
       "id": "fujikyu-fuji",
-      "status": "candidate",
+      "status": "live",
       "tier": 1,
       "view": [
         "mountain"
@@ -956,19 +1387,18 @@
       ],
       "side": null,
       "seat": null,
-      "section": null,
-      "season": null,
+      "section": "Higashi-Katsura – Kawaguchiko",
+      "season": "All year",
       "ticket": null,
       "evidence": "Same readers as the Tokaido Fuji seat; Kawaguchiko is already the fallback the site offers on cloudy days.",
       "osm": {
-        "name": "富士急行線",
+        "name": "富士急|富士山麓",
         "bbox": [
-          35.48,
-          138.74,
-          35.63,
-          138.98
-        ],
-        "nameToConfirm": true
+          35.47,
+          138.75,
+          35.62,
+          138.95
+        ]
       },
       "image": {
         "src": "/images/scenic/scenic-fujikyu-fuji-tall.png",
@@ -977,7 +1407,7 @@
         "alt": "Mt. Fuji close above a lake and autumn leaves through a local train window",
         "illustrative": true
       },
-      "teaser": "Kawaguchiko · autumn",
+      "teaser": "Otsuki → Kawaguchiko · Fuji on the left",
       "near": [
         "Otsuki",
         "Kawaguchiko",
@@ -987,7 +1417,554 @@
       "tags": [
         "fuji",
         "mountain"
-      ]
+      ],
+      "stations": [
+        {
+          "name": "Otsuki",
+          "ja": "大月",
+          "lat": 35.6129,
+          "lng": 138.9422
+        },
+        {
+          "name": "Kamiotsuki",
+          "ja": "上大月",
+          "lat": 35.6093,
+          "lng": 138.938
+        },
+        {
+          "name": "Tanokura",
+          "ja": "田野倉",
+          "lat": 35.5932,
+          "lng": 138.9313
+        },
+        {
+          "name": "Kasei",
+          "ja": "禾生",
+          "lat": 35.5751,
+          "lng": 138.9291
+        },
+        {
+          "name": "Akasaka",
+          "ja": "赤坂",
+          "lat": 35.5661,
+          "lng": 138.9162
+        },
+        {
+          "name": "Tsurushi",
+          "ja": "都留市",
+          "lat": 35.5571,
+          "lng": 138.9075
+        },
+        {
+          "name": "Yamuramachi",
+          "ja": "谷村町",
+          "lat": 35.5506,
+          "lng": 138.9047
+        },
+        {
+          "name": "Tsurubunkadaigakumae",
+          "ja": "都留文科大学前",
+          "lat": 35.5425,
+          "lng": 138.8965
+        },
+        {
+          "name": "Tokaichiba",
+          "ja": "十日市場",
+          "lat": 35.5399,
+          "lng": 138.8845
+        },
+        {
+          "name": "Higashi-Katsura",
+          "ja": "東桂",
+          "lat": 35.5364,
+          "lng": 138.8709
+        },
+        {
+          "name": "Mitsutoge",
+          "ja": "三つ峠",
+          "lat": 35.5242,
+          "lng": 138.8454
+        },
+        {
+          "name": "Kotobuki",
+          "ja": "寿",
+          "lat": 35.5082,
+          "lng": 138.8253
+        },
+        {
+          "name": "Yoshiike-Onsenmae",
+          "ja": "葭池温泉前",
+          "lat": 35.502,
+          "lng": 138.812
+        },
+        {
+          "name": "Shimoyoshida",
+          "ja": "下吉田",
+          "lat": 35.498,
+          "lng": 138.8036
+        },
+        {
+          "name": "Gekkoji",
+          "ja": "月江寺",
+          "lat": 35.4932,
+          "lng": 138.7981
+        },
+        {
+          "name": "Mt. Fuji",
+          "ja": "富士山",
+          "lat": 35.4835,
+          "lng": 138.7954
+        },
+        {
+          "name": "Fujikyu Highland",
+          "ja": "富士急ハイランド",
+          "lat": 35.4894,
+          "lng": 138.7819
+        },
+        {
+          "name": "Kawaguchiko",
+          "ja": "河口湖",
+          "lat": 35.498,
+          "lng": 138.769
+        }
+      ],
+      "targets": [
+        {
+          "id": "fuji",
+          "name": "Mt. Fuji",
+          "lat": 35.3606,
+          "lng": 138.7274,
+          "elevation": 3776,
+          "ignoreKm": 2
+        }
+      ],
+      "slug": "fujikyu",
+      "href": "/scenic/fujikyu",
+      "viewshed": "data/routes/fujikyu-fuji-viewshed.json",
+      "trackKmOffset": 0,
+      "directions": {
+        "forward": [
+          "Otsuki",
+          "Kawaguchiko"
+        ],
+        "backward": [
+          "Kawaguchiko",
+          "Otsuki"
+        ]
+      },
+      "chip": {
+        "emoji": "🗻",
+        "label": "Fuji up close"
+      },
+      "timelineStations": [
+        {
+          "name": "Otsuki",
+          "ja": "大月",
+          "km": 0
+        },
+        {
+          "name": "Kamiotsuki",
+          "ja": "上大月",
+          "km": 0.6
+        },
+        {
+          "name": "Tanokura",
+          "ja": "田野倉",
+          "km": 2.8
+        },
+        {
+          "name": "Kasei",
+          "ja": "禾生",
+          "km": 5.3
+        },
+        {
+          "name": "Akasaka",
+          "ja": "赤坂",
+          "km": 6.9
+        },
+        {
+          "name": "Tsurushi",
+          "ja": "都留市",
+          "km": 8.3
+        },
+        {
+          "name": "Yamuramachi",
+          "ja": "谷村町",
+          "km": 9.1
+        },
+        {
+          "name": "Tsurubunkadaigakumae",
+          "ja": "都留文科大学前",
+          "km": 10.3
+        },
+        {
+          "name": "Tokaichiba",
+          "ja": "十日市場",
+          "km": 11.6
+        },
+        {
+          "name": "Higashi-Katsura",
+          "ja": "東桂",
+          "km": 12.8
+        },
+        {
+          "name": "Mitsutoge",
+          "ja": "三つ峠",
+          "km": 15.4
+        },
+        {
+          "name": "Kotobuki",
+          "ja": "寿",
+          "km": 18.4
+        },
+        {
+          "name": "Yoshiike-Onsenmae",
+          "ja": "葭池温泉前",
+          "km": 19.8
+        },
+        {
+          "name": "Shimoyoshida",
+          "ja": "下吉田",
+          "km": 20.6
+        },
+        {
+          "name": "Gekkoji",
+          "ja": "月江寺",
+          "km": 21.5
+        },
+        {
+          "name": "Mt. Fuji",
+          "ja": "富士山",
+          "km": 22.6
+        },
+        {
+          "name": "Fujikyu Highland",
+          "ja": "富士急ハイランド",
+          "km": 24.1
+        },
+        {
+          "name": "Kawaguchiko",
+          "ja": "河口湖",
+          "km": 25.7
+        }
+      ],
+      "timing": {
+        "kind": "timetable",
+        "source": "Fujikyu Line station timetables (fujikyu-railway.jp), weekday, from 14 March 2026: the 13:55 local from Otsuki, the 13:16 local from Kawaguchiko and the 11:36 Fuji Excursion. Kawaguchiko arrival taken as the published 3-minute run from Fujikyu Highland; Otsuki arrival as 2 minutes after Kamiotsuki. Between stops, spread by distance.",
+        "sourceUrl": "https://www.fujikyu-railway.jp/",
+        "trains": [
+          {
+            "id": "local",
+            "label": "Local",
+            "note": "every station",
+            "forward": {
+              "train": "Local 13:55 from Otsuki",
+              "stops": [
+                [
+                  "Otsuki",
+                  null,
+                  "13:55"
+                ],
+                [
+                  "Kamiotsuki",
+                  "13:57",
+                  "13:57"
+                ],
+                [
+                  "Tanokura",
+                  "14:03",
+                  "14:03"
+                ],
+                [
+                  "Kasei",
+                  "14:07",
+                  "14:07"
+                ],
+                [
+                  "Akasaka",
+                  "14:10",
+                  "14:10"
+                ],
+                [
+                  "Tsurushi",
+                  "14:13",
+                  "14:13"
+                ],
+                [
+                  "Yamuramachi",
+                  "14:15",
+                  "14:15"
+                ],
+                [
+                  "Tsurubunkadaigakumae",
+                  "14:18",
+                  "14:18"
+                ],
+                [
+                  "Tokaichiba",
+                  "14:20",
+                  "14:20"
+                ],
+                [
+                  "Higashi-Katsura",
+                  "14:23",
+                  "14:23"
+                ],
+                [
+                  "Mitsutoge",
+                  "14:29",
+                  "14:29"
+                ],
+                [
+                  "Kotobuki",
+                  "14:34",
+                  "14:34"
+                ],
+                [
+                  "Yoshiike-Onsenmae",
+                  "14:36",
+                  "14:36"
+                ],
+                [
+                  "Shimoyoshida",
+                  "14:39",
+                  "14:39"
+                ],
+                [
+                  "Gekkoji",
+                  "14:41",
+                  "14:41"
+                ],
+                [
+                  "Mt. Fuji",
+                  "14:47",
+                  "14:47"
+                ],
+                [
+                  "Fujikyu Highland",
+                  "14:50",
+                  "14:50"
+                ],
+                [
+                  "Kawaguchiko",
+                  "14:53",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Local 13:16 from Kawaguchiko",
+              "stops": [
+                [
+                  "Kawaguchiko",
+                  null,
+                  "13:16"
+                ],
+                [
+                  "Fujikyu Highland",
+                  "13:19",
+                  "13:19"
+                ],
+                [
+                  "Mt. Fuji",
+                  "13:24",
+                  "13:24"
+                ],
+                [
+                  "Gekkoji",
+                  "13:27",
+                  "13:27"
+                ],
+                [
+                  "Shimoyoshida",
+                  "13:30",
+                  "13:30"
+                ],
+                [
+                  "Yoshiike-Onsenmae",
+                  "13:32",
+                  "13:32"
+                ],
+                [
+                  "Kotobuki",
+                  "13:34",
+                  "13:34"
+                ],
+                [
+                  "Mitsutoge",
+                  "13:39",
+                  "13:39"
+                ],
+                [
+                  "Higashi-Katsura",
+                  "13:43",
+                  "13:43"
+                ],
+                [
+                  "Tokaichiba",
+                  "13:46",
+                  "13:46"
+                ],
+                [
+                  "Tsurubunkadaigakumae",
+                  "13:48",
+                  "13:48"
+                ],
+                [
+                  "Yamuramachi",
+                  "13:51",
+                  "13:51"
+                ],
+                [
+                  "Tsurushi",
+                  "13:53",
+                  "13:53"
+                ],
+                [
+                  "Akasaka",
+                  "13:56",
+                  "13:56"
+                ],
+                [
+                  "Kasei",
+                  "13:58",
+                  "13:58"
+                ],
+                [
+                  "Tanokura",
+                  "14:03",
+                  "14:03"
+                ],
+                [
+                  "Kamiotsuki",
+                  "14:07",
+                  "14:07"
+                ],
+                [
+                  "Otsuki",
+                  "14:09",
+                  null
+                ]
+              ]
+            }
+          },
+          {
+            "id": "excursion",
+            "label": "Fuji Excursion",
+            "note": "limited express; stops at Tsurubunkadaigakumae, Shimoyoshida, Mt. Fuji and Fujikyu Highland",
+            "forward": {
+              "train": "Fuji Excursion (11:36 from Otsuki)",
+              "stops": [
+                [
+                  "Otsuki",
+                  null,
+                  "11:36"
+                ],
+                [
+                  "Tsurubunkadaigakumae",
+                  "11:56",
+                  "11:56"
+                ],
+                [
+                  "Shimoyoshida",
+                  "12:12",
+                  "12:12"
+                ],
+                [
+                  "Mt. Fuji",
+                  "12:19",
+                  "12:19"
+                ],
+                [
+                  "Fujikyu Highland",
+                  "12:22",
+                  "12:22"
+                ],
+                [
+                  "Kawaguchiko",
+                  "12:25",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Fuji Excursion (14:08 from Kawaguchiko)",
+              "stops": [
+                [
+                  "Kawaguchiko",
+                  null,
+                  "14:08"
+                ],
+                [
+                  "Fujikyu Highland",
+                  "14:11",
+                  "14:11"
+                ],
+                [
+                  "Mt. Fuji",
+                  "14:16",
+                  "14:16"
+                ],
+                [
+                  "Shimoyoshida",
+                  "14:21",
+                  "14:21"
+                ],
+                [
+                  "Tsurubunkadaigakumae",
+                  "14:37",
+                  null
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "views": [
+        {
+          "id": "fuji",
+          "name": "Mt. Fuji",
+          "targets": [
+            "fuji"
+          ],
+          "tags": [
+            "fuji",
+            "mountain"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Higashi-Katsura",
+          "to": "Kawaguchiko",
+          "kmFrom": 12.5,
+          "kmTo": 25.7,
+          "sectionKm": 13,
+          "nearestKm": 14.9,
+          "maxAngle": 11.16,
+          "season": "Clear days, all year; snow-capped from autumn to late spring",
+          "seat": null,
+          "basis": "terrain model only"
+        }
+      ],
+      "notes": [
+        "Trains reverse at Mt. Fuji station and leave in the opposite direction; by the terrain model Mt. Fuji stays on the left all the way to Kawaguchiko.",
+        "Before Higashi-Katsura the model also shows glimpses ahead of the train between Otsuki and Tsuru; they are not given a side."
+      ],
+      "verification": "Side and section from a terrain model (GSI elevation, OSM track); the summit counts as visible when any of its top 2 km clears the hills, since the crater rim hides the highest point from the north. No published source was found for the side, so it rests on the model alone. Seat letters not verified.",
+      "page": {
+        "title": "Fujikyu Line: Which Side for Mt. Fuji, Otsuki to Kawaguchiko?",
+        "description": "Going from Otsuki to Kawaguchiko, Mt. Fuji is on the left from Higashi-Katsura onward — about 13 km of line, up to a fist and a half high. A terrain model, a map and the minutes from the Fujikyu timetable.",
+        "h1": "Fujikyu Line: which side for Mt. Fuji?",
+        "labelStations": [
+          "Otsuki",
+          "Tsurushi",
+          "Higashi-Katsura",
+          "Mitsutoge",
+          "Shimoyoshida",
+          "Mt. Fuji",
+          "Kawaguchiko"
+        ]
+      }
     },
     {
       "id": "hakone-tozan",

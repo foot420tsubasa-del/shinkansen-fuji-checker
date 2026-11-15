@@ -467,7 +467,9 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
               to={routeMatch.to}
               tags={tags}
             />
-            {routeMatch.route.timing?.kind === "timetable" ? (
+            {/* Only where the JR Pass really covers the line: the Enoden and the
+                Fujikyu Line are private railways it does not. */}
+            {routeMatch.route.ticket?.linkId === "jrPass" ? (
               <div className="max-w-[560px]">
                 <ScenicPassCard href={JR_PASS_URL} routeId={routeMatch.route.id} line={routeMatch.route.line} />
               </div>
@@ -481,6 +483,21 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("search.unsupportedBody")}</p>
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                {routeMatch.nearbyLive.map((r) => (
+                  <Link key={r.id} href={r.href ?? "/"} className="overflow-hidden rounded-[18px] border-2 border-fuji/60 hover:shadow-md">
+                    {r.image ? (
+                      <div className="relative aspect-[16/10] bg-ink">
+                        <Image src={r.image.src} alt={r.image.alt} fill sizes="(min-width: 640px) 33vw, 100vw" className="object-cover" />
+                        <span className="absolute left-2.5 top-2.5 rounded-full bg-fuji px-2.5 py-0.5 text-[11px] font-bold text-white">Live</span>
+                        <span className="absolute bottom-1.5 right-2 text-[9.5px] text-white/75">Illustrative</span>
+                      </div>
+                    ) : null}
+                    <div className="p-3">
+                      <p className="text-sm font-bold leading-snug text-ink">{r.title}</p>
+                      {r.teaser ? <p className="mt-0.5 text-xs text-slate-500">{r.teaser}</p> : null}
+                    </div>
+                  </Link>
+                ))}
                 {routeMatch.comingSoon.map((r) => (
                   <div key={r.id} className="overflow-hidden rounded-[18px] border border-slate-200">
                     {r.image ? (

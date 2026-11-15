@@ -169,10 +169,11 @@ export default async function ScenicRoutePage({ params }: Props) {
           </div>
           <ul className="mt-5 grid gap-2.5">
             {[
+              ...(route.notes ?? []),
               "Trains pass every one of these stretches whether or not they stop; the views are between stations, not at them.",
               views.some((v) => v.seat)
                 ? "Seat letters are shown only where they have been verified."
-                : "Seat letters: we give sides, not letters, until the letters for this line are verified. Choose a window seat on the side you need when you book.",
+                : "Seat letters: we give sides, not letters, unless they have been verified.",
             ].map((line) => (
               <li key={line} className="flex gap-3 text-[16px] leading-7 text-slate-700">
                 <Check className="mt-1.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
@@ -182,17 +183,17 @@ export default async function ScenicRoutePage({ params }: Props) {
           </ul>
         </section>
 
-        {route.timing?.kind === "timetable" ? (
+        {route.ticket?.linkId === "jrPass" ? (
           <section className="mt-10">
             <ScenicPassCard href={JR_PASS_URL} routeId={route.id} line={route.line} />
           </section>
-        ) : (
+        ) : route.id === "tokaido-fuji" ? (
           <section className="mt-10">
             <Link href="/#seat-checker" className="inline-flex h-12 items-center gap-2 rounded-full bg-fuji px-6 text-[15px] font-bold text-white">
               Check your seat and book <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </section>
-        )}
+        ) : null}
 
         <section className="mt-12">
           <h2 className="text-2xl font-extrabold tracking-[-0.02em]">Questions</h2>
