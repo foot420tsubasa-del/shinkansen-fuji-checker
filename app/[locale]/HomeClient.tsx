@@ -15,7 +15,7 @@ import { ScenicRoutesGallery } from "@/components/home/ScenicRoutesGallery";
 import { RouteSearch } from "@/components/home/RouteSearch";
 import { RouteTimeline } from "@/components/scenic/RouteTimeline";
 import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
-import { matchRoute, type RouteMatch, type ViewTag } from "@/lib/scenic";
+import { matchRoute, resolveStation, type RouteMatch, type ViewTag } from "@/lib/scenic";
 import type { HeroSeason } from "@/lib/hero-images";
 import { trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
@@ -311,7 +311,8 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
       const params = new URLSearchParams(window.location.search);
       const from = params.get("from");
       const to = params.get("to");
-      if (from && to) runSearch(from, to);
+      // Same names the search box accepts: "Arashiyama", "Hakone" and the like.
+      if (from && to) runSearch(resolveStation(from) ?? from, resolveStation(to) ?? to);
     });
     return () => cancelAnimationFrame(frame);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on arrival
