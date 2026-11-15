@@ -106,7 +106,7 @@
       "hub": "SHINKANSEN SEAT CHECKER",
       "seat": "Check Seat",
       "planner": "Planner",
-      "stay": "Hotel Base",
+      "stay": "Where to Stay",
       "essentials": "Essentials",
       "about": "About",
       "guide": "Guide",
@@ -2061,6 +2061,34 @@
     "roomSizeGuide": {
       "title": "How small is a Tokyo hotel room?",
       "description": "Typical room sizes by hotel type, and what fits beside two suitcases."
+    },
+    "finder": {
+      "eyebrow": "Free · 36 Tokyo station areas",
+      "title": "Where should you stay in Tokyo?",
+      "sub": "Tap the places you want to go. We’ll find the station that gets you to them with the fewest changes of train.",
+      "visitLabel": "I want to go to",
+      "alsoLabel": "Also",
+      "optLuggage": "Lots of luggage",
+      "optShinkansen": "Shinkansen day",
+      "optAirport": "Airport transfer",
+      "pickMore": "Pick two or more places to see your best station.",
+      "bestBase": "Your best base",
+      "tradeOff": "No station reaches all of these without a change — this is the best trade-off.",
+      "stayNear": "Stay near {area}",
+      "walk": "Walk",
+      "direct": "No change",
+      "partial": "No change on some trains",
+      "transfer": "1+ change",
+      "stationEase": "Station ease",
+      "luggage": "Luggage",
+      "hotelsCta": "See hotels near {area}",
+      "hotelsNote": "Opens Booking.com with {area} already set.",
+      "alsoGood": "Also good",
+      "note": "“No change” means one train, start to finish. Ride times vary by line.",
+      "disclosure": "We may earn a commission if you book through these links, at no extra cost to you.",
+      "popularTitle": "Popular answers",
+      "popularIntro": "The places travelers combine most, answered with the same station data.",
+      "clear": "Clear"
     }
   },
   "planYourTrip": {

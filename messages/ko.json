@@ -106,7 +106,7 @@
       "hub": "신칸센 좌석 체커",
       "seat": "좌석 확인",
       "planner": "여행 플래너",
-      "stay": "호텔 거점",
+      "stay": "숙소 위치",
       "essentials": "필수 준비",
       "about": "소개",
       "guide": "가이드",
@@ -2061,6 +2061,34 @@
     "roomSizeGuide": {
       "title": "도쿄 호텔 객실은 얼마나 좁을까",
       "description": "호텔 종류별 일반적인 객실 크기와, 캐리어 두 개 옆에 무엇이 들어가는지."
+    },
+    "finder": {
+      "eyebrow": "무료 · 도쿄 36개 역 지역",
+      "title": "도쿄에서 어디에 묵을까요?",
+      "sub": "가고 싶은 곳을 누르세요. 환승이 가장 적은 역을 찾아 드립니다.",
+      "visitLabel": "가고 싶은 곳",
+      "alsoLabel": "추가 조건",
+      "optLuggage": "짐이 많아요",
+      "optShinkansen": "신칸센 타는 날",
+      "optAirport": "공항 이동",
+      "pickMore": "두 곳 이상 고르면 가장 좋은 역이 나옵니다.",
+      "bestBase": "추천 숙소 거점",
+      "tradeOff": "모든 곳에 환승 없이 가는 역은 없습니다. 가장 균형 잡힌 선택입니다.",
+      "stayNear": "{area} 근처에 묵기",
+      "walk": "도보",
+      "direct": "환승 없음",
+      "partial": "일부 열차 환승 없음",
+      "transfer": "환승 1회 이상",
+      "stationEase": "역 이용 편의",
+      "luggage": "짐",
+      "hotelsCta": "{area} 근처 호텔 보기",
+      "hotelsNote": "{area}가 설정된 상태로 Booking.com이 열립니다.",
+      "alsoGood": "이곳도 좋아요",
+      "note": "‘환승 없음’은 한 열차로 끝까지 간다는 뜻입니다. 소요 시간은 노선마다 다릅니다.",
+      "disclosure": "이 링크로 예약하시면 저희가 수수료를 받을 수 있지만, 추가 비용은 없습니다.",
+      "popularTitle": "자주 찾는 답",
+      "popularIntro": "여행자들이 가장 많이 묶는 장소를 같은 역 데이터로 답했습니다.",
+      "clear": "지우기"
     }
   },
   "planYourTrip": {

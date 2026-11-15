@@ -106,7 +106,7 @@
       "hub": "VÉRIFICATEUR DE SIÈGE SHINKANSEN",
       "seat": "Vérifier le siège",
       "planner": "Planificateur",
-      "stay": "Base hôtel",
+      "stay": "Où dormir",
       "essentials": "Essentiels",
       "about": "À propos",
       "guide": "Le guide",
@@ -2061,6 +2061,34 @@
     "roomSizeGuide": {
       "title": "Une chambre à Tokyo, c’est petit comment ?",
       "description": "Surfaces habituelles par type d’hôtel et ce qui tient à côté de deux valises."
+    },
+    "finder": {
+      "eyebrow": "Gratuit · 36 quartiers de gare à Tokyo",
+      "title": "Où dormir à Tokyo ?",
+      "sub": "Touche les lieux que tu veux visiter. On trouve la gare qui t’y mène avec le moins de changements.",
+      "visitLabel": "Je veux aller à",
+      "alsoLabel": "Aussi",
+      "optLuggage": "Beaucoup de bagages",
+      "optShinkansen": "Jour de Shinkansen",
+      "optAirport": "Trajet aéroport",
+      "pickMore": "Choisis au moins deux lieux pour voir ta meilleure gare.",
+      "bestBase": "Ta meilleure base",
+      "tradeOff": "Aucune gare ne dessert tout sans changement : voici le meilleur compromis.",
+      "stayNear": "Loge près de {area}",
+      "walk": "À pied",
+      "direct": "Sans changement",
+      "partial": "Sans changement pour certains trains",
+      "transfer": "1+ changement",
+      "stationEase": "Facilité de la gare",
+      "luggage": "Bagages",
+      "hotelsCta": "Voir les hôtels près de {area}",
+      "hotelsNote": "Ouvre Booking.com avec {area} déjà choisi.",
+      "alsoGood": "Aussi bien",
+      "note": "« Sans changement » veut dire un seul train. La durée dépend de la ligne.",
+      "disclosure": "Nous pouvons toucher une commission si tu réserves via ces liens, sans surcoût pour toi.",
+      "popularTitle": "Réponses fréquentes",
+      "popularIntro": "Les lieux que les voyageurs combinent le plus, avec les mêmes données de gare.",
+      "clear": "Effacer"
     }
   },
   "planYourTrip": {

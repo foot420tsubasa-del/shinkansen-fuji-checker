@@ -1,0 +1,326 @@
+"use client";
+
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ArrowRight, Check, Hotel } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { AFFILIATE_REL } from "@/lib/link-rel";
+import { trackAffiliateClick, trackCtaClick } from "@/lib/analytics";
+import {
+  isTradeOff,
+  rankAreas,
+  type FinderArea,
+  type FinderDestination,
+  type FinderOption,
+  type LegResult,
+} from "@/lib/stay-finder";
+
+const OPTIONS: FinderOption[] = ["luggage", "shinkansen", "airport"];
+const OPTION_KEY: Record<FinderOption, string> = {
+  luggage: "optLuggage",
+  shinkansen: "optShinkansen",
+  airport: "optAirport",
+};
+const OPTION_ICON: Record<FinderOption, string> = { luggage: "🧳", shinkansen: "🚄", airport: "✈️" };
+
+function legBadge(kind: LegResult["kind"]) {
+  return kind === "transfer"
+    ? "bg-amber-400/15 text-amber-200"
+    : kind === "partial"
+      ? "bg-sky-400/15 text-sky-200"
+      : "bg-emerald-400/15 text-emerald-200";
+}
+
+function Meter({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="rounded-xl bg-white/[0.07] px-3 py-2.5 text-xs text-white/70">
+      {label}
+      <b className="mt-0.5 block text-lg text-white">{Math.round(value)}</b>
+      <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/10">
+        <div className="h-full rounded-full bg-emerald-300" style={{ width: `${Math.min(100, value)}%` }} />
+      </div>
+    </div>
+  );
+}
+
+/**
+ * The Where to Stay finder. Tap the places on the trip; the answer is the
+ * station area that reaches them with the fewest changes of train, with the
+ * lines that do it and a hotel search already set to that station.
+ *
+ * The selection lives in the URL (?go=shinjuku,asakusa) so an answer can be
+ * shared or linked from an article; the page's canonical stays bare.
+ */
+export function StayFinder({
+  areas,
+  destinations,
+  lineNotes,
+}: {
+  areas: FinderArea[];
+  destinations: FinderDestination[];
+  /** "areaId|line" → a caveat shown under that leg. */
+  lineNotes: Record<string, string>;
+}) {
+  const t = useTranslations("areasToStayHub.finder");
+  const locale = useLocale();
+  const [selected, setSelected] = useState<string[]>([]);
+  const [options, setOptions] = useState<FinderOption[]>([]);
+  // False until a shared ?go= selection has been read, so the URL is not
+  // rewritten (and the selection lost) before it is.
+  const [urlRead, setUrlRead] = useState(false);
+  const answerRef = useRef<HTMLDivElement>(null);
+  const loggedRef = useRef<string>("");
+
+  // Read a shared selection once, after hydration, so the server HTML and the
+  // first client render agree.
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const params = new URLSearchParams(window.location.search);
+      const go = (params.get("go") ?? "").split(",").filter((id) => destinations.some((d) => d.id === id));
+      const opt = (params.get("opt") ?? "")
+        .split(",")
+        .filter((o): o is FinderOption => OPTIONS.includes(o as FinderOption));
+      if (go.length) setSelected(go.slice(0, 4));
+      if (opt.length) setOptions(opt);
+      setUrlRead(true);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [destinations]);
+
+  useEffect(() => {
+    if (!urlRead) return;
+    const url = new URL(window.location.href);
+    if (selected.length) url.searchParams.set("go", selected.join(","));
+    else url.searchParams.delete("go");
+    if (options.length) url.searchParams.set("opt", options.join(","));
+    else url.searchParams.delete("opt");
+    window.history.replaceState(null, "", url.toString());
+  }, [selected, options, urlRead]);
+
+  const chosen = useMemo(
+    () => selected.map((id) => destinations.find((d) => d.id === id)).filter((d): d is FinderDestination => Boolean(d)),
+    [selected, destinations],
+  );
+  const ranked = useMemo(
+    () => (chosen.length >= 2 ? rankAreas(areas, chosen, options) : []),
+    [areas, chosen, options],
+  );
+  const best = ranked[0];
+  const alternatives = ranked.slice(1, 3);
+
+  useEffect(() => {
+    if (!best) return;
+    const key = `${selected.join("+")}|${options.join("+")}`;
+    if (loggedRef.current === key) return;
+    loggedRef.current = key;
+    trackCtaClick({
+      placement: "stay_finder_answer",
+      href: `/areas-to-stay?go=${selected.join(",")}`,
+      label: `${selected.join("+")}→${best.area.id}`,
+      category: "stay",
+      locale,
+    });
+  }, [best, selected, options, locale]);
+
+  const toggle = (id: string) => {
+    setSelected((current) =>
+      current.includes(id) ? current.filter((x) => x !== id) : current.length >= 4 ? current : [...current, id],
+    );
+  };
+  const toggleOption = (option: FinderOption) =>
+    setOptions((current) => (current.includes(option) ? current.filter((x) => x !== option) : [...current, option]));
+
+  // The area name is styled on its own, and word order differs by language
+  // ("Stay near Kanda", "住在神田附近"), so the message is split around it.
+  const [stayNearBefore, stayNearAfter = ""] = (t.raw("stayNear") as string).split("{area}");
+
+  const legText = (leg: LegResult) =>
+    leg.kind === "walk" ? t("walk") : leg.kind === "direct" ? t("direct") : leg.kind === "partial" ? t("partial") : t("transfer");
+
+  return (
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
+      <div className="min-w-0">
+        <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">{t("eyebrow")}</p>
+        <h1 className="mt-3 text-[34px] font-extrabold leading-[1.06] tracking-[-0.03em] text-ink md:text-[48px]">
+          {t("title")}
+        </h1>
+        <p className="mt-3 max-w-[480px] text-base leading-7 text-slate-600">{t("sub")}</p>
+
+        <p className="mb-2 mt-6 text-xs font-bold uppercase tracking-[0.08em] text-slate-500">{t("visitLabel")}</p>
+        <div className="flex flex-wrap gap-2">
+          {destinations.map((dest) => {
+            const on = selected.includes(dest.id);
+            return (
+              <button
+                key={dest.id}
+                type="button"
+                aria-pressed={on}
+                onClick={() => toggle(dest.id)}
+                className={[
+                  "inline-flex min-h-10 items-center gap-1.5 rounded-full border-[1.5px] px-3.5 text-sm font-semibold transition-colors",
+                  on ? "border-ink bg-ink text-white" : "border-slate-300 bg-white text-ink hover:bg-slate-50",
+                ].join(" ")}
+              >
+                {on ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : null}
+                {dest.label}
+              </button>
+            );
+          })}
+        </div>
+
+        <p className="mb-2 mt-5 text-xs font-bold uppercase tracking-[0.08em] text-slate-500">{t("alsoLabel")}</p>
+        <div className="flex flex-wrap gap-2">
+          {OPTIONS.map((option) => {
+            const on = options.includes(option);
+            return (
+              <button
+                key={option}
+                type="button"
+                aria-pressed={on}
+                onClick={() => toggleOption(option)}
+                className={[
+                  "inline-flex min-h-9 items-center gap-1.5 rounded-full border-[1.5px] px-3 text-[13px] font-semibold transition-colors",
+                  on
+                    ? "border-emerald-700 bg-emerald-50 text-emerald-800"
+                    : "border-dashed border-slate-300 bg-white text-slate-600 hover:bg-slate-50",
+                ].join(" ")}
+              >
+                <span aria-hidden="true">{OPTION_ICON[option]}</span>
+                {t(OPTION_KEY[option])}
+              </button>
+            );
+          })}
+          {selected.length ? (
+            <button
+              type="button"
+              onClick={() => {
+                setSelected([]);
+                setOptions([]);
+              }}
+              className="min-h-9 px-2 text-[13px] font-semibold text-slate-500 underline underline-offset-2"
+            >
+              {t("clear")}
+            </button>
+          ) : null}
+        </div>
+      </div>
+
+      <div ref={answerRef} className="min-w-0" aria-live="polite">
+        {best ? (
+          <div className="grid grid-cols-1 gap-4">
+            <div className="rounded-[24px] bg-ink p-6 text-white shadow-[0_18px_44px_rgba(11,18,32,0.25)] md:p-7">
+              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/60">
+                {isTradeOff(best) ? t("tradeOff") : t("bestBase")}
+              </p>
+              <p className="mt-2 text-[34px] font-extrabold leading-[1.08] tracking-[-0.03em] md:text-[42px]">
+                {stayNearBefore}
+                <span className="text-[#ff7a5c]">{best.area.name}</span>
+                {stayNearAfter}
+              </p>
+              <ul className="mt-4 border-t border-white/15">
+                {best.legs.map((leg) => {
+                  const note = leg.line ? lineNotes[`${best.area.id}|${leg.line}`] : undefined;
+                  return (
+                    <li key={leg.destinationId} className="flex items-start justify-between gap-3 border-b border-white/10 py-2.5 text-sm">
+                      <span className="min-w-0">
+                        {leg.label}
+                        {leg.line ? <span className="mt-0.5 block text-xs text-white/60">{leg.line}</span> : null}
+                        {note ? <span className="mt-0.5 block text-xs text-amber-200/90">{note}</span> : null}
+                      </span>
+                      <span className={["shrink-0 rounded-full px-2.5 py-1 text-[11.5px] font-bold", legBadge(leg.kind)].join(" ")}>
+                        {legText(leg)}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+              <div className="mt-4 grid grid-cols-2 gap-2.5">
+                <Meter label={t("stationEase")} value={best.area.scores.stationSimplicity} />
+                <Meter label={t("luggage")} value={best.area.scores.luggageFriendly} />
+              </div>
+              <p className="mt-3 text-[11.5px] leading-5 text-white/55">{t("note")}</p>
+            </div>
+
+            {best.area.hotelUrl ? (
+              <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.07)]">
+                <a
+                  href={best.area.hotelUrl}
+                  target="_blank"
+                  rel={AFFILIATE_REL}
+                  onClick={() =>
+                    trackAffiliateClick({
+                      category: "hotel",
+                      provider: "booking_travelpayouts",
+                      placement: "stay_finder_result",
+                      href: best.area.hotelUrl ?? "",
+                      label: `${selected.join("+")}→${best.area.id}`,
+                      link_id: `booking_${best.area.id}`,
+                      product: "hotel_search",
+                      area_id: best.area.id,
+                      locale,
+                    })
+                  }
+                  className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-fuji px-5 text-[15px] font-bold text-white shadow-[0_8px_20px_rgba(217,74,50,0.28)] transition-colors hover:bg-fuji-hover"
+                >
+                  <Hotel className="h-4 w-4" aria-hidden="true" />
+                  {t("hotelsCta", { area: best.area.name })}
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+                <p className="mt-2 text-center text-xs text-slate-500">{t("hotelsNote", { area: best.area.name })}</p>
+                <p className="mt-3 border-t border-slate-100 pt-3 text-center text-[11px] leading-4 text-slate-500">
+                  {t("disclosure")}
+                </p>
+              </div>
+            ) : null}
+
+            {alternatives.length ? (
+              <div>
+                <p className="mb-2 text-xs font-bold uppercase tracking-[0.08em] text-slate-500">{t("alsoGood")}</p>
+                <div className="grid gap-2">
+                  {alternatives.map((alt) => (
+                    <div key={alt.area.id} className="flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3">
+                      <div className="min-w-0">
+                        <p className="font-bold text-ink">{alt.area.name}</p>
+                        <p className="mt-0.5 text-xs leading-5 text-slate-500">
+                          {alt.legs.map((leg) => `${leg.label}: ${legText(leg)}`).join(" · ")}
+                        </p>
+                      </div>
+                      {alt.area.hotelUrl ? (
+                        <a
+                          href={alt.area.hotelUrl}
+                          target="_blank"
+                          rel={AFFILIATE_REL}
+                          aria-label={t("hotelsCta", { area: alt.area.name })}
+                          onClick={() =>
+                            trackAffiliateClick({
+                              category: "hotel",
+                              provider: "booking_travelpayouts",
+                              placement: "stay_finder_result",
+                              href: alt.area.hotelUrl ?? "",
+                              label: `${selected.join("+")}→${alt.area.id}:alt`,
+                              link_id: `booking_${alt.area.id}`,
+                              product: "hotel_search",
+                              area_id: alt.area.id,
+                              locale,
+                            })
+                          }
+                          className="inline-flex h-9 shrink-0 items-center gap-1 rounded-full border border-slate-300 px-3 text-xs font-semibold text-ink hover:bg-slate-50"
+                        >
+                          <Hotel className="h-3.5 w-3.5" aria-hidden="true" />
+                          <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+                        </a>
+                      ) : null}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </div>
+        ) : (
+          <div className="flex h-full min-h-[320px] flex-col justify-end overflow-hidden rounded-[24px] bg-[url(/images/home/tokyo-hotel-base.png)] bg-cover bg-center">
+            <p className="m-4 rounded-2xl bg-white/95 px-4 py-3 text-sm font-semibold text-ink shadow">{t("pickMore")}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

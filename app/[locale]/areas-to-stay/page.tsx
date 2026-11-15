@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import fs from "node:fs";
-import path from "node:path";
-import { ArrowRight, Bed, Building2, Landmark, Mountain, Utensils } from "lucide-react";
+import { ArrowRight, Building2, Landmark, Mountain, Utensils } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { buttonClassName } from "@/components/ui/Button";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { SiteFooter } from "@/components/content/SiteFooter";
@@ -12,6 +8,9 @@ import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink"
 import { stayPages, type StayPage } from "@/lib/content/stay";
 import { getAlternates } from "@/i18n/hreflang";
 import { getTranslations } from "next-intl/server";
+import { StayFinder } from "@/components/stay/StayFinder";
+import { rankAreas, type LegResult } from "@/lib/stay-finder";
+import { getFinderAreas, getFinderDestinations, getFinderLineNotes, POPULAR_COMBOS } from "@/lib/stay-finder-data";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -71,10 +70,6 @@ function pageBySlug(slug: string) {
   return stayPages.find((page) => page.slug === slug);
 }
 
-function publicImageIfExists(candidates: readonly string[]) {
-  return candidates.find((src) => fs.existsSync(path.join(process.cwd(), "public", src.replace(/^\//, ""))));
-}
-
 function GuideCard({
   page,
   title,
@@ -123,10 +118,17 @@ export default async function AreasToStayIndex({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "areasToStayHub" });
   const pagePath = "/areas-to-stay";
-  const heroImage = publicImageIfExists([
-    "/images/home/tokyo-hotel-base.png",
-    "/images/stay/tokyo/tokyo-stay-hero.png",
-  ]);
+  const finderAreas = getFinderAreas();
+  const finderDestinations = getFinderDestinations();
+  const lineNotes = getFinderLineNotes();
+  const popular = POPULAR_COMBOS.map((combo) => {
+    const dests = combo
+      .map((id) => finderDestinations.find((d) => d.id === id))
+      .filter((d): d is NonNullable<typeof d> => Boolean(d));
+    return { combo, best: rankAreas(finderAreas, dests)[0] };
+  }).filter((entry) => entry.best);
+  const legLabel = (kind: LegResult["kind"]) =>
+    kind === "walk" ? t("finder.walk") : kind === "direct" ? t("finder.direct") : kind === "partial" ? t("finder.partial") : t("finder.transfer");
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -139,63 +141,33 @@ export default async function AreasToStayIndex({ params }: Props) {
           ]}
         />
 
-        <section className="mt-6 overflow-hidden rounded-[32px] border border-[#d9e5f2] bg-white shadow-sm">
-          <div className="grid gap-0 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="p-6 md:p-9">
-              <p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#106b43]">
-            <Bed className="h-4 w-4" aria-hidden="true" />
-            {t("hero.eyebrow")}
-              </p>
-              <h1 className="text-4xl font-semibold leading-tight text-slate-950 md:text-5xl">
-                {t("hero.title")}
-              </h1>
-              <p className="mt-4 text-2xl font-semibold leading-tight text-[#0b1a33] md:text-3xl">
-                {t("hero.tagline")}
-              </p>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-slate-600">
-                {t("hero.body")}
-              </p>
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <TrackedInternalLink
-                /* Was the folded tokyo-hotels parent; now the biggest
-                   comparison page still in the index (103 clicks / 6 months). */
-                href="/areas-to-stay/asakusa-vs-ueno"
-                sourcePage={pagePath}
-                placement="stay_hub_hero_finder"
-                label={t("hero.primaryCta")}
-                locale={locale}
-                className={buttonClassName({ variant: "navy", size: "lg", className: "text-white sm:min-w-64" })}
-              >
-                {t("hero.primaryCta")}
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
-              </TrackedInternalLink>
-              </div>
-            </div>
-            <div className="relative flex min-h-80 items-end overflow-hidden bg-[linear-gradient(135deg,#eff6ff,#f8fafc_52%,#ecfdf5)] p-6 md:p-8">
-              {heroImage ? (
-                <Image
-                  src={heroImage}
-                  alt={t("hero.imageAlt")}
-                  fill
-                  priority
-                  sizes="(min-width: 1024px) 38vw, 100vw"
-                  className="object-cover"
-                />
-              ) : null}
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.05),rgba(15,23,42,0.42))]" aria-hidden="true" />
-              <div className="relative w-full rounded-[26px] border border-white/80 bg-white/90 p-5 shadow-sm backdrop-blur">
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">{t("heroRoute.title")}</p>
-                <div className="mt-4 grid gap-3">
-                  {(t.raw("heroRoute.steps") as string[]).map((step, index) => (
-                    <div key={step} className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#0b1a33] text-sm font-bold text-white">{index + 1}</span>
-                      <span className="text-sm font-semibold text-slate-800">{step}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* The hub opens on the finder since 2026-11-15. The hero that stood
+            here (a headline, three steps and one link to the Asakusa vs Ueno
+            comparison) was read for about two seconds on average over ninety
+            days; the comparisons are still listed below. */}
+        <section id="stay-finder" className="mt-6 scroll-mt-20">
+          <StayFinder areas={finderAreas} destinations={finderDestinations} lineNotes={lineNotes} />
+        </section>
+
+        <section className="mt-10 rounded-[26px] border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+          <h2 className="text-2xl font-extrabold tracking-[-0.02em] text-ink">{t("finder.popularTitle")}</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("finder.popularIntro")}</p>
+          <ul className="mt-5 grid gap-3 md:grid-cols-2">
+            {popular.map(({ combo, best }) => (
+              <li key={combo.join("+")} className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-4">
+                <a href={`/areas-to-stay?go=${combo.join(",")}#stay-finder`} className="group block">
+                  <p className="text-base font-bold text-ink group-hover:text-fuji">
+                    {best.legs.map((leg) => leg.label).join(" + ")} → {best.area.name}
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-slate-600">
+                    {best.legs
+                      .map((leg) => `${leg.label}: ${legLabel(leg.kind)}${leg.line ? ` (${leg.line})` : ""}`)
+                      .join(" · ")}
+                  </p>
+                </a>
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section className="mt-8 rounded-[26px] border border-slate-200 bg-white p-5 shadow-sm md:p-6">

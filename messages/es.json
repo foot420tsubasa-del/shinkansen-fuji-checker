@@ -106,7 +106,7 @@
       "hub": "VERIFICADOR DE ASIENTO SHINKANSEN",
       "seat": "Verificar asiento",
       "planner": "Planificador",
-      "stay": "Base hotelera",
+      "stay": "Dónde alojarse",
       "essentials": "Esenciales",
       "about": "Acerca de",
       "guide": "Guía",
@@ -2061,6 +2061,34 @@
     "roomSizeGuide": {
       "title": "¿Qué tan pequeña es una habitación en Tokio?",
       "description": "Tamaños habituales por tipo de hotel y qué cabe junto a dos maletas."
+    },
+    "finder": {
+      "eyebrow": "Gratis · 36 zonas de estación en Tokio",
+      "title": "¿Dónde alojarse en Tokio?",
+      "sub": "Toca los lugares que quieres visitar. Buscamos la estación que te lleva a ellos con menos transbordos.",
+      "visitLabel": "Quiero ir a",
+      "alsoLabel": "También",
+      "optLuggage": "Mucho equipaje",
+      "optShinkansen": "Día de Shinkansen",
+      "optAirport": "Traslado al aeropuerto",
+      "pickMore": "Elige dos o más lugares para ver tu mejor estación.",
+      "bestBase": "Tu mejor base",
+      "tradeOff": "Ninguna estación llega a todos sin transbordo: este es el mejor equilibrio.",
+      "stayNear": "Alójate cerca de {area}",
+      "walk": "A pie",
+      "direct": "Sin transbordo",
+      "partial": "Sin transbordo en algunos trenes",
+      "transfer": "1+ transbordo",
+      "stationEase": "Facilidad de la estación",
+      "luggage": "Equipaje",
+      "hotelsCta": "Ver hoteles cerca de {area}",
+      "hotelsNote": "Abre Booking.com con {area} ya elegido.",
+      "alsoGood": "También buenas",
+      "note": "“Sin transbordo” significa un solo tren. El tiempo varía según la línea.",
+      "disclosure": "Podemos recibir una comisión si reservas con estos enlaces, sin coste adicional para ti.",
+      "popularTitle": "Respuestas populares",
+      "popularIntro": "Las combinaciones más comunes, respondidas con los mismos datos de estación.",
+      "clear": "Borrar"
     }
   },
   "planYourTrip": {

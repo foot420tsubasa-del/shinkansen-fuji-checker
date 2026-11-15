@@ -106,7 +106,7 @@
       "hub": "SHINKANSEN-SITZPLATZ-CHECKER",
       "seat": "Sitz prüfen",
       "planner": "Planer",
-      "stay": "Hotelbasis",
+      "stay": "Wo übernachten",
       "essentials": "Essentials",
       "about": "Über uns",
       "guide": "Reiseführer",
@@ -2061,6 +2061,34 @@
     "roomSizeGuide": {
       "title": "Wie klein ist ein Hotelzimmer in Tokio?",
       "description": "Typische Zimmergrößen nach Hoteltyp — und was neben zwei Koffern noch passt."
+    },
+    "finder": {
+      "eyebrow": "Kostenlos · 36 Bahnhofsviertel in Tokio",
+      "title": "Wo übernachten in Tokio?",
+      "sub": "Tippe die Orte an, die du besuchen willst. Wir finden den Bahnhof, von dem du mit den wenigsten Umstiegen hinkommst.",
+      "visitLabel": "Ich will nach",
+      "alsoLabel": "Außerdem",
+      "optLuggage": "Viel Gepäck",
+      "optShinkansen": "Shinkansen-Tag",
+      "optAirport": "Flughafentransfer",
+      "pickMore": "Wähle zwei oder mehr Orte, um deinen besten Bahnhof zu sehen.",
+      "bestBase": "Deine beste Basis",
+      "tradeOff": "Kein Bahnhof erreicht alles ohne Umstieg – das ist der beste Kompromiss.",
+      "stayNear": "Übernachte bei {area}",
+      "walk": "Zu Fuß",
+      "direct": "Ohne Umstieg",
+      "partial": "Ohne Umstieg bei manchen Zügen",
+      "transfer": "1+ Umstieg",
+      "stationEase": "Bahnhof-Komfort",
+      "luggage": "Gepäck",
+      "hotelsCta": "Hotels bei {area} ansehen",
+      "hotelsNote": "Öffnet Booking.com mit {area} voreingestellt.",
+      "alsoGood": "Auch gut",
+      "note": "„Ohne Umstieg“ heißt ein Zug von Anfang bis Ende. Fahrzeiten je nach Linie.",
+      "disclosure": "Wenn du über diese Links buchst, erhalten wir eventuell eine Provision – für dich ohne Mehrkosten.",
+      "popularTitle": "Häufige Antworten",
+      "popularIntro": "Die Orte, die Reisende am häufigsten kombinieren, mit denselben Bahnhofsdaten beantwortet.",
+      "clear": "Zurücksetzen"
     }
   },
   "planYourTrip": {

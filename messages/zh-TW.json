@@ -106,7 +106,7 @@
       "hub": "新幹線座位確認工具",
       "seat": "確認座位",
       "planner": "旅行規劃器",
-      "stay": "住宿基地",
+      "stay": "住哪裡",
       "essentials": "必備準備",
       "about": "關於",
       "guide": "指南",
@@ -2061,6 +2061,34 @@
     "roomSizeGuide": {
       "title": "東京的飯店房間有多小",
       "description": "按飯店類型看常見房型面積，以及兩個行李箱旁邊還放得下什麼。"
+    },
+    "finder": {
+      "eyebrow": "免費 · 東京 36 個車站區域",
+      "title": "東京住哪裡最方便？",
+      "sub": "點選你想去的地方，我們會找出轉乘最少的車站。",
+      "visitLabel": "我想去",
+      "alsoLabel": "其他條件",
+      "optLuggage": "行李很多",
+      "optShinkansen": "搭新幹線的日子",
+      "optAirport": "往返機場",
+      "pickMore": "選兩個以上的地點，就會出現最適合的車站。",
+      "bestBase": "最佳住宿據點",
+      "tradeOff": "沒有車站能不轉乘到達全部地點，這是最好的折衷。",
+      "stayNear": "住在{area}附近",
+      "walk": "步行",
+      "direct": "免轉乘",
+      "partial": "部分班次免轉乘",
+      "transfer": "需轉乘",
+      "stationEase": "車站好用度",
+      "luggage": "行李",
+      "hotelsCta": "查看{area}附近的飯店",
+      "hotelsNote": "開啟已設定{area}的 Booking.com。",
+      "alsoGood": "也不錯",
+      "note": "「免轉乘」代表一班車直達。乘車時間依路線而不同。",
+      "disclosure": "透過這些連結預訂時，我們可能獲得佣金，你不需支付額外費用。",
+      "popularTitle": "熱門解答",
+      "popularIntro": "旅客最常組合的地點，用同一份車站資料回答。",
+      "clear": "清除"
     }
   },
   "planYourTrip": {

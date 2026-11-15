@@ -106,7 +106,7 @@
       "hub": "VERIFICADOR DE ASSENTO SHINKANSEN",
       "seat": "Verificar assento",
       "planner": "Planejador",
-      "stay": "Base hoteleira",
+      "stay": "Onde ficar",
       "essentials": "Essenciais",
       "about": "Sobre",
       "guide": "Guia",
@@ -2061,6 +2061,34 @@
     "roomSizeGuide": {
       "title": "Quão pequeno é um quarto em Tóquio?",
       "description": "Tamanhos típicos por tipo de hotel e o que cabe ao lado de duas malas."
+    },
+    "finder": {
+      "eyebrow": "Grátis · 36 áreas de estação em Tóquio",
+      "title": "Onde ficar em Tóquio?",
+      "sub": "Toque nos lugares que você quer visitar. Encontramos a estação que leva até eles com menos baldeações.",
+      "visitLabel": "Quero ir a",
+      "alsoLabel": "Também",
+      "optLuggage": "Muita bagagem",
+      "optShinkansen": "Dia de Shinkansen",
+      "optAirport": "Traslado ao aeroporto",
+      "pickMore": "Escolha dois ou mais lugares para ver a melhor estação.",
+      "bestBase": "Sua melhor base",
+      "tradeOff": "Nenhuma estação chega a todos sem baldeação — este é o melhor equilíbrio.",
+      "stayNear": "Fique perto de {area}",
+      "walk": "A pé",
+      "direct": "Sem baldeação",
+      "partial": "Sem baldeação em alguns trens",
+      "transfer": "1+ baldeação",
+      "stationEase": "Facilidade da estação",
+      "luggage": "Bagagem",
+      "hotelsCta": "Ver hotéis perto de {area}",
+      "hotelsNote": "Abre o Booking.com já com {area}.",
+      "alsoGood": "Também boas",
+      "note": "“Sem baldeação” significa um único trem. O tempo varia por linha.",
+      "disclosure": "Podemos receber uma comissão se você reservar por estes links, sem custo extra para você.",
+      "popularTitle": "Respostas populares",
+      "popularIntro": "As combinações mais comuns, respondidas com os mesmos dados de estação.",
+      "clear": "Limpar"
     }
   },
   "planYourTrip": {

@@ -106,7 +106,7 @@
       "hub": "新干线座位确认工具",
       "seat": "确认座位",
       "planner": "旅行规划器",
-      "stay": "住宿基地",
+      "stay": "住哪里",
       "essentials": "必备准备",
       "about": "关于",
       "guide": "指南",
@@ -2061,6 +2061,34 @@
     "roomSizeGuide": {
       "title": "东京的酒店房间有多小",
       "description": "按酒店类型看常见房型面积，以及两个行李箱旁边还放得下什么。"
+    },
+    "finder": {
+      "eyebrow": "免费 · 东京 36 个车站区域",
+      "title": "东京住哪里最方便？",
+      "sub": "点选你想去的地方，我们会找出换乘最少的车站。",
+      "visitLabel": "我想去",
+      "alsoLabel": "其他条件",
+      "optLuggage": "行李很多",
+      "optShinkansen": "坐新干线的日子",
+      "optAirport": "往返机场",
+      "pickMore": "选两个以上的地点，就会出现最合适的车站。",
+      "bestBase": "最佳住宿据点",
+      "tradeOff": "没有车站能不换乘到达全部地点，这是最好的折中。",
+      "stayNear": "住在{area}附近",
+      "walk": "步行",
+      "direct": "无需换乘",
+      "partial": "部分班次无需换乘",
+      "transfer": "需换乘",
+      "stationEase": "车站好用度",
+      "luggage": "行李",
+      "hotelsCta": "查看{area}附近的酒店",
+      "hotelsNote": "打开已设定{area}的 Booking.com。",
+      "alsoGood": "也不错",
+      "note": "“无需换乘”表示一趟车直达。乘车时间因线路而异。",
+      "disclosure": "通过这些链接预订时，我们可能获得佣金，你无需支付额外费用。",
+      "popularTitle": "热门解答",
+      "popularIntro": "旅客最常组合的地点，用同一份车站数据回答。",
+      "clear": "清除"
     }
   },
   "planYourTrip": {

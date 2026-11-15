@@ -672,3 +672,54 @@ test("hero: every season has both frames on disk", () => {
     }
   }
 });
+
+/* ── Where to Stay finder (lib/stay-finder.ts) ─────────────────────────── */
+
+const sf = await importTsModule("lib/stay-finder.ts");
+const finderData = JSON.parse(readFileSync("data/stay-finder-destinations.json", "utf8"));
+const stayBase = JSON.parse(readFileSync("data/stay-area/tokyo-areas.base.json", "utf8"));
+const stayAreas = Array.isArray(stayBase) ? stayBase : stayBase.areas;
+const stayScores = Object.fromEntries(
+  JSON.parse(readFileSync("data/generated/tokyo-stay-area-scores.json", "utf8")).areas.map((a) => [a.id, a.scores]),
+);
+const finderAreas = stayAreas.map((a) => ({
+  id: a.id,
+  name: a.displayName ?? a.name,
+  lines: [...a.stationLines, ...(finderData.areaExtraLines[a.id] ?? [])].filter(
+    (line) => !(finderData.areaExcludeLines?.[a.id] ?? []).includes(line),
+  ),
+  coordinates: a.coordinates,
+  scores: stayScores[a.id],
+  hotelUrl: null,
+}));
+const finderDest = (id) => finderData.destinations.find((d) => d.id === id);
+
+test("finder: every destination is reachable without a change from some area", () => {
+  for (const dest of finderData.destinations) {
+    assert.ok(
+      finderAreas.some((area) => ["walk", "direct"].includes(sf.legFor(area, dest).kind)),
+      `${dest.id} has no line in common with any area — check the line names`,
+    );
+  }
+});
+
+test("finder: Shinjuku + Asakusa lands on an area with no change to either", () => {
+  const [best] = sf.rankAreas(finderAreas, [finderDest("shinjuku"), finderDest("asakusa")]);
+  assert.equal(best.directCount, 2);
+  assert.ok(!sf.isTradeOff(best));
+});
+
+test("finder: Kuramae is not credited with a Ginza Line stop it does not have", () => {
+  const kuramae = finderAreas.find((a) => a.id === "kuramae");
+  assert.ok(!kuramae.lines.includes("Tokyo Metro Ginza Line"));
+});
+
+test("finder: the hotel link for every Tokyo area is a live Booking.com affiliate link", () => {
+  const booking = JSON.parse(readFileSync("data/booking-hotel-destinations.json", "utf8"));
+  for (const area of stayAreas) {
+    const entry = booking[`booking_${area.id}`];
+    assert.ok(entry, `${area.id} has no Booking.com entry`);
+    assert.equal(entry.url_status, "active", `${area.id} link is not active`);
+    assert.match(entry.affiliate_url, /^https:\/\/booking\.tpx\.lv\//, `${area.id} must go through the Travelpayouts link`);
+  }
+});

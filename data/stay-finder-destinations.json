@@ -1,0 +1,247 @@
+{
+  "_note": "Places a visitor wants to reach, and the lines that serve them, for the Where to Stay finder. Line names match data/stay-area/tokyo-areas.base.json. 'partialLines' run through to the destination on some trains only (e.g. Toei Asakusa Line to the airports), and are shown as such. 'areaExtraLines' adds lines the base area data leaves out but that a traveller can board at that station; the base file feeds the scoring model, so it is left untouched. Coordinates are the main station for each place, used only to prefer the nearer of two equally direct areas. areaExcludeLines removes lines the base data lists for nearby stations rather than the area station itself (Kuramae has no Ginza Line stop; Tawaramachi is the nearby one).",
+  "areaExtraLines": {
+    "tokyo-station": [
+      "JR Keiyo Line",
+      "JR Sobu Line",
+      "JR Ueno-Tokyo Line",
+      "JR Tokaido Line"
+    ],
+    "shinjuku": [
+      "JR Chuo-Sobu Line",
+      "JR Saikyo Line",
+      "Toei Shinjuku Line"
+    ],
+    "shinagawa": [
+      "JR Tokaido Line"
+    ],
+    "ryogoku": [
+      "JR Chuo-Sobu Line"
+    ],
+    "kinshicho": [
+      "JR Chuo-Sobu Line"
+    ]
+  },
+  "areaExcludeLines": {
+    "kuramae": [
+      "Tokyo Metro Ginza Line"
+    ]
+  },
+  "lineNotes": {
+    "tokyo-station|JR Keiyo Line": "About a 10-minute walk inside Tokyo Station to the Keiyo Line platforms."
+  },
+  "destinations": [
+    {
+      "id": "shinjuku",
+      "label": "Shinjuku",
+      "areaId": "shinjuku",
+      "lines": [
+        "JR Yamanote Line",
+        "JR Chuo Line",
+        "JR Chuo-Sobu Line",
+        "JR Saikyo Line",
+        "Tokyo Metro Marunouchi Line",
+        "Toei Oedo Line",
+        "Toei Shinjuku Line",
+        "Odakyu Line",
+        "Keio Line"
+      ],
+      "partialLines": [],
+      "coordinates": {
+        "lat": 35.6909,
+        "lng": 139.7003
+      }
+    },
+    {
+      "id": "shibuya",
+      "label": "Shibuya",
+      "areaId": "shibuya",
+      "lines": [
+        "JR Yamanote Line",
+        "JR Saikyo Line",
+        "Tokyo Metro Ginza Line",
+        "Tokyo Metro Hanzomon Line",
+        "Tokyo Metro Fukutoshin Line",
+        "Tokyu Toyoko Line",
+        "Keio Inokashira Line"
+      ],
+      "partialLines": [],
+      "coordinates": {
+        "lat": 35.658,
+        "lng": 139.7016
+      }
+    },
+    {
+      "id": "harajuku",
+      "label": "Harajuku",
+      "areaId": null,
+      "lines": [
+        "JR Yamanote Line",
+        "Tokyo Metro Chiyoda Line",
+        "Tokyo Metro Fukutoshin Line"
+      ],
+      "partialLines": [],
+      "coordinates": {
+        "lat": 35.6702,
+        "lng": 139.7027
+      }
+    },
+    {
+      "id": "asakusa",
+      "label": "Asakusa",
+      "areaId": "asakusa",
+      "lines": [
+        "Tokyo Metro Ginza Line",
+        "Toei Asakusa Line",
+        "Tobu Skytree Line",
+        "Tsukuba Express"
+      ],
+      "partialLines": [],
+      "coordinates": {
+        "lat": 35.711,
+        "lng": 139.7966
+      }
+    },
+    {
+      "id": "skytree",
+      "label": "Skytree",
+      "areaId": "oshiage",
+      "lines": [
+        "Tobu Skytree Line",
+        "Toei Asakusa Line",
+        "Tokyo Metro Hanzomon Line",
+        "Keisei Oshiage Line"
+      ],
+      "partialLines": [],
+      "coordinates": {
+        "lat": 35.7101,
+        "lng": 139.8107
+      }
+    },
+    {
+      "id": "ueno",
+      "label": "Ueno",
+      "areaId": "ueno",
+      "lines": [
+        "JR Yamanote Line",
+        "JR Ueno-Tokyo Line",
+        "Tokyo Metro Ginza Line",
+        "Tokyo Metro Hibiya Line",
+        "Keisei Skyliner"
+      ],
+      "partialLines": [],
+      "coordinates": {
+        "lat": 35.7138,
+        "lng": 139.7773
+      }
+    },
+    {
+      "id": "akihabara",
+      "label": "Akihabara",
+      "areaId": "akihabara",
+      "lines": [
+        "JR Yamanote Line",
+        "JR Chuo-Sobu Line",
+        "Tokyo Metro Hibiya Line",
+        "Tsukuba Express"
+      ],
+      "partialLines": [],
+      "coordinates": {
+        "lat": 35.6984,
+        "lng": 139.7731
+      }
+    },
+    {
+      "id": "ginza",
+      "label": "Ginza",
+      "areaId": "ginza-yurakucho",
+      "lines": [
+        "Tokyo Metro Ginza Line",
+        "Tokyo Metro Marunouchi Line",
+        "Tokyo Metro Hibiya Line",
+        "Tokyo Metro Yurakucho Line",
+        "JR Yamanote Line"
+      ],
+      "partialLines": [],
+      "coordinates": {
+        "lat": 35.6717,
+        "lng": 139.765
+      }
+    },
+    {
+      "id": "roppongi",
+      "label": "Roppongi",
+      "areaId": "roppongi",
+      "lines": [
+        "Tokyo Metro Hibiya Line",
+        "Toei Oedo Line"
+      ],
+      "partialLines": [],
+      "coordinates": {
+        "lat": 35.6628,
+        "lng": 139.7314
+      }
+    },
+    {
+      "id": "odaiba",
+      "label": "Odaiba",
+      "areaId": "ariake-odaiba",
+      "lines": [
+        "Yurikamome",
+        "Rinkai Line"
+      ],
+      "partialLines": [],
+      "coordinates": {
+        "lat": 35.6297,
+        "lng": 139.7787
+      }
+    },
+    {
+      "id": "disney",
+      "label": "Tokyo Disney",
+      "areaId": null,
+      "lines": [
+        "JR Keiyo Line"
+      ],
+      "partialLines": [],
+      "coordinates": {
+        "lat": 35.6329,
+        "lng": 139.8804
+      }
+    },
+    {
+      "id": "haneda",
+      "label": "Haneda Airport",
+      "areaId": null,
+      "lines": [
+        "Keikyu Main Line",
+        "Tokyo Monorail"
+      ],
+      "partialLines": [
+        "Toei Asakusa Line"
+      ],
+      "coordinates": {
+        "lat": 35.5494,
+        "lng": 139.7798
+      }
+    },
+    {
+      "id": "narita",
+      "label": "Narita Airport",
+      "areaId": null,
+      "lines": [
+        "Keisei Skyliner",
+        "JR Narita Express"
+      ],
+      "partialLines": [
+        "Toei Asakusa Line",
+        "Keisei Oshiage Line",
+        "JR Sobu Line"
+      ],
+      "coordinates": {
+        "lat": 35.772,
+        "lng": 140.3929
+      }
+    }
+  ]
+}
