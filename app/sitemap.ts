@@ -5,6 +5,7 @@ import { stayPages } from "@/lib/content/stay";
 import { transferPages } from "@/lib/content/transfers";
 import { FOLDED_PATHS, RETIRED_PATHS } from "@/lib/retired-routes";
 import { BLOG_POSTS } from "@/data/blog/posts";
+import scenicCatalogue from "@/data/scenic-routes.json";
 
 const siteUrl = "https://fujiseat.com";
 
@@ -60,6 +61,9 @@ const dynamicPaths = [
   ...stayPages.map((page) => `/areas-to-stay/${page.slug}`),
   ...transferPages.map((page) => `/airport-transfers/${page.slug}`),
   ...BLOG_POSTS.map((post) => `/blog/${post.slug}`),
+  ...(scenicCatalogue.routes as { status: string; slug?: string }[])
+    .filter((r) => r.status === "live" && r.slug)
+    .map((r) => `/scenic/${r.slug}`),
 ];
 
 function localizedUrl(path: string, locale: string) {

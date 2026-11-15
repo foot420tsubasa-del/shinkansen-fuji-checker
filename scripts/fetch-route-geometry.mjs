@@ -30,7 +30,7 @@ if (!route?.osm) {
 }
 const binKm = Number(binArg ?? 0.4);
 const [s, w, n, e] = route.osm.bbox;
-const query = `[out:json][timeout:90];way["railway"~"^(rail|light_rail|narrow_gauge|monorail|tram)$"]["name"~"${route.osm.name}"](${s},${w},${n},${e});out geom;`;
+const query = `[out:json][timeout:180];way["railway"~"^(rail|light_rail|narrow_gauge|monorail|tram)$"]["name"~"${route.osm.name}"](${s},${w},${n},${e});out geom;`;
 
 const ENDPOINTS = [
   "https://overpass-api.de/api/interpreter",
@@ -66,44 +66,67 @@ if (!ways.length) {
   process.exit(1);
 }
 
-// Main axis: the two points of the whole set that are furthest apart.
 const pts = ways.flatMap((way) => way.geometry.map((p) => ({ lat: p.lat, lng: p.lon, tunnel: way.tags?.tunnel === "yes" })));
 const kx = Math.cos((((s + n) / 2) * Math.PI) / 180) * 111.32;
 const ky = 110.57;
 const xy = (p) => [p.lng * kx, p.lat * ky];
-let a = pts[0];
-let b = pts[0];
-let best = 0;
-for (const p of pts) {
-  const [px, py] = xy(p);
-  const [ax, ay] = xy(pts[0]);
-  const d = (px - ax) ** 2 + (py - ay) ** 2;
-  if (d > best) {
-    best = d;
-    a = p;
+
+/*
+ * Distance along the route for each point. With route.stations (in running
+ * order) every point is placed on its nearest station-to-station leg, which
+ * follows a line that doubles back (Nagano → Joetsu → the coast). Without
+ * them, points are projected on the main axis — fine for a line that runs
+ * one way across the box.
+ */
+let alongOf;
+if (route.stations?.length >= 2) {
+  const legs = route.stations.slice(1).map((st, i) => {
+    const [ax, ay] = xy(route.stations[i]);
+    const [bx, by] = xy(st);
+    return { ax, ay, bx, by, len: Math.hypot(bx - ax, by - ay) };
+  });
+  const offsets = legs.reduce((acc, leg, i) => [...acc, acc[i] + leg.len], [0]);
+  alongOf = (p) => {
+    const [px, py] = xy(p);
+    let best = { d: Infinity, along: 0 };
+    legs.forEach((leg, i) => {
+      const ux = (leg.bx - leg.ax) / leg.len;
+      const uy = (leg.by - leg.ay) / leg.len;
+      const t = Math.max(0, Math.min(leg.len, (px - leg.ax) * ux + (py - leg.ay) * uy));
+      const d = Math.hypot(leg.ax + ux * t - px, leg.ay + uy * t - py);
+      if (d < best.d) best = { d, along: offsets[i] + t };
+    });
+    return best.along;
+  };
+} else {
+  let a = pts[0];
+  let b = pts[0];
+  let far = 0;
+  for (const p of pts) {
+    const [px, py] = xy(p);
+    const [ox, oy] = xy(pts[0]);
+    const d = (px - ox) ** 2 + (py - oy) ** 2;
+    if (d > far) { far = d; a = p; }
   }
-}
-best = 0;
-for (const p of pts) {
-  const [px, py] = xy(p);
+  far = 0;
+  for (const p of pts) {
+    const [px, py] = xy(p);
+    const [ox, oy] = xy(a);
+    const d = (px - ox) ** 2 + (py - oy) ** 2;
+    if (d > far) { far = d; b = p; }
+  }
   const [ax, ay] = xy(a);
-  const d = (px - ax) ** 2 + (py - ay) ** 2;
-  if (d > best) {
-    best = d;
-    b = p;
-  }
+  const [bx, by] = xy(b);
+  const len = Math.hypot(bx - ax, by - ay);
+  alongOf = (p) => {
+    const [px, py] = xy(p);
+    return (px - ax) * ((bx - ax) / len) + (py - ay) * ((by - ay) / len);
+  };
 }
-const [ax, ay] = xy(a);
-const [bx, by] = xy(b);
-const len = Math.hypot(bx - ax, by - ay);
-const ux = (bx - ax) / len;
-const uy = (by - ay) / len;
 
 const bins = new Map();
 for (const p of pts) {
-  const [px, py] = xy(p);
-  const along = (px - ax) * ux + (py - ay) * uy;
-  const k = Math.round(along / binKm);
+  const k = Math.round(alongOf(p) / binKm);
   const bin = bins.get(k) ?? { lat: 0, lng: 0, n: 0, t: 0 };
   bin.lat += p.lat;
   bin.lng += p.lng;

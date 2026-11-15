@@ -13,6 +13,7 @@ import { HeroWindow } from "@/components/home/HeroWindow";
 import { FujiViewMap } from "@/components/travel/FujiViewMap";
 import { ScenicRoutesGallery } from "@/components/home/ScenicRoutesGallery";
 import type { HeroSeason } from "@/lib/hero-images";
+import scenicCatalogue from "@/data/scenic-routes.json";
 import { trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
   type DirectionId,
@@ -62,6 +63,11 @@ const SEAT_GUIDES: Array<{ href: string; title: string; body: string; image?: st
 ];
 
 const VIS_EMOJI = { high: "☀️", medium: "🌤️", low: "☁️" } as const;
+
+/** Verified views beyond Mt. Fuji, as links beside the Fuji chip in the hero. */
+const LIVE_VIEW_CHIPS = (scenicCatalogue.routes as { status: string; href?: string; chip?: { emoji: string; label: string } }[])
+  .filter((route) => route.status === "live" && route.chip && route.href)
+  .map((route) => ({ href: route.href!, emoji: route.chip!.emoji, label: route.chip!.label }));
 
 const homeHotelCopyByLocale: Record<
   string,
@@ -394,6 +400,16 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
                 <span aria-hidden="true">🗻</span>
                 {t("hero.viewFuji")}
               </span>
+              {LIVE_VIEW_CHIPS.map((chip) => (
+                <Link
+                  key={chip.href}
+                  href={chip.href}
+                  className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-slate-300 bg-white px-3.5 py-1 text-[13px] font-semibold text-ink transition-colors hover:bg-slate-50"
+                >
+                  <span aria-hidden="true">{chip.emoji}</span>
+                  {chip.label}
+                </Link>
+              ))}
               <span className="text-xs text-slate-400">{t("hero.moreViews")}</span>
             </div>
 

@@ -53,7 +53,7 @@
     },
     {
       "id": "hokuriku-alps",
-      "status": "verifying",
+      "status": "live",
       "tier": 1,
       "view": [
         "mountain",
@@ -66,19 +66,26 @@
         "Tokyo",
         "Kanazawa"
       ],
-      "side": null,
+      "side": {
+        "toKanazawa": "Mt. Asama on the right; Mt. Myoko and the Northern Alps on the left",
+        "toTokyo": "the opposite: Alps and Myoko on the right, Asama on the left"
+      },
       "seat": null,
-      "section": null,
-      "season": null,
-      "ticket": null,
+      "section": "Karuizawa–Sakudaira (Asama); before Joetsu-Myoko (Myoko); Kurobe-Unazukionsen–Toyama–Shin-Takaoka (Alps)",
+      "season": "clear days; the Alps carry snow from about November to May",
+      "ticket": {
+        "provider": "klook",
+        "linkId": "jrPass",
+        "note": "The Japan Rail Pass covers the Hokuriku Shinkansen."
+      },
       "evidence": "Search Console: 'hokuriku shinkansen seat map' 67 impressions in 90 days. Published advice disagrees on the side (booking sites: right; nippon.com: left) — likely different mountains on different sides.",
       "osm": {
         "name": "北陸新幹線",
         "bbox": [
           36.2,
-          136.6,
-          36.8,
-          138.7
+          136.55,
+          37.15,
+          139.08
         ]
       },
       "geometry": "data/routes/hokuriku-alps.json",
@@ -89,7 +96,163 @@
         "alt": "Snow-covered Northern Alps above winter rice fields through a bullet train window",
         "illustrative": true
       },
-      "teaser": "Tokyo → Kanazawa · winter"
+      "teaser": "Tokyo → Kanazawa · Alps on the left",
+      "stations": [
+        {
+          "name": "Takasaki",
+          "lat": 36.3225,
+          "lng": 139.0128
+        },
+        {
+          "name": "Annaka-Haruna",
+          "lat": 36.3626,
+          "lng": 138.8496
+        },
+        {
+          "name": "Karuizawa",
+          "lat": 36.3429,
+          "lng": 138.6351
+        },
+        {
+          "name": "Sakudaira",
+          "lat": 36.2777,
+          "lng": 138.4625
+        },
+        {
+          "name": "Ueda",
+          "lat": 36.3965,
+          "lng": 138.2493
+        },
+        {
+          "name": "Nagano",
+          "lat": 36.6431,
+          "lng": 138.1886
+        },
+        {
+          "name": "Iiyama",
+          "lat": 36.8456,
+          "lng": 138.3594
+        },
+        {
+          "name": "Joetsu-Myoko",
+          "lat": 37.0815,
+          "lng": 138.2489
+        },
+        {
+          "name": "Itoigawa",
+          "lat": 37.043,
+          "lng": 137.8616
+        },
+        {
+          "name": "Kurobe-Unazukionsen",
+          "lat": 36.8752,
+          "lng": 137.4458
+        },
+        {
+          "name": "Toyama",
+          "lat": 36.7013,
+          "lng": 137.2133
+        },
+        {
+          "name": "Shin-Takaoka",
+          "lat": 36.7372,
+          "lng": 137.0087
+        },
+        {
+          "name": "Kanazawa",
+          "lat": 36.5781,
+          "lng": 136.6481
+        }
+      ],
+      "targets": [
+        {
+          "id": "asama",
+          "name": "Mt. Asama",
+          "lat": 36.4064,
+          "lng": 138.5231,
+          "elevation": 2568
+        },
+        {
+          "id": "tateyama",
+          "name": "Mt. Tateyama",
+          "lat": 36.576,
+          "lng": 137.62,
+          "elevation": 3015
+        },
+        {
+          "id": "tsurugi",
+          "name": "Mt. Tsurugi",
+          "lat": 36.6236,
+          "lng": 137.6169,
+          "elevation": 2999
+        },
+        {
+          "id": "shirouma",
+          "name": "Mt. Shirouma (Hakuba)",
+          "lat": 36.7586,
+          "lng": 137.7586,
+          "elevation": 2932
+        },
+        {
+          "id": "myoko",
+          "name": "Mt. Myoko",
+          "lat": 36.8915,
+          "lng": 138.1135,
+          "elevation": 2454
+        }
+      ],
+      "_stationsNote": "Station and summit coordinates are approximate (about 1 km); used to order the track and as viewshed targets.",
+      "href": "/scenic/hokuriku-shinkansen",
+      "slug": "hokuriku-shinkansen",
+      "viewshed": "data/routes/hokuriku-alps-viewshed.json",
+      "views": [
+        {
+          "id": "asama",
+          "name": "Mt. Asama",
+          "targets": [
+            "asama"
+          ],
+          "sideToKanazawa": "right",
+          "from": "Karuizawa",
+          "to": "Sakudaira",
+          "kmFrom": 40.5,
+          "kmTo": 63.5,
+          "maxAngle": 10.2
+        },
+        {
+          "id": "myoko",
+          "name": "Mt. Myoko",
+          "targets": [
+            "myoko"
+          ],
+          "sideToKanazawa": "left",
+          "from": "Iiyama",
+          "to": "Joetsu-Myoko",
+          "kmFrom": 169.8,
+          "kmTo": 178.4,
+          "maxAngle": 5.9
+        },
+        {
+          "id": "alps",
+          "name": "The Northern Alps (Tsurugi, Tateyama, Shirouma)",
+          "targets": [
+            "tsurugi",
+            "tateyama",
+            "shirouma"
+          ],
+          "sideToKanazawa": "left",
+          "from": "Kurobe-Unazukionsen",
+          "to": "Shin-Takaoka",
+          "kmFrom": 246.4,
+          "kmTo": 321.5,
+          "maxAngle": 6.6
+        }
+      ],
+      "verification": "Sides from a terrain sight-line model (GSI elevation, OSM track) and matched against published accounts: Asama on the right after Karuizawa (shinkansentickets.net), mountains on the left towards Kanazawa (nippon.com). Seat letters not verified, so not given.",
+      "chip": {
+        "emoji": "🏔️",
+        "label": "Japan Alps"
+      }
     },
     {
       "id": "enoden-coast",

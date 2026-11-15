@@ -753,3 +753,14 @@ test("scenic routes: no unverified route claims a side, and every image is on di
     }
   }
 });
+
+test("scenic routes: a live route beyond Fuji carries its viewshed, its views and how they were checked", () => {
+  const { routes } = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
+  for (const route of routes.filter((r) => r.status === "live" && r.id !== "tokaido-fuji")) {
+    assert.ok(route.slug && route.href === `/scenic/${route.slug}`, `${route.id} needs a page`);
+    assert.ok(existsSync(route.viewshed), `${route.id}: viewshed file missing`);
+    assert.ok(route.views?.length, `${route.id}: no views listed`);
+    for (const view of route.views) assert.ok(["left", "right"].includes(view.sideToKanazawa), `${route.id}/${view.id}: side must be left or right`);
+    assert.ok(/published|footage/i.test(route.verification ?? ""), `${route.id}: say how the sides were checked`);
+  }
+});

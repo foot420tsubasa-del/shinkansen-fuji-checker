@@ -27,6 +27,7 @@ export type AffiliatePlacement =
   | "guide_quick_answer"
   | "stay_finder_result"
   | "blog_article_booking"
+  | "scenic_route_jr_pass"
   | "guide_seat_result"
   | "guide_seat_result_jr_pass"
   | "seat_result_return_tour"
