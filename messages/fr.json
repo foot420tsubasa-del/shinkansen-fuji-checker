@@ -454,6 +454,12 @@
       "viewFuji": "Mont Fuji",
       "moreViews": "D’autres paysages bientôt",
       "whichWay": "Dans quel sens voyages-tu ?"
+    },
+    "scenic": {
+      "title": "Les plus belles vues de train au Japon",
+      "sub": "Nous cartographions les meilleures places côté fenêtre au-delà du mont Fuji : quel côté, quel tronçon, quelle saison. Chacune est publiée une fois vérifiée.",
+      "soon": "Bientôt",
+      "live": "En ligne — trouve ta place"
     }
   },
   "guide": {

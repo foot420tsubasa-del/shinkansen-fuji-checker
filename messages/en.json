@@ -454,6 +454,12 @@
       "viewFuji": "Mt. Fuji",
       "moreViews": "More views coming soon",
       "whichWay": "Which way are you going?"
+    },
+    "scenic": {
+      "title": "Japan’s best train-window views",
+      "sub": "We’re mapping the best window seats beyond Mt. Fuji — which side, which stretch and which season. Each one goes live once it’s checked.",
+      "soon": "Coming soon",
+      "live": "Live — find your seat"
     }
   },
   "guide": {

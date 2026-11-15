@@ -454,6 +454,12 @@
       "viewFuji": "Mt. Fuji",
       "moreViews": "Weitere Aussichten folgen bald",
       "whichWay": "In welche Richtung fährst du?"
+    },
+    "scenic": {
+      "title": "Japans schönste Zugfenster-Aussichten",
+      "sub": "Wir kartieren die besten Fensterplätze über den Mt. Fuji hinaus – welche Seite, welcher Abschnitt, welche Jahreszeit. Jede Strecke geht online, sobald sie geprüft ist.",
+      "soon": "Demnächst",
+      "live": "Online – Platz finden"
     }
   },
   "guide": {

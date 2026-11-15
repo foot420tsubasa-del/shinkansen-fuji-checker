@@ -11,6 +11,7 @@ import { SeatMapCard } from "@/components/travel/SeatResultCard";
 import { FujiTiming } from "@/components/travel/FujiTiming";
 import { HeroWindow } from "@/components/home/HeroWindow";
 import { FujiViewMap } from "@/components/travel/FujiViewMap";
+import { ScenicRoutesGallery } from "@/components/home/ScenicRoutesGallery";
 import type { HeroSeason } from "@/lib/hero-images";
 import { trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
@@ -496,6 +497,8 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
             or to the hotel funnel, and over ninety days the five together drew
             31 clicks, 26 of them on the step that scrolled back up to the
             checker above. */}
+
+        <ScenicRoutesGallery />
 
         <section className="pt-12">
           <h2 className="text-2xl font-extrabold tracking-[-0.02em] text-ink md:text-[28px]">More seat guides</h2>

@@ -454,6 +454,12 @@
       "viewFuji": "Monte Fuji",
       "moreViews": "Más paisajes muy pronto",
       "whichWay": "¿Hacia dónde vas?"
+    },
+    "scenic": {
+      "title": "Las mejores vistas desde el tren en Japón",
+      "sub": "Estamos mapeando los mejores asientos de ventanilla más allá del Monte Fuji: qué lado, qué tramo y qué temporada. Cada uno se publica cuando está verificado.",
+      "soon": "Próximamente",
+      "live": "Disponible — encuentra tu asiento"
     }
   },
   "guide": {

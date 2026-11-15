@@ -1,5 +1,5 @@
 {
-  "_note": "Nationwide scenic train views, the catalogue behind the homepage view picker. Only status 'live' is shown to readers. Everything else is a candidate: which side, which section and which season are left null until verified (viewshed from OpenStreetMap track geometry + GSI elevation, then checked against real footage). Never publish a side that has not been verified — one wrong 'sit on the right' costs the whole site's credibility.",
+  "_note": "Nationwide scenic train views, the catalogue behind the homepage view picker. Only status 'live' is shown to readers. Everything else is a candidate: which side, which section and which season are left null until verified (viewshed from OpenStreetMap track geometry + GSI elevation, then checked against real footage). Never publish a side that has not been verified — one wrong 'sit on the right' costs the whole site's credibility. Images are generated (illustrative) and labelled as such wherever shown.",
   "statuses": {
     "live": "verified and on the site",
     "verifying": "geometry fetched, side and section being checked",
@@ -40,7 +40,16 @@
           35.33,
           139.22
         ]
-      }
+      },
+      "image": {
+        "src": "/images/hero/window-fuji-winter-wide.png",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Snow-capped Mt. Fuji through a Shinkansen window",
+        "illustrative": true
+      },
+      "teaser": "Tokyo → Kyoto · Seat E",
+      "href": "/guide"
     },
     {
       "id": "hokuriku-alps",
@@ -72,7 +81,15 @@
           138.7
         ]
       },
-      "geometry": "data/routes/hokuriku-alps.json"
+      "geometry": "data/routes/hokuriku-alps.json",
+      "image": {
+        "src": "/images/scenic/scenic-hokuriku-alps-wide.png",
+        "width": 1448,
+        "height": 1086,
+        "alt": "Snow-covered Northern Alps above winter rice fields through a bullet train window",
+        "illustrative": true
+      },
+      "teaser": "Tokyo → Kanazawa · winter"
     },
     {
       "id": "enoden-coast",
@@ -104,7 +121,15 @@
           139.56
         ]
       },
-      "geometry": "data/routes/enoden-coast.json"
+      "geometry": "data/routes/enoden-coast.json",
+      "image": {
+        "src": "/images/scenic/scenic-enoden-coast-wide.png",
+        "width": 1448,
+        "height": 1086,
+        "alt": "Beach, an island and distant Mt. Fuji through the window of a small seaside train",
+        "illustrative": true
+      },
+      "teaser": "Kamakura · day trip from Tokyo"
     },
     {
       "id": "fujikyu-fuji",
@@ -135,7 +160,15 @@
           138.98
         ],
         "nameToConfirm": true
-      }
+      },
+      "image": {
+        "src": "/images/scenic/scenic-fujikyu-fuji-tall.png",
+        "width": 1086,
+        "height": 1448,
+        "alt": "Mt. Fuji close above a lake and autumn leaves through a local train window",
+        "illustrative": true
+      },
+      "teaser": "Kawaguchiko · autumn"
     },
     {
       "id": "hakone-tozan",
@@ -166,7 +199,15 @@
           139.11
         ],
         "nameToConfirm": true
-      }
+      },
+      "image": {
+        "src": "/images/scenic/scenic-hakone-tozan-tall.png",
+        "width": 1086,
+        "height": 1448,
+        "alt": "Hydrangeas in bloom beside the track through the window of a red mountain train",
+        "illustrative": true
+      },
+      "teaser": "Hakone · June hydrangeas"
     },
     {
       "id": "sagano-gorge",
@@ -198,7 +239,15 @@
           135.68
         ],
         "nameToConfirm": true
-      }
+      },
+      "image": {
+        "src": "/images/scenic/scenic-sagano-gorge-tall.png",
+        "width": 1086,
+        "height": 1448,
+        "alt": "Autumn maples above a green river gorge from an open wooden trolley car",
+        "illustrative": true
+      },
+      "teaser": "Kyoto · autumn leaves"
     },
     {
       "id": "yurikamome-night",
@@ -229,7 +278,15 @@
           139.8
         ],
         "nameToConfirm": true
-      }
+      },
+      "image": {
+        "src": "/images/scenic/scenic-yurikamome-night-tall.png",
+        "width": 1086,
+        "height": 1448,
+        "alt": "An illuminated suspension bridge and city skyline from the front window of an elevated train at night",
+        "illustrative": true
+      },
+      "teaser": "Tokyo Bay · after dark"
     },
     {
       "id": "joetsu-snow",

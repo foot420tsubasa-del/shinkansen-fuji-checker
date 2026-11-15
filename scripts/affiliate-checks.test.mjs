@@ -737,3 +737,19 @@ test("view map: the line is OpenStreetMap-attributed and the window brackets Shi
   const map = readFileSync("components/travel/FujiViewMap.tsx", "utf8");
   assert.ok(map.includes("OpenStreetMap contributors"), "the attribution must be visible on the map");
 });
+
+/* ── Scenic routes catalogue (data/scenic-routes.json) ──────────────────── */
+
+test("scenic routes: no unverified route claims a side, and every image is on disk", () => {
+  const { routes } = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
+  for (const route of routes) {
+    if (route.status !== "live") {
+      assert.equal(route.side, null, `${route.id} is not live, so it must not claim a side yet`);
+      assert.equal(route.seat, null, `${route.id} is not live, so it must not claim a seat yet`);
+    }
+    if (route.image) {
+      assert.ok(existsSync(`public${route.image.src}`), `${route.id}: ${route.image.src} is missing`);
+      assert.equal(route.image.illustrative, true, `${route.id}: generated images must be labelled`);
+    }
+  }
+});

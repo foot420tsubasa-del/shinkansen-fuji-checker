@@ -454,6 +454,12 @@
       "viewFuji": "Monte Fuji",
       "moreViews": "Mais paisagens em breve",
       "whichWay": "Para onde você vai?"
+    },
+    "scenic": {
+      "title": "As melhores vistas de janela de trem do Japão",
+      "sub": "Estamos mapeando os melhores assentos de janela além do Monte Fuji — qual lado, qual trecho e qual estação. Cada um entra no ar depois de verificado.",
+      "soon": "Em breve",
+      "live": "No ar — encontre seu assento"
     }
   },
   "guide": {
