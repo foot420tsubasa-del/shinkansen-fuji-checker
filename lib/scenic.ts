@@ -88,8 +88,8 @@ export const sideFor = (view: ScenicView, direction: Direction): Side =>
 /** Places outside the live routes, so a search for them lands on "coming soon", not on nothing. */
 const OTHER_PLACES = [
   "Shinjuku", "Shibuya", "Ikebukuro", "Yokohama", "Kamakura", "Fujisawa", "Enoshima", "Hakone", "Hakone-Yumoto", "Gora",
-  "Kawaguchiko", "Otsuki", "Nikko", "Sendai", "Morioka", "Niigata", "Echigo-Yuzawa", "Hiroshima", "Okayama", "Hakata",
-  "Fukuoka", "Nara", "Osaka", "Kobe", "Himeji", "Arashiyama", "Kameoka", "Takayama", "Matsumoto", "Odaiba", "Toyosu",
+  "Kawaguchiko", "Otsuki", "Nikko", "Sendai", "Morioka", "Niigata", "Echigo-Yuzawa",
+  "Nara", "Arashiyama", "Kameoka", "Takayama", "Matsumoto", "Odaiba", "Toyosu",
   "Sapporo", "Hakodate", "Aomori", "Akita", "Furano", "Biei", "Abashiri", "Unazuki", "Fukui", "Tsuruga",
 ];
 
@@ -103,6 +103,9 @@ const ALIASES: Record<string, string> = {
   "joetsu myoko": "Joetsu-Myoko",
   "shin takaoka": "Shin-Takaoka",
   "annaka haruna": "Annaka-Haruna",
+  kobe: "Shin-Kobe",
+  "shin kobe": "Shin-Kobe",
+  fukuoka: "Hakata",
 };
 
 export type StationOption = { name: string; ja?: string; routes: string[] };

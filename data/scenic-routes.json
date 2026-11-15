@@ -175,6 +175,31 @@
           "name": "Shin-Osaka",
           "ja": "新大阪",
           "order": 11
+        },
+        {
+          "name": "Shin-Kobe",
+          "ja": "新神戸",
+          "order": 12
+        },
+        {
+          "name": "Himeji",
+          "ja": "姫路",
+          "order": 13
+        },
+        {
+          "name": "Okayama",
+          "ja": "岡山",
+          "order": 14
+        },
+        {
+          "name": "Hiroshima",
+          "ja": "広島",
+          "order": 15
+        },
+        {
+          "name": "Hakata",
+          "ja": "博多",
+          "order": 16
         }
       ],
       "views": [
@@ -268,7 +293,8 @@
       "tags": [
         "fuji",
         "mountain"
-      ]
+      ],
+      "_stationsNote": "Stations past Shin-Osaka are the Sanyo Shinkansen, which Nozomi trains run on without a change; the Mt. Fuji view and its timing from Tokyo are the same."
     },
     {
       "id": "hokuriku-alps",

@@ -823,3 +823,13 @@ test("disclosure: every booking card keeps its commission line", () => {
   }
   assert.match(readFileSync("app/[locale]/HomeClient.tsx", "utf8"), /hero\.affiliateNote/, "homepage booking card disclosure");
 });
+
+test("route search: through-running Nozomi destinations past Osaka still get the Fuji answer", () => {
+  for (const to of ["Hiroshima", "Hakata", "Okayama"]) {
+    const m = scenic.matchRoute("Tokyo", to);
+    assert.equal(m.kind, "live", `Tokyo → ${to}`);
+    assert.equal(m.route.id, "tokaido-fuji");
+    assert.equal(m.direction, "forward");
+  }
+  assert.equal(scenic.resolveStation("Fukuoka"), "Hakata");
+});
