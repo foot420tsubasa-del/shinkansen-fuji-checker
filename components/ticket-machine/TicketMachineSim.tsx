@@ -19,8 +19,8 @@ import { trackEvent } from "@/lib/analytics";
 type Lang = "ja" | "en" | "zh-CN" | "zh-TW" | "ko";
 type Mission = "charge" | "ticket";
 type Stage =
-  | "top"
-  | "people"
+  | "menu"
+  | "fares"
   | "pay"
   | "issuing"
   | "takeTicket"
@@ -74,6 +74,9 @@ const S: Record<string, Record<Lang, string>> = {
   newBalance: { ja: "チャージ後の残額", en: "New balance", "zh-CN": "充值后余额", "zh-TW": "儲值後餘額", ko: "충전 후 잔액" },
   change: { ja: "おつり", en: "Change", "zh-CN": "找零", "zh-TW": "找零", ko: "거스름돈" },
   thanks: { ja: "ありがとうございました", en: "Thank you", "zh-CN": "谢谢", "zh-TW": "謝謝", ko: "감사합니다" },
+  select: { ja: "ご希望のボタンを押してください", en: "Please choose what you need", "zh-CN": "请选择所需的服务", "zh-TW": "請選擇所需的服務", ko: "원하시는 버튼을 눌러 주십시오" },
+  selectFare: { ja: "人数を確認して、運賃のボタンを押してください", en: "Check the number of people, then press your fare", "zh-CN": "请确认人数后按票价按钮", "zh-TW": "請確認人數後按票價按鈕", ko: "인원을 확인한 뒤 운임 버튼을 눌러 주십시오" },
+  receipt: { ja: "領収書", en: "Receipt", "zh-CN": "收据", "zh-TW": "收據", ko: "영수증" },
   back: { ja: "もどる", en: "Back", "zh-CN": "返回", "zh-TW": "返回", ko: "뒤로" },
 };
 
@@ -105,15 +108,15 @@ const yen = (n: number) => `¥${n.toLocaleString("en-US")}`;
 
 const STEPS: Record<Mission, { stage: Stage[]; text: string }[]> = {
   charge: [
-    { stage: ["top"], text: "Tap Charge (チャージ) on the left of the screen." },
+    { stage: ["menu"], text: "The machine opens on a menu, not on fares. Tap Charge (チャージ) — or simply insert your IC card." },
     { stage: ["insertCard"], text: "Insert your IC card into the ticket slot (きっぷ・定期券)." },
     { stage: ["chargeAmount"], text: `Check your balance, then choose ${yen(MISSION_CHARGE)}.` },
     { stage: ["chargePay", "charging"], text: "Feed cash into the bill slot (紙幣) or coin slot (硬貨). IC cards are topped up with cash." },
     { stage: ["takeCard", "done"], text: "Take your card back from the tray — and any change." },
   ],
   ticket: [
-    { stage: ["top"], text: `Find your fare on the map above the machines. Tokyo → Shinjuku is ${yen(MISSION_FARE)}: tap it.` },
-    { stage: ["people"], text: "Choose how many people. Children are half fare." },
+    { stage: ["menu"], text: "The machine opens on a menu. Tap Tickets (きっぷ)." },
+    { stage: ["fares"], text: `Check the number of people at the top (1 adult is set). Find your fare on the map above the machines — Tokyo → Shinjuku is ${yen(MISSION_FARE)} — and press it.` },
     { stage: ["pay", "issuing"], text: "Insert cash. Most machines also take credit cards for single tickets." },
     { stage: ["takeTicket", "done"], text: "Take your ticket from the tray, and your change." },
   ],
@@ -150,7 +153,8 @@ function Btn({
 export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang }) {
   const [lang, setLang] = useState<Lang>(initialLang);
   const [mission, setMission] = useState<Mission>("charge");
-  const [stage, setStage] = useState<Stage>("top");
+  const [stage, setStage] = useState<Stage>("menu");
+  const [pax, setPax] = useState<"adult1" | "adult2" | "child1">("adult1");
   const [fare, setFare] = useState(0);
   const [people, setPeople] = useState(1);
   const [chargeAmount, setChargeAmount] = useState(0);
@@ -172,7 +176,8 @@ export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang })
 
   const reset = (next: Mission = mission) => {
     setMission(next);
-    setStage("top");
+    setStage("menu");
+    setPax("adult1");
     setFare(0);
     setPeople(1);
     setChargeAmount(0);
@@ -222,7 +227,8 @@ export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang })
 
   const stepIndex = STEPS[mission].findIndex((s) => s.stage.includes(stage));
   const want = {
-    charge: stage === "top" && mission === "charge",
+    charge: stage === "menu" && mission === "charge",
+    tickets: stage === "menu" && mission === "ticket",
     card: stage === "insertCard",
     cash: paying,
     ticketTray: stage === "takeTicket",
@@ -235,7 +241,7 @@ export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang })
   const menu = (
     <div className="flex h-full flex-col gap-[1.2cqw] bg-[#dfe3e7] p-[1.2cqw]" style={{ width: "21.5%" }}>
       {[
-        { k: "tickets" as const, active: stage === "top" || stage === "people" || stage === "pay", onClick: () => (stage !== "top" ? flash("Finish or cancel this purchase first.") : undefined) },
+        { k: "tickets" as const, active: stage === "fares" || stage === "pay", onClick: () => (stage !== "fares" ? flash("Finish or cancel this purchase first.") : undefined) },
         { k: "commuter" as const },
         { k: "green" as const },
         { k: "discount" as const },
@@ -256,7 +262,7 @@ export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang })
       <Btn
         glow={want.charge}
         onClick={() => {
-          if (stage !== "top") return flash("Finish or cancel this purchase first.");
+          if (stage !== "fares") return flash("Finish or cancel this purchase first.");
           setMission("charge");
           setStage("insertCard");
         }}
@@ -272,12 +278,72 @@ export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang })
     </div>
   );
 
+  const paxFare = (base: number) => (pax === "child1" ? Math.floor(base / 2 / 10) * 10 : base);
+
   let body: ReactNode = null;
-  if (stage === "top") {
+  if (stage === "menu") {
+    // The real machine opens on what you want to do; fares come after.
+    const tile = "flex flex-col items-center justify-center rounded-[0.8cqw] px-[1cqw] text-center leading-tight shadow-[0_2px_0_rgba(0,0,0,0.18)]";
+    body = (
+      <div className="flex h-full flex-col p-[1.8cqw]">
+        <p className="text-center font-bold text-[#222]" style={fs(2.3)}>{L("select")}</p>
+        <p className="mt-[0.4cqw] text-center text-[#444]" style={fs(1.45)}>{L("icFirst")}</p>
+        <div className="mt-[1.6cqw] grid flex-1 grid-cols-3 grid-rows-2 gap-[1.2cqw]">
+          <Btn
+            glow={want.tickets}
+            onClick={() => {
+              setMission("ticket");
+              setStage("fares");
+            }}
+            className={[tile, "row-span-2 bg-[#2f9a3f] text-white"].join(" ")}
+          >
+            <span className="font-bold" style={fs(3.4)}>{S.tickets.ja}</span>
+            <span className="mt-[0.4cqw]" style={fs(1.9)}>{lang === "ja" ? S.tickets.en : L("tickets")}</span>
+          </Btn>
+          <Btn
+            glow={want.charge}
+            onClick={() => {
+              setMission("charge");
+              setStage("insertCard");
+            }}
+            className={[tile, "bg-[#1d6fd1] text-white"].join(" ")}
+          >
+            <span className="font-bold" style={fs(2.6)}>{S.charge.ja}</span>
+            <span style={fs(1.6)}>{lang === "ja" ? S.charge.en : L("charge")}</span>
+          </Btn>
+          {(["commuter", "green", "discount"] as const).map((k) => (
+            <Btn key={k} onClick={() => flash("Not part of this practice.")} className={[tile, "bg-white text-[#222]"].join(" ")}>
+              <span className="font-bold" style={fs(2.1)}>{S[k].ja}</span>
+              <span style={fs(1.35)}>{lang === "ja" ? S[k].en : L(k)}</span>
+            </Btn>
+          ))}
+        </div>
+        <div className="mt-[1.2cqw] flex justify-between gap-[1cqw]">
+          <Btn onClick={() => flash("Receipts are offered after you pay.")} className="rounded-[0.5cqw] bg-white px-[1.6cqw] py-[0.6cqw] text-[#222] shadow-[0_1px_0_rgba(0,0,0,0.15)]" style={fs(1.5)}>
+            {S.receipt.ja} {lang === "ja" ? S.receipt.en : L("receipt")}
+          </Btn>
+          <Btn onClick={() => flash("Refunds: ask staff at the window or press Call.")} className="rounded-[0.5cqw] bg-[#ffe100] px-[1.6cqw] py-[0.6cqw] text-[#222]" style={fs(1.4)}>
+            {S.refund.ja}
+          </Btn>
+        </div>
+      </div>
+    );
+  } else if (stage === "fares") {
     body = (
       <div className="flex h-full flex-col p-[1.4cqw]">
         <div className="flex items-start justify-between gap-[1cqw]">
-          <p className="pt-[0.4cqw] text-[#222]" style={fs(1.55)}>{L("icFirst")}</p>
+          <div className="flex gap-[0.6cqw]">
+            {(["adult1", "adult2", "child1"] as const).map((k) => (
+              <Btn
+                key={k}
+                onClick={() => setPax(k)}
+                className={["rounded-[0.5cqw] px-[1.1cqw] py-[0.6cqw] font-bold", pax === k ? "bg-[#2f9a3f] text-white" : "bg-white text-[#222] shadow-[0_1px_0_rgba(0,0,0,0.15)]"].join(" ")}
+                style={fs(1.6)}
+              >
+                {L(k)}
+              </Btn>
+            ))}
+          </div>
           <div className="flex shrink-0 gap-[0.8cqw]">
             {(["searchNo", "searchName"] as const).map((k) => (
               <Btn key={k} onClick={() => flash("In practice: use the fare buttons. Fare maps hang above the machines.")} className="rounded-[0.5cqw] bg-[#ffe100] px-[1cqw] py-[0.6cqw] leading-tight text-[#222]">
@@ -287,20 +353,22 @@ export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang })
             ))}
           </div>
         </div>
-        <div className="mt-[1.2cqw] grid flex-1 grid-cols-6 gap-[0.9cqw]">
+        <p className="mt-[0.8cqw] text-[#333]" style={fs(1.5)}>{L("selectFare")}</p>
+        <div className="mt-[0.8cqw] grid flex-1 grid-cols-6 gap-[0.9cqw]">
           {FARES.map((f) => (
             <Btn
               key={f}
               glow={mission === "ticket" && f === MISSION_FARE}
               onClick={() => {
                 setMission("ticket");
-                setFare(f);
-                setStage("people");
+                setFare(paxFare(f));
+                setPeople(pax === "adult2" ? 2 : 1);
+                setStage("pay");
               }}
               className="rounded-[0.5cqw] bg-[linear-gradient(#3a3d42,#1d1f23)] font-bold text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"
               style={fs(2.7)}
             >
-              {f}
+              {paxFare(f)}
             </Btn>
           ))}
         </div>
@@ -316,45 +384,15 @@ export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang })
             </Btn>
           ))}
         </div>
-        <div className="mt-[0.9cqw] flex justify-end">
+        <div className="mt-[0.9cqw] flex justify-between">
+          <Btn onClick={() => setStage("menu")} className="rounded-[0.5cqw] bg-[#cfd5db] px-[2cqw] py-[0.5cqw] text-[#222]" style={fs(1.6)}>
+            {L("back")}
+          </Btn>
           <Btn onClick={() => flash("Platform tickets let you see someone off. Not part of this practice.")} className="rounded-[0.5cqw] bg-[linear-gradient(#3a3d42,#1d1f23)] px-[2.4cqw] py-[0.5cqw] leading-tight text-white">
             <span className="block font-bold" style={fs(1.5)}>{S.platform.ja}</span>
             <span className="block" style={fs(1.1)}>{S.platform.en} 150</span>
           </Btn>
         </div>
-      </div>
-    );
-  } else if (stage === "people") {
-    body = (
-      <div className="flex h-full flex-col p-[2cqw]">
-        <p className="font-bold text-[#222]" style={fs(2.4)}>{L("people")}</p>
-        <p className="mt-[0.6cqw] text-[#444]" style={fs(1.8)}>{L("fare")} {yen(fare)}</p>
-        <div className="mt-[2cqw] grid grid-cols-3 gap-[1.4cqw]">
-          {[
-            { k: "adult1" as const, n: 1, f: fare },
-            { k: "adult2" as const, n: 2, f: fare },
-            { k: "child1" as const, n: 1, f: Math.floor(fare / 2 / 10) * 10 },
-          ].map((o) => (
-            <Btn
-              key={o.k}
-              glow={o.k === "adult1"}
-              onClick={() => {
-                setPeople(o.n);
-                setFare(o.f);
-                setStage("pay");
-              }}
-              className="rounded-[0.8cqw] bg-white py-[2.4cqw] font-bold text-[#222] shadow-[0_2px_0_rgba(0,0,0,0.18)]"
-              style={fs(2.4)}
-            >
-              {L(o.k)}
-              <span className="mt-[0.6cqw] block font-normal text-[#555]" style={fs(1.7)}>{yen(o.f * o.n)}</span>
-            </Btn>
-          ))}
-        </div>
-        <div className="flex-1" />
-        <Btn onClick={() => setStage("top")} className="self-start rounded-[0.5cqw] bg-[#cfd5db] px-[2cqw] py-[0.8cqw] text-[#222]" style={fs(1.7)}>
-          {L("back")}
-        </Btn>
       </div>
     );
   } else if (stage === "pay" || stage === "chargePay") {
@@ -383,6 +421,9 @@ export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang })
     body = (
       <div className="flex h-full flex-col items-center justify-center p-[2cqw] text-center">
         <p className="font-bold text-[#222]" style={fs(3)}>{L(stage)}</p>
+        <Btn onClick={() => flash("Receipt printed — it comes out with your ticket.")} className="mt-[1.2cqw] rounded-[0.5cqw] bg-white px-[2cqw] py-[0.6cqw] text-[#222] shadow-[0_1px_0_rgba(0,0,0,0.15)]" style={fs(1.6)}>
+          {S.receipt.ja} {lang === "ja" ? S.receipt.en : L("receipt")}
+        </Btn>
         <div className="mt-[2cqw] grid w-[70%] grid-cols-2 gap-y-[1cqw] rounded-[0.8cqw] bg-white p-[2cqw] text-left shadow-sm" style={fs(2.1)}>
           {stage === "takeCard" ? (
             <>
@@ -405,7 +446,7 @@ export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang })
           </div>
           <span className="animate-bounce text-[#2f9a3f]" style={fs(5)}>↓</span>
         </div>
-        <Btn onClick={() => setStage("top")} className="mt-[3cqw] rounded-[0.5cqw] bg-[#cfd5db] px-[2cqw] py-[0.8cqw] text-[#222]" style={fs(1.7)}>
+        <Btn onClick={() => setStage("menu")} className="mt-[3cqw] rounded-[0.5cqw] bg-[#cfd5db] px-[2cqw] py-[0.8cqw] text-[#222]" style={fs(1.7)}>
           {L("back")}
         </Btn>
       </div>
@@ -466,7 +507,7 @@ export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang })
         ))}
       </div>
       <div className="flex min-h-0 flex-1">
-        {menu}
+        {stage === "menu" ? null : menu}
         <div className="min-w-0 flex-1">{body}</div>
       </div>
       {hint ? (
@@ -501,8 +542,15 @@ export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang })
         <button
           type="button"
           aria-label="Ticket and IC card slot"
-          onClick={() => (want.card ? setStage("chargeAmount") : flash(stage === "top" ? "Tap Charge on the screen first." : "Nothing to insert here right now."))}
-          className={[hot, want.card ? glowClass : ""].join(" ")}
+          onClick={() => {
+            // Inserting the card first is how most people do it: the machine
+            // reads it and goes straight to the charge screen.
+            if (want.card || stage === "menu") {
+              setMission("charge");
+              setStage("chargeAmount");
+            } else flash("Nothing to insert here right now.");
+          }}
+          className={[hot, want.card || want.charge ? glowClass : ""].join(" ")}
           style={pos(BOX.cardSlot)}
         />
         <button
