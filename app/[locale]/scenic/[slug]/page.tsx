@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { readFileSync } from "node:fs";
-import path from "node:path";
 import { ArrowRight, Check } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "../../components/SiteHeader";
@@ -12,6 +10,15 @@ import { RouteViewMap, type RouteView } from "@/components/scenic/RouteViewMap";
 import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
 import catalogue from "@/data/scenic-routes.json";
 import { JR_PASS_URL } from "@/src/affiliateLinks";
+import hokurikuViewshed from "@/data/routes/hokuriku-alps-viewshed.json";
+
+/*
+ * Viewshed files by route id, imported statically: reading them from disk at
+ * request time made the bundler trace (and ship) the whole project.
+ */
+const VIEWSHEDS: Record<string, { direction: [string, string]; points: Parameters<typeof RouteViewMap>[0]["points"] }> = {
+  "hokuriku-alps": hokurikuViewshed as unknown as { direction: [string, string]; points: Parameters<typeof RouteViewMap>[0]["points"] },
+};
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -78,7 +85,8 @@ export default async function ScenicRoutePage({ params }: Props) {
   const copy = PAGE_COPY[slug];
   if (!route || !copy) notFound();
 
-  const viewshed = JSON.parse(readFileSync(path.join(process.cwd(), route.viewshed), "utf8"));
+  const viewshed = VIEWSHEDS[route.id];
+  if (!viewshed) notFound();
   const [from, to] = route.between;
 
   const faq = [
