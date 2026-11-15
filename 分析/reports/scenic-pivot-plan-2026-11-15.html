@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>景色ルート化 全体整理</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0f1420;--panel:#161d2c;--line:#27314a;--ink:#e8ecf4;--dim:#9aa6bd;--accent:#f2c23e;--good:#4fbf8b;--bad:#e2685f;--red:#d94a32;--blue:#5b8def}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.8}
+  .wrap{max-width:960px;margin:0 auto;padding:30px 16px 70px}
+  h1{font-size:23px;margin:0 0 4px}.sub{color:var(--dim);font-size:13px;margin-bottom:20px}
+  h2{font-size:18px;margin:40px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+  h3{font-size:15px;margin:16px 0 6px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0}
+  .key{border-left:4px solid var(--accent)} .warn{border-left:4px solid var(--bad)} .ok{border-left:4px solid var(--good)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:8px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--dim);font-size:12px;font-weight:600}
+  .scroll{overflow-x:auto}
+  .dim{color:var(--dim)} .good{color:var(--good);font-weight:700} .bad{color:var(--bad);font-weight:700} .acc{color:var(--accent);font-weight:700}
+  .b{display:inline-block;font-size:11.5px;font-weight:700;border-radius:99px;padding:1px 9px;white-space:nowrap}
+  .now{background:#1f4a37;color:#8ee6b8}.next{background:#22345e;color:#9dbaff}.later{background:#3a3320;color:#f2d07a}.hold{background:#4a2626;color:#ffa79d}
+  svg{display:block;max-width:100%;height:auto}
+  .q{background:#1c2436;border:1px solid #33406a;border-radius:12px;padding:12px 16px;margin:10px 0}.q b{color:var(--accent)}
+
+  /* ===== hero mockup (light, the actual site look) ===== */
+  .mock{border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#fff;color:#0b1220;font-family:Inter,-apple-system,sans-serif}
+  .mhd{display:flex;justify-content:space-between;align-items:center;padding:12px 18px;background:rgba(255,255,255,.92);position:relative;z-index:2}
+  .mhd b{font-weight:800}.mhd span{font-size:13px;color:#5b6577;font-weight:600}
+  .mhero{position:relative;min-height:540px;background:#0b1220 url(../../public/seat-checker-fuji-window-20260423.png) 70% center/cover;display:flex;flex-direction:column;justify-content:space-between}
+  .mhero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,18,32,.55) 0%,rgba(11,18,32,.05) 40%,rgba(11,18,32,.0) 60%,rgba(11,18,32,.45) 100%)}
+  .mtitle{position:relative;text-align:center;color:#fff;padding:46px 20px 0}
+  .mtitle .e{font-size:11px;letter-spacing:.32em;font-weight:600;opacity:.9}
+  .mtitle h3{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:42px;line-height:1.05;margin:12px 0 10px;letter-spacing:-.01em;text-shadow:0 2px 20px rgba(0,0,0,.35)}
+  .mtitle p{margin:0;font-size:15px;opacity:.92}
+  .mbox{position:relative;margin:0 16px 18px;background:rgba(255,255,255,.96);border-radius:20px;padding:16px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+  .mlab{font-size:12px;font-weight:700;color:#5b6577;margin-bottom:8px}
+  .vchips{display:flex;flex-wrap:wrap;gap:8px}
+  .vc{border:1.5px solid #d5dae3;background:#fff;border-radius:99px;padding:8px 13px;font:600 13.5px Inter,sans-serif;cursor:pointer;color:#0b1220}
+  .vc.on{background:#0b1220;color:#fff;border-color:#0b1220}
+  .mres{margin-top:14px;border-top:1px solid #e9ecf1;padding-top:14px;display:grid;gap:10px}
+  @media(min-width:760px){.mres{grid-template-columns:1.2fr 1fr}}
+  .rc{border:1px solid #e3e7ee;border-radius:16px;padding:14px;background:#fff}
+  .rc .t{font-size:12px;font-weight:700;color:#d94a32;letter-spacing:.06em;text-transform:uppercase}
+  .rc .h{font-size:20px;font-weight:800;letter-spacing:-.02em;margin:2px 0 6px}
+  .rc ul{margin:0;padding-left:18px;font-size:13.5px;color:#3b4456;line-height:1.6}
+  .rbtn{display:flex;justify-content:center;align-items:center;height:44px;border-radius:99px;background:#d94a32;color:#fff;font-weight:700;font-size:14px;text-decoration:none;margin-top:10px}
+  .rbtn2{display:flex;justify-content:center;align-items:center;height:42px;border-radius:99px;border:1.5px solid #cfd5df;font-weight:600;font-size:13.5px;color:#0b1220;text-decoration:none;margin-top:8px}
+  .verify{display:inline-block;font-size:10.5px;font-weight:700;background:#fff3cd;color:#7a5b00;border-radius:99px;padding:1px 7px;margin-left:4px;vertical-align:middle}
+  .heat{height:12px;border-radius:9px;background:linear-gradient(90deg,#e9edf4 0%,#e9edf4 32%,#ffd36e 40%,#ff7a5c 50%,#d94a32 54%,#ff7a5c 60%,#ffd36e 66%,#e9edf4 74%,#e9edf4 100%);margin:8px 0 4px}
+  .hl{display:flex;justify-content:space-between;font-size:11px;color:#7a8394}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>「景色で選ぶ鉄道旅」へのピボット　全体整理</h1>
+<div class="sub">2026-11-15 ／ まだ実装しません ／ 根拠：Search Console・GA4 直近90日、Klook 10月実績、既存の富士山タイミングモデル</div>
+
+<div class="card key">
+<b>結論：ビジュアル中心の「景色ルート」サイトにする方向は賛成です。ただし、収益と検索流入のほぼすべてを生んでいる「富士山の座席」を土台にして広げる順番が大事です。</b>
+<ul>
+<li><b>土台の数字：</b>/guide だけで90日に<b>16万回表示・1,402クリック</b>。平均順位は<b>6.3位</b>で、ここを3位前後に上げるだけでクリックは2〜3倍になり得ます。どの新機能よりも効くのが、この1ページです。</li>
+<li><b>新しい景色ルートの需要：</b>今は小さいです（富士山以外の路線の検索は計133回）。「hokuriku shinkansen seat map」（67回）のような芽はあります。<b>小さく試して育てる</b>領域です。</li>
+<li><b>一番の新機能候補：</b>「予約後に、景色がいつ見えるかをカレンダーに入れる」機能です。富士山なら<b>既存のタイミングモデルがそのまま使え</b>、ログインもメール保存も不要で始められます。</li>
+<li><b>原則：</b>「道具とビジュアルは画面で見せる、文章はブログへ」。いただいた方針がそのまま全体の設計ルールになります。</li>
+</ul>
+</div>
+
+<h2>① 完成イメージ：トップの1画面目</h2>
+<p class="dim" style="font-size:13px;margin-top:0">参考画像の方向（車窓いっぱい＋検索ボックス）を、今ある車窓の写真で作ったモックです。景色をタップすると下の答えが変わります。富士山以外のルートは<span class="acc">要検証</span>の候補です。</p>
+<div class="mock">
+  <div class="mhd"><b>🗻 fujiseat</b><span>Scenic Routes · Where to Stay · Station Help · Blog</span></div>
+  <div class="mhero">
+    <div class="mtitle">
+      <div class="e">— SEE JAPAN FROM THE RIGHT SEAT —</div>
+      <h3>Which view do you want<br>from your train?</h3>
+      <p>Pick a view. We'll show the route, the seat, the time — and the ticket.</p>
+    </div>
+    <div class="mbox">
+      <div class="mlab">I want to see</div>
+      <div class="vchips" id="views">
+        <button class="vc on" data-v="fuji">🗻 Mt. Fuji</button>
+        <button class="vc" data-v="sea">🌊 Sea view</button>
+        <button class="vc" data-v="alps">🏔️ Snowy mountains</button>
+        <button class="vc" data-v="country">🌾 Countryside</button>
+        <button class="vc" data-v="city">🌆 City lights</button>
+      </div>
+      <div class="mres" id="res"></div>
+    </div>
+  </div>
+</div>
+<p class="dim" style="font-size:12px">本番の写真は、より横長で高解像度のもの（桜や季節違い）を画像生成で用意できます。ただし「実際に見える景色」の説明には実写を使い、生成画像は「イメージ」と明記します。</p>
+
+<h2>② 新しいサイト構成</h2>
+<div class="card">
+<svg viewBox="0 0 900 400" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Hiragino Sans,sans-serif">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0L8,4L0,8z" fill="#9aa6bd"/></marker></defs>
+  <rect x="330" y="10" width="240" height="64" rx="14" fill="#d94a32"/>
+  <text x="450" y="38" fill="#fff" font-size="15" font-weight="700" text-anchor="middle">トップ：景色を選ぶ</text>
+  <text x="450" y="60" fill="#ffe1da" font-size="12" text-anchor="middle">車窓いっぱいのビジュアル＋ピッカー</text>
+  <g stroke="#9aa6bd" stroke-width="1.6" fill="none">
+    <path d="M450 74 V100 H115 V122" marker-end="url(#a)"/><path d="M450 100 H340 V122" marker-end="url(#a)"/>
+    <path d="M450 100 H560 V122" marker-end="url(#a)"/><path d="M450 100 H785 V122" marker-end="url(#a)"/>
+  </g>
+  <!-- columns -->
+  <g font-size="12">
+    <rect x="10" y="126" width="210" height="230" rx="12" fill="#1c2436" stroke="#f2c23e"/>
+    <text x="115" y="150" fill="#f2c23e" font-size="14" font-weight="700" text-anchor="middle">Scenic Routes</text>
+    <text x="24" y="176" fill="#e8ecf4">● 富士山（東海道）＝今の主力</text>
+    <text x="24" y="198" fill="#e8ecf4">● 海・雪山・田園 ルート</text>
+    <text x="24" y="220" fill="#e8ecf4">● 線路沿いの「映え度」地図</text>
+    <text x="24" y="242" fill="#e8ecf4">● 座席・時刻・撮影のコツ</text>
+    <text x="24" y="270" fill="#ff9a85" font-weight="700">→ チケット予約（Klook）</text>
+    <text x="24" y="292" fill="#8ee6b8" font-weight="700">→ カレンダーにリマインド</text>
+    <text x="24" y="318" fill="#9aa6bd" font-size="11">/guide はここの中心ページ</text>
+    <text x="24" y="336" fill="#9aa6bd" font-size="11">として残す（分割しない）</text>
+
+    <rect x="235" y="126" width="210" height="230" rx="12" fill="#1c2436" stroke="#5b8def"/>
+    <text x="340" y="150" fill="#9dbaff" font-size="14" font-weight="700" text-anchor="middle">Where to Stay</text>
+    <text x="249" y="176" fill="#e8ecf4">● 行き先から駅を選ぶ道具</text>
+    <text x="249" y="198" fill="#e8ecf4">● 景色の見えるホテル</text>
+    <text x="249" y="220" fill="#e8ecf4">● 景色の見えるレストラン</text>
+    <text x="249" y="242" fill="#e8ecf4">● 富士登山の旅館</text>
+    <text x="249" y="270" fill="#ff9a85" font-weight="700">→ Booking / Agoda</text>
+    <text x="249" y="318" fill="#9aa6bd" font-size="11">Hotel Finderのリンクを再利用</text>
+
+    <rect x="460" y="126" width="200" height="230" rx="12" fill="#1c2436" stroke="#4fbf8b"/>
+    <text x="560" y="150" fill="#8ee6b8" font-size="14" font-weight="700" text-anchor="middle">Station Help</text>
+    <text x="474" y="176" fill="#e8ecf4">● 券売機（実写ベース）</text>
+    <text x="474" y="198" fill="#e8ecf4">● Suicaの買い方・チャージ</text>
+    <text x="474" y="220" fill="#e8ecf4">● 駅に着いたら：1手ずつ</text>
+    <text x="474" y="242" fill="#e8ecf4">● 駅の練習（既存）</text>
+    <text x="474" y="270" fill="#9aa6bd">旅行中にスマホで見る</text>
+    <text x="474" y="318" fill="#9aa6bd" font-size="11">文字は最小、写真と矢印</text>
+
+    <rect x="675" y="126" width="215" height="230" rx="12" fill="#1c2436" stroke="#9aa6bd"/>
+    <text x="782" y="150" fill="#e8ecf4" font-size="14" font-weight="700" text-anchor="middle">Blog（文章はここ）</text>
+    <text x="689" y="176" fill="#e8ecf4">● Quick Answerの深掘り</text>
+    <text x="689" y="198" fill="#e8ecf4">● 券売機の画面ごと解説</text>
+    <text x="689" y="220" fill="#e8ecf4">● 目的別の泊まる場所</text>
+    <text x="689" y="242" fill="#e8ecf4">● ルートごとの旅行記</text>
+    <text x="689" y="270" fill="#9aa6bd">検索とAIの入口</text>
+    <text x="689" y="318" fill="#9aa6bd" font-size="11">各記事→道具へ誘導</text>
+  </g>
+  <text x="450" y="388" fill="#f2c23e" font-size="13" font-weight="700" text-anchor="middle">原則：道具とビジュアルは画面で見せる ／ 文章はブログへ ／ 全部の答えが「予約」か「リマインド」で終わる</text>
+</svg>
+</div>
+
+<h2>③ データで見た「どこに力を入れるべきか」</h2>
+<div class="card">
+<svg viewBox="0 0 860 230" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Hiragino Sans,sans-serif" font-size="12">
+  <text x="0" y="16" fill="#9aa6bd">検索での表示回数（90日）</text>
+  <text x="0" y="46" fill="#e8ecf4">/guide（富士山の座席）</text><rect x="210" y="34" width="560" height="18" rx="4" fill="#f2c23e"/><text x="776" y="48" fill="#e8ecf4">160,489</text>
+  <text x="0" y="76" fill="#e8ecf4">座席の文字 A〜E</text><rect x="210" y="64" width="166" height="18" rx="4" fill="#f2c23e"/><text x="382" y="78" fill="#e8ecf4">47,708</text>
+  <text x="0" y="106" fill="#e8ecf4">各国語の /guide 合計</text><rect x="210" y="94" width="117" height="18" rx="4" fill="#f2c23e"/><text x="333" y="108" fill="#e8ecf4">約33,400</text>
+  <text x="0" y="136" fill="#e8ecf4">ホテル（浅草 vs 上野）</text><rect x="210" y="124" width="26" height="18" rx="4" fill="#5b8def"/><text x="242" y="138" fill="#e8ecf4">7,445</text>
+  <text x="0" y="166" fill="#e8ecf4">富士山以外のルート</text><rect x="210" y="154" width="3" height="18" rx="2" fill="#4fbf8b"/><text x="220" y="168" fill="#e8ecf4">133（ページがないため）</text>
+  <text x="0" y="196" fill="#e8ecf4">Suica・券売機</text><rect x="210" y="184" width="1" height="18" fill="#e2685f"/><text x="218" y="198" fill="#e8ecf4">0（今のSuicaページは検索に出ていない）</text>
+  <text x="0" y="224" fill="#9aa6bd" font-size="11.5">→ 富士山の座席が圧倒的。新機能はこの読者に「次に役立つもの」から作るのが一番早く伸びる。</text>
+</svg>
+</div>
+
+<h2>④ 機能ごとの判断</h2>
+<div class="scroll">
+<table>
+<tr><th>機能</th><th>価値</th><th>難しさ</th><th>必要なもの</th><th>判断</th></tr>
+<tr><td><b>トップのビジュアル化</b>（車窓いっぱい＋景色ピッカー）</td><td>ブランドが一目で伝わる。SNSからの入口にもなる</td><td>小</td><td>横長・高解像度の車窓画像（生成 or 撮影）</td><td><span class="b now">今すぐ</span></td></tr>
+<tr><td><b>カレンダーにリマインド</b>（景色が見える時刻・撮影のコツ）</td><td>他サイトにない。予約後も使われる。Seat Eが取れなかった人にも役立つ</td><td>小〜中</td><td>既存の富士山タイミングモデル＋乗る列車の時刻入力（既存の時刻入力欄を流用）。.icsファイルで、ログイン不要</td><td><span class="b now">今すぐ</span></td></tr>
+<tr><td>メールでのリマインド</td><td>カレンダーより届きやすい</td><td>中〜大</td><td>メール配信サービス、メールアドレスの保存、プライバシーと同意の対応</td><td><span class="b later">あとで</span></td></tr>
+<tr><td><b>線路沿いの映え度ヒートマップ</b></td><td>見ただけで分かる。SNS映えもする</td><td>中（富士山）／大（全国）</td><td>富士山は既存モデルの「見え始め・最高・見え終わり」で描ける。他の路線は1つずつ取材と検証が必要。地図は無料のOpenStreetMap系で足りる</td><td><span class="b next">次（富士山から）</span></td></tr>
+<tr><td><b>景色ルート集</b>（海・雪山・田園）</td><td>サイトの幅が広がる</td><td>大</td><td>ルートごとの側・区間・時期の検証。チケットの紹介リンクが無い路線もある</td><td><span class="b next">次（3〜5本で試す）</span></td></tr>
+<tr><td>景色の見えるホテル・レストラン</td><td>単価が高い（ホテル1件≒今の月収）</td><td>中</td><td>Hotel Finderのリンク＋景色の写真。レストランは紹介制度が弱め</td><td><span class="b next">次</span></td></tr>
+<tr><td><b>券売機・Suica（実写）</b></td><td>旅行中に役立つ。信頼が上がる</td><td>中</td><td><b>実物の写真が必須</b>（画面ごと）。他人の写真やアニメ風の再現は使わない</td><td><span class="b next">次（撮影待ち）</span></td></tr>
+<tr><td><b>Guide → ブログ化</b></td><td>文章を減らし、検索の入口を増やす</td><td>中</td><td><b>/guide 本体は分割しない</b>。Quick Answerの「周辺の疑問」を別記事にして /guide へ戻す</td><td><span class="b now">今すぐ（1本ずつ）</span></td></tr>
+<tr><td>SNS（景色シミュレーション動画）</td><td>認知が広がる</td><td>中</td><td>生成動画は「イメージ」と明記。まずは広告費ゼロの投稿で反応を見る</td><td><span class="b later">投稿から</span></td></tr>
+<tr><td>SNS広告（有料）</td><td>速く人を集められる</td><td>—</td><td>⑦の計算参照</td><td><span class="b hold">保留</span></td></tr>
+</table>
+</div>
+
+<h2>⑤ リマインドの中身（イメージ）</h2>
+<div class="card">
+<svg viewBox="0 0 860 210" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Hiragino Sans,sans-serif" font-size="12">
+  <line x1="40" y1="70" x2="820" y2="70" stroke="#27314a" stroke-width="6" stroke-linecap="round"/>
+  <rect x="404" y="64" width="170" height="12" rx="6" fill="#d94a32"/><rect x="460" y="64" width="40" height="12" rx="6" fill="#ffb199"/>
+  <circle cx="40" cy="70" r="8" fill="#f2c23e"/><text x="40" y="44" fill="#f2c23e" text-anchor="middle" font-weight="700">東京 9:00発</text>
+  <text x="40" y="100" fill="#9aa6bd" text-anchor="middle">予約完了</text>
+  <circle cx="300" cy="70" r="7" fill="#5b8def"/><text x="300" y="44" fill="#9dbaff" text-anchor="middle" font-weight="700">9:35 通知①</text>
+  <text x="300" y="100" fill="#e8ecf4" text-anchor="middle">「あと5分。右側の窓へ」</text>
+  <circle cx="460" cy="70" r="7" fill="#fff"/><text x="460" y="44" fill="#fff" text-anchor="middle" font-weight="700">9:40 見え始め</text>
+  <circle cx="480" cy="70" r="9" fill="#d94a32" stroke="#fff" stroke-width="2"/><text x="520" y="126" fill="#ff9a85" text-anchor="middle" font-weight="700">9:45 一番きれい（新富士駅付近）</text>
+  <circle cx="574" cy="70" r="7" fill="#fff"/><text x="600" y="44" fill="#fff" text-anchor="middle" font-weight="700">9:48 見え終わり</text>
+  <circle cx="820" cy="70" r="8" fill="#f2c23e"/><text x="820" y="44" fill="#f2c23e" text-anchor="middle" font-weight="700">京都</text>
+  <text x="40" y="160" fill="#e8ecf4">カレンダーに入る内容：</text>
+  <text x="40" y="182" fill="#9aa6bd">・見える時刻（乗る列車の発車時刻から計算） ・どちら側の窓か ・Seat Eが取れなかった時の撮り方（通路から、デッキの窓から 等）</text>
+  <text x="40" y="202" fill="#9aa6bd">・その日の富士山の見え具合予報（10日以内なら既存の予報を表示） ※時刻は東京発の既存モデル（見え始め+40分・最高+45分・見え終わり+48分）</text>
+</svg>
+</div>
+
+<h2>⑥ 進める順番</h2>
+<div class="card">
+<svg viewBox="0 0 900 260" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Hiragino Sans,sans-serif" font-size="12">
+  <line x1="20" y1="34" x2="880" y2="34" stroke="#27314a" stroke-width="3"/>
+  <g><circle cx="90" cy="34" r="9" fill="#f2c23e"/><text x="90" y="18" fill="#f2c23e" font-weight="700" text-anchor="middle">11〜12月</text>
+    <text x="20" y="62" fill="#e8ecf4" font-weight="700">土台を固める</text>
+    <text x="20" y="84" fill="#e8ecf4">・11/29 デザイン変更の効果確認</text>
+    <text x="20" y="104" fill="#e8ecf4">・トップをビジュアル化</text>
+    <text x="20" y="124" fill="#e8ecf4">・カレンダーにリマインド（富士山）</text>
+    <text x="20" y="144" fill="#e8ecf4">・/guide の深掘り記事 1本目</text>
+    <text x="20" y="172" fill="#9aa6bd" font-size="11">収益の導線は触らない</text></g>
+  <g><circle cx="320" cy="34" r="9" fill="#5b8def"/><text x="320" y="18" fill="#9dbaff" font-weight="700" text-anchor="middle">1〜2月</text>
+    <text x="245" y="62" fill="#e8ecf4" font-weight="700">見せる地図と泊まる場所</text>
+    <text x="245" y="84" fill="#e8ecf4">・富士山の映え度ヒートマップ</text>
+    <text x="245" y="104" fill="#e8ecf4">・Where to Stay の道具</text>
+    <text x="245" y="124" fill="#e8ecf4">・券売機の撮影 → 実写ガイド</text>
+    <text x="245" y="144" fill="#e8ecf4">・SNSへの投稿を開始（無料）</text></g>
+  <g><circle cx="560" cy="34" r="9" fill="#4fbf8b"/><text x="560" y="18" fill="#8ee6b8" font-weight="700" text-anchor="middle">3〜4月（桜）</text>
+    <text x="485" y="62" fill="#e8ecf4" font-weight="700">景色ルートを広げる</text>
+    <text x="485" y="84" fill="#e8ecf4">・海・雪山・田園など 3〜5本</text>
+    <text x="485" y="104" fill="#e8ecf4">・景色の見えるホテル</text>
+    <text x="485" y="124" fill="#e8ecf4">・桜の車窓で SNS 強化</text></g>
+  <g><circle cx="790" cy="34" r="9" fill="#d94a32"/><text x="790" y="18" fill="#ff9a85" font-weight="700" text-anchor="middle">5〜7月</text>
+    <text x="715" y="62" fill="#e8ecf4" font-weight="700">夏の富士</text>
+    <text x="715" y="84" fill="#e8ecf4">・富士登山の宿（旅館）</text>
+    <text x="715" y="104" fill="#e8ecf4">・メールでのリマインド</text>
+    <text x="715" y="124" fill="#e8ecf4">・数字が出ていれば広告を</text>
+    <text x="715" y="144" fill="#e8ecf4">  少額で試す</text></g>
+  <text x="20" y="226" fill="#9aa6bd" font-size="11.5">春の桜と夏の富士登山（7〜9月）は旅行者の検索が増える時期なので、その2〜3か月前に記事と道具を出しておく逆算です。</text>
+  <text x="20" y="246" fill="#9aa6bd" font-size="11.5">先に決めていた「Where to Stay」の計画は、1〜2月の枠にそのまま入ります。</text>
+</svg>
+</div>
+
+<h2>⑦ SNS広告は今は保留（お金の計算）</h2>
+<div class="card warn">
+<ul style="margin:0">
+<li>一番稼ぐリンクでも、<b>1クリックあたりの収益は約69円</b>（Klook、東京→京都）。サイト全体で見ると、予約ボタンを押すのは訪問者の約2%です。</li>
+<li>広告で1人連れてくるのに数十円〜100円以上かかると、<b>連れてきた人の大半は予約ボタンを押さない</b>ので赤字になります。</li>
+<li>先に<b>無料の投稿（Reels・TikTok・Shorts）</b>で、どの景色の動画が反応されるかを見ます。ホテル（1件 約2,400〜3,000円）の導線ができてから広告を考えると、計算が合いやすくなります。</li>
+<li>生成AIの景色動画は「Simulation / イメージ」と明記します。実在しない景色を本物のように見せると、信頼を失ううえ、各SNSの表示ルールにも触れます。</li>
+</ul>
+</div>
+
+<h2>⑧ 守るもの</h2>
+<table>
+<tr><th>守ること</th><th>理由</th></tr>
+<tr><td>/guide を分割・改名しない。ブログは周辺の疑問だけ</td><td>16万回表示の主力。同じ質問のページを増やすと、検索で共倒れになる</td></tr>
+<tr><td>座席チェッカーの答え → 予約ボタンの導線は変えない（テストで保護済み）</td><td>収益のほぼすべて</td></tr>
+<tr><td>ドメイン fujiseat.com は残す</td><td>これまでの検索の評価を引き継げる。名前は「富士山から始まる景色の鉄道旅」で通る</td></tr>
+<tr><td>最初はログインなし（参考画像の「Log In」は後回し）</td><td>ログインがあると、使う人が減り、個人情報の管理も増える</td></tr>
+<tr><td>景色ルートは1本ずつ検証してから出す</td><td>「右側で見える」が間違っていたら、サイト全体の信用を失う</td></tr>
+</table>
+
+<h2>⑨ 決めていただきたいこと</h2>
+<div class="q"><b>Q1.</b> 最初の一歩は「トップのビジュアル化＋カレンダーにリマインド（富士山）」で良いですか？（11/29の効果確認の後に出す想定）</div>
+<div class="q"><b>Q2.</b> トップの車窓画像：今の写真を使うか、画像生成で横長・季節違い（桜・雪・夏）を作るか。</div>
+<div class="q"><b>Q3.</b> 券売機とSuicaの実写：ご自身で画面ごとの撮影ができますか？（例：JR東日本の指定席券売機、Suicaのチャージ画面）</div>
+<div class="q"><b>Q4.</b> 富士山以外で最初に試したい景色はどれですか？（海・雪山・田園・夜景など）</div>
+<div class="q"><b>Q5.</b> サイト名：fujiseat のまま「景色」の意味を足すか、ロゴや見出しで別の名前を前に出すか。</div>
+</div>
+
+<script>
+const R = {
+  fuji:`<div class="rc"><div class="t">Tokaido Shinkansen · Tokyo → Kyoto</div><div class="h">Right side · Seat E</div>
+      <ul><li>Visible ~40–48 min after Tokyo, best near Shin-Fuji</li><li>Clearest on winter mornings</li><li>No Seat E? Shoot from the deck window</li></ul>
+      <div class="heat"></div><div class="hl"><span>Tokyo</span><span>Shin-Fuji 🔥</span><span>Nagoya</span></div></div>
+    <div class="rc"><div class="t">Next step</div><div class="h">Book & get a reminder</div>
+      <a class="rbtn" href="#">Book Tokyo → Kyoto on Klook →</a><a class="rbtn2" href="#">📅 Add “Mt. Fuji in 5 min” to calendar</a></div>`,
+  sea:`<div class="rc"><div class="t">Candidate routes <span class="verify">要検証</span></div><div class="h">Coastal lines</div>
+      <ul><li>Tokaido Shinkansen near Odawara–Atami (sea side = Seat A)</li><li>Other coastal limited expresses — to be researched</li></ul></div>
+    <div class="rc"><div class="t">Coming</div><div class="h">Route pages</div><a class="rbtn2" href="#">See the sea-view route list</a></div>`,
+  alps:`<div class="rc"><div class="t">Candidate routes <span class="verify">要検証</span></div><div class="h">Snowy mountain lines</div>
+      <ul><li>Hokuriku Shinkansen (Japan Alps) — side & section to verify</li><li>Searches already show: “hokuriku shinkansen seat map”</li></ul></div>
+    <div class="rc"><div class="t">Coming</div><div class="h">Route pages</div><a class="rbtn2" href="#">See the mountain route list</a></div>`,
+  country:`<div class="rc"><div class="t">Candidate routes <span class="verify">要検証</span></div><div class="h">Rice fields & villages</div><ul><li>Research needed</li></ul></div><div class="rc"><div class="t">Coming</div><div class="h">Route pages</div></div>`,
+  city:`<div class="rc"><div class="t">Candidate routes <span class="verify">要検証</span></div><div class="h">City lights</div><ul><li>Research needed</li></ul></div><div class="rc"><div class="t">Coming</div><div class="h">Route pages</div></div>`,
+};
+const res=document.getElementById("res");
+function show(v){res.innerHTML=R[v];document.querySelectorAll(".vc").forEach(b=>b.classList.toggle("on",b.dataset.v===v));}
+document.getElementById("views").addEventListener("click",e=>{const b=e.target.closest(".vc");if(b)show(b.dataset.v)});
+show("fuji");
+</script>
+</body>
+</html>

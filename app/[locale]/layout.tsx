@@ -7,7 +7,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { AdsenseScript } from "@/components/ads/AdsenseScript";
-import { Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import "../globals.css";
 
 // One modern sans for every locale: Latin and Cyrillic come from Inter, and
@@ -16,6 +16,14 @@ const inter = Inter({
   subsets: ["latin", "latin-ext", "cyrillic"],
   display: "swap",
   variable: "--font-inter",
+});
+
+// Display serif for headlines set over photographs only. Latin only: other
+// scripts fall back to the system serif in globals.css.
+const fraunces = Fraunces({
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+  variable: "--font-fraunces",
 });
 
 export const metadata: Metadata = {
@@ -53,7 +61,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={inter.variable}>
+    <html lang={locale} className={`${inter.variable} ${fraunces.variable}`}>
       <head>
         <meta name="agd-partner-manual-verification" />
       </head>

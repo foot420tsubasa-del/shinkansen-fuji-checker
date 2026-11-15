@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowRight, CloudRain } from "lucide-react";
+import { ArrowRight, CalendarPlus, CloudRain } from "lucide-react";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { trackAffiliateClick, trackAffiliateCtaView, trackCtaClick } from "@/lib/analytics";
 import { getAffUrl } from "@/src/affiliateLinks";
@@ -16,6 +16,7 @@ import {
 } from "@/lib/fuji-window";
 import { clearMorningOdds, LOW_ODDS_THRESHOLD, ODDS_PERIOD } from "@/lib/fuji-odds";
 import type { DirectionId } from "@/lib/seat-checker";
+import { addDays, googleCalendarUrl, icsDataUri, type FujiReminder } from "@/lib/fuji-reminder";
 
 const LEVEL_STYLE: Record<VisibilityLevel, string> = {
   high: "border-[#2E7D5B] bg-[#e8f3ed] text-[#2E7D5B]",
@@ -59,10 +60,13 @@ export function FujiTiming({
   direction,
   locale,
   pagePath,
+  reminder = false,
 }: {
   direction: DirectionId;
   locale: string;
   pagePath: string;
+  /** Offer the window as a calendar entry. On the homepage only, for now. */
+  reminder?: boolean;
 }) {
   const t = useTranslations("fujiWindow");
   const origins = ORIGINS_BY_DIRECTION[direction];
@@ -153,6 +157,27 @@ export function FujiTiming({
       locale,
     });
   };
+
+  // The calendar entry for this exact run. The view opens on the date the
+  // model resolved for the peak unless the opening falls before midnight.
+  const calendarEntry: FujiReminder = {
+    date: result.firstTime > result.fujiTime ? addDays(result.fujiDate, -1) : result.fujiDate,
+    first: result.firstTime,
+    peak: result.fujiTime,
+    last: result.lastTime,
+    title: t("eventTitle", { side: result.side === "right" ? t("sideRight") : t("sideLeft") }),
+    details: t("eventDetails", { peak: result.fujiTime }),
+    url: "https://fujiseat.com/guide",
+  };
+  const trackReminder = (method: "ics" | "google") =>
+    trackCtaClick({
+      placement: "fuji_reminder",
+      href: pagePath,
+      label: `${method}|${origin}|${day}|${departure}`,
+      category: "seat_checker",
+      page_path: pagePath,
+      locale,
+    });
 
   const fieldClass =
     "mt-1 min-h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm text-slate-900 focus:border-[#1d4e89] focus:outline-none";
@@ -266,6 +291,37 @@ export function FujiTiming({
       )}
 
       <p className="mt-2 text-[11px] leading-5 text-slate-500">{t("slowerTrains")}</p>
+
+      {reminder ? (
+        <div className="mt-3 rounded-2xl border border-slate-200 bg-slate-50 p-3.5">
+          <p className="flex items-center gap-1.5 text-sm font-bold text-slate-950">
+            <CalendarPlus className="h-4 w-4 text-[#d94a32]" aria-hidden="true" />
+            {t("reminderTitle")}
+          </p>
+          <p className="mt-1 text-[12.5px] leading-5 text-slate-600">{t("reminderBody")}</p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            <a
+              href={icsDataUri(calendarEntry)}
+              download="mt-fuji-reminder.ics"
+              onClick={() => trackReminder("ics")}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#0b1220] px-4 text-sm font-bold text-white transition-colors hover:bg-[#1c2740]"
+            >
+              <CalendarPlus className="h-4 w-4" aria-hidden="true" />
+              {t("reminderAdd")}
+            </a>
+            <a
+              href={googleCalendarUrl(calendarEntry)}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackReminder("google")}
+              className="inline-flex min-h-11 items-center justify-center rounded-full border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-900 transition-colors hover:bg-slate-100"
+            >
+              {t("reminderGoogle")}
+            </a>
+          </div>
+          <p className="mt-2 text-[11px] leading-4 text-slate-500">{t("reminderNote")}</p>
+        </div>
+      ) : null}
 
       {showTour && tourHref && tourLabel ? (
         <div className="mt-3 border-t border-slate-100 pt-3">

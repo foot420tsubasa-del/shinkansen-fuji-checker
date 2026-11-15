@@ -8,6 +8,9 @@ import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import Image from "next/image";
 import { SeatMapCard } from "@/components/travel/SeatResultCard";
+import { FujiTiming } from "@/components/travel/FujiTiming";
+import { HeroWindow } from "@/components/home/HeroWindow";
+import type { HeroSeason } from "@/lib/hero-images";
 import { trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
   type DirectionId,
@@ -166,7 +169,7 @@ function VisibilityChip({
   );
 }
 
-export default function HomeClient() {
+export default function HomeClient({ season }: { season: HeroSeason }) {
   const t = useTranslations("home");
   const locale = useLocale();
   const homeHotelCopy = homeHotelCopyByLocale[locale] ?? homeHotelCopyByLocale.en;
@@ -175,7 +178,7 @@ export default function HomeClient() {
   const [visData, setVisData] = useState<FujiVisibility | null>(null);
   const [visLoading, setVisLoading] = useState(true);
   const [visError, setVisError] = useState(false);
-  const answerRef = useRef<HTMLDivElement>(null);
+  const answerRef = useRef<HTMLElement>(null);
   const [scrollToAnswer, setScrollToAnswer] = useState(0);
 
   useEffect(() => {
@@ -207,8 +210,8 @@ export default function HomeClient() {
     fetchVisibility();
   }, []);
 
-  // On a phone the answer opens below the buttons, mostly off screen; bring it
-  // up. On a wide screen it opens beside them and is already in view.
+  // The answer opens below the photograph, off screen on every device; bring
+  // it up unless the reader has already scrolled down to it.
   useEffect(() => {
     if (!scrollToAnswer) return;
     const el = answerRef.current;
@@ -346,26 +349,47 @@ export default function HomeClient() {
     <main className="page-shell min-h-screen text-ink">
       <SiteHeader />
 
-      {/* Hero, redesigned 2026-11-15 after US travel tools: the checker is the
-          hero. The direction buttons used to sit about two phone screens down,
-          below the headline and the photo; now they are the first thing to
-          press, and the answer opens where the photo was. */}
-      <section id="seat-checker" className="scroll-mt-16 bg-white">
-        <div className="mx-auto grid max-w-[1180px] grid-cols-1 items-center gap-8 px-5 pb-10 pt-8 md:grid-cols-2 md:gap-12 md:px-7 md:pb-16 md:pt-14">
-          <div className="min-w-0 text-center md:text-left">
-            <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">{t("hero.eyebrow")}</p>
-            <h1 className="mt-3 text-[34px] font-extrabold leading-[1.06] tracking-[-0.03em] text-ink sm:text-[42px] md:text-[52px] md:leading-[1.02]">
+      {/* Hero, reworked 2026-11-15 toward a scenic-route site: the window
+          photograph fills the first screen and the checker sits on it in a
+          white panel. The view picker starts with Mt. Fuji alone; other views
+          join once their side and section have been verified. One tap on a
+          direction still answers, and the answer opens directly below. */}
+      <section id="seat-checker" className="relative isolate scroll-mt-14 overflow-hidden bg-ink">
+        <HeroWindow season={season} />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(11,18,32,0.72)_0%,rgba(11,18,32,0.42)_30%,rgba(11,18,32,0.08)_56%,rgba(11,18,32,0.5)_100%)]"
+        />
+        <span className="absolute bottom-1 right-3 text-[10px] font-medium text-white/60">Illustrative image</span>
+        <div className="mx-auto flex min-h-[740px] max-w-[1180px] flex-col justify-between px-4 pb-6 pt-9 md:min-h-[720px] md:px-7 md:pb-10 md:pt-16">
+          <div className="break-keep text-center text-white">
+            <p className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-white/90 md:text-xs">
+              — {t("hero.tagline")} —
+            </p>
+            <h1 className="mx-auto mt-4 max-w-[860px] font-display text-[34px] font-semibold leading-[1.08] tracking-[-0.01em] [text-shadow:0_2px_24px_rgba(0,0,0,0.35)] sm:text-[44px] md:text-[60px] md:leading-[1.04]">
               {t("brandTitle").split("\n").map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h1>
-            <p className="mx-auto mt-4 max-w-[460px] text-base leading-7 text-slate-600 md:mx-0 md:text-lg md:leading-8">
+            <p className="mx-auto mt-3 max-w-[520px] text-[15px] leading-6 text-white/90 font-medium [text-shadow:0_1px_14px_rgba(0,0,0,0.6)] md:mt-4 md:text-lg md:leading-7">
               {t("hero.sub")}
             </p>
+          </div>
 
-            <div className="mx-auto mt-7 grid max-w-[440px] gap-3 md:mx-0" role="group" aria-label={t("seatCheckerHeading")}>
+          <div className="mx-auto mt-10 w-full max-w-[760px] rounded-[26px] bg-white/95 p-4 text-ink shadow-[0_24px_60px_rgba(0,0,0,0.3)] backdrop-blur md:p-6">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span className="text-xs font-bold text-slate-500">{t("hero.viewLabel")}</span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-1.5 text-[13px] font-semibold text-white">
+                <span aria-hidden="true">🗻</span>
+                {t("hero.viewFuji")}
+              </span>
+              <span className="text-xs text-slate-400">{t("hero.moreViews")}</span>
+            </div>
+
+            <p className="mt-4 text-xs font-bold text-slate-500">{t("hero.whichWay")}</p>
+            <div className="mt-2 grid gap-2.5 sm:grid-cols-2" role="group" aria-label={t("seatCheckerHeading")}>
               {directions.map((opt, index) => {
                 const chosen = hasChecked && opt.id === direction;
                 const primary = hasChecked ? chosen : index === 0;
@@ -376,7 +400,7 @@ export default function HomeClient() {
                     aria-pressed={chosen}
                     onClick={() => chooseDirection(opt.id)}
                     className={[
-                      "flex min-h-14 w-full items-center justify-between gap-3 rounded-full px-6 text-left text-base font-bold transition-all active:scale-[0.99]",
+                      "flex min-h-14 w-full items-center justify-between gap-3 rounded-full px-5 text-left text-[15px] font-bold transition-all active:scale-[0.99] md:px-6 md:text-base",
                       primary
                         ? "bg-fuji text-white shadow-[0_10px_24px_rgba(217,74,50,0.3)] hover:bg-fuji-hover"
                         : "border-2 border-ink/85 bg-white text-ink hover:bg-slate-50",
@@ -389,69 +413,63 @@ export default function HomeClient() {
               })}
             </div>
 
-            <ul className="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-1.5 text-[13px] font-medium text-slate-600 md:justify-start">
-              <li className="inline-flex items-center gap-1.5">
-                <Check className="h-4 w-4 text-emerald-600" />
-                {t("hero.trustLocal")}
-              </li>
-              <li className="inline-flex items-center gap-1.5">
-                <Check className="h-4 w-4 text-emerald-600" />
-                {t("hero.trustSource")}
-              </li>
-            </ul>
-          </div>
-
-          <div ref={answerRef} className="min-w-0 scroll-mt-20">
-            {hasChecked ? (
-              <div className="grid grid-cols-1 gap-4">
-                <div className="rounded-[24px] bg-ink p-6 text-left text-white shadow-[0_18px_44px_rgba(11,18,32,0.25)] md:p-7">
-                  <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/60">{currentDirectionLabel}</p>
-                  <p className="mt-2 text-[48px] font-extrabold leading-none tracking-[-0.03em] md:text-[60px]">
-                    Seat <span className="text-[#ff7a5c]">{recommendation.standardWindowSeat}</span>
-                  </p>
-                  <p className="mt-3 text-[15px] leading-6 text-white/85">{t("resultSeatEMain")}</p>
-                  <p className="mt-1 text-xs leading-5 text-white/60">{t("resultSeatDFallback")}</p>
-                  <div className="mt-4">
-                    <VisibilityChip data={visData} loading={visLoading} error={visError} tone="dark" />
-                  </div>
-                </div>
-                {bookingCard}
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2.5">
+              <ul className="flex flex-wrap gap-x-4 gap-y-1 text-[12.5px] font-medium text-slate-600">
+                <li className="inline-flex items-center gap-1.5">
+                  <Check className="h-4 w-4 text-emerald-600" />
+                  {t("hero.trustLocal")}
+                </li>
+                <li className="inline-flex items-center gap-1.5">
+                  <Check className="h-4 w-4 text-emerald-600" />
+                  {t("hero.trustSource")}
+                </li>
+              </ul>
+              <div className="min-w-0 max-w-full">
+                <VisibilityChip data={visData} loading={visLoading} error={visError} tone="light" />
               </div>
-            ) : (
-              <div className="relative aspect-[16/10] overflow-hidden rounded-[24px] bg-[#07111f] shadow-[0_18px_50px_rgba(11,18,32,0.16)] md:aspect-[4/3]">
-                <Image
-                  src="/seat-checker-fuji-window-20260423.png"
-                  alt="Mt. Fuji seen from a Shinkansen window seat"
-                  fill
-                  priority
-                  sizes="(min-width: 1180px) 560px, (min-width: 768px) 50vw, calc(100vw - 40px)"
-                  className="object-cover object-[72%_center]"
-                />
-                <div className="absolute bottom-3 left-3 right-3 flex">
-                  <VisibilityChip data={visData} loading={visLoading} error={visError} tone="light" />
-                </div>
-              </div>
-            )}
+            </div>
           </div>
         </div>
       </section>
 
       <div className="mx-auto max-w-[1180px] px-5 md:px-7">
-        <section className="grid grid-cols-1 gap-5 pb-4 pt-8 lg:grid-cols-2">
-          {hasChecked ? (
-            <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.05)] md:p-6">
-              <p className="text-lg font-bold tracking-[-0.01em] text-ink">When to look</p>
-              <p className="mt-2 text-sm leading-6 text-slate-600">{t("timingNote")}</p>
+        {hasChecked ? (
+          // Mobile reads answer, booking, timing, seat map; from lg the four
+          // pair up as answer | booking over timing | seat map.
+          <section ref={answerRef} className="grid scroll-mt-16 grid-cols-1 gap-5 pb-4 pt-8 lg:grid-cols-2">
+            <div className="min-w-0 rounded-[24px] bg-ink p-6 text-left text-white shadow-[0_18px_44px_rgba(11,18,32,0.25)] md:p-7">
+              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/60">{currentDirectionLabel}</p>
+              <p className="mt-2 text-[48px] font-extrabold leading-none tracking-[-0.03em] md:text-[60px]">
+                Seat <span className="text-[#ff7a5c]">{recommendation.standardWindowSeat}</span>
+              </p>
+              <p className="mt-3 text-[15px] leading-6 text-white/85">{t("resultSeatEMain")}</p>
+              <p className="mt-1 text-xs leading-5 text-white/60">{t("resultSeatDFallback")}</p>
+              <div className="mt-4 min-w-0">
+                <VisibilityChip data={visData} loading={visLoading} error={visError} tone="dark" />
+              </div>
             </div>
-          ) : (
-            bookingCard
-          )}
-          <SeatMapCard
-            recommendation={recommendation}
-            directionLabel={currentDirectionLabel}
-            highlighted={hasChecked}
-          />
-        </section>
+            <div className="min-w-0">{bookingCard}</div>
+            <div className="min-w-0 rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.05)] md:p-6 [&>div:first-child]:mt-0 [&>div:first-child]:border-t-0 [&>div:first-child]:pt-0">
+              <FujiTiming key={direction} direction={direction} locale={locale} pagePath="/" reminder />
+            </div>
+            <div className="min-w-0">
+              <SeatMapCard
+                recommendation={recommendation}
+                directionLabel={currentDirectionLabel}
+                highlighted
+              />
+            </div>
+          </section>
+        ) : (
+          <section className="grid grid-cols-1 gap-5 pb-4 pt-8 lg:grid-cols-2">
+            {bookingCard}
+            <SeatMapCard
+              recommendation={recommendation}
+              directionLabel={currentDirectionLabel}
+              highlighted={false}
+            />
+          </section>
+        )}
         <p className="text-[11px] leading-5 text-slate-500">
           {t("brandSource")}{" "}
           <a href={JR_CENTRAL_SOURCE_URL} target="_blank" rel="noopener noreferrer" className="font-medium text-slate-600 underline underline-offset-2">

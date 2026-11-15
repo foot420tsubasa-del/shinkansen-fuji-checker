@@ -448,7 +448,12 @@
       "trustLocal": "Written by a Japan-based local",
       "trustSource": "Based on JR Central seat info",
       "today": "Today at Mt. Fuji",
-      "affiliateNote": "We may earn a commission if you book through these links, at no extra cost to you."
+      "affiliateNote": "We may earn a commission if you book through these links, at no extra cost to you.",
+      "tagline": "See Japan from the right seat",
+      "viewLabel": "I want to see",
+      "viewFuji": "Mt. Fuji",
+      "moreViews": "More views coming soon",
+      "whichWay": "Which way are you going?"
     }
   },
   "guide": {
@@ -5432,7 +5437,14 @@
     "originShinYokohama": "Shin-Yokohama",
     "originNagoya": "Nagoya",
     "oddsTitle": "Clear mornings over the Fuji stretch, by month",
-    "oddsCaption": "Share of 07:00–10:00 hours with cloud cover of 30% or less."
+    "oddsCaption": "Share of 07:00–10:00 hours with cloud cover of 30% or less.",
+    "reminderTitle": "Don’t miss it",
+    "reminderBody": "Add this window to your calendar. Your phone will remind you 5 minutes before Mt. Fuji appears.",
+    "reminderAdd": "Add to calendar",
+    "reminderGoogle": "Google Calendar",
+    "reminderNote": "Works with iPhone, Google and Outlook calendars. Nothing is stored on our side.",
+    "eventTitle": "🗻 Mt. Fuji — {side}",
+    "eventDetails": "Best view around {peak}, near Shin-Fuji Station. No Seat E? Step out to the door window at the end of the car, on the same side. Timing is for a Nozomi."
   },
   "areaScores": {
     "title": "Scored side by side",

@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>最初の一歩 イメージ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0f1420;--panel:#161d2c;--line:#27314a;--ink:#e8ecf4;--dim:#9aa6bd;--accent:#f2c23e;--good:#4fbf8b;--bad:#e2685f;--red:#d94a32}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.7}
+  .wrap{max-width:980px;margin:0 auto;padding:28px 16px 60px}
+  h1{font-size:22px;margin:0 0 4px}.sub{color:var(--dim);font-size:13px;margin:0 0 22px}
+  h2{font-size:18px;margin:44px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+  .stage{display:grid;gap:24px;align-items:start}
+  @media(min-width:860px){.stage{grid-template-columns:380px 1fr}}
+  /* steps list */
+  .steps{display:grid;gap:8px}
+  .st{display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer}
+  .st.on{border-color:var(--accent);background:#1d2436}
+  .st i{flex:none;width:26px;height:26px;border-radius:99px;background:#27314a;color:#fff;font-style:normal;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+  .st.on i{background:var(--accent);color:#1a1400}
+  .st b{display:block;font-size:14.5px}.st span{font-size:12.5px;color:var(--dim)}
+  /* phone */
+  .phone{width:360px;max-width:100%;margin:0 auto;border:10px solid #2a3142;border-radius:42px;overflow:hidden;background:#fff;height:740px;position:relative;box-shadow:0 30px 70px rgba(0,0,0,.45)}
+  .scr{position:absolute;inset:0;display:none;flex-direction:column;font-family:Inter,-apple-system,sans-serif;color:#0b1220}
+  .scr.on{display:flex}
+  .bar{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;font-weight:800;font-size:14px;background:rgba(255,255,255,.92);z-index:2}
+  .bar span{width:30px;height:30px;border-radius:99px;display:flex;align-items:center;justify-content:center}
+  .pill{font-size:11px;background:var(--red);color:#fff;border-radius:99px;padding:6px 10px;font-weight:700}
+  /* s1 */
+  .s1{flex:1;position:relative;background:#0b1220 url(../../public/seat-checker-fuji-window-20260423.png) 72% center/cover;display:flex;flex-direction:column;justify-content:space-between}
+  .s1::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,18,32,.6),rgba(11,18,32,0) 45%,rgba(11,18,32,.5))}
+  .s1 .t{position:relative;color:#fff;text-align:center;padding:30px 18px 0}
+  .s1 .e{font-size:9.5px;letter-spacing:.28em;font-weight:600;opacity:.9}
+  .s1 h3{font-family:Fraunces,Georgia,serif;font-size:31px;line-height:1.08;margin:10px 0 8px;font-weight:600;text-shadow:0 2px 18px rgba(0,0,0,.4)}
+  .s1 p{font-size:13px;margin:0;opacity:.92}
+  .box{position:relative;margin:12px;background:rgba(255,255,255,.97);border-radius:20px;padding:14px;box-shadow:0 18px 40px rgba(0,0,0,.3)}
+  .lab{font-size:11.5px;font-weight:700;color:#5b6577;margin-bottom:8px}
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{border:1.5px solid #d5dae3;background:#fff;border-radius:99px;padding:8px 12px;font:600 13px Inter,sans-serif;color:#0b1220;cursor:pointer}
+  .chip.on{background:#0b1220;color:#fff;border-color:#0b1220}
+  .chip.soon{opacity:.45}
+  .btn{display:flex;justify-content:center;align-items:center;gap:6px;height:48px;border-radius:99px;background:var(--red);color:#fff;font-weight:700;font-size:15px;border:0;width:100%;cursor:pointer;margin-top:12px;font-family:Inter,sans-serif;box-shadow:0 8px 20px rgba(217,74,50,.3)}
+  .btn2{display:flex;justify-content:center;align-items:center;gap:6px;height:46px;border-radius:99px;background:#fff;color:#0b1220;font-weight:700;font-size:14px;border:1.5px solid #0b1220;width:100%;cursor:pointer;margin-top:8px;font-family:Inter,sans-serif}
+  /* s2 */
+  .body{flex:1;overflow:auto;padding:14px;background:#f6f7f9}
+  .ph{height:150px;border-radius:18px;background:url(../../public/seat-checker-fuji-window-20260423.png) 72% center/cover;position:relative}
+  .ph span{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.92);border-radius:99px;font-size:11px;font-weight:700;padding:4px 10px}
+  .ans{background:#0b1220;color:#fff;border-radius:20px;padding:16px;margin-top:-26px;position:relative;margin-left:8px;margin-right:8px}
+  .ans .k{font-size:10.5px;letter-spacing:.1em;color:rgba(255,255,255,.6);font-weight:600}
+  .ans .big{font-size:34px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:4px 0}
+  .ans .big em{font-style:normal;color:#ff7a5c}
+  .ans p{margin:6px 0 0;font-size:13px;color:rgba(255,255,255,.85);line-height:1.5}
+  .heat{height:10px;border-radius:9px;margin:12px 0 4px;background:linear-gradient(90deg,#2a3348 0 30%,#ffd36e 40%,#ff7a5c 50%,#d94a32 55%,#ff7a5c 60%,#ffd36e 66%,#2a3348 75%)}
+  .hl{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.55)}
+  .card{background:#fff;border:1px solid #e3e7ee;border-radius:18px;padding:14px;margin-top:12px}
+  .card .h{font-weight:800;font-size:16px}.card .d{font-size:12.5px;color:#5b6577;margin-top:2px;line-height:1.45}
+  .tiny{font-size:10.5px;color:#7a8394;text-align:center;margin-top:8px}
+  /* s3 */
+  .f{display:grid;gap:10px;margin-top:10px}
+  .f label{font-size:11.5px;font-weight:700;color:#5b6577;display:block;margin-bottom:4px}
+  .f input{width:100%;height:44px;border:1.5px solid #d5dae3;border-radius:12px;padding:0 12px;font:600 15px Inter,sans-serif;color:#0b1220;background:#fff}
+  .tl{margin-top:14px;background:#fff;border:1px solid #e3e7ee;border-radius:18px;padding:12px 14px}
+  .tr{display:grid;grid-template-columns:58px 1fr;gap:8px;padding:7px 0;border-bottom:1px dashed #e9ecf1;font-size:13px}
+  .tr:last-child{border-bottom:0}
+  .tr b{font-variant-numeric:tabular-nums}
+  .tr.hot b{color:var(--red)}
+  /* s4 lock screen */
+  .lock{flex:1;background:linear-gradient(160deg,#1e3a6e,#0b1220 60%);color:#fff;padding:18px 14px;display:flex;flex-direction:column}
+  .clock{text-align:center;margin-top:30px}
+  .clock .d{font-size:14px;opacity:.85;font-weight:600}
+  .clock .tm{font-size:72px;font-weight:700;letter-spacing:-.03em;line-height:1}
+  .noti{margin-top:34px;background:rgba(255,255,255,.88);color:#0b1220;border-radius:20px;padding:12px 14px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+  .noti .a{display:flex;justify-content:space-between;font-size:11.5px;color:#5b6577;font-weight:600}
+  .noti b{display:block;font-size:14.5px;margin-top:4px}
+  .noti p{margin:3px 0 0;font-size:13px;line-height:1.45}
+  .noti2{margin-top:10px;background:rgba(255,255,255,.18);border-radius:20px;padding:12px 14px;font-size:13px}
+  .nav{display:flex;gap:8px;justify-content:center;margin-top:14px}
+  .nav button{background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:99px;padding:8px 16px;font-size:13px;cursor:pointer}
+  /* section B */
+  .card2{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0}
+  .key{border-left:4px solid var(--accent)} .warn{border-left:4px solid var(--bad)} .ok{border-left:4px solid var(--good)}
+  .cols{display:grid;gap:12px}
+  @media(min-width:760px){.cols{grid-template-columns:1fr 1fr}}
+  ul{margin:6px 0 0;padding-left:20px} li{margin:3px 0}
+  svg{display:block;max-width:100%;height:auto}
+  .dim{color:var(--dim)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>最初の一歩：トップのビジュアル化 ＋ 富士山のカレンダーリマインド</h1>
+<p class="sub">スマホで実際に使う流れです。左の手順をタップするか、画面の中のボタンで進めます。<b>4の「Add to calendar」は本当に予定ファイルが作られます</b>（お手元のカレンダーで開けます）。</p>
+
+<div class="stage">
+  <div>
+    <div class="steps" id="steps">
+      <div class="st on" data-s="1"><i>1</i><div><b>トップを開く</b><span>車窓いっぱいの写真。見たい景色を選ぶ</span></div></div>
+      <div class="st" data-s="2"><i>2</i><div><b>答えが出る</b><span>右側・Seat E、見える区間、チケット予約</span></div></div>
+      <div class="st" data-s="3"><i>3</i><div><b>乗る列車を入れる</b><span>出発駅・日付・時刻 → 見える時刻を計算</span></div></div>
+      <div class="st" data-s="4"><i>4</i><div><b>当日、スマホに通知</b><span>「あと5分で富士山。右側の窓へ」</span></div></div>
+    </div>
+    <div class="card2 ok" style="margin-top:14px;font-size:13px"><b>ポイント</b><ul>
+      <li>ログインもメール登録もいらない</li>
+      <li>見える時刻は、すでにある富士山の計算をそのまま使う</li>
+      <li>予約ボタン（収益）は今と同じ場所・同じリンク</li>
+    </ul></div>
+  </div>
+
+  <div>
+    <div class="phone">
+      <!-- S1 -->
+      <div class="scr on" id="s1">
+        <div class="bar">🗻 fujiseat<span>☰</span></div>
+        <div class="s1">
+          <div class="t"><div class="e">— SEE JAPAN FROM THE RIGHT SEAT —</div>
+            <h3>Which view do you want from your train?</h3>
+            <p>Pick a view. We'll show the seat, the time and the ticket.</p></div>
+          <div class="box">
+            <div class="lab">I want to see</div>
+            <div class="chips">
+              <button class="chip on">🗻 Mt. Fuji</button><button class="chip soon">🌊 Sea</button><button class="chip soon">🏔️ Snow</button><button class="chip soon">🌾 Countryside</button>
+            </div>
+            <button class="btn" data-go="2">Show my seat →</button>
+          </div>
+        </div>
+      </div>
+      <!-- S2 -->
+      <div class="scr" id="s2">
+        <div class="bar">🗻 fujiseat<span class="pill">Check Seat</span></div>
+        <div class="body">
+          <div class="ph"><span>☀️ Today: good chance</span></div>
+          <div class="ans"><div class="k">TOKYO → KYOTO / OSAKA</div>
+            <div class="big">Right side · <em>Seat E</em></div>
+            <p>Fuji shows for about 8 minutes, best near Shin-Fuji Station.</p>
+            <div class="heat"></div><div class="hl"><span>Tokyo</span><span>Shin-Fuji 🔥</span><span>Nagoya</span></div></div>
+          <div class="card"><div class="h">Book Seat E</div><div class="d">Choose Seat E if available.</div>
+            <button class="btn">Book on Klook →</button><div class="tiny">We may earn a commission at no extra cost to you.</div></div>
+          <div class="card"><div class="h">📅 Don't miss it</div><div class="d">Get a reminder 5 minutes before Mt. Fuji appears — with tips if you didn't get Seat E.</div>
+            <button class="btn2" data-go="3">Set a reminder</button></div>
+        </div>
+      </div>
+      <!-- S3 -->
+      <div class="scr" id="s3">
+        <div class="bar">← Reminder<span></span></div>
+        <div class="body">
+          <div class="h" style="font-weight:800;font-size:20px;letter-spacing:-.02em">When is your train?</div>
+          <div class="lab" style="margin-top:12px">From</div>
+          <div class="chips" id="org">
+            <button class="chip on" data-o="tokyo">Tokyo</button><button class="chip" data-o="shinagawa">Shinagawa</button><button class="chip" data-o="shinyokohama">Shin-Yokohama</button>
+          </div>
+          <div class="f">
+            <div><label>Date</label><input type="date" id="dt"></div>
+            <div><label>Departure time</label><input type="time" id="tm" value="09:00"></div>
+          </div>
+          <div class="tl" id="tl"></div>
+          <button class="btn" id="ics">📅 Add to calendar</button>
+          <div class="tiny">Works with iPhone, Google and Outlook calendars. Nothing is stored on our side.</div>
+          <button class="btn2" data-go="4" style="margin-top:12px">当日のイメージを見る →</button>
+        </div>
+      </div>
+      <!-- S4 -->
+      <div class="scr" id="s4">
+        <div class="lock">
+          <div class="clock"><div class="d" id="ld">Saturday, March 28</div><div class="tm" id="lt">9:35</div></div>
+          <div class="noti"><div class="a"><span>📅 CALENDAR</span><span>now</span></div>
+            <b>🗻 Mt. Fuji in 5 minutes</b>
+            <p id="ln">Move to the right-side window (Seat E). Best view at 9:45 near Shin-Fuji.</p></div>
+          <div class="noti2"><b>No Seat E?</b> Step out to the deck and use the door window on the right side for these few minutes.</div>
+          <div style="flex:1"></div>
+          <div style="text-align:center;font-size:11px;opacity:.6">— 当日のロック画面のイメージ —</div>
+        </div>
+      </div>
+    </div>
+    <div class="nav"><button id="prev">← 戻る</button><button id="next">次へ →</button></div>
+  </div>
+</div>
+
+<h2>Q4 への回答：ストリートビューで全国の景色は作れる？</h2>
+<div class="cols">
+  <div class="card2 warn"><b>そのままは難しい</b><ul>
+    <li><b>規約：</b>Googleマップの画像は、取り込んで保存したり、分析して自分のデータ（映え度など）を作ったりすることが禁止されています。</li>
+    <li><b>視点：</b>ストリートビューは道路から撮った写真で、<b>列車の窓からの景色ではない</b>。</li>
+  </ul></div>
+  <div class="card2 ok"><b>使える形</b><ul>
+    <li>ルートページに「この場所を見回す」としてストリートビューを<b>埋め込み表示</b>するのはOK（埋め込みは無料枠で使える）。</li>
+    <li>映え度は別の無料データで<b>計算</b>する（下の図）。</li>
+  </ul></div>
+</div>
+<div class="card2 key">
+<svg viewBox="0 0 900 200" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Hiragino Sans,sans-serif" font-size="12">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0L8,4L0,8z" fill="#9aa6bd"/></marker></defs>
+  <rect x="0" y="20" width="190" height="110" rx="12" fill="#1c2436" stroke="#5b8def"/>
+  <text x="95" y="46" fill="#9dbaff" font-weight="700" text-anchor="middle">① 線路の形</text>
+  <text x="95" y="70" fill="#e8ecf4" text-anchor="middle">OpenStreetMap の</text><text x="95" y="88" fill="#e8ecf4" text-anchor="middle">全国の線路データ</text>
+  <text x="95" y="114" fill="#4fbf8b" text-anchor="middle">無料・商用OK（表記必要）</text>
+  <line x1="192" y1="75" x2="228" y2="75" stroke="#9aa6bd" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="232" y="20" width="190" height="110" rx="12" fill="#1c2436" stroke="#5b8def"/>
+  <text x="327" y="46" fill="#9dbaff" font-weight="700" text-anchor="middle">② 山と地形の高さ</text>
+  <text x="327" y="70" fill="#e8ecf4" text-anchor="middle">国土地理院の</text><text x="327" y="88" fill="#e8ecf4" text-anchor="middle">標高データ</text>
+  <text x="327" y="114" fill="#4fbf8b" text-anchor="middle">無料・出典表記で利用可</text>
+  <line x1="424" y1="75" x2="460" y2="75" stroke="#9aa6bd" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="464" y="20" width="200" height="110" rx="12" fill="#1c2436" stroke="#f2c23e"/>
+  <text x="564" y="46" fill="#f2c23e" font-weight="700" text-anchor="middle">③ 見えるか計算</text>
+  <text x="564" y="70" fill="#e8ecf4" text-anchor="middle">線路の各地点から</text><text x="564" y="88" fill="#e8ecf4" text-anchor="middle">富士山・海・アルプスが</text><text x="564" y="106" fill="#e8ecf4" text-anchor="middle">見えるか／どちら側か</text>
+  <line x1="666" y1="75" x2="702" y2="75" stroke="#9aa6bd" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="706" y="20" width="190" height="110" rx="12" fill="#d94a32"/>
+  <text x="801" y="46" fill="#fff" font-weight="700" text-anchor="middle">④ 映え度マップ</text>
+  <text x="801" y="70" fill="#fff" text-anchor="middle">線路を色分け</text><text x="801" y="88" fill="#fff" text-anchor="middle">→ 左右・時刻・座席</text><text x="801" y="114" fill="#ffe1da" text-anchor="middle">→ チケット・リマインド</text>
+  <text x="0" y="160" fill="#e8ecf4">⑤ 最後に人が確認：計算で「見える」と出た区間は、実際の写真・動画・ストリートビュー埋め込みで1本ずつ確かめてから公開。</text>
+  <text x="0" y="184" fill="#9aa6bd">山（富士山・アルプス）と海は計算と相性が良い。桜・田園・夜景は季節や時刻で変わるので、写真と人の判断が中心になる。</text>
+</svg>
+</div>
+
+<h2>Q3 について一言</h2>
+<div class="card2 warn">券売機とSuicaの画面を生成する場合、<b>ボタンの文字や配置が実物と違う画像</b>ができやすいです。旅行者は画面の通りに押すので、公開前に実物（または公式の案内）と1画面ずつ照らし合わせて、違う所を直す工程を入れましょう。画像には「イメージ」と小さく入れておくと安全です。</div>
+
+<h2>このあと</h2>
+<div class="card2">
+<ol style="margin:0;padding-left:20px">
+  <li><b>11/29</b>：今回のデザイン変更の効果を確認（予約ボタンが押される率）</li>
+  <li><b>私</b>：トップのビジュアル化とリマインド機能を作る（画像は今の写真で仮置き → 生成画像が届いたら差し替え）</li>
+  <li><b>そちら</b>：トップ用の横長画像（桜・雪・夏）を生成して格納</li>
+  <li><b>並行</b>：富士山の映え度マップを、上の①〜④の方法で試作</li>
+</ol>
+</div>
+</div>
+
+<script>
+const ORIG={tokyo:{name:"Tokyo",f:40,p:45,l:48},shinagawa:{name:"Shinagawa",f:33,p:38,l:41},shinyokohama:{name:"Shin-Yokohama",f:22,p:27,l:30}};
+let cur=1, org="tokyo";
+const $=q=>document.querySelector(q);
+function go(n){cur=Math.max(1,Math.min(4,n));document.querySelectorAll(".scr").forEach(s=>s.classList.toggle("on",s.id==="s"+cur));document.querySelectorAll(".st").forEach(s=>s.classList.toggle("on",+s.dataset.s===cur));}
+document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>go(+b.dataset.go)));
+document.querySelectorAll(".st").forEach(s=>s.addEventListener("click",()=>go(+s.dataset.s)));
+$("#prev").onclick=()=>go(cur-1);$("#next").onclick=()=>go(cur+1);
+// default date: tomorrow
+const t=new Date(Date.now()+864e5);$("#dt").value=t.toISOString().slice(0,10);
+const add=(hm,min)=>{const[h,m]=hm.split(":").map(Number);const x=h*60+m+min;return String(Math.floor(x/60)%24).padStart(2,"0")+":"+String(x%60).padStart(2,"0")};
+const fmt=s=>s.replace(/^0/,"");
+function calc(){const o=ORIG[org],d=$("#tm").value||"09:00";
+  const r={rem:add(d,o.f-5),first:add(d,o.f),peak:add(d,o.p),last:add(d,o.l)};
+  $("#tl").innerHTML=`<div class="tr"><b>${fmt(d)}</b><span>Leave ${o.name}</span></div>
+  <div class="tr"><b>${fmt(r.rem)}</b><span>📳 Reminder: move to the right-side window</span></div>
+  <div class="tr"><b>${fmt(r.first)}</b><span>Mt. Fuji starts to appear</span></div>
+  <div class="tr hot"><b>${fmt(r.peak)}</b><span>🔥 Best view, near Shin-Fuji</span></div>
+  <div class="tr"><b>${fmt(r.last)}</b><span>View ends</span></div>`;
+  $("#lt").textContent=fmt(r.rem);
+  $("#ln").textContent=`Move to the right-side window (Seat E). Best view at ${fmt(r.peak)} near Shin-Fuji.`;
+  const dd=new Date($("#dt").value+"T00:00");$("#ld").textContent=dd.toLocaleDateString("en-US",{weekday:"long",month:"long",day:"numeric"});
+  return r;}
+$("#org").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;org=b.dataset.o;document.querySelectorAll("#org .chip").forEach(c=>c.classList.toggle("on",c===b));calc();});
+$("#tm").addEventListener("input",calc);$("#dt").addEventListener("input",calc);
+$("#ics").addEventListener("click",()=>{const r=calc();const day=$("#dt").value.replace(/-/g,"");
+  const toUtc=hm=>{const[h,m]=hm.split(":").map(Number);const d=new Date(Date.UTC(+day.slice(0,4),+day.slice(4,6)-1,+day.slice(6,8),h-9,m));return d.toISOString().replace(/[-:]/g,"").slice(0,15)+"Z"};
+  const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//fujiseat//reminder mock//EN","BEGIN:VEVENT","UID:"+Date.now()+"@fujiseat.com","DTSTAMP:"+new Date().toISOString().replace(/[-:]/g,"").slice(0,15)+"Z",
+   "DTSTART:"+toUtc(r.first),"DTEND:"+toUtc(r.last),"SUMMARY:🗻 Mt. Fuji — right-side window (Seat E)",
+   "DESCRIPTION:Best view at "+r.peak+" near Shin-Fuji. No Seat E? Use the right-side deck door window.\\nfujiseat.com","BEGIN:VALARM","TRIGGER:-PT5M","ACTION:DISPLAY","DESCRIPTION:Mt. Fuji in 5 minutes","END:VALARM","END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([ics],{type:"text/calendar"}));a.download="mt-fuji-reminder.ics";a.click();});
+calc();
+</script>
+</body>
+</html>

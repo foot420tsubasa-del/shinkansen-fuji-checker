@@ -448,7 +448,12 @@
       "trustLocal": "Geschrieben von jemandem, der in Japan lebt",
       "trustSource": "Basierend auf Angaben von JR Central",
       "today": "Heute am Mt. Fuji",
-      "affiliateNote": "Wenn du über diese Links buchst, erhalten wir eventuell eine Provision – für dich ohne Mehrkosten."
+      "affiliateNote": "Wenn du über diese Links buchst, erhalten wir eventuell eine Provision – für dich ohne Mehrkosten.",
+      "tagline": "Japan vom richtigen Platz aus sehen",
+      "viewLabel": "Ich möchte sehen",
+      "viewFuji": "Mt. Fuji",
+      "moreViews": "Weitere Aussichten folgen bald",
+      "whichWay": "In welche Richtung fährst du?"
     }
   },
   "guide": {
@@ -5376,7 +5381,14 @@
     "originShinYokohama": "Shin-Yokohama",
     "originNagoya": "Nagoya",
     "oddsTitle": "Klare Vormittage über dem Fuji-Abschnitt nach Monat",
-    "oddsCaption": "Anteil der Stunden von 07:00 bis 10:00 Uhr mit höchstens 30 % Bewölkung."
+    "oddsCaption": "Anteil der Stunden von 07:00 bis 10:00 Uhr mit höchstens 30 % Bewölkung.",
+    "reminderTitle": "Nicht verpassen",
+    "reminderBody": "Trag dieses Zeitfenster in deinen Kalender ein. Dein Handy erinnert dich 5 Minuten, bevor Mt. Fuji auftaucht.",
+    "reminderAdd": "Zum Kalender hinzufügen",
+    "reminderGoogle": "Google Kalender",
+    "reminderNote": "Funktioniert mit iPhone-, Google- und Outlook-Kalendern. Wir speichern nichts.",
+    "eventTitle": "🗻 Mt. Fuji — {side}",
+    "eventDetails": "Beste Sicht gegen {peak} bei Bahnhof Shin-Fuji. Kein Platz E? Geh zum Türfenster am Wagenende auf derselben Seite. Zeiten für einen Nozomi."
   },
   "areaScores": {
     "title": "Direkt verglichen, in Punkten",

@@ -8,7 +8,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import ts from "typescript";
 
@@ -623,4 +623,52 @@ test("posthog: inert until a project key is set", () => {
   assert.ok(init.includes("if (isPosthogEnabled())"), "init must stay behind the key check");
   assert.ok(lib.includes('startsWith("phc_")'), "only a real project key turns it on");
   assert.ok(init.includes('cookieless_mode: "always"'), "no cookies without a consent banner");
+});
+
+/* ── Fuji calendar reminder (lib/fuji-reminder.ts) ─────────────────────── */
+
+const fr = await importTsModule("lib/fuji-reminder.ts");
+
+test("reminder: Japan times become UTC nine hours earlier, across the date line", () => {
+  assert.equal(fr.tokyoToUtcStamp("2026-03-28", "09:40"), "20260328T004000Z");
+  assert.equal(fr.tokyoToUtcStamp("2026-03-28", "08:15"), "20260327T231500Z");
+});
+
+test("reminder: a view that straddles midnight ends the next day", () => {
+  const span = fr.reminderSpan({ date: "2026-03-28", first: "23:58", last: "00:03" });
+  assert.equal(span.start, "20260328T145800Z");
+  assert.equal(span.end, "20260328T150300Z");
+});
+
+test("reminder: the .ics alarms five minutes before and escapes commas", () => {
+  const ics = fr.buildIcs(
+    { date: "2026-03-28", first: "09:40", peak: "09:45", last: "09:48", title: "Mt. Fuji", details: "Best view, near Shin-Fuji", url: "https://fujiseat.com/guide" },
+    new Date("2026-03-01T00:00:00Z"),
+  );
+  assert.ok(ics.includes("DTSTART:20260328T004000Z"));
+  assert.ok(ics.includes("DTEND:20260328T004800Z"));
+  assert.ok(ics.includes("TRIGGER:-PT5M"));
+  assert.ok(ics.includes("Best view\\, near Shin-Fuji"));
+  assert.ok(ics.includes("\r\n"), "RFC 5545 needs CRLF line endings");
+});
+
+/* ── Seasonal hero (lib/hero-images.ts) ─────────────────────────────────── */
+
+const hero = await importTsModule("lib/hero-images.ts");
+
+test("hero: the season follows the month in Japan", () => {
+  // 2026-02-28 16:00 UTC is already March 1st in Tokyo.
+  assert.equal(hero.heroSeasonFor(new Date("2026-02-28T16:00:00Z")), "spring");
+  assert.equal(hero.heroSeasonFor(new Date("2026-04-20T00:00:00Z")), "spring");
+  assert.equal(hero.heroSeasonFor(new Date("2026-07-01T00:00:00Z")), "summer");
+  assert.equal(hero.heroSeasonFor(new Date("2026-11-15T00:00:00Z")), "winter");
+  assert.equal(hero.heroSeasonFor(new Date("2027-01-10T00:00:00Z")), "winter");
+});
+
+test("hero: every season has both frames on disk", () => {
+  for (const [season, image] of Object.entries(hero.HERO_IMAGES)) {
+    for (const frame of [image.wide, image.tall]) {
+      assert.ok(existsSync(`public${frame.src}`), `${season}: ${frame.src} is missing`);
+    }
+  }
 });

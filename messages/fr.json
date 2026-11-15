@@ -448,7 +448,12 @@
       "trustLocal": "Écrit par un habitant du Japon",
       "trustSource": "Basé sur les infos de JR Central",
       "today": "Aujourd’hui au Mont Fuji",
-      "affiliateNote": "Nous pouvons toucher une commission si tu réserves via ces liens, sans surcoût pour toi."
+      "affiliateNote": "Nous pouvons toucher une commission si tu réserves via ces liens, sans surcoût pour toi.",
+      "tagline": "Voir le Japon depuis le bon siège",
+      "viewLabel": "Je veux voir",
+      "viewFuji": "Mont Fuji",
+      "moreViews": "D’autres paysages bientôt",
+      "whichWay": "Dans quel sens voyages-tu ?"
     }
   },
   "guide": {
@@ -5377,7 +5382,14 @@
     "originShinYokohama": "Shin-Yokohama",
     "originNagoya": "Nagoya",
     "oddsTitle": "Matinées dégagées au-dessus du tronçon du Fuji, par mois",
-    "oddsCaption": "Part des heures entre 07:00 et 10:00 avec une couverture nuageuse de 30 % ou moins."
+    "oddsCaption": "Part des heures entre 07:00 et 10:00 avec une couverture nuageuse de 30 % ou moins.",
+    "reminderTitle": "Ne le rate pas",
+    "reminderBody": "Ajoute ce moment à ton agenda. Ton téléphone te préviendra 5 minutes avant l’apparition du mont Fuji.",
+    "reminderAdd": "Ajouter à l’agenda",
+    "reminderGoogle": "Google Agenda",
+    "reminderNote": "Fonctionne avec iPhone, Google et Outlook. Rien n’est enregistré chez nous.",
+    "eventTitle": "🗻 Mont Fuji — {side}",
+    "eventDetails": "Meilleure vue vers {peak}, près de la gare de Shin-Fuji. Pas de siège E ? Va à la fenêtre de la porte en bout de voiture, du même côté. Horaires pour un Nozomi."
   },
   "areaScores": {
     "title": "Comparés, en points",

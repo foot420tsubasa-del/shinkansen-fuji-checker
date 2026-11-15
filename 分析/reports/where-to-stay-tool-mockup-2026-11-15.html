@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where to Stay 完成イメージ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0b1220;--red:#d94a32;--red-h:#bf3d28;--line:#e3e7ee;--mute:#5b6577;--soft:#f6f7f9;--green:#0f7a4f}
+  *{box-sizing:border-box}
+  body{margin:0;background:#fff;color:var(--ink);font-family:Inter,-apple-system,"Segoe UI","Hiragino Sans",sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  /* explainer bar (not part of the page) */
+  .note{background:#fff8db;border-bottom:1px solid #f1df9a;color:#5a4a00;font-size:13px;line-height:1.7;padding:10px 16px;font-family:-apple-system,"Hiragino Sans",sans-serif}
+  .note b{color:#3d3200}
+  /* header */
+  header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .hd{max-width:1180px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;gap:12px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;text-decoration:none}
+  .logo i{width:32px;height:32px;border-radius:10px;background:url(../../public/fujiseat-window-fuji-icon.png) center/cover,#07142f;display:block}
+  .nav{display:none;gap:26px;font-size:14px;font-weight:600;color:var(--mute)}
+  .nav a{text-decoration:none}.nav a.on{color:var(--ink);box-shadow:inset 0 -2px 0 var(--red);padding-bottom:4px}
+  .hr{display:flex;align-items:center;gap:8px}
+  .pill{display:inline-flex;align-items:center;height:36px;padding:0 14px;border-radius:99px;background:var(--red);color:#fff;font-size:12.5px;font-weight:700;text-decoration:none;white-space:nowrap}
+  .burger{width:36px;height:36px;border-radius:99px;display:flex;align-items:center;justify-content:center;font-size:20px}
+  @media(min-width:960px){.nav{display:flex}.burger{display:none}}
+  /* hero */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  .hero{display:grid;gap:28px;padding:30px 0 34px}
+  @media(min-width:900px){.hero{grid-template-columns:1fr 1fr;gap:48px;padding:56px 0 64px;align-items:start}}
+  .eyebrow{color:var(--red);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+  h1{font-size:34px;line-height:1.06;letter-spacing:-.03em;font-weight:800;margin:10px 0 12px}
+  @media(min-width:900px){h1{font-size:50px}}
+  .sub{color:var(--mute);font-size:16px;line-height:1.6;margin:0 0 20px;max-width:470px}
+  .label{font-size:12px;font-weight:700;color:var(--mute);text-transform:uppercase;letter-spacing:.08em;margin:18px 0 8px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{border:1.5px solid #cfd5df;background:#fff;border-radius:99px;padding:9px 14px;font:600 14px Inter,sans-serif;color:var(--ink);cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+  .chip:hover{background:var(--soft)}
+  .chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+  .chip.on::before{content:"✓";font-weight:800}
+  .opts{display:flex;flex-wrap:wrap;gap:8px}
+  .opt{border:1.5px dashed #cfd5df;background:#fff;border-radius:99px;padding:7px 12px;font:600 13px Inter,sans-serif;color:var(--mute);cursor:pointer}
+  .opt.on{border-style:solid;border-color:var(--green);color:var(--green);background:#eefaf4}
+  .trust{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:18px;font-size:13px;color:var(--mute);font-weight:500}
+  .trust span::before{content:"✓ ";color:var(--green);font-weight:800}
+  /* result */
+  .ans{background:var(--ink);color:#fff;border-radius:24px;padding:24px;box-shadow:0 18px 44px rgba(11,18,32,.25)}
+  .ans .k{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  .ans .big{font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:6px 0 4px}
+  .ans .big em{font-style:normal;color:#ff7a5c}
+  .ans .why{font-size:15px;line-height:1.55;color:rgba(255,255,255,.86);margin:8px 0 14px}
+  .rows{border-top:1px solid rgba(255,255,255,.14)}
+  .row{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:14px}
+  .row .ln{font-size:12px;color:rgba(255,255,255,.6);display:block;margin-top:2px}
+  .tm{font-weight:700;white-space:nowrap}
+  .tx{font-size:11.5px;font-weight:700;border-radius:99px;padding:3px 8px;white-space:nowrap}
+  .tx.z{background:rgba(79,191,139,.18);color:#7ee0b0}
+  .tx.o{background:rgba(242,194,62,.18);color:#f6d36b}
+  .meters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .meter{background:rgba(255,255,255,.07);border-radius:12px;padding:10px 12px;font-size:12px;color:rgba(255,255,255,.7)}
+  .meter b{display:block;color:#fff;font-size:18px;margin-top:2px}
+  .bar{height:5px;border-radius:9px;background:rgba(255,255,255,.12);margin-top:6px;overflow:hidden}
+  .bar i{display:block;height:100%;background:#7ee0b0;border-radius:9px}
+  .book{margin-top:14px;background:#fff;color:var(--ink);border-radius:20px;padding:18px;border:1px solid var(--line)}
+  .book .t{font-weight:700;font-size:17px}
+  .book .d{font-size:13.5px;color:var(--mute);margin:3px 0 12px;line-height:1.5}
+  .btn{display:flex;align-items:center;justify-content:center;gap:8px;height:48px;border-radius:99px;background:var(--red);color:#fff;font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 8px 20px rgba(217,74,50,.28)}
+  .btn2{display:flex;align-items:center;justify-content:center;height:44px;border-radius:99px;border:1.5px solid #cfd5df;font-weight:600;font-size:14px;text-decoration:none;margin-top:8px}
+  .disc{font-size:11px;color:#7a8394;text-align:center;margin-top:10px;line-height:1.4}
+  .picks{display:grid;gap:8px;margin-top:12px}
+  .hp{display:flex;gap:10px;align-items:center;border:1px dashed #cfd5df;border-radius:14px;padding:10px;font-size:13px;color:var(--mute)}
+  .hp i{width:46px;height:46px;border-radius:10px;background:var(--soft);flex:none}
+  .alts{margin-top:14px}
+  .alt{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:12px 14px;margin-top:8px;font-size:14px;background:#fff}
+  .alt b{font-size:15px}
+  .alt small{color:var(--mute);display:block;font-size:12.5px;margin-top:2px}
+  .empty{border:1.5px dashed #cfd5df;border-radius:24px;padding:26px;text-align:center;color:var(--mute);background:var(--soft)}
+  .empty .ph{height:170px;border-radius:16px;background:url(../../public/images/home/tokyo-hotel-base.png) center/cover;margin-bottom:14px}
+  /* sections */
+  section.s{padding:40px 0;border-top:1px solid var(--line)}
+  h2{font-size:26px;letter-spacing:-.02em;font-weight:800;margin:0 0 6px}
+  .lead{color:var(--mute);margin:0 0 18px;font-size:15px}
+  .qa{display:grid;gap:12px}
+  @media(min-width:800px){.qa{grid-template-columns:1fr 1fr}}
+  .qa div{border:1px solid var(--line);border-radius:18px;padding:16px;background:#fff}
+  .qa h3{font-size:16px;margin:0 0 4px}
+  .qa p{margin:0;font-size:14px;color:var(--mute);line-height:1.55}
+  .qa p b{color:var(--ink)}
+  .cards{display:grid;gap:14px}
+  @media(min-width:800px){.cards{grid-template-columns:repeat(3,1fr)}}
+  .card{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(11,18,32,.05)}
+  .card .im{aspect-ratio:16/9;background-size:cover;background-position:center}
+  .card .tx2{padding:14px 16px}
+  .card b{font-size:16px;display:block}
+  .card span{font-size:13.5px;color:var(--mute);line-height:1.5;display:block;margin-top:4px}
+  .badge{display:inline-block;font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px}
+  /* embed mock */
+  .embed{border:1px solid var(--line);border-radius:22px;padding:18px;background:var(--soft);max-width:560px}
+  .embed .chips .chip{padding:7px 12px;font-size:13px}
+  .ex{font-family:-apple-system,"Hiragino Sans",sans-serif;font-size:12.5px;color:#7a5b00;background:#fff8db;border:1px solid #f1df9a;border-radius:10px;padding:8px 12px;margin:0 0 12px}
+  footer{background:var(--ink);color:rgba(255,255,255,.6);font-size:12px;padding:26px 20px;text-align:center}
+</style>
+</head>
+<body>
+<div class="note"><b>完成イメージ（モック）</b>：/areas-to-stay をこの形に作り替える案です。タップで動きます。<b>移動時間はサンプル値</b>（これから作るデータで確定）。動く組み合わせは「新宿＋浅草」「ディズニー＋渋谷」「富士登山」の3つです。駅のスコアは既存データの実数です。</div>
+
+<header><div class="hd">
+  <a class="logo" href="#"><i></i>fujiseat</a>
+  <nav class="nav"><a class="on" href="#">Where to Stay</a><a href="#">Rail Guide</a><a href="#">Arrival Prep</a></nav>
+  <div class="hr"><a class="pill" href="#">Check Seat</a><span class="burger">☰</span></div>
+</div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Free · 36 Tokyo station areas · No sign-up</div>
+      <h1>Where should you stay in Tokyo?</h1>
+      <p class="sub">Tap the places you want to go. We'll pick the station that gets you to all of them with the fewest transfers.</p>
+
+      <div class="label">I want to visit</div>
+      <div class="chips" id="dest">
+        <button class="chip" data-d="shinjuku">Shinjuku</button>
+        <button class="chip" data-d="shibuya">Shibuya</button>
+        <button class="chip" data-d="asakusa">Asakusa</button>
+        <button class="chip" data-d="ginza">Ginza</button>
+        <button class="chip" data-d="akihabara">Akihabara</button>
+        <button class="chip" data-d="harajuku">Harajuku</button>
+        <button class="chip" data-d="disney">Tokyo Disney</button>
+        <button class="chip" data-d="odaiba">Odaiba / teamLab</button>
+        <button class="chip" data-d="skytree">Skytree</button>
+        <button class="chip" data-d="fuji">Climb Mt. Fuji</button>
+      </div>
+
+      <div class="label">Also</div>
+      <div class="opts" id="opts">
+        <button class="opt" data-o="lug">🧳 Lots of luggage</button>
+        <button class="opt" data-o="shk">🚄 Shinkansen to Kyoto</button>
+        <button class="opt" data-o="air">✈️ Early flight</button>
+      </div>
+
+      <div class="trust"><span>Written by a Japan-based local</span><span>Station data for 36 areas</span></div>
+    </div>
+
+    <div id="result"></div>
+  </div>
+
+  <section class="s">
+    <h2>Popular answers</h2>
+    <p class="lead">The questions travelers ask most, answered with station data. <span style="color:#a0a8b6">(この欄は普通の文章なので、Google と AI が読めます)</span></p>
+    <div class="qa">
+      <div><h3>Shinjuku + Asakusa → Kanda</h3><p>Both <b>without a transfer</b>: JR Chuo Line to Shinjuku, Ginza Line to Asakusa. A small, easy station.</p></div>
+      <div><h3>Disney + Shibuya → Hatchobori</h3><p>No station does both directly. Hatchobori is <b>direct to Disney</b> and one transfer to Shibuya, with a calm station.</p></div>
+      <div><h3>Climbing Mt. Fuji → Shinjuku, then Kawaguchiko</h3><p>Night before: <b>Shinjuku</b> for the bus to the 5th Station. After: an <b>onsen ryokan at Lake Kawaguchi</b>.</p></div>
+      <div><h3>Early Shinkansen to Kyoto → Nihombashi</h3><p>A short ride to Tokyo Station without its crowds. Shinagawa is the other good pick.</p></div>
+    </div>
+  </section>
+
+  <section class="s">
+    <h2>Where-to-stay guides</h2>
+    <p class="lead">In-depth answers for the trips people actually plan. <span style="color:#a0a8b6">(ブログ記事＝補強。数は絞る)</span></p>
+    <div class="cards">
+      <a class="card" href="#"><div class="im" style="background-image:url(../../public/images/home/tokyo-hotel-base.png)"></div><div class="tx2"><div class="badge">Guide</div><b>Shinjuku and Asakusa: one base for both</b><span>Why Kanda beats staying in either one.</span></div></a>
+      <a class="card" href="#"><div class="im" style="background-image:url(../../public/images/Kawaguchiko.png)"></div><div class="tx2"><div class="badge">Guide</div><b>Climbing Mt. Fuji: where to sleep before and after</b><span>The bus from Shinjuku, then a ryokan by the lake.</span></div></a>
+      <a class="card" href="#"><div class="im" style="background-image:url(../../public/seat-checker-fuji-window-20260423.png)"></div><div class="tx2"><div class="badge">Guide</div><b>The night before an early Shinkansen</b><span>Stay close to Tokyo Station without its maze.</span></div></a>
+    </div>
+  </section>
+
+  <section class="s">
+    <h2 style="font-size:20px">他のページに置く「小さい版」</h2>
+    <p class="lead" style="font-family:-apple-system,'Hiragino Sans',sans-serif">「浅草 vs 上野」の記事内と、座席チェッカーの答えのあとに置くイメージ。</p>
+    <div class="embed">
+      <div class="ex">↓ 浅草 vs 上野の記事の途中に入るカード</div>
+      <b style="font-size:17px">Going somewhere else too?</b>
+      <p style="margin:4px 0 12px;color:var(--mute);font-size:14px">Add the other places on your list and we'll find the best station for all of them.</p>
+      <div class="chips"><span class="chip on">Asakusa</span><span class="chip">Shinjuku</span><span class="chip">Shibuya</span><span class="chip">Disney</span><span class="chip">+ more</span></div>
+      <a class="btn" style="margin-top:14px" href="#">Find my station →</a>
+    </div>
+    <div class="embed" style="margin-top:14px;background:#fff">
+      <div class="ex">↓ 座席チェッカーの答え（Seat E）の下に1行だけ。予約ボタンには触らない</div>
+      <div style="font-size:14px">🏨 <b>Need a hotel before the Shinkansen?</b> <a href="#" style="color:var(--red);font-weight:700;text-decoration:none">See the best stations →</a></div>
+    </div>
+  </section>
+</main>
+<footer>fujiseat.com · We may earn a commission if you book through links on this page, at no extra cost to you.</footer>
+
+<script>
+const AREAS = {
+  kanda:{name:"Kanda",stn:75,lug:74.5,link:"Booking.com: hotels near Kanda Station"},
+  akasaka:{name:"Akasaka-Mitsuke",stn:67.5,lug:75},
+  ueno:{name:"Ueno",stn:60,lug:78.5},
+  hatchobori:{name:"Hatchobori",stn:83,lug:80.5,link:"Booking.com: hotels near Hatchobori Station"},
+  tokyo:{name:"Tokyo Station",stn:30,lug:52},
+};
+const ANSWERS = {
+  "asakusa+shinjuku":{area:"kanda",why:"The only easy station that reaches both without a transfer. Small, with simple exits.",rows:[["Shinjuku","JR Chuo Line (Rapid)","~12 min",0],["Asakusa","Tokyo Metro Ginza Line","~10 min",0]],
+    alts:[["akasaka","Both direct, but Asakusa is ~25 min"],["ueno","Asakusa in 5 min, Shinjuku ~25 min; busy station"]]},
+  "disney+shibuya":{area:"hatchobori",why:"No station gets you to both without a transfer. Hatchobori is direct to Disney and one easy change to Shibuya.",noPerfect:true,rows:[["Tokyo Disney","JR Keiyo Line","~15 min",0],["Shibuya","Hibiya Line → Ginza Line","~25 min",1]],
+    alts:[["tokyo","Shibuya direct, but a ~10 min walk to the Disney platform"]]},
+};
+const sel = new Set(), opt = new Set();
+const $ = (q,r=document)=>r.querySelector(q);
+function txBadge(n){return n===0?'<span class="tx z">No transfer</span>':'<span class="tx o">'+n+' transfer</span>'}
+function meter(label,v){return '<div class="meter">'+label+'<b>'+Math.round(v)+'</b><div class="bar"><i style="width:'+v+'%"></i></div></div>'}
+function render(){
+  const out = $("#result");
+  if (sel.has("fuji")) {
+    out.innerHTML = `<div class="ans"><div class="k">Climbing Mt. Fuji</div>
+      <div class="big">Two nights, <em>two places</em></div>
+      <p class="why">Sleep in Tokyo the night before, then rest your legs in a hot-spring ryokan after the climb.</p>
+      <div class="rows">
+        <div class="row"><div>Night before: <b>Shinjuku</b><span class="ln">Direct bus to the Fuji Subaru Line 5th Station (Jul–Sep)</span></div><span></span><span class="tx z">Bus</span></div>
+        <div class="row"><div>After the climb: <b>Lake Kawaguchi</b><span class="ln">Onsen ryokan with a Mt. Fuji view</span></div><span></span><span class="tx o">Ryokan</span></div>
+      </div></div>
+      <div class="book"><div class="t">Ryokan by Lake Kawaguchi</div><div class="d">Hand-picked by a Japan-based local.</div>
+        <div class="picks"><div class="hp"><i></i>旅館A（URL発行待ち）— 大浴場・富士山ビュー</div><div class="hp"><i></i>旅館B（URL発行待ち）— 駅から送迎あり</div></div>
+        <a class="btn" style="margin-top:12px" href="#">See ryokan on Booking.com →</a>
+        <div class="disc">We may earn a commission if you book, at no extra cost to you.</div></div>`;
+    return;
+  }
+  const key = [...sel].sort().join("+");
+  const a = ANSWERS[key];
+  if (!a) {
+    out.innerHTML = `<div class="empty"><div class="ph"></div>${sel.size<2?'<b style="color:#0b1220">Pick two or more places</b><br>Your best station shows up here.':'<b style="color:#0b1220">（モックでは未対応の組み合わせ）</b><br>本番では 36エリア×行き先 の移動時間データから全組み合わせを計算します。<br>試す：Shinjuku＋Asakusa ／ Disney＋Shibuya ／ Climb Mt. Fuji'}</div>`;
+    return;
+  }
+  const A = AREAS[a.area];
+  const extra = [];
+  if (opt.has("lug")) extra.push("🧳 Lots of luggage: "+A.name+" scores "+Math.round(A.lug)+"/100 for luggage.");
+  if (opt.has("shk")) extra.push("🚄 Tokyo Station is "+(a.area==="kanda"?"one stop away (JR)":"two stops away")+".");
+  if (opt.has("air")) extra.push("✈️ Early flight: check the airport line before booking.");
+  out.innerHTML = `<div class="ans"><div class="k">${a.noPerfect?"No perfect station · best trade-off":"Your best base"}</div>
+    <div class="big">Stay near <em>${A.name}</em></div>
+    <p class="why">${a.why}</p>
+    <div class="rows">${a.rows.map(r=>`<div class="row"><div>${r[0]}<span class="ln">${r[1]}</span></div><span class="tm">${r[2]}</span>${txBadge(r[3])}</div>`).join("")}</div>
+    <div class="meters">${meter("Station ease",A.stn)}${meter("Luggage",A.lug)}</div>
+    ${extra.length?'<p class="why" style="margin:12px 0 0;font-size:13.5px">'+extra.join("<br>")+'</p>':''}
+  </div>
+  <div class="book"><div class="t">Hotels near ${A.name} Station</div><div class="d">Search opens on Booking.com with ${A.name} already set.</div>
+    <a class="btn" href="#">See hotels near ${A.name} →</a>
+    <a class="btn2" href="#">Compare on Agoda</a>
+    <div class="picks"><div class="hp"><i></i>おすすめホテル（URLが届いたら名指しで表示）</div></div>
+    <div class="disc">We may earn a commission if you book, at no extra cost to you.</div></div>
+  <div class="alts">${a.alts.map(x=>`<div class="alt"><div><b>${AREAS[x[0]].name}</b><small>${x[1]}</small></div><span style="color:#a0a8b6">→</span></div>`).join("")}</div>`;
+}
+$("#dest").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;const d=b.dataset.d;
+  if(d==="fuji"){const on=!sel.has("fuji");sel.clear();document.querySelectorAll("#dest .chip").forEach(c=>c.classList.remove("on"));if(on){sel.add("fuji");b.classList.add("on")}}
+  else{sel.delete("fuji");$('[data-d="fuji"]').classList.remove("on");sel.has(d)?sel.delete(d):sel.add(d);b.classList.toggle("on")}
+  render();});
+$("#opts").addEventListener("click",e=>{const b=e.target.closest(".opt");if(!b)return;const o=b.dataset.o;opt.has(o)?opt.delete(o):opt.add(o);b.classList.toggle("on");render();});
+// start with a filled example so the page shows an answer on load
+["shinjuku","asakusa"].forEach(d=>{sel.add(d);$('[data-d="'+d+'"]').classList.add("on")});
+render();
+</script>
+</body>
+</html>

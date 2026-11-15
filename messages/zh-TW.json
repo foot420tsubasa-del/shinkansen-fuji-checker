@@ -448,7 +448,12 @@
       "trustLocal": "由住在日本的在地人撰寫",
       "trustSource": "依據 JR 東海公開資訊",
       "today": "今日富士山",
-      "affiliateNote": "透過這些連結預訂時，我們可能獲得佣金，你不需支付額外費用。"
+      "affiliateNote": "透過這些連結預訂時，我們可能獲得佣金，你不需支付額外費用。",
+      "tagline": "從對的座位看日本",
+      "viewLabel": "我想看",
+      "viewFuji": "富士山",
+      "moreViews": "更多風景即將推出",
+      "whichWay": "你往哪個方向？"
     }
   },
   "guide": {
@@ -5376,7 +5381,14 @@
     "originShinYokohama": "新橫濱",
     "originNagoya": "名古屋",
     "oddsTitle": "富士山路段各月上午晴朗比例",
-    "oddsCaption": "07:00–10:00 時段中雲量不超過 30% 的比例。"
+    "oddsCaption": "07:00–10:00 時段中雲量不超過 30% 的比例。",
+    "reminderTitle": "別錯過",
+    "reminderBody": "把這段時間加入行事曆，富士山出現前 5 分鐘手機會提醒你。",
+    "reminderAdd": "加入行事曆",
+    "reminderGoogle": "Google 日曆",
+    "reminderNote": "支援 iPhone、Google 與 Outlook 行事曆。我們不會儲存任何資料。",
+    "eventTitle": "🗻 富士山 — {side}",
+    "eventDetails": "約 {peak} 在新富士站附近最清楚。沒訂到 E 座？到同一側車廂端的車門窗邊看。時間以希望號為準。"
   },
   "areaScores": {
     "title": "評分對比",

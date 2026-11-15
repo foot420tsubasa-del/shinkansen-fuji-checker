@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import HomeClient from "./HomeClient";
 import { getAlternates } from "@/i18n/hreflang";
+import { heroSeasonFor } from "@/lib/hero-images";
+
+// The hero photograph follows the season in Japan. The page is static, so it
+// is re-rendered once a day to pick up the change of month.
+export const revalidate = 86400;
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -43,7 +48,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
       />
-      <HomeClient />
+      <HomeClient season={heroSeasonFor()} />
     </>
   );
 }
