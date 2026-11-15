@@ -10,6 +10,7 @@ import Image from "next/image";
 import { SeatMapCard } from "@/components/travel/SeatResultCard";
 import { FujiTiming } from "@/components/travel/FujiTiming";
 import { HeroWindow } from "@/components/home/HeroWindow";
+import { FujiViewMap } from "@/components/travel/FujiViewMap";
 import type { HeroSeason } from "@/lib/hero-images";
 import { trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
@@ -456,6 +457,9 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
               </div>
             </div>
             <div className="min-w-0">{bookingCard}</div>
+            <div className="min-w-0 lg:col-span-2">
+              <FujiViewMap direction={direction} />
+            </div>
             <div className="min-w-0 rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.05)] md:p-6 [&>div:first-child]:mt-0 [&>div:first-child]:border-t-0 [&>div:first-child]:pt-0">
               <FujiTiming key={direction} direction={direction} locale={locale} pagePath="/" reminder />
             </div>

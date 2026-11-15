@@ -723,3 +723,17 @@ test("finder: the hotel link for every Tokyo area is a live Booking.com affiliat
     assert.match(entry.affiliate_url, /^https:\/\/booking\.tpx\.lv\//, `${area.id} must go through the Travelpayouts link`);
   }
 });
+
+/* ── Fuji view map (data/routes/tokaido-fuji.json) ──────────────────────── */
+
+test("view map: the line is OpenStreetMap-attributed and the window brackets Shin-Fuji", () => {
+  const route = JSON.parse(readFileSync("data/routes/tokaido-fuji.json", "utf8"));
+  assert.match(route._source, /OpenStreetMap contributors, ODbL/);
+  const shinFuji = route.stations.find((s) => s.id === "shin-fuji");
+  assert.equal(route.view.peakLng, shinFuji.lng, "the brightest point must be Shin-Fuji, as in lib/fuji-window.ts");
+  const mishima = route.stations.find((s) => s.id === "mishima");
+  assert.ok(route.view.opensLng < mishima.lng, "the view opens after Mishima, not before");
+  assert.ok(route.line.length > 50, "the line must carry real geometry");
+  const map = readFileSync("components/travel/FujiViewMap.tsx", "utf8");
+  assert.ok(map.includes("OpenStreetMap contributors"), "the attribution must be visible on the map");
+});

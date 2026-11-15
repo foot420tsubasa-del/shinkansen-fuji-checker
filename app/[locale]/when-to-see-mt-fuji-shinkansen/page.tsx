@@ -7,6 +7,7 @@ import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
 import { MonthlyOdds } from "@/components/content/MonthlyOdds";
+import { FujiViewMap } from "@/components/travel/FujiViewMap";
 import { seatCheckCopy } from "@/lib/copy/seat-check";
 import { JR_PASS_URL, KLOOK_URL } from "@/src/affiliateLinks";
 import { addMinutes, ORIGINS, type OriginId } from "@/lib/fuji-window";
@@ -197,6 +198,10 @@ export default async function WhenToSeeFujiPage({ params }: Props) {
             </li>
           </ul>
         </section>
+
+        <div className="mt-6">
+          <FujiViewMap />
+        </div>
 
         <div className="mt-6">
           <GuideSeatCheck
