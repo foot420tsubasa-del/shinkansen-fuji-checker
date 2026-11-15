@@ -8,43 +8,19 @@ import { SiteLegalLinks } from "@/components/content/SiteLegalLinks";
 import { getAlternates } from "@/i18n/hreflang";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { buttonClassName } from "@/components/ui/Button";
+import { TicketMachineSim } from "@/components/ticket-machine/TicketMachineSim";
 
 type Props = { params: Promise<{ locale: string }> };
 
 const PAGE_PATH = "/how-to-buy-suica";
 const OFFICIAL_SUICA_URL = "https://www.jreast.co.jp/multi/en/pass/suica.html";
 
-/**
- * The simulator HTML now supports ten UI languages of its own:
- *   ja, en, zh-CN, zh-TW, ko, de, fr, es, pt-BR, ru
- *
- * fujiseat.com supports nine site locales:
- *   en, pt-BR, es, ko, zh-TW, zh-CN, fr, de, ru
- *
- * Every fujiseat locale maps 1:1 to a simulator translation; the
- * map is kept explicit so the fallback stays controllable from
- * the page side without having to edit the simulator HTML.
- */
-const GAME_LANG_BY_LOCALE: Record<string, string> = {
-  en: "en",
-  "pt-BR": "pt-BR",
-  es: "es",
-  ko: "ko",
-  "zh-TW": "zh-TW",
-  "zh-CN": "zh-CN",
-  fr: "fr",
-  de: "de",
-  ru: "ru",
-};
 
-function resolveGameLang(locale: string): string {
-  return GAME_LANG_BY_LOCALE[locale] ?? "en";
-}
 
 /**
  * SEO guide copy is authored in English. Only the `en` route is indexed
  * (see robots in generateMetadata), so this guide targets English search
- * intent; the simulator itself stays localized in ten languages.
+ * intent; the practice machine offers the five languages of the real screen.
  */
 const SUICA_FAQ: Array<{ q: string; a: string }> = [
   {
@@ -90,8 +66,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function HowToBuySuicaPage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "suicaGuide" });
-  const gameLang = resolveGameLang(locale);
-  const iframeSrc = `/games/suica-simulator.html?lang=${encodeURIComponent(gameLang)}`;
+  // The real screen offers these five; every other locale starts in English.
+  const simLang = locale === "ko" || locale === "zh-CN" || locale === "zh-TW" ? locale : "en";
 
   const faqSchema = {
     "@context": "https://schema.org",
@@ -137,22 +113,11 @@ export default async function HowToBuySuicaPage({ params }: Props) {
           </p>
         </section>
 
-        <section id="simulator" className="mt-8 scroll-mt-24 flex justify-center">
-          {/*
-            The simulator is a self-contained kiosk-style HTML page with
-            its own scroll. We frame it with a thin shell so the
-            embedded UI stays centered (max ~460px wide on desktop) and
-            never breaks the page on mobile. Height is tuned to fit the
-            tallest panel; the iframe still scrolls internally on
-            shorter viewports.
-          */}
-          <iframe
-            src={iframeSrc}
-            title={t("iframeTitle")}
-            loading="lazy"
-            className="block w-full max-w-[460px] rounded-[24px] border border-slate-200 bg-white shadow-[0_18px_45px_rgba(9,35,70,0.10)]"
-            style={{ height: "980px" }}
-          />
+        {/* Since 2026-11-15 the practice machine is a photograph of a real-style
+            JR machine with a live screen laid over its own, replacing the
+            illustrated kiosk in /games/suica-simulator.html (kept, unlinked). */}
+        <section id="simulator" className="mt-8 scroll-mt-24">
+          <TicketMachineSim initialLang={simLang} />
         </section>
 
         <section className="mt-8 flex justify-center">
