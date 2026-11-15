@@ -21,7 +21,7 @@ const POPULAR: [string, string][] = [
 
 /** View names offered as suggestions for the third field (not free text). */
 const VIEW_SUGGESTIONS: { name: string; tag: ViewTag }[] = [
-  ...ROUTES.flatMap((r) => (r.views ?? []).filter((v) => !/glimpse/i.test(v.name)).map((v) => ({ name: v.name, tag: v.tags[0] }))),
+  ...ROUTES.flatMap((r) => (r.views ?? []).filter((v) => !/glimpse|after the reversal/i.test(v.name)).map((v) => ({ name: v.name, tag: v.tags[0] }))),
   { name: "Shonan coast (Enoden)", tag: "sea" as ViewTag },
   { name: "Tokyo Bay at night (Yurikamome)", tag: "city" as ViewTag },
   { name: "Hozu gorge (Sagano)", tag: "countryside" as ViewTag },

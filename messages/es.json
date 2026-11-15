@@ -505,7 +505,8 @@
       "pickStation": "Elige una estación de la lista.",
       "details": "Página completa de la ruta",
       "comingSoon": "Próximamente",
-      "modelOnly": "solo modelo del terreno"
+      "modelOnly": "solo modelo del terreno",
+      "reversed": "Tras invertir la marcha en {station} · según subiste: {side}"
     }
   },
   "guide": {

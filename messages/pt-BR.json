@@ -505,7 +505,8 @@
       "pickStation": "Escolha uma estação da lista.",
       "details": "Página completa da linha",
       "comingSoon": "Em breve",
-      "modelOnly": "só modelo de terreno"
+      "modelOnly": "só modelo de terreno",
+      "reversed": "Após inverter em {station} · como você embarcou: {side}"
     }
   },
   "guide": {

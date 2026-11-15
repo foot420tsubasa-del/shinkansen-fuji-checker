@@ -1935,10 +1935,34 @@
             "forward": "left"
           },
           "from": "Higashi-Katsura",
-          "to": "Kawaguchiko",
+          "to": "Mt. Fuji",
           "kmFrom": 12.5,
+          "kmTo": 22.6,
+          "sectionKm": 10.1,
+          "nearestKm": 14.9,
+          "maxAngle": 11.16,
+          "season": "Clear days, all year; snow-capped from autumn to late spring",
+          "seat": null,
+          "basis": "terrain model only"
+        },
+        {
+          "id": "fuji-after",
+          "name": "Mt. Fuji, after the reversal",
+          "targets": [
+            "fuji"
+          ],
+          "tags": [
+            "fuji",
+            "mountain"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Mt. Fuji",
+          "to": "Kawaguchiko",
+          "kmFrom": 22.6,
           "kmTo": 25.7,
-          "sectionKm": 13,
+          "sectionKm": 3.1,
           "nearestKm": 14.9,
           "maxAngle": 11.16,
           "season": "Clear days, all year; snow-capped from autumn to late spring",
@@ -1947,7 +1971,7 @@
         }
       ],
       "notes": [
-        "Trains reverse at Mt. Fuji station and leave in the opposite direction; by the terrain model Mt. Fuji stays on the left all the way to Kawaguchiko.",
+        "Every train reverses at Mt. Fuji station. Sides here are for the direction of travel, so Mt. Fuji is on the left both before and after — but after the reversal that is the other side of the car. Going to Kawaguchiko, sit on the left from Otsuki for the long stretch, then look across (or move) for the last 3 km past Fuji-Q Highland.",
         "Before Higashi-Katsura the model also shows glimpses ahead of the train between Otsuki and Tsuru; they are not given a side."
       ],
       "verification": "Side and section from a terrain model (GSI elevation, OSM track); the summit counts as visible when any of its top 2 km clears the hills, since the crater rim hides the highest point from the north. No published source was found for the side, so it rests on the model alone. Seat letters not verified.",
@@ -1964,7 +1988,10 @@
           "Mt. Fuji",
           "Kawaguchiko"
         ]
-      }
+      },
+      "reversals": [
+        "Mt. Fuji"
+      ]
     },
     {
       "id": "hakone-tozan",

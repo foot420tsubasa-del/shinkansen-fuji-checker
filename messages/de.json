@@ -505,7 +505,8 @@
       "pickStation": "Wähle einen Bahnhof aus der Liste.",
       "details": "Ganze Streckenseite",
       "comingSoon": "Demnächst",
-      "modelOnly": "nur Geländemodell"
+      "modelOnly": "nur Geländemodell",
+      "reversed": "Nach Richtungswechsel in {station} · vom Einstieg aus: {side}"
     }
   },
   "guide": {

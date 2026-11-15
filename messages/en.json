@@ -505,7 +505,8 @@
       "pickStation": "Choose a station from the list.",
       "details": "Full route page",
       "comingSoon": "Coming soon",
-      "modelOnly": "terrain model only"
+      "modelOnly": "terrain model only",
+      "reversed": "After reversing at {station} · as you boarded: {side}"
     }
   },
   "guide": {

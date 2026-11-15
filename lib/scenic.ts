@@ -48,7 +48,8 @@ export type TrainPattern = {
   backward: { train: string; stops: TrainStop[] };
 };
 
-export type TimelineStation = { name: string; ja?: string; km?: number; order?: number };
+/** `signal`: a passing loop or switchback with no passenger stop, kept for the km and left out of search. */
+export type TimelineStation = { name: string; ja?: string; km?: number; order?: number; signal?: boolean };
 
 export type ScenicRoute = {
   id: string;
@@ -75,6 +76,12 @@ export type ScenicRoute = {
   verification?: string;
   /** Booking link for the line; linkId "jrPass" only where the JR Pass covers it. */
   ticket?: { provider: string; linkId: string; note?: string } | null;
+  /**
+   * Stations where every train reverses (Mt. Fuji on the Fujikyu, the Hakone
+   * switchbacks). Sides are always given for the direction of travel, so after
+   * a reversal "left" is the other side of the car from where you sat down.
+   */
+  reversals?: string[];
   /** Plain-language caveats shown on the route page. */
   notes?: string[];
   page?: { title: string; description: string; h1: string; labelStations: string[] };
@@ -118,6 +125,7 @@ export function stationOptions(): StationOption[] {
   const map = new Map<string, StationOption>();
   for (const route of LIVE_ROUTES) {
     for (const st of route.timelineStations ?? []) {
+      if (st.signal) continue;
       const entry = map.get(st.name) ?? { name: st.name, ja: st.ja, routes: [] };
       entry.routes.push(route.id);
       map.set(st.name, entry);
@@ -158,7 +166,7 @@ export type RouteMatch =
   | { kind: "unsupported"; from: string; to: string; comingSoon: ScenicRoute[]; nearbyLive: ScenicRoute[] };
 
 function position(route: ScenicRoute, name: string): number | null {
-  const st = route.timelineStations?.find((s) => s.name === name);
+  const st = route.timelineStations?.find((s) => s.name === name && !s.signal);
   if (!st) return null;
   return st.km ?? st.order ?? null;
 }
@@ -252,7 +260,40 @@ export type TimelineItem = {
   start: number;
   end: number;
   visibleMinutes: number;
+  /**
+   * Reversals passed between boarding and the view, in order. An odd number
+   * means the view is out of the windows opposite the side you sat on.
+   */
+  reversedAt: string[];
 };
+
+/**
+ * Reversal stations the train passes after leaving `fromKm` and up to `toKm`,
+ * in order. Boarding at a reversal station does not count; a view that starts
+ * right at one does.
+ */
+function reversalsBetween(route: ScenicRoute, fromKm: number, toKm: number): string[] {
+  const passed = (km: number) => (toKm >= fromKm ? km > fromKm && km <= toKm : km < fromKm && km >= toKm);
+  const list = (route.reversals ?? [])
+    .map((name) => ({ name, km: route.timelineStations?.find((s) => s.name === name)?.km }))
+    .filter((r): r is { name: string; km: number } => typeof r.km === "number" && passed(r.km))
+    .sort((a, b) => a.km - b.km)
+    .map((r) => r.name);
+  return toKm >= fromKm ? list : list.reverse();
+}
+
+/** Reversals a train makes between boarding at `from` and the start of `view`. */
+export function reversalsBefore(route: ScenicRoute, view: ScenicView, direction: Direction, from: string): string[] {
+  const fromKm = route.timelineStations?.find((s) => s.name === from)?.km ?? 0;
+  const offset = route.trackKmOffset ?? 0;
+  const viewKm = direction === "forward" ? view.kmFrom + offset : view.kmTo + offset;
+  return reversalsBetween(route, fromKm, viewKm);
+}
+
+/** The side of the car as it faced when you boarded: the side of travel, flipped once per reversal passed. */
+export function seatedSide(side: Side, reversedAt: string[]): Side {
+  return reversedAt.length % 2 ? flipSide(side) : side;
+}
 
 /**
  * The views between `from` and `to`, in the order they come, with the minute
@@ -276,7 +317,7 @@ export function timeline(
     if (!spec || !main) return { items: [], train: null };
     return {
       train: null,
-      items: [{ view: main, side: sideFor(main, direction), start: spec.first, end: spec.last, visibleMinutes: spec.last - spec.first }],
+      items: [{ view: main, side: sideFor(main, direction), start: spec.first, end: spec.last, visibleMinutes: spec.last - spec.first, reversedAt: [] }],
     };
   }
 
@@ -325,6 +366,7 @@ export function timeline(
       start: Math.min(...times),
       end: Math.max(...times),
       visibleMinutes: Math.max(1, Math.round(visible)),
+      reversedAt: reversalsBefore(route, view, direction, from),
     });
   }
   items.sort((a, b) => a.start - b.start);

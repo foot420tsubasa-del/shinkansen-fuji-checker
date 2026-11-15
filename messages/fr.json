@@ -505,7 +505,8 @@
       "pickStation": "Choisis une gare dans la liste.",
       "details": "Page complète de la ligne",
       "comingSoon": "Bientôt",
-      "modelOnly": "modèle de terrain seul"
+      "modelOnly": "modèle de terrain seul",
+      "reversed": "Après rebroussement à {station} · par rapport à la montée : {side}"
     }
   },
   "guide": {

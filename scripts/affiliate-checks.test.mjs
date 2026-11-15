@@ -859,6 +859,23 @@ test("Fujikyu: Mt. Fuji on the left to Kawaguchiko, from the official timetable,
   assert.equal(scenic.matchRoute("Kawaguchiko", "Otsuki").direction, "backward");
 });
 
+test("Reversals: after Mt. Fuji station the view is out of the other side of the car", () => {
+  const pts = JSON.parse(readFileSync("data/routes/fujikyu-fuji-viewshed.json", "utf8")).points;
+  const route = scenic.LIVE_ROUTES.find((r) => r.id === "fujikyu-fuji");
+  const { items } = scenic.timeline(route, "forward", "Otsuki", "Kawaguchiko", pts, "local");
+  assert.deepEqual(
+    items.map((i) => [i.view.id, i.side, scenic.seatedSide(i.side, i.reversedAt)]),
+    [["fuji", "left", "left"], ["fuji-after", "left", "right"]],
+  );
+  assert.deepEqual(items[1].reversedAt, ["Mt. Fuji"]);
+  // Boarding at the reversal station itself: no reversal to account for.
+  const fromFuji = scenic.timeline(route, "forward", "Mt. Fuji", "Kawaguchiko", pts, "local").items;
+  assert.deepEqual(fromFuji.map((i) => [i.view.id, i.reversedAt.length]), [["fuji-after", 0]]);
+  // The other way: Kawaguchiko → Otsuki, right of travel throughout, and the long stretch on the far side of the car.
+  const back = scenic.timeline(route, "backward", "Kawaguchiko", "Otsuki", pts, "local").items;
+  assert.deepEqual(back.map((i) => [i.view.id, i.side, scenic.seatedSide(i.side, i.reversedAt)]), [["fuji-after", "right", "right"], ["fuji", "right", "left"]]);
+});
+
 test("viewshed: every live route's minutes stay sane (no view longer than the journey)", () => {
   for (const route of scenic.LIVE_ROUTES.filter((r) => r.timing?.kind === "timetable")) {
     const pts = JSON.parse(readFileSync(route.viewshed, "utf8")).points;

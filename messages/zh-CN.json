@@ -505,7 +505,8 @@
       "pickStation": "请从列表中选择车站。",
       "details": "路线完整页面",
       "comingSoon": "即将推出",
-      "modelOnly": "仅地形模型"
+      "modelOnly": "仅地形模型",
+      "reversed": "在{station}折返后 · 按上车时方向：{side}"
     }
   },
   "guide": {

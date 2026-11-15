@@ -8,7 +8,7 @@ import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { RouteTimeline } from "@/components/scenic/RouteTimeline";
 import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
-import { LIVE_ROUTES, flipSide, type ScenicRoute } from "@/lib/scenic";
+import { LIVE_ROUTES, flipSide, reversalsBefore, seatedSide, type ScenicRoute } from "@/lib/scenic";
 import { JR_PASS_URL } from "@/src/affiliateLinks";
 
 /*
@@ -114,6 +114,14 @@ export default async function ScenicRoutePage({ params }: Props) {
                           <span className="block text-sm text-white/70">
                             {v.from === v.to ? `near ${v.from}` : dir === "forward" ? `${v.from} → ${v.to}` : `${v.to} → ${v.from}`}
                           </span>
+                          {(() => {
+                            const rev = reversalsBefore(route, v, dir, a);
+                            return rev.length ? (
+                              <span className="mt-1 block text-[13px] font-semibold text-amber-200">
+                                After reversing at {rev[rev.length - 1]}: the {seatedSide(side, rev)} side of the car as you boarded
+                              </span>
+                            ) : null;
+                          })()}
                         </span>
                       </li>
                     );

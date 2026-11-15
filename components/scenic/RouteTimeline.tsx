@@ -11,6 +11,7 @@ import {
   fmtOffset,
   LIVE_ROUTES,
   referenceDeparture,
+  seatedSide,
   timeline,
   trainsServing,
   type Direction,
@@ -183,6 +184,14 @@ export function RouteTimeline({
                         {t("season")}: {it.view.season}
                         {/only/.test(it.view.basis) ? ` · ${t("modelOnly")}` : ""}
                       </span>
+                      {it.reversedAt.length ? (
+                        <span className="mt-1 block rounded-lg bg-amber-50 px-2 py-1 text-[11px] font-semibold leading-4 text-amber-900">
+                          {t("reversed", {
+                            station: it.reversedAt[it.reversedAt.length - 1],
+                            side: seatedSide(it.side, it.reversedAt) === "right" ? t("right") : t("left"),
+                          })}
+                        </span>
+                      ) : null}
                     </span>
                     <span className="flex flex-col items-end gap-1">
                       <span className={["rounded-full px-2.5 py-0.5 text-[11px] font-extrabold uppercase text-white", it.side === "right" ? "bg-[#d94a32]" : "bg-[#2f6fd6]"].join(" ")}>
