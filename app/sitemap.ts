@@ -4,6 +4,7 @@ import { publicItineraryPages } from "@/lib/content/itineraries";
 import { stayPages } from "@/lib/content/stay";
 import { transferPages } from "@/lib/content/transfers";
 import { FOLDED_PATHS, RETIRED_PATHS } from "@/lib/retired-routes";
+import { BLOG_POSTS } from "@/data/blog/posts";
 
 const siteUrl = "https://fujiseat.com";
 
@@ -37,6 +38,7 @@ const englishOnlyContentPaths = [
   "/osaka-to-tokyo-mt-fuji-seat",
   "/shinkansen-seat-letters",
   "/when-to-see-mt-fuji-shinkansen",
+  "/blog",
   "/jr-pass-vs-single-ticket",
   "/shinkansen-oversized-baggage-seat",
   "/nozomi-vs-hikari-vs-kodama",
@@ -57,6 +59,7 @@ const dynamicPaths = [
   ...publicItineraryPages.map((page) => `/itineraries/${page.slug}`),
   ...stayPages.map((page) => `/areas-to-stay/${page.slug}`),
   ...transferPages.map((page) => `/airport-transfers/${page.slug}`),
+  ...BLOG_POSTS.map((post) => `/blog/${post.slug}`),
 ];
 
 function localizedUrl(path: string, locale: string) {

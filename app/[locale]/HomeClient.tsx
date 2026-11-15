@@ -50,6 +50,13 @@ const SEAT_GUIDES: Array<{ href: string; title: string; body: string; image?: st
     image: "/images/Kyoto.png",
     alt: "Yasaka Pagoda on a Kyoto lane at sunset",
   },
+  {
+    href: "/blog/seat-e-sold-out-mt-fuji",
+    title: "Seat E sold out?",
+    body: "Five ways to still see Mt. Fuji, and how to photograph it through the glass.",
+    image: "/images/hero/window-fuji-summer-wide.png",
+    alt: "Mt. Fuji above green fields through a Shinkansen window",
+  },
 ];
 
 const VIS_EMOJI = { high: "☀️", medium: "🌤️", low: "☁️" } as const;
@@ -488,7 +495,7 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
 
         <section className="pt-12">
           <h2 className="text-2xl font-extrabold tracking-[-0.02em] text-ink md:text-[28px]">More seat guides</h2>
-          <div className="mt-5 grid gap-4 sm:grid-cols-3">
+          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {SEAT_GUIDES.map((guide) => (
               <Link
                 key={guide.href}
