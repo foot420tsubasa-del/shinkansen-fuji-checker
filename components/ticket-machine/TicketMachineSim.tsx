@@ -494,7 +494,7 @@ export function TicketMachineSim({ initialLang = "en" }: { initialLang?: Lang })
         {screen}
 
         <div className="absolute flex items-center justify-end pr-[9%] font-mono font-bold text-[#7dff9a]" style={{ ...pos(BOX.amount), fontSize: "clamp(10px, 2.6vw, 15px)" }}>
-          {inserted > 0 ? inserted.toLocaleString("en-US") : ""}
+          {paying && inserted > 0 ? inserted.toLocaleString("en-US") : ""}
         </div>
 
         <button type="button" aria-label="Cancel (とりけし)" onClick={onCancel} className={hot} style={pos(BOX.cancel)} />
