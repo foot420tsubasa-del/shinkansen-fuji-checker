@@ -49,7 +49,226 @@
         "illustrative": true
       },
       "teaser": "Tokyo → Kyoto · Seat E",
-      "href": "/guide"
+      "href": "/scenic/tokaido-shinkansen",
+      "stations": [
+        {
+          "name": "Odawara",
+          "lat": 35.2564,
+          "lng": 139.1554
+        },
+        {
+          "name": "Atami",
+          "lat": 35.1037,
+          "lng": 139.0779
+        },
+        {
+          "name": "Mishima",
+          "lat": 35.1263,
+          "lng": 138.9111
+        },
+        {
+          "name": "Shin-Fuji",
+          "lat": 35.1424,
+          "lng": 138.6634
+        },
+        {
+          "name": "Shizuoka",
+          "lat": 34.9714,
+          "lng": 138.389
+        }
+      ],
+      "targets": [
+        {
+          "id": "fuji",
+          "name": "Mt. Fuji",
+          "lat": 35.3606,
+          "lng": 138.7274,
+          "elevation": 3776
+        }
+      ],
+      "slug": "tokaido-shinkansen",
+      "viewshed": "data/routes/tokaido-fuji-viewshed.json",
+      "trackKmOffset": null,
+      "directions": {
+        "forward": [
+          "Tokyo",
+          "Shin-Osaka"
+        ],
+        "backward": [
+          "Shin-Osaka",
+          "Tokyo"
+        ]
+      },
+      "timing": {
+        "kind": "fuji-model",
+        "source": "fujiseat timing model for a Nozomi (lib/fuji-window.ts): the view opens about 40 minutes out of Tokyo, is largest passing Shin-Fuji at about 45 and closes after the Fuji River at about 48.",
+        "origins": {
+          "forward": [
+            "Tokyo",
+            "Shinagawa",
+            "Shin-Yokohama"
+          ],
+          "backward": [
+            "Nagoya",
+            "Kyoto",
+            "Shin-Osaka"
+          ]
+        }
+      },
+      "timelineStations": [
+        {
+          "name": "Tokyo",
+          "ja": "東京",
+          "order": 0
+        },
+        {
+          "name": "Shinagawa",
+          "ja": "品川",
+          "order": 1
+        },
+        {
+          "name": "Shin-Yokohama",
+          "ja": "新横浜",
+          "order": 2
+        },
+        {
+          "name": "Odawara",
+          "ja": "小田原",
+          "order": 3
+        },
+        {
+          "name": "Atami",
+          "ja": "熱海",
+          "order": 4
+        },
+        {
+          "name": "Mishima",
+          "ja": "三島",
+          "order": 5
+        },
+        {
+          "name": "Shin-Fuji",
+          "ja": "新富士",
+          "order": 6
+        },
+        {
+          "name": "Shizuoka",
+          "ja": "静岡",
+          "order": 7
+        },
+        {
+          "name": "Hamamatsu",
+          "ja": "浜松",
+          "order": 8
+        },
+        {
+          "name": "Nagoya",
+          "ja": "名古屋",
+          "order": 9
+        },
+        {
+          "name": "Kyoto",
+          "ja": "京都",
+          "order": 10
+        },
+        {
+          "name": "Shin-Osaka",
+          "ja": "新大阪",
+          "order": 11
+        }
+      ],
+      "views": [
+        {
+          "id": "fuji",
+          "name": "Mt. Fuji",
+          "targets": [
+            "fuji"
+          ],
+          "tags": [
+            "fuji",
+            "mountain"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Mishima",
+          "to": "Shin-Fuji",
+          "kmFrom": 38.1,
+          "kmTo": 66,
+          "sectionKm": 28,
+          "nearestKm": null,
+          "maxAngle": 9.25,
+          "season": "All year; clearest on winter mornings",
+          "seat": "E (standard car) · D (Green Car)",
+          "basis": "timing model and seat verified; section confirmed by the terrain model",
+          "main": true
+        },
+        {
+          "id": "fuji-odawara",
+          "name": "Mt. Fuji (glimpse near Odawara)",
+          "targets": [
+            "fuji"
+          ],
+          "tags": [
+            "fuji",
+            "mountain"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Odawara",
+          "to": "Odawara",
+          "kmFrom": 0,
+          "kmTo": 4.2,
+          "sectionKm": 4,
+          "nearestKm": null,
+          "maxAngle": 5.08,
+          "season": "Clear days",
+          "seat": null,
+          "basis": "terrain model only"
+        },
+        {
+          "id": "fuji-shizuoka",
+          "name": "Mt. Fuji (glimpses around Shizuoka)",
+          "targets": [
+            "fuji"
+          ],
+          "tags": [
+            "fuji",
+            "mountain"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Shin-Fuji",
+          "to": "Shizuoka",
+          "kmFrom": 84.8,
+          "kmTo": 96.2,
+          "sectionKm": 11,
+          "nearestKm": null,
+          "maxAngle": 4.9,
+          "season": "Clear days",
+          "seat": null,
+          "basis": "terrain model only"
+        }
+      ],
+      "page": {
+        "title": "Tokaido Shinkansen: Which Side for Mt. Fuji, and When?",
+        "description": "From Tokyo to Kyoto or Osaka, Mt. Fuji is on the right (Seat E), largest passing Shin-Fuji about 45 minutes out of Tokyo. A terrain model of the whole stretch, with a map, the minutes and two shorter glimpses.",
+        "h1": "Tokaido Shinkansen: which side for Mt. Fuji, and when?",
+        "labelStations": [
+          "Odawara",
+          "Atami",
+          "Mishima",
+          "Shin-Fuji",
+          "Shizuoka"
+        ]
+      },
+      "verification": "Side and seat letters verified (Seat E in standard cars, D in the Green Car). Timing from our Nozomi model. Sections from a terrain sight-line model (GSI elevation, OSM track); the two short glimpses rest on the model alone.",
+      "tags": [
+        "fuji",
+        "mountain"
+      ]
     },
     {
       "id": "hokuriku-alps",
@@ -212,12 +431,22 @@
           "targets": [
             "asama"
           ],
-          "sideToKanazawa": "right",
+          "tags": [
+            "mountain"
+          ],
+          "side": {
+            "forward": "right"
+          },
           "from": "Karuizawa",
           "to": "Sakudaira",
           "kmFrom": 40.5,
           "kmTo": 63.5,
-          "maxAngle": 10.2
+          "sectionKm": 23,
+          "nearestKm": 9.1,
+          "maxAngle": 10.2,
+          "season": "Clear days, all year",
+          "seat": null,
+          "basis": "terrain model; side matched to published accounts"
         },
         {
           "id": "myoko",
@@ -225,12 +454,22 @@
           "targets": [
             "myoko"
           ],
-          "sideToKanazawa": "left",
+          "tags": [
+            "mountain"
+          ],
+          "side": {
+            "forward": "left"
+          },
           "from": "Iiyama",
           "to": "Joetsu-Myoko",
           "kmFrom": 169.8,
           "kmTo": 178.4,
-          "maxAngle": 5.9
+          "sectionKm": 9,
+          "nearestKm": 22.8,
+          "maxAngle": 5.9,
+          "season": "Clear days; snow-capped in winter",
+          "seat": null,
+          "basis": "terrain model; side matched to published accounts"
         },
         {
           "id": "alps",
@@ -240,19 +479,390 @@
             "tateyama",
             "shirouma"
           ],
-          "sideToKanazawa": "left",
+          "tags": [
+            "mountain",
+            "snow"
+          ],
+          "side": {
+            "forward": "left"
+          },
           "from": "Kurobe-Unazukionsen",
           "to": "Shin-Takaoka",
           "kmFrom": 246.4,
           "kmTo": 321.5,
-          "maxAngle": 6.6
+          "sectionKm": 75,
+          "nearestKm": 25.2,
+          "maxAngle": 6.6,
+          "season": "Clear days; snow-capped from about November to May",
+          "seat": null,
+          "basis": "terrain model; side matched to published accounts"
         }
       ],
       "verification": "Sides from a terrain sight-line model (GSI elevation, OSM track) and matched against published accounts: Asama on the right after Karuizawa (shinkansentickets.net), mountains on the left towards Kanazawa (nippon.com). Seat letters not verified, so not given.",
       "chip": {
         "emoji": "🏔️",
         "label": "Japan Alps"
-      }
+      },
+      "trackKmOffset": 105,
+      "timelineStations": [
+        {
+          "name": "Tokyo",
+          "km": 0,
+          "ja": "東京"
+        },
+        {
+          "name": "Ueno",
+          "km": 3.6,
+          "ja": "上野"
+        },
+        {
+          "name": "Omiya",
+          "km": 30.3,
+          "ja": "大宮"
+        },
+        {
+          "name": "Takasaki",
+          "km": 105,
+          "ja": "高崎"
+        },
+        {
+          "name": "Annaka-Haruna",
+          "km": 123.5,
+          "ja": "安中榛名"
+        },
+        {
+          "name": "Karuizawa",
+          "km": 146.7,
+          "ja": "軽井沢"
+        },
+        {
+          "name": "Sakudaira",
+          "km": 164.5,
+          "ja": "佐久平"
+        },
+        {
+          "name": "Ueda",
+          "km": 188.8,
+          "ja": "上田"
+        },
+        {
+          "name": "Nagano",
+          "km": 222,
+          "ja": "長野"
+        },
+        {
+          "name": "Iiyama",
+          "km": 252,
+          "ja": "飯山"
+        },
+        {
+          "name": "Joetsu-Myoko",
+          "km": 281.7,
+          "ja": "上越妙高"
+        },
+        {
+          "name": "Itoigawa",
+          "km": 318.3,
+          "ja": "糸魚川"
+        },
+        {
+          "name": "Kurobe-Unazukionsen",
+          "km": 359.2,
+          "ja": "黒部宇奈月温泉"
+        },
+        {
+          "name": "Toyama",
+          "km": 391.7,
+          "ja": "富山"
+        },
+        {
+          "name": "Shin-Takaoka",
+          "km": 410.4,
+          "ja": "新高岡"
+        },
+        {
+          "name": "Kanazawa",
+          "km": 449.4,
+          "ja": "金沢"
+        }
+      ],
+      "directions": {
+        "forward": [
+          "Tokyo",
+          "Kanazawa"
+        ],
+        "backward": [
+          "Kanazawa",
+          "Tokyo"
+        ]
+      },
+      "timing": {
+        "kind": "timetable",
+        "source": "JR East train timetables (timetables.jreast.co.jp), November 2026 timetable: Hakutaka 553 and 552, Kagayaki 541 and 544. Times between stops are spread in proportion to distance along the line.",
+        "sourceUrl": "https://timetables.jreast.co.jp/",
+        "trains": [
+          {
+            "id": "hakutaka",
+            "label": "Hakutaka",
+            "note": "stops at every station on this list",
+            "forward": {
+              "train": "Hakutaka 553",
+              "stops": [
+                [
+                  "Tokyo",
+                  null,
+                  "07:52"
+                ],
+                [
+                  "Ueno",
+                  "07:57",
+                  "07:58"
+                ],
+                [
+                  "Omiya",
+                  "08:16",
+                  "08:17"
+                ],
+                [
+                  "Takasaki",
+                  "08:42",
+                  "08:43"
+                ],
+                [
+                  "Karuizawa",
+                  "08:58",
+                  "08:59"
+                ],
+                [
+                  "Sakudaira",
+                  "09:08",
+                  "09:09"
+                ],
+                [
+                  "Ueda",
+                  "09:18",
+                  "09:18"
+                ],
+                [
+                  "Nagano",
+                  "09:30",
+                  "09:32"
+                ],
+                [
+                  "Iiyama",
+                  "09:43",
+                  "09:43"
+                ],
+                [
+                  "Joetsu-Myoko",
+                  "09:54",
+                  "09:57"
+                ],
+                [
+                  "Itoigawa",
+                  "10:10",
+                  "10:11"
+                ],
+                [
+                  "Kurobe-Unazukionsen",
+                  "10:24",
+                  "10:25"
+                ],
+                [
+                  "Toyama",
+                  "10:37",
+                  "10:38"
+                ],
+                [
+                  "Shin-Takaoka",
+                  "10:47",
+                  "10:47"
+                ],
+                [
+                  "Kanazawa",
+                  "11:01",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Hakutaka 552",
+              "stops": [
+                [
+                  "Kanazawa",
+                  null,
+                  "06:16"
+                ],
+                [
+                  "Shin-Takaoka",
+                  "06:29",
+                  "06:30"
+                ],
+                [
+                  "Toyama",
+                  "06:39",
+                  "06:40"
+                ],
+                [
+                  "Kurobe-Unazukionsen",
+                  "06:52",
+                  "06:53"
+                ],
+                [
+                  "Itoigawa",
+                  "07:06",
+                  "07:07"
+                ],
+                [
+                  "Joetsu-Myoko",
+                  "07:19",
+                  "07:20"
+                ],
+                [
+                  "Iiyama",
+                  "07:32",
+                  "07:32"
+                ],
+                [
+                  "Nagano",
+                  "07:43",
+                  "07:45"
+                ],
+                [
+                  "Ueda",
+                  "07:57",
+                  "07:58"
+                ],
+                [
+                  "Sakudaira",
+                  "08:07",
+                  "08:08"
+                ],
+                [
+                  "Karuizawa",
+                  "08:16",
+                  "08:17"
+                ],
+                [
+                  "Takasaki",
+                  "08:32",
+                  "08:33"
+                ],
+                [
+                  "Omiya",
+                  "08:55",
+                  "08:56"
+                ],
+                [
+                  "Ueno",
+                  "09:14",
+                  "09:15"
+                ],
+                [
+                  "Tokyo",
+                  "09:20",
+                  null
+                ]
+              ]
+            }
+          },
+          {
+            "id": "kagayaki",
+            "label": "Kagayaki",
+            "note": "fastest; stops only at Ueno, Omiya, Nagano and Toyama",
+            "forward": {
+              "train": "Kagayaki 541",
+              "stops": [
+                [
+                  "Tokyo",
+                  null,
+                  "15:48"
+                ],
+                [
+                  "Ueno",
+                  "15:53",
+                  "15:54"
+                ],
+                [
+                  "Omiya",
+                  "16:12",
+                  "16:13"
+                ],
+                [
+                  "Nagano",
+                  "17:14",
+                  "17:16"
+                ],
+                [
+                  "Toyama",
+                  "18:04",
+                  "18:05"
+                ],
+                [
+                  "Kanazawa",
+                  "18:25",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Kagayaki 544",
+              "stops": [
+                [
+                  "Kanazawa",
+                  null,
+                  "19:49"
+                ],
+                [
+                  "Toyama",
+                  "20:08",
+                  "20:09"
+                ],
+                [
+                  "Nagano",
+                  "20:55",
+                  "20:57"
+                ],
+                [
+                  "Omiya",
+                  "21:55",
+                  "21:56"
+                ],
+                [
+                  "Ueno",
+                  "22:14",
+                  "22:15"
+                ],
+                [
+                  "Tokyo",
+                  "22:20",
+                  null
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "page": {
+        "title": "Hokuriku Shinkansen: Which Side for Mt. Asama and the Japan Alps?",
+        "description": "Going from Tokyo to Kanazawa, Mt. Asama is on the right between Karuizawa and Sakudaira, and the Northern Alps are on the left from Kurobe-Unazukionsen to Shin-Takaoka. A terrain model of every sight line, with a map and the minutes from the JR timetable.",
+        "h1": "Hokuriku Shinkansen: which side for Mt. Asama and the Japan Alps?",
+        "labelStations": [
+          "Takasaki",
+          "Karuizawa",
+          "Sakudaira",
+          "Nagano",
+          "Joetsu-Myoko",
+          "Itoigawa",
+          "Kurobe-Unazukionsen",
+          "Toyama",
+          "Kanazawa"
+        ]
+      },
+      "tags": [
+        "mountain",
+        "snow"
+      ]
     },
     {
       "id": "enoden-coast",
@@ -292,7 +902,17 @@
         "alt": "Beach, an island and distant Mt. Fuji through the window of a small seaside train",
         "illustrative": true
       },
-      "teaser": "Kamakura · day trip from Tokyo"
+      "teaser": "Kamakura · day trip from Tokyo",
+      "near": [
+        "Kamakura",
+        "Fujisawa",
+        "Enoshima",
+        "Hase",
+        "Shonan"
+      ],
+      "tags": [
+        "sea"
+      ]
     },
     {
       "id": "fujikyu-fuji",
@@ -331,7 +951,17 @@
         "alt": "Mt. Fuji close above a lake and autumn leaves through a local train window",
         "illustrative": true
       },
-      "teaser": "Kawaguchiko · autumn"
+      "teaser": "Kawaguchiko · autumn",
+      "near": [
+        "Otsuki",
+        "Kawaguchiko",
+        "Fujiyoshida",
+        "Fuji-Q"
+      ],
+      "tags": [
+        "fuji",
+        "mountain"
+      ]
     },
     {
       "id": "hakone-tozan",
@@ -370,7 +1000,17 @@
         "alt": "Hydrangeas in bloom beside the track through the window of a red mountain train",
         "illustrative": true
       },
-      "teaser": "Hakone · June hydrangeas"
+      "teaser": "Hakone · June hydrangeas",
+      "near": [
+        "Hakone",
+        "Hakone-Yumoto",
+        "Gora",
+        "Odawara"
+      ],
+      "tags": [
+        "mountain",
+        "countryside"
+      ]
     },
     {
       "id": "sagano-gorge",
@@ -410,7 +1050,17 @@
         "alt": "Autumn maples above a green river gorge from an open wooden trolley car",
         "illustrative": true
       },
-      "teaser": "Kyoto · autumn leaves"
+      "teaser": "Kyoto · autumn leaves",
+      "near": [
+        "Saga",
+        "Arashiyama",
+        "Kameoka",
+        "Saga-Arashiyama"
+      ],
+      "tags": [
+        "countryside",
+        "mountain"
+      ]
     },
     {
       "id": "yurikamome-night",
@@ -449,7 +1099,17 @@
         "alt": "An illuminated suspension bridge and city skyline from the front window of an elevated train at night",
         "illustrative": true
       },
-      "teaser": "Tokyo Bay · after dark"
+      "teaser": "Tokyo Bay · after dark",
+      "near": [
+        "Shimbashi",
+        "Odaiba",
+        "Toyosu",
+        "Daiba",
+        "Ariake"
+      ],
+      "tags": [
+        "city"
+      ]
     },
     {
       "id": "joetsu-snow",
@@ -479,7 +1139,16 @@
           37,
           139
         ]
-      }
+      },
+      "near": [
+        "Echigo-Yuzawa",
+        "Niigata",
+        "Takasaki"
+      ],
+      "tags": [
+        "mountain",
+        "snow"
+      ]
     },
     {
       "id": "tohoku-iwate",
@@ -510,7 +1179,15 @@
           39.8,
           141.3
         ]
-      }
+      },
+      "near": [
+        "Sendai",
+        "Morioka"
+      ],
+      "tags": [
+        "mountain",
+        "countryside"
+      ]
     },
     {
       "id": "kurobe-gorge",
@@ -540,7 +1217,14 @@
           137.67
         ],
         "nameToConfirm": true
-      }
+      },
+      "near": [
+        "Unazuki",
+        "Kurobe"
+      ],
+      "tags": [
+        "mountain"
+      ]
     },
     {
       "id": "gono-coast",
@@ -569,7 +1253,15 @@
           40.9,
           140.3
         ]
-      }
+      },
+      "near": [
+        "Akita",
+        "Aomori",
+        "Hirosaki"
+      ],
+      "tags": [
+        "sea"
+      ]
     },
     {
       "id": "furano-biei-flowers",
@@ -599,7 +1291,15 @@
           43.6,
           142.5
         ]
-      }
+      },
+      "near": [
+        "Furano",
+        "Biei",
+        "Asahikawa"
+      ],
+      "tags": [
+        "countryside"
+      ]
     },
     {
       "id": "senmo-drift-ice",
@@ -629,7 +1329,14 @@
           44.05,
           144.7
         ]
-      }
+      },
+      "near": [
+        "Abashiri",
+        "Shiretoko-Shari"
+      ],
+      "tags": [
+        "sea"
+      ]
     },
     {
       "id": "tadami-river",
@@ -659,7 +1366,14 @@
           37.6,
           139.85
         ]
-      }
+      },
+      "near": [
+        "Aizu-Wakamatsu",
+        "Koide"
+      ],
+      "tags": [
+        "countryside"
+      ]
     }
   ]
 }

@@ -61,16 +61,21 @@ export function FujiTiming({
   locale,
   pagePath,
   reminder = false,
+  initialOrigin,
 }: {
   direction: DirectionId;
   locale: string;
   pagePath: string;
   /** Offer the window as a calendar entry. On the homepage only, for now. */
   reminder?: boolean;
+  /** Start on this origin when it belongs to the direction (the route search passes From). */
+  initialOrigin?: string;
 }) {
   const t = useTranslations("fujiWindow");
   const origins = ORIGINS_BY_DIRECTION[direction];
-  const [origin, setOrigin] = useState<OriginId>(origins[0]);
+  const [origin, setOrigin] = useState<OriginId>(
+    origins.includes(initialOrigin as OriginId) ? (initialOrigin as OriginId) : origins[0],
+  );
   const [today] = useState(() => tokyoDate());
   const [maxDate] = useState(() => tokyoDate(330));
   const [date, setDate] = useState(today);

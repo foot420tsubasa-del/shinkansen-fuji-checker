@@ -6,98 +6,70 @@ import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
-import { RouteViewMap, type RouteView } from "@/components/scenic/RouteViewMap";
+import { RouteTimeline } from "@/components/scenic/RouteTimeline";
 import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
-import catalogue from "@/data/scenic-routes.json";
+import { LIVE_ROUTES, flipSide, type ScenicRoute } from "@/lib/scenic";
 import { JR_PASS_URL } from "@/src/affiliateLinks";
-import hokurikuViewshed from "@/data/routes/hokuriku-alps-viewshed.json";
 
 /*
- * Viewshed files by route id, imported statically: reading them from disk at
- * request time made the bundler trace (and ship) the whole project.
+ * One template for every mapped route (since 2026-11-15): the page reads only
+ * the shared schema in data/scenic-routes.json (lib/scenic.ts) — sides,
+ * sections, sizes, seasons, verified seats, timing and sources — so a new
+ * route is a data change, not a new page. The map and the minute-by-minute
+ * list come from RouteTimeline, the same component the homepage search uses.
  */
-const VIEWSHEDS: Record<string, { direction: [string, string]; points: Parameters<typeof RouteViewMap>[0]["points"] }> = {
-  "hokuriku-alps": hokurikuViewshed as unknown as { direction: [string, string]; points: Parameters<typeof RouteViewMap>[0]["points"] },
-};
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
-type LiveRoute = {
-  id: string;
-  slug: string;
-  status: string;
-  title: string;
-  line: string;
-  between: [string, string];
-  stations: { name: string; lat: number; lng: number }[];
-  targets: { id: string; name: string; lat: number; lng: number }[];
-  views: (RouteView & { kmFrom: number; kmTo: number; maxAngle: number })[];
-  viewshed: string;
-  season: string;
-  verification: string;
-  image: { src: string; alt: string; illustrative: boolean };
-};
-
-const PAGE_COPY: Record<string, { title: string; description: string; h1: string; labelStations: string[] }> = {
-  "hokuriku-shinkansen": {
-    title: "Hokuriku Shinkansen: Which Side for Mt. Asama and the Japan Alps?",
-    description:
-      "Going from Tokyo to Kanazawa, Mt. Asama is on the right between Karuizawa and Sakudaira, and the Northern Alps are on the left from Kurobe-Unazukionsen to Shin-Takaoka. A terrain model of every sight line, with a map.",
-    h1: "Hokuriku Shinkansen: which side for Mt. Asama and the Japan Alps?",
-    labelStations: ["Takasaki", "Karuizawa", "Sakudaira", "Nagano", "Joetsu-Myoko", "Itoigawa", "Kurobe-Unazukionsen", "Toyama", "Kanazawa"],
-  },
-};
-
-function liveRoute(slug: string): LiveRoute | undefined {
-  return (catalogue.routes as unknown as LiveRoute[]).find((r) => r.slug === slug && r.status === "live");
-}
+const pageRoute = (slug: string): ScenicRoute | undefined => LIVE_ROUTES.find((r) => r.slug === slug && r.page);
 
 export function generateStaticParams() {
-  return (catalogue.routes as unknown as LiveRoute[])
-    .filter((r) => r.status === "live" && r.slug && PAGE_COPY[r.slug])
-    .map((r) => ({ slug: r.slug }));
+  return LIVE_ROUTES.filter((r) => r.slug && r.page).map((r) => ({ slug: r.slug! }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const copy = PAGE_COPY[slug];
-  if (!copy || !liveRoute(slug)) return {};
+  const route = pageRoute(slug);
+  if (!route?.page) return {};
   return {
-    title: `${copy.title} | fujiseat`,
-    description: copy.description,
+    title: `${route.page.title} | fujiseat`,
+    description: route.page.description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(`/scenic/${slug}`, locale),
-    openGraph: { title: copy.title, description: copy.description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
+    openGraph: { title: route.page.title, description: route.page.description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
   };
 }
 
-/** Degrees above the horizon in terms a traveller can picture. */
-function howBig(angle: number): string {
+function howBig(angle: number | null): string {
+  if (angle === null) return "—";
   if (angle >= 8) return "Big: a fist high at arm's length";
   if (angle >= 4) return "Clear: three fingers high";
   return "Small: a thumb high";
 }
-const flip = (side: "left" | "right") => (side === "left" ? "right" : "left");
 
 export default async function ScenicRoutePage({ params }: Props) {
   const { slug } = await params;
-  const route = liveRoute(slug);
-  const copy = PAGE_COPY[slug];
-  if (!route || !copy) notFound();
+  const route = pageRoute(slug);
+  if (!route?.page || !route.views || !route.directions) notFound();
 
-  const viewshed = VIEWSHEDS[route.id];
-  if (!viewshed) notFound();
-  const [from, to] = route.between;
+  const [from, to] = route.directions.forward;
+  const views = route.views;
 
   const faq = [
-    ...route.views.map((v) => ({
-      q: `Which side of the ${route.line} is ${v.name} on?`,
-      a: `Going from ${from} to ${to}, ${v.name} is on the ${v.sideToKanazawa} side, between ${v.from} and ${v.to}. Going from ${to} to ${from}, it is on the ${flip(v.sideToKanazawa)}.`,
-    })),
-    {
-      q: `Which seat letter should I book on the ${route.line}?`,
-      a: "Pick a window seat on the side you need for your direction of travel when you choose seats. We give sides rather than seat letters because we have not yet verified the letters for this line.",
-    },
+    ...views
+      .filter((v) => !/only/.test(v.basis))
+      .map((v) => ({
+        q: `Which side of the ${route.line} is ${v.name} on?`,
+        a: `Going from ${from} to ${to}, ${v.name} is on the ${v.side.forward} side, between ${v.from} and ${v.to}${v.seat ? ` — Seat ${v.seat.split(" ")[0]} in standard cars` : ""}. Going from ${to} to ${from}, it is on the ${flipSide(v.side.forward)}.`,
+      })),
+    ...(views.some((v) => v.seat)
+      ? []
+      : [
+          {
+            q: `Which seat letter should I book on the ${route.line}?`,
+            a: "Pick a window seat on the side you need for your direction of travel. We give sides rather than seat letters because we have not yet verified the letters for this line.",
+          },
+        ]),
   ];
   const schema = {
     "@context": "https://schema.org",
@@ -109,79 +81,87 @@ export default async function ScenicRoutePage({ params }: Props) {
     <main className="page-shell min-h-screen text-ink">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <SiteHeader />
-      <article className="mx-auto max-w-[900px] px-5 pb-16 pt-8 md:pt-12">
+      <article className="mx-auto max-w-[1000px] px-5 pb-16 pt-8 md:pt-12">
         <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">Scenic routes · {route.line}</p>
-        <h1 className="mt-3 text-[32px] font-extrabold leading-[1.1] tracking-[-0.03em] md:text-[44px]">{copy.h1}</h1>
+        <h1 className="mt-3 text-[32px] font-extrabold leading-[1.1] tracking-[-0.03em] md:text-[44px]">{route.page.h1}</h1>
 
-        <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-[22px] bg-ink">
-          <Image src={route.image.src} alt={route.image.alt} fill priority sizes="(min-width: 940px) 900px, 100vw" className="object-cover" />
-          {route.image.illustrative ? (
-            <span className="absolute bottom-2 right-3 text-[10px] font-medium text-white/75">Illustrative image</span>
-          ) : null}
-        </div>
+        {route.image ? (
+          <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-[22px] bg-ink">
+            <Image src={route.image.src} alt={route.image.alt} fill priority sizes="(min-width: 1040px) 1000px, 100vw" className="object-cover" />
+            {route.image.illustrative ? <span className="absolute bottom-2 right-3 text-[10px] font-medium text-white/75">Illustrative image</span> : null}
+          </div>
+        ) : null}
 
         <section className="mt-8 grid gap-4 md:grid-cols-2">
-          {[
-            { label: `${from} → ${to}`, side: (v: RouteView) => v.sideToKanazawa },
-            { label: `${to} → ${from}`, side: (v: RouteView) => flip(v.sideToKanazawa) },
-          ].map((dir) => (
-            <div key={dir.label} className="rounded-[22px] bg-ink p-6 text-white">
-              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/60">{dir.label}</p>
-              <ul className="mt-3 grid gap-3">
-                {route.views.map((v) => (
-                  <li key={v.id} className="flex gap-3 text-[15px] leading-6">
-                    <span
-                      className={[
-                        "mt-0.5 shrink-0 self-start rounded-full px-2.5 py-0.5 text-[11.5px] font-bold uppercase",
-                        dir.side(v) === "right" ? "bg-[#d94a32] text-white" : "bg-[#2f6fd6] text-white",
-                      ].join(" ")}
-                    >
-                      {dir.side(v)}
-                    </span>
-                    <span>
-                      <b>{v.name}</b>
-                      <span className="block text-sm text-white/70">
-                        {dir.label.startsWith(from) ? `${v.from} → ${v.to}` : `${v.to} → ${v.from}`}
-                      </span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {(["forward", "backward"] as const).map((dir) => {
+            const [a, b] = route.directions![dir];
+            return (
+              <div key={dir} className="rounded-[22px] bg-ink p-6 text-white">
+                <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/60">
+                  {a} → {b}
+                </p>
+                <ul className="mt-3 grid gap-3">
+                  {views.map((v) => {
+                    const side = dir === "forward" ? v.side.forward : flipSide(v.side.forward);
+                    return (
+                      <li key={v.id} className="flex gap-3 text-[15px] leading-6">
+                        <span className={["mt-0.5 shrink-0 self-start rounded-full px-2.5 py-0.5 text-[11.5px] font-bold uppercase text-white", side === "right" ? "bg-[#d94a32]" : "bg-[#2f6fd6]"].join(" ")}>
+                          {side}
+                        </span>
+                        <span>
+                          <b>{v.name}</b>
+                          {v.seat ? <span className="ml-1.5 rounded-full bg-white/15 px-2 py-0.5 text-[11px] font-bold">Seat {v.seat.split(" ")[0]}</span> : null}
+                          <span className="block text-sm text-white/70">
+                            {v.from === v.to ? `near ${v.from}` : dir === "forward" ? `${v.from} → ${v.to}` : `${v.to} → ${v.from}`}
+                          </span>
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            );
+          })}
         </section>
 
-        <section className="mt-8">
-          <RouteViewMap
-            points={viewshed.points}
-            stations={route.stations}
-            targets={route.targets}
-            views={route.views}
-            labelStations={copy.labelStations}
-            direction={viewshed.direction}
-          />
+        <section className="mt-10">
+          <RouteTimeline routeId={route.id} direction="forward" from={from} to={to} showRouteLink={false} />
         </section>
 
         <section className="mt-10">
           <h2 className="text-2xl font-extrabold tracking-[-0.02em]">Each view, and how big it looks</h2>
-          <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200 bg-white">
-            <table className="w-full text-left text-[15px]">
+          <div className="mt-4 overflow-x-auto rounded-2xl border border-slate-200 bg-white">
+            <table className="w-full min-w-[640px] text-left text-[14.5px]">
               <thead className="bg-slate-50 text-xs uppercase tracking-[0.06em] text-slate-500">
                 <tr>
                   <th className="px-4 py-2.5 font-semibold">View</th>
                   <th className="px-4 py-2.5 font-semibold">Where</th>
+                  <th className="px-4 py-2.5 font-semibold">
+                    Side ({from} → {to})
+                  </th>
                   <th className="px-4 py-2.5 font-semibold">Size</th>
+                  <th className="px-4 py-2.5 font-semibold">Best</th>
                 </tr>
               </thead>
               <tbody>
-                {route.views.map((v) => (
+                {views.map((v) => (
                   <tr key={v.id} className="border-t border-slate-100 align-top">
-                    <td className="px-4 py-3 font-semibold">{v.name}</td>
-                    <td className="px-4 py-3 text-slate-700">
-                      {v.from} – {v.to}
-                      <span className="block text-xs text-slate-500">{Math.round(v.kmTo - v.kmFrom)} km of line, with gaps for tunnels and hills</span>
+                    <td className="px-4 py-3 font-semibold">
+                      {v.name}
+                      {v.seat ? <span className="block text-xs font-normal text-slate-500">Seat {v.seat}</span> : null}
                     </td>
+                    <td className="px-4 py-3 text-slate-700">
+                      {v.from === v.to ? `near ${v.from}` : `${v.from} – ${v.to}`}
+                      <span className="block text-xs text-slate-500">
+                        {v.sectionKm} km of line{v.nearestKm ? ` · summit about ${Math.round(v.nearestKm)} km away at its closest` : ""}
+                      </span>
+                    </td>
+                    <td className="px-4 py-3 capitalize text-slate-700">{v.side.forward}</td>
                     <td className="px-4 py-3 text-slate-700">{howBig(v.maxAngle)}</td>
+                    <td className="px-4 py-3 text-slate-700">
+                      {v.season}
+                      <span className="block text-xs text-slate-500">{v.basis}</span>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -189,9 +169,10 @@ export default async function ScenicRoutePage({ params }: Props) {
           </div>
           <ul className="mt-5 grid gap-2.5">
             {[
-              `When: ${route.season}. The Hokuriku sky is often overcast in midwinter, so check the forecast before you count on the Alps.`,
-              "Faster trains still pass every one of these stretches; they just do not stop. The views are between stations, not at them.",
-              "Seat letters: we give sides, not letters, until the letters for this line are verified. Choose a window seat on the side you need when you book.",
+              "Trains pass every one of these stretches whether or not they stop; the views are between stations, not at them.",
+              views.some((v) => v.seat)
+                ? "Seat letters are shown only where they have been verified."
+                : "Seat letters: we give sides, not letters, until the letters for this line are verified. Choose a window seat on the side you need when you book.",
             ].map((line) => (
               <li key={line} className="flex gap-3 text-[16px] leading-7 text-slate-700">
                 <Check className="mt-1.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
@@ -201,9 +182,17 @@ export default async function ScenicRoutePage({ params }: Props) {
           </ul>
         </section>
 
-        <section className="mt-10">
-          <ScenicPassCard href={JR_PASS_URL} routeId={route.id} line={route.line} />
-        </section>
+        {route.timing?.kind === "timetable" ? (
+          <section className="mt-10">
+            <ScenicPassCard href={JR_PASS_URL} routeId={route.id} line={route.line} />
+          </section>
+        ) : (
+          <section className="mt-10">
+            <Link href="/#seat-checker" className="inline-flex h-12 items-center gap-2 rounded-full bg-fuji px-6 text-[15px] font-bold text-white">
+              Check your seat and book <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </section>
+        )}
 
         <section className="mt-12">
           <h2 className="text-2xl font-extrabold tracking-[-0.02em]">Questions</h2>
@@ -220,10 +209,12 @@ export default async function ScenicRoutePage({ params }: Props) {
         <section className="mt-12 rounded-2xl bg-slate-50 p-5 text-sm leading-6 text-slate-600">
           <p className="font-bold text-ink">How we worked this out</p>
           <p className="mt-1">{route.verification}</p>
+          {route.timing ? <p className="mt-2">Timing: {route.timing.source}</p> : null}
+          <p className="mt-2">Elevation: Geospatial Information Authority of Japan (国土地理院). Track: © OpenStreetMap contributors (ODbL).</p>
         </section>
 
         <Link href="/" className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-fuji">
-          Mt. Fuji from the Tokaido Shinkansen <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          Search another route <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
       </article>
       <SiteFooter />

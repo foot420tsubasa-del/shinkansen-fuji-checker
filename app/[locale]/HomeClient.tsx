@@ -12,13 +12,15 @@ import { FujiTiming } from "@/components/travel/FujiTiming";
 import { HeroWindow } from "@/components/home/HeroWindow";
 import { FujiViewMap } from "@/components/travel/FujiViewMap";
 import { ScenicRoutesGallery } from "@/components/home/ScenicRoutesGallery";
+import { RouteSearch } from "@/components/home/RouteSearch";
+import { RouteTimeline } from "@/components/scenic/RouteTimeline";
+import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
+import { matchRoute, type RouteMatch, type ViewTag } from "@/lib/scenic";
 import type { HeroSeason } from "@/lib/hero-images";
-import scenicCatalogue from "@/data/scenic-routes.json";
 import { trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
   type DirectionId,
   type FujiVisibility,
-  directions,
   getSeatRecommendation,
 } from "@/lib/seat-checker";
 import {
@@ -64,10 +66,6 @@ const SEAT_GUIDES: Array<{ href: string; title: string; body: string; image?: st
 
 const VIS_EMOJI = { high: "☀️", medium: "🌤️", low: "☁️" } as const;
 
-/** Verified views beyond Mt. Fuji, as links beside the Fuji chip in the hero. */
-const LIVE_VIEW_CHIPS = (scenicCatalogue.routes as { status: string; href?: string; chip?: { emoji: string; label: string } }[])
-  .filter((route) => route.status === "live" && route.chip && route.href)
-  .map((route) => ({ href: route.href!, emoji: route.chip!.emoji, label: route.chip!.label }));
 
 const homeHotelCopyByLocale: Record<
   string,
@@ -195,6 +193,12 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
   const [visError, setVisError] = useState(false);
   const answerRef = useRef<HTMLElement>(null);
   const [scrollToAnswer, setScrollToAnswer] = useState(0);
+  // Route search (2026-11-15): the Tokaido answer is the checker below; any
+  // other mapped route answers with a timeline, an unmapped one with what is next.
+  const [routeMatch, setRouteMatch] = useState<RouteMatch | null>(null);
+  const [tags, setTags] = useState<ViewTag[]>([]);
+  const [tokaidoFrom, setTokaidoFrom] = useState("Tokyo");
+  const [searchKey, setSearchKey] = useState(0);
 
   useEffect(() => {
     const fetchVisibility = async () => {
@@ -271,6 +275,47 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
       locale,
     });
   };
+
+  const runSearch = (from: string, to: string) => {
+    const match = matchRoute(from, to);
+    trackCtaClick({
+      placement: "route_search",
+      href: `/?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`,
+      label: `${from}→${to}|${match.kind === "live" ? match.route.id : "unsupported"}`,
+      category: "seat_checker",
+      locale,
+    });
+    try {
+      const url = new URL(window.location.href);
+      url.searchParams.set("from", from);
+      url.searchParams.set("to", to);
+      window.history.replaceState(null, "", url.toString());
+    } catch {
+      // URL sync is a convenience.
+    }
+    setSearchKey((n) => n + 1);
+    if (match.kind === "live" && match.route.id === "tokaido-fuji") {
+      setRouteMatch(null);
+      setTokaidoFrom(from);
+      chooseDirection(match.direction === "forward" ? "tokyo-osaka" : "osaka-tokyo");
+      return;
+    }
+    setHasChecked(false);
+    setRouteMatch(match);
+    setScrollToAnswer((n) => n + 1);
+  };
+
+  // A shared /?from=…&to=… link answers on arrival.
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const params = new URLSearchParams(window.location.search);
+      const from = params.get("from");
+      const to = params.get("to");
+      if (from && to) runSearch(from, to);
+    });
+    return () => cancelAnimationFrame(frame);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on arrival
+  }, []);
 
   const omioHref = OMIO_SHINKANSEN_URL;
 
@@ -379,64 +424,18 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
         <div className="mx-auto flex min-h-[740px] max-w-[1180px] flex-col justify-between px-4 pb-6 pt-9 md:min-h-[720px] md:px-7 md:pb-10 md:pt-16">
           <div className="break-keep text-center text-white">
             <p className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-white/90 md:text-xs">
-              — {t("hero.tagline")} —
+              — {t("search.eyebrow")} —
             </p>
             <h1 className="mx-auto mt-4 max-w-[860px] font-display text-[34px] font-semibold leading-[1.08] tracking-[-0.01em] [text-shadow:0_2px_24px_rgba(0,0,0,0.35)] sm:text-[44px] md:text-[60px] md:leading-[1.04]">
-              {t("brandTitle").split("\n").map((line) => (
-                <span key={line} className="block">
-                  {line}
-                </span>
-              ))}
+              {t("search.title")}
             </h1>
             <p className="mx-auto mt-3 max-w-[520px] text-[15px] leading-6 text-white/90 font-medium [text-shadow:0_1px_14px_rgba(0,0,0,0.6)] md:mt-4 md:text-lg md:leading-7">
-              {t("hero.sub")}
+              {t("search.sub")}
             </p>
           </div>
 
-          <div className="mx-auto mt-10 w-full max-w-[760px] rounded-[26px] bg-white/95 p-4 text-ink shadow-[0_24px_60px_rgba(0,0,0,0.3)] backdrop-blur md:p-6">
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-              <span className="text-xs font-bold text-slate-500">{t("hero.viewLabel")}</span>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-ink px-3.5 py-1.5 text-[13px] font-semibold text-white">
-                <span aria-hidden="true">🗻</span>
-                {t("hero.viewFuji")}
-              </span>
-              {LIVE_VIEW_CHIPS.map((chip) => (
-                <Link
-                  key={chip.href}
-                  href={chip.href}
-                  className="inline-flex items-center gap-1.5 rounded-full border-[1.5px] border-slate-300 bg-white px-3.5 py-1 text-[13px] font-semibold text-ink transition-colors hover:bg-slate-50"
-                >
-                  <span aria-hidden="true">{chip.emoji}</span>
-                  {chip.label}
-                </Link>
-              ))}
-              <span className="text-xs text-slate-400">{t("hero.moreViews")}</span>
-            </div>
-
-            <p className="mt-4 text-xs font-bold text-slate-500">{t("hero.whichWay")}</p>
-            <div className="mt-2 grid gap-2.5 sm:grid-cols-2" role="group" aria-label={t("seatCheckerHeading")}>
-              {directions.map((opt, index) => {
-                const chosen = hasChecked && opt.id === direction;
-                const primary = hasChecked ? chosen : index === 0;
-                return (
-                  <button
-                    key={opt.id}
-                    type="button"
-                    aria-pressed={chosen}
-                    onClick={() => chooseDirection(opt.id)}
-                    className={[
-                      "flex min-h-14 w-full items-center justify-between gap-3 rounded-full px-5 text-left text-[15px] font-bold transition-all active:scale-[0.99] md:px-6 md:text-base",
-                      primary
-                        ? "bg-fuji text-white shadow-[0_10px_24px_rgba(217,74,50,0.3)] hover:bg-fuji-hover"
-                        : "border-2 border-ink/85 bg-white text-ink hover:bg-slate-50",
-                    ].join(" ")}
-                  >
-                    <span>{t(opt.labelKey)}</span>
-                    {chosen ? <Check className="h-5 w-5 shrink-0" /> : <ArrowRight className="h-5 w-5 shrink-0" />}
-                  </button>
-                );
-              })}
-            </div>
+          <div className="mx-auto mt-10 w-full max-w-[1000px] rounded-[26px] bg-white/95 p-4 text-ink shadow-[0_24px_60px_rgba(0,0,0,0.3)] backdrop-blur md:p-6">
+            <RouteSearch tags={tags} onTagsChange={setTags} onSubmit={runSearch} />
 
             <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2.5">
               <ul className="flex flex-wrap gap-x-4 gap-y-1 text-[12.5px] font-medium text-slate-600">
@@ -458,7 +457,67 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
       </section>
 
       <div className="mx-auto max-w-[1180px] px-5 md:px-7">
-        {hasChecked ? (
+        {routeMatch?.kind === "live" ? (
+          <section ref={answerRef} className="grid scroll-mt-16 grid-cols-1 gap-5 pb-4 pt-8">
+            <RouteTimeline
+              key={`${searchKey}-${routeMatch.route.id}`}
+              routeId={routeMatch.route.id}
+              direction={routeMatch.direction}
+              from={routeMatch.from}
+              to={routeMatch.to}
+              tags={tags}
+            />
+            {routeMatch.route.timing?.kind === "timetable" ? (
+              <div className="max-w-[560px]">
+                <ScenicPassCard href={JR_PASS_URL} routeId={routeMatch.route.id} line={routeMatch.route.line} />
+              </div>
+            ) : null}
+          </section>
+        ) : routeMatch?.kind === "unsupported" ? (
+          <section ref={answerRef} className="scroll-mt-16 pb-4 pt-8">
+            <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.06)] md:p-6">
+              <h2 className="text-xl font-extrabold tracking-[-0.02em] text-ink md:text-2xl">
+                {t("search.unsupportedTitle", { from: routeMatch.from, to: routeMatch.to })}
+              </h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("search.unsupportedBody")}</p>
+              <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                {routeMatch.comingSoon.map((r) => (
+                  <div key={r.id} className="overflow-hidden rounded-[18px] border border-slate-200">
+                    {r.image ? (
+                      <div className="relative aspect-[16/10] bg-ink">
+                        <Image src={r.image.src} alt={r.image.alt} fill sizes="(min-width: 640px) 33vw, 100vw" className="object-cover" />
+                        <span className="absolute left-2.5 top-2.5 rounded-full bg-white/90 px-2.5 py-0.5 text-[11px] font-bold text-ink">{t("search.comingSoon")}</span>
+                        <span className="absolute bottom-1.5 right-2 text-[9.5px] text-white/75">Illustrative</span>
+                      </div>
+                    ) : null}
+                    <div className="p-3">
+                      <p className="text-sm font-bold leading-snug text-ink">{r.title}</p>
+                      {r.teaser ? <p className="mt-0.5 text-xs text-slate-500">{r.teaser}</p> : null}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-5 flex flex-wrap items-center gap-3 rounded-2xl bg-slate-50 p-4">
+                <p className="min-w-0 flex-1 text-sm text-slate-700">{t("search.leaveNoteBody")}</p>
+                <Link
+                  href="/questions"
+                  onClick={() =>
+                    trackCtaClick({
+                      placement: "route_search_unsupported_note",
+                      href: "/questions",
+                      label: `${routeMatch.from}→${routeMatch.to}`,
+                      category: "support",
+                      locale,
+                    })
+                  }
+                  className="inline-flex h-10 items-center gap-1.5 rounded-full bg-ink px-4 text-sm font-bold text-white"
+                >
+                  {t("search.leaveNote")} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+          </section>
+        ) : hasChecked ? (
           // Mobile reads answer, booking, timing, seat map; from lg the four
           // pair up as answer | booking over timing | seat map.
           <section ref={answerRef} className="grid scroll-mt-16 grid-cols-1 gap-5 pb-4 pt-8 lg:grid-cols-2">
@@ -478,7 +537,14 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
               <FujiViewMap direction={direction} />
             </div>
             <div className="min-w-0 rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.05)] md:p-6 [&>div:first-child]:mt-0 [&>div:first-child]:border-t-0 [&>div:first-child]:pt-0">
-              <FujiTiming key={direction} direction={direction} locale={locale} pagePath="/" reminder />
+              <FujiTiming
+                key={`${direction}-${tokaidoFrom}`}
+                direction={direction}
+                locale={locale}
+                pagePath="/"
+                reminder
+                initialOrigin={tokaidoFrom.toLowerCase().replace(/ /g, "-")}
+              />
             </div>
             <div className="min-w-0">
               <SeatMapCard

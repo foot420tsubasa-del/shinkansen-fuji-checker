@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ルート検索ピボット 実装計画</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#0f1420;--panel:#161d2c;--line:#27314a;--ink:#e8ecf4;--dim:#9aa6bd;--accent:#f2c23e;--good:#4fbf8b;--bad:#e2685f;--red:#d94a32;--blue:#2f6fd6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;line-height:1.8}
+  .wrap{max-width:960px;margin:0 auto;padding:30px 16px 70px}
+  h1{font-size:22px;margin:0 0 4px}.sub{color:var(--dim);font-size:13px;margin-bottom:20px}
+  h2{font-size:18px;margin:38px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:10px 0}
+  .key{border-left:4px solid var(--accent)} .ok{border-left:4px solid var(--good)} .warn{border-left:4px solid var(--bad)}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:7px 9px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--dim);font-size:12px;font-weight:600}
+  .scroll{overflow-x:auto}
+  code{background:#0b1220;border:1px solid var(--line);border-radius:5px;padding:0 5px;font-size:12px}
+  .dim{color:var(--dim)}
+  svg{display:block;max-width:100%;height:auto}
+  .q{background:#1c2436;border:1px solid #33406a;border-radius:12px;padding:12px 16px;margin:10px 0}.q b{color:var(--accent)}
+  /* mock */
+  .mock{border-radius:16px;overflow:hidden;border:1px solid var(--line);font-family:Inter,sans-serif;color:#0b1220}
+  .mh{position:relative;min-height:420px;background:#0b1220 url(../../public/images/hero/window-fuji-winter-wide.png) center 45%/cover;display:flex;flex-direction:column;justify-content:space-between}
+  .mh::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,18,32,.7),rgba(11,18,32,.1) 45%,rgba(11,18,32,.45))}
+  .mt{position:relative;text-align:center;color:#fff;padding:30px 16px 0}
+  .mt .e{font-size:11px;letter-spacing:.32em;font-weight:600}
+  .mt h3{font-family:Fraunces,Georgia,serif;font-size:38px;font-weight:600;margin:10px 0 6px}
+  .mt p{margin:0;font-size:14px;opacity:.92}
+  .mb{position:relative;margin:0 14px 14px;background:rgba(255,255,255,.96);border-radius:20px;padding:14px;display:grid;gap:10px}
+  @media(min-width:760px){.mb .row{display:grid;grid-template-columns:1fr 1fr 1.3fr auto;gap:10px;align-items:end}}
+  .f label{display:block;font-size:12px;font-weight:700;color:#5b6577;margin-bottom:4px}
+  .f div{border:1.5px solid #d5dae3;border-radius:99px;padding:10px 14px;font-size:14px;color:#0b1220;background:#fff}
+  .btn{background:#d94a32;color:#fff;border-radius:99px;padding:11px 18px;font-weight:700;font-size:14px;text-align:center;white-space:nowrap}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+  .chip{border:1.5px solid #d5dae3;border-radius:99px;padding:5px 11px;font-size:12.5px;font-weight:600;background:#fff}
+  .chip.on{background:#0b1220;color:#fff;border-color:#0b1220}
+  .ill{position:absolute;right:10px;bottom:4px;color:rgba(255,255,255,.7);font-size:10px}
+  /* timeline mock */
+  .tl{background:#fff;color:#0b1220;border-radius:16px;padding:16px;font-family:Inter,sans-serif}
+  .tli{display:grid;grid-template-columns:62px 1fr auto;gap:10px;align-items:start;padding:10px 0;border-bottom:1px solid #eef0f3}
+  .tli:last-child{border-bottom:0}
+  .tm{font-weight:800;font-variant-numeric:tabular-nums}
+  .sd{font-size:11px;font-weight:800;border-radius:99px;padding:2px 9px;color:#fff;white-space:nowrap}
+  .R{background:#d94a32}.L{background:#2f6fd6}
+  .tli small{display:block;color:#5b6577;font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>ルート検索ピボット　実装計画（作業前の確認用）</h1>
+<div class="sub">2026-11-15 ／ ご指示の仕様（1〜4）と「検索欄」案を統合 ／ まだ作業していません</div>
+
+<div class="card key">
+<b>一言でいうと：</b>トップを「From／To を入れると、その区間の車窓が時系列で出る」検索窓に変えます。東海道は今の座席チェッカーの結果（Seat E・見える時刻・天気・予約導線）をそのまま答えに使い、北陸は北陸ページと同じ地図＋タイムライン、未対応ルートは Coming soon と「Leave a note」を出します。<br>
+<b>前回の私の案との違い：</b>自由入力の検索ではなく、ご指示どおり <b>駅名サジェスト付きの From／To ＋ 景色チップ</b> にします（推測の答えを出さないため、こちらが正しいと思います）。
+</div>
+
+<h2>① 完成イメージ：トップの1画面目</h2>
+<div class="mock">
+  <div class="mh">
+    <div class="mt"><div class="e">— EXPLORE JAPAN BY TRAIN —</div><h3>See Japan from the right seat</h3><p>Enter your route. We'll show what you'll see from the window — which side, and when.</p></div>
+    <div class="mb">
+      <div class="row">
+        <div class="f"><label>From</label><div>📍 Tokyo</div></div>
+        <div class="f"><label>To</label><div>📍 Kyoto</div></div>
+        <div class="f"><label>What would you like to see?</label><div>🔎 e.g. Mt. Fuji, Alps…</div></div>
+        <div class="btn">Show my window →</div>
+      </div>
+      <div class="chips"><span class="chip on">🗻 Mt. Fuji</span><span class="chip">🏔️ Mountains</span><span class="chip">🌊 Sea view</span><span class="chip">🌾 Countryside</span><span class="chip">🌆 City</span></div>
+      <div style="font-size:12px;color:#5b6577;text-align:center">Popular: <b>Tokyo → Kyoto</b> · <b>Kyoto → Tokyo</b> · <b>Tokyo → Kanazawa</b></div>
+    </div>
+    <span class="ill">Illustrative image</span>
+  </div>
+</div>
+<ul style="font-size:13.5px;margin-top:8px">
+<li>デザインはモック（車窓越しの富士山・EXPLORE JAPAN BY TRAIN・From／To／What would you like to see?・チップ・ボタン）に寄せ、<b>ブランドは fujiseat、画像は既存の季節ヒーロー</b>（Illustrative 表記を維持）。透かし入りのモック画像は使いません。</li>
+<li><b>From＝Tokyo、To＝Kyoto を最初から入れておき</b>、「Popular」のワンタップでも答えが出るようにします（今の「方向ボタン1回で答え」より手間を増やさないため＝予約クリックを減らさない）。</li>
+<li>ボタン名はモックの「Plan My Trip」ではなく、旅行プランナーに見えない「Show my window」にします（汎用プランナーにしない方針のため）。</li>
+</ul>
+
+<h2>② 入力から答えまでの流れ</h2>
+<div class="card">
+<svg viewBox="0 0 900 250" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Hiragino Sans,sans-serif" font-size="12">
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0L8,4L0,8z" fill="#9aa6bd"/></marker></defs>
+  <rect x="0" y="85" width="150" height="80" rx="12" fill="#1c2436" stroke="#f2c23e"/><text x="75" y="115" fill="#f2c23e" font-weight="700" text-anchor="middle">From／To 入力</text><text x="75" y="137" fill="#e8ecf4" text-anchor="middle">駅名サジェスト</text><text x="75" y="155" fill="#9aa6bd" text-anchor="middle">＋景色チップ</text>
+  <line x1="152" y1="125" x2="190" y2="125" stroke="#9aa6bd" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="194" y="85" width="170" height="80" rx="12" fill="#1c2436" stroke="#5b8def"/><text x="279" y="115" fill="#9dbaff" font-weight="700" text-anchor="middle">ルート判定</text><text x="279" y="137" fill="#e8ecf4" text-anchor="middle">両駅が同じ路線上か</text><text x="279" y="155" fill="#9aa6bd" text-anchor="middle">→ 方向・区間を決める</text>
+  <line x1="366" y1="105" x2="420" y2="40" stroke="#9aa6bd" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="366" y1="125" x2="420" y2="125" stroke="#9aa6bd" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="366" y1="145" x2="420" y2="210" stroke="#9aa6bd" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="424" y="10" width="470" height="62" rx="12" fill="#1c2436" stroke="#d94a32"/><text x="440" y="35" fill="#ff9a85" font-weight="700">A. 東海道（Tokyo⇄Kyoto/Osaka など）</text><text x="440" y="56" fill="#e8ecf4">既存チェッカーの結果をそのまま：Seat E・見える時刻（天気連動）・座席マップ・予約・通知</text>
+  <rect x="424" y="94" width="470" height="62" rx="12" fill="#1c2436" stroke="#2f6fd6"/><text x="440" y="119" fill="#8fb0ff" font-weight="700">B. 北陸（Tokyo⇄Kanazawa、途中駅も）</text><text x="440" y="140" fill="#e8ecf4">時系列タイムライン＋北陸ページと同じ色分け地図（連動）＋JR Pass</text>
+  <rect x="424" y="178" width="470" height="62" rx="12" fill="#1c2436" stroke="#9aa6bd"/><text x="440" y="203" fill="#e8ecf4" font-weight="700">C. 未対応ルート（エラーにしない）</text><text x="440" y="224" fill="#9aa6bd">経路に近い Coming soon カード（江ノ電・富士急など）＋「Leave a note」</text>
+</svg>
+<p class="dim" style="font-size:12.5px;margin:4px 0 0">答えはページを移動せずトップの中に出し、URLを <code>/?from=tokyo&amp;to=kanazawa</code> にして共有できるようにします（検索エンジン向けの正規URLはトップのまま）。</p>
+</div>
+
+<h2>③ 結果のタイムライン（北陸の例・東京→金沢）</h2>
+<div class="tl">
+  <div class="tli"><span class="tm">+0:58</span><div><b>Mt. Asama</b><small>Karuizawa → Sakudaira · 23 km of line · Big (a fist high) · about 15 km away</small></div><span class="sd R">RIGHT</span></div>
+  <div class="tli"><span class="tm">+1:22</span><div><b>Mt. Myoko</b><small>Iiyama → Joetsu-Myoko · 9 km · Clear (three fingers) </small></div><span class="sd L">LEFT</span></div>
+  <div class="tli"><span class="tm">+1:58</span><div><b>The Northern Alps</b><small>Kurobe-Unazukionsen → Shin-Takaoka · 75 km · Clear · Nov–May snow</small></div><span class="sd L">LEFT</span></div>
+  <p style="font-size:11.5px;color:#7a8394;margin:8px 0 0">↑ 時刻はイメージ（数値はまだ未算出）。タップすると地図の該当区間が光ります。座席記号は北陸では出しません（未検証のため）。</p>
+</div>
+
+<h2>④ 実装の順番（5段階・各段階で公開して確認）</h2>
+<div class="scroll">
+<table>
+<tr><th>段階</th><th>やること</th><th>壊さないもの／完了条件</th></tr>
+<tr><td><b>1. 共通スキーマ</b></td><td>北陸ページの表示項目をデータの型に切り出す：路線名／区間（From–To駅）／方向／景色名／見える側／区間km／見かけの大きさ／ベストシーズン／トンネル区間／座席記号（検証済みのみ）／出典と計算方法。<code>lib/scenic.ts</code> に型と読み込み関数、データは <code>data/scenic-routes.json</code>。北陸ページをこの型だけで描くように置き換え</td><td>/scenic/hokuriku-shinkansen の見た目・内容が今と同じ</td></tr>
+<tr><td><b>2. 東海道もテンプレートに</b></td><td>東海道（富士山）を同じスキーマで登録。地形モデルを東海道にも走らせて「区間km・距離・見かけの大きさ・地図」を作る。時刻と側・Seat E は既存モデル（検証済み）を正とする。<code>/scenic/tokaido-shinkansen</code> を北陸と同じテンプレートで新設し、サイトマップに追加</td><td>既存の富士山の時刻（東京+40〜48分など）と矛盾しない。/guide は触らない</td></tr>
+<tr><td><b>3. 検索窓ヒーロー</b></td><td>「I want to see」の場所を From／To（駅名サジェスト）＋景色チップ＋ボタンに。初期値 Tokyo→Kyoto、Popular ワンタップ。9言語</td><td>id="seat-checker" の入口、h1は1つ、ヘッダーの Check Seat、季節画像と Illustrative 表記</td></tr>
+<tr><td><b>4. ルート判定と結果</b></td><td>A：東海道 → 既存の答え一式（Seat E・FujiTiming＋カレンダー・地図・予約カード）を再利用。出発駅は From に連動。<br>B：北陸 → タイムライン＋地図（連動）＋JR Pass。<br>C：未対応 → 近い Coming soon ＋ Leave a note（/questions）</td><td>予約リンク（1443754 / 1265303 / 1165791）、placement 名（home_seat_result 等）、PR表記</td></tr>
+<tr><td><b>5. 確認と報告</b></td><td>テスト追加（ルート判定・未検証路線に座席記号が出ない・PR表記がある）、本番で対応／未対応ルートの両方を確認、変更ファイル一覧と結果を報告</td><td>チェッカー・北陸ページ・各ガイドが従来どおり開く</td></tr>
+</table>
+</div>
+
+<h2>⑤ ルート判定のルール</h2>
+<div class="scroll">
+<table>
+<tr><th>入力</th><th>判定</th><th>出すもの</th></tr>
+<tr><td>Tokyo / Shinagawa / Shin-Yokohama → Nagoya / Kyoto / Shin-Osaka（西行き）</td><td>東海道・右側</td><td>既存チェッカーの答え（出発駅は From のまま）</td></tr>
+<tr><td>Nagoya / Kyoto / Shin-Osaka → Tokyo など（東行き）</td><td>東海道・左側</td><td>同上</td></tr>
+<tr><td>Tokyo / Ueno / Omiya / Takasaki … → Nagano / Toyama / Kanazawa（と逆）</td><td>北陸</td><td>その区間に入る景色だけ（例：Tokyo→Nagano は浅間山のみ）</td></tr>
+<tr><td>Tokyo → Kamakura、Shinjuku → Hakone など</td><td>未対応</td><td>Coming soon（江ノ電・箱根登山…）＋ Leave a note</td></tr>
+<tr><td>同じ駅、未知の駅</td><td>—</td><td>サジェストから選ぶよう案内（エラー表示はしない）</td></tr>
+</table>
+</div>
+<p class="dim" style="font-size:12.5px">駅名は英語表記＋読み（Kyoto／京都）で引けるようにし、駅データはルートデータから自動で作ります（手書きの駅一覧を別に持たない）。</p>
+
+<h2>⑥ 守るルール（ご指示のとおり）</h2>
+<div class="card ok">
+<ul style="margin:0">
+<li>座席記号は検証済み（東海道の Seat E／グリーン車 D）以外では出さない。北陸は「側」だけ</li>
+<li>区間・左右は地形モデル（地理院標高＋OSM線形）か公開出典がある場合のみ。ページ内に算出方法と出典を明記。推測で作らない</li>
+<li>ストリートビューの画像取得・転載はしない／生成画像には Illustrative image</li>
+<li>アフィリエイトのPR表記は削除しない（テストで固定）</li>
+<li>既存URL・サイトマップ・9言語表示は壊さない。/guide は今回触らない</li>
+</ul>
+</div>
+
+<h2>⑦ 1点だけ決めていただきたいこと</h2>
+<div class="card warn">
+<b>北陸の「時刻目安」と「見える分数」の出し方</b><br>
+東海道は検証済みの時刻モデルがありますが、北陸にはまだ時刻のデータがありません。推測で分数を作らないために、次のどちらかにします。
+<ol style="margin:6px 0 0">
+<li><b>おすすめ：</b>JRの公開時刻表から「かがやき／はくたか」の駅の時刻を取り、駅と駅の間は距離に比例して割り振る（計算方法と時刻表を出典として明記）。区間の分数も同じ方法で出す</li>
+<li>時刻を出さず、「軽井沢→佐久平の間」のように駅の区間だけで並べる（時刻は後で追加）</li>
+</ol>
+</div>
+
+<div class="q"><b>進め方：</b>この計画でよければ、段階1から順に作って、段階ごとに本番で確認しながら進めます。⑦は 1（時刻表から算出）で進める想定です。</div>
+</div>
+</body>
+</html>

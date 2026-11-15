@@ -754,13 +754,72 @@ test("scenic routes: no unverified route claims a side, and every image is on di
   }
 });
 
-test("scenic routes: a live route beyond Fuji carries its viewshed, its views and how they were checked", () => {
+test("scenic routes: every live route carries its viewshed, views, page copy and how they were checked", () => {
   const { routes } = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
-  for (const route of routes.filter((r) => r.status === "live" && r.id !== "tokaido-fuji")) {
+  for (const route of routes.filter((r) => r.status === "live")) {
     assert.ok(route.slug && route.href === `/scenic/${route.slug}`, `${route.id} needs a page`);
     assert.ok(existsSync(route.viewshed), `${route.id}: viewshed file missing`);
-    assert.ok(route.views?.length, `${route.id}: no views listed`);
-    for (const view of route.views) assert.ok(["left", "right"].includes(view.sideToKanazawa), `${route.id}/${view.id}: side must be left or right`);
-    assert.ok(/published|footage/i.test(route.verification ?? ""), `${route.id}: say how the sides were checked`);
+    assert.ok(route.views?.length && route.page?.h1, `${route.id}: views and page copy`);
+    for (const view of route.views) {
+      assert.ok(["left", "right"].includes(view.side.forward), `${route.id}/${view.id}: side must be left or right`);
+      assert.ok(view.basis, `${route.id}/${view.id}: say what the section rests on`);
+    }
+    assert.ok(/published|verified|model/i.test(route.verification ?? ""), `${route.id}: say how the sides were checked`);
   }
+});
+
+test("scenic routes: seat letters only where verified (Tokaido), never on Hokuriku", () => {
+  const { routes } = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
+  const hokuriku = routes.find((r) => r.id === "hokuriku-alps");
+  assert.ok(hokuriku.views.every((v) => v.seat === null), "Hokuriku seat letters are not verified");
+  const tokaido = routes.find((r) => r.id === "tokaido-fuji");
+  assert.ok(tokaido.views.find((v) => v.main).seat.startsWith("E"), "Tokaido Seat E is verified");
+  assert.ok(tokaido.views.filter((v) => !v.main).every((v) => v.seat === null), "model-only glimpses carry no seat");
+});
+
+/* ── Route search and timeline (lib/scenic.ts) ──────────────────────────── */
+
+const { createJiti } = await import("jiti");
+const jiti = createJiti(process.cwd() + "/", { alias: { "@": process.cwd() } });
+const scenic = await jiti.import("./lib/scenic.ts");
+const hokurikuPoints = JSON.parse(readFileSync("data/routes/hokuriku-alps-viewshed.json", "utf8")).points;
+
+test("route search: Tokaido and Hokuriku both ways, anything else is coming soon", () => {
+  const tk = scenic.matchRoute("Tokyo", "Kyoto");
+  assert.equal(tk.kind, "live");
+  assert.equal(tk.route.id, "tokaido-fuji");
+  assert.equal(tk.direction, "forward");
+  assert.equal(scenic.matchRoute("Shin-Osaka", "Tokyo").direction, "backward");
+  const hk = scenic.matchRoute("Kanazawa", "Tokyo");
+  assert.equal(hk.route.id, "hokuriku-alps");
+  assert.equal(hk.direction, "backward");
+  const none = scenic.matchRoute("Tokyo", "Kamakura");
+  assert.equal(none.kind, "unsupported");
+  assert.ok(none.comingSoon.some((r) => r.id === "enoden-coast"), "Kamakura points at the Enoden");
+});
+
+test("timeline: Tokyo → Kanazawa runs Asama (right), Myoko (left), Alps (left), in order, from the JR timetable", () => {
+  const m = scenic.matchRoute("Tokyo", "Kanazawa");
+  const { items, train } = scenic.timeline(m.route, m.direction, "Tokyo", "Kanazawa", hokurikuPoints, "hakutaka");
+  assert.equal(train[m.direction].train, "Hakutaka 553");
+  assert.deepEqual(items.map((i) => [i.view.id, i.side]), [["asama", "right"], ["myoko", "left"], ["alps", "left"]]);
+  // Asama comes into view around Karuizawa, which Hakutaka 553 reaches 66 minutes after Tokyo.
+  assert.ok(items[0].start >= 60 && items[0].start <= 70, `Asama at +${items[0].start} min`);
+  assert.ok(items.every((i, k) => k === 0 || i.start > items[k - 1].start), "in time order");
+  // The other way round, the sides swap.
+  const back = scenic.timeline(m.route, "backward", "Kanazawa", "Tokyo", hokurikuPoints, "hakutaka");
+  assert.deepEqual(back.items.map((i) => i.side), ["right", "right", "left"]);
+});
+
+test("timeline: a journey that stops short only shows the views on it", () => {
+  const m = scenic.matchRoute("Tokyo", "Nagano");
+  const { items } = scenic.timeline(m.route, m.direction, "Tokyo", "Nagano", hokurikuPoints, "hakutaka");
+  assert.deepEqual(items.map((i) => i.view.id), ["asama"]);
+});
+
+test("disclosure: every booking card keeps its commission line", () => {
+  for (const file of ["components/scenic/ScenicPassCard.tsx", "components/blog/BlogBookingCard.tsx"]) {
+    assert.match(readFileSync(file, "utf8"), /commission/i, `${file} lost its disclosure`);
+  }
+  assert.match(readFileSync("app/[locale]/HomeClient.tsx", "utf8"), /hero\.affiliateNote/, "homepage booking card disclosure");
 });

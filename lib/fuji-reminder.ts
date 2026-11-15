@@ -97,3 +97,46 @@ export function googleCalendarUrl(r: FujiReminder): string {
   });
   return `https://calendar.google.com/calendar/render?${params.toString()}`;
 }
+
+/**
+ * Several views on one journey, one calendar file: an event per view, each
+ * with its own alarm. Used by the route timeline; same rules as above.
+ */
+export type ViewEvent = FujiReminder & { alarmMinutes: number };
+
+export function buildIcsEvents(events: ViewEvent[], now: Date = new Date()): string {
+  const stamp = now.toISOString().replace(/[-:]/g, "").slice(0, 15) + "Z";
+  const body = events.flatMap((e) => {
+    const { start, end } = reminderSpan(e);
+    return [
+      "BEGIN:VEVENT",
+      `UID:view-${start}-${icsText(e.title).replace(/[^a-z0-9]/gi, "").slice(0, 24)}@fujiseat.com`,
+      `DTSTAMP:${stamp}`,
+      `DTSTART:${start}`,
+      `DTEND:${end}`,
+      `SUMMARY:${icsText(e.title)}`,
+      `DESCRIPTION:${icsText(`${e.details}\n${e.url}`)}`,
+      `URL:${e.url}`,
+      "BEGIN:VALARM",
+      `TRIGGER:-PT${e.alarmMinutes}M`,
+      "ACTION:DISPLAY",
+      `DESCRIPTION:${icsText(e.title)}`,
+      "END:VALARM",
+      "END:VEVENT",
+    ];
+  });
+  return [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//fujiseat.com//Window views//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    ...body,
+    "END:VCALENDAR",
+    "",
+  ].join("\r\n");
+}
+
+export function icsEventsDataUri(events: ViewEvent[]): string {
+  return `data:text/calendar;charset=utf-8,${encodeURIComponent(buildIcsEvents(events))}`;
+}
