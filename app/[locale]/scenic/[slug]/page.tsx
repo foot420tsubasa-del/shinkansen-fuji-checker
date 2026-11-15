@@ -101,7 +101,7 @@ export default async function ScenicRoutePage({ params }: Props) {
                   {a} → {b}
                 </p>
                 <ul className="mt-3 grid gap-3">
-                  {views.map((v) => {
+                  {(dir === "forward" ? views : [...views].reverse()).map((v) => {
                     const side = dir === "forward" ? v.side.forward : flipSide(v.side.forward);
                     return (
                       <li key={v.id} className="flex gap-3 text-[15px] leading-6">

@@ -98,9 +98,9 @@ export const sideFor = (view: ScenicView, direction: Direction): Side =>
 
 /** Places outside the live routes, so a search for them lands on "coming soon", not on nothing. */
 const OTHER_PLACES = [
-  "Shinjuku", "Shibuya", "Ikebukuro", "Yokohama", "Kamakura", "Fujisawa", "Enoshima", "Hakone", "Hakone-Yumoto", "Gora",
-  "Kawaguchiko", "Otsuki", "Nikko", "Sendai", "Morioka", "Niigata", "Echigo-Yuzawa",
-  "Nara", "Arashiyama", "Kameoka", "Takayama", "Matsumoto", "Odaiba", "Toyosu",
+  "Shinjuku", "Shibuya", "Ikebukuro", "Yokohama", "Enoshima",
+  "Nikko", "Sendai", "Morioka", "Niigata", "Echigo-Yuzawa",
+  "Nara", "Takayama", "Matsumoto", "Odaiba", "Toyosu",
   "Sapporo", "Hakodate", "Aomori", "Akita", "Furano", "Biei", "Abashiri", "Unazuki", "Fukui", "Tsuruga",
 ];
 
@@ -117,6 +117,17 @@ const ALIASES: Record<string, string> = {
   kobe: "Shin-Kobe",
   "shin kobe": "Shin-Kobe",
   fukuoka: "Hakata",
+  hakone: "Hakone-Yumoto",
+  yumoto: "Hakone-Yumoto",
+  chokokunomori: "Chokoku-no-Mori",
+  "chokoku no mori": "Chokoku-no-Mori",
+  "hakone open air museum": "Chokoku-no-Mori",
+  arashiyama: "Torokko Saga",
+  "saga arashiyama": "Torokko Saga",
+  sagano: "Torokko Saga",
+  kameoka: "Torokko Kameoka",
+  "kameoka torokko": "Torokko Kameoka",
+  hozukyo: "Torokko Hozukyo",
 };
 
 export type StationOption = { name: string; ja?: string; routes: string[] };
@@ -286,7 +297,8 @@ function reversalsBetween(route: ScenicRoute, fromKm: number, toKm: number): str
 export function reversalsBefore(route: ScenicRoute, view: ScenicView, direction: Direction, from: string): string[] {
   const fromKm = route.timelineStations?.find((s) => s.name === from)?.km ?? 0;
   const offset = route.trackKmOffset ?? 0;
-  const viewKm = direction === "forward" ? view.kmFrom + offset : view.kmTo + offset;
+  // Where the view starts for this rider: not before the station they board at.
+  const viewKm = direction === "forward" ? Math.max(view.kmFrom + offset, fromKm) : Math.min(view.kmTo + offset, fromKm);
   return reversalsBetween(route, fromKm, viewKm);
 }
 

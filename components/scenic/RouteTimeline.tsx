@@ -28,6 +28,8 @@ const VIEWSHED_LOADERS: Record<string, () => Promise<{ points: MapPoint[] }>> = 
   "tokaido-fuji": () => import("@/data/routes/tokaido-fuji-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
   "enoden-coast": () => import("@/data/routes/enoden-coast-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
   "fujikyu-fuji": () => import("@/data/routes/fujikyu-fuji-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
+  "hakone-tozan": () => import("@/data/routes/hakone-tozan-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
+  "sagano-gorge": () => import("@/data/routes/sagano-gorge-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
 };
 
 function tokyoDate(): string {

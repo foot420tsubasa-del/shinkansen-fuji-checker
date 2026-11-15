@@ -1995,33 +1995,31 @@
     },
     {
       "id": "hakone-tozan",
-      "status": "candidate",
+      "status": "live",
       "tier": 1,
       "view": [
         "mountain",
         "seasonal-flowers"
       ],
-      "title": "Switchbacks and hydrangeas on the Hakone Tozan Railway",
+      "title": "The Hayakawa valley and three switchbacks on the Hakone Tozan Railway",
       "line": "Hakone Tozan Railway",
       "operator": "Odakyu Hakone",
       "between": [
         "Hakone-Yumoto",
         "Gora"
       ],
-      "side": null,
-      "seat": null,
-      "section": null,
-      "season": null,
+      "section": "Deyama – Ohiradai and Kami-Ohiradai – Gora",
+      "season": "All year; hydrangeas June–July, autumn leaves in November",
       "ticket": null,
       "osm": {
-        "name": "箱根登山鉄道鉄道線",
+        "name": "小田急箱根鉄道線|箱根登山鉄道鉄道線|箱根登山線",
         "bbox": [
-          35.22,
-          139.04,
-          35.27,
-          139.11
+          35.228,
+          139.035,
+          35.255,
+          139.106
         ],
-        "nameToConfirm": true
+        "chain": true
       },
       "image": {
         "src": "/images/scenic/scenic-hakone-tozan-tall.png",
@@ -2030,21 +2028,333 @@
         "alt": "Hydrangeas in bloom beside the track through the window of a red mountain train",
         "illustrative": true
       },
-      "teaser": "Hakone · June hydrangeas",
+      "teaser": "Hakone · the valley side, through three switchbacks",
       "near": [
         "Hakone",
         "Hakone-Yumoto",
         "Gora",
-        "Odawara"
+        "Odawara",
+        "Miyanoshita",
+        "Ohiradai"
       ],
       "tags": [
         "mountain",
         "countryside"
-      ]
+      ],
+      "stations": [
+        {
+          "name": "Hakone-Yumoto",
+          "ja": "箱根湯本",
+          "lat": 35.2334,
+          "lng": 139.1037
+        },
+        {
+          "name": "Tonosawa",
+          "ja": "塔ノ沢",
+          "lat": 35.2345,
+          "lng": 139.0941
+        },
+        {
+          "name": "Deyama Switchback",
+          "ja": "出山信号場",
+          "lat": 35.2324,
+          "lng": 139.0874
+        },
+        {
+          "name": "Ohiradai",
+          "ja": "大平台",
+          "lat": 35.2387,
+          "lng": 139.074
+        },
+        {
+          "name": "Kami-Ohiradai Switchback",
+          "ja": "上大平台信号場",
+          "lat": 35.2351,
+          "lng": 139.0755
+        },
+        {
+          "name": "Miyanoshita",
+          "ja": "宮ノ下",
+          "lat": 35.2421,
+          "lng": 139.0629
+        },
+        {
+          "name": "Kowakidani",
+          "ja": "小涌谷",
+          "lat": 35.2405,
+          "lng": 139.0528
+        },
+        {
+          "name": "Chokoku-no-Mori",
+          "ja": "彫刻の森",
+          "lat": 35.2466,
+          "lng": 139.0508
+        },
+        {
+          "name": "Gora",
+          "ja": "強羅",
+          "lat": 35.2508,
+          "lng": 139.0483
+        }
+      ],
+      "targets": [
+        {
+          "id": "valley",
+          "name": "The Hayakawa valley",
+          "type": "valley",
+          "lat": 0,
+          "lng": 0,
+          "elevation": 0,
+          "reach": 400,
+          "minDrop": 40
+        }
+      ],
+      "demZoom": 14,
+      "observerHeight": 3,
+      "minSectionKm": 0.3,
+      "bridgeKm": 0.25,
+      "evidence": "Hakone day trips from Tokyo; the line is a sight in itself.",
+      "geometry": "data/routes/hakone-tozan.json",
+      "slug": "hakone-tozan",
+      "href": "/scenic/hakone-tozan",
+      "viewshed": "data/routes/hakone-tozan-viewshed.json",
+      "trackKmOffset": 0,
+      "directions": {
+        "forward": [
+          "Hakone-Yumoto",
+          "Gora"
+        ],
+        "backward": [
+          "Gora",
+          "Hakone-Yumoto"
+        ]
+      },
+      "chip": {
+        "emoji": "⛰️",
+        "label": "Valley view"
+      },
+      "reversals": [
+        "Deyama Switchback",
+        "Ohiradai",
+        "Kami-Ohiradai Switchback"
+      ],
+      "timelineStations": [
+        {
+          "name": "Hakone-Yumoto",
+          "ja": "箱根湯本",
+          "km": 0
+        },
+        {
+          "name": "Tonosawa",
+          "ja": "塔ノ沢",
+          "km": 1.01
+        },
+        {
+          "name": "Deyama Switchback",
+          "ja": "出山信号場",
+          "km": 2.21,
+          "signal": true
+        },
+        {
+          "name": "Ohiradai",
+          "ja": "大平台",
+          "km": 3.86
+        },
+        {
+          "name": "Kami-Ohiradai Switchback",
+          "ja": "上大平台信号場",
+          "km": 4.34,
+          "signal": true
+        },
+        {
+          "name": "Miyanoshita",
+          "ja": "宮ノ下",
+          "km": 6
+        },
+        {
+          "name": "Kowakidani",
+          "ja": "小涌谷",
+          "km": 7.34
+        },
+        {
+          "name": "Chokoku-no-Mori",
+          "ja": "彫刻の森",
+          "km": 8.23
+        },
+        {
+          "name": "Gora",
+          "ja": "強羅",
+          "km": 8.98
+        }
+      ],
+      "timing": {
+        "kind": "timetable",
+        "source": "Station timetables of the Hakone Tozan Railway on hakonenavi.jp (the operator group’s official site), weekdays, read November 2026: the 13:12 from Hakone-Yumoto and the 13:08 from Gora, followed station by station. Gora arrival taken as 2 minutes after Chokoku-no-Mori and Hakone-Yumoto arrival as 4 minutes after Tonosawa (the published runs the other way). Between stops, spread by distance along the track.",
+        "sourceUrl": "https://www.hakonenavi.jp/transportation/station/",
+        "trains": [
+          {
+            "id": "tozan",
+            "label": "Hakone Tozan",
+            "note": "every station, about every 15 minutes",
+            "forward": {
+              "train": "Hakone Tozan 13:12 from Hakone-Yumoto",
+              "stops": [
+                [
+                  "Hakone-Yumoto",
+                  null,
+                  "13:12"
+                ],
+                [
+                  "Tonosawa",
+                  "13:16",
+                  "13:16"
+                ],
+                [
+                  "Ohiradai",
+                  "13:28",
+                  "13:28"
+                ],
+                [
+                  "Miyanoshita",
+                  "13:38",
+                  "13:38"
+                ],
+                [
+                  "Kowakidani",
+                  "13:43",
+                  "13:43"
+                ],
+                [
+                  "Chokoku-no-Mori",
+                  "13:47",
+                  "13:47"
+                ],
+                [
+                  "Gora",
+                  "13:49",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Hakone Tozan 13:08 from Gora",
+              "stops": [
+                [
+                  "Gora",
+                  null,
+                  "13:08"
+                ],
+                [
+                  "Chokoku-no-Mori",
+                  "13:10",
+                  "13:10"
+                ],
+                [
+                  "Kowakidani",
+                  "13:13",
+                  "13:13"
+                ],
+                [
+                  "Miyanoshita",
+                  "13:18",
+                  "13:18"
+                ],
+                [
+                  "Ohiradai",
+                  "13:29",
+                  "13:29"
+                ],
+                [
+                  "Tonosawa",
+                  "13:42",
+                  "13:42"
+                ],
+                [
+                  "Hakone-Yumoto",
+                  "13:46",
+                  null
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "views": [
+        {
+          "id": "valley-ohiradai",
+          "name": "The Hayakawa valley, below Ohiradai",
+          "targets": [
+            "valley"
+          ],
+          "tags": [
+            "mountain",
+            "countryside"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Deyama Switchback",
+          "to": "Ohiradai",
+          "kmFrom": 2.21,
+          "kmTo": 3.86,
+          "sectionKm": 1.7,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "All year; hydrangeas June–July",
+          "seat": null,
+          "basis": "terrain model only: the ground falls away up to about 120 m on that side"
+        },
+        {
+          "id": "valley-miyanoshita",
+          "name": "The Hayakawa valley, Miyanoshita to Gora",
+          "targets": [
+            "valley"
+          ],
+          "tags": [
+            "mountain",
+            "countryside"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Kami-Ohiradai Switchback",
+          "to": "Gora",
+          "kmFrom": 4.34,
+          "kmTo": 8.98,
+          "sectionKm": 4.6,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "All year; autumn leaves in November",
+          "seat": null,
+          "basis": "terrain model only: the ground falls away up to about 150 m on that side"
+        }
+      ],
+      "notes": [
+        "The train reverses three times on the way up — at Deyama, at Ohiradai station and at Kami-Ohiradai — and the driver and conductor change ends each time. Sides on this page are for the direction of travel, so they flip at each reversal; the side of the car does not. Going up from Hakone-Yumoto, the valley side is the left side of the car as you board, nearly all the way. Coming down from Gora, it is also the left as you board.",
+        "Between Tonosawa and Deyama the line crosses the Hayakawa on the Deyama bridge, high above the river: a view from both sides, gone in seconds.",
+        "Woods line much of the track. The model finds where the ground falls away on one side, not where the trees open; the view comes and goes through the leaves. Hydrangeas grow on both sides in June and July."
+      ],
+      "verification": "Side and sections from a terrain model (GSI 10 m elevation, OSM track followed rail by rail through the switchbacks): the valley counts as in view where the ground falls 40 m or more within 400 m on one side and no nearer bank hides it. No published source was found for the side, so it rests on the model alone. No seat letters.",
+      "page": {
+        "title": "Hakone Tozan Railway: Which Side for the Valley, Through Three Switchbacks?",
+        "description": "Hakone-Yumoto to Gora: the train reverses three times, so left and right keep flipping — but the Hayakawa valley stays on the left side of the car as you board. A terrain model, a map and the minutes from the official timetable.",
+        "h1": "Hakone Tozan Railway: which side for the valley?",
+        "labelStations": [
+          "Hakone-Yumoto",
+          "Tonosawa",
+          "Deyama Switchback",
+          "Ohiradai",
+          "Miyanoshita",
+          "Kowakidani",
+          "Gora"
+        ]
+      },
+      "side": null,
+      "seat": null
     },
     {
       "id": "sagano-gorge",
-      "status": "candidate",
+      "status": "live",
       "tier": 1,
       "view": [
         "gorge",
@@ -2060,18 +2370,19 @@
       ],
       "side": null,
       "seat": null,
-      "section": null,
-      "season": null,
+      "section": "Torokko Arashiyama – Torokko Kameoka",
+      "season": "Runs March to late December; autumn leaves mid-November to early December, cherry blossom early April",
       "ticket": null,
       "osm": {
-        "name": "嵯峨野観光線",
+        "name": "嵯峨野観光鉄道|嵯峨野観光線",
         "bbox": [
-          35,
-          135.57,
-          35.03,
-          135.68
+          35.005,
+          135.6,
+          35.032,
+          135.685
         ],
-        "nameToConfirm": true
+        "chain": true,
+        "joinM": 800
       },
       "image": {
         "src": "/images/scenic/scenic-sagano-gorge-tall.png",
@@ -2080,17 +2391,232 @@
         "alt": "Autumn maples above a green river gorge from an open wooden trolley car",
         "illustrative": true
       },
-      "teaser": "Kyoto · autumn leaves",
+      "teaser": "Kyoto · the gorge, left then right",
       "near": [
         "Saga",
         "Arashiyama",
         "Kameoka",
-        "Saga-Arashiyama"
+        "Saga-Arashiyama",
+        "Sagano",
+        "Hozukyo"
       ],
       "tags": [
         "countryside",
         "mountain"
-      ]
+      ],
+      "stations": [
+        {
+          "name": "Torokko Saga",
+          "ja": "トロッコ嵯峨",
+          "lat": 35.0187,
+          "lng": 135.6804
+        },
+        {
+          "name": "Torokko Arashiyama",
+          "ja": "トロッコ嵐山",
+          "lat": 35.017,
+          "lng": 135.6705
+        },
+        {
+          "name": "Torokko Hozukyo",
+          "ja": "トロッコ保津峡",
+          "lat": 35.0259,
+          "lng": 135.646
+        },
+        {
+          "name": "Torokko Kameoka",
+          "ja": "トロッコ亀岡",
+          "lat": 35.0131,
+          "lng": 135.6068
+        }
+      ],
+      "targets": [
+        {
+          "id": "gorge",
+          "name": "The Hozu gorge",
+          "type": "valley",
+          "lat": 0,
+          "lng": 0,
+          "elevation": 0,
+          "reach": 200,
+          "minDrop": 10
+        }
+      ],
+      "demZoom": 14,
+      "observerHeight": 3,
+      "minSectionKm": 0.4,
+      "bridgeKm": 0.3,
+      "evidence": "Kyoto day trip; often sells out in autumn.",
+      "geometry": "data/routes/sagano-gorge.json",
+      "slug": "sagano",
+      "href": "/scenic/sagano",
+      "viewshed": "data/routes/sagano-gorge-viewshed.json",
+      "trackKmOffset": 0,
+      "directions": {
+        "forward": [
+          "Torokko Saga",
+          "Torokko Kameoka"
+        ],
+        "backward": [
+          "Torokko Kameoka",
+          "Torokko Saga"
+        ]
+      },
+      "chip": {
+        "emoji": "🍁",
+        "label": "River gorge"
+      },
+      "timelineStations": [
+        {
+          "name": "Torokko Saga",
+          "ja": "トロッコ嵯峨",
+          "km": 0
+        },
+        {
+          "name": "Torokko Arashiyama",
+          "ja": "トロッコ嵐山",
+          "km": 0.95
+        },
+        {
+          "name": "Torokko Hozukyo",
+          "ja": "トロッコ保津峡",
+          "km": 3.95
+        },
+        {
+          "name": "Torokko Kameoka",
+          "ja": "トロッコ亀岡",
+          "km": 8.77
+        }
+      ],
+      "timing": {
+        "kind": "timetable",
+        "source": "Sagano Scenic Railway 2026 timetable (sagano-kanko.co.jp), read November 2026: Sagano 9 (13:02 from Torokko Saga) and Sagano 10 (13:30 from Torokko Kameoka); trains leave on the hour from Saga and at half past from Kameoka. Between stops, spread by distance along the track.",
+        "sourceUrl": "https://www.sagano-kanko.co.jp/train-info/",
+        "trains": [
+          {
+            "id": "sagano",
+            "label": "Sagano",
+            "note": "hourly, about 25 minutes end to end",
+            "forward": {
+              "train": "Sagano 9, 13:02 from Torokko Saga",
+              "stops": [
+                [
+                  "Torokko Saga",
+                  null,
+                  "13:02"
+                ],
+                [
+                  "Torokko Arashiyama",
+                  "13:05",
+                  "13:05"
+                ],
+                [
+                  "Torokko Hozukyo",
+                  "13:13",
+                  "13:13"
+                ],
+                [
+                  "Torokko Kameoka",
+                  "13:25",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Sagano 10, 13:30 from Torokko Kameoka",
+              "stops": [
+                [
+                  "Torokko Kameoka",
+                  null,
+                  "13:30"
+                ],
+                [
+                  "Torokko Hozukyo",
+                  "13:42",
+                  "13:42"
+                ],
+                [
+                  "Torokko Arashiyama",
+                  "13:53",
+                  "13:53"
+                ],
+                [
+                  "Torokko Saga",
+                  "13:56",
+                  null
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "views": [
+        {
+          "id": "gorge-arashiyama",
+          "name": "The Hozu gorge, Arashiyama to Hozukyo",
+          "targets": [
+            "gorge"
+          ],
+          "tags": [
+            "countryside",
+            "mountain"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Torokko Arashiyama",
+          "to": "Torokko Hozukyo",
+          "kmFrom": 1.1,
+          "kmTo": 3.1,
+          "sectionKm": 2,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "Autumn leaves mid-November to early December; cherry blossom early April",
+          "seat": null,
+          "basis": "terrain model, matching a published description (All About): the river 10–35 m below on that side"
+        },
+        {
+          "id": "gorge-kameoka",
+          "name": "The Hozu gorge, Hozukyo to Kameoka",
+          "targets": [
+            "gorge"
+          ],
+          "tags": [
+            "countryside",
+            "mountain"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Torokko Hozukyo",
+          "to": "Torokko Kameoka",
+          "kmFrom": 3.8,
+          "kmTo": 8.5,
+          "sectionKm": 4.7,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "Autumn leaves mid-November to early December; cherry blossom early April",
+          "seat": null,
+          "basis": "terrain model, matching a published description (All About): the river 10–30 m below on that side"
+        }
+      ],
+      "notes": [
+        "The line crosses the river near Torokko Hozukyo, so the gorge switches sides: on the left from Arashiyama to Hozukyo, then on the right to Kameoka, going from Saga — the longer stretch. Coming back from Kameoka it is the other way round: on the left most of the way, then on the right after Hozukyo.",
+        "Every seat is reserved, on facing wooden benches, so your side depends on the seat you are given. If you can choose, take the right side going to Kameoka (the left coming back) for the longer stretch, and look across for the rest.",
+        "The current trains run until 29 December 2026. New cars start on 1 March 2027, when times and fares may change — we will update this page then."
+      ],
+      "verification": "Side and sections from a terrain model (GSI 10 m elevation, OSM track followed rail by rail): the gorge counts as in view where the ground falls 10 m or more to the river within 200 m on one side and no nearer bank hides it. The order — left first, then right after the crossing near Hozukyo — matches All About’s published account; one other guide gives the halves the other way round. No seat letters.",
+      "page": {
+        "title": "Sagano Romantic Train: Which Side for the Hozu Gorge?",
+        "description": "Torokko Saga to Kameoka: the Hozu river is on the left as far as Hozukyo, then on the right — the longer stretch — all the way to Kameoka. A terrain model, a map and the minutes from the 2026 timetable.",
+        "h1": "Sagano Romantic Train: which side for the gorge?",
+        "labelStations": [
+          "Torokko Saga",
+          "Torokko Arashiyama",
+          "Torokko Hozukyo",
+          "Torokko Kameoka"
+        ]
+      }
     },
     {
       "id": "yurikamome-night",

@@ -876,6 +876,39 @@ test("Reversals: after Mt. Fuji station the view is out of the other side of the
   assert.deepEqual(back.map((i) => [i.view.id, i.side, scenic.seatedSide(i.side, i.reversedAt)]), [["fuji-after", "right", "right"], ["fuji", "right", "left"]]);
 });
 
+test("Hakone Tozan: three switchbacks, and the valley stays on the left of the car as you board, both ways", () => {
+  const pts = JSON.parse(readFileSync("data/routes/hakone-tozan-viewshed.json", "utf8")).points;
+  const route = scenic.LIVE_ROUTES.find((r) => r.id === "hakone-tozan");
+  assert.equal(scenic.matchRoute(scenic.resolveStation("Hakone"), "Gora").route.id, "hakone-tozan");
+  const up = scenic.timeline(route, "forward", "Hakone-Yumoto", "Gora", pts).items;
+  assert.deepEqual(
+    up.map((i) => [i.view.id, i.side, scenic.seatedSide(i.side, i.reversedAt), i.reversedAt.length]),
+    [["valley-ohiradai", "right", "left", 1], ["valley-miyanoshita", "right", "left", 3]],
+  );
+  const down = scenic.timeline(route, "backward", "Gora", "Hakone-Yumoto", pts).items;
+  assert.deepEqual(down.map((i) => scenic.seatedSide(i.side, i.reversedAt)), ["left", "left"]);
+  // Boarding past a switchback: only the reversals still ahead count.
+  const fromMiyanoshita = scenic.timeline(route, "forward", "Miyanoshita", "Gora", pts).items;
+  assert.deepEqual(fromMiyanoshita.map((i) => [i.side, i.reversedAt.length]), [["right", 0]]);
+  // Switchbacks without a platform are not stations you can search for.
+  assert.equal(scenic.resolveStation("Deyama Switchback"), null);
+  assert.equal(scenic.matchRoute("Gora", "Hakone-Yumoto").direction, "backward");
+});
+
+test("Sagano: the gorge on the left to Hozukyo, then on the right to Kameoka, from the 2026 timetable", () => {
+  const pts = JSON.parse(readFileSync("data/routes/sagano-gorge-viewshed.json", "utf8")).points;
+  const m = scenic.matchRoute(scenic.resolveStation("Arashiyama"), scenic.resolveStation("Kameoka"));
+  assert.equal(m.route.id, "sagano-gorge");
+  const { items, train } = scenic.timeline(m.route, m.direction, m.from, m.to, pts);
+  assert.equal(train.forward.stops[0][2], "13:02");
+  assert.deepEqual(items.map((i) => [i.view.id, i.side]), [["gorge-arashiyama", "left"], ["gorge-kameoka", "right"]]);
+  assert.ok(items[1].visibleMinutes > items[0].visibleMinutes, "the right-hand stretch is the longer one");
+  const back = scenic.timeline(m.route, "backward", "Torokko Kameoka", "Torokko Saga", pts).items;
+  assert.deepEqual(back.map((i) => [i.view.id, i.side]), [["gorge-kameoka", "left"], ["gorge-arashiyama", "right"]]);
+  // "Saga" alone is also a city in Kyushu: not taken as the Sagano station.
+  assert.notEqual(scenic.resolveStation("Saga"), "Torokko Saga");
+});
+
 test("viewshed: every live route's minutes stay sane (no view longer than the journey)", () => {
   for (const route of scenic.LIVE_ROUTES.filter((r) => r.timing?.kind === "timetable")) {
     const pts = JSON.parse(readFileSync(route.viewshed, "utf8")).points;
@@ -893,7 +926,7 @@ test("viewshed: every live route's minutes stay sane (no view longer than the jo
 
 test("JR Pass card: only on lines the pass covers (not the Enoden or the Fujikyu Line)", () => {
   const { routes } = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
-  for (const id of ["enoden-coast", "fujikyu-fuji"]) {
+  for (const id of ["enoden-coast", "fujikyu-fuji", "hakone-tozan", "sagano-gorge"]) {
     assert.notEqual(routes.find((r) => r.id === id).ticket?.linkId, "jrPass", `${id} is a private railway`);
   }
   assert.equal(routes.find((r) => r.id === "hokuriku-alps").ticket.linkId, "jrPass");

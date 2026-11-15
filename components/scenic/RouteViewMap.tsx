@@ -153,7 +153,7 @@ export function RouteViewMap({
         </g>
       </svg>
       <figcaption className="px-5 pb-4 pt-2 text-[11.5px] leading-5 text-slate-500">
-        Coloured where a terrain model finds the view — a summit clearing the hills, or open water beside the line: sight lines over elevation data from the Geospatial Information Authority of Japan (国土地理院), with the curve of the earth. Trees, buildings, noise barriers and weather are not modelled. Dashed sections are tunnels. Track © OpenStreetMap contributors.
+        Coloured where a terrain model finds the view — a summit clearing the hills, open water beside the line, or a valley falling away below it: sight lines over elevation data from the Geospatial Information Authority of Japan (国土地理院), with the curve of the earth. Trees, buildings, noise barriers and weather are not modelled. Dashed sections are tunnels. Track © OpenStreetMap contributors.
       </figcaption>
     </figure>
   );
