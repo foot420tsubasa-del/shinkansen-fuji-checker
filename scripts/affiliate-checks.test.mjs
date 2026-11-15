@@ -909,6 +909,23 @@ test("Sagano: the gorge on the left to Hozukyo, then on the right to Kameoka, fr
   assert.notEqual(scenic.resolveStation("Saga"), "Torokko Saga");
 });
 
+test("Yurikamome: the bay on the left from Takeshiba, the Odaiba waterfront on the right, the bridge on both sides", () => {
+  const pts = JSON.parse(readFileSync("data/routes/yurikamome-night-viewshed.json", "utf8")).points;
+  const m = scenic.matchRoute(scenic.resolveStation("Shimbashi"), scenic.resolveStation("Odaiba"));
+  assert.equal(m.route.id, "yurikamome-night");
+  const { items, train } = scenic.timeline(m.route, m.direction, m.from, m.to, pts);
+  assert.equal(train.forward.stops[0][2], "22:32");
+  assert.deepEqual(items.map((i) => [i.view.id, i.side]), [["bay-takeshiba", "left"]]);
+  const all = scenic.timeline(m.route, "forward", "Shimbashi", "Toyosu", pts).items;
+  assert.deepEqual(all.map((i) => [i.view.id, i.side]), [["bay-takeshiba", "left"], ["odaiba-waterfront", "right"], ["harumi-waterfront", "left"]]);
+  // On the Rainbow Bridge the model sees water on both sides: no side is claimed there.
+  const bridge = pts.filter((p) => p.km > 4.6 && p.km < 5.4);
+  assert.ok(bridge.filter((p) => p.see.bay?.side === "both").length / bridge.length > 0.8);
+  // Canals do not count as the bay: nothing between Shimbashi and Shiodome.
+  assert.ok(pts.filter((p) => p.km < 1).every((p) => !p.see.bay));
+  assert.equal(scenic.resolveStation("Toyosu Market"), "Shijo-mae");
+});
+
 test("viewshed: every live route's minutes stay sane (no view longer than the journey)", () => {
   for (const route of scenic.LIVE_ROUTES.filter((r) => r.timing?.kind === "timetable")) {
     const pts = JSON.parse(readFileSync(route.viewshed, "utf8")).points;
@@ -926,7 +943,7 @@ test("viewshed: every live route's minutes stay sane (no view longer than the jo
 
 test("JR Pass card: only on lines the pass covers (not the Enoden or the Fujikyu Line)", () => {
   const { routes } = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
-  for (const id of ["enoden-coast", "fujikyu-fuji", "hakone-tozan", "sagano-gorge"]) {
+  for (const id of ["enoden-coast", "fujikyu-fuji", "hakone-tozan", "sagano-gorge", "yurikamome-night"]) {
     assert.notEqual(routes.find((r) => r.id === id).ticket?.linkId, "jrPass", `${id} is a private railway`);
   }
   assert.equal(routes.find((r) => r.id === "hokuriku-alps").ticket.linkId, "jrPass");

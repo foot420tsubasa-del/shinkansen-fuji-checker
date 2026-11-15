@@ -100,7 +100,7 @@ export const sideFor = (view: ScenicView, direction: Direction): Side =>
 const OTHER_PLACES = [
   "Shinjuku", "Shibuya", "Ikebukuro", "Yokohama", "Enoshima",
   "Nikko", "Sendai", "Morioka", "Niigata", "Echigo-Yuzawa",
-  "Nara", "Takayama", "Matsumoto", "Odaiba", "Toyosu",
+  "Nara", "Takayama", "Matsumoto",
   "Sapporo", "Hakodate", "Aomori", "Akita", "Furano", "Biei", "Abashiri", "Unazuki", "Fukui", "Tsuruga",
 ];
 
@@ -128,6 +128,16 @@ const ALIASES: Record<string, string> = {
   kameoka: "Torokko Kameoka",
   "kameoka torokko": "Torokko Kameoka",
   hozukyo: "Torokko Hozukyo",
+  odaiba: "Odaiba-kaihinkoen",
+  "odaiba kaihinkoen": "Odaiba-kaihinkoen",
+  "big sight": "Tokyo Big Sight",
+  "tokyo bigsight": "Tokyo Big Sight",
+  "toyosu market": "Shijo-mae",
+  "shijo mae": "Shijo-mae",
+  "cruise terminal": "Tokyo International Cruise Terminal",
+  "shin toyosu": "Shin-Toyosu",
+  "shibaura futo": "Shibaura-futo",
+  "ariake tennis no mori": "Ariake-Tennis-no-mori",
 };
 
 export type StationOption = { name: string; ja?: string; routes: string[] };

@@ -119,6 +119,17 @@ function destination(p, bearingDeg, metres) {
 // beside the line is really seen.
 const SEA_REACH = route.seaReach ?? 1500;
 const SEA_STEP = 30;
+// Metres of open water the sea must stretch across, so a canal does not count
+// as the bay (seaMinWidth; 0 = any water, right for an open coast).
+const SEA_MIN_WIDTH = route.seaMinWidth ?? 0;
+const waterWidth = (p, bearingDeg, from) => {
+  let w = 0;
+  for (let m = from; w < SEA_MIN_WIDTH; m += SEA_STEP, w += SEA_STEP) {
+    const q = destination(p, bearingDeg, m);
+    if (!Number.isNaN(elevationRaw(q.lat, q.lng))) break;
+  }
+  return w;
+};
 const SEA_ANGLES = [60, 90, 120];
 // A valley or gorge: ground that falls away beside the line and can be seen
 // from the window (not hidden by a nearer bank). Per route: how far to look and
@@ -189,7 +200,7 @@ if (seaTarget || valleyTarget) {
     const heading = travelBearing(i);
     for (const sign of [-1, 1]) {
       for (const rel of SEA_ANGLES) {
-        for (let m = SEA_STEP; m <= reach; m += SEA_STEP * 4) {
+        for (let m = SEA_STEP; m <= reach + SEA_MIN_WIDTH; m += SEA_STEP * 4) {
           const q = destination(filled[i], heading + sign * rel, m);
           const { tx, ty } = tileOf(q.lat, q.lng);
           needed.add(`${tx}/${ty}`);
@@ -244,7 +255,7 @@ if (seaTarget) {
     if (p.tunnel) continue;
     const eye = elevationSync(p.lat, p.lng) + OBSERVER_ABOVE_GROUND;
     const heading = travelBearing(i);
-    let best = null;
+    const nearestWater = { right: Infinity, left: Infinity };
     for (const [sign, side] of [[1, "right"], [-1, "left"]]) {
       for (const rel of SEA_ANGLES) {
         let steepest = -Infinity;
@@ -253,14 +264,21 @@ if (seaTarget) {
           const v = elevationRaw(q.lat, q.lng);
           if (Number.isNaN(v)) {
             const toSea = Math.atan2(-eye, m);
-            if (toSea >= steepest && (!best || m < best.m)) best = { side, m };
+            if (toSea >= steepest && waterWidth(p, heading + sign * rel, m) >= SEA_MIN_WIDTH) nearestWater[side] = Math.min(nearestWater[side], m);
             break;
           }
           steepest = Math.max(steepest, Math.atan2(v - eye, m));
         }
       }
     }
-    if (best) results[i].see[seaTarget.id] = { side: best.side, angle: 0, km: +(best.m / 1000).toFixed(2) };
+    const side = nearestWater.right <= nearestWater.left ? "right" : "left";
+    const other = side === "right" ? "left" : "right";
+    const m = nearestWater[side];
+    if (Number.isFinite(m)) {
+      // Water close on both sides (a bridge, a causeway): a view from either window, no side.
+      const both = Number.isFinite(nearestWater[other]) && nearestWater[other] <= m * 2 + 60;
+      results[i].see[seaTarget.id] = { side: both ? "both" : side, angle: 0, km: +(m / 1000).toFixed(2) };
+    }
   }
 }
 

@@ -234,7 +234,14 @@ function writeChained(osm) {
     }
     return best;
   };
-  const path = (from, to) => {
+  // Shortest track path from `from` to whichever node in `targets` comes first.
+  // On double track the two directions are separate ways joined only at
+  // crossovers, so each station may be reached on either track: taking the
+  // first one the path meets keeps to one track instead of detouring to a
+  // crossover and back.
+  const path = (from, targets) => {
+    const goal = new Set(targets);
+    let to = null;
     const dd = new Map([[from, 0]]);
     const prev = new Map();
     const done = new Set();
@@ -244,7 +251,10 @@ function writeChained(osm) {
       const [d, u] = queue.shift();
       if (done.has(u)) continue;
       done.add(u);
-      if (u === to) break;
+      if (goal.has(u)) {
+        to = u;
+        break;
+      }
       for (const [v, w] of adj.get(u)) {
         if (d + w < (dd.get(v) ?? Infinity)) {
           dd.set(v, d + w);
@@ -253,14 +263,22 @@ function writeChained(osm) {
         }
       }
     }
-    if (!dd.has(to)) throw new Error("no track between two stations — widen osm.bbox or check osm.name");
+    if (to === null) throw new Error("no track between two stations — widen osm.bbox or check osm.name");
     const out = [to];
     while (out[0] !== from) out.unshift(prev.get(out[0]));
     return out;
   };
-  const stops = route.stations.map(nearest);
+  const near = (st) => {
+    const within = [...adj.keys()].filter((id) => dist(nodes.get(id), st) <= 100);
+    return within.length ? within : [nearest(st)];
+  };
+  const stops = [nearest(route.stations[0])];
   let ids = [stops[0]];
-  for (let i = 1; i < stops.length; i++) ids = ids.concat(path(stops[i - 1], stops[i]).slice(1));
+  for (let i = 1; i < route.stations.length; i++) {
+    const leg = path(stops[i - 1], near(route.stations[i]));
+    stops.push(leg[leg.length - 1]);
+    ids = ids.concat(leg.slice(1));
+  }
   // Resample every 25 m along the path.
   const STEP = 25;
   const line = [];

@@ -2620,13 +2620,13 @@
     },
     {
       "id": "yurikamome-night",
-      "status": "candidate",
+      "status": "live",
       "tier": 1,
       "view": [
         "city",
         "night"
       ],
-      "title": "Rainbow Bridge and Tokyo Bay from the Yurikamome",
+      "title": "Tokyo Bay and the Rainbow Bridge from the Yurikamome",
       "line": "Yurikamome",
       "operator": "Yurikamome",
       "between": [
@@ -2635,18 +2635,18 @@
       ],
       "side": null,
       "seat": null,
-      "section": null,
-      "season": null,
+      "section": "Takeshiba – Shibaura-futo, the Rainbow Bridge, and the Odaiba waterfront",
+      "season": "All year; after dark for the city lights",
       "ticket": null,
       "osm": {
         "name": "ゆりかもめ",
         "bbox": [
-          35.62,
+          35.612,
           139.75,
           35.67,
           139.8
         ],
-        "nameToConfirm": true
+        "chain": true
       },
       "image": {
         "src": "/images/scenic/scenic-yurikamome-night-tall.webp",
@@ -2655,17 +2655,510 @@
         "alt": "An illuminated suspension bridge and city skyline from the front window of an elevated train at night",
         "illustrative": true
       },
-      "teaser": "Tokyo Bay · after dark",
+      "teaser": "Tokyo Bay · the bridge, day or night",
       "near": [
         "Shimbashi",
         "Odaiba",
         "Toyosu",
         "Daiba",
-        "Ariake"
+        "Ariake",
+        "Big Sight",
+        "Toyosu Market",
+        "teamLab"
       ],
       "tags": [
+        "sea",
         "city"
-      ]
+      ],
+      "stations": [
+        {
+          "name": "Shimbashi",
+          "ja": "新橋",
+          "lat": 35.6654,
+          "lng": 139.7598
+        },
+        {
+          "name": "Shiodome",
+          "ja": "汐留",
+          "lat": 35.6629,
+          "lng": 139.76
+        },
+        {
+          "name": "Takeshiba",
+          "ja": "竹芝",
+          "lat": 35.654,
+          "lng": 139.7619
+        },
+        {
+          "name": "Hinode",
+          "ja": "日の出",
+          "lat": 35.6492,
+          "lng": 139.7591
+        },
+        {
+          "name": "Shibaura-futo",
+          "ja": "芝浦ふ頭",
+          "lat": 35.6417,
+          "lng": 139.7578
+        },
+        {
+          "name": "Odaiba-kaihinkoen",
+          "ja": "お台場海浜公園",
+          "lat": 35.6299,
+          "lng": 139.7788
+        },
+        {
+          "name": "Daiba",
+          "ja": "台場",
+          "lat": 35.6259,
+          "lng": 139.7714
+        },
+        {
+          "name": "Tokyo International Cruise Terminal",
+          "ja": "東京国際クルーズターミナル",
+          "lat": 35.6214,
+          "lng": 139.7731
+        },
+        {
+          "name": "Telecom Center",
+          "ja": "テレコムセンター",
+          "lat": 35.6176,
+          "lng": 139.7794
+        },
+        {
+          "name": "Aomi",
+          "ja": "青海",
+          "lat": 35.6247,
+          "lng": 139.7812
+        },
+        {
+          "name": "Tokyo Big Sight",
+          "ja": "東京ビッグサイト",
+          "lat": 35.6302,
+          "lng": 139.7914
+        },
+        {
+          "name": "Ariake",
+          "ja": "有明",
+          "lat": 35.6345,
+          "lng": 139.7933
+        },
+        {
+          "name": "Ariake-Tennis-no-mori",
+          "ja": "有明テニスの森",
+          "lat": 35.6401,
+          "lng": 139.7888
+        },
+        {
+          "name": "Shijo-mae",
+          "ja": "市場前",
+          "lat": 35.6458,
+          "lng": 139.7858
+        },
+        {
+          "name": "Shin-Toyosu",
+          "ja": "新豊洲",
+          "lat": 35.6487,
+          "lng": 139.7902
+        },
+        {
+          "name": "Toyosu",
+          "ja": "豊洲",
+          "lat": 35.6537,
+          "lng": 139.7954
+        }
+      ],
+      "targets": [
+        {
+          "id": "bay",
+          "name": "Tokyo Bay",
+          "type": "sea",
+          "lat": 0,
+          "lng": 0,
+          "elevation": 0
+        }
+      ],
+      "seaReach": 300,
+      "seaMinWidth": 400,
+      "evidence": "Driverless elevated line to Odaiba, popular with first-time visitors.",
+      "geometry": "data/routes/yurikamome-night.json",
+      "slug": "yurikamome",
+      "href": "/scenic/yurikamome",
+      "viewshed": "data/routes/yurikamome-night-viewshed.json",
+      "trackKmOffset": 0,
+      "directions": {
+        "forward": [
+          "Shimbashi",
+          "Toyosu"
+        ],
+        "backward": [
+          "Toyosu",
+          "Shimbashi"
+        ]
+      },
+      "chip": {
+        "emoji": "🌉",
+        "label": "Bay & bridge"
+      },
+      "timelineStations": [
+        {
+          "name": "Shimbashi",
+          "ja": "新橋",
+          "km": 0
+        },
+        {
+          "name": "Shiodome",
+          "ja": "汐留",
+          "km": 0.28
+        },
+        {
+          "name": "Takeshiba",
+          "ja": "竹芝",
+          "km": 1.51
+        },
+        {
+          "name": "Hinode",
+          "ja": "日の出",
+          "km": 2.13
+        },
+        {
+          "name": "Shibaura-futo",
+          "ja": "芝浦ふ頭",
+          "km": 3.02
+        },
+        {
+          "name": "Odaiba-kaihinkoen",
+          "ja": "お台場海浜公園",
+          "km": 6.85
+        },
+        {
+          "name": "Daiba",
+          "ja": "台場",
+          "km": 7.68
+        },
+        {
+          "name": "Tokyo International Cruise Terminal",
+          "ja": "東京国際クルーズターミナル",
+          "km": 8.29
+        },
+        {
+          "name": "Telecom Center",
+          "ja": "テレコムセンター",
+          "km": 9.12
+        },
+        {
+          "name": "Aomi",
+          "ja": "青海",
+          "km": 10.1
+        },
+        {
+          "name": "Tokyo Big Sight",
+          "ja": "東京ビッグサイト",
+          "km": 11.21
+        },
+        {
+          "name": "Ariake",
+          "ja": "有明",
+          "km": 11.87
+        },
+        {
+          "name": "Ariake-Tennis-no-mori",
+          "ja": "有明テニスの森",
+          "km": 12.62
+        },
+        {
+          "name": "Shijo-mae",
+          "ja": "市場前",
+          "km": 13.36
+        },
+        {
+          "name": "Shin-Toyosu",
+          "ja": "新豊洲",
+          "km": 13.9
+        },
+        {
+          "name": "Toyosu",
+          "ja": "豊洲",
+          "km": 14.61
+        }
+      ],
+      "timing": {
+        "kind": "timetable",
+        "source": "Yurikamome station timetables (yurikamome.co.jp), weekdays, read November 2026: the 22:32 from Shimbashi and the 22:44 from Toyosu, followed station by station. Run times checked against the next train each way (22:40 and 22:53), which match minute for minute; trains run every 3–8 minutes through the day. Toyosu and Shimbashi arrivals taken as the published run the other way (1 minute). Between stops, spread by distance along the track.",
+        "sourceUrl": "https://www.yurikamome.co.jp/station-timetable/",
+        "trains": [
+          {
+            "id": "yurikamome",
+            "label": "Yurikamome",
+            "note": "every station, every 3–8 minutes",
+            "forward": {
+              "train": "Yurikamome 22:32 from Shimbashi",
+              "stops": [
+                [
+                  "Shimbashi",
+                  null,
+                  "22:32"
+                ],
+                [
+                  "Shiodome",
+                  "22:33",
+                  "22:33"
+                ],
+                [
+                  "Takeshiba",
+                  "22:36",
+                  "22:36"
+                ],
+                [
+                  "Hinode",
+                  "22:38",
+                  "22:38"
+                ],
+                [
+                  "Shibaura-futo",
+                  "22:39",
+                  "22:39"
+                ],
+                [
+                  "Odaiba-kaihinkoen",
+                  "22:45",
+                  "22:45"
+                ],
+                [
+                  "Daiba",
+                  "22:47",
+                  "22:47"
+                ],
+                [
+                  "Tokyo International Cruise Terminal",
+                  "22:49",
+                  "22:49"
+                ],
+                [
+                  "Telecom Center",
+                  "22:51",
+                  "22:51"
+                ],
+                [
+                  "Aomi",
+                  "22:53",
+                  "22:53"
+                ],
+                [
+                  "Tokyo Big Sight",
+                  "22:55",
+                  "22:55"
+                ],
+                [
+                  "Ariake",
+                  "22:57",
+                  "22:57"
+                ],
+                [
+                  "Ariake-Tennis-no-mori",
+                  "22:58",
+                  "22:58"
+                ],
+                [
+                  "Shijo-mae",
+                  "23:01",
+                  "23:01"
+                ],
+                [
+                  "Shin-Toyosu",
+                  "23:02",
+                  "23:02"
+                ],
+                [
+                  "Toyosu",
+                  "23:03",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Yurikamome 22:44 from Toyosu",
+              "stops": [
+                [
+                  "Toyosu",
+                  null,
+                  "22:44"
+                ],
+                [
+                  "Shin-Toyosu",
+                  "22:45",
+                  "22:45"
+                ],
+                [
+                  "Shijo-mae",
+                  "22:47",
+                  "22:47"
+                ],
+                [
+                  "Ariake-Tennis-no-mori",
+                  "22:49",
+                  "22:49"
+                ],
+                [
+                  "Ariake",
+                  "22:51",
+                  "22:51"
+                ],
+                [
+                  "Tokyo Big Sight",
+                  "22:53",
+                  "22:53"
+                ],
+                [
+                  "Aomi",
+                  "22:55",
+                  "22:55"
+                ],
+                [
+                  "Telecom Center",
+                  "22:57",
+                  "22:57"
+                ],
+                [
+                  "Tokyo International Cruise Terminal",
+                  "22:59",
+                  "22:59"
+                ],
+                [
+                  "Daiba",
+                  "23:01",
+                  "23:01"
+                ],
+                [
+                  "Odaiba-kaihinkoen",
+                  "23:02",
+                  "23:02"
+                ],
+                [
+                  "Shibaura-futo",
+                  "23:08",
+                  "23:08"
+                ],
+                [
+                  "Hinode",
+                  "23:10",
+                  "23:10"
+                ],
+                [
+                  "Takeshiba",
+                  "23:12",
+                  "23:12"
+                ],
+                [
+                  "Shiodome",
+                  "23:15",
+                  "23:15"
+                ],
+                [
+                  "Shimbashi",
+                  "23:16",
+                  null
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "views": [
+        {
+          "id": "bay-takeshiba",
+          "name": "Tokyo Bay and the Rainbow Bridge",
+          "targets": [
+            "bay"
+          ],
+          "tags": [
+            "sea",
+            "city"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Takeshiba",
+          "to": "Shibaura-futo",
+          "kmFrom": 1.5,
+          "kmTo": 3.6,
+          "sectionKm": 2.1,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "All year; the bridge is lit after dark",
+          "seat": null,
+          "basis": "terrain model only: open water at least 400 m across, within 300 m of the line"
+        },
+        {
+          "id": "odaiba-waterfront",
+          "name": "The Odaiba waterfront",
+          "targets": [
+            "bay"
+          ],
+          "tags": [
+            "sea",
+            "city"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Odaiba-kaihinkoen",
+          "to": "Aomi",
+          "kmFrom": 6.85,
+          "kmTo": 11.3,
+          "sectionKm": 4.5,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "All year; sunset over the harbour in the late afternoon",
+          "seat": null,
+          "basis": "terrain model only: open water at least 400 m across, within 300 m of the line"
+        },
+        {
+          "id": "harumi-waterfront",
+          "name": "The Harumi waterfront and the city",
+          "targets": [
+            "bay"
+          ],
+          "tags": [
+            "sea",
+            "city"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Shijo-mae",
+          "to": "Toyosu",
+          "kmFrom": 13.3,
+          "kmTo": 14.61,
+          "sectionKm": 1.3,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "All year; city lights after dark",
+          "seat": null,
+          "basis": "terrain model only: open water at least 400 m across, within 300 m of the line"
+        }
+      ],
+      "notes": [
+        "After Shibaura-futo the line climbs a full circle onto the Rainbow Bridge, then crosses it on the lower deck: water on both sides, the city behind you going to Odaiba. On the loop the view swings round, so it is not given a side.",
+        "The line has no driver. The seats at the very front (and back) of the train look straight down the track — the best view of the loop and the bridge, if you can get them.",
+        "Buildings are not in the model, and in Tokyo they hide much of the water. We only count open water at least 400 m across that comes within 300 m of the line, so canals do not count — but a warehouse or a hotel can still stand in the way.",
+        "Cars mostly have long bench seats along the sides."
+      ],
+      "verification": "Side and sections from a terrain model (GSI elevation, where water has no height; OSM track followed rail by rail through the loop): the bay counts as in view where open water at least 400 m across comes within 300 m of the line on one side. No published source was found for the sides, so they rest on the model alone. No seat letters.",
+      "page": {
+        "title": "Yurikamome: Which Side for Tokyo Bay and the Rainbow Bridge?",
+        "description": "Shimbashi to Toyosu: Tokyo Bay is on the left from Takeshiba, the loop and the Rainbow Bridge have water on both sides, then the Odaiba waterfront is on the right. A terrain model, a map and the minutes from the official timetable.",
+        "h1": "Yurikamome: which side for Tokyo Bay?",
+        "labelStations": [
+          "Shimbashi",
+          "Takeshiba",
+          "Shibaura-futo",
+          "Odaiba-kaihinkoen",
+          "Daiba",
+          "Telecom Center",
+          "Toyosu"
+        ]
+      }
     },
     {
       "id": "joetsu-snow",
