@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: t("homeTitle"),
       description: t("homeDesc"),
       siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
-      images: [{ url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fujiseat.com"}/og-home.png`, width: 1200, height: 630 }],
+      images: [{ url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fujiseat.com"}/og-default.jpg`, width: 1200, height: 630 }],
     },
     other: {
       "agd-partner-manual-verification": "",

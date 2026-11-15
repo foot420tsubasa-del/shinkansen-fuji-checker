@@ -42,7 +42,7 @@ const pageConfig = {
     extraIcon: ShoppingBag,
   },
   "suitengumae-ningyocho": {
-    image: "/design-home-assets/quiet-suitengumae.png",
+    image: "/design-home-assets/quiet-suitengumae.webp",
     path: "/local-tokyo/suitengumae-ningyocho",
     Icon: MapPinned,
     extraIcon: null,

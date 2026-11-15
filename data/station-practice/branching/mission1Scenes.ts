@@ -18,8 +18,8 @@ import type { Mission, StationScene } from "./types";
  * SceneViewport's onError chain falls back through:
  *   1. a mood-matched placeholder from the existing
  *      /images/station-practice/* set (per-scene `fallbackImages[0]`);
- *   2. the universal gameplay default (`gameplay-station-bg.png`);
- *   3. the universal hero (`hero-station-bg.png`).
+ *   2. the universal gameplay default (`gameplay-station-bg.webp`);
+ *   3. the universal hero (`hero-station-bg.webp`).
  *
  * The branching mode never relies on text inside the image — every
  * gameplay-relevant sign is an HTML overlay defined in `signs[]` below.
@@ -30,8 +30,8 @@ import type { Mission, StationScene } from "./types";
  * `docs/STATION_PRACTICE_BRANCHING_IMAGE_CHECKLIST.md`.
  */
 
-const FALLBACK_GAMEPLAY = "/images/station-practice/gameplay-station-bg.png";
-const FALLBACK_HERO = "/images/station-practice/hero-station-bg.png";
+const FALLBACK_GAMEPLAY = "/images/station-practice/gameplay-station-bg.webp";
+const FALLBACK_HERO = "/images/station-practice/hero-station-bg.webp";
 
 /**
  * Per-scene placeholder picked to roughly match the scene's mood while
@@ -40,12 +40,12 @@ const FALLBACK_HERO = "/images/station-practice/hero-station-bg.png";
  * routes — they are *not* canonical for the branching mode.
  */
 const SCENE_IMG = {
-  platform: "/images/station-practice/scene-local-transfer.png",
+  platform: "/images/station-practice/scene-local-transfer.webp",
   midConcourse: FALLBACK_GAMEPLAY,
-  upperConcourse: "/images/station-practice/scene-hotel-exit.png",
-  multiBranchJunction: "/images/station-practice/scene-wrong-side.png",
-  longCorridor: "/images/station-practice/scene-long-corridor.png",
-  airportConcourse: "/images/station-practice/scene-airport-train.png",
+  upperConcourse: "/images/station-practice/scene-hotel-exit.webp",
+  multiBranchJunction: "/images/station-practice/scene-wrong-side.webp",
+  longCorridor: "/images/station-practice/scene-long-corridor.webp",
+  airportConcourse: "/images/station-practice/scene-airport-train.webp",
   hero: FALLBACK_HERO,
 } as const;
 
@@ -55,24 +55,24 @@ const SCENE_IMG = {
  * what to drop in.
  */
 const BRANCHING_IMG: Record<string, string> = {
-  "scene-01-platform":       "/images/station-practice/branching/scene-01-platform.png",
-  "scene-02-escalator":      "/images/station-practice/branching/scene-02-escalator.png",
-  "scene-03-stair-landing":  "/images/station-practice/branching/scene-03-stair-landing.png",
-  "scene-04-main-concourse": "/images/station-practice/branching/scene-04-main-concourse.png",
-  "scene-04-wrong-bayline":  "/images/station-practice/branching/scene-04-wrong-bayline.png",
-  "scene-05-branch-corridor":"/images/station-practice/branching/scene-05-branch-corridor.png",
-  "scene-06-pre-gate":       "/images/station-practice/branching/scene-06-pre-gate.png",
-  "scene-07-ticket-gate":    "/images/station-practice/branching/scene-07-ticket-gate.png",
-  "scene-07-wrong-transfer-gate": "/images/station-practice/branching/scene-07-wrong-transfer-gate.png",
-  "scene-08-outside-gate":   "/images/station-practice/branching/scene-08-outside-gate.png",
-  "scene-09-final-stretch":  "/images/station-practice/branching/scene-09-final-stretch.png",
-  "scene-10-clear":          "/images/station-practice/branching/scene-10-clear.png",
+  "scene-01-platform":       "/images/station-practice/branching/scene-01-platform.webp",
+  "scene-02-escalator":      "/images/station-practice/branching/scene-02-escalator.webp",
+  "scene-03-stair-landing":  "/images/station-practice/branching/scene-03-stair-landing.webp",
+  "scene-04-main-concourse": "/images/station-practice/branching/scene-04-main-concourse.webp",
+  "scene-04-wrong-bayline":  "/images/station-practice/branching/scene-04-wrong-bayline.webp",
+  "scene-05-branch-corridor":"/images/station-practice/branching/scene-05-branch-corridor.webp",
+  "scene-06-pre-gate":       "/images/station-practice/branching/scene-06-pre-gate.webp",
+  "scene-07-ticket-gate":    "/images/station-practice/branching/scene-07-ticket-gate.webp",
+  "scene-07-wrong-transfer-gate": "/images/station-practice/branching/scene-07-wrong-transfer-gate.webp",
+  "scene-08-outside-gate":   "/images/station-practice/branching/scene-08-outside-gate.webp",
+  "scene-09-final-stretch":  "/images/station-practice/branching/scene-09-final-stretch.webp",
+  "scene-10-clear":          "/images/station-practice/branching/scene-10-clear.webp",
 };
 
 /**
  * Build the ordered fallback chain for a given placeholder. Deduped so
  * a placeholder that already happens to be one of the universal
- * fallbacks (e.g. `gameplay-station-bg.png`) isn't tried twice.
+ * fallbacks (e.g. `gameplay-station-bg.webp`) isn't tried twice.
  */
 function buildFallbackChain(placeholder: string): string[] {
   const chain = [placeholder, FALLBACK_GAMEPLAY, FALLBACK_HERO];

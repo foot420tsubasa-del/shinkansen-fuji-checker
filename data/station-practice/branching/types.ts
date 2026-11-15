@@ -82,8 +82,8 @@ export type StationScene = {
    * Ordered fallback chain used when `image` fails to load. Conventionally:
    *   1. an existing /images/station-practice/* placeholder picked to
    *      match the scene's mood (e.g. corridor for scene-05);
-   *   2. /images/station-practice/gameplay-station-bg.png;
-   *   3. /images/station-practice/hero-station-bg.png.
+   *   2. /images/station-practice/gameplay-station-bg.webp;
+   *   3. /images/station-practice/hero-station-bg.webp.
    * Optional — if omitted, only `image` is tried.
    */
   fallbackImages?: string[];

@@ -4,10 +4,10 @@ import path from "node:path";
 const AIRPORT_TRANSFER_IMAGE_BASE = "/images/airport-transfers";
 
 export const airportTransferImages = {
-  hub: `${AIRPORT_TRANSFER_IMAGE_BASE}/airport-transfer-hero.png`,
-  narita: `${AIRPORT_TRANSFER_IMAGE_BASE}/narita-airport-arrivals.png`,
-  haneda: `${AIRPORT_TRANSFER_IMAGE_BASE}/haneda-airport-arrivals.png`,
-  kansai: `${AIRPORT_TRANSFER_IMAGE_BASE}/kansai-airport-arrivals.png`,
+  hub: `${AIRPORT_TRANSFER_IMAGE_BASE}/airport-transfer-hero.webp`,
+  narita: `${AIRPORT_TRANSFER_IMAGE_BASE}/narita-airport-arrivals.webp`,
+  haneda: `${AIRPORT_TRANSFER_IMAGE_BASE}/haneda-airport-arrivals.webp`,
+  kansai: `${AIRPORT_TRANSFER_IMAGE_BASE}/kansai-airport-arrivals.webp`,
 } as const;
 
 function publicImageIfExists(src: string) {

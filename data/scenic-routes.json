@@ -42,7 +42,7 @@
         ]
       },
       "image": {
-        "src": "/images/hero/window-fuji-winter-wide.png",
+        "src": "/images/hero/window-fuji-winter-wide.webp",
         "width": 1536,
         "height": 1024,
         "alt": "Snow-capped Mt. Fuji through a Shinkansen window",
@@ -336,7 +336,7 @@
       },
       "geometry": "data/routes/hokuriku-alps.json",
       "image": {
-        "src": "/images/scenic/scenic-hokuriku-alps-wide.png",
+        "src": "/images/scenic/scenic-hokuriku-alps-wide.webp",
         "width": 1448,
         "height": 1086,
         "alt": "Snow-covered Northern Alps above winter rice fields through a bullet train window",
@@ -923,7 +923,7 @@
       },
       "geometry": "data/routes/enoden-coast.json",
       "image": {
-        "src": "/images/scenic/scenic-enoden-coast-wide.png",
+        "src": "/images/scenic/scenic-enoden-coast-wide.webp",
         "width": 1448,
         "height": 1086,
         "alt": "Beach, an island and distant Mt. Fuji through the window of a small seaside train",
@@ -1401,7 +1401,7 @@
         ]
       },
       "image": {
-        "src": "/images/scenic/scenic-fujikyu-fuji-tall.png",
+        "src": "/images/scenic/scenic-fujikyu-fuji-tall.webp",
         "width": 1086,
         "height": 1448,
         "alt": "Mt. Fuji close above a lake and autumn leaves through a local train window",
@@ -2022,7 +2022,7 @@
         "chain": true
       },
       "image": {
-        "src": "/images/scenic/scenic-hakone-tozan-tall.png",
+        "src": "/images/scenic/scenic-hakone-tozan-tall.webp",
         "width": 1086,
         "height": 1448,
         "alt": "Hydrangeas in bloom beside the track through the window of a red mountain train",
@@ -2385,7 +2385,7 @@
         "joinM": 800
       },
       "image": {
-        "src": "/images/scenic/scenic-sagano-gorge-tall.png",
+        "src": "/images/scenic/scenic-sagano-gorge-tall.webp",
         "width": 1086,
         "height": 1448,
         "alt": "Autumn maples above a green river gorge from an open wooden trolley car",
@@ -2649,7 +2649,7 @@
         "nameToConfirm": true
       },
       "image": {
-        "src": "/images/scenic/scenic-yurikamome-night-tall.png",
+        "src": "/images/scenic/scenic-yurikamome-night-tall.webp",
         "width": 1086,
         "height": 1448,
         "alt": "An illuminated suspension bridge and city skyline from the front window of an elevated train at night",

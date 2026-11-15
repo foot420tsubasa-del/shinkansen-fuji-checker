@@ -13,18 +13,18 @@ type HeroFrame = { src: string; width: number; height: number };
 
 export const HERO_IMAGES: Record<HeroSeason, { wide: HeroFrame; tall: HeroFrame; alt: string }> = {
   spring: {
-    wide: { src: "/images/hero/window-fuji-spring-wide.png", width: 1448, height: 1086 },
-    tall: { src: "/images/hero/window-fuji-spring-tall.png", width: 1086, height: 1448 },
+    wide: { src: "/images/hero/window-fuji-spring-wide.webp", width: 1448, height: 1086 },
+    tall: { src: "/images/hero/window-fuji-spring-tall.webp", width: 1086, height: 1448 },
     alt: "Snow-capped Mt. Fuji and cherry blossoms seen from a Shinkansen window",
   },
   summer: {
-    wide: { src: "/images/hero/window-fuji-summer-wide.png", width: 1536, height: 1024 },
-    tall: { src: "/images/hero/window-fuji-summer-tall.png", width: 1086, height: 1448 },
+    wide: { src: "/images/hero/window-fuji-summer-wide.webp", width: 1536, height: 1024 },
+    tall: { src: "/images/hero/window-fuji-summer-tall.webp", width: 1086, height: 1448 },
     alt: "Mt. Fuji above green rice fields seen from a Shinkansen window",
   },
   winter: {
-    wide: { src: "/images/hero/window-fuji-winter-wide.png", width: 1536, height: 1024 },
-    tall: { src: "/images/hero/window-fuji-winter-tall.png", width: 1086, height: 1448 },
+    wide: { src: "/images/hero/window-fuji-winter-wide.webp", width: 1536, height: 1024 },
+    tall: { src: "/images/hero/window-fuji-winter-tall.webp", width: 1086, height: 1448 },
     alt: "Mt. Fuji covered in snow seen from a Shinkansen window",
   },
 };

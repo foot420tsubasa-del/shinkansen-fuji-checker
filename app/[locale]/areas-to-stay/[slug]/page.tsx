@@ -147,7 +147,7 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
   {
     anchorId: "shinjuku-area",
     title: "Shinjuku area",
-    image: "/images/stay/tokyo/stay-shinjuku.png",
+    image: "/images/stay/tokyo/stay-shinjuku.webp",
     categoryLabel: "Active city",
     tone: "active",
     mainBaseLabel: "Main base",
@@ -164,7 +164,7 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
   {
     anchorId: "ueno-area",
     title: "Ueno area",
-    image: "/images/stay/tokyo/stay-ueno.png",
+    image: "/images/stay/tokyo/stay-ueno.webp",
     categoryLabel: "Airport access",
     tone: "airport",
     mainBaseLabel: "Main base",
@@ -184,7 +184,7 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
   {
     anchorId: "asakusa-area",
     title: "Asakusa area",
-    image: "/images/stay/tokyo/stay-asakusa.png",
+    image: "/images/stay/tokyo/stay-asakusa.webp",
     categoryLabel: "Traditional",
     tone: "traditional",
     mainBaseLabel: "Main base",
@@ -201,7 +201,7 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
   {
     anchorId: "tokyo-station-ginza-area",
     title: "Tokyo Station / Ginza area",
-    image: "/images/stay/tokyo/stay-tokyo-station.png",
+    image: "/images/stay/tokyo/stay-tokyo-station.webp",
     categoryLabel: "Rail logistics",
     tone: "rail",
     mainBaseLabel: "Main base",
@@ -221,7 +221,7 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
   {
     anchorId: "central-balance-area",
     title: "Central balance area",
-    image: "/images/stay/tokyo/stay-east-tokyo.png",
+    image: "/images/stay/tokyo/stay-east-tokyo.webp",
     categoryLabel: "Calm central",
     tone: "calm",
     mainBaseLabel: "Main bases",
@@ -241,7 +241,7 @@ const tokyoHotelBaseMatrixGroups: TokyoHotelBaseMatrixGroup[] = [
   {
     anchorId: "airport-logistics-area",
     title: "Airport / logistics area",
-    image: "/images/stay/tokyo/stay-airport-logistics.png",
+    image: "/images/stay/tokyo/stay-airport-logistics.webp",
     categoryLabel: "Airport + rail",
     tone: "airport",
     mainBaseLabel: "Main bases",
@@ -1640,12 +1640,12 @@ function applyStayPageTranslation(page: StayContentPage, translation?: StayPageT
 }
 
 const tokyoStayImages = {
-  hero: "/images/stay/tokyo/tokyo-stay-hero.png",
-  shinjuku: "/images/stay/tokyo/stay-shinjuku.png",
-  ueno: "/images/stay/tokyo/stay-ueno.png",
-  asakusa: "/images/stay/tokyo/stay-asakusa.png",
-  tokyoStation: "/images/stay/tokyo/stay-tokyo-station.png",
-  eastTokyo: "/images/stay/tokyo/stay-east-tokyo.png",
+  hero: "/images/stay/tokyo/tokyo-stay-hero.webp",
+  shinjuku: "/images/stay/tokyo/stay-shinjuku.webp",
+  ueno: "/images/stay/tokyo/stay-ueno.webp",
+  asakusa: "/images/stay/tokyo/stay-asakusa.webp",
+  tokyoStation: "/images/stay/tokyo/stay-tokyo-station.webp",
+  eastTokyo: "/images/stay/tokyo/stay-east-tokyo.webp",
 };
 
 function publicImageIfExists(src: string) {

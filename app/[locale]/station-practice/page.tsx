@@ -171,7 +171,7 @@ export default async function StationPracticeLandingPage() {
       <main className="flex flex-1 flex-col">
         <section className="relative isolate flex min-h-[88vh] items-end overflow-hidden">
           <Image
-            src="/images/station-practice/hero-station-bg.png"
+            src="/images/station-practice/hero-station-bg.webp"
             alt="A Japanese underground station corridor with overhead yellow signage"
             fill
             priority

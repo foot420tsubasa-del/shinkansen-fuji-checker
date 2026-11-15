@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
-      images: [{ url: "https://fujiseat.com/og-local-tokyo.png", width: 1200, height: 630 }],
+      images: [{ url: "https://fujiseat.com/og-default.jpg", width: 1200, height: 630 }],
     },
     alternates: getAlternates("/local-tokyo", locale),
   };
@@ -53,7 +53,7 @@ export default async function LocalTokyoPage({ params }: Props) {
     { name: h("localTokyo.monzenNakacho.name"), summary: h("localTokyo.monzenNakacho.summary"), bestFor: h("localTokyo.monzenNakacho.bestFor"), avoidIf: h("localTokyo.monzenNakacho.avoidIf"), timing: h("localTokyo.monzenNakacho.timing"), href: "/local-tokyo/monzen-nakacho", image: "/design-home-assets/quiet-monzen-nakacho.jpg" },
     { name: h("localTokyo.ryogoku.name"), summary: h("localTokyo.ryogoku.summary"), bestFor: h("localTokyo.ryogoku.bestFor"), avoidIf: h("localTokyo.ryogoku.avoidIf"), timing: h("localTokyo.ryogoku.timing"), href: "/local-tokyo/ryogoku", image: "/design-home-assets/quiet-ryogoku.jpg" },
     { name: h("localTokyo.oshiage.name"), summary: h("localTokyo.oshiage.summary"), bestFor: h("localTokyo.oshiage.bestFor"), avoidIf: h("localTokyo.oshiage.avoidIf"), timing: h("localTokyo.oshiage.timing"), href: "/local-tokyo/oshiage", image: "/design-home-assets/quiet-oshiage.jpg" },
-    { name: h("localTokyo.suitengumae.name"), summary: h("localTokyo.suitengumae.summary"), bestFor: h("localTokyo.suitengumae.bestFor"), avoidIf: h("localTokyo.suitengumae.avoidIf"), timing: h("localTokyo.suitengumae.timing"), href: "/local-tokyo/suitengumae-ningyocho", image: "/design-home-assets/quiet-suitengumae.png" },
+    { name: h("localTokyo.suitengumae.name"), summary: h("localTokyo.suitengumae.summary"), bestFor: h("localTokyo.suitengumae.bestFor"), avoidIf: h("localTokyo.suitengumae.avoidIf"), timing: h("localTokyo.suitengumae.timing"), href: "/local-tokyo/suitengumae-ningyocho", image: "/design-home-assets/quiet-suitengumae.webp" },
   ];
   const breadcrumbSchema = {
     "@context": "https://schema.org",

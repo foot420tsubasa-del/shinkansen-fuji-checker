@@ -40,7 +40,7 @@ const SEAT_GUIDES: Array<{ href: string; title: string; body: string; image?: st
     href: "/guide#seat-e",
     title: "Seat E guide",
     body: "Why Seat E, when to look, and what to do if it's taken.",
-    image: "/images/Kawaguchiko.png",
+    image: "/images/Kawaguchiko.webp",
     alt: "Mt. Fuji above Lake Kawaguchi at dusk",
   },
   {
@@ -52,14 +52,14 @@ const SEAT_GUIDES: Array<{ href: string; title: string; body: string; image?: st
     href: "/kyoto-to-tokyo-mt-fuji-seat",
     title: "Kyoto → Tokyo seat",
     body: "Heading back to Tokyo? Mt. Fuji is on the left.",
-    image: "/images/Kyoto.png",
+    image: "/images/Kyoto.webp",
     alt: "Yasaka Pagoda on a Kyoto lane at sunset",
   },
   {
     href: "/blog/seat-e-sold-out-mt-fuji",
     title: "Seat E sold out?",
     body: "Five ways to still see Mt. Fuji, and how to photograph it through the glass.",
-    image: "/images/hero/window-fuji-summer-wide.png",
+    image: "/images/hero/window-fuji-summer-wide.webp",
     alt: "Mt. Fuji above green fields through a Shinkansen window",
   },
 ];
@@ -681,7 +681,7 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
             </div>
             <div className="relative aspect-[16/10] md:aspect-auto md:min-h-full">
               <Image
-                src="/images/home/tokyo-hotel-base.png"
+                src="/images/home/tokyo-hotel-base.webp"
                 alt="Luggage near a Tokyo station hotel area"
                 fill
                 sizes="(min-width: 768px) 520px, 100vw"

@@ -65,9 +65,9 @@ export type Mission = {
 };
 
 /** First fallback when a per-mission scene file is missing. */
-export const GAMEPLAY_DEFAULT_IMAGE = "/images/station-practice/gameplay-station-bg.png";
+export const GAMEPLAY_DEFAULT_IMAGE = "/images/station-practice/gameplay-station-bg.webp";
 /** Last-resort fallback when the gameplay default is also missing. */
-export const SCENE_FALLBACK_IMAGE = "/images/station-practice/hero-station-bg.png";
+export const SCENE_FALLBACK_IMAGE = "/images/station-practice/hero-station-bg.webp";
 
 /** Ordered fallback chain for a given per-mission scene src. Deduped, preserves order. */
 export function sceneFallbackChain(src: string): string[] {
@@ -101,8 +101,8 @@ export const missions: Mission[] = [
     hint: "Your hotel is near the business district. Look for the Hotel Side signs, not East Gate (opposite side) or Central Concourse (stays inside the station).",
     estimatedMinutes: "5–8 min",
     difficulty: "Beginner",
-    image: "/images/station-practice/scene-hotel-exit.png",
-    sceneImage: "/images/station-practice/scene-hotel-exit.png",
+    image: "/images/station-practice/scene-hotel-exit.webp",
+    sceneImage: "/images/station-practice/scene-hotel-exit.webp",
     sceneAlt:
       "A wide station concourse with overhead yellow signage pointing toward Hotel Side, Central Concourse, East Gate, and West Gate.",
     signText: "↑ Hotel Side / 出口",
@@ -157,8 +157,8 @@ export const missions: Mission[] = [
     hint: "Look for transfer signage with a train icon, not an exit sign.",
     estimatedMinutes: "5 min",
     difficulty: "Beginner",
-    image: "/images/station-practice/scene-local-transfer.png",
-    sceneImage: "/images/station-practice/scene-local-transfer.png",
+    image: "/images/station-practice/scene-local-transfer.webp",
+    sceneImage: "/images/station-practice/scene-local-transfer.webp",
     sceneAlt:
       "A station transfer hall with overhead yellow signs for Platform 3-4, Local Lines, and Platform 5-6.",
     signText: "↑ Local Lines / 乗換",
@@ -213,8 +213,8 @@ export const missions: Mission[] = [
     hint: "Skyscrapers and the city government building are on the West Gate side.",
     estimatedMinutes: "6 min",
     difficulty: "Intermediate",
-    image: "/images/station-practice/scene-wrong-side.png",
-    sceneImage: "/images/station-practice/scene-wrong-side.png",
+    image: "/images/station-practice/scene-wrong-side.webp",
+    sceneImage: "/images/station-practice/scene-wrong-side.webp",
     sceneAlt:
       "A multi-corridor junction inside a large station with overhead and floor signs pointing to Hotel Side, Opposite Gate, East Gate, and West Gate.",
     signText: "↑ West Gate / 西口",
@@ -269,8 +269,8 @@ export const missions: Mission[] = [
     hint: "Look for the sign that mentions a posted walking time (8-10 min), not a generic transfer arrow.",
     estimatedMinutes: "10 min",
     difficulty: "Intermediate",
-    image: "/images/station-practice/scene-long-corridor.png",
-    sceneImage: "/images/station-practice/scene-long-corridor.png",
+    image: "/images/station-practice/scene-long-corridor.webp",
+    sceneImage: "/images/station-practice/scene-long-corridor.webp",
     sceneAlt:
       "Entrance to a long underground transfer corridor with overhead yellow signs for the 8-10 min corridor, Platform 7-8, and Central Concourse.",
     signText: "↑ Long Transfer Corridor / 8-10 min",
@@ -325,8 +325,8 @@ export const missions: Mission[] = [
     hint: "Look for the airplane (✈) icon and Platform 1-2 on the overhead signs.",
     estimatedMinutes: "8 min",
     difficulty: "Advanced",
-    image: "/images/station-practice/scene-airport-train.png",
-    sceneImage: "/images/station-practice/scene-airport-train.png",
+    image: "/images/station-practice/scene-airport-train.webp",
+    sceneImage: "/images/station-practice/scene-airport-train.webp",
     sceneAlt:
       "A station concourse with overhead yellow signs for Airport Train, Airport Access, and Platform 1-2.",
     signText: "↑ Airport Train / Platform 1-2 / 空港 ✈",

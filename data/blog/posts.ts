@@ -37,7 +37,7 @@ export const BLOG_POSTS: BlogPost[] = [
     published: "2026-11-15",
     updated: "2026-11-15",
     heroImage: {
-      src: "/images/hero/window-fuji-winter-wide.png",
+      src: "/images/hero/window-fuji-winter-wide.webp",
       alt: "Snow-capped Mt. Fuji seen through a Shinkansen window",
       illustrative: true,
     },

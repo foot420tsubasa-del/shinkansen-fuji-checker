@@ -761,7 +761,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         title: "Mont Fuji depuis le Shinkansen — côté, siège et timing",
         description: "Guide gratuit par un Tokyoïte : quel côté du Shinkansen pour voir le mont Fuji.",
         siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
-        images: [{ url: "https://fujiseat.com/og-guide.png", width: 1200, height: 630 }],
+        images: [{ url: "https://fujiseat.com/og-default.jpg", width: 1200, height: 630 }],
       },
     };
   }
@@ -777,7 +777,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: guideTitle,
       description: guideDesc,
       siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
-      images: [{ url: "https://fujiseat.com/og-guide.png", width: 1200, height: 630 }],
+      images: [{ url: "https://fujiseat.com/og-default.jpg", width: 1200, height: 630 }],
     },
   };
 }

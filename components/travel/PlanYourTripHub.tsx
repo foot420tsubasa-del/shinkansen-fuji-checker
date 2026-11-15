@@ -98,22 +98,22 @@ const cityCardConfigs = [
   {
     key: "tokyo",
     linkId: "cityTokyo",
-    imageSrc: "/images/stay/tokyo/tokyo-stay-hero.png",
+    imageSrc: "/images/stay/tokyo/tokyo-stay-hero.webp",
   },
   {
     key: "kyoto",
     linkId: "cityKyoto",
-    imageSrc: "/images/Kyoto.png",
+    imageSrc: "/images/Kyoto.webp",
   },
   {
     key: "osaka",
     linkId: "cityOsaka",
-    imageSrc: "/images/Osaka.png",
+    imageSrc: "/images/Osaka.webp",
   },
   {
     key: "fujiHakone",
     linkId: "hakone",
-    imageSrc: "/images/Kawaguchiko.png",
+    imageSrc: "/images/Kawaguchiko.webp",
   },
 ] as const satisfies ReadonlyArray<Omit<CityCard, "title" | "description" | "cta" | "imageAlt">>;
 

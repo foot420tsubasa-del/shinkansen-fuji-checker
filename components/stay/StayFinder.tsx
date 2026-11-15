@@ -316,7 +316,7 @@ export function StayFinder({
             ) : null}
           </div>
         ) : (
-          <div className="flex h-full min-h-[320px] flex-col justify-end overflow-hidden rounded-[24px] bg-[url(/images/home/tokyo-hotel-base.png)] bg-cover bg-center">
+          <div className="flex h-full min-h-[320px] flex-col justify-end overflow-hidden rounded-[24px] bg-[url(/images/home/tokyo-hotel-base.webp)] bg-cover bg-center">
             <p className="m-4 rounded-2xl bg-white/95 px-4 py-3 text-sm font-semibold text-ink shadow">{t("pickMore")}</p>
           </div>
         )}

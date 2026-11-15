@@ -2223,7 +2223,7 @@ export default function AdminPage() {
             <input
               value={stayAreaMapForm.src}
               onChange={(e) => updateStayAreaMapForm("src", e.target.value)}
-              placeholder="/images/stay-area-maps/shinjuku-stay-map.png"
+              placeholder="/images/stay-area-maps/shinjuku-stay-map.webp"
               className="mt-1 w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs outline-none focus:border-emerald-300"
             />
           </div>

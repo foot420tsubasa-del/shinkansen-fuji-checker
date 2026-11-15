@@ -12,45 +12,45 @@ import type { Mission, StationScene } from "./types";
  * falls back to existing generic station art until those files are dropped in.
  */
 
-const FALLBACK_GAMEPLAY = "/images/station-practice/gameplay-station-bg.png";
-const FALLBACK_HERO = "/images/station-practice/hero-station-bg.png";
+const FALLBACK_GAMEPLAY = "/images/station-practice/gameplay-station-bg.webp";
+const FALLBACK_HERO = "/images/station-practice/hero-station-bg.webp";
 
 const SCENE_IMG = {
   concourse: FALLBACK_GAMEPLAY,
-  corridor: "/images/station-practice/scene-long-corridor.png",
-  gate: "/images/station-practice/scene-hotel-exit.png",
-  platform: "/images/station-practice/scene-local-transfer.png",
-  junction: "/images/station-practice/scene-wrong-side.png",
+  corridor: "/images/station-practice/scene-long-corridor.webp",
+  gate: "/images/station-practice/scene-hotel-exit.webp",
+  platform: "/images/station-practice/scene-local-transfer.webp",
+  junction: "/images/station-practice/scene-wrong-side.webp",
   hero: FALLBACK_HERO,
 } as const;
 
 const MISSION2_IMG: Record<string, string> = {
   "mission2-scene-01-central-concourse":
-    "/images/station-practice/branching/mission2-scene-01-central-concourse.png",
+    "/images/station-practice/branching/mission2-scene-01-central-concourse.webp",
   "mission2-scene-02-transfer-sign-wall":
-    "/images/station-practice/branching/mission2-scene-02-transfer-sign-wall.png",
+    "/images/station-practice/branching/mission2-scene-02-transfer-sign-wall.webp",
   "mission2-scene-03-underground-passage-entry":
-    "/images/station-practice/branching/mission2-scene-03-underground-passage-entry.png",
+    "/images/station-practice/branching/mission2-scene-03-underground-passage-entry.webp",
   "mission2-scene-04-ticket-gate-split":
-    "/images/station-practice/branching/mission2-scene-04-ticket-gate-split.png",
+    "/images/station-practice/branching/mission2-scene-04-ticket-gate-split.webp",
   "mission2-scene-04-detour-outside-gate":
-    "/images/station-practice/branching/mission2-scene-04-detour-outside-gate.png",
+    "/images/station-practice/branching/mission2-scene-04-detour-outside-gate.webp",
   "mission2-scene-05-red-metro-corridor":
-    "/images/station-practice/branching/mission2-scene-05-red-metro-corridor.png",
+    "/images/station-practice/branching/mission2-scene-05-red-metro-corridor.webp",
   "mission2-scene-05-detour-bayline":
-    "/images/station-practice/branching/mission2-scene-05-detour-bayline.png",
+    "/images/station-practice/branching/mission2-scene-05-detour-bayline.webp",
   "mission2-scene-06-stair-escalator-choice":
-    "/images/station-practice/branching/mission2-scene-06-stair-escalator-choice.png",
+    "/images/station-practice/branching/mission2-scene-06-stair-escalator-choice.webp",
   "mission2-scene-07-lower-transfer-hall":
-    "/images/station-practice/branching/mission2-scene-07-lower-transfer-hall.png",
+    "/images/station-practice/branching/mission2-scene-07-lower-transfer-hall.webp",
   "mission2-scene-08-platform-direction-board":
-    "/images/station-practice/branching/mission2-scene-08-platform-direction-board.png",
+    "/images/station-practice/branching/mission2-scene-08-platform-direction-board.webp",
   "mission2-scene-08-detour-main-rail-platforms":
-    "/images/station-practice/branching/mission2-scene-08-detour-main-rail-platforms.png",
+    "/images/station-practice/branching/mission2-scene-08-detour-main-rail-platforms.webp",
   "mission2-scene-09-red-metro-gate":
-    "/images/station-practice/branching/mission2-scene-09-red-metro-gate.png",
+    "/images/station-practice/branching/mission2-scene-09-red-metro-gate.webp",
   "mission2-scene-10-red-metro-arrival":
-    "/images/station-practice/branching/mission2-scene-10-red-metro-arrival.png",
+    "/images/station-practice/branching/mission2-scene-10-red-metro-arrival.webp",
 };
 
 function buildFallbackChain(placeholder: string): string[] {
