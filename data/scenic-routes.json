@@ -1,0 +1,445 @@
+{
+  "_note": "Nationwide scenic train views, the catalogue behind the homepage view picker. Only status 'live' is shown to readers. Everything else is a candidate: which side, which section and which season are left null until verified (viewshed from OpenStreetMap track geometry + GSI elevation, then checked against real footage). Never publish a side that has not been verified — one wrong 'sit on the right' costs the whole site's credibility.",
+  "statuses": {
+    "live": "verified and on the site",
+    "verifying": "geometry fetched, side and section being checked",
+    "candidate": "not yet researched"
+  },
+  "routes": [
+    {
+      "id": "tokaido-fuji",
+      "status": "live",
+      "tier": 1,
+      "view": [
+        "mountain"
+      ],
+      "title": "Mt. Fuji from the Tokaido Shinkansen",
+      "line": "Tokaido Shinkansen",
+      "operator": "JR Central",
+      "between": [
+        "Tokyo",
+        "Kyoto / Osaka"
+      ],
+      "side": {
+        "westbound": "right",
+        "eastbound": "left"
+      },
+      "seat": "E (standard), D (Green Car)",
+      "section": "Mishima – Shin-Fuji – Fuji River",
+      "season": "all year; clearest on winter mornings",
+      "ticket": {
+        "provider": "klook",
+        "linkId": "shinkansenTokyoKyoto"
+      },
+      "geometry": "data/routes/tokaido-fuji.json",
+      "osm": {
+        "name": "東海道新幹線",
+        "bbox": [
+          34.94,
+          138.33,
+          35.33,
+          139.22
+        ]
+      }
+    },
+    {
+      "id": "hokuriku-alps",
+      "status": "verifying",
+      "tier": 1,
+      "view": [
+        "mountain",
+        "snow"
+      ],
+      "title": "Mt. Asama and the Northern Alps from the Hokuriku Shinkansen",
+      "line": "Hokuriku Shinkansen",
+      "operator": "JR East / JR West",
+      "between": [
+        "Tokyo",
+        "Kanazawa"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "evidence": "Search Console: 'hokuriku shinkansen seat map' 67 impressions in 90 days. Published advice disagrees on the side (booking sites: right; nippon.com: left) — likely different mountains on different sides.",
+      "osm": {
+        "name": "北陸新幹線",
+        "bbox": [
+          36.2,
+          136.6,
+          36.8,
+          138.7
+        ]
+      },
+      "geometry": "data/routes/hokuriku-alps.json"
+    },
+    {
+      "id": "enoden-coast",
+      "status": "verifying",
+      "tier": 1,
+      "view": [
+        "sea",
+        "mountain"
+      ],
+      "title": "The Shonan coast from the Enoden",
+      "line": "Enoshima Electric Railway (Enoden)",
+      "operator": "Enoshima Electric Railway",
+      "between": [
+        "Kamakura",
+        "Fujisawa"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "evidence": "Day trip from Tokyo popular with overseas visitors.",
+      "osm": {
+        "name": "江ノ島電鉄|江ノ電",
+        "bbox": [
+          35.29,
+          139.47,
+          35.34,
+          139.56
+        ]
+      },
+      "geometry": "data/routes/enoden-coast.json"
+    },
+    {
+      "id": "fujikyu-fuji",
+      "status": "candidate",
+      "tier": 1,
+      "view": [
+        "mountain"
+      ],
+      "title": "Mt. Fuji up close from the Fujikyu Line",
+      "line": "Fujikyu Line",
+      "operator": "Fujisan Fumoto Railway",
+      "between": [
+        "Otsuki",
+        "Kawaguchiko"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "evidence": "Same readers as the Tokaido Fuji seat; Kawaguchiko is already the fallback the site offers on cloudy days.",
+      "osm": {
+        "name": "富士急行線",
+        "bbox": [
+          35.48,
+          138.74,
+          35.63,
+          138.98
+        ],
+        "nameToConfirm": true
+      }
+    },
+    {
+      "id": "hakone-tozan",
+      "status": "candidate",
+      "tier": 1,
+      "view": [
+        "mountain",
+        "seasonal-flowers"
+      ],
+      "title": "Switchbacks and hydrangeas on the Hakone Tozan Railway",
+      "line": "Hakone Tozan Railway",
+      "operator": "Odakyu Hakone",
+      "between": [
+        "Hakone-Yumoto",
+        "Gora"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "osm": {
+        "name": "箱根登山鉄道鉄道線",
+        "bbox": [
+          35.22,
+          139.04,
+          35.27,
+          139.11
+        ],
+        "nameToConfirm": true
+      }
+    },
+    {
+      "id": "sagano-gorge",
+      "status": "candidate",
+      "tier": 1,
+      "view": [
+        "gorge",
+        "autumn-leaves",
+        "sakura"
+      ],
+      "title": "The Hozu gorge from the Sagano Romantic Train",
+      "line": "Sagano Scenic Railway",
+      "operator": "Sagano Scenic Railway",
+      "between": [
+        "Torokko Saga",
+        "Torokko Kameoka"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "osm": {
+        "name": "嵯峨野観光線",
+        "bbox": [
+          35,
+          135.57,
+          35.03,
+          135.68
+        ],
+        "nameToConfirm": true
+      }
+    },
+    {
+      "id": "yurikamome-night",
+      "status": "candidate",
+      "tier": 1,
+      "view": [
+        "city",
+        "night"
+      ],
+      "title": "Rainbow Bridge and Tokyo Bay from the Yurikamome",
+      "line": "Yurikamome",
+      "operator": "Yurikamome",
+      "between": [
+        "Shimbashi",
+        "Toyosu"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "osm": {
+        "name": "ゆりかもめ",
+        "bbox": [
+          35.62,
+          139.75,
+          35.67,
+          139.8
+        ],
+        "nameToConfirm": true
+      }
+    },
+    {
+      "id": "joetsu-snow",
+      "status": "candidate",
+      "tier": 2,
+      "view": [
+        "snow",
+        "mountain"
+      ],
+      "title": "Snow country beyond the tunnels on the Joetsu Shinkansen",
+      "line": "Joetsu Shinkansen",
+      "operator": "JR East",
+      "between": [
+        "Tokyo",
+        "Echigo-Yuzawa / Niigata"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "osm": {
+        "name": "上越新幹線",
+        "bbox": [
+          36.6,
+          138.7,
+          37,
+          139
+        ]
+      }
+    },
+    {
+      "id": "tohoku-iwate",
+      "status": "candidate",
+      "tier": 2,
+      "view": [
+        "mountain",
+        "countryside"
+      ],
+      "title": "Mt. Iwate and the Tohoku plain from the Tohoku Shinkansen",
+      "line": "Tohoku Shinkansen",
+      "operator": "JR East",
+      "between": [
+        "Sendai",
+        "Morioka"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "evidence": "Search Console: 'tohoku shinkansen seat map' 16 impressions in 90 days.",
+      "osm": {
+        "name": "東北新幹線",
+        "bbox": [
+          39.4,
+          140.9,
+          39.8,
+          141.3
+        ]
+      }
+    },
+    {
+      "id": "kurobe-gorge",
+      "status": "candidate",
+      "tier": 2,
+      "view": [
+        "gorge"
+      ],
+      "title": "The Kurobe Gorge by open trolley",
+      "line": "Kurobe Gorge Railway",
+      "operator": "Kurobe Gorge Railway",
+      "between": [
+        "Unazuki",
+        "Keyakidaira"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "osm": {
+        "name": "黒部峡谷鉄道本線",
+        "bbox": [
+          36.7,
+          137.55,
+          36.85,
+          137.67
+        ],
+        "nameToConfirm": true
+      }
+    },
+    {
+      "id": "gono-coast",
+      "status": "candidate",
+      "tier": 3,
+      "view": [
+        "sea"
+      ],
+      "title": "The Sea of Japan coast on the Resort Shirakami",
+      "line": "Gono Line",
+      "operator": "JR East",
+      "between": [
+        "Akita",
+        "Aomori"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "osm": {
+        "name": "五能線",
+        "bbox": [
+          40.2,
+          139.9,
+          40.9,
+          140.3
+        ]
+      }
+    },
+    {
+      "id": "furano-biei-flowers",
+      "status": "candidate",
+      "tier": 3,
+      "view": [
+        "countryside",
+        "seasonal-flowers"
+      ],
+      "title": "Lavender fields from the Furano-Biei Norokko",
+      "line": "Furano Line",
+      "operator": "JR Hokkaido",
+      "between": [
+        "Asahikawa / Biei",
+        "Furano"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "osm": {
+        "name": "富良野線",
+        "bbox": [
+          43.3,
+          142.35,
+          43.6,
+          142.5
+        ]
+      }
+    },
+    {
+      "id": "senmo-drift-ice",
+      "status": "candidate",
+      "tier": 3,
+      "view": [
+        "sea",
+        "snow"
+      ],
+      "title": "Okhotsk drift ice from the Senmo Line",
+      "line": "Senmo Line",
+      "operator": "JR Hokkaido",
+      "between": [
+        "Abashiri",
+        "Shiretoko-Shari"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "osm": {
+        "name": "釧網本線",
+        "bbox": [
+          43.85,
+          144.25,
+          44.05,
+          144.7
+        ]
+      }
+    },
+    {
+      "id": "tadami-river",
+      "status": "candidate",
+      "tier": 3,
+      "view": [
+        "countryside",
+        "gorge"
+      ],
+      "title": "River bridges and mist on the Tadami Line",
+      "line": "Tadami Line",
+      "operator": "JR East",
+      "between": [
+        "Aizu-Wakamatsu",
+        "Koide"
+      ],
+      "side": null,
+      "seat": null,
+      "section": null,
+      "season": null,
+      "ticket": null,
+      "osm": {
+        "name": "只見線",
+        "bbox": [
+          37.3,
+          139.5,
+          37.6,
+          139.85
+        ]
+      }
+    }
+  ]
+}
