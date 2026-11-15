@@ -5073,7 +5073,10 @@
       "title": "Cómo comprar una tarjeta Suica — simulador interactivo",
       "description": "¿Conoces a alguien que va a Japón por primera vez? Comparte este simulador de máquina de billetes Suica para que pueda practicar antes de aterrizar."
     },
-    "startSimulator": "Abrir el simulador de Suica"
+    "startSimulator": "Abrir el simulador de Suica",
+    "lead": "Prueba abajo la máquina de billetes real y luego elige una guía breve.",
+    "guidesTitle": "Guías de Suica",
+    "faqTitle": "Preguntas"
   },
   "stationPractice": {
     "ui": {

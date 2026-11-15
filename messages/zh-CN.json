@@ -5072,7 +5072,10 @@
       "title": "如何购买 Suica 卡片：互动式模拟器",
       "description": "认识首次造访日本的朋友吗？把这个 Suica 售票机模拟器分享给他们，让他们在出发前先练习。"
     },
-    "startSimulator": "开始 Suica 模拟器"
+    "startSimulator": "开始 Suica 模拟器",
+    "lead": "先在下方试用真实的售票机，再挑一篇简短指南。",
+    "guidesTitle": "Suica 指南",
+    "faqTitle": "常见问题"
   },
   "stationPractice": {
     "ui": {

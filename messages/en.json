@@ -5128,7 +5128,10 @@
       "title": "How to Buy a Suica Card — Interactive Simulator",
       "description": "Know someone visiting Japan for the first time? Share this Suica ticket-machine simulator so they can practice before they land."
     },
-    "startSimulator": "Start the Suica simulator"
+    "startSimulator": "Start the Suica simulator",
+    "lead": "Try the real ticket machine below, then pick a short guide.",
+    "guidesTitle": "Suica guides",
+    "faqTitle": "Questions"
   },
   "stationPractice": {
     "ui": {

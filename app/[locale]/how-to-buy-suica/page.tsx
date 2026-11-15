@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { ArrowRight, ArrowDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
@@ -9,13 +9,12 @@ import { getAlternates } from "@/i18n/hreflang";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { buttonClassName } from "@/components/ui/Button";
 import { TicketMachineSim } from "@/components/ticket-machine/TicketMachineSim";
+import { SuicaGuideGrid } from "@/components/suica/SuicaGuideGrid";
 
 type Props = { params: Promise<{ locale: string }> };
 
 const PAGE_PATH = "/how-to-buy-suica";
 const OFFICIAL_SUICA_URL = "https://www.jreast.co.jp/multi/en/pass/suica.html";
-
-
 
 /**
  * SEO guide copy is authored in English. Only the `en` route is indexed
@@ -91,53 +90,59 @@ export default async function HowToBuySuicaPage({ params }: Props) {
 
       <SiteHeader />
 
-      <Container className="py-8 md:py-12">
-        <section className="overflow-hidden rounded-[28px] border border-[#d9e5f2] bg-[linear-gradient(135deg,#f8fcff,#fff_48%,#edf7ff)] p-6 shadow-[0_18px_45px_rgba(9,35,70,0.08)] md:p-9">
-          <p className="inline-flex rounded-full border border-sky-100 bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.1em] text-[#145aa0]">
-            Suica
-          </p>
-          <h1 className="mt-4 max-w-3xl font-serif text-3xl font-bold leading-tight text-[#082653] md:text-4xl">
-            {t("title")}
-          </h1>
-          <div className="mt-5">
-            <a
-              href="#simulator"
-              className="inline-flex items-center gap-2 rounded-2xl border border-[#145aa0] bg-[#145aa0] px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#0f4a86]"
-            >
-              {t("startSimulator")}
-              <ArrowDown className="h-4 w-4" />
-            </a>
-          </div>
-          <p className="mt-6 max-w-3xl text-base leading-7 text-slate-600">
-            {t("intro")}
-          </p>
-        </section>
+      <Container className="py-6 md:py-10">
+        {/* Tool first (2026-11-15): one line of title, then the practice
+            machine; the long guide is now short picture guides below, each
+            with its own page under /how-to-buy-suica/<slug>. */}
+        <header className="max-w-3xl">
+          <h1 className="font-serif text-[26px] font-bold leading-tight text-[#082653] md:text-[34px]">{t("title")}</h1>
+          <p className="mt-2 text-[15px] leading-6 text-slate-600">{t("lead")}</p>
+        </header>
 
-        {/* Since 2026-11-15 the practice machine is a photograph of a real-style
-            JR machine with a live screen laid over its own, replacing the
-            illustrated kiosk in /games/suica-simulator.html (kept, unlinked). */}
-        <section id="simulator" className="mt-8 scroll-mt-24">
+        {/* The practice machine is a photograph of a real-style JR machine with
+            a live screen laid over its own (the illustrated kiosk in
+            /games/suica-simulator.html is kept, unlinked). */}
+        <section id="simulator" className="mt-5 scroll-mt-24">
           <TicketMachineSim initialLang={simLang} />
         </section>
 
-        <section className="mt-8 flex justify-center">
-          {/*
-            The simulator IS the primary tool on this page (the iframe
-            above), so the only secondary CTA here is the Hotel Action
-            link forward to the Tokyo Stay Finder — sage filled,
-            matching the rest of the site's "Compare hotels in X" /
-            "Choose Tokyo hotel base" hierarchy.
-          */}
-          <Link
-            href="/areas-to-stay"
-            className={buttonClassName({ variant: "hotel", size: "lg" })}
-          >
+        <section className="mt-12" aria-labelledby="suica-guides">
+          <h2 id="suica-guides" className="text-2xl font-extrabold tracking-[-0.02em] text-[#082653]">
+            {t("guidesTitle")}
+          </h2>
+          <div className="mt-4">
+            <SuicaGuideGrid />
+          </div>
+        </section>
+
+        <section className="mx-auto mt-12 max-w-3xl" aria-labelledby="suica-faq">
+          <h2 id="suica-faq" className="text-2xl font-extrabold tracking-[-0.02em] text-[#082653]">
+            {t("faqTitle")}
+          </h2>
+          <div className="mt-4 grid gap-2.5">
+            {SUICA_FAQ.map((item) => (
+              <details key={item.q} className="rounded-2xl border border-slate-200 bg-white px-4 py-3">
+                <summary className="cursor-pointer text-[15.5px] font-bold text-slate-900">{item.q}</summary>
+                <p className="mt-2 text-[15px] leading-7 text-slate-600">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-10 flex justify-center">
+          <Link href="/areas-to-stay" className={buttonClassName({ variant: "hotel", size: "lg" })}>
             {t("back")}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </section>
 
-        <SuicaGuideBody />
+        <p className="mx-auto mt-8 max-w-3xl text-center text-[12px] leading-5 text-slate-400">
+          General travel information, not an official source. Suica availability, deposits and conditions can change and may vary by station and date — check the{" "}
+          <a href={OFFICIAL_SUICA_URL} target="_blank" rel="noopener nofollow" className="underline underline-offset-2">
+            official JR East Suica page
+          </a>{" "}
+          and ask at the station.
+        </p>
 
         <ShareThisPage
           title={t("share.title")}
@@ -150,188 +155,5 @@ export default async function HowToBuySuicaPage({ params }: Props) {
         <SiteLegalLinks className="mt-10 text-slate-500" />
       </Container>
     </main>
-  );
-}
-
-/** English SEO body: buying guide, tips, and FAQ rendered as real HTML. */
-function SuicaGuideBody() {
-  return (
-    <div className="mx-auto mt-12 max-w-3xl space-y-6 text-[15px] leading-7 text-slate-700">
-      <GuideSection title="Where to buy a Suica card">
-        <p>
-          You can buy a Suica at{" "}
-          <strong>ticket machines and staffed ticket windows in major train stations</strong>{" "}
-          — including the JR stations inside Narita and Haneda airports, so you can
-          get one right after you land. Look for the multilingual touchscreen
-          machines near the ticket gates, or a staffed window (Midori-no-madoguchi
-          at JR East stations). Availability of physical cards can change, so{" "}
-          <strong>availability may vary by station and date</strong>; if one machine
-          is sold out, try a nearby larger station or ask staff. On a supported
-          iPhone or Apple Watch you can also add a Suica in Apple Wallet instead of
-          a physical card. For anything official, check the{" "}
-          <a
-            href={OFFICIAL_SUICA_URL}
-            target="_blank"
-            rel="noopener nofollow"
-            className="font-semibold text-[#145aa0] underline underline-offset-2"
-          >
-            JR East Suica page
-          </a>
-          .
-        </p>
-      </GuideSection>
-
-      <GuideSection title="How to buy Suica at a ticket machine">
-        <ol className="list-decimal space-y-1.5 pl-5">
-          <li>Tap the language button and switch the screen to English (or your language).</li>
-          <li>Choose <strong>&ldquo;Purchase new Suica&rdquo;</strong> or the IC card option.</li>
-          <li>Pick the card type — a regular Suica, or the tourist Welcome Suica where it is offered.</li>
-          <li>Insert cash in yen. Many IC-card machines are <strong>cash-only</strong> and do not accept foreign cards.</li>
-          <li>Select how much to load onto the card.</li>
-          <li>Take your Suica and any change or receipt, and you are ready to tap through the gates.</li>
-        </ol>
-        <p className="mt-3 text-[13px] text-slate-500">
-          A regular Suica usually includes a 500 yen refundable deposit; the
-          Welcome Suica has no deposit but expires 28 days after purchase.
-        </p>
-      </GuideSection>
-
-      <GuideSection title="What you need before using the machine">
-        <ul className="list-disc space-y-1.5 pl-5">
-          <li><strong>Cash in Japanese yen</strong> — 1,000 yen notes and coins are safest, since many IC machines reject foreign credit cards.</li>
-          <li>A rough idea of how much to load (see below) so you are not deciding at the machine.</li>
-          <li>No passport or registration is required for a normal Suica.</li>
-        </ul>
-        <p className="mt-3">
-          It also helps to know how to read the gates and signs first — see{" "}
-          <Link href="/how-to-read-japanese-train-signs" className="font-semibold text-[#145aa0] underline underline-offset-2">
-            how to read Japanese train signs
-          </Link>{" "}
-          and{" "}
-          <Link href="/station-practice" className="font-semibold text-[#145aa0] underline underline-offset-2">
-            practice navigating a station
-          </Link>
-          .
-        </p>
-      </GuideSection>
-
-      <GuideSection title="Suica vs Welcome Suica">
-        <p>
-          <strong>Regular Suica:</strong> 500 yen refundable deposit, no expiry,
-          reloadable for years — best if you visit Japan often or want the deposit
-          back when you leave.
-        </p>
-        <p className="mt-2">
-          <strong>Welcome Suica:</strong> made for short-term visitors — no deposit,
-          a distinctive red design, but it expires 28 days after purchase and cannot
-          be refunded. Best for a single short trip, where it is offered.
-        </p>
-        <p className="mt-2 text-[13px] text-slate-500">
-          Physical-card availability has fluctuated in recent years, so a mobile
-          Suica in Apple Wallet is a reliable alternative on supported phones.
-        </p>
-      </GuideSection>
-
-      <GuideSection title="How much money to add first">
-        <p>
-          A common first charge is <strong>2,000–3,000 yen</strong>. That covers
-          several train, subway, and bus rides plus convenience-store purchases, and
-          you can top up anytime. If you are leaving Japan within a day or two, load
-          less — a regular Suica refund has a small handling fee, and a Welcome Suica
-          cannot be refunded at all.
-        </p>
-      </GuideSection>
-
-      <GuideSection title="How to charge (top up) Suica later">
-        <p>
-          Recharge at any ticket machine, fare-adjustment machine, or convenience-store
-          register. Tap <strong>&ldquo;Charge&rdquo; (chāji)</strong>, place the card
-          on the tray or reader, and add 1,000 yen or more in cash. Convenience stores
-          can also top up the card at the counter.
-        </p>
-      </GuideSection>
-
-      <GuideSection title="Common mistakes at the ticket machine">
-        <ul className="list-disc space-y-1.5 pl-5">
-          <li>Trying a foreign credit card in a cash-only IC-card slot.</li>
-          <li>Buying a single paper ticket instead of selecting the IC card / Suica option.</li>
-          <li>Loading far too much right before leaving Japan.</li>
-          <li>Tapping the wrong reader, or tapping too fast before the gate responds.</li>
-          <li>Assuming every station has cards in stock — availability may vary by station and date.</li>
-        </ul>
-      </GuideSection>
-
-      <GuideSection title="Practice with the interactive simulator">
-        <p>
-          The easiest way to feel ready is to run through the flow a couple of times
-          on the{" "}
-          <a href="#simulator" className="font-semibold text-[#145aa0] underline underline-offset-2">
-            free Suica simulator above
-          </a>
-          . It mirrors a real ticket-machine screen — choosing the card, inserting
-          cash, and selecting a charge amount — so the real machine at the airport
-          feels familiar.
-        </p>
-      </GuideSection>
-
-      <GuideSection title="Frequently asked questions">
-        <dl className="space-y-4">
-          {SUICA_FAQ.map((item) => (
-            <div key={item.q} className="border-b border-slate-100 pb-4 last:border-0 last:pb-0">
-              <dt className="font-semibold text-slate-900">{item.q}</dt>
-              <dd className="mt-1 text-slate-600">{item.a}</dd>
-            </div>
-          ))}
-        </dl>
-      </GuideSection>
-
-      <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-slate-400">
-          Plan the rest of your trip
-        </p>
-        <ul className="mt-3 grid gap-2 sm:grid-cols-2">
-          <li>
-            <Link href="/areas-to-stay" className="font-semibold text-[#145aa0] underline underline-offset-2">
-              Where to stay in Tokyo →
-            </Link>
-          </li>
-          <li>
-            <Link href="/areas-to-stay" className="font-semibold text-[#145aa0] underline underline-offset-2">
-              Compare Tokyo hotel areas →
-            </Link>
-          </li>
-          <li>
-            <Link href="/how-to-read-japanese-train-signs" className="font-semibold text-[#145aa0] underline underline-offset-2">
-              Read Japanese train signs →
-            </Link>
-          </li>
-          <li>
-            <Link href="/station-practice" className="font-semibold text-[#145aa0] underline underline-offset-2">
-              Practice station navigation →
-            </Link>
-          </li>
-        </ul>
-      </div>
-
-      <p className="text-[12px] leading-5 text-slate-400">
-        This is general travel information, not an official source and not a purchase
-        or booking service. Suica card availability, deposits, and conditions can
-        change and may vary by station and date — always confirm current details on
-        the{" "}
-        <a href={OFFICIAL_SUICA_URL} target="_blank" rel="noopener nofollow" className="underline underline-offset-2">
-          official JR East Suica page
-        </a>{" "}
-        and at the station.
-      </p>
-    </div>
-  );
-}
-
-function GuideSection({ title, children }: { title: string; children: React.ReactNode }) {
-  return (
-    <section className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm shadow-slate-200/60">
-      <h2 className="text-lg font-bold text-[#082653]">{title}</h2>
-      <div className="mt-3">{children}</div>
-    </section>
   );
 }

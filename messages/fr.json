@@ -5073,7 +5073,10 @@
       "title": "Comment acheter une carte Suica — simulateur interactif",
       "description": "Tu connais quelqu'un qui visite le Japon pour la première fois ? Partage-lui ce simulateur de distributeur Suica pour qu'il s'entraîne avant l'arrivée."
     },
-    "startSimulator": "Lancer le simulateur Suica"
+    "startSimulator": "Lancer le simulateur Suica",
+    "lead": "Essayez ci-dessous le vrai distributeur, puis choisissez un guide court.",
+    "guidesTitle": "Guides Suica",
+    "faqTitle": "Questions"
   },
   "stationPractice": {
     "ui": {

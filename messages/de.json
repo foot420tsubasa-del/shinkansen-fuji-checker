@@ -5072,7 +5072,10 @@
       "title": "So kaufst du eine Suica-Karte — interaktiver Simulator",
       "description": "Kennst du jemanden auf erstem Japan-Trip? Teil diesen Suica-Ticketautomaten-Simulator, damit er sich vor der Landung vertraut machen kann."
     },
-    "startSimulator": "Suica-Simulator starten"
+    "startSimulator": "Suica-Simulator starten",
+    "lead": "Probieren Sie unten den echten Fahrkartenautomaten aus und wählen Sie dann eine kurze Anleitung.",
+    "guidesTitle": "Suica-Anleitungen",
+    "faqTitle": "Fragen"
   },
   "stationPractice": {
     "ui": {
