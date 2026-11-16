@@ -35,10 +35,32 @@ export type ScenicView = {
   season: string;
   /** Only when verified. */
   seat: string | null;
+  /**
+   * Verified seat advice that depends on the direction of travel (seats that
+   * do not turn round, like the Sagano box seats): short, for a badge.
+   */
+  seatByDirection?: Record<Direction, string>;
   basis: string;
   main?: boolean;
   /** Track km where the model has this view in sight (scripts/scenic-seen.mjs), for route search. */
   seenKm?: number[];
+};
+
+export type TicketLink =
+  | { kind: "affiliate"; linkId: string; label: string; product: string }
+  | { kind: "official"; url: string; label: string };
+
+export type TicketGuideData = {
+  /** The answer in one line. */
+  verdict: string;
+  /** "If you … → buy …" rows. */
+  options: { who: string; buy: string; price?: string }[];
+  /** Month the prices were read on the sources. */
+  checked: string;
+  sources: { label: string; url: string }[];
+  links: TicketLink[];
+  /** Internal site page with a fuller comparison, if any. */
+  more?: { href: string; label: string };
 };
 
 export type TrainStop = [station: string, arrival: string | null, departure: string | null];
@@ -84,6 +106,10 @@ export type ScenicRoute = {
    * a reversal "left" is the other side of the car from where you sat down.
    */
   reversals?: string[];
+  /** Which ticket or pass to buy, from the operators' own pages (TicketGuide). */
+  ticketGuide?: TicketGuideData;
+  /** Extra questions for the route page FAQ, beyond the generated side questions. */
+  faq?: { q: string; a: string }[];
   /** Plain-language caveats shown on the route page. */
   notes?: string[];
   page?: { title: string; description: string; h1: string; labelStations: string[] };

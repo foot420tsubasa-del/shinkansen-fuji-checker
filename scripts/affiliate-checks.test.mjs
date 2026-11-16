@@ -821,7 +821,7 @@ test("timeline: a journey that stops short only shows the views on it", () => {
 });
 
 test("disclosure: every booking card keeps its commission line", () => {
-  for (const file of ["components/scenic/ScenicPassCard.tsx", "components/blog/BlogBookingCard.tsx"]) {
+  for (const file of ["components/scenic/ScenicPassCard.tsx", "components/blog/BlogBookingCard.tsx", "components/scenic/TicketGuide.tsx"]) {
     assert.match(readFileSync(file, "utf8"), /commission/i, `${file} lost its disclosure`);
   }
   assert.match(readFileSync("app/[locale]/HomeClient.tsx", "utf8"), /hero\.affiliateNote/, "homepage booking card disclosure");
@@ -997,4 +997,31 @@ test("JR Pass card: only on lines the pass covers (not the Enoden or the Fujikyu
   for (const file of ["app/[locale]/HomeClient.tsx", "app/[locale]/scenic/[slug]/page.tsx"]) {
     assert.match(readFileSync(file, "utf8"), /ticket\?\.linkId === "jrPass"/, `${file} must gate the JR Pass card`);
   }
+});
+
+test("scenic pages: every live route has a ticket guide, with links that exist and official pages on the operators' own sites", () => {
+  const links = JSON.parse(readFileSync("data/affiliate-links.json", "utf8"));
+  const official = ["japanrailpass.net", "www.westjr.co.jp", "www.enoden.co.jp", "www.fujikyu-railway.jp", "www.odakyu-freepass.jp", "www.hakonenavi.jp", "www.sagano-kanko.co.jp", "ars-saganokanko.triplabo.jp", "www.yurikamome.co.jp"];
+  for (const route of scenic.LIVE_ROUTES) {
+    const g = route.ticketGuide;
+    assert.ok(g, `${route.id} has no ticket guide`);
+    assert.ok(g.verdict && g.options.length && g.sources.length && g.links.length && g.checked, `${route.id}: incomplete ticket guide`);
+    for (const l of g.links) {
+      if (l.kind === "affiliate") {
+        assert.ok(links[l.linkId]?.directUrl || links[l.linkId]?.klookPath, `${route.id}: ${l.linkId} is not an existing affiliate link`);
+      } else {
+        assert.ok(official.includes(new URL(l.url).host), `${route.id}: ${l.url} is not an operator page we checked`);
+      }
+    }
+    for (const src of g.sources) assert.ok(official.includes(new URL(src.url).host), `${route.id}: source ${src.url}`);
+    assert.ok((route.faq ?? []).length > 0, `${route.id} has no ticket FAQ`);
+  }
+});
+
+test("Sagano: seats from the operator's guide — even-numbered boxes for the long stretch, D to Kameoka, A to Saga", () => {
+  const route = scenic.LIVE_ROUTES.find((r) => r.id === "sagano-gorge");
+  const long = route.views.find((v) => v.id === "gorge-kameoka");
+  assert.deepEqual(long.seatByDirection, { forward: "D, even-numbered box", backward: "A, even-numbered box" });
+  assert.equal(long.side.forward, "right");
+  assert.ok(route.notes.some((n) => /2027|New cars/i.test(n)), "the new-cars note stays");
 });

@@ -295,7 +295,61 @@
         "fuji",
         "mountain"
       ],
-      "_stationsNote": "Stations past Shin-Osaka are the Sanyo Shinkansen, which Nozomi trains run on without a change; the Mt. Fuji view and its timing from Tokyo are the same."
+      "_stationsNote": "Stations past Shin-Osaka are the Sanyo Shinkansen, which Nozomi trains run on without a change; the Mt. Fuji view and its timing from Tokyo are the same.",
+      "ticketGuide": {
+        "verdict": "Tokyo to Kyoto or Osaka and back: buy single Shinkansen tickets. A JR Pass only pays if you ride a lot more JR in the same 7 days.",
+        "options": [
+          {
+            "who": "Tokyo ↔ Kyoto / Osaka, there and back",
+            "buy": "Single reserved tickets on the Nozomi"
+          },
+          {
+            "who": "Several long JR trips within 7 days",
+            "buy": "7-day JR Pass",
+            "price": "50,000 yen online (53,000 yen through an overseas agent)"
+          },
+          {
+            "who": "Riding the Nozomi on a JR Pass",
+            "buy": "Add a Nozomi ticket for each ride",
+            "price": "4,960 yen Tokyo–Kyoto or Shin-Osaka, 4,180 yen Tokyo–Nagoya"
+          }
+        ],
+        "checked": "read November 2026",
+        "sources": [
+          {
+            "label": "the official Japan Rail Pass site (prices)",
+            "url": "https://japanrailpass.net/en/purchase/price/"
+          },
+          {
+            "label": "its Nozomi ticket page",
+            "url": "https://japanrailpass.net/en/use/special-ticket/"
+          }
+        ],
+        "links": [
+          {
+            "kind": "affiliate",
+            "linkId": "shinkansenTokyoKyoto",
+            "label": "Tokyo → Kyoto Shinkansen tickets",
+            "product": "shinkansen_ticket"
+          },
+          {
+            "kind": "affiliate",
+            "linkId": "jrPass",
+            "label": "Check JR Pass options",
+            "product": "jr_pass"
+          }
+        ],
+        "more": {
+          "href": "/jr-pass-vs-single-ticket",
+          "label": "JR Pass or single tickets: the full comparison"
+        }
+      },
+      "faq": [
+        {
+          "q": "Is the JR Pass worth it just for Tokyo to Kyoto?",
+          "a": "Usually not. The 7-day pass is 50,000 yen online, and a Nozomi needs an extra 4,960 yen ticket each way between Tokyo and Kyoto. For one return trip, single tickets cost less; the pass pays when you add more long JR rides within the 7 days."
+        }
+      ]
     },
     {
       "id": "hokuriku-alps",
@@ -1027,6 +1081,60 @@
       "tags": [
         "mountain",
         "snow"
+      ],
+      "ticketGuide": {
+        "verdict": "Tokyo to Kanazawa and back: single tickets. Going on from Kanazawa to Kyoto or Osaka within a week: the Hokuriku Arch Pass is built for that loop.",
+        "options": [
+          {
+            "who": "Tokyo ↔ Kanazawa, there and back",
+            "buy": "Single reserved tickets on the Hokuriku Shinkansen"
+          },
+          {
+            "who": "Tokyo → Kanazawa → Kyoto / Osaka (or the reverse) within 7 days",
+            "buy": "Hokuriku Arch Pass",
+            "price": "35,000 yen, 7 days — reserved seats on the Hokuriku Shinkansen Tokyo–Tsuruga, the Thunderbird and the Haruka"
+          },
+          {
+            "who": "A wider JR trip, Tokaido Shinkansen included",
+            "buy": "7-day JR Pass",
+            "price": "50,000 yen online; it covers the Hokuriku Shinkansen with no extra ticket"
+          }
+        ],
+        "checked": "read November 2026",
+        "sources": [
+          {
+            "label": "JR West (Hokuriku Arch Pass)",
+            "url": "https://www.westjr.co.jp/travel-information/en/tickets-passes/other/hokuriku-arch-pass/"
+          },
+          {
+            "label": "the official Japan Rail Pass site",
+            "url": "https://japanrailpass.net/en/purchase/price/"
+          }
+        ],
+        "links": [
+          {
+            "kind": "affiliate",
+            "linkId": "shinkansenTokyoKanazawa",
+            "label": "Tokyo → Kanazawa Shinkansen tickets",
+            "product": "shinkansen_ticket"
+          },
+          {
+            "kind": "affiliate",
+            "linkId": "passHokuriku",
+            "label": "Hokuriku Arch Pass",
+            "product": "regional_pass"
+          }
+        ],
+        "more": {
+          "href": "/jr-pass-vs-single-ticket",
+          "label": "JR Pass or single tickets: the full comparison"
+        }
+      },
+      "faq": [
+        {
+          "q": "Does the JR Pass cover the Hokuriku Shinkansen?",
+          "a": "Yes. The extra-ticket rule on the JR Pass applies to the Nozomi and Mizuho on the Tokaido, Sanyo and Kyushu Shinkansen, not to the Hokuriku Shinkansen. Some trains have no non-reserved seats, so reserve before you board."
+        }
       ]
     },
     {
@@ -1535,7 +1643,51 @@
           "Hase",
           "Kamakura"
         ]
-      }
+      },
+      "ticketGuide": {
+        "verdict": "Straight from Fujisawa to Kamakura: a single ticket (310 yen). Getting off along the way four times or more: the Noriorikun day ticket (800 yen) always pays.",
+        "options": [
+          {
+            "who": "One ride, end to end",
+            "buy": "Single ticket",
+            "price": "310 yen Fujisawa–Kamakura (the longest ride)"
+          },
+          {
+            "who": "Two stops off the train",
+            "buy": "Single tickets — two rides never reach 800 yen",
+            "price": "200–310 yen a ride"
+          },
+          {
+            "who": "Four rides or more in a day (Enoshima, Hase, Kamakura…)",
+            "buy": "Noriorikun one-day ticket",
+            "price": "800 yen (child 400), valid on the day of issue; ticket machines at every station, or digital on EMot"
+          }
+        ],
+        "checked": "read November 2026",
+        "sources": [
+          {
+            "label": "Enoden (Noriorikun)",
+            "url": "https://www.enoden.co.jp/tourism/ticket/noriorikun/"
+          },
+          {
+            "label": "Enoden fares",
+            "url": "https://www.enoden.co.jp/train/fare/"
+          }
+        ],
+        "links": [
+          {
+            "kind": "official",
+            "url": "https://www.enoden.co.jp/tourism/ticket/noriorikun/",
+            "label": "Noriorikun on Enoden's site"
+          }
+        ]
+      },
+      "faq": [
+        {
+          "q": "Is the Enoden Noriorikun day pass worth it?",
+          "a": "Only if you ride four times or more, or three longer rides. Single fares run from 200 to 310 yen, so two rides never reach the 800 yen of the pass. It is valid on the day it is issued, and also gives discounts at places along the line."
+        }
+      ]
     },
     {
       "id": "fujikyu-fuji",
@@ -2206,6 +2358,63 @@
       },
       "reversals": [
         "Mt. Fuji"
+      ],
+      "ticketGuide": {
+        "verdict": "Otsuki to Kawaguchiko with no stops: a single ticket (1,170 yen). Stopping at Shimoyoshida or Fuji-Q on the way, or riding the lake buses too: look at the Fujikyu free tickets.",
+        "options": [
+          {
+            "who": "Otsuki → Kawaguchiko, local train",
+            "buy": "Single ticket",
+            "price": "1,170 yen"
+          },
+          {
+            "who": "Shinjuku → Kawaguchiko without changing",
+            "buy": "Fuji Excursion limited express (reserved)",
+            "price": "4,200 yen in all (fare 2,580 + express 1,620)"
+          },
+          {
+            "who": "Getting off on the way (Shimoyoshida, Mt. Fuji, Fuji-Q)",
+            "buy": "Fujikyu Line 1-day or 2-day free ticket"
+          },
+          {
+            "who": "Buses around the Five Lakes too, over two days",
+            "buy": "Mt. Fuji & Fuji Five Lakes Passport (buses and the Fujikyu Line)"
+          }
+        ],
+        "checked": "read November 2026",
+        "sources": [
+          {
+            "label": "the Fujikyu Line fare table",
+            "url": "https://www.fujikyu-railway.jp/fare/"
+          },
+          {
+            "label": "its Fuji Excursion page",
+            "url": "https://www.fujikyu-railway.jp/fujikaiyuu/"
+          },
+          {
+            "label": "its discount tickets page",
+            "url": "https://www.fujikyu-railway.jp/ticket/couponpass.php"
+          }
+        ],
+        "links": [
+          {
+            "kind": "official",
+            "url": "https://www.fujikyu-railway.jp/ticket/couponpass.php",
+            "label": "Fujikyu free tickets"
+          },
+          {
+            "kind": "affiliate",
+            "linkId": "fujiKawaguchikoPass",
+            "label": "Mt. Fuji area pass (Klook)",
+            "product": "regional_pass"
+          }
+        ]
+      },
+      "faq": [
+        {
+          "q": "Does the JR Pass cover the Fujikyu Line to Kawaguchiko?",
+          "a": "The Japan Rail Pass is for JR lines. The Fujikyu Line beyond Otsuki is a separate railway, and it is not among the non-JR sections the pass's own conditions list as covered — so expect to pay the Fujikyu fare, including on the through Fuji Excursion."
+        }
       ]
     },
     {
@@ -2716,7 +2925,57 @@
         ]
       },
       "side": null,
-      "seat": null
+      "seat": null,
+      "ticketGuide": {
+        "verdict": "Just the train up and back: pay per ride (460 yen each way, Hakone-Yumoto–Gora). Doing the Hakone loop — cable car, ropeway, the cruise on Lake Ashi, buses: the Hakone Freepass.",
+        "options": [
+          {
+            "who": "Hakone-Yumoto ↔ Gora on the train only",
+            "buy": "Single tickets",
+            "price": "460 yen each way"
+          },
+          {
+            "who": "The loop by cable car, ropeway, Lake Ashi cruise and bus",
+            "buy": "Hakone Freepass, from Odawara or Hakone-Yumoto",
+            "price": "6,000 yen for 2 days, 6,400 yen for 3 days"
+          },
+          {
+            "who": "Starting from Shinjuku on Odakyu",
+            "buy": "Hakone Freepass from Shinjuku (Odakyu round trip included)",
+            "price": "7,100 yen for 2 days, 7,500 yen for 3 days; the Romancecar express ticket is extra"
+          }
+        ],
+        "checked": "read November 2026",
+        "sources": [
+          {
+            "label": "Odakyu (Hakone Freepass prices)",
+            "url": "https://www.odakyu-freepass.jp/hakone/buy.html"
+          },
+          {
+            "label": "Hakone Navi (what it covers, and train fares)",
+            "url": "https://www.hakonenavi.jp/transportation/ticket/freepass/"
+          }
+        ],
+        "links": [
+          {
+            "kind": "affiliate",
+            "linkId": "hakone",
+            "label": "Hakone Freepass (Klook)",
+            "product": "regional_pass"
+          },
+          {
+            "kind": "official",
+            "url": "https://www.odakyu-freepass.jp/hakone/",
+            "label": "Hakone Freepass on Odakyu's site"
+          }
+        ]
+      },
+      "faq": [
+        {
+          "q": "Should I buy the Hakone Freepass just for the Hakone Tozan train?",
+          "a": "No. Hakone-Yumoto to Gora is 460 yen each way, far below the 6,000 yen of a 2-day pass. The pass covers eight ways of getting around — the train, the cable car, the ropeway, the Lake Ashi cruise and buses — and pays when you ride the loop."
+        }
+      ]
     },
     {
       "id": "sagano-gorge",
@@ -3010,7 +3269,11 @@
             3,
             3.05,
             3.07
-          ]
+          ],
+          "seatByDirection": {
+            "forward": "D, odd-numbered box",
+            "backward": "A, odd-numbered box"
+          }
         },
         {
           "id": "gorge-kameoka",
@@ -3166,15 +3429,19 @@
             8.42,
             8.45,
             8.47
-          ]
+          ],
+          "seatByDirection": {
+            "forward": "D, even-numbered box",
+            "backward": "A, even-numbered box"
+          }
         }
       ],
       "notes": [
         "The line crosses the river near Torokko Hozukyo, so the gorge switches sides: on the left from Arashiyama to Hozukyo, then on the right to Kameoka, going from Saga — the longer stretch. Coming back from Kameoka it is the other way round: on the left most of the way, then on the right after Hozukyo.",
-        "Every seat is reserved, on facing wooden benches, so your side depends on the seat you are given. If you can choose, take the right side going to Kameoka (the left coming back) for the longer stretch, and look across for the rest.",
+        "Seats are four-person boxes, A to D; the window seats are A and D. Going to Kameoka, C and D face forward; going to Saga, A and B do. Online you can choose the car and the seat: take an even-numbered box for the long stretch of gorge in either direction — D going to Kameoka, A going to Saga, for the window facing forward.",
         "The current trains run until 29 December 2026. New cars start on 1 March 2027, when times and fares may change — we will update this page then."
       ],
-      "verification": "Side and sections from a terrain model (GSI 10 m elevation, OSM track followed rail by rail): the gorge counts as in view where the ground falls 10 m or more to the river within 200 m on one side and no nearer bank hides it. The order — left first, then right after the crossing near Hozukyo — matches All About’s published account; one other guide gives the halves the other way round. No seat letters.",
+      "verification": "Side and sections from a terrain model (GSI 10 m elevation, OSM track followed rail by rail): the gorge counts as in view where the ground falls 10 m or more to the river within 200 m on one side and no nearer bank hides it. The order — left first, then right after the crossing near Hozukyo — matches All About’s published account; one other guide gives the halves the other way round. Seats from Sagano Scenic Railway's own seat guide and FAQ: A and D are the window seats, C and D face forward going to Kameoka, A and B going to Saga. The even-numbered boxes are on the side of the line that has the gorge for the long stretch, reading the official seat chart against the direction of travel.",
       "page": {
         "title": "Sagano Romantic Train: Which Side for the Hozu Gorge?",
         "description": "Torokko Saga to Kameoka: the Hozu river is on the left as far as Hozukyo, then on the right — the longer stretch — all the way to Kameoka. A terrain model, a map and the minutes from the 2026 timetable.",
@@ -3185,7 +3452,58 @@
           "Torokko Hozukyo",
           "Torokko Kameoka"
         ]
-      }
+      },
+      "ticketGuide": {
+        "verdict": "One flat fare, 880 yen, any stretch. Book online to pick an even-numbered box; autumn trains often show sold out.",
+        "options": [
+          {
+            "who": "Any one-way ride",
+            "buy": "Reserved seat ticket",
+            "price": "880 yen (child 440)"
+          },
+          {
+            "who": "Choosing your side",
+            "buy": "Book online — you pick the car and seat on a seat map",
+            "price": "same fare"
+          },
+          {
+            "who": "Turning up on the day",
+            "buy": "Station windows sell that day's seats first come, first served from about 8:35 (Saga)"
+          }
+        ],
+        "checked": "read November 2026",
+        "sources": [
+          {
+            "label": "Sagano Scenic Railway (fares and how to buy)",
+            "url": "https://www.sagano-kanko.co.jp/ticket/"
+          },
+          {
+            "label": "its seat guide",
+            "url": "https://www.sagano-kanko.co.jp/seat/"
+          },
+          {
+            "label": "its FAQ",
+            "url": "https://www.sagano-kanko.co.jp/faq/"
+          }
+        ],
+        "links": [
+          {
+            "kind": "official",
+            "url": "https://ars-saganokanko.triplabo.jp/home",
+            "label": "Reserve on Sagano Scenic Railway's site"
+          }
+        ]
+      },
+      "faq": [
+        {
+          "q": "Which seat should I book on the Sagano Romantic Train?",
+          "a": "A window seat in an even-numbered box: the gorge is on that side for the longer stretch in both directions. Take D going to Kameoka or A going to Saga to face forward. The odd-numbered boxes have the river between Arashiyama and Hozukyo."
+        },
+        {
+          "q": "Can I choose my seat?",
+          "a": "Yes, online: Sagano Scenic Railway's booking site shows a seat map for the train you pick. Seats can be changed up to three times, on the same train, until 23:59 the day before."
+        }
+      ]
     },
     {
       "id": "yurikamome-night",
@@ -3958,7 +4276,47 @@
           "Telecom Center",
           "Toyosu"
         ]
-      }
+      },
+      "ticketGuide": {
+        "verdict": "Odaiba and back: single fares (390 yen at most). Riding three times or more, hopping between Odaiba stops: the one-day ticket (820 yen).",
+        "options": [
+          {
+            "who": "Shimbashi → Odaiba or Toyosu, and back",
+            "buy": "Single tickets or an IC card",
+            "price": "390 yen ticket, 388 yen IC, Shimbashi–Toyosu (the longest ride)"
+          },
+          {
+            "who": "Three rides or more in a day",
+            "buy": "One-day ticket (QR mobile ticket)",
+            "price": "820 yen (child 410)"
+          },
+          {
+            "who": "An evening into the next day",
+            "buy": "24-hour ticket (QR mobile ticket)",
+            "price": "900 yen (child 450)"
+          }
+        ],
+        "checked": "read November 2026",
+        "sources": [
+          {
+            "label": "Yurikamome (fares)",
+            "url": "https://www.yurikamome.co.jp/ride-guidance/fare.html"
+          }
+        ],
+        "links": [
+          {
+            "kind": "official",
+            "url": "https://www.yurikamome.co.jp/ride-guidance/fare.html",
+            "label": "Yurikamome fares and passes"
+          }
+        ]
+      },
+      "faq": [
+        {
+          "q": "Is the Yurikamome one-day ticket worth it?",
+          "a": "From the third ride. The longest single ride, Shimbashi to Toyosu, is 390 yen, so two rides (780 yen at most) cost less than the 820 yen day ticket."
+        }
+      ]
     },
     {
       "id": "joetsu-snow",

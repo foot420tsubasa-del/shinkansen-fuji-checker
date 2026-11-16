@@ -91,7 +91,7 @@ export function RouteTimeline({
     first: addClock(departure, it.start),
     peak: addClock(departure, it.start),
     last: addClock(departure, Math.max(it.end, it.start + it.visibleMinutes)),
-    title: `${it.view.name} — ${it.side === "right" ? t("right") : t("left")}${it.view.seat ? ` (${t("seat")} ${it.view.seat.split(" ")[0]})` : ""}`,
+    title: `${it.view.name} — ${it.side === "right" ? t("right") : t("left")}${it.view.seatByDirection ? ` (${it.view.seatByDirection[direction]})` : it.view.seat ? ` (${t("seat")} ${it.view.seat.split(" ")[0]})` : ""}`,
     details: `${from} → ${to}${train ? ` · ${train[direction].train}` : ""}. ${t("minutes", { n: it.visibleMinutes })}.`,
     url: `https://fujiseat.com${route.href ?? ""}`,
     alarmMinutes: 2,
@@ -200,7 +200,9 @@ export function RouteTimeline({
                       <span className={["rounded-full px-2.5 py-0.5 text-[11px] font-extrabold uppercase text-white", it.side === "right" ? "bg-[#d94a32]" : "bg-[#2f6fd6]"].join(" ")}>
                         {it.side === "right" ? t("right") : t("left")}
                       </span>
-                      {it.view.seat ? (
+                      {it.view.seatByDirection ? (
+                        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10.5px] font-bold text-slate-700">{it.view.seatByDirection[direction]}</span>
+                      ) : it.view.seat ? (
                         <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10.5px] font-bold text-slate-700">
                           {t("seat")} {it.view.seat.split(" ")[0]}
                         </span>

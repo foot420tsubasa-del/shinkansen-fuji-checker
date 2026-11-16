@@ -9,7 +9,9 @@ import { getAlternates } from "@/i18n/hreflang";
 import { RouteTimeline } from "@/components/scenic/RouteTimeline";
 import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
 import { LIVE_ROUTES, flipSide, reversalsBefore, seatedSide, type ScenicRoute } from "@/lib/scenic";
-import { JR_PASS_URL } from "@/src/affiliateLinks";
+import { AFFILIATE_LINKS, JR_PASS_URL, getAffUrl } from "@/src/affiliateLinks";
+import { TicketGuide, type ResolvedTicketLink } from "@/components/scenic/TicketGuide";
+import type { AffiliateProvider } from "@/lib/affiliate/links";
 
 /*
  * One template for every mapped route (since 2026-11-15): the page reads only
@@ -55,14 +57,25 @@ export default async function ScenicRoutePage({ params }: Props) {
   const [from, to] = route.directions.forward;
   const views = route.views;
 
+  // Every view gets its side question; where the side rests on the terrain
+  // model alone, the answer says so.
   const faq = [
     ...views
-      .filter((v) => !/only/.test(v.basis))
-      .map((v) => ({
-        q: `Which side of the ${route.line} is ${v.name} on?`,
-        a: `Going from ${from} to ${to}, ${v.name} is on the ${v.side.forward} side, between ${v.from} and ${v.to}${v.seat ? ` — Seat ${v.seat.split(" ")[0]} in standard cars` : ""}. Going from ${to} to ${from}, it is on the ${flipSide(v.side.forward)}.`,
-      })),
-    ...(views.some((v) => v.seat)
+      .filter((v) => !/glimpse|after the reversal/i.test(v.name))
+      .map((v) => {
+        const seatText = v.seatByDirection
+          ? ` — ${v.seatByDirection.forward} going to ${to}, ${v.seatByDirection.backward} going to ${from}`
+          : v.seat
+            ? ` — Seat ${v.seat.split(" ")[0]} in standard cars`
+            : "";
+        const basis = /only/.test(v.basis) ? " This comes from our terrain model; we found no published source for the side." : "";
+        const name = v.name.replace(/^The /, "the ");
+        return {
+          q: `Which side of the ${route.line} is ${name} on?`,
+          a: `Going from ${from} to ${to}, ${name} is on the ${v.side.forward} side, between ${v.from} and ${v.to}${seatText}. Going from ${to} to ${from}, it is on the ${flipSide(v.side.forward)}.${basis}`,
+        };
+      }),
+    ...(views.some((v) => v.seat || v.seatByDirection)
       ? []
       : [
           {
@@ -70,7 +83,16 @@ export default async function ScenicRoutePage({ params }: Props) {
             a: "Pick a window seat on the side you need for your direction of travel. We give sides rather than seat letters because we have not yet verified the letters for this line.",
           },
         ]),
+    ...(route.faq ?? []),
   ];
+
+  const ticketLinks: ResolvedTicketLink[] = (route.ticketGuide?.links ?? []).flatMap((l): ResolvedTicketLink[] => {
+    if (l.kind === "official") return [{ kind: "official", href: l.url, label: l.label }];
+    const href = getAffUrl(l.linkId);
+    const config = AFFILIATE_LINKS[l.linkId];
+    if (!href || !config) return [];
+    return [{ kind: "affiliate", href, label: l.label, product: l.product, linkId: l.linkId, provider: config.provider as AffiliateProvider, adid: config.adid || undefined }];
+  });
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -110,7 +132,11 @@ export default async function ScenicRoutePage({ params }: Props) {
                         </span>
                         <span>
                           <b>{v.name}</b>
-                          {v.seat ? <span className="ml-1.5 rounded-full bg-white/15 px-2 py-0.5 text-[11px] font-bold">Seat {v.seat.split(" ")[0]}</span> : null}
+                          {v.seatByDirection ? (
+                            <span className="ml-1.5 rounded-full bg-white/15 px-2 py-0.5 text-[11px] font-bold">{v.seatByDirection[dir]}</span>
+                          ) : v.seat ? (
+                            <span className="ml-1.5 rounded-full bg-white/15 px-2 py-0.5 text-[11px] font-bold">Seat {v.seat.split(" ")[0]}</span>
+                          ) : null}
                           <span className="block text-sm text-white/70">
                             {v.from === v.to ? `near ${v.from}` : dir === "forward" ? `${v.from} → ${v.to}` : `${v.to} → ${v.from}`}
                           </span>
@@ -156,7 +182,11 @@ export default async function ScenicRoutePage({ params }: Props) {
                   <tr key={v.id} className="border-t border-slate-100 align-top">
                     <td className="px-4 py-3 font-semibold">
                       {v.name}
-                      {v.seat ? <span className="block text-xs font-normal text-slate-500">Seat {v.seat}</span> : null}
+                      {v.seatByDirection ? (
+                        <span className="block text-xs font-normal text-slate-500">{v.seatByDirection.forward}</span>
+                      ) : v.seat ? (
+                        <span className="block text-xs font-normal text-slate-500">Seat {v.seat}</span>
+                      ) : null}
                     </td>
                     <td className="px-4 py-3 text-slate-700">
                       {v.from === v.to ? `near ${v.from}` : `${v.from} – ${v.to}`}
@@ -179,7 +209,7 @@ export default async function ScenicRoutePage({ params }: Props) {
             {[
               ...(route.notes ?? []),
               "Trains pass every one of these stretches whether or not they stop; the views are between stations, not at them.",
-              views.some((v) => v.seat)
+              views.some((v) => v.seat || v.seatByDirection)
                 ? "Seat letters are shown only where they have been verified."
                 : "Seat letters: we give sides, not letters, unless they have been verified.",
             ].map((line) => (
@@ -190,6 +220,15 @@ export default async function ScenicRoutePage({ params }: Props) {
             ))}
           </ul>
         </section>
+
+        {route.ticketGuide ? (
+          <section className="mt-10">
+            <h2 className="text-2xl font-extrabold tracking-[-0.02em]">Which ticket?</h2>
+            <div className="mt-4">
+              <TicketGuide routeId={route.id} line={route.line} guide={route.ticketGuide} links={ticketLinks} />
+            </div>
+          </section>
+        ) : null}
 
         {route.ticket?.linkId === "jrPass" ? (
           <section className="mt-10">
