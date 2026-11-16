@@ -8,7 +8,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import ts from "typescript";
 
@@ -1041,4 +1041,31 @@ test("scenic tickets: the four Klook links issued on 2026-11-17 are used exactly
     const route = scenic.LIVE_ROUTES.find((r) => r.id === routeId);
     assert.ok(route.ticketGuide.links.some((l) => l.linkId === id), `${id} is on ${routeId}`);
   }
+});
+
+test("links sheet: export and import round-trip with no change, and unsafe edits are refused", async () => {
+  const { execFileSync, spawnSync } = await import("node:child_process");
+  const { mkdtempSync } = await import("node:fs");
+  const { tmpdir } = await import("node:os");
+  execFileSync("node", ["scripts/links-sheet.mjs", "export"]);
+  const sheet = JSON.parse(readFileSync(".cache/links-sheet.json", "utf8"));
+  const dir = mkdtempSync(tmpdir() + "/links-");
+  const run = (values) => {
+    const f = dir + "/rows.json";
+    writeFileSync(f, JSON.stringify({ values }));
+    return spawnSync("node", ["scripts/links-sheet.mjs", "import", f], { encoding: "utf8" });
+  };
+  const same = run(sheet.values);
+  assert.equal(same.status, 0, same.stderr);
+  assert.match(same.stdout, /変更はありません/);
+  const idx = sheet.values.findIndex((r) => r[8] === "jrPass");
+  const blank = structuredClone(sheet.values);
+  blank[idx][3] = "";
+  assert.notEqual(run(blank).status, 0, "a live URL cannot be blanked");
+  const forged = structuredClone(sheet.values);
+  forged[idx][3] = forged[idx][3].replace("k_site=https%3A%2F%2Fwww.klook.com", "k_site=https%3A%2F%2Fexample.com");
+  assert.notEqual(run(forged).status, 0, "a Klook link must keep a klook.com k_site");
+  const kSiteOnly = structuredClone(sheet.values);
+  kSiteOnly[idx][3] = kSiteOnly[idx][3].replace(/k_site=.*/, "k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fother%2F");
+  assert.notEqual(run(kSiteOnly).status, 0, "changing k_site without a new adid is refused");
 });
