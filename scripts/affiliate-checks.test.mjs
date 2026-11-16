@@ -1069,3 +1069,24 @@ test("links sheet: export and import round-trip with no change, and unsafe edits
   kSiteOnly[idx][3] = kSiteOnly[idx][3].replace(/k_site=.*/, "k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fother%2F");
   assert.notEqual(run(kSiteOnly).status, 0, "changing k_site without a new adid is refused");
 });
+
+test("guide: quiet Klook text links after the Quick Answer and in 'Booking via Klook' (trial to 2026-12-01)", () => {
+  // Re-added 2026-11-17 at the user's request, as one-line text links under
+  // new placements, not the withdrawn buttons (guide_quick_answer: 0.41% CTR;
+  // guide_how_to_book: 0-2 clicks in 90 days). Review on 2026-12-01: remove
+  // either if its CTR is under 1% or guide_seat_result clicks fall against the
+  // previous two weeks.
+  const src = readFileSync("app/[locale]/guide/page.tsx", "utf8");
+  const quick = src.indexOf('placement="guide_quick_answer_text"');
+  const howTo = src.indexOf('placement="guide_klook_text"');
+  const checker = src.indexOf("{renderSeatCheck()}");
+  assert.ok(quick > 0 && quick < checker, "the Quick Answer line sits above the seat checker, which stays the main CTA");
+  assert.ok(howTo > src.indexOf("{copy.klookText}"), "the Booking via Klook paragraph has its link");
+  for (const at of [quick, howTo]) {
+    const block = src.slice(at - 400, at + 400);
+    assert.match(block, /href=\{KLOOK_URL\}/, "existing Shinkansen ticket link only");
+    assert.match(block, /hero\.affiliateNote/, "commission line");
+  }
+  const copy = src.slice(src.indexOf("const quickAnswerCopyByLocale"), src.indexOf("const priorityGuideFaqByLocale"));
+  assert.equal((copy.match(/\n    book: /g) || []).length, 9, "a booking line in every locale");
+});

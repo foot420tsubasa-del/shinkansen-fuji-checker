@@ -4,7 +4,8 @@ import { Mountain, Train, Info } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
-import { KLOOK_URL, JR_PASS_URL } from "@/src/affiliateLinks";
+import { AFFILIATE_LINKS, KLOOK_URL, JR_PASS_URL } from "@/src/affiliateLinks";
+import { GuideKlookTextLink } from "@/components/affiliate/GuideKlookTextLink";
 import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
 import { MonthlyOdds } from "@/components/content/MonthlyOdds";
 import { SiteFooter } from "@/components/content/SiteFooter";
@@ -162,6 +163,7 @@ const enGuideCopy = {
   jrOfficeH3: "At a JR ticket office (Japanese phrase included)",
   klookH3: "Booking via Klook (English UI)",
   klookText: "Choose the Tokaido Shinkansen route, then select column E on the seat map when the option is available.",
+  klookLink: "Book Tokaido Shinkansen tickets on Klook →",
   jrPassCounterH3: "Reserving with a JR Pass",
   jrPassCounterTextBefore: "With a JR Pass, reserve your seat at a JR Reservation Counter before boarding. For an early Shinkansen day, it can help to",
   stayLink: "stay near Tokyo Station for an early Shinkansen day",
@@ -244,6 +246,7 @@ const frGuideCopy = {
   jrOfficeH3: "Au guichet JR (avec la phrase japonaise utile)",
   klookH3: "Réservation via Klook (interface en français/anglais)",
   klookText: "Choisissez le trajet Tokaido Shinkansen, puis sélectionnez la colonne E sur le plan de siège lorsque l'option est disponible.",
+  klookLink: "Réserver des billets du Tokaido Shinkansen sur Klook →",
   jrPassCounterH3: "Avec un JR Pass au comptoir de réservation",
   jrPassCounterTextBefore: "Avec un JR Pass, réservez votre siège à un comptoir de réservation JR avant de monter à bord. Pour un départ tôt en Shinkansen, il peut être pratique de",
   stayLink: "séjourner près de la gare de Tokyo",
@@ -788,6 +791,8 @@ type QuickAnswerCopy = {
   summary: string;
   items: Array<{ bold: string; text: string }>;
   cta: string;
+  /** One quiet line after the Quick Answer: the reader knows the seat, here is where to book it. */
+  book: string;
 };
 
 type GuideFaqItem = { q: string; a: string };
@@ -804,6 +809,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
       { bold: "Best timing:", text: "be ready around Shin-Fuji." },
     ],
     cta: "Open free Seat Checker",
+    book: "Got your side? Book your Shinkansen ticket on Klook →",
   },
   "pt-BR": {
     title: "Resposta rápida",
@@ -816,6 +822,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
       { bold: "Melhor timing:", text: "esteja pronto perto de Shin-Fuji." },
     ],
     cta: "Abrir verificador de assento grátis",
+    book: "Já sabe o lado? Reserve sua passagem do Shinkansen na Klook →",
   },
   es: {
     title: "Respuesta rápida",
@@ -828,6 +835,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
       { bold: "Mejor momento:", text: "prepárate cerca de Shin-Fuji." },
     ],
     cta: "Abrir verificador de asiento gratis",
+    book: "¿Ya sabes el lado? Reserva tu billete de Shinkansen en Klook →",
   },
   ko: {
     title: "빠른 답변",
@@ -840,6 +848,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
       { bold: "좋은 타이밍:", text: "신후지 근처에서 준비하세요." },
     ],
     cta: "무료 좌석 체커 열기",
+    book: "좌석 방향을 정하셨나요? Klook에서 신칸센 티켓을 예약하세요 →",
   },
   "zh-TW": {
     title: "快速答案",
@@ -852,6 +861,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
       { bold: "最佳時機：", text: "接近新富士時先準備好。" },
     ],
     cta: "開啟免費座位檢查器",
+    book: "確定好座位方向了嗎？在 Klook 預訂新幹線車票 →",
   },
   "zh-CN": {
     title: "快速答案",
@@ -864,6 +874,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
       { bold: "最佳时机：", text: "接近新富士时提前准备。" },
     ],
     cta: "打开免费座位检查器",
+    book: "确定好座位方向了吗？在 Klook 预订新干线车票 →",
   },
   fr: {
     title: "Réponse rapide",
@@ -876,6 +887,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
       { bold: "Meilleur timing :", text: "soyez prêt autour de Shin-Fuji." },
     ],
     cta: "Ouvrir le vérificateur de siège gratuit",
+    book: "Vous savez de quel côté vous asseoir ? Réservez votre billet de Shinkansen sur Klook →",
   },
   de: {
     title: "Kurzantwort",
@@ -888,6 +900,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
       { bold: "Bester Zeitpunkt:", text: "sei rund um Shin-Fuji bereit." },
     ],
     cta: "Kostenlosen Sitz-Checker öffnen",
+    book: "Seite klar? Buch dein Shinkansen-Ticket auf Klook →",
   },
   ru: {
     title: "Короткий ответ",
@@ -900,6 +913,7 @@ const quickAnswerCopyByLocale: Record<string, QuickAnswerCopy> = {
       { bold: "Лучший момент:", text: "будьте готовы около Shin-Fuji." },
     ],
     cta: "Открыть бесплатную проверку места",
+    book: "Сторону выбрали? Забронируйте билет на синкансэн на Klook →",
   },
 };
 
@@ -1008,6 +1022,13 @@ const priorityGuideFaqByLocale: Record<string, GuideFaqItem[]> = {
 export default async function GuidePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "guide" });
+  const tHome = await getTranslations({ locale, namespace: "home" });
+  // Two quiet text links, on trial from 2026-11-17 to 2026-12-01 at the user's
+  // request (the button slots they replace were withdrawn for 0.41% CTR):
+  // keep them only if each clears 1% CTR and guide_seat_result clicks hold.
+  // The generic Tokaido Shinkansen ticket link (shinkansenTicket), the one
+  // that converts for both directions; same link as the seat checker's fallback.
+  const klookAdid = AFFILIATE_LINKS.shinkansenTicket?.adid || undefined;
   const isFr = locale === "fr";
   const copy = locale === "fr" ? frGuideCopy : { ...enGuideCopy, ...guideCopyOverridesByLocale[locale] };
   const quickAnswer = quickAnswerCopyByLocale[locale] ?? quickAnswerCopyByLocale.en;
@@ -1222,6 +1243,17 @@ export default async function GuidePage({ params }: Props) {
               </li>
             ))}
           </ul>
+          <GuideKlookTextLink
+            href={KLOOK_URL}
+            label={quickAnswer.book}
+            note={tHome("hero.affiliateNote")}
+            placement="guide_quick_answer_text"
+            linkId="shinkansenTicket"
+            adid={klookAdid}
+            locale={locale}
+            pagePath={guidePath}
+            className="mt-3 border-t border-emerald-200/70 pt-2.5 text-[13px]"
+          />
         </section>
 
         {renderSeatCheck()}
@@ -1464,6 +1496,17 @@ export default async function GuidePage({ params }: Props) {
             </ul>
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.klookH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.klookText}</p>
+            <GuideKlookTextLink
+              href={KLOOK_URL}
+              label={copy.klookLink}
+              note={tHome("hero.affiliateNote")}
+              placement="guide_klook_text"
+              linkId="shinkansenTicket"
+              adid={klookAdid}
+              locale={locale}
+              pagePath={guidePath}
+              className="mt-1.5 text-[12px]"
+            />
             <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.jrPassCounterH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.jrPassCounterTextBefore} <Link href="/areas-to-stay" className="font-semibold text-sky-700 underline underline-offset-2">{copy.stayLink}</Link>.</p>
           </section>

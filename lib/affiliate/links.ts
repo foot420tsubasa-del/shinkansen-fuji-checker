@@ -30,6 +30,8 @@ export type AffiliatePlacement =
   | "scenic_route_jr_pass"
   | "scenic_route_ticket"
   | "route_search_ticket"
+  | "guide_quick_answer_text"
+  | "guide_klook_text"
   | "guide_seat_result"
   | "guide_seat_result_jr_pass"
   | "seat_result_return_tour"
