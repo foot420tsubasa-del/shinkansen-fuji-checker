@@ -37,6 +37,8 @@ export type ScenicView = {
   seat: string | null;
   basis: string;
   main?: boolean;
+  /** Track km where the model has this view in sight (scripts/scenic-seen.mjs), for route search. */
+  seenKm?: number[];
 };
 
 export type TrainStop = [station: string, arrival: string | null, departure: string | null];
@@ -192,26 +194,60 @@ function position(route: ScenicRoute, name: string): number | null {
   return st.km ?? st.order ?? null;
 }
 
+/**
+ * Whether this exact trip is one the route's answer was built for. Both
+ * stations being on the line is not enough (2026-11-16: Shin-Osaka →
+ * Hiroshima matched the Tokaido line and showed the Mt. Fuji answer, timed
+ * from Tokyo, for a train that never passes Fuji):
+ * - Fuji model (Tokaido): boarding at a station the model times from, and
+ *   getting off at one on the far side of Fuji — Tokyo, Shinagawa or
+ *   Shin-Yokohama to Nagoya, Kyoto or Shin-Osaka, and back.
+ * - Timetable routes: a train in the timetable calls at both stations, and
+ *   the trip passes a point where the model has a view in sight.
+ */
+function servesTrip(route: ScenicRoute, direction: Direction, from: string, to: string): boolean {
+  const timing = route.timing;
+  if (timing?.kind === "fuji-model") {
+    const opposite: Direction = direction === "forward" ? "backward" : "forward";
+    return timing.origins[direction].includes(from) && timing.origins[opposite].includes(to);
+  }
+  if (timing?.kind === "timetable") {
+    if (!trainsServing(route, direction, from, to).length) return false;
+    const a = position(route, from)!;
+    const b = position(route, to)!;
+    const lo = Math.min(a, b);
+    const hi = Math.max(a, b);
+    const offset = route.trackKmOffset ?? 0;
+    // A point the model has in sight between the two stations — the same
+    // test the timeline makes, so a match always has something to show.
+    return (route.views ?? []).some((v) => (v.seenKm ?? []).some((km) => km + offset >= lo && km + offset <= hi));
+  }
+  return false;
+}
+
 export function matchRoute(from: string, to: string): RouteMatch {
+  // Exact matches only. No default route, no first route, no "nearest" route:
+  // anything a live route was not built for is unsupported.
   for (const route of LIVE_ROUTES) {
     const a = position(route, from);
     const b = position(route, to);
     if (a === null || b === null || a === b) continue;
-    return { kind: "live", route, direction: b > a ? "forward" : "backward", from, to };
+    const direction: Direction = b > a ? "forward" : "backward";
+    if (servesTrip(route, direction, from, to)) return { kind: "live", route, direction, from, to };
   }
   const words = [from, to].map(norm);
-  const related = ROUTES.filter(
-    (r) => r.status !== "live" && (r.near ?? []).some((n) => words.some((w) => norm(n) === w || w.includes(norm(n)))),
-  );
-  const fallback = ROUTES.filter((r) => r.status !== "live" && r.image);
-  // A mapped line that serves one end of the trip (Tokyo → Kamakura: the Enoden).
-  const nearbyLive = LIVE_ROUTES.filter((r) => position(r, from) !== null || position(r, to) !== null);
+  const nearMatch = (r: ScenicRoute) => (r.near ?? []).some((n) => words.some((w) => norm(n) === w || w.includes(norm(n))));
+  const related = ROUTES.filter((r) => r.status !== "live" && nearMatch(r));
+  const fallback = ROUTES.filter((r) => r.status !== "live");
+  // A mapped line that the trip leads to (Tokyo → Kamakura: the Enoden), by
+  // the places it is known for — not every line that merely passes a station.
+  const nearbyLive = LIVE_ROUTES.filter(nearMatch);
   return {
     kind: "unsupported",
     from,
     to,
     nearbyLive,
-    comingSoon: (related.length ? related : fallback).filter((r) => !nearbyLive.includes(r)).slice(0, nearbyLive.length ? 2 : 3),
+    comingSoon: (related.length ? related : fallback).slice(0, nearbyLive.length ? 2 : 3),
   };
 }
 

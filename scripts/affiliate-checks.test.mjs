@@ -827,14 +827,61 @@ test("disclosure: every booking card keeps its commission line", () => {
   assert.match(readFileSync("app/[locale]/HomeClient.tsx", "utf8"), /hero\.affiliateNote/, "homepage booking card disclosure");
 });
 
-test("route search: through-running Nozomi destinations past Osaka still get the Fuji answer", () => {
-  for (const to of ["Hiroshima", "Hakata", "Okayama"]) {
-    const m = scenic.matchRoute("Tokyo", to);
-    assert.equal(m.kind, "live", `Tokyo → ${to}`);
-    assert.equal(m.route.id, "tokaido-fuji");
-    assert.equal(m.direction, "forward");
+test("route search: exact matches only — Shin-Osaka → Hiroshima never gets the Fuji answer", () => {
+  // The bug of 2026-11-16: both stations were on the Tokaido entry, so the
+  // Fuji timeline (timed from Tokyo) showed for a train that never passes Fuji.
+  for (const [from, to] of [["Shin-Osaka", "Hiroshima"], ["Hiroshima", "Shin-Osaka"], ["Tokyo", "Takayama"], ["Tokyo", "Hakone-Yumoto"], ["Nagoya", "Kyoto"], ["Tokyo", "Shin-Yokohama"], ["Tokyo", "Mishima"], ["Hiroshima", "Tokyo"], ["Tokyo", "Hiroshima"]]) {
+    const m = scenic.matchRoute(from, to);
+    assert.equal(m.kind, "unsupported", `${from} → ${to} must be unsupported`);
+    const shown = JSON.stringify([...m.nearbyLive.map((r) => r.line), ...m.comingSoon.map((r) => [r.title, r.teaser])]);
+    assert.doesNotMatch(shown, /Fuji|Seat E|Tokyo 0?9:00/i, `${from} → ${to} shows nothing from the Fuji route`);
   }
-  assert.equal(scenic.resolveStation("Fukuoka"), "Hakata");
+  assert.ok(!scenic.matchRoute("Shin-Osaka", "Hiroshima").nearbyLive.length, "no other line offered for a trip on the same track");
+  assert.ok(scenic.matchRoute("Tokyo", "Hakone-Yumoto").nearbyLive.some((r) => r.id === "hakone-tozan"), "the Hakone line, by name");
+  // The trips the Fuji model is built for, both ways.
+  for (const [from, to] of [["Tokyo", "Kyoto"], ["Tokyo", "Shin-Osaka"], ["Kyoto", "Tokyo"], ["Shin-Osaka", "Tokyo"], ["Shinagawa", "Nagoya"], ["Nagoya", "Shin-Yokohama"]]) {
+    const m = scenic.matchRoute(from, to);
+    assert.equal(m.kind, "live", `${from} → ${to}`);
+    assert.equal(m.route.id, "tokaido-fuji");
+  }
+  assert.equal(scenic.matchRoute("Tokyo", "Kanazawa").route.id, "hokuriku-alps");
+  assert.equal(scenic.matchRoute("Kanazawa", "Tokyo").route.id, "hokuriku-alps");
+  // Mapped lines, but no view between these two stations: unsupported, not an empty timeline.
+  assert.equal(scenic.matchRoute("Fujisawa", "Enoshima").kind, "unsupported");
+  assert.equal(scenic.matchRoute("Shimbashi", "Shiodome").kind, "unsupported");
+});
+
+test("route search: the in-sight points in the catalogue match the viewshed files", () => {
+  for (const route of scenic.LIVE_ROUTES.filter((r) => r.timing?.kind === "timetable")) {
+    const points = JSON.parse(readFileSync(route.viewshed, "utf8")).points;
+    for (const view of route.views) {
+      const expected = points
+        .filter((p) => !p.tunnel && p.km >= view.kmFrom && p.km <= view.kmTo && view.targets.some((t) => p.see[t]?.side === view.side.forward))
+        .map((p) => p.km);
+      assert.deepEqual(view.seenKm, expected, `${route.id}/${view.id}: rerun node scripts/scenic-seen.mjs`);
+    }
+  }
+});
+
+test("route search: every live answer, for every pair of stations, has a view on it and a modelled start", () => {
+  const viewsheds = Object.fromEntries(scenic.LIVE_ROUTES.map((r) => [r.id, JSON.parse(readFileSync(r.viewshed, "utf8")).points]));
+  const names = scenic.stationOptions().map((o) => o.name);
+  let live = 0;
+  for (const from of names) {
+    for (const to of names) {
+      if (from === to) continue;
+      const m = scenic.matchRoute(from, to);
+      if (m.kind !== "live") continue;
+      live++;
+      if (m.route.timing.kind === "fuji-model") {
+        assert.ok(m.route.timing.origins[m.direction].includes(from), `${from} → ${to}: Fuji answer from an unmodelled station`);
+      } else {
+        const { items } = scenic.timeline(m.route, m.direction, from, to, viewsheds[m.route.id]);
+        assert.ok(items.length > 0, `${from} → ${to} (${m.route.id}) matched with nothing to show`);
+      }
+    }
+  }
+  assert.ok(live > 50, `${live} live pairs`);
 });
 
 test("Enoden: the sea is on the right to Kamakura, on the left to Fujisawa, Koshigoe to Inamuragasaki", () => {

@@ -16,6 +16,7 @@ import { RouteSearch } from "@/components/home/RouteSearch";
 import { RouteTimeline } from "@/components/scenic/RouteTimeline";
 import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
 import { matchRoute, resolveStation, type RouteMatch, type ViewTag } from "@/lib/scenic";
+import { ORIGINS_BY_DIRECTION, type OriginId } from "@/lib/fuji-window";
 import type { HeroSeason } from "@/lib/hero-images";
 import { trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
@@ -295,9 +296,19 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
     }
     setSearchKey((n) => n + 1);
     if (match.kind === "live" && match.route.id === "tokaido-fuji") {
-      setRouteMatch(null);
-      setTokaidoFrom(from);
-      chooseDirection(match.direction === "forward" ? "tokyo-osaka" : "osaka-tokyo");
+      const direction: DirectionId = match.direction === "forward" ? "tokyo-osaka" : "osaka-tokyo";
+      const origin = from.toLowerCase().replace(/ /g, "-") as OriginId;
+      // matchRoute only lets through trips the Fuji model times; this is the
+      // second lock, so the answer can never fall back to another station.
+      if (ORIGINS_BY_DIRECTION[direction].includes(origin)) {
+        setRouteMatch(null);
+        setTokaidoFrom(from);
+        chooseDirection(direction);
+        return;
+      }
+      setHasChecked(false);
+      setRouteMatch({ kind: "unsupported", from, to, nearbyLive: [], comingSoon: [] });
+      setScrollToAnswer((n) => n + 1);
       return;
     }
     setHasChecked(false);
@@ -484,19 +495,19 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("search.unsupportedBody")}</p>
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
+                {/* A line the trip leads to, by name only: no views, sides,
+                    times or pictures from another route on an unmapped trip. */}
                 {routeMatch.nearbyLive.map((r) => (
-                  <Link key={r.id} href={r.href ?? "/"} className="overflow-hidden rounded-[18px] border-2 border-fuji/60 hover:shadow-md">
-                    {r.image ? (
-                      <div className="relative aspect-[16/10] bg-ink">
-                        <Image src={r.image.src} alt={r.image.alt} fill sizes="(min-width: 640px) 33vw, 100vw" className="object-cover" />
-                        <span className="absolute left-2.5 top-2.5 rounded-full bg-fuji px-2.5 py-0.5 text-[11px] font-bold text-white">Live</span>
-                        <span className="absolute bottom-1.5 right-2 text-[9.5px] text-white/75">Illustrative</span>
-                      </div>
-                    ) : null}
-                    <div className="p-3">
-                      <p className="text-sm font-bold leading-snug text-ink">{r.title}</p>
-                      {r.teaser ? <p className="mt-0.5 text-xs text-slate-500">{r.teaser}</p> : null}
-                    </div>
+                  <Link
+                    key={r.id}
+                    href={r.href ?? "/"}
+                    className="flex items-center justify-between gap-3 rounded-[18px] border-2 border-fuji/60 p-4 hover:shadow-md"
+                  >
+                    <span className="min-w-0">
+                      <span className="block text-[11px] font-bold uppercase tracking-[0.08em] text-fuji">Mapped separately</span>
+                      <span className="mt-0.5 block text-sm font-bold leading-snug text-ink">{r.line}</span>
+                    </span>
+                    <ArrowRight className="h-4 w-4 shrink-0 text-fuji" aria-hidden="true" />
                   </Link>
                 ))}
                 {routeMatch.comingSoon.map((r) => (
