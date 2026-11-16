@@ -17,6 +17,7 @@ import { RouteTimeline } from "@/components/scenic/RouteTimeline";
 import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
 import { matchRoute, resolveStation, type RouteMatch, type ViewTag } from "@/lib/scenic";
 import { ORIGINS_BY_DIRECTION, type OriginId } from "@/lib/fuji-window";
+import { SearchTicketCard } from "@/components/scenic/SearchTicketCard";
 import type { HeroSeason } from "@/lib/hero-images";
 import { trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
 import {
@@ -485,7 +486,13 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
               <div className="max-w-[560px]">
                 <ScenicPassCard href={JR_PASS_URL} routeId={routeMatch.route.id} line={routeMatch.route.line} />
               </div>
-            ) : null}
+            ) : (
+              // The line's own tickets (existing affiliate links only); the
+              // JR Pass lines keep the pass card above instead.
+              <div className="max-w-[560px]">
+                <SearchTicketCard route={routeMatch.route} locale={locale} />
+              </div>
+            )}
           </section>
         ) : routeMatch?.kind === "unsupported" ? (
           <section ref={answerRef} className="scroll-mt-16 pb-4 pt-8">

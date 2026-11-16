@@ -1131,5 +1131,49 @@
     "klookPath": "",
     "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1443754&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fjapan-rail%2Fshinkansen%2F28-tokyo%2F30-kyoto%2F",
     "usedOn": []
+  },
+  "fujiExcursion": {
+    "label": "Fuji Excursion (Shinjuku – Kawaguchiko)",
+    "provider": "klook",
+    "adid": "1572917",
+    "klookPath": "japan-rail/fuji-excursion/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1572917&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Fjapan-rail%2Ffuji-excursion%2F",
+    "usedOn": [
+      "Scenic routes"
+    ],
+    "notes": "[scenic] /scenic/fujikyu のチケット判断と、トップ検索（富士急）の結果"
+  },
+  "saganoTrain": {
+    "label": "Sagano Romantic Train Ticket",
+    "provider": "klook",
+    "adid": "1572922",
+    "klookPath": "activity/17066-sagano-romantic-train-ticket-kyoto/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1572922&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F17066-sagano-romantic-train-ticket-kyoto%2F",
+    "usedOn": [
+      "Scenic routes"
+    ],
+    "notes": "[scenic] /scenic/sagano のチケット判断と、トップ検索（嵯峨野）の結果"
+  },
+  "enoshimaKamakuraFreepass": {
+    "label": "Digital Enoshima-Kamakura Freepass",
+    "provider": "klook",
+    "adid": "1572925",
+    "klookPath": "activity/241456-enoshima-kamakura-freepass/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1572925&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F241456-enoshima-kamakura-freepass%2F",
+    "usedOn": [
+      "Scenic routes"
+    ],
+    "notes": "[scenic] /scenic/enoden のチケット判断と、トップ検索（江ノ電）の結果"
+  },
+  "yurikamomeDayPass": {
+    "label": "Yurikamome One-day Pass",
+    "provider": "klook",
+    "adid": "1572928",
+    "klookPath": "activity/117632-yurikamome-one-day-pass-with-2-museum-tickets/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1572928&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F117632-yurikamome-one-day-pass-with-2-museum-tickets%2F",
+    "usedOn": [
+      "Scenic routes"
+    ],
+    "notes": "[scenic] /scenic/yurikamome のチケット判断と、トップ検索（ゆりかもめ）の結果"
   }
 }

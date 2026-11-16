@@ -821,7 +821,7 @@ test("timeline: a journey that stops short only shows the views on it", () => {
 });
 
 test("disclosure: every booking card keeps its commission line", () => {
-  for (const file of ["components/scenic/ScenicPassCard.tsx", "components/blog/BlogBookingCard.tsx", "components/scenic/TicketGuide.tsx"]) {
+  for (const file of ["components/scenic/ScenicPassCard.tsx", "components/blog/BlogBookingCard.tsx", "components/scenic/TicketGuide.tsx", "components/scenic/SearchTicketCard.tsx"]) {
     assert.match(readFileSync(file, "utf8"), /commission/i, `${file} lost its disclosure`);
   }
   assert.match(readFileSync("app/[locale]/HomeClient.tsx", "utf8"), /hero\.affiliateNote/, "homepage booking card disclosure");
@@ -1001,7 +1001,7 @@ test("JR Pass card: only on lines the pass covers (not the Enoden or the Fujikyu
 
 test("scenic pages: every live route has a ticket guide, with links that exist and official pages on the operators' own sites", () => {
   const links = JSON.parse(readFileSync("data/affiliate-links.json", "utf8"));
-  const official = ["japanrailpass.net", "www.westjr.co.jp", "www.enoden.co.jp", "www.fujikyu-railway.jp", "www.odakyu-freepass.jp", "www.hakonenavi.jp", "www.sagano-kanko.co.jp", "ars-saganokanko.triplabo.jp", "www.yurikamome.co.jp"];
+  const official = ["japanrailpass.net", "www.westjr.co.jp", "www.enoden.co.jp", "www.fujikyu-railway.jp", "www.odakyu-freepass.jp", "www.hakonenavi.jp", "www.sagano-kanko.co.jp", "ars-saganokanko.triplabo.jp", "www.yurikamome.co.jp", "www.odakyu-freepass.jp"];
   for (const route of scenic.LIVE_ROUTES) {
     const g = route.ticketGuide;
     assert.ok(g, `${route.id} has no ticket guide`);
@@ -1024,4 +1024,19 @@ test("Sagano: seats from the operator's guide — even-numbered boxes for the lo
   assert.deepEqual(long.seatByDirection, { forward: "D, even-numbered box", backward: "A, even-numbered box" });
   assert.equal(long.side.forward, "right");
   assert.ok(route.notes.some((n) => /2027|New cars/i.test(n)), "the new-cars note stays");
+});
+
+test("scenic tickets: the four Klook links issued on 2026-11-17 are used exactly as issued", () => {
+  const links = JSON.parse(readFileSync("data/affiliate-links.json", "utf8"));
+  const issued = {
+    fujiExcursion: ["1572917", "fujikyu-fuji", "japan-rail%2Ffuji-excursion%2F"],
+    saganoTrain: ["1572922", "sagano-gorge", "activity%2F17066-sagano-romantic-train-ticket-kyoto%2F"],
+    enoshimaKamakuraFreepass: ["1572925", "enoden-coast", "activity%2F241456-enoshima-kamakura-freepass%2F"],
+    yurikamomeDayPass: ["1572928", "yurikamome-night", "activity%2F117632-yurikamome-one-day-pass-with-2-museum-tickets%2F"],
+  };
+  for (const [id, [adid, routeId, path]] of Object.entries(issued)) {
+    assert.equal(links[id].directUrl, `https://affiliate.klook.com/redirect?aid=104861&aff_adid=${adid}&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2F${path}`);
+    const route = scenic.LIVE_ROUTES.find((r) => r.id === routeId);
+    assert.ok(route.ticketGuide.links.some((l) => l.linkId === id), `${id} is on ${routeId}`);
+  }
 });

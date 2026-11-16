@@ -1661,6 +1661,11 @@
             "who": "Four rides or more in a day (Enoshima, Hase, Kamakura…)",
             "buy": "Noriorikun one-day ticket",
             "price": "800 yen (child 400), valid on the day of issue; ticket machines at every station, or digital on EMot"
+          },
+          {
+            "who": "A day out from Shinjuku on Odakyu",
+            "buy": "Enoshima-Kamakura Freepass: the Odakyu round trip to Fujisawa, plus unlimited Enoden rides",
+            "price": "1,640 yen from Shinjuku (child 430), 1 day"
           }
         ],
         "checked": "read November 2026",
@@ -1672,9 +1677,19 @@
           {
             "label": "Enoden fares",
             "url": "https://www.enoden.co.jp/train/fare/"
+          },
+          {
+            "label": "Odakyu (Enoshima-Kamakura Freepass prices)",
+            "url": "https://www.odakyu-freepass.jp/enokama/buy.html"
           }
         ],
         "links": [
+          {
+            "kind": "affiliate",
+            "linkId": "enoshimaKamakuraFreepass",
+            "label": "Enoshima-Kamakura Freepass (Klook)",
+            "product": "regional_pass"
+          },
           {
             "kind": "official",
             "url": "https://www.enoden.co.jp/tourism/ticket/noriorikun/",
@@ -2397,6 +2412,12 @@
           }
         ],
         "links": [
+          {
+            "kind": "affiliate",
+            "linkId": "fujiExcursion",
+            "label": "Fuji Excursion tickets (Klook)",
+            "product": "limited_express_ticket"
+          },
           {
             "kind": "official",
             "url": "https://www.fujikyu-railway.jp/ticket/couponpass.php",
@@ -3488,6 +3509,12 @@
         ],
         "links": [
           {
+            "kind": "affiliate",
+            "linkId": "saganoTrain",
+            "label": "Sagano Romantic Train tickets (Klook)",
+            "product": "scenic_train_ticket"
+          },
+          {
             "kind": "official",
             "url": "https://ars-saganokanko.triplabo.jp/home",
             "label": "Reserve on Sagano Scenic Railway's site"
@@ -4304,6 +4331,12 @@
           }
         ],
         "links": [
+          {
+            "kind": "affiliate",
+            "linkId": "yurikamomeDayPass",
+            "label": "Yurikamome One-day Pass (Klook)",
+            "product": "day_pass"
+          },
           {
             "kind": "official",
             "url": "https://www.yurikamome.co.jp/ride-guidance/fare.html",
