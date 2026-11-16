@@ -103,16 +103,15 @@ export function TicketGuide({
       ) : null}
 
       <p className="mt-4 border-t border-slate-100 pt-3 text-[11.5px] leading-5 text-slate-500">
-        Prices as shown on{" "}
-        {guide.sources.map((s, i) => (
-          <span key={s.url}>
-            {i ? (i === guide.sources.length - 1 ? " and " : ", ") : null}
-            <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
-              {s.label}
+        Official details:{" "}
+        {guide.sources.map((src, i) => (
+          <span key={src.url}>
+            {i ? " · " : null}
+            <a href={src.url} target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
+              {src.label}
             </a>
           </span>
         ))}
-        , {guide.checked}. Fares change; check before you travel.
       </p>
     </div>
   );

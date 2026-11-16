@@ -1005,7 +1005,9 @@ test("scenic pages: every live route has a ticket guide, with links that exist a
   for (const route of scenic.LIVE_ROUTES) {
     const g = route.ticketGuide;
     assert.ok(g, `${route.id} has no ticket guide`);
-    assert.ok(g.verdict && g.options.length && g.sources.length && g.links.length && g.checked, `${route.id}: incomplete ticket guide`);
+    assert.ok(g.verdict && g.options.length && g.sources.length && g.links.length, `${route.id}: incomplete ticket guide`);
+    assert.ok(g.links.some((l) => l.kind === "affiliate"), `${route.id}: no booking link`);
+    assert.doesNotMatch(JSON.stringify([g, route.faq]), /\d[\d,]* ?yen/i, `${route.id}: keep money talk out of the ticket guide`);
     for (const l of g.links) {
       if (l.kind === "affiliate") {
         assert.ok(links[l.linkId]?.directUrl || links[l.linkId]?.klookPath, `${route.id}: ${l.linkId} is not an existing affiliate link`);

@@ -55,8 +55,8 @@ export type TicketGuideData = {
   verdict: string;
   /** "If you … → buy …" rows. */
   options: { who: string; buy: string; price?: string }[];
-  /** Month the prices were read on the sources. */
-  checked: string;
+  /** Month the sources were read, when the guide states prices (none since 2026-11-17). */
+  checked?: string;
   sources: { label: string; url: string }[];
   links: TicketLink[];
   /** Internal site page with a fuller comparison, if any. */
