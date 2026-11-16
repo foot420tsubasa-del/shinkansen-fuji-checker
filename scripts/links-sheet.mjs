@@ -18,7 +18,7 @@
  *     k_site; the adid is taken from the URL;
  *   - every URL must be https.
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 
 export const HEADER = ["ジャンル", "名前（何のリンクか）", "提供元", "アフィリエイトURL", "商品・行き先（参考）", "使っている場所", "状態", "メモ", "ID（変更しない）", "データ元（変更しない）"];
 const COL = Object.fromEntries(HEADER.map((h, i) => [h, i]));
@@ -156,9 +156,39 @@ const klookTarget = (url) => {
 const providerOfUrl = (url) =>
   /klook\.com/.test(url) ? "Klook" : /agoda\.com/.test(url) ? "Agoda" : /trip\.com/.test(url) ? "Trip.com" : /tpx\.lv|booking\.com/.test(url) ? "Booking.com（Travelpayouts）" : "";
 
+/** Where each link id is used in the code, as page names a person recognises. */
+function usageIndex() {
+  const files = [];
+  const walk = (dir) => {
+    for (const name of readdirSync(dir)) {
+      const f = `${dir}/${name}`;
+      if (statSync(f).isDirectory()) walk(f);
+      else if (/\.(tsx?|json)$/.test(name) && !/affiliate-links\.json$/.test(f)) files.push(f);
+    }
+  };
+  for (const d of ["app", "components", "lib", "src", "data"]) if (existsSync(d)) walk(d);
+  // Pages only; shared components and libraries count as "via shared parts".
+  const place = (f) => {
+    if (/^app\/\[locale\]\/(page|HomeClient)\.tsx$/.test(f)) return "トップ";
+    if (f.startsWith("app/[locale]/components/") || f.startsWith("app/[locale]/admin/")) return null;
+    const m = f.match(/^app\/\[locale\]\/(.+)\/[^/]+\.tsx$/);
+    if (m) return "/" + m[1].replace(/\[[^\]]+\]/g, "…");
+    if (f === "data/scenic-routes.json") return "景色ページ";
+    return null;
+  };
+  const text = files.map((f) => [f, readFileSync(f, "utf8")]);
+  return (id) => {
+    const re = new RegExp(`["'\`]${id}["'\`]`);
+    const hits = text.filter(([, t]) => re.test(t)).map(([f]) => place(f));
+    const pages = [...new Set(hits.filter(Boolean))];
+    return pages.length ? pages.join("、") : hits.length ? "共通部品経由" : "";
+  };
+}
+
 /** Every URL field the old admin page edited, one row each. */
 function buildRows() {
   const rows = [];
+  const usedIn = usageIndex();
   const push = (r) => rows.push(HEADER.map((h) => r[h] ?? ""));
 
   for (const [id, v] of Object.entries(load("affiliate-links"))) {
@@ -169,9 +199,9 @@ function buildRows() {
       提供元: PROVIDER_JA[v.provider] ?? v.provider ?? "",
       アフィリエイトURL: url,
       "商品・行き先（参考）": klookTarget(url) || (v.klookPath ? `klook: ${v.klookPath}` : ""),
-      使っている場所: (v.usedOn ?? []).join("、"),
+      使っている場所: usedIn(id) || "（未使用）",
       状態: url ? "公開中" : "未発行",
-      メモ: (v.notes ?? "").replace(/ — この商品でKlookのリンクを発行し.*$/, ""),
+      メモ: (v.notes ?? "").replace(/ — (この商品でKlookのリンクを発行し|対象商品: ).*$/, ""),
       "ID（変更しない）": id,
       "データ元（変更しない）": "affiliate-links",
     });
