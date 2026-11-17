@@ -929,6 +929,8 @@ test("route search: exact matches only — Shin-Osaka → Hiroshima never gets t
   assert.equal(scenic.matchRoute("Shimbashi", "Shiodome").kind, "unsupported");
 });
 
+const { thin: thinSeen } = await import("./scenic-seen.mjs");
+
 test("route search: the in-sight points in the catalogue match the viewshed files", () => {
   for (const route of scenic.LIVE_ROUTES.filter((r) => r.timing?.kind === "timetable")) {
     const points = JSON.parse(readFileSync(route.viewshed, "utf8")).points;
@@ -936,7 +938,7 @@ test("route search: the in-sight points in the catalogue match the viewshed file
       const expected = points
         .filter((p) => !p.tunnel && p.km >= view.kmFrom && p.km <= view.kmTo && view.targets.some((t) => p.see[t]?.side === view.side.forward))
         .map((p) => p.km);
-      assert.deepEqual(view.seenKm, expected, `${route.id}/${view.id}: rerun node scripts/scenic-seen.mjs`);
+      assert.deepEqual(view.seenKm, thinSeen(expected), `${route.id}/${view.id}: rerun node scripts/scenic-seen.mjs`);
     }
   }
 });
