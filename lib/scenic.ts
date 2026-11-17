@@ -184,6 +184,11 @@ const ALIASES: Record<string, string> = {
   tsubamesanjo: "Tsubame-Sanjo",
   "unazuki onsen": "Unazuki",
   "kurobe gorge": "Unazuki",
+  "akita shirakami": "Akita-Shirakami",
+  "wespa tsubakiyama": "Wespa-Tsubakiyama",
+  "higashi noshiro": "Higashi-Noshiro",
+  "juniko": "Juniko",
+  "senjojiki": "Senjojiki",
 };
 
 export type StationOption = { name: string; ja?: string; routes: string[] };

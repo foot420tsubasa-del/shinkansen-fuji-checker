@@ -860,6 +860,25 @@ test("Kurobe Gorge: the gorge on the right going up to Kanetsuri, then on the le
   assert.match(m.route.notes.join(" "), /November 30/);
 });
 
+test("Resort Shirakami: sea on the left going to Aomori, Iwaki on the right; the Higashi-Noshiro reversal flips the seated side", () => {
+  const points = JSON.parse(readFileSync("data/routes/gono-coast-viewshed.json", "utf8")).points;
+  const m = scenic.matchRoute("Akita", "Aomori");
+  assert.equal(m.kind, "live");
+  assert.equal(m.route.id, "gono-coast");
+  const { items, train } = scenic.timeline(m.route, m.direction, "Akita", "Aomori", points, "shirakami");
+  assert.equal(train.forward.train, "Resort Shirakami 1");
+  assert.deepEqual(items.map((i) => [i.view.id, i.side, i.reversedAt]), [
+    ["sea-shirakami", "left", ["Higashi-Noshiro"]],
+    ["sea-senjojiki", "left", ["Higashi-Noshiro"]],
+    ["iwaki", "right", ["Higashi-Noshiro"]],
+  ]);
+  // Boarded at Akita, one reversal: the sea is on the right of the car as it faced at Akita.
+  assert.equal(scenic.seatedSide(items[0].side, items[0].reversedAt), "right");
+  // Boarding on the coast itself: no reversal before the view.
+  const local = scenic.timeline(m.route, "forward", "Fukaura", "Ajigasawa", points, "shirakami");
+  assert.ok(local.items.length >= 1 && local.items.every((i) => i.reversedAt.length === 0), "no reversal between Fukaura and Ajigasawa");
+});
+
 test("timeline: Tokyo → Kanazawa runs Asama (right), Myoko (left), Alps (left), in order, from the JR timetable", () => {
   const m = scenic.matchRoute("Tokyo", "Kanazawa");
   const { items, train } = scenic.timeline(m.route, m.direction, "Tokyo", "Kanazawa", hokurikuPoints, "hakutaka");
@@ -1055,6 +1074,7 @@ test("JR Pass card: only on lines the pass covers (not the Enoden or the Fujikyu
   assert.equal(routes.find((r) => r.id === "hokuriku-alps").ticket.linkId, "jrPass");
   assert.equal(routes.find((r) => r.id === "tohoku-iwate").ticket.linkId, "jrPass");
   assert.equal(routes.find((r) => r.id === "joetsu-snow").ticket.linkId, "jrPass");
+  assert.equal(routes.find((r) => r.id === "gono-coast").ticket.linkId, "jrPass");
   for (const file of ["app/[locale]/HomeClient.tsx", "app/[locale]/scenic/[slug]/page.tsx"]) {
     assert.match(readFileSync(file, "utf8"), /ticket\?\.linkId === "jrPass"/, `${file} must gate the JR Pass card`);
   }
