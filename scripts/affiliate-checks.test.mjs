@@ -845,6 +845,21 @@ test("Joetsu Shinkansen: Echigo Sanzan on the right to Niigata, Yahiko on the le
   assert.equal(scenic.matchRoute("Tokyo", "Takasaki").kind, "unsupported");
 });
 
+test("Kurobe Gorge: the gorge on the right going up to Kanetsuri, then on the left; flipped coming down", () => {
+  const points = JSON.parse(readFileSync("data/routes/kurobe-gorge-viewshed.json", "utf8")).points;
+  const m = scenic.matchRoute("Unazuki", "Keyakidaira");
+  assert.equal(m.kind, "live");
+  assert.equal(m.route.id, "kurobe-gorge");
+  const up = scenic.timeline(m.route, m.direction, "Unazuki", "Keyakidaira", points, "torokko");
+  assert.deepEqual(up.items.map((i) => [i.view.id, i.side]), [["gorge-lower", "right"], ["gorge-upper", "left"]]);
+  const down = scenic.timeline(m.route, "backward", "Keyakidaira", "Unazuki", points, "torokko");
+  assert.deepEqual(down.items.map((i) => [i.view.id, i.side]), [["gorge-upper", "right"], ["gorge-lower", "left"]]);
+  assert.equal(scenic.resolveStation("unazuki onsen"), "Unazuki");
+  // The page must say where service stands: full line since 2026-10-01, to Keyakidaira until November 30.
+  assert.match(m.route.notes.join(" "), /October 1, 2026/);
+  assert.match(m.route.notes.join(" "), /November 30/);
+});
+
 test("timeline: Tokyo → Kanazawa runs Asama (right), Myoko (left), Alps (left), in order, from the JR timetable", () => {
   const m = scenic.matchRoute("Tokyo", "Kanazawa");
   const { items, train } = scenic.timeline(m.route, m.direction, "Tokyo", "Kanazawa", hokurikuPoints, "hakutaka");
@@ -1034,7 +1049,7 @@ test("viewshed: every live route's minutes stay sane (no view longer than the jo
 
 test("JR Pass card: only on lines the pass covers (not the Enoden or the Fujikyu Line)", () => {
   const { routes } = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
-  for (const id of ["enoden-coast", "fujikyu-fuji", "hakone-tozan", "sagano-gorge", "yurikamome-night"]) {
+  for (const id of ["enoden-coast", "fujikyu-fuji", "hakone-tozan", "sagano-gorge", "yurikamome-night", "kurobe-gorge"]) {
     assert.notEqual(routes.find((r) => r.id === id).ticket?.linkId, "jrPass", `${id} is a private railway`);
   }
   assert.equal(routes.find((r) => r.id === "hokuriku-alps").ticket.linkId, "jrPass");
@@ -1047,7 +1062,7 @@ test("JR Pass card: only on lines the pass covers (not the Enoden or the Fujikyu
 
 test("scenic pages: every live route has a ticket guide, with links that exist and official pages on the operators' own sites", () => {
   const links = JSON.parse(readFileSync("data/affiliate-links.json", "utf8"));
-  const official = ["japanrailpass.net", "www.westjr.co.jp", "www.enoden.co.jp", "www.fujikyu-railway.jp", "www.odakyu-freepass.jp", "www.hakonenavi.jp", "www.sagano-kanko.co.jp", "ars-saganokanko.triplabo.jp", "www.yurikamome.co.jp", "www.odakyu-freepass.jp"];
+  const official = ["japanrailpass.net", "www.westjr.co.jp", "www.enoden.co.jp", "www.fujikyu-railway.jp", "www.odakyu-freepass.jp", "www.hakonenavi.jp", "www.sagano-kanko.co.jp", "ars-saganokanko.triplabo.jp", "www.yurikamome.co.jp", "www.odakyu-freepass.jp", "www.kurotetu.co.jp"];
   for (const route of scenic.LIVE_ROUTES) {
     const g = route.ticketGuide;
     assert.ok(g, `${route.id} has no ticket guide`);

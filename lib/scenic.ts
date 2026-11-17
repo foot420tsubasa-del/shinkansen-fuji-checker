@@ -182,6 +182,8 @@ const ALIASES: Record<string, string> = {
   "jomo kogen": "Jomo-Kogen",
   "tsubame sanjo": "Tsubame-Sanjo",
   tsubamesanjo: "Tsubame-Sanjo",
+  "unazuki onsen": "Unazuki",
+  "kurobe gorge": "Unazuki",
 };
 
 export type StationOption = { name: string; ja?: string; routes: string[] };

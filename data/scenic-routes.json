@@ -6442,39 +6442,45 @@
     },
     {
       "id": "kurobe-gorge",
-      "status": "candidate",
-      "tier": 2,
+      "status": "live",
+      "tier": 1,
       "view": [
-        "gorge"
+        "gorge",
+        "autumn-leaves"
       ],
-      "title": "The Kurobe Gorge by open trolley",
+      "title": "The Kurobe gorge by open trolley",
       "line": "Kurobe Gorge Railway",
       "operator": "Kurobe Gorge Railway",
       "between": [
         "Unazuki",
         "Keyakidaira"
       ],
-      "side": null,
+      "side": {
+        "toKeyakidaira": "the gorge on the right to Kanetsuri, then on the left",
+        "toUnazuki": "the opposite: left most of the way down"
+      },
       "seat": null,
-      "section": null,
-      "season": null,
+      "section": "Unazuki–Kanetsuri (right going up); Kanetsuri–Keyakidaira (left)",
+      "season": "Runs from spring to November 30; autumn leaves late October to mid-November",
       "ticket": null,
       "osm": {
         "name": "黒部峡谷鉄道本線",
         "bbox": [
-          36.7,
-          137.55,
-          36.85,
+          36.69,
+          137.575,
+          36.82,
           137.67
         ],
-        "nameToConfirm": true
+        "chain": true,
+        "joinM": 800
       },
       "near": [
         "Unazuki",
         "Kurobe"
       ],
       "tags": [
-        "mountain"
+        "mountain",
+        "countryside"
       ],
       "image": {
         "src": "/images/scenic/scenic-kurobe-gorge-tall.webp",
@@ -6482,7 +6488,509 @@
         "height": 1448,
         "alt": "A red bridge over an emerald river in an autumn gorge from an open trolley car",
         "illustrative": true
-      }
+      },
+      "stations": [
+        {
+          "name": "Unazuki",
+          "ja": "宇奈月",
+          "lat": 36.8154,
+          "lng": 137.5852
+        },
+        {
+          "name": "Kuronagi",
+          "ja": "黒薙",
+          "lat": 36.7864,
+          "lng": 137.6251
+        },
+        {
+          "name": "Kanetsuri",
+          "ja": "鐘釣",
+          "lat": 36.7343,
+          "lng": 137.6516
+        },
+        {
+          "name": "Keyakidaira",
+          "ja": "欅平",
+          "lat": 36.6967,
+          "lng": 137.6581
+        }
+      ],
+      "targets": [
+        {
+          "id": "gorge",
+          "name": "The Kurobe gorge",
+          "type": "valley",
+          "lat": 0,
+          "lng": 0,
+          "elevation": 0,
+          "reach": 300,
+          "minDrop": 20
+        }
+      ],
+      "demZoom": 14,
+      "observerHeight": 3,
+      "minSectionKm": 0.3,
+      "bridgeKm": 0.3,
+      "teaser": "Toyama · the gorge on the right going up",
+      "href": "/scenic/kurobe-gorge",
+      "slug": "kurobe-gorge",
+      "viewshed": "data/routes/kurobe-gorge-viewshed.json",
+      "views": [
+        {
+          "id": "gorge-lower",
+          "name": "The Kurobe gorge, Unazuki to Kanetsuri",
+          "targets": [
+            "gorge"
+          ],
+          "tags": [
+            "mountain",
+            "countryside"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Unazuki",
+          "to": "Kanetsuri",
+          "kmFrom": 0.7,
+          "kmTo": 13.3,
+          "sectionKm": 12.6,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "Autumn leaves late October to mid-November; fresh green May to June",
+          "seat": null,
+          "basis": "terrain model, matching a published account (a rail blog: right side going up)",
+          "seenKm": [
+            0.72,
+            0.75,
+            0.77,
+            0.8,
+            0.82,
+            0.85,
+            0.87,
+            0.9,
+            0.92,
+            0.95,
+            0.97,
+            1,
+            1.02,
+            1.3,
+            2.22,
+            2.32,
+            2.35,
+            2.37,
+            2.4,
+            2.42,
+            3.04,
+            3.07,
+            3.09,
+            3.12,
+            3.14,
+            3.17,
+            3.19,
+            3.21,
+            3.24,
+            3.27,
+            3.29,
+            3.31,
+            3.34,
+            3.36,
+            3.39,
+            3.41,
+            3.99,
+            5.06,
+            5.08,
+            5.11,
+            5.13,
+            5.18,
+            5.28,
+            5.31,
+            5.33,
+            5.36,
+            5.38,
+            5.41,
+            5.43,
+            5.46,
+            5.48,
+            5.5,
+            5.53,
+            5.55,
+            5.58,
+            5.6,
+            5.63,
+            5.65,
+            5.68,
+            6.08,
+            6.1,
+            6.13,
+            6.45,
+            6.48,
+            6.5,
+            6.53,
+            6.6,
+            6.95,
+            6.97,
+            7,
+            7.02,
+            7.05,
+            7.07,
+            7.1,
+            7.12,
+            7.15,
+            7.17,
+            7.2,
+            7.22,
+            7.25,
+            7.27,
+            7.3,
+            7.32,
+            7.35,
+            8.19,
+            8.24,
+            8.27,
+            8.29,
+            8.32,
+            8.34,
+            8.37,
+            8.39,
+            8.42,
+            8.44,
+            8.47,
+            8.49,
+            8.52,
+            8.54,
+            8.57,
+            8.59,
+            8.62,
+            8.64,
+            8.67,
+            8.69,
+            8.71,
+            8.74,
+            8.84,
+            8.87,
+            8.89,
+            8.92,
+            8.94,
+            8.97,
+            8.99,
+            9.01,
+            9.04,
+            9.07,
+            9.09,
+            9.49,
+            9.51,
+            9.54,
+            9.56,
+            9.64,
+            9.66,
+            9.69,
+            9.71,
+            9.84,
+            9.86,
+            9.89,
+            9.91,
+            9.94,
+            10.01,
+            10.04,
+            10.06,
+            10.09,
+            10.11,
+            10.13,
+            10.16,
+            10.18,
+            10.21,
+            10.23,
+            10.26,
+            10.31,
+            10.33,
+            10.36,
+            10.38,
+            10.41,
+            10.43,
+            10.46,
+            10.48,
+            10.51,
+            10.53,
+            11.08,
+            11.11,
+            11.13,
+            11.16,
+            11.18,
+            11.2,
+            11.23,
+            11.26,
+            11.28,
+            11.31,
+            11.33,
+            11.35,
+            11.38,
+            11.4,
+            11.43,
+            11.45,
+            11.7,
+            12.1,
+            12.35,
+            12.38,
+            12.4,
+            12.43,
+            12.45,
+            12.48,
+            12.5,
+            12.53,
+            12.55,
+            12.58,
+            12.6,
+            12.63,
+            12.65,
+            12.68,
+            12.7,
+            12.73,
+            12.75,
+            12.78,
+            12.93,
+            12.95,
+            12.98,
+            13,
+            13.03,
+            13.05,
+            13.08,
+            13.1,
+            13.13,
+            13.15,
+            13.18,
+            13.2,
+            13.23,
+            13.25,
+            13.28,
+            13.3
+          ]
+        },
+        {
+          "id": "gorge-upper",
+          "name": "The Kurobe gorge, Kanetsuri to Keyakidaira",
+          "targets": [
+            "gorge"
+          ],
+          "tags": [
+            "mountain",
+            "countryside"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Kanetsuri",
+          "to": "Keyakidaira",
+          "kmFrom": 14.3,
+          "kmTo": 17.5,
+          "sectionKm": 3.2,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "Autumn leaves late October to mid-November; fresh green May to June",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            14.32,
+            14.35,
+            14.4,
+            14.42,
+            14.5,
+            14.52,
+            14.55,
+            14.57,
+            14.67,
+            14.7,
+            14.72,
+            14.75,
+            15.02,
+            15.05,
+            16.12,
+            16.15,
+            16.17,
+            16.2,
+            16.22,
+            16.59,
+            16.62,
+            16.64,
+            16.67,
+            16.69,
+            16.72,
+            16.87,
+            16.89,
+            16.92,
+            17.04,
+            17.07,
+            17.19,
+            17.22,
+            17.24,
+            17.27,
+            17.29,
+            17.32,
+            17.34,
+            17.37,
+            17.39,
+            17.42,
+            17.44,
+            17.46,
+            17.49
+          ]
+        }
+      ],
+      "verification": "Sides from a terrain model of the drop beside the track (GSI elevation, OSM track, 10 m tiles). The long right-hand stretch going up matches a published seat guide (banzokubiology.com: right side going up, left coming down). Track 19.7 km against the official 20.1 km. Timetable and service status from the Kurobe Gorge Railway official site, read November 2026.",
+      "chip": {
+        "emoji": "🍁",
+        "label": "Kurobe gorge"
+      },
+      "trackKmOffset": 0,
+      "timelineStations": [
+        {
+          "name": "Unazuki",
+          "ja": "宇奈月",
+          "km": 0
+        },
+        {
+          "name": "Kuronagi",
+          "ja": "黒薙",
+          "km": 6.4
+        },
+        {
+          "name": "Kanetsuri",
+          "ja": "鐘釣",
+          "km": 14.4
+        },
+        {
+          "name": "Keyakidaira",
+          "ja": "欅平",
+          "km": 19.7
+        }
+      ],
+      "directions": {
+        "forward": [
+          "Unazuki",
+          "Keyakidaira"
+        ],
+        "backward": [
+          "Keyakidaira",
+          "Unazuki"
+        ]
+      },
+      "notes": [
+        "The line reopened all the way to Keyakidaira on October 1, 2026, after repairs from the 2024 Noto earthquake. The stops are Unazuki, Kuronagi, Kanetsuri and Keyakidaira; at Keyakidaira only the station area and the visitor centre are open while repairs continue.",
+        "Trains to Keyakidaira run until November 30, 2026; from December 1 to 6 they go only as far as Sasadaira. The line closes for the winter. Check the official site for next season."
+      ],
+      "timing": {
+        "kind": "timetable",
+        "source": "Kurobe Gorge Railway timetable for October 1 to November 23, 2026 (kurotetu.co.jp), read November 2026: the 8:17 from Unazuki and the 10:01 from Keyakidaira. Times at Kuronagi and Kanetsuri are departures; between stops, spread by distance along the track.",
+        "sourceUrl": "https://www.kurotetu.co.jp/en/timetable/",
+        "trains": [
+          {
+            "id": "torokko",
+            "label": "Torokko",
+            "note": "about 80 minutes end to end; open cars, some trains also with windowed Relax cars",
+            "forward": {
+              "train": "8:17 from Unazuki",
+              "stops": [
+                [
+                  "Unazuki",
+                  null,
+                  "08:17"
+                ],
+                [
+                  "Kuronagi",
+                  "08:41",
+                  "08:41"
+                ],
+                [
+                  "Kanetsuri",
+                  "09:13",
+                  "09:13"
+                ],
+                [
+                  "Keyakidaira",
+                  "09:33",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "10:01 from Keyakidaira",
+              "stops": [
+                [
+                  "Keyakidaira",
+                  null,
+                  "10:01"
+                ],
+                [
+                  "Kanetsuri",
+                  "10:21",
+                  "10:21"
+                ],
+                [
+                  "Kuronagi",
+                  "10:55",
+                  "10:55"
+                ],
+                [
+                  "Unazuki",
+                  "11:20",
+                  null
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "page": {
+        "title": "Kurobe Gorge Railway: Which Side for the Gorge?",
+        "description": "On the Kurobe Gorge trolley from Unazuki to Keyakidaira, the gorge is on the right as far as Kanetsuri, then on the left. A terrain model of the drop beside the track, with the minutes from the official timetable.",
+        "h1": "Kurobe Gorge Railway: which side for the gorge?",
+        "labelStations": [
+          "Unazuki",
+          "Kuronagi",
+          "Kanetsuri",
+          "Keyakidaira"
+        ]
+      },
+      "ticketGuide": {
+        "verdict": "Book the trolley on the Kurobe Gorge Railway website, or buy a same-day ticket at Unazuki. From Tokyo, ride the Hokuriku Shinkansen to Kurobe-Unazukionsen, then the Toyama Chiho Railway to Unazuki-Onsen.",
+        "options": [
+          {
+            "who": "The trolley itself",
+            "buy": "Kurobe Gorge Railway ticket (official website, or same day at Unazuki)"
+          },
+          {
+            "who": "Getting there from Tokyo",
+            "buy": "Hokuriku Shinkansen to Kurobe-Unazukionsen"
+          }
+        ],
+        "sources": [
+          {
+            "label": "Kurobe Gorge Railway",
+            "url": "https://www.kurotetu.co.jp/en/"
+          }
+        ],
+        "links": [
+          {
+            "kind": "affiliate",
+            "linkId": "shinkansenTokyoKanazawa",
+            "label": "Hokuriku Shinkansen tickets",
+            "product": "shinkansen_ticket"
+          }
+        ]
+      },
+      "faq": [
+        {
+          "q": "Is the Kurobe Gorge Railway open all the way to Keyakidaira?",
+          "a": "Yes, since October 1, 2026, after repairs from the 2024 Noto earthquake. At Keyakidaira only the station area and the visitor centre are open while repairs continue. Trains to Keyakidaira run until November 30; from December 1 to 6 they turn back at Sasadaira."
+        },
+        {
+          "q": "Open car or windowed car?",
+          "a": "The open cars have no windows: the best for photos, but cold and wet in bad weather. The Relax cars have windows you can open and seats that turn to face forward. Either way, sit on the right going up as far as Kanetsuri."
+        },
+        {
+          "q": "Does the JR Pass cover the Kurobe Gorge Railway?",
+          "a": "No. It is a private railway, so you need its own ticket. The JR Pass does cover the Hokuriku Shinkansen to Kurobe-Unazukionsen."
+        }
+      ]
     },
     {
       "id": "gono-coast",
