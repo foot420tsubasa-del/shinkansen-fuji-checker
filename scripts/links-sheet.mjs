@@ -185,6 +185,10 @@ function usageIndex() {
   };
 }
 
+// Agoda is not used on the site (the CTAs filter it out), so its links stay
+// out of the sheet; the data files keep them untouched.
+const isAgoda = (id, v) => /^agoda/.test(id) || v.provider === "agoda";
+
 /** Every URL field the old admin page edited, one row each. */
 function buildRows() {
   const rows = [];
@@ -192,6 +196,7 @@ function buildRows() {
   const push = (r) => rows.push(HEADER.map((h) => r[h] ?? ""));
 
   for (const [id, v] of Object.entries(load("affiliate-links"))) {
+    if (isAgoda(id, v)) continue;
     const url = v.directUrl || v.affiliateUrl || "";
     push({
       ジャンル: genreOf(id),
@@ -221,7 +226,7 @@ function buildRows() {
     });
   }
   for (const [key, v] of Object.entries(load("hotel-links"))) {
-    for (const field of ["tripUrl", "agodaUrl"]) {
+    for (const field of ["tripUrl"]) {
       if (!v[field]) continue;
       push({
         ジャンル: "ホテル：エリア別（Trip.com）",
@@ -237,7 +242,7 @@ function buildRows() {
     }
   }
   for (const [key, v] of Object.entries(load("hotel-pick-links"))) {
-    for (const field of ["tripUrl", "agodaUrl"]) {
+    for (const field of ["tripUrl"]) {
       if (!v[field]) continue;
       push({
         ジャンル: "ホテル：個別ホテル（Trip.com）",
@@ -253,7 +258,7 @@ function buildRows() {
     }
   }
   for (const [key, v] of Object.entries(load("local-hotel-picks"))) {
-    for (const field of ["agodaUrl", "tripFallbackUrl", "officialUrl"]) {
+    for (const field of ["tripFallbackUrl", "officialUrl"]) {
       if (!v[field]) continue;
       push({
         ジャンル: "ホテル：ローカルおすすめ宿",
