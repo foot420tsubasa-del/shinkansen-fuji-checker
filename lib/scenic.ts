@@ -176,6 +176,12 @@ const ALIASES: Record<string, string> = {
   hanamaki: "Shin-Hanamaki",
   "iwate numakunai": "Iwate-Numakunai",
   "shichinohe towada": "Shichinohe-Towada",
+  "echigo yuzawa": "Echigo-Yuzawa",
+  yuzawa: "Echigo-Yuzawa",
+  "gala yuzawa": "Echigo-Yuzawa",
+  "jomo kogen": "Jomo-Kogen",
+  "tsubame sanjo": "Tsubame-Sanjo",
+  tsubamesanjo: "Tsubame-Sanjo",
 };
 
 export type StationOption = { name: string; ja?: string; routes: string[] };

@@ -796,7 +796,7 @@ test("route search: Tokaido and Hokuriku both ways, anything else is coming soon
   const none = scenic.matchRoute("Tokyo", "Kamakura");
   assert.equal(none.kind, "unsupported");
   assert.ok(none.nearbyLive.some((r) => r.id === "enoden-coast"), "Kamakura points at the live Enoden page");
-  const far = scenic.matchRoute("Tokyo", "Niigata");
+  const far = scenic.matchRoute("Tokyo", "Sapporo");
   assert.equal(far.kind, "unsupported");
   assert.ok(far.comingSoon.length > 0, "an unmapped trip still offers what is next");
 });
@@ -825,6 +825,24 @@ test("Tohoku Shinkansen: mountains on the left going north, Hayachine the one on
   // No listed train calls at Nasushiobara, so that trip is not answered.
   assert.equal(scenic.matchRoute("Tokyo", "Nasushiobara").kind, "unsupported");
   assert.equal(scenic.resolveStation("aomori"), "Shin-Aomori");
+});
+
+test("Joetsu Shinkansen: Echigo Sanzan on the right to Niigata, Yahiko on the left, from the JR East timetable", () => {
+  const points = JSON.parse(readFileSync("data/routes/joetsu-snow-viewshed.json", "utf8")).points;
+  const m = scenic.matchRoute("Tokyo", "Niigata");
+  assert.equal(m.kind, "live");
+  assert.equal(m.route.id, "joetsu-snow");
+  const { items, train } = scenic.timeline(m.route, m.direction, "Tokyo", "Niigata", points, "toki");
+  assert.equal(train.forward.train, "Toki 319");
+  assert.deepEqual(items.map((i) => [i.view.id, i.side]), [
+    ["haruna", "left"], ["akagi", "right"], ["echigo-sanzan", "right"], ["yahiko", "left"], ["sanzan-plain", "right"],
+  ]);
+  const back = scenic.timeline(m.route, "backward", "Niigata", "Tokyo", points, "toki");
+  assert.ok(back.items.find((i) => i.view.id === "echigo-sanzan").side === "left", "sides swap going back to Tokyo");
+  assert.equal(scenic.matchRoute("Tokyo", "Echigo-Yuzawa").route.id, "joetsu-snow");
+  assert.equal(scenic.resolveStation("yuzawa"), "Echigo-Yuzawa");
+  // Nothing to see before Takasaki, so Tokyo → Takasaki stays unanswered on both lines that serve it.
+  assert.equal(scenic.matchRoute("Tokyo", "Takasaki").kind, "unsupported");
 });
 
 test("timeline: Tokyo → Kanazawa runs Asama (right), Myoko (left), Alps (left), in order, from the JR timetable", () => {
@@ -1021,6 +1039,7 @@ test("JR Pass card: only on lines the pass covers (not the Enoden or the Fujikyu
   }
   assert.equal(routes.find((r) => r.id === "hokuriku-alps").ticket.linkId, "jrPass");
   assert.equal(routes.find((r) => r.id === "tohoku-iwate").ticket.linkId, "jrPass");
+  assert.equal(routes.find((r) => r.id === "joetsu-snow").ticket.linkId, "jrPass");
   for (const file of ["app/[locale]/HomeClient.tsx", "app/[locale]/scenic/[slug]/page.tsx"]) {
     assert.match(readFileSync(file, "utf8"), /ticket\?\.linkId === "jrPass"/, `${file} must gate the JR Pass card`);
   }

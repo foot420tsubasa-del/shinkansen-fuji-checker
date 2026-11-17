@@ -4247,31 +4247,38 @@
     },
     {
       "id": "joetsu-snow",
-      "status": "candidate",
-      "tier": 2,
+      "status": "live",
+      "tier": 1,
       "view": [
-        "snow",
-        "mountain"
+        "mountain",
+        "snow"
       ],
-      "title": "Snow country beyond the tunnels on the Joetsu Shinkansen",
+      "title": "The Echigo mountains and snow country from the Joetsu Shinkansen",
       "line": "Joetsu Shinkansen",
       "operator": "JR East",
       "between": [
         "Tokyo",
-        "Echigo-Yuzawa / Niigata"
+        "Niigata"
       ],
-      "side": null,
+      "side": {
+        "toNiigata": "the Echigo Sanzan on the right near Urasa; Mt. Yahiko on the left before Niigata",
+        "toTokyo": "the opposite: Echigo Sanzan on the left, Yahiko on the right"
+      },
       "seat": null,
-      "section": null,
-      "season": null,
-      "ticket": null,
+      "section": "Takasaki–Jomo-Kogen (Haruna left, Akagi right); near Urasa (Echigo Sanzan, right); Nagaoka–Niigata (Yahiko left, Echigo Sanzan right)",
+      "season": "clear days; the Echigo mountains carry snow from about November to May",
+      "ticket": {
+        "provider": "klook",
+        "linkId": "jrPass",
+        "note": "The Japan Rail Pass covers the Joetsu Shinkansen."
+      },
       "osm": {
         "name": "上越新幹線",
         "bbox": [
-          36.6,
+          36.28,
           138.7,
-          37,
-          139
+          37.95,
+          139.15
         ]
       },
       "near": [
@@ -4282,6 +4289,723 @@
       "tags": [
         "mountain",
         "snow"
+      ],
+      "stations": [
+        {
+          "name": "Takasaki",
+          "lat": 36.3225,
+          "lng": 139.0128
+        },
+        {
+          "name": "Jomo-Kogen",
+          "lat": 36.6958,
+          "lng": 138.9839
+        },
+        {
+          "name": "Echigo-Yuzawa",
+          "lat": 36.9357,
+          "lng": 138.8094
+        },
+        {
+          "name": "Urasa",
+          "lat": 37.1667,
+          "lng": 138.9217
+        },
+        {
+          "name": "Nagaoka",
+          "lat": 37.4473,
+          "lng": 138.8536
+        },
+        {
+          "name": "Tsubame-Sanjo",
+          "lat": 37.6528,
+          "lng": 138.9367
+        },
+        {
+          "name": "Niigata",
+          "lat": 37.9121,
+          "lng": 139.061
+        }
+      ],
+      "targets": [
+        {
+          "id": "asama",
+          "name": "Mt. Asama",
+          "lat": 36.406,
+          "lng": 138.5227,
+          "elevation": 2564
+        },
+        {
+          "id": "haruna",
+          "name": "Mt. Haruna",
+          "lat": 36.4775,
+          "lng": 138.8507,
+          "elevation": 1444
+        },
+        {
+          "id": "akagi",
+          "name": "Mt. Akagi",
+          "lat": 36.5603,
+          "lng": 139.1933,
+          "elevation": 1825
+        },
+        {
+          "id": "tanigawa",
+          "name": "Mt. Tanigawa",
+          "lat": 36.849,
+          "lng": 138.9165,
+          "elevation": 1972
+        },
+        {
+          "id": "naeba",
+          "name": "Mt. Naeba",
+          "lat": 36.846,
+          "lng": 138.6904,
+          "elevation": 2144
+        },
+        {
+          "id": "hakkai",
+          "name": "Mt. Hakkai",
+          "lat": 37.1039,
+          "lng": 139.0241,
+          "elevation": 1774
+        },
+        {
+          "id": "komagatake",
+          "name": "Echigo-Komagatake",
+          "lat": 37.1237,
+          "lng": 139.0752,
+          "elevation": 2001
+        },
+        {
+          "id": "yahiko",
+          "name": "Mt. Yahiko",
+          "lat": 37.7184,
+          "lng": 138.8161,
+          "elevation": 630
+        }
+      ],
+      "_stationsNote": "Station coordinates are approximate (about 1 km). Summits snapped to the highest GSI elevation point nearby (scripts/refine-summits.mjs).",
+      "teaser": "Tokyo → Niigata · Echigo mountains on the right",
+      "href": "/scenic/joetsu-shinkansen",
+      "slug": "joetsu-shinkansen",
+      "viewshed": "data/routes/joetsu-snow-viewshed.json",
+      "views": [
+        {
+          "id": "haruna",
+          "name": "Mt. Haruna and Mt. Asama",
+          "targets": [
+            "haruna",
+            "asama"
+          ],
+          "tags": [
+            "mountain"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Takasaki",
+          "to": "Jomo-Kogen",
+          "kmFrom": 4.6,
+          "kmTo": 10.4,
+          "sectionKm": 6,
+          "nearestKm": 17.6,
+          "maxAngle": 4.2,
+          "season": "Clear days; Asama snow-capped in winter",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            4.86,
+            5.37,
+            5.69,
+            6.15,
+            6.55,
+            6.94,
+            7.41,
+            7.88,
+            8.38,
+            8.77,
+            9.19,
+            9.61,
+            9.88,
+            10.38
+          ]
+        },
+        {
+          "id": "akagi",
+          "name": "Mt. Akagi",
+          "targets": [
+            "akagi"
+          ],
+          "tags": [
+            "mountain"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Takasaki",
+          "to": "Jomo-Kogen",
+          "kmFrom": 7.4,
+          "kmTo": 46.3,
+          "sectionKm": 39,
+          "nearestKm": 22.9,
+          "maxAngle": 3.5,
+          "season": "Clear days, all year",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            7.41,
+            7.88,
+            8.38,
+            8.77,
+            9.19,
+            9.61,
+            9.88,
+            10.38,
+            11.65,
+            12.02,
+            44.07,
+            44.48,
+            44.84,
+            45.21,
+            45.69,
+            46.3
+          ]
+        },
+        {
+          "id": "echigo-sanzan",
+          "name": "The Echigo Sanzan (Mt. Hakkai, Echigo-Komagatake)",
+          "targets": [
+            "hakkai",
+            "komagatake"
+          ],
+          "tags": [
+            "mountain",
+            "snow"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Echigo-Yuzawa",
+          "to": "Nagaoka",
+          "kmFrom": 103.4,
+          "kmTo": 108.9,
+          "sectionKm": 6,
+          "nearestKm": 10.5,
+          "maxAngle": 8.7,
+          "season": "Clear days; snow-capped from about November to May",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            103.9,
+            104.24,
+            104.63,
+            105,
+            105.45,
+            105.83,
+            106.24,
+            106.63,
+            107.04,
+            107.48,
+            107.94,
+            108.27,
+            108.87
+          ]
+        },
+        {
+          "id": "yahiko",
+          "name": "Mt. Yahiko",
+          "targets": [
+            "yahiko"
+          ],
+          "tags": [
+            "mountain",
+            "countryside"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Nagaoka",
+          "to": "Niigata",
+          "kmFrom": 146.6,
+          "kmTo": 188.5,
+          "sectionKm": 42,
+          "nearestKm": 12.9,
+          "maxAngle": 2.7,
+          "season": "Clear days, all year",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            147.43,
+            147.75,
+            148.18,
+            148.54,
+            149,
+            149.47,
+            149.9,
+            150.23,
+            150.57,
+            150.99,
+            151.34,
+            151.82,
+            152.24,
+            152.64,
+            153.01,
+            153.4,
+            153.83,
+            154.2,
+            154.65,
+            155,
+            155.35,
+            155.83,
+            156.27,
+            156.55,
+            157.01,
+            157.63,
+            158.02,
+            158.64,
+            159.12,
+            159.47,
+            159.82,
+            160.59,
+            161.11,
+            161.47,
+            161.7,
+            162.09,
+            162.7,
+            163.13,
+            163.45,
+            163.93,
+            164.19,
+            164.68,
+            164.94,
+            165.4,
+            165.97,
+            166.3,
+            166.68,
+            167.08,
+            167.5,
+            167.92,
+            168.26,
+            168.66,
+            169.06,
+            169.56,
+            170.41,
+            170.8,
+            171.07,
+            171.6,
+            171.88,
+            172.31,
+            172.75,
+            173.11,
+            173.51,
+            173.89,
+            174.38,
+            174.76,
+            175.19,
+            175.58,
+            175.91,
+            176.45,
+            176.82,
+            177.23,
+            177.71,
+            177.97,
+            178.33,
+            178.86,
+            179.23,
+            179.67,
+            180.08,
+            180.44,
+            180.96,
+            181.29,
+            181.68,
+            182.04,
+            182.6,
+            182.93,
+            183.38,
+            183.89,
+            184.24,
+            184.59,
+            185.01,
+            185.38,
+            185.85,
+            186.52,
+            187.58
+          ]
+        },
+        {
+          "id": "sanzan-plain",
+          "name": "The Echigo Sanzan across the rice plain",
+          "targets": [
+            "hakkai",
+            "komagatake"
+          ],
+          "tags": [
+            "mountain",
+            "countryside"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Tsubame-Sanjo",
+          "to": "Niigata",
+          "kmFrom": 153.4,
+          "kmTo": 196.6,
+          "sectionKm": 43,
+          "nearestKm": 50.4,
+          "maxAngle": 2,
+          "season": "Clear days; snow-capped from about November to May",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            153.4,
+            153.83,
+            154.2,
+            154.65,
+            155,
+            155.35,
+            155.83,
+            156.27,
+            156.55,
+            157.01,
+            157.63,
+            158.02,
+            158.64,
+            159.12,
+            159.47,
+            159.82,
+            160.59,
+            161.11,
+            161.47,
+            161.7,
+            162.09,
+            162.7,
+            163.13,
+            163.45,
+            163.93,
+            164.19,
+            164.68,
+            164.94,
+            165.4,
+            165.97,
+            166.3,
+            166.68,
+            167.08,
+            167.5,
+            167.92,
+            168.26,
+            168.66,
+            169.06,
+            169.56,
+            170.41,
+            170.8,
+            171.07,
+            171.6,
+            171.88,
+            172.31,
+            172.75,
+            173.11,
+            173.51,
+            173.89,
+            174.38,
+            174.76,
+            175.19,
+            175.58,
+            175.91,
+            176.45,
+            176.82,
+            177.23,
+            177.71,
+            177.97,
+            178.33,
+            178.86,
+            179.23,
+            179.67,
+            180.08,
+            180.44,
+            180.96,
+            181.29,
+            181.68,
+            182.04,
+            182.6,
+            182.93,
+            183.38,
+            183.89,
+            184.24,
+            184.59,
+            185.01,
+            185.38,
+            185.85,
+            186.52,
+            187.58,
+            188.53,
+            190.33,
+            190.63,
+            190.98,
+            191.47,
+            191.92,
+            192.32,
+            192.59,
+            193.05,
+            193.49,
+            193.91,
+            194.35,
+            194.88,
+            195.23,
+            195.8,
+            196.56
+          ]
+        }
+      ],
+      "verification": "Sides from a terrain sight-line model only (GSI elevation, OSM track); no published account of the sides was found, so treat them as a model. Between Jomo-Kogen and Echigo-Yuzawa the line is almost all tunnel. Seat letters not given.",
+      "chip": {
+        "emoji": "❄️",
+        "label": "Snow country"
+      },
+      "trackKmOffset": 100.4,
+      "timelineStations": [
+        {
+          "name": "Tokyo",
+          "km": 0,
+          "ja": "東京"
+        },
+        {
+          "name": "Ueno",
+          "km": 3.6,
+          "ja": "上野"
+        },
+        {
+          "name": "Omiya",
+          "km": 30.3,
+          "ja": "大宮"
+        },
+        {
+          "name": "Takasaki",
+          "km": 105,
+          "ja": "高崎"
+        },
+        {
+          "name": "Jomo-Kogen",
+          "km": 146.7,
+          "ja": "上毛高原"
+        },
+        {
+          "name": "Echigo-Yuzawa",
+          "km": 178.5,
+          "ja": "越後湯沢"
+        },
+        {
+          "name": "Urasa",
+          "km": 208.3,
+          "ja": "浦佐"
+        },
+        {
+          "name": "Nagaoka",
+          "km": 241.3,
+          "ja": "長岡"
+        },
+        {
+          "name": "Tsubame-Sanjo",
+          "km": 265.3,
+          "ja": "燕三条"
+        },
+        {
+          "name": "Niigata",
+          "km": 297,
+          "ja": "新潟"
+        }
+      ],
+      "directions": {
+        "forward": [
+          "Tokyo",
+          "Niigata"
+        ],
+        "backward": [
+          "Niigata",
+          "Tokyo"
+        ]
+      },
+      "timing": {
+        "kind": "timetable",
+        "source": "JR East train timetables (timetables.jreast.co.jp), November 2026 timetable: Toki 319 and 320. Times between stops are spread in proportion to distance along the line.",
+        "sourceUrl": "https://timetables.jreast.co.jp/en/",
+        "trains": [
+          {
+            "id": "toki",
+            "label": "Toki",
+            "note": "stops at every station from Takasaki to Niigata",
+            "forward": {
+              "train": "Toki 319",
+              "stops": [
+                [
+                  "Tokyo",
+                  null,
+                  "11:40"
+                ],
+                [
+                  "Ueno",
+                  "11:45",
+                  "11:46"
+                ],
+                [
+                  "Omiya",
+                  "12:04",
+                  "12:05"
+                ],
+                [
+                  "Takasaki",
+                  "12:27",
+                  "12:28"
+                ],
+                [
+                  "Jomo-Kogen",
+                  "12:42",
+                  "12:45"
+                ],
+                [
+                  "Echigo-Yuzawa",
+                  "12:58",
+                  "12:59"
+                ],
+                [
+                  "Urasa",
+                  "13:09",
+                  "13:10"
+                ],
+                [
+                  "Nagaoka",
+                  "13:21",
+                  "13:22"
+                ],
+                [
+                  "Tsubame-Sanjo",
+                  "13:30",
+                  "13:31"
+                ],
+                [
+                  "Niigata",
+                  "13:43",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Toki 320",
+              "stops": [
+                [
+                  "Niigata",
+                  null,
+                  "12:27"
+                ],
+                [
+                  "Tsubame-Sanjo",
+                  "12:38",
+                  "12:39"
+                ],
+                [
+                  "Nagaoka",
+                  "12:48",
+                  "12:49"
+                ],
+                [
+                  "Urasa",
+                  "13:00",
+                  "13:01"
+                ],
+                [
+                  "Echigo-Yuzawa",
+                  "13:12",
+                  "13:13"
+                ],
+                [
+                  "Jomo-Kogen",
+                  "13:24",
+                  "13:25"
+                ],
+                [
+                  "Takasaki",
+                  "13:40",
+                  "13:41"
+                ],
+                [
+                  "Omiya",
+                  "14:03",
+                  "14:04"
+                ],
+                [
+                  "Ueno",
+                  "14:22",
+                  "14:23"
+                ],
+                [
+                  "Tokyo",
+                  "14:28",
+                  null
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "page": {
+        "title": "Joetsu Shinkansen: Which Side for the Mountains and Snow Country?",
+        "description": "Going from Tokyo to Niigata, sit on the right for the Echigo Sanzan near Urasa; Mt. Yahiko is on the left before Niigata. Between Jomo-Kogen and Echigo-Yuzawa the line is almost all tunnel. A terrain model of every sight line, with the minutes from the JR East timetable.",
+        "h1": "Joetsu Shinkansen: which side for the mountains and snow country?",
+        "labelStations": [
+          "Takasaki",
+          "Jomo-Kogen",
+          "Echigo-Yuzawa",
+          "Urasa",
+          "Nagaoka",
+          "Niigata"
+        ]
+      },
+      "ticketGuide": {
+        "verdict": "Reserve your Joetsu Shinkansen seat ahead in ski season and holidays. Riding the Shinkansen more than once? The JR Pass covers the Joetsu Shinkansen.",
+        "options": [
+          {
+            "who": "Tokyo ↔ Echigo-Yuzawa or Niigata",
+            "buy": "Reserved Shinkansen ticket"
+          },
+          {
+            "who": "A wider JR trip",
+            "buy": "JR Pass — it covers the Joetsu Shinkansen with no extra ticket"
+          }
+        ],
+        "sources": [
+          {
+            "label": "Japan Rail Pass",
+            "url": "https://japanrailpass.net/en/about_jrp/route/"
+          }
+        ],
+        "links": [
+          {
+            "kind": "affiliate",
+            "linkId": "shinkansenTicket",
+            "label": "Shinkansen tickets",
+            "product": "shinkansen_ticket"
+          },
+          {
+            "kind": "affiliate",
+            "linkId": "jrPass",
+            "label": "Japan Rail Pass",
+            "product": "jr_pass"
+          }
+        ],
+        "more": {
+          "href": "/jr-pass-vs-single-ticket",
+          "label": "JR Pass or single tickets: the full comparison"
+        }
+      },
+      "faq": [
+        {
+          "q": "Does the JR Pass cover the Joetsu Shinkansen?",
+          "a": "Yes. The JR Pass leaves out only the Nozomi and Mizuho on the Tokaido, Sanyo and Kyushu Shinkansen, so the Toki and Tanigawa on the Joetsu Shinkansen are covered."
+        },
+        {
+          "q": "Which side is better from Tokyo to Echigo-Yuzawa?",
+          "a": "It matters little: after Takasaki the line is mostly in tunnels, and between Jomo-Kogen and Echigo-Yuzawa almost entirely. You see Mt. Haruna on the left and Mt. Akagi on the right just after Takasaki, then the snowy valley at Echigo-Yuzawa as you come out of the tunnel. Going on to Niigata, sit on the right for the Echigo Sanzan near Urasa."
+        }
       ]
     },
     {
