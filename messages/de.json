@@ -3059,7 +3059,21 @@
           "area": "Shinjuku",
           "why": "Beste Balance aus Nachtleben, Verkehrsanbindung und Hoteldichte. Viele Erstbesucher starten hier."
         },
-        "proTip": "Für den Shinkansen ab Tag 3 ist Shinjuku oft angenehmer als die ganze Zeit nahe Tokyo Station zu wohnen."
+        "proTip": "Für den Shinkansen ab Tag 3 ist Shinjuku oft angenehmer als die ganze Zeit nahe Tokyo Station zu wohnen.",
+        "faqs": [
+          {
+            "question": "Wo sollte man beim ersten Tokio-Besuch übernachten?",
+            "answer": "Shinjuku ist die beste Allround-Basis – starke Verkehrsanbindung, viele Hotels und etwa 14–15 Minuten zum Bahnhof Tokyo für Shinkansen-Tagesausflüge. Wähle Ueno für Preis und Narita-Anbindung, Asakusa für Atmosphäre oder den Bahnhof Tokyo, wenn dein Shinkansen früh fährt."
+          },
+          {
+            "question": "Welche Gegend in Tokio ist nach einem langen Flug mit Gepäck am einfachsten?",
+            "answer": "Ueno (direkter Keisei Skyliner ab Narita) oder der Bahnhof Tokyo sind die einfachsten Orte für die erste Nacht. Mit Jetlag kann der riesige Bahnhof Shinjuku am ersten Abend anstrengend sein – als Basis eignet er sich besser, sobald du dich orientiert hast."
+          },
+          {
+            "question": "Wie viele Nächte sollte ich in Tokio bleiben?",
+            "answer": "Die meisten Erstbesucher bleiben 3 bis 4 Nächte in Tokio, wohnen in einer Gegend und machen von dort Tagesausflüge. Wähle eine gut angebundene Basis, statt jede Nacht das Hotel zu wechseln – das kostet mit Gepäck viel Zeit."
+          }
+        ]
       },
       "shinjuku-vs-ueno-vs-asakusa": {
         "title": "Shinjuku vs Ueno vs Asakusa — welcher Tokyo-Standort passt?",
@@ -3126,6 +3140,20 @@
             "title": "7-Tage-Japan-Route",
             "description": "Ordne Tokyo, Fuji, Kyoto und Osaka sinnvoll.",
             "cta": "Route ansehen"
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Shinjuku, Ueno oder Asakusa – was ist am besten für den ersten Tokio-Besuch?",
+            "answer": "Shinjuku ist der beste Allrounder für flexible Verbindungen, Essen und Hotelauswahl. Ueno ist besser für Preis und Narita-Anbindung, Asakusa punktet mit Altstadt-Atmosphäre. Die meisten Erstbesucher fahren gut mit Shinjuku, außer Budget oder Flughafennähe stehen an erster Stelle."
+          },
+          {
+            "question": "Welche der drei Gegenden ist für Hotels am günstigsten?",
+            "answer": "Ueno und Asakusa sind in der Regel günstiger als Shinjuku, und Ueno hat die meisten Budgethotels und Hostels. Zentrale Zimmer in Shinjuku kosten eher mehr, dafür ist die Auswahl dort insgesamt am größten. Vergleiche vor der Buchung die aktuellen Preise."
+          },
+          {
+            "question": "Was ist vom Flughafen Narita am einfachsten?",
+            "answer": "Ueno – der Keisei Skyliner erreicht es direkt in 41 Minuten. Nach Asakusa sind es mit dem Access Express etwa 55 Minuten, nach Shinjuku dauert es länger (N'EX rund 80 Minuten oder Limousinenbus). Für eine entspannte erste Nacht nach einem langen Flug ist Ueno am einfachsten."
           }
         ]
       },
@@ -3450,7 +3478,7 @@
             "feature": "Shinkansen-Zugang",
             "values": {
               "Tokyo Station": "Direkt (0 Min)",
-              "Shinjuku": "10 Min Umstieg JR Chuo"
+              "Shinjuku": "14–15 Min. mit JR Chuo Rapid"
             }
           },
           {
@@ -3522,6 +3550,20 @@
             "description": "Prüfe vor dem Kauf, ob deine Route genug JR-Fernfahrten enthält.",
             "cta": "Guide lesen"
           }
+        ],
+        "faqs": [
+          {
+            "question": "Sollte ich für den Shinkansen in der Nähe des Bahnhofs Tokyo übernachten?",
+            "answer": "Ja, wenn dein Shinkansen früh fährt oder du viel Gepäck hast – am Bahnhof Tokyo halten alle Shinkansen-Linien ohne Umstieg, Abreisemorgen sind dann mühelos. Fährt dein Zug später oder mitten in der Reise, passt Shinjuku auch: Es liegt mit der JR Chuo Line etwa 14–15 Minuten entfernt und bietet viel mehr zu tun."
+          },
+          {
+            "question": "Was ist günstiger, Hotels am Bahnhof Tokyo oder in Shinjuku?",
+            "answer": "Shinjuku hat meist die größere Preisspanne, auch mit Mittelklasse- und Budgetzimmern. Rund um Bahnhof Tokyo, Marunouchi und Ginza überwiegen Business- und gehobene Hotels, die Preise pro Nacht sind daher eher höher. Prüfe vor der Buchung die aktuellen Preise für beide."
+          },
+          {
+            "question": "Ist Shinjuku oder der Bahnhof Tokyo besser für den Flughafen?",
+            "answer": "Beide haben den Narita Express (N'EX) direkt, Narita ist also von beiden leicht erreichbar. Von Shinjuku fahren außerdem häufig Limousinenbusse direkt zu vielen Hotels, praktisch mit Gepäck. Nach Haneda kommst du von beiden einfach mit Bahn oder Bus."
+          }
         ]
       },
       "ueno-vs-shinjuku": {
@@ -3562,6 +3604,20 @@
             ],
             "bestFor": "Nachtleben + Flexibilität",
             "transport": "14–15 Min. zur Tokyo Station. Narita Express direkt. Odakyu nach Hakone."
+          }
+        ],
+        "faqs": [
+          {
+            "question": "Ueno oder Shinjuku für den Flughafen Narita?",
+            "answer": "Ueno – der Keisei Skyliner fährt in 41 Minuten direkt von Narita nach Ueno, günstiger und mit weniger Umstiegen. Nach Shinjuku dauert es länger (N'EX etwa 80 Minuten oder Limousinenbus), daher ist Ueno die einfachere erste Unterkunft bei Ankunft in Narita."
+          },
+          {
+            "question": "Wo sind Hotels günstiger, in Ueno oder Shinjuku?",
+            "answer": "In Ueno. Dort gibt es mehr günstige Hotels und Hostels, vor allem rund um den Bahnhof und Okachimachi. Shinjuku hat insgesamt eine größere Auswahl, zentrale Zimmer kosten aber meist mehr. Prüfe die aktuellen Preise für beide."
+          },
+          {
+            "question": "Lohnt sich Shinjuku statt Ueno beim ersten Besuch?",
+            "answer": "Wenn du Nachtleben, Großstadtenergie und die meisten Verkehrsverbindungen willst, lohnt sich Shinjuku. Wenn dir Preis, Narita-Anbindung und Museen wichtiger sind, ist Ueno klüger. Beide liegen mit der JR Yamanote Line nur etwa 25 Minuten auseinander, du kannst also leicht beide besuchen."
           }
         ]
       },

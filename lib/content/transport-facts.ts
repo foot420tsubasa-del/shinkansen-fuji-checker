@@ -17,6 +17,9 @@ export const TRANSPORT_FACTS = {
   },
   shinjukuToTokyo: "about 14–15 min on the JR Chuo Rapid before station walking time",
   fares: {
+    // JR Central/West announced on 2026-10-16 that Nozomi/Mizuho reserved
+    // surcharges rise for tickets bought from 2027-07-01 (Tokyo–Shin-Osaka
+    // +¥700; non-reserved, Hikari and Kodama unchanged). Recheck in June 2027.
     tokyoKyotoNozomiReservedRegular: "¥14,170",
     tokyoKyotoNonReserved: "¥13,320",
     jrPassOrdinary: {

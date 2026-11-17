@@ -155,7 +155,7 @@
       "Stay",
       "Itineraries"
     ],
-    "notes": "【要再発行】directUrl が空のため、コードが自動生成したURLを使っている。6ヶ月48クリックで成約ゼロ。Klookで正規リンクを発行して貼ること。"
+    "notes": "Klookで正規リンク発行済み（adid 1403925）。以前は自動生成URLで6ヶ月48クリック・成約ゼロだった。"
   },
   "airportTransfer": {
     "label": "N'EX (Narita Express)",
@@ -179,7 +179,7 @@
       "Planner",
       "TripPicks"
     ],
-    "notes": "【要再発行】directUrl が空のため、コードが自動生成したURLを使っている。6ヶ月48クリックで成約ゼロ。Klookで正規リンクを発行して貼ること。"
+    "notes": "Klookで正規リンク発行済み（adid 1403929）。以前は自動生成URLで6ヶ月48クリック・成約ゼロだった。"
   },
   "carRental": {
     "label": "Car Charter (Tokyo)",
@@ -190,7 +190,7 @@
     "usedOn": [
       "Guide"
     ],
-    "notes": "【要再発行】directUrl が空のため、コードが自動生成したURLを使っている。6ヶ月48クリックで成約ゼロ。Klookで正規リンクを発行して貼ること。"
+    "notes": "Klookで正規リンク発行済み（adid 1403930）。以前は自動生成URLで6ヶ月48クリック・成約ゼロだった。"
   },
   "cityTokyo": {
     "label": "Tokyo Activities",
@@ -320,7 +320,7 @@
     "usedOn": [
       "Stay"
     ],
-    "notes": "【要再発行】directUrl が空のため、コードが自動生成したURLを使っている。6ヶ月48クリックで成約ゼロ。Klookで正規リンクを発行して貼ること。"
+    "notes": "Klookで正規リンク発行済み（adid 1403935）。以前は自動生成URLで6ヶ月48クリック・成約ゼロだった。"
   },
   "hotelKawaguchiko": {
     "label": "Kawaguchiko Hotels",

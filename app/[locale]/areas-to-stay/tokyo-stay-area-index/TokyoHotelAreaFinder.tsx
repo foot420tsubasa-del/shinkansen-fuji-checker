@@ -396,6 +396,9 @@ export function TokyoHotelAreaFinder({ areas, locale, pagePath, copy }: TokyoHot
     }, 0);
 
     return () => window.clearTimeout(restoreTimer);
+    // Restore once on mount only: re-running would reset the user's answers
+    // and fire trackFinderStart again.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
