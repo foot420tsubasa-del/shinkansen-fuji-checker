@@ -129,7 +129,7 @@ const OTHER_PLACES = [
   "Shinjuku", "Shibuya", "Ikebukuro", "Yokohama", "Enoshima",
   "Nikko", "Sendai", "Morioka", "Niigata", "Echigo-Yuzawa",
   "Nara", "Takayama", "Matsumoto",
-  "Sapporo", "Hakodate", "Aomori", "Akita", "Furano", "Biei", "Abashiri", "Unazuki", "Fukui", "Tsuruga",
+  "Sapporo", "Hakodate", "Akita", "Furano", "Biei", "Abashiri", "Unazuki", "Fukui", "Tsuruga",
 ];
 
 const ALIASES: Record<string, string> = {
@@ -166,6 +166,16 @@ const ALIASES: Record<string, string> = {
   "shin toyosu": "Shin-Toyosu",
   "shibaura futo": "Shibaura-futo",
   "ariake tennis no mori": "Ariake-Tennis-no-mori",
+  aomori: "Shin-Aomori",
+  "shin aomori": "Shin-Aomori",
+  "shin shirakawa": "Shin-Shirakawa",
+  "shiroishi zao": "Shiroishi-Zao",
+  "kurikoma kogen": "Kurikoma-Kogen",
+  "mizusawa esashi": "Mizusawa-Esashi",
+  "shin hanamaki": "Shin-Hanamaki",
+  hanamaki: "Shin-Hanamaki",
+  "iwate numakunai": "Iwate-Numakunai",
+  "shichinohe towada": "Shichinohe-Towada",
 };
 
 export type StationOption = { name: string; ja?: string; routes: string[] };

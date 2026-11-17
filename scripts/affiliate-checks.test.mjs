@@ -796,9 +796,35 @@ test("route search: Tokaido and Hokuriku both ways, anything else is coming soon
   const none = scenic.matchRoute("Tokyo", "Kamakura");
   assert.equal(none.kind, "unsupported");
   assert.ok(none.nearbyLive.some((r) => r.id === "enoden-coast"), "Kamakura points at the live Enoden page");
-  const far = scenic.matchRoute("Tokyo", "Sendai");
+  const far = scenic.matchRoute("Tokyo", "Niigata");
   assert.equal(far.kind, "unsupported");
   assert.ok(far.comingSoon.length > 0, "an unmapped trip still offers what is next");
+});
+
+const tohokuPoints = JSON.parse(readFileSync("data/routes/tohoku-iwate-viewshed.json", "utf8")).points;
+
+test("Tohoku Shinkansen: mountains on the left going north, Hayachine the one on the right, from the JR East timetable", () => {
+  const m = scenic.matchRoute("Tokyo", "Shin-Aomori");
+  assert.equal(m.kind, "live");
+  assert.equal(m.route.id, "tohoku-iwate");
+  const { items, train } = scenic.timeline(m.route, m.direction, "Tokyo", "Shin-Aomori", tohokuPoints, "hayabusa");
+  assert.equal(train.forward.train, "Hayabusa 3");
+  assert.deepEqual(items.map((i) => [i.view.id, i.side]), [
+    ["nasu", "left"], ["adatara-azuma", "left"], ["zao", "left"], ["kurikoma", "left"],
+    ["hayachine", "right"], ["iwate", "left"], ["hakkoda", "left"],
+  ]);
+  assert.ok(items.every((i, k) => k === 0 || i.start > items[k - 1].start), "in time order");
+  // Southbound, every side swaps.
+  const back = scenic.timeline(m.route, "backward", "Shin-Aomori", "Tokyo", tohokuPoints, "hayabusa");
+  assert.deepEqual(back.items.map((i) => i.side), ["right", "right", "left", "right", "right", "right", "right"]);
+  // Tokyo → Sendai shows only what lies before Sendai.
+  const sd = scenic.matchRoute("Tokyo", "Sendai");
+  assert.equal(sd.route.id, "tohoku-iwate");
+  const sdItems = scenic.timeline(sd.route, sd.direction, "Tokyo", "Sendai", tohokuPoints, "yamabiko").items;
+  assert.deepEqual(sdItems.map((i) => i.view.id), ["nasu", "adatara-azuma", "zao"]);
+  // No listed train calls at Nasushiobara, so that trip is not answered.
+  assert.equal(scenic.matchRoute("Tokyo", "Nasushiobara").kind, "unsupported");
+  assert.equal(scenic.resolveStation("aomori"), "Shin-Aomori");
 });
 
 test("timeline: Tokyo → Kanazawa runs Asama (right), Myoko (left), Alps (left), in order, from the JR timetable", () => {
@@ -994,6 +1020,7 @@ test("JR Pass card: only on lines the pass covers (not the Enoden or the Fujikyu
     assert.notEqual(routes.find((r) => r.id === id).ticket?.linkId, "jrPass", `${id} is a private railway`);
   }
   assert.equal(routes.find((r) => r.id === "hokuriku-alps").ticket.linkId, "jrPass");
+  assert.equal(routes.find((r) => r.id === "tohoku-iwate").ticket.linkId, "jrPass");
   for (const file of ["app/[locale]/HomeClient.tsx", "app/[locale]/scenic/[slug]/page.tsx"]) {
     assert.match(readFileSync(file, "utf8"), /ticket\?\.linkId === "jrPass"/, `${file} must gate the JR Pass card`);
   }

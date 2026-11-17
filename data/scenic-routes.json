@@ -4286,32 +4286,39 @@
     },
     {
       "id": "tohoku-iwate",
-      "status": "candidate",
-      "tier": 2,
+      "status": "live",
+      "tier": 1,
       "view": [
         "mountain",
-        "countryside"
+        "snow"
       ],
-      "title": "Mt. Iwate and the Tohoku plain from the Tohoku Shinkansen",
+      "title": "Mt. Iwate and the Tohoku mountains from the Tohoku Shinkansen",
       "line": "Tohoku Shinkansen",
       "operator": "JR East",
       "between": [
-        "Sendai",
-        "Morioka"
+        "Tokyo",
+        "Shin-Aomori"
       ],
-      "side": null,
+      "side": {
+        "toAomori": "Mt. Iwate, Zao, Azuma, Adatara and Nasu on the left; Mt. Hayachine on the right near Morioka",
+        "toTokyo": "the opposite: the big mountains on the right"
+      },
       "seat": null,
-      "section": null,
-      "season": null,
-      "ticket": null,
+      "section": "Utsunomiya–Shin-Shirakawa (Nasu); Koriyama–Fukushima (Adatara, Azuma); Shiroishi-Zao–Sendai (Zao); Shin-Hanamaki–Iwate-Numakunai (Iwate); Hachinohe–Shin-Aomori (Hakkoda)",
+      "season": "clear days; the peaks carry snow from about November to May",
+      "ticket": {
+        "provider": "klook",
+        "linkId": "jrPass",
+        "note": "The Japan Rail Pass covers the Tohoku Shinkansen, Hayabusa included."
+      },
       "evidence": "Search Console: 'tohoku shinkansen seat map' 16 impressions in 90 days.",
       "osm": {
         "name": "東北新幹線",
         "bbox": [
-          39.4,
-          140.9,
-          39.8,
-          141.3
+          36.5,
+          139.8,
+          40.86,
+          141.6
         ]
       },
       "near": [
@@ -4320,7 +4327,1379 @@
       ],
       "tags": [
         "mountain",
-        "countryside"
+        "snow"
+      ],
+      "stations": [
+        {
+          "name": "Utsunomiya",
+          "lat": 36.559,
+          "lng": 139.8985
+        },
+        {
+          "name": "Nasushiobara",
+          "lat": 36.931,
+          "lng": 140.0205
+        },
+        {
+          "name": "Shin-Shirakawa",
+          "lat": 37.1235,
+          "lng": 140.188
+        },
+        {
+          "name": "Koriyama",
+          "lat": 37.3983,
+          "lng": 140.3886
+        },
+        {
+          "name": "Fukushima",
+          "lat": 37.7545,
+          "lng": 140.4594
+        },
+        {
+          "name": "Shiroishi-Zao",
+          "lat": 38.0026,
+          "lng": 140.6383
+        },
+        {
+          "name": "Sendai",
+          "lat": 38.2601,
+          "lng": 140.8824
+        },
+        {
+          "name": "Furukawa",
+          "lat": 38.571,
+          "lng": 140.9672
+        },
+        {
+          "name": "Kurikoma-Kogen",
+          "lat": 38.748,
+          "lng": 141.07
+        },
+        {
+          "name": "Ichinoseki",
+          "lat": 38.9262,
+          "lng": 141.1371
+        },
+        {
+          "name": "Mizusawa-Esashi",
+          "lat": 39.145,
+          "lng": 141.187
+        },
+        {
+          "name": "Kitakami",
+          "lat": 39.287,
+          "lng": 141.122
+        },
+        {
+          "name": "Shin-Hanamaki",
+          "lat": 39.405,
+          "lng": 141.167
+        },
+        {
+          "name": "Morioka",
+          "lat": 39.7015,
+          "lng": 141.1365
+        },
+        {
+          "name": "Iwate-Numakunai",
+          "lat": 39.9706,
+          "lng": 141.2178
+        },
+        {
+          "name": "Ninohe",
+          "lat": 40.265,
+          "lng": 141.293
+        },
+        {
+          "name": "Hachinohe",
+          "lat": 40.5094,
+          "lng": 141.431
+        },
+        {
+          "name": "Shichinohe-Towada",
+          "lat": 40.713,
+          "lng": 141.18
+        },
+        {
+          "name": "Shin-Aomori",
+          "lat": 40.827,
+          "lng": 140.694
+        }
+      ],
+      "targets": [
+        {
+          "id": "nasu",
+          "name": "Mt. Nasu (Chausu-dake)",
+          "lat": 37.1225,
+          "lng": 139.9633,
+          "elevation": 1915
+        },
+        {
+          "id": "adatara",
+          "name": "Mt. Adatara",
+          "lat": 37.6219,
+          "lng": 140.2869,
+          "elevation": 1700
+        },
+        {
+          "id": "azuma",
+          "name": "Mt. Azuma (Issaikyo)",
+          "lat": 37.7244,
+          "lng": 140.2447,
+          "elevation": 1949
+        },
+        {
+          "id": "zao",
+          "name": "Mt. Zao (Kumano-dake)",
+          "lat": 38.1436,
+          "lng": 140.44,
+          "elevation": 1841
+        },
+        {
+          "id": "kurikoma",
+          "name": "Mt. Kurikoma",
+          "lat": 38.9606,
+          "lng": 140.7881,
+          "elevation": 1626
+        },
+        {
+          "id": "iwate",
+          "name": "Mt. Iwate",
+          "lat": 39.8525,
+          "lng": 141.0011,
+          "elevation": 2038
+        },
+        {
+          "id": "hayachine",
+          "name": "Mt. Hayachine",
+          "lat": 39.5592,
+          "lng": 141.4886,
+          "elevation": 1917
+        },
+        {
+          "id": "hakkoda",
+          "name": "The Hakkoda Mountains (Odake)",
+          "lat": 40.6589,
+          "lng": 140.8775,
+          "elevation": 1585
+        },
+        {
+          "id": "iwaki",
+          "name": "Mt. Iwaki",
+          "lat": 40.6531,
+          "lng": 140.3036,
+          "elevation": 1625
+        }
+      ],
+      "teaser": "Tokyo → Morioka · mountains on the left",
+      "href": "/scenic/tohoku-shinkansen",
+      "slug": "tohoku-shinkansen",
+      "viewshed": "data/routes/tohoku-iwate-viewshed.json",
+      "views": [
+        {
+          "id": "nasu",
+          "name": "Mt. Nasu",
+          "targets": [
+            "nasu"
+          ],
+          "tags": [
+            "mountain",
+            "snow"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Utsunomiya",
+          "to": "Shin-Shirakawa",
+          "kmFrom": 28.7,
+          "kmTo": 80.7,
+          "sectionKm": 52,
+          "nearestKm": 16.4,
+          "maxAngle": 5.4,
+          "season": "Clear days; snow-capped from about November to May",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            29.01,
+            29.43,
+            29.86,
+            30.21,
+            30.6,
+            38.72,
+            39.05,
+            39.42,
+            39.92,
+            40.4,
+            40.69,
+            41.25,
+            41.6,
+            41.96,
+            42.35,
+            42.86,
+            43.25,
+            43.82,
+            44.13,
+            44.53,
+            44.96,
+            45.4,
+            45.72,
+            46.18,
+            46.59,
+            46.97,
+            47.46,
+            47.83,
+            48.28,
+            48.75,
+            49.01,
+            49.53,
+            50.01,
+            50.42,
+            50.73,
+            51.15,
+            51.42,
+            51.86,
+            52.32,
+            52.82,
+            53.31,
+            53.55,
+            54.01,
+            54.4,
+            54.78,
+            55.24,
+            55.54,
+            56,
+            56.45,
+            56.84,
+            57.27,
+            57.66,
+            58.01,
+            58.31,
+            58.8,
+            59.2,
+            59.6,
+            59.96,
+            60.45,
+            60.83,
+            61.26,
+            61.64,
+            62.47,
+            70.37,
+            73.4,
+            73.79,
+            74.18,
+            74.66,
+            74.96,
+            75.29,
+            75.87,
+            76.89,
+            77.68,
+            78.77,
+            79.02,
+            79.41,
+            79.72
+          ]
+        },
+        {
+          "id": "adatara-azuma",
+          "name": "Mt. Adatara and Mt. Azuma",
+          "targets": [
+            "adatara",
+            "azuma"
+          ],
+          "tags": [
+            "mountain",
+            "snow"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Shin-Shirakawa",
+          "to": "Shiroishi-Zao",
+          "kmFrom": 92,
+          "kmTo": 164.6,
+          "sectionKm": 73,
+          "nearestKm": 16.4,
+          "maxAngle": 5.7,
+          "season": "Clear days; snow-capped from about November to May",
+          "seat": null,
+          "basis": "terrain model; side matched to published accounts",
+          "seenKm": [
+            92.05,
+            92.87,
+            93.35,
+            94.04,
+            94.77,
+            95.18,
+            95.81,
+            96.4,
+            96.65,
+            97.17,
+            97.58,
+            98.49,
+            98.67,
+            99.32,
+            99.79,
+            100.14,
+            100.46,
+            100.84,
+            101.3,
+            101.63,
+            102.1,
+            102.54,
+            102.92,
+            103.26,
+            103.61,
+            104.07,
+            104.47,
+            104.78,
+            105.12,
+            105.57,
+            106.09,
+            106.58,
+            107,
+            107.43,
+            107.81,
+            108.22,
+            108.57,
+            109.02,
+            109.41,
+            109.95,
+            110.27,
+            110.72,
+            111.03,
+            111.54,
+            111.97,
+            112.33,
+            112.74,
+            113.05,
+            113.87,
+            114.37,
+            114.81,
+            115.94,
+            116.68,
+            117.33,
+            117.71,
+            118.07,
+            118.28,
+            118.72,
+            119.1,
+            119.72,
+            120.03,
+            121.29,
+            121.7,
+            122.07,
+            122.48,
+            122.88,
+            123.26,
+            123.78,
+            124.04,
+            124.59,
+            124.91,
+            125.29,
+            125.77,
+            126.2,
+            126.69,
+            127.2,
+            127.53,
+            127.84,
+            128.72,
+            129.05,
+            129.33,
+            129.98,
+            130.29,
+            130.8,
+            132.43,
+            132.73,
+            133.26,
+            133.55,
+            134.15,
+            146.44,
+            146.83,
+            147.21,
+            147.57,
+            148.87,
+            149.7,
+            150.11,
+            150.42,
+            151.06,
+            151.38,
+            151.71,
+            152.16,
+            152.72,
+            153.13,
+            154.22,
+            154.74,
+            155.12,
+            155.62,
+            156.01,
+            156.2,
+            156.68,
+            157.45,
+            158.01,
+            158.53,
+            158.93,
+            159.1,
+            159.49,
+            160.01,
+            160.35,
+            160.8,
+            161.19,
+            161.76,
+            162.13,
+            162.52,
+            163.18,
+            163.48,
+            163.97,
+            164.59
+          ]
+        },
+        {
+          "id": "zao",
+          "name": "Mt. Zao",
+          "targets": [
+            "zao"
+          ],
+          "tags": [
+            "mountain",
+            "snow"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Shiroishi-Zao",
+          "to": "Sendai",
+          "kmFrom": 192.7,
+          "kmTo": 221.7,
+          "sectionKm": 29,
+          "nearestKm": 25.5,
+          "maxAngle": 4,
+          "season": "Clear days; snow-capped from about November to May",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            192.74,
+            193.5,
+            193.76,
+            194.42,
+            194.48,
+            195.16,
+            195.44,
+            196.02,
+            196.34,
+            196.54,
+            198.35,
+            198.71,
+            215.66,
+            216.19,
+            216.64,
+            217.08,
+            217.54,
+            217.96,
+            218.35,
+            218.78,
+            219.2,
+            220.92
+          ]
+        },
+        {
+          "id": "kurikoma",
+          "name": "Mt. Kurikoma",
+          "targets": [
+            "kurikoma"
+          ],
+          "tags": [
+            "mountain",
+            "snow"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Furukawa",
+          "to": "Mizusawa-Esashi",
+          "kmFrom": 253.9,
+          "kmTo": 308.7,
+          "sectionKm": 55,
+          "nearestKm": 30.3,
+          "maxAngle": 2.9,
+          "season": "Clear days; snow-capped from about November to May",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            253.92,
+            254.64,
+            255.01,
+            255.35,
+            256.38,
+            257.11,
+            257.51,
+            257.9,
+            258.49,
+            258.95,
+            260,
+            260.4,
+            260.82,
+            261.33,
+            261.57,
+            261.93,
+            262.34,
+            262.82,
+            263.12,
+            263.55,
+            263.96,
+            264.39,
+            264.96,
+            265.27,
+            265.63,
+            265.91,
+            266.35,
+            266.71,
+            267.33,
+            267.59,
+            267.91,
+            268.45,
+            268.71,
+            269.12,
+            269.94,
+            270.38,
+            271.2,
+            271.53,
+            272.02,
+            272.34,
+            272.74,
+            273.19,
+            273.61,
+            274,
+            274.34,
+            274.99,
+            275.94,
+            276.41,
+            279.09,
+            279.78,
+            279.97,
+            280.5,
+            281.34,
+            281.53,
+            282.18,
+            282.74,
+            283.12,
+            284.21,
+            284.45,
+            285.19,
+            285.81,
+            286.12,
+            286.48,
+            286.8,
+            287.45,
+            287.67,
+            288.05,
+            288.56,
+            288.89,
+            289.77,
+            290.04,
+            292.98,
+            293.46,
+            293.73,
+            296.08,
+            296.39,
+            298.96,
+            301.89,
+            302.21,
+            302.99,
+            303.27,
+            303.94,
+            304.29,
+            304.63,
+            305.35,
+            306.38,
+            307.05,
+            308.06,
+            308.7
+          ]
+        },
+        {
+          "id": "hayachine",
+          "name": "Mt. Hayachine",
+          "targets": [
+            "hayachine"
+          ],
+          "tags": [
+            "mountain",
+            "snow"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Mizusawa-Esashi",
+          "to": "Iwate-Numakunai",
+          "kmFrom": 328.8,
+          "kmTo": 400.3,
+          "sectionKm": 72,
+          "nearestKm": 27.4,
+          "maxAngle": 3.7,
+          "season": "Clear days; snow-capped from about November to May",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            329.32,
+            329.62,
+            329.99,
+            330.43,
+            330.76,
+            331.31,
+            331.66,
+            332.12,
+            332.41,
+            332.79,
+            333.3,
+            333.79,
+            334.17,
+            334.49,
+            334.97,
+            335.35,
+            335.78,
+            336.3,
+            336.64,
+            337.09,
+            337.42,
+            338.35,
+            338.71,
+            339.16,
+            339.5,
+            339.93,
+            342.06,
+            342.45,
+            342.94,
+            343.44,
+            343.86,
+            344.64,
+            345.02,
+            345.59,
+            346.1,
+            346.72,
+            347.09,
+            347.53,
+            347.94,
+            348.31,
+            348.62,
+            348.94,
+            350.71,
+            351.26,
+            351.53,
+            357.43,
+            359.01,
+            359.79,
+            360.64,
+            361.1,
+            363.67,
+            364.1,
+            365.22,
+            367.24,
+            367.6,
+            367.98,
+            371.06,
+            371.97,
+            372.44,
+            372.75,
+            373.48,
+            374.32,
+            374.67,
+            375.01,
+            375.7,
+            376.02,
+            376.45,
+            377.2,
+            377.8,
+            378.31,
+            379.36,
+            379.79,
+            380.33,
+            380.93,
+            381.38,
+            381.85,
+            382.23,
+            382.47,
+            383.28,
+            383.95,
+            384.53,
+            384.91,
+            385.25,
+            386.15,
+            386.8,
+            387.13,
+            388.49,
+            389.29,
+            389.81,
+            390.29,
+            390.6,
+            391.85,
+            392.31,
+            392.65,
+            394.5,
+            395.35,
+            395.75,
+            396.14,
+            396.45,
+            397.01,
+            397.47,
+            397.95,
+            398.62,
+            398.93,
+            399.48,
+            399.92,
+            400.27
+          ]
+        },
+        {
+          "id": "iwate",
+          "name": "Mt. Iwate",
+          "targets": [
+            "iwate"
+          ],
+          "tags": [
+            "mountain",
+            "snow"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Kitakami",
+          "to": "Iwate-Numakunai",
+          "kmFrom": 359,
+          "kmTo": 421.9,
+          "sectionKm": 63,
+          "nearestKm": 14.5,
+          "maxAngle": 7.2,
+          "season": "Clear days; snow-capped from about November to May",
+          "seat": null,
+          "basis": "terrain model; side matched to published accounts",
+          "seenKm": [
+            359.01,
+            359.79,
+            360.64,
+            361.1,
+            361.46,
+            361.79,
+            362.64,
+            363.67,
+            364.1,
+            365.22,
+            367.24,
+            367.6,
+            367.98,
+            368.93,
+            369.46,
+            370.27,
+            371.06,
+            371.97,
+            372.44,
+            372.75,
+            376.45,
+            377.2,
+            377.8,
+            378.31,
+            379.36,
+            379.79,
+            380.33,
+            380.93,
+            381.38,
+            381.85,
+            382.23,
+            382.47,
+            383.28,
+            383.95,
+            384.53,
+            384.91,
+            385.25,
+            386.15,
+            386.8,
+            387.13,
+            387.95,
+            388.49,
+            389.29,
+            389.81,
+            390.29,
+            390.6,
+            390.95,
+            391.38,
+            395.75,
+            396.14,
+            396.45,
+            397.01,
+            397.47,
+            397.95,
+            398.62,
+            398.93,
+            399.48,
+            399.92,
+            400.27,
+            401.92,
+            402.31,
+            402.66,
+            403.14,
+            405.9,
+            406.36,
+            408,
+            411.88,
+            415.24,
+            419.86,
+            420.93,
+            421.87
+          ]
+        },
+        {
+          "id": "hakkoda",
+          "name": "The Hakkoda Mountains",
+          "targets": [
+            "hakkoda"
+          ],
+          "tags": [
+            "mountain",
+            "snow"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Hachinohe",
+          "to": "Shin-Aomori",
+          "kmFrom": 499.9,
+          "kmTo": 565.7,
+          "sectionKm": 66,
+          "nearestKm": 14.4,
+          "maxAngle": 6.1,
+          "season": "Clear days; snow-capped from about November to May",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            500.21,
+            500.65,
+            501.07,
+            501.57,
+            501.96,
+            502.33,
+            502.71,
+            503.38,
+            503.78,
+            504.22,
+            505.62,
+            505.92,
+            506.18,
+            508.11,
+            508.21,
+            512.05,
+            512.39,
+            516.86,
+            517.45,
+            518.02,
+            520.1,
+            520.69,
+            520.97,
+            521.23,
+            521.96,
+            522.28,
+            522.63,
+            522.89,
+            523.36,
+            523.79,
+            524.34,
+            524.62,
+            525.06,
+            525.87,
+            526.23,
+            526.64,
+            526.99,
+            559.72,
+            559.95,
+            560.55,
+            560.9,
+            561.3,
+            561.63,
+            562.01,
+            562.39,
+            562.8,
+            563.25,
+            563.62,
+            564.09,
+            564.49,
+            564.85
+          ]
+        }
+      ],
+      "verification": "Sides from a terrain sight-line model (GSI elevation, OSM track). Matched against published accounts: Mt. Iwate on the left going north (visitjapan-vegetarian.com), and Mt. Adatara and Mt. Azuma photographed from the east out of a Tohoku Shinkansen window (Geological Survey of Japan). The other sections are model only. Seat letters not verified, so not given.",
+      "chip": {
+        "emoji": "🏔️",
+        "label": "Mt. Iwate"
+      },
+      "trackKmOffset": 103.8,
+      "timelineStations": [
+        {
+          "name": "Tokyo",
+          "km": 0,
+          "ja": "東京"
+        },
+        {
+          "name": "Ueno",
+          "km": 3.6,
+          "ja": "上野"
+        },
+        {
+          "name": "Omiya",
+          "km": 30.3,
+          "ja": "大宮"
+        },
+        {
+          "name": "Utsunomiya",
+          "km": 109.6,
+          "ja": "宇都宮"
+        },
+        {
+          "name": "Nasushiobara",
+          "km": 152.5,
+          "ja": "那須塩原"
+        },
+        {
+          "name": "Shin-Shirakawa",
+          "km": 178.8,
+          "ja": "新白河"
+        },
+        {
+          "name": "Koriyama",
+          "km": 214.5,
+          "ja": "郡山"
+        },
+        {
+          "name": "Fukushima",
+          "km": 255.5,
+          "ja": "福島"
+        },
+        {
+          "name": "Shiroishi-Zao",
+          "km": 287.6,
+          "ja": "白石蔵王"
+        },
+        {
+          "name": "Sendai",
+          "km": 325.5,
+          "ja": "仙台"
+        },
+        {
+          "name": "Furukawa",
+          "km": 364.2,
+          "ja": "古川"
+        },
+        {
+          "name": "Kurikoma-Kogen",
+          "km": 386,
+          "ja": "くりこま高原"
+        },
+        {
+          "name": "Ichinoseki",
+          "km": 406.8,
+          "ja": "一ノ関"
+        },
+        {
+          "name": "Mizusawa-Esashi",
+          "km": 431.8,
+          "ja": "水沢江刺"
+        },
+        {
+          "name": "Kitakami",
+          "km": 449.4,
+          "ja": "北上"
+        },
+        {
+          "name": "Shin-Hanamaki",
+          "km": 463.6,
+          "ja": "新花巻"
+        },
+        {
+          "name": "Morioka",
+          "km": 496.4,
+          "ja": "盛岡"
+        },
+        {
+          "name": "Iwate-Numakunai",
+          "km": 529,
+          "ja": "いわて沼宮内"
+        },
+        {
+          "name": "Ninohe",
+          "km": 563.3,
+          "ja": "二戸"
+        },
+        {
+          "name": "Hachinohe",
+          "km": 593.2,
+          "ja": "八戸"
+        },
+        {
+          "name": "Shichinohe-Towada",
+          "km": 627.6,
+          "ja": "七戸十和田"
+        },
+        {
+          "name": "Shin-Aomori",
+          "km": 674.8,
+          "ja": "新青森"
+        }
+      ],
+      "directions": {
+        "forward": [
+          "Tokyo",
+          "Shin-Aomori"
+        ],
+        "backward": [
+          "Shin-Aomori",
+          "Tokyo"
+        ]
+      },
+      "timing": {
+        "kind": "timetable",
+        "source": "JR East train timetables (timetables.jreast.co.jp), November 2026 timetable: Hayabusa 3 and 20, Yamabiko 53 and 50. Times between stops are spread in proportion to distance along the line.",
+        "sourceUrl": "https://timetables.jreast.co.jp/en/",
+        "trains": [
+          {
+            "id": "hayabusa",
+            "label": "Hayabusa",
+            "note": "fastest; through to Shin-Aomori",
+            "forward": {
+              "train": "Hayabusa 3",
+              "stops": [
+                [
+                  "Tokyo",
+                  null,
+                  "07:32"
+                ],
+                [
+                  "Ueno",
+                  "07:37",
+                  "07:38"
+                ],
+                [
+                  "Omiya",
+                  "07:56",
+                  "07:57"
+                ],
+                [
+                  "Sendai",
+                  "09:04",
+                  "09:05"
+                ],
+                [
+                  "Morioka",
+                  "09:44",
+                  "09:48"
+                ],
+                [
+                  "Iwate-Numakunai",
+                  "10:00",
+                  "10:00"
+                ],
+                [
+                  "Ninohe",
+                  "10:12",
+                  "10:13"
+                ],
+                [
+                  "Hachinohe",
+                  "10:24",
+                  "10:25"
+                ],
+                [
+                  "Shichinohe-Towada",
+                  "10:37",
+                  "10:37"
+                ],
+                [
+                  "Shin-Aomori",
+                  "10:52",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Hayabusa 20",
+              "stops": [
+                [
+                  "Shin-Aomori",
+                  null,
+                  "12:39"
+                ],
+                [
+                  "Shichinohe-Towada",
+                  "12:53",
+                  "12:54"
+                ],
+                [
+                  "Hachinohe",
+                  "13:06",
+                  "13:07"
+                ],
+                [
+                  "Ninohe",
+                  "13:18",
+                  "13:19"
+                ],
+                [
+                  "Iwate-Numakunai",
+                  "13:31",
+                  "13:32"
+                ],
+                [
+                  "Morioka",
+                  "13:44",
+                  "13:50"
+                ],
+                [
+                  "Sendai",
+                  "14:29",
+                  "14:31"
+                ],
+                [
+                  "Omiya",
+                  "15:39",
+                  "15:40"
+                ],
+                [
+                  "Ueno",
+                  "15:58",
+                  "15:59"
+                ],
+                [
+                  "Tokyo",
+                  "16:04",
+                  null
+                ]
+              ]
+            }
+          },
+          {
+            "id": "yamabiko",
+            "label": "Yamabiko",
+            "note": "stops at most stations between Utsunomiya and Morioka",
+            "forward": {
+              "train": "Yamabiko 53",
+              "stops": [
+                [
+                  "Tokyo",
+                  null,
+                  "08:45"
+                ],
+                [
+                  "Ueno",
+                  "08:50",
+                  "08:51"
+                ],
+                [
+                  "Omiya",
+                  "09:09",
+                  "09:10"
+                ],
+                [
+                  "Utsunomiya",
+                  "09:34",
+                  "09:38"
+                ],
+                [
+                  "Koriyama",
+                  "10:05",
+                  "10:06"
+                ],
+                [
+                  "Fukushima",
+                  "10:19",
+                  "10:24"
+                ],
+                [
+                  "Shiroishi-Zao",
+                  "10:34",
+                  "10:35"
+                ],
+                [
+                  "Sendai",
+                  "10:49",
+                  "10:50"
+                ],
+                [
+                  "Furukawa",
+                  "11:03",
+                  "11:03"
+                ],
+                [
+                  "Kurikoma-Kogen",
+                  "11:13",
+                  "11:13"
+                ],
+                [
+                  "Ichinoseki",
+                  "11:23",
+                  "11:27"
+                ],
+                [
+                  "Mizusawa-Esashi",
+                  "11:37",
+                  "11:38"
+                ],
+                [
+                  "Kitakami",
+                  "11:45",
+                  "11:46"
+                ],
+                [
+                  "Shin-Hanamaki",
+                  "11:53",
+                  "11:54"
+                ],
+                [
+                  "Morioka",
+                  "12:06",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Yamabiko 50",
+              "stops": [
+                [
+                  "Morioka",
+                  null,
+                  "07:01"
+                ],
+                [
+                  "Shin-Hanamaki",
+                  "07:12",
+                  "07:13"
+                ],
+                [
+                  "Kitakami",
+                  "07:20",
+                  "07:23"
+                ],
+                [
+                  "Mizusawa-Esashi",
+                  "07:31",
+                  "07:32"
+                ],
+                [
+                  "Ichinoseki",
+                  "07:41",
+                  "07:42"
+                ],
+                [
+                  "Kurikoma-Kogen",
+                  "07:50",
+                  "07:51"
+                ],
+                [
+                  "Furukawa",
+                  "07:59",
+                  "08:00"
+                ],
+                [
+                  "Sendai",
+                  "08:12",
+                  "08:20"
+                ],
+                [
+                  "Fukushima",
+                  "08:41",
+                  "08:42"
+                ],
+                [
+                  "Koriyama",
+                  "08:55",
+                  "08:56"
+                ],
+                [
+                  "Shin-Shirakawa",
+                  "09:08",
+                  "09:09"
+                ],
+                [
+                  "Utsunomiya",
+                  "09:28",
+                  "09:36"
+                ],
+                [
+                  "Omiya",
+                  "10:01",
+                  "10:02"
+                ],
+                [
+                  "Ueno",
+                  "10:20",
+                  "10:21"
+                ],
+                [
+                  "Tokyo",
+                  "10:26",
+                  null
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "page": {
+        "title": "Tohoku Shinkansen: Which Side for Mt. Iwate and the Mountains?",
+        "description": "Going north from Tokyo to Sendai, Morioka or Shin-Aomori, sit on the left: Mt. Nasu, Adatara, Azuma, Zao and Mt. Iwate are all on that side. A terrain model of every sight line, with a map and the minutes from the JR East timetable.",
+        "h1": "Tohoku Shinkansen: which side for Mt. Iwate and the Tohoku mountains?",
+        "labelStations": [
+          "Utsunomiya",
+          "Koriyama",
+          "Fukushima",
+          "Sendai",
+          "Ichinoseki",
+          "Morioka",
+          "Hachinohe",
+          "Shin-Aomori"
+        ]
+      },
+      "ticketGuide": {
+        "verdict": "Hayabusa trains are all reserved — book your seat before you go. Riding the Shinkansen more than once? The JR Pass covers the Tohoku Shinkansen, Hayabusa included.",
+        "options": [
+          {
+            "who": "Tokyo ↔ Sendai, Morioka or Shin-Aomori",
+            "buy": "Reserved Tohoku Shinkansen ticket"
+          },
+          {
+            "who": "A wider JR trip",
+            "buy": "JR Pass — it covers the Hayabusa with no extra ticket"
+          }
+        ],
+        "sources": [
+          {
+            "label": "Japan Rail Pass",
+            "url": "https://japanrailpass.net/en/about_jrp/route/"
+          }
+        ],
+        "links": [
+          {
+            "kind": "affiliate",
+            "linkId": "shinkansenTokyoSendai",
+            "label": "Tohoku Shinkansen tickets",
+            "product": "shinkansen_ticket"
+          },
+          {
+            "kind": "affiliate",
+            "linkId": "jrPass",
+            "label": "Japan Rail Pass",
+            "product": "jr_pass"
+          }
+        ],
+        "more": {
+          "href": "/jr-pass-vs-single-ticket",
+          "label": "JR Pass or single tickets: the full comparison"
+        }
+      },
+      "faq": [
+        {
+          "q": "Does the JR Pass cover the Hayabusa?",
+          "a": "Yes. The JR Pass leaves out only the Nozomi and Mizuho on the Tokaido, Sanyo and Kyushu Shinkansen; the Hayabusa on the Tohoku Shinkansen is not on that list. Hayabusa trains are all reserved, so book a seat before you board."
+        },
+        {
+          "q": "Which side is better from Tokyo to Sendai?",
+          "a": "The left, going north: Mt. Nasu after Utsunomiya, Mt. Adatara and Mt. Azuma around Koriyama and Fukushima, then Mt. Zao before Sendai. Coming back to Tokyo, sit on the right."
+        }
       ]
     },
     {

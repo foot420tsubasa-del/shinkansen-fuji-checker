@@ -30,6 +30,7 @@ const VIEWSHED_LOADERS: Record<string, () => Promise<{ points: MapPoint[] }>> = 
   "fujikyu-fuji": () => import("@/data/routes/fujikyu-fuji-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
   "hakone-tozan": () => import("@/data/routes/hakone-tozan-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
   "yurikamome-night": () => import("@/data/routes/yurikamome-night-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
+  "tohoku-iwate": () => import("@/data/routes/tohoku-iwate-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
   "sagano-gorge": () => import("@/data/routes/sagano-gorge-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
 };
 
