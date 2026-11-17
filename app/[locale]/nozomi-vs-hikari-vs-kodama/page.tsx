@@ -166,7 +166,7 @@ export default async function TrainTypePage({ params }: Props) {
             <h2 className="text-xl font-bold text-slate-950">The Mt. Fuji angle</h2>
             <div className="mt-3 space-y-3 text-sm leading-7 text-slate-600">
               <p>
-                All three services pass the same viewing zone around Shin-Fuji station, and the seat advice never changes: <strong>Seat E</strong> in Ordinary Cars, Seat D in Green Car. Kodama actually stops at Shin-Fuji, which slows the passage and stretches the view; Nozomi and most Hikari sweep through at full speed for the classic 30–60 second window.
+                All three services pass the Fuji viewing area, and the seat advice does not change: <strong>Seat E</strong> in Ordinary Cars, Seat D in Green Car. Kodama stops at Shin-Fuji; Nozomi and Hikari normally pass the station. The mountain may appear intermittently across several sections, while the clearest open view around Shin-Fuji is brief.
               </p>
             </div>
           </section>

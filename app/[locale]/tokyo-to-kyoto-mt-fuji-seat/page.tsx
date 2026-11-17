@@ -44,7 +44,7 @@ const faqSchema = {
       name: "How long after leaving Tokyo can I see Mt. Fuji?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "About 40–50 minutes after departing Tokyo Station, near Shin-Fuji station. The view lasts about 30–60 seconds at speed.",
+        text: "About 40–50 minutes after departing Tokyo Station, around the Shin-Fuji area. The mountain may appear intermittently; the clearest open view is brief.",
       },
     },
     {
@@ -149,10 +149,10 @@ export default async function TokyoToKyotoSeatPage({ params }: Props) {
             <h2 className="text-xl font-bold text-slate-950">Timing your view</h2>
             <div className="mt-3 space-y-3 text-sm leading-7 text-slate-600">
               <p>
-                When traveling from Tokyo toward Kyoto or Osaka on a Nozomi, Mt. Fuji comes into view on the right side about 40 minutes after leaving Tokyo Station and is largest at about 45, passing Shin-Fuji Station in Shizuoka Prefecture. By about 48 minutes it is behind you.
+                On a typical Nozomi from Tokyo toward Kyoto or Osaka, use about 40 minutes after departure as your cue to get ready. The train reaches the main viewing area around Shin-Fuji at roughly 45 minutes. These are planning estimates inferred from running times, not exact sighting times, and individual trains vary.
               </p>
               <p>
-                It is in view on and off for those eight minutes, but the wide-open stretch — Shin-Fuji and the Fuji River bridge just after it — lasts well under a minute at full speed. Have your camera ready a few minutes before. The <Link href="/when-to-see-mt-fuji-shinkansen" className="font-semibold text-sky-700 underline underline-offset-2">timing page</Link> gives clock times for your departure.
+                The mountain may appear on and off across several sections, but there is no fixed total viewing duration. The clearest open stretch around Shin-Fuji and the Fuji River is brief at full speed. Have your camera ready a few minutes before. The <Link href="/when-to-see-mt-fuji-shinkansen" className="font-semibold text-sky-700 underline underline-offset-2">timing page</Link> gives approximate clock times for your departure.
               </p>
             </div>
           </section>

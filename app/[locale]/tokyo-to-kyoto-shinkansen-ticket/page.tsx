@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { OMIO_TOKYO_KYOTO_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import { ProviderChoiceCTA } from "@/components/affiliate/ProviderChoiceCTA";
+import { TRANSPORT_FACTS } from "@/lib/content/transport-facts";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -36,7 +37,7 @@ const faqSchema = {
       name: "How much is a Shinkansen ticket from Tokyo to Kyoto?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "A reserved seat on the Tokaido Shinkansen (Nozomi) from Tokyo to Kyoto costs about ¥13,320 one-way for an Ordinary Car. Green Car (first class) costs more. Always confirm current prices before booking.",
+        text: `The regular-season reserved Ordinary Car fare on the Nozomi from Tokyo to Kyoto is ${TRANSPORT_FACTS.fares.tokyoKyotoNozomiReservedRegular}. ${TRANSPORT_FACTS.fares.tokyoKyotoNonReserved} is the non-reserved fare. Reserved-seat surcharges vary by season, so confirm the current price before booking.`,
       },
     },
     {
@@ -160,7 +161,7 @@ export default async function TokyoToKyotoTicketPage({ params }: Props) {
             <h2 className="text-xl font-bold text-slate-950">Single ticket vs JR Pass</h2>
             <div className="mt-3 space-y-3 text-sm leading-7 text-slate-600">
               <p>
-                A reserved seat on the Nozomi from Tokyo to Kyoto costs about <strong>¥13,320</strong>. A 7-day JR Pass costs about <strong>¥50,000</strong> and does not cover the Nozomi — you&apos;d need to use the Hikari instead (adds ~20 min).
+                The regular-season reserved Ordinary Car fare on the Nozomi from Tokyo to Kyoto is <strong>{TRANSPORT_FACTS.fares.tokyoKyotoNozomiReservedRegular}</strong>; <strong>{TRANSPORT_FACTS.fares.tokyoKyotoNonReserved}</strong> is the non-reserved fare. A 7-day Ordinary JR Pass bought on the official site costs <strong>{TRANSPORT_FACTS.fares.jrPassOrdinary.officialSite.sevenDay}</strong>. It does not include Nozomi by default: use Hikari, or buy the separate NOZOMI MIZUHO Ticket for that Nozomi ride.
               </p>
               <p>
                 For a simple one-way trip, a single ticket is cheaper and simpler. Only consider the JR Pass if your total route includes several additional long-distance JR rides.

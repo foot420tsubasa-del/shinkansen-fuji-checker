@@ -27,9 +27,9 @@ import { ODDS_PERIOD } from "@/lib/fuji-odds";
 type Props = { params: Promise<{ locale: string }> };
 
 const PATH = "/when-to-see-mt-fuji-shinkansen";
-const title = "When Do You See Mt. Fuji on the Shinkansen? 40–48 Minutes After Tokyo";
+const title = "When Do You See Mt. Fuji on the Shinkansen? Timing Near Shin-Fuji";
 const description =
-  "On a Nozomi out of Tokyo, Mt. Fuji comes into view about 40 minutes after departure and is largest at about 45, passing Shin-Fuji. From Kyoto it is about 88 minutes, from Shin-Osaka about 103. Enter your departure time for the exact minutes.";
+  "On a Nozomi from Tokyo, be ready around 40 minutes after departure; the train passes the Shin-Fuji area around 45 minutes. These are planning estimates, not a measured visibility duration.";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -66,7 +66,7 @@ const faqSchema = {
       name: "How many minutes after leaving Tokyo do you see Mt. Fuji?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: `On a Nozomi, Mt. Fuji comes into view about ${t.first} minutes after leaving Tokyo Station, is largest at about ${t.peak} minutes as the train passes Shin-Fuji, and is gone by about ${t.last} minutes. From Shinagawa subtract 7 minutes; from Shin-Yokohama subtract 18.`,
+        text: `On a Nozomi, use about ${t.first} minutes after Tokyo as a cue to get ready; the train passes the Shin-Fuji area at roughly ${t.peak} minutes. Keep watching until about ${t.last} minutes. These are planning estimates, not exact sighting times.`,
       },
     },
     {
@@ -74,7 +74,7 @@ const faqSchema = {
       name: "When do you see Mt. Fuji going from Kyoto or Osaka to Tokyo?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: `About ${k.first} to ${k.last} minutes after leaving Kyoto on a Nozomi, and about ${o.first} to ${o.last} minutes after leaving Shin-Osaka. That is roughly 45 minutes before the train arrives at Tokyo Station. Mt. Fuji is on the left in this direction.`,
+        text: `Get ready around ${k.first} minutes after leaving Kyoto on a Nozomi and around ${o.first} minutes after leaving Shin-Osaka. The train passes the Shin-Fuji area at roughly ${k.peak} and ${o.peak} minutes respectively. Mt. Fuji is on the left in this direction.`,
       },
     },
     {
@@ -82,7 +82,7 @@ const faqSchema = {
       name: "How long is Mt. Fuji visible from the Shinkansen?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: `About ${t.last - t.first} minutes from the first glimpse to the last on a Nozomi, with the clearest, most open view lasting only a few of those minutes around Shin-Fuji Station and the Fuji River bridge.`,
+        text: "There is no reliable fixed duration. The mountain can appear intermittently in several sections, and buildings, barriers, weather and other trains affect the view. JR Central identifies the area around Shin-Fuji as the main photo opportunity, so be ready before the station.",
       },
     },
     {
@@ -124,9 +124,9 @@ function DepartureTable({ origin, caption }: { origin: OriginId; caption: string
         <thead>
           <tr className="border-b border-slate-100">
             <th scope="col" className={th}>Departs</th>
-            <th scope="col" className={th}>First view</th>
-            <th scope="col" className={th}>Largest</th>
-            <th scope="col" className={th}>Gone by</th>
+            <th scope="col" className={th}>Get ready</th>
+            <th scope="col" className={th}>Near Shin-Fuji</th>
+            <th scope="col" className={th}>Keep watching to</th>
           </tr>
         </thead>
         <tbody>
@@ -160,9 +160,9 @@ export default async function WhenToSeeFujiPage({ params }: Props) {
           When do you see Mt. Fuji from the Shinkansen?
         </h1>
         <p className="mt-3 max-w-3xl text-sm leading-7 text-slate-600 md:text-base">
-          About {t.first} to {t.last} minutes after a Nozomi leaves Tokyo, and about 45 minutes before one
-          arrives there. The mountain is in view for only a few minutes, so the time matters as much as the
-          seat. Enter your own departure below for the minutes on your train.
+          On a Nozomi from Tokyo, get ready at roughly {t.first} minutes; the train passes the Shin-Fuji area
+          around {t.peak} minutes. In the other direction this is roughly 45 minutes before Tokyo. These are
+          planning cues rather than a measured visibility duration, and actual timing varies by train.
         </p>
 
         <section className="mt-8 rounded-[22px] border border-emerald-200 bg-emerald-50 p-5 shadow-sm">
@@ -171,15 +171,15 @@ export default async function WhenToSeeFujiPage({ params }: Props) {
             <li className="flex gap-2">
               <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
               <span>
-                <strong>From Tokyo:</strong> first view about {t.first} minutes after departure, largest at
-                about {t.peak}, gone by about {t.last}. Right side, seat E.
+                <strong>From Tokyo:</strong> get ready around {t.first} minutes after departure; the train is
+                near Shin-Fuji around {t.peak}. Keep watching until roughly {t.last}. Right side, seat E.
               </span>
             </li>
             <li className="flex gap-2">
               <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
               <span>
-                <strong>From Kyoto:</strong> about {k.first} to {k.last} minutes after departure.{" "}
-                <strong>From Shin-Osaka:</strong> about {o.first} to {o.last}. Left side, seat E.
+                <strong>From Kyoto:</strong> get ready around {k.first} minutes; near Shin-Fuji around {k.peak}.{" "}
+                <strong>From Shin-Osaka:</strong> get ready around {o.first}; near Shin-Fuji around {o.peak}. Left side, seat E.
               </span>
             </li>
             <li className="flex gap-2">
@@ -225,9 +225,9 @@ export default async function WhenToSeeFujiPage({ params }: Props) {
                   <tr className="border-b border-slate-100">
                     <th scope="col" className={th}>Boarding at</th>
                     <th scope="col" className={th}>Fuji is on the</th>
-                    <th scope="col" className={th}>First view</th>
-                    <th scope="col" className={th}>Largest</th>
-                    <th scope="col" className={th}>Gone by</th>
+                    <th scope="col" className={th}>Get ready</th>
+                    <th scope="col" className={th}>Near Shin-Fuji</th>
+                    <th scope="col" className={th}>Keep watching to</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -247,8 +247,8 @@ export default async function WhenToSeeFujiPage({ params }: Props) {
               </table>
             </div>
             <p className="mt-2 text-xs leading-5 text-slate-500">
-              Nozomi estimates, good to within two or three minutes. In Green Cars the Fuji-side window is
-              seat D.
+              Approximate Nozomi planning cues inferred from published station running times. They are not
+              measured sighting times and can vary by train. In Green Cars the Fuji-side window is seat D.
             </p>
           </section>
 
@@ -274,11 +274,9 @@ export default async function WhenToSeeFujiPage({ params }: Props) {
                 Station, Mt. Fuji is ahead of you on the right — about {t.first} minutes in.
               </p>
               <p>
-                It grows for the next few minutes as the line swings toward it, and is at its largest and
-                least obstructed passing Shin-Fuji Station, about {t.peak} minutes in. Just beyond, the train
-                crosses the Fuji River on a long bridge with nothing between you and the mountain — the view
-                on most postcards. After the bridge the line turns away and the hills close in, and by about{" "}
-                {t.last} minutes it is behind you.
+                The train reaches the main viewing area around Shin-Fuji at about {t.peak} minutes in, then
+                crosses the Fuji River. Barriers, buildings, weather and passing trains can interrupt the view,
+                so keep watching until roughly {t.last} minutes rather than treating either time as exact.
               </p>
               <p>
                 <strong className="text-slate-900">Heading to Tokyo.</strong> The same stretch in reverse.

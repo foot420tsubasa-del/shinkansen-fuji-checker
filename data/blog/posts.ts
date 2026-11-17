@@ -81,7 +81,7 @@ export const BLOG_POSTS: BlogPost[] = [
               },
               {
                 title: "Try the non-reserved cars",
-                text: "On most days the Nozomi has non-reserved cars (cars 1–3). Line up early at their marked spot on the platform and you can choose a Seat E yourself. During the New Year, Golden Week and Obon holidays the Nozomi runs fully reserved, so this does not work then.",
+                text: "On ordinary operating days, Nozomi cars 1 and 2 are non-reserved. Line up early at their marked platform position and you may be able to choose Seat E. On designated peak periods Nozomi runs with all seats reserved, so check JR Central's current notice before relying on this option.",
               },
             ],
           },
@@ -92,7 +92,7 @@ export const BLOG_POSTS: BlogPost[] = [
         blocks: [
           {
             type: "p",
-            text: "Mt. Fuji is in view for about eight minutes on a Nozomi, largest as the train passes Shin-Fuji Station. Be in place a little before the window opens:",
+            text: "Mt. Fuji may appear intermittently across several sections on a Nozomi and is largest around Shin-Fuji Station. The clearest open photo opportunity is much shorter, so be in place before the viewing area:",
           },
           { type: "timing" },
           {
@@ -142,7 +142,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         q: "How long is Mt. Fuji visible from the Shinkansen?",
-        a: "About eight minutes on a Nozomi. Going west it opens about 40 minutes after Tokyo and is largest at about 45, passing Shin-Fuji Station.",
+        a: "There is no reliable single duration: the mountain may appear intermittently across several sections, while the clearest open view around Shin-Fuji is brief. Going west, be ready roughly 40 minutes after Tokyo and confirm your train's timetable.",
       },
       {
         q: "Which side of the Shinkansen is Mt. Fuji on?",

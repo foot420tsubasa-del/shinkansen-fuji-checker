@@ -11,6 +11,7 @@ import { JR_PASS_URL, OMIO_JAPAN_RAIL_PASS_URL, SHINKANSEN_TICKET_URL } from "@/
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { ProviderChoiceCTA } from "@/components/affiliate/ProviderChoiceCTA";
 import { KlookProductRow } from "@/components/affiliate/KlookProductRow";
+import { TRANSPORT_FACTS } from "@/lib/content/transport-facts";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -38,7 +39,7 @@ const faqSchema = {
       name: "Is the JR Pass worth it for Tokyo to Kyoto only?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Usually not. A one-way Shinkansen ticket from Tokyo to Kyoto costs about ¥13,320. A 7-day JR Pass costs about ¥50,000. For a simple one-way or round trip, single tickets are usually cheaper and simpler.",
+        text: `Usually not. The regular-season Nozomi reserved fare from Tokyo to Kyoto is ${TRANSPORT_FACTS.fares.tokyoKyotoNozomiReservedRegular}; ${TRANSPORT_FACTS.fares.tokyoKyotoNonReserved} is the non-reserved fare. A 7-day Ordinary JR Pass bought on the official site is ${TRANSPORT_FACTS.fares.jrPassOrdinary.officialSite.sevenDay}. For a simple one-way or round trip, single tickets are usually cheaper and simpler.`,
       },
     },
     {
@@ -62,7 +63,7 @@ const faqSchema = {
       name: "Do I need a JR Pass for Tokyo, Kyoto and Osaka?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Usually not. The classic Tokyo → Kyoto → Osaka route needs only one Shinkansen ride (Tokyo to Kyoto, about ¥13,320). Kyoto to Osaka is a short local train, so single tickets total far less than a 7-day JR Pass.",
+        text: `Usually not. The classic Tokyo → Kyoto → Osaka route needs only one Shinkansen ride (regular-season Nozomi reserved fare ${TRANSPORT_FACTS.fares.tokyoKyotoNozomiReservedRegular}; non-reserved ${TRANSPORT_FACTS.fares.tokyoKyotoNonReserved}). Kyoto to Osaka is a short local train, so single tickets total far less than a 7-day JR Pass.`,
       },
     },
     {
@@ -87,16 +88,16 @@ const faqSchema = {
 // Absorbed from /shinkansen-ticket-vs-jr-pass-tokyo-kyoto-osaka (301'd here):
 // per-leg costs for the classic golden-route one-way.
 const costBreakdown = [
-  { leg: "Tokyo → Kyoto (Shinkansen Nozomi)", cost: "~¥13,320", note: "Reserved Ordinary Car" },
+  { leg: "Tokyo → Kyoto (Shinkansen Nozomi)", cost: TRANSPORT_FACTS.fares.tokyoKyotoNozomiReservedRegular, note: "Regular-season reserved Ordinary Car" },
   { leg: "Kyoto → Osaka (JR Special Rapid)", cost: "~¥580", note: "IC card, no reservation" },
   { leg: "Osaka → KIX (Nankai Rapi:t)", cost: "~¥1,450", note: "If flying from Kansai" },
-  { leg: "Total (one-way, fly out KIX)", cost: "~¥15,350", note: "vs ~¥50,000 for 7-day JR Pass" },
+  { leg: "Total (one-way, fly out KIX)", cost: "~¥16,200", note: `vs ${TRANSPORT_FACTS.fares.jrPassOrdinary.officialSite.sevenDay} for a 7-day official-site JR Pass` },
 ];
 
 const routes = [
   {
     name: "7-day: Tokyo → Kyoto → Osaka",
-    singleCost: "~¥13,320 one-way",
+    singleCost: `${TRANSPORT_FACTS.fares.tokyoKyotoNozomiReservedRegular} regular-season reserved`,
     passCost: "~¥50,000 (7-day)",
     verdict: "Single tickets are usually cheaper",
     link: "/itineraries/7-day-first-time-japan",
@@ -104,7 +105,7 @@ const routes = [
   },
   {
     name: "10-day: Tokyo → Kyoto → Osaka (fly out KIX)",
-    singleCost: "~¥13,320 one-way",
+    singleCost: `${TRANSPORT_FACTS.fares.tokyoKyotoNozomiReservedRegular} regular-season reserved`,
     passCost: "~¥50,000 (7-day)",
     verdict: "Single ticket — one Shinkansen leg only",
     link: "/itineraries/10-day-japan-with-fuji",
@@ -114,7 +115,7 @@ const routes = [
     name: "14-day: Tokyo → Kyoto → Hiroshima → Osaka → Tokyo",
     singleCost: "~¥40,000–50,000 total",
     passCost: "~¥80,000 (14-day)",
-    verdict: "Compare carefully — may be close",
+    verdict: "Single tickets are usually cheaper at these estimates",
     link: "/itineraries/14-day-japan-golden-route",
     linkLabel: "See 14-day itinerary",
   },
@@ -180,7 +181,7 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
             <h2 className="text-xl font-bold text-slate-950">When single tickets are better</h2>
             <div className="mt-3 space-y-3 text-sm leading-7 text-slate-600">
               <p>
-                A one-way Shinkansen ticket from Tokyo to Kyoto costs about <strong>¥13,320</strong>. A 7-day JR Pass costs about <strong>¥50,000</strong>. For the math to work, you need several long-distance JR rides within the pass window.
+                The regular-season Nozomi reserved fare from Tokyo to Kyoto is <strong>{TRANSPORT_FACTS.fares.tokyoKyotoNozomiReservedRegular}</strong>. The often-quoted <strong>{TRANSPORT_FACTS.fares.tokyoKyotoNonReserved}</strong> is the non-reserved fare. A 7-day Ordinary JR Pass bought on the official site costs <strong>{TRANSPORT_FACTS.fares.jrPassOrdinary.officialSite.sevenDay}</strong>.
               </p>
               <p>
                 Most first-time visitors doing the classic Tokyo → Kyoto → Osaka route only take one or two Shinkansen rides. In that case, single tickets are cheaper, require no activation process, and let you use any Shinkansen departure without worrying about pass validity dates.
@@ -208,6 +209,9 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
               </ul>
               <p>
                 Even in these cases, <strong>add up the individual ticket costs</strong> and compare with the current JR Pass price. The JR Pass price was raised significantly in 2023, and it doesn&apos;t always pay off the way older guides suggest.
+              </p>
+              <p>
+                Purchase channel matters: current Ordinary Pass prices are <strong>¥50,000 / ¥80,000 / ¥100,000</strong> for 7 / 14 / 21 days on the official reservation site, versus <strong>¥53,000 / ¥84,000 / ¥105,000</strong> through designated overseas agencies. Nozomi and Mizuho are not included by default; pass holders must buy the separate NOZOMI MIZUHO Ticket for each ride, and the pass and add-on ticket must be used together.
               </p>
             </div>
           </section>

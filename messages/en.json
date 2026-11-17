@@ -585,7 +585,7 @@
       "21-day: ¥100,000"
     ],
     "jrPassWorth": "JR Pass is usually worth comparing only if you take multiple long Shinkansen rides (e.g. Tokyo → Kyoto → Hiroshima → Tokyo). For a simple Tokyo ↔ Osaka round trip, single tickets are often cheaper.",
-    "jrNozomiNote": "Note: The Nozomi (fastest) may require an additional NOZOMI MIZUHO Ticket (approx. ¥4,960 Tokyo→Kyoto/Osaka) on top of your JR Pass. Without it, use Hikari or Kodama — these stop near Shin-Fuji, which is actually better for Mt. Fuji views anyway.",
+    "jrNozomiNote": "Note: The Nozomi (fastest) requires an additional NOZOMI MIZUHO Ticket for each ride with a JR Pass (for example, ¥4,960 Tokyo→Kyoto/Shin-Osaka in Ordinary Car). Without it, use Hikari or Kodama. Kodama stops at Shin-Fuji; Hikari normally passes it, though some Hikari stop at nearby Mishima.",
     "seasonH2": "Best Season & Time of Day to See Mt. Fuji",
     "seasonLabel": "Season guide",
     "seasons": [
@@ -633,7 +633,7 @@
     "carH2": "Car Number & Seat Detail Guide",
     "carStandardLabel": "Standard cars (3+2 layout)",
     "carStandard": [
-      "Cars 4–7 often give the clearest unobstructed views",
+      "Car number does not determine the Fuji view; obstructions vary along the line",
       "Seat E = Mt. Fuji window seat in all standard cars"
     ],
     "carGreenLabel": "Green Car (cars 8–10, 2+2 layout)",
@@ -648,7 +648,7 @@
       },
       {
         "bold": "Via Klook:",
-        "text": "select column E on the seat map"
+        "text": "request a window or Fuji-side seat if offered; Seat E is not guaranteed"
       },
       {
         "bold": "With JR Pass:",
@@ -663,7 +663,7 @@
       },
       {
         "q": "How long can I see Mt. Fuji from the train?",
-        "a": "Only about 30–60 seconds at Shinkansen speed. Have your camera ready before reaching Shin-Fuji station."
+        "a": "The mountain can appear intermittently across several sections. The clearest open view around Shin-Fuji is brief, so have your camera ready before the station."
       },
       {
         "q": "Is Seat E always the Mt. Fuji side?",
@@ -679,7 +679,7 @@
       },
       {
         "q": "Does the Nozomi stop near Mt. Fuji?",
-        "a": "No, but you can still see it through the window as the train passes. Hikari and Kodama stop at Shin-Fuji station."
+        "a": "No, but you can still see it through the window as the train passes. Kodama stops at Shin-Fuji; Nozomi and Hikari normally pass without stopping."
       },
       {
         "q": "Is the JR Pass worth it for Tokyo–Osaka only?",
@@ -695,7 +695,7 @@
       },
       {
         "q": "What is the best way to book as a foreigner?",
-        "a": "Klook — fully in English, instant mobile voucher, and you can select Seat E on the seat map."
+        "a": "Klook offers an English booking flow, but high-speed rail seats are normally assigned automatically. A window or Fuji-side preference is a request, not a guaranteed Seat E."
       }
     ],
     "makeEasyH2": "Make it easy with the Shinkansen Mt. Fuji Seat Checker",
@@ -3057,13 +3057,13 @@
         "description": "Compare Shinjuku, Ueno, Asakusa, Tokyo Station, Ginza and quieter East Tokyo before booking hotels. Choose by airport access, luggage, Shinkansen plans, nightlife and first-night comfort.",
         "quickRec": {
           "area": "Shinjuku",
-          "why": "Best balance of nightlife, transport access, and hotel density. 10 min to Tokyo Station for Shinkansen day trips. Most first-timers start here."
+          "why": "Best balance of nightlife, transport access, and hotel density. 14–15 min to Tokyo Station for Shinkansen day trips. Most first-timers start here."
         },
         "proTip": "If you're taking the Shinkansen to Kyoto on Day 3+, staying in Shinjuku and transferring to Tokyo Station is more fun than staying near Tokyo Station the whole time.",
         "faqs": [
           {
             "question": "Where should a first-time visitor stay in Tokyo?",
-            "answer": "Shinjuku is the best all-round base — strong transport, lots of hotels, and about 10 minutes to Tokyo Station for Shinkansen day trips. Choose Ueno for value and Narita access, Asakusa for atmosphere, or Tokyo Station if you have an early Shinkansen."
+            "answer": "Shinjuku is the best all-round base — strong transport, lots of hotels, and about 14–15 minutes to Tokyo Station for Shinkansen day trips. Choose Ueno for value and Narita access, Asakusa for atmosphere, or Tokyo Station if you have an early Shinkansen."
           },
           {
             "question": "Which Tokyo area is easiest with luggage after a long flight?",
@@ -3077,7 +3077,7 @@
       },
       "shinjuku-vs-ueno-vs-asakusa": {
         "title": "Shinjuku vs Ueno vs Asakusa — which Tokyo base is right?",
-        "description": "Shinjuku vs Ueno vs Asakusa for your Tokyo hotel: Shinjuku for transport and nightlife, Ueno for value and Narita access (Skyliner 36 min), Asakusa for old-town atmosphere and Senso-ji. A head-to-head with hotel picks for first-time visitors.",
+        "description": "Shinjuku vs Ueno vs Asakusa for your Tokyo hotel: Shinjuku for transport and nightlife, Ueno for value and Narita access (Skyliner 41 min), Asakusa for old-town atmosphere and Senso-ji. A head-to-head with hotel picks for first-time visitors.",
         "quickRec": {
           "area": "Shinjuku",
           "why": "If you can only pick one, Shinjuku wins on transport flexibility, dining variety, and nightlife. Ueno is better for value, while Asakusa is stronger for atmosphere."
@@ -3097,7 +3097,7 @@
               "Weekend rates can rise"
             ],
             "bestFor": "Nightlife & flexibility",
-            "transport": "JR Yamanote hub. N'EX to Narita. Odakyu to Hakone. 10 min to Tokyo Station."
+            "transport": "JR Yamanote hub. N'EX to Narita. Odakyu to Hakone. 14–15 min to Tokyo Station."
           },
           {
             "vibe": "Relaxed, museum-rich, market vibes",
@@ -3112,7 +3112,7 @@
               "Some streets feel dated"
             ],
             "bestFor": "Budget & culture",
-            "transport": "Skyliner to Narita 36 min. JR Yamanote and Metro access. Close to Akihabara."
+            "transport": "Skyliner to Narita 41 min. JR Yamanote and Metro access. Close to Akihabara."
           },
           {
             "vibe": "Old-town Tokyo — temples, craftsmen, river walks",
@@ -3153,7 +3153,7 @@
           },
           {
             "question": "Which is easiest from Narita Airport?",
-            "answer": "Ueno — the Keisei Skyliner reaches it directly in 36 minutes. Asakusa is about 55 minutes via the Access Express, and Shinjuku takes longer (N'EX roughly 80 minutes or a limousine bus). For a smooth first night after a long flight, Ueno is simplest."
+            "answer": "Ueno — the Keisei Skyliner reaches it directly in 41 minutes. Asakusa is about 55 minutes via the Access Express, and Shinjuku takes longer (N'EX roughly 80 minutes or a limousine bus). For a smooth first night after a long flight, Ueno is simplest."
           }
         ]
       },
@@ -3352,7 +3352,7 @@
           "area": "Tokyo Station",
           "why": "The best Tokyo hotel area before a Shinkansen day depends on departure time, luggage, station complexity, and what you want to do the night before. If the Shinkansen is your priority, Tokyo Station is the simplest base."
         },
-        "proTip": "If your Shinkansen leaves before 8am, stay near Tokyo Station because morning rush makes transfers less predictable. If your train is after 10am, Shinjuku gives you a better evening and the transfer is usually manageable.",
+        "proTip": "If your Shinkansen leaves before 8am, stay near Tokyo Station because morning rush makes transfers less predictable. If your train is after 14–15am, Shinjuku gives you a better evening and the transfer is usually manageable.",
         "areas": [
           {
             "vibe": "Efficient — direct Shinkansen, clean logistics",
@@ -3382,7 +3382,7 @@
               "Weekend rates can rise"
             ],
             "bestFor": "Nightlife & flexibility",
-            "transport": "JR Yamanote hub. N'EX to Narita. Odakyu to Hakone. 10 min to Tokyo Station."
+            "transport": "JR Yamanote hub. N'EX to Narita. Odakyu to Hakone. 14–15 min to Tokyo Station."
           },
           {
             "vibe": "Relaxed, museum-rich, market vibes",
@@ -3397,7 +3397,7 @@
               "Some streets feel dated"
             ],
             "bestFor": "Budget & culture",
-            "transport": "Skyliner to Narita 36 min. JR Yamanote and Metro access. Close to Akihabara."
+            "transport": "Skyliner to Narita 41 min. JR Yamanote and Metro access. Close to Akihabara."
           },
           {
             "vibe": "Old-town Tokyo — temples, craftsmen, river walks",
@@ -3435,7 +3435,7 @@
       },
       "tokyo-station-vs-shinjuku": {
         "title": "Tokyo Station or Shinjuku? Shinkansen Access vs Nightlife",
-        "description": "Tokyo Station or Shinjuku for your hotel? Stay near Tokyo Station for early Shinkansen and luggage-first trips (every Shinkansen line, zero transfer); pick Shinjuku for nightlife, dining, and hotel choice with a 10-min JR hop to the Shinkansen. Compared side by side with hotel picks.",
+        "description": "Tokyo Station or Shinjuku for your hotel? Stay near Tokyo Station for early Shinkansen and luggage-first trips (every Shinkansen line, zero transfer); pick Shinjuku for nightlife, dining, and hotel choice with a 14–15-min JR hop to the Shinkansen. Compared side by side with hotel picks.",
         "quickRec": {
           "area": "Shinjuku",
           "why": "Shinjuku is the better all-round base if a short transfer to Tokyo Station is acceptable. Tokyo Station wins for early Shinkansen and luggage-first trips."
@@ -3466,11 +3466,11 @@
             ],
             "cons": [
               "Station is enormous — easy to get lost",
-              "10 min transfer to Tokyo Station for Shinkansen",
+              "14–15 min transfer to Tokyo Station for Shinkansen",
               "Can feel overwhelming on first night"
             ],
             "bestFor": "First-timers & nightlife",
-            "transport": "10 min JR Chuo to Tokyo Station. Narita Express direct. Odakyu to Hakone."
+            "transport": "14–15 min JR Chuo to Tokyo Station. Narita Express direct. Odakyu to Hakone."
           }
         ],
         "comparison": [
@@ -3554,7 +3554,7 @@
         "faqs": [
           {
             "question": "Should I stay near Tokyo Station for the Shinkansen?",
-            "answer": "Yes if you have an early Shinkansen or are travelling luggage-first — Tokyo Station has every Shinkansen line with zero transfer, so departure mornings are effortless. If your train is later or mid-trip, Shinjuku is fine: it is about 10 minutes away by JR Chuo Line and has far more to do."
+            "answer": "Yes if you have an early Shinkansen or are travelling luggage-first — Tokyo Station has every Shinkansen line with zero transfer, so departure mornings are effortless. If your train is later or mid-trip, Shinjuku is fine: it is about 14–15 minutes away by JR Chuo Line and has far more to do."
           },
           {
             "question": "Which is cheaper, Tokyo Station or Shinjuku hotels?",
@@ -3568,7 +3568,7 @@
       },
       "ueno-vs-shinjuku": {
         "title": "Ueno vs Shinjuku: Which Tokyo Area Should You Stay In?",
-        "description": "Ueno or Shinjuku for your Tokyo hotel? Ueno wins on Narita access (Keisei Skyliner 36 min) and budget rooms; Shinjuku wins on nightlife, dining density, and transport flexibility. The two are 25 min apart on the JR Yamanote Line. Compared with hotel picks.",
+        "description": "Ueno or Shinjuku for your Tokyo hotel? Ueno wins on Narita access (Keisei Skyliner 41 min) and budget rooms; Shinjuku wins on nightlife, dining density, and transport flexibility. The two are 25 min apart on the JR Yamanote Line. Compared with hotel picks.",
         "quickRec": {
           "area": "Ueno",
           "why": "Ueno is smarter for Narita arrivals and value. Shinjuku is stronger for nightlife, food density, and first-time Tokyo energy."
@@ -3588,7 +3588,7 @@
               "Some streets feel dated"
             ],
             "bestFor": "Budget + Narita + museums",
-            "transport": "Skyliner to Narita 36 min. JR Yamanote to Shinjuku 25 min. Metro to Asakusa 5 min."
+            "transport": "Skyliner to Narita 41 min. JR Yamanote to Shinjuku 25 min. Metro to Asakusa 5 min."
           },
           {
             "vibe": "Electric — neon, crowds, endless options",
@@ -3603,13 +3603,13 @@
               "Narita transfer is longer"
             ],
             "bestFor": "Nightlife + flexibility",
-            "transport": "10 min to Tokyo Station. Narita Express direct. Odakyu to Hakone."
+            "transport": "14–15 min to Tokyo Station. Narita Express direct. Odakyu to Hakone."
           }
         ],
         "faqs": [
           {
             "question": "Ueno or Shinjuku for Narita Airport?",
-            "answer": "Ueno — the Keisei Skyliner runs direct from Narita to Ueno in 36 minutes, cheaper and with fewer transfers. Shinjuku from Narita takes longer (N'EX about 80 minutes, or a limousine bus), so Ueno is the easier first-night base for Narita arrivals."
+            "answer": "Ueno — the Keisei Skyliner runs direct from Narita to Ueno in 41 minutes, cheaper and with fewer transfers. Shinjuku from Narita takes longer (N'EX about 80 minutes, or a limousine bus), so Ueno is the easier first-night base for Narita arrivals."
           },
           {
             "question": "Which is cheaper for hotels, Ueno or Shinjuku?",
@@ -3800,7 +3800,7 @@
           "area": "Tokyo Station or Ueno",
           "why": "Both keep you close to Shinkansen logistics with easier luggage movement. Shinjuku is still fine for later trains."
         },
-        "proTip": "If the train leaves before 8am, stay near Tokyo Station or Ueno. If it leaves after 10am, most central areas work.",
+        "proTip": "If the train leaves before 8am, stay near Tokyo Station or Ueno. If it leaves after 14–15am, most central areas work.",
         "areas": [
           {
             "vibe": "Efficient — direct Shinkansen, clean logistics",
@@ -3830,7 +3830,7 @@
               "Weekend rates can rise"
             ],
             "bestFor": "Nightlife & flexibility",
-            "transport": "JR Yamanote hub. N'EX to Narita. Odakyu to Hakone. 10 min to Tokyo Station."
+            "transport": "JR Yamanote hub. N'EX to Narita. Odakyu to Hakone. 14–15 min to Tokyo Station."
           },
           {
             "vibe": "Relaxed, museum-rich, market vibes",
@@ -3845,7 +3845,7 @@
               "Some streets feel dated"
             ],
             "bestFor": "Budget & culture",
-            "transport": "Skyliner to Narita 36 min. JR Yamanote and Metro access. Close to Akihabara."
+            "transport": "Skyliner to Narita 41 min. JR Yamanote and Metro access. Close to Akihabara."
           },
           {
             "vibe": "Old-town Tokyo — temples, craftsmen, river walks",
@@ -3906,7 +3906,7 @@
       },
       "asakusa-vs-ueno": {
         "title": "Ueno vs Asakusa: Rail Access or Old-Town Atmosphere",
-        "description": "Asakusa or Ueno for your Tokyo hotel? Ueno wins on Narita access (Skyliner 36 min), budget hotels, and a 7-min hop to Tokyo Station; Asakusa wins on old-town atmosphere and Senso-ji. Side-by-side compare with hotel picks for first-time visitors.",
+        "description": "Asakusa or Ueno for your Tokyo hotel? Ueno wins on Narita access (Skyliner 41 min), budget hotels, and a 7-min hop to Tokyo Station; Asakusa wins on old-town atmosphere and Senso-ji. Side-by-side compare with hotel picks for first-time visitors.",
         "quickRec": {
           "area": "Ueno",
           "why": "Ueno is usually the more practical first-time base thanks to Narita access and JR links. Asakusa is better for atmosphere and temple walks."
@@ -3941,7 +3941,7 @@
               "Some streets feel dated"
             ],
             "bestFor": "Budget + Narita + museums",
-            "transport": "Skyliner to Narita 36 min. JR Yamanote to Shinjuku 25 min. Metro to Asakusa 5 min."
+            "transport": "Skyliner to Narita 41 min. JR Yamanote to Shinjuku 25 min. Metro to Asakusa 5 min."
           }
         ],
         "faqs": [
@@ -3967,7 +3967,7 @@
           },
           {
             "question": "Ueno or Asakusa for an easy first night with luggage?",
-            "answer": "Ueno is easier: the Keisei Skyliner runs direct from Narita (36 min) straight to Ueno, so you arrive with minimal transfers. From Asakusa the Access Express takes about 55 minutes. If your first night is right after a long flight, Ueno keeps luggage handling simplest."
+            "answer": "Ueno is easier: the Keisei Skyliner runs direct from Narita (41 min) straight to Ueno, so you arrive with minimal transfers. From Asakusa the Access Express takes about 55 minutes. If your first night is right after a long flight, Ueno keeps luggage handling simplest."
           },
           {
             "question": "Which has more to do at night, Asakusa or Ueno?",

@@ -1,6 +1,7 @@
 import type { TripPick } from "@/lib/trip-picks";
 import { requireAffUrl } from "@/src/affiliateLinks";
 import { getHotelLink } from "@/lib/hotel-links";
+import { TRANSPORT_FACTS } from "@/lib/content/transport-facts";
 
 
 // ─── Types ──────────────────────────────────────────────────────────────────
@@ -143,7 +144,7 @@ export const transferPages: TransferPage[] = [
         badge: "fastest",
         duration: "50–60 min",
         cost: "usually around ¥2,700–3,000",
-        pros: ["Skyliner is the fastest train from Narita (36 min to Ueno)", "Comfortable reserved seats", "JR transfer from Ueno to Tokyo Station is 7 min"],
+        pros: [`Skyliner takes as little as ${TRANSPORT_FACTS.skyliner.fastestToKeiseiUeno} to Keisei-Ueno (${TRANSPORT_FACTS.skyliner.fastestToNippori} is the advertised minimum to Nippori)`, "Comfortable reserved seats", "JR transfer from Ueno to Tokyo Station is about 7 min"],
         cons: ["Requires 1 transfer at Ueno", "Navigating Ueno Station with luggage", "Skyliner stops at Ueno/Nippori only"],
         luggageFriendly: true,
         lateOk: false,
@@ -183,7 +184,7 @@ export const transferPages: TransferPage[] = [
       },
       {
         q: "What if I arrive at Narita late at night?",
-        a: "The last N'EX and Skyliner departures are around 21:30, and the last Access Express runs slightly later. After that, the realistic choices are a night bus, a taxi that can exceed ¥20,000, or an airport-area hotel. For most travelers the airport hotel is the cheaper and calmer option.",
+        a: `The final departure depends on the date and service. Skyliner services continue later than 21:30 on the current timetable, while late Access Express trains may terminate before Oshiage or Asakusa. Check Keisei's official timetable (${TRANSPORT_FACTS.skyliner.timetableUrl}) for your arrival date. After the last suitable train or bus, use a taxi, pre-booked transfer, or airport-area hotel.`,
       },
       {
         q: "Is the JR Pass worth it just for the Narita Express?",
@@ -305,10 +306,10 @@ export const transferPages: TransferPage[] = [
       {
         name: "Keisei Skyliner",
         badge: "fastest",
-        duration: "36 min",
+        duration: TRANSPORT_FACTS.skyliner.fastestToKeiseiUeno,
         cost: "usually around ¥2,500–3,000",
         pros: ["Fastest Narita to central Tokyo route", "Reserved seats", "Good luggage space", "Arrives at Keisei Ueno near Ueno Park"],
-        cons: ["Premium price versus local trains", "Ends earlier than some local options"],
+        cons: ["Premium price versus local trains", "Only serves Nippori and Keisei-Ueno in central Tokyo"],
         luggageFriendly: true,
         lateOk: false,
         bookingLink: skylinerUrl,
@@ -384,8 +385,8 @@ export const transferPages: TransferPage[] = [
         badge: "cheapest",
         duration: "70–85 min",
         cost: "usually around ¥1,200–1,400",
-        pros: ["Direct through-service to Asakusa via Oshiage", "Cheapest train option from Narita", "Runs late — last departure ~23:00", "No reservation needed"],
-        cons: ["Not all trains run direct — confirm 'Asakusa Line' on platform", "No reserved seats or luggage racks", "Crowded during rush hour"],
+        pros: ["Some services run direct to Asakusa via Oshiage", "Cheapest direct train option from Narita", "No reservation needed"],
+        cons: ["Late Access Express trains may terminate at Keisei-Ueno or Keisei-Takasago — check the destination", "No reserved seats or luggage racks", "Crowded during rush hour"],
         luggageFriendly: false,
         lateOk: true,
         bookingLabel: "No booking needed - use IC card",
@@ -395,8 +396,8 @@ export const transferPages: TransferPage[] = [
         badge: "fastest",
         duration: "55–65 min",
         cost: "usually around ¥2,700–3,000",
-        pros: ["Fastest Narita segment (36 min to Ueno)", "Reserved seats and luggage space on Skyliner", "Ginza Line from Ueno to Asakusa is 5 min"],
-        cons: ["Requires transfer at Ueno with luggage", "Slightly more expensive", "Skyliner ends earlier than Access Express"],
+        pros: [`As little as ${TRANSPORT_FACTS.skyliner.fastestToKeiseiUeno} to Keisei-Ueno`, "Reserved seats and luggage space on Skyliner", "Ginza Line from Ueno to Asakusa is about 5 min"],
+        cons: ["Requires transfer at Ueno with luggage", "Slightly more expensive", "The subway transfer is not covered by the Skyliner ticket"],
         luggageFriendly: true,
         lateOk: false,
         bookingLink: skylinerUrl,
@@ -415,8 +416,8 @@ export const transferPages: TransferPage[] = [
         bookingLabel: "Book private transfer",
       },
     ],
-    lateArrivalNote: "The Keisei Access Express runs until about 23:00 from Narita. If you land after 22:00, check remaining departures before clearing customs. After the last train, expect a taxi to often start around ¥20,000 depending on destination or book a private transfer in advance.",
-    proTip: "The Keisei Access Express through-service to Asakusa Line is the underrated option here. Many guides default to Skyliner, but if you're heading to Asakusa specifically, Access Express drops you there without any transfer.",
+    lateArrivalNote: `Access Express trains leave Narita late in the evening, but the last direct train to Oshiage and Asakusa is earlier than the last Access Express departure. ${TRANSPORT_FACTS.naritaAccessExpress.revisionNote} Always recheck the official timetable for your date. After the last suitable train, use a taxi, pre-booked transfer, or airport hotel.`,
+    proTip: "A through Access Express is convenient for Asakusa, but not every train continues onto the Toei Asakusa Line. Confirm both the train type and destination on the platform before boarding.",
     nextActions: arrivalBundle(
       { id: "stay-asakusa", category: "stay", title: "Compare Asakusa hotels on Trip.com", description: "Senso-ji area — traditional vibe, great transit access.", cta: "Compare hotels", href: hotelAsakusa.href },
     ),
@@ -433,8 +434,8 @@ export const transferPages: TransferPage[] = [
         badge: "cheapest",
         duration: "60–70 min",
         cost: "usually around ¥1,100–1,300",
-        pros: ["Direct to Oshiage — no transfer needed", "Cheapest option from Narita", "Runs until ~23:00", "Oshiage station is directly under Skytree"],
-        cons: ["No reserved seats", "No luggage racks", "Can be crowded during rush hour"],
+        pros: ["Some services run direct to Oshiage", "Cheapest direct option from Narita", "Oshiage station is directly under Skytree"],
+        cons: ["Late Access Express trains may terminate before Oshiage — check the destination", "No reserved seats", "No luggage racks", "Can be crowded during rush hour"],
         luggageFriendly: false,
         lateOk: true,
         bookingLabel: "No booking needed - use IC card",
@@ -464,8 +465,8 @@ export const transferPages: TransferPage[] = [
         bookingLabel: "Book private transfer",
       },
     ],
-    lateArrivalNote: "Keisei Access Express runs until about 23:00 from Narita to Oshiage. After the last train, a taxi often starts around ¥20,000 depending on destination or book a private transfer. If landing very late, consider staying near Narita and traveling to Oshiage the next morning.",
-    proTip: "Oshiage is one of the most direct Narita connections in Tokyo. The Keisei Access Express runs straight there with no transfer — something most first-time visitors don't realize. If your hotel is near Skytree, this is the simplest arrival in East Tokyo.",
+    lateArrivalNote: `The last direct Access Express to Oshiage leaves earlier than the last Access Express from Narita. ${TRANSPORT_FACTS.naritaAccessExpress.revisionNote} Always recheck the official timetable for your date. After the last suitable train, use a taxi or pre-booked transfer, or stay near Narita and travel the next morning.`,
+    proTip: "Oshiage has convenient direct trains from Narita during much of the day. Confirm that your specific train continues beyond Keisei-Takasago before boarding.",
     nextActions: arrivalBundle(
       { id: "stay-oshiage", category: "stay", title: "Compare Oshiage / Skytree hotels", description: "East Tokyo base near Skytree, Asakusa, and Sumida River.", cta: "Compare hotels", href: hotelOshiage.href },
     ),
@@ -531,8 +532,8 @@ export const transferPages: TransferPage[] = [
         badge: "cheapest",
         duration: "70–100 min",
         cost: "usually around ¥1,000–1,400",
-        pros: ["Runs later than N'EX or Skyliner (~23:00)", "Cheapest way into Tokyo at night", "Connects to Asakusa, Oshiage, and metro"],
-        cons: ["No reserved seats", "Crowded with tired travelers and luggage", "Must confirm final departure time on arrival day", "Limited destinations without further transfer"],
+        pros: ["Some Access Express departures leave Narita around 23:00", "Cheapest late-evening rail option", "Useful for destinations on the Keisei network"],
+        cons: ["Late services do not necessarily continue to Oshiage or Asakusa", "No reserved seats", "Must confirm the destination and final connection on the arrival date", "Limited destinations without further transfer"],
         luggageFriendly: false,
         lateOk: true,
         bookingLabel: "No booking needed - use IC card",
@@ -563,7 +564,7 @@ export const transferPages: TransferPage[] = [
         bookingLabel: "Book private transfer",
       },
     ],
-    lateArrivalNote: "Before 21:00: N'EX, Skyliner, and most buses are still running. After 22:00: options thin out quickly — Keisei Access Express is your best train bet. After 23:00: consider a Narita airport hotel (transit hotels are available inside terminals), taxi, or pre-booked private transfer.",
+    lateArrivalNote: "Before 21:00, several rail and bus choices usually remain. After 22:00, check the exact destination as well as the departure time: a late Access Express may not continue to Oshiage or Asakusa. After the last suitable service, consider an airport hotel, taxi, or pre-booked private transfer.",
     proTip: "If your flight lands after 21:00, check exact train schedules before departure day. The Keisei website shows final departures. If there's any doubt, book a private transfer as backup — cancellation is usually free until 24h before.",
     nextActions: [
       { id: "esim", category: "connectivity", title: "Get Japan eSIM", description: "Activate before landing — essential for checking live schedules.", cta: "Get eSIM", href: esimUrl },

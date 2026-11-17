@@ -44,7 +44,7 @@ const faqSchema = {
       name: "How long after leaving Shin-Osaka can I see Mt. Fuji?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "About 100–108 minutes after leaving Shin-Osaka, near Shin-Fuji station. This is roughly 45 minutes before arriving at Tokyo Station.",
+        text: "On a typical Nozomi, get ready around 100 minutes after leaving Shin-Osaka; the train reaches the Shin-Fuji area at roughly 103 minutes. Treat this as a planning estimate and confirm your train's timetable.",
       },
     },
     {
@@ -100,7 +100,7 @@ export default async function OsakaToTokyoSeatPage({ params }: Props) {
             </li>
             <li className="flex gap-2">
               <Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
-              <span><strong>Watch for it:</strong> Around Shin-Fuji, about 100–108 min after Shin-Osaka departure.</span>
+              <span><strong>Watch for it:</strong> On a typical Nozomi, get ready around 100 min after Shin-Osaka departure; timing varies by train.</span>
             </li>
             <li className="flex gap-2">
               <Cloud className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
@@ -160,10 +160,10 @@ export default async function OsakaToTokyoSeatPage({ params }: Props) {
             <h2 className="text-xl font-bold text-slate-950">Timing from Shin-Osaka</h2>
             <div className="mt-3 space-y-3 text-sm leading-7 text-slate-600">
               <p>
-                From Shin-Osaka, expect the Mt. Fuji viewing window around 100–108 minutes into your journey, near Shin-Fuji station — about 15 minutes later than from Kyoto. This means the view comes roughly 45 minutes before Tokyo Station arrival.
+                From Shin-Osaka on a typical Nozomi, use roughly 100 minutes after departure as your cue to get ready; the train reaches the Shin-Fuji area at about 103 minutes. This is a planning estimate inferred from running times, not a guaranteed sighting window, and individual trains vary.
               </p>
               <p>
-                Set a timer or watch for Shizuoka station announcements — Shin-Fuji is the next major stretch after that. The view lasts about 30–60 seconds at speed.
+                Watch for Shizuoka station announcements — Shin-Fuji is the next major stretch after that. The mountain may appear intermittently, while the clearest open view around Shin-Fuji is brief.
               </p>
             </div>
           </section>

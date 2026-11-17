@@ -585,7 +585,7 @@
       "21 dias: ¥100.000"
     ],
     "jrPassWorth": "O JR Pass geralmente só vale comparar se você fizer várias viagens longas de Shinkansen (ex: Tóquio → Kyoto → Hiroshima → Tóquio). Para uma rota simples Tóquio ↔ Osaka, passagens avulsas costumam ser mais baratas.",
-    "jrNozomiNote": "Atenção: O Nozomi (mais rápido) pode exigir um bilhete adicional NOZOMI MIZUHO (aprox. ¥4.960 Tóquio→Kyoto/Osaka) além do JR Pass. Sem ele, use o Hikari ou Kodama — eles param perto da estação Shin-Fuji, o que é ainda melhor para ver o Monte Fuji.",
+    "jrNozomiNote": "Atenção: com JR Pass, o Nozomi exige um bilhete NOZOMI MIZUHO adicional em cada viagem (por exemplo, ¥4.960 Tokyo→Kyoto/Shin-Osaka em carro comum). Sem ele, use Hikari ou Kodama. Kodama para em Shin-Fuji; Hikari normalmente passa, embora alguns parem em Mishima.",
     "seasonH2": "Melhor Estação e Horário para Ver o Monte Fuji",
     "seasonLabel": "Guia de estações",
     "seasons": [
@@ -633,7 +633,7 @@
     "carH2": "Guia de Vagão e Número de Assento",
     "carStandardLabel": "Vagões padrão (layout 3+2)",
     "carStandard": [
-      "Os vagões 4 a 7 costumam ter as vistas mais desobstruídas",
+      "O número do vagão não determina a vista; as obstruções variam ao longo da linha",
       "Assento E = assento na janela do Monte Fuji em todos os vagões padrão"
     ],
     "carGreenLabel": "Green Car (vagões 8–10, layout 2+2)",
@@ -648,7 +648,7 @@
       },
       {
         "bold": "Via Klook:",
-        "text": "selecione a coluna E no mapa de assentos"
+        "text": "peça janela ou lado do Fuji se houver opção; o assento E não é garantido"
       },
       {
         "bold": "Com JR Pass:",
@@ -663,7 +663,7 @@
       },
       {
         "q": "Por quanto tempo dá para ver o Monte Fuji do trem?",
-        "a": "Apenas cerca de 30–60 segundos na velocidade do Shinkansen. Prepare a câmera antes de chegar à estação Shin-Fuji."
+        "a": "A montanha pode aparecer de forma intermitente em vários trechos. A vista mais aberta perto de Shin-Fuji é breve; prepare a câmera antes da estação."
       },
       {
         "q": "O Assento E é sempre o lado do Monte Fuji?",
@@ -679,7 +679,7 @@
       },
       {
         "q": "O Nozomi para perto do Monte Fuji?",
-        "a": "Não, mas dá para ver pela janela enquanto o trem passa. O Hikari e o Kodama param na estação Shin-Fuji."
+        "a": "Não, mas dá para ver pela janela enquanto o trem passa. Kodama para em Shin-Fuji; Nozomi e Hikari normalmente passam sem parar."
       },
       {
         "q": "O JR Pass compensa para o trajeto Tóquio–Osaka apenas?",
@@ -695,7 +695,7 @@
       },
       {
         "q": "Qual a melhor forma de reservar sendo estrangeiro?",
-        "a": "Klook — totalmente em inglês, voucher mobile instantâneo, e você pode selecionar o Assento E no mapa de assentos."
+        "a": "A Klook oferece reserva em inglês, mas os assentos de trem de alta velocidade costumam ser atribuídos automaticamente. Preferência por janela ou lado do Fuji não garante o assento E."
       }
     ],
     "makeEasyH2": "Facilite com o Verificador de Assento Shinkansen",
@@ -2427,7 +2427,7 @@
         [
           "Shinjuku",
           "N'EX direto, mais lento desde Narita",
-          "10–15 min até Tokyo Station",
+          "14–15–15 min até Tokyo Station",
           "Mais forte",
           "Ampla oferta, picos no fim de semana",
           "Energético"
@@ -3083,7 +3083,7 @@
               "Preços sobem em fins de semana"
             ],
             "bestFor": "Vida noturna e flexibilidade",
-            "transport": "Hub JR Yamanote. N'EX para Narita. Odakyu para Hakone. 10 min até Tokyo Station."
+            "transport": "Hub JR Yamanote. N'EX para Narita. Odakyu para Hakone. 14–15 min até Tokyo Station."
           },
           {
             "vibe": "Relaxada, cultural, com mercado local",
@@ -3098,7 +3098,7 @@
               "Algumas ruas parecem antigas"
             ],
             "bestFor": "Orçamento e cultura",
-            "transport": "Skyliner para Narita 36 min. JR Yamanote e metrô. Perto de Akihabara."
+            "transport": "Skyliner para Narita 41 min. JR Yamanote e metrô. Perto de Akihabara."
           },
           {
             "vibe": "Tokyo antigo — templos, artesãos, rio",
@@ -3354,7 +3354,7 @@
               "Preços sobem em fins de semana"
             ],
             "bestFor": "Vida noturna e flexibilidade",
-            "transport": "Hub JR Yamanote. N'EX para Narita. Odakyu para Hakone. 10 min até Tokyo Station."
+            "transport": "Hub JR Yamanote. N'EX para Narita. Odakyu para Hakone. 14–15 min até Tokyo Station."
           },
           {
             "vibe": "Relaxada, cultural, com mercado local",
@@ -3369,7 +3369,7 @@
               "Algumas ruas parecem antigas"
             ],
             "bestFor": "Orçamento e cultura",
-            "transport": "Skyliner para Narita 36 min. JR Yamanote e metrô. Perto de Akihabara."
+            "transport": "Skyliner para Narita 41 min. JR Yamanote e metrô. Perto de Akihabara."
           },
           {
             "vibe": "Tokyo antigo — templos, artesãos, rio",
@@ -3438,11 +3438,11 @@
             ],
             "cons": [
               "A estação é enorme e confusa",
-              "10 min até Tokyo Station para o Shinkansen",
+              "14–15 min até Tokyo Station para o Shinkansen",
               "Pode parecer intensa na primeira noite"
             ],
             "bestFor": "Primeira vez e vida noturna",
-            "transport": "10 min na JR Chuo até Tokyo Station. Narita Express direto. Odakyu para Hakone."
+            "transport": "14–15 min na JR Chuo até Tokyo Station. Narita Express direto. Odakyu para Hakone."
           }
         ],
         "comparison": [
@@ -3546,7 +3546,7 @@
               "Algumas ruas parecem antigas"
             ],
             "bestFor": "Orçamento + Narita + museus",
-            "transport": "Skyliner para Narita 36 min. JR Yamanote para Shinjuku 25 min. Metrô para Asakusa 5 min."
+            "transport": "Skyliner para Narita 41 min. JR Yamanote para Shinjuku 25 min. Metrô para Asakusa 5 min."
           },
           {
             "vibe": "Elétrica — neon, multidões, muitas opções",
@@ -3561,7 +3561,7 @@
               "Narita fica mais longe"
             ],
             "bestFor": "Vida noturna + flexibilidade",
-            "transport": "10 min até Tokyo Station. Narita Express direto. Odakyu para Hakone."
+            "transport": "14–15 min até Tokyo Station. Narita Express direto. Odakyu para Hakone."
           }
         ]
       },
@@ -3774,7 +3774,7 @@
               "Preços sobem em fins de semana"
             ],
             "bestFor": "Vida noturna e flexibilidade",
-            "transport": "Hub JR Yamanote. N'EX para Narita. Odakyu para Hakone. 10 min até Tokyo Station."
+            "transport": "Hub JR Yamanote. N'EX para Narita. Odakyu para Hakone. 14–15 min até Tokyo Station."
           },
           {
             "vibe": "Relaxada, cultural, com mercado local",
@@ -3789,7 +3789,7 @@
               "Algumas ruas parecem antigas"
             ],
             "bestFor": "Orçamento e cultura",
-            "transport": "Skyliner para Narita 36 min. JR Yamanote e metrô. Perto de Akihabara."
+            "transport": "Skyliner para Narita 41 min. JR Yamanote e metrô. Perto de Akihabara."
           },
           {
             "vibe": "Tokyo antigo — templos, artesãos, rio",
@@ -3885,7 +3885,7 @@
               "Algumas ruas parecem antigas"
             ],
             "bestFor": "Orçamento + Narita + museus",
-            "transport": "Skyliner para Narita 36 min. JR Yamanote para Shinjuku 25 min. Metrô para Asakusa 5 min."
+            "transport": "Skyliner para Narita 41 min. JR Yamanote para Shinjuku 25 min. Metrô para Asakusa 5 min."
           }
         ],
         "faqs": [
@@ -3911,7 +3911,7 @@
           },
           {
             "question": "Ueno ou Asakusa para a primeira noite com bagagem?",
-            "answer": "Ueno é mais fácil: o Keisei Skyliner vai direto de Narita até Ueno em 36 minutos, com pouquíssima baldeação. De Asakusa, o Access Express leva cerca de 55 minutos. Se a primeira noite vem logo depois de um voo longo, Ueno deixa a bagagem muito mais simples de administrar."
+            "answer": "Ueno é mais fácil: o Keisei Skyliner vai direto de Narita até Ueno em 41 minutos, com pouquíssima baldeação. De Asakusa, o Access Express leva cerca de 55 minutos. Se a primeira noite vem logo depois de um voo longo, Ueno deixa a bagagem muito mais simples de administrar."
           },
           {
             "question": "Onde tem mais movimento à noite, Asakusa ou Ueno?",
@@ -4881,7 +4881,7 @@
         },
         "exit": {
           "title": "5. Confira a saída ou o portão de transferência",
-          "body": "No Japão, a saída faz parte da viagem. A saída errada em Tokyo Station, Shinjuku Station ou Kyoto Station pode te deixar a 10–20 minutos do hotel ou do ponto de encontro. Depois de descer, siga os nomes, números de saída e portões de transferência.",
+          "body": "No Japão, a saída faz parte da viagem. A saída errada em Tokyo Station, Shinjuku Station ou Kyoto Station pode te deixar a 14–15–20 minutos do hotel ou do ponto de encontro. Depois de descer, siga os nomes, números de saída e portões de transferência.",
           "examples": "Yaesu South Exit · Hachiko Exit · A1 Exit · Portão Shinkansen"
         }
       }

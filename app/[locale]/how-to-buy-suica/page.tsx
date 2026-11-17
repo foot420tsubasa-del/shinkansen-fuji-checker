@@ -24,11 +24,11 @@ const OFFICIAL_SUICA_URL = "https://www.jreast.co.jp/multi/en/pass/suica.html";
 const SUICA_FAQ: Array<{ q: string; a: string }> = [
   {
     q: "Can tourists buy a Suica card in Japan?",
-    a: "Yes. Foreign visitors can buy a Suica at ticket machines and staffed windows in major train stations and at the airport train stations. Availability of physical cards can vary by station and date, so if one station is out, try a nearby major station or ask staff. On supported phones you can also add a Suica in Apple Wallet instead of a physical card.",
+    a: "Yes. Foreign visitors can buy a regular Suica at designated JR East ticket machines and staffed counters in the Suica area. At Narita, use the JR East station facilities. Haneda has no JR railway station; Welcome Suica is sold at designated facilities at Haneda Airport Terminal 3 Station on the Tokyo Monorail. Availability can change, so check JR East before travel. On supported phones you can also add Suica in Apple Wallet.",
   },
   {
     q: "Where can I buy a Suica at the airport?",
-    a: "At the train-station area inside Narita and Haneda airports — look for the JR or Keisei ticket machines and staffed windows near the station gates after you clear arrivals. Buying before your first ride means you can tap straight through the gates.",
+    a: "At Narita Airport, use the JR East Travel Service Center or designated JR ticket machines by the JR station. Haneda Airport has no JR station: JR East currently sells Welcome Suica at the Welcome Suica machine and JR East Travel Service Center at Haneda Airport Terminal 3 Station on the Tokyo Monorail. Terminals 1 and 2 are not listed as Welcome Suica sales locations.",
   },
   {
     q: "Do I need a passport to buy a Suica?",
@@ -40,7 +40,7 @@ const SUICA_FAQ: Array<{ q: string; a: string }> = [
   },
   {
     q: "Welcome Suica vs Suica — which should a tourist get?",
-    a: "Choose the Welcome Suica for a short trip: it has no deposit and a red design, but it expires 28 days after purchase and is non-refundable. Choose a regular Suica if you visit Japan often or want the deposit back — it carries a 500 yen refundable deposit and does not expire. Where both are offered, pick by how long and how often you travel.",
+    a: "Choose Welcome Suica for a short trip: it has no deposit and a red design, but it is valid for 28 days from purchase and the remaining balance is not refunded. A regular Suica has a 500 yen refundable deposit and no short tourist validity period, but JR East says a card becomes unusable after 10 years with no qualifying use. Where both are offered, choose based on your trip length and likely return visits.",
   },
   {
     q: "Can I use one Suica for trains and buses?",

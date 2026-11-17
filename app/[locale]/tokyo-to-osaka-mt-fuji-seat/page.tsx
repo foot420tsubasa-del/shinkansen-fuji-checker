@@ -41,7 +41,7 @@ const faqSchema = {
       name: "How long after leaving Tokyo can I see Mt. Fuji on the way to Osaka?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "About 40–50 minutes after departing Tokyo Station, near Shin-Fuji station — early in the roughly 2.5-hour ride to Shin-Osaka. The view lasts about 30–60 seconds at speed.",
+        text: "About 40–50 minutes after departing Tokyo Station, around the Shin-Fuji area — early in the roughly 2.5-hour ride to Shin-Osaka. The mountain may appear intermittently; the clearest open view is brief.",
       },
     },
     {
@@ -137,7 +137,7 @@ export default async function TokyoToOsakaSeatPage({ params }: Props) {
                 Tokyo to Shin-Osaka on the Nozomi takes about 2 hours 30 minutes, and the Mt. Fuji stretch comes early: the mountain appears on the right side approximately 40–50 minutes after leaving Tokyo Station, around Shin-Fuji station in Shizuoka Prefecture.
               </p>
               <p>
-                The view lasts roughly 30–60 seconds at full speed. Have your camera ready a few minutes before — after the Fuji zone passes, the rest of the ride to Osaka has no comparable viewpoint, so don&rsquo;t wait.
+                The mountain can appear intermittently across several sections, but the clearest open view around Shin-Fuji is brief. Have your camera ready a few minutes before — after the Fuji zone passes, the rest of the ride to Osaka has no comparable viewpoint, so don&rsquo;t wait.
               </p>
             </div>
           </section>

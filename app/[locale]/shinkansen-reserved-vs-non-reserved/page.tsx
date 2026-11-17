@@ -53,7 +53,7 @@ const faqSchema = {
       name: "Which cars are non-reserved on the Tokaido Shinkansen?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Typically the first cars of the train (cars 1–3 on most Tokaido services). During the busiest holiday periods some trains run fully reserved, so check before relying on non-reserved cars.",
+        text: "It depends on the service. On ordinary operating days Nozomi uses cars 1–2, Hikari generally uses cars 1–5, and Kodama generally uses cars 1–6 and 13–16 for non-reserved seating; formations can change. During designated peak periods Nozomi runs with all seats reserved, so check JR Central before travel.",
       },
     },
     {
