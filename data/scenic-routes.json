@@ -5006,7 +5006,14 @@
           "q": "Which side is better from Tokyo to Echigo-Yuzawa?",
           "a": "It matters little: after Takasaki the line is mostly in tunnels, and between Jomo-Kogen and Echigo-Yuzawa almost entirely. You see Mt. Haruna on the left and Mt. Akagi on the right just after Takasaki, then the snowy valley at Echigo-Yuzawa as you come out of the tunnel. Going on to Niigata, sit on the right for the Echigo Sanzan near Urasa."
         }
-      ]
+      ],
+      "image": {
+        "src": "/images/scenic/scenic-joetsu-snow-tall.webp",
+        "width": 1086,
+        "height": 1448,
+        "alt": "A snowy valley, a river and snow-roofed houses through a bullet train window",
+        "illustrative": true
+      }
     },
     {
       "id": "tohoku-iwate",
@@ -6424,7 +6431,14 @@
           "q": "Which side is better from Tokyo to Sendai?",
           "a": "The left, going north: Mt. Nasu after Utsunomiya, Mt. Adatara and Mt. Azuma around Koriyama and Fukushima, then Mt. Zao before Sendai. Coming back to Tokyo, sit on the right."
         }
-      ]
+      ],
+      "image": {
+        "src": "/images/scenic/scenic-tohoku-iwate-wide.webp",
+        "width": 1448,
+        "height": 1086,
+        "alt": "Snow-capped Mt. Iwate above frosted rice fields through a bullet train window",
+        "illustrative": true
+      }
     },
     {
       "id": "kurobe-gorge",
@@ -6461,7 +6475,14 @@
       ],
       "tags": [
         "mountain"
-      ]
+      ],
+      "image": {
+        "src": "/images/scenic/scenic-kurobe-gorge-tall.webp",
+        "width": 1086,
+        "height": 1448,
+        "alt": "A red bridge over an emerald river in an autumn gorge from an open trolley car",
+        "illustrative": true
+      }
     },
     {
       "id": "gono-coast",
@@ -6498,7 +6519,14 @@
       ],
       "tags": [
         "sea"
-      ]
+      ],
+      "image": {
+        "src": "/images/scenic/scenic-gono-coast-wide.webp",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Sunset over the Sea of Japan and a rocky shore through a sightseeing train window",
+        "illustrative": true
+      }
     },
     {
       "id": "furano-biei-flowers",
@@ -6536,7 +6564,14 @@
       ],
       "tags": [
         "countryside"
-      ]
+      ],
+      "image": {
+        "src": "/images/scenic/scenic-furano-lavender-wide.webp",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Lavender fields and distant mountains through the open window of a wooden train",
+        "illustrative": true
+      }
     },
     {
       "id": "senmo-drift-ice",
@@ -6573,7 +6608,14 @@
       ],
       "tags": [
         "sea"
-      ]
+      ],
+      "image": {
+        "src": "/images/scenic/scenic-senmo-drift-ice-wide.webp",
+        "width": 1448,
+        "height": 1086,
+        "alt": "Drift ice on the Sea of Okhotsk and snowy mountains through a train window",
+        "illustrative": true
+      }
     },
     {
       "id": "tadami-river",
@@ -6610,7 +6652,14 @@
       ],
       "tags": [
         "countryside"
-      ]
+      ],
+      "image": {
+        "src": "/images/scenic/scenic-tadami-river-wide.webp",
+        "width": 1536,
+        "height": 1024,
+        "alt": "Morning mist on a still river below autumn mountains and an arch bridge through a train window",
+        "illustrative": true
+      }
     }
   ]
 }
