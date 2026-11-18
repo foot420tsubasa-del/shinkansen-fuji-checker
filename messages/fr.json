@@ -500,6 +500,7 @@
       "tryRoutes": "Trajets avec cette vue :",
       "unsupportedTitle": "Nous n’avons pas encore cartographié {from} → {to}",
       "unsupportedBody": "Nous ne publions un côté que lorsqu’un modèle de terrain ou une source publiée le confirme. Voici les prochains :",
+      "browseScenicMap": "Explorer les lignes panoramiques sur la carte du Japon",
       "leaveNote": "Laisse un mot",
       "leaveNoteBody": "Dis-nous ton trajet et nous le ferons passer en priorité.",
       "pickStation": "Choisis une gare dans la liste.",

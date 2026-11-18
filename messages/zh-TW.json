@@ -500,6 +500,7 @@
       "tryRoutes": "有這個景色的路線：",
       "unsupportedTitle": "{from} → {to} 還沒有整理",
       "unsupportedBody": "只有地形模型或公開資料能佐證時，我們才會標示左右側。接下來準備的是：",
+      "browseScenicMap": "在日本地圖上探索觀景路線",
       "leaveNote": "留言給我們",
       "leaveNoteBody": "告訴我們你要搭的路線，我們會優先整理。",
       "pickStation": "請從清單中選擇車站。",

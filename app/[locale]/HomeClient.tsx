@@ -427,8 +427,10 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
           white panel. The view picker starts with Mt. Fuji alone; other views
           join once their side and section have been verified. One tap on a
           direction still answers, and the answer opens directly below. */}
-      <section id="seat-checker" className="relative isolate scroll-mt-14 overflow-hidden bg-ink">
-        <HeroWindow season={season} />
+      <section id="seat-checker" className="relative isolate z-10 scroll-mt-14 bg-ink">
+        <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
+          <HeroWindow season={season} />
+        </div>
         <div
           aria-hidden="true"
           className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(11,18,32,0.72)_0%,rgba(11,18,32,0.42)_30%,rgba(11,18,32,0.08)_56%,rgba(11,18,32,0.5)_100%)]"
@@ -501,6 +503,10 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
                 {t("search.unsupportedTitle", { from: routeMatch.from, to: routeMatch.to })}
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("search.unsupportedBody")}</p>
+              <Link href="/scenic" className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-fuji underline underline-offset-2">
+                {t("search.browseScenicMap")}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 {/* A line the trip leads to, by name only: no views, sides,
                     times or pictures from another route on an unmapped trip. */}
@@ -571,6 +577,10 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
             <div className="min-w-0">{bookingCard}</div>
             <div className="min-w-0 lg:col-span-2">
               <FujiViewMap direction={direction} />
+              <Link href="/scenic" className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-fuji underline underline-offset-2">
+                {t("search.browseScenicMap")}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
             </div>
             <div className="min-w-0 rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.05)] md:p-6 [&>div:first-child]:mt-0 [&>div:first-child]:border-t-0 [&>div:first-child]:pt-0">
               <FujiTiming

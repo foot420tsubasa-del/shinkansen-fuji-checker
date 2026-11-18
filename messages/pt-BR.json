@@ -500,6 +500,7 @@
       "tryRoutes": "Trajetos com esta vista:",
       "unsupportedTitle": "Ainda não mapeamos {from} → {to}",
       "unsupportedBody": "Só publicamos o lado quando um modelo de terreno ou uma fonte publicada confirma. Estes são os próximos:",
+      "browseScenicMap": "Explore rotas panorâmicas no mapa do Japão",
       "leaveNote": "Deixe uma nota",
       "leaveNoteBody": "Conte o trajeto que você vai fazer e daremos prioridade.",
       "pickStation": "Escolha uma estação da lista.",

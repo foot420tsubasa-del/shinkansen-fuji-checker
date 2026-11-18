@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import type { ReactNode } from "react";
 import { ArrowLeft, Check, ExternalLink, Rabbit } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -24,7 +23,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName: "fujiseat — Japan Rail Seats, Stays & Routes",
       publishedTime: article.published,
       modifiedTime: article.updated,
-      images: [{ url: `https://fujiseat.com${article.heroImage.src}`, alt: article.heroImage.alt }],
     },
   };
 }
@@ -39,7 +37,6 @@ export default async function SuicaNewCharacterPage({ params }: Props) {
       description: article.description,
       datePublished: article.published,
       dateModified: article.updated,
-      image: `https://fujiseat.com${article.heroImage.src}`,
       author: { "@type": "Organization", name: "fujiseat" },
       publisher: { "@type": "Organization", name: "fujiseat", url: "https://fujiseat.com" },
       mainEntityOfPage: `https://fujiseat.com${article.path}`,
@@ -74,26 +71,6 @@ export default async function SuicaNewCharacterPage({ params }: Props) {
         </h1>
         <p className="mt-4 text-[17px] leading-8 text-slate-600">{article.description}</p>
         <p className="mt-3 text-sm text-slate-500">Published November 19, 2026 · Checked against JR East's November 18 announcement</p>
-
-        <figure className="mt-7 overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_12px_32px_rgba(9,35,70,0.08)]">
-          <div className="relative aspect-[16/10] bg-slate-100">
-            <Image
-              src={article.heroImage.src}
-              alt={article.heroImage.alt}
-              fill
-              priority
-              sizes="(min-width: 820px) 780px, 100vw"
-              className="object-cover"
-            />
-          </div>
-          <figcaption className="px-4 py-3 text-[12px] leading-5 text-slate-500">
-            A Suica-compatible JR East IC reader—not the new character artwork. Photo by{" "}
-            <a href={article.heroImage.sourceUrl} target="_blank" rel="noopener" className="underline underline-offset-2">
-              {article.heroImage.author} / Wikimedia Commons
-            </a>{" "}
-            (<a href={article.heroImage.licenseUrl} target="_blank" rel="noopener" className="underline underline-offset-2">{article.heroImage.license}</a>).
-          </figcaption>
-        </figure>
 
         <section className="mt-8 rounded-[22px] bg-[#082653] p-6 text-white">
           <p className="text-xs font-bold uppercase tracking-[0.1em] text-white/60">The short answer</p>

@@ -821,10 +821,18 @@ test("scenic hub: hub files carry no affiliate URL or price copy", () => {
   }
 });
 
-test("scenic hub: homepage client and site header have no worktree changes", () => {
-  const protectedFiles = ["app/[locale]/HomeClient.tsx", "app/[locale]/components/SiteHeader.tsx", "app/[locale]/page.tsx"];
+test("scenic hub: site header and homepage entry have no worktree changes", () => {
+  const protectedFiles = ["app/[locale]/components/SiteHeader.tsx", "app/[locale]/page.tsx"];
   const changed = execSync(`/Library/Developer/CommandLineTools/usr/bin/git diff --name-only -- ${protectedFiles.map((file) => `'${file}'`).join(" ")}`, { encoding: "utf8" }).trim();
   assert.equal(changed, "");
+});
+
+test("homepage station suggestions can extend past the hero photo", () => {
+  const source = readFileSync("app/[locale]/HomeClient.tsx", "utf8");
+  const hero = source.match(/<section id="seat-checker"[^>]*>/)?.[0];
+  assert.ok(hero);
+  assert.doesNotMatch(hero, /overflow-hidden/);
+  assert.match(source, /overflow-hidden">\s*<HeroWindow/);
 });
 
 /* ── Route search and timeline (lib/scenic.ts) ──────────────────────────── */
@@ -987,7 +995,6 @@ test("scenic link and stay work leaves protected revenue and experiment pages un
   const protectedFiles = [
     "app/[locale]/guide/page.tsx",
     "app/[locale]/shinkansen-seat-letters/page.tsx",
-    "app/[locale]/HomeClient.tsx",
     "app/[locale]/components/SiteHeader.tsx",
     "app/[locale]/page.tsx",
   ];
@@ -1448,7 +1455,7 @@ test("guide: quiet Klook text links after the Quick Answer and in 'Booking via K
   assert.equal((copy.match(/\n    book: /g) || []).length, 9, "a booking line in every locale");
 });
 
-test("Suica character news: verified facts, licensed image, hub link and sitemap entry stay together", () => {
+test("Suica character news: verified facts, official link, hub link and sitemap entry stay together", () => {
   const data = readFileSync("data/suica-character-news.ts", "utf8");
   const page = readFileSync("app/[locale]/how-to-buy-suica/suica-new-character-2027/page.tsx", "utf8");
   const hub = readFileSync("app/[locale]/how-to-buy-suica/page.tsx", "utf8");
@@ -1459,9 +1466,8 @@ test("Suica character news: verified facts, licensed image, hub link and sitemap
   }
   assert.match(data, /jreast\.co\.jp\/press\/2026\/20261118_ho01\.pdf/);
   assert.match(data, /jreast\.co\.jp\/suica-new-character-vote/);
-  assert.match(data, /Wikimedia Commons|commons\.wikimedia\.org/);
-  assert.match(data, /CC0 1\.0/);
-  assert.ok(page.includes("article.heroImage.sourceUrl") && page.includes("article.heroImage.licenseUrl"), "photo credit and license must be visible");
+  assert.doesNotMatch(page, /<Image\b|<img\b|<figure\b/);
+  assert.match(page, /article\.officialCharacterUrl/);
   assert.ok(page.includes("instead of copying the image"), "explain why official character artwork is linked, not copied");
   assert.ok(hub.includes('/how-to-buy-suica/suica-new-character-2027'), "Suica hub links to the news article");
   assert.ok(sitemap.includes("SUICA_CHARACTER_NEWS.path"), "news article is in the sitemap");

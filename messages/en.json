@@ -500,6 +500,7 @@
       "tryRoutes": "Routes with this view:",
       "unsupportedTitle": "We haven’t mapped {from} → {to} yet",
       "unsupportedBody": "We only publish a side once a terrain model or a published source backs it. These are next:",
+      "browseScenicMap": "Explore scenic routes on the Japan map",
       "leaveNote": "Leave a note",
       "leaveNoteBody": "Tell us the route you’re riding and we’ll move it up the list.",
       "pickStation": "Choose a station from the list.",

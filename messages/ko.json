@@ -500,6 +500,7 @@
       "tryRoutes": "이 풍경이 있는 경로:",
       "unsupportedTitle": "{from} → {to} 구간은 아직 준비 중입니다",
       "unsupportedBody": "지형 모델이나 공개된 자료로 확인된 경우에만 좌우를 안내합니다. 다음 순서는 이 경로들입니다:",
+      "browseScenicMap": "일본 지도로 경치 좋은 노선 둘러보기",
       "leaveNote": "의견 남기기",
       "leaveNoteBody": "타실 경로를 알려 주시면 우선 준비하겠습니다.",
       "pickStation": "목록에서 역을 선택하세요.",

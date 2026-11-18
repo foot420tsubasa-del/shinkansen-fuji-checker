@@ -7,14 +7,6 @@ export const SUICA_CHARACTER_NEWS = {
   published: "2026-11-19",
   updated: "2026-11-19",
   officialCharacterUrl: "https://www.jreast.co.jp/suica-new-character-vote/",
-  heroImage: {
-    src: "/images/suica/jr-east-ic-gate-cc0.webp",
-    alt: "A Suica-compatible IC card reader at JR East's Yodo Station",
-    sourceUrl: "https://commons.wikimedia.org/wiki/File:JRE_Yodo-STA_Gate.jpg",
-    author: "MaedaAkihiko",
-    license: "CC0 1.0",
-    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
-  },
   facts: {
     announcementDate: "November 18, 2026",
     winner: "Candidate B, a purple rabbit motif",

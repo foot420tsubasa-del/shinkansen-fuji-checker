@@ -500,6 +500,7 @@
       "tryRoutes": "Strecken mit dieser Aussicht:",
       "unsupportedTitle": "{from} → {to} haben wir noch nicht kartiert",
       "unsupportedBody": "Wir veröffentlichen eine Seite erst, wenn ein Geländemodell oder eine veröffentlichte Quelle sie stützt. Als Nächstes kommen:",
+      "browseScenicMap": "Panoramastrecken auf der Japankarte entdecken",
       "leaveNote": "Schreib uns",
       "leaveNoteBody": "Sag uns deine Strecke, dann ziehen wir sie vor.",
       "pickStation": "Wähle einen Bahnhof aus der Liste.",
