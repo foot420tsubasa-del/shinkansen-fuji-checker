@@ -112,7 +112,7 @@ export default async function HowToBuySuicaPage({ params }: Props) {
               <Rabbit className="mt-0.5 h-6 w-6 shrink-0 text-[#145aa0]" aria-hidden="true" />
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.08em] text-[#2E7D5B]">Suica news · November 2026</p>
-                <h2 id="suica-character-news" className="mt-1 text-lg font-extrabold text-[#082653]">Suica's next mascot has been chosen</h2>
+                <h2 id="suica-character-news" className="mt-1 text-lg font-extrabold text-[#082653]">Suica’s next mascot has been chosen</h2>
                 <p className="mt-1 text-[14px] leading-6 text-slate-600">The purple rabbit candidate won the public vote. Its name is still open for suggestions, and the handover is planned for April 2027.</p>
                 <Link href="/how-to-buy-suica/suica-new-character-2027" className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-[#145aa0] underline underline-offset-2">
                   Read the verified announcement

@@ -70,13 +70,13 @@ export default async function SuicaNewCharacterPage({ params }: Props) {
           {article.title}
         </h1>
         <p className="mt-4 text-[17px] leading-8 text-slate-600">{article.description}</p>
-        <p className="mt-3 text-sm text-slate-500">Published November 19, 2026 · Checked against JR East's November 18 announcement</p>
+        <p className="mt-3 text-sm text-slate-500">Published November 19, 2026 · Checked against JR East’s November 18 announcement</p>
 
         <section className="mt-8 rounded-[22px] bg-[#082653] p-6 text-white">
           <p className="text-xs font-bold uppercase tracking-[0.1em] text-white/60">The short answer</p>
           <ul className="mt-4 grid gap-3">
             <Fact>Candidate B—a purple rabbit motif by {article.facts.designer}—won {article.facts.winningVotes} of {article.facts.totalVotes} votes.</Fact>
-            <Fact>The new mascot is scheduled to take over on {article.facts.handoverDate}, after the Suica Penguin's final day on {article.facts.penguinFinalDate}.</Fact>
+            <Fact>The new mascot is scheduled to take over on {article.facts.handoverDate}, after the Suica Penguin’s final day on {article.facts.penguinFinalDate}.</Fact>
             <Fact>The character does not have an announced name yet. Name suggestions close {article.facts.namingDeadline}.</Fact>
           </ul>
         </section>
@@ -84,10 +84,10 @@ export default async function SuicaNewCharacterPage({ params }: Props) {
         <section className="mt-10">
           <h2 className="text-2xl font-extrabold tracking-[-0.02em] text-[#082653]">What JR East decided</h2>
           <p className="mt-4 text-[17px] leading-8 text-slate-700">
-            JR East announced the result on {article.facts.announcementDate}, the 25th anniversary of Suica's launch. Of three public candidates, candidate B received about 51.7% of the vote. JR East describes it as the next image character for a Suica that is expanding from a transport-and-payment tool toward a broader “device for daily life.”
+            JR East announced the result on {article.facts.announcementDate}, the 25th anniversary of Suica’s launch. Of three public candidates, candidate B received about 51.7% of the vote. JR East describes it as the next image character for a Suica that is expanding from a transport-and-payment tool toward a broader “device for daily life.”
           </p>
           <p className="mt-4 text-[17px] leading-8 text-slate-700">
-            The winning design uses a purple rabbit motif. Its original designer, {article.facts.designer}, said the colors, shapes and gestures were designed to express Suica's future possibilities and remain visually distinctive in many settings.
+            The winning design uses a purple rabbit motif. Its original designer, {article.facts.designer}, said the colors, shapes and gestures were designed to express Suica’s future possibilities and remain visually distinctive in many settings.
           </p>
         </section>
 
@@ -97,7 +97,7 @@ export default async function SuicaNewCharacterPage({ params }: Props) {
             <div>
               <h2 className="text-xl font-extrabold text-[#082653]">See the actual character on JR East</h2>
               <p className="mt-2 text-[15px] leading-7 text-slate-700">
-                JR East's official page shows the selected artwork and the naming form. We link to it instead of copying the image because JR East's website terms prohibit reproducing its images.
+                JR East’s official page shows the selected artwork and the naming form. We link to it instead of copying the image because JR East’s website terms prohibit reproducing its images.
               </p>
               <a
                 href={article.officialCharacterUrl}
@@ -115,10 +115,10 @@ export default async function SuicaNewCharacterPage({ params }: Props) {
         <section className="mt-10">
           <h2 className="text-2xl font-extrabold tracking-[-0.02em] text-[#082653]">The handover from the Suica Penguin</h2>
           <p className="mt-4 text-[17px] leading-8 text-slate-700">
-            The Suica Penguin is scheduled to graduate as Suica's image character on {article.facts.penguinFinalDate}. JR East plans a handover event that day, with the new character beginning its role on {article.facts.handoverDate}.
+            The Suica Penguin is scheduled to graduate as Suica’s image character on {article.facts.penguinFinalDate}. JR East plans a handover event that day, with the new character beginning its role on {article.facts.handoverDate}.
           </p>
           <p className="mt-4 text-[17px] leading-8 text-slate-700">
-            This announcement is about the brand's image character. It did not announce a change to the way travelers buy, charge or tap Suica. For practical card information, use our current{" "}
+            This announcement is about the brand’s image character. It did not announce a change to the way travelers buy, charge or tap Suica. For practical card information, use our current{" "}
             <Link href="/how-to-buy-suica" className="font-semibold text-[#145aa0] underline underline-offset-2">Suica guide and ticket-machine practice</Link>.
           </p>
         </section>
@@ -158,7 +158,7 @@ export default async function SuicaNewCharacterPage({ params }: Props) {
             ))}
           </ul>
           <p className="mt-5 text-[12px] leading-5 text-slate-500">
-            Information checked November 19, 2026. The naming schedule and campaign details may change; use JR East's official page for the latest information.
+            Information checked November 19, 2026. The naming schedule and campaign details may change; use JR East’s official page for the latest information.
           </p>
         </section>
       </article>

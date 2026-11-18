@@ -150,9 +150,6 @@ const klookTarget = (url) => {
     return "";
   }
 };
-const providerOfUrl = (url) =>
-  /klook\.com/.test(url) ? "Klook" : /agoda\.com/.test(url) ? "Agoda" : /trip\.com/.test(url) ? "Trip.com" : /tpx\.lv|booking\.com/.test(url) ? "Booking.com（Travelpayouts）" : "";
-
 /** Where each link id is used in the code, as page names a person recognises. */
 function usageIndex() {
   const files = [];
