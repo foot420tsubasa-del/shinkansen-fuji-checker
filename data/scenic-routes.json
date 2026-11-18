@@ -8028,24 +8028,33 @@
     },
     {
       "id": "senmo-drift-ice",
-      "status": "candidate",
+      "status": "live",
       "tier": 3,
       "view": [
         "sea",
         "snow"
       ],
-      "title": "Okhotsk drift ice from the Senmo Line",
+      "title": "The Sea of Okhotsk and drift ice on the Senmo Line",
       "line": "Senmo Line",
       "operator": "JR Hokkaido",
       "between": [
         "Abashiri",
         "Shiretoko-Shari"
       ],
-      "side": null,
+      "side": {
+        "toShiretokoShari": "the Sea of Okhotsk on the left, especially on the coast to Hama-Koshimizu",
+        "toAbashiri": "the sea on the right"
+      },
       "seat": null,
-      "section": null,
-      "season": null,
-      "ticket": null,
+      "section": "Abashiri–Hama-Koshimizu for the main coastal view",
+      "season": "Winter for drift ice; sea conditions change daily",
+      "slug": "senmo-line-drift-ice",
+      "href": "/scenic/senmo-line-drift-ice",
+      "ticket": {
+        "provider": "klook",
+        "linkId": "jrPass",
+        "note": "The Japan Rail Pass covers JR Hokkaido trains on the Senmo Line; the 2027 Ryuhyo Monogatari requires a reserved seat."
+      },
       "osm": {
         "name": "釧網本線",
         "bbox": [
@@ -8053,8 +8062,444 @@
           144.25,
           44.05,
           144.7
+        ],
+        "chain": true,
+        "joinM": 800
+      },
+      "stations": [
+        {
+          "name": "Abashiri",
+          "ja": "網走",
+          "lat": 44.0199358,
+          "lng": 144.2541078
+        },
+        {
+          "name": "Katsuradai",
+          "ja": "桂台",
+          "lat": 44.0170196,
+          "lng": 144.2733423
+        },
+        {
+          "name": "Masuura",
+          "ja": "鱒浦",
+          "lat": 43.9826993,
+          "lng": 144.296498
+        },
+        {
+          "name": "Mokoto",
+          "ja": "藻琴",
+          "lat": 43.9684283,
+          "lng": 144.3202262
+        },
+        {
+          "name": "Kitahama",
+          "ja": "北浜",
+          "lat": 43.9584602,
+          "lng": 144.3526915
+        },
+        {
+          "name": "Genseikaen",
+          "ja": "原生花園",
+          "lat": 43.9410795,
+          "lng": 144.4141643
+        },
+        {
+          "name": "Hama-Koshimizu",
+          "ja": "浜小清水",
+          "lat": 43.9338732,
+          "lng": 144.4533822
+        },
+        {
+          "name": "Yamubetsu",
+          "ja": "止別",
+          "lat": 43.9215087,
+          "lng": 144.5202015
+        },
+        {
+          "name": "Shiretoko-Shari",
+          "ja": "知床斜里",
+          "lat": 43.9108848,
+          "lng": 144.6614523
+        }
+      ],
+      "targets": [
+        {
+          "id": "sea",
+          "name": "The Sea of Okhotsk",
+          "type": "sea",
+          "lat": 0,
+          "lng": 0,
+          "elevation": 0
+        }
+      ],
+      "views": [
+        {
+          "id": "okhotsk-coast",
+          "name": "The Sea of Okhotsk and drift ice",
+          "targets": [
+            "sea"
+          ],
+          "tags": [
+            "sea",
+            "snow"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Abashiri",
+          "to": "Hama-Koshimizu",
+          "kmFrom": 0.5,
+          "kmTo": 20.5,
+          "sectionKm": 20,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "Winter for drift ice; the coast is visible year-round, but ice is never guaranteed",
+          "seat": null,
+          "basis": "terrain model; JR Hokkaido confirms the coast and drift ice as this route's scenery",
+          "main": true,
+          "seenKm": [
+            0.55,
+            0.75,
+            0.95,
+            1.15,
+            1.35,
+            1.55,
+            2.42,
+            2.62,
+            2.82,
+            3.02,
+            3.22,
+            3.42,
+            3.62,
+            3.82,
+            4.02,
+            4.22,
+            4.42,
+            4.62,
+            4.82,
+            5.02,
+            5.22,
+            5.42,
+            5.62,
+            5.82,
+            6.02,
+            6.22,
+            6.42,
+            6.62,
+            6.82,
+            7.02,
+            7.22,
+            7.42,
+            7.62,
+            7.82,
+            8.02,
+            8.22,
+            8.42,
+            8.62,
+            8.82,
+            9.02,
+            9.22,
+            9.42,
+            9.62,
+            9.82,
+            10.02,
+            10.22,
+            10.42,
+            10.62,
+            10.82,
+            11.02,
+            11.22,
+            11.42,
+            11.62,
+            11.82,
+            12.02,
+            12.22,
+            12.42,
+            12.62,
+            12.82,
+            13.02,
+            13.22,
+            13.42,
+            13.62,
+            13.82,
+            14.02,
+            14.22,
+            14.42,
+            14.62,
+            14.82,
+            15.02,
+            15.22,
+            15.42,
+            15.62,
+            15.82,
+            16.02,
+            16.22,
+            16.42,
+            16.62,
+            16.82,
+            17.02,
+            17.22,
+            17.42,
+            17.62,
+            17.83,
+            18.05,
+            18.25,
+            18.45,
+            18.65,
+            18.88,
+            19.08,
+            19.92,
+            20.12,
+            20.32,
+            20.5
+          ]
+        }
+      ],
+      "viewshed": "data/routes/senmo-drift-ice-viewshed.json",
+      "trackKmOffset": 0,
+      "timelineStations": [
+        {
+          "name": "Abashiri",
+          "ja": "網走",
+          "km": 0
+        },
+        {
+          "name": "Katsuradai",
+          "ja": "桂台",
+          "km": 1.58
+        },
+        {
+          "name": "Masuura",
+          "ja": "鱒浦",
+          "km": 6.15
+        },
+        {
+          "name": "Mokoto",
+          "ja": "藻琴",
+          "km": 8.69
+        },
+        {
+          "name": "Kitahama",
+          "ja": "北浜",
+          "km": 11.49
+        },
+        {
+          "name": "Genseikaen",
+          "ja": "原生花園",
+          "km": 16.86
+        },
+        {
+          "name": "Hama-Koshimizu",
+          "ja": "浜小清水",
+          "km": 20.1
+        },
+        {
+          "name": "Yamubetsu",
+          "ja": "止別",
+          "km": 25.69
+        },
+        {
+          "name": "Shiretoko-Shari",
+          "ja": "知床斜里",
+          "km": 37.23
+        }
+      ],
+      "directions": {
+        "forward": [
+          "Abashiri",
+          "Shiretoko-Shari"
+        ],
+        "backward": [
+          "Shiretoko-Shari",
+          "Abashiri"
         ]
       },
+      "verification": "The sea is on the left from Abashiri towards Shiretoko-Shari in the terrain model (GSI elevation and OSM track). JR Hokkaido confirms that the train follows the Sea of Okhotsk coast and identifies Kitahama as the station closest to the sea, but it does not publish a seat-letter recommendation. The OSM track is 37.23 km against the 37.3 km total of JR Hokkaido's official station-to-station distances.",
+      "notes": [
+        "Ryuhyo Monogatari is seasonal, not a year-round train. JR Hokkaido has announced service on January 30–31 and February 1–28, 2027; March service is planned, but its exact dates had not been published as of November 18, 2026. All seats are reserved in 2027, and the operator says times and rolling stock may change.",
+        "The timeline below uses current regular local trains 4723D and 4722D because the current 2027 announcement does not publish every intermediate time for Ryuhyo Monogatari. Check JR Hokkaido again for your travel date. Genseikaen is a seasonal station and is not served by these winter reference trains.",
+        "Drift ice is a natural phenomenon and is not guaranteed on any day. The model verifies the sea on the left towards Shiretoko-Shari; it does not verify ice conditions or a seat letter.",
+        "The Blue Star version of Ryuhyo Monogatari is planned to start in 2028, not in the 2027 winter season."
+      ],
+      "timing": {
+        "kind": "timetable",
+        "source": "JR Hokkaido official station and train-detail data, checked November 18, 2026: local 4723D from Abashiri and local 4722D from Shiretoko-Shari. These are regular trains; check again for your date.",
+        "sourceUrl": "https://www3.jrhokkaido.co.jp/webunkou/stationlist.html",
+        "trains": [
+          {
+            "id": "local",
+            "label": "Local",
+            "note": "current regular Senmo Line locals; times can change at a timetable revision",
+            "forward": {
+              "train": "Local 4723D",
+              "stops": [
+                [
+                  "Abashiri",
+                  null,
+                  "06:38"
+                ],
+                [
+                  "Katsuradai",
+                  "06:41",
+                  "06:41"
+                ],
+                [
+                  "Masuura",
+                  "06:47",
+                  "06:47"
+                ],
+                [
+                  "Mokoto",
+                  "06:50",
+                  "06:50"
+                ],
+                [
+                  "Kitahama",
+                  "06:54",
+                  "06:54"
+                ],
+                [
+                  "Hama-Koshimizu",
+                  "07:04",
+                  "07:04"
+                ],
+                [
+                  "Yamubetsu",
+                  "07:10",
+                  "07:10"
+                ],
+                [
+                  "Shiretoko-Shari",
+                  "07:25",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Local 4722D",
+              "stops": [
+                [
+                  "Shiretoko-Shari",
+                  null,
+                  "06:42"
+                ],
+                [
+                  "Yamubetsu",
+                  "06:53",
+                  "06:53"
+                ],
+                [
+                  "Hama-Koshimizu",
+                  "07:04",
+                  "07:04"
+                ],
+                [
+                  "Kitahama",
+                  "07:14",
+                  "07:14"
+                ],
+                [
+                  "Mokoto",
+                  "07:18",
+                  "07:18"
+                ],
+                [
+                  "Masuura",
+                  "07:21",
+                  "07:21"
+                ],
+                [
+                  "Katsuradai",
+                  "07:27",
+                  "07:27"
+                ],
+                [
+                  "Abashiri",
+                  "07:34",
+                  null
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "page": {
+        "title": "Senmo Line: Which Side for the Sea of Okhotsk and Drift Ice?",
+        "description": "From Abashiri towards Shiretoko-Shari, the Sea of Okhotsk is on the left, with the main coastal stretch before Hama-Koshimizu. Includes a terrain-model map, current local-train times, and the confirmed 2027 Ryuhyo Monogatari operating plan.",
+        "h1": "Senmo Line: which side for the Sea of Okhotsk and drift ice?",
+        "labelStations": [
+          "Abashiri",
+          "Masuura",
+          "Mokoto",
+          "Kitahama",
+          "Genseikaen",
+          "Hama-Koshimizu",
+          "Yamubetsu",
+          "Shiretoko-Shari"
+        ]
+      },
+      "ticketGuide": {
+        "verdict": "For a regular Senmo Line train, use a normal JR ticket or a valid JR Pass. Ryuhyo Monogatari is all reserved in 2027, so confirm the operating day and reserve a seat before boarding.",
+        "options": [
+          {
+            "who": "Taking one regular Senmo Line trip",
+            "buy": "A normal JR ticket"
+          },
+          {
+            "who": "Travelling more widely on JR trains",
+            "buy": "Japan Rail Pass"
+          }
+        ],
+        "sources": [
+          {
+            "label": "JR Hokkaido Ryuhyo Monogatari guide",
+            "url": "https://www.jrhokkaido.co.jp/train/tr041_01.html"
+          },
+          {
+            "label": "JR Hokkaido 2027 winter train plan",
+            "url": "https://www.jrhokkaido.co.jp/travel/sl/pdf/20261022_newsrelease.pdf"
+          }
+        ],
+        "links": [
+          {
+            "kind": "affiliate",
+            "linkId": "jrPass",
+            "label": "Japan Rail Pass",
+            "product": "jr_pass"
+          }
+        ],
+        "more": {
+          "href": "/jr-pass-vs-single-ticket",
+          "label": "JR Pass or single tickets: the full comparison"
+        }
+      },
+      "faq": [
+        {
+          "q": "Which side is the Sea of Okhotsk on?",
+          "a": "From Abashiri towards Shiretoko-Shari, choose the left in the direction of travel. The main coastal view is before Hama-Koshimizu. Returning towards Abashiri, the sea is on the right. No seat letter is claimed because JR Hokkaido does not publish one for this service."
+        },
+        {
+          "q": "When does Ryuhyo Monogatari run in 2027?",
+          "a": "JR Hokkaido has confirmed January 30–31 and February 1–28, 2027. March service is planned, but its exact dates were still unpublished on November 18, 2026. It is seasonal and all seats are reserved."
+        },
+        {
+          "q": "Are the times on this page for Ryuhyo Monogatari?",
+          "a": "No. They are current regular local-train times. The 2027 announcement gives the sightseeing train's endpoint times and stops but not every intermediate time, so this page does not reuse the 2026 intermediate timetable as if it were current."
+        },
+        {
+          "q": "Will I definitely see drift ice?",
+          "a": "No. Drift ice changes with wind, currents and temperature. Check current conditions and JR Hokkaido's operating information close to your trip."
+        },
+        {
+          "q": "Does the JR Pass cover the Senmo Line?",
+          "a": "Yes, for JR Hokkaido trains on this route. Ryuhyo Monogatari is all reserved in 2027, so you still need a seat reservation before boarding."
+        }
+      ],
+      "chip": {
+        "emoji": "🧊",
+        "label": "Okhotsk ice"
+      },
+      "teaser": "Abashiri → Shiretoko-Shari · sea and drift ice on the left",
       "near": [
         "Abashiri",
         "Shiretoko-Shari"

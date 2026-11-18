@@ -895,6 +895,23 @@ test("Furano Line: Tokachi mountains on the left to Furano, the retired Norokko 
   assert.equal(scenic.resolveStation("lavender farm"), "Lavender-Farm");
 });
 
+test("Senmo Line: the Okhotsk coast is left towards Shiretoko-Shari, seasonal 2027 service stays separate from the local timetable", () => {
+  const points = JSON.parse(readFileSync("data/routes/senmo-drift-ice-viewshed.json", "utf8")).points;
+  const m = scenic.matchRoute("Abashiri", "Shiretoko-Shari");
+  assert.equal(m.kind, "live");
+  assert.equal(m.route.id, "senmo-drift-ice");
+  const { items, train } = scenic.timeline(m.route, m.direction, "Abashiri", "Shiretoko-Shari", points, "local");
+  assert.equal(train.forward.train, "Local 4723D");
+  assert.deepEqual(items.map((i) => [i.view.id, i.side]), [["okhotsk-coast", "left"]]);
+  const back = scenic.timeline(m.route, "backward", "Shiretoko-Shari", "Abashiri", points, "local");
+  assert.deepEqual(back.items.map((i) => [i.view.id, i.side]), [["okhotsk-coast", "right"]]);
+  assert.ok(items.every((i, k) => k === 0 || i.start > items[k - 1].start), "in time order");
+  assert.deepEqual(train.forward.stops.map((s) => s[0]), ["Abashiri", "Katsuradai", "Masuura", "Mokoto", "Kitahama", "Hama-Koshimizu", "Yamubetsu", "Shiretoko-Shari"]);
+  assert.match(m.route.notes.join(" "), /January 30–31 and February 1–28, 2027/);
+  assert.match(m.route.notes.join(" "), /regular local trains 4723D and 4722D/);
+  assert.match(m.route.notes.join(" "), /not guaranteed/);
+});
+
 test("timeline: Tokyo → Kanazawa runs Asama (right), Myoko (left), Alps (left), in order, from the JR timetable", () => {
   const m = scenic.matchRoute("Tokyo", "Kanazawa");
   const { items, train } = scenic.timeline(m.route, m.direction, "Tokyo", "Kanazawa", hokurikuPoints, "hakutaka");
