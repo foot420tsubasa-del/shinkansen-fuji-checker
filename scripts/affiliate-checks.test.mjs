@@ -876,6 +876,47 @@ test("scenic stays: every rendered URL comes unchanged from existing data, with 
   assert.ok(detail.indexOf("<ScenicStayBlock") > detail.indexOf("<ScenicPassCard"), "stay block remains below the ticket blocks");
 });
 
+test("scenic stay click: emits affiliate_click with the scenic placement, route and area", async () => {
+  const analytics = await jiti.import("./lib/analytics.ts");
+  const previousWindow = globalThis.window;
+  const previousNodeEnv = process.env.NODE_ENV;
+  const fakeWindow = {
+    location: { pathname: "/scenic/fujikyu", search: "?ga_debug=1" },
+    dataLayer: [],
+  };
+  try {
+    process.env.NODE_ENV = "production";
+    globalThis.window = fakeWindow;
+    analytics.trackAffiliateClick({
+      category: "hotel",
+      provider: "trip",
+      placement: "scenic_route_stay",
+      page_path: "/scenic/fujikyu",
+      locale: "en",
+      href: "https://www.trip.com/t/4yZdOmrBXU2",
+      label: "Compare Kawaguchiko hotels on Trip.com",
+      link_id: "kawaguchiko",
+      product: "hotel_area",
+      area_id: "kawaguchiko",
+      route: "fujikyu-fuji",
+      route_type: "scenic",
+    });
+    assert.equal(fakeWindow.dataLayer.length, 1);
+    const [command, event, params] = fakeWindow.dataLayer[0];
+    assert.equal(command, "event");
+    assert.equal(event, "affiliate_click");
+    assert.equal(params.placement, "scenic_route_stay");
+    assert.equal(params.route, "fujikyu-fuji");
+    assert.equal(params.area_id, "kawaguchiko");
+    assert.equal(params.debug_mode, true);
+  } finally {
+    if (previousWindow === undefined) delete globalThis.window;
+    else globalThis.window = previousWindow;
+    if (previousNodeEnv === undefined) delete process.env.NODE_ENV;
+    else process.env.NODE_ENV = previousNodeEnv;
+  }
+});
+
 test("related scenic links: pages use at most two links and every target is a live slug", () => {
   const related = JSON.parse(readFileSync("data/scenic-related-links.json", "utf8"));
   const live = new Map(scenic.LIVE_ROUTES.map((route) => [route.id, route.slug]));
