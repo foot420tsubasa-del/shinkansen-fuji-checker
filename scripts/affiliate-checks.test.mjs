@@ -784,7 +784,7 @@ const jiti = createJiti(process.cwd() + "/", { alias: { "@": process.cwd() } });
 const scenic = await jiti.import("./lib/scenic.ts");
 const hokurikuPoints = JSON.parse(readFileSync("data/routes/hokuriku-alps-viewshed.json", "utf8")).points;
 
-test("route search: Tokaido and Hokuriku both ways, anything else is coming soon", () => {
+test("route search: live routes work both ways and unsupported trips do not invent an answer", () => {
   const tk = scenic.matchRoute("Tokyo", "Kyoto");
   assert.equal(tk.kind, "live");
   assert.equal(tk.route.id, "tokaido-fuji");
@@ -798,7 +798,7 @@ test("route search: Tokaido and Hokuriku both ways, anything else is coming soon
   assert.ok(none.nearbyLive.some((r) => r.id === "enoden-coast"), "Kamakura points at the live Enoden page");
   const far = scenic.matchRoute("Tokyo", "Sapporo");
   assert.equal(far.kind, "unsupported");
-  assert.ok(far.comingSoon.length > 0, "an unmapped trip still offers what is next");
+  assert.equal(far.comingSoon.length, 0, "all catalogue candidates have now been published");
 });
 
 const tohokuPoints = JSON.parse(readFileSync("data/routes/tohoku-iwate-viewshed.json", "utf8")).points;
@@ -910,6 +910,36 @@ test("Senmo Line: the Okhotsk coast is left towards Shiretoko-Shari, seasonal 20
   assert.match(m.route.notes.join(" "), /January 30–31 and February 1–28, 2027/);
   assert.match(m.route.notes.join(" "), /regular local trains 4723D and 4722D/);
   assert.match(m.route.notes.join(" "), /not guaranteed/);
+});
+
+test("Tadami Line: the river changes sides across the bridge sequence and through trains remain visibly infrequent", () => {
+  const points = JSON.parse(readFileSync("data/routes/tadami-river-viewshed.json", "utf8")).points;
+  const m = scenic.matchRoute("Aizu-Wakamatsu", "Koide");
+  assert.equal(m.kind, "live");
+  assert.equal(m.route.id, "tadami-river");
+  const { items, train } = scenic.timeline(m.route, m.direction, "Aizu-Wakamatsu", "Koide", points, "local");
+  assert.equal(train.forward.train, "Local 427D");
+  assert.deepEqual(items.map((i) => [i.view.id, i.side]), [
+    ["first-bridge", "left"],
+    ["miyashita-valley", "right"],
+    ["hayato-valley", "left"],
+    ["mizunuma-valley", "right"],
+    ["yokota-valley", "right"],
+  ]);
+  const back = scenic.timeline(m.route, "backward", "Koide", "Aizu-Wakamatsu", points, "local");
+  assert.deepEqual(back.items.map((i) => [i.view.id, i.side]), [
+    ["yokota-valley", "left"],
+    ["mizunuma-valley", "left"],
+    ["hayato-valley", "right"],
+    ["miyashita-valley", "left"],
+    ["first-bridge", "right"],
+  ]);
+  assert.ok(items.every((i, k) => k === 0 || i.start > items[k - 1].start), "in time order");
+  assert.equal(train.forward.stops.length, 36);
+  assert.equal(train.backward.stops.length, 36);
+  assert.match(m.route.notes.join(" "), /Only a few trains run through/);
+  assert.match(m.route.notes.join(" "), /long gaps/);
+  assert.match(m.route.notes.join(" "), /eight Tadami River bridges/);
 });
 
 test("timeline: Tokyo → Kanazawa runs Asama (right), Myoko (left), Alps (left), in order, from the JR timetable", () => {
@@ -1117,7 +1147,7 @@ test("JR Pass card: only on lines the pass covers (not the Enoden or the Fujikyu
 
 test("scenic pages: every live route has a ticket guide, with links that exist and official pages on the operators' own sites", () => {
   const links = JSON.parse(readFileSync("data/affiliate-links.json", "utf8"));
-  const official = ["japanrailpass.net", "www.westjr.co.jp", "www.enoden.co.jp", "www.fujikyu-railway.jp", "www.odakyu-freepass.jp", "www.hakonenavi.jp", "www.sagano-kanko.co.jp", "ars-saganokanko.triplabo.jp", "www.yurikamome.co.jp", "www.odakyu-freepass.jp", "www.kurotetu.co.jp", "www.jrhokkaido.co.jp"];
+  const official = ["japanrailpass.net", "www.westjr.co.jp", "www.enoden.co.jp", "www.fujikyu-railway.jp", "www.odakyu-freepass.jp", "www.hakonenavi.jp", "www.sagano-kanko.co.jp", "ars-saganokanko.triplabo.jp", "www.yurikamome.co.jp", "www.odakyu-freepass.jp", "www.kurotetu.co.jp", "www.jrhokkaido.co.jp", "media.jreast.co.jp"];
   for (const route of scenic.LIVE_ROUTES) {
     const g = route.ticketGuide;
     assert.ok(g, `${route.id} has no ticket guide`);

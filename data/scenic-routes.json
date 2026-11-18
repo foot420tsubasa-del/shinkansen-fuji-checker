@@ -8517,39 +8517,1121 @@
     },
     {
       "id": "tadami-river",
-      "status": "candidate",
+      "status": "live",
       "tier": 3,
       "view": [
         "countryside",
         "gorge"
       ],
-      "title": "River bridges and mist on the Tadami Line",
+      "title": "The Tadami River bridges through the mountain valley",
       "line": "Tadami Line",
       "operator": "JR East",
       "between": [
         "Aizu-Wakamatsu",
         "Koide"
       ],
-      "side": null,
+      "side": {
+        "toKoide": "both sides — the river changes side across the bridge sequence",
+        "toAizuWakamatsu": "both sides in reverse order"
+      },
       "seat": null,
-      "section": null,
-      "season": null,
-      "ticket": null,
+      "section": "Aizu-Nishikata–Aizu-Gamo; follow the section-by-section timeline",
+      "season": "Beautiful year-round; autumn colour is usually late October to mid-November",
+      "ticket": {
+        "provider": "klook",
+        "linkId": "jrPass",
+        "note": "The Japan Rail Pass covers JR East local trains on the Tadami Line."
+      },
       "osm": {
         "name": "只見線",
         "bbox": [
-          37.3,
-          139.5,
-          37.6,
-          139.85
+          37.18,
+          138.9,
+          37.62,
+          140
+        ],
+        "relationId": 1924545,
+        "extraWayIds": [
+          244651086,
+          307293405
+        ],
+        "chain": true,
+        "joinM": 800
+      },
+      "stations": [
+        {
+          "name": "Aizu-Wakamatsu",
+          "ja": "会津若松",
+          "lat": 37.5085622,
+          "lng": 139.9301344
+        },
+        {
+          "name": "Nanukamachi",
+          "ja": "七日町",
+          "lat": 37.5014696,
+          "lng": 139.9191494
+        },
+        {
+          "name": "Nishi-Wakamatsu",
+          "ja": "西若松",
+          "lat": 37.4859472,
+          "lng": 139.9142245
+        },
+        {
+          "name": "Aizu-Hongo",
+          "ja": "会津本郷",
+          "lat": 37.4635707,
+          "lng": 139.8930093
+        },
+        {
+          "name": "Aizu-Takada",
+          "ja": "会津高田",
+          "lat": 37.470659,
+          "lng": 139.841939
+        },
+        {
+          "name": "Negishi",
+          "ja": "根岸",
+          "lat": 37.5018238,
+          "lng": 139.8286901
+        },
+        {
+          "name": "Niitsuru",
+          "ja": "新鶴",
+          "lat": 37.517126,
+          "lng": 139.8285141
+        },
+        {
+          "name": "Wakamiya",
+          "ja": "若宮",
+          "lat": 37.5355611,
+          "lng": 139.8283535
+        },
+        {
+          "name": "Aizu-Bange",
+          "ja": "会津坂下",
+          "lat": 37.5569104,
+          "lng": 139.8210081
+        },
+        {
+          "name": "Todera",
+          "ja": "塔寺",
+          "lat": 37.5697253,
+          "lng": 139.7854902
+        },
+        {
+          "name": "Aizu-Sakamoto",
+          "ja": "会津坂本",
+          "lat": 37.5533464,
+          "lng": 139.75652
+        },
+        {
+          "name": "Aizu-Yanaizu",
+          "ja": "会津柳津",
+          "lat": 37.5390794,
+          "lng": 139.7238157
+        },
+        {
+          "name": "Godo",
+          "ja": "郷戸",
+          "lat": 37.5164289,
+          "lng": 139.7099208
+        },
+        {
+          "name": "Takiya",
+          "ja": "滝谷",
+          "lat": 37.4947494,
+          "lng": 139.6986446
+        },
+        {
+          "name": "Aizu-Hinohara",
+          "ja": "会津桧原",
+          "lat": 37.491996,
+          "lng": 139.679831
+        },
+        {
+          "name": "Aizu-Nishikata",
+          "ja": "会津西方",
+          "lat": 37.4809743,
+          "lng": 139.6619638
+        },
+        {
+          "name": "Aizu-Miyashita",
+          "ja": "会津宮下",
+          "lat": 37.4712145,
+          "lng": 139.6475532
+        },
+        {
+          "name": "Hayato",
+          "ja": "早戸",
+          "lat": 37.4702287,
+          "lng": 139.5935867
+        },
+        {
+          "name": "Aizu-Mizunuma",
+          "ja": "会津水沼",
+          "lat": 37.4831489,
+          "lng": 139.5605062
+        },
+        {
+          "name": "Aizu-Nakagawa",
+          "ja": "会津中川",
+          "lat": 37.4734442,
+          "lng": 139.5319984
+        },
+        {
+          "name": "Aizu-Kawaguchi",
+          "ja": "会津川口",
+          "lat": 37.4551669,
+          "lng": 139.5239282
+        },
+        {
+          "name": "Honna",
+          "ja": "本名",
+          "lat": 37.4449849,
+          "lng": 139.4990402
+        },
+        {
+          "name": "Aizu-Kosugawa",
+          "ja": "会津越川",
+          "lat": 37.3985423,
+          "lng": 139.4690323
+        },
+        {
+          "name": "Aizu-Yokota",
+          "ja": "会津横田",
+          "lat": 37.392224,
+          "lng": 139.4357281
+        },
+        {
+          "name": "Aizu-Oshio",
+          "ja": "会津大塩",
+          "lat": 37.3927414,
+          "lng": 139.4134817
+        },
+        {
+          "name": "Aizu-Shiozawa",
+          "ja": "会津塩沢",
+          "lat": 37.3936494,
+          "lng": 139.3554577
+        },
+        {
+          "name": "Aizu-Gamo",
+          "ja": "会津蒲生",
+          "lat": 37.3816379,
+          "lng": 139.3332882
+        },
+        {
+          "name": "Tadami",
+          "ja": "只見",
+          "lat": 37.3506308,
+          "lng": 139.3151856
+        },
+        {
+          "name": "Oshirakawa",
+          "ja": "大白川",
+          "lat": 37.341639,
+          "lng": 139.120917
+        },
+        {
+          "name": "Irihirose",
+          "ja": "入広瀬",
+          "lat": 37.3584139,
+          "lng": 139.0660163
+        },
+        {
+          "name": "Kamijo",
+          "ja": "上条",
+          "lat": 37.347094,
+          "lng": 139.050894
+        },
+        {
+          "name": "Echigo-Suhara",
+          "ja": "越後須原",
+          "lat": 37.320557,
+          "lng": 139.0175
+        },
+        {
+          "name": "Uonuma-Tanaka",
+          "ja": "魚沼田中",
+          "lat": 37.29414,
+          "lng": 138.99263
+        },
+        {
+          "name": "Echigo-Hirose",
+          "ja": "越後広瀬",
+          "lat": 37.2743056,
+          "lng": 138.9811944
+        },
+        {
+          "name": "Yabukami",
+          "ja": "藪神",
+          "lat": 37.253611,
+          "lng": 138.978889
+        },
+        {
+          "name": "Koide",
+          "ja": "小出",
+          "lat": 37.2332881,
+          "lng": 138.9534902
+        }
+      ],
+      "targets": [
+        {
+          "id": "tadami-valley",
+          "name": "The Tadami River valley",
+          "type": "valley",
+          "lat": 0,
+          "lng": 0,
+          "elevation": 0,
+          "reach": 300,
+          "minDrop": 20
+        }
+      ],
+      "demZoom": 14,
+      "observerHeight": 3,
+      "minSectionKm": 0.3,
+      "bridgeKm": 0.3,
+      "geometry": "data/routes/tadami-river.json",
+      "slug": "tadami-line",
+      "href": "/scenic/tadami-line",
+      "viewshed": "data/routes/tadami-river-viewshed.json",
+      "trackKmOffset": 0,
+      "views": [
+        {
+          "id": "first-bridge",
+          "name": "First Tadami River Bridge near Aizu-Nishikata",
+          "targets": [
+            "tadami-valley"
+          ],
+          "tags": [
+            "countryside",
+            "mountain"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Aizu-Nishikata",
+          "to": "Aizu-Miyashita",
+          "kmFrom": 43.8,
+          "kmTo": 44.3,
+          "sectionKm": 0.5,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "Year-round; autumn colour is usually late October to mid-November",
+          "seat": null,
+          "basis": "terrain model; JR East identifies the First Tadami River Bridge as a highlight but does not publish a seat-side recommendation",
+          "seenKm": [
+            43.8,
+            44,
+            44.07
+          ]
+        },
+        {
+          "id": "miyashita-valley",
+          "name": "Tadami River valley after Aizu-Miyashita",
+          "targets": [
+            "tadami-valley"
+          ],
+          "tags": [
+            "countryside",
+            "mountain"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Aizu-Miyashita",
+          "to": "Hayato",
+          "kmFrom": 44.8,
+          "kmTo": 47.4,
+          "sectionKm": 2.6,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "Year-round; fresh green in spring and snow scenery in winter",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            44.85,
+            45.05,
+            45.25,
+            46.3,
+            46.5,
+            46.7,
+            46.9,
+            47.1,
+            47.3
+          ]
+        },
+        {
+          "id": "hayato-valley",
+          "name": "Tadami River valley around Hayato",
+          "targets": [
+            "tadami-valley"
+          ],
+          "tags": [
+            "countryside",
+            "mountain"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Hayato",
+          "to": "Aizu-Mizunuma",
+          "kmFrom": 49.8,
+          "kmTo": 53.9,
+          "sectionKm": 4.1,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "Year-round; visibility varies with mist, rain and snow",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            49.82,
+            50.12,
+            52.97,
+            53.17,
+            53.65,
+            53.85,
+            53.9
+          ]
+        },
+        {
+          "id": "mizunuma-valley",
+          "name": "Tadami River valley after Aizu-Mizunuma",
+          "targets": [
+            "tadami-valley"
+          ],
+          "tags": [
+            "countryside",
+            "mountain"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Aizu-Mizunuma",
+          "to": "Aizu-Nakagawa",
+          "kmFrom": 56.3,
+          "kmTo": 59.1,
+          "sectionKm": 2.8,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "Year-round; autumn colour is usually late October to mid-November",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            56.35,
+            56.57,
+            56.77,
+            56.97,
+            58.62,
+            59.04,
+            59.09
+          ]
+        },
+        {
+          "id": "yokota-valley",
+          "name": "Tadami River valley near Aizu-Yokota",
+          "targets": [
+            "tadami-valley"
+          ],
+          "tags": [
+            "countryside",
+            "mountain"
+          ],
+          "side": {
+            "forward": "right"
+          },
+          "from": "Aizu-Kosugawa",
+          "to": "Aizu-Yokota",
+          "kmFrom": 69.6,
+          "kmTo": 71.9,
+          "sectionKm": 2.3,
+          "nearestKm": null,
+          "maxAngle": null,
+          "season": "Year-round; visibility varies with weather",
+          "seat": null,
+          "basis": "terrain model",
+          "seenKm": [
+            69.62,
+            69.92,
+            70.12,
+            70.44,
+            70.72,
+            70.94,
+            71.14,
+            71.39,
+            71.59,
+            71.89
+          ]
+        }
+      ],
+      "directions": {
+        "forward": [
+          "Aizu-Wakamatsu",
+          "Koide"
+        ],
+        "backward": [
+          "Koide",
+          "Aizu-Wakamatsu"
         ]
       },
+      "verification": "The side changes come from a terrain model of the valley drop beside the track (GSI elevation, OSM track, 10 m tiles). JR East confirms that the railway follows the Tadami River and crosses eight named Tadami River bridges between Aizu-Nishikata and Aizu-Gamo, but does not publish a seat-side recommendation. The OSM route is 135.11 km against JR East's official 135.2 km operating distance; no seat letter is claimed.",
+      "timelineStations": [
+        {
+          "name": "Aizu-Wakamatsu",
+          "ja": "会津若松",
+          "km": 0
+        },
+        {
+          "name": "Nanukamachi",
+          "ja": "七日町",
+          "km": 1.21
+        },
+        {
+          "name": "Nishi-Wakamatsu",
+          "ja": "西若松",
+          "km": 3.11
+        },
+        {
+          "name": "Aizu-Hongo",
+          "ja": "会津本郷",
+          "km": 6.56
+        },
+        {
+          "name": "Aizu-Takada",
+          "ja": "会津高田",
+          "km": 11.27
+        },
+        {
+          "name": "Negishi",
+          "ja": "根岸",
+          "km": 15.11
+        },
+        {
+          "name": "Niitsuru",
+          "ja": "新鶴",
+          "km": 16.8
+        },
+        {
+          "name": "Wakamiya",
+          "ja": "若宮",
+          "km": 18.83
+        },
+        {
+          "name": "Aizu-Bange",
+          "ja": "会津坂下",
+          "km": 21.68
+        },
+        {
+          "name": "Todera",
+          "ja": "塔寺",
+          "km": 25.91
+        },
+        {
+          "name": "Aizu-Sakamoto",
+          "ja": "会津坂本",
+          "km": 29.62
+        },
+        {
+          "name": "Aizu-Yanaizu",
+          "ja": "会津柳津",
+          "km": 33.17
+        },
+        {
+          "name": "Godo",
+          "ja": "郷戸",
+          "km": 36.84
+        },
+        {
+          "name": "Takiya",
+          "ja": "滝谷",
+          "km": 39.63
+        },
+        {
+          "name": "Aizu-Hinohara",
+          "ja": "会津桧原",
+          "km": 41.46
+        },
+        {
+          "name": "Aizu-Nishikata",
+          "ja": "会津西方",
+          "km": 43.63
+        },
+        {
+          "name": "Aizu-Miyashita",
+          "ja": "会津宮下",
+          "km": 45.31
+        },
+        {
+          "name": "Hayato",
+          "ja": "早戸",
+          "km": 51.28
+        },
+        {
+          "name": "Aizu-Mizunuma",
+          "ja": "会津水沼",
+          "km": 55.09
+        },
+        {
+          "name": "Aizu-Nakagawa",
+          "ja": "会津中川",
+          "km": 58.26
+        },
+        {
+          "name": "Aizu-Kawaguchi",
+          "ja": "会津川口",
+          "km": 60.85
+        },
+        {
+          "name": "Honna",
+          "ja": "本名",
+          "km": 63.55
+        },
+        {
+          "name": "Aizu-Kosugawa",
+          "ja": "会津越川",
+          "km": 70.05
+        },
+        {
+          "name": "Aizu-Yokota",
+          "ja": "会津横田",
+          "km": 73.2
+        },
+        {
+          "name": "Aizu-Oshio",
+          "ja": "会津大塩",
+          "km": 75.36
+        },
+        {
+          "name": "Aizu-Shiozawa",
+          "ja": "会津塩沢",
+          "km": 80.81
+        },
+        {
+          "name": "Aizu-Gamo",
+          "ja": "会津蒲生",
+          "km": 83.86
+        },
+        {
+          "name": "Tadami",
+          "ja": "只見",
+          "km": 88.27
+        },
+        {
+          "name": "Oshirakawa",
+          "ja": "大白川",
+          "km": 109.22
+        },
+        {
+          "name": "Irihirose",
+          "ja": "入広瀬",
+          "km": 115.52
+        },
+        {
+          "name": "Kamijo",
+          "ja": "上条",
+          "km": 118.68
+        },
+        {
+          "name": "Echigo-Suhara",
+          "ja": "越後須原",
+          "km": 123.05
+        },
+        {
+          "name": "Uonuma-Tanaka",
+          "ja": "魚沼田中",
+          "km": 126.99
+        },
+        {
+          "name": "Echigo-Hirose",
+          "ja": "越後広瀬",
+          "km": 129.42
+        },
+        {
+          "name": "Yabukami",
+          "ja": "藪神",
+          "km": 131.96
+        },
+        {
+          "name": "Koide",
+          "ja": "小出",
+          "km": 135.11
+        }
+      ],
+      "notes": [
+        "Only a few trains run through between Aizu-Wakamatsu and Koide each day, with long gaps and lengthy stops on some services. Check JR East's timetable for your exact date before relying on a connection.",
+        "JR East describes eight Tadami River bridges from the First Bridge near Aizu-Nishikata to the Eighth near Aizu-Gamo. The river changes sides as the train crosses the valley, so there is no single best side for the whole journey.",
+        "Autumn colour is usually from late October to mid-November, but timing varies by year. Mist, rain and snow can change or hide the view; this page does not promise a particular weather condition or seat letter."
+      ],
+      "timing": {
+        "kind": "timetable",
+        "source": "JR East official November 2026 train timetables, checked November 18, 2026: local 427D from Aizu-Wakamatsu and local 426D from Koide. The official train pages showed service calendars through February 2027; check again for your travel date.",
+        "sourceUrl": "https://timetables.jreast.co.jp/en/2611/train/085/087391.html",
+        "trains": [
+          {
+            "id": "local",
+            "label": "Local",
+            "note": "through Tadami Line local trains; long waits occur at Aizu-Kawaguchi and other stations",
+            "forward": {
+              "train": "Local 427D",
+              "stops": [
+                [
+                  "Aizu-Wakamatsu",
+                  null,
+                  "13:05"
+                ],
+                [
+                  "Nanukamachi",
+                  "13:08",
+                  "13:08"
+                ],
+                [
+                  "Nishi-Wakamatsu",
+                  "13:11",
+                  "13:12"
+                ],
+                [
+                  "Aizu-Hongo",
+                  "13:17",
+                  "13:18"
+                ],
+                [
+                  "Aizu-Takada",
+                  "13:23",
+                  "13:24"
+                ],
+                [
+                  "Negishi",
+                  "13:29",
+                  "13:29"
+                ],
+                [
+                  "Niitsuru",
+                  "13:32",
+                  "13:32"
+                ],
+                [
+                  "Wakamiya",
+                  "13:35",
+                  "13:36"
+                ],
+                [
+                  "Aizu-Bange",
+                  "13:40",
+                  "13:47"
+                ],
+                [
+                  "Todera",
+                  "13:54",
+                  "13:54"
+                ],
+                [
+                  "Aizu-Sakamoto",
+                  "14:00",
+                  "14:00"
+                ],
+                [
+                  "Aizu-Yanaizu",
+                  "14:05",
+                  "14:05"
+                ],
+                [
+                  "Godo",
+                  "14:12",
+                  "14:13"
+                ],
+                [
+                  "Takiya",
+                  "14:18",
+                  "14:18"
+                ],
+                [
+                  "Aizu-Hinohara",
+                  "14:21",
+                  "14:21"
+                ],
+                [
+                  "Aizu-Nishikata",
+                  "14:25",
+                  "14:25"
+                ],
+                [
+                  "Aizu-Miyashita",
+                  "14:29",
+                  "14:30"
+                ],
+                [
+                  "Hayato",
+                  "14:38",
+                  "14:39"
+                ],
+                [
+                  "Aizu-Mizunuma",
+                  "14:46",
+                  "14:46"
+                ],
+                [
+                  "Aizu-Nakagawa",
+                  "14:53",
+                  "14:53"
+                ],
+                [
+                  "Aizu-Kawaguchi",
+                  "14:58",
+                  "15:29"
+                ],
+                [
+                  "Honna",
+                  "15:34",
+                  "15:35"
+                ],
+                [
+                  "Aizu-Kosugawa",
+                  "15:45",
+                  "15:45"
+                ],
+                [
+                  "Aizu-Yokota",
+                  "15:52",
+                  "15:52"
+                ],
+                [
+                  "Aizu-Oshio",
+                  "15:55",
+                  "15:56"
+                ],
+                [
+                  "Aizu-Shiozawa",
+                  "16:04",
+                  "16:04"
+                ],
+                [
+                  "Aizu-Gamo",
+                  "16:10",
+                  "16:11"
+                ],
+                [
+                  "Tadami",
+                  "16:21",
+                  "16:31"
+                ],
+                [
+                  "Oshirakawa",
+                  "17:00",
+                  "17:04"
+                ],
+                [
+                  "Irihirose",
+                  "17:15",
+                  "17:15"
+                ],
+                [
+                  "Kamijo",
+                  "17:20",
+                  "17:20"
+                ],
+                [
+                  "Echigo-Suhara",
+                  "17:26",
+                  "17:26"
+                ],
+                [
+                  "Uonuma-Tanaka",
+                  "17:32",
+                  "17:32"
+                ],
+                [
+                  "Echigo-Hirose",
+                  "17:36",
+                  "17:36"
+                ],
+                [
+                  "Yabukami",
+                  "17:40",
+                  "17:41"
+                ],
+                [
+                  "Koide",
+                  "17:47",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "Local 426D",
+              "stops": [
+                [
+                  "Koide",
+                  null,
+                  "05:36"
+                ],
+                [
+                  "Yabukami",
+                  "05:42",
+                  "05:42"
+                ],
+                [
+                  "Echigo-Hirose",
+                  "05:46",
+                  "05:47"
+                ],
+                [
+                  "Uonuma-Tanaka",
+                  "05:51",
+                  "05:51"
+                ],
+                [
+                  "Echigo-Suhara",
+                  "05:57",
+                  "05:58"
+                ],
+                [
+                  "Kamijo",
+                  "06:04",
+                  "06:04"
+                ],
+                [
+                  "Irihirose",
+                  "06:09",
+                  "06:10"
+                ],
+                [
+                  "Oshirakawa",
+                  "06:20",
+                  "06:32"
+                ],
+                [
+                  "Tadami",
+                  "07:01",
+                  "07:11"
+                ],
+                [
+                  "Aizu-Gamo",
+                  "07:20",
+                  "07:20"
+                ],
+                [
+                  "Aizu-Shiozawa",
+                  "07:26",
+                  "07:27"
+                ],
+                [
+                  "Aizu-Oshio",
+                  "07:34",
+                  "07:35"
+                ],
+                [
+                  "Aizu-Yokota",
+                  "07:38",
+                  "07:38"
+                ],
+                [
+                  "Aizu-Kosugawa",
+                  "07:44",
+                  "07:45"
+                ],
+                [
+                  "Honna",
+                  "07:55",
+                  "07:56"
+                ],
+                [
+                  "Aizu-Kawaguchi",
+                  "08:02",
+                  "08:41"
+                ],
+                [
+                  "Aizu-Nakagawa",
+                  "08:46",
+                  "08:46"
+                ],
+                [
+                  "Aizu-Mizunuma",
+                  "08:52",
+                  "08:53"
+                ],
+                [
+                  "Hayato",
+                  "09:00",
+                  "09:00"
+                ],
+                [
+                  "Aizu-Miyashita",
+                  "09:10",
+                  "09:15"
+                ],
+                [
+                  "Aizu-Nishikata",
+                  "09:17",
+                  "09:18"
+                ],
+                [
+                  "Aizu-Hinohara",
+                  "09:21",
+                  "09:22"
+                ],
+                [
+                  "Takiya",
+                  "09:25",
+                  "09:25"
+                ],
+                [
+                  "Godo",
+                  "09:30",
+                  "09:31"
+                ],
+                [
+                  "Aizu-Yanaizu",
+                  "09:38",
+                  "09:38"
+                ],
+                [
+                  "Aizu-Sakamoto",
+                  "09:42",
+                  "09:43"
+                ],
+                [
+                  "Todera",
+                  "09:48",
+                  "09:49"
+                ],
+                [
+                  "Aizu-Bange",
+                  "09:55",
+                  "09:57"
+                ],
+                [
+                  "Wakamiya",
+                  "10:01",
+                  "10:01"
+                ],
+                [
+                  "Niitsuru",
+                  "10:04",
+                  "10:05"
+                ],
+                [
+                  "Negishi",
+                  "10:07",
+                  "10:08"
+                ],
+                [
+                  "Aizu-Takada",
+                  "10:12",
+                  "10:13"
+                ],
+                [
+                  "Aizu-Hongo",
+                  "10:18",
+                  "10:19"
+                ],
+                [
+                  "Nishi-Wakamatsu",
+                  "10:24",
+                  "10:26"
+                ],
+                [
+                  "Nanukamachi",
+                  "10:29",
+                  "10:29"
+                ],
+                [
+                  "Aizu-Wakamatsu",
+                  "10:32",
+                  null
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "page": {
+        "title": "Tadami Line: Which Side for the River and Bridges?",
+        "description": "The Tadami River changes sides between Aizu-Wakamatsu and Koide. Follow the bridge-by-bridge timeline for left and right views, with a terrain-model map and current JR East through-train times.",
+        "h1": "Tadami Line: which side for the river and bridges?",
+        "labelStations": [
+          "Aizu-Wakamatsu",
+          "Aizu-Yanaizu",
+          "Aizu-Nishikata",
+          "Aizu-Miyashita",
+          "Hayato",
+          "Aizu-Mizunuma",
+          "Aizu-Kawaguchi",
+          "Tadami",
+          "Koide"
+        ]
+      },
+      "ticketGuide": {
+        "verdict": "For the Tadami Line, buy a normal JR ticket or use a valid JR Pass. Service is infrequent, so choose the train first and then arrange the ticket.",
+        "options": [
+          {
+            "who": "Taking one Tadami Line journey",
+            "buy": "A normal JR ticket"
+          },
+          {
+            "who": "Travelling more widely on JR trains",
+            "buy": "Japan Rail Pass"
+          }
+        ],
+        "sources": [
+          {
+            "label": "JR East Tadami Line scenic guide",
+            "url": "https://media.jreast.co.jp/articles/5227"
+          },
+          {
+            "label": "Japan Rail Pass route coverage",
+            "url": "https://japanrailpass.net/en/about_jrp/route/"
+          }
+        ],
+        "links": [
+          {
+            "kind": "affiliate",
+            "linkId": "jrPass",
+            "label": "Japan Rail Pass",
+            "product": "jr_pass"
+          }
+        ],
+        "more": {
+          "href": "/jr-pass-vs-single-ticket",
+          "label": "JR Pass or single tickets: the full comparison"
+        }
+      },
+      "faq": [
+        {
+          "q": "Which side is best on the Tadami Line?",
+          "a": "There is no single best side for the whole trip. Towards Koide, the First Tadami River Bridge is on the left, the valley after Aizu-Miyashita is on the right, it returns to the left around Hayato, then appears on the right after Aizu-Mizunuma. The sides reverse towards Aizu-Wakamatsu."
+        },
+        {
+          "q": "Can I ride straight from Aizu-Wakamatsu to Koide?",
+          "a": "Yes, but only a few through trains run each day and some have long station waits. This page uses local 427D towards Koide and local 426D towards Aizu-Wakamatsu from JR East's November 2026 timetable. Check the official timetable for your date."
+        },
+        {
+          "q": "When are the autumn leaves on the Tadami Line?",
+          "a": "JR East gives late October to mid-November as the usual period. It varies by year, and weather can hide the view, so treat this as a guide rather than a guarantee."
+        },
+        {
+          "q": "Is there a recommended seat letter?",
+          "a": "No verified seat letter is given here. The river changes sides, and JR East's scenic information does not assign a seat letter. Use the section-by-section left/right timeline instead."
+        },
+        {
+          "q": "Does the JR Pass cover the Tadami Line?",
+          "a": "Yes. The Tadami Line is operated by JR East and is within the JR network covered by the nationwide Japan Rail Pass, subject to the pass's normal validity conditions."
+        }
+      ],
+      "chip": {
+        "emoji": "🌉",
+        "label": "Tadami bridges"
+      },
+      "teaser": "Aizu-Wakamatsu → Koide · the river changes sides across the bridges",
       "near": [
         "Aizu-Wakamatsu",
+        "Aizu-Kawaguchi",
+        "Tadami",
         "Koide"
       ],
       "tags": [
-        "countryside"
+        "countryside",
+        "mountain"
       ],
       "image": {
         "src": "/images/scenic/scenic-tadami-river-wide.webp",

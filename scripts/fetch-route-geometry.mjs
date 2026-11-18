@@ -38,27 +38,51 @@ const query = chain
   ? `[out:json][timeout:180];way["railway"~"^(rail|light_rail|narrow_gauge|monorail|tram)$"]["name"~"${route.osm.name}"](${s},${w},${n},${e});out body;>;out skel qt;`
   : `[out:json][timeout:180];way["railway"~"^(rail|light_rail|narrow_gauge|monorail|tram)$"]["name"~"${route.osm.name}"](${s},${w},${n},${e});out geom;`;
 
-const ENDPOINTS = [
-  "https://overpass-api.de/api/interpreter",
-  "https://overpass.kumi.systems/api/interpreter",
-  "https://overpass.private.coffee/api/interpreter",
-];
+const relationUrl = route.osm.relationId
+  ? `https://api.openstreetmap.org/api/0.6/relation/${route.osm.relationId}/full.json`
+  : null;
+const ENDPOINTS = relationUrl
+  ? [relationUrl]
+  : [
+      "https://overpass-api.de/api/interpreter",
+      "https://overpass.kumi.systems/api/interpreter",
+      "https://overpass.private.coffee/api/interpreter",
+    ];
 
 // The raw answer is cached (.cache is gitignored), so a rerun does not need Overpass.
-const cacheFile = `.cache/overpass-${routeId}-${chain ? "chain" : "geom"}.json`;
+const extraWaySuffix = route.osm.extraWayIds?.length ? `-ways-${route.osm.extraWayIds.join("-")}` : "";
+const cacheFile = `.cache/overpass-${routeId}-${chain ? "chain" : "geom"}${route.osm.relationId ? `-relation-${route.osm.relationId}` : ""}${extraWaySuffix}.json`;
 let data = existsSync(cacheFile) && !process.env.REFETCH ? JSON.parse(readFileSync(cacheFile, "utf8")) : null;
 for (const url of data ? [] : ENDPOINTS) {
   try {
     const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded", "User-Agent": "fujiseat-route-build/1.0" },
-      body: `data=${encodeURIComponent(query)}`,
+      method: relationUrl ? "GET" : "POST",
+      headers: relationUrl
+        ? { "User-Agent": "fujiseat-route-build/1.0" }
+        : { "Content-Type": "application/x-www-form-urlencoded", "User-Agent": "fujiseat-route-build/1.0" },
+      body: relationUrl ? undefined : `data=${encodeURIComponent(query)}`,
     });
     const text = await res.text();
     if (text.startsWith("{")) {
       data = JSON.parse(text);
+      if (relationUrl && route.osm.extraWayIds?.length) {
+        const extras = await Promise.all(
+          route.osm.extraWayIds.map(async (id) => {
+            const extraRes = await fetch(`https://api.openstreetmap.org/api/0.6/way/${id}/full.json`, {
+              headers: { "User-Agent": "fujiseat-route-build/1.0" },
+            });
+            if (!extraRes.ok) throw new Error(`OSM way ${id}: HTTP ${extraRes.status}`);
+            return extraRes.json();
+          }),
+        );
+        const merged = new Map(data.elements.map((element) => [`${element.type}:${element.id}`, element]));
+        for (const extra of extras) {
+          for (const element of extra.elements) merged.set(`${element.type}:${element.id}`, element);
+        }
+        data.elements = [...merged.values()];
+      }
       mkdirSync(".cache", { recursive: true });
-      writeFileSync(cacheFile, text);
+      writeFileSync(cacheFile, JSON.stringify(data));
       break;
     }
     console.warn(`${url}: ${text.slice(0, 60).replace(/\s+/g, " ")}`);
@@ -275,7 +299,13 @@ function writeChained(osm) {
   const stops = [nearest(route.stations[0])];
   let ids = [stops[0]];
   for (let i = 1; i < route.stations.length; i++) {
-    const leg = path(stops[i - 1], near(route.stations[i]));
+    let leg;
+    try {
+      leg = path(stops[i - 1], near(route.stations[i]));
+    } catch (error) {
+      error.message += ` (${route.stations[i - 1].name} → ${route.stations[i].name})`;
+      throw error;
+    }
     stops.push(leg[leg.length - 1]);
     ids = ids.concat(leg.slice(1));
   }
@@ -305,7 +335,7 @@ function writeChained(osm) {
   writeFileSync(
     `data/routes/${routeId}.json`,
     JSON.stringify({
-      _source: `Track geometry: OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright). Ways tagged railway, name ~ ${route.osm.name}, fetched ${new Date().toISOString().slice(0, 10)} via Overpass, followed along the track graph station to station and resampled every ${STEP} m. Draft until checked by eye.`,
+      _source: `Track geometry: OpenStreetMap contributors, ODbL 1.0 (https://www.openstreetmap.org/copyright). ${route.osm.relationId ? `OSM route relation ${route.osm.relationId}${route.osm.extraWayIds?.length ? ` plus connecting ways ${route.osm.extraWayIds.join(", ")}` : ""}` : `Ways tagged railway, name ~ ${route.osm.name}`}, fetched ${new Date().toISOString().slice(0, 10)} via ${route.osm.relationId ? "the OSM API" : "Overpass"}, followed along the track graph station to station and resampled every ${STEP} m. Draft until checked by eye.`,
       routeId,
       stationKm,
       line,

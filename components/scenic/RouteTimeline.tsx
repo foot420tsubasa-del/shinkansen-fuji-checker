@@ -33,6 +33,7 @@ const VIEWSHED_LOADERS: Record<string, () => Promise<{ points: MapPoint[] }>> = 
   "gono-coast": () => import("@/data/routes/gono-coast-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
   "furano-biei-flowers": () => import("@/data/routes/furano-biei-flowers-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
   "senmo-drift-ice": () => import("@/data/routes/senmo-drift-ice-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
+  "tadami-river": () => import("@/data/routes/tadami-river-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
   "kurobe-gorge": () => import("@/data/routes/kurobe-gorge-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
   "joetsu-snow": () => import("@/data/routes/joetsu-snow-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
   "tohoku-iwate": () => import("@/data/routes/tohoku-iwate-viewshed.json").then((m) => (m.default ?? m) as unknown as { points: MapPoint[] }),
