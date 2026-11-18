@@ -3,7 +3,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { HotelCTA } from "@/components/affiliate/HotelCTA";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
-import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getAreaHotelChoice, getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 
 type AreaCardProps = {
@@ -52,14 +52,13 @@ export function AreaCard({
 }: AreaCardProps) {
   const t = useTranslations("stayShared.areaCard");
   const hotel = hotelKey ? getHotelLink(hotelKey) : null;
-  const hotelConfig = hotelKey ? getTripHotelConfig(hotelKey) : null;
   const ctaProvider = hotel?.provider === "trip" || hotel?.provider === "klook" ? hotel.provider : provider;
   const hotelActionLabel =
     hotelKey === "tokyoStation"
       ? t("compareTokyoStation")
       : t("compareAreaHotels", { area: hotel?.areaName ?? name });
-  const tripHref = hotel?.provider === "trip" ? hotel.href : hotelConfig?.tripUrl ?? (provider === "trip" ? hotelLink : undefined);
-  const tripTrackingHref = hotel?.provider === "trip" ? hotel.trackingHref : hotelConfig?.tripUrl ?? (provider === "trip" ? hotelLink : undefined);
+  // Area hotels stay on Klook (2026-11-18): this used to send the card to a Trip.com area search.
+  const areaChoice = hotelKey ? getAreaHotelChoice(hotelKey) : null;
   const bookingAreaId = hotelKey ? bookingAreaIdByHotelAreaKey[hotelKey] : undefined;
   const bookingLinks = bookingAreaId
     ? getHotelProviderLinks({ areaId: bookingAreaId, locale, placement: "tokyo_first_time_card" })
@@ -109,8 +108,8 @@ export function AreaCard({
 
       {showHotelCta && useProviderChoice ? (
         <>
-          {/* Spec Phase 3: one primary provider per area card (Trip.com where a
-              verified link exists, else Booking.com) — never side-by-side. */}
+          {/* One primary provider per area card: the area hotel link (Klook since
+              2026-11-18), else Booking.com — never side-by-side. */}
           <ProviderChoiceCTA
             actionLabel={hotelActionLabel}
             pagePath={pagePath}
@@ -118,14 +117,14 @@ export function AreaCard({
             area={`${hotel?.city ?? city}: ${hotel?.areaName ?? name}`}
             className="mt-4"
             providers={providerChoices(
-              tripHref
+              areaChoice
                 ? {
                     label: `Check ${name} hotels`,
-                    href: tripHref,
-                    trackingHref: tripTrackingHref,
-                    provider: "trip",
+                    href: areaChoice.href,
+                    trackingHref: areaChoice.trackingHref,
+                    provider: areaChoice.provider,
                     product: "hotel",
-                    linkId: hotelKey ? `hotelArea.${hotelKey}.trip` : undefined,
+                    linkId: areaChoice.linkId,
                     placement: "comparison_area_card",
                     variant: "primary",
                     category: "hotel",

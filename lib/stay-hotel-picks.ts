@@ -1,5 +1,6 @@
 import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelPickLinkConfig } from "@/lib/hotel-pick-links";
+import { getBookingHotelLink } from "@/lib/booking-hotels";
 import stayHotelPickData from "@/data/stay-hotel-picks.json";
 
 export type ManagedStayHotelPick = {
@@ -23,11 +24,11 @@ export type ResolvedStayHotelPick = {
   link: string;
   hotelKey?: HotelAreaKey;
   tag?: string;
-  provider?: "trip" | "klook";
+  provider?: "trip" | "klook" | "booking_travelpayouts";
   trackingHref?: string;
   label?: string;
   providerLinks?: Array<{
-    provider: "trip";
+    provider: "booking_travelpayouts";
     href: string;
     trackingHref?: string;
     label: string;
@@ -46,25 +47,23 @@ export function getManagedStayHotelPicks(slug: string, fallback: ResolvedStayHot
   return picks.map((pick) => {
     const shared = getHotelPickLinkConfig(pick.id);
     const hotelKey = shared?.hotelKey ?? pick.hotelKey;
-    const tripUrl = shared?.tripUrl?.trim() || pick.tripUrl?.trim();
+    // Hotels go to their Booking.com page (2026-11-18); see lib/booking-hotels.ts.
+    const booking = getBookingHotelLink(pick.id);
     const areaHotel = getHotelLink(hotelKey);
     const providerLinks: StayHotelPickProviderLink[] = [];
-    if (tripUrl) {
+    if (booking) {
       providerLinks.push({
-        provider: "trip",
-        href: tripUrl,
-        trackingHref: tripUrl,
-        label: "Trip.com",
-        linkId: `hotelPick.${pick.id}.trip`,
+        provider: "booking_travelpayouts",
+        href: booking.href,
+        trackingHref: booking.href,
+        label: "Booking.com",
+        linkId: booking.linkId,
       });
     }
-    const specificUrl =
-      tripUrl
-        ? tripUrl
-        : undefined;
-    const specificProvider = specificUrl ? "trip" : undefined;
-    const providerLabel = "Trip.com";
-    const specificLabel = shared?.label || pick.label || `Check ${pick.name} on ${providerLabel}`;
+    const specificUrl = booking?.href;
+    const specificProvider = specificUrl ? ("booking_travelpayouts" as const) : undefined;
+    const providerLabel = "Booking.com";
+    const specificLabel = `Check ${shared?.name ?? pick.name} on ${providerLabel}`;
     return {
       id: pick.id,
       name: shared?.name ?? pick.name,
@@ -75,7 +74,7 @@ export function getManagedStayHotelPicks(slug: string, fallback: ResolvedStayHot
       link: specificUrl || areaHotel.href,
       trackingHref: specificUrl || areaHotel.trackingHref,
       provider: specificProvider ?? (areaHotel.provider === "trip" || areaHotel.provider === "klook" ? areaHotel.provider : undefined),
-      label: specificUrl ? specificLabel.replace("Trip.com", providerLabel) : areaHotel.label,
+      label: specificUrl ? specificLabel : areaHotel.label,
       providerLinks: providerLinks.length ? providerLinks : undefined,
     };
   });

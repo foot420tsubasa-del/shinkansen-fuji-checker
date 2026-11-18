@@ -17,7 +17,7 @@ import { getAirportTransferRouteImage } from "@/lib/airport-transfer-images";
 import { AirportHeroCard, AirportNextSteps, AirportRouteCompareCard, ArrivalSetupCard } from "@/components/airport/AirportTransferUi";
 import { ESIM_URL, getAffiliateConfig, getReadyAffUrl } from "@/src/affiliateLinks";
 import { getAirportRouteUiCopy, localizedLateArrivalNote, localizedProTip, localizedRouteDescription, localizedRouteTitle, localizeTripPick, routeSpecific } from "@/lib/content/airport-transfer-i18n";
-import { getHotelLink, getTripHotelConfig, type HotelAreaKey } from "@/lib/hotel-links";
+import { getAreaHotelChoice, type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 
 type Props = {
@@ -56,10 +56,8 @@ const bookingAreaIdByHotelAreaKey: Partial<Record<HotelAreaKey, string>> = {
 };
 
 function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"], locale: string) {
-  const hotel = getHotelLink(areaKey);
-  const config = getTripHotelConfig(areaKey);
-  const tripHref = hotel.provider === "trip" ? hotel.href : config.tripUrl;
-  const tripTrackingHref = hotel.provider === "trip" ? hotel.trackingHref : config.tripUrl;
+  // Area hotels stay on Klook; this used to add a Trip.com area link.
+  const area = getAreaHotelChoice(areaKey);
   const bookingAreaId = bookingAreaIdByHotelAreaKey[areaKey];
   const bookingLinks = bookingAreaId
     ? getHotelProviderLinks({ areaId: bookingAreaId, locale, placement: "airport_page_first_night_cta" }).map((link) => ({
@@ -79,14 +77,14 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
 
   return providerChoices(
     ...bookingLinks,
-    tripHref
+    area
       ? {
-          label: "Trip.com",
-          href: tripHref,
-          trackingHref: tripTrackingHref,
-          provider: "trip",
+          label: area.label,
+          href: area.href,
+          trackingHref: area.trackingHref,
+          provider: area.provider,
           product: "hotel",
-          linkId: `hotelArea.${areaKey}.trip`,
+          linkId: area.linkId,
           placement,
           variant: "primary",
           category: "hotel",

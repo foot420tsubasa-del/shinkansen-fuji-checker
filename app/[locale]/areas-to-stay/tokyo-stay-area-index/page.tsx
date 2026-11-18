@@ -15,7 +15,6 @@ import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
-import { ProviderButton, type ProviderId } from "@/components/ui/ProviderButton";
 import { HotelAreaProviderRow } from "@/components/affiliate/HotelAreaProviderRow";
 import { getAlternates } from "@/i18n/hreflang";
 import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
@@ -23,8 +22,9 @@ import signalsJson from "@/data/generated/tokyo-stay-area-signals.json";
 import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import sourceStatusJson from "@/data/generated/tokyo-stay-area-source-status.json";
 import { tokyoStayAreaSourceRegistry } from "@/data/stay-area/source-registry";
-import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
+import { type HotelAreaKey } from "@/lib/hotel-links";
 import { getHotelPickLinkConfig } from "@/lib/hotel-pick-links";
+import { getBookingHotelLink } from "@/lib/booking-hotels";
 import { getHotelProviderLinks, type HotelAffiliatePlacement } from "@/lib/hotel-affiliate-links";
 import { getTranslations } from "next-intl/server";
 import type {
@@ -147,39 +147,11 @@ function hotelSearchForArea(area: StayAreaBase, locale: string, placement: Hotel
   // Booking.com for all 36 areas, keyed by the area's OWN id.
   const bookingLinks = getHotelProviderLinks({ areaId: area.id, locale, placement });
 
-  // Trip.com only for the six areas that have their own verified short-link.
-  // No parent/nearby Trip URL is ever borrowed for the other 30 areas.
+  // Hotels go to Booking.com only (2026-11-18). The Trip.com-labelled area
+  // link that used to sit here pointed at Klook; it is gone.
   const tripHotelKey = realTripHotelKeyByAreaId[area.id];
-  let tripLink:
-    | {
-        provider: ProviderId;
-        href: string;
-        trackingHref: string;
-        label: string;
-        linkId: string;
-        subId?: string;
-        priority: number;
-        placement: Parameters<typeof ProviderButton>[0]["placement"];
-      }
-    | null = null;
-  if (tripHotelKey) {
-    const hotel = getHotelLink(tripHotelKey);
-    const tripHref = hotel.href;
-    const tripTrackingHref = hotel.trackingHref;
-    if (tripHref && tripHref !== "#") {
-      tripLink = {
-        provider: "trip" as ProviderId,
-        href: tripHref,
-        trackingHref: tripTrackingHref,
-        label: "Search this area on Trip.com",
-        linkId: `hotelArea.${tripHotelKey}.trip`,
-        priority: 20,
-        placement,
-      };
-    }
-  }
 
-  const providers = [...bookingLinks, ...(tripLink ? [tripLink] : [])].sort(
+  const providers = [...bookingLinks].sort(
     (a, b) => a.priority - b.priority || a.linkId.localeCompare(b.linkId),
   );
 
@@ -380,8 +352,9 @@ function namedHotelsForFinderArea(areaId: string): FinderArea["namedHotels"] {
     .map((id) => {
       const config = getHotelPickLinkConfig(id);
       const reason = NAMED_HOTEL_REASONS[id];
-      if (!config?.tripUrl?.trim() || !reason) return null;
-      return { name: config.name, href: config.tripUrl, linkId: `hotelPick.${id}`, reason };
+      const booking = getBookingHotelLink(id);
+      if (!config || !booking || !reason) return null;
+      return { name: config.name, href: booking.href, linkId: booking.linkId, reason };
     })
     .filter((entry): entry is FinderArea["namedHotels"][number] => entry !== null)
     .slice(0, 3);
@@ -851,7 +824,7 @@ function SelectedAreaHotelSearch({
           provider: link.provider,
           href: link.href,
           trackingHref: link.trackingHref,
-          label: link.provider === "trip" ? "Trip.com" : "Booking.com",
+          label: "Booking.com",
           linkId: link.linkId,
           subId: link.subId,
           placement: "finder_result_primary",

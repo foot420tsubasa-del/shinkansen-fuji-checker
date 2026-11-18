@@ -35,11 +35,8 @@ const GENRES = [
 ];
 const GENRE_ORDER = [
   ...GENRES.map(([g]) => g),
+  "ホテル：個別ホテル（Booking.com）",
   "ホテル：Booking.com エリア検索",
-  "ホテル：エリア別（Trip.com）",
-  "ホテル：個別ホテル（Trip.com）",
-  "ホテル：ローカルおすすめ宿",
-  "ホテル：記事内のおすすめ",
   "その他",
 ];
 /** Japanese names for the sheet only (display; not read back on import). */
@@ -225,69 +222,24 @@ function buildRows() {
       "データ元（変更しない）": "booking-hotel-destinations",
     });
   }
-  for (const [key, v] of Object.entries(load("hotel-links"))) {
-    for (const field of ["tripUrl"]) {
-      if (!v[field]) continue;
-      push({
-        ジャンル: "ホテル：エリア別（Trip.com）",
-        "名前（何のリンクか）": `${v.label || v.areaName || key}（${field === "tripUrl" ? "Trip.com" : "Agoda"}）`,
-        提供元: providerOfUrl(v[field]),
-        アフィリエイトURL: v[field],
-        "商品・行き先（参考）": [v.areaName, v.city].filter(Boolean).join(" / "),
-        使っている場所: "エリア・ホテルのページ",
-        状態: "公開中",
-        "ID（変更しない）": `${key}#${field}`,
-        "データ元（変更しない）": "hotel-links",
-      });
-    }
-  }
-  for (const [key, v] of Object.entries(load("hotel-pick-links"))) {
-    for (const field of ["tripUrl"]) {
-      if (!v[field]) continue;
-      push({
-        ジャンル: "ホテル：個別ホテル（Trip.com）",
-        "名前（何のリンクか）": v.name || v.label || key,
-        提供元: providerOfUrl(v[field]),
-        アフィリエイトURL: v[field],
-        "商品・行き先（参考）": v.label || "",
-        使っている場所: "ホテル紹介（個別）",
-        状態: "公開中",
-        "ID（変更しない）": `${key}#${field}`,
-        "データ元（変更しない）": "hotel-pick-links",
-      });
-    }
-  }
-  for (const [key, v] of Object.entries(load("local-hotel-picks"))) {
-    for (const field of ["tripFallbackUrl", "officialUrl"]) {
-      if (!v[field]) continue;
-      push({
-        ジャンル: "ホテル：ローカルおすすめ宿",
-        "名前（何のリンクか）": `${v.hotelName || key}（${field === "officialUrl" ? "公式サイト" : providerOfUrl(v[field])}）`,
-        提供元: field === "officialUrl" ? "公式（アフィリエイトなし）" : providerOfUrl(v[field]),
-        アフィリエイトURL: v[field],
-        "商品・行き先（参考）": [v.area, v.city].filter(Boolean).join(" / "),
-        使っている場所: "Local Hotel Picks",
-        状態: v.status || "公開中",
-        "ID（変更しない）": `${key}#${field}`,
-        "データ元（変更しない）": "local-hotel-picks",
-      });
-    }
-  }
-  const picks = load("stay-hotel-picks");
-  for (const [group, list] of Object.entries(picks)) {
-    (Array.isArray(list) ? list : []).forEach((v) => {
-      if (!v.tripUrl) return;
-      push({
-        ジャンル: "ホテル：記事内のおすすめ",
-        "名前（何のリンクか）": v.name || v.id,
-        提供元: providerOfUrl(v.tripUrl),
-        アフィリエイトURL: v.tripUrl,
-        "商品・行き先（参考）": [v.area, group].filter(Boolean).join(" / "),
-        使っている場所: `宿泊記事（${group}）`,
-        状態: "公開中",
-        "ID（変更しない）": `${group}/${v.id}#tripUrl`,
-        "データ元（変更しない）": "stay-hotel-picks",
-      });
+  // Hotels go to Booking.com only (2026-11-18). Trip.com links are no longer
+  // shown anywhere, so they are left out of the sheet (the data files keep
+  // them). Each recommended hotel's Booking.com page is listed here; paste the
+  // Booking.com affiliate link into the URL column when it is issued and the
+  // site switches that hotel over to it.
+  for (const [key, v] of Object.entries(load("booking-hotel-urls").hotels)) {
+    const local = key.startsWith("local:");
+    push({
+      ジャンル: "ホテル：個別ホテル（Booking.com）",
+      "名前（何のリンクか）": v.name,
+      提供元: "Booking.com",
+      アフィリエイトURL: v.affiliateUrl,
+      "商品・行き先（参考）": v.bookingUrl || "",
+      使っている場所: local ? "ローカルおすすめ宿" : "ホテル紹介（個別）",
+      状態: !v.bookingUrl ? "Booking.com に掲載なし" : v.affiliateUrl ? "公開中" : "未発行（通常URLで表示中）",
+      メモ: v.note || "",
+      "ID（変更しない）": `${key}#affiliateUrl`,
+      "データ元（変更しない）": "booking-hotel-urls",
     });
   }
   const order = (g) => (GENRE_ORDER.indexOf(g) + 1 || 99);
@@ -299,6 +251,7 @@ function buildRows() {
 function locate(data, file, id) {
   if (file === "affiliate-links") return { obj: data[id], field: data[id]?.directUrl !== undefined ? "directUrl" : "directUrl" };
   const [path, field] = id.split("#");
+  if (file === "booking-hotel-urls") return { obj: data.hotels?.[path], field };
   if (file === "stay-hotel-picks") {
     const [group, pickId] = path.split("/");
     return { obj: (data[group] ?? []).find((x) => x.id === pickId), field };
@@ -308,6 +261,8 @@ function locate(data, file, id) {
 
 function checkUrl(url, provider) {
   if (!/^https:\/\/\S+$/.test(url)) return "https で始まる1つのURLにしてください";
+  if (provider === "Booking.com" && !/^https:\/\/([a-z0-9-]+\.)*(booking\.com|tpx\.lv|travelpayouts\.com|tp\.media)\//.test(url))
+    return "Booking.com のアフィリエイトリンク（booking.com / tpx.lv など）を貼ってください";
   if (/affiliate\.klook\.com/.test(url) || provider === "Klook") {
     const m = url.match(/^https:\/\/affiliate\.klook\.com\/redirect\?aid=104861&aff_adid=(\d+)&k_site=(https%3A%2F%2Fwww\.klook\.com%2F\S+)$/);
     if (!m) return "Klook のリンクは affiliate.klook.com/redirect?aid=104861&aff_adid=<数字>&k_site=https%3A%2F%2Fwww.klook.com%2F… の形にしてください（k_site は手で書き換えない）";

@@ -113,7 +113,10 @@ export function ProviderButton({
   // there is nothing for it to say: a Booking.com or Trip.com wordmark over a
   // Klook link would mislabel the destination and file the click wrongly.
   // ProviderId covers only the non-Klook brands, so this hides all of them.
-  if (KLOOK_ONLY) return null;
+  // Since 2026-11-18 recommended hotels go to their Booking.com page
+  // (lib/booking-hotels.ts), so the Booking.com mark is allowed through; area
+  // links that wear it stay off via isActiveBookingHotelDestination.
+  if (KLOOK_ONLY && provider !== "booking_travelpayouts") return null;
 
   const analyticsHref = trackingHref ?? href;
   const analyticsLabel = typeof children === "string" ? children : provider;

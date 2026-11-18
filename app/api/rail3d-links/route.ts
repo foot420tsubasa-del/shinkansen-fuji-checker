@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import type { HotelAreaKey, HotelLinkConfig } from "@/lib/hotel-links";
+import { getAreaHotelChoice, type HotelAreaKey } from "@/lib/hotel-links";
 
 /*
  * Public, read-only link resolver for the Rail 3D pages
@@ -15,9 +13,8 @@ import type { HotelAreaKey, HotelLinkConfig } from "@/lib/hotel-links";
  * don't appear, and the tool hides the CTA.
  */
 
-const DATA_PATH = path.join(process.cwd(), "data", "hotel-links.json");
 
-type CtaLink = { href: string; external: boolean; provider?: "trip" };
+type CtaLink = { href: string; external: boolean; provider?: "trip" | "klook" | "agoda" | "omio" | "booking_travelpayouts" | "other" };
 
 /** Tokyo stations (Japanese names, as used in window.STATIONS) → Stay Finder area ids. */
 const TOKYO_STATION_TO_AREA: Record<string, string> = {
@@ -93,9 +90,6 @@ function finderHref(areaId: string) {
   return `/areas-to-stay?legacyArea=${areaId}`;
 }
 
-function readHotelLinks(): Record<string, HotelLinkConfig> {
-  return JSON.parse(fs.readFileSync(DATA_PATH, "utf-8")) as Record<string, HotelLinkConfig>;
-}
 
 export async function GET(request: Request) {
   const city = new URL(request.url).searchParams.get("city") === "kansai" ? "kansai" : "tokyo";
@@ -111,19 +105,12 @@ export async function GET(request: Request) {
       lines[lineId] = { href, external: false };
     }
   } else {
-    // Kansai hotel CTAs come from the admin link master. Trip.com only —
-    // Agoda is intentionally not surfaced (site-wide policy).
-    let hotelLinks: Record<string, HotelLinkConfig>;
-    try {
-      hotelLinks = readHotelLinks();
-    } catch {
-      hotelLinks = {};
-    }
+    // Kansai station hotel CTAs: the area hotel link, which stays on Klook
+    // (2026-11-18). This used to send them to Trip.com area searches.
     for (const [name, key] of Object.entries(KANSAI_STATION_TO_HOTEL_KEY)) {
-      const config = hotelLinks[key];
-      const href = config?.tripUrl?.trim();
-      if (!href) continue;
-      stations[name] = { href, external: true, provider: "trip" };
+      const area = getAreaHotelChoice(key as HotelAreaKey);
+      if (!area) continue;
+      stations[name] = { href: area.href, external: true, provider: area.provider };
     }
     for (const [lineId, href] of Object.entries(KANSAI_LINE_GUIDES)) {
       lines[lineId] = { href, external: false };

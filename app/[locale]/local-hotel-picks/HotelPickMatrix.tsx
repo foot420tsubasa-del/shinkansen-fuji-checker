@@ -2,6 +2,7 @@
 
 import { trackAffiliateClick } from "@/lib/analytics";
 import { AFFILIATE_REL } from "@/lib/link-rel";
+import { getBookingHotelLink } from "@/lib/booking-hotels";
 import type { LocalHotelPick } from "@/lib/content/local-hotel-picks";
 
 type HotelPickMatrixProps = {
@@ -17,11 +18,9 @@ type TripTextLink = {
 };
 
 function providerLinksForPick(pick: LocalHotelPick): TripTextLink[] {
-  const tripUrl = pick.tripFallbackUrl.trim();
-
-  return [
-    tripUrl ? { href: tripUrl, label: "Search on Trip.com →", linkId: `localHotelPick.${pick.id}.trip` } : null,
-  ].filter(Boolean) as TripTextLink[];
+  // Hotels go to their Booking.com page (2026-11-18); see lib/booking-hotels.ts.
+  const booking = getBookingHotelLink(`local:${pick.id}`);
+  return booking ? [{ href: booking.href, label: "Check on Booking.com →", linkId: booking.linkId }] : [];
 }
 
 function TripTextAffiliateLink({
@@ -46,7 +45,7 @@ function TripTextAffiliateLink({
       onClick={() =>
         trackAffiliateClick({
           category: "hotel",
-          provider: "trip",
+          provider: "booking_travelpayouts",
           placement,
           page_path: pagePath,
           locale,

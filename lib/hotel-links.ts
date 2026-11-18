@@ -144,6 +144,24 @@ export function getHotelLink(areaKey: HotelAreaKey) {
   return klookHotelLink(config);
 }
 
+/**
+ * The area-level hotel button. Areas stay on Klook (user decision 2026-11-18,
+ * keeping the programme that pays); individual hotels go to Booking.com
+ * (lib/booking-hotels.ts). Several pages used to label this Klook link
+ * "Trip.com" — use this so the label and provider match where it goes.
+ */
+export function getAreaHotelChoice(areaKey: HotelAreaKey) {
+  const hotel = getHotelLink(areaKey);
+  if (!hotel.href || hotel.href === "#") return null;
+  return {
+    label: hotel.label,
+    href: hotel.href,
+    trackingHref: hotel.trackingHref,
+    provider: hotel.provider,
+    linkId: hotel.provider === "klook" ? hotel.fallbackLinkId : `hotelArea.${areaKey}.${hotel.provider}`,
+  };
+}
+
 export function getTripHotelConfig(areaKey: HotelAreaKey) {
   return hotelLinks[areaKey];
 }

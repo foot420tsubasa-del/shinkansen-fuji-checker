@@ -1,9 +1,14 @@
 import bookingDestinationData from "@/data/booking-hotel-destinations.json";
-import hotelLinkData from "@/data/hotel-links.json";
 import scenicStayData from "@/data/scenic-stays.json";
 import type { AffiliateProvider } from "@/lib/affiliate/links";
+import { getBookingHotelLink } from "@/lib/booking-hotels";
+import { getAreaHotelChoice, type HotelAreaKey } from "@/lib/hotel-links";
 
-type StaySource = "hotel-links" | "booking-hotel-destinations";
+// Hotels: a recommended hotel's Booking.com page (booking-hotel), or a
+// Booking.com area search (booking-hotel-destinations). Areas with neither use
+// the site's area hotel link, which stays on Klook (klook-area). No Trip.com,
+// no Agoda (2026-11-18).
+type StaySource = "booking-hotel" | "booking-hotel-destinations" | "klook-area";
 
 type StayReference = {
   source: StaySource;
@@ -14,13 +19,6 @@ type StayRouteConfig = {
   title: string;
   description: string;
   links: StayReference[];
-};
-
-type HotelAreaLink = {
-  areaName: string;
-  city: string;
-  label: string;
-  tripUrl: string;
 };
 
 type BookingDestination = {
@@ -47,20 +45,29 @@ export type ResolvedScenicStay = {
 };
 
 const stayRoutes = scenicStayData.routes as Record<string, StayRouteConfig>;
-const hotelAreas = hotelLinkData as Record<string, HotelAreaLink>;
 const bookingDestinations = bookingDestinationData as Record<string, BookingDestination>;
 
 function resolveReference(reference: StayReference): ResolvedScenicStayLink | null {
-  if (reference.source === "hotel-links") {
-    const area = hotelAreas[reference.id];
-    if (!area?.tripUrl || /agoda/i.test(area.tripUrl)) return null;
+  if (reference.source === "booking-hotel") {
+    const hotel = getBookingHotelLink(reference.id);
+    if (!hotel) return null;
     return {
-      id: reference.id,
-      label: area.label,
-      href: area.tripUrl,
-      provider: "trip",
+      id: hotel.linkId,
+      label: `${hotel.name} on Booking.com`,
+      href: hotel.href,
+      provider: "booking_travelpayouts",
       areaId: reference.id,
-      city: area.city,
+    };
+  }
+  if (reference.source === "klook-area") {
+    const area = getAreaHotelChoice(reference.id as HotelAreaKey);
+    if (!area) return null;
+    return {
+      id: area.linkId,
+      label: area.label,
+      href: area.href,
+      provider: area.provider,
+      areaId: reference.id,
     };
   }
 

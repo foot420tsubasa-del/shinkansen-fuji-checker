@@ -7,7 +7,7 @@ import { FujiseatAreaLogic } from "@/components/content/FujiseatAreaLogic";
 import { ProviderChoiceCTA, type ProviderChoiceButton } from "@/components/affiliate/ProviderChoiceCTA";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
 import { getAlternates } from "@/i18n/hreflang";
-import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
+import { type HotelAreaKey, getAreaHotelChoice } from "@/lib/hotel-links";
 import { SiteHeader } from "../../components/SiteHeader";
 
 type Props = {
@@ -334,19 +334,17 @@ function providerChoices(...providers: Array<ProviderChoiceButton | null | undef
 }
 
 function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"]) {
-  const hotel = getHotelLink(areaKey);
-  const tripHref = hotel.href;
-  const tripTrackingHref = hotel.trackingHref;
-
+  // Area hotels stay on Klook (2026-11-18); this button used to wear a Trip.com label while going to Klook.
+  const area = getAreaHotelChoice(areaKey);
   return providerChoices(
-    tripHref
+    area
       ? {
-          label: "Trip.com",
-          href: tripHref,
-          trackingHref: tripTrackingHref,
-          provider: "trip",
+          label: area.label,
+          href: area.href,
+          trackingHref: area.trackingHref,
+          provider: area.provider,
           product: "hotel",
-          linkId: `hotelArea.${areaKey}.trip`,
+          linkId: area.linkId,
           placement,
           variant: "primary",
           category: "hotel",

@@ -773,7 +773,7 @@ function ResultCard({
                       target="_blank"
                       rel={AFFILIATE_REL}
                       category="hotel"
-                      provider="trip"
+                      provider="booking_travelpayouts"
                       placement="finder_result_named_hotel"
                       label={hotelPick.name}
                       linkId={hotelPick.linkId}

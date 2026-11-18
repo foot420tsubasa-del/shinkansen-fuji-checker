@@ -9,7 +9,7 @@ import { AFFILIATE_REL } from "@/lib/link-rel";
 type HotelCTAProps = {
   areaName: string;
   city: string;
-  provider?: "trip" | "klook";
+  provider?: "trip" | "klook" | "booking_travelpayouts";
   href: string;
   placement: AffiliateClickParams["placement"];
   locale: string;
@@ -49,7 +49,7 @@ export function HotelCTA({
   // CTA (klook-routed or an unrecognized href) keeps the commercial orange style.
   if (resolvedProvider === "agoda") return null;
 
-  if (resolvedProvider === "trip") {
+  if (resolvedProvider === "trip" || resolvedProvider === "booking_travelpayouts") {
     return (
       <ProviderButton
         provider={resolvedProvider}

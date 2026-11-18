@@ -14,8 +14,9 @@ import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { Link } from "@/i18n/navigation";
 import { getAlternates } from "@/i18n/hreflang";
 import { getTranslations } from "next-intl/server";
-import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
+import { type HotelAreaKey, getAreaHotelChoice } from "@/lib/hotel-links";
 import { getAllHotelPickLinkConfigs } from "@/lib/hotel-pick-links";
+import { getBookingHotelLink } from "@/lib/booking-hotels";
 import type { StayAreaMapKey } from "@/lib/stay-area-maps";
 import { buttonClassName } from "@/components/ui/Button";
 
@@ -187,19 +188,17 @@ function providerChoices(...providers: Array<ProviderChoiceButton | null | undef
 }
 
 function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"]) {
-  const hotel = getHotelLink(areaKey);
-  const tripHref = hotel.href;
-  const tripTrackingHref = hotel.trackingHref;
-
+  // Area hotels stay on Klook (2026-11-18); this button used to wear a Trip.com label while going to Klook.
+  const area = getAreaHotelChoice(areaKey);
   return providerChoices(
-    tripHref
+    area
       ? {
-          label: "Trip.com",
-          href: tripHref,
-          trackingHref: tripTrackingHref,
-          provider: "trip",
+          label: area.label,
+          href: area.href,
+          trackingHref: area.trackingHref,
+          provider: area.provider,
           product: "hotel",
-          linkId: `hotelArea.${areaKey}.trip`,
+          linkId: area.linkId,
           placement,
           variant: "primary",
           category: "hotel",
@@ -226,9 +225,9 @@ const updatedHotelPageBySlug: Record<string, string> = {
 function hotelExamples(areaKey?: HotelAreaKey) {
   if (!areaKey) return [];
   return Object.entries(getAllHotelPickLinkConfigs())
-    .filter(([, config]) => config.hotelKey === areaKey && config.tripUrl.trim())
+    .filter(([id, config]) => config.hotelKey === areaKey && getBookingHotelLink(id))
     .slice(0, 4)
-    .map(([id, config]) => ({ id, ...config }));
+    .map(([id, config]) => ({ id, ...config, booking: getBookingHotelLink(id)! }));
 }
 
 export function generateStaticParams() {
@@ -421,8 +420,9 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
           {examples.length > 0 ? (
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {examples.map((hotel) => {
-                const provider = "trip";
-                const href = hotel.tripUrl;
+                // Hotels go to Booking.com only (2026-11-18); see lib/booking-hotels.ts.
+                const provider = "booking_travelpayouts";
+                const href = hotel.booking.href;
                 return (
                   <div key={hotel.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
                     <p className="text-sm font-semibold text-slate-950">{hotel.name}</p>
@@ -434,14 +434,14 @@ export default async function TokyoAreaDetailPage({ params }: Props) {
                       placement="stay_area_detail_hotel_example"
                       pagePath={pagePath}
                       locale={locale}
-                      linkId={`hotelPick.${hotel.id}.${provider}`}
+                      linkId={hotel.booking.linkId}
                       product="hotel"
                       area={localized.areaLabel}
                       hotelName={hotel.name}
                       fullWidth
                       className="mt-3"
                     >
-                      {hotel.label}
+                      {hotel.booking.label}
                     </ProviderButton>
                   </div>
                 );

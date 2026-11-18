@@ -838,12 +838,15 @@ test("scenic stays: every route and area reference exists in the approved existi
   const mapping = JSON.parse(readFileSync("data/scenic-stays.json", "utf8"));
   const hotelAreas = JSON.parse(readFileSync("data/hotel-links.json", "utf8"));
   const bookingAreas = JSON.parse(readFileSync("data/booking-hotel-destinations.json", "utf8"));
+  const bookingHotels = JSON.parse(readFileSync("data/booking-hotel-urls.json", "utf8")).hotels;
   const liveIds = new Set(scenic.LIVE_ROUTES.map((route) => route.id));
   for (const [routeId, config] of Object.entries(mapping.routes)) {
     assert.ok(liveIds.has(routeId), `${routeId}: stay block route must be live`);
     assert.ok(config.links.length > 0 && config.links.length <= 2, `${routeId}: one or two stay links`);
     for (const link of config.links) {
-      if (link.source === "hotel-links") assert.ok(hotelAreas[link.id], `${routeId}: missing hotel area ${link.id}`);
+      // Hotels go to Booking.com only (2026-11-18); areas without Booking data use the Klook area link.
+      if (link.source === "booking-hotel") assert.ok(bookingHotels[link.id]?.bookingUrl, `${routeId}: missing Booking.com hotel ${link.id}`);
+      else if (link.source === "klook-area") assert.ok(hotelAreas[link.id], `${routeId}: missing hotel area ${link.id}`);
       else if (link.source === "booking-hotel-destinations") assert.ok(bookingAreas[link.id], `${routeId}: missing Booking area ${link.id}`);
       else assert.fail(`${routeId}: unapproved stay source ${link.source}`);
     }
@@ -852,17 +855,24 @@ test("scenic stays: every route and area reference exists in the approved existi
 
 test("scenic stays: every rendered URL comes unchanged from existing data, with no Agoda or price copy", async () => {
   const mapping = JSON.parse(readFileSync("data/scenic-stays.json", "utf8"));
-  const hotelAreas = JSON.parse(readFileSync("data/hotel-links.json", "utf8"));
   const bookingAreas = JSON.parse(readFileSync("data/booking-hotel-destinations.json", "utf8"));
+  const bookingHotels = JSON.parse(readFileSync("data/booking-hotel-urls.json", "utf8")).hotels;
+  const hotelLinks = await jiti.import("./lib/hotel-links.ts");
   const stays = await jiti.import("./lib/scenic-stays.ts");
   for (const [routeId, config] of Object.entries(mapping.routes)) {
     const resolved = stays.getScenicStay(routeId);
     assert.ok(resolved, `${routeId}: stay block resolves`);
     assert.equal(resolved.links.length, config.links.length);
     config.links.forEach((reference, index) => {
-      const expected = reference.source === "hotel-links" ? hotelAreas[reference.id].tripUrl : bookingAreas[reference.id].affiliate_url;
+      const hotel = bookingHotels[reference.id];
+      const expected =
+        reference.source === "booking-hotel"
+          ? hotel.affiliateUrl || hotel.bookingUrl
+          : reference.source === "klook-area"
+            ? hotelLinks.getAreaHotelChoice(reference.id).href
+            : bookingAreas[reference.id].affiliate_url;
       assert.equal(resolved.links[index].href, expected, `${routeId}/${reference.id}: URL stays unchanged`);
-      assert.doesNotMatch(resolved.links[index].href, /agoda/i);
+      assert.doesNotMatch(resolved.links[index].href, /agoda|trip\.com/i);
     });
   }
   for (const file of ["data/scenic-stays.json", "components/scenic/ScenicStayBlock.tsx"]) {
@@ -874,6 +884,46 @@ test("scenic stays: every rendered URL comes unchanged from existing data, with 
   assert.match(block, /PR: \{stay\.disclosure\}/);
   const detail = readFileSync("app/[locale]/scenic/[slug]/page.tsx", "utf8");
   assert.ok(detail.indexOf("<ScenicStayBlock") > detail.indexOf("<ScenicPassCard"), "stay block remains below the ticket blocks");
+});
+
+test("hotels: Booking.com only (2026-11-18) — no rendered surface links to Trip.com, every recommended hotel has a Booking.com page", async () => {
+  const bookingHotels = JSON.parse(readFileSync("data/booking-hotel-urls.json", "utf8")).hotels;
+  for (const [id, hotel] of Object.entries(bookingHotels)) {
+    if (!hotel.bookingUrl) {
+      assert.ok(hotel.note, `${id}: a hotel without a Booking.com page says why`);
+      continue;
+    }
+    assert.match(hotel.bookingUrl, /^https:\/\/www\.booking\.com\/hotel\/jp\/[a-z0-9-]+\.html$/, `${id}: plain Booking.com hotel page`);
+    if (hotel.affiliateUrl) assert.match(hotel.affiliateUrl, /^https:\/\/([a-z]+\.)?(booking\.com|tpx\.lv|travelpayouts\.com|tp\.media)\//, `${id}: Booking.com affiliate link`);
+  }
+  // Every hotel pick and local pick resolves to a Booking.com link (or is the one hotel Booking.com does not list).
+  const picks = JSON.parse(readFileSync("data/hotel-pick-links.json", "utf8"));
+  const local = JSON.parse(readFileSync("data/local-hotel-picks.json", "utf8"));
+  for (const id of Object.keys(picks)) assert.ok(bookingHotels[id], `hotel pick ${id} has a Booking.com entry`);
+  for (const id of Object.keys(local)) assert.ok(bookingHotels[`local:${id}`], `local pick ${id} has a Booking.com entry`);
+  // No page, component or library that renders links still reads a Trip.com URL.
+  const surfaces = [
+    "app/[locale]/areas-to-stay/tokyo/[area]/page.tsx",
+    "app/[locale]/areas-to-stay/tokyo-stay-area-index/page.tsx",
+    "app/[locale]/areas-to-stay/where-to-stay-in-tokyo-with-luggage/page.tsx",
+    "app/[locale]/airport-transfers/page.tsx",
+    "app/[locale]/airport-transfers/[slug]/page.tsx",
+    "app/[locale]/local-hotel-picks/LocalHotelPickCard.tsx",
+    "app/[locale]/local-hotel-picks/HotelPickMatrix.tsx",
+    "components/content/AreaCard.tsx",
+    "lib/stay-hotel-picks.ts",
+    "lib/scenic-stays.ts",
+    "app/api/rail3d-links/route.ts",
+  ];
+  for (const file of surfaces) {
+    const src = readFileSync(file, "utf8");
+    assert.doesNotMatch(src, /\.tripUrl|tripFallbackUrl|"Trip\.com"|Search on Trip\.com|provider: "trip"/, `${file}: no Trip.com link`);
+  }
+  const finder = readFileSync("app/[locale]/areas-to-stay/tokyo-stay-area-index/TokyoHotelAreaFinder.tsx", "utf8");
+  assert.doesNotMatch(finder, /provider="trip"/, "Stay Finder named hotels are Booking.com");
+  const resolved = (await jiti.import("./lib/stay-hotel-picks.ts")).getManagedStayHotelPicks("tokyo-first-time", []);
+  assert.ok(resolved.length > 0);
+  for (const pick of resolved) assert.doesNotMatch(pick.link, /trip\.com/i, `${pick.name}: no Trip.com`);
 });
 
 test("scenic stay click: emits affiliate_click with the scenic placement, route and area", async () => {
@@ -889,13 +939,13 @@ test("scenic stay click: emits affiliate_click with the scenic placement, route 
     globalThis.window = fakeWindow;
     analytics.trackAffiliateClick({
       category: "hotel",
-      provider: "trip",
+      provider: "booking_travelpayouts",
       placement: "scenic_route_stay",
       page_path: "/scenic/fujikyu",
       locale: "en",
-      href: "https://www.trip.com/t/4yZdOmrBXU2",
-      label: "Compare Kawaguchiko hotels on Trip.com",
-      link_id: "kawaguchiko",
+      href: "https://www.booking.com/hotel/jp/fuji-lake.html",
+      label: "Fuji Lake Hotel on Booking.com",
+      link_id: "bookingHotel.fuji-lake-hotel",
       product: "hotel_area",
       area_id: "kawaguchiko",
       route: "fujikyu-fuji",

@@ -11,11 +11,11 @@ type HotelPick = {
   link: string;
   hotelKey?: HotelAreaKey;
   tag?: string;
-  provider?: "trip" | "klook";
+  provider?: "trip" | "klook" | "booking_travelpayouts";
   trackingHref?: string;
   label?: string;
   providerLinks?: Array<{
-    provider: "trip";
+    provider: "trip" | "booking_travelpayouts";
     href: string;
     trackingHref?: string;
     label: string;

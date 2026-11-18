@@ -18,7 +18,7 @@ import { Rail3dEmbed } from "@/components/rail3d/Rail3dEmbed";
 import { ESIM_URL } from "@/src/affiliateLinks";
 import { getAirportTransferHubImage, getAirportTransferRouteImage } from "@/lib/airport-transfer-images";
 import { getAirportTransferHubCopy, localizedRouteTitle } from "@/lib/content/airport-transfer-i18n";
-import { getHotelLink, type HotelAreaKey } from "@/lib/hotel-links";
+import { type HotelAreaKey, getAreaHotelChoice } from "@/lib/hotel-links";
 import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
 
 type Props = {
@@ -81,9 +81,8 @@ const bookingAreaIdByHotelAreaKey: Partial<Record<HotelAreaKey, string>> = {
 };
 
 function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceButton["placement"], locale: string) {
-  const hotel = getHotelLink(areaKey);
-  const tripHref = hotel.href;
-  const tripTrackingHref = hotel.trackingHref;
+  // Area hotels stay on Klook (2026-11-18); this button used to wear a Trip.com label while going to Klook.
+  const area = getAreaHotelChoice(areaKey);
   const bookingAreaId = bookingAreaIdByHotelAreaKey[areaKey];
   const bookingLinks = bookingAreaId
     ? getHotelProviderLinks({ areaId: bookingAreaId, locale, placement: "airport_page_first_night_cta" }).map((link) => ({
@@ -103,14 +102,14 @@ function hotelProviderChoices(areaKey: HotelAreaKey, placement: ProviderChoiceBu
 
   return providerChoices(
     ...bookingLinks,
-    tripHref
+    area
       ? {
-          label: "Trip.com",
-          href: tripHref,
-          trackingHref: tripTrackingHref,
-          provider: "trip",
+          label: area.label,
+          href: area.href,
+          trackingHref: area.trackingHref,
+          provider: area.provider,
           product: "hotel",
-          linkId: `hotelArea.${areaKey}.trip`,
+          linkId: area.linkId,
           placement,
           variant: "primary",
           category: "hotel",
