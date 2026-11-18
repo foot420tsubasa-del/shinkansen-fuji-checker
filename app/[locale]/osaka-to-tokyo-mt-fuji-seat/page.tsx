@@ -7,6 +7,7 @@ import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
+import { RelatedScenicLinks } from "@/components/scenic/RelatedScenicLinks";
 import { seatCheckCopy } from "@/lib/copy/seat-check";
 import { JR_PASS_URL, KLOOK_URL } from "@/src/affiliateLinks";
 
@@ -145,6 +146,8 @@ export default async function OsakaToTokyoSeatPage({ params }: Props) {
             copy={seatCheckCopy(locale)}
           />
         </div>
+
+        <RelatedScenicLinks pagePath="/osaka-to-tokyo-mt-fuji-seat" locale={locale} className="mt-5" />
 
         <div className="mt-10 space-y-8">
           <section>

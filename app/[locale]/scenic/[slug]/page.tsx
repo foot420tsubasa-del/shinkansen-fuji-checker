@@ -11,7 +11,9 @@ import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
 import { LIVE_ROUTES, flipSide, reversalsBefore, seatedSide, type ScenicRoute } from "@/lib/scenic";
 import { AFFILIATE_LINKS, JR_PASS_URL, getAffUrl } from "@/src/affiliateLinks";
 import { TicketGuide, type ResolvedTicketLink } from "@/components/scenic/TicketGuide";
+import { ScenicStayBlock } from "@/components/scenic/ScenicStayBlock";
 import type { AffiliateProvider } from "@/lib/affiliate/links";
+import { getScenicStay } from "@/lib/scenic-stays";
 
 /*
  * One template for every mapped route (since 2026-11-15): the page reads only
@@ -50,9 +52,10 @@ function howBig(angle: number | null): string {
 }
 
 export default async function ScenicRoutePage({ params }: Props) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const route = pageRoute(slug);
   if (!route?.page || !route.views || !route.directions) notFound();
+  const stay = getScenicStay(route.id);
 
   const [from, to] = route.directions.forward;
   const views = route.views;
@@ -243,6 +246,8 @@ export default async function ScenicRoutePage({ params }: Props) {
             </Link>
           </section>
         ) : null}
+
+        {stay ? <ScenicStayBlock stay={stay} routeId={route.id} locale={locale} pagePath={`/scenic/${slug}`} /> : null}
 
         <section className="mt-12">
           <h2 className="text-2xl font-extrabold tracking-[-0.02em]">Questions</h2>

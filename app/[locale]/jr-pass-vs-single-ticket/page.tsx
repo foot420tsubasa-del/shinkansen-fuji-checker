@@ -10,6 +10,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { JR_PASS_URL, OMIO_JAPAN_RAIL_PASS_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { ProviderChoiceCTA } from "@/components/affiliate/ProviderChoiceCTA";
+import { RelatedScenicLinks } from "@/components/scenic/RelatedScenicLinks";
 import { KlookProductRow } from "@/components/affiliate/KlookProductRow";
 import { TRANSPORT_FACTS } from "@/lib/content/transport-facts";
 
@@ -215,6 +216,8 @@ export default async function JrPassVsSingleTicketPage({ params }: Props) {
               </p>
             </div>
           </section>
+
+          <RelatedScenicLinks pagePath="/jr-pass-vs-single-ticket" locale={locale} />
 
           {/* Route comparison */}
           <section>

@@ -29,6 +29,7 @@ export type AffiliatePlacement =
   | "blog_article_booking"
   | "scenic_route_jr_pass"
   | "scenic_route_ticket"
+  | "scenic_route_stay"
   | "route_search_ticket"
   | "guide_quick_answer_text"
   | "guide_klook_text"

@@ -1,0 +1,54 @@
+{
+  "placement": "scenic_route_stay",
+  "disclosure": "We may earn a commission if you book through these links, at no extra cost to you.",
+  "routes": {
+    "fujikyu-fuji": {
+      "title": "Stay near the route",
+      "description": "Stay around Kawaguchiko for the Fujikyu Line and the Fuji Five Lakes.",
+      "links": [
+        {
+          "source": "hotel-links",
+          "id": "kawaguchiko"
+        }
+      ]
+    },
+    "hakone-tozan": {
+      "title": "Stay near the route",
+      "description": "Stay in Hakone for easier access to the mountain railway and local sights.",
+      "links": [
+        {
+          "source": "hotel-links",
+          "id": "hakone"
+        }
+      ]
+    },
+    "sagano-gorge": {
+      "title": "Stay in Kyoto for this day trip",
+      "description": "The current hotel data has no Arashiyama area entry. Kyoto Station or Gion can be a practical base for a day trip.",
+      "links": [
+        {
+          "source": "hotel-links",
+          "id": "kyotoStation"
+        },
+        {
+          "source": "booking-hotel-destinations",
+          "id": "booking_gion"
+        }
+      ]
+    },
+    "yurikamome-night": {
+      "title": "Stay near the route",
+      "description": "Ariake, Odaiba, and Toyosu are close to the waterfront section of this route.",
+      "links": [
+        {
+          "source": "booking-hotel-destinations",
+          "id": "booking_ariake-odaiba"
+        },
+        {
+          "source": "booking-hotel-destinations",
+          "id": "booking_toyosu"
+        }
+      ]
+    }
+  }
+}

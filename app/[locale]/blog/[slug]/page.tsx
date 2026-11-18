@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { BlogBookingCard } from "@/components/blog/BlogBookingCard";
+import { RelatedScenicLinks } from "@/components/scenic/RelatedScenicLinks";
 import { getAlternates } from "@/i18n/hreflang";
 import { BLOG_POSTS, getBlogPost, type BlogBlock } from "@/data/blog/posts";
 import { ORIGINS, type OriginId } from "@/lib/fuji-window";
@@ -139,7 +140,7 @@ function Block({ block, slug }: { block: BlogBlock; slug: string }) {
 }
 
 export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const post = getBlogPost(slug);
   if (!post) notFound();
 
@@ -212,6 +213,8 @@ export default async function BlogPostPage({ params }: Props) {
             ))}
           </section>
         ))}
+
+        <RelatedScenicLinks pagePath={`/blog/${post.slug}`} locale={locale} className="mt-8" />
 
         <section className="mt-12">
           <h2 className="text-2xl font-extrabold tracking-[-0.02em]">Questions</h2>

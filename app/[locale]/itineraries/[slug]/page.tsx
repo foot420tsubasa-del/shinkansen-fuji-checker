@@ -9,6 +9,7 @@ import { Breadcrumb } from "@/components/content/Breadcrumb";
 import { DayCard } from "@/components/content/DayCard";
 import { HotelBaseNextStep } from "@/components/content/HotelBaseNextStep";
 import { ProTip } from "@/components/content/ProTip";
+import { RelatedScenicLinks } from "@/components/scenic/RelatedScenicLinks";
 import { NextActions } from "@/components/content/NextActions";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { CompactStayFinder } from "@/components/stay/CompactStayFinder";
@@ -154,6 +155,8 @@ export default async function ItineraryPage({ params }: Props) {
           </section>
 
           <ProTip>{page.proTip}</ProTip>
+
+          <RelatedScenicLinks pagePath={pagePath} locale={locale} />
 
           <section className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-sm">
             <p className="text-[11px] font-black uppercase tracking-[0.1em] text-[#145aa0]">

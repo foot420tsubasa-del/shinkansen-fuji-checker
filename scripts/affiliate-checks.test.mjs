@@ -834,6 +834,76 @@ const jiti = createJiti(process.cwd() + "/", { alias: { "@": process.cwd() } });
 const scenic = await jiti.import("./lib/scenic.ts");
 const hokurikuPoints = JSON.parse(readFileSync("data/routes/hokuriku-alps-viewshed.json", "utf8")).points;
 
+test("scenic stays: every route and area reference exists in the approved existing data", () => {
+  const mapping = JSON.parse(readFileSync("data/scenic-stays.json", "utf8"));
+  const hotelAreas = JSON.parse(readFileSync("data/hotel-links.json", "utf8"));
+  const bookingAreas = JSON.parse(readFileSync("data/booking-hotel-destinations.json", "utf8"));
+  const liveIds = new Set(scenic.LIVE_ROUTES.map((route) => route.id));
+  for (const [routeId, config] of Object.entries(mapping.routes)) {
+    assert.ok(liveIds.has(routeId), `${routeId}: stay block route must be live`);
+    assert.ok(config.links.length > 0 && config.links.length <= 2, `${routeId}: one or two stay links`);
+    for (const link of config.links) {
+      if (link.source === "hotel-links") assert.ok(hotelAreas[link.id], `${routeId}: missing hotel area ${link.id}`);
+      else if (link.source === "booking-hotel-destinations") assert.ok(bookingAreas[link.id], `${routeId}: missing Booking area ${link.id}`);
+      else assert.fail(`${routeId}: unapproved stay source ${link.source}`);
+    }
+  }
+});
+
+test("scenic stays: every rendered URL comes unchanged from existing data, with no Agoda or price copy", async () => {
+  const mapping = JSON.parse(readFileSync("data/scenic-stays.json", "utf8"));
+  const hotelAreas = JSON.parse(readFileSync("data/hotel-links.json", "utf8"));
+  const bookingAreas = JSON.parse(readFileSync("data/booking-hotel-destinations.json", "utf8"));
+  const stays = await jiti.import("./lib/scenic-stays.ts");
+  for (const [routeId, config] of Object.entries(mapping.routes)) {
+    const resolved = stays.getScenicStay(routeId);
+    assert.ok(resolved, `${routeId}: stay block resolves`);
+    assert.equal(resolved.links.length, config.links.length);
+    config.links.forEach((reference, index) => {
+      const expected = reference.source === "hotel-links" ? hotelAreas[reference.id].tripUrl : bookingAreas[reference.id].affiliate_url;
+      assert.equal(resolved.links[index].href, expected, `${routeId}/${reference.id}: URL stays unchanged`);
+      assert.doesNotMatch(resolved.links[index].href, /agoda/i);
+    });
+  }
+  for (const file of ["data/scenic-stays.json", "components/scenic/ScenicStayBlock.tsx"]) {
+    const source = readFileSync(file, "utf8");
+    assert.doesNotMatch(source, /agoda\.|¥|\byen\b/i, `${file}: no Agoda or price copy`);
+  }
+  const block = readFileSync("components/scenic/ScenicStayBlock.tsx", "utf8");
+  assert.match(block, /placement: "scenic_route_stay"/);
+  assert.match(block, /PR: \{stay\.disclosure\}/);
+  const detail = readFileSync("app/[locale]/scenic/[slug]/page.tsx", "utf8");
+  assert.ok(detail.indexOf("<ScenicStayBlock") > detail.indexOf("<ScenicPassCard"), "stay block remains below the ticket blocks");
+});
+
+test("related scenic links: pages use at most two links and every target is a live slug", () => {
+  const related = JSON.parse(readFileSync("data/scenic-related-links.json", "utf8"));
+  const live = new Map(scenic.LIVE_ROUTES.map((route) => [route.id, route.slug]));
+  for (const [page, links] of Object.entries(related.pages)) {
+    assert.ok(links.length > 0 && links.length <= 2, `${page}: one or two relevant links`);
+    for (const link of links) {
+      assert.ok(live.get(link.routeId), `${page}: ${link.routeId} must have a live slug`);
+      assert.ok(related.messages[link.messageId], `${page}: missing copy ${link.messageId}`);
+    }
+  }
+  assert.deepEqual(Object.keys(related.messages.tokaidoRide).sort(), ["de", "en", "es", "fr", "ko", "pt-BR", "ru", "zh-CN", "zh-TW"].sort());
+  const component = readFileSync("components/scenic/RelatedScenicLinks.tsx", "utf8");
+  assert.match(component, /messages\[item\.messageId\]\?\.\[locale\]/, "translated links have no English fallback");
+  assert.match(component, /href=\{`\/scenic\/\$\{item\.slug\}`\}/, "href is derived from the live route slug");
+});
+
+test("scenic link and stay work leaves protected revenue and experiment pages unchanged", () => {
+  const protectedFiles = [
+    "app/[locale]/guide/page.tsx",
+    "app/[locale]/shinkansen-seat-letters/page.tsx",
+    "app/[locale]/HomeClient.tsx",
+    "app/[locale]/components/SiteHeader.tsx",
+    "app/[locale]/page.tsx",
+  ];
+  const changed = execSync(`/Library/Developer/CommandLineTools/usr/bin/git diff HEAD --name-only -- ${protectedFiles.map((file) => `'${file}'`).join(" ")}`, { encoding: "utf8" }).trim();
+  assert.equal(changed, "");
+});
+
 test("route search: live routes work both ways and unsupported trips do not invent an answer", () => {
   const tk = scenic.matchRoute("Tokyo", "Kyoto");
   assert.equal(tk.kind, "live");

@@ -1,0 +1,80 @@
+{
+  "messages": {
+    "tokaidoRide": {
+      "en": "Planning this ride? See the full Tokaido Shinkansen scenic guide: which side and when Mt. Fuji appears →",
+      "pt-BR": "Vai fazer esta viagem? Veja o guia panorâmico completo do Tokaido Shinkansen: o lado certo e quando o Monte Fuji aparece →",
+      "es": "¿Vas a hacer este trayecto? Consulta la guía panorámica completa del Tokaido Shinkansen: en qué lado sentarte y cuándo aparece el monte Fuji →",
+      "ko": "이 구간을 탈 예정인가요? 도카이도 신칸센 풍경 가이드에서 후지산이 보이는 방향과 시간을 확인하세요 →",
+      "zh-TW": "要搭這段列車嗎？查看東海道新幹線景觀指南，確認富士山在哪一側、何時出現 →",
+      "zh-CN": "准备乘坐这段列车吗？查看东海道新干线景观指南，确认富士山在哪一侧、何时出现 →",
+      "fr": "Vous prenez ce train ? Consultez le guide panoramique complet du Tokaido Shinkansen : de quel côté s’asseoir et quand le mont Fuji apparaît →",
+      "de": "Fährst du diese Strecke? Im vollständigen Tokaido-Shinkansen-Panoramaguide erfährst du, auf welcher Seite und wann der Fuji zu sehen ist →",
+      "ru": "Планируете эту поездку? В полном путеводителе по видам из Tokaido Shinkansen указано, с какой стороны и когда появляется Фудзи →"
+    },
+    "tokaidoArticle": {
+      "en": "For the full route map and viewing sections, see the Tokaido Shinkansen scenic guide →"
+    },
+    "tokaidoItinerary": {
+      "en": "On the Tokyo–Kyoto ride, see which side and when Mt. Fuji appears →"
+    },
+    "hokuriku": {
+      "en": "Taking the Hokuriku route? See which side Mt. Asama and the Northern Alps are on →"
+    },
+    "tohoku": {
+      "en": "Heading north by Shinkansen? See which side the Tohoku mountain views are on →"
+    },
+    "fujikyu": {
+      "en": "Riding from Otsuki to Kawaguchiko? See which side Mt. Fuji is on →"
+    },
+    "hakone": {
+      "en": "Riding the Hakone Tozan? See which side the valley is on →"
+    },
+    "sagano": {
+      "en": "Visiting Arashiyama? See where the Hozu gorge switches sides on the Sagano train →"
+    },
+    "enoden": {
+      "en": "Taking a Kamakura day trip? See which side the Shonan coast is on from the Enoden →"
+    }
+  },
+  "pages": {
+    "/tokyo-to-kyoto-mt-fuji-seat": [
+      { "routeId": "tokaido-fuji", "messageId": "tokaidoRide" }
+    ],
+    "/kyoto-to-tokyo-mt-fuji-seat": [
+      { "routeId": "tokaido-fuji", "messageId": "tokaidoRide" }
+    ],
+    "/tokyo-to-osaka-mt-fuji-seat": [
+      { "routeId": "tokaido-fuji", "messageId": "tokaidoRide" }
+    ],
+    "/osaka-to-tokyo-mt-fuji-seat": [
+      { "routeId": "tokaido-fuji", "messageId": "tokaidoRide" }
+    ],
+    "/blog/seat-e-sold-out-mt-fuji": [
+      { "routeId": "tokaido-fuji", "messageId": "tokaidoArticle" }
+    ],
+    "/jr-pass-vs-single-ticket": [
+      { "routeId": "hokuriku-alps", "messageId": "hokuriku" },
+      { "routeId": "tohoku-iwate", "messageId": "tohoku" }
+    ],
+    "/itineraries/7-day-first-time-japan": [
+      { "routeId": "tokaido-fuji", "messageId": "tokaidoItinerary" },
+      { "routeId": "sagano-gorge", "messageId": "sagano" }
+    ],
+    "/itineraries/5-day-express-japan": [
+      { "routeId": "tokaido-fuji", "messageId": "tokaidoItinerary" },
+      { "routeId": "sagano-gorge", "messageId": "sagano" }
+    ],
+    "/itineraries/10-day-japan-with-fuji": [
+      { "routeId": "tokaido-fuji", "messageId": "tokaidoItinerary" },
+      { "routeId": "sagano-gorge", "messageId": "sagano" }
+    ],
+    "/itineraries/14-day-japan-golden-route": [
+      { "routeId": "enoden-coast", "messageId": "enoden" },
+      { "routeId": "sagano-gorge", "messageId": "sagano" }
+    ],
+    "/itineraries/tokyo-kyoto-osaka-without-jr-pass": [
+      { "routeId": "tokaido-fuji", "messageId": "tokaidoItinerary" },
+      { "routeId": "sagano-gorge", "messageId": "sagano" }
+    ]
+  }
+}

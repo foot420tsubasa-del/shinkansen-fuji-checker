@@ -6,6 +6,7 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
+import { RelatedScenicLinks } from "@/components/scenic/RelatedScenicLinks";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -128,6 +129,8 @@ export default async function TokyoToOsakaSeatPage({ params }: Props) {
             </Link>
           </div>
         </section>
+
+        <RelatedScenicLinks pagePath="/tokyo-to-osaka-mt-fuji-seat" locale={locale} className="mt-5" />
 
         <div className="mt-10 space-y-8">
           <section>
