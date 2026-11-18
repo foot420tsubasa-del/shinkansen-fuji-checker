@@ -6,6 +6,7 @@ import { transferPages } from "@/lib/content/transfers";
 import { FOLDED_PATHS, RETIRED_PATHS } from "@/lib/retired-routes";
 import { BLOG_POSTS } from "@/data/blog/posts";
 import { SUICA_GUIDES } from "@/data/suica-guides";
+import { SUICA_CHARACTER_NEWS } from "@/data/suica-character-news";
 import scenicCatalogue from "@/data/scenic-routes.json";
 
 const siteUrl = "https://fujiseat.com";
@@ -64,6 +65,7 @@ const dynamicPaths = [
   ...transferPages.map((page) => `/airport-transfers/${page.slug}`),
   ...BLOG_POSTS.map((post) => `/blog/${post.slug}`),
   ...SUICA_GUIDES.map((guide) => `/how-to-buy-suica/${guide.slug}`),
+  SUICA_CHARACTER_NEWS.path,
   ...(scenicCatalogue.routes as { status: string; slug?: string }[])
     .filter((r) => r.status === "live" && r.slug)
     .map((r) => `/scenic/${r.slug}`),

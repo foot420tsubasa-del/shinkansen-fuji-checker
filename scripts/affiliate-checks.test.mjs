@@ -1447,3 +1447,23 @@ test("guide: quiet Klook text links after the Quick Answer and in 'Booking via K
   const copy = src.slice(src.indexOf("const quickAnswerCopyByLocale"), src.indexOf("const priorityGuideFaqByLocale"));
   assert.equal((copy.match(/\n    book: /g) || []).length, 9, "a booking line in every locale");
 });
+
+test("Suica character news: verified facts, licensed image, hub link and sitemap entry stay together", () => {
+  const data = readFileSync("data/suica-character-news.ts", "utf8");
+  const page = readFileSync("app/[locale]/how-to-buy-suica/suica-new-character-2027/page.tsx", "utf8");
+  const hub = readFileSync("app/[locale]/how-to-buy-suica/page.tsx", "utf8");
+  const sitemap = readFileSync("app/sitemap.ts", "utf8");
+
+  for (const fact of ["860,152", "1,664,399", "April 1, 2027", "December 15, 2026 at 3:59 p.m. JST"]) {
+    assert.ok(data.includes(fact), `missing checked fact: ${fact}`);
+  }
+  assert.match(data, /jreast\.co\.jp\/press\/2026\/20261118_ho01\.pdf/);
+  assert.match(data, /jreast\.co\.jp\/suica-new-character-vote/);
+  assert.match(data, /Wikimedia Commons|commons\.wikimedia\.org/);
+  assert.match(data, /CC0 1\.0/);
+  assert.ok(page.includes("article.heroImage.sourceUrl") && page.includes("article.heroImage.licenseUrl"), "photo credit and license must be visible");
+  assert.ok(page.includes("instead of copying the image"), "explain why official character artwork is linked, not copied");
+  assert.ok(hub.includes('/how-to-buy-suica/suica-new-character-2027'), "Suica hub links to the news article");
+  assert.ok(sitemap.includes("SUICA_CHARACTER_NEWS.path"), "news article is in the sitemap");
+  assert.doesNotMatch(`${data}\n${page}`, /affiliate\.klook|travelpayouts|trip\.com/i, "news article has no affiliate link");
+});

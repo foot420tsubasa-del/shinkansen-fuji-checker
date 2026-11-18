@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Rabbit } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
@@ -105,6 +105,23 @@ export default async function HowToBuySuicaPage({ params }: Props) {
         <section id="simulator" className="mt-5 scroll-mt-24">
           <TicketMachineSim initialLang={simLang} />
         </section>
+
+        {locale === "en" ? (
+          <section className="mx-auto mt-8 max-w-3xl rounded-[22px] border border-[#cfe0f3] bg-[#eef6ff] p-5" aria-labelledby="suica-character-news">
+            <div className="flex gap-4">
+              <Rabbit className="mt-0.5 h-6 w-6 shrink-0 text-[#145aa0]" aria-hidden="true" />
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.08em] text-[#2E7D5B]">Suica news · November 2026</p>
+                <h2 id="suica-character-news" className="mt-1 text-lg font-extrabold text-[#082653]">Suica's next mascot has been chosen</h2>
+                <p className="mt-1 text-[14px] leading-6 text-slate-600">The purple rabbit candidate won the public vote. Its name is still open for suggestions, and the handover is planned for April 2027.</p>
+                <Link href="/how-to-buy-suica/suica-new-character-2027" className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-[#145aa0] underline underline-offset-2">
+                  Read the verified announcement
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+          </section>
+        ) : null}
 
         <section className="mt-12" aria-labelledby="suica-guides">
           <h2 id="suica-guides" className="text-2xl font-extrabold tracking-[-0.02em] text-[#082653]">
