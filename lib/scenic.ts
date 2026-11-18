@@ -300,6 +300,19 @@ export function matchRoute(from: string, to: string): RouteMatch {
   };
 }
 
+/** The mapped Tokaido part of a longer trip on the same railway corridor. */
+export function mappedTokaidoLeg(from: string, to: string): [string, string] | null {
+  const route = LIVE_ROUTES.find(({ id }) => id === "tokaido-fuji");
+  if (!route || route.timing?.kind !== "fuji-model") return null;
+  const boundary = position(route, "Shin-Osaka");
+  if (boundary === null) return null;
+  const beyond = (station: string) => (position(route, station) ?? -1) > boundary;
+  const east = route.timing.origins.forward;
+  if (east.includes(from) && beyond(to)) return [from, "Shin-Osaka"];
+  if (beyond(from) && east.includes(to)) return ["Shin-Osaka", to];
+  return null;
+}
+
 /** Routes that carry a view with this tag, for a chip chosen before a route. */
 export function routesForTag(tag: ViewTag): { live: ScenicRoute[]; soon: ScenicRoute[] } {
   const has = (r: ScenicRoute) => (r.tags ?? []).includes(tag) || (r.views ?? []).some((v) => v.tags.includes(tag));
@@ -372,6 +385,25 @@ export type TimelineItem = {
    */
   reversedAt: string[];
 };
+
+/** Orient the named section and clip it to the rider's own stops when needed. */
+export function viewingSection(route: ScenicRoute, view: ScenicView, direction: Direction, from: string, to: string) {
+  const [start, end] = direction === "forward" ? [view.from, view.to] : [view.to, view.from];
+  if (route.timing?.kind !== "timetable") return [start, end] as const;
+  const fromKm = position(route, from);
+  const toKm = position(route, to);
+  const offset = route.trackKmOffset ?? 0;
+  const lower = view.kmFrom + offset;
+  const upper = view.kmTo + offset;
+  const clippedStart = fromKm !== null && (direction === "forward" ? fromKm > lower : fromKm < upper);
+  const clippedEnd = toKm !== null && (direction === "forward" ? toKm < upper : toKm > lower);
+  return [clippedStart ? from : start, clippedEnd ? to : end] as const;
+}
+
+export function primaryTripView(items: TimelineItem[]) {
+  return items.find(({ view }) => view.main)
+    ?? items.reduce<TimelineItem | undefined>((best, item) => !best || item.visibleMinutes > best.visibleMinutes ? item : best, undefined);
+}
 
 /**
  * Reversal stations the train passes after leaving `fromKm` and up to `toKm`,

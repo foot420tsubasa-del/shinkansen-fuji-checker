@@ -10,15 +10,18 @@ import {
   addClock,
   fmtOffset,
   LIVE_ROUTES,
+  primaryTripView,
   referenceDeparture,
   seatedSide,
   timeline,
   trainsServing,
+  viewingSection,
   type Direction,
   type ViewTag,
   type ViewshedPoint,
 } from "@/lib/scenic";
 import { RouteViewMap } from "./RouteViewMap";
+import { ScenicTripSummary } from "./ScenicTripSummary";
 
 type MapPoint = ViewshedPoint & { lat: number; lng: number };
 
@@ -71,6 +74,7 @@ export function RouteTimeline({
   const trains = trainsServing(route, direction, from, to);
   const [trainId, setTrainId] = useState(trains[0]?.id);
   const [points, setPoints] = useState<MapPoint[] | null>(null);
+  const [mapUnavailable, setMapUnavailable] = useState(false);
   const [highlight, setHighlight] = useState<string | null>(null);
   const [date, setDate] = useState(tokyoDate);
   const train = trains.find((x) => x.id === trainId) ?? trains[0] ?? null;
@@ -80,14 +84,19 @@ export function RouteTimeline({
     let live = true;
     VIEWSHED_LOADERS[routeId]?.().then((data) => {
       if (live) setPoints(data.points);
+    }).catch(() => {
+      if (live) setMapUnavailable(true);
     });
     return () => {
       live = false;
     };
   }, [routeId]);
 
-  const { items } = points ? timeline(route, direction, from, to, points, train?.id) : { items: [] };
+  const { items } = points || route.timing?.kind === "fuji-model"
+    ? timeline(route, direction, from, to, points ?? [], train?.id)
+    : { items: [] };
   const shown = tags.length ? items.filter((it) => it.view.tags.some((tag) => tags.includes(tag))) : items;
+  const primary = primaryTripView(shown);
 
   const sizeLabel = (angle: number | null) =>
     angle === null ? null : angle >= 8 ? t("sizeBig") : angle >= 4 ? t("sizeClear") : t("sizeSmall");
@@ -105,6 +114,8 @@ export function RouteTimeline({
   }));
 
   return (
+    <div className="grid gap-5">
+    {primary ? <ScenicTripSummary route={route} direction={direction} from={from} to={to} item={primary} train={train?.[direction].train ?? (route.timing?.kind === "fuji-model" ? "Nozomi" : undefined)} showGuide={showRouteLink} /> : null}
     <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
       <div className="min-w-0 rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.06)] md:p-6">
         <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">{route.line}</p>
@@ -159,7 +170,9 @@ export function RouteTimeline({
         </div>
 
         <ol className="mt-5 grid gap-2">
-          {points === null ? (
+          {mapUnavailable && !shown.length ? (
+            <li className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-600">{t("noViews")}</li>
+          ) : points === null && !shown.length ? (
             <li className="h-20 animate-pulse rounded-2xl bg-slate-100" />
           ) : shown.length === 0 ? (
             <li className="rounded-2xl bg-slate-50 px-4 py-3 text-sm text-slate-600">
@@ -169,6 +182,7 @@ export function RouteTimeline({
             shown.map((it) => {
               const size = sizeLabel(it.view.maxAngle);
               const active = highlight === it.view.id;
+              const [start, end] = viewingSection(route, it.view, direction, from, to);
               return (
                 <li key={it.view.id}>
                   <button
@@ -187,7 +201,7 @@ export function RouteTimeline({
                     <span className="min-w-0">
                       <b className="block text-[15px] leading-snug text-ink">{it.view.name}</b>
                       <span className="mt-0.5 block text-xs leading-5 text-slate-600">
-                        {it.view.from} → {it.view.to} · {t("minutes", { n: it.visibleMinutes })}
+                        {start === end ? start : `${start} → ${end}`} · {t("minutes", { n: it.visibleMinutes })}
                         {size ? ` · ${size}` : ""}
                       </span>
                       <span className="block text-[11px] leading-5 text-slate-500">
@@ -267,10 +281,11 @@ export function RouteTimeline({
             directionLabel={route.directions.forward}
             highlight={highlight}
           />
-        ) : (
+        ) : !mapUnavailable ? (
           <div className="aspect-[680/460] animate-pulse rounded-[24px] bg-slate-100" />
-        )}
+        ) : null}
       </div>
+    </div>
     </div>
   );
 }

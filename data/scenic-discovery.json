@@ -1,0 +1,36 @@
+{
+  "regionLabel": "Region",
+  "anyRegionLabel": "All regions",
+  "apply": "Show matching routes",
+  "clear": "Clear filters",
+  "emptyTitle": "No routes match these filters",
+  "emptyBody": "Try a different season or region, or browse all routes.",
+  "filterHelp": "Seasons describe the scenery. Check the operator’s calendar before you book.",
+  "viewingLabel": "Scenery:",
+  "serviceLabel": "Train service:",
+  "foliageLabel": "Autumn colour",
+  "routeSearchLink": "Check this journey from your stations",
+  "regions": {
+    "hokkaido": "Hokkaido",
+    "tohoku": "Tohoku",
+    "kanto": "Tokyo & Kanto",
+    "chubu": "Chubu & Hokuriku",
+    "kansai": "Kansai"
+  },
+  "routes": {
+    "tokaido-fuji": { "regions": ["kanto", "chubu", "kansai"] },
+    "hokuriku-alps": { "regions": ["kanto", "chubu"], "scenery": "Clear days year-round. The Northern Alps typically carry snow from November to May." },
+    "enoden-coast": { "regions": ["kanto"] },
+    "fujikyu-fuji": { "regions": ["chubu"] },
+    "hakone-tozan": { "regions": ["kanto"], "foliage": [11], "flowers": [6, 7], "extraViews": ["gorge-river"] },
+    "sagano-gorge": { "regions": ["kansai"], "foliage": [11, 12], "flowers": [4], "months": [4, 11, 12], "scenery": "Cherry blossoms in early April and autumn leaves from mid-November to early December." },
+    "yurikamome-night": { "regions": ["kanto"] },
+    "joetsu-snow": { "regions": ["kanto", "chubu"], "scenery": "Clear days year-round. The Echigo mountains typically carry snow from November to May." },
+    "tohoku-iwate": { "regions": ["kanto", "tohoku"], "scenery": "Clear days. The mountain peaks typically carry snow from November to May." },
+    "kurobe-gorge": { "regions": ["chubu"], "foliage": [10, 11], "months": [5, 6, 10, 11], "scenery": "Fresh greenery in May and June, and autumn leaves from late October to mid-November." },
+    "gono-coast": { "regions": ["tohoku"], "scenery": "Coastal views year-round, with sunset views on some afternoon services." },
+    "furano-biei-flowers": { "regions": ["hokkaido"], "flowers": [6, 7, 8] },
+    "senmo-drift-ice": { "regions": ["hokkaido"] },
+    "tadami-river": { "regions": ["tohoku", "chubu"], "foliage": [10, 11] }
+  }
+}

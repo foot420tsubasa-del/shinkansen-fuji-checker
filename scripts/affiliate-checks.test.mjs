@@ -791,7 +791,7 @@ test("scenic hub: every live route appears once, candidates stay out, and every 
     assert.ok(item.months.length > 0 && item.seasons.length > 0, `${item.id}: card needs a season from its data`);
   }
   const page = readFileSync("app/[locale]/scenic/page.tsx", "utf8");
-  assert.match(page, /overview\.routes\.filter/);
+  assert.match(page, /scenicDiscoveryRoutes\(\{ view, season, region \}\)/);
   assert.match(page, /visibleRoutes\.map/);
 });
 
@@ -841,6 +841,31 @@ test("homepage station suggestions can extend past the hero photo", () => {
 const { createJiti } = await import("jiti");
 const jiti = createJiti(process.cwd() + "/", { alias: { "@": process.cwd() } });
 const scenic = await jiti.import("./lib/scenic.ts");
+const { scenicDiscoveryRoutes } = await jiti.import("./lib/scenic-discovery.ts");
+
+test("scenic discovery applies view, region, and season together, with explicit empty matches", () => {
+  assert.equal(scenicDiscoveryRoutes({}).length, scenic.LIVE_ROUTES.length);
+  assert.ok(scenicDiscoveryRoutes({}).every((route) => route.regionNames.length));
+  assert.deepEqual(scenicDiscoveryRoutes({ view: "snow", region: "hokkaido", season: "winter" }).map((route) => route.id), ["senmo-drift-ice"]);
+  assert.deepEqual(scenicDiscoveryRoutes({ view: "snow", region: "hokkaido", season: "summer" }), []);
+  assert.deepEqual(scenicDiscoveryRoutes({ view: "autumn-colour", region: "kansai", season: "winter" }).map((route) => route.id), ["sagano-gorge"]);
+  assert.deepEqual(scenicDiscoveryRoutes({ view: "autumn-colour", region: "kansai", season: "summer" }), []);
+  assert.ok(!scenicDiscoveryRoutes({ season: "winter" }).some((route) => route.id === "kurobe-gorge"));
+});
+
+test("route results keep the mapped Tokaido leg separate and only choose a highlight in the actual timeline", () => {
+  assert.deepEqual(scenic.mappedTokaidoLeg("Tokyo", "Hiroshima"), ["Tokyo", "Shin-Osaka"]);
+  assert.deepEqual(scenic.mappedTokaidoLeg("Hiroshima", "Tokyo"), ["Shin-Osaka", "Tokyo"]);
+  assert.equal(scenic.mappedTokaidoLeg("Shin-Osaka", "Hiroshima"), null);
+  assert.equal(scenic.mappedTokaidoLeg("Tokyo", "Sapporo"), null);
+  const route = scenic.LIVE_ROUTES.find((r) => r.id === "enoden-coast");
+  const points = JSON.parse(readFileSync("data/routes/enoden-coast-viewshed.json", "utf8")).points;
+  const journey = scenic.timeline(route, "backward", "Kamakura", "Fujisawa", points);
+  const result = scenic.primaryTripView(journey.items);
+  assert.equal(result.side, "left");
+  assert.equal(result.view.seat, null);
+  assert.deepEqual(scenic.viewingSection(route, result.view, "backward", "Kamakura", "Fujisawa"), ["Inamuragasaki", "Koshigoe"]);
+});
 const { makeScenicMapFrame, mapWorldPoint } = await jiti.import("./lib/scenic-map-frame.ts");
 
 test("terrain map: the railway and GSI tiles share the same Web Mercator frame", () => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowRight, Check, Train } from "lucide-react";
+import { ArrowRight, Check, Compass, Train } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "./components/SiteHeader";
@@ -15,7 +15,8 @@ import { ScenicRoutesGallery } from "@/components/home/ScenicRoutesGallery";
 import { RouteSearch } from "@/components/home/RouteSearch";
 import { RouteTimeline } from "@/components/scenic/RouteTimeline";
 import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
-import { matchRoute, resolveStation, type RouteMatch, type ViewTag } from "@/lib/scenic";
+import { mappedTokaidoLeg, matchRoute, resolveStation, timeline, type RouteMatch } from "@/lib/scenic";
+import { ScenicTripSummary } from "@/components/scenic/ScenicTripSummary";
 import { ORIGINS_BY_DIRECTION, type OriginId } from "@/lib/fuji-window";
 import { SearchTicketCard } from "@/components/scenic/SearchTicketCard";
 import type { HeroSeason } from "@/lib/hero-images";
@@ -198,8 +199,7 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
   // Route search (2026-11-15): the Tokaido answer is the checker below; any
   // other mapped route answers with a timeline, an unmapped one with what is next.
   const [routeMatch, setRouteMatch] = useState<RouteMatch | null>(null);
-  const [tags, setTags] = useState<ViewTag[]>([]);
-  const [tokaidoFrom, setTokaidoFrom] = useState("Tokyo");
+  const [submittedTrip, setSubmittedTrip] = useState({ from: "Tokyo", to: "Kyoto" });
   const [searchKey, setSearchKey] = useState(0);
 
   useEffect(() => {
@@ -280,6 +280,7 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
 
   const runSearch = (from: string, to: string) => {
     const match = matchRoute(from, to);
+    setSubmittedTrip({ from, to });
     trackCtaClick({
       placement: "route_search",
       href: `/?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`,
@@ -302,8 +303,7 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
       // matchRoute only lets through trips the Fuji model times; this is the
       // second lock, so the answer can never fall back to another station.
       if (ORIGINS_BY_DIRECTION[direction].includes(origin)) {
-        setRouteMatch(null);
-        setTokaidoFrom(from);
+        setRouteMatch(match);
         chooseDirection(direction);
         return;
       }
@@ -330,6 +330,9 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on arrival
   }, []);
 
+  const fujiMatch = routeMatch?.kind === "live" && routeMatch.route.id === "tokaido-fuji" ? routeMatch : null;
+  const fujiView = fujiMatch ? timeline(fujiMatch.route, fujiMatch.direction, fujiMatch.from, fujiMatch.to, []).items[0] : undefined;
+  const partialLeg = routeMatch?.kind === "unsupported" ? mappedTokaidoLeg(routeMatch.from, routeMatch.to) : null;
   const omioHref = OMIO_SHINKANSEN_URL;
 
   const bookingCard = (
@@ -422,11 +425,6 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
     <main className="page-shell min-h-screen text-ink">
       <SiteHeader />
 
-      {/* Hero, reworked 2026-11-15 toward a scenic-route site: the window
-          photograph fills the first screen and the checker sits on it in a
-          white panel. The view picker starts with Mt. Fuji alone; other views
-          join once their side and section have been verified. One tap on a
-          direction still answers, and the answer opens directly below. */}
       <section id="seat-checker" className="relative isolate z-10 scroll-mt-14 bg-ink">
         <div className="pointer-events-none absolute inset-0 -z-20 overflow-hidden">
           <HeroWindow season={season} />
@@ -436,7 +434,7 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
           className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(11,18,32,0.72)_0%,rgba(11,18,32,0.42)_30%,rgba(11,18,32,0.08)_56%,rgba(11,18,32,0.5)_100%)]"
         />
         <span className="absolute bottom-1 right-3 text-[10px] font-medium text-white/60">Illustrative image</span>
-        <div className="mx-auto flex min-h-[740px] max-w-[1180px] flex-col justify-between px-4 pb-6 pt-9 md:min-h-[720px] md:px-7 md:pb-10 md:pt-16">
+        <div className="mx-auto flex max-w-[1180px] flex-col justify-between px-4 pb-8 pt-9 md:min-h-[660px] md:px-7 md:pb-10 md:pt-16">
           <div className="break-keep text-center text-white">
             <p className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-white/90 md:text-xs">
               — {t("search.eyebrow")} —
@@ -450,7 +448,27 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
           </div>
 
           <div className="mx-auto mt-10 w-full max-w-[1000px] rounded-[26px] bg-white/95 p-4 text-ink shadow-[0_24px_60px_rgba(0,0,0,0.3)] backdrop-blur md:p-6">
-            <RouteSearch tags={tags} onTagsChange={setTags} onSubmit={runSearch} />
+            <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(250px,0.47fr)]">
+              <section aria-labelledby="search-known-route" className="min-w-0">
+                <h2 id="search-known-route" className="flex items-center gap-2 text-lg font-extrabold"><Train className="h-5 w-5" aria-hidden="true" />{t("search.knownRoute")}</h2>
+                <p className="mb-3 mt-1 text-sm text-slate-600">{t("search.knownRouteHelp")}</p>
+                <RouteSearch key={searchKey} initialFrom={submittedTrip.from} initialTo={submittedTrip.to} onSubmit={runSearch} />
+              </section>
+              <section aria-labelledby="search-discover" className="min-w-0 rounded-2xl border border-[#c7dfd5] bg-[#eff7f3] p-4">
+                <h2 id="search-discover" className="flex items-center gap-2 text-lg font-extrabold"><Compass className="h-5 w-5 text-emerald-800" aria-hidden="true" />{t("search.discoverMode")}</h2>
+                <p className="mt-1 text-sm text-slate-700">{t("search.discoverHelp")}</p>
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {([["fuji", "fuji"], ["sea", "sea"], ["mountain", "mountains"]] as const).map(([label, view]) => (
+                    <Link key={view} href={`/scenic?view=${view}`} prefetch={false} onClick={() => trackCtaClick({ placement: "home_scenic_discovery", href: `/scenic?view=${view}`, label: view, category: "train", locale })} className="inline-flex min-h-9 items-center rounded-full border border-[#b5d2c3] bg-white px-3 text-xs font-bold text-emerald-950 hover:bg-emerald-100">
+                      {t(`search.${label}`)}
+                    </Link>
+                  ))}
+                </div>
+                <Link href="/scenic" className="mt-2 inline-flex min-h-10 items-center gap-2 text-sm font-extrabold text-emerald-950 underline underline-offset-2" onClick={() => trackCtaClick({ placement: "home_scenic_discovery", href: "/scenic", label: "browse", category: "train", locale })}>
+                  {t("search.discoverLink")} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </section>
+            </div>
 
             <div className="mt-4 flex flex-wrap items-center justify-between gap-x-4 gap-y-2.5">
               <ul className="flex flex-wrap gap-x-4 gap-y-1 text-[12.5px] font-medium text-slate-600">
@@ -472,7 +490,7 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
       </section>
 
       <div className="mx-auto max-w-[1180px] px-5 md:px-7">
-        {routeMatch?.kind === "live" ? (
+        {routeMatch?.kind === "live" && !fujiMatch ? (
           <section ref={answerRef} className="grid scroll-mt-16 grid-cols-1 gap-5 pb-4 pt-8">
             <RouteTimeline
               key={`${searchKey}-${routeMatch.route.id}`}
@@ -480,7 +498,6 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
               direction={routeMatch.direction}
               from={routeMatch.from}
               to={routeMatch.to}
-              tags={tags}
             />
             {/* Only where the JR Pass really covers the line: the Enoden and the
                 Fujikyu Line are private railways it does not. */}
@@ -503,6 +520,11 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
                 {t("search.unsupportedTitle", { from: routeMatch.from, to: routeMatch.to })}
               </h2>
               <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("search.unsupportedBody")}</p>
+              {partialLeg ? (
+                <Link href={`/?${new URLSearchParams({ from: partialLeg[0], to: partialLeg[1] })}`} onClick={(event) => { if (!event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) { event.preventDefault(); runSearch(...partialLeg); } }} className="mt-4 flex w-fit items-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-bold text-ink">
+                  {t("search.partialLeg")}: {partialLeg.join(" → ")} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                </Link>
+              ) : null}
               <Link href="/scenic" className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-fuji underline underline-offset-2">
                 {t("search.browseScenicMap")}
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -559,21 +581,16 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
               </div>
             </div>
           </section>
-        ) : hasChecked ? (
+        ) : hasChecked && fujiMatch && fujiView ? (
           // Mobile reads answer, booking, timing, seat map; from lg the four
           // pair up as answer | booking over timing | seat map.
           <section ref={answerRef} className="grid scroll-mt-16 grid-cols-1 gap-5 pb-4 pt-8 lg:grid-cols-2">
-            <div className="min-w-0 rounded-[24px] bg-ink p-6 text-left text-white shadow-[0_18px_44px_rgba(11,18,32,0.25)] md:p-7">
-              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/60">{currentDirectionLabel}</p>
-              <p className="mt-2 text-[48px] font-extrabold leading-none tracking-[-0.03em] md:text-[60px]">
-                Seat <span className="text-[#ff7a5c]">{recommendation.standardWindowSeat}</span>
-              </p>
-              <p className="mt-3 text-[15px] leading-6 text-white/85">{t("resultSeatEMain")}</p>
-              <p className="mt-1 text-xs leading-5 text-white/60">{t("resultSeatDFallback")}</p>
+            <ScenicTripSummary route={fujiMatch.route} direction={fujiMatch.direction} from={fujiMatch.from} to={fujiMatch.to} item={fujiView} train="Nozomi">
+              <p className="mt-2 text-xs leading-5 text-slate-600">{t("resultSeatDFallback")}</p>
               <div className="mt-4 min-w-0">
-                <VisibilityChip data={visData} loading={visLoading} error={visError} tone="dark" />
+                <VisibilityChip data={visData} loading={visLoading} error={visError} tone="light" />
               </div>
-            </div>
+            </ScenicTripSummary>
             <div className="min-w-0">{bookingCard}</div>
             <div className="min-w-0 lg:col-span-2">
               <FujiViewMap direction={direction} />
@@ -584,12 +601,12 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
             </div>
             <div className="min-w-0 rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.05)] md:p-6 [&>div:first-child]:mt-0 [&>div:first-child]:border-t-0 [&>div:first-child]:pt-0">
               <FujiTiming
-                key={`${direction}-${tokaidoFrom}`}
+                key={`${direction}-${fujiMatch.from}`}
                 direction={direction}
                 locale={locale}
                 pagePath="/"
                 reminder
-                initialOrigin={tokaidoFrom.toLowerCase().replace(/ /g, "-")}
+                initialOrigin={fujiMatch.from.toLowerCase().replace(/ /g, "-")}
               />
             </div>
             <div className="min-w-0">

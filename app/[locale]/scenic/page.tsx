@@ -7,11 +7,13 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { ScenicOverviewMap } from "@/components/scenic/ScenicOverviewMap";
 import hub from "@/data/scenic-hub.json";
+import discovery from "@/data/scenic-discovery.json";
 import overview from "@/data/scenic-overview.json";
+import { scenicDiscoveryRoutes, viewFilters } from "@/lib/scenic-discovery";
 
 type Props = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ view?: string | string[]; season?: string | string[] }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -29,22 +31,20 @@ function first(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
 }
 
-function filterHref(view: string | undefined, season: string | undefined) {
-  const query = new URLSearchParams();
-  if (view) query.set("view", view);
-  if (season) query.set("season", season);
-  const suffix = query.toString();
-  return suffix ? `/scenic?${suffix}` : "/scenic";
-}
+const filterClass = "mt-1 block min-h-12 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-ink";
 
 export default async function ScenicHubPage({ params, searchParams }: Props) {
   const [{ locale }, query] = await Promise.all([params, searchParams]);
   const requestedView = first(query.view);
   const requestedSeason = first(query.season);
-  const view = hub.viewFilters.some((item) => item.id === requestedView) ? requestedView : undefined;
+  const requestedRegion = first(query.region);
+  const view = viewFilters.some((item) => item.id === requestedView) ? requestedView : undefined;
   const season = hub.seasonFilters.some((item) => item.id === requestedSeason) ? requestedSeason : undefined;
-  const visibleRoutes = overview.routes.filter((route) => (!view || route.categories.includes(view)) && (!season || route.seasons.includes(season)));
-  const monthRows = hub.months.map((label, index) => ({ label, routes: overview.routes.filter((route) => route.months.includes(index + 1)) }));
+  const region = requestedRegion && Object.hasOwn(discovery.regions, requestedRegion) ? requestedRegion : undefined;
+  const visibleRoutes = scenicDiscoveryRoutes({ view, season, region });
+  const allRoutes = scenicDiscoveryRoutes({});
+  const monthRows = hub.months.map((label, index) => ({ label, routes: allRoutes.filter((route) => route.months.includes(index + 1)) }));
+  const path = locale === "en" ? "/scenic" : `/${locale}/scenic`;
   const schemas = [
     {
       "@context": "https://schema.org",
@@ -76,34 +76,45 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
           <p className="mt-5 text-[17px] leading-8 text-slate-700 md:text-lg">{hub.intro}</p>
         </header>
 
-        <section className="mt-9 rounded-[22px] border border-slate-200 bg-white p-5" aria-labelledby="filter-heading">
-          <div className="flex items-baseline justify-between gap-4">
+        <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-4 sm:p-5" aria-labelledby="filter-heading">
+          <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h2 id="filter-heading" className="text-lg font-extrabold">{hub.filterTitle}</h2>
-            <p className="text-sm font-semibold text-slate-500">{visibleRoutes.length} {hub.routeCountLabel}</p>
+            <p className="text-sm font-semibold text-slate-600">{visibleRoutes.length} {visibleRoutes.length === 1 ? "route" : hub.routeCountLabel}</p>
           </div>
-          <div className="mt-4">
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-500">{hub.sceneryLabel}</p>
-            <div className="mt-2 flex flex-wrap gap-2">
-              <Link href={filterHref(undefined, season)} aria-current={!view ? "page" : undefined} className={`rounded-full px-3.5 py-2 text-sm font-bold ${!view ? "bg-ink text-white" : "bg-slate-100 text-ink hover:bg-slate-200"}`}>{hub.allViewsLabel}</Link>
-              {hub.viewFilters.map((item) => (
-                <Link key={item.id} href={filterHref(item.id, season)} aria-current={view === item.id ? "page" : undefined} className={`rounded-full px-3.5 py-2 text-sm font-bold ${view === item.id ? "bg-ink text-white" : "bg-slate-100 text-ink hover:bg-slate-200"}`}>
-                  {item.label}
-                </Link>
-              ))}
+          <form method="get" action={path} className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            <label className="col-span-2 min-w-0 text-sm font-bold sm:col-span-1">{hub.sceneryLabel}
+              <select name="view" defaultValue={view ?? ""} className={filterClass}>
+                <option value="">{hub.allViewsLabel}</option>
+                {viewFilters.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}
+              </select>
+            </label>
+            <label className="min-w-0 text-sm font-bold">{discovery.regionLabel}
+              <select name="region" defaultValue={region ?? ""} className={filterClass}>
+                <option value="">{discovery.anyRegionLabel}</option>
+                {Object.entries(discovery.regions).map(([id, label]) => <option key={id} value={id}>{label}</option>)}
+              </select>
+            </label>
+            <label className="min-w-0 text-sm font-bold">{hub.seasonLabel}
+              <select name="season" defaultValue={season ?? ""} className={filterClass}>
+                <option value="">{hub.anySeasonLabel}</option>
+                {hub.seasonFilters.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}
+              </select>
+            </label>
+            <div className="col-span-2 flex flex-wrap items-center gap-3 sm:col-span-3">
+              <button type="submit" className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-white">{discovery.apply}<ArrowRight className="h-4 w-4" aria-hidden="true" /></button>
+              {view || region || season ? <Link href="/scenic" className="inline-flex min-h-11 items-center px-2 text-sm font-bold underline">{discovery.clear}</Link> : null}
             </div>
-          </div>
-          <div className="mt-5">
-            <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-500">{hub.seasonLabel}</p>
-            <div className="mt-2 flex flex-wrap gap-2">
-              <Link href={filterHref(view, undefined)} aria-current={!season ? "page" : undefined} className={`rounded-full px-3.5 py-2 text-sm font-bold ${!season ? "bg-fuji text-white" : "bg-[#f8eee9] text-ink hover:bg-[#f1ded4]"}`}>{hub.anySeasonLabel}</Link>
-              {hub.seasonFilters.map((item) => (
-                <Link key={item.id} href={filterHref(view, item.id)} aria-current={season === item.id ? "page" : undefined} className={`rounded-full px-3.5 py-2 text-sm font-bold ${season === item.id ? "bg-fuji text-white" : "bg-[#f8eee9] text-ink hover:bg-[#f1ded4]"}`}>
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          </div>
+          </form>
+          <p className="mt-2 text-xs leading-5 text-slate-600">{discovery.filterHelp}</p>
         </section>
+
+        {visibleRoutes.length === 0 ? (
+          <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5">
+            <h2 className="text-lg font-extrabold">{discovery.emptyTitle}</h2>
+            <p className="mt-2 text-sm text-slate-700">{discovery.emptyBody}</p>
+            <Link href="/scenic" className="mt-3 inline-flex min-h-11 items-center font-bold text-fuji underline">{hub.allViewsLabel}</Link>
+          </section>
+        ) : null}
 
         <section className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" aria-label={hub.routesLabel}>
           {visibleRoutes.map((route) => (
@@ -116,11 +127,12 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
                 <div className="flex flex-1 flex-col p-5">
                   <p className="text-xs font-bold uppercase tracking-[0.08em] text-fuji">{route.line}</p>
                   <h2 className="mt-2 text-xl font-extrabold leading-tight tracking-[-0.02em] group-hover:text-fuji">{route.title}</h2>
-                  <p className="mt-1 text-xs font-semibold text-slate-500">{route.region}</p>
+                  <p className="mt-1 text-xs font-bold text-slate-600">{route.regionNames.join(" · ")}</p>
+                  <p className="mt-1 text-xs text-slate-600">{route.region}</p>
                   <p className="mt-4 text-[15px] font-semibold leading-6 text-ink">{route.teaser}</p>
                   <div className="mt-4 border-t border-slate-100 pt-4 text-sm leading-6 text-slate-600">
-                    <p><span className="font-bold text-ink">{hub.whenLabel}</span> {route.season}</p>
-                    {route.notice ? <p className="mt-2 rounded-xl bg-amber-50 px-3 py-2 text-[13px] leading-5 text-amber-950">{route.notice}</p> : null}
+                    <p><span className="font-bold text-ink">{discovery.viewingLabel}</span> {route.scenery}</p>
+                    {route.notice ? <p className="mt-2 rounded-xl bg-amber-50 px-3 py-2 text-[13px] leading-5 text-amber-950"><b>{discovery.serviceLabel}</b> {route.notice}</p> : null}
                   </div>
                   <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-bold text-fuji">{hub.cardLinkLabel} <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
                 </div>

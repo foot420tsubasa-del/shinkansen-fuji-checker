@@ -14,6 +14,7 @@ import { TicketGuide, type ResolvedTicketLink } from "@/components/scenic/Ticket
 import { ScenicStayBlock } from "@/components/scenic/ScenicStayBlock";
 import type { AffiliateProvider } from "@/lib/affiliate/links";
 import { getScenicStay } from "@/lib/scenic-stays";
+import discovery from "@/data/scenic-discovery.json";
 
 /*
  * One template for every mapped route (since 2026-11-15): the page reads only
@@ -83,7 +84,9 @@ export default async function ScenicRoutePage({ params }: Props) {
       : [
           {
             q: `Which seat letter should I book on the ${route.line}?`,
-            a: "Pick a window seat on the side you need for your direction of travel. We give sides rather than seat letters because we have not yet verified the letters for this line.",
+            a: route.id === "enoden-coast" && route.notes?.[0]
+              ? route.notes[0]
+              : "Look out on the side shown for your direction of travel. Seat numbers and reservation rules depend on the train.",
           },
         ]),
     ...(route.faq ?? []),
@@ -111,6 +114,9 @@ export default async function ScenicRoutePage({ params }: Props) {
           <Link href="/scenic" className="underline-offset-4 hover:underline">Scenic routes</Link> · {route.line}
         </p>
         <h1 className="mt-3 text-[32px] font-extrabold leading-[1.1] tracking-[-0.03em] md:text-[44px]">{route.page.h1}</h1>
+        <Link href={`/?${new URLSearchParams({ from, to })}`} className="mt-3 inline-flex min-h-10 items-center gap-2 text-sm font-bold text-fuji underline underline-offset-2">
+          {discovery.routeSearchLink} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
 
         {route.image ? (
           <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-[22px] bg-ink">
