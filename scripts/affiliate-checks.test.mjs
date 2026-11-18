@@ -879,6 +879,22 @@ test("Resort Shirakami: sea on the left going to Aomori, Iwaki on the right; the
   assert.ok(local.items.length >= 1 && local.items.every((i) => i.reversedAt.length === 0), "no reversal between Fukaura and Ajigasawa");
 });
 
+test("Furano Line: Tokachi mountains on the left to Furano, the retired Norokko is not presented as a 2027 train", () => {
+  const points = JSON.parse(readFileSync("data/routes/furano-biei-flowers-viewshed.json", "utf8")).points;
+  const m = scenic.matchRoute("Biei", "Furano");
+  assert.equal(m.kind, "live");
+  assert.equal(m.route.id, "furano-biei-flowers");
+  const { items, train } = scenic.timeline(m.route, m.direction, "Biei", "Furano", points, "local");
+  assert.equal(train.forward.train, "14:19 local from Biei");
+  assert.deepEqual(items.map((i) => [i.view.id, i.side]), [["tokachi-range", "left"]]);
+  const back = scenic.timeline(m.route, "backward", "Furano", "Biei", points, "local");
+  assert.deepEqual(back.items.map((i) => [i.view.id, i.side]), [["tokachi-range", "right"]]);
+  assert.ok(items.every((i, k) => k === 0 || i.start > items[k - 1].start), "in time order");
+  assert.match(m.route.notes.join(" "), /final run on September 23, 2026/);
+  assert.match(m.route.notes.join(" "), /regular Furano Line local trains/);
+  assert.equal(scenic.resolveStation("lavender farm"), "Lavender-Farm");
+});
+
 test("timeline: Tokyo → Kanazawa runs Asama (right), Myoko (left), Alps (left), in order, from the JR timetable", () => {
   const m = scenic.matchRoute("Tokyo", "Kanazawa");
   const { items, train } = scenic.timeline(m.route, m.direction, "Tokyo", "Kanazawa", hokurikuPoints, "hakutaka");
@@ -1084,7 +1100,7 @@ test("JR Pass card: only on lines the pass covers (not the Enoden or the Fujikyu
 
 test("scenic pages: every live route has a ticket guide, with links that exist and official pages on the operators' own sites", () => {
   const links = JSON.parse(readFileSync("data/affiliate-links.json", "utf8"));
-  const official = ["japanrailpass.net", "www.westjr.co.jp", "www.enoden.co.jp", "www.fujikyu-railway.jp", "www.odakyu-freepass.jp", "www.hakonenavi.jp", "www.sagano-kanko.co.jp", "ars-saganokanko.triplabo.jp", "www.yurikamome.co.jp", "www.odakyu-freepass.jp", "www.kurotetu.co.jp"];
+  const official = ["japanrailpass.net", "www.westjr.co.jp", "www.enoden.co.jp", "www.fujikyu-railway.jp", "www.odakyu-freepass.jp", "www.hakonenavi.jp", "www.sagano-kanko.co.jp", "ars-saganokanko.triplabo.jp", "www.yurikamome.co.jp", "www.odakyu-freepass.jp", "www.kurotetu.co.jp", "www.jrhokkaido.co.jp"];
   for (const route of scenic.LIVE_ROUTES) {
     const g = route.ticketGuide;
     assert.ok(g, `${route.id} has no ticket guide`);

@@ -7489,24 +7489,84 @@
     },
     {
       "id": "furano-biei-flowers",
-      "status": "candidate",
+      "status": "live",
       "tier": 3,
       "view": [
         "countryside",
         "seasonal-flowers"
       ],
-      "title": "Lavender fields from the Furano-Biei Norokko",
+      "title": "Furano Line flower fields and the Tokachi mountains",
       "line": "Furano Line",
       "operator": "JR Hokkaido",
       "between": [
-        "Asahikawa / Biei",
+        "Biei",
         "Furano"
       ],
-      "side": null,
+      "side": {
+        "toFurano": "the Tokachi mountains on the left; fields spread across both sides",
+        "toBiei": "the Tokachi mountains on the right"
+      },
       "seat": null,
-      "section": null,
-      "season": null,
-      "ticket": null,
+      "section": "Biei to Furano",
+      "season": "Summer for flowers; clear days in any season for the Tokachi mountains",
+      "slug": "furano-biei-norokko",
+      "href": "/scenic/furano-biei-norokko",
+      "stations": [
+        {
+          "name": "Biei",
+          "ja": "美瑛",
+          "lat": 43.5909601,
+          "lng": 142.4612251
+        },
+        {
+          "name": "Bibaushi",
+          "ja": "美馬牛",
+          "lat": 43.5376491,
+          "lng": 142.4473761
+        },
+        {
+          "name": "Kami-Furano",
+          "ja": "上富良野",
+          "lat": 43.4632561,
+          "lng": 142.4689582
+        },
+        {
+          "name": "Nishinaka",
+          "ja": "西中",
+          "lat": 43.429202,
+          "lng": 142.44158
+        },
+        {
+          "name": "Lavender-Farm",
+          "ja": "ラベンダー畑",
+          "lat": 43.4173264,
+          "lng": 142.4310927
+        },
+        {
+          "name": "Naka-Furano",
+          "ja": "中富良野",
+          "lat": 43.4058508,
+          "lng": 142.4210386
+        },
+        {
+          "name": "Shikauchi",
+          "ja": "鹿討",
+          "lat": 43.387233,
+          "lng": 142.404669
+        },
+        {
+          "name": "Gakuden",
+          "ja": "学田",
+          "lat": 43.366216,
+          "lng": 142.386216
+        },
+        {
+          "name": "Furano",
+          "ja": "富良野",
+          "lat": 43.3469008,
+          "lng": 142.3916593
+        }
+      ],
       "osm": {
         "name": "富良野線",
         "bbox": [
@@ -7514,8 +7574,442 @@
           142.35,
           43.6,
           142.5
+        ],
+        "chain": true,
+        "joinM": 800
+      },
+      "targets": [
+        {
+          "id": "tokachi",
+          "name": "Mt. Tokachi and the Tokachi mountain range",
+          "lat": 43.4176,
+          "lng": 142.686,
+          "elevation": 2066
+        }
+      ],
+      "views": [
+        {
+          "id": "tokachi-range",
+          "name": "Mt. Tokachi and the Tokachi mountain range",
+          "targets": [
+            "tokachi"
+          ],
+          "tags": [
+            "mountain",
+            "countryside"
+          ],
+          "side": {
+            "forward": "left"
+          },
+          "from": "Biei",
+          "to": "Furano",
+          "kmFrom": 0,
+          "kmTo": 31,
+          "sectionKm": 31,
+          "nearestKm": null,
+          "maxAngle": 5.72,
+          "season": "Clear days; summer adds fields of colour, but crops and bloom dates vary",
+          "seat": null,
+          "basis": "terrain model; JR Hokkaido confirms the Tokachi mountain range as a feature of this route",
+          "main": true,
+          "seenKm": [
+            0,
+            0.2,
+            0.4,
+            0.6,
+            0.8,
+            1,
+            1.3,
+            1.5,
+            1.8,
+            2,
+            2.2,
+            2.4,
+            2.6,
+            2.8,
+            3,
+            3.2,
+            3.4,
+            3.6,
+            3.8,
+            4,
+            4.2,
+            4.4,
+            4.6,
+            4.8,
+            5,
+            5.2,
+            5.4,
+            5.6,
+            5.8,
+            6,
+            6.2,
+            6.4,
+            6.6,
+            6.8,
+            7,
+            7.2,
+            7.4,
+            7.6,
+            7.8,
+            8,
+            8.2,
+            8.4,
+            8.6,
+            8.8,
+            9,
+            9.2,
+            9.4,
+            9.6,
+            9.8,
+            10.02,
+            10.22,
+            10.42,
+            10.62,
+            10.82,
+            11.02,
+            11.22,
+            11.42,
+            11.62,
+            11.82,
+            12.02,
+            12.22,
+            12.42,
+            12.62,
+            12.82,
+            13.02,
+            13.22,
+            13.42,
+            13.62,
+            13.82,
+            14.02,
+            14.22,
+            14.42,
+            14.62,
+            14.82,
+            15.02,
+            15.22,
+            15.42,
+            15.62,
+            15.82,
+            16.02,
+            16.22,
+            16.42,
+            16.62,
+            16.82,
+            17.02,
+            17.22,
+            17.42,
+            17.62,
+            17.82,
+            18.02,
+            18.22,
+            18.42,
+            18.62,
+            18.82,
+            19.02,
+            19.22,
+            19.42,
+            19.62,
+            19.82,
+            20.02,
+            20.22,
+            20.42,
+            20.62,
+            20.82,
+            21.02,
+            21.22,
+            21.42,
+            21.62,
+            21.82,
+            22.02,
+            22.22,
+            22.42,
+            22.62,
+            22.82,
+            23.02,
+            23.22,
+            23.42,
+            23.62,
+            23.82,
+            24.02,
+            24.22,
+            24.42,
+            24.62,
+            24.82,
+            25.02,
+            25.22,
+            25.42,
+            25.62,
+            25.82,
+            26.02,
+            26.22,
+            26.42,
+            26.62,
+            26.82,
+            27.02,
+            27.22,
+            27.42,
+            27.62,
+            27.82,
+            28.02,
+            28.22,
+            28.42,
+            28.62,
+            28.82,
+            29.02,
+            29.22,
+            29.42,
+            29.62,
+            29.82,
+            30.02,
+            30.22,
+            30.42,
+            30.62,
+            30.82,
+            31
+          ]
+        }
+      ],
+      "viewshed": "data/routes/furano-biei-flowers-viewshed.json",
+      "trackKmOffset": 0,
+      "timelineStations": [
+        {
+          "name": "Biei",
+          "ja": "美瑛",
+          "km": 0
+        },
+        {
+          "name": "Bibaushi",
+          "ja": "美馬牛",
+          "km": 6.79
+        },
+        {
+          "name": "Kami-Furano",
+          "ja": "上富良野",
+          "km": 15.98
+        },
+        {
+          "name": "Nishinaka",
+          "ja": "西中",
+          "km": 20.35
+        },
+        {
+          "name": "Lavender-Farm",
+          "ja": "ラベンダー畑",
+          "km": 21.96
+        },
+        {
+          "name": "Naka-Furano",
+          "ja": "中富良野",
+          "km": 23.48
+        },
+        {
+          "name": "Shikauchi",
+          "ja": "鹿討",
+          "km": 25.87
+        },
+        {
+          "name": "Gakuden",
+          "ja": "学田",
+          "km": 28.66
+        },
+        {
+          "name": "Furano",
+          "ja": "富良野",
+          "km": 31.11
+        }
+      ],
+      "directions": {
+        "forward": [
+          "Biei",
+          "Furano"
+        ],
+        "backward": [
+          "Furano",
+          "Biei"
         ]
       },
+      "verification": "The left-hand mountain view going from Biei to Furano comes from a terrain sight-line model (GSI elevation and OSM track). JR Hokkaido describes the Tokachi mountain range, Biei hills and Furano Line fields as the route's scenery, but does not publish a seat-side recommendation. The OSM Biei–Furano track is 31.11 km against JR Hokkaido's official 31.0 km fare distance; no seat letter is claimed.",
+      "notes": [
+        "The Furano-Biei Norokko made its final run on September 23, 2026. It is not a 2027 seasonal train. JR Hokkaido plans the new Blue Star 'Hill Colors' train between Asahikawa and Furano from early July to early September 2027, but its exact operating dates, stops and times are still subject to change.",
+        "The timeline below uses regular Furano Line local trains, not the retired Norokko. Lavender-Farm is a seasonal station and is not a stop on these reference trains. Check JR Hokkaido for your travel date.",
+        "The model verifies the Tokachi mountains on the left towards Furano. Flower fields and crops change by season and are spread across the landscape, so this page does not promise one fixed side for lavender."
+      ],
+      "timing": {
+        "kind": "timetable",
+        "source": "JR Hokkaido official station departure information, checked November 18, 2026, cross-checked with the 2026 Furano Line timetable release: the 14:19 local from Biei and the 13:16 local from Furano. These are regular trains; check again for your date.",
+        "sourceUrl": "https://www3.jrhokkaido.co.jp/webunkou/stationlist.html",
+        "trains": [
+          {
+            "id": "local",
+            "label": "Local",
+            "note": "regular Furano Line local train; times can change at a timetable revision",
+            "forward": {
+              "train": "14:19 local from Biei",
+              "stops": [
+                [
+                  "Biei",
+                  null,
+                  "14:19"
+                ],
+                [
+                  "Bibaushi",
+                  "14:26",
+                  "14:26"
+                ],
+                [
+                  "Kami-Furano",
+                  "14:39",
+                  "14:39"
+                ],
+                [
+                  "Nishinaka",
+                  "14:44",
+                  "14:44"
+                ],
+                [
+                  "Naka-Furano",
+                  "14:49",
+                  "14:49"
+                ],
+                [
+                  "Shikauchi",
+                  "14:52",
+                  "14:52"
+                ],
+                [
+                  "Gakuden",
+                  "14:56",
+                  "14:56"
+                ],
+                [
+                  "Furano",
+                  "14:59",
+                  null
+                ]
+              ]
+            },
+            "backward": {
+              "train": "13:16 local from Furano",
+              "stops": [
+                [
+                  "Furano",
+                  null,
+                  "13:16"
+                ],
+                [
+                  "Gakuden",
+                  "13:19",
+                  "13:19"
+                ],
+                [
+                  "Shikauchi",
+                  "13:23",
+                  "13:23"
+                ],
+                [
+                  "Naka-Furano",
+                  "13:27",
+                  "13:27"
+                ],
+                [
+                  "Nishinaka",
+                  "13:30",
+                  "13:30"
+                ],
+                [
+                  "Kami-Furano",
+                  "13:36",
+                  "13:36"
+                ],
+                [
+                  "Bibaushi",
+                  "13:46",
+                  "13:46"
+                ],
+                [
+                  "Biei",
+                  "13:59",
+                  null
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "page": {
+        "title": "Furano Line: Which Side for the Tokachi Mountains and Flower Fields?",
+        "description": "From Biei to Furano, the Tokachi mountain range is on the left. Flower fields vary and are not confined to one side. Includes a terrain-model map, regular local-train times, and the current status of the retired Furano-Biei Norokko.",
+        "h1": "Furano Line: which side for the Tokachi mountains and flower fields?",
+        "labelStations": [
+          "Biei",
+          "Bibaushi",
+          "Kami-Furano",
+          "Lavender-Farm",
+          "Naka-Furano",
+          "Furano"
+        ]
+      },
+      "ticket": {
+        "provider": "klook",
+        "linkId": "jrPass",
+        "note": "The Japan Rail Pass covers regular JR Hokkaido trains on the Furano Line."
+      },
+      "ticketGuide": {
+        "verdict": "For the regular Furano Line, buy a normal JR ticket or use a valid JR Pass. The former Norokko no longer operates; check JR Hokkaido separately for the 2027 Blue Star train.",
+        "options": [
+          {
+            "who": "Biei to Furano on a regular local train",
+            "buy": "A normal JR ticket"
+          },
+          {
+            "who": "Travelling more widely on JR trains",
+            "buy": "Japan Rail Pass"
+          }
+        ],
+        "sources": [
+          {
+            "label": "JR Hokkaido Blue Star route plan",
+            "url": "https://www.jrhokkaido.co.jp/startrain/plan/"
+          }
+        ],
+        "links": [
+          {
+            "kind": "affiliate",
+            "linkId": "jrPass",
+            "label": "Japan Rail Pass",
+            "product": "jr_pass"
+          }
+        ],
+        "more": {
+          "href": "/jr-pass-vs-single-ticket",
+          "label": "JR Pass or single tickets: the full comparison"
+        }
+      },
+      "faq": [
+        {
+          "q": "Which side should I sit on from Biei to Furano?",
+          "a": "Choose the left for the Tokachi mountain range on a clear day. Coming back towards Biei, it is on the right. Flower fields and crops vary by place and season, so there is no verified single best side for lavender."
+        },
+        {
+          "q": "Does the Furano-Biei Norokko still run?",
+          "a": "No. JR Hokkaido states that its final run was September 23, 2026. Do not plan a 2027 trip around the Norokko timetable."
+        },
+        {
+          "q": "What replaces the Norokko in 2027?",
+          "a": "JR Hokkaido plans the Blue Star 'Hill Colors' train between Asahikawa and Furano from early July to early September 2027. The operator says stops and times may change, so use its official page before booking."
+        },
+        {
+          "q": "Does the JR Pass cover the Furano Line?",
+          "a": "Yes, for regular JR Hokkaido local trains. Separate reservation or product conditions may apply to special sightseeing trains, so check the operator's details."
+        }
+      ],
+      "chip": {
+        "emoji": "🪻",
+        "label": "Furano fields"
+      },
+      "teaser": "Biei → Furano · Tokachi mountains on the left",
       "near": [
         "Furano",
         "Biei",
