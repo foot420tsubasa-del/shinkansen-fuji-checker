@@ -735,7 +735,8 @@ test("view map: the line is OpenStreetMap-attributed and the window brackets Shi
   assert.ok(route.view.opensLng < mishima.lng, "the view opens after Mishima, not before");
   assert.ok(route.line.length > 50, "the line must carry real geometry");
   const map = readFileSync("components/travel/FujiViewMap.tsx", "utf8");
-  assert.ok(map.includes("OpenStreetMap contributors"), "the attribution must be visible on the map");
+  assert.match(map, /<ScenicMapCredits\b/, "the attribution must be visible on the map");
+  assert.match(readFileSync("components/scenic/ScenicTerrainMap.tsx", "utf8"), /OpenStreetMap contributors/);
 });
 
 /* ── Scenic routes catalogue (data/scenic-routes.json) ──────────────────── */
@@ -840,6 +841,23 @@ test("homepage station suggestions can extend past the hero photo", () => {
 const { createJiti } = await import("jiti");
 const jiti = createJiti(process.cwd() + "/", { alias: { "@": process.cwd() } });
 const scenic = await jiti.import("./lib/scenic.ts");
+const { makeScenicMapFrame, mapWorldPoint } = await jiti.import("./lib/scenic-map-frame.ts");
+
+test("terrain map: the railway and GSI tiles share the same Web Mercator frame", () => {
+  const points = [{ lat: 35.15, lng: 138.55 }, { lat: 35.36, lng: 138.73 }, { lat: 35.11, lng: 139.08 }];
+  const frame = makeScenicMapFrame(points, 680, 460, 34);
+  for (const point of points) {
+    const projected = frame.project(point);
+    assert.ok(projected.x >= 34 && projected.x <= 646 && projected.y >= 34 && projected.y <= 426);
+    const world = mapWorldPoint(point);
+    const tileX = world.x * 2 ** frame.zoom;
+    const tileY = world.y * 2 ** frame.zoom;
+    const tile = frame.tiles.find(({ path }) => path === `${frame.zoom}/${Math.floor(tileX)}/${Math.floor(tileY)}.png`);
+    assert.ok(tile);
+    assert.ok(Math.abs(projected.x - (tile.left + (tileX % 1) * frame.tileSize)) < 0.01);
+    assert.ok(Math.abs(projected.y - (tile.top + (tileY % 1) * frame.tileSize)) < 0.01);
+  }
+});
 const hokurikuPoints = JSON.parse(readFileSync("data/routes/hokuriku-alps-viewshed.json", "utf8")).points;
 
 test("scenic stays: every route and area reference exists in the approved existing data", () => {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { makeScenicMapFrame } from "@/lib/scenic-map-frame";
 
 type OverviewRoute = {
   id: string;
@@ -27,11 +28,13 @@ type MapCopy = {
 
 const WIDTH = 620;
 const HEIGHT = 680;
-const BOUNDS = { west: 128, east: 146.5, south: 30, north: 46.6 };
+const FRAME = makeScenicMapFrame([
+  { lng: 127.5, lat: 29.5 },
+  { lng: 146.5, lat: 46.6 },
+], WIDTH, HEIGHT, 18);
 
 function project([lng, lat]: [number, number]): [number, number] {
-  const x = 18 + ((lng - BOUNDS.west) / (BOUNDS.east - BOUNDS.west)) * (WIDTH - 36);
-  const y = 18 + ((BOUNDS.north - lat) / (BOUNDS.north - BOUNDS.south)) * (HEIGHT - 36);
+  const { x, y } = FRAME.project({ lng, lat });
   return [x, y];
 }
 
@@ -77,15 +80,15 @@ export function ScenicOverviewMap({ locale, copy }: { locale: string; copy: MapC
 
   return (
     <div ref={rootRef} className="overflow-hidden rounded-[22px] border border-slate-200 bg-white">
-      <div className="relative min-h-[420px] bg-[#f5f7f3] sm:min-h-[560px]">
+      <div className="relative mx-auto aspect-[620/680] max-w-[620px]">
         {data ? (
           <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} role="img" aria-labelledby="scenic-map-title scenic-map-desc" className="block h-auto w-full max-h-[680px]">
             <title id="scenic-map-title">{copy.ariaTitle}</title>
             <desc id="scenic-map-desc">{copy.ariaDescription}</desc>
-            <rect width={WIDTH} height={HEIGHT} fill="#f5f7f3" />
+            <rect width={WIDTH} height={HEIGHT} fill="#d9ebf3" />
             <g aria-hidden="true">
               {data.outline.map((ring, index) => (
-                <polygon key={index} points={pointString(ring)} fill="#dfe8dc" stroke="#b8c7b3" strokeWidth="0.8" />
+                <polygon key={index} points={pointString(ring)} fill="#e8eee2" stroke="#9aaf98" strokeWidth="1.2" />
               ))}
             </g>
             <g>
@@ -93,6 +96,7 @@ export function ScenicOverviewMap({ locale, copy }: { locale: string; copy: MapC
                 <a key={route.id} href={`${prefix}/scenic/${route.slug}`} aria-label={`${route.title}, ${route.line}`} className="group outline-none">
                   <title>{`${route.title} · ${route.line}`}</title>
                   <polyline points={pointString(route.points)} fill="none" stroke="transparent" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
+                  <polyline points={pointString(route.points)} fill="none" stroke="white" strokeWidth="6.5" strokeLinecap="round" strokeLinejoin="round" pointerEvents="none" />
                   <polyline
                     points={pointString(route.points)}
                     fill="none"

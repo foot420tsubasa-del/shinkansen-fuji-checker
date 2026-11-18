@@ -1,5 +1,7 @@
 import { flipSide, type Direction, type ScenicView, type Side, type ViewshedPoint } from "@/lib/scenic";
-import { JapanLand, JapanMapLocator, SEA } from "./JapanMapContext";
+import { makeScenicMapFrame } from "@/lib/scenic-map-frame";
+import { JapanMapLocator } from "./JapanMapContext";
+import { ScenicMapCredits, ScenicTerrainMap } from "./ScenicTerrainMap";
 
 type Point = ViewshedPoint & { lat: number; lng: number };
 type Station = { name: string; lat: number; lng: number };
@@ -14,7 +16,7 @@ const SIDE_COLOR: Record<Side, string> = { right: "#d94a32", left: "#2f6fd6" };
  * scripts/compute-viewshed.mjs: red where the view is on the right of the
  * direction of travel, blue on the left. Grey is open track with no listed
  * view; dashed is tunnel. `highlight` dims every view but one, for the
- * timeline. Plain SVG, no map tiles, usable on the server or the client.
+ * timeline. The railway overlay uses the same projection as the GSI map.
  */
 export function RouteViewMap({
   points,
@@ -39,19 +41,8 @@ export function RouteViewMap({
   // single location, and a mountain 70 km off would shrink the line to a dot.
   const used = new Set(views.flatMap((v) => v.targets));
   targets = targets.filter((t) => used.has(t.id) && (t.lat !== 0 || t.lng !== 0));
-  const all = [...points, ...targets];
-  const minLat = Math.min(...all.map((p) => p.lat));
-  const maxLat = Math.max(...all.map((p) => p.lat));
-  const minLng = Math.min(...all.map((p) => p.lng));
-  const maxLng = Math.max(...all.map((p) => p.lng));
-  const k = Math.cos((((minLat + maxLat) / 2) * Math.PI) / 180);
-  const s = Math.min((W - 2 * PAD) / ((maxLng - minLng) * k), (H - 2 * PAD) / (maxLat - minLat));
-  const ox = (W - (maxLng - minLng) * k * s) / 2;
-  const oy = (H - (maxLat - minLat) * s) / 2;
-  const project = (p: { lat: number; lng: number }) => ({
-    x: +(ox + (p.lng - minLng) * k * s).toFixed(1),
-    y: +(oy + (maxLat - p.lat) * s).toFixed(1),
-  });
+  const frame = makeScenicMapFrame([...points, ...targets], W, H, PAD);
+  const { project } = frame;
 
   const colourAt = (p: Point): { colour: string; viewId: string } | null => {
     for (const view of views) {
@@ -85,10 +76,9 @@ export function RouteViewMap({
   return (
     <figure className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_12px_32px_rgba(11,18,32,0.06)]">
       <JapanMapLocator lat={locator.lat} lng={locator.lng} />
-      <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto w-full" role="img" aria-label={`Map of the line from ${from} to ${to}, coloured where views are: red on the right, blue on the left`}>
-        <rect width={W} height={H} fill={SEA} />
-        <JapanLand project={project} />
-        <polyline points={pts.map((p) => `${p.x},${p.y}`).join(" ")} fill="none" stroke="#c4cad4" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" />
+      <ScenicTerrainMap frame={frame} label={`Map of the line from ${from} to ${to}, coloured where views are: red on the right, blue on the left`}>
+        <polyline points={pts.map((p) => `${p.x},${p.y}`).join(" ")} fill="none" stroke="#fff" strokeWidth="9" strokeLinejoin="round" strokeLinecap="round" />
+        <polyline points={pts.map((p) => `${p.x},${p.y}`).join(" ")} fill="none" stroke="#697788" strokeWidth="4.5" strokeLinejoin="round" strokeLinecap="round" />
         {pts.slice(1).map((p, i) => {
           const a = pts[i];
           if (a.tunnel && p.tunnel) {
@@ -116,7 +106,7 @@ export function RouteViewMap({
           <g key={peak.name} transform={`translate(${peak.x} ${peak.y})`}>
             <path d="M-13 9 L0 -11 L13 9 Z" fill="#5b6b86" />
             <path d="M-5 -3 L0 -11 L5 -3 L2 -1 L0 -4 L-2 -1 Z" fill="#fff" />
-            <text y="-16" fill="#0b1220" fontSize="12" fontWeight="700" textAnchor="middle" stroke="#f3f6f2" strokeWidth="3" paintOrder="stroke">
+            <text y="-17" fill="#0b1220" className="text-[18px] sm:text-[14px]" fontWeight="700" textAnchor="middle" stroke="white" strokeWidth="4" paintOrder="stroke">
               {peak.name}
             </text>
           </g>
@@ -131,13 +121,13 @@ export function RouteViewMap({
               {labelled ? (
                 <text
                   x={p.x > W - 110 ? p.x - 7 : p.x + 7}
-                  y={p.y + 16}
+                  y={p.y + 20}
                   textAnchor={p.x > W - 110 ? "end" : "start"}
                   fill="#3b4456"
-                  fontSize="11.5"
-                  fontWeight="600"
-                  stroke="#f3f6f2"
-                  strokeWidth="3"
+                  className="text-[18px] sm:text-[14px]"
+                  fontWeight="700"
+                  stroke="white"
+                  strokeWidth="4"
                   paintOrder="stroke"
                 >
                   {st.name}
@@ -147,17 +137,15 @@ export function RouteViewMap({
           );
         })}
 
-        <g transform={`translate(${PAD} ${H - 22})`} fontSize="12" fontWeight="600">
-          <rect x="-8" y="-16" width={W - 2 * PAD + 16} height="24" rx="6" fill="white" fillOpacity="0.93" />
-          <rect x="0" y="-9" width="22" height="7" rx="3.5" fill={SIDE_COLOR.right} />
-          <text x="28" y="-2" fill="#3b4456">Right side</text>
-          <rect x="110" y="-9" width="22" height="7" rx="3.5" fill={SIDE_COLOR.left} />
-          <text x="138" y="-2" fill="#3b4456">Left side</text>
-          <text x="214" y="-2" fill="#7a8394">travelling {from} → {to}</text>
-        </g>
-      </svg>
+      </ScenicTerrainMap>
+      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 border-y border-slate-200 px-4 py-2.5 text-xs font-semibold text-slate-700">
+        <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-4 rounded-full bg-[#d94a32]" aria-hidden="true" />Right side</span>
+        <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-4 rounded-full bg-[#2f6fd6]" aria-hidden="true" />Left side</span>
+        <span>Heading {from} → {to}</span>
+      </div>
+      <ScenicMapCredits zoom={frame.zoom} />
       <figcaption className="px-5 pb-4 pt-2 text-[11.5px] leading-5 text-slate-500">
-        Coloured where a terrain model finds the view — a summit clearing the hills, open water beside the line, or a valley falling away below it: sight lines over elevation data from the Geospatial Information Authority of Japan (国土地理院), with the curve of the earth. Trees, buildings, noise barriers and weather are not modelled. Dashed sections are tunnels. Track © OpenStreetMap contributors. Japan coastline: Natural Earth.
+        Coloured sections mark views modelled from GSI elevation data. Dashed sections are tunnels. Trees, buildings, noise barriers and weather are outside the model.
       </figcaption>
     </figure>
   );
