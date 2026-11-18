@@ -1,4 +1,5 @@
 import route from "@/data/routes/tokaido-fuji.json";
+import { JapanLand, JapanMapLocator, SEA } from "@/components/scenic/JapanMapContext";
 import type { DirectionId } from "@/lib/seat-checker";
 
 type Pt = { lat: number; lng: number; tunnel?: boolean };
@@ -56,7 +57,8 @@ export function FujiViewMap({ direction = "tokyo-osaka" }: { direction?: Directi
     const heat = viewHeat((a.lng + p.lng) / 2);
     return { a, b: p, heat, tunnel: Boolean(a.tunnel && p.tunnel) };
   });
-  const peak = project(route.stations.find((s) => s.id === "shin-fuji")!);
+  const peakStation = route.stations.find((s) => s.id === "shin-fuji")!;
+  const peak = project(peakStation);
 
   return (
     <figure className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_12px_32px_rgba(11,18,32,0.06)]">
@@ -71,18 +73,16 @@ export function FujiViewMap({ direction = "tokyo-osaka" }: { direction?: Directi
           {westbound ? "Tokyo → Kyoto" : "Kyoto → Tokyo"}
         </span>
       </div>
-      <svg viewBox={`0 0 ${W} ${H}`} className="mt-2 block h-auto w-full" role="img" aria-label="Map of the Tokaido Shinkansen from Odawara to Shizuoka, coloured where Mt. Fuji is in view, brightest at Shin-Fuji Station">
+      <div className="mt-3"><JapanMapLocator lat={peakStation.lat} lng={peakStation.lng} /></div>
+      <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto w-full" role="img" aria-label="Map of the Tokaido Shinkansen from Odawara to Shizuoka, coloured where Mt. Fuji is in view, brightest at Shin-Fuji Station">
         <defs>
-          <linearGradient id="fvm-land" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#eef4ec" />
-            <stop offset="1" stopColor="#f7f8f4" />
-          </linearGradient>
           <radialGradient id="fvm-glow" cx="0.5" cy="0.5" r="0.5">
             <stop offset="0" stopColor="#ff7a5c" stopOpacity="0.28" />
             <stop offset="1" stopColor="#ff7a5c" stopOpacity="0" />
           </radialGradient>
         </defs>
-        <rect width={W} height={H} fill="url(#fvm-land)" />
+        <rect width={W} height={H} fill={SEA} />
+        <JapanLand project={project} />
         <text x={project({ lat: 34.985, lng: 138.62 }).x} y={project({ lat: 34.985, lng: 138.62 }).y} fill="#8fb3c9" fontSize="13" fontStyle="italic" textAnchor="middle">
           Suruga Bay
         </text>
@@ -136,7 +136,7 @@ export function FujiViewMap({ direction = "tokyo-osaka" }: { direction?: Directi
         </g>
       </svg>
       <figcaption className="px-5 pb-4 pt-1 text-[11.5px] leading-5 text-slate-500">
-        Colour follows the same timing model as the seat checker: the view opens past Mishima, is largest passing Shin-Fuji and closes after the Fuji River. Clouds decide the rest. Dashed sections are tunnels. Track © OpenStreetMap contributors.
+        Colour follows the same timing model as the seat checker: the view opens past Mishima, is largest passing Shin-Fuji and closes after the Fuji River. Clouds decide the rest. Dashed sections are tunnels. Track © OpenStreetMap contributors. Japan coastline: Natural Earth.
       </figcaption>
     </figure>
   );

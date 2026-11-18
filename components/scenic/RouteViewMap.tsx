@@ -1,4 +1,5 @@
 import { flipSide, type Direction, type ScenicView, type Side, type ViewshedPoint } from "@/lib/scenic";
+import { JapanLand, JapanMapLocator, SEA } from "./JapanMapContext";
 
 type Point = ViewshedPoint & { lat: number; lng: number };
 type Station = { name: string; lat: number; lng: number };
@@ -8,7 +9,6 @@ const W = 680;
 const H = 460;
 const PAD = 34;
 const SIDE_COLOR: Record<Side, string> = { right: "#d94a32", left: "#2f6fd6" };
-
 /**
  * A route coloured where its views are, from a viewshed file made by
  * scripts/compute-viewshed.mjs: red where the view is on the right of the
@@ -80,11 +80,14 @@ export function RouteViewMap({
       : []),
   ];
   const [from, to] = direction === "forward" ? directionLabel : [directionLabel[1], directionLabel[0]];
+  const locator = points[Math.floor(points.length / 2)];
 
   return (
     <figure className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_12px_32px_rgba(11,18,32,0.06)]">
+      <JapanMapLocator lat={locator.lat} lng={locator.lng} />
       <svg viewBox={`0 0 ${W} ${H}`} className="block h-auto w-full" role="img" aria-label={`Map of the line from ${from} to ${to}, coloured where views are: red on the right, blue on the left`}>
-        <rect width={W} height={H} fill="#f3f6f2" />
+        <rect width={W} height={H} fill={SEA} />
+        <JapanLand project={project} />
         <polyline points={pts.map((p) => `${p.x},${p.y}`).join(" ")} fill="none" stroke="#c4cad4" strokeWidth="4" strokeLinejoin="round" strokeLinecap="round" />
         {pts.slice(1).map((p, i) => {
           const a = pts[i];
@@ -145,6 +148,7 @@ export function RouteViewMap({
         })}
 
         <g transform={`translate(${PAD} ${H - 22})`} fontSize="12" fontWeight="600">
+          <rect x="-8" y="-16" width={W - 2 * PAD + 16} height="24" rx="6" fill="white" fillOpacity="0.93" />
           <rect x="0" y="-9" width="22" height="7" rx="3.5" fill={SIDE_COLOR.right} />
           <text x="28" y="-2" fill="#3b4456">Right side</text>
           <rect x="110" y="-9" width="22" height="7" rx="3.5" fill={SIDE_COLOR.left} />
@@ -153,7 +157,7 @@ export function RouteViewMap({
         </g>
       </svg>
       <figcaption className="px-5 pb-4 pt-2 text-[11.5px] leading-5 text-slate-500">
-        Coloured where a terrain model finds the view — a summit clearing the hills, open water beside the line, or a valley falling away below it: sight lines over elevation data from the Geospatial Information Authority of Japan (国土地理院), with the curve of the earth. Trees, buildings, noise barriers and weather are not modelled. Dashed sections are tunnels. Track © OpenStreetMap contributors.
+        Coloured where a terrain model finds the view — a summit clearing the hills, open water beside the line, or a valley falling away below it: sight lines over elevation data from the Geospatial Information Authority of Japan (国土地理院), with the curve of the earth. Trees, buildings, noise barriers and weather are not modelled. Dashed sections are tunnels. Track © OpenStreetMap contributors. Japan coastline: Natural Earth.
       </figcaption>
     </figure>
   );
