@@ -19,6 +19,7 @@ const translatedPaths = [
 ];
 
 const englishOnlyContentPaths = [
+  "/scenic",
   "/itineraries",
   "/areas-to-stay",
   "/airport-transfers",

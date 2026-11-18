@@ -777,6 +777,56 @@ test("scenic routes: seat letters only where verified (Tokaido), never on Hokuri
   assert.ok(tokaido.views.filter((v) => !v.main).every((v) => v.seat === null), "model-only glimpses carry no seat");
 });
 
+test("scenic hub: every live route appears once, candidates stay out, and every card target exists", () => {
+  const catalogue = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
+  const overview = JSON.parse(readFileSync("data/scenic-overview.json", "utf8"));
+  const live = catalogue.routes.filter((route) => route.status === "live");
+  assert.deepEqual(overview.routes.map((route) => route.id).sort(), live.map((route) => route.id).sort());
+  assert.equal(new Set(overview.routes.map((route) => route.id)).size, overview.routes.length, "no route is repeated");
+  for (const item of overview.routes) {
+    const route = live.find((candidate) => candidate.id === item.id);
+    assert.equal(item.slug, route?.slug, `${item.id}: card slug must exist on the live route`);
+    assert.ok(item.categories.length > 0, `${item.id}: card needs a real scenery filter`);
+    assert.ok(item.months.length > 0 && item.seasons.length > 0, `${item.id}: card needs a season from its data`);
+  }
+  const page = readFileSync("app/[locale]/scenic/page.tsx", "utf8");
+  assert.match(page, /overview\.routes\.filter/);
+  assert.match(page, /visibleRoutes\.map/);
+});
+
+test("scenic hub: the lightweight map covers every live route and stays within its point limit", () => {
+  const overview = JSON.parse(readFileSync("data/scenic-overview.json", "utf8"));
+  const catalogue = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
+  assert.equal(overview.routes.length, catalogue.routes.filter((route) => route.status === "live").length);
+  assert.ok(overview.outline.length > 0, "Japan outline is present");
+  for (const route of overview.routes) {
+    assert.ok(route.points.length >= 2, `${route.id}: map line is not empty`);
+    assert.ok(route.points.length <= overview.maxPoints, `${route.id}: ${route.points.length} exceeds ${overview.maxPoints}`);
+  }
+  assert.match(readFileSync("components/scenic/ScenicOverviewMap.tsx", "utf8"), /openstreetmap\.org\/copyright/);
+  assert.match(readFileSync("data/scenic-hub.json", "utf8"), /OpenStreetMap contributors/);
+});
+
+test("scenic hub: hub files carry no affiliate URL or price copy", () => {
+  const files = [
+    "app/[locale]/scenic/page.tsx",
+    "components/scenic/ScenicOverviewMap.tsx",
+    "data/scenic-hub.json",
+    "data/scenic-overview.json",
+  ];
+  for (const file of files) {
+    const source = readFileSync(file, "utf8");
+    assert.doesNotMatch(source, /affiliate\.klook|aff_adid|k_site=|\baid=/i, `${file}: affiliate link`);
+    assert.doesNotMatch(source, /¥|\byen\b/i, `${file}: price copy`);
+  }
+});
+
+test("scenic hub: homepage client and site header have no worktree changes", () => {
+  const protectedFiles = ["app/[locale]/HomeClient.tsx", "app/[locale]/components/SiteHeader.tsx", "app/[locale]/page.tsx"];
+  const changed = execSync(`/Library/Developer/CommandLineTools/usr/bin/git diff --name-only -- ${protectedFiles.map((file) => `'${file}'`).join(" ")}`, { encoding: "utf8" }).trim();
+  assert.equal(changed, "");
+});
+
 /* ── Route search and timeline (lib/scenic.ts) ──────────────────────────── */
 
 const { createJiti } = await import("jiti");

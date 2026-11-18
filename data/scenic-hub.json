@@ -1,0 +1,61 @@
+{
+  "eyebrow": "Scenic routes",
+  "title": "Japan's scenic train routes: which side to sit on",
+  "intro": "Choose the view first. Each route shows which side to sit on, where the scenery starts, the best season, and which ticket fits the trip.",
+  "filterTitle": "Choose your view",
+  "routeCountLabel": "routes",
+  "sceneryLabel": "Scenery",
+  "allViewsLabel": "All views",
+  "seasonLabel": "Season",
+  "anySeasonLabel": "Any season",
+  "routesLabel": "Scenic train route guides",
+  "illustrativeLabel": "Illustrative image",
+  "whenLabel": "When:",
+  "cardLinkLabel": "See the side and timing",
+  "viewFilters": [
+    { "id": "fuji", "label": "Mt. Fuji" },
+    { "id": "mountains", "label": "Mountains" },
+    { "id": "sea", "label": "Sea" },
+    { "id": "gorge-river", "label": "Gorge · river" },
+    { "id": "snow", "label": "Snow" },
+    { "id": "flowers-countryside", "label": "Flowers · countryside" },
+    { "id": "city-night", "label": "City at night" }
+  ],
+  "seasonFilters": [
+    { "id": "spring", "label": "Spring" },
+    { "id": "summer", "label": "Summer" },
+    { "id": "autumn", "label": "Autumn" },
+    { "id": "winter", "label": "Winter" }
+  ],
+  "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  "map": {
+    "title": "See all 14 routes on the map",
+    "intro": "Select a red line or a route name to open its seat-side guide.",
+    "ariaTitle": "Map of Japan's scenic train routes",
+    "ariaDescription": "Fourteen route lines. Select a line to open its side-of-train guide.",
+    "loading": "Map loads as you reach it",
+    "navigationLabel": "Routes on the map",
+    "attributionPrefix": "Route data ©",
+    "attributionLink": "OpenStreetMap contributors",
+    "outlineCredit": "Map outline: Natural Earth"
+  },
+  "monthTable": {
+    "title": "What to see, month by month",
+    "intro": "The months below come directly from each route's season note. Natural conditions and operating days can change."
+  },
+  "faqTitle": "Questions",
+  "faq": [
+    {
+      "q": "How do I choose which side of the train to sit on?",
+      "a": "Open a route to see the verified side for each direction. When a river, gorge or mountain changes sides, the route timeline shows the sections in order."
+    },
+    {
+      "q": "Are the seat letters the same on every train?",
+      "a": "No. These guides give left or right first. A seat letter appears only where it has been verified for that train and direction."
+    },
+    {
+      "q": "Are seasonal trains and views guaranteed?",
+      "a": "No. Operating days, weather, flowers, autumn colour, snow and drift ice can change. Each card shows the season and any operating note available in the route data."
+    }
+  ]
+}

@@ -104,7 +104,9 @@ export default async function ScenicRoutePage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <SiteHeader />
       <article className="mx-auto max-w-[1000px] px-5 pb-16 pt-8 md:pt-12">
-        <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">Scenic routes · {route.line}</p>
+        <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">
+          <Link href="/scenic" className="underline-offset-4 hover:underline">Scenic routes</Link> · {route.line}
+        </p>
         <h1 className="mt-3 text-[32px] font-extrabold leading-[1.1] tracking-[-0.03em] md:text-[44px]">{route.page.h1}</h1>
 
         {route.image ? (
