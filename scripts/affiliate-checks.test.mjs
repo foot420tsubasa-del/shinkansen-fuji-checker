@@ -823,8 +823,13 @@ test("scenic hub: hub files carry no affiliate URL or price copy", () => {
   }
 });
 
-test("scenic hub: site header and homepage entry have no worktree changes", () => {
-  const protectedFiles = ["app/[locale]/components/SiteHeader.tsx", "app/[locale]/page.tsx"];
+test("scenic hub: homepage entry has no worktree changes; the header leads with Scenic Routes and keeps Check Seat (2026-11-20 nav pass)", () => {
+  const header = readFileSync("app/[locale]/components/SiteHeader.tsx", "utf8");
+  assert.match(header, /href: "\/scenic", label: t\("nav\.scenic"\)/);
+  assert.match(header, /href: "\/#seat-checker", label: t\("nav\.seat"\)/);
+  assert.match(header, /aria-current=\{isCurrent/);
+  for (const loc of ["en", "de", "es", "fr", "ko", "pt-BR", "ru", "zh-CN", "zh-TW"]) assert.ok(JSON.parse(readFileSync(`messages/${loc}.json`, "utf8")).home.nav.scenic, `${loc}: nav.scenic`);
+  const protectedFiles = ["app/[locale]/page.tsx"];
   const changed = execSync(`/Library/Developer/CommandLineTools/usr/bin/git diff --name-only -- ${protectedFiles.map((file) => `'${file}'`).join(" ")}`, { encoding: "utf8" }).trim();
   assert.equal(changed, "");
 });
@@ -1011,7 +1016,8 @@ test("Plan this ride: every fact is sourced on the operator's site, dated, and n
     assert.match(e.fare.text, /one way/i, `${id}: fare states the section and direction`);
   }
   const page = readFileSync("app/[locale]/scenic/[slug]/page.tsx", "utf8");
-  assert.ok(page.indexOf("<PlanThisRide") > page.indexOf("{route.image ? (") && page.indexOf("<PlanThisRide") < page.indexOf("<RouteTimeline"), "after the photo, before the timeline");
+  // 2026-11-20 design pass: see → side → when and where (timeline) → how to ride → which ticket.
+  assert.ok(page.indexOf("<PlanThisRide") > page.indexOf("<RouteTimeline") && page.indexOf("<PlanThisRide") < page.indexOf('id="tickets"'), "after the timeline, before the tickets");
   assert.match(page, /id="tickets"/);
 });
 
@@ -1199,7 +1205,6 @@ test("related scenic links: pages use at most two links and every target is a li
 test("scenic link and stay work leaves protected revenue and experiment pages unchanged", () => {
   const protectedFiles = [
     "app/[locale]/shinkansen-seat-letters/page.tsx",
-    "app/[locale]/components/SiteHeader.tsx",
     "app/[locale]/page.tsx",
   ];
   const changed = execSync(`/Library/Developer/CommandLineTools/usr/bin/git diff HEAD --name-only -- ${protectedFiles.map((file) => `'${file}'`).join(" ")}`, { encoding: "utf8" }).trim();
@@ -1210,8 +1215,9 @@ test("guide: the only change since the scenic work is one Fuji-view stays link a
   const diff = execSync("/Library/Developer/CommandLineTools/usr/bin/git diff 6824139 -- 'app/[locale]/guide/page.tsx'", { encoding: "utf8" });
   const added = diff.split("\n").filter((l) => l.startsWith("+") && !l.startsWith("+++"));
   const removed = diff.split("\n").filter((l) => l.startsWith("-") && !l.startsWith("---"));
-  assert.equal(removed.length, 0, "nothing removed from /guide");
-  assert.ok(added.every((l) => /stays\/mt-fuji-view|Mt\. Fuji|locale === "en"|\) : null\}|<\/p>|<p |Continue planning|^\+\s*$/.test(l)), `unexpected /guide change: ${added.join(" / ")}`);
+  // The one removal allowed: the English booking line no longer offers Omio (Klook-only rail policy, 2026-11-20).
+  assert.ok(removed.every((l) => /Omio to compare route options/.test(l)), `unexpected /guide removal: ${removed.join(" / ")}`);
+  assert.ok(added.every((l) => /stays\/mt-fuji-view|Mt\. Fuji|locale === "en"|\) : null\}|<\/p>|<p |Continue planning|Book the specific Shinkansen ticket on Klook|^\+\s*$/.test(l)), `unexpected /guide change: ${added.join(" / ")}`);
   const page = readFileSync("app/[locale]/guide/page.tsx", "utf8");
   assert.ok(page.indexOf("/stays/mt-fuji-view") > page.indexOf("{renderSeatGuides()}"), "the link sits after the closing guide links");
   for (const placement of ["guide_seat_result", "guide_quick_answer_text", "guide_klook_text"]) assert.match(page, new RegExp(placement));
@@ -1721,4 +1727,36 @@ test("Suica character news: verified facts, official link, hub link and sitemap 
   assert.ok(hub.includes('/how-to-buy-suica/suica-new-character-2027'), "Suica hub links to the news article");
   assert.ok(sitemap.includes("SUICA_CHARACTER_NEWS.path"), "news article is in the sitemap");
   assert.doesNotMatch(`${data}\n${page}`, /affiliate\.klook|travelpayouts|trip\.com/i, "news article has no affiliate link");
+});
+
+/* ── 2026-11-20 design pass ─────────────────────────────────────────────── */
+
+test("design pass: Omio never reaches a page; rail stays Klook-only", () => {
+  const src = readFileSync("src/affiliateLinks.ts", "utf8");
+  assert.match(src, /link\.provider === "omio" && KLOOK_ONLY\) return null/);
+  assert.match(src, /const KLOOK_ONLY = true;/);
+  const links = JSON.parse(readFileSync("data/affiliate-links.json", "utf8"));
+  assert.ok(Object.values(links).some((l) => l.provider === "omio"), "the Omio entries stay in the data (sheet archive)");
+});
+
+test("design pass: homepage shows six featured live routes and links to all of them", () => {
+  const discovery = JSON.parse(readFileSync("data/scenic-discovery.json", "utf8"));
+  const catalogue = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
+  assert.equal(discovery.homeFeatured.length, 6);
+  for (const id of discovery.homeFeatured) {
+    const route = catalogue.routes.find((r) => r.id === id);
+    assert.ok(route?.status === "live" && route.href && route.image, `${id}: live, with a page and an image`);
+  }
+  const gallery = readFileSync("components/home/ScenicRoutesGallery.tsx", "utf8");
+  assert.match(gallery, /href="\/scenic"/);
+});
+
+test("design pass: hotel cards use only cleared photos, never a placeholder picture", () => {
+  const stays = JSON.parse(readFileSync("data/fuji-view-stays.json", "utf8"));
+  for (const h of stays.hotels) {
+    assert.ok("photo" in h, `${h.name}: photo slot`);
+    if (h.photo) assert.ok(h.photo.src && h.photo.alt && h.photo.credit, `${h.name}: photo needs alt and credit`);
+    assert.match(h.viewRooms, /^(all|some)$/);
+  }
+  assert.doesNotMatch(readFileSync("components/stays/FujiViewStayCards.tsx", "utf8"), /coming soon/i);
 });

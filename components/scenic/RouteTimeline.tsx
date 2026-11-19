@@ -63,6 +63,7 @@ export function RouteTimeline({
   to,
   tags = [],
   showRouteLink = true,
+  showSummary = true,
 }: {
   routeId: string;
   direction: Direction;
@@ -70,6 +71,8 @@ export function RouteTimeline({
   to: string;
   tags?: ViewTag[];
   showRouteLink?: boolean;
+  /** The route page answers the side in its own cards above, so it hides this summary (2026-11-20). */
+  showSummary?: boolean;
 }) {
   const t = useTranslations("home.search");
   const locale = useLocale();
@@ -125,7 +128,7 @@ export function RouteTimeline({
 
   return (
     <div className="grid gap-5">
-    {primary ? <ScenicTripSummary route={route} direction={direction} from={from} to={to} item={primary} train={train?.[direction].train ?? (route.timing?.kind === "fuji-model" ? "Nozomi" : undefined)} showGuide={showRouteLink} /> : null}
+    {primary && showSummary ? <ScenicTripSummary route={route} direction={direction} from={from} to={to} item={primary} train={train?.[direction].train ?? (route.timing?.kind === "fuji-model" ? "Nozomi" : undefined)} showGuide={showRouteLink} /> : null}
     <div className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
       <div className="min-w-0 rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.06)] md:p-6">
         <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">{route.line}</p>

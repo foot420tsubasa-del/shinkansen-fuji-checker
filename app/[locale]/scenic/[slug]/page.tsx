@@ -244,61 +244,13 @@ export default async function ScenicRoutePage({ params }: Props) {
           </div>
         ) : null}
 
-        {(() => {
-          // Plan this ride (data/trip-essentials.json): after the answer and the photo, before the minute-by-minute timeline.
-          const essentials = getTripEssentials(route.id);
-          const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo" }).format(new Date());
-          return essentials ? <PlanThisRide essentials={essentials} today={today} /> : null;
-        })()}
-
         <section className="mt-10">
-          <RouteTimeline routeId={route.id} direction="forward" from={from} to={to} showRouteLink={false} />
+          <RouteTimeline routeId={route.id} direction="forward" from={from} to={to} showRouteLink={false} showSummary={false} />
         </section>
 
-        <section className="mt-10">
-          <h2 className="text-2xl font-extrabold tracking-[-0.02em]">Each view, and how big it looks</h2>
-          <div className="mt-4 overflow-x-auto rounded-2xl border border-slate-200 bg-white">
-            <table className="w-full min-w-[640px] text-left text-[14.5px]">
-              <thead className="bg-slate-50 text-xs uppercase tracking-[0.06em] text-slate-500">
-                <tr>
-                  <th className="px-4 py-2.5 font-semibold">View</th>
-                  <th className="px-4 py-2.5 font-semibold">Where</th>
-                  <th className="px-4 py-2.5 font-semibold">
-                    {reverses ? seating.reversalLabels.tableSide : "Side"} ({from} → {to})
-                  </th>
-                  <th className="px-4 py-2.5 font-semibold">Size</th>
-                  <th className="px-4 py-2.5 font-semibold">Best</th>
-                </tr>
-              </thead>
-              <tbody>
-                {views.map((v) => (
-                  <tr key={v.id} className="border-t border-slate-100 align-top">
-                    <td className="px-4 py-3 font-semibold">
-                      {v.name}
-                      {v.seatByDirection ? (
-                        <span className="block text-xs font-normal text-slate-500">{v.seatByDirection.forward}</span>
-                      ) : v.seat ? (
-                        <span className="block text-xs font-normal text-slate-500">Seat {v.seat}</span>
-                      ) : null}
-                    </td>
-                    <td className="px-4 py-3 text-slate-700">
-                      {v.from === v.to ? `near ${v.from}` : `${v.from} – ${v.to}`}
-                      <span className="block text-xs text-slate-500">
-                        {v.sectionKm} km of line{v.nearestKm ? ` · summit about ${Math.round(v.nearestKm)} km away at its closest` : ""}
-                      </span>
-                    </td>
-                    <td className="px-4 py-3 capitalize text-slate-700">{v.side.forward}</td>
-                    <td className="px-4 py-3 text-slate-700">{howBig(v.maxAngle)}</td>
-                    <td className="px-4 py-3 text-slate-700">
-                      {v.season}
-                      <span className="block text-xs text-slate-500">{v.basis}</span>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <ul className="mt-5 grid gap-2.5">
+        <section className="mt-10" aria-labelledby="good-to-know">
+          <h2 id="good-to-know" className="text-2xl font-extrabold tracking-[-0.02em]">Good to know</h2>
+          <ul className="mt-4 grid gap-2.5">
             {[
               ...(route.notes ?? []),
               "Trains pass every one of these stretches whether or not they stop; the views are between stations, not at them.",
@@ -312,7 +264,63 @@ export default async function ScenicRoutePage({ params }: Props) {
               </li>
             ))}
           </ul>
+          <details className="group mt-6 rounded-2xl border border-slate-200 bg-white px-4 py-3">
+            <summary className="flex min-h-10 cursor-pointer list-none items-center justify-between gap-3 text-[16px] font-bold">
+              Each view, and how big it looks
+              <span aria-hidden="true" className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-slate-300 text-base transition-transform group-open:rotate-45">+</span>
+            </summary>
+            <div className="mt-4 overflow-x-auto rounded-2xl border border-slate-200 bg-white">
+              <table className="w-full min-w-[640px] text-left text-[14.5px]">
+                <thead className="bg-slate-50 text-xs uppercase tracking-[0.06em] text-slate-500">
+                  <tr>
+                    <th className="px-4 py-2.5 font-semibold">View</th>
+                    <th className="px-4 py-2.5 font-semibold">Where</th>
+                    <th className="px-4 py-2.5 font-semibold">
+                      {reverses ? seating.reversalLabels.tableSide : "Side"} ({from} → {to})
+                    </th>
+                    <th className="px-4 py-2.5 font-semibold">Size</th>
+                    <th className="px-4 py-2.5 font-semibold">Best</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {views.map((v) => (
+                    <tr key={v.id} className="border-t border-slate-100 align-top">
+                      <td className="px-4 py-3 font-semibold">
+                        {v.name}
+                        {v.seatByDirection ? (
+                          <span className="block text-xs font-normal text-slate-500">{v.seatByDirection.forward}</span>
+                        ) : v.seat ? (
+                          <span className="block text-xs font-normal text-slate-500">Seat {v.seat}</span>
+                        ) : null}
+                      </td>
+                      <td className="px-4 py-3 text-slate-700">
+                        {v.from === v.to ? `near ${v.from}` : `${v.from} – ${v.to}`}
+                        <span className="block text-xs text-slate-500">
+                          {v.sectionKm} km of line{v.nearestKm ? ` · summit about ${Math.round(v.nearestKm)} km away at its closest` : ""}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 capitalize text-slate-700">{v.side.forward}</td>
+                      <td className="px-4 py-3 text-slate-700">{howBig(v.maxAngle)}</td>
+                      <td className="px-4 py-3 text-slate-700">
+                        {v.season}
+                        <span className="block text-xs text-slate-500">{v.basis}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </details>
         </section>
+
+        {(() => {
+          // How to ride (data/trip-essentials.json). Since the 2026-11-20 design pass it follows
+          // the questions in the order travellers ask them: what you see, which side, when and
+          // where, then how to ride and which ticket.
+          const essentials = getTripEssentials(route.id);
+          const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo" }).format(new Date());
+          return essentials ? <PlanThisRide essentials={essentials} today={today} /> : null;
+        })()}
 
         {route.ticketGuide ? (
           <section id="tickets" className="mt-10 scroll-mt-20">

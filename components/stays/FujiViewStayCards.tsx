@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight, Mountain } from "lucide-react";
 import stays from "@/data/fuji-view-stays.json";
 import { getBookingHotelLink } from "@/lib/booking-hotels";
 import { trackAffiliateClick, type AffiliateClickParams } from "@/lib/analytics";
@@ -8,25 +9,15 @@ import { ProviderButton } from "@/components/ui/ProviderButton";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 
 type Hotel = (typeof stays.hotels)[number];
+type HotelPhoto = { src: string; alt: string; credit?: string };
 
 /**
- * Placeholder until the hotels' own photos (with permission) are in hand: a
- * quiet sky-and-lake gradient with the mountain's outline, never a photo we
- * have no rights to.
+ * Mt. Fuji-view stay cards. Typographic by design (2026-11-20): we have no
+ * hotel photos we may use, and a placeholder picture read as unfinished. When
+ * a hotel's photo is cleared for use, set hotel.photo in
+ * data/fuji-view-stays.json and the card shows it on top; nothing else changes.
+ * Generated images are never used as hotel or room photos.
  */
-function PhotoPlaceholder({ name }: { name: string }) {
-  return (
-    <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-b from-[#dce8f2] via-[#eef3f6] to-[#cfdfe6]" role="img" aria-label={`${name} — hotel photo coming soon`}>
-      <svg viewBox="0 0 400 300" className="absolute inset-x-0 bottom-0 h-3/4 w-full" aria-hidden="true" preserveAspectRatio="xMidYMax slice">
-        <path d="M0 230 L120 150 L170 110 L200 92 L230 110 L280 150 L400 230 Z" fill="#9fb3c4" />
-        <path d="M170 110 L200 92 L230 110 L214 118 L200 112 L186 120 Z" fill="#ffffff" />
-        <rect y="228" width="400" height="72" fill="#b9d0db" />
-      </svg>
-      <span className="absolute bottom-2 right-3 text-[11px] font-medium text-slate-600">Hotel photo coming soon</span>
-    </div>
-  );
-}
-
 export function FujiViewStayCards({
   variant = "full",
   placement,
@@ -40,25 +31,49 @@ export function FujiViewStayCards({
 }) {
   const full = variant === "full";
   return (
-    <ul className={["grid gap-5", full ? "md:grid-cols-3" : "sm:grid-cols-3"].join(" ")}>
-      {stays.hotels.map((hotel: Hotel) => {
+    <ul className={["grid gap-5", full ? "lg:grid-cols-3" : "lg:grid-cols-3"].join(" ")}>
+      {stays.hotels.map((hotel: Hotel, index) => {
         const booking = getBookingHotelLink(hotel.bookingKey);
+        const photo = (hotel as { photo?: HotelPhoto | null }).photo;
+        const everyRoom = hotel.viewRooms === "all";
         return (
-          <li key={hotel.id} className="flex flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white">
-            <PhotoPlaceholder name={hotel.name} />
-            <div className="flex flex-1 flex-col p-5">
-              <p className="text-xs font-bold uppercase tracking-[0.08em] text-fuji">{hotel.tag}</p>
-              <h3 className="mt-1.5 text-lg font-extrabold leading-snug tracking-[-0.01em] text-ink">{hotel.name}</h3>
-              {full ? <p className="mt-2 text-[15px] leading-6 text-slate-700">{hotel.line}</p> : null}
-              <p className={["mt-2 text-sm leading-6", /not every room/i.test(hotel.view) ? "font-semibold text-amber-900" : "text-slate-600"].join(" ")}>{hotel.view}</p>
-              {full ? <p className="mt-2 text-sm leading-6 text-slate-600"><b className="text-ink">Getting there:</b> {hotel.access}</p> : null}
+          <li key={hotel.id} className="flex flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_8px_24px_rgba(11,18,32,0.04)]">
+            {photo ? (
+              <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 768px) 360px, 100vw" className="object-cover" />
+                {photo.credit ? <span className="absolute bottom-2 right-3 rounded bg-black/50 px-1.5 py-0.5 text-[10px] text-white">{photo.credit}</span> : null}
+              </div>
+            ) : null}
+            <div className={["flex flex-1 flex-col", full ? "p-6" : "p-5"].join(" ")}>
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-xs font-bold uppercase tracking-[0.1em] text-slate-500">{hotel.tag}</p>
+                {!photo && full ? <span aria-hidden="true" className="font-display text-2xl leading-none text-slate-300">{String(index + 1).padStart(2, "0")}</span> : null}
+              </div>
+              <h3 className={["mt-2 font-extrabold leading-snug tracking-[-0.015em] text-ink", full ? "text-[22px]" : "text-lg"].join(" ")}>{hotel.name}</h3>
+              <p className={["mt-3 inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold", everyRoom ? "bg-sky-50 text-sky-900" : "bg-amber-50 text-amber-900"].join(" ")}>
+                <Mountain className="h-3.5 w-3.5" aria-hidden="true" />
+                {hotel.viewSummary}
+              </p>
+              {full ? <p className="mt-3 text-[15px] leading-6 text-slate-700">{hotel.line}</p> : null}
+              <dl className="mt-4 grid gap-3 border-t border-slate-100 pt-4 text-sm leading-6">
+                <div>
+                  <dt className="font-bold text-ink">The view</dt>
+                  <dd className="text-slate-600">{hotel.view}</dd>
+                </div>
+                {full ? (
+                  <div>
+                    <dt className="font-bold text-ink">Getting there</dt>
+                    <dd className="text-slate-600">{hotel.access}</dd>
+                  </div>
+                ) : null}
+              </dl>
               {full ? (
-                <a href={hotel.source.url} target="_blank" rel="noopener noreferrer" className="mt-2 text-xs font-semibold text-slate-500 underline underline-offset-2 hover:text-ink">
+                <a href={hotel.source.url} target="_blank" rel="noopener noreferrer" className="mt-3 w-fit text-xs font-semibold text-slate-500 underline underline-offset-2 hover:text-ink">
                   {hotel.source.label}
                 </a>
               ) : null}
               {booking ? (
-                <div className="mt-auto pt-4">
+                <div className="mt-auto pt-5">
                   <ProviderButton
                     provider="booking_travelpayouts"
                     href={booking.href}
