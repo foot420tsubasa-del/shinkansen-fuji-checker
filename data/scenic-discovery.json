@@ -18,19 +18,364 @@
     "kansai": "Kansai"
   },
   "routes": {
-    "tokaido-fuji": { "regions": ["kanto", "chubu", "kansai"] },
-    "hokuriku-alps": { "regions": ["kanto", "chubu"], "scenery": "Clear days year-round. The Northern Alps typically carry snow from November to May." },
-    "enoden-coast": { "regions": ["kanto"] },
-    "fujikyu-fuji": { "regions": ["chubu"] },
-    "hakone-tozan": { "regions": ["kanto"], "foliage": [11], "flowers": [6, 7], "extraViews": ["gorge-river"] },
-    "sagano-gorge": { "regions": ["kansai"], "foliage": [11, 12], "flowers": [4], "months": [4, 11, 12], "scenery": "Cherry blossoms in early April and autumn leaves from mid-November to early December." },
-    "yurikamome-night": { "regions": ["kanto"] },
-    "joetsu-snow": { "regions": ["kanto", "chubu"], "scenery": "Clear days year-round. The Echigo mountains typically carry snow from November to May." },
-    "tohoku-iwate": { "regions": ["kanto", "tohoku"], "scenery": "Clear days. The mountain peaks typically carry snow from November to May." },
-    "kurobe-gorge": { "regions": ["chubu"], "foliage": [10, 11], "months": [5, 6, 10, 11], "scenery": "Fresh greenery in May and June, and autumn leaves from late October to mid-November." },
-    "gono-coast": { "regions": ["tohoku"], "scenery": "Coastal views year-round, with sunset views on some afternoon services." },
-    "furano-biei-flowers": { "regions": ["hokkaido"], "flowers": [6, 7, 8] },
-    "senmo-drift-ice": { "regions": ["hokkaido"] },
-    "tadami-river": { "regions": ["tohoku", "chubu"], "foliage": [10, 11] }
-  }
+    "tokaido-fuji": {
+      "regions": [
+        "kanto",
+        "chubu",
+        "kansai"
+      ],
+      "anytime": true,
+      "highlights": [
+        {
+          "seasons": [
+            "winter"
+          ],
+          "months": [
+            12,
+            1,
+            2
+          ],
+          "label": "Clearest Mt. Fuji on winter mornings",
+          "basis": "all year; clearest on winter mornings"
+        }
+      ]
+    },
+    "hokuriku-alps": {
+      "regions": [
+        "kanto",
+        "chubu"
+      ],
+      "scenery": "Clear days year-round. The Northern Alps typically carry snow from November to May.",
+      "anytime": true,
+      "highlights": [
+        {
+          "seasons": [
+            "winter",
+            "spring"
+          ],
+          "months": [
+            11,
+            12,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "label": "Snow-capped Northern Alps (about November to May)",
+          "basis": "the Alps carry snow from about November to May"
+        }
+      ]
+    },
+    "enoden-coast": {
+      "regions": [
+        "kanto"
+      ],
+      "anytime": true,
+      "highlights": []
+    },
+    "fujikyu-fuji": {
+      "regions": [
+        "chubu"
+      ],
+      "anytime": true,
+      "highlights": [
+        {
+          "seasons": [
+            "autumn",
+            "winter",
+            "spring"
+          ],
+          "months": [
+            11,
+            12,
+            1,
+            2,
+            3,
+            4
+          ],
+          "label": "Snow-capped Mt. Fuji (autumn to late spring)",
+          "basis": "Clear days, all year; snow-capped from autumn to late spring"
+        }
+      ]
+    },
+    "hakone-tozan": {
+      "regions": [
+        "kanto"
+      ],
+      "foliage": [
+        11
+      ],
+      "flowers": [
+        6,
+        7
+      ],
+      "extraViews": [
+        "gorge-river"
+      ],
+      "anytime": true,
+      "highlights": [
+        {
+          "seasons": [
+            "summer"
+          ],
+          "months": [
+            6,
+            7
+          ],
+          "label": "Hydrangeas beside the track (June–July)",
+          "basis": "hydrangeas June–July"
+        },
+        {
+          "seasons": [
+            "autumn"
+          ],
+          "months": [
+            11
+          ],
+          "label": "Autumn leaves (November)",
+          "basis": "autumn leaves in November"
+        }
+      ]
+    },
+    "sagano-gorge": {
+      "regions": [
+        "kansai"
+      ],
+      "foliage": [
+        11,
+        12
+      ],
+      "flowers": [
+        4
+      ],
+      "months": [
+        4,
+        11,
+        12
+      ],
+      "scenery": "Cherry blossoms in early April and autumn leaves from mid-November to early December.",
+      "anytime": true,
+      "noServiceMonths": [
+        1,
+        2
+      ],
+      "highlights": [
+        {
+          "seasons": [
+            "spring"
+          ],
+          "months": [
+            4
+          ],
+          "label": "Cherry blossom (early April)",
+          "basis": "cherry blossom early April"
+        },
+        {
+          "seasons": [
+            "autumn"
+          ],
+          "months": [
+            11,
+            12
+          ],
+          "label": "Autumn leaves (mid-November to early December)",
+          "basis": "autumn leaves mid-November to early December"
+        }
+      ]
+    },
+    "yurikamome-night": {
+      "regions": [
+        "kanto"
+      ],
+      "anytime": true,
+      "highlights": []
+    },
+    "joetsu-snow": {
+      "regions": [
+        "kanto",
+        "chubu"
+      ],
+      "scenery": "Clear days year-round. The Echigo mountains typically carry snow from November to May.",
+      "anytime": true,
+      "highlights": [
+        {
+          "seasons": [
+            "winter",
+            "spring"
+          ],
+          "months": [
+            11,
+            12,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "label": "Snow-capped Echigo mountains (about November to May)",
+          "basis": "the Echigo mountains carry snow from about November to May"
+        }
+      ]
+    },
+    "tohoku-iwate": {
+      "regions": [
+        "kanto",
+        "tohoku"
+      ],
+      "scenery": "Clear days. The mountain peaks typically carry snow from November to May.",
+      "anytime": true,
+      "highlights": [
+        {
+          "seasons": [
+            "winter",
+            "spring"
+          ],
+          "months": [
+            11,
+            12,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "label": "Snow-capped Mt. Iwate and the Tohoku peaks (about November to May)",
+          "basis": "the peaks carry snow from about November to May"
+        }
+      ]
+    },
+    "kurobe-gorge": {
+      "regions": [
+        "chubu"
+      ],
+      "foliage": [
+        10,
+        11
+      ],
+      "months": [
+        5,
+        6,
+        10,
+        11
+      ],
+      "scenery": "Fresh greenery in May and June, and autumn leaves from late October to mid-November.",
+      "anytime": false,
+      "noServiceMonths": [
+        12,
+        1,
+        2,
+        3
+      ],
+      "highlights": [
+        {
+          "seasons": [
+            "spring",
+            "summer"
+          ],
+          "months": [
+            5,
+            6
+          ],
+          "label": "Fresh green (May–June)",
+          "basis": "fresh green May to June"
+        },
+        {
+          "seasons": [
+            "autumn"
+          ],
+          "months": [
+            10,
+            11
+          ],
+          "label": "Autumn leaves (late October to mid-November)",
+          "basis": "autumn leaves late October to mid-November"
+        }
+      ]
+    },
+    "gono-coast": {
+      "regions": [
+        "tohoku"
+      ],
+      "scenery": "Coastal views year-round, with sunset views on some afternoon services.",
+      "anytime": true,
+      "highlights": []
+    },
+    "furano-biei-flowers": {
+      "regions": [
+        "hokkaido"
+      ],
+      "flowers": [
+        6,
+        7,
+        8
+      ],
+      "anytime": true,
+      "highlights": [
+        {
+          "seasons": [
+            "summer"
+          ],
+          "months": [
+            6,
+            7,
+            8
+          ],
+          "label": "Flower fields (summer; bloom dates vary)",
+          "basis": "Summer for flowers; clear days in any season for the Tokachi mountains"
+        }
+      ]
+    },
+    "senmo-drift-ice": {
+      "regions": [
+        "hokkaido"
+      ],
+      "anytime": true,
+      "highlights": [
+        {
+          "seasons": [
+            "winter"
+          ],
+          "months": [
+            1,
+            2
+          ],
+          "label": "Drift ice on the Sea of Okhotsk (never guaranteed)",
+          "basis": "Winter for drift ice; the coast is visible year-round; Ryuhyo Monogatari announced for January 30 to February 28, 2027"
+        }
+      ]
+    },
+    "tadami-river": {
+      "regions": [
+        "tohoku",
+        "chubu"
+      ],
+      "foliage": [
+        10,
+        11
+      ],
+      "anytime": true,
+      "highlights": [
+        {
+          "seasons": [
+            "autumn"
+          ],
+          "months": [
+            10,
+            11
+          ],
+          "label": "Autumn colour (late October to mid-November)",
+          "basis": "autumn colour is usually late October to mid-November"
+        }
+      ]
+    }
+  },
+  "bestInLabel": "At their best in {season}",
+  "alsoGoodLabel": "Also worth riding in {season}",
+  "alsoGoodHelp": "Views you can enjoy in any season, on routes that run then.",
+  "bestSummary": "{best} at their best in {season} · {good} more you can ride",
+  "anyMonthLabel": "Any month",
+  "anyMonthHelp": "Good in every season:",
+  "mapFilteredNote": "Routes matching your filters are in red; the others stay on the map in grey.",
+  "monthFilteredNote": "Showing the months for the routes that match your filters."
 }

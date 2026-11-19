@@ -42,7 +42,8 @@ function pointString(points: [number, number][]) {
   return points.map((point) => project(point).map((value) => value.toFixed(1)).join(",")).join(" ");
 }
 
-export function ScenicOverviewMap({ locale, copy }: { locale: string; copy: MapCopy }) {
+/** `highlight`: route ids matching the page filters. Others stay on the map, greyed out. */
+export function ScenicOverviewMap({ locale, copy, highlight }: { locale: string; copy: MapCopy; highlight?: string[] }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<OverviewData | null>(null);
 
@@ -77,6 +78,9 @@ export function ScenicOverviewMap({ locale, copy }: { locale: string; copy: MapC
   }, []);
 
   const prefix = locale === "en" ? "" : `/${locale}`;
+  const isOn = (id: string) => !highlight || highlight.includes(id);
+  // Matching routes are drawn last so they sit on top of the greyed-out ones.
+  const ordered = data ? [...data.routes].sort((a, b) => Number(isOn(a.id)) - Number(isOn(b.id))) : [];
 
   return (
     <div ref={rootRef} className="overflow-hidden rounded-[22px] border border-slate-200 bg-white">
@@ -92,16 +96,16 @@ export function ScenicOverviewMap({ locale, copy }: { locale: string; copy: MapC
               ))}
             </g>
             <g>
-              {data.routes.map((route) => (
-                <a key={route.id} href={`${prefix}/scenic/${route.slug}`} aria-label={`${route.title}, ${route.line}`} className="group outline-none">
+              {ordered.map((route) => (
+                <a key={route.id} href={`${prefix}/scenic/${route.slug}`} aria-label={`${route.title}, ${route.line}`} className={["group outline-none", isOn(route.id) ? "" : "opacity-60"].join(" ")}>
                   <title>{`${route.title} · ${route.line}`}</title>
                   <polyline points={pointString(route.points)} fill="none" stroke="transparent" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" />
                   <polyline points={pointString(route.points)} fill="none" stroke="white" strokeWidth="6.5" strokeLinecap="round" strokeLinejoin="round" pointerEvents="none" />
                   <polyline
                     points={pointString(route.points)}
                     fill="none"
-                    stroke="#d94a32"
-                    strokeWidth="3.4"
+                    stroke={isOn(route.id) ? "#d94a32" : "#9aa6b2"}
+                    strokeWidth={isOn(route.id) ? "3.4" : "2.4"}
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     className="transition group-hover:stroke-[#16324f] group-focus:stroke-[#16324f]"
@@ -118,8 +122,8 @@ export function ScenicOverviewMap({ locale, copy }: { locale: string; copy: MapC
       </div>
       {data ? (
         <nav aria-label={copy.navigationLabel} className="flex flex-wrap gap-2 border-t border-slate-100 px-4 py-4">
-          {data.routes.map((route) => (
-            <a key={route.id} href={`${prefix}/scenic/${route.slug}`} className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold text-ink transition hover:bg-ink hover:text-white">
+          {[...ordered].reverse().map((route) => (
+            <a key={route.id} href={`${prefix}/scenic/${route.slug}`} className={["rounded-full px-3 py-1.5 text-xs font-bold transition hover:bg-ink hover:text-white", isOn(route.id) ? "bg-[#fde7e2] text-ink" : "bg-slate-100 text-slate-500"].join(" ")}>
               {route.line}
             </a>
           ))}

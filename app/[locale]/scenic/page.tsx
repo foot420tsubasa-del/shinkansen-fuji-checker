@@ -9,7 +9,7 @@ import { ScenicOverviewMap } from "@/components/scenic/ScenicOverviewMap";
 import hub from "@/data/scenic-hub.json";
 import discovery from "@/data/scenic-discovery.json";
 import overview from "@/data/scenic-overview.json";
-import { scenicDiscoveryRoutes, viewFilters } from "@/lib/scenic-discovery";
+import { scenicDiscoveryRoutes, scenicMonthRows, viewFilters } from "@/lib/scenic-discovery";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -42,8 +42,17 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
   const season = hub.seasonFilters.some((item) => item.id === requestedSeason) ? requestedSeason : undefined;
   const region = requestedRegion && Object.hasOwn(discovery.regions, requestedRegion) ? requestedRegion : undefined;
   const visibleRoutes = scenicDiscoveryRoutes({ view, season, region });
-  const allRoutes = scenicDiscoveryRoutes({});
-  const monthRows = hub.months.map((label, index) => ({ label, routes: allRoutes.filter((route) => route.months.includes(index + 1)) }));
+  const filtered = Boolean(view || season || region);
+  const bestRoutes = season ? visibleRoutes.filter((route) => route.fit === "best") : visibleRoutes;
+  const goodRoutes = season ? visibleRoutes.filter((route) => route.fit === "good") : [];
+  const seasonName = hub.seasonFilters.find((item) => item.id === season)?.label ?? "";
+  const fill = (template: string, values: Record<string, string | number>) =>
+    template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""));
+  // The map and the month table follow the filters: the map keeps every
+  // route but greys out the ones that do not match; the month table lists
+  // only matching routes, and only the months they are at their best.
+  const { rows: monthRows, anyMonth } = scenicMonthRows(filtered ? visibleRoutes : scenicDiscoveryRoutes({}));
+  const highlightIds = filtered ? (season ? bestRoutes : visibleRoutes).map((route) => route.id) : undefined;
   const path = locale === "en" ? "/scenic" : `/${locale}/scenic`;
   const schemas = [
     {
@@ -65,6 +74,30 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
     },
   ];
 
+  const routeCard = (route: (typeof visibleRoutes)[number]) => (
+            <article key={route.id} className="flex overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(30,41,59,0.06)]">
+              <Link href={`/scenic/${route.slug}`} className="group flex min-w-0 flex-1 flex-col">
+                <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
+                  <Image src={route.image.src} alt={route.image.alt} fill sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="object-cover transition duration-300 group-hover:scale-[1.02]" />
+                  {route.image.illustrative ? <span className="absolute bottom-2 right-3 rounded bg-black/45 px-1.5 py-0.5 text-[10px] font-medium text-white">{hub.illustrativeLabel}</span> : null}
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="text-xs font-bold uppercase tracking-[0.08em] text-fuji">{route.line}</p>
+                  <h2 className="mt-2 text-xl font-extrabold leading-tight tracking-[-0.02em] group-hover:text-fuji">{route.title}</h2>
+                  <p className="mt-1 text-xs font-bold text-slate-600">{route.regionNames.join(" · ")}</p>
+                  <p className="mt-1 text-xs text-slate-600">{route.region}</p>
+                  <p className="mt-4 text-[15px] font-semibold leading-6 text-ink">{route.teaser}</p>
+                  {route.seasonHighlight ? <p className="mt-2 inline-flex w-fit rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800">{route.seasonHighlight}</p> : null}
+                  <div className="mt-4 border-t border-slate-100 pt-4 text-sm leading-6 text-slate-600">
+                    <p><span className="font-bold text-ink">{discovery.viewingLabel}</span> {route.scenery}</p>
+                    {route.notice ? <p className="mt-2 rounded-xl bg-amber-50 px-3 py-2 text-[13px] leading-5 text-amber-950"><b>{discovery.serviceLabel}</b> {route.notice}</p> : null}
+                  </div>
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-bold text-fuji">{hub.cardLinkLabel} <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
+                </div>
+              </Link>
+            </article>
+  );
+
   return (
     <main className="page-shell min-h-screen text-ink">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }} />
@@ -79,9 +112,13 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
         <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-4 sm:p-5" aria-labelledby="filter-heading">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h2 id="filter-heading" className="text-lg font-extrabold">{hub.filterTitle}</h2>
-            <p className="text-sm font-semibold text-slate-600">{visibleRoutes.length} {visibleRoutes.length === 1 ? "route" : hub.routeCountLabel}</p>
+            <p className="text-sm font-semibold text-slate-600" aria-live="polite">
+              {season && visibleRoutes.length
+                ? fill(discovery.bestSummary, { best: bestRoutes.length, good: goodRoutes.length, season: seasonName.toLowerCase() })
+                : `${visibleRoutes.length} ${visibleRoutes.length === 1 ? "route" : hub.routeCountLabel}`}
+            </p>
           </div>
-          <form method="get" action={path} className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
+          <form method="get" action={`${path}#results`} className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3">
             <label className="col-span-2 min-w-0 text-sm font-bold sm:col-span-1">{hub.sceneryLabel}
               <select name="view" defaultValue={view ?? ""} className={filterClass}>
                 <option value="">{hub.allViewsLabel}</option>
@@ -108,6 +145,8 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
           <p className="mt-2 text-xs leading-5 text-slate-600">{discovery.filterHelp}</p>
         </section>
 
+        {/* After a search the page opens here, so on a phone the results are on screen, not the form. */}
+        <div id="results" className="scroll-mt-20" />
         {visibleRoutes.length === 0 ? (
           <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5">
             <h2 className="text-lg font-extrabold">{discovery.emptyTitle}</h2>
@@ -116,40 +155,38 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
           </section>
         ) : null}
 
-        <section className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" aria-label={hub.routesLabel}>
-          {visibleRoutes.map((route) => (
-            <article key={route.id} className="flex overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(30,41,59,0.06)]">
-              <Link href={`/scenic/${route.slug}`} className="group flex min-w-0 flex-1 flex-col">
-                <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
-                  <Image src={route.image.src} alt={route.image.alt} fill sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="object-cover transition duration-300 group-hover:scale-[1.02]" />
-                  {route.image.illustrative ? <span className="absolute bottom-2 right-3 rounded bg-black/45 px-1.5 py-0.5 text-[10px] font-medium text-white">{hub.illustrativeLabel}</span> : null}
-                </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <p className="text-xs font-bold uppercase tracking-[0.08em] text-fuji">{route.line}</p>
-                  <h2 className="mt-2 text-xl font-extrabold leading-tight tracking-[-0.02em] group-hover:text-fuji">{route.title}</h2>
-                  <p className="mt-1 text-xs font-bold text-slate-600">{route.regionNames.join(" · ")}</p>
-                  <p className="mt-1 text-xs text-slate-600">{route.region}</p>
-                  <p className="mt-4 text-[15px] font-semibold leading-6 text-ink">{route.teaser}</p>
-                  <div className="mt-4 border-t border-slate-100 pt-4 text-sm leading-6 text-slate-600">
-                    <p><span className="font-bold text-ink">{discovery.viewingLabel}</span> {route.scenery}</p>
-                    {route.notice ? <p className="mt-2 rounded-xl bg-amber-50 px-3 py-2 text-[13px] leading-5 text-amber-950"><b>{discovery.serviceLabel}</b> {route.notice}</p> : null}
-                  </div>
-                  <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-bold text-fuji">{hub.cardLinkLabel} <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
-                </div>
-              </Link>
-            </article>
-          ))}
-        </section>
+        {bestRoutes.length ? (
+          <section className="mt-8" aria-labelledby={season ? "best-heading" : undefined} aria-label={season ? undefined : hub.routesLabel}>
+            {season ? <h2 id="best-heading" className="text-xl font-extrabold tracking-[-0.02em]">{fill(discovery.bestInLabel, { season: seasonName.toLowerCase() })}</h2> : null}
+            <div className={["grid gap-5 sm:grid-cols-2 lg:grid-cols-3", season ? "mt-4" : ""].join(" ")}>
+              {bestRoutes.map((route) => routeCard(route))}
+            </div>
+          </section>
+        ) : null}
+
+        {goodRoutes.length ? (
+          <details className="mt-10 rounded-[22px] border border-slate-200 bg-white p-4 sm:p-5">
+            <summary className="cursor-pointer list-none">
+              <span className="text-lg font-extrabold">{fill(discovery.alsoGoodLabel, { season: seasonName.toLowerCase() })} ({goodRoutes.length})</span>
+              <span className="mt-1 block text-sm text-slate-600">{discovery.alsoGoodHelp}</span>
+            </summary>
+            <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {goodRoutes.map((route) => routeCard(route))}
+            </div>
+          </details>
+        ) : null}
 
         <section className="mt-14" aria-labelledby="map-heading">
           <h2 id="map-heading" className="text-2xl font-extrabold tracking-[-0.02em] md:text-3xl">{hub.map.title}</h2>
           <p className="mt-2 text-[15px] leading-7 text-slate-600">{hub.map.intro}</p>
-          <div className="mt-5"><ScenicOverviewMap locale={locale} copy={hub.map} /></div>
+          {highlightIds ? <p className="mt-2 text-sm font-semibold text-slate-700">{discovery.mapFilteredNote}</p> : null}
+          <div className="mt-5"><ScenicOverviewMap locale={locale} copy={hub.map} highlight={highlightIds} /></div>
         </section>
 
         <section className="mt-14" aria-labelledby="month-heading">
           <h2 id="month-heading" className="text-2xl font-extrabold tracking-[-0.02em] md:text-3xl">{hub.monthTable.title}</h2>
           <p className="mt-2 text-[15px] leading-7 text-slate-600">{hub.monthTable.intro}</p>
+          {filtered ? <p className="mt-1 text-sm font-semibold text-slate-700">{discovery.monthFilteredNote}</p> : null}
           <div className="mt-5 overflow-hidden rounded-[22px] border border-slate-200 bg-white">
             <table className="w-full text-left text-sm">
               <tbody>
@@ -158,13 +195,28 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
                     <th scope="row" className="w-16 bg-slate-50 px-4 py-4 font-extrabold text-ink sm:w-24">{month.label}</th>
                     <td className="px-4 py-3">
                       <div className="flex flex-wrap gap-2">
-                        {month.routes.map((route) => (
+                        {month.entries.length ? month.entries.map(({ route, label }) => (
+                          <Link key={`${route.id}-${label}`} href={`/scenic/${route.slug}`} title={label} className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-700 hover:bg-ink hover:text-white">
+                            {route.line}<span className="font-medium text-slate-500"> · {label.replace(/ \(.*\)$/, "")}</span>
+                          </Link>
+                        )) : <span className="text-xs text-slate-400">—</span>}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+                {anyMonth.length ? (
+                  <tr className="border-t border-slate-100 align-top">
+                    <th scope="row" className="w-16 bg-slate-50 px-4 py-4 font-extrabold text-ink sm:w-24">{discovery.anyMonthLabel}</th>
+                    <td className="px-4 py-3">
+                      <p className="mb-2 text-xs text-slate-500">{discovery.anyMonthHelp}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {anyMonth.map((route) => (
                           <Link key={route.id} href={`/scenic/${route.slug}`} className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-bold text-slate-700 hover:bg-ink hover:text-white">{route.line}</Link>
                         ))}
                       </div>
                     </td>
                   </tr>
-                ))}
+                ) : null}
               </tbody>
             </table>
           </div>
