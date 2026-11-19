@@ -56,6 +56,8 @@ export function getAffUrl(linkId: string): string | null {
 export function getReadyAffUrl(linkId: string, options: { allowFallback?: boolean } = {}): string | null {
   const link = AFFILIATE_LINKS[linkId];
   if (!link) return null;
+  // Rail, tours and experiences go to Klook only (2026-11-20 policy): Omio entries stay in the data, never on a page.
+  if (link.provider === "omio" && KLOOK_ONLY) return null;
   const status = link.urlStatus;
   if (status && status !== "ready" && !(options.allowFallback && status === "fallback_only")) return null;
   return getAffUrl(linkId);

@@ -105,6 +105,7 @@
     "nav": {
       "hub": "VERIFICADOR DE ASIENTO SHINKANSEN",
       "seat": "Verificar asiento",
+      "scenic": "Rutas panorámicas",
       "planner": "Planificador",
       "stay": "Dónde alojarse",
       "essentials": "Esenciales",
@@ -459,7 +460,8 @@
       "title": "Las mejores vistas desde el tren en Japón",
       "sub": "Estamos mapeando los mejores asientos de ventanilla más allá del Monte Fuji: qué lado, qué tramo y qué temporada. Cada uno se publica cuando está verificado.",
       "soon": "Próximamente",
-      "live": "Disponible — encuentra tu asiento"
+      "live": "Disponible — encuentra tu asiento",
+      "all": "Ver las 14 rutas panorámicas"
     },
     "search": {
       "eyebrow": "Explora Japón en tren",
@@ -528,6 +530,23 @@
       "departureShifted": "Cambiaste la salida: los horarios siguen el patrón del {train} desde esa hora. Son estimaciones; otros trenes paran de forma distinta.",
       "noServiceOnDate": "Según nuestros datos, la línea no opera este mes. Consulta al operador antes de viajar.",
       "serviceNote": "Aviso de servicio"
+    },
+    "quickAnswer": {
+      "eyebrow": "Tokaido Shinkansen",
+      "title": "El Fuji está del lado del asiento E",
+      "right": "Derecha",
+      "left": "Izquierda",
+      "westbound": "Tokio → Kioto / Osaka: el Fuji está a la derecha. Reserva el asiento E, la ventanilla de ese lado.",
+      "eastbound": "Kioto / Osaka → Tokio: está a la izquierda, y sigue siendo el asiento E.",
+      "guide": "Cuándo mirar y qué hacer si el E está agotado",
+      "book": "Reservar asiento del Tokaido Shinkansen en Klook"
+    },
+    "seatGuidesTitle": "Guías de asiento para el Fuji",
+    "planRest": {
+      "title": "Planifica el resto del viaje",
+      "sub": "Dónde alojarte y cómo moverte por estaciones grandes.",
+      "stayEyebrow": "Dónde alojarse",
+      "stayBody": "Elige una base en Tokio según la llegada, el equipaje y los días de Shinkansen temprano."
     }
   },
   "guide": {

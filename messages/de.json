@@ -105,6 +105,7 @@
     "nav": {
       "hub": "SHINKANSEN-SITZPLATZ-CHECKER",
       "seat": "Sitz prüfen",
+      "scenic": "Panoramastrecken",
       "planner": "Planer",
       "stay": "Wo übernachten",
       "essentials": "Essentials",
@@ -459,7 +460,8 @@
       "title": "Japans schönste Zugfenster-Aussichten",
       "sub": "Wir kartieren die besten Fensterplätze über den Mt. Fuji hinaus – welche Seite, welcher Abschnitt, welche Jahreszeit. Jede Strecke geht online, sobald sie geprüft ist.",
       "soon": "Demnächst",
-      "live": "Online – Platz finden"
+      "live": "Online – Platz finden",
+      "all": "Alle 14 Panoramastrecken ansehen"
     },
     "search": {
       "eyebrow": "Japan mit dem Zug entdecken",
@@ -528,6 +530,23 @@
       "departureShifted": "Sie haben die Abfahrt geändert: Die Zeiten folgen dem Fahrmuster des {train} ab dieser Uhrzeit. Es sind Schätzungen – andere Züge halten anders.",
       "noServiceOnDate": "Laut unseren Daten verkehrt die Linie in diesem Monat nicht. Prüfen Sie vor der Reise beim Betreiber.",
       "serviceNote": "Betriebshinweis"
+    },
+    "quickAnswer": {
+      "eyebrow": "Tokaido-Shinkansen",
+      "title": "Der Fuji liegt auf der Seite von Sitz E",
+      "right": "Rechts",
+      "left": "Links",
+      "westbound": "Tokio → Kyoto / Osaka: Der Fuji ist rechts. Buche Sitz E, den Fensterplatz auf dieser Seite.",
+      "eastbound": "Kyoto / Osaka → Tokio: Er ist links – und das ist wieder Sitz E.",
+      "guide": "Wann hinsehen und was tun, wenn E ausgebucht ist",
+      "book": "Tokaido-Shinkansen-Sitz bei Klook buchen"
+    },
+    "seatGuidesTitle": "Fuji-Sitzplatz-Guides",
+    "planRest": {
+      "title": "Den Rest der Reise planen",
+      "sub": "Wo übernachten und wie man sich in großen Bahnhöfen zurechtfindet.",
+      "stayEyebrow": "Wo übernachten",
+      "stayBody": "Eine Basis in Tokio, die zu Ankunft, Gepäck und frühen Shinkansen-Tagen passt."
     }
   },
   "guide": {

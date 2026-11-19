@@ -350,7 +350,7 @@ const guideUiByLocale = {
     getJapanEsim: "Get Japan eSIM on Klook", getSimCard: "Get Japan SIM card on Klook",
     railDecisionLabel: "Rail booking options",
     bookShinkansenTitle: "Book Shinkansen ticket",
-    bookShinkansenBody: "For a simple Tokyo → Kyoto / Osaka trip, choose Seat E if available. Use Klook to book a specific Shinkansen ticket, or Omio to compare route options before booking.",
+    bookShinkansenBody: "For a simple Tokyo → Kyoto / Osaka trip, choose Seat E if available. Book the specific Shinkansen ticket on Klook.",
     checkJrPassTitle: "Check JR Pass options",
     checkJrPassBody: "JR Pass is a separate decision from a single Shinkansen ticket. Check it if your route includes Hiroshima, multiple long JR rides, or a return to Tokyo.",
     shinkansenDayLabel: "Shinkansen day setup",

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { BrandMark } from "@/components/ui/BrandMark";
 import { LanguageSelector } from "./LanguageSelector";
 import type { MouseEvent } from "react";
@@ -36,6 +36,14 @@ export function SiteHeader() {
   const t = useTranslations("home");
   const locale = useLocale();
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  // The section you are in, so the bar shows where you are (2026-11-20 design pass).
+  const isCurrent = (href: string) => {
+    const base = href.split("#")[0];
+    if (base === "/" || !base) return false;
+    if (base === "/areas-to-stay") return pathname.startsWith("/areas-to-stay") || pathname.startsWith("/stays");
+    return pathname === base || pathname.startsWith(base + "/");
+  };
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -48,6 +56,8 @@ export function SiteHeader() {
 
   const navLinks = [
     { href: "/#seat-checker", label: t("nav.seat"), category: "seat_checker" },
+    // Scenic routes lead the bar: the site is now about train-window views (2026-11-20).
+    { href: "/scenic", label: t("nav.scenic"), category: "scenic" },
     { href: "/areas-to-stay", label: t("nav.stay"), category: "stay" },
     // Was /plan-your-trip#rail, a page retired from the index; the Shinkansen
     // guide is the rail content that ranks.
@@ -84,7 +94,11 @@ export function SiteHeader() {
                   locale,
                 })
               }
-              className="transition-colors hover:text-ink"
+              aria-current={isCurrent(link.href) ? "page" : undefined}
+              className={[
+                "relative py-1 transition-colors hover:text-ink",
+                isCurrent(link.href) ? "text-ink after:absolute after:inset-x-0 after:-bottom-[19px] after:h-[2px] after:rounded-full after:bg-ink" : "",
+              ].join(" ")}
             >
               {link.label}
             </Link>
@@ -144,7 +158,8 @@ export function SiteHeader() {
                 });
                 preferOnPageChecker(event, link.category);
               }}
-              className="flex min-h-12 items-center border-b border-slate-100 text-base font-semibold text-ink"
+              aria-current={isCurrent(link.href) ? "page" : undefined}
+              className={["flex min-h-12 items-center justify-between border-b border-slate-100 text-base font-semibold", isCurrent(link.href) ? "text-fuji" : "text-ink"].join(" ")}
             >
               {link.label}
             </Link>

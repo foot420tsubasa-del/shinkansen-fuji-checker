@@ -176,7 +176,7 @@ export function ProviderButton({
       ].join(" ")}
     >
       <ProviderMark provider={provider} />
-      <span className="min-w-0 flex-1 truncate text-center">{children}</span>
+      <span className="min-w-0 flex-1 text-center leading-tight">{children}</span>
       <ExternalLink
         className={`h-4 w-4 ${provider === "booking_travelpayouts" ? "text-blue-700" : "text-cyan-700"}`}
         aria-hidden="true"

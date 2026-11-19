@@ -105,6 +105,7 @@
     "nav": {
       "hub": "SHINKANSEN SEAT CHECKER",
       "seat": "Check Seat",
+      "scenic": "Scenic Routes",
       "planner": "Planner",
       "stay": "Where to Stay",
       "essentials": "Essentials",
@@ -112,7 +113,7 @@
       "guide": "Guide",
       "decisions": "Trip decisions",
       "questions": "Feedback",
-      "tagline": "Fuji seat & Tokyo hotel base",
+      "tagline": "Train-window views & seats in Japan",
       "tickets": "Tickets",
       "esim": "eSIM",
       "railGuide": "Rail Guide",
@@ -457,9 +458,10 @@
     },
     "scenic": {
       "title": "Japan’s best train-window views",
-      "sub": "We’re mapping the best window seats beyond Mt. Fuji — which side, which stretch and which season. Each one goes live once it’s checked.",
+      "sub": "Pick a view. Each guide shows which side to sit on, where the view starts, and the best season.",
       "soon": "Coming soon",
-      "live": "Live — find your seat"
+      "live": "Live — find your seat",
+      "all": "Explore all 14 scenic routes"
     },
     "search": {
       "eyebrow": "Explore Japan by train",
@@ -528,6 +530,23 @@
       "departureShifted": "You changed the departure: times follow the {train} running pattern from that time. They are estimates — other trains stop differently.",
       "noServiceOnDate": "Our route data shows no service in this month. Check the operator before you travel.",
       "serviceNote": "Service note"
+    },
+    "quickAnswer": {
+      "eyebrow": "Tokaido Shinkansen",
+      "title": "Mt. Fuji is on the Seat E side",
+      "right": "Right",
+      "left": "Left",
+      "westbound": "Tokyo → Kyoto / Osaka: Mt. Fuji is on the right. Book Seat E, the window seat on that side.",
+      "eastbound": "Kyoto / Osaka → Tokyo: it's on the left, and that is still Seat E.",
+      "guide": "When to look and what if E is sold out",
+      "book": "Book a Tokaido Shinkansen seat on Klook"
+    },
+    "seatGuidesTitle": "Mt. Fuji seat guides",
+    "planRest": {
+      "title": "Plan the rest of your trip",
+      "sub": "Where to stay, and how to feel at home in a busy station.",
+      "stayEyebrow": "Where to stay",
+      "stayBody": "Pick a Tokyo base that suits airport arrival, luggage and early Shinkansen days."
     }
   },
   "guide": {
