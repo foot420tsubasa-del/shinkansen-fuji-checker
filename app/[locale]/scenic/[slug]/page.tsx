@@ -140,6 +140,8 @@ export default async function ScenicRoutePage({ params }: Props) {
     ...(route.faq ?? []),
   ];
 
+  const essentials = getTripEssentials(route.id);
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo" }).format(new Date());
   const ticketLinks: ResolvedTicketLink[] = (route.ticketGuide?.links ?? []).flatMap((l): ResolvedTicketLink[] => {
     if (l.kind === "official") return [{ kind: "official", href: l.url, label: l.label }];
     const href = getAffUrl(l.linkId);
@@ -163,15 +165,17 @@ export default async function ScenicRoutePage({ params }: Props) {
           <Link href="/scenic" className="underline-offset-4 hover:underline">Scenic routes</Link> · {route.line}
         </p>
         <h1 className="mt-3 text-[32px] font-extrabold leading-[1.1] tracking-[-0.03em] md:text-[44px]">{route.page.h1}</h1>
-        <Link href={`/?${new URLSearchParams({ from, to })}`} className="mt-3 inline-flex min-h-10 items-center gap-2 text-sm font-bold text-fuji underline underline-offset-2">
-          {discovery.routeSearchLink} <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
+        <nav aria-label="On this route" className="mt-2 flex flex-wrap gap-x-4 sm:gap-x-6">
+          <a href="#ride-timing" className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-700 underline underline-offset-4 hover:text-ink">Map &amp; timing</a>
+          {essentials ? <a href="#plan-ride-heading" className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-700 underline underline-offset-4 hover:text-ink">Plan this ride</a> : null}
+          {route.ticketGuide ? <a href="#tickets" className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-700 underline underline-offset-4 hover:text-ink">Tickets</a> : null}
+        </nav>
 
-        <section className="mt-6 grid gap-4 md:grid-cols-2" aria-label="Which side to sit on">
+        <section className="mt-3 grid gap-4 md:grid-cols-2" aria-label="Which side to sit on">
           {(["forward", "backward"] as const).map((dir) => {
             const [a, b] = route.directions![dir];
             return (
-              <div key={dir} className="rounded-[22px] bg-ink p-6 text-white">
+              <div key={dir} className="rounded-[22px] bg-ink p-5 text-white md:p-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/60">
                   {a} → {b}
                 </p>
@@ -209,6 +213,16 @@ export default async function ScenicRoutePage({ params }: Props) {
           })}
         </section>
 
+        {route.image ? (
+          <div className="mt-6">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[22px] bg-ink">
+              <Image src={route.image.src} alt={route.image.alt} fill sizes="(min-width: 1000px) 960px, calc(100vw - 40px)" className="object-cover" style={{ objectPosition: route.image.position }} />
+              {route.image.illustrative ? <span className="absolute bottom-2 right-3 rounded bg-black/55 px-1.5 py-0.5 text-[11px] font-medium text-white">Illustrative image, not a photo from this train</span> : null}
+            </div>
+            <PhotoCredit src={route.image.src} className="mt-2" detailed />
+          </div>
+        ) : null}
+
         {(() => {
           const highlights = (discovery.routes as Record<string, { highlights?: { label: string }[] }>)[route.id]?.highlights ?? [];
           const seatKind = seatInfo?.kind;
@@ -238,17 +252,12 @@ export default async function ScenicRoutePage({ params }: Props) {
             {seatInfo.sources.map(({ label, url }) => <li key={url}><a href={url} className="underline underline-offset-2">{label}</a></li>)}
           </ul>
         ) : null}
-        {route.image ? (
-          <div className="mt-8">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-[22px] bg-ink">
-              <Image src={route.image.src} alt={route.image.alt} fill priority sizes="(min-width: 1040px) 1000px, 100vw" className="object-cover" style={{ objectPosition: route.image.position }} />
-              {route.image.illustrative ? <span className="absolute bottom-2 right-3 rounded bg-black/55 px-1.5 py-0.5 text-[11px] font-medium text-white">Illustrative image, not a photo from this train</span> : null}
-            </div>
-            <PhotoCredit src={route.image.src} className="mt-2" detailed />
-          </div>
-        ) : null}
 
-        <section className="mt-10">
+        <Link href={`/?${new URLSearchParams({ from, to })}`} className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-fuji underline underline-offset-2">
+          {discovery.routeSearchLink} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
+
+        <section id="ride-timing" tabIndex={-1} className="mt-8 scroll-mt-20">
           <RouteTimeline routeId={route.id} direction="forward" from={from} to={to} showRouteLink={false} showSummary={false} />
         </section>
 
@@ -317,17 +326,10 @@ export default async function ScenicRoutePage({ params }: Props) {
           </details>
         </section>
 
-        {(() => {
-          // How to ride (data/trip-essentials.json). Since the 2026-11-20 design pass it follows
-          // the questions in the order travellers ask them: what you see, which side, when and
-          // where, then how to ride and which ticket.
-          const essentials = getTripEssentials(route.id);
-          const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo" }).format(new Date());
-          return essentials ? <PlanThisRide essentials={essentials} today={today} /> : null;
-        })()}
+        {essentials ? <PlanThisRide essentials={essentials} today={today} /> : null}
 
         {route.ticketGuide ? (
-          <section id="tickets" className="mt-10 scroll-mt-20">
+          <section id="tickets" tabIndex={-1} className="mt-10 scroll-mt-20">
             <h2 className="text-2xl font-extrabold tracking-[-0.02em]">Which ticket?</h2>
             <div className="mt-4">
               <TicketGuide routeId={route.id} line={route.line} guide={route.ticketGuide} links={ticketLinks} />

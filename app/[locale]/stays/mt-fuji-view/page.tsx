@@ -54,7 +54,7 @@ export default async function MtFujiViewStaysPage({ params }: Props) {
 
         <div className="mt-8">
           <div className="relative aspect-[16/9] overflow-hidden rounded-[24px] bg-slate-100">
-            <Image src={p.heroImage.src} alt={p.heroImage.alt} fill priority sizes="(min-width: 1160px) 1120px, 100vw" className="object-cover" style={{ objectPosition: p.heroImage.position }} />
+            <Image src={p.heroImage.src} alt={p.heroImage.alt} fill preload sizes="(min-width: 1120px) 1080px, calc(100vw - 40px)" className="object-cover" style={{ objectPosition: p.heroImage.position }} />
             {p.heroImage.illustrative ? (
               <span className="absolute bottom-2 right-3 rounded bg-black/55 px-1.5 py-0.5 text-[11px] font-medium text-white">Illustrative image</span>
             ) : null}

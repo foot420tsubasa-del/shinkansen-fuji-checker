@@ -1040,6 +1040,17 @@ test("Plan this ride: every fact is sourced on the operator's site, dated, and n
   assert.match(page, /id="tickets"/);
 });
 
+test("scenic route shortcuts lead to the existing plan, timeline and ticket sections", () => {
+  const page = readFileSync("app/[locale]/scenic/[slug]/page.tsx", "utf8");
+  const plan = readFileSync("components/scenic/PlanThisRide.tsx", "utf8");
+  assert.match(page, /href="#ride-timing"/);
+  assert.match(page, /id="ride-timing"[^>]*>\s*<RouteTimeline /);
+  assert.match(page, /essentials \? <a href="#plan-ride-heading"/);
+  assert.match(plan, /id="plan-ride-heading"[^>]*>Plan this ride/);
+  assert.match(page, /route\.ticketGuide \? <a href="#tickets"/);
+  assert.match(page, /id="tickets"[^>]*>\s*<h2[^>]*>Which ticket\?/);
+});
+
 test("route results keep the mapped Tokaido leg separate and only choose a highlight in the actual timeline", () => {
   assert.deepEqual(scenic.mappedTokaidoLeg("Tokyo", "Hiroshima"), ["Tokyo", "Shin-Osaka"]);
   assert.deepEqual(scenic.mappedTokaidoLeg("Hiroshima", "Tokyo"), ["Shin-Osaka", "Tokyo"]);

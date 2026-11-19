@@ -54,7 +54,7 @@ export function PlanThisRide({ essentials, today }: { essentials: TripEssentials
 
   return (
     <section className="mt-10 rounded-[22px] border border-slate-200 bg-white p-5 md:p-6" aria-labelledby="plan-ride-heading">
-      <h2 id="plan-ride-heading" className="text-2xl font-extrabold tracking-[-0.02em]">Plan this ride</h2>
+      <h2 id="plan-ride-heading" tabIndex={-1} className="scroll-mt-20 text-2xl font-extrabold tracking-[-0.02em]">Plan this ride</h2>
       <p className="mt-1 text-sm text-slate-600">From the operators&apos; own sites, checked {fmtDate(essentials.checked)}. Fares are one-way adult fares for the section shown.</p>
       <dl className="mt-3">
         {row("Where to board", essentials.board)}

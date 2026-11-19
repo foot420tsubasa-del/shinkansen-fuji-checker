@@ -33,7 +33,7 @@ function first(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] : value;
 }
 
-const filterClass = "mt-1 block min-h-12 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-ink";
+const filterClass = "mt-1 block min-h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-base text-ink";
 
 export default async function ScenicHubPage({ params, searchParams }: Props) {
   const [{ locale }, query] = await Promise.all([params, searchParams]);
@@ -76,28 +76,24 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
     },
   ];
 
-  // Card order (2026-11-20 design pass): the view and route, what you see,
-  // where it runs, the best season, then one link. The long scenery text and
-  // service notices are shortened here; the route page carries them in full.
   const routeCard = (route: (typeof visibleRoutes)[number]) => (
     <article key={route.id} className="flex flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(30,41,59,0.05)] transition-shadow hover:shadow-[0_14px_36px_rgba(30,41,59,0.1)]">
-      <Link href={`/scenic/${route.slug}`} className="group flex min-w-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+      <Link href={`/scenic/${route.slug}`} className="group flex min-w-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ink">
         <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <Image src={route.image.src} alt={route.image.alt} fill sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="object-cover transition duration-500 group-hover:scale-[1.03]" style={{ objectPosition: route.image.position }} />
-          {route.image.illustrative ? <span className="absolute bottom-2 right-3 rounded bg-black/45 px-1.5 py-0.5 text-[10px] font-medium text-white">{hub.illustrativeLabel}</span> : null}
+          <Image src={route.image.src} alt={route.image.alt} fill sizes="(min-width: 1160px) 360px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 640px) calc((100vw - 60px) / 2), calc(100vw - 40px)" className="object-cover" style={{ objectPosition: route.image.position }} />
         </div>
         <div className="flex flex-1 flex-col p-5">
-          <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-500">{route.line}</p>
-          <h2 className="mt-1.5 text-[19px] font-extrabold leading-snug tracking-[-0.02em] text-ink group-hover:text-fuji">{route.title}</h2>
-          <p className="mt-2 text-[15px] font-semibold leading-6 text-slate-800">{route.teaser}</p>
-          <p className="mt-1 text-sm text-slate-500">{route.regionNames.join(" · ")} · {route.region}</p>
-          <p className="mt-3 line-clamp-2 text-sm leading-6 text-slate-600"><span className="font-bold text-ink">{discovery.viewingLabel}</span> {route.scenery}</p>
-          {route.seasonHighlight ? <p className="mt-3 inline-flex w-fit rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800">{route.seasonHighlight}</p> : null}
+          <h2 className="text-[19px] font-extrabold leading-snug tracking-[-0.02em] text-ink group-hover:text-fuji">{route.title}</h2>
+          <p className="mt-1 text-sm leading-5 text-slate-600">{route.title.includes(route.line) ? route.region : `${route.line} · ${route.region}`}</p>
+          <p className="mt-3 text-[15px] font-semibold leading-6 text-slate-800">{route.teaser}</p>
+          <p className="mt-2 text-sm leading-5 text-slate-600"><span className="font-bold text-ink">{discovery.viewingLabel}</span> {route.seasonHighlight ?? route.scenery}</p>
           {route.notice ? <p className="mt-3 line-clamp-2 border-l-2 border-amber-400 pl-3 text-[13px] leading-5 text-slate-700"><b className="text-ink">{discovery.serviceLabel}</b> {route.notice}</p> : null}
-          <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[15px] font-bold text-ink group-hover:text-fuji">{hub.cardLinkLabel} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" /></span>
+          <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-[15px] font-bold text-ink group-hover:text-fuji">{hub.cardLinkLabel} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" /></span>
         </div>
       </Link>
-      <PhotoCredit src={route.image.src} className="border-t border-slate-100 px-5 py-2" />
+      {route.image.illustrative ? (
+        <p className="border-t border-slate-100 px-5 py-2 text-xs leading-5 text-slate-600">{hub.illustrativeLabel}</p>
+      ) : <PhotoCredit src={route.image.src} className="border-t border-slate-100 px-5 py-2" />}
       {route.id === "fujikyu-fuji" ? (
         <Link href="/stays/mt-fuji-view" className="flex min-h-12 items-center border-t border-slate-100 px-5 text-sm font-semibold text-slate-700 underline-offset-4 hover:text-ink hover:underline">
           Stay with a Mt. Fuji view →
@@ -114,10 +110,10 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
         <header className="max-w-[780px]">
           <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">{hub.eyebrow}</p>
           <h1 className="mt-3 text-[34px] font-extrabold leading-[1.08] tracking-[-0.035em] md:text-[52px]">{hub.title}</h1>
-          <p className="mt-5 text-[17px] leading-8 text-slate-700 md:text-lg">{hub.intro}</p>
+          <p className="mt-4 text-[17px] leading-7 text-slate-700 md:text-lg">{hub.browseIntro}</p>
         </header>
 
-        <nav aria-label="Quick view filters" className="-mx-5 mt-6 overflow-x-auto px-5 pb-1">
+        <nav aria-label="Quick view filters" className="-mx-5 mt-4 overflow-x-auto px-5 pb-1">
           <ul className="flex w-max gap-2">
             <li>
               <Link href="/scenic#results" aria-current={!filtered ? "page" : undefined} className={["inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-bold transition-colors", !filtered ? "border-ink bg-ink text-white" : "border-slate-300 bg-white text-ink hover:border-ink"].join(" ")}>{hub.allViewsLabel}</Link>
@@ -133,7 +129,7 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
           </ul>
         </nav>
 
-        <section className="mt-4 rounded-[22px] border border-slate-200 bg-white p-4 sm:p-5" aria-labelledby="filter-heading">
+        <section className="mt-3 rounded-[22px] border border-slate-200 bg-white p-4 sm:p-5" aria-labelledby="filter-heading">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h2 id="filter-heading" className="text-lg font-extrabold">{hub.filterTitle}</h2>
             <p className="text-sm font-semibold text-slate-600" aria-live="polite">
@@ -181,7 +177,7 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
         ) : null}
 
         {bestRoutes.length ? (
-          <section className="mt-8" aria-labelledby={season ? "best-heading" : undefined} aria-label={season ? undefined : hub.routesLabel}>
+          <section className="mt-5" aria-labelledby={season ? "best-heading" : undefined} aria-label={season ? undefined : hub.routesLabel}>
             {season ? <h2 id="best-heading" className="text-xl font-extrabold tracking-[-0.02em]">{fill(discovery.bestInLabel, { season: seasonName.toLowerCase() })}</h2> : null}
             <div className={["grid gap-5 sm:grid-cols-2 lg:grid-cols-3", season ? "mt-4" : ""].join(" ")}>
               {bestRoutes.map((route) => routeCard(route))}
