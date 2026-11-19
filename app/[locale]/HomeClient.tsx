@@ -459,7 +459,10 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
             <p className="text-[10.5px] font-semibold uppercase tracking-[0.28em] text-white/90 md:text-xs">
               — {t("search.eyebrow")} —
             </p>
-            <h1 className="mx-auto mt-4 max-w-[860px] font-display text-[34px] font-semibold leading-[1.08] tracking-[-0.01em] [text-shadow:0_2px_24px_rgba(0,0,0,0.35)] sm:text-[44px] md:text-[60px] md:leading-[1.04]">
+            <h1 className={[
+              "mx-auto mt-4 max-w-[860px] text-[34px] font-semibold leading-[1.08] tracking-[-0.01em] [text-shadow:0_2px_24px_rgba(0,0,0,0.35)] sm:text-[44px] md:text-[60px] md:leading-[1.04]",
+              locale === "en" ? "[font-family:Georgia,'Times_New_Roman',serif] lg:max-w-[960px]" : "font-display",
+            ].join(" ")}>
               {t("search.title")}
             </h1>
             <p className="mx-auto mt-3 max-w-[520px] text-[15px] leading-6 text-white/90 font-medium [text-shadow:0_1px_14px_rgba(0,0,0,0.6)] md:mt-4 md:text-lg md:leading-7">
