@@ -8,7 +8,7 @@ import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { RouteTimeline } from "@/components/scenic/RouteTimeline";
 import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
-import { LIVE_ROUTES, flipSide, reversalsBefore, seatedSide, type ScenicRoute } from "@/lib/scenic";
+import { LIVE_ROUTES, reversalsBefore, seatedSide, sideFor, type ScenicRoute } from "@/lib/scenic";
 import { AFFILIATE_LINKS, JR_PASS_URL, getAffUrl } from "@/src/affiliateLinks";
 import { TicketGuide, type ResolvedTicketLink } from "@/components/scenic/TicketGuide";
 import { ScenicStayBlock } from "@/components/scenic/ScenicStayBlock";
@@ -25,17 +25,18 @@ const SEAT_LINE: Record<string, string> = {
   car: "You book a car, not a seat; seats in it are first come, first served.",
 };
 
-type SeatingEntry = { kind: string; q?: string; a?: string };
+type SeatingEntry = { kind: string; q?: string; a?: string; summary?: string; reversalAnswer?: string; sources?: { label: string; url: string }[] };
+const seatingFor = (id: string) => (seating.routes as Record<string, SeatingEntry | undefined>)[id];
 
 /**
  * The seat question that fits the train (data/scenic-seating.json): book a
  * window on a Shinkansen or reserved train; no reservations on regular local
- * trains; long benches on the Enoden and Yurikamome; a car, not a seat, on the
- * Kurobe trolley. Skipped where the route already answers it (verified seats,
+ * trains; train-specific layouts on the Enoden and Yurikamome; car booking on
+ * the Kurobe trolley. Skipped where the route already answers it (verified seats,
  * or its own seat question).
  */
 function seatingFaq(route: ScenicRoute): { q: string; a: string }[] {
-  const entry = (seating.routes as Record<string, SeatingEntry>)[route.id];
+  const entry = seatingFor(route.id);
   const fill = (text: string, values: Record<string, string>) => text.replace(/\{(\w+)\}/g, (_, k: string) => values[k] ?? "");
   const out: { q: string; a: string }[] = [];
   const verifiedSeats = route.views?.some((v) => v.seat || v.seatByDirection);
@@ -48,7 +49,7 @@ function seatingFaq(route: ScenicRoute): { q: string; a: string }[] {
   }
   if (route.reversals?.length) {
     const stations = route.reversals.map((name) => name.replace(/ Switchback$/, "")).join(", ");
-    out.push({ q: fill(seating.templates.reversal.q, { line: route.line }), a: fill(seating.templates.reversal.a, { stations }) });
+    out.push({ q: fill(seating.templates.reversal.q, { line: route.line }), a: entry?.reversalAnswer ?? fill(seating.templates.reversal.a, { stations }) });
   }
   return out;
 }
@@ -102,12 +103,14 @@ export default async function ScenicRoutePage({ params }: Props) {
 
   const [from, to] = route.directions.forward;
   const views = route.views;
+  const seatInfo = seatingFor(route.id);
+  const reverses = Boolean(route.reversals?.length);
 
   // Every view gets its side question; where the side rests on the terrain
   // model alone, the answer says so.
   const faq = [
     ...views
-      .filter((v) => !/glimpse|after the reversal/i.test(v.name))
+      .filter((v) => !/glimpse/i.test(v.name))
       .map((v) => {
         const seatText = v.seatByDirection
           ? ` — ${v.seatByDirection.forward} going to ${to}, ${v.seatByDirection.backward} going to ${from}`
@@ -116,9 +119,20 @@ export default async function ScenicRoutePage({ params }: Props) {
             : "";
         const basis = sideFromModelOnly(v.basis) ? " This comes from our terrain model; we found no published source for the side." : "";
         const name = v.name.replace(/^The /, "the ");
+        if (reverses) {
+          const forward = sideFor(v, "forward");
+          const backward = sideFor(v, "backward");
+          const forwardWindow = seatedSide(forward, reversalsBefore(route, v, "forward", from));
+          const backwardWindow = seatedSide(backward, reversalsBefore(route, v, "backward", to));
+          const section = v.from === v.to ? `Near ${v.from}` : `Between ${v.from} and ${v.to}`;
+          return {
+            q: `Which side of the ${route.line} is ${name} on?`,
+            a: `${section}, the view is on the ${forward} facing the direction of travel toward ${to}, or the ${backward} toward ${from}. If you board at ${from}, use the window on your ${forwardWindow} as the train first sets off. If you board at ${to}, use the window on your ${backwardWindow} as it first sets off.${basis}`,
+          };
+        }
         return {
           q: `Which side of the ${route.line} is ${name} on?`,
-          a: `Going from ${from} to ${to}, ${name} is on the ${v.side.forward} side, between ${v.from} and ${v.to}${seatText}. Going from ${to} to ${from}, it is on the ${flipSide(v.side.forward)}.${basis}`,
+          a: `Going from ${from} to ${to}, ${name} is on the ${v.side.forward} side, between ${v.from} and ${v.to}${seatText}. Going from ${to} to ${from}, it is on the ${sideFor(v, "backward")}.${basis}`,
         };
       }),
     ...seatingFaq(route),
@@ -159,9 +173,10 @@ export default async function ScenicRoutePage({ params }: Props) {
                 <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/60">
                   {a} → {b}
                 </p>
+                {reverses ? <p className="mt-1 text-xs text-white/80">{seating.reversalLabels.direction}</p> : null}
                 <ul className="mt-3 grid gap-3">
                   {(dir === "forward" ? views : [...views].reverse()).map((v) => {
-                    const side = dir === "forward" ? v.side.forward : flipSide(v.side.forward);
+                    const side = sideFor(v, dir);
                     return (
                       <li key={v.id} className="flex gap-3 text-[15px] leading-6">
                         <span className={["mt-0.5 shrink-0 self-start rounded-full px-2.5 py-0.5 text-[11.5px] font-bold uppercase text-white", side === "right" ? "bg-[#d94a32]" : "bg-[#2f6fd6]"].join(" ")}>
@@ -177,14 +192,11 @@ export default async function ScenicRoutePage({ params }: Props) {
                           <span className="block text-sm text-white/70">
                             {v.from === v.to ? `near ${v.from}` : dir === "forward" ? `${v.from} → ${v.to}` : `${v.to} → ${v.from}`}
                           </span>
-                          {(() => {
-                            const rev = reversalsBefore(route, v, dir, a);
-                            return rev.length ? (
-                              <span className="mt-1 block text-[13px] font-semibold text-amber-200">
-                                After reversing at {rev[rev.length - 1]}: the {seatedSide(side, rev)} side of the car as you boarded
-                              </span>
-                            ) : null;
-                          })()}
+                          {reverses ? (
+                            <span className="mt-1 block text-[13px] font-semibold text-amber-200">
+                              {seating.reversalLabels.departure} {a}: {seatedSide(side, reversalsBefore(route, v, dir, a))}
+                            </span>
+                          ) : null}
                         </span>
                       </li>
                     );
@@ -197,12 +209,10 @@ export default async function ScenicRoutePage({ params }: Props) {
 
         {(() => {
           const highlights = (discovery.routes as Record<string, { highlights?: { label: string }[] }>)[route.id]?.highlights ?? [];
-          const seatKind = (seating.routes as Record<string, SeatingEntry>)[route.id]?.kind;
-          const seatLine = route.views?.some((v) => v.seat || v.seatByDirection)
+          const seatKind = seatInfo?.kind;
+          const seatLine = seatInfo?.summary ?? (views.some((v) => v.seat || v.seatByDirection)
             ? "Seat letters are verified for this train — see the cards above."
-            : seatKind
-              ? SEAT_LINE[seatKind]
-              : null;
+            : seatKind ? SEAT_LINE[seatKind] : null);
           const notice = overview.routes.find((r) => r.id === route.id)?.notice;
           const rows = [
             highlights.length ? ["Best time", highlights.map((h) => h.label).join(" · ")] : ["When", overview.routes.find((r) => r.id === route.id)?.season ?? ""],
@@ -221,6 +231,11 @@ export default async function ScenicRoutePage({ params }: Props) {
           );
         })()}
 
+        {seatInfo?.sources?.length ? (
+          <ul aria-label="Official seating and direction sources" className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-600">
+            {seatInfo.sources.map(({ label, url }) => <li key={url}><a href={url} className="underline underline-offset-2">{label}</a></li>)}
+          </ul>
+        ) : null}
         {route.image ? (
           <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-[22px] bg-ink">
             <Image src={route.image.src} alt={route.image.alt} fill priority sizes="(min-width: 1040px) 1000px, 100vw" className="object-cover" />
@@ -241,7 +256,7 @@ export default async function ScenicRoutePage({ params }: Props) {
                   <th className="px-4 py-2.5 font-semibold">View</th>
                   <th className="px-4 py-2.5 font-semibold">Where</th>
                   <th className="px-4 py-2.5 font-semibold">
-                    Side ({from} → {to})
+                    {reverses ? seating.reversalLabels.tableSide : "Side"} ({from} → {to})
                   </th>
                   <th className="px-4 py-2.5 font-semibold">Size</th>
                   <th className="px-4 py-2.5 font-semibold">Best</th>

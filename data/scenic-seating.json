@@ -1,5 +1,10 @@
 {
   "_about": "How you sit on each scenic route, so the seat question on its page fits the train. kinds: reserved (book a seat; letters only where verified), bench (long side benches, no reservations), unreserved (regular trains, no seat reservations), car (book a car, sit anywhere in it). Every answer rests on the route's own notes or the operator's site; nothing about seat layouts is assumed beyond that.",
+  "reversalLabels": {
+    "direction": "Left and right are measured facing the direction of travel in each section.",
+    "departure": "Window as the train first leaves",
+    "tableSide": "Side facing travel"
+  },
   "templates": {
     "reserved": {
       "q": "Which seat should I book on the {line}?",
@@ -11,7 +16,7 @@
     },
     "reversal": {
       "q": "Does the train change direction on the {line}?",
-      "a": "Yes, at {stations}. The sides on this page are for the direction of travel, so after a reversal the view is on the other side of the car from the one you boarded on — the timeline marks each stretch where that applies."
+      "a": "Yes, at {stations}. The train starts moving in the opposite direction. You stay by the same physical window, which is now on the opposite side when facing the direction of travel. The landscape can also change sides as the track curves or crosses a river. Use the guidance for each section to find the window for that view."
     }
   },
   "routes": {
@@ -19,13 +24,24 @@
     "hokuriku-alps": { "kind": "reserved" },
     "tohoku-iwate": { "kind": "reserved" },
     "joetsu-snow": { "kind": "reserved" },
-    "gono-coast": { "kind": "reserved" },
-    "sagano-gorge": { "kind": "reserved" },
+    "gono-coast": {
+      "kind": "reserved",
+      "a": "All ordinary seats on the Resort Shirakami are reserved. Use the departure-window side in the cards above when checking the seat map. The left and right badges describe the view while the train is moving through each section."
+    },
+    "sagano-gorge": {
+      "kind": "reserved",
+      "summary": "The seat letters above apply to the current cars, which retire on December 29, 2026. Check the operator's seat map for the new fleet from March 1, 2027.",
+      "sources": [
+        { "label": "Sagano Scenic Railway: retirement of the 2026 cars", "url": "https://www.sagano-kanko.co.jp/news/5197/" },
+        { "label": "Sagano Scenic Railway: new cars in 2027", "url": "https://www.sagano-kanko.co.jp/news/4796/" }
+      ]
+    },
     "enoden-coast": {
       "kind": "bench",
       "q": "Where should I sit on the Enoden?",
-      "a": "Enoden cars have long bench seats along the sides. To face the sea, sit on the land-side bench, or stand by the sea-side windows; the cab window at the front of the train works too.",
-      "source": "route note"
+      "a": "Seating varies by train. On cars with side benches, the inland bench faces the sea-facing windows across the aisle. The 700 series also has transverse seats on the seaward side.",
+      "summary": "Where to sit depends on the car. Use the sea-facing windows on the side shown above.",
+      "sources": [{ "label": "Enoden 700-series seating", "url": "https://www.enoden.co.jp/type700/" }]
     },
     "yurikamome-night": {
       "kind": "bench",
@@ -33,10 +49,36 @@
       "a": "Cars mostly have long bench seats along the sides, and there are no seat reservations. The line has no driver, so the seats at the very front (and back) look straight down the track — the best view of the Rainbow Bridge loop, if you can get them. Otherwise stand by the windows on the side shown for your view.",
       "source": "route notes"
     },
-    "fujikyu-fuji": { "kind": "unreserved" },
-    "hakone-tozan": { "kind": "unreserved" },
-    "furano-biei-flowers": { "kind": "unreserved" },
-    "senmo-drift-ice": { "kind": "unreserved" },
+    "fujikyu-fuji": {
+      "kind": "unreserved",
+      "q": "Can I reserve a seat on the Fujikyu Line?",
+      "a": "Regular local trains have unreserved seating. For the Fuji Excursion shown in the timeline, a reserved-seat limited express ticket assigns you a seat. A seat-unassigned limited express ticket does not guarantee one.",
+      "summary": "Regular locals have unreserved seating. Fuji Excursion has its own limited express ticket and seat rules.",
+      "sources": [{ "label": "Fuji Excursion ticket and seat rules", "url": "https://www.fujikyu-railway.jp/fujikaiyuu/" }]
+    },
+    "hakone-tozan": {
+      "kind": "unreserved",
+      "a": "Regular Hakone Tozan trains between Hakone-Yumoto and Gora have unreserved seating. Individually announced special services, such as the Night Hydrangea Train, can have separate reservations. Check the operator for your date.",
+      "summary": "Regular trains have unreserved seats. Special services can have separate reservations.",
+      "reversalAnswer": "The train reverses at Deyama signal station, Ohiradai Station and Kami-Ohiradai signal station. The same physical window stays beside you. If that window was on your left when the train first set off, it is on your right relative to the new direction after one reversal, on your left after two, and on your right after three. Our terrain model puts both highlighted valley sections on the left as you boarded, in either direction on the full Hakone-Yumoto–Gora trip. This guidance is for those two sections. The river, track and view can change sides between them.",
+      "sources": [
+        { "label": "Hakone Navi: switchback locations", "url": "https://www.hakonenavi.jp/hakone-tozan/" },
+        { "label": "Hakone Navi: regular train seating", "url": "https://www.hakonenavi.jp/hakone-tozan/ajisai/about/" },
+        { "label": "Hakone Navi: example of a separately booked special service", "url": "https://www.hakonenavi.jp/groupnews/16482/" }
+      ]
+    },
+    "furano-biei-flowers": {
+      "kind": "unreserved",
+      "a": "The timetable on this page uses regular local trains with unreserved seats. For the separate 2027 Blue Star sightseeing train, JR Hokkaido announced reserved Green Car seating throughout.",
+      "sources": [{ "label": "JR Hokkaido: 2027 Furano Line sightseeing train plan", "url": "https://www.jrhokkaido.co.jp/CM/Info/press/pdf/20261028_KO_aoihoshi.pdf" }]
+    },
+    "senmo-drift-ice": {
+      "kind": "unreserved",
+      "q": "Do I need a seat reservation on the Senmo Line?",
+      "a": "The timeline uses regular local trains with unreserved seats. The seasonal Ryuhyo Monogatari requires a seat reservation for the announced 2027 services.",
+      "summary": "The reference local trains have unreserved seating. Ryuhyo Monogatari is all-reserved in 2027.",
+      "sources": [{ "label": "JR Hokkaido: 2027 winter train plan", "url": "https://www.jrhokkaido.co.jp/travel/sl/pdf/20261022_newsrelease.pdf" }]
+    },
     "tadami-river": { "kind": "unreserved" },
     "kurobe-gorge": {
       "kind": "car",

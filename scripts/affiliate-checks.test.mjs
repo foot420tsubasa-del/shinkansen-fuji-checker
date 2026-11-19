@@ -900,7 +900,7 @@ test("scenic seats: the seat question fits the train, and model-only sides say s
   const catalogue = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
   const live = catalogue.routes.filter((r) => r.status === "live");
   for (const route of live) assert.ok(seating.routes[route.id]?.kind, `${route.id}: seating kind`);
-  // Long-bench and trolley answers are the route's own notes / the operator's information.
+  // The Enoden answer accounts for mixed seating and the trolley answer uses the operator's information.
   assert.ok(catalogue.routes.find((r) => r.id === "enoden-coast").notes[0].includes(seating.routes["enoden-coast"].a.split(".")[0]));
   assert.match(seating.routes["kurobe-gorge"].source, /official/i);
   // Local lines are never asked which seat letter to book.
@@ -917,6 +917,26 @@ test("scenic seats: the seat question fits the train, and model-only sides say s
   // Answer first: the side cards come before the photo.
   assert.ok(page.indexOf('aria-label="Which side to sit on"') < page.indexOf("{route.image ? ("), "side cards above the photo");
   assert.match(page, /Illustrative image, not a photo from this train/);
+});
+
+test("scenic detail seating distinguishes departure windows and the currently applicable train", () => {
+  const seating = JSON.parse(readFileSync("data/scenic-seating.json", "utf8"));
+  assert.match(seating.templates.reversal.a, /same physical window.*opposite side when facing the direction of travel/);
+  assert.match(seating.routes["hakone-tozan"].reversalAnswer, /terrain model.*left as you boarded, in either direction/);
+  assert.match(seating.routes["fujikyu-fuji"].a, /unreserved seating.*Fuji Excursion.*does not guarantee/);
+  assert.match(seating.routes["enoden-coast"].a, /700 series.*transverse seats/);
+  assert.match(seating.routes["senmo-drift-ice"].a, /local trains with unreserved seats.*seat reservation.*2027/);
+  assert.match(seating.routes["sagano-gorge"].summary, /December 29, 2026.*March 1, 2027/);
+
+  const route = scenic.LIVE_ROUTES.find((r) => r.id === "hakone-tozan");
+  for (const direction of ["forward", "backward"]) {
+    const [from] = route.directions[direction];
+    for (const view of route.views) {
+      const side = scenic.sideFor(view, direction);
+      assert.equal(side, direction === "forward" ? "right" : "left");
+      assert.equal(scenic.seatedSide(side, scenic.reversalsBefore(route, view, direction, from)), "left");
+    }
+  }
 });
 
 test("route results keep the mapped Tokaido leg separate and only choose a highlight in the actual timeline", () => {

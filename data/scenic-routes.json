@@ -1597,10 +1597,10 @@
         }
       ],
       "notes": [
-        "Enoden cars have long bench seats along the sides. To face the sea, sit on the land-side bench, or stand by the sea-side windows; the cab window at the front of the train works too.",
+        "Seating varies by train. On cars with side benches, the inland bench faces the sea-facing windows across the aisle. The 700 series also has transverse seats on the seaward side.",
         "On clear days Mt. Fuji and Enoshima show over the sea from the same stretch — behind you going to Kamakura, ahead going to Fujisawa. The terrain model shows both; they are not given a side because they sit ahead of or behind the train, not to one side."
       ],
-      "verification": "Side and section from a terrain model (GSI elevation, OSM track), counting the sea as a view only where open water lies within 250 m of the line, because buildings are not modelled. No seat letters: the cars have bench seats.",
+      "verification": "Side and section from a terrain model (GSI elevation, OSM track), counting the sea as a view only where open water lies within 250 m of the line, because buildings are not modelled. Seating varies by train.",
       "page": {
         "title": "Enoden: Which Side for the Sea, Between Fujisawa and Kamakura?",
         "description": "Going from Fujisawa to Kamakura, the sea is on the right from Koshigoe past Kamakurakokomae and Shichirigahama to Inamuragasaki — about 3 km of open water beside the line. A terrain model, a map and the minutes from the Enoden timetable.",
@@ -2720,7 +2720,7 @@
         }
       ],
       "notes": [
-        "The train reverses three times on the way up — at Deyama, at Ohiradai station and at Kami-Ohiradai — and the driver and conductor change ends each time. Sides on this page are for the direction of travel, so they flip at each reversal; the side of the car does not. Going up from Hakone-Yumoto, the valley side is the left side of the car as you board, nearly all the way. Coming down from Gora, it is also the left as you board.",
+        "The train reverses at Deyama signal station, Ohiradai Station and Kami-Ohiradai signal station. Your physical window stays beside you while its left/right label changes with the train’s direction. For the two highlighted valley sections, the terrain model points to the left as you board at Hakone-Yumoto or Gora. The window with the view can vary elsewhere along the line.",
         "Between Tonosawa and Deyama the line crosses the Hayakawa on the Deyama bridge, high above the river: a view from both sides, gone in seconds.",
         "Woods line much of the track. The model finds where the ground falls away on one side, not where the trees open; the view comes and goes through the leaves. Hydrangeas grow on both sides in June and July."
       ],
@@ -3117,7 +3117,7 @@
       "faq": [
         {
           "q": "Which seat should I book on the Sagano Romantic Train?",
-          "a": "A window seat in an even-numbered box: the gorge is on that side for the longer stretch in both directions. Take D going to Kameoka or A going to Saga to face forward. The odd-numbered boxes have the river between Arashiyama and Hozukyo."
+          "a": "On the 2026 fleet, which retires on December 29, choose a window in an even-numbered box for the longer stretch of gorge. Take D going to Kameoka or A going to Saga to face forward. Odd-numbered boxes have the river between Arashiyama and Hozukyo. Check the operator's seat map for the new trains from March 1, 2027."
         },
         {
           "q": "Can I choose my seat?",
@@ -7475,7 +7475,7 @@
       "faq": [
         {
           "q": "Which side is the sea on?",
-          "a": "Going from Akita towards Aomori, the sea is on the left in the direction of travel for about 90 km, from Akita-Shirakami to Ajigasawa. The train reverses at Higashi-Noshiro, so if you boarded at Akita that is the right-hand side of the car as it faced when you got on. From Aomori it reverses at Hirosaki, and the sea is on the right in the direction of travel."
+          "a": "For the coast between Akita-Shirakami and Ajigasawa, choose the right-hand window facing forward when the train first leaves Akita. After the reversal at Higashi-Noshiro, the same window is on the left in the direction of travel. From Aomori, choose the left-hand window at departure. After the reversal at Hirosaki, that window is on the right in the direction of travel."
         },
         {
           "q": "Does the JR Pass cover the Resort Shirakami?",
@@ -7832,7 +7832,7 @@
       },
       "verification": "The left-hand mountain view going from Biei to Furano comes from a terrain sight-line model (GSI elevation and OSM track). JR Hokkaido describes the Tokachi mountain range, Biei hills and Furano Line fields as the route's scenery, but does not publish a seat-side recommendation. The OSM Biei–Furano track is 31.11 km against JR Hokkaido's official 31.0 km fare distance; no seat letter is claimed.",
       "notes": [
-        "The Furano-Biei Norokko made its final run on September 23, 2026. It is not a 2027 seasonal train. JR Hokkaido plans the new Blue Star 'Hill Colors' train between Asahikawa and Furano from early July to early September 2027, but its exact operating dates, stops and times are still subject to change.",
+        "The Furano-Biei Norokko made its final run on September 23, 2026. JR Hokkaido has announced selected dates from July 1 through September 2027 for the new Blue Star 'Hill Colors' train between Asahikawa and Furano. The operator has published the calendar and planned stops and times.",
         "The timeline below uses regular Furano Line local trains, not the retired Norokko. Lavender-Farm is a seasonal station and is not a stop on these reference trains. Check JR Hokkaido for your travel date.",
         "The model verifies the Tokachi mountains on the left towards Furano. Flower fields and crops change by season and are spread across the landscape, so this page does not promise one fixed side for lavender."
       ],
@@ -7998,7 +7998,7 @@
         },
         {
           "q": "What replaces the Norokko in 2027?",
-          "a": "JR Hokkaido plans the Blue Star 'Hill Colors' train between Asahikawa and Furano from early July to early September 2027. The operator says stops and times may change, so use its official page before booking."
+          "a": "JR Hokkaido plans the Blue Star 'Hill Colors' train between Asahikawa and Furano from July 1, 2027, on selected dates through September. Its October 2026 announcement lists the dates and planned stops and times. It also lists a separate limited express on selected June dates."
         },
         {
           "q": "Does the JR Pass cover the Furano Line?",
