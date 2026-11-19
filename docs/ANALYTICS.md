@@ -60,3 +60,17 @@ Recommended GA4 events to mark or monitor for fujiseat.com.
 - **今回から計測を始めたもの**（過去の比較はできない）
   - `route_search`、`scenic_filter_apply`、`scenic_route_view`
   - 11/29 の判定には使わず、それ以降の基準値として使います。
+
+### GA4 カスタムディメンションの登録（優先順）
+
+2026-11-20 時点で、GA4 の管理画面には手を入れていません。そのため、これらはまだ**未登録**です。登録はイベントスコープで行い、登録した日以降のデータに使えます。
+
+1. `result`（route_search）：検索の成功率。最優先
+2. `reason`（route_search）：未対応の理由
+3. `route_id`（route_search、scenic_route_view）：どの路線が見られ、答えられているか
+4. `placement`（affiliate_click）：予約リンクの位置ごとの比較。すでに登録済みなら不要
+5. `from_hub`（scenic_route_view）：一覧から詳細ページへ進んだか
+6. `view`、`season`、`region`（scenic_filter_apply）：絞り込みの使われ方
+7. `from_station`、`to_station`（route_search）：未対応区間の需要。値が多いので最後
+
+確認方法：URL に `?ga_debug=1` を付けて開き、DebugView でイベントとパラメータが届くことを確かめます。登録後24〜48時間で、標準レポートと探索に出ます。
