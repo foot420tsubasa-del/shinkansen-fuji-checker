@@ -2006,6 +2006,42 @@
     }
   },
   "areasToStayHub": {
+    "discovery": {
+      "title": "Encuentra dónde alojarte en Japón.",
+      "sub": "Elige una ciudad y descubre la zona que encaja con tu viaje.",
+      "destinationsLabel": "Elige un destino",
+      "credits": "Créditos de las fotos",
+      "photoEdits": "Imágenes redimensionadas y recortadas para su visualización.",
+      "guides": "Guías por destino",
+      "tokyoGuides": "Guías de Tokio",
+      "kyotoGuides": "Guías de Kioto",
+      "osakaGuides": "Guías de Osaka",
+      "fujiGuides": "Alojamientos con vistas al Fuji",
+      "fujiGuideSub": "Compara hoteles con vistas al monte Fuji cerca del lago Kawaguchi.",
+      "examples": "Respuestas frecuentes y consejos para Tokio",
+      "cities": {
+        "tokyo": {
+          "name": "Tokio",
+          "description": "Grandes atracciones y barrios con carácter",
+          "alt": "Personas cruzando el cruce de Shibuya en Tokio"
+        },
+        "kyoto": {
+          "name": "Kioto",
+          "description": "Templos y calles históricas",
+          "alt": "La pagoda Yasaka sobre una calle con faroles en Kioto"
+        },
+        "osaka": {
+          "name": "Osaka",
+          "description": "Comida callejera y vida nocturna",
+          "alt": "Canal Dotonbori en Osaka al atardecer"
+        },
+        "fuji": {
+          "name": "Monte Fuji / Kawaguchiko",
+          "description": "A orillas del lago con vistas al Fuji",
+          "alt": "El monte Fuji reflejado en el lago Kawaguchi"
+        }
+      }
+    },
     "meta": {
       "title": "Dónde alojarse en Tokio — Compara zonas de estación",
       "description": "Compara las zonas de estación de Tokio antes de reservar hotel: Ueno, Asakusa, Shinjuku y Tokyo Station, puntuadas por acceso al aeropuerto, equipaje, días de Shinkansen y tranquilidad.",

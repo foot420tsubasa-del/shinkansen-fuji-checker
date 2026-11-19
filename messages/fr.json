@@ -2006,6 +2006,42 @@
     }
   },
   "areasToStayHub": {
+    "discovery": {
+      "title": "Trouvez où séjourner au Japon.",
+      "sub": "Choisissez une ville, puis le quartier qui vous convient.",
+      "destinationsLabel": "Choisir une destination",
+      "credits": "Crédits photo",
+      "photoEdits": "Photos redimensionnées et recadrées pour l’affichage.",
+      "guides": "Guides par destination",
+      "tokyoGuides": "Guides de Tokyo",
+      "kyotoGuides": "Guides de Kyoto",
+      "osakaGuides": "Guides d’Osaka",
+      "fujiGuides": "Séjours avec vue sur le Fuji",
+      "fujiGuideSub": "Comparez des hôtels avec vue sur le mont Fuji près du lac Kawaguchi.",
+      "examples": "Réponses fréquentes et conseils pour Tokyo",
+      "cities": {
+        "tokyo": {
+          "name": "Tokyo",
+          "description": "Sites incontournables et quartiers animés",
+          "alt": "Des passants traversent le carrefour de Shibuya à Tokyo"
+        },
+        "kyoto": {
+          "name": "Kyoto",
+          "description": "Temples et rues historiques",
+          "alt": "La pagode Yasaka au-dessus d’une rue éclairée par des lanternes à Kyoto"
+        },
+        "osaka": {
+          "name": "Osaka",
+          "description": "Cuisine de rue et soirées animées",
+          "alt": "Le canal Dotonbori à Osaka au coucher du soleil"
+        },
+        "fuji": {
+          "name": "Mont Fuji / Kawaguchiko",
+          "description": "Séjours au bord du lac avec vue sur le Fuji",
+          "alt": "Le mont Fuji se reflète dans le lac Kawaguchi"
+        }
+      }
+    },
     "meta": {
       "title": "Où loger à Tokyo — comparer les quartiers de gare",
       "description": "Comparez les quartiers de gare de Tokyo avant de réserver : Ueno, Asakusa, Shinjuku et Tokyo Station, notés sur l'accès aéroport, les bagages, les jours de Shinkansen et le calme.",

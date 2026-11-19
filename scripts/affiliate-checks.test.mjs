@@ -283,6 +283,38 @@ test("retired routes: the sitemap offers nothing that is retired", () => {
   }
 });
 
+test("where to stay discovery uses four credited photos and complete locale copy", () => {
+  const { destinations, cities } = JSON.parse(readFileSync("data/stay-hub-design.json", "utf8"));
+  const credits = {
+    ...JSON.parse(readFileSync("data/scenic-photo-credits.json", "utf8")),
+    ...JSON.parse(readFileSync("data/stay-destination-photo-credits.json", "utf8")),
+  };
+  assert.deepEqual(destinations.map(({ id, href }) => [id, href]), [
+    ["tokyo", "#stay-finder"],
+    ["kyoto", "#kyoto"],
+    ["osaka", "#osaka"],
+    ["fuji", "/stays/mt-fuji-view"],
+  ]);
+  for (const { image } of destinations) {
+    assert.ok(statSync(`public${image}`).size <= 300_000);
+    assert.ok(credits[image]?.author);
+    assert.match(credits[image].source, /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+    assert.match(credits[image].licenseUrl, /^https:\/\/creativecommons\.org\//);
+  }
+  for (const locale of LOCALES) {
+    const messages = JSON.parse(readFileSync(`messages/${locale}.json`, "utf8"));
+    for (const { id } of destinations) {
+      const copy = messages.areasToStayHub.discovery.cities[id];
+      assert.ok(copy.name && copy.description && copy.alt, `${locale}: ${id} copy`);
+    }
+    for (const city of cities) {
+      for (const { id } of city.areas) {
+        assert.ok(messages.firstTimeStayHubs[`${city.id}-first-time`].areas[id].bestFor, `${locale}: ${id} area guide`);
+      }
+    }
+  }
+});
+
 test("retired routes: the areas-to-stay hub stays indexable", () => {
   // It is the entry point to the comparison pages, which are the site's
   // third-biggest source of clicks. A bulk rename once swept it onto the

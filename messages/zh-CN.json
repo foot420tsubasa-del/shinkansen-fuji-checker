@@ -2006,6 +2006,42 @@
     }
   },
   "areasToStayHub": {
+    "discovery": {
+      "title": "在日本找到适合你的落脚点。",
+      "sub": "选一座城市，再找适合你行程的住宿区域。",
+      "destinationsLabel": "选择目的地",
+      "credits": "照片来源",
+      "photoEdits": "为展示调整了尺寸和裁切。",
+      "guides": "各地住宿指南",
+      "tokyoGuides": "东京指南",
+      "kyotoGuides": "京都指南",
+      "osakaGuides": "大阪指南",
+      "fujiGuides": "富士山景住宿",
+      "fujiGuideSub": "比较河口湖附近可眺望富士山的酒店。",
+      "examples": "东京住宿常见问题与建议",
+      "cities": {
+        "tokyo": {
+          "name": "东京",
+          "description": "都市景点与特色街区",
+          "alt": "行人穿过东京涩谷十字路口"
+        },
+        "kyoto": {
+          "name": "京都",
+          "description": "寺院与历史街道",
+          "alt": "京都灯笼街道上方的八坂塔"
+        },
+        "osaka": {
+          "name": "大阪",
+          "description": "街头美食和热闹夜晚",
+          "alt": "日落时的大阪道顿堀运河"
+        },
+        "fuji": {
+          "name": "富士山 / 河口湖",
+          "description": "在湖边住宿，欣赏富士山",
+          "alt": "富士山倒映在河口湖水面"
+        }
+      }
+    },
     "meta": {
       "title": "东京住哪里 — 订房前先比较车站区域",
       "description": "订酒店前先比较东京的车站区域：上野、浅草、新宿、东京站，按机场交通、行李、新干线行程与清静程度打分。",

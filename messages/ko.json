@@ -2006,6 +2006,42 @@
     }
   },
   "areasToStayHub": {
+    "discovery": {
+      "title": "일본에서 머물 곳을 찾아보세요.",
+      "sub": "도시를 선택하고 내 여행에 맞는 숙박 지역을 찾아보세요.",
+      "destinationsLabel": "여행지 선택",
+      "credits": "사진 출처",
+      "photoEdits": "표시를 위해 크기를 조정하고 잘랐습니다.",
+      "guides": "지역별 가이드",
+      "tokyoGuides": "도쿄 가이드",
+      "kyotoGuides": "교토 가이드",
+      "osakaGuides": "오사카 가이드",
+      "fujiGuides": "후지산 전망 숙소",
+      "fujiGuideSub": "가와구치호 근처의 후지산 전망 호텔을 비교해 보세요.",
+      "examples": "자주 찾는 답변과 도쿄 숙박 팁",
+      "cities": {
+        "tokyo": {
+          "name": "도쿄",
+          "description": "대도시의 명소와 개성 있는 동네",
+          "alt": "도쿄 시부야 교차로를 건너는 사람들"
+        },
+        "kyoto": {
+          "name": "교토",
+          "description": "사찰과 옛 거리를 따라",
+          "alt": "교토의 등불이 켜진 거리 위로 보이는 야사카탑"
+        },
+        "osaka": {
+          "name": "오사카",
+          "description": "길거리 음식과 활기찬 밤",
+          "alt": "해 질 무렵의 오사카 도톤보리 운하"
+        },
+        "fuji": {
+          "name": "후지산 / 가와구치호",
+          "description": "호숫가에서 보는 후지산",
+          "alt": "가와구치호에 비친 후지산"
+        }
+      }
+    },
     "meta": {
       "title": "도쿄 숙소 지역 — 예약 전에 역세권 비교하기",
       "description": "호텔을 정하기 전에 도쿄의 역세권을 비교하세요. 우에노·아사쿠사·신주쿠·도쿄역을 공항 접근성, 짐, 신칸센 일정, 조용함으로 점수화했습니다.",

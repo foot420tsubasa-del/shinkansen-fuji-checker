@@ -2006,6 +2006,42 @@
     }
   },
   "areasToStayHub": {
+    "discovery": {
+      "title": "Encontre onde ficar no Japão.",
+      "sub": "Escolha uma cidade e encontre a região que combina com sua viagem.",
+      "destinationsLabel": "Escolha um destino",
+      "credits": "Créditos das fotos",
+      "photoEdits": "Imagens redimensionadas e recortadas para exibição.",
+      "guides": "Guias por destino",
+      "tokyoGuides": "Guias de Tóquio",
+      "kyotoGuides": "Guias de Quioto",
+      "osakaGuides": "Guias de Osaka",
+      "fujiGuides": "Hospedagem com vista para o Fuji",
+      "fujiGuideSub": "Compare hotéis com vista para o Monte Fuji perto do Lago Kawaguchi.",
+      "examples": "Respostas frequentes e dicas sobre Tóquio",
+      "cities": {
+        "tokyo": {
+          "name": "Tóquio",
+          "description": "Atrações urbanas e bairros variados",
+          "alt": "Pessoas atravessando o cruzamento de Shibuya, em Tóquio"
+        },
+        "kyoto": {
+          "name": "Quioto",
+          "description": "Templos e ruas históricas",
+          "alt": "Pagode de Yasaka acima de uma rua iluminada por lanternas em Quioto"
+        },
+        "osaka": {
+          "name": "Osaka",
+          "description": "Comida de rua e noites animadas",
+          "alt": "Canal Dotonbori em Osaka ao pôr do sol"
+        },
+        "fuji": {
+          "name": "Monte Fuji / Kawaguchiko",
+          "description": "Estadias à beira do lago com vista para o Fuji",
+          "alt": "Monte Fuji refletido no Lago Kawaguchi"
+        }
+      }
+    },
     "meta": {
       "title": "Onde ficar em Tóquio — compare as regiões de estação",
       "description": "Compare as regiões de estação de Tóquio antes de reservar: Ueno, Asakusa, Shinjuku e Tokyo Station, pontuadas por acesso ao aeroporto, bagagem, dias de Shinkansen e tranquilidade.",

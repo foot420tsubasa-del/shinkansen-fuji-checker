@@ -2006,6 +2006,42 @@
     }
   },
   "areasToStayHub": {
+    "discovery": {
+      "title": "在日本找到適合你的落腳處。",
+      "sub": "選一座城市，再找適合你行程的住宿區域。",
+      "destinationsLabel": "選擇目的地",
+      "credits": "照片來源",
+      "photoEdits": "為顯示而調整尺寸與裁切。",
+      "guides": "各地住宿指南",
+      "tokyoGuides": "東京指南",
+      "kyotoGuides": "京都指南",
+      "osakaGuides": "大阪指南",
+      "fujiGuides": "富士山景住宿",
+      "fujiGuideSub": "比較河口湖附近能眺望富士山的飯店。",
+      "examples": "東京住宿常見問題與建議",
+      "cities": {
+        "tokyo": {
+          "name": "東京",
+          "description": "都會景點與特色街區",
+          "alt": "行人穿過東京澀谷十字路口"
+        },
+        "kyoto": {
+          "name": "京都",
+          "description": "寺院與歷史街道",
+          "alt": "京都燈籠街道上方的八坂塔"
+        },
+        "osaka": {
+          "name": "大阪",
+          "description": "街頭美食與熱鬧夜晚",
+          "alt": "日落時的大阪道頓堀運河"
+        },
+        "fuji": {
+          "name": "富士山 / 河口湖",
+          "description": "在湖畔住宿，欣賞富士山",
+          "alt": "富士山倒映在河口湖水面"
+        }
+      }
+    },
     "meta": {
       "title": "東京住哪裡 — 訂房前先比較車站區域",
       "description": "訂飯店前先比較東京的車站區域：上野、淺草、新宿、東京車站，按機場交通、行李、新幹線行程與清靜程度打分。",

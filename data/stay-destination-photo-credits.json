@@ -1,0 +1,23 @@
+{
+  "/images/stay/discovery/tokyo.webp": {
+    "title": "Shibuya Crossing 20241020",
+    "author": "Supanut Arunoprayote",
+    "source": "https://commons.wikimedia.org/wiki/File:Shibuya_Crossing_20241020.jpg",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "/images/stay/discovery/kyoto.webp": {
+    "title": "Yasaka-dori early morning with street lanterns and the Tower of Yasaka",
+    "author": "Basile Morin",
+    "source": "https://commons.wikimedia.org/wiki/File:Yasaka-dori_early_morning_with_street_lanterns_and_the_Tower_of_Yasaka_(Hokan-ji_Temple),_Kyoto,_Japan.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  "/images/stay/discovery/osaka.webp": {
+    "title": "Dōtonbori canal at sunset, in Osaka, Kansai, Japan",
+    "author": "blieusong (Benh Lieu Song)",
+    "source": "https://commons.wikimedia.org/wiki/File:D%C5%8Dtonbori_canal_at_sunset,_in_Osaka;_October_2018.jpg",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/"
+  }
+}

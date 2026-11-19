@@ -2006,6 +2006,42 @@
     }
   },
   "areasToStayHub": {
+    "discovery": {
+      "title": "Finde deinen Ausgangspunkt in Japan.",
+      "sub": "Wähle eine Stadt und entdecke das Viertel, das zu deiner Reise passt.",
+      "destinationsLabel": "Reiseziel wählen",
+      "credits": "Bildnachweise",
+      "photoEdits": "Für die Anzeige verkleinert und zugeschnitten.",
+      "guides": "Reiseführer nach Stadt",
+      "tokyoGuides": "Tokio-Reiseführer",
+      "kyotoGuides": "Kyoto-Reiseführer",
+      "osakaGuides": "Osaka-Reiseführer",
+      "fujiGuides": "Unterkünfte mit Fuji-Blick",
+      "fujiGuideSub": "Vergleiche Hotels mit Blick auf den Fuji am Kawaguchi-See.",
+      "examples": "Häufige Fragen und Tipps für Tokio",
+      "cities": {
+        "tokyo": {
+          "name": "Tokio",
+          "description": "Großstadt und spannende Viertel",
+          "alt": "Menschen überqueren die Kreuzung in Shibuya, Tokio"
+        },
+        "kyoto": {
+          "name": "Kyoto",
+          "description": "Tempel und historische Gassen",
+          "alt": "Die Yasaka-Pagode über einer Straße mit Laternen in Kyoto"
+        },
+        "osaka": {
+          "name": "Osaka",
+          "description": "Streetfood und Nachtleben",
+          "alt": "Der Dotonbori-Kanal in Osaka bei Sonnenuntergang"
+        },
+        "fuji": {
+          "name": "Fuji / Kawaguchiko",
+          "description": "Am See mit Blick auf den Fuji",
+          "alt": "Der Fuji spiegelt sich im Kawaguchi-See"
+        }
+      }
+    },
     "meta": {
       "title": "Wo in Tokio übernachten — Bahnhofsviertel im Vergleich",
       "description": "Vergleichen Sie Tokios Bahnhofsviertel vor der Hotelbuchung: Ueno, Asakusa, Shinjuku und Tokyo Station, bewertet nach Flughafen-Anbindung, Gepäck, Shinkansen-Tagen und Ruhe.",

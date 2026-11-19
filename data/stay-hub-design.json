@@ -1,49 +1,50 @@
 {
-  "cityLabel": "Choose a destination",
-  "photoLink": "Mt. Fuji & Kawaguchiko",
-  "areaIntro": "Choose the area that fits your plans, then look at a hotel in that area.",
   "hotelLink": "View rooms on Booking.com",
   "cities": [
     {
       "id": "kyoto",
-      "title": "Where to stay in Kyoto",
       "source": "https://kyoto.travel/en/travel-inspiration/choosing-accommodation-key-features-of-each-area/",
       "areas": [
         {
           "name": "Kyoto Station",
           "reason": "For Shinkansen arrivals and early departures.",
-          "hotel": "hotel-granvia-kyoto"
+          "hotel": "hotel-granvia-kyoto",
+          "id": "kyoto-station"
         },
         {
           "name": "Gion",
           "reason": "For historic streets, Yasaka Shrine, and evening walks.",
-          "hotel": "hotel-the-celestine-gion"
+          "hotel": "hotel-the-celestine-gion",
+          "id": "gion-higashiyama"
         },
         {
           "name": "Shijo–Kawaramachi",
-          "reason": "For dining, shopping, and Nishiki Market."
+          "reason": "For dining, shopping, and Nishiki Market.",
+          "id": "kawaramachi-shijo"
         }
       ]
     },
     {
       "id": "osaka",
-      "title": "Where to stay in Osaka",
       "source": "https://osaka-info.jp/en/information/to-osaka/",
       "areas": [
         {
           "name": "Namba",
           "reason": "For Dotonbori, street food, and late evenings out.",
-          "hotel": "cross-hotel-osaka"
+          "hotel": "cross-hotel-osaka",
+          "id": "namba"
         },
         {
           "name": "Umeda / Osaka Station",
           "reason": "For shopping and rail connections around Osaka Station.",
-          "hotel": "hotel-granvia-osaka"
+          "hotel": "hotel-granvia-osaka",
+          "id": "umeda"
         },
         {
           "name": "Shin-Osaka",
           "reason": "For catching an early Shinkansen.",
-          "hotel": "remm-shin-osaka"
+          "hotel": "remm-shin-osaka",
+          "id": "shin-osaka"
         }
       ]
     }
@@ -53,5 +54,31 @@
     "asakusa": "richmond-hotel-asakusa",
     "tokyo-station": "hotel-metropolitan-tokyo-marunouchi",
     "shinjuku": "hotel-gracery-shinjuku"
-  }
+  },
+  "destinations": [
+    {
+      "id": "tokyo",
+      "href": "#stay-finder",
+      "image": "/images/stay/discovery/tokyo.webp",
+      "position": "50% 84%"
+    },
+    {
+      "id": "kyoto",
+      "href": "#kyoto",
+      "image": "/images/stay/discovery/kyoto.webp",
+      "position": "50% 12%"
+    },
+    {
+      "id": "osaka",
+      "href": "#osaka",
+      "image": "/images/stay/discovery/osaka.webp",
+      "position": "50% 74%"
+    },
+    {
+      "id": "fuji",
+      "href": "/stays/mt-fuji-view",
+      "image": "/images/scenic/photos/kawaguchiko.webp",
+      "position": "50% 8%"
+    }
+  ]
 }

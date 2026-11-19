@@ -84,7 +84,10 @@ export function StayFinder({
       const opt = (params.get("opt") ?? "")
         .split(",")
         .filter((o): o is FinderOption => OPTIONS.includes(o as FinderOption));
-      if (go.length) setSelected(go.slice(0, 4));
+      if (go.length) {
+        setSelected(go.slice(0, 4));
+        if (!window.location.hash) document.getElementById("stay-finder")?.scrollIntoView();
+      }
       setOptions([...new Set(opt)]);
       setUrlRead(true);
     });
@@ -146,9 +149,9 @@ export function StayFinder({
     <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
       <div className="min-w-0">
         <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">{t("eyebrow")}</p>
-        <h1 className="mt-3 text-[34px] font-extrabold leading-[1.06] tracking-[-0.03em] text-ink md:text-[48px]">
+        <h2 id="stay-finder-title" className="mt-2 text-2xl font-extrabold leading-[1.1] tracking-[-0.025em] text-ink md:text-[32px]">
           {t("title")}
-        </h1>
+        </h2>
         <p className="mt-3 max-w-[480px] text-base leading-7 text-slate-600">{t("sub")}</p>
 
         <fieldset className="mt-6 min-w-0">

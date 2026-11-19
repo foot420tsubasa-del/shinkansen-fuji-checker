@@ -2006,6 +2006,42 @@
     }
   },
   "areasToStayHub": {
+    "discovery": {
+      "title": "Find your base in Japan.",
+      "sub": "Choose a city. Find the area that fits your trip.",
+      "destinationsLabel": "Choose a destination",
+      "credits": "Photo credits",
+      "photoEdits": "Resized and cropped for display.",
+      "guides": "Area guides",
+      "tokyoGuides": "Tokyo guides",
+      "kyotoGuides": "Kyoto guides",
+      "osakaGuides": "Osaka guides",
+      "fujiGuides": "Mt. Fuji stays",
+      "fujiGuideSub": "Compare hotels with a view of Mt. Fuji near Lake Kawaguchi.",
+      "examples": "Popular answers and Tokyo tips",
+      "cities": {
+        "tokyo": {
+          "name": "Tokyo",
+          "description": "Big-city sights and neighborhoods",
+          "alt": "People crossing the Shibuya intersection in Tokyo"
+        },
+        "kyoto": {
+          "name": "Kyoto",
+          "description": "Temples and historic streets",
+          "alt": "Yasaka Pagoda above a lantern-lit street in Kyoto"
+        },
+        "osaka": {
+          "name": "Osaka",
+          "description": "Street food and lively nights",
+          "alt": "Dotonbori Canal in Osaka at sunset"
+        },
+        "fuji": {
+          "name": "Mt. Fuji / Kawaguchiko",
+          "description": "Lakeside stays with Fuji views",
+          "alt": "Mount Fuji reflected in Lake Kawaguchi"
+        }
+      }
+    },
     "meta": {
       "title": "Where to Stay in Tokyo — Compare Station Areas Before Booking",
       "description": "Compare Tokyo station areas before booking a hotel: Ueno, Asakusa, Shinjuku and Tokyo Station, scored on airport access, luggage, Shinkansen days and how calm the streets are.",
