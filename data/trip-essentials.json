@@ -1,0 +1,98 @@
+{
+  "_about": "Plan this ride: the practical facts for riding a scenic route, each with its official source, the date it was checked and, where it can lapse, validUntil (YYYY-MM-DD). A test fails once a validUntil has passed, so a stale fact cannot ship. Nothing here is estimated; a fact we could not read on an official page is left out. Fares are the one-way adult fare for the stated section, as shown by the operator on the checked date.",
+  "routes": {
+    "enoden-coast": {
+      "checked": "2026-11-20",
+      "board": {
+        "text": "Board at either end: Fujisawa or Kamakura. The sea views are between Koshigoe and Inamuragasaki, so ride the whole line."
+      },
+      "access": [
+        { "from": "Tokyo Station", "text": "JR Tokaido Line to Fujisawa, or JR Yokosuka Line to Kamakura and ride the Enoden from that end." },
+        { "from": "Shinjuku", "text": "Odakyu Line to Fujisawa. The Enoshima-Kamakura Freepass covers this trip and the Enoden." }
+      ],
+      "ride": {
+        "text": "About 37 minutes, Fujisawa to Kamakura.",
+        "source": { "label": "Enoden fares and travel times (Japanese)", "url": "https://www.enoden.co.jp/train/fare/" }
+      },
+      "fare": {
+        "text": "¥310 adult, ¥160 child, one way Fujisawa–Kamakura.",
+        "source": { "label": "Enoden fares (Japanese)", "url": "https://www.enoden.co.jp/train/fare/" }
+      },
+      "reservation": {
+        "text": "No seat reservations: board any train."
+      },
+      "operation": {
+        "text": "Regular trains all day. Check the station timetables for times.",
+        "source": { "label": "Enoden station timetables (Japanese)", "url": "https://www.enoden.co.jp/train/station/" }
+      },
+      "tickets": [
+        { "text": "Single ticket: ticket machines at every Enoden station.", "source": { "label": "Enoden fares (Japanese)", "url": "https://www.enoden.co.jp/train/fare/" } },
+        { "text": "Noriorikun one-day pass, ¥800 adult: ride the whole Enoden as often as you like on the day you buy it, from the ticket machines at all Enoden stations.", "source": { "label": "Noriorikun (Japanese)", "url": "https://www.enoden.co.jp/tourism/ticket/noriorikun/" } },
+        { "text": "Enoshima-Kamakura Freepass: from Odakyu stations or online, one day, including the Odakyu trip to Fujisawa and back.", "source": { "label": "Odakyu Freepass (Japanese)", "url": "https://www.odakyu-freepass.jp/enokama/buy.html" } }
+      ],
+      "officialLanguage": "The Enoden site has an English version: https://www.enoden.co.jp/en/"
+    },
+    "sagano-gorge": {
+      "checked": "2026-11-20",
+      "board": {
+        "text": "Board at Torokko Saga, the brick building next to JR Saga-Arashiyama Station, or at Torokko Kameoka at the other end. The gorge is along the whole ride."
+      },
+      "access": [
+        { "from": "Kyoto Station", "text": "JR Sagano Line to Saga-Arashiyama, then walk next door to Torokko Saga." }
+      ],
+      "ride": {
+        "text": "About 25 minutes one way, Torokko Saga to Torokko Kameoka.",
+        "source": { "label": "Sagano Scenic Railway timetable", "url": "https://www.sagano-kanko.co.jp/en/train-info" }
+      },
+      "fare": {
+        "text": "¥880 adult, ¥440 child, one way — the same for any section.",
+        "source": { "label": "Sagano Scenic Railway fares (Japanese)", "url": "https://www.sagano-kanko.co.jp/ticket/" },
+        "validUntil": "2026-12-29",
+        "expiryNote": "Fares and times may change with the new cars from March 1, 2027."
+      },
+      "reservation": {
+        "text": "All seats are reserved. Book online from midnight Japan time one month before your ride, or buy same-day tickets at the station counters (not at Torokko Hozukyo); standing tickets are sold once seats run out.",
+        "source": { "label": "Sagano Scenic Railway FAQ", "url": "https://www.sagano-kanko.co.jp/en/faq" }
+      },
+      "operation": {
+        "text": "2026 season runs until December 29. No trains January 1–February 28, December 30–31 and on some Wednesdays — check the calendar. New cars start on March 1, 2027.",
+        "source": { "label": "Sagano Scenic Railway 2026 calendar (Japanese, PDF)", "url": "https://www.sagano-kanko.co.jp/train-info/" },
+        "validUntil": "2026-12-31"
+      },
+      "tickets": [
+        { "text": "Official online booking, one month ahead.", "source": { "label": "Sagano Scenic Railway tickets", "url": "https://www.sagano-kanko.co.jp/en/ticket" } },
+        { "text": "The JR Pass is not valid on this train.", "source": { "label": "Sagano Scenic Railway FAQ", "url": "https://www.sagano-kanko.co.jp/en/faq" } }
+      ],
+      "officialLanguage": "The Sagano Scenic Railway site has English pages; the yearly calendar and timetable are Japanese PDFs."
+    },
+    "yurikamome-night": {
+      "checked": "2026-11-20",
+      "board": {
+        "text": "Board at Shimbashi and ride to Toyosu (or the other way). The Rainbow Bridge loop is between Shibaura-futo and Odaiba-kaihinkoen."
+      },
+      "access": [
+        { "from": "Central Tokyo", "text": "Shimbashi: change from the JR Yamanote Line or the Tokyo Metro Ginza Line. Toyosu: Tokyo Metro Yurakucho Line." }
+      ],
+      "ride": {
+        "text": "About 31 minutes, Shimbashi to Toyosu.",
+        "source": { "label": "Yurikamome station timetables (Japanese)", "url": "https://www.yurikamome.co.jp/station-timetable/" }
+      },
+      "fare": {
+        "text": "¥390 adult with a paper ticket (¥388 with an IC card), Shimbashi–Toyosu one way.",
+        "source": { "label": "Yurikamome fare search (Japanese)", "url": "https://www.yurikamome.co.jp/ride-guidance/fare.html" }
+      },
+      "reservation": {
+        "text": "No seat reservations. The line is driverless: the seats at the very front look straight down the track — first come, first served."
+      },
+      "operation": {
+        "text": "Runs every day. Check service status before you go.",
+        "source": { "label": "Yurikamome service status (Japanese)", "url": "https://www.yurikamome.co.jp/ride-guidance/operation.html" }
+      },
+      "tickets": [
+        { "text": "Single tickets from station machines, or tap an IC card, credit card or phone at the gate.", "source": { "label": "Yurikamome tickets (Japanese)", "url": "https://www.yurikamome.co.jp/ticket/about/normal.html" } },
+        { "text": "One-day ticket, ¥820 adult, sold as a QR mobile ticket for unlimited rides on the whole line.", "source": { "label": "Yurikamome fares (Japanese)", "url": "https://www.yurikamome.co.jp/ride-guidance/fare.html" } }
+      ],
+      "officialLanguage": "The Yurikamome site is mainly in Japanese, with English and other language versions linked from the top page."
+    }
+  }
+}

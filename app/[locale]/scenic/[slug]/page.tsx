@@ -13,6 +13,7 @@ import { AFFILIATE_LINKS, JR_PASS_URL, getAffUrl } from "@/src/affiliateLinks";
 import { TicketGuide, type ResolvedTicketLink } from "@/components/scenic/TicketGuide";
 import { ScenicStayBlock } from "@/components/scenic/ScenicStayBlock";
 import { ScenicRouteViewTracker } from "@/components/scenic/ScenicTracking";
+import { PlanThisRide, getTripEssentials } from "@/components/scenic/PlanThisRide";
 import type { AffiliateProvider } from "@/lib/affiliate/links";
 import { getScenicStay } from "@/lib/scenic-stays";
 import discovery from "@/data/scenic-discovery.json";
@@ -241,6 +242,13 @@ export default async function ScenicRoutePage({ params }: Props) {
           </div>
         ) : null}
 
+        {(() => {
+          // Plan this ride (data/trip-essentials.json): after the answer and the photo, before the minute-by-minute timeline.
+          const essentials = getTripEssentials(route.id);
+          const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo" }).format(new Date());
+          return essentials ? <PlanThisRide essentials={essentials} today={today} /> : null;
+        })()}
+
         <section className="mt-10">
           <RouteTimeline routeId={route.id} direction="forward" from={from} to={to} showRouteLink={false} />
         </section>
@@ -305,7 +313,7 @@ export default async function ScenicRoutePage({ params }: Props) {
         </section>
 
         {route.ticketGuide ? (
-          <section className="mt-10">
+          <section id="tickets" className="mt-10 scroll-mt-20">
             <h2 className="text-2xl font-extrabold tracking-[-0.02em]">Which ticket?</h2>
             <div className="mt-4">
               <TicketGuide routeId={route.id} line={route.line} guide={route.ticketGuide} links={ticketLinks} />

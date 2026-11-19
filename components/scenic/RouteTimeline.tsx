@@ -206,7 +206,7 @@ export function RouteTimeline({
                     onClick={() => setHighlight(active ? null : it.view.id)}
                     aria-pressed={active}
                     className={[
-                      "grid w-full grid-cols-[64px_minmax(0,1fr)_auto] items-start gap-3 rounded-2xl border px-3.5 py-3 text-left transition-colors",
+                      "grid w-full grid-cols-[64px_minmax(0,1fr)] items-start gap-x-3 gap-y-2 sm:grid-cols-[64px_minmax(0,1fr)_auto] rounded-2xl border px-3.5 py-3 text-left transition-colors",
                       active ? "border-ink bg-slate-50" : "border-slate-200 bg-white hover:bg-slate-50",
                     ].join(" ")}
                   >
@@ -233,12 +233,12 @@ export function RouteTimeline({
                         </span>
                       ) : null}
                     </span>
-                    <span className="flex flex-col items-end gap-1">
+                    <span className="col-start-2 flex flex-wrap items-center gap-1 sm:col-start-auto sm:max-w-[120px] sm:flex-col sm:items-end sm:text-right">
                       <span className={["rounded-full px-2.5 py-0.5 text-[11px] font-extrabold uppercase text-white", it.side === "right" ? "bg-[#d94a32]" : "bg-[#2f6fd6]"].join(" ")}>
                         {it.side === "right" ? t("right") : t("left")}
                       </span>
                       {it.view.seatByDirection ? (
-                        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10.5px] font-bold text-slate-700">{it.view.seatByDirection[direction]}</span>
+                        <span className="rounded-xl bg-slate-100 px-2 py-0.5 text-[10.5px] font-bold leading-4 text-slate-700">{it.view.seatByDirection[direction]}</span>
                       ) : it.view.seat ? (
                         <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10.5px] font-bold text-slate-700">
                           {t("seat")} {it.view.seat.split(" ")[0]}

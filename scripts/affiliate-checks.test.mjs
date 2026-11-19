@@ -991,6 +991,30 @@ test("analytics: search, filter and route-view events exist, and the legacy rout
   assert.match(readFileSync("docs/ANALYTICS.md", "utf8"), /route_search/);
 });
 
+test("Plan this ride: every fact is sourced on the operator's site, dated, and not past its validUntil", () => {
+  const data = JSON.parse(readFileSync("data/trip-essentials.json", "utf8"));
+  const official = ["www.enoden.co.jp", "www.odakyu-freepass.jp", "www.sagano-kanko.co.jp", "www.yurikamome.co.jp"];
+  const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo" }).format(new Date());
+  const live = new Set(scenic.LIVE_ROUTES.map((r) => r.id));
+  for (const [id, e] of Object.entries(data.routes)) {
+    assert.ok(live.has(id), `${id}: live route`);
+    assert.match(e.checked, /^\d{4}-\d{2}-\d{2}$/, `${id}: checked date`);
+    for (const key of ["board", "ride", "fare", "reservation", "operation"]) assert.ok(e[key]?.text, `${id}: ${key}`);
+    assert.ok(e.access.length && e.tickets.length, `${id}: access and tickets`);
+    for (const key of ["ride", "fare", "operation"]) assert.ok(e[key].source, `${id}: ${key} needs an official source`);
+    const facts = [e.board, e.ride, e.fare, e.reservation, e.operation, ...e.tickets];
+    for (const f of facts) {
+      if (f.source) assert.ok(official.includes(new URL(f.source.url).host), `${id}: ${f.source.url} is not an operator site we checked`);
+      if (f.validUntil) assert.ok(f.validUntil >= today, `${id}: "${f.text.slice(0, 40)}…" expired on ${f.validUntil} — recheck the operator and update data/trip-essentials.json`);
+    }
+    assert.match(e.fare.text, /¥\d/, `${id}: fare states an amount`);
+    assert.match(e.fare.text, /one way/i, `${id}: fare states the section and direction`);
+  }
+  const page = readFileSync("app/[locale]/scenic/[slug]/page.tsx", "utf8");
+  assert.ok(page.indexOf("<PlanThisRide") > page.indexOf("{route.image ? (") && page.indexOf("<PlanThisRide") < page.indexOf("<RouteTimeline"), "after the photo, before the timeline");
+  assert.match(page, /id="tickets"/);
+});
+
 test("route results keep the mapped Tokaido leg separate and only choose a highlight in the actual timeline", () => {
   assert.deepEqual(scenic.mappedTokaidoLeg("Tokyo", "Hiroshima"), ["Tokyo", "Shin-Osaka"]);
   assert.deepEqual(scenic.mappedTokaidoLeg("Hiroshima", "Tokyo"), ["Shin-Osaka", "Tokyo"]);
