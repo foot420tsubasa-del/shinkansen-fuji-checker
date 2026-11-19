@@ -119,7 +119,7 @@ export function SiteHeader() {
               });
               preferOnPageChecker(event, seatLink.category);
             }}
-            className="inline-flex h-9 items-center whitespace-nowrap rounded-full bg-fuji px-3.5 text-xs font-bold text-white shadow-[0_4px_14px_rgba(217,74,50,0.28)] transition-colors hover:bg-fuji-hover md:text-sm"
+            className="inline-flex min-h-11 items-center whitespace-nowrap rounded-full bg-[#c4422c] px-3.5 text-xs font-bold text-white shadow-[0_4px_14px_rgba(217,74,50,0.28)] transition-colors hover:bg-fuji-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fuji-hover md:text-sm"
           >
             {seatLink.label}
           </Link>
