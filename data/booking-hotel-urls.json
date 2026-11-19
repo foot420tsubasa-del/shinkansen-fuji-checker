@@ -1,11 +1,12 @@
 {
-  "_about": "Booking.com hotel pages for the recommended hotels (2026-11-18). bookingUrl is the plain hotel page, found by searching Booking.com for the hotel name and matching the listed property name. affiliateUrl stays empty until the Booking.com affiliate links are issued; when set it is used instead of bookingUrl.",
+  "_about": "Booking.com hotel pages for the recommended hotels (2026-11-18). bookingUrl is the plain hotel page, found by searching Booking.com for the hotel name and matching the listed property name. affiliateUrl stays empty until the Booking.com affiliate links are issued; when set it is used instead of bookingUrl. affiliateChecked: the date the tpx.lv link was followed and found to land on this hotel page (2026-11-20 for the links issued in the sheet tab 取得候補_20261120). That proves the destination, not the commission terms.",
   "hotels": {
     "hotel-gracery-shinjuku": {
       "name": "Hotel Gracery Shinjuku",
       "bookingUrl": "https://www.booking.com/hotel/jp/gracery-shinjuku.html",
-      "affiliateUrl": "",
-      "checked": "2026-11-18"
+      "affiliateUrl": "https://booking.tpx.lv/ARNZ7UND",
+      "checked": "2026-11-18",
+      "affiliateChecked": "2026-11-20"
     },
     "dormy-inn-ueno-okachimachi": {
       "name": "Dormy Inn Ueno Okachimachi",
@@ -52,14 +53,16 @@
     "hotel-granvia-kyoto": {
       "name": "Hotel Granvia Kyoto",
       "bookingUrl": "https://www.booking.com/hotel/jp/granvia-kyoto-kyoto.html",
-      "affiliateUrl": "",
-      "checked": "2026-11-18"
+      "affiliateUrl": "https://booking.tpx.lv/5Ps9efan",
+      "checked": "2026-11-18",
+      "affiliateChecked": "2026-11-20"
     },
     "daiwa-roynet-kyoto-station": {
       "name": "Daiwa Roynet Hotel Kyoto-Hachijoguchi",
       "bookingUrl": "https://www.booking.com/hotel/jp/daiwa-roynet-kyoto-hachijyoguchi.html",
-      "affiliateUrl": "",
-      "checked": "2026-11-18"
+      "affiliateUrl": "https://booking.tpx.lv/2rVfVapH",
+      "checked": "2026-11-18",
+      "affiliateChecked": "2026-11-20"
     },
     "sowaka-gion": {
       "name": "Sowaka",
@@ -76,14 +79,16 @@
     "fuji-lake-hotel": {
       "name": "Fuji Lake Hotel",
       "bookingUrl": "https://www.booking.com/hotel/jp/fuji-lake.html",
-      "affiliateUrl": "",
-      "checked": "2026-11-18"
+      "affiliateUrl": "https://booking.tpx.lv/NXC8KgTT",
+      "checked": "2026-11-18",
+      "affiliateChecked": "2026-11-20"
     },
     "hotel-mystays-fuji": {
       "name": "HOTEL MYSTAYS Fuji Onsen Resort",
       "bookingUrl": "https://www.booking.com/hotel/jp/mystays-premier-fujisan.html",
-      "affiliateUrl": "",
-      "checked": "2026-11-18"
+      "affiliateUrl": "https://booking.tpx.lv/cFDUFMhD",
+      "checked": "2026-11-18",
+      "affiliateChecked": "2026-11-20"
     },
     "cross-hotel-osaka": {
       "name": "Cross Hotel Osaka",
@@ -100,8 +105,9 @@
     "remm-shin-osaka": {
       "name": "remm Shin-Osaka",
       "bookingUrl": "https://www.booking.com/hotel/jp/remm-shin-osaka.html",
-      "affiliateUrl": "",
-      "checked": "2026-11-18"
+      "affiliateUrl": "https://booking.tpx.lv/JbNfuaDk",
+      "checked": "2026-11-18",
+      "affiliateChecked": "2026-11-20"
     },
     "hotel-monterey-grasmere": {
       "name": "Hotel Monterey Grasmere Osaka",
@@ -118,8 +124,9 @@
     "courtyard-marriott-shin-osaka": {
       "name": "Courtyard by Marriott Shin-Osaka Station",
       "bookingUrl": "https://www.booking.com/hotel/jp/courtyard-by-marriott-shinosaka-station.html",
-      "affiliateUrl": "",
-      "checked": "2026-11-18"
+      "affiliateUrl": "https://booking.tpx.lv/nZpSqf6r",
+      "checked": "2026-11-18",
+      "affiliateChecked": "2026-11-20"
     },
     "hotel-ryumeikan-tokyo": {
       "name": "Hotel Ryumeikan Tokyo",
@@ -130,14 +137,16 @@
     "mimaru-tokyo-ueno": {
       "name": "MIMARU Tokyo Ueno East",
       "bookingUrl": "https://www.booking.com/hotel/jp/mimaru-tokyo-ueno-east.html",
-      "affiliateUrl": "",
-      "checked": "2026-11-18"
+      "affiliateUrl": "https://booking.tpx.lv/BlB2MtgA",
+      "checked": "2026-11-18",
+      "affiliateChecked": "2026-11-20"
     },
     "local:yuenShinjuku": {
       "name": "ONSEN RYOKAN YUEN SHINJUKU",
       "bookingUrl": "https://www.booking.com/hotel/jp/onsen-ryokan-yuen-shinjuku.html",
-      "affiliateUrl": "",
-      "checked": "2026-11-18"
+      "affiliateUrl": "https://booking.tpx.lv/RyYjOEBN",
+      "checked": "2026-11-18",
+      "affiliateChecked": "2026-11-20"
     },
     "local:mimaruShinjukuWest": {
       "name": "MIMARU Tokyo Shinjuku West",
@@ -148,8 +157,9 @@
     "local:daiwaRoynetNishiShinjuku": {
       "name": "Daiwa Roynet Hotel Nishi-Shinjuku PREMIER",
       "bookingUrl": "https://www.booking.com/hotel/jp/daiwa-roynet-nishi-shinjuku.html",
-      "affiliateUrl": "",
-      "checked": "2026-11-18"
+      "affiliateUrl": "https://booking.tpx.lv/O3lrlDF7",
+      "checked": "2026-11-18",
+      "affiliateChecked": "2026-11-20"
     },
     "local:theKnotShinjuku": {
       "name": "THE KNOT TOKYO Shinjuku",
@@ -172,8 +182,9 @@
     "local:mimaruKyotoStation": {
       "name": "MIMARU Kyoto Station",
       "bookingUrl": "https://www.booking.com/hotel/jp/mimaru-jing-du-station.html",
-      "affiliateUrl": "",
-      "checked": "2026-11-18"
+      "affiliateUrl": "https://booking.tpx.lv/8kY2HDLP",
+      "checked": "2026-11-18",
+      "affiliateChecked": "2026-11-20"
     },
     "local:nohgaKiyomizu": {
       "name": "NOHGA HOTEL KIYOMIZU KYOTO",
@@ -214,8 +225,9 @@
     "local:hotelHankyuRespire": {
       "name": "Hotel Hankyu RESPIRE OSAKA",
       "bookingUrl": "https://www.booking.com/hotel/jp/hankyu-respire-osaka.html",
-      "affiliateUrl": "",
-      "checked": "2026-11-18"
+      "affiliateUrl": "https://booking.tpx.lv/VyxesIOv",
+      "checked": "2026-11-18",
+      "affiliateChecked": "2026-11-20"
     },
     "local:zentisOsaka": {
       "name": "Zentis Osaka",
@@ -229,6 +241,34 @@
       "affiliateUrl": "",
       "checked": "2026-11-18",
       "note": "Not found on Booking.com (searched in English and Japanese)."
+    },
+    "fuji-view:mizno-hotel": {
+      "name": "Mizno Hotel",
+      "bookingUrl": "https://www.booking.com/hotel/jp/mizuno.html",
+      "affiliateUrl": "https://booking.tpx.lv/ydQ9QNBJ",
+      "checked": "2026-11-20",
+      "affiliateChecked": "2026-11-20"
+    },
+    "fuji-view:shuhokaku-kogetsu": {
+      "name": "Shuhokaku Kogetsu",
+      "bookingUrl": "https://www.booking.com/hotel/jp/shuhokaku-kogetsu.html",
+      "affiliateUrl": "https://booking.tpx.lv/l8onx4AK",
+      "checked": "2026-11-20",
+      "affiliateChecked": "2026-11-20"
+    },
+    "fuji-view:la-vista-fujikawaguchiko": {
+      "name": "La Vista Fujikawaguchiko",
+      "bookingUrl": "https://www.booking.com/hotel/jp/la-vista-fujikawaguchiko.html",
+      "affiliateUrl": "https://booking.tpx.lv/VsgyUpFq",
+      "checked": "2026-11-20",
+      "affiliateChecked": "2026-11-20"
+    },
+    "fuji-view:fuji-view-hotel": {
+      "name": "Fuji View Hotel",
+      "bookingUrl": "https://www.booking.com/hotel/jp/fuji-view.html",
+      "affiliateUrl": "https://booking.tpx.lv/yrhFFbkc",
+      "checked": "2026-11-20",
+      "affiliateChecked": "2026-11-20"
     }
   }
 }
