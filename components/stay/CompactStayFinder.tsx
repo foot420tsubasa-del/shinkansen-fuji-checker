@@ -13,8 +13,7 @@ type FinderStepRaw = {
 /**
  * Server wrapper for the §4-3 compact Stay Finder embed. Pulls the already
  * translated quiz steps (Q1 shinkansen + Q2 luggage) and the compact labels
- * from the tokyoStayAreaIndex.finder namespace, so every embed surface stays
- * in sync with the full Finder in all 9 locales.
+ * from the tokyoStayAreaIndex.finder namespace.
  */
 export async function CompactStayFinder({
   locale,

@@ -5,6 +5,9 @@ import { ArrowRight, Check, Hotel } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import { trackAffiliateClick, trackCtaClick } from "@/lib/analytics";
+import { ProviderButton } from "@/components/ui/ProviderButton";
+import type { BookingHotelLink } from "@/lib/booking-hotels";
+import design from "@/data/stay-hub-design.json";
 import {
   isTradeOff,
   rankAreas,
@@ -21,6 +24,7 @@ const OPTION_KEY: Record<FinderOption, string> = {
   airport: "optAirport",
 };
 const OPTION_ICON: Record<FinderOption, string> = { luggage: "🧳", shinkansen: "🚄", airport: "✈️" };
+const focus = "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
 
 function legBadge(kind: LegResult["kind"]) {
   return kind === "transfer"
@@ -54,11 +58,13 @@ export function StayFinder({
   areas,
   destinations,
   lineNotes,
+  hotelPicks,
 }: {
   areas: FinderArea[];
   destinations: FinderDestination[];
   /** "areaId|line" → a caveat shown under that leg. */
   lineNotes: Record<string, string>;
+  hotelPicks?: Record<string, BookingHotelLink | null>;
 }) {
   const t = useTranslations("areasToStayHub.finder");
   const locale = useLocale();
@@ -67,7 +73,6 @@ export function StayFinder({
   // False until a shared ?go= selection has been read, so the URL is not
   // rewritten (and the selection lost) before it is.
   const [urlRead, setUrlRead] = useState(false);
-  const answerRef = useRef<HTMLDivElement>(null);
   const loggedRef = useRef<string>("");
 
   // Read a shared selection once, after hydration, so the server HTML and the
@@ -75,12 +80,12 @@ export function StayFinder({
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
       const params = new URLSearchParams(window.location.search);
-      const go = (params.get("go") ?? "").split(",").filter((id) => destinations.some((d) => d.id === id));
+      const go = [...new Set((params.get("go") ?? "").split(","))].filter((id) => destinations.some((d) => d.id === id));
       const opt = (params.get("opt") ?? "")
         .split(",")
         .filter((o): o is FinderOption => OPTIONS.includes(o as FinderOption));
       if (go.length) setSelected(go.slice(0, 4));
-      if (opt.length) setOptions(opt);
+      setOptions([...new Set(opt)]);
       setUrlRead(true);
     });
     return () => cancelAnimationFrame(frame);
@@ -105,6 +110,7 @@ export function StayFinder({
     [areas, chosen, options],
   );
   const best = ranked[0];
+  const hotel = best && hotelPicks?.[best.area.id];
   const alternatives = ranked.slice(1, 3);
 
   useEffect(() => {
@@ -145,8 +151,9 @@ export function StayFinder({
         </h1>
         <p className="mt-3 max-w-[480px] text-base leading-7 text-slate-600">{t("sub")}</p>
 
-        <p className="mb-2 mt-6 text-xs font-bold uppercase tracking-[0.08em] text-slate-500">{t("visitLabel")}</p>
-        <div className="flex flex-wrap gap-2">
+        <fieldset className="mt-6 min-w-0">
+        <legend className="mb-2 text-sm font-bold text-ink">{t("visitLabel")}</legend>
+        <div className="flex flex-wrap gap-2" aria-describedby="stay-finder-progress">
           {destinations.map((dest) => {
             const on = selected.includes(dest.id);
             return (
@@ -156,9 +163,10 @@ export function StayFinder({
                 aria-pressed={on}
                 onClick={() => toggle(dest.id)}
                 className={[
-                  "inline-flex min-h-10 items-center gap-1.5 rounded-full border-[1.5px] px-3.5 text-sm font-semibold transition-colors",
+                  `inline-flex min-h-11 items-center gap-1.5 rounded-full border-[1.5px] px-3.5 py-2 text-sm font-semibold ${focus} disabled:cursor-not-allowed disabled:text-slate-500`,
                   on ? "border-ink bg-ink text-white" : "border-slate-300 bg-white text-ink hover:bg-slate-50",
                 ].join(" ")}
+                disabled={selected.length >= 4 && !on}
               >
                 {on ? <Check className="h-3.5 w-3.5" aria-hidden="true" /> : null}
                 {dest.label}
@@ -166,8 +174,10 @@ export function StayFinder({
             );
           })}
         </div>
+        </fieldset>
 
-        <p className="mb-2 mt-5 text-xs font-bold uppercase tracking-[0.08em] text-slate-500">{t("alsoLabel")}</p>
+        <fieldset className="mt-5 min-w-0">
+        <legend className="mb-2 text-sm font-bold text-ink">{t("alsoLabel")}</legend>
         <div className="flex flex-wrap gap-2">
           {OPTIONS.map((option) => {
             const on = options.includes(option);
@@ -178,7 +188,7 @@ export function StayFinder({
                 aria-pressed={on}
                 onClick={() => toggleOption(option)}
                 className={[
-                  "inline-flex min-h-9 items-center gap-1.5 rounded-full border-[1.5px] px-3 text-[13px] font-semibold transition-colors",
+                  `inline-flex min-h-11 items-center gap-1.5 rounded-full border-[1.5px] px-3 py-2 text-sm font-semibold ${focus}`,
                   on
                     ? "border-emerald-700 bg-emerald-50 text-emerald-800"
                     : "border-dashed border-slate-300 bg-white text-slate-600 hover:bg-slate-50",
@@ -189,25 +199,32 @@ export function StayFinder({
               </button>
             );
           })}
-          {selected.length ? (
+          {(selected.length > 0 || options.length > 0) ? (
             <button
               type="button"
               onClick={() => {
                 setSelected([]);
                 setOptions([]);
               }}
-              className="min-h-9 px-2 text-[13px] font-semibold text-slate-500 underline underline-offset-2"
+              className={`min-h-11 px-2 text-sm font-semibold text-slate-600 underline underline-offset-2 ${focus}`}
             >
               {t("clear")}
             </button>
           ) : null}
         </div>
+        </fieldset>
+        <div id="stay-finder-progress" className="mt-3 text-sm text-slate-700" aria-live="polite">
+          {best ? (
+            <a href="#stay-finder-answer" className={`inline-flex min-h-11 items-center gap-2 font-bold text-ink underline underline-offset-4 lg:sr-only lg:focus:not-sr-only ${focus}`}>
+              {t("stayNear", { area: best.area.name })}<ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+            </a>
+          ) : t("pickMore")}
+        </div>
       </div>
 
-      <div ref={answerRef} className="min-w-0" aria-live="polite">
-        {best ? (
-          <div className="grid grid-cols-1 gap-4">
-            <div className="rounded-[24px] bg-ink p-6 text-white shadow-[0_18px_44px_rgba(11,18,32,0.25)] md:p-7">
+      {best ? (
+        <div id="stay-finder-answer" tabIndex={-1} className={`grid min-w-0 scroll-mt-24 grid-cols-1 gap-4 ${focus}`}>
+            <div className="rounded-[22px] bg-ink p-5 text-white md:p-7">
               <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/60">
                 {isTradeOff(best) ? t("tradeOff") : t("bestBase")}
               </p>
@@ -226,22 +243,48 @@ export function StayFinder({
                         {leg.line ? <span className="mt-0.5 block text-xs text-white/60">{leg.line}</span> : null}
                         {note ? <span className="mt-0.5 block text-xs text-amber-200/90">{note}</span> : null}
                       </span>
-                      <span className={["shrink-0 rounded-full px-2.5 py-1 text-[11.5px] font-bold", legBadge(leg.kind)].join(" ")}>
+                      <span className={["max-w-[46%] rounded-lg px-2 py-1 text-end text-xs font-bold", legBadge(leg.kind)].join(" ")}>
                         {legText(leg)}
                       </span>
                     </li>
                   );
                 })}
               </ul>
-              <div className="mt-4 grid grid-cols-2 gap-2.5">
-                <Meter label={t("stationEase")} value={best.area.scores.stationSimplicity} />
-                <Meter label={t("luggage")} value={best.area.scores.luggageFriendly} />
-              </div>
-              <p className="mt-3 text-[11.5px] leading-5 text-white/55">{t("note")}</p>
+              <p className="mt-3 text-xs leading-5 text-white/75">{t("note")}</p>
+              <details className="group mt-2">
+                <summary className="flex min-h-11 cursor-pointer list-none items-center gap-2 text-sm font-semibold underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">
+                  {t("stationEase")} · {t("luggage")}
+                </summary>
+                <div className="grid grid-cols-2 gap-2.5">
+                  <Meter label={t("stationEase")} value={best.area.scores.stationSimplicity} />
+                  <Meter label={t("luggage")} value={best.area.scores.luggageFriendly} />
+                </div>
+              </details>
             </div>
 
-            {best.area.hotelUrl ? (
-              <div className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.07)]">
+            {hotel || best.area.hotelUrl ? (
+              <div className="rounded-[22px] border border-slate-200 bg-white p-5">
+                {hotel ? (
+                  <>
+                    <p className="mb-2 text-base font-extrabold text-ink">{hotel.name}</p>
+                    <ProviderButton
+                      provider="booking_travelpayouts"
+                      href={hotel.href}
+                      placement="stay_finder_hotel"
+                      pagePath="/areas-to-stay"
+                      locale={locale}
+                      linkId={hotel.linkId}
+                      hotelName={hotel.name}
+                      areaId={best.area.id}
+                      area={best.area.name}
+                      product="hotel"
+                      city="tokyo"
+                    >
+                      {design.hotelLink}
+                    </ProviderButton>
+                  </>
+                ) : null}
+                {best.area.hotelUrl ? (
                 <a
                   href={best.area.hotelUrl}
                   target="_blank"
@@ -259,22 +302,25 @@ export function StayFinder({
                       locale,
                     })
                   }
-                  className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-fuji px-5 text-[15px] font-bold text-white shadow-[0_8px_20px_rgba(217,74,50,0.28)] transition-colors hover:bg-fuji-hover"
+                  className={`inline-flex min-h-11 items-center gap-2 py-2 text-[15px] font-semibold text-ink underline underline-offset-4 ${focus}`}
                 >
-                  <Hotel className="h-4 w-4" aria-hidden="true" />
+                  <Hotel className="h-4 w-4 shrink-0" aria-hidden="true" />
                   {t("hotelsCta", { area: best.area.name })}
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
                 </a>
-                <p className="mt-2 text-center text-xs text-slate-500">{t("hotelsNote", { area: best.area.name })}</p>
-                <p className="mt-3 border-t border-slate-100 pt-3 text-center text-[11px] leading-4 text-slate-500">
+                ) : null}
+                {best.area.hotelUrl ? <p className="text-xs text-slate-600">{t("hotelsNote", { area: best.area.name })}</p> : null}
+                <p className="mt-3 border-t border-slate-200 pt-3 text-xs leading-5 text-slate-600">
                   {t("disclosure")}
                 </p>
               </div>
             ) : null}
 
             {alternatives.length ? (
-              <div>
-                <p className="mb-2 text-xs font-bold uppercase tracking-[0.08em] text-slate-500">{t("alsoGood")}</p>
+              <details className="border-y border-slate-200">
+                <summary className={`flex min-h-11 cursor-pointer items-center gap-2 text-sm font-bold text-ink underline underline-offset-4 ${focus}`}>
+                  {t("alsoGood")} ({alternatives.length})
+                </summary>
                 <div className="grid gap-2">
                   {alternatives.map((alt) => (
                     <div key={alt.area.id} className="flex items-center justify-between gap-3 rounded-2xl border border-slate-200 bg-white px-4 py-3">
@@ -303,7 +349,7 @@ export function StayFinder({
                               locale,
                             })
                           }
-                          className="inline-flex h-9 shrink-0 items-center gap-1 rounded-full border border-slate-300 px-3 text-xs font-semibold text-ink hover:bg-slate-50"
+                          className={`inline-flex min-h-11 shrink-0 items-center gap-1 rounded-full border border-slate-300 px-3 text-sm font-semibold text-ink hover:bg-slate-50 ${focus}`}
                         >
                           <Hotel className="h-3.5 w-3.5" aria-hidden="true" />
                           <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -312,15 +358,11 @@ export function StayFinder({
                     </div>
                   ))}
                 </div>
-              </div>
+                {alternatives.some((alt) => alt.area.hotelUrl) ? <p className="my-3 text-xs leading-5 text-slate-600">{t("disclosure")}</p> : null}
+              </details>
             ) : null}
-          </div>
-        ) : (
-          <div className="flex h-full min-h-[320px] flex-col justify-end overflow-hidden rounded-[24px] bg-[url(/images/home/tokyo-hotel-base.webp)] bg-cover bg-center">
-            <p className="m-4 rounded-2xl bg-white/95 px-4 py-3 text-sm font-semibold text-ink shadow">{t("pickMore")}</p>
-          </div>
-        )}
-      </div>
+        </div>
+      ) : null}
     </div>
   );
 }

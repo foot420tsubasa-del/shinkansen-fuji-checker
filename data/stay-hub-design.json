@@ -1,0 +1,57 @@
+{
+  "cityLabel": "Choose a destination",
+  "photoLink": "Mt. Fuji & Kawaguchiko",
+  "areaIntro": "Choose the area that fits your plans, then look at a hotel in that area.",
+  "hotelLink": "View rooms on Booking.com",
+  "cities": [
+    {
+      "id": "kyoto",
+      "title": "Where to stay in Kyoto",
+      "source": "https://kyoto.travel/en/travel-inspiration/choosing-accommodation-key-features-of-each-area/",
+      "areas": [
+        {
+          "name": "Kyoto Station",
+          "reason": "For Shinkansen arrivals and early departures.",
+          "hotel": "hotel-granvia-kyoto"
+        },
+        {
+          "name": "Gion",
+          "reason": "For historic streets, Yasaka Shrine, and evening walks.",
+          "hotel": "hotel-the-celestine-gion"
+        },
+        {
+          "name": "Shijo–Kawaramachi",
+          "reason": "For dining, shopping, and Nishiki Market."
+        }
+      ]
+    },
+    {
+      "id": "osaka",
+      "title": "Where to stay in Osaka",
+      "source": "https://osaka-info.jp/en/information/to-osaka/",
+      "areas": [
+        {
+          "name": "Namba",
+          "reason": "For Dotonbori, street food, and late evenings out.",
+          "hotel": "cross-hotel-osaka"
+        },
+        {
+          "name": "Umeda / Osaka Station",
+          "reason": "For shopping and rail connections around Osaka Station.",
+          "hotel": "hotel-granvia-osaka"
+        },
+        {
+          "name": "Shin-Osaka",
+          "reason": "For catching an early Shinkansen.",
+          "hotel": "remm-shin-osaka"
+        }
+      ]
+    }
+  ],
+  "tokyoHotels": {
+    "ueno": "nohga-hotel-ueno-tokyo",
+    "asakusa": "richmond-hotel-asakusa",
+    "tokyo-station": "hotel-metropolitan-tokyo-marunouchi",
+    "shinjuku": "hotel-gracery-shinjuku"
+  }
+}

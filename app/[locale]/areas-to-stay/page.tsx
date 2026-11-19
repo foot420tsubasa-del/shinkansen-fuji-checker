@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, Building2, Landmark, Mountain, Utensils } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
 import { Breadcrumb } from "@/components/content/Breadcrumb";
@@ -11,6 +11,10 @@ import { getTranslations } from "next-intl/server";
 import { StayFinder } from "@/components/stay/StayFinder";
 import { rankAreas, type LegResult } from "@/lib/stay-finder";
 import { getFinderAreas, getFinderDestinations, getFinderLineNotes, POPULAR_COMBOS } from "@/lib/stay-finder-data";
+import { getBookingHotelLink } from "@/lib/booking-hotels";
+import { Link } from "@/i18n/navigation";
+import { StayCityGuides } from "@/components/stay/StayCityGuides";
+import design from "@/data/stay-hub-design.json";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -59,13 +63,6 @@ const guideGroups = [
 const quickAnswerKeys = ["firstTime", "narita", "shinkansen", "quiet"] as const;
 
 
-const guideGroupChrome = {
-  tokyo: { icon: Building2, className: "border-sky-100 bg-sky-50/60 text-sky-800" },
-  kyoto: { icon: Landmark, className: "border-emerald-100 bg-emerald-50/60 text-emerald-800" },
-  osaka: { icon: Utensils, className: "border-orange-100 bg-orange-50/55 text-orange-800" },
-  fuji: { icon: Mountain, className: "border-slate-200 bg-white text-slate-800" },
-} as const;
-
 function pageBySlug(slug: string) {
   return stayPages.find((page) => page.slug === slug);
 }
@@ -92,21 +89,15 @@ function GuideCard({
       placement="stay_hub_featured_guide"
       label={title}
       locale={locale}
-      className="group block rounded-2xl border border-slate-200 bg-white px-4 py-3 text-left transition-colors hover:border-slate-300 hover:bg-slate-50"
+      className="group block min-h-11 rounded px-1 py-4 text-left focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
     >
       <div className="flex h-full items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="text-sm font-semibold leading-5 text-slate-950 group-hover:text-[#106b43]">{title}</h3>
-          <p className="mt-1.5 text-xs leading-5 text-slate-600">
+          <h3 className="text-base font-extrabold leading-5 text-ink group-hover:underline">{title}</h3>
+          <p className="mt-1.5 text-sm leading-5 text-slate-600">
             {description}
           </p>
-          <div className="mt-2 flex flex-wrap gap-1.5">
-            {tags.slice(0, 3).map((tag) => (
-              <span key={tag} className="rounded-full border border-slate-200 bg-slate-50 px-2 py-0.5 text-[10px] font-medium text-slate-500">
-                {tag}
-              </span>
-            ))}
-          </div>
+          <p className="mt-1 text-xs text-slate-600">{tags.slice(0, 3).join(" · ")}</p>
         </div>
         <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-300 group-hover:text-[#106b43]" aria-hidden="true" />
       </div>
@@ -121,6 +112,9 @@ export default async function AreasToStayIndex({ params }: Props) {
   const finderAreas = getFinderAreas();
   const finderDestinations = getFinderDestinations();
   const lineNotes = getFinderLineNotes();
+  const hotelPicks = locale === "en" ? Object.fromEntries(
+    Object.entries(design.tokyoHotels).map(([areaId, hotelId]) => [areaId, getBookingHotelLink(hotelId)]),
+  ) : undefined;
   const popular = POPULAR_COMBOS.map((combo) => {
     const dests = combo
       .map((id) => finderDestinations.find((d) => d.id === id))
@@ -141,22 +135,25 @@ export default async function AreasToStayIndex({ params }: Props) {
           ]}
         />
 
-        {/* The hub opens on the finder since 2026-11-15. The hero that stood
-            here (a headline, three steps and one link to the Asakusa vs Ueno
-            comparison) was read for about two seconds on average over ninety
-            days; the comparisons are still listed below. */}
+        {locale === "en" ? (
+          <nav aria-label={design.cityLabel} className="mt-5 flex flex-wrap gap-x-4 border-b border-slate-200 text-sm font-bold text-ink [&_a]:inline-flex [&_a]:min-h-11 [&_a]:items-center [&_a]:underline [&_a]:underline-offset-4">
+            <a href="#stay-finder">{t("featuredGuides.groups.tokyo")}</a>
+            {design.cities.map(({ id }) => <a key={id} href={`#${id}`}>{t(`featuredGuides.groups.${id}`)}</a>)}
+            <Link href="/stays/mt-fuji-view">{design.photoLink}</Link>
+          </nav>
+        ) : null}
         <section id="stay-finder" className="mt-6 scroll-mt-20">
-          <StayFinder areas={finderAreas} destinations={finderDestinations} lineNotes={lineNotes} />
+          <StayFinder areas={finderAreas} destinations={finderDestinations} lineNotes={lineNotes} hotelPicks={hotelPicks} />
         </section>
 
-        <section className="mt-10 rounded-[26px] border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+        <section className="mt-12 border-t border-slate-200 pt-8">
           <h2 className="text-2xl font-extrabold tracking-[-0.02em] text-ink">{t("finder.popularTitle")}</h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("finder.popularIntro")}</p>
-          <ul className="mt-5 grid gap-3 md:grid-cols-2">
+          <ul className="mt-4 grid gap-x-8 md:grid-cols-2">
             {popular.map(({ combo, best }) => (
-              <li key={combo.join("+")} className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-4">
-                <a href={`/areas-to-stay?go=${combo.join(",")}#stay-finder`} className="group block">
-                  <p className="text-base font-bold text-ink group-hover:text-fuji">
+              <li key={combo.join("+")} className="border-b border-slate-200">
+                <Link href={`/areas-to-stay?go=${combo.join(",")}#stay-finder`} className="group block min-h-11 py-4">
+                  <p className="text-base font-bold text-ink group-hover:underline">
                     {best.legs.map((leg) => leg.label).join(" + ")} → {best.area.name}
                   </p>
                   <p className="mt-1 text-sm leading-6 text-slate-600">
@@ -164,20 +161,20 @@ export default async function AreasToStayIndex({ params }: Props) {
                       .map((leg) => `${leg.label}: ${legLabel(leg.kind)}${leg.line ? ` (${leg.line})` : ""}`)
                       .join(" · ")}
                   </p>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
         </section>
 
-        <section className="mt-8 rounded-[26px] border border-slate-200 bg-white p-5 shadow-sm md:p-6">
+        <section className="mt-10">
           <div>
-            <h2 className="text-2xl font-semibold text-slate-950">{t("quickAnswerTitle")}</h2>
+            <h2 className="text-2xl font-extrabold text-ink">{t("quickAnswerTitle")}</h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("quickAnswerIntro")}</p>
           </div>
-          <ul className="mt-5 grid gap-3 md:grid-cols-2">
+          <ul className="mt-4 grid gap-x-8 md:grid-cols-2">
             {quickAnswerKeys.map((key) => (
-              <li key={key} className="rounded-2xl border border-slate-100 bg-slate-50 px-4 py-4 text-sm leading-6 text-slate-700">
+              <li key={key} className="border-b border-slate-200 py-3 text-[15px] leading-6 text-slate-700">
                 {t(`quickAnswersNew.${key}`)}
               </li>
             ))}
@@ -189,20 +186,12 @@ export default async function AreasToStayIndex({ params }: Props) {
           <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-500">{t("detailedGuides.eyebrow")}</p>
           <h2 className="mt-1 text-2xl font-semibold text-slate-950">{t("detailedGuides.title")}</h2>
           <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600">{t("detailedGuides.body")}</p>
-          <div className="mt-5 grid gap-4 lg:grid-cols-2">
+          <div className="mt-5">
             {guideGroups.map((group) => {
               const pages = group.slugs.map(pageBySlug).filter((page): page is StayPage => Boolean(page));
-              const chrome = guideGroupChrome[group.cityKey];
-              const GroupIcon = chrome.icon;
               return (
-                <section key={group.cityKey} className={["rounded-[22px] border p-4", chrome.className].join(" ")}>
-                  <div className="flex items-center gap-2">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/80 shadow-sm">
-                      <GroupIcon className="h-4 w-4" aria-hidden="true" />
-                    </span>
-                    <h3 className="text-base font-semibold text-slate-950">{t(`featuredGuides.groups.${group.cityKey}`)}</h3>
-                  </div>
-                  <div className="mt-3 grid gap-3">
+                <section key={group.cityKey} aria-label={t(`featuredGuides.groups.${group.cityKey}`)}>
+                  <div className="grid gap-x-8 md:grid-cols-2 [&>a]:border-b [&>a]:border-slate-200">
                     {pages.map((page) => (
                       <GuideCard
                         key={page.slug}
@@ -238,6 +227,7 @@ export default async function AreasToStayIndex({ params }: Props) {
           </TrackedInternalLink>
         </section>
 
+        {locale === "en" ? <StayCityGuides disclosure={t("finder.disclosure")} /> : null}
       </Container>
       <SiteFooter />
     </main>

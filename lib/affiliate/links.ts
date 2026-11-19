@@ -26,6 +26,8 @@ export type AffiliateDestinationType =
 export type AffiliatePlacement =
   | "guide_quick_answer"
   | "stay_finder_result"
+  | "stay_finder_hotel"
+  | "stay_hub_city_hotel"
   | "blog_article_booking"
   | "scenic_route_jr_pass"
   | "scenic_route_ticket"

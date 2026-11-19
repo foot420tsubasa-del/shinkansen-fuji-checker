@@ -1211,16 +1211,31 @@ test("scenic link and stay work leaves protected revenue and experiment pages un
   assert.equal(changed, "");
 });
 
-test("guide: the only change since the scenic work is one Fuji-view stays link after the closing guide links (2026-11-20, by request)", () => {
-  const diff = execSync("/Library/Developer/CommandLineTools/usr/bin/git diff 6824139 -- 'app/[locale]/guide/page.tsx'", { encoding: "utf8" });
-  const added = diff.split("\n").filter((l) => l.startsWith("+") && !l.startsWith("+++"));
-  const removed = diff.split("\n").filter((l) => l.startsWith("-") && !l.startsWith("---"));
-  // The one removal allowed: the English booking line no longer offers Omio (Klook-only rail policy, 2026-11-20).
-  assert.ok(removed.every((l) => /Omio to compare route options/.test(l)), `unexpected /guide removal: ${removed.join(" / ")}`);
-  assert.ok(added.every((l) => /stays\/mt-fuji-view|Mt\. Fuji|locale === "en"|\) : null\}|<\/p>|<p |Continue planning|Book the specific Shinkansen ticket on Klook|^\+\s*$/.test(l)), `unexpected /guide change: ${added.join(" / ")}`);
+test("guide: answer first, keep booking placements and route links after the article", () => {
   const page = readFileSync("app/[locale]/guide/page.tsx", "utf8");
+  assert.ok(page.indexOf('id="quick-answer"') < page.indexOf("{renderSeatCheck()}"));
+  for (const id of ["tldr", "which-side", "seat-letters", "seat-e", "route-zone", "when-to-see", "book-seat-e", "jr-pass", "faq"]) {
+    assert.ok(page.includes(`id="${id}"`), `missing /guide hash #${id}`);
+  }
+  const design = JSON.parse(readFileSync("data/guide-design.json", "utf8"));
+  assert.deepEqual(design.rows.map((row) => row.window), ["E", "D"]);
   assert.ok(page.indexOf("/stays/mt-fuji-view") > page.indexOf("{renderSeatGuides()}"), "the link sits after the closing guide links");
   for (const placement of ["guide_seat_result", "guide_quick_answer_text", "guide_klook_text"]) assert.match(page, new RegExp(placement));
+});
+
+test("stay hub: Kyoto and Osaka hotel suggestions use registered Booking.com hotels and the compact finder carries trip priorities", () => {
+  const design = JSON.parse(readFileSync("data/stay-hub-design.json", "utf8"));
+  const hotels = JSON.parse(readFileSync("data/booking-hotel-urls.json", "utf8")).hotels;
+  assert.deepEqual(design.cities.map((city) => city.id), ["kyoto", "osaka"]);
+  const usedHotels = [...Object.values(design.tokyoHotels), ...design.cities.flatMap((city) => city.areas.flatMap((area) => area.hotel ? [area.hotel] : []))];
+  for (const id of usedHotels) assert.ok(hotels[id]?.bookingUrl.startsWith("https://www.booking.com/hotel/"), id);
+  const compact = readFileSync("components/stay/CompactStayFinderClient.tsx", "utf8");
+  const finder = readFileSync("components/stay/StayFinder.tsx", "utf8");
+  assert.match(compact, /\?opt=/);
+  assert.match(compact, /#stay-finder/);
+  assert.doesNotMatch(compact, /q_shinkansen|q_luggage/);
+  assert.match(finder, /params\.get\("opt"\)/);
+  assert.match(finder, /placement: "stay_finder_result"/);
 });
 
 test("Fuji-view stays: verified hotels, links registered once, no prices or rankings, placed where asked", () => {

@@ -2858,7 +2858,7 @@ export default async function StayPage({ params }: Props) {
           { label: page.title.split("—")[0].trim() },
         ]} />
 
-        <h1 className="mt-4 text-2xl font-semibold text-slate-950 md:text-3xl">
+        <h1 className="mt-4 max-w-4xl text-[34px] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink md:text-[44px]">
           {page.title}
         </h1>
         <p className="mt-3 max-w-3xl text-sm leading-6 text-slate-600 md:text-base">
@@ -2866,24 +2866,6 @@ export default async function StayPage({ params }: Props) {
         </p>
 
         <div className="mt-8 space-y-8">
-          {page.mapId ? (
-            <section className="space-y-4">
-              <StayAreaMap
-                mapId={page.mapId}
-                priority={page.slug === "tokyo-first-time"}
-              />
-              {page.mapDescription && page.mapDescription.length > 0 ? (
-                <div className="rounded-[18px] border border-slate-200 bg-white p-5 text-sm leading-6 text-slate-600 shadow-sm">
-                  {page.mapDescription.map((paragraph) => (
-                    <p key={paragraph} className="mt-3 first:mt-0">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              ) : null}
-            </section>
-          ) : null}
-
           <QuickRec
             area={page.quickRec.area}
             why={page.quickRec.why}
@@ -2902,6 +2884,24 @@ export default async function StayPage({ params }: Props) {
                went nowhere worth sending anyone. */
             secondaryHref={undefined}
           />
+
+          {page.mapId ? (
+            <section className="space-y-4">
+              <StayAreaMap
+                mapId={page.mapId}
+                priority={page.slug === "tokyo-first-time"}
+              />
+              {page.mapDescription && page.mapDescription.length > 0 ? (
+                <div className="rounded-[18px] border border-slate-200 bg-white p-5 text-sm leading-6 text-slate-600 shadow-sm">
+                  {page.mapDescription.map((paragraph) => (
+                    <p key={paragraph} className="mt-3 first:mt-0">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              ) : null}
+            </section>
+          ) : null}
 
           {isShinkansenProblemPage ? (
             <>
