@@ -15,6 +15,48 @@ import { ScenicStayBlock } from "@/components/scenic/ScenicStayBlock";
 import type { AffiliateProvider } from "@/lib/affiliate/links";
 import { getScenicStay } from "@/lib/scenic-stays";
 import discovery from "@/data/scenic-discovery.json";
+import seating from "@/data/scenic-seating.json";
+import overview from "@/data/scenic-overview.json";
+
+const SEAT_LINE: Record<string, string> = {
+  reserved: "Reserve a window seat on the side for your view.",
+  unreserved: "No seat reservations on regular trains: board early for a window on that side.",
+  bench: "Long bench seats: sit facing across the car, or stand by the windows on that side.",
+  car: "You book a car, not a seat; seats in it are first come, first served.",
+};
+
+type SeatingEntry = { kind: string; q?: string; a?: string };
+
+/**
+ * The seat question that fits the train (data/scenic-seating.json): book a
+ * window on a Shinkansen or reserved train; no reservations on regular local
+ * trains; long benches on the Enoden and Yurikamome; a car, not a seat, on the
+ * Kurobe trolley. Skipped where the route already answers it (verified seats,
+ * or its own seat question).
+ */
+function seatingFaq(route: ScenicRoute): { q: string; a: string }[] {
+  const entry = (seating.routes as Record<string, SeatingEntry>)[route.id];
+  const fill = (text: string, values: Record<string, string>) => text.replace(/\{(\w+)\}/g, (_, k: string) => values[k] ?? "");
+  const out: { q: string; a: string }[] = [];
+  const verifiedSeats = route.views?.some((v) => v.seat || v.seatByDirection);
+  const ownSeatQuestion = (route.faq ?? []).some((item) => /seat letter|which seat|choose my seat|where should i sit/i.test(item.q));
+  if (entry && !verifiedSeats && !ownSeatQuestion) {
+    const template = (seating.templates as Record<string, { q: string; a: string } | undefined>)[entry.kind];
+    const q = entry.q ?? (template ? fill(template.q, { line: route.line }) : null);
+    const a = entry.a ?? template?.a;
+    if (q && a) out.push({ q, a });
+  }
+  if (route.reversals?.length) {
+    const stations = route.reversals.map((name) => name.replace(/ Switchback$/, "")).join(", ");
+    out.push({ q: fill(seating.templates.reversal.q, { line: route.line }), a: fill(seating.templates.reversal.a, { stations }) });
+  }
+  return out;
+}
+
+/** A side is "published" only where the basis says it matched a published source, or the seat was verified. */
+function sideFromModelOnly(basis: string) {
+  return !/match|seat verified/i.test(basis);
+}
 
 /*
  * One template for every mapped route (since 2026-11-15): the page reads only
@@ -72,23 +114,14 @@ export default async function ScenicRoutePage({ params }: Props) {
           : v.seat
             ? ` — Seat ${v.seat.split(" ")[0]} in standard cars`
             : "";
-        const basis = /only/.test(v.basis) ? " This comes from our terrain model; we found no published source for the side." : "";
+        const basis = sideFromModelOnly(v.basis) ? " This comes from our terrain model; we found no published source for the side." : "";
         const name = v.name.replace(/^The /, "the ");
         return {
           q: `Which side of the ${route.line} is ${name} on?`,
           a: `Going from ${from} to ${to}, ${name} is on the ${v.side.forward} side, between ${v.from} and ${v.to}${seatText}. Going from ${to} to ${from}, it is on the ${flipSide(v.side.forward)}.${basis}`,
         };
       }),
-    ...(views.some((v) => v.seat || v.seatByDirection)
-      ? []
-      : [
-          {
-            q: `Which seat letter should I book on the ${route.line}?`,
-            a: route.id === "enoden-coast" && route.notes?.[0]
-              ? route.notes[0]
-              : "Look out on the side shown for your direction of travel. Seat numbers and reservation rules depend on the train.",
-          },
-        ]),
+    ...seatingFaq(route),
     ...(route.faq ?? []),
   ];
 
@@ -118,14 +151,7 @@ export default async function ScenicRoutePage({ params }: Props) {
           {discovery.routeSearchLink} <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
 
-        {route.image ? (
-          <div className="relative mt-6 aspect-[16/9] overflow-hidden rounded-[22px] bg-ink">
-            <Image src={route.image.src} alt={route.image.alt} fill priority sizes="(min-width: 1040px) 1000px, 100vw" className="object-cover" />
-            {route.image.illustrative ? <span className="absolute bottom-2 right-3 text-[10px] font-medium text-white/75">Illustrative image</span> : null}
-          </div>
-        ) : null}
-
-        <section className="mt-8 grid gap-4 md:grid-cols-2">
+        <section className="mt-6 grid gap-4 md:grid-cols-2" aria-label="Which side to sit on">
           {(["forward", "backward"] as const).map((dir) => {
             const [a, b] = route.directions![dir];
             return (
@@ -168,6 +194,39 @@ export default async function ScenicRoutePage({ params }: Props) {
             );
           })}
         </section>
+
+        {(() => {
+          const highlights = (discovery.routes as Record<string, { highlights?: { label: string }[] }>)[route.id]?.highlights ?? [];
+          const seatKind = (seating.routes as Record<string, SeatingEntry>)[route.id]?.kind;
+          const seatLine = route.views?.some((v) => v.seat || v.seatByDirection)
+            ? "Seat letters are verified for this train — see the cards above."
+            : seatKind
+              ? SEAT_LINE[seatKind]
+              : null;
+          const notice = overview.routes.find((r) => r.id === route.id)?.notice;
+          const rows = [
+            highlights.length ? ["Best time", highlights.map((h) => h.label).join(" · ")] : ["When", overview.routes.find((r) => r.id === route.id)?.season ?? ""],
+            seatLine ? ["Seats", seatLine] : null,
+            notice ? ["Service", notice] : null,
+          ].filter((row): row is string[] => Boolean(row && row[1]));
+          return (
+            <dl className="mt-4 grid gap-2 rounded-2xl border border-slate-200 bg-white p-4 text-[14.5px] leading-6">
+              {rows.map(([label, value]) => (
+                <div key={label} className="grid gap-1 sm:grid-cols-[110px_1fr]">
+                  <dt className="font-bold text-ink">{label}</dt>
+                  <dd className={label === "Service" ? "text-amber-900" : "text-slate-700"}>{value}</dd>
+                </div>
+              ))}
+            </dl>
+          );
+        })()}
+
+        {route.image ? (
+          <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-[22px] bg-ink">
+            <Image src={route.image.src} alt={route.image.alt} fill priority sizes="(min-width: 1040px) 1000px, 100vw" className="object-cover" />
+            {route.image.illustrative ? <span className="absolute bottom-2 right-3 rounded bg-black/55 px-1.5 py-0.5 text-[11px] font-medium text-white">Illustrative image, not a photo from this train</span> : null}
+          </div>
+        ) : null}
 
         <section className="mt-10">
           <RouteTimeline routeId={route.id} direction="forward" from={from} to={to} showRouteLink={false} />

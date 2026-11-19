@@ -792,7 +792,8 @@ test("scenic hub: every live route appears once, candidates stay out, and every 
   }
   const page = readFileSync("app/[locale]/scenic/page.tsx", "utf8");
   assert.match(page, /scenicDiscoveryRoutes\(\{ view, season, region \}\)/);
-  assert.match(page, /visibleRoutes\.map/);
+  assert.match(page, /bestRoutes\.map\(\(route\) => routeCard\(route\)\)/);
+  assert.match(page, /goodRoutes\.map\(\(route\) => routeCard\(route\)\)/);
 });
 
 test("scenic hub: the lightweight map covers every live route and stays within its point limit", () => {
@@ -851,6 +852,71 @@ test("scenic discovery applies view, region, and season together, with explicit 
   assert.deepEqual(scenicDiscoveryRoutes({ view: "autumn-colour", region: "kansai", season: "winter" }).map((route) => route.id), ["sagano-gorge"]);
   assert.deepEqual(scenicDiscoveryRoutes({ view: "autumn-colour", region: "kansai", season: "summer" }), []);
   assert.ok(!scenicDiscoveryRoutes({ season: "winter" }).some((route) => route.id === "kurobe-gorge"));
+});
+
+test("scenic seasons: a season shows the routes at their best first, keeps year-round ones separate, and drops closed lines", async () => {
+  const { scenicMonthRows } = await jiti.import("./lib/scenic-discovery.ts");
+  const winter = scenicDiscoveryRoutes({ season: "winter" });
+  const best = winter.filter((r) => r.fit === "best").map((r) => r.id);
+  const good = winter.filter((r) => r.fit === "good").map((r) => r.id);
+  // Best = the season named in the route's own season text.
+  assert.ok(best.includes("tokaido-fuji") && best.includes("senmo-drift-ice") && best.includes("tohoku-iwate"));
+  assert.ok(!best.includes("enoden-coast") && good.includes("enoden-coast"), "a year-round view is 'also good', not 'best'");
+  assert.ok(!winter.some((r) => r.id === "kurobe-gorge"), "Kurobe is closed in winter");
+  assert.deepEqual(winter.map((r) => r.fit), [...best.map(() => "best"), ...good.map(() => "good")], "best first");
+  assert.ok(winter.filter((r) => r.fit === "best").every((r) => r.seasonHighlight), "every best match says why");
+  // Seasonal views must be on in that season.
+  assert.deepEqual(scenicDiscoveryRoutes({ view: "snow", season: "summer" }), []);
+  assert.deepEqual(scenicDiscoveryRoutes({ view: "autumn-colour", season: "autumn" }).map((r) => r.fit), scenicDiscoveryRoutes({ view: "autumn-colour", season: "autumn" }).map(() => "best"));
+  // Every highlight is grounded in the route's own season text.
+  const discovery = JSON.parse(readFileSync("data/scenic-discovery.json", "utf8"));
+  const catalogue = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
+  for (const [id, data] of Object.entries(discovery.routes)) {
+    const route = catalogue.routes.find((r) => r.id === id);
+    const text = [route.season, ...route.views.map((v) => v.season), ...(route.notes ?? [])].join(" ").toLowerCase();
+    for (const h of data.highlights ?? []) {
+      for (const part of h.basis.split(/; /)) {
+        const probe = part.toLowerCase().replace(/ryuhyo monogatari announced for january 30 to february 28, 2027/, "february 1–28, 2027");
+        assert.ok(text.includes(probe), `${id}: highlight basis "${part}" is not in the route's own text`);
+      }
+    }
+    assert.equal(typeof data.anytime, "boolean", `${id}: says whether it is good in any season`);
+  }
+  // The month table lists highlights only; year-round routes without one go to "Any month".
+  const { rows, anyMonth } = scenicMonthRows(scenicDiscoveryRoutes({}));
+  assert.equal(rows.length, 12);
+  assert.ok(rows[1].entries.some((e) => e.route.id === "senmo-drift-ice"), "drift ice in February");
+  assert.ok(!rows[6].entries.some((e) => e.route.id === "enoden-coast"), "no year-round route padding every month");
+  assert.ok(anyMonth.some((r) => r.id === "enoden-coast"));
+  // Filters drive the map and the month table.
+  const page = readFileSync("app/[locale]/scenic/page.tsx", "utf8");
+  assert.match(page, /scenicMonthRows\(filtered \? visibleRoutes : scenicDiscoveryRoutes\(\{\}\)\)/);
+  assert.match(page, /<ScenicOverviewMap locale=\{locale\} copy=\{hub\.map\} highlight=\{highlightIds\} \/>/);
+  assert.match(readFileSync("components/scenic/ScenicOverviewMap.tsx", "utf8"), /highlight\?: string\[\]/);
+});
+
+test("scenic seats: the seat question fits the train, and model-only sides say so", () => {
+  const seating = JSON.parse(readFileSync("data/scenic-seating.json", "utf8"));
+  const catalogue = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
+  const live = catalogue.routes.filter((r) => r.status === "live");
+  for (const route of live) assert.ok(seating.routes[route.id]?.kind, `${route.id}: seating kind`);
+  // Long-bench and trolley answers are the route's own notes / the operator's information.
+  assert.ok(catalogue.routes.find((r) => r.id === "enoden-coast").notes[0].includes(seating.routes["enoden-coast"].a.split(".")[0]));
+  assert.match(seating.routes["kurobe-gorge"].source, /official/i);
+  // Local lines are never asked which seat letter to book.
+  for (const id of ["enoden-coast", "yurikamome-night", "fujikyu-fuji", "hakone-tozan", "furano-biei-flowers", "senmo-drift-ice", "tadami-river"]) {
+    assert.notEqual(seating.routes[id].kind, "reserved", `${id}: no seat reservations on regular trains`);
+  }
+  const page = readFileSync("app/[locale]/scenic/[slug]/page.tsx", "utf8");
+  assert.doesNotMatch(page, /Which seat letter should I book/);
+  assert.match(page, /\.\.\.seatingFaq\(route\)/);
+  // "terrain model" (no published match) must carry the model-only note, not just "terrain model only".
+  assert.match(page, /return !\/match\|seat verified\/i\.test\(basis\)/);
+  // Every route that reverses gets the direction question.
+  assert.ok(live.filter((r) => r.reversals?.length).length >= 3);
+  // Answer first: the side cards come before the photo.
+  assert.ok(page.indexOf('aria-label="Which side to sit on"') < page.indexOf("{route.image ? ("), "side cards above the photo");
+  assert.match(page, /Illustrative image, not a photo from this train/);
 });
 
 test("route results keep the mapped Tokaido leg separate and only choose a highlight in the actual timeline", () => {

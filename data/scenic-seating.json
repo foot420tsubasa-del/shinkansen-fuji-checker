@@ -1,0 +1,48 @@
+{
+  "_about": "How you sit on each scenic route, so the seat question on its page fits the train. kinds: reserved (book a seat; letters only where verified), bench (long side benches, no reservations), unreserved (regular trains, no seat reservations), car (book a car, sit anywhere in it). Every answer rests on the route's own notes or the operator's site; nothing about seat layouts is assumed beyond that.",
+  "templates": {
+    "reserved": {
+      "q": "Which seat should I book on the {line}?",
+      "a": "Reserve a window seat on the side of the view you want most — each view's side is listed above, for both directions. We do not give a seat letter for each side because we have not verified it for every train on this line."
+    },
+    "unreserved": {
+      "q": "Can I reserve a seat on the {line}?",
+      "a": "The regular trains used on this page have no seat reservations. Board early and take a window on the side shown for your direction; if the train is full, stand by those windows."
+    },
+    "reversal": {
+      "q": "Does the train change direction on the {line}?",
+      "a": "Yes, at {stations}. The sides on this page are for the direction of travel, so after a reversal the view is on the other side of the car from the one you boarded on — the timeline marks each stretch where that applies."
+    }
+  },
+  "routes": {
+    "tokaido-fuji": { "kind": "reserved" },
+    "hokuriku-alps": { "kind": "reserved" },
+    "tohoku-iwate": { "kind": "reserved" },
+    "joetsu-snow": { "kind": "reserved" },
+    "gono-coast": { "kind": "reserved" },
+    "sagano-gorge": { "kind": "reserved" },
+    "enoden-coast": {
+      "kind": "bench",
+      "q": "Where should I sit on the Enoden?",
+      "a": "Enoden cars have long bench seats along the sides. To face the sea, sit on the land-side bench, or stand by the sea-side windows; the cab window at the front of the train works too.",
+      "source": "route note"
+    },
+    "yurikamome-night": {
+      "kind": "bench",
+      "q": "Where should I sit on the Yurikamome?",
+      "a": "Cars mostly have long bench seats along the sides, and there are no seat reservations. The line has no driver, so the seats at the very front (and back) look straight down the track — the best view of the Rainbow Bridge loop, if you can get them. Otherwise stand by the windows on the side shown for your view.",
+      "source": "route notes"
+    },
+    "fujikyu-fuji": { "kind": "unreserved" },
+    "hakone-tozan": { "kind": "unreserved" },
+    "furano-biei-flowers": { "kind": "unreserved" },
+    "senmo-drift-ice": { "kind": "unreserved" },
+    "tadami-river": { "kind": "unreserved" },
+    "kurobe-gorge": {
+      "kind": "car",
+      "q": "Can I choose my seat on the Kurobe Gorge Railway?",
+      "a": "Seats are not numbered: you reserve a car, and seats in it are first come, first served. Open cars have benches four across with no windows; the windowed Relax cars seat three across, with seats that turn to face forward. Either way, sit on the right going up as far as Kanetsuri.",
+      "source": "Kurobe Gorge Railway official site (timetable and Q&A), read November 2026"
+    }
+  }
+}
