@@ -1240,7 +1240,7 @@ export default async function GuidePage({ params }: Props) {
             {quickAnswer.items.slice(0, 2).map((item) => (
               <div key={item.bold} className="border-t border-slate-200 pt-3">
                 <dt className="text-sm font-semibold text-slate-600">{item.bold.replace(/[:：]$/, "")}</dt>
-                <dd className="mt-0.5 text-[19px] font-extrabold text-ink">{item.text}</dd>
+                <dd className="mt-0.5 text-[19px] font-extrabold text-ink">{isEn ? item.text.replace("Seat E", "Seat\u00a0E") : item.text}</dd>
               </div>
             ))}
           </dl>

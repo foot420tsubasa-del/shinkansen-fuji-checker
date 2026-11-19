@@ -37,7 +37,7 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="mb-3 text-xs font-black uppercase tracking-[0.06em] text-sky-200">{t("footer.plan")}</h4>
+            <h2 className="mb-3 text-xs font-black uppercase tracking-[0.06em] text-sky-200">{t("footer.plan")}</h2>
             <Link className={footerLinkClass} href="/#seat-checker" onClick={() => trackFooterLink("/#seat-checker", t("footer.seatChecker"), "seat_checker")}>{t("footer.seatChecker")}</Link>
             <Link className={footerLinkClass} href="/areas-to-stay" onClick={() => trackFooterLink("/areas-to-stay", t("nav.stay"), "stay")}>{t("nav.stay")}</Link>
             <Link className={footerLinkClass} href="/guide" onClick={() => trackFooterLink("/guide", t("nav.railGuide"), "rail")}>{t("nav.railGuide")}</Link>
@@ -46,13 +46,13 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="mb-3 text-xs font-black uppercase tracking-[0.06em] text-sky-200">{t("footer.guides")}</h4>
+            <h2 className="mb-3 text-xs font-black uppercase tracking-[0.06em] text-sky-200">{t("footer.guides")}</h2>
             <Link className={footerLinkClass} href="/guide" onClick={() => trackFooterLink("/guide", t("footer.shinkansenGuide"), "rail")}>{t("footer.shinkansenGuide")}</Link>
             <Link className={footerLinkClass} href="/areas-to-stay" onClick={() => trackFooterLink("/areas-to-stay", t("footer.stayAreas"), "stay")}>{t("footer.stayAreas")}</Link>
           </div>
 
           <div>
-            <h4 className="mb-3 text-xs font-black uppercase tracking-[0.06em] text-sky-200">{t("footer.support")}</h4>
+            <h2 className="mb-3 text-xs font-black uppercase tracking-[0.06em] text-sky-200">{t("footer.support")}</h2>
             <Link className={footerLinkClass} href="/about" onClick={() => trackFooterLink("/about", t("footer.about"), "support")}>{t("footer.about")}</Link>
             <Link className={footerLinkClass} href="/local-tokyo" onClick={() => trackFooterLink("/local-tokyo", t("footer.localTokyo"), "local_tokyo")}>{t("footer.localTokyo")}</Link>
             <Link className={footerLinkClass} href="/privacy" onClick={() => trackFooterLink("/privacy", t("footer.privacy"), "support")}>{t("footer.privacy")}</Link>
@@ -60,9 +60,9 @@ export function SiteFooter() {
           </div>
 
           <div className="rounded-[14px] border border-white/10 bg-white/5 p-5">
-            <h4 className="text-xs font-black uppercase tracking-[0.06em] text-sky-200">
+            <h2 className="text-xs font-black uppercase tracking-[0.06em] text-sky-200">
               {t("footer.feedbackTitle")}
-            </h4>
+            </h2>
             <p className="mt-2 text-sm leading-6 text-slate-300">
               {t("footer.feedbackDesc")}
             </p>
