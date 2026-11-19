@@ -1232,9 +1232,14 @@ test("Fuji-view stays: verified hotels, links registered once, no prices or rank
   assert.match(stays.hotels.find((h) => h.id === "la-vista-fujikawaguchiko").view, /Not every room/);
   assert.match(stays.page.viewNotes.join(" "), /cloud/i);
   assert.equal(stays.areaSearch.affiliate, false, "the area search is a plain link until an affiliate link is issued");
-  // No affiliate link is registered twice.
-  const urls = Object.values(booking).map((h) => h.affiliateUrl).filter(Boolean);
-  assert.equal(new Set(urls).size, urls.length);
+  // One affiliate link never points at two different hotels (alias keys for the same Booking page may share it).
+  const hotelFor = new Map();
+  for (const h of Object.values(booking)) {
+    if (!h?.affiliateUrl) continue;
+    const prev = hotelFor.get(h.affiliateUrl);
+    assert.ok(!prev || prev === h.bookingUrl, `${h.affiliateUrl} is used for two different hotels`);
+    hotelFor.set(h.affiliateUrl, h.bookingUrl);
+  }
   // Placement: Fujikyu shows the cards; Tokaido and /guide only link; Tokyo stay finder untouched.
   const route = readFileSync("app/[locale]/scenic/[slug]/page.tsx", "utf8");
   assert.ok(route.indexOf("fuji-stays-heading") > route.indexOf('id="tickets"') && route.indexOf("fuji-stays-heading") < route.indexOf(">Questions<"), "Fujikyu: after tickets, before the FAQ");
