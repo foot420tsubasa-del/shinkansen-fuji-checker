@@ -86,7 +86,7 @@ export type ScenicRoute = {
   teaser?: string;
   tags?: ViewTag[];
   near?: string[];
-  image?: { src: string; width: number; height: number; alt: string; illustrative: boolean };
+  image?: { src: string; width: number; height: number; alt: string; illustrative: boolean; position?: string };
   stations?: { name: string; lat: number; lng: number }[];
   targets?: { id: string; name: string; lat: number; lng: number }[];
   views?: ScenicView[];

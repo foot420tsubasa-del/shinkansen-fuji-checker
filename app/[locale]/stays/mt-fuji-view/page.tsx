@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { PhotoCredit } from "@/components/scenic/PhotoCredit";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { getAlternates } from "@/i18n/hreflang";
@@ -51,11 +52,14 @@ export default async function MtFujiViewStaysPage({ params }: Props) {
           <p className="mt-4 text-lg leading-8 text-slate-700 md:text-xl">{p.sub}</p>
         </header>
 
-        <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-[24px] bg-slate-100 md:aspect-[21/9]">
-          <Image src={p.heroImage.src} alt={p.heroImage.alt} fill priority sizes="(min-width: 1160px) 1120px, 100vw" className="object-cover object-[50%_35%]" />
-          {p.heroImage.illustrative ? (
-            <span className="absolute bottom-2 right-3 rounded bg-black/55 px-1.5 py-0.5 text-[11px] font-medium text-white">Illustrative image</span>
-          ) : null}
+        <div className="mt-8">
+          <div className="relative aspect-[16/9] overflow-hidden rounded-[24px] bg-slate-100">
+            <Image src={p.heroImage.src} alt={p.heroImage.alt} fill priority sizes="(min-width: 1160px) 1120px, 100vw" className="object-cover" style={{ objectPosition: p.heroImage.position }} />
+            {p.heroImage.illustrative ? (
+              <span className="absolute bottom-2 right-3 rounded bg-black/55 px-1.5 py-0.5 text-[11px] font-medium text-white">Illustrative image</span>
+            ) : null}
+          </div>
+          <PhotoCredit src={p.heroImage.src} className="mt-2" detailed />
         </div>
 
         <section className="mt-12" aria-labelledby="stays-heading">

@@ -42,11 +42,11 @@
         ]
       },
       "image": {
-        "src": "/images/hero/window-fuji-winter-wide.webp",
-        "width": 1536,
-        "height": 1024,
-        "alt": "Snow-capped Mt. Fuji through a Shinkansen window",
-        "illustrative": true
+        "src": "/images/scenic/photos/shin-fuji.webp",
+        "width": 1600,
+        "height": 1067,
+        "alt": "Mount Fuji rising beyond the foothills and buildings, photographed from the Tokaido Shinkansen",
+        "illustrative": false
       },
       "teaser": "Tokyo → Kyoto · Seat E",
       "href": "/scenic/tokaido-shinkansen",
@@ -1154,11 +1154,11 @@
       },
       "geometry": "data/routes/enoden-coast.json",
       "image": {
-        "src": "/images/scenic/scenic-enoden-coast-wide.webp",
-        "width": 1448,
-        "height": 1086,
-        "alt": "Beach, an island and distant Mt. Fuji through the window of a small seaside train",
-        "illustrative": true
+        "src": "/images/scenic/photos/enoden.webp",
+        "width": 1600,
+        "height": 1112,
+        "alt": "An Enoden train beside the Shonan coast with the sea and Mount Fuji in the distance",
+        "illustrative": false
       },
       "teaser": "Kamakura · the sea on the right",
       "near": [
@@ -1684,11 +1684,12 @@
         ]
       },
       "image": {
-        "src": "/images/scenic/scenic-fujikyu-fuji-tall.webp",
-        "width": 1086,
-        "height": 1448,
-        "alt": "Mt. Fuji close above a lake and autumn leaves through a local train window",
-        "illustrative": true
+        "src": "/images/scenic/photos/kawaguchiko.webp",
+        "width": 1600,
+        "height": 1125,
+        "alt": "Mount Fuji and a low bridge above Lake Kawaguchi, with the mountain reflected in the water",
+        "illustrative": false,
+        "position": "50% 22%"
       },
       "teaser": "Otsuki → Kawaguchiko · Fuji on the left",
       "near": [
@@ -2812,11 +2813,11 @@
         "joinM": 800
       },
       "image": {
-        "src": "/images/scenic/scenic-sagano-gorge-tall.webp",
-        "width": 1086,
-        "height": 1448,
-        "alt": "Autumn maples above a green river gorge from an open wooden trolley car",
-        "illustrative": true
+        "src": "/images/scenic/photos/sagano.webp",
+        "width": 1280,
+        "height": 854,
+        "alt": "Rocky banks and green hills along the Hozu River, seen beside the red carriages of a Sagano train",
+        "illustrative": false
       },
       "teaser": "Kyoto · the gorge, left then right",
       "near": [
@@ -5973,11 +5974,11 @@
         "countryside"
       ],
       "image": {
-        "src": "/images/scenic/scenic-kurobe-gorge-tall.webp",
-        "width": 1086,
-        "height": 1448,
-        "alt": "A red bridge over an emerald river in an autumn gorge from an open trolley car",
-        "illustrative": true
+        "src": "/images/scenic/photos/kurobe.webp",
+        "width": 1120,
+        "height": 1493,
+        "alt": "A Kurobe Gorge Railway train on a red bridge above turquoise water and forested slopes",
+        "illustrative": false
       },
       "stations": [
         {
@@ -8508,11 +8509,11 @@
         "sea"
       ],
       "image": {
-        "src": "/images/scenic/scenic-senmo-drift-ice-wide.webp",
-        "width": 1448,
-        "height": 1086,
-        "alt": "Drift ice on the Sea of Okhotsk and snowy mountains through a train window",
-        "illustrative": true
+        "src": "/images/scenic/photos/senmo.webp",
+        "width": 1600,
+        "height": 1200,
+        "alt": "A green sightseeing train beside drift ice in the Sea of Okhotsk, seen from Kitahama Station",
+        "illustrative": false
       }
     },
     {
@@ -9634,11 +9635,11 @@
         "mountain"
       ],
       "image": {
-        "src": "/images/scenic/scenic-tadami-river-wide.webp",
-        "width": 1536,
-        "height": 1024,
-        "alt": "Morning mist on a still river below autumn mountains and an arch bridge through a train window",
-        "illustrative": true
+        "src": "/images/scenic/photos/tadami.webp",
+        "width": 1280,
+        "height": 853,
+        "alt": "A Tadami Line train on the First Tadami River Bridge amid autumn foliage, reflected in the river",
+        "illustrative": false
       }
     }
   ]

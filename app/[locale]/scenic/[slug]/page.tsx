@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { PhotoCredit } from "@/components/scenic/PhotoCredit";
 import { notFound } from "next/navigation";
 import { ArrowRight, Check } from "lucide-react";
 import { Link } from "@/i18n/navigation";
@@ -238,9 +239,12 @@ export default async function ScenicRoutePage({ params }: Props) {
           </ul>
         ) : null}
         {route.image ? (
-          <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-[22px] bg-ink">
-            <Image src={route.image.src} alt={route.image.alt} fill priority sizes="(min-width: 1040px) 1000px, 100vw" className="object-cover" />
-            {route.image.illustrative ? <span className="absolute bottom-2 right-3 rounded bg-black/55 px-1.5 py-0.5 text-[11px] font-medium text-white">Illustrative image, not a photo from this train</span> : null}
+          <div className="mt-8">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[22px] bg-ink">
+              <Image src={route.image.src} alt={route.image.alt} fill priority sizes="(min-width: 1040px) 1000px, 100vw" className="object-cover" style={{ objectPosition: route.image.position }} />
+              {route.image.illustrative ? <span className="absolute bottom-2 right-3 rounded bg-black/55 px-1.5 py-0.5 text-[11px] font-medium text-white">Illustrative image, not a photo from this train</span> : null}
+            </div>
+            <PhotoCredit src={route.image.src} className="mt-2" detailed />
           </div>
         ) : null}
 

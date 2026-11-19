@@ -7,6 +7,7 @@ import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { ScenicOverviewMap } from "@/components/scenic/ScenicOverviewMap";
 import { ScenicFilterTracker } from "@/components/scenic/ScenicTracking";
+import { PhotoCredit } from "@/components/scenic/PhotoCredit";
 import hub from "@/data/scenic-hub.json";
 import discovery from "@/data/scenic-discovery.json";
 import overview from "@/data/scenic-overview.json";
@@ -82,7 +83,7 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
     <article key={route.id} className="flex flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(30,41,59,0.05)] transition-shadow hover:shadow-[0_14px_36px_rgba(30,41,59,0.1)]">
       <Link href={`/scenic/${route.slug}`} className="group flex min-w-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
         <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <Image src={route.image.src} alt={route.image.alt} fill sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="object-cover transition duration-500 group-hover:scale-[1.03]" />
+          <Image src={route.image.src} alt={route.image.alt} fill sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="object-cover transition duration-500 group-hover:scale-[1.03]" style={{ objectPosition: route.image.position }} />
           {route.image.illustrative ? <span className="absolute bottom-2 right-3 rounded bg-black/45 px-1.5 py-0.5 text-[10px] font-medium text-white">{hub.illustrativeLabel}</span> : null}
         </div>
         <div className="flex flex-1 flex-col p-5">
@@ -96,6 +97,7 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
           <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[15px] font-bold text-ink group-hover:text-fuji">{hub.cardLinkLabel} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" /></span>
         </div>
       </Link>
+      <PhotoCredit src={route.image.src} className="border-t border-slate-100 px-5 py-2" />
       {route.id === "fujikyu-fuji" ? (
         <Link href="/stays/mt-fuji-view" className="flex min-h-12 items-center border-t border-slate-100 px-5 text-sm font-semibold text-slate-700 underline-offset-4 hover:text-ink hover:underline">
           Stay with a Mt. Fuji view →

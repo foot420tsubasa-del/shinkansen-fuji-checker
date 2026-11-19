@@ -8,7 +8,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import ts from "typescript";
 
@@ -743,6 +743,7 @@ test("view map: the line is OpenStreetMap-attributed and the window brackets Shi
 
 test("scenic routes: no unverified route claims a side, and every image is on disk", () => {
   const { routes } = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
+  const photoCredits = JSON.parse(readFileSync("data/scenic-photo-credits.json", "utf8"));
   for (const route of routes) {
     if (route.status !== "live") {
       assert.equal(route.side, null, `${route.id} is not live, so it must not claim a side yet`);
@@ -750,8 +751,26 @@ test("scenic routes: no unverified route claims a side, and every image is on di
     }
     if (route.image) {
       assert.ok(existsSync(`public${route.image.src}`), `${route.id}: ${route.image.src} is missing`);
-      assert.equal(route.image.illustrative, true, `${route.id}: generated images must be labelled`);
+      assert.equal(route.image.illustrative, !photoCredits[route.image.src], `${route.id}: every photograph has a credit and illustrations are labelled`);
     }
+  }
+});
+
+test("scenic photography: published files have an author, source, licence and a small WebP", () => {
+  const { routes } = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
+  const credits = JSON.parse(readFileSync("data/scenic-photo-credits.json", "utf8"));
+  const stays = JSON.parse(readFileSync("data/fuji-view-stays.json", "utf8"));
+  const photos = routes.filter((route) => route.image?.illustrative === false).map((route) => route.image);
+  assert.deepEqual(photos.map((photo) => photo.src).sort(), Object.keys(credits).sort());
+  assert.ok(credits[stays.page.heroImage.src], "the lake photograph also has a credit on the stays page");
+  for (const photo of photos) {
+    const { title, author, source, license, licenseUrl, caption } = credits[photo.src];
+    assert.ok(title && author && caption && photo.alt);
+    assert.match(source, /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+    assert.match(license, /^CC(?:0| BY(?:-SA)?) \d\.\d$/);
+    assert.match(licenseUrl, /^https:\/\/creativecommons\.org\/(?:licenses\/by(?:-sa)?|publicdomain\/zero)\//);
+    assert.match(photo.src, /\.webp$/);
+    assert.ok(statSync(`public${photo.src}`).size <= 300_000);
   }
 });
 

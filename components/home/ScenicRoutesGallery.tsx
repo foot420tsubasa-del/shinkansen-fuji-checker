@@ -7,6 +7,8 @@ import { Link } from "@/i18n/navigation";
 import catalogue from "@/data/scenic-routes.json";
 import discovery from "@/data/scenic-discovery.json";
 import { trackCtaClick } from "@/lib/analytics";
+import { PhotoCredit } from "@/components/scenic/PhotoCredit";
+import type { ScenicRoute } from "@/lib/scenic";
 
 type GalleryRoute = {
   id: string;
@@ -14,7 +16,7 @@ type GalleryRoute = {
   title: string;
   teaser?: string;
   href?: string;
-  image?: { src: string; width: number; height: number; alt: string; illustrative: boolean };
+  image?: ScenicRoute["image"];
 };
 
 /**
@@ -50,11 +52,14 @@ export function ScenicRoutesGallery() {
       </div>
       <div className="-mx-5 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 md:-mx-7 md:px-7 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-5 lg:overflow-visible lg:px-0">
         {routes.map((route) => (
-          <Link
+          <article
             key={route.id}
-            href={route.href!}
-            className="group w-[76vw] max-w-[320px] shrink-0 snap-start overflow-hidden rounded-[22px] bg-ink shadow-[0_10px_28px_rgba(11,18,32,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink lg:w-auto lg:max-w-none"
+            className="w-[76vw] max-w-[320px] shrink-0 snap-start lg:w-auto lg:max-w-none"
           >
+            <Link
+              href={route.href!}
+              className="group block overflow-hidden rounded-[22px] bg-ink shadow-[0_10px_28px_rgba(11,18,32,0.12)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink"
+            >
             <div className="relative aspect-[4/5] overflow-hidden lg:aspect-[4/3]">
               <Image
                 src={route.image!.src}
@@ -62,6 +67,7 @@ export function ScenicRoutesGallery() {
                 fill
                 sizes="(min-width: 1024px) 380px, 76vw"
                 className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                style={{ objectPosition: route.image!.position }}
               />
               <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,18,32,0)_40%,rgba(11,18,32,0.85)_100%)]" />
               {route.image!.illustrative ? (
@@ -75,7 +81,9 @@ export function ScenicRoutesGallery() {
                 </p>
               </div>
             </div>
-          </Link>
+            </Link>
+            <PhotoCredit src={route.image!.src} className="mt-2 px-1" />
+          </article>
         ))}
       </div>
       <Link

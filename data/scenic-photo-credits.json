@@ -1,0 +1,65 @@
+{
+  "/images/scenic/photos/shin-fuji.webp": {
+    "title": "View of Mount Fuji from Tokaido Shinkansen 2018-04-10.jpg",
+    "author": "jessedyck",
+    "source": "https://commons.wikimedia.org/wiki/File:View_of_Mount_Fuji_from_Tokaido_Shinkansen_2018-04-10.jpg",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "caption": "Mt. Fuji from the Tokaido Shinkansen near Shin-Fuji.",
+    "cardCaption": false
+  },
+  "/images/scenic/photos/enoden.webp": {
+    "title": "Enoden Type 10 with Shonan Sea and Mt.Fuji.jpg",
+    "author": "Kirin7739",
+    "source": "https://commons.wikimedia.org/wiki/File:Enoden_Type_10_with_Shonan_Sea_and_Mt.Fuji.jpg",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "caption": "The Enoden between Shichirigahama and Inamuragasaki, photographed from beside the tracks.",
+    "cardCaption": false
+  },
+  "/images/scenic/photos/sagano.webp": {
+    "title": "Hozukyo Station seen from Sagano Scenic Railway train 2016-08-26.jpg",
+    "author": "pang yu liu",
+    "source": "https://commons.wikimedia.org/wiki/File:Hozukyo_Station_seen_from_Sagano_Scenic_Railway_train_2016-08-26.jpg",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "caption": "Hozukyo Station and the Hozu River from a Sagano Scenic Railway train.",
+    "cardCaption": false
+  },
+  "/images/scenic/photos/kawaguchiko.webp": {
+    "title": "Kawaguchiko, Part III - Kawaguchiko6782.jpg",
+    "author": "lumoplank",
+    "source": "https://commons.wikimedia.org/wiki/File:Kawaguchiko%2C_Part_III_-_Kawaguchiko6782.jpg",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "caption": "Lake Kawaguchi near the end of the Fujikyu Line.",
+    "cardCaption": true
+  },
+  "/images/scenic/photos/tadami.webp": {
+    "title": "Tadami-Line-First-Bridge-Autumn.jpg",
+    "author": "MaedaAkihiko",
+    "source": "https://commons.wikimedia.org/wiki/File:Tadami-Line-First-Bridge-Autumn.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "caption": "The First Tadami River Bridge in Mishima, photographed from a viewpoint in 2019.",
+    "cardCaption": false
+  },
+  "/images/scenic/photos/senmo.webp": {
+    "title": "Ryuhyo norokko in Kitahama station.jpg",
+    "author": "欅 (Keyaki)",
+    "source": "https://commons.wikimedia.org/wiki/File:Ryuhyo_norokko_in_Kitahama_station.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+    "caption": "The former Ryuhyo Norokko and drift ice from Kitahama Station in 2009.",
+    "cardCaption": true
+  },
+  "/images/scenic/photos/kurobe.webp": {
+    "title": "Kurobe Gorge Railway1.jpg",
+    "author": "tsuda",
+    "source": "https://commons.wikimedia.org/wiki/File:Kurobe_Gorge_Railway1.jpg",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "caption": "The Kurobe Gorge Railway crossing the Shin-Yamabiko Bridge, photographed from above.",
+    "cardCaption": false
+  }
+}

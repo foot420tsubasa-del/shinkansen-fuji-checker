@@ -7,9 +7,12 @@
     "h1": "Wake up to Mt. Fuji.",
     "sub": "Handpicked stays with unforgettable mountain views.",
     "heroImage": {
-      "src": "/images/scenic/scenic-fujikyu-fuji-tall.webp",
-      "alt": "Mt. Fuji rising above a lake with autumn leaves",
-      "illustrative": true
+      "src": "/images/scenic/photos/kawaguchiko.webp",
+      "width": 1600,
+      "height": 1125,
+      "alt": "Mount Fuji and a low bridge above Lake Kawaguchi, with the mountain reflected in the water",
+      "illustrative": false,
+      "position": "50% 22%"
     },
     "hotelsTitle": "Three stays with a view",
     "viewTitle": "About the view",
