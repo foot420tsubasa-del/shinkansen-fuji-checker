@@ -522,7 +522,12 @@
       "details": "Página completa da linha",
       "comingSoon": "Em breve",
       "modelOnly": "só modelo de terreno",
-      "reversed": "Após inverter em {station} · como você embarcou: {side}"
+      "reversed": "Após inverter em {station} · como você embarcou: {side}",
+      "reasonNoView": "{from} e {to} estão na linha {line}, mas não há nenhuma vista mapeada por nós entre elas.",
+      "reasonDifferentLines": "Esta viagem exige troca de trem. Mapeamos uma linha por vez — estas linhas fazem parte da sua viagem:",
+      "departureShifted": "Você mudou a partida: os horários seguem o padrão do {train} a partir desse horário. São estimativas; outros trens param de forma diferente.",
+      "noServiceOnDate": "Pelos nossos dados, a linha não opera neste mês. Confira com a operadora antes de viajar.",
+      "serviceNote": "Aviso de serviço"
     }
   },
   "guide": {

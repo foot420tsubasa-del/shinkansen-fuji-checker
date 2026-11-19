@@ -522,7 +522,12 @@
       "details": "Full route page",
       "comingSoon": "Coming soon",
       "modelOnly": "terrain model only",
-      "reversed": "After reversing at {station} · as you boarded: {side}"
+      "reversed": "After reversing at {station} · as you boarded: {side}",
+      "reasonNoView": "{from} and {to} are both on the {line}, but no view we have mapped lies between them.",
+      "reasonDifferentLines": "This trip needs a change of train. We map one line at a time — these lines are on your trip:",
+      "departureShifted": "You changed the departure: times follow the {train} running pattern from that time. They are estimates — other trains stop differently.",
+      "noServiceOnDate": "Our route data shows no service in this month. Check the operator before you travel.",
+      "serviceNote": "Service note"
     }
   },
   "guide": {

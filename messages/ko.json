@@ -522,7 +522,12 @@
       "details": "노선 상세 페이지",
       "comingSoon": "곧 공개",
       "modelOnly": "지형 모델만",
-      "reversed": "{station}에서 방향 전환 후 · 탑승 기준: {side}"
+      "reversed": "{station}에서 방향 전환 후 · 탑승 기준: {side}",
+      "reasonNoView": "{from}와 {to}는 모두 {line}에 있지만, 두 역 사이에는 저희가 지도로 정리한 풍경이 없습니다.",
+      "reasonDifferentLines": "이 여정은 환승이 필요합니다. 저희는 노선을 하나씩 정리합니다 — 여정에 있는 노선은 다음과 같습니다:",
+      "departureShifted": "출발 시각을 바꾸셨습니다: 시각은 그 시점부터 {train}의 운행 패턴을 따릅니다. 추정치이며, 다른 열차는 정차 방식이 다릅니다.",
+      "noServiceOnDate": "저희 데이터에 따르면 이번 달에는 운행하지 않습니다. 여행 전에 운영사에서 확인하세요.",
+      "serviceNote": "운행 안내"
     }
   },
   "guide": {

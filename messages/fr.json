@@ -522,7 +522,12 @@
       "details": "Page complète de la ligne",
       "comingSoon": "Bientôt",
       "modelOnly": "modèle de terrain seul",
-      "reversed": "Après rebroussement à {station} · par rapport à la montée : {side}"
+      "reversed": "Après rebroussement à {station} · par rapport à la montée : {side}",
+      "reasonNoView": "{from} et {to} sont tous deux sur la ligne {line}, mais aucune vue que nous avons cartographiée ne se trouve entre les deux.",
+      "reasonDifferentLines": "Ce trajet demande un changement de train. Nous cartographions une ligne à la fois — voici les lignes de votre trajet :",
+      "departureShifted": "Vous avez changé le départ : les horaires suivent le rythme du {train} à partir de cette heure. Ce sont des estimations ; d’autres trains s’arrêtent différemment.",
+      "noServiceOnDate": "Selon nos données, la ligne ne circule pas ce mois-ci. Vérifiez auprès de l’opérateur avant de partir.",
+      "serviceNote": "Information de service"
     }
   },
   "guide": {

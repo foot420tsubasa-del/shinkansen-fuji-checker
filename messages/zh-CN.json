@@ -522,7 +522,12 @@
       "details": "路线完整页面",
       "comingSoon": "即将推出",
       "modelOnly": "仅地形模型",
-      "reversed": "在{station}折返后 · 按上车时方向：{side}"
+      "reversed": "在{station}折返后 · 按上车时方向：{side}",
+      "reasonNoView": "{from} 和 {to} 都在 {line} 上，但两站之间没有我们标注的风景。",
+      "reasonDifferentLines": "这段行程需要换乘。我们按线路逐条标注——以下线路在您的行程上：",
+      "departureShifted": "您修改了出发时间：时间按 {train} 的运行模式从该时刻推算，仅为估计——其他列车的停站不同。",
+      "noServiceOnDate": "根据我们的数据，该线路本月不运行。出行前请向运营方确认。",
+      "serviceNote": "运行提示"
     }
   },
   "guide": {

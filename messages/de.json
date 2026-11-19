@@ -522,7 +522,12 @@
       "details": "Ganze Streckenseite",
       "comingSoon": "Demnächst",
       "modelOnly": "nur Geländemodell",
-      "reversed": "Nach Richtungswechsel in {station} · vom Einstieg aus: {side}"
+      "reversed": "Nach Richtungswechsel in {station} · vom Einstieg aus: {side}",
+      "reasonNoView": "{from} und {to} liegen beide an der Linie {line}, aber dazwischen liegt keine von uns kartierte Aussicht.",
+      "reasonDifferentLines": "Für diese Fahrt müssen Sie umsteigen. Wir kartieren jeweils eine Linie – diese Linien liegen auf Ihrer Strecke:",
+      "departureShifted": "Sie haben die Abfahrt geändert: Die Zeiten folgen dem Fahrmuster des {train} ab dieser Uhrzeit. Es sind Schätzungen – andere Züge halten anders.",
+      "noServiceOnDate": "Laut unseren Daten verkehrt die Linie in diesem Monat nicht. Prüfen Sie vor der Reise beim Betreiber.",
+      "serviceNote": "Betriebshinweis"
     }
   },
   "guide": {

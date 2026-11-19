@@ -19,8 +19,11 @@ import {
   type Direction,
   type ViewTag,
   type ViewshedPoint,
+  isModelOnlyBasis,
 } from "@/lib/scenic";
 import { RouteViewMap } from "./RouteViewMap";
+import discovery from "@/data/scenic-discovery.json";
+import overview from "@/data/scenic-overview.json";
 import { ScenicTripSummary } from "./ScenicTripSummary";
 
 type MapPoint = ViewshedPoint & { lat: number; lng: number };
@@ -79,6 +82,13 @@ export function RouteTimeline({
   const [date, setDate] = useState(tokyoDate);
   const train = trains.find((x) => x.id === trainId) ?? trains[0] ?? null;
   const [departure, setDeparture] = useState(() => referenceDeparture(route, train, direction, from));
+  // The minutes come from one reference train. A different departure only
+  // shifts that pattern, and the date is not checked against a timetable —
+  // so say so, and flag months our data marks as having no service.
+  const shifted = train ? departure !== referenceDeparture(route, train, direction, from) : false;
+  const noServiceMonths = (discovery.routes as Record<string, { noServiceMonths?: number[] }>)[routeId]?.noServiceMonths ?? [];
+  const noServiceOnDate = noServiceMonths.includes(Number(date.slice(5, 7)));
+  const serviceNotice = overview.routes.find((r) => r.id === routeId)?.notice;
 
   useEffect(() => {
     let live = true;
@@ -168,6 +178,12 @@ export function RouteTimeline({
             />
           </label>
         </div>
+        {shifted && train ? <p className="mt-2 text-xs leading-5 text-slate-600">{t("departureShifted", { train: train[direction].train })}</p> : null}
+        {noServiceOnDate ? (
+          <p role="status" className="mt-2 rounded-xl bg-amber-50 px-3 py-2 text-xs font-semibold leading-5 text-amber-950">{t("noServiceOnDate")}</p>
+        ) : serviceNotice ? (
+          <p className="mt-2 rounded-xl bg-slate-50 px-3 py-2 text-xs leading-5 text-slate-700"><b>{t("serviceNote")}:</b> {serviceNotice}</p>
+        ) : null}
 
         <ol className="mt-5 grid gap-2">
           {mapUnavailable && !shown.length ? (
@@ -206,7 +222,7 @@ export function RouteTimeline({
                       </span>
                       <span className="block text-[11px] leading-5 text-slate-500">
                         {t("season")}: {it.view.season}
-                        {/only/.test(it.view.basis) ? ` · ${t("modelOnly")}` : ""}
+                        {isModelOnlyBasis(it.view.basis) ? ` · ${t("modelOnly")}` : ""}
                       </span>
                       {it.reversedAt.length ? (
                         <span className="mt-1 block rounded-lg bg-amber-50 px-2 py-1 text-[11px] font-semibold leading-4 text-amber-900">

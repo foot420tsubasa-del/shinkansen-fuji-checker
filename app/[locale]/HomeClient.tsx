@@ -15,12 +15,12 @@ import { ScenicRoutesGallery } from "@/components/home/ScenicRoutesGallery";
 import { RouteSearch } from "@/components/home/RouteSearch";
 import { RouteTimeline } from "@/components/scenic/RouteTimeline";
 import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
-import { mappedTokaidoLeg, matchRoute, resolveStation, timeline, type RouteMatch } from "@/lib/scenic";
+import { mappedTokaidoLeg, matchRoute, resolveStation, timeline, unsupportedReason, type RouteMatch } from "@/lib/scenic";
 import { ScenicTripSummary } from "@/components/scenic/ScenicTripSummary";
 import { ORIGINS_BY_DIRECTION, type OriginId } from "@/lib/fuji-window";
 import { SearchTicketCard } from "@/components/scenic/SearchTicketCard";
 import type { HeroSeason } from "@/lib/hero-images";
-import { trackAffiliateClick, trackCtaClick, trackEvent, trackSeatCheckComplete } from "@/lib/analytics";
+import { trackAffiliateClick, trackCtaClick, trackEvent, trackRouteSearch, trackSeatCheckComplete } from "@/lib/analytics";
 import {
   type DirectionId,
   type FujiVisibility,
@@ -278,9 +278,20 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
     });
   };
 
-  const runSearch = (from: string, to: string) => {
+  const runSearch = (from: string, to: string, source: "form" | "link" = "form") => {
     const match = matchRoute(from, to);
     setSubmittedTrip({ from, to });
+    const known = (name: string) => (resolveStation(name) === name ? name : "unresolved");
+    const reason = match.kind === "live" ? undefined : known(from) === "unresolved" || known(to) === "unresolved" ? "unresolved" : unsupportedReason(from, to).kind;
+    trackRouteSearch({
+      result: match.kind === "live" ? "live" : "unsupported",
+      route_id: match.kind === "live" ? match.route.id : undefined,
+      reason,
+      from_station: known(from),
+      to_station: known(to),
+      source,
+      locale,
+    });
     trackCtaClick({
       placement: "route_search",
       href: `/?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`,
@@ -324,7 +335,7 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
       const from = params.get("from");
       const to = params.get("to");
       // Same names the search box accepts: "Arashiyama", "Hakone" and the like.
-      if (from && to) runSearch(resolveStation(from) ?? from, resolveStation(to) ?? to);
+      if (from && to) runSearch(resolveStation(from) ?? from, resolveStation(to) ?? to, "link");
     });
     return () => cancelAnimationFrame(frame);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- once, on arrival
@@ -333,6 +344,15 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
   const fujiMatch = routeMatch?.kind === "live" && routeMatch.route.id === "tokaido-fuji" ? routeMatch : null;
   const fujiView = fujiMatch ? timeline(fujiMatch.route, fujiMatch.direction, fujiMatch.from, fujiMatch.to, []).items[0] : undefined;
   const partialLeg = routeMatch?.kind === "unsupported" ? mappedTokaidoLeg(routeMatch.from, routeMatch.to) : null;
+  // Why there is no answer, from the mapped data only (lib/scenic unsupportedReason).
+  const missReason = routeMatch?.kind === "unsupported" ? unsupportedReason(routeMatch.from, routeMatch.to) : null;
+  const missLines =
+    routeMatch?.kind === "unsupported"
+      ? [
+          ...(missReason?.kind === "no-view-between" ? [missReason.route] : missReason?.kind === "different-lines" ? missReason.routes : []),
+          ...routeMatch.nearbyLive,
+        ].filter((r, i, all) => all.findIndex((x) => x.id === r.id) === i)
+      : [];
   const omioHref = OMIO_SHINKANSEN_URL;
 
   const bookingCard = (
@@ -519,7 +539,13 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
               <h2 className="text-xl font-extrabold tracking-[-0.02em] text-ink md:text-2xl">
                 {t("search.unsupportedTitle", { from: routeMatch.from, to: routeMatch.to })}
               </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("search.unsupportedBody")}</p>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">
+                {missReason?.kind === "no-view-between"
+                  ? t("search.reasonNoView", { from: routeMatch.from, to: routeMatch.to, line: missReason.route.line })
+                  : missReason?.kind === "different-lines"
+                    ? t("search.reasonDifferentLines")
+                    : t("search.unsupportedBody")}
+              </p>
               {partialLeg ? (
                 <Link href={`/?${new URLSearchParams({ from: partialLeg[0], to: partialLeg[1] })}`} onClick={(event) => { if (!event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) { event.preventDefault(); runSearch(...partialLeg); } }} className="mt-4 flex w-fit items-center gap-2 rounded-xl border border-slate-300 px-4 py-3 text-sm font-bold text-ink">
                   {t("search.partialLeg")}: {partialLeg.join(" → ")} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
@@ -532,7 +558,7 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 {/* A line the trip leads to, by name only: no views, sides,
                     times or pictures from another route on an unmapped trip. */}
-                {routeMatch.nearbyLive.map((r) => (
+                {missLines.map((r) => (
                   <Link
                     key={r.id}
                     href={r.href ?? "/"}

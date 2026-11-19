@@ -8,10 +8,11 @@ import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { RouteTimeline } from "@/components/scenic/RouteTimeline";
 import { ScenicPassCard } from "@/components/scenic/ScenicPassCard";
-import { LIVE_ROUTES, reversalsBefore, seatedSide, sideFor, type ScenicRoute } from "@/lib/scenic";
+import { LIVE_ROUTES, isModelOnlyBasis, reversalsBefore, seatedSide, sideFor, type ScenicRoute } from "@/lib/scenic";
 import { AFFILIATE_LINKS, JR_PASS_URL, getAffUrl } from "@/src/affiliateLinks";
 import { TicketGuide, type ResolvedTicketLink } from "@/components/scenic/TicketGuide";
 import { ScenicStayBlock } from "@/components/scenic/ScenicStayBlock";
+import { ScenicRouteViewTracker } from "@/components/scenic/ScenicTracking";
 import type { AffiliateProvider } from "@/lib/affiliate/links";
 import { getScenicStay } from "@/lib/scenic-stays";
 import discovery from "@/data/scenic-discovery.json";
@@ -54,10 +55,6 @@ function seatingFaq(route: ScenicRoute): { q: string; a: string }[] {
   return out;
 }
 
-/** A side is "published" only where the basis says it matched a published source, or the seat was verified. */
-function sideFromModelOnly(basis: string) {
-  return !/match|seat verified/i.test(basis);
-}
 
 /*
  * One template for every mapped route (since 2026-11-15): the page reads only
@@ -117,7 +114,7 @@ export default async function ScenicRoutePage({ params }: Props) {
           : v.seat
             ? ` — Seat ${v.seat.split(" ")[0]} in standard cars`
             : "";
-        const basis = sideFromModelOnly(v.basis) ? " This comes from our terrain model; we found no published source for the side." : "";
+        const basis = isModelOnlyBasis(v.basis) ? " This comes from our terrain model; we found no published source for the side." : "";
         const name = v.name.replace(/^The /, "the ");
         if (reverses) {
           const forward = sideFor(v, "forward");
@@ -156,6 +153,7 @@ export default async function ScenicRoutePage({ params }: Props) {
     <main className="page-shell min-h-screen text-ink">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
       <SiteHeader />
+      <ScenicRouteViewTracker routeId={route.id} locale={locale} />
       <article className="mx-auto max-w-[1000px] px-5 pb-16 pt-8 md:pt-12">
         <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">
           <Link href="/scenic" className="underline-offset-4 hover:underline">Scenic routes</Link> · {route.line}

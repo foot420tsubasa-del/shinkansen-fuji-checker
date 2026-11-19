@@ -209,13 +209,51 @@ export function stationOptions(): StationOption[] {
 
 const norm = (s: string) => s.toLowerCase().replace(/[‐-―−-]/g, " ").replace(/\s+/g, " ").trim();
 
+/**
+ * A spelling-insensitive key: accents and macrons dropped (Kyōto), "station" /
+ * "sta." / "eki" dropped, spaces and hyphens removed (Shinosaka), and the
+ * long-vowel spellings folded (Kyouto, Tookyoo, Toukyou → kyoto / tokyo).
+ */
+export function stationKey(input: string): string {
+  return input
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\b(station|sta\.?|eki)\b/g, " ")
+    .replace(/[^a-z0-9\u3040-\u30ff\u4e00-\u9fff]/g, "")
+    .replace(/ou/g, "o")
+    .replace(/oo/g, "o")
+    .replace(/uu/g, "u");
+}
+
+function editDistance(a: string, b: string, max: number): number {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    for (let j = 1; j <= b.length; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    prev = cur;
+  }
+  return prev[b.length];
+}
+
+/** True where a side rests on the terrain model alone: no published source matched it, and no seat was verified. */
+export function isModelOnlyBasis(basis: string): boolean {
+  return !/match|seat verified/i.test(basis);
+}
+
 export function resolveStation(input: string): string | null {
   const q = norm(input);
   if (!q) return null;
   if (ALIASES[q]) return ALIASES[q];
   const options = stationOptions();
   const exact = options.find((o) => norm(o.name) === q || (o.ja && o.ja === input.trim()));
-  return exact ? exact.name : null;
+  if (exact) return exact.name;
+  const key = stationKey(input);
+  if (!key) return null;
+  for (const [alias, name] of Object.entries(ALIASES)) if (stationKey(alias) === key) return name;
+  const byKey = options.filter((o) => stationKey(o.name) === key);
+  return byKey.length === 1 ? byKey[0].name : null;
 }
 
 export function suggestStations(input: string, limit = 6): StationOption[] {
@@ -230,7 +268,44 @@ export function suggestStations(input: string, limit = 6): StationOption[] {
     })
     .filter((x) => x.score < 9)
     .sort((a, b) => a.score - b.score || a.o.name.localeCompare(b.o.name));
-  return scored.slice(0, limit).map((x) => x.o);
+  if (scored.length) return scored.slice(0, limit).map((x) => x.o);
+  const key = stationKey(input);
+  if (key.length < 3) return [];
+  const resolved = resolveStation(input);
+  if (resolved) return options.filter((o) => o.name === resolved);
+  const max = key.length <= 5 ? 1 : 2;
+  return options
+    .map((o) => ({ o, d: editDistance(key, stationKey(o.name), max) }))
+    .filter((x) => x.d <= max)
+    .sort((a, b) => a.d - b.d || Number(!b.o.routes.length) - Number(!a.o.routes.length) || a.o.name.localeCompare(b.o.name))
+    .slice(0, limit)
+    .map((x) => x.o);
+}
+
+/**
+ * Why a trip has no answer, from the mapped data only:
+ * - "no-view-between": both stations are on one mapped line, but no view we
+ *   mapped lies between them (Nagoya → Kyoto).
+ * - "different-lines": each station is on a mapped line, but not the same one
+ *   — the trip needs a change of train, and we map one line at a time.
+ * - "unmapped": at least one station is not on any mapped line.
+ */
+export type UnsupportedReason =
+  | { kind: "no-view-between"; route: ScenicRoute }
+  | { kind: "different-lines"; routes: ScenicRoute[] }
+  | { kind: "unmapped" };
+
+export function unsupportedReason(from: string, to: string): UnsupportedReason {
+  const shared = LIVE_ROUTES.find((r) => {
+    const a = position(r, from);
+    const b = position(r, to);
+    return a !== null && b !== null && a !== b;
+  });
+  if (shared) return { kind: "no-view-between", route: shared };
+  const onFrom = LIVE_ROUTES.filter((r) => position(r, from) !== null);
+  const onTo = LIVE_ROUTES.filter((r) => position(r, to) !== null);
+  if (onFrom.length && onTo.length) return { kind: "different-lines", routes: [...new Set([...onTo, ...onFrom])].slice(0, 3) }; // the line at the destination first
+  return { kind: "unmapped" };
 }
 
 export type RouteMatch =

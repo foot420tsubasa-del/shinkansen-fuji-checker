@@ -4,6 +4,7 @@ import { useId, useState, type KeyboardEvent } from "react";
 import { ArrowLeftRight, ArrowRight, MapPin } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { resolveStation, suggestStations } from "@/lib/scenic";
+import { trackRouteSearch } from "@/lib/analytics";
 
 const POPULAR = [
   ["Tokyo", "Kyoto"],
@@ -126,8 +127,14 @@ export function RouteSearch({
   const submit = (a = from, b = to) => {
     const resolvedFrom = resolveStation(a);
     const resolvedTo = resolveStation(b);
-    if (!resolvedFrom || !resolvedTo) return setError("station");
-    if (resolvedFrom === resolvedTo) return setError("same");
+    if (!resolvedFrom || !resolvedTo) {
+      trackRouteSearch({ result: "invalid", reason: "unresolved", from_station: resolvedFrom ?? "unresolved", to_station: resolvedTo ?? "unresolved", source: "form" });
+      return setError("station");
+    }
+    if (resolvedFrom === resolvedTo) {
+      trackRouteSearch({ result: "invalid", reason: "same_station", from_station: resolvedFrom, to_station: resolvedTo, source: "form" });
+      return setError("same");
+    }
     setError(null);
     onSubmit(resolvedFrom, resolvedTo);
   };
