@@ -377,5 +377,14 @@
   "anyMonthLabel": "Any month",
   "anyMonthHelp": "Good in every season:",
   "mapFilteredNote": "Routes matching your filters are in red; the others stay on the map in grey.",
-  "monthFilteredNote": "Showing the months for the routes that match your filters."
+  "monthFilteredNote": "Showing the months for the routes that match your filters.",
+  "homeFeatured": [
+    "tokaido-fuji",
+    "fujikyu-fuji",
+    "enoden-coast",
+    "sagano-gorge",
+    "hokuriku-alps",
+    "kurobe-gorge"
+  ],
+  "_homeFeatured": "Six routes the homepage shows (2026-11-20 design pass): the two Mt. Fuji answers, a coast, a gorge, the Alps and an open trolley. Every route stays on /scenic."
 }

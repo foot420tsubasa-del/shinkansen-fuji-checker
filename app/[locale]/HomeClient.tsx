@@ -644,12 +644,48 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
             </div>
           </section>
         ) : (
-          <section className="grid grid-cols-1 gap-5 pb-4 pt-8 lg:grid-cols-2">
-            {bookingCard}
+          // Before any search (2026-11-20 design pass): the answer most visitors
+          // came for, with the seat already marked, and booking as a quiet
+          // second step instead of a full-width button under the hero.
+          <section className="grid grid-cols-1 items-start gap-5 pb-4 pt-8 lg:grid-cols-2" aria-labelledby="home-fuji-answer">
+            <div className="flex min-w-0 flex-col rounded-[24px] border border-slate-200 bg-white p-6 shadow-[0_12px_32px_rgba(11,18,32,0.05)] md:p-7">
+              <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">{t("quickAnswer.eyebrow")}</p>
+              <h2 id="home-fuji-answer" className="mt-2 text-2xl font-extrabold tracking-[-0.02em] text-ink md:text-[28px]">{t("quickAnswer.title")}</h2>
+              <ul className="mt-4 grid gap-3 text-[15px] leading-6 text-slate-700">
+                <li className="flex gap-3"><span className="mt-0.5 shrink-0 self-start whitespace-nowrap rounded-full bg-[#d94a32] px-2.5 py-0.5 text-[11.5px] font-bold uppercase text-white">{t("quickAnswer.right")}</span><span>{t("quickAnswer.westbound")}</span></li>
+                <li className="flex gap-3"><span className="mt-0.5 shrink-0 self-start whitespace-nowrap rounded-full bg-[#2f6fd6] px-2.5 py-0.5 text-[11.5px] font-bold uppercase text-white">{t("quickAnswer.left")}</span><span>{t("quickAnswer.eastbound")}</span></li>
+              </ul>
+              <Link href="/guide" onClick={() => trackCtaClick({ placement: "home_quick_answer", href: "/guide", label: "guide", category: "seat_checker", locale })} className="mt-4 inline-flex min-h-11 w-fit items-center gap-1.5 text-[15px] font-bold text-ink underline underline-offset-4 hover:text-fuji">
+                {t("quickAnswer.guide")} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <div className="mt-6 border-t border-slate-100 pt-5">
+                <a
+                  href={ticketHref}
+                  target="_blank"
+                  rel={AFFILIATE_REL}
+                  onClick={() => trackAffiliateClick({
+                    category: "train",
+                    provider: "klook",
+                    placement: "home_seat_result",
+                    href: ticketHref,
+                    label: "Book Shinkansen ticket",
+                    link_id: ticket?.linkId ?? "shinkansenTicket",
+                    product: "shinkansen_ticket",
+                    adid: ticket?.adid ?? "1265303",
+                    locale,
+                  })}
+                  className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-ink bg-white px-5 py-2 text-center text-[15px] font-bold leading-tight text-ink transition-colors hover:bg-ink hover:text-white"
+                >
+                  <Train className="h-4 w-4" aria-hidden="true" />
+                  {t("quickAnswer.book")}
+                </a>
+                <p className="mt-2 text-center text-[11px] leading-4 text-slate-500">{t("hero.affiliateNote")}</p>
+              </div>
+            </div>
             <SeatMapCard
               recommendation={recommendation}
               directionLabel={currentDirectionLabel}
-              highlighted={false}
+              highlighted
             />
           </section>
         )}
@@ -670,18 +706,9 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
             checker above. */}
 
         <ScenicRoutesGallery />
-        {locale === "en" ? (
-          // One quiet pointer to the Fuji-view stays; the train-window search stays the main thing here.
-          <p className="mt-4 text-[15px] text-slate-600">
-            Want to wake up to Mt. Fuji?{" "}
-            <Link href="/stays/mt-fuji-view" onClick={() => trackCtaClick({ placement: "home_fuji_view_stays", href: "/stays/mt-fuji-view", label: "fuji-view-stays", category: "hotel", locale })} className="font-bold text-ink underline underline-offset-4 hover:text-fuji">
-              See hotels with Mt. Fuji views
-            </Link>
-          </p>
-        ) : null}
 
-        <section className="pt-12">
-          <h2 className="text-2xl font-extrabold tracking-[-0.02em] text-ink md:text-[28px]">More seat guides</h2>
+        <section className="pt-14 md:pt-16" aria-labelledby="home-seat-guides">
+          <h2 id="home-seat-guides" className="text-2xl font-extrabold tracking-[-0.02em] text-ink md:text-[32px]">{t("seatGuidesTitle")}</h2>
           <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {SEAT_GUIDES.map((guide) => (
               <Link
@@ -726,83 +753,40 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
           </div>
         </section>
 
-        <section className="pt-12">
-          <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-[0_12px_32px_rgba(11,18,32,0.05)] md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)]">
-            <div className="p-6 md:p-8">
-              <p className="text-xs font-bold uppercase tracking-[0.1em] text-emerald-700">Tokyo hotel base</p>
-              <h2 className="mt-2 text-2xl font-extrabold tracking-[-0.02em] text-ink">{homeHotelCopy.title}</h2>
-              <p className="mt-3 max-w-xl text-[15px] leading-7 text-slate-600">{homeHotelCopy.body}</p>
-              <div className="mt-5 flex flex-wrap items-center gap-2">
-                {homeHotelCopy.links.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() =>
-                      trackCtaClick({
-                        placement: "home_hotel_base_click",
-                        href: link.href,
-                        label: link.label,
-                        category: "stay",
-                        locale,
-                      })
-                    }
-                    className={
-                      link.variant === "secondary"
-                        ? "inline-flex h-11 items-center justify-center rounded-full border border-slate-300 bg-white px-5 text-sm font-semibold text-ink transition-colors hover:bg-slate-50"
-                        : "inline-flex h-11 items-center justify-center gap-2 rounded-full bg-ink px-5 text-sm font-bold text-white transition-colors hover:bg-[#1c2740]"
-                    }
-                  >
-                    {link.label}
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                ))}
-              </div>
-              <p className="mt-4 text-xs leading-5 text-slate-500">{homeHotelCopy.imageNote}</p>
-            </div>
-            <div className="relative aspect-[16/10] md:aspect-auto md:min-h-full">
-              <Image
-                src="/images/home/tokyo-hotel-base.webp"
-                alt="Luggage near a Tokyo station hotel area"
-                fill
-                sizes="(min-width: 768px) 520px, 100vw"
-                className="object-cover"
-              />
-            </div>
+        {/* Plan the rest of the trip (2026-11-20): the Tokyo hotel base, the
+            Mt. Fuji-view stays and Station Practice as one row of equal cards,
+            where they were three differently styled sections. */}
+        <section className="pb-16 pt-14 md:pt-16" aria-labelledby="home-plan-rest">
+          <h2 id="home-plan-rest" className="text-2xl font-extrabold tracking-[-0.02em] text-ink md:text-[32px]">{t("planRest.title")}</h2>
+          <p className="mt-2 max-w-2xl text-[15px] leading-6 text-slate-600">{t("planRest.sub")}</p>
+          <div className="mt-6 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              { href: homeHotelCopy.links[0]?.href ?? "/areas-to-stay", eyebrow: t("planRest.stayEyebrow"), title: homeHotelCopy.title, body: t("planRest.stayBody"), cta: homeHotelCopy.links[0]?.label ?? homeHotelCopy.title, image: "/images/home/tokyo-hotel-base.webp", alt: "Luggage near a Tokyo station hotel area", placement: "home_hotel_base_click", category: "stay" },
+              ...(locale === "en"
+                ? [{ href: "/stays/mt-fuji-view", eyebrow: "Stays", title: "Wake up to Mt. Fuji", body: "Three lakeside stays at Kawaguchiko with Mt. Fuji views, and how to get there by train.", cta: "See Mt. Fuji-view stays", image: "/images/scenic/scenic-fujikyu-fuji-tall.webp", alt: "Mt. Fuji above Lake Kawaguchi in autumn", placement: "home_fuji_view_stays", category: "hotel" }]
+                : []),
+              { href: "/station-practice", eyebrow: t("supportTools.featuredLabel"), title: t("supportTools.stationPracticeTitle"), body: t("supportTools.stationPracticeDesc"), cta: t("supportTools.stationPracticeCta"), image: "/images/station-practice/hero-station-bg.webp", alt: "A bright Japanese station concourse", placement: "home_more_tools_featured", category: "station_practice" },
+            ].map((card) => (
+              <Link
+                key={card.href}
+                href={card.href}
+                onClick={() => trackCtaClick({ placement: card.placement, href: card.href, label: card.cta, category: card.category, locale })}
+                className="group flex flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_8px_24px_rgba(11,18,32,0.05)] transition-shadow hover:shadow-[0_14px_34px_rgba(11,18,32,0.1)]"
+              >
+                <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
+                  <Image src={card.image} alt={card.alt} fill sizes="(min-width: 1024px) 380px, (min-width: 768px) 50vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
+                </div>
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="text-xs font-bold uppercase tracking-[0.1em] text-slate-500">{card.eyebrow}</p>
+                  <p className="mt-1.5 text-lg font-extrabold tracking-[-0.01em] text-ink">{card.title}</p>
+                  <p className="mt-1.5 text-[15px] leading-6 text-slate-600">{card.body}</p>
+                  <span className="mt-auto inline-flex items-center gap-1.5 pt-4 text-[15px] font-bold text-ink">
+                    {card.cta} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
-        </section>
-
-        <section className="pb-14 pt-12">
-          <h2 className="text-2xl font-extrabold tracking-[-0.02em] text-ink md:text-[28px]">{t("supportTools.eyebrow")}</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{t("supportTools.description")}</p>
-          <Link
-            href="/station-practice"
-            onClick={() =>
-              trackCtaClick({
-                placement: "home_more_tools_featured",
-                href: "/station-practice",
-                label: t("supportTools.stationPracticeCta"),
-                category: "station_practice",
-                locale,
-              })
-            }
-            className="mt-5 flex max-w-[520px] items-center justify-between gap-4 rounded-[20px] border border-slate-200 bg-white p-5 shadow-[0_8px_24px_rgba(11,18,32,0.05)] transition-shadow hover:shadow-[0_14px_34px_rgba(11,18,32,0.1)]"
-          >
-            <span className="min-w-0">
-              <span className="text-xs font-bold uppercase tracking-[0.1em] text-blue-700">
-                {t("supportTools.featuredLabel")}
-              </span>
-              <span className="mt-1 block text-base font-bold text-ink">
-                {t("supportTools.stationPracticeTitle")}
-              </span>
-              <span className="mt-1 block text-sm leading-5 text-slate-600">
-                {t("supportTools.stationPracticeDesc")}
-              </span>
-            </span>
-            <span className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-full bg-ink px-4 text-xs font-bold text-white">
-              {t("supportTools.stationPracticeCta")}
-              <ArrowRight className="h-3.5 w-3.5" />
-            </span>
-          </Link>
         </section>
       </div>
 

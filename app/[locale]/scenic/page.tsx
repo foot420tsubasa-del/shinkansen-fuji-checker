@@ -75,33 +75,33 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
     },
   ];
 
+  // Card order (2026-11-20 design pass): the view and route, what you see,
+  // where it runs, the best season, then one link. The long scenery text and
+  // service notices are shortened here; the route page carries them in full.
   const routeCard = (route: (typeof visibleRoutes)[number]) => (
-            <article key={route.id} className="flex flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(30,41,59,0.06)]">
-              <Link href={`/scenic/${route.slug}`} className="group flex min-w-0 flex-1 flex-col">
-                <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
-                  <Image src={route.image.src} alt={route.image.alt} fill sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="object-cover transition duration-300 group-hover:scale-[1.02]" />
-                  {route.image.illustrative ? <span className="absolute bottom-2 right-3 rounded bg-black/45 px-1.5 py-0.5 text-[10px] font-medium text-white">{hub.illustrativeLabel}</span> : null}
-                </div>
-                <div className="flex flex-1 flex-col p-5">
-                  <p className="text-xs font-bold uppercase tracking-[0.08em] text-fuji">{route.line}</p>
-                  <h2 className="mt-2 text-xl font-extrabold leading-tight tracking-[-0.02em] group-hover:text-fuji">{route.title}</h2>
-                  <p className="mt-1 text-xs font-bold text-slate-600">{route.regionNames.join(" · ")}</p>
-                  <p className="mt-1 text-xs text-slate-600">{route.region}</p>
-                  <p className="mt-4 text-[15px] font-semibold leading-6 text-ink">{route.teaser}</p>
-                  {route.seasonHighlight ? <p className="mt-2 inline-flex w-fit rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800">{route.seasonHighlight}</p> : null}
-                  <div className="mt-4 border-t border-slate-100 pt-4 text-sm leading-6 text-slate-600">
-                    <p><span className="font-bold text-ink">{discovery.viewingLabel}</span> {route.scenery}</p>
-                    {route.notice ? <p className="mt-2 rounded-xl bg-amber-50 px-3 py-2 text-[13px] leading-5 text-amber-950"><b>{discovery.serviceLabel}</b> {route.notice}</p> : null}
-                  </div>
-                  <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-bold text-fuji">{hub.cardLinkLabel} <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
-                </div>
-              </Link>
-              {route.id === "fujikyu-fuji" ? (
-                <Link href="/stays/mt-fuji-view" className="border-t border-slate-100 px-5 py-3 text-sm font-bold text-ink underline-offset-4 hover:text-fuji hover:underline">
-                  Stay with a Mt. Fuji view →
-                </Link>
-              ) : null}
-            </article>
+    <article key={route.id} className="flex flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(30,41,59,0.05)] transition-shadow hover:shadow-[0_14px_36px_rgba(30,41,59,0.1)]">
+      <Link href={`/scenic/${route.slug}`} className="group flex min-w-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+        <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+          <Image src={route.image.src} alt={route.image.alt} fill sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="object-cover transition duration-500 group-hover:scale-[1.03]" />
+          {route.image.illustrative ? <span className="absolute bottom-2 right-3 rounded bg-black/45 px-1.5 py-0.5 text-[10px] font-medium text-white">{hub.illustrativeLabel}</span> : null}
+        </div>
+        <div className="flex flex-1 flex-col p-5">
+          <p className="text-xs font-bold uppercase tracking-[0.08em] text-slate-500">{route.line}</p>
+          <h2 className="mt-1.5 text-[19px] font-extrabold leading-snug tracking-[-0.02em] text-ink group-hover:text-fuji">{route.title}</h2>
+          <p className="mt-2 text-[15px] font-semibold leading-6 text-slate-800">{route.teaser}</p>
+          <p className="mt-1 text-sm text-slate-500">{route.regionNames.join(" · ")} · {route.region}</p>
+          <p className="mt-3 line-clamp-2 text-sm leading-6 text-slate-600"><span className="font-bold text-ink">{discovery.viewingLabel}</span> {route.scenery}</p>
+          {route.seasonHighlight ? <p className="mt-3 inline-flex w-fit rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800">{route.seasonHighlight}</p> : null}
+          {route.notice ? <p className="mt-3 line-clamp-2 border-l-2 border-amber-400 pl-3 text-[13px] leading-5 text-slate-700"><b className="text-ink">{discovery.serviceLabel}</b> {route.notice}</p> : null}
+          <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-[15px] font-bold text-ink group-hover:text-fuji">{hub.cardLinkLabel} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" /></span>
+        </div>
+      </Link>
+      {route.id === "fujikyu-fuji" ? (
+        <Link href="/stays/mt-fuji-view" className="flex min-h-12 items-center border-t border-slate-100 px-5 text-sm font-semibold text-slate-700 underline-offset-4 hover:text-ink hover:underline">
+          Stay with a Mt. Fuji view →
+        </Link>
+      ) : null}
+    </article>
   );
 
   return (
@@ -115,7 +115,23 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
           <p className="mt-5 text-[17px] leading-8 text-slate-700 md:text-lg">{hub.intro}</p>
         </header>
 
-        <section className="mt-6 rounded-[22px] border border-slate-200 bg-white p-4 sm:p-5" aria-labelledby="filter-heading">
+        <nav aria-label="Quick view filters" className="-mx-5 mt-6 overflow-x-auto px-5 pb-1">
+          <ul className="flex w-max gap-2">
+            <li>
+              <Link href="/scenic#results" aria-current={!filtered ? "page" : undefined} className={["inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-bold transition-colors", !filtered ? "border-ink bg-ink text-white" : "border-slate-300 bg-white text-ink hover:border-ink"].join(" ")}>{hub.allViewsLabel}</Link>
+            </li>
+            {viewFilters.map((item) => {
+              const active = view === item.id && !season && !region;
+              return (
+                <li key={item.id}>
+                  <Link href={`/scenic?view=${item.id}#results`} aria-current={active ? "page" : undefined} className={["inline-flex min-h-11 items-center whitespace-nowrap rounded-full border px-4 text-sm font-bold transition-colors", active ? "border-ink bg-ink text-white" : "border-slate-300 bg-white text-ink hover:border-ink"].join(" ")}>{item.label}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+
+        <section className="mt-4 rounded-[22px] border border-slate-200 bg-white p-4 sm:p-5" aria-labelledby="filter-heading">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h2 id="filter-heading" className="text-lg font-extrabold">{hub.filterTitle}</h2>
             <p className="text-sm font-semibold text-slate-600" aria-live="polite">
@@ -190,9 +206,14 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
           <div className="mt-5"><ScenicOverviewMap locale={locale} copy={hub.map} highlight={highlightIds} /></div>
         </section>
 
-        <section className="mt-14" aria-labelledby="month-heading">
-          <h2 id="month-heading" className="text-2xl font-extrabold tracking-[-0.02em] md:text-3xl">{hub.monthTable.title}</h2>
-          <p className="mt-2 text-[15px] leading-7 text-slate-600">{hub.monthTable.intro}</p>
+        <details className="group mt-14 rounded-[22px] border border-slate-200 bg-white p-5 sm:p-6" open={filtered || undefined}>
+          <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
+            <span>
+              <h2 id="month-heading" className="text-2xl font-extrabold tracking-[-0.02em] md:text-3xl">{hub.monthTable.title}</h2>
+              <span className="mt-2 block text-[15px] leading-7 text-slate-600">{hub.monthTable.intro}</span>
+            </span>
+            <span aria-hidden="true" className="mt-1 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-slate-300 text-lg font-bold text-ink transition-transform group-open:rotate-45">+</span>
+          </summary>
           {filtered ? <p className="mt-1 text-sm font-semibold text-slate-700">{discovery.monthFilteredNote}</p> : null}
           <div className="mt-5 overflow-hidden rounded-[22px] border border-slate-200 bg-white">
             <table className="w-full text-left text-sm">
@@ -227,7 +248,7 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
               </tbody>
             </table>
           </div>
-        </section>
+        </details>
 
         <section className="mt-14" aria-labelledby="faq-heading">
           <h2 id="faq-heading" className="text-2xl font-extrabold tracking-[-0.02em] md:text-3xl">{hub.faqTitle}</h2>
