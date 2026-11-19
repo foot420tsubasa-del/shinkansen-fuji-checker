@@ -1,0 +1,11 @@
+{
+  "viewing": "Look up around Shin-Fuji, between Mishima and Shizuoka. The clearest view is brief, and clouds can hide the mountain.",
+  "bookingJump": "How to book",
+  "basics": "Seat and viewing basics",
+  "window": "Mt. Fuji window",
+  "aisle": "Aisle",
+  "rows": [
+    { "label": "Standard car", "left": ["A", "B", "C"], "right": ["D", "E"], "window": "E" },
+    { "label": "Green Car", "left": ["A", "B"], "right": ["C", "D"], "window": "D" }
+  ]
+}

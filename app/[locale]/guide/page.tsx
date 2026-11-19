@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { Mountain, Train, Info } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import guideDesign from "@/data/guide-design.json";
 import { Link } from "@/i18n/navigation";
 import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
@@ -9,6 +10,10 @@ import { GuideKlookTextLink } from "@/components/affiliate/GuideKlookTextLink";
 import { GuideSeatCheck } from "@/components/travel/GuideSeatCheck";
 import { MonthlyOdds } from "@/components/content/MonthlyOdds";
 import { SiteFooter } from "@/components/content/SiteFooter";
+
+const articleSection = "scroll-mt-24 border-b border-slate-200 pb-8 md:pb-10";
+const articleHeading = "mb-4 text-2xl font-extrabold leading-tight tracking-[-0.02em] text-ink md:text-[30px]";
+const sectionLink = "inline-flex min-h-11 items-center rounded px-1 font-semibold text-ink underline decoration-slate-300 underline-offset-4 hover:decoration-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
 
 const SITE_URL = "https://fujiseat.com";
 
@@ -1030,12 +1035,12 @@ export default async function GuidePage({ params }: Props) {
   // that converts for both directions; same link as the seat checker's fallback.
   const klookAdid = AFFILIATE_LINKS.shinkansenTicket?.adid || undefined;
   const isFr = locale === "fr";
+  const isEn = locale === "en";
   const copy = locale === "fr" ? frGuideCopy : { ...enGuideCopy, ...guideCopyOverridesByLocale[locale] };
   const quickAnswer = quickAnswerCopyByLocale[locale] ?? quickAnswerCopyByLocale.en;
   const ui = guideUiByLocale[locale as keyof typeof guideUiByLocale] ?? guideUiByLocale.en;
   // Locale-aware so GA4 attributes each language's clicks to its own page.
   const guidePath = locale === "en" ? "/guide" : `/${locale}/guide`;
-  const quickLabel = `${quickAnswer.title}:`;
   const displayTitle = locale === "en"
     ? "Which Side of the Shinkansen for Mt. Fuji? Right Side, Seat E"
     : t("h1");
@@ -1218,31 +1223,30 @@ export default async function GuidePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchemaData) }}
       />
       <SiteHeader />
-      <div className="flex-1 flex flex-col px-4 py-6 lg:py-10 max-w-2xl lg:max-w-5xl mx-auto w-full">
-        <div className="mb-6 lg:mb-8">
-          <h1 className="text-lg lg:text-[26px] lg:leading-tight font-semibold tracking-tight text-slate-950">
+      <div className="mx-auto flex w-full max-w-[1040px] flex-1 flex-col px-5 pb-16 pt-8 md:pt-12">
+        <div className="mb-5 md:mb-7">
+          <h1 className="max-w-[820px] text-balance text-[30px] font-extrabold leading-[1.1] tracking-[-0.03em] text-ink md:text-[46px]">
             {displayTitle}
           </h1>
-          <p className="mt-1 text-xs lg:text-sm text-slate-500">{t("subtitle")}</p>
-          <p className="mt-0.5 text-[10px] lg:text-xs text-slate-500">
-            {t("writtenBy")}
-          </p>
+          <p className="mt-3 max-w-2xl text-[15px] leading-6 text-slate-600">{t("subtitle")}</p>
         </div>
 
-        <section className="mb-5 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 text-[13px] leading-relaxed text-emerald-950 shadow-sm">
-          <p className="text-[11px] font-black uppercase tracking-[0.1em] text-emerald-700">
-            {quickAnswer.title}
-          </p>
-          <h2 className="mt-1 text-base font-semibold text-slate-950">
+        <section aria-labelledby="quick-answer" className="mb-5 rounded-[22px] border border-slate-200 bg-white px-5 py-5 md:px-7 md:py-6">
+          <p className="text-xs font-bold uppercase tracking-[0.1em] text-slate-600">{quickAnswer.title}</p>
+          <h2 id="quick-answer" className="mt-2 text-xl font-extrabold leading-tight text-ink md:text-[26px]">
             {quickAnswer.heading}
           </h2>
-          <ul className="mt-3 space-y-2">
-            {quickAnswer.items.map((item) => (
-              <li key={item.bold}>
-                <strong>{item.bold}</strong> {item.text}
-              </li>
+          <dl className={isEn ? "mt-4 grid grid-cols-2 gap-x-3 md:gap-x-6" : "mt-4 grid gap-y-3 sm:grid-cols-2 sm:gap-x-6"}>
+            {quickAnswer.items.slice(0, 2).map((item) => (
+              <div key={item.bold} className="border-t border-slate-200 pt-3">
+                <dt className="text-sm font-semibold text-slate-600">{item.bold.replace(/[:：]$/, "")}</dt>
+                <dd className="mt-0.5 text-[19px] font-extrabold text-ink">{item.text}</dd>
+              </div>
             ))}
-          </ul>
+          </dl>
+          <p className="mt-4 border-t border-slate-200 pt-3 text-[15px] leading-6 text-slate-700">
+            {isEn ? guideDesign.viewing : quickAnswer.items[3].text}
+          </p>
           <GuideKlookTextLink
             href={KLOOK_URL}
             label={quickAnswer.book}
@@ -1252,127 +1256,112 @@ export default async function GuidePage({ params }: Props) {
             adid={klookAdid}
             locale={locale}
             pagePath={guidePath}
-            className="mt-3 border-t border-emerald-200/70 pt-2.5 text-[13px]"
+            className="mt-3 border-t border-slate-200 pt-2.5 text-[13px]"
           />
         </section>
 
         {renderSeatCheck()}
 
-        {/* The forecast card that sat here was folded into the seat checker on
-            2026-11-13 (components/travel/FujiTiming.tsx): it asked for the
-            direction a second time and only knew ten days by the hour. */}
+        <nav aria-label={copy.jumpTo} className="mb-8 flex flex-wrap gap-x-4 border-b border-slate-200 pb-2 text-sm">
+          <a href="#route-zone" className={sectionLink}>{copy.jumpZone}</a>
+          <a href="#when-to-see" className={sectionLink}>{copy.jumpTime}</a>
+          <a href="#book-seat-e" className={sectionLink}>{isEn ? guideDesign.bookingJump : copy.bookH2}</a>
+          <a href="#seat-letters" className={sectionLink}>{copy.jumpLetters}</a>
+          <a href="#faq" className={sectionLink}>{copy.jumpFaq}</a>
+        </nav>
 
-
-        {/* Two-column layout on desktop: article + sidebar */}
-        <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-10 lg:items-start">
+        <div className="lg:grid lg:grid-cols-[1fr_216px] lg:items-start lg:gap-16">
         <div className="min-w-0">
+        <details id="tldr" className="group mb-9 scroll-mt-24 border-b border-slate-200 pb-4 text-[15px] leading-7 text-slate-700">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 font-bold text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+            {isEn ? guideDesign.basics : copy.tldrH2}
+            <ChevronDown className="h-4 w-4 shrink-0 group-open:rotate-180" aria-hidden="true" />
+          </summary>
+          <div className="mt-2 space-y-2">
+            <h2 className="text-lg font-extrabold text-ink">{t("introH2")}</h2>
+            <p className="text-xs text-slate-600">{t("writtenBy")}</p>
+            {!isEn ? <p>{quickAnswer.summary}</p> : null}
+            <p>{t("introP1")}</p>
+            <p>{t("introP2")}</p>
+            <ul className="list-disc space-y-1 pl-5">
+              {tldrItems.map((item) => <li key={item.bold}><strong>{item.bold}</strong> {item.text}</li>)}
+            </ul>
+          </div>
+        </details>
 
-        {/* Intro */}
-        <section className="mb-5 text-[13px] lg:text-sm leading-relaxed text-slate-700 bg-white/90 border border-slate-200 rounded-2xl px-4 py-3 lg:px-6 lg:py-4 shadow-sm shadow-slate-200/70">
-          <h2 className="text-sm font-semibold text-slate-900 mb-2">
-            {t("introH2")}
-          </h2>
-          <p className="mb-2 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-            <strong>{quickLabel}</strong> {quickAnswer.summary}
-          </p>
-          <p>{t("introP1")}</p>
-          <p className="mt-2 text-[12px] text-slate-600">{t("introP2")}</p>
-        </section>
-
-        {/* TL;DR */}
-        <section id="tldr" className="mb-5 text-[13px] lg:text-sm leading-relaxed text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 lg:px-6 lg:py-4 shadow-sm shadow-slate-200/70">
-          <h2 className="text-sm font-semibold text-slate-900 mb-2">
-            {copy.tldrH2}
-          </h2>
-          <ul className="list-disc pl-5 space-y-1.5">
-            {tldrItems.map((item, i) => (
-              <li key={i}>
-                <span className="font-semibold">{item.bold}</span> {item.text}
-              </li>
-            ))}
-          </ul>
-        </section>
-
-        {/* Jump to section — mobile only */}
-        <div className="mb-5 text-[12px] text-slate-500 leading-relaxed lg:hidden">
-          <span className="font-semibold text-slate-600">{copy.jumpTo} </span>
-          <a href="#tldr" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpTldr}</a>
-          {" · "}
-          <a href="#which-side" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpSide}</a>
-          {" · "}
-          <a href="#seat-letters" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpLetters}</a>
-          {" · "}
-          <a href="#when-to-see" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpTime}</a>
-          {" · "}
-          <a href="#route-zone" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpZone}</a>
-          {" · "}
-          <a href="#jr-pass" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpJrPass}</a>
-          {" · "}
-          <a href="#faq" className="underline underline-offset-2 hover:text-slate-800 transition-colors">{copy.jumpFaq}</a>
-        </div>
-
-        <div className="space-y-6 lg:space-y-8 text-[13px] lg:text-sm leading-relaxed text-slate-700">
-          <section id="which-side" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
-              <Train className="h-4 w-4 text-sky-600" />
+        <div className="space-y-9 text-[15px] leading-7 text-slate-700 md:space-y-10">
+          <section id="which-side" className={articleSection}>
+            <h2 className={articleHeading}>
               {copy.whichSideH2}
             </h2>
-            <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{quickLabel}</strong> {copy.whichSideQuick}
-            </p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.tokyoRightH3}</h3>
+            {!isEn ? <p className="mb-3">{copy.whichSideQuick}</p> : null}
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.tokyoRightH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>
                 <span className="font-semibold">{t("s1Bullet1Bold")}</span>{" "}
                 {t("s1Bullet1")}
               </li>
             </ul>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.returnLeftH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.returnLeftH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>
                 <span className="font-semibold">{t("s1Bullet2Bold")}</span>{" "}
                 {t("s1Bullet2")}
               </li>
             </ul>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.sideBackH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.sideBackH3}</h3>
             <p className="mt-2 text-[12px] text-slate-600">{t("s1Note")}</p>
           </section>
 
-          <section id="seat-letters" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
-              <Train className="h-4 w-4 text-sky-600" />
+          <section id="seat-letters" className={articleSection}>
+            <h2 className={articleHeading}>
               {copy.lettersH2}
             </h2>
-            <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{quickLabel}</strong> {copy.lettersQuick}
-            </p>
+            {!isEn ? <p className="mb-3">{copy.lettersQuick}</p> : null}
+            {isEn ? (
+              <div className="divide-y divide-slate-200 rounded-[22px] border border-slate-200 bg-white px-4">
+                {guideDesign.rows.map((row) => (
+                  <div key={row.label} className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 py-3">
+                    <p className="font-bold text-ink">{row.label}</p>
+                    <p className="flex flex-wrap items-center gap-1.5 text-sm">
+                      {row.left.map((seat) => <span key={seat} className="inline-grid size-7 place-items-center rounded bg-slate-100 font-semibold">{seat}</span>)}
+                      <span className="mx-0.5 text-xs text-slate-600">{guideDesign.aisle}</span>
+                      {row.right.map((seat) => (
+                        <span
+                          key={seat}
+                          className={`inline-grid size-7 place-items-center rounded font-bold ${seat === row.window ? "bg-ink text-white" : "bg-slate-100"}`}
+                        >{seat}</span>
+                      ))}
+                      <span className="ml-0.5 text-xs font-semibold text-ink">{guideDesign.window}</span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            ) : null}
             <h3 id="seat-e" className="mt-3 scroll-mt-24 text-[13px] font-semibold text-slate-900">{copy.seatEH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               {carStandard.map((item, i) => (
                 <li key={i}>{item}</li>
               ))}
             </ul>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.greenCarH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.greenCarH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               {carGreen.map((item, i) => (
                 <li key={i}>{item}</li>
               ))}
             </ul>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.seatAH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.seatAH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.seatAText}</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.whyEH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.whyEH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.whyEText}</p>
           </section>
 
-          <section id="when-to-see" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
-              <Info className="h-4 w-4 text-sky-600" />
+          <section id="when-to-see" className={articleSection}>
+            <h2 className={articleHeading}>
               {copy.whenH2}
             </h2>
-            <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{quickLabel}</strong> {copy.whenQuick}
-            </p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.timeH3}</h3>
+            {!isEn ? <p className="mb-3">{copy.whenQuick}</p> : null}
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.timeH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               {timeItems.map((item, i) => (
                 <li key={i}>
@@ -1380,7 +1369,7 @@ export default async function GuidePage({ params }: Props) {
                 </li>
               ))}
             </ul>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.seasonH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.seasonH3}</h3>
             <div className="mt-2 divide-y divide-slate-100 rounded-xl border border-slate-200 overflow-hidden text-[12px]">
               {seasons.map((s, i) => (
                 <div key={i} className="flex items-start gap-2 px-3 py-2 bg-white">
@@ -1405,57 +1394,48 @@ export default async function GuidePage({ params }: Props) {
                 .
               </p>
             ) : null}
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.nightH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.nightH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.nightText}</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.liveH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.liveH3}</h3>
             <p className="text-[12px] text-slate-600">
               {copy.liveTextBefore} <a href="#fuji-seat-check" className="font-semibold text-sky-700 underline underline-offset-2">{copy.liveLink}</a> {copy.liveTextAfter}
             </p>
           </section>
 
-          <section id="route-zone" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
-              <Mountain className="h-4 w-4 text-sky-600" />
+          <section id="route-zone" className={articleSection}>
+            <h2 className={articleHeading}>
               {copy.routeH2}
             </h2>
-            <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{quickLabel}</strong> {copy.routeQuick}
-            </p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.shinFujiH3}</h3>
+            <p className="mb-3">{copy.routeQuick}</p>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.shinFujiH3}</h3>
             <p>{t("s2P1")}</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.durationH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.durationH3}</h3>
             <p className="text-[12px] text-slate-600">{t("s3Bullet3")}</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.mapH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.mapH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               <li><span className="font-semibold">{t("s2Bullet1Bold")}</span> {t("s2Bullet1")}</li>
               <li><span className="font-semibold">{t("s2Bullet3Bold")}</span> {t("s2Bullet3")}</li>
             </ul>
           </section>
 
-          <section id="nozomi-hikari-kodama" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
-              <Train className="h-4 w-4 text-sky-600" />
+          <section id="nozomi-hikari-kodama" className={articleSection}>
+            <h2 className={articleHeading}>
               {copy.trainTypeH2}
             </h2>
-            <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{quickLabel}</strong> {copy.trainTypeQuick}
-            </p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.nozomiH3}</h3>
+            <p className="mb-3">{copy.trainTypeQuick}</p>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.nozomiH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.nozomiText}</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.hikariH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.hikariH3}</h3>
             <p className="text-[12px] text-slate-600">{t("jrNozomiNote")}</p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.typeSeatH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.typeSeatH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.typeSeatText}</p>
           </section>
 
-          <section id="jr-pass" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
-              <Train className="h-4 w-4 text-sky-600" />
+          <section id="jr-pass" className={articleSection}>
+            <h2 className={articleHeading}>
               {copy.jrPassH2}
             </h2>
-            <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{quickLabel}</strong> {copy.jrPassQuick}
-            </p>
+            <p className="mb-3">{copy.jrPassQuick}</p>
             <p className="mb-2">{t("jrSingleLabel")}</p>
             <ul className="list-disc pl-5 space-y-1.5">
               {jrSingle.map((item, i) => (
@@ -1478,15 +1458,12 @@ export default async function GuidePage({ params }: Props) {
             </div>
           </section>
 
-          <section id="book-seat-e" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
-              <Train className="h-4 w-4 text-sky-600" />
+          <section id="book-seat-e" className={articleSection}>
+            <h2 className={articleHeading}>
               {copy.bookH2}
             </h2>
-            <p className="mb-3 rounded-xl border border-sky-100 bg-sky-50 px-3 py-2 text-[12px] text-sky-900">
-              <strong>{quickLabel}</strong> {copy.bookQuick}
-            </p>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.jrOfficeH3}</h3>
+            <p className="mb-3">{copy.bookQuick}</p>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.jrOfficeH3}</h3>
             <ul className="list-disc pl-5 space-y-1.5">
               {carRequest.slice(0, 1).map((item, i) => (
                 <li key={i}>
@@ -1494,7 +1471,7 @@ export default async function GuidePage({ params }: Props) {
                 </li>
               ))}
             </ul>
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.klookH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.klookH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.klookText}</p>
             <GuideKlookTextLink
               href={KLOOK_URL}
@@ -1507,14 +1484,13 @@ export default async function GuidePage({ params }: Props) {
               pagePath={guidePath}
               className="mt-1.5 text-[12px]"
             />
-            <h3 className="mt-3 text-[13px] font-semibold text-slate-900">{copy.jrPassCounterH3}</h3>
+            <h3 className="mt-5 text-base font-bold text-ink">{copy.jrPassCounterH3}</h3>
             <p className="text-[12px] text-slate-600">{copy.jrPassCounterTextBefore} <Link href="/areas-to-stay" className="font-semibold text-sky-700 underline underline-offset-2">{copy.stayLink}</Link>.</p>
           </section>
 
 
-          <section id="common-mistakes" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
-              <Info className="h-4 w-4 text-sky-600" />
+          <section id="common-mistakes" className={articleSection}>
+            <h2 className={articleHeading}>
               {copy.mistakesH2 ?? t("s4H2")}
             </h2>
             <ul className="list-disc pl-5 space-y-1.5">
@@ -1543,30 +1519,25 @@ export default async function GuidePage({ params }: Props) {
 
 
           {/* Section D: FAQ */}
-          <section id="faq" className="bg-white border border-slate-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-slate-200/60">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-slate-900 mb-3">
-              <Info className="h-4 w-4 text-sky-600" />
+          <section id="faq" className={articleSection}>
+            <h2 className={articleHeading}>
               {copy.faqH2 ?? t("faqH2")}
             </h2>
             <div className="space-y-3">
-              {orderedFaqItems.map((item, i) => (
-                <div
-                  key={i}
-                  className="border-b border-slate-100 pb-3 last:border-0 last:pb-0"
-                >
-                  <p className="font-semibold text-slate-800 mb-1">
-                    Q: {item.q}
-                  </p>
-                  <p className="text-[12px] text-slate-600">A: {item.a}</p>
-                </div>
+              {orderedFaqItems.map((item) => (
+                <details key={item.q} className="group border-b border-slate-200 last:border-0">
+                  <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 py-2 font-bold text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                    {item.q}<ChevronDown className="h-4 w-4 shrink-0 group-open:rotate-180" aria-hidden="true" />
+                  </summary>
+                  <p className="pb-3">{item.a}</p>
+                </details>
               ))}
             </div>
           </section>
 
           {/* Section 5: Make it easy */}
           <section className="bg-sky-50 border border-sky-200 rounded-2xl px-4 py-4 lg:px-6 lg:py-5 shadow-sm shadow-sky-100">
-            <h2 className="flex items-center gap-2 text-sm lg:text-base font-semibold text-slate-900 mb-2.5">
-              <Mountain className="h-4 w-4 text-sky-700" />
+            <h2 className={articleHeading}>
               {copy.makeEasyH2 ?? t("makeEasyH2")}
             </h2>
             <p>{t("makeEasyP1")}</p>
@@ -1600,7 +1571,7 @@ export default async function GuidePage({ params }: Props) {
         <aside className="hidden lg:block">
           <div className="sticky top-6 space-y-4">
             {/* Table of contents */}
-            <nav className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <nav aria-label={copy.jumpTo} className="border-l border-slate-200 pl-5">
               <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-400 mb-3">
                 {copy.jumpTo}
               </p>
