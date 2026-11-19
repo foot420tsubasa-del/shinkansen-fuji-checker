@@ -185,15 +185,15 @@ export default async function ScenicRoutePage({ params }: Props) {
                     const side = sideFor(v, dir);
                     return (
                       <li key={v.id} className="flex gap-3 text-[15px] leading-6">
-                        <span className={["mt-0.5 shrink-0 self-start rounded-full px-2.5 py-0.5 text-[11.5px] font-bold uppercase text-white", side === "right" ? "bg-[#d94a32]" : "bg-[#2f6fd6]"].join(" ")}>
+                        <span className={["mt-0.5 shrink-0 self-start rounded-full px-2.5 py-0.5 text-[11.5px] font-bold uppercase text-white", side === "right" ? "bg-fuji-hover" : "bg-[#2f6fd6]"].join(" ")}>
                           {side}
                         </span>
                         <span>
                           <b>{v.name}</b>
                           {v.seatByDirection ? (
-                            <span className="ml-1.5 rounded-full bg-white/15 px-2 py-0.5 text-[11px] font-bold">{v.seatByDirection[dir]}</span>
+                            <span className="ml-1.5 inline-block whitespace-nowrap rounded-full bg-white/15 px-2 py-0.5 text-[11px] leading-4 font-bold">{v.seatByDirection[dir]}</span>
                           ) : v.seat ? (
-                            <span className="ml-1.5 rounded-full bg-white/15 px-2 py-0.5 text-[11px] font-bold">Seat {v.seat.split(" ")[0]}</span>
+                            <span className="ml-1.5 inline-block whitespace-nowrap rounded-full bg-white/15 px-2 py-0.5 text-[11px] leading-4 font-bold">Seat {v.seat.split(" ")[0]}</span>
                           ) : null}
                           <span className="block text-sm text-white/70">
                             {v.from === v.to ? `near ${v.from}` : dir === "forward" ? `${v.from} → ${v.to}` : `${v.to} → ${v.from}`}

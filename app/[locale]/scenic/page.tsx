@@ -80,7 +80,7 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
     <article key={route.id} className="flex flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(30,41,59,0.05)] transition-shadow hover:shadow-[0_14px_36px_rgba(30,41,59,0.1)]">
       <Link href={`/scenic/${route.slug}`} className="group flex min-w-0 flex-1 flex-col focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ink">
         <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
-          <Image src={route.image.src} alt={route.image.alt} fill sizes="(min-width: 1160px) 360px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 640px) calc((100vw - 60px) / 2), calc(100vw - 40px)" className="object-cover" style={{ objectPosition: route.image.position }} />
+          <Image src={route.image.src} alt={route.image.alt} fill preload={route.id === bestRoutes[0]?.id} sizes="(min-width: 1160px) 360px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 640px) calc((100vw - 60px) / 2), calc(100vw - 40px)" className="object-cover" style={{ objectPosition: route.image.position }} />
         </div>
         <div className="flex flex-1 flex-col p-5">
           <h2 className="text-[19px] font-extrabold leading-snug tracking-[-0.02em] text-ink group-hover:text-fuji">{route.title}</h2>
