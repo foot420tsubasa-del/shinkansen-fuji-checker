@@ -670,6 +670,15 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
             checker above. */}
 
         <ScenicRoutesGallery />
+        {locale === "en" ? (
+          // One quiet pointer to the Fuji-view stays; the train-window search stays the main thing here.
+          <p className="mt-4 text-[15px] text-slate-600">
+            Want to wake up to Mt. Fuji?{" "}
+            <Link href="/stays/mt-fuji-view" onClick={() => trackCtaClick({ placement: "home_fuji_view_stays", href: "/stays/mt-fuji-view", label: "fuji-view-stays", category: "hotel", locale })} className="font-bold text-ink underline underline-offset-4 hover:text-fuji">
+              See hotels with Mt. Fuji views
+            </Link>
+          </p>
+        ) : null}
 
         <section className="pt-12">
           <h2 className="text-2xl font-extrabold tracking-[-0.02em] text-ink md:text-[28px]">More seat guides</h2>

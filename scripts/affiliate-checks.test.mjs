@@ -1198,13 +1198,52 @@ test("related scenic links: pages use at most two links and every target is a li
 
 test("scenic link and stay work leaves protected revenue and experiment pages unchanged", () => {
   const protectedFiles = [
-    "app/[locale]/guide/page.tsx",
     "app/[locale]/shinkansen-seat-letters/page.tsx",
     "app/[locale]/components/SiteHeader.tsx",
     "app/[locale]/page.tsx",
   ];
   const changed = execSync(`/Library/Developer/CommandLineTools/usr/bin/git diff HEAD --name-only -- ${protectedFiles.map((file) => `'${file}'`).join(" ")}`, { encoding: "utf8" }).trim();
   assert.equal(changed, "");
+});
+
+test("guide: the only change since the scenic work is one Fuji-view stays link after the closing guide links (2026-11-20, by request)", () => {
+  const diff = execSync("/Library/Developer/CommandLineTools/usr/bin/git diff 6824139 -- 'app/[locale]/guide/page.tsx'", { encoding: "utf8" });
+  const added = diff.split("\n").filter((l) => l.startsWith("+") && !l.startsWith("+++"));
+  const removed = diff.split("\n").filter((l) => l.startsWith("-") && !l.startsWith("---"));
+  assert.equal(removed.length, 0, "nothing removed from /guide");
+  assert.ok(added.every((l) => /stays\/mt-fuji-view|Mt\. Fuji|locale === "en"|\) : null\}|<\/p>|<p |Continue planning|^\+\s*$/.test(l)), `unexpected /guide change: ${added.join(" / ")}`);
+  const page = readFileSync("app/[locale]/guide/page.tsx", "utf8");
+  assert.ok(page.indexOf("/stays/mt-fuji-view") > page.indexOf("{renderSeatGuides()}"), "the link sits after the closing guide links");
+  for (const placement of ["guide_seat_result", "guide_quick_answer_text", "guide_klook_text"]) assert.match(page, new RegExp(placement));
+});
+
+test("Fuji-view stays: verified hotels, links registered once, no prices or rankings, placed where asked", () => {
+  const stays = JSON.parse(readFileSync("data/fuji-view-stays.json", "utf8"));
+  const booking = JSON.parse(readFileSync("data/booking-hotel-urls.json", "utf8")).hotels;
+  assert.equal(stays.hotels.length, 3);
+  for (const h of stays.hotels) {
+    const b = booking[h.bookingKey];
+    assert.ok(b?.affiliateUrl && b.bookingUrl, `${h.name}: Booking.com entry with an affiliate link`);
+    assert.match(b.affiliateUrl, /^https:\/\/booking\.tpx\.lv\/[A-Za-z0-9]+$/);
+    assert.ok(h.source?.url && h.checked, `${h.name}: official source and date`);
+    assert.doesNotMatch(JSON.stringify(h), /¥|\byen\b|\$\d|rating|best price|guaranteed|#1|top-rated/i, `${h.name}: no price, rating or sales claims`);
+  }
+  // La Vista: not every room faces Fuji, and the card says so.
+  assert.match(stays.hotels.find((h) => h.id === "la-vista-fujikawaguchiko").view, /Not every room/);
+  assert.match(stays.page.viewNotes.join(" "), /cloud/i);
+  assert.equal(stays.areaSearch.affiliate, false, "the area search is a plain link until an affiliate link is issued");
+  // No affiliate link is registered twice.
+  const urls = Object.values(booking).map((h) => h.affiliateUrl).filter(Boolean);
+  assert.equal(new Set(urls).size, urls.length);
+  // Placement: Fujikyu shows the cards; Tokaido and /guide only link; Tokyo stay finder untouched.
+  const route = readFileSync("app/[locale]/scenic/[slug]/page.tsx", "utf8");
+  assert.ok(route.indexOf("fuji-stays-heading") > route.indexOf('id="tickets"') && route.indexOf("fuji-stays-heading") < route.indexOf(">Questions<"), "Fujikyu: after tickets, before the FAQ");
+  assert.match(route, /Explore hotels with Mt\. Fuji views/);
+  assert.ok(!JSON.parse(readFileSync("data/scenic-stays.json", "utf8")).routes["fujikyu-fuji"], "no second stay block on Fujikyu");
+  assert.match(readFileSync("app/[locale]/scenic/page.tsx", "utf8"), /route\.id === "fujikyu-fuji" \? \(\s*<Link href="\/stays\/mt-fuji-view"/);
+  assert.match(readFileSync("app/sitemap.ts", "utf8"), /"\/stays\/mt-fuji-view"/);
+  const unchanged = execSync("/Library/Developer/CommandLineTools/usr/bin/git diff 6824139 --name-only -- 'app/[locale]/areas-to-stay/tokyo-stay-area-index'", { encoding: "utf8" }).trim();
+  assert.equal(unchanged, "", "Tokyo stay finder unchanged");
 });
 
 test("route search: live routes work both ways and unsupported trips do not invent an answer", () => {

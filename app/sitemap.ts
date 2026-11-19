@@ -21,6 +21,7 @@ const translatedPaths = [
 
 const englishOnlyContentPaths = [
   "/scenic",
+  "/stays/mt-fuji-view",
   "/itineraries",
   "/areas-to-stay",
   "/airport-transfers",

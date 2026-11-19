@@ -14,6 +14,8 @@ import { TicketGuide, type ResolvedTicketLink } from "@/components/scenic/Ticket
 import { ScenicStayBlock } from "@/components/scenic/ScenicStayBlock";
 import { ScenicRouteViewTracker } from "@/components/scenic/ScenicTracking";
 import { PlanThisRide, getTripEssentials } from "@/components/scenic/PlanThisRide";
+import { FujiAreaSearchLink, FujiViewStayCards } from "@/components/stays/FujiViewStayCards";
+import fujiViewStays from "@/data/fuji-view-stays.json";
 import type { AffiliateProvider } from "@/lib/affiliate/links";
 import { getScenicStay } from "@/lib/scenic-stays";
 import discovery from "@/data/scenic-discovery.json";
@@ -330,10 +332,33 @@ export default async function ScenicRoutePage({ params }: Props) {
             <Link href="/#seat-checker" className="inline-flex h-12 items-center gap-2 rounded-full bg-fuji px-6 text-[15px] font-bold text-white">
               Check your seat and book <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
+            {/* A quiet pointer, not hotel cards: seeing Fuji from the train needs no stay. */}
+            <p className="mt-6 text-[15px] leading-6 text-slate-600">
+              Planning to spend more time near Mt. Fuji?{" "}
+              <Link href="/stays/mt-fuji-view" className="font-bold text-ink underline underline-offset-4 hover:text-fuji">Explore hotels with Mt. Fuji views</Link>
+            </p>
           </section>
         ) : null}
 
-        {stay ? <ScenicStayBlock stay={stay} routeId={route.id} locale={locale} pagePath={`/scenic/${slug}`} /> : null}
+        {route.id === "fujikyu-fuji" ? (
+          // Fuji-view stays at Lake Kawaguchiko: after the seat answer and the tickets, before the FAQ.
+          <section className="mt-12" aria-labelledby="fuji-stays-heading">
+            <h2 id="fuji-stays-heading" className="text-2xl font-extrabold tracking-[-0.02em]">{fujiViewStays.sectionOnRoute.title}</h2>
+            <p className="mt-1 text-[15px] text-slate-600">{fujiViewStays.sectionOnRoute.sub}</p>
+            <div className="mt-5">
+              <FujiViewStayCards variant="compact" placement="scenic_fujikyu_fuji_stays" pagePath={`/scenic/${slug}`} locale={locale} />
+            </div>
+            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-1">
+              <Link href="/stays/mt-fuji-view" className="inline-flex min-h-11 items-center gap-1.5 text-[15px] font-bold text-ink underline underline-offset-4 hover:text-fuji">
+                {fujiViewStays.sectionOnRoute.more} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <FujiAreaSearchLink placement="fuji_view_area_search" pagePath={`/scenic/${slug}`} locale={locale} />
+            </div>
+            <p className="mt-2 text-xs leading-5 text-slate-500">PR: {fujiViewStays.page.disclosure}</p>
+          </section>
+        ) : stay ? (
+          <ScenicStayBlock stay={stay} routeId={route.id} locale={locale} pagePath={`/scenic/${slug}`} />
+        ) : null}
 
         <section className="mt-12">
           <h2 className="text-2xl font-extrabold tracking-[-0.02em]">Questions</h2>

@@ -1584,6 +1584,13 @@ export default async function GuidePage({ params }: Props) {
           </section>
 
           {renderSeatGuides()}
+          {locale === "en" ? (
+            // Continue planning: one link to the Fuji-view stays, after the seat answer and the guides — never near the top.
+            <p className="rounded-2xl border border-slate-200 bg-white px-4 py-3 text-[13px] text-slate-700">
+              Planning to spend more time near Mt. Fuji?{" "}
+              <Link href="/stays/mt-fuji-view" className="font-semibold text-slate-900 underline underline-offset-2">Explore hotels with Mt. Fuji views</Link>
+            </p>
+          ) : null}
 
 
         </div>

@@ -76,7 +76,7 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
   ];
 
   const routeCard = (route: (typeof visibleRoutes)[number]) => (
-            <article key={route.id} className="flex overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(30,41,59,0.06)]">
+            <article key={route.id} className="flex flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_8px_30px_rgba(30,41,59,0.06)]">
               <Link href={`/scenic/${route.slug}`} className="group flex min-w-0 flex-1 flex-col">
                 <div className="relative aspect-[16/9] overflow-hidden bg-slate-100">
                   <Image src={route.image.src} alt={route.image.alt} fill sizes="(min-width: 1024px) 360px, (min-width: 640px) 50vw, 100vw" className="object-cover transition duration-300 group-hover:scale-[1.02]" />
@@ -96,6 +96,11 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
                   <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-bold text-fuji">{hub.cardLinkLabel} <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
                 </div>
               </Link>
+              {route.id === "fujikyu-fuji" ? (
+                <Link href="/stays/mt-fuji-view" className="border-t border-slate-100 px-5 py-3 text-sm font-bold text-ink underline-offset-4 hover:text-fuji hover:underline">
+                  Stay with a Mt. Fuji view →
+                </Link>
+              ) : null}
             </article>
   );
 

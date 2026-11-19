@@ -2,35 +2,42 @@
   "placement": "scenic_route_stay",
   "disclosure": "We may earn a commission if you book through these links, at no extra cost to you.",
   "routes": {
-    "fujikyu-fuji": {
-      "title": "Stay near the route",
-      "description": "Stay by Lake Kawaguchiko, at the end of the Fujikyu Line, for early clear views of Mt. Fuji.",
-      "links": [
-        { "source": "booking-hotel", "id": "fuji-lake-hotel" },
-        { "source": "booking-hotel", "id": "hotel-mystays-fuji" }
-      ]
-    },
     "hakone-tozan": {
       "title": "Stay near the route",
       "description": "Stay in Hakone, along the mountain railway, and ride it before the day-trip crowds.",
       "links": [
-        { "source": "klook-area", "id": "hakone" }
+        {
+          "source": "klook-area",
+          "id": "hakone"
+        }
       ]
     },
     "sagano-gorge": {
       "title": "Stay in Kyoto for this day trip",
       "description": "Torokko Saga is next to JR Saga-Arashiyama, a direct JR ride from Kyoto Station, so a hotel by Kyoto Station makes an easy base.",
       "links": [
-        { "source": "booking-hotel", "id": "hotel-granvia-kyoto" },
-        { "source": "booking-hotel", "id": "daiwa-roynet-kyoto-station" }
+        {
+          "source": "booking-hotel",
+          "id": "hotel-granvia-kyoto"
+        },
+        {
+          "source": "booking-hotel",
+          "id": "daiwa-roynet-kyoto-station"
+        }
       ]
     },
     "yurikamome-night": {
       "title": "Stay near the route",
       "description": "Ariake, Odaiba and Toyosu are on the waterfront section of this route.",
       "links": [
-        { "source": "booking-hotel-destinations", "id": "booking_ariake-odaiba" },
-        { "source": "booking-hotel-destinations", "id": "booking_toyosu" }
+        {
+          "source": "booking-hotel-destinations",
+          "id": "booking_ariake-odaiba"
+        },
+        {
+          "source": "booking-hotel-destinations",
+          "id": "booking_toyosu"
+        }
       ]
     }
   }

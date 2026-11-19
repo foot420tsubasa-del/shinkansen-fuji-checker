@@ -1,0 +1,75 @@
+{
+  "_about": "Mt. Fuji-view stays around Lake Kawaguchiko. Each hotel's view and access line comes from its own official site (source + checked). Booking links resolve through data/booking-hotel-urls.json (bookingKey), so a link is registered once. No ratings, prices, availability or rankings: none of them are verified. Order is by view and information quality, not by commission.",
+  "page": {
+    "title": "Mt. Fuji View Hotels at Lake Kawaguchiko",
+    "description": "Three handpicked stays at Lake Kawaguchiko with Mt. Fuji views, what each hotel says about its views, how to get there from Kawaguchiko Station, and where to book.",
+    "eyebrow": "Stays",
+    "h1": "Wake up to Mt. Fuji.",
+    "sub": "Handpicked stays with unforgettable mountain views.",
+    "heroImage": {
+      "src": "/images/scenic/scenic-fujikyu-fuji-tall.webp",
+      "alt": "Mt. Fuji rising above a lake with autumn leaves",
+      "illustrative": true
+    },
+    "hotelsTitle": "Three stays with a view",
+    "viewTitle": "About the view",
+    "viewNotes": [
+      "Mt. Fuji is often in cloud. Clear mornings, especially in winter, give the best chance of seeing it.",
+      "Not every room faces the mountain at every hotel. When you book, choose a room type described as having a Mt. Fuji view.",
+      "What each card says about the view is the hotel's own description, checked on its official site."
+    ],
+    "areaTitle": "Want more choice?",
+    "areaBody": "Browse every hotel around Lake Kawaguchiko and Fujikawaguchiko.",
+    "areaCta": "See all hotels near Mt. Fuji",
+    "routeTitle": "Getting there by train",
+    "routeBody": "The Fujikyu Line runs to Kawaguchiko Station with Mt. Fuji on the left on the way up. See which side to sit on.",
+    "routeCta": "Fujikyu Line seat guide",
+    "disclosure": "We may earn a commission if you book through these links, at no extra cost to you."
+  },
+  "sectionOnRoute": {
+    "title": "Stay with a view of Mt. Fuji",
+    "sub": "Make the most of your journey to Lake Kawaguchiko.",
+    "more": "All Mt. Fuji-view stays"
+  },
+  "areaSearch": {
+    "url": "https://www.booking.com/searchresults.html?ss=Fujikawaguchiko",
+    "affiliate": false,
+    "note": "Plain Booking.com search for Fujikawaguchiko (resolved to 富士河口湖町 on 2026-11-20). No area affiliate link has been issued yet; replace with one when it is.",
+    "checked": "2026-11-20"
+  },
+  "hotels": [
+    {
+      "id": "mizno-hotel",
+      "bookingKey": "fuji-view:mizno-hotel",
+      "name": "Mizno Hotel",
+      "tag": "Fuji + lake view",
+      "line": "A hotel 800 m up the hillside above Lake Kawaguchi, with private open-air baths on the roof.",
+      "view": "The hotel says every room overlooks Mt. Fuji and Lake Kawaguchi.",
+      "access": "Hotel shuttle from Kawaguchiko Station, 14:00–18:00 — call the hotel when you arrive. About 5 minutes.",
+      "source": { "label": "Mizno Hotel (official, English)", "url": "https://mzn.jp/en/" },
+      "checked": "2026-11-20"
+    },
+    {
+      "id": "shuhokaku-kogetsu",
+      "bookingKey": "fuji-view:shuhokaku-kogetsu",
+      "name": "Shuhokaku Kogetsu",
+      "tag": "Traditional ryokan",
+      "line": "A lakeside ryokan on the north shore, with hot-spring baths that look across the lake to the mountain.",
+      "view": "The ryokan says every room looks out on Mt. Fuji and the lake.",
+      "access": "Ryokan shuttle from Kawaguchiko Station, 14:30–18:30 — call when you arrive. Or take the sightseeing bus to the Itchiku Kubota Art Museum stop.",
+      "source": { "label": "Shuhokaku Kogetsu (official, Japanese)", "url": "https://www.kogetu.com/" },
+      "checked": "2026-11-20"
+    },
+    {
+      "id": "la-vista-fujikawaguchiko",
+      "bookingKey": "fuji-view:la-vista-fujikawaguchiko",
+      "name": "La Vista Fujikawaguchiko",
+      "tag": "Scenic resort",
+      "line": "A resort overlooking Lake Kawaguchi, where many rooms have a view bath facing Mt. Fuji across the lake.",
+      "view": "Not every room faces Mt. Fuji: the hotel's Fourth rooms have no Fuji view. Book a room type described as facing Mt. Fuji.",
+      "access": "Free shuttle from Kawaguchiko Station — reserve it in advance.",
+      "source": { "label": "La Vista Fujikawaguchiko (official, Japanese)", "url": "https://dormy-hotels.com/resort/hotels/la_kawaguchiko/rooms/" },
+      "checked": "2026-11-20"
+    }
+  ]
+}
