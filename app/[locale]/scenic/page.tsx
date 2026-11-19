@@ -6,6 +6,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { ScenicOverviewMap } from "@/components/scenic/ScenicOverviewMap";
+import { ScenicFilterTracker } from "@/components/scenic/ScenicTracking";
 import hub from "@/data/scenic-hub.json";
 import discovery from "@/data/scenic-discovery.json";
 import overview from "@/data/scenic-overview.json";
@@ -147,6 +148,7 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
 
         {/* After a search the page opens here, so on a phone the results are on screen, not the form. */}
         <div id="results" className="scroll-mt-20" />
+        <ScenicFilterTracker view={view} region={region} season={season} results={visibleRoutes.length} best={season ? bestRoutes.length : undefined} />
         {visibleRoutes.length === 0 ? (
           <section className="mt-6 rounded-2xl border border-slate-200 bg-white p-5">
             <h2 className="text-lg font-extrabold">{discovery.emptyTitle}</h2>

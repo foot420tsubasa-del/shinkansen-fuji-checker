@@ -237,6 +237,60 @@ export function trackCtaClick(params: {
   });
 }
 
+/**
+ * One event per From/To search (homepage): result live | unsupported |
+ * invalid, the route answered, why not (no-view-between, different-lines,
+ * unmapped, unresolved, same_station), and the stations — only names from our
+ * station list; anything typed that did not resolve is sent as "unresolved".
+ * Added 2026-11-20. The older cta_click (placement route_search) still fires
+ * for live/unsupported searches so before/after comparisons keep working.
+ */
+export function trackRouteSearch(params: {
+  result: "live" | "unsupported" | "invalid";
+  route_id?: string;
+  reason?: string;
+  from_station: string;
+  to_station: string;
+  source: "form" | "link";
+  locale?: string;
+}) {
+  trackEvent({
+    action: "route_search",
+    category: "route_search",
+    label: params.result,
+    params: {
+      result: params.result,
+      route_id: params.route_id,
+      reason: params.reason,
+      from_station: params.from_station,
+      to_station: params.to_station,
+      source: params.source,
+      locale: params.locale,
+      page_path: typeof window === "undefined" ? undefined : window.location.pathname,
+    },
+  });
+}
+
+/** /scenic filters applied (the page is a GET form; fired once per filtered page load). */
+export function trackScenicFilter(params: { view?: string; region?: string; season?: string; results: number; best?: number }) {
+  trackEvent({
+    action: "scenic_filter_apply",
+    category: "scenic_discovery",
+    label: [params.view ?? "any", params.region ?? "any", params.season ?? "any"].join("|"),
+    params: { view: params.view ?? "any", region: params.region ?? "any", season: params.season ?? "any", results: params.results, best: params.best },
+  });
+}
+
+/** A scenic route guide opened (/scenic/<slug>), with where the reader came from. */
+export function trackScenicRouteView(params: { route_id: string; from_hub: boolean; locale?: string }) {
+  trackEvent({
+    action: "scenic_route_view",
+    category: "scenic_discovery",
+    label: params.route_id,
+    params: { route_id: params.route_id, from_hub: params.from_hub, locale: params.locale },
+  });
+}
+
 export function trackInternalLinkClick(params: {
   source_page: string;
   placement: string;

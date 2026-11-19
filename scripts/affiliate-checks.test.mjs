@@ -911,7 +911,11 @@ test("scenic seats: the seat question fits the train, and model-only sides say s
   assert.doesNotMatch(page, /Which seat letter should I book/);
   assert.match(page, /\.\.\.seatingFaq\(route\)/);
   // "terrain model" (no published match) must carry the model-only note, not just "terrain model only".
-  assert.match(page, /return !\/match\|seat verified\/i\.test\(basis\)/);
+  assert.match(page, /isModelOnlyBasis\(v\.basis\)/);
+  assert.match(readFileSync("components/scenic/RouteTimeline.tsx", "utf8"), /isModelOnlyBasis\(it\.view\.basis\)/);
+  assert.equal(scenic.isModelOnlyBasis("terrain model"), true);
+  assert.equal(scenic.isModelOnlyBasis("terrain model; JR Hokkaido confirms the coast"), true);
+  assert.equal(scenic.isModelOnlyBasis("terrain model; side matched to published accounts"), false);
   // Every route that reverses gets the direction question.
   assert.ok(live.filter((r) => r.reversals?.length).length >= 3);
   // Answer first: the side cards come before the photo.
@@ -937,6 +941,54 @@ test("scenic detail seating distinguishes departure windows and the currently ap
       assert.equal(scenic.seatedSide(side, scenic.reversalsBefore(route, view, direction, from)), "left");
     }
   }
+});
+
+test("route search: spelling variants resolve, typos only suggest, and every no-answer says why", () => {
+  for (const [typed, name] of [["Shinosaka", "Shin-Osaka"], ["Kyōto", "Kyoto"], ["kyouto", "Kyoto"], ["Tokyo Station", "Tokyo"], ["Toukyou", "Tokyo"], ["hakone yumoto", "Hakone-Yumoto"], ["Fujisawa-eki", "Fujisawa"], ["東京", "Tokyo"]]) {
+    assert.equal(scenic.resolveStation(typed), name, typed);
+  }
+  // A typo is never auto-corrected into an answer; it is offered as a suggestion.
+  assert.equal(scenic.resolveStation("Kyto"), null);
+  assert.equal(scenic.suggestStations("Kyto")[0]?.name, "Kyoto");
+  assert.equal(scenic.suggestStations("Kanazwa")[0]?.name, "Kanazawa");
+  assert.deepEqual(scenic.suggestStations("Nowhere"), []);
+  // No station key collides with another station.
+  const keys = scenic.stationOptions().map((o) => scenic.stationKey(o.name));
+  assert.equal(new Set(keys).size, keys.length);
+  // Both ways, mid-line stations, and the trips the brief names.
+  for (const [a, b, id, dir] of [["Tokyo", "Kyoto", "tokaido-fuji", "forward"], ["Kyoto", "Tokyo", "tokaido-fuji", "backward"], ["Tokyo", "Shin-Osaka", "tokaido-fuji", "forward"], ["Tokyo", "Kanazawa", "hokuriku-alps", "forward"], ["Fujisawa", "Kamakura", "enoden-coast", "forward"], ["Kamakura", "Fujisawa", "enoden-coast", "backward"], ["Karuizawa", "Toyama", "hokuriku-alps", "forward"]]) {
+    const m = scenic.matchRoute(a, b);
+    assert.equal(m.kind, "live", `${a} → ${b}`);
+    assert.equal(m.route.id, id);
+    assert.equal(m.direction, dir);
+  }
+  assert.equal(scenic.unsupportedReason("Nagoya", "Kyoto").kind, "no-view-between");
+  const change = scenic.unsupportedReason("Tokyo", "Kamakura");
+  assert.equal(change.kind, "different-lines");
+  assert.equal(change.routes[0].id, "enoden-coast", "the line at the destination comes first");
+  assert.equal(scenic.unsupportedReason("Tokyo", "Sapporo").kind, "unmapped");
+  // The homepage shows the reason, and the search event never carries typed text.
+  const home = readFileSync("app/[locale]/HomeClient.tsx", "utf8");
+  assert.match(home, /search\.reasonNoView/);
+  assert.match(home, /search\.reasonDifferentLines/);
+  assert.match(home, /resolveStation\(name\) === name \? name : "unresolved"/);
+  const search = readFileSync("components/home/RouteSearch.tsx", "utf8");
+  assert.match(search, /from_station: resolvedFrom \?\? "unresolved"/);
+  for (const locale of ["en", "fr", "es", "pt-BR", "de", "ru", "ko", "zh-CN", "zh-TW"]) {
+    const m = JSON.parse(readFileSync(`messages/${locale}.json`, "utf8")).home.search;
+    for (const key of ["reasonNoView", "reasonDifferentLines", "departureShifted", "noServiceOnDate", "serviceNote"]) assert.ok(m[key], `${locale}: ${key}`);
+  }
+});
+
+test("analytics: search, filter and route-view events exist, and the legacy route_search cta_click is kept for comparisons", () => {
+  const analytics = readFileSync("lib/analytics.ts", "utf8");
+  for (const name of ["route_search", "scenic_filter_apply", "scenic_route_view"]) assert.match(analytics, new RegExp(`action: "${name}"`));
+  const home = readFileSync("app/[locale]/HomeClient.tsx", "utf8");
+  assert.match(home, /placement: "route_search"/, "cta_click route_search stays for 11/29 comparisons");
+  assert.match(readFileSync("app/[locale]/scenic/page.tsx", "utf8"), /<ScenicFilterTracker /);
+  assert.match(readFileSync("app/[locale]/scenic/[slug]/page.tsx", "utf8"), /<ScenicRouteViewTracker /);
+  assert.ok(existsSync("docs/ANALYTICS.md"));
+  assert.match(readFileSync("docs/ANALYTICS.md", "utf8"), /route_search/);
 });
 
 test("route results keep the mapped Tokaido leg separate and only choose a highlight in the actual timeline", () => {
