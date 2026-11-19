@@ -47,7 +47,7 @@
   "faq": [
     {
       "q": "How do I choose which side of the train to sit on?",
-      "a": "Open a route to see the verified side for each direction. When a river, gorge or mountain changes sides, the route timeline shows the sections in order."
+      "a": "Open a route to see the side for each direction. Every side comes from our terrain model of the line; where a published source agrees, the page says so, and where it does not, the answer is marked as model-only. When a river, gorge or mountain changes sides, the route timeline shows the sections in order."
     },
     {
       "q": "Are the seat letters the same on every train?",

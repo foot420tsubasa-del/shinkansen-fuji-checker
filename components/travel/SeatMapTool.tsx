@@ -25,7 +25,8 @@ type CarSpec = {
 const CARS: CarSpec[] = [
   {
     id: "ordinary-nonreserved",
-    cars: "Cars 1–3",
+    // JR Central English guide (global.jr-central.co.jp/en/goldenroute/shinkansen/), read 2026-11-20: "Nozomi: Cars 1–2".
+    cars: "Cars 1–2",
     layout: "3+2",
     left: ["A", "B", "C"],
     right: ["D", "E"],
@@ -34,7 +35,7 @@ const CARS: CarSpec[] = [
   },
   {
     id: "ordinary-reserved",
-    cars: "Cars 4–7, 11–16",
+    cars: "Cars 3–7, 11–16",
     layout: "3+2",
     left: ["A", "B", "C"],
     right: ["D", "E"],
