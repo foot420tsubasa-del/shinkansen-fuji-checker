@@ -3518,7 +3518,7 @@
       },
       "tokyo-station-vs-shinjuku": {
         "title": "Tokyo Station or Shinjuku? Shinkansen Access vs Nightlife",
-        "description": "Tokyo Station or Shinjuku for your hotel? Stay near Tokyo Station for early Shinkansen and luggage-first trips (every Shinkansen line, zero transfer); pick Shinjuku for nightlife, dining, and hotel choice with a 14–15-min JR hop to the Shinkansen. Compared side by side with hotel picks.",
+        "description": "Tokyo Station and Shinjuku are two different stations, about 14 minutes apart on the JR Chuo Line Rapid. Stay near Tokyo Station for early Shinkansen and luggage-first trips (every Shinkansen line, zero transfer); pick Shinjuku for nightlife, dining, and hotel choice. Compared side by side with hotel picks.",
         "quickRec": {
           "area": "Shinjuku",
           "why": "Shinjuku is the better all-round base if a short transfer to Tokyo Station is acceptable. Tokyo Station wins for early Shinkansen and luggage-first trips."
@@ -5410,11 +5410,11 @@
   },
   "seatLetters": {
     "meta": {
-      "title": "Shinkansen Seat Letters A–E: Which Seat Gets the Fuji View",
-      "description": "Understand Shinkansen seat letters A, B, C, D and E, including which seats are windows, aisles, and usually best for Mt. Fuji views."
+      "title": "Shinkansen Seat Map: Nozomi Seats A–E and the Fuji Side",
+      "description": "Tokaido Shinkansen seat map for Nozomi and Hikari: Ordinary Cars run A B C | aisle | D E, Green Cars A B | C D. See which seats are windows and why Seat E faces Mt. Fuji."
     },
     "eyebrow": "Seat layout guide",
-    "h1": "Shinkansen Seat Letters Explained",
+    "h1": "Shinkansen Seat Map: Seat Letters A–E Explained",
     "quick": {
       "label": "Quick answer",
       "a1": "<b>A and E</b> are window seats in most Ordinary Cars.",
