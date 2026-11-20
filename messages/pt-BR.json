@@ -574,7 +574,7 @@
       },
       {
         "bold": "Quando?",
-        "text": "Dias claros, geralmente do final da manhã ao início da tarde (dependendo da estação)."
+        "text": "Dias claros, com luz do dia. A estação importa mais que o horário: o inverno é o mais limpo."
       },
       {
         "bold": "Não quer memorizar?",
@@ -583,16 +583,16 @@
     ],
     "s1H2": "De qual lado do Shinkansen fica o Monte Fuji? (Assento E explicado)",
     "s1Bullet1Bold": "Tóquio → Osaka / Kyoto:",
-    "s1Bullet1": "O Monte Fuji fica no lado direito do trem (Assento E na janela na maioria dos vagões padrão).",
+    "s1Bullet1": "O Monte Fuji fica no lado direito do trem (Assento E na janela nos carros standard, Assento D no Green Car).",
     "s1Bullet2Bold": "Osaka / Kyoto → Tóquio:",
-    "s1Bullet2": "O Monte Fuji fica no lado esquerdo do trem (novamente, Assento E na janela na maioria dos vagões padrão).",
-    "s1Note": "Na maioria dos vagões padrão 3+2, o Assento E é o assento na janela do lado do Monte Fuji. Os Green Cars podem ter layout diferente, mas a mesma regra esquerda/direita se aplica.",
+    "s1Bullet2": "O Monte Fuji fica no lado esquerdo do trem (novamente, Assento E na janela nos carros standard, Assento D no Green Car).",
+    "s1Note": "É a recomendação da JR Central: Assento E nos carros standard (layout 3+2), Assento D no Green Car (layout 2+2).",
     "s2H2": "Melhor trecho e horário para ver o Monte Fuji do trem",
     "s2P1": "Você não verá o Monte Fuji durante toda a viagem. O Monte Fuji costuma ser visível em dias claros entre Shin-Yokohama e Shizuoka, especialmente perto da estação Shin-Fuji.",
     "s2Bullet1Bold": "Rota:",
     "s2Bullet1": "Tokaido Shinkansen entre Tóquio, Nagoya e Osaka/Kyoto (Nozomi / Hikari / Kodama).",
     "s2Bullet2Bold": "Horário:",
-    "s2Bullet2": "Do final da manhã ao início da tarde costuma dar uma silhueta mais nítida. No verão, o início da manhã também pode funcionar bem.",
+    "s2Bullet2": "A estação e o tempo importam mais que o horário. Em dia claro, qualquer trem durante o dia funciona; no fim do verão, as manhãs costumam ser mais limpas.",
     "s2Bullet3Bold": "Clima:",
     "s2Bullet3": "Em dias nublados ou com neblina, o Monte Fuji pode ser difícil de ver mesmo do lado e assento corretos.",
     "s3H2": "Dicas práticas de assento para uma melhor vista do Monte Fuji",
@@ -657,16 +657,16 @@
     "timeLabel": "Horário do dia",
     "timeItems": [
       {
-        "bold": "Antes das 10h:",
-        "text": "Geralmente mais claro antes da neblina aumentar"
+        "bold": "Horário:",
+        "text": "Ao longo do ano, céu limpo perto de Shin-Fuji foi quase tão comum de manhã quanto à tarde (registros de nebulosidade 2016–2025). Em agosto e setembro, as manhãs foram um pouco mais limpas."
       },
       {
-        "bold": "Final da manhã até início da tarde:",
-        "text": "Bom em dias claros"
+        "bold": "Estação:",
+        "text": "Quase metade das horas de luz foi de céu limpo em dezembro e janeiro, e cerca de uma em seis em junho e julho."
       },
       {
-        "bold": "Final da tarde:",
-        "text": "Possível reflexo de luz solar no lado do Monte Fuji"
+        "bold": "À noite:",
+        "text": "O Monte Fuji não é iluminado: escolha um trem durante o dia."
       }
     ],
     "proTip": "Dica: Verifique a previsão do tempo da Prefeitura de Shizuoka na noite anterior. Nossa ferramenta mostra a visibilidade ao vivo perto de Shin-Fuji no topo da página.",
@@ -674,7 +674,7 @@
     "carStandardLabel": "Vagões padrão (layout 3+2)",
     "carStandard": [
       "O número do vagão não determina a vista; as obstruções variam ao longo da linha",
-      "Assento E = assento na janela do Monte Fuji em todos os vagões padrão"
+      "Assento E = janela do lado do Monte Fuji nos carros standard"
     ],
     "carGreenLabel": "Green Car (vagões 8–10, layout 2+2)",
     "carGreen": [
@@ -688,7 +688,7 @@
       },
       {
         "bold": "Via Klook:",
-        "text": "peça janela ou lado do Fuji se houver opção; o assento E não é garantido"
+        "text": "escolha assento reservado e adicione preferência por janela ou lado do Fuji; o assento E não é garantido"
       },
       {
         "bold": "Com JR Pass:",
@@ -735,7 +735,7 @@
       },
       {
         "q": "Qual a melhor forma de reservar sendo estrangeiro?",
-        "a": "A Klook oferece reserva em inglês, mas os assentos de trem de alta velocidade costumam ser atribuídos automaticamente. Preferência por janela ou lado do Fuji não garante o assento E."
+        "a": "A Klook oferece reserva em inglês. Escolha um assento reservado e adicione preferência por janela ou lado do Fuji: a Klook diz que fará o possível para atender. É um pedido, não uma garantia do assento E."
       }
     ],
     "makeEasyH2": "Facilite com o Verificador de Assento Shinkansen",

@@ -574,7 +574,7 @@
       },
       {
         "bold": "When?",
-        "text": "Clear days, usually late morning to early afternoon (season-dependent)."
+        "text": "Clear days in daylight. The season matters more than the hour: winter is the clearest."
       },
       {
         "bold": "Don't want to memorize this?",
@@ -583,16 +583,16 @@
     ],
     "s1H2": "Which side of the Shinkansen is Mt. Fuji on? (Seat E explained)",
     "s1Bullet1Bold": "Tokyo → Osaka / Kyoto:",
-    "s1Bullet1": "Mt. Fuji is on the right side of the train (window seat E in most standard cars).",
+    "s1Bullet1": "Mt. Fuji is on the right side of the train (window Seat E in standard cars, Seat D in the Green Car).",
     "s1Bullet2Bold": "Osaka / Kyoto → Tokyo:",
-    "s1Bullet2": "Mt. Fuji is on the left side of the train (again, window seat E in most standard cars).",
-    "s1Note": "In most standard (non–Green Car) 3+2 seat cars, Seat E is the window seat on the Mt. Fuji side. Green Cars may have a different layout, but the same left/right rule still applies. Some older guides still mention different seat letters, but on most modern 3+2 standard cars, Seat E is the Mt. Fuji window seat.",
+    "s1Bullet2": "Mt. Fuji is on the left side of the train (again, window Seat E in standard cars, Seat D in the Green Car).",
+    "s1Note": "This follows JR Central's own advice: Seat E in standard cars (3+2 layout), Seat D in the Green Car (2+2 layout).",
     "s2H2": "Best section and timing to see Mt. Fuji from the train",
     "s2P1": "You won't see Mt. Fuji for the whole ride – it appears only for a short stretch of the journey. Mt. Fuji is usually visible on clear days between Shin-Yokohama and Shizuoka, especially around Shin-Fuji station.",
     "s2Bullet1Bold": "Route:",
     "s2Bullet1": "Tokaido Shinkansen between Tokyo, Nagoya and Osaka/Kyoto (Nozomi / Hikari / Kodama).",
     "s2Bullet2Bold": "Time of day:",
-    "s2Bullet2": "Late morning to early afternoon often gives a clearer silhouette. In summer, early morning can also work well.",
+    "s2Bullet2": "The season and the weather matter more than the hour. On a clear day any daylight train works; in late summer, mornings tend to be clearer.",
     "s2Bullet3Bold": "Weather:",
     "s2Bullet3": "On cloudy or hazy days, Mt. Fuji may be hard to see even from the correct side and seat.",
     "s3H2": "Practical seat tips for a better Mt. Fuji view",
@@ -657,16 +657,16 @@
     "timeLabel": "Time of day",
     "timeItems": [
       {
-        "bold": "Before 10am:",
-        "text": "Often clearest before haze builds"
+        "bold": "Hour of day:",
+        "text": "Across the year, clear skies near Shin-Fuji were about as common in the morning as in the afternoon (2016–2025 cloud records). In August and September, mornings were somewhat clearer."
       },
       {
-        "bold": "Late morning to early afternoon:",
-        "text": "Good on clear days"
+        "bold": "Season:",
+        "text": "Close to half of daylight hours were clear in December and January, and about one in six in June and July."
       },
       {
-        "bold": "Late afternoon:",
-        "text": "Sun glare possible on the Mt. Fuji side"
+        "bold": "After dark:",
+        "text": "Mt. Fuji is not lit, so choose a daylight train."
       }
     ],
     "proTip": "Pro tip: Check Shizuoka Prefecture weather the night before. Our tool shows live visibility near Shin-Fuji at the top of the page.",
@@ -674,7 +674,7 @@
     "carStandardLabel": "Standard cars (3+2 layout)",
     "carStandard": [
       "Car number does not determine the Fuji view; obstructions vary along the line",
-      "Seat E = Mt. Fuji window seat in all standard cars"
+      "Seat E = Mt. Fuji window seat in standard cars"
     ],
     "carGreenLabel": "Green Car (cars 8–10, 2+2 layout)",
     "carGreen": [
@@ -688,7 +688,7 @@
       },
       {
         "bold": "Via Klook:",
-        "text": "request a window or Fuji-side seat if offered; Seat E is not guaranteed"
+        "text": "choose a reserved seat and add a window or Fuji-side preference; Seat E is not guaranteed"
       },
       {
         "bold": "With JR Pass:",
@@ -735,7 +735,7 @@
       },
       {
         "q": "What is the best way to book as a foreigner?",
-        "a": "Klook offers an English booking flow, but high-speed rail seats are normally assigned automatically. A window or Fuji-side preference is a request, not a guaranteed Seat E."
+        "a": "Klook offers an English booking flow. Choose a reserved seat and add a window or Fuji-side seat preference: Klook says it will do its best to accommodate it, so it is a request, not a guaranteed Seat E."
       }
     ],
     "makeEasyH2": "Make it easy with the Shinkansen Mt. Fuji Seat Checker",
