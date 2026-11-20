@@ -12,6 +12,7 @@
 | 2026-11-20（/guide の事実修正） | cdfbeb8 | /guide（全9言語） | 座席記号を JR東海の表現（普通車E・グリーン車D）に統一。Klook の座席は「指定席で希望を出せるが E席は保証されない」に。時間帯は自前の雲量データに合わせた（時間より季節）。見出し構造・title・URL・予約リンク・placement は変更なし | なし。12/01 の Klook 文中リンクの判定では、`guide_klook_text` の直前の説明文がこの日に変わったことに注意 |
 | 2026-11-21（東京→関西→広島） | d6d565f | 新規 /scenic/golden-route、/scenic/miyajima-ferry（英語のみ）。/scenic の見出し下にリンク1本、サイトマップ | 旅程別の景色の入口と、宮島 JR フェリーの大鳥居の側。新しい placement `golden_route_ticket`（新幹線3区間の Klook） | なし。トップ・/guide は変更なし |
 | 2026-11-21（OGP画像） | 本記録の前のコミット | 29ファイル（/scenic・/scenic/*・/kyoto-to-tokyo-mt-fuji-seat ほか）。トップ・/guide・/shinkansen-seat-letters・東京の宿検索は対象外 | `<head>` の og:image と twitter:image を共通画像で補い、Twitter Card を `summary_large_image` に。title・description・本文・リンクは変更なし（[SEO監査](./seo-audit-2026-11-21.md)） | なし |
+| 2026-11-21（SEO文言） | 本記録の前のコミット | /shinkansen-seat-letters（英語の title・H1・description）、/areas-to-stay/tokyo-station-vs-shinjuku（英語の description） | 座席表（seat map）の検索の意図に title を合わせた。東京駅と新宿は別の駅で、中央線快速で約14分と冒頭に追記。座席チェッカー・Klook の導線・placement・翻訳は変更なし（[SEO監査 §7](./seo-audit-2026-11-21.md)） | なし。12/01 の判定は `/guide` で絞り込むので影響しない |
 
 ## 座席CTAの文言修正と計測準備（2026-11-21）
 
