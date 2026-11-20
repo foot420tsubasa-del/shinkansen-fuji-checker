@@ -904,7 +904,13 @@ test("homepage station suggestions can extend past the hero photo", () => {
 const { createJiti } = await import("jiti");
 const jiti = createJiti(process.cwd() + "/", { alias: { "@": process.cwd() } });
 const scenic = await jiti.import("./lib/scenic.ts");
-const { scenicDiscoveryRoutes } = await jiti.import("./lib/scenic-discovery.ts");
+const { scenicDiscoveryRoutes, scenicQuickViewHref } = await jiti.import("./lib/scenic-discovery.ts");
+
+test("scenic quick filters keep region and season when choosing or clearing scenery", () => {
+  assert.equal(scenicQuickViewHref({ view: "sea", region: "kanto", season: "winter" }), "/scenic?view=sea&region=kanto&season=winter#results");
+  assert.equal(scenicQuickViewHref({ region: "kanto", season: "winter" }), "/scenic?region=kanto&season=winter#results");
+  assert.equal(scenicQuickViewHref({}), "/scenic#results");
+});
 
 test("scenic discovery applies view, region, and season together, with explicit empty matches", () => {
   assert.equal(scenicDiscoveryRoutes({}).length, scenic.LIVE_ROUTES.length);

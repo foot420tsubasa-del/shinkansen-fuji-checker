@@ -21,6 +21,16 @@ type RouteDiscovery = {
 const routeData = discovery.routes as Record<string, RouteDiscovery>;
 export const seasonMonths: Record<string, number[]> = { spring: [3, 4, 5], summer: [6, 7, 8], autumn: [9, 10, 11], winter: [12, 1, 2] };
 
+/** Change the scenery while keeping the selected region and season. */
+export function scenicQuickViewHref({ view, region, season }: { view?: string; region?: string; season?: string }) {
+  const params = new URLSearchParams();
+  if (view) params.set("view", view);
+  if (region) params.set("region", region);
+  if (season) params.set("season", season);
+  const search = params.toString();
+  return `/scenic${search ? `?${search}` : ""}#results`;
+}
+
 export const viewFilters = [...hub.viewFilters, { id: "autumn-colour", label: discovery.foliageLabel }];
 
 /** "best": the season is one of the route's highlights; "good": enjoyable in any season and running then. */

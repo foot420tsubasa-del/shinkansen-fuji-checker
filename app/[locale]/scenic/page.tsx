@@ -12,7 +12,7 @@ import hub from "@/data/scenic-hub.json";
 import goldenRoute from "@/data/golden-route.json";
 import discovery from "@/data/scenic-discovery.json";
 import overview from "@/data/scenic-overview.json";
-import { scenicDiscoveryRoutes, scenicMonthRows, viewFilters } from "@/lib/scenic-discovery";
+import { scenicDiscoveryRoutes, scenicMonthRows, scenicQuickViewHref, viewFilters } from "@/lib/scenic-discovery";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -118,16 +118,16 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
           </Link>
         </header>
 
-        <nav aria-label="Quick view filters" className="-mx-5 mt-4 overflow-x-auto px-5 pb-1">
+        <nav aria-label="Quick view filters" className="-mx-5 mt-4 hidden overflow-x-auto px-5 pb-1 sm:block">
           <ul className="flex w-max gap-2">
             <li>
-              <Link href="/scenic#results" aria-current={!filtered ? "page" : undefined} className={["inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-bold transition-colors", !filtered ? "border-ink bg-ink text-white" : "border-slate-300 bg-white text-ink hover:border-ink"].join(" ")}>{hub.allViewsLabel}</Link>
+              <Link href={scenicQuickViewHref({ region, season })} aria-current={!view ? "page" : undefined} className={["inline-flex min-h-11 items-center rounded-full border px-4 text-sm font-bold transition-colors", !view ? "border-ink bg-ink text-white" : "border-slate-300 bg-white text-ink hover:border-ink"].join(" ")}>{hub.allViewsLabel}</Link>
             </li>
             {viewFilters.map((item) => {
-              const active = view === item.id && !season && !region;
+              const active = view === item.id;
               return (
                 <li key={item.id}>
-                  <Link href={`/scenic?view=${item.id}#results`} aria-current={active ? "page" : undefined} className={["inline-flex min-h-11 items-center whitespace-nowrap rounded-full border px-4 text-sm font-bold transition-colors", active ? "border-ink bg-ink text-white" : "border-slate-300 bg-white text-ink hover:border-ink"].join(" ")}>{item.label}</Link>
+                  <Link href={scenicQuickViewHref({ view: item.id, region, season })} aria-current={active ? "page" : undefined} className={["inline-flex min-h-11 items-center whitespace-nowrap rounded-full border px-4 text-sm font-bold transition-colors", active ? "border-ink bg-ink text-white" : "border-slate-300 bg-white text-ink hover:border-ink"].join(" ")}>{item.label}</Link>
                 </li>
               );
             })}
