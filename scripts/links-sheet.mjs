@@ -33,11 +33,15 @@ const GENRES = [
   ["ホテル検索（Agoda）", /^agoda/],
   ["比較サイト（Omio）", /^omio/],
 ];
+/** Links still to be issued live at the bottom of the same tab (data/affiliate-wishlist.json). */
+const WISHLIST_GENRE = "取得待ち（未発行）";
+const WISHLIST_SRC = "取得待ち";
 const GENRE_ORDER = [
   ...GENRES.map(([g]) => g),
   "ホテル：個別ホテル（Booking.com）",
   "ホテル：Booking.com エリア検索",
   "その他",
+  WISHLIST_GENRE,
 ];
 /** Japanese names for the sheet only (display; not read back on import). */
 const JA_NAME = {
@@ -249,6 +253,23 @@ function buildRows() {
       "データ元（変更しない）": "booking-hotel-urls",
     });
   }
+  // Not issued yet: one row each, so the tab is the single list of every link.
+  if (existsSync("data/affiliate-wishlist.json")) {
+    for (const [id, v] of Object.entries(load("affiliate-wishlist").items)) {
+      push({
+        ジャンル: WISHLIST_GENRE,
+        "名前（何のリンクか）": `[${v.priority}] ${v.name}`,
+        提供元: v.provider,
+        アフィリエイトURL: "",
+        "商品・行き先（参考）": v.normalUrl || "",
+        使っている場所: `予定: ${v.placeOn}`,
+        状態: v.status,
+        メモ: [v.purpose, v.caution && `注意: ${v.caution}`, v.method && `取得方法: ${v.method}`, v.checked && `確認日: ${v.checked}`].filter(Boolean).join(" ／ "),
+        "ID（変更しない）": id,
+        "データ元（変更しない）": WISHLIST_SRC,
+      });
+    }
+  }
   const order = (g) => (GENRE_ORDER.indexOf(g) + 1 || 99);
   rows.sort((a, b) => order(a[0]) - order(b[0]) || String(a[1]).localeCompare(String(b[1]), "ja"));
   return rows;
@@ -287,12 +308,18 @@ function importRows(file, apply) {
   const errors = [];
   const changes = [];
   const seen = new Set();
+  const waiting = [];
   rows.forEach((r, i) => {
     const line = i + 2;
     const cell = (h) => String(r[COL[h]] ?? "").trim();
     const id = cell("ID（変更しない）");
     const src = cell("データ元（変更しない）");
     if (!id && !src && !cell("アフィリエイトURL")) return; // blank row
+    if (src === WISHLIST_SRC) {
+      // Never written to the site: an issued link here needs a page to go on.
+      if (cell("アフィリエイトURL")) waiting.push(`${line}行目: [${id}] ${cell("名前（何のリンクか）")} — 発行済み。掲載先に組み込む作業が必要です`);
+      return;
+    }
     const key = `${src}:${id}`;
     if (seen.has(key)) return errors.push(`${line}行目: ID「${id}」が重複しています`);
     seen.add(key);
@@ -338,6 +365,7 @@ function importRows(file, apply) {
     console.error(`取り込みを中止しました（${errors.length}件）:\n- ` + errors.join("\n- "));
     process.exit(1);
   }
+  if (waiting.length) console.log("取得待ちの行に貼られたリンク（自動では反映しません）:\n- " + waiting.join("\n- "));
   console.log(changes.length ? changes.map((c) => `${c.line}行目: ${c.what}`).join("\n") : "変更はありません");
   if (apply && changes.length) {
     for (const c of changes) c.run();
