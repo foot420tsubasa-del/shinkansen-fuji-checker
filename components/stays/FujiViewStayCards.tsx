@@ -37,6 +37,7 @@ export function FujiViewStayCards({
         const booking = getBookingHotelLink(hotel.bookingKey);
         const photo = (hotel as { photo?: HotelPhoto | null }).photo;
         const everyRoom = hotel.viewRooms === "all";
+        const notice = (stays.bookingNotices as Record<string, { text: string; label: string; url: string } | undefined>)[hotel.id];
         return (
           <li key={hotel.id} className="flex flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_8px_24px_rgba(11,18,32,0.04)]">
             {photo ? (
@@ -73,6 +74,12 @@ export function FujiViewStayCards({
                   {hotel.source.label}
                 </a>
               ) : null}
+              {notice ? (
+                <p className="mt-4 border-l-2 border-amber-400 pl-3 text-sm leading-5 text-slate-700">
+                  {notice.text}{" "}
+                  <a href={notice.url} className="inline-flex min-h-11 items-center font-semibold underline underline-offset-2">{notice.label}</a>
+                </p>
+              ) : null}
               {booking ? (
                 <div className="mt-auto pt-5">
                   <ProviderButton
@@ -101,7 +108,7 @@ export function FujiViewStayCards({
   );
 }
 
-/** "See all hotels near Mt. Fuji": Booking.com's Fujikawaguchiko search, the Travelpayouts link in data/booking-hotel-destinations.json. */
+/** Booking.com area search for Lake Kawaguchiko. */
 export function FujiAreaSearchLink({ placement, pagePath, locale, className = "" }: { placement: AffiliateClickParams["placement"]; pagePath: string; locale: string; className?: string }) {
   const href = (bookingDestinations as Record<string, { affiliate_url?: string }>)[stays.areaSearch.destination]?.affiliate_url;
   if (!href) return null;
@@ -118,7 +125,7 @@ export function FujiAreaSearchLink({ placement, pagePath, locale, className = ""
           page_path: pagePath,
           locale,
           href,
-          label: stays.page.areaCta,
+          label: stays.areaSearch.trackingLabel,
           link_id: "bookingArea.fujikawaguchiko",
           product: "hotel_area",
           area: "Fujikawaguchiko",

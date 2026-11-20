@@ -46,6 +46,11 @@ export async function StayCityGuides({ locale }: { locale: string }) {
         })}
       </ul>
       {locale === "en" ? <p className="mt-3 text-xs leading-5 text-slate-600">{t("finder.disclosure")}</p> : null}
+      {city.id === "kyoto" ? (
+        <a href="#stay-finder" className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold text-slate-700 underline underline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2">
+          {t("discovery.backToTokyoFinder")}
+        </a>
+      ) : null}
     </section>
   ));
 }

@@ -141,7 +141,10 @@ export default async function AreasToStayIndex({ params }: Props) {
 
         <section id="stay-finder" aria-labelledby="stay-finder-title" tabIndex={-1} className="mt-6 scroll-mt-24 rounded-[22px] border border-slate-200 bg-white p-3.5 md:mt-8 md:p-7">
           <StayFinder areas={finderAreas} destinations={finderDestinations} lineNotes={lineNotes} hotelPicks={hotelPicks} />
-          <details className="group mt-6 border-t border-slate-200">
+          <a href="#kyoto" className="mt-3 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-slate-700 underline underline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2">
+            {t("discovery.compareKyoto")} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </a>
+          <details className="group mt-3 border-t border-slate-200">
             <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 pt-2 text-sm font-bold marker:content-none">
               {t("discovery.examples")}
               <ChevronDown className="h-4 w-4 shrink-0 group-open:rotate-180" aria-hidden="true" />
