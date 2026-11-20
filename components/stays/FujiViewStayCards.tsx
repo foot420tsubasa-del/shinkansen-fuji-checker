@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ArrowUpRight, Mountain } from "lucide-react";
 import stays from "@/data/fuji-view-stays.json";
+import bookingDestinations from "@/data/booking-hotel-destinations.json";
 import { getBookingHotelLink } from "@/lib/booking-hotels";
 import { trackAffiliateClick, type AffiliateClickParams } from "@/lib/analytics";
 import { ProviderButton } from "@/components/ui/ProviderButton";
@@ -100,9 +101,10 @@ export function FujiViewStayCards({
   );
 }
 
-/** "See all hotels near Mt. Fuji": Booking.com's Fujikawaguchiko search (plain link until an area affiliate link exists). */
+/** "See all hotels near Mt. Fuji": Booking.com's Fujikawaguchiko search, the Travelpayouts link in data/booking-hotel-destinations.json. */
 export function FujiAreaSearchLink({ placement, pagePath, locale, className = "" }: { placement: AffiliateClickParams["placement"]; pagePath: string; locale: string; className?: string }) {
-  const href = stays.areaSearch.url;
+  const href = (bookingDestinations as Record<string, { affiliate_url?: string }>)[stays.areaSearch.destination]?.affiliate_url;
+  if (!href) return null;
   return (
     <a
       href={href}

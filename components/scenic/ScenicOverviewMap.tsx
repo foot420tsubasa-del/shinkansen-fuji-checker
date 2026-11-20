@@ -2,6 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { makeScenicMapFrame } from "@/lib/scenic-map-frame";
+import extras from "@/data/scenic-map-extras.json";
+
+/** Journey extras (2026-11-21): verified West Japan items from /scenic/golden-route, drawn dashed so they are not read as seat-side route guides. */
+type MapExtra = { id: string; label: string; title: string; href: string; points: [number, number][]; marker?: [number, number] };
+const EXTRAS = extras.items as unknown as MapExtra[];
+/** Orientation for the Tokyo → Kyoto → Osaka → Hiroshima journey. */
+const CITIES: { name: string; at: [number, number]; dx: number; dy: number; anchor: "start" | "end" }[] = extras.cities as never;
 
 type OverviewRoute = {
   id: string;
@@ -29,8 +36,9 @@ type MapCopy = {
 const WIDTH = 620;
 const HEIGHT = 680;
 const FRAME = makeScenicMapFrame([
-  { lng: 127.5, lat: 29.5 },
-  { lng: 146.5, lat: 46.6 },
+  // Main islands only (2026-11-21): the old frame kept Okinawa and open sea, which left the west of the map empty.
+  { lng: 129.6, lat: 31.0 },
+  { lng: 146.0, lat: 45.6 },
 ], WIDTH, HEIGHT, 18);
 
 function project([lng, lat]: [number, number]): [number, number] {
@@ -113,6 +121,31 @@ export function ScenicOverviewMap({ locale, copy, highlight }: { locale: string;
                 </a>
               ))}
             </g>
+            <g aria-hidden="true" className="pointer-events-none">
+              {CITIES.map((city) => {
+                const [x, y] = project(city.at);
+                return (
+                  <g key={city.name}>
+                    <circle cx={x} cy={y} r="3" fill="#0b1220" stroke="white" strokeWidth="1.5" />
+                    <text x={x + city.dx} y={y + city.dy} textAnchor={city.anchor} className="fill-[#0b1220] text-[13px] font-bold" stroke="white" strokeWidth="3.5" paintOrder="stroke">{city.name}</text>
+                  </g>
+                );
+              })}
+            </g>
+            <g>
+              {EXTRAS.map((extra) => (
+                <a key={extra.id} href={`${prefix}${extra.href}`} aria-label={extra.title} className="group outline-none">
+                  <title>{extra.title}</title>
+                  <polyline points={pointString(extra.points)} fill="none" stroke="transparent" strokeWidth="12" strokeLinecap="round" />
+                  <polyline points={pointString(extra.points)} fill="none" stroke="white" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" pointerEvents="none" />
+                  <polyline points={pointString(extra.points)} fill="none" stroke="#16324f" strokeWidth="2.8" strokeDasharray="5 3.5" strokeLinecap="round" strokeLinejoin="round" className="transition group-hover:stroke-[#d94a32]" />
+                  {extra.marker ? (() => {
+                    const [x, y] = project(extra.marker);
+                    return <circle cx={x} cy={y} r="6" fill="#16324f" stroke="white" strokeWidth="2" className="transition group-hover:fill-[#d94a32]" />;
+                  })() : null}
+                </a>
+              ))}
+            </g>
           </svg>
         ) : (
           <div className="absolute inset-0 grid place-items-center" aria-live="polite">
@@ -122,6 +155,11 @@ export function ScenicOverviewMap({ locale, copy, highlight }: { locale: string;
       </div>
       {data ? (
         <nav aria-label={copy.navigationLabel} className="flex flex-wrap gap-2 border-t border-slate-100 px-4 py-4">
+          {EXTRAS.map((extra) => (
+            <a key={extra.id} href={`${prefix}${extra.href}`} className="rounded-full border border-dashed border-[#16324f] bg-white px-3 py-1.5 text-xs font-bold text-ink transition hover:bg-ink hover:text-white">
+              {extra.label}
+            </a>
+          ))}
           {[...ordered].reverse().map((route) => (
             <a key={route.id} href={`${prefix}/scenic/${route.slug}`} className={["rounded-full px-3 py-1.5 text-xs font-bold transition hover:bg-ink hover:text-white", isOn(route.id) ? "bg-[#fde7e2] text-ink" : "bg-slate-100 text-slate-500"].join(" ")}>
               {route.line}
@@ -129,6 +167,10 @@ export function ScenicOverviewMap({ locale, copy, highlight }: { locale: string;
           ))}
         </nav>
       ) : null}
+      <p className="flex flex-wrap items-center gap-x-4 gap-y-1 border-t border-slate-100 px-4 py-2 text-xs text-slate-600">
+        <span className="inline-flex items-center gap-1.5"><span aria-hidden="true" className="inline-block h-[3px] w-5 rounded bg-[#d94a32]" />{extras.legend.routes}</span>
+        <span className="inline-flex items-center gap-1.5"><span aria-hidden="true" className="inline-block w-5 border-t-[3px] border-dashed border-[#16324f]" />{extras.legend.extras}</span>
+      </p>
       <p className="border-t border-slate-100 px-4 py-2 text-[11px] text-slate-500">
         {copy.attributionPrefix} <a href="https://www.openstreetmap.org/copyright" className="underline">{copy.attributionLink}</a> · {copy.outlineCredit}
       </p>

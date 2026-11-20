@@ -21,22 +21,58 @@
           "image": "/images/scenic/photos/shin-fuji.webp",
           "imageAlt": "Mt. Fuji seen from the Tokaido Shinkansen near Shin-Fuji",
           "facts": [
-            ["What you see", "Mt. Fuji, clearest around Shin-Fuji station, on clear days."],
-            ["Ride", "Tokyo → Kyoto or Shin-Osaka, any Nozomi, Hikari or Kodama."],
-            ["Extra travel", "None."],
-            ["Seat side", "Right side going to Kyoto and Osaka: Seat E in standard cars, Seat D in the Green Car. Left side on the way back."],
-            ["How to book", "A reserved seat on the Tokaido Shinkansen. Ask for Seat E at a JR ticket office, or add a window or Fuji-side preference on Klook (not a guaranteed Seat E)."]
+            [
+              "What you see",
+              "Mt. Fuji, clearest around Shin-Fuji station, on clear days."
+            ],
+            [
+              "Ride",
+              "Tokyo → Kyoto or Shin-Osaka, any Nozomi, Hikari or Kodama."
+            ],
+            [
+              "Extra travel",
+              "None."
+            ],
+            [
+              "Seat side",
+              "Right side going to Kyoto and Osaka: Seat E in standard cars, Seat D in the Green Car. Left side on the way back."
+            ],
+            [
+              "How to book",
+              "A reserved seat on the Tokaido Shinkansen. Ask for Seat E at a JR ticket office, or add a window or Fuji-side preference on Klook (not a guaranteed Seat E)."
+            ]
           ],
-          "links": [["Which side for Mt. Fuji?", "/guide"], ["Route page and timing", "/scenic/tokaido-shinkansen"]]
+          "links": [
+            [
+              "Which side for Mt. Fuji?",
+              "/guide"
+            ],
+            [
+              "Route page and timing",
+              "/scenic/tokaido-shinkansen"
+            ]
+          ]
         },
         {
           "id": "sanyo",
           "name": "Shin-Osaka to Hiroshima on the Sanyo Shinkansen",
           "facts": [
-            ["What you see", "We have not verified a headline view on this stretch, so we do not recommend a side. Book the seat that suits you."],
-            ["Ride", "Shin-Osaka → Hiroshima, about 1 h 25 min by Mizuho and up to about 1 h 50 min by Hikari (timetable listing on Klook, 21 Nov 2026)."],
-            ["Extra travel", "None."],
-            ["How to book", "A reserved seat Shin-Osaka → Hiroshima. Through tickets from Tokyo to Hiroshima are also sold."]
+            [
+              "What you see",
+              "We have not verified a headline view on this stretch, so we do not recommend a side. Book the seat that suits you."
+            ],
+            [
+              "Ride",
+              "Shin-Osaka → Hiroshima, about 1 h 25 min by Mizuho and up to about 1 h 50 min by Hikari (timetable listing on Klook, 21 Nov 2026)."
+            ],
+            [
+              "Extra travel",
+              "None."
+            ],
+            [
+              "How to book",
+              "A reserved seat Shin-Osaka → Hiroshima. Through tickets from Tokyo to Hiroshima are also sold."
+            ]
           ],
           "links": []
         }
@@ -53,21 +89,49 @@
           "image": "/images/scenic/photos/enoden.webp",
           "imageAlt": "An Enoden train by the Shonan sea with Mt. Fuji",
           "facts": [
-            ["What you see", "The sea between Koshigoe and Inamuragasaki."],
-            ["Where", "Fujisawa ↔ Kamakura, a day trip from Tokyo."],
-            ["Extra travel", "Yes: Tokyo to Fujisawa or Kamakura by JR, then the Enoden."]
+            [
+              "What you see",
+              "The sea between Koshigoe and Inamuragasaki."
+            ],
+            [
+              "Where",
+              "Fujisawa ↔ Kamakura, a day trip from Tokyo."
+            ],
+            [
+              "Extra travel",
+              "Yes: Tokyo to Fujisawa or Kamakura by JR, then the Enoden."
+            ]
           ],
-          "links": [["Which side, timing and tickets", "/scenic/enoden"]]
+          "links": [
+            [
+              "Which side, timing and tickets",
+              "/scenic/enoden"
+            ]
+          ]
         },
         {
           "id": "hakone",
           "name": "Hakone Tozan Railway",
           "facts": [
-            ["What you see", "The Hayakawa valley and three switchbacks."],
-            ["Where", "Hakone-Yumoto to Gora; the switchbacks are between Deyama and Gora. A day trip or overnight from Tokyo."],
-            ["Extra travel", "Yes: Tokyo to Odawara or Hakone-Yumoto first."]
+            [
+              "What you see",
+              "The Hayakawa valley and three switchbacks."
+            ],
+            [
+              "Where",
+              "Hakone-Yumoto to Gora; the switchbacks are between Deyama and Gora. A day trip or overnight from Tokyo."
+            ],
+            [
+              "Extra travel",
+              "Yes: Tokyo to Odawara or Hakone-Yumoto first."
+            ]
           ],
-          "links": [["Route page", "/scenic/hakone-tozan"]]
+          "links": [
+            [
+              "Route page",
+              "/scenic/hakone-tozan"
+            ]
+          ]
         },
         {
           "id": "sagano",
@@ -75,11 +139,25 @@
           "image": "/images/scenic/photos/sagano.webp",
           "imageAlt": "The Hozu river and Hozukyo station from the Sagano Scenic Railway",
           "facts": [
-            ["What you see", "The Hozu river gorge."],
-            ["Where", "Torokko Saga ↔ Torokko Kameoka, west Kyoto; the gorge is between Torokko Arashiyama and Torokko Kameoka."],
-            ["Extra travel", "Yes: from Kyoto station to Saga-Arashiyama by JR."]
+            [
+              "What you see",
+              "The Hozu river gorge."
+            ],
+            [
+              "Where",
+              "Torokko Saga ↔ Torokko Kameoka, west Kyoto; the gorge is between Torokko Arashiyama and Torokko Kameoka."
+            ],
+            [
+              "Extra travel",
+              "Yes: from Kyoto station to Saga-Arashiyama by JR."
+            ]
           ],
-          "links": [["Which side, timing and tickets", "/scenic/sagano"]]
+          "links": [
+            [
+              "Which side, timing and tickets",
+              "/scenic/sagano"
+            ]
+          ]
         },
         {
           "id": "etsetora",
@@ -87,15 +165,39 @@
           "image": "/images/scenic/photos/etsetora.webp",
           "imageAlt": "The etSETOra sightseeing train at a station platform",
           "facts": [
-            ["What it is", "JR West's sightseeing train between Hiroshima and Fukuyama via the Kure Line, the coastal line east of Hiroshima."],
-            ["Timetable", "Hiroshima 9:32 → Fukuyama 12:53 (stops include Kure, Takehara, Mihara, Onomichi). Return Fukuyama 14:17 → Hiroshima about 17:22."],
-            ["When it runs", "Mondays, Fridays, weekends and public holidays, except the New Year period. JR West has published plans through February 2027."],
-            ["Seats", "All seats are reserved. You need a fare ticket plus a reserved Green ticket for ordinary trains, bought before boarding."],
-            ["How to book", "JR West's e5489 site, major JR ticket offices or travel agencies. Meals must be reserved at least four days ahead, separately from e5489."],
-            ["Sea side", "Not stated by JR West, so we do not recommend a side."],
-            ["Extra travel", "Yes: a half-day ride from Hiroshima. Onomichi and Fukuyama are both on the Sanyo Shinkansen for the trip back."]
+            [
+              "What it is",
+              "JR West's sightseeing train between Hiroshima and Fukuyama via the Kure Line, the coastal line east of Hiroshima."
+            ],
+            [
+              "Timetable",
+              "Hiroshima 9:32 → Fukuyama 12:53 (stops include Kure, Takehara, Mihara, Onomichi). Return Fukuyama 14:17 → Hiroshima about 17:22."
+            ],
+            [
+              "When it runs",
+              "Mondays, Fridays, weekends and public holidays, except the New Year period. JR West has published plans through February 2027."
+            ],
+            [
+              "Seats",
+              "All seats are reserved. You need a fare ticket plus a reserved Green ticket for ordinary trains, bought before boarding."
+            ],
+            [
+              "How to book",
+              "JR West's e5489 site, major JR ticket offices or travel agencies. Meals must be reserved at least four days ahead, separately from e5489."
+            ],
+            [
+              "Sea side",
+              "Not stated by JR West, so we do not recommend a side."
+            ],
+            [
+              "Extra travel",
+              "Yes: a half-day ride from Hiroshima. Onomichi and Fukuyama are both on the Sanyo Shinkansen for the trip back."
+            ]
           ],
-          "official": ["etSETOra on JR West (Japanese)", "https://www.jr-odekake.net/railroad/kankoutrain/etsetora/"],
+          "official": [
+            "etSETOra on JR West (Japanese)",
+            "https://www.jr-odekake.net/railroad/kankoutrain/etsetora/"
+          ],
           "links": []
         }
       ]
@@ -111,12 +213,29 @@
           "image": "/images/scenic/photos/miyajima-ferries.webp",
           "imageAlt": "Itsukushima island, Mt. Misen, the Great Torii and Miyajima ferries",
           "facts": [
-            ["What you see", "The Great Torii of Itsukushima Shrine from the sea."],
-            ["Ride", "Miyajimaguchi → Miyajima, about 10 minutes."],
-            ["Extra travel", "JR Sanyo Line from Hiroshima to Miyajimaguchi, about 28 minutes."],
-            ["Side", "Right side, facing forward, on Great Torii sailings."]
+            [
+              "What you see",
+              "The Great Torii of Itsukushima Shrine from the sea."
+            ],
+            [
+              "Ride",
+              "Miyajimaguchi → Miyajima, about 10 minutes."
+            ],
+            [
+              "Extra travel",
+              "JR Sanyo Line from Hiroshima to Miyajimaguchi, about 28 minutes."
+            ],
+            [
+              "Side",
+              "Right side, facing forward, on Great Torii sailings."
+            ]
           ],
-          "links": [["Which sailings pass the Torii", "/scenic/miyajima-ferry"]]
+          "links": [
+            [
+              "Which sailings pass the Torii",
+              "/scenic/miyajima-ferry"
+            ]
+          ]
         }
       ]
     }
@@ -125,9 +244,18 @@
     "title": "Book the Shinkansen legs",
     "sub": "Reserved Shinkansen tickets in English. Tourist trains and the ferry are booked with their operators.",
     "links": [
-      ["shinkansenTokyoKyoto", "Tokyo → Kyoto on Klook"],
-      ["shinkansenOsakaHiroshima", "Osaka → Hiroshima on Klook"],
-      ["shinkansenTokyoHiroshima", "Tokyo → Hiroshima on Klook"]
+      [
+        "shinkansenTokyoKyoto",
+        "Tokyo → Kyoto on Klook"
+      ],
+      [
+        "shinkansenOsakaHiroshima",
+        "Osaka → Hiroshima on Klook"
+      ],
+      [
+        "shinkansenTokyoHiroshima",
+        "Tokyo → Hiroshima on Klook"
+      ]
     ],
     "disclosure": "We may earn a commission if you book through these links, at no extra cost to you."
   },
@@ -143,12 +271,36 @@
     "image": "/images/scenic/photos/miyajima-torii-from-ferry.webp",
     "imageAlt": "The Great Torii of Itsukushima Shrine seen from the JR ferry",
     "facts": [
-      ["Which sailings", "Departures from Miyajimaguchi between 9:10 and 16:10 on a normal day, marked on the official timetable. On some busy days JR has run them from 7:05.", "https://jr-miyajimaferry.co.jp/timetable"],
-      ["When the route changes", "A Great Torii sailing may not run that way because of the tide, and the route is changed when a storm surge is forecast. The operator posts monthly notices.", "https://jr-miyajimaferry.co.jp/route"],
-      ["Crossing time", "About 10 minutes, the same as a direct sailing.", "https://jr-miyajimaferry.co.jp/timetable"],
-      ["How often", "About every 15 minutes during the day.", "https://jr-miyajimaferry.co.jp/timetable"],
-      ["Fare", "¥200 one way for adults (¥100 for children), plus the ¥100 Miyajima Visitor Tax, which is collected with the fare.", "https://jr-miyajimaferry.co.jp/fare"],
-      ["Passes and IC cards", "Japan Rail Pass and JR-WEST Rail Pass are accepted. Suica, ICOCA, PASMO and seven other IC cards work at the gates.", "https://jr-miyajimaferry.co.jp/en/"]
+      [
+        "Which sailings",
+        "Departures from Miyajimaguchi between 9:10 and 16:10 on a normal day, marked on the official timetable. On some busy days JR has run them from 7:05.",
+        "https://jr-miyajimaferry.co.jp/timetable"
+      ],
+      [
+        "When the route changes",
+        "A Great Torii sailing may not run that way because of the tide, and the route is changed when a storm surge is forecast. The operator posts monthly notices.",
+        "https://jr-miyajimaferry.co.jp/route"
+      ],
+      [
+        "Crossing time",
+        "About 10 minutes, the same as a direct sailing.",
+        "https://jr-miyajimaferry.co.jp/timetable"
+      ],
+      [
+        "How often",
+        "About every 15 minutes during the day.",
+        "https://jr-miyajimaferry.co.jp/timetable"
+      ],
+      [
+        "Fare",
+        "¥200 one way for adults (¥100 for children), plus the ¥100 Miyajima Visitor Tax, which is collected with the fare.",
+        "https://jr-miyajimaferry.co.jp/fare"
+      ],
+      [
+        "Passes and IC cards",
+        "Japan Rail Pass and JR-WEST Rail Pass are accepted. Suica, ICOCA, PASMO and seven other IC cards work at the gates.",
+        "https://jr-miyajimaferry.co.jp/en/"
+      ]
     ],
     "gettingThereTitle": "Getting there from Hiroshima",
     "gettingThere": [
@@ -164,5 +316,11 @@
       "Another operator runs ferries on the same crossing; this page covers JR's Great Torii sailings only."
     ],
     "back": "Plan the rest of the route"
+  },
+  "stay": {
+    "title": "Where to stay for Miyajima",
+    "text": "Hiroshima Station is where the Shinkansen stops and the Sanyo Line to Miyajimaguchi starts.",
+    "label": "Compare stays near Hiroshima Station on Booking.com",
+    "destination": "booking_hiroshima-station"
   }
 }

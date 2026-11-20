@@ -35,10 +35,8 @@
     "more": "All Mt. Fuji-view stays"
   },
   "areaSearch": {
-    "url": "https://www.booking.com/searchresults.html?ss=Fujikawaguchiko",
-    "affiliate": false,
-    "note": "Plain Booking.com search for Fujikawaguchiko (resolved to 富士河口湖町 on 2026-11-20). No area affiliate link has been issued yet; replace with one when it is.",
-    "checked": "2026-11-20"
+    "destination": "booking_fujikawaguchiko",
+    "note": "Booking.com Fujikawaguchiko search via Travelpayouts; the URL lives in data/booking-hotel-destinations.json so the URL sheet covers it (2026-11-21)."
   },
   "hotels": [
     {

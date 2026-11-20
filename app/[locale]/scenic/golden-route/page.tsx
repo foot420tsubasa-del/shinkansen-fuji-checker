@@ -10,6 +10,7 @@ import { TrackedAffiliateLink } from "@/components/analytics/TrackedAffiliateLin
 import { AFFILIATE_LINKS, getAffUrl } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import data from "@/data/golden-route.json";
+import destinations from "@/data/booking-hotel-destinations.json";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -84,6 +85,9 @@ export default async function GoldenRoutePage({ params }: Props) {
     .map(([linkId, label]) => ({ linkId, label, href: getAffUrl(linkId), adid: AFFILIATE_LINKS[linkId]?.adid || undefined }))
     .filter((t): t is { linkId: string; label: string; href: string; adid: string | undefined } => Boolean(t.href));
 
+  const stayArea = (destinations as Record<string, { affiliate_url?: string; url_status?: string }>)[data.stay.destination];
+  const stayHref = stayArea?.url_status === "active" ? stayArea.affiliate_url : undefined;
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -121,6 +125,29 @@ export default async function GoldenRoutePage({ params }: Props) {
             </div>
           </section>
         ))}
+
+        {stayHref ? (
+          <section className="mt-12 max-w-[760px]" aria-labelledby="stay-heading">
+            <h2 id="stay-heading" className="text-xl font-extrabold tracking-[-0.02em]">{data.stay.title}</h2>
+            <p className="mt-1 text-[15px] leading-6 text-slate-600">{data.stay.text}</p>
+            <TrackedAffiliateLink
+              href={stayHref}
+              rel={AFFILIATE_REL}
+              target="_blank"
+              category="hotel"
+              provider="booking_travelpayouts"
+              placement="golden_route_stay"
+              label={data.stay.label}
+              linkId={data.stay.destination}
+              pagePath={pagePath}
+              locale={locale}
+              className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-bold text-ink underline underline-offset-4 hover:text-fuji"
+            >
+              {data.stay.label} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </TrackedAffiliateLink>
+            <p className="mt-1 text-xs leading-5 text-slate-500">PR: {data.tickets.disclosure}</p>
+          </section>
+        ) : null}
 
         {tickets.length ? (
           <section className="mt-12 max-w-[760px]" aria-labelledby="tickets-heading">

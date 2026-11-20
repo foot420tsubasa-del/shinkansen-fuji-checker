@@ -1320,7 +1320,9 @@ test("Fuji-view stays: verified hotels, links registered once, no prices or rank
   // La Vista: not every room faces Fuji, and the card says so.
   assert.match(stays.hotels.find((h) => h.id === "la-vista-fujikawaguchiko").view, /Not every room/);
   assert.match(stays.page.viewNotes.join(" "), /cloud/i);
-  assert.equal(stays.areaSearch.affiliate, false, "the area search is a plain link until an affiliate link is issued");
+  // The area search is the Travelpayouts link issued 2026-11-21, kept with the other Booking.com area links.
+  const areas = JSON.parse(readFileSync("data/booking-hotel-destinations.json", "utf8"));
+  assert.match(areas[stays.areaSearch.destination]?.affiliate_url ?? "", /^https:\/\/booking\.tpx\.lv\/[A-Za-z0-9]+$/);
   // One affiliate link never points at two different hotels (alias keys for the same Booking page may share it).
   const hotelFor = new Map();
   for (const h of Object.values(booking)) {
@@ -1893,4 +1895,21 @@ test("scenic nearby: 'Along the line' links are registered Klook links, quiet, w
   assert.match(component, /PR: \{disclosure\}/);
   assert.ok(!component.includes("bg-fuji"), "never a filled button");
   assert.match(readFileSync("lib/affiliate/links.ts", "utf8"), /"scenic_route_nearby"/);
+});
+
+test("scenic stays: every route stay block resolves to an active Booking.com or Klook link", () => {
+  // 2026-11-21: Booking.com area searches issued for the route bases (Gora, Unazuki, Abashiri,
+  // Aizuwakamatsu, Fukaura, Echigo-Yuzawa, Aomori, Furano) and Hiroshima Station for the journey page.
+  const stays = JSON.parse(readFileSync("data/scenic-stays.json", "utf8"));
+  const areas = JSON.parse(readFileSync("data/booking-hotel-destinations.json", "utf8"));
+  for (const [routeId, cfg] of Object.entries(stays.routes)) {
+    for (const link of cfg.links.filter((l) => l.source === "booking-hotel-destinations")) {
+      const a = areas[link.id];
+      assert.ok(a && a.url_status === "active", `${routeId}: ${link.id} active`);
+      assert.match(a.affiliate_url, /^https:\/\/booking\.tpx\.lv\/[A-Za-z0-9]+$/, `${routeId}: ${link.id} is a Travelpayouts link`);
+    }
+  }
+  const golden = JSON.parse(readFileSync("data/golden-route.json", "utf8"));
+  assert.match(areas[golden.stay.destination]?.affiliate_url ?? "", /^https:\/\/booking\.tpx\.lv\//);
+  assert.match(readFileSync("lib/affiliate/links.ts", "utf8"), /"golden_route_stay"/);
 });

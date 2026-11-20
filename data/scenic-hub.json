@@ -14,26 +14,72 @@
   "whenLabel": "When:",
   "cardLinkLabel": "See the side and timing",
   "viewFilters": [
-    { "id": "fuji", "label": "Mt. Fuji" },
-    { "id": "mountains", "label": "Mountains" },
-    { "id": "sea", "label": "Sea" },
-    { "id": "gorge-river", "label": "Gorge · river" },
-    { "id": "snow", "label": "Snow" },
-    { "id": "flowers-countryside", "label": "Flowers · countryside" },
-    { "id": "city-night", "label": "City at night" }
+    {
+      "id": "fuji",
+      "label": "Mt. Fuji"
+    },
+    {
+      "id": "mountains",
+      "label": "Mountains"
+    },
+    {
+      "id": "sea",
+      "label": "Sea"
+    },
+    {
+      "id": "gorge-river",
+      "label": "Gorge · river"
+    },
+    {
+      "id": "snow",
+      "label": "Snow"
+    },
+    {
+      "id": "flowers-countryside",
+      "label": "Flowers · countryside"
+    },
+    {
+      "id": "city-night",
+      "label": "City at night"
+    }
   ],
   "seasonFilters": [
-    { "id": "spring", "label": "Spring" },
-    { "id": "summer", "label": "Summer" },
-    { "id": "autumn", "label": "Autumn" },
-    { "id": "winter", "label": "Winter" }
+    {
+      "id": "spring",
+      "label": "Spring"
+    },
+    {
+      "id": "summer",
+      "label": "Summer"
+    },
+    {
+      "id": "autumn",
+      "label": "Autumn"
+    },
+    {
+      "id": "winter",
+      "label": "Winter"
+    }
   ],
-  "months": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+  "months": [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec"
+  ],
   "map": {
-    "title": "See all 14 routes on the map",
-    "intro": "Select a red line or a route name to open its seat-side guide.",
+    "title": "See the routes on the map",
+    "intro": "Select a red line or a route name to open its seat-side guide. Dashed lines are extras on the Tokyo → Kyoto → Hiroshima journey.",
     "ariaTitle": "Map of Japan's scenic train routes",
-    "ariaDescription": "Fourteen route lines. Select a line to open its side-of-train guide.",
+    "ariaDescription": "Fourteen route lines, plus two dashed journey extras near Hiroshima. Select a line to open its guide.",
     "loading": "Map loads as you reach it",
     "navigationLabel": "Routes on the map",
     "attributionPrefix": "Route data ©",
