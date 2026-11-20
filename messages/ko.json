@@ -11,6 +11,11 @@
     "jrPass": "JR 패스 비교"
   },
   "home": {
+    "seatBooking": {
+      "title": "신칸센 티켓",
+      "label": "Klook에서 신칸센 티켓 보기",
+      "preference": "지정석 예약 시 옵션이 있다면 후지산 쪽 좌석을 요청하세요. E석은 보장되지 않습니다."
+    },
     "brandTitle": "후지산이 보이는 신칸센 좌석을 확인하세요",
     "brandSubtitle": "그 다음 도쿄 호텔 거점, 철도 옵션, 도착 준비를 올바른 순서로 선택하세요.",
     "seatCheckerHeading": "신칸센 후지산 좌석 확인기",

@@ -131,7 +131,8 @@ export default async function GoldenRoutePage({ params }: Props) {
           {tickets.length ? <a href="#train-tickets" className={jumpClass}>{data.tickets.jumpLabel}</a> : null}
         </nav>
 
-        {data.sections.map((section) => {
+        {data.sections.map((section, index) => {
+          const nextId = data.sections[index + 1]?.id ?? (tickets.length ? "train-tickets" : undefined);
           const wide = section.items.length === 1;
           const layout = wide ? cardLayouts.single : section.items.length === 2 ? cardLayouts.pair : cardLayouts.group;
           return (
@@ -143,6 +144,11 @@ export default async function GoldenRoutePage({ params }: Props) {
                   <ItemCard key={item.id} item={item} wide={wide} sizes={layout.sizes} />
                 ))}
               </div>
+              {nextId ? (
+                <a href={`#${nextId}`} className="mt-3 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-bold text-ink underline underline-offset-4 hover:text-fuji focus-visible:outline-2 focus-visible:outline-offset-2">
+                  {section.nextLabel} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+                </a>
+              ) : null}
             </section>
           );
         })}

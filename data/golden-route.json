@@ -13,6 +13,7 @@
   "sections": [
     {
       "id": "from-my-train",
+      "nextLabel": "Explore scenic detours",
       "title": "Views from my train",
       "sub": "No extra travel: the view is on the Shinkansen you are already taking.",
       "items": [
@@ -86,6 +87,7 @@
     },
     {
       "id": "detours",
+      "nextLabel": "Plan the Miyajima ferry",
       "title": "Scenic detours along the way",
       "sub": "Worth a day or half a day off the Shinkansen. Each needs its own train and ticket.",
       "items": [
@@ -211,6 +213,7 @@
     },
     {
       "id": "near-destination",
+      "nextLabel": "Find Shinkansen tickets",
       "title": "Beautiful experiences near my destination",
       "sub": "A short ride from where you are staying.",
       "items": [

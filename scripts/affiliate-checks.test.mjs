@@ -1854,6 +1854,16 @@ test("design pass: hotel cards use only cleared photos, never a placeholder pict
   assert.doesNotMatch(readFileSync("components/stays/FujiViewStayCards.tsx", "utf8"), /coming soon/i);
 });
 
+test("the Ueno recommendation uses the existing Ueno hotel search", async () => {
+  const { getStayBySlug } = await jiti.import("./lib/content/stay.ts");
+  const { getHotelLink } = await jiti.import("./lib/hotel-links.ts");
+  const recommendation = getStayBySlug("ueno-vs-shinjuku")?.quickRec;
+  assert.equal(recommendation?.area, "Ueno");
+  assert.equal(recommendation?.areaId, "ueno");
+  assert.equal(recommendation?.link, getHotelLink("ueno").href);
+  assert.notEqual(recommendation?.link, getHotelLink("shinjuku").href);
+});
+
 test("golden route: journey hub and Miyajima ferry page stay sourced and book the right legs", () => {
   // The three rail booking links serve the exact legs of this route.
   // etSETOra has reserved seats, while ferry passengers can buy at the pier.

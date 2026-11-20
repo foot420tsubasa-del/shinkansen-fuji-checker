@@ -11,6 +11,11 @@
     "jrPass": "Comparar JR Pass"
   },
   "home": {
+    "seatBooking": {
+      "title": "Passagens de Shinkansen",
+      "label": "Ver passagens de Shinkansen na Klook",
+      "preference": "Ao reservar um assento, solicite o lado do Monte Fuji se a opção estiver disponível. O assento E não é garantido."
+    },
     "brandTitle": "Confira seu assento Shinkansen do lado do Monte Fuji",
     "brandSubtitle": "Depois escolha sua base de hotel em Tóquio, opção ferroviária e preparação para a chegada na ordem certa.",
     "seatCheckerHeading": "Verificador de assento no Shinkansen para ver o Monte Fuji",

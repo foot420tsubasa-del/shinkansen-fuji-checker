@@ -11,6 +11,11 @@
     "jrPass": "Compare JR Pass"
   },
   "home": {
+    "seatBooking": {
+      "title": "Shinkansen tickets",
+      "label": "Check tickets on Klook",
+      "preference": "If offered, request the Mt. Fuji side when reserving a seat. Seat E is not guaranteed."
+    },
     "brandTitle": "Check your Mt. Fuji-side Shinkansen seat",
     "brandSubtitle": "Then choose your Tokyo hotel base, rail option, and arrival prep in the right order.",
     "seatCheckerHeading": "Shinkansen Mt. Fuji Seat Checker",
@@ -3555,8 +3560,8 @@
           {
             "feature": "Shinkansen access",
             "values": {
-              "Tokyo Station": "Direct (0 min)",
-              "Shinjuku": "14–15 min on JR Chuo Rapid"
+              "Tokyo Station": "Board at Tokyo Station",
+              "Shinjuku": "JR Chuo Rapid, then change trains at Tokyo Station"
             }
           },
           {
@@ -3583,8 +3588,8 @@
           {
             "feature": "Luggage ease",
             "values": {
-              "Tokyo Station": "★★★★★",
-              "Shinjuku": "★★★☆☆"
+              "Tokyo Station": "Stay near the station to avoid a local train on departure day",
+              "Shinjuku": "Allow time for station walking and the transfer"
             }
           },
           {

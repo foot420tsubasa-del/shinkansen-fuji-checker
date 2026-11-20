@@ -1932,6 +1932,8 @@ const SCORED_COMPARISONS: Record<string, string[]> = {
   "shinjuku-vs-ueno-vs-asakusa": ["shinjuku", "ueno", "asakusa"],
 };
 
+const EARLY_COMPARISONS = new Set(["asakusa-vs-ueno", "tokyo-station-vs-shinjuku", "ueno-vs-shinjuku"]);
+
 function ComparisonAreaHotelCtas({
   slug,
   locale,
@@ -2818,6 +2820,8 @@ export default async function StayPage({ params }: Props) {
   const stayComparisonAdPlacement = stayComparisonAdPlacements[page.slug];
   const quickRecBooking = comparisonBookingLink(page.quickRec.areaId, pagePath, locale);
   const scoredAreaIds = SCORED_COMPARISONS[slug];
+  const isPriorityComparison = EARLY_COMPARISONS.has(slug);
+  const showComparisonEarly = isPriorityComparison && (locale === "en" || Boolean(pageTranslations[slug]?.comparison));
   const scoreT = await getTranslations({ locale, namespace: "areaScores" });
 
   const isTokyoFirstTime = page.slug === "tokyo-first-time";
@@ -2831,6 +2835,18 @@ export default async function StayPage({ params }: Props) {
   if (firstTimeStayHub) {
     return <FirstTimeStayDecisionHub config={firstTimeStayHub} locale={locale} />;
   }
+
+  const comparisonSection = (
+    <section id="comparison" className="scroll-mt-24">
+      <h2 className="mb-4 text-lg font-semibold text-slate-950">{stayPagesCommon.comparisonTitle}</h2>
+      <ComparisonTable
+        columns={page.comparisonColumns}
+        rows={page.comparison}
+        highlight={page.quickRec.area}
+        wrapOnMobile={isPriorityComparison}
+      />
+    </section>
+  );
 
   return (
     <main className="page-shell min-h-screen text-slate-950">
@@ -2884,6 +2900,8 @@ export default async function StayPage({ params }: Props) {
                went nowhere worth sending anyone. */
             secondaryHref={undefined}
           />
+
+          {showComparisonEarly ? comparisonSection : null}
 
           {page.mapId ? (
             <section className="space-y-4">
@@ -2961,14 +2979,7 @@ export default async function StayPage({ params }: Props) {
             </div>
           </section>
 
-          <section id="comparison" className="scroll-mt-24">
-            <h2 className="mb-4 text-lg font-semibold text-slate-950">{stayPagesCommon.comparisonTitle}</h2>
-            <ComparisonTable
-              columns={page.comparisonColumns}
-              rows={page.comparison}
-              highlight={page.quickRec.area}
-            />
-          </section>
+          {!showComparisonEarly ? comparisonSection : null}
 
           {scoredAreaIds ? (
             <AreaScoreCompare

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { ArrowRight, Check } from "lucide-react";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import {
@@ -24,7 +25,7 @@ export type GuideSeatCheckCopy = {
   sideRight: string;
   sideLeft: string;
   greenCar: string;
-  bookNote: string;
+  /** Historical GA4 label for the booking click. */
   book: string;
   /** Conditional JR Pass route — shown under the ticket CTA. */
   jrPassLead: string;
@@ -53,6 +54,7 @@ export function GuideSeatCheck({
   pagePath: string;
   copy: GuideSeatCheckCopy;
 }) {
+  const bookingCopy = useTranslations("home.seatBooking");
   const [direction, setDirection] = useState<DirectionId | null>(null);
   const recommendation = direction ? getSeatRecommendation(direction) : null;
   // Once the reader has stated a direction, book the exact route rather than
@@ -164,7 +166,7 @@ export function GuideSeatCheck({
             <p className="mt-1 text-[12px] leading-5 text-slate-600">
               {copy.greenCar.replace("{seat}", recommendation.greenCarWindowSeat)}
             </p>
-            <p className="mt-2 text-[12px] leading-5 text-slate-600">{copy.bookNote}</p>
+            <p className="mt-2 text-[12px] leading-5 text-slate-600">{bookingCopy("preference")}</p>
             <a
               href={ticketHref}
               target="_blank"
@@ -187,7 +189,7 @@ export function GuideSeatCheck({
               }
               className={`mt-3 ${KLOOK_FILLED_CTA}`}
             >
-              {copy.book}
+              {bookingCopy("label")}
               <ArrowRight className="h-4 w-4" />
             </a>
             {/* Klook data: the Pass converts at ~2.5x the single-ticket rate for

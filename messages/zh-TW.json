@@ -11,6 +11,11 @@
     "jrPass": "比較 JR Pass"
   },
   "home": {
+    "seatBooking": {
+      "title": "新幹線車票",
+      "label": "在 Klook 查看新幹線車票",
+      "preference": "預訂指定席時，如有選項，可提出富士山一側的座位偏好。無法保證分配到 E 座。"
+    },
     "brandTitle": "確認富士山側的新幹線座位",
     "brandSubtitle": "然後依正確順序選擇東京飯店基地、鐵道方案與抵達準備。",
     "seatCheckerHeading": "新幹線富士山座位查詢",

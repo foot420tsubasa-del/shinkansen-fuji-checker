@@ -360,12 +360,10 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="text-lg font-bold tracking-[-0.01em] text-ink">
-            {hasChecked ? `Book Seat ${recommendation.standardWindowSeat}` : "Book your Shinkansen ticket"}
+            {t("seatBooking.title")}
           </p>
           <p className="mt-1 text-sm leading-6 text-slate-600">
-            {hasChecked
-              ? `${currentDirectionLabel}. Choose Seat ${recommendation.standardWindowSeat} if available.`
-              : "Reserved Tokaido Shinkansen seats. Choose Seat E if available."}
+            {t("seatBooking.preference")}
           </p>
         </div>
         <span className="shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-[11px] font-semibold text-slate-600">Klook</span>
@@ -389,7 +387,7 @@ export default function HomeClient({ season }: { season: HeroSeason }) {
         className="mt-4 flex h-12 w-full items-center justify-center gap-2 rounded-full bg-fuji px-5 text-[15px] font-bold text-white shadow-[0_8px_20px_rgba(217,74,50,0.28)] transition-colors hover:bg-fuji-hover"
       >
         <Train className="h-4 w-4" />
-        {hasChecked ? `Book Seat ${recommendation.standardWindowSeat} on Klook` : "Book on Klook"}
+        {t("seatBooking.label")}
         <ArrowRight className="h-4 w-4" />
       </a>
       <a

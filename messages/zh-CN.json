@@ -11,6 +11,11 @@
     "jrPass": "比较 JR Pass"
   },
   "home": {
+    "seatBooking": {
+      "title": "新干线车票",
+      "label": "在 Klook 查看新干线车票",
+      "preference": "预订指定席时，如有选项，可提出富士山一侧的座位偏好。不能保证分配到 E 座。"
+    },
     "brandTitle": "确认富士山侧的新干线座位",
     "brandSubtitle": "然后依正确顺序选择东京酒店基地、铁道方案与抵达准备。",
     "seatCheckerHeading": "新干线富士山座位查询",

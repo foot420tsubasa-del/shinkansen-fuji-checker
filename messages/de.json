@@ -11,6 +11,11 @@
     "jrPass": "JR Pass vergleichen"
   },
   "home": {
+    "seatBooking": {
+      "title": "Shinkansen-Tickets",
+      "label": "Shinkansen-Tickets auf Klook ansehen",
+      "preference": "Falls verfügbar, gib bei der Buchung eines reservierten Sitzplatzes die Fuji-Seite als Wunsch an. Sitz E ist nicht garantiert."
+    },
     "brandTitle": "Prüfe deinen Shinkansen-Platz auf der Fuji-Seite",
     "brandSubtitle": "Wähle dann deine Tokio-Hotelbasis, deine Bahnoption und deine Ankunftsvorbereitung in der richtigen Reihenfolge.",
     "seatCheckerHeading": "Shinkansen Mt. Fuji Sitzplatzcheck",
