@@ -1,0 +1,24 @@
+{
+  "_note": "Klook experiences shown as quiet text links under 'Along the line' on a scenic route page (2026-11-21). Links come from the URL管理 sheet tab 取得候補_20261120, each redirect checked. Only products that involve the line itself or sit at one of its stations; one per need.",
+  "title": "Along the line",
+  "sub": "Booked separately from your train ticket.",
+  "disclosure": "We may earn a commission if you book through these links, at no extra cost to you.",
+  "routes": {
+    "sagano-gorge": [
+      { "linkId": "tourSaganoRiverBoat", "title": "Sagano Romantic Train and Hozugawa river boat", "note": "Half-day guided tour (English, as listed on Klook). Check the date's inclusions before booking." }
+    ],
+    "enoden-coast": [
+      { "linkId": "tourKamakuraEnoden", "title": "Kamakura day walk with an Enoden ride", "note": "Group tour; Klook lists the Enoden ticket as included." }
+    ],
+    "hakone-tozan": [
+      { "linkId": "hakoneRopeway", "title": "Hakone Ropeway", "note": "From Sounzan, after the Tozan Railway and the cable car. The Hakone Freepass already covers it." },
+      { "linkId": "hakoneCruise", "title": "Lake Ashi sightseeing cruise", "note": "The usual next leg after the ropeway. Also covered by the Hakone Freepass." }
+    ],
+    "yurikamome-night": [
+      { "linkId": "teamlabPlanets", "title": "teamLab Planets TOKYO", "note": "At Shin-Toyosu, a Yurikamome station. Timed-entry tickets." }
+    ],
+    "fujikyu-fuji": [
+      { "linkId": "fujiPanoramicRopeway", "title": "Mt. Fuji Panoramic Ropeway", "note": "Up the hill by Lake Kawaguchi, walkable from Kawaguchiko station at the end of the Fujikyu line." }
+    ]
+  }
+}

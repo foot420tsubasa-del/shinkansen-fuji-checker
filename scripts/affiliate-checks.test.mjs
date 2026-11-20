@@ -1869,3 +1869,28 @@ test("golden route: journey hub and Miyajima ferry page stay sourced and book th
   const sitemap = readFileSync("app/sitemap.ts", "utf8");
   for (const path of ["/scenic/golden-route", "/scenic/miyajima-ferry"]) assert.ok(sitemap.includes(`"${path}"`), `${path} in the sitemap`);
 });
+
+test("scenic nearby: 'Along the line' links are registered Klook links, quiet, with the PR line", () => {
+  // 2026-11-21: from the URL sheet tab 取得候補_20261120, redirect-checked.
+  const nearby = JSON.parse(readFileSync("data/scenic-nearby.json", "utf8"));
+  const links = JSON.parse(readFileSync("data/affiliate-links.json", "utf8"));
+  const { routes } = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
+  const liveIds = new Set(routes.filter((r) => r.status === "live").map((r) => r.id));
+  for (const [routeId, items] of Object.entries(nearby.routes)) {
+    assert.ok(liveIds.has(routeId), `${routeId} is a live route`);
+    assert.ok(items.length <= 2, `${routeId}: at most two nearby links`);
+    for (const item of items) {
+      const link = links[item.linkId];
+      assert.ok(link, `${item.linkId} is registered`);
+      assert.equal(link.provider, "klook");
+      assert.match(link.directUrl, new RegExp(`^https://affiliate\\.klook\\.com/redirect\\?aid=104861&aff_adid=${link.adid}&k_site=https%3A%2F%2Fwww\\.klook\\.com%2F`));
+      assert.ok(item.title && item.note);
+    }
+  }
+  const component = readFileSync("components/scenic/ScenicNearbyLinks.tsx", "utf8");
+  assert.match(component, /placement: "scenic_route_nearby"/);
+  assert.match(component, /rel=\{AFFILIATE_REL\}/);
+  assert.match(component, /PR: \{disclosure\}/);
+  assert.ok(!component.includes("bg-fuji"), "never a filled button");
+  assert.match(readFileSync("lib/affiliate/links.ts", "utf8"), /"scenic_route_nearby"/);
+});

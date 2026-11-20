@@ -1175,5 +1175,107 @@
       "Scenic routes"
     ],
     "notes": "[scenic] /scenic/yurikamome のチケット判断と、トップ検索（ゆりかもめ）の結果"
+  },
+  "tourSaganoRiverBoat": {
+    "label": "Sagano Romantic Train + Hozugawa River Boat (half-day tour)",
+    "provider": "klook",
+    "adid": "1581372",
+    "klookPath": "activity/92794-arashiyama-hozukyo-gorge-half-day-landmark-tour-sagano-romantic-train-hozugawakudari-river-boat-ride/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1581372&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F92794-arashiyama-hozukyo-gorge-half-day-landmark-tour-sagano-romantic-train-hozugawakudari-river-boat-ride%2F",
+    "usedOn": [
+      "Scenic: Sagano"
+    ],
+    "notes": "URL管理「取得候補_20261120」P1（/scenic/sagano）から反映 2026-11-21。転送先確認済み。"
+  },
+  "tourSaganoRiverBoatAlt": {
+    "label": "Sagano Train, Hozugawa Boat & Arashiyama Walk (tour)",
+    "provider": "klook",
+    "adid": "1581374",
+    "klookPath": "activity/112332-kyoto-city-sagano-romantic-train-hozugawa-river-boat-ride-tour/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1581374&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F112332-kyoto-city-sagano-romantic-train-hozugawa-river-boat-ride-tour%2F",
+    "usedOn": [],
+    "notes": "URL管理「取得候補_20261120」P1（/scenic/sagano）から反映 2026-11-21。転送先確認済み。"
+  },
+  "tourKamakuraEnoden": {
+    "label": "Kamakura one-day walk with the Enoden (tour)",
+    "provider": "klook",
+    "adid": "1581375",
+    "klookPath": "activity/149592-kamakura-one-day-stroll-enoden-string-of-youth-shrine-encounter-a/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1581375&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F149592-kamakura-one-day-stroll-enoden-string-of-youth-shrine-encounter-a%2F",
+    "usedOn": [
+      "Scenic: Enoden"
+    ],
+    "notes": "URL管理「取得候補_20261120」P1（/scenic/enoden）から反映 2026-11-21。転送先確認済み。"
+  },
+  "hakoneRopeway": {
+    "label": "Hakone Ropeway ticket",
+    "provider": "klook",
+    "adid": "1581379",
+    "klookPath": "activity/187307-hakone-ropeway-one-way-round-trip-ticket/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1581379&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F187307-hakone-ropeway-one-way-round-trip-ticket%2F",
+    "usedOn": [
+      "Scenic: Hakone Tozan"
+    ],
+    "notes": "URL管理「取得候補_20261120」P1（/scenic/hakone-tozan）から反映 2026-11-21。転送先確認済み。"
+  },
+  "hakoneCruise": {
+    "label": "Hakone Sightseeing Cruise (Lake Ashi)",
+    "provider": "klook",
+    "adid": "1581380",
+    "klookPath": "activity/74237-hakone-sightseeing-cruise-regular-ticket/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1581380&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F74237-hakone-sightseeing-cruise-regular-ticket%2F",
+    "usedOn": [
+      "Scenic: Hakone Tozan"
+    ],
+    "notes": "URL管理「取得候補_20261120」P1（/scenic/hakone-tozan）から反映 2026-11-21。転送先確認済み。"
+  },
+  "teamlabPlanets": {
+    "label": "teamLab Planets TOKYO",
+    "provider": "klook",
+    "adid": "1581383",
+    "klookPath": "activity/25300-teamlab-planets-toyosu-tokyo-ticket/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1581383&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F25300-teamlab-planets-toyosu-tokyo-ticket%2F",
+    "usedOn": [
+      "Scenic: Yurikamome"
+    ],
+    "notes": "URL管理「取得候補_20261120」P1（/scenic/yurikamome）から反映 2026-11-21。転送先確認済み。"
+  },
+  "fujiPanoramicRopeway": {
+    "label": "Mt. Fuji Panoramic Ropeway",
+    "provider": "klook",
+    "adid": "1581385",
+    "klookPath": "activity/89462-mt-fuji-panoramic-ropeway-round-trip-ticket-yamanashi/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1581385&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F89462-mt-fuji-panoramic-ropeway-round-trip-ticket-yamanashi%2F",
+    "usedOn": [
+      "Scenic: Fujikyu"
+    ],
+    "notes": "URL管理「取得候補_20261120」P1（/scenic/fujikyu）から反映 2026-11-21。転送先確認済み。"
+  },
+  "tourFujiHakone": {
+    "label": "Mt. Fuji & Hakone day tour from Tokyo",
+    "provider": "klook",
+    "adid": "1581388",
+    "klookPath": "activity/91055-mtfuji-hakone-one-day-tour-tokyo/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1581388&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F91055-mtfuji-hakone-one-day-tour-tokyo%2F",
+    "usedOn": [],
+    "notes": "URL管理「取得候補_20261120」P2（/scenic/hakone-tozan）から反映 2026-11-21。転送先確認済み。"
+  },
+  "tourKamakuraYokohama": {
+    "label": "Kamakura, Enoden & Yokohama tour (Korean/Chinese guide)",
+    "provider": "klook",
+    "adid": "1581392",
+    "klookPath": "activity/129437-kamakura-enoshima-tram-yokohama-night-view-day-tour-korean-chinese/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1581392&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F129437-kamakura-enoshima-tram-yokohama-night-view-day-tour-korean-chinese%2F",
+    "usedOn": [],
+    "notes": "URL管理「取得候補_20261120」P2（/scenic/enoden）から反映 2026-11-21。転送先確認済み。"
+  },
+  "tourKyotoSagano": {
+    "label": "Kyoto + Sagano Romantic Train day tour",
+    "provider": "klook",
+    "adid": "1581394",
+    "klookPath": "activity/6241-nanzen-ji-fushimi-inari-taisha-sagano-romantic-train-day-tour/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1581394&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F6241-nanzen-ji-fushimi-inari-taisha-sagano-romantic-train-day-tour%2F",
+    "usedOn": [],
+    "notes": "URL管理「取得候補_20261120」P2（/scenic/sagano）から反映 2026-11-21。転送先確認済み。"
   }
 }

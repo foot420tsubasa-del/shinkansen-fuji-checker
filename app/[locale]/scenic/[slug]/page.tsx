@@ -13,6 +13,8 @@ import { LIVE_ROUTES, isModelOnlyBasis, reversalsBefore, seatedSide, sideFor, ty
 import { AFFILIATE_LINKS, JR_PASS_URL, getAffUrl } from "@/src/affiliateLinks";
 import { TicketGuide, type ResolvedTicketLink } from "@/components/scenic/TicketGuide";
 import { ScenicStayBlock } from "@/components/scenic/ScenicStayBlock";
+import { ScenicNearbyLinks, type NearbyLink } from "@/components/scenic/ScenicNearbyLinks";
+import nearby from "@/data/scenic-nearby.json";
 import { ScenicRouteViewTracker } from "@/components/scenic/ScenicTracking";
 import { PlanThisRide, getTripEssentials } from "@/components/scenic/PlanThisRide";
 import { FujiAreaSearchLink, FujiViewStayCards } from "@/components/stays/FujiViewStayCards";
@@ -142,6 +144,10 @@ export default async function ScenicRoutePage({ params }: Props) {
 
   const essentials = getTripEssentials(route.id);
   const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Tokyo" }).format(new Date());
+  const nearbyLinks: NearbyLink[] = ((nearby.routes as Record<string, { linkId: string; title: string; note: string }[]>)[route.id] ?? []).flatMap((item) => {
+    const href = getAffUrl(item.linkId);
+    return href ? [{ ...item, href, adid: AFFILIATE_LINKS[item.linkId]?.adid || undefined }] : [];
+  });
   const ticketLinks: ResolvedTicketLink[] = (route.ticketGuide?.links ?? []).flatMap((l): ResolvedTicketLink[] => {
     if (l.kind === "official") return [{ kind: "official", href: l.url, label: l.label }];
     const href = getAffUrl(l.linkId);
@@ -353,6 +359,8 @@ export default async function ScenicRoutePage({ params }: Props) {
             </p>
           </section>
         ) : null}
+
+        <ScenicNearbyLinks routeId={route.id} title={nearby.title} sub={nearby.sub} disclosure={nearby.disclosure} links={nearbyLinks} />
 
         {route.id === "fujikyu-fuji" ? (
           // Fuji-view stays at Lake Kawaguchiko: after the seat answer and the tickets, before the FAQ.

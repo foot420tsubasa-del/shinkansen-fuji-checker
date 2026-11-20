@@ -32,6 +32,7 @@ export type AffiliatePlacement =
   | "scenic_route_jr_pass"
   | "scenic_route_ticket"
   | "golden_route_ticket"
+  | "scenic_route_nearby"
   | "scenic_route_stay"
   | "fuji_view_stays"
   | "scenic_fujikyu_fuji_stays"
