@@ -264,7 +264,7 @@ function buildRows() {
         "商品・行き先（参考）": v.normalUrl || "",
         使っている場所: `予定: ${v.placeOn}`,
         状態: v.status,
-        メモ: [v.purpose, v.caution && `注意: ${v.caution}`, v.method && `取得方法: ${v.method}`, v.checked && `確認日: ${v.checked}`].filter(Boolean).join(" ／ "),
+        メモ: [v.purpose, v.caution && `注意: ${v.caution}`, v.method && `取得方法: ${v.method}`, v.searchChecked, v.checked && `確認日: ${v.checked}`].filter(Boolean).join(" ／ "),
         "ID（変更しない）": id,
         "データ元（変更しない）": WISHLIST_SRC,
       });

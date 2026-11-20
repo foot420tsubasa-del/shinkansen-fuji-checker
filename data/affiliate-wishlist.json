@@ -17,109 +17,118 @@
       "priority": "P1",
       "name": "箱根・強羅駅周辺の宿泊施設",
       "provider": "Booking.com",
-      "normalUrl": "",
+      "normalUrl": "https://www.booking.com/searchresults.html?ss=Gora%2C+Hakone",
       "placeOn": "/scenic/hakone-tozan",
-      "status": "候補探索・未発行",
+      "status": "未発行（変換するURLは確定）",
       "purpose": "箱根登山電車で強羅まで乗る旅行者向け",
       "caution": "既存のKlookホテル検索の代わりにBooking.comに統一",
-      "method": "Booking.comでエリア検索し、適切な宿泊施設を選んで専用リンクを発行",
-      "checked": "2026-11-20"
+      "method": "Travelpayouts のリンク作成で「商品・行き先」の検索URLを変換",
+      "checked": "2026-11-21",
+      "searchChecked": "Booking.comで検索結果を確認 2026-11-21: 箱根強羅公園周辺 387軒"
     },
     "bookingUnazuki": {
       "priority": "P1",
       "name": "宇奈月温泉駅周辺の宿泊施設",
       "provider": "Booking.com",
-      "normalUrl": "",
+      "normalUrl": "https://www.booking.com/searchresults.html?ss=Unazuki+Onsen",
       "placeOn": "/scenic/kurobe-gorge",
-      "status": "候補探索・未発行",
+      "status": "未発行（変換するURLは確定）",
       "purpose": "黒部峡谷鉄道の出発地点で前泊・宿泊",
       "caution": "観光鉄道の運行日を確認してから案内",
-      "method": "Booking.comでエリア検索し、個別宿泊施設のリンクを発行",
-      "checked": "2026-11-20"
+      "method": "Travelpayouts のリンク作成で「商品・行き先」の検索URLを変換",
+      "checked": "2026-11-21",
+      "searchChecked": "Booking.comで検索結果を確認 2026-11-21: 宇奈月温泉 14軒"
     },
     "bookingAbashiri": {
       "priority": "P1",
       "name": "網走駅周辺・流氷観光の宿泊施設",
       "provider": "Booking.com",
-      "normalUrl": "",
+      "normalUrl": "https://www.booking.com/searchresults.html?ss=Abashiri",
       "placeOn": "/scenic/senmo-line-drift-ice",
-      "status": "候補探索・未発行",
+      "status": "未発行（変換するURLは確定）",
       "purpose": "冬の釧網本線と流氷観光の宿泊拠点",
       "caution": "ホテルの交通アクセスと冬季の運行を要確認",
-      "method": "Booking.comでエリア検索し、個別宿泊施設のリンクを発行",
-      "checked": "2026-11-20"
+      "method": "Travelpayouts のリンク作成で「商品・行き先」の検索URLを変換",
+      "checked": "2026-11-21",
+      "searchChecked": "Booking.comで検索結果を確認 2026-11-21: 網走市 34軒"
     },
     "bookingGonoLine": {
       "priority": "P2",
       "name": "五所川原・鰺ケ沢・深浦周辺の宿泊施設",
       "provider": "Booking.com",
-      "normalUrl": "",
+      "normalUrl": "https://www.booking.com/searchresults.html?ss=Fukaura",
       "placeOn": "/scenic/resort-shirakami",
-      "status": "候補探索・未発行",
+      "status": "未発行（変換するURLは確定）",
       "purpose": "五能線の景色を途中下車して楽しむ旅行者",
       "caution": "駅からの交通アクセスの良い施設に限定",
-      "method": "Booking.comでエリア検索し、個別宿泊施設のリンクを発行",
-      "checked": "2026-11-20"
+      "method": "Travelpayouts のリンク作成で「商品・行き先」の検索URLを変換",
+      "checked": "2026-11-21",
+      "searchChecked": "Booking.comで検索結果を確認 2026-11-21: 深浦町 4軒（黄金崎不老ふ死温泉ほか。五所川原・鰺ケ沢より五能線の海沿いに近い）"
     },
     "bookingAizu": {
       "priority": "P2",
       "name": "会津若松・会津柳津周辺の宿泊施設",
       "provider": "Booking.com",
-      "normalUrl": "",
+      "normalUrl": "https://www.booking.com/searchresults.html?ss=Aizuwakamatsu",
       "placeOn": "/scenic/tadami-line",
-      "status": "候補探索・未発行",
+      "status": "未発行（変換するURLは確定）",
       "purpose": "只見線の乗車前後・沿線滞在",
       "caution": "実際の列車本数と乗車駅のアクセスを確認",
-      "method": "Booking.comでエリア検索し、個別宿泊施設のリンクを発行",
-      "checked": "2026-11-20"
+      "method": "Travelpayouts のリンク作成で「商品・行き先」の検索URLを変換",
+      "checked": "2026-11-21",
+      "searchChecked": "Booking.comで検索結果を確認 2026-11-21: 会津若松市 53軒"
     },
     "bookingFuranoBiei": {
       "priority": "P2",
       "name": "富良野・美瑛駅周辺の宿泊施設",
       "provider": "Booking.com",
-      "normalUrl": "",
+      "normalUrl": "https://www.booking.com/searchresults.html?ss=Furano",
       "placeOn": "/scenic/furano-biei-norokko",
-      "status": "候補探索・未発行",
+      "status": "未発行（変換するURLは確定）",
       "purpose": "富良野・美瑛の景色をゆっくり楽しむ旅行者",
       "caution": "観光列車の運行期間に注意",
-      "method": "Booking.comでエリア検索し、個別宿泊施設のリンクを発行",
-      "checked": "2026-11-20"
+      "method": "Travelpayouts のリンク作成で「商品・行き先」の検索URLを変換",
+      "checked": "2026-11-21",
+      "searchChecked": "Booking.comで検索結果を確認 2026-11-21: 富良野市 308軒"
     },
     "bookingAomori": {
       "priority": "P2",
       "name": "新青森・青森駅周辺の宿泊施設",
       "provider": "Booking.com",
-      "normalUrl": "",
+      "normalUrl": "https://www.booking.com/searchresults.html?ss=Aomori+Station",
       "placeOn": "/scenic/tohoku-shinkansen",
-      "status": "候補探索・未発行",
+      "status": "未発行（変換するURLは確定）",
       "purpose": "東北新幹線の北方面利用時の宿泊",
       "caution": "路線との具体的な導線を公開前に確認",
-      "method": "Booking.comでエリア検索し、個別宿泊施設のリンクを発行",
-      "checked": "2026-11-20"
+      "method": "Travelpayouts のリンク作成で「商品・行き先」の検索URLを変換",
+      "checked": "2026-11-21",
+      "searchChecked": "Booking.comで検索結果を確認 2026-11-21: 青森駅周辺 107軒"
     },
     "bookingTakasakiYuzawa": {
       "priority": "P2",
       "name": "高崎・越後湯沢周辺の宿泊施設",
       "provider": "Booking.com",
-      "normalUrl": "",
+      "normalUrl": "https://www.booking.com/searchresults.html?ss=Echigo-Yuzawa",
       "placeOn": "/scenic/joetsu-shinkansen",
-      "status": "候補探索・未発行",
+      "status": "未発行（変換するURLは確定）",
       "purpose": "上越新幹線で雪景色や温泉を楽しむ旅行者",
       "caution": "実際の乗車区間と施設の立地を確認",
-      "method": "Booking.comでエリア検索し、個別宿泊施設のリンクを発行",
-      "checked": "2026-11-20"
+      "method": "Travelpayouts のリンク作成で「商品・行き先」の検索URLを変換",
+      "checked": "2026-11-21",
+      "searchChecked": "Booking.comで検索結果を確認 2026-11-21: 越後湯沢駅周辺 112軒（雪景色・温泉の目的に合うため高崎より優先）"
     },
     "bookingHiroshimaStation": {
       "priority": "P3",
       "name": "広島駅周辺の宿泊施設",
       "provider": "Booking.com",
-      "normalUrl": "",
+      "normalUrl": "https://www.booking.com/searchresults.html?ss=Hiroshima+Station",
       "placeOn": "/scenic/golden-route",
       "status": "保留（需要確認後）",
       "purpose": "東京→京都→大阪→広島の新ページ（11/21公開）で、宮島へ行く前泊の候補",
       "caution": "/scenic/golden-route の表示・クリックが出てから発行。今は不要",
-      "method": "Booking.comで広島駅周辺の個別ホテルを選び、Travelpayoutsで発行",
-      "checked": "2026-11-21"
+      "method": "Travelpayouts のリンク作成で「商品・行き先」の検索URLを変換",
+      "checked": "2026-11-21",
+      "searchChecked": "Booking.comで検索結果を確認 2026-11-21: 広島駅周辺 572軒"
     }
   }
 }
