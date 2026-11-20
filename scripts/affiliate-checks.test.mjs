@@ -959,6 +959,8 @@ test("scenic seasons: a season shows the routes at their best first, keeps year-
   // Filters drive the map and the month table.
   const page = readFileSync("app/[locale]/scenic/page.tsx", "utf8");
   assert.match(page, /scenicMonthRows\(filtered \? visibleRoutes : scenicDiscoveryRoutes\(\{\}\)\)/);
+  assert.match(page, /highlightIds = filtered \? visibleRoutes\.map/);
+  assert.match(page, /<details open=\{bestRoutes\.length === 0 \|\| undefined\}/);
   assert.match(page, /<ScenicOverviewMap locale=\{locale\} copy=\{hub\.map\} highlight=\{highlightIds\} \/>/);
   assert.match(readFileSync("components/scenic/ScenicOverviewMap.tsx", "utf8"), /highlight\?: string\[\]/);
 });

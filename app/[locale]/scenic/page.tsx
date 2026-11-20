@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { getAlternates } from "@/i18n/hreflang";
 import { SiteHeader } from "../components/SiteHeader";
@@ -55,7 +55,7 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
   // route but greys out the ones that do not match; the month table lists
   // only matching routes, and only the months they are at their best.
   const { rows: monthRows, anyMonth } = scenicMonthRows(filtered ? visibleRoutes : scenicDiscoveryRoutes({}));
-  const highlightIds = filtered ? (season ? bestRoutes : visibleRoutes).map((route) => route.id) : undefined;
+  const highlightIds = filtered ? visibleRoutes.map((route) => route.id) : undefined;
   const path = locale === "en" ? "/scenic" : `/${locale}/scenic`;
   const schemas = [
     {
@@ -191,10 +191,13 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
         ) : null}
 
         {goodRoutes.length ? (
-          <details className="mt-10 rounded-[22px] border border-slate-200 bg-white p-4 sm:p-5">
-            <summary className="cursor-pointer list-none">
-              <span className="text-lg font-extrabold">{fill(discovery.alsoGoodLabel, { season: seasonName.toLowerCase() })} ({goodRoutes.length})</span>
-              <span className="mt-1 block text-sm text-slate-600">{discovery.alsoGoodHelp}</span>
+          <details open={bestRoutes.length === 0 || undefined} className="group mt-10 rounded-[22px] border border-slate-200 bg-white p-4 sm:p-5">
+            <summary className="flex min-h-11 cursor-pointer list-none items-start justify-between gap-3">
+              <span>
+                <span className="text-lg font-extrabold">{fill(discovery.alsoGoodLabel, { season: seasonName.toLowerCase() })} ({goodRoutes.length})</span>
+                <span className="mt-1 block text-sm text-slate-600">{discovery.alsoGoodHelp}</span>
+              </span>
+              <ChevronDown className="mt-1 h-5 w-5 shrink-0 group-open:rotate-180" aria-hidden="true" />
             </summary>
             <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {goodRoutes.map((route) => routeCard(route))}
