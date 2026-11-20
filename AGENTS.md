@@ -2,6 +2,7 @@
 
 このファイルは Codex などのAIエージェントが作業前に読むためのものです。最終更新：2026-11-19。
 細かい運用ルールは CLAUDE.md、景色ルートの作り方は docs/codex-handoff-scenic.md にあります。
+ペルソナと優先順位（2026-11-20）は docs/persona-research-2026-11-20.md・docs/persona-site-fit-2026-11-20.md・docs/growth-roadmap-2026-11-20.md にあります。
 
 ---
 

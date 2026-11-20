@@ -56,3 +56,17 @@
 - `npm run check:translations`: 実行完了。JSON/ICU破損なし。既存の不足キー・未翻訳警告は残存（今回の交通情報修正とは別件）。
 - 専用の`check-internal-links.mjs`はリポジトリに存在せず実行不可。代わりにビルドと`test:funnel`内の退役URL・サイトマップ・主要リンク検査を確認した。
 
+
+## 追記（2026年11月20日）：/guide の座席・Klook・時間帯の表記
+
+コミット `cdfbeb8`。全9言語に反映し、本番に公開した。見出し構造、H1、title、URL、構造化データの形、予約リンク、placement は変えていない。
+
+| 項目 | 修正前 | 確認した根拠 | 修正後 |
+|---|---|---|---|
+| 座席記号 | 「E席は most standard cars」と「all standard cars」が混在 | JR東海の英語ガイドのFAQ「choose Seat E in Standard Class or Seat D in Green Class」（[Golden Route](https://global.jr-central.co.jp/en/goldenroute/shinkansen/)、2026-11-20 閲覧） | 「普通車はE席、グリーン車はD席」に統一。JR東海の案内に合わせ、例外の強調はしない |
+| Klook の座席 | 「Klook のヘルプセンターによると高速鉄道の座席は自動割り当て」 | Klook 予約画面（2026-12-03発、東京→京都・京都→東京の両方向、2026-11-20）。指定席の説明に「Seats are guaranteed. You can also choose your seat preference, and we'll do our best to accommodate it.」とある。両方向とも普通車・グリーン車の指定席に「Choose your seat preference」の表示あり。自由席にはない。Klook ブログ（2025-06-24 更新）は希望の選択肢として「Window seat with Mt Fuji view」と記載（[Klook blog](https://www.klook.com/en-AU/blog/tokaido-sanyo-shinkansen/)） | 「指定席を選び、窓側・富士山側の希望を追加できる。Klook はできるだけ対応するとしているが、E席の保証ではない」。引用元を確認できなかったヘルプセンターの記述は削除 |
+| 時間帯 | 見出し「昼前〜昼過ぎがベスト」、本文「10時前が最も晴れやすい」「夕方は富士山側がまぶしい」 | `data/fuji-clear-sky-odds.json`（ERA5、新富士付近、2016–2025年、雲量30%以下かつ降水0.5mm未満）。年平均は6時〜18時で28〜33%とほぼ一定。月別では12〜1月に42〜54%、6〜7月に11〜18%。時間差が出るのは8〜9月で、7時が27〜28%、15時が17〜18%。夕方のまぶしさの根拠は見つからなかった（富士山は線路の北側） | 「時間より季節と天気。年間では午前と午後で晴れる割合はほぼ同じ。8〜9月は朝がやや晴れやすい。夜は見えない」。データは雲量だけで、霞は測っていないため、季節表の「霞」の記述は残した |
+
+確認できなかった範囲
+- Klook の予約画面は「Book now」のあとにログインを求めるため、そこで止めた。希望の具体的な選択肢（「Window seat with Mt Fuji view」の有無）、追加料金の有無、確定後に座席番号が分かる時点は未確認。
+- 決済・予約はしていない。

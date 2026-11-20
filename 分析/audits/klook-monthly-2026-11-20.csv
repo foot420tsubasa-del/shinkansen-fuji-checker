@@ -1,0 +1,16 @@
+period,source_file,adid,link,clicks,booked_units,sales_jpy,commission_jpy,note
+2026-02..04,klook-2026-02_04.csv,1165791,JR Pass (7-day),86,11,186078.29,4246.13,product mix unknown (no ticket report); effective rate 2.28%
+2026-02..04,klook-2026-02_04.csv,(8 other links),various,39,0,0,0,
+2026-05..07,klook-2026-05_07.csv,1265303,Shinkansen (generic),77,4,131499.17,3266.42,product mix unknown; effective rate 2.48%
+2026-05..07,klook-2026-05_07.csv,(16 other links),various,69,0,0,0,
+2026-08-01..09-09,klook-2026-08-01_09-09.csv,(all links),various,81,0,0,0,no bookings
+2026-09 (derived),klook-2026-09_10.csv minus klook-2026-10.csv,1265303,Shinkansen (generic),57,2,29729.75,1481.30,both tours per ticket report (Tateyama Kurobe 1-day tour; Kamikochi hike); user country US; rate 5%; paid 9/19-9/20 for travel 10/13-10/16
+2026-09 (derived),klook-2026-09_10.csv minus klook-2026-10.csv,1443754,Tokyo->Kyoto route,9,0,0,0,link live from 2026-09-22
+2026-09 (derived),klook-2026-09_10.csv minus klook-2026-10.csv,1443748,Kyoto->Tokyo route,8,0,0,0,link live from 2026-09-22
+2026-09 (derived),klook-2026-09_10.csv minus klook-2026-10.csv,(6 other links),various,13,0,0,0,
+2026-10,klook-2026-10.csv,1265303,Shinkansen (generic),28,3,82190.18,1055.73,effective rate 1.28% -> rail (inferred; no ticket report)
+2026-10,klook-2026-10.csv,1443754,Tokyo->Kyoto route,20,3,104312.79,1380.06,effective rate 1.32% -> rail (inferred); 34.8k JPY per unit suggests multi-passenger or multi-leg orders
+2026-10,klook-2026-10.csv,1443748,Kyoto->Tokyo route,22,0,0,0,not served since 2026-11-06 (ee8d93e); the return answer now uses 1265303
+2026-10,klook-2026-10.csv,1165791,JR Pass (7-day),4,0,0,0,
+2026-10,klook-2026-10.csv,(3 other links),various,3,0,0,0,
+2026-11,(not downloaded),,,,,,,ads_performance and ticket report for 2026-11 needed

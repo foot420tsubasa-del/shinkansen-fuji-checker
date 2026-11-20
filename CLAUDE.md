@@ -26,6 +26,7 @@
 - **未検証のアフィリエイトURLを作らない。** admin のリンクマスタにあるものだけを使う。無ければ枠だけ用意して登録を依頼する。
 - **ホテルは個別ホテル＝Booking.com のみ（data/booking-hotel-urls.json）、エリア単位＝Klook のまま。Trip.com・Agoda は使わない**（2026-11-18 決定）。Booking.com の CTA は `ProviderButton` を使う。緑の塗りボタン（中立的な「hotel action」階層）や Klook のオレンジで出さない。
 - サイトの方向性の全体像は `AGENTS.md`（Codex 等も読む）にまとめてある。
+- 誰のために何を優先するかは `docs/persona-research-2026-11-20.md`・`docs/persona-site-fit-2026-11-20.md`・`docs/growth-roadmap-2026-11-20.md`（開発を始める前に読む）。
 - **Klook は `ProviderButton` に非対応。** 代わりに次の2階調を守る。
   - 塗り `#D94A32` — 答えの直後の主要CTA（座席診断の結果、Quick Answer など）
   - 淡色 `orange-50` / `orange-200` — 一覧カード・二次選択肢
