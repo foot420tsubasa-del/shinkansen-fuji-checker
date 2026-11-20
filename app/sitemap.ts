@@ -21,6 +21,8 @@ const translatedPaths = [
 
 const englishOnlyContentPaths = [
   "/scenic",
+  "/scenic/golden-route",
+  "/scenic/miyajima-ferry",
   "/stays/mt-fuji-view",
   "/itineraries",
   "/areas-to-stay",

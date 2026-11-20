@@ -792,8 +792,14 @@ test("scenic photography: published files have an author, source, licence and a 
   const { routes } = JSON.parse(readFileSync("data/scenic-routes.json", "utf8"));
   const credits = JSON.parse(readFileSync("data/scenic-photo-credits.json", "utf8"));
   const stays = JSON.parse(readFileSync("data/fuji-view-stays.json", "utf8"));
-  const photos = routes.filter((route) => route.image?.illustrative === false).map((route) => route.image);
-  assert.deepEqual(photos.map((photo) => photo.src).sort(), Object.keys(credits).sort());
+  const golden = JSON.parse(readFileSync("data/golden-route.json", "utf8"));
+  // Route photos, plus the journey hub's and the Miyajima ferry page's own (2026-11-21).
+  const goldenPhotos = [
+    ...golden.sections.flatMap((section) => section.items).filter((item) => item.image).map((item) => ({ src: item.image, alt: item.imageAlt })),
+    { src: golden.ferry.image, alt: golden.ferry.imageAlt },
+  ];
+  const photos = [...routes.filter((route) => route.image?.illustrative === false).map((route) => route.image), ...goldenPhotos];
+  assert.deepEqual([...new Set(photos.map((photo) => photo.src))].sort(), Object.keys(credits).sort());
   assert.ok(credits[stays.page.heroImage.src], "the lake photograph also has a credit on the stays page");
   for (const photo of photos) {
     const { title, author, source, license, licenseUrl, caption } = credits[photo.src];
@@ -1836,4 +1842,30 @@ test("design pass: hotel cards use only cleared photos, never a placeholder pict
     assert.match(h.viewRooms, /^(all|some)$/);
   }
   assert.doesNotMatch(readFileSync("components/stays/FujiViewStayCards.tsx", "utf8"), /coming soon/i);
+});
+
+test("golden route: journey hub and Miyajima ferry page stay sourced and book the right legs", () => {
+  // 2026-11-21. One hub and one detail page; tourist trains and the ferry are
+  // booked with their operators, so the only affiliate links are Shinkansen
+  // tickets for the exact legs of this route.
+  const golden = JSON.parse(readFileSync("data/golden-route.json", "utf8"));
+  const links = JSON.parse(readFileSync("data/affiliate-links.json", "utf8"));
+  const expected = { shinkansenTokyoKyoto: "1443754", shinkansenOsakaHiroshima: "1385363", shinkansenTokyoHiroshima: "1385360" };
+  assert.deepEqual(golden.tickets.links.map(([id]) => id).sort(), Object.keys(expected).sort());
+  for (const [id, adid] of Object.entries(expected)) {
+    assert.equal(links[id].adid, adid);
+    assert.match(links[id].directUrl, new RegExp(`^https://affiliate\\.klook\\.com/redirect\\?aid=104861&aff_adid=${adid}&`));
+  }
+  for (const [, , source] of golden.ferry.facts) assert.match(source, /^https:\/\/jr-miyajimaferry\.co\.jp\//, "every ferry fact links the operator");
+  const etsetora = golden.sections.flatMap((s) => s.items).find((i) => i.id === "etsetora");
+  assert.match(etsetora.official[1], /^https:\/\/www\.jr-odekake\.net\//);
+  assert.ok(etsetora.facts.some(([label, value]) => label === "Sea side" && /not stated/i.test(value)), "no unverified sea side");
+  const hub = readFileSync("app/[locale]/scenic/golden-route/page.tsx", "utf8");
+  assert.match(hub, /placement="golden_route_ticket"/);
+  assert.match(hub, /rel=\{AFFILIATE_REL\}/);
+  assert.match(hub, /data\.tickets\.disclosure/);
+  assert.match(readFileSync("lib/affiliate/links.ts", "utf8"), /"golden_route_ticket"/);
+  assert.ok(!readFileSync("app/[locale]/scenic/miyajima-ferry/page.tsx", "utf8").includes("affiliate"), "the ferry page carries no affiliate link");
+  const sitemap = readFileSync("app/sitemap.ts", "utf8");
+  for (const path of ["/scenic/golden-route", "/scenic/miyajima-ferry"]) assert.ok(sitemap.includes(`"${path}"`), `${path} in the sitemap`);
 });

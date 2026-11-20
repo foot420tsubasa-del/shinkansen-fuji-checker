@@ -61,5 +61,32 @@
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
     "caption": "The Kurobe Gorge Railway crossing the Shin-Yamabiko Bridge, photographed from above.",
     "cardCaption": false
+  },
+  "/images/scenic/photos/miyajima-torii-from-ferry.webp": {
+    "title": "Itsukushima Floating Torii Gate, Northwest view from Ferry 20190417 1.jpg",
+    "author": "DXR",
+    "source": "https://commons.wikimedia.org/wiki/File:Itsukushima_Floating_Torii_Gate,_Northwest_view_from_Ferry_20190417_1.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "caption": "The Great Torii of Itsukushima Shrine from the JR ferry, April 2019.",
+    "cardCaption": false
+  },
+  "/images/scenic/photos/miyajima-ferries.webp": {
+    "title": "Itsukushima Island, Mt Misen, Torii of Itsukushima Shrine and Ferry for Miyajima Route 001.jpg",
+    "author": "Naokijp",
+    "source": "https://commons.wikimedia.org/wiki/File:Itsukushima_Island,_Mt_Misen,_Torii_of_Itsukushima_Shrine_and_Ferry_for_Miyajima_Route_001.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "caption": "Itsukushima, Mt. Misen, the Great Torii and Miyajima ferries, May 2023.",
+    "cardCaption": false
+  },
+  "/images/scenic/photos/etsetora.webp": {
+    "title": "JR West Kiha 47 etSETOra 2021-03-07.jpg",
+    "author": "広電バスが好き",
+    "source": "https://commons.wikimedia.org/wiki/File:JR_West_Kiha_47_etSETOra_2021-03-07.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "caption": "The etSETOra sightseeing train, March 2021.",
+    "cardCaption": false
   }
 }

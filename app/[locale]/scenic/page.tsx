@@ -111,6 +111,10 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
           <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">{hub.eyebrow}</p>
           <h1 className="mt-3 text-[34px] font-extrabold leading-[1.08] tracking-[-0.035em] md:text-[52px]">{hub.title}</h1>
           <p className="mt-4 text-[17px] leading-7 text-slate-700 md:text-lg">{hub.browseIntro}</p>
+          {/* Journey view of the same routes, plus Hiroshima and Miyajima (2026-11-21). */}
+          <Link href="/scenic/golden-route" className="mt-3 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-bold text-ink underline underline-offset-4 hover:text-fuji">
+            Travelling Tokyo → Kyoto → Osaka → Hiroshima? See views along that route <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </header>
 
         <nav aria-label="Quick view filters" className="-mx-5 mt-4 overflow-x-auto px-5 pb-1">
