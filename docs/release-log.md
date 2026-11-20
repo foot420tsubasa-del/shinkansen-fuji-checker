@@ -11,6 +11,7 @@
 | 2026-11-20（デザイン改善） | 本記録のコミット群 | 全ページのヘッダー、トップ、/scenic、/scenic/*（14路線）、/stays/mt-fuji-view、/airport-transfers/*（Omio削除） | ヘッダーに Scenic Routes を追加し、現在地を表示。トップは検索前に富士山の答えと E 席の座席図を表示し、予約ボタンは控えめに。景色は6路線と「全14路線」への導線。下部は3カードに統合。一覧はクイック絞り込みと簡潔なカード、月別表は折りたたみ。路線ページは要約カードの重複を除き、順番を「タイムライン → Plan this ride → 切符」に。宿カードは文字中心に | **トップのレイアウトを変更（ユーザー許可）**。11/29 の比較ではこの日以降を別期間として扱う。/guide の座席判定と Klook の導線は変更なし |
 | 2026-11-20（/guide の事実修正） | cdfbeb8 | /guide（全9言語） | 座席記号を JR東海の表現（普通車E・グリーン車D）に統一。Klook の座席は「指定席で希望を出せるが E席は保証されない」に。時間帯は自前の雲量データに合わせた（時間より季節）。見出し構造・title・URL・予約リンク・placement は変更なし | なし。12/01 の Klook 文中リンクの判定では、`guide_klook_text` の直前の説明文がこの日に変わったことに注意 |
 | 2026-11-21（東京→関西→広島） | d6d565f | 新規 /scenic/golden-route、/scenic/miyajima-ferry（英語のみ）。/scenic の見出し下にリンク1本、サイトマップ | 旅程別の景色の入口と、宮島 JR フェリーの大鳥居の側。新しい placement `golden_route_ticket`（新幹線3区間の Klook） | なし。トップ・/guide は変更なし |
+| 2026-11-21（OGP画像） | 本記録の前のコミット | 29ファイル（/scenic・/scenic/*・/kyoto-to-tokyo-mt-fuji-seat ほか）。トップ・/guide・/shinkansen-seat-letters・東京の宿検索は対象外 | `<head>` の og:image と twitter:image を共通画像で補い、Twitter Card を `summary_large_image` に。title・description・本文・リンクは変更なし（[SEO監査](./seo-audit-2026-11-21.md)） | なし |
 
 ## 座席CTAの文言修正と計測準備（2026-11-21）
 
