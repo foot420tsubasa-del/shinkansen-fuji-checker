@@ -1847,9 +1847,8 @@ test("design pass: hotel cards use only cleared photos, never a placeholder pict
 });
 
 test("golden route: journey hub and Miyajima ferry page stay sourced and book the right legs", () => {
-  // 2026-11-21. One hub and one detail page; tourist trains and the ferry are
-  // booked with their operators, so the only affiliate links are Shinkansen
-  // tickets for the exact legs of this route.
+  // The three rail booking links serve the exact legs of this route.
+  // etSETOra has reserved seats, while ferry passengers can buy at the pier.
   const golden = JSON.parse(readFileSync("data/golden-route.json", "utf8"));
   const links = JSON.parse(readFileSync("data/affiliate-links.json", "utf8"));
   const expected = { shinkansenTokyoKyoto: "1443754", shinkansenOsakaHiroshima: "1385363", shinkansenTokyoHiroshima: "1385360" };
@@ -1858,9 +1857,18 @@ test("golden route: journey hub and Miyajima ferry page stay sourced and book th
     assert.equal(links[id].adid, adid);
     assert.match(links[id].directUrl, new RegExp(`^https://affiliate\\.klook\\.com/redirect\\?aid=104861&aff_adid=${adid}&`));
   }
-  for (const [, , source] of golden.ferry.facts) assert.match(source, /^https:\/\/jr-miyajimaferry\.co\.jp\//, "every ferry fact links the operator");
+  for (const [, , source, label] of golden.ferry.facts) {
+    assert.match(source, /^https:\/\/(?:jr-miyajimaferry\.co\.jp|japanrailpass\.net)\//, "every ferry fact links an official source");
+    assert.ok(label && label !== "Official page", "source link names its destination");
+  }
   const etsetora = golden.sections.flatMap((s) => s.items).find((i) => i.id === "etsetora");
   assert.match(etsetora.official[1], /^https:\/\/www\.jr-odekake\.net\//);
+  const etsetoraFacts = Object.fromEntries(etsetora.facts);
+  assert.match(etsetoraFacts["Extra travel"], /Onomichi.*Shin-Onomichi.*separate.*transfer at the same station.*Fukuyama/);
+  assert.match(etsetoraFacts.Timetable, /17:22 on weekdays or 17:25 on weekends and public holidays/);
+  assert.match(golden.tickets.boardingNote, /Reserve an etSETOra seat.*buy a ticket at the pier or tap a supported IC card/);
+  assert.match(Object.fromEntries(golden.ferry.facts)["Rail passes"], /covers the JR ferry fare.*Visitor Tax separately/);
+  assert.doesNotMatch(golden.tickets.sub, /ferry.*booked/i);
   assert.ok(etsetora.facts.some(([label, value]) => label === "Sea side" && /not stated/i.test(value)), "no unverified sea side");
   const hub = readFileSync("app/[locale]/scenic/golden-route/page.tsx", "utf8");
   assert.match(hub, /placement="golden_route_ticket"/);

@@ -50,34 +50,40 @@ export default async function MiyajimaFerryPage() {
           <p className="text-xs font-bold uppercase tracking-[0.1em] text-white/70">Quick answer</p>
           <h2 id="answer-heading" className="mt-2 text-2xl font-extrabold tracking-[-0.02em] md:text-[28px]">{f.answerTitle}</h2>
           <p className="mt-3 text-[15px] leading-7 text-white/85">{f.answer}</p>
-          <a href={f.facts[1][2]} rel="noopener noreferrer" className="mt-3 inline-flex min-h-11 items-center gap-1.5 text-sm font-bold text-white underline underline-offset-4">
+          <a href={f.routeSource} rel="noopener noreferrer" className="mt-3 inline-flex min-h-11 items-center gap-1.5 text-sm font-bold text-white underline underline-offset-4">
             JR Miyajima Ferry: Great Torii route <ExternalLink className="h-4 w-4" aria-hidden="true" />
           </a>
         </section>
 
-        <div className="mt-8">
+        <nav aria-label="Sections" className="mt-3 flex flex-wrap gap-x-5">
+          {f.jumps.map(([label, href]) => (
+            <a key={href} href={href} className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-700 underline underline-offset-4 hover:text-ink">{label}</a>
+          ))}
+        </nav>
+
+        <div className="mt-4">
           <div className="relative aspect-[16/9] overflow-hidden rounded-[24px] bg-slate-100">
             <Image src={f.image} alt={f.imageAlt} fill preload sizes="(min-width: 1000px) 960px, calc(100vw - 40px)" className="object-cover" />
           </div>
           <PhotoCredit src={f.image} className="mt-2" detailed />
         </div>
 
-        <section className="mt-10 max-w-[760px]" aria-labelledby="facts-heading">
+        <section id="sailings" tabIndex={-1} className="mt-10 max-w-[760px] scroll-mt-20" aria-labelledby="facts-heading">
           <h2 id="facts-heading" className="text-2xl font-extrabold tracking-[-0.02em]">Sailings, fares and passes</h2>
           <dl className="mt-4 divide-y divide-slate-200 rounded-[22px] border border-slate-200 bg-white">
-            {f.facts.map(([label, value, source]) => (
+            {f.facts.map(([label, value, source, linkLabel]) => (
               <div key={label} className="grid gap-1 px-5 py-4 md:grid-cols-[180px_1fr] md:gap-6">
                 <dt className="text-sm font-bold text-ink">{label}</dt>
                 <dd className="text-[15px] leading-6 text-slate-700">
                   {value}{" "}
-                  <a href={source} rel="noopener noreferrer" className="whitespace-nowrap text-xs font-semibold text-slate-500 underline underline-offset-2 hover:text-ink">Official page</a>
+                  <a href={source} rel="noopener noreferrer" className="text-sm font-semibold text-slate-700 underline underline-offset-2 hover:text-ink">{linkLabel}</a>
                 </dd>
               </div>
             ))}
           </dl>
         </section>
 
-        <section className="mt-10 max-w-[760px]" aria-labelledby="getting-heading">
+        <section id="getting-there" tabIndex={-1} className="mt-10 max-w-[760px] scroll-mt-20" aria-labelledby="getting-heading">
           <h2 id="getting-heading" className="text-2xl font-extrabold tracking-[-0.02em]">{f.gettingThereTitle}</h2>
           <ol className="mt-4 grid gap-3 text-[15px] leading-7 text-slate-700">
             {f.gettingThere.map((step, i) => (
@@ -87,7 +93,7 @@ export default async function MiyajimaFerryPage() {
               </li>
             ))}
           </ol>
-          <a href={f.gettingThereSource} rel="noopener noreferrer" className="mt-2 inline-block text-xs font-semibold text-slate-500 underline underline-offset-2 hover:text-ink">Access, JR Miyajima Ferry</a>
+          <a href={f.gettingThereSource} rel="noopener noreferrer" className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold text-slate-700 underline underline-offset-2 hover:text-ink">How to board (JR Miyajima Ferry)</a>
         </section>
 
         <section className="mt-10 max-w-[760px]" aria-labelledby="tips-heading">

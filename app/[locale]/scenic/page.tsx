@@ -9,6 +9,7 @@ import { ScenicOverviewMap } from "@/components/scenic/ScenicOverviewMap";
 import { ScenicFilterTracker } from "@/components/scenic/ScenicTracking";
 import { PhotoCredit } from "@/components/scenic/PhotoCredit";
 import hub from "@/data/scenic-hub.json";
+import goldenRoute from "@/data/golden-route.json";
 import discovery from "@/data/scenic-discovery.json";
 import overview from "@/data/scenic-overview.json";
 import { scenicDiscoveryRoutes, scenicMonthRows, viewFilters } from "@/lib/scenic-discovery";
@@ -112,8 +113,8 @@ export default async function ScenicHubPage({ params, searchParams }: Props) {
           <h1 className="mt-3 text-[34px] font-extrabold leading-[1.08] tracking-[-0.035em] md:text-[52px]">{hub.title}</h1>
           <p className="mt-4 text-[17px] leading-7 text-slate-700 md:text-lg">{hub.browseIntro}</p>
           {/* Journey view of the same routes, plus Hiroshima and Miyajima (2026-11-21). */}
-          <Link href="/scenic/golden-route" className="mt-3 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-bold text-ink underline underline-offset-4 hover:text-fuji">
-            Travelling Tokyo → Kyoto → Osaka → Hiroshima? See views along that route <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          <Link href={goldenRoute.hub.path} className="mt-3 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-bold text-ink underline underline-offset-4 hover:text-fuji">
+            {goldenRoute.hub.scenicLink} <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </header>
 

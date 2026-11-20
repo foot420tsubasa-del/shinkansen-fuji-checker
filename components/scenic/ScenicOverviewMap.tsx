@@ -154,9 +154,9 @@ export function ScenicOverviewMap({ locale, copy, highlight }: { locale: string;
         )}
       </div>
       {data ? (
-        <nav aria-label={copy.navigationLabel} className="flex flex-wrap gap-2 border-t border-slate-100 px-4 py-4">
+        <nav aria-label={copy.navigationLabel} className="flex flex-wrap items-center gap-2 border-t border-slate-100 px-4 py-4">
           {EXTRAS.map((extra) => (
-            <a key={extra.id} href={`${prefix}${extra.href}`} className="rounded-full border border-dashed border-[#16324f] bg-white px-3 py-1.5 text-xs font-bold text-ink transition hover:bg-ink hover:text-white">
+            <a key={extra.id} href={`${prefix}${extra.href}`} className="inline-flex min-h-11 items-center rounded-full border border-dashed border-[#16324f] bg-white px-3 py-1.5 text-xs font-bold text-ink transition hover:bg-ink hover:text-white sm:min-h-0">
               {extra.label}
             </a>
           ))}

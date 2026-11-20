@@ -38,13 +38,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function ItemCard({ item }: { item: Item }) {
+const cardLayouts = {
+  single: {
+    columns: "",
+    sizes: "(min-width: 1120px) 540px, (min-width: 1024px) calc((100vw - 40px) / 2), calc(100vw - 40px)",
+  },
+  pair: {
+    columns: "md:grid-cols-2",
+    sizes: "(min-width: 1120px) 530px, (min-width: 768px) calc((100vw - 60px) / 2), calc(100vw - 40px)",
+  },
+  group: {
+    columns: "md:grid-cols-2 lg:grid-cols-3",
+    sizes: "(min-width: 1120px) 347px, (min-width: 1024px) calc((100vw - 80px) / 3), (min-width: 768px) calc((100vw - 60px) / 2), calc(100vw - 40px)",
+  },
+};
+
+function ItemCard({ item, wide, sizes }: { item: Item; wide: boolean; sizes: string }) {
   return (
-    <article className="flex h-full flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_10px_28px_rgba(11,18,32,0.06)]">
+    <article id={item.id} tabIndex={-1} className={`flex h-full scroll-mt-20 flex-col overflow-hidden rounded-[22px] border border-slate-200 bg-white shadow-[0_10px_28px_rgba(11,18,32,0.06)]${wide ? " lg:grid lg:grid-cols-2" : ""}`}>
       {item.image ? (
         <div>
           <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
-            <Image src={item.image} alt={item.imageAlt ?? ""} fill sizes="(min-width: 1024px) 340px, calc(100vw - 40px)" className="object-cover" />
+            <Image src={item.image} alt={item.imageAlt ?? ""} fill sizes={sizes} className="object-cover" />
           </div>
           <PhotoCredit src={item.image} className="px-5 pt-2" />
         </div>
@@ -88,11 +103,12 @@ export default async function GoldenRoutePage({ params }: Props) {
   const stayArea = (destinations as Record<string, { affiliate_url?: string; url_status?: string }>)[data.stay.destination];
   const stayHref = stayArea?.url_status === "active" ? stayArea.affiliate_url : undefined;
 
+  const jumpClass = "inline-flex min-h-11 items-center rounded-full border border-slate-300 bg-white px-4 text-sm font-bold text-ink hover:border-ink";
   const schema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: data.hub.title,
-    itemListElement: data.sections.flatMap((s) => s.items).map((item, index) => ({ "@type": "ListItem", position: index + 1, name: item.name })),
+    itemListElement: data.sections.flatMap((section): Item[] => section.items).map((item, index) => ({ "@type": "ListItem", position: index + 1, name: item.name })),
   };
 
   return (
@@ -108,23 +124,28 @@ export default async function GoldenRoutePage({ params }: Props) {
 
         <nav aria-label="Sections" className="mt-6 flex flex-wrap gap-2">
           {data.sections.map((s) => (
-            <a key={s.id} href={`#${s.id}`} className="inline-flex min-h-11 items-center rounded-full border border-slate-300 bg-white px-4 text-sm font-bold text-ink hover:border-ink">
-              {s.title}
+            <a key={s.id} href={`#${s.id}`} className={jumpClass}>
+              {s.jumpLabel}
             </a>
           ))}
+          {tickets.length ? <a href="#train-tickets" className={jumpClass}>{data.tickets.jumpLabel}</a> : null}
         </nav>
 
-        {data.sections.map((section) => (
-          <section key={section.id} id={section.id} className="mt-12 scroll-mt-20" aria-labelledby={`${section.id}-heading`}>
-            <h2 id={`${section.id}-heading`} className="text-2xl font-extrabold tracking-[-0.02em] md:text-[32px]">{section.title}</h2>
-            <p className="mt-2 text-[15px] leading-6 text-slate-600">{section.sub}</p>
-            <div className="mt-6 grid gap-5 lg:grid-cols-3">
-              {(section.items as Item[]).map((item) => (
-                <ItemCard key={item.id} item={item} />
-              ))}
-            </div>
-          </section>
-        ))}
+        {data.sections.map((section) => {
+          const wide = section.items.length === 1;
+          const layout = wide ? cardLayouts.single : section.items.length === 2 ? cardLayouts.pair : cardLayouts.group;
+          return (
+            <section key={section.id} id={section.id} tabIndex={-1} className="mt-12 scroll-mt-20" aria-labelledby={`${section.id}-heading`}>
+              <h2 id={`${section.id}-heading`} className="text-2xl font-extrabold tracking-[-0.02em] md:text-[32px]">{section.title}</h2>
+              <p className="mt-2 text-[15px] leading-6 text-slate-600">{section.sub}</p>
+              <div className={`mt-6 grid gap-5 ${layout.columns}`}>
+                {section.items.map((item) => (
+                  <ItemCard key={item.id} item={item} wide={wide} sizes={layout.sizes} />
+                ))}
+              </div>
+            </section>
+          );
+        })}
 
         {stayHref ? (
           <section className="mt-12 max-w-[760px]" aria-labelledby="stay-heading">
@@ -150,7 +171,7 @@ export default async function GoldenRoutePage({ params }: Props) {
         ) : null}
 
         {tickets.length ? (
-          <section className="mt-12 max-w-[760px]" aria-labelledby="tickets-heading">
+          <section id="train-tickets" tabIndex={-1} className="mt-12 max-w-[760px] scroll-mt-20" aria-labelledby="tickets-heading">
             <h2 id="tickets-heading" className="text-xl font-extrabold tracking-[-0.02em]">{data.tickets.title}</h2>
             <p className="mt-1 text-[15px] leading-6 text-slate-600">{data.tickets.sub}</p>
             <ul className="mt-3 grid gap-1">
@@ -176,6 +197,7 @@ export default async function GoldenRoutePage({ params }: Props) {
               ))}
             </ul>
             <p className="mt-2 text-xs leading-5 text-slate-500">PR: {data.tickets.disclosure}</p>
+            <p className="mt-4 text-[15px] leading-6 text-slate-700">{data.tickets.boardingNote}</p>
           </section>
         ) : null}
 

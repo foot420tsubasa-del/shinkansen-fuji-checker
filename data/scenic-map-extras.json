@@ -7,9 +7,9 @@
   "items": [
     {
       "id": "kure-line",
-      "label": "Kure Line · etSETOra",
-      "title": "etSETOra on the Kure Line, Hiroshima to Mihara (journey extra)",
-      "href": "/scenic/golden-route#detours",
+      "label": "Kure Line segment · etSETOra",
+      "title": "Kure Line segment, Hiroshima to Mihara. etSETOra continues to Fukuyama.",
+      "href": "/scenic/golden-route#etsetora",
       "points": [
         [
           132.476,
