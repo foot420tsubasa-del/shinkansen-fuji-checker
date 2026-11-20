@@ -11,7 +11,7 @@
 | 根拠 | 内容 | 種類 |
 |---|---|---|
 | JNTO「Golden Route: Tokyo, Kansai & Hiroshima」 | 東京 → 箱根 → 京都 → 奈良 → 倉敷 → 広島（宮島への日帰り）→ 姫路・神戸 → 大阪の2週間モデル。移動は新幹線と JR Pass。岡山・高松は含まれない（[JNTO](https://www.japan.travel/en/gc/itineraries/long-plan/)、2026-11-21 閲覧） | 背景需要（市場） |
-| 広島市の外国人観光客 約256万人（2025年） | ご依頼の数字。今回は**公式の出典を確認できていません** | 未検証 |
+| 広島市の外国人観光客 256万1千人（2025年、前年比+1.9%、統計開始以来の最高） | 広島市の報道資料「令和7年（2025年）広島市観光客数について」（2026-07-08公表）。[報道資料](https://www.city.hiroshima.lg.jp/tourism-culture/tourism/1021446/1026907/1051491.html)・[PDF](https://www.city.hiroshima.lg.jp/_res/projects/default_project/_page_/001/051/491/r7irikomikankoukyakusuu.pdf)。2026-11-21 に確認 | 市場（公式統計）。観光客数が多いことは、鉄道・景色の検索需要があることを意味しない |
 | fujiseat の GSC（2026-06-23〜11-17、クエリに語を含むもの） | hiroshima 5表示、miyajima・onomichi・kure・etsetora・marine liner・seto・sanyo はいずれも0。osaka to 3,404表示、kyoto to 5,107表示は、どちらも富士山の座席の検索 | 実測。該当ページがなかったので、表示0は**需要がない証拠にはならない** |
 | 英語の競合 | 宮島フェリー：japanuncharted、japanhighlights、japan-experience、wikivoyage などに解説がある。etSETOra：Ekitan（英語、2026年7月時点）と KKday の販売ページ。大阪→広島で「どちら側に座るか」を書いたページは見つからなかった | 調査（2026-11-21） |
 
