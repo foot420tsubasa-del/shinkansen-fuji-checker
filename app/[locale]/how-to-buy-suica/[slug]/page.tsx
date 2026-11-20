@@ -9,6 +9,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { SuicaDiagram } from "@/components/suica/SuicaDiagram";
 import { SuicaGuideGrid } from "@/components/suica/SuicaGuideGrid";
 import { SUICA_GUIDES, getSuicaGuide } from "@/data/suica-guides";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // English only, like the guide this came from.
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(`/how-to-buy-suica/${guide.slug}`, locale),
-    openGraph: { type: "article", title: guide.title, description: guide.description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
+    openGraph: { images: DEFAULT_OG_IMAGES, type: "article", title: guide.title, description: guide.description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
   };
 }
 

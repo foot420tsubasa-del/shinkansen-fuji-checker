@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/Card";
 import { BrandMark } from "@/components/ui/BrandMark";
 import { SiteHeader } from "../components/SiteHeader";
 import { getAlternates } from "@/i18n/hreflang";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -15,6 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: "Terms & Notices | fujiseat",
     description: "Terms, travel notices, affiliate disclosure, and important limitations for using fujiseat.",
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       title: "Terms & Notices | fujiseat",
       description: "Terms, travel notices, affiliate disclosure, and important limitations for using fujiseat.",
       siteName: "fujiseat — Japan Rail Seats, Stays & Routes",

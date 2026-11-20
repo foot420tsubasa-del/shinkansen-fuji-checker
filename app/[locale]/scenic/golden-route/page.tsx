@@ -11,6 +11,7 @@ import { AFFILIATE_LINKS, getAffUrl } from "@/src/affiliateLinks";
 import { AFFILIATE_REL } from "@/lib/link-rel";
 import data from "@/data/golden-route.json";
 import destinations from "@/data/booking-hotel-destinations.json";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // English only for now, like the other scenic pages.
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(PATH, locale),
-    openGraph: { title: data.hub.title, description: data.hub.description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
+    openGraph: { images: DEFAULT_OG_IMAGES, title: data.hub.title, description: data.hub.description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
   };
 }
 

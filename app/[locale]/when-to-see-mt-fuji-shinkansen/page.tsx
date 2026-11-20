@@ -12,6 +12,7 @@ import { seatCheckCopy } from "@/lib/copy/seat-check";
 import { JR_PASS_URL, KLOOK_URL } from "@/src/affiliateLinks";
 import { addMinutes, ORIGINS, type OriginId } from "@/lib/fuji-window";
 import { ODDS_PERIOD } from "@/lib/fuji-odds";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 /*
  * The page for "when", as distinct from "which side".
@@ -37,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${title} | fujiseat`,
     description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
-    openGraph: { title, description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
+    openGraph: { images: DEFAULT_OG_IMAGES, title, description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
     alternates: getAlternates(PATH, locale),
   };
 }

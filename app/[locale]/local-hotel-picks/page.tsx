@@ -16,6 +16,7 @@ import {
 import { HotelPickMatrix } from "./HotelPickMatrix";
 import { LocalHotelPickCard } from "./LocalHotelPickCard";
 import { getTranslations } from "next-intl/server";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -107,6 +108,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: t("description"),
     robots: locale === "en" ? undefined : { index: false, follow: true },
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       title: t("ogTitle"),
       description: t("ogDescription"),
       siteName: "fujiseat — Japan Rail Seats, Stays & Routes",

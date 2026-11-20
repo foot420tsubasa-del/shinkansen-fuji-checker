@@ -7,6 +7,7 @@ import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { PhotoCredit } from "@/components/scenic/PhotoCredit";
 import data from "@/data/golden-route.json";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // English only for now, like the other scenic pages.
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(PATH, locale),
-    openGraph: { title: f.title, description: f.description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
+    openGraph: { images: DEFAULT_OG_IMAGES, title: f.title, description: f.description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
   };
 }
 

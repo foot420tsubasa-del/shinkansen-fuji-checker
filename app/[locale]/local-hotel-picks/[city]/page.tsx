@@ -16,6 +16,7 @@ import {
 import { SiteHeader } from "../../components/SiteHeader";
 import { HotelPickMatrix } from "../HotelPickMatrix";
 import { LocalHotelPickCard } from "../LocalHotelPickCard";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = {
   params: Promise<{ locale: string; city: string }>;
@@ -199,6 +200,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(path, locale),
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       title: config.title,
       description: `Practical ${config.city} hotel examples by area logic. Not rankings.`,
       siteName: "fujiseat — Japan Rail Seats, Stays & Routes",

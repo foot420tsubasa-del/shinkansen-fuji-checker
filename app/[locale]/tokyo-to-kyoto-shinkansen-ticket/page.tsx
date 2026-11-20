@@ -10,6 +10,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { OMIO_TOKYO_KYOTO_URL, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
 import { ProviderChoiceCTA } from "@/components/affiliate/ProviderChoiceCTA";
 import { TRANSPORT_FACTS } from "@/lib/content/transport-facts";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${title} | fujiseat`,
     description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
-    openGraph: { title, description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
+    openGraph: { images: DEFAULT_OG_IMAGES, title, description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
     alternates: getAlternates("/tokyo-to-kyoto-shinkansen-ticket", locale),
   };
 }

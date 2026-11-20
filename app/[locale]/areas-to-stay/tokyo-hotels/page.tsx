@@ -11,6 +11,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { tokyoStayAreasBase } from "@/data/stay-area/tokyo-areas.base";
 import scoresJson from "@/data/generated/tokyo-stay-area-scores.json";
 import type { StayAreaBase, StayAreaScoresFile } from "@/lib/stay-area/types";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 const SUPPORTED_SLUGS = tokyoStayAreasBase.map((area) => area.id);
 
@@ -69,6 +70,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(PAGE_PATH, locale),
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       title: t("lp.h1"),
       description: t("metaDescription"),
       siteName: "fujiseat — Japan Rail Seats, Stays & Routes",

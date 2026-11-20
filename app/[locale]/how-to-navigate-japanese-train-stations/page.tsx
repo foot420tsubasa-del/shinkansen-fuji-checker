@@ -22,6 +22,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { ShareThisPage } from "@/components/share/ShareThisPage";
 import { TrackedCtaLink } from "@/components/analytics/TrackedCtaLink";
 import { Rail3dEmbed } from "@/components/rail3d/Rail3dEmbed";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -73,7 +74,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${META_TITLE} | fujiseat`,
     description: META_DESCRIPTION,
     robots: locale === "en" ? undefined : { index: false, follow: true },
-    openGraph: { title: META_TITLE, description: META_DESCRIPTION, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
+    openGraph: { images: DEFAULT_OG_IMAGES, title: META_TITLE, description: META_DESCRIPTION, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
     alternates: getAlternates(PAGE_PATH, locale),
   };
 }

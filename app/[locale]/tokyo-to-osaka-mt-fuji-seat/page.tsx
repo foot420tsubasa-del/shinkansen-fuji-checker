@@ -7,6 +7,7 @@ import { SuggestedNextSteps } from "@/components/content/SuggestedNextSteps";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { RelatedScenicLinks } from "@/components/scenic/RelatedScenicLinks";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${title} | fujiseat`,
     description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
-    openGraph: { title, description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
+    openGraph: { images: DEFAULT_OG_IMAGES, title, description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
     alternates: getAlternates("/tokyo-to-osaka-mt-fuji-seat", locale),
   };
 }

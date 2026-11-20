@@ -15,6 +15,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { SiteHeader } from "../components/SiteHeader";
 import { ProviderButton } from "@/components/ui/ProviderButton";
 import { getHotelProviderLinks } from "@/lib/hotel-affiliate-links";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 const pageConfig = {
   "kiyosumi-shirakawa": {
@@ -119,6 +120,7 @@ export async function getLocalTokyoMetadata(
     description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       title,
       description,
       siteName: "fujiseat.com",

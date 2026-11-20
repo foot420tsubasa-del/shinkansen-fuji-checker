@@ -13,6 +13,7 @@ import { ProviderChoiceCTA } from "@/components/affiliate/ProviderChoiceCTA";
 import { RelatedScenicLinks } from "@/components/scenic/RelatedScenicLinks";
 import { KlookProductRow } from "@/components/affiliate/KlookProductRow";
 import { TRANSPORT_FACTS } from "@/lib/content/transport-facts";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: `${title} | fujiseat`,
     description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
-    openGraph: { title, description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
+    openGraph: { images: DEFAULT_OG_IMAGES, title, description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
     alternates: getAlternates("/jr-pass-vs-single-ticket", locale),
   };
 }

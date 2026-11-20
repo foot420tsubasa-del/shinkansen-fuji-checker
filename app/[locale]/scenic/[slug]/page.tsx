@@ -24,6 +24,7 @@ import { getScenicStay } from "@/lib/scenic-stays";
 import discovery from "@/data/scenic-discovery.json";
 import seating from "@/data/scenic-seating.json";
 import overview from "@/data/scenic-overview.json";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 const SEAT_LINE: Record<string, string> = {
   reserved: "Reserve a window seat on the side for your view.",
@@ -87,7 +88,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: route.page.description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(`/scenic/${slug}`, locale),
-    openGraph: { title: route.page.title, description: route.page.description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
+    openGraph: { images: DEFAULT_OG_IMAGES, title: route.page.title, description: route.page.description, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
   };
 }
 

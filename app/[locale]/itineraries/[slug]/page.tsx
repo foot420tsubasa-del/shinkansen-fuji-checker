@@ -16,6 +16,7 @@ import { CompactStayFinder } from "@/components/stay/CompactStayFinder";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAllItinerarySlugs, getItineraryBySlug } from "@/lib/content/itineraries";
 import { getAlternates } from "@/i18n/hreflang";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = {
   params: Promise<{ slug: string; locale: string }>;
@@ -34,6 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: page.description,
     robots: locale === "en" ? undefined : { index: false, follow: true },
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       title: page.title,
       description: page.description,
       siteName: "fujiseat — Japan Rail Seats, Stays & Routes",

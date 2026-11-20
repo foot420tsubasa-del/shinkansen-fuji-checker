@@ -6,6 +6,7 @@ import { SiteHeader } from "../../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { getAlternates } from "@/i18n/hreflang";
 import { SUICA_CHARACTER_NEWS as article } from "@/data/suica-character-news";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates(article.path, locale),
     openGraph: {
+      images: DEFAULT_OG_IMAGES,
       type: "article",
       title: article.title,
       description: article.description,

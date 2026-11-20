@@ -13,6 +13,7 @@ import goldenRoute from "@/data/golden-route.json";
 import discovery from "@/data/scenic-discovery.json";
 import overview from "@/data/scenic-overview.json";
 import { scenicDiscoveryRoutes, scenicMonthRows, scenicQuickViewHref, viewFilters } from "@/lib/scenic-discovery";
+import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -26,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: hub.intro,
     robots: locale === "en" ? undefined : { index: false, follow: true },
     alternates: getAlternates("/scenic", locale),
-    openGraph: { title: hub.title, description: hub.intro, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
+    openGraph: { images: DEFAULT_OG_IMAGES, title: hub.title, description: hub.intro, siteName: "fujiseat — Japan Rail Seats, Stays & Routes" },
   };
 }
 
