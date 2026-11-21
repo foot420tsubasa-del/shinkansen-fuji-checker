@@ -18,6 +18,7 @@
 | 2026-11-21（クレカ記事の英語・押上） | 本記録の前のコミット | /credit-card-tap-to-ride-japan | 平易な米国英語に書き換え。浅草→押上→成田空港の例と FAQ を1問追加。アフィリエイトなし（[記録 §7](./credit-card-tap-2026-11-21.md)） | なし |
 | 2026-11-21（アクティビティハブ） | 本記録の前のコミット | 新規 /things-to-do（英語のみ）。/areas-to-stay（英語のみのリンク1本）、/scenic/golden-route（末尾に1文）、サイトマップ | teamLab 3館・USJ・ディズニーの違いと予約前の注意。Klook のボタンは発行済みの3本だけ（新しい placement `things_to_do_ticket`）。[記録](./things-to-do-2026-11-21.md) | なし。トップ・/guide は変更なし |
 | 2026-11-21（アクティビティの導線） | 本記録の前のコミット | /areas-to-stay（京都・大阪の欄）、/plan-your-trip（Activities の欄）、/things-to-do（teamLab の比較に1文） | 英語のみのテキストリンク3本と、Planets が2027年末で終了する旨の1文。Klook の都市カードとその計測は変更なし | なし |
+| 2026-11-21（/plan-your-trip の仕上げ） | 本記録の前のコミット | /plan-your-trip（9言語） | 都市カードの画像を next/image に（スマホでの空白を解消）。重複していたホテルの説明を1つの枠に統合。英語のボタン名の重複を解消（`plan_trip_stay_hub_finder` の label が変わる）。アフィリエイトリンク・広告ID・placement は変更なし | なし |
 
 ## 座席CTAの文言修正と計測準備（2026-11-21）
 

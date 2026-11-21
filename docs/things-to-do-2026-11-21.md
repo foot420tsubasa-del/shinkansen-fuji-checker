@@ -83,3 +83,23 @@
 - **自然検索**：「Planets vs Borderless」「Disneyland vs DisneySea」「USJ の Express Pass に入場は含まれるか」は、Klook のブログ、Tokyo Cheapo、japan-guide、多数のブログが上位にいる。新しいページが上位に入る見込みは低い。28表示は fujiseat の実績で、市場全体の需要ではない。
 - **既存の流入から送る（主力）**：/areas-to-stay、/plan-your-trip、/scenic/golden-route からの内部リンク。
 - 本文に追加したこと：「1館しか行けないなら、Planets は2027年末で終了、Borderless は常設」（公式の情報）。
+
+## 7. 最終UXチェックとリンク発行の記録（2026-11-21）
+
+### URL管理シートへの記載
+- 取得待ち（未発行）として2行追加（`data/affiliate-wishlist.json` と同じ内容）。
+  - 190行目：[P1] teamLab Biovortex 京都（Klook activity 167098）
+  - 191行目：[P2] 東京ディズニー 1デーパスポート（activity 695）
+- 37・38・178行目（USJ・Borderless・Planets）の「使っている場所」に /things-to-do を追記。
+
+### /plan-your-trip
+| 項目 | Before | After |
+|---|---|---|
+| Klook 都市カードの画像 | `<img loading="lazy">` で原寸（1448〜1672px、106〜317KB）を配信。背景がないため、スマホでは読み込み中の数秒間、カードの上半分が空白に見えた（本番の375pxで、表示位置に入ってから2.5秒後も読み込み未完了。数秒後には表示された）。読み込み失敗ではなく、CSS の問題でも Klook 側の仕様でもない | next/image で、カードの大きさに合わせた画像を配信（スマホ375pxで750w、1440pxで340px幅）。読み込み中は薄い灰色の背景を表示。画像ファイルは同じものを使用 |
+| ホテルの説明の重複 | 「Do not book hotels before these route decisions」と「Do not book hotels before the route shape is clear」の2つの枠に、同じ本文があった。2つ目は英語の固定文で、英語以外の8言語でも英語のまま表示されていた | 1つの枠にまとめた（翻訳された見出しと本文 ＋ 既存の Stay Finder ボタン）。placement `plan_trip_hotel_base_next_step` はそのまま |
+| 英語のボタン名の重複 | 「Compare Tokyo stay areas」が2つ並び、どちらも /areas-to-stay へのリンクだった | 2つ目を「Try the Tokyo Stay Finder」に（他の言語ではすでに「エリアファインダー」の意味で翻訳されていた）。URL と placement `plan_trip_stay_hub_finder` は維持。GA4 の label はこの文言に変わる |
+
+アフィリエイトのリンク、広告ID、placement は変更していない。
+
+### アクティビティ関連の制作はここで区切る
+次は計測の段階（評価方法は §6）。
