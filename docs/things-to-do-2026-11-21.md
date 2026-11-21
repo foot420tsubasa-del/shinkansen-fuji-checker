@@ -103,3 +103,13 @@
 
 ### アクティビティ関連の制作はここで区切る
 次は計測の段階（評価方法は §6）。
+
+## 8. Biovortex とディズニーのリンクを反映（2026-11-21）
+
+- URL管理シートの190・191行目に貼られた発行済みURLを反映した。形式を確認済み：aid=104861、広告IDは数字、k_site は商品と一致。
+  - teamLab Biovortex 京都：広告ID **1584870** → activity 167098（`link_id=teamlabBiovortex`、city=kyoto）
+  - 東京ディズニー 1デーパスポート：広告ID **1584871** → activity 695（`link_id=tokyoDisney1Day`、city=tokyo）
+- ディズニーの購入先：TDR 公式の購入ページは「一部の旅行会社」とだけ書いており、Klook の名前はない。そのため、ページでは Klook を「公認」とは書いていない。テストでも確認する。
+- Biovortex の紹介文の「newest」（最新館）は確認できない表現なので、「2025年10月開業」に変更した。
+- 報酬率・除外条件は未確認のまま。
+- `/things-to-do` の Klook ボタンは5本（placement `things_to_do_ticket`）。
