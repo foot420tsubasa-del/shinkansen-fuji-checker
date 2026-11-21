@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowRight, ChevronDown, MapPinned } from "lucide-react";
+import { ArrowRight, ChevronDown, MapPinned, Ruler, Ticket } from "lucide-react";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
@@ -56,7 +56,6 @@ const photoCredits: Record<string, {
   licenseUrl: string;
 }> = { ...scenicCredits, ...destinationCredits };
 
-const guideLinkClass = "group flex min-h-11 items-start justify-between gap-3 py-3.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink";
 
 export default async function AreasToStayIndex({ params }: Props) {
   const { locale } = await params;
@@ -204,56 +203,89 @@ export default async function AreasToStayIndex({ params }: Props) {
 
         <section className="mt-12 md:mt-16" aria-labelledby="stay-guides">
           <h2 id="stay-guides" className="text-2xl font-extrabold tracking-[-0.02em] md:text-[32px]">{t("discovery.guides")}</h2>
-          <section id="tokyo" className="mt-6 scroll-mt-24">
-            <h3 className="text-xl font-extrabold tracking-[-0.02em]">{t("discovery.tokyoGuides")}</h3>
-            <ul className="mt-2 grid gap-x-8 md:grid-cols-2">
+
+          {/* Tokyo: the guides are head-to-head comparisons, so the tile shows
+              the matchup itself rather than a line of text. */}
+          <section id="tokyo" className="mt-6 scroll-mt-24" aria-labelledby="tokyo-guides-heading">
+            <h3 id="tokyo-guides-heading" className="text-xl font-extrabold tracking-[-0.02em]">{t("discovery.tokyoGuides")}</h3>
+            <ul className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {tokyoGuideSlugs.filter((slug) => stayPages.some((page) => page.slug === slug)).map((slug) => {
                 const title = t(`featuredGuides.guides.${slug}.title`);
+                const sides = title.split(/\s+vs\.?\s+/i);
                 return (
-                  <li key={slug} className="border-b border-slate-200">
-                    <TrackedInternalLink href={`/areas-to-stay/${slug}`} sourcePage={pagePath} placement="stay_hub_featured_guide" label={title} locale={locale} className={guideLinkClass}>
-                      <span>
-                        <span className="font-bold group-hover:underline">{title}</span>
-                        <span className="mt-1 block text-sm leading-6 text-slate-600">{t(`featuredGuides.guides.${slug}.description`)}</span>
-                      </span>
-                      <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />
+                  <li key={slug}>
+                    <TrackedInternalLink href={`/areas-to-stay/${slug}`} sourcePage={pagePath} placement="stay_hub_featured_guide" label={title} locale={locale} className="group flex h-full flex-col rounded-[18px] border border-slate-200 bg-white p-4 shadow-[0_4px_18px_rgba(30,41,59,0.05)] hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                      {sides.length > 1 ? (
+                        <span className="flex flex-wrap items-center gap-1.5" aria-label={title}>
+                          {sides.map((side, i) => (
+                            <span key={side} className="contents">
+                              {i > 0 ? <span className="flex h-6 w-6 items-center justify-center rounded-full bg-fuji text-[11px] font-black text-white" aria-hidden="true">vs</span> : null}
+                              <span className="rounded-lg bg-[#eef3fa] px-2.5 py-1 text-[15px] font-extrabold text-ink" aria-hidden="true">{side}</span>
+                            </span>
+                          ))}
+                        </span>
+                      ) : (
+                        <span className="text-[16px] font-extrabold text-ink">{title}</span>
+                      )}
+                      <span className="mt-2 block text-[14px] leading-6 text-slate-600">{t(`featuredGuides.guides.${slug}.description`)}</span>
+                      <span className="mt-auto inline-flex items-center gap-1 pt-2 text-[13.5px] font-bold text-ink group-hover:underline">{locale === "en" ? "Compare" : null} <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
                     </TrackedInternalLink>
                   </li>
                 );
               })}
-              <li className="border-b border-slate-200">
-                <TrackedInternalLink href="/areas-to-stay/tokyo-hotel-room-size-guide" sourcePage={pagePath} placement="stay_hub_room_size_guide" label={t("roomSizeGuide.title")} locale={locale} className={guideLinkClass}>
-                  <span>
-                    <span className="font-bold group-hover:underline">{t("roomSizeGuide.title")}</span>
-                    <span className="mt-1 block text-sm leading-6 text-slate-600">{t("roomSizeGuide.description")}</span>
-                  </span>
-                  <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />
+              <li>
+                <TrackedInternalLink href="/areas-to-stay/tokyo-hotel-room-size-guide" sourcePage={pagePath} placement="stay_hub_room_size_guide" label={t("roomSizeGuide.title")} locale={locale} className="group flex h-full flex-col rounded-[18px] border border-dashed border-slate-300 bg-[#f7f9fc] p-4 hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                  <span className="flex items-center gap-2 text-[16px] font-extrabold text-ink"><Ruler className="h-5 w-5 shrink-0" aria-hidden="true" />{t("roomSizeGuide.title")}</span>
+                  <span className="mt-2 block text-[14px] leading-6 text-slate-600">{t("roomSizeGuide.description")}</span>
+                  <span className="mt-auto inline-flex items-center gap-1 pt-2 text-[13.5px] font-bold text-ink group-hover:underline">{locale === "en" ? "Check sizes" : null} <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
                 </TrackedInternalLink>
               </li>
             </ul>
           </section>
-          <div className="mt-9 grid gap-9 xl:grid-cols-2 xl:gap-8">
+
+          <div className="mt-10 grid gap-6 xl:grid-cols-2">
             <StayCityGuides locale={locale} />
           </div>
-          <div className="mt-9 border-y border-slate-200">
-            <Link href="/stays/mt-fuji-view" className={guideLinkClass}>
-              <div>
-                <h3 className="text-xl font-extrabold tracking-[-0.02em] group-hover:underline">{t("discovery.fujiGuides")}</h3>
-                <span className="mt-1 block text-sm leading-6 text-slate-600">{t("discovery.fujiGuideSub")}</span>
+
+          {/* More ways to choose: each card opens a different kind of stay. */}
+          <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <Link href="/stays/mt-fuji-view" className="group flex flex-col overflow-hidden rounded-[18px] border border-slate-200 bg-white hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+              <div className="relative aspect-[16/9] bg-slate-200">
+                <Image src={design.destinations.find((d) => d.id === "fuji")?.image ?? "/images/scenic/photos/kawaguchiko.webp"} alt="" fill sizes="(min-width: 1160px) 370px, (min-width: 640px) 50vw, 100vw" className="object-cover" />
               </div>
-              <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />
+              <div className="flex flex-1 flex-col p-4">
+                <h3 className="text-[18px] font-extrabold tracking-[-0.01em] text-ink group-hover:underline">{t("discovery.fujiGuides")}</h3>
+                <span className="mt-1 text-[14px] leading-6 text-slate-600">{t("discovery.fujiGuideSub")}</span>
+              </div>
             </Link>
-            {/* English only: the activity hub has no translations yet. */}
             {locale === "en" ? (
-              <Link href="/things-to-do#tokyo" className={`${guideLinkClass} border-t border-slate-200`}>
-                <div>
-                  <h3 className="text-xl font-extrabold tracking-[-0.02em] group-hover:underline">Things to book in Tokyo, Kyoto and Osaka</h3>
-                  <span className="mt-1 block text-sm leading-6 text-slate-600">teamLab Planets vs Borderless, Tokyo Disney and USJ: where each one is and what to know before you book.</span>
-                </div>
-                <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />
-              </Link>
+              <>
+                <Link href="/stays/tokyo-special" className="group flex flex-col overflow-hidden rounded-[18px] border border-slate-200 bg-white hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                  <div className="relative aspect-[16/9] bg-slate-200">
+                    <Image src="/images/stays/special/skytree-night.webp" alt="" fill sizes="(min-width: 1160px) 370px, (min-width: 640px) 50vw, 100vw" className="object-cover" />
+                  </div>
+                  <div className="flex flex-1 flex-col p-4">
+                    <h3 className="text-[18px] font-extrabold tracking-[-0.01em] text-ink group-hover:underline">Tokyo hotels with a view or a theme</h3>
+                    <span className="mt-1 text-[14px] leading-6 text-slate-600">Skytree and Tokyo Tower rooms, Pokémon and Godzilla rooms, and the room type to pick.</span>
+                  </div>
+                </Link>
+                <Link href="/things-to-do#tokyo" className="group flex flex-col overflow-hidden rounded-[18px] border border-slate-200 bg-white hover:border-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+                  <div className="flex aspect-[16/9] items-center justify-center bg-gradient-to-br from-ink to-[#1e3a8a] text-white">
+                    <Ticket className="h-12 w-12 opacity-90" aria-hidden="true" />
+                  </div>
+                  <div className="flex flex-1 flex-col p-4">
+                    <h3 className="text-[18px] font-extrabold tracking-[-0.01em] text-ink group-hover:underline">Things to book in Tokyo, Kyoto and Osaka</h3>
+                    <span className="mt-1 text-[14px] leading-6 text-slate-600">teamLab Planets vs Borderless, Tokyo Disney and USJ: where each one is and what to know before you book.</span>
+                  </div>
+                </Link>
+              </>
             ) : null}
           </div>
+          {locale === "en" ? (
+            <p className="mt-2 text-xs leading-5 text-slate-500">
+              Skytree photo: <a href="https://commons.wikimedia.org/wiki/File:JP-Tokyo-Tokyo-Skytree-Night.jpg" className="underline underline-offset-2">Kanchi1979</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" className="underline underline-offset-2">CC BY-SA 4.0</a>. Prince Park Tower photo (top of page): <a href="https://commons.wikimedia.org/wiki/File:Prince_Park_Tower_Tokyo1.jpg" className="underline underline-offset-2">江戸村のとくぞう</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0" className="underline underline-offset-2">CC BY-SA 4.0</a>.
+            </p>
+          ) : null}
         </section>
       </article>
       <SiteFooter />
