@@ -2026,10 +2026,21 @@ test("tokyo special stays: Booking.com buttons only for issued links, exact room
     for (const id of h.more ?? []) assert.ok(hotels[id], `${id} registered`);
   }
   // The button needs an issued tpx link; plain Booking.com URLs are not shown.
-  assert.match(page, /if \(!link\?\.affiliate\) return null;/);
+  assert.match(page, /filter\(\(x\) => x\.link\?\.affiliate\)/);
   assert.match(page, /placement="tokyo_special_stay"/);
-  assert.match(page, /rel=\{AFFILIATE_REL\}/);
-  assert.doesNotMatch(JSON.stringify(data), /US\$|¥\d|cheapest|lowest price|best price|guarantee/i);
+  assert.match(page, /<ProviderButton/, "Booking.com button is the shared provider button (rel=sponsored inside)");
+  // Photos: every one credited, commercial-use licence only, WebP under 300 KB.
+  const credits = JSON.parse(readFileSync("data/stay-special-photo-credits.json", "utf8"));
+  const photos = [...data.sections.map((s) => s.photo), ...all.map((h) => h.photo)].filter(Boolean);
+  for (const src of photos) {
+    const c = credits[src];
+    assert.ok(c, `${src} credited`);
+    assert.match(c.license, /^(CC BY(-SA)? [0-9.]+|CC0|Public domain)$/, `${src}: licence allows commercial use`);
+    assert.match(c.source, /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/);
+    assert.ok(statSync("public" + src).size <= 300_000, `${src} under 300 KB`);
+  }
+  for (const h of all) assert.ok(h.photo || h.feature, `${h.id}: photo or a feature panel, never an empty box`);
+  assert.doesNotMatch(JSON.stringify(data), /US\$|¥\d|cheapest|lowest price|best price|price guarantee|guaranteed (lowest|best)/i);
   // Publish rule: two hotels with an issued link before the page is in the sitemap.
   const issued = new Set(all.flatMap((h) => [h.id, ...(h.more ?? [])]).filter((id) => hotels[id]?.affiliateUrl?.startsWith("https://booking.tpx.lv/")));
   if (readFileSync("app/sitemap.ts", "utf8").includes('"/stays/tokyo-special"')) assert.ok(issued.size >= 2, `only ${issued.size} issued link(s)`);

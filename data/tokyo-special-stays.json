@@ -27,7 +27,10 @@
           "official": [
             "Asakusa View Hotel (official)",
             "https://www.viewhotels.jp/asakusa/"
-          ]
+          ],
+          "photo": "/images/stays/special/asakusa-view.webp",
+          "badge": "Skytree view",
+          "guarantee": "Only room types with “Skytree Side” in the name face the tower."
         },
         {
           "id": "tobu-hotel-levant-tokyo",
@@ -39,7 +42,10 @@
           "official": [
             "Tobu Hotel Levant Tokyo (official, Japanese)",
             "https://www.tobuhotel.co.jp/levant/rooms/"
-          ]
+          ],
+          "photo": "/images/stays/special/tobu-levant.webp",
+          "badge": "Skytree view",
+          "guarantee": "Only “with Tokyo Sky Tree View” room types face the tower; “No Tower View” types don't."
         },
         {
           "id": "keisei-richmond-oshiage",
@@ -48,7 +54,10 @@
           "what": "A hotel in Oshiage, the neighborhood at the foot of Skytree.",
           "suits": "Anyone who wants Skytree up close.",
           "pick": "Room types starting “(Skytree View)”, e.g. (Skytree View) Comfort Double Room.",
-          "note": "We could not open the hotel's official site; the room names are as Booking.com lists them."
+          "note": "We could not open the hotel's official site; the room names are as Booking.com lists them.",
+          "badge": "Skytree view",
+          "feature": "Skytree next door",
+          "guarantee": "Only room types starting “(Skytree View)” face the tower."
         },
         {
           "id": "hotel-east-21-tokyo",
@@ -57,9 +66,14 @@
           "what": "A hotel in Toyocho with family rooms that face Skytree.",
           "suits": "Families: the Skytree family rooms take up to 4 adults.",
           "pick": "“Deluxe Family Room with Sky Tree View” (2, 3 or 4 adults) or “King Room with Skytree View”.",
-          "note": "The hotel's official site was under maintenance when we checked; the room names are as Booking.com lists them."
+          "note": "The hotel's official site was under maintenance when we checked; the room names are as Booking.com lists them.",
+          "photo": "/images/stays/special/east-21.webp",
+          "badge": "Skytree view · family",
+          "guarantee": "Only room types with “Sky Tree View” in the name face the tower."
         }
-      ]
+      ],
+      "photo": "/images/stays/special/skytree-night.webp",
+      "tile": "Skytree views"
     },
     {
       "id": "tokyo-tower",
@@ -76,7 +90,10 @@
           "official": [
             "Tower View Rooms (official)",
             "https://www.princehotels.co.jp/parktower/contents/towerviewrooms/en"
-          ]
+          ],
+          "photo": "/images/stays/special/prince-park-tower.webp",
+          "badge": "Tokyo Tower view",
+          "guarantee": "Only room types ending “with Tokyo Tower View” face the tower."
         },
         {
           "id": "park-hotel-tokyo",
@@ -88,7 +105,10 @@
           "official": [
             "Park Hotel Tokyo rooms (official)",
             "https://parkhoteltokyo.com/rooms-suites"
-          ]
+          ],
+          "photo": "/images/stays/special/park-hotel-tokyo.webp",
+          "badge": "Tokyo Tower view",
+          "guarantee": "Only “Tokyo Tower Side” room types face the tower."
         },
         {
           "id": "tokyo-edition-toranomon",
@@ -97,9 +117,14 @@
           "what": "A hotel in Toranomon, in the same part of Minato as Tokyo Tower.",
           "suits": "A special-occasion stay.",
           "pick": "“Premier Tower View King”, which Booking.com lists with a Tokyo Tower view. The “Deluxe Tower View King” is listed with a city view.",
-          "note": "The official site blocked our check; the room names are as Booking.com lists them."
+          "note": "The official site blocked our check; the room names are as Booking.com lists them.",
+          "badge": "Tokyo Tower view",
+          "feature": "Premier Tower View King",
+          "guarantee": "Booking.com lists the Tokyo Tower view only for the Premier Tower View King."
         }
-      ]
+      ],
+      "photo": "/images/stays/special/tokyo-tower.webp",
+      "tile": "Tokyo Tower views"
     },
     {
       "id": "themed",
@@ -108,8 +133,8 @@
       "hotels": [
         {
           "id": "mimaru-tokyo-ueno",
-          "name": "MIMARU Pokémon Rooms (Ueno East, Ikebukuro, Kinshicho, Ginza East, Hatchobori)",
-          "area": "Five MIMARU apartment hotels",
+          "name": "MIMARU Pokémon Rooms",
+          "area": "Five Tokyo hotels: Ueno East, Ikebukuro, Kinshicho, Ginza East, Hatchobori",
           "what": "Pokémon Rooms with a giant Snorlax on the bed, a Poké Ball dining table and Pokémon kitchenware. One gift set per booking.",
           "suits": "Families: 4–6 guests, 38–60 m², kitchen in every room. Layout (loft, bunk beds or four singles) depends on the hotel.",
           "pick": "“Pokémon ROOM”. The other apartments are regular rooms, and the room design can't be chosen.",
@@ -123,7 +148,10 @@
             "mimaru-tokyo-ginza-east",
             "mimaru-tokyo-hatchobori"
           ],
-          "buttonLabel": "Ueno East on Booking.com"
+          "buttonLabel": "Ueno East on Booking.com",
+          "badge": "Pokémon",
+          "feature": "Pokémon ROOM · sleeps 4–6 · kitchen",
+          "guarantee": "Only the “Pokémon ROOM” type. Five Tokyo locations; the design can't be chosen."
         },
         {
           "id": "hotel-gracery-shinjuku",
@@ -136,7 +164,10 @@
           "official": [
             "Godzilla rooms (official, Japanese)",
             "https://gracery.com/shinjuku/page/godzilla/index.html"
-          ]
+          ],
+          "badge": "Godzilla",
+          "feature": "Godzilla Floor · 30th floor",
+          "guarantee": "The Godzilla Floor is guaranteed only with this room type. The single Godzilla Room isn't on Booking.com."
         },
         {
           "id": "henn-na-hotel-nishikasai",
@@ -148,9 +179,13 @@
           "official": [
             "Henn na Hotel Tokyo Nishikasai (official, Japanese)",
             "https://www.hennnahotel.com/nishikasai/"
-          ]
+          ],
+          "badge": "Dinosaurs",
+          "feature": "Dinosaur Room · up to 3 adults",
+          "guarantee": "The dinosaur theme comes only with this room type, and there are two such rooms."
         }
-      ]
+      ],
+      "tile": "Pokémon & Godzilla"
     },
     {
       "id": "design",
@@ -168,21 +203,28 @@
           "official": [
             "Artist in Hotel (official)",
             "https://parkhoteltokyo.com/art-at-park-hotel-tokyo/artist-in-hotel"
-          ]
+          ],
+          "badge": "Art",
+          "feature": "50+ rooms painted by artists",
+          "guarantee": "Artist rooms only; the artwork is assigned at check-in."
         },
         {
           "id": "mitsui-garden-ginza-premier",
           "name": "Mitsui Garden Hotel Ginza Premier",
           "area": "Ginza",
-          "what": "A Ginza hotel with a 16th-floor lobby and rooms where the bathtub sits by the view.",
+          "what": "A Ginza hotel with a 16th-floor lobby looking over the city, and rooms with a View Bath.",
           "suits": "Couples who want Ginza and a bath with a view.",
           "pick": "“Superior Queen Room with View Bath” or “Deluxe Twin Room with View Bath”.",
           "official": [
             "Mitsui Garden Hotel Ginza Premier (official)",
             "https://www.gardenhotels.co.jp/ginza-premier/eng/"
-          ]
+          ],
+          "photo": "/images/stays/special/mitsui-ginza-premier.webp",
+          "badge": "View bath",
+          "guarantee": "Only room types “with View Bath” come with the view bath."
         }
-      ]
+      ],
+      "tile": "Art & view baths"
     }
   ],
   "related": [

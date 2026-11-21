@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, MapPinned } from "lucide-react";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "@/components/content/SiteFooter";
 import { TrackedInternalLink } from "@/components/analytics/TrackedInternalLink";
@@ -88,7 +88,32 @@ export default async function AreasToStayIndex({ params }: Props) {
           <p className="mt-3 text-base leading-6 text-slate-700 md:text-lg">{t("discovery.sub")}</p>
         </header>
 
-        <nav aria-label={t("discovery.destinationsLabel")} className="mt-6 md:mt-8">
+        {locale === "en" ? (
+          <div className="mt-5 grid grid-cols-2 gap-3 sm:gap-5" role="group" aria-label="Two ways to choose a hotel">
+            <a href="#cities" className="group flex flex-col overflow-hidden rounded-[18px] border-2 border-ink bg-white sm:flex-row shadow-[0_6px_24px_rgba(30,41,59,0.08)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+              <div className="flex aspect-[16/9] items-center justify-center bg-[#eef6fb] text-ink sm:aspect-auto sm:w-[38%] sm:shrink-0">
+                <MapPinned className="h-10 w-10" aria-hidden="true" />
+              </div>
+              <div className="flex flex-1 flex-col p-3 sm:min-h-[150px] sm:p-5">
+                <span className="text-[16px] font-extrabold leading-5 tracking-[-0.02em] sm:text-xl">Find the right area</span>
+                <span className="mt-1 text-[13px] leading-[1.35] text-slate-600 sm:text-[15px]">Tokyo, Kyoto, Osaka or Kawaguchiko: pick the base that fits your trip.</span>
+                <span className="mt-auto inline-flex items-center gap-1 pt-2 text-[13px] font-bold text-ink sm:text-sm">Choose a city <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
+              </div>
+            </a>
+            <Link href="/stays/tokyo-special" className="group flex flex-col overflow-hidden rounded-[18px] border border-slate-200 bg-white sm:flex-row shadow-[0_6px_24px_rgba(30,41,59,0.08)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink">
+              <div className="relative aspect-[16/9] bg-slate-200 sm:aspect-auto sm:w-[38%] sm:shrink-0">
+                <Image src="/images/stays/special/prince-park-tower.webp" alt="The Prince Park Tower Tokyo with Tokyo Tower beside it" fill preload sizes="(min-width: 1160px) 210px, (min-width: 640px) 19vw, 50vw" className="object-cover" />
+              </div>
+              <div className="flex flex-1 flex-col p-3 sm:min-h-[150px] sm:p-5">
+                <span className="text-[16px] font-extrabold leading-5 tracking-[-0.02em] group-hover:underline sm:text-xl">Discover special stays</span>
+                <span className="mt-1 text-[13px] leading-[1.35] text-slate-600 sm:text-[15px]">Tokyo hotels with Skytree or Tokyo Tower views, Pokémon and Godzilla rooms.</span>
+                <span className="mt-auto inline-flex items-center gap-1 pt-2 text-[13px] font-bold text-fuji sm:text-sm">See 11 hotels <ArrowRight className="h-4 w-4" aria-hidden="true" /></span>
+              </div>
+            </Link>
+          </div>
+        ) : null}
+
+        <nav id="cities" aria-label={t("discovery.destinationsLabel")} className="mt-6 scroll-mt-20 md:mt-8">
           <ul className="grid grid-cols-2 gap-3 sm:gap-5">
             {design.destinations.map(({ id, href, image, position }, index) => {
               const DestinationLink = href.startsWith("#") ? "a" : Link;
@@ -101,6 +126,7 @@ export default async function AreasToStayIndex({ params }: Props) {
                         alt={t(`discovery.cities.${id}.alt`)}
                         fill
                         preload={index === 0}
+                        loading="eager"
                         sizes="(min-width: 1160px) 548px, (min-width: 640px) calc((100vw - 60px) / 2), calc((100vw - 52px) / 2)"
                         className="object-cover"
                         style={{ objectPosition: position }}
@@ -120,14 +146,6 @@ export default async function AreasToStayIndex({ params }: Props) {
           </ul>
         </nav>
 
-        {/* Plan A of docs/tokyo-special-stays: a second way in, by the room
-            rather than the area. English only, like the page it opens. */}
-        {locale === "en" ? (
-          <Link href="/stays/tokyo-special" className="mt-3 flex min-h-12 items-center justify-between gap-3 rounded-[18px] border border-slate-200 bg-white px-4 py-3 text-[15px] font-bold text-ink shadow-[0_6px_24px_rgba(30,41,59,0.06)] hover:underline">
-            <span>Or start with the room: Skytree and Tokyo Tower views, Pokémon and Godzilla rooms</span>
-            <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
-          </Link>
-        ) : null}
 
         <details className="text-xs text-slate-600">
           <summary className="w-fit min-h-11 cursor-pointer content-center underline decoration-slate-300 underline-offset-4 hover:text-ink">

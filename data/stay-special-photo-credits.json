@@ -1,0 +1,66 @@
+{
+  "/images/stays/special/skytree-night.webp": {
+    "caption": "Tokyo Skytree at night, seen from near Asakusa",
+    "title": "JP-Tokyo-Tokyo-Skytree-Night",
+    "author": "Kanchi1979",
+    "source": "https://commons.wikimedia.org/wiki/File:JP-Tokyo-Tokyo-Skytree-Night.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "/images/stays/special/tokyo-tower.webp": {
+    "caption": "Tokyo Tower lit up at night",
+    "title": "Tokyo Tower 50th Anniversary",
+    "author": "inoc from Japan",
+    "source": "https://commons.wikimedia.org/wiki/File:Tokyo_Tower_50th_Anniversary.jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "/images/stays/special/asakusa-view.webp": {
+    "caption": "Asakusa View Hotel (exterior)",
+    "title": "Asakusa View Hotel (9633952253)",
+    "author": "Guilhem Vellut from Annecy, France",
+    "source": "https://commons.wikimedia.org/wiki/File:Asakusa_View_Hotel_(9633952253).jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "/images/stays/special/tobu-levant.webp": {
+    "caption": "Tobu Hotel Levant Tokyo (exterior)",
+    "title": "Tobu Hotel Levant Tokyo",
+    "author": "Abasaa",
+    "source": "https://commons.wikimedia.org/wiki/File:Tobu_Hotel_Levant_Tokyo.JPG",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  "/images/stays/special/east-21.webp": {
+    "caption": "Hotel East 21 Tokyo (exterior)",
+    "title": "Hotel East21 Tokyo 20180616",
+    "author": "Akitsumaru",
+    "source": "https://commons.wikimedia.org/wiki/File:Hotel_East21_Tokyo_20180616.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "/images/stays/special/prince-park-tower.webp": {
+    "caption": "The Prince Park Tower Tokyo, with Tokyo Tower beside it",
+    "title": "Prince Park Tower Tokyo1",
+    "author": "江戸村のとくぞう",
+    "source": "https://commons.wikimedia.org/wiki/File:Prince_Park_Tower_Tokyo1.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "/images/stays/special/park-hotel-tokyo.webp": {
+    "caption": "Shiodome Media Tower, home of Park Hotel Tokyo",
+    "title": "Shiodome Media Tower (2007.09.11) 1",
+    "author": "Lombroso",
+    "source": "https://commons.wikimedia.org/wiki/File:Shiodome_Media_Tower_(2007.09.11)_1.jpg",
+    "license": "Public domain",
+    "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/"
+  },
+  "/images/stays/special/mitsui-ginza-premier.webp": {
+    "caption": "Mitsui Garden Hotel Ginza Premier (exterior)",
+    "title": "Mitsui-Garden Hotel Ginza-Premier, Chūō-ku, Japan (Unsplash)",
+    "author": "Dmitri  Popov dmpop",
+    "source": "https://commons.wikimedia.org/wiki/File:Mitsui-Garden_Hotel_Ginza-Premier,_Ch%C5%AB%C5%8D-ku,_Japan_(Unsplash).jpg",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  }
+}
