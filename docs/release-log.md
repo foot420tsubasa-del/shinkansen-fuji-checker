@@ -16,6 +16,7 @@
 | 2026-11-21（クレカのタッチ乗車） | 本記録の前のコミット | 新規 /credit-card-tap-to-ride-japan（英語のみ）。/how-to-buy-suica（英語のみのカード1枚）、/how-to-navigate-japanese-train-stations（本文1文と関連リンク1行）、サイトマップ | 改札でクレカが使える会社・使えない会社、出られないときの対処、Suica・クレカ・JR Pass の違い。アフィリエイトなし（[記録](./credit-card-tap-2026-11-21.md)） | なし。トップ・/guide は変更なし |
 | 2026-11-21（クレカ記事の訂正） | 本記録の前のコミット | /credit-card-tap-to-ride-japan | JR東日本は「改札でのタッチ不可、切符はクレカで購入可」に訂正。メトロからJRへ直通した場合の2段階の精算を明記。終了した受付番号の案内を削除（[記録 §6](./credit-card-tap-2026-11-21.md)） | なし |
 | 2026-11-21（クレカ記事の英語・押上） | 本記録の前のコミット | /credit-card-tap-to-ride-japan | 平易な米国英語に書き換え。浅草→押上→成田空港の例と FAQ を1問追加。アフィリエイトなし（[記録 §7](./credit-card-tap-2026-11-21.md)） | なし |
+| 2026-11-21（アクティビティハブ） | 本記録の前のコミット | 新規 /things-to-do（英語のみ）。/areas-to-stay（英語のみのリンク1本）、/scenic/golden-route（末尾に1文）、サイトマップ | teamLab 3館・USJ・ディズニーの違いと予約前の注意。Klook のボタンは発行済みの3本だけ（新しい placement `things_to_do_ticket`）。[記録](./things-to-do-2026-11-21.md) | なし。トップ・/guide は変更なし |
 
 ## 座席CTAの文言修正と計測準備（2026-11-21）
 
