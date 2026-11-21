@@ -113,3 +113,27 @@
 - Biovortex の紹介文の「newest」（最新館）は確認できない表現なので、「2025年10月開業」に変更した。
 - 報酬率・除外条件は未確認のまま。
 - `/things-to-do` の Klook ボタンは5本（placement `things_to_do_ticket`）。
+
+## 9. ディズニーの販売先の訂正（2026-11-21）
+
+**§8 の確認漏れ**：§8 では「TDR 公式は Klook の名前を出していない」と書いた。購入方法のページ（/en/ticket/purchase.html）しか見ていなかったため。
+
+**正しい情報**：公式の Park Guide（https://www.tokyodisneyresort.jp/treasure/parkguide/en/ の Purchase Park Tickets → Online Travel Agencies）に、Klook が明記されている。
+- 「Only 1-Day Passports are available for purchase on the following websites」。一覧は Agoda、Booking.com、GetYourGuide、Klook、KKday、Trip.com、Viator など。
+- パークのチケット売り場では購入できない。
+
+**Klook の商品ページ（activity 695、2026-11-21 閲覧）で確認したこと**
+- 1デーパスポートは、購入時に選んだ来園日とパークだけで有効。当日の変更はできない。
+- 来園日は購入日から2か月先まで選べる。
+- 入園はスマートフォン表示のみで、紙に印刷したチケットは使えない。
+- 取消・返金・変更は、発券した旅行会社に連絡する（パークの窓口ではできない）。
+- 同じ日に2つのパークに入るには、それぞれのチケットが必要。
+
+**確認できなかったこと**
+- 国籍・居住地による購入制限、Klook 側のキャンセル規定：商品ページの本文に記載がなかった。
+- 報酬率・除外条件。
+
+**ページの修正**
+- ディズニーの欄を、上の事実に合わせて書き直した（Klook は公式一覧に載っている旅行会社で、1デーパスポートのみ）。
+- 公式一覧へのリンクを追加した。
+- 広告ID 1584871、URL、`link_id=tokyoDisney1Day`、SEO 設定は変更していない。
