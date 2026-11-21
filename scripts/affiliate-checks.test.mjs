@@ -1955,9 +1955,17 @@ test("credit-card tap page: official sources, JR East marked no, no affiliate li
   assert.match(readFileSync("app/sitemap.ts", "utf8"), /"\/credit-card-tap-to-ride-japan"/);
   // The JR Pass must never be pitched for subway rides.
   const pass = data.compare.cards.find((c) => c.name === "JR Pass");
-  assert.ok(pass.points.some((p) => /not on its list/.test(p)));
+  assert.ok(pass.points.some((p) => /cover Tokyo Metro or Toei/.test(p)), "says the JR Pass does not cover the subway");
   for (const href of ["/how-to-buy-suica", "/how-to-navigate-japanese-train-stations"]) {
     const file = href === "/how-to-buy-suica" ? "app/[locale]/how-to-buy-suica/page.tsx" : "app/[locale]/how-to-navigate-japanese-train-stations/page.tsx";
     assert.match(readFileSync(file, "utf8"), /href="\/credit-card-tap-to-ride-japan"/, `${href} links to the new page`);
   }
+});
+
+test("credit-card tap page: Oshiage example is sourced and does not call Oshiage card-free", () => {
+  const ex = JSON.parse(readFileSync("data/credit-card-tap.json", "utf8")).where.example;
+  for (const [, url] of ex.sources) assert.match(url, /^https:\/\/www\.(keisei\.co\.jp|tokyometro\.jp)\//);
+  assert.ok(ex.points.some((p) => /tap in and out at Oshiage/.test(p)), "says Toei cards work at Oshiage itself");
+  assert.ok(ex.points.some((p) => /Keisei isn't one of the 11/.test(p)));
+  assert.ok(ex.points.some((p) => /Skyliner doesn't stop at Oshiage/.test(p)), "Skyliner is not the Oshiage train");
 });

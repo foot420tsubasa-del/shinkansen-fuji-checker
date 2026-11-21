@@ -62,7 +62,7 @@ function Official({ source }: { source: string[] }) {
 export default async function CreditCardTapPage() {
   const rows = data.where.rows as Row[];
   const plans = data.compare.cards as Plan[];
-  const checked = new Date(`${data.checked}T00:00:00Z`).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+  const checked = new Date(`${data.checked}T00:00:00Z`).toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
 
   const schema = [
     {
@@ -171,6 +171,23 @@ export default async function CreditCardTapPage() {
             ))}
           </div>
           <p className="mt-3 text-[14.5px] leading-6 text-slate-600">{data.where.others}</p>
+
+          {/* The trip readers get stuck on most around Oshiage: one train,
+              two railways, and only the first one takes cards. */}
+          <div id="oshiage" className="mt-5 scroll-mt-20 rounded-[22px] border border-slate-200 bg-slate-50 p-5">
+            <h3 className="text-[17px] font-extrabold text-ink">{data.where.example.title}</h3>
+            <ul className="mt-3 grid gap-2 text-[15px] leading-6 text-slate-700">
+              {data.where.example.points.map((point) => (
+                <li key={point} className="flex gap-2.5">
+                  <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-slate-400" aria-hidden="true" />
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-2 flex flex-wrap gap-x-4">
+              {data.where.example.sources.map((source) => <Official key={source[1]} source={source} />)}
+            </div>
+          </div>
         </section>
 
         <section id="why" tabIndex={-1} className="mt-12 scroll-mt-20" aria-labelledby="why-heading">
