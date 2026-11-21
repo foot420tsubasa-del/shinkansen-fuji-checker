@@ -22,6 +22,7 @@ type Hotel = {
   note?: string;
   official?: string[];
   more?: string[];
+  buttonLabel?: string;
 };
 
 const PATH = data.path;
@@ -106,11 +107,11 @@ export default async function TokyoSpecialStaysPage({ params }: Props) {
                   </div>
                   {hotel.note ? <p className="mt-2 text-[13.5px] leading-5 text-slate-500">{hotel.note}</p> : null}
                   <div className="mt-3 flex flex-col gap-2 md:flex-row md:flex-wrap md:items-center">
-                    <BookingButton id={hotel.id} label="Check rooms on Booking.com" pagePath={pagePath} locale={locale} area={hotel.area} />
+                    <BookingButton id={hotel.id} label={hotel.buttonLabel ?? "Check rooms on Booking.com"} pagePath={pagePath} locale={locale} area={hotel.area} />
                     {(hotel.more ?? []).map((id) => {
                       const link = getBookingHotelLink(id);
                       return link?.affiliate ? (
-                        <BookingButton key={id} id={id} label={link.name.replace("MIMARU Tokyo ", "")} pagePath={pagePath} locale={locale} area={link.name} />
+                        <BookingButton key={id} id={id} label={`${link.name.replace("MIMARU Tokyo ", "")} on Booking.com`} pagePath={pagePath} locale={locale} area={link.name} />
                       ) : null;
                     })}
                     {hotel.official ? (

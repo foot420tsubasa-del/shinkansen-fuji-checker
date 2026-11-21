@@ -127,3 +127,12 @@
 **計測を汚した可能性**：表示確認のテスト中に、ナビゲーションの抑止がうまく働かず、グレイスリーと MIMARU のリンクを実際に開いた可能性がある（最大2クリック、予約なし）。2026-11-21 の Travelpayouts のクリックを集計するときは、この分を除く。
 
 **追加で発行が必要なリンク**：URL管理シートの192〜204行目（13軒）。
+
+## 10. 13軒のリンクを反映（2026-11-21）
+
+- URL管理シートの192〜204行目に貼られた13本（すべて `https://booking.tpx.lv/` の8文字）を、`data/booking-hotel-urls.json` の affiliateUrl に反映した。重複はない。
+- これで /stays/tokyo-special の全ホテルに Booking.com のボタンが付いた（16本）。
+  - MIMARU は5館それぞれにボタン（「Ueno East on Booking.com」など）。
+  - パークホテル東京は、タワービューとアーティストルームの2枚のカードで同じリンクを使う。
+- 遷移先は確認していない。アフィリエイトのクリックを発生させないため、リンクは開いていない。発行元（Travelpayouts の Booking.com リンク生成）を信頼している。
+- GA4：placement は `tokyo_special_stay`、`link_id` は `bookingHotel.<id>`、`hotel_name` で区別する。

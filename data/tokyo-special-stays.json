@@ -122,7 +122,8 @@
             "mimaru-tokyo-kinshicho",
             "mimaru-tokyo-ginza-east",
             "mimaru-tokyo-hatchobori"
-          ]
+          ],
+          "buttonLabel": "Ueno East on Booking.com"
         },
         {
           "id": "hotel-gracery-shinjuku",
