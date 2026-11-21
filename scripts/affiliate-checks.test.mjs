@@ -1984,8 +1984,14 @@ test("things-to-do hub: Klook buttons only for issued links, official sources, n
       assert.match(item.cta, /^Check .+ on Klook$/, "CTA promises nothing");
     }
   }
-  // Products without an issued link get no Klook button.
-  for (const id of ["tokyo-disney", "teamlab-biovortex"]) assert.equal(data.items.find((i) => i.id === id).klookLinkId, undefined, id);
+  // Biovortex and Disney links were issued 2026-11-21 (URL管理 rows 190-191).
+  assert.equal(data.items.find((i) => i.id === "teamlab-biovortex").klookLinkId, "teamlabBiovortex");
+  assert.equal(data.items.find((i) => i.id === "tokyo-disney").klookLinkId, "tokyoDisney1Day");
+  // Each Klook target is the product the card describes.
+  const target = { teamlabPlanets: "25300", teamlabBorderless: "20707", universalStudiosJapan: "46604", teamlabBiovortex: "167098", tokyoDisney1Day: "695" };
+  for (const [id, activity] of Object.entries(target)) assert.match(decodeURIComponent(links[id].directUrl), new RegExp(`/activity/${activity}-`), id);
+  // TDR names no reseller, so the page must not call Klook authorized for Disney.
+  assert.doesNotMatch(JSON.stringify(data.items.find((i) => i.id === "tokyo-disney")), /authori[sz]ed seller|official partner/i);
   assert.match(page, /rel=\{AFFILIATE_REL\}/);
   assert.match(page, /placement="things_to_do_ticket"/);
   assert.match(page, /linkId=\{item\.klookLinkId\}/);

@@ -1,29 +1,4 @@
 {
   "_about": "Links still to be issued (2026-11-21). Exported to the bottom of the URL管理 tab under 取得待ち（未発行） so one tab holds everything; import never writes these rows to the site. When a link is issued, paste it into the row's アフィリエイトURL and ask for it to be wired in.",
-  "items": {
-    "teamlabBiovortex": {
-      "priority": "P1",
-      "name": "チームラボ バイオヴォルテックス 京都 チケット",
-      "provider": "Klook",
-      "normalUrl": "https://www.klook.com/en-US/activity/167098-teamlab-kyoto/",
-      "placeOn": "/things-to-do#kyoto（teamLab Biovortex Kyoto のカード）",
-      "status": "未発行",
-      "purpose": "京都駅八条東口から徒歩7分。新幹線・ゴールデンルートの読者の動線上にあり、/areas-to-stay の京都欄からもリンク済み。現在は公式サイトへのリンクのみ",
-      "caution": "報酬対象か・報酬率・除外条件を管理画面で確認してから貼る",
-      "method": "Klook管理画面のリンク生成に左の通常URLを入れて変換し、アフィリエイトURL列に貼る",
-      "checked": "2026-11-21"
-    },
-    "tokyoDisney1Day": {
-      "priority": "P2",
-      "name": "東京ディズニーリゾート 1デーパスポート",
-      "provider": "Klook",
-      "normalUrl": "https://www.klook.com/activity/695-tokyo-disney-resort-1-day-pass-tokyo/",
-      "placeOn": "/things-to-do#tokyo-disney（Tokyo Disneyland or DisneySea のカード）",
-      "status": "未発行（急ぎではない）",
-      "purpose": "人気は高いが、舞浜（千葉県浦安市）で鉄道コンテンツとの関係は薄い。競合も強い",
-      "caution": "Biovortex の後でよい。テーマパークは報酬率が低い可能性があるので、管理画面で率を確認してから判断",
-      "method": "Klook管理画面のリンク生成で左の通常URLを変換",
-      "checked": "2026-11-21"
-    }
-  }
+  "items": {}
 }

@@ -27,7 +27,7 @@ const GENRES = [
   ["鉄道チケット（新幹線・特急）", /^(shinkansen|fujiExcursion|saganoTrain)/],
   ["鉄道パス・乗り放題", /^(jrPass|pass[A-Z]|hakone$|fujiKawaguchikoPass|enoshimaKamakuraFreepass|yurikamomeDayPass|osakaAmazingPass)/],
   ["空港アクセス", /^(airportTransfer|nex|skyliner|keiseiSkyliner|limousineBus|naritaLimousineBus|hanedaMonorail|hanedaLimousineBus|jrHaruka|kixLimousineBus|nankaiRapit|naritaPrivateTransfer|hanedaPrivateTransfer|airportPrivateTransfer|klookAirportTransfers|klookTokyoTransport)$/],
-  ["観光・ツアー・体験", /^(city|foodTour|teamlab|tokyoTower|kimono|fushimi|universal|nara$|fujiDayTour|fujiOshino|fujiChureito|tour[A-Z]|hakoneRopeway|hakoneCruise|fujiPanoramicRopeway)/],
+  ["観光・ツアー・体験", /^(city|foodTour|teamlab|tokyoTower|kimono|fushimi|universal|nara$|fujiDayTour|fujiOshino|fujiChureito|tour[A-Z]|hakoneRopeway|hakoneCruise|fujiPanoramicRopeway|tokyoDisney)/],
   ["通信・保険・車", /^(esim|simCard|insurance|carRental)$/],
   ["ホテル検索（Klook）", /^hotel/],
   ["ホテル検索（Agoda）", /^agoda/],
@@ -46,6 +46,8 @@ const GENRE_ORDER = [
 /** Japanese names for the sheet only (display; not read back on import). */
 const JA_NAME = {
   "jrPass": "JRパス（全国7日間）",
+  "teamlabBiovortex": "チームラボ バイオヴォルテックス 京都",
+  "tokyoDisney1Day": "東京ディズニーリゾート 1デーパスポート",
   "shinkansenTicket": "新幹線チケット（東海道・汎用）",
   "shinkansenTokyoKyoto": "新幹線 東京→京都",
   "shinkansenKyotoTokyo": "新幹線 京都→東京",

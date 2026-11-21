@@ -118,7 +118,7 @@
       "tickets": "A 1-Day Passport is for one date and one park: Tokyo Disneyland or Tokyo DisneySea. The price changes by date, and some dates sell out.",
       "before": [
         "Choose your park when you buy. The ticket doesn't let you switch parks.",
-        "Buy from the official site or an authorized seller. Tokyo Disney Resort warns about resold tickets."
+        "Tokyo Disney Resort sells tickets on its official site and through some travel agencies, and warns against resold tickets. Check the date and park on your ticket before you pay."
       ],
       "official": [
         "Tokyo Disney Resort tickets (official)",
@@ -127,13 +127,15 @@
       "extraSource": [
         "Getting there (official)",
         "https://www.tokyodisneyresort.jp/en/tdr/access/"
-      ]
+      ],
+      "klookLinkId": "tokyoDisney1Day",
+      "cta": "Check Tokyo Disney 1-Day Passports on Klook"
     },
     {
       "id": "teamlab-biovortex",
       "city": "kyoto",
       "name": "teamLab Biovortex Kyoto",
-      "tagline": "teamLab's newest museum, a short walk from Kyoto Station.",
+      "tagline": "teamLab's museum by Kyoto Station, opened in October 2025.",
       "goodFor": "An evening plan in Kyoto, especially if you are staying near Kyoto Station.",
       "where": "7 minutes on foot from the Hachijo East Gate of Kyoto Station.",
       "tickets": "An Entrance Pass with a set entry time, or a Flexible Pass for a set date. Tickets can be changed up to three times.",
@@ -148,7 +150,9 @@
       "stay": [
         "Planning Kyoto on the Golden Route",
         "/scenic/golden-route"
-      ]
+      ],
+      "klookLinkId": "teamlabBiovortex",
+      "cta": "Check teamLab Biovortex tickets on Klook"
     },
     {
       "id": "usj",

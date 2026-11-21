@@ -1277,5 +1277,27 @@
     "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1581394&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F6241-nanzen-ji-fushimi-inari-taisha-sagano-romantic-train-day-tour%2F",
     "usedOn": [],
     "notes": "URL管理「取得候補_20261120」P2（/scenic/sagano）から反映 2026-11-21。転送先確認済み。"
+  },
+  "teamlabBiovortex": {
+    "label": "teamLab Biovortex Kyoto",
+    "provider": "klook",
+    "adid": "1584870",
+    "klookPath": "activity/167098-teamlab-kyoto/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1584870&k_site=https%3A%2F%2Fwww.klook.com%2Fen-US%2Factivity%2F167098-teamlab-kyoto%2F",
+    "usedOn": [
+      "/things-to-do#kyoto"
+    ],
+    "notes": "URL管理 190行目（取得待ち P1）から反映 2026-11-21。k_site は activity 167098 と一致。報酬率は未確認。"
+  },
+  "tokyoDisney1Day": {
+    "label": "Tokyo Disney Resort 1-Day Passport",
+    "provider": "klook",
+    "adid": "1584871",
+    "klookPath": "activity/695-tokyo-disney-resort-1-day-pass-tokyo/",
+    "directUrl": "https://affiliate.klook.com/redirect?aid=104861&aff_adid=1584871&k_site=https%3A%2F%2Fwww.klook.com%2Factivity%2F695-tokyo-disney-resort-1-day-pass-tokyo%2F",
+    "usedOn": [
+      "/things-to-do#tokyo-disney"
+    ],
+    "notes": "URL管理 191行目（取得待ち P2）から反映 2026-11-21。k_site は activity 695 と一致。報酬率は未確認。TDR公式は販売先を「一部の旅行会社」とだけ記載（Klook の名前はない）。"
   }
 }
