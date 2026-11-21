@@ -8,7 +8,7 @@
   "lead": "Yes on the subways, no on JR. Here is where a contactless Visa, Mastercard or phone works, why a gate can refuse it, and what to do if you are stuck inside.",
   "quick": [
     "Tokyo Metro, Toei Subway and nine other Kanto railways take a contactless credit, debit or prepaid card, or a phone with one in its wallet.",
-    "JR East does not. That includes the Yamanote Line, the Chuo Line and the Narita Express.",
+    "JR East gates do not take a card tap. That includes the Yamanote Line, the Chuo Line and the Narita Express. You can still buy JR tickets with a credit card at ticket offices and the purple reserved-seat machines.",
     "Tap in and out with the same card or phone. A different card, even the same card on your phone, does not count.",
     "A JR Pass is for JR trains. Tokyo Metro and Toei are not on its list of covered lines.",
     "A Suica or PASMO works on all of these, JR included."
@@ -27,17 +27,25 @@
       ],
       [
         "Say where you got on",
-        "Tell the staff your boarding station. They will tell you what to pay and how. If the card trip no longer counts, Tokyo Metro asks for cash or another non-credit payment."
+        "Tell the staff your boarding station. They will tell you what to pay and how."
       ],
       [
-        "Keep any number they give you",
-        "Tokyo Metro may give you a reception number. Its FAQ explains how to follow up online."
+        "Did your train run on to JR?",
+        "Tokyo Metro says your card trip is then void from the station you boarded. Pay at the station where you get off, from the connecting station onward. Separately, take the same card to a station window of the railway you boarded (a Tokyo Metro station if you started on Tokyo Metro). Staff there clear the entry record and charge the fare from your boarding station to the connecting station. Both payments are in cash or another non-credit method."
+      ],
+      [
+        "Anything left to settle later?",
+        "Take the same card to a ticket window of the railway you boarded. Tokyo Metro stopped issuing reception numbers on 25 October 2026."
       ]
     ],
     "phrases": [
       [
         "I got on at ___ station with this card. The gate won't open.",
         "このカードで ___ 駅から乗りました。改札が開きません。"
+      ],
+      [
+        "My train continued onto the JR line.",
+        "電車がそのままJR線に乗り入れました。"
       ],
       [
         "How should I pay?",
@@ -48,11 +56,7 @@
         "クレジットカードしか持っていません。"
       ]
     ],
-    "phrasesNote": "Show the Japanese to the staff. Fill in your station name in English; staff will understand.",
-    "faqLink": [
-      "Tokyo Metro FAQ",
-      "https://ssl.tokyometro.jp/support/faq_top?lang=en"
-    ]
+    "phrasesNote": "Show the Japanese to the staff. Fill in your station name in English; staff will understand."
   },
   "where": {
     "title": "Where can I tap my credit card?",
@@ -101,14 +105,15 @@
       {
         "name": "JR East",
         "card": "no",
-        "cardText": "Not accepted",
+        "cardText": "No card tap at the gates",
         "notes": [
-          "Not at the gates and not at ticket machines or ticket offices. This covers the Yamanote, Chuo and Keihin-Tohoku lines, the Narita Express and JR East Shinkansen.",
-          "Use a Suica, PASMO or other transport IC card, or buy a ticket."
+          "JR East gates do not take a credit card tap, and its ticket offices and machines do not take tap payments either.",
+          "You can still buy tickets with a credit or debit card inserted into the machine: at ticket offices (Midori-no-madoguchi) and the purple reserved-seat machines. The green machines do not take credit cards; the black multi-function machines take them only for some tickets.",
+          "To ride, use a Suica, PASMO or other transport IC card, or buy a ticket."
         ],
         "source": [
-          "JR East FAQ (Japanese)",
-          "https://jreastfaq.jreast.co.jp/faq/show/3954"
+          "JR East FAQ: paying by card (Japanese)",
+          "https://jreastfaq.jreast.co.jp/faq/show/1183"
         ]
       },
       {
@@ -137,11 +142,11 @@
     "items": [
       [
         "The company does not take cards",
-        "JR East gates have no card reader at all. If you are at a JR gate, you need an IC card or a ticket."
+        "JR East gates have no card reader. At a JR gate you need an IC card or a ticket. You can buy the ticket with a credit card at a ticket office or a purple reserved-seat machine."
       ],
       [
         "Your train ran on to another company",
-        "Many subway trains continue onto other lines without you changing trains. On Tokyo Metro, a card trip that runs on to JR East, Saitama Rapid Railway or Toyo Rapid no longer counts, and you pay separately."
+        "Many subway trains continue onto other lines without you changing trains. On Tokyo Metro, a card trip that runs on to JR East, Saitama Rapid Railway or Toyo Rapid becomes void, and you settle it in two parts without the card: see the steps above."
       ],
       [
         "The station or gate is excluded",
@@ -180,7 +185,7 @@
         "verdict": "Good backup on the subway",
         "points": [
           "No card to buy or top up. On Tokyo Metro, the same fare as a paper ticket.",
-          "Adult fare only, and not on JR East.",
+          "Adult fare only. No tapping at JR East gates.",
           "Tap in and out with the same card or phone."
         ]
       },
@@ -218,7 +223,11 @@
     ],
     [
       "Can I tap my credit card on the JR Yamanote Line?",
-      "No. JR East does not accept contactless credit cards at gates, ticket machines or ticket offices. Use a Suica or PASMO, or buy a ticket."
+      "No. JR East gates do not take a credit card tap. Use a Suica or PASMO, or buy a ticket."
+    ],
+    [
+      "Can I buy JR tickets with a credit card?",
+      "Yes, by inserting the card, not tapping it. JR East ticket offices and the purple reserved-seat machines take Visa, Mastercard, JCB, American Express, Diners Club and Discover. The green machines do not take credit cards."
     ],
     [
       "Can I tap a credit card at Shinjuku Station?",
@@ -234,7 +243,7 @@
     ],
     [
       "Can I take the Narita Express with a credit card tap?",
-      "No. The Narita Express is JR East. Buy a ticket or use a Suica."
+      "Not by tapping. The Narita Express is JR East. Use a Suica, or buy a ticket: JR ticket offices and the purple reserved-seat machines accept credit cards inserted into the reader."
     ],
     [
       "Do I still need a Suica?",

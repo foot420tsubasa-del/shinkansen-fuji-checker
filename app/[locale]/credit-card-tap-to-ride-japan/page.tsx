@@ -126,12 +126,6 @@ export default async function CreditCardTapPage() {
                   <span className="block text-[15.5px] font-bold text-ink">{title}</span>
                   <span className="mt-0.5 block text-[15px] leading-6 text-slate-700">
                     {text}
-                    {i === data.stuck.steps.length - 1 ? (
-                      <>
-                        {" "}
-                        <a href={data.stuck.faqLink[1]} rel="noopener noreferrer" className="font-semibold underline underline-offset-2">{data.stuck.faqLink[0]}</a>
-                      </>
-                    ) : null}
                   </span>
                 </span>
               </li>
