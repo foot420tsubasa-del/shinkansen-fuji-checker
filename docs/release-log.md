@@ -14,6 +14,7 @@
 | 2026-11-21（OGP画像） | 本記録の前のコミット | 29ファイル（/scenic・/scenic/*・/kyoto-to-tokyo-mt-fuji-seat ほか）。トップ・/guide・/shinkansen-seat-letters・東京の宿検索は対象外 | `<head>` の og:image と twitter:image を共通画像で補い、Twitter Card を `summary_large_image` に。title・description・本文・リンクは変更なし（[SEO監査](./seo-audit-2026-11-21.md)） | なし |
 | 2026-11-21（SEO文言） | 本記録の前のコミット | /shinkansen-seat-letters（英語の title・H1・description）、/areas-to-stay/tokyo-station-vs-shinjuku（英語の description） | 座席表（seat map）の検索の意図に title を合わせた。東京駅と新宿は別の駅で、中央線快速で約14分と冒頭に追記。座席チェッカー・Klook の導線・placement・翻訳は変更なし（[SEO監査 §7](./seo-audit-2026-11-21.md)） | なし。12/01 の判定は `/guide` で絞り込むので影響しない |
 | 2026-11-21（クレカのタッチ乗車） | 本記録の前のコミット | 新規 /credit-card-tap-to-ride-japan（英語のみ）。/how-to-buy-suica（英語のみのカード1枚）、/how-to-navigate-japanese-train-stations（本文1文と関連リンク1行）、サイトマップ | 改札でクレカが使える会社・使えない会社、出られないときの対処、Suica・クレカ・JR Pass の違い。アフィリエイトなし（[記録](./credit-card-tap-2026-11-21.md)） | なし。トップ・/guide は変更なし |
+| 2026-11-21（クレカ記事の訂正） | 本記録の前のコミット | /credit-card-tap-to-ride-japan | JR東日本は「改札でのタッチ不可、切符はクレカで購入可」に訂正。メトロからJRへ直通した場合の2段階の精算を明記。終了した受付番号の案内を削除（[記録 §6](./credit-card-tap-2026-11-21.md)） | なし |
 
 ## 座席CTAの文言修正と計測準備（2026-11-21）
 
