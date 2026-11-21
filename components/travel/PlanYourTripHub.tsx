@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Bed, CalendarDays, ExternalLink, Landmark, Luggage, Plane, ShieldCheck, Signpost, Train, Wifi } from "lucide-react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
@@ -328,17 +329,15 @@ export function PlanYourTripHub() {
           </Card>
         </section>
 
-        <section className="mt-8 rounded-[22px] border border-emerald-100 bg-emerald-50/70 p-5 shadow-sm">
-          <h2 className="text-xl font-semibold text-slate-950">{t("bookingOrder.routeDecisionTitle")}</h2>
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-700">{t("bookingOrder.routeDecisionBody")}</p>
-        </section>
-
+        {/* One block, not two: this used to repeat the same paragraph in a
+            translated box and again here in English. The translated copy now
+            feeds the block that carries the Stay Finder links. */}
         <HotelBaseNextStep
           sourcePage="/plan-your-trip"
           locale={locale}
           placement="plan_trip_hotel_base_next_step"
-          title="Do not book hotels before the route shape is clear"
-          body="Before choosing hotel names, decide your arrival airport, first-night area, Shinkansen day, luggage plan, and whether Kyoto, Osaka, Mt. Fuji, or Disney affects your base."
+          title={t("bookingOrder.routeDecisionTitle")}
+          body={t("bookingOrder.routeDecisionBody")}
           primaryLabel="Open Tokyo Stay Finder"
           secondaryLabel="See local hotel examples"
           className="mt-6"
@@ -584,9 +583,12 @@ export function PlanYourTripHub() {
               return (
                 <Card key={city.title} className="overflow-hidden p-0">
                   {city.imageSrc ? (
-                    // Future city images can be added through cityCards without changing the card layout.
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img src={city.imageSrc} alt={city.imageAlt ?? city.title} className="aspect-[16/9] w-full object-cover" loading="lazy" />
+                    // Served through next/image so a phone downloads a card-sized
+                    // copy instead of the 1,400–1,700px original, and the slate
+                    // background shows while it loads instead of an empty box.
+                    <div className="relative aspect-[16/9] w-full bg-slate-100">
+                      <Image src={city.imageSrc} alt={city.imageAlt ?? city.title} fill sizes="(min-width: 1280px) 340px, (min-width: 768px) 50vw, calc(100vw - 32px)" className="object-cover" />
+                    </div>
                   ) : (
                     <div className="aspect-[16/9] border-b border-slate-100 bg-[linear-gradient(135deg,#eef6fb,#f8fbff_48%,#f0fbf6)]" aria-hidden="true" />
                   )}
