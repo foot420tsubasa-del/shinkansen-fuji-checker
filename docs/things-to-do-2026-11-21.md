@@ -50,3 +50,36 @@
 - **Klook で発行してほしいリンク**：teamLab Biovortex 京都（activity 167098）、東京ディズニーリゾート 1デーパスポート（activity 695）。
 - Klook の管理画面で、上の5商品の報酬率と除外条件を確認する。
 - 公開8週間後に、表示・クリック・`things_to_do_ticket` のクリックと予約を確認する。個別記事を作るかはその後に判断する。候補は「teamLab Planets vs Borderless」。
+
+## 6. 仕上げ（2026-11-21）
+
+### 既存ページからの導線
+
+| ページ | 判断 |
+|---|---|
+| /areas-to-stay | 末尾に東京へのリンクがある（前回）。京都の欄に「Biovortex は京都駅から徒歩7分」、大阪の欄に「USJ に行くなら先に買うもの」を追加（英語のみ） |
+| /plan-your-trip | Activities の説明文の下にテキストリンクを1本追加（英語のみ）。既存の Klook 都市カード（`plan_trip_activity_cards`）は変更なし |
+| /itineraries | 追加なし。旅程ページには、すでに USJ と teamLab Borderless の Klook ボタンがあり、noindex でもある |
+| /scenic/golden-route | 末尾にリンクがある（前回）。追加なし |
+| 京都・大阪の宿の比較ページ | 301で /areas-to-stay にまとめ済みなので、上の京都・大阪の欄で対応 |
+
+### 施設の写真・公式の販促素材
+- Klook Affiliate Portal の公開ページには「widgets, search boxes, banners」があると書かれている。ただし、素材ごとの利用条件と報酬率はログインしないと見られない。今回はログインしていないので**未確認**。
+- 権利が確認できた施設写真はない。teamLab は作品の著作権、ディズニーと USJ はキャラクターと商標の問題がある。**現状（都市の写真）のまま**にした。
+
+### 3商品の報酬条件
+- 広告IDと商品URL（k_site）は一致している：1581383 → activity 25300、1263775 → 20707、1263782 → 46604。
+- 報酬対象かどうか・報酬率・除外条件は**未確認**（管理画面へのログインが必要）。
+
+### Biovortex とディズニー、どちらから広告IDを発行するか
+**先に Biovortex**。理由：
+- 京都駅から徒歩7分で、新幹線・ゴールデンルートの読者の動線上にある。
+- 公式の情報がページにすでにある。
+- 第三者のレビューで、Klook は「authorised reseller」とされ、売り切れが多い（＝事前予約の需要がある）。
+
+ディズニーは後回し。舞浜（千葉）で鉄道コンテンツとのつながりが弱く、競合は Klook・Trip.com・ファンサイトと非常に強い。
+
+### SEO と送客
+- **自然検索**：「Planets vs Borderless」「Disneyland vs DisneySea」「USJ の Express Pass に入場は含まれるか」は、Klook のブログ、Tokyo Cheapo、japan-guide、多数のブログが上位にいる。新しいページが上位に入る見込みは低い。28表示は fujiseat の実績で、市場全体の需要ではない。
+- **既存の流入から送る（主力）**：/areas-to-stay、/plan-your-trip、/scenic/golden-route からの内部リンク。
+- 本文に追加したこと：「1館しか行けないなら、Planets は2027年末で終了、Borderless は常設」（公式の情報）。
