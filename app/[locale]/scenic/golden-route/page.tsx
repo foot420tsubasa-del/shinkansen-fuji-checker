@@ -208,7 +208,11 @@ export default async function GoldenRoutePage({ params }: Props) {
           </section>
         ) : null}
 
-        <p className="mt-10 max-w-[760px] text-sm leading-6 text-slate-600">{data.notCovered}</p>
+        <p className="mt-10 max-w-[760px] text-[15px] leading-6 text-slate-700">
+          {data.activities.text}{" "}
+          <Link href={data.activities.href} className="font-bold text-ink underline underline-offset-4 hover:text-fuji">{data.activities.label}</Link>
+        </p>
+        <p className="mt-4 max-w-[760px] text-sm leading-6 text-slate-600">{data.notCovered}</p>
         <p className="mt-2 max-w-[760px] text-xs leading-5 text-slate-500">{data.hub.verified}</p>
       </article>
       <SiteFooter />

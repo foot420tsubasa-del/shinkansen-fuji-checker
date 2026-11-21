@@ -1969,3 +1969,36 @@ test("credit-card tap page: Oshiage example is sourced and does not call Oshiage
   assert.ok(ex.points.some((p) => /Keisei isn't one of the 11/.test(p)));
   assert.ok(ex.points.some((p) => /Skyliner doesn't stop at Oshiage/.test(p)), "Skyliner is not the Oshiage train");
 });
+
+test("things-to-do hub: Klook buttons only for issued links, official sources, no invented claims", () => {
+  const data = JSON.parse(readFileSync("data/things-to-do.json", "utf8"));
+  const links = JSON.parse(readFileSync("data/affiliate-links.json", "utf8"));
+  const page = readFileSync("app/[locale]/things-to-do/page.tsx", "utf8");
+  for (const item of data.items) {
+    assert.match(item.official[1], /^https:\/\/www\.(teamlab\.art|usj\.co\.jp|tokyodisneyresort\.jp)\//, `${item.id}: official source`);
+    if (item.klookLinkId) {
+      const link = links[item.klookLinkId];
+      assert.ok(link, `${item.id}: link registered`);
+      assert.equal(link.provider, "klook");
+      assert.match(link.directUrl, /^https:\/\/affiliate\.klook\.com\/redirect\?aid=104861&aff_adid=\d+&k_site=/, `${item.id}: issued Klook URL`);
+      assert.match(item.cta, /^Check .+ on Klook$/, "CTA promises nothing");
+    }
+  }
+  // Products without an issued link get no Klook button.
+  for (const id of ["tokyo-disney", "teamlab-biovortex"]) assert.equal(data.items.find((i) => i.id === id).klookLinkId, undefined, id);
+  assert.match(page, /rel=\{AFFILIATE_REL\}/);
+  assert.match(page, /placement="things_to_do_ticket"/);
+  assert.match(page, /linkId=\{item\.klookLinkId\}/);
+  assert.match(data.disclosure, /^PR: /);
+  assert.doesNotMatch(JSON.stringify(data), /cheapest|best price|lowest|guarantee|discount/i, "no price claims");
+  // The three misunderstandings the page exists to prevent.
+  const usj = data.items.find((i) => i.id === "usj");
+  assert.match(usj.tickets, /does not include park entry/);
+  assert.match(data.items.find((i) => i.id === "tokyo-disney").where, /Chiba/);
+  assert.match(data.teamlabCompare.intro, /doesn't work at the others/);
+  assert.match(readFileSync("app/sitemap.ts", "utf8"), /"\/things-to-do"/);
+  assert.match(page, /robots: locale === "en" \? undefined : \{ index: false, follow: true \}/);
+  // Every photo used has a licence entry.
+  const credits = JSON.parse(readFileSync("data/stay-destination-photo-credits.json", "utf8"));
+  for (const c of data.cities) assert.ok(credits[c.image], `${c.image} credited`);
+});

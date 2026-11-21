@@ -353,5 +353,10 @@
     "text": "From Hiroshima Station, you can take the Shinkansen or catch a JR Sanyo Line train to Miyajimaguchi.",
     "label": "Compare stays near Hiroshima Station on Booking.com",
     "destination": "booking_hiroshima-station"
+  },
+  "activities": {
+    "text": "Staying in Kyoto or Osaka for a few nights?",
+    "label": "teamLab Biovortex Kyoto and Universal Studios Japan, explained",
+    "href": "/things-to-do#kyoto"
   }
 }

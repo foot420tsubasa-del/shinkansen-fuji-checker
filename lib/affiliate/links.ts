@@ -33,6 +33,7 @@ export type AffiliatePlacement =
   | "scenic_route_ticket"
   | "golden_route_ticket"
   | "golden_route_stay"
+  | "things_to_do_ticket"
   | "scenic_route_nearby"
   | "scenic_route_stay"
   | "fuji_view_stays"

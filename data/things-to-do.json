@@ -1,0 +1,212 @@
+{
+  "_about": "Activity hub. Venue facts were read on each venue's official site on 'checked'. Klook buttons appear only for products with an issued fujiseat affiliate link in data/affiliate-links.json (klookLinkId); the rest link to the official ticket page. No prices are printed because every venue prices by date.",
+  "checked": "2026-11-21",
+  "path": "/things-to-do",
+  "title": "teamLab, USJ or Tokyo Disney? Big-Ticket Days in Japan, Explained",
+  "description": "Which teamLab is which, what a USJ Express Pass does and doesn't include, and why Tokyo Disney is in Chiba. Timed tickets, sell-outs and booking tips for Tokyo, Kyoto and Osaka.",
+  "h1": "Big-ticket days in Tokyo, Kyoto and Osaka",
+  "lead": "The three teamLab museums are in three different places. A USJ Express Pass won't get you into the park. Tokyo Disney isn't technically in Tokyo. Here's what each one is, who it suits, and what to sort out before you book.",
+  "disclosure": "PR: We may earn a commission if you book through these Klook links, at no extra cost to you.",
+  "cities": [
+    {
+      "id": "tokyo",
+      "name": "Tokyo",
+      "image": "/images/stay/discovery/tokyo.webp",
+      "imageAlt": "Crowds crossing Shibuya Crossing in Tokyo"
+    },
+    {
+      "id": "kyoto",
+      "name": "Kyoto",
+      "image": "/images/stay/discovery/kyoto.webp",
+      "imageAlt": "Lanterns along Yasaka-dori in Kyoto in the early morning"
+    },
+    {
+      "id": "osaka",
+      "name": "Osaka",
+      "image": "/images/stay/discovery/osaka.webp",
+      "imageAlt": "Dotonbori canal in Osaka at sunset"
+    }
+  ],
+  "teamlabCompare": {
+    "title": "Which teamLab is which?",
+    "intro": "Three separate museums with separate tickets. A ticket for one doesn't work at the others.",
+    "rows": [
+      [
+        "teamLab Planets",
+        "Toyosu, Tokyo",
+        "You walk barefoot through water, up to knee height in places",
+        "Open until the end of 2027"
+      ],
+      [
+        "teamLab Borderless",
+        "Azabudai Hills, Tokyo",
+        "A maze of rooms with no map, where the artworks drift between spaces",
+        "Permanent"
+      ],
+      [
+        "teamLab Biovortex",
+        "Next to Kyoto Station",
+        "Opened in October 2025, next to the station",
+        "Permanent"
+      ]
+    ],
+    "headers": [
+      "Museum",
+      "Where",
+      "What it's like",
+      "How long it's open"
+    ]
+  },
+  "items": [
+    {
+      "id": "teamlab-planets",
+      "city": "tokyo",
+      "name": "teamLab Planets TOKYO",
+      "tagline": "Walk barefoot through art, in water up to your knees.",
+      "goodFor": "Anyone who wants one unforgettable, hands-on art space. Fun with kids too.",
+      "where": "Toyosu, by the bay. 3 minutes on foot from Shin-Toyosu Station (Yurikamome Line), or 10 minutes from Toyosu Station (Tokyo Metro Yurakucho Line).",
+      "tickets": "Tickets are for a set date and entry time, and the price changes by date. Popular slots sell out, so book ahead.",
+      "before": [
+        "You go barefoot, and some rooms have water up to knee height. Wear shorts or pants you can roll up.",
+        "Some rooms have mirror floors. Free rental shorts are available inside.",
+        "It's open until the end of 2027."
+      ],
+      "hours": "Open 8:00 a.m. to 10:00 p.m. (shorter hours Dec 31–Jan 2). Last entry one hour before closing.",
+      "klookLinkId": "teamlabPlanets",
+      "cta": "Check teamLab Planets tickets on Klook",
+      "official": [
+        "teamLab Planets (official site)",
+        "https://www.teamlab.art/e/planets/"
+      ],
+      "stay": [
+        "Where to stay in Tokyo",
+        "/areas-to-stay"
+      ]
+    },
+    {
+      "id": "teamlab-borderless",
+      "city": "tokyo",
+      "name": "teamLab Borderless",
+      "tagline": "A museum with no map, where the art moves from room to room.",
+      "goodFor": "Visitors who like to wander and explore. Allow time: you find things by getting a little lost.",
+      "where": "Azabudai Hills, central Tokyo. 2 minutes on foot from Kamiyacho Station (Tokyo Metro Hibiya Line), connected underground.",
+      "tickets": "Two choices: an Entrance Pass with a set entry time, or a Flexible Pass for a set date that you can use any time before last entry. Prices change by date.",
+      "before": [
+        "No re-entry once you leave.",
+        "There's no map, on purpose. Expect to explore rather than follow a route.",
+        "Last entry is one hour before closing."
+      ],
+      "hours": "Open 8:30 a.m. to 9:00 p.m., with some earlier closings. Check the date on the official site.",
+      "klookLinkId": "teamlabBorderless",
+      "cta": "Check teamLab Borderless tickets on Klook",
+      "official": [
+        "teamLab Borderless (official site)",
+        "https://www.teamlab.art/e/borderless-azabudai/"
+      ],
+      "stay": [
+        "Where to stay in Tokyo",
+        "/areas-to-stay"
+      ]
+    },
+    {
+      "id": "tokyo-disney",
+      "city": "tokyo",
+      "name": "Tokyo Disneyland or Tokyo DisneySea",
+      "tagline": "Two separate parks. Each ticket is for one park on one day.",
+      "goodFor": "Disney fans and families who can give it a full day. Decide which park you want before you buy.",
+      "where": "Maihama, in Urayasu, Chiba, just east of Tokyo. Take the JR Keiyo Line to Maihama Station.",
+      "tickets": "A 1-Day Passport is for one date and one park: Tokyo Disneyland or Tokyo DisneySea. The price changes by date, and some dates sell out.",
+      "before": [
+        "Choose your park when you buy. The ticket doesn't let you switch parks.",
+        "Buy from the official site or an authorized seller. Tokyo Disney Resort warns about resold tickets."
+      ],
+      "official": [
+        "Tokyo Disney Resort tickets (official)",
+        "https://www.tokyodisneyresort.jp/en/ticket/index.html"
+      ],
+      "extraSource": [
+        "Getting there (official)",
+        "https://www.tokyodisneyresort.jp/en/tdr/access/"
+      ]
+    },
+    {
+      "id": "teamlab-biovortex",
+      "city": "kyoto",
+      "name": "teamLab Biovortex Kyoto",
+      "tagline": "teamLab's newest museum, a short walk from Kyoto Station.",
+      "goodFor": "An evening plan in Kyoto, especially if you are staying near Kyoto Station.",
+      "where": "7 minutes on foot from the Hachijo East Gate of Kyoto Station.",
+      "tickets": "An Entrance Pass with a set entry time, or a Flexible Pass for a set date. Tickets can be changed up to three times.",
+      "before": [
+        "No re-entry once you leave.",
+        "Open 9:00 a.m. to 9:00 p.m. (last entry 7:30 p.m.), and closed on some days. Check the calendar."
+      ],
+      "official": [
+        "teamLab Biovortex Kyoto (official site)",
+        "https://www.teamlab.art/e/kyoto/"
+      ],
+      "stay": [
+        "Planning Kyoto on the Golden Route",
+        "/scenic/golden-route"
+      ]
+    },
+    {
+      "id": "usj",
+      "city": "osaka",
+      "name": "Universal Studios Japan",
+      "tagline": "Osaka's theme park. Buy park entry first; Express Passes are an add-on.",
+      "goodFor": "Theme-park fans and families who can give it a full day.",
+      "where": "Universal City, Osaka. The official site lists train routes from Osaka Station, Namba and Shin-Osaka.",
+      "tickets": "You need a Studio Pass to get in. It's for a set date, and the price changes by date. A Universal Express Pass only cuts the wait for certain rides. It does not include park entry.",
+      "before": [
+        "Buy the Studio Pass first. Add an Express Pass only if you want shorter lines.",
+        "No re-entry once you leave the park.",
+        "Buy from USJ or a listed travel agency. USJ says tickets from resale or auction sites can be cancelled. Klook is on USJ's list of travel agencies."
+      ],
+      "klookLinkId": "universalStudiosJapan",
+      "cta": "Check USJ Studio Pass tickets on Klook",
+      "official": [
+        "USJ tickets (official)",
+        "https://www.usj.co.jp/web/en/us/tickets"
+      ],
+      "extraSource": [
+        "USJ's travel agency list",
+        "https://www.usj.co.jp/web/en/us/travel"
+      ],
+      "stay": [
+        "Planning Osaka on the Golden Route",
+        "/scenic/golden-route"
+      ],
+      "accessSource": [
+        "Getting there by train (official)",
+        "https://www.usj.co.jp/web/en/us/access/train"
+      ]
+    }
+  ],
+  "tips": {
+    "title": "Before you book anything",
+    "items": [
+      "Fix your date first. All of these price by date, and the busiest days sell out.",
+      "Check the name on the ticket. teamLab Planets, Borderless and Biovortex are three different places.",
+      "Keep the QR code or voucher on your phone, and have it ready at the gate."
+    ]
+  },
+  "related": [
+    [
+      "Where to stay in Tokyo",
+      "/areas-to-stay"
+    ],
+    [
+      "Tokyo → Kyoto → Osaka → Hiroshima, by train",
+      "/scenic/golden-route"
+    ],
+    [
+      "Can you tap a credit card at Tokyo train gates?",
+      "/credit-card-tap-to-ride-japan"
+    ],
+    [
+      "How to buy a Suica",
+      "/how-to-buy-suica"
+    ]
+  ]
+}

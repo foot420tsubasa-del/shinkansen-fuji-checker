@@ -216,6 +216,16 @@ export default async function AreasToStayIndex({ params }: Props) {
               </div>
               <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />
             </Link>
+            {/* English only: the activity hub has no translations yet. */}
+            {locale === "en" ? (
+              <Link href="/things-to-do#tokyo" className={`${guideLinkClass} border-t border-slate-200`}>
+                <div>
+                  <h3 className="text-xl font-extrabold tracking-[-0.02em] group-hover:underline">Things to book in Tokyo, Kyoto and Osaka</h3>
+                  <span className="mt-1 block text-sm leading-6 text-slate-600">teamLab Planets vs Borderless, Tokyo Disney and USJ: where each one is and what to know before you book.</span>
+                </div>
+                <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />
+              </Link>
+            ) : null}
           </div>
         </section>
       </article>

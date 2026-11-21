@@ -40,6 +40,7 @@ const englishOnlyContentPaths = [
   "/how-to-navigate-japanese-train-stations",
   "/how-to-buy-suica",
   "/credit-card-tap-to-ride-japan",
+  "/things-to-do",
   "/tokyo-to-kyoto-mt-fuji-seat",
   "/kyoto-to-tokyo-mt-fuji-seat",
   "/tokyo-to-osaka-mt-fuji-seat",
