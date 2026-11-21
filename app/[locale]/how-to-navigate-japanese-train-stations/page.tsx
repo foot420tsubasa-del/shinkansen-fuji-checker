@@ -313,7 +313,9 @@ export default async function NavigateJapaneseStationsPage({ params }: Props) {
             <p className="mt-3">
               A prepaid <Link href="/how-to-buy-suica" className="font-semibold text-[#145aa0] underline underline-offset-2">Suica IC card</Link>{" "}
               makes transfers painless — you tap through every gate without buying
-              a new ticket.
+              a new ticket. A contactless credit card works on the subways but not
+              at JR gates:{" "}
+              <Link href="/credit-card-tap-to-ride-japan" className="font-semibold text-[#145aa0] underline underline-offset-2">where you can tap a credit card</Link>.
             </p>
           </ArticleSection>
 
@@ -425,6 +427,9 @@ export default async function NavigateJapaneseStationsPage({ params }: Props) {
               </RelatedLink>
               <RelatedLink href="/how-to-buy-suica">
                 How to buy a Suica IC card
+              </RelatedLink>
+              <RelatedLink href="/credit-card-tap-to-ride-japan">
+                Tapping a credit card at the gate: JR vs subway
               </RelatedLink>
             </ul>
           </ArticleSection>

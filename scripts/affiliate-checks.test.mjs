@@ -1939,3 +1939,25 @@ test("scenic stays: every route stay block resolves to an active Booking.com or 
   assert.match(areas[golden.stay.destination]?.affiliate_url ?? "", /^https:\/\/booking\.tpx\.lv\//);
   assert.match(readFileSync("lib/affiliate/links.ts", "utf8"), /"golden_route_stay"/);
 });
+
+test("credit-card tap page: official sources, JR East marked no, no affiliate links, English-only and in the sitemap", () => {
+  const data = JSON.parse(readFileSync("data/credit-card-tap.json", "utf8"));
+  const page = readFileSync("app/[locale]/credit-card-tap-to-ride-japan/page.tsx", "utf8");
+  const official = /^(https:\/\/(www\.|ssl\.)?tokyometro\.jp|https:\/\/www\.metro\.tokyo\.lg\.jp|https:\/\/jreastfaq\.jreast\.co\.jp|https:\/\/subway\.osakametro\.co\.jp|https:\/\/japanrailpass\.net)\//;
+  for (const row of data.where.rows) assert.match(row.source[1], official, `${row.name}: operator source`);
+  assert.equal(data.where.rows.find((r) => r.name === "JR East").card, "no");
+  assert.match(data.compare.subwayTicket.source[1], official);
+  assert.match(data.checked, /^\d{4}-\d{2}-\d{2}$/);
+  // Re-read the operators' pages at least once a year; the 11-operator scheme started 2026-03-25.
+  assert.ok(new Date(data.checked) > new Date(Date.now() - 365 * 864e5), "rules re-checked within a year");
+  assert.doesNotMatch(page, /AffiliateButton|TrackedAffiliateLink|getAffUrl|klook|booking\.com/i, "help page carries no affiliate links");
+  assert.match(page, /robots: locale === "en" \? undefined : \{ index: false, follow: true \}/);
+  assert.match(readFileSync("app/sitemap.ts", "utf8"), /"\/credit-card-tap-to-ride-japan"/);
+  // The JR Pass must never be pitched for subway rides.
+  const pass = data.compare.cards.find((c) => c.name === "JR Pass");
+  assert.ok(pass.points.some((p) => /not on its list/.test(p)));
+  for (const href of ["/how-to-buy-suica", "/how-to-navigate-japanese-train-stations"]) {
+    const file = href === "/how-to-buy-suica" ? "app/[locale]/how-to-buy-suica/page.tsx" : "app/[locale]/how-to-navigate-japanese-train-stations/page.tsx";
+    assert.match(readFileSync(file, "utf8"), /href="\/credit-card-tap-to-ride-japan"/, `${href} links to the new page`);
+  }
+});

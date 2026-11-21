@@ -1,0 +1,267 @@
+{
+  "_about": "Credit-card tap-to-ride in Tokyo (and Osaka Metro). Every rule here was read on the operator's own page on the 'checked' date; anything an official page did not say is left out. Re-check before 2027-03-25 (one year after the 11-operator mutual use began) or sooner if JR East announces support.",
+  "checked": "2026-11-21",
+  "path": "/credit-card-tap-to-ride-japan",
+  "title": "Can You Tap a Credit Card at Tokyo Train Gates? JR vs Subway (2026)",
+  "description": "Tokyo Metro, Toei and nine other Kanto railways take contactless cards at the gate. JR East does not. Where your card works, and what to do if you can't exit.",
+  "h1": "Can you tap a credit card at Tokyo train gates?",
+  "lead": "Yes on the subways, no on JR. Here is where a contactless Visa, Mastercard or phone works, why a gate can refuse it, and what to do if you are stuck inside.",
+  "quick": [
+    "Tokyo Metro, Toei Subway and nine other Kanto railways take a contactless credit, debit or prepaid card, or a phone with one in its wallet.",
+    "JR East does not. That includes the Yamanote Line, the Chuo Line and the Narita Express.",
+    "Tap in and out with the same card or phone. A different card, even the same card on your phone, does not count.",
+    "A JR Pass is for JR trains. Tokyo Metro and Toei are not on its list of covered lines.",
+    "A Suica or PASMO works on all of these, JR included."
+  ],
+  "stuck": {
+    "title": "Can't get out of the gate?",
+    "intro": "Don't keep tapping other cards. The gate is looking for the trip you started.",
+    "steps": [
+      [
+        "Go to the staffed gate",
+        "Look for the gate next to the station office window, or press the call button on the gate. Walk there instead of trying other gates."
+      ],
+      [
+        "Show the card or phone you entered with",
+        "Hold up the exact card or phone you tapped on the way in. A second card, or the same card on a different device, starts a new trip."
+      ],
+      [
+        "Say where you got on",
+        "Tell the staff your boarding station. They will tell you what to pay and how. If the card trip no longer counts, Tokyo Metro asks for cash or another non-credit payment."
+      ],
+      [
+        "Keep any number they give you",
+        "Tokyo Metro may give you a reception number. Its FAQ explains how to follow up online."
+      ]
+    ],
+    "phrases": [
+      [
+        "I got on at ___ station with this card. The gate won't open.",
+        "このカードで ___ 駅から乗りました。改札が開きません。"
+      ],
+      [
+        "How should I pay?",
+        "どうやって精算すればいいですか？"
+      ],
+      [
+        "I only have a credit card.",
+        "クレジットカードしか持っていません。"
+      ]
+    ],
+    "phrasesNote": "Show the Japanese to the staff. Fill in your station name in English; staff will understand.",
+    "faqLink": [
+      "Tokyo Metro FAQ",
+      "https://ssl.tokyometro.jp/support/faq_top?lang=en"
+    ]
+  },
+  "where": {
+    "title": "Where can I tap my credit card?",
+    "intro": "The rules belong to the railway company, not the station. A big station like Shinjuku has gates from several companies side by side, and only some of them take cards.",
+    "rows": [
+      {
+        "name": "Tokyo Metro",
+        "card": "yes",
+        "cardText": "All lines",
+        "notes": [
+          "You cannot ride on through onto JR East, Saitama Rapid Railway or Toyo Rapid Railway lines with the card.",
+          "You cannot start a card trip at Nakano. If you get off there, the fare is settled at the staffed counter with the card you used.",
+          "Changing between Tokyo Metro and Toei on a card gets ¥70 off, as with other tickets."
+        ],
+        "source": [
+          "Tokyo Metro: Tap to Ride",
+          "https://www.tokyometro.jp/en/ticket/tap-to-ride/index.html"
+        ]
+      },
+      {
+        "name": "Toei Subway",
+        "card": "yes",
+        "cardText": "All four lines, all stations (since 23 Dec 2025)",
+        "notes": [
+          "Asakusa, Mita, Shinjuku and Oedo lines.",
+          "Toei says some gates are handled at the staffed window instead."
+        ],
+        "source": [
+          "Tokyo Metropolitan Government (Japanese)",
+          "https://www.metro.tokyo.lg.jp/documents/d/tosei/20251216_02_01"
+        ]
+      },
+      {
+        "name": "Nine other Kanto railways",
+        "card": "partly",
+        "cardText": "Odakyu, Odakyu Hakone, Keio, Keikyu, Sotetsu, Seibu, Tokyu, Tobu, Yokohama Minatomirai",
+        "notes": [
+          "Since 25 March 2026 these work together with Tokyo Metro and Toei: 11 operators, 54 lines, 729 stations.",
+          "Some operators cover only some stations (Tokyo Metro names Odakyu Hakone, Seibu and Tobu). Check the operator before relying on it."
+        ],
+        "source": [
+          "Tokyo Metro news release, 28 Jan 2026 (Japanese)",
+          "https://www.tokyometro.jp/news/2026/222741.html"
+        ]
+      },
+      {
+        "name": "JR East",
+        "card": "no",
+        "cardText": "Not accepted",
+        "notes": [
+          "Not at the gates and not at ticket machines or ticket offices. This covers the Yamanote, Chuo and Keihin-Tohoku lines, the Narita Express and JR East Shinkansen.",
+          "Use a Suica, PASMO or other transport IC card, or buy a ticket."
+        ],
+        "source": [
+          "JR East FAQ (Japanese)",
+          "https://jreastfaq.jreast.co.jp/faq/show/3954"
+        ]
+      },
+      {
+        "name": "Osaka Metro",
+        "card": "yes",
+        "cardText": "Subway and New Tram",
+        "notes": [
+          "Adult fare only. Use the dedicated reader at the gate.",
+          "Osaka Metro does not say how card trips onto other companies' lines work. Ask staff before riding through."
+        ],
+        "source": [
+          "Osaka Metro: contactless payment",
+          "https://subway.osakametro.co.jp/en/guide/page/contactless_payment.php"
+        ]
+      }
+    ],
+    "others": "Other lines, such as Keisei, the Tokyo Monorail or the Rinkai Line, are not among the 11 operators. A few run their own card service (Yurikamome, for example), which does not join up with the others. When in doubt, use your Suica.",
+    "legend": {
+      "yes": "Card works",
+      "partly": "Some stations",
+      "no": "No card"
+    }
+  },
+  "why": {
+    "title": "Why your card might not work",
+    "items": [
+      [
+        "The company does not take cards",
+        "JR East gates have no card reader at all. If you are at a JR gate, you need an IC card or a ticket."
+      ],
+      [
+        "Your train ran on to another company",
+        "Many subway trains continue onto other lines without you changing trains. On Tokyo Metro, a card trip that runs on to JR East, Saitama Rapid Railway or Toyo Rapid no longer counts, and you pay separately."
+      ],
+      [
+        "The station or gate is excluded",
+        "You cannot start a Tokyo Metro card trip at Nakano. Toei says some of its gates are handled at the staffed window instead."
+      ],
+      [
+        "You tapped out with something else",
+        "Entry and exit must be the same card on the same device. A physical card and the same card in Apple Pay are two different things."
+      ],
+      [
+        "You tapped the wrong reader",
+        "The card reader is a separate, dedicated pad, not the round IC-card target. Tap the one with the contactless symbol and wait for the beep."
+      ]
+    ],
+    "fallback": "If none of these fits, go to the staffed gate. Staff can see what the gate recorded."
+  },
+  "compare": {
+    "title": "Suica vs credit card vs JR Pass",
+    "intro": "For trains around a city, a transport IC card is still the simplest choice. A credit card is a good backup on the subway. The JR Pass is a different decision about long JR trips.",
+    "cards": [
+      {
+        "name": "Suica / PASMO (IC card)",
+        "verdict": "Best for getting around",
+        "points": [
+          "Works on JR East, Tokyo Metro, Toei and the private railways.",
+          "One of ten IC cards that also work in other regions, such as ICOCA in Kansai.",
+          "PASMO can be added to the Wallet app on an iPhone 8 or later."
+        ],
+        "link": [
+          "How to buy a Suica",
+          "/how-to-buy-suica"
+        ]
+      },
+      {
+        "name": "Contactless credit card",
+        "verdict": "Good backup on the subway",
+        "points": [
+          "No card to buy or top up. On Tokyo Metro, the same fare as a paper ticket.",
+          "Adult fare only, and not on JR East.",
+          "Tap in and out with the same card or phone."
+        ]
+      },
+      {
+        "name": "JR Pass",
+        "verdict": "Only for long JR trips",
+        "points": [
+          "Covers JR trains and the Tokyo Monorail, but not Nozomi or Mizuho Shinkansen.",
+          "Tokyo Metro and Toei are not on its list. Don't buy it for subway rides.",
+          "Worth comparing only if your trip is built around long JR journeys."
+        ],
+        "link": [
+          "JR Pass or single tickets?",
+          "/jr-pass-vs-single-ticket"
+        ],
+        "source": [
+          "Japan Rail Pass: covered lines (Japanese)",
+          "https://japanrailpass.net/about_jrp/route/"
+        ]
+      }
+    ],
+    "subwayTicket": {
+      "title": "Riding the subway all day? Tokyo Subway Ticket",
+      "text": "Unlimited Tokyo Metro and Toei rides for 24, 48 or 72 hours: ¥1,000, ¥1,500 or ¥2,000 for adults. Sold to overseas visitors and to Japan residents from outside Tokyo and seven nearby prefectures. It does not cover JR.",
+      "source": [
+        "Tokyo Metro: Tokyo Subway Ticket",
+        "https://www.tokyometro.jp/en/ticket/travel/index.html"
+      ]
+    }
+  },
+  "faq": [
+    [
+      "Can I use Apple Pay or Google Pay on the Tokyo subway?",
+      "Yes, if the phone has an eligible card in its wallet. Tokyo Metro accepts phones with Visa, Mastercard, JCB, American Express or Discover. Use the same phone to tap in and out."
+    ],
+    [
+      "Can I tap my credit card on the JR Yamanote Line?",
+      "No. JR East does not accept contactless credit cards at gates, ticket machines or ticket offices. Use a Suica or PASMO, or buy a ticket."
+    ],
+    [
+      "Can I tap a credit card at Shinjuku Station?",
+      "At the Tokyo Metro, Toei, Odakyu and Keio gates, yes. At the JR gates, no. Check which company's gate you are walking through."
+    ],
+    [
+      "Which cards does Tokyo Metro accept?",
+      "Visa, Mastercard, JCB, American Express, Diners Club, Discover and UnionPay cards with the tap-to-pay symbol: credit, debit or prepaid."
+    ],
+    [
+      "Do kids pay less with a credit card?",
+      "No. Card trips are charged the adult fare. Children should use a child IC card or a child ticket."
+    ],
+    [
+      "Can I take the Narita Express with a credit card tap?",
+      "No. The Narita Express is JR East. Buy a ticket or use a Suica."
+    ],
+    [
+      "Do I still need a Suica?",
+      "If you will ride any JR line, yes, or buy tickets for those trips. If you only ride the subway, a contactless card can be enough."
+    ],
+    [
+      "Does the JR Pass work on Tokyo Metro?",
+      "No. The JR Pass covers JR lines and the Tokyo Monorail. Tokyo Metro and Toei are not on its list of covered lines."
+    ]
+  ],
+  "related": [
+    [
+      "How to buy a Suica (practice machine)",
+      "/how-to-buy-suica"
+    ],
+    [
+      "How to navigate Japanese train stations",
+      "/how-to-navigate-japanese-train-stations"
+    ],
+    [
+      "JR Pass or single tickets?",
+      "/jr-pass-vs-single-ticket"
+    ],
+    [
+      "Japanese train station signs",
+      "/how-to-read-japanese-train-signs"
+    ]
+  ],
+  "disclaimer": "General travel information, not an official source. Card rules change and can differ by station; the operator's own page and station staff have the final word."
+}

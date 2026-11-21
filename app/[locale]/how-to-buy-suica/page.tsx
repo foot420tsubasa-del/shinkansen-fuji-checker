@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { ArrowRight, Rabbit } from "lucide-react";
+import { ArrowRight, Rabbit, CreditCard } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Container } from "@/components/ui/Container";
 import { SiteHeader } from "../components/SiteHeader";
@@ -106,6 +106,24 @@ export default async function HowToBuySuicaPage({ params }: Props) {
         <section id="simulator" className="mt-5 scroll-mt-24">
           <TicketMachineSim initialLang={simLang} />
         </section>
+
+        {/* Readers arrive here asking whether they need a Suica at all now that
+            the subways take contactless cards. The answer depends on JR. */}
+        {locale === "en" ? (
+          <section className="mx-auto mt-8 max-w-3xl rounded-[22px] border border-slate-200 bg-white p-5" aria-labelledby="suica-credit-card">
+            <div className="flex gap-4">
+              <CreditCard className="mt-0.5 h-6 w-6 shrink-0 text-[#145aa0]" aria-hidden="true" />
+              <div>
+                <h2 id="suica-credit-card" className="text-lg font-extrabold text-[#082653]">Can&rsquo;t I just tap my credit card?</h2>
+                <p className="mt-1 text-[14px] leading-6 text-slate-600">On Tokyo Metro, Toei and nine other Kanto railways, yes. At JR East gates, no — so a Suica is still the card that works everywhere.</p>
+                <Link href="/credit-card-tap-to-ride-japan" className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-[#145aa0] underline underline-offset-2">
+                  Where credit cards work, and what to do if the gate won&rsquo;t open
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+          </section>
+        ) : null}
 
         {locale === "en" ? (
           <section className="mx-auto mt-8 max-w-3xl rounded-[22px] border border-[#cfe0f3] bg-[#eef6ff] p-5" aria-labelledby="suica-character-news">
