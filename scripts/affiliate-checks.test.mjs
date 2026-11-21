@@ -1990,8 +1990,11 @@ test("things-to-do hub: Klook buttons only for issued links, official sources, n
   // Each Klook target is the product the card describes.
   const target = { teamlabPlanets: "25300", teamlabBorderless: "20707", universalStudiosJapan: "46604", teamlabBiovortex: "167098", tokyoDisney1Day: "695" };
   for (const [id, activity] of Object.entries(target)) assert.match(decodeURIComponent(links[id].directUrl), new RegExp(`/activity/${activity}-`), id);
-  // TDR names no reseller, so the page must not call Klook authorized for Disney.
-  assert.doesNotMatch(JSON.stringify(data.items.find((i) => i.id === "tokyo-disney")), /authori[sz]ed seller|official partner/i);
+  // The Disney button rests on TDR's own list of online travel agencies (1-Day Passports only).
+  const disney = data.items.find((i) => i.id === "tokyo-disney");
+  assert.equal(disney.extraSource[1], "https://www.tokyodisneyresort.jp/treasure/parkguide/en/#Ticket");
+  assert.ok(disney.before.some((b) => /official list of online travel agencies, which sell 1-Day Passports only/.test(b)));
+  assert.match(disney.tickets, /one date and one park/);
   assert.match(page, /rel=\{AFFILIATE_REL\}/);
   assert.match(page, /placement="things_to_do_ticket"/);
   assert.match(page, /linkId=\{item\.klookLinkId\}/);

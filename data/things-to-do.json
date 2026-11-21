@@ -115,21 +115,26 @@
       "tagline": "Two separate parks. Each ticket is for one park on one day.",
       "goodFor": "Disney fans and families who can give it a full day. Decide which park you want before you buy.",
       "where": "Maihama, in Urayasu, Chiba, just east of Tokyo. Take the JR Keiyo Line to Maihama Station.",
-      "tickets": "A 1-Day Passport is for one date and one park: Tokyo Disneyland or Tokyo DisneySea. The price changes by date, and some dates sell out.",
+      "tickets": "A 1-Day Passport is for one date and one park: Tokyo Disneyland or Tokyo DisneySea. The price changes by date, and some dates sell out. Tickets can't be bought at the park, so buy before you go.",
       "before": [
-        "Choose your park when you buy. The ticket doesn't let you switch parks.",
-        "Tokyo Disney Resort sells tickets on its official site and through some travel agencies, and warns against resold tickets. Check the date and park on your ticket before you pay."
+        "Pick your park when you buy. The ticket is only good for that park on that date, and can't be changed on the day. Visiting both parks in one day needs a ticket for each.",
+        "Klook is on Tokyo Disney Resort's official list of online travel agencies, which sell 1-Day Passports only. On Klook you can choose a date up to two months ahead.",
+        "Show the ticket on your phone at the gate; printed tickets aren't accepted. Changes and refunds go through the agency you bought from, not the park."
       ],
       "official": [
         "Tokyo Disney Resort tickets (official)",
         "https://www.tokyodisneyresort.jp/en/ticket/index.html"
       ],
       "extraSource": [
-        "Getting there (official)",
-        "https://www.tokyodisneyresort.jp/en/tdr/access/"
+        "Official list of online travel agencies",
+        "https://www.tokyodisneyresort.jp/treasure/parkguide/en/#Ticket"
       ],
       "klookLinkId": "tokyoDisney1Day",
-      "cta": "Check Tokyo Disney 1-Day Passports on Klook"
+      "cta": "Check Tokyo Disney 1-Day Passports on Klook",
+      "accessSource": [
+        "Getting there (official)",
+        "https://www.tokyodisneyresort.jp/en/tdr/access/"
+      ]
     },
     {
       "id": "teamlab-biovortex",
