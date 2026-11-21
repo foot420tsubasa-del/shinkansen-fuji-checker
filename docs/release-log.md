@@ -19,6 +19,7 @@
 | 2026-11-21（アクティビティハブ） | 本記録の前のコミット | 新規 /things-to-do（英語のみ）。/areas-to-stay（英語のみのリンク1本）、/scenic/golden-route（末尾に1文）、サイトマップ | teamLab 3館・USJ・ディズニーの違いと予約前の注意。Klook のボタンは発行済みの3本だけ（新しい placement `things_to_do_ticket`）。[記録](./things-to-do-2026-11-21.md) | なし。トップ・/guide は変更なし |
 | 2026-11-21（アクティビティの導線） | 本記録の前のコミット | /areas-to-stay（京都・大阪の欄）、/plan-your-trip（Activities の欄）、/things-to-do（teamLab の比較に1文） | 英語のみのテキストリンク3本と、Planets が2027年末で終了する旨の1文。Klook の都市カードとその計測は変更なし | なし |
 | 2026-11-21（/plan-your-trip の仕上げ） | 本記録の前のコミット | /plan-your-trip（9言語） | 都市カードの画像を next/image に（スマホでの空白を解消）。重複していたホテルの説明を1つの枠に統合。英語のボタン名の重複を解消（`plan_trip_stay_hub_finder` の label が変わる）。アフィリエイトリンク・広告ID・placement は変更なし | なし |
+| 2026-11-21（見出しフォント・/guide の Klook ボタン） | 本記録の前のコミット | 全ページの h1。/guide（9言語）の「Booking via Klook」 | 全ページの h1 をトップと同じセリフ体に統一（英語は Georgia、他言語は Fraunces）。/guide の `guide_klook_text` を文中リンクからボタンに変更（ユーザーの指示。placement・リンク・adid は同じ） | **12/01 の文中リンク試験：`guide_klook_text` は 11/17〜11/21 の公開時刻までで打ち切り。** 公開時刻以降はボタン版として別の期間で集計する。`guide_quick_answer_text` は文中リンクのまま継続 |
 
 ## 座席CTAの文言修正と計測準備（2026-11-21）
 
