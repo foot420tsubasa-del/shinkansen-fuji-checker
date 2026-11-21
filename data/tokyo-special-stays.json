@@ -1,0 +1,120 @@
+{
+  "_about": "Tokyo stays where the room is the point. Facts from each hotel's official site and the room-type names on Booking.com, checked on 'checked'. A Booking.com button appears only for hotels whose affiliate link is issued (data/booking-hotel-urls.json). No prices: they change by date.",
+  "checked": "2026-11-21",
+  "path": "/stays/tokyo-special",
+  "title": "Pokémon Rooms & Tokyo Tower View Hotels in Tokyo: Which Room to Book",
+  "description": "MIMARU's Pokémon Rooms at five Tokyo hotels and The Prince Park Tower's Tokyo Tower view rooms: who they suit, how many they sleep, and the exact room type to pick when you book.",
+  "h1": "Tokyo stays where the room is the reason to go",
+  "lead": "A Pokémon Room for the kids, or Tokyo Tower outside your window. Both are easy to miss when you book: the hotel has ordinary rooms too, and you only get the special one if you pick that exact room type.",
+  "disclosure": "PR: We may earn a commission if you book through these Booking.com links, at no extra cost to you.",
+  "rule": {
+    "title": "The one thing to get right",
+    "text": "Booking the hotel isn't enough. On the booking page, choose the room type with the exact name we give below. Any other room at the same hotel is a regular room."
+  },
+  "sections": [
+    {
+      "id": "pokemon",
+      "title": "Pokémon Rooms (MIMARU)",
+      "intro": "MIMARU apartment hotels have Pokémon Rooms at five Tokyo locations. They sleep a family of four or more, and every one has a kitchen.",
+      "facts": [
+        [
+          "Who it suits",
+          "Families with kids who love Pokémon. Rooms sleep 4–6 depending on the hotel."
+        ],
+        [
+          "What's in the room",
+          "A giant Snorlax on the bed, a Poké Ball dining table, and Pokémon designs on the kitchen walls and tableware. A gift set comes with each booking (one per group)."
+        ],
+        [
+          "Layout",
+          "38–60 m², with a loft bed, bunk beds or four single beds depending on the hotel. You can't choose the design."
+        ],
+        [
+          "Room type to pick",
+          "“Pokémon ROOM”. The hotels' other apartments are regular rooms."
+        ]
+      ],
+      "official": [
+        "MIMARU Pokémon Room (official)",
+        "https://mimaruhotels.com/en/lp/pokemon/"
+      ],
+      "hotels": [
+        {
+          "id": "mimaru-tokyo-ueno",
+          "name": "MIMARU Tokyo Ueno East",
+          "area": "Ueno",
+          "note": "On Booking.com: “Pokémon ROOM”, 4 single beds, sleeps 4, 40 m², kitchen."
+        },
+        {
+          "id": "mimaru-tokyo-ikebukuro",
+          "name": "MIMARU Tokyo Ikebukuro",
+          "area": "Ikebukuro"
+        },
+        {
+          "id": "mimaru-tokyo-kinshicho",
+          "name": "MIMARU Tokyo Kinshicho",
+          "area": "Kinshicho"
+        },
+        {
+          "id": "mimaru-tokyo-ginza-east",
+          "name": "MIMARU Tokyo Ginza East",
+          "area": "Ginza"
+        },
+        {
+          "id": "mimaru-tokyo-hatchobori",
+          "name": "MIMARU Tokyo Hatchobori",
+          "area": "Hatchobori"
+        }
+      ]
+    },
+    {
+      "id": "tokyo-tower",
+      "title": "Rooms facing Tokyo Tower",
+      "intro": "The Prince Park Tower Tokyo is in Shiba Park, close to Tokyo Tower, and it sells rooms by view. Only rooms with “with Tokyo Tower View” in the name face the tower.",
+      "facts": [
+        [
+          "Who it suits",
+          "Couples and anyone for whom the view is the trip. Some tower-view rooms take 3–4 guests with extra beds."
+        ],
+        [
+          "Room type to pick",
+          "Any type ending “with Tokyo Tower View”, for example Panoramic King Room with Tokyo Tower View. “Panoramic” on its own means a high floor, not the tower."
+        ],
+        [
+          "Floors",
+          "Panoramic rooms are on floors 19–28, Club rooms on 29–32 (official room guide)."
+        ],
+        [
+          "Where",
+          "4-8-1 Shibakoen, Minato."
+        ]
+      ],
+      "official": [
+        "Tower View Rooms (official)",
+        "https://www.princehotels.co.jp/parktower/contents/towerviewrooms/en"
+      ],
+      "hotels": [
+        {
+          "id": "the-prince-park-tower-tokyo",
+          "name": "The Prince Park Tower Tokyo",
+          "area": "Shiba Park",
+          "note": "On Booking.com: twelve-plus room types named “… with Tokyo Tower View”."
+        }
+      ]
+    }
+  ],
+  "related": [
+    [
+      "Choose your Tokyo area first",
+      "/areas-to-stay"
+    ],
+    [
+      "Mt. Fuji view hotels",
+      "/stays/mt-fuji-view"
+    ],
+    [
+      "Things to book in Tokyo, Kyoto and Osaka",
+      "/things-to-do"
+    ]
+  ]
+}
