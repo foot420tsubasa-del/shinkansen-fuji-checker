@@ -1,0 +1,58 @@
+# クレジットカードのタッチ乗車ページ（2026-11-21）
+
+新しいページは `/credit-card-tap-to-ride-japan` です（英語のみ。英語以外は noindex。ほかの駅ガイドと同じ扱い）。文面と出典はすべて `data/credit-card-tap.json` にあります。
+
+## 1. 公式情報（2026-11-21 確認）
+
+| 事業者 | クレカのタッチ乗車 | 公式で確認できたこと | 出典 |
+|---|---|---|---|
+| 東京メトロ | 全線で利用可 | <ul><li>Visa・Mastercard・JCB・AMEX・Diners・Discover・銀聯。スマホは Diners と銀聯を除く5ブランド。</li><li>**JR東日本・埼玉高速鉄道・東葉高速鉄道への直通は不可**。乗り越すとそのカードの乗車は無効になり、現金などクレカ以外で精算する。</li><li>**中野駅からは乗車できない**。中野で降りる場合は有人窓口で、乗ったときのカードで精算する。</li><li>**入場と出場は同じカード・同じ端末**（同じカード番号のスマホも別扱い）。大人運賃のみで、運賃はきっぷと同額。</li><li>都営との乗り継ぎは70円引き。乗車記録の取り消しや返金はできない。窓口で受付番号を渡された場合は、オンラインで手続きする。</li></ul> | [Tap to Ride](https://www.tokyometro.jp/en/ticket/tap-to-ride/index.html) |
+| 11社局の相互利用（2026-03-25〜） | 54路線729駅 | <ul><li>小田急・小田急箱根・京王・京急・相鉄・西武・東急・東京メトロ・都営・東武・横浜高速の11社局。</li><li>JR東日本・京成・東京モノレール・りんかい線は含まれない。</li><li>小田急箱根・西武・東武は一部の駅のみ（東京メトロのページの表記）。</li></ul> | [東京メトロ報道発表 2026-01-28](https://www.tokyometro.jp/news/2026/222741.html) |
+| 都営地下鉄 | 浅草線・三田線・新宿線・大江戸線の全駅（2025-12-23〜） | <ul><li>一部の改札口は窓口での対応になる。</li><li>大人運賃のみ。</li></ul> | [東京都の発表資料](https://www.metro.tokyo.lg.jp/documents/d/tosei/20251216_02_01) |
+| JR東日本 | **利用不可** | <ul><li>みどりの窓口・券売機での購入にも、自動改札での入出場にも使えない。</li><li>FAQ の公開日は2025-12-26。</li></ul> | [JR東日本 FAQ](https://jreastfaq.jreast.co.jp/faq/show/3954) |
+| Osaka Metro | 地下鉄とニュートラム | <ul><li>7ブランド。スマホ・スマートウォッチも可。大人運賃のみ。専用のリーダーを使う。</li><li>市バスと BRT は2025-11-01から。</li><li>他社への直通は記載なし。</li></ul> | [Osaka Metro](https://subway.osakametro.co.jp/en/guide/page/contactless_payment.php) |
+| JR Pass | — | <ul><li>JR グループ全線（のぞみ・みずほを除く）と東京モノレール。</li><li>東京メトロ・都営は対象の一覧にない。</li></ul> | [JR Pass 対象路線](https://japanrailpass.net/about_jrp/route/) |
+| 東京サブウェイチケット | — | <ul><li>24・48・72時間で、大人 ¥1,000・¥1,500・¥2,000。メトロと都営の全線。</li><li>買えるのは海外からの旅行者と、東京と近隣7県以外に住む人。JR は対象外。</li></ul> | [東京メトロ](https://www.tokyometro.jp/en/ticket/travel/index.html) |
+| PASMO | — | <ul><li>全国で相互利用できる10枚の交通系ICカードの1つ。</li><li>iPhone 8 以降のウォレットに追加できる。</li></ul> | [PASMO（訪日客向け）](https://www.pasmo.co.jp/visitors/en/) |
+
+**確認できなかったこと（ページには書いていない）**
+
+- 都営の英語ページは、ボット判定（Imperva）で読めなかった。都営の情報は、東京都の発表資料と検索結果の要約によるもの。
+- JR東日本の Suica の英語ページは403で読めなかった。Suica をウォレットに入れられることは書かず、PASMO の公式の記載だけを使った。
+- Osaka Metro で他社へ直通する場合の扱い。ページには「直通する前に駅員に確認」とだけ書いた。
+- 改札のリーダーの見分け方を図示した公式資料。ページには「専用のリーダー」（都営・Osaka Metro の表現）とだけ書いた。
+
+## 2. 検索需要と競合
+
+- **fujiseat 自身の需要データはない**。過去90日の Search Console で、credit / contactless / tap / visa / Apple Pay / suica を含む検索の表示は0だった。
+- **英語の競合は多く、新しい**：tokyocheapo、real-japan-guide、glostravel、landinginjapan、japan-travel-kit、tokyointernationalmeetup など。いずれも2026年の記事。記事が多いことは需要がある傍証にはなるが、量は測れていない。
+- **競合との差**：
+  - 改札で出られないときの手順を先に置いた。
+  - 駅員に見せる日本語の文面を付けた。
+  - 中野駅など、事業者ごとの例外を公式の出典つきで書いた。
+  - 「JR Pass は地下鉄に使えない」と明記した。
+  - 古い競合記事の「Mastercard 非対応」は、公式の最新情報と矛盾するので採用しない。
+- 評価：公開から8週間後に、ページの表示・クリック・検索語を確認する。表示が28日で100未満なら、title の語を見直す。
+
+## 3. 既存ページとの役割分担
+
+| ページ | 役割 |
+|---|---|
+| /how-to-buy-suica とその子ページ | Suica の買い方・チャージ・使える場所。券売機の練習 |
+| **/credit-card-tap-to-ride-japan** | クレカのタッチ乗車が使える会社・使えない会社、出られないときの対処、Suica・クレカ・JR Pass の使い分け。Suica の買い方は書かず、リンクだけ |
+| /how-to-navigate-japanese-train-stations | 駅の構造と乗り換え |
+| /jr-pass-vs-single-ticket | JR Pass の損得 |
+
+## 4. 内部リンクを追加した場所
+
+- `/how-to-buy-suica`（ヘッダーの Arrival から入るページ）：練習用の券売機の下に、英語のみのカードを追加。「Can't I just tap my credit card?」
+- `/how-to-navigate-japanese-train-stations`：乗り換えの節の Suica の説明の後に1文。関連リンクにも1行。
+- `/plan-your-trip` の Arrival 欄には入れていない。9言語の翻訳とアフィリエイトのカードがある場所のため。
+- トップと /guide は変更していない。
+
+## 5. 更新が必要になること
+
+- JR東日本がタッチ乗車に対応したら、表の行・Quick answer・FAQ を変える。
+- 11社局の相互利用の対象が広がったら（報道発表には「順次拡大」とある）、表の行を変える。
+- 中野駅の例外、直通の制限、70円の割引は、東京メトロのページで年に1回確認する。テストは `checked` が1年を超えると失敗する。
+- 東京サブウェイチケットの価格と、買える人の条件。
