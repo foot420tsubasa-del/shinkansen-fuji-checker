@@ -51,9 +51,6 @@ export function BlogBookingCard({
         Book on Klook
         <ArrowRight className="h-4 w-4" aria-hidden="true" />
       </a>
-      <p className="mt-3 text-center text-[11px] leading-4 text-slate-500">
-        We may earn a commission if you book through this link, at no extra cost to you.
-      </p>
     </div>
   );
 }

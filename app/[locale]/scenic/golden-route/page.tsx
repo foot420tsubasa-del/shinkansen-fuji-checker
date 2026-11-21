@@ -12,6 +12,7 @@ import { AFFILIATE_REL } from "@/lib/link-rel";
 import data from "@/data/golden-route.json";
 import destinations from "@/data/booking-hotel-destinations.json";
 import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
+import { AffiliateDisclosure } from "@/components/affiliate/AffiliateDisclosure";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -121,6 +122,7 @@ export default async function GoldenRoutePage({ params }: Props) {
           <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">{data.hub.eyebrow}</p>
           <h1 className="mt-3 text-[34px] font-extrabold leading-[1.08] tracking-[-0.03em] md:text-[52px]">{data.hub.h1}</h1>
           <p className="mt-4 text-lg leading-8 text-slate-700">{data.hub.sub}</p>
+          <AffiliateDisclosure locale={locale} className="mt-3" />
         </header>
 
         <nav aria-label="Sections" className="mt-6 flex flex-wrap gap-2">
@@ -173,7 +175,6 @@ export default async function GoldenRoutePage({ params }: Props) {
             >
               {data.stay.label} <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </TrackedAffiliateLink>
-            <p className="mt-1 text-xs leading-5 text-slate-500">PR: {data.tickets.disclosure}</p>
           </section>
         ) : null}
 
@@ -203,7 +204,6 @@ export default async function GoldenRoutePage({ params }: Props) {
                 </li>
               ))}
             </ul>
-            <p className="mt-2 text-xs leading-5 text-slate-500">PR: {data.tickets.disclosure}</p>
             <p className="mt-4 text-[15px] leading-6 text-slate-700">{data.tickets.boardingNote}</p>
           </section>
         ) : null}

@@ -11,6 +11,7 @@ import { getBookingHotelLink } from "@/lib/booking-hotels";
 import data from "@/data/tokyo-special-stays.json";
 import photoCredits from "@/data/stay-special-photo-credits.json";
 import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
+import { AffiliateDisclosure } from "@/components/affiliate/AffiliateDisclosure";
 
 type Props = { params: Promise<{ locale: string }> };
 type Hotel = {
@@ -118,6 +119,7 @@ export default async function TokyoSpecialStaysPage({ params }: Props) {
           ))}
         </div>
         <p className="mt-3 text-[15.5px] leading-7 text-slate-700">{data.lead}</p>
+        <AffiliateDisclosure locale={locale} className="mt-2" />
 
         {/* Theme tiles: the page's table of contents, sized for thumbs. */}
         <nav aria-label="Themes" className="mt-4 grid grid-cols-2 gap-2 md:grid-cols-4">
@@ -195,7 +197,6 @@ export default async function TokyoSpecialStaysPage({ params }: Props) {
                   </div>
                 ))}
               </div>
-              <p className="mt-2 text-xs leading-5 text-slate-500">{data.disclosure}</p>
             </section>
           );
         })}

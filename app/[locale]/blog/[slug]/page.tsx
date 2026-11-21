@@ -11,6 +11,7 @@ import { getAlternates } from "@/i18n/hreflang";
 import { BLOG_POSTS, getBlogPost, type BlogBlock } from "@/data/blog/posts";
 import { ORIGINS, type OriginId } from "@/lib/fuji-window";
 import { getDirectionTicketLink, SHINKANSEN_TICKET_URL } from "@/src/affiliateLinks";
+import { AffiliateDisclosure } from "@/components/affiliate/AffiliateDisclosure";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -185,6 +186,7 @@ export default async function BlogPostPage({ params }: Props) {
         </Link>
         <h1 className="mt-3 text-[32px] font-extrabold leading-[1.1] tracking-[-0.03em] md:text-[44px]">{post.title}</h1>
         <p className="mt-3 text-sm text-slate-500">By a Japan-based local · Updated {updated}</p>
+        <AffiliateDisclosure locale={locale} className="mt-1" />
 
         <div className="relative mt-6 aspect-[16/10] overflow-hidden rounded-[22px] bg-ink">
           <Image src={post.heroImage.src} alt={post.heroImage.alt} fill priority sizes="(min-width: 800px) 760px, 100vw" className="object-cover" />

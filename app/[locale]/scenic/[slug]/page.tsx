@@ -25,6 +25,7 @@ import discovery from "@/data/scenic-discovery.json";
 import seating from "@/data/scenic-seating.json";
 import overview from "@/data/scenic-overview.json";
 import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
+import { AffiliateDisclosure } from "@/components/affiliate/AffiliateDisclosure";
 
 const SEAT_LINE: Record<string, string> = {
   reserved: "Reserve a window seat on the side for your view.",
@@ -172,6 +173,7 @@ export default async function ScenicRoutePage({ params }: Props) {
           <Link href="/scenic" className="underline-offset-4 hover:underline">Scenic routes</Link> · {route.line}
         </p>
         <h1 className="mt-3 text-[32px] font-extrabold leading-[1.1] tracking-[-0.03em] md:text-[44px]">{route.page.h1}</h1>
+        <AffiliateDisclosure locale={locale} className="mt-2" />
         <nav aria-label="On this route" className="mt-2 flex flex-wrap gap-x-4 sm:gap-x-6">
           <a href="#ride-timing" className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-700 underline underline-offset-4 hover:text-ink">Map &amp; timing</a>
           {essentials ? <a href="#plan-ride-heading" className="inline-flex min-h-11 items-center text-sm font-semibold text-slate-700 underline underline-offset-4 hover:text-ink">Plan this ride</a> : null}
@@ -346,7 +348,7 @@ export default async function ScenicRoutePage({ params }: Props) {
 
         {route.ticket?.linkId === "jrPass" ? (
           <section className="mt-10">
-            <ScenicPassCard href={JR_PASS_URL} routeId={route.id} line={route.line} />
+            <ScenicPassCard href={JR_PASS_URL} routeId={route.id} line={route.line} note={false} />
           </section>
         ) : route.id === "tokaido-fuji" ? (
           <section className="mt-10">
@@ -361,7 +363,7 @@ export default async function ScenicRoutePage({ params }: Props) {
           </section>
         ) : null}
 
-        <ScenicNearbyLinks routeId={route.id} title={nearby.title} sub={nearby.sub} disclosure={nearby.disclosure} links={nearbyLinks} />
+        <ScenicNearbyLinks routeId={route.id} title={nearby.title} sub={nearby.sub} links={nearbyLinks} />
 
         {route.id === "fujikyu-fuji" ? (
           // Fuji-view stays at Lake Kawaguchiko: after the seat answer and the tickets, before the FAQ.
@@ -377,7 +379,6 @@ export default async function ScenicRoutePage({ params }: Props) {
               </Link>
               <FujiAreaSearchLink placement="fuji_view_area_search" pagePath={`/scenic/${slug}`} locale={locale} />
             </div>
-            <p className="mt-2 text-xs leading-5 text-slate-500">PR: {fujiViewStays.page.disclosure}</p>
           </section>
         ) : stay ? (
           <ScenicStayBlock stay={stay} routeId={route.id} locale={locale} pagePath={`/scenic/${slug}`} />

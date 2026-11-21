@@ -5,7 +5,7 @@ import { AFFILIATE_REL } from "@/lib/link-rel";
 import { trackAffiliateClick } from "@/lib/analytics";
 
 /** JR Pass card for a scenic route the pass covers, tracked per route. */
-export function ScenicPassCard({ href, routeId, line }: { href: string; routeId: string; line: string }) {
+export function ScenicPassCard({ href, routeId, line, note = true }: { href: string; routeId: string; line: string; note?: boolean }) {
   return (
     <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.07)]">
       <div className="flex items-start justify-between gap-3">
@@ -39,9 +39,11 @@ export function ScenicPassCard({ href, routeId, line }: { href: string; routeId:
         Check JR Pass options
         <ArrowRight className="h-4 w-4" aria-hidden="true" />
       </a>
-      <p className="mt-3 text-center text-[11px] leading-4 text-slate-500">
-        We may earn a commission if you book through this link, at no extra cost to you.
-      </p>
+      {note ? (
+        <p className="mt-3 text-center text-[11px] leading-4 text-slate-500">
+          We may earn a commission if you book through this link, at no extra cost to you.
+        </p>
+      ) : null}
     </div>
   );
 }

@@ -36,7 +36,6 @@ export function ScenicStayBlock({ stay, routeId, locale, pagePath }: Props) {
         routeType="scenic"
         className="mt-3 max-w-2xl"
       />
-      <p className="mt-2 max-w-2xl text-[11px] leading-5 text-slate-500">PR: {stay.disclosure}</p>
     </section>
   );
 }

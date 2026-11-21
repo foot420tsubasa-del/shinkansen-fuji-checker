@@ -24,7 +24,8 @@ export function GuideKlookTextLink({
 }: {
   href: string;
   label: string;
-  note: string;
+  /** Omit when the page's one disclosure already sits above this link. */
+  note?: string;
   placement: AffiliatePlacement;
   linkId: string;
   adid?: string;
@@ -67,7 +68,7 @@ export function GuideKlookTextLink({
         {text}
         {asButton ? <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" /> : null}
       </a>
-      <span className={asButton ? "mt-2 block text-[12px] leading-5 text-slate-500" : "mt-0.5 block text-[10.5px] text-slate-500"}>{note}</span>
+      {note ? <span className="mt-0.5 block text-[11px] leading-4 text-slate-500">{note}</span> : null}
     </p>
   );
 }

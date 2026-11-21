@@ -1478,7 +1478,6 @@ export default async function GuidePage({ params }: Props) {
               <GuideKlookTextLink
                 href={KLOOK_URL}
                 label={copy.klookLink}
-                note={tHome("hero.affiliateNote")}
                 placement="guide_klook_text"
                 linkId="shinkansenTicket"
                 adid={klookAdid}

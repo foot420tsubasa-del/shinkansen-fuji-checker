@@ -28,7 +28,6 @@ export function TicketGuide({
   guide: TicketGuideData;
   links: ResolvedTicketLink[];
 }) {
-  const hasAffiliate = links.some((l) => l.kind === "affiliate");
   return (
     <div className="rounded-[22px] border border-slate-200 bg-white p-5 shadow-[0_12px_32px_rgba(11,18,32,0.07)] md:p-6">
       <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-fuji">
@@ -89,11 +88,6 @@ export function TicketGuide({
             ),
           )}
         </div>
-      ) : null}
-      {hasAffiliate ? (
-        <p className="mt-3 text-center text-[11px] leading-4 text-slate-500">
-          We may earn a commission if you book through this link, at no extra cost to you.
-        </p>
       ) : null}
 
       {guide.more ? (

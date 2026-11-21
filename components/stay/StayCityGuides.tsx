@@ -82,7 +82,6 @@ export async function StayCityGuides({ locale }: { locale: string }) {
               {ACTIVITY_LINKS[city.id]} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
             </Link>
           ) : null}
-          {locale === "en" ? <p className="text-xs leading-5 text-slate-500">{t("finder.disclosure")}</p> : null}
           {city.id === "kyoto" ? (
             <a href="#stay-finder" className="mt-1 inline-flex min-h-11 items-center text-sm font-semibold text-slate-600 underline underline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2">
               {t("discovery.backToTokyoFinder")}

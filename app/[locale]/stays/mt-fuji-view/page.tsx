@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/content/SiteFooter";
 import { FujiAreaSearchLink, FujiViewStayCards } from "@/components/stays/FujiViewStayCards";
 import stays from "@/data/fuji-view-stays.json";
 import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
+import { AffiliateDisclosure } from "@/components/affiliate/AffiliateDisclosure";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -54,6 +55,7 @@ export default async function MtFujiViewStaysPage({ params }: Props) {
           <a href="#compare-hotels" className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-[15px] font-bold text-ink underline underline-offset-4 hover:text-fuji focus-visible:outline-2 focus-visible:outline-offset-2">
             {p.compareLabel} <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>
+          <AffiliateDisclosure locale={locale} className="mt-2" />
         </header>
 
         <div className="mt-8">
@@ -68,7 +70,6 @@ export default async function MtFujiViewStaysPage({ params }: Props) {
 
         <section id="compare-hotels" tabIndex={-1} className="mt-12 scroll-mt-20" aria-labelledby="stays-heading">
           <h2 id="stays-heading" className="text-2xl font-extrabold tracking-[-0.02em] md:text-3xl">{p.hotelsTitle}</h2>
-          <p className="mt-2 text-xs leading-5 text-slate-600">PR: {p.disclosure}</p>
           <div className="mt-5">
             <FujiViewStayCards variant="full" placement="fuji_view_stays" pagePath={pagePath} locale={locale} />
           </div>
@@ -91,7 +92,6 @@ export default async function MtFujiViewStaysPage({ params }: Props) {
             <h2 className="text-lg font-extrabold">{p.areaTitle}</h2>
             <p className="mt-1 text-[15px] leading-6 text-slate-600">{p.areaBody}</p>
             <FujiAreaSearchLink placement="fuji_view_area_search" pagePath={pagePath} locale={locale} className="mt-3" />
-            <p className="mt-1 text-xs leading-5 text-slate-600">PR: {p.disclosure}</p>
           </div>
           <div className="rounded-[22px] border border-slate-200 bg-white p-6">
             <h2 className="text-lg font-extrabold">{p.routeTitle}</h2>

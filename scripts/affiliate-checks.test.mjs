@@ -1176,7 +1176,6 @@ test("scenic stays: every rendered URL comes unchanged from existing data, with 
   }
   const block = readFileSync("components/scenic/ScenicStayBlock.tsx", "utf8");
   assert.match(block, /placement: "scenic_route_stay"/);
-  assert.match(block, /PR: \{stay\.disclosure\}/);
   const detail = readFileSync("app/[locale]/scenic/[slug]/page.tsx", "utf8");
   assert.ok(detail.indexOf("<ScenicStayBlock") > detail.indexOf("<ScenicPassCard"), "stay block remains below the ticket blocks");
 });
@@ -1527,11 +1526,30 @@ test("timeline: a journey that stops short only shows the views on it", () => {
   assert.deepEqual(items.map((i) => i.view.id), ["asama"]);
 });
 
-test("disclosure: every booking card keeps its commission line", () => {
-  for (const file of ["components/scenic/ScenicPassCard.tsx", "components/blog/BlogBookingCard.tsx", "components/scenic/TicketGuide.tsx", "components/scenic/SearchTicketCard.tsx"]) {
-    assert.match(readFileSync(file, "utf8"), /commission/i, `${file} lost its disclosure`);
+test("disclosure: one per page, above the first affiliate link (2026-11-21)", () => {
+  // Pages that render affiliate links carry the shared AffiliateDisclosure
+  // exactly once, before the first affiliate component in the source.
+  const pages = {
+    "app/[locale]/scenic/golden-route/page.tsx": /<TrackedAffiliateLink/,
+    "app/[locale]/scenic/[slug]/page.tsx": /<(ScenicPassCard|TicketGuide|ScenicNearbyLinks|ScenicStayBlock|FujiViewStayCards)\b/,
+    "app/[locale]/stays/mt-fuji-view/page.tsx": /<FujiViewStayCards/,
+    "app/[locale]/stays/tokyo-special/page.tsx": /<BookingButtons/,
+    "app/[locale]/things-to-do/page.tsx": /<TrackedAffiliateLink/,
+    "app/[locale]/areas-to-stay/page.tsx": /<StayFinder\b/,
+    // Blog booking cards render from the section blocks loop, after the header.
+    "app/[locale]/blog/[slug]/page.tsx": /section\.blocks\.map/,
+  };
+  for (const [file, firstLink] of Object.entries(pages)) {
+    const src = readFileSync(file, "utf8");
+    const at = src.split("<AffiliateDisclosure").length - 1;
+    assert.equal(at, 1, `${file}: one disclosure`);
+    const first = src.search(firstLink);
+    assert.ok(first > 0 && src.indexOf("<AffiliateDisclosure") < first, `${file}: disclosure sits above the first affiliate link`);
   }
-  assert.match(readFileSync("app/[locale]/HomeClient.tsx", "utf8"), /hero\.affiliateNote/, "homepage booking card disclosure");
+  // Home (measured until 11/29) and the guide keep their existing top-of-page lines.
+  assert.match(readFileSync("app/[locale]/HomeClient.tsx", "utf8"), /hero\.affiliateNote/, "homepage disclosure");
+  assert.match(readFileSync("components/scenic/SearchTicketCard.tsx", "utf8"), /commission/i, "home search card keeps its line");
+  assert.match(readFileSync("components/affiliate/AffiliateDisclosure.tsx", "utf8"), /hero\.affiliateNote/);
 });
 
 test("route search: exact matches only — Shin-Osaka → Hiroshima never gets the Fuji answer", () => {
@@ -1797,8 +1815,9 @@ test("guide: quiet Klook text links after the Quick Answer and in 'Booking via K
   for (const at of [quick, howTo]) {
     const block = src.slice(at - 400, at + 400);
     assert.match(block, /href=\{KLOOK_URL\}/, "existing Shinkansen ticket link only");
-    assert.match(block, /hero\.affiliateNote/, "commission line");
   }
+  // One disclosure for the page, on the first affiliate link (the Quick Answer line).
+  assert.match(src.slice(quick - 400, quick + 400), /hero\.affiliateNote/, "page disclosure on the first link");
   const copy = src.slice(src.indexOf("const quickAnswerCopyByLocale"), src.indexOf("const priorityGuideFaqByLocale"));
   assert.equal((copy.match(/\n    book: /g) || []).length, 9, "a booking line in every locale");
 });
@@ -1891,7 +1910,7 @@ test("golden route: journey hub and Miyajima ferry page stay sourced and book th
   const hub = readFileSync("app/[locale]/scenic/golden-route/page.tsx", "utf8");
   assert.match(hub, /placement="golden_route_ticket"/);
   assert.match(hub, /rel=\{AFFILIATE_REL\}/);
-  assert.match(hub, /data\.tickets\.disclosure/);
+  assert.match(hub, /<AffiliateDisclosure/);
   assert.match(readFileSync("lib/affiliate/links.ts", "utf8"), /"golden_route_ticket"/);
   assert.ok(!readFileSync("app/[locale]/scenic/miyajima-ferry/page.tsx", "utf8").includes("affiliate"), "the ferry page carries no affiliate link");
   const sitemap = readFileSync("app/sitemap.ts", "utf8");
@@ -1918,7 +1937,7 @@ test("scenic nearby: 'Along the line' links are registered Klook links, quiet, w
   const component = readFileSync("components/scenic/ScenicNearbyLinks.tsx", "utf8");
   assert.match(component, /placement: "scenic_route_nearby"/);
   assert.match(component, /rel=\{AFFILIATE_REL\}/);
-  assert.match(component, /PR: \{disclosure\}/);
+  assert.match(readFileSync("app/[locale]/scenic/[slug]/page.tsx", "utf8"), /<AffiliateDisclosure/, "page-level PR line");
   assert.ok(!component.includes("bg-fuji"), "never a filled button");
   assert.match(readFileSync("lib/affiliate/links.ts", "utf8"), /"scenic_route_nearby"/);
 });

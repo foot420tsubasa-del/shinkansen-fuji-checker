@@ -15,13 +15,11 @@ export function ScenicNearbyLinks({
   routeId,
   title,
   sub,
-  disclosure,
   links,
 }: {
   routeId: string;
   title: string;
   sub: string;
-  disclosure: string;
   links: NearbyLink[];
 }) {
   if (!links.length) return null;
@@ -55,7 +53,6 @@ export function ScenicNearbyLinks({
           </li>
         ))}
       </ul>
-      <p className="mt-2 text-xs leading-5 text-slate-500">PR: {disclosure}</p>
     </section>
   );
 }

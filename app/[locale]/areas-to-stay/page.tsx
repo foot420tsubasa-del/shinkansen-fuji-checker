@@ -16,6 +16,7 @@ import { StayCityGuides } from "@/components/stay/StayCityGuides";
 import design from "@/data/stay-hub-design.json";
 import scenicCredits from "@/data/scenic-photo-credits.json";
 import destinationCredits from "@/data/stay-destination-photo-credits.json";
+import { AffiliateDisclosure } from "@/components/affiliate/AffiliateDisclosure";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -85,6 +86,7 @@ export default async function AreasToStayIndex({ params }: Props) {
             {t("discovery.title")}
           </h1>
           <p className="mt-3 text-base leading-6 text-slate-700 md:text-lg">{t("discovery.sub")}</p>
+          <AffiliateDisclosure locale={locale} className="mt-2" />
         </header>
 
         {locale === "en" ? (

@@ -11,6 +11,7 @@ import { AFFILIATE_REL } from "@/lib/link-rel";
 import data from "@/data/things-to-do.json";
 import photoCredits from "@/data/stay-destination-photo-credits.json";
 import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
+import { AffiliateDisclosure } from "@/components/affiliate/AffiliateDisclosure";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -95,6 +96,7 @@ export default async function ThingsToDoPage({ params }: Props) {
           <p className="text-xs font-bold uppercase tracking-[0.1em] text-fuji">Tokyo · Kyoto · Osaka</p>
           <h1 className="mt-3 text-[32px] font-extrabold leading-[1.1] tracking-[-0.03em] md:text-[44px]">{data.h1}</h1>
           <p className="mt-3 text-[16px] leading-7 text-slate-600">{data.lead}</p>
+          <AffiliateDisclosure locale={locale} className="mt-3" />
         </header>
 
         {/* Simple city jump links: no filters, no state. */}
@@ -185,7 +187,6 @@ export default async function ThingsToDoPage({ params }: Props) {
                           >
                             {item.cta} <ExternalLink className="h-4 w-4" aria-hidden="true" />
                           </TrackedAffiliateLink>
-                          <p className="mt-1.5 text-xs leading-5 text-slate-500">{data.disclosure}</p>
                         </div>
                       ) : null}
                       <div className="mt-2 flex flex-wrap gap-x-4">

@@ -313,9 +313,6 @@ export function StayFinder({
                 </a>
                 ) : null}
                 {best.area.hotelUrl ? <p className="text-xs text-slate-600">{t("hotelsNote", { area: best.area.name })}</p> : null}
-                <p className="mt-3 border-t border-slate-200 pt-3 text-xs leading-5 text-slate-600">
-                  {t("disclosure")}
-                </p>
               </div>
             ) : null}
 
@@ -361,7 +358,6 @@ export function StayFinder({
                     </div>
                   ))}
                 </div>
-                {alternatives.some((alt) => alt.area.hotelUrl) ? <p className="my-3 text-xs leading-5 text-slate-600">{t("disclosure")}</p> : null}
               </details>
             ) : null}
         </div>
