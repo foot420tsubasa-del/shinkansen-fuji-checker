@@ -112,7 +112,7 @@ export default async function TokyoSpecialStaysPage({ params }: Props) {
         <div className="mt-4 grid grid-cols-2 gap-2 md:gap-3">
           {heroPhotos.map((src, i) => (
             <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-[18px] bg-slate-200">
-              <Image src={src} alt={credits[src]?.caption ?? ""} fill preload={i === 0} sizes="(min-width: 960px) 460px, 50vw" className="object-cover" />
+              <Image src={src} alt={credits[src]?.caption ?? ""} fill preload sizes="(min-width: 960px) 460px, 50vw" className="object-cover" />
               <span className="absolute bottom-2 left-2 rounded-full bg-black/60 px-2.5 py-1 text-xs font-bold text-white">{i === 0 ? "Skytree" : "Tokyo Tower"}</span>
             </div>
           ))}
