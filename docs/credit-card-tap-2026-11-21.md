@@ -72,3 +72,44 @@
 - 東京サブウェイチケット。
 
 いずれも公式の記載と矛盾していない。
+
+## 7. 英語の平易化・押上の例・収益化の検討（2026-11-21）
+
+### 英語
+- 変更前は正確だったが、米国の初訪日客には専門用語が多かった。
+  - 例：Kanto、operators、void、connecting station、entry record、non-credit method、IC-card target。
+  - 日付も英国式だった（25 October）。
+- 平易な米国英語に書き換えた。
+  - 例：Tokyo-area railways、"doesn't count"、"in cash or another way that isn't a credit card"、"the spot for Suica and PASMO"。
+  - 日付は米国式（October 25, 2026）。
+- 事実・出典・title・description・URL は変更していない。
+
+### 押上の例（Asakusa → Oshiage → Narita Airport）
+| 事実 | 出典 |
+|---|---|
+| 京成は11社局に含まれない | [東京メトロ（日本語）](https://www.tokyometro.jp/ticket/types/tap-to-ride/index.html) |
+| アクセス特急は品川・新橋・日本橋から直通し、特急料金は不要 | [京成 Access Express](https://www.keisei.co.jp/keisei/tetudou/skyliner/us/traffic/express.php) |
+| スカイライナーは成田空港と上野を結び、日暮里にノンストップで停まる。全席指定 | [京成 Skyliner](https://www.keisei.co.jp/keisei/tetudou/skyliner/us/skyliner/index.php) |
+| 都営は全駅対応（押上を含む） | 東京都の発表資料 |
+| PASMO は京成でも使える | [京成 PASMO](https://www.keisei.co.jp/keisei/tetudou/accessj/pasmo.php) |
+
+**書かなかったこと（未確認のため）**
+- 都営から京成へ直通した場合の、都営側の正式な精算手順。ページには「降車駅の有人改札でカードを見せる」とだけ書いた。
+- 押上から成田空港までの運賃。
+
+### 収益化（今回は**実装しない**）
+| 候補 | 既存のリンクマスタ | 確認できなかったこと |
+|---|---|---|
+| Welcome Suica（Klook activity 16917） | **広告IDなし**（未発行） | Klook ページ（403・セキュリティ認証）。JR東日本の Welcome Suica 公式ページ（403）。FAQ で確認できたのは「28日間有効・原則1人1枚」だけ |
+| 東京サブウェイチケット（Klook 1552） | `passTokyoSubway` adid 1385352（発行済み・未使用） | Klook の販売状態・価格・受取方法・報酬率（ページが403・セキュリティ認証） |
+| スカイライナー（Klook 1410） | `keiseiSkyliner` adid 1263641 | 同上。過去の実績は5〜7月のクリック4・予約0。経路も押上ではなく上野・日暮里発なので、この記事の文脈と合う読者は限られる |
+
+- 報酬率は Klook の明細で確認できない（この3商品の予約がないため）。推測はしない。
+- 関連ページの流入（GA4、90日）：/how-to-buy-suica の閲覧は45、Suica の子ページは各1〜4。新しい記事は公開直後で、まだデータがない。
+- **見込み**：流入が小さく、商品の単価も低い（例：東京サブウェイチケット ¥1,000〜¥2,000、Suica 系）。報酬率が分からない段階では、収益は「ほぼ期待できない」と扱う。
+- **実装の条件**：次の4点がそろったら、Suica と JR Pass の比較の直後、またはサブウェイチケットの欄にカードを1枚だけ置く。
+  1. ユーザーがブラウザで Klook のセキュリティ認証を通すか、商品画面を共有する。
+  2. 販売状態・価格・受取方法を確認する。
+  3. Klook 管理画面で、その商品が報酬対象かを確認する。
+  4. Welcome Suica は広告IDを発行する。
+- 改札トラブルの手順の中には広告を置かない。
