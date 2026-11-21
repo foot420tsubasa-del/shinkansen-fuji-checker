@@ -294,6 +294,41 @@
       "affiliateUrl": "https://booking.tpx.lv/yrhFFbkc",
       "checked": "2026-11-20",
       "affiliateChecked": "2026-11-20"
+    },
+    "mimaru-tokyo-ikebukuro": {
+      "name": "MIMARU Tokyo Ikebukuro",
+      "bookingUrl": "https://www.booking.com/hotel/jp/mimarudong-jing-chi-dai.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Pokémon ROOM is a room type on this Booking.com page (checked 2026-11-21)."
+    },
+    "mimaru-tokyo-kinshicho": {
+      "name": "MIMARU Tokyo Kinshicho",
+      "bookingUrl": "https://www.booking.com/hotel/jp/mimaru-dong-jing-jin-mi-ting-dong-jing.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Pokémon ROOM is a room type on this Booking.com page (checked 2026-11-21)."
+    },
+    "mimaru-tokyo-ginza-east": {
+      "name": "MIMARU Tokyo Ginza East",
+      "bookingUrl": "https://www.booking.com/hotel/jp/mimaru-tokyo-ginza-east.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Pokémon ROOM is a room type on this Booking.com page (checked 2026-11-21)."
+    },
+    "mimaru-tokyo-hatchobori": {
+      "name": "MIMARU Tokyo Hatchobori",
+      "bookingUrl": "https://www.booking.com/hotel/jp/mimaru-tokyo-hatchobori.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Pokémon ROOM is a room type on this Booking.com page (checked 2026-11-21)."
+    },
+    "the-prince-park-tower-tokyo": {
+      "name": "The Prince Park Tower Tokyo",
+      "bookingUrl": "https://www.booking.com/hotel/jp/the-prince-park-tower-tokyo.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Booking.com sells room types named \"... with Tokyo Tower View\" (checked 2026-11-21)."
     }
   }
 }
