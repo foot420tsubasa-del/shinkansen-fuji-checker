@@ -1470,21 +1470,26 @@ export default async function GuidePage({ params }: Props) {
                 </li>
               ))}
             </ul>
-            <h3 className="mt-5 text-base font-bold text-ink">{copy.klookH3}</h3>
-            <p className="text-[12px] text-slate-600">{copy.klookText}</p>
-            <GuideKlookTextLink
-              href={KLOOK_URL}
-              label={copy.klookLink}
-              note={tHome("hero.affiliateNote")}
-              placement="guide_klook_text"
-              linkId="shinkansenTicket"
-              adid={klookAdid}
-              locale={locale}
-              pagePath={guidePath}
-              className="mt-1.5 text-[12px]"
-            />
+            <div className="mt-5 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <h3 className="text-base font-bold text-ink">{copy.klookH3}</h3>
+              <p className="mt-1 text-[14px] leading-6 text-slate-700">{copy.klookText}</p>
+              {/* Button since 2026-11-21 (user request); the in-text trial for
+                  12/01 ended here. Same placement, link and adid. */}
+              <GuideKlookTextLink
+                href={KLOOK_URL}
+                label={copy.klookLink}
+                note={tHome("hero.affiliateNote")}
+                placement="guide_klook_text"
+                linkId="shinkansenTicket"
+                adid={klookAdid}
+                locale={locale}
+                pagePath={guidePath}
+                variant="button"
+                className="mt-3"
+              />
+            </div>
             <h3 className="mt-5 text-base font-bold text-ink">{copy.jrPassCounterH3}</h3>
-            <p className="text-[12px] text-slate-600">{copy.jrPassCounterTextBefore} <Link href="/areas-to-stay" className="font-semibold text-sky-700 underline underline-offset-2">{copy.stayLink}</Link>.</p>
+            <p className="mt-1 text-[14px] leading-6 text-slate-700">{copy.jrPassCounterTextBefore} <Link href="/areas-to-stay" className="font-semibold text-sky-700 underline underline-offset-2">{copy.stayLink}</Link>.</p>
           </section>
 
 

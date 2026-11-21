@@ -36,6 +36,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Page titles speak in the home page's voice: a serif headline (Georgia in
+   English; Fraunces with CJK serif fallbacks in the other languages, as the
+   home hero does), semibold and slightly tight. Unlayered, so it wins over
+   Tailwind's font-weight/tracking utilities on every h1 without touching
+   each page. Body text and section headings stay in Inter. */
+h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+html:not([lang="en"]) h1 {
+  font-family: var(--font-fraunces), Georgia, "Times New Roman", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+}
+
 /* Was a peach-to-pink wash. US travel sites read clean: white, then the
    faintest grey further down so white cards still separate from the page. */
 .page-shell {

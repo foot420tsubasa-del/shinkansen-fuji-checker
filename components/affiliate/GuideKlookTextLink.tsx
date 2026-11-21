@@ -1,5 +1,6 @@
 "use client";
 
+import { ExternalLink } from "lucide-react";
 import { trackAffiliateClick } from "@/lib/analytics";
 import type { AffiliatePlacement } from "@/lib/affiliate/links";
 import { AFFILIATE_REL } from "@/lib/link-rel";
@@ -19,6 +20,7 @@ export function GuideKlookTextLink({
   locale,
   pagePath,
   className = "",
+  variant = "text",
 }: {
   href: string;
   label: string;
@@ -29,7 +31,12 @@ export function GuideKlookTextLink({
   locale: string;
   pagePath: string;
   className?: string;
+  /** "button" (2026-11-21, user request): a filled CTA instead of the in-text link. Tracking is identical. */
+  variant?: "text" | "button";
 }) {
+  const asButton = variant === "button";
+  // A trailing arrow belongs to the text-link style; the button has its own icon.
+  const text = asButton ? label.replace(/\s*[→›»]\s*$/, "") : label;
   return (
     <p className={className}>
       <a
@@ -51,11 +58,16 @@ export function GuideKlookTextLink({
             label,
           })
         }
-        className="font-semibold text-[#c2410c] underline underline-offset-2 hover:text-[#9a3412]"
+        className={
+          asButton
+            ? "inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-fuji px-5 py-3 text-[15px] font-bold text-white shadow-sm transition-colors hover:bg-fuji-hover focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink sm:w-auto"
+            : "font-semibold text-[#c2410c] underline underline-offset-2 hover:text-[#9a3412]"
+        }
       >
-        {label}
+        {text}
+        {asButton ? <ExternalLink className="h-4 w-4 shrink-0" aria-hidden="true" /> : null}
       </a>
-      <span className="mt-0.5 block text-[10.5px] text-slate-500">{note}</span>
+      <span className={asButton ? "mt-2 block text-[12px] leading-5 text-slate-500" : "mt-0.5 block text-[10.5px] text-slate-500"}>{note}</span>
     </p>
   );
 }
