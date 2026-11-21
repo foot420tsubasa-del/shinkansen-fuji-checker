@@ -2016,17 +2016,21 @@ test("tokyo special stays: Booking.com buttons only for issued links, exact room
   const data = JSON.parse(readFileSync("data/tokyo-special-stays.json", "utf8"));
   const hotels = JSON.parse(readFileSync("data/booking-hotel-urls.json", "utf8")).hotels;
   const page = readFileSync("app/[locale]/stays/tokyo-special/page.tsx", "utf8");
-  for (const section of data.sections) {
-    assert.match(section.official[1], /^https:\/\/(mimaruhotels\.com|www\.princehotels\.co\.jp)\//);
-    assert.ok(section.facts.some(([k, v]) => k === "Room type to pick" && /“.+”/.test(v)), `${section.id}: names the room type`);
-    for (const h of section.hotels) assert.ok(hotels[h.id]?.bookingUrl.startsWith("https://www.booking.com/hotel/jp/"), `${h.id} registered`);
+  const all = data.sections.flatMap((s) => s.hotels);
+  assert.ok(new Set(all.map((h) => h.id)).size >= 10, "at least ten hotels");
+  for (const h of all) {
+    assert.ok(hotels[h.id]?.bookingUrl.startsWith("https://www.booking.com/hotel/jp/"), `${h.id} registered`);
+    assert.match(h.pick, /\u201c.+\u201d/, `${h.id}: names the exact room type`);
+    // A hotel without an official source must say where the room names come from.
+    if (!h.official) assert.match(h.note ?? "", /as Booking\.com lists them/, `${h.id}: source stated`);
+    for (const id of h.more ?? []) assert.ok(hotels[id], `${id} registered`);
   }
   // The button needs an issued tpx link; plain Booking.com URLs are not shown.
-  assert.match(page, /link\?\.affiliate \? link : null/);
+  assert.match(page, /if \(!link\?\.affiliate\) return null;/);
   assert.match(page, /placement="tokyo_special_stay"/);
   assert.match(page, /rel=\{AFFILIATE_REL\}/);
   assert.doesNotMatch(JSON.stringify(data), /US\$|¥\d|cheapest|lowest price|best price|guarantee/i);
-  // Publish rule: at least two hotels with an issued link before this page is in the sitemap.
-  const issued = data.sections.flatMap((s) => s.hotels).filter((h) => hotels[h.id]?.affiliateUrl?.startsWith("https://booking.tpx.lv/"));
-  if (readFileSync("app/sitemap.ts", "utf8").includes('"/stays/tokyo-special"')) assert.ok(issued.length >= 2, `only ${issued.length} issued link(s)`);
+  // Publish rule: two hotels with an issued link before the page is in the sitemap.
+  const issued = new Set(all.flatMap((h) => [h.id, ...(h.more ?? [])]).filter((id) => hotels[id]?.affiliateUrl?.startsWith("https://booking.tpx.lv/")));
+  if (readFileSync("app/sitemap.ts", "utf8").includes('"/stays/tokyo-special"')) assert.ok(issued.size >= 2, `only ${issued.size} issued link(s)`);
 });

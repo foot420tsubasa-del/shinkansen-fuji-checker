@@ -1,104 +1,185 @@
 {
-  "_about": "Tokyo stays where the room is the point. Facts from each hotel's official site and the room-type names on Booking.com, checked on 'checked'. A Booking.com button appears only for hotels whose affiliate link is issued (data/booking-hotel-urls.json). No prices: they change by date.",
+  "_about": "Tokyo stays where the room is the point. Each hotel's feature was checked on its official site where reachable, and the room-type name on Booking.com on 'checked'. 'pick' is the exact Booking.com room-type wording. A Booking.com button appears only once the hotel's affiliate link is issued (data/booking-hotel-urls.json). No prices: they change by date.",
   "checked": "2026-11-21",
   "path": "/stays/tokyo-special",
-  "title": "Pokémon Rooms & Tokyo Tower View Hotels in Tokyo: Which Room to Book",
-  "description": "MIMARU's Pokémon Rooms at five Tokyo hotels and The Prince Park Tower's Tokyo Tower view rooms: who they suit, how many they sleep, and the exact room type to pick when you book.",
-  "h1": "Tokyo stays where the room is the reason to go",
-  "lead": "A Pokémon Room for the kids, or Tokyo Tower outside your window. Both are easy to miss when you book: the hotel has ordinary rooms too, and you only get the special one if you pick that exact room type.",
+  "title": "Unique Tokyo Hotels: Skytree & Tokyo Tower Views, Pokémon and Godzilla Rooms",
+  "description": "Eleven Tokyo hotels where the room is the point: Skytree and Tokyo Tower views, Pokémon, Godzilla and dinosaur rooms, artist-painted rooms. With the exact room type to pick when you book.",
+  "h1": "Tokyo hotels where the room is the reason to go",
+  "lead": "Wake up facing Skytree, sleep next to Godzilla, or give the kids a Pokémon Room. Each of these hotels also sells ordinary rooms, so we tell you the exact room type to pick.",
   "disclosure": "PR: We may earn a commission if you book through these Booking.com links, at no extra cost to you.",
   "rule": {
     "title": "The one thing to get right",
-    "text": "Booking the hotel isn't enough. On the booking page, choose the room type with the exact name we give below. Any other room at the same hotel is a regular room."
+    "text": "Booking the hotel isn't enough. Our Booking.com links open a search with the hotel at the top: tap the hotel, then choose the room type with the name we give. Other rooms at the same hotel are regular rooms, and a view or theme can't be added at check-in."
   },
   "sections": [
     {
-      "id": "pokemon",
-      "title": "Pokémon Rooms (MIMARU)",
-      "intro": "MIMARU apartment hotels have Pokémon Rooms at five Tokyo locations. They sleep a family of four or more, and every one has a kitchen.",
-      "facts": [
-        [
-          "Who it suits",
-          "Families with kids who love Pokémon. Rooms sleep 4–6 depending on the hotel."
-        ],
-        [
-          "What's in the room",
-          "A giant Snorlax on the bed, a Poké Ball dining table, and Pokémon designs on the kitchen walls and tableware. A gift set comes with each booking (one per group)."
-        ],
-        [
-          "Layout",
-          "38–60 m², with a loft bed, bunk beds or four single beds depending on the hotel. You can't choose the design."
-        ],
-        [
-          "Room type to pick",
-          "“Pokémon ROOM”. The hotels' other apartments are regular rooms."
-        ]
-      ],
-      "official": [
-        "MIMARU Pokémon Room (official)",
-        "https://mimaruhotels.com/en/lp/pokemon/"
-      ],
+      "id": "skytree",
+      "title": "Tokyo Skytree views",
+      "intro": "Skytree is east of central Tokyo, so these hotels are in Asakusa, Oshiage and Kinshicho, and the view room is a specific side of the building.",
       "hotels": [
         {
-          "id": "mimaru-tokyo-ueno",
-          "name": "MIMARU Tokyo Ueno East",
-          "area": "Ueno",
-          "note": "On Booking.com: “Pokémon ROOM”, 4 single beds, sleeps 4, 40 m², kitchen."
+          "id": "asakusa-view-hotel",
+          "name": "Asakusa View Hotel",
+          "area": "Asakusa",
+          "what": "An Asakusa hotel with a Sky Tree View Side looking over Skytree and the old streets below. Some rooms have a bathtub with the view.",
+          "suits": "Couples and first-timers who want Asakusa on the doorstep.",
+          "pick": "Room types ending “with Skytree Side”, e.g. Superior Twin with Skytree Side. For the bath view: Executive Deluxe King with View Bath and Skytree Side.",
+          "official": [
+            "Asakusa View Hotel (official)",
+            "https://www.viewhotels.jp/asakusa/"
+          ]
         },
         {
-          "id": "mimaru-tokyo-ikebukuro",
-          "name": "MIMARU Tokyo Ikebukuro",
-          "area": "Ikebukuro"
+          "id": "tobu-hotel-levant-tokyo",
+          "name": "Tobu Hotel Levant Tokyo",
+          "area": "Kinshicho, 3 min from JR Kinshicho Station",
+          "what": "A Kinshicho hotel with rooms that look straight at Skytree.",
+          "suits": "Travelers who want the view next to a JR station.",
+          "pick": "Room types with “with Tokyo Sky Tree View”. Types marked “No Tower View” face away.",
+          "official": [
+            "Tobu Hotel Levant Tokyo (official, Japanese)",
+            "https://www.tobuhotel.co.jp/levant/rooms/"
+          ]
         },
         {
-          "id": "mimaru-tokyo-kinshicho",
-          "name": "MIMARU Tokyo Kinshicho",
-          "area": "Kinshicho"
+          "id": "keisei-richmond-oshiage",
+          "name": "Keisei Richmond Hotel Tokyo Oshiage",
+          "area": "Oshiage, at the foot of Skytree",
+          "what": "A hotel in Oshiage, the neighborhood at the foot of Skytree.",
+          "suits": "Anyone who wants Skytree up close.",
+          "pick": "Room types starting “(Skytree View)”, e.g. (Skytree View) Comfort Double Room.",
+          "note": "We could not open the hotel's official site; the room names are as Booking.com lists them."
         },
         {
-          "id": "mimaru-tokyo-ginza-east",
-          "name": "MIMARU Tokyo Ginza East",
-          "area": "Ginza"
-        },
-        {
-          "id": "mimaru-tokyo-hatchobori",
-          "name": "MIMARU Tokyo Hatchobori",
-          "area": "Hatchobori"
+          "id": "hotel-east-21-tokyo",
+          "name": "Hotel East 21 Tokyo",
+          "area": "Toyocho, Koto",
+          "what": "A hotel in Toyocho with family rooms that face Skytree.",
+          "suits": "Families: the Skytree family rooms take up to 4 adults.",
+          "pick": "“Deluxe Family Room with Sky Tree View” (2, 3 or 4 adults) or “King Room with Skytree View”.",
+          "note": "The hotel's official site was under maintenance when we checked; the room names are as Booking.com lists them."
         }
       ]
     },
     {
       "id": "tokyo-tower",
-      "title": "Rooms facing Tokyo Tower",
-      "intro": "The Prince Park Tower Tokyo is in Shiba Park, close to Tokyo Tower, and it sells rooms by view. Only rooms with “with Tokyo Tower View” in the name face the tower.",
-      "facts": [
-        [
-          "Who it suits",
-          "Couples and anyone for whom the view is the trip. Some tower-view rooms take 3–4 guests with extra beds."
-        ],
-        [
-          "Room type to pick",
-          "Any type ending “with Tokyo Tower View”, for example Panoramic King Room with Tokyo Tower View. “Panoramic” on its own means a high floor, not the tower."
-        ],
-        [
-          "Floors",
-          "Panoramic rooms are on floors 19–28, Club rooms on 29–32 (official room guide)."
-        ],
-        [
-          "Where",
-          "4-8-1 Shibakoen, Minato."
-        ]
-      ],
-      "official": [
-        "Tower View Rooms (official)",
-        "https://www.princehotels.co.jp/parktower/contents/towerviewrooms/en"
-      ],
+      "title": "Tokyo Tower views",
+      "intro": "Tokyo Tower is in Minato, so the view rooms are in Shiba Park, Shiodome and Toranomon.",
       "hotels": [
         {
           "id": "the-prince-park-tower-tokyo",
           "name": "The Prince Park Tower Tokyo",
-          "area": "Shiba Park",
-          "note": "On Booking.com: twelve-plus room types named “… with Tokyo Tower View”."
+          "area": "Shiba Park, Minato",
+          "what": "A hotel in Shiba Park that sells rooms by view, from standard twins to panoramic rooms on floors 19–28.",
+          "suits": "The widest choice of Tokyo Tower rooms, including some for 3–4 guests with extra beds.",
+          "pick": "Any type ending “with Tokyo Tower View”. “Panoramic” on its own means a high floor, not the tower.",
+          "official": [
+            "Tower View Rooms (official)",
+            "https://www.princehotels.co.jp/parktower/contents/towerviewrooms/en"
+          ]
+        },
+        {
+          "id": "park-hotel-tokyo",
+          "name": "Park Hotel Tokyo",
+          "area": "Shiodome, 1 min from Shiodome Station",
+          "what": "Rooms on floors 26–34 of a Shiodome tower. Tokyo Tower Side rooms face the tower; Artist Rooms are painted by artists (see below).",
+          "suits": "Couples and solo travelers; rooms are 19–33 m².",
+          "pick": "“Twin Room Tokyo Tower Side”, “Queen Room Tokyo Tower Side” or “Corner King Room Tokyo Tower Side”.",
+          "official": [
+            "Park Hotel Tokyo rooms (official)",
+            "https://parkhoteltokyo.com/rooms-suites"
+          ]
+        },
+        {
+          "id": "tokyo-edition-toranomon",
+          "name": "The Tokyo EDITION, Toranomon",
+          "area": "Toranomon, Minato",
+          "what": "A hotel in Toranomon, in the same part of Minato as Tokyo Tower.",
+          "suits": "A special-occasion stay.",
+          "pick": "“Premier Tower View King”, which Booking.com lists with a Tokyo Tower view. The “Deluxe Tower View King” is listed with a city view.",
+          "note": "The official site blocked our check; the room names are as Booking.com lists them."
+        }
+      ]
+    },
+    {
+      "id": "themed",
+      "title": "Pokémon, Godzilla and dinosaur rooms",
+      "intro": "Themed rooms are few and sell out first. The theme belongs to the room type, not the hotel.",
+      "hotels": [
+        {
+          "id": "mimaru-tokyo-ueno",
+          "name": "MIMARU Pokémon Rooms (Ueno East, Ikebukuro, Kinshicho, Ginza East, Hatchobori)",
+          "area": "Five MIMARU apartment hotels",
+          "what": "Pokémon Rooms with a giant Snorlax on the bed, a Poké Ball dining table and Pokémon kitchenware. One gift set per booking.",
+          "suits": "Families: 4–6 guests, 38–60 m², kitchen in every room. Layout (loft, bunk beds or four singles) depends on the hotel.",
+          "pick": "“Pokémon ROOM”. The other apartments are regular rooms, and the room design can't be chosen.",
+          "official": [
+            "MIMARU Pokémon Room (official)",
+            "https://mimaruhotels.com/en/lp/pokemon/"
+          ],
+          "more": [
+            "mimaru-tokyo-ikebukuro",
+            "mimaru-tokyo-kinshicho",
+            "mimaru-tokyo-ginza-east",
+            "mimaru-tokyo-hatchobori"
+          ]
+        },
+        {
+          "id": "hotel-gracery-shinjuku",
+          "name": "Hotel Gracery Shinjuku",
+          "area": "Shinjuku, 5 min from JR Shinjuku Station (East Exit)",
+          "what": "The hotel with the giant Godzilla head. The top (30th) floor is a 35-room Godzilla Floor; there is also a single Godzilla Room and six Godzilla View Rooms.",
+          "suits": "Godzilla and movie fans who want to be in the middle of Shinjuku.",
+          "pick": "On Booking.com: “Standard Twin on the Highest Floor (Godzilla Floor)”.",
+          "note": "The one Godzilla Room and the Godzilla View Rooms are booked on the hotel's own site; we didn't see them on Booking.com.",
+          "official": [
+            "Godzilla rooms (official, Japanese)",
+            "https://gracery.com/shinjuku/page/godzilla/index.html"
+          ]
+        },
+        {
+          "id": "henn-na-hotel-nishikasai",
+          "name": "Henn na Hotel Tokyo Nishikasai",
+          "area": "Nishikasai, 3 min from Nishi-kasai Station (Tokyo Metro Tozai Line)",
+          "what": "Robot dinosaurs run check-in, and two Dinosaur Rooms sleep up to 3 adults. The hotel runs a free daily bus toward Tokyo Disney Resort.",
+          "suits": "Families with dinosaur fans, especially on a Disney trip.",
+          "pick": "“Concept Twin Room - Dinosaur”.",
+          "official": [
+            "Henn na Hotel Tokyo Nishikasai (official, Japanese)",
+            "https://www.hennnahotel.com/nishikasai/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "design",
+      "title": "Art rooms and view baths",
+      "intro": "Rooms where the design itself is the experience.",
+      "hotels": [
+        {
+          "id": "park-hotel-tokyo",
+          "key": "park-hotel-tokyo-art",
+          "name": "Park Hotel Tokyo — Artist Rooms",
+          "area": "Shiodome",
+          "what": "More than 50 rooms, each painted directly onto the walls by a different artist.",
+          "suits": "Art lovers and repeat visitors to Tokyo.",
+          "pick": "“Artist Queen Room”, “Artist King Room” or “Artist Single Room”. The artwork is assigned at check-in; you can list up to three you'd like.",
+          "official": [
+            "Artist in Hotel (official)",
+            "https://parkhoteltokyo.com/art-at-park-hotel-tokyo/artist-in-hotel"
+          ]
+        },
+        {
+          "id": "mitsui-garden-ginza-premier",
+          "name": "Mitsui Garden Hotel Ginza Premier",
+          "area": "Ginza",
+          "what": "A Ginza hotel with a 16th-floor lobby and rooms where the bathtub sits by the view.",
+          "suits": "Couples who want Ginza and a bath with a view.",
+          "pick": "“Superior Queen Room with View Bath” or “Deluxe Twin Room with View Bath”.",
+          "official": [
+            "Mitsui Garden Hotel Ginza Premier (official)",
+            "https://www.gardenhotels.co.jp/ginza-premier/eng/"
+          ]
         }
       ]
     }

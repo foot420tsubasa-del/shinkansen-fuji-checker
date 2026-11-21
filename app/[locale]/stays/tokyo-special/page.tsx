@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowRight, BedDouble, ExternalLink, MapPin } from "lucide-react";
+import { ArrowRight, ExternalLink, MapPin, Users, KeyRound } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { getAlternates } from "@/i18n/hreflang";
 import { SiteHeader } from "../../components/SiteHeader";
@@ -11,7 +11,18 @@ import data from "@/data/tokyo-special-stays.json";
 import { DEFAULT_OG_IMAGES } from "@/lib/seo/og";
 
 type Props = { params: Promise<{ locale: string }> };
-type Hotel = { id: string; name: string; area: string; note?: string };
+type Hotel = {
+  id: string;
+  key?: string;
+  name: string;
+  area: string;
+  what: string;
+  suits: string;
+  pick: string;
+  note?: string;
+  official?: string[];
+  more?: string[];
+};
 
 const PATH = data.path;
 
@@ -26,11 +37,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function OfficialLink({ source }: { source: string[] }) {
+function BookingButton({ id, label, pagePath, locale, area }: { id: string; label: string; pagePath: string; locale: string; area: string }) {
+  const link = getBookingHotelLink(id);
+  // Only an issued affiliate link gets a button; a plain Booking.com URL would
+  // be an unpaid ad with our name on it.
+  if (!link?.affiliate) return null;
   return (
-    <a href={source[1]} rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-1 text-sm font-semibold text-slate-700 underline underline-offset-2 hover:text-ink">
-      {source[0]} <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-    </a>
+    <TrackedAffiliateLink
+      href={link.href}
+      rel={AFFILIATE_REL}
+      target="_blank"
+      category="hotel"
+      provider="booking_travelpayouts"
+      placement="tokyo_special_stay"
+      label={`Check ${link.name} on Booking.com`}
+      linkId={link.linkId}
+      hotelName={link.name}
+      area={area}
+      city="tokyo"
+      pagePath={pagePath}
+      locale={locale}
+      className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-[14.5px] font-bold text-white hover:bg-slate-800 md:w-auto"
+    >
+      {label} <ExternalLink className="h-4 w-4" aria-hidden="true" />
+    </TrackedAffiliateLink>
   );
 }
 
@@ -53,66 +83,45 @@ export default async function TokyoSpecialStaysPage({ params }: Props) {
           <p className="mt-2 text-[15px] leading-7 text-white/90">{data.rule.text}</p>
         </section>
 
-        <nav aria-label="Sections" className="mt-4 flex flex-wrap gap-2">
+        <nav aria-label="Sections" className="sticky top-14 z-10 -mx-5 mt-4 flex gap-2 overflow-x-auto bg-[var(--page-bg,#f7f8fb)]/95 px-5 py-2 backdrop-blur md:static md:mx-0 md:flex-wrap md:px-0">
           {data.sections.map((s) => (
-            <a key={s.id} href={`#${s.id}`} className="inline-flex min-h-11 items-center rounded-full border border-slate-300 bg-white px-4 text-sm font-bold text-ink hover:border-ink">{s.title}</a>
+            <a key={s.id} href={`#${s.id}`} className="inline-flex min-h-11 shrink-0 items-center whitespace-nowrap rounded-full border border-slate-300 bg-white px-4 text-sm font-bold text-ink hover:border-ink">{s.title}</a>
           ))}
         </nav>
 
         {data.sections.map((section) => (
-          <section key={section.id} id={section.id} tabIndex={-1} className="mt-12 scroll-mt-24" aria-labelledby={`${section.id}-heading`}>
+          <section key={section.id} id={section.id} tabIndex={-1} className="mt-12 scroll-mt-28" aria-labelledby={`${section.id}-heading`}>
             <h2 id={`${section.id}-heading`} className="text-[26px] font-extrabold tracking-[-0.02em]">{section.title}</h2>
             <p className="mt-2 text-[15px] leading-7 text-slate-600">{section.intro}</p>
-            <dl className="mt-4 divide-y divide-slate-200 rounded-[22px] border border-slate-200 bg-white">
-              {section.facts.map(([label, value]) => (
-                <div key={label} className="grid gap-1 px-5 py-3.5 md:grid-cols-[170px_1fr] md:gap-6">
-                  <dt className="text-sm font-bold text-ink">{label}</dt>
-                  <dd className="text-[15px] leading-6 text-slate-700">{value}</dd>
+            <div className="mt-4 grid gap-4">
+              {(section.hotels as Hotel[]).map((hotel) => (
+                <div key={hotel.key ?? hotel.id} className="rounded-[22px] border border-slate-200 bg-white p-5">
+                  <h3 className="text-[19px] font-extrabold tracking-[-0.01em] text-ink">{hotel.name}</h3>
+                  <p className="mt-1 flex items-center gap-1.5 text-sm text-slate-600"><MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />{hotel.area}</p>
+                  <p className="mt-3 text-[15px] leading-6 text-slate-800">{hotel.what}</p>
+                  <p className="mt-2 flex gap-2 text-[14.5px] leading-6 text-slate-700"><Users className="mt-1 h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />{hotel.suits}</p>
+                  <div className="mt-3 rounded-2xl bg-amber-50 p-3.5">
+                    <p className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-[0.08em] text-amber-900"><KeyRound className="h-3.5 w-3.5" aria-hidden="true" />Room type to pick</p>
+                    <p className="mt-1 text-[14.5px] font-semibold leading-6 text-slate-900">{hotel.pick}</p>
+                  </div>
+                  {hotel.note ? <p className="mt-2 text-[13.5px] leading-5 text-slate-500">{hotel.note}</p> : null}
+                  <div className="mt-3 flex flex-col gap-2 md:flex-row md:flex-wrap md:items-center">
+                    <BookingButton id={hotel.id} label="Check rooms on Booking.com" pagePath={pagePath} locale={locale} area={hotel.area} />
+                    {(hotel.more ?? []).map((id) => {
+                      const link = getBookingHotelLink(id);
+                      return link?.affiliate ? (
+                        <BookingButton key={id} id={id} label={link.name.replace("MIMARU Tokyo ", "")} pagePath={pagePath} locale={locale} area={link.name} />
+                      ) : null;
+                    })}
+                    {hotel.official ? (
+                      <a href={hotel.official[1]} rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-1 text-sm font-semibold text-slate-700 underline underline-offset-2 hover:text-ink">
+                        {hotel.official[0]} <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                      </a>
+                    ) : null}
+                  </div>
                 </div>
               ))}
-            </dl>
-            <OfficialLink source={section.official} />
-
-            <ul className="mt-4 grid gap-3 md:grid-cols-2">
-              {(section.hotels as Hotel[]).map((hotel) => {
-                const link = getBookingHotelLink(hotel.id);
-                // Only an issued affiliate link gets a booking button; a plain
-                // Booking.com URL would be an unpaid ad with our name on it.
-                const bookable = link?.affiliate ? link : null;
-                return (
-                  <li key={hotel.id} className="flex flex-col rounded-2xl border border-slate-200 bg-white p-4">
-                    <h3 className="flex items-start gap-2 text-[16px] font-extrabold text-ink">
-                      <BedDouble className="mt-0.5 h-4 w-4 shrink-0 text-slate-500" aria-hidden="true" />
-                      {hotel.name}
-                    </h3>
-                    <p className="mt-1 flex items-center gap-1.5 text-sm text-slate-600"><MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />{hotel.area}</p>
-                    {hotel.note ? <p className="mt-2 text-[14px] leading-6 text-slate-700">{hotel.note}</p> : null}
-                    {bookable ? (
-                      <div className="mt-auto pt-3">
-                        <TrackedAffiliateLink
-                          href={bookable.href}
-                          rel={AFFILIATE_REL}
-                          target="_blank"
-                          category="hotel"
-                          provider="booking_travelpayouts"
-                          placement="tokyo_special_stay"
-                          label={`Check ${hotel.name} on Booking.com`}
-                          linkId={bookable.linkId}
-                          hotelName={hotel.name}
-                          area={hotel.area}
-                          city="tokyo"
-                          pagePath={pagePath}
-                          locale={locale}
-                          className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-ink px-4 py-2.5 text-[14.5px] font-bold text-white hover:bg-slate-800"
-                        >
-                          Check rooms on Booking.com <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                        </TrackedAffiliateLink>
-                      </div>
-                    ) : null}
-                  </li>
-                );
-              })}
-            </ul>
+            </div>
             <p className="mt-2 text-xs leading-5 text-slate-500">{data.disclosure}</p>
           </section>
         ))}

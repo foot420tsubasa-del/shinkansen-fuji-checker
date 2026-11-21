@@ -124,7 +124,7 @@ export default async function AreasToStayIndex({ params }: Props) {
             rather than the area. English only, like the page it opens. */}
         {locale === "en" ? (
           <Link href="/stays/tokyo-special" className="mt-3 flex min-h-12 items-center justify-between gap-3 rounded-[18px] border border-slate-200 bg-white px-4 py-3 text-[15px] font-bold text-ink shadow-[0_6px_24px_rgba(30,41,59,0.06)] hover:underline">
-            <span>Or start with the room: Pokémon Rooms and Tokyo Tower views</span>
+            <span>Or start with the room: Skytree and Tokyo Tower views, Pokémon and Godzilla rooms</span>
             <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
           </Link>
         ) : null}

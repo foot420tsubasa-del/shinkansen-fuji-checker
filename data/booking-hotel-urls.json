@@ -329,6 +329,62 @@
       "affiliateUrl": "",
       "checked": "2026-11-21",
       "note": "Tokyo special stays: Booking.com sells room types named \"... with Tokyo Tower View\" (checked 2026-11-21)."
+    },
+    "asakusa-view-hotel": {
+      "name": "Asakusa View Hotel",
+      "bookingUrl": "https://www.booking.com/hotel/jp/asakusa-view-tokyo.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Booking.com room types \"... with Skytree Side\". (checked 2026-11-21)."
+    },
+    "tobu-hotel-levant-tokyo": {
+      "name": "Tobu Hotel Levant Tokyo",
+      "bookingUrl": "https://www.booking.com/hotel/jp/tobu-levant-tokyo.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Booking.com room types \"... with Tokyo Sky Tree View\" (others say \"No Tower View\"). (checked 2026-11-21)."
+    },
+    "keisei-richmond-oshiage": {
+      "name": "Keisei Richmond Hotel Tokyo Oshiage",
+      "bookingUrl": "https://www.booking.com/hotel/jp/keisei-richmond-hotel-tokyo-oshiage.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Booking.com room types \"(Skytree View) ...\". (checked 2026-11-21)."
+    },
+    "hotel-east-21-tokyo": {
+      "name": "Hotel East 21 Tokyo",
+      "bookingUrl": "https://www.booking.com/hotel/jp/east-21-tokyo.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Booking.com room types \"Deluxe Family Room with Sky Tree View\" (2-4 adults), \"King Room with Skytree View\". (checked 2026-11-21)."
+    },
+    "park-hotel-tokyo": {
+      "name": "Park Hotel Tokyo",
+      "bookingUrl": "https://www.booking.com/hotel/jp/park-tokyo.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Booking.com room types \"Artist Queen/King/Single\" and \"... Tokyo Tower Side\". (checked 2026-11-21)."
+    },
+    "tokyo-edition-toranomon": {
+      "name": "The Tokyo EDITION, Toranomon",
+      "bookingUrl": "https://www.booking.com/hotel/jp/the-tokyo-edition-toranomon.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Booking.com room type \"Premier Tower View King ... Tokyo Tower view\". (checked 2026-11-21)."
+    },
+    "henn-na-hotel-nishikasai": {
+      "name": "Henn na Hotel Tokyo Nishikasai",
+      "bookingUrl": "https://www.booking.com/hotel/jp/henn-na-tokyo-nishikasai.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Booking.com room type \"Concept Twin Room - Dinosaur\". (checked 2026-11-21)."
+    },
+    "mitsui-garden-ginza-premier": {
+      "name": "Mitsui Garden Hotel Ginza Premier",
+      "bookingUrl": "https://www.booking.com/hotel/jp/mitsui-garden-ginza-premier-chuo.html",
+      "affiliateUrl": "",
+      "checked": "2026-11-21",
+      "note": "Tokyo special stays: Booking.com room types \"... with View Bath\". (checked 2026-11-21)."
     }
   }
 }
