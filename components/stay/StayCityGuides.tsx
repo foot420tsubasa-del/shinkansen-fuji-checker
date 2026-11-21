@@ -1,7 +1,15 @@
 import { getTranslations } from "next-intl/server";
 import { ProviderButton } from "@/components/ui/ProviderButton";
 import { getBookingHotelLink } from "@/lib/booking-hotels";
+import { ArrowRight } from "lucide-react";
+import { Link } from "@/i18n/navigation";
 import design from "@/data/stay-hub-design.json";
+
+// English only, like the activity page they point to.
+const ACTIVITY_LINKS: Record<string, string> = {
+  kyoto: "teamLab Biovortex is a 7-minute walk from Kyoto Station",
+  osaka: "Going to Universal Studios Japan? What to buy first",
+};
 
 export async function StayCityGuides({ locale }: { locale: string }) {
   const t = await getTranslations({ locale, namespace: "areasToStayHub" });
@@ -46,6 +54,11 @@ export async function StayCityGuides({ locale }: { locale: string }) {
         })}
       </ul>
       {locale === "en" ? <p className="mt-3 text-xs leading-5 text-slate-600">{t("finder.disclosure")}</p> : null}
+      {locale === "en" && ACTIVITY_LINKS[city.id] ? (
+        <Link href={`/things-to-do#${city.id}`} className="mt-2 flex min-h-11 items-center gap-1.5 text-sm font-semibold text-ink underline underline-offset-4 hover:text-fuji">
+          {ACTIVITY_LINKS[city.id]} <ArrowRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+        </Link>
+      ) : null}
       {city.id === "kyoto" ? (
         <a href="#stay-finder" className="mt-2 inline-flex min-h-11 items-center text-sm font-semibold text-slate-700 underline underline-offset-4 hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2">
           {t("discovery.backToTokyoFinder")}

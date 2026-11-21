@@ -570,6 +570,12 @@ export function PlanYourTripHub() {
             <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#106b43]">{t("activities.eyebrow")}</p>
             <h2 className="mt-2 text-2xl font-semibold text-slate-950">{t("activities.title")}</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">{t("activities.subtitle")}</p>
+            {/* English only: the activity explainer has no translations yet. */}
+            {locale === "en" ? (
+              <Link href="/things-to-do" className="mt-2 inline-flex min-h-10 items-center gap-1.5 text-sm font-semibold text-slate-700 underline underline-offset-4 hover:text-ink">
+                Which teamLab, USJ tickets and Tokyo Disney, explained <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            ) : null}
           </div>
           <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {cityCards.map((city) => {
